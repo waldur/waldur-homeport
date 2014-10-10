@@ -5,20 +5,22 @@
     width: 100%;
     background: #E2E2E2;
     .main-nav {
-        @include clear-list;
-        li {
-            display: inline-block;
-            a {
+        ul {
+            @include clear-list;
+            li {
                 display: inline-block;
-                vertical-align: middle;
-                padding: 10px 15px;
-                color: #565656;
-                text-decoration: none;
-                &:hover {
-                    background: #565656;
-                    color: #e2e2e2;
-                }
-            } // a
-        } // li
+                a {
+                    display: inline-block;
+                    vertical-align: middle;
+                    padding: 10px 15px;
+                    color: #565656;
+                    text-decoration: none;
+                    &:hover, &.current {
+                        background: #565656;
+                        color: #e2e2e2;
+                    }
+                } // a
+            } // li
+        } // ul
     } // main-nav
 } // app-header

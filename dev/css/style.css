@@ -3,6 +3,7 @@ body {
   font-size: 16px;
   font-size: 1rem;
   color: #777;
+  margin: 0;
 }
 
 a:hover, a:active, a:focus {
@@ -26,6 +27,24 @@ form fieldset {
   padding: 0;
 }
 
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+}
+
+td {
+  margin: 0;
+  padding: 0;
+  vertical-align: top;
+}
+
+th {
+  text-align: left;
+  vertical-align: top;
+}
+
 .app-header {
   position: fixed;
   top: 0px;
@@ -33,24 +52,24 @@ form fieldset {
   width: 100%;
   background: #E2E2E2;
 }
-.app-header .main-nav {
+.app-header .main-nav ul {
   margin: 0;
   padding: 0;
 }
-.app-header .main-nav li {
+.app-header .main-nav ul li {
   list-style: none;
 }
-.app-header .main-nav li {
+.app-header .main-nav ul li {
   display: inline-block;
 }
-.app-header .main-nav li a {
+.app-header .main-nav ul li a {
   display: inline-block;
   vertical-align: middle;
   padding: 10px 15px;
   color: #565656;
   text-decoration: none;
 }
-.app-header .main-nav li a:hover {
+.app-header .main-nav ul li a:hover, .app-header .main-nav ul li a.current {
   background: #565656;
   color: #e2e2e2;
 }
@@ -100,6 +119,151 @@ form fieldset {
   vertical-align: middle;
   color: #fff;
   font-size: 1.875rem;
+}
+
+.dashboard.dark-dash {
+  background: #565656;
+  color: #fff;
+  padding-bottom: 20px;
+}
+.dashboard.m-top {
+  margin-top: 20px;
+}
+.dashboard .container {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.dashboard .title-separate {
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px dashed #d2d2d2;
+}
+.dashboard .dash-block {
+  overflow: hidden;
+}
+.dashboard .dash-block .summary-info {
+  width: 33.33333%;
+  float: left;
+  box-sizing: border-box;
+  padding: 15px;
+}
+.dashboard .dash-block .summary-info:nth-child(3n+1) {
+  clear: both;
+}
+.dashboard .dash-block .summary-info .content {
+  border-radius: 4px;
+  border-bottom: 2px solid #A8A8A8;
+  background: #ECECEC;
+  padding: 10px;
+  text-align: center;
+}
+.dashboard .dash-block .summary-info .content.events-log {
+  border-bottom: none;
+  background: none;
+  text-align: left;
+}
+.dashboard .dash-block .summary-info .content.events-log ul {
+  margin: 0;
+  padding: 0;
+}
+.dashboard .dash-block .summary-info .content.events-log ul li {
+  list-style: none;
+}
+.dashboard .dash-block .summary-info .content.events-log ul li + li {
+  margin-top: .25rem;
+}
+.dashboard .dash-block .summary-info .content.events-log ul li a {
+  display: inline-block;
+  vertical-align: middle;
+  color: #fff;
+  font-weight: 200;
+  text-decoration: none;
+}
+.dashboard .dash-block .summary-info .content.events-log ul li a:before {
+  display: inline-block;
+  vertical-align: middle;
+  content: attr(data-type);
+  margin-right: 4px;
+  background: #83addb;
+  border-radius: 2px;
+  padding: 2px 4px;
+  box-sizing: border-box;
+  color: #fff;
+  font-weight: 200;
+  background: #8eadd7;
+}
+.dashboard .dash-block .summary-info .content.events-log ul li a.created:before {
+  background: #2e88d3;
+}
+.dashboard .dash-block .summary-info .content.events-log ul li a.rebooted:before {
+  background: #2ed3c0;
+}
+.dashboard .dash-block .summary-info .content.events-log ul li a.stopped:before {
+  background: #d32e2e;
+}
+.dashboard .dash-block .summary-info .content .count {
+  width: 45%;
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 5rem;
+  color: #4A4A4A;
+  text-align: center;
+}
+.dashboard .dash-block .summary-info .content .activies {
+  width: 50%;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: left;
+}
+.dashboard .dash-block .summary-info .content .activies ul {
+  margin: 0;
+  padding: 0;
+}
+.dashboard .dash-block .summary-info .content .activies ul li {
+  list-style: none;
+}
+.dashboard .dash-block .summary-info .content .activies ul li + li {
+  margin-top: .5rem;
+}
+.dashboard .dash-block .summary-info .content .activies ul li a {
+  display: inline-block;
+  vertical-align: middle;
+  color: #000;
+  text-decoration: none;
+}
+.dashboard .dash-block .summary-info .content .activies ul li a:before {
+  display: inline-block;
+  vertical-align: middle;
+  content: attr(data-count);
+  margin-right: 4px;
+  width: 36px;
+  height: 36px;
+  background: #83addb;
+  border: 2px solid #fff;
+  border-radius: 100%;
+  text-align: center;
+  box-sizing: border-box;
+  padding-top: 8px;
+  color: #fff;
+  font-weight: 700;
+}
+.dashboard .dash-block .dash-title {
+  text-align: center;
+}
+.dashboard .dash-block .project-list table.project-list-table tr .name {
+  width: 80px;
+}
+.dashboard .dash-block .project-list table.project-list-table tr .actions {
+  width: 120px;
+}
+.dashboard .dash-block .project-list table.project-list-table tr th, .dashboard .dash-block .project-list table.project-list-table tr td {
+  padding: 10px 15px;
+}
+.dashboard .dash-block .project-list table.project-list-table tr th + th {
+  border-left: 1px solid gray;
+}
+.dashboard .dash-block .project-list table.project-list-table tr td + td {
+  border-left: 1px solid #dddddd;
 }
 
 .verify-data .verify-block {

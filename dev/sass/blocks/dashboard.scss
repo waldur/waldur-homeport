@@ -1,0 +1,157 @@
+.dashboard {
+    &.dark-dash {
+        background: #565656;
+        color: #fff;
+        padding-bottom: 20px;
+    }
+    &.m-top {
+        margin-top: 20px;
+    }
+    .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    .title-separate {
+        margin-bottom: 2rem;
+        padding-bottom: 2rem;
+        border-bottom: 1px dashed rgb(210, 210, 210);
+    }
+    .dash-block {
+        overflow: hidden;
+        .summary-info {
+            @include block-3;
+            padding: 15px;
+            .content {
+                border-radius: 4px;
+                border-bottom: 2px solid #A8A8A8;
+                background: #ECECEC;
+                padding: 10px;
+                text-align: center;
+                &.events-log {
+                    border-bottom: none;
+                    background: none;
+                    text-align: left;
+                    ul {
+                        @include clear-list;
+                        li {
+                            + li {
+                                margin-top: .25rem;
+                            }
+                            a {
+                                @include inline-middle;
+                                color: #fff;
+                                font-weight: 200;
+                                text-decoration: none;
+                                &:before {
+                                    @include inline-middle;
+                                    content: attr(data-type);
+                                    margin-right: 4px;
+                                    background: rgb(131, 173, 219);
+                                    border-radius: 2px;
+                                    padding: 2px 4px;
+                                    box-sizing: border-box;
+                                    color: #fff;
+                                    font-weight: 200;
+                                    background: rgb(142, 173, 215);
+                                }
+                                &.created {
+                                    &:before {
+                                        background: rgb(46, 136, 211);
+                                    }
+                                }
+                                &.rebooted {
+                                    &:before {
+                                        background: rgb(46, 211, 192);
+                                    }
+                                }
+                                &.stopped {
+                                    &:before {
+                                        background: rgb(211, 46, 46);
+                                    }
+                                }
+                            }
+                        } // li
+                    } // ul
+                }
+                .count {
+                    width: 45%;
+                    @include inline-middle;
+                    font-size: rem(80);
+                    color: #4A4A4A;
+                    text-align: center;
+                }
+                .activies {
+                    width: 50%;
+                    @include inline-middle;
+                    text-align: left;
+                    ul {
+                        @include clear-list;
+                        li {
+                            + li {
+                                margin-top: .5rem;
+                            }
+                            a {
+                                @include inline-middle;
+                                color: #000;
+                                text-decoration: none;
+                                &:before {
+                                    @include inline-middle;
+                                    content: attr(data-count);
+                                    margin-right: 4px;
+                                    width: 36px;
+                                    height: 36px;
+                                    background: rgb(131, 173, 219);
+                                    border: 2px solid #fff;
+                                    border-radius: 100%;
+                                    text-align: center;
+                                    box-sizing: border-box;
+                                    padding-top: 8px;
+                                    color: #fff;
+                                    font-weight: 700;
+                                }
+                            } // a
+                        } // li
+                    } // ul
+                }
+            }
+        } // summary-info
+        .dash-title {
+            text-align: center;
+        }
+        .project-list {
+            table.project-list-table {
+                tr {
+                    .name {
+                        width: 80px;
+                    } // name
+                    .description {
+                        // width: ;
+                    } // description
+                    .participants {
+                        // width: ;
+                    } // participants
+                    .shared-resources {
+                        // width: ;
+                    }
+                    // shared-resources
+                    .actions {
+                        width: 120px;
+                    } // actions
+                    th, td {
+                        padding: 10px 15px;
+                    }
+                    th {
+                        + th {
+                            border-left: 1px solid gray;
+                        }
+                    } // th
+                    td {
+                        + td {
+                            border-left: 1px solid rgb(221, 221, 221);
+                        }
+                    } // td
+                } // tr
+            } // table
+        } // project-list
+    } // dash-block
+} // dashboard

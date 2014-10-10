@@ -5,6 +5,7 @@ body {
     font-size: 16px;
     font-size: rem(16);
     color: #777;
+    margin: 0;
 }
 
 a:hover, a:active, a:focus {
@@ -28,4 +29,22 @@ form {
         border: none;
         padding: 0;
     }
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+}
+
+td {
+    margin: 0;
+    padding: 0;
+    vertical-align: top;
+}
+
+th {
+    text-align: left; 
+    vertical-align: top;
 }

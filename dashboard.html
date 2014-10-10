@@ -21,21 +21,125 @@
 <![endif]-->
 
 </head>
-<body data-role="with-fixed-header">
+<body data-role="with-fixed-header-one">
 
 <!-- app-header -->
 <div class="app-header" data-role="fixed-header">
     <div class="container">
         <nav class="main-nav">
-            <li><a href="/">NodeConductor</a></li>
+            <ul>
+                <li><a href="/">NodeConductor</a></li>
+                <li><a href="dashboard.html" class="current">Dashboard</a></li>
+            </ul>
         </nav>
     </div>    
 </div>
 <!-- /app-header -->
 
-<section class="dashboard">
+<section class="dashboard dark-dash">
     <div class="container">
-        
+        <div class="dash-block">
+            <div class="summary-info">
+                <h3 class="dash-title">Active projects</h3>
+                <div class="content">
+                    <div class="count">35</div>
+                    <div class="activies">
+                        <ul>
+                            <li>
+                                <a href="#" data-count="4">new</a>
+                            </li>
+                            <li>
+                                <a href="#" data-count="12">notifications</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="summary-info">
+                <h3 class="dash-title">Resources</h3>
+                <div class="content">
+                    <div class="count">49</div>
+                    <div class="activies">
+                        <ul>
+                            <li>
+                                <a href="#" data-count="11">new</a>
+                            </li>
+                            <li>
+                                <a href="#" data-count="2">notifications</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="summary-info">
+                <h3 class="dash-title">Event log</h3>
+                <div class="content events-log">
+                    <ul>
+                        <li><a href="#" class="rebooted" data-type="rebooted">G48 aZ</a></li>
+                        <li><a href="#" class="stopped" data-type="stoped">7Havenroot2</a></li>
+                        <li><a href="#" class="rebooted" data-type="rebooted">GB-notMyall</a></li>
+                        <li><a href="#" class="created" data-type="created">4546All</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="dashboard m-top">
+    <div class="container">
+        <div class="dash-block">
+            <div class="dash-title">
+                <h3 class="title-separate">Projects</h3>
+            </div>
+            <div class="project-list">
+                <table class="project-list-table">
+                    <tr>
+                        <th class="name">Name</th>
+                        <th class="description">Description</th>
+                        <th class="participants">Participants</th>
+                        <th class="shared-resources">Shared resources</th>
+                        <th class="actions">Actions</th>
+                    </tr>
+                    <tr>
+                        <td class="name">G48s-11</td>
+                        <td class="description">Garag48 in Montentegro</td>
+                        <td class="participants">
+                            <ul>
+                                <li><a href="#">Mihail Loon</a></li>
+                                <li><a href="#">Vasilij Blomberg</a></li>
+                            </ul>
+                        </td>
+                        <td class="shared-resources">
+                            <ul>
+                                <li><a href="#">git hosting</a></li>
+                                <li><a href="#">AWS</a></li>
+                                <li><a href="#">Rackspace instance</a></li>
+                            </ul>
+                        </td>
+                        <td class="actions">Actions</td>
+                    </tr>
+                    <tr>
+                        <td class="name">GAJ7004</td>
+                        <td class="description">Flag for new country</td>
+                        <td class="participants">
+                            <ul>
+                                <li><a href="#">Mihail Loon</a></li>
+                                <li><a href="#">Vasilij Blomberg</a></li>
+                            </ul>
+                        </td>
+                        <td class="shared-resources">
+                            <ul>
+                                <li><a href="#">git hosting</a></li>
+                                <li><a href="#">AWS</a></li>
+                                <li><a href="#">Rackspace instance</a></li>
+                            </ul>
+                        </td>
+                        <td class="actions">Actions</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </div>
 </section>
 
