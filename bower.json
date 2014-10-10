@@ -1,0 +1,20 @@
+{
+  "name": "NC SaaS",
+  "version": "0.0.0",
+  "authors": [
+    "Mihail Yakimenko <macgera@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "description": "For robots",
+  "main": "index.html",
+  "homepage": "http://mihailyakimenko.com/",
+  "devDependencies": {
+  }
+}

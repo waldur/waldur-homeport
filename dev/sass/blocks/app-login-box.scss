@@ -1,0 +1,39 @@
+.app-login-window {    
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: auto;
+    text-align: center;
+    h3.login {
+        text-align: center;
+        margin-bottom: 0;
+        font-size: rem(48);
+        color: #000;
+    } // h3.login
+    .app-login-content {
+        display: inline-block;
+        box-sizing: border-box;
+        padding: 30px;
+        padding-top: 20px;
+        .login-with {
+            border: none;
+            @include green-button;
+            padding-top: 10px;
+            &:nth-child(1) {
+                margin-right: none;
+            }
+            span {
+                display: inline-block;
+                vertical-align: middle;
+                font-size: rem(20);
+                color: #fff;
+            } // span
+            .fa {
+                display: inline-block;
+                vertical-align: middle;
+                color: #fff;
+                font-size: rem(30);
+            } // .fa
+        } // .login-with
+    } // .app-login-content
+} // .app-login-window

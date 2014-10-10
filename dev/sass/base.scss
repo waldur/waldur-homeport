@@ -1,0 +1,31 @@
+// override bootstrap && base styles
+
+body {
+    font-family: Helvetica, Arial;
+    font-size: 16px;
+    font-size: rem(16);
+    color: #777;
+}
+
+a:hover, a:active, a:focus {
+    outline: 0;
+}
+
+.container {
+    box-sizing: border-box;
+    width: 960px;
+    margin: auto;
+} // container
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: inline-block;
+}
+
+form {
+    fieldset {
+        border: none;
+        padding: 0;
+    }
+}

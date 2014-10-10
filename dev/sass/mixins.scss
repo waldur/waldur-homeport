@@ -1,0 +1,68 @@
+// transition
+@mixin transition($property, $duration, $timing) {
+    transition-property: $property;
+    transition-duration: $duration;
+    transition-timing-function: $timing;
+}
+
+// inline top
+@mixin inline-top {
+    display: inline-block;
+    vertical-align: top;
+}
+
+// inline middle
+@mixin inline-middle {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+@mixin clear-list {
+    margin: 0;
+    padding: 0;
+    li {
+        list-style: none;
+    }
+}
+
+@mixin block-title {
+    color: #000;
+    font-size: 25px;
+    font-weight: 200;
+    margin-bottom: 12px;
+}
+
+@mixin green-button {
+    display: inline-block;
+    background: #00cf70;
+    border-bottom: 2px solid #508E31;
+    border-radius: 4px;
+    padding: 5px 10px;
+    line-height: 1;
+    margin-right: 10px;
+    text-decoration: none;
+}
+
+@mixin bp($point) {
+    $bp-cr: "(min-width : 320px)";
+    $bp-xs: "(min-width : 480px)";
+    $bp-sm: "(min-width : 768px)";
+    $bp-md: "(min-width : 992px)";
+    $bp-lg: "(min-width : 1200px)";
+
+    @if $point == cr {
+        @media #{$bp-cr} { @content; }
+    }
+    @if $point == xs {
+        @media #{$bp-xs} { @content; }
+    }
+    @if $point == sm {
+        @media #{$bp-sm} { @content; }
+    }
+    @if $point == md {
+        @media #{$bp-md} { @content; }
+    }
+    @if $point == lg {
+        @media #{$bp-lg} { @content; }
+    }
+}

@@ -1,0 +1,219 @@
+body {
+  font-family: Helvetica, Arial;
+  font-size: 16px;
+  font-size: 1rem;
+  color: #777;
+}
+
+a:hover, a:active, a:focus {
+  outline: 0;
+}
+
+.container {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  width: 960px;
+  margin: auto;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: inline-block;
+}
+
+form fieldset {
+  border: none;
+  padding: 0;
+}
+
+.app-header {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  background: #E2E2E2;
+}
+.app-header .main-nav {
+  margin: 0;
+  padding: 0;
+}
+.app-header .main-nav li {
+  list-style: none;
+}
+.app-header .main-nav li {
+  display: inline-block;
+}
+.app-header .main-nav li a {
+  display: inline-block;
+  vertical-align: middle;
+  padding: 10px 15px;
+  color: #565656;
+  text-decoration: none;
+}
+.app-header .main-nav li a:hover {
+  background: #565656;
+  color: #e2e2e2;
+}
+
+.app-login-window {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: auto;
+  text-align: center;
+}
+.app-login-window h3.login {
+  text-align: center;
+  margin-bottom: 0;
+  font-size: 3rem;
+  color: #000;
+}
+.app-login-window .app-login-content {
+  display: inline-block;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 30px;
+  padding-top: 20px;
+}
+.app-login-window .app-login-content .login-with {
+  border: none;
+  display: inline-block;
+  background: #00cf70;
+  border-bottom: 2px solid #508E31;
+  -webkit-border-radius: 4px;
+          border-radius: 4px;
+  padding: 5px 10px;
+  line-height: 1;
+  margin-right: 10px;
+  text-decoration: none;
+  padding-top: 10px;
+}
+.app-login-window .app-login-content .login-with:nth-child(1) {
+  margin-right: none;
+}
+.app-login-window .app-login-content .login-with span {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 1.25rem;
+  color: #fff;
+}
+.app-login-window .app-login-content .login-with .fa {
+  display: inline-block;
+  vertical-align: middle;
+  color: #fff;
+  font-size: 1.875rem;
+}
+
+.verify-data .verify-block {
+  width: 50%;
+  float: left;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.verify-data .verify-block:nth-child(2n+1) {
+  clear: both;
+}
+.verify-data .verify-block.portrait-block {
+  width: 30%;
+}
+.verify-data .verify-block.data-block {
+  width: 70%;
+}
+.verify-data .data-title {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px dashed #d2d2d2;
+  font-size: 3rem;
+  color: #000;
+}
+.verify-data .portrait {
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+  padding-left: 15px;
+}
+.verify-data .portrait img {
+  -webkit-border-radius: 4px;
+          border-radius: 4px;
+  border-bottom: 2px solid #888888;
+}
+.verify-data .data {
+  padding-left: 40px;
+}
+.verify-data .data fieldset + fieldset {
+  margin-top: 1rem;
+}
+.verify-data .data fieldset.submit-box {
+  margin-top: 3rem;
+  padding-left: 15px;
+}
+.verify-data .data fieldset.can-edit {
+  position: relative;
+}
+.verify-data .data fieldset.can-edit:hover:before {
+  position: absolute;
+  top: 20px;
+  left: -20px;
+  content: "\f040";
+  font-family: FontAwesome;
+}
+.verify-data .data fieldset input[type=text], .verify-data .data fieldset textarea {
+  -webkit-transition-property: all;
+          transition-property: all;
+  -webkit-transition-duration: 0.5s;
+          transition-duration: 0.5s;
+  -webkit-transition-timing-function: ease;
+          transition-timing-function: ease;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  font-size: 1.875rem;
+  padding: 10px 15px;
+  -webkit-border-radius: 4px;
+          border-radius: 4px;
+  border: none;
+  outline: 0;
+}
+.verify-data .data fieldset input[type=text]:focus, .verify-data .data fieldset textarea:focus {
+  -webkit-box-shadow: 0px 0px 10px 0px #B2DF9C;
+          box-shadow: 0px 0px 10px 0px #B2DF9C;
+}
+.verify-data .data fieldset .login-with {
+  color: #000;
+  text-decoration: none;
+}
+.verify-data .data fieldset .submit {
+  border: none;
+  display: inline-block;
+  background: #00cf70;
+  border-bottom: 2px solid #508E31;
+  -webkit-border-radius: 4px;
+          border-radius: 4px;
+  padding: 5px 10px;
+  line-height: 1;
+  margin-right: 10px;
+  text-decoration: none;
+  padding-top: 10px;
+}
+.verify-data .data fieldset .submit:nth-child(1) {
+  margin-right: none;
+}
+.verify-data .data fieldset .submit span {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 1.25rem;
+  color: #fff;
+}
+.verify-data .data fieldset .submit .fa {
+  display: inline-block;
+  vertical-align: middle;
+  color: #fff;
+  font-size: 1.875rem;
+}
