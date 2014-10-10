@@ -1,7 +1,7 @@
-# project: okei
+# project: dashboard
 
 * *developer: [Mihail Yakiemnko][1]*
-* *company: [whitescape.com][2]*
+* *company: [opennodecloud.com][2]*
 * *project: okei*
 
 ## Technology
