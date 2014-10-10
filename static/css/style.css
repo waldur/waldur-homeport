@@ -6,6 +6,10 @@ body {
   margin: 0;
 }
 
+a {
+  color: #71A4C3;
+}
+
 a:hover, a:active, a:focus {
   outline: 0;
 }
@@ -145,6 +149,10 @@ th {
 }
 .dashboard .dash-block {
   overflow: hidden;
+  margin-bottom: 30px;
+}
+.dashboard .dash-block:nth-child(1) {
+  margin-bottom: 0;
 }
 .dashboard .dash-block .summary-info {
   width: 33.33333%;
@@ -269,15 +277,57 @@ th {
 }
 .dashboard .dash-block .project-list table.project-list-table tr .actions {
   width: 120px;
+  text-align: center;
+}
+.dashboard .dash-block .project-list table.project-list-table tr .actions button {
+  font-size: 1rem;
+  background: #d5d5d5;
+  border: none;
+  border-bottom: 1px solid #bbbbbb;
+  -webkit-border-radius: 3px;
+          border-radius: 3px;
+  padding: 4px 6px;
+  color: #414141;
+  cursor: pointer;
+}
+.dashboard .dash-block .project-list table.project-list-table tr .actions button.remove {
+  background: #d32e2e;
+  border-bottom: 1px solid #790101;
+  color: #fff;
+  opacity: .5;
+}
+.dashboard .dash-block .project-list table.project-list-table tr .actions button.remove:hover {
+  opacity: 1;
+}
+.dashboard .dash-block .project-list table.project-list-table tr:nth-child(odd) td {
+  background: #f4f4f4;
 }
 .dashboard .dash-block .project-list table.project-list-table tr th, .dashboard .dash-block .project-list table.project-list-table tr td {
   padding: 10px 15px;
+}
+.dashboard .dash-block .project-list table.project-list-table tr th {
+  cursor: pointer;
+  border-bottom: 1px solid gray;
 }
 .dashboard .dash-block .project-list table.project-list-table tr th + th {
   border-left: 1px solid gray;
 }
 .dashboard .dash-block .project-list table.project-list-table tr td + td {
   border-left: 1px solid #dddddd;
+}
+.dashboard .dash-block .project-list table.project-list-table tr td ul {
+  margin: 0;
+  padding: 0;
+}
+.dashboard .dash-block .project-list table.project-list-table tr td ul li {
+  list-style: none;
+}
+.dashboard .dash-block .project-list table.project-list-table tr td ul li + li {
+  margin-top: .25rem;
+}
+.dashboard .dash-block .project-list table.project-list-table tr td ul li a {
+  text-decoration: none;
+  font-size: 0.9rem;
 }
 
 .verify-data .verify-block {

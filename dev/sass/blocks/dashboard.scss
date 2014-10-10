@@ -18,6 +18,10 @@
     }
     .dash-block {
         overflow: hidden;
+        margin-bottom: 30px;
+        &:nth-child(1) {
+            margin-bottom: 0;
+        }
         .summary-info {
             @include block-3;
             padding: 15px;
@@ -136,7 +140,37 @@
                     // shared-resources
                     .actions {
                         width: 120px;
+                        text-align: center;
+                        button {
+                            font-size: rem(16);
+                            background: rgb(213, 213, 213);
+                            border: none;
+                            border-bottom: 1px solid rgb(187, 187, 187);
+                            border-radius: 3px;
+                            padding: 4px 6px;
+                            color: #414141;
+                            cursor: pointer;
+                            &.view {}
+                            &.conf {}
+                            &.remove {
+                                background: rgb(211, 46, 46);
+                                border-bottom: 1px solid rgb(121, 1, 1);
+                                color: #fff;
+                                opacity: .5;
+                                &:hover {
+                                    opacity: 1;
+                                }
+                            }
+                        }
                     } // actions
+                    &:nth-child(odd) {
+                        td {
+                            background: rgb(244, 244, 244);
+                        }
+                    }
+                    &:nth-child(even) {
+                        td {}
+                    }
                     th, td {
                         padding: 10px 15px;
                     }
@@ -144,11 +178,25 @@
                         + th {
                             border-left: 1px solid gray;
                         }
+                        cursor: pointer;
+                        border-bottom: 1px solid gray;
                     } // th
                     td {
                         + td {
                             border-left: 1px solid rgb(221, 221, 221);
                         }
+                        ul {
+                            @include clear-list;
+                            li {
+                                + li {
+                                    margin-top: .25rem;
+                                }
+                                a {
+                                    text-decoration: none;
+                                    font-size: 0.9rem;
+                                }
+                            } // li
+                        } // ul
                     } // td
                 } // tr
             } // table
