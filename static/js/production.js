@@ -9223,17 +9223,34 @@ return jQuery;
         });
     }
 
+    // menu
+    function menuNames() {
+        var link = $('.main-nav ul li a');
+        link.each(function() {
+            $(this).append('<span class=\"display-name\"></span>');
+            $(this).find('.display-name').html($(this).attr('data-name'));
+        });
+    }
+
+    // Event log
     function typeNotify() {
         var singleNotify = $('[data-notify="single-notify"]');
-
-        // singleNotify
-
         var notifyDecor = singleNotify.find('.name');
         notifyDecor.append('<span class=\"sp\"></span>');
 
         var combineNotify = $('[data-notify="combine-notify"]');
         var notifyDecor = combineNotify.find('.name');
         notifyDecor.append('<span class=\"sp combine-1\"></span><span class=\"sp combine-2\"></span>');
+    }
+
+    function eventOverlay() {
+        var eventItem = $('.main-activity-item');
+        eventItem.each(function(){
+            var box = $(this);
+            box.append('<div class=\"overlay\"></div>')
+            var overlayReady = $(this).find('.overlay');
+            overlayReady.css('width', box.outerWidth()).css('height', box.outerHeight());
+        });
     }
 
     // document ready
@@ -9243,6 +9260,8 @@ return jQuery;
         withFixedHeaderOne();
         newProject();
         typeNotify();
+        eventOverlay();
+        menuNames();
     });
 
     // all initial on window resize

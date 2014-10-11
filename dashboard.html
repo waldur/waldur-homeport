@@ -29,10 +29,10 @@
         <nav class="main-nav">
             <ul>
                 <li><a href="/" class="home-link">NodeConductor</a></li>
-                <li><a href="dashboard.html" class="current"><i class="fa fa-tachometer"></i> Dashboard</a></li>
-                <li><a href="#"><i class="fa fa-desktop"></i></a></li>
-                <li><a href="#"><i class="fa fa-tasks"></i></a></li>
-                <li><a href="#"><i class="fa fa-users"></i></a></li>
+                <li><a href="dashboard.html" class="current" data-name="Dashboard"><i class="fa fa-tachometer"></i></a></li>
+                <li><a href="#" data-name="Projects"><i class="fa fa-desktop"></i></a></li>
+                <li><a href="#" data-name="Resources"><i class="fa fa-tasks"></i></a></li>
+                <li><a href="#" data-name="Users"><i class="fa fa-users"></i></a></li>
             </ul>
         </nav>
         <nav class="main-nav user-area">
@@ -53,106 +53,116 @@
     <div class="container">
 
         <div class="activity-monitor">
-            <!-- main-activity-item -->
-            <div class="main-activity-item" data-notify="single-notify">
-                <!-- header -->
-                <header>
-                    <a href="#" class="name">Gh-45nd</a>
-                    <ul class="controls">
-                        <li><a href="#"><i class="fa fa-clock-o"></i></a></li>
-                        <li><a href="#"><i class="fa fa-star"></i></a></li>
-                    </ul>
-                </header>
-                <!-- /header -->
-                <!-- content -->
-                <div class="content">
-                    <div class="silver">this is example of single task</div>
+            <div class="dash-title">
+                <div class="title-no-separate controls">
+                    <h3>Event log</h3>
+                    <a href="#" class="len active">5 hours</a>
+                    <a href="#" class="len">24 hours</a>
+                    <a href="#" class="len">week</a>
                 </div>
-                <!-- /content -->
-                <div class="separate"></div>
             </div>
-            <!-- /main-activity-item -->
-            <div class="main-activity-item" data-notify="combine-notify">
-                <!-- header -->
-                <header>
-                    <a href="#" class="name">Update bash</a><span class="label">important</span>
-                    <ul class="controls">
-                        <li><a href="#"><i class="fa fa-clock-o"></i></a></li>
-                        <li><a href="#"><i class="fa fa-star"></i></a></li>
-                    </ul>
-                </header>
-                <!-- /header -->
-                <!-- content -->
-                <div class="content">
-                    <span class="elem silver">Sequrity task. Need to update bash on virtualhosts</span>
-                    <span class="elem"><a href="#" class="live-action">update all</a></span>
+            <div class="main-activities">
+                <!-- main-activity-item -->
+                <div class="main-activity-item" data-notify="single-notify">
+                    <!-- header -->
+                    <header>
+                        <a href="#" class="name">Gh-45nd</a>
+                        <ul class="controls">
+                            <li><a href="#"><i class="fa fa-clock-o"></i></a></li>
+                            <li><a href="#"><i class="fa fa-star"></i></a></li>
+                        </ul>
+                    </header>
+                    <!-- /header -->
+                    <!-- content -->
+                    <div class="content">
+                        <div class="silver">this is example of single task</div>
+                    </div>
+                    <!-- /content -->
+                    <div class="separate"></div>
                 </div>
-                <!-- /content -->
-                <div class="separate"></div>
+                <!-- /main-activity-item -->
+                <div class="main-activity-item" data-notify="combine-notify">
+                    <!-- header -->
+                    <header>
+                        <a href="#" class="name">Update bash</a><span class="label">important</span>
+                        <ul class="controls">
+                            <li><a href="#"><i class="fa fa-clock-o"></i></a></li>
+                            <li><a href="#"><i class="fa fa-star"></i></a></li>
+                        </ul>
+                    </header>
+                    <!-- /header -->
+                    <!-- content -->
+                    <div class="content">
+                        <span class="elem silver">Sequrity task. Need to update bash on virtualhosts</span>
+                        <span class="elem"><a href="#" class="live-action">update all</a></span>
+                    </div>
+                    <!-- /content -->
+                    <div class="separate"></div>
+                </div>
+                <!-- main-activity-item -->
+                <div class="main-activity-item" data-notify="single-notify">
+                    <!-- header -->
+                    <header>
+                        <a href="#" class="name">AA-021</a>
+                        <ul class="controls">
+                            <li><a href="#"><i class="fa fa-clock-o"></i></a></li>
+                            <li><a href="#"><i class="fa fa-star"></i></a></li>
+                        </ul>
+                    </header>
+                    <!-- /header -->
+                    <!-- content -->
+                    <div class="content">
+                        <span class="elem silver">In project invite new manager</span>
+                        <span class="elem"><a href="#" class="user-name"><i class="fa fa-user"></i> Viktor Aleniichuk</a></span>
+                        <span class="elem"><a href="#" class="live-action">set rights</a></span>
+                    </div>
+                    <!-- /content -->
+                    <div class="content">
+                        <span class="elem silver"><i class="fa fa-tasks"></i> Amazon s3 need payment</span>
+                        <span class="elem"><a href="#" class="live-action"><i class="fa fa-eye"></i></a></span>
+                    </div>
+                    <!-- /content -->
+                    <div class="separate"></div>
+                </div>
+                <!-- /main-activity-item -->
+                <!-- main-activity-item -->
+                <div class="main-activity-item" data-notify="single-notify">
+                    <!-- header -->
+                    <header>
+                        <a href="#" class="name">Za-412d</a>
+                        <ul class="controls">
+                            <li><a href="#"><i class="fa fa-clock-o"></i></a></li>
+                            <li><a href="#"><i class="fa fa-star"></i></a></li>
+                        </ul>
+                    </header>
+                    <!-- /header -->
+                    <!-- content -->
+                    <div class="content">
+                        <div class="silver">this is example of single task</div>
+                    </div>
+                    <!-- /content -->
+                    <div class="separate"></div>
+                </div>
+                <!-- /main-activity-item -->
+                <!-- main-activity-item -->
+                <div class="main-activity-item" data-notify="single-notify">
+                    <!-- header -->
+                    <header>
+                        <a href="#" class="name">Za-412d</a>
+                        <ul class="controls">
+                            <li><a href="#"><i class="fa fa-clock-o"></i></a></li>
+                            <li><a href="#"><i class="fa fa-star"></i></a></li>
+                        </ul>
+                    </header>
+                    <!-- /header -->
+                    <!-- content -->
+                    <div class="content">
+                        <div class="silver">this is example of single task</div>
+                    </div>
+                    <!-- /content -->
+                </div>
+                <!-- /main-activity-item -->
             </div>
-            <!-- main-activity-item -->
-            <div class="main-activity-item" data-notify="single-notify">
-                <!-- header -->
-                <header>
-                    <a href="#" class="name">AA-021</a>
-                    <ul class="controls">
-                        <li><a href="#"><i class="fa fa-clock-o"></i></a></li>
-                        <li><a href="#"><i class="fa fa-star"></i></a></li>
-                    </ul>
-                </header>
-                <!-- /header -->
-                <!-- content -->
-                <div class="content">
-                    <span class="elem silver">In project invite new manager</span>
-                    <span class="elem"><a href="#" class="user-name"><i class="fa fa-user"></i> Viktor Aleniichuk</a></span>
-                    <span class="elem"><a href="#" class="live-action">set rights</a></span>
-                </div>
-                <!-- /content -->
-                <div class="content">
-                    <span class="elem silver"><i class="fa fa-tasks"></i> Amazon s3 need payment</span>
-                    <span class="elem"><a href="#" class="live-action"><i class="fa fa-eye"></i></a></span>
-                </div>
-                <!-- /content -->
-                <div class="separate"></div>
-            </div>
-            <!-- /main-activity-item -->
-            <!-- main-activity-item -->
-            <div class="main-activity-item" data-notify="single-notify">
-                <!-- header -->
-                <header>
-                    <a href="#" class="name">Za-412d</a>
-                    <ul class="controls">
-                        <li><a href="#"><i class="fa fa-clock-o"></i></a></li>
-                        <li><a href="#"><i class="fa fa-star"></i></a></li>
-                    </ul>
-                </header>
-                <!-- /header -->
-                <!-- content -->
-                <div class="content">
-                    <div class="silver">this is example of single task</div>
-                </div>
-                <!-- /content -->
-                <div class="separate"></div>
-            </div>
-            <!-- /main-activity-item -->
-            <!-- main-activity-item -->
-            <div class="main-activity-item" data-notify="single-notify">
-                <!-- header -->
-                <header>
-                    <a href="#" class="name">Za-412d</a>
-                    <ul class="controls">
-                        <li><a href="#"><i class="fa fa-clock-o"></i></a></li>
-                        <li><a href="#"><i class="fa fa-star"></i></a></li>
-                    </ul>
-                </header>
-                <!-- /header -->
-                <!-- content -->
-                <div class="content">
-                    <div class="silver">this is example of single task</div>
-                </div>
-                <!-- /content -->
-            </div>
-            <!-- /main-activity-item -->
         </div>
 
         <div class="dash-block">

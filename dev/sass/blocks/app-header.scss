@@ -14,17 +14,23 @@
                 display: inline-block;
                 float: left;
                 a {
-                    display: inline-block;
-                    vertical-align: middle;
+                    @include inline-middle;
                     padding: 20px 15px;
                     color: inherit;
                     text-decoration: none;
+                    .display-name {
+                        display: none;
+                    }
                     &:hover, &.current {
                         // background: #565656;
                         color: rgb(23, 61, 10);
                         position: relative;
                     }
                     &.current {
+                        .display-name {
+                            @include inline-middle;
+                            margin-left: .4rem;
+                        }
                         &:after {
                             content: '';
                             position: absolute;
