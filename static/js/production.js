@@ -9211,11 +9211,24 @@ return jQuery;
         body.css('padding-top', fixedHeaderHeight);
     }
 
+    function newProject(){
+        var trigger = $('[data-role="new-project-trigger"]');
+        var createNewProject = $('[data-role="create-new-project"]');
+        trigger.click(function(){
+            if(!createNewProject.hasClass('state')) {
+                createNewProject.addClass('state');
+            } else {
+                createNewProject.removeClass('state');
+            }
+        });
+    }
+
     // document ready
     $(document).ready(function() {
         absCenter();
         withFixedHeader();
         withFixedHeaderOne();
+        newProject();
     });
 
     // all initial on window resize

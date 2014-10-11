@@ -56,7 +56,11 @@ th {
   top: 0px;
   left: 0px;
   width: 100%;
-  background: #E2E2E2;
+  background: #27ae60;
+  color: #fff;
+}
+.app-header .main-nav {
+  float: left;
 }
 .app-header .main-nav ul {
   margin: 0;
@@ -67,17 +71,54 @@ th {
 }
 .app-header .main-nav ul li {
   display: inline-block;
+  float: left;
 }
 .app-header .main-nav ul li a {
   display: inline-block;
   vertical-align: middle;
-  padding: 10px 15px;
-  color: #565656;
+  padding: 20px 15px;
+  color: inherit;
   text-decoration: none;
 }
 .app-header .main-nav ul li a:hover, .app-header .main-nav ul li a.current {
-  background: #565656;
-  color: #e2e2e2;
+  color: #173d0a;
+  position: relative;
+}
+.app-header .main-nav ul li a.current:after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  margin-left: -10px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 10px 10px 0 10px;
+  border-color: #27ae60 transparent transparent transparent;
+}
+.app-header .main-nav ul li a.home-link:hover, .app-header .main-nav ul li a.home-link.current {
+  background: inherit;
+  color: inherit;
+}
+.app-header .main-nav ul li a.user-pic {
+  padding: 10px 15px;
+}
+.app-header .main-nav ul li a.user-pic img {
+  width: 40px;
+  vertical-align: top;
+}
+.app-header .main-nav ul li a.user-pic:after {
+  font-family: FontAwesome;
+  content: '\f0dd';
+  position: relative;
+  top: 10px;
+  left: 8px;
+  margin-left: 0;
+  font-size: 12px;
+  border: none;
+}
+.app-header .main-nav.user-area {
+  float: right;
 }
 
 .app-login-window {
@@ -130,11 +171,6 @@ th {
   font-size: 1.875rem;
 }
 
-.dashboard.dark-dash {
-  background: #565656;
-  color: #fff;
-  padding-bottom: 20px;
-}
 .dashboard.m-top {
   margin-top: 20px;
 }
@@ -145,7 +181,54 @@ th {
 .dashboard .title-separate {
   margin-bottom: 2rem;
   padding-bottom: 2rem;
+  padding-top: 1rem;
   border-bottom: 1px dashed #d2d2d2;
+}
+.dashboard .controls h3 {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0;
+}
+.dashboard .controls .len {
+  display: inline-block;
+  vertical-align: middle;
+  background: gray;
+  color: #000;
+  padding: 2px 4px;
+  text-decoration: none;
+  position: relative;
+  width: 30px;
+  -webkit-border-radius: 2px;
+          border-radius: 2px;
+}
+.dashboard .controls .len.active:after {
+  content: '';
+  display: inline-block;
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  margin-left: -5px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 6px 5px 0 5px;
+  border-color: gray transparent transparent transparent;
+}
+.dashboard .controls .create-new-project {
+  display: inline-block;
+  background: #00cf70;
+  border-bottom: 2px solid #508E31;
+  -webkit-border-radius: 4px;
+          border-radius: 4px;
+  padding: 5px 10px;
+  line-height: 1;
+  margin-right: 10px;
+  text-decoration: none;
+  margin-right: 0;
+  padding-top: 8px;
+  color: #fff;
+  text-decoration: none;
+  float: right;
 }
 .dashboard .dash-block {
   overflow: hidden;
@@ -155,15 +238,7 @@ th {
   margin-bottom: 0;
 }
 .dashboard .dash-block .summary-info {
-  width: 33.33333%;
-  float: left;
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
   padding: 15px;
-}
-.dashboard .dash-block .summary-info:nth-child(3n+1) {
-  clear: both;
 }
 .dashboard .dash-block .summary-info .content {
   -webkit-border-radius: 4px;
@@ -191,7 +266,6 @@ th {
 .dashboard .dash-block .summary-info .content.events-log ul li a {
   display: inline-block;
   vertical-align: middle;
-  color: #fff;
   font-weight: 200;
   text-decoration: none;
 }
@@ -328,6 +402,10 @@ th {
 .dashboard .dash-block .project-list table.project-list-table tr td ul li a {
   text-decoration: none;
   font-size: 0.9rem;
+}
+.dashboard .dash-block .create-block {
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .verify-data .verify-block {

@@ -1,9 +1,4 @@
 .dashboard {
-    &.dark-dash {
-        background: #565656;
-        color: #fff;
-        padding-bottom: 20px;
-    }
     &.m-top {
         margin-top: 20px;
     }
@@ -14,7 +9,47 @@
     .title-separate {
         margin-bottom: 2rem;
         padding-bottom: 2rem;
+        padding-top: 1rem;
         border-bottom: 1px dashed rgb(210, 210, 210);
+    }
+    .controls {
+        h3 {
+            @include inline-middle;
+            margin: 0;
+        }
+        .len {
+            @include inline-middle;
+            background: gray;
+            color: #000;
+            padding: 2px 4px;
+            text-decoration: none;
+            position: relative;
+            width: 30px;
+            border-radius: 2px;
+            &.active {
+                &:after {
+                    content: '';
+                    display: inline-block;
+                    position: absolute;
+                    bottom: -6px;
+                    left: 50%;
+                    margin-left: -5px;
+                    width: 0;
+                    height: 0;
+                    border-style: solid;
+                    border-width: 6px 5px 0 5px;
+                    border-color: gray transparent transparent transparent;
+                }
+            }
+        }
+        .create-new-project {
+            @include green-button;
+            margin-right: 0;
+            padding-top: 8px;
+            color: #fff;
+            text-decoration: none;
+            float: right;
+        }
     }
     .dash-block {
         overflow: hidden;
@@ -23,7 +58,6 @@
             margin-bottom: 0;
         }
         .summary-info {
-            @include block-3;
             padding: 15px;
             .content {
                 border-radius: 4px;
@@ -43,7 +77,6 @@
                             }
                             a {
                                 @include inline-middle;
-                                color: #fff;
                                 font-weight: 200;
                                 text-decoration: none;
                                 &:before {
@@ -201,5 +234,9 @@
                 } // tr
             } // table
         } // project-list
+        .create-block {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        } // create-block
     } // dash-block
 } // dashboard
