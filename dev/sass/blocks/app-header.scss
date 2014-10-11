@@ -5,6 +5,7 @@
     width: 100%;
     background: #27ae60;
     color: #fff;
+    z-index: 9999;
     .main-nav {
         float: left;
         ul {
@@ -44,17 +45,23 @@
                         }
                     }
                     &.user-pic {
-                        padding: 10px 15px;
+                        padding: 12px 15px;
                         img {
-                            width: 40px;
-                            vertical-align: top;
+                            @include inline-middle;
+                            width: 36px;
+                            // vertical-align: top;
+                            border-radius: 100%;
+                        }
+                        span {
+                            @include inline-middle;
                         }
                         &:after {
+                            @include inline-middle;
                             font-family: FontAwesome;
                             content: '\f0dd';
                             position: relative;
-                            top: 10px;
-                            left: 8px;
+                            top: -2px;
+                            left: 4px;
                             margin-left: 0;
                             font-size: 12px;
                             border: none;

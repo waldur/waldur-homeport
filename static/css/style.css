@@ -58,6 +58,7 @@ th {
   width: 100%;
   background: #27ae60;
   color: #fff;
+  z-index: 9999;
 }
 .app-header .main-nav {
   float: left;
@@ -101,18 +102,27 @@ th {
   color: inherit;
 }
 .app-header .main-nav ul li a.user-pic {
-  padding: 10px 15px;
+  padding: 12px 15px;
 }
 .app-header .main-nav ul li a.user-pic img {
-  width: 40px;
-  vertical-align: top;
+  display: inline-block;
+  vertical-align: middle;
+  width: 36px;
+  -webkit-border-radius: 100%;
+          border-radius: 100%;
+}
+.app-header .main-nav ul li a.user-pic span {
+  display: inline-block;
+  vertical-align: middle;
 }
 .app-header .main-nav ul li a.user-pic:after {
+  display: inline-block;
+  vertical-align: middle;
   font-family: FontAwesome;
   content: '\f0dd';
   position: relative;
-  top: 10px;
-  left: 8px;
+  top: -2px;
+  left: 4px;
   margin-left: 0;
   font-size: 12px;
   border: none;
@@ -146,7 +156,7 @@ th {
   border: none;
   display: inline-block;
   background: #00cf70;
-  border-bottom: 2px solid #508E31;
+  border-bottom: 1px solid #3D980F;
   -webkit-border-radius: 4px;
           border-radius: 4px;
   padding: 5px 10px;
@@ -169,6 +179,119 @@ th {
   vertical-align: middle;
   color: #fff;
   font-size: 1.875rem;
+}
+
+.activity-monitor {
+  margin-bottom: 30px;
+}
+.activity-monitor .main-activity-item {
+  position: relative;
+  padding: 10px 20px 10px 20px;
+}
+.activity-monitor .main-activity-item:before {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 1px;
+  left: -1px;
+  top: 0px;
+  bottom: 0px;
+  background: #dfdfdf;
+}
+.activity-monitor .main-activity-item > header {
+  padding-bottom: 8px;
+}
+.activity-monitor .main-activity-item > header .name {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 1.125rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+.activity-monitor .main-activity-item > header .name .sp {
+  display: block;
+  width: 11px;
+  height: 11px;
+  -webkit-border-radius: 100%;
+          border-radius: 100%;
+  background: #fff;
+  border: 2px solid #dfdfdf;
+  position: absolute;
+  top: 4px;
+  left: -28px;
+}
+.activity-monitor .main-activity-item > header .name .sp.combine-1 {
+  left: -30px;
+}
+.activity-monitor .main-activity-item > header .name .sp.combine-2 {
+  left: -26px;
+}
+.activity-monitor .main-activity-item > header .label {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-border-radius: 3px;
+          border-radius: 3px;
+  padding: 2px 4px;
+  margin-left: 8px;
+  background: #e67e22;
+  font-size: 0.75rem;
+  color: #fff;
+}
+.activity-monitor .main-activity-item > header .controls {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0;
+  padding: 0;
+  float: right;
+}
+.activity-monitor .main-activity-item > header .controls li {
+  list-style: none;
+}
+.activity-monitor .main-activity-item > header .controls li {
+  display: inline-block;
+  vertical-align: middle;
+}
+.activity-monitor .main-activity-item > header .controls li + li {
+  margin-left: 0.625rem;
+}
+.activity-monitor .main-activity-item > header .controls li a {
+  color: #565656;
+}
+.activity-monitor .main-activity-item .content + .content {
+  margin-top: .4rem;
+}
+.activity-monitor .main-activity-item .content .elem {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: .5rem;
+}
+.activity-monitor .main-activity-item .content .elem:nth-child(1) {
+  margin-left: 0px;
+}
+.activity-monitor .main-activity-item .content .live-action {
+  display: inline-block;
+  color: #4A4A4A;
+  background: #DBDBDB;
+  border-bottom: 1px solid #B5B5B5;
+  -webkit-border-radius: 4px;
+          border-radius: 4px;
+  padding: 5px 10px;
+  line-height: 1;
+  margin-right: 10px;
+  text-decoration: none;
+  font-size: 0.75rem;
+  padding: 2px 4px;
+}
+.activity-monitor .main-activity-item .content .silver {
+  color: silver;
+}
+.activity-monitor .main-activity-item .separate {
+  width: 100%;
+  height: 1px;
+  border-bottom: 1px dashed #d2d2d2;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .dashboard.m-top {
@@ -217,7 +340,7 @@ th {
 .dashboard .controls .create-new-project {
   display: inline-block;
   background: #00cf70;
-  border-bottom: 2px solid #508E31;
+  border-bottom: 1px solid #3D980F;
   -webkit-border-radius: 4px;
           border-radius: 4px;
   padding: 5px 10px;
@@ -494,7 +617,7 @@ th {
   border: none;
   display: inline-block;
   background: #00cf70;
-  border-bottom: 2px solid #508E31;
+  border-bottom: 1px solid #3D980F;
   -webkit-border-radius: 4px;
           border-radius: 4px;
   padding: 5px 10px;

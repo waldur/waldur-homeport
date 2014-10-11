@@ -32,12 +32,26 @@
         });
     }
 
+    function typeNotify() {
+        var singleNotify = $('[data-notify="single-notify"]');
+
+        // singleNotify
+
+        var notifyDecor = singleNotify.find('.name');
+        notifyDecor.append('<span class=\"sp\"></span>');
+
+        var combineNotify = $('[data-notify="combine-notify"]');
+        var notifyDecor = combineNotify.find('.name');
+        notifyDecor.append('<span class=\"sp combine-1\"></span><span class=\"sp combine-2\"></span>');
+    }
+
     // document ready
     $(document).ready(function() {
         absCenter();
         withFixedHeader();
         withFixedHeaderOne();
         newProject();
+        typeNotify();
     });
 
     // all initial on window resize
