@@ -200,7 +200,7 @@ th {
   z-index: 888;
   top: 0px;
   left: 0px;
-  background: url(../images/pulse-green.png) no-repeat 100% 34px;
+  background: url(../images/pulse-green.png) no-repeat 100% calc(100% - 20px);
   opacity: .3;
 }
 .activity-monitor .main-activity-item:before {
@@ -301,8 +301,8 @@ th {
   width: 100%;
   height: 1px;
   border-bottom: 1px dashed #d2d2d2;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .dashboard.m-top {

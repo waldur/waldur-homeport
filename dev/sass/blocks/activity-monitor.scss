@@ -14,7 +14,7 @@
             z-index: 888;
             top: 0px;
             left: 0px;
-            background: url(../images/pulse-green.png) no-repeat 100% 34px;
+            background: url(../images/pulse-green.png) no-repeat 100% calc(100% - 20px);
             opacity: .3;
         }
         &:before {
@@ -110,11 +110,12 @@
             } // silver
         } // content
         .separate {
+            // display: none;
             width: 100%;
             height: 1px;
             border-bottom: 1px dashed rgb(210, 210, 210);
-            margin-top: 20px;
-            margin-bottom: 20px;
+            margin-top: 10px;
+            margin-bottom: 10px;
         } // separate
     } // main-activity-item
 } // activity-monitor
