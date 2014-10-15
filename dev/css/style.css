@@ -6732,6 +6732,16 @@ img {
   display: inline-block;
 }
 
+.show-more {
+  display: block;
+  text-align: center;
+  color: #000;
+  opacity: .5;
+}
+.show-more:hover {
+  color: #000;
+}
+
 .navbar-fixed-top {
   border-width: 0;
 }
@@ -6854,6 +6864,7 @@ img {
   display: inline-block;
   vertical-align: middle;
   margin: 0;
+  font-size: 2.2rem;
 }
 .dash-block .dash-title-box .sort {
   display: inline-block;
@@ -6958,6 +6969,9 @@ img {
 .main-activity-item .controls-box .controls li a {
   color: #000;
 }
+.main-activity-item .controls-box .controls li a:hover {
+  color: #000;
+}
 .main-activity-item .notifications {
   margin: 0;
   padding: 0;
@@ -7012,6 +7026,9 @@ img {
   cursor: pointer;
   margin-left: .8rem;
 }
+.projects-list table.project-list-table tr .actions a:hover {
+  color: #000;
+}
 .projects-list table.project-list-table tr .actions a:nth-child(1) {
   margin-left: 0px;
 }
@@ -7031,9 +7048,60 @@ img {
 .projects-list table.project-list-table tr th {
   cursor: pointer;
   border-bottom: 1px solid gray;
+  position: relative;
+  color: #6E9B34;
 }
 .projects-list table.project-list-table tr th + th {
   border-left: 1px solid gray;
+}
+.projects-list table.project-list-table tr th:after {
+  position: absolute;
+  top: calc(50% - 8px);
+  right: 5px;
+  font-family: FontAwesome;
+  font-size: 1rem;
+  color: #000;
+}
+.projects-list table.project-list-table tr th.sort-up:after {
+  content: '\f0de';
+}
+.projects-list table.project-list-table tr th.sort-down:after {
+  content: '\f0dd';
+}
+.projects-list table.project-list-table tr th .search {
+  color: #000;
+  margin-left: .8rem;
+}
+.projects-list table.project-list-table tr th .search:hover {
+  color: #000;
+}
+.projects-list table.project-list-table tr th .search.active {
+  color: #4b8add;
+}
+.projects-list table.project-list-table tr th .by-name-search {
+  display: none;
+  position: absolute;
+  left: 0px;
+  bottom: -24px;
+}
+.projects-list table.project-list-table tr th .by-name-search.state {
+  display: block;
+}
+.projects-list table.project-list-table tr th .by-name-search input {
+  width: 100%;
+  height: 24px;
+  border: none;
+  background: #f6f7f6;
+  border-bottom: 2px solid gray;
+  color: #565656;
+  font-size: 1.4rem;
+  font-weight: 200;
+  padding: 2px 10px;
+  box-sizing: border-box;
+  outline: 0;
+}
+.projects-list table.project-list-table tr td {
+  color: #9e9e9e;
 }
 .projects-list table.project-list-table tr td + td {
   border-left: 1px solid #dddddd;

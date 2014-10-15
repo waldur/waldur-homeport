@@ -49,3 +49,10 @@ img {
     height: auto;
     display: inline-block;
 }
+
+.show-more {
+    display: block;
+    text-align: center;
+    @include black-link;
+    opacity: .5;
+} // show-more

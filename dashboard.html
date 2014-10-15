@@ -86,6 +86,9 @@
                             <li><a href="#" class="active">5 hours</a></li>
                             <li><a href="#">24 hours</a></li>
                             <li><a href="#">week</a></li>
+                            <li class="separate"></li>
+                            <li><a href="#"><i class="fa fa-clock-o"></i></a></li>
+                            <li><a href="#"><i class="fa fa-star"></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -276,12 +279,22 @@
                     <div class="projects-list">
                         <table class="project-list-table">
                             <tr>
-                                <th class="name">Name</th>
-                                <th class="description">Description</th>
-                                <th class="participants">Admins</th>
-                                <th class="participants">Managers</th>
-                                <th class="shared-resources">Shared resources</th>
-                                <th class="actions">Actions</th>
+                                <th class="name sort-down">Name</th>
+                                <th class="description sort-down">Description</th>
+                                <th class="participants sort-down" data-proj-sort="box">
+                                    Admins <a class="search" data-proj-sort="name" data-toggle="tooltip" data-placement="bottom" title="By name"><i class="fa fa-search"></i></a>
+                                    <div class="by-name-search" data-proj-sort="field">
+                                        <input type="text" placeholder="John Doe">
+                                    </div>
+                                </th>
+                                <th class="participants sort-down" data-proj-sort="box">
+                                    Managers <a class="search" data-proj-sort="name" data-toggle="tooltip" data-placement="bottom" title="By name"><i class="fa fa-search"></i></a>
+                                    <div class="by-name-search" data-proj-sort="field">
+                                        <input type="text" placeholder="John Doe">
+                                    </div>
+                                </th>
+                                <th class="shared-resources sort-down">Shared resources</th>
+                                <th class="actions sort-down">Actions</th>
                             </tr>
                             <tr>
                                 <td class="name">G48s-11</td>
@@ -290,12 +303,14 @@
                                     <ul>
                                         <li><a href="#">Mihail Loon</a></li>
                                         <li><a href="#">Vasilij Blomberg</a></li>
+                                        <li><a href="#" class="show-more" data-toggle="tooltip" data-placement="bottom" title="All project admins"><i class="fa fa-ellipsis-h"></i></a></li>
                                     </ul>
                                 </td>
                                 <td class="participants">
                                     <ul>
                                         <li><a href="#">Mihail Loon</a></li>
                                         <li><a href="#">Vasilij Blomberg</a></li>
+                                        <li><a href="#" class="show-more" data-toggle="tooltip" data-placement="bottom" title="All project Managers"><i class="fa fa-ellipsis-h"></i></a></li>
                                     </ul>
                                 </td>
                                 <td class="shared-resources">
@@ -306,9 +321,9 @@
                                     </ul>
                                 </td>
                                 <td class="actions">
-                                    <a href="#" class="view" data-toggle="tooltip" data-placement="bottom" title="Viwe project"><i class="fa fa-eye"></i></a>
+                                    <a href="#" class="view" data-toggle="tooltip" data-placement="bottom" title="Viwe"><i class="fa fa-eye"></i></a>
                                     <a href="#" class="conf" data-toggle="tooltip" data-placement="bottom" title="Settings"><i class="glyphicon glyphicon-compressed"></i></a>
-                                    <a href="#" class="remove" data-toggle="tooltip" data-placement="bottom" title="Remove project"><i class="fa fa-times"></i></a>
+                                    <a href="#" class="remove" data-toggle="tooltip" data-placement="bottom" title="Remove"><i class="fa fa-times"></i></a>
                                 </td>
                             </tr>
                             <tr>
@@ -318,12 +333,14 @@
                                     <ul>
                                         <li><a href="#">Mihail Loon</a></li>
                                         <li><a href="#">Vasilij Blomberg</a></li>
+                                        <li><a href="#" class="show-more" data-toggle="tooltip" data-placement="bottom" title="All project admins"><i class="fa fa-ellipsis-h"></i></a></li>
                                     </ul>
                                 </td>
                                 <td class="participants">
                                     <ul>
                                         <li><a href="#">Mihail Loon</a></li>
                                         <li><a href="#">Vasilij Blomberg</a></li>
+                                        <li><a href="#" class="show-more" data-toggle="tooltip" data-placement="bottom" title="All project Managers"><i class="fa fa-ellipsis-h"></i></a></li>
                                     </ul>
                                 </td>
                                 <td class="shared-resources">
@@ -346,12 +363,14 @@
                                     <ul>
                                         <li><a href="#">Mihail Loon</a></li>
                                         <li><a href="#">Vasilij Blomberg</a></li>
+                                        <li><a href="#" class="show-more" data-toggle="tooltip" data-placement="bottom" title="All project admins"><i class="fa fa-ellipsis-h"></i></a></li>
                                     </ul>
                                 </td>
                                 <td class="participants">
                                     <ul>
                                         <li><a href="#">Mihail Loon</a></li>
                                         <li><a href="#">Vasilij Blomberg</a></li>
+                                        <li><a href="#" class="show-more" data-toggle="tooltip" data-placement="bottom" title="All project Managers"><i class="fa fa-ellipsis-h"></i></a></li>
                                     </ul>
                                 </td>
                                 <td class="shared-resources">
@@ -374,12 +393,14 @@
                                     <ul>
                                         <li><a href="#">Mihail Loon</a></li>
                                         <li><a href="#">Vasilij Blomberg</a></li>
+                                        <li><a href="#" class="show-more" data-toggle="tooltip" data-placement="bottom" title="All project admins"><i class="fa fa-ellipsis-h"></i></a></li>
                                     </ul>
                                 </td>
                                 <td class="participants">
                                     <ul>
                                         <li><a href="#">Mihail Loon</a></li>
                                         <li><a href="#">Vasilij Blomberg</a></li>
+                                        <li><a href="#" class="show-more" data-toggle="tooltip" data-placement="bottom" title="All project Managers"><i class="fa fa-ellipsis-h"></i></a></li>
                                     </ul>
                                 </td>
                                 <td class="shared-resources">
@@ -402,12 +423,14 @@
                                     <ul>
                                         <li><a href="#">Mihail Loon</a></li>
                                         <li><a href="#">Vasilij Blomberg</a></li>
+                                        <li><a href="#" class="show-more" data-toggle="tooltip" data-placement="bottom" title="All project admins"><i class="fa fa-ellipsis-h"></i></a></li>
                                     </ul>
                                 </td>
                                 <td class="participants">
                                     <ul>
                                         <li><a href="#">Mihail Loon</a></li>
                                         <li><a href="#">Vasilij Blomberg</a></li>
+                                        <li><a href="#" class="show-more" data-toggle="tooltip" data-placement="bottom" title="All project Managers"><i class="fa fa-ellipsis-h"></i></a></li>
                                     </ul>
                                 </td>
                                 <td class="shared-resources">

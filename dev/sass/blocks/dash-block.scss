@@ -8,6 +8,7 @@
         .dash-title {
             @include inline-middle;
             margin: 0;
+            font-size: rem(22);
         } // dash-title
         .sort {
             @include inline-middle;

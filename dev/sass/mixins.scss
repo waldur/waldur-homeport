@@ -37,6 +37,9 @@
 
 @mixin black-link {
     color: #000;
+    &:hover {
+        color: #000;
+    }
 }
 
 @mixin small-black-link {
