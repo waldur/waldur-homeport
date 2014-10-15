@@ -22,22 +22,15 @@ a:hover, a:active, a:focus {
 }
 
 .container-fluid {
-    padding-left: 40px;
-    padding-right: 40px;
+    // padding-left: 40px;
+    // padding-right: 40px;
+    width: 960px;
+    // margin: auto;
 }
 
 .tooltip {
-    border-radius: 3px; /* border radius */
-    background-clip: padding-box; /* prevents bg color from leaking outside the border */
-    background-color: #ffffcf; /* layer fill content */
-    box-shadow: 0 0 5px rgba(181,181,111,.65); /* drop shadow */
-    .tooltip-arrow {
-        display: none;
-    }
     .tooltip-inner {
-        background-clip: padding-box; /* prevents bg color from leaking outside the border */
-        background-color: #ffffcf; /* layer fill content */
-        color: #000;
+        font-size: rem(12);
     }
 }
 

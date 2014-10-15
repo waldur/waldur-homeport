@@ -23,9 +23,7 @@
 
 </head>
 <body class="app-body">
-
-
-
+    <!-- header -->
     <div class="app-header navbar navbar-fixed-top" role="navigation">         
         <div class="container-fluid">
             <div class="navbar-header">
@@ -38,14 +36,34 @@
                 <a class="navbar-brand" href="#"></a>
             </div>
             <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="#" class="active" data-toggle="tooltip" data-placement="bottom" title="Dashboard"><i class="fa fa-dashboard"></i></a></li>
+                    <li><a href="#" class="" data-toggle="tooltip" data-placement="bottom" title="Projects"><i class="fa fa-desktop"></i></a></li>
+                    <li><a href="#" class="" data-toggle="tooltip" data-placement="bottom" title="Resources"><i class="fa fa-tasks"></i></a></li>
+                    <li><a href="#" class="" data-toggle="tooltip" data-placement="bottom" title="Users"><i class="fa fa-users"></i></a></li>
+                </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="../navbar/">Customer</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle user-pic-box" data-toggle="dropdown">
+                            Customer
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li class="divider"></li>
+                            <li class="dropdown-header">Nav header</li>
+                            <li><a href="#">Separated link</a></li>
+                            <li><a href="#">One more separated link</a></li>
+                        </ul>
+                    </li>
                     <li>
                         <img src="static/images/887178.jpg" class="user-pic" alt="John Doe">
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle user-pic-box" data-toggle="dropdown">
-                            sds
+                            John Winner
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
@@ -62,11 +80,212 @@
             </div><!--/.nav-collapse -->
         </div>
     </div>
+    <!-- /header -->
 
+    <!-- dash-block -->
     <div class="dash-block">
         <div class="container-fluid">
-            .row>.col
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="dash-title-box">
+                        <h2 class="dash-title">What's happening</h2>
+                        <ul class="sort">
+                            <li><a href="#" class="active">5 hours</a></li>
+                            <li><a href="#">24 hours</a></li>
+                            <li><a href="#">week</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="main-activities">
+                        <!-- main-activity-item -->
+                        <div class="main-activity-item" data-notify="single-notify">
+                            <!-- header -->
+                            <header class="row">
+                                <div class="col-xs-6"><a href="#" class="project-title">Gh-45nd<span class="sp"></span></a></div>
+                                <div class="col-xs-6 controls-box">
+                                    <ul class="controls">
+                                        <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Watch later"><i class="fa fa-clock-o"></i></a></li>
+                                        <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Favorite"><i class="fa fa-star"></i></a></li>
+                                    </ul>
+                                </div>
+                            </header>
+                            <!-- /header -->
+                            <!-- content -->
+                            <div class="content">
+                                <ul class="notifications">
+                                    <li class="notification">
+                                        <span class="elem icon-box"><i class="fa fa-shield"></i></span>
+                                        <span class="elem notification-text">Sequrity task. Need to update bash on virtualhosts</span>
+                                        <a href="#" class="elem notification-action">Update all</a>
+                                    </li>
+                                    <li class="notification">
+                                        <span class="elem icon-box"><i class="fa fa-cloud"></i></span>
+                                        <span class="elem notification-text">Need to billing aws</span>
+                                    </li>
+                                    <li class="notification">
+                                        <span class="elem notification-text">Need to send notification for</span>
+                                        <span class="elem user"><a href="#"><i class="fa fa-user"></i> Andrey Titula</a></span>
+                                        <a href="#" class="elem notification-action">Send notification</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- separate -->
+                            <div class="separate"></div>
+                        </div>
+                        <!-- /main-activity-item -->
+                        <!-- main-activity-item -->
+                        <div class="main-activity-item" data-notify="single-notify">
+                            <!-- header -->
+                            <header class="row">
+                                <div class="col-xs-6"><a href="#" class="project-title">Gh-45nd<span class="sp"></span></a></div>
+                                <div class="col-xs-6 controls-box">
+                                    <ul class="controls">
+                                        <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Watch later"><i class="fa fa-clock-o"></i></a></li>
+                                        <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Favorite"><i class="fa fa-star"></i></a></li>
+                                    </ul>
+                                </div>
+                            </header>
+                            <!-- /header -->
+                            <!-- content -->
+                            <div class="content">
+                                <ul class="notifications">
+                                    <li class="notification">
+                                        <span class="elem icon-box"><i class="fa fa-shield"></i></span>
+                                        <span class="elem notification-text">Sequrity task. Need to update bash on virtualhosts</span>
+                                        <a href="#" class="elem notification-action">Update all</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- separate -->
+                            <div class="separate"></div>
+                        </div>
+                        <!-- /main-activity-item -->
+                        <!-- main-activity-item -->
+                        <div class="main-activity-item" data-notify="single-notify">
+                            <!-- header -->
+                            <header class="row">
+                                <div class="col-xs-6"><a href="#" class="project-title">Gh-45nd<span class="sp"></span></a></div>
+                                <div class="col-xs-6 controls-box">
+                                    <ul class="controls">
+                                        <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Watch later"><i class="fa fa-clock-o"></i></a></li>
+                                        <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Favorite"><i class="fa fa-star"></i></a></li>
+                                    </ul>
+                                </div>
+                            </header>
+                            <!-- /header -->
+                            <!-- content -->
+                            <div class="content">
+                                <ul class="notifications">
+                                    <li class="notification">
+                                        <span class="elem icon-box"><i class="fa fa-cloud"></i></span>
+                                        <span class="elem notification-text">Need to billing aws</span>
+                                    </li>
+                                    <li class="notification">
+                                        <span class="elem notification-text">Need to send notification for</span>
+                                        <span class="elem user"><a href="#"><i class="fa fa-user"></i> Andrey Titula</a></span>
+                                        <a href="#" class="elem notification-action">Send notification</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- separate -->
+                            <div class="separate"></div>
+                        </div>
+                        <!-- /main-activity-item -->
+                        <!-- main-activity-item -->
+                        <div class="main-activity-item" data-notify="single-notify">
+                            <!-- header -->
+                            <header class="row">
+                                <div class="col-xs-6"><a href="#" class="project-title">Gh-45nd<span class="sp"></span></a></div>
+                                <div class="col-xs-6 controls-box">
+                                    <ul class="controls">
+                                        <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Watch later"><i class="fa fa-clock-o"></i></a></li>
+                                        <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Favorite"><i class="fa fa-star"></i></a></li>
+                                    </ul>
+                                </div>
+                            </header>
+                            <!-- /header -->
+                            <!-- content -->
+                            <div class="content">
+                                <ul class="notifications">
+                                    <li class="notification">
+                                        <span class="elem icon-box"><i class="fa fa-cloud"></i></span>
+                                        <span class="elem notification-text">Need to billing aws</span>
+                                    </li>
+                                    <li class="notification">
+                                        <span class="elem notification-text">Need to send notification for</span>
+                                        <span class="elem user"><a href="#"><i class="fa fa-user"></i> Andrey Titula</a></span>
+                                        <a href="#" class="elem notification-action">Send notification</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- separate -->
+                            <div class="separate"></div>
+                        </div>
+                        <!-- /main-activity-item -->
+                        <!-- main-activity-item -->
+                        <div class="main-activity-item" data-notify="single-notify">
+                            <!-- header -->
+                            <header class="row">
+                                <div class="col-xs-6"><a href="#" class="project-title">Gh-45nd<span class="sp"></span></a></div>
+                                <div class="col-xs-6 controls-box">
+                                    <ul class="controls">
+                                        <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Watch later"><i class="fa fa-clock-o"></i></a></li>
+                                        <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Favorite"><i class="fa fa-star"></i></a></li>
+                                    </ul>
+                                </div>
+                            </header>
+                            <!-- /header -->
+                            <!-- content -->
+                            <div class="content">
+                                <ul class="notifications">
+                                    <li class="notification">
+                                        <span class="elem icon-box"><i class="fa fa-cloud"></i></span>
+                                        <span class="elem notification-text">Need to billing aws</span>
+                                    </li>
+                                    <li class="notification">
+                                        <span class="elem notification-text">Need to send notification for</span>
+                                        <span class="elem user"><a href="#"><i class="fa fa-user"></i> Andrey Titula</a></span>
+                                        <a href="#" class="elem notification-action">Send notification</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- separate -->
+                            <div class="separate"></div>
+                        </div>
+                        <!-- /main-activity-item -->
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+    <!-- /dash-block -->
+
+    <!-- dash-block -->
+    <div class="dash-block">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="dash-title-box">
+                        <h2 class="dash-title">Projects</h2>
+                        <ul class="sort">
+                            <li><a href="#" class="active">5</a></li>
+                            <li><a href="#">15</a></li>
+                            <li><a href="#">24</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /dash-block -->
+
 </body>
 </html>

@@ -11301,7 +11301,7 @@ return jQuery;
 
     // document ready
     $(document).ready(function() {
-        // $('SELECTOR').tooltip(); tooltip example
+        $('[data-toggle="tooltip"]').tooltip();
     });
 
     // all initial on window resize

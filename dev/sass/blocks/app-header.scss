@@ -15,7 +15,7 @@
 .navbar {
     border-radius: 0;
     margin: 0;
-    background: #27ae60;
+    background: #9ECF5D;
 }
 
 .navbar-nav > li {
@@ -28,9 +28,18 @@
 } // .navbar-nav > li
 
 .navbar-nav > li > a {
-    color: #fff;
+    color: #1F3305;
+    text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.54);
     &:hover, &:focus {
         text-decoration: none;
         background-color: transparent;
+    }
+    &.active {
+        color: #fff;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.54);
+        &:after {
+            content: attr(data-original-title);
+            margin-left: 8px;
+        } // :after
     }
 } // .navbar-nav > li > a

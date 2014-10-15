@@ -5,10 +5,40 @@
     transition-timing-function: $timing;
 }
 
+@mixin inline-top {
+    display: inline-block;
+    vertical-align: top;
+}
+
+@mixin inline-middle {
+    display: inline-block;
+    vertical-align: middle;
+}
+
 @mixin clear-list {
     margin: 0;
     padding: 0;
     li {
         list-style: none;
     }
+}
+
+@mixin dotted-link {
+    color: #000;
+    padding: 2px 0px;
+    text-decoration: none;
+    position: relative;
+    border-bottom: 1px dashed gray;
+    opacity: .4;
+    &.active {
+        opacity: 1;
+    }
+}
+
+@mixin small-black-link {
+    font-size: rem(13);
+    padding: 2px 0px;
+    color: #000;
+    text-decoration: none;
+    border-bottom: 1px dashed gray;
 }
