@@ -1,5 +1,6 @@
 (function($) {
 
+    // absolutelly center
     function absCenter(){
         elem = $('[data-role="abs-center"]');
         elemHeight = elem.outerHeight();
@@ -8,6 +9,7 @@
         elem.css('margin-left', -elemWidth/2);
     }
 
+    // fixed header
     function withFixedHeader(){
         var body = $('[data-role="with-fixed-header"]');
         var fixedHeaderHeight = $('[data-role="fixed-header"]').height();
@@ -37,7 +39,7 @@
         var link = $('.main-nav ul li a');
         link.each(function() {
             $(this).append('<span class=\"display-name\"></span>');
-            $(this).find('.display-name').html($(this).attr('data-name'));
+            $(this).find('.display-name').html($(this).attr('data-tooltip'));
         });
     }
 
@@ -52,13 +54,25 @@
         notifyDecor.append('<span class=\"sp combine-1\"></span><span class=\"sp combine-2\"></span>');
     }
 
-    function eventOverlay() {
-        var eventItem = $('.main-activity-item');
-        eventItem.each(function(){
-            var box = $(this);
-            box.append('<div class=\"overlay\"></div>')
-            var overlayReady = $(this).find('.overlay');
-            overlayReady.css('width', box.outerWidth()).css('height', box.outerHeight());
+    // overlay
+    // function eventOverlay() {
+    //     var eventItem = $('.main-activity-item');
+    //     eventItem.each(function(){
+    //         var box = $(this);
+    //         box.append('<div class=\"overlay\"></div>')
+    //         var overlayReady = $(this).find('.overlay');
+    //         overlayReady.css('width', box.outerWidth()).css('height', box.outerHeight());
+    //     });
+    // }
+
+    // tooltips
+    function tooltip() {
+        $('[data-tool="tooltip"]').each(function() {
+            $(this).append('<span class=\"tooltip-box\"><span class=\"tooltip\">' 
+                + $(this).attr('data-tooltip') 
+                + '</span>');
+            var top = $(this).height() + 30;
+            $(this).find('.tooltip-box').css('top', top)
         });
     }
 
@@ -69,8 +83,9 @@
         withFixedHeaderOne();
         newProject();
         typeNotify();
-        eventOverlay();
+        // eventOverlay();
         menuNames();
+        tooltip();
     });
 
     // all initial on window resize

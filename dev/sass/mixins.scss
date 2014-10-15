@@ -1,0 +1,14 @@
+// transition
+@mixin transition($property, $duration, $timing) {
+    transition-property: $property;
+    transition-duration: $duration;
+    transition-timing-function: $timing;
+}
+
+@mixin clear-list {
+    margin: 0;
+    padding: 0;
+    li {
+        list-style: none;
+    }
+}

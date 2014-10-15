@@ -54,9 +54,10 @@ th {
   top: 0px;
   left: 0px;
   width: 100%;
-  background: #27ae60;
+  background: #9ECF5D;
   color: #fff;
   z-index: 9999;
+  height: 58px;
 }
 .app-header .main-nav {
   float: left;
@@ -81,9 +82,10 @@ th {
 }
 .app-header .main-nav ul li a .display-name {
   display: none;
+  line-height: 1.1;
 }
 .app-header .main-nav ul li a:hover, .app-header .main-nav ul li a.current {
-  color: #173d0a;
+  color: #1F3305;
   position: relative;
 }
 .app-header .main-nav ul li a.current .display-name {
@@ -101,14 +103,17 @@ th {
   height: 0;
   border-style: solid;
   border-width: 10px 10px 0 10px;
-  border-color: #27ae60 transparent transparent transparent;
+  border-color: #9ECF5D transparent transparent transparent;
 }
-.app-header .main-nav ul li a.home-link:hover, .app-header .main-nav ul li a.home-link.current {
-  background: inherit;
-  color: inherit;
+.app-header .main-nav ul li a.home-link {
+  width: 58px;
+  height: 58px;
+  background: url(../images/logo.png) no-repeat 50% 50%;
+  background-size: 45px;
+  padding: 0;
 }
 .app-header .main-nav ul li a.user-pic {
-  padding: 12px 15px;
+  padding: 11px 15px;
 }
 .app-header .main-nav ul li a.user-pic img {
   display: inline-block;
@@ -131,6 +136,10 @@ th {
   margin-left: 0;
   font-size: 12px;
   border: none;
+}
+.app-header .main-nav ul li a .link-box {
+  border-radius: 100%;
+  background: gray;
 }
 .app-header .main-nav.user-area {
   float: right;
@@ -641,6 +650,41 @@ th {
   vertical-align: middle;
   color: #fff;
   font-size: 1.875rem;
+}
+
+[data-tool="tooltip"] {
+  position: relative;
+}
+[data-tool="tooltip"]:hover > span.tooltip-box {
+  display: block;
+}
+[data-tool="tooltip"] > span.tooltip-box {
+  display: none;
+  position: absolute;
+  right: -20px;
+  left: -20px;
+  text-align: center;
+  z-index: 8888;
+}
+[data-tool="tooltip"] > span.tooltip-box:after {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  margin-left: -6px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 5px 6px 5px;
+  border-color: transparent transparent rgba(0, 0, 0, 0.7) transparent;
+}
+[data-tool="tooltip"] > span.tooltip-box .tooltip {
+  display: inline-block;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-size: 0.875rem;
+  color: #fff;
 }
 
 /*# sourceMappingURL=style.css.map */

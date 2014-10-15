@@ -1,0 +1,58 @@
+// override bootstrap && base styles
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    letter-spacing: -.03rem;
+    font-size: $font-size-base;
+    font-size: rem(16);
+    // > .container-fluid {
+    //     max-width: 1280px;
+    //     min-width: 1010px;
+    // }
+    &.app-body {
+        padding-top: 80px;
+    }
+}
+
+a:hover, a:active, a:focus {
+    outline: 0 !important;
+}
+
+.container-fluid {
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.tooltip {
+    border-radius: 3px; /* border radius */
+    background-clip: padding-box; /* prevents bg color from leaking outside the border */
+    background-color: #ffffcf; /* layer fill content */
+    box-shadow: 0 0 5px rgba(181,181,111,.65); /* drop shadow */
+    .tooltip-arrow {
+        display: none;
+    }
+    .tooltip-inner {
+        background-clip: padding-box; /* prevents bg color from leaking outside the border */
+        background-color: #ffffcf; /* layer fill content */
+        color: #000;
+    }
+}
+
+a:hover, a:active, a:focus {
+    outline: 0;
+}
+
+.container {
+    box-sizing: border-box;
+    width: 960px;
+    margin: auto;
+} // container
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: inline-block;
+}

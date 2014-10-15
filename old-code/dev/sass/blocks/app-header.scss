@@ -3,9 +3,10 @@
     top: 0px;
     left: 0px;
     width: 100%;
-    background: #27ae60;
+    background: #9ECF5D;
     color: #fff;
     z-index: 9999;
+    height: 58px;
     .main-nav {
         float: left;
         ul {
@@ -20,10 +21,11 @@
                     text-decoration: none;
                     .display-name {
                         display: none;
+                        line-height: 1.1;
                     }
                     &:hover, &.current {
                         // background: #565656;
-                        color: rgb(23, 61, 10);
+                        color: #1F3305;
                         position: relative;
                     }
                     &.current {
@@ -41,17 +43,18 @@
                             height: 0;
                             border-style: solid;
                             border-width: 10px 10px 0 10px;
-                            border-color: #27ae60 transparent transparent transparent;
+                            border-color: #9ECF5D transparent transparent transparent;
                         }
                     }
                     &.home-link {
-                        &:hover, &.current {
-                            background: inherit;
-                            color: inherit;
-                        }
+                        width: 58px;
+                        height: 58px;
+                        background: url(../images/logo.png) no-repeat 50% 50%;
+                        background-size: 45px;
+                        padding: 0;
                     }
                     &.user-pic {
-                        padding: 12px 15px;
+                        padding: 11px 15px;
                         img {
                             @include inline-middle;
                             width: 36px;
@@ -73,6 +76,10 @@
                             border: none;
                         }
                     } // user-pic
+                    .link-box {
+                        border-radius: 100%;
+                        background: gray;
+                    } // link-box
                 } // a
             } // li
         } // ul
