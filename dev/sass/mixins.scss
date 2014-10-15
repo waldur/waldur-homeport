@@ -35,6 +35,10 @@
     }
 }
 
+@mixin black-link {
+    color: #000;
+}
+
 @mixin small-black-link {
     font-size: rem(13);
     padding: 2px 0px;

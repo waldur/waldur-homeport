@@ -42,7 +42,7 @@
                 }
                 @include inline-middle;
                 a {
-                    color: #000;
+                    @include black-link;
                 } // a
             } // li
         } // controls

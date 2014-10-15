@@ -6750,11 +6750,27 @@ img {
   background: #9ECF5D;
 }
 
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+  background-color: transparent;
+  color: #066D7B;
+}
+
 .navbar-nav > li .user-pic {
   width: auto;
   height: 40px;
   margin-top: 5px;
   border-radius: 100%;
+}
+.navbar-nav > li .dropdown-menu {
+  background: #9ECF5D;
+  border: none;
+  border-radius: 0px 0px 4px 4px;
+  box-shadow: none;
+  border-bottom: 2px solid gray;
+}
+.navbar-nav > li .dropdown-menu li a {
+  color: #fff;
+  font-size: 1.4rem;
 }
 
 .navbar-nav > li > a {
@@ -6828,10 +6844,11 @@ img {
 }
 
 .dash-block + .dash-block {
-  margin-top: 20px;
+  margin-top: 40px;
 }
 .dash-block .dash-title-box {
   text-align: center;
+  margin-bottom: 40px;
 }
 .dash-block .dash-title-box .dash-title {
   display: inline-block;
@@ -6977,6 +6994,63 @@ img {
   border-bottom: 1px dashed #d2d2d2;
   margin-top: 10px;
   margin-bottom: 10px;
+}
+
+.projects-list table.project-list-table {
+  width: 100%;
+}
+.projects-list table.project-list-table tr .name {
+  width: 80px;
+}
+.projects-list table.project-list-table tr .actions {
+  width: 120px;
+  text-align: center;
+}
+.projects-list table.project-list-table tr .actions a {
+  font-size: 1.6rem;
+  color: #000;
+  cursor: pointer;
+  margin-left: .8rem;
+}
+.projects-list table.project-list-table tr .actions a:nth-child(1) {
+  margin-left: 0px;
+}
+.projects-list table.project-list-table tr .actions a.remove {
+  color: #f00;
+  opacity: .5;
+}
+.projects-list table.project-list-table tr .actions a.remove:hover {
+  opacity: 1;
+}
+.projects-list table.project-list-table tr:nth-child(odd) td {
+  background: #f4f4f4;
+}
+.projects-list table.project-list-table tr th, .projects-list table.project-list-table tr td {
+  padding: 10px 15px;
+}
+.projects-list table.project-list-table tr th {
+  cursor: pointer;
+  border-bottom: 1px solid gray;
+}
+.projects-list table.project-list-table tr th + th {
+  border-left: 1px solid gray;
+}
+.projects-list table.project-list-table tr td + td {
+  border-left: 1px solid #dddddd;
+}
+.projects-list table.project-list-table tr td ul {
+  margin: 0;
+  padding: 0;
+}
+.projects-list table.project-list-table tr td ul li {
+  list-style: none;
+}
+.projects-list table.project-list-table tr td ul li + li {
+  margin-top: .25rem;
+}
+.projects-list table.project-list-table tr td ul li a {
+  text-decoration: none;
+  font-size: 1.4rem;
 }
 
 /*# sourceMappingURL=style.css.map */

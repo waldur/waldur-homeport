@@ -1,0 +1,77 @@
+.projects-list {
+    table.project-list-table {
+        width: 100%;
+        tr {
+            .name {
+                width: 80px;
+            } // name
+            .description {
+                // width: ;
+            } // description
+            .participants {
+                // width: ;
+            } // participants
+            .shared-resources {
+                // width: ;
+            }
+            // shared-resources
+            .actions {
+                width: 120px;
+                text-align: center;
+                a {
+                    font-size: rem(16);
+                    @include black-link;
+                    cursor: pointer;
+                    margin-left: .8rem;
+                    &:nth-child(1) {
+                        margin-left: 0px;
+                    }
+                    &.view {}
+                    &.conf {}
+                    &.remove {
+                        color: #f00;
+                        opacity: .5;
+                        &:hover {
+                            opacity: 1;
+                        }
+                    }
+                }
+            } // actions
+            &:nth-child(odd) {
+                td {
+                    background: rgb(244, 244, 244);
+                }
+            }
+            &:nth-child(even) {
+                td {}
+            }
+            th, td {
+                padding: 10px 15px;
+            }
+            th {
+                + th {
+                    border-left: 1px solid gray;
+                }
+                cursor: pointer;
+                border-bottom: 1px solid gray;
+            } // th
+            td {
+                + td {
+                    border-left: 1px solid rgb(221, 221, 221);
+                }
+                ul {
+                    @include clear-list;
+                    li {
+                        + li {
+                            margin-top: .25rem;
+                        }
+                        a {
+                            text-decoration: none;
+                            font-size: rem(14);
+                        }
+                    } // li
+                } // ul
+            } // td
+        } // tr
+    } // table
+} // project-list

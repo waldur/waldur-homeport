@@ -18,6 +18,11 @@
     background: #9ECF5D;
 }
 
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+    background-color: transparent;
+    color: #066D7B;
+}
+
 .navbar-nav > li {
     .user-pic {
         width: auto;
@@ -25,6 +30,19 @@
         margin-top: 5px;
         border-radius: 100%;
     } // user-pic
+    .dropdown-menu {
+        background: #9ECF5D;
+        border: none;
+        border-radius: 0px 0px 4px 4px;
+        box-shadow: none;
+        border-bottom: 2px solid gray;
+        li {
+            a {
+                color: #fff;
+                font-size: rem(14);
+            } // a
+        } // li
+    } // dropdown-menu
 } // .navbar-nav > li
 
 .navbar-nav > li > a {

@@ -1,9 +1,10 @@
 .dash-block {
     + .dash-block {
-        margin-top: 20px;
+        margin-top: 40px;
     }
     .dash-title-box {
         text-align: center;
+        margin-bottom: 40px;
         .dash-title {
             @include inline-middle;
             margin: 0;
