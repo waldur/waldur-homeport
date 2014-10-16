@@ -30,6 +30,18 @@
         margin-top: 5px;
         border-radius: 100%;
     } // user-pic
+    .add-something-button {
+        position: relative;
+        &:after {
+            content: '\f0dd';
+            position: absolute;
+            top: calc(50% - 12px);
+            right: 5px;
+            font-family: FontAwesome;
+            font-size: rem(10);
+            color: #000;
+        }
+    }
     .dropdown-menu {
         background: #9ECF5D;
         border: none;

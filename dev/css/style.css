@@ -6771,6 +6771,18 @@ img {
   margin-top: 5px;
   border-radius: 100%;
 }
+.navbar-nav > li .add-something-button {
+  position: relative;
+}
+.navbar-nav > li .add-something-button:after {
+  content: '\f0dd';
+  position: absolute;
+  top: calc(50% - 12px);
+  right: 5px;
+  font-family: FontAwesome;
+  font-size: 1rem;
+  color: #000;
+}
 .navbar-nav > li .dropdown-menu {
   background: #9ECF5D;
   border: none;
