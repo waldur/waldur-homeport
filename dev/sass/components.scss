@@ -1,5 +1,6 @@
 .modal-content {
     box-shadow: none;
+    border: none;
     border-radius: 4px;
     border-bottom: 2px solid #A8A8A8;
     padding: 10px;
@@ -13,14 +14,22 @@
 } // modal-dialog
 
 .btn {
-    border-color: none;
+    border-color: transparent;
+    &:hover {
+        border-color: transparent;
+    }
 }
 
-.btn-default {} // btn-default
+.btn-default {
+    border-color: silver;
+} // btn-default
 .btn-primary {
     display: inline-block;
     background: #00cf70;
     border-bottom: 1px solid #3D980F;
     border-radius: 4px;
     color: #fff;
+    &:hover {
+        background: #01BD66;
+    }
 } // btn-primary

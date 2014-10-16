@@ -6744,6 +6744,7 @@ img {
 
 .modal-content {
   box-shadow: none;
+  border: none;
   border-radius: 4px;
   border-bottom: 2px solid #A8A8A8;
   padding: 10px;
@@ -6754,7 +6755,14 @@ img {
 }
 
 .btn {
-  border-color: none;
+  border-color: transparent;
+}
+.btn:hover {
+  border-color: transparent;
+}
+
+.btn-default {
+  border-color: silver;
 }
 
 .btn-primary {
@@ -6763,6 +6771,9 @@ img {
   border-bottom: 1px solid #3D980F;
   border-radius: 4px;
   color: #fff;
+}
+.btn-primary:hover {
+  background: #01BD66;
 }
 
 .navbar-fixed-top {
@@ -6964,7 +6975,7 @@ img {
 
 .dash-nav {
   position: fixed;
-  right: 20px;
+  left: 20px;
   top: 50%;
 }
 .dash-nav ul {
@@ -6977,7 +6988,7 @@ img {
 .dash-nav ul li a {
   display: block;
   padding: 10px;
-  background-color: #9ECF5D;
+  background-color: transparent;
   color: #1F3305;
   text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.54);
 }
@@ -7010,6 +7021,10 @@ img {
 .dash-block .dash-title-box .sort li {
   display: inline-block;
   vertical-align: middle;
+}
+.dash-block .dash-title-box .sort li.divid {
+  border-left: 1px solid silver;
+  margin-left: 10px;
 }
 .dash-block .dash-title-box .sort li a {
   display: inline-block;

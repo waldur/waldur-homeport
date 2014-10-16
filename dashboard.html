@@ -34,14 +34,15 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#"></a>
+            <a class="navbar-brand" href="/"></a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="#" class="active" data-toggle="tooltip" data-placement="bottom" title="Dashboard"><i class="fa fa-dashboard"></i></a></li>
-                <li><a href="#" class="" data-toggle="tooltip" data-placement="bottom" title="Projects"><i class="fa fa-desktop"></i></a></li>
-                <li><a href="#" class="" data-toggle="tooltip" data-placement="bottom" title="Resources"><i class="fa fa-tasks"></i></a></li>
-                <li><a href="#" class="" data-toggle="tooltip" data-placement="bottom" title="Users"><i class="fa fa-users"></i></a></li>
+                <li><a href="/dashboard.html" class="active" data-toggle="tooltip" data-placement="bottom" title="Dashboard"><i class="fa fa-dashboard"></i></a></li>
+                <li><a href="/notificatins.html" class="" data-toggle="tooltip" data-placement="bottom" title="Users"><i class="fa fa-info"></i></a></li>
+                <li><a href="/projects.html" class="" data-toggle="tooltip" data-placement="bottom" title="Projects"><i class="fa fa-desktop"></i></a></li>
+                <li><a href="/resources.html" class="" data-toggle="tooltip" data-placement="bottom" title="Resources"><i class="fa fa-tasks"></i></a></li>
+                <li><a href="/users.html" class="" data-toggle="tooltip" data-placement="bottom" title="Users"><i class="fa fa-users"></i></a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown add-something-box">
@@ -49,9 +50,9 @@
                         <i class="fa fa-plus"></i>
                     </a>
                     <ul class="dropdown-menu add-something" role="menu">
-                        <li><a href="#" data-toggle="modal" data-target="#createCustomer"><i class="fa fa-user"></i> Add Customer</a></li>
-                        <li><a href="#"><i class="fa fa-desktop"></i> Add Project</a></li>
-                        <li><a href="#"><i class="fa fa-tasks"></i> Add Resource</a></li>
+                        <li><a href="#" data-toggle="modal" data-target="#addCustomer"><i class="fa fa-user"></i> Add Customer</a></li>
+                        <li><a href="#" data-toggle="modal" data-target="#addProject"><i class="fa fa-desktop"></i> Add Project</a></li>
+                        <li><a href="#" data-toggle="modal" data-target="#addResource"><i class="fa fa-tasks"></i> Add Resource</a></li>
                     </ul>
                 </li>
                 <li>
@@ -101,8 +102,7 @@
                         <li><a href="#" class="active">5 hours</a></li>
                         <li><a href="#">24 hours</a></li>
                         <li><a href="#">week</a></li>
-                        <li class="separate"></li>
-                        <li><a href="#"><i class="fa fa-clock-o"></i></a></li>
+                        <li class="divid"><a href="#"><i class="fa fa-clock-o"></i></a></li>
                         <li><a href="#"><i class="fa fa-star"></i></a></li>
                     </ul>
                 </div>
@@ -500,19 +500,57 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="createCustomer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="addCustomer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                <h4 class="modal-title" id="myModalLabel">Add Customer</h4>
             </div>
             <div class="modal-body">
                 ...
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary">Add</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="addProject" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">Add Project</h4>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary">Add</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="addResource" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">Add Resource</h4>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary">Add</button>
             </div>
         </div>
     </div>

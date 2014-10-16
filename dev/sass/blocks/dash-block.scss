@@ -1,6 +1,6 @@
 .dash-nav {
     position: fixed;
-    right: 20px;
+    left: 20px;
     top: 50%;
     ul {
         @include clear-list;
@@ -8,7 +8,8 @@
             a {
                 display: block;
                 padding: 10px;
-                background-color: #9ECF5D;
+                // background-color: #9ECF5D;
+                background-color: rgba(0, 0, 0, 0);
                 color: #1F3305;
                 text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.54);
                 &.active {
@@ -35,6 +36,10 @@
             @include clear-list;
             li {
                 @include inline-middle;
+                &.divid {
+                    border-left: 1px solid silver;
+                    margin-left: 10px;
+                } // divid
                 a {
                     @include inline-middle;
                     @include dotted-link;
