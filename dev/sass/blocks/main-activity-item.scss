@@ -12,7 +12,14 @@
             display: none;
         }
     }
+    time.date {
+        @include inline-middle;
+        margin-left: 8px;
+        font-size: rem(12);
+        color: silver;
+    } // time.date
     .project-title {
+        @include inline-middle;
         font-size: rem(22);
         font-weight: 700;
         text-decoration: none;
@@ -61,7 +68,10 @@
                 width: 20px;
                 text-align: center;
             } // icon-box
-            .notification-text {} // notification-text
+            .notification-text {
+                color: rgb(158, 158, 158);
+                text-decoration: none;
+            } // notification-text
             .user {} // user
             .notification-action {
                 @include small-black-link;

@@ -23,450 +23,500 @@
 
 </head>
 <body class="app-body">
-    <!-- header -->
-    <div class="app-header navbar navbar-fixed-top" role="navigation">         
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#"></a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="#" class="active" data-toggle="tooltip" data-placement="bottom" title="Dashboard"><i class="fa fa-dashboard"></i></a></li>
-                    <li><a href="#" class="" data-toggle="tooltip" data-placement="bottom" title="Projects"><i class="fa fa-desktop"></i></a></li>
-                    <li><a href="#" class="" data-toggle="tooltip" data-placement="bottom" title="Resources"><i class="fa fa-tasks"></i></a></li>
-                    <li><a href="#" class="" data-toggle="tooltip" data-placement="bottom" title="Users"><i class="fa fa-users"></i></a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown add-something-box">
-                        <a href="#" class="dropdown-toggle add-something-button" data-extra="tooltip" data-toggle="dropdown" data-placement="bottom" title="Create something...">
-                            <i class="fa fa-plus"></i>
-                        </a>
-                        <ul class="dropdown-menu add-something" role="menu">
-                            <li><a href="#"><i class="fa fa-user"></i> Add Customer</a></li>
-                            <li><a href="#"><i class="fa fa-desktop"></i> Add Project</a></li>
-                            <li><a href="#"><i class="fa fa-tasks"></i> Add Resource</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <div class="custom-select">
-                            <select name="" id="">
-                                <option value="">Ilja Livenson</option>
-                            </select>
-                        </div>
-                    </li>
-                    <li>
-                        <img src="static/images/887178.jpg" class="user-pic" alt="John Doe">
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle user-pic-box" data-toggle="dropdown">
-                            John Winner
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu user-drop" role="menu">
-                            <li><a href="#">Profile</a></li>
-                            <li><a href="#">Logout</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div><!--/.nav-collapse -->
+
+<!-- header -->
+<div class="app-header navbar navbar-fixed-top" role="navigation">         
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"></a>
         </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="#" class="active" data-toggle="tooltip" data-placement="bottom" title="Dashboard"><i class="fa fa-dashboard"></i></a></li>
+                <li><a href="#" class="" data-toggle="tooltip" data-placement="bottom" title="Projects"><i class="fa fa-desktop"></i></a></li>
+                <li><a href="#" class="" data-toggle="tooltip" data-placement="bottom" title="Resources"><i class="fa fa-tasks"></i></a></li>
+                <li><a href="#" class="" data-toggle="tooltip" data-placement="bottom" title="Users"><i class="fa fa-users"></i></a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown add-something-box">
+                    <a href="#" class="dropdown-toggle add-something-button" data-extra="tooltip" data-toggle="dropdown" data-placement="bottom" title="Create something...">
+                        <i class="fa fa-plus"></i>
+                    </a>
+                    <ul class="dropdown-menu add-something" role="menu">
+                        <li><a href="#" data-toggle="modal" data-target="#createCustomer"><i class="fa fa-user"></i> Add Customer</a></li>
+                        <li><a href="#"><i class="fa fa-desktop"></i> Add Project</a></li>
+                        <li><a href="#"><i class="fa fa-tasks"></i> Add Resource</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="custom-select">
+                        <select name="" id="">
+                            <option value="">Ilja Livenson</option>
+                        </select>
+                    </div>
+                </li>
+                <li>
+                    <img src="static/images/887178.jpg" class="user-pic" alt="John Doe">
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle user-pic-box" data-toggle="dropdown">
+                        John Winner
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu user-drop" role="menu">
+                        <li><a href="#">Profile</a></li>
+                        <li><a href="#">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div><!--/.nav-collapse -->
     </div>
-    <!-- /header -->
+</div>
+<!-- /header -->
 
-    <!-- left-nav -->
-    <nav class="dash-nav">
-        <ul>
-            <li><a href="#stats" class="active"><i class="fa fa-bar-chart"></i></a></li>
-            <li><a href="#eventlog"><i class="fa fa-bullhorn"></i></a></li>
-            <li><a href="#projects"><i class="fa fa-desktop"></i></a></li>
-        </ul>
-    </nav>
-    <!-- /left-nav -->
+<!-- left-nav -->
+<nav class="dash-nav">
+    <ul>
+        <li><a href="#stats"><i class="fa fa-bar-chart"></i></a></li>
+        <li><a href="#eventlog"><i class="fa fa-bullhorn"></i></a></li>
+        <li><a href="#projects"><i class="fa fa-desktop"></i></a></li>
+    </ul>
+</nav>
+<!-- /left-nav -->
 
-    <!-- dash-block -->
-    <div class="dash-block" id="eventlog">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="dash-title-box">
-                        <h2 class="dash-title">What's happening</h2>
-                        <ul class="sort">
-                            <li><a href="#" class="active">5 hours</a></li>
-                            <li><a href="#">24 hours</a></li>
-                            <li><a href="#">week</a></li>
-                            <li class="separate"></li>
-                            <li><a href="#"><i class="fa fa-clock-o"></i></a></li>
-                            <li><a href="#"><i class="fa fa-star"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="main-activities">
-                        <!-- main-activity-item -->
-                        <div class="main-activity-item" data-notify="single-notify">
-                            <!-- header -->
-                            <header class="row">
-                                <div class="col-xs-6"><a href="#" class="project-title">Gh-45nd<span class="sp"></span></a></div>
-                                <div class="col-xs-6 controls-box">
-                                    <ul class="controls">
-                                        <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Watch later"><i class="fa fa-clock-o"></i></a></li>
-                                        <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Favorite"><i class="fa fa-star"></i></a></li>
-                                    </ul>
-                                </div>
-                            </header>
-                            <!-- /header -->
-                            <!-- content -->
-                            <div class="content">
-                                <ul class="notifications">
-                                    <li class="notification">
-                                        <span class="elem icon-box"><i class="fa fa-shield"></i></span>
-                                        <span class="elem notification-text">Sequrity task. Need to update bash on virtualhosts</span>
-                                        <a href="#" class="elem notification-action">Update all</a>
-                                    </li>
-                                    <li class="notification">
-                                        <span class="elem icon-box"><i class="fa fa-cloud"></i></span>
-                                        <span class="elem notification-text">Need to billing aws</span>
-                                    </li>
-                                    <li class="notification">
-                                        <span class="elem notification-text">Need to send notification for</span>
-                                        <span class="elem user"><a href="#"><i class="fa fa-user"></i> Andrey Titula</a></span>
-                                        <a href="#" class="elem notification-action">Send notification</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <!-- separate -->
-                            <div class="separate"></div>
-                        </div>
-                        <!-- /main-activity-item -->
-                        <!-- main-activity-item -->
-                        <div class="main-activity-item" data-notify="single-notify">
-                            <!-- header -->
-                            <header class="row">
-                                <div class="col-xs-6"><a href="#" class="project-title">Gh-45nd<span class="sp"></span></a></div>
-                                <div class="col-xs-6 controls-box">
-                                    <ul class="controls">
-                                        <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Watch later"><i class="fa fa-clock-o"></i></a></li>
-                                        <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Favorite"><i class="fa fa-star"></i></a></li>
-                                    </ul>
-                                </div>
-                            </header>
-                            <!-- /header -->
-                            <!-- content -->
-                            <div class="content">
-                                <ul class="notifications">
-                                    <li class="notification">
-                                        <span class="elem icon-box"><i class="fa fa-shield"></i></span>
-                                        <span class="elem notification-text">Sequrity task. Need to update bash on virtualhosts</span>
-                                        <a href="#" class="elem notification-action">Update all</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <!-- separate -->
-                            <div class="separate"></div>
-                        </div>
-                        <!-- /main-activity-item -->
-                        <!-- main-activity-item -->
-                        <div class="main-activity-item" data-notify="single-notify">
-                            <!-- header -->
-                            <header class="row">
-                                <div class="col-xs-6"><a href="#" class="project-title">Gh-45nd<span class="sp"></span></a></div>
-                                <div class="col-xs-6 controls-box">
-                                    <ul class="controls">
-                                        <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Watch later"><i class="fa fa-clock-o"></i></a></li>
-                                        <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Favorite"><i class="fa fa-star"></i></a></li>
-                                    </ul>
-                                </div>
-                            </header>
-                            <!-- /header -->
-                            <!-- content -->
-                            <div class="content">
-                                <ul class="notifications">
-                                    <li class="notification">
-                                        <span class="elem icon-box"><i class="fa fa-cloud"></i></span>
-                                        <span class="elem notification-text">Need to billing aws</span>
-                                    </li>
-                                    <li class="notification">
-                                        <span class="elem notification-text">Need to send notification for</span>
-                                        <span class="elem user"><a href="#"><i class="fa fa-user"></i> Andrey Titula</a></span>
-                                        <a href="#" class="elem notification-action">Send notification</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <!-- separate -->
-                            <div class="separate"></div>
-                        </div>
-                        <!-- /main-activity-item -->
-                        <!-- main-activity-item -->
-                        <div class="main-activity-item" data-notify="single-notify">
-                            <!-- header -->
-                            <header class="row">
-                                <div class="col-xs-6"><a href="#" class="project-title">Gh-45nd<span class="sp"></span></a></div>
-                                <div class="col-xs-6 controls-box">
-                                    <ul class="controls">
-                                        <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Watch later"><i class="fa fa-clock-o"></i></a></li>
-                                        <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Favorite"><i class="fa fa-star"></i></a></li>
-                                    </ul>
-                                </div>
-                            </header>
-                            <!-- /header -->
-                            <!-- content -->
-                            <div class="content">
-                                <ul class="notifications">
-                                    <li class="notification">
-                                        <span class="elem icon-box"><i class="fa fa-cloud"></i></span>
-                                        <span class="elem notification-text">Need to billing aws</span>
-                                    </li>
-                                    <li class="notification">
-                                        <span class="elem notification-text">Need to send notification for</span>
-                                        <span class="elem user"><a href="#"><i class="fa fa-user"></i> Andrey Titula</a></span>
-                                        <a href="#" class="elem notification-action">Send notification</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <!-- separate -->
-                            <div class="separate"></div>
-                        </div>
-                        <!-- /main-activity-item -->
-                        <!-- main-activity-item -->
-                        <div class="main-activity-item" data-notify="single-notify">
-                            <!-- header -->
-                            <header class="row">
-                                <div class="col-xs-6"><a href="#" class="project-title">Gh-45nd<span class="sp"></span></a></div>
-                                <div class="col-xs-6 controls-box">
-                                    <ul class="controls">
-                                        <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Watch later"><i class="fa fa-clock-o"></i></a></li>
-                                        <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Favorite"><i class="fa fa-star"></i></a></li>
-                                    </ul>
-                                </div>
-                            </header>
-                            <!-- /header -->
-                            <!-- content -->
-                            <div class="content">
-                                <ul class="notifications">
-                                    <li class="notification">
-                                        <span class="elem icon-box"><i class="fa fa-cloud"></i></span>
-                                        <span class="elem notification-text">Need to billing aws</span>
-                                    </li>
-                                    <li class="notification">
-                                        <span class="elem notification-text">Need to send notification for</span>
-                                        <span class="elem user"><a href="#"><i class="fa fa-user"></i> Andrey Titula</a></span>
-                                        <a href="#" class="elem notification-action">Send notification</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <!-- separate -->
-                            <div class="separate"></div>
-                        </div>
-                        <!-- /main-activity-item -->
-                    </div>
+<!-- dash-block -->
+<div class="dash-block" id="eventlog">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="dash-title-box">
+                    <h2 class="dash-title">What's happening</h2>
+                    <ul class="sort">
+                        <li><a href="#" class="active">5 hours</a></li>
+                        <li><a href="#">24 hours</a></li>
+                        <li><a href="#">week</a></li>
+                        <li class="separate"></li>
+                        <li><a href="#"><i class="fa fa-clock-o"></i></a></li>
+                        <li><a href="#"><i class="fa fa-star"></i></a></li>
+                    </ul>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- /dash-block -->
-
-    <!-- dash-block -->
-    <div class="dash-block" id="projects">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="dash-title-box">
-                        <h2 class="dash-title">Projects</h2>
-                        <ul class="sort">
-                            <li><a href="#" class="active">5</a></li>
-                            <li><a href="#">15</a></li>
-                            <li><a href="#">24</a></li>
-                        </ul>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="main-activities">
+                    <!-- main-activity-item -->
+                    <div class="main-activity-item" data-notify="single-notify">
+                        <!-- header -->
+                        <header class="row">
+                            <div class="col-xs-6">
+                                <a href="#" class="project-title">Gh-45nd<span class="sp"></span></a>
+                            </div>
+                            <div class="col-xs-6 controls-box">
+                                <ul class="controls">
+                                    <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Watch later"><i class="fa fa-clock-o"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Favorite"><i class="fa fa-star"></i></a></li>
+                                </ul>
+                            </div>
+                        </header>
+                        <!-- /header -->
+                        <!-- content -->
+                        <div class="content">
+                            <ul class="notifications">
+                                <li class="notification">
+                                    <span class="elem icon-box"><i class="fa fa-shield"></i></span>
+                                    <a href="#" class="elem notification-text">Sequrity task. Need to update bash on virtualhosts</a>
+                                    <a href="#" class="elem notification-action">Update all</a>
+                                </li>
+                                <li class="notification">
+                                    <span class="elem icon-box"><i class="fa fa-cloud"></i></span>
+                                    <a href="#" class="elem notification-text">Need to billing aws</a>
+                                </li>
+                                <li class="notification">
+                                    <a href="#" class="elem notification-text">Need to send notification for</a>
+                                    <span class="elem user"><a href="#"><i class="fa fa-user"></i> Andrey Titula</a></span>
+                                    <a href="#" class="elem notification-action">Send notification</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- separate -->
+                        <div class="separate"></div>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="projects-list">
-                        <table class="project-list-table">
-                            <tr>
-                                <th class="name sort-down">Name</th>
-                                <th class="description sort-down">Description</th>
-                                <th class="participants sort-down" data-proj-sort="box">
-                                    Admins <a class="search" data-proj-sort="name" data-toggle="tooltip" data-placement="bottom" title="By name"><i class="fa fa-search"></i></a>
-                                    <div class="by-name-search" data-proj-sort="field">
-                                        <input type="text" placeholder="John Doe">
-                                    </div>
-                                </th>
-                                <th class="participants sort-down" data-proj-sort="box">
-                                    Managers <a class="search" data-proj-sort="name" data-toggle="tooltip" data-placement="bottom" title="By name"><i class="fa fa-search"></i></a>
-                                    <div class="by-name-search" data-proj-sort="field">
-                                        <input type="text" placeholder="John Doe">
-                                    </div>
-                                </th>
-                                <th class="shared-resources sort-down">Shared resources</th>
-                                <th class="actions sort-down">Actions</th>
-                            </tr>
-                            <tr>
-                                <td class="name">G48s-11</td>
-                                <td class="description">Garag48 in Montentegro</td>
-                                <td class="participants">
-                                    <ul>
-                                        <li><a href="#">Mihail Loon</a></li>
-                                        <li><a href="#">Vasilij Blomberg</a></li>
-                                        <li><a href="#" class="show-more" data-toggle="tooltip" data-placement="bottom" title="All project admins"><i class="fa fa-ellipsis-h"></i></a></li>
-                                    </ul>
-                                </td>
-                                <td class="participants">
-                                    <ul>
-                                        <li><a href="#">Mihail Loon</a></li>
-                                        <li><a href="#">Vasilij Blomberg</a></li>
-                                        <li><a href="#" class="show-more" data-toggle="tooltip" data-placement="bottom" title="All project Managers"><i class="fa fa-ellipsis-h"></i></a></li>
-                                    </ul>
-                                </td>
-                                <td class="shared-resources">
-                                    <ul>
-                                        <li><a href="#">git hosting</a></li>
-                                        <li><a href="#">AWS</a></li>
-                                        <li><a href="#">Rackspace instance</a></li>
-                                    </ul>
-                                </td>
-                                <td class="actions">
-                                    <a href="#" class="view" data-toggle="tooltip" data-placement="bottom" title="Viwe"><i class="fa fa-eye"></i></a>
-                                    <a href="#" class="conf" data-toggle="tooltip" data-placement="bottom" title="Settings"><i class="glyphicon glyphicon-compressed"></i></a>
-                                    <a href="#" class="remove" data-toggle="tooltip" data-placement="bottom" title="Remove"><i class="fa fa-times"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="name">GAJ7004</td>
-                                <td class="description">Flag for new country</td>
-                                <td class="participants">
-                                    <ul>
-                                        <li><a href="#">Mihail Loon</a></li>
-                                        <li><a href="#">Vasilij Blomberg</a></li>
-                                        <li><a href="#" class="show-more" data-toggle="tooltip" data-placement="bottom" title="All project admins"><i class="fa fa-ellipsis-h"></i></a></li>
-                                    </ul>
-                                </td>
-                                <td class="participants">
-                                    <ul>
-                                        <li><a href="#">Mihail Loon</a></li>
-                                        <li><a href="#">Vasilij Blomberg</a></li>
-                                        <li><a href="#" class="show-more" data-toggle="tooltip" data-placement="bottom" title="All project Managers"><i class="fa fa-ellipsis-h"></i></a></li>
-                                    </ul>
-                                </td>
-                                <td class="shared-resources">
-                                    <ul>
-                                        <li><a href="#">git hosting</a></li>
-                                        <li><a href="#">AWS</a></li>
-                                        <li><a href="#">Rackspace instance</a></li>
-                                    </ul>
-                                </td>
-                                <td class="actions">
-                                    <a href="#" class="view" data-toggle="tooltip" data-placement="bottom" title="Viwe project"><i class="fa fa-eye"></i></a>
-                                    <a href="#" class="conf" data-toggle="tooltip" data-placement="bottom" title="Archive"><i class="glyphicon glyphicon-compressed"></i></a>
-                                    <a href="#" class="remove" data-toggle="tooltip" data-placement="bottom" title="Remove project"><i class="fa fa-times"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="name">GAJ7004</td>
-                                <td class="description">Flag for new country</td>
-                                <td class="participants">
-                                    <ul>
-                                        <li><a href="#">Mihail Loon</a></li>
-                                        <li><a href="#">Vasilij Blomberg</a></li>
-                                        <li><a href="#" class="show-more" data-toggle="tooltip" data-placement="bottom" title="All project admins"><i class="fa fa-ellipsis-h"></i></a></li>
-                                    </ul>
-                                </td>
-                                <td class="participants">
-                                    <ul>
-                                        <li><a href="#">Mihail Loon</a></li>
-                                        <li><a href="#">Vasilij Blomberg</a></li>
-                                        <li><a href="#" class="show-more" data-toggle="tooltip" data-placement="bottom" title="All project Managers"><i class="fa fa-ellipsis-h"></i></a></li>
-                                    </ul>
-                                </td>
-                                <td class="shared-resources">
-                                    <ul>
-                                        <li><a href="#">git hosting</a></li>
-                                        <li><a href="#">AWS</a></li>
-                                        <li><a href="#">Rackspace instance</a></li>
-                                    </ul>
-                                </td>
-                                <td class="actions">
-                                    <a href="#" class="view" data-toggle="tooltip" data-placement="bottom" title="Viwe project"><i class="fa fa-eye"></i></a>
-                                    <a href="#" class="conf" data-toggle="tooltip" data-placement="bottom" title="Archive"><i class="glyphicon glyphicon-compressed"></i></a>
-                                    <a href="#" class="remove" data-toggle="tooltip" data-placement="bottom" title="Remove project"><i class="fa fa-times"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="name">GAJ7004</td>
-                                <td class="description">Flag for new country</td>
-                                <td class="participants">
-                                    <ul>
-                                        <li><a href="#">Mihail Loon</a></li>
-                                        <li><a href="#">Vasilij Blomberg</a></li>
-                                        <li><a href="#" class="show-more" data-toggle="tooltip" data-placement="bottom" title="All project admins"><i class="fa fa-ellipsis-h"></i></a></li>
-                                    </ul>
-                                </td>
-                                <td class="participants">
-                                    <ul>
-                                        <li><a href="#">Mihail Loon</a></li>
-                                        <li><a href="#">Vasilij Blomberg</a></li>
-                                        <li><a href="#" class="show-more" data-toggle="tooltip" data-placement="bottom" title="All project Managers"><i class="fa fa-ellipsis-h"></i></a></li>
-                                    </ul>
-                                </td>
-                                <td class="shared-resources">
-                                    <ul>
-                                        <li><a href="#">git hosting</a></li>
-                                        <li><a href="#">AWS</a></li>
-                                        <li><a href="#">Rackspace instance</a></li>
-                                    </ul>
-                                </td>
-                                <td class="actions">
-                                    <a href="#" class="view" data-toggle="tooltip" data-placement="bottom" title="Viwe project"><i class="fa fa-eye"></i></a>
-                                    <a href="#" class="conf" data-toggle="tooltip" data-placement="bottom" title="Archive"><i class="glyphicon glyphicon-compressed"></i></a>
-                                    <a href="#" class="remove" data-toggle="tooltip" data-placement="bottom" title="Remove project"><i class="fa fa-times"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="name">GAJ7004</td>
-                                <td class="description">Flag for new country</td>
-                                <td class="participants">
-                                    <ul>
-                                        <li><a href="#">Mihail Loon</a></li>
-                                        <li><a href="#">Vasilij Blomberg</a></li>
-                                        <li><a href="#" class="show-more" data-toggle="tooltip" data-placement="bottom" title="All project admins"><i class="fa fa-ellipsis-h"></i></a></li>
-                                    </ul>
-                                </td>
-                                <td class="participants">
-                                    <ul>
-                                        <li><a href="#">Mihail Loon</a></li>
-                                        <li><a href="#">Vasilij Blomberg</a></li>
-                                        <li><a href="#" class="show-more" data-toggle="tooltip" data-placement="bottom" title="All project Managers"><i class="fa fa-ellipsis-h"></i></a></li>
-                                    </ul>
-                                </td>
-                                <td class="shared-resources">
-                                    <ul>
-                                        <li><a href="#">git hosting</a></li>
-                                        <li><a href="#">AWS</a></li>
-                                        <li><a href="#">Rackspace instance</a></li>
-                                    </ul>
-                                </td>
-                                <td class="actions">
-                                    <a href="#" class="view" data-toggle="tooltip" data-placement="bottom" title="Viwe project"><i class="fa fa-eye"></i></a>
-                                    <a href="#" class="conf" data-toggle="tooltip" data-placement="bottom" title="Archive"><i class="glyphicon glyphicon-compressed"></i></a>
-                                    <a href="#" class="remove" data-toggle="tooltip" data-placement="bottom" title="Remove project"><i class="fa fa-times"></i></a>
-                                </td>
-                            </tr>
-                        </table>
+                    <!-- /main-activity-item -->
+                    <!-- main-activity-item -->
+                    <div class="main-activity-item" data-notify="single-notify">
+                        <!-- header -->
+                        <header class="row">
+                            <div class="col-xs-6">
+                                <a href="#" class="project-title">Gh-45nd<span class="sp"></span></a>
+                            </div>
+                            <div class="col-xs-6 controls-box">
+                                <ul class="controls">
+                                    <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Watch later"><i class="fa fa-clock-o"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Favorite"><i class="fa fa-star"></i></a></li>
+                                </ul>
+                            </div>
+                        </header>
+                        <!-- /header -->
+                        <!-- content -->
+                        <div class="content">
+                            <ul class="notifications">
+                                <li class="notification">
+                                    <span class="elem icon-box"><i class="fa fa-shield"></i></span>
+                                    <a href="#" class="elem notification-text">Sequrity task. Need to update bash on virtualhosts</a>
+                                    <a href="#" class="elem notification-action">Update all</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- separate -->
+                        <div class="separate"></div>
                     </div>
+                    <!-- /main-activity-item -->
+                    <!-- main-activity-item -->
+                    <div class="main-activity-item" data-notify="single-notify">
+                        <!-- header -->
+                        <header class="row">
+                            <div class="col-xs-6">
+                                <a href="#" class="project-title">Gh-45nd<span class="sp"></span></a>
+                            </div>
+                            <div class="col-xs-6 controls-box">
+                                <ul class="controls">
+                                    <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Watch later"><i class="fa fa-clock-o"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Favorite"><i class="fa fa-star"></i></a></li>
+                                </ul>
+                            </div>
+                        </header>
+                        <!-- /header -->
+                        <!-- content -->
+                        <div class="content">
+                            <ul class="notifications">
+                                <li class="notification">
+                                    <span class="elem icon-box"><i class="fa fa-cloud"></i></span>
+                                    <a href="#" class="elem notification-text">Need to billing aws</a>
+                                </li>
+                                <li class="notification">
+                                    <a href="#" class="elem notification-text">Need to send notification for</a>
+                                    <span class="elem user"><a href="#"><i class="fa fa-user"></i> Andrey Titula</a></span>
+                                    <a href="#" class="elem notification-action">Send notification</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- separate -->
+                        <div class="separate"></div>
+                    </div>
+                    <!-- /main-activity-item -->
+                    <!-- main-activity-item -->
+                    <div class="main-activity-item" data-notify="single-notify">
+                        <!-- header -->
+                        <header class="row">
+                            <div class="col-xs-6">
+                                <a href="#" class="project-title">Gh-45nd<span class="sp"></span></a>
+                            </div>
+                            <div class="col-xs-6 controls-box">
+                                <ul class="controls">
+                                    <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Watch later"><i class="fa fa-clock-o"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Favorite"><i class="fa fa-star"></i></a></li>
+                                </ul>
+                            </div>
+                        </header>
+                        <!-- /header -->
+                        <!-- content -->
+                        <div class="content">
+                            <ul class="notifications">
+                                <li class="notification">
+                                    <span class="elem icon-box"><i class="fa fa-cloud"></i></span>
+                                    <a href="#" class="elem notification-text">Need to billing aws</a>
+                                </li>
+                                <li class="notification">
+                                    <a href="#" class="elem notification-text">Need to send notification for</a>
+                                    <span class="elem user"><a href="#"><i class="fa fa-user"></i> Andrey Titula</a></span>
+                                    <a href="#" class="elem notification-action">Send notification</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- separate -->
+                        <div class="separate"></div>
+                    </div>
+                    <!-- /main-activity-item -->
+                    <!-- main-activity-item -->
+                    <div class="main-activity-item" data-notify="single-notify">
+                        <!-- header -->
+                        <header class="row">
+                            <div class="col-xs-6">
+                                <a href="#" class="project-title">Gh-45nd<span class="sp"></span></a>
+                            </div>
+                            <div class="col-xs-6 controls-box">
+                                <ul class="controls">
+                                    <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Watch later"><i class="fa fa-clock-o"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Favorite"><i class="fa fa-star"></i></a></li>
+                                </ul>
+                            </div>
+                        </header>
+                        <!-- /header -->
+                        <!-- content -->
+                        <div class="content">
+                            <ul class="notifications">
+                                <li class="notification">
+                                    <span class="elem icon-box"><i class="fa fa-cloud"></i></span>
+                                    <a href="#" class="elem notification-text">Need to billing aws</a>
+                                </li>
+                                <li class="notification">
+                                    <a href="#" class="elem notification-text">Need to send notification for</a>
+                                    <span class="elem user"><a href="#"><i class="fa fa-user"></i> Andrey Titula</a></span>
+                                    <a href="#" class="elem notification-action">Send notification</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- separate -->
+                        <div class="separate"></div>
+                    </div>
+                    <!-- /main-activity-item -->
                 </div>
             </div>
         </div>
     </div>
-    <!-- /dash-block -->
+</div>
+<!-- /dash-block -->
+
+<!-- dash-block -->
+<div class="dash-block" id="projects">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="dash-title-box">
+                    <h2 class="dash-title">Projects</h2>
+                    <ul class="sort">
+                        <li><a href="#" class="active">5</a></li>
+                        <li><a href="#">15</a></li>
+                        <li><a href="#">24</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="projects-list">
+                    <table class="project-list-table">
+                        <tr>
+                            <th class="name sort-down">Name</th>
+                            <th class="description sort-down">Description</th>
+                            <th class="participants sort-down" data-proj-sort="box">
+                                Admins <a class="search" data-proj-sort="name" data-toggle="tooltip" data-placement="bottom" title="By name"><i class="fa fa-search"></i></a>
+                                <div class="by-name-search" data-proj-sort="field">
+                                    <input type="text" placeholder="John Doe">
+                                </div>
+                            </th>
+                            <th class="participants sort-down" data-proj-sort="box">
+                                Managers <a class="search" data-proj-sort="name" data-toggle="tooltip" data-placement="bottom" title="By name"><i class="fa fa-search"></i></a>
+                                <div class="by-name-search" data-proj-sort="field">
+                                    <input type="text" placeholder="John Doe">
+                                </div>
+                            </th>
+                            <th class="shared-resources sort-down">Shared resources</th>
+                            <th class="actions sort-down">Actions</th>
+                        </tr>
+                        <tr>
+                            <td class="name"><a href="/project.html">G48s-11</a></td>
+                            <td class="description">Garag48 in Montentegro</td>
+                            <td class="participants">
+                                <ul>
+                                    <li><a href="#">Mihail Loon</a></li>
+                                    <li><a href="#">Vasilij Blomberg</a></li>
+                                    <li><a href="#" class="show-more" data-toggle="tooltip" data-placement="bottom" title="All project admins"><i class="fa fa-ellipsis-h"></i></a></li>
+                                </ul>
+                            </td>
+                            <td class="participants">
+                                <ul>
+                                    <li><a href="#">Mihail Loon</a></li>
+                                    <li><a href="#">Vasilij Blomberg</a></li>
+                                    <li><a href="#" class="show-more" data-toggle="tooltip" data-placement="bottom" title="All project Managers"><i class="fa fa-ellipsis-h"></i></a></li>
+                                </ul>
+                            </td>
+                            <td class="shared-resources">
+                                <ul>
+                                    <li><a href="#">git hosting</a></li>
+                                    <li><a href="#">AWS</a></li>
+                                    <li><a href="#">Rackspace instance</a></li>
+                                </ul>
+                            </td>
+                            <td class="actions">
+                                <a href="#" class="view" data-toggle="tooltip" data-placement="bottom" title="Viwe"><i class="fa fa-eye"></i></a>
+                                <a href="#" class="conf" data-toggle="tooltip" data-placement="bottom" title="Settings"><i class="glyphicon glyphicon-compressed"></i></a>
+                                <a href="#" class="remove" data-toggle="tooltip" data-placement="bottom" title="Remove"><i class="fa fa-times"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="name"><a href="/project.html">G48s-11</a></td>
+                            <td class="description">Flag for new country</td>
+                            <td class="participants">
+                                <ul>
+                                    <li><a href="#">Mihail Loon</a></li>
+                                    <li><a href="#">Vasilij Blomberg</a></li>
+                                    <li><a href="#" class="show-more" data-toggle="tooltip" data-placement="bottom" title="All project admins"><i class="fa fa-ellipsis-h"></i></a></li>
+                                </ul>
+                            </td>
+                            <td class="participants">
+                                <ul>
+                                    <li><a href="#">Mihail Loon</a></li>
+                                    <li><a href="#">Vasilij Blomberg</a></li>
+                                    <li><a href="#" class="show-more" data-toggle="tooltip" data-placement="bottom" title="All project Managers"><i class="fa fa-ellipsis-h"></i></a></li>
+                                </ul>
+                            </td>
+                            <td class="shared-resources">
+                                <ul>
+                                    <li><a href="#">git hosting</a></li>
+                                    <li><a href="#">AWS</a></li>
+                                    <li><a href="#">Rackspace instance</a></li>
+                                </ul>
+                            </td>
+                            <td class="actions">
+                                <a href="#" class="view" data-toggle="tooltip" data-placement="bottom" title="Viwe project"><i class="fa fa-eye"></i></a>
+                                <a href="#" class="conf" data-toggle="tooltip" data-placement="bottom" title="Archive"><i class="glyphicon glyphicon-compressed"></i></a>
+                                <a href="#" class="remove" data-toggle="tooltip" data-placement="bottom" title="Remove project"><i class="fa fa-times"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="name"><a href="/project.html">G48s-11</a></td>
+                            <td class="description">Flag for new country</td>
+                            <td class="participants">
+                                <ul>
+                                    <li><a href="#">Mihail Loon</a></li>
+                                    <li><a href="#">Vasilij Blomberg</a></li>
+                                    <li><a href="#" class="show-more" data-toggle="tooltip" data-placement="bottom" title="All project admins"><i class="fa fa-ellipsis-h"></i></a></li>
+                                </ul>
+                            </td>
+                            <td class="participants">
+                                <ul>
+                                    <li><a href="#">Mihail Loon</a></li>
+                                    <li><a href="#">Vasilij Blomberg</a></li>
+                                    <li><a href="#" class="show-more" data-toggle="tooltip" data-placement="bottom" title="All project Managers"><i class="fa fa-ellipsis-h"></i></a></li>
+                                </ul>
+                            </td>
+                            <td class="shared-resources">
+                                <ul>
+                                    <li><a href="#">git hosting</a></li>
+                                    <li><a href="#">AWS</a></li>
+                                    <li><a href="#">Rackspace instance</a></li>
+                                </ul>
+                            </td>
+                            <td class="actions">
+                                <a href="#" class="view" data-toggle="tooltip" data-placement="bottom" title="Viwe project"><i class="fa fa-eye"></i></a>
+                                <a href="#" class="conf" data-toggle="tooltip" data-placement="bottom" title="Archive"><i class="glyphicon glyphicon-compressed"></i></a>
+                                <a href="#" class="remove" data-toggle="tooltip" data-placement="bottom" title="Remove project"><i class="fa fa-times"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="name"><a href="/project.html">G48s-11</a></td>
+                            <td class="description">Flag for new country</td>
+                            <td class="participants">
+                                <ul>
+                                    <li><a href="#">Mihail Loon</a></li>
+                                    <li><a href="#">Vasilij Blomberg</a></li>
+                                    <li><a href="#" class="show-more" data-toggle="tooltip" data-placement="bottom" title="All project admins"><i class="fa fa-ellipsis-h"></i></a></li>
+                                </ul>
+                            </td>
+                            <td class="participants">
+                                <ul>
+                                    <li><a href="#">Mihail Loon</a></li>
+                                    <li><a href="#">Vasilij Blomberg</a></li>
+                                    <li><a href="#" class="show-more" data-toggle="tooltip" data-placement="bottom" title="All project Managers"><i class="fa fa-ellipsis-h"></i></a></li>
+                                </ul>
+                            </td>
+                            <td class="shared-resources">
+                                <ul>
+                                    <li><a href="#">git hosting</a></li>
+                                    <li><a href="#">AWS</a></li>
+                                    <li><a href="#">Rackspace instance</a></li>
+                                </ul>
+                            </td>
+                            <td class="actions">
+                                <a href="#" class="view" data-toggle="tooltip" data-placement="bottom" title="Viwe project"><i class="fa fa-eye"></i></a>
+                                <a href="#" class="conf" data-toggle="tooltip" data-placement="bottom" title="Archive"><i class="glyphicon glyphicon-compressed"></i></a>
+                                <a href="#" class="remove" data-toggle="tooltip" data-placement="bottom" title="Remove project"><i class="fa fa-times"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="name"><a href="/project.html">G48s-11</a></td>
+                            <td class="description">Flag for new country</td>
+                            <td class="participants">
+                                <ul>
+                                    <li><a href="#">Mihail Loon</a></li>
+                                    <li><a href="#">Vasilij Blomberg</a></li>
+                                    <li><a href="#" class="show-more" data-toggle="tooltip" data-placement="bottom" title="All project admins"><i class="fa fa-ellipsis-h"></i></a></li>
+                                </ul>
+                            </td>
+                            <td class="participants">
+                                <ul>
+                                    <li><a href="#">Mihail Loon</a></li>
+                                    <li><a href="#">Vasilij Blomberg</a></li>
+                                    <li><a href="#" class="show-more" data-toggle="tooltip" data-placement="bottom" title="All project Managers"><i class="fa fa-ellipsis-h"></i></a></li>
+                                </ul>
+                            </td>
+                            <td class="shared-resources">
+                                <ul>
+                                    <li><a href="#">git hosting</a></li>
+                                    <li><a href="#">AWS</a></li>
+                                    <li><a href="#">Rackspace instance</a></li>
+                                </ul>
+                            </td>
+                            <td class="actions">
+                                <a href="#" class="view" data-toggle="tooltip" data-placement="bottom" title="Viwe project"><i class="fa fa-eye"></i></a>
+                                <a href="#" class="conf" data-toggle="tooltip" data-placement="bottom" title="Archive"><i class="glyphicon glyphicon-compressed"></i></a>
+                                <a href="#" class="remove" data-toggle="tooltip" data-placement="bottom" title="Remove project"><i class="fa fa-times"></i></a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /dash-block -->
+
+<!-- Help | Copyright | API -->
+
+<div class="app-footer">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="copy">Node Conductor</div>
+            </div>
+            <div class="col-xs-6">
+                <nav>
+                    <ul>
+                        <li><a href="">Help</a></li>
+                        <li><a href="">API</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="createCustomer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
