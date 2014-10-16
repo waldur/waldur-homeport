@@ -6804,6 +6804,13 @@ img {
   color: #fff;
   font-size: 1.4rem;
 }
+.navbar-nav > li .dropdown-menu li a:hover, .navbar-nav > li .dropdown-menu li a.active {
+  background-color: #6f9658;
+}
+
+.add-something-box .tooltip .tooltip-inner {
+  min-width: 124px;
+}
 
 .navbar-nav > li > a {
   color: #1F3305;
@@ -6901,6 +6908,29 @@ img {
 .verify-data fieldset .login-with {
   color: #000;
   text-decoration: none;
+}
+
+.dash-nav {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+}
+.dash-nav ul {
+  margin: 0;
+  padding: 0;
+}
+.dash-nav ul li {
+  list-style: none;
+}
+.dash-nav ul li a {
+  display: block;
+  padding: 10px;
+  background-color: #9ECF5D;
+  color: #1F3305;
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.54);
+}
+.dash-nav ul li a.active {
+  color: #066D7B;
 }
 
 .dash-block + .dash-block {

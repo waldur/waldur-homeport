@@ -1,3 +1,23 @@
+.dash-nav {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    ul {
+        @include clear-list;
+        li {
+            a {
+                display: block;
+                padding: 10px;
+                background-color: #9ECF5D;
+                color: #1F3305;
+                text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.54);
+                &.active {
+                    color: #066D7B;
+                }
+            }
+        }
+    }
+} // dash-nav
 .dash-block {
     + .dash-block {
         margin-top: 40px;

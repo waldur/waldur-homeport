@@ -62,10 +62,21 @@
             a {
                 color: #fff;
                 font-size: rem(14);
+                &:hover, &.active {
+                    background-color: rgb(111, 150, 88);
+                }
             } // a
         } // li
     } // dropdown-menu
 } // .navbar-nav > li
+
+.add-something-box {
+    .tooltip {
+        .tooltip-inner {
+            min-width: 124px;
+        }
+    }
+} // add-something-box
 
 .navbar-nav > li > a {
     color: #1F3305;

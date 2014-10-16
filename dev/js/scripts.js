@@ -19,12 +19,19 @@
         });
     }
 
+    function dashNav(){
+        var dashNavBox = $('.dash-nav');
+        dashNavBox.css('margin-top', -dashNavBox.height()/2)
+    }
+
     // document ready
     $(document).ready(function() {
         // bs tooltips
         $('[data-toggle="tooltip"]').tooltip();
+        $('[data-extra="tooltip"]').tooltip();
         // sort by name – search field in projects th
         byNameinProjects();
+        dashNav();
     });
 
     // all initial on window resize

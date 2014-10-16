@@ -43,9 +43,9 @@
                     <li><a href="#" class="" data-toggle="tooltip" data-placement="bottom" title="Users"><i class="fa fa-users"></i></a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle add-something-button" data-toggle="dropdown">
-                            <i class="fa fa-plus" data-toggle="tooltip" data-placement="bottom" title="Create something..."></i>
+                    <li class="dropdown add-something-box">
+                        <a href="#" class="dropdown-toggle add-something-button" data-extra="tooltip" data-toggle="dropdown" data-placement="bottom" title="Create something...">
+                            <i class="fa fa-plus"></i>
                         </a>
                         <ul class="dropdown-menu add-something" role="menu">
                             <li><a href="#"><i class="fa fa-user"></i> Add Customer</a></li>
@@ -79,8 +79,18 @@
     </div>
     <!-- /header -->
 
+    <!-- left-nav -->
+    <nav class="dash-nav">
+        <ul>
+            <li><a href="#stats" class="active"><i class="fa fa-bar-chart"></i></a></li>
+            <li><a href="#eventlog"><i class="fa fa-bullhorn"></i></a></li>
+            <li><a href="#projects"><i class="fa fa-desktop"></i></a></li>
+        </ul>
+    </nav>
+    <!-- /left-nav -->
+
     <!-- dash-block -->
-    <div class="dash-block">
+    <div class="dash-block" id="eventlog">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-12">
@@ -264,7 +274,7 @@
     <!-- /dash-block -->
 
     <!-- dash-block -->
-    <div class="dash-block">
+    <div class="dash-block" id="projects">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-12">
