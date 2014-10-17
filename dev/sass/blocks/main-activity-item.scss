@@ -54,9 +54,9 @@
             } // li
         } // controls
     } // controls-box
-    .notifications {
+    .events {
         @include clear-list;
-        .notification {
+        .event {
             color: rgb(158, 158, 158);
             .elem {
                 @include inline-middle;
@@ -69,7 +69,7 @@
                 text-align: center;
                 font-size: rem(14);
             } // icon-box
-            .notification-text {
+            .event-text {
                 color: rgb(158, 158, 158);
                 text-decoration: none;
                 font-size: rem(14);
@@ -77,13 +77,13 @@
             .user {
                 font-size: rem(14);
             } // user
-            .notification-action {
+            .event-action {
                 @include small-black-link;
                 position: relative;
                 top: 1px;
-            } // notification-action
-        } // notification
-    } // notifications    
+            } // event-action
+        } // event
+    } // events    
     .separate {
         width: 100%;
         height: 1px;

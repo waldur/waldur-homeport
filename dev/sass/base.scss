@@ -21,29 +21,6 @@ a:hover, a:active, a:focus {
     outline: 0 !important;
 }
 
-.container-fluid {
-    // padding-left: 40px;
-    // padding-right: 40px;
-    width: 960px;
-    // margin: auto;
-}
-
-.tooltip {
-    .tooltip-inner {
-        font-size: rem(12);
-    }
-}
-
-a:hover, a:active, a:focus {
-    outline: 0;
-}
-
-.container {
-    box-sizing: border-box;
-    width: 960px;
-    margin: auto;
-} // container
-
 img {
     max-width: 100%;
     height: auto;
