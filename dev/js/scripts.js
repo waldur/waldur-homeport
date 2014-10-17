@@ -24,6 +24,23 @@
         dashNavBox.css('margin-top', -dashNavBox.height()/2)
     }
 
+    function showGrouped() {
+        var infoBox = $('[data-grouped="box"]');
+        infoBox.each(function() {
+            var groupedTrigger = $(this).find('[data-grouped="trigger"]');
+            var groupedShowGrouped = $(this).find('[data-grouped="show-grouped"]');
+            groupedTrigger.click(function() {
+                if(!groupedShowGrouped.hasClass('state')) {
+                    groupedShowGrouped.addClass('state');
+                    console.log('sd')
+                } else {
+                    groupedShowGrouped.removeClass('state');
+                    console.log('fail')
+                }
+            });
+        });        
+    }
+
     // document ready
     $(document).ready(function() {
         // bs tooltips
@@ -32,6 +49,7 @@
         // sort by name – search field in projects th
         byNameinProjects();
         dashNav();
+        showGrouped();
     });
 
     // all initial on window resize
