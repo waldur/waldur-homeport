@@ -1,0 +1,23 @@
+.event {
+    margin-bottom: 40px;
+    .container-fluid {
+        padding: 15px;
+        // background: rgb(231, 231, 231);
+        border: 1px dashed rgb(226, 226, 226);
+    }
+    .event-title {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    } // event-title
+    .event-description {
+        color: rgb(158, 158, 158);
+    } // event-description
+    .event-info {
+        .elem {
+            @include inline-middle;
+        } // elem
+    } // event-from
+    .event-actions {
+        @include small-black-link;
+    } // event-actions
+} // event

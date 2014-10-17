@@ -51,9 +51,24 @@
     &:hover {
         background: #01BD66;
     }
+    &:active, &:focus {
+        background-color: #089051;
+    }
 } // btn-primary
 
 .more {
     padding-top: 30px;
     text-align: center;
 } // more
+
+time.date {
+    @include inline-middle;
+    font-size: rem(12);
+    color: rgb(108, 108, 108);
+} // time.date
+
+.simple-text {
+    @include inline-middle;
+    font-size: rem(12);
+    color: silver;
+} // simple-text

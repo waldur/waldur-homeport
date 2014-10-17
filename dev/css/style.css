@@ -6771,10 +6771,27 @@ img {
 .btn-primary:hover {
   background: #01BD66;
 }
+.btn-primary:active, .btn-primary:focus {
+  background-color: #089051;
+}
 
 .more {
   padding-top: 30px;
   text-align: center;
+}
+
+time.date {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 1.2rem;
+  color: #6c6c6c;
+}
+
+.simple-text {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 1.2rem;
+  color: silver;
 }
 
 .navbar-fixed-top {
@@ -7076,13 +7093,6 @@ img {
 .main-activity-item:nth-last-child(1) .separate {
   display: none;
 }
-.main-activity-item time.date {
-  display: inline-block;
-  vertical-align: middle;
-  margin-left: 8px;
-  font-size: 1.2rem;
-  color: silver;
-}
 .main-activity-item .project-title {
   display: inline-block;
   vertical-align: middle;
@@ -7284,6 +7294,32 @@ img {
 .projects-list table.project-list-table tr td ul li a {
   text-decoration: none;
   font-size: 1.4rem;
+}
+
+.event {
+  margin-bottom: 40px;
+}
+.event .container-fluid {
+  padding: 15px;
+  border: 1px dashed #e2e2e2;
+}
+.event .event-title {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.event .event-description {
+  color: #9e9e9e;
+}
+.event .event-info .elem {
+  display: inline-block;
+  vertical-align: middle;
+}
+.event .event-actions {
+  font-size: 1.3rem;
+  padding: 2px 0px;
+  color: #000;
+  text-decoration: none;
+  border-bottom: 1px dashed gray;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -38,8 +38,8 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="/dashboard.html" class="active" data-toggle="tooltip" data-placement="bottom" title="Dashboard"><i class="fa fa-dashboard"></i></a></li>
-                <li><a href="/events.html" class="" data-toggle="tooltip" data-placement="bottom" title="Events"><i class="fa fa-info"></i></a></li>
+                <li><a href="/dashboard.html" class="" data-toggle="tooltip" data-placement="bottom" title="Dashboard"><i class="fa fa-dashboard"></i></a></li>
+                <li><a href="/events.html" class="active" data-toggle="tooltip" data-placement="bottom" title="Events"><i class="fa fa-info"></i></a></li>
                 <li><a href="/projects.html" class="" data-toggle="tooltip" data-placement="bottom" title="Projects"><i class="fa fa-desktop"></i></a></li>
                 <li><a href="/resources.html" class="" data-toggle="tooltip" data-placement="bottom" title="Resources"><i class="fa fa-tasks"></i></a></li>
                 <li><a href="/users.html" class="" data-toggle="tooltip" data-placement="bottom" title="Users"><i class="fa fa-users"></i></a></li>
@@ -81,15 +81,50 @@
 </div>
 <!-- /header -->
 
-<!-- left-nav -->
-<nav class="dash-nav">
-    <ul>
-        <li><a href="#stats"><i class="fa fa-bar-chart"></i></a></li>
-        <li><a href="#eventlog"><i class="fa fa-bullhorn"></i></a></li>
-        <li><a href="#projects"><i class="fa fa-desktop"></i></a></li>
-    </ul>
-</nav>
-<!-- /left-nav -->
+<!-- event -->
+<div class="event">
+    <div class="container-fluid">
+        <!-- event-info -->
+        <div class="event-info">
+            <div class="elem">
+                <span class="simple-text">from </span> <a href="/project.html" class="project-title">Gh-45nd</a>
+                <span class="simple-text">at</span> <time class="date"><i class="fa fa-calendar-o"></i> 17.10.2014 – <i class="fa fa-clock-o"></i> 16:02</time>
+            </div>
+        </div>
+        <!-- /event-info -->
+        <h2 class="event-title"><a href="/event.html" class="elem event-text">Sequrity task. Need to update bash on virtualhosts</a></h2>
+        <div class="event-description">
+            Discovered a security hole bash. To fix this you need to update to the latest version of bash.
+        </div>
+        <div class="event-info">
+            <a href="#" class="event-actions">update all</a>
+        </div>        
+    </div>
+</div>
+<!-- /event -->
+
+<!-- event -->
+<div class="event">
+    <div class="container-fluid">
+        <!-- event-info -->
+        <div class="event-info">
+            <div class="elem">
+                <span class="simple-text">from </span> <a href="/project.html" class="project-title">Gh-45nd</a>
+                <span class="simple-text">at</span> <time class="date"><i class="fa fa-calendar-o"></i> 17.10.2014 – <i class="fa fa-clock-o"></i> 16:02</time>
+            </div>
+            <div class="main">asdasd</div>
+        </div>
+        <!-- /event-info -->
+        <h2 class="event-title"><a href="/event.html" class="elem event-text">Sequrity task. Need to update bash on virtualhosts</a></h2>
+        <div class="event-description">
+            Discovered a security hole bash. To fix this you need to update to the latest version of bash.
+        </div>
+        <div class="event-info">
+            <a href="#" class="event-actions">update all</a>
+        </div>        
+    </div>
+</div>
+<!-- /event -->
 
 <!-- dash-block -->
 <div class="dash-block" id="eventlog">
@@ -97,7 +132,7 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="dash-title-box">
-                    <h2 class="dash-title">What's happening</h2>
+                    <h2 class="dash-title">More events</h2>
                     <ul class="sort">
                         <li><a href="#" class="active">5 hours</a></li>
                         <li><a href="#">24 hours</a></li>
@@ -277,209 +312,183 @@
                         <div class="separate"></div>
                     </div>
                     <!-- /main-activity-item -->
+                                        <!-- main-activity-item -->
+                    <div class="main-activity-item" data-notify="single-notify">
+                        <!-- header -->
+                        <header class="row">
+                            <div class="col-xs-6">
+                                <a href="/project.html" class="project-title">Gh-45nd</a>
+                            </div>
+                            <div class="col-xs-6 controls-box">
+                                <ul class="controls">
+                                    <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Watch later"><i class="fa fa-clock-o"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Favorite"><i class="fa fa-star"></i></a></li>
+                                </ul>
+                            </div>
+                        </header>
+                        <!-- /header -->
+                        <!-- content -->
+                        <div class="content">
+                            <ul class="events">
+                                <li class="event">
+                                    <span class="elem icon-box"><i class="fa fa-shield"></i></span>
+                                    <a href="/event.html" class="elem event-text">Sequrity task. Need to update bash on virtualhosts</a>
+                                    <a href="#" class="elem event-action">Update all</a>
+                                </li>
+                                <li class="event">
+                                    <span class="elem icon-box"><i class="fa fa-cloud"></i></span>
+                                    <a href="/event.html" class="elem event-text">Need to billing aws</a>
+                                </li>
+                                <li class="event">
+                                    <a href="/event.html" class="elem event-text">Need to send event for</a>
+                                    <span class="elem user"><a href="#"><i class="fa fa-user"></i> Andrey Titula</a></span>
+                                    <a href="#" class="elem event-action">Send event</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- separate -->
+                        <div class="separate"></div>
+                    </div>
+                    <!-- /main-activity-item -->
+                    <!-- main-activity-item -->
+                    <div class="main-activity-item" data-notify="single-notify">
+                        <!-- header -->
+                        <header class="row">
+                            <div class="col-xs-6">
+                                <a href="/project.html" class="project-title">Gh-45nd</a>
+                            </div>
+                            <div class="col-xs-6 controls-box">
+                                <ul class="controls">
+                                    <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Watch later"><i class="fa fa-clock-o"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Favorite"><i class="fa fa-star"></i></a></li>
+                                </ul>
+                            </div>
+                        </header>
+                        <!-- /header -->
+                        <!-- content -->
+                        <div class="content">
+                            <ul class="events">
+                                <li class="event">
+                                    <span class="elem icon-box"><i class="fa fa-shield"></i></span>
+                                    <a href="/event.html" class="elem event-text">Sequrity task. Need to update bash on virtualhosts</a>
+                                    <a href="#" class="elem event-action">Update all</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- separate -->
+                        <div class="separate"></div>
+                    </div>
+                    <!-- /main-activity-item -->
+                    <!-- main-activity-item -->
+                    <div class="main-activity-item" data-notify="single-notify">
+                        <!-- header -->
+                        <header class="row">
+                            <div class="col-xs-6">
+                                <a href="/project.html" class="project-title">Gh-45nd</a>
+                            </div>
+                            <div class="col-xs-6 controls-box">
+                                <ul class="controls">
+                                    <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Watch later"><i class="fa fa-clock-o"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Favorite"><i class="fa fa-star"></i></a></li>
+                                </ul>
+                            </div>
+                        </header>
+                        <!-- /header -->
+                        <!-- content -->
+                        <div class="content">
+                            <ul class="events">
+                                <li class="event">
+                                    <span class="elem icon-box"><i class="fa fa-cloud"></i></span>
+                                    <a href="/event.html" class="elem event-text">Need to billing aws</a>
+                                </li>
+                                <li class="event">
+                                    <a href="/event.html" class="elem event-text">Need to send event for</a>
+                                    <span class="elem user"><a href="#"><i class="fa fa-user"></i> Andrey Titula</a></span>
+                                    <a href="#" class="elem event-action">Send event</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- separate -->
+                        <div class="separate"></div>
+                    </div>
+                    <!-- /main-activity-item -->
+                    <!-- main-activity-item -->
+                    <div class="main-activity-item" data-notify="single-notify">
+                        <!-- header -->
+                        <header class="row">
+                            <div class="col-xs-6">
+                                <a href="/project.html" class="project-title">Gh-45nd</a>
+                            </div>
+                            <div class="col-xs-6 controls-box">
+                                <ul class="controls">
+                                    <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Watch later"><i class="fa fa-clock-o"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Favorite"><i class="fa fa-star"></i></a></li>
+                                </ul>
+                            </div>
+                        </header>
+                        <!-- /header -->
+                        <!-- content -->
+                        <div class="content">
+                            <ul class="events">
+                                <li class="event">
+                                    <span class="elem icon-box"><i class="fa fa-cloud"></i></span>
+                                    <a href="/event.html" class="elem event-text">Need to billing aws</a>
+                                </li>
+                                <li class="event">
+                                    <a href="/event.html" class="elem event-text">Need to send event for</a>
+                                    <span class="elem user"><a href="#"><i class="fa fa-user"></i> Andrey Titula</a></span>
+                                    <a href="#" class="elem event-action">Send event</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- separate -->
+                        <div class="separate"></div>
+                    </div>
+                    <!-- /main-activity-item -->
+                    <!-- main-activity-item -->
+                    <div class="main-activity-item" data-notify="single-notify">
+                        <!-- header -->
+                        <header class="row">
+                            <div class="col-xs-6">
+                                <a href="/project.html" class="project-title">Gh-45nd</a>
+                            </div>
+                            <div class="col-xs-6 controls-box">
+                                <ul class="controls">
+                                    <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Watch later"><i class="fa fa-clock-o"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Favorite"><i class="fa fa-star"></i></a></li>
+                                </ul>
+                            </div>
+                        </header>
+                        <!-- /header -->
+                        <!-- content -->
+                        <div class="content">
+                            <ul class="events">
+                                <li class="event">
+                                    <span class="elem icon-box"><i class="fa fa-cloud"></i></span>
+                                    <a href="/event.html" class="elem event-text">Need to billing aws</a>
+                                </li>
+                                <li class="event">
+                                    <a href="/event.html" class="elem event-text">Need to send event for</a>
+                                    <span class="elem user"><a href="#"><i class="fa fa-user"></i> Andrey Titula</a></span>
+                                    <a href="#" class="elem event-action">Send event</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- separate -->
+                        <div class="separate"></div>
+                    </div>
+                    <!-- /main-activity-item -->
                 </div>
             </div>
         </div>
+        <!-- more -->
+        <div class="more">
+            <a href="#" class="btn btn-default">Show more</a>
+        </div>
+        <!-- /more -->
     </div>
 </div>
 <!-- /dash-block -->
-
-<!-- dash-block -->
-<div class="dash-block" id="projects">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="dash-title-box">
-                    <h2 class="dash-title">Projects</h2>
-                    <ul class="sort">
-                        <li><a href="#" class="active">5</a></li>
-                        <li><a href="#">15</a></li>
-                        <li><a href="#">24</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="projects-list">
-                    <table class="project-list-table">
-                        <tr>
-                            <th class="name sort-down">Name</th>
-                            <th class="description sort-down">Description</th>
-                            <th class="participants sort-down" data-proj-sort="box">
-                                Admins <a class="search" data-proj-sort="name" data-toggle="tooltip" data-placement="bottom" title="By name"><i class="fa fa-search"></i></a>
-                                <div class="by-name-search" data-proj-sort="field">
-                                    <input type="text" placeholder="John Doe">
-                                </div>
-                            </th>
-                            <th class="participants sort-down" data-proj-sort="box">
-                                Managers <a class="search" data-proj-sort="name" data-toggle="tooltip" data-placement="bottom" title="By name"><i class="fa fa-search"></i></a>
-                                <div class="by-name-search" data-proj-sort="field">
-                                    <input type="text" placeholder="John Doe">
-                                </div>
-                            </th>
-                            <th class="shared-resources sort-down">Shared resources</th>
-                            <th class="actions sort-down">Actions</th>
-                        </tr>
-                        <tr>
-                            <td class="name"><a href="/project.html">G48s-11</a></td>
-                            <td class="description">Garag48 in Montentegro</td>
-                            <td class="participants">
-                                <ul>
-                                    <li><a href="#">Mihail Loon</a></li>
-                                    <li><a href="#">Vasilij Blomberg</a></li>
-                                    <li><a href="#" class="show-more" data-toggle="tooltip" data-placement="bottom" title="All project admins"><i class="fa fa-ellipsis-h"></i></a></li>
-                                </ul>
-                            </td>
-                            <td class="participants">
-                                <ul>
-                                    <li><a href="#">Mihail Loon</a></li>
-                                    <li><a href="#">Vasilij Blomberg</a></li>
-                                    <li><a href="#" class="show-more" data-toggle="tooltip" data-placement="bottom" title="All project Managers"><i class="fa fa-ellipsis-h"></i></a></li>
-                                </ul>
-                            </td>
-                            <td class="shared-resources">
-                                <ul>
-                                    <li><a href="#">git hosting</a></li>
-                                    <li><a href="#">AWS</a></li>
-                                    <li><a href="#">Rackspace instance</a></li>
-                                </ul>
-                            </td>
-                            <td class="actions">
-                                <a href="#" class="view" data-toggle="tooltip" data-placement="bottom" title="Viwe"><i class="fa fa-eye"></i></a>
-                                <a href="#" class="conf" data-toggle="tooltip" data-placement="bottom" title="Settings"><i class="glyphicon glyphicon-compressed"></i></a>
-                                <a href="#" class="remove" data-toggle="tooltip" data-placement="bottom" title="Remove"><i class="fa fa-times"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="name"><a href="/project.html">G48s-11</a></td>
-                            <td class="description">Flag for new country</td>
-                            <td class="participants">
-                                <ul>
-                                    <li><a href="#">Mihail Loon</a></li>
-                                    <li><a href="#">Vasilij Blomberg</a></li>
-                                    <li><a href="#" class="show-more" data-toggle="tooltip" data-placement="bottom" title="All project admins"><i class="fa fa-ellipsis-h"></i></a></li>
-                                </ul>
-                            </td>
-                            <td class="participants">
-                                <ul>
-                                    <li><a href="#">Mihail Loon</a></li>
-                                    <li><a href="#">Vasilij Blomberg</a></li>
-                                    <li><a href="#" class="show-more" data-toggle="tooltip" data-placement="bottom" title="All project Managers"><i class="fa fa-ellipsis-h"></i></a></li>
-                                </ul>
-                            </td>
-                            <td class="shared-resources">
-                                <ul>
-                                    <li><a href="#">git hosting</a></li>
-                                    <li><a href="#">AWS</a></li>
-                                    <li><a href="#">Rackspace instance</a></li>
-                                </ul>
-                            </td>
-                            <td class="actions">
-                                <a href="#" class="view" data-toggle="tooltip" data-placement="bottom" title="Viwe project"><i class="fa fa-eye"></i></a>
-                                <a href="#" class="conf" data-toggle="tooltip" data-placement="bottom" title="Archive"><i class="glyphicon glyphicon-compressed"></i></a>
-                                <a href="#" class="remove" data-toggle="tooltip" data-placement="bottom" title="Remove project"><i class="fa fa-times"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="name"><a href="/project.html">G48s-11</a></td>
-                            <td class="description">Flag for new country</td>
-                            <td class="participants">
-                                <ul>
-                                    <li><a href="#">Mihail Loon</a></li>
-                                    <li><a href="#">Vasilij Blomberg</a></li>
-                                    <li><a href="#" class="show-more" data-toggle="tooltip" data-placement="bottom" title="All project admins"><i class="fa fa-ellipsis-h"></i></a></li>
-                                </ul>
-                            </td>
-                            <td class="participants">
-                                <ul>
-                                    <li><a href="#">Mihail Loon</a></li>
-                                    <li><a href="#">Vasilij Blomberg</a></li>
-                                    <li><a href="#" class="show-more" data-toggle="tooltip" data-placement="bottom" title="All project Managers"><i class="fa fa-ellipsis-h"></i></a></li>
-                                </ul>
-                            </td>
-                            <td class="shared-resources">
-                                <ul>
-                                    <li><a href="#">git hosting</a></li>
-                                    <li><a href="#">AWS</a></li>
-                                    <li><a href="#">Rackspace instance</a></li>
-                                </ul>
-                            </td>
-                            <td class="actions">
-                                <a href="#" class="view" data-toggle="tooltip" data-placement="bottom" title="Viwe project"><i class="fa fa-eye"></i></a>
-                                <a href="#" class="conf" data-toggle="tooltip" data-placement="bottom" title="Archive"><i class="glyphicon glyphicon-compressed"></i></a>
-                                <a href="#" class="remove" data-toggle="tooltip" data-placement="bottom" title="Remove project"><i class="fa fa-times"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="name"><a href="/project.html">G48s-11</a></td>
-                            <td class="description">Flag for new country</td>
-                            <td class="participants">
-                                <ul>
-                                    <li><a href="#">Mihail Loon</a></li>
-                                    <li><a href="#">Vasilij Blomberg</a></li>
-                                    <li><a href="#" class="show-more" data-toggle="tooltip" data-placement="bottom" title="All project admins"><i class="fa fa-ellipsis-h"></i></a></li>
-                                </ul>
-                            </td>
-                            <td class="participants">
-                                <ul>
-                                    <li><a href="#">Mihail Loon</a></li>
-                                    <li><a href="#">Vasilij Blomberg</a></li>
-                                    <li><a href="#" class="show-more" data-toggle="tooltip" data-placement="bottom" title="All project Managers"><i class="fa fa-ellipsis-h"></i></a></li>
-                                </ul>
-                            </td>
-                            <td class="shared-resources">
-                                <ul>
-                                    <li><a href="#">git hosting</a></li>
-                                    <li><a href="#">AWS</a></li>
-                                    <li><a href="#">Rackspace instance</a></li>
-                                </ul>
-                            </td>
-                            <td class="actions">
-                                <a href="#" class="view" data-toggle="tooltip" data-placement="bottom" title="Viwe project"><i class="fa fa-eye"></i></a>
-                                <a href="#" class="conf" data-toggle="tooltip" data-placement="bottom" title="Archive"><i class="glyphicon glyphicon-compressed"></i></a>
-                                <a href="#" class="remove" data-toggle="tooltip" data-placement="bottom" title="Remove project"><i class="fa fa-times"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="name"><a href="/project.html">G48s-11</a></td>
-                            <td class="description">Flag for new country</td>
-                            <td class="participants">
-                                <ul>
-                                    <li><a href="#">Mihail Loon</a></li>
-                                    <li><a href="#">Vasilij Blomberg</a></li>
-                                    <li><a href="#" class="show-more" data-toggle="tooltip" data-placement="bottom" title="All project admins"><i class="fa fa-ellipsis-h"></i></a></li>
-                                </ul>
-                            </td>
-                            <td class="participants">
-                                <ul>
-                                    <li><a href="#">Mihail Loon</a></li>
-                                    <li><a href="#">Vasilij Blomberg</a></li>
-                                    <li><a href="#" class="show-more" data-toggle="tooltip" data-placement="bottom" title="All project Managers"><i class="fa fa-ellipsis-h"></i></a></li>
-                                </ul>
-                            </td>
-                            <td class="shared-resources">
-                                <ul>
-                                    <li><a href="#">git hosting</a></li>
-                                    <li><a href="#">AWS</a></li>
-                                    <li><a href="#">Rackspace instance</a></li>
-                                </ul>
-                            </td>
-                            <td class="actions">
-                                <a href="#" class="view" data-toggle="tooltip" data-placement="bottom" title="Viwe project"><i class="fa fa-eye"></i></a>
-                                <a href="#" class="conf" data-toggle="tooltip" data-placement="bottom" title="Archive"><i class="glyphicon glyphicon-compressed"></i></a>
-                                <a href="#" class="remove" data-toggle="tooltip" data-placement="bottom" title="Remove project"><i class="fa fa-times"></i></a>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- /dash-block -->
-
-<!-- Help | Copyright | API -->
 
 <div class="app-footer">
     <div class="container-fluid">
@@ -499,6 +508,7 @@
     </div>
 </div>
 
+<!-- all modals -->
 <!-- Modal -->
 <div class="modal fade" id="addCustomer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">

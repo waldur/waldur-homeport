@@ -12,12 +12,6 @@
             display: none;
         }
     }
-    time.date {
-        @include inline-middle;
-        margin-left: 8px;
-        font-size: rem(12);
-        color: silver;
-    } // time.date
     .project-title {
         @include inline-middle;
         font-size: rem(22);
