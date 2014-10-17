@@ -6856,6 +6856,22 @@ img {
   color: #000;
 }
 
+.container-fluid {
+  width: 960px;
+}
+
+.container {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  width: 960px;
+  margin: auto;
+}
+
+.tooltip .tooltip-inner {
+  font-size: 1.2rem;
+}
+
 .modal-content {
   -webkit-box-shadow: none;
           box-shadow: none;
@@ -6891,6 +6907,11 @@ img {
 }
 .btn-primary:hover {
   background: #01BD66;
+}
+
+.more {
+  padding-top: 30px;
+  text-align: center;
 }
 
 .navbar-fixed-top {
@@ -7281,10 +7302,15 @@ img {
 .main-activity-item .notifications .notification .icon-box {
   width: 20px;
   text-align: center;
+  font-size: 1.4rem;
 }
 .main-activity-item .notifications .notification .notification-text {
   color: #9e9e9e;
   text-decoration: none;
+  font-size: 1.4rem;
+}
+.main-activity-item .notifications .notification .user {
+  font-size: 1.4rem;
 }
 .main-activity-item .notifications .notification .notification-action {
   font-size: 1.3rem;
@@ -7299,8 +7325,7 @@ img {
   width: 100%;
   height: 1px;
   border-bottom: 1px dashed #d2d2d2;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 20px;
 }
 
 .projects-list table.project-list-table {

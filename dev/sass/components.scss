@@ -1,3 +1,22 @@
+.container-fluid {
+    // padding-left: 40px;
+    // padding-right: 40px;
+    width: 960px;
+    // margin: auto;
+}
+
+.container {
+    box-sizing: border-box;
+    width: 960px;
+    margin: auto;
+} // container
+
+.tooltip {
+    .tooltip-inner {
+        font-size: rem(12);
+    }
+}
+
 .modal-content {
     box-shadow: none;
     border: none;
@@ -33,3 +52,8 @@
         background: #01BD66;
     }
 } // btn-primary
+
+.more {
+    padding-top: 30px;
+    text-align: center;
+} // more

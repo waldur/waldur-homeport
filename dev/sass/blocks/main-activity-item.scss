@@ -67,12 +67,16 @@
             .icon-box {
                 width: 20px;
                 text-align: center;
+                font-size: rem(14);
             } // icon-box
             .notification-text {
                 color: rgb(158, 158, 158);
                 text-decoration: none;
+                font-size: rem(14);
             } // notification-text
-            .user {} // user
+            .user {
+                font-size: rem(14);
+            } // user
             .notification-action {
                 @include small-black-link;
                 position: relative;
@@ -84,7 +88,6 @@
         width: 100%;
         height: 1px;
         border-bottom: 1px dashed #d2d2d2;
-        margin-top: 10px;
-        margin-bottom: 10px;
+        margin-top: 20px;
     } // separate
 } // main-activity-item
