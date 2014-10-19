@@ -6794,6 +6794,14 @@ time.date {
   color: silver;
 }
 
+.elem {
+  display: inline-block;
+  vertical-align: middle;
+}
+.elem + .elem {
+  margin-left: 8px;
+}
+
 .navbar-fixed-top {
   border-width: 0;
 }
@@ -7139,37 +7147,44 @@ time.date {
 .main-activity-item .controls-box .controls li a:hover {
   color: #000;
 }
-.main-activity-item .events {
+.main-activity-item .separate {
+  width: 100%;
+  height: 1px;
+  border-bottom: 1px dashed #d2d2d2;
+  margin-top: 20px;
+}
+
+.events {
   margin: 0;
   padding: 0;
 }
-.main-activity-item .events li {
+.events li {
   list-style: none;
 }
-.main-activity-item .events .event {
+.events .event {
   color: #9e9e9e;
 }
-.main-activity-item .events .event .elem {
+.events .event .elem {
   display: inline-block;
   vertical-align: middle;
 }
-.main-activity-item .events .event .elem + .elem {
+.events .event .elem + .elem {
   margin-left: .8rem;
 }
-.main-activity-item .events .event .icon-box {
+.events .event .icon-box {
   width: 20px;
   text-align: center;
   font-size: 1.4rem;
 }
-.main-activity-item .events .event .event-text {
+.events .event .event-text {
   color: #9e9e9e;
   text-decoration: none;
   font-size: 1.4rem;
 }
-.main-activity-item .events .event .user {
+.events .event .user {
   font-size: 1.4rem;
 }
-.main-activity-item .events .event .event-action {
+.events .event .event-action {
   font-size: 1.3rem;
   padding: 2px 0px;
   color: #000;
@@ -7177,12 +7192,6 @@ time.date {
   border-bottom: 1px dashed gray;
   position: relative;
   top: 1px;
-}
-.main-activity-item .separate {
-  width: 100%;
-  height: 1px;
-  border-bottom: 1px dashed #d2d2d2;
-  margin-top: 20px;
 }
 
 .projects-list table.project-list-table {
@@ -7296,12 +7305,17 @@ time.date {
   font-size: 1.4rem;
 }
 
+.project-single .project-title {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
 .event-single {
   margin-bottom: 40px;
 }
 .event-single .container-fluid {
   padding: 15px;
-  border: 1px dashed #A9A9A9;
+  border: 1px solid #dfdfdf;
 }
 .event-single .event-title {
   margin-top: 5px;
@@ -7346,6 +7360,7 @@ time.date {
 .event-single .event-info .project-title.grouped {
   position: relative;
   padding-right: 15px;
+  cursor: pointer;
 }
 .event-single .event-info .project-title.grouped:after {
   content: '\f0dd';

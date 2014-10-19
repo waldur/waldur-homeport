@@ -3,7 +3,7 @@
     .container-fluid {
         padding: 15px;
         // background: rgb(231, 231, 231);
-        border: 1px dashed #A9A9A9;
+        border: 1px solid #dfdfdf;
     }
     .event-title {
         margin-top: 5px;
@@ -40,6 +40,7 @@
             &.grouped {
                 position: relative;
                 padding-right: 15px;
+                cursor: pointer;
                 &:after {
                     content: '\f0dd';
                     position: absolute;

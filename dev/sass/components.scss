@@ -1,6 +1,6 @@
 .container-fluid {
-    // padding-left: 40px;
-    // padding-right: 40px;
+    // padding-left: 5%;
+    // padding-right: 5%;
     width: 960px;
     // margin: auto;
 }
@@ -72,3 +72,10 @@ time.date {
     font-size: rem(12);
     color: silver;
 } // simple-text
+
+.elem {
+    + .elem {
+        margin-left: 8px;
+    }
+    @include inline-middle;
+} // elem
