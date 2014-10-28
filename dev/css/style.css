@@ -6725,7 +6725,8 @@ img {
 }
 
 .container-fluid {
-  width: 960px;
+  padding-left: 5%;
+  padding-right: 5%;
 }
 
 .container {
@@ -7308,6 +7309,27 @@ time.date {
 .project-single .project-title {
   margin-top: 0px;
   margin-bottom: 0px;
+  font-size: 2.2rem;
+}
+.project-single .project-info {
+  color: #9e9e9e;
+  text-decoration: none;
+  font-size: 1.4rem;
+}
+.project-single .project-description {
+  padding: 15px;
+  padding-left: 0px;
+  color: #9e9e9e;
+  text-decoration: none;
+  font-size: 1.4rem;
+}
+.project-single .project-events {
+  padding: 15px;
+  padding-right: 0px;
+}
+.project-single .project-resources {
+  padding: 15px;
+  padding-left: 0px;
 }
 
 .event-single {

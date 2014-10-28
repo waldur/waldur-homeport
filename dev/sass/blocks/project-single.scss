@@ -2,5 +2,26 @@
     .project-title {
         margin-top: 0px;
         margin-bottom: 0px;
+        font-size: rem(22);
     } // project-title
+    .project-info {
+        color: #9e9e9e;
+        text-decoration: none;
+        font-size: 1.4rem;
+    } // project-info
+    .project-description {
+        padding: 15px;
+        padding-left: 0px;
+        color: #9e9e9e;
+        text-decoration: none;
+        font-size: 1.4rem;
+    }  // project-description
+    .project-events {
+        padding: 15px;
+        padding-right: 0px;
+    } // project-events
+    .project-resources {
+        padding: 15px;
+        padding-left: 0px;
+    } // project-resources
 } // project-single

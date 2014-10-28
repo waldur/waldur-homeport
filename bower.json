@@ -16,5 +16,6 @@
   "main": "index.html",
   "homepage": "http://mihailyakimenko.com/",
   "devDependencies": {
+    "angularjs": "~1.3.0"
   }
 }
