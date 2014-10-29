@@ -6725,8 +6725,8 @@ img {
 }
 
 .container-fluid {
-  padding-left: 5%;
-  padding-right: 5%;
+  padding-left: 10%;
+  padding-right: 10%;
 }
 
 .container {
@@ -7312,7 +7312,23 @@ time.date {
   margin-bottom: 0px;
   font-size: 2.2rem;
 }
-.project-single .project-info {
+.project-single .project-customer .user-pic {
+  display: inline-block;
+  vertical-align: middle;
+  width: 60px;
+  border-radius: 100%;
+}
+.project-single .project-customer h3 {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 2.4rem;
+  margin: 0;
+  margin-left: 10px;
+}
+.project-single .project-group {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid gray;
   color: #9e9e9e;
   text-decoration: none;
   font-size: 1.4rem;

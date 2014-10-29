@@ -4,11 +4,27 @@
         margin-bottom: 0px;
         font-size: rem(22);
     } // project-title
-    .project-info {
+    .project-customer {
+        .user-pic {
+            @include inline-middle;
+            width: 60px;
+            border-radius: 100%;
+        } // user-pic
+        h3 {
+            @include inline-middle;
+            font-size: rem(24);
+            margin: 0;
+            margin-left: 10px;
+        } // h3
+    } // project-customer
+    .project-group {
+        margin-top: 10px;
+        padding-top: 10px;
+        border-top: 1px solid gray;
         color: #9e9e9e;
         text-decoration: none;
         font-size: 1.4rem;
-    } // project-info
+    } // project-group
     .project-description {
         padding: 15px;
         padding-left: 0px;

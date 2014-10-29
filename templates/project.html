@@ -6,23 +6,25 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-8">
-                <h2 class="project-title">Project Gh-45</h2>
-                <div class="project-info">
-                    <div class="elem">
-                        customer: <a href="#">Ilja Livenson</a>
-                    </div>
-                    <div class="elem">
-                        group: <a href="#">Project Group</a>
-                    </div>
-                </div>
+                <h1 class="project-title">Project Gh-45</h1>
+                
                 <div class="project-description">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ac est volutpat, convallis nisi ac, pretium justo. Proin feugiat ligula sit amet ipsum efficitur, id interdum leo eleifend.
                 </div>
             </div>
             <div class="col-xs-4">
-                <!-- <button class="btn btn-default"><i class="fa fa-pencil-square-o"></i> edit</button>
-                <button class="btn btn-default"><i class="glyphicon glyphicon-compressed"></i> archive</button>
-                <button class="btn btn-default"><i class="fa fa-times"></i> delete</button> -->
+                <div class="project-customer">
+                    <img src="{{ url_for('static', filename='images/887178.jpg') }}" class="user-pic" alt="John Doe">
+                    <h3 class="title">Ilja Livenson</h3>
+                </div>
+                <div class="project-group">
+                    group: <a href="#">Project Group</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                
             </div>
         </div>
     </div>
