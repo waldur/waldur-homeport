@@ -34,7 +34,7 @@ install grunt pakcages && build static
 
 generate prototype
 
-`./app.py build`
+    ./app.py build
 
 [1]: http://mihailyakimenko.com
 [2]: http://whitescape.com
