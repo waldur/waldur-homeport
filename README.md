@@ -23,14 +23,14 @@ all packages from bower copied to dev/
 make virtual env
 activate your env & install dependens
 
-`virtualenv env`
-`source env/bin/activate`
-`pip install -r requirements.txt`
+    virtualenv env
+    source env/bin/activate
+    pip install -r requirements.txt
 
 install grunt pakcages && build static
 
-`npm install`
-`grunt build`
+    npm install
+    grunt build
 
 generate prototype
 
