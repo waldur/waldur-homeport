@@ -6,12 +6,13 @@
 
 ## Technology
 
-* [sass][3]
-* [Autoprefixer][4]
+* [sass][3] – for styles
+* [Autoprefixer][4] – for styles
+* [flask][7] - for render prototype
 
 ## Package manger [bower.io][5]
 
-all packages copied to dev/
+all packages from bower copied to dev/
 
 ## Automatization
 
@@ -19,14 +20,21 @@ all packages copied to dev/
 
 ## Usage
 
-folder `developer` – source of static
-folder `production` – production static
+make virtual env
+activate your env & install dependens
 
-Install `npm install` and `bower install`
+`virtualenv env`
+`source env/bin/activate`
+`pip install -r requirements.txt`
 
-Production `grunt build`
+install grunt pakcages && build static
 
-Develop `grunt` or `grunt run`
+`npm install`
+`grunt build`
+
+generate prototype
+
+`./app.py build`
 
 [1]: http://mihailyakimenko.com
 [2]: http://whitescape.com
@@ -34,3 +42,4 @@ Develop `grunt` or `grunt run`
 [4]: https://github.com/postcss/autoprefixer
 [5]: http://bower.io
 [6]: http://gruntjs.com
+[7]: http://flask.pocoo.org/
