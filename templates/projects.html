@@ -1,0 +1,119 @@
+{% extends 'base_account.html' %}
+
+{% block content %}
+<!-- dash-block -->
+<div class="dash-block" id="projects">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="dash-title-box">
+                    <h2 class="dash-title">Projects</h2>
+                    <ul class="sort">
+                        <li><a href="#" class="active">5</a></li>
+                        <li><a href="#">15</a></li>
+                        <li><a href="#">24</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="projects-list">
+                    <table class="project-list-table">
+                        <tr>
+                            <th class="name sort-down">Name</th>
+                            <th class="description sort-down">Description</th>
+                            <th class="participants sort-down" data-proj-sort="box">
+                                Admins <a class="search" data-proj-sort="name" data-toggle="tooltip" data-placement="bottom" title="By name"><i class="fa fa-search"></i></a>
+                                <div class="by-name-search" data-proj-sort="field">
+                                    <input type="text" placeholder="John Doe">
+                                </div>
+                            </th>
+                            <th class="participants sort-down" data-proj-sort="box">
+                                Managers <a class="search" data-proj-sort="name" data-toggle="tooltip" data-placement="bottom" title="By name"><i class="fa fa-search"></i></a>
+                                <div class="by-name-search" data-proj-sort="field">
+                                    <input type="text" placeholder="John Doe">
+                                </div>
+                            </th>
+                            <th class="shared-resources sort-down">Shared resources</th>
+                            <th class="actions sort-down">Actions</th>
+                        </tr>
+                        {% include 'includes/parts/project-list-item.html' %}
+                        {% include 'includes/parts/project-list-item.html' %}
+                        {% include 'includes/parts/project-list-item.html' %}
+                        {% include 'includes/parts/project-list-item.html' %}
+                        {% include 'includes/parts/project-list-item.html' %}
+                        {% include 'includes/parts/project-list-item.html' %}
+                        {% include 'includes/parts/project-list-item.html' %}
+                    </table>
+                    <!-- more -->
+                    <div class="more">
+                        <a href="#" class="btn btn-default">Show more</a>
+                    </div>
+                    <!-- /more -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /dash-block -->
+{% endblock %}
+
+{% block modals %}
+<!-- Modal -->
+<div class="modal fade" id="addCustomer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">Add Customer</h4>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary">Add</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="addProject" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">Add Project</h4>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary">Add</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="addResource" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">Add Resource</h4>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary">Add</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

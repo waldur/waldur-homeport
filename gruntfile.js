@@ -96,7 +96,7 @@ module.exports = function(grunt) {
             server: {
                 options: {
                     post: 8000, 
-                    base: './'
+                    base: './production/'
                 }
             }
         }
@@ -106,7 +106,8 @@ module.exports = function(grunt) {
     require('load-grunt-tasks')(grunt);
 
     grunt.registerTask('build', ['concat', 'uglify', 'imagemin', 'sass', 'autoprefixer', 'cssmin']);
-    grunt.registerTask('run', ['connect', 'concat', 'imagemin', 'sass', 'autoprefixer', 'watch']);
+    grunt.registerTask('run', ['concat', 'imagemin', 'sass', 'autoprefixer', 'watch']);
+    grunt.registerTask('serve', ['connect',]);
     grunt.registerTask('default', ['run'])
 
 };

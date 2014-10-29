@@ -1,0 +1,56 @@
+<!-- header -->
+<div class="app-header navbar navbar-fixed-top" role="navigation">         
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/"></a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="{{ url_for('dashboard') }}" class="" data-toggle="tooltip" data-placement="bottom" title="Dashboard">Dashboard</a></li>
+                <li><a href="{{ url_for('events') }}" class="" data-toggle="tooltip" data-placement="bottom" title="Events">Events</a></li>
+                <li><a href="{{ url_for('projects') }}" class="" data-toggle="tooltip" data-placement="bottom" title="Projects">Projects</a></li>
+                <li><a href="{{ url_for('dashboard') }}" class="" data-toggle="tooltip" data-placement="bottom" title="Resources">Resources</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown add-something-box">
+                    <a href="#" class="dropdown-toggle add-something-button" data-extra="tooltip" data-toggle="dropdown" data-placement="bottom" title="Create something...">
+                        <i class="fa fa-plus"></i>
+                    </a>
+                    <ul class="dropdown-menu add-something" role="menu">
+                        <li><a href="#" data-toggle="modal" data-target="#addCustomer"><i class="fa fa-user"></i> Add Customer</a></li>
+                        <li><a href="#" data-toggle="modal" data-target="#addProject"><i class="fa fa-desktop"></i> Add Project</a></li>
+                        <li><a href="#" data-toggle="modal" data-target="#addResource"><i class="fa fa-tasks"></i> Add Resource</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="custom-select">
+                        <select name="" id="">
+                            <option value="">Ilja Livenson</option>
+                        </select>
+                    </div>
+                </li>
+                <li>
+                    <img src="{{ url_for('static', filename='images/887178.jpg') }}" class="user-pic" alt="John Doe">
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle user-pic-box" data-toggle="dropdown">
+                        John Winner
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu user-drop" role="menu">
+                        <li><a href="#">Profile</a></li>
+                        <li><a href="#">Manage Customers</a></li>
+                        <li><a href="#">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</div>
+<!-- /header -->

@@ -7264,6 +7264,7 @@ time.date {
   color: #4b8add;
 }
 .projects-list table.project-list-table tr th .by-name-search {
+  width: 100%;
   display: none;
   position: absolute;
   left: 0px;

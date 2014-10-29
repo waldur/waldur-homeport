@@ -1,0 +1,90 @@
+{% extends 'base_account.html' %}
+
+{% block content %}
+<!-- project-single -->
+<div class="project-single">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-8">
+                <h2 class="project-title">Project Gh-45</h2>
+                <div class="project-info">
+                    <div class="elem">
+                        customer: <a href="#">Ilja Livenson</a>
+                    </div>
+                    <div class="elem">
+                        group: <a href="#">Project Group</a>
+                    </div>
+                </div>
+                <div class="project-description">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ac est volutpat, convallis nisi ac, pretium justo. Proin feugiat ligula sit amet ipsum efficitur, id interdum leo eleifend.
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <!-- <button class="btn btn-default"><i class="fa fa-pencil-square-o"></i> edit</button>
+                <button class="btn btn-default"><i class="glyphicon glyphicon-compressed"></i> archive</button>
+                <button class="btn btn-default"><i class="fa fa-times"></i> delete</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /project-single -->
+{% endblock %}
+
+{% block modals %}
+<!-- Modal -->
+<div class="modal fade" id="addCustomer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">Add Customer</h4>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary">Add</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="addProject" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">Add Project</h4>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary">Add</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="addResource" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">Add Resource</h4>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary">Add</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
