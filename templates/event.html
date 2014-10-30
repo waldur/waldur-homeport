@@ -4,31 +4,33 @@
 <!-- event-single -->
 <div class="event-single">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-6">
-                <!-- event-info -->
-                <div class="event-info">
-                    <div class="elem">
-                        <span class="simple-text">from </span> <a href="/project.html" class="project-title">Gh-45nd</a>
-                        <span class="simple-text">at</span> <time class="date"><i class="fa fa-calendar-o"></i> 17.10.2014 – <i class="fa fa-clock-o"></i> 16:02</time>
+        <div class="event-single-box">
+            <div class="row">
+                <div class="col-xs-6">
+                    <!-- event-info -->
+                    <div class="event-info">
+                        <div class="elem">
+                            <span class="simple-text">from </span> <a href="{{ url_for('project') }}" class="project-title">Gh-45nd</a>
+                            <span class="simple-text">at</span> <time class="date"><i class="fa fa-calendar-o"></i> 17.10.2014 – <i class="fa fa-clock-o"></i> 16:02</time>
+                        </div>
                     </div>
+                    <!-- /event-info -->
                 </div>
-                <!-- /event-info -->
+                <div class="col-xs-6 controls-box">
+                    <ul class="controls">
+                        <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Watch later"><i class="fa fa-clock-o"></i></a></li>
+                        <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Favorite"><i class="fa fa-star"></i></a></li>
+                    </ul>
+                </div>
             </div>
-            <div class="col-xs-6 controls-box">
-                <ul class="controls">
-                    <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Watch later"><i class="fa fa-clock-o"></i></a></li>
-                    <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Favorite"><i class="fa fa-star"></i></a></li>
-                </ul>
+            <h2 class="event-title"><a href="{{ url_for('event') }}" class="elem event-text">Sequrity task. Need to update bash on virtualhosts</a></h2>
+            <div class="event-description">
+                Discovered a security hole bash. To fix this you need to update to the latest version of bash.
+            </div>
+            <div class="event-info">
+                <a href="#" class="event-actions">update</a>
             </div>
         </div>
-        <h2 class="event-title"><a href="/event.html" class="elem event-text">Sequrity task. Need to update bash on virtualhosts</a></h2>
-        <div class="event-description">
-            Discovered a security hole bash. To fix this you need to update to the latest version of bash.
-        </div>
-        <div class="event-info">
-            <a href="#" class="event-actions">update</a>
-        </div>        
     </div>
 </div>
 <!-- /event-single -->
@@ -36,38 +38,39 @@
 <!-- event-single -->
 <div class="event-single">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-6">
-                <!-- event-info -->
-                <div class="event-info" data-grouped="box">
-                    <div class="elem">
-                        <span class="simple-text">from </span> <span data-grouped="trigger" class="project-title grouped">Grouped <b>10</b> projects</span>
-                        <span class="simple-text">at</span> <time class="date"><i class="fa fa-calendar-o"></i> 17.10.2014 – <i class="fa fa-clock-o"></i> 16:02</time>
-                    </div>
-                    <div data-grouped="show-grouped">
-                        <div class="gruoped-projects">
-                            <a href="/project.html">Gh-45nd</a>,
-                            <a href="/project.html">Gh-45nd</a>,
-                            <a href="/project.html">Gh-45nd</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- /event-info -->
-            </div>
-            <div class="col-xs-6 controls-box">
-                <ul class="controls">
-                    <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Watch later"><i class="fa fa-clock-o"></i></a></li>
-                    <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Favorite"><i class="fa fa-star"></i></a></li>
-                </ul>
-            </div>
+       <div class="event-single-box"> <div class="row">
+               <div class="col-xs-6">
+                   <!-- event-info -->
+                   <div class="event-info" data-grouped="box">
+                       <div class="elem">
+                           <span class="simple-text">from </span> <span data-grouped="trigger" class="project-title grouped">Grouped <b>10</b> projects</span>
+                           <span class="simple-text">at</span> <time class="date"><i class="fa fa-calendar-o"></i> 17.10.2014 – <i class="fa fa-clock-o"></i> 16:02</time>
+                       </div>
+                       <div data-grouped="show-grouped">
+                           <div class="gruoped-projects">
+                               <a href="{{ url_for('project') }}">Gh-45nd</a>,
+                               <a href="{{ url_for('project') }}">Gh-45nd</a>,
+                               <a href="{{ url_for('project') }}">Gh-45nd</a>
+                           </div>
+                       </div>
+                   </div>
+                   <!-- /event-info -->
+               </div>
+               <div class="col-xs-6 controls-box">
+                   <ul class="controls">
+                       <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Watch later"><i class="fa fa-clock-o"></i></a></li>
+                       <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Favorite"><i class="fa fa-star"></i></a></li>
+                   </ul>
+               </div>
+           </div>
+           <h2 class="event-title"><a href="{{ url_for('event') }}" class="elem event-text">Sequrity task. Need to update bash on virtualhosts</a></h2>
+           <div class="event-description">
+               Discovered a security hole bash. To fix this you need to update to the latest version of bash.
+           </div>
+           <div class="event-info">
+               <a href="#" class="event-actions">update all</a>
+           </div> 
         </div>
-        <h2 class="event-title"><a href="/event.html" class="elem event-text">Sequrity task. Need to update bash on virtualhosts</a></h2>
-        <div class="event-description">
-            Discovered a security hole bash. To fix this you need to update to the latest version of bash.
-        </div>
-        <div class="event-info">
-            <a href="#" class="event-actions">update all</a>
-        </div>        
     </div>
 </div>
 <!-- /event-single -->
@@ -92,338 +95,16 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="main-activities">
-                    <!-- main-activity-item -->
-                    <div class="main-activity-item" data-notify="single-notify">
-                        <!-- header -->
-                        <header class="row">
-                            <div class="col-xs-6">
-                                <a href="/project.html" class="project-title">Gh-45nd</a>
-                            </div>
-                            <div class="col-xs-6 controls-box">
-                                <ul class="controls">
-                                    <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Watch later"><i class="fa fa-clock-o"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Favorite"><i class="fa fa-star"></i></a></li>
-                                </ul>
-                            </div>
-                        </header>
-                        <!-- /header -->
-                        <!-- content -->
-                        <div class="content">
-                            <ul class="events">
-                                <li class="event">
-                                    <span class="elem icon-box"><i class="fa fa-shield"></i></span>
-                                    <a href="/event.html" class="elem event-text">Sequrity task. Need to update bash on virtualhosts</a>
-                                    <a href="#" class="elem event-action">Update all</a>
-                                </li>
-                                <li class="event">
-                                    <span class="elem icon-box"><i class="fa fa-cloud"></i></span>
-                                    <a href="/event.html" class="elem event-text">Need to billing aws</a>
-                                </li>
-                                <li class="event">
-                                    <a href="/event.html" class="elem event-text">Need to send event for</a>
-                                    <span class="elem user"><a href="#"><i class="fa fa-user"></i> Andrey Titula</a></span>
-                                    <a href="#" class="elem event-action">Send event</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- separate -->
-                        <div class="separate"></div>
-                    </div>
-                    <!-- /main-activity-item -->
-                    <!-- main-activity-item -->
-                    <div class="main-activity-item" data-notify="single-notify">
-                        <!-- header -->
-                        <header class="row">
-                            <div class="col-xs-6">
-                                <a href="/project.html" class="project-title">Gh-45nd</a>
-                            </div>
-                            <div class="col-xs-6 controls-box">
-                                <ul class="controls">
-                                    <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Watch later"><i class="fa fa-clock-o"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Favorite"><i class="fa fa-star"></i></a></li>
-                                </ul>
-                            </div>
-                        </header>
-                        <!-- /header -->
-                        <!-- content -->
-                        <div class="content">
-                            <ul class="events">
-                                <li class="event">
-                                    <span class="elem icon-box"><i class="fa fa-shield"></i></span>
-                                    <a href="/event.html" class="elem event-text">Sequrity task. Need to update bash on virtualhosts</a>
-                                    <a href="#" class="elem event-action">Update all</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- separate -->
-                        <div class="separate"></div>
-                    </div>
-                    <!-- /main-activity-item -->
-                    <!-- main-activity-item -->
-                    <div class="main-activity-item" data-notify="single-notify">
-                        <!-- header -->
-                        <header class="row">
-                            <div class="col-xs-6">
-                                <a href="/project.html" class="project-title">Gh-45nd</a>
-                            </div>
-                            <div class="col-xs-6 controls-box">
-                                <ul class="controls">
-                                    <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Watch later"><i class="fa fa-clock-o"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Favorite"><i class="fa fa-star"></i></a></li>
-                                </ul>
-                            </div>
-                        </header>
-                        <!-- /header -->
-                        <!-- content -->
-                        <div class="content">
-                            <ul class="events">
-                                <li class="event">
-                                    <span class="elem icon-box"><i class="fa fa-cloud"></i></span>
-                                    <a href="/event.html" class="elem event-text">Need to billing aws</a>
-                                </li>
-                                <li class="event">
-                                    <a href="/event.html" class="elem event-text">Need to send event for</a>
-                                    <span class="elem user"><a href="#"><i class="fa fa-user"></i> Andrey Titula</a></span>
-                                    <a href="#" class="elem event-action">Send event</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- separate -->
-                        <div class="separate"></div>
-                    </div>
-                    <!-- /main-activity-item -->
-                    <!-- main-activity-item -->
-                    <div class="main-activity-item" data-notify="single-notify">
-                        <!-- header -->
-                        <header class="row">
-                            <div class="col-xs-6">
-                                <a href="/project.html" class="project-title">Gh-45nd</a>
-                            </div>
-                            <div class="col-xs-6 controls-box">
-                                <ul class="controls">
-                                    <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Watch later"><i class="fa fa-clock-o"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Favorite"><i class="fa fa-star"></i></a></li>
-                                </ul>
-                            </div>
-                        </header>
-                        <!-- /header -->
-                        <!-- content -->
-                        <div class="content">
-                            <ul class="events">
-                                <li class="event">
-                                    <span class="elem icon-box"><i class="fa fa-cloud"></i></span>
-                                    <a href="/event.html" class="elem event-text">Need to billing aws</a>
-                                </li>
-                                <li class="event">
-                                    <a href="/event.html" class="elem event-text">Need to send event for</a>
-                                    <span class="elem user"><a href="#"><i class="fa fa-user"></i> Andrey Titula</a></span>
-                                    <a href="#" class="elem event-action">Send event</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- separate -->
-                        <div class="separate"></div>
-                    </div>
-                    <!-- /main-activity-item -->
-                    <!-- main-activity-item -->
-                    <div class="main-activity-item" data-notify="single-notify">
-                        <!-- header -->
-                        <header class="row">
-                            <div class="col-xs-6">
-                                <a href="/project.html" class="project-title">Gh-45nd</a>
-                            </div>
-                            <div class="col-xs-6 controls-box">
-                                <ul class="controls">
-                                    <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Watch later"><i class="fa fa-clock-o"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Favorite"><i class="fa fa-star"></i></a></li>
-                                </ul>
-                            </div>
-                        </header>
-                        <!-- /header -->
-                        <!-- content -->
-                        <div class="content">
-                            <ul class="events">
-                                <li class="event">
-                                    <span class="elem icon-box"><i class="fa fa-cloud"></i></span>
-                                    <a href="/event.html" class="elem event-text">Need to billing aws</a>
-                                </li>
-                                <li class="event">
-                                    <a href="/event.html" class="elem event-text">Need to send event for</a>
-                                    <span class="elem user"><a href="#"><i class="fa fa-user"></i> Andrey Titula</a></span>
-                                    <a href="#" class="elem event-action">Send event</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- separate -->
-                        <div class="separate"></div>
-                    </div>
-                    <!-- /main-activity-item -->
-                                        <!-- main-activity-item -->
-                    <div class="main-activity-item" data-notify="single-notify">
-                        <!-- header -->
-                        <header class="row">
-                            <div class="col-xs-6">
-                                <a href="/project.html" class="project-title">Gh-45nd</a>
-                            </div>
-                            <div class="col-xs-6 controls-box">
-                                <ul class="controls">
-                                    <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Watch later"><i class="fa fa-clock-o"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Favorite"><i class="fa fa-star"></i></a></li>
-                                </ul>
-                            </div>
-                        </header>
-                        <!-- /header -->
-                        <!-- content -->
-                        <div class="content">
-                            <ul class="events">
-                                <li class="event">
-                                    <span class="elem icon-box"><i class="fa fa-shield"></i></span>
-                                    <a href="/event.html" class="elem event-text">Sequrity task. Need to update bash on virtualhosts</a>
-                                    <a href="#" class="elem event-action">Update all</a>
-                                </li>
-                                <li class="event">
-                                    <span class="elem icon-box"><i class="fa fa-cloud"></i></span>
-                                    <a href="/event.html" class="elem event-text">Need to billing aws</a>
-                                </li>
-                                <li class="event">
-                                    <a href="/event.html" class="elem event-text">Need to send event for</a>
-                                    <span class="elem user"><a href="#"><i class="fa fa-user"></i> Andrey Titula</a></span>
-                                    <a href="#" class="elem event-action">Send event</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- separate -->
-                        <div class="separate"></div>
-                    </div>
-                    <!-- /main-activity-item -->
-                    <!-- main-activity-item -->
-                    <div class="main-activity-item" data-notify="single-notify">
-                        <!-- header -->
-                        <header class="row">
-                            <div class="col-xs-6">
-                                <a href="/project.html" class="project-title">Gh-45nd</a>
-                            </div>
-                            <div class="col-xs-6 controls-box">
-                                <ul class="controls">
-                                    <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Watch later"><i class="fa fa-clock-o"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Favorite"><i class="fa fa-star"></i></a></li>
-                                </ul>
-                            </div>
-                        </header>
-                        <!-- /header -->
-                        <!-- content -->
-                        <div class="content">
-                            <ul class="events">
-                                <li class="event">
-                                    <span class="elem icon-box"><i class="fa fa-shield"></i></span>
-                                    <a href="/event.html" class="elem event-text">Sequrity task. Need to update bash on virtualhosts</a>
-                                    <a href="#" class="elem event-action">Update all</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- separate -->
-                        <div class="separate"></div>
-                    </div>
-                    <!-- /main-activity-item -->
-                    <!-- main-activity-item -->
-                    <div class="main-activity-item" data-notify="single-notify">
-                        <!-- header -->
-                        <header class="row">
-                            <div class="col-xs-6">
-                                <a href="/project.html" class="project-title">Gh-45nd</a>
-                            </div>
-                            <div class="col-xs-6 controls-box">
-                                <ul class="controls">
-                                    <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Watch later"><i class="fa fa-clock-o"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Favorite"><i class="fa fa-star"></i></a></li>
-                                </ul>
-                            </div>
-                        </header>
-                        <!-- /header -->
-                        <!-- content -->
-                        <div class="content">
-                            <ul class="events">
-                                <li class="event">
-                                    <span class="elem icon-box"><i class="fa fa-cloud"></i></span>
-                                    <a href="/event.html" class="elem event-text">Need to billing aws</a>
-                                </li>
-                                <li class="event">
-                                    <a href="/event.html" class="elem event-text">Need to send event for</a>
-                                    <span class="elem user"><a href="#"><i class="fa fa-user"></i> Andrey Titula</a></span>
-                                    <a href="#" class="elem event-action">Send event</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- separate -->
-                        <div class="separate"></div>
-                    </div>
-                    <!-- /main-activity-item -->
-                    <!-- main-activity-item -->
-                    <div class="main-activity-item" data-notify="single-notify">
-                        <!-- header -->
-                        <header class="row">
-                            <div class="col-xs-6">
-                                <a href="/project.html" class="project-title">Gh-45nd</a>
-                            </div>
-                            <div class="col-xs-6 controls-box">
-                                <ul class="controls">
-                                    <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Watch later"><i class="fa fa-clock-o"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Favorite"><i class="fa fa-star"></i></a></li>
-                                </ul>
-                            </div>
-                        </header>
-                        <!-- /header -->
-                        <!-- content -->
-                        <div class="content">
-                            <ul class="events">
-                                <li class="event">
-                                    <span class="elem icon-box"><i class="fa fa-cloud"></i></span>
-                                    <a href="/event.html" class="elem event-text">Need to billing aws</a>
-                                </li>
-                                <li class="event">
-                                    <a href="/event.html" class="elem event-text">Need to send event for</a>
-                                    <span class="elem user"><a href="#"><i class="fa fa-user"></i> Andrey Titula</a></span>
-                                    <a href="#" class="elem event-action">Send event</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- separate -->
-                        <div class="separate"></div>
-                    </div>
-                    <!-- /main-activity-item -->
-                    <!-- main-activity-item -->
-                    <div class="main-activity-item" data-notify="single-notify">
-                        <!-- header -->
-                        <header class="row">
-                            <div class="col-xs-6">
-                                <a href="/project.html" class="project-title">Gh-45nd</a>
-                            </div>
-                            <div class="col-xs-6 controls-box">
-                                <ul class="controls">
-                                    <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Watch later"><i class="fa fa-clock-o"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Favorite"><i class="fa fa-star"></i></a></li>
-                                </ul>
-                            </div>
-                        </header>
-                        <!-- /header -->
-                        <!-- content -->
-                        <div class="content">
-                            <ul class="events">
-                                <li class="event">
-                                    <span class="elem icon-box"><i class="fa fa-cloud"></i></span>
-                                    <a href="/event.html" class="elem event-text">Need to billing aws</a>
-                                </li>
-                                <li class="event">
-                                    <a href="/event.html" class="elem event-text">Need to send event for</a>
-                                    <span class="elem user"><a href="#"><i class="fa fa-user"></i> Andrey Titula</a></span>
-                                    <a href="#" class="elem event-action">Send event</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- separate -->
-                        <div class="separate"></div>
-                    </div>
-                    <!-- /main-activity-item -->
+                    {% include 'includes/parts/event-list-item.html' %}
+                    {% include 'includes/parts/event-list-item.html' %}
+                    {% include 'includes/parts/event-list-item.html' %}
+                    {% include 'includes/parts/event-list-item.html' %}
+                    {% include 'includes/parts/event-list-item.html' %}
+                    {% include 'includes/parts/event-list-item.html' %}
+                    {% include 'includes/parts/event-list-item.html' %}
+                    {% include 'includes/parts/event-list-item.html' %}
+                    {% include 'includes/parts/event-list-item.html' %}
+                    {% include 'includes/parts/event-list-item.html' %}
                 </div>
             </div>
         </div>

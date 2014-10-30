@@ -1,4 +1,4 @@
-.main-activity-item {
+.event {
     border-left: 1px solid #dfdfdf;
     padding: 10px 20px 10px 20px;
     // position: relative;
@@ -54,11 +54,7 @@
         border-bottom: 1px dashed #d2d2d2;
         margin-top: 20px;
     } // separate
-} // main-activity-item
-.events {
-    @include clear-list;
-    .event {
-        color: rgb(158, 158, 158);
+    .content {
         .elem {
             @include inline-middle;
             + .elem {
@@ -83,5 +79,5 @@
             position: relative;
             top: 1px;
         } // event-action
-    } // event
-} // events
+    } // content
+} // main-activity-item

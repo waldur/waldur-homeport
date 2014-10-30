@@ -43,6 +43,11 @@
     .nav-tabs {
         margin-top: 20px;
         margin-bottom: 20px;
+        li {
+            a {
+                color: #000;
+            } // a
+        } // li
     } // nav-tabs
     .tab-content {
         margin-top: 20px;
