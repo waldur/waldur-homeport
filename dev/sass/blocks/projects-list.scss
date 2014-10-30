@@ -47,6 +47,7 @@
             }
             th, td {
                 padding: 10px 15px;
+                font-size: rem(14);
             }
             th {
                 + th {
@@ -74,7 +75,15 @@
                         content: '\f0dd';
                     }
                 }
+                .th-label {
+                    @include inline-middle;
+                    max-width: calc(100% - 30px);
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    overflow: hidden;
+                } // th-label
                 .search {
+                    @include inline-middle;
                     @include black-link;
                     margin-left: .8rem;
                     &.active {

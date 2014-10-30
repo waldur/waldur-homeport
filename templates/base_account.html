@@ -26,22 +26,11 @@
 
 {% include 'includes/app-header.html' %}
 
-<!-- left-nav -->
-<!-- <nav class="dash-nav">
-    <ul>
-        <li><a href="#stats"><i class="fa fa-bar-chart"></i></a></li>
-        <li><a href="#eventlog"><i class="fa fa-bullhorn"></i></a></li>
-        <li><a href="#projects"><i class="fa fa-desktop"></i></a></li>
-    </ul>
-</nav> -->
-<!-- /left-nav -->
+{% block side_menu %}
+{% endblock %}
 
-<div class="content-container">
-    {% block content %}
-    {% endblock %}
-    {% block side_menu %}
-    {% endblock %}
-</div>
+{% block content %}
+{% endblock %}
 
 {% block modals %}
 {% endblock %}

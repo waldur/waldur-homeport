@@ -53,22 +53,25 @@
                 <div class="projects-list">
                     <table class="project-list-table">
                         <tr>
-                            <th class="name sort-down">Name</th>
-                            <th class="description sort-down">Description</th>
+                            <th class="name sort-down">
+                                <div class="th-label" data-toggle="tooltip" data-placement="top" title="Name">Name</div>
+                            </th>
+                            <th class="description sort-down">
+                                <div class="th-label" data-toggle="tooltip" data-placement="top" title="Description">Description</div>
+                            </th>
                             <th class="participants sort-down" data-proj-sort="box">
-                                Admins <a class="search" data-proj-sort="name" data-toggle="tooltip" data-placement="bottom" title="By name"><i class="fa fa-search"></i></a>
+                                <div class="th-label" data-toggle="tooltip" data-placement="top" title="Administrators">Administrators</div> 
+                                <a class="search" data-proj-sort="name" data-toggle="tooltip" data-placement="bottom" title="By name"><i class="fa fa-search"></i></a>
                                 <div class="by-name-search" data-proj-sort="field">
                                     <input type="text" placeholder="John Doe">
                                 </div>
                             </th>
-                            <th class="participants sort-down" data-proj-sort="box">
-                                Managers <a class="search" data-proj-sort="name" data-toggle="tooltip" data-placement="bottom" title="By name"><i class="fa fa-search"></i></a>
-                                <div class="by-name-search" data-proj-sort="field">
-                                    <input type="text" placeholder="John Doe">
-                                </div>
+                            <th class="shared-resources sort-down">
+                                <div class="th-label" data-toggle="tooltip" data-placement="top" title="Shared resources">Shared resources</div>
                             </th>
-                            <th class="shared-resources sort-down">Shared resources</th>
-                            <th class="actions sort-down">Actions</th>
+                            <th class="actions sort-down">
+                                <div class="th-label" data-toggle="tooltip" data-placement="top" title="Actions">Actions</div>
+                            </th>
                         </tr>
                         {% include 'includes/parts/project-list-item.html' %}
                         {% include 'includes/parts/project-list-item.html' %}

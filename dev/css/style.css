@@ -7006,60 +7006,38 @@ time.date {
   text-decoration: none;
 }
 
-.dash-nav {
-  position: fixed;
-  right: 20px;
-  top: 50%;
-}
-.dash-nav ul {
-  margin: 0;
-  padding: 0;
-}
-.dash-nav ul li {
-  list-style: none;
-}
-.dash-nav ul li a {
-  display: block;
-  padding: 10px;
-  background-color: transparent;
-  color: #1F3305;
-  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.54);
-}
-.dash-nav ul li a.active {
-  color: #066D7B;
-}
-
 .dash-block + .dash-block {
   margin-top: 40px;
 }
-.dash-block .dash-title-box {
+
+.dash-title-box {
   text-align: center;
   margin-bottom: 40px;
 }
-.dash-block .dash-title-box .dash-title {
+.dash-title-box .dash-title {
   display: inline-block;
   vertical-align: middle;
   margin: 0;
   font-size: 2.2rem;
 }
-.dash-block .dash-title-box .sort {
+.dash-title-box .sort {
   display: inline-block;
   vertical-align: middle;
   margin: 0;
   padding: 0;
 }
-.dash-block .dash-title-box .sort li {
+.dash-title-box .sort li {
   list-style: none;
 }
-.dash-block .dash-title-box .sort li {
+.dash-title-box .sort li {
   display: inline-block;
   vertical-align: middle;
 }
-.dash-block .dash-title-box .sort li.divid {
+.dash-title-box .sort li.divid {
   border-left: 1px solid silver;
   margin-left: 10px;
 }
-.dash-block .dash-title-box .sort li a {
+.dash-title-box .sort li a {
   display: inline-block;
   vertical-align: middle;
   color: #000;
@@ -7071,10 +7049,10 @@ time.date {
   position: relative;
   margin-left: 10px;
 }
-.dash-block .dash-title-box .sort li a.active {
+.dash-title-box .sort li a.active {
   opacity: 1;
 }
-.dash-block .dash-title-box .sort li a:after {
+.dash-title-box .sort li a:after {
   display: none;
   content: '';
   position: absolute;
@@ -7087,11 +7065,11 @@ time.date {
   border-width: 6px 5px 0 5px;
   border-color: #27ae60 transparent transparent transparent;
 }
-.dash-block .dash-title-box .sort li a.active {
+.dash-title-box .sort li a.active {
   border-bottom: 1px solid #27ae60;
   opacity: 1;
 }
-.dash-block .dash-title-box .sort li a.active:after {
+.dash-title-box .sort li a.active:after {
   display: inline-block;
 }
 
@@ -7189,6 +7167,13 @@ time.date {
   position: relative;
   top: 1px;
 }
+.event .content .specifications {
+  margin: 0;
+  padding: 0;
+}
+.event .content .specifications li {
+  list-style: none;
+}
 
 .projects-list table.project-list-table {
   width: 100%;
@@ -7224,6 +7209,7 @@ time.date {
 }
 .projects-list table.project-list-table tr th, .projects-list table.project-list-table tr td {
   padding: 10px 15px;
+  font-size: 1.4rem;
 }
 .projects-list table.project-list-table tr th {
   cursor: pointer;
@@ -7248,7 +7234,17 @@ time.date {
 .projects-list table.project-list-table tr th.sort-down:after {
   content: '\f0dd';
 }
+.projects-list table.project-list-table tr th .th-label {
+  display: inline-block;
+  vertical-align: middle;
+  max-width: calc(100% - 30px);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
 .projects-list table.project-list-table tr th .search {
+  display: inline-block;
+  vertical-align: middle;
   color: #000;
   margin-left: .8rem;
 }
@@ -7358,7 +7354,7 @@ time.date {
   padding-left: 0px;
   padding-right: 0px;
 }
-.project-single .tab-content .tab-pane .main-activity-item {
+.project-single .tab-content .tab-pane .event {
   padding-right: 0px;
 }
 
@@ -7460,6 +7456,53 @@ time.date {
   margin-top: 20px;
   margin-bottom: 20px;
   text-align: center;
+}
+
+.side-menu {
+  position: absolute;
+  right: 10px;
+  top: 100px;
+  z-index: 999;
+  width: 40px;
+  box-shadow: inset 1px 0 0 #eee;
+  background-image: linear-gradient(to right, #f6f6f6 0%, #fff 8px);
+}
+.side-menu:before {
+  content: '';
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  background-image: linear-gradient(#fff, rgba(255, 255, 255, 0));
+  position: absolute;
+  width: 100%;
+  height: 15px;
+}
+.side-menu:after {
+  content: '';
+  left: 0;
+  bottom: 0;
+  background-color: transparent;
+  background-image: linear-gradient(rgba(255, 255, 255, 0), #fff);
+  position: absolute;
+  width: 100%;
+  height: 15px;
+}
+.side-menu ul {
+  margin: 0;
+  padding: 0;
+}
+.side-menu ul li {
+  list-style: none;
+}
+.side-menu ul li a {
+  text-align: center;
+  display: block;
+  padding: 10px;
+  color: #1F3305;
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.54);
+}
+.side-menu ul li a.active {
+  color: #066D7B;
 }
 
 /*# sourceMappingURL=style.css.map */

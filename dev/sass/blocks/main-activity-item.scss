@@ -79,5 +79,8 @@
             position: relative;
             top: 1px;
         } // event-action
+        .specifications {
+            @include clear-list;
+        } // specifications
     } // content
 } // main-activity-item
