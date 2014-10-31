@@ -7644,15 +7644,38 @@ time.date {
 .side-menu ul li {
   list-style: none;
 }
+.side-menu ul li {
+  position: relative;
+}
 .side-menu ul li a {
   text-align: center;
   display: block;
-  padding: 10px;
   color: #1F3305;
   text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.54);
+  padding: 10px;
 }
 .side-menu ul li a.active {
   color: #066D7B;
+}
+.side-menu ul li.settings .tooltip.left {
+  top: 10px !important;
+  left: -74px !important;
+}
+.side-menu ul li.settings .tooltip.left .tooltip-arrow {
+  top: 50% !important;
+}
+.side-menu ul li.settings .tooltip.left .tooltip-arrow .tooltip-inner {
+  margin-right: 20px;
+}
+.side-menu ul li.add .tooltip.left {
+  top: 10px !important;
+  left: -88px !important;
+}
+.side-menu ul li.add .tooltip.left .tooltip-arrow {
+  top: 50% !important;
+}
+.side-menu ul li.add .tooltip.left .tooltip-arrow .tooltip-inner {
+  margin-right: 20px;
 }
 
 .pagination {

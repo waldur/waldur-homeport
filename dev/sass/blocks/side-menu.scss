@@ -32,19 +32,44 @@
     ul {
         @include clear-list;
         li {
-            // border-right: 6px solid gray;
+            position: relative;
             a {
                 text-align: center;
                 display: block;
-                padding: 10px;
-                // background-color: #9ECF5D;
-                // background-color: rgba(0, 0, 0, 0);
                 color: #1F3305;
                 text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.54);
+                padding: 10px;
                 &.active {
                     color: #066D7B;
                 }
             }
+            // tempory css, crap this is awesome bootstrap!
+            &.settings {
+                .tooltip.left {
+                    top: 10px !important;
+                    left: -74px !important;
+                    .tooltip-arrow {
+                        top: 50% !important;
+                        // padding-right: 20px;
+                        .tooltip-inner {
+                            margin-right: 20px;
+                        } // tooltip-inner
+                    } // .tooltip-arrow
+                } // .tooltip.left
+            }
+            &.add {
+                .tooltip.left {
+                    top: 10px !important;
+                    left: -88px !important;
+                    .tooltip-arrow {
+                        top: 50% !important;
+                        // padding-right: 20px;
+                        .tooltip-inner {
+                            margin-right: 20px;
+                        } // tooltip-inner
+                    } // .tooltip-arrow
+                } // .tooltip.left
+            }
         }
-    }
+    } // ul
 } // side-menu

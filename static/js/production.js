@@ -11340,6 +11340,13 @@ return jQuery;
         });        
     }
 
+    // function fixBStooltips() {
+    //     $('.side-menu ul .tooltip.left').each(function() {
+    //         tipWidth = $(this).outerWidth();
+    //         $(this).css('left', -tooltip);
+    //     });
+    // }
+
     // document ready
     $(document).ready(function() {
         // bs tooltips
@@ -11349,6 +11356,7 @@ return jQuery;
         byNameinProjects();
         dashNav();
         showGrouped();
+        // fixBStooltips();
     });
 
     // all initial on window resize

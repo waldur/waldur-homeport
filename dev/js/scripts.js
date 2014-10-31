@@ -41,6 +41,13 @@
         });        
     }
 
+    // function fixBStooltips() {
+    //     $('.side-menu ul .tooltip.left').each(function() {
+    //         tipWidth = $(this).outerWidth();
+    //         $(this).css('left', -tooltip);
+    //     });
+    // }
+
     // document ready
     $(document).ready(function() {
         // bs tooltips
@@ -50,6 +57,7 @@
         byNameinProjects();
         dashNav();
         showGrouped();
+        // fixBStooltips();
     });
 
     // all initial on window resize
