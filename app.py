@@ -44,6 +44,10 @@ def projects():
 def project():
     return render_template('project.html')
 
+@app.route('/resources/')
+def resources():
+    return render_template('resources.html')
+
 # @app.route('/404.html')
 # def error404():
 #     return render_template('404.html')

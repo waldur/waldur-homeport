@@ -25,13 +25,13 @@
             </div>
             <div class="row">
                 <ul class="nav nav-tabs" role="tablist">
-                    <li class="active">
+                    <li>
                         <a href="#eventlog" role="tab" data-toggle="tab">
                             Events
                             <span class="label label-success">11</span>
                         </a>
                     </li>
-                    <li>
+                    <li class="active">
                         <a href="#resources" role="tab" data-toggle="tab">
                             Resources
                             <span class="label label-success">12</span>
@@ -46,7 +46,7 @@
                 </ul>
             </div>
             <div class="row tab-content">
-                <div class="col-xs-12 tab-pane active" id="eventlog">
+                <div class="col-xs-12 tab-pane" id="eventlog">
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="dash-title-box">
@@ -79,15 +79,19 @@
                     </div>
                     <!-- /more -->
                 </div>
-                <div class="col-xs-12 tab-pane" id="resources">
+                <div class="col-xs-12 tab-pane active" id="resources">
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="dash-title-box">
-                                <h2 class="dash-title">Projects</h2>
+                                <h2 class="dash-title">Resources</h2>
                                 <ul class="sort">
                                     <li><a href="#" class="active">5</a></li>
                                     <li><a href="#">15</a></li>
                                     <li><a href="#">24</a></li>
+                                    <li class="divid">
+                                        <a href="#" class="conf">hosting</a>
+                                    </li>
+                                    <li><a href="#">repository</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -101,47 +105,44 @@
                                 <th class="description sort-down">
                                     <div class="th-label" data-toggle="tooltip" data-placement="top" title="Description">Description</div>
                                 </th>
-                                <th class="participants sort-down" data-proj-sort="box">
-                                    <div class="th-label" data-toggle="tooltip" data-placement="top" title="Customer Owners">Customer Owners</div> 
-                                    <a class="search" data-proj-sort="name" data-toggle="tooltip" data-placement="bottom" title="By name"><i class="fa fa-search"></i></a>
-                                    <div class="by-name-search" data-proj-sort="field">
-                                        <input type="text" placeholder="John Doe">
-                                    </div>
-                                </th>
-                                <th class="participants sort-down" data-proj-sort="box">
+                                <!-- <th class="participants sort-down" data-proj-sort="box">
                                     <div class="th-label" data-toggle="tooltip" data-placement="top" title="Admins">Admins</div> 
                                     <a class="search" data-proj-sort="name" data-toggle="tooltip" data-placement="bottom" title="By name"><i class="fa fa-search"></i></a>
                                     <div class="by-name-search" data-proj-sort="field">
                                         <input type="text" placeholder="John Doe">
                                     </div>
-                                </th>
-                                <th class="participants sort-down" data-proj-sort="box">
-                                    <div class="th-label" data-toggle="tooltip" data-placement="top" title="Managers">Managers</div> 
-                                    <a class="search" data-proj-sort="name" data-toggle="tooltip" data-placement="bottom" title="By name"><i class="fa fa-search"></i></a>
+                                </th> -->
+                                <th class="shared-resources sort-down" data-proj-sort="box">
+                                    <div class="th-label" data-toggle="tooltip" data-placement="top" title="IPs">IPs</div>
+                                    <a class="search" data-proj-sort="name" data-toggle="tooltip" data-placement="bottom" title="By IP"><i class="fa fa-search"></i></a>
                                     <div class="by-name-search" data-proj-sort="field">
-                                        <input type="text" placeholder="John Doe">
+                                        <input type="text" placeholder="31.11.231.121">
                                     </div>
-                                </th>
-                                <th class="shared-resources sort-down">
-                                    <div class="th-label" data-toggle="tooltip" data-placement="top" title="Shared resources">Shared resources</div>
                                 </th>
                                 <th class="actions sort-down">
                                     <div class="th-label" data-toggle="tooltip" data-placement="top" title="Actions">Actions</div>
                                 </th>
                             </tr>
-                            {% include 'includes/parts/project-list-item.html' %}
-                            {% include 'includes/parts/project-list-item.html' %}
-                            {% include 'includes/parts/project-list-item.html' %}
-                            {% include 'includes/parts/project-list-item.html' %}
-                            {% include 'includes/parts/project-list-item.html' %}
-                            {% include 'includes/parts/project-list-item.html' %}
-                            {% include 'includes/parts/project-list-item.html' %}
+                            {% include 'includes/parts/resource-list-item-project.html' %}
+                            {% include 'includes/parts/resource-list-item-project.html' %}
+                            {% include 'includes/parts/resource-list-item-project.html' %}
+                            {% include 'includes/parts/resource-list-item-project.html' %}
+                            {% include 'includes/parts/resource-list-item-project.html' %}
+                            {% include 'includes/parts/resource-list-item-project.html' %}
+                            {% include 'includes/parts/resource-list-item-project.html' %}
                         </table>
-                        <!-- more -->
-                        <div class="more">
-                            <a href="#" class="btn btn-default">Show more</a>
+                        <!-- pagination -->
+                        <div class="pagination">
+                            <ul>
+                                <li><span>list pages:</span></li>
+                                <li><a href="#" class="current">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">5</a></li>
+                            </ul>
                         </div>
-                        <!-- /more -->
+                        <!-- /pagination -->
                     </div>
                 </div>
                 <div class="col-xs-12 tab-pane" id="users"></div>
@@ -156,65 +157,13 @@
 <div class="side-menu">
     <ul>
         <li><a href="#stats" data-toggle="tooltip" data-placement="left" title="Edit project"><i class="fa fa-cog"></i></a></li>
+        <li><a href="#stats" data-toggle="tooltip" data-placement="left" title="Add Resource"><i class="fa fa-plus"></i></a></li>
     </ul>
 </div>
 {% endblock %}
 
 {% block modals %}
-<!-- Modal -->
-<div class="modal fade" id="addCustomer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="myModalLabel">Add Customer</h4>
-            </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary">Add</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="addProject" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="myModalLabel">Add Project</h4>
-            </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary">Add</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="addResource" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="myModalLabel">Add Resource</h4>
-            </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary">Add</button>
-            </div>
-        </div>
-    </div>
-</div>
+{% include 'includes/parts/addcustomer.html' %}
+{% include 'includes/parts/addproject.html' %}
+{% include 'includes/parts/addresource.html' %}
 {% endblock %}

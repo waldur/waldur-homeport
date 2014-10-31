@@ -7283,6 +7283,9 @@ time.date {
 .projects-list table.project-list-table tr td + td {
   border-left: 1px solid #dddddd;
 }
+.projects-list table.project-list-table tr td strong {
+  color: #595959;
+}
 .projects-list table.project-list-table tr td ul {
   margin: 0;
   padding: 0;
@@ -7503,6 +7506,40 @@ time.date {
 }
 .side-menu ul li a.active {
   color: #066D7B;
+}
+
+.pagination {
+  width: 100%;
+  padding-top: 30px;
+  text-align: center;
+}
+.pagination ul {
+  margin: 0;
+  padding: 0;
+}
+.pagination ul li {
+  list-style: none;
+}
+.pagination ul li {
+  display: inline-block;
+  vertical-align: middle;
+}
+.pagination ul li span {
+  color: #000;
+  opacity: .4;
+}
+.pagination ul li a {
+  display: inline-block;
+  vertical-align: middle;
+  color: #000;
+  padding: 2px 0px;
+  text-decoration: none;
+  position: relative;
+  opacity: .4;
+  margin-left: 10px;
+}
+.pagination ul li a.current {
+  opacity: 1;
 }
 
 /*# sourceMappingURL=style.css.map */
