@@ -31,13 +31,13 @@
                             <span class="label label-success">11</span>
                         </a>
                     </li>
-                    <li class="active">
+                    <li>
                         <a href="#resources" role="tab" data-toggle="tab">
                             Resources
                             <span class="label label-success">12</span>
                         </a>
                     </li>
-                    <li>
+                    <li class="active">
                         <a href="#users" role="tab" data-toggle="tab">
                             Users
                             <span class="label label-success">37</span>
@@ -79,7 +79,7 @@
                     </div>
                     <!-- /more -->
                 </div>
-                <div class="col-xs-12 tab-pane active" id="resources">
+                <div class="col-xs-12 tab-pane" id="resources">
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="dash-title-box">
@@ -145,7 +145,244 @@
                         <!-- /pagination -->
                     </div>
                 </div>
-                <div class="col-xs-12 tab-pane" id="users"></div>
+                <div class="col-xs-12 tab-pane active" id="users">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <h3 class="users-list-title">Administrators</h3>
+                            <div class="users-list-box">
+                                <!-- user lists -->
+                                <ul class="users-list">
+                                    <!-- users-list item -->
+                                    <li>
+                                        <div class="user-view">
+                                            <div class="user-title">
+                                                <div class="user-pic">
+                                                    <img src="{{ url_for('static', filename='images/887178.jpg') }}">
+                                                </div>
+                                                <div class="user-name">
+                                                    <h4><a href="{{ url_for }}">Ahila Hilesovitch</a></h4>
+                                                </div>
+                                            </div>
+                                            <div class="user-description gray-text">
+                                                Some description about user, and he's roles and rights.
+                                            </div>
+                                            <h4 class="user-project-in-title">Projects</h4>
+                                            <ul class="user-project-in">
+                                                <li><a href="{{ url_for('project') }}">Proj 45FGn</a></li>
+                                                <li><a href="{{ url_for('project') }}">45FGn Proj</a></li>
+                                                <li><a href="{{ url_for('project') }}">Salsa 5toP</a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <!-- /users-list item -->
+                                    <!-- users-list item -->
+                                    <li>
+                                        <div class="user-view">
+                                            <div class="user-title">
+                                                <div class="user-pic">
+                                                    <img src="{{ url_for('static', filename='images/887178.jpg') }}">
+                                                </div>
+                                                <div class="user-name">
+                                                    <h4><a href="{{ url_for }}">Ahila Hilesovitch</a></h4>
+                                                </div>
+                                            </div>
+                                            <div class="user-description gray-text">
+                                                Some description about user, and he's roles and rights.
+                                            </div>
+                                            <h4 class="user-project-in-title">Projects</h4>
+                                            <ul class="user-project-in">
+                                                <li><a href="{{ url_for('project') }}">Proj 45FGn</a></li>
+                                                <li><a href="{{ url_for('project') }}">45FGn Proj</a></li>
+                                                <li><a href="{{ url_for('project') }}">Salsa 5toP</a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <!-- /users-list item -->
+                                    <!-- users-list item -->
+                                    <li>
+                                        <div class="user-view">
+                                            <div class="user-title">
+                                                <div class="user-pic">
+                                                    <img src="{{ url_for('static', filename='images/887178.jpg') }}">
+                                                </div>
+                                                <div class="user-name">
+                                                    <h4><a href="{{ url_for }}">Ahila Hilesovitch</a></h4>
+                                                </div>
+                                            </div>
+                                            <div class="user-description gray-text">
+                                                Some description about user, and he's roles and rights.
+                                            </div>
+                                            <h4 class="user-project-in-title">Projects</h4>
+                                            <ul class="user-project-in">
+                                                <li><a href="{{ url_for('project') }}">Proj 45FGn</a></li>
+                                                <li><a href="{{ url_for('project') }}">45FGn Proj</a></li>
+                                                <li><a href="{{ url_for('project') }}">Salsa 5toP</a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <!-- /users-list item -->
+                                </ul>
+                                <!-- /user lists -->
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <h3 class="users-list-title">Managers</h3>
+                            <div class="users-list-box">
+                                <!-- user lists -->
+                                <ul class="users-list">
+                                    <!-- users-list item -->
+                                    <li>
+                                        <div class="user-view">
+                                            <div class="user-title">
+                                                <div class="user-pic">
+                                                    <img src="{{ url_for('static', filename='images/887178.jpg') }}">
+                                                </div>
+                                                <div class="user-name">
+                                                    <h4><a href="{{ url_for }}">Ahila Hilesovitch</a></h4>
+                                                </div>
+                                            </div>
+                                            <div class="user-description gray-text">
+                                                Some description about user, and he's roles and rights.
+                                            </div>
+                                            <h4 class="user-project-in-title">Projects</h4>
+                                            <ul class="user-project-in">
+                                                <li><a href="{{ url_for('project') }}">Proj 45FGn</a></li>
+                                                <li><a href="{{ url_for('project') }}">45FGn Proj</a></li>
+                                                <li><a href="{{ url_for('project') }}">Salsa 5toP</a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <!-- /users-list item -->
+                                    <!-- users-list item -->
+                                    <li>
+                                        <div class="user-view">
+                                            <div class="user-title">
+                                                <div class="user-pic">
+                                                    <img src="{{ url_for('static', filename='images/887178.jpg') }}">
+                                                </div>
+                                                <div class="user-name">
+                                                    <h4><a href="{{ url_for }}">Ahila Hilesovitch</a></h4>
+                                                </div>
+                                            </div>
+                                            <div class="user-description gray-text">
+                                                Some description about user, and he's roles and rights.
+                                            </div>
+                                            <h4 class="user-project-in-title">Projects</h4>
+                                            <ul class="user-project-in">
+                                                <li><a href="{{ url_for('project') }}">Proj 45FGn</a></li>
+                                                <li><a href="{{ url_for('project') }}">45FGn Proj</a></li>
+                                                <li><a href="{{ url_for('project') }}">Salsa 5toP</a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <!-- /users-list item -->
+                                    <!-- users-list item -->
+                                    <li>
+                                        <div class="user-view">
+                                            <div class="user-title">
+                                                <div class="user-pic">
+                                                    <img src="{{ url_for('static', filename='images/887178.jpg') }}">
+                                                </div>
+                                                <div class="user-name">
+                                                    <h4><a href="{{ url_for }}">Ahila Hilesovitch</a></h4>
+                                                </div>
+                                            </div>
+                                            <div class="user-description gray-text">
+                                                Some description about user, and he's roles and rights.
+                                            </div>
+                                            <h4 class="user-project-in-title">Projects</h4>
+                                            <ul class="user-project-in">
+                                                <li><a href="{{ url_for('project') }}">Proj 45FGn</a></li>
+                                                <li><a href="{{ url_for('project') }}">45FGn Proj</a></li>
+                                                <li><a href="{{ url_for('project') }}">Salsa 5toP</a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <!-- /users-list item -->
+                                </ul>
+                                <!-- /user lists -->
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <h3 class="users-list-title">Customer owners</h3>
+                            <div class="users-list-box">
+                                <!-- user lists -->
+                                <ul class="users-list">
+                                    <!-- users-list item -->
+                                    <li>
+                                        <div class="user-view">
+                                            <div class="user-title">
+                                                <div class="user-pic">
+                                                    <img src="{{ url_for('static', filename='images/887178.jpg') }}">
+                                                </div>
+                                                <div class="user-name">
+                                                    <h4><a href="{{ url_for }}">Ahila Hilesovitch</a></h4>
+                                                </div>
+                                            </div>
+                                            <div class="user-description gray-text">
+                                                Some description about user, and he's roles and rights.
+                                            </div>
+                                            <h4 class="user-project-in-title">Projects</h4>
+                                            <ul class="user-project-in">
+                                                <li><a href="{{ url_for('project') }}">Proj 45FGn</a></li>
+                                                <li><a href="{{ url_for('project') }}">45FGn Proj</a></li>
+                                                <li><a href="{{ url_for('project') }}">Salsa 5toP</a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <!-- /users-list item -->
+                                    <!-- users-list item -->
+                                    <li>
+                                        <div class="user-view">
+                                            <div class="user-title">
+                                                <div class="user-pic">
+                                                    <img src="{{ url_for('static', filename='images/887178.jpg') }}">
+                                                </div>
+                                                <div class="user-name">
+                                                    <h4><a href="{{ url_for }}">Ahila Hilesovitch</a></h4>
+                                                </div>
+                                            </div>
+                                            <div class="user-description gray-text">
+                                                Some description about user, and he's roles and rights.
+                                            </div>
+                                            <h4 class="user-project-in-title">Projects</h4>
+                                            <ul class="user-project-in">
+                                                <li><a href="{{ url_for('project') }}">Proj 45FGn</a></li>
+                                                <li><a href="{{ url_for('project') }}">45FGn Proj</a></li>
+                                                <li><a href="{{ url_for('project') }}">Salsa 5toP</a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <!-- /users-list item -->
+                                    <!-- users-list item -->
+                                    <li>
+                                        <div class="user-view">
+                                            <div class="user-title">
+                                                <div class="user-pic">
+                                                    <img src="{{ url_for('static', filename='images/887178.jpg') }}">
+                                                </div>
+                                                <div class="user-name">
+                                                    <h4><a href="{{ url_for }}">Ahila Hilesovitch</a></h4>
+                                                </div>
+                                            </div>
+                                            <div class="user-description gray-text">
+                                                Some description about user, and he's roles and rights.
+                                            </div>
+                                            <h4 class="user-project-in-title">Projects</h4>
+                                            <ul class="user-project-in">
+                                                <li><a href="{{ url_for('project') }}">Proj 45FGn</a></li>
+                                                <li><a href="{{ url_for('project') }}">45FGn Proj</a></li>
+                                                <li><a href="{{ url_for('project') }}">Salsa 5toP</a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <!-- /users-list item -->
+                                </ul>
+                                <!-- /user lists -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

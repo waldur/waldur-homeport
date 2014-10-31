@@ -7542,4 +7542,82 @@ time.date {
   opacity: 1;
 }
 
+.users-list-title {
+  font-size: 2rem;
+}
+
+.users-list-box {
+  padding-right: 20px;
+}
+
+.users-list {
+  margin: 0;
+  padding: 0;
+}
+.users-list li {
+  list-style: none;
+}
+.users-list ul {
+  margin: 0;
+  padding: 0;
+}
+.users-list ul li {
+  list-style: none;
+}
+.users-list > li {
+  margin-top: 10px;
+}
+.users-list > li + li {
+  border-top: 1px dashed #d2d2d2;
+  padding-top: 10px;
+}
+.users-list .user-view .user-title {
+  table-layout: fixed;
+  display: table;
+  width: 100%;
+  box-sizing: border-box;
+}
+.users-list .user-view .user-title .user-pic {
+  display: table-cell;
+  vertical-align: top;
+  box-sizing: border-box;
+  vertical-align: middle;
+  width: 35px;
+}
+.users-list .user-view .user-title .user-pic img {
+  border-radius: 100%;
+}
+.users-list .user-view .user-title .user-name {
+  display: table-cell;
+  vertical-align: top;
+  box-sizing: border-box;
+  padding-left: 10px;
+  vertical-align: middle;
+  color: #000;
+}
+.users-list .user-view .user-title .user-name h4 {
+  font-size: 1.6rem;
+}
+.users-list .user-view .user-title .user-name h4 a {
+  color: inherit;
+}
+.users-list .user-view .user-description {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.users-list .user-view .user-project-in-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+.users-list .user-view .user-project-in li {
+  display: inline-block;
+  vertical-align: middle;
+}
+.users-list .user-view .user-project-in li:after {
+  content: ', ';
+}
+.users-list .user-view .user-project-in li:nth-last-child(1):after {
+  content: '';
+}
+
 /*# sourceMappingURL=style.css.map */

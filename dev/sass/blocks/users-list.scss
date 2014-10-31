@@ -1,0 +1,66 @@
+.users-list-title {
+    font-size: rem(20);
+} // users-list-title
+.users-list-box {
+    // padding-left: 20px;
+    padding-right: 20px;
+} // users-list-box 
+.users-list {
+    @include clear-list;
+    ul {
+        @include clear-list;
+    } // ul
+    > li {
+        + li {
+            border-top: 1px dashed #d2d2d2;
+            padding-top: 10px;
+        } // + li
+        margin-top: 10px;
+    } // li
+    .user-view {
+        .user-title {
+            @include table;
+            .user-pic {
+                @include table-cell;
+                vertical-align: middle;
+                width: 35px;
+                img {
+                    border-radius: 100%;
+                } // img
+            } // user-pic
+            .user-name {
+                @include table-cell;
+                padding-left: 10px;
+                vertical-align: middle;
+                color: #000;
+                h4 {
+                    font-size: rem(16);
+                    a {
+                        color: inherit;
+                    } // a
+                }
+            } // user-name
+        } // user-title
+        .user-description {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        } // user-description
+        .user-project-in-title {
+            font-size: rem(16);
+            font-weight: 700;
+        } // user-project-in-title
+        .user-project-in {
+            li {
+                @include inline-middle;
+                &:after {
+                    content: ', ';
+                } // &:after
+                &:nth-last-child(1) {
+                    &:after {
+                        content: '';
+                    } // &:after
+                } // &:nth-last-child(1)
+            } // li
+        } // user-project-in-title
+    } // user-view
+} // users-list
