@@ -62,9 +62,43 @@
             a {
                 color: #fff;
                 font-size: rem(14);
+                padding-left: 35px;
+                position: relative;
                 &:hover, &.active {
                     background-color: rgb(111, 150, 88);
                 }
+                &:hover {
+                    background-color: #6f9658;
+                } // &:hover
+                &:before {
+                    display: block;
+                    width: 20px;
+                    position: absolute;
+                    top: 4px;
+                    left: 8px;
+                    text-align: center;
+                    font-size: rem(13);
+                    text-rendering: auto;
+                    -webkit-font-smoothing: antialiased;
+                } // &:before
+                &.add-customer {
+                    &:before {
+                        content: '\f1ad';
+                        font-family: FontAwesome;
+                    } // &:before
+                } // &.add-customer
+                &.add-project {
+                    &:before {
+                        content: '\f07b';
+                        font-family: FontAwesome;
+                    } // &:before
+                } // &.add-project
+                &.add-resource {
+                    &:before {
+                        content: '\f0ae';
+                        font-family: FontAwesome;
+                    } // &:before
+                } // &.add-resource
             } // a
         } // li
     } // dropdown-menu

@@ -6870,9 +6870,37 @@ time.date {
 .navbar-nav > li .dropdown-menu li a {
   color: #fff;
   font-size: 1.4rem;
+  padding-left: 35px;
+  position: relative;
 }
 .navbar-nav > li .dropdown-menu li a:hover, .navbar-nav > li .dropdown-menu li a.active {
   background-color: #6f9658;
+}
+.navbar-nav > li .dropdown-menu li a:hover {
+  background-color: #6f9658;
+}
+.navbar-nav > li .dropdown-menu li a:before {
+  display: block;
+  width: 20px;
+  position: absolute;
+  top: 4px;
+  left: 8px;
+  text-align: center;
+  font-size: 1.3rem;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+}
+.navbar-nav > li .dropdown-menu li a.add-customer:before {
+  content: '\f1ad';
+  font-family: FontAwesome;
+}
+.navbar-nav > li .dropdown-menu li a.add-project:before {
+  content: '\f07b';
+  font-family: FontAwesome;
+}
+.navbar-nav > li .dropdown-menu li a.add-resource:before {
+  content: '\f0ae';
+  font-family: FontAwesome;
 }
 
 .add-something-box .tooltip .tooltip-inner {
