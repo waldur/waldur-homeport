@@ -11340,23 +11340,14 @@ return jQuery;
         });        
     }
 
-    // function fixBStooltips() {
-    //     $('.side-menu ul .tooltip.left').each(function() {
-    //         tipWidth = $(this).outerWidth();
-    //         $(this).css('left', -tooltip);
-    //     });
-    // }
-
     // document ready
     $(document).ready(function() {
         // bs tooltips
         $('[data-toggle="tooltip"]').tooltip();
         $('[data-extra="tooltip"]').tooltip();
-        // sort by name – search field in projects th
         byNameinProjects();
         dashNav();
         showGrouped();
-        // fixBStooltips();
     });
 
     // all initial on window resize

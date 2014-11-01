@@ -7342,22 +7342,24 @@ time.date {
   padding: 15px;
   padding-left: 0px;
 }
-.project-single .nav-tabs {
+
+.nav-tabs {
   margin-top: 20px;
   margin-bottom: 20px;
 }
-.project-single .nav-tabs li a {
+.nav-tabs li a {
   color: #000;
 }
-.project-single .tab-content {
+
+.tab-content {
   margin-top: 20px;
   margin-bottom: 20px;
 }
-.project-single .tab-content .tab-pane {
+.tab-content .tab-pane {
   padding-left: 0px;
   padding-right: 0px;
 }
-.project-single .tab-content .tab-pane .event {
+.tab-content .tab-pane .event {
   padding-right: 0px;
 }
 

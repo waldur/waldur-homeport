@@ -40,24 +40,26 @@
         padding: 15px;
         padding-left: 0px;
     } // project-resources
-    .nav-tabs {
-        margin-top: 20px;
-        margin-bottom: 20px;
-        li {
-            a {
-                color: #000;
-            } // a
-        } // li
-    } // nav-tabs
-    .tab-content {
-        margin-top: 20px;
-        margin-bottom: 20px;
-        .tab-pane {
-            padding-left: 0px;
-            padding-right: 0px;
-            .event {
-                padding-right: 0px;
-            } // main-activity-item
-        } // tab-pane
-    } // tab-content
 } // project-single
+
+
+.nav-tabs {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    li {
+        a {
+            color: #000;
+        } // a
+    } // li
+} // nav-tabs
+.tab-content {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    .tab-pane {
+        padding-left: 0px;
+        padding-right: 0px;
+        .event {
+            padding-right: 0px;
+        } // main-activity-item
+    } // tab-pane
+} // tab-content
