@@ -14,7 +14,7 @@
             <ul class="nav navbar-nav">
                 <li><a href="{{ url_for('dashboard') }}" class="" data-toggle="tooltip" data-placement="bottom" title="Dashboard"><i class="fa fa-th-large"></i> Dashboard</a></li>
                 <li><a href="{{ url_for('events') }}" class="" data-toggle="tooltip" data-placement="bottom" title="Events"><i class="fa fa-bell"></i> Events</a></li>
-                <li><a href="{{ url_for('projects') }}" class="" data-toggle="tooltip" data-placement="bottom" title="Projects"><i class="fa fa-building"></i> Projects</a></li>
+                <li><a href="{{ url_for('projects') }}" class="" data-toggle="tooltip" data-placement="bottom" title="Projects"><i class="fa fa-folder"></i> Projects</a></li>
                 <li><a href="{{ url_for('resources') }}" class="" data-toggle="tooltip" data-placement="bottom" title="Resources"><i class="fa fa-tasks"></i> Resources</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -29,13 +29,6 @@
                     </ul>
                 </li>
                 <li>
-                    <div class="custom-select">
-                        <select name="" id="">
-                            <option value="">Ilja Livenson</option>
-                        </select>
-                    </div>
-                </li>
-                <li>
                     <img src="{{ url_for('static', filename='images/887178.jpg') }}" class="user-pic" alt="John Doe">
                 </li>
                 <li class="dropdown">
@@ -48,6 +41,13 @@
                         <li><a href="#">Manage Customers</a></li>
                         <li><a href="#">Logout</a></li>
                     </ul>
+                </li>
+                <li>
+                    <div class="custom-select">
+                        <select name="" id="">
+                            <option value="">Ilja Livenson</option>
+                        </select>
+                    </div>
                 </li>
             </ul>
         </div><!--/.nav-collapse -->
