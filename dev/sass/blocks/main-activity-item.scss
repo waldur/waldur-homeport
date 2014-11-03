@@ -12,9 +12,9 @@
             display: none;
         }
     }
-    .project-title {
+    .event-title {
         @include inline-middle;
-        font-size: rem(22);
+        font-size: rem(18);
         font-weight: 700;
         text-decoration: none;
         position: relative;

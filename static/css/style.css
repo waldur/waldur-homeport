@@ -7276,15 +7276,15 @@ time.date {
 .event:nth-last-child(1) .separate {
   display: none;
 }
-.event .project-title {
+.event .event-title {
   display: inline-block;
   vertical-align: middle;
-  font-size: 2.2rem;
+  font-size: 1.8rem;
   font-weight: 700;
   text-decoration: none;
   position: relative;
 }
-.event .project-title:before {
+.event .event-title:before {
   content: '';
   display: block;
   width: 15px;
