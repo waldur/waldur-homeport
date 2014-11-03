@@ -21,9 +21,10 @@
 
     function dashNav(){
         var dashNavBox = $('.dash-nav');
-        dashNavBox.css('margin-top', -dashNavBox.height()/2)
+        dashNavBox.css('margin-top', -dashNavBox.height()/2);
     }
 
+    // show input
     function showGrouped() {
         var infoBox = $('[data-grouped="box"]');
         infoBox.each(function() {
@@ -41,6 +42,14 @@
         });        
     }
 
+    // position local controls
+    function menuLocalLevel() {
+        var localMenu = $('[data-menu-level="local"]');
+        var localBox = $('[data-menu-level="local-box"]');
+        var offsetBox = localBox.offset().left-10;
+        localMenu.css('right', -offsetBox);
+    }
+
     // document ready
     $(document).ready(function() {
         // bs tooltips
@@ -49,10 +58,12 @@
         byNameinProjects();
         dashNav();
         showGrouped();
+        menuLocalLevel();
     });
 
     // all initial on window resize
     $(window).on('resize', function() {
+        menuLocalLevel();
     });
 
 
