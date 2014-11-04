@@ -6,9 +6,15 @@
     <div class="container-fluid">
         <div class="content-relative">
             <div class="row">
+                <div class="col-xs-12">
+                    <h1 class="project-title pull-left">Project Gh-45</h1>
+                    <div class="pull-right">
+                        <a href="#" class="crud-controls"><i class="fa fa-cog"></i> edit project</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-xs-8">
-                    <h1 class="project-title">Project Gh-45</h1>
-                    
                     <div class="project-description">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ac est volutpat, convallis nisi ac, pretium justo. Proin feugiat ligula sit amet ipsum efficitur, id interdum leo eleifend.
                     </div>
@@ -80,11 +86,6 @@
                     <!-- /more -->
                 </div>
                 <div class="col-xs-12 tab-pane" id="resources">
-                    <div class="side-menu local" data-menu-level="local">
-                        <ul>
-                            <li class="add"><a href="#stats" data-toggle="tooltip" data-placement="left" title="Add Resource"><i class="fa fa-plus"></i></a></li>
-                        </ul>
-                    </div>
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="dash-title-box">
@@ -97,6 +98,7 @@
                                         <a href="#" class="conf">hosting</a>
                                     </li>
                                     <li><a href="#">repository</a></li>
+                                    <li class="crud-box"><a href="#" class="crud-controls"><i class="fa fa-plus"></i> add project</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -151,11 +153,6 @@
                     </div>
                 </div>
                 <div class="col-xs-12 tab-pane" id="users">
-                    <div class="side-menu local" data-menu-level="local">
-                        <ul>
-                            <li class="add"><a href="#stats" data-toggle="tooltip" data-placement="left" title="Manage Users"><i class="fa fa-users"></i></a></li>
-                        </ul>
-                    </div>
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="dash-title-box">
@@ -169,6 +166,7 @@
                                             <input type="text">
                                         </div>
                                     </li> -->
+                                    <li class="crud-box"><a href="#" class="crud-controls"><i class="fa fa-users"></i> manage users</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -223,11 +221,11 @@
 {% endblock %}
 
 {% block side_menu %}
-<div class="side-menu">
+<!-- <div class="side-menu">
     <ul>
         <li class="settings"><a href="#stats" data-toggle="tooltip" data-placement="left" title="Edit project"><i class="fa fa-cog"></i></a></li>
     </ul>
-</div>
+</div> -->
 {% endblock %}
 
 {% block modals %}

@@ -6926,6 +6926,14 @@ time.date {
   font-size: 1.4rem;
 }
 
+.crud-controls {
+  color: black !important;
+  font-size: 14px !important;
+  text-decoration: none !important;
+  opacity: 1 !important;
+  border: none !important;
+}
+
 .navbar-fixed-top {
   border-width: 0;
 }
@@ -7174,6 +7182,7 @@ time.date {
 .dash-title-box {
   text-align: center;
   margin-bottom: 40px;
+  position: relative;
 }
 .dash-title-box .dash-title {
   display: inline-block;
@@ -7197,6 +7206,11 @@ time.date {
 .dash-title-box .sort li.divid {
   border-left: 1px solid silver;
   margin-left: 10px;
+}
+.dash-title-box .sort li.crud-box {
+  position: absolute;
+  right: 0px;
+  top: 0px;
 }
 .dash-title-box .sort li a {
   display: inline-block;

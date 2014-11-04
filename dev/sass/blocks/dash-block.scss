@@ -7,6 +7,7 @@
 .dash-title-box {
     text-align: center;
     margin-bottom: 40px;
+    position: relative;
     .dash-title {
         @include inline-middle;
         margin: 0;
@@ -21,6 +22,11 @@
                 border-left: 1px solid silver;
                 margin-left: 10px;
             } // divid
+            &.crud-box {
+                position: absolute;
+                right: 0px;
+                top: 0px;
+            } // crud-box
             a {
                 @include inline-middle;
                 @include dotted-link;
