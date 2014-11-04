@@ -1,0 +1,14 @@
+.site-welcome {
+    position: relative;
+    // background-image: url(../images/land-back.jpg);
+    background: radial-gradient(ellipse at center, #89d087 0%, #3b9239 100%);
+    background-size: cover;
+    .interface-show {
+        width: 60%;
+        background: url(../images/site-welcome.png) no-repeat 50% 50%;
+        background-size: 100%;
+        position: absolute;
+        top: 0px;
+        right: -80px;
+    }
+} // site-welcome

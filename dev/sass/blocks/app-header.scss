@@ -10,6 +10,13 @@
     margin-top: 5px;
     background: url(../images/logo.png) no-repeat 50% 50%;
     background-size: 40px;
+    &.site-brand {
+        width: auto;
+        padding-left: 40px;
+        padding-top: 9px;
+        background-position: left;
+        color: #000;
+    }
 }
 
 .navbar {
@@ -24,6 +31,23 @@
 }
 
 .navbar-nav > li {
+    .join-link {
+        background-color: rgb(125, 178, 67);
+        margin-top: 6px;
+        border-radius: 4px;
+        padding: 6px 15px;
+        color: #fff;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.28);
+        border-bottom: 2px solid rgb(45, 108, 9);
+        &:hover {
+            background-color: #72A53A;
+        }
+        &:active {
+            border-color: transparent;
+            position: relative;
+            top: 2px;
+        }
+    }
     .user-pic {
         width: auto;
         height: 40px;
@@ -184,3 +208,5 @@
         outline: 0;
     } // select
 } // custom-select
+
+

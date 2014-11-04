@@ -6815,6 +6815,9 @@ body {
 body.app-body {
   padding-top: 80px;
 }
+body.site-body {
+  padding-top: 50px;
+}
 
 a:hover, a:active, a:focus {
   outline: 0 !important;
@@ -6946,6 +6949,13 @@ time.date {
   -webkit-background-size: 40px 40px;
           background-size: 40px;
 }
+.navbar-brand.site-brand {
+  width: auto;
+  padding-left: 40px;
+  padding-top: 9px;
+  background-position: left;
+  color: #000;
+}
 
 .navbar {
   -webkit-border-radius: 0;
@@ -6959,6 +6969,24 @@ time.date {
   color: #066D7B;
 }
 
+.navbar-nav > li .join-link {
+  background-color: #7db243;
+  margin-top: 6px;
+  -webkit-border-radius: 4px;
+          border-radius: 4px;
+  padding: 6px 15px;
+  color: #fff;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.28);
+  border-bottom: 2px solid #2d6c09;
+}
+.navbar-nav > li .join-link:hover {
+  background-color: #72A53A;
+}
+.navbar-nav > li .join-link:active {
+  border-color: transparent;
+  position: relative;
+  top: 2px;
+}
 .navbar-nav > li .user-pic {
   width: auto;
   height: 40px;
@@ -8043,4 +8071,21 @@ time.date {
 .users-list-table td ul li a {
   text-decoration: none;
   font-size: 1.4rem;
+}
+
+.site-welcome {
+  position: relative;
+  background: -webkit-radial-gradient(center, ellipse, #89d087 0%, #3b9239 100%);
+  background: radial-gradient(ellipse at center, #89d087 0%, #3b9239 100%);
+  -webkit-background-size: cover;
+          background-size: cover;
+}
+.site-welcome .interface-show {
+  width: 60%;
+  background: url(../images/site-welcome.png) no-repeat 50% 50%;
+  -webkit-background-size: 100% 100%;
+          background-size: 100%;
+  position: absolute;
+  top: 0px;
+  right: -80px;
 }

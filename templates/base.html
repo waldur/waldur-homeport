@@ -4,16 +4,16 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="shortcut icon" href="static/images/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon" />
 <title>nc saas</title>
 <meta name="author" content="opennodecloud.com" />
 
 <!-- css -->
-<link rel="stylesheet" href="static/css/font-awesome.min.css" type="text/css" />
-<link rel="stylesheet" href="static/css/style.css" type="text/css" />
+<link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}" type="text/css" />
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css" />
 
 <!-- JS -->
-<script src="static/js/production.js"></script>
+<script src="{{ url_for('static', filename='js/production.js') }}"></script>
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
@@ -22,53 +22,20 @@
 <![endif]-->
 
 </head>
-<body class="app-body">
+<body class="site-body">
 
-    <div class="app-header navbar navbar-fixed-top" role="navigation">         
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#"></a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">login</a></li>
-                    <li><a href="#">Signup</a></li>
-                </ul>
-                <!-- <ul class="nav navbar-nav navbar-right">
-                    <li><a href="../navbar/">Customer</a></li>
-                    <li>
-                        <img src="static/images/887178.jpg" class="user-pic" alt="John Doe">
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle user-pic-box" data-toggle="dropdown">
-                            sds
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li class="divider"></li>
-                            <li class="dropdown-header">Nav header</li>
-                            <li><a href="#">Separated link</a></li>
-                            <li><a href="#">One more separated link</a></li>
-                        </ul>
-                    </li>
-                </ul> -->
-            </div><!--/.nav-collapse -->
-        </div>
-    </div>
+{% include 'includes/site-header.html' %}
+
+{% block side_menu %}
+{% endblock %}
+
+{% block content %}
+{% endblock %}
+
+{% block modals %}
+{% endblock %}
+
+{% include 'includes/site-footer.html' %}
 
 </body>
 </html>

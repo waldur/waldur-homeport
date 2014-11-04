@@ -11299,6 +11299,16 @@ return jQuery;
 
 (function($) {
 
+    // for website
+    // welcome slide
+    function siteSlide() {
+        var slide = $('[data-role="slide"]');
+        var header = $('[data-role="header"]');
+        var slideHeight = $(window).height()-header.height();
+        
+        slide.css('min-height', slideHeight);
+    }
+
     // sort by name – search field in projects th
     function byNameinProjects(){
         var searchBox = $('[data-proj-sort="box"]');
@@ -11351,18 +11361,19 @@ return jQuery;
 
     // document ready
     $(document).ready(function() {
-        // bs tooltips
         $('[data-toggle="tooltip"]').tooltip();
         $('[data-extra="tooltip"]').tooltip();
         byNameinProjects();
         dashNav();
         showGrouped();
-        menuLocalLevel();
+        siteSlide()
+        // menuLocalLevel();
     });
 
     // all initial on window resize
     $(window).on('resize', function() {
-        menuLocalLevel();
+        siteSlide()
+        // menuLocalLevel();
     });
 
 
