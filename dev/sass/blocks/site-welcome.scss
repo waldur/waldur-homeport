@@ -1,14 +1,42 @@
 .site-welcome {
     position: relative;
     // background-image: url(../images/land-back.jpg);
-    background: radial-gradient(ellipse at center, #89d087 0%, #3b9239 100%);
+    background: radial-gradient(ellipse at center, #F7F7F7 0%, #D8D8D8 100%);
     background-size: cover;
-    .interface-show {
-        width: 60%;
-        background: url(../images/site-welcome.png) no-repeat 50% 50%;
-        background-size: 100%;
-        position: absolute;
-        top: 0px;
-        right: -80px;
+    overflow: hidden;
+    h1 {
+        font-weight: 400;
+        font-size: rem(45);
+        line-height: 1;
+        color: #000;
+        margin: 20px 0;
+        text-align: center;
     }
+    .interface-screen {
+        // position: relative;
+        // right: -100px;
+        display: block;
+        margin: 0 auto;
+    }
+    .tour-box {
+        text-align: center;
+        margin: 20px 0;
+    }
+    .take-a-tour {
+        background-color: rgb(125, 178, 67);
+        border-radius: 4px;
+        font-size: rem(30);
+        // padding: 6px 15px;
+        color: #fff;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.28);
+        border-bottom: 2px solid rgb(45, 108, 9);
+        &:hover {
+            background-color: #72A53A;
+        }
+        &:active {
+            border-color: transparent;
+            position: relative;
+            top: 2px;
+        }
+    } // take-a-tour
 } // site-welcome

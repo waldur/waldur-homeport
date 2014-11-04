@@ -23,6 +23,9 @@
     border-radius: 0;
     margin: 0;
     background: #9ECF5D;
+    &.site-header {
+        background: #fff;
+    }
 }
 
 .nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
@@ -208,5 +211,3 @@
         outline: 0;
     } // select
 } // custom-select
-
-

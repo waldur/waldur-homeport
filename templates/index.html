@@ -2,6 +2,72 @@
 
 {% block content %}
 <div class="site-welcome" data-role="slide">
-    <div class="interface-show" data-role="slide"></div>
+    <div class="container-fluid">
+        <h1>Remove the boring aspects of system administration and concentrate on the fun stuff.</h1>
+        <img src="{{ url_for('static', filename='images/site-welcome.png')}}" alt="" class="interface-screen" data-role="interface-screen">
+        <div class="tour-box" data-role="take-a-tour">
+            <a class="take-a-tour btn btn-default">Take a tour</a>
+        </div>
+    </div>
 </div>
+
+<section class="site-block landing-block">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4">
+                <div class="product-box big-icon mobile">
+                    <h3>Full monitoring</h3>
+                    <p>
+                        System and application monitoring. Autodetection of running applictions.
+                    </p>
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <div class="product-box big-icon graph circle-decor">
+                    <h3>Event tracking</h3>
+                    <p>
+                        Aggregate information from system and application logs. Configurable notifications for non-typical behavior.
+                    </p>
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <div class="product-box big-icon secure circle-decor">
+                    <h3>Reliable backup</h3>
+                    <p>
+                        Encrypted with your key. Stored in 3 replicas across the world. Easy restoration. Regular validations.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-4">
+                <div class="product-box big-icon cloud">
+                    <h3>Cloud-agnostic</h3>
+                    <p>
+                        OpenStack, VMware, AWS, Rackspace or a standalone server - the choice is yours.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="col-xs-4">
+                <div class="product-box big-icon lab circle-decor">
+                    <h3>One-click deployment</h3>
+                    <p>
+                        Leverage a library of pre-made applications from OpenNode and Turnkeylinux. Atlassian JIRA, Zabbix, Joomla, Drupal and much more.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-xs-4">
+                <div class="product-box big-icon tools circle-decor">
+                    <h3>Traceable changes</h3>
+                    <p>
+                        All modifications to the system are recorded and timestamped. You have the full audit trail.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}

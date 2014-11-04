@@ -6963,6 +6963,9 @@ time.date {
   margin: 0;
   background: #9ECF5D;
 }
+.navbar.site-header {
+  background: #fff;
+}
 
 .nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
   background-color: transparent;
@@ -8075,17 +8078,42 @@ time.date {
 
 .site-welcome {
   position: relative;
-  background: -webkit-radial-gradient(center, ellipse, #89d087 0%, #3b9239 100%);
-  background: radial-gradient(ellipse at center, #89d087 0%, #3b9239 100%);
+  background: -webkit-radial-gradient(center, ellipse, #F7F7F7 0%, #D8D8D8 100%);
+  background: radial-gradient(ellipse at center, #F7F7F7 0%, #D8D8D8 100%);
   -webkit-background-size: cover;
           background-size: cover;
+  overflow: hidden;
 }
-.site-welcome .interface-show {
-  width: 60%;
-  background: url(../images/site-welcome.png) no-repeat 50% 50%;
-  -webkit-background-size: 100% 100%;
-          background-size: 100%;
-  position: absolute;
-  top: 0px;
-  right: -80px;
+.site-welcome h1 {
+  font-weight: 400;
+  font-size: 4.5rem;
+  line-height: 1;
+  color: #000;
+  margin: 20px 0;
+  text-align: center;
+}
+.site-welcome .interface-screen {
+  display: block;
+  margin: 0 auto;
+}
+.site-welcome .tour-box {
+  text-align: center;
+  margin: 20px 0;
+}
+.site-welcome .take-a-tour {
+  background-color: #7db243;
+  -webkit-border-radius: 4px;
+          border-radius: 4px;
+  font-size: 3rem;
+  color: #fff;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.28);
+  border-bottom: 2px solid #2d6c09;
+}
+.site-welcome .take-a-tour:hover {
+  background-color: #72A53A;
+}
+.site-welcome .take-a-tour:active {
+  border-color: transparent;
+  position: relative;
+  top: 2px;
 }

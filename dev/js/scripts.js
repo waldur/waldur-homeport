@@ -4,10 +4,15 @@
     // welcome slide
     function siteSlide() {
         var slide = $('[data-role="slide"]');
+        var slideImage = $('[data-role="interface-screen"]')
+        var slideTitle = slide.find('h1');
         var header = $('[data-role="header"]');
         var slideHeight = $(window).height()-header.height();
+        var takeTour = $('[data-role="take-a-tour"]');
         
         slide.css('min-height', slideHeight);
+        slideImage.css('height', slideHeight-(slideTitle.height()+takeTour.height()+80));
+
     }
 
     // sort by name – search field in projects th
