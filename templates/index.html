@@ -3,11 +3,17 @@
 {% block content %}
 <div class="site-welcome" data-role="slide">
     <div class="container-fluid">
-        <h1>Remove the boring aspects of system administration and concentrate on the fun stuff.</h1>
-        <img src="{{ url_for('static', filename='images/site-welcome.png')}}" alt="" class="interface-screen" data-role="interface-screen">
+        <h1>
+            Remove the boring aspects of system administration
+            <span>and concentrate on the fun stuff</span>
+        </h1>
         <div class="tour-box" data-role="take-a-tour">
-            <a class="take-a-tour btn btn-default">Take a tour</a>
+            <a class="take-a-tour btn btn-default">Join for take account</a>
         </div>
+        <img src="{{ url_for('static', filename='images/site-left.png')}}" alt="" class="img img-left">
+        <img src="{{ url_for('static', filename='images/site-center.png')}}" alt="" class="img img-center">
+        <img src="{{ url_for('static', filename='images/site-right.png')}}" alt="" class="img img-right">
+        <div class="decor"></div>
     </div>
 </div>
 

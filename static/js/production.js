@@ -11303,15 +11303,15 @@ return jQuery;
     // welcome slide
     function siteSlide() {
         var slide = $('[data-role="slide"]');
-        var slideImage = $('[data-role="interface-screen"]')
-        var slideTitle = slide.find('h1');
         var header = $('[data-role="header"]');
-        var slideHeight = $(window).height()-header.height();
-        var takeTour = $('[data-role="take-a-tour"]');
-        
+        var slideHeight = $(window).height()-(header.height()+100);
         slide.css('min-height', slideHeight);
-        slideImage.css('height', slideHeight-(slideTitle.height()+takeTour.height()+80));
+    }
 
+    function siteImages() {
+        var imgLeft = $('[data-imgpos="left"]')
+        var imgCenter = $('[data-imgpos="center"]')
+        var imgRight = $('[data-imgpos="right"]')
     }
 
     // sort by name – search field in projects th

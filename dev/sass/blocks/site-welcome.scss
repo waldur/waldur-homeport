@@ -1,35 +1,44 @@
 .site-welcome {
     position: relative;
-    // background-image: url(../images/land-back.jpg);
-    background: radial-gradient(ellipse at center, #F7F7F7 0%, #D8D8D8 100%);
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzI1YTFjMyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM2NGJjNWIiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
     background-size: cover;
     overflow: hidden;
+    .decor {
+        width: 100%;
+        height: 30px;
+        box-shadow: inset 2px -41px 22px -36px rgba(0,0,0,0.15);
+        position: absolute;
+        bottom: 0px;
+        z-index: 9999;
+    }
     h1 {
-        font-weight: 400;
+        font-weight: 200;
         font-size: rem(45);
         line-height: 1;
-        color: #000;
-        margin: 20px 0;
+        color: #fff;
+        margin: 30px 0;
         text-align: center;
-    }
-    .interface-screen {
-        // position: relative;
-        // right: -100px;
-        display: block;
-        margin: 0 auto;
+        position: relative;
+        z-index: 999;
+        span {
+            display: block;
+            font-weight: 600;
+        }
     }
     .tour-box {
         text-align: center;
         margin: 20px 0;
+        position: relative;
+        z-index: 999;
     }
     .take-a-tour {
-        background-color: rgb(125, 178, 67);
+        background-color: #7db243;
         border-radius: 4px;
-        font-size: rem(30);
-        // padding: 6px 15px;
+        font-size: 3rem;
         color: #fff;
         text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.28);
-        border-bottom: 2px solid rgb(45, 108, 9);
+        border-color: transparent;
+        border-bottom: 2px solid #2d6c09;
         &:hover {
             background-color: #72A53A;
         }
@@ -39,4 +48,22 @@
             top: 2px;
         }
     } // take-a-tour
+    .img {
+        position: absolute;
+        bottom: -50px;
+    } // img
+    .img-left {
+        left: 50px;
+        z-index: 9;
+    } // img
+    .img-center {
+        left: 50%;
+        margin-left: -268px;
+        z-index: 10;
+        bottom: -30px;
+    } // img
+    .img-right {
+        right: 50px;
+        z-index: 9;
+    } // img
 } // site-welcome
