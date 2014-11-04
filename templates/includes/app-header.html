@@ -29,16 +29,26 @@
                     </ul>
                 </li>
                 <li>
-                    <div class="custom-select">
+                    <!-- <div class="custom-select">
                         <select name="" id="">
                             <option value="">Ilja Livenson</option>
                         </select>
-                    </div>
+                    </div> -->
+                    <a href="#" class="customer-head" data-toggle="dropdown">
+                        <span class="customer-title">Livenson PLC</span>
+                        <span class="customer-expl">active for context</span>
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Customer 1</a></li>
+                        <li><a href="#">Customer 2</a></li>
+                        <li><a href="#">Customer 3</a></li>
+                    </ul>
                 </li>
                 <li>
                     <img src="{{ url_for('static', filename='images/887178.jpg') }}" class="user-pic" alt="John Doe">
                 </li>
-                <li class="dropdown">
+                <li class="dropdown user-box">
                     <a href="#" class="dropdown-toggle user-pic-box" data-toggle="dropdown">
                         John Winner
                         <span class="caret"></span>

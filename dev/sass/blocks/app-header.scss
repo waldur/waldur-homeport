@@ -42,6 +42,32 @@
             color: #000;
         }
     }
+    .customer-head {
+        // background-color: #89B550;
+        margin-top: 8px;
+        padding: 6px 10px;
+        padding-right: 15px;
+        margin-left: 12px;
+        margin-right: 12px;
+        border-radius: 3px;
+        position: relative;
+        &:hover,  {
+            // background-color: #89B550;
+        }
+        .customer-title {
+            width: 100%;
+            position: relative;
+            top: -6px;
+            left: 0px;
+        } // customer-title
+        .customer-expl {
+            width: 100%;
+            position: absolute;
+            top: 14px;
+            left: 11px;
+            font-size: 12px;
+        } // customer-expl
+    } // customer-head
     .dropdown-menu {
         background: #9ECF5D;
         border: none;
@@ -59,6 +85,9 @@
             text-align: right;
         }
         li {
+            &.user-box {
+                padding-right: 0px;
+            } // &.user-box
             a {
                 color: #fff;
                 font-size: rem(14);

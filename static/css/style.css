@@ -6979,6 +6979,29 @@ time.date {
   font-size: 1rem;
   color: #000;
 }
+.navbar-nav > li .customer-head {
+  margin-top: 8px;
+  padding: 6px 10px;
+  padding-right: 15px;
+  margin-left: 12px;
+  margin-right: 12px;
+  -webkit-border-radius: 3px;
+          border-radius: 3px;
+  position: relative;
+}
+.navbar-nav > li .customer-head .customer-title {
+  width: 100%;
+  position: relative;
+  top: -6px;
+  left: 0px;
+}
+.navbar-nav > li .customer-head .customer-expl {
+  width: 100%;
+  position: absolute;
+  top: 14px;
+  left: 11px;
+  font-size: 12px;
+}
 .navbar-nav > li .dropdown-menu {
   background: #9ECF5D;
   border: none;
@@ -6997,6 +7020,9 @@ time.date {
 }
 .navbar-nav > li .dropdown-menu.user-drop {
   text-align: right;
+}
+.navbar-nav > li .dropdown-menu li.user-box {
+  padding-right: 0px;
 }
 .navbar-nav > li .dropdown-menu li a {
   color: #fff;
