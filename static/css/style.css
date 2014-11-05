@@ -8257,6 +8257,15 @@ body.prices {
 .plans-and-price .price-table-box table.price-table tr td + td, .plans-and-price .price-table-box table.price-table tr td + th, .plans-and-price .price-table-box table.price-table tr th + td, .plans-and-price .price-table-box table.price-table tr th + th {
   border-left: 1px solid #e5e5e5;
 }
+.plans-and-price .price-table-box table.price-table tr td span, .plans-and-price .price-table-box table.price-table tr th span {
+  display: block;
+}
+.plans-and-price .price-table-box table.price-table tr td .plan-name, .plans-and-price .price-table-box table.price-table tr th .plan-name {
+  color: #6cc644;
+}
+.plans-and-price .price-table-box table.price-table tr td .plan-price, .plans-and-price .price-table-box table.price-table tr th .plan-price {
+  font-size: 1.4rem;
+}
 .plans-and-price table.buttons {
   margin: 0 auto;
   width: 60%;
