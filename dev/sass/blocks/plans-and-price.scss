@@ -1,0 +1,80 @@
+body {
+    &.prices {
+        background: url(../images/robo-price.png) right center no-repeat;
+        background-size: 30%;
+    }
+}
+
+.plans-and-price {
+    .price-table-box {
+        border-radius: 4px;
+        border: 1px solid rgb(229, 229, 229);
+        margin: 0 auto;
+        width: 60%;
+        table.price-table {
+            margin: 0 auto;
+            width: 100%;
+            tr {
+                &:nth-child(even) {
+                    td {
+                        background: #f0f5fa;
+                    }
+                }
+                + tr {
+                    td {
+                        border-top: 1px solid rgb(229, 229, 229);
+                    }
+                }
+                td, th {
+                    width: 33%;
+                    padding: 9px;
+                    text-align: center;
+                    + td, + th {
+                        border-left: 1px solid rgb(229, 229, 229);
+                    }
+                } // td
+            } // tr
+        } // price-table
+    } // .price-table-box
+    table.buttons {
+        margin: 0 auto;
+        width: 60%;
+        margin-top: 20px;
+        td {
+            width: 33%;
+            padding: 9px;
+            text-align: center;
+            .btn-choice {
+                background-color: rgb(125, 178, 67);
+                margin-top: 6px;
+                border-radius: 4px;
+                padding: 6px 15px;
+                color: #fff;
+                text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.28);
+                border-bottom: 2px solid rgb(45, 108, 9);
+            }
+        }
+    } // buttons
+} // plans-and-price
+
+.contact-for-details {
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+} // contact-for-details
+.mail-box {
+    display: inline-block;
+    padding: 4px 10px;
+    background: #ECECEC;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    font-size: 2.2rem;
+    color: #4C4C4C;
+    font-weight: 200;
+    a {
+        color: inherit;
+        text-decoration: none;
+        font-weight: 700;
+    }
+} // mail-box
+
