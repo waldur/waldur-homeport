@@ -7985,7 +7985,7 @@ time.date {
 
 .product-box {
   background: #efefef;
-  height: 160px;
+  height: 200px;
   box-sizing: border-box;
   padding: 12px;
   margin-bottom: 10px;
@@ -8016,15 +8016,43 @@ time.date {
   content: '\f080';
 }
 .product-box.backup:before {
-  content: '\f01e';
+  content: '\f1da';
+}
+.product-box.cloud:before {
+  content: '\f0c2';
+}
+.product-box.lab:before {
+  content: '\f0c3';
+}
+.product-box.tools:before {
+  content: '\f074';
 }
 .product-box h3 {
   color: #5f9312;
+  margin-top: 30px;
 }
 
 .site-title {
   text-align: center;
-  margin: 40px 0;
+  margin: 40px 0 70px 0;
+}
+
+.seep-lans {
+  text-align: center;
+  margin: 40px 0px;
+}
+.seep-lans h4 {
+  margin-bottom: 0px;
+}
+.seep-lans h3 {
+  margin-top: 10px;
+}
+.seep-lans h3 a {
+  color: inherit;
+  text-decoration: underline;
+}
+.seep-lans h3 a:hover {
+  text-decoration: none;
 }
 
 /*# sourceMappingURL=style.css.map */

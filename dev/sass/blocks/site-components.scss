@@ -2,7 +2,7 @@
 
 .product-box {
     background: rgb(239, 239, 239);
-    height: 160px;
+    height: 200px;
     box-sizing: border-box;
     padding: 12px;
     margin-bottom: 10px;
@@ -37,16 +37,49 @@
     }
     &.backup {
         &:before {
-            content: '\f01e';
+            content: '\f1da';
+        }
+    }
+    &.cloud {
+        &:before {
+            content: '\f0c2';
+        }
+    }
+    &.lab {
+        &:before {
+            content: '\f0c3';
+        }
+    }
+    &.tools {
+        &:before {
+            content: '\f074';
         }
     }
     h3 {
         color: rgb(95, 147, 18);
-        // margin-top: 0px;
+        margin-top: 30px;
     }
 } // product-box
 
 .site-title {
     text-align: center;
-    margin: 40px 0;
+    margin: 40px 0 70px 0;
 }
+
+.seep-lans {
+    text-align: center;
+    margin: 40px 0px;
+    h4 {
+        margin-bottom: 0px;
+    }
+    h3 {
+        margin-top: 10px;
+        a {
+            color: inherit;
+            text-decoration: underline;
+            &:hover {
+                text-decoration: none;
+            }
+        }
+    }
+} // see-plans
