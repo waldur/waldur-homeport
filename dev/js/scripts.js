@@ -1,19 +1,22 @@
 (function($) {
 
     // for website
-    // welcome slide
-    // function siteSlide() {
-    //     var slide = $('[data-role="slide"]');
-    //     var header = $('[data-role="header"]');
-    //     var slideHeight = $(window).height()-(header.height()+100);
-    //     slide.css('min-height', slideHeight);
-    // }
+    // one page scroll
+    function onePage() {
+        $('.scroller').click(function(){
+            var section = $($(this).data("section"));
+            var top = section.offset().top;
+            $("html, body").animate({ scrollTop: top }, 700);
+            return false;
+        });
+    }
 
-    // function siteImages() {
-    //     var imgLeft = $('[data-imgpos="left"]')
-    //     var imgCenter = $('[data-imgpos="center"]')
-    //     var imgRight = $('[data-imgpos="right"]')
-    // }
+    // for account
+    // tooltips
+    function tooltips() {
+        $('[data-toggle="tooltip"]').tooltip();
+        $('[data-extra="tooltip"]').tooltip();
+    }
 
     // sort by name – search field in projects th
     function byNameinProjects(){
@@ -34,11 +37,6 @@
         });
     }
 
-    function dashNav(){
-        var dashNavBox = $('.dash-nav');
-        dashNavBox.css('margin-top', -dashNavBox.height()/2);
-    }
-
     // show input
     function showGrouped() {
         var infoBox = $('[data-grouped="box"]');
@@ -57,38 +55,19 @@
         });        
     }
 
-    // position local controls
-    function menuLocalLevel() {
-        var localMenu = $('[data-menu-level="local"]');
-        var localBox = $('[data-menu-level="local-box"]');
-        var offsetBox = localBox.offset().left-10;
-        localMenu.css('right', -offsetBox);
-    }
-
     // document ready
     $(document).ready(function() {
-        $('[data-toggle="tooltip"]').tooltip();
-        $('[data-extra="tooltip"]').tooltip();
+        // website js
+        onePage();
+        // account js
+        tooltips();
         byNameinProjects();
         dashNav();
         showGrouped();
-        // siteSlide()
-        // menuLocalLevel();
-        $('.scroller').click(function(){
-            var section = $($(this).data("section"));
-            var top = section.offset().top;
-            $("html, body").animate({ scrollTop: top }, 700);
-            return false;
-        });
-        // $('body').scrollspy({
-        //     target: '.navbar-fixed-top'
-        // })
     });
 
     // all initial on window resize
     $(window).on('resize', function() {
-        // siteSlide()
-        // menuLocalLevel();
     });
 
 
