@@ -11301,18 +11301,18 @@ return jQuery;
 
     // for website
     // welcome slide
-    function siteSlide() {
-        var slide = $('[data-role="slide"]');
-        var header = $('[data-role="header"]');
-        var slideHeight = $(window).height()-(header.height()+100);
-        slide.css('min-height', slideHeight);
-    }
+    // function siteSlide() {
+    //     var slide = $('[data-role="slide"]');
+    //     var header = $('[data-role="header"]');
+    //     var slideHeight = $(window).height()-(header.height()+100);
+    //     slide.css('min-height', slideHeight);
+    // }
 
-    function siteImages() {
-        var imgLeft = $('[data-imgpos="left"]')
-        var imgCenter = $('[data-imgpos="center"]')
-        var imgRight = $('[data-imgpos="right"]')
-    }
+    // function siteImages() {
+    //     var imgLeft = $('[data-imgpos="left"]')
+    //     var imgCenter = $('[data-imgpos="center"]')
+    //     var imgRight = $('[data-imgpos="right"]')
+    // }
 
     // sort by name – search field in projects th
     function byNameinProjects(){
@@ -11371,13 +11371,19 @@ return jQuery;
         byNameinProjects();
         dashNav();
         showGrouped();
-        siteSlide()
+        // siteSlide()
         // menuLocalLevel();
+        $('.scroller').click(function(){
+            var section = $($(this).data("section"));
+            var top = section.offset().top;
+            $("html, body").animate({ scrollTop: top }, 700);
+            return false;
+        });
     });
 
     // all initial on window resize
     $(window).on('resize', function() {
-        siteSlide()
+        // siteSlide()
         // menuLocalLevel();
     });
 

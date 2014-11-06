@@ -7918,6 +7918,7 @@ time.date {
   background: url(../images/decor-image.png);
   background-size: cover;
   overflow: hidden;
+  padding-bottom: 314px;
 }
 .site-welcome .decor {
   width: 100%;
@@ -7928,6 +7929,7 @@ time.date {
   z-index: 9999;
 }
 .site-welcome h1 {
+  margin-top: 40px;
   font-weight: 200;
   font-size: 4.5rem;
   line-height: 1;

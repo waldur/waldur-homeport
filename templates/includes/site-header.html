@@ -8,18 +8,14 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand site-brand" href="/">
+            <a class="navbar-brand site-brand scroller" href="#" data-section="#main">
                 NodeConductor
             </a>
         </div>
         <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <!-- <li><a href="#" class="">Tour</a></li> -->
-                <li><a href="{{ url_for('plans') }}" class="">Plans</a></li>
-                <!-- <li><a href="#" class="">About</a></li> -->
-            </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#" class="join-link"> Join</a></li>
+                <li><a href="#" class="scroller" data-section="#featurues">Feautures</a></li>
+                <li><a href="#" class="scroller" data-section="#plans">Plans</a></li>
                 <li><a href="#" class=""><i class="fa fa-key"></i> Login</a></li>
             </ul>
         </div><!--/.nav-collapse -->
