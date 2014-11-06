@@ -80,6 +80,9 @@
             $("html, body").animate({ scrollTop: top }, 700);
             return false;
         });
+        // $('body').scrollspy({
+        //     target: '.navbar-fixed-top'
+        // })
     });
 
     // all initial on window resize

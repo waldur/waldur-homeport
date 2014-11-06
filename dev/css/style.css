@@ -6853,6 +6853,12 @@ time.date {
   color: #066D7B;
 }
 
+.navbar-nav > li.home {
+  display: none;
+}
+.navbar-nav > li.active {
+  background: #f7f7f7;
+}
 .navbar-nav > li .join-link {
   background-color: #7db243;
   margin-top: 6px;
@@ -7926,7 +7932,7 @@ time.date {
   box-shadow: inset 2px -41px 22px -36px rgba(0, 0, 0, 0.15);
   position: absolute;
   bottom: 0px;
-  z-index: 9999;
+  z-index: 999;
 }
 .site-welcome h1 {
   margin-top: 40px;

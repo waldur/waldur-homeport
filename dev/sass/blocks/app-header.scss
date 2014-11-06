@@ -34,6 +34,12 @@
 }
 
 .navbar-nav > li {
+    &.home {
+        display: none;
+    }
+    &.active {
+        background: rgb(247, 247, 247);
+    }
     .join-link {
         background-color: rgb(125, 178, 67);
         margin-top: 6px;
