@@ -11354,6 +11354,15 @@ return jQuery;
         });        
     }
 
+    // add resource
+    function addResource() {
+        var appHeaderHeight = $('.app-header').height();
+        var addResTrigger = $('[data-add-trigger="add-presource"]');
+        var addResBox = $('[data-add-box="add-presource"]');
+        
+        addResBox.css('top', appHeaderHeight);
+    }
+
     // document ready
     $(document).ready(function() {
         // website js
@@ -11361,8 +11370,8 @@ return jQuery;
         // account js
         tooltips();
         byNameinProjects();
-        dashNav();
         showGrouped();
+        addResource();
     });
 
     // all initial on window resize

@@ -8082,6 +8082,23 @@ time.date {
   font-size: 1.4rem;
 }
 
+.add-form-box {
+  display: none;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+  background: #fff;
+  z-index: 999;
+  overflow-y: scroll;
+  padding: 30px 0px;
+}
+.add-form-box .standart-title {
+  text-align: center;
+  margin-top: 0px;
+}
+
 .site-welcome {
   position: relative;
   background: url(../images/decor-image.png);
