@@ -1,0 +1,55 @@
+{% extends 'base_account.html' %}
+
+{% block content %}
+<section class="form-view">
+    <div class="container-fluid">
+        <!-- form-add -->
+        <div class="form-add">
+            <div class="row">
+                <div class="col-xs-4">
+                    <label for="">Project Name</label>
+                </div>
+                <div class="col-xs-8">
+                    <input type="text" class="form-control">
+                </div>
+                <div class="col-xs-4">
+                    <label for="">Project Description</label>
+                </div>
+                <div class="col-xs-8">
+                    <textarea name="" id="" cols="30" rows="10" class="form-control"></textarea>
+                </div>
+            </div>
+        </div>
+        <!-- /form-add -->
+        <div class="appstore">
+            <div class="templates">
+                <div class="row">
+                    <!-- template-box -->
+                    <div class="col-xs-4">
+                        <div class="template">
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <div class="img icon"></div>
+                                </div>
+                                <div class="col-xs-8">
+                                    <h3></h3>
+                                    <article></article>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="price"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /template-box -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block modals %}
+{% endblock %}
