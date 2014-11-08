@@ -30,27 +30,27 @@ def plans():
 
 @app.route('/dashboard/')
 def dashboard():
-    return render_template('dashboard.html')
+    return render_template('dashboard.html', current = 'dashboard')
 
 @app.route('/events/')
 def events():
-    return render_template('events.html')
+    return render_template('events.html', current = 'events')
 
 @app.route('/event/')
 def event():
-    return render_template('event.html')
+    return render_template('event.html', current = 'events')
 
 @app.route('/projects/')
 def projects():
-    return render_template('projects.html')
+    return render_template('projects.html', current = 'projects')
 
 @app.route('/project/')
 def project():
-    return render_template('project.html')
+    return render_template('project.html', current = 'projects')
 
 @app.route('/resources/')
 def resources():
-    return render_template('resources.html')
+    return render_template('resources.html', current = 'resources')
 
 @app.route('/add-project/')
 def addproject():

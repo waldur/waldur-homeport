@@ -6880,14 +6880,23 @@ time.date {
 
 .nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
   background-color: transparent;
-  color: #066D7B;
+  color: #fff;
+  text-shadow: none;
+}
+.nav .open > a:after, .nav .open > a:hover:after, .nav .open > a:focus:after {
+  color: #fff;
+  text-shadow: none;
 }
 
 .navbar-nav > li.home {
   display: none;
 }
 .navbar-nav > li.active {
-  background: #f7f7f7;
+  background: #76AE2C;
+}
+.navbar-nav > li.active a {
+  color: #FFF;
+  text-shadow: none;
 }
 .navbar-nav > li .join-link {
   background-color: #7db243;
@@ -6966,6 +6975,9 @@ time.date {
 .navbar-nav > li .dropdown-menu li.user-box {
   padding-right: 0px;
 }
+.navbar-nav > li .dropdown-menu li.divider {
+  background-color: #6EA366;
+}
 .navbar-nav > li .dropdown-menu li a {
   color: #fff;
   font-size: 1.4rem;
@@ -6988,6 +7000,7 @@ time.date {
   font-size: 1.3rem;
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
+  color: #095207;
 }
 .navbar-nav > li .dropdown-menu li a.add-customer:before {
   content: '\f1ad';

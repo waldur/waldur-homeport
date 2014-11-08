@@ -30,7 +30,12 @@
 
 .nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
     background-color: transparent;
-    color: #066D7B;
+    color: #fff;
+    text-shadow: none;
+    &:after {
+        color: #fff;
+        text-shadow: none;
+    }
 }
 
 .navbar-nav > li {
@@ -38,7 +43,11 @@
         display: none;
     }
     &.active {
-        background: rgb(247, 247, 247);
+        background: #76AE2C;
+        a {
+            color: #FFF;
+            text-shadow: none;
+        } // a
     }
     .join-link {
         background-color: rgb(125, 178, 67);
@@ -121,6 +130,9 @@
             &.user-box {
                 padding-right: 0px;
             } // &.user-box
+            &.divider {
+                background-color: #6EA366;
+            }
             a {
                 color: #fff;
                 font-size: rem(14);
@@ -142,6 +154,7 @@
                     font-size: rem(13);
                     text-rendering: auto;
                     -webkit-font-smoothing: antialiased;
+                    color: #095207;
                 } // &:before
                 &.add-customer {
                     &:before {

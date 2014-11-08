@@ -66,7 +66,8 @@
     function addResTemplate() {
         var templ = $('[data-role="appstore-template"]');
         templ.click(function(){
-            $(this).toggleClass('state');
+            templ.removeClass('state');
+            $(this).addClass('state');
         });
     }
 
