@@ -93,3 +93,32 @@ time.date {
     opacity: 1 !important;
     border: none !important;
 } // crud-controls
+
+.custom-select {
+    background-color: transparent;
+    border: 1px solid #D8D8D8;
+    // margin-top: 8px;
+    padding: 6px 10px;
+    padding-right: 15px;
+    margin-left: 12px;
+    margin-right: 12px;
+    border-radius: 3px;
+    position: relative;
+    background: linear-gradient(to bottom, #eeeeee 0%,#D7D7D7 100%); /* W3C */
+    @include inline-middle;
+    &:after {
+        content: '\f0dd';
+        position: absolute;
+        top: calc(50% - 8px);
+        right: 5px;
+        font-family: FontAwesome;
+        font-size: rem(10);
+        color: #000;
+    }
+    select {
+        background: transparent;
+        -webkit-appearance: none;
+        border: none;
+        outline: 0;
+    } // select
+} // custom-select

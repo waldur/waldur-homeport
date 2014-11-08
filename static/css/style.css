@@ -6937,6 +6937,40 @@ time.date {
   border: none !important;
 }
 
+.custom-select {
+  background-color: transparent;
+  border: 1px solid #D8D8D8;
+  padding: 6px 10px;
+  padding-right: 15px;
+  margin-left: 12px;
+  margin-right: 12px;
+  -webkit-border-radius: 3px;
+          border-radius: 3px;
+  position: relative;
+  background: -webkit-gradient(linear, left top, left bottom, from(#eeeeee), to(#D7D7D7));
+  background: -webkit-linear-gradient(top, #eeeeee 0%, #D7D7D7 100%);
+  background: linear-gradient(to bottom, #eeeeee 0%, #D7D7D7 100%);
+  /* W3C */
+  display: inline-block;
+  vertical-align: middle;
+}
+.custom-select:after {
+  content: '\f0dd';
+  position: absolute;
+  top: -webkit-calc(50% - 8px);
+  top: calc(50% - 8px);
+  right: 5px;
+  font-family: FontAwesome;
+  font-size: 1rem;
+  color: #000;
+}
+.custom-select select {
+  background: transparent;
+  -webkit-appearance: none;
+  border: none;
+  outline: 0;
+}
+
 .navbar-fixed-top {
   border-width: 0;
 }
@@ -7116,36 +7150,6 @@ time.date {
 .navbar-nav > li > a.active:after {
   content: attr(data-original-title);
   margin-left: 8px;
-}
-
-.custom-select {
-  background-color: #89B550;
-  margin-top: 8px;
-  padding: 6px 10px;
-  padding-right: 15px;
-  margin-left: 12px;
-  margin-right: 12px;
-  -webkit-border-radius: 3px;
-          border-radius: 3px;
-  position: relative;
-  display: inline-block;
-  vertical-align: middle;
-}
-.custom-select:after {
-  content: '\f0dd';
-  position: absolute;
-  top: -webkit-calc(50% - 8px);
-  top: calc(50% - 8px);
-  right: 5px;
-  font-family: FontAwesome;
-  font-size: 1rem;
-  color: #000;
-}
-.custom-select select {
-  background: transparent;
-  -webkit-appearance: none;
-  border: none;
-  outline: 0;
 }
 
 .app-footer {
@@ -8097,6 +8101,108 @@ time.date {
 .add-form-box .standart-title {
   text-align: center;
   margin-top: 0px;
+}
+
+.form-view .form-view-block + .form-view-block {
+  margin-top: 30px;
+}
+.form-view .form-title, .form-view h3.form-title, .form-view h4.form-title {
+  text-align: center;
+  margin: 0px;
+  margin-bottom: 10px;
+}
+.form-view h3.form-title {
+  font-size: 2.2rem;
+}
+.form-view h4.form-title {
+  font-size: 2rem;
+}
+.form-view .send-box {
+  text-align: center;
+}
+.form-view .send-box .btn-cancel {
+  opacity: .5;
+}
+
+.add-resource-form .proj-label {
+  margin-left: 12px;
+}
+.add-resource-form .form-field.description {
+  margin-top: 20px;
+}
+.add-resource-form .form-field label {
+  margin-bottom: 10px;
+  position: relative;
+}
+.add-resource-form .form-field label.filled:after {
+  content: '\f00c';
+  font-family: FontAwesome;
+  color: green;
+  position: absolute;
+  right: -24px;
+  top: 0px;
+}
+
+.appstore .templates .templates-row + .templates-row {
+  margin-top: 5px;
+}
+.appstore .templates .template {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 12px;
+  margin-bottom: 5px;
+  -webkit-border-radius: 4px;
+          border-radius: 4px;
+  position: relative;
+  cursor: pointer;
+  border: 1px solid #cacaca;
+}
+.appstore .templates .template .name-row .icon-box {
+  text-align: center;
+}
+.appstore .templates .template .name-row .icon-box .icon {
+  -webkit-filter: grayscale(100%);
+          filter: grayscale(100%);
+  width: 80px;
+}
+.appstore .templates .template .name-row .description h3 {
+  margin: 0;
+  margin-bottom: 10px;
+  font-size: 1.8rem;
+}
+.appstore .templates .template .name-row .description article {
+  margin: 0;
+  line-height: 1.2;
+}
+.appstore .templates .template .price-row {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed #b0b0b0;
+}
+.appstore .templates .template .price-row .price {
+  text-align: center;
+  font-size: 1.4rem;
+}
+.appstore .templates .template .price-row .price .pice-item {
+  display: inline-block;
+  vertical-align: middle;
+}
+.appstore .templates .template .price-row .price .pice-item .int {
+  font-weight: 700;
+}
+.appstore .templates .template .price-row .price .pice-item .period {
+  color: #5C5C5C;
+}
+.appstore .templates .template.state {
+  border: 1px solid #3eab54;
+}
+.appstore .templates .template.state .name-row .icon-box .icon {
+  -webkit-filter: none;
+          filter: none;
+}
+.appstore .templates .template.state .price .int {
+  color: #43983a;
 }
 
 .site-welcome {

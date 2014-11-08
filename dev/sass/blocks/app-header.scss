@@ -190,30 +190,3 @@
         } // :after
     }
 } // .navbar-nav > li > a
-
-.custom-select {
-    background-color: #89B550;
-    margin-top: 8px;
-    padding: 6px 10px;
-    padding-right: 15px;
-    margin-left: 12px;
-    margin-right: 12px;
-    border-radius: 3px;
-    position: relative;
-    @include inline-middle;
-    &:after {
-        content: '\f0dd';
-        position: absolute;
-        top: calc(50% - 8px);
-        right: 5px;
-        font-family: FontAwesome;
-        font-size: rem(10);
-        color: #000;
-    }
-    select {
-        background: transparent;
-        -webkit-appearance: none;
-        border: none;
-        outline: 0;
-    } // select
-} // custom-select

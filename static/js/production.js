@@ -11359,8 +11359,14 @@ return jQuery;
         var appHeaderHeight = $('.app-header').height();
         var addResTrigger = $('[data-add-trigger="add-presource"]');
         var addResBox = $('[data-add-box="add-presource"]');
-        
         addResBox.css('top', appHeaderHeight);
+    }
+
+    function addResTemplate() {
+        var templ = $('[data-role="appstore-template"]');
+        templ.click(function(){
+            $(this).toggleClass('state');
+        });
     }
 
     // document ready
@@ -11372,6 +11378,7 @@ return jQuery;
         byNameinProjects();
         showGrouped();
         addResource();
+        addResTemplate();
     });
 
     // all initial on window resize
