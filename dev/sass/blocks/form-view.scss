@@ -69,6 +69,7 @@
             position: relative;
             cursor: pointer;
             border: 1px solid rgb(202, 202, 202);
+            // opacity: .5;
             .name-row {
                 // height: 200px;
                 .icon-box {
@@ -111,6 +112,7 @@
             &.state {
                 // background: #fff;
                 border: 1px solid rgb(62, 171, 84);
+                // opacity: 1;
                 .name-row {
                     .icon-box {
                         .icon {

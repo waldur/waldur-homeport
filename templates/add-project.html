@@ -1,0 +1,330 @@
+{% extends 'base_account.html' %}
+
+{% block content %}
+<section class="form-view">
+    <form action="" class="add-resource-form">
+        <div class="form-view-block">
+            <div class="container-fluid">
+                <!-- <h3 class="form-title">add resource</h3> -->
+                <div class="dash-title-box">
+                    <h2 class="dash-title">Add resource</h2>
+                </div>
+                <div class="row form-field">
+                    <!-- add to label filled if input fiiled correct -->
+                    <div class="col-xs-4"><label for="" class="">name</label></div>
+                    <div class="col-xs-8"><label for="" class="proj-label">project</label></div>
+                </div>
+                <div class="row form-field">
+                    <div class="col-xs-4">
+                        <input type="text" class="form-control" placeholder="Resource Name" data-role="form-input">
+                    </div>
+                    <div class="col-xs-8">
+                        <div class="custom-select">
+                            <select name="" id="">
+                                <option value="">Prj345N</option>
+                                <option value="">U345NV</option>
+                                <option value="">DooTram11</option>
+                                <option value="">FrayD34</option>
+                            </select>
+                        </div>
+                        <a href="#" class="crud-controls"><i class="fa fa-plus"></i> add project</a>
+                    </div>
+                </div>
+                <div class="row form-field description">
+                    <div class="col-xs-12">
+                        <label for="" class="desc-label">Description (optional)</label>
+                        <input type="text" class="form-control" placeholder="Resource Description" data-role="form-input">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-view-block app-store">
+            <div class="container-fluid">
+                <div class="appstore">
+                    <label for="">Pickup template</label>
+                    <div class="templates">
+                        <div class="row templates-row">
+                            <!-- template-box -->
+                            <div class="col-xs-4">
+                                <div class="template" data-role="appstore-template">
+                                    <div class="row name-row">
+                                        <div class="col-xs-4 icon-box">
+                                            <img src="{{ url_for('static', filename='images/tmp/cent-icon.png') }}" alt="" class="icon">
+                                        </div>
+                                        <div class="col-xs-8">
+                                            <div class="description">
+                                                <h3>CentOS 34</h3>
+                                                <article class="gray-text">
+                                                    Here goes some description about this template
+                                                </article>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row price-row">
+                                        <div class="col-xs-12">
+                                            <div class="price">
+                                                <div class="pice-item">
+                                                    <span class="int">34.86</span>
+                                                    / <span class="period">month</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /template-box -->
+                            <!-- template-box -->
+                            <div class="col-xs-4">
+                                <div class="template" data-role="appstore-template">
+                                    <div class="row name-row">
+                                        <div class="col-xs-4 icon-box">
+                                            <img src="{{ url_for('static', filename='images/tmp/ubuntu.png') }}" alt="" class="icon">
+                                        </div>
+                                        <div class="col-xs-8">
+                                            <div class="description">
+                                                <h3>CentOS 34</h3>
+                                                <article class="gray-text">
+                                                    Here goes some description about this template
+                                                </article>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row price-row">
+                                        <div class="col-xs-12">
+                                            <div class="price">
+                                                <div class="pice-item">
+                                                    <span class="int">34.86</span>
+                                                    / <span class="period">month</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /template-box -->
+                            <!-- template-box -->
+                            <div class="col-xs-4">
+                                <div class="template" data-role="appstore-template">
+                                    <div class="row name-row">
+                                        <div class="col-xs-4 icon-box">
+                                            <img src="{{ url_for('static', filename='images/tmp/windows.png') }}" alt="" class="icon">
+                                        </div>
+                                        <div class="col-xs-8">
+                                            <div class="description">
+                                                <h3>CentOS 34</h3>
+                                                <article class="gray-text">
+                                                    Here goes some description about this template
+                                                </article>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row price-row">
+                                        <div class="col-xs-12">
+                                            <div class="price">
+                                                <div class="pice-item">
+                                                    <span class="int">34.86</span>
+                                                    / <span class="period">month</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /template-box -->
+                        </div>
+                        <div class="row templates-row">
+                            <!-- template-box -->
+                            <div class="col-xs-4">
+                                <div class="template" data-role="appstore-template">
+                                    <div class="row name-row">
+                                        <div class="col-xs-4 icon-box">
+                                            <img src="{{ url_for('static', filename='images/tmp/cent-icon.png') }}" alt="" class="icon">
+                                        </div>
+                                        <div class="col-xs-8">
+                                            <div class="description">
+                                                <h3>CentOS 34</h3>
+                                                <article class="gray-text">
+                                                    Here goes some description about this template
+                                                </article>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row price-row">
+                                        <div class="col-xs-12">
+                                            <div class="price">
+                                                <div class="pice-item">
+                                                    <span class="int">34.86</span>
+                                                    / <span class="period">month</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /template-box -->
+                            <!-- template-box -->
+                            <div class="col-xs-4">
+                                <div class="template" data-role="appstore-template">
+                                    <div class="row name-row">
+                                        <div class="col-xs-4 icon-box">
+                                            <img src="{{ url_for('static', filename='images/tmp/ubuntu.png') }}" alt="" class="icon">
+                                        </div>
+                                        <div class="col-xs-8">
+                                            <div class="description">
+                                                <h3>CentOS 34</h3>
+                                                <article class="gray-text">
+                                                    Here goes some description about this template
+                                                </article>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row price-row">
+                                        <div class="col-xs-12">
+                                            <div class="price">
+                                                <div class="pice-item">
+                                                    <span class="int">34.86</span>
+                                                    / <span class="period">month</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /template-box -->
+                            <!-- template-box -->
+                            <div class="col-xs-4">
+                                <div class="template" data-role="appstore-template">
+                                    <div class="row name-row">
+                                        <div class="col-xs-4 icon-box">
+                                            <img src="{{ url_for('static', filename='images/tmp/windows.png') }}" alt="" class="icon">
+                                        </div>
+                                        <div class="col-xs-8">
+                                            <div class="description">
+                                                <h3>CentOS 34</h3>
+                                                <article class="gray-text">
+                                                    Here goes some description about this template
+                                                </article>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row price-row">
+                                        <div class="col-xs-12">
+                                            <div class="price">
+                                                <div class="pice-item">
+                                                    <span class="int">34.86</span>
+                                                    / <span class="period">month</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /template-box -->
+                        </div>
+                        <div class="row templates-row">
+                            <!-- template-box -->
+                            <div class="col-xs-4">
+                                <div class="template" data-role="appstore-template">
+                                    <div class="row name-row">
+                                        <div class="col-xs-4 icon-box">
+                                            <img src="{{ url_for('static', filename='images/tmp/cent-icon.png') }}" alt="" class="icon">
+                                        </div>
+                                        <div class="col-xs-8">
+                                            <div class="description">
+                                                <h3>CentOS 34</h3>
+                                                <article class="gray-text">
+                                                    Here goes some description about this template
+                                                </article>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row price-row">
+                                        <div class="col-xs-12">
+                                            <div class="price">
+                                                <div class="pice-item">
+                                                    <span class="int">34.86</span>
+                                                    / <span class="period">month</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /template-box -->
+                            <!-- template-box -->
+                            <div class="col-xs-4">
+                                <div class="template" data-role="appstore-template">
+                                    <div class="row name-row">
+                                        <div class="col-xs-4 icon-box">
+                                            <img src="{{ url_for('static', filename='images/tmp/ubuntu.png') }}" alt="" class="icon">
+                                        </div>
+                                        <div class="col-xs-8">
+                                            <div class="description">
+                                                <h3>CentOS 34</h3>
+                                                <article class="gray-text">
+                                                    Here goes some description about this template
+                                                </article>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row price-row">
+                                        <div class="col-xs-12">
+                                            <div class="price">
+                                                <div class="pice-item">
+                                                    <span class="int">34.86</span>
+                                                    / <span class="period">month</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /template-box -->
+                            <!-- template-box -->
+                            <div class="col-xs-4">
+                                <div class="template" data-role="appstore-template">
+                                    <div class="row name-row">
+                                        <div class="col-xs-4 icon-box">
+                                            <img src="{{ url_for('static', filename='images/tmp/windows.png') }}" alt="" class="icon">
+                                        </div>
+                                        <div class="col-xs-8">
+                                            <div class="description">
+                                                <h3>CentOS 34</h3>
+                                                <article class="gray-text">
+                                                    Here goes some description about this template
+                                                </article>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row price-row">
+                                        <div class="col-xs-12">
+                                            <div class="price">
+                                                <div class="pice-item">
+                                                    <span class="int">34.86</span>
+                                                    / <span class="period">month</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /template-box -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-view-block">
+            <div class="container-fluid">
+                <div class="row col-xs-12 send-box">
+                    <button class="btn btn-default btn-cancel">Cancel</button>
+                    <button class="btn btn-primary">Add resource</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>
+{% endblock %}
+
+{% block modals %}
+{% endblock %}

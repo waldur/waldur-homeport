@@ -38,6 +38,21 @@
     }
 }
 
+.site-header {
+    .navbar-nav > li {
+        &.home {
+            display: none;
+        }
+        &.active {
+            background: rgb(247, 247, 247);
+            a {
+                color: #000;
+                text-shadow: none;
+            } // a
+        }
+    }
+}
+
 .navbar-nav > li {
     &.home {
         display: none;

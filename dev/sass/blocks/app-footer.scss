@@ -7,6 +7,13 @@
         padding: 15px;
     } // .copy, nav
     .copy {} // copy
+    a {
+        color: #fff;
+        text-decoration: underline;
+        &:hover {
+            text-decoration: none;
+        }
+    } // a
     nav {
         text-align: right;
         ul {

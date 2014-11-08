@@ -6888,6 +6888,17 @@ time.date {
   text-shadow: none;
 }
 
+.site-header .navbar-nav > li.home {
+  display: none;
+}
+.site-header .navbar-nav > li.active {
+  background: #f7f7f7;
+}
+.site-header .navbar-nav > li.active a {
+  color: #000;
+  text-shadow: none;
+}
+
 .navbar-nav > li.home {
   display: none;
 }
@@ -7044,6 +7055,13 @@ time.date {
 }
 .app-footer .copy, .app-footer nav {
   padding: 15px;
+}
+.app-footer a {
+  color: #fff;
+  text-decoration: underline;
+}
+.app-footer a:hover {
+  text-decoration: none;
 }
 .app-footer nav {
   text-align: right;
