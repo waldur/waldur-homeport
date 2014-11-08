@@ -7514,6 +7514,7 @@ time.date {
 .event-single .event-single-box {
   padding: 15px;
   border: 1px solid #dfdfdf;
+  border-radius: 3px;
 }
 .event-single .event-title {
   margin-top: 5px;
