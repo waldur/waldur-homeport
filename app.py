@@ -24,6 +24,14 @@ freezer = Freezer(app)
 def index():
     return render_template('index.html')
 
+@app.route('/login/')
+def login():
+    return render_template('login.html')
+
+@app.route('/intial-data/')
+def initial_data():
+    return render_template('intial-data.html')
+
 @app.route('/plans/')
 def plans():
     return render_template('plans.html')

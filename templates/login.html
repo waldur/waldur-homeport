@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="login site-welcome" data-role="login">
+    
+    
+    <div class="login-box" data-role="login-box">
+        <div class="container-fluid">
+            <h1>Welcome! Just login, to see the future!</h1>
+            <div class="login-form">
+                <div class="login-block">
+                    <h4 class="title">One click login/signup</h4>
+                    <a href="{{ url_for('initial_data') }}" class="button-login google">Google</a>
+                    <span class="or">or</span>
+                    <a href="{{ url_for('initial_data') }}" class="button-login facebook">Facebook</a>
+                </div>
+                <div class="login-block">
+                    <h4 class="title">
+                        or use <a href="#" data-role="switch-login-form">login/password</a>
+                    </h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="login-box inputs" data-role="login-box-inputs">
+        <div class="container-fluid">
+            <h1>Welcome! Just login, to see the future!</h1>
+            <div class="login-form">
+                <div class="login-block">
+                    <div class="inputs-box">
+                        <div class="row inputs-row">
+                            <label for="" class="col-xs-4">username:</label>
+                            <input type="text" class="col-xs-8">
+                        </div>
+                        <div class="row inputs-row">
+                            <label for="" class="col-xs-4">password:</label>
+                            <input type="password" class="col-xs-8">
+                        </div>
+                        <a href="{{ url_for('initial_data') }}" class="btn btn-signup">Signup</a>
+                    </div>
+                </div>
+                <div class="login-block">
+                    <h4 class="title">
+                        back to <a href="#" data-role="switch-login-form">one click</a>
+                    </h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

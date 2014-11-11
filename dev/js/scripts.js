@@ -1,5 +1,25 @@
 (function($) {
 
+    // functions
+    function absCenter(elem) {
+        $el = elem;
+        var elLeft = -$el.width()/2;
+        var elTop = -$el.height()/2;
+        $el.css({
+            'margin-top': elTop,
+            'margin-left': elLeft
+        });
+    }
+    function stateCheck(elem, clName) {
+        $el = elem;
+        $clName = clName
+        if (!$el.hasClass(clName)) {
+            $el.addClass(clName);
+        } else {
+            $el.removeClass(clName);
+        }
+    }
+
     // for website
     // one page scroll
     function onePage() {
@@ -8,6 +28,36 @@
             var top = section.offset().top;
             $("html, body").animate({ scrollTop: top }, 700);
             return false;
+        });
+    }
+
+    // login slide
+    function loginSlide() {
+        var windowHieght = $(window).height();
+        var siteHeader = $('[data-role="header"]').height();
+        var siteFooter = $('[data-role="footer"]').height();
+        var login = $('[data-role="login"]');
+        
+        login.css('height', windowHieght-(siteHeader+siteFooter));
+
+        var loginBox = $('[data-role="login-box"]');
+        var loginBoxInputs = $('[data-role="login-box-inputs"]');
+        var switchTrigger = $('[data-role="switch-login-form"]');
+        
+        absCenter(loginBox);
+        absCenter(loginBoxInputs);
+        loginBox.addClass('transition');
+        loginBoxInputs.addClass('transition');
+
+        switchTrigger.click(function(){
+            
+                stateCheck(loginBox, 'state');
+            
+            
+            
+            
+                stateCheck(loginBoxInputs, 'state');
+            
         });
     }
 
@@ -72,9 +122,10 @@
     }
 
     // document ready
-    $(document).ready(function() {
+    $(window).on('load', function() {
         // website js
         onePage();
+        loginSlide();
         // account js
         tooltips();
         byNameinProjects();
@@ -85,6 +136,7 @@
 
     // all initial on window resize
     $(window).on('resize', function() {
+        loginSlide();
     });
 
 

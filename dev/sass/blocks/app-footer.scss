@@ -3,6 +3,9 @@
     margin-top: 40px;
     color: #fff;
     font-size: rem(15);
+    &.no-margin {
+        margin-top: 0px;
+    }
     .copy, nav {
         padding: 15px;
     } // .copy, nav

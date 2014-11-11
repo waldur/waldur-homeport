@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% block homelink %}#main{% endblock %}
+
 {% block content %}
 <div class="site-welcome">
     <div class="container-fluid">
@@ -8,7 +10,7 @@
             <span>and concentrate on the fun stuff</span>
         </h1>
         <div class="tour-box">
-            <a class="take-a-tour btn btn-default">Sign me up!</a>
+            <a href="/login/" class="take-a-tour btn btn-default">Sign me up!</a>
         </div>
         <img src="{{ url_for('static', filename='images/site-left.png')}}" alt="" class="img img-left">
         <img src="{{ url_for('static', filename='images/site-center.png')}}" alt="" class="img img-center">
