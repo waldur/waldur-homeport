@@ -1,0 +1,28 @@
+.initial-data {
+    .image {
+        padding-right: 20px;
+        img {
+            margin-top: 65px;
+            border-radius: 100%;
+        } // img
+    } // image
+    .data {
+        padding-left: 20px;
+    } // data
+    .form-data {
+        .form-block {
+            + .form-block {
+                margin-top: 30px;
+            } // +
+        } // form-block
+        .form-field {
+            + .form-field {
+                margin-top: 20px;
+            } // +
+        } // .form-field
+    } // form-data
+} // initial-data
+
+.finish-signup {
+    text-align: center;
+} // finish-signup

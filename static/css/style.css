@@ -8406,9 +8406,33 @@ body.prices {
   margin: 0 auto;
   width: 60%;
 }
+.plans-and-price .price-table-box.in-data {
+  width: 100%;
+  display: block;
+  color: inherit;
+  cursor: pointer;
+}
+.plans-and-price .price-table-box.in-data.active .grayscale {
+  opacity: 1;
+}
+.plans-and-price .price-table-box.in-data.active .grayscale .plan-name {
+  color: #6cc644;
+}
 .plans-and-price .price-table-box table.price-table {
   margin: 0 auto;
   width: 100%;
+}
+.plans-and-price .price-table-box table.price-table.grayscale {
+  opacity: .4;
+}
+.plans-and-price .price-table-box table.price-table.grayscale:hover {
+  opacity: 1;
+}
+.plans-and-price .price-table-box table.price-table.grayscale tr:nth-child(even) td {
+  background: #EFEFEF;
+}
+.plans-and-price .price-table-box table.price-table.grayscale tr .plan-name {
+  color: #000;
 }
 .plans-and-price .price-table-box table.price-table tr:nth-child(even) td {
   background: #f0f5fa;
@@ -8432,6 +8456,16 @@ body.prices {
 }
 .plans-and-price .price-table-box table.price-table tr td .plan-price, .plans-and-price .price-table-box table.price-table tr th .plan-price {
   font-size: 1.4rem;
+}
+.plans-and-price .price-table-box table.price-table tr td .btn-choice, .plans-and-price .price-table-box table.price-table tr th .btn-choice {
+  background-color: #7db243;
+  margin-top: 6px;
+  -webkit-border-radius: 4px;
+          border-radius: 4px;
+  padding: 6px 15px;
+  color: #fff;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.28);
+  border-bottom: 2px solid #2d6c09;
 }
 .plans-and-price table.buttons {
   margin: 0 auto;
@@ -8631,4 +8665,26 @@ body.prices {
   color: #fff;
   border-bottom: 2px solid #2d6c09;
   text-decoration: none;
+}
+
+.initial-data .image {
+  padding-right: 20px;
+}
+.initial-data .image img {
+  margin-top: 65px;
+  -webkit-border-radius: 100%;
+          border-radius: 100%;
+}
+.initial-data .data {
+  padding-left: 20px;
+}
+.initial-data .form-data .form-block + .form-block {
+  margin-top: 30px;
+}
+.initial-data .form-data .form-field + .form-field {
+  margin-top: 20px;
+}
+
+.finish-signup {
+  text-align: center;
 }

@@ -11,9 +11,39 @@ body {
         border: 1px solid rgb(229, 229, 229);
         margin: 0 auto;
         width: 60%;
+        &.in-data {
+            width: 100%;
+            display: block;
+            color: inherit;
+            cursor: pointer;
+            &.active {
+                .grayscale {
+                    opacity: 1;
+                    .plan-name {
+                        color: #6cc644;
+                    }
+                }
+            } // &.active 
+        } // in-data
         table.price-table {
             margin: 0 auto;
             width: 100%;
+            &.grayscale {
+                opacity: .4;
+                &:hover {
+                    opacity: 1;
+                } // &:hover
+                tr {
+                    &:nth-child(even) {
+                        td {
+                            background: #EFEFEF;
+                        }
+                    }
+                    .plan-name {
+                        color: #000;
+                    }
+                }
+            } // &.grayscale
             tr {
                 &:nth-child(even) {
                     td {
@@ -40,6 +70,15 @@ body {
                     }
                     .plan-price {
                         font-size: rem(14);
+                    }
+                    .btn-choice {
+                        background-color: rgb(125, 178, 67);
+                        margin-top: 6px;
+                        border-radius: 4px;
+                        padding: 6px 15px;
+                        color: #fff;
+                        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.28);
+                        border-bottom: 2px solid rgb(45, 108, 9);
                     }
                 } // td
             } // tr

@@ -11319,6 +11319,15 @@ return jQuery;
         }
     }
 
+    // choices
+    function choices(elem, classname) {
+        var templ = $(elem);
+        templ.click(function(){
+            templ.removeClass(classname);
+            $(this).addClass(classname);
+        });
+    }
+
     // for website
     // one page scroll
     function onePage() {
@@ -11377,10 +11386,8 @@ return jQuery;
                 $(this).toggleClass('active');
                 if(!searchField.hasClass('state')) {
                     searchField.addClass('state');
-                    console.log('foo bar')
                 } else {
                     searchField.removeClass('state');
-                    console.log('fuck')
                 }
             });
         });
@@ -11395,10 +11402,8 @@ return jQuery;
             groupedTrigger.click(function() {
                 if(!groupedShowGrouped.hasClass('state')) {
                     groupedShowGrouped.addClass('state');
-                    console.log('sd')
                 } else {
                     groupedShowGrouped.removeClass('state');
-                    console.log('fail')
                 }
             });
         });        
@@ -11412,14 +11417,6 @@ return jQuery;
         addResBox.css('top', appHeaderHeight);
     }
 
-    function addResTemplate() {
-        var templ = $('[data-role="appstore-template"]');
-        templ.click(function(){
-            templ.removeClass('state');
-            $(this).addClass('state');
-        });
-    }
-
     // document ready
     $(window).on('load', function() {
         // website js
@@ -11430,7 +11427,9 @@ return jQuery;
         byNameinProjects();
         showGrouped();
         addResource();
-        addResTemplate();
+        // addResTemplate();
+        choices('[data-role="appstore-template"]', 'state');
+        choices('[data-role="plan-in-data"]', 'active');
     });
 
     // all initial on window resize
