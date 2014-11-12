@@ -8017,6 +8017,9 @@ time.date {
   margin-top: 5px;
 }
 .appstore .templates .template {
+  transition-property: all;
+  transition-duration: 0.2s;
+  transition-timing-function: ease;
   box-sizing: border-box;
   padding: 12px;
   margin-bottom: 5px;
@@ -8243,6 +8246,9 @@ body.prices {
 }
 .plans-and-price .price-table-box table.price-table.grayscale {
   opacity: .4;
+  transition-property: all;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
 }
 .plans-and-price .price-table-box table.price-table.grayscale:hover {
   opacity: 1;

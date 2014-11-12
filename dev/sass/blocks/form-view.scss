@@ -61,6 +61,7 @@
             } // +            
         }  // templates-row
         .template {
+            @include transition(all, 0.2s, ease);
             // background: #EDEDED;
             box-sizing: border-box;
             padding: 12px;

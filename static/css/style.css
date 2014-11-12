@@ -8183,6 +8183,12 @@ time.date {
   margin-top: 5px;
 }
 .appstore .templates .template {
+  -webkit-transition-property: all;
+          transition-property: all;
+  -webkit-transition-duration: 0.2s;
+          transition-duration: 0.2s;
+  -webkit-transition-timing-function: ease;
+          transition-timing-function: ease;
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
           box-sizing: border-box;
@@ -8424,6 +8430,12 @@ body.prices {
 }
 .plans-and-price .price-table-box table.price-table.grayscale {
   opacity: .4;
+  -webkit-transition-property: all;
+          transition-property: all;
+  -webkit-transition-duration: 0.3s;
+          transition-duration: 0.3s;
+  -webkit-transition-timing-function: ease;
+          transition-timing-function: ease;
 }
 .plans-and-price .price-table-box table.price-table.grayscale:hover {
   opacity: 1;

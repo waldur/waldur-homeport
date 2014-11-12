@@ -30,6 +30,7 @@ body {
             width: 100%;
             &.grayscale {
                 opacity: .4;
+                @include transition(all, 0.3s, ease);
                 &:hover {
                     opacity: 1;
                 } // &:hover
