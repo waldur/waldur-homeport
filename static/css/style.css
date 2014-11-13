@@ -8525,6 +8525,7 @@ body.prices {
 .login {
   position: relative;
   color: #fff;
+  padding-bottom: 400px;
 }
 .login h4 {
   font-weight: 400;
@@ -8537,11 +8538,14 @@ body.prices {
 .login h1 {
   text-align: center;
 }
+.login .login-additional {
+  position: relative;
+}
 .login .login-box {
   position: absolute;
-  width: 80%;
-  top: 50%;
-  left: 50%;
+  top: 0px;
+  width: 100%;
+  float: left;
 }
 .login .login-box.transition {
   -webkit-transition-property: all;

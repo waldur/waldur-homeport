@@ -2,8 +2,7 @@
 
 {% block content %}
 <div class="login site-welcome" data-role="login">
-    
-    
+    <!-- login with social -->
     <div class="login-box" data-role="login-box">
         <div class="container-fluid">
             <h1>Welcome! Just login, to see the future!</h1>
@@ -22,8 +21,8 @@
             </div>
         </div>
     </div>
-
-
+    <!-- /login with social -->
+    <!-- login with fields -->
     <div class="login-box inputs" data-role="login-box-inputs">
         <div class="container-fluid">
             <h1>Welcome! Just login, to see the future!</h1>
@@ -49,5 +48,8 @@
             </div>
         </div>
     </div>
+    <!-- /login with fields -->
+    <!-- next block for additional content on login box -->
+    <div class="login-additional" data-role="login-additional"></div>
 </div>
 {% endblock %}

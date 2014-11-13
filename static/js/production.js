@@ -11345,27 +11345,31 @@ return jQuery;
         var siteHeader = $('[data-role="header"]').height();
         var siteFooter = $('[data-role="footer"]').height();
         var login = $('[data-role="login"]');
-        
-        login.css('height', windowHieght-(siteHeader+siteFooter));
-
         var loginBox = $('[data-role="login-box"]');
         var loginBoxInputs = $('[data-role="login-box-inputs"]');
         var switchTrigger = $('[data-role="switch-login-form"]');
+        var additional = $('[data-role="login-additional"]');
+        var loginPadding = 0;
+
+        if (loginBox.height() > loginBoxInputs.height()) {
+            loginPadding = loginBox.height();
+        } else {
+            loginPadding = loginBoxInputs.height()
+        }
+
+        login.css('min-height', windowHieght-(siteHeader+siteFooter));
+        loginBox.css('top', (windowHieght*.2))
+        loginBoxInputs.css('top', (windowHieght*.2))
+        additional.css('top', loginPadding+(windowHieght*.2));
         
-        absCenter(loginBox);
-        absCenter(loginBoxInputs);
+        // absCenter(loginBox);
+        // absCenter(loginBoxInputs);
         loginBox.addClass('transition');
         loginBoxInputs.addClass('transition');
 
-        switchTrigger.click(function(){
-            
-                stateCheck(loginBox, 'state');
-            
-            
-            
-            
-                stateCheck(loginBoxInputs, 'state');
-            
+        switchTrigger.click(function(){            
+            stateCheck(loginBox, 'state');
+            stateCheck(loginBoxInputs, 'state');
         });
     }
 
@@ -11430,6 +11434,7 @@ return jQuery;
         // addResTemplate();
         choices('[data-role="appstore-template"]', 'state');
         choices('[data-role="plan-in-data"]', 'active');
+        $('.disabled').bind('click', function(){ return false; });
     });
 
     // all initial on window resize

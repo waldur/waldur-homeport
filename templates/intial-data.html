@@ -16,13 +16,13 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="{% if current == "dashboard" %}active{% endif %}"><a href="{{ url_for('dashboard') }}" class="" data-toggle="tooltip" data-placement="bottom" title="Dashboard"><i class="fa fa-th-large"></i> Dashboard</a></li>
-                <li class="{% if current == "events" %}active{% endif %}"><a href="{{ url_for('events') }}" class="" data-toggle="tooltip" data-placement="bottom" title="Events"><i class="fa fa-bell"></i> Events</a></li>
-                <li class="{% if current == "projects" %}active{% endif %}"><a href="{{ url_for('projects') }}" class="" data-toggle="tooltip" data-placement="bottom" title="Projects"><i class="fa fa-folder"></i> Projects</a></li>
-                <li class="{% if current == "resources" %}active{% endif %}"><a href="{{ url_for('resources') }}" class="" data-toggle="tooltip" data-placement="bottom" title="Resources"><i class="fa fa-tasks"></i> Resources</a></li>
+                <li class="disabled {% if current == "dashboard" %}active{% endif %}"><a href="{{ url_for('dashboard') }}" class="" data-toggle="tooltip" data-placement="bottom" title="Dashboard"><i class="fa fa-th-large"></i> Dashboard</a></li>
+                <li class="disabled {% if current == "events" %}active{% endif %}"><a href="{{ url_for('events') }}" class="" data-toggle="tooltip" data-placement="bottom" title="Events"><i class="fa fa-bell"></i> Events</a></li>
+                <li class="disabled {% if current == "projects" %}active{% endif %}"><a href="{{ url_for('projects') }}" class="" data-toggle="tooltip" data-placement="bottom" title="Projects"><i class="fa fa-folder"></i> Projects</a></li>
+                <li class="disabled {% if current == "resources" %}active{% endif %}"><a href="{{ url_for('resources') }}" class="" data-toggle="tooltip" data-placement="bottom" title="Resources"><i class="fa fa-tasks"></i> Resources</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown add-something-box">
+                <li class="disabled dropdown add-something-box">
                     <a href="#" class="dropdown-toggle add-something-button" data-extra="tooltip" data-toggle="dropdown" data-placement="bottom" title="Create something...">
                         <i class="fa fa-plus"></i>
                     </a>
@@ -32,7 +32,7 @@
                         <li><a href="/add-resource/" class="add-resource">Add Resource</a></li>
                     </ul>
                 </li>
-                <li>
+                <li class="disabled">
                     <!-- <div class="custom-select">
                         <select name="" id="">
                             <option value="">Ilja Livenson</option>
@@ -51,10 +51,10 @@
                         <li><a href="#" class="add-customer">Manage Customers</a></li>
                     </ul>
                 </li>
-                <li>
+                <li class="disabled">
                     <img src="{{ url_for('static', filename='images/887178.jpg') }}" class="user-pic" alt="John Doe">
                 </li>
-                <li class="dropdown user-box">
+                <li class="disabled dropdown user-box">
                     <a href="#" class="dropdown-toggle user-pic-box" data-toggle="dropdown">
                         John Winner
                         <span class="caret"></span>
@@ -203,7 +203,14 @@
                                     <input type="text" class="form-control" placeholder="Email">
                                 </div>
                                 <div class="col-xs-6">
-                                    <input type="text" class="form-control" placeholder="Phone number">
+                                    <div class="row">
+                                        <div class="col-xs-4">
+                                            <input type="text" class="col-xs-4 form-control phone-code" placeholder="phone code">    
+                                        </div>
+                                        <div class="col-xs-8">
+                                            <input type="text" class="col-xs-8 form-control phone" placeholder="Phone number">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row form-field">
@@ -227,8 +234,42 @@
                         <!-- form-block -->
                         <div class="form-block">
                             <div class="row">
+                                <div class="col-xs-12">
+                                    
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <label for="">Card number</label>
+                                </div>
+                                <div class="col-xs-1"></div>
+                                <div class="col-xs-4">
+                                    <label for="">CVV</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <div class="row">
+                                        <div class="col-xs-3"><input type="text" class="form-control"></div>
+                                        <div class="col-xs-3"><input type="text" class="form-control"></div>
+                                        <div class="col-xs-3"><input type="text" class="form-control"></div>
+                                        <div class="col-xs-3"><input type="text" class="form-control"></div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-1"></div>
+                                <div class="col-xs-4">
+                                    <div class="row">
+                                        <div class="col-xs-3"><input type="text" class="form-control"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /form-block -->
+                        <!-- form-block -->
+                        <div class="form-block">
+                            <div class="row">
                                 <div class="col-xs-12 finish-signup">
-                                    <button class="btn btn-primary">Finish Signup</button>
+                                    <a href="{{ url_for('dashboard') }}" class="btn btn-primary">Finish Signup</a>
                                 </div>
                             </div>
                         </div>

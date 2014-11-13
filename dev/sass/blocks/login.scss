@@ -2,6 +2,7 @@
     // background: rgb(237, 237, 237) url(../images/decor-image-grayscale.png);
     position: relative;
     color: #fff;
+    padding-bottom: 400px;
     h4 {
         font-weight: 400;
             a {
@@ -13,11 +14,17 @@
     h1 {
         text-align: center;
     } // h1
+    .login-additional {
+        position: relative;
+    } // login-additional
     .login-box {
         position: absolute;
-        width: 80%;
-        top: 50%;
-        left: 50%;
+        // position: relative;
+        top: 0px;
+        width: 100%;
+        float: left;
+        // top: 50%;
+        // left: 50%;
         &.transition {
             @include transition(all, 0.4s, ease);
         }
