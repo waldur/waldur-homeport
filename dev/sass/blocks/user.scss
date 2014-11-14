@@ -1,0 +1,25 @@
+.user-profile {
+    .user-pic {
+        @include inline-middle;
+        width: 100px;
+        border-radius: 100%;
+    } // user-pic
+    .user-name {
+        @include inline-middle;
+        font-size: rem(24);
+        margin: 0;
+    } // user-name
+    .user-description {
+        padding: 15px;
+        padding-left: 0px;
+        color: #9e9e9e;
+        text-decoration: none;
+        font-size: 1.4rem;
+        &.edit {
+            padding-right: 0px;
+        } // &.edit
+        textarea {
+            height: 100px;
+        }
+    } // user-description
+} // user-profile

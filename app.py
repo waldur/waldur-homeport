@@ -60,6 +60,14 @@ def project():
 def resources():
     return render_template('resources.html', current = 'resources')
 
+@app.route('/user/')
+def user():
+    return render_template('user.html', current = 'user')
+
+@app.route('/user/edit/')
+def user_edit():
+    return render_template('user-edit.html', current = 'user')
+
 @app.route('/add-project/')
 def addproject():
     return render_template('add-project.html')
