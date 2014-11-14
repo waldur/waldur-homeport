@@ -98,14 +98,15 @@ time.date {
     background-color: transparent;
     border: 1px solid #D8D8D8;
     // margin-top: 8px;
-    padding: 6px 10px;
-    padding-right: 15px;
-    margin-left: 12px;
-    margin-right: 12px;
+    // padding: 6px 10px;
+    // padding-right: 15px;
     border-radius: 3px;
     position: relative;
-    background: linear-gradient(to bottom, #eeeeee 0%,#D7D7D7 100%); /* W3C */
+    // background: linear-gradient(to bottom, #eeeeee 0%,#D7D7D7 100%); /* W3C */
+    background: #F4F4F4;
+    color: #565656;
     @include inline-middle;
+    cursor: pointer;
     &:after {
         content: '\f0dd';
         position: absolute;
@@ -113,9 +114,12 @@ time.date {
         right: 5px;
         font-family: FontAwesome;
         font-size: rem(10);
-        color: #000;
+        color: #565656;
     }
     select {
+        padding: 6px 10px;
+        padding-right: 15px;
+        cursor: pointer;
         background: transparent;
         -webkit-appearance: none;
         border: none;
