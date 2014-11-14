@@ -16,28 +16,12 @@
                         <div class="pull-right">
                             <!-- <a href="{{ url_for('user_edit') }}" class="crud-controls"><i class="fa fa-cog"></i> manage user</a> -->
                             <!-- <a href="{{ url_for('user_edit') }}" class="crud-controls"><i class="fa fa-cog"></i> edit profile</a> -->
-                            <div class="btn btn-default">Save Changes</div>
+                            <a href="{{ url_for('user') }}" class="btn btn-default">Save Changes</a>
                         </div>
                     </div>
                 </div>
                 <div class="user-description edit">
                     <textarea name="" id="" cols="30" rows="10" class=" form-control">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ac est volutpat, convallis nisi ac, pretium justo. Proin feugiat ligula sit amet ipsum efficitur, id interdum leo eleifend.</textarea>
-                </div>
-                <div class="roles">
-                    <div class="checkbox-toggle inline">
-                        <input type="checkbox" id="some-check">
-                        <label for="some-check">
-                            Can manage projects
-                            <span class="toggle"></span>
-                        </label>
-                    </div>
-                    <div class="checkbox-toggle inline">
-                        <input type="checkbox" id="some-check-2">
-                        <label for="some-check-2">
-                            Can buy a coffe
-                            <span class="toggle"></span>
-                        </label>
-                    </div>
                 </div>
             </div>
         </div>
@@ -49,12 +33,6 @@
         <div class="row">
             <ul class="nav nav-tabs" role="tablist">
                 <li class="active">
-                    <a href="#eventlog" role="tab" data-toggle="tab">
-                        Events
-                        <span class="label label-success">11</span>
-                    </a>
-                </li>
-                <li>
                     <a href="#projects" role="tab" data-toggle="tab">
                         Projects in
                         <span class="label label-success">12</span>
@@ -62,47 +40,13 @@
                 </li>
                 <li>
                     <a href="#resources" role="tab" data-toggle="tab">
-                        Customer owner
-                        <span class="label label-success">12</span>
+                        Roles
                     </a>
                 </li>
             </ul>
         </div>
         <div class="row tab-content">
-            <div class="col-xs-12 tab-pane active" id="eventlog">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="dash-title-box">
-                            <h2 class="dash-title">What's happening</h2>
-                            <ul class="sort">
-                                <li><a href="#" class="active">5 hours</a></li>
-                                <li><a href="#">24 hours</a></li>
-                                <li><a href="#">week</a></li>
-                                <li class="divid"><a href="#"><i class="fa fa-clock-o"></i></a></li>
-                                <li><a href="#"><i class="fa fa-star"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="main-activities">
-                    {% include 'includes/parts/event-list-item.html' %}
-                    {% include 'includes/parts/event-list-item.html' %}
-                    {% include 'includes/parts/event-list-item.html' %}
-                    {% include 'includes/parts/event-list-item.html' %}
-                    {% include 'includes/parts/event-list-item.html' %}
-                    {% include 'includes/parts/event-list-item.html' %}
-                    {% include 'includes/parts/event-list-item.html' %}
-                    {% include 'includes/parts/event-list-item.html' %}
-                    {% include 'includes/parts/event-list-item.html' %}
-                    {% include 'includes/parts/event-list-item.html' %}
-                </div>
-                <!-- more -->
-                <div class="more">
-                    <a href="#" class="btn btn-default">Show more</a>
-                </div>
-                <!-- /more -->
-            </div>
-            <div class="col-xs-12 tab-pane" id="projects">
+            <div class="col-xs-12 tab-pane active" id="projects">
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="dash-title-box">
@@ -133,19 +77,19 @@
                                 <div class="th-label" data-toggle="tooltip" data-placement="top" title="Description">Description</div>
                             </th>
                             <th class="shared-resources sort-down">
-                                <div class="th-label" data-toggle="tooltip" data-placement="top" title="Shared resources">Shared resources</div>
+                                <div class="th-label" data-toggle="tooltip" data-placement="top" title="Shared resources">role</div>
                             </th>
                             <th class="actions sort-down">
                                 <div class="th-label" data-toggle="tooltip" data-placement="top" title="Actions">Actions</div>
                             </th>
                         </tr>
-                        {% include 'includes/parts/project-list-item-user.html' %}
-                        {% include 'includes/parts/project-list-item-user.html' %}
-                        {% include 'includes/parts/project-list-item-user.html' %}
-                        {% include 'includes/parts/project-list-item-user.html' %}
-                        {% include 'includes/parts/project-list-item-user.html' %}
-                        {% include 'includes/parts/project-list-item-user.html' %}
-                        {% include 'includes/parts/project-list-item-user.html' %}
+                        {% include 'includes/parts/project-list-item-user-edit.html' %}
+                        {% include 'includes/parts/project-list-item-user-edit.html' %}
+                        {% include 'includes/parts/project-list-item-user-edit.html' %}
+                        {% include 'includes/parts/project-list-item-user-edit.html' %}
+                        {% include 'includes/parts/project-list-item-user-edit.html' %}
+                        {% include 'includes/parts/project-list-item-user-edit.html' %}
+                        {% include 'includes/parts/project-list-item-user-edit.html' %}
                     </table>
                     <!-- pagination -->
                     <div class="pagination">
@@ -162,61 +106,21 @@
                 </div>
             </div>
             <div class="col-xs-12 tab-pane" id="resources">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="dash-title-box">
-                            <h2 class="dash-title">Resources</h2>
-                            <ul class="sort">
-                                <li><a href="#" class="active">5</a></li>
-                                <li><a href="#">15</a></li>
-                                <li><a href="#">24</a></li>
-                            </ul>
-                        </div>
+                <div class="roles">
+                    <div class="checkbox-toggle inline">
+                        <input type="checkbox" id="some-check">
+                        <label for="some-check">
+                            Can manage projects
+                            <span class="toggle"></span>
+                        </label>
                     </div>
-                </div>
-                <div class="projects-list">
-                    <table class="project-list-table">
-                        <tr>
-                            <th class="name sort-down">
-                                <div class="th-label" data-toggle="tooltip" data-placement="top" title="Name">Name</div>
-                            </th>
-                            <th class="description sort-down">
-                                <div class="th-label" data-toggle="tooltip" data-placement="top" title="Description">Description</div>
-                            </th>
-                            <th class="participants sort-down" data-proj-sort="box">
-                                <div class="th-label" data-toggle="tooltip" data-placement="top" title="Project">Projects</div>
-                                <a class="search" data-proj-sort="name" data-toggle="tooltip" data-placement="bottom" title="By name"><i class="fa fa-search"></i></a>
-                                <div class="by-name-search" data-proj-sort="field">
-                                    <input type="text" placeholder="John Doe">
-                                </div>
-                            </th>
-                            <th class="shared-resources sort-down">
-                                <div class="th-label" data-toggle="tooltip" data-placement="top" title="Shared resources">Shared resources</div>
-                            </th>
-                            <th class="actions sort-down">
-                                <div class="th-label" data-toggle="tooltip" data-placement="top" title="Actions">Actions</div>
-                            </th>
-                        </tr>
-                        {% include 'includes/parts/customer-list-item.html' %}
-                        {% include 'includes/parts/customer-list-item.html' %}
-                        {% include 'includes/parts/customer-list-item.html' %}
-                        {% include 'includes/parts/customer-list-item.html' %}
-                        {% include 'includes/parts/customer-list-item.html' %}
-                        {% include 'includes/parts/customer-list-item.html' %}
-                        {% include 'includes/parts/customer-list-item.html' %}
-                    </table>
-                    <!-- pagination -->
-                    <div class="pagination">
-                        <ul>
-                            <li><span>list pages:</span></li>
-                            <li><a href="#" class="current">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                        </ul>
+                    <div class="checkbox-toggle inline">
+                        <input type="checkbox" id="some-check-2">
+                        <label for="some-check-2">
+                            Can buy a coffe
+                            <span class="toggle"></span>
+                        </label>
                     </div>
-                    <!-- /pagination -->
                 </div>
             </div>
         </div>

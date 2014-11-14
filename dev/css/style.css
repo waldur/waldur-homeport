@@ -6823,16 +6823,13 @@ time.date {
 .custom-select {
   background-color: transparent;
   border: 1px solid #D8D8D8;
-  padding: 6px 10px;
-  padding-right: 15px;
-  margin-left: 12px;
-  margin-right: 12px;
   border-radius: 3px;
   position: relative;
-  background: linear-gradient(to bottom, #eeeeee 0%, #D7D7D7 100%);
-  /* W3C */
+  background: #F4F4F4;
+  color: #565656;
   display: inline-block;
   vertical-align: middle;
+  cursor: pointer;
 }
 .custom-select:after {
   content: '\f0dd';
@@ -6841,9 +6838,12 @@ time.date {
   right: 5px;
   font-family: FontAwesome;
   font-size: 1rem;
-  color: #000;
+  color: #565656;
 }
 .custom-select select {
+  padding: 6px 10px;
+  padding-right: 15px;
+  cursor: pointer;
   background: transparent;
   -webkit-appearance: none;
   border: none;
@@ -6996,7 +6996,7 @@ time.date {
   width: auto;
   height: 40px;
   margin-top: 5px;
-  border-radius: 100%;
+  border-radius: .4em;
 }
 .navbar-nav > li .add-something-button {
   position: relative;
@@ -7309,6 +7309,26 @@ time.date {
   border-left: 1px solid #dfdfdf;
   padding: 10px 20px 10px 20px;
 }
+.event.event-user {
+  position: relative;
+  padding-left: 60px;
+}
+.event.event-user:nth-child(1) .user-pic {
+  top: 1px;
+}
+.event.event-user .user-pic {
+  position: absolute;
+  left: 18px;
+  top: 11px;
+  display: table-cell;
+  vertical-align: top;
+  box-sizing: border-box;
+  vertical-align: middle;
+  width: 25px;
+}
+.event.event-user .user-pic img {
+  border-radius: .4em;
+}
 .event:nth-child(1) {
   padding-top: 0px;
 }
@@ -7337,7 +7357,7 @@ time.date {
   border: 2px solid #dfdfdf;
   position: absolute;
   top: 6px;
-  left: -28px;
+  left: -68px;
 }
 .event .controls-box {
   text-align: right;
@@ -7542,7 +7562,7 @@ time.date {
   display: inline-block;
   vertical-align: middle;
   width: 60px;
-  border-radius: 100%;
+  border-radius: .4em;
 }
 .project-single .project-customer h3 {
   display: inline-block;
@@ -7847,7 +7867,7 @@ time.date {
   width: 35px;
 }
 .users-list .user-view .user-title .user-pic img {
-  border-radius: 100%;
+  border-radius: .4em;
 }
 .users-list .user-view .user-title .user-name {
   display: table-cell;
@@ -7901,7 +7921,7 @@ time.date {
 }
 .users-list-table tr .user-pic img {
   max-width: 40px;
-  border-radius: 100%;
+  border-radius: .4em;
 }
 .users-list-table tr .user-name {
   width: 260px;
@@ -8565,7 +8585,7 @@ body.prices {
   display: inline-block;
   vertical-align: middle;
   width: 100px;
-  border-radius: 100%;
+  border-radius: .6em;
 }
 .user-profile .user-name {
   display: inline-block;

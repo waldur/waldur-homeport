@@ -2,7 +2,7 @@
     .user-pic {
         @include inline-middle;
         width: 100px;
-        border-radius: 100%;
+        border-radius: .6em;
     } // user-pic
     .user-name {
         @include inline-middle;

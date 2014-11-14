@@ -8,7 +8,7 @@
         .user-pic {
             @include inline-middle;
             width: 60px;
-            border-radius: 100%;
+            border-radius: .4em;
         } // user-pic
         h3 {
             @include inline-middle;

@@ -1,9 +1,12 @@
 <!-- main-activity-item -->
-<div class="event" data-notify="single-notify">
+<div class="event event-user" data-notify="single-notify">
+    <a href="{{ url_for('user') }}" class="user-pic">
+        <img src="{{ url_for('static', filename='images/887178.jpg') }}">
+    </a>
     <!-- header -->
     <header class="row">
         <div class="col-xs-8">
-            <a href="{{ url_for('event') }}" class="event-title">Update something</a>
+            <a href="{{ url_for('event') }}" class="event-title">Update something</a> for <a href="{{ url_for('project') }}">GhZ400</a>
         </div>
         <div class="col-xs-4 controls-box">
             <ul class="controls">
@@ -20,9 +23,9 @@
                 Description of an event. AWS VM john.doe.com was is suffering from a Heartbleed bug.
             </p>
         </div>
-        <div class="bottom-controls">
+        <!-- <div class="bottom-controls">
             <a href="#" class="elem event-action">Send event</a>
-        </div>
+        </div> -->
     </div>
     <!-- separate -->
     <div class="separate"></div>

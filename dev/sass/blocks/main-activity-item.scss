@@ -3,6 +3,26 @@
     padding: 10px 20px 10px 20px;
     // position: relative;
     // z-index: 999;
+    &.event-user {
+        position: relative;
+        padding-left: 60px;
+        &:nth-child(1) {
+            .user-pic  {
+                top: 1px;
+            } // .user-pic 
+        }
+        .user-pic {
+            position: absolute;
+            left: 18px;
+            top: 11px;
+            @include table-cell;
+            vertical-align: middle;
+            width: 25px;
+            img {
+                border-radius: .4em;
+            } // img
+        } // user-pic
+    } // event-user
     &:nth-child(1) {
         padding-top: 0px;
     }
@@ -29,7 +49,7 @@
             border: 2px solid #dfdfdf;
             position: absolute;
             top: 6px;
-            left: -28px;
+            left: -68px;
         }
     } // project-title
     .controls-box {
