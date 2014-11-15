@@ -64,9 +64,21 @@ def resources():
 def user():
     return render_template('user.html', current = 'user')
 
+@app.route('/users/manage/')
+def users_manage():
+    return render_template('users-manage.html', current = 'user')
+
 @app.route('/user/edit/')
 def user_edit():
     return render_template('user-edit.html', current = 'user')
+
+@app.route('/customer/')
+def customer():
+    return render_template('customer.html', current = 'user')
+
+@app.route('/customer/edit/')
+def customer_edit():
+    return render_template('customer-edit.html', current = 'user')
 
 @app.route('/add-project/')
 def addproject():

@@ -19,9 +19,14 @@
             vertical-align: middle;
             width: 25px;
             img {
-                border-radius: .4em;
+                border-radius: .2em;
             } // img
         } // user-pic
+        .event-title {
+            &:before {
+                left: -68px;
+            }
+        } // envent-title
     } // event-user
     &:nth-child(1) {
         padding-top: 0px;
@@ -49,7 +54,7 @@
             border: 2px solid #dfdfdf;
             position: absolute;
             top: 6px;
-            left: -68px;
+            left: -28px;
         }
     } // project-title
     .controls-box {

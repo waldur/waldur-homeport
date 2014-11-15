@@ -29,7 +29,7 @@
     <div class="container-fluid">
         <div class="row">
             <ul class="nav nav-tabs" role="tablist">
-                <li class="active">
+                <li>
                     <a href="#eventlog" role="tab" data-toggle="tab">
                         Events
                         <span class="label label-success">11</span>
@@ -41,16 +41,16 @@
                         <span class="label label-success">12</span>
                     </a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="#resources" role="tab" data-toggle="tab">
-                        Customer owner
+                        Customers
                         <span class="label label-success">12</span>
                     </a>
                 </li>
             </ul>
         </div>
         <div class="row tab-content">
-            <div class="col-xs-12 tab-pane active" id="eventlog">
+            <div class="col-xs-12 tab-pane" id="eventlog">
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="dash-title-box">
@@ -142,26 +142,32 @@
                     <!-- /pagination -->
                 </div>
             </div>
-            <div class="col-xs-12 tab-pane" id="resources">
+            <div class="col-xs-12 tab-pane active" id="resources">
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="dash-title-box">
-                            <h2 class="dash-title">Resources</h2>
+                            <h2 class="dash-title">Customers</h2>
                             <ul class="sort">
                                 <li><a href="#" class="active">5</a></li>
                                 <li><a href="#">15</a></li>
                                 <li><a href="#">24</a></li>
+                                <li class="crud-box"><a href="#" class="crud-controls"><i class="fa fa-building"></i> manage customers</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
                 <div class="projects-list">
-                    <table class="project-list-table">
+                    <table class="users-list-table">
                         <tr>
-                            <th class="name sort-down">
+                            <th class="user-pic"></th>
+                            <th class="description sort-down" data-proj-sort="box">
                                 <div class="th-label" data-toggle="tooltip" data-placement="top" title="Name">Name</div>
+                                <a class="search" data-proj-sort="name" data-toggle="tooltip" data-placement="bottom" title="By name"><i class="fa fa-search"></i></a>
+                                <div class="by-name-search" data-proj-sort="field">
+                                    <input type="text" placeholder="John Doe">
+                                </div>
                             </th>
-                            <th class="description sort-down">
+                            <th class="user-description">
                                 <div class="th-label" data-toggle="tooltip" data-placement="top" title="Description">Description</div>
                             </th>
                             <th class="participants sort-down" data-proj-sort="box">
@@ -170,9 +176,6 @@
                                 <div class="by-name-search" data-proj-sort="field">
                                     <input type="text" placeholder="John Doe">
                                 </div>
-                            </th>
-                            <th class="shared-resources sort-down">
-                                <div class="th-label" data-toggle="tooltip" data-placement="top" title="Shared resources">Shared resources</div>
                             </th>
                             <th class="actions sort-down">
                                 <div class="th-label" data-toggle="tooltip" data-placement="top" title="Actions">Actions</div>

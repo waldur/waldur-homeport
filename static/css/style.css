@@ -7476,8 +7476,11 @@ time.date {
   width: 25px;
 }
 .event.event-user .user-pic img {
-  -webkit-border-radius: .4em;
-          border-radius: .4em;
+  -webkit-border-radius: .2em;
+          border-radius: .2em;
+}
+.event.event-user .event-title:before {
+  left: -68px;
 }
 .event:nth-child(1) {
   padding-top: 0px;
@@ -7507,7 +7510,7 @@ time.date {
   border: 2px solid #dfdfdf;
   position: absolute;
   top: 6px;
-  left: -68px;
+  left: -28px;
 }
 .event .controls-box {
   text-align: right;
@@ -7582,6 +7585,9 @@ time.date {
 }
 .projects-list table.project-list-table tr .name {
   width: 120px;
+}
+.projects-list table.project-list-table tr .role {
+  width: 154px;
 }
 .projects-list table.project-list-table tr .actions {
   width: 120px;
@@ -8095,6 +8101,9 @@ time.date {
   max-width: 40px;
   -webkit-border-radius: .4em;
           border-radius: .4em;
+}
+.users-list-table tr .role {
+  width: 154px;
 }
 .users-list-table tr .user-name {
   width: 260px;

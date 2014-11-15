@@ -166,7 +166,7 @@
                                             <input type="text">
                                         </div>
                                     </li> -->
-                                    <li class="crud-box"><a href="#" class="crud-controls"><i class="fa fa-users"></i> manage users</a></li>
+                                    <li class="crud-box"><a href="{{ url_for('users_manage') }}" class="crud-controls"><i class="fa fa-users"></i> manage users</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -197,19 +197,19 @@
                             {% include 'includes/parts/user-list-item-project.html' %}
                             {% include 'includes/parts/user-list-item-project.html' %}
                             {% include 'includes/parts/user-list-item-project.html' %}
-                        </table>
-                        <!-- pagination -->
-                        <div class="pagination">
-                            <ul>
-                                <li><span>list pages:</span></li>
-                                <li><a href="#" class="current">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">5</a></li>
-                            </ul>
-                        </div>
-                        <!-- /pagination -->
+                            </table>
+                            <!-- pagination -->
+                            <div class="pagination">
+                                <ul>
+                                    <li><span>list pages:</span></li>
+                                    <li><a href="#" class="current">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#">4</a></li>
+                                    <li><a href="#">5</a></li>
+                                </ul>
+                            </div>
+                            <!-- /pagination -->
                         </div>
                     </div>
                 </div>

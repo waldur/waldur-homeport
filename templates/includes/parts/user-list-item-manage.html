@@ -1,0 +1,25 @@
+<tr>
+    <td class="user-pic">
+        <a href="{{ url_for('user') }}">
+            <img src="{{ url_for('static', filename='images/887178.jpg') }}">
+        </a>
+    </td>
+    <td class="user-name">
+        <a href="{{ url_for('user') }}">Alex Fillow Thor jr.</a>
+    </td>
+    <td class="user-description">
+        Some description about user. Something interesting for admin, or customer owner.
+    </td>
+    <td class="role">
+        <div class="custom-select">
+            <select name="" id="">
+                <option value="">Manager</option>
+                <option value="">Admin</option>
+            </select>
+        </div>
+        <div class="label label-success">saved</div>
+    </td>
+    <td class="actions">
+        <a href="#" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
+    </td>
+</tr>

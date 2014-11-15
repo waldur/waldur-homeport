@@ -1,0 +1,78 @@
+{% extends 'base_account.html' %}
+
+{% block content %}
+<!-- dash-block -->
+<div class="dash-block" id="projects">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="dash-title-box">
+                    <h2 class="dash-title"><a href="{{ url_for('project') }}">Project Gh-45</a>: manage users</h2>
+                    <ul class="sort">
+                        <li><a href="#" class="active">5</a></li>
+                        <li><a href="#">15</a></li>
+                        <li><a href="#">24</a></li>
+                        <li class="divid">
+                            <a href="#" class="conf">hosting</a>
+                        </li>
+                        <li><a href="#">repository</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="projects-list">
+                    <table class="users-list-table">
+                        <tr>
+                            <th class="user-pic"></th>
+                            <th class="description sort-down" data-proj-sort="box">
+                                <div class="th-label" data-toggle="tooltip" data-placement="top" title="Name">Name</div>
+                                <a class="search" data-proj-sort="name" data-toggle="tooltip" data-placement="bottom" title="By name"><i class="fa fa-search"></i></a>
+                                <div class="by-name-search" data-proj-sort="field">
+                                    <input type="text" placeholder="John Doe">
+                                </div>
+                            </th>
+                            <th class="user-description">
+                                <div class="th-label" data-toggle="tooltip" data-placement="top" title="Description">Description</div>
+                            </th>
+                            <th class="sort-down">
+                                <div class="th-label" data-toggle="tooltip" data-placement="top" title="Shared resources">Role</div>
+                            </th>
+                            <th class="actions sort-down">
+                                <div class="th-label" data-toggle="tooltip" data-placement="top" title="Actions">Actions</div>
+                            </th>
+                        </tr>
+                        {% include 'includes/parts/user-list-item-manage.html' %}
+                        {% include 'includes/parts/user-list-item-manage.html' %}
+                        {% include 'includes/parts/user-list-item-manage.html' %}
+                        {% include 'includes/parts/user-list-item-manage.html' %}
+                        {% include 'includes/parts/user-list-item-manage.html' %}
+                        {% include 'includes/parts/user-list-item-manage.html' %}
+                        {% include 'includes/parts/user-list-item-manage.html' %}
+                    </table>
+                    <!-- pagination -->
+                    <div class="pagination">
+                        <ul>
+                            <li><span>list pages:</span></li>
+                            <li><a href="#" class="current">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                        </ul>
+                    </div>
+                    <!-- /pagination -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /dash-block -->
+{% endblock %}
+
+{% block side_menu %}
+{% endblock %}
+
+{% block modals %}
+{% endblock %}
