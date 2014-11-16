@@ -39,6 +39,7 @@
     }
     .event-title {
         @include inline-middle;
+        margin: 0;
         font-size: rem(18);
         font-weight: 700;
         text-decoration: none;

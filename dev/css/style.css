@@ -7344,6 +7344,7 @@ time.date {
 .event .event-title {
   display: inline-block;
   vertical-align: middle;
+  margin: 0;
   font-size: 1.8rem;
   font-weight: 700;
   text-decoration: none;

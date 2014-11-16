@@ -16,8 +16,6 @@
                 <li class="{% if current == "resources" %}active{% endif %}"><a href="{{ url_for('resources') }}" class="" data-toggle="tooltip" data-placement="bottom" title="Resources"><i class="fa fa-tasks"></i> Resources</a></li>
                 <li class="{% if current == "projects" %}active{% endif %}"><a href="{{ url_for('projects') }}" class="" data-toggle="tooltip" data-placement="bottom" title="Projects"><i class="fa fa-folder"></i> Projects</a></li>
                 <li class="{% if current == "services" %}active{% endif %}"><a href="{{ url_for('projects') }}" class="" data-toggle="tooltip" data-placement="bottom" title="Services"><i class="fa fa-folder"></i> Services</a></li>
-
-                <li class="{% if current == "events" %}active{% endif %}"><a href="{{ url_for('events') }}" class="" data-toggle="tooltip" data-placement="bottom" title="Events"><i class="fa fa-bell"></i> Events</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown add-something-box">

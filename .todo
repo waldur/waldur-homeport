@@ -21,3 +21,48 @@ add cloud account to form resources
 
 add project
 manage customers
+
+
+1. Packages
+    - Free tier
+        - 2 projects
+        - 5 users
+        - 5 resource
+    - refund 14 days -- highlight in text
+    - plan selection should be moved to customer profile/separate page
+    - payment
+        - through gw
+        - adyen | paypal | stripe
+
+2. Personal information
+    - only name => editable
+    - email => editable
+
+3. Icon on initial data
+    - square, not round
+
+4. Events
+    Account creation =>
+        Add cloud account
+        Create new project
+    Project creation =>
+        Connect cloud account
+        Add collaborators
+
+5. Cloud accounts
+    Add to header menu
+    => Services
+
+6. Event
+    Drop filter by "watch later"
+    "Send event" => "Send to email"
+    Drop event page
+        => expandable event view if needed
+    Events => last in header
+
+7. Top level tooltips => drop them
+
+8. Generic item order
+    Dash > Resources > Projects > Services > Events
+
+9. Edit links -> close to titles
