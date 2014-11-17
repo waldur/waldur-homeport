@@ -6936,6 +6936,16 @@ time.date {
   opacity: 1 !important;
   border: none !important;
 }
+.crud-controls.active {
+  background: #27ae60;
+  padding: 4px 6px !important;
+  -webkit-border-radius: 3px;
+          border-radius: 3px;
+  color: #fff !important;
+}
+.crud-controls.active:after {
+  display: none !important;
+}
 
 .custom-select {
   background-color: transparent;

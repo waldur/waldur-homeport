@@ -92,6 +92,15 @@ time.date {
     text-decoration: none !important;
     opacity: 1 !important;
     border: none !important;
+    &.active {
+        background: #27ae60;
+        padding: 4px 6px !important;
+        border-radius: 3px;
+        color: #fff !important;
+        &:after {
+            display: none !important;
+        }
+    }
 } // crud-controls
 
 .custom-select {

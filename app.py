@@ -52,6 +52,10 @@ def event():
 def projects():
     return render_template('projects.html', current = 'projects')
 
+@app.route('/services/')
+def services():
+    return render_template('services.html', current = 'services')
+
 @app.route('/project/')
 def project():
     return render_template('project.html', current = 'projects')
