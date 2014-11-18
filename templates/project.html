@@ -166,7 +166,10 @@
                                             <input type="text">
                                         </div>
                                     </li> -->
-                                    <li class="crud-box"><a href="{{ url_for('users_manage') }}" class="crud-controls"><i class="fa fa-users"></i> manage users</a></li>
+                                    <li class="crud-box">
+                                        <a href="{{ url_for('users_manage') }}" class="crud-controls"><i class="fa fa-plus"></i> add users</a>
+                                        <a href="{{ url_for('users_manage') }}" class="crud-controls"><i class="fa fa-users"></i> manage users</a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>

@@ -23,3 +23,17 @@
         }
     } // user-description
 } // user-profile
+
+.user-edit-form {
+    .user-edit-row {
+        + .user-edit-row {
+            margin-top: 20px;
+        } // +
+        input + input {
+            margin-top: 10px;
+        } // input + input
+        label {
+            margin-bottom: 20px;
+        }
+    } // user-edit-row
+} // user-edit-form

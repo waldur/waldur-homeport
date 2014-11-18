@@ -9,19 +9,24 @@
             </div>
             <div class="col-xs-10">
                 <div class="row">
-                    <div class="col-xs-10">
-                        <input type="text" class="form-control pull-left" value="Mihail Yakimenko">
+                    <div class="col-xs-10 user-edit-form">
+                        <div class="user-edit-row">
+                            <label for="">change personal data</label>
+                            <input type="text" class="form-control" value="Mihail Yakimenko">
+                            <input type="text" class="form-control" value="mail@mail.com">
+                        </div>
+                        <div class="user-edit-row">
+                            <label for="">change password</label>
+                            <input type="password" class="form-control" placeholder="current password">
+                            <input type="password" class="form-control" placeholder="new password">
+                            <input type="password" class="form-control" placeholder="confirm new password">
+                        </div>
                     </div>
                     <div class="col-xs-2">
                         <div class="pull-right">
-                            <!-- <a href="{{ url_for('user_edit') }}" class="crud-controls"><i class="fa fa-cog"></i> manage user</a> -->
-                            <!-- <a href="{{ url_for('user_edit') }}" class="crud-controls"><i class="fa fa-cog"></i> edit profile</a> -->
-                            <a href="{{ url_for('user') }}" class="btn btn-default">Save Changes</a>
+                            <a href="{{ url_for('user') }}" class="crud-controls active"><i class="fa fa-cog"></i> edit profile</a>
                         </div>
                     </div>
-                </div>
-                <div class="user-description edit">
-                    <textarea name="" id="" cols="30" rows="10" class=" form-control">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ac est volutpat, convallis nisi ac, pretium justo. Proin feugiat ligula sit amet ipsum efficitur, id interdum leo eleifend.</textarea>
                 </div>
             </div>
         </div>
@@ -47,7 +52,11 @@
                 <li>
                     <a href="#resources" role="tab" data-toggle="tab">
                         Customers
-                        <span class="label label-success">12</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#keys" role="tab" data-toggle="tab">
+                        Keys
                     </a>
                 </li>
             </ul>
@@ -61,9 +70,8 @@
                             <ul class="sort">
                                 <li><a href="#" class="active">5 hours</a></li>
                                 <li><a href="#">24 hours</a></li>
-                                <li><a href="#">week</a></li>
-                                <li class="divid"><a href="#"><i class="fa fa-clock-o"></i></a></li>
-                                <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                <li><a href="#">week</a></li>                                
+                                <li class="divid"><a href="#"><i class="fa fa-star"></i></a></li>
                             </ul>
                         </div>
                     </div>
@@ -99,6 +107,7 @@
                                     <a href="#" class="conf">Administrator</a>
                                 </li>
                                 <li><a href="#">Manager</a></li>
+                                <li class="crud-box"><a href="#" class="crud-controls"><i class="fa fa-plus"></i> add project</a></li>
                             </ul>
                         </div>
                     </div>
@@ -146,6 +155,19 @@
                 </div>
             </div>
             <div class="col-xs-12 tab-pane" id="resources">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="dash-title-box">
+                            <h2 class="dash-title">Customers</h2>
+                            <ul class="sort">
+                                <li><a href="#" class="active">5</a></li>
+                                <li><a href="#">15</a></li>
+                                <li><a href="#">24</a></li>
+                                <li class="crud-box"><a href="#" class="crud-controls"><i class="fa fa-plus"></i> add customers</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
                 <div class="projects-list">
                     <table class="users-list-table">
                         <tr>
@@ -178,6 +200,63 @@
                         {% include 'includes/parts/customer-list-item.html' %}
                         {% include 'includes/parts/customer-list-item.html' %}
                         {% include 'includes/parts/customer-list-item.html' %}
+                    </table>
+                    <!-- pagination -->
+                    <div class="pagination">
+                        <ul>
+                            <li><span>list pages:</span></li>
+                            <li><a href="#" class="current">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                        </ul>
+                    </div>
+                    <!-- /pagination -->
+                </div>
+            </div>
+            <div class="col-xs-12 tab-pane" id="keys">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="dash-title-box">
+                            <h2 class="dash-title">Customers</h2>
+                            <ul class="sort">
+                                <li><a href="#" class="active">5</a></li>
+                                <li><a href="#">15</a></li>
+                                <li><a href="#">24</a></li>
+                                <li class="crud-box"><a href="#" class="crud-controls"><i class="fa fa-plus"></i> add key</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="projects-list">
+                    <table class="users-list-table">
+                        <tr>
+                            <th class="description sort-down" data-proj-sort="box">
+                                <div class="th-label" data-toggle="tooltip" data-placement="top" title="Name">Name</div>
+                                <a class="search" data-proj-sort="name" data-toggle="tooltip" data-placement="bottom" title="By name"><i class="fa fa-search"></i></a>
+                                <div class="by-name-search" data-proj-sort="field">
+                                    <input type="text" placeholder="John Doe">
+                                </div>
+                            </th>
+                            <th class="date sort-down" data-proj-sort="box">
+                                <div class="th-label" data-toggle="tooltip" data-placement="top" title="Name">Name</div>
+                                <a class="search" data-proj-sort="name" data-toggle="tooltip" data-placement="bottom" title="By name"><i class="fa fa-search"></i></a>
+                                <div class="by-name-search" data-proj-sort="field">
+                                    <input type="text" placeholder="John Doe">
+                                </div>
+                            </th>
+                            <th class="actions sort-down">
+                                <div class="th-label" data-toggle="tooltip" data-placement="top" title="Actions">Actions</div>
+                            </th>
+                        </tr>
+                        {% include 'includes/parts/key-list.html' %}
+                        {% include 'includes/parts/key-list.html' %}
+                        {% include 'includes/parts/key-list.html' %}
+                        {% include 'includes/parts/key-list.html' %}
+                        {% include 'includes/parts/key-list.html' %}
+                        {% include 'includes/parts/key-list.html' %}
+                        {% include 'includes/parts/key-list.html' %}
                     </table>
                     <!-- pagination -->
                     <div class="pagination">

@@ -7478,6 +7478,7 @@ time.date {
 .projects-list table.project-list-table tr th, .projects-list table.project-list-table tr td {
   padding: 5px 10px;
   font-size: 1.4rem;
+  vertical-align: top;
 }
 .projects-list table.project-list-table tr th {
   cursor: pointer;
@@ -7927,6 +7928,7 @@ time.date {
 .users-list-table tr th, .users-list-table tr td {
   padding: 5px 10px;
   font-size: 1.4rem;
+  vertical-align: top;
 }
 .users-list-table tr .name {
   width: 120px;
@@ -8584,7 +8586,7 @@ body.prices {
 }
 .initial-data .image img {
   margin-top: 65px;
-  border-radius: 100%;
+  border-radius: .4em;
 }
 .initial-data .data {
   padding-left: 20px;
@@ -8624,6 +8626,16 @@ body.prices {
 }
 .user-profile .user-description textarea {
   height: 100px;
+}
+
+.user-edit-form .user-edit-row + .user-edit-row {
+  margin-top: 20px;
+}
+.user-edit-form .user-edit-row input + input {
+  margin-top: 10px;
+}
+.user-edit-form .user-edit-row label {
+  margin-bottom: 20px;
 }
 
 /*# sourceMappingURL=style.css.map */

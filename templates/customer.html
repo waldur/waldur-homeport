@@ -1,0 +1,163 @@
+{% extends 'base_account.html' %}
+
+{% block content %}
+<section class="user-profile">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-2">
+                <img src="{{ url_for('static', filename='images/tmp/dojocat.jpg') }}" class="user-pic" alt="John Doe">
+            </div>
+            <div class="col-xs-10">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h1 class="user-name pull-left">Mihail Yakimenko</h1>
+                        <div class="pull-right">
+                            <!-- <a href="{{ url_for('user_edit') }}" class="crud-controls"><i class="fa fa-cog"></i> manage user</a> -->
+                            <a href="{{ url_for('user_edit') }}" class="crud-controls"><i class="fa fa-cog"></i> edit profile</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="user-description">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ac est volutpat, convallis nisi ac, pretium justo. Proin feugiat ligula sit amet ipsum efficitur, id interdum leo eleifend.
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="user-dash">
+    <div class="container-fluid">
+        <div class="row">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="active">
+                    <a href="#projects" role="tab" data-toggle="tab">
+                        Projects
+                        <span class="label label-success">12</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#resources" role="tab" data-toggle="tab">
+                        Services
+                        <span class="label label-success">12</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="row tab-content">
+            <div class="col-xs-12 tab-pane active" id="projects">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="dash-title-box">
+                            <h2 class="dash-title">Projects</h2>
+                            <ul class="sort">
+                                <li><a href="#" class="active">5</a></li>
+                                <li><a href="#">15</a></li>
+                                <li><a href="#">24</a></li>
+                                <li class="divid">
+                                    <a href="#" class="conf">Administrator</a>
+                                </li>
+                                <li><a href="#">Manager</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="projects-list">
+                    <table class="project-list-table">
+                        <tr>
+                            <th class="name sort-down">
+                                <div class="th-label" data-toggle="tooltip" data-placement="top" title="Name">Name</div>
+                            </th>
+                            <th class="description sort-down">
+                                <div class="th-label" data-toggle="tooltip" data-placement="top" title="Description">Description</div>
+                            </th>
+                            <th class="participants sort-down" data-proj-sort="box">
+                                <div class="th-label" data-toggle="tooltip" data-placement="top" title="Administrators">Administrators</div> 
+                                <a class="search" data-proj-sort="name" data-toggle="tooltip" data-placement="bottom" title="By name"><i class="fa fa-search"></i></a>
+                                <div class="by-name-search" data-proj-sort="field">
+                                    <input type="text" placeholder="John Doe">
+                                </div>
+                            </th>
+                            <th class="shared-resources sort-down">
+                                <div class="th-label" data-toggle="tooltip" data-placement="top" title="Shared resources">Shared resources</div>
+                            </th>
+                            <th class="actions sort-down">
+                                <div class="th-label" data-toggle="tooltip" data-placement="top" title="Actions">Actions</div>
+                            </th>
+                        </tr>
+                        {% include 'includes/parts/project-list-item.html' %}
+                        {% include 'includes/parts/project-list-item.html' %}
+                        {% include 'includes/parts/project-list-item.html' %}
+                        {% include 'includes/parts/project-list-item.html' %}
+                        {% include 'includes/parts/project-list-item.html' %}
+                        {% include 'includes/parts/project-list-item.html' %}
+                        {% include 'includes/parts/project-list-item.html' %}
+                    </table>
+                    <!-- pagination -->
+                    <div class="pagination">
+                        <ul>
+                            <li><span>list pages:</span></li>
+                            <li><a href="#" class="current">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                        </ul>
+                    </div>
+                    <!-- /pagination -->
+                </div>
+            </div>
+            <div class="col-xs-12 tab-pane" id="resources">
+                <div class="projects-list">
+                    <table class="users-list-table">
+                        <tr>
+                            <th class="user-pic"></th>
+                            <th class="description sort-down" data-proj-sort="box">
+                                <div class="th-label" data-toggle="tooltip" data-placement="top" title="Name">Name</div>
+                                <a class="search" data-proj-sort="name" data-toggle="tooltip" data-placement="bottom" title="By name"><i class="fa fa-search"></i></a>
+                                <div class="by-name-search" data-proj-sort="field">
+                                    <input type="text" placeholder="John Doe">
+                                </div>
+                            </th>
+                            <th class="user-description">
+                                <div class="th-label" data-toggle="tooltip" data-placement="top" title="Description">Description</div>
+                            </th>
+                            <th class="participants sort-down" data-proj-sort="box">
+                                <div class="th-label" data-toggle="tooltip" data-placement="top" title="Project">Projects</div>
+                                <a class="search" data-proj-sort="name" data-toggle="tooltip" data-placement="bottom" title="By name"><i class="fa fa-search"></i></a>
+                                <div class="by-name-search" data-proj-sort="field">
+                                    <input type="text" placeholder="John Doe">
+                                </div>
+                            </th>
+                            <th class="actions sort-down">
+                                <div class="th-label" data-toggle="tooltip" data-placement="top" title="Actions">Actions</div>
+                            </th>
+                        </tr>
+                        {% include 'includes/parts/customer-list-item.html' %}
+                        {% include 'includes/parts/customer-list-item.html' %}
+                        {% include 'includes/parts/customer-list-item.html' %}
+                        {% include 'includes/parts/customer-list-item.html' %}
+                        {% include 'includes/parts/customer-list-item.html' %}
+                        {% include 'includes/parts/customer-list-item.html' %}
+                        {% include 'includes/parts/customer-list-item.html' %}
+                    </table>
+                    <!-- pagination -->
+                    <div class="pagination">
+                        <ul>
+                            <li><span>list pages:</span></li>
+                            <li><a href="#" class="current">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                        </ul>
+                    </div>
+                    <!-- /pagination -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block modals %}
+{% endblock %}
