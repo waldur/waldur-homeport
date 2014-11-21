@@ -1,0 +1,14 @@
+.app-items-list {
+    @include clear-list;
+    .list-item {
+        padding-top: 5px;
+        padding-bottom: 5px;
+        + .list-item {
+            border-top: 1px solid #E0E0E0;
+        } // +
+        .list-elem {
+            padding-right: 20px;
+            padding-left: 20px;
+        } // list-elem
+    } // list-item
+} // app-items-list

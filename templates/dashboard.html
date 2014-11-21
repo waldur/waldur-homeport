@@ -4,44 +4,55 @@
 {% endblock %}
 
 {% block modals %}
-<!-- dash-block -->
-<div class="dash-block" id="eventlog">
+
+<!-- app-block -->
+<section class="app-block">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="dash-title-box">
-                    <h2 class="dash-title">What's happening</h2>
-                    <ul class="sort">
-                        <li><a href="#" class="active">5 hours</a></li>
-                        <li><a href="#">24 hours</a></li>
-                        <li><a href="#">week</a></li>
-                        <li class="divid"><a href="#"><i class="fa fa-star"></i></a></li>
-                    </ul>
+        <div class="white-box">
+            <div class="app-title-line">
+                <div class="row">
+                    <div class="col-xs-12 first-line">
+                        <h2 class="app-title">What's happening</h2>
+                        <ul class="sort">
+                            <li><a href="#" class="active">5 hours</a></li>
+                            <li><a href="#">24 hours</a></li>
+                            <li><a href="#">week</a></li>
+                            <li class="divid"><a href="#"><i class="fa fa-star"></i></a></li>
+                        </ul>
+                        <div class="crud-box pull-right"><a href="#" class="crud-controls"><i class="fa fa-plus"></i> add project</a></div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="main-activities">
-                    {% include 'includes/parts/event-list-item.html' %}
-                    {% include 'includes/parts/event-list-item.html' %}
-                    {% include 'includes/parts/event-list-item.html' %}
-                    {% include 'includes/parts/event-list-item.html' %}
-                    {% include 'includes/parts/event-list-item.html' %}
-                    {% include 'includes/parts/event-list-item.html' %}
-                    {% include 'includes/parts/event-list-item.html' %}
-                    {% include 'includes/parts/event-list-item.html' %}
-                    {% include 'includes/parts/event-list-item.html' %}
-                    {% include 'includes/parts/event-list-item.html' %}
-                </div>
-            </div>
-        </div>
-        <!-- more -->
-        <div class="more">
-            <a href="#" class="btn btn-default">Show more</a>
-        </div>
-        <!-- /more -->
     </div>
-</div>
-<!-- /dash-block -->
+</section>
+<!-- /app-block -->
+
+<!-- app-block -->
+<section class="app-block">
+    <div class="container-fluid">
+        <div class="white-box">
+            <div class="app-content">
+                <ul class="app-items-list">
+                    <li class="list-item">
+                        {% include 'includes/parts/event-list-item.html' %}
+                    </li>
+                    <li class="list-item">
+                        {% include 'includes/parts/event-list-item.html' %}
+                    </li>
+                    <li class="list-item">
+                        {% include 'includes/parts/event-list-item.html' %}
+                    </li>
+                    <li class="list-item">
+                        {% include 'includes/parts/event-list-item.html' %}
+                    </li>
+                    <li class="list-item">
+                        {% include 'includes/parts/event-list-item.html' %}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- /app-block -->
 {% endblock %}

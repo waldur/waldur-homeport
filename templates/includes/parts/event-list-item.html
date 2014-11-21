@@ -1,13 +1,13 @@
-<!-- main-activity-item -->
-<div class="event" data-notify="single-notify">
+<!-- event -->
+<div class="list-elem event">
     <!-- header -->
     <header class="row">
-        <div class="col-xs-8">
+        <div class="col-xs-12">
             <h4 class="event-title">Update something</h4>
-        </div>
-        <div class="col-xs-4 controls-box">
-            <ul class="controls">
-                <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Favorite"><i class="fa fa-star"></i></a></li>
+            <ul class="controls pull-right">
+                <li>
+                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="Favorite"><i class="fa fa-star"></i></a>
+                </li>
             </ul>
         </div>
     </header>
@@ -19,11 +19,13 @@
                 Description of an event. AWS VM john.doe.com was is suffering from a Heartbleed bug.
             </p>
         </div>
-        <div class="bottom-controls">
-            <a href="#" class="elem event-action">Send to email</a>
-        </div>
+        <ul class="controls">
+            <li>
+                <a href="#" class="event-action">Send to email</a>
+            </li>
+        </ul>
     </div>
     <!-- separate -->
     <div class="separate"></div>
 </div>
-<!-- /main-activity-item -->
+<!-- /event -->
