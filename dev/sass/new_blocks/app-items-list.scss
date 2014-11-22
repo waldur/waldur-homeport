@@ -1,14 +1,75 @@
 .app-items-list {
-    @include clear-list;
-    .list-item {
-        padding-top: 5px;
-        padding-bottom: 5px;
-        + .list-item {
-            border-top: 1px solid #E0E0E0;
-        } // +
-        .list-elem {
-            padding-right: 20px;
-            padding-left: 20px;
-        } // list-elem
-    } // list-item
+    .items-table {
+        width: 100%;
+        tr {
+            + tr {
+                border-top: 1px solid #E0E0E0;
+            } // +
+            th, td {
+                padding-top: 10px;
+                padding-bottom: 10px;
+                overflow: visible;
+                &:nth-child(1) {
+                    padding-left: 20px;
+                }
+                &:nth-last-child(1) {
+                    padding-right: 20px;
+                }
+                &.name {
+                    max-width: 80px !important;
+                } // &.name
+                &.type {} // &.type
+                &.controls-ctn {
+                    vertical-align: top;
+                } // &.controls-ctn
+            }
+            td {
+                .item-title {
+                    font-size: rem(18);
+                    color: #0B0B0A;
+                    margin: 0;
+                } // item-title
+                .item-type {
+                    font-size: rem(14);
+                    color: #C0C0C0;
+                    &:before {
+                        @include inline-middle;
+                        margin-right: 5px;
+                        border-radius: 100%;
+                        font-family: FontAwesome;
+                        -webkit-font-smoothing: antialiased;
+                        -moz-osx-font-smoothing: grayscale;
+                        text-align: center;
+                        box-sizing: border-box;
+                        width: 24px;
+                        height: 24px;
+                        background: #D8D8D8;
+                        color: #8C8C8C;
+                        font-size: rem(14);
+                        padding-top: 3px;
+                    } // &:before
+                    &.vm {
+                        &:before {
+                            content: '\f0ae';
+                        } // &:before
+                    } // &.vm
+                    &.repo {
+                        &:before {
+                            content: '\f02d';
+                        } // &:before
+                    } // &.repo
+                } // item-type
+                .sort-display {
+                    font-size: rem(14);
+                    color: #000;
+                } // sort-display
+                .controls {} // controls
+            } // td
+        } // list-item
+    } // items-table
 } // app-items-list
+
+.sort-line {
+    padding-right: 20px;
+    padding-left: 20px;
+} // sort-line

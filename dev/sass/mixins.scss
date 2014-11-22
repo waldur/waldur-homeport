@@ -23,33 +23,6 @@
     }
 }
 
-@mixin dotted-link {
-    color: #000;
-    padding: 2px 0px;
-    text-decoration: none;
-    position: relative;
-    border-bottom: 1px dashed gray;
-    opacity: .4;
-    &.active {
-        opacity: 1;
-    }
-}
-
-@mixin black-link {
-    color: #000;
-    &:hover {
-        color: #000;
-    }
-}
-
-@mixin small-black-link {
-    font-size: rem(13);
-    padding: 2px 0px;
-    color: #000;
-    text-decoration: none;
-    border-bottom: 1px dashed gray;
-}
-
 @mixin table {
     table-layout: fixed;
     display: table;

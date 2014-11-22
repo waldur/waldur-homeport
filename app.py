@@ -17,7 +17,7 @@ FREEZER_RELATIVE_URLS = True
 # app
 app = Flask(__name__)
 app.config.from_object(__name__)
-freezer = Freezer(app) 
+freezer = Freezer(app)
 
 # views
 @app.route('/')

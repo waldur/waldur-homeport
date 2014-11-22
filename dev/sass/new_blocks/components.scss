@@ -31,11 +31,12 @@
     @include inline-middle;
     li {
         + li {
-            margin-left: 1rem;
+            margin-left: 10px;
         }
         @include inline-middle;
         a {
             @include black-link;
+            font-size: rem(14)
         } // a
     } // li
 } // controls
@@ -147,3 +148,10 @@
         box-shadow: 0px 0px 4px 0px rgba(69, 69, 69, 1);
     }
 } // checkbox-toggle
+
+input[type=text], 
+input[type=search], 
+input[type=password] {
+    border: transparent;
+    border-bottom: 1px solid #979797;
+}

@@ -5,6 +5,7 @@ html {
 }
 
 body {
+    background-color: #F8F8F8;
     letter-spacing: -.03rem;
     font-size: $font-size-base;
     font-size: rem(16);
@@ -29,10 +30,3 @@ img {
     height: auto;
     display: inline-block;
 }
-
-.show-more {
-    display: block;
-    text-align: center;
-    @include black-link;
-    opacity: .5;
-} // show-more
