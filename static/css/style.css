@@ -6816,6 +6816,9 @@ body {
 body.app-body {
   padding-top: 80px;
 }
+body.app-body.obj-view {
+  padding-top: 50px;
+}
 body.site-body {
   padding-top: 50px;
 }
@@ -7604,6 +7607,10 @@ input[type=password] {
 .app-items-list .items-table tr th.controls-ctn, .app-items-list .items-table tr td.controls-ctn {
   vertical-align: top;
 }
+.app-items-list .items-table tr th.pic img, .app-items-list .items-table tr td.pic img {
+  -webkit-border-radius: .6em;
+          border-radius: .6em;
+}
 .app-items-list .items-table tr td .item-title {
   font-size: 1.8rem;
   color: #0B0B0A;
@@ -7638,6 +7645,9 @@ input[type=password] {
 }
 .app-items-list .items-table tr td .item-type.repo:before {
   content: '\f02d';
+}
+.app-items-list .items-table tr td .item-type.github:before {
+  content: '\f09b';
 }
 .app-items-list .items-table tr td .sort-display {
   font-size: 1.4rem;
@@ -7729,39 +7739,68 @@ input[type=password] {
   background: #D8D8D8;
 }
 
-.user-profile .user-pic {
-  display: inline-block;
-  vertical-align: middle;
+.profile-view {
+  background: #fff;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.profile-view .profile-pic {
   width: 100px;
   -webkit-border-radius: .6em;
           border-radius: .6em;
 }
-.user-profile .user-name {
-  display: inline-block;
-  vertical-align: middle;
+.profile-view .profile-name {
   font-size: 2.4rem;
   margin: 0;
 }
-.user-profile .user-description {
-  padding: 15px;
-  padding-left: 0px;
-  color: #9e9e9e;
-  text-decoration: none;
-  font-size: 1.4rem;
-}
-.user-profile .user-description.edit {
-  padding-right: 0px;
-}
-.user-profile .user-description textarea {
-  height: 100px;
-}
-
-.user-edit-form .user-edit-row + .user-edit-row {
-  margin-top: 20px;
-}
-.user-edit-form .user-edit-row input + input {
+.profile-view .stats {
   margin-top: 10px;
 }
-.user-edit-form .user-edit-row label {
-  margin-bottom: 20px;
+.profile-view .stats .stat-int {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 2.4rem;
+  color: #417505;
+  line-height: 1;
+}
+.profile-view .stats .stat-description {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 1.8rem;
+  color: #020202;
+  line-height: 1;
+}
+
+.app-tabs {
+  margin-top: 40px;
+}
+.app-tabs .nav-tabs {
+  border-bottom: none;
+  padding-left: 20px;
+}
+.app-tabs .nav-tabs > li a {
+  font-size: 2rem;
+  color: #020202;
+}
+.app-tabs .nav-tabs > li a .label-success {
+  -webkit-border-radius: 1px;
+          border-radius: 1px;
+  background: #C4D2B6;
+}
+.app-tabs .nav-tabs > li:hover a {
+  background: none;
+  border-color: transparent;
+}
+.app-tabs .nav-tabs > li.active a {
+  border: none;
+  border-bottom: 1px solid #fff;
+  -webkit-box-shadow: 0px -1px 2px 0px rgba(223, 223, 223, 0.5);
+          box-shadow: 0px -1px 2px 0px rgba(223, 223, 223, 0.5);
+}
+.app-tabs .nav-tabs > li.active a .label-success {
+  background: #7ED321;
+}
+.app-tabs .nav-tabs > li.active:hover a {
+  background: #fff;
+  border-color: transparent;
 }

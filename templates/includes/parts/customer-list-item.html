@@ -1,24 +1,34 @@
 <tr>
-    <td class="user-pic">
+    <td class="col-xs-1 pic">
         <a href="{{ url_for('customer') }}">
             <img src="{{ url_for('static', filename='images/tmp/dojocat.jpg') }}">
         </a>
     </td>
-    <td class="user-name">
-        <a href="{{ url_for('customer') }}">Cooler Inc. PLC</a>
+    <td class="name">
+        <h2 class="item-title">
+            <a href="{{ url_for('customer') }}">Cooler Inc. PLC</a>
+        </h2>
     </td>
-    <td class="user-description">
-        Some description about user. Something interesting for admin, or customer owner.
-    </td>
-    <td class="user-projects">
+    <td class="col-xs-3 projects">
         <ul>
             <li><a href="{{ url_for('project') }}">45FGn Proj</a></li>
             <li><a href="{{ url_for('project') }}">Salsa 5toP</a></li>
         </ul>
     </td>
-    <td class="actions">
-        <a href="{{ url_for('customer') }}" class="view" data-toggle="tooltip" data-placement="top" title="View"><i class="fa fa-eye"></i></a>
-        <a href="{{ url_for('customer_edit') }}" class="conf" data-toggle="tooltip" data-placement="top" title="Settings"><i class="fa fa-cog"></i></a>
-        <a href="#" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
+    <td class="col-xs-2 controls-ctn">
+        <ul class="controls pull-right">
+            <li>
+                <a href="#" data-toggle="tooltip" data-placement="top" title="Quick View"><i class="fa fa-eye"></i></a>
+            </li>
+            <li>
+                <a href="#" data-toggle="tooltip" data-placement="top" title="Poweroff"><i class="fa fa-power-off"></i></a>
+            </li>
+            <li>
+                <a href="#" data-toggle="tooltip" data-placement="top" title="Restart"><i class="fa fa-refresh"></i></a>
+            </li>
+            <li>
+                <a href="#" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
+            </li>
+        </ul>
     </td>
 </tr>

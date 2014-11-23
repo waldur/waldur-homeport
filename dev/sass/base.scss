@@ -15,6 +15,9 @@ body {
     // }
     &.app-body {
         padding-top: 80px;
+        &.obj-view {
+            padding-top: 50px;
+        } // &.obj-view
     }
     &.site-body {
         padding-top: 50px;

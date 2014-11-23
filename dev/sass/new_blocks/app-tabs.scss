@@ -1,0 +1,39 @@
+.app-tabs {
+    margin-top: 40px;
+    .nav-tabs {
+        border-bottom: none;
+        padding-left: 20px;
+        > li {
+            a {
+                font-size: rem(20);
+                color: #020202;
+                .label-success {
+                    border-radius: 1px;
+                    background: #C4D2B6;
+                } // label-success
+            } // a
+            &:hover {
+                a {
+                    background: none;
+                    border-color: transparent;
+                } // a
+            } // &:hover
+            &.active {
+                a {
+                    border: none;
+                    border-bottom: 1px solid #fff;
+                    box-shadow: 0px -1px 2px 0px rgba(223, 223, 223, 0.5);
+                    .label-success {
+                        background: #7ED321;
+                    } // label-success
+                } // a
+                &:hover {
+                    a {
+                        background: #fff;
+                        border-color: transparent;
+                    } // a
+                } // &:hover
+            } // &.active
+        } // > li
+    } // .nav-tabs
+} // app-tabs

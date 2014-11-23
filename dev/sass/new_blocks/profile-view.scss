@@ -1,0 +1,28 @@
+.profile-view {
+    background: #fff;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    .profile-pic {
+        width: 100px;
+        border-radius: .6em;
+    } // profile-pic
+    .profile-name {
+        font-size: rem(24);
+        margin: 0;
+    } // profile-name
+    .stats {
+        margin-top: 10px;
+        .stat-int {
+            @include inline-middle;
+            font-size: rem(24);
+            color: #417505;
+            line-height: 1;
+        } // stat-int
+        .stat-description {
+            @include inline-middle;
+            font-size: rem(18);
+            color: #020202;
+            line-height: 1;
+        } // stat-description
+    } // stats
+} // profile-view

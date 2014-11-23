@@ -22,6 +22,11 @@
                 &.controls-ctn {
                     vertical-align: top;
                 } // &.controls-ctn
+                &.pic {
+                    img {
+                        border-radius: .6em;
+                    } // img
+                } // pic
             }
             td {
                 .item-title {
@@ -58,6 +63,11 @@
                             content: '\f02d';
                         } // &:before
                     } // &.repo
+                    &.github {
+                        &:before {
+                            content: '\f09b';
+                        } // &:before
+                    } // &.github
                 } // item-type
                 .sort-display {
                     font-size: rem(14);
