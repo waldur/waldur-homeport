@@ -7594,6 +7594,7 @@ input[type=password] {
   padding-top: 10px;
   padding-bottom: 10px;
   overflow: visible;
+  vertical-align: top;
 }
 .app-items-list .items-table tr th:nth-child(1), .app-items-list .items-table tr td:nth-child(1) {
   padding-left: 20px;
@@ -7603,9 +7604,6 @@ input[type=password] {
 }
 .app-items-list .items-table tr th.name, .app-items-list .items-table tr td.name {
   max-width: 80px !important;
-}
-.app-items-list .items-table tr th.controls-ctn, .app-items-list .items-table tr td.controls-ctn {
-  vertical-align: top;
 }
 .app-items-list .items-table tr th.pic img, .app-items-list .items-table tr td.pic img {
   -webkit-border-radius: .6em;
@@ -7652,6 +7650,13 @@ input[type=password] {
 .app-items-list .items-table tr td .sort-display {
   font-size: 1.4rem;
   color: #000;
+}
+.app-items-list .items-table tr td .standart-list {
+  margin: 0;
+  padding: 0;
+}
+.app-items-list .items-table tr td .standart-list li {
+  list-style: none;
 }
 
 .sort-line {
@@ -7741,8 +7746,11 @@ input[type=password] {
 
 .profile-view {
   background: #fff;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+.profile-view .profile-info {
+  padding-left: 20px;
 }
 .profile-view .profile-pic {
   width: 100px;
@@ -7762,6 +7770,7 @@ input[type=password] {
   font-size: 2.4rem;
   color: #417505;
   line-height: 1;
+  margin-right: 10px;
 }
 .profile-view .stats .stat-description {
   display: inline-block;

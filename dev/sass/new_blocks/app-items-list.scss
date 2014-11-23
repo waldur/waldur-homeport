@@ -9,6 +9,7 @@
                 padding-top: 10px;
                 padding-bottom: 10px;
                 overflow: visible;
+                vertical-align: top;
                 &:nth-child(1) {
                     padding-left: 20px;
                 }
@@ -19,15 +20,12 @@
                     max-width: 80px !important;
                 } // &.name
                 &.type {} // &.type
-                &.controls-ctn {
-                    vertical-align: top;
-                } // &.controls-ctn
                 &.pic {
                     img {
                         border-radius: .6em;
                     } // img
                 } // pic
-            }
+            } // th, td
             td {
                 .item-title {
                     font-size: rem(18);
@@ -74,6 +72,9 @@
                     color: #000;
                 } // sort-display
                 .controls {} // controls
+                .standart-list {
+                    @include clear-list;
+                }
             } // td
         } // list-item
     } // items-table

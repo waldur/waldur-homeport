@@ -10,7 +10,7 @@
             <div class="col-xs-1">
                 <img src="{{ url_for('static', filename='images/887178.jpg') }}" class="profile-pic" alt="John Doe">
             </div>
-            <div class="col-xs-9">
+            <div class="col-xs-9 profile-info">
                 <h1 class="profile-name">Mihail Yakimenko</h1>
                 <a href="mailto:mail@mail.com">mail@mail.com</a>
                 <div class="stats">
@@ -54,18 +54,18 @@
                         <span class="label label-success">11</span>
                     </a>
                 </li>
-                <li>
+                <li class="">
                     <a href="#projects" role="tab" data-toggle="tab">
                         Projects
                         <span class="label label-success">12</span>
                     </a>
                 </li>
-                <li class="active">
+                <li class="">
                     <a href="#customers" role="tab" data-toggle="tab">
                         Customers
                     </a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="#keys" role="tab" data-toggle="tab">
                         Keys
                     </a>
@@ -152,7 +152,7 @@
                                             </div>
                                         </li>
                                     </ul>
-                                    <div class="crud-box pull-right"><a href="#" class="crud-controls"><i class="fa fa-plus"></i> add resource</a></div>
+                                    <div class="crud-box pull-right"><a href="#" class="crud-controls"><i class="fa fa-plus"></i> add project</a></div>
                                 </div>
                             </div>
                         </div>
@@ -204,7 +204,7 @@
             </div>
             <!-- /app-block -->
         </div>
-        <div class="tab-pane active" id="customers">
+        <div class="tab-pane" id="customers">
             <!-- app-block -->
             <section class="app-block">
                 <div class="container-fluid">
@@ -225,7 +225,7 @@
                                             </div>
                                         </li>
                                     </ul>
-                                    <div class="crud-box pull-right"><a href="#" class="crud-controls"><i class="fa fa-plus"></i> add resource</a></div>
+                                    <div class="crud-box pull-right"><a href="#" class="crud-controls"><i class="fa fa-plus"></i> add customer</a></div>
                                 </div>
                             </div>
                         </div>
@@ -244,8 +244,8 @@
                                     <th class="name">
                                         <a href="" class="sort">Name</a>
                                     </th>
-                                    <th class="col-xs-3 projects">
-                                        <a href="" class="sort">Projects</a>
+                                    <th class="col-xs-3">
+                                        <a href="" class="sort">Services</a>
                                     </th>
                                 </tr>
                                 {% include 'includes/parts/customer-list-item.html' %}
@@ -279,7 +279,7 @@
             </div>
             <!-- /app-block -->
         </div>
-        <div class="tab-pane" id="keys">
+        <div class="tab-pane active" id="keys">
             <!-- app-block -->
             <section class="app-block">
                 <div class="container-fluid">
@@ -300,7 +300,7 @@
                                             </div>
                                         </li>
                                     </ul>
-                                    <div class="crud-box pull-right"><a href="#" class="crud-controls"><i class="fa fa-plus"></i> add resource</a></div>
+                                    <div class="crud-box pull-right"><a href="#" class="crud-controls"><i class="fa fa-plus"></i> add key</a></div>
                                 </div>
                             </div>
                         </div>
@@ -315,21 +315,21 @@
                         <div class="app-items-list">
                             <table class="items-table">
                                 <tr>
-                                    <th class="pic"></th>
                                     <th class="name">
                                         <a href="" class="sort">Name</a>
                                     </th>
-                                    <th class="col-xs-3 projects">
-                                        <a href="" class="sort">Projects</a>
+                                    <th class="col-xs-2 date">
+                                        <a href="" class="sort">Date</a>
                                     </th>
+                                    <th class="col-xs-1"></th>
                                 </tr>
-                                {% include 'includes/parts/customer-list-item.html' %}
-                                {% include 'includes/parts/customer-list-item.html' %}
-                                {% include 'includes/parts/customer-list-item.html' %}
-                                {% include 'includes/parts/customer-list-item.html' %}
-                                {% include 'includes/parts/customer-list-item.html' %}
-                                {% include 'includes/parts/customer-list-item.html' %}
-                                {% include 'includes/parts/customer-list-item.html' %}
+                                {% include 'includes/parts/keys-list-item.html' %}
+                                {% include 'includes/parts/keys-list-item.html' %}
+                                {% include 'includes/parts/keys-list-item.html' %}
+                                {% include 'includes/parts/keys-list-item.html' %}
+                                {% include 'includes/parts/keys-list-item.html' %}
+                                {% include 'includes/parts/keys-list-item.html' %}
+                                {% include 'includes/parts/keys-list-item.html' %}
                             </table>
                         </div>
                     </div>
@@ -358,274 +358,7 @@
     <!-- /tabs-content -->
 </div>
 <!-- /app-tabs -->
-
-
-<!-- <section class="user-profile">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-2">
-                <img src="{{ url_for('static', filename='images/887178.jpg') }}" class="user-pic" alt="John Doe">
-            </div>
-            <div class="col-xs-10">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <h1 class="user-name pull-left">Mihail Yakimenko</h1>
-                        <div class="pull-right">
-                            <a href="{{ url_for('user_edit') }}" class="crud-controls"><i class="fa fa-cog"></i> edit profile</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="user-description">
-                    <a href="mailto:mail@mail.com">mail@mail.com</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="user-dash">
-    <div class="container-fluid">
-        <div class="row">
-            <ul class="nav nav-tabs" role="tablist">
-                <li class="active">
-                    <a href="#eventlog" role="tab" data-toggle="tab">
-                        Events
-                        <span class="label label-success">11</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#projects" role="tab" data-toggle="tab">
-                        Projects
-                        <span class="label label-success">12</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#resources" role="tab" data-toggle="tab">
-                        Customers
-                    </a>
-                </li>
-                <li>
-                    <a href="#keys" role="tab" data-toggle="tab">
-                        Keys
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <div class="row tab-content">
-            <div class="col-xs-12 tab-pane active" id="eventlog">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="dash-title-box">
-                            <h2 class="dash-title">What's happening</h2>
-                            <ul class="sort">
-                                <li><a href="#" class="active">5 hours</a></li>
-                                <li><a href="#">24 hours</a></li>
-                                <li><a href="#">week</a></li>                                
-                                <li class="divid"><a href="#"><i class="fa fa-star"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="main-activities">
-                    {% include 'includes/parts/event-list-item-user.html' %}
-                    {% include 'includes/parts/event-list-item-user.html' %}
-                    {% include 'includes/parts/event-list-item-user.html' %}
-                    {% include 'includes/parts/event-list-item-user.html' %}
-                    {% include 'includes/parts/event-list-item-user.html' %}
-                    {% include 'includes/parts/event-list-item-user.html' %}
-                    {% include 'includes/parts/event-list-item-user.html' %}
-                    {% include 'includes/parts/event-list-item-user.html' %}
-                    {% include 'includes/parts/event-list-item-user.html' %}
-                    {% include 'includes/parts/event-list-item-user.html' %}
-                </div>
-                <!-- more -->
-                <div class="more">
-                    <a href="#" class="btn btn-default">Show more</a>
-                </div>
-                <!-- /more -->
-            </div>
-            <div class="col-xs-12 tab-pane" id="projects">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="dash-title-box">
-                            <h2 class="dash-title">Projects</h2>
-                            <ul class="sort">
-                                <li><a href="#" class="active">5</a></li>
-                                <li><a href="#">15</a></li>
-                                <li><a href="#">24</a></li>
-                                <li class="divid">
-                                    <a href="#" class="conf">Administrator</a>
-                                </li>
-                                <li><a href="#">Manager</a></li>
-                                <li class="crud-box"><a href="#" class="crud-controls"><i class="fa fa-plus"></i> add project</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="projects-list">
-                    <table class="project-list-table">
-                        <tr>
-                            <th class="name sort-down" data-proj-sort="box">
-                                <div class="th-label" data-toggle="tooltip" data-placement="top" title="Name">Name</div>
-                                <a class="search" data-proj-sort="name" data-toggle="tooltip" data-placement="bottom" title="By name"><i class="fa fa-search"></i></a>
-                                <div class="by-name-search" data-proj-sort="field">
-                                    <input type="text" placeholder="John Doe">
-                                </div>
-                            </th>
-                            <th class="description sort-down">
-                                <div class="th-label" data-toggle="tooltip" data-placement="top" title="Description">Description</div>
-                            </th>
-                            <th class="shared-resources sort-down">
-                                <div class="th-label" data-toggle="tooltip" data-placement="top" title="Shared resources">Shared resources</div>
-                            </th>
-                            <th class="actions sort-down">
-                                <div class="th-label" data-toggle="tooltip" data-placement="top" title="Actions">Actions</div>
-                            </th>
-                        </tr>
-                        {% include 'includes/parts/project-list-item-user.html' %}
-                        {% include 'includes/parts/project-list-item-user.html' %}
-                        {% include 'includes/parts/project-list-item-user.html' %}
-                        {% include 'includes/parts/project-list-item-user.html' %}
-                        {% include 'includes/parts/project-list-item-user.html' %}
-                        {% include 'includes/parts/project-list-item-user.html' %}
-                        {% include 'includes/parts/project-list-item-user.html' %}
-                    </table>
-                    <!-- pagination -->
-                    <div class="pagination">
-                        <ul>
-                            <li><span>list pages:</span></li>
-                            <li><a href="#" class="current">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                        </ul>
-                    </div>
-                    /pagination
-                </div>
-            </div>
-            <div class="col-xs-12 tab-pane" id="resources">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="dash-title-box">
-                            <h2 class="dash-title">Customers</h2>
-                            <ul class="sort">
-                                <li><a href="#" class="active">5</a></li>
-                                <li><a href="#">15</a></li>
-                                <li><a href="#">24</a></li>
-                                <li class="crud-box"><a href="#" class="crud-controls"><i class="fa fa-plus"></i> add customers</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="projects-list">
-                    <table class="users-list-table">
-                        <tr>
-                            <th class="user-pic"></th>
-                            <th class="description sort-down" data-proj-sort="box">
-                                <div class="th-label" data-toggle="tooltip" data-placement="top" title="Name">Name</div>
-                                <a class="search" data-proj-sort="name" data-toggle="tooltip" data-placement="bottom" title="By name"><i class="fa fa-search"></i></a>
-                                <div class="by-name-search" data-proj-sort="field">
-                                    <input type="text" placeholder="John Doe">
-                                </div>
-                            </th>
-                            <th class="user-description">
-                                <div class="th-label" data-toggle="tooltip" data-placement="top" title="Description">Description</div>
-                            </th>
-                            <th class="participants sort-down" data-proj-sort="box">
-                                <div class="th-label" data-toggle="tooltip" data-placement="top" title="Project">Projects</div>
-                                <a class="search" data-proj-sort="name" data-toggle="tooltip" data-placement="bottom" title="By name"><i class="fa fa-search"></i></a>
-                                <div class="by-name-search" data-proj-sort="field">
-                                    <input type="text" placeholder="John Doe">
-                                </div>
-                            </th>
-                            <th class="actions sort-down">
-                                <div class="th-label" data-toggle="tooltip" data-placement="top" title="Actions">Actions</div>
-                            </th>
-                        </tr>
-                        {% include 'includes/parts/customer-list-item.html' %}
-                        {% include 'includes/parts/customer-list-item.html' %}
-                        {% include 'includes/parts/customer-list-item.html' %}
-                        {% include 'includes/parts/customer-list-item.html' %}
-                        {% include 'includes/parts/customer-list-item.html' %}
-                        {% include 'includes/parts/customer-list-item.html' %}
-                        {% include 'includes/parts/customer-list-item.html' %}
-                    </table>
-                    <!-- pagination -->
-                    <div class="pagination">
-                        <ul>
-                            <li><span>list pages:</span></li>
-                            <li><a href="#" class="current">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                        </ul>
-                    </div>
-                    <!-- /pagination -->
-                </div>
-            </div>
-            <div class="col-xs-12 tab-pane" id="keys">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="dash-title-box">
-                            <h2 class="dash-title">Customers</h2>
-                            <ul class="sort">
-                                <li><a href="#" class="active">5</a></li>
-                                <li><a href="#">15</a></li>
-                                <li><a href="#">24</a></li>
-                                <li class="crud-box"><a href="#" class="crud-controls"><i class="fa fa-plus"></i> add key</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="projects-list">
-                    <table class="users-list-table">
-                        <tr>
-                            <th class="description sort-down" data-proj-sort="box">
-                                <div class="th-label" data-toggle="tooltip" data-placement="top" title="Name">Name</div>
-                                <a class="search" data-proj-sort="name" data-toggle="tooltip" data-placement="bottom" title="By name"><i class="fa fa-search"></i></a>
-                                <div class="by-name-search" data-proj-sort="field">
-                                    <input type="text" placeholder="John Doe">
-                                </div>
-                            </th>
-                            <th class="date sort-down" data-proj-sort="box">
-                                <div class="th-label" data-toggle="tooltip" data-placement="top" title="Name">Name</div>
-                                <a class="search" data-proj-sort="name" data-toggle="tooltip" data-placement="bottom" title="By name"><i class="fa fa-search"></i></a>
-                                <div class="by-name-search" data-proj-sort="field">
-                                    <input type="text" placeholder="John Doe">
-                                </div>
-                            </th>
-                            <th class="actions sort-down">
-                                <div class="th-label" data-toggle="tooltip" data-placement="top" title="Actions">Actions</div>
-                            </th>
-                        </tr>
-                        {% include 'includes/parts/key-list.html' %}
-                        {% include 'includes/parts/key-list.html' %}
-                        {% include 'includes/parts/key-list.html' %}
-                        {% include 'includes/parts/key-list.html' %}
-                        {% include 'includes/parts/key-list.html' %}
-                        {% include 'includes/parts/key-list.html' %}
-                        {% include 'includes/parts/key-list.html' %}
-                    </table>
-                    <!-- pagination -->
-                    <div class="pagination">
-                        <ul>
-                            <li><span>list pages:</span></li>
-                            <li><a href="#" class="current">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                        </ul>
-                    </div>
-                    <!-- /pagination -->
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
- -->{% endblock %}
+{% endblock %}
 
 {% block modals %}
 {% endblock %}
