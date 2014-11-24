@@ -1,226 +1,284 @@
 {% extends 'base_account.html' %}
 
+{% block body_class %}obj-view{% endblock %}
+
 {% block content %}
-<!-- project-single -->
-<div class="project-single">
+<!-- profile-view -->
+<div class="profile-view">
     <div class="container-fluid">
-        <div class="content-relative">
-            <div class="row">
-                <div class="col-xs-12">
-                    <h1 class="project-title pull-left">Project Gh-45</h1>
-                    <div class="pull-right">
-                        <a href="#" class="crud-controls"><i class="fa fa-cog"></i> edit project</a>
+        <div class="row">
+            <div class="col-xs-10 profile-info">
+                <h1 class="profile-name">Project Gz-900</h1>
+                <a href="{{ url_for('customer') }}" class="customer-link">Mihail Yakimenko</a>
+                <div class="stats">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <span class="stat-int">2</span>
+                            <span class="stat-description">Resources</span>
+                        </div>
+                        <div class="col-xs-4">
+                            <span class="stat-int">7</span>
+                            <span class="stat-description">Users</span>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-xs-8">
-                    <div class="project-description">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ac est volutpat, convallis nisi ac, pretium justo. Proin feugiat ligula sit amet ipsum efficitur, id interdum leo eleifend.
-                    </div>
-                </div>
-                <div class="col-xs-4">
-                    <div class="project-customer">
-                        <img src="{{ url_for('static', filename='images/887178.jpg') }}" class="user-pic" alt="John Doe">
-                        <h3 class="title">Ilja Livenson</h3>
-                    </div>
-                    <div class="project-group">
-                        group: <a href="#">Project Group</a>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <ul class="nav nav-tabs" role="tablist">
-                    <li class="active">
-                        <a href="#eventlog" role="tab" data-toggle="tab">
-                            Events
-                            <span class="label label-success">11</span>
-                        </a>
-                    </li>
+            <div class="col-xs-2">
+                <ul class="controls pull-right">
                     <li>
-                        <a href="#resources" role="tab" data-toggle="tab">
-                            Resources
-                            <span class="label label-success">12</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#users" role="tab" data-toggle="tab">
-                            Users
-                            <span class="label label-success">37</span>
-                        </a>
+                        <a href="{{ url_for('user_edit') }}" class="crud-controls"><i class="fa fa-cog"></i> edit project</a>
                     </li>
                 </ul>
-            </div>
-            <div class="row tab-content" data-menu-level="local-box">
-                <div class="col-xs-12 tab-pane active" id="eventlog">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="dash-title-box">
-                                <h2 class="dash-title">What's happening</h2>
-                                <ul class="sort">
-                                    <li><a href="#" class="active">5 hours</a></li>
-                                    <li><a href="#">24 hours</a></li>
-                                    <li><a href="#">week</a></li>
-                                    <li class="divid"><a href="#"><i class="fa fa-clock-o"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="main-activities">
-                        {% include 'includes/parts/event-list-item.html' %}
-                        {% include 'includes/parts/event-list-item.html' %}
-                        {% include 'includes/parts/event-list-item.html' %}
-                        {% include 'includes/parts/event-list-item.html' %}
-                        {% include 'includes/parts/event-list-item.html' %}
-                        {% include 'includes/parts/event-list-item.html' %}
-                        {% include 'includes/parts/event-list-item.html' %}
-                        {% include 'includes/parts/event-list-item.html' %}
-                        {% include 'includes/parts/event-list-item.html' %}
-                        {% include 'includes/parts/event-list-item.html' %}
-                    </div>
-                    <!-- more -->
-                    <div class="more">
-                        <a href="#" class="btn btn-default">Show more</a>
-                    </div>
-                    <!-- /more -->
-                </div>
-                <div class="col-xs-12 tab-pane" id="resources">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="dash-title-box">
-                                <h2 class="dash-title">Resources</h2>
-                                <ul class="sort">
-                                    <li><a href="#" class="active">5</a></li>
-                                    <li><a href="#">15</a></li>
-                                    <li><a href="#">24</a></li>
-                                    <li class="divid">
-                                        <a href="#" class="conf">hosting</a>
-                                    </li>
-                                    <li><a href="#">repository</a></li>
-                                    <li class="crud-box"><a href="#" class="crud-controls"><i class="fa fa-plus"></i> add project</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="projects-list">
-                        <table class="project-list-table">
-                            <tr>
-                                <th class="name sort-down">
-                                    <div class="th-label" data-toggle="tooltip" data-placement="top" title="Name">Name</div>
-                                </th>
-                                <th class="description sort-down">
-                                    <div class="th-label" data-toggle="tooltip" data-placement="top" title="Description">Description</div>
-                                </th>
-                                <!-- <th class="participants sort-down" data-proj-sort="box">
-                                    <div class="th-label" data-toggle="tooltip" data-placement="top" title="Admins">Admins</div> 
-                                    <a class="search" data-proj-sort="name" data-toggle="tooltip" data-placement="bottom" title="By name"><i class="fa fa-search"></i></a>
-                                    <div class="by-name-search" data-proj-sort="field">
-                                        <input type="text" placeholder="John Doe">
-                                    </div>
-                                </th> -->
-                                <th class="shared-resources sort-down" data-proj-sort="box">
-                                    <div class="th-label" data-toggle="tooltip" data-placement="top" title="IPs">IPs</div>
-                                    <a class="search" data-proj-sort="name" data-toggle="tooltip" data-placement="bottom" title="By IP"><i class="fa fa-search"></i></a>
-                                    <div class="by-name-search" data-proj-sort="field">
-                                        <input type="text" placeholder="31.11.231.121">
-                                    </div>
-                                </th>
-                                <th class="actions sort-down">
-                                    <div class="th-label" data-toggle="tooltip" data-placement="top" title="Actions">Actions</div>
-                                </th>
-                            </tr>
-                            {% include 'includes/parts/resource-list-item-project.html' %}
-                            {% include 'includes/parts/resource-list-item-project.html' %}
-                            {% include 'includes/parts/resource-list-item-project.html' %}
-                            {% include 'includes/parts/resource-list-item-project.html' %}
-                            {% include 'includes/parts/resource-list-item-project.html' %}
-                            {% include 'includes/parts/resource-list-item-project.html' %}
-                            {% include 'includes/parts/resource-list-item-project.html' %}
-                        </table>
-                        <!-- pagination -->
-                        <div class="pagination">
-                            <ul>
-                                <li><span>list pages:</span></li>
-                                <li><a href="#" class="current">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">5</a></li>
-                            </ul>
-                        </div>
-                        <!-- /pagination -->
-                    </div>
-                </div>
-                <div class="col-xs-12 tab-pane" id="users">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="dash-title-box">
-                                <h2 class="dash-title">Users</h2>
-                                <ul class="sort">
-                                    <li><a href="#" class="active">Administrators</a></li>
-                                    <li><a href="#">Managers</a></li>
-                                    <!-- <li class="divid">
-                                        <div class="sort-input">
-                                            <span class="gray-text">Sort by project:</span>
-                                            <input type="text">
-                                        </div>
-                                    </li> -->
-                                    <li class="crud-box">
-                                        <a href="{{ url_for('users_manage') }}" class="crud-controls"><i class="fa fa-plus"></i> add users</a>
-                                        <a href="{{ url_for('users_manage') }}" class="crud-controls"><i class="fa fa-users"></i> manage users</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <table class="users-list-table">
-                            <tr>
-                                <th class="user-pic"></th>
-                                <th class="description sort-down" data-proj-sort="box">
-                                    <div class="th-label" data-toggle="tooltip" data-placement="top" title="Name">Name</div>
-                                    <a class="search" data-proj-sort="name" data-toggle="tooltip" data-placement="bottom" title="By name"><i class="fa fa-search"></i></a>
-                                    <div class="by-name-search" data-proj-sort="field">
-                                        <input type="text" placeholder="John Doe">
-                                    </div>
-                                </th>
-                                <th class="user-description">
-                                    <div class="th-label" data-toggle="tooltip" data-placement="top" title="Description">Description</div>
-                                </th>
-                                <th class="actions sort-down">
-                                    <div class="th-label" data-toggle="tooltip" data-placement="top" title="Actions">Actions</div>
-                                </th>
-                            </tr>
-                            {% include 'includes/parts/user-list-item-project.html' %}
-                            {% include 'includes/parts/user-list-item-project.html' %}
-                            {% include 'includes/parts/user-list-item-project.html' %}
-                            {% include 'includes/parts/user-list-item-project.html' %}
-                            {% include 'includes/parts/user-list-item-project.html' %}
-                            {% include 'includes/parts/user-list-item-project.html' %}
-                            {% include 'includes/parts/user-list-item-project.html' %}
-                            </table>
-                            <!-- pagination -->
-                            <div class="pagination">
-                                <ul>
-                                    <li><span>list pages:</span></li>
-                                    <li><a href="#" class="current">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#">4</a></li>
-                                    <li><a href="#">5</a></li>
-                                </ul>
-                            </div>
-                            <!-- /pagination -->
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
 </div>
-<!-- /project-single -->
+<!-- /profile-view -->
+
+<!-- app-tabs -->
+<div class="app-tabs">
+    <!-- tabs-nav -->
+    <div class="tabs-container">
+        <div class="container-fluid">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="active">
+                    <a href="#eventlog" role="tab" data-toggle="tab">
+                        Events
+                        <span class="label label-success">11</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#projects" role="tab" data-toggle="tab">
+                        Resources
+                        <span class="label label-success">12</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#customers" role="tab" data-toggle="tab">
+                        Users
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- /tabs-nav -->
+    <!-- tabs-content -->
+    <div class="tab-content">
+        <!-- tab -->
+        <div class="tab-pane active" id="eventlog">
+            <!-- app-block -->
+            <section class="app-block">
+                <div class="container-fluid">
+                    <!-- white-box -->
+                    <div class="white-box">
+                        <div class="app-title-line">
+                            <div class="row">
+                                <div class="col-xs-12 first-line">
+                                    <ul class="sort">
+                                        <li><a href="#" class="active">5</a></li>
+                                        <li><a href="#">15</a></li>
+                                        <li><a href="#">24</a></li>
+                                        <li class="divid">
+                                            <div class="search">
+                                                <input type="text">
+                                                <button class="search-button">
+                                                    <i class="fa fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /white-box -->
+                </div>
+            </section>
+            <!-- /app-block -->
+            <!-- app-block -->
+            <section class="app-block">
+                <div class="container-fluid">
+                    <div class="white-box">
+                       <div class="app-items-list">
+                            <table class="items-table">
+                                {% include 'includes/parts/event-list-item.html' %}
+                                {% include 'includes/parts/event-list-item.html' %}
+                                {% include 'includes/parts/event-list-item.html' %}
+                                {% include 'includes/parts/event-list-item.html' %}
+                                {% include 'includes/parts/event-list-item.html' %}
+                                {% include 'includes/parts/event-list-item.html' %}
+                                {% include 'includes/parts/event-list-item.html' %}
+                                {% include 'includes/parts/event-list-item.html' %}
+                                {% include 'includes/parts/event-list-item.html' %}
+                                {% include 'includes/parts/event-list-item.html' %}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- /app-block -->
+        </div>
+        <!-- /tab -->
+        <div class="tab-pane" id="projects">
+            <!-- app-block -->
+            <section class="app-block">
+                <div class="container-fluid">
+                    <div class="white-box">
+                        <div class="app-title-line">
+                            <div class="row">
+                                <div class="col-xs-12 first-line">
+                                    <ul class="sort">
+                                        <li><a href="#" class="active">5</a></li>
+                                        <li><a href="#">15</a></li>
+                                        <li><a href="#">24</a></li>
+                                        <li class="divid">
+                                            <div class="search">
+                                                <input type="text">
+                                                <button class="search-button">
+                                                    <i class="fa fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <div class="crud-box pull-right"><a href="#" class="crud-controls"><i class="fa fa-plus"></i> add resource</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- /app-block -->
+            <!-- app-block -->
+            <section class="app-block">
+                <div class="container-fluid">
+                    <div class="white-box">
+                        <div class="app-items-list">
+                            <table class="items-table">
+                                <th class="name">
+                                    <a href="" class="sort">Name</a>
+                                </th>
+                                <th class="type">
+                                    <a href="" class="sort">Type</a>
+                                </th>
+                                <th></th>
+                                {% include 'includes/parts/resource-list-item-project.html' %}
+                                {% include 'includes/parts/resource-list-item-project.html' %}
+                                {% include 'includes/parts/resource-list-item-project.html' %}
+                                {% include 'includes/parts/resource-list-item-project.html' %}
+                                {% include 'includes/parts/resource-list-item-project.html' %}
+                                {% include 'includes/parts/resource-list-item-project.html' %}
+                                {% include 'includes/parts/resource-list-item-project.html' %}
+                                {% include 'includes/parts/resource-list-item-project.html' %}
+                                {% include 'includes/parts/resource-list-item-project.html' %}
+                                {% include 'includes/parts/resource-list-item-project.html' %}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- /app-block -->
+            <!-- app-block -->
+            <div class="app-block">
+                <div class="container-fluid">
+                    <!-- pagination -->
+                    <div class="pagination">
+                        <ul>
+                            <li><a href="#" class="current">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                        </ul>
+                    </div>
+                    <!-- /pagination -->
+                </div>
+            </div>
+            <!-- /app-block -->
+        </div>
+        <div class="tab-pane" id="customers">
+            <!-- app-block -->
+            <section class="app-block">
+                <div class="container-fluid">
+                    <div class="white-box">
+                        <div class="app-title-line">
+                            <div class="row">
+                                <div class="col-xs-12 first-line">
+                                    <ul class="sort">
+                                        <li><a href="#" class="active">5</a></li>
+                                        <li><a href="#">15</a></li>
+                                        <li><a href="#">24</a></li>
+                                        <li class="divid"><a href="#">Administrators</a></li>
+                                        <li><a href="#">Managers</a></li>
+                                        <li>
+                                            <div class="search">
+                                                <input type="text">
+                                                <button class="search-button">
+                                                    <i class="fa fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <div class="crud-box pull-right">
+                                        <a href="#" class="crud-controls"><i class="fa fa-plus"></i> add user</a>
+                                        <a href="{{ url_for('users_manage') }}" class="crud-controls"><i class="fa fa-users"></i> manage users</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- /app-block -->
+            <!-- app-block -->
+            <section class="app-block">
+                <div class="container-fluid">
+                    <div class="white-box">
+                        <div class="app-items-list">
+                            <table class="items-table">
+                                <tr>
+                                    <th class="pic"></th>
+                                    <th class="name">
+                                        <a href="" class="sort">Name</a>
+                                    </th>
+                                    <th class="col-xs-3">
+                                        <a href="" class="sort">Services</a>
+                                    </th>
+                                </tr>
+                                {% include 'includes/parts/user-list-item-project.html' %}
+                                {% include 'includes/parts/user-list-item-project.html' %}
+                                {% include 'includes/parts/user-list-item-project.html' %}
+                                {% include 'includes/parts/user-list-item-project.html' %}
+                                {% include 'includes/parts/user-list-item-project.html' %}
+                                {% include 'includes/parts/user-list-item-project.html' %}
+                                {% include 'includes/parts/user-list-item-project.html' %}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- /app-block -->
+            <!-- app-block -->
+            <div class="app-block">
+                <div class="container-fluid">
+                    <!-- pagination -->
+                    <div class="pagination">
+                        <ul>
+                            <li><a href="#" class="current">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                        </ul>
+                    </div>
+                    <!-- /pagination -->
+                </div>
+            </div>
+            <!-- /app-block -->
+        </div>
+    </div>
+    <!-- /tabs-content -->
+</div>
+<!-- /app-tabs -->
 {% endblock %}
 
 {% block side_menu %}

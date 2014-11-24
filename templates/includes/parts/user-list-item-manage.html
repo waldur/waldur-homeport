@@ -1,16 +1,21 @@
 <tr>
-    <td class="user-pic">
+    <td class="col-xs-1 pic">
         <a href="{{ url_for('user') }}">
-            <img src="{{ url_for('static', filename='images/887178.jpg') }}">
+            <img src="{{ url_for('static', filename='images/887178.jpg') }}" alt="John Doe">
         </a>
     </td>
-    <td class="user-name">
-        <a href="{{ url_for('user') }}">Alex Fillow Thor jr.</a>
+    <td class="name">
+        <h2 class="item-title">
+            <a href="{{ url_for('user') }}">Mihail Yakimenko</a>
+        </h2>
     </td>
-    <td class="user-description">
-        Some description about user. Something interesting for admin, or customer owner.
+    <td class="col-xs-2 gray-text">
+        <ul class="standart-list">
+            <li><a href="{{ url_for('project') }}">Github account</a></li>
+            <li><a href="{{ url_for('project') }}">OpenStack</a></li>
+        </ul>
     </td>
-    <td class="role">
+    <td class="col-xs-2 role gray-text">
         <div class="custom-select">
             <select name="" id="">
                 <option value="">Manager</option>
@@ -19,7 +24,11 @@
         </div>
         <div class="label label-success">saved</div>
     </td>
-    <td class="actions">
-        <a href="#" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
+    <td class="col-xs-1 controls-ctn">
+        <ul class="controls pull-right">
+            <li>
+                <a href="#" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
+            </li>
+        </ul>
     </td>
 </tr>

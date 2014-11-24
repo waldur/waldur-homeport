@@ -15,11 +15,6 @@
                 border-left: 1px solid silver;
                 margin-left: 10px;
             } // divid
-            &.crud-box {
-                position: absolute;
-                right: 0px;
-                top: 0px;
-            } // crud-box
             a {
                 @include inline-middle;
                 @include dotted-link;
@@ -97,4 +92,11 @@
             } // search
         } // li
     } // sort
+    .crud-box {
+        a {
+            + a {
+                margin-left: 10px;
+            } // +
+        } // 
+    } // crud-box
 } // app-title-line

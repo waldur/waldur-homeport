@@ -21,7 +21,9 @@
                 } // &.name
                 &.type {} // &.type
                 &.pic {
+                    padding-right: 10px;
                     img {
+                        width: 80%;
                         border-radius: .6em;
                     } // img
                 } // pic
@@ -73,7 +75,15 @@
                 } // sort-display
                 .controls {} // controls
                 .standart-list {
+                    + .standart-list {
+                        margin-top: 10px;
+                    } // +
                     @include clear-list;
+                    .standart-list-title {
+                        font-size: rem(14);
+                        margin: 0;
+                        color: #595959;
+                    } // standart-list-title
                 }
             } // td
         } // list-item

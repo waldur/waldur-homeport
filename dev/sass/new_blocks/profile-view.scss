@@ -29,4 +29,22 @@
             line-height: 1;
         } // stat-description
     } // stats
+    .customer-link {
+        position: relative;
+        padding-left: 22px;
+        &:before {
+            display: block;
+            width: 20px;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            text-align: center;
+            font-size: rem(13);
+            text-rendering: auto;
+            -webkit-font-smoothing: antialiased;
+            color: gray;
+            content: '\f1ad';
+            font-family: FontAwesome;
+        } // &:before
+    } // customer-link
 } // profile-view
