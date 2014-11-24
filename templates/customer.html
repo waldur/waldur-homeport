@@ -19,12 +19,8 @@
                             <span class="stat-description">Active projects</span>
                         </div>
                         <div class="col-xs-4">
-                            <span class="stat-int">2</span>
-                            <span class="stat-description">Customers</span>
-                        </div>
-                        <div class="col-xs-4">
-                            <span class="stat-int">7</span>
-                            <span class="stat-description">SSH keys</span>
+                            <span class="stat-int">4</span>
+                            <span class="stat-description">Services</span>
                         </div>
                     </div>
                 </div>
@@ -33,6 +29,8 @@
                 <ul class="controls pull-right">
                     <li>
                         <a href="{{ url_for('customer_edit') }}" class="crud-controls"><i class="fa fa-cog"></i> edit profile</a>
+                    </li>
+                    <li>
                         <a href="{{ url_for('plans') }}" class="crud-controls"><i class="fa fa-cog"></i> plans</a>
                     </li>
                 </ul>
@@ -48,13 +46,7 @@
     <div class="tabs-container">
         <div class="container-fluid">
             <ul class="nav nav-tabs" role="tablist">
-                <li class="">
-                    <a href="#eventlog" role="tab" data-toggle="tab">
-                        Events
-                        <span class="label label-success">11</span>
-                    </a>
-                </li>
-                <li class="">
+                <li class="active">
                     <a href="#projects" role="tab" data-toggle="tab">
                         Projects
                         <span class="label label-success">12</span>
@@ -62,12 +54,7 @@
                 </li>
                 <li class="">
                     <a href="#customers" role="tab" data-toggle="tab">
-                        Customers
-                    </a>
-                </li>
-                <li class="active">
-                    <a href="#keys" role="tab" data-toggle="tab">
-                        Keys
+                        Services
                     </a>
                 </li>
             </ul>
@@ -76,62 +63,7 @@
     <!-- /tabs-nav -->
     <!-- tabs-content -->
     <div class="tab-content">
-        <!-- tab -->
-        <div class="tab-pane " id="eventlog">
-            <!-- app-block -->
-            <section class="app-block">
-                <div class="container-fluid">
-                    <!-- white-box -->
-                    <div class="white-box">
-                        <div class="app-title-line">
-                            <div class="row">
-                                <div class="col-xs-12 first-line">
-                                    <ul class="sort">
-                                        <li><a href="#" class="active">5</a></li>
-                                        <li><a href="#">15</a></li>
-                                        <li><a href="#">24</a></li>
-                                        <li class="divid">
-                                            <div class="search">
-                                                <input type="text">
-                                                <button class="search-button">
-                                                    <i class="fa fa-search"></i>
-                                                </button>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /white-box -->
-                </div>
-            </section>
-            <!-- /app-block -->
-            <!-- app-block -->
-            <section class="app-block">
-                <div class="container-fluid">
-                    <div class="white-box">
-                       <div class="app-items-list">
-                            <table class="items-table">
-                                {% include 'includes/parts/event-list-item.html' %}
-                                {% include 'includes/parts/event-list-item.html' %}
-                                {% include 'includes/parts/event-list-item.html' %}
-                                {% include 'includes/parts/event-list-item.html' %}
-                                {% include 'includes/parts/event-list-item.html' %}
-                                {% include 'includes/parts/event-list-item.html' %}
-                                {% include 'includes/parts/event-list-item.html' %}
-                                {% include 'includes/parts/event-list-item.html' %}
-                                {% include 'includes/parts/event-list-item.html' %}
-                                {% include 'includes/parts/event-list-item.html' %}
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- /app-block -->
-        </div>
-        <!-- /tab -->
-        <div class="tab-pane" id="projects">
+        <div class="tab-pane active" id="projects">
             <!-- app-block -->
             <section class="app-block">
                 <div class="container-fluid">
@@ -225,7 +157,7 @@
                                             </div>
                                         </li>
                                     </ul>
-                                    <div class="crud-box pull-right"><a href="#" class="crud-controls"><i class="fa fa-plus"></i> add customer</a></div>
+                                    <div class="crud-box pull-right"><a href="#" class="crud-controls"><i class="fa fa-plus"></i> add service</a></div>
                                 </div>
                             </div>
                         </div>
@@ -239,97 +171,23 @@
                     <div class="white-box">
                         <div class="app-items-list">
                             <table class="items-table">
-                                <tr>
-                                    <th class="pic"></th>
-                                    <th class="name">
-                                        <a href="" class="sort">Name</a>
-                                    </th>
-                                    <th class="col-xs-3">
-                                        <a href="" class="sort">Services</a>
-                                    </th>
-                                </tr>
-                                {% include 'includes/parts/customer-list-item.html' %}
-                                {% include 'includes/parts/customer-list-item.html' %}
-                                {% include 'includes/parts/customer-list-item.html' %}
-                                {% include 'includes/parts/customer-list-item.html' %}
-                                {% include 'includes/parts/customer-list-item.html' %}
-                                {% include 'includes/parts/customer-list-item.html' %}
-                                {% include 'includes/parts/customer-list-item.html' %}
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- /app-block -->
-            <!-- app-block -->
-            <div class="app-block">
-                <div class="container-fluid">
-                    <!-- pagination -->
-                    <div class="pagination">
-                        <ul>
-                            <li><a href="#" class="current">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                        </ul>
-                    </div>
-                    <!-- /pagination -->
-                </div>
-            </div>
-            <!-- /app-block -->
-        </div>
-        <div class="tab-pane active" id="keys">
-            <!-- app-block -->
-            <section class="app-block">
-                <div class="container-fluid">
-                    <div class="white-box">
-                        <div class="app-title-line">
-                            <div class="row">
-                                <div class="col-xs-12 first-line">
-                                    <ul class="sort">
-                                        <li><a href="#" class="active">5</a></li>
-                                        <li><a href="#">15</a></li>
-                                        <li><a href="#">24</a></li>
-                                        <li class="divid">
-                                            <div class="search">
-                                                <input type="text">
-                                                <button class="search-button">
-                                                    <i class="fa fa-search"></i>
-                                                </button>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                    <div class="crud-box pull-right"><a href="#" class="crud-controls"><i class="fa fa-plus"></i> add key</a></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- /app-block -->
-            <!-- app-block -->
-            <section class="app-block">
-                <div class="container-fluid">
-                    <div class="white-box">
-                        <div class="app-items-list">
-                            <table class="items-table">
-                                <tr>
-                                    <th class="name">
-                                        <a href="" class="sort">Name</a>
-                                    </th>
-                                    <th class="col-xs-2 date">
-                                        <a href="" class="sort">Date</a>
-                                    </th>
-                                    <th class="col-xs-1"></th>
-                                </tr>
-                                {% include 'includes/parts/keys-list-item.html' %}
-                                {% include 'includes/parts/keys-list-item.html' %}
-                                {% include 'includes/parts/keys-list-item.html' %}
-                                {% include 'includes/parts/keys-list-item.html' %}
-                                {% include 'includes/parts/keys-list-item.html' %}
-                                {% include 'includes/parts/keys-list-item.html' %}
-                                {% include 'includes/parts/keys-list-item.html' %}
+                                <th class="name">
+                                    <a href="" class="sort">Name</a>
+                                </th>
+                                <th class="type">
+                                    <a href="" class="sort">Service</a>
+                                </th>
+                                <th></th>
+                                {% include 'includes/parts/service-list-item-customer.html' %}
+                                {% include 'includes/parts/service-list-item-customer.html' %}
+                                {% include 'includes/parts/service-list-item-customer.html' %}
+                                {% include 'includes/parts/service-list-item-customer.html' %}
+                                {% include 'includes/parts/service-list-item-customer.html' %}
+                                {% include 'includes/parts/service-list-item-customer.html' %}
+                                {% include 'includes/parts/service-list-item-customer.html' %}
+                                {% include 'includes/parts/service-list-item-customer.html' %}
+                                {% include 'includes/parts/service-list-item-customer.html' %}
+                                {% include 'includes/parts/service-list-item-customer.html' %}
                             </table>
                         </div>
                     </div>
