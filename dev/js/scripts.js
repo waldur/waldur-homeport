@@ -1,5 +1,37 @@
 (function($) {
 
+    function equalheight(container) {
+
+        var currentTallest = 0,
+            currentRowStart = 0,
+            rowDivs = new Array(),
+            $el,
+            topPosition = 0;
+
+        $(container).each(function() {
+
+            $el = $(this);
+            $($el).height('auto')
+            topPostion = $el.position().top;
+
+            if (currentRowStart != topPostion) {
+                for (currentDiv = 0 ; currentDiv < rowDivs.length ; currentDiv++) {
+                    rowDivs[currentDiv].height(currentTallest);
+                }
+                rowDivs.length = 0; // empty the array
+                currentRowStart = topPostion;
+                currentTallest = $el.height();
+                rowDivs.push($el);
+            } else {
+                rowDivs.push($el);
+                currentTallest = (currentTallest < $el.height()) ? ($el.height()) : (currentTallest);
+            }
+            for (currentDiv = 0 ; currentDiv < rowDivs.length ; currentDiv++) {
+                    rowDivs[currentDiv].height(currentTallest);
+            }
+        });
+    }
+
     // functions
     function absCenter(elem) {
         $el = elem;
@@ -132,9 +164,12 @@
         byNameinProjects();
         showGrouped();
         addResource();
+        equalheight('[data-role="appstore"] [data-role="appstore-template"]');
+        equalheight('[data-role="servicestore"] [data-role="servicestore-template"]');
         // addResTemplate();
         choices('[data-role="appstore-template"]', 'state');
         choices('[data-role="plan-in-data"]', 'active');
+        choices('[data-role="servicestore-template"]', 'state');
         $('.disabled').bind('click', function(){ return false; });
     });
 

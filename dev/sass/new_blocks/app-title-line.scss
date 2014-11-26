@@ -1,6 +1,9 @@
 .app-title-line {
     padding: 20px;
     text-align: left;
+    &.in-form {
+        padding: 0px;
+    } // &.in-form
     .app-title {
         @include inline-middle;
         margin: 0;

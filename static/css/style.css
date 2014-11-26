@@ -7333,12 +7333,11 @@ time.date {
 }
 
 .custom-select {
-  background-color: transparent;
   border: 1px solid #D8D8D8;
   -webkit-border-radius: 3px;
           border-radius: 3px;
   position: relative;
-  background: #F4F4F4;
+  background: white;
   color: #565656;
   display: inline-block;
   vertical-align: middle;
@@ -7445,6 +7444,17 @@ input[type=search],
 input[type=password] {
   border: transparent;
   border-bottom: 1px solid #979797;
+  -webkit-border-radius: 0;
+          border-radius: 0;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+input[type=text]:focus,
+input[type=search]:focus,
+input[type=password]:focus {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  outline: none;
 }
 
 .white-box {
@@ -7459,6 +7469,9 @@ input[type=password] {
 .app-title-line {
   padding: 20px;
   text-align: left;
+}
+.app-title-line.in-form {
+  padding: 0px;
 }
 .app-title-line .app-title {
   display: inline-block;
@@ -7840,6 +7853,212 @@ input[type=password] {
 .app-tabs .nav-tabs > li.active:hover a {
   background: #fff;
   border-color: transparent;
+}
+
+.app-form-box {
+  margin-top: 0px;
+  margin-bottom: 40px;
+}
+
+.app-basic-form {
+  padding: 20px;
+}
+.app-basic-form .form-field + .form-field {
+  padding-top: 20px;
+}
+.app-basic-form .form-field.form-pre-label {
+  padding-top: 0px !important;
+}
+.app-basic-form .form-field .custom-select.project {
+  margin-right: 10px;
+}
+.app-basic-form .form-field.description {
+  padding-top: 10px !important;
+}
+.app-basic-form .form-divide {
+  height: 1px;
+  background: #EDEDED;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.appstore .templates .templates-row + .templates-row {
+  margin-top: 5px;
+}
+.appstore .templates .template {
+  -webkit-transition-property: all;
+          transition-property: all;
+  -webkit-transition-duration: 0.2s;
+          transition-duration: 0.2s;
+  -webkit-transition-timing-function: ease;
+          transition-timing-function: ease;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 12px;
+  margin-bottom: 5px;
+  -webkit-border-radius: 1px;
+          border-radius: 1px;
+  position: relative;
+  cursor: pointer;
+  border: 1px solid #cacaca;
+}
+.appstore .templates .template .name-row .icon-box {
+  text-align: center;
+}
+.appstore .templates .template .name-row .icon-box .icon {
+  -webkit-filter: grayscale(100%);
+          filter: grayscale(100%);
+  width: 80px;
+}
+.appstore .templates .template .name-row .description h3 {
+  margin: 0;
+  margin-bottom: 10px;
+  font-size: 1.8rem;
+}
+.appstore .templates .template .name-row .description article {
+  margin: 0;
+  line-height: 1.2;
+}
+.appstore .templates .template .name-row .description article ul {
+  margin: 0;
+  padding: 0;
+}
+.appstore .templates .template .name-row .description article ul li {
+  list-style: none;
+}
+.appstore .templates .template .price-row {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed #b0b0b0;
+}
+.appstore .templates .template .price-row .price {
+  text-align: center;
+  font-size: 1.4rem;
+}
+.appstore .templates .template .price-row .price .pice-item {
+  display: inline-block;
+  vertical-align: middle;
+}
+.appstore .templates .template .price-row .price .pice-item .int {
+  font-weight: 700;
+}
+.appstore .templates .template .price-row .price .pice-item .period {
+  color: #5C5C5C;
+}
+.appstore .templates .template.state {
+  border: 1px solid #3eab54;
+}
+.appstore .templates .template.state:after {
+  content: '\f00c';
+  font-family: FontAwesome;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 2rem;
+  text-align: center;
+  background-color: #3eab54;
+  color: #fff;
+  width: 26px;
+  height: 26px;
+  -webkit-border-radius: 100%;
+          border-radius: 100%;
+  position: absolute;
+  right: -10px;
+  top: -10px;
+}
+.appstore .templates .template.state .name-row .icon-box .icon {
+  -webkit-filter: none;
+          filter: none;
+}
+.appstore .templates .template.state .price .int {
+  color: #43983a;
+}
+
+.servicestore .templates-row + .templates-row {
+  margin-top: 5px;
+}
+.servicestore .service-template {
+  -webkit-transition-property: all;
+          transition-property: all;
+  -webkit-transition-duration: 0.2s;
+          transition-duration: 0.2s;
+  -webkit-transition-timing-function: ease;
+          transition-timing-function: ease;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 5px 12px;
+  margin-bottom: 5px;
+  -webkit-border-radius: 1px;
+          border-radius: 1px;
+  position: relative;
+  cursor: pointer;
+  border: 1px solid #cacaca;
+}
+.servicestore .service-template .name-row {
+  table-layout: fixed;
+  display: table;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.servicestore .service-template .name-row .icon-box {
+  display: table-cell;
+  vertical-align: top;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  vertical-align: middle;
+  text-align: center;
+  width: 80px;
+}
+.servicestore .service-template .name-row .icon-box .icon {
+  -webkit-filter: grayscale(100%);
+          filter: grayscale(100%);
+  width: 80px;
+}
+.servicestore .service-template .name-row .description {
+  display: table-cell;
+  vertical-align: top;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  vertical-align: middle;
+  padding-left: 10px;
+}
+.servicestore .service-template .name-row .description h3 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+.servicestore .service-template .name-row .description article {
+  margin: 0;
+  line-height: 1.2;
+}
+.servicestore .service-template.state {
+  border: 1px solid #3eab54;
+}
+.servicestore .service-template.state:after {
+  content: '\f00c';
+  font-family: FontAwesome;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 2rem;
+  text-align: center;
+  background-color: #3eab54;
+  color: #fff;
+  width: 26px;
+  height: 26px;
+  -webkit-border-radius: 100%;
+          border-radius: 100%;
+  position: absolute;
+  right: -10px;
+  top: -10px;
+}
+.servicestore .service-template.state .name-row .icon-box .icon {
+  -webkit-filter: none;
+          filter: none;
+  width: 80px;
 }
 
 .site-welcome {

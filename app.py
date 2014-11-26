@@ -40,6 +40,10 @@ def plans():
 def dashboard():
     return render_template('dashboard.html', current = 'dashboard')
 
+@app.route('/all-forms/')
+def all_forms():
+    return render_template('all-forms.html')
+
 @app.route('/events/')
 def events():
     return render_template('events.html', current = 'events')

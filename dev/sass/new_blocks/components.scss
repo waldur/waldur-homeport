@@ -54,7 +54,6 @@
 } // show-more
 
 .custom-select {
-    background-color: transparent;
     border: 1px solid #D8D8D8;
     // margin-top: 8px;
     // padding: 6px 10px;
@@ -62,7 +61,7 @@
     border-radius: 3px;
     position: relative;
     // background: linear-gradient(to bottom, #eeeeee 0%,#D7D7D7 100%); /* W3C */
-    background: #F4F4F4;
+    background: white;
     color: #565656;
     @include inline-middle;
     cursor: pointer;
@@ -154,4 +153,11 @@ input[type=search],
 input[type=password] {
     border: transparent;
     border-bottom: 1px solid #979797;
+    border-radius: 0;
+    box-shadow: none;
+    &:focus {
+        box-shadow: none;
+        outline: none;
+    } // &:focus
+    &.correct {} // &.correct
 }
