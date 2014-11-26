@@ -7443,15 +7443,31 @@ input[type=text],
 input[type=search],
 input[type=password] {
   border: transparent;
-  border-bottom: 1px solid #979797;
-  -webkit-border-radius: 0;
-          border-radius: 0;
+  border: 1px solid #D8D8D8;
+  -webkit-border-radius: 1px;
+          border-radius: 1px;
   -webkit-box-shadow: none;
           box-shadow: none;
 }
 input[type=text]:focus,
 input[type=search]:focus,
 input[type=password]:focus {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  outline: none;
+}
+
+textarea,
+textarea.form-control {
+  border: transparent;
+  border: 1px solid #D8D8D8;
+  -webkit-border-radius: 1px;
+          border-radius: 1px;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+textarea:focus,
+textarea.form-control:focus {
   -webkit-box-shadow: none;
           box-shadow: none;
   outline: none;
@@ -7464,6 +7480,10 @@ input[type=password]:focus {
   border: 0px solid #D8D8D8;
   -webkit-box-shadow: 0px 2px 2px 0px rgba(223, 223, 223, 0.5);
           box-shadow: 0px 2px 2px 0px rgba(223, 223, 223, 0.5);
+}
+.white-box.top-level {
+  -webkit-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16);
+          box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16);
 }
 
 .app-title-line {

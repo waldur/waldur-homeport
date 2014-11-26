@@ -152,8 +152,23 @@ input[type=text],
 input[type=search], 
 input[type=password] {
     border: transparent;
-    border-bottom: 1px solid #979797;
-    border-radius: 0;
+    // border-bottom: 1px solid #979797;
+    border: 1px solid #D8D8D8;
+    border-radius: 1px;
+    box-shadow: none;
+    &:focus {
+        box-shadow: none;
+        outline: none;
+    } // &:focus
+    &.correct {} // &.correct
+}
+
+textarea,
+textarea.form-control {
+    border: transparent;
+    // border-bottom: 1px solid #979797;
+    border: 1px solid #D8D8D8;
+    border-radius: 1px;
     box-shadow: none;
     &:focus {
         box-shadow: none;

@@ -7293,8 +7293,8 @@ input[type=text],
 input[type=search],
 input[type=password] {
   border: transparent;
-  border-bottom: 1px solid #979797;
-  border-radius: 0;
+  border: 1px solid #D8D8D8;
+  border-radius: 1px;
   box-shadow: none;
 }
 input[type=text]:focus,
@@ -7304,11 +7304,27 @@ input[type=password]:focus {
   outline: none;
 }
 
+textarea,
+textarea.form-control {
+  border: transparent;
+  border: 1px solid #D8D8D8;
+  border-radius: 1px;
+  box-shadow: none;
+}
+textarea:focus,
+textarea.form-control:focus {
+  box-shadow: none;
+  outline: none;
+}
+
 .white-box {
   border-radius: 1px;
   background: #FFFFFF;
   border: 0px solid #D8D8D8;
   box-shadow: 0px 2px 2px 0px rgba(223, 223, 223, 0.5);
+}
+.white-box.top-level {
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16);
 }
 
 .app-title-line {
