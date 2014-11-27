@@ -60,6 +60,10 @@ def projects():
 def services():
     return render_template('services.html', current = 'services')
 
+@app.route('/service/')
+def service():
+    return render_template('service.html', current = 'services')
+
 @app.route('/project/')
 def project():
     return render_template('project.html', current = 'projects')
@@ -79,6 +83,10 @@ def users_manage():
 @app.route('/user/edit/')
 def user_edit():
     return render_template('user-edit.html', current = 'user')
+
+@app.route('/user/pass/')
+def user_pass():
+    return render_template('user-pass.html', current = 'user')
 
 @app.route('/customer/')
 def customer():

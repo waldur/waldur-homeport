@@ -11,8 +11,22 @@
                 <img src="{{ url_for('static', filename='images/887178.jpg') }}" class="profile-pic" alt="John Doe">
             </div>
             <div class="col-xs-7 profile-info">
-                <h1 class="profile-name">Mihail Yakimenko</h1>
-                <a href="mailto:mail@mail.com">mail@mail.com</a>
+                <div class="edit-forms user-pass">
+                    <form action="">
+                        <div class="row form-field">
+                            <div class="col-xs-8">
+                                <label for="">New password</label>
+                                <input type="password" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row form-field">
+                            <div class="col-xs-8">
+                                <label for="">Confirm new password</label>
+                                <input type="password" class="form-control">
+                            </div>
+                        </div>
+                    </form>
+                </div>
                 <div class="stats">
                     <div class="row">
                         <div class="col-xs-4">
@@ -36,7 +50,7 @@
                         <a href="{{ url_for('user_edit') }}" class="crud-controls"><i class="fa fa-cog"></i> edit profile</a>
                     </li>
                     <li>
-                        <a href="{{ url_for('user_pass') }}" class="crud-controls"><i class="fa fa-cog"></i> change password</a>
+                        <a href="{{ url_for('user') }}" class="crud-controls active"><i class="fa fa-cog"></i> change password</a>
                     </li>
                 </ul>
             </div>

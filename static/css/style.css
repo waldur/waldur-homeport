@@ -8081,6 +8081,15 @@ textarea.form-control:focus {
   width: 80px;
 }
 
+.edit-forms .form-field + .form-field {
+  margin-top: 10px;
+}
+.edit-forms.user-pass .form-field label {
+  margin-top: 0px;
+  margin-bottom: 5px;
+  font-size: 1.4rem;
+}
+
 .site-welcome {
   position: relative;
   background: url(../images/decor-image.png);

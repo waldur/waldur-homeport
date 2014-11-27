@@ -10,9 +10,21 @@
             <div class="col-xs-1">
                 <img src="{{ url_for('static', filename='images/887178.jpg') }}" class="profile-pic" alt="John Doe">
             </div>
-            <div class="col-xs-9 profile-info">
-                <h1 class="profile-name">Mihail Yakimenko</h1>
-                <a href="mailto:mail@mail.com">mail@mail.com</a>
+            <div class="col-xs-7 profile-info">
+                <div class="edit-forms user-edit">
+                    <form action="">
+                        <div class="row form-field">
+                            <div class="col-xs-8">
+                                <input type="text" class="form-control" value="Mihail Yakimenko">
+                            </div>
+                        </div>
+                        <div class="row form-field">
+                            <div class="col-xs-8">
+                                <input type="text" class="form-control" value="macgera@gmail.com">
+                            </div>
+                        </div>
+                    </form>
+                </div>
                 <div class="stats">
                     <div class="row">
                         <div class="col-xs-4">
@@ -30,10 +42,13 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xs-2">
+            <div class="col-xs-4">
                 <ul class="controls pull-right">
                     <li>
-                        <a href="{{ url_for('user_edit') }}" class="crud-controls"><i class="fa fa-cog"></i> edit profile</a>
+                        <a href="{{ url_for('user') }}" class="crud-controls active"><i class="fa fa-cog"></i> edit profile</a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('user_pass') }}" class="crud-controls"><i class="fa fa-cog"></i> change password</a>
                     </li>
                 </ul>
             </div>
