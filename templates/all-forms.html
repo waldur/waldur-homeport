@@ -33,7 +33,7 @@
                                         <option value="">FrayD34</option>
                                     </select>
                                 </div>
-                                <a href="#" class="crud-controls"><i class="fa fa-plus"></i> add project</a>
+                                <a href="#" class="crud-controls"><i class="fa fa-plus"></i> add customer</a>
                             </div>
                         </div>
                         <div class="row form-field description">
@@ -434,6 +434,110 @@
                             <div class="col-xs-12 text-center">
                                 <button class="btn btn-default">Cancel</button>
                                 <button class="btn btn-primary">Add key</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- /app-basic-form -->
+            </div>
+        </div>
+    </section>
+    <!-- /app-block -->
+</div>
+
+<div class="app-form-box" data-role="form-box">    
+    <!-- app-block -->
+    <section class="app-block">
+        <div class="container-fluid">
+            <div class="white-box">
+                <!-- app-basic-form -->
+                <div class="app-basic-form">
+                    <form action="">
+
+                        <!-- app-title-line -->
+                        <div class="app-title-line in-form form-field">
+                            <div class="row">
+                                <div class="col-xs-12 first-line">
+                                    <h2 class="app-title">Service type</h2>
+                                    <div class="crud-box pull-right"><a href="#" class="crud-controls"><i class="fa fa-plus"></i> add service</a></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /app-title-line -->
+
+                        <!-- service-choice -->
+                        <div class="servicestore form-field" data-role="servicestore">
+                            <div class="row templates-row">
+                                <div class="col-xs-4">
+                                    <div class="service-template" data-role="servicestore-template">
+                                        <div class="name-row">
+                                            <div class="icon-box">
+                                                <img src="{{ url_for('static', filename='images/icons/openstack.jpg') }}" alt="" class="icon">
+                                            </div>
+                                            <div class="description">
+                                                <h3>OpenStack</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-4">
+                                    <div class="service-template" data-role="servicestore-template">
+                                        <div class="name-row">
+                                            <div class="icon-box">
+                                                <img src="{{ url_for('static', filename='images/icons/digitalocean.jpg') }}" alt="" class="icon">
+                                            </div>
+                                            <div class="description">
+                                                <h3>DigitalOcean</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-4">
+                                    <div class="service-template" data-role="servicestore-template">
+                                        <div class="name-row">
+                                            <div class="icon-box">
+                                                <img src="{{ url_for('static', filename='images/icons/amazon.jpg') }}" alt="" class="icon">
+                                            </div>
+                                            <div class="description">
+                                                <h3>Amazon WebServices</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /service-choice -->
+
+                        <div class="form-divide"></div>
+
+                        <!-- app-title-line -->
+                        <div class="app-title-line in-form form-field">
+                            <div class="row">
+                                <div class="col-xs-12 first-line">
+                                    <h2 class="app-title">Login details</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /app-title-line -->
+
+                        <div class="row form-field">
+                            <div class="col-xs-4">
+                                <input type="text" class="form-control" placeholder="auth url" data-role="form-input">
+                            </div>
+                            <div class="col-xs-4">
+                                <input type="text" class="form-control" placeholder="Login" data-role="form-input">
+                            </div>
+                            <div class="col-xs-4">
+                                <input type="text" class="form-control" placeholder="Pass" data-role="form-input">
+                            </div>
+                        </div>
+
+                        <div class="form-divide"></div>
+
+                        <div class="row form-field">
+                            <div class="col-xs-12 text-center">
+                                <button class="btn btn-default">Cancel</button>
+                                <button class="btn btn-primary">Add service</button>
                             </div>
                         </div>
                     </form>

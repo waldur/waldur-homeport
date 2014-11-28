@@ -104,6 +104,10 @@ def addproject():
 def addresource():
     return render_template('add-resource.html')
 
+@app.route('/add-service/')
+def addservice():
+    return render_template('add-service.html')
+
 # @app.route('/404.html')
 # def error404():
 #     return render_template('404.html')

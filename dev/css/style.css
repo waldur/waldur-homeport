@@ -6691,6 +6691,35 @@ button.close {
     display: none !important;
   }
 }
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes show {
+  0% {
+    display: none;
+    opacity: 0;
+    transform: translate(0, 200px);
+  }
+  60% {
+    opacity: .2;
+    transform: translate(0, 25px);
+  }
+  75% {
+    opacity: 1;
+    transform: translate(0, 15px);
+  }
+  90% {
+    transform: translate(0, 5px);
+  }
+  100% {
+    transform: none;
+  }
+}
 html {
   font-size: 62.5%;
 }
@@ -6719,6 +6748,10 @@ img {
   max-width: 100%;
   height: auto;
   display: inline-block;
+}
+
+.no-display {
+  display: none !important;
 }
 
 .container-fluid {
@@ -7296,6 +7329,7 @@ input[type=password] {
   border: 1px solid #D8D8D8;
   border-radius: 1px;
   box-shadow: none;
+  padding: 2px 6px;
 }
 input[type=text]:focus,
 input[type=search]:focus,
@@ -7310,6 +7344,7 @@ textarea.form-control {
   border: 1px solid #D8D8D8;
   border-radius: 1px;
   box-shadow: none;
+  padding: 2px 6px;
 }
 textarea:focus,
 textarea.form-control:focus {
@@ -7421,14 +7456,12 @@ textarea.form-control:focus {
 .app-title-line .sort li .search {
   width: 120px;
   margin-left: 10px;
+  transition-property: all;
+  transition-duration: 0.4s;
+  transition-timing-function: ease;
 }
 .app-title-line .sort li .search.state {
-  width: 100%;
-  position: absolute;
-  top: -10px;
-  left: 0px;
-  padding: 10px 0px;
-  background: white;
+  width: 300px;
 }
 .app-title-line .sort li .search input[type=text] {
   width: calc(100% - 35px);
@@ -7708,6 +7741,9 @@ textarea.form-control:focus {
 .app-form-box {
   margin-top: 0px;
   margin-bottom: 40px;
+}
+.app-form-box.after-line {
+  margin-top: 40px;
 }
 
 .app-basic-form {

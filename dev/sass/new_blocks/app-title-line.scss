@@ -71,13 +71,12 @@
             .search {
                 width: 120px;
                 margin-left: 10px;
+                @include transition(all, 0.4s, ease);
                 &.state {
-                    width: 100%;
-                    position: absolute;
-                    top: -10px;
-                    left: 0px;
-                    padding: 10px 0px;
-                    background: white;
+                    width: 300px;
+                    // position: absolute;
+                    // top: -10px;
+                    // left: 0px;
                 }
                 input[type=text] {
                     width: calc(100% - 35px);

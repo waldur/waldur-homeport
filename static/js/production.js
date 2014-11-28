@@ -11453,6 +11453,31 @@ return jQuery;
         addResBox.css('top', appHeaderHeight);
     }
 
+    function searchAnimate() {
+        var box = $('[data-role="search-box"]');
+        box.each(function() {
+            searchbox = $(this);
+            var searchinput = searchbox.find('input');
+            // console.log(searchinput);
+            searchinput.on('focus', function() {
+                searchbox.addClass('state');
+            });
+            searchinput.on('blur', function() {
+                searchbox.removeClass('state');
+            });
+                // if (searchinput.is(':focus')) {
+                //     searchbox.addClass('state');
+                //     console.log(searchbox);
+                // } else {
+                //     searchbox.removeClass('state');
+                //     console.log(searchbox);
+                // }
+            // $(this).find('input').on('focus', function() {
+            //     $(this).parent('[data-role="search-box"]').addClass('state');
+            // });
+        });
+    }
+
     // document ready
     $(window).on('load', function() {
         // website js
@@ -11470,6 +11495,7 @@ return jQuery;
         choices('[data-role="plan-in-data"]', 'active');
         choices('[data-role="servicestore-template"]', 'state');
         $('.disabled').bind('click', function(){ return false; });
+        searchAnimate()
     });
 
     // all initial on window resize

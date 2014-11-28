@@ -156,6 +156,7 @@ input[type=password] {
     border: 1px solid #D8D8D8;
     border-radius: 1px;
     box-shadow: none;
+    padding: 2px 6px;
     &:focus {
         box-shadow: none;
         outline: none;
@@ -170,6 +171,7 @@ textarea.form-control {
     border: 1px solid #D8D8D8;
     border-radius: 1px;
     box-shadow: none;
+    padding: 2px 6px;
     &:focus {
         box-shadow: none;
         outline: none;
