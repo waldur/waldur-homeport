@@ -90,11 +90,15 @@ def user_pass():
 
 @app.route('/customer/')
 def customer():
-    return render_template('customer.html', current = 'user')
+    return render_template('customer.html')
 
 @app.route('/customer/edit/')
 def customer_edit():
-    return render_template('customer-edit.html', current = 'user')
+    return render_template('customer-edit.html')
+
+@app.route('/customer/plans/')
+def customer_plans():
+    return render_template('customer-plans.html')
 
 @app.route('/add-project/')
 def addproject():

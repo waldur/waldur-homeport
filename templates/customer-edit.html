@@ -1,1 +1,237 @@
-customer-edit.html
+{% extends 'base_account.html' %}
+
+{% block body_class %}obj-view{% endblock %}
+
+{% block content %}
+<!-- profile-view -->
+<div class="profile-view">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-1">
+                <img src="{{ url_for('static', filename='images/tmp/dojocat.jpg') }}" class="profile-pic">
+            </div>
+            <div class="col-xs-9 profile-info">
+                <div class="edit-forms user-edit">
+                    <form action="">
+                        <div class="row form-field">
+                            <div class="col-xs-8">
+                                <input type="text" class="form-control" value="Mihail Yakimenko">
+                            </div>
+                        </div>
+                        <div class="row form-field">
+                            <div class="col-xs-8">
+                                <textarea class="form-control" name="" id="" placeholder="Description"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="stats">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <span class="stat-int">4</span>
+                            <span class="stat-description">Active projects</span>
+                        </div>
+                        <div class="col-xs-4">
+                            <span class="stat-int">4</span>
+                            <span class="stat-description">Services</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-2">
+                <ul class="controls pull-right">
+                    <li>
+                        <a href="{{ url_for('customer') }}" class="crud-controls active"><i class="fa fa-cog"></i> edit profile</a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('customer_plans') }}" class="crud-controls"><i class="fa fa-cog"></i> plans</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /profile-view -->
+
+<!-- app-tabs -->
+<div class="app-tabs">
+    <!-- tabs-nav -->
+    <div class="tabs-container">
+        <div class="container-fluid">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="active">
+                    <a href="#projects" role="tab" data-toggle="tab">
+                        Projects
+                        <span class="label label-success">12</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#customers" role="tab" data-toggle="tab">
+                        Services
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- /tabs-nav -->
+    <!-- tabs-content -->
+    <div class="tab-content">
+        <div class="tab-pane active" id="projects">
+            <!-- app-block -->
+            <section class="app-block">
+                <div class="container-fluid">
+                    <div class="white-box">
+                        <div class="app-title-line">
+                            <div class="row">
+                                <div class="col-xs-12 first-line">
+                                    <ul class="sort">
+                                        <li><a href="#" class="active">5</a></li>
+                                        <li><a href="#">15</a></li>
+                                        <li><a href="#">24</a></li>
+                                        <li class="divid">
+                                            <div class="search" data-role="search-box">
+                                                <input type="text">
+                                                <button class="search-button">
+                                                    <i class="fa fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <div class="crud-box pull-right"><a href="#" class="crud-controls"><i class="fa fa-plus"></i> add project</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- /app-block -->
+            <!-- app-block -->
+            <section class="app-block">
+                <div class="container-fluid">
+                    <div class="white-box">
+                        <div class="app-items-list">
+                            <table class="items-table">
+                                <th class="name">
+                                    <a href="" class="sort">Name</a>
+                                </th>
+                                <th class="col-xs-2"><a href="" class="sort">IP's</a></th>
+                                <th class="col-xs-2"><a href="" class="sort">Users</a></th>
+                                <th class="col-xs-2"></th>
+                                {% include 'includes/parts/project-list-item.html' %}
+                                {% include 'includes/parts/project-list-item.html' %}
+                                {% include 'includes/parts/project-list-item.html' %}
+                                {% include 'includes/parts/project-list-item.html' %}
+                                {% include 'includes/parts/project-list-item.html' %}
+                                {% include 'includes/parts/project-list-item.html' %}
+                                {% include 'includes/parts/project-list-item.html' %}
+                                {% include 'includes/parts/project-list-item.html' %}
+                                {% include 'includes/parts/project-list-item.html' %}
+                                {% include 'includes/parts/project-list-item.html' %}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- /app-block -->
+            <!-- app-block -->
+            <div class="app-block">
+                <div class="container-fluid">
+                    <!-- pagination -->
+                    <div class="pagination">
+                        <ul>
+                            <li><a href="#" class="current">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                        </ul>
+                    </div>
+                    <!-- /pagination -->
+                </div>
+            </div>
+            <!-- /app-block -->
+        </div>
+        <div class="tab-pane" id="customers">
+            <!-- app-block -->
+            <section class="app-block">
+                <div class="container-fluid">
+                    <div class="white-box">
+                        <div class="app-title-line">
+                            <div class="row">
+                                <div class="col-xs-12 first-line">
+                                    <ul class="sort">
+                                        <li><a href="#" class="active">5</a></li>
+                                        <li><a href="#">15</a></li>
+                                        <li><a href="#">24</a></li>
+                                        <li class="divid">
+                                            <div class="search" data-role="search-box">
+                                                <input type="text">
+                                                <button class="search-button">
+                                                    <i class="fa fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <div class="crud-box pull-right"><a href="#" class="crud-controls"><i class="fa fa-plus"></i> add service</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- /app-block -->
+            <!-- app-block -->
+            <section class="app-block">
+                <div class="container-fluid">
+                    <div class="white-box">
+                        <div class="app-items-list">
+                            <table class="items-table">
+                                <th class="name">
+                                    <a href="" class="sort">Name</a>
+                                </th>
+                                <th class="col-xs-2 type">
+                                    <a href="" class="sort">Service</a>
+                                </th>
+                                <th class="col-xs-1"></th>
+                                {% include 'includes/parts/service-list-item-customer.html' %}
+                                {% include 'includes/parts/service-list-item-customer.html' %}
+                                {% include 'includes/parts/service-list-item-customer.html' %}
+                                {% include 'includes/parts/service-list-item-customer.html' %}
+                                {% include 'includes/parts/service-list-item-customer.html' %}
+                                {% include 'includes/parts/service-list-item-customer.html' %}
+                                {% include 'includes/parts/service-list-item-customer.html' %}
+                                {% include 'includes/parts/service-list-item-customer.html' %}
+                                {% include 'includes/parts/service-list-item-customer.html' %}
+                                {% include 'includes/parts/service-list-item-customer.html' %}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- /app-block -->
+            <!-- app-block -->
+            <div class="app-block">
+                <div class="container-fluid">
+                    <!-- pagination -->
+                    <div class="pagination">
+                        <ul>
+                            <li><a href="#" class="current">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                        </ul>
+                    </div>
+                    <!-- /pagination -->
+                </div>
+            </div>
+            <!-- /app-block -->
+        </div>
+    </div>
+    <!-- /tabs-content -->
+</div>
+<!-- /app-tabs -->
+{% endblock %}
+
+{% block modals %}
+{% endblock %}

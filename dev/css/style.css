@@ -7705,6 +7705,13 @@ textarea.form-control:focus {
   content: '\f1ad';
   font-family: FontAwesome;
 }
+.profile-view .profile-plans {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+.profile-view .profile-plans .plans-confirm {
+  margin-top: 20px;
+}
 
 .app-tabs {
   margin-top: 40px;

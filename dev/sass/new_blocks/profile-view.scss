@@ -47,4 +47,11 @@
             font-family: FontAwesome;
         } // &:before
     } // customer-link
+    .profile-plans {
+        margin-top: 40px;
+        margin-bottom: 40px;
+        .plans-confirm {
+            margin-top: 20px;
+        } // plans-confirm
+    } // profile-plans
 } // profile-view
