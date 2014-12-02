@@ -1,7 +1,8 @@
 {% extends 'base_account.html' %}
 
-{% block content %}
+{# block body_class %}obj-view{% endblock #}
 
+{% block content %}
 <!-- header -->
 <div class="app-header-overlay navbar navbar-fixed-top" role="navigation">         
     <div class="container-fluid">
@@ -70,211 +71,111 @@
 </div>
 <!-- /header -->
 
-
-<div class="section initial-data">
+<!-- profile-view -->
+<!-- <div class="profile-view">
     <div class="container-fluid">
-        
         <div class="row">
-            <div class="col-xs-2 image">
-                <img src="/static/images/887178.jpg" alt="">
+            <div class="col-xs-1 initial-data-image">
+                <img src="{{ url_for('static', filename='images/887178.jpg') }}" class="profile-pic" alt="John Doe">
             </div>
-            <div class="col-xs-10 data">
-                <div class="form-data">
-                    <form action="" class="data">
-                        <!-- form block -->
-                        <div class="form-block">
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <div class="dash-title-box">
-                                        <h2 class="dash-title">Personal information</h2>
-                                    </div>
-                                </div>
+            <div class="col-xs-10 profile-info">
+                <div class="edit-forms user-edit">
+                    <form action="">
+                        <div class="row form-field">
+                            <div class="col-xs-8">
+                                <input type="text" class="form-control" value="Mihail Yakimenko">
                             </div>
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <div class="form-field">
+                        </div>
+                        <div class="row form-field">
+                            <div class="col-xs-8">
+                                <input type="text" class="form-control" value="macgera@gmail.com">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+<!-- /profile-view -->
+
+<!-- app-block -->
+<section class="app-block">
+    <div class="container-fluid">
+        <div class="white-box">
+            <div class="app-title-line">
+                <div class="row">
+                    <div class="col-xs-12 first-line">
+                        <h2 class="app-title">Welcome to Nodeconductor</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- /app-block -->
+
+<div class="app-block">
+    <div class="container-fluid">
+        <div class="white-box">
+            <div class="app-initial-data">
+                <div class="row">
+                    <div class="col-xs-2 initial-data-image">
+                        <img src="{{ url_for('static', filename='images/887178.jpg') }}" class="profile-pic" alt="John Doe">
+                    </div>
+                    <div class="col-xs-10 initial-data-info">
+                        <div class="edit-forms initial-data-edit">
+                            <form action="">
+                                <div class="row form-field">
+                                    <div class="col-xs-8">
                                         <input type="text" class="form-control" value="Mihail Yakimenko">
                                     </div>
-                                    <div class="form-field">
+                                </div>
+                                <div class="row form-field">
+                                    <div class="col-xs-8">
                                         <input type="text" class="form-control" value="macgera@gmail.com">
                                     </div>
-                                    <div class="form-field">
-                                        <input type="text" class="form-control" value="Some value">
-                                    </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
-                        <!-- /form block -->
-                        <!-- form block -->
-                        <div class="form-block plans-and-price">
+                        <div class="initial-info">
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <div class="dash-title-box">
-                                        <h2 class="dash-title">Plan</h2>
+                                    <h3 class="init-title">You have a basic plan</h3> <span class="label label-info">refund 14 days</span>
+                                </div>
+                            </div>
+                            <div class="init-plan">
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        <span class="plan-int">2</span>
+                                        <span class="plan-description">Projects</span>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <span class="plan-int">2</span>
+                                        <span class="plan-description">Customers</span>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <span class="plan-int">7</span>
+                                        <span class="plan-description">SSH keys</span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-xs-4">
-                                    <div class="price-table-box in-data active" data-role="plan-in-data">
-                                        <table class="price-table grayscale">
-                                            <tr>
-                                                <th>
-                                                    <span class="plan-name">Lonely warrior</span>
-                                                    <span class="plan-price">$39/month</span>
-                                                </th>
-                                            </tr>
-                                            <tr>
-                                                <td>10 projects</td>
-                                            </tr>
-                                            <tr>
-                                                <td>100 users</td>                                        
-                                            </tr>
-                                            <tr>
-                                                <td>300 resources</td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
-                                <div class="col-xs-4">
-                                    <div class="price-table-box in-data" data-role="plan-in-data">
-                                        <table class="price-table grayscale">
-                                            <tr>
-                                                <th>
-                                                    <span class="plan-name">Pack of specialists</span>
-                                                    <span class="plan-price">$69/month</span>
-                                                </th>
-                                            </tr>
-                                            <tr>
-                                                <td>50 projects</td>
-                                            </tr>
-                                            <tr>
-                                                <td>300 users</td>
-                                            </tr>
-                                            <tr>
-                                                <td>800 resources</td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
-                                <div class="col-xs-4">
-                                    <div class="price-table-box in-data" data-role="plan-in-data">
-                                        <table class="price-table grayscale">
-                                            <tr>
-                                                <th>
-                                                    <span class="plan-name">Corporation</span>
-                                                    <span class="plan-price">$139/month</span>
-                                                </th>
-                                            </tr>
-                                            <tr>
-                                                <td>100 projects</td>
-                                            </tr>
-                                            <tr>
-                                                <td>500 users</td>
-                                            </tr>
-                                            <tr>
-                                                <td>1000 resources</td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /form block -->
-                        <!-- form block -->
-                        <div class="form-block">
-                            <div class="row">
+                            <div class="row agrement-text">
                                 <div class="col-xs-12">
-                                    <div class="dash-title-box">
-                                        <h2 class="dash-title">Billing information</h2>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row form-field">
-                                <div class="col-xs-6">
-                                    <input type="text" class="form-control" placeholder="First Name">
-                                </div>
-                                <div class="col-xs-6">
-                                    <input type="text" class="form-control" placeholder="Last Name">
-                                </div>
-                            </div>
-                            <div class="row form-field">
-                                <div class="col-xs-6">
-                                    <input type="text" class="form-control" placeholder="Email">
-                                </div>
-                                <div class="col-xs-6">
-                                    <div class="row">
-                                        <div class="col-xs-4">
-                                            <input type="text" class="col-xs-4 form-control phone-code" placeholder="phone code">    
-                                        </div>
-                                        <div class="col-xs-8">
-                                            <input type="text" class="col-xs-8 form-control phone" placeholder="Phone number">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row form-field">
-                                <div class="col-xs-6">
-                                    <input type="text" class="form-control" placeholder="Country">
-                                </div>
-                                <div class="col-xs-6">
-                                    <input type="text" class="form-control" placeholder="City">
-                                </div>
-                            </div>
-                            <div class="row form-field">
-                                <div class="col-xs-6">
-                                    <input type="text" class="form-control" placeholder="Address">
-                                </div>
-                                <div class="col-xs-6">
-                                    <input type="text" class="form-control" placeholder="ZIP/Postal">
+                                    <p class="gray-text">
+                                        We are can put here some agreement text, if this need, but without billing form fields, 
+                                        this page of intial data looks like very short.
+                                        Also, we can put text about <span class="label label-info">refund 14 days</span> here to.
+                                    </p>
                                 </div>
                             </div>
                         </div>
-                        <!-- /form block -->
-                        <!-- form-block -->
-                        <div class="form-block">
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-6">
-                                    <label for="">Card number</label>
-                                </div>
-                                <div class="col-xs-1"></div>
-                                <div class="col-xs-4">
-                                    <label for="">CVV</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-6">
-                                    <div class="row">
-                                        <div class="col-xs-3"><input type="text" class="form-control"></div>
-                                        <div class="col-xs-3"><input type="text" class="form-control"></div>
-                                        <div class="col-xs-3"><input type="text" class="form-control"></div>
-                                        <div class="col-xs-3"><input type="text" class="form-control"></div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-1"></div>
-                                <div class="col-xs-4">
-                                    <div class="row">
-                                        <div class="col-xs-3"><input type="text" class="form-control"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /form-block -->
-                        <!-- form-block -->
-                        <div class="form-block">
-                            <div class="row">
-                                <div class="col-xs-12 finish-signup">
-                                    <a href="{{ url_for('dashboard') }}" class="btn btn-primary">Finish Signup</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /form-block -->
-                    </form>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 text-center">
+                        <a href="#" class="btn btn-primary">Finish signup</a>
+                    </div>
                 </div>
             </div>
         </div>

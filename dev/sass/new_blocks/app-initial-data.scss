@@ -1,0 +1,53 @@
+.app-initial-data {
+    padding: 20px;
+    .initial-data-info {
+        padding-left: 20px;
+        .initial-info {
+            margin-top: 20px;
+        } // initial-info
+        .init-title {
+            @include inline-middle;
+            margin: 0;
+            font-size: rem(22);
+        } // init-title
+        .init-plan {
+            margin-top: 20px;
+            margin-bottom: 40px;
+            .plan-int {
+                @include inline-middle;
+                font-size: rem(24);
+                color: #417505;
+                line-height: 1;
+                margin-right: 10px;
+            } // plan-int
+            .plan-description {
+                @include inline-middle;
+                font-size: rem(18);
+                color: #020202;
+                line-height: 1;
+            } // plan-description
+        } // init-plan
+        .refound-info {
+            p {
+                padding: 10px 20px;
+            }
+        } // refound-info
+    } // initial-data-edit
+    .agrement-text {
+        margin-bottom: 20px;
+    } // agrement-text
+} // app-initial-data
+
+.initial-data-image {
+    .profile-pic {
+        width: auto;
+    } // profile-pic
+    .change-photo {
+        display: inline-block;
+        width: auto;
+        height: auto;
+        overflow: hidden;
+        font-size: rem(18);
+        input {} // input
+    } // change-photo
+} // initial-data-image

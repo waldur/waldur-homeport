@@ -7685,6 +7685,9 @@ textarea.form-control:focus {
 .app-block + .app-block {
   margin-top: 40px;
 }
+.app-block.initial-data {
+  margin-top: 40px;
+}
 
 .app-content.with-paddings {
   padding: 20px;
@@ -8175,6 +8178,58 @@ textarea.form-control:focus {
   font-size: 1.4rem;
 }
 
+.app-initial-data {
+  padding: 20px;
+}
+.app-initial-data .initial-data-info {
+  padding-left: 20px;
+}
+.app-initial-data .initial-data-info .initial-info {
+  margin-top: 20px;
+}
+.app-initial-data .initial-data-info .init-title {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0;
+  font-size: 2.2rem;
+}
+.app-initial-data .initial-data-info .init-plan {
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+.app-initial-data .initial-data-info .init-plan .plan-int {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 2.4rem;
+  color: #417505;
+  line-height: 1;
+  margin-right: 10px;
+}
+.app-initial-data .initial-data-info .init-plan .plan-description {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 1.8rem;
+  color: #020202;
+  line-height: 1;
+}
+.app-initial-data .initial-data-info .refound-info p {
+  padding: 10px 20px;
+}
+.app-initial-data .agrement-text {
+  margin-bottom: 20px;
+}
+
+.initial-data-image .profile-pic {
+  width: auto;
+}
+.initial-data-image .change-photo {
+  display: inline-block;
+  width: auto;
+  height: auto;
+  overflow: hidden;
+  font-size: 1.8rem;
+}
+
 .site-welcome {
   position: relative;
   background: url(../images/decor-image.png);
@@ -8609,26 +8664,4 @@ body.prices {
   color: #fff;
   border-bottom: 2px solid #2d6c09;
   text-decoration: none;
-}
-
-.initial-data .image {
-  padding-right: 20px;
-}
-.initial-data .image img {
-  margin-top: 65px;
-  -webkit-border-radius: .4em;
-          border-radius: .4em;
-}
-.initial-data .data {
-  padding-left: 20px;
-}
-.initial-data .form-data .form-block + .form-block {
-  margin-top: 30px;
-}
-.initial-data .form-data .form-field + .form-field {
-  margin-top: 20px;
-}
-
-.finish-signup {
-  text-align: center;
 }
