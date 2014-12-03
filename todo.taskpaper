@@ -1,0 +1,8 @@
+Random:
+	- Intital data add Plan to right section
+	- Fixes by Youri https://gist.github.com/hudolejev/9400b643540bd8cc713a
+	- change plans design & current splan 
+	- buttons crud controls
+
+Components:
+	- Customize BS buttons
