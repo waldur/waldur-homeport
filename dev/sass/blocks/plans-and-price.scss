@@ -11,6 +11,10 @@ body {
         border: 1px solid rgb(229, 229, 229);
         margin: 0 auto;
         width: 60%;
+        &.in-login {
+            width: 80%;
+            opacity: 1;
+        }
         &.in-data {
             width: 100%;
             display: block;

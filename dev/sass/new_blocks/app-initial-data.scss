@@ -10,23 +10,6 @@
             margin: 0;
             font-size: rem(22);
         } // init-title
-        .init-plan {
-            margin-top: 20px;
-            margin-bottom: 40px;
-            .plan-int {
-                @include inline-middle;
-                font-size: rem(24);
-                color: #417505;
-                line-height: 1;
-                margin-right: 10px;
-            } // plan-int
-            .plan-description {
-                @include inline-middle;
-                font-size: rem(18);
-                color: #020202;
-                line-height: 1;
-            } // plan-description
-        } // init-plan
         .refound-info {
             p {
                 padding: 10px 20px;
@@ -36,6 +19,11 @@
     .agrement-text {
         margin-bottom: 20px;
     } // agrement-text
+    .plan-description {
+        width: 80%;
+        margin: 0 auto;
+        margin-top: 20px;
+    } // plan-description
 } // app-initial-data
 
 .initial-data-image {

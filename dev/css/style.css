@@ -7957,30 +7957,16 @@ textarea.form-control:focus {
   margin: 0;
   font-size: 2.2rem;
 }
-.app-initial-data .initial-data-info .init-plan {
-  margin-top: 20px;
-  margin-bottom: 40px;
-}
-.app-initial-data .initial-data-info .init-plan .plan-int {
-  display: inline-block;
-  vertical-align: middle;
-  font-size: 2.4rem;
-  color: #417505;
-  line-height: 1;
-  margin-right: 10px;
-}
-.app-initial-data .initial-data-info .init-plan .plan-description {
-  display: inline-block;
-  vertical-align: middle;
-  font-size: 1.8rem;
-  color: #020202;
-  line-height: 1;
-}
 .app-initial-data .initial-data-info .refound-info p {
   padding: 10px 20px;
 }
 .app-initial-data .agrement-text {
   margin-bottom: 20px;
+}
+.app-initial-data .plan-description {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 20px;
 }
 
 .initial-data-image .profile-pic {
@@ -8148,6 +8134,10 @@ body.prices {
   border: 1px solid #e5e5e5;
   margin: 0 auto;
   width: 60%;
+}
+.plans-and-price .price-table-box.in-login {
+  width: 80%;
+  opacity: 1;
 }
 .plans-and-price .price-table-box.in-data {
   width: 100%;

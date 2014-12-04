@@ -93,45 +93,24 @@
                     <div class="col-xs-2 initial-data-image">
                         <img src="{{ url_for('static', filename='images/887178.jpg') }}" class="profile-pic" alt="John Doe">
                     </div>
-                    <div class="col-xs-10 initial-data-info">
+                    <div class="col-xs-6 initial-data-info">
                         <div class="edit-forms initial-data-edit">
                             <form action="">
                                 <div class="row form-field">
-                                    <div class="col-xs-8">
+                                    <div class="col-xs-12">
                                         <input type="text" class="form-control" value="Mihail Yakimenko">
                                     </div>
                                 </div>
                                 <div class="row form-field">
-                                    <div class="col-xs-8">
+                                    <div class="col-xs-12">
                                         <input type="text" class="form-control" value="macgera@gmail.com">
                                     </div>
                                 </div>
                             </form>
                         </div>
                         <div class="initial-info">
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <h3 class="init-title">You have a basic plan</h3> <span class="label label-info">refund 14 days</span>
-                                </div>
-                            </div>
-                            <div class="init-plan">
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <span class="plan-int">2</span>
-                                        <span class="plan-description">Projects</span>
-                                    </div>
-                                    <div class="col-xs-3">
-                                        <span class="plan-int">2</span>
-                                        <span class="plan-description">Customers</span>
-                                    </div>
-                                    <div class="col-xs-3">
-                                        <span class="plan-int">7</span>
-                                        <span class="plan-description">SSH keys</span>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="row agrement-text">
-                                <div class="col-xs-8">
+                                <div class="col-xs-12">
                                     <p class="gray-text">
                                         We are can put here some agreement text, if this need, but without billing form fields, 
                                         this page of intial data looks like very short.
@@ -141,7 +120,33 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-xs-4 plans-and-price">
+                        <div class="price-table-box in-login">
+                            <table class="price-table">
+                                <tr>
+                                    <th>
+                                        <span class="plan-name">Lonely warrior</span>
+                                        <span class="plan-price">$39/month</span>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>10 projects</td>
+                                </tr>
+                                <tr>
+                                    <td>100 users</td>                                        
+                                </tr>
+                                <tr>
+                                    <td>300 resources</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="plan-description gray-text">
+                            <span class="current">Your current plan is.</span>
+                            You can upgrade plan in your customer profile.
+                        </div>
+                    </div>
                 </div>
+
                 <div class="row">
                     <div class="col-xs-12 text-center">
                         <a href="#" class="btn btn-primary">Finish signup</a>
