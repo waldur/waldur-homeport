@@ -10,8 +10,23 @@
             <div class="col-xs-1">
                 <img src="{{ url_for('static', filename='images/tmp/dojocat.jpg') }}" class="profile-pic">
             </div>
-            <div class="col-xs-9 profile-info">
-                <h1 class="profile-name">Mihail Yakimenko plans</h1>
+            <div class="col-xs-11 profile-info">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h1 class="profile-name pull-left">Mihail Yakimenko</h1>
+                        <ul class="controls pull-right">
+                            <li>
+                                <a href="{{ url_for('customer_edit') }}" class="crud-controls"><i class="fa fa-cog"></i> edit profile</a>
+                            </li>
+                            <li>
+                                <a href="{{ url_for('customer') }}" class="crud-controls active"><i class="fa fa-cog"></i> plans</a>
+                            </li>
+                            <li>
+                                <a href="{{ url_for('customer_billing') }}" class="crud-controls"><i class="fa fa-cog"></i> billing</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
                 <!-- plans -->
                 <div class="profile-plans plans-and-price">
                     <div class="row">
@@ -110,28 +125,6 @@
                     <!-- /plans confirm -->
                 </div>
                 <!-- /plans -->
-                <div class="stats">
-                    <div class="row">
-                        <div class="col-xs-4">
-                            <span class="stat-int">4</span>
-                            <span class="stat-description">Active projects</span>
-                        </div>
-                        <div class="col-xs-4">
-                            <span class="stat-int">4</span>
-                            <span class="stat-description">Services</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-2">
-                <ul class="controls pull-right">
-                    <li>
-                        <a href="{{ url_for('customer_edit') }}" class="crud-controls"><i class="fa fa-cog"></i> edit profile</a>
-                    </li>
-                    <li>
-                        <a href="{{ url_for('customer') }}" class="crud-controls active"><i class="fa fa-cog"></i> plans</a>
-                    </li>
-                </ul>
             </div>
         </div>
     </div>

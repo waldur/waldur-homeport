@@ -25,6 +25,32 @@
     border-bottom: 1px dashed gray;
 }
 
+.container-fluid {
+    padding-left: 10%;
+    padding-right: 10%;
+    // width: 960px;
+    // margin: auto;
+}
+
+.container {
+    box-sizing: border-box;
+    width: 960px;
+    margin: auto;
+} // container
+
+.tooltip {
+    .tooltip-inner {
+        font-size: rem(12);
+    }
+}
+
+.btn {
+    border-color: transparent;
+    &:hover {
+        border-color: transparent;
+    }
+}
+
 // styles
 .controls {
     @include clear-list;
@@ -40,6 +66,23 @@
         } // a
     } // li
 } // controls
+
+.crud-controls {
+    color: black !important;
+    font-size: 14px !important;
+    padding: 4px 6px !important;
+    text-decoration: none !important;
+    opacity: 1 !important;
+    border: none !important;
+    &.active {
+        background: #27ae60;
+        border-radius: 3px;
+        color: #fff !important;
+        &:after {
+            display: none !important;
+        }
+    }
+} // crud-controls
 
 .gray-text {
     color: rgb(158, 158, 158);
