@@ -7,10 +7,37 @@ body {
 
 .plans-and-price {
     .price-table-box {
-        border-radius: 4px;
-        border: 1px solid rgb(229, 229, 229);
+        border-radius: 1px;
+        border: 1px solid #e5e5e5;
         margin: 0 auto;
         width: 60%;
+        position: relative;
+        &.active {
+            border: 1px solid rgb(62, 171, 84);
+            .grayscale {
+                opacity: 1;
+                .plan-name {
+                    color: #6cc644;
+                }
+            }
+            &:after {
+                // content: '\f058';
+                content: '\f00c';
+                font-family: FontAwesome;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                font-size: rem(20);
+                text-align: center;
+                background-color: rgb(62, 171, 84);
+                color: #fff;
+                width: 26px;
+                height: 26px;
+                border-radius: 100%;
+                position: absolute;
+                right: -10px;
+                top: -10px;
+            } // &:after
+        }
         &.in-login {
             width: 80%;
             opacity: 1;
@@ -20,14 +47,6 @@ body {
             display: block;
             color: inherit;
             cursor: pointer;
-            &.active {
-                .grayscale {
-                    opacity: 1;
-                    .plan-name {
-                        color: #6cc644;
-                    }
-                }
-            } // &.active 
         } // in-data
         table.price-table {
             margin: 0 auto;
