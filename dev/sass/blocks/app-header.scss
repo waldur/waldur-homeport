@@ -145,7 +145,10 @@
             }
         }
         &.user-drop {
-            text-align: right;
+            // text-align: right;
+            a {
+                padding-left: 46px;
+            }
         }
         li {
             &.user-box {

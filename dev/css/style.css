@@ -6890,8 +6890,8 @@ img {
 .navbar-nav > li .dropdown-menu.add-something .fa {
   margin-right: 10px;
 }
-.navbar-nav > li .dropdown-menu.user-drop {
-  text-align: right;
+.navbar-nav > li .dropdown-menu.user-drop a {
+  padding-left: 46px;
 }
 .navbar-nav > li .dropdown-menu li.user-box {
   padding-right: 0px;
