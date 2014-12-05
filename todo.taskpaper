@@ -3,8 +3,8 @@ Random:
 	- crud in user & project profiles
 Components:
 	- Customize BS buttons
-	- Star buttons: not checked empty star, checked filled green star
 Archive:
+	- Star buttons: not checked empty star, checked filled green star @done @project(Components)
 	- buttons crud controls @done @project(Random)
 
 	- change plans design & current splan  @done @project(Random)
