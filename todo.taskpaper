@@ -1,10 +1,11 @@
 Random:
 	- Fixes by Youri https://gist.github.com/hudolejev/9400b643540bd8cc713a
-	- change plans design & current splan 
-	- buttons crud controls
-
+	- crud in user & project profiles
 Components:
 	- Customize BS buttons
 	- Star buttons: not checked empty star, checked filled green star
 Archive:
+	- buttons crud controls @done @project(Random)
+
+	- change plans design & current splan  @done @project(Random)
 	- Intital data add Plan to right section @done @project(Random)
