@@ -6984,12 +6984,18 @@ img {
   position: relative;
   top: 2px;
 }
+.navbar-nav > li .user-pic-box {
+  padding-left: 50px;
+}
 .navbar-nav > li .user-pic {
   width: auto;
   height: 40px;
   margin-top: 5px;
   -webkit-border-radius: .4em;
           border-radius: .4em;
+  position: absolute;
+  top: 0px;
+  left: 5px;
 }
 .navbar-nav > li .add-something-button {
   position: relative;

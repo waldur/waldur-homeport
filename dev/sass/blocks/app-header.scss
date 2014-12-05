@@ -81,11 +81,17 @@
             top: 2px;
         }
     }
+    .user-pic-box {
+        padding-left: 50px;
+    }
     .user-pic {
         width: auto;
         height: 40px;
         margin-top: 5px;
         border-radius: .4em;
+        position: absolute;
+        top: 0px;
+        left: 5px;
     } // user-pic
     .add-something-button {
         position: relative;
