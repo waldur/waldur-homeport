@@ -67,6 +67,24 @@
     } // li
 } // controls
 
+a.kit-icon {
+    text-decoration: none;
+    color: black;
+}
+.kit-icon {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    &.view {
+        &:before {
+            content: '\f06e';
+        }
+    } // &.view    
+} // s-icon
+
 .crud-controls {
     color: black !important;
     font-size: 14px !important;
@@ -221,3 +239,48 @@ textarea.form-control {
     } // &:focus
     &.correct {} // &.correct
 }
+
+table.standart-table {
+    margin: 0 auto;
+    width: 100%;
+    tr {
+        &:nth-child(even) {
+            td {
+                background: #f0f5fa;
+            }
+        }
+        + tr {
+            td {
+                border-top: 1px solid rgb(229, 229, 229);
+            }
+        }
+        td, th {
+            width: 33%;
+            padding: 9px;
+            + td, + th {
+                border-left: 1px solid rgb(229, 229, 229);
+            }
+            &.no-border {
+                border-left: none;
+            } // &.no-border
+            span {
+                display: block;
+            }
+            .plan-name {
+                color: #6cc644;
+            }
+            .plan-price {
+                font-size: rem(14);
+            }
+            .btn-choice {
+                background-color: rgb(125, 178, 67);
+                margin-top: 6px;
+                border-radius: 4px;
+                padding: 6px 15px;
+                color: #fff;
+                text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.28);
+                border-bottom: 2px solid rgb(45, 108, 9);
+            }
+        } // td
+    } // tr
+} // price-table

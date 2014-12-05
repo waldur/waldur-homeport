@@ -100,6 +100,10 @@ def customer_edit():
 def customer_plans():
     return render_template('customer-plans.html')
 
+@app.route('/customer/billing/')
+def customer_billing():
+    return render_template('customer-billing.html')
+
 @app.route('/add-project/')
 def addproject():
     return render_template('add-project.html')
