@@ -11429,6 +11429,14 @@ return jQuery;
         });
     }
 
+    // sort link
+    $('.none, .up, .down').click(function() {                             
+        this.className = {
+           down : 'none', none: 'up', up: 'down'
+        }[this.className];
+        return false;
+    });
+
     // show input
     function showGrouped() {
         var infoBox = $('[data-grouped="box"]');

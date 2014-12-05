@@ -7249,6 +7249,31 @@ table.standart-table tr td .btn-choice, table.standart-table tr th .btn-choice {
   border-bottom: 2px solid #2d6c09;
 }
 
+a.sort {
+  color: black;
+  font-size: 1.4rem;
+  text-decoration: none;
+  position: relative;
+}
+a.sort:after {
+  position: absolute;
+  right: -12px;
+  display: inline-block;
+  font-family: FontAwesome;
+  font-size: 10px;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+a.sort.up:after {
+  content: '\f0de';
+  top: 6px;
+}
+a.sort.down:after {
+  content: '\f0dd';
+  top: 2px;
+}
+
 .white-box {
   border-radius: 1px;
   background: #FFFFFF;
