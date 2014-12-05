@@ -7052,6 +7052,13 @@ a.kit-icon {
 .kit-icon.view:before {
   content: '\f06e';
 }
+.kit-icon.star:before {
+  content: '\f006';
+}
+.kit-icon.star.filled:before {
+  content: '\f005';
+  color: #7ED321;
+}
 
 .crud-controls {
   color: black !important;

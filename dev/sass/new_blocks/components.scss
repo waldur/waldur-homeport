@@ -82,7 +82,18 @@ a.kit-icon {
         &:before {
             content: '\f06e';
         }
-    } // &.view    
+    } // &.view
+    &.star {
+        &:before {
+            content: '\f006';
+        }
+        &.filled {
+            &:before {
+                content: '\f005';
+                color: #7ED321;
+            }
+        } // &.filled
+    } // &.star
 } // s-icon
 
 .crud-controls {
