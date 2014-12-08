@@ -6,33 +6,42 @@
 
 ## Technology
 
-* [sass][3] – for styles
-* [Autoprefixer][4] – for styles
-* [flask][7] - for render prototype
+* [sass][3] - for styles
+* [Autoprefixer][4] - for styles
+* [flask][7] - to render prototype
 
 ## Package manger [bower.io][5]
 
-all packages from bower copied to dev/
+All packages from bower are copied to `dev/`
 
-## Automatization
+## Automation
 
 * [grunt][6]
 
 ## Usage
 
-make virtual env
-activate your env & install dependens
+Additional requirements:
 
-    virtualenv env
-    source env/bin/activate
+* `git`
+* `libpng-devel` on CentOS or `libpng-dev` on Ubuntu
+* `npm`
+* `rubygems`
+* `python-virtualenv`
+
+Create virtualenv and install dependencies:
+
+    virtualenv venv
+    venv/binactivate
     pip install -r requirements.txt
 
-install grunt pakcages && build static
+Install Grunt pakcages and build static:
 
+    gem install sass
     npm install
+    npm install -g grunt-cli
     grunt build
 
-generate prototype
+Generate prototype:
 
     ./app.py build
 
