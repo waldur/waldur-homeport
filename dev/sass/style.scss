@@ -10,23 +10,25 @@
 
 @import "animations.scss";
 @import "base.scss";
-// @import "components.scss";
+@import "blocks/site-welcome.scss";
+@import "blocks/site-components.scss";
+@import "blocks/plans-and-price.scss";
+@import "blocks/login.scss";
 @import "blocks/app-header.scss";
 @import "blocks/app-footer.scss";
-
-@import "new_blocks/components.scss";
-@import "new_blocks/white-box.scss";
-@import "new_blocks/app-title-line.scss";
-@import "new_blocks/app-block.scss";
-@import "new_blocks/app-content.scss";
-@import "new_blocks/app-items-list";
-@import "new_blocks/app-event.scss";
-@import "new_blocks/app-pagination.scss";
-@import "new_blocks/profile-view.scss";
-@import "new_blocks/app-tabs.scss";
-@import "new_blocks/app-form-box.scss";
-@import "new_blocks/app-edit-forms.scss";
-@import "new_blocks/app-initial-data.scss";
+@import "blocks/components.scss";
+@import "blocks/white-box.scss";
+@import "blocks/app-title-line.scss";
+@import "blocks/app-block.scss";
+@import "blocks/app-content.scss";
+@import "blocks/app-items-list";
+@import "blocks/app-event.scss";
+@import "blocks/app-pagination.scss";
+@import "blocks/profile-view.scss";
+@import "blocks/app-tabs.scss";
+@import "blocks/app-form-box.scss";
+@import "blocks/app-edit-forms.scss";
+@import "blocks/app-initial-data.scss";
 
 // @import "blocks/verify-data.scss";
 // @import "blocks/dash-block.scss";
@@ -41,11 +43,6 @@
 // @import "blocks/users-list.scss";
 // @import "blocks/add-form-box.scss";
 // @import "blocks/form-view.scss";
-
-@import "blocks/site-welcome.scss";
-@import "blocks/site-components.scss";
-@import "blocks/plans-and-price.scss";
-@import "blocks/login.scss";
 // @import "blocks/initial-data.scss";
 
 // @import "blocks/user.scss";
