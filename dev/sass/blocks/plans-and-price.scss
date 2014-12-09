@@ -15,7 +15,7 @@ body {
         &.active {
             border: 1px solid rgb(62, 171, 84);
             .grayscale {
-                opacity: 1;
+                opacity: 1 !important;
                 .plan-name {
                     color: #6cc644;
                 }
