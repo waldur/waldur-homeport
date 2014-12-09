@@ -20,6 +20,15 @@ all packages from bower copied to dev/
 
 ## Usage
 
+install grunt
+
+'npm install -g grunt-cli'
+
+Install ruby & ruby gems
+
+install rubygems
+`gem install sass`
+
 make virtual env
 activate your env & install dependens
 
