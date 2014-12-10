@@ -11490,10 +11490,20 @@ return jQuery;
         var notify = $('[data-role="notify"]');
         var notifyTrigger = $('[data-role="notify-trigger"]');
 
+        var notifyNegative = $('[data-role="notify-negative"]');
+        var notifyTriggerNegative = $('[data-role="notify-trigger-negative"]');
+
         notifyTrigger.click(function(){
             notify.fadeIn( "fast" );
             setTimeout(function() {
                 notify.fadeOut( "fast" );
+            }, 1600);
+        });
+
+        notifyTriggerNegative.click(function(){
+            notifyNegative.fadeIn( "fast" );
+            setTimeout(function() {
+                notifyNegative.fadeOut( "fast" );
             }, 1600);
         });
     }

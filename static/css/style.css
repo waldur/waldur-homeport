@@ -8077,6 +8077,7 @@ a.sort.down:after {
   top: 70px;
   left: 0px;
   z-index: 9999;
+  margin-top: 0px !important;
 }
 
 .app-content.with-paddings {
