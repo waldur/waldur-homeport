@@ -50,6 +50,11 @@ def all_forms():
     return render_template('all-forms.html')
 
 
+@app.route('/components/')
+def components():
+    return render_template('components.html')
+
+
 @app.route('/events/')
 def events():
     return render_template('events.html', current='events')

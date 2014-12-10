@@ -5,4 +5,12 @@
     &.initial-data {
         margin-top: 40px;
     }
+    &.notification {
+        display: none;
+        width: 100%;
+        position: fixed;
+        top: 70px;
+        left: 0px;
+        z-index: 9999;
+    } // &.notification
 } // app-block
