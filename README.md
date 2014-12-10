@@ -1,8 +1,6 @@
-# project: dashboard
+# Introduction
 
-* *developer: [Mihail Yakiemnko][1]*
-* *company: [opennodecloud.com][2]*
-* *project: okei*
+NodeConductor-web is a thin web-based client for the NodeConductor REST client.
 
 ## Technology
 

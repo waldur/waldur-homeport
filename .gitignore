@@ -1,6 +1,23 @@
-node_modules
-bower_components
+# Editor artifacts
+/.idea
+/.project
+/.pydevproject
+/.settings
+/.sublime
+*.sw*
+
+# Testing artifacts
+TEST-*.xml
+
+# OS X
+.DS_Store
+
+# dev specific
 .sass-cache
-prototype
 venv
 .venv
+node_modules
+bower_components
+
+# built artifacts
+prototype
