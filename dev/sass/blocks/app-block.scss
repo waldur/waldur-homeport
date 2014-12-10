@@ -15,3 +15,13 @@
         margin-top: 0px !important;
     } // &.notification
 } // app-block
+
+.standart-box {
+    padding: 20px;
+} // standart-box
+
+.standart-row {    
+    + .standart-row {
+        margin-top: 20px;
+    } // +
+} // standart-row

@@ -8080,6 +8080,14 @@ a.sort.down:after {
   margin-top: 0px !important;
 }
 
+.standart-box {
+  padding: 20px;
+}
+
+.standart-row + .standart-row {
+  margin-top: 20px;
+}
+
 .app-content.with-paddings {
   padding: 20px;
 }
