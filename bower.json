@@ -1,10 +1,10 @@
 {
-  "name": "NC SaaS",
+  "name": "NodeConductor-web",
   "version": "0.0.0",
   "authors": [
-    "Mihail Yakimenko <macgera@gmail.com>"
+    "OpenNode"
   ],
-  "license": "MIT",
+  "license": "Proprietary",
   "ignore": [
     "**/.*",
     "node_modules",
@@ -12,10 +12,14 @@
     "test",
     "tests"
   ],
-  "description": "For robots",
+  "description": "Web UI for NodeConductor REST service.",
   "main": "index.html",
-  "homepage": "http://mihailyakimenko.com/",
+  "homepage": "http://nodeconductor.com",
   "devDependencies": {
-    "angularjs": "~1.3.0"
+    "angularjs": "~1.3.0",
+    "angular-route": "1.2.x",
+    "angular-loader": "1.2.x",
+    "angular-mocks": "~1.2.x",
+    "html5-boilerplate": "~4.3.0"
   }
 }

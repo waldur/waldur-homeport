@@ -5,6 +5,7 @@
 /.settings
 /.sublime
 *.sw*
+/atlassian-ide-plugin.xml
 
 # Testing artifacts
 TEST-*.xml
