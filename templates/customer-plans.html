@@ -3,6 +3,16 @@
 {% block body_class %}obj-view{% endblock %}
 
 {% block content %}
+<!-- app-block -->
+<section class="app-block notification" data-role="notify">
+    <div class="container-fluid">
+        <div class="alert alert-success" role="alert">
+            Enter a valid email address
+        </div>
+    </div>
+</section>
+<!-- /app-block -->
+
 <!-- profile-view -->
 <div class="profile-view">
     <div class="container-fluid">
@@ -119,7 +129,7 @@
                     <div class="row plans-confirm">
                         <div class="col-xs-12 text-center">
                             <button class="btn btn-default">Cancel</button>
-                            <button class="btn btn-primary">Confirm change your Plan</button>
+                            <button class="btn btn-primary" data-role="notify-trigger">Confirm change your Plan</button>
                         </div>
                     </div>
                     <!-- /plans confirm -->

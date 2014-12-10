@@ -7844,6 +7844,14 @@ a.sort.down:after {
 .app-block.initial-data {
   margin-top: 40px;
 }
+.app-block.notification {
+  display: none;
+  width: 100%;
+  position: fixed;
+  top: 70px;
+  left: 0px;
+  z-index: 9999;
+}
 
 .app-content.with-paddings {
   padding: 20px;

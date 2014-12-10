@@ -11486,6 +11486,18 @@ return jQuery;
         });
     }
 
+    function notifyShow() {
+        var notify = $('[data-role="notify"]');
+        var notifyTrigger = $('[data-role="notify-trigger"]');
+
+        notifyTrigger.click(function(){
+            notify.fadeIn( "fast" );
+            setTimeout(function() {
+                notify.fadeOut( "fast" );
+            }, 1600);
+        });
+    }
+
     // document ready
     $(window).on('load', function() {
         // website js
@@ -11503,7 +11515,8 @@ return jQuery;
         choices('[data-role="plan-in-data"]', 'active');
         choices('[data-role="servicestore-template"]', 'state');
         $('.disabled').bind('click', function(){ return false; });
-        searchAnimate()
+        searchAnimate();
+        notifyShow();
     });
 
     // all initial on window resize
