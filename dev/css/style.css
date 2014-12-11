@@ -8360,4 +8360,22 @@ a.sort.down:after {
   font-size: 1.8rem;
 }
 
+.plan-description {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+.app-payment {
+  margin-top: 20px;
+}
+.app-payment .radio-card-type {
+  padding-top: 8px;
+}
+.app-payment .radio-card-type img {
+  position: relative;
+  top: -8px;
+  left: 10px;
+}
+
 /*# sourceMappingURL=style.css.map */

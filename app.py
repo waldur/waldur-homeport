@@ -130,6 +130,16 @@ def customer_billing():
     return render_template('customer-billing.html')
 
 
+@app.route('/payment/start/')
+def payment_start():
+    return render_template('payment-start.html')
+
+
+@app.route('/payment/finish/')
+def payment_finish():
+    return render_template('payment-finish.html')
+
+
 @app.route('/add-project/')
 def add_project():
     return render_template('add-project.html')
