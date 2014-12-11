@@ -7851,6 +7851,15 @@ a.sort.down:after {
   top: 70px;
   left: 0px;
   z-index: 9999;
+  margin-top: 0px !important;
+}
+
+.standart-box {
+  padding: 20px;
+}
+
+.standart-row + .standart-row {
+  margin-top: 20px;
 }
 
 .app-content.with-paddings {
