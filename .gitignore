@@ -5,6 +5,7 @@
 /.settings
 /.sublime
 *.sw*
+/atlassian-ide-plugin.xml
 
 # Testing artifacts
 TEST-*.xml
@@ -20,4 +21,4 @@ node_modules
 bower_components
 
 # built artifacts
-prototype
+app
