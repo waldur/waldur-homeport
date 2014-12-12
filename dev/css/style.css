@@ -8360,4 +8360,36 @@ a.sort.down:after {
   font-size: 1.8rem;
 }
 
+.plan-description {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+.app-payment {
+  margin-top: 20px;
+}
+.app-payment .radio-card-type {
+  padding-top: 8px;
+}
+.app-payment .radio-card-type img {
+  position: relative;
+  top: -4px;
+  left: 10px;
+  height: 30px;
+}
+
+.tnx-circle {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 3.4rem;
+  width: 50px;
+  height: 50px;
+  padding-top: 6px;
+  box-sizing: border-box;
+  border-radius: 100%;
+  background: #7dda7d;
+  color: white;
+}
+
 /*# sourceMappingURL=style.css.map */
