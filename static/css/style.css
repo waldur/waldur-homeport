@@ -8632,6 +8632,23 @@ a.sort.down:after {
 }
 .app-payment .radio-card-type img {
   position: relative;
-  top: -8px;
+  top: -4px;
   left: 10px;
+  height: 30px;
+}
+
+.tnx-circle {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 3.4rem;
+  width: 50px;
+  height: 50px;
+  padding-top: 6px;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-border-radius: 100%;
+          border-radius: 100%;
+  background: #7dda7d;
+  color: white;
 }
