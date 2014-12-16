@@ -43,6 +43,12 @@ Generate prototype:
 
     ./app.py build
 
+Run Angular app
+
+    grunt
+
+listen on `//localhost:8000/app/`
+
 [1]: http://mihailyakimenko.com
 [2]: http://whitescape.com
 [3]: http://sass-lang.com
