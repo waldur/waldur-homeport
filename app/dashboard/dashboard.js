@@ -9,6 +9,19 @@ angular.module('ncsaas.dashboard', ['ngRoute'])
   });
 }])
 
-.controller('dashboardCtrl', [function() {
+.controller('dashboardCtrl', function($scope) {
 
-}]);
+    // tempory data
+
+    $scope.events = [
+        {
+            title: 'Bash update! Urgent!',
+            description: 'Some interesting happening? Yes, we need to update bash!'
+        },
+        {
+            title: 'Need payment on this week',
+            description: 'We should pay for DigitalOcean'
+        }
+    ];
+
+});

@@ -1,25 +1,12 @@
 {
-    "name": "NodeConductor-web",
-    "version": "0.0.0",
-    "authors": [
-        "OpenNode"
-    ],
-    "license": "Proprietary",
-    "ignore": [
-        "**/.*",
-        "node_modules",
-        "bower_components",
-        "test",
-        "tests"
-    ],
-    "description": "Web UI for NodeConductor REST service.",
-    "main": "index.html",
-    "homepage": "http://nodeconductor.com",
-    "devDependencies": {
-        "angularjs": "~1.3.0",
-        "angular-route": "1.2.x",
-        "angular-loader": "1.2.x",
-        "angular-mocks": "~1.2.x",
-        "html5-boilerplate": "~4.3.0"
-    }
+  "name": "ncsass",
+  "description": "nc saas project",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "angular": "1.2.x",
+    "angular-route": "1.2.x",
+    "angular-loader": "1.2.x",
+    "angular-mocks": "~1.2.x"
+  }
 }
