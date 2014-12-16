@@ -9,6 +9,25 @@ angular.module('ncsaas.resources', ['ngRoute'])
   });
 }])
 
-.controller('resourcesCtrl', [function() {
+.controller('resourcesCtrl', function($scope) {
 
-}]);
+    // tempory data
+
+    $scope.resources = [
+        {
+            Name: 'Resource Name',
+            Type: 'github',
+            Poject: 'Project: ZH-11'
+        },
+        {
+            Name: 'Liboola',
+            Type: 'VM',
+            Poject: 'Project: ZH-11'
+        },
+        {
+            Name: 'Fractal 51',
+            Type: 'DO',
+            Poject: 'Project: ZH-11'
+        }
+    ];
+});
