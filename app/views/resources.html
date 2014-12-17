@@ -1,0 +1,78 @@
+<!-- app-block -->
+<section class="app-block">
+    <div class="container-fluid">
+        <div class="white-box">
+            <div class="app-title-line">
+                <div class="row">
+                    <div class="col-xs-12 first-line">
+                        <h2 class="app-title">Resources</h2>
+                        <ul class="sort">
+                            <li><a href="#" class="active">5</a></li>
+                            <li><a href="#">15</a></li>
+                            <li><a href="#">24</a></li>
+                            <li class="divid">
+                                <div class="search" data-role="search-box">
+                                    <input type="text">
+                                    <button class="search-button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="crud-box pull-right"><a href="../add-resource/index.html" class="crud-controls"><i class="fa fa-plus"></i> Add resource</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- /app-block -->
+
+<!-- app-block -->
+<section class="app-block">
+    <div class="container-fluid">
+        <div class="white-box">
+            <div class="app-items-list">
+                <table class="items-table">
+                    <tr>
+                        <th class="name">
+                            <a href="" class="sort">Name</a>
+                        </th>
+                        <th class="type">
+                            <a href="" class="sort">Type</a>
+                        </th>
+                        <th>
+                            <a href="" class="sort">Project</a>
+                        </th>
+                        <th></th>
+                    </tr>
+                    <tr ng-repeat="resource in resources">
+                        <td class="name">        
+                            <h2 class="item-title">{{ resource.Name }}</h2>
+                        </td>
+                        <td class="type">
+                            <span class="elem item-type vm">{{ resource.Type }}</span>
+                        </td>
+                        <td>
+                            <a href="#" class="elem sort-display">{{ resource.Project }}</a>
+                        </td>
+                        <td class="col-xs-2 controls-ctn">
+                            <ul class="controls pull-right">
+                                <li>
+                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Poweroff"><i class="fa fa-power-off"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Restart"><i class="fa fa-refresh"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- /app-block -->

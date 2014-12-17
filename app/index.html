@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="ncsaas">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon" />
+<title>nc saas</title>
+<meta name="author" content="opennodecloud.com" />
+
+<!-- css -->
+<link rel="stylesheet" href="/static/css/font-awesome.min.css" type="text/css" />
+<link rel="stylesheet" href="/static/css/style.css" type="text/css" />
+
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body class="app-body ">
+
+<!-- header -->
+<div class="app-header navbar navbar-fixed-top" role="navigation">         
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/"></a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#/dashboard" class=""><i class="fa fa-th-large"></i> Dashboard</a></li>
+                <li class=""><a href="#/resources" class=""><i class="fa fa-tasks"></i> Resources</a></li>
+                <li class=""><a href="#/projects" class=""><i class="fa fa-folder"></i> Projects</a></li>
+                <li class=""><a href="#/services" class=""><i class="fa fa-folder"></i> Services</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown add-something-box">
+                    <a href="" class="dropdown-toggle add-something-button" data-toggle="dropdown" data-placement="bottom">
+                        <i class="fa fa-plus"></i>
+                    </a>
+                    <ul class="dropdown-menu add-something" role="menu">
+                        <li><a href="/add-service/" class="add-project">Add service</a></li>
+                        <li><a href="/add-project/" class="add-project">Add project</a></li>
+                        <li><a href="/add-resource/" class="add-resource">Add resource</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <!-- <div class="custom-select">
+                        <select name="" id="">
+                            <option value="">Ilja Livenson</option>
+                        </select>
+                    </div> -->
+                    <a href="" class="customer-head" data-toggle="dropdown">
+                        <span class="customer-title">Livenson PLC</span>
+                        <span class="customer-expl">active for context</span>
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="../customer/index.html">Customer 1</a></li>
+                        <li><a href="../customer/index.html">Customer 2</a></li>
+                        <li><a href="../customer/index.html">Customer 3</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#" class="add-customer">Manage customers</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown user-box">
+                    <a href="#" class="dropdown-toggle user-pic-box" data-toggle="dropdown">
+                        <img src="../static/images/887178.jpg" class="user-pic" alt="John Doe">
+                        John Winner
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu user-drop" role="menu">
+                        <li><a href="#">Profile</a></li>
+                        <li><a href="#">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</div>
+<!-- /header -->
+
+<div ng-view></div>
+
+<div class="app-footer">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="copy">&copy; NodeConductor 2014</div>
+            </div>
+            <div class="col-xs-6">
+                <nav>
+                    <ul>
+                        <li><a href="">Help</a></li>
+                        <li><a href="">API</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JS -->
+<script src="/bower_components/angular/angular.js"></script>
+<script src="/bower_components/angular-route/angular-route.js"></script>
+<script src="app.js"></script>
+<script src="dashboard/dashboard.js"></script>
+<script src="resources/resources.js"></script>
+<script src="projects/projects.js"></script>
+<script src="services/services.js"></script>
+<script src="/static/js/production.js"></script>
+
+</body>
+</html>
