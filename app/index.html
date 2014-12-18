@@ -19,93 +19,9 @@
 <![endif]-->
 
 </head>
-<body class="app-body ">
-
-<!-- header -->
-<div class="app-header navbar navbar-fixed-top" role="navigation">         
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/"></a>
-        </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#/dashboard" class=""><i class="fa fa-th-large"></i> Dashboard</a></li>
-                <li class=""><a href="#/resources" class=""><i class="fa fa-tasks"></i> Resources</a></li>
-                <li class=""><a href="#/projects" class=""><i class="fa fa-folder"></i> Projects</a></li>
-                <li class=""><a href="#/services" class=""><i class="fa fa-folder"></i> Services</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown add-something-box">
-                    <a href="" class="dropdown-toggle add-something-button" data-toggle="dropdown" data-placement="bottom">
-                        <i class="fa fa-plus"></i>
-                    </a>
-                    <ul class="dropdown-menu add-something" role="menu">
-                        <li><a href="/add-service/" class="add-project">Add service</a></li>
-                        <li><a href="/add-project/" class="add-project">Add project</a></li>
-                        <li><a href="/add-resource/" class="add-resource">Add resource</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <!-- <div class="custom-select">
-                        <select name="" id="">
-                            <option value="">Ilja Livenson</option>
-                        </select>
-                    </div> -->
-                    <a href="" class="customer-head" data-toggle="dropdown">
-                        <span class="customer-title">Livenson PLC</span>
-                        <span class="customer-expl">active for context</span>
-                        <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="../customer/index.html">Customer 1</a></li>
-                        <li><a href="../customer/index.html">Customer 2</a></li>
-                        <li><a href="../customer/index.html">Customer 3</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#" class="add-customer">Manage customers</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown user-box">
-                    <a href="#" class="dropdown-toggle user-pic-box" data-toggle="dropdown">
-                        <img src="../static/images/887178.jpg" class="user-pic" alt="John Doe">
-                        John Winner
-                        <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu user-drop" role="menu">
-                        <li><a href="#">Profile</a></li>
-                        <li><a href="#">Logout</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div><!--/.nav-collapse -->
-    </div>
-</div>
-<!-- /header -->
+<body class="app-body">
 
 <div ng-view></div>
-
-<div class="app-footer">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-6">
-                <div class="copy">&copy; NodeConductor 2014</div>
-            </div>
-            <div class="col-xs-6">
-                <nav>
-                    <ul>
-                        <li><a href="">Help</a></li>
-                        <li><a href="">API</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- JS -->
 <script src="/bower_components/angular/angular.js"></script>
