@@ -11,7 +11,7 @@ DEBUG = True
 # BASE_URL = 'http://localhost:8000'
 # FREEZER_BASE_URL = 'http://localhost:8000'
 
-FREEZER_DESTINATION = 'app'
+FREEZER_DESTINATION = 'prototype'
 FREEZER_RELATIVE_URLS = True
 
 # app

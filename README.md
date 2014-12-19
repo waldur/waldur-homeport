@@ -39,9 +39,19 @@ Install Grunt pakcages and build static:
     npm install -g grunt-cli
     grunt build
 
+Install Angular dep.
+
+    bower install
+
 Generate prototype:
 
     ./app.py build
+
+Run Angular app
+
+    grunt
+
+listen on `//localhost:8000/app/`
 
 [1]: http://mihailyakimenko.com
 [2]: http://whitescape.com
