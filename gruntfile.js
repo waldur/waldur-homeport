@@ -9,7 +9,7 @@ module.exports = function(grunt) {
                     compass: false
                 },
                 files: {
-                    'dev/css/style.css': 'dev/sass/style.scss'
+                    'assets/css/style.css': 'assets/sass/style.scss'
                 }
             }
         },
@@ -21,15 +21,15 @@ module.exports = function(grunt) {
             multiple_files: {
                 expand: true,
                 flatten: true,
-                src: 'dev/css/*.css',
-                dest: 'static/css/'
+                src: 'assets/css/*.css',
+                dest: 'app/static/css/'
             }
         },
 
         cssmin: {
             combine: {
                 files: {
-                    'static/css/style.min.css': ['static/css/style.css']
+                    'app/static/css/style.min.css': ['app/static/css/style.css']
                 }
             }
         },
@@ -37,18 +37,18 @@ module.exports = function(grunt) {
         concat: {
             dist: {
                 src: [
-                    'dev/js/libs/jquery.js',
-                    'dev/js/libs/bootstrap.js',
-                    'dev/js/scripts.js'
+                    'assets/js/libs/jquery.js',
+                    'assets/js/libs/bootstrap.js',
+                    'assets/js/scripts.js'
                 ],
-                dest: 'static/js/production.js',
+                dest: 'app/static/js/production.js',
             }
         },
 
         uglify: {
             build: {
-                src: 'static/js/production.js',
-                dest: 'static/js/production.min.js',
+                src: 'app/static/js/production.js',
+                dest: 'app/static/js/production.min.js',
             }
         },
 
@@ -56,9 +56,9 @@ module.exports = function(grunt) {
             dynamic: {
                 files: [{
                     expand: true,
-                    cwd: 'dev/images/',
+                    cwd: 'assets/images/',
                     src: ['**/*.{png,jpg,gif}'],
-                    dest: 'static/images/'
+                    dest: 'app/static/images/'
                 }]
             }
         },
@@ -68,14 +68,14 @@ module.exports = function(grunt) {
                 livereload: true,
             },
             scripts: {
-                files: ['dev/js/*.js'],
+                files: ['assets/js/*.js'],
                 tasks: ['concat'],
                 options: {
                     spawn: false,
                 }
             },
             css: {
-                files: ['dev/sass/*.scss', 'dev/sass/*/*.scss'],
+                files: ['assets/sass/*.scss', 'assets/sass/*/*.scss'],
                 tasks: ['sass', 'autoprefixer'],
                 options: {
                     spawn: false,
@@ -83,11 +83,11 @@ module.exports = function(grunt) {
                 }
             },
             autoprefixer: {
-                files: 'dev/css/**',
+                files: 'assets/css/**',
                 tasks: ['autoprefixer']
             },
             images: {
-                files: ['dev/images/*.{png,jpg,gif}'],
+                files: ['assets/images/*.{png,jpg,gif}'],
                 tasks: ['imagemin'],
             }
         },
@@ -96,7 +96,7 @@ module.exports = function(grunt) {
             server: {
                 options: {
                     post: 8000, 
-                    base: './'
+                    base: './app/'
                 }
             }
         }
