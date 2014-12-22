@@ -4,7 +4,7 @@
     "description": "NodeConductor web client",
     "repository": "https://code.opennodecloud.com/nc-saas/nodeconductor-web",
     "license": "Proprietary",
-    "devDependencies": {
+    "dependencies": {
         "grunt": "~0.4.5",
         "grunt-autoprefixer": "~1.0.1",
         "grunt-contrib-concat": "~0.5.0",
@@ -19,7 +19,7 @@
         "karma": "~0.10",
         "protractor": "^1.1.1",
         "http-server": "^0.6.1",
-        "bower": "^1.3.1",
+        "bower": "^1.3.12",
         "shelljs": "^0.2.6",
         "karma-junit-reporter": "^0.2.2"
     },
