@@ -65,7 +65,7 @@ module.exports = function(grunt) {
 
         watch: {
             options: {
-                livereload: true,
+                livereload: true
             },
             scripts: {
                 files: ['assets/js/*.js'],
@@ -93,10 +93,21 @@ module.exports = function(grunt) {
         },
 
         connect: {
+            options: {
+                port: 8000,
+                hostname: 'localhost'
+            },
             server: {
                 options: {
-                    post: 8000, 
-                    base: './app/'
+                    middleware: function(connect) {
+                        return [
+                            connect().use(
+                                '/bower_components',
+                                connect.static('./bower_components')
+                            ),
+                            connect.static('./app')
+                        ];
+                    }
                 }
             }
         }
