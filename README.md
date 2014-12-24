@@ -40,3 +40,10 @@ listen on `//localhost:8000`
 1. Setup nodeconductor project
 2. Install nodeconductor-plus app to nodecinductor project
 3. Install django-cors-headers
+
+
+## TESTS
+
+To start tests:
+
+    grunt test
