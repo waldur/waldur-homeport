@@ -1,12 +1,13 @@
 {
-  "name": "ncsass",
-  "description": "nc saas project",
+  "name": "nodeconductor-web",
+  "description": "NodeConductor Web interface",
   "version": "0.0.0",
   "private": true,
   "dependencies": {
     "angular": "1.2.x",
     "angular-route": "1.2.x",
     "angular-loader": "1.2.x",
-    "angular-mocks": "~1.2.x"
+    "angular-mocks": "~1.2.x",
+    "angular-cookies": "1.2.x",
   }
 }

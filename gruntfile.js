@@ -63,9 +63,16 @@ module.exports = function(grunt) {
             }
         },
 
+        karma: {
+            unit: {
+                configFile: 'test/karma.conf.js',
+                singleRun: true
+            }
+        },
+
         watch: {
             options: {
-                livereload: true,
+                livereload: true
             },
             scripts: {
                 files: ['assets/js/*.js'],
@@ -93,10 +100,21 @@ module.exports = function(grunt) {
         },
 
         connect: {
+            options: {
+                port: 8000,
+                hostname: 'localhost'
+            },
             server: {
                 options: {
-                    post: 8000, 
-                    base: './app/'
+                    middleware: function(connect) {
+                        return [
+                            connect().use(
+                                '/bower_components',
+                                connect.static('./bower_components')
+                            ),
+                            connect.static('./app')
+                        ];
+                    }
                 }
             }
         }
@@ -108,6 +126,7 @@ module.exports = function(grunt) {
     grunt.registerTask('build', ['concat', 'uglify', 'imagemin', 'sass', 'autoprefixer', 'cssmin']);
     grunt.registerTask('run', ['connect', 'concat', 'imagemin', 'sass', 'autoprefixer', 'watch']);
     grunt.registerTask('serve', ['connect',]);
-    grunt.registerTask('default', ['run'])
+    grunt.registerTask('default', ['run']);
+    grunt.registerTask('test', ['karma']);
 
 };

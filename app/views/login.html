@@ -1,8 +1,8 @@
-<ng-include src="partials/site-header.html"></ng-include>
+<ng-include src="'views/partials/site-header.html'"></ng-include>
 
-<div class="login site-welcome" data-role="login">
+<div class="login site-welcome" data-role="login" ng-controller="AuthCtrl as auth">
     <!-- login with social -->
-    <div class="login-box" data-role="login-box">
+    <div class="login-box" ng-class="{state: auth.isSignupFormVisible}" data-role="login-box">
         <div class="container-fluid">
             <h1>Welcome!</h1>
             <div class="login-form">
@@ -14,7 +14,7 @@
                 </div>
                 <div class="login-block">
                     <h4 class="title">
-                        or use <a href="#" data-role="switch-login-form">login/password</a>
+                        or use <a href="javascript:void(0);" ng-click="auth.isSignupFormVisible = true" data-role="switch-login-form">login/password</a>
                     </h4>
                 </div>
             </div>
@@ -22,26 +22,31 @@
     </div>
     <!-- /login with social -->
     <!-- login with fields -->
-    <div class="login-box inputs" data-role="login-box-inputs">
+    <div class="login-box inputs" ng-class="{state: auth.isSignupFormVisible}" data-role="login-box-inputs">
         <div class="container-fluid">
             <h1>Welcome! Just login, to see the future!</h1>
             <div class="login-form">
-                <div class="login-block">
-                    <div class="inputs-box">
-                        <div class="row inputs-row">
-                            <label for="" class="col-xs-4">username:</label>
-                            <input type="text" class="col-xs-8">
+                <form name="signupForm" ng-submit="auth.signin()" form-autofill-fix>
+                    <div class="login-block">
+                        <div class="inputs-box">
+                            <div class="row inputs-row" ng-show="auth.hasErrors()">
+                                <div>ERRORS:{{ auth.getErrors() }}</div>
+                            </div>
+                            <div class="row inputs-row">
+                                <label for="" class="col-xs-4">username:</label>
+                                <input type="text" class="col-xs-8" ng-model="auth.user.username">
+                            </div>
+                            <div class="row inputs-row">
+                                <label for="" class="col-xs-4">password:</label>
+                                <input type="password" class="col-xs-8" ng-model="auth.user.password">
+                            </div>
+                            <input class="btn btn-signup" type="submit"/>
                         </div>
-                        <div class="row inputs-row">
-                            <label for="" class="col-xs-4">password:</label>
-                            <input type="password" class="col-xs-8">
-                        </div>
-                        <a href="../intial-data/index.html" class="btn btn-signup">Signup</a>
                     </div>
-                </div>
+                </form>
                 <div class="login-block">
                     <h4 class="title">
-                        back to <a href="#" data-role="switch-login-form">one click</a>
+                        back to <a href="javascript:void(0)" ng-click="auth.isSignupFormVisible = false" data-role="switch-login-form">one click</a>
                     </h4>
                 </div>
             </div>
@@ -52,4 +57,4 @@
     <div class="login-additional" data-role="login-additional"></div>
 </div>
 
-<ng-include src="partials/site-footer.html"></ng-include>
+<ng-include src="'views/partials/site-footer.html'"></ng-include>
