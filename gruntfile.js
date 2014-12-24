@@ -63,6 +63,13 @@ module.exports = function(grunt) {
             }
         },
 
+        karma: {
+            unit: {
+                configFile: 'test/karma.conf.js',
+                singleRun: true
+            }
+        },
+
         watch: {
             options: {
                 livereload: true
@@ -119,6 +126,7 @@ module.exports = function(grunt) {
     grunt.registerTask('build', ['concat', 'uglify', 'imagemin', 'sass', 'autoprefixer', 'cssmin']);
     grunt.registerTask('run', ['connect', 'concat', 'imagemin', 'sass', 'autoprefixer', 'watch']);
     grunt.registerTask('serve', ['connect',]);
-    grunt.registerTask('default', ['run'])
+    grunt.registerTask('default', ['run']);
+    grunt.registerTask('test', ['karma']);
 
 };

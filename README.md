@@ -29,7 +29,7 @@ Run application in development mode:
 
     grunt
 
-listen on `//localhost:8000/app/`
+listen on `//localhost:8000`
 
 [5]: http://bower.io
 [6]: http://gruntjs.com
