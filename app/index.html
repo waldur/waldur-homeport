@@ -21,17 +21,23 @@
 </head>
 <body class="app-body">
 
-<div ng-view></div>
+<div ng-view=""></div>
 
 <!-- JS -->
-<script src="/bower_components/angular/angular.js"></script>
-<script src="/bower_components/angular-route/angular-route.js"></script>
-<script src="app.js"></script>
-<script src="dashboard/dashboard.js"></script>
-<script src="resources/resources.js"></script>
-<script src="projects/projects.js"></script>
-<script src="services/services.js"></script>
-<script src="/static/js/production.js"></script>
+
+<!-- Bower -->
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-loader/angular-loader.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/angular-cookies/angular-cookies.js"></script>
+
+<!-- Custom modules -->
+<script src="scripts/app.js"></script>
+  <!-- controllers -->
+<script src="scripts/controllers/auth-ctrl.js"></script>
+  <!-- services -->
+<script src="scripts/services/auth.js"></script>
+
 
 </body>
 </html>
