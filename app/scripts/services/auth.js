@@ -2,9 +2,9 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('auth', ['API', '$http', '$cookies', auth]);
+    .service('auth', ['APIURL', '$http', '$cookies', auth]);
 
-  function auth(API, $http, $cookies) {
+  function auth(APIURL, $http, $cookies) {
     /*jshint validthis: true */
     var vm = this;
 
@@ -13,7 +13,7 @@
     vm.signout = signout;
 
     function signin(username, password) {
-      var request = $http.post(API + 'ncauth/signin/', {username: username, password: password})
+      var request = $http.post(APIURL + 'ncauth/signin/', {username: username, password: password})
         .then(success);
 
       function success(data) {
@@ -27,7 +27,7 @@
     }
 
     function signup(username, password) {
-      var request = $http.post(API + 'ncauth/signup/', {username: username, password: password})
+      var request = $http.post(APIURL + 'ncauth/signup/', {username: username, password: password})
         .then(success);
 
       function success(data) {
