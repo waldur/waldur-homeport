@@ -117,14 +117,48 @@ module.exports = function(grunt) {
                     }
                 }
             }
+        },
+
+        ngconstant: {
+            // Options for all targets
+            options: {
+                space: '  ',
+                wrap: '"use strict";\n\n {%= __ngModule %}',
+                name: 'config',
+            },
+            // Environment targets
+            development: {
+                options: {
+                    dest: 'app/scripts/config.js'
+                },
+                constants: {
+                    ENV: {
+                        name: 'development',
+                        apiEndpoint: 'http://127.0.0.1:8080/'
+                    }
+                }
+            },
+            production: {
+                options: {
+                    dest: 'app/scripts/config.js'
+                },
+                constants: {
+                    ENV: {
+                        name: 'production',
+                        apiEndpoint: 'http://api.livesite.com'
+                    }
+                }
+            }
         }
 
     });
 
     require('load-grunt-tasks')(grunt);
 
-    grunt.registerTask('build', ['concat', 'uglify', 'imagemin', 'sass', 'autoprefixer', 'cssmin']);
-    grunt.registerTask('run', ['connect', 'concat', 'imagemin', 'sass', 'autoprefixer', 'watch']);
+    grunt.registerTask(
+        'build', ['concat', 'ngconstant:development', 'uglify', 'imagemin', 'sass', 'autoprefixer', 'cssmin']);
+    grunt.registerTask(
+        'run', ['connect', 'ngconstant:development', 'concat', 'imagemin', 'sass', 'autoprefixer', 'watch']);
     grunt.registerTask('serve', ['connect',]);
     grunt.registerTask('default', ['run']);
     grunt.registerTask('test', ['karma']);

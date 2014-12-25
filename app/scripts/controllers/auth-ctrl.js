@@ -34,10 +34,14 @@
         for (var key in vm.errors) {
           if (vm.errors.hasOwnProperty(key)) {
             var errorList = vm.errors[key];
-            prettyErrors.push(errorList.join('\n'));
+            if (Object.prototype.toString.call(vm.errors[key]) === '[object Array]') {
+              prettyErrors.push(key + ': ' + vm.errors[key].join(', '));
+            } else {
+              prettyErrors.push(key + ': ' + vm.errors[key]);
+            }
           }
         }
-        return prettyErrors.join('\n');
+        return prettyErrors;
       } else {
         return '';
       }
