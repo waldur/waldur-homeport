@@ -4,6 +4,16 @@
     border-width: 0;
 }
 
+.navbar-toggle {
+    background: #8BBE46;
+    .icon-bar {
+        background: black;
+    } // .icon-bar
+    &.collapsed {
+        background: none;
+    } // &.collapsed
+} // .navbar-toggle
+
 .navbar-brand {
     width: 40px;
     height: 40px;
