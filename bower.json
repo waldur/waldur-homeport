@@ -7,6 +7,7 @@
     "angular": "1.2.x",
     "angular-route": "1.2.x",
     "angular-loader": "1.2.x",
-    "angular-mocks": "~1.2.x"
+    "angular-mocks": "~1.2.x",
+    "angular-cookies": "1.2.x",
   }
 }
