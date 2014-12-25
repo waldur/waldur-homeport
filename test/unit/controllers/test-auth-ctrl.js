@@ -7,13 +7,13 @@ describe('Controller: AuthCtrl', function() {
   beforeEach(module('ncsaas'));
 
   // Initialize the controller and mocked backend
-  beforeEach(inject(function($controller, $injector, $location, APIURL) {
+  beforeEach(inject(function($controller, $injector, $location, ENV) {
     location = $location;
     auth = $controller('AuthCtrl');
 
     $httpBackend = $injector.get('$httpBackend');
 
-    signinUrl = APIURL + 'ncauth/signin/';
+    signinUrl = ENV.apiEndpoint + 'api-auth/password/';
   }));
 
   afterEach(function() {
@@ -54,8 +54,8 @@ describe('Controller: AuthCtrl', function() {
   });
 
   it('getErrors() returns prettified controller errors', function() {
-    auth.errors = {'field': ['error1', 'error2']}
-    expect(auth.getErrors()).toBe('error1\nerror2');
+    auth.errors = {field: ['error1', 'error2']};
+    expect(auth.getErrors()[0]).toBe('field: error1, error2');
   });
 
 });

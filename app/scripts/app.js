@@ -3,6 +3,7 @@
 angular
   // module name and dependencies
   .module('ncsaas', [
+    'config',
     'ngRoute',
     'ngCookies',])
   // urls
@@ -20,6 +21,4 @@ angular
       .otherwise({
         redirectTo: '/'
       });
-  })
-  // constants
-  .constant('APIURL', 'http://127.0.0.1:8080/api/');
+  });

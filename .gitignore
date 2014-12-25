@@ -22,3 +22,6 @@ bower_components
 
 # built artifacts
 prototype
+
+# config
+app/scripts/config.js
