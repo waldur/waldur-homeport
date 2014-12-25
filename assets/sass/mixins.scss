@@ -35,3 +35,28 @@
     vertical-align: top;
     box-sizing: border-box;
 }
+
+// mediaqueries
+@mixin bp($point) {
+    $bp-cr: "(min-width : 320px)";
+    $bp-xs: "(min-width : 480px)";
+    $bp-sm: "(min-width : 768px)";
+    $bp-md: "(min-width : 992px)";
+    $bp-lg: "(min-width : 1200px)";
+    
+    @if $point == cr {
+        @media #{$bp-cr} { @content; }
+    }
+    @if $point == xs {
+        @media #{$bp-xs} { @content; }
+    }
+    @if $point == sm {
+        @media #{$bp-sm} { @content; }
+    }
+    @if $point == md {
+        @media #{$bp-md} { @content; }
+    }
+    @if $point == lg {
+        @media #{$bp-lg} { @content; }
+    }
+}
