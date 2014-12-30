@@ -7370,6 +7370,16 @@ body.prices {
   border-width: 0;
 }
 
+.navbar-toggle {
+  background: #8BBE46;
+}
+.navbar-toggle .icon-bar {
+  background: black;
+}
+.navbar-toggle.collapsed {
+  background: none;
+}
+
 .navbar-brand {
   width: 40px;
   height: 40px;
@@ -7458,6 +7468,9 @@ body.prices {
   top: 0px;
   left: 5px;
 }
+.navbar-nav > li .user-pic.small-screen {
+  left: -10px;
+}
 .navbar-nav > li .add-something-button {
   position: relative;
 }
@@ -7470,6 +7483,9 @@ body.prices {
   font-family: FontAwesome;
   font-size: 1rem;
   color: #000;
+}
+.navbar-nav > li .add-something-button.small-screen:after {
+  display: none;
 }
 .navbar-nav > li .customer-head {
   margin-top: 8px;
@@ -7509,6 +7525,9 @@ body.prices {
 }
 .navbar-nav > li .dropdown-menu.add-something .fa {
   margin-right: 10px;
+}
+.navbar-nav > li .dropdown-menu.small-screen {
+  margin-top: 22px;
 }
 .navbar-nav > li .dropdown-menu.user-drop a {
   padding-left: 46px;
@@ -7954,6 +7973,21 @@ a.sort.down:after {
   vertical-align: middle;
   margin: 0;
   font-size: 2.2rem;
+  margin-bottom: 10px;
+}
+@media (min-width: 992px) {
+  .app-title-line .app-title {
+    display: inline-block;
+    vertical-align: middle;
+    margin-bottom: 0px;
+  }
+}
+@media (min-width: 1200px) {
+  .app-title-line .app-title {
+    display: inline-block;
+    vertical-align: middle;
+    margin-bottom: 0px;
+  }
 }
 .app-title-line .sort {
   display: inline-block;
@@ -8060,8 +8094,49 @@ a.sort.down:after {
   color: #000;
   outline: none;
 }
+.app-title-line .crud-box {
+  display: block;
+  text-align: center;
+  float: none !important;
+  margin-top: 10px;
+}
 .app-title-line .crud-box a + a {
   margin-left: 10px;
+  margin-top: 4px;
+}
+@media (min-width: 992px) {
+  .app-title-line .crud-box a + a {
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 0px;
+  }
+}
+@media (min-width: 1200px) {
+  .app-title-line .crud-box a + a {
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 0px;
+  }
+}
+@media (min-width: 992px) {
+  .app-title-line .crud-box {
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 0px;
+    text-align: left;
+    display: inline-block;
+    float: right !important;
+  }
+}
+@media (min-width: 1200px) {
+  .app-title-line .crud-box {
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 0px;
+    text-align: left;
+    display: inline-block;
+    float: right !important;
+  }
 }
 
 .app-block + .app-block {
@@ -8094,6 +8169,7 @@ a.sort.down:after {
 
 .app-items-list .items-table {
   width: 100%;
+  min-width: 600px;
 }
 .app-items-list .items-table tr + tr {
   border-top: 1px solid #E0E0E0;
