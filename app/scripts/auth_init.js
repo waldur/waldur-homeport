@@ -23,9 +23,10 @@
     function auth($q, $cookies) {
       var headerIsSet = false;
       function request(data) {
+
         if (!headerIsSet) {
           var token = $cookies.token;
-          if (token !== undefined) {
+          if (typeof token != 'undefined') {
             $httpProvider.defaults.headers.common.Authorization = 'Token ' + token;
             headerIsSet = true;
           }
