@@ -27,4 +27,4 @@ prototype
 assets/css
 
 # config
-app/scripts/config.js
+app/scripts/configs/config.js
