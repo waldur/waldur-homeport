@@ -1,8 +1,6 @@
 .login {
-    // background: rgb(237, 237, 237) url(../images/decor-image-grayscale.png);
     position: relative;
     color: #fff;
-    // padding-bottom: 400px;
     h4 {
         font-weight: 400;
             a {
@@ -19,10 +17,11 @@
     } // login-additional
     .login-box {
         position: absolute;
-        // position: relative;
         top: 0px;
         width: 100%;
         float: left;
+        // below absolute position for login box's should use this if can't build directive
+        // position: relative;
         // top: 50%;
         // left: 50%;
         @include transition(all, 0.4s, ease);
@@ -54,7 +53,6 @@
             border-radius: 4px;
             padding: 6px 15px;
             color: #fff;
-            // text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.28);
             border-bottom: 2px solid rgb(45, 108, 9);
             font-size: rem(24);
             padding-left: 30px;
@@ -134,10 +132,7 @@
                 border-radius: 4px;
                 padding: 6px 15px;
                 color: #fff;
-                // text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.28);
                 border-bottom: 2px solid rgb(45, 108, 9);
-                // font-size: rem(24);
-                // padding-left: 30px;
                 text-decoration: none;
             } // btn-signup
         } // inputs-box
