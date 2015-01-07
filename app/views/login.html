@@ -1,8 +1,8 @@
 <ng-include src="'views/partials/site-header.html'"></ng-include>
 
-<div class="login site-welcome" data-role="login" ng-controller="AuthCtrl as auth">
+<div class="login site-welcome" ng-controller="AuthCtrl as auth" loginbox>
     <!-- login with social -->
-    <div class="login-box" ng-class="{state: auth.isSignupFormVisible}" data-role="login-box">
+    <div class="login-box" ng-class="{state: auth.isSignupFormVisible}" data-role="login-box" loginboxcontext>
         <div class="container-fluid">
             <h1>Welcome!</h1>
             <div class="login-form">
@@ -22,9 +22,9 @@
     </div>
     <!-- /login with social -->
     <!-- login with fields -->
-    <div class="login-box inputs" ng-class="{state: auth.isSignupFormVisible}" data-role="login-box-inputs">
+    <div class="login-box inputs" ng-class="{state: auth.isSignupFormVisible}" data-role="login-box-inputs" loginboxcontext>
         <div class="container-fluid">
-            <h1>Welcome! Just login, to see the future!</h1>
+            <h1>Welcome, stranger! Please login.</h1>
             <div class="login-form">
                 <form name="signupForm" ng-submit="auth.signin()" form-autofill-fix>
                     <div class="login-block">
