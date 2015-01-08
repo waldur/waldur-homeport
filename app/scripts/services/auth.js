@@ -18,8 +18,7 @@
 
       function success(data) {
         vm.user = data.data;
-        /*jshint camelcase: false*/
-        setAuthCookie(vm.user.auth_token);
+        setAuthCookie(vm.user.token);
         vm.user.isAuthenticated = true;
       }
 
@@ -32,8 +31,7 @@
 
       function success(data) {
         vm.user = data;
-        /*jshint camelcase: false*/
-        setAuthCookie(vm.user.auth_token);
+        setAuthCookie(vm.user.token);
         vm.user.isAuthenticated = true;
       }
 
