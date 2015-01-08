@@ -1,4 +1,4 @@
-<ng-include src="partials/app-header.html"></ng-include>
+<ng-include src="'/views/partials/app-header.html'"></ng-include>
 
 <!-- app-block -->
 <section class="app-block">
@@ -46,19 +46,19 @@
                     </tr>
                     <tr ng-repeat="project in controller.projects">
                         <td class="name">
-                            <h2 class="item-title"><a href="../project/index.html">{{ project.Name }}</a></h2>
+                            <h2 class="item-title"><a href="../project/index.html">{{ project.name }}</a></h2>
                             <p class="gray-text">
-                                {{ project.Description }}
+                                {{ project.description }}
                             </p>
                         </td>
                         <td class="col-xs-3 gray-text">
                             <ul class="standart-list">
-                                <li ng-repeat="resource in project.Resources"><span class="elem item-type repo"></span> {{ resource.Name }}</li>
+                                <li ng-repeat="resource in project.clouds"><span class="elem item-type repo"></span> {{ resource.name }}</li>
                             </ul>
                         </td>
                         <td class="col-xs-2 gray-text">
                             <ul class="standart-list">
-                                <li ng-repeat="user in project.Users"><a href="">{{ user.Name }}</a></li>
+                                <li ng-repeat="user in project.Users"><a href="">{{ user.name }}</a></li>
                             </ul>
                         </td>
                         <td class="col-xs-2 controls-ctn">
@@ -103,4 +103,4 @@
 </div>
 <!-- /app-block -->
 
-<ng-include src="partials/app-footer.html"></ng-include>
+<ng-include src="'/views/partials/app-footer.html'"></ng-include>
