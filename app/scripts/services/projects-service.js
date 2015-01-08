@@ -2,7 +2,7 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('projectsService', ['ENV', '$http', projectsService]);
+    .service('projectsService', ['ENV', '$resource', projectsService]);
 
   function projectsService(ENV, $resource, $cookies) {
     /*jshint validthis: true */

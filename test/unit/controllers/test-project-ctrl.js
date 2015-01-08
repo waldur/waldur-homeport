@@ -9,7 +9,7 @@ describe('Controller: ProjectCtrl', function() {
   // Initialize the controller and mocked backend
   beforeEach(inject(function($controller, $injector, $location, ENV) {
     location = $location;
-    controller = $controller('ProjectCtrl');
+    controller = $controller('ProjectsCtrl');
 
     $httpBackend = $injector.get('$httpBackend');
 
@@ -59,13 +59,13 @@ describe('Controller: ProjectCtrl', function() {
   });
 
   it('list() returns all projects', function() {
-    $httpBackend.when('GET', projectsUrl)
-      .respond(200, {id: 2, username: 'admin', auth_token: '58b3130951ca12199109044a0a179725cbee8085'});
-    $httpBackend.expectPOST(signinUrl, {username: auth.user.username, password: auth.user.password});
+    $httpBackend.when('GET', projectsUrl).respond(200, [backendProject]);
+    $httpBackend.expectPOST(projectsUrl);
 
-    auth.signin();
+    controller.list();
 
     $httpBackend.flush();
+    expect(controller.projects).toBe([backendProject]);
   });
 
 });
