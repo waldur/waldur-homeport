@@ -5,7 +5,8 @@ angular
   .module('ncsaas', [
     'config',
     'ngRoute',
-    'ngCookies',])
+    'ngCookies',
+    'ngResource',])
   // urls
   .config(function($routeProvider) {
     $routeProvider
@@ -16,6 +17,11 @@ angular
       .when('/login/', {
         templateUrl: 'views/login.html',
         controller: 'AuthCtrl'
+      })
+
+      .when('/projects/', {
+        templateUrl: 'views/projects.html',
+        controller: 'ProjectsCtrl',
       })
 
       .otherwise({

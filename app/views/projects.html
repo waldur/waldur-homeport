@@ -31,7 +31,7 @@
 <!-- /app-block -->
 
 <!-- app-block -->
-<section class="app-block">
+<section class="app-block" ng-controller="ProjectsCtrl as controller">
     <div class="container-fluid">
         <div class="white-box">
             <div class="app-items-list">
@@ -44,7 +44,7 @@
                         <th class="col-xs-2"><a href="" class="sort">Users</a></th>
                         <th class="col-xs-2"></th>
                     </tr>
-                    <tr ng-repeat="project in projects">
+                    <tr ng-repeat="project in controller.projects">
                         <td class="name">
                             <h2 class="item-title"><a href="../project/index.html">{{ project.Name }}</a></h2>
                             <p class="gray-text">
