@@ -18,6 +18,10 @@ angular
         controller: 'AuthCtrl'
       })
 
+      .when('/projects/', {
+        templateUrl: 'views/projects.html',
+      })
+
       .otherwise({
         redirectTo: '/'
       });
