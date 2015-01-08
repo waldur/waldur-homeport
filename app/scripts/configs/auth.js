@@ -26,7 +26,7 @@
 
         if (!headerIsSet) {
           var token = $cookies.token;
-          if (typeof token != 'undefined') {
+          if (typeof token !== 'undefined' && token !== 'undefined') {
             $httpProvider.defaults.headers.common.Authorization = 'Token ' + token;
             headerIsSet = true;
           }
