@@ -1,2 +1,75 @@
 <ng-include src="'/views/partials/app-header.html'"></ng-include>
+
+<!-- profile-view -->
+<div class="profile-view">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-1">
+                <img src="../static/images/tmp/dojocat.jpg" class="profile-pic">
+            </div>
+            <div class="col-xs-11 profile-info">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h1 class="profile-name pull-left">Mihail Yakimenko</h1>
+                        <ul class="controls pull-right">
+                            <li>
+                                <a href="edit/index.html" class="crud-controls"><i class="fa fa-cog"></i> Edit profile</a>
+                            </li>
+                            <li>
+                                <a href="plans/index.html" class="crud-controls"><i class="fa fa-cog"></i> Plans</a>
+                            </li>
+                            <li>
+                                <a href="billing/index.html" class="crud-controls"><i class="fa fa-cog"></i> Billing</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="stats">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <span class="stat-int">4</span>
+                            <span class="stat-description">Active projects</span>
+                        </div>
+                        <div class="col-xs-4">
+                            <span class="stat-int">4</span>
+                            <span class="stat-description">Services</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /profile-view -->
+
+<!-- app-tabs -->
+<div class="app-tabs">
+    <!-- tabs-nav -->
+    <div class="tabs-container">
+        <div class="container-fluid">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="active">
+                    <a href="#resources" role="tab" data-toggle="tab">
+                        Resources
+                        <span class="label label-success">12</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#projects" role="tab" data-toggle="tab">
+                        Projects
+                        <span class="label label-success">12</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#customers" role="tab" data-toggle="tab">
+                        Services
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- /tabs-nav -->
+</div>
+<!-- /app-tabs -->
+
 <ng-include src="'/views/partials/app-footer.html'"></ng-include>
