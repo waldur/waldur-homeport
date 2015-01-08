@@ -21,7 +21,6 @@ angular
 
       .when('/projects/', {
         templateUrl: 'views/projects.html',
-        controller: 'ProjectsCtrl',
       })
 
       .otherwise({
