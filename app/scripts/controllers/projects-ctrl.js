@@ -2,17 +2,13 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('ProjectsCtrl', ['$scope', '$location', 'projectsService', ProjectsCtrl]);
+    .controller('ProjectsCtrl', ['$location', 'projectsService', ProjectsCtrl]);
 
-  function ProjectsCtrl($scope, $location, projectsService) {
+  function ProjectsCtrl($location, projectsService) {
     var vm = this;
 
-    vm.testvar = 'strong'
-
-    $scope.initList = function() {
-        vm.projects = projectsService.projectResource.query();
-    };
-
+    vm.list = [];
+    vm.initList = function() {vm.list = projectsService.projectResource.query();};
   }
 
 })();

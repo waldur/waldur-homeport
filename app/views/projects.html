@@ -35,7 +35,7 @@
     <div class="container-fluid">
         <div class="white-box">
             <div class="app-items-list">
-                <table class="items-table" ng-init="initList()">
+                <table class="items-table" ng-init="controller.initList()">
                     <tr>
                         <th class="name">
                             <a href="" class="sort">Name</a>
@@ -44,7 +44,7 @@
                         <th class="col-xs-2"><a href="" class="sort">Users</a></th>
                         <th class="col-xs-2"></th>
                     </tr>
-                    <tr ng-repeat="project in controller.projects">
+                    <tr ng-repeat="project in controller.list">
                         <td class="name">
                             <h2 class="item-title"><a href="../project/index.html">{{ project.name }}</a></h2>
                             <p class="gray-text">
