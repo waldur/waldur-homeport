@@ -1,6 +1,6 @@
 <ng-include src="'/views/partials/app-header.html'"></ng-include>
 
-<div ng-controller="AddProjectsCtrl as controller">
+<div ng-controller="AddProjectsController as controller">
     <!-- app-block -->
     <section class="app-block">
         <div class="container-fluid">
@@ -38,8 +38,8 @@
                 <div class="white-box top-level">
                     <!-- app-basic-form -->
                     <div class="app-basic-form">
-                    {{ controller.al }}
-                        <form name="addProjectForm" ng-submit="initAddProject()">
+
+                        <form name="addProjectForm" ng-submit="controller.initAddProject()">
     
                             <!-- app-title-line -->
                             <div class="app-title-line in-form form-field">
@@ -53,7 +53,7 @@
     
                             <div class="row form-field">
                                 <div class="col-xs-4">
-                                    <input type="text" class="form-control" placeholder="Project Name" data-role="form-input">
+                                    <input type="text" class="form-control" placeholder="Project Name" data-role="form-input" ng-model="controller.project.name">
                                 </div>
                                 <div class="col-xs-4">
                                     <div class="custom-select project">
@@ -76,7 +76,7 @@
                             </div>
                             <div class="row form-field">
                                 <div class="col-xs-8">
-                                    <textarea class="form-control" name="" id="" placeholder="Project description"></textarea>
+                                    <textarea class="form-control" name="" id="" placeholder="Project description" ng-model="controller.project.description"></textarea>
                                 </div>
                             </div>
     

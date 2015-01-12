@@ -2,9 +2,9 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('ProjectsCtrl', ['$location', 'projectsService', ProjectsCtrl]);
+    .controller('ProjectsController', ['$location', 'projectsService', ProjectsController]);
 
-  function ProjectsCtrl($location, projectsService) {
+  function ProjectsController($location, projectsService) {
     var vm = this;
 
     vm.list = [];
@@ -13,9 +13,9 @@
   }
 
   angular.module('ncsaas')
-    .controller('AddProjectsCtrl', ['$location', 'projectsService', AddProjectsCtrl]);
+    .controller('AddProjectsController', ['$location', 'projectsService', AddProjectsController]);
 
-  function AddProjectsCtrl($location, projectsService) {
+  function AddProjectsController($location, projectsService) {
     var vm = this;
 
     vm.project = new projectsService.projectResource();
