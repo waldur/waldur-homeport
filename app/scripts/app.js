@@ -7,8 +7,8 @@ angular
     'config',
     'satellizer',
     'ngRoute',
-    'ngCookies',])
-
+    'ngCookies',
+    'ngResource',])
   // urls
   .config(function($routeProvider) {
     $routeProvider
@@ -21,7 +21,9 @@ angular
         controller: 'AuthCtrl'
       })
 
-      .when('')
+      .when('/projects/', {
+        templateUrl: 'views/projects.html',
+      })
 
       .otherwise({
         redirectTo: '/'

@@ -8,6 +8,15 @@
         @include inline-middle;
         margin: 0;
         font-size: rem(22);
+        margin-bottom: 10px;
+        @include bp(md) {
+            @include inline-middle;
+            margin-bottom: 0px;
+        } // medium
+        @include bp(lg) {
+            @include inline-middle;
+            margin-bottom: 0px;
+        } // large
     } // app-title
     .sort {
         @include inline-middle;
@@ -95,10 +104,37 @@
         } // li
     } // sort
     .crud-box {
+        display: block;
+        text-align: center;
+        float: none !important;
+        margin-top: 10px;
         a {
             + a {
                 margin-left: 10px;
+                margin-top: 4px;
+                @include bp(md) {
+                    @include inline-middle;
+                    margin-top: 0px;
+                } // medium
+                @include bp(lg) {
+                    @include inline-middle;
+                    margin-top: 0px;
+                } // large
             } // +
-        } // 
+        } // a
+        @include bp(md) {
+            @include inline-middle;
+            margin-top: 0px;
+            text-align: left;
+            display: inline-block;
+            float: right !important;
+        } // medium
+        @include bp(lg) {
+            @include inline-middle;
+            margin-top: 0px;
+            text-align: left;
+            display: inline-block;
+            float: right !important;
+        } // large
     } // crud-box
 } // app-title-line

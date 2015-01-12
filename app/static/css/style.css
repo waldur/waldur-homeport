@@ -1,4 +1,3 @@
-@charset "UTF-8";
 /*! normalize.css v3.0.1 | MIT License | git.io/normalize */
 html {
   font-family: sans-serif;
@@ -7208,7 +7207,6 @@ body.prices {
 .login {
   position: relative;
   color: #fff;
-  padding-bottom: 400px;
 }
 .login h4 {
   font-weight: 400;
@@ -7229,8 +7227,6 @@ body.prices {
   top: 0px;
   width: 100%;
   float: left;
-}
-.login .login-box.transition {
   -webkit-transition-property: all;
           transition-property: all;
   -webkit-transition-duration: 0.4s;
@@ -7370,6 +7366,16 @@ body.prices {
   border-width: 0;
 }
 
+.navbar-toggle {
+  background: #8BBE46;
+}
+.navbar-toggle .icon-bar {
+  background: black;
+}
+.navbar-toggle.collapsed {
+  background: none;
+}
+
 .navbar-brand {
   width: 40px;
   height: 40px;
@@ -7448,6 +7454,12 @@ body.prices {
 .navbar-nav > li .user-pic-box {
   padding-left: 50px;
 }
+@media (min-width: 480px) {
+  .navbar-nav > li .user-pic-box {
+    padding-left: 64px;
+    padding-top: 14px;
+  }
+}
 .navbar-nav > li .user-pic {
   width: auto;
   height: 40px;
@@ -7457,6 +7469,14 @@ body.prices {
   position: absolute;
   top: 0px;
   left: 5px;
+}
+.navbar-nav > li .user-pic.small-screen {
+  left: -10px;
+}
+@media (min-width: 480px) {
+  .navbar-nav > li .user-pic {
+    left: 16px;
+  }
 }
 .navbar-nav > li .add-something-button {
   position: relative;
@@ -7471,6 +7491,15 @@ body.prices {
   font-size: 1rem;
   color: #000;
 }
+.navbar-nav > li .add-something-button.small-screen:after {
+  display: none;
+}
+@media (min-width: 480px) {
+  .navbar-nav > li .add-something-button:after {
+    right: auto;
+    left: 35px;
+  }
+}
 .navbar-nav > li .customer-head {
   margin-top: 8px;
   padding: 6px 10px;
@@ -7480,6 +7509,12 @@ body.prices {
   -webkit-border-radius: 3px;
           border-radius: 3px;
   position: relative;
+}
+@media (min-width: 480px) {
+  .navbar-nav > li .customer-head {
+    margin-left: 6px;
+    margin-bottom: 16px;
+  }
 }
 .navbar-nav > li .customer-head .customer-title {
   width: 100%;
@@ -7509,6 +7544,9 @@ body.prices {
 }
 .navbar-nav > li .dropdown-menu.add-something .fa {
   margin-right: 10px;
+}
+.navbar-nav > li .dropdown-menu.small-screen {
+  margin-top: 22px;
 }
 .navbar-nav > li .dropdown-menu.user-drop a {
   padding-left: 46px;
@@ -7554,6 +7592,25 @@ body.prices {
 .navbar-nav > li .dropdown-menu li a.add-resource:before {
   content: '\f0ae';
   font-family: FontAwesome;
+}
+
+.nav-user-area {
+  margin-bottom: 30px;
+}
+@media (min-width: 768px) {
+  .nav-user-area {
+    margin-bottom: 0px;
+  }
+}
+@media (min-width: 992px) {
+  .nav-user-area {
+    margin-bottom: 0px;
+  }
+}
+@media (min-width: 1200px) {
+  .nav-user-area {
+    margin-bottom: 0px;
+  }
 }
 
 .add-something-box .tooltip .tooltip-inner {
@@ -7954,6 +8011,21 @@ a.sort.down:after {
   vertical-align: middle;
   margin: 0;
   font-size: 2.2rem;
+  margin-bottom: 10px;
+}
+@media (min-width: 992px) {
+  .app-title-line .app-title {
+    display: inline-block;
+    vertical-align: middle;
+    margin-bottom: 0px;
+  }
+}
+@media (min-width: 1200px) {
+  .app-title-line .app-title {
+    display: inline-block;
+    vertical-align: middle;
+    margin-bottom: 0px;
+  }
 }
 .app-title-line .sort {
   display: inline-block;
@@ -8060,8 +8132,49 @@ a.sort.down:after {
   color: #000;
   outline: none;
 }
+.app-title-line .crud-box {
+  display: block;
+  text-align: center;
+  float: none !important;
+  margin-top: 10px;
+}
 .app-title-line .crud-box a + a {
   margin-left: 10px;
+  margin-top: 4px;
+}
+@media (min-width: 992px) {
+  .app-title-line .crud-box a + a {
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 0px;
+  }
+}
+@media (min-width: 1200px) {
+  .app-title-line .crud-box a + a {
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 0px;
+  }
+}
+@media (min-width: 992px) {
+  .app-title-line .crud-box {
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 0px;
+    text-align: left;
+    display: inline-block;
+    float: right !important;
+  }
+}
+@media (min-width: 1200px) {
+  .app-title-line .crud-box {
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 0px;
+    text-align: left;
+    display: inline-block;
+    float: right !important;
+  }
 }
 
 .app-block + .app-block {
@@ -8094,6 +8207,7 @@ a.sort.down:after {
 
 .app-items-list .items-table {
   width: 100%;
+  min-width: 600px;
 }
 .app-items-list .items-table tr + tr {
   border-top: 1px solid #E0E0E0;
