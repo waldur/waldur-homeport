@@ -23,7 +23,7 @@ angular
         templateUrl: 'views/projects.html',
       })
 
-      .when('/add-projects/', {
+      .when('/add-project/', {
         templateUrl: 'views/add-project.html',
       })
 
