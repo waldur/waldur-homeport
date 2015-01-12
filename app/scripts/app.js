@@ -23,6 +23,10 @@ angular
         templateUrl: 'views/projects.html',
       })
 
+      .when('/add-projects/', {
+        templateUrl: 'views/add-project.html',
+      })
+
       .otherwise({
         redirectTo: '/'
       });

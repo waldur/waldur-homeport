@@ -9,6 +9,7 @@
 
     vm.list = [];
     vm.initList = function() {vm.list = projectsService.projectResource.query();};
+    
   }
 
 })();
