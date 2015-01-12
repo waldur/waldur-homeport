@@ -19,15 +19,14 @@
     var vm = this;
 
     vm.project = new projectsService.projectResource();
-
+    
+    // all customers for select in html
     vm.customersList = customersService.customerResource.query();
 
-    console.log(vm.customersList);
-    // vm.customersList = [];
-    // vm.initCustomersList = function() {vm.customersList = customerssService.customerResource.query();};
-
     vm.initAddProject = function() {
-      vm.project.$save();
+      vm.project.$save(function() {
+        console.log('project added');
+      });
     };
 
   }

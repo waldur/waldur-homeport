@@ -30,7 +30,7 @@
         </div>
     </section>
     <!-- /app-block -->
-    
+
     <div class="app-form-box top-level after-line" data-role="form-box">    
         <!-- app-block -->
         <section class="app-block">
@@ -57,8 +57,10 @@
                                 </div>
                                 <div class="col-xs-4">
                                     <div class="custom-select project">
-                                        <select name="" id="" ng-model="controller.project.customer">
-                                            <option value="{{ i.url }}" ng-repeat="i in controller.customersList">{{ i.name }}</option>
+                                        <select name="" 
+                                            ng-options="item.url as item.name for item in controller.customersList"
+                                            ng-model="controller.project.customer">
+                                            <option value="" selected>Choose customer</option>
                                         </select>
                                     </div>
                                     <a href="#" class="crud-controls"><i class="fa fa-plus"></i> add customer</a>
