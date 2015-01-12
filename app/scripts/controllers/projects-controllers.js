@@ -13,12 +13,18 @@
   }
 
   angular.module('ncsaas')
-    .controller('AddProjectsController', ['$location', 'projectsService', AddProjectsController]);
+    .controller('AddProjectsController', ['$location', 'projectsService', 'customersService', AddProjectsController]);
 
-  function AddProjectsController($location, projectsService) {
+  function AddProjectsController($location, projectsService, customersService) {
     var vm = this;
 
     vm.project = new projectsService.projectResource();
+
+    vm.customersList = customersService.customerResource.query();
+
+    console.log(vm.customersList);
+    // vm.customersList = [];
+    // vm.initCustomersList = function() {vm.customersList = customerssService.customerResource.query();};
 
     vm.initAddProject = function() {
       vm.project.$save();

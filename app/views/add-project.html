@@ -57,11 +57,8 @@
                                 </div>
                                 <div class="col-xs-4">
                                     <div class="custom-select project">
-                                        <select name="" id="">
-                                            <option value="">Customer</option>
-                                            <option value="">U345NV</option>
-                                            <option value="">DooTram11</option>
-                                            <option value="">FrayD34</option>
+                                        <select name="" id="" ng-model="controller.project.customer">
+                                            <option value="{{ i.url }}" ng-repeat="i in controller.customersList">{{ i.name }}</option>
                                         </select>
                                     </div>
                                     <a href="#" class="crud-controls"><i class="fa fa-plus"></i> add customer</a>
