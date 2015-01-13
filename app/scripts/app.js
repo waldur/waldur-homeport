@@ -4,7 +4,6 @@ angular
 
   // module name and dependencies
   .module('ncsaas', [
-    'config',
     'satellizer',
     'ngRoute',
     'ngCookies',
@@ -28,24 +27,18 @@ angular
       .otherwise({
         redirectTo: '/'
       });
-  })
-
-  // social auth
-  .config(function($authProvider) {
-
-    $authProvider.facebook({
-      clientId: '654736081301402', // '624059410963642',
-      url: 'http://localhost:8080/api-auth/facebook/',
-    });
-
-    $authProvider.google({
-      clientId: '251636923168-9a6n6391j5vv5v4vf0m1k3n9sl9kag41.apps.googleusercontent.com',
-      url: 'http://localhost:8080/api-auth/google/',
-    });
-
-  })
-
-  .run(function(ENV) {
-    ENV.name = 'prduction';
-    console.log(ENV);
   });
+
+(function() {
+  angular.module('ncsaas')
+    .config(['ENV', 'CUSTOMENV', overrideBaseSettings]);
+
+    function overrideBaseSettings(ENV, CUSTOMENV) {
+      for (var property in CUSTOMENV) {
+        if (CUSTOMENV.hasOwnProperty(property)) {
+            ENV[property] = CUSTOMENV[property];
+        }
+      }
+    }
+
+})();
