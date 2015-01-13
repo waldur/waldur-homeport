@@ -32,10 +32,11 @@
 
 <!-- app-block -->
 <section class="app-block" ng-controller="ProjectsController as controller">
+
     <div class="container-fluid">
         <div class="white-box">
             <div class="app-items-list">
-                <table class="items-table" ng-init="controller.initList()">
+                <table class="items-table">
                     <tr>
                         <th class="name">
                             <a href="" class="sort">Name</a>
@@ -58,7 +59,7 @@
                         </td>
                         <td class="col-xs-2 gray-text">
                             <ul class="standart-list">
-                                <li ng-repeat="user in project.Users"><a href="">{{ user.name }}</a></li>
+                                <li ng-repeat="user in project.users"><a href="">{{ user.native_name }}</a></li>
                             </ul>
                         </td>
                         <td class="col-xs-2 controls-ctn">

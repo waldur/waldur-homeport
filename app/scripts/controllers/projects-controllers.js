@@ -2,13 +2,20 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('ProjectsController', ['$location', 'projectsService', ProjectsController]);
+    .controller('ProjectsController', ['$location', 'projectsService', 'usersService', ProjectsController]);
 
-  function ProjectsController($location, projectsService) {
+  function ProjectsController($location, projectsService, usersService) {
     var vm = this;
 
-    vm.list = [];
-    vm.initList = function() {vm.list = projectsService.projectResource.query();};
+    vm.list = projectsService.projectResource.query();
+    vm.list.$promise.then(function(projects) {
+      for (var i=0; i < projects.length; i++) {
+        var project;
+        project = projects[i];
+        var usersList = usersService.userResource.query({project: projects[i].name});
+        project.users = usersList;
+      }
+    });
     
   }
 
@@ -19,8 +26,6 @@
     var vm = this;
 
     vm.project = new projectsService.projectResource();
-    
-    // all customers for select in html
     vm.customersList = customersService.customerResource.query();
 
     vm.initAddProject = function() {
