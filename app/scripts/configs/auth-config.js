@@ -43,13 +43,13 @@
     function initAuthProvider(ENV, $authProvider) {
 
       $authProvider.facebook({
-        clientId: '654736081301402',
-        url: 'http://localhost:8080/api-auth/facebook/',
+        clientId: ENV.facebookClientId,
+        url: ENV.apiEndpoint + ENV.facebookEndpointUrl
       });
 
       $authProvider.google({
-        clientId: ENV.googleCliendId,
-        url: ENV.apiEndpoint + ENV.googleEndpointUrl,
+        clientId: ENV.googleClientId,
+        url: ENV.apiEndpoint + ENV.googleEndpointUrl
       });
 
     }
