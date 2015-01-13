@@ -28,3 +28,4 @@ assets/css
 
 # config
 app/scripts/configs/config.js
+app/scripts/configs/custom-config.js

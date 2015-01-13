@@ -1,9 +1,10 @@
 'use strict';
 
 angular
+
   // module name and dependencies
   .module('ncsaas', [
-    'config',
+    'satellizer',
     'ngRoute',
     'ngCookies',
     'ngResource',])
@@ -27,3 +28,17 @@ angular
         redirectTo: '/'
       });
   });
+
+(function() {
+  angular.module('ncsaas')
+    .config(['ENV', 'CUSTOMENV', overrideBaseSettings]);
+
+    function overrideBaseSettings(ENV, CUSTOMENV) {
+      for (var property in CUSTOMENV) {
+        if (CUSTOMENV.hasOwnProperty(property)) {
+            ENV[property] = CUSTOMENV[property];
+        }
+      }
+    }
+
+})();

@@ -1,23 +1,11 @@
 'use strict';
 
-// for csrf
+// set auth token header
 (function() {
   angular.module('ncsaas')
-    .config(['$httpProvider', csrf]);
+    .config(['$httpProvider', initAuthToken]);
 
-  function csrf($httpProvider) {
-    // $httpProvider.defaults.useXDomain = true;
-    // delete $httpProvider.defaults.headers.common['X-Requested-With'];
-  }
-
-})();
-
-// redirects
-(function() {
-  angular.module('ncsaas')
-    .config(['$httpProvider', initAuth]);
-
-  function initAuth($httpProvider) {
+  function initAuthToken($httpProvider) {
     $httpProvider.interceptors.push(auth);
 
     function auth($q, $cookies) {
@@ -35,7 +23,6 @@
       }
 
       function responseError(rejection) {
-        console.log(rejection);
         return $q.reject(rejection);
       }
       return {
@@ -45,5 +32,26 @@
     }
 
   }
+
+})();
+
+// social auth
+(function() {
+  angular.module('ncsaas')
+    .config(['ENV', '$authProvider', initAuthProvider]);
+
+    function initAuthProvider(ENV, $authProvider) {
+
+      $authProvider.facebook({
+        clientId: ENV.facebookClientId,
+        url: ENV.apiEndpoint + ENV.facebookEndpointUrl
+      });
+
+      $authProvider.google({
+        clientId: ENV.googleClientId,
+        url: ENV.apiEndpoint + ENV.googleEndpointUrl
+      });
+
+    }
 
 })();
