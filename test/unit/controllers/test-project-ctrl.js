@@ -9,7 +9,7 @@ describe('Controller: ProjectCtrl', function() {
   // Initialize the controller and mocked backend
   beforeEach(inject(function($controller, $injector, $location, ENV) {
     location = $location;
-    controller = $controller('ProjectsCtrl');
+    // controller = $controller('ProjectsCtrl');
 
     $httpBackend = $injector.get('$httpBackend');
 
@@ -53,12 +53,14 @@ describe('Controller: ProjectCtrl', function() {
 
     }));
 
+  controller = $controller('ProjectsCtrl');
+
   afterEach(function() {
     $httpBackend.verifyNoOutstandingExpectation();
     $httpBackend.verifyNoOutstandingRequest();
   });
 
-  it('list() returns all projects', function() {
+  it('list returns all projects', function() {
     $httpBackend.when('GET', projectsUrl).respond(200, [backendProject]);
     $httpBackend.expectPOST(projectsUrl);
 
@@ -67,5 +69,17 @@ describe('Controller: ProjectCtrl', function() {
     $httpBackend.flush();
     expect(controller.projects).toBe([backendProject]);
   });
+
+// it('delete() delete a project', function() {
+//     $httpBackend.when('GET', projectsUrl).respond(409, [backendProject]);
+//     $httpBackend.expectPOST(projectsUrl);
+
+//     controller = $controller('ProjectsCtrl');
+
+//     controller.project.delete();
+
+//     $httpBackend.flush();
+//     expect(controller.projects).toBe([backendProject]);
+//   });
 
 });

@@ -18,6 +18,13 @@
       }
     });
 
+    vm.deleteProject = function(project) {
+      var index = vm.list.indexOf(project)
+      project.$delete(function(success) {
+        vm.list.splice(index, 1);
+      });
+    }
+
   }
 
   angular.module('ncsaas')
