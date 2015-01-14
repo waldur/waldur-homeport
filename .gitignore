@@ -25,6 +25,7 @@ prototype
 
 # css
 assets/css
+app/static/css/style.min.css
 
 # config
 app/scripts/configs/config.js
