@@ -7,7 +7,7 @@
   function customersService(ENV, $resource, $cookies) {
     /*jshint validthis: true */
     var vm = this;
-    vm.customerResource = $resource(ENV.apiEndpoint + 'api/customers/:cutomerUUID', {cutomerUUID:'@uuid'});
+    vm.customerResource = $resource(ENV.apiEndpoint + 'api/customers/:cutomerUUID/', {cutomerUUID:'@uuid'});
 
   }
 
