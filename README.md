@@ -56,7 +56,7 @@ To start tests:
 
 Nodeconductor-web allows authentication through GooglePlus and Facebook.
 [This instructions][3] can be used for Google or Facebook application creation.
-Application public id has to be set as `googleCliendId` or `facebookClientId` parameters in `CUSTOMENV`.
+Application public id has to be set as `googleClientId` or `facebookClientId` parameters in `CUSTOMENV`.
 
 
 [1]: http://bower.io
