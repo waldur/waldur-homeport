@@ -13,24 +13,30 @@ __Requirements__:
 
 __Installation steps__:
 
-1. Install dependencies and build static assets:
+1. Clone project and go to its folder:
+
+        git clone git@code.opennodecloud.com:nc-saas/nodeconductor-web.git
+        cd nodeconductor-web
+
+2. Install dependencies and build static assets:
 
         gem install sass
         npm install
         npm install -g grunt-cli
         grunt build
+        bower install
 
-2. Create `/app/scripts/configs/custom-config.js`:
+3. Create `/app/scripts/configs/custom-config.js`:
 
         cp /app/scripts/configs/custom-config.js.example /app/scripts/configs/custom-config.js
 
-3. Configure `custom-config.js`
+4. Configure `custom-config.js`
 
-4. Run application in development mode:
+5. Run application in development mode:
 
         grunt
 
-5. Listen on `//localhost:8000`
+6. Listen on `//localhost:8000`
 
 
 ## Backend installation
