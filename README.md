@@ -23,12 +23,11 @@ __Installation steps__:
         gem install sass
         npm install
         npm install -g grunt-cli
-        grunt build
         bower install
 
 3. Create `/app/scripts/configs/custom-config.js`:
 
-        cp /app/scripts/configs/custom-config.js.example /app/scripts/configs/custom-config.js
+        cp app/scripts/configs/custom-config.js.example app/scripts/configs/custom-config.js
 
 4. Configure `custom-config.js`
 
@@ -39,11 +38,9 @@ __Installation steps__:
 6. Listen on `//localhost:8000`
 
 
-## Backend installation
+## Backend
 
-1. Setup nodeconductor project
-2. Install nodeconductor-plus app to nodecinductor project
-3. Install django-cors-headers
+Use [NodeConductor][4] with [NodeConductorPlus][5] for backend.
 
 
 ## Tests
@@ -53,13 +50,17 @@ To start tests:
     grunt test
 
 
-## Authentication configurations
+## Configuration
+
+### Authentication configurations
 
 Nodeconductor-web allows authentication through GooglePlus and Facebook.
 [This instructions][3] can be used for Google or Facebook application creation.
-Application public id has to be set as `googleCliendId` or `facebookClientId` parameter in `CUSTOMENV`.
+Application public id has to be set as `googleCliendId` or `facebookClientId` parameters in `CUSTOMENV`.
 
 
 [1]: http://bower.io
 [2]: http://gruntjs.com
 [3]: https://github.com/sahat/satellizer/#obtaining-oauth-keys
+[4]: https://code.opennodecloud.com/nodeconductor/nodeconductor/blob/develop/README.rst
+[5]: https://code.opennodecloud.com/nc-saas/ncplus/blob/develop/README.rst
