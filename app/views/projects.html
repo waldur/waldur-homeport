@@ -47,7 +47,7 @@
                     </tr>
                     <tr ng-repeat="project in controller.list">
                         <td class="name">
-                            <h2 class="item-title"><a href="../project/index.html">{{ project.name }}</a> + {{ project.uuid }}</h2>
+                            <h2 class="item-title"><a href="../project/index.html">{{ project.name }}</a></h2>
                             <p class="gray-text">
                                 {{ project.description }}
                             </p>
@@ -74,7 +74,7 @@
                                     <a href="#" class="conf" data-toggle="tooltip" data-placement="top" title="Settings"><i class="fa fa-cog"></i></a>
                                 </li>
                                 <li>
-                                    <a href="" ng-click="controller.remove(project)" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
+                                    <a href="" ng-click="project.$delete()" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
                                 </li>
                             </ul>
                         </td>

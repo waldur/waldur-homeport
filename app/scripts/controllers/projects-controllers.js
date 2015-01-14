@@ -18,11 +18,6 @@
       }
     });
 
-    // project delete
-    vm.remove = function(project) {
-      project.$delete();
-    }
-    
   }
 
   angular.module('ncsaas')
