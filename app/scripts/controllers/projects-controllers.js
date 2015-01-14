@@ -7,6 +7,7 @@
   function ProjectsController($location, projectsService, usersService) {
     var vm = this;
 
+    // project list
     vm.list = projectsService.projectResource.query();
     vm.list.$promise.then(function(projects) {
       for (var i=0; i < projects.length; i++) {
@@ -16,6 +17,11 @@
         project.users = usersList;
       }
     });
+
+    // project delete
+    vm.remove = function(project) {
+      project.$delete();
+    }
     
   }
 
