@@ -31,7 +31,7 @@
     </section>
     <!-- /app-block -->
 
-    <div class="app-form-box top-level after-line" data-role="form-box">    
+    <div class="app-form-box top-level after-line" data-role="form-box">
         <!-- app-block -->
         <section class="app-block">
             <div class="container-fluid">
@@ -39,8 +39,8 @@
                     <!-- app-basic-form -->
                     <div class="app-basic-form">
 
-                        <form name="addProjectForm" ng-submit="controller.initAddProject()">
-    
+                        <form name="addProjectForm" ng-submit="controller.save()">
+
                             <!-- app-title-line -->
                             <div class="app-title-line in-form form-field">
                                 <div class="row">
@@ -50,14 +50,14 @@
                                 </div>
                             </div>
                             <!-- /app-title-line -->
-    
+
                             <div class="row form-field">
                                 <div class="col-xs-4">
                                     <input type="text" class="form-control" placeholder="Project Name" data-role="form-input" ng-model="controller.project.name">
                                 </div>
                                 <div class="col-xs-4">
                                     <div class="custom-select project">
-                                        <select name="" 
+                                        <select name=""
                                             ng-options="item.url as item.name for item in controller.customersList"
                                             ng-model="controller.project.customer">
                                             <option value="" selected>Choose customer</option>
@@ -78,9 +78,9 @@
                                     <textarea class="form-control" name="" id="" placeholder="Project description" ng-model="controller.project.description"></textarea>
                                 </div>
                             </div>
-    
+
                             <div class="form-divide"></div>
-    
+
                             <div class="row form-field">
                                 <div class="col-xs-12 text-center">
                                     <button class="btn btn-default">Cancel</button>

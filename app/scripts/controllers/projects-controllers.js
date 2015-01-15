@@ -7,19 +7,19 @@
   function ProjectsController($location, projectsService, usersService) {
     var vm = this;
 
-    // project list
-    vm.list = projectsService.projectResource.query();
-    vm.list.$promise.then(function(projects) {
-      for (var i=0; i < projects.length; i++) {
-        var project;
-        project = projects[i];
-        var usersList = usersService.userResource.query({project: projects[i].name});
-        project.users = usersList;
-      }
-    });
+    vm.list = projectsService.projectResource.query(initProjectUsers);
+    vm.remove = remove;
 
-    vm.deleteProject = function(project) {
-      var index = vm.list.indexOf(project)
+    function initProjectUsers(projects) {
+      for (var i = 0; i < projects.length; i++) {
+        var project = projects[i];
+        project.users = usersService.userResource.query({project: project.name});
+      }
+    }
+
+    function remove(project) {
+      var index = vm.list.indexOf(project);
+
       project.$delete(function(success) {
         vm.list.splice(index, 1);
       });
@@ -35,12 +35,11 @@
 
     vm.project = new projectsService.projectResource();
     vm.customersList = customersService.customerResource.query();
+    vm.save = save;
 
-    vm.initAddProject = function() {
-      vm.project.$save(function() {
-        console.log('project added');
-      });
-    };
+    function save() {
+      vm.project.$save();
+    }
 
   }
 

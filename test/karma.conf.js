@@ -23,6 +23,7 @@ module.exports = function(config) {
       'bower_components/angular-loader/angular-loader.js',
       'bower_components/angular-cookies/angular-cookies.js',
       'bower_components/angular-route/angular-route.js',
+      'bower_components/angular-resource/angular-resource.js',
       'app/scripts/**/*.js',
       'test/mock/**/*.js',
       'test/unit/**/*.js'

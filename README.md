@@ -1,49 +1,66 @@
-# Introduction
+## Introduction
 
 NodeConductor-web is a thin web-based client for the NodeConductor REST client.
+It uses [bower.io][1] as package manager and [grunt][2] for automation.
 
-## Package manger [bower.io][5]
+## Installation
 
-All packages from bower are copied to `dev/`
-
-## Automation
-
-* [grunt][6]
-
-## Usage
-
-Build requirements:
+__Requirements__:
 
 * `libpng-devel` on CentOS or `libpng-dev` on Ubuntu
 * `npm`
 * `rubygems`
 
-Install dependencies and build static assets:
+__Installation steps__:
 
-    gem install sass
-    npm install
-    npm install -g grunt-cli
-    grunt build
+1. Clone project and go to its folder:
 
-Run application in development mode:
+        git clone git@code.opennodecloud.com:nc-saas/nodeconductor-web.git
+        cd nodeconductor-web
 
-    grunt
+2. Install dependencies and build static assets:
 
-listen on `//localhost:8000`
+        gem install sass
+        npm install
+        npm install -g grunt-cli
+        bower install
 
-[5]: http://bower.io
-[6]: http://gruntjs.com
+3. Create `/app/scripts/configs/custom-config.js`:
+
+        cp app/scripts/configs/custom-config.js.example app/scripts/configs/custom-config.js
+
+4. Configure `custom-config.js`
+
+5. Run application in development mode:
+
+        grunt
+
+6. Listen on `//localhost:8000`
 
 
-## Expected backend(only for develop)
+## Backend
 
-1. Setup nodeconductor project
-2. Install nodeconductor-plus app to nodecinductor project
-3. Install django-cors-headers
+Use [NodeConductor][4] with [NodeConductorPlus][5] for backend.
 
 
-## TESTS
+## Tests
 
 To start tests:
 
     grunt test
+
+
+## Configuration
+
+### Authentication configurations
+
+Nodeconductor-web allows authentication through GooglePlus and Facebook.
+[This instructions][3] can be used for Google or Facebook application creation.
+Application public id has to be set as `googleClientId` or `facebookClientId` parameters in `CUSTOMENV`.
+
+
+[1]: http://bower.io
+[2]: http://gruntjs.com
+[3]: https://github.com/sahat/satellizer/#obtaining-oauth-keys
+[4]: https://code.opennodecloud.com/nodeconductor/nodeconductor/blob/develop/README.rst
+[5]: https://code.opennodecloud.com/nc-saas/ncplus/blob/develop/README.rst

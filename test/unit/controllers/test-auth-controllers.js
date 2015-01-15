@@ -1,7 +1,7 @@
 'use strict';
 
 describe('Controller: AuthCtrl', function() {
-  var auth, $httpBackend, signinUrl, location;
+  var controller, $httpBackend, signinUrl, location;
 
   // load the controller's module
   beforeEach(module('ncsaas'));
@@ -9,7 +9,7 @@ describe('Controller: AuthCtrl', function() {
   // Initialize the controller and mocked backend
   beforeEach(inject(function($controller, $injector, $location, ENV) {
     location = $location;
-    auth = $controller('AuthCtrl');
+    controller = $controller('AuthCtrl');
 
     $httpBackend = $injector.get('$httpBackend');
 
@@ -23,39 +23,39 @@ describe('Controller: AuthCtrl', function() {
 
   it('signin() makes request to signin url with entered password and login', function() {
     $httpBackend.when('POST', signinUrl)
-      .respond(200, {id: 2, username: 'admin', auth_token: '58b3130951ca12199109044a0a179725cbee8085'});
-    auth.user.username = 'admin';
-    auth.user.password = 'adminpass';
-    $httpBackend.expectPOST(signinUrl, {username: auth.user.username, password: auth.user.password});
+      .respond(200, {id: 2, username: 'admin', token: '58b3130951ca12199109044a0a179725cbee8085'});
+    controller.user.username = 'admin';
+    controller.user.password = 'adminpass';
+    $httpBackend.expectPOST(signinUrl, {username: controller.user.username, password: controller.user.password});
 
-    auth.signin();
+    controller.signin();
 
     $httpBackend.flush();
   });
 
   it('signin() redirects to main page on success', function() {
     $httpBackend.when('POST', signinUrl)
-      .respond(200, {id: 2, username: 'admin', auth_token: '58b3130951ca12199109044a0a179725cbee8085'});
+      .respond(200, {id: 2, username: 'admin', token: '58b3130951ca12199109044a0a179725cbee8085'});
 
-    auth.signin();
+    controller.signin();
 
     $httpBackend.flush();
     expect(location.path()).toBe('/');
   });
 
-  it('signin() saves errors to auth.errors variable on signin fail', function() {
+  it('signin() saves errors to controller.errors variable on signin fail', function() {
     var errors = 'some error';
     $httpBackend.when('POST', signinUrl).respond(400, errors);
 
-    auth.signin();
+    controller.signin();
 
     $httpBackend.flush();
-    expect(auth.errors).toBe(errors);
+    expect(controller.errors).toBe(errors);
   });
 
   it('getErrors() returns prettified controller errors', function() {
-    auth.errors = {field: ['error1', 'error2']};
-    expect(auth.getErrors()[0]).toBe('field: error1, error2');
+    controller.errors = {field: ['error1', 'error2']};
+    expect(controller.getErrors()[0]).toBe('field: error1, error2');
   });
 
 });
