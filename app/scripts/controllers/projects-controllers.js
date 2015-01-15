@@ -7,10 +7,10 @@
   function ProjectsController($location, projectsService, usersService) {
     var vm = this;
 
-    vm.list = projectsService.projectResource.query(addUsersToProjects);
+    vm.list = projectsService.projectResource.query(initProjectUsers);
     vm.remove = remove;
 
-    function addUsersToProjects(projects) {
+    function initProjectUsers(projects) {
       for (var i = 0; i < projects.length; i++) {
         var project = projects[i];
         project.users = usersService.userResource.query({project: project.name});
@@ -35,12 +35,11 @@
 
     vm.project = new projectsService.projectResource();
     vm.customersList = customersService.customerResource.query();
+    vm.save = save;
 
-    vm.initAddProject = function() {
-      vm.project.$save(function() {
-        console.log('project added');
-      });
-    };
+    function save() {
+      vm.project.$save();
+    }
 
   }
 
