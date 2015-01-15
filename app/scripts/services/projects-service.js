@@ -7,7 +7,7 @@
   function projectsService(ENV, $resource, $cookies) {
     /*jshint validthis: true */
     var vm = this;
-    vm.projectResource = $resource(ENV.apiEndpoint + 'api/projects/:projectId', {projectId:'@id'});
+    vm.projectResource = $resource(ENV.apiEndpoint + 'api/projects/:projectUUID/', {projectUUID:'@uuid'});
 
   }
 
