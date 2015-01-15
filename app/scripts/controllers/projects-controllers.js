@@ -44,4 +44,23 @@
 
   }
 
+  angular.module('ncsaas')
+    .controller('ProjectController', ['$location', '$routeParams', 'projectsService', 'usersService', ProjectController]);
+
+  function ProjectController($location, $routeParams, projectsService, usersService) {
+    var vm = this;
+
+    // get project
+    vm.project = projectsService.projectResource.get({projectUUID: $routeParams.uuid});
+
+    // get users
+    vm.project.$promise.then(function(data){
+      vm.users = usersService.userResource.query({project: data.name, isArray: true});
+    });
+
+    // tabs
+    vm.activeTab = 'eventlog';
+
+  }
+
 })();
