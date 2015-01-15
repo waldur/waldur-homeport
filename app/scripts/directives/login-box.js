@@ -4,7 +4,7 @@
 
   angular.module('ncsaas')
     .directive('loginbox', function($window) {
-      return  {
+      return {
         restrict: 'A',
         link: function(scope, element, attrs) {
           var winHeight = $window.innerHeight;
@@ -14,13 +14,13 @@
     })
 
     .directive('loginboxcontext', function($window) {
-      return  {
+      return {
         restrict: 'A',
         link: function(scope, element, attrs) {
           var winHeight = $window.innerHeight;
           element.css('top', winHeight / 5 + 'px');
         }
       };
-    })
+    });
 
 })();

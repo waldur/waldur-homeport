@@ -1,4 +1,4 @@
-<ng-include src="partials/app-header.html"></ng-include>
+<ng-include src="'/views/partials/app-header.html'"></ng-include>
 
 <!-- app-block -->
 <section class="app-block">
@@ -21,7 +21,7 @@
                                 </div>
                             </li>
                         </ul>
-                        <div class="crud-box pull-right"><a href="../add-project/index.html" class="crud-controls"><i class="fa fa-plus"></i> Add project</a></div>
+                        <div class="crud-box pull-right"><a href="/#/add-project/" class="crud-controls"><i class="fa fa-plus"></i> Add project</a></div>
                     </div>
                 </div>
             </div>
@@ -31,7 +31,8 @@
 <!-- /app-block -->
 
 <!-- app-block -->
-<section class="app-block" ng-controller="ProjectsCtrl as controller">
+<section class="app-block" ng-controller="ProjectsController as controller">
+
     <div class="container-fluid">
         <div class="white-box">
             <div class="app-items-list">
@@ -44,21 +45,21 @@
                         <th class="col-xs-2"><a href="" class="sort">Users</a></th>
                         <th class="col-xs-2"></th>
                     </tr>
-                    <tr ng-repeat="project in controller.projects">
+                    <tr ng-repeat="project in controller.list">
                         <td class="name">
-                            <h2 class="item-title"><a href="../project/index.html">{{ project.Name }}</a></h2>
+                            <h2 class="item-title"><a href="../project/index.html">{{ project.name }}</a></h2>
                             <p class="gray-text">
-                                {{ project.Description }}
+                                {{ project.description }}
                             </p>
                         </td>
                         <td class="col-xs-3 gray-text">
                             <ul class="standart-list">
-                                <li ng-repeat="resource in project.Resources"><span class="elem item-type repo"></span> {{ resource.Name }}</li>
+                                <li ng-repeat="resource in project.clouds"><span class="elem item-type repo"></span> {{ resource.name }}</li>
                             </ul>
                         </td>
                         <td class="col-xs-2 gray-text">
                             <ul class="standart-list">
-                                <li ng-repeat="user in project.Users"><a href="">{{ user.Name }}</a></li>
+                                <li ng-repeat="user in project.users"><a href="">{{ user.native_name }}</a></li>
                             </ul>
                         </td>
                         <td class="col-xs-2 controls-ctn">
@@ -73,7 +74,7 @@
                                     <a href="#" class="conf" data-toggle="tooltip" data-placement="top" title="Settings"><i class="fa fa-cog"></i></a>
                                 </li>
                                 <li>
-                                    <a href="#" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
+                                    <a href="" ng-click="controller.remove(project)" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
                                 </li>
                             </ul>
                         </td>
@@ -103,4 +104,4 @@
 </div>
 <!-- /app-block -->
 
-<ng-include src="partials/app-footer.html"></ng-include>
+<ng-include src="'/views/partials/app-footer.html'"></ng-include>
