@@ -11,10 +11,10 @@
                     <form action="" ng-submit="controller.update()">
                         <div class="row form-field">
                             <div class="col-xs-8">
-                                <input type="text" class="form-control" placeholder="New Project name" ng-model="controller.project_new_name">
+                                <input type="text" class="form-control" placeholder="New Project name" ng-model="controller.project_new_name" required>
                             </div>
                             <div class="col-xs-2">
-                                <button class="btn btn-primary" type="submit">Save</button>
+                                <button class="btn btn-primary ng-hide" ng-show="controller.project_new_name.length" type="submit">Save</button>
                             </div>
                         </div>
                     </form>
