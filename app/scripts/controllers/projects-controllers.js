@@ -59,6 +59,7 @@
 
     vm.activeTab = 'eventlog';
     vm.project = projectsService.projectResource.get({projectUUID: $routeParams.uuid}, initProjectElemetns);
+    vm.update = update;
 
     function initProjectElemetns(project) {
       vm.users = usersService.userResource.query({project: project.name});
@@ -67,6 +68,11 @@
       customersService.customerResource.query({name: project.customer_name}, function(list) {
         vm.customer=list[0];
       });
+    }
+
+    function update() {
+      vm.project.name = vm.project_new_name;
+      vm.project.$update();
     }
 
   }

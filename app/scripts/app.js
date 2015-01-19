@@ -28,6 +28,10 @@ angular
         templateUrl: 'views/project.html',
       })
 
+      .when('/projects/:uuid/edit/', {
+        templateUrl: 'views/project-edit.html',
+      })
+
       .when('/add-project/', {
         templateUrl: 'views/add-project.html',
       })
