@@ -44,21 +44,30 @@
   }
 
   angular.module('ncsaas')
-    .controller('ProjectController', ['$location', '$routeParams', 'projectsService', 'usersService', ProjectController]);
+    .controller('ProjectController', [
+      '$location',
+      '$routeParams',
+      'projectsService',
+      'usersService',
+      'cloudsService',
+      'customersService',
+      ProjectController
+    ]);
 
-  function ProjectController($location, $routeParams, projectsService, usersService) {
+  function ProjectController($location, $routeParams, projectsService, usersService, cloudsService, customersService) {
     var vm = this;
 
-    // get project
-    vm.project = projectsService.projectResource.get({projectUUID: $routeParams.uuid});
-
-    // get users
-    vm.project.$promise.then(function(data){
-      vm.users = usersService.userResource.query({project: data.name, isArray: true});
-    });
-
-    // tabs
     vm.activeTab = 'eventlog';
+    vm.project = projectsService.projectResource.get({projectUUID: $routeParams.uuid}, initProjectSubLists);
+
+    function initProjectSubLists(project) {
+      vm.users = usersService.userResource.query({project: project.name});
+      vm.clouds = cloudsService.cloudResource.query({project: project.uuid});
+      vm.customer;
+      customersService.customerResource.query({name: project.customer_name}, function(list) {
+        vm.customer=list[0];
+      });
+    }
 
   }
 

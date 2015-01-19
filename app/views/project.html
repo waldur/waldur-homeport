@@ -7,12 +7,12 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-10 profile-info">
-                <h1 class="profile-name">Project Gz-900</h1>
-                <a href="{{ url_for('customer') }}" class="customer-link">Mihail Yakimenko</a>
+                <h1 class="profile-name">{{ controller.project.name }}</h1>
+                <a href="/#/customers/{{ controller.customer.uuid }}/" class="customer-link">{{ controller.customer.name }}</a>
                 <div class="stats">
                     <div class="row">
                         <div class="col-xs-4">
-                            <span class="stat-int">2</span>
+                            <span class="stat-int">{{ controller.clouds.length }}</span>
                             <span class="stat-description">Resources</span>
                         </div>
                         <div class="col-xs-4">
@@ -25,7 +25,7 @@
             <div class="col-xs-2">
                 <ul class="controls pull-right">
                     <li>
-                        <a href="{{ url_for('user_edit') }}" class="crud-controls"><i class="fa fa-cog"></i> edit project</a>
+                        <a href="" class="crud-controls"><i class="fa fa-cog"></i> edit project</a>
                     </li>
                 </ul>
             </div>
@@ -46,8 +46,8 @@
                         <span class="label label-success">11</span>
                     </a>
                 </li>
-                <li ng-class="{'active': controller.activeTab === 'projects'}">
-                    <a href="" role="tab" data-toggle="tab" ng-click="controller.activeTab = 'projects'">
+                <li ng-class="{'active': controller.activeTab === 'resources'}">
+                    <a href="" role="tab" data-toggle="tab" ng-click="controller.activeTab = 'resources'">
                         Resources
                         <span class="label label-success">12</span>
                     </a>
@@ -399,7 +399,7 @@
         </div>
         <!-- /tab -->
         <!-- tab -->
-        <div ng-class="{'active': controller.activeTab === 'eventlog'}" id="projects" ng-switch-when="projects">
+        <div ng-class="{'active': controller.activeTab === 'resources'}" id="projects" ng-switch-when="resources">
             <!-- app-block -->
             <section class="app-block">
                 <div class="container-fluid">
@@ -434,205 +434,18 @@
                     <div class="white-box">
                         <div class="app-items-list">
                             <table class="items-table">
-                                <th class="name">
-                                    <a href="" class="sort">Name</a>
-                                </th>
-                                <th class="type">
-                                    <a href="" class="sort">Type</a>
-                                </th>
-                                <th></th>
                                 <tr>
-                                    <td class="name">        
-                                        <h2 class="item-title">Resource Name</h2>
-                                    </td>
-                                    <td class="type">
-                                        <span class="elem item-type vm">repository on GitHub</span>
-                                    </td>
-                                    <td class="col-xs-2 controls-ctn">
-                                        <ul class="controls pull-right">
-                                            <li>
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Poweroff"><i class="fa fa-power-off"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Restart"><i class="fa fa-refresh"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="#" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
-                                            </li>
-                                        </ul>
-                                    </td>
+                                    <th class="name">
+                                        <a href="" class="sort">Name</a>
+                                    </th>
+                                    <th class="type">
+                                        <a href="" class="sort">Type</a>
+                                    </th>
+                                    <th></th>
                                 </tr>
-                                <tr>
+                                <tr ng-repeat="resource in controller.clouds">
                                     <td class="name">        
-                                        <h2 class="item-title">Resource Name</h2>
-                                    </td>
-                                    <td class="type">
-                                        <span class="elem item-type vm">repository on GitHub</span>
-                                    </td>
-                                    <td class="col-xs-2 controls-ctn">
-                                        <ul class="controls pull-right">
-                                            <li>
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Poweroff"><i class="fa fa-power-off"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Restart"><i class="fa fa-refresh"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="#" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="name">        
-                                        <h2 class="item-title">Resource Name</h2>
-                                    </td>
-                                    <td class="type">
-                                        <span class="elem item-type vm">repository on GitHub</span>
-                                    </td>
-                                    <td class="col-xs-2 controls-ctn">
-                                        <ul class="controls pull-right">
-                                            <li>
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Poweroff"><i class="fa fa-power-off"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Restart"><i class="fa fa-refresh"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="#" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="name">        
-                                        <h2 class="item-title">Resource Name</h2>
-                                    </td>
-                                    <td class="type">
-                                        <span class="elem item-type vm">repository on GitHub</span>
-                                    </td>
-                                    <td class="col-xs-2 controls-ctn">
-                                        <ul class="controls pull-right">
-                                            <li>
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Poweroff"><i class="fa fa-power-off"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Restart"><i class="fa fa-refresh"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="#" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="name">        
-                                        <h2 class="item-title">Resource Name</h2>
-                                    </td>
-                                    <td class="type">
-                                        <span class="elem item-type vm">repository on GitHub</span>
-                                    </td>
-                                    <td class="col-xs-2 controls-ctn">
-                                        <ul class="controls pull-right">
-                                            <li>
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Poweroff"><i class="fa fa-power-off"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Restart"><i class="fa fa-refresh"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="#" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="name">        
-                                        <h2 class="item-title">Resource Name</h2>
-                                    </td>
-                                    <td class="type">
-                                        <span class="elem item-type vm">repository on GitHub</span>
-                                    </td>
-                                    <td class="col-xs-2 controls-ctn">
-                                        <ul class="controls pull-right">
-                                            <li>
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Poweroff"><i class="fa fa-power-off"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Restart"><i class="fa fa-refresh"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="#" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="name">        
-                                        <h2 class="item-title">Resource Name</h2>
-                                    </td>
-                                    <td class="type">
-                                        <span class="elem item-type vm">repository on GitHub</span>
-                                    </td>
-                                    <td class="col-xs-2 controls-ctn">
-                                        <ul class="controls pull-right">
-                                            <li>
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Poweroff"><i class="fa fa-power-off"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Restart"><i class="fa fa-refresh"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="#" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="name">        
-                                        <h2 class="item-title">Resource Name</h2>
-                                    </td>
-                                    <td class="type">
-                                        <span class="elem item-type vm">repository on GitHub</span>
-                                    </td>
-                                    <td class="col-xs-2 controls-ctn">
-                                        <ul class="controls pull-right">
-                                            <li>
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Poweroff"><i class="fa fa-power-off"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Restart"><i class="fa fa-refresh"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="#" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="name">        
-                                        <h2 class="item-title">Resource Name</h2>
-                                    </td>
-                                    <td class="type">
-                                        <span class="elem item-type vm">repository on GitHub</span>
-                                    </td>
-                                    <td class="col-xs-2 controls-ctn">
-                                        <ul class="controls pull-right">
-                                            <li>
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Poweroff"><i class="fa fa-power-off"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Restart"><i class="fa fa-refresh"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="#" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="name">        
-                                        <h2 class="item-title">Resource Name</h2>
+                                        <h2 class="item-title">{{ resource.name }}</h2>
                                     </td>
                                     <td class="type">
                                         <span class="elem item-type vm">repository on GitHub</span>
@@ -677,7 +490,7 @@
         </div>
         <!-- /tab -->
         <!-- tab -->
-        <div ng-class="{'active': controller.activeTab === 'eventlog'}" id="users" ng-switch-when="users">
+        <div ng-class="{'active': controller.activeTab === 'users'}" id="users" ng-switch-when="users">
             <!-- app-block -->
             <section class="app-block">
                 <div class="container-fluid">
