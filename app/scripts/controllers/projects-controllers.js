@@ -58,9 +58,9 @@
     var vm = this;
 
     vm.activeTab = 'eventlog';
-    vm.project = projectsService.projectResource.get({projectUUID: $routeParams.uuid}, initProjectSubLists);
+    vm.project = projectsService.projectResource.get({projectUUID: $routeParams.uuid}, initProjectElemetns);
 
-    function initProjectSubLists(project) {
+    function initProjectElemetns(project) {
       vm.users = usersService.userResource.query({project: project.name});
       vm.clouds = cloudsService.cloudResource.query({project: project.uuid});
       vm.customer;
