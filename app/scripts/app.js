@@ -17,7 +17,7 @@ angular
 
       .when('/login/', {
         templateUrl: 'views/login.html',
-        controller: 'AuthCtrl'
+        controller: 'AuthController'
       })
 
       .when('/projects/', {

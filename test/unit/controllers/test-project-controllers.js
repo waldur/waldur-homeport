@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Controller: ProjectsController', function() {
+describe('Controller: ProjectListController', function() {
   var controller, $httpBackend, projectsUrl, usersUrl, cloudsUrl, customersUrl, location, backendProject,
     controllerCreator;
 
@@ -71,7 +71,7 @@ describe('Controller: ProjectsController', function() {
     $httpBackend.expectGET(projectsUrl);
     $httpBackend.expectGET(usersUrl + '?project=' + backendProject.name);
 
-    controller = controllerCreator('ProjectsController');
+    controller = controllerCreator('ProjectListController');
 
     $httpBackend.flush();
     backendProject.users = [];
@@ -97,7 +97,8 @@ describe('Controller: ProjectsController', function() {
     $httpBackend.expectGET(expectedCloudsUrl);
     $httpBackend.expectGET(expectedCustomerUrl);
 
-    controller = controllerCreator('ProjectController', {$routeParams: {uuid: '6529589b43f741608139f85fd243de07'}});
+    controller = controllerCreator(
+      'ProjectDetailUpdateController', {$routeParams: {uuid: '6529589b43f741608139f85fd243de07'}});
 
     $httpBackend.flush();
   });
@@ -107,7 +108,7 @@ describe('Controller: ProjectsController', function() {
   //   $httpBackend.when('DELETE', backendProject.url).respond(409);
   //   $httpBackend.expectDELETE(backendProject.url);
 
-  //   controller = controllerCreator('ProjectsController');
+  //   controller = controllerCreator('ProjectListController');
   //   controller.remove(backendProject);
 
   //   $httpBackend.flush();

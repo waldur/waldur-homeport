@@ -2,9 +2,9 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('ProjectsController', ['$location', 'projectsService', 'usersService', ProjectsController]);
+    .controller('ProjectListController', ['$location', 'projectsService', 'usersService', ProjectListController]);
 
-  function ProjectsController($location, projectsService, usersService) {
+  function ProjectListController($location, projectsService, usersService) {
     var vm = this;
 
     vm.list = projectsService.projectResource.query(initProjectUsers);
@@ -28,9 +28,9 @@
   }
 
   angular.module('ncsaas')
-    .controller('AddProjectsController', ['$location', 'projectsService', 'customersService', AddProjectsController]);
+    .controller('ProjectAddController', ['$location', 'projectsService', 'customersService', ProjectAddController]);
 
-  function AddProjectsController($location, projectsService, customersService) {
+  function ProjectAddController($location, projectsService, customersService) {
     var vm = this;
 
     vm.project = new projectsService.projectResource();
@@ -44,17 +44,18 @@
   }
 
   angular.module('ncsaas')
-    .controller('ProjectController', [
+    .controller('ProjectDetailUpdateController', [
       '$location',
       '$routeParams',
       'projectsService',
       'usersService',
       'cloudsService',
       'customersService',
-      ProjectController
+      ProjectDetailUpdateController
     ]);
 
-  function ProjectController($location, $routeParams, projectsService, usersService, cloudsService, customersService) {
+  function ProjectDetailUpdateController(
+      $location, $routeParams, projectsService, usersService, cloudsService, customersService) {
     var vm = this;
 
     vm.activeTab = 'eventlog';
