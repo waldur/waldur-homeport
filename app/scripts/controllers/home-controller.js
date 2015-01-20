@@ -5,7 +5,7 @@
     .controller('HomeController', ['$rootScope', HomeController]);
 
   function HomeController($rootScope) {
-    $rootScope.bodyClass = true;
+    $rootScope.bodyClass = 'site-body';
   }
 
 })();
