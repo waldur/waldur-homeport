@@ -64,14 +64,17 @@
     function initProjectElemetns(project) {
       vm.users = usersService.userResource.query({project: project.name});
       vm.clouds = cloudsService.cloudResource.query({project: project.uuid});
-      vm.customer;
+      /*jshint camelcase: false */
       customersService.customerResource.query({name: project.customer_name}, function(list) {
-        vm.customer=list[0];
+        vm.customer = list[0];
       });
+      /*jshint camelcase: true */
     }
 
     function update() {
+      /* jshint camelcase: false */
       vm.project.name = vm.project_new_name;
+      /* jshint camelcase: true */
       vm.project.$update();
     }
 

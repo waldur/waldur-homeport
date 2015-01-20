@@ -1,7 +1,8 @@
 'use strict';
 
 describe('Controller: ProjectsController', function() {
-  var controller, $httpBackend, projectsUrl, usersUrl, cloudsUrl, location, backendProject, controllerCreator;
+  var controller, $httpBackend, projectsUrl, usersUrl, cloudsUrl, customersUrl, location, backendProject,
+    controllerCreator;
 
   // load the controller's module
   beforeEach(module('ncsaas'));
@@ -16,6 +17,7 @@ describe('Controller: ProjectsController', function() {
     projectsUrl = ENV.apiEndpoint + 'api/projects/';
     usersUrl = ENV.apiEndpoint + 'api/users/';
     cloudsUrl = ENV.apiEndpoint + 'api/clouds/';
+    customersUrl = ENV.apiEndpoint + 'api/customers/';
 
     /*jshint camelcase: false */
     backendProject = {
@@ -23,7 +25,7 @@ describe('Controller: ProjectsController', function() {
       uuid: '6529589b43f741608139f85fd243de07',
       name: 'ProjectEKppM',
       customer: 'http://127.0.0.1:8080/api/customers/cbd39be4fda04cbeac80ea6a066da896/',
-      customer_name: 'Customer khUviUm',
+      customer_name: 'CustomerkhUviUm',
       customer_native_name: 'Native: Customer khUviUm',
       customer_abbreviation: 'MLLyGP',
       project_groups: [],
@@ -63,7 +65,7 @@ describe('Controller: ProjectsController', function() {
 
   it('list returns all projects', function() {
     var expectedUsersUrl = usersUrl + '?project=' + backendProject.name;
-    
+
     $httpBackend.when('GET', expectedUsersUrl).respond(200, []);
     $httpBackend.when('GET', projectsUrl).respond(200, [backendProject]);
     $httpBackend.expectGET(projectsUrl);
@@ -76,19 +78,28 @@ describe('Controller: ProjectsController', function() {
     expect(controller.list[0].name).toBe(backendProject.name);
   });
 
-  it('return a project', function() {
-    // var expectedCloudsUrl = cloudsUrl + '?project=' + backendProject.uuid;
-    // $httpBackend.when('GET', expectedCloudsUrl).respond(200, []);
+  // This test have to be separated to different tests
+  it('project detail update controller return full information about project', function() {
+    /*jshint camelcase: false */
+    var expectedUsersUrl = usersUrl + '?project=' + backendProject.name,
+    expectedCustomerUrl = customersUrl + '?name=' + backendProject.customer_name,
+    expectedProjectUrl = projectsUrl + backendProject.uuid + '/',
+    expectedCloudsUrl = cloudsUrl + '?project=' + backendProject.uuid,
+    backendCustomer = {name: 'customer'};
 
-    $httpBackend.when('GET', projectsUrl + '6529589b43f741608139f85fd243de07').respond(200, backendProject);
-    $httpBackend.expectGET(projectsUrl  + '6529589b43f741608139f85fd243de07');
-    // $httpBackend.expectGET(cloudsUrl + '?project=' + backendProject.uuid);
+    $httpBackend.when('GET', expectedProjectUrl).respond(200, backendProject);
+    $httpBackend.when('GET', expectedCustomerUrl).respond(200, [backendCustomer]);
+    $httpBackend.when('GET', expectedCloudsUrl).respond(200, []);
+    $httpBackend.when('GET', expectedUsersUrl).respond(200, []);
 
-    controller = controllerCreator('ProjectController');
+    $httpBackend.expectGET(expectedProjectUrl);
+    $httpBackend.expectGET(expectedUsersUrl);
+    $httpBackend.expectGET(expectedCloudsUrl);
+    $httpBackend.expectGET(expectedCustomerUrl);
+
+    controller = controllerCreator('ProjectController', {$routeParams: {uuid: '6529589b43f741608139f85fd243de07'}});
 
     $httpBackend.flush();
-    // backendProject.users = [];
-    // expect(controller.list[0].uuid).toBe(backendProject.uuid);
   });
 
   // TODO: use real mocked resource object in this test
