@@ -5,6 +5,7 @@
     .controller('ProjectListController', ['$location', 'projectsService', 'usersService', ProjectListController]);
 
   function ProjectListController($location, projectsService, usersService) {
+
     var vm = this;
 
     vm.list = projectsService.projectResource.query(initProjectUsers);
