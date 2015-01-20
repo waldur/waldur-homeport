@@ -2,9 +2,9 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('ProjectsController', ['$location', 'projectsService', 'usersService', ProjectsController]);
+    .controller('ProjectListController', ['$location', 'projectsService', 'usersService', ProjectListController]);
 
-  function ProjectsController($location, projectsService, usersService) {
+  function ProjectListController($location, projectsService, usersService) {
     var vm = this;
 
     vm.list = projectsService.projectResource.query(initProjectUsers);
@@ -28,9 +28,9 @@
   }
 
   angular.module('ncsaas')
-    .controller('AddProjectsController', ['$location', 'projectsService', 'customersService', AddProjectsController]);
+    .controller('ProjectAddController', ['$location', 'projectsService', 'customersService', ProjectAddController]);
 
-  function AddProjectsController($location, projectsService, customersService) {
+  function ProjectAddController($location, projectsService, customersService) {
     var vm = this;
 
     vm.project = new projectsService.projectResource();
@@ -39,6 +39,44 @@
 
     function save() {
       vm.project.$save();
+    }
+
+  }
+
+  angular.module('ncsaas')
+    .controller('ProjectDetailUpdateController', [
+      '$location',
+      '$routeParams',
+      'projectsService',
+      'usersService',
+      'cloudsService',
+      'customersService',
+      ProjectDetailUpdateController
+    ]);
+
+  function ProjectDetailUpdateController(
+      $location, $routeParams, projectsService, usersService, cloudsService, customersService) {
+    var vm = this;
+
+    vm.activeTab = 'eventlog';
+    vm.project = projectsService.projectResource.get({projectUUID: $routeParams.uuid}, initProjectElemetns);
+    vm.update = update;
+
+    function initProjectElemetns(project) {
+      vm.users = usersService.userResource.query({project: project.name});
+      vm.clouds = cloudsService.cloudResource.query({project: project.uuid});
+      /*jshint camelcase: false */
+      customersService.customerResource.query({name: project.customer_name}, function(list) {
+        vm.customer = list[0];
+      });
+      /*jshint camelcase: true */
+    }
+
+    function update() {
+      /* jshint camelcase: false */
+      vm.project.name = vm.project_new_name;
+      /* jshint camelcase: true */
+      vm.project.$update();
     }
 
   }

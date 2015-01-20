@@ -2,9 +2,9 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('auth', ['ENV', '$http', '$cookies', auth]);
+    .service('authService', ['ENV', '$http', '$cookies', authService]);
 
-  function auth(ENV, $http, $cookies) {
+  function authService(ENV, $http, $cookies) {
     /*jshint validthis: true */
     var vm = this;
 

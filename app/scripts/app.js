@@ -17,11 +17,19 @@ angular
 
       .when('/login/', {
         templateUrl: 'views/login.html',
-        controller: 'AuthCtrl'
+        controller: 'AuthController'
       })
 
       .when('/projects/', {
         templateUrl: 'views/projects.html',
+      })
+
+      .when('/projects/:uuid/', {
+        templateUrl: 'views/project.html',
+      })
+
+      .when('/projects/:uuid/edit/', {
+        templateUrl: 'views/project-edit.html',
       })
 
       .when('/add-project/', {

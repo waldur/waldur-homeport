@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Controller: AuthCtrl', function() {
+describe('Controller: AuthController', function() {
   var controller, $httpBackend, signinUrl, location;
 
   // load the controller's module
@@ -9,7 +9,7 @@ describe('Controller: AuthCtrl', function() {
   // Initialize the controller and mocked backend
   beforeEach(inject(function($controller, $injector, $location, ENV) {
     location = $location;
-    controller = $controller('AuthCtrl');
+    controller = $controller('AuthController');
 
     $httpBackend = $injector.get('$httpBackend');
 
