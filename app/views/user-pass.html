@@ -1,2 +1,1314 @@
 <ng-include src="'/views/partials/app-header.html'"></ng-include>
+
+<!-- profile-view -->
+<div class="profile-view">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-1">
+                <img src="../../static/images/887178.jpg" class="profile-pic" alt="John Doe">
+            </div>
+            <div class="col-xs-7 profile-info">
+                <div class="edit-forms user-pass">
+                    <form action="">
+                        <div class="row form-field">
+                            <div class="col-xs-8">
+                                <label for="">New password</label>
+                                <input type="password" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row form-field">
+                            <div class="col-xs-8">
+                                <label for="">Confirm new password</label>
+                                <input type="password" class="form-control">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="stats">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <span class="stat-int">4</span>
+                            <span class="stat-description">Active projects</span>
+                        </div>
+                        <div class="col-xs-4">
+                            <span class="stat-int">2</span>
+                            <span class="stat-description">Customers</span>
+                        </div>
+                        <div class="col-xs-4">
+                            <span class="stat-int">7</span>
+                            <span class="stat-description">SSH keys</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <ul class="controls pull-right">
+                    <li>
+                        <a href="../edit/index.html" class="crud-controls"><i class="fa fa-cog"></i> edit profile</a>
+                    </li>
+                    <li>
+                        <a href="../index.html" class="crud-controls active"><i class="fa fa-cog"></i> change password</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /profile-view -->
+
+<!-- app-tabs -->
+<div class="app-tabs">
+    <!-- tabs-nav -->
+    <div class="tabs-container">
+        <div class="container-fluid">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="active">
+                    <a href="#eventlog" role="tab" data-toggle="tab">
+                        Events
+                        <span class="label label-success">11</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#projects" role="tab" data-toggle="tab">
+                        Projects
+                        <span class="label label-success">12</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#customers" role="tab" data-toggle="tab">
+                        Customers
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#keys" role="tab" data-toggle="tab">
+                        Keys
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- /tabs-nav -->
+    <!-- tabs-content -->
+    <div class="tab-content">
+        <!-- tab -->
+        <div class="tab-pane active" id="eventlog">
+            <!-- app-block -->
+            <section class="app-block">
+                <div class="container-fluid">
+                    <!-- white-box -->
+                    <div class="white-box">
+                        <div class="app-title-line">
+                            <div class="row">
+                                <div class="col-xs-12 first-line">
+                                    <ul class="sort">
+                                        <li><a href="#" class="active">5</a></li>
+                                        <li><a href="#">15</a></li>
+                                        <li><a href="#">24</a></li>
+                                        <li class="divid">
+                                            <div class="search" data-role="search-box">
+                                                <input type="text">
+                                                <button class="search-button">
+                                                    <i class="fa fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /white-box -->
+                </div>
+            </section>
+            <!-- /app-block -->
+            <!-- app-block -->
+            <section class="app-block">
+                <div class="container-fluid">
+                    <div class="white-box">
+                       <div class="app-items-list">
+                            <table class="items-table">
+                                <!-- event -->
+                                <tr class="event">
+                                    <td class="circle">
+                                        <div class="circle-decor"></div>
+                                    </td>
+                                    <td>
+                                        <h2 class="item-title">Update something</h2>
+                                        <div class="content">
+                                            <div class="gray-text">
+                                                <p>
+                                                    Description of an event. AWS VM john.doe.com was is suffering from a Heartbleed bug.
+                                                </p>
+                                            </div>
+                                            <ul class="controls">
+                                                <li>
+                                                    <a href="#" class="event-action">Send to email</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                    <td class="col-xs-2 controls-ctn">
+                                        <ul class="controls pull-right">
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Favorite" class="kit-icon star filled"></a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <!-- /event -->
+                                <!-- event -->
+                                <tr class="event">
+                                    <td class="circle">
+                                        <div class="circle-decor"></div>
+                                    </td>
+                                    <td>
+                                        <h2 class="item-title">Update something</h2>
+                                        <div class="content">
+                                            <div class="gray-text">
+                                                <p>
+                                                    Description of an event. AWS VM john.doe.com was is suffering from a Heartbleed bug.
+                                                </p>
+                                            </div>
+                                            <ul class="controls">
+                                                <li>
+                                                    <a href="#" class="event-action">Send to email</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                    <td class="col-xs-2 controls-ctn">
+                                        <ul class="controls pull-right">
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Favorite" class="kit-icon star filled"></a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <!-- /event -->
+                                <!-- event -->
+                                <tr class="event">
+                                    <td class="circle">
+                                        <div class="circle-decor"></div>
+                                    </td>
+                                    <td>
+                                        <h2 class="item-title">Update something</h2>
+                                        <div class="content">
+                                            <div class="gray-text">
+                                                <p>
+                                                    Description of an event. AWS VM john.doe.com was is suffering from a Heartbleed bug.
+                                                </p>
+                                            </div>
+                                            <ul class="controls">
+                                                <li>
+                                                    <a href="#" class="event-action">Send to email</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                    <td class="col-xs-2 controls-ctn">
+                                        <ul class="controls pull-right">
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Favorite" class="kit-icon star filled"></a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <!-- /event -->
+                                <!-- event -->
+                                <tr class="event">
+                                    <td class="circle">
+                                        <div class="circle-decor"></div>
+                                    </td>
+                                    <td>
+                                        <h2 class="item-title">Update something</h2>
+                                        <div class="content">
+                                            <div class="gray-text">
+                                                <p>
+                                                    Description of an event. AWS VM john.doe.com was is suffering from a Heartbleed bug.
+                                                </p>
+                                            </div>
+                                            <ul class="controls">
+                                                <li>
+                                                    <a href="#" class="event-action">Send to email</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                    <td class="col-xs-2 controls-ctn">
+                                        <ul class="controls pull-right">
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Favorite" class="kit-icon star filled"></a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <!-- /event -->
+                                <!-- event -->
+                                <tr class="event">
+                                    <td class="circle">
+                                        <div class="circle-decor"></div>
+                                    </td>
+                                    <td>
+                                        <h2 class="item-title">Update something</h2>
+                                        <div class="content">
+                                            <div class="gray-text">
+                                                <p>
+                                                    Description of an event. AWS VM john.doe.com was is suffering from a Heartbleed bug.
+                                                </p>
+                                            </div>
+                                            <ul class="controls">
+                                                <li>
+                                                    <a href="#" class="event-action">Send to email</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                    <td class="col-xs-2 controls-ctn">
+                                        <ul class="controls pull-right">
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Favorite" class="kit-icon star filled"></a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <!-- /event -->
+                                <!-- event -->
+                                <tr class="event">
+                                    <td class="circle">
+                                        <div class="circle-decor"></div>
+                                    </td>
+                                    <td>
+                                        <h2 class="item-title">Update something</h2>
+                                        <div class="content">
+                                            <div class="gray-text">
+                                                <p>
+                                                    Description of an event. AWS VM john.doe.com was is suffering from a Heartbleed bug.
+                                                </p>
+                                            </div>
+                                            <ul class="controls">
+                                                <li>
+                                                    <a href="#" class="event-action">Send to email</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                    <td class="col-xs-2 controls-ctn">
+                                        <ul class="controls pull-right">
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Favorite" class="kit-icon star filled"></a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <!-- /event -->
+                                <!-- event -->
+                                <tr class="event">
+                                    <td class="circle">
+                                        <div class="circle-decor"></div>
+                                    </td>
+                                    <td>
+                                        <h2 class="item-title">Update something</h2>
+                                        <div class="content">
+                                            <div class="gray-text">
+                                                <p>
+                                                    Description of an event. AWS VM john.doe.com was is suffering from a Heartbleed bug.
+                                                </p>
+                                            </div>
+                                            <ul class="controls">
+                                                <li>
+                                                    <a href="#" class="event-action">Send to email</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                    <td class="col-xs-2 controls-ctn">
+                                        <ul class="controls pull-right">
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Favorite" class="kit-icon star filled"></a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <!-- /event -->
+                                <!-- event -->
+                                <tr class="event">
+                                    <td class="circle">
+                                        <div class="circle-decor"></div>
+                                    </td>
+                                    <td>
+                                        <h2 class="item-title">Update something</h2>
+                                        <div class="content">
+                                            <div class="gray-text">
+                                                <p>
+                                                    Description of an event. AWS VM john.doe.com was is suffering from a Heartbleed bug.
+                                                </p>
+                                            </div>
+                                            <ul class="controls">
+                                                <li>
+                                                    <a href="#" class="event-action">Send to email</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                    <td class="col-xs-2 controls-ctn">
+                                        <ul class="controls pull-right">
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Favorite" class="kit-icon star filled"></a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <!-- /event -->
+                                <!-- event -->
+                                <tr class="event">
+                                    <td class="circle">
+                                        <div class="circle-decor"></div>
+                                    </td>
+                                    <td>
+                                        <h2 class="item-title">Update something</h2>
+                                        <div class="content">
+                                            <div class="gray-text">
+                                                <p>
+                                                    Description of an event. AWS VM john.doe.com was is suffering from a Heartbleed bug.
+                                                </p>
+                                            </div>
+                                            <ul class="controls">
+                                                <li>
+                                                    <a href="#" class="event-action">Send to email</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                    <td class="col-xs-2 controls-ctn">
+                                        <ul class="controls pull-right">
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Favorite" class="kit-icon star filled"></a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <!-- /event -->
+                                <!-- event -->
+                                <tr class="event">
+                                    <td class="circle">
+                                        <div class="circle-decor"></div>
+                                    </td>
+                                    <td>
+                                        <h2 class="item-title">Update something</h2>
+                                        <div class="content">
+                                            <div class="gray-text">
+                                                <p>
+                                                    Description of an event. AWS VM john.doe.com was is suffering from a Heartbleed bug.
+                                                </p>
+                                            </div>
+                                            <ul class="controls">
+                                                <li>
+                                                    <a href="#" class="event-action">Send to email</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                    <td class="col-xs-2 controls-ctn">
+                                        <ul class="controls pull-right">
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Favorite" class="kit-icon star filled"></a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <!-- /event -->
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- /app-block -->
+        </div>
+        <!-- /tab -->
+        <div class="tab-pane" id="projects">
+            <!-- app-block -->
+            <section class="app-block">
+                <div class="container-fluid">
+                    <div class="white-box">
+                        <div class="app-title-line">
+                            <div class="row">
+                                <div class="col-xs-12 first-line">
+                                    <ul class="sort">
+                                        <li><a href="#" class="active">5</a></li>
+                                        <li><a href="#">15</a></li>
+                                        <li><a href="#">24</a></li>
+                                        <li class="divid">
+                                            <div class="search" data-role="search-box">
+                                                <input type="text">
+                                                <button class="search-button">
+                                                    <i class="fa fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <div class="crud-box pull-right"><a href="#" class="crud-controls"><i class="fa fa-plus"></i> add project</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- /app-block -->
+            <!-- app-block -->
+            <section class="app-block">
+                <div class="container-fluid">
+                    <div class="white-box">
+                        <div class="app-items-list">
+                            <table class="items-table">
+                                <th class="name">
+                                    <a href="" class="sort">Name</a>
+                                </th>
+                                <th></th>
+                                <tr>
+                                    <td class="name">
+                                        <h2 class="item-title"><a href="../../project/index.html">G48s-11</a></h2>
+                                        <p class="gray-text">
+                                            Here goes project description.
+                                        </p>
+                                    </td>
+                                    <td class="col-xs-3 gray-text">
+                                        <ul class="standart-list">
+                                            <li><span class="elem item-type repo"></span> Repo</li>
+                                            <li><span class="elem item-type vm"></span> VM for this</li>
+                                        </ul>
+                                    </td>
+                                    <td class="col-xs-2 gray-text">
+                                        <ul class="standart-list">
+                                            <li><a href="../index.html">Mihail Yakimenko</a></li>
+                                            <li><a href="../index.html">Ilja Livenson</a></li>
+                                        </ul>
+                                    </td>
+                                    <td class="col-xs-2 controls-ctn">
+                                        <ul class="controls pull-right">
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Favorite" class="kit-icon star"></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="conf" data-toggle="tooltip" data-placement="top" title="Archive"><i class="glyphicon glyphicon-compressed"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="conf" data-toggle="tooltip" data-placement="top" title="Settings"><i class="fa fa-cog"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="name">
+                                        <h2 class="item-title"><a href="../../project/index.html">G48s-11</a></h2>
+                                        <p class="gray-text">
+                                            Here goes project description.
+                                        </p>
+                                    </td>
+                                    <td class="col-xs-3 gray-text">
+                                        <ul class="standart-list">
+                                            <li><span class="elem item-type repo"></span> Repo</li>
+                                            <li><span class="elem item-type vm"></span> VM for this</li>
+                                        </ul>
+                                    </td>
+                                    <td class="col-xs-2 gray-text">
+                                        <ul class="standart-list">
+                                            <li><a href="../index.html">Mihail Yakimenko</a></li>
+                                            <li><a href="../index.html">Ilja Livenson</a></li>
+                                        </ul>
+                                    </td>
+                                    <td class="col-xs-2 controls-ctn">
+                                        <ul class="controls pull-right">
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Favorite" class="kit-icon star"></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="conf" data-toggle="tooltip" data-placement="top" title="Archive"><i class="glyphicon glyphicon-compressed"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="conf" data-toggle="tooltip" data-placement="top" title="Settings"><i class="fa fa-cog"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="name">
+                                        <h2 class="item-title"><a href="../../project/index.html">G48s-11</a></h2>
+                                        <p class="gray-text">
+                                            Here goes project description.
+                                        </p>
+                                    </td>
+                                    <td class="col-xs-3 gray-text">
+                                        <ul class="standart-list">
+                                            <li><span class="elem item-type repo"></span> Repo</li>
+                                            <li><span class="elem item-type vm"></span> VM for this</li>
+                                        </ul>
+                                    </td>
+                                    <td class="col-xs-2 gray-text">
+                                        <ul class="standart-list">
+                                            <li><a href="../index.html">Mihail Yakimenko</a></li>
+                                            <li><a href="../index.html">Ilja Livenson</a></li>
+                                        </ul>
+                                    </td>
+                                    <td class="col-xs-2 controls-ctn">
+                                        <ul class="controls pull-right">
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Favorite" class="kit-icon star"></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="conf" data-toggle="tooltip" data-placement="top" title="Archive"><i class="glyphicon glyphicon-compressed"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="conf" data-toggle="tooltip" data-placement="top" title="Settings"><i class="fa fa-cog"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="name">
+                                        <h2 class="item-title"><a href="../../project/index.html">G48s-11</a></h2>
+                                        <p class="gray-text">
+                                            Here goes project description.
+                                        </p>
+                                    </td>
+                                    <td class="col-xs-3 gray-text">
+                                        <ul class="standart-list">
+                                            <li><span class="elem item-type repo"></span> Repo</li>
+                                            <li><span class="elem item-type vm"></span> VM for this</li>
+                                        </ul>
+                                    </td>
+                                    <td class="col-xs-2 gray-text">
+                                        <ul class="standart-list">
+                                            <li><a href="../index.html">Mihail Yakimenko</a></li>
+                                            <li><a href="../index.html">Ilja Livenson</a></li>
+                                        </ul>
+                                    </td>
+                                    <td class="col-xs-2 controls-ctn">
+                                        <ul class="controls pull-right">
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Favorite" class="kit-icon star"></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="conf" data-toggle="tooltip" data-placement="top" title="Archive"><i class="glyphicon glyphicon-compressed"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="conf" data-toggle="tooltip" data-placement="top" title="Settings"><i class="fa fa-cog"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="name">
+                                        <h2 class="item-title"><a href="../../project/index.html">G48s-11</a></h2>
+                                        <p class="gray-text">
+                                            Here goes project description.
+                                        </p>
+                                    </td>
+                                    <td class="col-xs-3 gray-text">
+                                        <ul class="standart-list">
+                                            <li><span class="elem item-type repo"></span> Repo</li>
+                                            <li><span class="elem item-type vm"></span> VM for this</li>
+                                        </ul>
+                                    </td>
+                                    <td class="col-xs-2 gray-text">
+                                        <ul class="standart-list">
+                                            <li><a href="../index.html">Mihail Yakimenko</a></li>
+                                            <li><a href="../index.html">Ilja Livenson</a></li>
+                                        </ul>
+                                    </td>
+                                    <td class="col-xs-2 controls-ctn">
+                                        <ul class="controls pull-right">
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Favorite" class="kit-icon star"></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="conf" data-toggle="tooltip" data-placement="top" title="Archive"><i class="glyphicon glyphicon-compressed"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="conf" data-toggle="tooltip" data-placement="top" title="Settings"><i class="fa fa-cog"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="name">
+                                        <h2 class="item-title"><a href="../../project/index.html">G48s-11</a></h2>
+                                        <p class="gray-text">
+                                            Here goes project description.
+                                        </p>
+                                    </td>
+                                    <td class="col-xs-3 gray-text">
+                                        <ul class="standart-list">
+                                            <li><span class="elem item-type repo"></span> Repo</li>
+                                            <li><span class="elem item-type vm"></span> VM for this</li>
+                                        </ul>
+                                    </td>
+                                    <td class="col-xs-2 gray-text">
+                                        <ul class="standart-list">
+                                            <li><a href="../index.html">Mihail Yakimenko</a></li>
+                                            <li><a href="../index.html">Ilja Livenson</a></li>
+                                        </ul>
+                                    </td>
+                                    <td class="col-xs-2 controls-ctn">
+                                        <ul class="controls pull-right">
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Favorite" class="kit-icon star"></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="conf" data-toggle="tooltip" data-placement="top" title="Archive"><i class="glyphicon glyphicon-compressed"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="conf" data-toggle="tooltip" data-placement="top" title="Settings"><i class="fa fa-cog"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="name">
+                                        <h2 class="item-title"><a href="../../project/index.html">G48s-11</a></h2>
+                                        <p class="gray-text">
+                                            Here goes project description.
+                                        </p>
+                                    </td>
+                                    <td class="col-xs-3 gray-text">
+                                        <ul class="standart-list">
+                                            <li><span class="elem item-type repo"></span> Repo</li>
+                                            <li><span class="elem item-type vm"></span> VM for this</li>
+                                        </ul>
+                                    </td>
+                                    <td class="col-xs-2 gray-text">
+                                        <ul class="standart-list">
+                                            <li><a href="../index.html">Mihail Yakimenko</a></li>
+                                            <li><a href="../index.html">Ilja Livenson</a></li>
+                                        </ul>
+                                    </td>
+                                    <td class="col-xs-2 controls-ctn">
+                                        <ul class="controls pull-right">
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Favorite" class="kit-icon star"></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="conf" data-toggle="tooltip" data-placement="top" title="Archive"><i class="glyphicon glyphicon-compressed"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="conf" data-toggle="tooltip" data-placement="top" title="Settings"><i class="fa fa-cog"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="name">
+                                        <h2 class="item-title"><a href="../../project/index.html">G48s-11</a></h2>
+                                        <p class="gray-text">
+                                            Here goes project description.
+                                        </p>
+                                    </td>
+                                    <td class="col-xs-3 gray-text">
+                                        <ul class="standart-list">
+                                            <li><span class="elem item-type repo"></span> Repo</li>
+                                            <li><span class="elem item-type vm"></span> VM for this</li>
+                                        </ul>
+                                    </td>
+                                    <td class="col-xs-2 gray-text">
+                                        <ul class="standart-list">
+                                            <li><a href="../index.html">Mihail Yakimenko</a></li>
+                                            <li><a href="../index.html">Ilja Livenson</a></li>
+                                        </ul>
+                                    </td>
+                                    <td class="col-xs-2 controls-ctn">
+                                        <ul class="controls pull-right">
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Favorite" class="kit-icon star"></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="conf" data-toggle="tooltip" data-placement="top" title="Archive"><i class="glyphicon glyphicon-compressed"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="conf" data-toggle="tooltip" data-placement="top" title="Settings"><i class="fa fa-cog"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="name">
+                                        <h2 class="item-title"><a href="../../project/index.html">G48s-11</a></h2>
+                                        <p class="gray-text">
+                                            Here goes project description.
+                                        </p>
+                                    </td>
+                                    <td class="col-xs-3 gray-text">
+                                        <ul class="standart-list">
+                                            <li><span class="elem item-type repo"></span> Repo</li>
+                                            <li><span class="elem item-type vm"></span> VM for this</li>
+                                        </ul>
+                                    </td>
+                                    <td class="col-xs-2 gray-text">
+                                        <ul class="standart-list">
+                                            <li><a href="../index.html">Mihail Yakimenko</a></li>
+                                            <li><a href="../index.html">Ilja Livenson</a></li>
+                                        </ul>
+                                    </td>
+                                    <td class="col-xs-2 controls-ctn">
+                                        <ul class="controls pull-right">
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Favorite" class="kit-icon star"></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="conf" data-toggle="tooltip" data-placement="top" title="Archive"><i class="glyphicon glyphicon-compressed"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="conf" data-toggle="tooltip" data-placement="top" title="Settings"><i class="fa fa-cog"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="name">
+                                        <h2 class="item-title"><a href="../../project/index.html">G48s-11</a></h2>
+                                        <p class="gray-text">
+                                            Here goes project description.
+                                        </p>
+                                    </td>
+                                    <td class="col-xs-3 gray-text">
+                                        <ul class="standart-list">
+                                            <li><span class="elem item-type repo"></span> Repo</li>
+                                            <li><span class="elem item-type vm"></span> VM for this</li>
+                                        </ul>
+                                    </td>
+                                    <td class="col-xs-2 gray-text">
+                                        <ul class="standart-list">
+                                            <li><a href="../index.html">Mihail Yakimenko</a></li>
+                                            <li><a href="../index.html">Ilja Livenson</a></li>
+                                        </ul>
+                                    </td>
+                                    <td class="col-xs-2 controls-ctn">
+                                        <ul class="controls pull-right">
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Favorite" class="kit-icon star"></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="conf" data-toggle="tooltip" data-placement="top" title="Archive"><i class="glyphicon glyphicon-compressed"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="conf" data-toggle="tooltip" data-placement="top" title="Settings"><i class="fa fa-cog"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- /app-block -->
+            <!-- app-block -->
+            <div class="app-block">
+                <div class="container-fluid">
+                    <!-- pagination -->
+                    <div class="pagination">
+                        <ul>
+                            <li><a href="#" class="current">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                        </ul>
+                    </div>
+                    <!-- /pagination -->
+                </div>
+            </div>
+            <!-- /app-block -->
+        </div>
+        <div class="tab-pane" id="customers">
+            <!-- app-block -->
+            <section class="app-block">
+                <div class="container-fluid">
+                    <div class="white-box">
+                        <div class="app-title-line">
+                            <div class="row">
+                                <div class="col-xs-12 first-line">
+                                    <ul class="sort">
+                                        <li><a href="#" class="active">5</a></li>
+                                        <li><a href="#">15</a></li>
+                                        <li><a href="#">24</a></li>
+                                        <li class="divid">
+                                            <div class="search" data-role="search-box">
+                                                <input type="text">
+                                                <button class="search-button">
+                                                    <i class="fa fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <div class="crud-box pull-right"><a href="#" class="crud-controls"><i class="fa fa-plus"></i> add customer</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- /app-block -->
+            <!-- app-block -->
+            <section class="app-block">
+                <div class="container-fluid">
+                    <div class="white-box">
+                        <div class="app-items-list">
+                            <table class="items-table">
+                                <tr>
+                                    <th class="pic"></th>
+                                    <th class="name">
+                                        <a href="" class="sort">Name</a>
+                                    </th>
+                                    <th class="col-xs-3">
+                                        <a href="" class="sort">Services</a>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td class="col-xs-1 pic">
+                                        <a href="../../customer/index.html">
+                                            <img src="../../static/images/tmp/dojocat.jpg">
+                                        </a>
+                                    </td>
+                                    <td class="name">
+                                        <h2 class="item-title">
+                                            <a href="../../customer/index.html">Cooler Inc. PLC</a>
+                                        </h2>
+                                    </td>
+                                    <td class="col-xs-3">
+                                        <ul class="standart-list">
+                                            <li><a href="../../project/index.html">Github account</a></li>
+                                            <li><a href="../../project/index.html">OpenStack</a></li>
+                                        </ul>
+                                    </td>
+                                    <td class="col-xs-2 controls-ctn">
+                                        <ul class="controls pull-right">
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Poweroff"><i class="fa fa-power-off"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Restart"><i class="fa fa-refresh"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-xs-1 pic">
+                                        <a href="../../customer/index.html">
+                                            <img src="../../static/images/tmp/dojocat.jpg">
+                                        </a>
+                                    </td>
+                                    <td class="name">
+                                        <h2 class="item-title">
+                                            <a href="../../customer/index.html">Cooler Inc. PLC</a>
+                                        </h2>
+                                    </td>
+                                    <td class="col-xs-3">
+                                        <ul class="standart-list">
+                                            <li><a href="../../project/index.html">Github account</a></li>
+                                            <li><a href="../../project/index.html">OpenStack</a></li>
+                                        </ul>
+                                    </td>
+                                    <td class="col-xs-2 controls-ctn">
+                                        <ul class="controls pull-right">
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Poweroff"><i class="fa fa-power-off"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Restart"><i class="fa fa-refresh"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-xs-1 pic">
+                                        <a href="../../customer/index.html">
+                                            <img src="../../static/images/tmp/dojocat.jpg">
+                                        </a>
+                                    </td>
+                                    <td class="name">
+                                        <h2 class="item-title">
+                                            <a href="../../customer/index.html">Cooler Inc. PLC</a>
+                                        </h2>
+                                    </td>
+                                    <td class="col-xs-3">
+                                        <ul class="standart-list">
+                                            <li><a href="../../project/index.html">Github account</a></li>
+                                            <li><a href="../../project/index.html">OpenStack</a></li>
+                                        </ul>
+                                    </td>
+                                    <td class="col-xs-2 controls-ctn">
+                                        <ul class="controls pull-right">
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Poweroff"><i class="fa fa-power-off"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Restart"><i class="fa fa-refresh"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-xs-1 pic">
+                                        <a href="../../customer/index.html">
+                                            <img src="../../static/images/tmp/dojocat.jpg">
+                                        </a>
+                                    </td>
+                                    <td class="name">
+                                        <h2 class="item-title">
+                                            <a href="../../customer/index.html">Cooler Inc. PLC</a>
+                                        </h2>
+                                    </td>
+                                    <td class="col-xs-3">
+                                        <ul class="standart-list">
+                                            <li><a href="../../project/index.html">Github account</a></li>
+                                            <li><a href="../../project/index.html">OpenStack</a></li>
+                                        </ul>
+                                    </td>
+                                    <td class="col-xs-2 controls-ctn">
+                                        <ul class="controls pull-right">
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Poweroff"><i class="fa fa-power-off"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Restart"><i class="fa fa-refresh"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-xs-1 pic">
+                                        <a href="../../customer/index.html">
+                                            <img src="../../static/images/tmp/dojocat.jpg">
+                                        </a>
+                                    </td>
+                                    <td class="name">
+                                        <h2 class="item-title">
+                                            <a href="../../customer/index.html">Cooler Inc. PLC</a>
+                                        </h2>
+                                    </td>
+                                    <td class="col-xs-3">
+                                        <ul class="standart-list">
+                                            <li><a href="../../project/index.html">Github account</a></li>
+                                            <li><a href="../../project/index.html">OpenStack</a></li>
+                                        </ul>
+                                    </td>
+                                    <td class="col-xs-2 controls-ctn">
+                                        <ul class="controls pull-right">
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Poweroff"><i class="fa fa-power-off"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Restart"><i class="fa fa-refresh"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-xs-1 pic">
+                                        <a href="../../customer/index.html">
+                                            <img src="../../static/images/tmp/dojocat.jpg">
+                                        </a>
+                                    </td>
+                                    <td class="name">
+                                        <h2 class="item-title">
+                                            <a href="../../customer/index.html">Cooler Inc. PLC</a>
+                                        </h2>
+                                    </td>
+                                    <td class="col-xs-3">
+                                        <ul class="standart-list">
+                                            <li><a href="../../project/index.html">Github account</a></li>
+                                            <li><a href="../../project/index.html">OpenStack</a></li>
+                                        </ul>
+                                    </td>
+                                    <td class="col-xs-2 controls-ctn">
+                                        <ul class="controls pull-right">
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Poweroff"><i class="fa fa-power-off"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Restart"><i class="fa fa-refresh"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-xs-1 pic">
+                                        <a href="../../customer/index.html">
+                                            <img src="../../static/images/tmp/dojocat.jpg">
+                                        </a>
+                                    </td>
+                                    <td class="name">
+                                        <h2 class="item-title">
+                                            <a href="../../customer/index.html">Cooler Inc. PLC</a>
+                                        </h2>
+                                    </td>
+                                    <td class="col-xs-3">
+                                        <ul class="standart-list">
+                                            <li><a href="../../project/index.html">Github account</a></li>
+                                            <li><a href="../../project/index.html">OpenStack</a></li>
+                                        </ul>
+                                    </td>
+                                    <td class="col-xs-2 controls-ctn">
+                                        <ul class="controls pull-right">
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Poweroff"><i class="fa fa-power-off"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Restart"><i class="fa fa-refresh"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- /app-block -->
+            <!-- app-block -->
+            <div class="app-block">
+                <div class="container-fluid">
+                    <!-- pagination -->
+                    <div class="pagination">
+                        <ul>
+                            <li><a href="#" class="current">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                        </ul>
+                    </div>
+                    <!-- /pagination -->
+                </div>
+            </div>
+            <!-- /app-block -->
+        </div>
+        <div class="tab-pane" id="keys">
+            <!-- app-block -->
+            <section class="app-block">
+                <div class="container-fluid">
+                    <div class="white-box">
+                        <div class="app-title-line">
+                            <div class="row">
+                                <div class="col-xs-12 first-line">
+                                    <ul class="sort">
+                                        <li><a href="#" class="active">5</a></li>
+                                        <li><a href="#">15</a></li>
+                                        <li><a href="#">24</a></li>
+                                        <li class="divid">
+                                            <div class="search" data-role="search-box">
+                                                <input type="text">
+                                                <button class="search-button">
+                                                    <i class="fa fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <div class="crud-box pull-right"><a href="#" class="crud-controls"><i class="fa fa-plus"></i> add key</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- /app-block -->
+            <!-- app-block -->
+            <section class="app-block">
+                <div class="container-fluid">
+                    <div class="white-box">
+                        <div class="app-items-list">
+                            <table class="items-table">
+                                <tr>
+                                    <th class="name">
+                                        <a href="" class="sort">Name</a>
+                                    </th>
+                                    <th class="col-xs-2 date">
+                                        <a href="" class="sort">Date</a>
+                                    </th>
+                                    <th class="col-xs-1"></th>
+                                </tr>
+                                <tr>
+                                    <td class="user-name">
+                                        <strong>key from my MacBook Pro</strong>
+                                    </td>
+                                    <td class="col-xs-2 date">
+                                        23 January 2014
+                                    </td>
+                                    <td class="col-xs-1 controls-ctn">
+                                        <ul class="controls pull-right">
+                                            <li>
+                                                <a href="#" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="user-name">
+                                        <strong>key from my MacBook Pro</strong>
+                                    </td>
+                                    <td class="col-xs-2 date">
+                                        23 January 2014
+                                    </td>
+                                    <td class="col-xs-1 controls-ctn">
+                                        <ul class="controls pull-right">
+                                            <li>
+                                                <a href="#" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="user-name">
+                                        <strong>key from my MacBook Pro</strong>
+                                    </td>
+                                    <td class="col-xs-2 date">
+                                        23 January 2014
+                                    </td>
+                                    <td class="col-xs-1 controls-ctn">
+                                        <ul class="controls pull-right">
+                                            <li>
+                                                <a href="#" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="user-name">
+                                        <strong>key from my MacBook Pro</strong>
+                                    </td>
+                                    <td class="col-xs-2 date">
+                                        23 January 2014
+                                    </td>
+                                    <td class="col-xs-1 controls-ctn">
+                                        <ul class="controls pull-right">
+                                            <li>
+                                                <a href="#" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="user-name">
+                                        <strong>key from my MacBook Pro</strong>
+                                    </td>
+                                    <td class="col-xs-2 date">
+                                        23 January 2014
+                                    </td>
+                                    <td class="col-xs-1 controls-ctn">
+                                        <ul class="controls pull-right">
+                                            <li>
+                                                <a href="#" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="user-name">
+                                        <strong>key from my MacBook Pro</strong>
+                                    </td>
+                                    <td class="col-xs-2 date">
+                                        23 January 2014
+                                    </td>
+                                    <td class="col-xs-1 controls-ctn">
+                                        <ul class="controls pull-right">
+                                            <li>
+                                                <a href="#" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="user-name">
+                                        <strong>key from my MacBook Pro</strong>
+                                    </td>
+                                    <td class="col-xs-2 date">
+                                        23 January 2014
+                                    </td>
+                                    <td class="col-xs-1 controls-ctn">
+                                        <ul class="controls pull-right">
+                                            <li>
+                                                <a href="#" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- /app-block -->
+            <!-- app-block -->
+            <div class="app-block">
+                <div class="container-fluid">
+                    <!-- pagination -->
+                    <div class="pagination">
+                        <ul>
+                            <li><a href="#" class="current">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                        </ul>
+                    </div>
+                    <!-- /pagination -->
+                </div>
+            </div>
+            <!-- /app-block -->
+        </div>
+    </div>
+    <!-- /tabs-content -->
+</div>
+<!-- /app-tabs -->
+
 <ng-include src="'/views/partials/app-footer.html'"></ng-include>
