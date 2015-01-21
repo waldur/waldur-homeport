@@ -2,26 +2,18 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('ProjectListController', ['$location', 'projectsService', 'usersService', ProjectListController]);
+    .controller('ProjectListController', ['$location', 'projectsService', ProjectListController]);
 
-  function ProjectListController($location, projectsService, usersService) {
-
+  function ProjectListController($location, projectsService) {
     var vm = this;
 
-    vm.list = projectsService.projectResource.query(initProjectUsers);
+    vm.list = projectsService.getProjectsList();
     vm.remove = remove;
-
-    function initProjectUsers(projects) {
-      for (var i = 0; i < projects.length; i++) {
-        var project = projects[i];
-        project.users = usersService.userResource.query({project: project.name});
-      }
-    }
 
     function remove(project) {
       var index = vm.list.indexOf(project);
 
-      project.$delete(function(success) {
+      project.$delete(function() {
         vm.list.splice(index, 1);
       });
     }
@@ -34,8 +26,8 @@
   function ProjectAddController($location, projectsService, customersService) {
     var vm = this;
 
-    vm.project = new projectsService.projectResource();
-    vm.customersList = customersService.customerResource.query();
+    vm.project = projectsService.createProject();
+    vm.customersList = customersService.getCustomersList();
     vm.save = save;
 
     function save() {
@@ -46,40 +38,22 @@
 
   angular.module('ncsaas')
     .controller('ProjectDetailUpdateController', [
-      '$location',
       '$routeParams',
       '$rootScope',
       'projectsService',
-      'usersService',
-      'cloudsService',
-      'customersService',
       ProjectDetailUpdateController
     ]);
 
-  function ProjectDetailUpdateController(
-      $location, $routeParams, $rootScope, projectsService, usersService, cloudsService, customersService) {
+  function ProjectDetailUpdateController($routeParams, $rootScope, projectsService) {
     var vm = this;
 
     $rootScope.bodyClass = 'obj-view';
 
     vm.activeTab = 'eventlog';
-    vm.project = projectsService.projectResource.get({projectUUID: $routeParams.uuid}, initProjectElemetns);
+    vm.project = projectsService.getProject($routeParams.uuid);
     vm.update = update;
 
-    function initProjectElemetns(project) {
-      vm.users = usersService.userResource.query({project: project.name});
-      vm.clouds = cloudsService.cloudResource.query({project: project.uuid});
-      /*jshint camelcase: false */
-      customersService.customerResource.query({name: project.customer_name}, function(list) {
-        vm.customer = list[0];
-      });
-      /*jshint camelcase: true */
-    }
-
     function update() {
-      /* jshint camelcase: false */
-      vm.project.name = vm.project_new_name;
-      /* jshint camelcase: true */
       vm.project.$update();
     }
 

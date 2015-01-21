@@ -25,16 +25,16 @@ angular
         templateUrl: 'views/projects.html',
       })
 
+      .when('/projects/add/', {
+        templateUrl: 'views/add-project.html',
+      })
+
       .when('/projects/:uuid/', {
         templateUrl: 'views/project.html',
       })
 
       .when('/projects/:uuid/edit/', {
         templateUrl: 'views/project-edit.html',
-      })
-
-      .when('/add-project/', {
-        templateUrl: 'views/add-project.html',
       })
 
       .otherwise({
