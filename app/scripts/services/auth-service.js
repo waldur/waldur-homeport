@@ -2,9 +2,9 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('auth', ['ENV', '$http', '$cookies', auth]);
+    .service('authService', ['ENV', '$http', '$cookies', authService]);
 
-  function auth(ENV, $http, $cookies) {
+  function authService(ENV, $http, $cookies) {
     /*jshint validthis: true */
     var vm = this;
 
@@ -18,8 +18,7 @@
 
       function success(data) {
         vm.user = data.data;
-        /*jshint camelcase: false*/
-        setAuthCookie(vm.user.auth_token);
+        setAuthCookie(vm.user.token);
         vm.user.isAuthenticated = true;
       }
 
@@ -32,8 +31,7 @@
 
       function success(data) {
         vm.user = data;
-        /*jshint camelcase: false*/
-        setAuthCookie(vm.user.auth_token);
+        setAuthCookie(vm.user.token);
         vm.user.isAuthenticated = true;
       }
 

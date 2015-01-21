@@ -1,11 +1,13 @@
 'use strict';
 
 angular
+
   // module name and dependencies
   .module('ncsaas', [
-    'config',
+    'satellizer',
     'ngRoute',
-    'ngCookies',])
+    'ngCookies',
+    'ngResource',])
   // urls
   .config(function($routeProvider) {
     $routeProvider
@@ -15,10 +17,40 @@ angular
 
       .when('/login/', {
         templateUrl: 'views/login.html',
-        controller: 'AuthCtrl'
+        controller: 'AuthController'
+      })
+
+      .when('/projects/', {
+        templateUrl: 'views/projects.html',
+      })
+
+      .when('/projects/:uuid/', {
+        templateUrl: 'views/project.html',
+      })
+
+      .when('/projects/:uuid/edit/', {
+        templateUrl: 'views/project-edit.html',
+      })
+
+      .when('/add-project/', {
+        templateUrl: 'views/add-project.html',
       })
 
       .otherwise({
         redirectTo: '/'
       });
   });
+
+(function() {
+  angular.module('ncsaas')
+    .config(['ENV', 'CUSTOMENV', overrideBaseSettings]);
+
+    function overrideBaseSettings(ENV, CUSTOMENV) {
+      for (var property in CUSTOMENV) {
+        if (CUSTOMENV.hasOwnProperty(property)) {
+            ENV[property] = CUSTOMENV[property];
+        }
+      }
+    }
+
+})();

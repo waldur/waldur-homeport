@@ -7208,7 +7208,6 @@ body.prices {
 .login {
   position: relative;
   color: #fff;
-  padding-bottom: 400px;
 }
 .login h4 {
   font-weight: 400;
@@ -7229,8 +7228,6 @@ body.prices {
   top: 0px;
   width: 100%;
   float: left;
-}
-.login .login-box.transition {
   -webkit-transition-property: all;
           transition-property: all;
   -webkit-transition-duration: 0.4s;

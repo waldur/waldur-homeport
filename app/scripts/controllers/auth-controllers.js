@@ -2,18 +2,19 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('AuthCtrl', ['$location', 'auth', AuthCtrl]);
+    .controller('AuthController', ['$location', '$auth', 'authService', AuthController]);
 
-  function AuthCtrl($location, auth) {
+  function AuthController($location, $auth, authService) {
     var vm = this;
     vm.isSignupFormVisible = false;
     vm.signin = signin;
     vm.user = {};
     vm.hasErrors = hasErrors;
     vm.getErrors = getErrors;
+    vm.authenticate = authenticate;
 
     function signin() {
-      auth.signin(vm.user.username, vm.user.password).then(success, error);
+      authService.signin(vm.user.username, vm.user.password).then(success, error);
 
       function success() {
         $location.path('/');
@@ -45,6 +46,10 @@
       } else {
         return '';
       }
+    }
+
+    function authenticate(provider) {
+      $auth.authenticate(provider);
     }
 
   }
