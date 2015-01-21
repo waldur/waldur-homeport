@@ -24,3 +24,11 @@ Recommended name: `<ObjectName><Actions>Controller`. Examples: `ProjectAddContro
 
 #### Views layer
 Shows controllers attributes to users, allows users to modify them.
+
+
+## Urls
+
+ - list of objects: `/objects/`
+ - list-level operation (example: add): `/objects/<operation>/`
+ - one object: `/object/<uuid>/`
+ - object-level operation (example: update): `/object/<uuid>/<operation>/`
