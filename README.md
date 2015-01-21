@@ -61,7 +61,7 @@ Application public id has to be set as `googleClientId` or `facebookClientId` pa
 
 ## Development process
 
-Look `docs/development_guideline.md` for development agreements, advices and guides
+See `docs/development_guideline.md` for development policies.
 
 
 [1]: http://bower.io
