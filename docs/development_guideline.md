@@ -2,7 +2,7 @@
 
 ## Getting data from backend to view
 
-To get data from backend to view (and vice versa) 4 (3) layers have to be realized
+To get data from backend to view (and vice versa) 4 (3) layers have to be realized.
 
 #### Raw layer
 
