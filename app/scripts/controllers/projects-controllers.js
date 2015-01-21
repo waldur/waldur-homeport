@@ -5,6 +5,7 @@
     .controller('ProjectListController', ['$location', 'projectsService', 'usersService', ProjectListController]);
 
   function ProjectListController($location, projectsService, usersService) {
+
     var vm = this;
 
     vm.list = projectsService.projectResource.query(initProjectUsers);
@@ -47,6 +48,7 @@
     .controller('ProjectDetailUpdateController', [
       '$location',
       '$routeParams',
+      '$rootScope',
       'projectsService',
       'usersService',
       'cloudsService',
@@ -55,8 +57,10 @@
     ]);
 
   function ProjectDetailUpdateController(
-      $location, $routeParams, projectsService, usersService, cloudsService, customersService) {
+      $location, $routeParams, $rootScope, projectsService, usersService, cloudsService, customersService) {
     var vm = this;
+
+    $rootScope.bodyClass = 'obj-view';
 
     vm.activeTab = 'eventlog';
     vm.project = projectsService.projectResource.get({projectUUID: $routeParams.uuid}, initProjectElemetns);

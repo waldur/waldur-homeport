@@ -13,6 +13,7 @@ angular
     $routeProvider
       .when('/', {
         templateUrl: 'views/home.html',
+        controller: 'HomeController'
       })
 
       .when('/login/', {
