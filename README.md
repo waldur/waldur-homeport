@@ -59,6 +59,11 @@ Nodeconductor-web allows authentication through GooglePlus and Facebook.
 Application public id has to be set as `googleClientId` or `facebookClientId` parameters in `CUSTOMENV`.
 
 
+## Development process
+
+Look `docs/development_guideline.md` for development agreements, advices and guides
+
+
 [1]: http://bower.io
 [2]: http://gruntjs.com
 [3]: https://github.com/sahat/satellizer/#obtaining-oauth-keys
