@@ -8,15 +8,15 @@
         <div class="row">
             <div class="col-xs-10 profile-info">
                 <h1 class="profile-name">{{ controller.project.name }}</h1>
-                <a href="/#/customers/{{ controller.customer.uuid }}/" class="customer-link">{{ controller.customer.name }}</a>
+                <a href="/#/customers/{{ controller.project.customer.uuid }}/" class="customer-link">{{ controller.project.customer.name }}</a>
                 <div class="stats">
                     <div class="row">
                         <div class="col-xs-4">
-                            <span class="stat-int">{{ controller.clouds.length }}</span>
+                            <span class="stat-int">{{ controller.project.clouds.length }}</span>
                             <span class="stat-description">Resources</span>
                         </div>
                         <div class="col-xs-4">
-                            <span class="stat-int">{{ controller.users.length }}</span>
+                            <span class="stat-int">{{ controller.project.users.length }}</span>
                             <span class="stat-description">Users</span>
                         </div>
                     </div>
