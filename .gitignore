@@ -7,6 +7,7 @@
 /.sublime
 *.sw*
 /atlassian-ide-plugin.xml
+.todo
 
 # Testing artifacts
 TEST-*.xml
