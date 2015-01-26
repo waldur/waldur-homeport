@@ -2,13 +2,26 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('usersService', ['ENV', '$resource', usersService]);
+    .service('usersService', ['RawUser', 'RawKey', usersService]);
 
-  function usersService(ENV, $resource, $cookies) {
+  function usersService(RawUser, RawKey) {
     /*jshint validthis: true */
     var vm = this;
-    // TODO: rewrite this to getUser, getUsers and other methods or delete service it is not needed
-    vm.userResource = $resource(ENV.apiEndpoint + 'api/users/:userUUID/', {userUUID:'@uuid'});
+    vm.getCurrentUser = getCurrentUser;
+    vm.getCurrentUserWithKeys = getCurrentUserWithKeys;
+
+    function getCurrentUser() {
+      return RawUser.getCurrent();
+    }
+
+    function getCurrentUserWithKeys() {
+      return RawUser.getCurrent(initKeys);
+
+      function initKeys(user) {
+        /*jshint camelcase: false */
+        user.keys = RawKey.query({user_uuid: user.uuid});
+      }
+    }
 
   }
 
@@ -19,7 +32,15 @@
     .factory('RawUser', ['ENV', '$resource', RawUser]);
 
     function RawUser(ENV, $resource) {
-      return $resource(ENV.apiEndpoint + 'api/users/:userUUID/', {userUUID:'@uuid'});
+      return $resource(ENV.apiEndpoint + 'api/users/:userUUID/', {userUUID:'@uuid'},
+        {
+          getCurrent: {
+              method: 'GET',
+              transformResponse: function(data) {return angular.fromJson(data)[0];},
+              params: {current:''}
+          }
+        }
+      );
     }
 
 })();
