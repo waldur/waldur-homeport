@@ -5,7 +5,7 @@
     .factory('RawKey', ['ENV', '$resource', RawKey]);
 
     function RawKey(ENV, $resource) {
-      return $resource(ENV.apiEndpoint + 'api/keys/:cutomerUUID/', {cutomerUUID:'@uuid'});
+      return $resource(ENV.apiEndpoint + 'api/keys/:keyUUID/', {keyUUID:'@uuid'});
     }
 
 })();
