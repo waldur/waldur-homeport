@@ -37,6 +37,10 @@ angular
         templateUrl: 'views/project-edit.html',
       })
 
+      .when('/profile/', {
+        templateUrl: 'views/user.html',
+      })
+
       .otherwise({
         redirectTo: '/'
       });
