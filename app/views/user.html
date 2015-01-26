@@ -1,5 +1,6 @@
 <ng-include src="'/views/partials/app-header.html'"></ng-include>
 
+<div ng-controller="ProfileController as controller">
 <!-- profile-view -->
 <div class="profile-view">
     <div class="container-fluid">
@@ -8,20 +9,20 @@
                 <img src="../static/images/887178.jpg" class="profile-pic" alt="John Doe">
             </div>
             <div class="col-xs-7 profile-info">
-                <h1 class="profile-name">Mihail Yakimenko</h1>
+                <h1 class="profile-name">{{ controller.user.username }}</h1>
                 <a href="mailto:mail@mail.com">mail@mail.com</a>
                 <div class="stats">
                     <div class="row">
                         <div class="col-xs-4">
-                            <span class="stat-int">4</span>
+                            <span class="stat-int">{{ controller.projects.length }}</span>
                             <span class="stat-description">Active projects</span>
                         </div>
                         <div class="col-xs-4">
-                            <span class="stat-int">2</span>
+                            <span class="stat-int">{{ controller.customers.length }}</span>
                             <span class="stat-description">Customers</span>
                         </div>
                         <div class="col-xs-4">
-                            <span class="stat-int">7</span>
+                            <span class="stat-int">{{ controller.user.keys.length }}</span>
                             <span class="stat-description">SSH keys</span>
                         </div>
                     </div>
@@ -437,5 +438,6 @@
     <!-- /tabs-content -->
 </div>
 <!-- /app-tabs -->
+</div>
 
 <ng-include src="'/views/partials/app-footer.html'"></ng-include>
