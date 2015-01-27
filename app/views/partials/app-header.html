@@ -1,5 +1,5 @@
 <!-- header -->
-<div class="app-header navbar navbar-fixed-top" role="navigation">
+<div class="app-header navbar navbar-fixed-top" role="navigation" ng-controller="MenuController as controller">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" ng-click="menuCollapse = !menuCollapse">
@@ -22,7 +22,7 @@
                     <a href="" class="dropdown-toggle add-something-button small-screen" ng-click="controller.combineMenu = !controller.combineMenu">
                         <img src="/static/images/887178.jpg" class="user-pic small-screen" alt="John Doe">
                     </a>
-                    <ul class="dropdown-menu add-something small-screen" role="menu" ng-show="controller.combineMenu">
+                    <ul class="dropdown-menu add-something small-screen" role="menu" ng-show="controller.menuState.combineMenu">
                         <li><a href="/add-service/" class="add-project">Add service</a></li>
                         <li><a href="/#/projects/add/" class="add-project">Add project</a></li>
                         <li><a href="/add-resource/" class="add-resource">Add resource</a></li>
@@ -40,10 +40,10 @@
             <ul class="nav navbar-nav navbar-right nav-user-area hidden-md hidden-sm">
                 <li class="dropdown add-something-box">
                     <a href="" class="dropdown-toggle add-something-button" 
-                       ng-click="controller.addSomethingMenu = !controller.addSomethingMenu; controller.customerMenu = false; controller.profileMenu = false">
+                       ng-click="controller.menuToggle('addSomethingMenu')">
                         <i class="fa fa-plus"></i>
                     </a>
-                    <ul class="dropdown-menu add-something" role="menu" ng-show="controller.addSomethingMenu">
+                    <ul class="dropdown-menu add-something" role="menu" ng-show="controller.menuState.addSomethingMenu">
                         <li><a href="/add-service/" class="add-project">Add service</a></li>
                         <li><a href="/#/projects/add/" class="add-project">Add project</a></li>
                         <li><a href="/add-resource/" class="add-resource">Add resource</a></li>
@@ -56,12 +56,12 @@
                         </select>
                     </div> -->
                     <a href="" class="customer-head" 
-                       ng-click="controller.customerMenu = !controller.customerMenu; controller.addSomethingMenu = false; controller.profileMenu = false">
+                       ng-click="controller.menuToggle('customerMenu')">
                         <span class="customer-title">Livenson PLC</span>
                         <span class="customer-expl">active for context</span>
                         <span class="caret"></span>
                     </a>
-                    <ul class="dropdown-menu" role="menu" ng-show="controller.customerMenu">
+                    <ul class="dropdown-menu" role="menu" ng-show="controller.menuState.customerMenu">
                         <li><a href="../customer/index.html">Customer 1</a></li>
                         <li><a href="../customer/index.html">Customer 2</a></li>
                         <li><a href="../customer/index.html">Customer 3</a></li>
@@ -71,12 +71,12 @@
                 </li>
                 <li class="dropdown user-box">
                     <a href="" class="dropdown-toggle user-pic-box" 
-                       ng-click="controller.profileMenu = !controller.profileMenu; controller.addSomethingMenu = false; controller.customerMenu = false">
+                       ng-click="controller.menuToggle('profileMenu')">
                         <img src="../static/images/887178.jpg" class="user-pic" alt="John Doe">
                         John Winner
                         <span class="caret"></span>
                     </a>
-                    <ul class="dropdown-menu user-drop" role="menu" ng-show="controller.profileMenu">
+                    <ul class="dropdown-menu user-drop" role="menu" ng-show="controller.menuState.profileMenu">
                         <li><a href="#">Profile</a></li>
                         <li><a href="#">Logout</a></li>
                     </ul>
