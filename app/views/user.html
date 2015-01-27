@@ -9,8 +9,8 @@
                 <img src="../static/images/887178.jpg" class="profile-pic" alt="John Doe">
             </div>
             <div class="col-xs-7 profile-info">
-                <h1 class="profile-name">{{ controller.user.username }}</h1>
-                <a href="mailto:mail@mail.com">mail@mail.com</a>
+                <h1 class="profile-name">{{ controller.user.native_name }} ({{ controller.user.username }})</h1>
+                <a href="mailto:{{ controller.user.email }}">{{ controller.user.email }}</a>
                 <div class="stats">
                     <div class="row">
                         <div class="col-xs-4">
