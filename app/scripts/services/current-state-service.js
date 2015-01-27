@@ -17,7 +17,6 @@
       if (!user) {
         user = RawUser.getCurrent();
       }
-      console.log(user);
       return user;
     }
 
