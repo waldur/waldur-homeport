@@ -3,9 +3,9 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('HeaderContoller', ['currentStateService', 'customersService', HeaderContoller]);
+    .controller('HeaderController', ['currentStateService', 'customersService', HeaderController]);
 
-  function HeaderContoller(currentStateService, customersService) {
+  function HeaderController(currentStateService, customersService) {
     var vm = this;
 
     vm.customers = [];
