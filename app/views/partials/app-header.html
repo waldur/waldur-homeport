@@ -39,7 +39,8 @@
             </ul>
             <ul class="nav navbar-nav navbar-right nav-user-area hidden-md hidden-sm">
                 <li class="dropdown add-something-box">
-                    <a href="" class="dropdown-toggle add-something-button" ng-click="controller.addSomethingMenu = !controller.addSomethingMenu">
+                    <a href="" class="dropdown-toggle add-something-button" 
+                       ng-click="controller.addSomethingMenu = !controller.addSomethingMenu; controller.customerMenu = false; controller.profileMenu = false">
                         <i class="fa fa-plus"></i>
                     </a>
                     <ul class="dropdown-menu add-something" role="menu" ng-show="controller.addSomethingMenu">
@@ -54,7 +55,8 @@
                             <option value="">Ilja Livenson</option>
                         </select>
                     </div> -->
-                    <a href="" class="customer-head" ng-click="controller.customerMenu = !controller.customerMenu">
+                    <a href="" class="customer-head" 
+                       ng-click="controller.customerMenu = !controller.customerMenu; controller.addSomethingMenu = false; controller.profileMenu = false">
                         <span class="customer-title">Livenson PLC</span>
                         <span class="customer-expl">active for context</span>
                         <span class="caret"></span>
@@ -68,7 +70,8 @@
                     </ul>
                 </li>
                 <li class="dropdown user-box">
-                    <a href="" class="dropdown-toggle user-pic-box" ng-click="controller.profileMenu = !controller.profileMenu">
+                    <a href="" class="dropdown-toggle user-pic-box" 
+                       ng-click="controller.profileMenu = !controller.profileMenu; controller.addSomethingMenu = false; controller.customerMenu = false">
                         <img src="../static/images/887178.jpg" class="user-pic" alt="John Doe">
                         John Winner
                         <span class="caret"></span>
