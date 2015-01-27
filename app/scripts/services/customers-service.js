@@ -32,7 +32,7 @@
         }
       }
 
-      return $resource(ENV.apiEndpoint + 'api/customers/:cutomerUUID/', {cutomerUUID:'@uuid'},
+      return $resource(ENV.apiEndpoint + 'api/customers/:customerUUID/', {customerUUID:'@uuid'},
         {
           getFirst: {
               method: 'GET',
