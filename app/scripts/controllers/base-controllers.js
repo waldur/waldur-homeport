@@ -3,9 +3,9 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('HeaderContoller', ['currentStateService', 'customersService', HeaderContoller]);
+    .controller('HeaderContoller', ['$document', 'currentStateService', 'customersService', HeaderContoller]);
 
-  function HeaderContoller(currentStateService, customersService) {
+  function HeaderContoller($document, currentStateService, customersService) {
     var vm = this;
 
     vm.customers = customersService.getCustomersList();
@@ -29,7 +29,19 @@
           }
         }
       }
+
+      event.stopPropagation();
       vm.menuState[active] = !vm.menuState[active];
+
+      console.log('before');
+      console.log(vm.menuState);
+
+      $document.bind('click', function() {
+        console.log('after');
+        vm.menuState[active] = false;
+        console.log(vm.menuState);
+        console.log('Done');
+      });
     }
 
     function setCurrentCustomer(customer) {
@@ -38,5 +50,22 @@
     }
 
   }
+
+// angular.module('ncsaas')
+// .directive('clickAnywhereButHere', function($document){
+//   return {
+//     restrict: 'A',
+//     link: function(scope, elem, attr, ctrl) {
+//       elem.bind('click', function(e) {
+//         // this part keeps it from firing the click on the document.
+//         e.stopPropagation();
+//       });
+//       $document.bind('click', function() {
+//         // magic here.
+//         scope.$apply(attr.clickAnywhereButHere);
+//       })
+//     }
+//   }
+// })
 
 })();

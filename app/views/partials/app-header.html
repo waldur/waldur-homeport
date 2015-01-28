@@ -55,8 +55,8 @@
                         <span class="customer-expl">active for context</span>
                         <span class="caret"></span>
                     </a>
-                    <ul class="dropdown-menu" role="menu" ng-show="controller.menuState.customerMenu">
-                        <li ng-repeat="customer in controller.customers"><a href="" ng-click="controller.setCurrentCustomerByClick(customer)">{{ customer.name }}</a></li>
+                    <ul class="dropdown-menu" role="menu" ng-show="controller.menuState.customerMenu" >
+                        <li ng-repeat="customer in controller.customers"><a href="" ng-click="controller.setCurrentCustomer(customer)">{{ customer.name }}</a></li>
                         <li class="divider"></li>
                         <li><a href="/#/profile/" class="add-customer">Manage customers</a></li>
                     </ul>
