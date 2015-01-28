@@ -9,24 +9,22 @@
     var vm = this;
 
     vm.customers = customersService.getCustomersList();
-    // vm.initCustomersList = initCustomersList;
-    vm.user = currentStateService.getUser();
-    vm.customer = currentStateService.getCustomer();
-    vm.setCurrentCustomer = currentStateService.setCustomer;
+    vm.getUser = currentStateService.getUser;
+    vm.getCustomer = currentStateService.getCustomer;
     vm.menuToggle = menuToggle;
-
+    vm.setCurrentCustomer = setCurrentCustomer;
     // top-level menu
     vm.menuState = {
       addSomethingMenu : false,
       combineMenu : false,
       customerMenu : false,
       profileMenu : false
-    }
+    };
 
     function menuToggle(active) {
       for (var property in vm.menuState) {
         if (vm.menuState.hasOwnProperty(property)) {
-          if (property != active) {
+          if (property !== active) {
             vm.menuState[property] = false;
           }
         }
@@ -34,12 +32,9 @@
       vm.menuState[active] = !vm.menuState[active];
     }
 
-    // setCustomer
-    // fix this
-    vm.setCurrentCustomerByClick = function(customer) {
-      vm.setCurrentCustomer(customer);
-      vm.customer = currentStateService.getCustomer();
-      vm.menuState['customerMenu'] = false;
+    function setCurrentCustomer(customer) {
+      currentStateService.setCustomer(customer);
+      vm.menuState.customerMenu = false;
     }
 
   }
