@@ -15,13 +15,6 @@
     vm.setCurrentCustomer = currentStateService.setCustomer;
     vm.menuToggle = menuToggle;
 
-    // setCustomer
-    // fix this
-    vm.setCurrentCustomerByClick = function(customer) {
-      vm.setCurrentCustomer(customer);
-      vm.customer = currentStateService.getCustomer();
-    }
-
     // top-level menu
     vm.menuState = {
       addSomethingMenu : false,
@@ -39,6 +32,14 @@
         }
       }
       vm.menuState[active] = !vm.menuState[active];
+    }
+
+    // setCustomer
+    // fix this
+    vm.setCurrentCustomerByClick = function(customer) {
+      vm.setCurrentCustomer(customer);
+      vm.customer = currentStateService.getCustomer();
+      vm.menuState['customerMenu'] = false;
     }
 
   }
