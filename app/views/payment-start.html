@@ -1,2 +1,109 @@
-<ng-include src="partials/app-header.html"></ng-include>
-<ng-include src="partials/app-footer.html"></ng-include>
+<ng-include src="'/views/partials/app-header.html'"></ng-include>
+
+<!-- app-block -->
+<section class="app-block">
+    <div class="container-fluid">
+        <div class="white-box">
+            <div class="app-title-line">
+                <div class="row">
+                    <div class="col-xs-12 first-line text-center">
+                        <h2 class="app-title">Payment</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- /app-block -->
+
+<!-- app-block -->
+<section class="app-block">
+    <div class="container-fluid">
+        <div class="white-box">
+            <div class="standart-box">
+                <div class="row">
+                    <div class="col-xs-4 col-xs-offset-2">
+                        <h4>To checkout</h4>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th class="col-xs-4">$</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Month</td>
+                                    <td class="col-xs-4">$39</td>
+                                </tr>
+                                <tr>
+                                    <td>Fee</td>
+                                    <td class="col-xs-4">$0</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-right"><strong>Total</strong></td>
+                                    <td class="col-xs-4"><strong>$39</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-xs-4 plans-and-price">
+                        <div class="price-table-box in-login">
+                            <table class="price-table">
+                                <tr>
+                                    <th>
+                                        <span class="plan-name">Lonely warrior</span>
+                                        <span class="plan-price">$39/month</span>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>10 projects</td>
+                                </tr>
+                                <tr>
+                                    <td>100 users</td>                                        
+                                </tr>
+                                <tr>
+                                    <td>300 resources</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="plan-description gray-text">
+                            <span class="current">Your current plan is.</span>
+                            You can upgrade plan in your customer profile.
+                        </div>
+                    </div>
+                </div>
+                <div class="app-payment row">
+                    <div class="col-xs-8 col-xs-offset-2">
+                        <h4>Payment method</h4>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="radio radio-card-type">
+                                    <label>
+                                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                                        <img src="/static/images/paypal.jpg" alt="">
+                                    </label>
+                                </div>
+                                <div class="radio radio-card-type">
+                                    <label>
+                                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                                        <img src="/static/images/visa.jpg" alt="">
+                                    </label>
+                                </div>
+                            </div>    
+                        </div>
+                        <div class="app-payment row">
+                            <div class="col-xs-12 text-center">
+                                <button class="btn btn-default" data-role="notify-trigger-negative">Cancel</button>
+                                <button class="btn btn-primary" data-role="notify-trigger">Proceed</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- /app-block -->
+
+<ng-include src="'/views/partials/app-footer.html'"></ng-include>

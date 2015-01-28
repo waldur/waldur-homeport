@@ -28,6 +28,11 @@
                         border-radius: .6em;
                     } // img
                 } // pic
+                .key {
+                    width: 400px;
+                    max-width: 400px;
+                    word-wrap: break-word;
+                } // &.key
             } // th, td
             td {
                 .item-title {

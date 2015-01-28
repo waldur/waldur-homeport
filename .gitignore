@@ -7,6 +7,7 @@
 /.sublime
 *.sw*
 /atlassian-ide-plugin.xml
+.todo
 
 # Testing artifacts
 TEST-*.xml
@@ -26,6 +27,7 @@ prototype
 
 # css
 assets/css
+app/static/css/*
 app/static/css/style.min.css
 app/static/css/style.css
 

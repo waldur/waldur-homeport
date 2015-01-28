@@ -12,6 +12,7 @@
     vm.getProject = getProject;
     vm.getProjectsList = getProjectsList;
     vm.createProject = createProject;
+    vm.getRawProjectsList = getRawProjectsList;
 
     function createProject() {
       return new RawProject();
@@ -27,6 +28,10 @@
       }
 
       return project;
+    }
+
+    function getRawProjectsList() {
+      return RawProject.query();
     }
 
     function getProjectsList() {

@@ -145,9 +145,18 @@
         margin-right: 12px;
         border-radius: 3px;
         position: relative;
-        @include bp(xs) {
+        margin-bottom: 16px;
+        @include bp(sm) {
             margin-left: 6px;
-            margin-bottom: 16px;
+            margin-bottom: 0px;
+        }
+        @include bp(md) {
+            margin-left: 6px;
+            margin-bottom: 0px;
+        }
+        @include bp(lg) {
+            margin-left: 6px;
+            margin-bottom: 0px;
         }
         &:hover,  {
             // background-color: #89B550;

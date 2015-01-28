@@ -34,7 +34,6 @@
         var prettyErrors = [];
         for (var key in vm.errors) {
           if (vm.errors.hasOwnProperty(key)) {
-            var errorList = vm.errors[key];
             if (Object.prototype.toString.call(vm.errors[key]) === '[object Array]') {
               prettyErrors.push(key + ': ' + vm.errors[key].join(', '));
             } else {
