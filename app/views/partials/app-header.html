@@ -27,10 +27,8 @@
                         <li><a href="/#/projects/add/" class="add-project">Add project</a></li>
                         <li><a href="/add-resource/" class="add-resource">Add resource</a></li>
                         <li class="divider">{{ controller.getCustomer().name }}</li>
-                        <li><a href="">Customer 1</a></li>
-                        <li><a href="">Customer 2</a></li>
-                        <li><a href="">Customer 3</a></li>
-                        <li><a href="#" class="add-customer">Manage customers</a></li>
+                        <li ng-repeat="customer in controller.customers"><a href="" ng-click="controller.setCurrentCustomer(customer)" ng-class="{'current-customer': customer.uuid == controller.getCustomer().uuid}">{{ customer.name }}</a></li>
+                        <li><a href="/#/profile/" class="add-customer">Manage customers</a></li>
                         <li class="divider"></li>
                         <li><a href="#">Profile</a></li>
                         <li><a href="#">Logout</a></li>
@@ -56,7 +54,7 @@
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu" role="menu" ng-show="controller.menuState.customerMenu" >
-                        <li ng-repeat="customer in controller.customers"><a href="" ng-click="controller.setCurrentCustomer(customer)">{{ customer.name }}</a></li>
+                        <li ng-repeat="customer in controller.customers"><a href="" ng-click="controller.setCurrentCustomer(customer)" ng-class="{'current-customer': customer.uuid == controller.getCustomer().uuid}">{{ customer.name }}</a></li>
                         <li class="divider"></li>
                         <li><a href="/#/profile/" class="add-customer">Manage customers</a></li>
                     </ul>

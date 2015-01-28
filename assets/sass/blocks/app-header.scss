@@ -246,6 +246,12 @@
                         font-family: FontAwesome;
                     } // &:before
                 } // &.add-resource
+                &.current-customer {
+                    &:before {
+                        content: '\f00c';
+                        font-family: FontAwesome;
+                    } // &:after
+                } // &.current-customer
             } // a
         } // li
     } // dropdown-menu
