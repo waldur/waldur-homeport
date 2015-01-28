@@ -3,16 +3,16 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('HeaderContoller', ['$document', 'currentStateService', 'customersService', HeaderContoller]);
+    .controller('HeaderContoller', ['$scope', 'currentStateService', 'customersService', HeaderContoller]);
 
-  function HeaderContoller($document, currentStateService, customersService) {
+  function HeaderContoller($scope, currentStateService, customersService) {
     var vm = this;
 
     vm.customers = customersService.getCustomersList();
     vm.getUser = currentStateService.getUser;
     vm.getCustomer = currentStateService.getCustomer;
     vm.menuToggle = menuToggle;
-    vm.setCurrentCustomer = setCurrentCustomer;
+    vm.setCurrentCustomer = currentStateService.setCustomer;
     // top-level menu
     vm.menuState = {
       addSomethingMenu : false,
@@ -29,43 +29,19 @@
           }
         }
       }
-
       event.stopPropagation();
       vm.menuState[active] = !vm.menuState[active];
-
-      console.log('before');
-      console.log(vm.menuState);
-
-      $document.bind('click', function() {
-        console.log('after');
-        vm.menuState[active] = false;
-        console.log(vm.menuState);
-        console.log('Done');
-      });
     }
 
-    function setCurrentCustomer(customer) {
-      currentStateService.setCustomer(customer);
-      vm.menuState.customerMenu = false;
+    window.onclick = function() {
+      for (var property in vm.menuState) {
+        if (vm.menuState.hasOwnProperty(property)) {
+          vm.menuState[property] = false;
+        }
+      }
+      $scope.$apply();
     }
 
   }
-
-// angular.module('ncsaas')
-// .directive('clickAnywhereButHere', function($document){
-//   return {
-//     restrict: 'A',
-//     link: function(scope, elem, attr, ctrl) {
-//       elem.bind('click', function(e) {
-//         // this part keeps it from firing the click on the document.
-//         e.stopPropagation();
-//       });
-//       $document.bind('click', function() {
-//         // magic here.
-//         scope.$apply(attr.clickAnywhereButHere);
-//       })
-//     }
-//   }
-// })
 
 })();
