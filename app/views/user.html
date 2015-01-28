@@ -9,7 +9,7 @@
                 <img src="../static/images/887178.jpg" class="profile-pic" alt="John Doe">
             </div>
             <div class="col-xs-7 profile-info">
-                <h1 class="profile-name">{{ controller.user.native_name }} ({{ controller.user.username }})</h1>
+                <h1 class="profile-name">{{ controller.user.full_name }} ({{ controller.user.username }})</h1>
                 <a href="mailto:{{ controller.user.email }}">{{ controller.user.email }}</a>
                 <div class="stats">
                     <div class="row">
@@ -206,7 +206,7 @@
                                     </td>
                                     <td class="col-xs-2 gray-text">
                                         <ul class="standart-list">
-                                            <li ng-repeat="user in project.users"><a href="">{{ user.native_name }}</a></li>
+                                            <li ng-repeat="user in project.users"><a href="">{{ user.full_name }}</a></li>
                                         </ul>
                                     </td>
                                     <td class="col-xs-2 controls-ctn">
