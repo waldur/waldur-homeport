@@ -26,7 +26,7 @@
                         <li><a href="/add-service/" class="add-project">Add service</a></li>
                         <li><a href="/#/projects/add/" class="add-project">Add project</a></li>
                         <li><a href="/add-resource/" class="add-resource">Add resource</a></li>
-                        <li class="divider">{{ controller.customer.name }}</li>
+                        <li class="divider">{{ controller.getCustomer().name }}</li>
                         <li><a href="">Customer 1</a></li>
                         <li><a href="">Customer 2</a></li>
                         <li><a href="">Customer 3</a></li>
@@ -39,7 +39,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right nav-user-area hidden-md hidden-sm">
                 <li class="dropdown add-something-box">
-                    <a href="" class="dropdown-toggle add-something-button" 
+                    <a href="" class="dropdown-toggle add-something-button"
                        ng-click="controller.menuToggle('addSomethingMenu')">
                         <i class="fa fa-plus"></i>
                     </a>
@@ -51,7 +51,7 @@
                 </li>
                 <li>
                     <a href="" class="customer-head" ng-click="controller.menuToggle('customerMenu')">
-                        <span class="customer-title">{{ controller.customer.name }}</span>
+                        <span class="customer-title">{{ controller.getCustomer().name }}</span>
                         <span class="customer-expl">active for context</span>
                         <span class="caret"></span>
                     </a>
@@ -62,10 +62,10 @@
                     </ul>
                 </li>
                 <li class="dropdown user-box">
-                    <a href="" class="dropdown-toggle user-pic-box" 
+                    <a href="" class="dropdown-toggle user-pic-box"
                        ng-click="controller.menuToggle('profileMenu')">
                         <img src="../static/images/887178.jpg" class="user-pic" alt="John Doe">
-                        {{ controller.user.full_name }}
+                        {{ controller.getUser().full_name }}
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu user-drop" role="menu" ng-show="controller.menuState.profileMenu">
