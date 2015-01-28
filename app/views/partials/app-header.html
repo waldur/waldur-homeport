@@ -1,5 +1,5 @@
 <!-- header -->
-<div class="app-header navbar navbar-fixed-top" role="navigation" ng-controller="MenuController as controller">
+<div class="app-header navbar navbar-fixed-top" role="navigation" ng-controller="HeaderContoller as controller">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" ng-click="menuCollapse = !menuCollapse">
@@ -19,14 +19,14 @@
             </ul>
             <ul class="nav navbar-nav navbar-right hidden-lg hidden-xs">
                 <li class="dropdown add-something-box">
-                    <a href="" class="dropdown-toggle add-something-button small-screen" ng-click="controller.combineMenu = !controller.combineMenu">
+                    <a href="" class="dropdown-toggle add-something-button small-screen" ng-click="controller.menuToggle('combineMenu')">
                         <img src="/static/images/887178.jpg" class="user-pic small-screen" alt="John Doe">
                     </a>
                     <ul class="dropdown-menu add-something small-screen" role="menu" ng-show="controller.menuState.combineMenu">
                         <li><a href="/add-service/" class="add-project">Add service</a></li>
                         <li><a href="/#/projects/add/" class="add-project">Add project</a></li>
                         <li><a href="/add-resource/" class="add-resource">Add resource</a></li>
-                        <li class="divider"></li>
+                        <li class="divider">{{ controller.customer.name }}</li>
                         <li><a href="">Customer 1</a></li>
                         <li><a href="">Customer 2</a></li>
                         <li><a href="">Customer 3</a></li>
@@ -50,30 +50,22 @@
                     </ul>
                 </li>
                 <li>
-                    <!-- <div class="custom-select">
-                        <select name="" id="">
-                            <option value="">Ilja Livenson</option>
-                        </select>
-                    </div> -->
-                    <a href="" class="customer-head" 
-                       ng-click="controller.menuToggle('customerMenu')">
-                        <span class="customer-title">Livenson PLC</span>
+                    <a href="" class="customer-head" ng-click="controller.menuToggle('customerMenu')">
+                        <span class="customer-title">{{ controller.customer.name }}</span>
                         <span class="customer-expl">active for context</span>
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu" role="menu" ng-show="controller.menuState.customerMenu">
-                        <li><a href="../customer/index.html">Customer 1</a></li>
-                        <li><a href="../customer/index.html">Customer 2</a></li>
-                        <li><a href="../customer/index.html">Customer 3</a></li>
+                        <li ng-repeat="customer in controller.customers"><a href="" ng-click="controller.setCurrentCustomerByClick(customer)">{{ customer.name }}</a></li>
                         <li class="divider"></li>
-                        <li><a href="#" class="add-customer">Manage customers</a></li>
+                        <li><a href="/#/profile/" class="add-customer">Manage customers</a></li>
                     </ul>
                 </li>
                 <li class="dropdown user-box">
                     <a href="" class="dropdown-toggle user-pic-box" 
                        ng-click="controller.menuToggle('profileMenu')">
                         <img src="../static/images/887178.jpg" class="user-pic" alt="John Doe">
-                        John Winner
+                        {{ controller.user.name }}
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu user-drop" role="menu" ng-show="controller.menuState.profileMenu">
