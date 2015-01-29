@@ -9,7 +9,7 @@
                 <img src="../static/images/887178.jpg" class="profile-pic" alt="John Doe">
             </div>
             <div class="col-xs-7 profile-info">
-                <h1 class="profile-name">{{ controller.user.native_name }} ({{ controller.user.username }})</h1>
+                <h1 class="profile-name">{{ controller.user.full_name }} ({{ controller.user.username }})</h1>
                 <a href="mailto:{{ controller.user.email }}">{{ controller.user.email }}</a>
                 <div class="stats">
                     <div class="row">
@@ -401,7 +401,7 @@
                                         <strong>{{ key.name }}</strong>
                                     </td>
                                     <td class="col-xs-8">
-                                        <div class="key">{{ key.public_key }}</div>
+                                        <div class="key">{{ key.fingerprint }}</div>
                                     </td>
                                     <td class="col-xs-1 controls-ctn">
                                         <ul class="controls pull-right">
