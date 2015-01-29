@@ -31,7 +31,15 @@
     vm.save = save;
 
     function save() {
-      vm.project.$save();
+      vm.project.$save(function() {
+        var url = vm.project.url;
+        var array = url.split ('/').filter(function(el) {
+          return el.length != 0
+        });
+        var uuidNew = array[4];
+        console.log(uuidNew);
+        $location.path('/projects/'+uuidNew+'/');
+      });
     }
 
   }
