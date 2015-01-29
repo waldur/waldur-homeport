@@ -14,7 +14,7 @@
                 </div>
                 <div class="login-block">
                     <h4 class="title">
-                        or use <a href="javascript:void(0);" ng-click="auth.isSignupFormVisible = true" data-role="switch-login-form">login/password</a>
+                        or use <a href="javascript:void(0);" ng-click="auth.isSignupFormVisible = true" data-role="switch-login-form">username/password</a>
                     </h4>
                 </div>
             </div>
@@ -24,7 +24,7 @@
     <!-- login with fields -->
     <div class="login-box inputs" ng-class="{state: auth.isSignupFormVisible}" data-role="login-box-inputs" loginboxcontext>
         <div class="container-fluid">
-            <h1>Welcome, Stranger!</h1>
+            <h1>Welcome!</h1>
             <div class="login-form">
                 <form name="signupForm" ng-submit="auth.signin()" form-autofill-fix>
                     <div class="login-block">
@@ -40,7 +40,7 @@
                                 <label for="" class="col-xs-4">password:</label>
                                 <input type="password" class="col-xs-8" ng-model="auth.user.password">
                             </div>
-                            <input class="btn btn-signup" type="submit"/>
+                            <input class="btn btn-signup" type="submit" value="Submit"/>
                         </div>
                     </div>
                 </form>
