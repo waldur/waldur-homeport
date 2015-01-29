@@ -35,35 +35,37 @@
     <div class="container-fluid">
         <div class="white-box">
             <div class="app-items-list">
-                <table class="items-table">
-                    <tr>
-                        <th class="name">
-                            <a href="" class="sort">Name</a>
-                        </th>
-                        <th class="col-xs-2 type">
-                            <a href="" class="sort">Type</a>
-                        </th>
-                        <th class="col-xs-1"></th>
-                    </tr>
-                    <tr ng-repeat="service in services">
-                        <td class="name">        
-                            <h2 class="item-title"><a href="../service/index.html">{{ service.Name }}</a></h2>
-                        </td>
-                        <td class="col-xs-2 type">
-                            <span class="elem item-type github">{{ service.Type }}</span>
-                        </td>
-                        <td class="col-xs-1 controls-ctn">
-                            <ul class="controls pull-right">
-                                <li>
-                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Restart"><i class="fa fa-cog"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
-                                </li>
-                            </ul>
-                        </td>
-                    </tr>
-                </table>
+                <div class="table-responsive">
+                    <table class="items-table">
+                        <tr>
+                            <th class="name">
+                                <a href="" class="sort">Name</a>
+                            </th>
+                            <th class="col-xs-2 type">
+                                <a href="" class="sort">Type</a>
+                            </th>
+                            <th class="col-xs-1"></th>
+                        </tr>
+                        <tr ng-repeat="service in services">
+                            <td class="name">        
+                                <h2 class="item-title"><a href="../service/index.html">{{ service.Name }}</a></h2>
+                            </td>
+                            <td class="col-xs-2 type">
+                                <span class="elem item-type github">{{ service.Type }}</span>
+                            </td>
+                            <td class="col-xs-1 controls-ctn">
+                                <ul class="controls pull-right">
+                                    <li>
+                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Restart"><i class="fa fa-cog"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

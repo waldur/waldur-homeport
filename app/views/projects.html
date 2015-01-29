@@ -36,50 +36,54 @@
     <div class="container-fluid">
         <div class="white-box">
             <div class="app-items-list">
-                <table class="items-table">
-                    <tr>
-                        <th class="name">
-                            <a href="" class="sort">Name</a>
-                        </th>
-                        <th class="col-xs-2"><a href="" class="sort">Resources</a></th>
-                        <th class="col-xs-2"><a href="" class="sort">Users</a></th>
-                        <th class="col-xs-2"></th>
-                    </tr>
-                    <tr ng-repeat="project in controller.list">
-                        <td class="name">
-                            <h2 class="item-title"><a href="/#/projects/{{ project.uuid }}/">{{ project.name }}</a></h2>
-                            <p class="gray-text">
-                                {{ project.description }}
-                            </p>
-                        </td>
-                        <td class="col-xs-3 gray-text">
-                            <ul class="standart-list">
-                                <li ng-repeat="resource in project.clouds"><span class="elem item-type repo"></span> {{ resource.name }}</li>
-                            </ul>
-                        </td>
-                        <td class="col-xs-2 gray-text">
-                            <ul class="standart-list">
-                                <li ng-repeat="user in project.users"><a href="">{{ user.full_name }}</a></li>
-                            </ul>
-                        </td>
-                        <td class="col-xs-2 controls-ctn">
-                            <ul class="controls pull-right">
-                                <li>
-                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Favorite" class="kit-icon star"></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="conf" data-toggle="tooltip" data-placement="top" title="Archive"><i class="glyphicon glyphicon-compressed"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="conf" data-toggle="tooltip" data-placement="top" title="Settings"><i class="fa fa-cog"></i></a>
-                                </li>
-                                <li>
-                                    <a href="" ng-click="controller.remove(project)" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
-                                </li>
-                            </ul>
-                        </td>
-                    </tr>
-                </table>
+                <div class="table-responsive">
+                    <div class="table-responsive">
+                        <table class="items-table">
+                            <tr>
+                                <th class="name">
+                                    <a href="" class="sort">Name</a>
+                                </th>
+                                <th class="col-xs-2"><a href="" class="sort">Resources</a></th>
+                                <th class="col-xs-2"><a href="" class="sort">Users</a></th>
+                                <th class="col-xs-2"></th>
+                            </tr>
+                            <tr ng-repeat="project in controller.list">
+                                <td class="name">
+                                    <h2 class="item-title"><a href="/#/projects/{{ project.uuid }}/">{{ project.name }}</a></h2>
+                                    <p class="gray-text">
+                                        {{ project.description }}
+                                    </p>
+                                </td>
+                                <td class="col-xs-3 gray-text">
+                                    <ul class="standart-list">
+                                        <li ng-repeat="resource in project.clouds"><span class="elem item-type repo"></span> {{ resource.name }}</li>
+                                    </ul>
+                                </td>
+                                <td class="col-xs-2 gray-text">
+                                    <ul class="standart-list">
+                                        <li ng-repeat="user in project.users"><a href="">{{ user.native_name }}</a></li>
+                                    </ul>
+                                </td>
+                                <td class="col-xs-2 controls-ctn">
+                                    <ul class="controls pull-right">
+                                        <li>
+                                            <a href="#" data-toggle="tooltip" data-placement="top" title="Favorite" class="kit-icon star"></a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="conf" data-toggle="tooltip" data-placement="top" title="Archive"><i class="glyphicon glyphicon-compressed"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="conf" data-toggle="tooltip" data-placement="top" title="Settings"><i class="fa fa-cog"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="" ng-click="controller.remove(project)" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

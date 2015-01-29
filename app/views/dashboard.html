@@ -27,37 +27,39 @@
     <div class="container-fluid">
         <div class="white-box">
            <div class="app-items-list">
-                <table class="items-table">
-                    <!-- event -->
-                    <tr class="event" ng-repeat="event in events">
-                        <td class="circle">
-                            <div class="circle-decor"></div>
-                        </td>
-                        <td>
-                            <h2 class="item-title">{{ event.title }}</h2>
-                            <div class="content">
-                                <div class="gray-text">
-                                    <p>
-                                        {{ event.description }}
-                                    </p>
+                <div class="table-responsive">
+                    <table class="items-table">
+                        <!-- event -->
+                        <tr class="event" ng-repeat="event in events">
+                            <td class="circle">
+                                <div class="circle-decor"></div>
+                            </td>
+                            <td>
+                                <h2 class="item-title">{{ event.title }}</h2>
+                                <div class="content">
+                                    <div class="gray-text">
+                                        <p>
+                                            {{ event.description }}
+                                        </p>
+                                    </div>
+                                    <ul class="controls">
+                                        <li>
+                                            <a href="#" class="event-action">Send to email</a>
+                                        </li>
+                                    </ul>
                                 </div>
-                                <ul class="controls">
+                            </td>
+                            <td class="col-xs-2 controls-ctn">
+                                <ul class="controls pull-right">
                                     <li>
-                                        <a href="#" class="event-action">Send to email</a>
+                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Favorite" class="kit-icon star filled"></a>
                                     </li>
                                 </ul>
-                            </div>
-                        </td>
-                        <td class="col-xs-2 controls-ctn">
-                            <ul class="controls pull-right">
-                                <li>
-                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Favorite" class="kit-icon star filled"></a>
-                                </li>
-                            </ul>
-                        </td>
-                    </tr>
-                    <!-- /event -->
-                </table>
+                            </td>
+                        </tr>
+                        <!-- /event -->
+                    </table>
+                </div>
             </div>
         </div>
     </div>
