@@ -3,9 +3,9 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('HeaderContoller', ['$scope', 'currentStateService', 'customersService', HeaderContoller]);
+    .controller('HeaderController', ['$scope', 'currentStateService', 'customersService', HeaderController]);
 
-  function HeaderContoller($scope, currentStateService, customersService) {
+  function HeaderController($scope, currentStateService, customersService) {
     var vm = this;
 
     vm.customers = customersService.getCustomersList();
