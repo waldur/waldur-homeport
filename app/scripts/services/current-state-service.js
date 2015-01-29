@@ -9,6 +9,7 @@
     var vm = this;
     vm.getCustomer = getCustomer;
     vm.getUser = getUser;
+    vm.setCustomer = setCustomer;
 
     // private variables:
     var user, customer;

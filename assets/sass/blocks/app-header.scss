@@ -176,6 +176,7 @@
         } // customer-expl
     } // customer-head
     .dropdown-menu {
+        display: block;
         background: #9ECF5D;
         border: none;
         border-radius: 0px 0px 4px 4px;
@@ -245,6 +246,12 @@
                         font-family: FontAwesome;
                     } // &:before
                 } // &.add-resource
+                &.current-customer {
+                    &:before {
+                        content: '\f00c';
+                        font-family: FontAwesome;
+                    } // &:after
+                } // &.current-customer
             } // a
         } // li
     } // dropdown-menu
