@@ -17,7 +17,7 @@
       authService.signin(vm.user.username, vm.user.password).then(success, error);
 
       function success() {
-        $location.path('/');
+        $location.path('/projects/');
       }
 
       function error(response) {
