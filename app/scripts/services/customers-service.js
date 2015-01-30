@@ -8,9 +8,19 @@
     /*jshint validthis: true */
     var vm = this;
     vm.getCustomersList = getCustomersList;
+    vm.createCustomer = createCustomer;
+    vm.getCustomer = getCustomer;
 
     function getCustomersList() {
       return RawCustomer.query();
+    }
+
+    function createCustomer() {
+      return new RawCustomer();
+    }
+
+    function getCustomer(uuid) {
+      return RawCustomer.get({projectUUID: uuid});
     }
 
   }
