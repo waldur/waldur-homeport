@@ -38,6 +38,10 @@ angular
       })
 
       .when('/profile/', {
+        templateUrl: 'views/profile.html',
+      })
+
+      .when('/user/', {
         templateUrl: 'views/user.html',
       })
 
