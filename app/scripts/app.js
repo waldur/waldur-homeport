@@ -21,6 +21,10 @@ angular
         controller: 'AuthController'
       })
 
+      .when('/initial-data/', {
+        templateUrl: 'views/initial-data.html',
+      })
+
       .when('/projects/', {
         templateUrl: 'views/projects.html',
       })
