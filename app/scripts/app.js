@@ -38,7 +38,7 @@ angular
       })
 
       .when('/profile/', {
-        templateUrl: 'views/user.html',
+        templateUrl: 'views/profile.html',
       })
 
       .otherwise({
