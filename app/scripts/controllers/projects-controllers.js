@@ -31,7 +31,15 @@
     vm.save = save;
 
     function save() {
-      vm.project.$save();
+      // TODO: refactor this function to use named urls and uuid field instead - SAAS-108
+      vm.project.$save(function() {
+        var url = vm.project.url;
+        var array = url.split ('/').filter(function(el) {
+          return el.length != 0
+        });
+        var uuidNew = array[4];
+        $location.path('/projects/'+uuidNew+'/');
+      });
     }
 
   }
