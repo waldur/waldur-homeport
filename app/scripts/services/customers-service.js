@@ -20,7 +20,7 @@
     }
 
     function getCustomer(uuid) {
-      return RawCustomer.get({projectUUID: uuid});
+      return RawCustomer.get({customerUUID: uuid});
     }
 
   }
