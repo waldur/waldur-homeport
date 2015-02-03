@@ -30,7 +30,7 @@
                         <li ng-repeat="customer in controller.customers"><a href="" ng-click="controller.setCurrentCustomer(customer)" ng-class="{'current-customer': customer.uuid == controller.getCustomer().uuid}">{{ customer.name }}</a></li>
                         <li><a href="/#/profile/" class="add-customer">Manage customers</a></li>
                         <li class="divider"></li>
-                        <li><a href="#">Profile</a></li>
+                        <li><a href="/#/profile/">Profile</a></li>
                         <li><a href="#">Logout</a></li>
                     </ul>
                 </li>
@@ -67,7 +67,7 @@
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu user-drop" role="menu" ng-show="controller.menuState.profileMenu">
-                        <li><a href="#">Profile</a></li>
+                        <li><a href="/#/profile/">Profile</a></li>
                         <li><a href="#">Logout</a></li>
                     </ul>
                 </li>

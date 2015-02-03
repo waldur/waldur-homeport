@@ -45,12 +45,12 @@ angular
         templateUrl: 'views/profile.html',
       })
 
-      .when('/user/', {
-        templateUrl: 'views/user.html',
+      .when('/customers/:uuid/', {
+        templateUrl: 'views/customer.html',
       })
 
-      .when('/customer/', {
-        templateUrl: 'views/customer.html',
+      .when('/user/', {
+        templateUrl: 'views/user.html',
       })
 
       .otherwise({
