@@ -49,7 +49,11 @@ angular
         templateUrl: 'views/customer.html',
       })
 
-      .when('/user/', {
+      .when('/users/', {
+        templateUrl: 'views/users.html',
+      })
+
+      .when('/users/:uuid/', {
         templateUrl: 'views/user.html',
       })
 
