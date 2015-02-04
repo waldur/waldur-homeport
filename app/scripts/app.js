@@ -25,6 +25,10 @@ angular
         templateUrl: 'views/initial-data.html',
       })
 
+      .when('/dashboard/', {
+        templateUrl: 'views/dashboard.html',
+      })
+
       .when('/projects/', {
         templateUrl: 'views/projects.html',
       })
@@ -53,7 +57,11 @@ angular
         templateUrl: 'views/customer-plans.html',
       })
 
-      .when('/user/', {
+      .when('/users/', {
+        templateUrl: 'views/users.html',
+      })
+
+      .when('/users/:uuid/', {
         templateUrl: 'views/user.html',
       })
 
