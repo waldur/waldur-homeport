@@ -61,6 +61,14 @@ angular
         templateUrl: 'views/user.html',
       })
 
+      .when('/payment/', {
+        templateUrl: 'views/payment-start.html',
+      })
+
+      .when('/payment/finish/', {
+        templateUrl: 'views/payment-finish.html',
+      })
+
       .otherwise({
         redirectTo: '/'
       });
