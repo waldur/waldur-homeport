@@ -9,6 +9,8 @@
     var vm = this;
     vm.getCurrentUser = getCurrentUser;
     vm.getCurrentUserWithKeys = getCurrentUserWithKeys;
+    vm.getUser = getUser;
+    vm.getRawUserList = getRawUserList;
 
     function getCurrentUser() {
       return RawUser.getCurrent();
@@ -21,6 +23,14 @@
         /*jshint camelcase: false */
         user.keys = RawKey.query({user_uuid: user.uuid});
       }
+    }
+
+    function getRawUserList() {
+      return RawUser.query();
+    }
+
+    function getUser(uuid) {
+      return RawUser.get({userUUID: uuid});
     }
 
   }
