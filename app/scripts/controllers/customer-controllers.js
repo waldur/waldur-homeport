@@ -1,6 +1,30 @@
 'use strict';
 
 (function() {
+    angular.module('ncsaas')
+    .controller('CustomerListController', [
+      '$rootScope',
+      '$location',
+      'customersService',
+      CustomerListController
+    ]);
+
+  function CustomerListController($rootScope, $location, customersService) {
+    var vm = this;
+
+    vm.list = customersService.getCustomersList();
+    vm.remove = remove;
+
+    function remove(customer) {
+      var index = vm.list.indexOf(customer);
+
+      customer.$delete(function() {
+        vm.list.splice(index, 1);
+      });
+    }
+
+  }
+
   angular.module('ncsaas')
     .controller('CustomerDetailUpdateController', [
       '$routeParams',
