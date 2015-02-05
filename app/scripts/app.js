@@ -61,6 +61,10 @@ angular
         templateUrl: 'views/user.html',
       })
 
+      .when('/resources/', {
+        templateUrl: 'views/resources.html',
+      })
+
       .otherwise({
         redirectTo: '/'
       });
