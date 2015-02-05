@@ -2,12 +2,22 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('cloudsService', ['ENV', '$resource', 'projectsService', cloudsService]);
+    .service('cloudsService', ['RawCloud', cloudsService]);
 
-  function cloudsService(ENV, $resource, projectsService, $cookies) {
+  function cloudsService(RawCloud) {
     /*jshint validthis: true */
     var vm = this;
-    vm.cloudResource = $resource(ENV.apiEndpoint + 'api/clouds/:cloudUUID/', {cloudUUID:'@uuid'});
+
+    vm.getCloudList = getCloudList;
+    vm.getCloud = getCloud;
+
+    function getCloudList() {
+      return RawCloud.query();
+    }
+
+    function getCloud(uuid) {
+      return RawCloud.get({cloudUUID: uuid});
+    }
 
   }
 
