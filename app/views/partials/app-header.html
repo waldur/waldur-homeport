@@ -29,7 +29,7 @@
                         <li><a href="/add-resource/" class="add-resource">Add resource</a></li>
                         <li class="divider">{{ controller.getCustomer().name }}</li>
                         <li ng-repeat="customer in controller.customers"><a href="" ng-click="controller.setCurrentCustomer(customer)" ng-class="{'current-customer': customer.uuid == controller.getCustomer().uuid}">{{ customer.name }}</a></li>
-                        <li><a href="/#/profile/" class="add-customer">Manage customers</a></li>
+                        <li><a href="/#/customers/" class="add-customer">Manage customers</a></li>
                         <li class="divider"></li>
                         <li><a href="/#/profile/">Profile</a></li>
                         <li><a href="#">Logout</a></li>
@@ -57,7 +57,7 @@
                     <ul class="dropdown-menu" role="menu" ng-show="controller.menuState.customerMenu" >
                         <li ng-repeat="customer in controller.customers"><a href="" ng-click="controller.setCurrentCustomer(customer)" ng-class="{'current-customer': customer.uuid == controller.getCustomer().uuid}">{{ customer.name }}</a></li>
                         <li class="divider"></li>
-                        <li><a href="/#/profile/" class="add-customer">Manage customers</a></li>
+                        <li><a href="/#/customers/" class="add-customer">Manage customers</a></li>
                     </ul>
                 </li>
                 <li class="dropdown user-box">
