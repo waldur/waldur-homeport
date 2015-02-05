@@ -53,6 +53,10 @@ angular
         templateUrl: 'views/customer.html',
       })
 
+      .when('/customers/:uuid/plans/', {
+        templateUrl: 'views/customer-plans.html',
+      })
+
       .when('/users/', {
         templateUrl: 'views/users.html',
       })
@@ -63,6 +67,14 @@ angular
 
       .when('/resources/', {
         templateUrl: 'views/resources.html',
+      })
+
+      .when('/payment/', {
+        templateUrl: 'views/payment-start.html',
+      })
+
+      .when('/payment/finish/', {
+        templateUrl: 'views/payment-finish.html',
       })
 
       .otherwise({
