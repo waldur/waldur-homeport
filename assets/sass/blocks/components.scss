@@ -326,8 +326,9 @@ a.sort {
 } // sort
 
 .error {
-    &.error-standart {
+    &.error-standard {
+        font-size: rem(14);
         padding: 4px 8px;
         background: rgb(202, 59, 59);
-    } // error-standart
+    } // error-standard
 } // error
