@@ -38,7 +38,7 @@
           return el.length != 0
         });
         var uuidNew = array[4];
-        $location.path('/projects/'+uuidNew+'/');
+        $location.path('/projects/' + uuidNew + '/');
       });
     }
 
