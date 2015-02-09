@@ -57,6 +57,10 @@ angular
         templateUrl: 'views/customer.html',
       })
 
+      .when('/customers/:uuid/edit/', {
+        templateUrl: 'views/customer-edit.html',
+      })
+
       .when('/customers/:uuid/plans/', {
         templateUrl: 'views/customer-plans.html',
       })
