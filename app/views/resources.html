@@ -53,10 +53,10 @@
                         </tr>
                         <tr ng-repeat="resource in controller.list">
                             <td class="name">        
-                                <h2 class="item-title">{{ resource.name }}</h2>
+                                <h2 class="item-title">{{ resource.hostname }}</h2>
                             </td>
                             <td class="type">
-                                <span class="elem item-type vm">{{ resource.Type }}</span>
+                                <span class="elem item-type vm">{{ resource.type }}</span>
                             </td>
                             <td>
                                 <a href="#" class="elem sort-display" ng-repeat="project in resource.projects">{{ project.name }}</a>
