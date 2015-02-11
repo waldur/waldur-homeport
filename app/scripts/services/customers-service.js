@@ -47,6 +47,9 @@
           getFirst: {
               method: 'GET',
               transformResponse: getFirst
+          },
+          update: {
+            method: 'PUT'
           }
         }
       );
