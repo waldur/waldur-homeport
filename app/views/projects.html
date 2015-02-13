@@ -61,7 +61,7 @@
                                 </td>
                                 <td class="col-xs-2 gray-text">
                                     <ul class="standart-list">
-                                        <li ng-repeat="user in project.users"><a href="#/users/{{ user.uuid }}/">{{ user.native_name }}</a></li>
+                                        <li ng-repeat="user in project.users"><a ui-sref="users({uuid: user.uuid})">{{ user.native_name }}</a></li>
                                     </ul>
                                 </td>
                                 <td class="col-xs-2 controls-ctn">
