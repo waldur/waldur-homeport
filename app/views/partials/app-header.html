@@ -12,11 +12,11 @@
         </div>
         <div class="navbar-collapse collapse" ng-class="{'in': menuCollapse}">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#/dashboard" class=""><i class="fa fa-th-large"></i> Dashboard</a></li>
-                <li class=""><a href="#/resources" class=""><i class="fa fa-tasks"></i> Resources</a></li>
-                <li class=""><a href="#/projects" class=""><i class="fa fa-folder"></i> Projects</a></li>
-                <li class=""><a href="#/services" class=""><i class="fa fa-folder"></i> Services</a></li>
-                <li class=""><a href="#/users" class=""><i class="fa fa-folder"></i> Users</a></li>
+                <li class="active"><a ui-sref="dashboard" class=""><i class="fa fa-th-large"></i> Dashboard</a></li>
+                <li class=""><a ui-sref="resources" class=""><i class="fa fa-tasks"></i> Resources</a></li>
+                <li class=""><a ui-sref="projects" class=""><i class="fa fa-folder"></i> Projects</a></li>
+                <li class=""><a ui-sref="services" class=""><i class="fa fa-folder"></i> Services</a></li>
+                <li class=""><a ui-sref="users" class=""><i class="fa fa-folder"></i> Users</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right hidden-lg hidden-xs">
                 <li class="dropdown add-something-box">
@@ -24,14 +24,14 @@
                         <img src="/static/images/887178.jpg" class="user-pic small-screen" alt="John Doe">
                     </a>
                     <ul class="dropdown-menu add-something small-screen" role="menu" ng-show="controller.menuState.combineMenu">
-                        <li><a href="/add-service/" class="add-project">Add service</a></li>
-                        <li><a href="/#/projects/add/" class="add-project">Add project</a></li>
-                        <li><a href="/add-resource/" class="add-resource">Add resource</a></li>
+                        <li><a ui-sref="service-add" class="add-project">Add service</a></li>
+                        <li><a ui-sref="projects-add" class="add-project">Add project</a></li>
+                        <li><a ui-sref="resource-add" class="add-resource">Add resource</a></li>
                         <li class="divider">{{ controller.getCustomer().name }}</li>
                         <li ng-repeat="customer in controller.customers"><a href="" ng-click="controller.setCurrentCustomer(customer)" ng-class="{'current-customer': customer.uuid == controller.getCustomer().uuid}">{{ customer.name }}</a></li>
-                        <li><a href="/#/customers/" class="add-customer">Manage customers</a></li>
+                        <li><a ui-sref="customers" class="add-customer">Manage customers</a></li>
                         <li class="divider"></li>
-                        <li><a href="/#/profile/">Profile</a></li>
+                        <li><a ui-sref="profile">Profile</a></li>
                         <li><a href="#">Logout</a></li>
                     </ul>
                 </li>
@@ -43,9 +43,9 @@
                         <i class="fa fa-plus"></i>
                     </a>
                     <ul class="dropdown-menu add-something" role="menu" ng-show="controller.menuState.addSomethingMenu">
-                        <li><a href="/add-service/" class="add-project">Add service</a></li>
-                        <li><a href="/#/projects/add/" class="add-project">Add project</a></li>
-                        <li><a href="/add-resource/" class="add-resource">Add resource</a></li>
+                        <li><a ui-sref="service-add" class="add-project">Add service</a></li>
+                        <li><a ui-sref="projects-add" class="add-project">Add project</a></li>
+                        <li><a ui-sref="resource-add" class="add-resource">Add resource</a></li>
                     </ul>
                 </li>
                 <li>
@@ -57,7 +57,7 @@
                     <ul class="dropdown-menu" role="menu" ng-show="controller.menuState.customerMenu" >
                         <li ng-repeat="customer in controller.customers"><a href="" ng-click="controller.setCurrentCustomer(customer)" ng-class="{'current-customer': customer.uuid == controller.getCustomer().uuid}">{{ customer.name }}</a></li>
                         <li class="divider"></li>
-                        <li><a href="/#/customers/" class="add-customer">Manage customers</a></li>
+                        <li><a ui-sref="customers" class="add-customer">Manage customers</a></li>
                     </ul>
                 </li>
                 <li class="dropdown user-box">
@@ -68,7 +68,7 @@
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu user-drop" role="menu" ng-show="controller.menuState.profileMenu">
-                        <li><a href="/#/profile/">Profile</a></li>
+                        <li><a ui-sref="profile">Profile</a></li>
                         <li><a href="#">Logout</a></li>
                     </ul>
                 </li>
