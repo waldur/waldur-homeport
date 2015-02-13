@@ -25,7 +25,7 @@ angular
         controller: 'AuthController'
       })
 
-      .state('initial-data', {
+      .state('initialdata', {
         url: '/initial-data/',
         templateUrl: 'views/initial-data.html',
       })
