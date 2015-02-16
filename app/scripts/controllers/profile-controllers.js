@@ -8,7 +8,6 @@
   function ProfileController($rootScope, usersService, customersService, projectsService) {
     var vm = this;
 
-    $rootScope.bodyClass = 'obj-view';
     vm.activeTab = 'eventlog';
 
     vm.user = usersService.getCurrentUserWithKeys();
