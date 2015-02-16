@@ -1,19 +1,16 @@
 'use strict';
 
 (function() {
-    angular.module('ncsaas')
-        .controller('MainController', ['$rootScope','$location', '$auth','usersService','authService', MainController]);
+  angular.module('ncsaas')
+    .controller('MainController', ['$rootScope', 'authService', '$state', MainController]);
 
-    function MainController($rootScope, $location, $auth,usersService,authService) {
-        $rootScope.$on('$routeChangeSuccess', function (e, current, pre) {
-            if (current.$$route != undefined && (current.$$route.originalPath === '/login/' || current.$$route.originalPath === '/')){
-                if (authService.getAuthCookie() != null){
-                    $location.path('/dashboard');
-                }
-            }
-        });
-        $rootScope.bodyClass = 'site-body';
-
-    }
-
+  function MainController($rootScope, authService, $state) {
+    $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
+      if (toState.name === 'home' || toState.name === 'login'){
+        if (authService.getAuthCookie() != null){
+          $state.go('dashboard');
+        }
+      }
+    });
+  }
 })();
