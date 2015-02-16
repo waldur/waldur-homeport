@@ -26,19 +26,19 @@
 
   angular.module('ncsaas')
     .controller('UserDetailUpdateController', [
-      '$routeParams',
+      '$stateParams',
       '$rootScope',
       'usersService',
       UserDetailUpdateController
     ]);
 
-  function UserDetailUpdateController($routeParams, $rootScope, usersService) {
+  function UserDetailUpdateController($stateParams, $rootScope, usersService) {
     var vm = this;
 
     $rootScope.bodyClass = 'obj-view';
 
     vm.activeTab = 'resources';
-    vm.user = usersService.getUser($routeParams.uuid);
+    vm.user = usersService.getUser($stateParams.uuid);
     vm.update = update;
 
     function update() {
