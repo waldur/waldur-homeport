@@ -11,6 +11,7 @@
     vm.signin = signin;
     vm.signup = signup;
     vm.signout = signout;
+    vm.getAuthCookie = getAuthCookie;
 
     function signin(username, password) {
       var request = $http.post(ENV.apiEndpoint + 'api-auth/password/', {username: username, password: password})
