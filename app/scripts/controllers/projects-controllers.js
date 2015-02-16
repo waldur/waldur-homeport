@@ -46,19 +46,19 @@
 
   angular.module('ncsaas')
     .controller('ProjectDetailUpdateController', [
-      '$routeParams',
+      '$stateParams',
       '$rootScope',
       'projectsService',
       ProjectDetailUpdateController
     ]);
 
-  function ProjectDetailUpdateController($routeParams, $rootScope, projectsService) {
+  function ProjectDetailUpdateController($stateParams, $rootScope, projectsService) {
     var vm = this;
 
     $rootScope.bodyClass = 'obj-view';
 
     vm.activeTab = 'eventlog';
-    vm.project = projectsService.getProject($routeParams.uuid);
+    vm.project = projectsService.getProject($stateParams.uuid);
     vm.update = update;
 
     function update() {

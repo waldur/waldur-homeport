@@ -5,88 +5,104 @@ angular
   // module name and dependencies
   .module('ncsaas', [
     'satellizer',
-    'ngRoute',
+    'ui.router',
     'ngCookies',
     'ngResource',])
   // urls
-  .config(function($routeProvider) {
-    $routeProvider
-      .when('/', {
+  .config(function($stateProvider, $urlRouterProvider) {
+
+    $urlRouterProvider.otherwise('/');
+
+    $stateProvider
+      .state('home', {
+        url: '/',
         templateUrl: 'views/home.html',
-        controller: 'HomeController'
       })
 
-      .when('/login/', {
+      .state('login', {
+        url: '/login/',
         templateUrl: 'views/login.html',
         controller: 'AuthController'
       })
 
-      .when('/initial-data/', {
+      .state('initialdata', {
+        url: '/initial-data/',
         templateUrl: 'views/initial-data.html',
       })
 
-      .when('/dashboard/', {
+      .state('dashboard', {
+        url: '/dashboard/',
         templateUrl: 'views/dashboard.html',
       })
 
-      .when('/projects/', {
+      .state('projects', {
+        url: '/projects/',
         templateUrl: 'views/projects.html',
       })
 
-      .when('/projects/add/', {
+      .state('projects-add', {
+        url: '/projects/add/',
         templateUrl: 'views/add-project.html',
       })
 
-      .when('/projects/:uuid/', {
+      .state('project', {
+        url: '/projects/:uuid/',
         templateUrl: 'views/project.html',
       })
 
-      .when('/projects/:uuid/edit/', {
+      .state('project-edit', {
+        url: '/projects/:uuid/edit/',
         templateUrl: 'views/project-edit.html',
       })
 
-      .when('/profile/', {
+      .state('profile', {
+        url: '/profile/',
         templateUrl: 'views/profile.html',
       })
 
-      .when('/customers/', {
+      .state('customers', {
+        url: '/customers/',
         templateUrl: 'views/customers.html',
       })
 
-      .when('/customers/:uuid/', {
+      .state('customer', {
+        url: '/customers/:uuid/',
         templateUrl: 'views/customer.html',
       })
 
-      .when('/customers/:uuid/edit/', {
+      .state('customer-edit', {
+        url: '/customers/:uuid/edit/',
         templateUrl: 'views/customer-edit.html',
       })
 
-      .when('/customers/:uuid/plans/', {
+      .state('customer-plans', {
+        url: '/customers/:uuid/plans/',
         templateUrl: 'views/customer-plans.html',
       })
 
-      .when('/users/', {
+      .state('users', {
+        url: '/users/',
         templateUrl: 'views/users.html',
       })
 
-      .when('/users/:uuid/', {
+      .state('user', {
+        url: '/users/:uuid/',
         templateUrl: 'views/user.html',
       })
 
-      .when('/resources/', {
+      .state('resources', {
+        url: '/resources/',
         templateUrl: 'views/resources.html',
       })
 
-      .when('/payment/', {
+      .state('payment', {
+        url: '/payment/',
         templateUrl: 'views/payment-start.html',
       })
 
-      .when('/payment/finish/', {
+      .state('payment-finish', {
+        url: '/payment/finish/',
         templateUrl: 'views/payment-finish.html',
-      })
-
-      .otherwise({
-        redirectTo: '/'
       });
   });
 
