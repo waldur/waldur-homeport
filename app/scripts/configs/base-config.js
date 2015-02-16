@@ -4,7 +4,7 @@ angular.module('ncsaas')
   .constant('ENV', {
     // general config
     name: '',
-    apiEndpoint: 'http://localhost:8000/',
+    apiEndpoint: 'http://localhost:8080/',
 
     // auth config
     googleClientId: 'google client id',
