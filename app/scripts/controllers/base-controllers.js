@@ -51,7 +51,7 @@
       var vm = this;
 
       $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
-        $rootScope.bodyClass = BodyClassService.setBodyClass(toState.name);
+        $rootScope.bodyClass = BodyClassService.getBodyClass(toState.name);
 
         if (toState.name === 'home' || toState.name === 'login'){
           if (authService.getAuthCookie() != null){

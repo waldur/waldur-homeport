@@ -6,9 +6,9 @@
 
     function BodyClassService() {
       var vm = this;
-      vm.setBodyClass = setBodyClass;
+      vm.setBodyClass = getBodyClass;
 
-      function setBodyClass(name) {
+      function getBodyClass(name) {
         var stateWithProfile = [
           'profile',
           'profile-edit',
