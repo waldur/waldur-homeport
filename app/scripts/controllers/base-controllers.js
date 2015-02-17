@@ -3,9 +3,9 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('HeaderController', ['$scope', 'currentStateService', 'customersService', HeaderController]);
+    .controller('HeaderController', ['$scope', '$state', 'currentStateService', 'customersService', 'HeaderActiveService', HeaderController]);
 
-  function HeaderController($scope, currentStateService, customersService) {
+  function HeaderController($scope, $state, currentStateService, customersService, HeaderActiveService) {
     var vm = this;
 
     vm.customers = customersService.getCustomersList();
@@ -20,6 +20,13 @@
       customerMenu : false,
       profileMenu : false
     };
+
+    // header active
+    vm.dashboardActive = HeaderActiveService.getStateForDashboard();
+    vm.resourcesActive = HeaderActiveService.getStateForResources();
+    vm.projectsActive = HeaderActiveService.getStateForProjects();
+    vm.servicesActive = HeaderActiveService.getStateForServices();
+    vm.usersActive = HeaderActiveService.getStateForUsers();
 
     function menuToggle(active) {
       for (var property in vm.menuState) {
