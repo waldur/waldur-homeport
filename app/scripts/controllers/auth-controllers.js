@@ -2,9 +2,9 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('AuthController', ['$location', '$state', '$auth', 'authService', AuthController]);
+    .controller('AuthController', ['$state', '$auth', 'authService', AuthController]);
 
-  function AuthController($location, $state, $auth, authService) {
+  function AuthController($state, $auth, authService) {
     var vm = this;
     vm.isSignupFormVisible = false;
     vm.signin = signin;
