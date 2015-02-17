@@ -19,11 +19,9 @@
 <![endif]-->
 
 </head>
-<body ng-controller="BodyController" ng-class="bodyClass">
+<body ng-controller="MainController" ng-class="bodyClass">
 
-<div ng-controller="MainController">
-    <div ui-view=""></div>
-</div>
+<div ui-view=""></div>
 
 <!-- Bower -->
   <!-- angular -->
@@ -43,7 +41,6 @@
 <script src="scripts/configs/auth-config.js"></script>
 <script src="scripts/configs/resource-config.js"></script>
 <!-- controllers -->
-<script src="scripts/controllers/main-controller.js"></script>
 <script src="scripts/controllers/base-controllers.js"></script>
 <script src="scripts/controllers/auth-controllers.js"></script>
 <script src="scripts/controllers/profile-controllers.js"></script>
@@ -52,6 +49,7 @@
 <script src="scripts/controllers/users-controllers.js"></script>
 <script src="scripts/controllers/instances-controllers.js"></script>
 <!-- services -->
+<script src="scripts/services/bodyclass-service.js"></script>
 <script src="scripts/services/auth-service.js"></script>
 <script src="scripts/services/current-state-service.js"></script>
 <script src="scripts/services/projects-service.js"></script>
