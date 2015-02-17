@@ -36,8 +36,6 @@
   function CustomerDetailUpdateController($stateParams, $rootScope, customersService) {
     var vm = this;
 
-    $rootScope.bodyClass = 'obj-view';
-
     vm.activeTab = 'resources';
     vm.customer = customersService.getCustomer($stateParams.uuid);
     vm.update = update;

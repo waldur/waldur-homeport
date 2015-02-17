@@ -44,4 +44,21 @@
 
   }
 
+  angular.module('ncsaas')
+    .controller('MainController', ['$rootScope', '$state', 'BodyClassService', MainController]);
+
+    function MainController($rootScope, $state, BodyClassService) {
+      var vm = this;
+
+      $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
+        $rootScope.bodyClass = BodyClassService.getBodyClass(toState.name);
+
+        if (toState.name === 'home' || toState.name === 'login'){
+          if (authService.getAuthCookie() != null){
+            $state.go('dashboard');
+          }
+        }
+      });
+    }
+
 })();

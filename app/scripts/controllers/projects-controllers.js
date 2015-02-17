@@ -55,8 +55,6 @@
   function ProjectDetailUpdateController($stateParams, $rootScope, projectsService) {
     var vm = this;
 
-    $rootScope.bodyClass = 'obj-view';
-
     vm.activeTab = 'eventlog';
     vm.project = projectsService.getProject($stateParams.uuid);
     vm.update = update;
