@@ -53,6 +53,11 @@
       $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
         BodyClassService.getBodyClass(toState.name);
 
+        if (toState.name === 'home' || toState.name === 'login'){
+          if (authService.getAuthCookie() != null){
+            $state.go('dashboard');
+          }
+        }
       });
     }
 
