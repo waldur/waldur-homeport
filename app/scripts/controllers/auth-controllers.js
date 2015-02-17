@@ -2,9 +2,9 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('AuthController', ['$location', '$auth', 'authService', AuthController]);
+    .controller('AuthController', ['$state', '$auth', 'authService', AuthController]);
 
-  function AuthController($location, $auth, authService) {
+  function AuthController($state, $auth, authService) {
     var vm = this;
     vm.isSignupFormVisible = false;
     vm.signin = signin;
@@ -17,7 +17,7 @@
       authService.signin(vm.user.username, vm.user.password).then(success, error);
 
       function success() {
-        $location.path('/projects/');
+        $state.go('dashboard');
       }
 
       function error(response) {
