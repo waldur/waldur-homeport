@@ -45,9 +45,9 @@
   }
 
   angular.module('ncsaas')
-    .controller('MainController', ['$rootScope', '$state', 'BodyClassService', MainController]);
+    .controller('MainController', ['$rootScope', '$state', 'authService', 'BodyClassService', MainController]);
 
-    function MainController($rootScope, $state, BodyClassService) {
+    function MainController($rootScope, $state, authService, BodyClassService) {
       var vm = this;
 
       $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
