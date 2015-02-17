@@ -2,15 +2,13 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('BodyClassService', ['$rootScope', BodyClassService]);
+    .service('BodyClassService', [BodyClassService]);
 
-    function BodyClassService($rootScope) {
+    function BodyClassService() {
       var vm = this;
+      vm.setBodyClass = setBodyClass;
 
-      $rootScope.bodyClass = 'app-body';
-      vm.getBodyClass = getBodyClass;
-
-      function getBodyClass(name) {
+      function setBodyClass(name) {
         var stateWithProfile = [
           'profile',
           'profile-edit',
@@ -22,16 +20,19 @@
           'user',
           'home',
           'login',
-        ]
+        ];
 
         if (stateWithProfile.indexOf(name) > -1 ) {
           if (name === 'login' || name === 'home') {
-            $rootScope.bodyClass = 'app-body site-body'
+            vm.bodyClass = 'app-body site-body';
+            return vm.bodyClass;
           } else {
-            $rootScope.bodyClass = 'app-body obj-view'
+            vm.bodyClass = 'app-body obj-view';
+            return vm.bodyClass;
           }
         } else {
-          $rootScope.bodyClass = 'app-body'
+          vm.bodyClass = 'app-body'
+          return vm.bodyClass;
         }
       }
     }
