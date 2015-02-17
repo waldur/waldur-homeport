@@ -9,6 +9,8 @@
       vm.getBodyClass = getBodyClass;
 
       function getBodyClass(name) {
+        var bodyClass;
+
         var stateWithProfile = [
           'profile',
           'profile-edit',
@@ -24,15 +26,15 @@
 
         if (stateWithProfile.indexOf(name) > -1 ) {
           if (name === 'login' || name === 'home') {
-            vm.bodyClass = 'app-body site-body';
-            return vm.bodyClass;
+            bodyClass = 'app-body site-body';
+            return bodyClass;
           } else {
-            vm.bodyClass = 'app-body obj-view';
-            return vm.bodyClass;
+            bodyClass = 'app-body obj-view';
+            return bodyClass;
           }
         } else {
-          vm.bodyClass = 'app-body'
-          return vm.bodyClass;
+          bodyClass = 'app-body'
+          return bodyClass;
         }
       }
     }
