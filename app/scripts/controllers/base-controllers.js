@@ -49,13 +49,13 @@
   }
 
   angular.module('ncsaas')
-    .controller('MainController', ['$rootScope', '$state', 'authService', 'BodyClassService', MainController]);
+    .controller('MainController', ['$rootScope', '$state', 'authService', 'currentStateService', MainController]);
 
-    function MainController($rootScope, $state, authService, BodyClassService) {
+    function MainController($rootScope, $state, authService, currentStateService) {
       var vm = this;
 
       $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
-        $rootScope.bodyClass = BodyClassService.getBodyClass(toState.name);
+        $rootScope.bodyClass = currentStateService.getBodyClass(toState.name);
 
         if (toState.name === 'home' || toState.name === 'login'){
           if (authService.getAuthCookie() != null){
