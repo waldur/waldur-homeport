@@ -1,6 +1,6 @@
 <ng-include src="'/views/partials/app-header.html'"></ng-include>
 
-<div ng-controller="InstanceListController as controller">
+<div ng-controller="ResourceListController as resources">
 
 <!-- app-block -->
 <section class="app-block">
@@ -51,7 +51,7 @@
                             </th>
                             <th></th>
                         </tr>
-                        <tr ng-repeat="resource in controller.list">
+                        <tr ng-repeat="resource in resources.list">
                             <td class="name">        
                                 <h2 class="item-title">{{ resource.hostname }}</h2>
                             </td>
