@@ -2,58 +2,31 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('HeaderActiveService', ['$state', HeaderActiveService]);
+    .service('HeaderActiveService', [HeaderActiveService]);
 
-    function HeaderActiveService($state) {
+    function HeaderActiveService() {
+      /*jshint validthis: true */
       var vm = this;
+      vm.getActiveItem = getActiveItem;
 
-      vm.getStateForDashboard = getStateForDashboard;
-      vm.getStateForResources = getStateForResources;
-      vm.getStateForProjects = getStateForProjects;
-      vm.getStateForServices = getStateForServices;
-      vm.getStateForUsers = getStateForUsers;
-
-      function getState(list) {
-        return (list.indexOf($state.current.name) !== -1)? true:false;
+      var urlList = {
+        'dashboard': ['dashboard'],
+        'resources': ['resources'],
+        'projects': ['projects', 'project', 'project-edit', 'projects-add'],
+        'services': ['services'],
+        'users': ['users', 'user']
       }
 
-      function getStateForDashboard() {
-        var statesList = [
-          'dashboard'
-        ];
-        return getState(statesList)
-      }
-
-      function getStateForResources() {
-        var statesList = [
-          'resources'
-        ];
-        return getState(statesList)
-      }
-
-      function getStateForProjects() {
-        var statesList = [
-          'projects',
-          'project',
-          'project-edit',
-          'projects-add'
-        ];
-        return getState(statesList)
-      }
-
-      function getStateForServices() {
-        var statesList = [
-          'services'
-        ];
-        return getState(statesList)
-      }
-
-      function getStateForUsers() {
-        var statesList = [
-          'users',
-          'user'
-        ];
-        return getState(statesList)
+      function getActiveItem(stateName) {
+        var activeState;
+        for (var prop in urlList) {
+          if (urlList.hasOwnProperty(prop)) {
+            if (urlList[prop].indexOf(stateName) !== -1) {
+              activeState = prop;
+            }
+          }
+        }
+        return activeState;
       }
     }
 
