@@ -36,12 +36,12 @@
 
     // Active menuItem
     var urlList = {
-      'dashboard': ['dashboard'],
-      'resources': ['resources'],
-      'projects': ['projects', 'project', 'project-edit', 'projects-add'],
-      'services': ['services'],
-      'users': ['users', 'user']
-    }
+      dashboard: ['dashboard'],
+      resources: ['resources'],
+      projects: ['projects', 'project', 'project-edit', 'projects-add'],
+      services: ['services'],
+      users: ['users', 'user']
+    };
 
     function getActiveItem(stateName) {
       var activeState;
@@ -72,7 +72,7 @@
     function getBodyClass(name) {
       var bodyClass;
 
-      if (stateWithProfile.indexOf(name) > -1 ) {
+      if (stateWithProfile.indexOf(name) > -1) {
         if (name === 'login' || name === 'home') {
           bodyClass = 'app-body site-body';
           return bodyClass;
@@ -81,7 +81,7 @@
           return bodyClass;
         }
       } else {
-        bodyClass = 'app-body'
+        bodyClass = 'app-body';
         return bodyClass;
       }
     }
