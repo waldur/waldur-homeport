@@ -55,6 +55,11 @@ angular
         templateUrl: 'views/project-edit.html',
       })
 
+      .state('services', {
+        url: '/services/',
+        templateUrl: 'views/services.html',
+      })
+
       .state('profile', {
         url: '/profile/',
         templateUrl: 'views/profile.html',
