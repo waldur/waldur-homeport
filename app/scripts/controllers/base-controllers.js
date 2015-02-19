@@ -3,9 +3,9 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('HeaderController', ['$scope', 'currentStateService', 'customersService', HeaderController]);
+    .controller('HeaderController', ['$scope', '$state', 'currentStateService', 'customersService', HeaderController]);
 
-  function HeaderController($scope, currentStateService, customersService) {
+  function HeaderController($scope, $state, currentStateService, customersService) {
     var vm = this;
 
     vm.customers = customersService.getCustomersList();
@@ -13,6 +13,8 @@
     vm.getCustomer = currentStateService.getCustomer;
     vm.menuToggle = menuToggle;
     vm.setCurrentCustomer = currentStateService.setCustomer;
+    vm.menuItemActive;
+
     // top-level menu
     vm.menuState = {
       addSomethingMenu : false,
@@ -20,6 +22,8 @@
       customerMenu : false,
       profileMenu : false
     };
+    // top-level menu active state
+    vm.menuItemActive = currentStateService.getActiveItem($state.current.name);
 
     function menuToggle(active, event) {
       for (var property in vm.menuState) {
@@ -45,13 +49,13 @@
   }
 
   angular.module('ncsaas')
-    .controller('MainController', ['$rootScope', '$state', 'authService', 'BodyClassService', MainController]);
+    .controller('MainController', ['$rootScope', '$state', 'authService', 'currentStateService', MainController]);
 
-    function MainController($rootScope, $state, authService, BodyClassService) {
+    function MainController($rootScope, $state, authService, currentStateService) {
       var vm = this;
 
       $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
-        $rootScope.bodyClass = BodyClassService.getBodyClass(toState.name);
+        $rootScope.bodyClass = currentStateService.getBodyClass(toState.name);
 
         if (toState.name === 'home' || toState.name === 'login'){
           if (authService.getAuthCookie() != null){
