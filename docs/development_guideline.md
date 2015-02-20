@@ -23,6 +23,7 @@ Recommended name: `<ObjectsName>Service`
 Uses providers from service layer to get or create objects with backend data.
 It is possible to use raw layer providers - only if objects are really simple, don't require any additional data
 and there is no provider from service layer for this type of objects.
+The results of promise request must be process in then block and put into variable which is available for a view.
 
 Recommended name: `<ObjectName><Actions>Controller`. Examples: `ProjectAddController`, `ProjectDetailUpdateController`
 
