@@ -20,7 +20,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right hidden-lg hidden-xs">
                 <li class="dropdown add-something-box">
-                    <a href="" class="dropdown-toggle add-something-button small-screen" ng-click="controller.menuToggle('combineMenu')">
+                    <a href="" class="dropdown-toggle add-something-button small-screen" ng-click="controller.menuToggle('combineMenu', $event)">
                         <img src="/static/images/887178.jpg" class="user-pic small-screen" alt="John Doe">
                     </a>
                     <ul class="dropdown-menu add-something small-screen" role="menu" ng-show="controller.menuState.combineMenu">
@@ -39,7 +39,7 @@
             <ul class="nav navbar-nav navbar-right nav-user-area hidden-md hidden-sm">
                 <li class="dropdown add-something-box">
                     <a href="" class="dropdown-toggle add-something-button"
-                       ng-click="controller.menuToggle('addSomethingMenu')">
+                       ng-click="controller.menuToggle('addSomethingMenu', $event)">
                         <i class="fa fa-plus"></i>
                     </a>
                     <ul class="dropdown-menu add-something" role="menu" ng-show="controller.menuState.addSomethingMenu">
@@ -49,7 +49,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="" class="customer-head" ng-click="controller.menuToggle('customerMenu')">
+                    <a href="" class="customer-head" ng-click="controller.menuToggle('customerMenu', $event)">
                         <span class="customer-title">{{ controller.getCustomer().name }}</span>
                         <span class="customer-expl">active for context</span>
                         <span class="caret"></span>
@@ -62,7 +62,7 @@
                 </li>
                 <li class="dropdown user-box">
                     <a href="" class="dropdown-toggle user-pic-box"
-                       ng-click="controller.menuToggle('profileMenu')">
+                       ng-click="controller.menuToggle('profileMenu', $event)">
                         <img src="../static/images/887178.jpg" class="user-pic" alt="John Doe">
                         {{ controller.getUser().full_name }}
                         <span class="caret"></span>
