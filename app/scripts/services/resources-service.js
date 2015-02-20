@@ -5,6 +5,7 @@
     .service('resourcesService', ['RawResource', 'currentStateService', '$q', resourcesService]);
 
   function resourcesService(RawResource, currentStateService, $q) {
+    /*jshint validthis: true */
     var vm = this;
     vm.getResourcesList = getResourcesList;
     vm.getRawResourcesList = getRawResourcesList;
@@ -14,11 +15,12 @@
     }
     function getResourcesList() {
       var deferred = $q.defer();
-      currentStateService.getCustomer().then(function(response){
-        var customerName = response.name;
-        var resources = RawResource.query({customer_name: customerName});
+      currentStateService.getCustomer().then(function(response) {
+        var customerName = response.name,
+        /*jshint camelcase: false */
+            resources = RawResource.query({customer_name: customerName});
         deferred.resolve(resources);
-      }, function(err){
+      }, function(err) {
         deferred.reject(err);
       });
       return deferred.promise;

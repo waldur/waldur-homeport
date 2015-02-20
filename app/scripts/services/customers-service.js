@@ -29,7 +29,7 @@
 
 (function() {
   angular.module('ncsaas')
-    .factory('RawCustomer', ['ENV', '$resource', '$q', RawCustomer]);
+    .factory('RawCustomer', ['ENV', '$resource', RawCustomer]);
 
     function RawCustomer(ENV, $resource) {
 
