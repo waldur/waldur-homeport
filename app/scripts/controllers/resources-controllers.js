@@ -6,9 +6,10 @@
 
   function ResourceListController(resourcesService) {
     var vm = this;
-
-    vm.list = resourcesService.getResourcesList();
-    console.log(vm.list);
+    vm.list = {};
+    resourcesService.getResourcesList().then(function(response){
+      vm.list = response;
+    });
     vm.remove = remove;
 
     function remove(resource) {

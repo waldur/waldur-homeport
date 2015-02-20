@@ -2,9 +2,9 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('resourcesService', ['RawResource','currentStateService', resourcesService]);
+    .service('resourcesService', ['RawResource', 'currentStateService', '$q', resourcesService]);
 
-  function resourcesService(RawResource, currentStateService) {
+  function resourcesService(RawResource, currentStateService, $q) {
 
     var vm = this;
     vm.getResourcesList = getResourcesList;
@@ -14,14 +14,16 @@
     function getRawResourcesList() {
       return RawResource.query();
     }
-
     function getResourcesList() {
-      currentStateService.getCustomer().$promise.then(function(response){
-        console.log(response.name);
+      var deferred = $q.defer();
+      currentStateService.getCustomer().then(function(response){
         var customerName = response.name;
         var resources = RawResource.query({customer_name: customerName});
-
+        deferred.resolve(resources);
+      }, function(err){
+        deferred.reject(err);
       });
+      return deferred.promise;
     }
 
   }

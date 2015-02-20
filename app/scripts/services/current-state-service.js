@@ -2,9 +2,9 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('currentStateService', ['RawUser', 'RawCustomer', currentStateService]);
+    .service('currentStateService', ['RawUser', 'RawCustomer', '$q', currentStateService]);
 
-  function currentStateService(RawUser, RawCustomer) {
+  function currentStateService(RawUser, RawCustomer, $q) {
     /*jshint validthis: true */
     var vm = this;
     vm.getCustomer = getCustomer;
@@ -24,8 +24,9 @@
     function getCustomer() {
       if (!customer) {
         customer = RawCustomer.getFirst();
+        return customer.$promise;
       }
-      return customer;
+
     }
 
     function setCustomer(newCustomer) {
