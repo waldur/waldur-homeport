@@ -35,9 +35,6 @@
     return $resource(
       ENV.apiEndpoint + 'api/resources/', {},
       {
-        update: {
-          method: 'PUT'
-        }
       }
     );
   }
