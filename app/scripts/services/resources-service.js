@@ -5,11 +5,9 @@
     .service('resourcesService', ['RawResource', 'currentStateService', '$q', resourcesService]);
 
   function resourcesService(RawResource, currentStateService, $q) {
-
     var vm = this;
     vm.getResourcesList = getResourcesList;
     vm.getRawResourcesList = getRawResourcesList;
-
 
     function getRawResourcesList() {
       return RawResource.query();
@@ -35,7 +33,7 @@
 
   function RawResource(ENV, $resource) {
     return $resource(
-      ENV.apiEndpoint + 'api/services/', {},
+      ENV.apiEndpoint + 'api/resources/', {},
       {
         update: {
           method: 'PUT'

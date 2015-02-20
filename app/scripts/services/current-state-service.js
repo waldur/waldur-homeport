@@ -24,9 +24,8 @@
     function getCustomer() {
       if (!customer) {
         customer = RawCustomer.getFirst();
-        return customer.$promise;
       }
-
+      return customer.$promise;
     }
 
     function setCustomer(newCustomer) {
