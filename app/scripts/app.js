@@ -7,7 +7,8 @@ angular
     'satellizer',
     'ui.router',
     'ngCookies',
-    'ngResource',])
+    'ngResource',
+    'duScroll'])
   // urls
   .config(function($stateProvider, $urlRouterProvider) {
 
