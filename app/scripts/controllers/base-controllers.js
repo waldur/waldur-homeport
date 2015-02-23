@@ -25,7 +25,7 @@
     // top-level menu active state
     vm.menuItemActive = currentStateService.getActiveItem($state.current.name);
 
-    function menuToggle(active) {
+    function menuToggle(active, event) {
       for (var property in vm.menuState) {
         if (vm.menuState.hasOwnProperty(property)) {
           if (property !== active) {

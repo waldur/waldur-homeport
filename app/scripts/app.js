@@ -7,7 +7,8 @@ angular
     'satellizer',
     'ui.router',
     'ngCookies',
-    'ngResource',])
+    'ngResource',
+    'duScroll'])
   // urls
   .config(function($stateProvider, $urlRouterProvider) {
 
@@ -53,6 +54,11 @@ angular
       .state('project-edit', {
         url: '/projects/:uuid/edit/',
         templateUrl: 'views/project-edit.html',
+      })
+
+      .state('services', {
+        url: '/services/',
+        templateUrl: 'views/services.html',
       })
 
       .state('profile', {
