@@ -95,6 +95,11 @@ angular
         templateUrl: 'views/resources.html',
       })
 
+      .state('resource-add', {
+        url: '/resources/add/',
+        templateUrl: 'views/add-resource.html',
+      })
+
       .state('payment', {
         url: '/payment/',
         templateUrl: 'views/payment-start.html',
