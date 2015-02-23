@@ -1,5 +1,6 @@
 'use strict';
 
+// XXX: Instance service have to be deleted
 (function() {
   angular.module('ncsaas')
     .service('instancesService', ['RawInstance', instancesService]);
@@ -17,6 +18,23 @@
 
     function getInstance(uuid) {
       return RawInstance.get({instanceUUID: uuid});
+    }
+
+  }
+
+})();
+
+// TODO: Merge with actual resource service
+(function() {
+  angular.module('ncsaas')
+    .service('resourceService', ['RawInstance', resourceService]);
+
+  function resourceService(RawInstance) {
+    /*jshint validthis: true */
+    var vm = this;
+
+    function createResource() {
+      return new RawInstance();
     }
 
   }
