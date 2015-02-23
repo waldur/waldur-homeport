@@ -52,14 +52,14 @@
                             <th></th>
                         </tr>
                         <tr ng-repeat="resource in resources.list">
-                            <td class="name">        
-                                <h2 class="item-title">{{ resource.hostname }}</h2>
+                            <td class="name">
+                                <h2 class="item-title"><a ui-sref="resource({uuid: resource.uuid})">{{ resource.hostname }}</a></h2>
                             </td>
                             <td class="type">
                                 <span class="elem item-type vm">{{ resource.type }}</span>
                             </td>
                             <td>
-                                <a href="#" class="elem sort-display" ng-repeat="project in resource.projects">{{ project.name }}</a>
+                                <a ui-sref="project({uuid: resource.project.uuid })" class="elem sort-display">{{ resource.project.name }}</a>
                             </td>
                             <td class="col-xs-2 controls-ctn">
                                 <ul class="controls pull-right">
