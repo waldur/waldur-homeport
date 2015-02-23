@@ -31,7 +31,7 @@
   function ResourceAddController($location, resourceService, projectsService) {
     var vm = this;
 
-    vm.projects = projectsService.getRawProjectsList();
+    vm.projects = projectsService.getRawProjectList();
 
   }
 
