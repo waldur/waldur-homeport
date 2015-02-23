@@ -2,13 +2,16 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('resourcesService', ['RawResource', 'currentStateService', '$q', resourcesService]);
+    .service('resourcesService', ['RawResource', 'RawInstance', 'currentStateService', '$q', resourcesService]);
 
-  function resourcesService(RawResource, currentStateService, $q) {
+  function resourcesService(RawResource, RawInstance, currentStateService, $q) {
     /*jshint validthis: true */
     var vm = this;
     vm.getResourcesList = getResourcesList;
     vm.getRawResourcesList = getRawResourcesList;
+    vm.stopResource = resourceSSROperation.bind('stop', null);
+    vm.startResource = resourceSSROperation.bind('start', null);
+    vm.restartResource = resourceSSROperation.bind('restart', null);
 
     function getRawResourcesList() {
       return RawResource.query();
@@ -25,7 +28,11 @@
       });
       return deferred.promise;
     }
-
+    function resourceSSROperation(operation, resource) {
+      RawInstance.SSROperation({instanceUUID: resource.uiid, operation: operation}, function(responce){
+        console.log(responce);
+      });
+    }
   }
 })();
 

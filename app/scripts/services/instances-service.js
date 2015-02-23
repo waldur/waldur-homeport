@@ -28,7 +28,13 @@
     .factory('RawInstance', ['ENV', '$resource', RawInstance]);
 
     function RawInstance(ENV, $resource) {
-      return $resource(ENV.apiEndpoint + 'api/instances/:instanceUUID/', {instanceUUID:'@uuid'});
+      return $resource(ENV.apiEndpoint + 'api/instances/:instanceUUID/:operation', {instanceUUID:'@uuid',
+        operation:'@operation'},
+        {
+          SSROperation: {
+            method:'POST'
+          }
+        });
     }
 
 })();
