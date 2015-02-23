@@ -9,8 +9,13 @@
     var vm = this;
     vm.getTemplateList = getTemplateList;
 
-    function getTemplateList() {
-      return RawTemplate.query().$promise;
+    function getTemplateList(cloudUUID) {
+      if (cloudUUID) {
+        return RawTemplate.query({cloud: cloudUUID}).$promise;
+      } else {
+        return RawTemplate.query().$promise;
+      }
+
     }
 
   }
@@ -22,7 +27,7 @@
     .factory('RawTemplate', ['ENV', '$resource', RawTemplate]);
 
     function RawTemplate(ENV, $resource) {
-      return $resource(ENV.apiEndpoint + 'api/templates/:templateUUID/', {templateUUID:'@uuid'});
+      return $resource(ENV.apiEndpoint + 'api/iaas-templates/:templateUUID/', {templateUUID:'@uuid'});
     }
 
 })();

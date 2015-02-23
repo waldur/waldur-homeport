@@ -7,7 +7,7 @@
   function ProjectListController($location, projectsService) {
     var vm = this;
 
-    vm.list = projectsService.getProjectsList();
+    vm.list = projectsService.getProjectList();
     vm.remove = remove;
 
     function remove(project) {

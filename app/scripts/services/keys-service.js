@@ -10,7 +10,7 @@
     vm.getKeyList = getKeyList;
 
     function getKeyList() {
-      return RawKey.query();
+      return RawKey.query().$promise;
     }
 
   }
