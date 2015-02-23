@@ -12,12 +12,17 @@
     vm.getUser = currentStateService.getUser;
     vm.currentCustomer = {};
     vm.menuToggle = menuToggle;
-    vm.setCurrentCustomer = currentStateService.setCustomer;
+    vm.setCurrentCustomer = setCurrentCustomer;
 
     // initiate current controller
     currentStateService.getCustomer().then(function(response) {
       vm.currentCustomer = response;
     });
+
+    function setCurrentCustomer(customer) {
+      currentStateService.setCustomer(customer);
+      vm.currentCustomer = customer;
+    }
 
     // top-level menu
     vm.menuState = {
