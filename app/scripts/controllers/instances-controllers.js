@@ -21,3 +21,18 @@
   }
 
 })();
+
+// TODO: move this controller to other resource controllers.
+(function() {
+  angular.module('ncsaas')
+    .controller('ResourceAddController',
+      ['$location', 'resourceService', 'projectsService', ResourceAddController]);
+
+  function ResourceAddController($location, resourceService, projectsService) {
+    var vm = this;
+
+    vm.projects = projectsService.getRawProjectsList();
+
+  }
+
+})();
