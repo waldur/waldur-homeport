@@ -2,13 +2,14 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('resourcesService', ['RawResource', 'currentStateService', '$q', resourcesService]);
+    .service('resourcesService', ['RawResource', 'RawInstance', 'currentStateService', '$q', resourcesService]);
 
   function resourcesService(RawResource, RawInstance, currentStateService, $q) {
     /*jshint validthis: true */
     var vm = this;
     vm.getResourcesList = getResourcesList;
     vm.getRawResourcesList = getRawResourcesList;
+    vm.createResource = createResource;
 
     function getRawResourcesList() {
       return RawResource.query();
