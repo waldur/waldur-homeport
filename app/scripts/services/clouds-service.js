@@ -2,9 +2,9 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('cloudsService', ['RawCloud', cloudsService]);
+    .service('cloudsService', ['RawCloud', 'RawTemplate', cloudsService]);
 
-  function cloudsService(RawCloud) {
+  function cloudsService(RawCloud, RawTemplate) {
     /*jshint validthis: true */
     var vm = this;
 
@@ -19,6 +19,10 @@
       return RawCloud.get({cloudUUID: uuid});
     }
 
+    function getCloudTemplates(cloudUUID) {
+      return RawTemplate.query({cloud: cloudUUID});
+    }
+
   }
 
 })();
@@ -29,6 +33,17 @@
 
     function RawCloud(ENV, $resource) {
       return $resource(ENV.apiEndpoint + 'api/clouds/:cloudUUID/', {cloudUUID:'@uuid'});
+    }
+
+})();
+
+// This factory has to be moved to template service if this service will be created
+(function() {
+  angular.module('ncsaas')
+    .factory('RawTemplate', ['ENV', '$resource', RawTemplate]);
+
+    function RawTemplate(ENV, $resource) {
+      return $resource(ENV.apiEndpoint + 'api/templates/:templateUUID/', {templateUUID:'@uuid'});
     }
 
 })();
