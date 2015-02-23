@@ -62,7 +62,21 @@
         @include inline-middle;
         a {
             @include black-link;
-            font-size: rem(14)
+            font-size: rem(14);
+            &.none {
+                display: none;
+            } // &.none
+            &.poweroff {
+                &.online {
+                    color: #e74c3c;
+                } // &.online
+                &.offline {
+                    color: #2ecc71;
+                } // &.online
+            } // poweroff
+            .remove {
+                color: #e74c3c;
+            } // remove
         } // a
     } // li
 } // controls
@@ -220,8 +234,8 @@ a.kit-icon {
     }
 } // checkbox-toggle
 
-input[type=text], 
-input[type=search], 
+input[type=text],
+input[type=search],
 input[type=password] {
     border: transparent;
     // border-bottom: 1px solid #979797;
@@ -332,3 +346,13 @@ a.sort {
         background: rgb(202, 59, 59);
     } // error-standard
 } // error
+
+.status-display {
+    &.online {
+        color: #9ECF5D;
+    } // &.online
+    &.offline {
+        color: #909099;
+        opacity: 0.2;
+    } // &.offline
+} // status-display

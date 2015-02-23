@@ -49,6 +49,9 @@
                             <th>
                                 <a href="" class="sort">Project</a>
                             </th>
+                            <th>
+                                <a href="" class="sort">Status</a>
+                            </th>
                             <th></th>
                         </tr>
                         <tr ng-repeat="resource in resources.list">
@@ -60,17 +63,23 @@
                             </td>
                             <td>
                                 <a ui-sref="project({uuid: resource.project.uuid })" class="elem sort-display">{{ resource.project.name }}</a>
+
+                            </td>
+                            <td class="col-xs-2">
+                                <span class="status-display online">
+                                    online
+                                </span>
                             </td>
                             <td class="col-xs-2 controls-ctn">
                                 <ul class="controls pull-right">
                                     <li>
-                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Poweroff"><i class="fa fa-power-off"></i></a>
+                                        <a href="#" class="poweroff online"><i class="fa fa-power-off"></i></a>
                                     </li>
                                     <li>
-                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Restart"><i class="fa fa-refresh"></i></a>
+                                        <a href="#" class=""><i class="fa fa-refresh"></i></a>
                                     </li>
                                     <li>
-                                        <a href="#" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
+                                        <a href="#" class="remove none"><i class="fa fa-times"></i></a>
                                     </li>
                                 </ul>
                             </td>
