@@ -41,14 +41,3 @@
     }
 
 })();
-
-// This factory has to be moved to template service if this service will be created
-(function() {
-  angular.module('ncsaas')
-    .factory('RawTemplate', ['ENV', '$resource', RawTemplate]);
-
-    function RawTemplate(ENV, $resource) {
-      return $resource(ENV.apiEndpoint + 'api/templates/:templateUUID/', {templateUUID:'@uuid'});
-    }
-
-})();
