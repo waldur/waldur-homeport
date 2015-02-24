@@ -42,18 +42,20 @@
           projects = {};
         /*jshint camelcase: false */
         if (includeUsers) {
-          projects = RawProject.query({customer_name: customerName}, initUsers, reject);
+          RawProject.query({customer_name: customerName}).$promise.then(
+            function(response_projects) {
+              projects = response_projects;
+              for (var i = 0; i < projects.length; i++) {
+                initProjectUsers(projects[i]);
+              }
+              deferred.resolve(projects);
+            },
+            reject);
         } else {
           projects = RawProject.query({customer_name: customerName});
+          deferred.resolve(projects);
         }
-        deferred.resolve(projects);
       }, reject);
-
-      function initUsers(projects) {
-        for (var i = 0; i < projects.length; i++) {
-          initProjectUsers(projects[i]);
-        }
-      }
 
       function reject(error) {
         deferred.reject(error);
