@@ -30,7 +30,7 @@
 </section>
 <!-- /app-block -->
 
-<div class="app-form-box after-line" data-role="form-box">    
+<div class="app-form-box after-line" data-role="form-box" ng-controller="ResourceAddController as ResourceAdd">
     <!-- app-block -->
     <section class="app-block">
         <div class="container-fluid">
@@ -51,28 +51,50 @@
 
                         <div class="row form-field">
                             <div class="col-xs-4">
-                                <input type="text" class="form-control" placeholder="Resource Name" data-role="form-input">
+                                <input type="text" class="form-control" placeholder="Resource Name" data-role="form-input" ng-model="ResourceAdd.resource.hostname">
                             </div>
                             <div class="col-xs-4">
                                 <div class="custom-select project">
-                                    <select name="" id="">
-                                        <option value="">Project</option>
-                                        <option value="">U345NV</option>
-                                        <option value="">DooTram11</option>
-                                        <option value="">FrayD34</option>
+                                    <select name="" id="" ng-model="ResourceAdd.resource.project">
+                                        <option ng-repeat="project in ResourceAdd.projectList" value="{{ project.url }}">{{ project.name }}</option>
                                     </select>
                                 </div>
                                 <a href="#" class="crud-controls active"><i class="fa fa-plus"></i> Add project</a>
                             </div>
                             <div class="col-xs-4">
                                 <div class="custom-select project">
-                                    <select name="" id="">
-                                        <option value="">ssh key</option>
-                                        <option value="">MaBook key</option>
-                                        <option value="">iMac Key</option>
+                                    <select name="" id="" ng-model="ResourceAdd.resource.ssh_public_key">
+                                        <option ng-repeat="key in ResourceAdd.keyList" value="{{ key.url }}">{{ key.name }}</option>
                                     </select>
                                 </div>
                                 <a href="#" class="crud-controls"><i class="fa fa-plus"></i> Add SSH key</a>
+                            </div>
+                        </div>
+
+                        <div class="row form-field">
+                            <div class="col-xs-4">
+                                Service:
+                                <div class="custom-select project">
+                                    <select name="" id="">
+                                        <option ng-repeat="service in ResourceAdd.serviceList" ng-click="ResourceAdd.setService(service)">{{ service.name }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xs-4">
+                                Flavor
+                                <div class="custom-select project">
+                                    <select name="" id="" ng-model="ResourceAdd.resource.flavor">
+                                        <option ng-repeat="flavor in ResourceAdd.flavorList" value="{{ flavor.url }}">{{ flavor.name }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xs-4">
+                                Template
+                                <div class="custom-select project">
+                                    <select name="" id="" ng-model="ResourceAdd.resource.template">
+                                        <option ng-repeat="template in ResourceAdd.templateList" value="{{ template.url }}">{{ template.name }}</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                         <div class="row form-field description">
@@ -350,7 +372,7 @@
                         <div class="row form-field">
                             <div class="col-xs-12 text-center">
                                 <button class="btn btn-default">Cancel</button>
-                                <button class="btn btn-primary">Add resource</button>
+                                <button class="btn btn-primary" ng-click="ResourceAdd.save()">Add resource</button>
                             </div>
                         </div>
                     </form>
