@@ -21,9 +21,9 @@
   }
 
   angular.module('ncsaas')
-    .controller('ProjectAddController', ['$location', 'projectsService', 'customersService', ProjectAddController]);
+    .controller('ProjectAddController', ['$state', 'projectsService', 'customersService', ProjectAddController]);
 
-  function ProjectAddController($location, projectsService, customersService) {
+  function ProjectAddController($state, projectsService, customersService) {
     var vm = this;
 
     vm.project = projectsService.createProject();
@@ -38,7 +38,7 @@
             return el.length !== 0;
           }),
           uuidNew = array[4];
-        $location.path('/projects/' + uuidNew + '/');
+        $state.go('project', {uuid:uuidNew});
       });
     }
 
