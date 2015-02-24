@@ -71,32 +71,6 @@
                             </div>
                         </div>
 
-                        <div class="row form-field">
-                            <div class="col-xs-4">
-                                Service:
-                                <div class="custom-select project">
-                                    <select name="" id="">
-                                        <option ng-repeat="service in ResourceAdd.serviceList" ng-click="ResourceAdd.setService(service)">{{ service.name }}</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-xs-4">
-                                Flavor
-                                <div class="custom-select project">
-                                    <select name="" id="" ng-model="ResourceAdd.resource.flavor">
-                                        <option ng-repeat="flavor in ResourceAdd.flavorList" value="{{ flavor.url }}">{{ flavor.name }}</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-xs-4">
-                                Template
-                                <div class="custom-select project">
-                                    <select name="" id="" ng-model="ResourceAdd.resource.template">
-                                        <option ng-repeat="template in ResourceAdd.templateList" value="{{ template.url }}">{{ template.name }}</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
                         <div class="row form-field description">
                             <div class="col-xs-4 col-xs-offset-4">
                                 <div class="gray-text">
@@ -126,42 +100,20 @@
                         <!-- service-choice -->
                         <div class="servicestore form-field" data-role="servicestore">
                             <div class="row templates-row">
-                                <div class="col-xs-4">
-                                    <div class="service-template" data-role="servicestore-template">
+                                <!-- template -->
+                                <div class="col-xs-4" ng-repeat="service in ResourceAdd.serviceList">
+                                    <div class="service-template" data-role="servicestore-template" ng-click="ResourceAdd.setService(service)">
                                         <div class="name-row">
                                             <div class="icon-box">
                                                 <img src="../static/images/icons/openstack.jpg" alt="" class="icon">
                                             </div>
                                             <div class="description">
-                                                <h3>OpenStack</h3>
+                                                <h3>{{ service.name }}</h3>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-xs-4">
-                                    <div class="service-template" data-role="servicestore-template">
-                                        <div class="name-row">
-                                            <div class="icon-box">
-                                                <img src="../static/images/icons/digitalocean.jpg" alt="" class="icon">
-                                            </div>
-                                            <div class="description">
-                                                <h3>DigitalOcean</h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-4">
-                                    <div class="service-template" data-role="servicestore-template">
-                                        <div class="name-row">
-                                            <div class="icon-box">
-                                                <img src="../static/images/icons/amazon.jpg" alt="" class="icon">
-                                            </div>
-                                            <div class="description">
-                                                <h3>Amazon WebServices</h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <!-- /template -->
                             </div>
                         </div>
                         <!-- /service-choice -->
@@ -172,7 +124,7 @@
                         <div class="app-title-line in-form form-field">
                             <div class="row">
                                 <div class="col-xs-12 first-line">
-                                    <h2 class="app-title">Instance Template</h2>
+                                    <h2 class="app-title">Template</h2>
                                 </div>
                             </div>
                         </div>
@@ -183,7 +135,7 @@
                             <div class="templates">
                                 <div class="row templates-row">
                                     <!-- template-box -->
-                                    <div class="col-xs-4">
+                                    <div class="col-xs-4" ng-repeat="template in ResourceAdd.templateList">
                                         <div class="template" data-role="appstore-template">
                                             <div class="row name-row">
                                                 <div class="col-xs-4 icon-box">
@@ -191,7 +143,7 @@
                                                 </div>
                                                 <div class="col-xs-8">
                                                     <div class="description">
-                                                        <h3>CentOS 34</h3>
+                                                        <h3>{{ template.name }}</h3>
                                                         <article class="gray-text">
                                                             Here goes some description about this template
                                                             <ul>
@@ -206,48 +158,27 @@
                                         </div>
                                     </div>
                                     <!-- /template-box -->
-                                    <!-- template-box -->
-                                    <div class="col-xs-4">
-                                        <div class="template" data-role="appstore-template">
-                                            <div class="row name-row">
-                                                <div class="col-xs-4 icon-box">
-                                                    <img src="../static/images/tmp/ubuntu.png" alt="" class="icon">
-                                                </div>
-                                                <div class="col-xs-8">
-                                                    <div class="description">
-                                                        <h3>CentOS 34</h3>
-                                                        <article class="gray-text">
-                                                            Here goes some description about this template
-                                                        </article>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- /template-box -->
-                                    <!-- template-box -->
-                                    <div class="col-xs-4">
-                                        <div class="template" data-role="appstore-template">
-                                            <div class="row name-row">
-                                                <div class="col-xs-4 icon-box">
-                                                    <img src="../static/images/tmp/windows.png" alt="" class="icon">
-                                                </div>
-                                                <div class="col-xs-8">
-                                                    <div class="description">
-                                                        <h3>CentOS 34</h3>
-                                                        <article class="gray-text">
-                                                            Here goes some description about this template
-                                                        </article>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- /template-box -->
                                 </div>
+                            </div>
+                        </div>
+                        <!-- /appstore -->
+
+                        <!-- app-title-line -->
+                        <div class="app-title-line in-form form-field">
+                            <div class="row">
+                                <div class="col-xs-12 first-line">
+                                    <h2 class="app-title">Flavor</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /app-title-line -->
+
+                        <!-- appstore -->
+                        <div class="appstore form-field" data-role="appstore">
+                            <div class="templates">
                                 <div class="row templates-row">
                                     <!-- template-box -->
-                                    <div class="col-xs-4">
+                                    <div class="col-xs-4" ng-repeat="template in ResourceAdd.templateList">
                                         <div class="template" data-role="appstore-template">
                                             <div class="row name-row">
                                                 <div class="col-xs-4 icon-box">
@@ -255,106 +186,14 @@
                                                 </div>
                                                 <div class="col-xs-8">
                                                     <div class="description">
-                                                        <h3>CentOS 34</h3>
+                                                        <h3>{{ template.name }}</h3>
                                                         <article class="gray-text">
                                                             Here goes some description about this template
-                                                        </article>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- /template-box -->
-                                    <!-- template-box -->
-                                    <div class="col-xs-4">
-                                        <div class="template" data-role="appstore-template">
-                                            <div class="row name-row">
-                                                <div class="col-xs-4 icon-box">
-                                                    <img src="../static/images/tmp/ubuntu.png" alt="" class="icon">
-                                                </div>
-                                                <div class="col-xs-8">
-                                                    <div class="description">
-                                                        <h3>CentOS 34</h3>
-                                                        <article class="gray-text">
-                                                            Here goes some description about this template
-                                                        </article>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- /template-box -->
-                                    <!-- template-box -->
-                                    <div class="col-xs-4">
-                                        <div class="template" data-role="appstore-template">
-                                            <div class="row name-row">
-                                                <div class="col-xs-4 icon-box">
-                                                    <img src="../static/images/tmp/windows.png" alt="" class="icon">
-                                                </div>
-                                                <div class="col-xs-8">
-                                                    <div class="description">
-                                                        <h3>CentOS 34</h3>
-                                                        <article class="gray-text">
-                                                            Here goes some description about this template
-                                                        </article>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- /template-box -->
-                                </div>
-                                <div class="row templates-row">
-                                    <!-- template-box -->
-                                    <div class="col-xs-4">
-                                        <div class="template" data-role="appstore-template">
-                                            <div class="row name-row">
-                                                <div class="col-xs-4 icon-box">
-                                                    <img src="../static/images/tmp/cent-icon.png" alt="" class="icon">
-                                                </div>
-                                                <div class="col-xs-8">
-                                                    <div class="description">
-                                                        <h3>CentOS 34</h3>
-                                                        <article class="gray-text">
-                                                            Here goes some description about this template
-                                                        </article>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- /template-box -->
-                                    <!-- template-box -->
-                                    <div class="col-xs-4">
-                                        <div class="template" data-role="appstore-template">
-                                            <div class="row name-row">
-                                                <div class="col-xs-4 icon-box">
-                                                    <img src="../static/images/tmp/ubuntu.png" alt="" class="icon">
-                                                </div>
-                                                <div class="col-xs-8">
-                                                    <div class="description">
-                                                        <h3>CentOS 34</h3>
-                                                        <article class="gray-text">
-                                                            Here goes some description about this template
-                                                        </article>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- /template-box -->
-                                    <!-- template-box -->
-                                    <div class="col-xs-4">
-                                        <div class="template" data-role="appstore-template">
-                                            <div class="row name-row">
-                                                <div class="col-xs-4 icon-box">
-                                                    <img src="../static/images/tmp/windows.png" alt="" class="icon">
-                                                </div>
-                                                <div class="col-xs-8">
-                                                    <div class="description">
-                                                        <h3>CentOS 34</h3>
-                                                        <article class="gray-text">
-                                                            Here goes some description about this template
+                                                            <ul>
+                                                                <li>asdasd</li>
+                                                                <li>asdasd</li>
+                                                                <li>asdasd</li>
+                                                            </ul>
                                                         </article>
                                                     </div>
                                                 </div>
