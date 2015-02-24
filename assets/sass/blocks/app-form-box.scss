@@ -38,7 +38,7 @@
         .templates-row {
             + .templates-row {
                 margin-top: 5px;
-            } // +            
+            } // +
         }  // templates-row
         .template {
             @include transition(all, 0.2s, ease);
@@ -133,7 +133,7 @@
     .templates-row {
         + .templates-row {
             margin-top: 5px;
-        } // +            
+        } // +
     }  // templates-row
     .service-template {
         @include transition(all, 0.2s, ease);
@@ -168,6 +168,9 @@
                 article {
                     margin: 0;
                     line-height: 1.2;
+                    ul {
+                        @include clear-list;
+                    } // ul
                 } // article
             } // description
         } // name-row
