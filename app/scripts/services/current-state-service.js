@@ -20,7 +20,7 @@
       if (!user) {
         user = RawUser.getCurrent();
       }
-      return user;
+      return user.$promise;
     }
 
     function getCustomer() {

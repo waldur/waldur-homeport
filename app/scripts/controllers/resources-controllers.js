@@ -51,7 +51,7 @@
         vm.projectList = response;
       });
       // keys
-      keysService.getKeyList().then(function(response) {
+      keysService.getCurrentUserKeyList().then(function(response) {
         vm.keyList = response;
       });
     }

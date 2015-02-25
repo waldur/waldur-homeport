@@ -2,15 +2,37 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('keysService', ['RawKey', keysService]);
+    .service('keysService', ['$q', 'RawKey', 'currentStateService', keysService]);
 
-  function keysService(RawKey) {
+  function keysService($q, RawKey, currentStateService) {
     /*jshint validthis: true */
     var vm = this;
     vm.getKeyList = getKeyList;
+    vm.getCurrentUserKeyList = getCurrentUserKeyList;
 
     function getKeyList() {
       return RawKey.query().$promise;
+    }
+
+    function getCurrentUserKeyList() {
+      var deferred = $q.defer();
+      currentStateService.getUser().then(initKeys, reject);
+
+      function initKeys(user) {
+        /*jshint camelcase: false */
+        RawKey.query({user_uuid: user.uuid}).$promise.then(
+          function(keys) {
+            deferred.resolve(keys);
+          },
+          reject
+        );
+      }
+
+      function reject(error) {
+        deferred.reject(error);
+      }
+
+      return deferred.promise;
     }
 
   }
