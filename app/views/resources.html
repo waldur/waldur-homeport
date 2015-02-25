@@ -1,6 +1,6 @@
 <ng-include src="'/views/partials/app-header.html'"></ng-include>
 
-<div ng-controller="ResourceListController as resources">
+<div ng-controller="ResourceListController as ResourceList">
 
 <!-- app-block -->
 <section class="app-block">
@@ -16,10 +16,7 @@
                             <li><a href="#">24</a></li>
                             <li class="divid">
                                 <div class="search" data-role="search-box">
-                                    <input type="text">
-                                    <button class="search-button">
-                                        <i class="fa fa-search"></i>
-                                    </button>
+                                    <input type="text" ng-model='ResourceList.searchInput' ng-keyup="ResourceList.search()">
                                 </div>
                             </li>
                         </ul>
@@ -51,8 +48,8 @@
                             </th>
                             <th></th>
                         </tr>
-                        <tr ng-repeat="resource in resources.list">
-                            <td class="name">        
+                        <tr ng-repeat="resource in ResourceList.list">
+                            <td class="name">
                                 <h2 class="item-title">{{ resource.hostname }}</h2>
                             </td>
                             <td class="type">

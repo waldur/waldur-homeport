@@ -8,10 +8,21 @@
     var vm = this;
 
     vm.list = {};
+    vm.searchInput = '';
+    vm.search = search;
+
     resourcesService.getResourcesList().then(function(response) {
       vm.list = response;
     });
+
+    function search() {
+      resourcesService.getResourcesList({hostname: vm.searchInput}).then(function(response) {
+        vm.list = response;
+      });
+    }
+
   }
+
 })();
 
 (function() {
