@@ -11,13 +11,13 @@
     vm.getCloudList = getCloudList;
     vm.getCloud = getCloud;
 
-    function getCloudList() {
+    function getCloudList(filter) {
       var deferred = $q.defer();
       currentStateService.getCustomer().then(function(response) {
-        var customerName = response.name,
         /*jshint camelcase: false */
-            resources = RawCloud.query({customer_name: customerName});
-        deferred.resolve(resources);
+        filter.customer_name = response.name;
+        var clouds = RawCloud.query(filter);
+        deferred.resolve(clouds);
       }, function(err) {
         deferred.reject(err);
       });

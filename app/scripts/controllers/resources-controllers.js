@@ -37,15 +37,12 @@
     vm.projectList = {};
     vm.templateList = {};
     vm.setService = setService;
+    vm.setProject = setProject;
     vm.resource = resourcesService.createResource();
     vm.save = save;
     vm.errors = {};
 
     function activate() {
-      // services
-      cloudsService.getCloudList().then(function(response) {
-        vm.serviceList = response;
-      });
       // projects
       projectsService.getProjectList().then(function(response) {
         vm.projectList = response;
@@ -60,6 +57,14 @@
       vm.flavorList = service.flavors;
       templatesService.getTemplateList(service.uuid).then(function(response) {
         vm.templateList = response;
+      });
+    }
+
+    function setProject(project) {
+      vm.resource.project = project.url;
+      // services
+      cloudsService.getCloudList({project: project.uuid}).then(function(response) {
+        vm.serviceList = response;
       });
     }
 
