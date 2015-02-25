@@ -167,38 +167,38 @@
                         </div>
                         <!-- /app-title-line -->
 
-                        <!-- appstore -->
-                        <div class="appstore form-field" data-role="appstore">
-                            <div class="templates">
-                                <div class="row templates-row">
-                                    <!-- template-box -->
-                                    <div class="col-xs-4" ng-repeat="template in ResourceAdd.templateList">
-                                        <div class="template" data-role="appstore-template">
-                                            <div class="row name-row">
-                                                <div class="col-xs-4 icon-box">
-                                                    <img src="../static/images/tmp/cent-icon.png" alt="" class="icon">
-                                                </div>
-                                                <div class="col-xs-8">
-                                                    <div class="description">
-                                                        <h3>{{ template.name }}</h3>
-                                                        <article class="gray-text">
-                                                            Here goes some description about this template
-                                                            <ul>
-                                                                <li>asdasd</li>
-                                                                <li>asdasd</li>
-                                                                <li>asdasd</li>
-                                                            </ul>
-                                                        </article>
-                                                    </div>
-                                                </div>
+                        <!-- template-choice -->
+                        <div class="servicestore form-field" data-role="servicestore">
+                            <div class="row templates-row">
+                                <!-- template -->
+                                <div class="col-xs-4" ng-repeat="template in ResourceAdd.flavorList">
+                                    <div class="service-template" data-role="servicestore-template" ng-click="ResourceAdd.setService(service)">
+                                        <div class="name-row">
+                                            <div class="description">
+                                                <article class="gray-text-dark">
+                                                    <ul class="hardware">
+                                                        <li>
+                                                            <i class="flaticon-computer33"></i>
+                                                            Cores: {{ template.cores }}
+                                                        </li>
+                                                        <li>
+                                                            <i class="flaticon-random"></i>
+                                                            RAM: {{ template.ram }}
+                                                        </li>
+                                                        <li>
+                                                            <i class="flaticon-hardware1"></i>
+                                                            Disk: {{ template.disk }}
+                                                        </li>
+                                                    </ul>
+                                                </article>
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- /template-box -->
                                 </div>
+                                <!-- /template -->
                             </div>
                         </div>
-                        <!-- /appstore -->
+                        <!-- /template-choice -->
 
                         <div class="form-divide"></div>
 
