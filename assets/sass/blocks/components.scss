@@ -119,6 +119,12 @@ a.kit-icon {
     font-size: rem(14);
 } // gray-text
 
+.gray-text-dark {
+    color: #505050;
+    text-decoration: none;
+    font-size: rem(14);
+} // gray-text
+
 .show-more {
     display: block;
     text-align: center;
@@ -220,8 +226,8 @@ a.kit-icon {
     }
 } // checkbox-toggle
 
-input[type=text], 
-input[type=search], 
+input[type=text],
+input[type=search],
 input[type=password] {
     border: transparent;
     // border-bottom: 1px solid #979797;

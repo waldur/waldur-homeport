@@ -137,16 +137,15 @@
     }  // templates-row
     .service-template {
         @include transition(all, 0.2s, ease);
-        // background: #EDEDED;
         box-sizing: border-box;
-        padding: 5px 12px;
+        padding: 10px 12px;
         margin-bottom: 5px;
         border-radius: 1px;
         position: relative;
         cursor: pointer;
         border: 1px solid rgb(202, 202, 202);
+        @include table;
         .name-row {
-            @include table;
             .icon-box {
                 @include table-cell;
                 vertical-align: middle;
@@ -170,6 +169,17 @@
                     line-height: 1.2;
                     ul {
                         @include clear-list;
+                        li + li {
+                            margin-top: 10px;
+                        } // li + li
+                        &.hardware {
+                            [class^="flaticon-"] {
+                                margin-right: 10px;
+                                &:before {
+                                    font-size: rem(16);
+                                } // &:before
+                            } // [class^="flaticon-"]
+                        } // &.hardware
                     } // ul
                 } // article
             } // description
