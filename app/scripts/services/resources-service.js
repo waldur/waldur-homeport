@@ -9,13 +9,18 @@
     var vm = this;
     vm.getResourcesList = getResourcesList;
     vm.getRawResourcesList = getRawResourcesList;
+
     vm.stopResource = resourceSSROperation.bind('stop', null);
     vm.startResource = resourceSSROperation.bind('start', null);
     vm.restartResource = resourceSSROperation.bind('restart', null);
 
+    vm.createResource = createResource;
+
+
     function getRawResourcesList() {
       return RawResource.query();
     }
+
     function getResourcesList() {
       var deferred = $q.defer();
       currentStateService.getCustomer().then(function(response) {
@@ -28,11 +33,17 @@
       });
       return deferred.promise;
     }
+
     function resourceSSROperation(operation, resource) {
       RawInstance.SSROperation({instanceUUID: resource.uiid, operation: operation}, function(responce){
         console.log(responce);
       });
     }
+
+    function createResource() {
+      return new RawInstance();
+    }
+
   }
 })();
 
@@ -41,10 +52,23 @@
     .factory('RawResource', ['ENV', '$resource', RawResource]);
 
   function RawResource(ENV, $resource) {
-    return $resource(
-      ENV.apiEndpoint + 'api/resources/', {},
-      {
-      }
-    );
+    return $resource(ENV.apiEndpoint + 'api/resources/');
   }
+})();
+
+// Instance - one resource implementations. Thar why RawInstance factory locates in this file
+(function() {
+  angular.module('ncsaas')
+    .factory('RawInstance', ['ENV', '$resource', RawInstance]);
+
+  function RawInstance(ENV, $resource) {
+    return $resource(ENV.apiEndpoint + 'api/instances/:instanceUUID/:operation', {instanceUUID:'@uuid',
+        operation:'@operation'},
+      {
+        SSROperation: {
+          method:'POST'
+        }
+      });
+  }
+
 })();

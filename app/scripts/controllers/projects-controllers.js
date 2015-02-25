@@ -7,7 +7,7 @@
   function ProjectListController($location, projectsService) {
     var vm = this;
 
-    vm.list = projectsService.getProjectsList();
+    vm.list = projectsService.getProjectList();
     vm.remove = remove;
 
     function remove(project) {
@@ -21,9 +21,9 @@
   }
 
   angular.module('ncsaas')
-    .controller('ProjectAddController', ['$location', 'projectsService', 'customersService', ProjectAddController]);
+    .controller('ProjectAddController', ['$state', 'projectsService', 'customersService', ProjectAddController]);
 
-  function ProjectAddController($location, projectsService, customersService) {
+  function ProjectAddController($state, projectsService, customersService) {
     var vm = this;
 
     vm.project = projectsService.createProject();
@@ -33,12 +33,12 @@
     function save() {
       // TODO: refactor this function to use named urls and uuid field instead - SAAS-108
       vm.project.$save(function() {
-        var url = vm.project.url;
-        var array = url.split ('/').filter(function(el) {
-          return el.length != 0
-        });
-        var uuidNew = array[4];
-        $location.path('/projects/' + uuidNew + '/');
+        var url = vm.project.url,
+          array = url.split ('/').filter(function(el) {
+            return el.length !== 0;
+          }),
+          uuidNew = array[4];
+        $state.go('project', {uuid:uuidNew});
       });
     }
 
