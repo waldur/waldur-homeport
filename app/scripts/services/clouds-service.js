@@ -11,16 +11,26 @@
     vm.getCloudList = getCloudList;
     vm.getCloud = getCloud;
 
-    function getCloudList() {
+    function getCloudList(filter) {
       var deferred = $q.defer();
-      currentStateService.getCustomer().then(function(response) {
-        var customerName = response.name,
+      filter = filter || {};
+      currentStateService.getCustomer().then(initClouds, reject);
+
+      function initClouds(customer) {
         /*jshint camelcase: false */
-            resources = RawCloud.query({customer_name: customerName});
-        deferred.resolve(resources);
-      }, function(err) {
-        deferred.reject(err);
-      });
+        filter.customer_name = customer.name;
+        RawCloud.query(filter).$promise.then(
+          function(response) {
+            deferred.resolve(response);
+          },
+          reject
+        );
+      }
+
+      function reject(error) {
+        deferred.reject(error);
+      }
+
       return deferred.promise;
     }
 
