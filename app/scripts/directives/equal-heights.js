@@ -8,26 +8,32 @@
     function EqualHeightsDirective($window, $timeout) {
       return {
         restrict: 'A',
-        scope: {},
+        scope: {
+          isParentShown: '&'
+        },
         link: function($scope, element, attrs) {
-          $timeout(function() {
 
-            var children = element.children(),
-            currentMaxHeight = 0;
+          $scope.$watch($scope.isParentShown, function() {
+            $timeout(function() {
 
-            console.log(children);
+              var children = element.children().children().children().children(),
+              currentMaxHeight = 0;
+              console.log(children);
 
-            angular.forEach(children, function(child) {
-              var childHeight = child.offsetHeight;
+              angular.forEach(children, function(child) {
 
-              if (childHeight > currentMaxHeight) {
-                currentMaxHeight = childHeight;
-              }
-            });
+                var childHeight = child.offsetHeight;
 
-            angular.element(children).css('height', currentMaxHeight + 'px');
+                if (childHeight > currentMaxHeight) {
+                  currentMaxHeight = childHeight;
+                }
 
-          }, 100);
+              });
+
+              angular.element(children).css('height', currentMaxHeight + 'px');
+
+            }, 400);
+          });
         }
       }
     }
