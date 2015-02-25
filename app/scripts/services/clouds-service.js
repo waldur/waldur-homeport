@@ -13,14 +13,24 @@
 
     function getCloudList(filter) {
       var deferred = $q.defer();
-      currentStateService.getCustomer().then(function(response) {
+      filter = filter || {};
+      currentStateService.getCustomer().then(initClouds, reject);
+
+      function initClouds(customer) {
         /*jshint camelcase: false */
-        filter.customer_name = response.name;
-        var clouds = RawCloud.query(filter);
-        deferred.resolve(clouds);
-      }, function(err) {
-        deferred.reject(err);
-      });
+        filter.customer_name = customer.name;
+        RawCloud.query(filter).$promise.then(
+          function(response) {
+            deferred.resolve(response);
+          },
+          reject
+        );
+      }
+
+      function reject(error) {
+        deferred.reject(error);
+      }
+
       return deferred.promise;
     }
 
