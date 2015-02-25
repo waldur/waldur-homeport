@@ -99,10 +99,10 @@
 
                         <!-- service-choice -->
                         <div class="servicestore form-field" data-role="servicestore">
-                            <div class="row templates-row">
+                            <div class="row templates-row" equal-heights>
                                 <!-- template -->
                                 <div class="col-xs-4" ng-repeat="service in ResourceAdd.serviceList">
-                                    <div class="service-template" data-role="servicestore-template" ng-click="ResourceAdd.setService(service)">
+                                    <div class="service-template" data-role="servicestore-template" ng-click="ResourceAdd.setService(service)" ng-class="{'state': ResourceAdd.currentService == service}">
                                         <div class="name-row">
                                             <div class="icon-box">
                                                 <img src="../static/images/icons/openstack.jpg" alt="" class="icon">
@@ -131,11 +131,11 @@
                         <!-- /app-title-line -->
 
                         <!-- template-choice -->
-                        <div class="servicestore form-field" data-role="servicestore">
-                            <div class="row templates-row">
+                        <div class="servicestore form-field" data-role="servicestore" ng-show="ResourceAdd.showTemplates">
+                            <div class="row templates-row" equal-heights is-parent-shown='ResourceAdd.showTemplates'>
                                 <!-- template -->
                                 <div class="col-xs-4" ng-repeat="template in ResourceAdd.templateList">
-                                    <div class="service-template" data-role="servicestore-template" ng-click="ResourceAdd.setService(service)">
+                                    <div class="service-template" data-role="servicestore-template" ng-click="ResourceAdd.setTemplate(template)" ng-class="{'state': ResourceAdd.currentTemplate == template}">
                                         <div class="name-row">
                                             <div class="icon-box">
                                                 <img ng-show="template.icon_url" src="{{ template.icon_url }}" alt="" class="icon">
@@ -168,26 +168,26 @@
                         <!-- /app-title-line -->
 
                         <!-- template-choice -->
-                        <div class="servicestore form-field" data-role="servicestore">
-                            <div class="row templates-row">
+                        <div class="servicestore form-field" data-role="servicestore" ng-show="ResourceAdd.showFlavors">
+                            <div class="row templates-row" equal-heights is-parent-shown='ResourceAdd.showFlavors'>
                                 <!-- template -->
-                                <div class="col-xs-4" ng-repeat="template in ResourceAdd.flavorList">
-                                    <div class="service-template" data-role="servicestore-template" ng-click="ResourceAdd.setService(service)">
+                                <div class="col-xs-4" ng-repeat="flavor in ResourceAdd.flavorList">
+                                    <div class="service-template" data-role="servicestore-template" ng-click="ResourceAdd.setFlavor(flavor)" ng-class="{'state': ResourceAdd.currentFlavor == flavor}">
                                         <div class="name-row">
                                             <div class="description">
                                                 <article class="gray-text-dark">
                                                     <ul class="hardware">
                                                         <li>
                                                             <i class="flaticon-computer33"></i>
-                                                            Cores: {{ template.cores }}
+                                                            Cores: {{ flavor.cores }}
                                                         </li>
                                                         <li>
                                                             <i class="flaticon-random"></i>
-                                                            RAM: {{ template.ram }}
+                                                            RAM: {{ flavor.ram }}
                                                         </li>
                                                         <li>
                                                             <i class="flaticon-hardware1"></i>
-                                                            Disk: {{ template.disk }}
+                                                            Disk: {{ flavor.disk }}
                                                         </li>
                                                     </ul>
                                                 </article>
