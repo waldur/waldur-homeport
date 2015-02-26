@@ -70,16 +70,18 @@
       templatesService.getTemplateList(service.uuid).then(function(response) {
         vm.templateList = response;
       });
-      vm.showFlavors = true;
-      vm.showTemplates = true;
       vm.currentService = service;
+      vm.showTemplates = true;
     }
 
     function setTemplate(tamplate) {
+      vm.resource.template = tamplate.url;
       vm.currentTemplate = tamplate;
+      vm.showFlavors = true;
     }
 
     function setFlavor(flavor) {
+      vm.resource.flavor = flavor.url;
       vm.currentFlavor = flavor;
     }
 
