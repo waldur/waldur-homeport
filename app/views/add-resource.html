@@ -55,16 +55,20 @@
                             </div>
                             <div class="col-xs-4">
                                 <div class="custom-select project">
-                                    <select name="" id="" ng-model="ResourceAdd.resource.project">
-                                        <option ng-repeat="project in ResourceAdd.projectList" value="{{ project.url }}">{{ project.name }}</option>
+                                    <select name="" id=""
+                                        ng-options="project.url as project.name for project in ResourceAdd.projectList"
+                                        ng-model="ResourceAdd.resource.project">
+                                        <option value="" selected>Choose project</option>
                                     </select>
                                 </div>
                                 <a href="#" class="crud-controls active"><i class="fa fa-plus"></i> Add project</a>
                             </div>
                             <div class="col-xs-4">
                                 <div class="custom-select project">
-                                    <select name="" id="" ng-model="ResourceAdd.resource.ssh_public_key">
-                                        <option ng-repeat="key in ResourceAdd.keyList" value="{{ key.url }}">{{ key.name }}</option>
+                                    <select name="" id=""
+                                        ng-options="key.name as key.name for key in ResourceAdd.keyList"
+                                        ng-model="ResourceAdd.resource.key_name">
+                                        <option value="" selected>Choose key</option>
                                     </select>
                                 </div>
                                 <a href="#" class="crud-controls"><i class="fa fa-plus"></i> Add SSH key</a>
@@ -98,30 +102,22 @@
                         <!-- /app-title-line -->
 
                         <!-- service-choice -->
-                        <div class="servicestore form-field" data-role="servicestore">
-                            <div class="row templates-row" equal-heights>
-                                <!-- template -->
-                                <div class="col-xs-4" ng-repeat="service in ResourceAdd.serviceList">
-                                    <div class="service-template" data-role="servicestore-template" ng-click="ResourceAdd.setService(service)" ng-class="{'state': ResourceAdd.currentService == service}">
-                                        <div class="name-row">
-                                            <div class="icon-box">
-                                                <img src="../static/images/icons/openstack.jpg" alt="" class="icon">
-                                            </div>
-                                            <div class="description">
-                                                <h3>{{ service.name }}</h3>
-                                            </div>
-                                        </div>
-                                    </div>
+                        <div class="appstore-templates">
+                            <!-- template -->
+                            <div class="appstore-template" ng-repeat="service in ResourceAdd.serviceList" ng-click="ResourceAdd.setService(service)" ng-class="{'state': ResourceAdd.currentService == service}">
+                                <div class="icon">
+                                    <img src="../static/images/icons/openstack.jpg" alt="" class="icon">
                                 </div>
-                                <!-- /template -->
+                                <div class="description">
+                                    <h3>{{ service.name }}</h3>
+                                </div>
                             </div>
+                            <!-- /template -->
                         </div>
                         <!-- /service-choice -->
 
-                        <div class="form-divide"></div>
-
                         <!-- app-title-line -->
-                        <div class="app-title-line in-form form-field">
+                        <div class="app-title-line in-form form-field" ng-show="ResourceAdd.showTemplates">
                             <div class="row">
                                 <div class="col-xs-12 first-line">
                                     <h2 class="app-title">Template</h2>
@@ -131,34 +127,28 @@
                         <!-- /app-title-line -->
 
                         <!-- template-choice -->
-                        <div class="servicestore form-field" data-role="servicestore" ng-show="ResourceAdd.showTemplates">
-                            <div class="row templates-row" equal-heights is-parent-shown='ResourceAdd.showTemplates'>
-                                <!-- template -->
-                                <div class="col-xs-4" ng-repeat="template in ResourceAdd.templateList">
-                                    <div class="service-template" data-role="servicestore-template" ng-click="ResourceAdd.setTemplate(template)" ng-class="{'state': ResourceAdd.currentTemplate == template}">
-                                        <div class="name-row">
-                                            <div class="icon-box">
-                                                <img ng-show="template.icon_url" src="{{ template.icon_url }}" alt="" class="icon">
-                                                <img ng-show="!template.icon_url" src="static/images/os-fallback.png" alt="" class="icon">
-                                            </div>
-                                            <div class="description">
-                                                <h3>{{ template.name }}</h3>
-                                                <article class="gray-text">
-                                                    <ul>
-                                                        <li>OS: {{ template.os }}</li>
-                                                    </ul>
-                                                </article>
-                                            </div>
-                                        </div>
-                                    </div>
+                        <div class="appstore-templates" ng-show="ResourceAdd.showTemplates">
+                            <!-- template -->
+                            <div class="appstore-template" ng-repeat="template in ResourceAdd.templateList" ng-click="ResourceAdd.setTemplate(template)" ng-class="{'state': ResourceAdd.currentTemplate == template}">
+                                <div class="icon">
+                                    <img ng-show="template.icon_url" src="{{ template.icon_url }}" alt="" class="icon">
+                                    <img ng-show="!template.icon_url" src="static/images/os-fallback.png" alt="" class="icon">
                                 </div>
-                                <!-- /template -->
+                                <div class="description">
+                                    <h3>{{ template.name }}</h3>
+                                    <article class="gray-text">
+                                        <ul>
+                                            <li>OS: {{ template.os }}</li>
+                                        </ul>
+                                    </article>
+                                </div>
                             </div>
+                            <!-- /template -->
                         </div>
                         <!-- /template-choice -->
 
                         <!-- app-title-line -->
-                        <div class="app-title-line in-form form-field">
+                        <div class="app-title-line in-form form-field" ng-show="ResourceAdd.showFlavors">
                             <div class="row">
                                 <div class="col-xs-12 first-line">
                                     <h2 class="app-title">Flavor</h2>
@@ -167,38 +157,32 @@
                         </div>
                         <!-- /app-title-line -->
 
-                        <!-- template-choice -->
-                        <div class="servicestore form-field" data-role="servicestore" ng-show="ResourceAdd.showFlavors">
-                            <div class="row templates-row" equal-heights is-parent-shown='ResourceAdd.showFlavors'>
-                                <!-- template -->
-                                <div class="col-xs-4" ng-repeat="flavor in ResourceAdd.flavorList">
-                                    <div class="service-template" data-role="servicestore-template" ng-click="ResourceAdd.setFlavor(flavor)" ng-class="{'state': ResourceAdd.currentFlavor == flavor}">
-                                        <div class="name-row">
-                                            <div class="description">
-                                                <article class="gray-text-dark">
-                                                    <ul class="hardware">
-                                                        <li>
-                                                            <i class="flaticon-computer33"></i>
-                                                            Cores: {{ flavor.cores }}
-                                                        </li>
-                                                        <li>
-                                                            <i class="flaticon-random"></i>
-                                                            RAM: {{ flavor.ram }}
-                                                        </li>
-                                                        <li>
-                                                            <i class="flaticon-hardware1"></i>
-                                                            Disk: {{ flavor.disk }}
-                                                        </li>
-                                                    </ul>
-                                                </article>
-                                            </div>
-                                        </div>
-                                    </div>
+                        <!-- flavor-choice -->
+                        <div class="appstore-templates" ng-show="ResourceAdd.showFlavors">
+                            <!-- template -->
+                            <div class="appstore-template" ng-repeat="flavor in ResourceAdd.flavorList" ng-click="ResourceAdd.setFlavor(flavor)" ng-class="{'state': ResourceAdd.currentFlavor == flavor}">
+                                <div class="description">
+                                    <article class="gray-text-dark">
+                                        <ul class="hardware">
+                                            <li>
+                                                <i class="flaticon-computer33"></i>
+                                                Cores: {{ flavor.cores }}
+                                            </li>
+                                            <li>
+                                                <i class="flaticon-random"></i>
+                                                RAM: {{ flavor.ram }}
+                                            </li>
+                                            <li>
+                                                <i class="flaticon-hardware1"></i>
+                                                Disk: {{ flavor.disk }}
+                                            </li>
+                                        </ul>
+                                    </article>
                                 </div>
-                                <!-- /template -->
                             </div>
+                            <!-- /template -->
                         </div>
-                        <!-- /template-choice -->
+                        <!-- /flavor-choice -->
 
                         <div class="form-divide"></div>
 
