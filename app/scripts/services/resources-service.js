@@ -35,9 +35,13 @@
     }
 
     function resourceOperation(operation, uuid) {
-      RawInstance.Operation({uuid: uuid, operation: operation}).$promise.then( function(response){
-
+      var deferred = $q.defer();
+      RawInstance.Operation({uuid: uuid, operation: operation}).$promise.then(function(response){
+        deferred.resolve(response);
+      }, function(err) {
+        deferred.reject(err);
       });
+      return deferred.promise;
     }
 
     function createResource() {
