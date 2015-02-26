@@ -8,10 +8,21 @@
     var vm = this;
 
     vm.list = {};
+    vm.searchInput = '';
+    vm.search = search;
+
     resourcesService.getResourcesList().then(function(response) {
       vm.list = response;
     });
+
+    function search() {
+      resourcesService.getResourcesList({hostname: vm.searchInput}).then(function(response) {
+        vm.list = response;
+      });
+    }
+
   }
+
 })();
 
 (function() {
@@ -46,21 +57,18 @@
     vm.setService = setService;
     vm.setTemplate = setTemplate;
     vm.setFlavor = setFlavor;
+    vm.setProject = setProject;
     vm.resource = resourcesService.createResource();
     vm.save = save;
     vm.errors = {};
 
     function activate() {
-      // services
-      cloudsService.getCloudList().then(function(response) {
-        vm.serviceList = response;
-      });
       // projects
       projectsService.getProjectList().then(function(response) {
         vm.projectList = response;
       });
       // keys
-      keysService.getKeyList().then(function(response) {
+      keysService.getCurrentUserKeyList().then(function(response) {
         vm.keyList = response;
       });
     }
@@ -83,6 +91,14 @@
     function setFlavor(flavor) {
       vm.resource.flavor = flavor.url;
       vm.currentFlavor = flavor;
+    }
+
+    function setProject(project) {
+      vm.resource.project = project.url;
+      // services
+      cloudsService.getCloudList({project: project.uuid}).then(function(response) {
+        vm.serviceList = response;
+      });
     }
 
     function save() {

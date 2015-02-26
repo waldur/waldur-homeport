@@ -64,7 +64,7 @@
                     <a href="" class="dropdown-toggle user-pic-box"
                        ng-click="controller.menuToggle('profileMenu', $event)">
                         <img src="../static/images/887178.jpg" class="user-pic" alt="John Doe">
-                        {{ controller.getUser().full_name }}
+                        {{ controller.currentUser.full_name }}
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu user-drop" role="menu" ng-show="controller.menuState.profileMenu">
