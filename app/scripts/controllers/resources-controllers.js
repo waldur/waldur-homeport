@@ -15,6 +15,18 @@
     resourcesService.getResourcesList().then(function(response) {
       vm.list = response;
     });
+
+    function stopResource(uuid) {
+      resourcesService.stopResource(uuid);
+    }
+
+    function startResource(uuid) {
+      resourcesService.startResource(uuid);
+    }
+
+    function restartResource(uuid) {
+      resourcesService.restartResource(uuid);
+    }
   }
 })();
 
