@@ -11,6 +11,7 @@
     vm.stopResource = stopResource;
     vm.startResource = startResource;
     vm.restartResource = restartResource;
+    vm.deleteResource = deleteResource;
 
     resourcesService.getResourcesList().then(function(response) {
       vm.list = response;
@@ -26,6 +27,13 @@
 
     function restartResource(uuid) {
       resourcesService.restartResource(uuid);
+    }
+
+    function deleteResource(uuid, index) {
+      console.log("%s %s", uuid, index);
+      resourcesService.deleteResource(uuid).then(function(response){
+        vm.list.splice(index, 1);
+      });
     }
   }
 })();
@@ -93,16 +101,5 @@
 
     activate();
 
-    function stopResource(resource) {
-      resourceService.stopResource(resource);
-    }
-
-    function startResource(resoruce) {
-      resourcesService.startResource(resource);
-    }
-
-    function restartResource(resource) {
-      resourceService.restartResource(resource);
-    }
   }
 })();
