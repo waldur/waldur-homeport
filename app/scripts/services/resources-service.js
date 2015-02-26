@@ -10,9 +10,9 @@
     vm.getResourcesList = getResourcesList;
     vm.getRawResourcesList = getRawResourcesList;
 
-    vm.stopResource = resourceSSROperation.bind(null, 'stop');
-    vm.startResource = resourceSSROperation.bind(null, 'start');
-    vm.restartResource = resourceSSROperation.bind(null, 'restart');
+    vm.stopResource = resourceOperation.bind(null, 'stop');
+    vm.startResource = resourceOperation.bind(null, 'start');
+    vm.restartResource = resourceOperation.bind(null, 'restart');
 
     vm.createResource = createResource;
 
@@ -34,9 +34,9 @@
       return deferred.promise;
     }
 
-    function resourceSSROperation(operation, uuid) {
-      RawInstance.SSROperation({uuid: uuid, operation: operation}, function(responce){
-        console.log(responce);
+    function resourceOperation(operation, uuid) {
+      RawInstance.Operation({uuid: uuid, operation: operation}).$promise.then( function(response){
+
       });
     }
 
@@ -65,7 +65,7 @@
     return $resource(ENV.apiEndpoint + 'api/instances/:instanceUUID', {instanceUUID:'@uuid'
         },
       {
-        SSROperation: {
+        Operation: {
           method:'POST',
           url:ENV.apiEndpoint + 'api/instances/:instanceUUID/:operation',
           params: {instanceUUID:'@uuid', operation:'@operation'}
