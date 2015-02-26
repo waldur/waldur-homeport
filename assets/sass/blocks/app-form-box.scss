@@ -129,64 +129,22 @@
     } // templates
 } // appstore
 
-.servicestore {
-    .templates-row {
-        + .templates-row {
-            margin-top: 5px;
-        } // +
-    }  // templates-row
-    .service-template {
-        @include transition(all, 0.2s, ease);
-        box-sizing: border-box;
-        padding: 10px 12px;
-        margin-bottom: 5px;
-        border-radius: 1px;
+.appstore-templates {
+    display: flex;
+    flex-wrap: wrap-reverse;
+    margin-left: -10px;
+    margin-right: -10px;
+    .appstore-template {
+        width: calc(33.3333% - 20px);
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        margin: 10px;
+        border: 1px solid rgb(202, 202, 202);
         position: relative;
         cursor: pointer;
-        border: 1px solid rgb(202, 202, 202);
-        @include table;
-        .name-row {
-            .icon-box {
-                @include table-cell;
-                vertical-align: middle;
-                text-align: center;
-                width: 80px;
-                .icon {
-                    filter: grayscale(100%);
-                    width: 80px;
-                } // icon
-            } // icon-box
-            .description {
-                @include table-cell;
-                vertical-align: middle;
-                padding-left: 10px;
-                h3 {
-                    margin: 0;
-                    font-size: rem(18);
-                } // h3
-                article {
-                    margin: 0;
-                    line-height: 1.2;
-                    ul {
-                        @include clear-list;
-                        li + li {
-                            margin-top: 10px;
-                        } // li + li
-                        &.hardware {
-                            [class^="flaticon-"] {
-                                margin-right: 10px;
-                                &:before {
-                                    font-size: rem(16);
-                                } // &:before
-                            } // [class^="flaticon-"]
-                        } // &.hardware
-                    } // ul
-                } // article
-            } // description
-        } // name-row
         &.state {
             border: 1px solid rgb(62, 171, 84);
-            // box-shadow: 0 6px 10px rgba(0,0,0,.23),0 10px 30px rgba(0,0,0,.19);
             &:after {
                 // content: '\f058';
                 content: '\f00c';
@@ -204,14 +162,39 @@
                 right: -10px;
                 top: -10px;
             } // &:after
-            .name-row {
-                .icon-box {
-                    .icon {
-                        filter: none;
-                        width: 80px;
-                    } // icon
-                } // icon-box
-            } // name-row
-        } // state
-    } // service-template
-} // servicestore
+        } // &.state
+        .icon {
+            // display: flex;
+            width: 80px;
+            text-align: center;
+        } // icon
+        .description {
+            // display: flex;
+            width: calc(100% - 80px);
+            box-sizing: border-box;
+            padding-left: 10px;
+            h3 {
+                margin: 0;
+                font-size: rem(18);
+            } // h3
+            article {
+                margin: 0;
+                line-height: 1.2;
+                ul {
+                    @include clear-list;
+                    li + li {
+                        margin-top: 10px;
+                    } // li + li
+                    &.hardware {
+                        [class^="flaticon-"] {
+                            margin-right: 10px;
+                            &:before {
+                                font-size: rem(16);
+                            } // &:before
+                        } // [class^="flaticon-"]
+                    } // &.hardware
+                } // ul
+            } // article
+        } // description
+    } // appstore-template
+} // appstore-templates
