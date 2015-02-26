@@ -21,12 +21,13 @@
       return RawResource.query();
     }
 
-    function getResourcesList() {
+    function getResourcesList(filter) {
       var deferred = $q.defer();
+      filter = filter || {};
       currentStateService.getCustomer().then(function(response) {
-        var customerName = response.name,
         /*jshint camelcase: false */
-            resources = RawResource.query({customer_name: customerName});
+        filter.customer_name = response.name;
+        var resources = RawResource.query(filter);
         deferred.resolve(resources);
       }, function(err) {
         deferred.reject(err);

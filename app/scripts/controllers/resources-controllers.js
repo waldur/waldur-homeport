@@ -11,6 +11,8 @@
     vm.stopResource = stopResource;
     vm.startResource = startResource;
     vm.restartResource = restartResource;
+    vm.searchInput = '';
+    vm.search = search;
 
     resourcesService.getResourcesList().then(function(response) {
       vm.list = response;
@@ -27,7 +29,14 @@
     function restartResource(uuid) {
       resourcesService.restartResource(uuid);
     }
+    function search() {
+      resourcesService.getResourcesList({hostname: vm.searchInput}).then(function(response) {
+        vm.list = response;
+      });
+    }
+
   }
+
 })();
 
 (function() {
@@ -53,21 +62,18 @@
     vm.projectList = {};
     vm.templateList = {};
     vm.setService = setService;
+    vm.setProject = setProject;
     vm.resource = resourcesService.createResource();
     vm.save = save;
     vm.errors = {};
 
     function activate() {
-      // services
-      cloudsService.getCloudList().then(function(response) {
-        vm.serviceList = response;
-      });
       // projects
       projectsService.getProjectList().then(function(response) {
         vm.projectList = response;
       });
       // keys
-      keysService.getKeyList().then(function(response) {
+      keysService.getCurrentUserKeyList().then(function(response) {
         vm.keyList = response;
       });
     }
@@ -76,6 +82,14 @@
       vm.flavorList = service.flavors;
       templatesService.getTemplateList(service.uuid).then(function(response) {
         vm.templateList = response;
+      });
+    }
+
+    function setProject(project) {
+      vm.resource.project = project.url;
+      // services
+      cloudsService.getCloudList({project: project.uuid}).then(function(response) {
+        vm.serviceList = response;
       });
     }
 
