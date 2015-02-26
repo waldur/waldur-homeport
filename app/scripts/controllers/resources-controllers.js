@@ -13,10 +13,22 @@
     vm.restartResource = restartResource;
     vm.searchInput = '';
     vm.search = search;
+    vm.changePageSize = changePageSize;
+    vm.changePage = changePage;
+    vm.getNumber = getNumber;
 
-    resourcesService.getResourcesList().then(function(response) {
-      vm.list = response;
-    });
+    vm.pageSizes = [1,5,10,15,20];
+    vm.currentPageSize = resourcesService.pageSize;
+    vm.pages = 5;
+    vm.currentPage = resourcesService.page;
+
+    getResourceList();
+
+    function getResourceList() {
+      resourcesService.getResourcesList().then(function (response) {
+        vm.list = response;
+      });
+    }
 
     function stopResource(uuid) {
       resourcesService.stopResource(uuid);
@@ -29,12 +41,28 @@
     function restartResource(uuid) {
       resourcesService.restartResource(uuid);
     }
+
     function search() {
       resourcesService.getResourcesList({hostname: vm.searchInput}).then(function(response) {
         vm.list = response;
       });
     }
 
+    function changePageSize(pageSize) {
+      vm.currentPageSize = pageSize;
+      resourcesService.pageSize = pageSize;
+      getResourceList();
+    }
+
+    function changePage(page) {
+      vm.currentPage = page;
+      resourcesService.page = page;
+      getResourceList();
+    }
+
+    function getNumber(num) {
+      return new Array(num);
+    }
   }
 
 })();

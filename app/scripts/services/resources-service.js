@@ -16,6 +16,9 @@
 
     vm.createResource = createResource;
 
+    vm.pageSize = 10;
+    vm.page = 1;
+
 
     function getRawResourcesList() {
       return RawResource.query();
@@ -27,6 +30,8 @@
       currentStateService.getCustomer().then(function(response) {
         /*jshint camelcase: false */
         filter.customer_name = response.name;
+        filter.page = vm.page;
+        filter.page_size = vm.pageSize;
         var resources = RawResource.query(filter);
         deferred.resolve(resources);
       }, function(err) {
@@ -57,7 +62,7 @@
     .factory('RawResource', ['ENV', '$resource', RawResource]);
 
   function RawResource(ENV, $resource) {
-    return $resource(ENV.apiEndpoint + 'api/resources/');
+    return $resource(ENV.apiEndpoint + 'api/resources/',{page_size:'@page_size', page:'@page'});
   }
 })();
 

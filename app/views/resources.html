@@ -11,9 +11,11 @@
                     <div class="col-xs-12 first-line">
                         <h2 class="app-title">Resources</h2>
                         <ul class="sort">
-                            <li><a href="#" class="active">5</a></li>
-                            <li><a href="#">15</a></li>
-                            <li><a href="#">24</a></li>
+                            <li ng-repeat="pageSize in ResourceList.pageSizes">
+                                <a href="#/resources/" ng-click="ResourceList.changePageSize(pageSize)"
+                                   ng-class="{active: pageSize === ResourceList.currentPageSize}">{{pageSize}}</a>
+                            </li>
+
                             <li class="divid">
                                 <div class="search" data-role="search-box">
                                     <input type="text" ng-model='ResourceList.searchInput' ng-keyup="ResourceList.search()">
@@ -79,7 +81,24 @@
     </div>
 </section>
 <!-- /app-block -->
+<div class="app-block">
+        <div class="container-fluid">
+            <!-- pagination -->
+            <div class="pagination">
+                <ul>
+                    <li><a href="#/resources/" ng-repeat="i in ResourceList.getNumber(ResourceList.pages) track by $index"
+                           ng-class="{current: ($index+1) === ResourceList.currentPage}"
+                           ng-click="ResourceList.changePage($index+1)">{{$index+1}}</a></li>
+
+                </ul>
+            </div>
+            <!-- /pagination -->
+        </div>
+</div>
 
 </div>
+    <!-- app-block -->
+    <!-- /app-block -->
+<!--</div>-->
 
 <ng-include src="'/views/partials/app-footer.html'"></ng-include>
