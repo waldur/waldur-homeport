@@ -62,8 +62,8 @@
                                 <a ui-sref="project({uuid: resource.project_uuid })" class="elem sort-display">{{ resource.project_name }}</a>
                             </td>
                             <td class="col-xs-2">
-                                <span class="status-display online">
-                                    online
+                                <span class="status-display" ng-class="{'online': resource.state == 'onlnie', 'offline' : resource.state == 'offline'}">
+                                    {{ resource.state }}
                                 </span>
                             </td>
                             <td class="col-xs-2 controls-ctn">

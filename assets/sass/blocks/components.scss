@@ -371,6 +371,8 @@ a.sort {
 } // error
 
 .status-display {
+    font-size: rem(14);
+    line-height: 1;
     &.online {
         color: #9ECF5D;
     } // &.online
