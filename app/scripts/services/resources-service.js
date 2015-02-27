@@ -13,6 +13,7 @@
     vm.stopResource = resourceOperation.bind(null, 'stop');
     vm.startResource = resourceOperation.bind(null, 'start');
     vm.restartResource = resourceOperation.bind(null, 'restart');
+    vm.deleteResource = deleteResource;
 
     vm.createResource = createResource;
 
@@ -49,6 +50,16 @@
       return new RawInstance();
     }
 
+    function deleteResource(uuid) {
+      var deferred = $q.defer();
+      RawInstance.Delete({},{uuid: uuid}).$promise.then(function(response) {
+        deferred.resolve(response);
+      }, function(err) {
+        deferred.reject(err)
+      });
+      return deferred.promise;
+    }
+
   }
 })();
 
@@ -67,15 +78,18 @@
     .factory('RawInstance', ['ENV', '$resource', RawInstance]);
 
   function RawInstance(ENV, $resource) {
-    return $resource(ENV.apiEndpoint + 'api/instances/:instanceUUID', {instanceUUID:'@uuid'
-        },
+    return $resource(ENV.apiEndpoint + 'api/instances/:instanceUUID', {instanceUUID:'@uuid'},
       {
         Operation: {
           method:'POST',
           url:ENV.apiEndpoint + 'api/instances/:instanceUUID/:operation',
           params: {instanceUUID:'@uuid', operation:'@operation'}
+        },
+        Delete: {
+          method:'DELETE'
         }
-      });
+      }
+    );
   }
 
 })();

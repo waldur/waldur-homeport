@@ -61,13 +61,16 @@
                             <td class="col-xs-2 controls-ctn">
                                 <ul class="controls pull-right">
                                     <li>
-                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Poweroff" ><i class="fa fa-power-off" ng-click="ResourceList.stopResource(resource.uuid)"></i></a>
+                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Poweroff"
+                                           ng-click="ResourceList.stopResource(resource.uuid)"><i class="fa fa-power-off"></i></a>
                                     </li>
                                     <li>
-                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Restart" ng-click="restartResource(resource)"><i class="fa fa-refresh"></i></a>
+                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Restart"
+                                           ng-click="ResourceList.restartResource(resource.uuid)"><i class="fa fa-refresh"></i></a>
                                     </li>
                                     <li>
-                                        <a href="#" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
+                                        <a href="#" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"
+                                           ng-click="ResourceList.deleteResource(resource.uuid, $index)"><i class="fa fa-times"></i></a>
                                     </li>
                                 </ul>
                             </td>
