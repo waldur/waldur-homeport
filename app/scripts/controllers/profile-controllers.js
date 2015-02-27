@@ -12,7 +12,7 @@
 
     vm.user = usersService.getCurrentUserWithKeys();
     vm.customers = customersService.getCustomersList();
-    vm.projects = projectsService.getProjectsList();
+    vm.projects = projectsService.getProjectList();
 
   }
 

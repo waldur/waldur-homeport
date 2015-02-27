@@ -9,11 +9,25 @@
     var vm = this;
 
     vm.customers = customersService.getCustomersList();
-    vm.getUser = currentStateService.getUser;
-    vm.getCustomer = currentStateService.getCustomer;
+    vm.currentUser = {};
+    vm.currentCustomer = {};
     vm.menuToggle = menuToggle;
-    vm.setCurrentCustomer = currentStateService.setCustomer;
-    vm.menuItemActive;
+    vm.setCurrentCustomer = setCurrentCustomer;
+
+    // initiate current customer
+    currentStateService.getCustomer().then(function(response) {
+      vm.currentCustomer = response;
+    });
+
+    // initiate current user
+    currentStateService.getUser().then(function(response) {
+      vm.currentUser = response;
+    });
+
+    function setCurrentCustomer(customer) {
+      currentStateService.setCustomer(customer);
+      vm.currentCustomer = customer;
+    }
 
     // top-level menu
     vm.menuState = {

@@ -1,6 +1,6 @@
 <ng-include src="'/views/partials/app-header.html'"></ng-include>
 
-<div ng-controller="ResourceListController as resources">
+<div ng-controller="ResourceListController as ResourceList">
 
 <!-- app-block -->
 <section class="app-block">
@@ -16,10 +16,7 @@
                             <li><a href="#">24</a></li>
                             <li class="divid">
                                 <div class="search" data-role="search-box">
-                                    <input type="text">
-                                    <button class="search-button">
-                                        <i class="fa fa-search"></i>
-                                    </button>
+                                    <input type="text" ng-model='ResourceList.searchInput' ng-keyup="ResourceList.search()">
                                 </div>
                             </li>
                         </ul>
@@ -54,9 +51,9 @@
                             </th>
                             <th></th>
                         </tr>
-                        <tr ng-repeat="resource in resources.list">
+                        <tr ng-repeat="resource in ResourceList.list">
                             <td class="name">
-                                <h2 class="item-title"><a ui-sref="resource({uuid: resource.uuid})">{{ resource.hostname }}</a></h2>
+                                <h2 class="item-title">{{ resource.hostname }}</h2>
                             </td>
                             <td class="type">
                                 <span class="elem item-type vm">{{ resource.type }}</span>
@@ -72,13 +69,16 @@
                             <td class="col-xs-2 controls-ctn">
                                 <ul class="controls pull-right">
                                     <li>
-                                        <a href="#" class="poweroff online"><i class="fa fa-power-off"></i></a>
+                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Poweroff"
+                                           ng-click="ResourceList.stopResource(resource.uuid)"><i class="fa fa-power-off"></i></a>
                                     </li>
                                     <li>
-                                        <a href="#" class=""><i class="fa fa-refresh"></i></a>
+                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Restart"
+                                           ng-click="ResourceList.restartResource(resource.uuid)"><i class="fa fa-refresh"></i></a>
                                     </li>
                                     <li>
-                                        <a href="#" class="remove none"><i class="fa fa-times"></i></a>
+                                        <a href="#" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"
+                                           ng-click="ResourceList.deleteResource(resource.uuid, $index)"><i class="fa fa-times"></i></a>
                                     </li>
                                 </ul>
                             </td>
