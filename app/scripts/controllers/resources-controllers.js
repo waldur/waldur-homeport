@@ -8,14 +8,19 @@
     var vm = this;
 
     vm.list = {};
+
+
     vm.stopResource = stopResource;
     vm.startResource = startResource;
     vm.restartResource = restartResource;
+    vm.deleteResource = deleteResource;
+
     vm.searchInput = '';
     vm.search = search;
     vm.changePageSize = changePageSize;
     vm.changePage = changePage;
     vm.getNumber = getNumber;
+
 
     vm.pageSizes = [1,5,10,15,20];
     vm.currentPageSize = resourcesService.pageSize;
@@ -30,6 +35,12 @@
       });
     }
 
+
+    resourcesService.getResourcesList().then(function(response) {
+      vm.list = response;
+    });
+
+
     function stopResource(uuid) {
       resourcesService.stopResource(uuid);
     }
@@ -40,6 +51,13 @@
 
     function restartResource(uuid) {
       resourcesService.restartResource(uuid);
+    }
+
+
+    function deleteResource(uuid, index) {
+      resourcesService.deleteResource(uuid).then(function(response){
+        vm.list.splice(index, 1);
+      });
     }
 
     function search() {
@@ -84,12 +102,21 @@
     // based on services
     // 3. User has to choose flavor, template, ssh key and other resource attributes.
 
+    vm.selectedService;
+    vm.selectedTemaplate;
+    vm.selectedFlavor;
+
+    vm.showFlavors = false;
+    vm.showTemplates = false;
+
     vm.serviceList = {};
     vm.flavorList = {};
     vm.keyList = {};
     vm.projectList = {};
     vm.templateList = {};
     vm.setService = setService;
+    vm.setTemplate = setTemplate;
+    vm.setFlavor = setFlavor;
     vm.setProject = setProject;
     vm.resource = resourcesService.createResource();
     vm.save = save;
@@ -111,6 +138,19 @@
       templatesService.getTemplateList(service.uuid).then(function(response) {
         vm.templateList = response;
       });
+      vm.selectedService = service;
+      vm.showTemplates = true;
+    }
+
+    function setTemplate(tamplate) {
+      vm.resource.template = tamplate.url;
+      vm.selectedTemplate = tamplate;
+      vm.showFlavors = true;
+    }
+
+    function setFlavor(flavor) {
+      vm.resource.flavor = flavor.url;
+      vm.selectedFlavor = flavor;
     }
 
     function setProject(project) {
@@ -135,16 +175,5 @@
 
     activate();
 
-    function stopResource(resource) {
-      resourceService.stopResource(resource);
-    }
-
-    function startResource(resoruce) {
-      resourcesService.startResource(resource);
-    }
-
-    function restartResource(resource) {
-      resourceService.restartResource(resource);
-    }
   }
 })();
