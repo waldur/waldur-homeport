@@ -18,26 +18,7 @@
       currentStateService.getCustomer().then(function(response) {
         var customerName = response.name,
         /*jshint camelcase: false */
-            resources = RawResource.query({customer_name: customerName}, init);
-
-            function init(resources) {
-              for (var i = 0; i < resources.length; i++) {
-                initResourceProject(resources[i]);
-              }
-            }
-
-            function initResourceProject(resource) {
-              return RawProject.query(init);
-              function init(projects) {
-                for (var i = 0; i < projects.length; i++) {
-                  if (projects[i].name === resource.project_name) {
-                    var new_project = projects[i];
-                  }
-                }
-                resource.project = new_project;
-              }
-            }
-
+        resources = RawResource.query({customer_name: customerName});
         deferred.resolve(resources);
       }, function(err) {
         deferred.reject(err);
