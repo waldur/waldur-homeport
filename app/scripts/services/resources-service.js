@@ -19,6 +19,7 @@
 
     vm.pageSize = 10;
     vm.page = 1;
+    vm.pages = null;
 
 
     function getRawResourcesList() {
@@ -33,8 +34,17 @@
         filter.customer_name = response.name;
         filter.page = vm.page;
         filter.page_size = vm.pageSize;
-        var resources = RawResource.query(filter);
-        deferred.resolve(resources);
+        RawResource.query(filter,function(response, responseHeaders){
+          var header = responseHeaders(),
+            objQuantity = header['x-result-count']? header['x-result-count'] : null;
+          if (objQuantity) {
+            vm.pages = Math.ceil(objQuantity/vm.pageSize);
+          }
+          deferred.resolve(response);
+        }, function(err) {
+          deferred.reject(err);
+        });
+
       }, function(err) {
         deferred.reject(err);
       });

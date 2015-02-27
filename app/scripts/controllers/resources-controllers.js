@@ -24,13 +24,14 @@
 
     vm.pageSizes = [1,5,10,15,20];
     vm.currentPageSize = resourcesService.pageSize;
-    vm.pages = 5;
+    vm.pages = resourcesService.pages ? resourcesService : 5;
     vm.currentPage = resourcesService.page;
 
     getResourceList();
 
     function getResourceList() {
       resourcesService.getResourcesList().then(function (response) {
+        vm.pages = resourcesService.pages;
         vm.list = response;
       });
     }
@@ -68,6 +69,8 @@
 
     function changePageSize(pageSize) {
       vm.currentPageSize = pageSize;
+      vm.currentPage = 1;
+      resourcesService.page = 1;
       resourcesService.pageSize = pageSize;
       getResourceList();
     }
