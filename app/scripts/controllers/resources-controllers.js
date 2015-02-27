@@ -42,9 +42,9 @@
     // based on services
     // 3. User has to choose flavor, template, ssh key and other resource attributes.
 
-    vm.currentService;
-    vm.currentTemaplate;
-    vm.currentFlavor;
+    vm.selectedService;
+    vm.selectedTemaplate;
+    vm.selectedFlavor;
 
     vm.showFlavors = false;
     vm.showTemplates = false;
@@ -78,19 +78,19 @@
       templatesService.getTemplateList(service.uuid).then(function(response) {
         vm.templateList = response;
       });
-      vm.currentService = service;
+      vm.selectedService = service;
       vm.showTemplates = true;
     }
 
     function setTemplate(tamplate) {
       vm.resource.template = tamplate.url;
-      vm.currentTemplate = tamplate;
+      vm.selectedTemplate = tamplate;
       vm.showFlavors = true;
     }
 
     function setFlavor(flavor) {
       vm.resource.flavor = flavor.url;
-      vm.currentFlavor = flavor;
+      vm.selectedFlavor = flavor;
     }
 
     function setProject(project) {

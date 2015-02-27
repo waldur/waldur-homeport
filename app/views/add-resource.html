@@ -115,7 +115,7 @@
                         <!-- service-choice -->
                         <div class="appstore-templates">
                             <!-- template -->
-                            <div class="appstore-template" ng-repeat="service in ResourceAdd.serviceList" ng-click="ResourceAdd.setService(service)" ng-class="{'state': ResourceAdd.currentService == service}">
+                            <div class="appstore-template" ng-repeat="service in ResourceAdd.serviceList" ng-click="ResourceAdd.setService(service)" ng-class="{'state': ResourceAdd.selectedService == service}">
                                 <div class="icon">
                                     <img src="../static/images/icons/openstack.jpg" alt="" class="icon">
                                 </div>
@@ -145,7 +145,7 @@
                         <!-- template-choice -->
                         <div class="appstore-templates" ng-show="ResourceAdd.showTemplates">
                             <!-- template -->
-                            <div class="appstore-template" ng-repeat="template in ResourceAdd.templateList" ng-click="ResourceAdd.setTemplate(template)" ng-class="{'state': ResourceAdd.currentTemplate == template}">
+                            <div class="appstore-template" ng-repeat="template in ResourceAdd.templateList" ng-click="ResourceAdd.setTemplate(template)" ng-class="{'state': ResourceAdd.selectedTemplate == template}">
                                 <div class="icon">
                                     <img ng-show="template.icon_url" src="{{ template.icon_url }}" alt="" class="icon">
                                     <img ng-show="!template.icon_url" src="static/images/os-fallback.png" alt="" class="icon">
@@ -181,7 +181,7 @@
                         <!-- flavor-choice -->
                         <div class="appstore-templates" ng-show="ResourceAdd.showFlavors">
                             <!-- template -->
-                            <div class="appstore-template" ng-repeat="flavor in ResourceAdd.flavorList" ng-click="ResourceAdd.setFlavor(flavor)" ng-class="{'state': ResourceAdd.currentFlavor == flavor}">
+                            <div class="appstore-template" ng-repeat="flavor in ResourceAdd.flavorList" ng-click="ResourceAdd.setFlavor(flavor)" ng-class="{'state': ResourceAdd.selectedFlavor == flavor}">
                                 <div class="description">
                                     <article class="gray-text-dark">
                                         <ul class="hardware">
