@@ -9,6 +9,7 @@
 
     vm.list = {};
 
+
     vm.stopResource = stopResource;
     vm.startResource = startResource;
     vm.restartResource = restartResource;
