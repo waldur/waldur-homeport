@@ -62,7 +62,21 @@
         @include inline-middle;
         a {
             @include black-link;
-            font-size: rem(14)
+            font-size: rem(14);
+            &.none {
+                display: none;
+            } // &.none
+            &.poweroff {
+                &.online {
+                    color: #e74c3c;
+                } // &.online
+                &.offline {
+                    color: #2ecc71;
+                } // &.online
+            } // poweroff
+            &.remove {
+                color: #e74c3c;
+            } // remove
         } // a
     } // li
 } // controls
@@ -355,3 +369,15 @@ a.sort {
         } // &.arrow-down
     } // error-standard
 } // error
+
+.status-display {
+    font-size: rem(14);
+    line-height: 1;
+    &.online {
+        color: #9ECF5D;
+    } // &.online
+    &.offline {
+        color: #909099;
+        opacity: 0.2;
+    } // &.offline
+} // status-display
