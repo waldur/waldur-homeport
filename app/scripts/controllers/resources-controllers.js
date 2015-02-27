@@ -8,6 +8,9 @@
     var vm = this;
 
     vm.list = {};
+    vm.stopResource = stopResource;
+    vm.startResource = startResource;
+    vm.restartResource = restartResource;
     vm.searchInput = '';
     vm.search = search;
 
@@ -15,6 +18,17 @@
       vm.list = response;
     });
 
+    function stopResource(uuid) {
+      resourcesService.stopResource(uuid);
+    }
+
+    function startResource(uuid) {
+      resourcesService.startResource(uuid);
+    }
+
+    function restartResource(uuid) {
+      resourcesService.restartResource(uuid);
+    }
     function search() {
       resourcesService.getResourcesList({hostname: vm.searchInput}).then(function(response) {
         vm.list = response;
@@ -93,5 +107,16 @@
 
     activate();
 
+    function stopResource(resource) {
+      resourceService.stopResource(resource);
+    }
+
+    function startResource(resoruce) {
+      resourcesService.startResource(resource);
+    }
+
+    function restartResource(resource) {
+      resourceService.restartResource(resource);
+    }
   }
 })();
