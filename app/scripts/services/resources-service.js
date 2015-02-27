@@ -17,6 +17,10 @@
 
     vm.createResource = createResource;
 
+    vm.pageSize = 10;
+    vm.page = 1;
+    vm.pages = null;
+
 
     function getRawResourcesList() {
       return RawResource.query();
@@ -28,8 +32,19 @@
       currentStateService.getCustomer().then(function(response) {
         /*jshint camelcase: false */
         filter.customer_name = response.name;
-        var resources = RawResource.query(filter);
-        deferred.resolve(resources);
+        filter.page = vm.page;
+        filter.page_size = vm.pageSize;
+        RawResource.query(filter,function(response, responseHeaders){
+          var header = responseHeaders(),
+            objQuantity = header['x-result-count']? header['x-result-count'] : null;
+          if (objQuantity) {
+            vm.pages = Math.ceil(objQuantity/vm.pageSize);
+          }
+          deferred.resolve(response);
+        }, function(err) {
+          deferred.reject(err);
+        });
+
       }, function(err) {
         deferred.reject(err);
       });
@@ -68,7 +83,7 @@
     .factory('RawResource', ['ENV', '$resource', RawResource]);
 
   function RawResource(ENV, $resource) {
-    return $resource(ENV.apiEndpoint + 'api/resources/');
+    return $resource(ENV.apiEndpoint + 'api/resources/',{page_size:'@page_size', page:'@page'});
   }
 })();
 

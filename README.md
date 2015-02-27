@@ -42,7 +42,13 @@ __Installation steps__:
 
 Use [NodeConductor][4] with [NodeConductorPlus][5] for backend.
 
+Also django-cors configuration must set the following lines in the config file of NodeConductor:
 
+CORS_EXPOSE_HEADERS = (
+        'x-result-count',
+        'Link'
+)
+It is needed for enable reading header's response from frontend app.
 ## Tests
 
 To start tests:
