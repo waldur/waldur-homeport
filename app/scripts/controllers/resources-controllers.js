@@ -56,9 +56,14 @@
 
 
     function deleteResource(uuid, index) {
-      resourcesService.deleteResource(uuid).then(function(response){
-        vm.list.splice(index, 1);
-      });
+      var confirmDelete = confirm("Confirm resource deletion?");
+      if (confirmDelete) {
+        resourcesService.deleteResource(uuid).then(function(response){
+          vm.list.splice(index, 1);
+        });
+      } else {
+        alert('Resource not deleted.');
+      }
     }
 
     function search() {
