@@ -2,21 +2,21 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('cloudsService', ['RawCloud', cloudsService]);
+    .service('serviceService', ['RawService', serviceService]);
 
-  function cloudsService(RawCloud) {
+  function serviceService(RawService) {
     /*jshint validthis: true */
     var vm = this;
 
-    vm.getCloudList = getCloudList;
-    vm.getCloud = getCloud;
+    vm.getServiceList = getServiceList;
+    vm.getService = getService;
 
-    function getCloudList() {
-      return RawCloud.query();
+    function getServiceList() {
+      return RawService.query();
     }
 
-    function getCloud(uuid) {
-      return RawCloud.get({cloudUUID: uuid});
+    function getService(uuid) {
+      return RawService.get({cloudUUID: uuid});
     }
 
   }
@@ -25,9 +25,9 @@
 
 (function() {
   angular.module('ncsaas')
-    .factory('RawCloud', ['ENV', '$resource', RawCloud]);
+    .factory('RawService', ['ENV', '$resource', RawService]);
 
-    function RawCloud(ENV, $resource) {
+    function RawService(ENV, $resource) {
       return $resource(ENV.apiEndpoint + 'api/clouds/:cloudUUID/', {cloudUUID:'@uuid'});
     }
 

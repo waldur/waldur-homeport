@@ -12,7 +12,7 @@
                 <div class="stats">
                     <div class="row">
                         <div class="col-xs-4">
-                            <span class="stat-int">{{ controller.project.clouds.length }}</span>
+                            <span class="stat-int">{{ controller.project.services.length }}</span>
                             <span class="stat-description">Resources</span>
                         </div>
                         <div class="col-xs-4">
@@ -446,7 +446,7 @@
                                         </th>
                                         <th></th>
                                     </tr>
-                                    <tr ng-repeat="resource in controller.clouds">
+                                    <tr ng-repeat="resource in controller.project.services">
                                         <td class="name">
                                             <h2 class="item-title">{{ resource.name }}</h2>
                                         </td>

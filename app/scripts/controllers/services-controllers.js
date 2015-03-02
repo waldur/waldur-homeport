@@ -2,18 +2,18 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('CloudListController', ['cloudsService', CloudListController]);
+    .controller('ServiceListController', ['serviceService', ServiceListController]);
 
-  function CloudListController(cloudsService) {
+  function ServiceListController(serviceService) {
     var vm = this;
 
-    vm.list = cloudsService.getCloudList();
+    vm.list = serviceService.getServiceList();
     vm.remove = remove;
 
-    function remove(cloud) {
-      var index = vm.list.indexOf(cloud);
+    function remove(service) {
+      var index = vm.list.indexOf(service);
 
-      cloud.$delete(function() {
+      service.$delete(function() {
         vm.list.splice(index, 1);
       });
     }
