@@ -2,17 +2,18 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('projectsService', ['RawProject', 'RawUser', 'RawCustomer', 'RawService', projectsService]);
+    .service('projectsService',
+      ['$q', 'RawProject', 'RawUser', 'RawCustomer', 'RawService', 'currentStateService', projectsService]);
 
-  function projectsService(RawProject, RawUser, RawCustomer, RawService) {
+  function projectsService($q, RawProject, RawUser, RawCustomer, RawService, currentStateService) {
     /*jshint validthis: true */
     var vm = this;
     /*jshint validthis: false */
 
     vm.getProject = getProject;
-    vm.getProjectsList = getProjectsList;
+    vm.getProjectList = getProjectList;
     vm.createProject = createProject;
-    vm.getRawProjectsList = getRawProjectsList;
+    vm.getRawProjectList = getRawProjectList;
 
     function createProject() {
       return new RawProject();
@@ -30,20 +31,37 @@
       return project;
     }
 
-    function getRawProjectsList() {
-      return RawProject.query();
+    function getRawProjectList() {
+      return RawProject.query().$promise;
     }
 
-    function getProjectsList() {
-      var projects = RawProject.query(init);
-
-      function init(projects) {
-        for (var i = 0; i < projects.length; i++) {
-          initProjectUsers(projects[i]);
+    function getProjectList(includeUsers) {
+      var deferred = $q.defer();
+      currentStateService.getCustomer().then(function(response) {
+        var customerName = response.name,
+          projects = {};
+        /*jshint camelcase: false */
+        if (includeUsers) {
+          RawProject.query({customer_name: customerName}).$promise.then(
+            function(response_projects) {
+              projects = response_projects;
+              for (var i = 0; i < projects.length; i++) {
+                initProjectUsers(projects[i]);
+              }
+              deferred.resolve(projects);
+            },
+            reject);
+        } else {
+          projects = RawProject.query({customer_name: customerName});
+          deferred.resolve(projects);
         }
+      }, reject);
+
+      function reject(error) {
+        deferred.reject(error);
       }
 
-      return projects;
+      return deferred.promise;
     }
 
     function initProjectUsers(project) {

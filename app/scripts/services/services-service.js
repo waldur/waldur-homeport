@@ -2,21 +2,40 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('serviceService', ['RawService', serviceService]);
+    .service('serviceService', ['$q', 'RawService', 'RawTemplate', 'currentStateService', serviceService]);
 
-  function serviceService(RawService) {
+  function serviceService($q, RawService, RawTemplate, currentStateService) {
     /*jshint validthis: true */
     var vm = this;
 
     vm.getServiceList = getServiceList;
     vm.getService = getService;
 
-    function getServiceList() {
-      return RawService.query();
+    function getServiceList(filter) {
+      var deferred = $q.defer();
+      filter = filter || {};
+      currentStateService.getCustomer().then(initServices, reject);
+
+      function initServices(customer) {
+        /*jshint camelcase: false */
+        filter.customer_name = customer.name;
+        RawService.query(filter).$promise.then(
+          function(response) {
+            deferred.resolve(response);
+          },
+          reject
+        );
+      }
+
+      function reject(error) {
+        deferred.reject(error);
+      }
+
+      return deferred.promise;
     }
 
     function getService(uuid) {
-      return RawService.get({cloudUUID: uuid});
+      return RawService.get({serviceUUID: uuid});
     }
 
   }
