@@ -2,24 +2,24 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('cloudsService', ['$q', 'RawCloud', 'RawTemplate', 'currentStateService', cloudsService]);
+    .service('serviceService', ['$q', 'RawService', 'RawTemplate', 'currentStateService', serviceService]);
 
-  function cloudsService($q, RawCloud, RawTemplate, currentStateService) {
+  function serviceService($q, RawService, RawTemplate, currentStateService) {
     /*jshint validthis: true */
     var vm = this;
 
-    vm.getCloudList = getCloudList;
-    vm.getCloud = getCloud;
+    vm.getServiceList = getServiceList;
+    vm.getService = getService;
 
-    function getCloudList(filter) {
+    function getServiceList(filter) {
       var deferred = $q.defer();
       filter = filter || {};
-      currentStateService.getCustomer().then(initClouds, reject);
+      currentStateService.getCustomer().then(initServices, reject);
 
-      function initClouds(customer) {
+      function initServices(customer) {
         /*jshint camelcase: false */
         filter.customer_name = customer.name;
-        RawCloud.query(filter).$promise.then(
+        RawService.query(filter).$promise.then(
           function(response) {
             deferred.resolve(response);
           },
@@ -34,8 +34,8 @@
       return deferred.promise;
     }
 
-    function getCloud(uuid) {
-      return RawCloud.get({cloudUUID: uuid});
+    function getService(uuid) {
+      return RawService.get({serviceUUID: uuid});
     }
 
   }
@@ -44,9 +44,9 @@
 
 (function() {
   angular.module('ncsaas')
-    .factory('RawCloud', ['ENV', '$resource', RawCloud]);
+    .factory('RawService', ['ENV', '$resource', RawService]);
 
-    function RawCloud(ENV, $resource) {
+    function RawService(ENV, $resource) {
       return $resource(ENV.apiEndpoint + 'api/clouds/:cloudUUID/', {cloudUUID:'@uuid'});
     }
 

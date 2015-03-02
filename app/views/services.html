@@ -1,5 +1,7 @@
 <ng-include src="'/views/partials/app-header.html'"></ng-include>
 
+<div ng-controller="ServiceListController as serviceList">
+
 <!-- app-block -->
 <section class="app-block">
     <div class="container-fluid">
@@ -46,12 +48,12 @@
                             </th>
                             <th class="col-xs-1"></th>
                         </tr>
-                        <tr ng-repeat="service in services">
-                            <td class="name">        
-                                <h2 class="item-title"><a href="../service/index.html">{{ service.Name }}</a></h2>
+                        <tr ng-repeat="service in services.list">
+                            <td class="name">
+                                <h2 class="item-title"><a ui-sref="service({uuid: serviceList.uuid})">{{ serviceList.name }}</a></h2>
                             </td>
                             <td class="col-xs-2 type">
-                                <span class="elem item-type github">{{ service.Type }}</span>
+                                <span class="elem item-type github">{{ serviceList.Type }}</span>
                             </td>
                             <td class="col-xs-1 controls-ctn">
                                 <ul class="controls pull-right">
@@ -86,6 +88,8 @@
         </div>
         <!-- /pagination -->
     </div>
+</div>
+
 </div>
 
 <ng-include src="'/views/partials/app-footer.html'"></ng-include>
