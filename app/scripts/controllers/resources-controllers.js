@@ -91,11 +91,11 @@
 (function() {
   angular.module('ncsaas')
     .controller('ResourceAddController',
-      ['$state', 'resourcesService', 'cloudsService', 'projectsService', 'keysService', 'templatesService',
+      ['$state', 'resourcesService', 'servicesService', 'projectsService', 'keysService', 'templatesService',
       ResourceAddController]);
 
   function ResourceAddController(
-      $state, resourcesService, cloudsService, projectsService, keysService, templatesService) {
+      $state, resourcesService, servicesService, projectsService, keysService, templatesService) {
     var vm = this;
 
     // Resource add process:
@@ -159,7 +159,7 @@
     function setProject(project) {
       vm.resource.project = project.url;
       // services
-      cloudsService.getCloudList({project: project.uuid}).then(function(response) {
+      servicesService.getServiceList({project: project.uuid}).then(function(response) {
         vm.serviceList = response;
       });
     }

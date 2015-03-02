@@ -2,12 +2,12 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('ServiceListController', ['serviceService', ServiceListController]);
+    .controller('ServiceListController', ['servicesService', ServiceListController]);
 
-  function ServiceListController(serviceService) {
+  function ServiceListController(servicesService) {
     var vm = this;
 
-    vm.list = serviceService.getServiceList();
+    vm.list = servicesService.getServiceList();
     vm.remove = remove;
 
     function remove(service) {

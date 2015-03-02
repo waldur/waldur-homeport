@@ -2,9 +2,9 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('serviceService', ['$q', 'RawService', 'RawTemplate', 'currentStateService', serviceService]);
+    .service('servicesService', ['$q', 'RawService', 'RawTemplate', 'currentStateService', servicesService]);
 
-  function serviceService($q, RawService, RawTemplate, currentStateService) {
+  function servicesService($q, RawService, RawTemplate, currentStateService) {
     /*jshint validthis: true */
     var vm = this;
 
