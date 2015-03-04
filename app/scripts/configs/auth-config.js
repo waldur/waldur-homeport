@@ -42,6 +42,8 @@
 
     function initAuthProvider(ENV, $authProvider) {
 
+      $authProvider.loginUrl = ENV.apiEndpoint + 'api-auth/password/';
+
       $authProvider.facebook({
         clientId: ENV.facebookClientId,
         url: ENV.apiEndpoint + ENV.facebookEndpointUrl

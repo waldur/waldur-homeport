@@ -2,9 +2,9 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('authService', ['ENV', '$http', '$cookies', authService]);
+    .service('authService', ['ENV', '$http', '$cookies', '$auth', '$window', authService]);
 
-  function authService(ENV, $http, $cookies) {
+  function authService(ENV, $http, $cookies, $auth) {
     /*jshint validthis: true */
     var vm = this;
 
@@ -12,9 +12,12 @@
     vm.signup = signup;
     vm.signout = signout;
     vm.getAuthCookie = getAuthCookie;
+    vm.isAuthenticated = isAuthenticated;
 
     function signin(username, password) {
-      var request = $http.post(ENV.apiEndpoint + 'api-auth/password/', {username: username, password: password})
+/*      var request = $http.post(ENV.apiEndpoint + 'api-auth/password/', {username: username, password: password})
+        .then(success);*/
+      var request = $auth.login({username: username, password: password})
         .then(success);
 
       function success(data) {
@@ -40,9 +43,10 @@
     }
 
     function signout(){
-      $cookies.token = undefined;
+      delete $cookies.token;
       delete $http.defaults.headers.common.Authorization;
       vm.user = {isAuthenticated: false};
+      $auth.logout();
     }
 
     function setAuthCookie(token) {
@@ -56,6 +60,10 @@
 
     function setAuthHeader(token) {
       $http.defaults.headers.common.Authorization = 'Token ' + token;
+    }
+
+    function isAuthenticated() {
+      return $auth.isAuthenticated();
     }
 
   }
