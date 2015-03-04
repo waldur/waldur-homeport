@@ -76,13 +76,12 @@
 
       $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
         $rootScope.bodyClass = currentStateService.getBodyClass(toState.name);
-
         if (toState.name === 'home' || toState.name === 'login') {
           if (authService.isAuthenticated()) {
             $state.go('dashboard');
           }
         }
-        if (toState.auth && !authService.isAuthenticated()) {
+        if (toState.auth && !authService.isAuthenticated() && toState.name !== 'login') {
           $state.go('login');
         }
       });

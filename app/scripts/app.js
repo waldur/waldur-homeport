@@ -94,7 +94,10 @@ angular
       .state('users', {
         url: '/users/',
         templateUrl: 'views/users.html',
-        auth: true
+        auth: true,
+        resolve: {
+          authenticated: authCheck
+        }
       })
 
       .state('user', {
@@ -107,7 +110,8 @@ angular
         templateUrl: 'views/resources.html',
         resolve: {
           authenticated: authCheck
-        }
+        },
+        auth: true
       })
 
       .state('resource-add', {
@@ -128,7 +132,7 @@ angular
       var deferred = $q.defer();
 
       if (!$auth.isAuthenticated()) {
-        $location.path('login');
+        $location.path('/login/');
       } else {
         deferred.resolve();
       }

@@ -10,9 +10,18 @@
 
   function UserListController($location, usersService) {
     var vm = this;
+    vm.pageSizes = [1,5,10,15,20];
+    vm.currentPageSize = usersService.pageSize;
+    vm.pages = usersService.pages ? usersService.pages : 5;
+    vm.currentPage = usersService.page;
+    vm.getNumber = getNumber;
+    vm.changePage = changePage;
+    vm.changePageSize = changePageSize;
 
-    vm.list = usersService.getRawUserList();
+    vm.list = {};
     vm.remove = remove;
+
+    getUserList();
 
     function remove(user) {
       var index = vm.list.indexOf(user);
@@ -21,6 +30,32 @@
         vm.list.splice(index, 1);
       });
     }
+
+    function changePage(page) {
+      vm.currentPage = page;
+      usersService.page = page;
+      getUserList();
+    }
+
+    function getUserList() {
+      usersService.getRawUserList().then(function (response) {
+        vm.pages = usersService.pages;
+        vm.list = response;
+      });
+    }
+
+    function getNumber(num) {
+      return new Array(num);
+    }
+
+    function changePageSize(pageSize) {
+      vm.currentPageSize = pageSize;
+      vm.currentPage = 1;
+      usersService.page = 1;
+      usersService.pageSize = pageSize;
+      getUserList();
+    }
+
 
   }
 

@@ -24,7 +24,7 @@
 
     vm.pageSizes = [1,5,10,15,20];
     vm.currentPageSize = resourcesService.pageSize;
-    vm.pages = resourcesService.pages ? resourcesService : 5;
+    vm.pages = resourcesService.pages ? resourcesService.pages : 5;
     vm.currentPage = resourcesService.page;
 
     getResourceList();
