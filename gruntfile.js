@@ -1,5 +1,8 @@
 /*jshint camelcase: false */
 
+var basePort = 8001,
+    testPort = 8002;
+
 module.exports = function(grunt) {
 
     grunt.initConfig({
@@ -67,22 +70,37 @@ module.exports = function(grunt) {
 
         protractor_webdriver: {
             options: {
-                path: 'node_modules/.bin/',
+                path: 'node_modules/protractor/bin/',
                 command: 'webdriver-manager start --standalone'
             },
-            all: {},
+            test: {},
+            daemonize: {
+                options: {
+                    keepAlive: true
+                }
+            }
         },
 
         protractor: {
             options: {
-              configFile: 'test/protractor.conf.js', // Default config file
-              keepAlive: false, // If false, the grunt process stops when the test fails.
-              noColor: false, // If true, protractor will not use colors in its output.
-              args: {
-                baseUrl: 'http://localhost:8001'
-              }
+                configFile: 'test/protractor.conf.js', // Default config file
+                keepAlive: false, // If false, the grunt process stops when the test fails.
+                noColor: false, // If true, protractor will not use colors in its output.
             },
-            all: {},
+            test: {
+                options: {
+                    args: {
+                        baseUrl: 'http://localhost:' + testPort
+                    }
+                }
+            },
+            fasttest: {
+                options: {
+                    args: {
+                        baseUrl: 'http://localhost:' + basePort
+                    }
+                }
+            }
         },
 
         watch: {
@@ -116,12 +134,9 @@ module.exports = function(grunt) {
 
         connect: {
             options: {
-                port: 8001,
-                hostname: 'localhost'
-            },
-            server: {
-                options: {
-                    middleware: function(connect) {
+                port: basePort,
+                hostname: 'localhost',
+                middleware: function(connect) {
                         return [
                             connect().use(
                                 '/bower_components',
@@ -130,6 +145,11 @@ module.exports = function(grunt) {
                             connect.static('./app')
                         ];
                     }
+            },
+            server: {},
+            test: {
+                options: {
+                    port: testPort,
                 }
             }
         },
@@ -141,9 +161,10 @@ module.exports = function(grunt) {
     grunt.registerTask(
         'build', ['concat', 'uglify', 'imagemin', 'sass', 'autoprefixer', 'cssmin']);
     grunt.registerTask(
-        'run', ['connect', 'concat', 'imagemin', 'sass', 'autoprefixer', 'watch']);
+        'run', ['connect:server', 'concat', 'imagemin', 'sass', 'autoprefixer', 'watch']);
     grunt.registerTask('serve', ['connect',]);
     grunt.registerTask('default', ['run']);
-    grunt.registerTask('test', ['protractor_webdriver', 'protractor']);
+    grunt.registerTask('test',
+        ['connect:test', 'concat', 'imagemin', 'sass', 'autoprefixer', 'protractor_webdriver:test', 'protractor:test']);
 
 };
