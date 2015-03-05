@@ -30,7 +30,7 @@
     getResourceList();
 
     function getResourceList() {
-      resourcesService.getResourcesList().then(function (response) {
+      resourcesService.getResourcesList().then(function(response) {
         vm.pages = resourcesService.pages;
         vm.list = response;
       });
@@ -56,7 +56,7 @@
 
 
     function deleteResource(uuid, index) {
-      var confirmDelete = confirm("Confirm resource deletion?");
+      var confirmDelete = confirm('Confirm resource deletion?');
       if (confirmDelete) {
         resourcesService.deleteResource(uuid).then(function(response){
           vm.list.splice(index, 1);
@@ -105,14 +105,11 @@
 
     // Resource add process:
     // 0. User has to choose back-end. Currently this step is not active because we have only one back-end.
-    // 1. User has to choose project.
+    // 1. User has to choose project. Method setProject has to be called, because services are initiated based on
+    // projects
     // 2. User has to choose service. Method setService has to be called, because flavors and templates are initialized
     // based on services
     // 3. User has to choose flavor, template, ssh key and other resource attributes.
-
-    vm.selectedService;
-    vm.selectedTemaplate;
-    vm.selectedFlavor;
 
     vm.showFlavors = false;
     vm.showTemplates = false;
@@ -128,6 +125,7 @@
     vm.setProject = setProject;
     vm.resource = resourcesService.createResource();
     vm.save = save;
+    vm.cancel = cancel;
     vm.errors = {};
 
     function activate() {
@@ -179,6 +177,10 @@
       function error(response) {
         vm.errors = response.data;
       }
+    }
+
+    function cancel() {
+      $state.go('resources');
     }
 
     activate();

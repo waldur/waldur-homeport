@@ -1,7 +1,7 @@
 <ng-include src="'/views/partials/app-header.html'"></ng-include>
 
 <!-- app-block -->
-<section class="app-block">
+<!-- <section class="app-block">
     <div class="container-fluid">
         <div class="white-box">
             <div class="app-title-line">
@@ -27,7 +27,7 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->
 <!-- /app-block -->
 
 <div class="app-form-box after-line" data-role="form-box" ng-controller="ResourceAddController as ResourceAdd">
@@ -66,10 +66,9 @@
                             </div>
                             <div class="col-xs-4">
                                 <div class="custom-select project">
-                                    <select name="" id=""
-                                        ng-options="project.url as project.name for project in ResourceAdd.projectList"
-                                        ng-model="ResourceAdd.resource.project">
+                                    <select name="" id="">
                                         <option value="" selected>Choose project</option>
+                                        <option ng-repeat="project in ResourceAdd.projectList" ng-click="ResourceAdd.setProject(project)" value="{{ project.url }}">{{ project.name }}</option>
                                     </select>
                                 </div>
                                 <a href="#" class="crud-controls active"><i class="fa fa-plus"></i> Add project</a>
@@ -209,7 +208,7 @@
 
                         <div class="row form-field">
                             <div class="col-xs-12 text-center">
-                                <button class="btn btn-default">Cancel</button>
+                                <button class="btn btn-default" ng-click="ResourceAdd.cancel()">Cancel</button>
                                 <button class="btn btn-primary" ng-click="ResourceAdd.save()">Add resource</button>
                             </div>
                         </div>
