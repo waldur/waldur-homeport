@@ -55,6 +55,8 @@
     "node": true,
 
     "globals": {
+        "alert": false,
+        "confirm": false,
         "angular": false,
         "$": false,
         "after": false,
