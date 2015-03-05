@@ -125,6 +125,7 @@
     vm.setProject = setProject;
     vm.resource = resourcesService.createResource();
     vm.save = save;
+    vm.cancel = cancel;
     vm.errors = {};
 
     function activate() {
@@ -176,6 +177,10 @@
       function error(response) {
         vm.errors = response.data;
       }
+    }
+
+    function cancel() {
+      $state.go('resources');
     }
 
     activate();
