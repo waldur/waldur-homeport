@@ -99,6 +99,9 @@ angular
       .state('resources', {
         url: '/resources/',
         templateUrl: 'views/resources.html',
+        resolve: {
+          authenticated: authCheck
+        }
       })
 
       .state('resource-add', {
@@ -115,6 +118,17 @@ angular
         url: '/payment/finish/',
         templateUrl: 'views/payment-finish.html',
       });
+    function authCheck($q, $location, $cookies) {
+      var deferred = $q.defer();
+
+      if (!$cookies.token) {
+        $location.path('/login/');
+      } else {
+        deferred.resolve();
+      }
+
+      return deferred.promise;
+    }
   });
 
 (function() {
