@@ -16,6 +16,7 @@
     vm.deleteResource = deleteResource;
 
     vm.createResource = createResource;
+    vm.getAvailableOperations = getAvailableOperations;
 
     vm.pageSize = 10;
     vm.page = 1;
@@ -70,9 +71,16 @@
       RawInstance.Delete({},{uuid: uuid}).$promise.then(function(response) {
         deferred.resolve(response);
       }, function(err) {
-        deferred.reject(err)
+        deferred.reject(err);
       });
       return deferred.promise;
+    }
+
+    function getAvailableOperations(resource) {
+      var state = resource.state.toLowerCase();
+      if (state === 'online') {return ['stop', 'restart'];}
+      if (state === 'offline') {return ['start', 'delete'];}
+      return [];
     }
 
   }
@@ -93,11 +101,11 @@
     .factory('RawInstance', ['ENV', '$resource', RawInstance]);
 
   function RawInstance(ENV, $resource) {
-    return $resource(ENV.apiEndpoint + 'api/instances/:instanceUUID', {instanceUUID:'@uuid'},
+    return $resource(ENV.apiEndpoint + 'api/instances/:instanceUUID/', {instanceUUID:'@uuid'},
       {
         Operation: {
           method:'POST',
-          url:ENV.apiEndpoint + 'api/instances/:instanceUUID/:operation',
+          url:ENV.apiEndpoint + 'api/instances/:instanceUUID/:operation/',
           params: {instanceUUID:'@uuid', operation:'@operation'}
         },
         Delete: {

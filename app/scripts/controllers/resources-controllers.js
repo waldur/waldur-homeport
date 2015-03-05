@@ -9,19 +9,21 @@
 
     vm.list = {};
 
-
+    // resource operations
     vm.stopResource = stopResource;
     vm.startResource = startResource;
     vm.restartResource = restartResource;
     vm.deleteResource = deleteResource;
+    vm.isOperationAvailable = isOperationAvailable;
 
+    // search
     vm.searchInput = '';
     vm.search = search;
+
+    // pagination
     vm.changePageSize = changePageSize;
     vm.changePage = changePage;
     vm.getNumber = getNumber;
-
-
     vm.pageSizes = [1,5,10,15,20];
     vm.currentPageSize = resourcesService.pageSize;
     vm.pages = resourcesService.pages ? resourcesService : 5;
@@ -62,7 +64,7 @@
           vm.list.splice(index, 1);
         });
       } else {
-        alert('Resource not deleted.');
+        alert('Resource was not deleted.');
       }
     }
 
@@ -89,6 +91,13 @@
     function getNumber(num) {
       return new Array(num);
     }
+
+    function isOperationAvailable(resource, operation) {
+      var availableOperations = resourcesService.getAvailableOperations(resource);
+      operation = operation.toLowerCase();
+      return availableOperations.indexOf(operation) !== -1;
+    }
+
   }
 
 })();
