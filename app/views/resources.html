@@ -22,7 +22,7 @@
                                 </div>
                             </li>
                         </ul>
-                        <div class="crud-box pull-right"><a href="../add-resource/index.html" class="crud-controls"><i class="fa fa-plus"></i> Add resource</a></div>
+                        <div class="crud-box pull-right"><a ui-sref="resource-add" class="crud-controls"><i class="fa fa-plus"></i> Add resource</a></div>
                     </div>
                 </div>
             </div>
@@ -49,6 +49,10 @@
                                 <a href="" class="sort">Project</a>
                             </th>
                             <th>
+                                <a href="" class="sort">Access information</a>
+                                <!-- access_information -->
+                            </th>
+                            <th>
                                 <a href="" class="sort">Status</a>
                             </th>
                             <th></th>
@@ -64,7 +68,12 @@
                                 <a ui-sref="project({uuid: resource.project_uuid })" class="elem sort-display">{{ resource.project_name }}</a>
                             </td>
                             <td class="col-xs-2">
-                                <span class="status-display" ng-class="{'online': resource.state == 'online', 'offline' : resource.state == 'offline'}">
+                                <ul class="standart-list gray-text">
+                                    <li ng-repeat="access in resource.access_information">{{ access }}</li>
+                                </ul>
+                            </td>
+                            <td class="col-xs-2">
+                                <span class="status-display" ng-class="{'online': resource.state == 'Online', 'offline' : resource.state == 'Offline'}">
                                     {{ resource.state }}
                                 </span>
                             </td>
@@ -72,21 +81,21 @@
                                 <ul class="controls pull-right">
                                     <li>
                                         <a href="#" class="poweroff offline"
-                                           ng-click="ResourceList.stopResource(resource.uuid)"
-                                           ng-show="resource.state == 'offline'"><i class="fa fa-power-off"></i></a>
-                                        <a href="#" class="poweroff online"
-                                           ng-click="ResourceList.stopResource(resource.uuid)"
-                                           ng-show="resource.state == 'online'"><i class="fa fa-power-off"></i></a>
+                                           ng-click="ResourceList.stopResource(resource.uuid)" title="Stop"
+                                           ng-show="ResourceList.isOperationAvailable(resource, 'stop')"><i class="fa fa-power-off"></i></a>
+                                        <a href="#" class="poweroff online" title="Start"
+                                           ng-click="ResourceList.startResource(resource.uuid)"
+                                           ng-show="ResourceList.isOperationAvailable(resource, 'start')"><i class="fa fa-power-off"></i></a>
                                     </li>
                                     <li>
                                         <a href="#" data-toggle="tooltip" data-placement="top" title="Restart"
                                            ng-click="ResourceList.restartResource(resource.uuid)"
-                                           ng-show="resource.state == 'online'"><i class="fa fa-refresh"></i></a>
+                                           ng-show="ResourceList.isOperationAvailable(resource, 'restart')"><i class="fa fa-refresh"></i></a>
                                     </li>
                                     <li>
                                         <a href="#" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"
                                            ng-click="ResourceList.deleteResource(resource.uuid, $index)"
-                                           ng-show="resource.state == 'offline'"><i class="fa fa-times"></i></a>
+                                           ng-show="ResourceList.isOperationAvailable(resource, 'delete')"><i class="fa fa-times"></i></a>
                                     </li>
                                 </ul>
                             </td>

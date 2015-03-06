@@ -38,6 +38,8 @@
     "update-index-async": "node -e \"require('shelljs/global'); sed('-i', /\\/\\/@@NG_LOADER_START@@[\\s\\S]*\\/\\/@@NG_LOADER_END@@/, '//@@NG_LOADER_START@@\\n' + sed(/sourceMappingURL=angular-loader.min.js.map/,'sourceMappingURL=bower_components/angular-loader/angular-loader.min.js.map','app/bower_components/angular-loader/angular-loader.min.js') + '\\n//@@NG_LOADER_END@@', 'app/index-async.html');\""
   },
   "devDependencies": {
+    "grunt-protractor-runner": "^1.2.1",
+    "grunt-protractor-webdriver": "^0.2.0",
     "jasmine-core": "^2.1.3",
     "karma-jasmine": "^0.3.3",
     "karma-phantomjs-launcher": "^0.1.4"

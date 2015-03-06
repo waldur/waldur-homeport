@@ -55,6 +55,8 @@
     "node": true,
 
     "globals": {
+        "alert": false,
+        "confirm": false,
         "angular": false,
         "$": false,
         "after": false,
@@ -68,6 +70,8 @@
         "inject": false,
         "it": false,
         "jasmine": false,
-        "spyOn": false
+        "spyOn": false,
+        "by": false,
+        "element": false
     }
 }

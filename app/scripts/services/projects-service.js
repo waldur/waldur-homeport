@@ -3,9 +3,9 @@
 (function() {
   angular.module('ncsaas')
     .service('projectsService',
-      ['$q', 'RawProject', 'RawUser', 'RawCustomer', 'RawCloud', 'currentStateService', projectsService]);
+      ['$q', 'RawProject', 'RawUser', 'RawCustomer', 'RawService', 'currentStateService', projectsService]);
 
-  function projectsService($q, RawProject, RawUser, RawCustomer, RawCloud, currentStateService) {
+  function projectsService($q, RawProject, RawUser, RawCustomer, RawService, currentStateService) {
     /*jshint validthis: true */
     var vm = this;
     /*jshint validthis: false */
@@ -25,7 +25,7 @@
       function init(project) {
         initProjectUsers(project);
         initProjectCustomer(project);
-        initProjectClouds(project);
+        initProjectService(project);
       }
 
       return project;
@@ -81,11 +81,11 @@
       }
     }
 
-    function initProjectClouds(project) {
-      RawCloud.query({project: project.uuid}, init);
+    function initProjectService(project) {
+      RawService.query({project: project.uuid}, init);
 
-      function init(clouds) {
-        project.clouds = clouds;
+      function init(services) {
+        project.services = services;
       }
     }
 

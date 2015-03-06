@@ -49,12 +49,36 @@ CORS_EXPOSE_HEADERS = (
         'Link'
 )
 It is needed for enable reading header's response from frontend app.
+
 ## Tests
 
-To start tests:
+[Protractor][6] is used for tests.
 
-    grunt test
+### Setup
 
+1. Install developer dependencies from `package.json`
+
+2. Update WebdriverJS:
+
+        node_modules/protractor/bin/webdriver-manager update
+
+### Run all tests at once
+
+Command `grunt test` will start local server on separate host and run all tests.
+
+Notice: `Error: ECONNREFUSED connect ECONNREFUSED` Can be raised in the end of tests flow.
+It occurs because selenium server shuts down before protractor ends tests. ([Link to issue][7]).
+
+### Run selected file on current develop server
+
+1. Run `grunt protractor_webdriver:daemonize` to start Selenium Server for tests.
+This server will not shut down after tests, so this command can be executed only once.
+
+2. Start your develop server: `grunt run`
+
+3. Execute all tests faster with `grunt protractor:fasttest`
+
+4. Or execute concrete file with tests: `grunt protractor:fasttest --specs test/internal/some-file.js`
 
 ## Configuration
 
@@ -75,3 +99,5 @@ See `docs/development_guideline.md` for development policies.
 [3]: https://github.com/sahat/satellizer/#obtaining-oauth-keys
 [4]: https://code.opennodecloud.com/nodeconductor/nodeconductor/blob/develop/README.rst
 [5]: https://code.opennodecloud.com/nc-saas/ncplus/blob/develop/README.rst
+[6]: http://angular.github.io/protractor/#/tutorial
+[7]: https://github.com/teerapap/grunt-protractor-runner/issues/111
