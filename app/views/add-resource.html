@@ -66,8 +66,8 @@
                             </div>
                             <div class="col-xs-4">
                                 <div class="custom-select project">
-                                    <select ng-model="ResourceAdd.resource.project" ng-options="project.url as project.name for project in ResourceAdd.projectList" ng-change="ResourceAdd.setProject(ResourceAdd.resource.project)">
-                                        <option value="" selected>Choose project</option>
+                                    <select ng-model="ResourceAdd.selectedProject" ng-options="project as project.name for project in ResourceAdd.projectList" ng-change="ResourceAdd.setProject(ResourceAdd.selectedProject)">
+                                        <option value="">Choose project</option>
                                     </select>
                                 </div>
                                 <a href="#" class="crud-controls active"><i class="fa fa-plus"></i> Add project</a>

@@ -136,6 +136,7 @@
     vm.save = save;
     vm.cancel = cancel;
     vm.errors = {};
+    vm.selectedProject = null;
 
     function activate() {
       // projects
