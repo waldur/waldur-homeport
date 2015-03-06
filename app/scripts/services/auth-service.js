@@ -2,7 +2,7 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('authService', ['ENV', '$http', '$cookies', '$auth', '$window', authService]);
+    .service('authService', ['ENV', '$http', '$cookies', '$auth', authService]);
 
   function authService(ENV, $http, $cookies, $auth) {
     /*jshint validthis: true */
