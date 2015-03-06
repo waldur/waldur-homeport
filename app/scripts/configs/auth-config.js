@@ -8,12 +8,12 @@
   function initAuthToken($httpProvider) {
     $httpProvider.interceptors.push(auth);
 
-    function auth($q, $cookies) {
+    function auth($q, $cookies, $window) {
       var headerIsSet = false;
       function request(data) {
 
         if (!headerIsSet) {
-          var token = $cookies.token;
+          var token = $cookies.token ? $cookies.token : $window.localStorage['satellizer_token'];
           if (typeof token !== 'undefined' && token !== 'undefined') {
             $httpProvider.defaults.headers.common.Authorization = 'Token ' + token;
             headerIsSet = true;
@@ -41,6 +41,8 @@
     .config(['ENV', '$authProvider', initAuthProvider]);
 
     function initAuthProvider(ENV, $authProvider) {
+
+      $authProvider.loginUrl = ENV.apiEndpoint + 'api-auth/password/';
 
       $authProvider.facebook({
         clientId: ENV.facebookClientId,

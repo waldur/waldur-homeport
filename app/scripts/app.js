@@ -34,11 +34,15 @@ angular
       .state('dashboard', {
         url: '/dashboard/',
         templateUrl: 'views/dashboard.html',
+        resolve: {
+          authenticated: authCheck
+        }
       })
 
       .state('projects', {
         url: '/projects/',
         templateUrl: 'views/projects.html',
+        auth: true
       })
 
       .state('projects-add', {
@@ -59,6 +63,7 @@ angular
       .state('services', {
         url: '/services/',
         templateUrl: 'views/services.html',
+        auth: true
       })
 
       .state('profile', {
@@ -89,6 +94,10 @@ angular
       .state('users', {
         url: '/users/',
         templateUrl: 'views/users.html',
+        auth: true,
+        resolve: {
+          authenticated: authCheck
+        }
       })
 
       .state('user', {
@@ -101,7 +110,8 @@ angular
         templateUrl: 'views/resources.html',
         resolve: {
           authenticated: authCheck
-        }
+        },
+        auth: true
       })
 
       .state('resource-add', {
@@ -118,10 +128,10 @@ angular
         url: '/payment/finish/',
         templateUrl: 'views/payment-finish.html',
       });
-    function authCheck($q, $location, $cookies) {
+    function authCheck($q, $location, $auth) {
       var deferred = $q.defer();
 
-      if (!$cookies.token) {
+      if (!$auth.isAuthenticated()) {
         $location.path('/login/');
       } else {
         deferred.resolve();
