@@ -106,17 +106,21 @@ angular
       })
 
       .state('resources', {
+        templateUrl: 'views/app.html',
+      })
+
+      .state('resources.list', {
         url: '/resources/',
-        templateUrl: 'views/resources.html',
+        templateUrl: 'views/resource-list.html',
         resolve: {
           authenticated: authCheck
         },
         auth: true
       })
 
-      .state('resource-add', {
+      .state('resources.add', {
         url: '/resources/add/',
-        templateUrl: 'views/add-resource.html',
+        templateUrl: 'views/resource-add.html',
       })
 
       .state('payment', {

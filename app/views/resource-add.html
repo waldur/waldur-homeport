@@ -1,33 +1,17 @@
-<ng-include src="'/views/partials/app-header.html'"></ng-include>
-
 <!-- app-block -->
-<!-- <section class="app-block">
+<section class="app-block">
     <div class="container-fluid">
         <div class="white-box">
             <div class="app-title-line">
                 <div class="row">
                     <div class="col-xs-12 first-line">
                         <h2 class="app-title">Add Resource</h2>
-                        <ul class="sort no-display">
-                            <li><a href="#" class="active">5</a></li>
-                            <li><a href="#">15</a></li>
-                            <li><a href="#">24</a></li>
-                            <li class="divid">
-                                <div class="search" data-role="search-box">
-                                    <input type="text">
-                                    <button class="search-button">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </div>
-                            </li>
-                        </ul>
-                        <div class="crud-box pull-right"><a href="../resources/index.html" class="crud-controls active"><i class="fa fa-plus"></i> add resource</a></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</section> -->
+</section>
 <!-- /app-block -->
 
 <div class="app-form-box after-line" data-role="form-box" ng-controller="ResourceAddController as ResourceAdd">
@@ -43,7 +27,7 @@
                         <div class="app-title-line in-form form-field">
                             <div class="row">
                                 <div class="col-xs-12 first-line">
-                                    <h2 class="app-title">Add resource</h2>
+                                    <h2 class="app-title">Resource</h2>
                                 </div>
                             </div>
                         </div>
@@ -70,7 +54,7 @@
                                         <option value="">Choose project</option>
                                     </select>
                                 </div>
-                                <a href="#" class="crud-controls active"><i class="fa fa-plus"></i> Add project</a>
+                                <a href="#" class="crud-controls"><i class="fa fa-plus"></i> Add project</a>
                             </div>
                             <div class="col-xs-4">
                                 <div class="custom-select project">
@@ -219,5 +203,3 @@
     </section>
     <!-- /app-block -->
 </div>
-
-<ng-include src="'/views/partials/app-footer.html'"></ng-include>

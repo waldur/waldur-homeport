@@ -1,5 +1,3 @@
-<ng-include src="'/views/partials/app-header.html'"></ng-include>
-
 <div ng-controller="ResourceListController as ResourceList">
 
 <!-- app-block -->
@@ -22,7 +20,7 @@
                                 </div>
                             </li>
                         </ul>
-                        <div class="crud-box pull-right"><a ui-sref="resource-add" class="crud-controls"><i class="fa fa-plus"></i> Add resource</a></div>
+                        <div class="crud-box pull-right"><a ui-sref="resources.add" class="crud-controls"><i class="fa fa-plus"></i> Add resource</a></div>
                     </div>
                 </div>
             </div>
@@ -107,24 +105,21 @@
     </div>
 </section>
 <!-- /app-block -->
+
 <div class="app-block">
-        <div class="container-fluid">
-            <!-- pagination -->
-            <div class="pagination">
-                <ul>
-                    <li><a href="#/resources/" ng-repeat="i in ResourceList.getNumber(ResourceList.pages) track by $index"
-                           ng-class="{current: ($index+1) === ResourceList.currentPage}"
-                           ng-click="ResourceList.changePage($index+1)">{{$index+1}}</a></li>
+    <div class="container-fluid">
+        <!-- pagination -->
+        <div class="pagination">
+            <ul>
+                <li><a href="#/resources/" ng-repeat="i in ResourceList.getNumber(ResourceList.pages) track by $index"
+                       ng-class="{current: ($index+1) === ResourceList.currentPage}"
+                       ng-click="ResourceList.changePage($index+1)">{{$index+1}}</a></li>
 
-                </ul>
-            </div>
-            <!-- /pagination -->
+            </ul>
         </div>
+        <!-- /pagination -->
+    </div>
 </div>
 
 </div>
-    <!-- app-block -->
-    <!-- /app-block -->
 <!--</div>-->
-
-<ng-include src="'/views/partials/app-footer.html'"></ng-include>

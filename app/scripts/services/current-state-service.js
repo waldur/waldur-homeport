@@ -37,7 +37,7 @@
     // Active menuItem
     var urlList = {
       dashboard: ['dashboard'],
-      resources: ['resources'],
+      resources: ['resources.list', 'resources.add'],
       projects: ['projects', 'project', 'project-edit', 'projects-add'],
       services: ['services'],
       users: ['users', 'user']

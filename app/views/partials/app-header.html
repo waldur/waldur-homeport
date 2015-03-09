@@ -13,7 +13,7 @@
         <div class="navbar-collapse collapse" ng-class="{'in': menuCollapse}">
             <ul class="nav navbar-nav">
                 <li ng-class="{'active': controller.menuItemActive === 'dashboard'}"><a ui-sref="dashboard" class=""><i class="fa fa-th-large"></i> Dashboard</a></li>
-                <li ng-class="{'active': controller.menuItemActive === 'resources'}"><a ui-sref="resources" class=""><i class="fa fa-tasks"></i> Resources</a></li>
+                <li ng-class="{'active': controller.menuItemActive === 'resources'}"><a ui-sref="resources.list" class=""><i class="fa fa-tasks"></i> Resources</a></li>
                 <li ng-class="{'active': controller.menuItemActive === 'projects'}"><a ui-sref="projects" class=""><i class="fa fa-folder"></i> Projects</a></li>
                 <li ng-class="{'active': controller.menuItemActive === 'services'}"><a ui-sref="services" class=""><i class="fa fa-folder"></i> Services</a></li>
                 <li ng-class="{'active': controller.menuItemActive === 'users'}"><a ui-sref="users" class=""><i class="fa fa-folder"></i> Users</a></li>
@@ -26,7 +26,7 @@
                     <ul class="dropdown-menu add-something small-screen" role="menu" ng-show="controller.menuState.combineMenu">
                         <li><a ui-sref="service-add" class="add-project">Add service</a></li>
                         <li><a ui-sref="projects-add" class="add-project">Add project</a></li>
-                        <li><a ui-sref="resource-add" class="add-resource">Add resource</a></li>
+                        <li><a ui-sref="resources.add" class="add-resource">Add resource</a></li>
                         <li class="divider">{{ controller.getCustomer().name }}</li>
                         <li ng-repeat="customer in controller.customers"><a href="" ng-click="controller.setCurrentCustomer(customer)" ng-class="{'current-customer': customer.uuid == controller.getCustomer().uuid}">{{ customer.name }}</a></li>
                         <li><a ui-sref="customers" class="add-customer">Manage customers</a></li>
@@ -45,7 +45,7 @@
                     <ul class="dropdown-menu add-something" role="menu" ng-show="controller.menuState.addSomethingMenu">
                         <li><a ui-sref="service-add" class="add-project">Add service</a></li>
                         <li><a ui-sref="projects-add" class="add-project">Add project</a></li>
-                        <li><a ui-sref="resource-add" class="add-resource">Add resource</a></li>
+                        <li><a ui-sref="resources.add" class="add-resource">Add resource</a></li>
                     </ul>
                 </li>
                 <li>
