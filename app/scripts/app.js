@@ -111,7 +111,14 @@ angular
 
       .state('resources.list', {
         url: '/resources/',
-        templateUrl: 'views/resource/list.html',
+        views: {
+          '': {
+            templateUrl: 'views/resource/list.html',
+          },
+          'resourcesList': {
+            templateUrl: 'views/resource/_list.html',
+          }
+        },
         resolve: {
           authenticated: authCheck
         },
