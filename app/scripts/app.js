@@ -114,7 +114,7 @@ angular
       .state('resources.list', {
         url: '',
         views: {
-          '': {
+          'appContent': {
             templateUrl: 'views/resource/list.html',
           },
           'appHeader': {
@@ -133,7 +133,7 @@ angular
       .state('resources.add', {
         url: '/resources/add/',
         views: {
-          '': {
+          'appContent': {
             templateUrl: 'views/resource/create.html',
           },
           'appHeader': {
