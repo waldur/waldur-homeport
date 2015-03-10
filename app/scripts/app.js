@@ -106,15 +106,17 @@ angular
       })
 
       .state('resources', {
-        templateUrl: 'views/app.html',
+        url: '/resources/',
+        abstract: true,
+        templateUrl: 'views/resource/list.html',
       })
 
       .state('resources.list', {
-        url: '/resources/',
+        url: '',
         views: {
-          '': {
+          /*'': {
             templateUrl: 'views/resource/list.html',
-          },
+          },*/
           'resourcesList': {
             templateUrl: 'views/resource/_list.html',
           }
