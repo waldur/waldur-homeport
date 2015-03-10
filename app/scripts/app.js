@@ -111,7 +111,7 @@ angular
 
       .state('resources.list', {
         url: '/resources/',
-        templateUrl: 'views/resource-list.html',
+        templateUrl: 'views/resource/list.html',
         resolve: {
           authenticated: authCheck
         },
@@ -120,7 +120,7 @@ angular
 
       .state('resources.add', {
         url: '/resources/add/',
-        templateUrl: 'views/resource-add.html',
+        templateUrl: 'views/resource/create.html',
       })
 
       .state('payment', {
