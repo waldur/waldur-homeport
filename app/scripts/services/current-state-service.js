@@ -40,7 +40,7 @@
       resources: ['resources.list', 'resources.add'],
       projects: ['projects', 'project', 'project-edit', 'projects-add'],
       services: ['services'],
-      users: ['users', 'user']
+      users: ['users.list', 'users.details']
     };
 
     function getActiveItem(stateName) {
@@ -64,7 +64,7 @@
       'customer',
       'customer-edit',
       'customer-plans',
-      'user',
+      'users.details',
       'home',
       'login',
     ];

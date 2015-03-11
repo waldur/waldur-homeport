@@ -93,16 +93,46 @@ angular
 
       .state('users', {
         url: '/users/',
-        templateUrl: 'views/users.html',
-        auth: true,
-        resolve: {
-          authenticated: authCheck
-        }
+        abstract: true,
+        templateUrl: 'views/user/base.html'
       })
 
-      .state('user', {
-        url: '/users/:uuid/',
-        templateUrl: 'views/user.html',
+      .state('users.list', {
+        url: '',
+        views: {
+          'appContent': {
+            templateUrl: 'views/user/list.html',
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html',
+          },
+          'appFooter': {
+            templateUrl: 'views/partials/app-footer.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
+        auth: true
+      })
+
+      .state('users.details', {
+        url: '/:uuid/',
+        views: {
+          'appContent': {
+            templateUrl: 'views/user/details.html',
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html',
+          },
+          'appFooter': {
+            templateUrl: 'views/partials/app-footer.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
+        auth: true
       })
 
       .state('resources', {
