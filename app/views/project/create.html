@@ -1,0 +1,96 @@
+<div ng-controller="ProjectAddController as controller">
+    <!-- app-block -->
+    <section class="app-block">
+        <div class="container-fluid">
+            <div class="white-box">
+                <div class="app-title-line">
+                    <div class="row">
+                        <div class="col-xs-12 first-line">
+                            <h2 class="app-title">Add Project</h2>
+                            <ul class="sort no-display">
+                                <li><a href="#" class="active">5</a></li>
+                                <li><a href="#">15</a></li>
+                                <li><a href="#">24</a></li>
+                                <li class="divid">
+                                    <div class="search" data-role="search-box">
+                                        <input type="text">
+                                        <button class="search-button">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="crud-box pull-right"><a href="../#/projects/" class="crud-controls active"><i class="fa fa-plus"></i> Add Project</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /app-block -->
+
+    <div class="app-form-box top-level after-line" data-role="form-box">
+        <!-- app-block -->
+        <section class="app-block">
+            <div class="container-fluid">
+                <div class="white-box top-level">
+                    <!-- app-basic-form -->
+                    <div class="app-basic-form">
+
+                        <form name="addProjectForm" ng-submit="controller.save()">
+
+                            <!-- app-title-line -->
+                            <div class="app-title-line in-form form-field">
+                                <div class="row">
+                                    <div class="col-xs-12 first-line">
+                                        <h2 class="app-title">Add Project</h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /app-title-line -->
+
+                            <div class="row form-field">
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" placeholder="Project Name" data-role="form-input" ng-model="controller.project.name">
+                                </div>
+                                <div class="col-xs-4">
+                                    <div class="custom-select project">
+                                        <select name=""
+                                            ng-options="item.url as item.name for item in controller.customersList"
+                                            ng-model="controller.project.customer">
+                                            <option value="" selected>Choose customer</option>
+                                        </select>
+                                    </div>
+                                    <a href="#" class="crud-controls"><i class="fa fa-plus"></i> add customer</a>
+                                </div>
+                            </div>
+                            <div class="row form-field description">
+                                <div class="col-xs-4 col-xs-offset-4">
+                                    <div class="gray-text">
+                                        Description for Project choises goes here...
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row form-field">
+                                <div class="col-xs-8">
+                                    <textarea class="form-control" name="" id="" placeholder="Project description" ng-model="controller.project.description"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-divide"></div>
+
+                            <div class="row form-field">
+                                <div class="col-xs-12 text-center">
+                                    <button class="btn btn-default">Cancel</button>
+                                    <button class="btn btn-primary" type="submit">Add Project</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /app-basic-form -->
+                </div>
+            </div>
+        </section>
+        <!-- /app-block -->
+    </div>
+</div>

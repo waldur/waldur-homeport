@@ -107,16 +107,42 @@ angular
 
       .state('resources', {
         url: '/resources/',
-        templateUrl: 'views/resources.html',
+        abstract: true,
+        templateUrl: 'views/resource/base.html',
+      })
+
+      .state('resources.list', {
+        url: '',
+        views: {
+          'appContent': {
+            templateUrl: 'views/resource/list.html',
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html',
+          },
+          'appFooter': {
+            templateUrl: 'views/partials/app-footer.html',
+          }
+        },
         resolve: {
           authenticated: authCheck
         },
         auth: true
       })
 
-      .state('resource-add', {
+      .state('resources.add', {
         url: '/resources/add/',
-        templateUrl: 'views/add-resource.html',
+        views: {
+          'appContent': {
+            templateUrl: 'views/resource/create.html',
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html',
+          },
+          'appFooter': {
+            templateUrl: 'views/partials/app-footer.html',
+          }
+        },
       })
 
       .state('payment', {
