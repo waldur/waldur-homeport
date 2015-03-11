@@ -13,7 +13,7 @@
                         <h1 class="profile-name pull-left">{{ controller.customer.name }}</h1>
                         <ul class="controls pull-right">
                             <li>
-                                <a href="#/customers/{{ controller.customer.uuid }}/edit/" class="crud-controls"><i class="fa fa-cog"></i> Edit profile</a>
+                                <a ui-sref="customers.edit({uuid: controller.customer.uuid})" class="crud-controls"><i class="fa fa-cog"></i> Edit profile</a>
                             </li>
                             <li>
                                 <a href="#/customers/{{ controller.customer.uuid }}/plans/" class="crud-controls"><i class="fa fa-cog"></i> Plans</a>

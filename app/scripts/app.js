@@ -73,17 +73,65 @@ angular
 
       .state('customers', {
         url: '/customers/',
-        templateUrl: 'views/customers.html',
+        abstract: true,
+        templateUrl: 'views/customer/base.html',
       })
 
-      .state('customer', {
-        url: '/customers/:uuid/',
-        templateUrl: 'views/customer.html',
+      .state('customers.list', {
+        url: '',
+        views: {
+          'appContent': {
+            templateUrl: 'views/customer/list.html',
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html',
+          },
+          'appFooter': {
+            templateUrl: 'views/partials/app-footer.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
+        auth: true
       })
 
-      .state('customer-edit', {
-        url: '/customers/:uuid/edit/',
-        templateUrl: 'views/customer-edit.html',
+      .state('customers.details', {
+        url: '/:uuid/',
+        views: {
+          'appContent': {
+            templateUrl: 'views/customer/details.html',
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html',
+          },
+          'appFooter': {
+            templateUrl: 'views/partials/app-footer.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
+        auth: true
+      })
+
+      .state('customers.edit', {
+        url: '/:uuid/edit/',
+        views: {
+          'appContent': {
+            templateUrl: 'views/customer/update.html',
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html',
+          },
+          'appFooter': {
+            templateUrl: 'views/partials/app-footer.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
+        auth: true
       })
 
       .state('customer-plans', {
