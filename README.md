@@ -52,7 +52,8 @@ It is needed for enable reading header's response from frontend app.
 
 ## Tests
 
-[Protractor][6] is used for tests.
+[Protractor][6] is used for tests. Tests are base on ["Alice" dataset][8], so backend server has to contain data from
+this dataset. It can contain other data too, this does not have to break tests.
 
 ### Setup
 
@@ -61,6 +62,9 @@ It is needed for enable reading header's response from frontend app.
 2. Update WebdriverJS:
 
         node_modules/protractor/bin/webdriver-manager update
+
+Notice: Currently "Alice" dataset contain only non-active templates, all of them have to be active.
+This will be fixed in SAAS-170.
 
 ### Run all tests at once
 
@@ -101,3 +105,4 @@ See `docs/development_guideline.md` for development policies.
 [5]: https://code.opennodecloud.com/nc-saas/ncplus/blob/develop/README.rst
 [6]: http://angular.github.io/protractor/#/tutorial
 [7]: https://github.com/teerapap/grunt-protractor-runner/issues/111
+[8]: http://nodeconductor.readthedocs.org/en/stable/developer/sample-data.html
