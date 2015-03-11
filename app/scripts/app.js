@@ -41,23 +41,84 @@ angular
 
       .state('projects', {
         url: '/projects/',
-        templateUrl: 'views/projects.html',
+        abstract: true,
+        templateUrl: 'views/project/base.html',
+      })
+
+      .state('projects.list', {
+        url: '',
+        views: {
+          'appContent': {
+            templateUrl: 'views/project/list.html',
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html',
+          },
+          'appFooter': {
+            templateUrl: 'views/partials/app-footer.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
         auth: true
       })
 
-      .state('projects-add', {
-        url: '/projects/add/',
-        templateUrl: 'views/add-project.html',
+      .state('projects.create', {
+        url: 'add/',
+        views: {
+          'appContent': {
+            templateUrl: 'views/project/create.html',
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html',
+          },
+          'appFooter': {
+            templateUrl: 'views/partials/app-footer.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
+        auth: true
       })
 
-      .state('project', {
-        url: '/projects/:uuid/',
-        templateUrl: 'views/project.html',
+      .state('projects.details', {
+        url: ':uuid/',
+        views: {
+          'appContent': {
+            templateUrl: 'views/project/details.html',
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html',
+          },
+          'appFooter': {
+            templateUrl: 'views/partials/app-footer.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
+        auth: true
       })
 
-      .state('project-edit', {
-        url: '/projects/:uuid/edit/',
-        templateUrl: 'views/project-edit.html',
+      .state('projects.update', {
+        url: ':uuid/edit/',
+        views: {
+          'appContent': {
+            templateUrl: 'views/project/update.html',
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html',
+          },
+          'appFooter': {
+            templateUrl: 'views/partials/app-footer.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
+        auth: true
       })
 
       .state('services', {
