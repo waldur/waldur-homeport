@@ -158,7 +158,7 @@ angular
       })
 
       .state('customers.details', {
-        url: '/:uuid/',
+        url: ':uuid/',
         views: {
           'appContent': {
             templateUrl: 'views/customer/details.html',
@@ -177,7 +177,7 @@ angular
       })
 
       .state('customers.edit', {
-        url: '/:uuid/edit/',
+        url: ':uuid/edit/',
         views: {
           'appContent': {
             templateUrl: 'views/customer/update.html',
@@ -226,7 +226,7 @@ angular
       })
 
       .state('users.details', {
-        url: '/:uuid/',
+        url: ':uuid/',
         views: {
           'appContent': {
             templateUrl: 'views/user/details.html',
@@ -245,7 +245,7 @@ angular
       })
 
       .state('resources', {
-        url: '/resources/',
+        url: 'resources/',
         abstract: true,
         templateUrl: 'views/resource/base.html',
       })
@@ -269,8 +269,8 @@ angular
         auth: true
       })
 
-      .state('resources.add', {
-        url: '/resources/add/',
+      .state('resources.create', {
+        url: 'add/',
         views: {
           'appContent': {
             templateUrl: 'views/resource/create.html',
