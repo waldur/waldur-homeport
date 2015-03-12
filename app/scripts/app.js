@@ -18,17 +18,26 @@ angular
       .state('home', {
         url: '/',
         templateUrl: 'views/home.html',
+        resolve: {
+          authenticated: notLoggedCheck
+        }
       })
 
       .state('login', {
         url: '/login/',
         templateUrl: 'views/login.html',
-        controller: 'AuthController'
+        controller: 'AuthController',
+        resolve: {
+          authenticated: notLoggedCheck
+        }
       })
 
       .state('initialdata', {
         url: '/initial-data/',
         templateUrl: 'views/initial-data.html',
+        resolve: {
+          authenticated: authCheck
+        }
       })
 
       .state('dashboard', {
@@ -124,7 +133,9 @@ angular
       .state('services', {
         url: '/services/',
         templateUrl: 'views/services.html',
-        auth: true
+        resolve: {
+          authenticated: authCheck
+        }
       })
 
       .state('profile', {
@@ -237,6 +248,9 @@ angular
       .state('customer-plans', {
         url: '/customers/:uuid/plans/',
         templateUrl: 'views/customer-plans.html',
+        resolve: {
+          authenticated: authCheck
+        }
       })
 
       .state('users', {
@@ -287,6 +301,9 @@ angular
         url: 'resources/',
         abstract: true,
         templateUrl: 'views/resource/base.html',
+        resolve: {
+          authenticated: authCheck
+        }
       })
 
       .state('resources.list', {
@@ -304,8 +321,7 @@ angular
         },
         resolve: {
           authenticated: authCheck
-        },
-        auth: true
+        }
       })
 
       .state('resources.create', {
@@ -321,6 +337,9 @@ angular
             templateUrl: 'views/partials/app-footer.html',
           }
         },
+        resolve: {
+          authenticated: authCheck
+        }
       })
 
       .state('payment', {
@@ -371,7 +390,21 @@ angular
       var deferred = $q.defer();
 
       if (!$auth.isAuthenticated()) {
+        // can't use $state because its will throw recursion error
         $location.path('/login/');
+      } else {
+        deferred.resolve();
+      }
+
+      return deferred.promise;
+    }
+
+    function notLoggedCheck($q, $location, $auth) {
+      var deferred = $q.defer();
+
+      if ($auth.isAuthenticated()) {
+        // can't use $state because its will throw recursion error
+        $location.path('/dashboard/');
       } else {
         deferred.resolve();
       }
