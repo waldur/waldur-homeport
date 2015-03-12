@@ -286,13 +286,48 @@ angular
 
       .state('payment', {
         url: '/payment/',
-        templateUrl: 'views/payment-start.html',
+        abstract: true,
+        templateUrl: 'views/payment/base.html',
       })
 
-      .state('payment-finish', {
-        url: '/payment/finish/',
-        templateUrl: 'views/payment-finish.html',
+      .state('payment.checkout', {
+        url: '',
+        views: {
+          'appContent': {
+            templateUrl: 'views/payment/checkout.html',
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html',
+          },
+          'appFooter': {
+            templateUrl: 'views/partials/app-footer.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
+        auth: true
+      })
+
+      .state('payment.success', {
+        url: 'success/',
+        views: {
+          'appContent': {
+            templateUrl: 'views/payment/success.html',
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html',
+          },
+          'appFooter': {
+            templateUrl: 'views/partials/app-footer.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
+        auth: true
       });
+
     function authCheck($q, $location, $auth) {
       var deferred = $q.defer();
 
