@@ -129,7 +129,46 @@ angular
 
       .state('profile', {
         url: '/profile/',
-        templateUrl: 'views/profile.html',
+        abstract: true,
+        templateUrl: 'views/profile/base.html',
+      })
+
+      .state('profile.details', {
+        url: '',
+        views: {
+          'appContent': {
+            templateUrl: 'views/customer/details.html',
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html',
+          },
+          'appFooter': {
+            templateUrl: 'views/partials/app-footer.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
+        auth: true
+      })
+
+      .state('profile.update', {
+        url: '',
+        views: {
+          'appContent': {
+            templateUrl: 'views/customer/update.html',
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html',
+          },
+          'appFooter': {
+            templateUrl: 'views/partials/app-footer.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
+        auth: true
       })
 
       .state('customers', {
