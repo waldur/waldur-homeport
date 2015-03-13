@@ -2,92 +2,51 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('resourcesService', ['RawResource', 'RawInstance', 'currentStateService', '$q', resourcesService]);
+    .service('resourcesService', ['RawResource', 'RawInstance', 'currentStateService', '$q', 'baseServiceClass', resourcesService]);
 
-  function resourcesService(RawResource, RawInstance, currentStateService, $q) {
-    /*jshint validthis: true */
-    var vm = this;
-    vm.getResourcesList = getResourcesList;
-    vm.getRawResourcesList = getRawResourcesList;
-
-    vm.stopResource = resourceOperation.bind(null, 'stop');
-    vm.startResource = resourceOperation.bind(null, 'start');
-    vm.restartResource = resourceOperation.bind(null, 'restart');
-    vm.deleteResource = deleteResource;
-    vm.getResource = getResource;
-
-    vm.createResource = createResource;
-    vm.getAvailableOperations = getAvailableOperations;
-
-    vm.pageSize = 10;
-    vm.page = 1;
-    vm.pages = null;
-
-
-    function getRawResourcesList() {
-      return RawResource.query();
-    }
-
-    function getResourcesList(filter) {
-      var deferred = $q.defer();
-      filter = filter || {};
-      currentStateService.getCustomer().then(function(response) {
-        /*jshint camelcase: false */
-        filter.customer_name = response.name;
-        filter.page = vm.page;
-        filter.page_size = vm.pageSize;
-        RawResource.query(filter,function(response, responseHeaders){
-          var header = responseHeaders(),
-            objQuantity = header['x-result-count']? header['x-result-count'] : null;
-          if (objQuantity) {
-            vm.pages = Math.ceil(objQuantity/vm.pageSize);
-          }
+  function resourcesService(RawResource, RawInstance, currentStateService, $q, baseServiceClass) {
+    var ServiceClass = baseServiceClass.extend({
+      init:function() {
+        this.stopResource = this.resourceOperation.bind(null, 'stop');
+        this.startResource = this.resourceOperation.bind(null, 'start');
+        this.restartResource = this.resourceOperation.bind(null, 'restart');
+        this.rawFabric = RawResource;
+        this.rawInstance = RawInstance;
+        this.currentStateService = currentStateService;
+        this.createResource = this.createInstance;
+        this.getList = this.getList.bind(this, 'filter');
+        this.deleteResource = this.deleteInstance.bind(this, 'uuid');
+        this.getResource = this.getFactoryItem.bind(this, 'uuid');
+        this._super();
+      },
+      getRawResourcesList:function() {
+        return RawResource.query();
+      },
+      resourceOperation:function(operation, uuid) {
+        var deferred = $q.defer();
+        RawInstance.Operation({uuid: uuid, operation: operation}).$promise.then(function(response){
           deferred.resolve(response);
         }, function(err) {
           deferred.reject(err);
         });
-
-      }, function(err) {
-        deferred.reject(err);
-      });
-      return deferred.promise;
-    }
-
-    function getResource(uuid) {
-      return RawResource.get({resourceUUID: uuid}).$promise;
-    }
-
-    function resourceOperation(operation, uuid) {
-      var deferred = $q.defer();
-      RawInstance.Operation({uuid: uuid, operation: operation}).$promise.then(function(response){
-        deferred.resolve(response);
-      }, function(err) {
-        deferred.reject(err);
-      });
-      return deferred.promise;
-    }
-
-    function createResource() {
-      return new RawInstance();
-    }
-
-    function deleteResource(uuid) {
-      var deferred = $q.defer();
-      RawInstance.Delete({},{uuid: uuid}).$promise.then(function(response) {
-        deferred.resolve(response);
-      }, function(err) {
-        deferred.reject(err);
-      });
-      return deferred.promise;
-    }
-
-    function getAvailableOperations(resource) {
-      var state = resource.state.toLowerCase();
-      if (state === 'online') {return ['stop', 'restart'];}
-      if (state === 'offline') {return ['start', 'delete'];}
-      return [];
-    }
-
+        return deferred.promise;
+      },
+      getAvailableOperations:function(resource) {
+        var state = resource.state.toLowerCase();
+        if (state === 'online') {return ['stop', 'restart'];}
+        if (state === 'offline') {return ['start', 'delete'];}
+        return [];
+      },
+      getFactoryItem:function(uuid) {
+        var params = {resourceUUID: uuid};
+        return this._super(params);
+      },
+      deleteInstance:function(uuid) {
+        var params = {uuid: uuid};
+        return this._super(params);
+      }
+    });
+    return new ServiceClass();
   }
 })();
 

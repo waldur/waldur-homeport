@@ -298,7 +298,7 @@ angular
       })
 
       .state('resources', {
-        url: 'resources/',
+        url: '/resources/',
         abstract: true,
         templateUrl: 'views/resource/base.html',
         resolve: {

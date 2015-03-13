@@ -32,16 +32,16 @@
     getResourceList();
 
     function getResourceList() {
-      resourcesService.getResourcesList().then(function(response) {
+      resourcesService.getList().then(function(response) {
         vm.pages = resourcesService.pages;
         vm.list = response;
       });
     }
 
 
-    resourcesService.getResourcesList().then(function(response) {
+    /*resourcesService.getResourcesList().then(function(response) {
       vm.list = response;
-    });
+    });*/
 
 
     function stopResource(resource) {
@@ -90,7 +90,7 @@
     }
 
     function search() {
-      resourcesService.getResourcesList({hostname: vm.searchInput}).then(function(response) {
+      resourcesService.getList({hostname: vm.searchInput}).then(function(response) {
         vm.list = response;
       });
     }
