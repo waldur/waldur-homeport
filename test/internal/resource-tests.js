@@ -5,7 +5,7 @@ var auth = require('../helpers/auth.js'),
       user: auth.getUser('Charlie'),
       project: 'bells.org',
       service: 'Stratus',
-      template: 'CentOS 7 minimal jmHCYir',
+      template: 'CentOS 7 64-bit',
       flavor: 'RAM: 512',
       key: 'charlie@example.com'
     }
