@@ -77,25 +77,25 @@
                                     {{ resource.state }}
                                 </span>
                             </td>
-                            <td class="col-xs-2 controls-ctn">
+                            <td class="col-xs-4 controls-ctn">
                                 <ul class="controls pull-right">
                                     <li>
-                                        <a href="#" class="poweroff offline"
-                                           ng-click="ResourceList.stopResource(resource.uuid)" title="Stop"
-                                           ng-show="ResourceList.isOperationAvailable(resource, 'stop')"><i class="fa fa-power-off"></i></a>
-                                        <a href="#" class="poweroff online" title="Start"
+                                        <a class="btn btn-control online" title="Start"
                                            ng-click="ResourceList.startResource(resource.uuid)"
-                                           ng-show="ResourceList.isOperationAvailable(resource, 'start')"><i class="fa fa-power-off"></i></a>
+                                           >Start</a>
+                                        <a href="#" class="btn btn-control offline"
+                                           ng-click="ResourceList.stopResource(resource.uuid)" title="Stop"
+                                           >Stop</a>
                                     </li>
                                     <li>
-                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Restart"
+                                        <a class="btn btn-control"
                                            ng-click="ResourceList.restartResource(resource.uuid)"
-                                           ng-show="ResourceList.isOperationAvailable(resource, 'restart')"><i class="fa fa-refresh"></i></a>
+                                           >Restart</a>
                                     </li>
                                     <li>
-                                        <a href="#" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"
+                                        <a class="btn btn-control remove"
                                            ng-click="ResourceList.deleteResource(resource.uuid, $index)"
-                                           ng-show="ResourceList.isOperationAvailable(resource, 'delete')"><i class="fa fa-times"></i></a>
+                                           >Remove</a>
                                     </li>
                                 </ul>
                             </td>
