@@ -32,10 +32,10 @@ for(var i = 0; i < testData.length; i++) {
     });
 
     it('I should be able to go to "resource add" page', function() {
-      element(by.css('ul.nav li a[ui-sref=resources]')).click();
+      element(by.cssContainingText('ul.nav li a', 'Resources')).click();
       expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/resources/');
 
-      element(by.css('a.crud-controls[ui-sref="resource-add"]')).click();
+      element(by.cssContainingText('a.crud-controls', 'Add resource')).click();
       expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/resources/add/');
     });
 
@@ -44,7 +44,7 @@ for(var i = 0; i < testData.length; i++) {
       // choose project
       element(by.cssContainingText('option', data.project)).click();
       // choose key
-      element(by.cssContainingText('option', user.key)).click();
+      element(by.cssContainingText('option', data.key)).click();
       // choose service
       element(by.cssContainingText('h3', data.service)).click();
       // choose template
