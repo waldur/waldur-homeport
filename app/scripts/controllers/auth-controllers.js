@@ -14,15 +14,19 @@
     vm.authenticate = authenticate;
 
     function signin() {
-      authService.signin(vm.user.username, vm.user.password).then(success, error);
+      authService.signin(vm.user.username, vm.user.password).then(loginSuccess, loginError);
+    }
 
-      function success() {
-        $state.go('dashboard');
-      }
+    function authenticate(provider) {
+      authService.authenticate(provider).then(loginSuccess, loginError);
+    }
 
-      function error(response) {
-        vm.errors = response.data;
-      }
+    function loginSuccess() {
+      $state.go('dashboard');
+    }
+
+    function loginError(response) {
+      vm.errors = response.data;
     }
 
     function hasErrors() {
@@ -46,11 +50,6 @@
         return '';
       }
     }
-
-    function authenticate(provider) {
-      $auth.authenticate(provider);
-    }
-
   }
 
 })();

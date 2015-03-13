@@ -2,40 +2,45 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('authService', ['ENV', '$http', '$cookies', '$auth', authService]);
+    .service('authService', ['$http', '$auth', authService]);
 
-  function authService(ENV, $http, $cookies, $auth) {
+  function authService($http, $auth) {
     /*jshint validthis: true */
     var vm = this;
 
     vm.signin = signin;
     vm.signup = signup;
     vm.signout = signout;
-    vm.getAuthCookie = getAuthCookie;
     vm.isAuthenticated = isAuthenticated;
+    vm.authenticate = authenticate;
 
     function signin(username, password) {
-/*      var request = $http.post(ENV.apiEndpoint + 'api-auth/password/', {username: username, password: password})
-        .then(success);*/
       var request = $auth.login({username: username, password: password})
-        .then(success);
-
-      function success(data) {
-        vm.user = data.data;
-        setAuthCookie(vm.user.token);
-        vm.user.isAuthenticated = true;
-      }
+        .then(loginSuccess);
 
       return request;
     }
 
+    function authenticate(provider) {
+      var request = $auth.authenticate(provider)
+        .then(loginSuccess);
+
+      return request;
+    }
+
+    function loginSuccess(data) {
+      vm.user = data.data;
+      setAuthHeader(vm.user.token);
+      vm.user.isAuthenticated = true;
+    }
+
     function signup(username, password) {
-      var request = $http.post(ENV.apiEndpoint + 'api-auth/register/', {username: username, password: password})
+      var request = $auth.signup({username: username, password: password})
         .then(success);
 
       function success(data) {
         vm.user = data;
-        setAuthCookie(vm.user.token);
+        setAuthHeader(vm.user.token);
         vm.user.isAuthenticated = true;
       }
 
@@ -43,19 +48,9 @@
     }
 
     function signout(){
-      delete $cookies.token;
       delete $http.defaults.headers.common.Authorization;
       vm.user = {isAuthenticated: false};
       $auth.logout();
-    }
-
-    function setAuthCookie(token) {
-      $cookies.token = token;
-      setAuthHeader(token);
-    }
-
-    function getAuthCookie() {
-      return $cookies.token;
     }
 
     function setAuthHeader(token) {

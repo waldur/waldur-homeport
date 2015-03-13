@@ -38,7 +38,6 @@
       });
     }
 
-
     resourcesService.getResourcesList().then(function(response) {
       vm.list = response;
     });
