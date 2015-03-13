@@ -202,7 +202,7 @@
       vm.resource.$save(success, error);
 
       function success(response) {
-        $state.go('resources');
+        $state.go('resources.list');
       }
 
       function error(response) {
@@ -211,7 +211,7 @@
     }
 
     function cancel() {
-      $state.go('resources');
+      $state.go('resources.list');
     }
 
     activate();

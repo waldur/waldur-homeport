@@ -32,7 +32,7 @@
                         <li><a ui-sref="customers.list" class="add-customer">Manage customers</a></li>
                         <li class="divider"></li>
                         <li><a ui-sref="profile">Profile</a></li>
-                        <li><a href="#">Logout</a></li>
+                        <li><a ng-click="logout()">Logout</a></li>
                     </ul>
                 </li>
             </ul>
@@ -69,7 +69,7 @@
                     </a>
                     <ul class="dropdown-menu user-drop" role="menu" ng-show="controller.menuState.profileMenu">
                         <li><a ui-sref="profile">Profile</a></li>
-                        <li><a ng-click="logout()" href="#/login/">Logout</a></li>
+                        <li><a ng-click="logout()">Logout</a></li>
                     </ul>
                 </li>
             </ul>
