@@ -64,7 +64,7 @@ for(var i = 0; i < testData.length; i++) {
 
     it('I should be able to logout', function() {
       auth.logout();
-      expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#');
+      expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/');
     });
 
   });
@@ -72,3 +72,44 @@ for(var i = 0; i < testData.length; i++) {
 }
 
 
+describe('Resource pagination test for Alice :', function() {
+
+  var user = auth.getUser('Alice');
+
+  it('I should be able to login', function() {
+    auth.login(user);
+    expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/dashboard/');
+  });
+
+  it('I should see 10 elements on page by default', function() {
+    // Go to resources list
+    element(by.cssContainingText('ul.nav li a', 'Resources')).click();
+    expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/resources/');
+    // checks elements count on page
+    var elements = element.all(by.css('td.name h2.item-title'));
+    expect(elements.count()).toEqual(10);
+  });
+
+  it('After click on pagination size 5 I should see 5 elements on page', function() {
+    // choose pagination size: 5
+    element(by.cssContainingText('ul.sort li a', '5')).click();
+    // check elements count on page
+    var elements = element.all(by.css('td.name h2.item-title'));
+    expect(elements.count()).toEqual(5);
+  });
+
+  it('When I go to next page I need to see another 5 elements', function() {
+    // Go to next page
+    element(by.cssContainingText('div.pagination a', '2')).click();
+    // check elements count on page
+    var elements = element.all(by.css('td.name h2.item-title'));
+    expect(elements.count()).toEqual(5);
+  });
+
+  it('I should be able to logout', function() {
+    auth.logout();
+    expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/');
+  });
+
+
+});
