@@ -18,13 +18,13 @@
                         </tr>
                         <tr ng-repeat="customer in controller.list">
                             <td class="col-xs-1 pic">
-                                <a href="../customer/index.html">
+                                <a ui-sref="customers.details({uuid: customer.uuid})">
                                     <img src="../static/images/tmp/dojocat.jpg">
                                 </a>
                             </td>
                             <td class="name">
                                 <h2 class="item-title">
-                                    <a ui-sref="customer({uuid: customer.uuid})">{{ customer.name }}</a>
+                                    <a ui-sref="customers.details({uuid: customer.uuid})">{{ customer.name }}</a>
                                 </h2>
                             </td>
                             <td class="col-xs-3">

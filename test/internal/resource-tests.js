@@ -5,7 +5,7 @@ var auth = require('../helpers/auth.js'),
       user: auth.getUser('Charlie'),
       project: 'bells.org',
       service: 'Stratus',
-      template: 'CentOS 7 minimal jmHCYir',
+      template: 'CentOS 7 64-bit',
       flavor: 'RAM: 512',
       key: 'charlie@example.com'
     }
@@ -32,10 +32,10 @@ for(var i = 0; i < testData.length; i++) {
     });
 
     it('I should be able to go to "resource add" page', function() {
-      element(by.css('ul.nav li a[ui-sref=resources]')).click();
+      element(by.cssContainingText('ul.nav li a', 'Resources')).click();
       expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/resources/');
 
-      element(by.css('a.crud-controls[ui-sref="resource-add"]')).click();
+      element(by.cssContainingText('a.crud-controls', 'Add resource')).click();
       expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/resources/add/');
     });
 
@@ -44,7 +44,7 @@ for(var i = 0; i < testData.length; i++) {
       // choose project
       element(by.cssContainingText('option', data.project)).click();
       // choose key
-      element(by.cssContainingText('option', user.key)).click();
+      element(by.cssContainingText('option', data.key)).click();
       // choose service
       element(by.cssContainingText('h3', data.service)).click();
       // choose template
@@ -64,7 +64,7 @@ for(var i = 0; i < testData.length; i++) {
 
     it('I should be able to logout', function() {
       auth.logout();
-      expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#');
+      expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/');
     });
 
   });
@@ -72,3 +72,44 @@ for(var i = 0; i < testData.length; i++) {
 }
 
 
+describe('Resource pagination test for Alice :', function() {
+
+  var user = auth.getUser('Alice');
+
+  it('I should be able to login', function() {
+    auth.login(user);
+    expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/dashboard/');
+  });
+
+  it('I should see 10 elements on page by default', function() {
+    // Go to resources list
+    element(by.cssContainingText('ul.nav li a', 'Resources')).click();
+    expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/resources/');
+    // checks elements count on page
+    var elements = element.all(by.css('td.name h2.item-title'));
+    expect(elements.count()).toEqual(10);
+  });
+
+  it('After click on pagination size 5 I should see 5 elements on page', function() {
+    // choose pagination size: 5
+    element(by.cssContainingText('ul.sort li a', '5')).click();
+    // check elements count on page
+    var elements = element.all(by.css('td.name h2.item-title'));
+    expect(elements.count()).toEqual(5);
+  });
+
+  it('When I go to next page I need to see another 5 elements', function() {
+    // Go to next page
+    element(by.cssContainingText('div.pagination a', '2')).click();
+    // check elements count on page
+    var elements = element.all(by.css('td.name h2.item-title'));
+    expect(elements.count()).toEqual(5);
+  });
+
+  it('I should be able to logout', function() {
+    auth.logout();
+    expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/');
+  });
+
+
+});

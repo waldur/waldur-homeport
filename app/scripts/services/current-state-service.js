@@ -38,9 +38,9 @@
     var urlList = {
       dashboard: ['dashboard'],
       resources: ['resources.list', 'resources.add'],
-      projects: ['projects', 'project', 'project-edit', 'projects-add'],
+      projects: ['projects.list', 'projects.details', 'projects.update', 'projects.create'],
       services: ['services'],
-      users: ['users', 'user']
+      users: ['users.list', 'users.details']
     };
 
     function getActiveItem(stateName) {
@@ -59,12 +59,12 @@
     var stateWithProfile = [
       'profile',
       'profile-edit',
-      'project',
-      'project-edit',
-      'customer',
-      'customer-edit',
+      'projects.details',
+      'projects.update',
+      'customers.details',
+      'customers.edit',
       'customer-plans',
-      'user',
+      'users.details',
       'home',
       'login',
     ];

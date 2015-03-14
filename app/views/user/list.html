@@ -48,13 +48,13 @@
                         </tr>
                         <tr ng-repeat="user in controller.list">
                             <td class="col-xs-1 pic">
-                                <a href="#/users/{{ user.uuid }}/">
+                                <a ui-sref="users.details({uuid: user.uuid})">
                                     <img src="../static/images/887178.jpg" alt="John Doe">
                                 </a>
                             </td>
                             <td class="name">
                                 <h2 class="item-title">
-                                    <a ui-sref="user({uuid: user.uuid})">{{ user.native_name }}</a>
+                                    <a ui-sref="users.details({uuid: user.uuid})">{{ user.native_name }}</a>
                                 </h2>
                             </td>
                             <td class="col-xs-3 gray-text">

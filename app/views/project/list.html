@@ -21,7 +21,7 @@
                                 </div>
                             </li>
                         </ul>
-                        <div class="crud-box pull-right"><a href="/#/projects/add/" class="crud-controls"><i class="fa fa-plus"></i> Add project</a></div>
+                        <div class="crud-box pull-right"><a ui-sref="projects.create" class="crud-controls"><i class="fa fa-plus"></i> Add project</a></div>
                     </div>
                 </div>
             </div>
@@ -49,7 +49,7 @@
                             </tr>
                             <tr ng-repeat="project in controller.list">
                                 <td class="name">
-                                    <h2 class="item-title"><a ui-sref="project({uuid: project.uuid})">{{ project.name }}</a></h2>
+                                    <h2 class="item-title"><a ui-sref="project.details({uuid: project.uuid})">{{ project.name }}</a></h2>
                                     <p class="gray-text">
                                         {{ project.description }}
                                     </p>

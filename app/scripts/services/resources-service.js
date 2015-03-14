@@ -14,6 +14,7 @@
     vm.startResource = resourceOperation.bind(null, 'start');
     vm.restartResource = resourceOperation.bind(null, 'restart');
     vm.deleteResource = deleteResource;
+    vm.getResource = getResource;
 
     vm.createResource = createResource;
     vm.getAvailableOperations = getAvailableOperations;
@@ -50,6 +51,10 @@
         deferred.reject(err);
       });
       return deferred.promise;
+    }
+
+    function getResource(uuid) {
+      return RawResource.get({resourceUUID: uuid}).$promise;
     }
 
     function resourceOperation(operation, uuid) {
@@ -91,7 +96,7 @@
     .factory('RawResource', ['ENV', '$resource', RawResource]);
 
   function RawResource(ENV, $resource) {
-    return $resource(ENV.apiEndpoint + 'api/resources/',{page_size:'@page_size', page:'@page'});
+    return $resource(ENV.apiEndpoint + 'api/resources/:resourceUUID/',{page_size:'@page_size', page:'@page'});
   }
 })();
 

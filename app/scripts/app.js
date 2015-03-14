@@ -18,17 +18,26 @@ angular
       .state('home', {
         url: '/',
         templateUrl: 'views/home.html',
+        resolve: {
+          authenticated: notLoggedCheck
+        }
       })
 
       .state('login', {
         url: '/login/',
         templateUrl: 'views/login.html',
-        controller: 'AuthController'
+        controller: 'AuthController',
+        resolve: {
+          authenticated: notLoggedCheck
+        }
       })
 
       .state('initialdata', {
         url: '/initial-data/',
         templateUrl: 'views/initial-data.html',
+        resolve: {
+          authenticated: authCheck
+        }
       })
 
       .state('dashboard', {
@@ -41,74 +50,260 @@ angular
 
       .state('projects', {
         url: '/projects/',
-        templateUrl: 'views/projects.html',
+        abstract: true,
+        templateUrl: 'views/project/base.html',
+      })
+
+      .state('projects.list', {
+        url: '',
+        views: {
+          'appContent': {
+            templateUrl: 'views/project/list.html',
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html',
+          },
+          'appFooter': {
+            templateUrl: 'views/partials/app-footer.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
         auth: true
       })
 
-      .state('projects-add', {
-        url: '/projects/add/',
-        templateUrl: 'views/add-project.html',
+      .state('projects.create', {
+        url: 'add/',
+        views: {
+          'appContent': {
+            templateUrl: 'views/project/create.html',
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html',
+          },
+          'appFooter': {
+            templateUrl: 'views/partials/app-footer.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
+        auth: true
       })
 
-      .state('project', {
-        url: '/projects/:uuid/',
-        templateUrl: 'views/project.html',
+      .state('projects.details', {
+        url: ':uuid/',
+        views: {
+          'appContent': {
+            templateUrl: 'views/project/details.html',
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html',
+          },
+          'appFooter': {
+            templateUrl: 'views/partials/app-footer.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
+        auth: true
       })
 
-      .state('project-edit', {
-        url: '/projects/:uuid/edit/',
-        templateUrl: 'views/project-edit.html',
+      .state('projects.update', {
+        url: ':uuid/edit/',
+        views: {
+          'appContent': {
+            templateUrl: 'views/project/update.html',
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html',
+          },
+          'appFooter': {
+            templateUrl: 'views/partials/app-footer.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
+        auth: true
       })
 
       .state('services', {
         url: '/services/',
         templateUrl: 'views/services.html',
-        auth: true
-      })
-
-      .state('profile', {
-        url: '/profile/',
-        templateUrl: 'views/profile.html',
-      })
-
-      .state('customers', {
-        url: '/customers/',
-        templateUrl: 'views/customers.html',
-      })
-
-      .state('customer', {
-        url: '/customers/:uuid/',
-        templateUrl: 'views/customer.html',
-      })
-
-      .state('customer-edit', {
-        url: '/customers/:uuid/edit/',
-        templateUrl: 'views/customer-edit.html',
-      })
-
-      .state('customer-plans', {
-        url: '/customers/:uuid/plans/',
-        templateUrl: 'views/customer-plans.html',
-      })
-
-      .state('users', {
-        url: '/users/',
-        templateUrl: 'views/users.html',
-        auth: true,
         resolve: {
           authenticated: authCheck
         }
       })
 
-      .state('user', {
-        url: '/users/:uuid/',
-        templateUrl: 'views/user.html',
+      .state('profile', {
+        url: '/profile/',
+        abstract: true,
+        templateUrl: 'views/profile/base.html',
+      })
+
+      .state('profile.details', {
+        url: '',
+        views: {
+          'appContent': {
+            templateUrl: 'views/customer/details.html',
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html',
+          },
+          'appFooter': {
+            templateUrl: 'views/partials/app-footer.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
+        auth: true
+      })
+
+      .state('profile.update', {
+        url: '',
+        views: {
+          'appContent': {
+            templateUrl: 'views/customer/update.html',
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html',
+          },
+          'appFooter': {
+            templateUrl: 'views/partials/app-footer.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
+        auth: true
+      })
+
+      .state('customers', {
+        url: '/customers/',
+        abstract: true,
+        templateUrl: 'views/customer/base.html',
+      })
+
+      .state('customers.list', {
+        url: '',
+        views: {
+          'appContent': {
+            templateUrl: 'views/customer/list.html',
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html',
+          },
+          'appFooter': {
+            templateUrl: 'views/partials/app-footer.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
+        auth: true
+      })
+
+      .state('customers.details', {
+        url: ':uuid/',
+        views: {
+          'appContent': {
+            templateUrl: 'views/customer/details.html',
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html',
+          },
+          'appFooter': {
+            templateUrl: 'views/partials/app-footer.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
+        auth: true
+      })
+
+      .state('customers.edit', {
+        url: ':uuid/edit/',
+        views: {
+          'appContent': {
+            templateUrl: 'views/customer/update.html',
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html',
+          },
+          'appFooter': {
+            templateUrl: 'views/partials/app-footer.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
+        auth: true
+      })
+
+      .state('customer-plans', {
+        url: '/customers/:uuid/plans/',
+        templateUrl: 'views/customer-plans.html',
+        resolve: {
+          authenticated: authCheck
+        }
+      })
+
+      .state('users', {
+        url: '/users/',
+        abstract: true,
+        templateUrl: 'views/user/base.html'
+      })
+
+      .state('users.list', {
+        url: '',
+        views: {
+          'appContent': {
+            templateUrl: 'views/user/list.html',
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html',
+          },
+          'appFooter': {
+            templateUrl: 'views/partials/app-footer.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
+        auth: true
+      })
+
+      .state('users.details', {
+        url: ':uuid/',
+        views: {
+          'appContent': {
+            templateUrl: 'views/user/details.html',
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html',
+          },
+          'appFooter': {
+            templateUrl: 'views/partials/app-footer.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
+        auth: true
       })
 
       .state('resources', {
-        url: '/resources/',
+        url: 'resources/',
         abstract: true,
         templateUrl: 'views/resource/base.html',
+        resolve: {
+          authenticated: authCheck
+        }
       })
 
       .state('resources.list', {
@@ -126,12 +321,11 @@ angular
         },
         resolve: {
           authenticated: authCheck
-        },
-        auth: true
+        }
       })
 
-      .state('resources.add', {
-        url: '/resources/add/',
+      .state('resources.create', {
+        url: 'add/',
         views: {
           'appContent': {
             templateUrl: 'views/resource/create.html',
@@ -143,22 +337,74 @@ angular
             templateUrl: 'views/partials/app-footer.html',
           }
         },
+        resolve: {
+          authenticated: authCheck
+        }
       })
 
       .state('payment', {
         url: '/payment/',
-        templateUrl: 'views/payment-start.html',
+        abstract: true,
+        templateUrl: 'views/payment/base.html',
       })
 
-      .state('payment-finish', {
-        url: '/payment/finish/',
-        templateUrl: 'views/payment-finish.html',
+      .state('payment.checkout', {
+        url: '',
+        views: {
+          'appContent': {
+            templateUrl: 'views/payment/checkout.html',
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html',
+          },
+          'appFooter': {
+            templateUrl: 'views/partials/app-footer.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
+        auth: true
+      })
+
+      .state('payment.success', {
+        url: 'success/',
+        views: {
+          'appContent': {
+            templateUrl: 'views/payment/success.html',
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html',
+          },
+          'appFooter': {
+            templateUrl: 'views/partials/app-footer.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
+        auth: true
       });
+
     function authCheck($q, $location, $auth) {
       var deferred = $q.defer();
 
       if (!$auth.isAuthenticated()) {
+        // can't use $state because its will throw recursion error
         $location.path('/login/');
+      } else {
+        deferred.resolve();
+      }
+
+      return deferred.promise;
+    }
+
+    function notLoggedCheck($q, $location, $auth) {
+      var deferred = $q.defer();
+
+      if ($auth.isAuthenticated()) {
+        // can't use $state because its will throw recursion error
+        $location.path('/dashboard/');
       } else {
         deferred.resolve();
       }

@@ -44,27 +44,48 @@
     });
 
 
-    function stopResource(uuid) {
-      resourcesService.stopResource(uuid);
+    function stopResource(resource) {
+      resourcesService.stopResource(resource.uuid).then(
+        reinitResource.bind(null, resource), handleResourceActionException);
     }
 
-    function startResource(uuid) {
-      resourcesService.startResource(uuid);
+    function startResource(resource) {
+      resourcesService.startResource(resource.uuid).then(
+        reinitResource.bind(null, resource), handleResourceActionException);
     }
 
-    function restartResource(uuid) {
-      resourcesService.restartResource(uuid);
+    function restartResource(resource) {
+      resourcesService.restartResource(resource.uuid).then(
+        reinitResource.bind(null, resource), handleResourceActionException);
     }
 
-
-    function deleteResource(uuid, index) {
+    function deleteResource(resource, index) {
       var confirmDelete = confirm('Confirm resource deletion?');
       if (confirmDelete) {
-        resourcesService.deleteResource(uuid).then(function(response){
-          vm.list.splice(index, 1);
-        });
+        resourcesService.deleteResource(resource.uuid).then(
+          function(response) {
+            vm.list.splice(index, 1);
+          },
+          function(response) {
+            if (response.status === 409) {
+              alert(response.data.detail);
+            }
+          });
       } else {
         alert('Resource was not deleted.');
+      }
+    }
+
+    function reinitResource(resource, response) {
+      resourcesService.getResource(resource.uuid).then(function(response) {
+        var index = vm.list.indexOf(resource);
+        vm.list[index] = response;
+      });
+    }
+
+    function handleResourceActionException(response) {
+      if (response.status === 409) {
+        alert(response.data.status);
       }
     }
 
@@ -181,7 +202,7 @@
       vm.resource.$save(success, error);
 
       function success(response) {
-        $state.go('resources');
+        $state.go('resources.list');
       }
 
       function error(response) {
@@ -190,7 +211,7 @@
     }
 
     function cancel() {
-      $state.go('resources');
+      $state.go('resources.list');
     }
 
     activate();
