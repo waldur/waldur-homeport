@@ -53,17 +53,12 @@
 
 .btn-control {
     padding: 2px 5px;
-    // border-color: silver;
-    // border-color: rgb(203, 224, 213);
-    // background: rgb(235, 239, 227);
     border-radius: 0px;
     background-color: transparent;
     color: rgb(0, 149, 135) !important;
     box-shadow: rgba(0, 0, 0, 0.11765) 0px 1px 4px 0px;
     &:hover,
     &:active {
-        // background-color: rgb(185, 202, 184);
-        // color: white;
         color: rgba(255,255,255,.84);
     }
     &.remove {
@@ -171,12 +166,8 @@ a.kit-icon {
 
 .custom-select {
     border: 1px solid #D8D8D8;
-    // margin-top: 8px;
-    // padding: 6px 10px;
-    // padding-right: 15px;
     border-radius: 3px;
     position: relative;
-    // background: linear-gradient(to bottom, #eeeeee 0%,#D7D7D7 100%); /* W3C */
     background: white;
     color: #565656;
     @include inline-middle;
@@ -268,7 +259,6 @@ input[type=text],
 input[type=search],
 input[type=password] {
     border: transparent;
-    // border-bottom: 1px solid #979797;
     border: 1px solid #D8D8D8;
     border-radius: 1px;
     box-shadow: none;
@@ -283,7 +273,6 @@ input[type=password] {
 textarea,
 textarea.form-control {
     border: transparent;
-    // border-bottom: 1px solid #979797;
     border: 1px solid #D8D8D8;
     border-radius: 1px;
     box-shadow: none;
