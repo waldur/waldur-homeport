@@ -1,4 +1,4 @@
-
+// jscs:disable
 (function(){
   angular.module('ncsaas')
     .service('baseServiceClass', ['$q', baseServiceClass]);
@@ -19,7 +19,7 @@
         this.page = 1;
         this.pages = null;
       },
-      getList:function(filter) {
+      getInstanceList:function(filter) {
         var vm = this;
         var deferred = $q.defer();
         filter = filter || {};
@@ -30,7 +30,7 @@
           filter.page_size = vm.pageSize;
           vm.rawFabric.query(filter,function(response, responseHeaders){
             var header = responseHeaders(),
-              objQuantity = header['x-result-count']? header['x-result-count'] : null;
+              objQuantity = !header['x-result-count'] ? null : header['x-result-count'];
             if (objQuantity) {
               vm.pages = Math.ceil(objQuantity/vm.pageSize);
             }
@@ -60,6 +60,7 @@
         return this.rawFabric.get(params).$promise;
       }
     });
+
     return BaseServiceClass;
   }
 })();

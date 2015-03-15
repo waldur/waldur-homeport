@@ -32,17 +32,11 @@
     getResourceList();
 
     function getResourceList() {
-      resourcesService.getList().then(function(response) {
+      resourcesService.getResourceList().then(function(response) {
         vm.pages = resourcesService.pages;
         vm.list = response;
       });
     }
-
-
-    /*resourcesService.getResourcesList().then(function(response) {
-      vm.list = response;
-    });*/
-
 
     function stopResource(resource) {
       resourcesService.stopResource(resource.uuid).then(

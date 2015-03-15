@@ -2,7 +2,8 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('resourcesService', ['RawResource', 'RawInstance', 'currentStateService', '$q', 'baseServiceClass', resourcesService]);
+    .service('resourcesService', ['RawResource', 'RawInstance', 'currentStateService', '$q',
+      'baseServiceClass', resourcesService]);
 
   function resourcesService(RawResource, RawInstance, currentStateService, $q, baseServiceClass) {
     var ServiceClass = baseServiceClass.extend({
@@ -14,7 +15,7 @@
         this.rawInstance = RawInstance;
         this.currentStateService = currentStateService;
         this.createResource = this.createInstance;
-        this.getList = this.getList.bind(this, 'filter');
+        this.getResourceList = this.getInstanceList;
         this.deleteResource = this.deleteInstance.bind(this, 'uuid');
         this.getResource = this.getFactoryItem.bind(this, 'uuid');
         this._super();
