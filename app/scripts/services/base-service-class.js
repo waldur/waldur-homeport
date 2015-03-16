@@ -12,9 +12,7 @@
       pages:null,
       currentStateService:null,
       endpoint:null,
-      rawFabric:null,
-      rawInstance:null,
-
+     
       init:function(){
         this.pageSize = 10;
         this.page = 1;
