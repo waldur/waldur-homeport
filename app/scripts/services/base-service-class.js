@@ -21,7 +21,6 @@
         this.stopResource = this.operation.bind(null, 'stop');
         this.startResource = this.operation.bind(null, 'start');
         this.restartResource = this.operation.bind(null, 'restart');
-        this.getEndpoint = this.getEndpointUrl;
       },
       getList:function(filter) {
         var vm = this;
@@ -96,7 +95,7 @@
       $get:function(uuid) {
         return this.getFactory().get({uuid: uuid}).$promise;
       },
-      getEndpointUrl:function() {
+      getEndpoint:function() {
         return this.endpoint;
       }
     });

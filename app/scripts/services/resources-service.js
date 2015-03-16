@@ -7,7 +7,6 @@
   function resourcesService(baseServiceClass) {
     var ServiceClass = baseServiceClass.extend({
       init:function() {
-        this.getEndpoint = this.getEndpointUrl;
         this._super();
       },
       getAvailableOperations:function(resource) {
@@ -16,7 +15,7 @@
         if (state === 'offline') {return ['start', 'delete'];}
         return [];
       },
-      getEndpointUrl:function(isList) {
+      getEndpoint:function(isList) {
         var endpoint = (isList) ? '/resources/' : '/instances/';
         return endpoint;
       }
