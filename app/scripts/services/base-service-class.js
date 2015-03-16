@@ -5,14 +5,13 @@
   function baseServiceClass($q, currentStateService, $resource, ENV) {
     // Base service class for services with pagination
     // pageSize, page, pages - default variables, you can change this in your init method or call this._super() in init
-    // you should set currentStateService and rawFabric service in your init method for correct getList work
     var BaseServiceClass = Class.extend({
       pageSize:null,
       page:null,
       pages:null,
       currentStateService:null,
       endpoint:null,
-     
+
       init:function(){
         this.pageSize = 10;
         this.page = 1;
@@ -82,7 +81,7 @@
           {
             Operation: {
               method:'POST',
-              url:ENV.apiEndpoint + 'api/instances/:UUID/:operation/',
+              url:ENV.apiEndpoint + 'api' + this.getEndpoint(params) + ':UUID/:operation/',
               params: {UUID:'@uuid', operation:'@operation'}
             },
             Delete: {
@@ -92,7 +91,7 @@
         );
       },
       get:function(uuid) {
-        return this.rawFabric.get({uuid: uuid}).$promise;
+        return this.getEndpointUrl().get({uuid: uuid}).$promise;
       },
       getEndpointUrl:function() {
         return this.endpoint;
