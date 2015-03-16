@@ -191,11 +191,8 @@
                         <div class="form-divide" ng-show="ResourceAdd.errors.non_field_errors"></div>
                         <div class="non-field" ng-show="ResourceAdd.errors.non_field_errors">
                             <ul class="add-form-non-field-errors">
-                                <li>
-                                    <span class="error error-standard label">sds</span>
-                                </li>
-                                <li>
-                                    <span class="error error-standard label">sds</span>
+                                <li ng-repeat="error in ResourceAdd.errors.non_field_errors">
+                                    <span class="error error-standard label">{{ error }}</span>
                                 </li>
                             </ul>
                         </div>
