@@ -359,6 +359,19 @@ a.sort {
     } // &.down
 } // sort
 
+.add-form-non-field-errors {
+    width: 30%;
+    @include clear-list;
+    margin: auto;
+    li + li {
+        margin-top: 10px;
+    } // +
+    li {
+        .error-standard {
+            font-size: rem(12);
+        }
+    } // li
+} // non-field-errors
 .error {
     &.error-standard {
         font-size: rem(14);
