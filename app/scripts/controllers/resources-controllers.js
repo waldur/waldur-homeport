@@ -56,7 +56,7 @@
     function deleteResource(resource, index) {
       var confirmDelete = confirm('Confirm resource deletion?');
       if (confirmDelete) {
-        resourcesService.deleteResource(resource.uuid).then(
+        resourcesService.$delete(resource.uuid).then(
           function(response) {
             vm.list.splice(index, 1);
           },
@@ -71,7 +71,7 @@
     }
 
     function reinitResource(resource, response) {
-      resourcesService.get(resource.uuid).then(function(response) {
+      resourcesService.$get(resource.uuid).then(function(response) {
         var index = vm.list.indexOf(resource);
         vm.list[index] = response;
       });
@@ -147,7 +147,7 @@
     vm.setTemplate = setTemplate;
     vm.setFlavor = setFlavor;
     vm.setProject = setProject;
-    vm.resource = resourcesService.create();
+    vm.resource = resourcesService.$create();
     vm.save = save;
     vm.cancel = cancel;
     vm.errors = {};

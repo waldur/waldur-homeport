@@ -11,15 +11,16 @@
       pages:null,
       currentStateService:null,
       endpoint:null,
+      customerName:null,
 
       init:function(){
         this.pageSize = 10;
         this.page = 1;
         this.pages = null;
         this.currentStateService = currentStateService;
-        this.stopResource = this.Operation.bind(null, 'stop');
-        this.startResource = this.Operation.bind(null, 'start');
-        this.restartResource = this.Operation.bind(null, 'restart');
+        this.stopResource = this.operation.bind(null, 'stop');
+        this.startResource = this.operation.bind(null, 'start');
+        this.restartResource = this.operation.bind(null, 'restart');
         this.getEndpoint = this.getEndpointUrl;
       },
       getList:function(filter) {
@@ -29,7 +30,7 @@
         var queryList = function() {
           filter.page = vm.page;
           filter.page_size = vm.pageSize;
-          vm.getFactory().query(filter,function(response, responseHeaders){
+          vm.getFactory(true).query(filter,function(response, responseHeaders){
             var header = responseHeaders(),
               objQuantity = !header['x-result-count'] ? null : header['x-result-count'];
             if (objQuantity) {
@@ -46,7 +47,7 @@
         } else {
           vm.currentStateService.getCustomer().then(function (response) {
             /*jshint camelcase: false */
-            filter.customer_name = response.name;
+            filter.customer_name = (this.customerName) ? this.customerName() : response.name;
             queryList();
           }, function (err) {
             deferred.reject(err);
@@ -55,10 +56,11 @@
 
         return deferred.promise;
       },
-      create:function() {
-        return new this.getFactory();
+      $create:function() {
+        var Instance = this.getFactory(false);
+        return new Instance();
       },
-      delete:function(uuid) {
+      $delete:function(uuid) {
         var deferred = $q.defer();
         this.getFactory().Delete({},{uuid: uuid}).$promise.then(function(response) {
           deferred.resolve(response);
@@ -67,7 +69,7 @@
         });
         return deferred.promise;
       },
-      Operation:function(operation, uuid) {
+      operation:function(operation, uuid) {
         var deferred = $q.defer();
         this.getFactory().Operation({uuid: uuid, operation: operation}).$promise.then(function(response){
           deferred.resolve(response);
@@ -77,7 +79,8 @@
         return deferred.promise;
       },
       getFactory:function(params) {
-        return $resource(ENV.apiEndpoint + 'api' + this.getEndpoint(params) + ':UUID/', {UUID:'@uuid'},
+        return $resource(ENV.apiEndpoint + 'api' + this.getEndpoint(params) + ':UUID/', {UUID:'@uuid',
+            page_size:'@page_size', page:'@page'},
           {
             Operation: {
               method:'POST',
@@ -90,7 +93,7 @@
           }
         );
       },
-      get:function(uuid) {
+      $get:function(uuid) {
         return this.getFactory().get({uuid: uuid}).$promise;
       },
       getEndpointUrl:function() {
