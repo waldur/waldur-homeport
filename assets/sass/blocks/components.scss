@@ -80,6 +80,7 @@
         }
         @include inline-middle;
         a {
+            cursor: pointer;
             @include black-link;
             font-size: rem(14);
             &.none {
