@@ -32,7 +32,7 @@
     getResourceList();
 
     function getResourceList() {
-      resourcesService.getResourceList().then(function(response) {
+      resourcesService.getList().then(function(response) {
         vm.pages = resourcesService.pages;
         vm.list = response;
       });
@@ -71,7 +71,7 @@
     }
 
     function reinitResource(resource, response) {
-      resourcesService.getResource(resource.uuid).then(function(response) {
+      resourcesService.get(resource.uuid).then(function(response) {
         var index = vm.list.indexOf(resource);
         vm.list[index] = response;
       });
@@ -147,7 +147,7 @@
     vm.setTemplate = setTemplate;
     vm.setFlavor = setFlavor;
     vm.setProject = setProject;
-    vm.resource = resourcesService.createResource();
+    vm.resource = resourcesService.create();
     vm.save = save;
     vm.cancel = cancel;
     vm.errors = {};
