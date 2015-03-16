@@ -91,7 +91,7 @@
         );
       },
       get:function(uuid) {
-        return this.getEndpointUrl().get({uuid: uuid}).$promise;
+        return this.getFactory().get({uuid: uuid}).$promise;
       },
       getEndpointUrl:function() {
         return this.endpoint;
