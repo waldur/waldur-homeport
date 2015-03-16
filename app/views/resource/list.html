@@ -77,25 +77,28 @@
                                     {{ resource.state }}
                                 </span>
                             </td>
-                            <td class="col-xs-2 controls-ctn">
+                            <td class="col-xs-4 controls-ctn">
                                 <ul class="controls pull-right">
                                     <li>
-                                        <a class="poweroff offline"
-                                           ng-click="ResourceList.stopResource(resource)" title="Stop"
-                                           ng-show="ResourceList.isOperationAvailable(resource, 'stop')"><i class="fa fa-power-off"></i></a>
-                                        <a class="poweroff online" title="Start"
-                                           ng-click="ResourceList.startResource(resource)"
-                                           ng-show="ResourceList.isOperationAvailable(resource, 'start')"><i class="fa fa-power-off"></i></a>
+                                        <a class="btn btn-control offline"
+                                           ng-click="ResourceList.stopResource(resource.uuid)" title="Stop"
+                                           ng-show="ResourceList.isOperationAvailable(resource, 'stop')"
+                                           >Stop</a>
+                                        <a class="btn btn-control online" title="Start"
+                                           ng-click="ResourceList.startResource(resource.uuid)"
+                                           ng-show="ResourceList.isOperationAvailable(resource, 'start')"
+                                           >Start</a>
                                     </li>
                                     <li>
-                                        <a data-toggle="tooltip" data-placement="top" title="Restart"
-                                           ng-click="ResourceList.restartResource(resource)"
-                                           ng-show="ResourceList.isOperationAvailable(resource, 'restart')"><i class="fa fa-refresh"></i></a>
+                                        <a class="btn btn-control"
+                                           ng-click="ResourceList.restartResource(resource.uuid)"
+                                           ng-show="ResourceList.isOperationAvailable(resource, 'restart')"
+                                           >Restart</a>
                                     </li>
                                     <li>
-                                        <a class="remove" data-toggle="tooltip" data-placement="top" title="Remove"
-                                           ng-click="ResourceList.deleteResource(resource, $index)"
-                                           ng-show="ResourceList.isOperationAvailable(resource, 'delete')"><i class="fa fa-times"></i></a>
+                                        <a class="btn btn-control remove"
+                                           ng-click="ResourceList.deleteResource(resource.uuid, $index)"
+                                           >Remove</a>
                                     </li>
                                 </ul>
                             </td>
