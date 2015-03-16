@@ -345,6 +345,13 @@ a.sort {
     } // &.down
 } // sort
 
+.error-list {
+    @include clear-list;
+    li + li {
+        margin-top: 5px;
+    }
+} // error-list
+
 .error {
     &.error-standard {
         font-size: rem(14);
