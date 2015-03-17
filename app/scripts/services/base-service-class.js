@@ -61,7 +61,7 @@
       },
       $delete:function(uuid) {
         var deferred = $q.defer();
-        this.getFactory().Delete({},{uuid: uuid}).$promise.then(function(response) {
+        this.getFactory(false).Delete({},{uuid: uuid}).$promise.then(function(response) {
           deferred.resolve(response);
         }, function(err) {
           deferred.reject(err);
@@ -70,7 +70,7 @@
       },
       operation:function(operation, uuid) {
         var deferred = $q.defer();
-        this.getFactory().Operation({uuid: uuid, operation: operation}).$promise.then(function(response){
+        this.getFactory(false).Operation({uuid: uuid, operation: operation}).$promise.then(function(response){
           deferred.resolve(response);
         }, function(err) {
           deferred.reject(err);
@@ -93,9 +93,9 @@
         );
       },
       $get:function(uuid) {
-        return this.getFactory().get({uuid: uuid}).$promise;
+        return this.getFactory(false).get({uuid: uuid}).$promise;
       },
-      getEndpoint:function() {
+      getEndpoint:function(isList) {
         return this.endpoint;
       }
     });
