@@ -32,16 +32,11 @@
     getResourceList();
 
     function getResourceList() {
-      resourcesService.getResourcesList().then(function(response) {
+      resourcesService.getList().then(function(response) {
         vm.pages = resourcesService.pages;
         vm.list = response;
       });
     }
-
-    resourcesService.getResourcesList().then(function(response) {
-      vm.list = response;
-    });
-
 
     function stopResource(resource) {
       resourcesService.stopResource(resource.uuid).then(
@@ -61,7 +56,7 @@
     function deleteResource(resource, index) {
       var confirmDelete = confirm('Confirm resource deletion?');
       if (confirmDelete) {
-        resourcesService.deleteResource(resource.uuid).then(
+        resourcesService.$delete(resource.uuid).then(
           function(response) {
             vm.list.splice(index, 1);
           },
@@ -76,7 +71,7 @@
     }
 
     function reinitResource(resource, response) {
-      resourcesService.getResource(resource.uuid).then(function(response) {
+      resourcesService.$get(resource.uuid).then(function(response) {
         var index = vm.list.indexOf(resource);
         vm.list[index] = response;
       });
@@ -89,7 +84,7 @@
     }
 
     function search() {
-      resourcesService.getResourcesList({hostname: vm.searchInput}).then(function(response) {
+      resourcesService.getList({hostname: vm.searchInput}).then(function(response) {
         vm.list = response;
       });
     }
@@ -152,7 +147,7 @@
     vm.setTemplate = setTemplate;
     vm.setFlavor = setFlavor;
     vm.setProject = setProject;
-    vm.resource = resourcesService.createResource();
+    vm.resource = resourcesService.$create();
     vm.save = save;
     vm.cancel = cancel;
     vm.errors = {};
@@ -201,7 +196,7 @@
       vm.resource.$save(success, error);
 
       function success(response) {
-        $state.go('resources');
+        $state.go('resources.list');
       }
 
       function error(response) {
@@ -210,7 +205,7 @@
     }
 
     function cancel() {
-      $state.go('resources');
+      $state.go('resources.list');
     }
 
     activate();
