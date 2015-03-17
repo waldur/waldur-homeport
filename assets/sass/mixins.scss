@@ -23,6 +23,15 @@
     }
 }
 
+@mixin clear-list-inline {
+    margin: 0;
+    padding: 0;
+    li {
+        @include inline-middle;
+        list-style: none;
+    }
+}
+
 @mixin table {
     table-layout: fixed;
     display: table;
@@ -43,7 +52,7 @@
     $bp-sm: "(min-width : 768px)";
     $bp-md: "(min-width : 992px)";
     $bp-lg: "(min-width : 1200px)";
-    
+
     @if $point == cr {
         @media #{$bp-cr} { @content; }
     }

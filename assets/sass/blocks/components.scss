@@ -51,6 +51,25 @@
     }
 }
 
+.btn-control {
+    padding: 2px 5px;
+    border-radius: 0px;
+    background-color: transparent;
+    color: rgb(0, 149, 135) !important;
+    box-shadow: rgba(0, 0, 0, 0.11765) 0px 1px 4px 0px;
+    &:hover,
+    &:active {
+        color: rgba(255,255,255,.84);
+    }
+    &.remove {
+        color: #e74c3c !important;
+        &:hover,
+        &:active {
+            color: #e74c3c !important;
+        }
+    } // remove
+} // btn-control
+
 // styles
 .controls {
     @include clear-list;
@@ -61,6 +80,7 @@
         }
         @include inline-middle;
         a {
+            cursor: pointer;
             @include black-link;
             font-size: rem(14);
             &.none {
@@ -147,12 +167,8 @@ a.kit-icon {
 
 .custom-select {
     border: 1px solid #D8D8D8;
-    // margin-top: 8px;
-    // padding: 6px 10px;
-    // padding-right: 15px;
     border-radius: 3px;
     position: relative;
-    // background: linear-gradient(to bottom, #eeeeee 0%,#D7D7D7 100%); /* W3C */
     background: white;
     color: #565656;
     @include inline-middle;
@@ -244,7 +260,6 @@ input[type=text],
 input[type=search],
 input[type=password] {
     border: transparent;
-    // border-bottom: 1px solid #979797;
     border: 1px solid #D8D8D8;
     border-radius: 1px;
     box-shadow: none;
@@ -259,7 +274,6 @@ input[type=password] {
 textarea,
 textarea.form-control {
     border: transparent;
-    // border-bottom: 1px solid #979797;
     border: 1px solid #D8D8D8;
     border-radius: 1px;
     box-shadow: none;
@@ -351,6 +365,20 @@ a.sort {
         margin-top: 5px;
     }
 } // error-list
+
+.add-form-non-field-errors {
+    width: 30%;
+    @include clear-list;
+    margin: auto;
+    li + li {
+        margin-top: 10px;
+    } // +
+    li {
+        .error-standard {
+            font-size: rem(12);
+        }
+    } // li
+} // non-field-errors
 
 .error {
     &.error-standard {
