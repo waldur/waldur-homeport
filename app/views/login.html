@@ -31,7 +31,11 @@
                         <div class="inputs-box">
                             <div class="row inputs-row" ng-show="auth.hasErrors()">
                                 <div class="col-md-offset-4 text-left">
-                                    <span class="error error-standard label" ng-repeat="error in auth.getErrors()">{{ error }}</span>
+                                    <ul class="error-list">
+                                        <li ng-repeat="error in auth.getErrors()">
+                                            <span class="error error-standard label">{{ error }}</span>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                             <div class="row inputs-row">

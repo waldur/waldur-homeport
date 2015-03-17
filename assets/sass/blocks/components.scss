@@ -359,6 +359,13 @@ a.sort {
     } // &.down
 } // sort
 
+.error-list {
+    @include clear-list;
+    li + li {
+        margin-top: 5px;
+    }
+} // error-list
+
 .add-form-non-field-errors {
     width: 30%;
     @include clear-list;
@@ -372,6 +379,7 @@ a.sort {
         }
     } // li
 } // non-field-errors
+
 .error {
     &.error-standard {
         font-size: rem(14);
