@@ -72,6 +72,7 @@
         "jasmine": false,
         "spyOn": false,
         "by": false,
-        "element": false
+        "element": false,
+        "Class": false
     }
 }
