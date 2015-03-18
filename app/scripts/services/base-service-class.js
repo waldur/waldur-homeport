@@ -22,7 +22,7 @@
       endpoint:null,
       customerName:null,
 
-      init:function(){
+      init:function() {
         this.pageSize = 10;
         this.page = 1;
         this.pages = null;
@@ -37,7 +37,7 @@
           filter.page = vm.page;
           /*jshint camelcase: false */
           filter.page_size = vm.pageSize;
-          vm.getFactory(true).query(filter,function(response, responseHeaders){
+          vm.getFactory(true).query(filter, function(response, responseHeaders) {
             var header = responseHeaders(),
               objQuantity = !header['x-result-count'] ? null : header['x-result-count'];
             if (objQuantity) {
@@ -89,14 +89,15 @@
         return deferred.promise;
       },
 
-      getFactory:function(isList) {
+      getFactory:function(isList, endpoint) {
+        endpoint = endpoint || this.getEndpoint(isList);
         /*jshint camelcase: false */
-        return $resource(ENV.apiEndpoint + 'api' + this.getEndpoint(isList) + ':UUID/', {UUID:'@uuid',
+        return $resource(ENV.apiEndpoint + 'api' + endpoint + ':UUID/', {UUID:'@uuid',
             page_size:'@page_size', page:'@page'},
           {
             operation: {
               method:'POST',
-              url:ENV.apiEndpoint + 'api' + this.getEndpoint(isList) + ':UUID/:operation/',
+              url:ENV.apiEndpoint + 'api' + endpoint + ':UUID/:operation/',
               params: {UUID:'@uuid', operation:'@operation'}
             },
           }
@@ -109,7 +110,26 @@
 
       getEndpoint:function(isList) {
         return this.endpoint;
+      },
+
+      // helper, that adds functions to promise
+      chainFunctionsToPromise:function(promise, functions) {
+        var deferred = $q.defer();
+        promise.then(
+          function(response) {
+            for (var i=0; i < functions.length; i++) {
+              var f = functions[i];
+              f(response);
+              deferred.resolve(response);
+            }
+          },
+          function(error) {
+            deferred.reject(error);
+          }
+        );
+        return deferred.promise;
       }
+
     });
 
     return BaseServiceClass;
