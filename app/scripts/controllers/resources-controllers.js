@@ -60,11 +60,8 @@
           function(response) {
             vm.list.splice(index, 1);
           },
-          function(response) {
-            if (response.status === 409) {
-              alert(response.data.detail);
-            }
-          });
+          handleResourceActionException
+        );
       } else {
         alert('Resource was not deleted.');
       }
@@ -79,7 +76,8 @@
 
     function handleResourceActionException(response) {
       if (response.status === 409) {
-        alert(response.data.status);
+        var message = response.data.status || response.data.detail;
+        alert(message);
       }
     }
 

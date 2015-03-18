@@ -18,16 +18,18 @@
         this.page = 1;
         this.pages = null;
         this.currentStateService = currentStateService;
-        this.stopResource = this.operation.bind(null, 'stop');
-        this.startResource = this.operation.bind(null, 'start');
-        this.restartResource = this.operation.bind(null, 'restart');
+        this.stopResource = this.operation.bind(this, 'stop');
+        this.startResource = this.operation.bind(this, 'start');
+        this.restartResource = this.operation.bind(this, 'restart');
       },
+
       getList:function(filter) {
         var vm = this;
         var deferred = $q.defer();
         filter = filter || {};
         var queryList = function() {
           filter.page = vm.page;
+          /*jshint camelcase: false */
           filter.page_size = vm.pageSize;
           vm.getFactory(true).query(filter,function(response, responseHeaders){
             var header = responseHeaders(),
@@ -55,46 +57,50 @@
 
         return deferred.promise;
       },
+
       $create:function() {
         var Instance = this.getFactory(false);
         return new Instance();
       },
+
       $delete:function(uuid) {
         var deferred = $q.defer();
-        this.getFactory(false).Delete({},{uuid: uuid}).$promise.then(function(response) {
+        this.getFactory(false).remove({}, {uuid: uuid}).$promise.then(function(response) {
           deferred.resolve(response);
         }, function(err) {
           deferred.reject(err);
         });
         return deferred.promise;
       },
+
       operation:function(operation, uuid) {
         var deferred = $q.defer();
-        this.getFactory(false).Operation({uuid: uuid, operation: operation}).$promise.then(function(response){
+        this.getFactory(false).operation({uuid: uuid, operation: operation}).$promise.then(function(response){
           deferred.resolve(response);
         }, function(err) {
           deferred.reject(err);
         });
         return deferred.promise;
       },
-      getFactory:function(params) {
-        return $resource(ENV.apiEndpoint + 'api' + this.getEndpoint(params) + ':UUID/', {UUID:'@uuid',
+
+      getFactory:function(isList) {
+        /*jshint camelcase: false */
+        return $resource(ENV.apiEndpoint + 'api' + this.getEndpoint(isList) + ':UUID/', {UUID:'@uuid',
             page_size:'@page_size', page:'@page'},
           {
-            Operation: {
+            operation: {
               method:'POST',
-              url:ENV.apiEndpoint + 'api' + this.getEndpoint(params) + ':UUID/:operation/',
+              url:ENV.apiEndpoint + 'api' + this.getEndpoint(isList) + ':UUID/:operation/',
               params: {UUID:'@uuid', operation:'@operation'}
             },
-            Delete: {
-              method:'DELETE'
-            }
           }
         );
       },
+
       $get:function(uuid) {
-        return this.getFactory(false).get({uuid: uuid}).$promise;
+        return this.getFactory(false).get({}, {uuid: uuid}).$promise;
       },
+
       getEndpoint:function(isList) {
         return this.endpoint;
       }
