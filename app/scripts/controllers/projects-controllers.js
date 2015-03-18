@@ -10,6 +10,10 @@
     vm.list = {};
     vm.deleteProject = deleteProject;
 
+    // search
+    vm.searchInput = '';
+    vm.search = search;
+
     // pagination
     vm.changePageSize = changePageSize;
     vm.changePage = changePage;
@@ -36,6 +40,12 @@
     function handleProjectDeletionException(response) {
       var message = response.data.status || response.data.detail;
       alert(message);
+    }
+
+    function search() {
+      projectsService.getList({name: vm.searchInput}, true, true).then(function(response) {
+        vm.list = response;
+      });
     }
 
     function activate() {
