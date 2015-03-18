@@ -1,9 +1,18 @@
 // jscs:disable
 (function(){
+
+  /**
+   * Base service class for services with pagination
+   *   getList
+   *   $get
+   *   $delete
+   *   $create
+   *   operation
+   */
+
   angular.module('ncsaas')
     .service('baseServiceClass', ['$q', 'currentStateService', '$resource', 'ENV', baseServiceClass]);
   function baseServiceClass($q, currentStateService, $resource, ENV) {
-    // Base service class for services with pagination
     // pageSize, page, pages - default variables, you can change this in your init method or call this._super() in init
     var BaseServiceClass = Class.extend({
       pageSize:null,
@@ -18,9 +27,6 @@
         this.page = 1;
         this.pages = null;
         this.currentStateService = currentStateService;
-        this.stopResource = this.operation.bind(this, 'stop');
-        this.startResource = this.operation.bind(this, 'start');
-        this.restartResource = this.operation.bind(this, 'restart');
       },
 
       getList:function(filter) {
