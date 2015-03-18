@@ -98,7 +98,7 @@
       },
 
       $get:function(uuid) {
-        return this.getFactory(false).get({UUID: uuid}).$promise;
+        return this.getFactory(false).get({}, {uuid: uuid}).$promise;
       },
 
       getEndpoint:function(isList) {
