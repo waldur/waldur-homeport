@@ -153,7 +153,7 @@
 
     function activate() {
       // projects
-      projectsService.getProjectList().then(function(response) {
+      projectsService.getList().then(function(response) {
         vm.projectList = response;
       });
       // keys
