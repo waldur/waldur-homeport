@@ -21,13 +21,11 @@
     vm.search = search;
 
     // pagination
-    vm.changePageSize = changePageSize;
-    vm.changePage = changePage;
-    vm.getNumber = getNumber;
     vm.pageSizes = [5, 10, 20, 50];
     vm.currentPageSize = resourcesService.pageSize;
     vm.pages = resourcesService.pages ? resourcesService.pages : 5;
     vm.currentPage = resourcesService.page;
+    vm.service = resourcesService;
 
     getResourceList();
 
@@ -85,24 +83,6 @@
       resourcesService.getList({hostname: vm.searchInput}).then(function(response) {
         vm.list = response;
       });
-    }
-
-    function changePageSize(pageSize) {
-      vm.currentPageSize = pageSize;
-      vm.currentPage = 1;
-      resourcesService.page = 1;
-      resourcesService.pageSize = pageSize;
-      getResourceList();
-    }
-
-    function changePage(page) {
-      vm.currentPage = page;
-      resourcesService.page = page;
-      getResourceList();
-    }
-
-    function getNumber(num) {
-      return new Array(num);
     }
 
     function isOperationAvailable(resource, operation) {
