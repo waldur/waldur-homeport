@@ -1,4 +1,4 @@
-<div ng-controller="ProjectListController as controller">
+<div ng-controller="ProjectListController as ProjectList">
 
 <!-- app-block -->
 <section class="app-block">
@@ -9,15 +9,14 @@
                     <div class="col-xs-12 first-line">
                         <h2 class="app-title">Projects</h2>
                         <ul class="sort">
-                            <li><a href="#" class="active">5</a></li>
-                            <li><a href="#">15</a></li>
-                            <li><a href="#">24</a></li>
+                            <li ng-repeat="pageSize in ProjectList.pageSizes">
+                                <a ng-click="ProjectList.changePageSize(pageSize)"
+                                   ng-class="{active: pageSize === ProjectList.currentPageSize}">{{pageSize}}</a>
+                            </li>
+
                             <li class="divid">
                                 <div class="search" data-role="search-box">
-                                    <input type="text">
-                                    <button class="search-button">
-                                        <i class="fa fa-search"></i>
-                                    </button>
+                                    <input type="text" ng-model='ProjectList.searchInput' ng-keyup="ProjectList.search()">
                                 </div>
                             </li>
                         </ul>
@@ -47,7 +46,7 @@
                                 <th class="col-xs-2"><a href="" class="sort">Users</a></th>
                                 <th class="col-xs-2"></th>
                             </tr>
-                            <tr ng-repeat="project in controller.list">
+                            <tr ng-repeat="project in ProjectList.list">
                                 <td class="name">
                                     <h2 class="item-title"><a ui-sref="project.details({uuid: project.uuid})">{{ project.name }}</a></h2>
                                     <p class="gray-text">
@@ -56,7 +55,7 @@
                                 </td>
                                 <td class="col-xs-3 gray-text">
                                     <ul class="standart-list">
-                                        <li ng-repeat="resource in project.services"><span class="elem item-type repo"></span> {{ resource.name }}</li>
+                                        <li ng-repeat="resource in project.resources"><span class="elem item-type repo"></span> {{ resource.hostname }}</li>
                                     </ul>
                                 </td>
                                 <td class="col-xs-2 gray-text">
@@ -76,7 +75,7 @@
                                             <a href="#" class="conf" data-toggle="tooltip" data-placement="top" title="Settings"><i class="fa fa-cog"></i></a>
                                         </li>
                                         <li>
-                                            <a href="" ng-click="controller.remove(project)" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
+                                            <a href="" ng-click="ProjectList.deleteProject(project)" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
                                         </li>
                                     </ul>
                                 </td>
@@ -96,11 +95,10 @@
         <!-- pagination -->
         <div class="pagination">
             <ul>
-                <li><a href="#" class="current">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
+                <li><a href="#/resources/" ng-repeat="i in ProjectList.getNumber(ProjectList.pages) track by $index"
+                       ng-class="{current: ($index+1) === ProjectList.currentPage}"
+                       ng-click="ProjectList.changePage($index+1)">{{$index+1}}</a></li>
+
             </ul>
         </div>
         <!-- /pagination -->

@@ -1,112 +1,54 @@
 'use strict';
 
+
 (function() {
   angular.module('ncsaas')
-    .service('projectsService',
-      ['$q', 'RawProject', 'RawUser', 'RawCustomer', 'RawService', 'currentStateService', projectsService]);
+    .service('projectsService', ['$q', 'baseServiceClass', projectsService]);
 
-  function projectsService($q, RawProject, RawUser, RawCustomer, RawService, currentStateService) {
-    /*jshint validthis: true */
-    var vm = this;
-    /*jshint validthis: false */
+  function projectsService($q, baseServiceClass) {
+    var ServiceClass = baseServiceClass.extend({
+      init:function() {
+        this._super();
+        this.endpoint = '/projects/';
+      },
 
-    vm.getProject = getProject;
-    vm.getProjectList = getProjectList;
-    vm.createProject = createProject;
-    vm.getRawProjectList = getRawProjectList;
-
-    function createProject() {
-      return new RawProject();
-    }
-
-    function getProject(uuid) {
-      var project = RawProject.get({projectUUID: uuid}, init);
-
-      function init(project) {
-        initProjectUsers(project);
-        initProjectCustomer(project);
-        initProjectService(project);
-      }
-
-      return project;
-    }
-
-    function getRawProjectList() {
-      return RawProject.query().$promise;
-    }
-
-    function getProjectList(includeUsers) {
-      var deferred = $q.defer();
-      currentStateService.getCustomer().then(function(response) {
-        var customerName = response.name,
-          projects = {};
-        /*jshint camelcase: false */
+      // adds users and resources for each project if `includeAdditionalData` is true
+      getList: function(filter, includeUsers, includeResources) {
+        var projectsPromise = this._super(filter);
         if (includeUsers) {
-          RawProject.query({customer_name: customerName}).$promise.then(
-            function(response_projects) {
-              projects = response_projects;
-              for (var i = 0; i < projects.length; i++) {
-                initProjectUsers(projects[i]);
-              }
-              deferred.resolve(projects);
-            },
-            reject);
-        } else {
-          projects = RawProject.query({customer_name: customerName});
-          deferred.resolve(projects);
+          projectsPromise = this.chainFunctionsToPromise(projectsPromise, [this._initProjectsUsers.bind(this)]);
         }
-      }, reject);
+        if (includeResources) {
+          projectsPromise = this.chainFunctionsToPromise(projectsPromise, [this._initProjectsResources.bind(this)]);
+        }
+        return projectsPromise;
+      },
 
-      function reject(error) {
-        deferred.reject(error);
+      _initProjectsUsers: function(projects) {
+        var usersFactory = this.getFactory(null, '/users/');
+        for (var i = 0; i < projects.length; i++) {
+          var project = projects[i];
+          usersFactory.query({project: project.name}).$promise.then(
+            function(users) {
+              project.users = users;
+            }
+          );
+        }
+      },
+
+      _initProjectsResources: function(projects) {
+        var resourcesFactory = this.getFactory(null, '/resources/');
+        for (var i = 0; i < projects.length; i++) {
+          var project = projects[i];
+          resourcesFactory.query({project: project.name}).$promise.then(
+            function(resources) {
+              project.resources = resources;
+            }
+          );
+        }
       }
 
-      return deferred.promise;
-    }
-
-    function initProjectUsers(project) {
-      RawUser.query({project: project.name}, init);
-
-      function init(users) {
-        project.users = users;
-      }
-    }
-
-    function initProjectCustomer(project) {
-      /*jshint camelcase: false */
-      RawCustomer.query({name: project.customer_name}, init);
-
-      function init(customers) {
-        project.customer = customers[0];
-      }
-    }
-
-    function initProjectService(project) {
-      RawService.query({project: project.uuid}, init);
-
-      function init(services) {
-        project.services = services;
-      }
-    }
-
+    });
+    return new ServiceClass();
   }
-
-})();
-
-(function() {
-  angular.module('ncsaas')
-    .factory('RawProject', ['ENV', '$resource', RawProject]);
-
-    function RawProject(ENV, $resource) {
-      return $resource(
-        ENV.apiEndpoint + 'api/projects/:projectUUID/', {projectUUID: '@uuid'},
-        {
-          update: {
-            method: 'PUT'
-          }
-        }
-
-      );
-    }
-
 })();

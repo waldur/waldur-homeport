@@ -7,16 +7,77 @@
   function ProjectListController($location, projectsService) {
     var vm = this;
 
-    vm.list = projectsService.getProjectList();
-    vm.remove = remove;
+    vm.list = {};
+    vm.deleteProject = deleteProject;
 
-    function remove(project) {
-      var index = vm.list.indexOf(project);
+    // search
+    vm.searchInput = '';
+    vm.search = search;
 
-      project.$delete(function() {
-        vm.list.splice(index, 1);
+    // pagination
+    vm.changePageSize = changePageSize;
+    vm.changePage = changePage;
+    vm.getNumber = getNumber;
+    vm.pageSizes = [5, 10, 20, 50];
+    vm.currentPageSize = projectsService.pageSize;
+    vm.pages = projectsService.pages ? projectsService.pages : 5;
+    vm.currentPage = projectsService.page;
+
+    function deleteProject(project, index) {
+      var confirmDelete = confirm('Confirm project deletion?');
+      if (confirmDelete) {
+        projectsService.$delete(project.uuid).then(
+          function(response) {
+            vm.list.splice(index, 1);
+          },
+          handleProjectDeletionException
+        );
+      } else {
+        alert('Project was not deleted.');
+      }
+    }
+
+    function handleProjectDeletionException(response) {
+      var message = response.data.status || response.data.detail;
+      alert(message);
+    }
+
+    function search() {
+      projectsService.getList({name: vm.searchInput}, true, true).then(function(response) {
+        vm.list = response;
       });
     }
+
+    function activate() {
+      initList();
+    }
+
+    function initList() {
+      projectsService.getList(null, true, true).then(function(response) {
+        vm.pages = projectsService.pages;
+        vm.list = response;
+      });
+    }
+
+    function changePageSize(pageSize) {
+      vm.currentPageSize = pageSize;
+      vm.currentPage = 1;
+      projectsService.page = 1;
+      projectsService.pageSize = pageSize;
+      initList();
+    }
+
+    function changePage(page) {
+      vm.currentPage = page;
+      projectsService.page = page;
+      initList();
+    }
+
+    function getNumber(num) {
+      return new Array(num);
+    }
+
+    activate();
 
   }
 

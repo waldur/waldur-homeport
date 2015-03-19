@@ -1,9 +1,18 @@
 // jscs:disable
 (function(){
+
+  /**
+   * Base service class for services with pagination
+   *   getList
+   *   $get
+   *   $delete
+   *   $create
+   *   operation
+   */
+
   angular.module('ncsaas')
     .service('baseServiceClass', ['$q', 'currentStateService', '$resource', 'ENV', baseServiceClass]);
   function baseServiceClass($q, currentStateService, $resource, ENV) {
-    // Base service class for services with pagination
     // pageSize, page, pages - default variables, you can change this in your init method or call this._super() in init
     var BaseServiceClass = Class.extend({
       pageSize:null,
@@ -13,14 +22,11 @@
       endpoint:null,
       customerName:null,
 
-      init:function(){
+      init:function() {
         this.pageSize = 10;
         this.page = 1;
         this.pages = null;
         this.currentStateService = currentStateService;
-        this.stopResource = this.operation.bind(this, 'stop');
-        this.startResource = this.operation.bind(this, 'start');
-        this.restartResource = this.operation.bind(this, 'restart');
       },
 
       getList:function(filter) {
@@ -31,7 +37,7 @@
           filter.page = vm.page;
           /*jshint camelcase: false */
           filter.page_size = vm.pageSize;
-          vm.getFactory(true).query(filter,function(response, responseHeaders){
+          vm.getFactory(true).query(filter, function(response, responseHeaders) {
             var header = responseHeaders(),
               objQuantity = !header['x-result-count'] ? null : header['x-result-count'];
             if (objQuantity) {
@@ -83,14 +89,15 @@
         return deferred.promise;
       },
 
-      getFactory:function(isList) {
+      getFactory:function(isList, endpoint) {
+        endpoint = endpoint || this.getEndpoint(isList);
         /*jshint camelcase: false */
-        return $resource(ENV.apiEndpoint + 'api' + this.getEndpoint(isList) + ':UUID/', {UUID:'@uuid',
+        return $resource(ENV.apiEndpoint + 'api' + endpoint + ':UUID/', {UUID:'@uuid',
             page_size:'@page_size', page:'@page'},
           {
             operation: {
               method:'POST',
-              url:ENV.apiEndpoint + 'api' + this.getEndpoint(isList) + ':UUID/:operation/',
+              url:ENV.apiEndpoint + 'api' + endpoint + ':UUID/:operation/',
               params: {UUID:'@uuid', operation:'@operation'}
             },
           }
@@ -103,7 +110,26 @@
 
       getEndpoint:function(isList) {
         return this.endpoint;
+      },
+
+      // helper, that adds functions to promise
+      chainFunctionsToPromise:function(promise, functions) {
+        var deferred = $q.defer();
+        promise.then(
+          function(response) {
+            for (var i=0; i < functions.length; i++) {
+              var f = functions[i];
+              f(response);
+              deferred.resolve(response);
+            }
+          },
+          function(error) {
+            deferred.reject(error);
+          }
+        );
+        return deferred.promise;
       }
+
     });
 
     return BaseServiceClass;
