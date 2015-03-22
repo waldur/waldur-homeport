@@ -2,6 +2,11 @@
     .items-table {
         width: 100%;
         min-width: 600px;
+        &.inline-middle {
+            th, td {
+                vertical-align: middle;
+            } // th, td
+        } // &.inline-middle
         tr {
             + tr {
                 border-top: 1px solid #E0E0E0;

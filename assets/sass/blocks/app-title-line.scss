@@ -4,20 +4,6 @@
     &.in-form {
         padding: 0px;
     } // &.in-form
-    .app-title {
-        @include inline-middle;
-        margin: 0;
-        font-size: rem(22);
-        margin-bottom: 10px;
-        @include bp(md) {
-            @include inline-middle;
-            margin-bottom: 0px;
-        } // medium
-        @include bp(lg) {
-            @include inline-middle;
-            margin-bottom: 0px;
-        } // large
-    } // app-title
     .sort {
         @include inline-middle;
         @include clear-list;
