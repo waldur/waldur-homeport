@@ -64,6 +64,12 @@
     &:hover {
         border-color: transparent;
     }
+    &.btn-white {
+        font-size: rem(16);
+        color: #303030;
+        background: #FFFFFF;
+        box-shadow: 0px 1px 1px 0px rgba(153, 153, 153, 0.5);
+    }
 }
 
 .btn-control {
@@ -453,3 +459,17 @@ a.sort {
         } // &.active
     } // a
 } // links-list
+
+.invites-form {
+    padding: 20px 0;
+} // invites-form
+
+.invited-list {
+    li + li {
+        margin-top: 5px;
+    }
+} // invited-list
+
+.label-black-txt {
+    color: #303030;
+} // label-black-txt
