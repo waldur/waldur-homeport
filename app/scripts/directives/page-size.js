@@ -3,9 +3,9 @@
 (function() {
 
   angular.module('ncsaas')
-    .directive('pagesize', ['ENV',pageSize]);
+    .directive('pagesize', ['ENV', '$state',pageSize]);
 
-  function pageSize(ENV) {
+  function pageSize(ENV, $state) {
     return {
       restrict: 'E',
       templateUrl: "views/directives/page-size.html",
@@ -16,9 +16,9 @@
         pagesService: '='
       },
       link: function ($scope) {
-        debugger;
         var pagesController = $scope.pagesList,
           pagesService = $scope.pagesService;
+        $scope.pagesHref = $scope.pagesHref || $state.href($state.current.name, $state.params, {absolute: true});
         pagesController.changePageSize = changePageSize;
         pagesController.pageSizes = pagesController.pageSizes || ENV.pageSizes;
 

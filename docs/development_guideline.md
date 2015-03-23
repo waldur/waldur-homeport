@@ -44,8 +44,10 @@ Pagination directive calling looks like:
 <pagination pages-href="#/resources/" pages-list="ResourceList" pages-service="ResourceList.service"/>
 pages-list - list controller
 pages-service - list model
+pages-href is not required, current url by default
 
 page-size directive calling looks like:
 <pagesize pages-href="#/resources/" pages-list="ResourceList" pages-service="ResourceList.service"/>
 pages-list - list controller
 pages-service - list model
+pages-href is not required, current url by default
