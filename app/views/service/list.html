@@ -21,7 +21,7 @@
                                 </div>
                             </li>
                         </ul>
-                        <div class="crud-box pull-right"><a href="../add-service/index.html" class="crud-controls"><i class="fa fa-plus"></i> Add service</a></div>
+                        <div class="crud-box pull-right"><a ui-sref="services.create" class="crud-controls"><i class="fa fa-plus"></i> Add service</a></div>
                     </div>
                 </div>
             </div>
@@ -46,12 +46,12 @@
                             </th>
                             <th class="col-xs-1"></th>
                         </tr>
-                        <tr ng-repeat="service in services.list">
+                        <tr ng-repeat="service in serviceList.list">
                             <td class="name">
-                                <h2 class="item-title"><a ui-sref="service({uuid: serviceList.uuid})">{{ serviceList.name }}</a></h2>
+                                <h2 class="item-title"><a ui-sref="service({uuid: serviceList.uuid})">{{ service.name }}</a></h2>
                             </td>
                             <td class="col-xs-2 type">
-                                <span class="elem item-type github">{{ serviceList.Type }}</span>
+                                <span class="elem item-type github">{{ service.service_type }}</span>
                             </td>
                             <td class="col-xs-1 controls-ctn">
                                 <ul class="controls pull-right">

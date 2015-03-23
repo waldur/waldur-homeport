@@ -2,52 +2,20 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('servicesService', ['$q', 'RawService', 'RawTemplate', 'currentStateService', servicesService]);
+    .service('servicesService', ['baseServiceClass', servicesService]);
 
-  function servicesService($q, RawService, RawTemplate, currentStateService) {
+  function servicesService(baseServiceClass) {
     /*jshint validthis: true */
-    var vm = this;
-
-    vm.getServiceList = getServiceList;
-    vm.getService = getService;
-
-    function getServiceList(filter) {
-      var deferred = $q.defer();
-      filter = filter || {};
-      currentStateService.getCustomer().then(initServices, reject);
-
-      function initServices(customer) {
-        /*jshint camelcase: false */
-        filter.customer_name = customer.name;
-        RawService.query(filter).$promise.then(
-          function(response) {
-            deferred.resolve(response);
-          },
-          reject
-        );
+    var ServiceClass = baseServiceClass.extend({
+      init:function() {
+        this._super();
+      },
+      getEndpoint:function() {
+        var endpoint = '/clouds/';
+        return endpoint;
       }
-
-      function reject(error) {
-        deferred.reject(error);
-      }
-
-      return deferred.promise;
-    }
-
-    function getService(uuid) {
-      return RawService.get({serviceUUID: uuid});
-    }
-
+    });
+    return new ServiceClass();
   }
-
-})();
-
-(function() {
-  angular.module('ncsaas')
-    .factory('RawService', ['ENV', '$resource', RawService]);
-
-    function RawService(ENV, $resource) {
-      return $resource(ENV.apiEndpoint + 'api/clouds/:cloudUUID/', {cloudUUID:'@uuid'});
-    }
 
 })();
