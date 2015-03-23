@@ -254,28 +254,35 @@ angular
       })
 
       .state('users', {
-        url: '/users/',
         abstract: true,
         templateUrl: 'views/user/base.html'
       })
 
       .state('users.list', {
-        url: '',
+        url: '/users/',
+        abstract: true,
         views: {
           'appContent': {
             templateUrl: 'views/user/list.html',
-            url: '',
-            views: {
-              'controlsList': {
-                templateUrl: 'views/partials/controls-line.html',
-              }
-            }
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',
           },
           'appFooter': {
             templateUrl: 'views/partials/app-footer.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
+        auth: true
+      })
+
+      .state('users.list.show',{
+        url:'',
+        views: {
+          'controlsList': {
+            templateUrl: 'views/partials/controls-line.html',
           }
         },
         resolve: {

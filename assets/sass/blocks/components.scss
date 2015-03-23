@@ -216,15 +216,20 @@ a.kit-icon {
 
 .checkbox-toggle {
     @include inline-middle;
+    position: relative;
     &.inline {
         + .checkbox-toggle.inline {
             margin-left: 10px;
         }
     } // &.inline
-
+    label {
+        height: 17px;
+    }
     [type="checkbox"]:not(:checked),
     [type="checkbox"]:checked {
       position: absolute;
+      top: 0;
+      left: 0;
       opacity: 0;
     }
     [type="checkbox"]:not(:checked) + label,
@@ -255,7 +260,7 @@ a.kit-icon {
         background: rgb(106, 187, 106);
     }
     [type="checkbox"]:checked + label:after {
-        background: rgb(223, 223, 223);
+        background: rgb(106, 187, 106);
     }
     [type="checkbox"] + label:before {
         position: absolute;
@@ -273,7 +278,7 @@ a.kit-icon {
     }
     [type="checkbox"]:checked + label:before {
         transform: translate(-16px, 0);
-        box-shadow: 0px 0px 4px 0px rgba(69, 69, 69, 1);
+        box-shadow: 0px 0px 4px 0px rgba(15, 82, 4, 1);
     }
 } // checkbox-toggle
 

@@ -46,6 +46,7 @@
         align-items: center;
         box-sizing: border-box;
         padding: 0 5px;
+        // min-height: 62px; // temporary need this comment
         &.checkbox {
             padding: 0;
             input[type="checkbox"] {
@@ -68,3 +69,9 @@
     paddging: 20px;
     text-align: center;
 } // empty-search
+
+.label-text {
+    &.special-left {
+        margin-left: 5px;
+    }
+}

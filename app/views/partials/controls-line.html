@@ -2,13 +2,20 @@
 <section class="app-block controls-line">
     <div class="container-fluid">
         <div class="main-list-controls">
-            <div class="box checkbox">
+            <div class="box">
+                <span class="label-text">Control element as: group</span>
+                <div class="checkbox-toggle">
+                    <input type="checkbox" id="control-types" ng-click="ctrlgroup=!ctrlgroup"><label for="control-types"></label>
+                </div>
+                <span class="label-text special-left">element</span>
+            </div>
+            <div class="box checkbox" ng-show="ctrlgroup">
                 <input type="checkbox">
             </div>
-            <div class="box">
+            <div class="box" ng-show="ctrlgroup">
                 <a class="btn btn-white">Add to project</a>
             </div>
-            <div class="box">
+            <div class="box" ng-show="ctrlgroup">
                 <a class="btn btn-white">Remove from project</a>
             </div>
         </div>
