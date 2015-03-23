@@ -193,12 +193,6 @@ angular
         views: {
           'appContent': {
             templateUrl: 'views/customer/list.html',
-            views: {
-              'controlsList': {
-                url: '',
-                templateUrl: 'views/partials/controls-line.html',
-              }
-            }
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',
@@ -270,6 +264,12 @@ angular
         views: {
           'appContent': {
             templateUrl: 'views/user/list.html',
+            url: '',
+            views: {
+              'controlsList': {
+                templateUrl: 'views/partials/controls-line.html',
+              }
+            }
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',
