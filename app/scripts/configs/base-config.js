@@ -10,6 +10,7 @@ angular.module('ncsaas')
     googleClientId: 'google client id',
     googleEndpointUrl: 'api-auth/google/',
     facebookClientId: 'facebook client id',
-    facebookEndpointUrl: 'api-auth/facebook/'
+    facebookEndpointUrl: 'api-auth/facebook/',
+    pageSizes: [5, 10, 20, 50]
 
   });

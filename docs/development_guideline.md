@@ -37,3 +37,15 @@ Shows controller attributes to users, allows users to modify them.
  - list-level operation (example: add): `/objects/<operation>/`
  - one object: `/object/<uuid>/`
  - object-level operation (example: update): `/object/<uuid>/<operation>/`
+
+### Pagination directives
+
+Pagination directive calling looks like:
+<pagination pages-href="#/resources/" pages-list="ResourceList" pages-service="ResourceList.service"/>
+pages-list - list controller
+pages-service - list model
+
+page-size directive calling looks like:
+<pagesize pages-href="#/resources/" pages-list="ResourceList" pages-service="ResourceList.service"/>
+pages-list - list controller
+pages-service - list model
