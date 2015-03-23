@@ -66,11 +66,24 @@
                                 </ul>
                             </td>
                             <td class="col-xs-2 controls-ctn">
-                                <ul class="controls pull-right" ng-show="!ctrlgroup">
-                                    <li>
-                                        <a class="btn btn-control">Actions</a>
-                                    </li>
-                                </ul>
+                                <div class="rel-box">
+                                    <ul class="controls pull-right">
+                                        <li>
+                                            <a class="btn btn-control dropdown"
+                                                ng-click="subactions=!subactions"
+                                                ng-class="{'active': subactions}"
+                                                >Actions</a>
+                                            <ul class="sub-controls" ng-show="subactions">
+                                                <li>
+                                                    <a class="btn btn-control">Add to project</a>
+                                                </li>
+                                                <li>
+                                                    <a class="btn btn-control">Remove from project</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
                             </td>
                         </tr>
                     </table>

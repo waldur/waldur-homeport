@@ -8,7 +8,7 @@
       UserListController
     ]);
 
-  function UserListController($location, usersService) {
+  function UserListController($location, usersService, $rootScope) {
     var vm = this;
 
     vm.list = usersService.getRawUserList();

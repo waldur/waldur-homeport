@@ -67,8 +67,13 @@
     &.btn-white {
         font-size: rem(16);
         color: #303030;
-        background: #FFFFFF;
+        background: #fff;
         box-shadow: 0px 1px 1px 0px rgba(153, 153, 153, 0.5);
+        &.dropdown {
+            &.active {
+                box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+            } // &.active
+        } // &.dropdown
     }
 }
 
@@ -78,6 +83,7 @@
     background-color: transparent;
     color: rgb(0, 149, 135) !important;
     box-shadow: rgba(0, 0, 0, 0.11765) 0px 1px 4px 0px;
+    background-color: white;
     &:hover,
     &:active {
         color: rgba(255,255,255,.84);
@@ -95,7 +101,7 @@
 .controls {
     @include clear-list;
     @include inline-middle;
-    li {
+    > li {
         + li {
             margin-left: 10px;
         }
@@ -119,6 +125,23 @@
                 color: #e74c3c;
             } // remove
         } // a
+        .sub-controls {
+            @include clear-list;
+            position: absolute;
+            margin: 0;
+            padding: 0;
+            position: absolute;
+            top: 34px;
+            right: 0px;
+            z-index: 999;
+            text-align: right;
+            li + li {
+                margin-top: 10px;
+            }
+            .btn-control {
+                color: #303030 !important;
+            }
+        } // sub-controls
     } // li
 } // controls
 
@@ -478,3 +501,7 @@ a.sort {
 .label-black-txt {
     color: #303030;
 } // label-black-txt
+
+.rel-box {
+    position: relative;
+} // rel-box
