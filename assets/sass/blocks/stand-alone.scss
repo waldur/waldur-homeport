@@ -37,3 +37,29 @@
         margin: 0;
     } // name
 } // user
+
+.main-list-controls {
+    display: flex;
+    flex-wrap: wrap-reverse;
+    .box {
+        display: flex;
+        align-items: center;
+        box-sizing: border-box;
+        padding: 0 5px;
+        &.checkbox {
+            padding: 0;
+            input[type="checkbox"] {
+                position: relative;
+                top: 2px;
+            }
+        } // checkbox
+    } // box
+} // main-list-controls
+
+.checkbox {
+    width: 40px;
+    input[type="checkbox"] {
+        margin: 0;
+        margin: auto;
+    }
+} // checkbox
