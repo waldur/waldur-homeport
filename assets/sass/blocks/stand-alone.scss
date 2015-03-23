@@ -46,14 +46,11 @@
         align-items: center;
         box-sizing: border-box;
         padding: 0 5px;
-        // min-height: 62px; // temporary need this comment
-        &.checkbox {
-            padding: 0;
-            input[type="checkbox"] {
-                position: relative;
-                top: 2px;
-            }
-        } // checkbox
+        height: 62px;
+        input[type="checkbox"] {
+            position: relative;
+            top: -1px;
+        }
     } // box
 } // main-list-controls
 
