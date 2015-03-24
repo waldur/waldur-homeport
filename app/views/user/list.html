@@ -49,6 +49,7 @@
                         </tr>
                         <tr ng-repeat="user in controller.list">
                             <td class="col-xs-1 pic">
+                                <input type="checkbox" ng-show="controller.showgroup">
                                 <a ui-sref="users.details({uuid: user.uuid})">
                                     <img src="../static/images/887178.jpg" alt="John Doe">
                                 </a>
@@ -66,7 +67,7 @@
                             </td>
                             <td class="col-xs-2 controls-ctn">
                                 <div class="rel-box">
-                                    <ul class="controls pull-right">
+                                    <ul class="controls pull-right" ng-hide="controller.showgroup">
                                         <li>
                                             <a class="btn btn-control dropdown"
                                                 ng-click="subactions=!subactions"

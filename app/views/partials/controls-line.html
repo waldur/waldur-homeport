@@ -5,12 +5,13 @@
             <div class="box">
                 <span class="label-text">Control element as: group</span>
                 <div class="checkbox-toggle">
-                    <input type="checkbox" id="control-types" ng-click="$rootScope.controlgroup=!$rootScope.controlgroup"><label for="control-types"></label>
+                    <input type="checkbox" id="control-types" ng-click="controller.showgroup=!controller.showgroup">
+                    <label for="control-types"></label>
                 </div>
                 <span class="label-text special-left">element</span>
             </div>
         </div>
-        <div class="main-list-controls" ng-show="$rootScope.controlgroup">
+        <div class="main-list-controls" ng-show="controller.showgroup">
             <div class="box">
                 <input class="standart-check" type="checkbox">
             </div>
