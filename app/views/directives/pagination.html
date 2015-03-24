@@ -1,0 +1,17 @@
+<div class="pagination">
+    <ul>
+        <li>
+            <a href="{{pagesHref}}" ng-if="pagesList.currentPage > 1" ng-click="pagesList.changePage(1)">First</a>
+            <a href="{{pagesHref}}" ng-if="pagesList.currentPage > 1"
+               ng-click="pagesList.changePage(pagesList.currentPage - 1)"><<</a>
+            <a href="{{pagesHref}}" ng-repeat="pageNumber in  pagesList.getNumber(pagesList.pages, pagesList.currentPage)"
+               ng-class="{current: (pageNumber) === pagesList.currentPage}"
+               ng-click="pagesList.changePage(pageNumber)">{{pageNumber}}</a>
+            <a href="{{pagesHref}}" ng-if="pagesList.currentPage < pagesList.pages"
+               ng-click="pagesList.changePage(pagesList.currentPage + 1)">>></a>
+            <a href="{{pagesHref}}" ng-if="pagesList.currentPage < pagesList.pages"
+               ng-click="pagesList.changePage(pagesList.pages)">Last</a>
+        </li>
+
+    </ul>
+</div>
