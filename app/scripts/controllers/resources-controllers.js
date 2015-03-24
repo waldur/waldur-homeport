@@ -98,11 +98,12 @@
 (function() {
   angular.module('ncsaas')
     .controller('ResourceAddController',
-      ['$state', 'resourcesService', 'servicesService', 'projectsService', 'keysService', 'templatesService',
-      ResourceAddController]);
+      ['$rootScope', '$state',
+       'resourcesService', 'servicesService', 'projectsService', 'keysService', 'templatesService',
+        ResourceAddController]);
 
   function ResourceAddController(
-      $state, resourcesService, servicesService, projectsService, keysService, templatesService) {
+      $rootScope, $state, resourcesService, servicesService, projectsService, keysService, templatesService) {
     var vm = this;
 
     // Resource add process:
@@ -130,6 +131,18 @@
     vm.cancel = cancel;
     vm.errors = {};
     vm.selectedProject = null;
+
+    $rootScope.$on('currentCustomerUpdated', function () {
+      vm.showFlavors = false;
+      vm.showTemplates = false;
+      vm.selectedProject = null;
+      vm.serviceList = {};
+      vm.flavorList = {};
+      vm.keyList = {};
+      vm.projectList = {};
+      vm.templateList = {};
+      activate();
+    });
 
     function activate() {
       // projects
