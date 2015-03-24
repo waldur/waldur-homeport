@@ -8,6 +8,7 @@
     var vm = this;
 
     vm.list = {};
+    vm.service = resourcesService;
 
     // resource operations
     vm.stopResource = stopResource;
@@ -20,16 +21,13 @@
     vm.searchInput = '';
     vm.search = search;
 
-    // pagination
-    vm.pageSizes = [5, 10, 20, 50];
-    vm.currentPageSize = resourcesService.pageSize;
-    vm.pages = resourcesService.pages ? resourcesService.pages : 5;
-    vm.currentPage = resourcesService.page;
-    vm.service = resourcesService;
-
+    // initialization
     getResourceList();
-
-    $rootScope.$on('currentCustomerUpdated', getResourceList);
+    // handler
+    $rootScope.$on('currentCustomerUpdated', function () {
+      vm.service.page = 1;
+      getResourceList();
+    });
 
     function getResourceList() {
       resourcesService.getList().then(function(response) {

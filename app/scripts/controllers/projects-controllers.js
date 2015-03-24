@@ -23,7 +23,10 @@
     vm.pages = projectsService.pages ? projectsService.pages : 5;
     vm.currentPage = projectsService.page;
 
-    $rootScope.$on('currentCustomerUpdated', activate);
+    $rootScope.$on('currentCustomerUpdated', function() {
+      projectsService.page = 1;
+      activate();
+    });
 
     function deleteProject(project, index) {
       var confirmDelete = confirm('Confirm project deletion?');
