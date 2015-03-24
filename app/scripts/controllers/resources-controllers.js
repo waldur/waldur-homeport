@@ -2,9 +2,9 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('ResourceListController', ['resourcesService', ResourceListController]);
+    .controller('ResourceListController', ['$rootScope', 'resourcesService', ResourceListController]);
 
-  function ResourceListController(resourcesService) {
+  function ResourceListController($rootScope, resourcesService) {
     var vm = this;
 
     vm.list = {};
@@ -30,6 +30,8 @@
     vm.currentPage = resourcesService.page;
 
     getResourceList();
+
+    $rootScope.$on('currentCustomerUpdated', getResourceList);
 
     function getResourceList() {
       resourcesService.getList().then(function(response) {
