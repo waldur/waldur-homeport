@@ -2,9 +2,9 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('keysService', ['$q', 'RawKey', 'currentStateService', keysService]);
+    .service('keysService', ['$q', 'RawKey', 'usersService', keysService]);
 
-  function keysService($q, RawKey, currentStateService) {
+  function keysService($q, RawKey, usersService) {
     /*jshint validthis: true */
     var vm = this;
     vm.getKeyList = getKeyList;
@@ -16,7 +16,7 @@
 
     function getCurrentUserKeyList() {
       var deferred = $q.defer();
-      currentStateService.getUser().then(initKeys, reject);
+      usersService.getCurrentUser().then(initKeys, reject);
 
       function initKeys(user) {
         /*jshint camelcase: false */
