@@ -8,9 +8,10 @@
       UserListController
     ]);
 
-  function UserListController($location, usersService) {
+  function UserListController($location, usersService, $rootScope) {
     var vm = this;
 
+    vm.showgroup = false;
     vm.list = usersService.getRawUserList();
     vm.remove = remove;
 

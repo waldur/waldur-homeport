@@ -1,0 +1,27 @@
+<!-- app-block -->
+<section class="app-block controls-line">
+    <div class="container-fluid">
+        <div class="main-list-controls">
+            <div class="box">
+                <span class="label-text">Control element as: group</span>
+                <div class="checkbox-toggle">
+                    <input type="checkbox" id="control-types" ng-click="controller.showgroup=!controller.showgroup">
+                    <label for="control-types"></label>
+                </div>
+                <span class="label-text special-left">element</span>
+            </div>
+        </div>
+        <div class="main-list-controls" ng-show="controller.showgroup">
+            <div class="box">
+                <input class="standart-check" type="checkbox">
+            </div>
+            <div class="box">
+                <a class="btn btn-white">Add to project</a>
+            </div>
+            <div class="box">
+                <a class="btn btn-white">Remove from project</a>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- /app-block -->

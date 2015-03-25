@@ -2,6 +2,11 @@
     .items-table {
         width: 100%;
         min-width: 600px;
+        &.inline-middle {
+            th, td {
+                vertical-align: middle;
+            } // th, td
+        } // &.inline-middle
         tr {
             + tr {
                 border-top: 1px solid #E0E0E0;
@@ -22,9 +27,15 @@
                 } // &.name
                 &.type {} // &.type
                 &.pic {
+                    position: relative;
                     padding-right: 10px;
+                    padding-left: 30px;
+                    input[type="checkbox"] {
+                        position: absolute;
+                        left: 6px;
+                    } // input[type="checkbox"]
                     img {
-                        width: 80%;
+                        width: 90%;
                         border-radius: .6em;
                     } // img
                 } // pic
