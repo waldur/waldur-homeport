@@ -79,19 +79,21 @@
                             <td class="col-xs-4 controls-ctn">
                                 <ul class="controls pull-right">
                                     <li>
-                                        <a class="btn btn-control offline"
-                                           ng-click="ResourceList.stopResource(resource)" title="Stop"
-                                           ng-show="ResourceList.isOperationAvailable(resource, 'stop')"
-                                           >Stop</a>
                                         <a class="btn btn-control online" title="Start"
                                            ng-click="ResourceList.startResource(resource)"
-                                           ng-show="ResourceList.isOperationAvailable(resource, 'start')"
+                                           ng-class="{'disabled': !ResourceList.isOperationAvailable(resource, 'start')}"
                                            >Start</a>
+                                    </li>
+                                    <li>
+                                        <a class="btn btn-control offline"
+                                           ng-click="ResourceList.stopResource(resource)" title="Stop"
+                                           ng-class="{'disabled': !ResourceList.isOperationAvailable(resource, 'stop')}"
+                                           >Stop</a>
                                     </li>
                                     <li>
                                         <a class="btn btn-control"
                                            ng-click="ResourceList.restartResource(resource)"
-                                           ng-show="ResourceList.isOperationAvailable(resource, 'restart')"
+                                           ng-class="{'disabled': !ResourceList.isOperationAvailable(resource, 'restart')}"
                                            >Restart</a>
                                     </li>
                                     <li>
