@@ -55,7 +55,7 @@
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu" role="menu" ng-show="controller.menuState.customerMenu" >
-                        <li ng-repeat="customer in controller.customers"><a href="" ng-click="controller.setCurrentCustomer(customer)" ng-class="{'current-customer': customer.uuid == controller.getCustomer().uuid}">{{ customer.name }}</a></li>
+                        <li ng-repeat="customer in controller.customers"><a href="" ng-click="controller.setCurrentCustomer(customer)" ng-class="{'current-customer': customer.uuid == controller.currentCustomer.uuid}">{{ customer.name }}</a></li>
                         <li class="divider"></li>
                         <li><a ui-sref="customers.list" class="add-customer">Manage customers</a></li>
                     </ul>
