@@ -309,6 +309,18 @@ angular
           'appContent': {
             templateUrl: 'views/user/details.html',
           },
+          'tabEventlog@users.details': {
+            templateUrl: 'views/user/tab-eventlog.html',
+          },
+          'tabProjects@users.details': {
+            templateUrl: 'views/user/tab-projects.html',
+          },
+          'tabKeys@users.details': {
+            templateUrl: 'views/user/tab-keys.html',
+          },
+          'tabManageUser@users.details': {
+            templateUrl: 'views/user/tab-manage.html',
+          },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',
           },
