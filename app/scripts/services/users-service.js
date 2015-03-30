@@ -13,7 +13,7 @@
     vm.getRawUserList = getRawUserList;
 
     function getCurrentUser() {
-      return RawUser.getCurrent();
+      return RawUser.getCurrent().$promise;
     }
 
     function getCurrentUserWithKeys() {

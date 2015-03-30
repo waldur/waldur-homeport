@@ -2,9 +2,9 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('ProjectListController', ['$location', 'projectsService', ProjectListController]);
+    .controller('ProjectListController', ['$rootScope', '$location', 'projectsService', ProjectListController]);
 
-  function ProjectListController($location, projectsService) {
+  function ProjectListController($rootScope, $location, projectsService) {
     var vm = this;
 
     vm.list = {};
@@ -22,6 +22,11 @@
     vm.currentPageSize = projectsService.pageSize;
     vm.pages = projectsService.pages ? projectsService.pages : 5;
     vm.currentPage = projectsService.page;
+
+    $rootScope.$on('currentCustomerUpdated', function() {
+      projectsService.page = 1;
+      activate();
+    });
 
     function deleteProject(project, index) {
       var confirmDelete = confirm('Confirm project deletion?');
@@ -76,6 +81,10 @@
     function getNumber(num) {
       return new Array(num);
     }
+
+    $rootScope.$on('currentCustomerUpdated', function () {
+      initList();
+    });
 
     activate();
 
