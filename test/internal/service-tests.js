@@ -17,8 +17,8 @@ for(var i=0; i < users.length; i++) {
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/services/');
       });
 
-      it('I should not see "Add service" button', function() {
-        expect(element(by.cssContainingText('a.disabled', 'Add service')).isPresent()).toBe(true);
+      it('"Add service" should be disabled', function() {
+        expect(element(by.cssContainingText('div.disabled', 'Add service')).isPresent()).toBe(true);
       });
 
       it('I should be able to logout', function() {

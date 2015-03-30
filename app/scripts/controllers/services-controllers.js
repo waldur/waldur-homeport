@@ -13,8 +13,12 @@
     vm.canUserAddService = null;
 
     function activate() {
-      // init isCurrentUserCustomerOwner
+      // init canUserAddService
       usersService.getCurrentUser().then(function(user) {
+        /*jshint camelcase: false */
+        if (user.is_staff) {
+          vm.canUserAddService = true;
+        }
         customerPermissionsService.getList({username: user.username}).then(function(permissions) {
           if (permissions.length !== 0) {
             vm.canUserAddService = (permissions[0].role === 'owner');
