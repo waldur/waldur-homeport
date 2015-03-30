@@ -6,6 +6,7 @@ module.exports.getUser = function(name) {
 };
 
 module.exports.login = function(user) {
+  browser.driver.manage().window().maximize();
   browser.get('/#/login/');
 
   element(by.css('div.login-form a[data-role="switch-login-form"]')).click();
@@ -17,6 +18,6 @@ module.exports.login = function(user) {
 module.exports.logout = function(user) {
   browser.get('/#/dashboard/');
 
-  element(by.css('ul.navbar-right li.dropdown a.dropdown-toggle')).click();
-  element(by.cssContainingText('ul.navbar-right ul.dropdown-menu a', 'Logout')).click();
+  element(by.css('li.dropdown.user-box a')).click();
+  element(by.cssContainingText('li.dropdown.user-box ul li:nth-child(2) a', 'Logout')).click();
 };

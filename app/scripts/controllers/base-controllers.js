@@ -3,9 +3,10 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('HeaderController', ['$scope', '$state', 'currentStateService', 'customersService', HeaderController]);
+    .controller('HeaderController', [
+      '$rootScope', '$scope', '$state', 'currentStateService', 'customersService', 'usersService', HeaderController]);
 
-  function HeaderController($scope, $state, currentStateService, customersService) {
+  function HeaderController($rootScope, $scope, $state, currentStateService, customersService, usersService) {
     var vm = this;
 
     vm.customers = customersService.getCustomersList();
@@ -14,19 +15,20 @@
     vm.menuToggle = menuToggle;
     vm.setCurrentCustomer = setCurrentCustomer;
 
-    // initiate current customer
-    currentStateService.getCustomer().then(function(response) {
-      vm.currentCustomer = response;
+    // initiate current user
+    usersService.getCurrentUser().then(function(response) {
+      vm.currentUser = response;
     });
 
-    // initiate current user
-    currentStateService.getUser().then(function(response) {
-      vm.currentUser = response;
+    // initiate current customer
+    currentStateService.getCustomer().then(function(customer) {
+      vm.currentCustomer = customer;
     });
 
     function setCurrentCustomer(customer) {
       currentStateService.setCustomer(customer);
       vm.currentCustomer = customer;
+      $rootScope.$broadcast('currentCustomerUpdated');
     }
 
     // top-level menu
@@ -63,9 +65,10 @@
   }
 
   angular.module('ncsaas')
-    .controller('MainController', ['$rootScope', '$state', 'authService', 'currentStateService', MainController]);
+    .controller('MainController', [
+      '$rootScope', '$state', 'authService', 'currentStateService', 'customersService', MainController]);
 
-    function MainController($rootScope, $state, authService, currentStateService) {
+    function MainController($rootScope, $state, authService, currentStateService, customersService) {
       $rootScope.logout = logout;
 
       function logout() {
@@ -75,6 +78,14 @@
 
       $rootScope.$on('$stateChangeSuccess', function(event, toState) {
         $rootScope.bodyClass = currentStateService.getBodyClass(toState.name);
+      });
+
+      $rootScope.$on('$stateChangeSuccess', function(event, toState) {
+        // if user is authenticated - he should have selected customer
+        if (authService.isAuthenticated() && !currentStateService.isCustomerDefined) {
+          var customer = customersService.getFirst();
+          currentStateService.setCustomer(customer);
+        }
       });
     }
 

@@ -10,6 +10,11 @@
     vm.getCustomersList = getCustomersList;
     vm.createCustomer = createCustomer;
     vm.getCustomer = getCustomer;
+    vm.getFirst = getFirst;
+
+    function getFirst() {
+      return RawCustomer.getFirst().$promise;
+    }
 
     function getCustomersList() {
       return RawCustomer.query();

@@ -5,3 +5,7 @@ module.exports.getUUID = function() {
   });
 };
 
+module.exports.chooseCustomer = function(customerName) {
+  element(by.cssContainingText('a.customer-head span.customer-expl', 'active for context')).click();
+  element(by.cssContainingText('ul li:nth-child(2) ul li a', customerName)).click();
+};
