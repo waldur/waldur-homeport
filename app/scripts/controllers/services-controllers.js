@@ -2,13 +2,26 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('ServiceListController', ['servicesService', ServiceListController]);
+    .controller('ServiceListController',
+      ['servicesService', 'customerPermissionsService', 'usersService', ServiceListController]);
 
-  function ServiceListController(servicesService) {
+  function ServiceListController(servicesService, customerPermissionsService, usersService) {
     var vm = this;
 
     vm.list = servicesService.getServiceList();
     vm.remove = remove;
+    vm.canUserAddService = null;
+
+    function activate() {
+      // init isCurrentUserCustomerOwner
+      usersService.getCurrentUser().then(function(user) {
+        customerPermissionsService.getList({username: user.username}).then(function(permissions) {
+          if (permissions.length !== 0) {
+            vm.canUserAddService = (permissions[0].role === 'owner');
+          }
+        });
+      });
+    }
 
     function remove(service) {
       var index = vm.list.indexOf(service);
@@ -17,6 +30,8 @@
         vm.list.splice(index, 1);
       });
     }
+
+    activate();
 
   }
 
