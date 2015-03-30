@@ -309,6 +309,9 @@ angular
           'appContent': {
             templateUrl: 'views/user/details.html',
           },
+          'controlsListUser@users.details' : {
+            templateUrl: 'views/partials/controls-line-user.html',
+          },
           'tabEventlog@users.details': {
             templateUrl: 'views/user/tab-eventlog.html',
           },
