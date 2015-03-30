@@ -98,6 +98,18 @@ angular
           'appContent': {
             templateUrl: 'views/project/details.html',
           },
+          'controlsList@projects.details' : {
+            templateUrl: 'views/partials/controls-line.html',
+          },
+          'tabEventlog@projects.details' : {
+            templateUrl: 'views/project/tab-eventlog.html',
+          },
+          'tabResources@projects.details' : {
+            templateUrl: 'views/project/tab-resources.html',
+          },
+          'tabUsers@projects.details' : {
+            templateUrl: 'views/project/tab-users.html',
+          },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',
           },
