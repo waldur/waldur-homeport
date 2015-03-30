@@ -2,12 +2,13 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('ResourceListController', ['resourcesService', ResourceListController]);
+    .controller('ResourceListController', ['$rootScope', 'resourcesService', ResourceListController]);
 
-  function ResourceListController(resourcesService) {
+  function ResourceListController($rootScope, resourcesService) {
     var vm = this;
 
     vm.list = {};
+    vm.service = resourcesService;
 
     // resource operations
     vm.stopResource = stopResource;
@@ -20,14 +21,13 @@
     vm.searchInput = '';
     vm.search = search;
 
-    // pagination
-    vm.pageSizes = [5, 10, 20, 50];
-    vm.currentPageSize = resourcesService.pageSize;
-    vm.pages = resourcesService.pages ? resourcesService.pages : 5;
-    vm.currentPage = resourcesService.page;
-    vm.service = resourcesService;
-
+    // initialization
     getResourceList();
+    // handler
+    $rootScope.$on('currentCustomerUpdated', function () {
+      vm.service.page = 1;
+      getResourceList();
+    });
 
     function getResourceList() {
       resourcesService.getList().then(function(response) {
@@ -98,11 +98,12 @@
 (function() {
   angular.module('ncsaas')
     .controller('ResourceAddController',
-      ['$state', 'resourcesService', 'servicesService', 'projectsService', 'keysService', 'templatesService',
-      ResourceAddController]);
+      ['$rootScope', '$state',
+       'resourcesService', 'servicesService', 'projectsService', 'keysService', 'templatesService',
+        ResourceAddController]);
 
   function ResourceAddController(
-      $state, resourcesService, servicesService, projectsService, keysService, templatesService) {
+      $rootScope, $state, resourcesService, servicesService, projectsService, keysService, templatesService) {
     var vm = this;
 
     // Resource add process:
@@ -130,6 +131,18 @@
     vm.cancel = cancel;
     vm.errors = {};
     vm.selectedProject = null;
+
+    $rootScope.$on('currentCustomerUpdated', function () {
+      vm.showFlavors = false;
+      vm.showTemplates = false;
+      vm.selectedProject = null;
+      vm.serviceList = {};
+      vm.flavorList = {};
+      vm.keyList = {};
+      vm.projectList = {};
+      vm.templateList = {};
+      activate();
+    });
 
     function activate() {
       // projects

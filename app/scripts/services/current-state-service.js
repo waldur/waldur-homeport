@@ -2,37 +2,36 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('currentStateService', ['RawUser', 'RawCustomer', '$q', currentStateService]);
+    .service('currentStateService', ['$q', currentStateService]);
 
-  function currentStateService(RawUser, RawCustomer, $q) {
+  /**
+   * This service contains values of objects, that affect current displayed data.
+   * Notice: CurrentStateService can not make any backend calls. It stores only selected on user-side objects.
+   */
+  function currentStateService($q) {
     /*jshint validthis: true */
     var vm = this;
     vm.getCustomer = getCustomer;
-    vm.getUser = getUser;
     vm.setCustomer = setCustomer;
+    vm.isCustomerDefined = false;
+
     vm.getActiveItem = getActiveItem;
     vm.getBodyClass = getBodyClass;
 
     // private variables:
-    var user, customer;
-
-    function getUser() {
-      if (!user) {
-        user = RawUser.getCurrent();
-      }
-      return user.$promise;
-    }
+    var customer = null;
 
     function getCustomer() {
-      if (!customer) {
-        customer = RawCustomer.getFirst();
-      }
-      return customer.$promise;
+      return customer;
     }
 
     function setCustomer(newCustomer) {
-      customer = newCustomer;
+      vm.isCustomerDefined = true;
+      customer = $q.when(newCustomer);
     }
+
+    // XXX: getActiveItem and getBodyClass methods have to be moved to apps.js for code consistency.
+    // (We decided, that all URL-depended code have to defined near URLs definition)
 
     // Active menuItem
     var urlList = {
