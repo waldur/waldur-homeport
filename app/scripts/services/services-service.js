@@ -9,10 +9,7 @@
     var ServiceClass = baseServiceClass.extend({
       init:function() {
         this._super();
-      },
-      getEndpoint:function() {
-        var endpoint = '/clouds/';
-        return endpoint;
+        this.endpoint = '/clouds/';
       }
     });
     return new ServiceClass();

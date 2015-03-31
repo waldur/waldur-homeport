@@ -16,6 +16,7 @@ module.exports.login = function(user) {
 };
 
 module.exports.logout = function(user) {
+  browser.driver.manage().window().setSize(1600,900);
   browser.get('/#/dashboard/');
 
   element(by.css('li.dropdown.user-box a')).click();

@@ -96,7 +96,7 @@
   function ProjectAddController($state, projectsService, customersService) {
     var vm = this;
 
-    vm.project = projectsService.createProject();
+    vm.project = projectsService.$create();
     vm.customersList = customersService.getCustomersList();
     vm.save = save;
 

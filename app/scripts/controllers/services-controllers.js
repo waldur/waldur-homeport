@@ -7,7 +7,7 @@
   function ServiceListController(servicesService) {
     var vm = this;
 
-    servicesService.getList().then(function(response){
+    servicesService.getList().then(function(response) {
       vm.list = response;
     });
     vm.remove = remove;
