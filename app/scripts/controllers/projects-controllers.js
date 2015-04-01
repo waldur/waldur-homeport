@@ -126,7 +126,10 @@
     var vm = this;
 
     vm.activeTab = 'eventlog';
-    vm.project = projectsService.getProject($stateParams.uuid);
+    vm.project = null;
+    projectsService.$get($stateParams.uuid).then(function(response) {
+      vm.project = response;
+    });
     vm.update = update;
 
     function update() {
