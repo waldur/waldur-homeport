@@ -47,5 +47,5 @@ for(var i = 0; i < testData.length; i++) {
       });
     });
 
-  })(user, data, serviceName);
+  })(user, data);
 }
