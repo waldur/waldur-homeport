@@ -3,8 +3,7 @@ var auth = require('../helpers/auth.js'),
     {
       user: auth.getUser('Walter'),
       auth_url: 'http://keystone.example.com:5000/v2.0',
-      name: 'Service test 1 ' + Math.random(),
-      customer: "Ministry of Bells"
+      name: 'Service test 1 ' + Math.random()
     },
   ];
 
@@ -29,8 +28,6 @@ for(var i = 0; i < testData.length; i++) {
       });
 
       it('I should be able to add new resource', function() {
-        // choose customer
-        element(by.cssContainingText('option', data.customer)).click();
         // fill name
         element(by.model('ServiceAdd.service.name')).sendKeys(data.name);
         // fill auth_url

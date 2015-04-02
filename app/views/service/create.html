@@ -38,9 +38,6 @@
                                 <span class="error error-standard error-small arrow-down label" ng-repeat="error in ServiceAdd.errors.name">{{ error }}</span>
                             </div>
                             <div class="col-xs-4">
-                                <span class="error error-standard error-small arrow-down label" ng-repeat="error in ServiceAdd.errors.customer">{{ error }}</span>
-                            </div>
-                            <div class="col-xs-4">
                                 <span class="error error-standard error-small arrow-down label" ng-repeat="error in ServiceAdd.errors.auth_url">{{ error }}</span>
                             </div>
                         </div>
@@ -48,15 +45,6 @@
                         <div class="row form-field">
                             <div class="col-xs-4">
                                 <input type="text" class="form-control" placeholder="Service Name" data-role="form-input" ng-model="ServiceAdd.service.name">
-                            </div>
-
-                            <div class="col-xs-4">
-                                <div class="custom-select project">
-                                    <select ng-model="ServiceAdd.service.customer" ng-options="customer.url as customer.name for customer in ServiceAdd.custumersList">
-                                        <option value="">Choose customer</option>
-                                    </select>
-                                </div>
-                                <a href="#" class="crud-controls"><i class="fa fa-plus"></i> Add customer</a>
                             </div>
 
                             <div class="col-xs-4">

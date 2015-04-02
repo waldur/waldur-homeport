@@ -28,9 +28,10 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('ServiceAddController', ['servicesService', '$state', 'customersService', ServiceAddController]);
+    .controller('ServiceAddController',
+      ['servicesService', '$state', 'currentStateService', '$rootScope', ServiceAddController]);
 
-  function ServiceAddController(servicesService, $state, customersService) {
+  function ServiceAddController(servicesService, $state, currentStateService, $rootScope) {
     var vm = this;
     vm.service = servicesService.$create();
     vm.save = save;
@@ -39,14 +40,23 @@
     vm.custumersList = {};
 
     function activate() {
-      // customers
-      vm.custumersList = customersService.getCustomersList();
+      currentStateService.getCustomer().then(function(customer) {
+        vm.service.customer = customer.url;
+      });
+      if (vm.service.auth_url || vm.service.name) {
+        if (confirm('All fields will be cleaned!')) {
+          vm.service.auth_url = '';
+          vm.service.name = '';
+        }
+      }
     }
+
+    $rootScope.$on('currentCustomerUpdated', activate);
 
     function save() {
       vm.service.$save(success, error);
 
-      function success(response) {
+      function success() {
         $state.go('services.list');
       }
 
@@ -60,7 +70,7 @@
     }
 
     activate();
-  }
 
+  }
 
 })();
