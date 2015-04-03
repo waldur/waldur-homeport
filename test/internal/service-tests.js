@@ -38,6 +38,8 @@ for(var i = 0; i < testData.length; i++) {
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/services/');
       });
 
+      // TODO add test "I should be able to find added service in service list" when search will be implemented
+
       it('I should be able to logout', function() {
         auth.logout();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/');
