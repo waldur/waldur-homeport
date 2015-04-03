@@ -505,3 +505,9 @@ a.sort {
 .rel-box {
     position: relative;
 } // rel-box
+
+.disabled {
+    opacity: .5 !important;
+    pointer-events: none !important;
+    cursor: not-allowed !important;
+} // disabled
