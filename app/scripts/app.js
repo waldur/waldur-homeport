@@ -132,10 +132,45 @@ angular
 
       .state('services', {
         url: '/services/',
-        templateUrl: 'views/services.html',
+        abstract: true,
+        templateUrl: 'views/service/base.html'
+      })
+
+      .state('services.list', {
+        url: '',
+        views: {
+          'appContent': {
+            templateUrl: 'views/service/list.html'
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html'
+          },
+          'appFooter': {
+            templateUrl: 'views/partials/app-footer.html'
+          }
+        },
         resolve: {
           authenticated: authCheck
         }
+      })
+
+      .state('services.create', {
+        url: 'add/',
+        views: {
+          'appContent': {
+            templateUrl: 'views/service/create.html'
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html'
+          },
+          'appFooter': {
+            templateUrl: 'views/partials/app-footer.html'
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
+        auth: true
       })
 
       .state('profile', {

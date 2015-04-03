@@ -178,7 +178,7 @@
     function setProject(project) {
       vm.resource.project = project.url;
       // services
-      servicesService.getServiceList({project: project.uuid}).then(function(response) {
+      servicesService.getList({project: project.uuid}).then(function(response) {
         vm.serviceList = response;
       });
     }

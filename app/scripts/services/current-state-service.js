@@ -38,7 +38,7 @@
       dashboard: ['dashboard'],
       resources: ['resources.list', 'resources.add'],
       projects: ['projects.list', 'projects.details', 'projects.update', 'projects.create'],
-      services: ['services'],
+      services: ['services.list', 'services.create'],
       users: ['users.list', 'users.details']
     };
 
