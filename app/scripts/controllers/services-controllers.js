@@ -3,14 +3,15 @@
 (function() {
   angular.module('ncsaas')
     .controller('ServiceListController',
-      ['servicesService', 'customerPermissionsService', 'usersService', ServiceListController]);
+      ['$state', 'servicesService', 'customerPermissionsService', 'usersService', ServiceListController]);
 
-  function ServiceListController(servicesService, customerPermissionsService, usersService) {
+  function ServiceListController($state, servicesService, customerPermissionsService, usersService) {
     var vm = this;
 
-    vm.list = servicesService.getServiceList();
+    servicesService.getList().then(function(response) {
+      vm.list = response;
+    });
     vm.remove = remove;
-    vm.canUserAddService = null;
 
     function activate() {
       // init canUserAddService
@@ -41,3 +42,52 @@
 
 })();
 
+(function() {
+  angular.module('ncsaas')
+    .controller('ServiceAddController',
+      ['servicesService', '$state', 'currentStateService', '$rootScope', ServiceAddController]);
+
+  function ServiceAddController(servicesService, $state, currentStateService, $rootScope) {
+    var vm = this;
+    vm.service = servicesService.$create();
+    vm.save = save;
+    vm.cancel = cancel;
+    vm.projectList = {};
+    vm.custumersList = {};
+
+    function activate() {
+      currentStateService.getCustomer().then(function(customer) {
+        vm.service.customer = customer.url;
+      });
+      /*jshint camelcase: false */
+      if (vm.service.auth_url || vm.service.name) {
+        if (confirm('Clean all fields?')) {
+          vm.service.auth_url = '';
+          vm.service.name = '';
+        }
+      }
+    }
+
+    $rootScope.$on('currentCustomerUpdated', activate);
+
+    function save() {
+      vm.service.$save(success, error);
+
+      function success() {
+        $state.go('services.list');
+      }
+
+      function error(response) {
+        vm.errors = response.data;
+      }
+    }
+
+    function cancel() {
+      $state.go('services.list');
+    }
+
+    activate();
+
+  }
+
+})();

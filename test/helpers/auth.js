@@ -6,7 +6,7 @@ module.exports.getUser = function(name) {
 };
 
 module.exports.login = function(user) {
-  browser.driver.manage().window().maximize();
+  browser.driver.manage().window().setSize(1600, 900);
   browser.get('/#/login/');
 
   element(by.css('div.login-form a[data-role="switch-login-form"]')).click();
