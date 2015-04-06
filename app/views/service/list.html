@@ -21,7 +21,10 @@
                                 </div>
                             </li>
                         </ul>
-                        <div class="crud-box pull-right"><a ui-sref="services.create" class="crud-controls"><i class="fa fa-plus"></i> Add service</a></div>
+                        <div class="crud-box pull-right" ng-class="{'disabled': !serviceList.canUserAddService}">
+                            <a ui-sref="services.create" class="crud-controls" ng-show="serviceList.canUserAddService"><i class="fa fa-plus"></i>Add service</a>
+                            <div ng-show="!serviceList.canUserAddService"><i class="fa fa-plus"></i>Add service</a></div>
+                        </div>
                     </div>
                 </div>
             </div>

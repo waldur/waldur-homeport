@@ -2,15 +2,31 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('ServiceListController', ['servicesService', ServiceListController]);
+    .controller('ServiceListController',
+      ['$state', 'servicesService', 'customerPermissionsService', 'usersService', ServiceListController]);
 
-  function ServiceListController(servicesService) {
+  function ServiceListController($state, servicesService, customerPermissionsService, usersService) {
     var vm = this;
 
     servicesService.getList().then(function(response) {
       vm.list = response;
     });
     vm.remove = remove;
+
+    function activate() {
+      // init canUserAddService
+      usersService.getCurrentUser().then(function(user) {
+        /*jshint camelcase: false */
+        if (user.is_staff) {
+          vm.canUserAddService = true;
+        }
+        customerPermissionsService.getList({username: user.username}).then(function(permissions) {
+          if (permissions.length !== 0) {
+            vm.canUserAddService = (permissions[0].role === 'owner');
+          }
+        });
+      });
+    }
 
     function remove(service) {
       var index = vm.list.indexOf(service);
@@ -20,7 +36,7 @@
       });
     }
 
-
+    activate();
 
   }
 
@@ -43,8 +59,9 @@
       currentStateService.getCustomer().then(function(customer) {
         vm.service.customer = customer.url;
       });
+      /*jshint camelcase: false */
       if (vm.service.auth_url || vm.service.name) {
-        if (confirm('All fields will be cleaned!')) {
+        if (confirm('Clean all fields?')) {
           vm.service.auth_url = '';
           vm.service.name = '';
         }

@@ -1,9 +1,42 @@
 var auth = require('../helpers/auth.js'),
-  testData = [
+  helpers = require('../helpers/helpers.js'),
+  users = [auth.getUser('Charlie'), auth.getUser('Dave')];
+
+for(var i=0; i < users.length; i++) {
+  var user = users[i];
+
+  (function(user) {
+    describe('Test ' + user.username + ' can not go to "service add" page:', function() {
+
+      it('I should be able to login', function() {
+        auth.login(user);
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/dashboard/');
+      });
+
+      it('I should be able to go to services list', function() {
+        element(by.cssContainingText('ul.nav li a', 'Services')).click();
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/services/');
+      });
+
+      it('"Add service" should be disabled', function() {
+        expect(element(by.cssContainingText('div.disabled', 'Add service')).isPresent()).toBe(true);
+      });
+
+      it('I should be able to logout', function() {
+        auth.logout();
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/');
+      });
+    });
+  })(user);
+
+}
+
+/*jshint camelcase: false */
+var testData = [
     {
-      user: auth.getUser('Walter'),
+      user: auth.getUser('Bob'),
       auth_url: 'http://keystone.example.com:5000/v2.0',
-      name: 'Service test 1 ' + Math.random()
+      name: 'Service test 1 ' + helpers.getUUID()
     },
   ];
 
@@ -12,11 +45,16 @@ for(var i = 0; i < testData.length; i++) {
     user = data.user;
 
   (function(user, data) {
-    describe('Service creation test for administrator(' + user.username + '):', function() {
+    describe('Service creation test for customer owner(' + user.username + '):', function() {
 
       it('I should be able to login', function() {
         auth.login(user);
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/dashboard/');
+      });
+
+      it('I should be able to go to services list', function() {
+        element(by.cssContainingText('ul.nav li a', 'Services')).click();
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/services/');
       });
 
       it('I should be able to go to "service add" page', function() {
@@ -44,6 +82,7 @@ for(var i = 0; i < testData.length; i++) {
         auth.logout();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/');
       });
+
     });
 
   })(user, data);
