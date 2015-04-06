@@ -3,16 +3,21 @@
 (function() {
   angular.module('ncsaas')
     .controller('ProfileController',
-      ['$rootScope', 'usersService', 'customersService', 'projectsService', ProfileController]);
+      ['usersService', 'customersService', 'projectsService', ProfileController]);
 
-  function ProfileController($rootScope, usersService, customersService, projectsService) {
+  function ProfileController(usersService, customersService, projectsService) {
     var vm = this;
 
     vm.activeTab = 'eventlog';
+    vm.user = {};
+    vm.customers = {};
+    vm.projects = {};
 
     vm.user = usersService.getCurrentUserWithKeys();
     vm.customers = customersService.getCustomersList();
-    vm.projects = projectsService.getProjectList();
+    projectsService.getList().then(function(response) {
+      vm.projects = response;
+    });
 
   }
 
