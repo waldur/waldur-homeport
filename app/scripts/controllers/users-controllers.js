@@ -36,7 +36,7 @@
   function UserDetailUpdateController($stateParams, $rootScope, usersService) {
     var vm = this;
 
-    vm.activeTab = 'resources';
+    vm.activeTab = 'eventlog';
     vm.user = usersService.getUser($stateParams.uuid);
     vm.update = update;
 
