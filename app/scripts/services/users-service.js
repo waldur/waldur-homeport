@@ -48,6 +48,9 @@
               method: 'GET',
               transformResponse: function(data) {return angular.fromJson(data)[0];},
               params: {current:''}
+          },
+          update: {
+            method: 'PUT'
           }
         }
       );

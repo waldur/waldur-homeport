@@ -22,3 +22,35 @@
   }
 
 })();
+
+
+(function() {
+  angular.module('ncsaas')
+    .controller('UpdateProfileController', ['usersService', '$state', UpdateProfileController]);
+
+  function UpdateProfileController(usersService, $state) {
+    var vm = this;
+
+    vm.user = {};
+    vm.errors = {};
+    vm.update = update;
+
+    usersService.getCurrentUser().then(function(response) {
+      vm.user = response;
+    });
+
+    function update() {
+      vm.user.$update(success, error);
+
+      function success() {
+        $state.go('profile.details');
+      }
+
+      function error(response) {
+        vm.errors = response.data;
+      }
+    }
+
+  }
+
+})();
