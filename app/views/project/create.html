@@ -64,6 +64,28 @@
                                     <a href="#" class="crud-controls"><i class="fa fa-plus"></i> add customer</a>
                                 </div>
                             </div>
+                            <div class="row form-field">
+                                <div class="col-xs-4">
+                                    <angucomplete-alt placeholder="Select users"
+                                                      pause="100"
+                                                      selected-object="controller.selectedUsersCallback"
+                                                      local-data="controller.users"
+                                                      search-fields="full_name"
+                                                      title-field="full_name"
+                                                      minlength="1"
+                                                      input-changed="controller.userSearchInputChanged"
+                                                      clear-selected="true"
+                                                      input-class="form-control form-control-small"/>
+                                </div>
+
+                                <div class="col-xs-4">
+                                    <ul>
+                                        <li ng-repeat="user in controller.selectedUsers">
+                                            <span>{{user.full_name}}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                             <div class="row form-field description">
                                 <div class="col-xs-4 col-xs-offset-4">
                                     <div class="gray-text">
