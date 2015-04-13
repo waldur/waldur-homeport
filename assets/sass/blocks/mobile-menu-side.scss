@@ -1,5 +1,4 @@
 .mobile-menu-side {
-    display: none;
     width: 85%;
     height: calc(100% - 50px);
     box-sizing: border-box;
@@ -14,4 +13,13 @@
             display: block;
         } // &.active
     } // xs
+    @include bp(sm) {
+        display: none;
+    } // sm
+    @include bp(md) {
+        display: none;
+    } // md
+    @include bp(lg) {
+        display: none;
+    } // lg
 } // mobile-menu-side

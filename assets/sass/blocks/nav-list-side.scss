@@ -33,20 +33,22 @@
                 color: white;
                 background-color: #76AE2C;
                 position: relative;
-                &:after {
-                    z-index: 12;
-                    content: '';
-                    display: block;
-                    position: absolute;
-                    bottom: -10px;
-                    left: 50%;
-                    margin-left: -12px;
-                    width: 0;
-                    height: 0;
-                    border-style: solid;
-                    border-width: 10px 12px 0 12px;
-                    border-color: #76ae2c transparent transparent transparent;
-                } // &:after
+                &.drop-active {
+                    &:after {
+                        z-index: 12;
+                        content: '';
+                        display: block;
+                        position: absolute;
+                        bottom: -10px;
+                        left: 50%;
+                        margin-left: -12px;
+                        width: 0;
+                        height: 0;
+                        border-style: solid;
+                        border-width: 10px 12px 0 12px;
+                        border-color: #76ae2c transparent transparent transparent;
+                    } // &:after
+                } // &.drop-active
             } // &.active
             &.logo {
                 @include property(width, 50);

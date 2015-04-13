@@ -1,109 +1,213 @@
-<!-- app-header -->
-<header class="app-header" ng-controller="HeaderController as controller">
-    <nav class="container">
-        <!-- views nav -->
-        <ul class="nav-list views">
-            <li class="logo-box">
-                <a href="" class="logo"></a>
-            </li>
-            <li class="mobile-trigger">
-                <a href="#" class="mobile-trigger-link icon bars"></a>
-            </li>
-            <li class="node-conductor">
-                <h2>node-conductor</h2>
-            </li>
-            <li>
-                <a ui-sref="resources.list"
-                    ng-class="{'active': controller.menuItemActive === 'resources'}" class="resource">Resources</a>
-            </li>
-            <li>
-                <a ui-sref="projects.list"
-                    ng-class="{'active': controller.menuItemActive === 'projects'}" class="project">Projects</a>
-            </li>
-            <li>
-                <a ui-sref="services.list"
-                    ng-class="{'active': controller.menuItemActive === 'services'}" class="service">Services</a>
-            </li>
-            <li>
-                <a ui-sref="users.list.show"
-                    ng-class="{'active': controller.menuItemActive === 'users'}" class="user">Users</a>
-            </li>
-        </ul>
-        <!-- /views nav -->
-        <!-- context nav -->
-        <ul class="nav-list context">
-            <li class="dropdown add-something">
-                <a class="drop-active" ng-click="controller.menuToggle('addSomethingMenu', $event)"
-                    ng-class="{'active': controller.menuState.addSomethingMenu}">
-                    <span class="icon plus"></span>
-                </a>
-                <ul class="nav-sublist" ng-show="controller.menuState.addSomethingMenu">
-                    <li>
-                        <a ui-sref="service-add" class="service">Add service</a>
-                    </li>
-                    <li>
-                        <a ui-sref="projects.create" class="project">Add project</a>
-                    </li>
-                    <li>
-                        <a ui-sref="resources.create" class="resource">Add resource</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="dropdown customers">
-                <a class="customer-context drop-active" ng-click="controller.menuToggle('customerMenu', $event)"
-                    ng-class="{'active': controller.menuState.customerMenu}">
-                    <span class="customer-name">{{ controller.currentCustomer.name }}</span>
-                    <span class="active-context">Active for context</span>
-                </a>
-                <ul class="nav-sublist" ng-show="controller.menuState.customerMenu">
-                    <li ng-repeat="customer in controller.customers">
-                        <a ng-click="controller.setCurrentCustomer(customer)"
-                            ng-class="{'current': customer.uuid == controller.currentCustomer.uuid}">{{ customer.name }}</a>
-                    </li>
-                    <li>
-                        <a ui-sref="customers.list" class="manage">Manage customers</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="dropdown">
-                <a class="user-area drop-active" ng-click="controller.menuToggle('profileMenu', $event)"
-                    ng-class="{'active': controller.menuState.profileMenu}">
-                    <span class="avatar">
-                        <img src="/static/images/user-avatar.jpg" alt="" class="avatar-img">
-                    </span>
-                    <span class="user-name">{{ controller.currentUser.full_name }}</span>
-                </a>
-                <ul class="nav-sublist user-area" ng-show="controller.menuState.profileMenu">
-                    <li class="on-tablet">
-                        <a ui-sref="service-add" class="service">Add service</a>
-                    </li>
-                    <li class="on-tablet">
-                        <a ui-sref="projects.create" class="project">Add project</a>
-                    </li>
-                    <li class="on-tablet">
-                        <a ui-sref="resources.create" class="resource">Add resource</a>
-                    </li>
-                    <li class="divider on-tablet"></li>
+<div ng-controller="HeaderController as controller">
+    <!-- app-header -->
+    <header class="app-header">
+        <nav class="container">
+            <!-- views nav -->
+            <ul class="nav-list views">
+                <li class="logo-box">
+                    <a href="" class="logo"></a>
+                </li>
+                <li class="mobile-trigger">
+                    <a class="mobile-trigger-link icon bars"
+                        ng-click="controller.mobileMenu()"></a>
+                </li>
+                <li class="node-conductor">
+                    <h2>node-conductor</h2>
+                </li>
+                <li>
+                    <a ui-sref="resources.list"
+                        ng-class="{'active': controller.menuItemActive === 'resources'}" class="resource">Resources</a>
+                </li>
+                <li>
+                    <a ui-sref="projects.list"
+                        ng-class="{'active': controller.menuItemActive === 'projects'}" class="project">Projects</a>
+                </li>
+                <li>
+                    <a ui-sref="services.list"
+                        ng-class="{'active': controller.menuItemActive === 'services'}" class="service">Services</a>
+                </li>
+                <li>
+                    <a ui-sref="users.list.show"
+                        ng-class="{'active': controller.menuItemActive === 'users'}" class="user">Users</a>
+                </li>
+            </ul>
+            <!-- /views nav -->
+            <!-- context nav -->
+            <ul class="nav-list context">
+                <li class="dropdown add-something">
+                    <a class="drop-active" ng-click="controller.menuToggle('addSomethingMenu', $event)"
+                        ng-class="{'active': controller.menuState.addSomethingMenu}">
+                        <span class="icon plus"></span>
+                    </a>
+                    <ul class="nav-sublist" ng-show="controller.menuState.addSomethingMenu">
+                        <li>
+                            <a ui-sref="service-add" class="service">Add service</a>
+                        </li>
+                        <li>
+                            <a ui-sref="projects.create" class="project">Add project</a>
+                        </li>
+                        <li>
+                            <a ui-sref="resources.create" class="resource">Add resource</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown customers">
+                    <a class="customer-context drop-active" ng-click="controller.menuToggle('customerMenu', $event)"
+                        ng-class="{'active': controller.menuState.customerMenu}">
+                        <span class="customer-name">{{ controller.currentCustomer.name }}</span>
+                        <span class="active-context">Active for context</span>
+                    </a>
+                    <ul class="nav-sublist" ng-show="controller.menuState.customerMenu">
+                        <li ng-repeat="customer in controller.customers">
+                            <a ng-click="controller.setCurrentCustomer(customer)"
+                                ng-class="{'current': customer.uuid == controller.currentCustomer.uuid}">{{ customer.name }}</a>
+                        </li>
+                        <li>
+                            <a ui-sref="customers.list" class="manage">Manage customers</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="user-area drop-active" ng-click="controller.menuToggle('profileMenu', $event)"
+                        ng-class="{'active': controller.menuState.profileMenu}">
+                        <span class="avatar">
+                            <img src="/static/images/user-avatar.jpg" alt="" class="avatar-img">
+                        </span>
+                        <span class="user-name">{{ controller.currentUser.full_name }}</span>
+                    </a>
+                    <ul class="nav-sublist user-area" ng-show="controller.menuState.profileMenu">
+                        <li class="on-tablet">
+                            <a ui-sref="service-add" class="service">Add service</a>
+                        </li>
+                        <li class="on-tablet">
+                            <a ui-sref="projects.create" class="project">Add project</a>
+                        </li>
+                        <li class="on-tablet">
+                            <a ui-sref="resources.create" class="resource">Add resource</a>
+                        </li>
+                        <li class="divider on-tablet"></li>
 
-                    <li class="on-tablet" ng-repeat="customer in controller.customers">
-                        <a ng-click="controller.setCurrentCustomer(customer)"
-                            ng-class="{'current': customer.uuid == controller.currentCustomer.uuid}">{{ customer.name }}</a>
-                    </li>
-                    <li class="divider on-tablet"></li>
-                    <li class="on-tablet">
-                        <a ui-sref="customers.list" class="manage">Manage customers</a>
-                    </li>
-                    <li class="divider on-tablet"></li>
-                    <li>
-                        <a ui-sref="profile" class="">Profile</a>
-                    </li>
-                    <li>
-                        <a ng-click="logout()">Logout</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-        <!-- /context nav -->
-    </nav>
-</header>
-<!-- app-footer -->
+                        <li class="on-tablet" ng-repeat="customer in controller.customers">
+                            <a ng-click="controller.setCurrentCustomer(customer)"
+                                ng-class="{'current': customer.uuid == controller.currentCustomer.uuid}">{{ customer.name }}</a>
+                        </li>
+                        <li class="divider on-tablet"></li>
+                        <li class="on-tablet">
+                            <a ui-sref="customers.list" class="manage">Manage customers</a>
+                        </li>
+                        <li class="divider on-tablet"></li>
+                        <li>
+                            <a ui-sref="profile" class="">Profile</a>
+                        </li>
+                        <li>
+                            <a ng-click="logout()">Logout</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- /context nav -->
+        </nav>
+    </header>
+    <!-- app-header -->
+    <div class="mobile-menu-side" ng-show="controller.showMobileMenu">
+        <nav>
+            <!-- views nav -->
+            <ul class="nav-list-side">
+                <li>
+                    <a ui-sref="resources.list"
+                        ng-class="{'active': controller.menuItemActive === 'resources'}" class="resource">Resources</a>
+                </li>
+                <li>
+                    <a ui-sref="projects.list"
+                        ng-class="{'active': controller.menuItemActive === 'projects'}" class="project">Projects</a>
+                </li>
+                <li>
+                    <a ui-sref="services.list"
+                        ng-class="{'active': controller.menuItemActive === 'services'}" class="service">Services</a>
+                </li>
+                <li>
+                    <a ui-sref="users.list.show"
+                        ng-class="{'active': controller.menuItemActive === 'users'}" class="user">Users</a>
+                </li>
+            </ul>
+            <!-- /views nav -->
+            <!-- context nav -->
+            <ul class="nav-list-side">
+                <li class="dropdown add-something">
+                    <a class="drop-active" ng-click="controller.menuToggle('addSomethingMenu', $event)"
+                        ng-class="{'active': controller.menuState.addSomethingMenu}">
+                        <span class="icon plus"></span> Add something
+                    </a>
+                    <ul class="nav-sublist-side" ng-show="controller.menuState.addSomethingMenu">
+                        <li>
+                            <a href="" class="service">Add service</a>
+                        </li>
+                        <li>
+                            <a href="" class="project">Add project</a>
+                        </li>
+                        <li>
+                            <a href="" class="resource">Add resource</a>
+                        </li>
+                        <li>
+                            <a href="" class="user">Invite user</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown customers side">
+                    <a class="customer-context drop-active" ng-click="controller.menuToggle('customerMenu', $event)"
+                        ng-class="{'active': controller.menuState.customerMenu}">
+                        <span class="customer-name">{{ controller.currentCustomer.name }}</span>
+                        <span class="active-context">Active for context</span>
+                    </a>
+                    <ul class="nav-sublist-side" ng-show="controller.menuState.customerMenu">
+                        <li ng-repeat="customer in controller.customers">
+                            <a ng-click="controller.setCurrentCustomer(customer)"
+                                ng-class="{'current': customer.uuid == controller.currentCustomer.uuid}">{{ customer.name }}</a>
+                        </li>
+                        <li>
+                            <a ui-sref="customers.list" class="manage">Manage customers</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="" class="user-area drop-active" ng-click="controller.menuToggle('profileMenu', $event)"
+                        ng-class="{'active': controller.menuState.profileMenu}">
+                        <span class="avatar">
+                            <img src="/static/images/user-avatar.jpg" alt="" class="avatar-img">
+                        </span>
+                        <span class="user-name">Michael Yakimenko</span>
+                    </a>
+                    <ul class="nav-sublist-side user-area" ng-show="controller.menuState.profileMenu">
+                        <li class="on-tablet">
+                            <a ui-sref="service-add" class="service">Add service</a>
+                        </li>
+                        <li class="on-tablet">
+                            <a ui-sref="projects.create" class="project">Add project</a>
+                        </li>
+                        <li class="on-tablet">
+                            <a ui-sref="resources.create" class="resource">Add resource</a>
+                        </li>
+                        <li class="divider on-tablet"></li>
+
+                        <li class="on-tablet" ng-repeat="customer in controller.customers">
+                            <a ng-click="controller.setCurrentCustomer(customer)"
+                                ng-class="{'current': customer.uuid == controller.currentCustomer.uuid}">{{ customer.name }}</a>
+                        </li>
+                        <li class="divider on-tablet"></li>
+                        <li class="on-tablet">
+                            <a ui-sref="customers.list" class="manage">Manage customers</a>
+                        </li>
+                        <li class="divider on-tablet"></li>
+                        <li>
+                            <a ui-sref="profile" class="">Profile</a>
+                        </li>
+                        <li>
+                            <a ng-click="logout()">Logout</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- /context nav -->
+        </nav>
+    </div>
+</div>
