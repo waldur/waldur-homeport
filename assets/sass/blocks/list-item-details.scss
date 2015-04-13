@@ -1,0 +1,35 @@
+.list-item-details {
+    display: none;
+    background-color: #F2F2F2;
+    @include property(padding, 10);
+    @include property(padding-left, 50);
+    @include property(font-size, 16);
+    &.opened {
+        display: block;
+    } // &.opened
+    > section {
+        + section {
+            @include property(margin-top, 10);
+            @include property(padding-top, 10);
+            border-top: 1px solid rgb(205, 205, 205);
+        }
+        > ul {
+            @include clear-list;
+            > li {
+                &:nth-child(1) {
+                    @include property(margin-bottom, 10);
+                } // &:nth-child(1)
+            } // li
+        } // > ul
+        .item-list {
+            @include table;
+            > section {
+                @include table-cell;
+            }
+            a {
+                text-decoration: none;
+                color: #444;
+            } // a
+        } // item-list
+    } // > *
+} // list-item-details

@@ -1,0 +1,24 @@
+.search-box {
+    @include inline-middle;
+    @include clearfix;
+    input[type=text] {
+        width: calc(120px - 35px);
+        outline: none;
+        float: left;
+        // @include property(margin-top, 3);
+        @include transition(all, 0.4s, ease);
+        &:focus {
+            width: 200px;
+        }
+    } // input[type=text]
+    .search-button {
+        float: left;
+        background: none;
+        color: #000;
+        @include property(margin-left, 10);
+        &:before {
+            @include icon-fa;
+            content: '\f002';
+        } // &:before
+    } // search-button
+} // search-box

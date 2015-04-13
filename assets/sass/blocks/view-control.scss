@@ -1,0 +1,21 @@
+.view-control {
+    @include property(margin, 20 60);
+    // @include property(padding, 20);
+    .view-action-buttons {
+        @include bp(xs) {
+            display: none;
+        } // xs
+        @include bp(sm) {
+            display: none;
+        } // sm
+    } // view-action-buttons
+    .view-action-buttons-mobile {
+        display: none;
+        @include bp(xs) {
+            @include inline-middle;
+        } // xs
+        @include bp(sm) {
+            @include inline-middle;
+        } // sm
+    } // view-action-buttons
+} // view-control

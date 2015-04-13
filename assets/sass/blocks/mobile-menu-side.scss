@@ -1,0 +1,17 @@
+.mobile-menu-side {
+    display: none;
+    width: 85%;
+    height: calc(100% - 50px);
+    box-sizing: border-box;
+    overflow-y: scroll;
+    position: fixed;
+    @include property(top, 50);
+    background-color: rgb(200, 236, 152);
+    z-index: 14;
+    box-shadow: 3px 0px 4px 0px rgba(0,0,0,0.32);
+    @include bp(xs) {
+        &.active {
+            display: block;
+        } // &.active
+    } // xs
+} // mobile-menu-side

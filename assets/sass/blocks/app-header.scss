@@ -1,0 +1,9 @@
+.app-header {
+    background-color: #9ECF5D;
+    position: relative;
+    z-index: 22;
+    width: 100%;
+    @include property(height, 50);
+    position: fixed;
+    top: 0;
+} // app-header

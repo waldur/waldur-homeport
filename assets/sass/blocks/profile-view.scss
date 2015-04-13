@@ -1,0 +1,17 @@
+.profile-view {
+    @include table;
+    @include property(padding, 40 60);
+    background-color: white;
+    > section {
+        @include table-cell;
+        @include property(padding, 0 10);
+        &.avatar {
+            @include property(width, 80);
+        } // &.avatar
+        &.content {} // &.content
+        &.actions {
+            text-align: right;
+            @include property(width, 120);
+        } // &.actions
+    } // > section
+} // profile-view

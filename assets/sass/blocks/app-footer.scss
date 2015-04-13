@@ -1,0 +1,15 @@
+.app-footer {
+    background-color: #565656;
+    color: white;
+    @include property(font-size, 15);
+    a {
+        color: white;
+    } // a
+    .copy {
+        float: left;
+    } // copy
+    .footer-nav {
+        float: right;
+        @include clear-list-inline;
+    } // footer-nav
+} // app-footer
