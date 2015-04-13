@@ -33,7 +33,7 @@
         <!-- context nav -->
         <ul class="nav-list context">
             <li class="dropdown add-something">
-                <a ng-click="controller.menuToggle('addSomethingMenu', $event)"
+                <a class="drop-active" ng-click="controller.menuToggle('addSomethingMenu', $event)"
                     ng-class="{'active': controller.menuState.addSomethingMenu}">
                     <span class="icon plus"></span>
                 </a>
@@ -50,7 +50,7 @@
                 </ul>
             </li>
             <li class="dropdown customers">
-                <a class="customer-context" ng-click="controller.menuToggle('customerMenu', $event)"
+                <a class="customer-context drop-active" ng-click="controller.menuToggle('customerMenu', $event)"
                     ng-class="{'active': controller.menuState.customerMenu}">
                     <span class="customer-name">{{ controller.currentCustomer.name }}</span>
                     <span class="active-context">Active for context</span>
@@ -66,7 +66,8 @@
                 </ul>
             </li>
             <li class="dropdown">
-                <a class="user-area" ng-click="controller.menuToggle('profileMenu', $event)">
+                <a class="user-area drop-active" ng-click="controller.menuToggle('profileMenu', $event)"
+                    ng-class="{'active': controller.menuState.profileMenu}">
                     <span class="avatar">
                         <img src="/static/images/user-avatar.jpg" alt="" class="avatar-img">
                     </span>
