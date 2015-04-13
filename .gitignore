@@ -26,6 +26,7 @@ bower_components
 prototype
 
 # css
+assets-old/css
 assets/css
 app/static/css/*
 app/static/css/style.min.css
