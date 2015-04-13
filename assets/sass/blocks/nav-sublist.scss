@@ -1,5 +1,4 @@
 .nav-sublist {
-    display: none;
     @include clear-list;
     @include property(top, 50);
     @include property(width, 180);
@@ -18,13 +17,11 @@
             margin-left: 0;
             left: auto;
             right: 0;
-            width: 100%;
         } // md
         @include bp(lg) {
             margin-left: 0;
             left: auto;
             right: 0;
-            width: 100%;
         } // lg
     } // &.user-area
     > li {
