@@ -1,0 +1,76 @@
+.appstore-templates {
+    display: flex;
+    flex-wrap: wrap-reverse;
+    margin-left: -10px;
+    margin-right: -10px;
+    .appstore-template {
+        border-radius: 3px;
+        width: calc(33.3333% - 20px);
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        margin: 10px;
+        border: 1px solid rgb(202, 202, 202);
+        position: relative;
+        cursor: pointer;
+        @include bp(xs) {
+            width: calc(100% - 20px);
+        } // xs
+        @include bp(sm) {
+            width: calc(100% - 20px);
+        } // sm
+        &.state {
+            border: 1px solid rgb(62, 171, 84);
+            &:after {
+                // content: '\f058';
+                content: '\f00c';
+                font-family: FontAwesome;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                font-size: rem(20);
+                text-align: center;
+                background-color: rgb(62, 171, 84);
+                color: #fff;
+                width: 26px;
+                height: 26px;
+                border-radius: 100%;
+                position: absolute;
+                right: -10px;
+                top: -10px;
+            } // &:after
+        } // &.state
+        .icon {
+            // display: flex;
+            width: 80px;
+            text-align: center;
+        } // icon
+        .description {
+            // display: flex;
+            width: calc(100% - 80px);
+            box-sizing: border-box;
+            padding-left: 10px;
+            h3 {
+                margin: 0;
+                font-size: rem(18);
+            } // h3
+            article {
+                margin: 0;
+                line-height: 1.2;
+                ul {
+                    @include clear-list;
+                    li + li {
+                        margin-top: 10px;
+                    } // li + li
+                    &.hardware {
+                        [class^="flaticon-"] {
+                            margin-right: 10px;
+                            &:before {
+                                font-size: rem(16);
+                            } // &:before
+                        } // [class^="flaticon-"]
+                    } // &.hardware
+                } // ul
+            } // article
+        } // description
+    } // appstore-template
+} // appstore-templates
