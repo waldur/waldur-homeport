@@ -60,6 +60,12 @@
     &.active, &:active, &:hover {
         background-color: rgb(223, 223, 223);
     } // &.active, &:active, &:hover
+    &.start {} // &.start
+    &.restart {} // &.restart
+    &.stop {} // &.stop
+    &.remove {
+        color: #e74c3c;
+    } // &.remove
 } // button-simple
 
 .list-sort {

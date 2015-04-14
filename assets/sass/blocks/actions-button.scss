@@ -1,7 +1,6 @@
 .actions-button {
     position: relative;
     ul.actions-dropdown {
-        display: none;
         @include clear-list;
         position: absolute;
         z-index: 10;

@@ -1,3 +1,13 @@
+.status {
+    color: silver;
+    &.online {
+        color: #6abb6a;
+    } // online
+    &.offline {
+        color: #e74c3c;
+    } // offline
+} // status
+
 .status-circle {
     display: none;
     @include property(width, 12);
@@ -8,15 +18,13 @@
     position: relative;
     @include property(left, 5);
     @include property(top, -1);
+    background-color: silver;
     &.online {
         background-color: #6abb6a;
     } // online
     &.offline {
         background-color: #e74c3c;
     } // offline
-    &.other {
-        background-color: #bdc3c7;
-    } // other
     @include bp(xs) {
         @include inline-middle;
     } // xs
