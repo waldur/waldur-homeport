@@ -7,6 +7,7 @@
     /**
      * Use controllerScope.__proto__ = new Controller() in needed controller
      * use this.controllerScope for changes in event handler
+     * sеt events in this._signals
      */
     var ControllerListClass = Class.extend({
       list: {},
@@ -14,10 +15,12 @@
       pages: null,
       searchInput: '',
       searchFieldName: '', // required in init
-      controllerScope: null,
+      controllerScope: null, // required in init
+      _signals: {},
 
       init:function() {
-        this.eventsHandler();
+        this.setSignals();
+        this.registerEventHandlers();
         this.getList();
       },
       getList:function(filter) {
@@ -52,12 +55,18 @@
           alert(message);
         }
       },
-      eventsHandler: function() {
+      setSignals: function() {
         var vm = this.controllerScope;
-        $rootScope.$on('currentCustomerUpdated', function() {
+        this._signals.currentCustomerUpdated = function() {
           vm.service.page = 1;
           vm.getList();
-        });
+        };
+        return vm;
+      },
+      registerEventHandlers: function() {
+        for (var eventName in this._signals) {
+          $rootScope.$on(eventName, this._signals[eventName]);
+        }
       }
     });
 
@@ -69,23 +78,27 @@
 (function(){
 
   angular.module('ncsaas')
-    .service('baseControllerAddClass', ['$state', baseControllerAddClass]);
+    .service('baseControllerAddClass', ['$state', '$rootScope', baseControllerAddClass]);
 
-  function baseControllerAddClass($state) {
+  function baseControllerAddClass($state, $rootScope) {
     /**
      * Use controllerScope.__proto__ = new Controller() in needed controller
      * use this.controllerScope for changes in event handler
+     * sеt events in this._signals
      */
     var ControllerAddClass = Class.extend({
       service: null, // required in init
       instance: null,
       listState: null, // required in init
       errors: {},
+      _signals: {},
+      controllerScope: null, // required in init
 
       init:function() {
         this.instance = this.service.$create();
         this.activate();
-        this.eventsHandler();
+        this.setSignals();
+        this.registerEventHandlers();
       },
       save:function() {
         var vm = this;
@@ -102,7 +115,14 @@
         $state.go(vm.listState);
       },
       activate: function() {},
-      eventsHandler: function() {}
+      setSignals: function() {
+        return this.controllerScope;
+      },
+      registerEventHandlers: function() {
+        for (var eventName in this._signals) {
+          $rootScope.$on(eventName, this._signals[eventName]);
+        }
+      }
     });
 
     return ControllerAddClass;

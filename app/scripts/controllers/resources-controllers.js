@@ -51,12 +51,11 @@
 (function() {
   angular.module('ncsaas')
     .controller('ResourceAddController',
-    ['$rootScope','resourcesService',
-      'servicesService', 'projectsService', 'keysService', 'templatesService', 'baseControllerAddClass',
+    ['resourcesService', 'servicesService', 'projectsService', 'keysService', 'templatesService', 'baseControllerAddClass',
       ResourceAddController]);
 
   function ResourceAddController(
-    $rootScope, resourcesService, servicesService, projectsService, keysService, templatesService, baseControllerAddClass) {
+    resourcesService, servicesService, projectsService, keysService, templatesService, baseControllerAddClass) {
     var controllerScope = this;
     var ResourceController = baseControllerAddClass.extend({
       showFlavors: false,
@@ -71,6 +70,7 @@
 
       init:function() {
         this.service = resourcesService;
+        this.controllerScope = controllerScope;
         this._super();
         this.listState = 'resources.list';
         this.resource = this.instance;
@@ -84,20 +84,6 @@
         // keys
         keysService.getCurrentUserKeyList().then(function(response) {
           vm.keyList = response;
-        });
-      },
-      eventsHandler:function() {
-        var vm = controllerScope;
-        $rootScope.$on('currentCustomerUpdated', function() {
-          vm.showFlavors = false;
-          vm.showTemplates = false;
-          vm.selectedProject = null;
-          vm.serviceList = {};
-          vm.flavorList = {};
-          vm.keyList = {};
-          vm.projectList = {};
-          vm.templateList = {};
-          vm.activate();
         });
       },
       setService:function(service) {
@@ -131,6 +117,20 @@
         } else {
           vm.serviceList = {};
         }
+      },
+      setSignals: function() {
+        var vm = this._super();
+        this._signals.currentCustomerUpdated = function() {
+          vm.showFlavors = false;
+          vm.showTemplates = false;
+          vm.selectedProject = null;
+          vm.serviceList = {};
+          vm.flavorList = {};
+          vm.keyList = {};
+          vm.projectList = {};
+          vm.templateList = {};
+          vm.activate();
+        };
       }
     });
 
