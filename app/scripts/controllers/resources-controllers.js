@@ -8,7 +8,6 @@
     var controllerScope = this;
     var ResourceController = baseControllerListClass.extend({
       init:function() {
-        var vm = this;
         this.service = resourcesService;
         this.controllerScope = controllerScope;
         this._super();
@@ -71,6 +70,7 @@
       init:function() {
         this.service = resourcesService;
         this.controllerScope = controllerScope;
+        this.setSignalHandler('currentCustomerUpdated', this.currentCustomerUpdatedHandler.bind(this));
         this._super();
         this.listState = 'resources.list';
         this.resource = this.instance;
@@ -118,19 +118,17 @@
           vm.serviceList = {};
         }
       },
-      setSignals: function() {
-        var vm = this._super();
-        this._signals.currentCustomerUpdated = function() {
-          vm.showFlavors = false;
-          vm.showTemplates = false;
-          vm.selectedProject = null;
-          vm.serviceList = {};
-          vm.flavorList = {};
-          vm.keyList = {};
-          vm.projectList = {};
-          vm.templateList = {};
-          vm.activate();
-        };
+      currentCustomerUpdatedHandler: function() {
+        var vm = this.controllerScope;
+        vm.showFlavors = false;
+        vm.showTemplates = false;
+        vm.selectedProject = null;
+        vm.serviceList = {};
+        vm.flavorList = {};
+        vm.keyList = {};
+        vm.projectList = {};
+        vm.templateList = {};
+        vm.activate();
       }
     });
 

@@ -1,26 +1,50 @@
 (function(){
+  angular.module('ncsaas')
+    .service('baseControllerClass', ['$rootScope', baseControllerClass]);
+
+  function baseControllerClass($rootScope) {
+    var ControllerClass = Class.extend({
+      _signals: {},
+
+      init:function() {
+        this.registerEventHandlers();
+      },
+      setSignalHandler: function(signalName, handlerFunction) {
+        this._signals[signalName] = handlerFunction
+      },
+      registerEventHandlers: function() {
+        for (var eventName in this._signals) {
+          $rootScope.$on(eventName, this._signals[eventName]);
+        }
+      }
+    });
+
+    return ControllerClass;
+  }
+})();
+
+(function(){
 
   angular.module('ncsaas')
-    .service('baseControllerListClass', ['$rootScope', baseControllerListClass]);
+    .service('baseControllerListClass', ['baseControllerClass', baseControllerListClass]);
 
-  function baseControllerListClass($rootScope) {
+  function baseControllerListClass(baseControllerClass) {
     /**
      * Use controllerScope.__proto__ = new Controller() in needed controller
      * use this.controllerScope for changes in event handler
-     * sеt events in this._signals
+     * sеt events in this.setSignalHandler('eventName', this.eventFunction);
      */
-    var ControllerListClass = Class.extend({
+    var ControllerListClass = baseControllerClass.extend({
       list: {},
       service: null, // required in init
       pages: null,
       searchInput: '',
       searchFieldName: '', // required in init
       controllerScope: null, // required in init
-      _signals: {},
 
       init:function() {
-        this.setSignals();
-        this.registerEventHandlers();
+        this.setSignalHandler('currentCustomerUpdated', this.currentCustomerUpdatedHandler.bind(this));
+        this._super();
         this.getList();
       },
       getList:function(filter) {
@@ -55,18 +79,10 @@
           alert(message);
         }
       },
-      setSignals: function() {
+      currentCustomerUpdatedHandler: function() {
         var vm = this.controllerScope;
-        this._signals.currentCustomerUpdated = function() {
-          vm.service.page = 1;
-          vm.getList();
-        };
-        return vm;
-      },
-      registerEventHandlers: function() {
-        for (var eventName in this._signals) {
-          $rootScope.$on(eventName, this._signals[eventName]);
-        }
+        vm.service.page = 1;
+        vm.getList();
       }
     });
 
@@ -78,27 +94,25 @@
 (function(){
 
   angular.module('ncsaas')
-    .service('baseControllerAddClass', ['$state', '$rootScope', baseControllerAddClass]);
+    .service('baseControllerAddClass', ['$state', 'baseControllerClass', baseControllerAddClass]);
 
-  function baseControllerAddClass($state, $rootScope) {
+  function baseControllerAddClass($state, baseControllerClass) {
     /**
      * Use controllerScope.__proto__ = new Controller() in needed controller
      * use this.controllerScope for changes in event handler
      * sеt events in this._signals
      */
-    var ControllerAddClass = Class.extend({
+    var ControllerAddClass = baseControllerClass.extend({
       service: null, // required in init
       instance: null,
       listState: null, // required in init
       errors: {},
-      _signals: {},
       controllerScope: null, // required in init
 
       init:function() {
         this.instance = this.service.$create();
         this.activate();
-        this.setSignals();
-        this.registerEventHandlers();
+        this._super();
       },
       save:function() {
         var vm = this;
@@ -114,15 +128,7 @@
         var vm = this;
         $state.go(vm.listState);
       },
-      activate: function() {},
-      setSignals: function() {
-        return this.controllerScope;
-      },
-      registerEventHandlers: function() {
-        for (var eventName in this._signals) {
-          $rootScope.$on(eventName, this._signals[eventName]);
-        }
-      }
+      activate: function() {}
     });
 
     return ControllerAddClass;

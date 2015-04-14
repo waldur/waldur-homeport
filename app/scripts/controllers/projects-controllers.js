@@ -91,29 +91,14 @@
   }
 
   angular.module('ncsaas')
-    .controller('ProjectAddController',
-      ['$state', 'projectsService', 'customersService', 'usersService', 'projectPermissionsService', ProjectAddController]);
+    .controller('ProjectAddController', ['$state', 'projectsService', 'customersService', ProjectAddController]);
 
-  function ProjectAddController($state, projectsService, customersService, usersService, projectPermissionsService) {
+  function ProjectAddController($state, projectsService, customersService) {
     var vm = this;
 
     vm.project = projectsService.$create();
     vm.customersList = customersService.getCustomersList();
     vm.save = save;
-    vm.users = [];
-    vm.selectedUsersCallback = selectedUsersCallback;
-    vm.selectedUsers = [];
-    vm.userSearchInputChanged = userSearchInputChanged;
-
-    getUsers();
-
-    function selectedUsersCallback(selected) {
-      vm.selectedUsers.push(selected.originalObject);
-    }
-
-    function userSearchInputChanged(name) {
-      getUsers({full_name:name});
-    }
 
     function save() {
       // TODO: refactor this function to use named urls and uuid field instead - SAAS-108
@@ -123,24 +108,7 @@
             return el.length !== 0;
           }),
           uuidNew = array[4];
-        saveSelectedUsers(url);
-        $state.go('projects.details', {uuid:uuidNew});
-      });
-    }
-
-    function saveSelectedUsers(projectUrl) {
-      for (var i = 0; i < vm.selectedUsers.length; i++) {
-        var instance = projectPermissionsService.$create();
-        instance.project = projectUrl;
-        instance.role = 'manager';
-        instance.user = vm.selectedUsers[i].url;
-        instance.$save();
-      }
-    }
-
-    function getUsers(filter) {
-      usersService.getRawUserList(filter).$promise.then(function(response) {
-        vm.users = response;
+        $state.go('project', {uuid:uuidNew});
       });
     }
 

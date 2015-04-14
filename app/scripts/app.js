@@ -8,8 +8,7 @@ angular
     'ui.router',
     'ngCookies',
     'ngResource',
-    'duScroll',
-    'angucomplete-alt'])
+    'duScroll'])
   // urls
   .config(function($stateProvider, $urlRouterProvider) {
 

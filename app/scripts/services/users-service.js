@@ -25,9 +25,8 @@
       }
     }
 
-    function getRawUserList(filters) {
-      filters = filters || {};
-      return RawUser.query(filters);
+    function getRawUserList() {
+      return RawUser.query();
     }
 
     function getUser(uuid) {
