@@ -2,11 +2,11 @@
 @import "functions/rem.scss";
 
 // mixins
+@import "mixins/mediaqueries.scss ";
+@import "mixins/propertis.scss";
 @import "mixins/lists.scss";
 @import "mixins/display.scss";
 @import "mixins/components.scss";
-@import "mixins/mediaqueries.scss ";
-@import "mixins/propertis.scss";
 
 @import "variables.scss";
 @import "animate.scss";
@@ -44,3 +44,4 @@
 @import "blocks/row.scss";
 @import "blocks/gray-box.scss";
 @import "blocks/decision.scss";
+@import "blocks/appstore.scss";

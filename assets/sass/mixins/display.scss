@@ -23,12 +23,26 @@
 
 @mixin row {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     flex-wrap: wrap;
     > .col {
         flex: 0 0 auto;
         @include property(padding, 0 10);
+        @include bp(xs) {
+            flex: 1 100%;
+            @include property(margin, 10 0);
+        } // xs
+        @include bp(sm) {
+            flex: 1 100%;
+            @include property(margin, 10 0);
+        } // sm
     } // > .col
+    &.top {
+        > .col {
+            flex: 0 0 auto;
+            @include property(padding, 0 10);
+        } // > .col
+    } // &.top
 }
 
 @mixin row-centered {

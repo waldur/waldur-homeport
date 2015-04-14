@@ -12,4 +12,11 @@
     &.active {
         box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16);
     } // &.top-level
+    .simple-line {
+        @include property(padding, 0 10);
+        @include property(margin, 20 0);
+        &.first {
+            @include property(margin-top, 0);
+        } // &.first
+    } // simple-line
 } // app-title-line

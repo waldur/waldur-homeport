@@ -14,7 +14,7 @@
     } // input[type=text]
     .search-button {
         position: absolute;
-        @include property(top, 8);
+        @include property(top, 5);
         @include property(right, -20);
         background: none;
         color: #000;
