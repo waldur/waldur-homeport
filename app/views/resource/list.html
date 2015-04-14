@@ -2,122 +2,176 @@
 
 <div ng-controller="ResourceListController as ResourceList">
 
-<!-- app-block -->
-<section class="app-block">
-    <div class="container-fluid">
-        <div class="white-box">
-            <div class="app-title-line">
-                <div class="row">
-                    <div class="col-xs-12 first-line">
-                        <h2 class="app-title">Resources</h2>
-                        <ul class="sort">
-                            <li>
-                                <pagesize pages-href="#/resources/" pages-list="ResourceList" pages-service="ResourceList.service"/>
-                            </li>
+<div class="white-box">
+    <ul class="sort-list">
+        <li class="title">
+            <h2 class="app-title">Resources</h2>
+        </li>
+        <pagesize pages-href="#/resources/" pages-list="ResourceList" pages-service="ResourceList.service"></pagesize>
+        <li class="search divid">
+            <div class="search-box">
+                <input type="text" ng-model='ResourceList.searchInput' ng-keyup="ResourceList.search()">
+                <button class="search-button"></button>
+            </div>
+        </li>
+    </ul>
+</div>
 
-                            <li class="divid">
-                                <div class="search" data-role="search-box">
-                                    <input type="text" ng-model='ResourceList.searchInput' ng-keyup="ResourceList.search()">
-                                </div>
+<!-- view-control -->
+<section class="view-control">
+    <div class="list-item no-cursor">
+        <div class="checkbox">
+            <div class="checkbox" ng-show="controller.showgroup">
+                <input type="checkbox">
+            </div>
+        </div>
+        <div>
+            <div class="view-action-buttons" ng-show="controller.showgroup">
+                <a class="button start"
+                    ng-click="ResourceList.startResource(resource)"
+                    ng-class="{'disabled': !ResourceList.isOperationAvailable(resource, 'start')}">
+                Start</a>
+                <a class="button stop"
+                    ng-click="ResourceList.stopResource(resource)" title="Stop"
+                    ng-class="{'disabled': !ResourceList.isOperationAvailable(resource, 'stop')}">
+                Stop</a>
+                <a class="button restart"
+                    ng-click="ResourceList.restartResource(resource)"
+                    ng-class="{'disabled': !ResourceList.isOperationAvailable(resource, 'restart')}">
+                Restart</a>
+                <a class="button remove"
+                    ng-click="ResourceList.deleteResource(resource, $index)">
+                Remove</a>
+            </div>
+            <div class="view-action-buttons-mobile" ng-show="controller.showgroup">
+                <div class="actions-button">
+                    <a class="button dropdown-active"
+                        ng-click="mobileActions=!mobileActions">actions</a>
+                    <ul class="actions-dropdown" ng-show="mobileActions">
+                        <li>
+                            <a class="button-simple start"
+                                ng-click="ResourceList.startResource(resource)"
+                                ng-class="{'disabled': !ResourceList.isOperationAvailable(resource, 'start')}">
+                            Start</a>
+                        </li>
+                        <li>
+                            <a class="button-simple stop"
+                                ng-click="ResourceList.stopResource(resource)" title="Stop"
+                                ng-class="{'disabled': !ResourceList.isOperationAvailable(resource, 'stop')}">
+                            Stop</a>
+                        </li>
+                        <li>
+                            <a class="button-simple restart"
+                                ng-click="ResourceList.restartResource(resource)"
+                                ng-class="{'disabled': !ResourceList.isOperationAvailable(resource, 'restart')}">
+                            Restart</a>
+                        </li>
+                        <li>
+                            <a class="button-simple remove"
+                                ng-click="ResourceList.deleteResource(resource, $index)">
+                            Remove</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="actions switch">
+            <span class="label-text">batch</span>
+            <div class="checkbox-toggle">
+                <input type="checkbox" id="control-types" ng-click="controller.showgroup=!controller.showgroup">
+                <label for="control-types"></label>
+            </div>
+            <span class="label-text special-left">single</span>
+        </div>
+    </div>
+</section>
+<!-- /view-control -->
+
+<div class="white-box clear">
+    <ul class="object-list">
+        <li class="list-item">
+            <div class="checkbox"></div>
+            <div class="name">
+                <a href="#" class="list-sort">Name</a>
+            </div>
+            <div class="additional-cell">
+                <a href="#" class="list-sort">Type</a>
+            </div>
+            <div class="additional-cell">
+                <a href="#" class="list-sort">Project</a>
+            </div>
+            <div class="additional-cell">
+                <a href="#" class="list-sort">Access information</a>
+            </div>
+            <div class="additional-cell">
+                <a href="#" class="list-sort">Status</a>
+            </div>
+            <div class="actions"></div>
+        </li>
+        <li ng-repeat="resource in ResourceList.list">
+            <div class="list-item">
+                <div class="checkbox">
+                    <div class="checkbox" ng-show="controller.showgroup">
+                        <input type="checkbox">
+                    </div>
+                </div>
+                <div class="">
+                    <h3 class="item-title">{{ resource.name }}</h3>
+                    <div class="status-circle"
+                        ng-class="{'online': resource.state == 'Online', 'offline' : resource.state == 'Offline'}"></div>
+                </div>
+                <div class="additional-cell" ng-hide="collapsedItem">
+                    {{ resource.type }}
+                </div>
+                <div class="additional-cell">
+                    <a ui-sref="projects.details({uuid: resource.project_uuid })">{{ resource.project_name }}</a>
+                </div>
+                <div class="additional-cell">
+                    <span ng-repeat="access in resource.access_information">{{ access }}</span>
+                </div>
+                <div class="additional-cell">
+                    <span class="status"
+                        ng-class="{'online': resource.state == 'Online', 'offline' : resource.state == 'Offline'}">
+                        {{ resource.state }}</span>
+                </div>
+                <div class="actions">
+                    <div class="actions-button" ng-show="!controller.showgroup">
+                        <a class="button" ng-click="openActions=!openActions">actions</a>
+                        <ul class="actions-dropdown" ng-show="openActions">
+                            <li>
+                                <a class="button-simple start"
+                                    ng-click="ResourceList.startResource(resource)"
+                                    ng-class="{'disabled': !ResourceList.isOperationAvailable(resource, 'start')}">
+                                Start</a>
+                            </li>
+                            <li>
+                                <a class="button-simple stop"
+                                    ng-click="ResourceList.stopResource(resource)" title="Stop"
+                                    ng-class="{'disabled': !ResourceList.isOperationAvailable(resource, 'stop')}">
+                                Stop</a>
+                            </li>
+                            <li>
+                                <a class="button-simple restart"
+                                    ng-click="ResourceList.restartResource(resource)"
+                                    ng-class="{'disabled': !ResourceList.isOperationAvailable(resource, 'restart')}">
+                                Restart</a>
+                            </li>
+                            <li>
+                                <a class="button-simple remove"
+                                    ng-click="ResourceList.deleteResource(resource, $index)">
+                                Remove</a>
                             </li>
                         </ul>
-                        <div class="crud-box pull-right"><a ui-sref="resources.create" class="crud-controls"><i class="fa fa-plus"></i> Add resource</a></div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</section>
-<!-- /app-block -->
+        </li>
+    </ul>
+</div>
 
-<!-- app-block -->
-<section class="app-block">
-    <div class="container-fluid">
-        <div class="white-box">
-            <div class="app-items-list">
-                <div class="table-responsive">
-                    <table class="items-table">
-                        <tr>
-                            <th class="name">
-                                <a href="" class="sort">Name</a>
-                            </th>
-                            <th class="type">
-                                <a href="" class="sort">Type</a>
-                            </th>
-                            <th>
-                                <a href="" class="sort">Project</a>
-                            </th>
-                            <th>
-                                <a href="" class="sort">Access information</a>
-                                <!-- access_information -->
-                            </th>
-                            <th>
-                                <a href="" class="sort">Status</a>
-                            </th>
-                            <th></th>
-                        </tr>
-                        <tr ng-repeat="resource in ResourceList.list">
-                            <td class="name">
-                                <h2 class="item-title">{{ resource.hostname }}</h2>
-                            </td>
-                            <td class="type">
-                                <span class="elem item-type vm">{{ resource.type }}</span>
-                            </td>
-                            <td>
-                                <a ui-sref="project({uuid: resource.project_uuid })" class="elem sort-display">{{ resource.project_name }}</a>
-                            </td>
-                            <td class="col-xs-2">
-                                <ul class="standart-list gray-text">
-                                    <li ng-repeat="access in resource.access_information">{{ access }}</li>
-                                </ul>
-                            </td>
-                            <td class="col-xs-2">
-                                <span class="status-display" ng-class="{'online': resource.state == 'Online', 'offline' : resource.state == 'Offline'}">
-                                    {{ resource.state }}
-                                </span>
-                            </td>
-                            <td class="col-xs-4 controls-ctn">
-                                <ul class="controls pull-right">
-                                    <li>
-                                        <a class="btn btn-control online" title="Start"
-                                           ng-click="ResourceList.startResource(resource)"
-                                           ng-class="{'disabled': !ResourceList.isOperationAvailable(resource, 'start')}"
-                                           >Start</a>
-                                    </li>
-                                    <li>
-                                        <a class="btn btn-control offline"
-                                           ng-click="ResourceList.stopResource(resource)" title="Stop"
-                                           ng-class="{'disabled': !ResourceList.isOperationAvailable(resource, 'stop')}"
-                                           >Stop</a>
-                                    </li>
-                                    <li>
-                                        <a class="btn btn-control"
-                                           ng-click="ResourceList.restartResource(resource)"
-                                           ng-class="{'disabled': !ResourceList.isOperationAvailable(resource, 'restart')}"
-                                           >Restart</a>
-                                    </li>
-                                    <li>
-                                        <a class="btn btn-control remove"
-                                           ng-click="ResourceList.deleteResource(resource, $index)"
-                                           >Remove</a>
-                                    </li>
-                                </ul>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- /app-block -->
-
-<div class="app-block">
-    <div class="container-fluid">
-        <!-- pagination -->
-        <pagination pages-href="#/resources/" pages-list="ResourceList" pages-service="ResourceList.service"/>
-        <!-- /pagination -->
-    </div>
+<div class="pagination">
+    <pagination pages-href="#/resources/"
+        pages-list="ResourceList" pages-service="ResourceList.service"></pagination>
 </div>
 
 </div>
