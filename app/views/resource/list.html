@@ -76,12 +76,12 @@
             </div>
         </div>
         <div class="actions switch">
-            <span class="label-text">batch</span>
+            <span class="label-text" ng-class="{'low-grade': !controller.showgroup}">batch</span>
             <div class="checkbox-toggle">
                 <input type="checkbox" id="control-types" ng-click="controller.showgroup=!controller.showgroup">
                 <label for="control-types"></label>
             </div>
-            <span class="label-text special-left">single</span>
+            <span class="label-text special-left" ng-class="{'low-grade': controller.showgroup}">single</span>
         </div>
     </div>
 </section>
