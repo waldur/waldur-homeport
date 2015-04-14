@@ -17,6 +17,15 @@
     vm.deleteResource = deleteResource;
     vm.isOperationAvailable = isOperationAvailable;
 
+    // view type
+    vm.changeViewType = changeViewType();
+    vm.showgroup = false;
+
+    function changeViewType() {
+      vm.showgroup = !vm.showgroup;
+      console.log('sss');
+    }
+
     // search
     vm.searchInput = '';
     vm.search = search;

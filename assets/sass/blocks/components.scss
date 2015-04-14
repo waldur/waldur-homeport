@@ -252,4 +252,12 @@ input[type="password"] {
 
 .low-grade {
     opacity: 0.3;
+    @include transition(all, .2s, ease);
+
+} // low-grade
+
+.disabled {
+    opacity: 0.3;
+    pointer-events: none;
+    @include transition(all, .2s, ease);
 } // low-grade
