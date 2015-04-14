@@ -123,6 +123,7 @@
     // based on services
     // 3. User has to choose flavor, template, ssh key and other resource attributes.
 
+    vm.showServices = false;
     vm.showFlavors = false;
     vm.showTemplates = false;
 
@@ -186,6 +187,7 @@
 
     function setProject(project) {
       vm.resource.project = project.url;
+      vm.showServices = true;
       // services
       servicesService.getList({project: project.uuid}).then(function(response) {
         vm.serviceList = response;
