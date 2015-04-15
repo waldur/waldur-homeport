@@ -1,109 +1,152 @@
 <div ng-controller="ProjectListController as ProjectList">
 
-<!-- app-block -->
-<section class="app-block">
-    <div class="container-fluid">
-        <div class="white-box">
-            <div class="app-title-line">
-                <div class="row">
-                    <div class="col-xs-12 first-line">
-                        <h2 class="app-title">Projects</h2>
-                        <ul class="sort">
-                            <li ng-repeat="pageSize in ProjectList.pageSizes">
-                                <a ng-click="ProjectList.changePageSize(pageSize)"
-                                   ng-class="{active: pageSize === ProjectList.currentPageSize}">{{pageSize}}</a>
-                            </li>
+<div class="white-box">
+    <ul class="sort-list">
+        <li class="title">
+            <h2 class="app-title">Projects</h2>
+        </li>
+        <li ng-repeat="pageSize in ProjectList.pageSizes">
+            <a ng-click="ProjectList.changePageSize(pageSize)"
+               ng-class="{active: pageSize === ProjectList.currentPageSize}">{{pageSize}}</a>
+        </li>
+        <li class="search divid">
+            <div class="search-box">
+                <input type="text" ng-model='ProjectList.searchInput' ng-keyup="ProjectList.search()">
+                <button class="search-button" ng-click="ProjectList.search()"></button>
+            </div>
+        </li>
+    </ul>
+</div>
 
-                            <li class="divid">
-                                <div class="search" data-role="search-box">
-                                    <input type="text" ng-model='ProjectList.searchInput' ng-keyup="ProjectList.search()">
-                                </div>
+<div class="white-box clear">
+    <ul class="object-list">
+        <li>
+            <div class="list-item">
+                <div class="checkbox"></div>
+                <div class="name">
+                    <a class="list-sort">Name</a>
+                </div>
+                <div class="additional-cell">
+                    <a class="list-sort">creation date</a>
+                </div>
+                <div class="actions"></div>
+            </div>
+        </li>
+        <li ng-repeat="project in ProjectList.list" ng-click="expandItem=!expandItem">
+            <div class="list-item" ng-class="{'opened': expandItem}">
+                <div class="checkbox">
+                    <div class="checkbox">
+                        <input type="checkbox">
+                    </div>
+                </div>
+                <div class="name">
+                    <h3 class="item-title">{{ project.name }}</h3>
+                </div>
+                <div class="additional-cell">
+                    {{ project.creation_date }}
+                </div>
+                <div class="actions">
+                    <div class="actions-button">
+                        <a class="button" ng-click="openActions=!openActions">actions</a>
+                        <ul class="actions-dropdown" ng-show="openActions">
+                            <li>
+                                <a class="button-simple">Add user</a>
+                            </li>
+                            <li>
+                                <a class="button-simple">Archive</a>
+                            </li>
+                            <li>
+                                <a class="button-simple">Delete</a>
                             </li>
                         </ul>
-                        <div class="crud-box pull-right"><a ui-sref="projects.create" class="crud-controls"><i class="fa fa-plus"></i> Add project</a></div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</section>
-<!-- /app-block -->
-
-<!-- app-block -->
-<section class="app-block">
-
-    <div class="container-fluid">
-        <div class="white-box">
-            <div class="app-items-list">
-                <div class="table-responsive">
-                    <div class="table-responsive">
-                        <table class="items-table">
-                            <tr>
-                                <th class="name">
-                                    <a href="" class="sort">Name</a>
-                                </th>
-                                <th class="col-xs-2"><a href="" class="sort">Resources</a></th>
-                                <th class="col-xs-2"><a href="" class="sort">Users</a></th>
-                                <th class="col-xs-2"></th>
-                            </tr>
-                            <tr ng-repeat="project in ProjectList.list">
-                                <td class="name">
-                                    <h2 class="item-title"><a ui-sref="projects.details({uuid: project.uuid})">{{ project.name }}</a></h2>
-                                    <p class="gray-text">
-                                        {{ project.description }}
-                                    </p>
-                                </td>
-                                <td class="col-xs-3 gray-text">
-                                    <ul class="standart-list">
-                                        <li ng-repeat="resource in project.resources"><span class="elem item-type repo"></span> {{ resource.hostname }}</li>
-                                    </ul>
-                                </td>
-                                <td class="col-xs-2 gray-text">
-                                    <ul class="standart-list">
-                                        <li ng-repeat="user in project.users"><a ui-sref="users({uuid: user.uuid})">{{ user.native_name }}</a></li>
-                                    </ul>
-                                </td>
-                                <td class="col-xs-2 controls-ctn">
-                                    <ul class="controls pull-right">
-                                        <li>
-                                            <a href="#" data-toggle="tooltip" data-placement="top" title="Favorite" class="kit-icon star"></a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="conf" data-toggle="tooltip" data-placement="top" title="Archive"><i class="glyphicon glyphicon-compressed"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="conf" data-toggle="tooltip" data-placement="top" title="Settings"><i class="fa fa-cog"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="" ng-click="ProjectList.deleteProject(project)" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
-                                        </li>
-                                    </ul>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
+            <div class="list-item-details" ng-show="expandItem">
+                <section ng-if="project.description">
+                    {{ project.description }}
+                </section>
+                <section>
+                    <header>
+                        <h4 class="item-title">Resources</h4>
+                        <ul class="inline-pagination">
+                            <li>
+                                <a href="">1</a>
+                            </li>
+                            <li>
+                                <a href="" class="current">2</a>
+                            </li>
+                            <li>
+                                <a href="">3</a>
+                            </li>
+                            <li>
+                                <span>...</span>
+                            </li>
+                            <li>
+                                <a href="">5</a>
+                            </li>
+                        </ul>
+                    </header>
+                    <ul>
+                        <li class="item-list">
+                            <section>
+                                <a class="list-sort">Name</a>
+                            </section>
+                            <section>
+                                <div class="list-sort">Access information</div>
+                            </section>
+                        </li>
+                        <li class="item-list" ng-repeat="resource in project.resources">
+                            <section>
+                                <a href="">{{ resource.name }}</a>
+                            </section>
+                            <section>
+                                <span ng-repeat="access in resource.access_information">{{ access }}</span>
+                            </section>
+                        </li>
+                    </ul>
+                </section>
+                <!-- asas -->
+                <section>
+                    <header>
+                        <h4 class="item-title">Users</h4>
+                        <ul class="inline-pagination">
+                            <li>
+                                <a href="">1</a>
+                            </li>
+                            <li>
+                                <a href="" class="current">2</a>
+                            </li>
+                            <li>
+                                <a href="">3</a>
+                            </li>
+                            <li>
+                                <span>...</span>
+                            </li>
+                            <li>
+                                <a href="">5</a>
+                            </li>
+                        </ul>
+                    </header>
+                    <ul>
+                        <li class="item-list">
+                            <section>
+                                <a class="list-sort">Name</a>
+                            </section>
+                        </li>
+                        <li class="item-list" ng-repeat="user in project.users">
+                            <section>
+                                <div class="avatar">
+                                    <img src="/static/images/user-avatar.jpg" alt="" class="avatar-img">
+                                </div>
+                                <a ui-sref="users({uuid: user.uuid})">{{ user.native_name }}</a>
+                            </section>
+                        </li>
+                    </ul>
+                </section>
             </div>
-        </div>
-    </div>
-</section>
-<!-- /app-block -->
-
-<!-- app-block -->
-<div class="app-block">
-    <div class="container-fluid">
-        <!-- pagination -->
-        <div class="pagination">
-            <ul>
-                <li><a href="#/resources/" ng-repeat="i in ProjectList.getNumber(ProjectList.pages) track by $index"
-                       ng-class="{current: ($index+1) === ProjectList.currentPage}"
-                       ng-click="ProjectList.changePage($index+1)">{{$index+1}}</a></li>
-
-            </ul>
-        </div>
-        <!-- /pagination -->
-    </div>
+        </li>
+    </ul>
 </div>
-<!-- /app-block -->
 
 </div>

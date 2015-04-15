@@ -1,5 +1,4 @@
 .list-item-details {
-    display: none;
     background-color: #F2F2F2;
     @include property(padding, 10);
     @include property(padding-left, 50);
@@ -13,12 +12,16 @@
             @include property(padding-top, 10);
             border-top: 1px solid rgb(205, 205, 205);
         }
+        > header {
+            @include property(margin-bottom, 10);
+        } // > header
         > ul {
             @include clear-list;
             > li {
-                &:nth-child(1) {
-                    @include property(margin-bottom, 10);
-                } // &:nth-child(1)
+                @include property(padding, 4 0);
+                + li {
+                    border-top: 1px dashed rgba(205, 205, 205, 0.5);
+                } // + li
             } // li
         } // > ul
         .item-list {
@@ -28,7 +31,6 @@
             }
             a {
                 text-decoration: none;
-                color: #444;
             } // a
         } // item-list
     } // > *
