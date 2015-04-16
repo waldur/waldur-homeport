@@ -20,7 +20,6 @@
           pagesService = $scope.pagesService;
         $scope.pagesHref = $scope.pagesHref || $state.href($state.current.name, $state.params, {absolute: true});
         pagesController.currentPageSize = pagesController.currentPageSize || pagesService.pageSize;
-        pagesController.pages = pagesController.pages || (pagesService.pages ? pagesService.pages : 5);
         pagesController.currentPage = pagesController.currentPage || pagesService.page;
         pagesController.changePage = changePage;
         pagesController.getNumber = getNumber;
