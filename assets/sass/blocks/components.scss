@@ -8,6 +8,25 @@ input[type="password"] {
     @include property(font-size, 16);
 }
 
+textarea {
+    border: 1px solid #D8D8D8;
+    box-shadow: none;
+    @include property(border-radius, 1);
+    @include property(padding, 6 10);
+    @include property(font-size, 16);
+    width: 100%;
+    max-width: 100%;
+    &.small {
+        width: 250px;
+    } // &.small
+    &.normal {
+        width: 350px;
+    } // &.normal
+    &.big {
+        width: 550px;
+    } // &.big
+} // textarea
+
 .custom-select {
     border: 1px solid #D8D8D8;
     border-radius: 3px;
