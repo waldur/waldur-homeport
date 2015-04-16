@@ -41,6 +41,9 @@
                 </div>
                 <div class="name">
                     <h3 class="item-title">{{ project.name }}</h3>
+                    <a class="more-details"
+                        ng-show="expandItem"
+                        ui-sref="projects.details({uuid: project.uuid})">Permanent link</a>
                 </div>
                 <div class="additional-cell">
                     {{ project.creation_date }}
