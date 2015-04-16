@@ -7,7 +7,6 @@
     @include table;
     @include property(font-size, 16);
     line-height: 1;
-    cursor: pointer;
     min-height: 38px;
     &.no-cursor {
         cursor: default;

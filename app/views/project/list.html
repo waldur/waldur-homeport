@@ -32,7 +32,7 @@
                 <div class="actions"></div>
             </div>
         </li>
-        <li ng-repeat="project in ProjectList.list" ng-click="expandItem=!expandItem">
+        <li ng-repeat="project in ProjectList.list">
             <div class="list-item" ng-class="{'opened': expandItem}">
                 <div class="checkbox">
                     <div class="checkbox">
@@ -40,7 +40,7 @@
                     </div>
                 </div>
                 <div class="name">
-                    <h3 class="item-title">{{ project.name }}</h3>
+                    <h3 class="item-title pointer" ng-click="expandItem=!expandItem">{{ project.name }}</h3>
                     <a class="more-details"
                         ng-show="expandItem"
                         ui-sref="projects.details({uuid: project.uuid})">Permanent link</a>

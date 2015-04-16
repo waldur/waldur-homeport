@@ -7,6 +7,9 @@ h6.app-title {
     @include inline-middle;
     margin: 0;
     line-height: 1;
+    &.pointer {
+        cursor: pointer;
+    } // &.pointer
     a {
         text-decoration: none;
     } // a
@@ -43,6 +46,9 @@ h6.item-title {
     &.lead {
         color: rgb(17, 108, 184);
     } // &.lead
+    &.pointer {
+        cursor: pointer;
+    } // &.pointer
     a {
         text-decoration: none;
     } // a
