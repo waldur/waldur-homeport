@@ -73,6 +73,11 @@
                             <input type="checkbox" ng-show="controller.showgroup">
                         </div>
                     </div>
+                    <div class="expand">
+                        <a class="plus-minus"
+                            ng-click="expandItem=!expandItem"
+                            ng-class="{'plus': !expandItem, 'minus active': expandItem}"></a>
+                    </div>
                     <div class="avatar">
                         <span class="avatar">
                             <img src="/static/images/user-avatar.jpg" alt="" class="avatar-img">
@@ -95,7 +100,7 @@
                 <div class="list-item-details" ng-show="expandItem">
                     <section>
                         <header>
-                            <h4 class="item-title">Connected projects</h4>
+                            <h4 class="item-title">Services</h4>
                             <ul class="inline-pagination">
                                 <li>
                                     <a href="">1</a>
@@ -119,16 +124,10 @@
                                 <section>
                                     <a class="list-sort">Name</a>
                                 </section>
-                                <section>
-                                    <div class="list-sort">Creation date</div>
-                                </section>
                             </li>
                             <li class="item-list">
                                 <section>
-                                    <a href="">Project</a>
-                                </section>
-                                <section>
-                                    Creation date
+                                    <a href="">Service</a>
                                 </section>
                             </li>
                         </ul>
