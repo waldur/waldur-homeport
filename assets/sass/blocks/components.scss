@@ -332,3 +332,31 @@ textarea {
         } // &:after
     } // &.arrow-down
 } // error
+
+.plus-minus {
+    @include inline-middle;
+    width: 18px;
+    height: 18px;
+    box-sizing: border-box;
+    padding-top: 1px;
+    border-radius: 2px;
+    color: white;
+    background-color: rgb(199, 199, 199);
+    &.active {
+        background: rgb(55, 55, 58);
+    } // &.active
+    &:before {
+        @include inline-middle;
+        @include icon-fa;
+    } // &:before
+    &.plus {
+        &:before {
+            content: '\f067';
+        } // &:before
+    } // &.plus
+    &.minus {
+        &:before {
+            content: '\f068';
+        } // &:before
+    } // minus
+} // plus-minus

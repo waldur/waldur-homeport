@@ -39,11 +39,15 @@
                         <input type="checkbox">
                     </div>
                 </div>
+                <div class="expand">
+                    <a class="plus-minus"
+                        ng-click="expandItem=!expandItem"
+                        ng-class="{'plus': !expandItem, 'minus active': expandItem}"></a>
+                </div>
                 <div class="name">
-                    <h3 class="item-title pointer" ng-click="expandItem=!expandItem">{{ project.name }}</h3>
-                    <a class="more-details"
-                        ng-show="expandItem"
-                        ui-sref="projects.details({uuid: project.uuid})">Permanent link</a>
+                    <h3 class="item-title pointer">
+                        <a ui-sref="projects.details({uuid: project.uuid})">{{ project.name }}</a>
+                    </h3>
                 </div>
                 <div class="additional-cell">
                     {{ project.creation_date }}
