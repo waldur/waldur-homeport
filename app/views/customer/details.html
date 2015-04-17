@@ -1,320 +1,85 @@
 <div ng-controller="CustomerDetailUpdateController as controller">
 
-<!-- profile-view -->
 <div class="profile-view">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-1">
-                <img src="../static/images/tmp/dojocat.jpg" class="profile-pic">
+        <section class="avatar">
+            <span class="avatar big">
+                <img src="/static/images/user-avatar.jpg" alt="" class="avatar-img">
+            </span>
+        </section>
+        <section class="content">
+            <h2 class="app-title">{{ controller.customer.name }}</h2>
+            <div>
+                <a href="mailto:{{ controller.user.email }}">{{ controller.user.email }}</a>
             </div>
-            <div class="col-xs-11 profile-info">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <h1 class="profile-name pull-left">{{ controller.customer.name }}</h1>
-                        <ul class="controls pull-right">
-                            <li>
-                                <a ui-sref="customers.edit({uuid: controller.customer.uuid})" class="crud-controls"><i class="fa fa-cog"></i> Edit profile</a>
-                            </li>
-                            <li>
-                                <a href="#/customers/{{ controller.customer.uuid }}/plans/" class="crud-controls"><i class="fa fa-cog"></i> Plans</a>
-                            </li>
-                            <li>
-                                <a href="#/customers/{{ controller.customer.uuid }}/billing/" class="crud-controls"><i class="fa fa-cog"></i> Billing</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="stats">
-                    <div class="row">
-                        <div class="col-xs-4">
-                            <span class="stat-int">4</span>
-                            <span class="stat-description">Active projects</span>
-                        </div>
-                        <div class="col-xs-4">
-                            <span class="stat-int">4</span>
-                            <span class="stat-description">Services</span>
-                        </div>
-                    </div>
-                </div>
+        </section>
+        <section class="actions">
+            <div class="actions-button">
+                <a class="button" ng-click="openActions=!openActions">actions</a>
+                <ul class="actions-dropdown" ng-show="openActions">
+                    <li>
+                        <a class="button-simple">Edit profile</a>
+                    </li>
+                    <li>
+                        <a class="button-simple">Plans</a>
+                    </li>
+                    <li>
+                        <a class="button-simple">Billing</a>
+                    </li>
+                </ul>
             </div>
-        </div>
+        </section>
     </div>
-</div>
-<!-- /profile-view -->
 
-<!-- app-tabs -->
-<div class="app-tabs">
-    <!-- tabs-nav -->
-    <div class="tabs-container">
-        <div class="container-fluid">
-            <ul class="nav nav-tabs" role="tablist">
-                <li ng-class="{'active': controller.activeTab === 'resources'}">
-                    <a href="" ng-click="controller.activeTab = 'resources'">
-                        Resources
-                    </a>
-                </li>
-                <li ng-class="{'active': controller.activeTab === 'projects'}">
-                    <a href="" ng-click="controller.activeTab = 'projects'">
-                        Projects
-                    </a>
-                </li>
-                <li ng-class="{'active': controller.activeTab === 'services'}">
-                    <a href="" ng-click="controller.activeTab = 'services'">
-                        Services
-                    </a>
-                </li>
-            </ul>
-        </div>
+    <ul class="tabs-nav">
+        <li ng-class="{'active': controller.activeTab === 'resources'}"
+            ng-click="controller.activeTab = 'resources'">
+            Resources
+        </li>
+        <li ng-class="{'active': controller.activeTab === 'projects'}"
+            ng-click="controller.activeTab = 'projects'">
+            Projects
+        </li>
+        <li ng-class="{'active': controller.activeTab === 'services'}"
+            ng-click="controller.activeTab = 'services'">
+            Services
+        </li>
+    </ul>
+    <div class="white-box tabs">
+        <ul class="sort-list">
+            <li>
+                <a href="#" class="active">5 hours</a>
+            </li>
+            <li>
+                <a href="#">24 hours</a>
+            </li>
+            <li>
+                <a href="#">week</a>
+            </li>
+            <li class="search divid">
+                <div class="search-box" data-role="search-box">
+                    <input type="text">
+                    <button class="search-button"></button>
+                </div>
+            </li>
+        </ul>
     </div>
-    <!-- /tabs-nav -->
-    <!-- tabs-content -->
-    <div class="tab-content" ng-switch="controller.activeTab">
-        <!-- tab -->
-        <div ng-class="{'active': controller.activeTab === 'resources'}" id="eventlog" ng-switch-when="resources">
-            <!-- app-block -->
-            <section class="app-block">
-                <div class="container-fluid">
-                    <div class="white-box">
-                        <div class="app-title-line">
-                            <div class="row">
-                                <div class="col-xs-12 first-line">
-                                    <ul class="sort">
-                                        <li><a href="#" class="active">5</a></li>
-                                        <li><a href="#">15</a></li>
-                                        <li><a href="#">24</a></li>
-                                        <li class="divid">
-                                            <div class="search" data-role="search-box">
-                                                <input type="text">
-                                                <button class="search-button">
-                                                    <i class="fa fa-search"></i>
-                                                </button>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                    <div class="crud-box pull-right"><a href="#" class="crud-controls"><i class="fa fa-plus"></i> Add resource</a></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- /app-block -->
-            <!-- app-block -->
-            <section class="app-block">
-                <div class="container-fluid">
-                    <div class="white-box">
-                        <div class="app-items-list">
-                            <table class="items-table">
-                                <tr>
-                                    <th class="name">
-                                        <a href="" class="sort">Name</a>
-                                    </th>
-                                    <th class="type">
-                                        <a href="" class="sort">Type</a>
-                                    </th>
-                                    <th>
-                                        <a href="" class="sort">Project</a>
-                                    </th>
-                                    <th></th>
-                                </tr>
-                                <tr>
-                                    <td class="name">
-                                        <h2 class="item-title">Resource Name</h2>
-                                    </td>
-                                    <td class="type">
-                                        <span class="elem item-type vm">repository on GitHub</span>
-                                    </td>
-                                    <td>
-                                        <a href="#" class="elem sort-display">Project: ZH-11</a>
-                                    </td>
-                                    <td class="col-xs-2 controls-ctn">
-                                        <ul class="controls pull-right">
-                                            <li>
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Poweroff"><i class="fa fa-power-off"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Restart"><i class="fa fa-refresh"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="#" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- /app-block -->
-            <ng-include src="'/views/partials/pagination.html'"></ng-include>
-        </div>
-        <!-- /tab -->
-        <!-- tab -->
-        <div ng-class="{'active': controller.activeTab === 'projects'}" id="eventlog" ng-switch-when="projects">
-            <!-- app-block -->
-            <section class="app-block">
-                <div class="container-fluid">
-                    <div class="white-box">
-                        <div class="app-title-line">
-                            <div class="row">
-                                <div class="col-xs-12 first-line">
-                                    <ul class="sort">
-                                        <li><a href="#" class="active">5</a></li>
-                                        <li><a href="#">15</a></li>
-                                        <li><a href="#">24</a></li>
-                                        <li class="divid">
-                                            <div class="search" data-role="search-box">
-                                                <input type="text">
-                                                <button class="search-button">
-                                                    <i class="fa fa-search"></i>
-                                                </button>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                    <div class="crud-box pull-right"><a href="#" class="crud-controls"><i class="fa fa-plus"></i> Add project</a></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- /app-block -->
-            <!-- app-block -->
-            <section class="app-block">
-                <div class="container-fluid">
-                    <div class="white-box">
-                        <div class="app-items-list">
-                            <table class="items-table">
-                                <tr>
-                                    <th class="name">
-                                        <a href="" class="sort">Name</a>
-                                    </th>
-                                    <th class="col-xs-2"><a href="" class="sort">IP's</a></th>
-                                    <th class="col-xs-2"><a href="" class="sort">Users</a></th>
-                                    <th class="col-xs-2"></th>
-                                </tr>
-                                <tr>
-                                    <td class="name">
-                                        <h2 class="item-title"><a href="{{ url_for('project') }}">G48s-11</a></h2>
-                                        <p class="gray-text">
-                                            Here goes project description.
-                                        </p>
-                                    </td>
-                                    <td class="col-xs-3 gray-text">
-                                        <ul class="standart-list">
-                                            <li><span class="elem item-type repo"></span> Repo</li>
-                                            <li><span class="elem item-type vm"></span> VM for this</li>
-                                        </ul>
-                                    </td>
-                                    <td class="col-xs-2 gray-text">
-                                        <ul class="standart-list">
-                                            <li><a href="{{ url_for('user') }}">Mihail Yakimenko</a></li>
-                                            <li><a href="{{ url_for('user') }}">Ilja Livenson</a></li>
-                                        </ul>
-                                    </td>
-                                    <td class="col-xs-2 controls-ctn">
-                                        <ul class="controls pull-right">
-                                            <li>
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Favorite" class="kit-icon star"></a>
-                                            </li>
-                                            <li>
-                                                <a href="#" class="conf" data-toggle="tooltip" data-placement="top" title="Archive"><i class="glyphicon glyphicon-compressed"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="#" class="conf" data-toggle="tooltip" data-placement="top" title="Settings"><i class="fa fa-cog"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="#" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- /app-block -->
-            <ng-include src="'/views/partials/pagination.html'"></ng-include>
-        </div>
-        <!-- /tab -->
-        <!-- tab -->
-        <div ng-class="{'active': controller.activeTab === 'services'}" id="eventlog" ng-switch-when="services">
-            <!-- app-block -->
-            <section class="app-block">
-                <div class="container-fluid">
-                    <div class="white-box">
-                        <div class="app-title-line">
-                            <div class="row">
-                                <div class="col-xs-12 first-line">
-                                    <ul class="sort">
-                                        <li><a href="#" class="active">5</a></li>
-                                        <li><a href="#">15</a></li>
-                                        <li><a href="#">24</a></li>
-                                        <li class="divid">
-                                            <div class="search" data-role="search-box">
-                                                <input type="text">
-                                                <button class="search-button">
-                                                    <i class="fa fa-search"></i>
-                                                </button>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                    <div class="crud-box pull-right"><a href="#" class="crud-controls"><i class="fa fa-plus"></i> Add service</a></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- /app-block -->
-            <!-- app-block -->
-            <section class="app-block">
-                <div class="container-fluid">
-                    <div class="white-box">
-                        <div class="app-items-list">
-                            <table class="items-table">
-                                <tr>
-                                    <th class="name">
-                                        <a href="" class="sort">Name</a>
-                                    </th>
-                                    <th class="col-xs-2 type">
-                                        <a href="" class="sort">Service</a>
-                                    </th>
-                                    <th class="col-xs-1"></th>
-                                </tr>
-                                <tr>
-                                    <td class="name">
-                                        <h2 class="item-title"><a href="{{ url_for('service') }}">Service (cloud acc.) Name</a></h2>
-                                    </td>
-                                    <td class="col-xs-2 type">
-                                        <span class="elem item-type github">Github</span>
-                                    </td>
-                                    <td class="col-xs-1 controls-ctn">
-                                        <ul class="controls pull-right">
-                                            <li>
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Restart"><i class="fa fa-cog"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="#" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                </tr>
 
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- /app-block -->
-            <ng-include src="'/views/partials/pagination.html'"></ng-include>
+    <sectin class="tabs-content" ng-switch="controller.activeTab">
+        <div class="tab" id="resources"
+            ng-class="{'tab-active': controller.activeTab === 'resources'}"
+            ng-switch-when="resources">
+            <div ui-view="tabResources"></div>
         </div>
-        <!-- /tab -->
-    </div>
-    <!-- /tabs-content -->
-</div>
-<!-- /app-tabs -->
+        <div class="tab" id="projects"
+            ng-class="{'tab-active': controller.activeTab === 'projects'}"
+            ng-switch-when="projects">
+            <div ui-view="tabProjects"></div>
+        </div>
+        <div class="tab" id="services"
+            ng-class="{'tab-active': controller.activeTab === 'services'}"
+            ng-switch-when="services">
+            <div ui-view="tabServices"></div>
+        </div>
+    </sectin>
 
 </div>

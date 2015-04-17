@@ -260,6 +260,15 @@ angular
           'appContent': {
             templateUrl: 'views/customer/details.html',
           },
+          'tabResources@customers.details': {
+            templateUrl: 'views/customer/tab-resources.html',
+          },
+          'tabProjects@customers.details': {
+            templateUrl: 'views/customer/tab-projects.html',
+          },
+          'tabServices@customers.details': {
+            templateUrl: 'views/customer/tab-services.html',
+          },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',
           },
