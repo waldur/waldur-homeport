@@ -1,81 +1,82 @@
-<!-- app-block -->
-<section class="app-block">
-    <div class="container-fluid">
-        <div class="white-box">
-            <div class="app-title-line">
-                <div class="row">
-                    <div class="col-xs-12 first-line">
-                        <ul class="sort">
-                            <li><a href="#" class="active">5</a></li>
-                            <li><a href="#">15</a></li>
-                            <li><a href="#">24</a></li>
-                            <li class="divid">
-                                <div class="search" data-role="search-box">
-                                    <input type="text">
-                                    <button class="search-button">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </div>
-                            </li>
-                        </ul>
-                        <div class="crud-box pull-right"><a href="#" class="crud-controls"><i class="fa fa-plus"></i> add key</a></div>
-                    </div>
+<!-- view-control -->
+<section class="view-control">
+    <div class="list-item no-cursor">
+        <div class="checkbox">
+            <div class="checkbox" ng-show="controller.showgroup">
+                <input type="checkbox">
+            </div>
+        </div>
+        <div>
+            <div class="view-action-buttons" ng-show="controller.showgroup">
+                <a class="button remove"
+                    ng-click="ResourceList.deleteResource(resource, $index)">
+                Remove</a>
+            </div>
+            <div class="view-action-buttons-mobile" ng-show="controller.showgroup">
+                <div class="actions-button">
+                    <a class="button dropdown-active"
+                        ng-click="mobileActions=!mobileActions">actions</a>
+                    <ul class="actions-dropdown" ng-show="mobileActions">
+                        <li>
+                            <a class="button-simple remove"
+                                ng-click="ResourceList.deleteResource(resource, $index)">
+                            Remove</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-<!-- /app-block -->
-<!-- app-block -->
-<section class="app-block">
-    <div class="container-fluid">
-        <div class="white-box">
-            <div class="app-items-list">
-                <table class="items-table">
-                    <tr>
-                        <th class="name">
-                            <a href="" class="sort">Name</a>
-                        </th>
-                        <th class="col-xs-8">
-                            <a href="" class="sort">Key</a>
-                        </th>
-                        <th class="col-xs-1"></th>
-                    </tr>
-                    <tr ng-repeat="key in controller.user.keys">
-                        <td class="user-name">
-                            <strong>{{ key.name }}</strong>
-                        </td>
-                        <td class="col-xs-8">
-                            <div class="key">{{ key.fingerprint }}</div>
-                        </td>
-                        <td class="col-xs-1 controls-ctn">
-                            <ul class="controls pull-right">
-                                <li>
-                                    <a href="#" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
-                                </li>
-                            </ul>
-                        </td>
-                    </tr>
-                </table>
+        <div class="actions switch">
+            <span class="label-text" ng-class="{'low-grade': !controller.showgroup}">batch</span>
+            <div class="checkbox-toggle">
+                <input type="checkbox" id="control-types" ng-click="controller.showgroup=!controller.showgroup">
+                <label for="control-types"></label>
             </div>
+            <span class="label-text special-left" ng-class="{'low-grade': controller.showgroup}">single</span>
         </div>
     </div>
 </section>
-<!-- /app-block -->
-<!-- app-block -->
-<div class="app-block">
-    <div class="container-fluid">
-        <!-- pagination -->
-        <div class="pagination">
-            <ul>
-                <li><a href="#" class="current">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-            </ul>
-        </div>
-        <!-- /pagination -->
-    </div>
+<!-- /view-control -->
+
+<div class="white-box clear">
+    <ul class="object-list">
+        <li>
+            <div class="list-item">
+                <div class="checkbox"></div>
+                <div class="name">
+                    <a class="list-sort">Name</a>
+                </div>
+                <div class="additional-cell">
+                    <a class="list-sort">Fingerprint</a>
+                </div>
+                <div class="actions"></div>
+            </div>
+        </li>
+        <li ng-repeat="key in controller.user.keys">
+            <div class="list-item">
+                <div class="checkbox">
+                    <div class="checkbox">
+                        <input type="checkbox" ng-show="controller.showgroup">
+                    </div>
+                </div>
+                <div class="name">
+                    <h3 class="item-title pointer">{{ key.name }}</h3>
+                </div>
+                <div class="additional-cell">
+                    {{ key.fingerprint }}
+                </div>
+                <div class="actions">
+                    <div class="actions-button" ng-show="!controller.showgroup">
+                        <a class="button" ng-click="openActions=!openActions">actions</a>
+                        <ul class="actions-dropdown" ng-show="openActions">
+                            <li>
+                            <a class="button-simple remove">
+                                Remove</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
 </div>
-<!-- /app-block -->

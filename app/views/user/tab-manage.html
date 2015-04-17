@@ -1,104 +1,80 @@
-<!-- app-block -->
-<section class="app-block">
-    <div class="container-fluid">
-        <div class="white-box">
-            <div class="app-title-line">
-                <div class="row">
-                    <div class="col-xs-12 first-line">
-                        <ul class="sort">
-                            <li><a href="#" class="active">5</a></li>
-                            <li><a href="#">15</a></li>
-                            <li><a href="#">24</a></li>
-                            <li class="divid">
-                                <div class="search" data-role="search-box">
-                                    <input type="text">
-                                    <button class="search-button">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </div>
+<!-- view-control -->
+<section class="view-control">
+    <div class="list-item no-cursor">
+        <div class="checkbox">
+            <div class="checkbox" ng-show="controller.showgroup">
+                <input type="checkbox">
+            </div>
+        </div>
+        <div>
+            <div class="view-action-buttons" ng-show="controller.showgroup">
+                <a class="button remove">
+                Change role</a>
+            </div>
+            <div class="view-action-buttons-mobile" ng-show="controller.showgroup">
+                <div class="actions-button">
+                    <a class="button dropdown-active"
+                        ng-click="mobileActions=!mobileActions">actions</a>
+                    <ul class="actions-dropdown" ng-show="mobileActions">
+                        <li>
+                            <a class="button-simple remove">
+                            Change role</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="actions switch">
+            <span class="label-text" ng-class="{'low-grade': !controller.showgroup}">batch</span>
+            <div class="checkbox-toggle">
+                <input type="checkbox" id="control-types" ng-click="controller.showgroup=!controller.showgroup">
+                <label for="control-types"></label>
+            </div>
+            <span class="label-text special-left" ng-class="{'low-grade': controller.showgroup}">single</span>
+        </div>
+    </div>
+</section>
+<!-- /view-control -->
+
+<div class="white-box clear">
+    <ul class="object-list">
+        <li>
+            <div class="list-item">
+                <div class="checkbox"></div>
+                <div class="name">
+                    <a class="list-sort">Name</a>
+                </div>
+                <div class="additional-cell">
+                    <a class="list-sort">Role</a>
+                </div>
+                <div class="actions"></div>
+            </div>
+        </li>
+        <li>
+            <div class="list-item">
+                <div class="checkbox">
+                    <div class="checkbox">
+                        <input type="checkbox" ng-show="controller.showgroup">
+                    </div>
+                </div>
+                <div class="name">
+                    <h3 class="item-title pointer"><a href="ui-sref=">Project name</a></h3>
+                </div>
+                <div class="additional-cell">
+                    Role
+                </div>
+                <div class="actions">
+                    <div class="actions-button" ng-show="!controller.showgroup">
+                        <a class="button" ng-click="openActions=!openActions">actions</a>
+                        <ul class="actions-dropdown" ng-show="openActions">
+                            <li>
+                            <a class="button-simple">
+                                Change role</a>
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</section>
-<!-- /app-block -->
-
-<div ui-view="controlsListUser"></div>
-
-<!-- app-block -->
-<section class="app-block">
-    <div class="container-fluid">
-        <div class="white-box">
-            <div class="app-items-list">
-                <div class="table-responsive">
-                    <table class="items-table">
-                        <tr>
-                            <th class="pic"></th>
-                            <th class="name">
-                                <a href="" class="sort">Project</a>
-                            </th>
-                            <th class="col-xs-3">
-                                <a href="" class="sort">Role</a>
-                            </th>
-                            <th></th>
-                        </tr>
-                        <tr>
-                            <td class="col-xs-1 pic">
-                                <input type="checkbox" ng-show="controller.showgroup">
-                            </td>
-                            <td class="name">
-                                <h2 class="item-title">
-                                    <a ui-sref="#">Project</a>
-                                </h2>
-                            </td>
-                            <td class="col-xs-3 gray-text">
-                                <span class="gray-text">Role in project</span>
-                            </td>
-                            <td class="col-xs-2 controls-ctn">
-                                <div class="rel-box">
-                                    <ul class="controls pull-right" ng-hide="controller.showgroup">
-                                        <li>
-                                            <a class="btn btn-control dropdown"
-                                                ng-click="subactions=!subactions"
-                                                ng-class="{'active': subactions}"
-                                                >Actions</a>
-                                            <ul class="sub-controls" ng-show="subactions">
-                                                <li>
-                                                    <a class="btn btn-control">Setup new role</a>
-                                                </li>
-                                                <li>
-                                                    <a class="btn btn-control">Remove from project</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- /app-block -->
-<!-- app-block -->
-<div class="app-block">
-    <div class="container-fluid">
-        <!-- pagination -->
-        <div class="pagination">
-            <ul>
-                <li><a href="#" class="current">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-            </ul>
-        </div>
-        <!-- /pagination -->
-    </div>
+        </li>
+    </ul>
 </div>
-<!-- /app-block -->
