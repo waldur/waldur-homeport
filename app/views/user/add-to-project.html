@@ -1,82 +1,40 @@
-<!-- app-block -->
-<section class="app-block">
-    <div class="container-fluid">
-        <div class="white-box">
-            <div class="app-basic-form">
-                <div class="row form-field">
-                    <div class="col-xs-12 first-line">
-                        <h2 class="app-title inline-elem">Add users to project</h2>
-                        <div class="custom-select project inline-elem">
-                            <select>
-                                <option value="">Choose project</option>
-                                <option value="">Some project</option>
-                                <option value="">Some project 2</option>
-                            </select>
-                        </div>
-                        <ul class="links-list list-inline inline-elem">
-                            <li><a href="#" ng-click="showusers=!showusers"
-                                ng-class="{'active': showusers}">Show users</a></li>
-                            <li><a href="#" ng-click="invitemore=!invitemore"
-                                ng-class="{'active': invitemore}">Invite more users</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="row form-field" ng-show="showusers">
-                    <div class="col-xs-12">
-                        <div class="gray-box">
-                            <div class="user">
-                                <div class="user-wrap">
-                                    <div class="pic">
-                                        <img src="../static/images/887178.jpg" alt="John Doe">
-                                    </div>
-                                    <h2 class="name">
-                                        <a ui-sref="users.details({uuid: user.uuid})">John Doe</a>
-                                    </h2>
-                                </div>
-                            </div>
-                            <div class="user">
-                                <div class="user-wrap">
-                                    <div class="pic">
-                                        <img src="../static/images/887178.jpg" alt="John Doe">
-                                    </div>
-                                    <h2 class="name">
-                                        <a ui-sref="users.details({uuid: user.uuid})">John Doe</a>
-                                    </h2>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-field invites-form" ng-show="invitemore">
-                    <div class="row">
-                        <div class="col-xs-8">
-                            <ul class="list-unstyled invited-list">
-                                <li>
-                                    <strong>alex@grabos.com</strong> <span class="label label-black-txt">invite sended</span>
-                                </li>
-                                <li>
-                                    <strong>Indie@vasanna.me</strong> <span class="label label-black-txt">invite sended</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-4">
-                            <input type="text" class="form-control" placeholder="user@example.com">
-                        </div>
-                        <div class="col-xs-4">
-                            <a class="btn btn-white">Add users</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="row form-field">
-                    <div class="col-xs-12 text-center">
-                        <a class="btn btn-default">Cancel</a>
-                        <a class="btn btn-primary">Add users</a>
-                    </div>
-                </div>
-            </div>
+<section class="row">
+    <div class="col">
+        <h2 class="app-title">Add to project</h2>
+    </div>
+    <div class="col">
+        <div class="custom-select project inline-elem">
+            <select>
+                <option value="">Choose project</option>
+                <option value="">Some project</option>
+                <option value="">Some project 2</option>
+            </select>
         </div>
     </div>
 </section>
-<!-- /app-block -->
+<section class="row gray-box">
+    <div class="col">
+        <span class="avatar offset-right">
+            <img src="/static/images/user-avatar.jpg" alt="" class="avatar-img">
+        </span>
+        <h4 class="item-title">
+            <a href="">Michael Yakimenko</a>
+        </h4>
+    </div>
+    <div class="col">
+        <span class="avatar offset-right">
+            <img src="/static/images/thumb50.png" alt="" class="avatar-img">
+        </span>
+        <h4 class="item-title">
+            <a href="">Pavel Marchuk</a>
+        </h4>
+    </div>
+</section>
+<div class="decision">
+    <div class="col">
+        <a class="button-cancel">Cancel</a>
+    </div>
+    <div class="col">
+        <a class="button-apply">Add to project</a>
+    </div>
+</div>
