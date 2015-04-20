@@ -195,7 +195,7 @@ angular
         url: '',
         views: {
           'appContent': {
-            templateUrl: 'views/customer/details.html',
+            templateUrl: 'views/profile/details.html',
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',
@@ -211,10 +211,10 @@ angular
       })
 
       .state('profile.update', {
-        url: '',
+        url: 'edit/',
         views: {
           'appContent': {
-            templateUrl: 'views/customer/update.html',
+            templateUrl: 'views/profile/update.html',
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',

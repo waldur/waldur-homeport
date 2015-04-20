@@ -1,0 +1,42 @@
+<div ng-controller="UpdateProfileController as controller">
+
+<!-- profile-view -->
+<div class="profile-view">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-1">
+                <img src="../static/images/887178.jpg" class="profile-pic" alt="John Doe">
+            </div>
+            <div class="col-xs-7 profile-info">
+                <h1 class="profile-name">{{ controller.user.full_name }} ({{ controller.user.username }})</h1>
+            </div>
+            <div class="col-xs-4">
+                <ul class="controls pull-right">
+                    <li>
+                        <a ui-sref="profile.details" class="crud-controls active"><i class="fa fa-cog"></i> edit profile</a>
+                    </li>
+                    <li>
+                        <a href="/#/profile/changepass/" class="crud-controls"><i class="fa fa-cog"></i> change password</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="form">
+                <form ng-submit="controller.update()">
+                    <div class="row form-field">
+                        <div class="col-xs-6">
+                            <input type="text" class="form-control" ng-model="controller.user.email" required>
+                        </div>
+                        <div class="col-xs-2">
+                            <button class="btn btn-primary ng-hide" ng-show="controller.user.email.length" type="submit">Save</button>
+                        </div>
+                    </div>
+                </form>
+
+                <span class="error error-standard error-small label" ng-repeat="error in controller.errors.email">{{ error }}</span>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /profile-view -->
+
+</div>
