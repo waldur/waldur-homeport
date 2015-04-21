@@ -46,15 +46,9 @@ angular
         url: 'login/',
         controller: 'AuthController',
         views: {
-          'siteHeader@home' : {
-            templateUrl: 'views/partials/site-header.html',
-          },
           'siteContent@home' : {
-            templateUrl: 'views/home/login.html',
+            templateUrl: 'views/login.html',
           },
-          'siteFooter@home' : {
-            templateUrl: 'views/partials/site-footer.html',
-          }
         },
         resolve: {
           authenticated: notLoggedCheck
