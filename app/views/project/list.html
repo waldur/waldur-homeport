@@ -9,9 +9,8 @@
                     <div class="col-xs-12 first-line">
                         <h2 class="app-title">Projects</h2>
                         <ul class="sort">
-                            <li ng-repeat="pageSize in ProjectList.pageSizes">
-                                <a ng-click="ProjectList.changePageSize(pageSize)"
-                                   ng-class="{active: pageSize === ProjectList.currentPageSize}">{{pageSize}}</a>
+                            <li>
+                                <pagesize pages-href="#/projects/" pages-list="ProjectList" pages-service="ProjectList.service"/>
                             </li>
 
                             <li class="divid">
@@ -93,14 +92,7 @@
 <div class="app-block">
     <div class="container-fluid">
         <!-- pagination -->
-        <div class="pagination">
-            <ul>
-                <li><a href="#/resources/" ng-repeat="i in ProjectList.getNumber(ProjectList.pages) track by $index"
-                       ng-class="{current: ($index+1) === ProjectList.currentPage}"
-                       ng-click="ProjectList.changePage($index+1)">{{$index+1}}</a></li>
-
-            </ul>
-        </div>
+        <pagination pages-href="#/projects/" pages-list="ProjectList" pages-service="ProjectList.service"/>
         <!-- /pagination -->
     </div>
 </div>
