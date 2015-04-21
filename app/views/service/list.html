@@ -14,10 +14,7 @@
                             <li><a href="#">24</a></li>
                             <li class="divid">
                                 <div class="search" data-role="search-box">
-                                    <input type="text">
-                                    <button class="search-button">
-                                        <i class="fa fa-search"></i>
-                                    </button>
+                                    <input type="text" ng-model='serviceList.searchInput' ng-keyup="serviceList.search()">
                                 </div>
                             </li>
                         </ul>
