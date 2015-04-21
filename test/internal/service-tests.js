@@ -76,7 +76,10 @@ for(var i = 0; i < testData.length; i++) {
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/services/');
       });
 
-      // TODO add test "I should be able to find added service in service list" when search will be implemented
+      it('I should be able to find added service "' + data.name + '" in service list', function() {
+        element(by.model('serviceList.searchInput')).sendKeys(data.name);
+        expect(element(by.cssContainingText('h2.item-title', data.name)).isPresent()).toBe(true);
+      });
 
       it('I should be able to logout', function() {
         auth.logout();

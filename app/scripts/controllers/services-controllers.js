@@ -8,12 +8,16 @@
   function ServiceListController($state, servicesService, customerPermissionsService, usersService) {
     var vm = this;
 
-    servicesService.getList().then(function(response) {
-      vm.list = response;
-    });
+    vm.list = [];
+
+    // search
+    vm.searchInput = '';
+    vm.search = search;
+
     vm.remove = remove;
 
     function activate() {
+      getList();
       // init canUserAddService
       usersService.getCurrentUser().then(function(user) {
         /*jshint camelcase: false */
@@ -26,6 +30,16 @@
           }
         });
       });
+    }
+
+    function getList(filters) {
+      servicesService.getList(filters).then(function(response) {
+        vm.list = response;
+      });
+    }
+
+    function search() {
+      getList({name: vm.searchInput});
     }
 
     function remove(service) {
