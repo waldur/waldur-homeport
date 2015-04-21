@@ -63,25 +63,31 @@
             <li>
                 <div class="list-item">
                     <div class="checkbox"></div>
+                    <div class="expand"></div>
                     <div class="avatar"></div>
                     <div>
                         <a class="list-sort">Name</a>
                     </div>
-                    <div>
+                    <div class="additional-cell">
                         <a class="list-sort">access information</a>
                     </div>
-                    <div>
+                    <div class="additional-cell">
                         <a class="list-sort">status</a>
                     </div>
                     <div class="actions"></div>
                 </div>
             </li>
             <li ng-repeat="user in controller.list">
-                <div class="list-item">
+                <div class="list-item" ng-class="{'opened': expandItem}">
                     <div class="checkbox">
                         <div class="checkbox">
                             <input type="checkbox" ng-show="controller.showgroup">
                         </div>
+                    </div>
+                    <div class="expand">
+                        <a class="plus-minus"
+                        ng-click="expandItem=!expandItem"
+                        ng-class="{'plus': !expandItem, 'minus active': expandItem}"></a>
                     </div>
                     <div class="avatar">
                         <span class="avatar">
@@ -92,10 +98,10 @@
                         <h3 class="item-title"><a ui-sref="users.details({uuid: user.uuid})">{{ user.native_name }}</a></h3>
                         <span>({{ user.username }})</span>
                     </div>
-                    <div>
+                    <div class="additional-cell">
                         access information
                     </div>
-                    <div>
+                    <div class="additional-cell">
                         status
                     </div>
                     <div class="actions">

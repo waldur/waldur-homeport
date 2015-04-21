@@ -27,7 +27,7 @@
                         ng-class="{'active': controller.menuItemActive === 'services'}" class="service">Services</a>
                 </li>
                 <li>
-                    <a ui-sref="users.list.show"
+                    <a ui-sref="users.list"
                         ng-class="{'active': controller.menuItemActive === 'users'}" class="user">Users</a>
                 </li>
             </ul>
@@ -41,13 +41,19 @@
                     </a>
                     <ul class="nav-sublist" ng-show="controller.menuState.addSomethingMenu">
                         <li>
-                            <a ui-sref="service-add" class="service">Add service</a>
+                            <a ui-sref="services.create" class="service">Add service</a>
                         </li>
                         <li>
                             <a ui-sref="projects.create" class="project">Add project</a>
                         </li>
                         <li>
                             <a ui-sref="resources.create" class="resource">Add resource</a>
+                        </li>
+                        <li>
+                            <a ui-sref="keys.create" class="key">Add SSH key</a>
+                        </li>
+                        <li>
+                            <a href="" class="user">Invite user</a>
                         </li>
                     </ul>
                 </li>
@@ -77,13 +83,19 @@
                     </a>
                     <ul class="nav-sublist user-area" ng-show="controller.menuState.profileMenu">
                         <li class="on-tablet">
-                            <a ui-sref="service-add" class="service">Add service</a>
+                            <a ui-sref="services.create" class="service">Add service</a>
                         </li>
                         <li class="on-tablet">
                             <a ui-sref="projects.create" class="project">Add project</a>
                         </li>
                         <li class="on-tablet">
                             <a ui-sref="resources.create" class="resource">Add resource</a>
+                        </li>
+                        <li class="on-tablet">
+                            <a ui-sref="keys.create" class="key">Add SSH key</a>
+                        </li>
+                        <li class="on-tablet">
+                            <a href="" class="user">Invite user</a>
                         </li>
                         <li class="divider on-tablet"></li>
 
@@ -126,7 +138,7 @@
                         ng-class="{'active': controller.menuItemActive === 'services'}" class="service">Services</a>
                 </li>
                 <li>
-                    <a ui-sref="users.list.show"
+                    <a ui-sref="users.list"
                         ng-class="{'active': controller.menuItemActive === 'users'}" class="user">Users</a>
                 </li>
             </ul>
@@ -140,13 +152,16 @@
                     </a>
                     <ul class="nav-sublist-side" ng-show="controller.menuState.addSomethingMenu">
                         <li>
-                            <a href="" class="service">Add service</a>
+                            <a ui-sref="services.create" class="service">Add service</a>
                         </li>
                         <li>
-                            <a href="" class="project">Add project</a>
+                            <a ui-sref="projects.create" class="project">Add project</a>
                         </li>
                         <li>
-                            <a href="" class="resource">Add resource</a>
+                            <a ui-sref="resources.create" class="resource">Add resource</a>
+                        </li>
+                        <li>
+                            <a ui-sref="keys.create" class="key">Add SSH key</a>
                         </li>
                         <li>
                             <a href="" class="user">Invite user</a>
@@ -179,7 +194,7 @@
                     </a>
                     <ul class="nav-sublist-side user-area" ng-show="controller.menuState.profileMenu">
                         <li class="on-tablet">
-                            <a ui-sref="service-add" class="service">Add service</a>
+                            <a ui-sref="services.create" class="service">Add service</a>
                         </li>
                         <li class="on-tablet">
                             <a ui-sref="projects.create" class="project">Add project</a>

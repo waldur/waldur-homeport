@@ -2,6 +2,7 @@
     background-color: #565656;
     color: white;
     @include property(font-size, 15);
+    @include property(height, 50);
     a {
         color: white;
     } // a

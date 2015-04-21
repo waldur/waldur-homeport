@@ -1,9 +1,12 @@
 .app-header {
     background-color: #9ECF5D;
     position: relative;
-    z-index: 22;
+    z-index: 55;
     width: 100%;
     @include property(height, 50);
     position: fixed;
     top: 0;
+    &.site {
+        background-color: white;
+    } // &.site
 } // app-header

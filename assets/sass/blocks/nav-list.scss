@@ -1,6 +1,16 @@
 .nav-list {
     @include clear-list-inline;
     @include clearfix;
+    &.in-home {
+        > li {
+            > a {
+                &.active {
+                    color: #1F3305;
+                    background-color: #f7f7f7;
+                } // &.active
+            } // > a
+        } // > li
+    } // &.in-home
     &.views {
         float: left;
     } // &.views

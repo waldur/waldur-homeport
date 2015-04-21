@@ -49,7 +49,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
+    flex-wrap: row-reverse;
     > .col {
         flex: 0 0 auto;
         @include property(padding, 0 10);

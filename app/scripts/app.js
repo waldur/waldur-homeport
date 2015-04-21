@@ -17,16 +17,45 @@ angular
     $stateProvider
       .state('home', {
         url: '/',
-        templateUrl: 'views/home.html',
+        abstract: true,
+        templateUrl: 'views/home/base.html',
         resolve: {
           authenticated: notLoggedCheck
         }
       })
 
-      .state('login', {
-        url: '/login/',
-        templateUrl: 'views/login.html',
+      .state('home.home', {
+        url: '',
+        views: {
+          'siteHeader@home' : {
+            templateUrl: 'views/partials/site-header.html',
+          },
+          'siteContent@home' : {
+            templateUrl: 'views/home/home.html',
+          },
+          'siteFooter@home' : {
+            templateUrl: 'views/partials/site-footer.html',
+          }
+        },
+        resolve: {
+          authenticated: notLoggedCheck
+        }
+      })
+
+      .state('home.login', {
+        url: 'login/',
         controller: 'AuthController',
+        views: {
+          'siteHeader@home' : {
+            templateUrl: 'views/partials/site-header.html',
+          },
+          'siteContent@home' : {
+            templateUrl: 'views/home/login.html',
+          },
+          'siteFooter@home' : {
+            templateUrl: 'views/partials/site-footer.html',
+          }
+        },
         resolve: {
           authenticated: notLoggedCheck
         }
@@ -310,13 +339,13 @@ angular
       })
 
       .state('users', {
+        url: '/users/',
         abstract: true,
         templateUrl: 'views/user/base.html'
       })
 
       .state('users.list', {
-        url: '/users/',
-        abstract: true,
+        url: '',
         views: {
           'appContent': {
             templateUrl: 'views/user/list.html',
@@ -326,19 +355,6 @@ angular
           },
           'appFooter': {
             templateUrl: 'views/partials/app-footer.html',
-          }
-        },
-        resolve: {
-          authenticated: authCheck
-        },
-        auth: true
-      })
-
-      .state('users.list.show',{
-        url:'',
-        views: {
-          'controlsList': {
-            templateUrl: 'views/partials/controls-line.html',
           }
         },
         resolve: {
