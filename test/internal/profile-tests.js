@@ -1,4 +1,5 @@
 var auth = require('../helpers/auth.js'),
+  helpers = require('../helpers/helpers.js'),
   users = [auth.getUser('Charlie'), auth.getUser('Walter')],
   testData = [
     {
@@ -23,8 +24,11 @@ for(var i=0; i < users.length; i++) {
       });
 
       it('I should be able to go to profile', function() {
-        element(by.css('li.dropdown.user-box a')).click();
-        element(by.cssContainingText('li.dropdown.user-box ul li:nth-child(1) a', 'Profile')).click();
+        element(by.css('header > nav > ul.nav-list.context > li:nth-child(3) > a')).click();
+        browser.takeScreenshot().then(function(png) {
+          helpers.writeScreenShot(png, 'exception.png');
+        });
+        element(by.cssContainingText('ul.nav-list.context > li:nth-child(3) > ul > li > a', 'Profile')).click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/profile/');
         expect(element(by.css('.profile-name')).getText()).toContain(user.username);
       });

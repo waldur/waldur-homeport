@@ -13,6 +13,7 @@
     // search
     vm.searchInput = '';
     vm.search = search;
+    vm.service = servicesService;
 
     vm.remove = remove;
 

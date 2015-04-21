@@ -53,12 +53,12 @@ for(var i = 0; i < testData.length; i++) {
       });
 
       it('I should be able to go to services list', function() {
-        element(by.cssContainingText('ul.nav li a', 'Services')).click();
+        element(by.cssContainingText('ul.nav-list.views li a', 'Services')).click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/services/');
       });
 
       it('I should be able to go to "service add" page', function() {
-        element(by.cssContainingText('ul.nav li a', 'Services')).click();
+        element(by.cssContainingText('ul.nav-list.views li a', 'Services')).click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/services/');
 
         element(by.cssContainingText('a.crud-controls', 'Add service')).click();
