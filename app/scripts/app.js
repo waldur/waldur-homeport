@@ -47,7 +47,7 @@ angular
         controller: 'AuthController',
         views: {
           'siteContent@home' : {
-            templateUrl: 'views/login.html',
+            templateUrl: 'views/home/login.html',
           },
         },
         resolve: {
