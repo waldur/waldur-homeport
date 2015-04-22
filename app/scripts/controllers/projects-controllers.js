@@ -9,19 +9,11 @@
 
     vm.list = {};
     vm.deleteProject = deleteProject;
+    vm.service = projectsService;
 
     // search
     vm.searchInput = '';
     vm.search = search;
-
-    // pagination
-    vm.changePageSize = changePageSize;
-    vm.changePage = changePage;
-    vm.getNumber = getNumber;
-    vm.pageSizes = [5, 10, 20, 50];
-    vm.currentPageSize = projectsService.pageSize;
-    vm.pages = projectsService.pages ? projectsService.pages : 5;
-    vm.currentPage = projectsService.page;
 
     $rootScope.$on('currentCustomerUpdated', function() {
       projectsService.page = 1;
@@ -62,24 +54,6 @@
         vm.pages = projectsService.pages;
         vm.list = response;
       });
-    }
-
-    function changePageSize(pageSize) {
-      vm.currentPageSize = pageSize;
-      vm.currentPage = 1;
-      projectsService.page = 1;
-      projectsService.pageSize = pageSize;
-      initList();
-    }
-
-    function changePage(page) {
-      vm.currentPage = page;
-      projectsService.page = page;
-      initList();
-    }
-
-    function getNumber(num) {
-      return new Array(num);
     }
 
     $rootScope.$on('currentCustomerUpdated', function () {
