@@ -20,11 +20,10 @@
         if (user.is_staff) {
           vm.canUserAddService = true;
         }
-        customerPermissionsService.getList({username: user.username}).then(function(permissions) {
-          if (permissions.length !== 0) {
-            vm.canUserAddService = (permissions[0].role === 'owner');
-          }
+        customerPermissionsService.userHasCustomerRole(user, 'owner').then(function(hasRole) {
+          vm.canUserAddService = hasRole;
         });
+
       });
     }
 
