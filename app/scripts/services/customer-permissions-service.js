@@ -9,10 +9,16 @@
         this.endpoint = '/customer-permissions/';
       },
 
-      userHasCustomerRole: function(user, role) {
-        var deferred = $q.defer();
+      userHasCustomerRole: function(username, role, customerUUID) {
+        var deferred = $q.defer(),
+          filter = {username: username};
+        if (customerUUID) {
+          /*jshint camelcase: false */
+          filter.customer_uuid = customerUUID;
+        }
 
-        this.getList({username: user.username}).then(function(permissions) {
+
+        this.getList(filter).then(function(permissions) {
           for (var i = 0; i < permissions.length; i++) {
             if (permissions[i].role === role) {
               deferred.resolve(true);
