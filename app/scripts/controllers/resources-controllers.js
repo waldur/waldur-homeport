@@ -57,6 +57,7 @@
     resourcesService, servicesService, projectsService, keysService, templatesService, baseControllerAddClass) {
     var controllerScope = this;
     var ResourceController = baseControllerAddClass.extend({
+      showServices: false,
       showFlavors: false,
       showTemplates: false,
 
@@ -110,6 +111,7 @@
         var vm = this;
         if (project) {
           vm.resource.project = project.url;
+          vm.showServices = true;
           // services
           servicesService.getList({project: project.uuid}).then(function(response) {
             vm.serviceList = response;
