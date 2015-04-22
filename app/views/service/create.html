@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div class="col">
-                <input type="text" placeholder="Auth Name" ng-model="ServiceAdd.service.auth_url">
+                <input type="text" placeholder="Auth URL" ng-model="ServiceAdd.service.auth_url">
                 <div class="error arrow-up" ng-show="ServiceAdd.errors.auth_url">
                     <ul class="error-list">
                         <li ng-repeat="error in ServiceAdd.errors.auth_url">{{ error }}</li>
@@ -40,7 +40,6 @@
         </div>
         <!-- /non field errors -->
 
-
         <div class="decision">
             <div class="col">
                 <a class="button-cancel" ng-click="ServiceAdd.cancel()">Cancel</a>
@@ -50,71 +49,6 @@
             </div>
         </div>
     </div>
-
-<div class="app-form-box after-line" data-role="form-box" >
-    <!-- app-block -->
-    <section class="app-block">
-        <div class="container-fluid">
-            <div class="white-box top-level">
-                <!-- app-basic-form -->
-                <div class="app-basic-form">
-                    <form action="">
-
-                        <!-- app-title-line -->
-                        <div class="app-title-line in-form form-field">
-                            <div class="row">
-                                <div class="col-xs-12 first-line">
-                                    <h2 class="app-title">Service</h2>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /app-title-line -->
-
-                        <div class="row form-field description">
-                            <div class="col-xs-4">
-                                <span class="error error-standard error-small arrow-down label" ng-repeat="error in ServiceAdd.errors.name">{{ error }}</span>
-                            </div>
-                            <div class="col-xs-4">
-                                <span class="error error-standard error-small arrow-down label" ng-repeat="error in ServiceAdd.errors.auth_url">{{ error }}</span>
-                            </div>
-                        </div>
-
-                        <div class="row form-field">
-                            <div class="col-xs-4">
-                                <input type="text" class="form-control" placeholder="Service Name" data-role="form-input" ng-model="ServiceAdd.service.name">
-                            </div>
-
-                            <div class="col-xs-4">
-                                <input type="text" class="form-control" placeholder="Auth Url" data-role="form-input" ng-model="ServiceAdd.service.auth_url">
-                            </div>
-                        </div>
-
-                        <!-- non field errors -->
-                        <div class="form-divide" ng-show="ServiceAdd.errors.non_field_errors"></div>
-                        <div class="non-field" ng-show="ServiceAdd.errors.non_field_errors">
-                            <ul class="add-form-non-field-errors">
-                                <li ng-repeat="error in ServiceAdd.errors.non_field_errors">
-                                    <span class="error error-standard label">{{ error }}</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- /non field errors -->
-
-                        <div class="form-divide"></div>
-
-                        <div class="row form-field">
-                            <div class="col-xs-12 text-center">
-                                <a class="btn btn-default" ng-click="ServiceAdd.cancel()">Cancel</a>
-                                <a class="btn btn-primary" ng-click="ServiceAdd.save()">Add service</a>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <!-- /app-basic-form -->
-            </div>
-        </div>
-    </section>
-    <!-- /app-block -->
 </div>
 
 </div>
