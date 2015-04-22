@@ -14,6 +14,7 @@
     vm.showgroup = false;
     vm.list = usersService.getRawUserList();
     vm.remove = remove;
+    vm.service = usersService;
 
     function remove(user) {
       var index = vm.list.indexOf(user);

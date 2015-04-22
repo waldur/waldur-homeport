@@ -37,7 +37,7 @@ for(var i = 0; i < testData.length; i++) {
         if ('customer' in data) {
           helpers.chooseCustomer(data.customer);
         }
-        element(by.cssContainingText('ul.nav li a', 'Resources')).click();
+        element(by.cssContainingText('ul.nav-list.views li a', 'Resources')).click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/resources/');
 
         element(by.cssContainingText('a.crud-controls', 'Add resource')).click();

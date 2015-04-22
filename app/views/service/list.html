@@ -5,10 +5,10 @@
         <li class="title">
             <h2 class="app-title">Services</h2>
         </li>
-        <pagesize pages-href="#/resources/" pages-list="ResourceList" pages-service="ResourceList.service"></pagesize>
+        <pagesize pages-list="serviceList" pages-service="serviceList.service"></pagesize>
         <li class="search divid">
             <div class="search-box">
-                <input type="text" ng-model='ResourceList.searchInput' ng-keyup="ResourceList.search()">
+                <input type="text" ng-model='serviceList.searchInput' ng-keyup="serviceList.search()">
                 <button class="search-button"></button>
             </div>
         </li>
@@ -155,8 +155,7 @@
 </div>
 
 <div class="pagination">
-    <pagination pages-href="#/resources/"
-        pages-list="ResourceList" pages-service="ResourceList.service"></pagination>
+    <pagination pages-list="serviceList" pages-service="serviceList.service"></pagination>
 </div>
 
 </div>

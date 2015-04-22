@@ -22,7 +22,7 @@ for(var i = 0; i < testData.length; i++) {
       });
 
       it('I should be able to go to projects list', function() {
-        element(by.cssContainingText('ul.nav li a', 'Projects')).click();
+        element(by.cssContainingText('ul.nav-list.views li a', 'Projects')).click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/projects/');
       });
 
@@ -30,7 +30,7 @@ for(var i = 0; i < testData.length; i++) {
         (function(project) {
           it('I should be able to see ' + project + ' at projects list page', function() {
             element(by.model('ProjectList.searchInput')).sendKeys(project);
-            expect(element(by.cssContainingText('h2.item-title', project)).isPresent()).toBe(true);
+            expect(element(by.cssContainingText('h3.item-title a', project)).isPresent()).toBe(true);
           });
         })(data.projects[j]);
       }
