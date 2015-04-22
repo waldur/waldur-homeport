@@ -3,9 +3,9 @@
 (function() {
   angular.module('ncsaas')
     .controller('ProfileController',
-      ['usersService', 'customersService', 'projectsService', 'baseControllerClass', ProfileController]);
+      ['usersService', 'customersService', 'projectsService', 'baseControllerClass', 'authService', ProfileController]);
 
-  function ProfileController(usersService, customersService, projectsService, baseControllerClass) {
+  function ProfileController(usersService, customersService, projectsService, baseControllerClass, authService) {
     var controllerScope = this;
     var Controller = baseControllerClass.extend({
       activeTab: 'eventlog',
@@ -30,6 +30,16 @@
         projectsService.getList().then(function(response) {
           vm.projects = response;
         });
+      },
+      deleteAccount: function() {
+        if (confirm('Are you sure you want to delete your account?')) {
+          this.user.$delete(
+            authService.signout,
+            function(errors) {
+              alert(errors.data.detail);
+            }
+          );
+        }
       }
     });
 
