@@ -20,7 +20,7 @@
         if (user.is_staff) {
           vm.canUserAddService = true;
         }
-        customerPermissionsService.userHasCustomerRole(user, 'owner').then(function(hasRole) {
+        customerPermissionsService.userHasCustomerRole(user.username, 'owner').then(function(hasRole) {
           vm.canUserAddService = hasRole;
         });
 

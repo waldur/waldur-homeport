@@ -10,7 +10,7 @@
         this.registerEventHandlers();
       },
       setSignalHandler: function(signalName, handlerFunction) {
-        this._signals[signalName] = handlerFunction
+        this._signals[signalName] = handlerFunction;
       },
       registerEventHandlers: function() {
         for (var eventName in this._signals) {
