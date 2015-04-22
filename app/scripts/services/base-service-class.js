@@ -21,6 +21,7 @@
       currentStateService:null,
       endpoint:null,
       customerName:null,
+      filterByCustomer: true,
 
       init:function() {
         this.pageSize = 10;
@@ -49,7 +50,7 @@
           });
         };
 
-        if (vm.currentStateService == null) {
+        if (vm.currentStateService == null || !vm.filterByCustomer) {
           queryList();
         } else {
           vm.currentStateService.getCustomer().then(function (response) {
