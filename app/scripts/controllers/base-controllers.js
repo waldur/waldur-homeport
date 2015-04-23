@@ -73,6 +73,7 @@
 
       function logout() {
         authService.signout();
+        currentStateService.isCustomerDefined = false;
         $state.go('login');
       }
 
