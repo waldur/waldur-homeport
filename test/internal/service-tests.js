@@ -67,7 +67,7 @@ for(var i = 0; i < testData.length; i++) {
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/services/add/');
       });
 
-      it('I should be able to add new resource', function() {
+      it('I should be able to add new service', function() {
         // fill name
         element(by.model('ServiceAdd.service.name')).sendKeys(data.name);
         // fill auth_url
@@ -81,6 +81,14 @@ for(var i = 0; i < testData.length; i++) {
       it('I should be able to find added service "' + data.name + '" in service list', function() {
         element(by.model('serviceList.searchInput')).sendKeys(data.name);
         expect(element(by.cssContainingText('h3.item-title a', data.name)).isPresent()).toBe(true);
+      });
+
+      // TODO this test can be run when deletion service functionality will be available at backend
+      xit('I should be able to delete service', function() {
+        element(by.css('.object-list .list-item .actions-button a.button')).click();
+        element(by.css('.object-list .list-item .remove')).click();
+        browser.switchTo().alert().accept();
+        expect(element(by.cssContainingText('h3.item-title a', data.name)).isPresent()).toBe(false);
       });
 
       it('I should be able to logout', function() {

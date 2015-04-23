@@ -44,11 +44,20 @@
     }
 
     function remove(service) {
-      var index = vm.list.indexOf(service);
+      var confirmDelete = confirm('Confirm service deletion?');
+      if (confirmDelete) {
+        var index = vm.list.indexOf(service);
+        service.$delete(function() {
+          vm.list.splice(index, 1);
+        },handleServiceActionException);
+      }
+    }
 
-      service.$delete(function() {
-        vm.list.splice(index, 1);
-      });
+    function handleServiceActionException(response) {
+      if (response.status === 409) {
+        var message = response.data.status || response.data.detail;
+        alert(message);
+      }
     }
 
     activate();
