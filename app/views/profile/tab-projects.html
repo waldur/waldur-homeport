@@ -1,20 +1,3 @@
-<div ng-controller="ServiceListController as serviceList">
-
-<div class="white-box">
-    <ul class="sort-list">
-        <li class="title">
-            <h2 class="app-title">Services</h2>
-        </li>
-        <pagesize pages-list="serviceList" pages-service="serviceList.service"></pagesize>
-        <li class="search divid">
-            <div class="search-box">
-                <input type="text" ng-model='serviceList.searchInput' ng-keyup="serviceList.search()">
-                <button class="search-button"></button>
-            </div>
-        </li>
-    </ul>
-</div>
-
 <!-- view-control -->
 <section class="view-control">
     <div class="list-item no-cursor">
@@ -87,91 +70,129 @@
 
 <div class="white-box clear">
     <ul class="object-list">
-        <li class="list-item">
-            <div class="checkbox"></div>
-            <div class="expand"></div>
-            <div class="name">
-                <a href="#" class="list-sort">Name</a>
+        <li>
+            <div class="list-item">
+                <div class="checkbox"></div>
+                <div class="name">
+                    <a class="list-sort">Name</a>
+                </div>
+                <div class="additional-cell">
+                    <a class="list-sort">creation date</a>
+                </div>
+                <div class="actions"></div>
             </div>
-            <div class="additional-cell">
-                <a href="#" class="list-sort">Type</a>
-            </div>
-            <div class="actions"></div>
         </li>
-        <li ng-repeat="service in serviceList.list">
+        <li ng-repeat="project in controller.projects">
             <div class="list-item" ng-class="{'opened': expandItem}">
                 <div class="checkbox">
-                        <div class="checkbox">
-                            <input type="checkbox" ng-show="controller.showgroup">
-                        </div>
+                    <div class="checkbox">
+                        <input type="checkbox">
                     </div>
-                    <div class="expand">
-                        <a class="plus-minus"
-                        ng-click="expandItem=!expandItem"
-                        ng-class="{'plus': !expandItem, 'minus active': expandItem}"></a>
-                    </div>
-                <div>
-                    <h3 class="item-title">
-                        <a ui-sref="services.details({uuid: service.uuid})">{{ service.name }}</a>
-                    </h3>
                 </div>
-                <div class="additional-cell" ng-hide="collapsedItem">
-                    {{ service.service_type }}
+                <div class="name">
+                    <h3 class="item-title pointer" ng-click="expandItem=!expandItem">{{ project.name }}</h3>
+                    <a class="more-details"
+                        ng-show="expandItem"
+                        ui-sref="projects.details({uuid: project.uuid})">Permanent link</a>
+                </div>
+                <div class="additional-cell">
+                    {{ project.creation_date }}
                 </div>
                 <div class="actions">
-                    <div class="actions-button" ng-show="!controller.showgroup">
+                    <div class="actions-button">
                         <a class="button" ng-click="openActions=!openActions">actions</a>
                         <ul class="actions-dropdown" ng-show="openActions">
                             <li>
-                                <a class="button-simple start"
-                                    ng-click="ResourceList.startResource(resource)"
-                                    ng-class="{'disabled': !ResourceList.isOperationAvailable(resource, 'start')}">
-                                Start</a>
+                                <a class="button-simple">Add user</a>
                             </li>
                             <li>
-                                <a class="button-simple stop"
-                                    ng-click="ResourceList.stopResource(resource)" title="Stop"
-                                    ng-class="{'disabled': !ResourceList.isOperationAvailable(resource, 'stop')}">
-                                Stop</a>
+                                <a class="button-simple">Archive</a>
                             </li>
                             <li>
-                                <a class="button-simple restart"
-                                    ng-click="ResourceList.restartResource(resource)"
-                                    ng-class="{'disabled': !ResourceList.isOperationAvailable(resource, 'restart')}">
-                                Restart</a>
-                            </li>
-                            <li>
-                                <a class="button-simple remove"
-                                    ng-click="ResourceList.deleteResource(resource, $index)">
-                                Remove</a>
+                                <a class="button-simple">Delete</a>
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="list-item-details" ng-show="expandItem">
+                <section ng-if="project.description">
+                    {{ project.description }}
+                </section>
                 <section>
+                    <header>
+                        <h4 class="item-title">Resources</h4>
+                        <ul class="inline-pagination">
+                            <li>
+                                <a href="">1</a>
+                            </li>
+                            <li>
+                                <a href="" class="current">2</a>
+                            </li>
+                            <li>
+                                <a href="">3</a>
+                            </li>
+                            <li>
+                                <span>...</span>
+                            </li>
+                            <li>
+                                <a href="">5</a>
+                            </li>
+                        </ul>
+                    </header>
                     <ul>
                         <li class="item-list">
                             <section>
-                                <a class="list-sort">auth_url</a>
+                                <a class="list-sort">Name</a>
                             </section>
                             <section>
-                                <div class="list-sort">user name</div>
-                            </section>
-                            <section>
-                                <div class="list-sort">tenant</div>
+                                <div class="list-sort">Access information</div>
                             </section>
                         </li>
+                        <li class="item-list" ng-repeat="resource in project.resources">
+                            <section>
+                                <a href="">{{ resource.name }}</a>
+                            </section>
+                            <section>
+                                <span ng-repeat="access in resource.access_information">{{ access }}</span>
+                            </section>
+                        </li>
+                    </ul>
+                </section>
+                <!-- asas -->
+                <section>
+                    <header>
+                        <h4 class="item-title">Users</h4>
+                        <ul class="inline-pagination">
+                            <li>
+                                <a href="">1</a>
+                            </li>
+                            <li>
+                                <a href="" class="current">2</a>
+                            </li>
+                            <li>
+                                <a href="">3</a>
+                            </li>
+                            <li>
+                                <span>...</span>
+                            </li>
+                            <li>
+                                <a href="">5</a>
+                            </li>
+                        </ul>
+                    </header>
+                    <ul>
                         <li class="item-list">
                             <section>
-                                <a href="">auth_url</a>
+                                <a class="list-sort">Name</a>
                             </section>
+                        </li>
+                        <li class="item-list" ng-repeat="user in project.users">
                             <section>
-                                user name
-                            </section>
-                            <section>
-                                tenant
+                                <div class="avatar">
+                                    <img src="/static/images/user-avatar.jpg" alt="" class="avatar-img">
+                                </div>
+                                <a ui-sref="users({uuid: user.uuid})">{{ user.native_name }}</a>
                             </section>
                         </li>
                     </ul>
@@ -179,10 +200,4 @@
             </div>
         </li>
     </ul>
-</div>
-
-<div class="pagination">
-    <pagination pages-list="serviceList" pages-service="serviceList.service"></pagination>
-</div>
-
 </div>

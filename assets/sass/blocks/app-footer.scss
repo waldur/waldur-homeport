@@ -1,8 +1,10 @@
 .app-footer {
     background-color: #565656;
     color: white;
+    box-sizing: border-box;
     @include property(font-size, 15);
     @include property(height, 50);
+    @include property(padding-top, 13);
     a {
         color: white;
     } // a

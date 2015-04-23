@@ -208,6 +208,34 @@ angular
         auth: true
       })
 
+      .state('services.details', {
+        url: ':uuid/',
+        views: {
+          'appContent': {
+            templateUrl: 'views/service/details.html'
+          },
+          'tabEventlog@services.details' : {
+            templateUrl: 'views/service/tab-eventlog.html',
+          },
+          'tabResources@services.details' : {
+            templateUrl: 'views/service/tab-resources.html',
+          },
+          'tabProjects@services.details' : {
+            templateUrl: 'views/service/tab-projects.html',
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html'
+          },
+          'appFooter': {
+            templateUrl: 'views/partials/app-footer.html'
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
+        auth: true
+      })
+
       .state('profile', {
         url: '/profile/',
         abstract: true,
@@ -217,11 +245,23 @@ angular
       .state('profile.details', {
         url: '',
         views: {
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html',
+          },
           'appContent': {
             templateUrl: 'views/profile/details.html',
           },
-          'appHeader': {
-            templateUrl: 'views/partials/app-header.html',
+          'tabEventlog@users.details': {
+            templateUrl: 'views/profile/tab-eventlog.html',
+          },
+          'tabProjects@users.details': {
+            templateUrl: 'views/profile/tab-projects.html',
+          },
+          'tabKeys@users.details': {
+            templateUrl: 'views/profile/tab-keys.html',
+          },
+          'tabManageUser@users.details': {
+            templateUrl: 'views/profile/tab-manage.html',
           },
           'appFooter': {
             templateUrl: 'views/partials/app-footer.html',
