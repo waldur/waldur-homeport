@@ -13,10 +13,10 @@
         </div>
         <section class="row top">
             <div class="col">
-                <input type="text" placeholder="Resource Name" ng-model="ResourceAdd.resource.hostname">
-                <div class="error arrow-up" ng-show="ResourceAdd.errors.hostname">
+                <input type="text" placeholder="Resource Name" ng-model="ResourceAdd.resource.name">
+                <div class="error arrow-up" ng-show="ResourceAdd.errors.name">
                     <ul class="error-list">
-                        <li ng-repeat="error in ResourceAdd.errors.hostname">{{ error }}</li>
+                        <li ng-repeat="error in ResourceAdd.errors.name">{{ error }}</li>
                     </ul>
                 </div>
             </div>
@@ -138,7 +138,7 @@
                 <a class="button-cancel" ng-click="ResourceAdd.cancel()">Cancel</a>
             </div>
             <div class="col">
-                <a class="button-apply" ng-click="ResourceAdd.save()">Add to project</a>
+                <a class="button-apply" ng-click="ResourceAdd.save()">Add resource</a>
             </div>
         </div>
     </div>
