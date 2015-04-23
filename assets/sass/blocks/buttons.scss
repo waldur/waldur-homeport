@@ -54,6 +54,52 @@
     border-bottom: 2px solid #2d6c09;
     color: #fff;
 } // button-select
+.button-login {
+    @include inline-middle;
+    @include property(border-radius, 2);
+    @include property(padding, 12 15);
+    @include property(font-size, 16);
+    line-height: 1;
+    background-color: #7db243;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.28);
+    border-color: transparent;
+    border-bottom: 2px solid #2d6c09;
+    color: #fff;
+} // button-select
+
+.button-social {
+    @include property(padding, 10 12);
+    background-color: transparent;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    border-radius: 2px;
+    border-bottom: 2px solid rgba(69, 69, 69, 0.57);
+    span {
+        &:before {
+            @include property(margin-right, 10);
+            @include icon-fa;
+        } // &:before
+    } // span
+    &.facebook {
+        color: white;
+        background-color: #2980b9;
+        span {
+            &:before {
+                content: '\f230';
+            } // &:before
+        } // span
+    } // &.facebook
+    &.google {
+        color: white;
+        background-color: #e74c3c;
+        span {
+            &:before {
+                content: '\f230';
+            } // &:before
+        } // span
+    } // &.google
+} // button-social
 
 .button-simple {
     @include inline-middle;
