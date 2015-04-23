@@ -66,9 +66,10 @@
 
   angular.module('ncsaas')
     .controller('MainController', [
-      '$rootScope', '$state', 'authService', 'currentStateService', 'customersService', MainController]);
+      '$q', '$rootScope', '$state', 'authService', 'currentStateService', 'customersService', 'usersService',
+      MainController]);
 
-    function MainController($rootScope, $state, authService, currentStateService, customersService) {
+    function MainController($q, $rootScope, $state, authService, currentStateService, customersService, usersService) {
       $rootScope.logout = logout;
 
       function logout() {
@@ -84,8 +85,13 @@
       $rootScope.$on('$stateChangeSuccess', function(event, toState) {
         // if user is authenticated - he should have selected customer
         if (authService.isAuthenticated() && !currentStateService.isCustomerDefined) {
-          var customer = customersService.getFirst();
-          currentStateService.setCustomer(customer);
+          var deferred = $q.defer();
+          usersService.getCurrentUser().then(function(user) {
+            customersService.getPersonalOrFirstCustomer(user.username).then(function(customer) {
+              deferred.resolve(customer);
+            });
+          });
+          currentStateService.setCustomer(deferred.promise);
         }
       });
     }
