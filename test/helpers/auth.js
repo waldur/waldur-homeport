@@ -18,6 +18,6 @@ module.exports.login = function(user) {
 module.exports.logout = function(user) {
   browser.get('/#/dashboard/');
 
-  element(by.css('li.dropdown.user-box a')).click();
-  element(by.cssContainingText('li.dropdown.user-box ul li:nth-child(2) a', 'Logout')).click();
+  element(by.css('ul.nav-list.context > li:nth-child(3) > a')).click();
+  element(by.cssContainingText('ul.nav-list.context > li:nth-child(3) > ul > li > a', 'Logout')).click();
 };

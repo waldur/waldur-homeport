@@ -1,0 +1,27 @@
+.actions-button {
+    position: relative;
+    ul.actions-dropdown {
+        @include clear-list;
+        position: absolute;
+        z-index: 10;
+        text-align: right;
+        @include property(top, 26);
+        @include property(right, 0);
+        @include property(padding, 5);
+        @include property(padding-top, 10);
+        @include property(border-radius, 3 0 3 3);
+        background-color: white;
+        border: 1px solid #CBCBCB;
+        box-shadow: 0px 0px 8px rgba(139, 139, 139, 0.39);
+        > li + li {
+            @include property(margin-top, 5);
+            @include property(padding-top, 5);
+            border-top: 1px solid lightgrey;
+        } // > li + li
+        li {
+            a {
+                white-space: nowrap;
+            }
+        }
+    } // ul.actions-dropdown
+} // actions-button

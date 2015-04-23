@@ -37,15 +37,16 @@ for(var i = 0; i < testData.length; i++) {
         if ('customer' in data) {
           helpers.chooseCustomer(data.customer);
         }
-        element(by.cssContainingText('ul.nav li a', 'Resources')).click();
+        element(by.cssContainingText('ul.nav-list.views li a', 'Resources')).click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/resources/');
 
-        element(by.cssContainingText('a.crud-controls', 'Add resource')).click();
+        element(by.css('li.add-something > a')).click();
+        element(by.cssContainingText('li.add-something li a.resource', 'Add resource')).click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/resources/add/');
       });
 
       it('I should be able to add new resource', function() {
-        element(by.model('ResourceAdd.resource.hostname')).sendKeys(resourceName);
+        element(by.model('ResourceAdd.resource.name')).sendKeys(resourceName);
         // choose project
         element(by.cssContainingText('option', data.project)).click();
         // choose key
@@ -57,14 +58,14 @@ for(var i = 0; i < testData.length; i++) {
         // choose flavor
         element(by.cssContainingText('li', data.flavor)).click();
 
-        element(by.cssContainingText('a.btn', 'Add resource')).click();
+        element(by.cssContainingText('a.button-apply', 'Add resource')).click();
 
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/resources/');
       });
 
       it('I should be able to find added resource in resource list', function() {
         element(by.model('ResourceList.searchInput')).sendKeys(resourceName);
-        expect(element(by.cssContainingText('h2.item-title', resourceName)).isPresent()).toBe(true);
+        expect(element(by.cssContainingText('h3.item-title', resourceName)).isPresent()).toBe(true);
       });
 
       it('I should be able to logout', function() {
@@ -89,18 +90,18 @@ describe('Resource pagination test for Alice :', function() {
 
   it('I should see 10 elements on page by default', function() {
     // Go to resources list
-    element(by.cssContainingText('ul.nav li a', 'Resources')).click();
+    element(by.cssContainingText('ul.nav-list.views li a', 'Resources')).click();
     expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/resources/');
     // checks elements count on page
-    var elements = element.all(by.css('td.name h2.item-title'));
+    var elements = element.all(by.css('h3.item-title'));
     expect(elements.count()).toEqual(10);
   });
 
   it('After click on pagination size 5 I should see 5 elements on page', function() {
     // choose pagination size: 5
-    element(by.cssContainingText('ul.sort li a', '5')).click();
+    element(by.cssContainingText('ul.sort-list li a', '5')).click();
     // check elements count on page
-    var elements = element.all(by.css('td.name h2.item-title'));
+    var elements = element.all(by.css('h3.item-title'));
     expect(elements.count()).toEqual(5);
   });
 
@@ -108,7 +109,7 @@ describe('Resource pagination test for Alice :', function() {
     // Go to next page
     element(by.cssContainingText('div.pagination a', '2')).click();
     // check elements count on page
-    var elements = element.all(by.css('td.name h2.item-title'));
+    var elements = element.all(by.css('h3.item-title'));
     expect(elements.count()).toEqual(5);
   });
 

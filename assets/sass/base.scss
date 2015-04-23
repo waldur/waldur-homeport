@@ -1,39 +1,79 @@
-// override bootstrap && base styles
-
-html {
-    font-size: 62.5%;
-}
+body, html {
+    height: 100%;
+} // body, html
 
 body {
-    background-color: #F8F8F8;
-    letter-spacing: -.03rem;
-    font-size: $font-size-base;
-    font-size: rem(16);
-    // > .container-fluid {
-    //     max-width: 1280px;
-    //     min-width: 1010px;
-    // }
-    &.app-body {
-        padding-top: 80px;
-        &.obj-view {
-            padding-top: 50px;
-        } // &.obj-view
-    }
-    &.site-body {
-        padding-top: 50px;
-    }
-}
-
-a:hover, a:active, a:focus {
-    outline: 0 !important;
-}
+    @include property(font-size, 16);
+    line-height: 150%;
+    background: $main-background-color;
+    font-family: $base-font-family;
+    color: $text-color;
+    position: relative;
+    padding: 0;
+    margin: 0;
+    @include property(padding-top, 50);
+    &.no-scroll {
+        overflow: hidden;
+    } // &.no-scroll
+    @include bp(xs) {
+        @include property(font-size, 20);
+    } // xs
+    @include bp(sm) {
+        @include property(font-size, 20);
+    } // sm
+    @include bp(md) {
+        @include property(font-size, 16);
+    } // md
+    @include bp(lg) {
+        @include property(font-size, 16);
+    } // lg
+    * {
+        -webkit-text-size-adjust: none;
+        box-sizing: border-box;
+    } // *
+} // body
 
 img {
+    display: block;
     max-width: 100%;
-    height: auto;
-    display: inline-block;
-}
+    vertical-align: top;
+} // img
 
-.no-display {
-    display: none !important;
-} // no-display
+a {
+    cursor: pointer;
+    color: $link-color;
+    &:hover {
+        text-decoration: none;
+    } // &:hover
+} // a
+
+
+h1, h2, h3, h4, h5 {
+    font-weight: normal;
+    line-height: 1;
+} // h1, h2, h3, h4, h5
+
+img, fieldset, a img {
+    border: none;
+} // img, fieldset, a img
+
+button {
+    border: none;
+    background: none;
+} // button
+
+input[type="submit"],
+button {
+    cursor: pointer;
+    padding: 0;
+    border: 0;
+    &::-moz-focus-inner {
+        padding: 0;
+        border: 0;
+    } // &::-moz-focus-inner
+} // input[type="submit"], button
+
+div, input, textarea, select,button, h1, h2, h3, h4, h5, h6,
+a, a:focus, span {
+    outline: none;
+} // div, input, textarea, select,button, h1, h2, h3, h4, h5, h6, a, a:focus, span

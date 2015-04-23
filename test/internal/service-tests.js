@@ -14,11 +14,12 @@ for(var i=0; i < users.length; i++) {
       });
 
       it('I should be able to go to services list', function() {
-        element(by.cssContainingText('ul.nav li a', 'Services')).click();
+        element(by.cssContainingText('ul.nav-list.views li a', 'Services')).click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/services/');
       });
 
-      it('"Add service" should be disabled', function() {
+      // TODO no button "Add service" on page list
+      xit('"Add service" should be disabled', function() {
         expect(element(by.cssContainingText('div.disabled', 'Add service')).isPresent()).toBe(true);
       });
 
@@ -53,15 +54,16 @@ for(var i = 0; i < testData.length; i++) {
       });
 
       it('I should be able to go to services list', function() {
-        element(by.cssContainingText('ul.nav li a', 'Services')).click();
+        element(by.cssContainingText('ul.nav-list.views li a', 'Services')).click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/services/');
       });
 
       it('I should be able to go to "service add" page', function() {
-        element(by.cssContainingText('ul.nav li a', 'Services')).click();
+        element(by.cssContainingText('ul.nav-list.views li a', 'Services')).click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/services/');
 
-        element(by.cssContainingText('a.crud-controls', 'Add service')).click();
+        element(by.css('li.add-something > a')).click();
+        element(by.cssContainingText('li.add-something li a.service', 'Add service')).click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/services/add/');
       });
 
@@ -71,14 +73,14 @@ for(var i = 0; i < testData.length; i++) {
         // fill auth_url
         element(by.model('ServiceAdd.service.auth_url')).sendKeys(data.auth_url);
 
-        element(by.cssContainingText('a.btn', 'Add service')).click();
+        element(by.cssContainingText('a.button-apply', 'Add service')).click();
 
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/services/');
       });
 
       it('I should be able to find added service "' + data.name + '" in service list', function() {
         element(by.model('serviceList.searchInput')).sendKeys(data.name);
-        expect(element(by.cssContainingText('h2.item-title', data.name)).isPresent()).toBe(true);
+        expect(element(by.cssContainingText('h3.item-title a', data.name)).isPresent()).toBe(true);
       });
 
       it('I should be able to logout', function() {

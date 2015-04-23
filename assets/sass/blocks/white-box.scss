@@ -1,9 +1,22 @@
 .white-box {
+    margin: auto;
+    @include property(margin, 20 60);
+    @include property(padding, 20);
     border-radius: 1px;
     background: #FFFFFF;
     border: 0px solid #D8D8D8;
     box-shadow: 0px 2px 2px 0px rgba(223,223,223,0.50);
-    &.top-level {
+    &.clear {
+        padding: 0;
+    } // &.clear
+    &.active {
         box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16);
     } // &.top-level
+    .simple-line {
+        @include property(padding, 0 10);
+        @include property(margin, 20 0);
+        &.first {
+            @include property(margin-top, 0);
+        } // &.first
+    } // simple-line
 } // app-title-line

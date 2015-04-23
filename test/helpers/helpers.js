@@ -6,6 +6,21 @@ module.exports.getUUID = function() {
 };
 
 module.exports.chooseCustomer = function(customerName) {
-  element(by.cssContainingText('a.customer-head span.customer-expl', 'active for context')).click();
-  element(by.cssContainingText('ul li:nth-child(2) ul li a', customerName)).click();
+  element(by.cssContainingText('.dropdown.customers .active-context', 'Active for context')).click();
+  element(by.cssContainingText('.dropdown.customers .nav-sublist li a', customerName)).click();
+};
+
+/**
+ * Saves screenshot image to disk. Usage example:
+ *
+ *  browser.takeScreenshot().then(function(png) {
+ *    helpers.writeScreenShot(png, 'exception.png');
+ *  })
+ *
+ */
+module.exports.writeScreenShot = function(data, filename) {
+  var fs = require('fs');
+  var stream = fs.createWriteStream(filename);
+  stream.write(new Buffer(data, 'base64'));
+  stream.end();
 };

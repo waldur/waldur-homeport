@@ -1,0 +1,8 @@
+.container {
+    @include clearfix;
+    margin: auto;
+    @include property(padding, 0 60);
+    @include bp(xs) {
+        @include property(padding, 0 10);
+    } // xs
+} // container

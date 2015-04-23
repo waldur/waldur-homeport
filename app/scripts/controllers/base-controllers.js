@@ -13,6 +13,7 @@
     vm.currentUser = {};
     vm.currentCustomer = {};
     vm.menuToggle = menuToggle;
+    vm.mobileMenu = mobileMenu;
     vm.setCurrentCustomer = setCurrentCustomer;
 
     // initiate current user
@@ -34,7 +35,6 @@
     // top-level menu
     vm.menuState = {
       addSomethingMenu : false,
-      combineMenu : false,
       customerMenu : false,
       profileMenu : false
     };
@@ -51,6 +51,12 @@
       }
       event.stopPropagation();
       vm.menuState[active] = !vm.menuState[active];
+    }
+
+    function mobileMenu() {
+      vm.showMobileMenu = !vm.showMobileMenu;
+      console.log(vm.showMobileMenu);
+      console.log('sddd');
     }
 
     window.onclick = function() {

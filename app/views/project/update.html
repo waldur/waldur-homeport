@@ -1,82 +1,82 @@
 <div ng-controller="ProjectDetailUpdateController as controller">
 
-<!-- profile-view -->
-<div class="profile-view">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-10 profile-info">
-                <h1 class="profile-name">{{ controller.project.name }}</h1>
-                <a href="/#/customers/{{ controller.project.customer.uuid }}/" class="customer-link">{{ controller.project.customer.name }}</a>
-                <div class="stats">
-                    <div class="row">
-                        <div class="col-xs-4">
-                            <span class="stat-int">{{ controller.project.services.length }}</span>
-                            <span class="stat-description">Resources</span>
-                        </div>
-                        <div class="col-xs-4">
-                            <span class="stat-int">{{ controller.project.users.length }}</span>
-                            <span class="stat-description">Users</span>
-                        </div>
-                    </div>
-                </div>
+    <div class="profile-view">
+        <section class="content">
+            <h2 class="app-title">{{ controller.project.name }}</h2>
+            <div>
+                <a ui-sref="customers.details({uuid: controller.project.customer.uuid})">{{ controller.project.customer.name }}</a>
             </div>
-            <div class="col-xs-2">
-                <ul class="controls pull-right">
+        </section>
+        <section class="actions">
+            <div class="actions-button">
+                <a class="button" ng-click="openActions=!openActions">actions</a>
+                <ul class="actions-dropdown" ng-show="openActions">
                     <li>
-                        <a ui-sref="projects.update({uuid: controller.project.uuid})" class="crud-controls"><i class="fa fa-cog"></i> edit project</a>
+                        <a class="button-simple">Add user</a>
+                    </li>
+                    <li>
+                        <a class="button-simple">Archive</a>
+                    </li>
+                    <li>
+                        <a class="button-simple">Delete</a>
                     </li>
                 </ul>
             </div>
-        </div>
+        </section>
     </div>
-</div>
-<!-- /profile-view -->
 
-<!-- app-tabs -->
-<div class="app-tabs">
-    <!-- tabs-nav -->
-    <div class="tabs-container">
-        <div class="container-fluid">
-            <ul class="nav nav-tabs" role="tablist">
-                <li ng-class="{'active': controller.activeTab === 'eventlog'}">
-                    <a href="" role="tab" data-toggle="tab" ng-click="controller.activeTab = 'eventlog'">
-                        Events
-                    </a>
-                </li>
-                <li ng-class="{'active': controller.activeTab === 'resources'}">
-                    <a href="" role="tab" data-toggle="tab" ng-click="controller.activeTab = 'resources'">
-                        Resources
-                    </a>
-                </li>
-                <li ng-class="{'active': controller.activeTab === 'users'}">
-                    <a href="" role="tab" data-toggle="tab" ng-click="controller.activeTab = 'users'">
-                        Users
-                    </a>
-                </li>
-            </ul>
-        </div>
+{{ controller.project.resources }}
+
+    <ul class="tabs-nav">
+        <li ng-class="{'active': controller.activeTab === 'eventlog'}"
+            ng-click="controller.activeTab = 'eventlog'">
+            Events
+        </li>
+        <li ng-class="{'active': controller.activeTab === 'resources'}"
+            ng-click="controller.activeTab = 'resources'">
+            Resources
+        </li>
+        <li ng-class="{'active': controller.activeTab === 'users'}"
+            ng-click="controller.activeTab = 'users'">
+            Users
+        </li>
+    </ul>
+    <div class="white-box tabs">
+        <ul class="sort-list">
+            <li>
+                <a href="#" class="active">5 hours</a>
+            </li>
+            <li>
+                <a href="#">24 hours</a>
+            </li>
+            <li>
+                <a href="#">week</a>
+            </li>
+            <li class="search divid">
+                <div class="search-box" data-role="search-box">
+                    <input type="text">
+                    <button class="search-button"></button>
+                </div>
+            </li>
+        </ul>
     </div>
-    <!-- /tabs-nav -->
-    <!-- tabs-content -->
-    <div class="tab-content" ng-switch="controller.activeTab">
-        <!-- tab -->
-        <div ng-class="{'active': controller.activeTab === 'eventlog'}" id="eventlog" ng-switch-when="eventlog">
+
+    <sectin class="tabs-content" ng-switch="controller.activeTab">
+        <div class="tab" id="eventlog"
+            ng-class="{'tab-active': controller.activeTab === 'eventlog'}"
+            ng-switch-when="eventlog">
             <div ui-view="tabEventlog"></div>
         </div>
-        <!-- /tab -->
-        <!-- tab -->
-        <div ng-class="{'active': controller.activeTab === 'resources'}" id="projects" ng-switch-when="resources">
+        <div class="tab" id="projects"
+            ng-class="{'tab-active': controller.activeTab === 'resources'}"
+            ng-switch-when="resources">
             <div ui-view="tabResources"></div>
         </div>
-        <!-- /tab -->
-        <!-- tab -->
-        <div ng-class="{'active': controller.activeTab === 'users'}" id="users" ng-switch-when="users">
+        <div class="tab" id="users"
+            ng-class="{'tab-active': controller.activeTab === 'users'}"
+            ng-switch-when="users">
             <div ui-view="tabUsers"></div>
         </div>
-        <!-- /tab -->
-    </div>
-    <!-- /tabs-content -->
-</div>
-<!-- /app-tabs -->
+    </sectin>
 
 </div>

@@ -1,91 +1,188 @@
 <div ng-controller="ServiceListController as serviceList">
 
-<!-- app-block -->
-<section class="app-block">
-    <div class="container-fluid">
-        <div class="white-box">
-            <div class="app-title-line">
-                <div class="row">
-                    <div class="col-xs-12 first-line">
-                        <h2 class="app-title">Services</h2>
-                        <ul class="sort">
-                            <li><a href="#" class="active">5</a></li>
-                            <li><a href="#">15</a></li>
-                            <li><a href="#">24</a></li>
-                            <li class="divid">
-                                <div class="search" data-role="search-box">
-                                    <input type="text" ng-model='serviceList.searchInput' ng-keyup="serviceList.search()">
-                                </div>
+<div class="white-box">
+    <ul class="sort-list">
+        <li class="title">
+            <h2 class="app-title">Services</h2>
+        </li>
+        <pagesize pages-list="serviceList" pages-service="serviceList.service"></pagesize>
+        <li class="search divid">
+            <div class="search-box">
+                <input type="text" ng-model='serviceList.searchInput' ng-keyup="serviceList.search()">
+                <button class="search-button"></button>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<!-- view-control -->
+<section class="view-control">
+    <div class="list-item no-cursor">
+        <div class="checkbox">
+            <div class="checkbox" ng-show="controller.showgroup">
+                <input type="checkbox">
+            </div>
+        </div>
+        <div>
+            <div class="view-action-buttons" ng-show="controller.showgroup">
+                <a class="button start"
+                    ng-click="ResourceList.startResource(resource)"
+                    ng-class="{'disabled': !ResourceList.isOperationAvailable(resource, 'start')}">
+                Start</a>
+                <a class="button stop"
+                    ng-click="ResourceList.stopResource(resource)" title="Stop"
+                    ng-class="{'disabled': !ResourceList.isOperationAvailable(resource, 'stop')}">
+                Stop</a>
+                <a class="button restart"
+                    ng-click="ResourceList.restartResource(resource)"
+                    ng-class="{'disabled': !ResourceList.isOperationAvailable(resource, 'restart')}">
+                Restart</a>
+                <a class="button remove"
+                    ng-click="ResourceList.deleteResource(resource, $index)">
+                Remove</a>
+            </div>
+            <div class="view-action-buttons-mobile" ng-show="controller.showgroup">
+                <div class="actions-button">
+                    <a class="button dropdown-active"
+                        ng-click="mobileActions=!mobileActions">actions</a>
+                    <ul class="actions-dropdown" ng-show="mobileActions">
+                        <li>
+                            <a class="button-simple start"
+                                ng-click="ResourceList.startResource(resource)"
+                                ng-class="{'disabled': !ResourceList.isOperationAvailable(resource, 'start')}">
+                            Start</a>
+                        </li>
+                        <li>
+                            <a class="button-simple stop"
+                                ng-click="ResourceList.stopResource(resource)" title="Stop"
+                                ng-class="{'disabled': !ResourceList.isOperationAvailable(resource, 'stop')}">
+                            Stop</a>
+                        </li>
+                        <li>
+                            <a class="button-simple restart"
+                                ng-click="ResourceList.restartResource(resource)"
+                                ng-class="{'disabled': !ResourceList.isOperationAvailable(resource, 'restart')}">
+                            Restart</a>
+                        </li>
+                        <li>
+                            <a class="button-simple remove"
+                                ng-click="ResourceList.deleteResource(resource, $index)">
+                            Remove</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="actions switch">
+            <span class="label-text" ng-class="{'low-grade': !controller.showgroup}">batch</span>
+            <div class="checkbox-toggle">
+                <input type="checkbox" id="control-types" ng-click="controller.showgroup=!controller.showgroup">
+                <label for="control-types"></label>
+            </div>
+            <span class="label-text special-left" ng-class="{'low-grade': controller.showgroup}">single</span>
+        </div>
+    </div>
+</section>
+<!-- /view-control -->
+
+<div class="white-box clear">
+    <ul class="object-list">
+        <li class="list-item">
+            <div class="checkbox"></div>
+            <div class="expand"></div>
+            <div class="name">
+                <a href="#" class="list-sort">Name</a>
+            </div>
+            <div class="additional-cell">
+                <a href="#" class="list-sort">Type</a>
+            </div>
+            <div class="actions"></div>
+        </li>
+        <li ng-repeat="service in serviceList.list">
+            <div class="list-item" ng-class="{'opened': expandItem}">
+                <div class="checkbox">
+                        <div class="checkbox">
+                            <input type="checkbox" ng-show="controller.showgroup">
+                        </div>
+                    </div>
+                    <div class="expand">
+                        <a class="plus-minus"
+                        ng-click="expandItem=!expandItem"
+                        ng-class="{'plus': !expandItem, 'minus active': expandItem}"></a>
+                    </div>
+                <div>
+                    <h3 class="item-title">
+                        <a ui-sref="services.details({uuid: service.uuid})">{{ service.name }}</a>
+                    </h3>
+                </div>
+                <div class="additional-cell" ng-hide="collapsedItem">
+                    {{ service.service_type }}
+                </div>
+                <div class="actions">
+                    <div class="actions-button" ng-show="!controller.showgroup">
+                        <a class="button" ng-click="openActions=!openActions">actions</a>
+                        <ul class="actions-dropdown" ng-show="openActions">
+                            <li>
+                                <a class="button-simple start"
+                                    ng-click="ResourceList.startResource(resource)"
+                                    ng-class="{'disabled': !ResourceList.isOperationAvailable(resource, 'start')}">
+                                Start</a>
+                            </li>
+                            <li>
+                                <a class="button-simple stop"
+                                    ng-click="ResourceList.stopResource(resource)" title="Stop"
+                                    ng-class="{'disabled': !ResourceList.isOperationAvailable(resource, 'stop')}">
+                                Stop</a>
+                            </li>
+                            <li>
+                                <a class="button-simple restart"
+                                    ng-click="ResourceList.restartResource(resource)"
+                                    ng-class="{'disabled': !ResourceList.isOperationAvailable(resource, 'restart')}">
+                                Restart</a>
+                            </li>
+                            <li>
+                                <a class="button-simple remove"
+                                    ng-click="ResourceList.deleteResource(resource, $index)">
+                                Remove</a>
                             </li>
                         </ul>
-                        <div class="crud-box pull-right" ng-class="{'disabled': !serviceList.canUserAddService}">
-                            <a ui-sref="services.create" class="crud-controls" ng-show="serviceList.canUserAddService"><i class="fa fa-plus"></i>Add service</a>
-                            <div ng-show="!serviceList.canUserAddService"><i class="fa fa-plus"></i>Add service</a></div>
-                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</section>
-<!-- /app-block -->
-
-<!-- app-block -->
-<section class="app-block">
-    <div class="container-fluid">
-        <div class="white-box">
-            <div class="app-items-list">
-                <div class="table-responsive">
-                    <table class="items-table">
-                        <tr>
-                            <th class="name">
-                                <a href="" class="sort">Name</a>
-                            </th>
-                            <th class="col-xs-2 type">
-                                <a href="" class="sort">Type</a>
-                            </th>
-                            <th class="col-xs-1"></th>
-                        </tr>
-                        <tr ng-repeat="service in serviceList.list">
-                            <td class="name">
-                                <h2 class="item-title"><a ui-sref="service({uuid: serviceList.uuid})">{{ service.name }}</a></h2>
-                            </td>
-                            <td class="col-xs-2 type">
-                                <span class="elem item-type github">{{ service.service_type }}</span>
-                            </td>
-                            <td class="col-xs-1 controls-ctn">
-                                <ul class="controls pull-right">
-                                    <li>
-                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Restart"><i class="fa fa-cog"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
-                                    </li>
-                                </ul>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
+            <div class="list-item-details" ng-show="expandItem">
+                <section>
+                    <ul>
+                        <li class="item-list">
+                            <section>
+                                <a class="list-sort">auth_url</a>
+                            </section>
+                            <section>
+                                <div class="list-sort">user name</div>
+                            </section>
+                            <section>
+                                <div class="list-sort">tenant</div>
+                            </section>
+                        </li>
+                        <li class="item-list">
+                            <section>
+                                <a href="">auth_url</a>
+                            </section>
+                            <section>
+                                user name
+                            </section>
+                            <section>
+                                tenant
+                            </section>
+                        </li>
+                    </ul>
+                </section>
             </div>
-        </div>
-    </div>
-</section>
-<!-- /app-block -->
+        </li>
+    </ul>
+</div>
 
-<div class="app-block">
-    <div class="container-fluid">
-        <!-- pagination -->
-        <div class="pagination">
-            <ul>
-                <li><a href="#" class="current">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-            </ul>
-        </div>
-        <!-- /pagination -->
-    </div>
+<div class="pagination">
+    <pagination pages-list="serviceList" pages-service="serviceList.service"></pagination>
 </div>
 
 </div>

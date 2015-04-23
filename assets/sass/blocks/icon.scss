@@ -1,0 +1,19 @@
+.icon {
+    @include inline-middle;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transform: translate(0, 0);
+    &.plus {
+        &:before {
+            content: '\f067';
+        } // &.before
+    } // plus
+    &.bars {
+        &:before {
+            content: '\f0c9';
+        } // &.before
+    }
+} // icons

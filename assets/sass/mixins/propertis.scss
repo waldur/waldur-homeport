@@ -1,0 +1,21 @@
+@mixin property($property, $values) {
+    $px : ();
+    $rem: ();
+    @each $value in $values {
+        $px: append($px,  $value + px);
+        $rem: append($rem, rem($value));
+    }
+    #{$property}: $px;
+    #{$property}: $rem;
+}
+
+@mixin boxshadow($values, $color) {
+    $px : ();
+    $rem: ();
+    @each $value in $values {
+        $px: append($px,  $value + px);
+        $rem: append($rem, rem($value));
+    }
+    box-shadow: $px $color;
+    box-shadow: $rem $color;
+}

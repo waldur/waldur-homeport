@@ -1,24 +1,29 @@
-<!-- header -->
-<div class="site-header site-header navbar navbar-fixed-top">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand site-brand scroller" href="#maintop" offset="40" du-smooth-scroll>
-                NodeConductor
-            </a>
-        </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li du-scrollspy="features"><a href="#features" du-smooth-scroll>Features</a></li>
-                <li du-scrollspy="plans"><a href="#plans" du-smooth-scroll>Plans</a></li>
-                <li><a href="#/login/"><i class="fa fa-key"></i> Login</a></li>
-            </ul>
-        </div><!--/.nav-collapse -->
-    </div>
-</div>
-<!-- /header -->
+<!-- app-header -->
+<header class="app-header site">
+    <nav class="container">
+        <!-- views nav -->
+        <ul class="nav-list in-home views">
+            <li class="logo-box site">
+                <a href="#maintop" du-smooth-scroll class="logo"></a>
+            </li>
+            <li class="node-conductor site">
+                <h2>node-conductor</h2>
+            </li>
+        </ul>
+        <!-- /views nav -->
+        <!-- context nav -->
+        <ul class="nav-list in-home context">
+            <li>
+               <a href="#features" du-smooth-scroll du-scrollspy="features">Features</a>
+            </li>
+            <li>
+               <a href="#plans" du-smooth-scroll du-scrollspy="plans">Plans</a>
+            </li>
+            <li>
+               <a ui-sref="home.login">Login</a>
+            </li>
+        </ul>
+        <!-- /context nav -->
+    </nav>
+</header>
+<!-- app-header -->
