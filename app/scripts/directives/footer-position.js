@@ -9,15 +9,15 @@
         link: function(scope, element, attrs) {
 
           // get app container
-          var foo = $document[0].getElementById('appContainer');
+          var appContainer = $document[0].getElementById('appContainer');
           // get window size
           var winHeight = $window.innerHeight;
 
           // watch app container height, if height more
           // than window height set fixed class for footer
           scope.$watch(function() {
-              scope.foo_height = foo.offsetHeight;
-              if (scope.foo_height < winHeight) {
+              scope.appContainer_height = appContainer.offsetHeight;
+              if (scope.appContainer_height < winHeight) {
                 element.addClass('fixed');
               } else {
                 element.removeClass('fixed');
