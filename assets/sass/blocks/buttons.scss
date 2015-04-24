@@ -79,6 +79,7 @@
         &:before {
             @include property(margin-right, 10);
             @include icon-fa;
+            @include property(font-size, 20);
         } // &:before
     } // span
     &.facebook {
@@ -95,7 +96,7 @@
         background-color: #e74c3c;
         span {
             &:before {
-                content: '\f230';
+                content: '\f0d4';
             } // &:before
         } // span
     } // &.google
