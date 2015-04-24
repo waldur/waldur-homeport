@@ -2,7 +2,7 @@
     <div class="login-box" loginboxcontext>
         <div class="white-box">
             <h3 class="app-title centered">Login</h3>
-            <ul class="error-list" ng-if="auth.getErrors()">
+            <ul class="error-list" ng-if="auth.errors">
                 <li ng-repeat="error in auth.getErrors()">
                     <span class="error error-standard label">{{ error }}</span>
                 </li>
