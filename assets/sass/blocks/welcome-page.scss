@@ -18,7 +18,7 @@
         .white-box {
             @include boxshadow(0 2 2 2, rgba(47, 47, 47, 0.23));
             max-height: calc(90vh - 100px) !important;
-            overflow-y: scroll;
+            overflow-y: auto;
         }
         .row-login {
             @include property(margin-top, 10);
