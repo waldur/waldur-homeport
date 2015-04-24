@@ -10,6 +10,10 @@ h6.app-title {
     &.pointer {
         cursor: pointer;
     } // &.pointer
+    &.centered {
+        display: block;
+        text-align: center;
+    } // &.centered
     a {
         text-decoration: none;
     } // a
@@ -49,6 +53,10 @@ h6.item-title {
     &.pointer {
         cursor: pointer;
     } // &.pointer
+    &.centered {
+        display: block;
+        text-align: center;
+    } // &.centered
     a {
         text-decoration: none;
     } // a
