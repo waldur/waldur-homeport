@@ -25,7 +25,7 @@
                         <a class="list-sort">Name</a>
                     </div>
                     <div class="additional-cell">
-                        <a class="list-sort">creation date</a>
+                        <a class="list-sort">Created</a>
                     </div>
                     <div class="actions"></div>
                 </div>
@@ -48,7 +48,7 @@
                         </h3>
                     </div>
                     <div class="additional-cell">
-                        {{ project.creation_date }}
+                        {{ project.created | date:'medium' }}
                     </div>
                     <div class="actions">
                         <div class="actions-button">
