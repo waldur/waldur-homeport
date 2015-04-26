@@ -19,8 +19,7 @@
         return [];
       },
       getEndpoint:function(isList) {
-        var endpoint = (isList) ? '/resources/' : '/instances/';
-        return endpoint;
+        return '/instances/';
       }
     });
     return new ServiceClass();
