@@ -20,8 +20,8 @@
       pages:null,
       currentStateService:null,
       endpoint:null,
-      customerName:null,
       filterByCustomer: true,
+      customerUuid:null,
 
       init:function() {
         this.pageSize = 10;
@@ -55,7 +55,7 @@
         } else {
           vm.currentStateService.getCustomer().then(function (response) {
             /*jshint camelcase: false */
-            filter.customer_name = (this.customerName) ? this.customerName() : response.name;
+            filter.customer = (this.customerUuid) ? this.customerUuid() : response.uuid;
             queryList();
           }, function (err) {
             deferred.reject(err);

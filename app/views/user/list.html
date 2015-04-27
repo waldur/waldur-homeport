@@ -28,7 +28,7 @@
             </div>
             <div>
                 <div class="view-action-buttons" ng-show="controller.showgroup">
-                    <a class="button">Add from project</a>
+                    <a class="button">Add to project</a>
                     <a class="button">Remove from project</a>
                 </div>
                 <div class="view-action-buttons-mobile" ng-show="controller.showgroup">
@@ -37,7 +37,7 @@
                             ng-click="mobileActions=!mobileActions">actions</a>
                         <ul class="actions-dropdown" ng-show="mobileActions">
                             <li>
-                                <a class="button-simple">Add from project</a>
+                                <a class="button-simple">Add to project</a>
                             </li>
                             <li>
                                 <a class="button-simple">Remove from project</a>
@@ -69,10 +69,10 @@
                         <a class="list-sort">Name</a>
                     </div>
                     <div class="additional-cell">
-                        <a class="list-sort">access information</a>
+                        <a class="list-sort">E-mail</a>
                     </div>
                     <div class="additional-cell">
-                        <a class="list-sort">status</a>
+                        <a class="list-sort">Username</a>
                     </div>
                     <div class="actions"></div>
                 </div>
@@ -96,20 +96,19 @@
                     </div>
                     <div>
                         <h3 class="item-title"><a ui-sref="users.details({uuid: user.uuid})">{{ user.native_name }}</a></h3>
-                        <span>({{ user.username }})</span>
                     </div>
                     <div class="additional-cell">
-                        access information
+                        {{ user.email }}
                     </div>
                     <div class="additional-cell">
-                        status
+                        {{ user.username }}
                     </div>
                     <div class="actions">
                         <div class="actions-button" ng-show="!controller.showgroup">
                             <a class="button" ng-click="openActions=!openActions">actions</a>
                             <ul class="actions-dropdown" ng-show="openActions">
                                 <li>
-                                    <a class="button-simple">Add from project</a>
+                                    <a class="button-simple">Add to project</a>
                                 </li>
                                 <li>
                                     <a class="button-simple">Remove from project</a>

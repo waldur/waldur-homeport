@@ -5,6 +5,7 @@
     @include property(font-size, 15);
     @include property(height, 50);
     @include property(padding-top, 13);
+    width: 100%;
     a {
         color: white;
     } // a
@@ -16,3 +17,8 @@
         @include clear-list-inline;
     } // footer-nav
 } // app-footer
+
+.app-footer-fixed {
+    position: absolute;
+    bottom: 0;
+} // &.fixed

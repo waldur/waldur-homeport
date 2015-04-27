@@ -55,8 +55,6 @@
 
     function mobileMenu() {
       vm.showMobileMenu = !vm.showMobileMenu;
-      console.log(vm.showMobileMenu);
-      console.log('sddd');
     }
 
     window.onclick = function() {

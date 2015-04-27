@@ -60,8 +60,8 @@
                 <li class="dropdown customers">
                     <a class="customer-context drop-active" ng-click="controller.menuToggle('customerMenu', $event)"
                         ng-class="{'active': controller.menuState.customerMenu}">
+                        <span class="active-context">Working as part of</span>
                         <span class="customer-name">{{ controller.currentCustomer.name }}</span>
-                        <span class="active-context">Active for context</span>
                     </a>
                     <ul class="nav-sublist" ng-show="controller.menuState.customerMenu">
                         <li ng-repeat="customer in controller.customers">
