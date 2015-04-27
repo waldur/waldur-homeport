@@ -49,6 +49,9 @@
             width: calc(100% - 80px);
             box-sizing: border-box;
             padding-left: 10px;
+            &.full {
+                width: 100%;
+            } // &.full
             h3 {
                 margin: 0;
                 font-size: rem(18);
