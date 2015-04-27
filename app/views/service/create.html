@@ -9,44 +9,60 @@
 </div>
 
 <div class="white-box">
-        <section class="row top">
-            <div class="col">
-                <input type="text" placeholder="Service Name" ng-model="ServiceAdd.service.name">
+
+    <section class="short-form">
+        <div class="form-row">
+            <div class="col label">
+                <label for="">Service name:</label>
+            </div>
+            <div class="col input">
+                <input type="text" placeholder="My OpenStack" ng-model="ServiceAdd.service.name">
                 <div class="error arrow-up" ng-show="ServiceAdd.errors.name">
                     <ul class="error-list">
                         <li ng-repeat="error in ServiceAdd.errors.name">{{ error }}</li>
                     </ul>
                 </div>
             </div>
-            <div class="col">
-                <input type="text" placeholder="Auth URL" ng-model="ServiceAdd.service.auth_url">
+            <div class="col description">
+                Description of field
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col label">
+                <label for="">Auth url:</label>
+            </div>
+            <div class="col input">
+                <input type="text" placeholder="http://my.openstack.com" ng-model="ServiceAdd.service.auth_url">
                 <div class="error arrow-up" ng-show="ServiceAdd.errors.auth_url">
                     <ul class="error-list">
                         <li ng-repeat="error in ServiceAdd.errors.auth_url">{{ error }}</li>
                     </ul>
                 </div>
             </div>
-        </section>
-
-        <!-- non field errors -->
-        <div class="simple-line" ng-show="controller.errors.non_field_errors">
-            <div class="error">
-                <ul class="error-list">
-                    <li ng-repeat="error in controller.errors.non_field_errors">
-                        {{ error }}
-                    </li>
-                </ul>
+            <div class="col description">
+                Description of field
             </div>
         </div>
-        <!-- /non field errors -->
+    </section>
 
-        <div class="decision">
-            <div class="col">
-                <a class="button-cancel" ng-click="ServiceAdd.cancel()">Cancel</a>
-            </div>
-            <div class="col">
-                <a class="button-apply" ng-click="ServiceAdd.save()">Add service</a>
-            </div>
+    <!-- non field errors -->
+    <div class="simple-line" ng-show="controller.errors.non_field_errors">
+        <div class="error">
+            <ul class="error-list">
+                <li ng-repeat="error in controller.errors.non_field_errors">
+                    {{ error }}
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- /non field errors -->
+
+    <div class="decision">
+        <div class="col">
+            <a class="button-cancel" ng-click="ServiceAdd.cancel()">Cancel</a>
+        </div>
+        <div class="col">
+            <a class="button-apply" ng-click="ServiceAdd.save()">Add service</a>
         </div>
     </div>
 </div>
