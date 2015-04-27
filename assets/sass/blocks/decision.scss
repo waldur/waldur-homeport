@@ -1,0 +1,4 @@
+.decision {
+    @include row-centered;
+    @include property(margin, 20 0);
+} // decision

@@ -1,0 +1,36 @@
+<div class="site-welcome login " ng-controller="AuthController as auth">
+    <div class="login-box" loginboxcontext>
+        <div class="white-box">
+            <h3 class="app-title centered">Login</h3>
+            <ul class="error-list" ng-if="auth.errors">
+                <li ng-repeat="error in auth.getErrors()">
+                    <span class="error error-standard label">{{ error }}</span>
+                </li>
+            </ul>
+            <form ng-submit="auth.signin()" form-autofill-fix>
+                <div class="row-login">
+                    <input type="text" ng-model="auth.user.username">
+                </div>
+                <div class="row-login">
+                    <input type="password" ng-model="auth.user.password">
+                </div>
+                <div class="decision">
+                    <div class="col">
+                        <button class="button-login" type="Submit">Login</button>
+                    </div>
+                </div>
+            </form>
+            <h3 class="app-title centered">Login use social</h3>
+            <div class="row-login">
+                <a class="button-social google" ng-click="auth.authenticate('google')">
+                    <span>Google</span>
+                </a>
+            </div>
+            <div class="row-login">
+                <a class="button-social facebook" ng-click="auth.authenticate('facebook')">
+                    <span>Facebook</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

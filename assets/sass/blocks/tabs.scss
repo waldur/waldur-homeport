@@ -1,0 +1,15 @@
+.tabs-nav {
+    @include clear-list-inline;
+    @include property(margin, 20 60);
+    @include property(margin-bottom, -20);
+    @include property(padding-left, 10);
+    li {
+        cursor: pointer;
+        @include property(padding, 10 15);
+        @include property(border-radius, 4 4 0 0);
+        &.active {
+            background-color: white;
+            box-shadow: 0px -1px 2px 0px rgba(223, 223, 223, 0.5);
+        } // &.active
+    }
+} // tabs-nav

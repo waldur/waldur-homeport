@@ -1,33 +1,23 @@
 .app-footer {
-    background: #565656;
-    margin-top: 40px;
-    color: #fff;
-    font-size: rem(15);
-    &.no-margin {
-        margin-top: 0px;
-    }
-    .copy, nav {
-        padding: 15px;
-    } // .copy, nav
-    .copy {} // copy
+    background-color: #565656;
+    color: white;
+    box-sizing: border-box;
+    @include property(font-size, 15);
+    @include property(height, 50);
+    @include property(padding-top, 13);
+    width: 100%;
+    &.fixed {
+        position: absolute;
+        bottom: 0;
+    } // &.fixed
     a {
-        color: #fff;
-        text-decoration: underline;
-        &:hover {
-            text-decoration: none;
-        }
+        color: white;
     } // a
-    nav {
-        text-align: right;
-        ul {
-            @include clear-list;
-            @include inline-middle;
-            li {
-                @include inline-middle;
-                a {
-                    color: #fff;
-                } // a
-            } // li
-        } // ul
-    } // nav
-} //app-footer
+    .copy {
+        float: left;
+    } // copy
+    .footer-nav {
+        float: right;
+        @include clear-list-inline;
+    } // footer-nav
+} // app-footer

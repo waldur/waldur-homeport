@@ -1,0 +1,180 @@
+.nav-list {
+    @include clear-list-inline;
+    @include clearfix;
+    &.in-home {
+        > li {
+            > a {
+                &.active {
+                    color: #1F3305;
+                    background-color: #f7f7f7;
+                } // &.active
+            } // > a
+        } // > li
+    } // &.in-home
+    &.views {
+        float: left;
+    } // &.views
+    &.context {
+        float: right;
+    } // &.context
+    &.mobile {
+        display: none;
+        float: right;
+        @include bp(xs) {
+            display: block;
+        } // xs
+    } // &.mobile
+    > li {
+        float: left;
+        &:not(.logo-box):not(.mobile-trigger):not(.node-conductor) {
+            @include bp(xs) {
+                display: none;
+            } // xs
+        }
+        &.mobile-trigger {
+            display: none;
+            @include bp(xs) {
+                display: block;
+            } // xs
+        } // .mobile-trigger
+        &.node-conductor {
+            display: none;
+            h2 {
+                @include inline-middle;
+                @include property(font-size, 20);
+                @include property(padding-top, 16);
+                margin: 0;
+            } // h2
+            @include bp(xs) {
+                display: block;
+            } // xs
+        } // &..node-conductor
+        &.dropdown {
+            position: relative;
+        } // &.dropdown
+        &.add-something {
+            @include bp(sm) {
+                display: none;
+            } // sm
+            @include bp(md) {
+                display: none;
+            } // md
+        } // &.add-something
+        &.customers {
+            @include bp(sm) {
+                display: none;
+            } // sm
+            @include bp(md) {
+                display: none;
+            } // md
+        } // &.customers
+        > a {
+            @include property(font-size, 16);
+            @include property(padding, 0 20);
+            @include property(padding-top, 13);
+            @include property(height, 50);
+            display: block;
+            color: #1F3305;
+            text-decoration: none;
+            &.active {
+                color: white;
+                background-color: #76AE2C;
+                position: relative;
+                &.drop-active {
+                    &:after {
+                        z-index: 12;
+                        content: '';
+                        display: block;
+                        position: absolute;
+                        bottom: -10px;
+                        left: 50%;
+                        margin-left: -12px;
+                        width: 0;
+                        height: 0;
+                        border-style: solid;
+                        border-width: 10px 12px 0 12px;
+                        border-color: #76ae2c transparent transparent transparent;
+                    } // &:after
+                } // &.drop-active
+            } // &.active
+            &.logo {
+                @include property(width, 50);
+                @include property(height, 50);
+                @include property(background-size, 40 40);
+                background-position: 50% 50%;
+                background-repeat: no-repeat;
+                background-image: url('/static/images/logo.png');
+            } // &.logo
+            &.customer-context {
+                @include property(padding-top, 12);
+                span {
+                    display: block;
+                    line-height: 1;
+                } // span
+                .customer-name {} // customer-name
+                .active-context {
+                    font-size: rem(12);
+                } // active-context
+            } // &.customer-context
+            &.user-area {
+                @include property(padding-top, 5);
+                .user-name {
+                    position: relative;
+                    @include property(top, 2);
+                    @include property(margin-left, 5);
+                    @include bp(sm) {
+                        display: none;
+                    } // sm
+                } // user-name
+            } // &.user-area
+            &.service {
+                &:before {
+                    position: relative;
+                    @include property(top, -1);
+                    @include property(margin-right, 5);
+                    @include inline-middle;
+                    @include icon-fa;
+                    content: '\f0c2';
+                    transform: translate(1.1, 1.1);
+                } // &:before
+            } // &.service
+            &.project {
+                &:before {
+                    position: relative;
+                    @include property(top, -1);
+                    @include property(margin-right, 5);
+                    @include inline-middle;
+                    @include icon-fa;
+                    content: '\f07c';
+                    transform: translate(1.1, 1.1);
+                } // &:before
+            } // &.project
+            &.resource {
+                &:before {
+                    position: relative;
+                    @include property(top, -1);
+                    @include property(margin-right, 5);
+                    @include inline-middle;
+                    @include icon-fa;
+                    content: '\f233';
+                    transform: translate(1.1, 1.1);
+                } // &:before
+            } // &.resource
+            &.user {
+                &:before {
+                    position: relative;
+                    @include property(top, -1);
+                    @include property(margin-right, 5);
+                    @include inline-middle;
+                    @include icon-fa;
+                    content: '\f007';
+                    transform: translate(1.1, 1.1);
+                } // &:before
+            } // invite-user
+            &.mobile-trigger-link {
+                @include property(padding-top, 12);
+                @include property(font-size, 24);
+            } // &.mobile-trigger-link
+        } // > a
+    } // > li
+} // nav-list

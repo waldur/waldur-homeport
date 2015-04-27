@@ -8,12 +8,17 @@
   function ServiceListController($state, servicesService, customerPermissionsService, usersService) {
     var vm = this;
 
-    servicesService.getList().then(function(response) {
-      vm.list = response;
-    });
+    vm.list = [];
+
+    // search
+    vm.searchInput = '';
+    vm.search = search;
+    vm.service = servicesService;
+
     vm.remove = remove;
 
     function activate() {
+      getList();
       // init canUserAddService
       usersService.getCurrentUser().then(function(user) {
         /*jshint camelcase: false */
@@ -27,12 +32,31 @@
       });
     }
 
-    function remove(service) {
-      var index = vm.list.indexOf(service);
-
-      service.$delete(function() {
-        vm.list.splice(index, 1);
+    function getList(filters) {
+      servicesService.getList(filters).then(function(response) {
+        vm.list = response;
       });
+    }
+
+    function search() {
+      getList({name: vm.searchInput});
+    }
+
+    function remove(service) {
+      var confirmDelete = confirm('Confirm service deletion?');
+      if (confirmDelete) {
+        var index = vm.list.indexOf(service);
+        service.$delete(function() {
+          vm.list.splice(index, 1);
+        },handleServiceActionException);
+      }
+    }
+
+    function handleServiceActionException(response) {
+      if (response.status === 409) {
+        var message = response.data.status || response.data.detail;
+        alert(message);
+      }
     }
 
     activate();

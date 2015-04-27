@@ -1,0 +1,14 @@
+.avatar {
+    @include inline-middle;
+    @include property(width, 40);
+    &.big {
+        width: 100%;
+    } // &.big
+    &.offset-right {
+        @include property(margin-right, 6);
+    } // &.offset-right
+    .avatar-img {
+        @include property(border-radius, 3);
+        @include boxshadow(0 0 0 1.5, rgba(255, 255, 255, 1));
+    } // avatar-img
+} // avatar

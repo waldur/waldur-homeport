@@ -14,6 +14,7 @@
 
     vm.list = customersService.getCustomersList();
     vm.remove = remove;
+    vm.service = customersService;
 
     function remove(customer) {
       var index = vm.list.indexOf(customer);

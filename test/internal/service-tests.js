@@ -14,11 +14,12 @@ for(var i=0; i < users.length; i++) {
       });
 
       it('I should be able to go to services list', function() {
-        element(by.cssContainingText('ul.nav li a', 'Services')).click();
+        element(by.cssContainingText('ul.nav-list.views li a', 'Services')).click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/services/');
       });
 
-      it('"Add service" should be disabled', function() {
+      // TODO no button "Add service" on page list
+      xit('"Add service" should be disabled', function() {
         expect(element(by.cssContainingText('div.disabled', 'Add service')).isPresent()).toBe(true);
       });
 
@@ -53,30 +54,42 @@ for(var i = 0; i < testData.length; i++) {
       });
 
       it('I should be able to go to services list', function() {
-        element(by.cssContainingText('ul.nav li a', 'Services')).click();
+        element(by.cssContainingText('ul.nav-list.views li a', 'Services')).click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/services/');
       });
 
       it('I should be able to go to "service add" page', function() {
-        element(by.cssContainingText('ul.nav li a', 'Services')).click();
+        element(by.cssContainingText('ul.nav-list.views li a', 'Services')).click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/services/');
 
-        element(by.cssContainingText('a.crud-controls', 'Add service')).click();
+        element(by.css('li.add-something > a')).click();
+        element(by.cssContainingText('li.add-something li a.service', 'Add service')).click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/services/add/');
       });
 
-      it('I should be able to add new resource', function() {
+      it('I should be able to add new service', function() {
         // fill name
         element(by.model('ServiceAdd.service.name')).sendKeys(data.name);
         // fill auth_url
         element(by.model('ServiceAdd.service.auth_url')).sendKeys(data.auth_url);
 
-        element(by.cssContainingText('a.btn', 'Add service')).click();
+        element(by.cssContainingText('a.button-apply', 'Add service')).click();
 
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/services/');
       });
 
-      // TODO add test "I should be able to find added service in service list" when search will be implemented
+      it('I should be able to find added service "' + data.name + '" in service list', function() {
+        element(by.model('serviceList.searchInput')).sendKeys(data.name);
+        expect(element(by.cssContainingText('h3.item-title a', data.name)).isPresent()).toBe(true);
+      });
+
+      // TODO this test can be run when deletion service functionality will be available at backend
+      xit('I should be able to delete service', function() {
+        element(by.css('.object-list .list-item .actions-button a.button')).click();
+        element(by.css('.object-list .list-item .remove')).click();
+        browser.switchTo().alert().accept();
+        expect(element(by.cssContainingText('h3.item-title a', data.name)).isPresent()).toBe(false);
+      });
 
       it('I should be able to logout', function() {
         auth.logout();

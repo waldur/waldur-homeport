@@ -1,0 +1,37 @@
+.list-item-details {
+    background-color: #F2F2F2;
+    @include property(padding, 10);
+    @include property(padding-left, 50);
+    @include property(font-size, 16);
+    &.opened {
+        display: block;
+    } // &.opened
+    > section {
+        + section {
+            @include property(margin-top, 10);
+            @include property(padding-top, 10);
+            border-top: 1px solid rgb(205, 205, 205);
+        }
+        > header {
+            @include property(margin-bottom, 10);
+        } // > header
+        > ul {
+            @include clear-list;
+            > li {
+                @include property(padding, 4 0);
+                + li {
+                    border-top: 1px dashed rgba(205, 205, 205, 0.5);
+                } // + li
+            } // li
+        } // > ul
+        .item-list {
+            @include table;
+            > section {
+                @include table-cell;
+            }
+            a {
+                text-decoration: none;
+            } // a
+        } // item-list
+    } // > *
+} // list-item-details

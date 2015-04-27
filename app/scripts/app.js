@@ -17,16 +17,45 @@ angular
     $stateProvider
       .state('home', {
         url: '/',
-        templateUrl: 'views/home.html',
+        abstract: true,
+        templateUrl: 'views/home/base.html',
         resolve: {
           authenticated: notLoggedCheck
         }
       })
 
-      .state('login', {
-        url: '/login/',
-        templateUrl: 'views/login.html',
+      .state('home.home', {
+        url: '',
+        views: {
+          'siteHeader@home' : {
+            templateUrl: 'views/partials/site-header.html',
+          },
+          'siteContent@home' : {
+            templateUrl: 'views/home/home.html',
+          },
+          'siteFooter@home' : {
+            templateUrl: 'views/partials/site-footer.html',
+          }
+        },
+        resolve: {
+          authenticated: notLoggedCheck
+        }
+      })
+
+      .state('home.login', {
+        url: 'login/',
         controller: 'AuthController',
+        views: {
+          'siteHeader@home' : {
+            templateUrl: 'views/partials/site-header.html',
+          },
+          'siteContent@home' : {
+            templateUrl: 'views/home/login.html',
+          },
+          'siteFooter@home' : {
+            templateUrl: 'views/partials/site-footer.html',
+          }
+        },
         resolve: {
           authenticated: notLoggedCheck
         }
@@ -185,6 +214,34 @@ angular
         auth: true
       })
 
+      .state('services.details', {
+        url: ':uuid/',
+        views: {
+          'appContent': {
+            templateUrl: 'views/service/details.html'
+          },
+          'tabEventlog@services.details' : {
+            templateUrl: 'views/service/tab-eventlog.html',
+          },
+          'tabResources@services.details' : {
+            templateUrl: 'views/service/tab-resources.html',
+          },
+          'tabProjects@services.details' : {
+            templateUrl: 'views/service/tab-projects.html',
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html'
+          },
+          'appFooter': {
+            templateUrl: 'views/partials/app-footer.html'
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
+        auth: true
+      })
+
       .state('profile', {
         url: '/profile/',
         abstract: true,
@@ -194,11 +251,23 @@ angular
       .state('profile.details', {
         url: '',
         views: {
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html',
+          },
           'appContent': {
             templateUrl: 'views/profile/details.html',
           },
-          'appHeader': {
-            templateUrl: 'views/partials/app-header.html',
+          'tabEventlog@users.details': {
+            templateUrl: 'views/profile/tab-eventlog.html',
+          },
+          'tabProjects@users.details': {
+            templateUrl: 'views/profile/tab-projects.html',
+          },
+          'tabKeys@users.details': {
+            templateUrl: 'views/profile/tab-keys.html',
+          },
+          'tabManageUser@users.details': {
+            templateUrl: 'views/profile/tab-manage.html',
           },
           'appFooter': {
             templateUrl: 'views/partials/app-footer.html',
@@ -260,6 +329,15 @@ angular
           'appContent': {
             templateUrl: 'views/customer/details.html',
           },
+          'tabResources@customers.details': {
+            templateUrl: 'views/customer/tab-resources.html',
+          },
+          'tabProjects@customers.details': {
+            templateUrl: 'views/customer/tab-projects.html',
+          },
+          'tabServices@customers.details': {
+            templateUrl: 'views/customer/tab-services.html',
+          },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',
           },
@@ -312,13 +390,13 @@ angular
       })
 
       .state('users', {
+        url: '/users/',
         abstract: true,
         templateUrl: 'views/user/base.html'
       })
 
       .state('users.list', {
-        url: '/users/',
-        abstract: true,
+        url: '',
         views: {
           'appContent': {
             templateUrl: 'views/user/list.html',
@@ -336,21 +414,8 @@ angular
         auth: true
       })
 
-      .state('users.list.show',{
-        url:'',
-        views: {
-          'controlsList': {
-            templateUrl: 'views/partials/controls-line.html',
-          }
-        },
-        resolve: {
-          authenticated: authCheck
-        },
-        auth: true
-      })
-
       .state('users.details', {
-        url: ':uuid/',
+        url: '/users/:uuid/',
         views: {
           'appContent': {
             templateUrl: 'views/user/details.html',

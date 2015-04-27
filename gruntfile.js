@@ -39,24 +39,6 @@ module.exports = function(grunt) {
             }
         },
 
-        concat: {
-            dist: {
-                src: [
-                    'assets/js/libs/jquery.js',
-                    'assets/js/libs/bootstrap.js',
-                    'assets/js/scripts.js'
-                ],
-                dest: 'app/static/js/production.js',
-            }
-        },
-
-        uglify: {
-            build: {
-                src: 'app/static/js/production.js',
-                dest: 'app/static/js/production.min.js',
-            }
-        },
-
         imagemin: {
             dynamic: {
                 files: [{
@@ -66,6 +48,99 @@ module.exports = function(grunt) {
                     dest: 'app/static/images/'
                 }]
             }
+        },
+
+        copy: {
+            main: {
+                files: [
+                    // front-end
+                    {
+                        expand: true,
+                        cwd: 'bower_components/normalize.css',
+                        src: ['normalize.css'],
+                        dest: 'app/static/css/',
+                        filter: 'isFile'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/fontawesome/fonts',
+                        src: ['*'],
+                        dest: 'app/static/fonts/',
+                        filter: 'isFile'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/fontawesome/css',
+                        src: ['font-awesome.min.css'],
+                        dest: 'app/static/css/',
+                        filter: 'isFile'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/html5shiv/dist',
+                        src: ['html5shiv.min.js'],
+                        dest: 'app/static/js/',
+                        filter: 'isFile'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/respond/dest',
+                        src: ['respond.min.js'],
+                        dest: 'app/static/js/',
+                        filter: 'isFile'
+                    },
+                    // angular
+                    {
+                        expand: true,
+                        cwd: 'bower_components/angular',
+                        src: ['angular.js'],
+                        dest: 'app/static/js/angular/',
+                        filter: 'isFile'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/angular-loader',
+                        src: ['angular-loader.js'],
+                        dest: 'app/static/js/angular/',
+                        filter: 'isFile'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/angular-ui-router/release',
+                        src: ['angular-ui-router.js'],
+                        dest: 'app/static/js/angular/',
+                        filter: 'isFile'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/angular-cookies',
+                        src: ['angular-cookies.js'],
+                        dest: 'app/static/js/angular/',
+                        filter: 'isFile'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/angular-resource',
+                        src: ['angular-resource.js'],
+                        dest: 'app/static/js/angular/',
+                        filter: 'isFile'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/angular-scroll',
+                        src: ['angular-scroll.js'],
+                        dest: 'app/static/js/angular/',
+                        filter: 'isFile'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/satellizer',
+                        src: ['satellizer.js'],
+                        dest: 'app/static/js/angular/',
+                        filter: 'isFile'
+                    }
+                ],
+            },
         },
 
         protractor_webdriver: {
@@ -107,13 +182,6 @@ module.exports = function(grunt) {
             options: {
                 livereload: true
             },
-            scripts: {
-                files: ['assets/js/*.js'],
-                tasks: ['concat'],
-                options: {
-                    spawn: false,
-                }
-            },
             css: {
                 files: ['assets/sass/*.scss', 'assets/sass/*/*.scss'],
                 tasks: ['sass', 'autoprefixer'],
@@ -136,15 +204,7 @@ module.exports = function(grunt) {
             options: {
                 port: basePort,
                 hostname: 'localhost',
-                middleware: function(connect) {
-                        return [
-                            connect().use(
-                                '/bower_components',
-                                connect.static('./bower_components')
-                            ),
-                            connect.static('./app')
-                        ];
-                    }
+                base: 'app'
             },
             server: {},
             test: {
@@ -159,12 +219,12 @@ module.exports = function(grunt) {
     require('load-grunt-tasks')(grunt);
 
     grunt.registerTask(
-        'build', ['concat', 'uglify', 'imagemin', 'sass', 'autoprefixer', 'cssmin']);
+        'build', ['copy', 'imagemin', 'sass', 'autoprefixer', 'cssmin']);
     grunt.registerTask(
-        'run', ['connect:server', 'concat', 'imagemin', 'sass', 'autoprefixer', 'watch']);
+        'run', ['copy', 'connect:server', 'imagemin', 'sass', 'autoprefixer', 'watch']);
     grunt.registerTask('serve', ['connect',]);
     grunt.registerTask('default', ['run']);
     grunt.registerTask('test',
-        ['connect:test', 'concat', 'imagemin', 'sass', 'autoprefixer', 'protractor_webdriver:test', 'protractor:test']);
+        ['connect:test', 'imagemin', 'sass', 'autoprefixer', 'protractor_webdriver:test', 'protractor:test']);
 
 };
