@@ -36,7 +36,8 @@
       }
     }
 
-    function deleteProject(project, index) {
+    function deleteProject(project) {
+      var index = vm.list.indexOf(project);
       var confirmDelete = confirm('Confirm project deletion?');
       if (confirmDelete) {
         projectsService.$delete(project.uuid).then(

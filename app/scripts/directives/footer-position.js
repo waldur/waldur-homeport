@@ -18,9 +18,9 @@
           scope.$watch(function() {
               scope.appContainer_height = appContainer.offsetHeight;
               if (scope.appContainer_height < winHeight) {
-                element.addClass('fixed');
+                element.addClass('app-footer-fixed');
               } else {
-                element.removeClass('fixed');
+                element.removeClass('app-footer-fixed');
               }
           });
         }
