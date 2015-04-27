@@ -37,7 +37,6 @@
     var ControllerListClass = baseControllerClass.extend({
       list: {},
       service: null, // required in init
-      pages: null,
       searchInput: '',
       searchFieldName: '', // required in init
       controllerScope: null, // required in init
@@ -51,7 +50,6 @@
         var vm = this;
         filter = filter || {};
         vm.service.getList(filter).then(function(response) {
-          vm.pages = vm.service.pages;
           vm.list = response;
         });
       },
