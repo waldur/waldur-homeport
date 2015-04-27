@@ -39,7 +39,7 @@
                     </div>
                     <div class="expand">
                         <a class="plus-minus"
-                           ng-click="expandItem=!expandItem"
+                           ng-click="expandItem=!expandItem; ProjectList.showMore(project)"
                            ng-class="{'plus': !expandItem, 'minus active': expandItem}"></a>
                     </div>
                     <div class="name">

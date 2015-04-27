@@ -2,9 +2,10 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('ProjectListController', ['$rootScope', '$location', 'projectsService', ProjectListController]);
+    .controller('ProjectListController',
+      ['$rootScope', 'projectsService', 'projectPermissionsService', 'resourcesService', ProjectListController]);
 
-  function ProjectListController($rootScope, $location, projectsService) {
+  function ProjectListController($rootScope, projectsService, projectPermissionsService, resourcesService) {
     var vm = this;
 
     vm.list = {};
@@ -15,10 +16,25 @@
     vm.searchInput = '';
     vm.search = search;
 
+    vm.showMore = showMore;
+
     $rootScope.$on('currentCustomerUpdated', function() {
       projectsService.page = 1;
       activate();
     });
+
+    function showMore(project) {
+      if (!project.users) {
+        projectPermissionsService.getList({project:project.uuid}).then(function(reponse) {
+          project.users = reponse;
+        });
+      }
+      if (!project.resources) {
+        resourcesService.getList({project:project.uuid}).then(function(reponse) {
+          project.resources = reponse;
+        });
+      }
+    }
 
     function deleteProject(project, index) {
       var confirmDelete = confirm('Confirm project deletion?');
@@ -40,7 +56,7 @@
     }
 
     function search() {
-      projectsService.getList({name: vm.searchInput}, true, true).then(function(response) {
+      projectsService.getList({name: vm.searchInput}).then(function(response) {
         vm.list = response;
       });
     }
@@ -50,7 +66,7 @@
     }
 
     function initList() {
-      projectsService.getList(null, true, true).then(function(response) {
+      projectsService.getList().then(function(response) {
         vm.pages = projectsService.pages;
         vm.list = response;
       });
