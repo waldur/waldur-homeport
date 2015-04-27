@@ -50,11 +50,13 @@
 (function() {
   angular.module('ncsaas')
     .controller('ResourceAddController',
-    ['resourcesService', 'servicesService', 'projectsService', 'keysService', 'templatesService', 'baseControllerAddClass',
+    ['resourcesService', 'projectCloudMembershipsService', 'projectsService',
+      'keysService', 'templatesService', 'baseControllerAddClass', 'servicesService',
       ResourceAddController]);
 
   function ResourceAddController(
-    resourcesService, servicesService, projectsService, keysService, templatesService, baseControllerAddClass) {
+    resourcesService, projectCloudMembershipsService, projectsService, keysService,
+    templatesService, baseControllerAddClass, servicesService) {
     var controllerScope = this;
     var ResourceController = baseControllerAddClass.extend({
       showServices: false,
@@ -87,14 +89,22 @@
           vm.keyList = response;
         });
       },
-      setService:function(service) {
+      setService:function(projectCloudMemberships) {
         var vm = this;
-        vm.flavorList = service.flavors;
-        templatesService.getTemplateList(service.uuid).then(function(response) {
-          vm.templateList = response;
+        var url = projectCloudMemberships.cloud,
+          array = url.split ('/').filter(function(el) {
+            return el.length !== 0;
+          }),
+          uuid = array[4];
+        servicesService.$get(uuid).then(function(response) {
+          var service = response;
+          vm.flavorList = service.flavors;
+          templatesService.getTemplateList(service.uuid).then(function(response) {
+            vm.templateList = response;
+          });
+          vm.selectedService = projectCloudMemberships;
+          vm.showTemplates = true;
         });
-        vm.selectedService = service;
-        vm.showTemplates = true;
       },
       setTemplate:function(tamplate) {
         var vm = this;
@@ -112,8 +122,8 @@
         if (project) {
           vm.resource.project = project.url;
           vm.showServices = true;
-          // services
-          servicesService.getList({project: project.uuid}).then(function(response) {
+          // projectCloudMemberships
+          projectCloudMembershipsService.getList({project: project.uuid}).then(function(response) {
             vm.serviceList = response;
           });
         } else {
