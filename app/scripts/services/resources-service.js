@@ -11,15 +11,13 @@
         this.stopResource = this.operation.bind(this, 'stop');
         this.startResource = this.operation.bind(this, 'start');
         this.restartResource = this.operation.bind(this, 'restart');
+        this.endpoint = '/instances/';
       },
       getAvailableOperations:function(resource) {
         var state = resource.state.toLowerCase();
         if (state === 'online') {return ['stop', 'restart'];}
         if (state === 'offline') {return ['start', 'delete'];}
         return [];
-      },
-      getEndpoint:function(isList) {
-        return '/instances/';
       }
     });
     return new ServiceClass();
