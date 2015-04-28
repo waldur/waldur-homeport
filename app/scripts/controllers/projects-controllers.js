@@ -99,7 +99,7 @@
             return el.length !== 0;
           }),
           uuidNew = array[4];
-        $state.go('project', {uuid:uuidNew});
+        $state.go('projects.details', {uuid:uuidNew});
       });
     }
 
@@ -129,4 +129,77 @@
 
   }
 
+})();
+
+(function() {
+
+  angular.module('ncsaas')
+    .controller('UserAddToProject', ['usersService',
+     '$stateParams', 'projectsService', 'projectPermissionsService', '$state', addToProject]);
+
+  function addToProject(usersService, $stateParams, projectsService, projectPermissionsService, $state) {
+    var vm = this;
+
+    vm.users = [];
+    vm.project = null;
+    vm.usersInvited = [];
+    vm.userInviteEmail = null;
+    vm.addUser = addUser;
+    vm.addUsersToProject = addUsersToProject;
+    vm.userInvitedRemove = userInvitedRemove;
+    projectsService.$get($stateParams.uuid).then(function(response) {
+      vm.project = response;
+      usersService.getRawUserList({project: vm.project.name}).$promise.then(function(response) {
+        vm.users = response;
+      });
+    });
+
+    function addUser() {
+      var userEmail = vm.userInviteEmail;
+      if (userEmail) {
+        usersService.getRawUserList({email: userEmail}).$promise.then(function(response) {
+          var user = response[0];
+          var userForInvite = {
+            email: userEmail,
+            user: user
+          };
+          if (!user) {
+            userForInvite.errors = userEmail + ' is not exist';
+          }
+          vm.usersInvited.push(userForInvite);
+          vm.userInviteEmail = '';
+        });
+      }
+    }
+
+  function addUsersToProject() {
+    var errorsCount = 0;
+    for (var i = 0; vm.usersInvited.length > i; i++) {
+      var user = vm.usersInvited[i].user;
+      if (user) {
+        var instance = projectPermissionsService.$create();
+        instance.project = vm.project.url;
+        instance.role = 'manager';
+        instance.user = user.url;
+        var success = function() {
+          if (vm.usersInvited.length == i && errorsCount === 0) {
+            $state.go('projects.details', {uuid: vm.project.uuid});
+          }
+        };
+        var error = function(usersInvited, errors) {
+          usersInvited.errors = errors.data ? errors.data.non_field_errors : [];
+          errorsCount++;
+        }.bind(null, vm.usersInvited[i]);
+        instance.$save(success, error);
+      }
+    }
+  }
+
+  function userInvitedRemove(user) {
+    var index = vm.usersInvited.indexOf(user);
+
+    vm.usersInvited.splice(index, 1);
+   }
+
+  }
 })();

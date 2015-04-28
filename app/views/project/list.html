@@ -55,7 +55,7 @@
                             <a class="button" ng-click="openActions=!openActions">actions</a>
                             <ul class="actions-dropdown" ng-show="openActions">
                                 <li>
-                                    <a class="button-simple">Add user</a>
+                                    <a ui-sref="projects.add-users({uuid: project.uuid})" class="button-simple">Add user</a>
                                 </li>
                                 <li>
                                     <a class="button-simple">Archive</a>
