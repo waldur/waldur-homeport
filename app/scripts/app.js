@@ -60,28 +60,29 @@ angular
           authenticated: notLoggedCheck
         }
       })
-      // temporary, for develop only, remove after
-      .state('home.initialdatatemplate', {
-        url: 'init-test/',
-        views: {
-          'siteHeader@home' : {
-            templateUrl: 'views/partials/site-header.html',
-          },
-          'siteContent@home' : {
-            templateUrl: 'views/initial-data/initial-data.html',
-          },
-          'siteFooter@home' : {
-            templateUrl: 'views/partials/site-footer.html',
-          }
-        },
+
+      .state('initialdata', {
+        url: '/initial-data/',
+        templateUrl: 'views/initial-data/base.html',
+        abstract: true,
         resolve: {
           authenticated: notLoggedCheck
         }
       })
-      // temporary, for develop only, remove after
-      .state('initialdata', {
-        url: '/initial-data/',
-        templateUrl: 'views/initial-data.html',
+
+      .state('initialdata.view', {
+        url: '',
+        views: {
+          'siteHeader@initialdata' : {
+            templateUrl: 'views/partials/site-header-disabled.html',
+          },
+          'siteContent@initialdata' : {
+            templateUrl: 'views/initial-data/initial-data.html',
+          },
+          'siteFooter@initialdata' : {
+            templateUrl: 'views/partials/site-footer.html',
+          }
+        },
         resolve: {
           authenticated: authCheck
         }
