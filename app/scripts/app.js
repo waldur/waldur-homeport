@@ -34,7 +34,7 @@ angular
             templateUrl: 'views/home/home.html',
           },
           'siteFooter@home' : {
-            templateUrl: 'views/partials/site-footer.html',
+            templateUrl: 'views/partials/app-footer.html',
           }
         },
         resolve: {
@@ -53,7 +53,7 @@ angular
             templateUrl: 'views/home/login.html',
           },
           'siteFooter@home' : {
-            templateUrl: 'views/partials/site-footer.html',
+            templateUrl: 'views/partials/app-footer.html',
           }
         },
         resolve: {
@@ -80,7 +80,7 @@ angular
             templateUrl: 'views/initial-data/initial-data.html',
           },
           'siteFooter@initialdata' : {
-            templateUrl: 'views/partials/site-footer.html',
+            templateUrl: 'views/partials/app-footer.html',
           }
         },
         resolve: {
