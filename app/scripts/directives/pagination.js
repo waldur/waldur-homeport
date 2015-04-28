@@ -28,7 +28,6 @@
           pagesController.currentPage = page;
           pagesService.page = page;
           pagesService.getList().then(function(response) {
-            pagesController.pages = pagesService.pages;
             pagesController.list = response;
           });
         }
