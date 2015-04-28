@@ -20,6 +20,7 @@
       pages:null,
       currentStateService:null,
       endpoint:null,
+      filterByCustomer: true,
       customerUuid:null,
 
       init:function() {
@@ -49,7 +50,7 @@
           });
         };
 
-        if (vm.currentStateService == null) {
+        if (vm.currentStateService == null || !vm.filterByCustomer) {
           queryList();
         } else {
           vm.currentStateService.getCustomer().then(function (response) {
