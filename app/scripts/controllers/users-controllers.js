@@ -12,7 +12,11 @@
     var vm = this;
 
     vm.showgroup = false;
-    vm.list = usersService.getRawUserList();
+    vm.list = [];
+
+    usersService.getList().then(function(response) {
+      vm.list = response;
+    });
     vm.remove = remove;
     vm.service = usersService;
 
@@ -38,7 +42,11 @@
     var vm = this;
 
     vm.activeTab = 'eventlog';
-    vm.user = usersService.getUser($stateParams.uuid);
+    vm.user = null;
+    
+    usersService.$get($stateParams.uuid).then(function(response) {
+      vm.user = response;
+    });
     vm.update = update;
 
     function update() {

@@ -2,10 +2,11 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('ProfileController',
-      ['usersService', 'customersService', 'projectsService', 'baseControllerClass', 'authService', ProfileController]);
+    .controller('ProfileController', ['usersService', 'customersService',
+      'projectsService', 'baseControllerClass', 'authService', 'keysService', ProfileController]);
 
-  function ProfileController(usersService, customersService, projectsService, baseControllerClass, authService) {
+  function ProfileController(
+    usersService, customersService, projectsService, baseControllerClass, authService, keysService) {
     var controllerScope = this;
     var Controller = baseControllerClass.extend({
       activeTab: 'eventlog',
@@ -21,7 +22,13 @@
       },
       activate: function() {
         var vm = this;
-        vm.user = usersService.getCurrentUserWithKeys();
+        vm.user = null;
+        usersService.getCurrentUser(true).then(function(response) {
+          vm.user = response;
+          keysService.getUserKeys(vm.user.uuid).then(function(response) {
+            vm.user.keys = response;
+          });
+        });
         vm.customers = customersService.getCustomersList();
         vm.getProjects();
       },
