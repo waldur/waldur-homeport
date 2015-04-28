@@ -1,10 +1,9 @@
 var auth = require('../helpers/auth.js'),
   expectedPlans = ['Default', 'Small', 'Medium', 'Large'],
   user = auth.getUser('Alice'),
-  customer = {'name': 'Ministry of Bells'},
-  plans = ['Default', 'Small', 'Medium', 'Large'];
+  customer = {'name': 'Ministry of Bells'};
 
-describe('Project list visibility positive test for user ' + user.username + ':', function() {
+describe('Plans list visibility positive test for user ' + user.username + ':', function() {
 
   it('I should be able to login', function() {
     auth.login(user);
@@ -24,8 +23,8 @@ describe('Project list visibility positive test for user ' + user.username + ':'
     element(by.cssContainingText('tr.ng-scope td.name h2.item-title a.ng-binding', customer.name)).click();
     element(by.cssContainingText(
       'div.col-xs-11.profile-info > div.row > div > ul > li:nth-child(2) > a', 'Plans')).click();
-    for (var i = 0; i < plans.length; i++) {
-      expect(element(by.cssContainingText('span.plan-name.ng-binding', plans[i])).isPresent()).toBe(true);
+    for (var i = 0; i < expectedPlans.length; i++) {
+      expect(element(by.cssContainingText('span.plan-name.ng-binding', expectedPlans[i])).isPresent()).toBe(true);
     }
   });
 

@@ -14,7 +14,10 @@
       init:function() {
         this.service = plansService;
         this.controllerScope = controllerScope;
+        this.checkPermissions();
+      },
 
+      checkPermissions: function() {
         // check is current user - customer owner and load page if he is
         var vm = this;
         usersService.getCurrentUser().then(function(user) {
@@ -33,6 +36,7 @@
           });
         });
       },
+
       // XXX: This is quick fix, we need to get display names from backend, but currently quotas on backend do not
       // have display names
       getPrettyQuotaName: function(name) {
