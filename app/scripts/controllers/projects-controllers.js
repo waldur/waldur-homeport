@@ -134,10 +134,11 @@
 (function() {
 
   angular.module('ncsaas')
-    .controller('UserAddToProject', ['usersService',
-     '$stateParams', 'projectsService', 'projectPermissionsService', '$state', addToProject]);
+    .controller('UserAddToProjectController', ['usersService', '$stateParams',
+      'projectsService', 'projectPermissionsService', '$state', 'USERPROJECTROLE', UserAddToProjectController]);
 
-  function addToProject(usersService, $stateParams, projectsService, projectPermissionsService, $state) {
+  function UserAddToProjectController(
+    usersService, $stateParams, projectsService, projectPermissionsService, $state, USERPROJECTROLE) {
     var vm = this;
 
     vm.users = [];
@@ -158,13 +159,14 @@
       var userEmail = vm.userInviteEmail;
       if (userEmail) {
         usersService.getRawUserList({email: userEmail}).$promise.then(function(response) {
-          var user = response[0];
+          var user = (response.length > 0) ? response[0] : null;
           var userForInvite = {
             email: userEmail,
-            user: user
+            user: user,
+            errors: []
           };
           if (!user) {
-            userForInvite.errors = userEmail + ' is not exist';
+            userForInvite.errors.push(userEmail + ' is not exist');
           }
           vm.usersInvited.push(userForInvite);
           vm.userInviteEmail = '';
@@ -179,13 +181,13 @@
       if (user) {
         var instance = projectPermissionsService.$create();
         instance.project = vm.project.url;
-        instance.role = 'manager';
+        instance.role = USERPROJECTROLE.admin;
         instance.user = user.url;
-        var success = function() {
-          if (vm.usersInvited.length == i && errorsCount === 0) {
+        var success = function(index) {
+          if (vm.usersInvited.length == index + 1 && errorsCount === 0) {
             $state.go('projects.details', {uuid: vm.project.uuid});
           }
-        };
+        }.bind(null, i);
         var error = function(usersInvited, errors) {
           usersInvited.errors = errors.data ? errors.data.non_field_errors : [];
           errorsCount++;

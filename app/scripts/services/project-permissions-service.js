@@ -16,3 +16,9 @@
   }
 
 })();
+
+(function() {
+  angular.module('ncsaas').constant('USERPROJECTROLE', {
+    admin: 'admin'
+  });
+})();

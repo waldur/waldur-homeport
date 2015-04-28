@@ -4,18 +4,19 @@ var auth = require('../helpers/auth.js'),
     {
       user: auth.getUser('Charlie'),
       projects: ['bells.org'],
+      customer: 'Ministry of Bells'
     },
     {
       user: auth.getUser('Bob'),
       projects: ['bells.org'],
+      customer: 'Ministry of Bells'
     }
-  ],
-  customer = 'Ministry of Bells';
+  ];
 
 for(var i = 0; i < testData.length; i++) {
   var data = testData[i];
 
-  (function(user, projects) {
+  (function(user, projects, customer) {
     describe('Project list test for user ' + user.username + ':', function() {
 
       it('I should be able to login', function() {
@@ -45,7 +46,7 @@ for(var i = 0; i < testData.length; i++) {
       });
 
     });
-  })(data.user, data.projects);
+  })(data.user, data.projects, data.customer);
 
 }
 
@@ -55,7 +56,7 @@ var addProjectTestData = [
     customer: 'Ministry of Whistles'
   },
   {
-    user: auth.getUser('Walter'),
+    user: auth.getUser('Alice'),
     customer: 'Ministry of Bells'
   }
 ];
@@ -83,7 +84,7 @@ for(var i = 0; i < addProjectTestData.length; i++) {
 
       it('I should be able to add new project', function() {
         // fill name
-        element(by.model('controller.project.name')).sendKeys(projectName);
+        element(by.model('ProjectAdd.project.name')).sendKeys(projectName);
         // choose customer
         element(by.cssContainingText('option', data.customer)).click();
 
@@ -108,12 +109,14 @@ for(var i = 0; i < addProjectTestData.length; i++) {
 var addUserToProjectTestData = [
   {
     user: auth.getUser('Walter'),
-    userEmail: 'alice@example.com'
+    userEmail: 'alice@example.com',
+    userNotExistEmail: 'notexist@example.com',
+    customer: 'Ministry of Bells'
   }
 ];
 
 for(var i = 0; i < addUserToProjectTestData.length; i++) {
-  var data = addUserToProjectTestData[0],
+  var data = addUserToProjectTestData[i],
     user = data.user,
     projectUrl;
 
@@ -125,7 +128,7 @@ for(var i = 0; i < addUserToProjectTestData.length; i++) {
       });
 
       it('I should be able to go to "users add project" page for project "' + projectName + '"', function() {
-        helpers.chooseCustomer(customer);
+        helpers.chooseCustomer(data.customer);
         element(by.cssContainingText('ul.nav-list.views li a', 'Projects')).click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/projects/');
         element(by.model('ProjectList.searchInput')).sendKeys(projectName);
@@ -139,9 +142,13 @@ for(var i = 0; i < addUserToProjectTestData.length; i++) {
       });
 
       it('I should be able to add user to project', function() {
-        element(by.model('controller.userInviteEmail')).sendKeys(data.userEmail);
+        element(by.model('UserAddToProject.userInviteEmail')).sendKeys(data.userNotExistEmail);
         element(by.cssContainingText('a.btn.btn-white', 'Add users')).click();
-        element(by.cssContainingText('a.button-apply', 'Add to projec')).click();
+        expect(element(by.cssContainingText('.error.error-standard', data.userNotExistEmail + ' is not exist')).isPresent()).toBe(true);
+
+        element(by.model('UserAddToProject.userInviteEmail')).sendKeys(data.userEmail);
+        element(by.cssContainingText('a.btn.btn-white', 'Add users')).click();
+        element(by.cssContainingText('a.button-apply', 'Add to project')).click();
 
         expect(browser.getCurrentUrl()).toEqual(projectUrl);
       });
