@@ -1,63 +1,56 @@
 <div ng-controller="PlansListController as PlanList">
 
-<!-- profile-view -->
 <div class="profile-view">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-1">
-                <img src="../static/images/tmp/dojocat.jpg" class="profile-pic">
+        <section class="avatar">
+            <span class="avatar big">
+                <img src="/static/images/user-avatar.jpg" alt="" class="avatar-img">
+            </span>
+        </section>
+        <section class="content">
+            <h2 class="app-title"><a ui-sref="customers.details({uuid: PlanList.customer.uuid})">{{ PlanList.customer.name }}</a></h2>
+            <div>
+                <h4 class="app-title">Choose new plan</h4>
             </div>
-            <div class="col-xs-11 profile-info">
-                <!-- XXX: several customer views has this header, it has to be moved to separate template -->
-                <div class="row">
-                    <div class="col-xs-12">
-                        <h1 class="profile-name pull-left">{{ PlanList.customer.name }}</h1>
-                        <ul class="controls pull-right">
-                            <li>
-                                <a href="#/customers/{{ PlanList.customer.uuid }}/edit/" class="crud-controls"><i class="fa fa-cog"></i> Edit profile</a>
-                            </li>
-                            <li>
-                                <a href="#/customers/{{ PlanList.customer.uuid }}/plans/" class="crud-controls active"><i class="fa fa-cog"></i> Plans</a>
-                            </li>
-                            <li>
-                                <a href="#/customers/{{ PlanList.customer.uuid }}/billing/" class="crud-controls"><i class="fa fa-cog"></i> Billing</a>
-                            </li>
-                        </ul>
+            <div class="plans">
+                <div class="plan" ng-repeat="plan in PlanList.list">
+                    <div class="plan-item">
+                        <table>
+                            <th>
+                                <span class="plan-name">{{ plan.name }}</span>
+                                <span class="plan-price">${{ plan.price }} / mo.</span>
+                            </th>
+                            <tr ng-repeat="quota in plan.quotas">
+                                <td>{{ quota.value }} {{ PlanList.getPrettyQuotaName(quota.name) }}</td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
-                <!-- plans -->
-                <div class="profile-plans plans-and-price">
-                    <div class="row">
-                        <div class="col-xs-3" ng-repeat="plan in PlanList.list">
-                            <div class="price-table-box in-data" data-role="plan-in-data">
-                                <table class="price-table grayscale">
-                                    <tr>
-                                        <th>
-                                            <span class="plan-name">{{ plan.name }}</span>
-                                            <span class="plan-price">{{ plan.price }}</span>
-                                        </th>
-                                    </tr>
-                                    <tr ng-repeat="quota in plan.quotas">
-                                        <td>{{ quota.value }} {{ PlanList.getPrettyQuotaName(quota.name) }}</td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- plans confirm -->
-                    <div class="row plans-confirm">
-                        <div class="col-xs-12 text-center">
-                            <button class="btn btn-default" data-role="notify-trigger-negative" ng-click="PlanList.cancel()">Cancel</button>
-                            <button class="btn btn-primary" data-role="notify-trigger">Confirm change your Plan</button>
-                        </div>
-                    </div>
-                    <!-- /plans confirm -->
-                </div>
-                <!-- /plans -->
             </div>
-        </div>
+            <div class="decision">
+                <div class="col">
+                    <a class="button-cancel" ng-click="PlanList.cancel()">Cancel</a>
+                </div>
+                <div class="col">
+                    <a class="button-apply" ng-click="ServiceAdd.save()">Confirm change your Plan</a>
+                </div>
+            </div>
+        </section>
+        <section class="actions">
+            <div class="actions-button">
+                <a class="button" ng-click="openActions=!openActions">actions</a>
+                <ul class="actions-dropdown" ng-show="openActions">
+                    <li>
+                        <a ui-sref="customers.edit({uuid: PlanList.customer.uuid})" class="button-simple">Edit profile</a>
+                    </li>
+                    <li>
+                        <span class="button-simple active">Plans</span>
+                    </li>
+                    <li>
+                        <a class="button-simple">Billing</a>
+                    </li>
+                </ul>
+            </div>
+        </section>
     </div>
-</div>
-<!-- /profile-view -->
 
 </div>
