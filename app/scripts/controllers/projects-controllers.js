@@ -82,9 +82,11 @@
   }
 
   angular.module('ncsaas')
-    .controller('ProjectAddController', ['$state', 'projectsService', 'customersService', ProjectAddController]);
+    .controller('ProjectAddController', ['$state', 'projectsService',
+      'customersService', 'servicesService', 'projectCloudMembershipsService', ProjectAddController]);
 
-  function ProjectAddController($state, projectsService, customersService) {
+  function ProjectAddController(
+    $state, projectsService, customersService, servicesService, projectCloudMembershipsService) {
     var vm = this;
 
     vm.project = projectsService.$create();
@@ -99,7 +101,13 @@
             return el.length !== 0;
           }),
           uuidNew = array[4];
-        $state.go('project', {uuid:uuidNew});
+        servicesService.filterByCustomer = false;
+        servicesService.getList().then(function(response) {
+          for (var i = 0; response.length > i; i++) {
+            projectCloudMembershipsService.addRow(vm.project.url, response[i].url);
+          }
+        });
+        $state.go('projects.detail', {uuid:uuidNew});
       });
     }
 

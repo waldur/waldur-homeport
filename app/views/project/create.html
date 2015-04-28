@@ -1,4 +1,4 @@
-<div ng-controller="ProjectAddController as controller">
+<div ng-controller="ProjectAddController as ProjectAdd">
 
     <div class="white-box">
         <ul class="sort-list">
@@ -11,7 +11,7 @@
     <div class="white-box">
         <section class="row top">
             <div class="col">
-                <input type="text" placeholder="Project Name" ng-model="controller.project.name">
+                <input type="text" placeholder="Project Name" ng-model="ProjectAdd.project.name">
                 <div class="error arrow-up" ng-show="ResourceAdd.errors.hostname">
                     <ul class="error-list">
                         <li ng-repeat="error in ResourceAdd.errors.hostname">{{ error }}</li>
@@ -21,8 +21,8 @@
             <div class="col">
                 <div class="custom-select project">
                     <select name=""
-                        ng-options="item.url as item.name for item in controller.customersList"
-                        ng-model="controller.project.customer">
+                        ng-options="item.url as item.name for item in ProjectAdd.customersList"
+                        ng-model="ProjectAdd.project.customer">
                         <option value="" selected>Choose customer</option>
                     </select>
                 </div>
@@ -38,15 +38,15 @@
             <div class="col">
                 <textarea class="normal"
                     placeholder="Project description"
-                    ng-model="controller.project.description"></textarea>
+                    ng-model="ProjectAdd.project.description"></textarea>
             </div>
         </section>
 
         <!-- non field errors -->
-        <div class="simple-line" ng-show="controller.errors.non_field_errors">
+        <div class="simple-line" ng-show="ProjectAdd.errors.non_field_errors">
             <div class="error">
                 <ul class="error-list">
-                    <li ng-repeat="error in controller.errors.non_field_errors">
+                    <li ng-repeat="error in ProjectAdd.errors.non_field_errors">
                         {{ error }}
                     </li>
                 </ul>
@@ -56,10 +56,10 @@
 
         <div class="decision">
             <div class="col">
-                <a class="button-cancel" ng-click="ResourceAdd.cancel()">Cancel</a>
+                <a class="button-cancel" ng-click="ProjectAdd.cancel()">Cancel</a>
             </div>
             <div class="col">
-                <a class="button-apply" ng-click="ResourceAdd.save()">Create project</a>
+                <a class="button-apply" ng-click="ProjectAdd.save()">Create project</a>
             </div>
         </div>
     </div>
