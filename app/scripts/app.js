@@ -34,7 +34,7 @@ angular
             templateUrl: 'views/home/home.html',
           },
           'siteFooter@home' : {
-            templateUrl: 'views/partials/site-footer.html',
+            templateUrl: 'views/partials/app-footer.html',
           }
         },
         resolve: {
@@ -53,7 +53,7 @@ angular
             templateUrl: 'views/home/login.html',
           },
           'siteFooter@home' : {
-            templateUrl: 'views/partials/site-footer.html',
+            templateUrl: 'views/partials/app-footer.html',
           }
         },
         resolve: {
@@ -63,7 +63,26 @@ angular
 
       .state('initialdata', {
         url: '/initial-data/',
-        templateUrl: 'views/initial-data.html',
+        templateUrl: 'views/initial-data/base.html',
+        abstract: true,
+        resolve: {
+          authenticated: notLoggedCheck
+        }
+      })
+
+      .state('initialdata.view', {
+        url: '',
+        views: {
+          'siteHeader@initialdata' : {
+            templateUrl: 'views/partials/site-header-disabled.html',
+          },
+          'siteContent@initialdata' : {
+            templateUrl: 'views/initial-data/initial-data.html',
+          },
+          'siteFooter@initialdata' : {
+            templateUrl: 'views/partials/app-footer.html',
+          }
+        },
         resolve: {
           authenticated: authCheck
         }
