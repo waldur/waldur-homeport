@@ -59,7 +59,7 @@
                     <img src="../static/images/icons/openstack.jpg" alt="" class="icon">
                 </div>
                 <div class="description">
-                    <h3>{{ service.name }}</h3>
+                    <h3>{{ service.cloud_name }}</h3>
                 </div>
             </div>
             <!-- /template -->
@@ -75,7 +75,7 @@
                 ng-click="ResourceAdd.setTemplate(template)"
                 ng-class="{'state': ResourceAdd.selectedTemplate == template}">
                 <div class="icon">
-                    <img ng-show="template.icon_url" src="{{ template.icon_url }}" alt="" class="icon">
+                    <img ng-show="template.icon_url" ng-src="{{ template.icon_url }}" alt="" class="icon">
                     <img ng-show="!template.icon_url" src="static/images/os-fallback.png" alt="" class="icon">
                 </div>
                 <div class="description">
