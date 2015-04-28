@@ -67,10 +67,11 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('ServiceAddController',
-      ['servicesService', '$state', 'currentStateService', '$rootScope', ServiceAddController]);
+    .controller('ServiceAddController', ['servicesService', '$state',
+      'currentStateService', '$rootScope', 'projectCloudMembershipsService', 'projectsService', ServiceAddController]);
 
-  function ServiceAddController(servicesService, $state, currentStateService, $rootScope) {
+  function ServiceAddController(
+    servicesService, $state, currentStateService, $rootScope, projectCloudMembershipsService, projectsService) {
     var vm = this;
     vm.service = servicesService.$create();
     vm.save = save;
@@ -97,6 +98,12 @@
       vm.service.$save(success, error);
 
       function success() {
+        projectsService.filterByCustomer = false;
+        projectsService.getList().then(function(response) {
+          for (var i = 0; response.length > i; i++) {
+            projectCloudMembershipsService.addRow(response[i].url, vm.service.url);
+          }
+        });
         $state.go('services.list');
       }
 

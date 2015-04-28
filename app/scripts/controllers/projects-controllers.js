@@ -2,9 +2,10 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('ProjectListController', ['$rootScope', '$location', 'projectsService', ProjectListController]);
+    .controller('ProjectListController',
+      ['$rootScope', 'projectsService', 'projectPermissionsService', 'resourcesService', ProjectListController]);
 
-  function ProjectListController($rootScope, $location, projectsService) {
+  function ProjectListController($rootScope, projectsService, projectPermissionsService, resourcesService) {
     var vm = this;
 
     vm.list = {};
@@ -15,12 +16,28 @@
     vm.searchInput = '';
     vm.search = search;
 
+    vm.showMore = showMore;
+
     $rootScope.$on('currentCustomerUpdated', function() {
       projectsService.page = 1;
       activate();
     });
 
-    function deleteProject(project, index) {
+    function showMore(project) {
+      if (!project.users) {
+        projectPermissionsService.getList({project:project.uuid}).then(function(reponse) {
+          project.users = reponse;
+        });
+      }
+      if (!project.resources) {
+        resourcesService.getList({project:project.uuid}).then(function(reponse) {
+          project.resources = reponse;
+        });
+      }
+    }
+
+    function deleteProject(project) {
+      var index = vm.list.indexOf(project);
       var confirmDelete = confirm('Confirm project deletion?');
       if (confirmDelete) {
         projectsService.$delete(project.uuid).then(
@@ -40,7 +57,7 @@
     }
 
     function search() {
-      projectsService.getList({name: vm.searchInput}, true, true).then(function(response) {
+      projectsService.getList({name: vm.searchInput}).then(function(response) {
         vm.list = response;
       });
     }
@@ -50,7 +67,7 @@
     }
 
     function initList() {
-      projectsService.getList(null, true, true).then(function(response) {
+      projectsService.getList().then(function(response) {
         vm.pages = projectsService.pages;
         vm.list = response;
       });
@@ -65,9 +82,11 @@
   }
 
   angular.module('ncsaas')
-    .controller('ProjectAddController', ['$state', 'projectsService', 'customersService', ProjectAddController]);
+    .controller('ProjectAddController', ['$state', 'projectsService',
+      'customersService', 'servicesService', 'projectCloudMembershipsService', ProjectAddController]);
 
-  function ProjectAddController($state, projectsService, customersService) {
+  function ProjectAddController(
+    $state, projectsService, customersService, servicesService, projectCloudMembershipsService) {
     var vm = this;
 
     vm.project = projectsService.$create();
@@ -82,7 +101,13 @@
             return el.length !== 0;
           }),
           uuidNew = array[4];
-        $state.go('project', {uuid:uuidNew});
+        servicesService.filterByCustomer = false;
+        servicesService.getList().then(function(response) {
+          for (var i = 0; response.length > i; i++) {
+            projectCloudMembershipsService.addRow(vm.project.url, response[i].url);
+          }
+        });
+        $state.go('projects.detail', {uuid:uuidNew});
       });
     }
 

@@ -9,10 +9,9 @@ module.exports.login = function(user) {
   browser.driver.manage().window().setSize(1600, 900);
   browser.get('/#/login/');
 
-  element(by.css('div.login-form a[data-role="switch-login-form"]')).click();
   element(by.model('auth.user.username')).sendKeys(user.username);
   element(by.model('auth.user.password')).sendKeys(user.password);
-  element(by.css('div.inputs-box input[type=submit]')).click();
+  element(by.css('.button-login')).click();
 };
 
 module.exports.logout = function(user) {

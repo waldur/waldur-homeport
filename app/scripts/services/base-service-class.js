@@ -20,6 +20,7 @@
       pages:null,
       currentStateService:null,
       endpoint:null,
+      filterByCustomer: true,
       customerUuid:null,
       filterByCustomer: true,
 
