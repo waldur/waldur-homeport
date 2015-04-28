@@ -9,85 +9,7 @@
         <section class="content">
             <h2 class="app-title">{{ controller.customer.name }}</h2>
             <div>
-                <a href="mailto:{{ controller.user.email }}">{{ controller.user.email }}</a>
-            </div>
-            <div class="plans">
-                <div class="plan">
-                    <div class="plan-item">
-                        <table>
-                            <th>
-                                <span class="plan-name">Free</span>
-                                <span class="plan-price">Free</span>
-                            </th>
-                            <tr>
-                                <td>2 projects</td>
-                            </tr>
-                            <tr>
-                                <td>5 users</td>
-                            </tr>
-                            <tr>
-                                <td>5 resources</td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                <div class="plan">
-                    <div class="plan-item">
-                        <table>
-                            <th>
-                                <span class="plan-name">Beginner</span>
-                                <span class="plan-price">$39/mo.</span>
-                            </th>
-                            <tr>
-                                <td>2 projects</td>
-                            </tr>
-                            <tr>
-                                <td>5 users</td>
-                            </tr>
-                            <tr>
-                                <td>5 resources</td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                <div class="plan">
-                    <div class="plan-item">
-                        <table>
-                            <th>
-                                <span class="plan-name">Beginner</span>
-                                <span class="plan-price">$39/mo.</span>
-                            </th>
-                            <tr>
-                                <td>2 projects</td>
-                            </tr>
-                            <tr>
-                                <td>5 users</td>
-                            </tr>
-                            <tr>
-                                <td>5 resources</td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                <div class="plan">
-                    <div class="plan-item">
-                        <table>
-                            <th>
-                                <span class="plan-name">Beginner</span>
-                                <span class="plan-price">$39/mo.</span>
-                            </th>
-                            <tr>
-                                <td>2 projects</td>
-                            </tr>
-                            <tr>
-                                <td>5 users</td>
-                            </tr>
-                            <tr>
-                                <td>5 resources</td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
+                <article class="normal-description"></article>
             </div>
         </section>
         <section class="actions">
@@ -95,10 +17,10 @@
                 <a class="button" ng-click="openActions=!openActions">actions</a>
                 <ul class="actions-dropdown" ng-show="openActions">
                     <li>
-                        <a class="button-simple">Edit profile</a>
+                        <a ui-sref="customers.edit({uuid: controller.customer.uuid})" class="button-simple">Edit profile</a>
                     </li>
                     <li>
-                        <a class="button-simple">Plans</a>
+                        <a ui-sref="customers.plans({uuid: controller.customer.uuid})" class="button-simple">Plans</a>
                     </li>
                     <li>
                         <a class="button-simple">Billing</a>
