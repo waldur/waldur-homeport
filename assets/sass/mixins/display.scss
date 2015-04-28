@@ -36,11 +36,19 @@
             flex: 1 100%;
             @include property(margin, 10 0);
         } // sm
+        &.full {
+            flex: 1 100%;
+            @include property(margin, 10 0);
+        } // full
     } // > .col
     &.top {
         > .col {
             flex: 0 0 auto;
             @include property(padding, 0 10);
+            &.full {
+                flex: 1 100%;
+                @include property(margin, 10 0);
+            } // full
         } // > .col
     } // &.top
 }
