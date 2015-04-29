@@ -15,6 +15,50 @@
         </ul>
     </div>
 
+    <!-- view-control -->
+    <section class="view-control">
+        <div class="list-item no-cursor">
+            <div class="checkbox">
+                <div class="checkbox" ng-show="controller.showgroup">
+                    <input type="checkbox">
+                </div>
+            </div>
+            <div>
+                <div class="view-action-buttons" ng-show="controller.showgroup">
+                    <a class="button">Add user</a>
+                    <a class="button">Archive</a>
+                    <a class="button" ng-click="ProjectList.deleteProject(project)">Delete</a>
+                </div>
+                <div class="view-action-buttons-mobile" ng-show="controller.showgroup">
+                    <div class="actions-button">
+                        <a class="button dropdown-active"
+                            ng-click="mobileActions=!mobileActions">actions</a>
+                        <ul class="actions-dropdown" ng-show="mobileActions">
+                            <li>
+                                <a class="button-simple">Add user</a>
+                            </li>
+                            <li>
+                                <a class="button-simple">Archive</a>
+                            </li>
+                            <li>
+                                <a class="button-simple" ng-click="ProjectList.deleteProject(project)">Delete</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="actions switch">
+                <span class="label-text" ng-class="{'low-grade': !controller.showgroup}">batch</span>
+                <div class="checkbox-toggle">
+                    <input type="checkbox" id="control-types" ng-click="controller.showgroup=!controller.showgroup">
+                    <label for="control-types"></label>
+                </div>
+                <span class="label-text special-left" ng-class="{'low-grade': controller.showgroup}">single</span>
+            </div>
+        </div>
+    </section>
+    <!-- /view-control -->
+
     <div class="white-box clear">
         <ul class="object-list">
             <li>
@@ -34,7 +78,7 @@
                 <div class="list-item" ng-class="{'opened': expandItem}">
                     <div class="checkbox">
                         <div class="checkbox">
-                            <input type="checkbox">
+                            <input type="checkbox" ng-show="controller.showgroup">
                         </div>
                     </div>
                     <div class="expand">
@@ -52,7 +96,7 @@
                     </div>
                     <div class="actions">
                         <div class="actions-button">
-                            <a class="button" ng-click="openActions=!openActions">actions</a>
+                            <a class="button" ng-click="openActions=!openActions" ng-show="!controller.showgroup">actions</a>
                             <ul class="actions-dropdown" ng-show="openActions">
                                 <li>
                                     <a class="button-simple">Add user</a>
