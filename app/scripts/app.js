@@ -8,7 +8,8 @@ angular
     'ui.router',
     'ngCookies',
     'ngResource',
-    'duScroll'])
+    'duScroll',
+    'ui.gravatar'])
   // urls
   .config(function($stateProvider, $urlRouterProvider) {
 
