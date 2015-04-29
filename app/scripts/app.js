@@ -188,6 +188,22 @@ angular
         auth: true
       })
 
+      .state('projects.add-users', {
+        url: ':uuid/add-users/',
+        views: {
+          'appContent': {
+              templateUrl: 'views/project/add-users.html'
+            },
+          'appHeader': {
+              templateUrl: 'views/partials/app-header.html'
+            },
+          'appFooter': {
+              templateUrl: 'views/partials/app-footer.html'
+            }
+        }
+
+      })
+
       .state('services', {
         url: '/services/',
         abstract: true,

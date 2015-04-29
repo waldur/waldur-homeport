@@ -138,3 +138,78 @@
   }
 
 })();
+
+(function() {
+
+  angular.module('ncsaas')
+    .controller('UserAddToProjectController', ['usersService', '$stateParams',
+      'projectsService', 'projectPermissionsService', '$state', 'USERPROJECTROLE', UserAddToProjectController]);
+
+  function UserAddToProjectController(
+    usersService, $stateParams, projectsService, projectPermissionsService, $state, USERPROJECTROLE) {
+    var vm = this;
+
+    vm.users = [];
+    vm.project = null;
+    vm.usersInvited = [];
+    vm.userInviteEmail = null;
+    vm.addUser = addUser;
+    vm.addUsersToProject = addUsersToProject;
+    vm.userInvitedRemove = userInvitedRemove;
+    projectsService.$get($stateParams.uuid).then(function(response) {
+      vm.project = response;
+      usersService.getList({project: vm.project.name}).then(function(response) {
+        vm.users = response;
+      });
+    });
+
+    function addUser() {
+      var userEmail = vm.userInviteEmail;
+      if (userEmail) {
+        usersService.getList({email: userEmail}).then(function(response) {
+          var user = (response.length > 0) ? response[0] : null;
+          var userForInvite = {
+            email: userEmail,
+            user: user,
+            errors: []
+          };
+          if (!user) {
+            userForInvite.errors.push(userEmail + ' does not exist');
+          }
+          vm.usersInvited.push(userForInvite);
+          vm.userInviteEmail = '';
+        });
+      }
+    }
+
+    function addUsersToProject() {
+      var errorsCount = 0;
+      for (var i = 0; vm.usersInvited.length > i; i++) {
+        var user = vm.usersInvited[i].user;
+        if (user) {
+          var instance = projectPermissionsService.$create();
+          instance.project = vm.project.url;
+          instance.role = USERPROJECTROLE.admin;
+          instance.user = user.url;
+          var success = function(index) {
+            if (vm.usersInvited.length == index + 1 && errorsCount === 0) {
+              $state.go('projects.details', {uuid: vm.project.uuid});
+            }
+          }.bind(null, i);
+          var error = function(usersInvited, errors) {
+            usersInvited.errors = errors.data ? errors.data.non_field_errors : [];
+            errorsCount++;
+          }.bind(null, vm.usersInvited[i]);
+          instance.$save(success, error);
+        }
+      }
+    }
+
+    function userInvitedRemove(user) {
+      var index = vm.usersInvited.indexOf(user);
+
+      vm.usersInvited.splice(index, 1);
+    }
+
+  }
+})();

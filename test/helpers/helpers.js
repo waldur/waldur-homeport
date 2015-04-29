@@ -6,7 +6,7 @@ module.exports.getUUID = function() {
 };
 
 module.exports.chooseCustomer = function(customerName) {
-  element(by.cssContainingText('.dropdown.customers .active-context', 'Active for context')).click();
+  element(by.css('.dropdown.customers .active-context')).click();
   element(by.cssContainingText('.dropdown.customers .nav-sublist li a', customerName)).click();
 };
 

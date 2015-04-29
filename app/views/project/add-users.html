@@ -1,0 +1,51 @@
+<div ng-controller="UserAddToProjectController as UserAddToProject">
+    <div class="white-box">
+        <ul class="sort-list">
+            <li class="title">
+                <h2 class="app-title">Add users to project {{UserAddToProject.project.name}}</h2>
+            </li>
+        </ul>
+    </div>
+
+    <div class="white-box">
+        <section class="row gray-box">
+            <div class="col" ng-repeat="user in UserAddToProject.users">
+            <span class="avatar offset-right">
+                <img src="/static/images/user-avatar.jpg" alt="{{user.full_name}}" class="avatar-img">
+            </span>
+                <h4 class="item-title">
+                    <a ui-sref="users.details({uuid: user.uuid})">{{user.full_name}}</a>
+                </h4>
+            </div>
+        </section>
+        <section class="row">
+            <ul class="list-unstyled invited-list">
+                <li ng-repeat="userInvited in UserAddToProject.usersInvited">
+                    <strong>{{userInvited.email}}</strong>
+                    <span class="error error-standard error-small label" ng-repeat="error in userInvited.errors">{{error}}</span>
+                    <span class="label label-black-txt" ng-click="UserAddToProject.userInvitedRemove(userInvited)">remove</span>
+                </li>
+            </ul>
+        </section>
+        <section class="row">
+            <form name="userInviteForm">
+                <div class="col-xs-4">
+                    <input type="email" name="email" ng-model="UserAddToProject.userInviteEmail" class="form-control" placeholder="user@example.com" required>
+                    <span class="error" ng-show="userInviteForm.email.$error.email">Not valid email!</span>
+                </div>
+                <div class="col-xs-4">
+                    <a class="btn btn-white" ng-click="UserAddToProject.addUser()">Add users</a>
+                </div>
+            </form>
+        </section>
+        <div class="decision">
+            <div class="col">
+                <a class="button-cancel" ui-sref="projects.details({uuid: UserAddToProject.project.uuid})">Cancel</a>
+            </div>
+            <div class="col">
+                <a class="button-apply" ng-click="UserAddToProject.addUsersToProject()">Add to project</a>
+            </div>
+        </div>
+    </div>
+</div>
+
