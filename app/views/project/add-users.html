@@ -28,13 +28,24 @@
             </ul>
         </section>
         <section class="row">
-            <form name="userInviteForm">
-                <div class="col-xs-4">
-                    <input type="email" name="email" ng-model="UserAddToProject.userInviteEmail" class="form-control" placeholder="user@example.com" required>
+            <form name="userInviteForm" class="short-form">
+                <div class="form-row">
+                    <angucomplete-alt placeholder="user@example.com"
+                                      required="true"
+                                      pause="100"
+                                      type="text"
+                                      selected-object="UserAddToProject.selectedUsersCallback"
+                                      local-data="UserAddToProject.usersList"
+                                      search-fields="email, full_name"
+                                      title-field="email"
+                                      description-field="full_name"
+                                      minlength="1"
+                                      clear-selected="true"
+                                      input-changed="UserAddToProject.userSearchInputChanged"
+                                      input-class="form-control"></angucomplete-alt>
+                    <input type="email" name="email" ng-model="UserAddToProject.userInviteEmail" class="ng-hide" required>
+                    <a class="button" ng-click="UserAddToProject.addUser()">Add user</a>
                     <span class="error" ng-show="userInviteForm.email.$error.email">Not valid email!</span>
-                </div>
-                <div class="col-xs-4">
-                    <a class="btn btn-white" ng-click="UserAddToProject.addUser()">Add users</a>
                 </div>
             </form>
         </section>

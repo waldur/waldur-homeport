@@ -156,6 +156,30 @@
     vm.addUser = addUser;
     vm.addUsersToProject = addUsersToProject;
     vm.userInvitedRemove = userInvitedRemove;
+    vm.usersList = [];
+    vm.userSearchInputChanged = userSearchInputChanged;
+    vm.selectedUsersCallback = selectedUsersCallback;
+
+    getUserList();
+
+    function getUserList(filter) {
+      usersService.getList(filter).then(function(response) {
+        vm.usersList = response;
+      });
+    }
+
+    function userSearchInputChanged(searchText) {
+      getUserList({email: searchText});
+      vm.userInviteEmail = searchText;
+    }
+
+    function selectedUsersCallback(selected) {
+      if (selected) {
+        vm.userInviteEmail = selected.title;
+        addUser();
+      }
+    }
+
     projectsService.$get($stateParams.uuid).then(function(response) {
       vm.project = response;
       usersService.getList({project: vm.project.name}).then(function(response) {
