@@ -14,14 +14,19 @@
       getCurrentUser:function() {
         var vm = this;
         var deferred = $q.defer();
-        vm.filterByCustomer = false;
-        vm.getList({current:''}).then(function(response) {
-          var user = response.length > 0 ? response[0] : null;
-          deferred.resolve(response[0]);
-        }, function(error) {
-          deferred.reject(error);
-        });
-        vm.filterByCustomer = true;
+        if (!vm.currentUser) {
+          vm.filterByCustomer = false;
+          vm.getList({current:''}).then(function(response) {
+            var user = response.length > 0 ? response[0] : null;
+            vm.currentUser = user;
+            deferred.resolve(vm.currentUser);
+          }, function(error) {
+            deferred.reject(error);
+          });
+          vm.filterByCustomer = true;
+        } else {
+          deferred.resolve(vm.currentUser);
+        }
         return deferred.promise;
       }
     });
