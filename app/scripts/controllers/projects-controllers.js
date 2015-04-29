@@ -158,7 +158,7 @@
     vm.userInvitedRemove = userInvitedRemove;
     projectsService.$get($stateParams.uuid).then(function(response) {
       vm.project = response;
-      usersService.getRawUserList({project: vm.project.name}).$promise.then(function(response) {
+      usersService.getList({project: vm.project.name}).then(function(response) {
         vm.users = response;
       });
     });
@@ -166,7 +166,7 @@
     function addUser() {
       var userEmail = vm.userInviteEmail;
       if (userEmail) {
-        usersService.getRawUserList({email: userEmail}).$promise.then(function(response) {
+        usersService.getList({email: userEmail}).then(function(response) {
           var user = (response.length > 0) ? response[0] : null;
           var userForInvite = {
             email: userEmail,
