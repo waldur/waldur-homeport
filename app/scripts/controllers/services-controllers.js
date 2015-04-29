@@ -68,10 +68,11 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('ServiceAddController',
-      ['servicesService', '$state', 'currentStateService', '$rootScope', ServiceAddController]);
+    .controller('ServiceAddController', ['servicesService', '$state',
+      'currentStateService', '$rootScope', 'projectCloudMembershipsService', 'projectsService', ServiceAddController]);
 
-  function ServiceAddController(servicesService, $state, currentStateService, $rootScope) {
+  function ServiceAddController(
+    servicesService, $state, currentStateService, $rootScope, projectCloudMembershipsService, projectsService) {
     var vm = this;
     vm.service = servicesService.$create();
     vm.save = save;
@@ -98,6 +99,12 @@
       vm.service.$save(success, error);
 
       function success() {
+        projectsService.filterByCustomer = false;
+        projectsService.getList().then(function(response) {
+          for (var i = 0; response.length > i; i++) {
+            projectCloudMembershipsService.addRow(response[i].url, vm.service.url);
+          }
+        });
         $state.go('services.list');
       }
 
@@ -114,4 +121,42 @@
 
   }
 
+})();
+
+(function() {
+  angular.module('ncsaas')
+    .controller('ServiceDetailUpdateController',
+      ['baseControllerClass', 'servicesService', '$stateParams', '$state', ServiceDetailUpdateController]);
+
+  function ServiceDetailUpdateController(baseControllerClass, servicesService, $stateParams, $state) {
+    var controllerScope = this;
+    var Controller = baseControllerClass.extend({
+      service: null,
+
+      init:function() {
+        this._super();
+        this.activate();
+      },
+      activate:function() {
+        var vm = this;
+        servicesService.$get($stateParams.uuid).then(function(response) {
+          vm.service = response;
+        });
+      },
+      remove:function() {
+        if (confirm('Are you sure you want to delete service?')) {
+          this.service.$delete(
+            function() {
+              $state.go('services.list');
+            },
+            function(errors) {
+              alert(errors.data.detail);
+            }
+          );
+        }
+      }
+    });
+
+    controllerScope.__proto__ = new Controller();
+  }
 })();

@@ -9,6 +9,7 @@
     var vm = this;
     vm.getKeyList = getKeyList;
     vm.getCurrentUserKeyList = getCurrentUserKeyList;
+    vm.getUserKeys = getUserKeys;
 
     function getKeyList() {
       return RawKey.query().$promise;
@@ -20,7 +21,7 @@
 
       function initKeys(user) {
         /*jshint camelcase: false */
-        RawKey.query({user_uuid: user.uuid}).$promise.then(
+        getUserKeys(user.uuid).then(
           function(keys) {
             deferred.resolve(keys);
           },
@@ -33,6 +34,10 @@
       }
 
       return deferred.promise;
+    }
+
+    function getUserKeys(userUuid) {
+      return RawKey.query({user_uuid: userUuid}).$promise;
     }
 
   }

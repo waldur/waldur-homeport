@@ -360,3 +360,13 @@ textarea {
         } // &:before
     } // minus
 } // plus-minus
+
+.text-label {
+    @include inline-middle;
+    @include property(padding, 2 4);
+    @include property(border-radius, 2);
+    &.lightgreen {
+        background-color: #9ECF5D;
+        color: #fff;
+    } // &.lightgreen
+} // text-label

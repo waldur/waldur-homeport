@@ -1,0 +1,41 @@
+.short-form {
+    width: 60%;
+    margin: 0 auto;
+    &.full {
+        width: 100%;
+    } // &.full
+    .divider {
+        border-top: 1px solid lightgray;
+        @include property(padding, 0 10);
+        @include property(padding-top, 25);
+        @include property(margin-top, 10);
+    } // .divider
+    .form-row {
+        @include row;
+        @include property(margin-top, 10);
+        &:nth-child(1) {
+            margin-top: 0;
+        } // &:nth-child(1)
+        &.inputs-centered {
+            align-items: center;
+        } // &.inputs-centered
+        .col {
+            &.label {
+                width: 160px;
+                text-align: right;
+            } // &.label
+            &.input {
+                width: calc(100% - 320px);
+                &.input-full {
+                    width: calc(100% - 160px);
+                } // &.input-full
+                input[type=text] {
+                    width: 100%;
+                } // input[type=text]
+            } // &.input
+            &.description {
+                width: 160px;
+            } // &.description
+        } // foo
+    } // form-row
+} // short-form

@@ -3,4 +3,16 @@
     + .row {
         @include property(margin-top, 20);
     } // + .row
+    .col {
+        &.inital-avatar {
+            width: 180px;
+        } // &.inital-avatar
+        &.inital-inputs {
+            width: calc(100% - (180px + 240px));
+        } // &.inital-inputs
+        &.inital-package {
+            width: 240px;
+            text-align: center;
+        } // &.inital-package
+    } // .col
 } // row
