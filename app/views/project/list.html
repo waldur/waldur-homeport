@@ -186,7 +186,7 @@
                             <li class="item-list" ng-repeat="user in project.users">
                                 <section>
                                     <div class="avatar">
-                                        <img src="/static/images/user-avatar.jpg" alt="" class="avatar-img">
+                                        <img gravatar-src="'{{ user.email }}'" gravatar-size="100">
                                     </div>
                                     <a ui-sref="users({uuid: user.uuid})">{{ user.native_name }}</a>
                                 </section>
