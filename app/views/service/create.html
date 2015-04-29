@@ -59,6 +59,19 @@
                     </section>
                 </div>
             </div>
+            <div class="col full">
+                <div>
+                    <input type="checkbox" id="openstackdummy" ng-model="ServiceAdd.service.dummy">
+                    <label for="openstackdummy">
+                        Dummy
+                    </label>
+                </div>
+                <!-- this code shows only when openstack selected -->
+                <article class="light-description">
+                    Check if created OpenStack should be working in emulation mode
+                </article>
+                <!-- /this code shows only when openstack selected -->
+            </div>
         </div>
         <div class="divider"></div>
         <div class="form-row">
@@ -81,7 +94,7 @@
         </div>
         <div class="form-row">
             <div class="col label">
-                <label for="">Auth url:</label>
+                <label for="">Auth URL:</label>
             </div>
             <div class="col input">
                 <input type="text" placeholder="http://keystone.example.com:5000/v2.0" ng-model="ServiceAdd.service.auth_url">
