@@ -2,9 +2,9 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('authService', ['$http', '$auth', authService]);
+    .service('authService', ['$http', '$auth', 'usersService', authService]);
 
-  function authService($http, $auth) {
+  function authService($http, $auth, usersService) {
     /*jshint validthis: true */
     var vm = this;
 
@@ -50,6 +50,7 @@
     function signout(){
       delete $http.defaults.headers.common.Authorization;
       vm.user = {isAuthenticated: false};
+      usersService.currentUser = null;
       $auth.logout();
     }
 

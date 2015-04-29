@@ -64,10 +64,7 @@ angular
       .state('initialdata', {
         url: '/initial-data/',
         templateUrl: 'views/initial-data/base.html',
-        abstract: true,
-        resolve: {
-          authenticated: notLoggedCheck
-        }
+        abstract: true
       })
 
       .state('initialdata.view', {
@@ -93,7 +90,8 @@ angular
         templateUrl: 'views/dashboard.html',
         resolve: {
           authenticated: authCheck
-        }
+        },
+        auth: true
       })
 
       .state('projects', {
@@ -211,7 +209,8 @@ angular
         },
         resolve: {
           authenticated: authCheck
-        }
+        },
+        auth: true
       })
 
       .state('services.create', {
@@ -480,7 +479,8 @@ angular
         },
         resolve: {
           authenticated: authCheck
-        }
+        },
+        auth: true
       })
 
       .state('resources.create', {
@@ -498,7 +498,8 @@ angular
         },
         resolve: {
           authenticated: authCheck
-        }
+        },
+        auth: true
       })
 
       .state('payment', {
