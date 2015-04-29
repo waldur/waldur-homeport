@@ -138,6 +138,13 @@ module.exports = function(grunt) {
                         src: ['satellizer.js'],
                         dest: 'app/static/js/angular/',
                         filter: 'isFile'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/angular-gravatar/build',
+                        src: ['angular-gravatar.js'],
+                        dest: 'app/static/js/angular/',
+                        filter: 'isFile'
                     }
                 ],
             },
