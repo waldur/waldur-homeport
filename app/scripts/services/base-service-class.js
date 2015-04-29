@@ -101,6 +101,9 @@
               url:ENV.apiEndpoint + 'api' + endpoint + ':UUID/:operation/',
               params: {UUID:'@uuid', operation:'@operation'}
             },
+            update: {
+              method: 'PUT'
+            }
           }
         );
       },

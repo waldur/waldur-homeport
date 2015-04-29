@@ -1,4 +1,4 @@
-<div>
+<div ng-controller="InitialDataController as InitialData">
 
 <div class="white-box">
     <ul class="sort-list">
@@ -20,7 +20,12 @@
                         <label for="">Use name:</label>
                     </div>
                     <div class="col input input-full">
-                        <input type="text" placeholder="Michael Yakimenko">
+                        <input ng-model="InitialData.user.full_name" type="text" placeholder="Michael Yakimenko" required>
+                        <div class="error arrow-up" ng-show="InitialData.errors.full_name">
+                            <ul class="error-list">
+                                <li ng-repeat="error in InitialData.errors.full_name">{{ error }}</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
                 <div class="form-row inputs-centered">
@@ -28,7 +33,12 @@
                         <label for="">Use email:</label>
                     </div>
                     <div class="col input input-full">
-                        <input type="text" placeholder="email@example.com">
+                        <input ng-model="InitialData.user.email" type="text" placeholder="email@example.com" required>
+                        <div class="error arrow-up" ng-show="InitialData.errors.email">
+                            <ul class="error-list">
+                                <li ng-repeat="error in InitialData.errors.email">{{ error }}</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
                 <div class="form-row">
@@ -70,7 +80,7 @@
 
     <div class="decision">
         <div class="col">
-            <a class="button-apply">Finish signup</a>
+            <a class="button-apply" ng-click="InitialData.save()">Finish signup</a>
         </div>
     </div>
 </div>
