@@ -182,34 +182,34 @@
       }
     }
 
-  function addUsersToProject() {
-    var errorsCount = 0;
-    for (var i = 0; vm.usersInvited.length > i; i++) {
-      var user = vm.usersInvited[i].user;
-      if (user) {
-        var instance = projectPermissionsService.$create();
-        instance.project = vm.project.url;
-        instance.role = USERPROJECTROLE.admin;
-        instance.user = user.url;
-        var success = function(index) {
-          if (vm.usersInvited.length == index + 1 && errorsCount === 0) {
-            $state.go('projects.details', {uuid: vm.project.uuid});
-          }
-        }.bind(null, i);
-        var error = function(usersInvited, errors) {
-          usersInvited.errors = errors.data ? errors.data.non_field_errors : [];
-          errorsCount++;
-        }.bind(null, vm.usersInvited[i]);
-        instance.$save(success, error);
+    function addUsersToProject() {
+      var errorsCount = 0;
+      for (var i = 0; vm.usersInvited.length > i; i++) {
+        var user = vm.usersInvited[i].user;
+        if (user) {
+          var instance = projectPermissionsService.$create();
+          instance.project = vm.project.url;
+          instance.role = USERPROJECTROLE.admin;
+          instance.user = user.url;
+          var success = function(index) {
+            if (vm.usersInvited.length == index + 1 && errorsCount === 0) {
+              $state.go('projects.details', {uuid: vm.project.uuid});
+            }
+          }.bind(null, i);
+          var error = function(usersInvited, errors) {
+            usersInvited.errors = errors.data ? errors.data.non_field_errors : [];
+            errorsCount++;
+          }.bind(null, vm.usersInvited[i]);
+          instance.$save(success, error);
+        }
       }
     }
-  }
 
-  function userInvitedRemove(user) {
-    var index = vm.usersInvited.indexOf(user);
+    function userInvitedRemove(user) {
+      var index = vm.usersInvited.indexOf(user);
 
-    vm.usersInvited.splice(index, 1);
-   }
+      vm.usersInvited.splice(index, 1);
+    }
 
   }
 })();
