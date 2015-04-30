@@ -143,10 +143,10 @@
 
   angular.module('ncsaas')
     .controller('UserAddToProjectController', ['usersService', '$stateParams',
-      'projectsService', 'projectPermissionsService', '$state', 'USERPROJECTROLE', UserAddToProjectController]);
+      'projectsService', 'projectPermissionsService', 'USERPROJECTROLE', '$scope', UserAddToProjectController]);
 
   function UserAddToProjectController(
-    usersService, $stateParams, projectsService, projectPermissionsService, $state, USERPROJECTROLE) {
+    usersService, $stateParams, projectsService, projectPermissionsService, USERPROJECTROLE, $scope) {
     var vm = this;
 
     vm.users = [];
@@ -161,6 +161,7 @@
     vm.selectedUsersCallback = selectedUsersCallback;
 
     getUserList();
+    getProjectUsers();
 
     function getUserList(filter) {
       usersService.getList(filter).then(function(response) {
@@ -182,21 +183,31 @@
 
     projectsService.$get($stateParams.uuid).then(function(response) {
       vm.project = response;
-      projectPermissionsService.getList({project: vm.project.uuid}).then(function(response) {
+    });
+
+    function getProjectUsers() {
+      projectPermissionsService.getList({project: $stateParams.uuid}).then(function(response) {
         vm.users = response;
       });
-    });
+    }
 
     function addUser() {
       var userEmail = vm.userInviteEmail;
+      var userForInvite = {
+        email: userEmail,
+        user: null,
+        errors: []
+      };
+      for (var i = 0; i < vm.usersInvited.length; i++) {
+        if (vm.usersInvited[i].email === userEmail) {
+          alert(userEmail + ' was already added to list');
+          userEmail = null;
+        }
+      }
       if (userEmail) {
         usersService.getList({email: userEmail}).then(function(response) {
           var user = (response.length > 0) ? response[0] : null;
-          var userForInvite = {
-            email: userEmail,
-            user: user,
-            errors: []
-          };
+          userForInvite.user = user;
           if (user) {
             var projectPermissionsFilters = {
               username: user.username,
@@ -212,13 +223,13 @@
             userForInvite.errors.push(userEmail + ' does not exist');
           }
           vm.usersInvited.push(userForInvite);
-          vm.userInviteEmail = '';
         });
       }
+      vm.userInviteEmail = '';
+      $scope.$broadcast('angucomplete-alt:clearInput');
     }
 
     function addUsersToProject() {
-      var errorsCount = 0;
       for (var i = 0; vm.usersInvited.length > i; i++) {
         var user = vm.usersInvited[i].user;
         if (user) {
@@ -226,18 +237,16 @@
           instance.project = vm.project.url;
           instance.role = USERPROJECTROLE.admin;
           instance.user = user.url;
-          var success = function(index) {
-            if (vm.usersInvited.length == index + 1 && errorsCount === 0) {
-              $state.go('projects.details', {uuid: vm.project.uuid});
-            }
-          }.bind(null, i);
-          var error = function(usersInvited, errors) {
-            usersInvited.errors = errors.data ? errors.data.non_field_errors : [];
-            errorsCount++;
-          }.bind(null, vm.usersInvited[i]);
+          var success = function() {
+            getProjectUsers();
+          };
+          var error = function(errors) {
+            alert(errors.data.detail);
+          };
           instance.$save(success, error);
         }
       }
+      vm.usersInvited = [];
     }
 
     function userInvitedRemove(user) {
