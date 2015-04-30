@@ -182,13 +182,20 @@
                                 <section>
                                     <a class="list-sort">Name</a>
                                 </section>
+                                <section>
+                                    <div class="list-sort">Username</div>
+                                </section>
+
                             </li>
                             <li class="item-list" ng-repeat="user in project.users">
                                 <section>
                                     <div class="avatar">
                                         <img src="/static/images/user-avatar.jpg" alt="" class="avatar-img">
                                     </div>
-                                    <a ui-sref="users({uuid: user.uuid})">{{ user.native_name }}</a>
+                                    <a ui-sref="users({uuid: user.uuid})">{{ user.user_full_name }}</a>
+                                </section>
+                                <section>
+                                    <span>{{ user.user_username }}</span>
                                 </section>
                             </li>
                         </ul>

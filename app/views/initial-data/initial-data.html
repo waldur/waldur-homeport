@@ -3,7 +3,7 @@
 <div class="white-box">
     <ul class="sort-list">
         <li class="title">
-            <h2 class="app-title">Welcome to Nodeconductor</h2>
+            <h2 class="app-title">Welcome to NodeConductor!</h2>
         </li>
     </ul>
 </div>
@@ -17,10 +17,10 @@
             <div class="short-form full">
                 <div class="form-row inputs-centered">
                     <div class="col label">
-                        <label for="">Use name:</label>
+                        <label for="">Your name:</label>
                     </div>
                     <div class="col input input-full">
-                        <input ng-model="InitialData.user.full_name" type="text" placeholder="Michael Yakimenko" required>
+                        <input ng-model="InitialData.user.full_name" type="text" placeholder="Full Name" required>
                         <div class="error arrow-up" ng-show="InitialData.errors.full_name">
                             <ul class="error-list">
                                 <li ng-repeat="error in InitialData.errors.full_name">{{ error }}</li>
@@ -30,7 +30,7 @@
                 </div>
                 <div class="form-row inputs-centered">
                     <div class="col label">
-                        <label for="">Use email:</label>
+                        <label for="">Your email:</label>
                     </div>
                     <div class="col input input-full">
                         <input ng-model="InitialData.user.email" type="text" placeholder="email@example.com" required>
@@ -45,13 +45,14 @@
                     <div class="col full">
                         <article class="normal-description">
                             <p>
-                                We are can put here some agreement text, if this need, but without billing form fields,
-                                this page of intial data looks like very short. Also, we can put text about
-                                <span class="text-label lightgreen">refund 14 days</span> here to.
+                               NodeConductor is a cloud management platform for project-based resource management.
+                               Share your resources with colleagues or join a team and provision the resources you need.
                             </p>
-
                             <p>
-                                Your current plan is <strong>Free plan</strong>. You can upgrade plan in your customer profile.
+                               By continuing you agree to the Terms of Service agreement.
+                            </p>
+                            <p>
+                                Your current plan is a <strong>Free plan</strong>. You can upgrade plan in your profile.
                             </p>
                         </article>
                     </div>
