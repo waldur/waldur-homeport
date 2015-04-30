@@ -182,7 +182,7 @@
 
     projectsService.$get($stateParams.uuid).then(function(response) {
       vm.project = response;
-      usersService.getList({project: vm.project.name}).then(function(response) {
+      projectPermissionsService.getList({project: vm.project.uuid}).then(function(response) {
         vm.users = response;
       });
     });
@@ -197,7 +197,18 @@
             user: user,
             errors: []
           };
-          if (!user) {
+          if (user) {
+            var projectPermissionsFilters = {
+              username: user.username,
+              project: vm.project.uuid
+            };
+            projectPermissionsService.getList(projectPermissionsFilters).then(function(response) {
+              if (response.length > 0) {
+                userForInvite.user = null;
+                userForInvite.errors.push(userEmail + ' was already added to project ' + vm.project.name);
+              }
+            });
+          } else {
             userForInvite.errors.push(userEmail + ' does not exist');
           }
           vm.usersInvited.push(userForInvite);

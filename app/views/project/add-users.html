@@ -11,10 +11,11 @@
         <section class="row gray-box">
             <div class="col" ng-repeat="user in UserAddToProject.users">
             <span class="avatar offset-right">
-                <img src="/static/images/user-avatar.jpg" alt="{{user.full_name}}" class="avatar-img">
+                <img src="/static/images/user-avatar.jpg" alt="{{user.user_full_name}}" class="avatar-img">
             </span>
                 <h4 class="item-title">
-                    <a ui-sref="users.details({uuid: user.uuid})">{{user.full_name}}</a>
+                    <!--TODO add ui-sref="users.details({uuid: user.user_uuid})" when backend will provide user_uuid-->
+                    <a>{{user.user_full_name}}</a>
                 </h4>
             </div>
         </section>
@@ -45,7 +46,6 @@
                                       input-class="form-control"></angucomplete-alt>
                     <input type="email" name="email" ng-model="UserAddToProject.userInviteEmail" class="ng-hide" required>
                     <a class="button" ng-click="UserAddToProject.addUser()">Add user</a>
-                    <span class="error" ng-show="userInviteForm.email.$error.email">Not valid email!</span>
                 </div>
             </form>
         </section>
