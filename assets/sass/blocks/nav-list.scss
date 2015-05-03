@@ -110,7 +110,10 @@
                     display: block;
                     line-height: 1;
                 } // span
-                .customer-name {} // customer-name
+                .customer-name {
+                    max-width: 180px;
+                    @include elipsis;
+                } // customer-name
                 .active-context {
                     font-size: rem(12);
                 } // active-context
@@ -118,8 +121,11 @@
             &.user-area {
                 @include property(padding-top, 5);
                 .user-name {
+                    @include elipsis;
+                    max-width: 180px;
+                    display: inline-block;
                     position: relative;
-                    @include property(top, 2);
+                    @include property(top, 10);
                     @include property(margin-left, 5);
                     @include bp(sm) {
                         display: none;
