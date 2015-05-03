@@ -30,10 +30,13 @@
             @include property(margin-bottom, -4);
         }
     } // li
-    a {
+    .page-size + .page-size {
+        @include property(margin-left, 15);
+    } // .page-size + .page-size
+    a.page-size {
         @include inline-middle;
         @include property(font-size, 16);
-        @include property(padding-top, 5);
+        @include property(padding-top, 10);
         line-height: 1;
         color: #333;
         text-decoration: none;
