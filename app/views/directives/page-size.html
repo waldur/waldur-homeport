@@ -1,6 +1,6 @@
 <li>
     <span ng-repeat="pageSize in pagesList.pageSizes">
-        <a href="{{pagesHref}}" ng-click="pagesList.changePageSize(pageSize)"
+        <a href="{{pagesHref}}" class="page-size" ng-click="pagesList.changePageSize(pageSize)"
            ng-class="{active: pageSize === pagesList.currentPageSize}">{{pageSize}}</a>
     </span>
 </li>
