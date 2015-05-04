@@ -140,6 +140,13 @@ module.exports = function(grunt) {
                         filter: 'isFile'
                     },
                     {
+                        expand: true,
+                        cwd: 'bower_components/angular-gravatar/build',
+                        src: ['angular-gravatar.js'],
+                        dest: 'app/static/js/angular/',
+                        filter: 'isFile'
+                    },
+                    {
                       expand: true,
                       cwd: 'bower_components/angucomplete-alt',
                       src: ['angucomplete-alt.js'],
@@ -152,6 +159,7 @@ module.exports = function(grunt) {
                       src: ['angucomplete-alt.css'],
                       dest: 'app/static/css/',
                       filter: 'isFile'
+
                     }
                 ],
             },
