@@ -59,6 +59,19 @@
                     </section>
                 </div>
             </div>
+            <div class="col full">
+                <div>
+                    <input type="checkbox" id="openstackdummy" ng-model="ServiceAdd.service.dummy">
+                    <label for="openstackdummy">
+                        Dummy
+                    </label>
+                </div>
+                <!-- this code shows only when openstack selected -->
+                <article class="light-description">
+                    Check if created OpenStack should be working in emulation mode. Expected auth URL: http://keystone.example.com:5000/v2.0
+                </article>
+                <!-- /this code shows only when openstack selected -->
+            </div>
         </div>
         <div class="divider"></div>
         <div class="form-row">
@@ -66,7 +79,7 @@
                 <label for="">Service name:</label>
             </div>
             <div class="col input">
-                <input type="text" placeholder="My OpenStack" ng-model="ServiceAdd.service.name">
+                <input type="text" placeholder="OpenStack Testbed" ng-model="ServiceAdd.service.name">
                 <div class="error arrow-up" ng-show="ServiceAdd.errors.name">
                     <ul class="error-list">
                         <li ng-repeat="error in ServiceAdd.errors.name">{{ error }}</li>
@@ -75,16 +88,16 @@
             </div>
             <div class="col description">
                 <article class="light-description">
-                    Name of the service, e.g. "OpenStack Testbed"
+                    Name of the service
                 </article>
             </div>
         </div>
         <div class="form-row">
             <div class="col label">
-                <label for="">Auth url:</label>
+                <label for="">Auth URL:</label>
             </div>
             <div class="col input">
-                <input type="text" placeholder="http://my.openstack.com" ng-model="ServiceAdd.service.auth_url">
+                <input type="text" placeholder="http://keystone.example.com:5000/v2.0" ng-model="ServiceAdd.service.auth_url">
                 <div class="error arrow-up" ng-show="ServiceAdd.errors.auth_url">
                     <ul class="error-list">
                         <li ng-repeat="error in ServiceAdd.errors.auth_url">{{ error }}</li>
@@ -93,7 +106,7 @@
             </div>
             <div class="col description">
                 <article class="light-description">
-                    URL of supported OpenStack Keystone, e.g. http://keystone.example.com:5000/v2.0
+                    URL of supported OpenStack Keystone
                 </article>
             </div>
         </div>

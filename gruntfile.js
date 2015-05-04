@@ -138,6 +138,20 @@ module.exports = function(grunt) {
                         src: ['satellizer.js'],
                         dest: 'app/static/js/angular/',
                         filter: 'isFile'
+                    },
+                    {
+                      expand: true,
+                      cwd: 'bower_components/angucomplete-alt',
+                      src: ['angucomplete-alt.js'],
+                      dest: 'app/static/js/angular/',
+                      filter: 'isFile'
+                    },
+                    {
+                      expand: true,
+                      cwd: 'bower_components/angucomplete-alt',
+                      src: ['angucomplete-alt.css'],
+                      dest: 'app/static/css/',
+                      filter: 'isFile'
                     }
                 ],
             },

@@ -41,89 +41,90 @@
         &:nth-last-child(1) {
             padding-right: 0;
         }
-        .plan-item {
-            border-radius: 1px;
-            border: 1px solid #e5e5e5;
-            position: relative;
-            &.active {
-                border: 1px solid rgb(62, 171, 84);
-                &:after {
-                    // content: '\f058';
-                    content: '\f00c';
-                    font-family: FontAwesome;
-                    -webkit-font-smoothing: antialiased;
-                    -moz-osx-font-smoothing: grayscale;
-                    font-size: rem(20);
-                    text-align: center;
-                    background-color: rgb(62, 171, 84);
-                    color: #fff;
-                    width: 26px;
-                    height: 26px;
-                    border-radius: 100%;
-                    position: absolute;
-                    right: -10px;
-                    top: -10px;
-                } // &:after
-                .plan-name {
-                    color: #6cc644;
-                } // pan-name
-            }
-            table {
-                margin: 0 auto;
-                width: 100%;
-                &.grayscale {
-                    opacity: .6;
-                    @include transition(all, 0.3s, ease);
-                    &:hover {
-                        opacity: 1;
-                    } // &:hover
-                    tr {
-                        &:nth-child(even) {
-                            td {
-                                background: #EFEFEF;
-                            }
-                        }
-                        .plan-name {
-                            color: #000;
-                        }
-                    }
-                } // &.grayscale
-                tr {
-                    &:nth-child(even) {
-                        td {
-                            background: #f0f5fa;
-                        }
-                    }
-                    + tr {
-                        td {
-                            border-top: 1px solid rgb(229, 229, 229);
-                        }
-                    }
-                    td, th {
-                        width: 33%;
-                        padding: 9px;
-                        text-align: center;
-                        + td, + th {
-                            border-left: 1px solid rgb(229, 229, 229);
-                        }
-                        span {
-                            display: block;
-                        }
-                        .plan-price {
-                            font-size: rem(14);
-                        }
-                        .btn-choice {
-                            background-color: rgb(125, 178, 67);
-                            margin-top: 6px;
-                            border-radius: 4px;
-                            padding: 6px 15px;
-                            color: #fff;
-                            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.28);
-                            border-bottom: 2px solid rgb(45, 108, 9);
-                        }
-                    } // td
-                } // tr
-            } // table
-        } // plan-item
     } // plan
 } // plans
+
+.plan-item {
+    border-radius: 1px;
+    border: 1px solid #e5e5e5;
+    position: relative;
+    &.active {
+        border: 1px solid rgb(62, 171, 84);
+        &:after {
+            // content: '\f058';
+            content: '\f00c';
+            font-family: FontAwesome;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-size: rem(20);
+            text-align: center;
+            background-color: rgb(62, 171, 84);
+            color: #fff;
+            width: 26px;
+            height: 26px;
+            border-radius: 100%;
+            position: absolute;
+            right: -10px;
+            top: -10px;
+        } // &:after
+        .plan-name {
+            color: #6cc644;
+        } // pan-name
+    }
+    table {
+        margin: 0 auto;
+        width: 100%;
+        &.grayscale {
+            opacity: .6;
+            @include transition(all, 0.3s, ease);
+            &:hover {
+                opacity: 1;
+            } // &:hover
+            tr {
+                &:nth-child(even) {
+                    td {
+                        background: #EFEFEF;
+                    }
+                }
+                .plan-name {
+                    color: #000;
+                }
+            }
+        } // &.grayscale
+        tr {
+            &:nth-child(even) {
+                td {
+                    background: #f0f5fa;
+                }
+            }
+            + tr {
+                td {
+                    border-top: 1px solid rgb(229, 229, 229);
+                }
+            }
+            td, th {
+                width: 33%;
+                padding: 9px;
+                text-align: center;
+                + td, + th {
+                    border-left: 1px solid rgb(229, 229, 229);
+                }
+                span {
+                    display: block;
+                }
+                .plan-price {
+                    font-size: rem(14);
+                }
+                .btn-choice {
+                    background-color: rgb(125, 178, 67);
+                    margin-top: 6px;
+                    border-radius: 4px;
+                    padding: 6px 15px;
+                    color: #fff;
+                    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.28);
+                    border-bottom: 2px solid rgb(45, 108, 9);
+                }
+            } // td
+        } // tr
+    } // table
+} // plan-item

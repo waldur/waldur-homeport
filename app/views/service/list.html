@@ -12,6 +12,12 @@
                 <button class="search-button"></button>
             </div>
         </li>
+        <li class="right-sort">
+            <a ui-sref="services.create" class="button">
+                <span class="icon plus"></span>
+                <span>Add Service</span>
+            </a>
+        </li>
     </ul>
 </div>
 
@@ -25,18 +31,6 @@
         </div>
         <div>
             <div class="view-action-buttons" ng-show="controller.showgroup">
-                <a class="button start"
-                    ng-click="ResourceList.startResource(resource)"
-                    ng-class="{'disabled': !ResourceList.isOperationAvailable(resource, 'start')}">
-                Start</a>
-                <a class="button stop"
-                    ng-click="ResourceList.stopResource(resource)" title="Stop"
-                    ng-class="{'disabled': !ResourceList.isOperationAvailable(resource, 'stop')}">
-                Stop</a>
-                <a class="button restart"
-                    ng-click="ResourceList.restartResource(resource)"
-                    ng-class="{'disabled': !ResourceList.isOperationAvailable(resource, 'restart')}">
-                Restart</a>
                 <a class="button remove"
                     ng-click="ResourceList.deleteResource(resource, $index)">
                 Remove</a>
@@ -46,24 +40,6 @@
                     <a class="button dropdown-active"
                         ng-click="mobileActions=!mobileActions">actions</a>
                     <ul class="actions-dropdown" ng-show="mobileActions">
-                        <li>
-                            <a class="button-simple start"
-                                ng-click="ResourceList.startResource(resource)"
-                                ng-class="{'disabled': !ResourceList.isOperationAvailable(resource, 'start')}">
-                            Start</a>
-                        </li>
-                        <li>
-                            <a class="button-simple stop"
-                                ng-click="ResourceList.stopResource(resource)" title="Stop"
-                                ng-class="{'disabled': !ResourceList.isOperationAvailable(resource, 'stop')}">
-                            Stop</a>
-                        </li>
-                        <li>
-                            <a class="button-simple restart"
-                                ng-click="ResourceList.restartResource(resource)"
-                                ng-class="{'disabled': !ResourceList.isOperationAvailable(resource, 'restart')}">
-                            Restart</a>
-                        </li>
                         <li>
                             <a class="button-simple remove"
                                 ng-click="ResourceList.deleteResource(resource, $index)">
@@ -116,30 +92,12 @@
                     </h3>
                 </div>
                 <div class="additional-cell" ng-hide="collapsedItem">
-                    {{ service.service_type }}
+                    OpenStack
                 </div>
                 <div class="actions">
                     <div class="actions-button" ng-show="!controller.showgroup">
                         <a class="button" ng-click="openActions=!openActions">actions</a>
                         <ul class="actions-dropdown" ng-show="openActions">
-                            <li>
-                                <a class="button-simple start"
-                                    ng-click="ResourceList.startResource(resource)"
-                                    ng-class="{'disabled': !ResourceList.isOperationAvailable(resource, 'start')}">
-                                Start</a>
-                            </li>
-                            <li>
-                                <a class="button-simple stop"
-                                    ng-click="ResourceList.stopResource(resource)" title="Stop"
-                                    ng-class="{'disabled': !ResourceList.isOperationAvailable(resource, 'stop')}">
-                                Stop</a>
-                            </li>
-                            <li>
-                                <a class="button-simple restart"
-                                    ng-click="ResourceList.restartResource(resource)"
-                                    ng-class="{'disabled': !ResourceList.isOperationAvailable(resource, 'restart')}">
-                                Restart</a>
-                            </li>
                             <li>
                                 <a class="button-simple remove"
                                    ui-sref="services.list" ng-click="serviceList.remove(service)">
@@ -154,24 +112,18 @@
                     <ul>
                         <li class="item-list">
                             <section>
-                                <a class="list-sort">auth_url</a>
+                                <a class="list-sort">Access URL</a>
                             </section>
                             <section>
-                                <div class="list-sort">user name</div>
-                            </section>
-                            <section>
-                                <div class="list-sort">tenant</div>
+                                <div class="list-sort">Number of connected projects</div>
                             </section>
                         </li>
                         <li class="item-list">
                             <section>
-                                <a href="">auth_url</a>
+                                <a href="{{ service.auth_url }}">{{ service.auth_url }}</a>
                             </section>
                             <section>
-                                user name
-                            </section>
-                            <section>
-                                tenant
+                                {{ service.projects.length }}
                             </section>
                         </li>
                     </ul>

@@ -1,20 +1,23 @@
-<div ng-controller="UserListController as controller">
+<div ng-controller="UserListController as UserList">
 
     <div class="white-box">
         <ul class="sort-list">
             <li class="title">
                 <h2 class="app-title">Users</h2>
             </li>
-            <li ng-repeat="pageSize in controlle.pageSizes">
-                <a ng-click="controlle.changePageSize(pageSize)"
-                   ng-class="{active: pageSize === controlle.currentPageSize}">{{pageSize}}</a>
-            </li>
+            <pagesize pages-list="UserList" pages-service="UserList.service"/></pagesize>
             <li class="search divid">
                 <div class="search-box">
-                    <input type="text" ng-model='controlle.searchInput' ng-keyup="controlle.search()">
-                    <button class="search-button" ng-click="controlle.search()"></button>
+                    <input type="text" ng-model='UserList.searchInput' ng-keyup="UserList.search()">
+                    <button class="search-button" ng-click="UserList.search()"></button>
                 </div>
             </li>
+            <!--li class="right-sort">
+                <a class="button">
+                    <span class="icon plus"></span>
+                    <span>Invite User</span>
+                </a>
+            </li -->
         </ul>
     </div>
 
@@ -22,16 +25,16 @@
     <section class="view-control">
         <div class="list-item no-cursor">
             <div class="checkbox">
-                <div class="checkbox" ng-show="controller.showgroup">
+                <div class="checkbox" ng-show="UserList.showgroup">
                     <input type="checkbox">
                 </div>
             </div>
             <div>
-                <div class="view-action-buttons" ng-show="controller.showgroup">
+                <div class="view-action-buttons" ng-show="UserList.showgroup">
                     <a class="button">Add to project</a>
                     <a class="button">Remove from project</a>
                 </div>
-                <div class="view-action-buttons-mobile" ng-show="controller.showgroup">
+                <div class="view-action-buttons-mobile" ng-show="UserList.showgroup">
                     <div class="actions-button">
                         <a class="button dropdown-active"
                             ng-click="mobileActions=!mobileActions">actions</a>
@@ -47,12 +50,12 @@
                 </div>
             </div>
             <div class="actions switch">
-                <span class="label-text" ng-class="{'low-grade': !controller.showgroup}">batch</span>
+                <span class="label-text" ng-class="{'low-grade': !UserList.showgroup}">batch</span>
                 <div class="checkbox-toggle">
-                    <input type="checkbox" id="control-types" ng-click="controller.showgroup=!controller.showgroup">
+                    <input type="checkbox" id="control-types" ng-click="UserList.showgroup=!UserList.showgroup">
                     <label for="control-types"></label>
                 </div>
-                <span class="label-text special-left" ng-class="{'low-grade': controller.showgroup}">single</span>
+                <span class="label-text special-left" ng-class="{'low-grade': UserList.showgroup}">single</span>
             </div>
         </div>
     </section>
@@ -77,11 +80,11 @@
                     <div class="actions"></div>
                 </div>
             </li>
-            <li ng-repeat="user in controller.list">
+            <li ng-repeat="user in UserList.list">
                 <div class="list-item" ng-class="{'opened': expandItem}">
                     <div class="checkbox">
                         <div class="checkbox">
-                            <input type="checkbox" ng-show="controller.showgroup">
+                            <input type="checkbox" ng-show="UserList.showgroup">
                         </div>
                     </div>
                     <div class="expand">
@@ -95,7 +98,7 @@
                         </span>
                     </div>
                     <div>
-                        <h3 class="item-title"><a ui-sref="users.details({uuid: user.uuid})">{{ user.native_name }}</a></h3>
+                        <h3 class="item-title"><a ui-sref="users.details({uuid: user.uuid})">{{ user.full_name }}</a></h3>
                     </div>
                     <div class="additional-cell">
                         {{ user.email }}
@@ -104,7 +107,7 @@
                         {{ user.username }}
                     </div>
                     <div class="actions">
-                        <div class="actions-button" ng-show="!controller.showgroup">
+                        <div class="actions-button" ng-show="!UserList.showgroup">
                             <a class="button" ng-click="openActions=!openActions">actions</a>
                             <ul class="actions-dropdown" ng-show="openActions">
                                 <li>
@@ -164,7 +167,7 @@
     </div>
 
     <div class="pagination">
-        <pagination pages-list="controller" pages-service="controller.service"></pagination>
+        <pagination pages-list="UserList" pages-service="UserList.service"></pagination>
     </div>
 
 </div>

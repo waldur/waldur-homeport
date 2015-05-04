@@ -2,58 +2,36 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('usersService', ['RawUser', 'RawKey', usersService]);
+    .service('usersService', ['baseServiceClass', '$q', usersService]);
 
-  function usersService(RawUser, RawKey) {
-    /*jshint validthis: true */
-    var vm = this;
-    vm.getCurrentUser = getCurrentUser;
-    vm.getCurrentUserWithKeys = getCurrentUserWithKeys;
-    vm.getUser = getUser;
-    vm.getRawUserList = getRawUserList;
-
-    function getCurrentUser() {
-      return RawUser.getCurrent().$promise;
-    }
-
-    function getCurrentUserWithKeys() {
-      return RawUser.getCurrent(initKeys);
-
-      function initKeys(user) {
-        /*jshint camelcase: false */
-        user.keys = RawKey.query({user_uuid: user.uuid});
+  function usersService(baseServiceClass, $q) {
+    var ServiceClass = baseServiceClass.extend({
+      currentUser: null,
+      init:function() {
+        this._super();
+        this.endpoint = '/users/';
+      },
+      getCurrentUser:function() {
+        var vm = this;
+        var deferred = $q.defer();
+        if (!vm.currentUser) {
+          vm.filterByCustomer = false;
+          vm.getList({current:''}).then(function(response) {
+            var user = response.length > 0 ? response[0] : null;
+            vm.currentUser = user;
+            deferred.resolve(vm.currentUser);
+          }, function(error) {
+            deferred.reject(error);
+          });
+          vm.filterByCustomer = true;
+        } else {
+          deferred.resolve(vm.currentUser);
+        }
+        return deferred.promise;
       }
-    }
-
-    function getRawUserList() {
-      return RawUser.query();
-    }
-
-    function getUser(uuid) {
-      return RawUser.get({userUUID: uuid});
-    }
-
+    });
+    return new ServiceClass();
   }
 
 })();
 
-(function() {
-  angular.module('ncsaas')
-    .factory('RawUser', ['ENV', '$resource', RawUser]);
-
-    function RawUser(ENV, $resource) {
-      return $resource(ENV.apiEndpoint + 'api/users/:userUUID/', {userUUID:'@uuid'},
-        {
-          getCurrent: {
-              method: 'GET',
-              transformResponse: function(data) {return angular.fromJson(data)[0];},
-              params: {current:''}
-          },
-          update: {
-            method: 'PUT'
-          }
-        }
-      );
-    }
-
-})();

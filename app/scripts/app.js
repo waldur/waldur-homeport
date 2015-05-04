@@ -8,7 +8,8 @@ angular
     'ui.router',
     'ngCookies',
     'ngResource',
-    'duScroll'])
+    'duScroll',
+    'angucomplete-alt'])
   // urls
   .config(function($stateProvider, $urlRouterProvider) {
 
@@ -34,7 +35,7 @@ angular
             templateUrl: 'views/home/home.html',
           },
           'siteFooter@home' : {
-            templateUrl: 'views/partials/site-footer.html',
+            templateUrl: 'views/partials/app-footer.html',
           }
         },
         resolve: {
@@ -53,7 +54,7 @@ angular
             templateUrl: 'views/home/login.html',
           },
           'siteFooter@home' : {
-            templateUrl: 'views/partials/site-footer.html',
+            templateUrl: 'views/partials/app-footer.html',
           }
         },
         resolve: {
@@ -63,7 +64,23 @@ angular
 
       .state('initialdata', {
         url: '/initial-data/',
-        templateUrl: 'views/initial-data.html',
+        templateUrl: 'views/initial-data/base.html',
+        abstract: true
+      })
+
+      .state('initialdata.view', {
+        url: '',
+        views: {
+          'siteHeader@initialdata' : {
+            templateUrl: 'views/partials/site-header-disabled.html',
+          },
+          'siteContent@initialdata' : {
+            templateUrl: 'views/initial-data/initial-data.html',
+          },
+          'siteFooter@initialdata' : {
+            templateUrl: 'views/partials/app-footer.html',
+          }
+        },
         resolve: {
           authenticated: authCheck
         }
@@ -74,7 +91,8 @@ angular
         templateUrl: 'views/dashboard.html',
         resolve: {
           authenticated: authCheck
-        }
+        },
+        auth: true
       })
 
       .state('projects', {
@@ -171,6 +189,22 @@ angular
         auth: true
       })
 
+      .state('projects.add-users', {
+        url: ':uuid/add-users/',
+        views: {
+          'appContent': {
+              templateUrl: 'views/project/add-users.html'
+            },
+          'appHeader': {
+              templateUrl: 'views/partials/app-header.html'
+            },
+          'appFooter': {
+              templateUrl: 'views/partials/app-footer.html'
+            }
+        }
+
+      })
+
       .state('services', {
         url: '/services/',
         abstract: true,
@@ -192,7 +226,8 @@ angular
         },
         resolve: {
           authenticated: authCheck
-        }
+        },
+        auth: true
       })
 
       .state('services.create', {
@@ -472,7 +507,8 @@ angular
         },
         resolve: {
           authenticated: authCheck
-        }
+        },
+        auth: true
       })
 
       .state('resources.create', {
@@ -490,7 +526,8 @@ angular
         },
         resolve: {
           authenticated: authCheck
-        }
+        },
+        auth: true
       })
 
       .state('payment', {

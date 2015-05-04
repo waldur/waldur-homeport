@@ -37,8 +37,8 @@
     var urlList = {
       dashboard: ['dashboard'],
       resources: ['resources.list', 'resources.add'],
-      projects: ['projects.list', 'projects.details', 'projects.update', 'projects.create'],
-      services: ['services.list', 'services.create'],
+      projects: ['projects.list', 'projects.details', 'projects.update', 'projects.create', 'projects.add-users'],
+      services: ['services.list', 'services.create', 'services.details'],
       users: ['users.list', 'users.details']
     };
 
