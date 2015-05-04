@@ -62,6 +62,7 @@ textarea {
 .checkbox-toggle {
     @include inline-middle;
     position: relative;
+    @include no-select;
     &.inline {
         + .checkbox-toggle.inline {
             margin-left: 10px;

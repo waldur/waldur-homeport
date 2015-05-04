@@ -17,6 +17,7 @@
     "fontawesome": "~4.3.0",
     "html5shiv": "~3.7.2",
     "respond": "~1.4.2",
-    "angular-gravatar": "~0.3.1"
+    "angular-gravatar": "~0.3.1",
+    "angucomplete-alt": "0.0.38"
   }
 }

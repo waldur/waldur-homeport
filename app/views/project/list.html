@@ -12,6 +12,12 @@
                     <button class="search-button" ng-click="ProjectList.search()"></button>
                 </div>
             </li>
+            <li class="right-sort">
+                <a ui-sref="projects.create" class="button">
+                    <span class="icon plus"></span>
+                    <span>Add Project</span>
+                </a>
+            </li>
         </ul>
     </div>
 
@@ -99,7 +105,7 @@
                             <a class="button" ng-click="openActions=!openActions" ng-show="!controller.showgroup">actions</a>
                             <ul class="actions-dropdown" ng-show="openActions">
                                 <li>
-                                    <a class="button-simple">Add user</a>
+                                    <a ui-sref="projects.add-users({uuid: project.uuid})" class="button-simple">Add user</a>
                                 </li>
                                 <li>
                                     <a class="button-simple">Archive</a>
@@ -182,13 +188,20 @@
                                 <section>
                                     <a class="list-sort">Name</a>
                                 </section>
+                                <section>
+                                    <div class="list-sort">Username</div>
+                                </section>
+
                             </li>
                             <li class="item-list" ng-repeat="user in project.users">
                                 <section>
                                     <div class="avatar">
                                         <img gravatar-src="'{{ user.email }}'" gravatar-size="100">
                                     </div>
-                                    <a ui-sref="users({uuid: user.uuid})">{{ user.native_name }}</a>
+                                    <a ui-sref="users({uuid: user.uuid})">{{ user.user_full_name }}</a>
+                                </section>
+                                <section>
+                                    <span>{{ user.user_username }}</span>
                                 </section>
                             </li>
                         </ul>

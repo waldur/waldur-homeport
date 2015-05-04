@@ -12,9 +12,9 @@
         <section class="row top">
             <div class="col">
                 <input type="text" placeholder="Project Name" ng-model="ProjectAdd.project.name">
-                <div class="error arrow-up" ng-show="ResourceAdd.errors.hostname">
+                <div class="error arrow-up" ng-show="ProjectAdd.errors.name">
                     <ul class="error-list">
-                        <li ng-repeat="error in ResourceAdd.errors.hostname">{{ error }}</li>
+                        <li ng-repeat="error in ProjectAdd.errors.name">{{ error }}</li>
                     </ul>
                 </div>
             </div>
@@ -27,9 +27,9 @@
                     </select>
                 </div>
                 <a ui-sref="customers.list" class="button">Add customer</a>
-                <div class="error arrow-up" ng-show="ResourceAdd.errors.project">
+                <div class="error arrow-up" ng-show="ProjectAdd.errors.project">
                     <ul class="error-list">
-                        <li ng-repeat="error in ResourceAdd.errors.project">{{ error }}</li>
+                        <li ng-repeat="error in ProjectAdd.errors.project">{{ error }}</li>
                     </ul>
                 </div>
             </div>

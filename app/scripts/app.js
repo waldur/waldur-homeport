@@ -9,7 +9,8 @@ angular
     'ngCookies',
     'ngResource',
     'duScroll',
-    'ui.gravatar'])
+    'ui.gravatar',
+    'angucomplete-alt'])
   // urls
   .config(function($stateProvider, $urlRouterProvider) {
 
@@ -65,10 +66,7 @@ angular
       .state('initialdata', {
         url: '/initial-data/',
         templateUrl: 'views/initial-data/base.html',
-        abstract: true,
-        resolve: {
-          authenticated: notLoggedCheck
-        }
+        abstract: true
       })
 
       .state('initialdata.view', {
@@ -94,7 +92,8 @@ angular
         templateUrl: 'views/dashboard.html',
         resolve: {
           authenticated: authCheck
-        }
+        },
+        auth: true
       })
 
       .state('projects', {
@@ -191,6 +190,22 @@ angular
         auth: true
       })
 
+      .state('projects.add-users', {
+        url: ':uuid/add-users/',
+        views: {
+          'appContent': {
+              templateUrl: 'views/project/add-users.html'
+            },
+          'appHeader': {
+              templateUrl: 'views/partials/app-header.html'
+            },
+          'appFooter': {
+              templateUrl: 'views/partials/app-footer.html'
+            }
+        }
+
+      })
+
       .state('services', {
         url: '/services/',
         abstract: true,
@@ -212,7 +227,8 @@ angular
         },
         resolve: {
           authenticated: authCheck
-        }
+        },
+        auth: true
       })
 
       .state('services.create', {
@@ -481,7 +497,8 @@ angular
         },
         resolve: {
           authenticated: authCheck
-        }
+        },
+        auth: true
       })
 
       .state('resources.create', {
@@ -499,7 +516,8 @@ angular
         },
         resolve: {
           authenticated: authCheck
-        }
+        },
+        auth: true
       })
 
       .state('payment', {

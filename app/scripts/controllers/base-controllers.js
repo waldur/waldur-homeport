@@ -86,7 +86,16 @@
         $rootScope.bodyClass = currentStateService.getBodyClass(toState.name);
       });
 
+
+
       $rootScope.$on('$stateChangeSuccess', function(event, toState) {
+        if (toState.auth) {
+          usersService.getCurrentUser().then(function(response) {
+            if (!response.full_name || !response.email) {
+              $state.go('initialdata.view');
+            }
+          });
+        }
         // if user is authenticated - he should have selected customer
         if (authService.isAuthenticated() && !currentStateService.isCustomerDefined) {
           var deferred = $q.defer();
@@ -101,3 +110,4 @@
     }
 
 })();
+
