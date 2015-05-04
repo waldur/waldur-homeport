@@ -3,11 +3,12 @@
 (function() {
   angular.module('ncsaas')
     .controller('ProjectListController',
-      ['$rootScope', 'projectsService', 'projectPermissionsService', 'resourcesService', ProjectListController]);
+      ['$rootScope', 'projectsService', 'projectPermissionsService', 'resourcesService', '$scope', ProjectListController]);
 
-  function ProjectListController($rootScope, projectsService, projectPermissionsService, resourcesService) {
+  function ProjectListController($rootScope, projectsService, projectPermissionsService, resourcesService, $scope) {
     var vm = this;
 
+    vm.getUsersForProject = getUsersForProject;
     vm.list = {};
     vm.deleteProject = deleteProject;
     vm.service = projectsService;
@@ -18,6 +19,9 @@
 
     vm.showMore = showMore;
 
+    vm.projectUsers = {};
+    vm.projectResources = {};
+
     $rootScope.$on('currentCustomerUpdated', function() {
       projectsService.page = 1;
       activate();
@@ -25,15 +29,43 @@
 
     function showMore(project) {
       if (!project.users) {
-        projectPermissionsService.getList({project:project.uuid}).then(function(reponse) {
-          project.users = reponse;
-        });
+        getUsersForProject(project);
       }
       if (!project.resources) {
-        resourcesService.getList({project:project.uuid}).then(function(reponse) {
-          project.resources = reponse;
-        });
+        getResourcesForProject(project);
       }
+    }
+
+    function getUsersForProject(project, page) {
+      var filter = {
+        project:project.uuid
+      };
+      vm.projectUsers[project.uuid] = {data:null};
+      page = page || 1;
+      projectPermissionsService.page = page;
+      projectPermissionsService.pageSize = 2;
+      vm.projectUsers[project.uuid].page = page;
+      projectPermissionsService.getList(filter).then(function(response) {
+        vm.projectUsers[project.uuid].data = response;
+        vm.projectUsers[project.uuid].pages = projectPermissionsService.pages;
+        $scope.$broadcast('mini-pagination:getNumberList', vm.projectUsers[project.uuid].pages, page, getUsersForProject);
+      });
+    }
+
+    function getResourcesForProject(project, page) {
+      var filter = {
+        project:project.uuid
+      };
+      vm.projectResources[project.uuid] = {data:null};
+      page = page || 1;
+      resourcesService.page = page;
+      resourcesService.pageSize = 2;
+      vm.projectResources[project.uuid].page = page;
+      resourcesService.getList(filter).then(function(response) {
+        vm.projectResources[project.uuid].data = response;
+        vm.projectResources[project.uuid].pages = resourcesService.pages;
+        $scope.$broadcast('mini-pagination:getNumberList', vm.projectResources[project.uuid], page, getResourcesForProject);
+      });
     }
 
     function deleteProject(project) {
