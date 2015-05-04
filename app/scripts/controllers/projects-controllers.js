@@ -25,11 +25,13 @@
 
     function showMore(project) {
       if (!project.users) {
+        projectPermissionsService.filterByCustomer = false;
         projectPermissionsService.getList({project:project.uuid}).then(function(reponse) {
           project.users = reponse;
         });
       }
       if (!project.resources) {
+        resourcesService.filterByCustomer = false;
         resourcesService.getList({project:project.uuid}).then(function(reponse) {
           project.resources = reponse;
         });
