@@ -15,6 +15,10 @@
                     <h2>node-conductor</h2>
                 </li>
                 <li>
+                    <a ui-sref="dashboard"
+                        ng-class="{'active': controller.menuItemActive === 'dashboard'}" class="dashboard">Dashboard</a>
+                </li>
+                <li>
                     <a ui-sref="resources.list"
                         ng-class="{'active': controller.menuItemActive === 'resources'}" class="resource">Resources</a>
                 </li>

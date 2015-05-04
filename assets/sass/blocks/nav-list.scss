@@ -76,6 +76,14 @@
             display: block;
             color: #1F3305;
             text-decoration: none;
+            @include bp(xs) {
+                @include property(padding, 0 15);
+                @include property(padding-top, 13);
+            } // xs
+            @include bp(sm) {
+                @include property(padding, 0 15);
+                @include property(padding-top, 13);
+            } // sm
             &.active {
                 color: white;
                 background-color: #76AE2C;
@@ -132,6 +140,17 @@
                     } // sm
                 } // user-name
             } // &.user-area
+            &.dashboard {
+                &:before {
+                    position: relative;
+                    @include property(top, -3);
+                    @include property(margin-right, 5);
+                    @include inline-middle;
+                    @include icon-fa;
+                    content: '\f0e4';
+                    transform: translate(1.1, 1.1);
+                } // &:before
+            } // &.dashboard
             &.service {
                 &:before {
                     position: relative;
