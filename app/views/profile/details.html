@@ -49,21 +49,19 @@
             Manage User
         </li>
     </ul>
-    <div class="white-box tabs">
+
+    <div class="white-box">
         <ul class="sort-list">
             <li>
-                <a href="#" class="active">5 hours</a>
-            </li>
-            <li>
-                <a href="#">24 hours</a>
-            </li>
-            <li>
-                <a href="#">week</a>
+                <a href="{{pagesHref}}" class="page-size active">5</a>
+                <a href="{{pagesHref}}" class="page-size">10</a>
+                <a href="{{pagesHref}}" class="page-size">15</a>
+                <a href="{{pagesHref}}" class="page-size">20</a>
             </li>
             <li class="search divid">
-                <div class="search-box" data-role="search-box">
-                    <input type="text">
-                    <button class="search-button"></button>
+                <div class="search-box">
+                    <input type="text" ng-model='ProjectList.searchInput' ng-keyup="ProjectList.search()">
+                    <button class="search-button" ng-click="ProjectList.search()"></button>
                 </div>
             </li>
         </ul>
