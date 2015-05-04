@@ -9,6 +9,7 @@ angular
     'ngCookies',
     'ngResource',
     'duScroll',
+    'ui.gravatar',
     'angucomplete-alt'])
   // urls
   .config(function($stateProvider, $urlRouterProvider) {
