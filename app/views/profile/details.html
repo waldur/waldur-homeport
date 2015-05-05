@@ -1,4 +1,4 @@
-<div ng-controller="ProfileController as controller">
+<div ng-controller="ProfileController as DetailsProfile">
 
     <div class="profile-view">
         <section class="avatar">
@@ -7,10 +7,10 @@
             </span>
         </section>
         <section class="content">
-            <h2 class="app-title">{{ controller.user.full_name }}</h2>
-            <span>({{ controller.user.username }})</span>
+            <h2 class="app-title">{{ DetailsProfile.user.full_name }}</h2>
+            <span>({{ DetailsProfile.user.username }})</span>
             <div>
-                <a href="mailto:{{ controller.user.email }}">{{ controller.user.email }}</a>
+                <a href="mailto:{{ DetailsProfile.user.email }}">{{ DetailsProfile.user.email }}</a>
             </div>
         </section>
         <section class="actions">
@@ -24,7 +24,7 @@
                         <a ui-sref="profile.update" class="button-simple">Edit profile</a>
                     </li>
                     <li>
-                        <a class="crud-controls" ng-click="controller.deleteAccount()">delete my account</a>
+                        <a class="button-simple" ng-click="DetailsProfile.deleteAccount()">delete my account</a>
                     </li>
                 </ul>
             </div>
@@ -32,61 +32,59 @@
     </div>
 
     <ul class="tabs-nav">
-        <li ng-class="{'active': controller.activeTab === 'eventlog'}"
-            ng-click="controller.activeTab = 'eventlog'">
+        <li ng-class="{'active': DetailsProfile.activeTab === 'eventlog'}"
+            ng-click="DetailsProfile.activeTab = 'eventlog'">
             Events
         </li>
-        <li ng-class="{'active': controller.activeTab === 'projects'}"
-            ng-click="controller.activeTab = 'projects'">
+        <li ng-class="{'active': DetailsProfile.activeTab === 'projects'}"
+            ng-click="DetailsProfile.activeTab = 'projects'">
             Projects
         </li>
-        <li ng-class="{'active': controller.activeTab === 'keys'}"
-            ng-click="controller.activeTab = 'keys'">
+        <li ng-class="{'active': DetailsProfile.activeTab === 'keys'}"
+            ng-click="DetailsProfile.activeTab = 'keys'">
             SSH Keys
         </li>
-        <li ng-class="{'active': controller.activeTab === 'manageuser'}"
-            ng-click="controller.activeTab = 'manageuser'">
+        <li ng-class="{'active': DetailsProfile.activeTab === 'manageuser'}"
+            ng-click="DetailsProfile.activeTab = 'manageuser'">
             Manage User
         </li>
     </ul>
-    <div class="white-box tabs">
+
+    <div class="white-box">
         <ul class="sort-list">
             <li>
-                <a href="#" class="active">5 hours</a>
-            </li>
-            <li>
-                <a href="#">24 hours</a>
-            </li>
-            <li>
-                <a href="#">week</a>
+                <a href="{{pagesHref}}" class="page-size active">5</a>
+                <a href="{{pagesHref}}" class="page-size">10</a>
+                <a href="{{pagesHref}}" class="page-size">15</a>
+                <a href="{{pagesHref}}" class="page-size">20</a>
             </li>
             <li class="search divid">
-                <div class="search-box" data-role="search-box">
-                    <input type="text">
-                    <button class="search-button"></button>
+                <div class="search-box">
+                    <input type="text" ng-model='ProjectList.searchInput' ng-keyup="ProjectList.search()">
+                    <button class="search-button" ng-click="ProjectList.search()"></button>
                 </div>
             </li>
         </ul>
     </div>
 
-    <sectin class="tabs-content" ng-switch="controller.activeTab">
+    <sectin class="tabs-content" ng-switch="DetailsProfile.activeTab">
         <div class="tab" id="eventlog"
-            ng-class="{'tab-active': controller.activeTab === 'eventlog'}"
+            ng-class="{'tab-active': DetailsProfile.activeTab === 'eventlog'}"
             ng-switch-when="eventlog">
             <div ui-view="tabEventlog"></div>
         </div>
         <div class="tab" id="projects"
-            ng-class="{'tab-active': controller.activeTab === 'projects'}"
+            ng-class="{'tab-active': DetailsProfile.activeTab === 'projects'}"
             ng-switch-when="projects">
             <div ui-view="tabProjects"></div>
         </div>
         <div class="tab" id="keys"
-            ng-class="{'tab-active': controller.activeTab === 'keys'}"
+            ng-class="{'tab-active': DetailsProfile.activeTab === 'keys'}"
             ng-switch-when="keys">
             <div ui-view="tabKeys"></div>
         </div>
         <div class="tab" id="manageuser"
-            ng-class="{'tab-active': controller.activeTab === 'manageuser'}"
+            ng-class="{'tab-active': DetailsProfile.activeTab === 'manageuser'}"
             ng-switch-when="manageuser">
             <div ui-view="tabManageUser"></div>
         </div>

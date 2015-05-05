@@ -63,6 +63,7 @@
   function UpdateProfileController(usersService, $state) {
     var vm = this;
 
+    vm.activeTab = 'eventlog';
     vm.user = {};
     vm.errors = {};
     vm.update = update;
