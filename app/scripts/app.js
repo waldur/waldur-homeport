@@ -89,7 +89,23 @@ angular
 
       .state('dashboard', {
         url: '/dashboard/',
-        templateUrl: 'views/dashboard.html',
+        abstract: true,
+        templateUrl: 'views/dashboard/base.html',
+      })
+
+      .state('dashboard.eventlog', {
+        url: '',
+        views: {
+          'appHeader@dashboard' : {
+            templateUrl: 'views/partials/app-header.html',
+          },
+          'appContent@dashboard' : {
+            templateUrl: 'views/dashboard/event-log.html',
+          },
+          'appFooter@dashboard' : {
+            templateUrl: 'views/partials/app-footer.html',
+          }
+        },
         resolve: {
           authenticated: authCheck
         },
@@ -293,16 +309,16 @@ angular
           'appContent': {
             templateUrl: 'views/profile/details.html',
           },
-          'tabEventlog@users.details': {
+          'tabEventlog@profile.details': {
             templateUrl: 'views/profile/tab-eventlog.html',
           },
-          'tabProjects@users.details': {
+          'tabProjects@profile.details': {
             templateUrl: 'views/profile/tab-projects.html',
           },
-          'tabKeys@users.details': {
+          'tabKeys@profile.details': {
             templateUrl: 'views/profile/tab-keys.html',
           },
-          'tabManageUser@users.details': {
+          'tabManageUser@profile.details': {
             templateUrl: 'views/profile/tab-manage.html',
           },
           'appFooter': {
