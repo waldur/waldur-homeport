@@ -1,334 +1,109 @@
-<!-- app-block -->
-<section class="app-block">
-    <div class="container-fluid">
-        <!-- white-box -->
-        <div class="white-box">
-            <div class="app-title-line">
-                <div class="row">
-                    <div class="col-xs-12 first-line">
-                        <ul class="sort">
-                            <li><a href="#" class="active">5</a></li>
-                            <li><a href="#">15</a></li>
-                            <li><a href="#">24</a></li>
-                            <li class="divid">
-                                <div class="search" data-role="search-box">
-                                    <input type="text">
-                                    <button class="search-button">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </div>
+<div class="white-box">
+    <ul class="sort-list">
+        <li class="title">
+            <h2 class="app-title">Events</h2>
+        </li>
+        <li>
+            <a class="page-size active">5</a>
+            <a class="page-size">10</a>
+            <a class="page-size">15</a>
+            <a class="page-size">20</a>
+        </li>
+        <li class="search divid">
+            <div class="search-box">
+                <input type="text" ng-model='UserList.searchInput' ng-keyup="UserList.search()">
+                <button class="search-button" ng-click="UserList.search()"></button>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<div class="white-box clear">
+    <ul class="object-list">
+        <li>
+            <div class="list-item">
+                <div>
+                    <span class="event">User <a class="name">Walter</a> with full name <span class="name">Walter Lebowsky</span> authenticated successfully with username and password</span>
+                </div>
+                <div class="actions">
+                    <div class="actions-button" ng-show="!UserList.showgroup">
+                        <a class="button" ng-click="openActions1=!openActions1">actions</a>
+                        <ul class="actions-dropdown" ng-show="openActions1">
+                            <li>
+                                <a class="button-simple">Some action for this type</a>
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- /white-box -->
-    </div>
-</section>
-<!-- /app-block -->
-<!-- app-block -->
-<section class="app-block">
-    <div class="container-fluid">
-        <div class="white-box">
-           <div class="app-items-list">
-                <div class="table-responsive">
-                    <table class="items-table">
-                        <!-- event -->
-                        <tr class="event">
-                            <td class="circle">
-                                <div class="circle-decor"></div>
-                            </td>
-                            <td>
-                                <h2 class="item-title">Update something</h2>
-                                <div class="content">
-                                    <div class="gray-text">
-                                        <p>
-                                            Description of an event. AWS VM john.doe.com was is suffering from a Heartbleed bug.
-                                        </p>
-                                    </div>
-                                    <ul class="controls">
-                                        <li>
-                                            <a href="#" class="event-action">Send to email</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </td>
-                            <td class="col-xs-2 controls-ctn">
-                                <ul class="controls pull-right">
-                                    <li>
-                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Favorite" class="kit-icon star filled"></a>
-                                    </li>
-                                </ul>
-                            </td>
-                        </tr>
-                        <!-- /event -->
-                        <!-- event -->
-                        <tr class="event">
-                            <td class="circle">
-                                <div class="circle-decor"></div>
-                            </td>
-                            <td>
-                                <h2 class="item-title">Update something</h2>
-                                <div class="content">
-                                    <div class="gray-text">
-                                        <p>
-                                            Description of an event. AWS VM john.doe.com was is suffering from a Heartbleed bug.
-                                        </p>
-                                    </div>
-                                    <ul class="controls">
-                                        <li>
-                                            <a href="#" class="event-action">Send to email</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </td>
-                            <td class="col-xs-2 controls-ctn">
-                                <ul class="controls pull-right">
-                                    <li>
-                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Favorite" class="kit-icon star filled"></a>
-                                    </li>
-                                </ul>
-                            </td>
-                        </tr>
-                        <!-- /event -->
-                        <!-- event -->
-                        <tr class="event">
-                            <td class="circle">
-                                <div class="circle-decor"></div>
-                            </td>
-                            <td>
-                                <h2 class="item-title">Update something</h2>
-                                <div class="content">
-                                    <div class="gray-text">
-                                        <p>
-                                            Description of an event. AWS VM john.doe.com was is suffering from a Heartbleed bug.
-                                        </p>
-                                    </div>
-                                    <ul class="controls">
-                                        <li>
-                                            <a href="#" class="event-action">Send to email</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </td>
-                            <td class="col-xs-2 controls-ctn">
-                                <ul class="controls pull-right">
-                                    <li>
-                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Favorite" class="kit-icon star filled"></a>
-                                    </li>
-                                </ul>
-                            </td>
-                        </tr>
-                        <!-- /event -->
-                        <!-- event -->
-                        <tr class="event">
-                            <td class="circle">
-                                <div class="circle-decor"></div>
-                            </td>
-                            <td>
-                                <h2 class="item-title">Update something</h2>
-                                <div class="content">
-                                    <div class="gray-text">
-                                        <p>
-                                            Description of an event. AWS VM john.doe.com was is suffering from a Heartbleed bug.
-                                        </p>
-                                    </div>
-                                    <ul class="controls">
-                                        <li>
-                                            <a href="#" class="event-action">Send to email</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </td>
-                            <td class="col-xs-2 controls-ctn">
-                                <ul class="controls pull-right">
-                                    <li>
-                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Favorite" class="kit-icon star filled"></a>
-                                    </li>
-                                </ul>
-                            </td>
-                        </tr>
-                        <!-- /event -->
-                        <!-- event -->
-                        <tr class="event">
-                            <td class="circle">
-                                <div class="circle-decor"></div>
-                            </td>
-                            <td>
-                                <h2 class="item-title">Update something</h2>
-                                <div class="content">
-                                    <div class="gray-text">
-                                        <p>
-                                            Description of an event. AWS VM john.doe.com was is suffering from a Heartbleed bug.
-                                        </p>
-                                    </div>
-                                    <ul class="controls">
-                                        <li>
-                                            <a href="#" class="event-action">Send to email</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </td>
-                            <td class="col-xs-2 controls-ctn">
-                                <ul class="controls pull-right">
-                                    <li>
-                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Favorite" class="kit-icon star filled"></a>
-                                    </li>
-                                </ul>
-                            </td>
-                        </tr>
-                        <!-- /event -->
-                        <!-- event -->
-                        <tr class="event">
-                            <td class="circle">
-                                <div class="circle-decor"></div>
-                            </td>
-                            <td>
-                                <h2 class="item-title">Update something</h2>
-                                <div class="content">
-                                    <div class="gray-text">
-                                        <p>
-                                            Description of an event. AWS VM john.doe.com was is suffering from a Heartbleed bug.
-                                        </p>
-                                    </div>
-                                    <ul class="controls">
-                                        <li>
-                                            <a href="#" class="event-action">Send to email</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </td>
-                            <td class="col-xs-2 controls-ctn">
-                                <ul class="controls pull-right">
-                                    <li>
-                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Favorite" class="kit-icon star filled"></a>
-                                    </li>
-                                </ul>
-                            </td>
-                        </tr>
-                        <!-- /event -->
-                        <!-- event -->
-                        <tr class="event">
-                            <td class="circle">
-                                <div class="circle-decor"></div>
-                            </td>
-                            <td>
-                                <h2 class="item-title">Update something</h2>
-                                <div class="content">
-                                    <div class="gray-text">
-                                        <p>
-                                            Description of an event. AWS VM john.doe.com was is suffering from a Heartbleed bug.
-                                        </p>
-                                    </div>
-                                    <ul class="controls">
-                                        <li>
-                                            <a href="#" class="event-action">Send to email</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </td>
-                            <td class="col-xs-2 controls-ctn">
-                                <ul class="controls pull-right">
-                                    <li>
-                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Favorite" class="kit-icon star filled"></a>
-                                    </li>
-                                </ul>
-                            </td>
-                        </tr>
-                        <!-- /event -->
-                        <!-- event -->
-                        <tr class="event">
-                            <td class="circle">
-                                <div class="circle-decor"></div>
-                            </td>
-                            <td>
-                                <h2 class="item-title">Update something</h2>
-                                <div class="content">
-                                    <div class="gray-text">
-                                        <p>
-                                            Description of an event. AWS VM john.doe.com was is suffering from a Heartbleed bug.
-                                        </p>
-                                    </div>
-                                    <ul class="controls">
-                                        <li>
-                                            <a href="#" class="event-action">Send to email</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </td>
-                            <td class="col-xs-2 controls-ctn">
-                                <ul class="controls pull-right">
-                                    <li>
-                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Favorite" class="kit-icon star filled"></a>
-                                    </li>
-                                </ul>
-                            </td>
-                        </tr>
-                        <!-- /event -->
-                        <!-- event -->
-                        <tr class="event">
-                            <td class="circle">
-                                <div class="circle-decor"></div>
-                            </td>
-                            <td>
-                                <h2 class="item-title">Update something</h2>
-                                <div class="content">
-                                    <div class="gray-text">
-                                        <p>
-                                            Description of an event. AWS VM john.doe.com was is suffering from a Heartbleed bug.
-                                        </p>
-                                    </div>
-                                    <ul class="controls">
-                                        <li>
-                                            <a href="#" class="event-action">Send to email</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </td>
-                            <td class="col-xs-2 controls-ctn">
-                                <ul class="controls pull-right">
-                                    <li>
-                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Favorite" class="kit-icon star filled"></a>
-                                    </li>
-                                </ul>
-                            </td>
-                        </tr>
-                        <!-- /event -->
-                        <!-- event -->
-                        <tr class="event">
-                            <td class="circle">
-                                <div class="circle-decor"></div>
-                            </td>
-                            <td>
-                                <h2 class="item-title">Update something</h2>
-                                <div class="content">
-                                    <div class="gray-text">
-                                        <p>
-                                            Description of an event. AWS VM john.doe.com was is suffering from a Heartbleed bug.
-                                        </p>
-                                    </div>
-                                    <ul class="controls">
-                                        <li>
-                                            <a href="#" class="event-action">Send to email</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </td>
-                            <td class="col-xs-2 controls-ctn">
-                                <ul class="controls pull-right">
-                                    <li>
-                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Favorite" class="kit-icon star filled"></a>
-                                    </li>
-                                </ul>
-                            </td>
-                        </tr>
-                        <!-- /event -->
-                    </table>
+        </li>
+        <li>
+            <div class="list-item">
+                <div>
+                    <span class="event">Virtual machine <a class="name">New Machine</a> creation has been scheduled.</span>
+                </div>
+                <div class="actions">
+                    <div class="actions-button" ng-show="!UserList.showgroup">
+                        <a class="button" ng-click="openActions2=!openActions2">actions</a>
+                        <ul class="actions-dropdown" ng-show="openActions2">
+                            <li>
+                                <a class="button-simple">Some action for this type</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-</section>
-<!-- /app-block -->
-
+        </li>
+        <li>
+            <div class="list-item">
+                <div>
+                    <span class="event">Instance <a class="name">OpenStack Instance</a> is already started</span>
+                </div>
+                <div class="actions">
+                    <div class="actions-button" ng-show="!UserList.showgroup">
+                        <a class="button" ng-click="openActions3=!openActions3">actions</a>
+                        <ul class="actions-dropdown" ng-show="openActions3">
+                            <li>
+                                <a class="button-simple">Some action for this type</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="list-item">
+                <div>
+                    <span class="event">Template service <span class="name">Github public repo</span> has been created.</span>
+                </div>
+                <div class="actions">
+                    <div class="actions-button" ng-show="!UserList.showgroup">
+                        <a class="button" ng-click="openActions4=!openActions4">actions</a>
+                        <ul class="actions-dropdown" ng-show="openActions4">
+                            <li>
+                                <a class="button-simple">Some action for this type</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="list-item">
+                <div>
+                    <span class="event">Backup schedule for <a class="name">New Machine</a> has been activated.</span>
+                </div>
+                <div class="actions">
+                    <div class="actions-button" ng-show="!UserList.showgroup">
+                        <a class="button" ng-click="openActions5=!openActions5">actions</a>
+                        <ul class="actions-dropdown" ng-show="openActions5">
+                            <li>
+                                <a class="button-simple">Some action for this type</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
