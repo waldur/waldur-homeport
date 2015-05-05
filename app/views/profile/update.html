@@ -12,7 +12,7 @@
             <div>
                 <div class="mini-form">
                     <input type="text" class="form-control" ng-model="UpdateProfile.user.email" required>
-                    <button class="button-apply" ng-show="UpdateProfile.user.email.length" type="submit">Save</button>
+                    <button class="button-apply" ng-click="UpdateProfile.update()" ng-show="UpdateProfile.user.email.length" type="submit">Save</button>
                 </div>
                 <div class="error short" ng-show="UpdateProfile.errors.email">
                     <ul class="error-list">

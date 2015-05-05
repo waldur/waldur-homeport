@@ -33,15 +33,15 @@ for(var i=0; i < users.length; i++) {
         var currentEmail = element(by.css('.profile-view .content a.ng-binding')).getText();
 
         function setEmail(email) {
-          element(by.model('controller.user.email')).clear();
-          element(by.model('controller.user.email')).sendKeys(email);
-          element(by.css('.btn.btn-primary')).click();
+          element(by.model('UpdateProfile.user.email')).clear();
+          element(by.model('UpdateProfile.user.email')).sendKeys(email);
+          element(by.cssContainingText('.button-apply', 'Save')).click();
         }
 
         element(by.cssContainingText('.actions-button a.button', 'actions')).click();
         element(by.cssContainingText('.actions-button .actions-dropdown li a', 'Edit profile')).click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/profile/edit/');
-        expect(element(by.css('.profile-name')).getText()).toContain(user.username);
+        expect(element(by.css('.app-title')).getText()).toContain(user.username);
         setEmail(data.emailFail);
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/profile/edit/');
         expect(element(by.css('.profile-view .error')).getText()).toEqual('Enter a valid email address.');
