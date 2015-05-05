@@ -422,12 +422,23 @@ angular
         auth: true
       })
 
-      .state('customer-plans', {
-        url: '/customers/:uuid/plans/',
-        templateUrl: 'views/customer-plans.html',
+      .state('customers.plans', {
+        url: ':uuid/plans/',
+        views: {
+          'appContent': {
+            templateUrl: 'views/customer/plans.html',
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html',
+          },
+          'appFooter': {
+            templateUrl: 'views/partials/app-footer.html',
+          }
+        },
         resolve: {
           authenticated: authCheck
-        }
+        },
+        auth: true
       })
 
       .state('users', {
@@ -578,6 +589,12 @@ angular
           authenticated: authCheck
         },
         auth: true
+      })
+
+      .state('pageNotFound', {
+        url: '/error/404/',
+        templateUrl: 'views/404.html',
+        auth: false
       });
 
     function authCheck($q, $location, $auth) {

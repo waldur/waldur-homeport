@@ -18,21 +18,6 @@
                     </ul>
                 </div>
             </div>
-            <div class="col">
-                <div class="custom-select project">
-                    <select name=""
-                        ng-options="item.url as item.name for item in ProjectAdd.customersList"
-                        ng-model="ProjectAdd.project.customer">
-                        <option value="" selected>Choose customer</option>
-                    </select>
-                </div>
-                <a ui-sref="customers.list" class="button">Add customer</a>
-                <div class="error arrow-up" ng-show="ProjectAdd.errors.project">
-                    <ul class="error-list">
-                        <li ng-repeat="error in ProjectAdd.errors.project">{{ error }}</li>
-                    </ul>
-                </div>
-            </div>
         </section>
         <section class="row top">
             <div class="col">

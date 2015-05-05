@@ -25,11 +25,13 @@
 
     function showMore(project) {
       if (!project.users) {
+        projectPermissionsService.filterByCustomer = false;
         projectPermissionsService.getList({project:project.uuid}).then(function(reponse) {
           project.users = reponse;
         });
       }
       if (!project.resources) {
+        resourcesService.filterByCustomer = false;
         resourcesService.getList({project:project.uuid}).then(function(reponse) {
           project.resources = reponse;
         });
@@ -83,15 +85,18 @@
 
   angular.module('ncsaas')
     .controller('ProjectAddController', ['$state', 'projectsService',
-      'customersService', 'servicesService', 'projectCloudMembershipsService', ProjectAddController]);
+      'currentStateService', 'servicesService', 'projectCloudMembershipsService', ProjectAddController]);
 
   function ProjectAddController(
-    $state, projectsService, customersService, servicesService, projectCloudMembershipsService) {
+    $state, projectsService, currentStateService, servicesService, projectCloudMembershipsService) {
     var vm = this;
 
     vm.project = projectsService.$create();
-    vm.customersList = customersService.getCustomersList();
     vm.save = save;
+
+    currentStateService.getCustomer().then(function(customer) {
+      vm.project.customer = customer.url;
+    });
 
     function save() {
       // TODO: refactor this function to use named urls and uuid field instead - SAAS-108
@@ -107,7 +112,9 @@
             projectCloudMembershipsService.addRow(vm.project.url, response[i].url);
           }
         });
-        $state.go('projects.detail', {uuid:uuidNew});
+        $state.go('projects.details', {uuid:uuidNew});
+      }, function(response) {
+        vm.errors = response.data;
       });
     }
 
