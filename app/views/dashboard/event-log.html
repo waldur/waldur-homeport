@@ -1,0 +1,123 @@
+<div>
+
+    <div class="white-box">
+        <ul class="sort-list">
+            <li class="title">
+                <h2 class="app-title">Events</h2>
+            </li>
+            <li>
+                <a class="page-size active">5</a>
+                <a class="page-size">10</a>
+                <a class="page-size">15</a>
+                <a class="page-size">20</a>
+            </li>
+            <li class="search divid">
+                <div class="search-box">
+                    <input type="text" ng-model='UserList.searchInput' ng-keyup="UserList.search()">
+                    <button class="search-button" ng-click="UserList.search()"></button>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="white-box clear">
+        <ul class="object-list">
+            <li>
+                <div class="list-item">
+                    <div>
+                        <span class="event">User <a class="name">Walter</a> with full name <span class="name">Walter Lebowsky</span> authenticated successfully with username and password</span>
+                    </div>
+                    <div class="actions">
+                        <div class="actions-button" ng-show="!UserList.showgroup">
+                            <a class="button" ng-click="openActions1=!openActions1">actions</a>
+                            <ul class="actions-dropdown" ng-show="openActions1">
+                                <li>
+                                    <a class="button-simple">Some action for this type</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="list-item">
+                    <div>
+                        <span class="event">Virtual machine <a class="name">New Machine</a> creation has been scheduled.</span>
+                    </div>
+                    <div class="actions">
+                        <div class="actions-button" ng-show="!UserList.showgroup">
+                            <a class="button" ng-click="openActions2=!openActions2">actions</a>
+                            <ul class="actions-dropdown" ng-show="openActions2">
+                                <li>
+                                    <a class="button-simple">Some action for this type</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="list-item">
+                    <div>
+                        <span class="event">Instance <a class="name">OpenStack Instance</a> is already started</span>
+                    </div>
+                    <div class="actions">
+                        <div class="actions-button" ng-show="!UserList.showgroup">
+                            <a class="button" ng-click="openActions3=!openActions3">actions</a>
+                            <ul class="actions-dropdown" ng-show="openActions3">
+                                <li>
+                                    <a class="button-simple">Some action for this type</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="list-item">
+                    <div>
+                        <span class="event">Template service <span class="name">Github public repo</span> has been created.</span>
+                    </div>
+                    <div class="actions">
+                        <div class="actions-button" ng-show="!UserList.showgroup">
+                            <a class="button" ng-click="openActions4=!openActions4">actions</a>
+                            <ul class="actions-dropdown" ng-show="openActions4">
+                                <li>
+                                    <a class="button-simple">Some action for this type</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="list-item">
+                    <div>
+                        <span class="event">Backup schedule for <a class="name">New Machine</a> has been activated.</span>
+                    </div>
+                    <div class="actions">
+                        <div class="actions-button" ng-show="!UserList.showgroup">
+                            <a class="button" ng-click="openActions5=!openActions5">actions</a>
+                            <ul class="actions-dropdown" ng-show="openActions5">
+                                <li>
+                                    <a class="button-simple">Some action for this type</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="pagination">
+        <ul>
+            <li><a href="#" class="current">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+        </ul>
+    </div>
+
+</div>
