@@ -90,7 +90,6 @@
 
       $rootScope.$on('$stateChangeSuccess', function(event, toState) {
         if (toState.auth) {
-          usersService.currentUser = null;
           usersService.getCurrentUser().then(function(response) {
             if (!response.full_name || !response.email) {
               $state.go('initialdata.view');
