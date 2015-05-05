@@ -190,7 +190,7 @@
                         <li class="item-list" ng-repeat="user in project.users">
                             <section>
                                 <div class="avatar">
-                                    <img gravatar-src="'{{ user.email }}'" gravatar-size="100" alt="" class="avatar-img">
+                                    <img gravatar-src="user.email" gravatar-size="100" alt="" class="avatar-img">
                                 </div>
                                 <a ui-sref="users({uuid: user.uuid})">{{ user.full_name }}</a>
                             </section>
