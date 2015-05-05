@@ -1,7 +1,7 @@
 <ul class="inline-pagination">
-    <li ng-repeat="pageNumber in numberList">
+    <li ng-repeat="pageNumber in numberList[paginationKey]">
         <a href=""
            ng-class="{current: (pageNumber) === pageCurrent}"
-           ng-click="pageChange(pageCount, pageNumber)">{{pageNumber}}</a>
+           ng-click="pageChange(pageModelId, pageNumber)">{{pageNumber}}</a>
     </li>
 </ul>

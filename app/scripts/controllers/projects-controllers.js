@@ -29,42 +29,42 @@
 
     function showMore(project) {
       if (!project.users) {
-        getUsersForProject(project);
+        getUsersForProject(project.uuid);
       }
       if (!project.resources) {
-        getResourcesForProject(project);
+        getResourcesForProject(project.uuid);
       }
     }
 
-    function getUsersForProject(project, page) {
+    function getUsersForProject(uuid, page) {
       var filter = {
-        project:project.uuid
+        project:uuid
       };
-      vm.projectUsers[project.uuid] = {data:null};
+      vm.projectUsers[uuid] = {data:null};
       page = page || 1;
       projectPermissionsService.page = page;
       projectPermissionsService.pageSize = 2;
-      vm.projectUsers[project.uuid].page = page;
+      vm.projectUsers[uuid].page = page;
       projectPermissionsService.getList(filter).then(function(response) {
-        vm.projectUsers[project.uuid].data = response;
-        vm.projectUsers[project.uuid].pages = projectPermissionsService.pages;
-        $scope.$broadcast('mini-pagination:getNumberList', vm.projectUsers[project.uuid].pages, page, getUsersForProject);
+        vm.projectUsers[uuid].data = response;
+        vm.projectUsers[uuid].pages = projectPermissionsService.pages;
+        $scope.$broadcast('mini-pagination:getNumberList', vm.projectUsers[uuid].pages, page, getUsersForProject, 'users');
       });
     }
 
-    function getResourcesForProject(project, page) {
+    function getResourcesForProject(uuid, page) {
       var filter = {
-        project:project.uuid
+        project:uuid
       };
-      vm.projectResources[project.uuid] = {data:null};
+      vm.projectResources[uuid] = {data:null};
       page = page || 1;
       resourcesService.page = page;
       resourcesService.pageSize = 2;
-      vm.projectResources[project.uuid].page = page;
+      vm.projectResources[uuid].page = page;
       resourcesService.getList(filter).then(function(response) {
-        vm.projectResources[project.uuid].data = response;
-        vm.projectResources[project.uuid].pages = resourcesService.pages;
-        $scope.$broadcast('mini-pagination:getNumberList', vm.projectResources[project.uuid], page, getResourcesForProject);
+        vm.projectResources[uuid].data = response;
+        vm.projectResources[uuid].pages = resourcesService.pages;
+        $scope.$broadcast('mini-pagination:getNumberList', vm.projectResources[uuid], page, getResourcesForProject, 'resources');
       });
     }
 

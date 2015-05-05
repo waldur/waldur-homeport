@@ -12,22 +12,27 @@
       scope: {
         pageModels: '@',
         pageChange: '@',
-        pageModelId: '@'
+        pageModelId: '=',
+        pageEntityName: '@'
       },
       link: function($scope) {
-        var modelId = $scope.pageModelId;
-        $scope.numberList = null;
+        var modelId = $scope.pageModelId,
+          paginationKey = modelId + $scope.pageEntityName;
+        $scope.paginationKey = paginationKey;
+        $scope.numberList = {};
+        $scope.numberList[paginationKey] = [];
         if ($scope.pageModels[modelId]) {
           var change = $scope.pageChange,
             model = $scope.pageModels[modelId],
             count = model.pages,
             current = model.page;
-          $scope.numberList = getNumberList(count, current);
+          $scope.numberList[paginationKey] = getNumberList(count, current);
           $scope.pageCurrent = current;
         }
 
-        $scope.$on('mini-pagination:getNumberList', function (event, count, current, pageChange) {
-          $scope.numberList = getNumberList(count, current);
+        $scope.$on('mini-pagination:getNumberList', function (event, count, current, pageChange, entityName) {
+          var paginationKey = modelId + entityName;
+          $scope.numberList[paginationKey] = getNumberList(count, current);
           $scope.pageChange = pageChange;
           $scope.pageCurrent = current;
           $scope.pageCount = current;
