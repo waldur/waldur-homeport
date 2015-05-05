@@ -89,7 +89,23 @@ angular
 
       .state('dashboard', {
         url: '/dashboard/',
-        templateUrl: 'views/dashboard.html',
+        abstract: true,
+        templateUrl: 'views/dashboard/base.html',
+      })
+
+      .state('dashboard.eventlog', {
+        url: '',
+        views: {
+          'appHeader@dashboard' : {
+            templateUrl: 'views/partials/app-header.html',
+          },
+          'appContent@dashboard' : {
+            templateUrl: 'views/dashboard/event-log.html',
+          },
+          'appFooter@dashboard' : {
+            templateUrl: 'views/partials/app-footer.html',
+          }
+        },
         resolve: {
           authenticated: authCheck
         },
