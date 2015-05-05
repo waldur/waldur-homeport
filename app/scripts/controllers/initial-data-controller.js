@@ -22,6 +22,7 @@
       if (vm.user.full_name && vm.user.email) {
         vm.user.$update(
           function() {
+            usersService.currentUser = null;
             $state.go('dashboard');
           },
           function(error) {

@@ -79,7 +79,7 @@
       function logout() {
         authService.signout();
         currentStateService.isCustomerDefined = false;
-        $state.go('login');
+        $state.go('home.login');
       }
 
       $rootScope.$on('$stateChangeSuccess', function(event, toState) {
