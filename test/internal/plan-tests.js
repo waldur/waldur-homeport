@@ -32,4 +32,3 @@ describe('Plans list visibility positive test for user ' + user.username + ':', 
   });
 
 });
-// html.ng-scope body.ng-scope div#appContainer.ng-scope div.ng-scope div.ng-scope div.white-box.clear ul.object-list li.ng-scope div.list-item div h3.item-title a.ng-binding
