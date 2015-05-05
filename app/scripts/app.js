@@ -309,16 +309,16 @@ angular
           'appContent': {
             templateUrl: 'views/profile/details.html',
           },
-          'tabEventlog@users.details': {
+          'tabEventlog@profile.details': {
             templateUrl: 'views/profile/tab-eventlog.html',
           },
-          'tabProjects@users.details': {
+          'tabProjects@profile.details': {
             templateUrl: 'views/profile/tab-projects.html',
           },
-          'tabKeys@users.details': {
+          'tabKeys@profile.details': {
             templateUrl: 'views/profile/tab-keys.html',
           },
-          'tabManageUser@users.details': {
+          'tabManageUser@profile.details': {
             templateUrl: 'views/profile/tab-manage.html',
           },
           'appFooter': {
