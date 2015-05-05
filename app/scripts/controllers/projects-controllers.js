@@ -159,6 +159,7 @@
     vm.usersList = [];
     vm.userSearchInputChanged = userSearchInputChanged;
     vm.selectedUsersCallback = selectedUsersCallback;
+    vm.userProjectRemove = userProjectRemove;
 
     getUserList();
     getProjectUsers();
@@ -253,6 +254,29 @@
       var index = vm.usersInvited.indexOf(user);
 
       vm.usersInvited.splice(index, 1);
+    }
+
+    function userProjectRemove(userProject) {
+      var index = vm.users.indexOf(userProject);
+      // TODO: refactor this function to use named urls and uuid field instead
+      var url = userProject.url,
+        array = url.split ('/').filter(function(el) {
+          return el.length !== 0;
+        }),
+        uuid = array[4];
+      var confirmDelete = confirm('Confirm user deletion?');
+      if (confirmDelete) {
+        projectPermissionsService.$delete(uuid).then(
+          function() {
+            vm.users.splice(index, 1);
+          },
+          function(response) {
+            alert(response.data.detail);
+          }
+        );
+      } else {
+        alert('User was not deleted.');
+      }
     }
 
   }

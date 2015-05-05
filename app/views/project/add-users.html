@@ -16,6 +16,7 @@
                 <h4 class="item-title">
                     <!--TODO add ui-sref="users.details({uuid: user.user_uuid})" when backend will provide user_uuid-->
                     <a>{{user.user_full_name}}</a>
+                    <span ng-click="UserAddToProject.userProjectRemove(user)">remove</span>
                 </h4>
             </div>
         </section>
