@@ -14,6 +14,7 @@
                     <input type="text" class="form-control" ng-model="UpdateProfile.user.email" required>
                     <input type="text" class="form-control" ng-model="UpdateProfile.user.full_name" required>
                     <button class="button-apply" ng-click="UpdateProfile.update()" ng-show="UpdateProfile.user.email.length" type="submit">Save</button>
+                    <a ui-sref="profile.details" class="button-cancel">Cancel</a>
                 </div>
                 <div class="error short" ng-show="UpdateProfile.errors.email">
                     <ul class="error-list">
@@ -37,9 +38,6 @@
                 <ul class="actions-dropdown" ng-show="openActions">
                     <li>
                         <a class="button-simple">Add to project</a>
-                    </li>
-                    <li>
-                        <a ui-sref="profile.details" class="button-simple">Back to profile</a>
                     </li>
                     <li>
                         <a class="button-simple" ng-click="UpdateProfile.deleteAccount()">delete my account</a>
