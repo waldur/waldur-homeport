@@ -81,7 +81,7 @@
                     <a class="user-area drop-active" ng-click="Header.menuToggle('profileMenu', $event)"
                         ng-class="{'active': Header.menuState.profileMenu}">
                         <span class="avatar">
-                            <img src="/static/images/user-avatar.jpg" alt="" class="avatar-img">
+                            <img gravatar-src="controller.currentUser.email" gravatar-size="100">
                         </span>
                         <span class="user-name">{{ Header.currentUser.full_name }}</span>
                     </a>
@@ -192,7 +192,7 @@
                     <a href="" class="user-area drop-active" ng-click="Header.menuToggle('profileMenu', $event)"
                         ng-class="{'active': Header.menuState.profileMenu}">
                         <span class="avatar">
-                            <img src="/static/images/user-avatar.jpg" alt="" class="avatar-img">
+                            <img gravatar-src="controller.currentUser.email" gravatar-size="100">
                         </span>
                         <span class="user-name">{{ Header.currentUser.full_name }}</span>
                     </a>

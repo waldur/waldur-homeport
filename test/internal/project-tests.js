@@ -53,7 +53,7 @@ for(var i = 0; i < testData.length; i++) {
 var addProjectTestData = [
   {
     user: auth.getUser('Walter'),
-    customer: 'Ministry of Whistles'
+    customer: 'Alice'
   },
   {
     user: auth.getUser('Alice'),
@@ -83,10 +83,9 @@ for(var i = 0; i < addProjectTestData.length; i++) {
       });
 
       it('I should be able to add new project', function() {
+        helpers.chooseCustomer(data.customer);
         // fill name
         element(by.model('ProjectAdd.project.name')).sendKeys(projectName);
-        // choose customer
-        element(by.cssContainingText('option', data.customer)).click();
 
         element(by.cssContainingText('a.button-apply', 'Create project')).click();
 
@@ -111,7 +110,7 @@ var addUserToProjectTestData = [
     user: auth.getUser('Walter'),
     userEmail: 'alice@example.com',
     userNotExistEmail: 'notexist@example.com',
-    customer: 'Ministry of Bells'
+    customer: 'Alice'
   }
 ];
 
@@ -142,15 +141,14 @@ for(var i = 0; i < addUserToProjectTestData.length; i++) {
       });
 
       it('I should be able to add user to project', function() {
-        element(by.model('UserAddToProject.userInviteEmail')).sendKeys(data.userNotExistEmail);
-        element(by.cssContainingText('a.btn.btn-white', 'Add users')).click();
-        expect(element(by.cssContainingText('.error.error-standard', data.userNotExistEmail + ' is not exist')).isPresent()).toBe(true);
+        element(by.model('searchStr')).sendKeys(data.userNotExistEmail);
+        element(by.cssContainingText('a.button', 'Add user')).click();
+        expect(element(by.cssContainingText('.error.error-standard', data.userNotExistEmail + ' does not exist')).isPresent()).toBe(true);
 
-        element(by.model('UserAddToProject.userInviteEmail')).sendKeys(data.userEmail);
-        element(by.cssContainingText('a.btn.btn-white', 'Add users')).click();
+        element(by.model('searchStr')).sendKeys(data.userEmail);
+        element(by.cssContainingText('a.button', 'Add user')).click();
         element(by.cssContainingText('a.button-apply', 'Add to project')).click();
 
-        expect(browser.getCurrentUrl()).toEqual(projectUrl);
       });
 
       it('I should be able to logout', function() {

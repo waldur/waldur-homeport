@@ -1,42 +1,103 @@
-<div ng-controller="UpdateProfileController as controller">
+<div ng-controller="UpdateProfileController as UpdateProfile">
 
-<!-- profile-view -->
-<div class="profile-view">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-1">
-                <img src="../static/images/887178.jpg" class="profile-pic" alt="John Doe">
+    <div class="profile-view">
+        <section class="avatar">
+            <span class="avatar big">
+                <img gravatar-src="'{{ UpdateProfile.user.email }}'" alt="" class="avatar-img">
+            </span>
+        </section>
+        <section class="content">
+            <h2 class="app-title">{{ UpdateProfile.user.full_name }}</h2>
+            <span>({{ UpdateProfile.user.username }})</span>
+            <div>
+                <div class="mini-form">
+                    <input type="text" class="form-control" ng-model="UpdateProfile.user.email" required>
+                    <button class="button-apply" ng-show="UpdateProfile.user.email.length" type="submit">Save</button>
+                </div>
+                <div class="error short" ng-show="UpdateProfile.errors.email">
+                    <ul class="error-list">
+                        <li ng-repeat="error in UpdateProfile.errors.email">
+                            {{ error }}
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="col-xs-7 profile-info">
-                <h1 class="profile-name">{{ controller.user.full_name }} ({{ controller.user.username }})</h1>
-            </div>
-            <div class="col-xs-4">
-                <ul class="controls pull-right">
+        </section>
+        <section class="actions">
+            <div class="actions-button">
+                <a class="button" ng-click="openActions=!openActions">actions</a>
+                <ul class="actions-dropdown" ng-show="openActions">
                     <li>
-                        <a ui-sref="profile.details" class="crud-controls active"><i class="fa fa-cog"></i> edit profile</a>
+                        <a class="button-simple">Add to project</a>
                     </li>
                     <li>
-                        <a href="/#/profile/changepass/" class="crud-controls"><i class="fa fa-cog"></i> change password</a>
+                        <a ui-sref="profile.details" class="button-simple">Back to profile</a>
+                    </li>
+                    <li>
+                        <a class="button-simple" ng-click="UpdateProfile.deleteAccount()">delete my account</a>
                     </li>
                 </ul>
             </div>
-            <div class="form">
-                <form ng-submit="controller.update()">
-                    <div class="row form-field">
-                        <div class="col-xs-6">
-                            <input type="text" class="form-control" ng-model="controller.user.email" required>
-                        </div>
-                        <div class="col-xs-2">
-                            <button class="btn btn-primary ng-hide" ng-show="controller.user.email.length" type="submit">Save</button>
-                        </div>
-                    </div>
-                </form>
-
-                <span class="error error-standard error-small label" ng-repeat="error in controller.errors.email">{{ error }}</span>
-            </div>
-        </div>
+        </section>
     </div>
-</div>
-<!-- /profile-view -->
+
+    <ul class="tabs-nav">
+        <li ng-class="{'active': UpdateProfile.activeTab === 'eventlog'}"
+            ng-click="UpdateProfile.activeTab = 'eventlog'">
+            Events
+        </li>
+        <li ng-class="{'active': UpdateProfile.activeTab === 'projects'}"
+            ng-click="UpdateProfile.activeTab = 'projects'">
+            Projects
+        </li>
+        <li ng-class="{'active': UpdateProfile.activeTab === 'keys'}"
+            ng-click="UpdateProfile.activeTab = 'keys'">
+            SSH Keys
+        </li>
+        <li ng-class="{'active': UpdateProfile.activeTab === 'manageuser'}"
+            ng-click="UpdateProfile.activeTab = 'manageuser'">
+            Manage User
+        </li>
+    </ul>
+
+    <div class="white-box">
+        <ul class="sort-list">
+            <li>
+                <a href="{{pagesHref}}" class="page-size active">5</a>
+                <a href="{{pagesHref}}" class="page-size">10</a>
+                <a href="{{pagesHref}}" class="page-size">15</a>
+                <a href="{{pagesHref}}" class="page-size">20</a>
+            </li>
+            <li class="search divid">
+                <div class="search-box">
+                    <input type="text" ng-model='ProjectList.searchInput' ng-keyup="ProjectList.search()">
+                    <button class="search-button" ng-click="ProjectList.search()"></button>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <sectin class="tabs-content" ng-switch="UpdateProfile.activeTab">
+        <div class="tab" id="eventlog"
+            ng-class="{'tab-active': UpdateProfile.activeTab === 'eventlog'}"
+            ng-switch-when="eventlog">
+            <div ui-view="tabEventlog"></div>
+        </div>
+        <div class="tab" id="projects"
+            ng-class="{'tab-active': UpdateProfile.activeTab === 'projects'}"
+            ng-switch-when="projects">
+            <div ui-view="tabProjects"></div>
+        </div>
+        <div class="tab" id="keys"
+            ng-class="{'tab-active': UpdateProfile.activeTab === 'keys'}"
+            ng-switch-when="keys">
+            <div ui-view="tabKeys"></div>
+        </div>
+        <div class="tab" id="manageuser"
+            ng-class="{'tab-active': UpdateProfile.activeTab === 'manageuser'}"
+            ng-switch-when="manageuser">
+            <div ui-view="tabManageUser"></div>
+        </div>
+    </sectin>
 
 </div>

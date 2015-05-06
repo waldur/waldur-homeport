@@ -299,6 +299,9 @@ textarea {
     @include property(border-radius, 3);
     @include property(margin, 10 0);
     @include property(padding, 4 8);
+    &.short {
+        @include property(width, 200);
+    } // &.short
     &.error-small {
         @include property(font-size, 12);
     } // &.error-small

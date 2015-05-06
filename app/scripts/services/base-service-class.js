@@ -22,6 +22,7 @@
       endpoint:null,
       filterByCustomer: true,
       customerUuid:null,
+      filterByCustomer: true,
 
       init:function() {
         this.pageSize = 10;
