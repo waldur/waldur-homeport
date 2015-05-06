@@ -12,6 +12,12 @@
                     <button class="search-button" ng-click="ProjectList.search()"></button>
                 </div>
             </li>
+            <li class="right-sort">
+                <a ui-sref="projects.create" class="button">
+                    <span class="icon plus"></span>
+                    <span>Add Project</span>
+                </a>
+            </li>
         </ul>
     </div>
 
@@ -166,7 +172,7 @@
                             <li class="item-list" ng-repeat="user in ProjectList.projectUsers[project.uuid].data">
                                 <section>
                                     <div class="avatar">
-                                        <img src="/static/images/user-avatar.jpg" alt="" class="avatar-img">
+                                        <img gravatar-src="user.email" gravatar-size="100">
                                     </div>
                                     <a ui-sref="users({uuid: user.uuid})">{{ user.user_full_name }}</a>
                                 </section>

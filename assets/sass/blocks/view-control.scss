@@ -1,6 +1,8 @@
 .view-control {
     @include property(margin, 20 60);
-    // @include property(padding, 20);
+    > .list-item {
+        @include property(height, 45);
+    } // > list-item
     .view-action-buttons {
         @include bp(xs) {
             display: none;

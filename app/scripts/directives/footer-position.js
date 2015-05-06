@@ -16,7 +16,7 @@
           // watch app container height, if height more
           // than window height set fixed class for footer
           scope.$watch(function() {
-              scope.appContainer_height = appContainer.offsetHeight;
+              scope.appContainer_height = (appContainer.offsetHeight + 50);
               if (scope.appContainer_height < winHeight) {
                 element.addClass('app-footer-fixed');
               } else {

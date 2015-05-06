@@ -12,6 +12,12 @@
                     <button class="search-button" ng-click="UserList.search()"></button>
                 </div>
             </li>
+            <!--li class="right-sort">
+                <a class="button">
+                    <span class="icon plus"></span>
+                    <span>Invite User</span>
+                </a>
+            </li -->
         </ul>
     </div>
 
@@ -88,11 +94,11 @@
                     </div>
                     <div class="avatar">
                         <span class="avatar">
-                            <img src="/static/images/user-avatar.jpg" alt="" class="avatar-img">
+                            <img gravatar-src="user.email" gravatar-size="100" alt="" class="avatar-img">
                         </span>
                     </div>
                     <div>
-                        <h3 class="item-title"><a ui-sref="users.details({uuid: user.uuid})">{{ user.native_name }}</a></h3>
+                        <h3 class="item-title"><a ui-sref="users.details({uuid: user.uuid})">{{ user.full_name }}</a></h3>
                     </div>
                     <div class="additional-cell">
                         {{ user.email }}

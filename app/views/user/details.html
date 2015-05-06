@@ -1,16 +1,16 @@
-<div ng-controller="UserDetailUpdateController as controller">
+<div ng-controller="UserDetailUpdateController as UserDetailUpdate">
 
     <div class="profile-view">
         <section class="avatar">
             <span class="avatar big">
-                <img src="/static/images/user-avatar.jpg" alt="" class="avatar-img">
+                <img gravatar-src="UserDetailUpdate.user.email" class="avatar-img" gravatar-size="100">
             </span>
         </section>
         <section class="content">
-            <h2 class="app-title">{{ controller.user.full_name }}</h2>
-            <span>({{ controller.user.username }})</span>
+            <h2 class="app-title">{{ UserDetailUpdate.user.full_name }}</h2>
+            <span>({{ UserDetailUpdate.user.username }})</span>
             <div>
-                <a href="mailto:{{ controller.user.email }}">{{ controller.user.email }}</a>
+                <a href="mailto:{{ UserDetailUpdate.user.email }}">{{ UserDetailUpdate.user.email }}</a>
             </div>
         </section>
         <section class="actions">
@@ -29,20 +29,20 @@
     </div>
 
     <ul class="tabs-nav">
-        <li ng-class="{'active': controller.activeTab === 'eventlog'}"
-            ng-click="controller.activeTab = 'eventlog'">
+        <li ng-class="{'active': UserDetailUpdate.activeTab === 'eventlog'}"
+            ng-click="UserDetailUpdate.activeTab = 'eventlog'">
             Events
         </li>
-        <li ng-class="{'active': controller.activeTab === 'projects'}"
-            ng-click="controller.activeTab = 'projects'">
+        <li ng-class="{'active': UserDetailUpdate.activeTab === 'projects'}"
+            ng-click="UserDetailUpdate.activeTab = 'projects'">
             Projects
         </li>
-        <li ng-class="{'active': controller.activeTab === 'keys'}"
-            ng-click="controller.activeTab = 'keys'">
+        <li ng-class="{'active': UserDetailUpdate.activeTab === 'keys'}"
+            ng-click="UserDetailUpdate.activeTab = 'keys'">
             SSH Keys
         </li>
-        <li ng-class="{'active': controller.activeTab === 'manageuser'}"
-            ng-click="controller.activeTab = 'manageuser'">
+        <li ng-class="{'active': UserDetailUpdate.activeTab === 'manageuser'}"
+            ng-click="UserDetailUpdate.activeTab = 'manageuser'">
             Manage User
         </li>
     </ul>
@@ -66,24 +66,24 @@
         </ul>
     </div>
 
-    <sectin class="tabs-content" ng-switch="controller.activeTab">
+    <sectin class="tabs-content" ng-switch="UserDetailUpdate.activeTab">
         <div class="tab" id="eventlog"
-            ng-class="{'tab-active': controller.activeTab === 'eventlog'}"
+            ng-class="{'tab-active': UserDetailUpdate.activeTab === 'eventlog'}"
             ng-switch-when="eventlog">
             <div ui-view="tabEventlog"></div>
         </div>
         <div class="tab" id="projects"
-            ng-class="{'tab-active': controller.activeTab === 'projects'}"
+            ng-class="{'tab-active': UserDetailUpdate.activeTab === 'projects'}"
             ng-switch-when="projects">
             <div ui-view="tabProjects"></div>
         </div>
         <div class="tab" id="keys"
-            ng-class="{'tab-active': controller.activeTab === 'keys'}"
+            ng-class="{'tab-active': UserDetailUpdate.activeTab === 'keys'}"
             ng-switch-when="keys">
             <div ui-view="tabKeys"></div>
         </div>
         <div class="tab" id="manageuser"
-            ng-class="{'tab-active': controller.activeTab === 'manageuser'}"
+            ng-class="{'tab-active': UserDetailUpdate.activeTab === 'manageuser'}"
             ng-switch-when="manageuser">
             <div ui-view="tabManageUser"></div>
         </div>
