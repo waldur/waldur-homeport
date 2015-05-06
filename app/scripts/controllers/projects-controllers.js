@@ -48,7 +48,8 @@
       projectPermissionsService.getList(filter).then(function(response) {
         vm.projectUsers[uuid].data = response;
         vm.projectUsers[uuid].pages = projectPermissionsService.pages;
-        $scope.$broadcast('mini-pagination:getNumberList', vm.projectUsers[uuid].pages, page, getUsersForProject, 'users');
+        $scope.$broadcast('mini-pagination:getNumberList', vm.projectUsers[uuid].pages,
+          page, getUsersForProject, 'users', uuid);
       });
     }
 
@@ -64,7 +65,8 @@
       resourcesService.getList(filter).then(function(response) {
         vm.projectResources[uuid].data = response;
         vm.projectResources[uuid].pages = resourcesService.pages;
-        $scope.$broadcast('mini-pagination:getNumberList', vm.projectResources[uuid], page, getResourcesForProject, 'resources');
+        $scope.$broadcast('mini-pagination:getNumberList', vm.projectResources[uuid].pages,
+          page, getResourcesForProject, 'resources', uuid);
       });
     }
 

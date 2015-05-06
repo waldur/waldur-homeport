@@ -16,27 +16,29 @@
         pageEntityName: '@'
       },
       link: function($scope) {
-        var modelId = $scope.pageModelId,
-          paginationKey = modelId + $scope.pageEntityName;
+        var modelId = $scope.pageModelId;
+        var paginationKey = modelId + $scope.pageEntityName;
         $scope.paginationKey = paginationKey;
         $scope.numberList = {};
-        $scope.numberList[paginationKey] = [];
+        $scope.change = {};
+        $scope.pageCurrent = {};
+        $scope.pageCount = {};
         if ($scope.pageModels[modelId]) {
-          var change = $scope.pageChange,
-            model = $scope.pageModels[modelId],
-            count = model.pages,
-            current = model.page;
-          $scope.numberList[paginationKey] = getNumberList(count, current);
-          $scope.pageCurrent = current;
+          var model = $scope.pageModels[modelId];
+          initPagination(model.pages, model.page, $scope.pageChange, $scope.pageEntityName, modelId)
         }
 
-        $scope.$on('mini-pagination:getNumberList', function (event, count, current, pageChange, entityName) {
-          var paginationKey = modelId + entityName;
-          $scope.numberList[paginationKey] = getNumberList(count, current);
-          $scope.pageChange = pageChange;
-          $scope.pageCurrent = current;
-          $scope.pageCount = current;
+        $scope.$on('mini-pagination:getNumberList', function (event, count, current, pageChange, entityName, uuid) {
+          initPagination(count, current, pageChange, entityName, uuid);
         });
+
+        function initPagination(count, current, pageChange, entityName, uuid) {
+          var paginationKey = uuid + entityName;
+          $scope.numberList[paginationKey] = getNumberList(count, current);
+          $scope.change[paginationKey] = pageChange;
+          $scope.pageCurrent[paginationKey] = current;
+          $scope.pageCount[paginationKey] = current;
+        }
 
         function getNumberList(num, currentPage) {
           var firstPage,
