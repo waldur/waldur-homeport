@@ -22,7 +22,7 @@
     }
 
     function loginSuccess() {
-      $state.go('dashboard');
+      $state.go('dashboard.eventlog');
     }
 
     function loginError(response) {

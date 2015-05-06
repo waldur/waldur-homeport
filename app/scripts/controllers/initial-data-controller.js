@@ -14,7 +14,7 @@
     usersService.getCurrentUser().then(function(response) {
       vm.user = response;
       if (response.full_name && response.email) {
-        $state.go('dashboard');
+        $state.go('dashboard.eventlog');
       }
     });
 
@@ -23,7 +23,7 @@
         vm.user.$update(
           function() {
             usersService.currentUser = null;
-            $state.go('dashboard');
+            $state.go('dashboard.eventlog');
           },
           function(error) {
             vm.errors = error.data;
