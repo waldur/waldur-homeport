@@ -7,8 +7,11 @@
     .divider {
         border-top: 1px solid lightgray;
         @include property(padding, 0 10);
-        @include property(padding-top, 25);
+        @include property(padding-top, 10);
         @include property(margin-top, 10);
+        &.br {
+            @include property(margin-top, 30);
+        } //br
     } // .divider
     .form-row {
         @include row;
