@@ -18,13 +18,14 @@
                 <a class="button" ng-click="openActions=!openActions">actions</a>
                 <ul class="actions-dropdown" ng-show="openActions">
                     <li>
+                        <!-- TODO set href to new manage-user view. -->
                         <a class="button-simple">Add to project</a>
                     </li>
                     <li>
                         <a ui-sref="profile.update" class="button-simple">Edit profile</a>
                     </li>
                     <li>
-                        <a class="button-simple" ng-click="DetailsProfile.deleteAccount()">delete my account</a>
+                        <a class="button-simple button-delete" ng-click="DetailsProfile.deleteAccount()">Delete my account</a>
                     </li>
                 </ul>
             </div>
