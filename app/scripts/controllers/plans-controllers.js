@@ -4,17 +4,27 @@
   angular.module('ncsaas')
     .controller('PlansListController',
       ['baseControllerListClass', 'plansService', 'customersService', 'usersService', 'customerPermissionsService',
-       '$stateParams', '$state', PlansListController]);
+       'planCustomersService', '$stateParams', '$state', PlansListController]);
 
   function PlansListController(
       baseControllerListClass, plansService, customersService, usersService, customerPermissionsService,
-      $stateParams, $state) {
+      planCustomersService, $stateParams, $state) {
     var controllerScope = this;
     var Controller = baseControllerListClass.extend({
       init:function() {
         this.service = plansService;
         this.controllerScope = controllerScope;
         this.checkPermissions();
+        this.initCurrentPlan();
+      },
+
+      initCurrentPlan: function() {
+        var vm = this;
+        planCustomersService.getList().then(function(planCustomers) {
+          if (planCustomers.length !== 0) {
+            vm.currentPlan = planCustomers[0].plan;
+          }
+        });
       },
 
       checkPermissions: function() {
