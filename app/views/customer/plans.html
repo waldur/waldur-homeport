@@ -13,7 +13,7 @@
             </div>
             <div class="plans">
                 <div class="plan" ng-repeat="plan in PlanList.list">
-                    <div class="plan-item">
+                    <div class="plan-item" ng-class="{'active': PlanList.currentPlan.uuid === plan.uuid}">
                         <table>
                             <th>
                                 <span class="plan-name">{{ plan.name }}</span>
