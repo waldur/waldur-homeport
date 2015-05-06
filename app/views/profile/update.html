@@ -3,32 +3,56 @@
     <div class="profile-view">
         <section class="avatar">
             <span class="avatar big">
-                <img gravatar-src="'{{ UpdateProfile.user.email }}'" alt="" class="avatar-img">
+                <img gravatar-src="UpdateProfile.user.email" alt="" class="avatar-img">
             </span>
         </section>
         <section class="content">
             <h2 class="app-title">{{ UpdateProfile.user.full_name }}</h2>
             <span>({{ UpdateProfile.user.username }})</span>
             <div>
-                <div class="mini-form">
-                    <input type="text" class="form-control" ng-model="UpdateProfile.user.email" required>
-                    <input type="text" class="form-control" ng-model="UpdateProfile.user.full_name" required>
-                    <button class="button-apply" ng-click="UpdateProfile.update()" ng-show="UpdateProfile.user.email.length" type="submit">Save</button>
-                    <a ui-sref="profile.details" class="button-cancel">Cancel</a>
-                </div>
-                <div class="error short" ng-show="UpdateProfile.errors.email">
-                    <ul class="error-list">
-                        <li ng-repeat="error in UpdateProfile.errors.email">
-                            {{ error }}
-                        </li>
-                    </ul>
-                </div>
-                <div class="error short" ng-show="UpdateProfile.errors.full_name">
-                    <ul class="error-list">
-                        <li ng-repeat="error in UpdateProfile.errors.full_name">
-                            {{ error }}
-                        </li>
-                    </ul>
+                <div class="short-form half in-profile">
+                    <div class="form-row">
+                        <div class="col label">
+                            <label>My email</label>
+                        </div>
+                        <div class="col input-full">
+                            <input type="text" class="form-control" ng-model="UpdateProfile.user.email" required>
+                            <div class="error short" ng-show="UpdateProfile.errors.email">
+                                <ul class="error-list">
+                                    <li ng-repeat="error in UpdateProfile.errors.email">
+                                        {{ error }}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col label">
+                            <label>My full name</label>
+                        </div>
+                        <div class="col input-full">
+                            <input type="text" class="form-control" ng-model="UpdateProfile.user.full_name" required>
+                            <div class="error short" ng-show="UpdateProfile.errors.full_name">
+                                <ul class="error-list">
+                                    <li ng-repeat="error in UpdateProfile.errors.full_name">
+                                        {{ error }}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col full">
+                            <div class="decision">
+                                <div class="col">
+                                    <a ui-sref="profile.details" class="button-cancel">Cancel</a>
+                                </div>
+                                <div class="col">
+                                    <button class="button-apply" ng-click="UpdateProfile.update()" ng-show="UpdateProfile.user.email.length" type="submit">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
