@@ -12,11 +12,20 @@
             <div>
                 <div class="mini-form">
                     <input type="text" class="form-control" ng-model="UpdateProfile.user.email" required>
-                    <button class="button-apply" ng-show="UpdateProfile.user.email.length" type="submit">Save</button>
+                    <input type="text" class="form-control" ng-model="UpdateProfile.user.full_name" required>
+                    <button class="button-apply" ng-click="UpdateProfile.update()" ng-show="UpdateProfile.user.email.length" type="submit">Save</button>
+                    <a ui-sref="profile.details" class="button-cancel">Cancel</a>
                 </div>
                 <div class="error short" ng-show="UpdateProfile.errors.email">
                     <ul class="error-list">
                         <li ng-repeat="error in UpdateProfile.errors.email">
+                            {{ error }}
+                        </li>
+                    </ul>
+                </div>
+                <div class="error short" ng-show="UpdateProfile.errors.full_name">
+                    <ul class="error-list">
+                        <li ng-repeat="error in UpdateProfile.errors.full_name">
                             {{ error }}
                         </li>
                     </ul>
@@ -28,13 +37,11 @@
                 <a class="button" ng-click="openActions=!openActions">actions</a>
                 <ul class="actions-dropdown" ng-show="openActions">
                     <li>
+                        <!-- TODO set href to new manage-user view. -->
                         <a class="button-simple">Add to project</a>
                     </li>
                     <li>
-                        <a ui-sref="profile.details" class="button-simple">Back to profile</a>
-                    </li>
-                    <li>
-                        <a class="button-simple" ng-click="UpdateProfile.deleteAccount()">delete my account</a>
+                        <a class="button-simple button-delete" ng-click="UpdateProfile.deleteAccount()">Delete my account</a>
                     </li>
                 </ul>
             </div>
