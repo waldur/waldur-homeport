@@ -115,8 +115,8 @@
                             <img ng-show="!template.icon_url" src="static/images/os-fallback.png" alt="" class="icon">
                         </div>
                         <div class="description">
-                            <h3>{{ template.name }}</h3>
-                            <article class="gray-text">
+                            <h3 class="small">{{ template.name }}</h3>
+                            <article class="light-description">
                                 <ul>
                                     <li>OS: {{ template.os }}</li>
                                 </ul>
@@ -139,7 +139,7 @@
                     <!-- template -->
                     <div class="appstore-template" ng-repeat="flavor in ResourceAdd.flavorList" ng-click="ResourceAdd.setFlavor(flavor)" ng-class="{'state': ResourceAdd.selectedFlavor == flavor}">
                         <div class="description">
-                            <article class="gray-text-dark">
+                            <article class="light-description">
                                 <ul class="hardware">
                                     <li>
                                         <i class="flaticon-computer33"></i>
