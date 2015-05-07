@@ -484,9 +484,6 @@ angular
           'tabKeys@users.details': {
             templateUrl: 'views/user/tab-keys.html',
           },
-          'tabManageUser@users.details': {
-            templateUrl: 'views/user/tab-manage.html',
-          },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',
           },
