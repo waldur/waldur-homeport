@@ -10,3 +10,9 @@ article.normal-description {
     line-height: 1.4;
     color: rgb(165, 165, 165);
 } // light-description
+
+article[class$="description"] {
+    ul {
+        @include clear-list;
+    } // ul
+} // article[class$="description"]

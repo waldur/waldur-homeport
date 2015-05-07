@@ -12,7 +12,7 @@
                         ng-click="Header.mobileMenu()"></a>
                 </li>
                 <li class="node-conductor">
-                    <h2>node-conductor</h2>
+                    <h2>NodeConductor</h2>
                 </li>
                 <li>
                     <a ui-sref="dashboard.eventlog"
@@ -54,9 +54,6 @@
                             <a ui-sref="resources.create" class="resource">Add resource</a>
                         </li>
                         <li>
-                            <a ui-sref="keys.create" class="key">Add SSH key</a>
-                        </li>
-                        <li>
                             <a href="" class="user">Invite user</a>
                         </li>
                     </ul>
@@ -94,9 +91,6 @@
                         </li>
                         <li class="on-tablet">
                             <a ui-sref="resources.create" class="resource">Add resource</a>
-                        </li>
-                        <li class="on-tablet">
-                            <a ui-sref="keys.create" class="key">Add SSH key</a>
                         </li>
                         <li class="on-tablet">
                             <a href="" class="user">Invite user</a>
@@ -165,9 +159,6 @@
                             <a ui-sref="resources.create" class="resource">Add resource</a>
                         </li>
                         <li>
-                            <a ui-sref="keys.create" class="key">Add SSH key</a>
-                        </li>
-                        <li>
                             <a href="" class="user">Invite user</a>
                         </li>
                     </ul>
@@ -176,7 +167,7 @@
                     <a class="customer-context drop-active" ng-click="Header.menuToggle('customerMenu', $event)"
                         ng-class="{'active': Header.menuState.customerMenu}">
                         <span class="customer-name">{{ Header.currentCustomer.name }}</span>
-                        <span class="active-context">Active for context</span>
+                        <span class="active-context">Active organization</span>
                     </a>
                     <ul class="nav-sublist-side" ng-show="Header.menuState.customerMenu">
                         <li ng-repeat="customer in Header.customers">
