@@ -55,6 +55,9 @@
             h3 {
                 margin: 0;
                 font-size: rem(18);
+                &.small {
+                    font-size: rem(15);
+                } // &.small
             } // h3
             article {
                 margin: 0;
