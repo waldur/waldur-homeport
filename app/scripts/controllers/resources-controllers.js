@@ -62,6 +62,7 @@
       showServices: false,
       showFlavors: false,
       showTemplates: false,
+      showKeys: false,
 
       serviceList: {},
       flavorList: {},
@@ -116,6 +117,7 @@
         var vm = this;
         vm.resource.flavor = flavor.url;
         vm.selectedFlavor = flavor;
+        vm.showKeys = true;
       },
       setProject:function(project) {
         var vm = this;
@@ -130,7 +132,12 @@
           vm.serviceList = {};
         }
       },
-      currentCustomerUpdatedHandler: function() {
+      setKey:function(key) {
+        var vm = this;
+        vm.resource.ssh_public_key = key.url;
+        vm.selectedKey = key;
+      },
+      currentCustomerUpdatedHandler:function() {
         var vm = this.controllerScope;
         vm.showFlavors = false;
         vm.showTemplates = false;

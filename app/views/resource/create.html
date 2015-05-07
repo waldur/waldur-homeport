@@ -12,10 +12,10 @@
     <section class="short-form">
         <div class="form-row">
             <div class="col label">
-                <label for="">Resource name:</label>
+                <label for="">Name</label>
             </div>
             <div class="col input">
-                <input type="text" placeholder="OpenStack Testbed" ng-model="ResourceAdd.resource.name">
+                <input type="text" placeholder="Test VM" ng-model="ResourceAdd.resource.name">
                 <div class="error arrow-up" ng-show="ResourceAdd.errors.name">
                     <ul class="error-list">
                         <li ng-repeat="error in ResourceAdd.errors.name">{{ error }}</li>
@@ -24,7 +24,7 @@
             </div>
             <div class="col description">
                 <article class="light-description">
-                    Name of the Resource
+                    Human-friendly label
                 </article>
             </div>
         </div>
@@ -48,27 +48,7 @@
             </div>
             <div class="col description">
                 <article class="light-description">
-                    For  which Project this resource
-                </article>
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="col label">
-                <label for="">SSH Key</label>
-            </div>
-            <div class="col input">
-                <div class="custom-select project inline-elem">
-                    <select
-                        ng-options="key.name as key.name for key in ResourceAdd.keyList"
-                        ng-model="ResourceAdd.resource.key_name">
-                        <option value="">Choose SSH key</option>
-                    </select>
-                </div>
-                <a class="button">Add SSH key</a>
-            </div>
-            <div class="col description">
-                <article class="light-description">
-                    SSH key for access to resource
+                    Resources are assigned to projects
                 </article>
             </div>
         </div>
@@ -77,24 +57,24 @@
 
         <div class="form-row" ng-show="ResourceAdd.showServices">
             <div class="col full">
-                <h4 class="app-title">Service</h4> <a class="button">Add service</a>
-                <!-- template-choice -->
+                <h4 class="app-title">Available Services</h4>
+                <!-- service-choice -->
                 <div class="appstore-templates">
-                    <!-- template -->
+                    <!-- service -->
                     <div class="appstore-template"
                             ng-repeat="service in ResourceAdd.serviceList"
                             ng-click="ResourceAdd.setService(service)"
                             ng-class="{'state': ResourceAdd.selectedService == service}">
                         <div class="icon">
-                            <img src="/static/images/icons/icon_aws_small.png" alt="" class="icon">
+                            <img src="/static/images/icons/icon_openstack_small.png" alt="" class="icon">
                         </div>
                         <div class="description">
                             <h3>{{ service.cloud_name }}</h3>
                         </div>
                     </div>
-                    <!-- /template -->
+                    <!-- /service -->
                 </div>
-                <!-- /template-choice -->
+                <!-- /service-choice -->
             </div>
         </div>
 
@@ -162,6 +142,31 @@
                 <!-- /template-choice -->
             </div>
         </div>
+
+        <div class="divider" ng-show="ResourceAdd.showKeys"></div>
+        <div class="form-row" ng-show="ResourceAdd.showKeys">
+            <div class="col full">
+                <h4 class="app-title">SSH key</h4>
+                <!-- key-choice -->
+                <div class="appstore-templates">
+                    <!-- keys -->
+                    <div class="appstore-template"
+                            ng-repeat="key in ResourceAdd.keyList"
+                            ng-click="ResourceAdd.setKey(key)"
+                            ng-class="{'state': ResourceAdd.selectedKey == key}">
+
+                         <div class="description">
+                            <h3>{{ key.name }}</h3>
+                             <!-- TODO: move to a tooltip -->
+                             <!-- article class="light-description">
+                             {{ key.fingerprint }}
+                             </article -->
+                         </div>
+                    </div>
+                    <!-- /jeys -->
+                </div>
+                <!-- /key-choice -->
+            </div>
 
     </section>
 
