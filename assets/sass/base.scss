@@ -17,10 +17,10 @@ body {
         overflow: hidden;
     } // &.no-scroll
     @include bp(xs) {
-        @include property(font-size, 20);
+        @include property(font-size, 16);
     } // xs
     @include bp(sm) {
-        @include property(font-size, 20);
+        @include property(font-size, 16);
     } // sm
     @include bp(md) {
         @include property(font-size, 16);
