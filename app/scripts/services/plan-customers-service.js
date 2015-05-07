@@ -10,6 +10,7 @@
       init:function() {
         this._super();
         this.endpoint = '/plan-customers/';
+        this.filterByCustomer = false;
       }
     });
     return new ServiceClass();

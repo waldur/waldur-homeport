@@ -15,13 +15,12 @@
         this.service = plansService;
         this.controllerScope = controllerScope;
         this.checkPermissions();
-        this.initCurrentPlan();
         this.selectedPlan = null;
       },
 
-      initCurrentPlan: function() {
+      initCurrentPlan: function(customer) {
         var vm = this;
-        planCustomersService.getList().then(function(planCustomers) {
+        planCustomersService.getList({customer: customer.uuid}).then(function(planCustomers) {
           if (planCustomers.length !== 0) {
             vm.currentPlan = planCustomers[0].plan;
           }
@@ -37,9 +36,11 @@
             vm.canSeePlans = hasRole;
 
             if (vm.canSeePlans || user.is_staff) {
+              customersService.getCustomer($stateParams.uuid).$promise.then(function(customer) {
+                vm.customer = customer;
+                vm.initCurrentPlan(customer);
+              });
               vm.getList();
-              vm.initCurrentPlan();
-              vm.customer = customersService.getCustomer($stateParams.uuid);
             } else {
               $state.go('pageNotFound');
             }
@@ -76,6 +77,7 @@
       },
 
       selectPlan: function(plan) {
+        console.log('selected: ' + plan.name);
         if (!this.currentPlan || plan.uuid !== this.currentPlan.uuid) {
           this.selectedPlan = plan;
         } else {
