@@ -11,7 +11,7 @@
         this.service = resourcesService;
         this.controllerScope = controllerScope;
         this._super();
-        this.searchFieldName = 'hostname';
+        this.searchFieldName = 'name';
       },
       stopResource:function(resource) {
         var vm = this;
