@@ -10,7 +10,8 @@ angular
     'ngResource',
     'duScroll',
     'ui.gravatar',
-    'angucomplete-alt'])
+    'angucomplete-alt',
+    'angular-moment'])
   // urls
   .config(function($stateProvider, $urlRouterProvider) {
 

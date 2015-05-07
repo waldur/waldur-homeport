@@ -78,6 +78,12 @@
                             <a ui-sref="customers.details({uuid: event.customer_uuid})" class="name">{{ event.customer_name }}</a>
                             has been updated
                         </span>
+
+                        <span class="event" ng-if="!EventList.isTemplateTypeReady(event.event_type)">
+                            {{ event.message }}
+                        </span>
+
+                        <span>{{ event['@timestamp'] | momentFromNow }}</span>
                         <!--TODO add templates for all event types-->
                     </div>
                     <div class="actions">

@@ -159,7 +159,20 @@ module.exports = function(grunt) {
                       src: ['angucomplete-alt.css'],
                       dest: 'app/static/css/',
                       filter: 'isFile'
-
+                    },
+                    {
+                      expand: true,
+                      cwd: 'bower_components/momentjs',
+                      src: ['moment.js'],
+                      dest: 'app/static/js/angular/',
+                      filter: 'isFile'
+                    },
+                    {
+                      expand: true,
+                      cwd: 'bower_components/angular-moment/src',
+                      src: ['angular-moment.js'],
+                      dest: 'app/static/js/angular/',
+                      filter: 'isFile'
                     }
                 ],
             },
