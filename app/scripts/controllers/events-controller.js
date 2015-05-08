@@ -1,0 +1,38 @@
+'use strict';
+
+(function() {
+  angular.module('ncsaas')
+    .controller('EventListController', ['baseControllerListClass', 'eventsService', 'EVENTTYPE', EventListController]);
+
+  function EventListController(baseControllerListClass, eventsService, EVENTTYPE) {
+    var controllerScope = this;
+    var EventController = baseControllerListClass.extend({
+      EVENTTYPE: EVENTTYPE,
+
+      init:function() {
+        this.service = eventsService;
+        this.controllerScope = controllerScope;
+        this._super();
+        this.searchFieldName = 'search';
+      },
+      isTemplateTypeReady: function(type) {
+        var typesReady = [
+          EVENTTYPE.auth_logged_in_with_username,
+          EVENTTYPE.role_granted,
+          EVENTTYPE.role_granted_structure_type_project,
+          EVENTTYPE.role_granted_structure_type_customer,
+          EVENTTYPE.user_update_succeeded,
+          EVENTTYPE.project_creation_succeeded,
+          EVENTTYPE.iaas_service_sync_failed,
+          EVENTTYPE.iaas_instance_creation_scheduled,
+          EVENTTYPE.customer_creation_succeeded,
+          EVENTTYPE.project_group_creation_succeeded,
+          EVENTTYPE.customer_update_succeeded
+        ];
+        return ~typesReady.indexOf(type);
+      }
+    });
+
+    controllerScope.__proto__ = new EventController();
+  }
+})();
