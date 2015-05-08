@@ -16,7 +16,7 @@
 
     usersService.getCurrentUser().then(function(response) {
       vm.user = response;
-      if (response.full_name && response.email) {
+      if (response.email) {
         $state.go('dashboard.eventlog');
       }
     });
@@ -41,7 +41,7 @@
     }
 
     function save() {
-      if (vm.user.full_name && vm.user.email) {
+      if (vm.user.email) {
         vm.user.$update(
           function() {
             usersService.currentUser = null;
@@ -53,12 +53,7 @@
         );
       } else {
         var errorText = 'This field is required';
-        if (!vm.user.full_name) {
-          vm.errors.full_name = [errorText];
-        }
-        if (!vm.user.email) {
-          vm.errors.email = [errorText];
-        }
+        vm.errors.email = [errorText];
       }
     }
   }
