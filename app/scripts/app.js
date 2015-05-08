@@ -162,9 +162,6 @@ angular
           'appContent': {
             templateUrl: 'views/project/details.html',
           },
-          'controlsList@projects.details' : {
-            templateUrl: 'views/partials/controls-line.html',
-          },
           'tabEventlog@projects.details' : {
             templateUrl: 'views/project/tab-eventlog.html',
           },
@@ -471,9 +468,6 @@ angular
         views: {
           'appContent': {
             templateUrl: 'views/user/details.html',
-          },
-          'controlsListUser@users.details' : {
-            templateUrl: 'views/partials/controls-line-user.html',
           },
           'tabEventlog@users.details': {
             templateUrl: 'views/user/tab-eventlog.html',
