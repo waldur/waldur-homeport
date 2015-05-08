@@ -169,7 +169,7 @@ module.exports = function(grunt) {
                     },
                     {
                       expand: true,
-                      cwd: 'bower_components/angular-moment/src',
+                      cwd: 'bower_components/angular-moment',
                       src: ['angular-moment.js'],
                       dest: 'app/static/js/angular/',
                       filter: 'isFile'

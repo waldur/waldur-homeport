@@ -83,7 +83,7 @@
                             {{ event.message }}
                         </span>
 
-                        <span>{{ event['@timestamp'] | momentFromNow }}</span>
+                        <span am-time-ago="event['@timestamp']"></span>
                         <!--TODO add templates for all event types-->
                     </div>
                     <div class="actions">

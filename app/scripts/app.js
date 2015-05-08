@@ -11,7 +11,7 @@ angular
     'duScroll',
     'ui.gravatar',
     'angucomplete-alt',
-    'angular-moment'])
+    'angularMoment'])
   // urls
   .config(function($stateProvider, $urlRouterProvider) {
 
