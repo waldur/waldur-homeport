@@ -48,10 +48,48 @@
     border-radius: 1px;
     border: 1px solid #e5e5e5;
     position: relative;
-    &.active {
-        border: 1px solid rgb(62, 171, 84);
+    cursor: pointer;
+    &.current-plan {
+        border: 1px solid rgb(176, 176, 176);
+        &:before {
+            content: 'current';
+            position: absolute;
+            @include property(font-size, 12);
+            @include property(top, -20);
+            @include property(right, 20);
+            color: rgb(176, 176, 176);
+        }
         &:after {
-            // content: '\f058';
+            content: '\f00c';
+            font-family: FontAwesome;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-size: rem(20);
+            text-align: center;
+            background-color: rgb(176, 176, 176);
+            color: #fff;
+            width: 26px;
+            height: 26px;
+            border-radius: 100%;
+            position: absolute;
+            right: -10px;
+            top: -10px;
+        } // &:after
+        .plan-name {
+            color: #6cc644;
+        } // pan-name
+    }
+    &.selected {
+        border: 1px solid rgb(62, 171, 84);
+        &:before {
+            content: 'new';
+            position: absolute;
+            @include property(font-size, 12);
+            @include property(top, -20);
+            @include property(right, 20);
+            color: rgb(62, 171, 84);
+        }
+        &:after {
             content: '\f00c';
             font-family: FontAwesome;
             -webkit-font-smoothing: antialiased;
