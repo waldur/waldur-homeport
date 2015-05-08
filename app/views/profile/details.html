@@ -51,23 +51,6 @@
         </li>
     </ul>
 
-    <div class="white-box">
-        <ul class="sort-list">
-            <li>
-                <a href="{{pagesHref}}" class="page-size active">5</a>
-                <a href="{{pagesHref}}" class="page-size">10</a>
-                <a href="{{pagesHref}}" class="page-size">15</a>
-                <a href="{{pagesHref}}" class="page-size">20</a>
-            </li>
-            <li class="search divid">
-                <div class="search-box">
-                    <input type="text" ng-model='ProjectList.searchInput' ng-keyup="ProjectList.search()">
-                    <button class="search-button" ng-click="ProjectList.search()"></button>
-                </div>
-            </li>
-        </ul>
-    </div>
-
     <sectin class="tabs-content" ng-switch="DetailsProfile.activeTab">
         <div class="tab" id="eventlog"
             ng-class="{'tab-active': DetailsProfile.activeTab === 'eventlog'}"
