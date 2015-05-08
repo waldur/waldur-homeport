@@ -20,7 +20,7 @@ angular
       .state('home', {
         url: '/',
         abstract: true,
-        templateUrl: 'views/home/base.html',
+        templateUrl: 'views/partials/base.html',
         resolve: {
           authenticated: notLoggedCheck
         }
@@ -29,13 +29,13 @@ angular
       .state('home.home', {
         url: '',
         views: {
-          'siteHeader@home' : {
+          'appHeader@home' : {
             templateUrl: 'views/partials/site-header.html',
           },
-          'siteContent@home' : {
+          'appContent@home' : {
             templateUrl: 'views/home/home.html',
           },
-          'siteFooter@home' : {
+          'appFooter@home' : {
             templateUrl: 'views/partials/app-footer.html',
           }
         },
@@ -48,13 +48,13 @@ angular
         url: 'login/',
         controller: 'AuthController',
         views: {
-          'siteHeader@home' : {
+          'appHeader@home' : {
             templateUrl: 'views/partials/site-header.html',
           },
-          'siteContent@home' : {
+          'appContent@home' : {
             templateUrl: 'views/home/login.html',
           },
-          'siteFooter@home' : {
+          'appFooter@home' : {
             templateUrl: 'views/partials/app-footer.html',
           }
         },
@@ -65,20 +65,20 @@ angular
 
       .state('initialdata', {
         url: '/initial-data/',
-        templateUrl: 'views/initial-data/base.html',
+        templateUrl: 'views/partials/base.html',
         abstract: true
       })
 
       .state('initialdata.view', {
         url: '',
         views: {
-          'siteHeader@initialdata' : {
+          'appHeader@initialdata' : {
             templateUrl: 'views/partials/site-header-disabled.html',
           },
-          'siteContent@initialdata' : {
+          'appContent@initialdata' : {
             templateUrl: 'views/initial-data/initial-data.html',
           },
-          'siteFooter@initialdata' : {
+          'appFooter@initialdata' : {
             templateUrl: 'views/partials/app-footer.html',
           }
         },
@@ -90,7 +90,7 @@ angular
       .state('dashboard', {
         url: '/dashboard/',
         abstract: true,
-        templateUrl: 'views/dashboard/base.html',
+        templateUrl: 'views/partials/base.html',
       })
 
       .state('dashboard.eventlog', {
@@ -115,7 +115,7 @@ angular
       .state('projects', {
         url: '/projects/',
         abstract: true,
-        templateUrl: 'views/project/base.html',
+        templateUrl: 'views/partials/base.html',
       })
 
       .state('projects.list', {
@@ -225,7 +225,7 @@ angular
       .state('services', {
         url: '/services/',
         abstract: true,
-        templateUrl: 'views/service/base.html'
+        templateUrl: 'views/partials/base.html',
       })
 
       .state('services.list', {
@@ -297,7 +297,7 @@ angular
       .state('profile', {
         url: '/profile/',
         abstract: true,
-        templateUrl: 'views/profile/base.html',
+        templateUrl: 'views/partials/base.html',
       })
 
       .state('profile.details', {
@@ -353,7 +353,7 @@ angular
       .state('customers', {
         url: '/customers/',
         abstract: true,
-        templateUrl: 'views/customer/base.html',
+        templateUrl: 'views/partials/base.html',
       })
 
       .state('customers.list', {
@@ -444,7 +444,7 @@ angular
       .state('users', {
         url: '/users/',
         abstract: true,
-        templateUrl: 'views/user/base.html'
+        templateUrl: 'views/partials/base.html',
       })
 
       .state('users.list', {
@@ -503,7 +503,7 @@ angular
       .state('resources', {
         url: '/resources/',
         abstract: true,
-        templateUrl: 'views/resource/base.html',
+        templateUrl: 'views/partials/base.html',
         resolve: {
           authenticated: authCheck
         }
@@ -550,7 +550,7 @@ angular
       .state('payment', {
         url: '/payment/',
         abstract: true,
-        templateUrl: 'views/payment/base.html',
+        templateUrl: 'views/partials/base.html',
       })
 
       .state('payment.checkout', {
