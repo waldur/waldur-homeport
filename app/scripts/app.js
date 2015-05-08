@@ -586,6 +586,25 @@ angular
         auth: true
       })
 
+      .state('payment.mock', {
+        url: ':uuid/execute/',
+        views: {
+          'appContent': {
+            templateUrl: 'views/payment/mock.html',
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html',
+          },
+          'appFooter': {
+            templateUrl: 'views/partials/app-footer.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
+        auth: true
+      })
+
       .state('pageNotFound', {
         url: '/error/404/',
         templateUrl: 'views/404.html',
