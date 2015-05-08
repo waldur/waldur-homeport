@@ -18,8 +18,9 @@
       return RawCustomer.getFirst().$promise;
     }
 
-    function getCustomersList() {
-      return RawCustomer.query();
+    function getCustomersList(filter) {
+      filter = filter || null;
+      return RawCustomer.query(filter);
     }
 
     function createCustomer() {

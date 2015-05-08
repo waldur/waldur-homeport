@@ -9,7 +9,7 @@
   function HeaderController($rootScope, $scope, $state, currentStateService, customersService, usersService) {
     var vm = this;
 
-    vm.customers = customersService.getCustomersList();
+    vm.customers = customersService.getCustomersList({page_size: 50});
     vm.currentUser = {};
     vm.currentCustomer = {};
     vm.menuToggle = menuToggle;
