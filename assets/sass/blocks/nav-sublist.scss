@@ -48,6 +48,7 @@
             color: rgb(73, 73, 73);
             font-weight: normal;
             text-decoration: none;
+            word-wrap: break-word;
             &:hover, &:active {
                 background-color: #fff;
             } // &:hover, &:active
