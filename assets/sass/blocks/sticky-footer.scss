@@ -1,0 +1,8 @@
+.app-wrap {
+    @include property(margin-bottom, -50);
+    min-height: 100%;
+    &:after {
+        content: "";
+        display: block;
+    } // &:after
+} // app-wrap
