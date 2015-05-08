@@ -64,16 +64,10 @@
                 <div class="plan-item">
                     <table>
                         <th>
-                            <span class="plan-name">Your plan</span>
+                            <span class="plan-name">{{ InitialData.plan.name }}</span>
                         </th>
-                        <tr>
-                            <td>2 projects</td>
-                        </tr>
-                        <tr>
-                            <td>5 users</td>
-                        </tr>
-                        <tr>
-                            <td>5 resources</td>
+                        <tr ng-repeat="quota in InitialData.plan.quotas">
+                            <td>{{ quota.value }} {{ InitialData.getPrettyQuotaName(quota.name) }}</td>
                         </tr>
                     </table>
                 </div>
