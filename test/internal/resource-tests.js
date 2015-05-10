@@ -7,7 +7,6 @@ var auth = require('../helpers/auth.js'),
       service: 'Stratus',
       template: 'CentOS 7 64-bit',
       flavor: 'RAM: 512',
-      key: 'charlie@example.com',
       customer: 'Ministry of Bells'
     },
     {
@@ -16,7 +15,6 @@ var auth = require('../helpers/auth.js'),
       service: 'Cumulus',
       template: 'Windows 3.11 jWxL',
       flavor: 'RAM: 4096',
-      key: 'dave@example.com',
       customer: 'Ministry of Whistles'
     },
   ];
@@ -48,8 +46,6 @@ for(var i = 0; i < testData.length; i++) {
         element(by.model('ResourceAdd.resource.name')).sendKeys(resourceName);
         // choose project
         element(by.cssContainingText('option', data.project)).click();
-        // choose key
-        element(by.cssContainingText('option', data.key)).click();
         // choose service
         element(by.cssContainingText('h3', data.service)).click();
         // choose template
