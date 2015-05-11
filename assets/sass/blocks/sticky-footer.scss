@@ -7,3 +7,7 @@
         @include property(height, 50);
     } // &:after
 } // app-wrap
+
+.sticky-footer {
+    @include property(height, 50);
+} // sticky-footer
