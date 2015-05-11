@@ -24,7 +24,23 @@
 </head>
 <body ng-controller="MainController">
 
-<div ui-view="" id="appContainer"></div>
+<div ui-view="" class="app-wrap"></div>
+
+<footer class="app-footer sticky-footer">
+    <div class="container">
+        <div class="copy">
+            &copy; NodeConductor 2014
+        </div>
+        <ul class="footer-nav">
+            <li>
+                <a href="" target='_blanc'>Help</a>
+            </li>
+            <li>
+                <a href="" target='_blanc'>API</a>
+            </li>
+        </ul>
+    </div>
+</footer>
 
 <!-- angular -->
 <script src="static/js/angular/angular.js"></script>
