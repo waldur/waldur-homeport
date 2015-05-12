@@ -1,6 +1,6 @@
 <div ng-controller="ResourceListController as ResourceList">
 
-<div class="white-box">
+<div class="white-box" ng-show="ResourceList.list.length > 0">
     <ul class="sort-list">
         <li class="title">
             <h2 class="app-title">Resources</h2>
@@ -21,7 +21,19 @@
     </ul>
 </div>
 
-<div class="white-box clear">
+<div class="white-box no-styles" ng-show="ResourceList.list.length <= 0">
+    <h2 class="app-title">
+        You have no resources yet.
+    </h2>
+    <div class="decision">
+        <div class="col">
+            <a ui-sref="resources.create" class="button">Add resource</a>
+        </div>
+    </div>
+</div>
+
+
+<div class="white-box clear" ng-show="ResourceList.list.length > 0">
     <ul class="object-list">
         <li class="list-item">
             <div class="checkbox"></div>
