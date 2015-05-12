@@ -1,5 +1,5 @@
 <div class="pagination">
-    <ul>
+    <ul ng-show="pagesList.service.pages">
         <li>
             <a href="{{pagesHref}}"
               ng-class="{'disabled': pagesList.currentPage === 1}"
