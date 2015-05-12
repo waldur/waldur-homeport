@@ -10,13 +10,12 @@
     <div class="white-box">
         <section class="row gray-box">
             <div class="col" ng-repeat="user in UserAddToProject.users">
-            <span class="avatar offset-right">
-                <img src="/static/images/user-avatar.jpg" alt="{{user.user_full_name}}" class="avatar-img">
-            </span>
+                <span class="avatar offset-right">
+                    <img src="/static/images/user-avatar.jpg" alt="{{user.user_full_name}}" class="avatar-img">
+                </span>
                 <h4 class="item-title">
-                    <!--TODO add ui-sref="users.details({uuid: user.user_uuid})" when backend will provide user_uuid-->
-                    <a>{{user.user_full_name}}</a>
-                    <span ng-click="UserAddToProject.userProjectRemove(user)">remove</span>
+                    <a ui-sref="users.details({uuid: user.user_uuid})">{{user.user_full_name}}</a>
+                    <span class="user-project-remove" ng-click="UserAddToProject.userProjectRemove(user)">x</span>
                 </h4>
             </div>
         </section>
