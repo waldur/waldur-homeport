@@ -53,6 +53,11 @@
     border-color: transparent;
     border-bottom: 2px solid #2d6c09;
     color: #fff;
+    &.inhome-plans {
+        @include property(font-size, 20);
+        @include property(padding, 6 12);
+        @include property(padding-top, 8);
+    }
 } // button-select
 .button-login {
     @include inline-middle;
