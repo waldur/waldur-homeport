@@ -1,0 +1,25 @@
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    z-index: 999;
+    @include table;
+    @include transition(all, 1s, ease);
+    .preloader-content {
+        @include table-cell;
+        vertical-align: middle;
+        text-align: center;
+        .preloader-spinner {
+            animation: spin 1s infinite .2s linear;
+            @include icon-fa;
+            color: rgb(210, 210, 210);
+            @include property(font-size, 30);
+            &:before {
+                content: '\f110';
+            } // &:before
+        } // preloader-spinner
+    } // .preloader-content
+} // preloader
