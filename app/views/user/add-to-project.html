@@ -1,42 +1,43 @@
-<div class="popup">
+<div class="popup" ng-controller="AddToProjectUserController as AddToProjectUser">
     <section class="row">
         <div class="col">
             <h2 class="app-title">Add to project</h2>
         </div>
         <div class="col">
             <div class="custom-select project inline-elem">
-                <select>
+                <select ng-model="AddToProjectUser.instance.project"
+                        ng-options="project.url as project.name for project in AddToProjectUser.projects">
                     <option value="">Choose project</option>
-                    <option value="">Some project</option>
-                    <option value="">Some project 2</option>
                 </select>
+            </div>
+            <div class="error arrow-up" ng-show="AddToProjectUser.errors.project">
+                <ul class="error-list">
+                    <li ng-repeat="error in AddToProjectUser.errors.project">{{ error }}</li>
+                </ul>
             </div>
         </div>
     </section>
     <section class="row gray-box">
         <div class="col">
             <span class="avatar offset-right">
-                <img src="/static/images/user-avatar.jpg" alt="" class="avatar-img">
+                <img gravatar-src="AddToProjectUser.user.email" gravatar-size="100" alt="" class="avatar-img">
             </span>
             <h4 class="item-title">
-                <a href="">Michael Yakimenko</a>
-            </h4>
-        </div>
-        <div class="col">
-            <span class="avatar offset-right">
-                <img src="/static/images/thumb50.png" alt="" class="avatar-img">
-            </span>
-            <h4 class="item-title">
-                <a href="">Pavel Marchuk</a>
+                <a ui-sref="users.details({uuid: AddToProjectUser.user.uuid})">{{AddToProjectUser.user.full_name}}</a>
             </h4>
         </div>
     </section>
+    <ul class="error-list" ng-if="AddToProjectUser.errors.non_field_errors">
+        <li ng-repeat="error in AddToProjectUser.errors.non_field_errors">
+            <span class="error error-standard label">{{ error }}</span>
+        </li>
+    </ul>
     <div class="decision">
         <div class="col">
-            <a class="button-cancel">Cancel</a>
+            <a ng-click="AddToProjectUser.cancel()" class="button-cancel">Cancel</a>
         </div>
         <div class="col">
-            <a class="button-apply">Add to project</a>
+            <a ng-click="AddToProjectUser.save()" class="button-apply">Add to project</a>
         </div>
     </div>
 </div>
