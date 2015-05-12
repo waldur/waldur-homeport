@@ -1,146 +1,26 @@
 <sortline ></sortline>
 
-<!-- view-control -->
-<section class="view-control">
-    <div class="list-item no-cursor">
-        <div class="checkbox">
-            <div class="checkbox" ng-show="UserList.showgroup">
-                <input type="checkbox">
+<div class="white-box">
+    <div class="row">
+        <div class="col full">
+            <div class="add-or-remove">
+                <h3 class="app-title">Administrator</h3>
+                <span class="added">Jack Pollack</span>
+                <span class="added">John Doe</span>
+                <input type="text" class="add-label" placeholder="Add"
+                    ng-click="inputMode=!inputMode"
+                    ng-class="{'input': inputMode}">
             </div>
         </div>
-        <div>
-            <div class="view-action-buttons" ng-show="UserList.showgroup">
-                <a class="button">Add to project</a>
-                <a class="button">Remove from project</a>
+                <div class="col full">
+            <div class="add-or-remove">
+                <h3 class="app-title">Managers</h3>
+                <span class="added">Jack Pollack</span>
+                <span class="added">John Doe</span>
+                <input type="text" class="add-label" placeholder="Add"
+                    ng-click="inputMode2=!inputMode2"
+                    ng-class="{'input': inputMode2}">
             </div>
-            <div class="view-action-buttons-mobile" ng-show="UserList.showgroup">
-                <div class="actions-button">
-                    <a class="button dropdown-active"
-                        ng-click="mobileActions=!mobileActions">actions</a>
-                    <ul class="actions-dropdown" ng-show="mobileActions">
-                        <li>
-                            <a class="button-simple">Add to project</a>
-                        </li>
-                        <li>
-                            <a class="button-simple">Remove from project</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="actions switch">
-            <span class="label-text" ng-class="{'low-grade': !UserList.showgroup}">batch</span>
-            <div class="checkbox-toggle">
-                <input type="checkbox" id="control-types" ng-click="UserList.showgroup=!UserList.showgroup">
-                <label for="control-types"></label>
-            </div>
-            <span class="label-text special-left" ng-class="{'low-grade': UserList.showgroup}">single</span>
         </div>
     </div>
-</section>
-<!-- /view-control -->
-
-<div class="white-box clear">
-    <ul class="object-list">
-        <li>
-            <div class="list-item">
-                <div class="checkbox"></div>
-                <div class="expand"></div>
-                <div class="avatar"></div>
-                <div>
-                    <a class="list-sort">Name</a>
-                </div>
-                <div class="additional-cell">
-                    <a class="list-sort">E-mail</a>
-                </div>
-                <div class="additional-cell">
-                    <a class="list-sort">Username</a>
-                </div>
-                <div class="actions"></div>
-            </div>
-        </li>
-        <li ng-repeat="user in UserList.list">
-            <div class="list-item" ng-class="{'opened': expandItem}">
-                <div class="checkbox">
-                    <div class="checkbox">
-                        <input type="checkbox" ng-show="UserList.showgroup">
-                    </div>
-                </div>
-                <div class="expand">
-                    <a class="plus-minus"
-                    ng-click="expandItem=!expandItem"
-                    ng-class="{'plus': !expandItem, 'minus active': expandItem}"></a>
-                </div>
-                <div class="avatar">
-                    <span class="avatar">
-                        <img gravatar-src="user.email" gravatar-size="100" alt="" class="avatar-img">
-                    </span>
-                </div>
-                <div>
-                    <h3 class="item-title"><a ui-sref="users.details({uuid: user.uuid})">{{ user.native_name }}</a></h3>
-                </div>
-                <div class="additional-cell">
-                    {{ user.email }}
-                </div>
-                <div class="additional-cell">
-                    {{ user.username }}
-                </div>
-                <div class="actions">
-                    <div class="actions-button" ng-show="!UserList.showgroup">
-                        <a class="button" ng-click="openActions=!openActions">actions</a>
-                        <ul class="actions-dropdown" ng-show="openActions">
-                            <li>
-                                <a class="button-simple">Add to project</a>
-                            </li>
-                            <li>
-                                <a class="button-simple">Remove from project</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="list-item-details" ng-show="expandItem">
-                <section>
-                    <header>
-                        <h4 class="item-title">Connected projects</h4>
-                        <ul class="inline-pagination">
-                            <li>
-                                <a href="">1</a>
-                            </li>
-                            <li>
-                                <a href="" class="current">2</a>
-                            </li>
-                            <li>
-                                <a href="">3</a>
-                            </li>
-                            <li>
-                                <span>...</span>
-                            </li>
-                            <li>
-                                <a href="">5</a>
-                            </li>
-                        </ul>
-                    </header>
-                    <ul>
-                        <li class="item-list">
-                            <section>
-                                <a class="list-sort">Name</a>
-                            </section>
-                            <section>
-                                <div class="list-sort">Creation date</div>
-                            </section>
-                        </li>
-                        <li class="item-list">
-                            <section>
-                                <a href="">Project</a>
-                            </section>
-                            <section>
-                                Creation date
-                            </section>
-                        </li>
-                    </ul>
-                </section>
-            </div>
-        </li>
-    </ul>
 </div>
