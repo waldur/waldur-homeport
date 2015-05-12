@@ -103,6 +103,11 @@ for(var i=0; i < users.length; i++) {
         browser.switchTo().alert().accept();
         expect(element(by.css('.tour-box .take-a-tour')).getText()).toEqual('Sign me up!');
       });
+
+      it('I should be able to logout', function() {
+        auth.logout();
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/');
+      });
     });
   })(user);
 }
