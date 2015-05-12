@@ -9,6 +9,5 @@
 } // app-wrap
 
 .sticky-footer {
-    @include property(margin-top, 20);
     @include property(height, 50);
 } // sticky-footer
