@@ -18,13 +18,14 @@
                 <a class="button" ng-click="openActions=!openActions">actions</a>
                 <ul class="actions-dropdown" ng-show="openActions">
                     <li>
+                        <!-- TODO set href to new manage-user view. -->
                         <a class="button-simple">Add to project</a>
                     </li>
                     <li>
                         <a ui-sref="profile.update" class="button-simple">Edit profile</a>
                     </li>
                     <li>
-                        <a class="button-simple" ng-click="DetailsProfile.deleteAccount()">delete my account</a>
+                        <a class="button-simple button-delete" ng-click="DetailsProfile.deleteAccount()">Delete my account</a>
                     </li>
                 </ul>
             </div>
@@ -49,23 +50,6 @@
             Manage User
         </li>
     </ul>
-
-    <div class="white-box">
-        <ul class="sort-list">
-            <li>
-                <a href="{{pagesHref}}" class="page-size active">5</a>
-                <a href="{{pagesHref}}" class="page-size">10</a>
-                <a href="{{pagesHref}}" class="page-size">15</a>
-                <a href="{{pagesHref}}" class="page-size">20</a>
-            </li>
-            <li class="search divid">
-                <div class="search-box">
-                    <input type="text" ng-model='ProjectList.searchInput' ng-keyup="ProjectList.search()">
-                    <button class="search-button" ng-click="ProjectList.search()"></button>
-                </div>
-            </li>
-        </ul>
-    </div>
 
     <sectin class="tabs-content" ng-switch="DetailsProfile.activeTab">
         <div class="tab" id="eventlog"

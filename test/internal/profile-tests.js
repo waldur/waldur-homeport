@@ -1,4 +1,5 @@
 var auth = require('../helpers/auth.js'),
+  helpers = require('../helpers/helpers.js'),
   users = [auth.getUser('Charlie'), auth.getUser('Walter')],
   testData = [
     {
@@ -11,10 +12,11 @@ var auth = require('../helpers/auth.js'),
     },
   ];
 for(var i=0; i < users.length; i++) {
-  var user = users[i];
-  var data = testData[i];
+  var user = users[i],
+    data = testData[i],
+    name = helpers.getUUID();
 
-  (function(user, data) {
+  (function(user, data, name) {
     describe('Test ' + user.username + ' can go to "profile" page:', function() {
 
       it('I should be able to login', function() {
@@ -30,29 +32,38 @@ for(var i=0; i < users.length; i++) {
       });
 
       it('I should be able to edit profile', function() {
-        var currentEmail = element(by.css('.profile-view .content a.ng-binding')).getText();
+        var currentEmail = element(by.css('.profile-view .content a.ng-binding')).getText(),
+          currentName = element(by.css('.profile-view .app-title')).getText();
+
+        function setName(name) {
+          element(by.model('UpdateProfile.user.full_name')).clear();
+          element(by.model('UpdateProfile.user.full_name')).sendKeys(name);
+        }
 
         function setEmail(email) {
-          element(by.model('controller.user.email')).clear();
-          element(by.model('controller.user.email')).sendKeys(email);
-          element(by.css('.btn.btn-primary')).click();
+          element(by.model('UpdateProfile.user.email')).clear();
+          element(by.model('UpdateProfile.user.email')).sendKeys(email);
+          element(by.cssContainingText('.button-apply', 'Save')).click();
         }
 
         element(by.cssContainingText('.actions-button a.button', 'actions')).click();
         element(by.cssContainingText('.actions-button .actions-dropdown li a', 'Edit profile')).click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/profile/edit/');
-        expect(element(by.css('.profile-name')).getText()).toContain(user.username);
+        expect(element(by.css('.app-title')).getText()).toContain(user.username);
         setEmail(data.emailFail);
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/profile/edit/');
         expect(element(by.css('.profile-view .error')).getText()).toEqual('Enter a valid email address.');
 
+        setName(name);
         setEmail(data.email);
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/profile/');
         expect(element(by.css('.profile-view .content a.ng-binding')).getText()).toEqual(data.email);
+        expect(element(by.css('.profile-view .app-title')).getText()).toEqual(name);
 
-        // reset email
+        // reset email and name
         element(by.cssContainingText('.actions-button a.button', 'actions')).click();
         element(by.cssContainingText('.actions-button .actions-dropdown li a', 'Edit profile')).click();
+        setName(currentName);
         setEmail(currentEmail);
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/profile/');
 
@@ -63,7 +74,7 @@ for(var i=0; i < users.length; i++) {
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/');
       });
     });
-  })(user, data);
+  })(user, data, name);
 
 }
 

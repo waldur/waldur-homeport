@@ -7,7 +7,7 @@ var auth = require('../helpers/auth.js'),
       service: 'Stratus',
       template: 'CentOS 7 64-bit',
       flavor: 'RAM: 512',
-      key: 'charlie@example.com'
+      customer: 'Ministry of Bells'
     },
     {
       user: auth.getUser('Dave'),
@@ -15,7 +15,6 @@ var auth = require('../helpers/auth.js'),
       service: 'Cumulus',
       template: 'Windows 3.11 jWxL',
       flavor: 'RAM: 4096',
-      key: 'dave@example.com',
       customer: 'Ministry of Whistles'
     },
   ];
@@ -34,9 +33,7 @@ for(var i = 0; i < testData.length; i++) {
       });
 
       it('I should be able to go to "resource add" page', function() {
-        if ('customer' in data) {
-          helpers.chooseCustomer(data.customer);
-        }
+        helpers.chooseCustomer(data.customer);
         element(by.cssContainingText('ul.nav-list.views li a', 'Resources')).click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/resources/');
 
@@ -49,8 +46,6 @@ for(var i = 0; i < testData.length; i++) {
         element(by.model('ResourceAdd.resource.name')).sendKeys(resourceName);
         // choose project
         element(by.cssContainingText('option', data.project)).click();
-        // choose key
-        element(by.cssContainingText('option', data.key)).click();
         // choose service
         element(by.cssContainingText('h3', data.service)).click();
         // choose template
@@ -78,7 +73,7 @@ for(var i = 0; i < testData.length; i++) {
 
 }
 
-
+var customer = 'Ministry of Bells';
 describe('Resource pagination test for Alice :', function() {
 
   var user = auth.getUser('Alice');
@@ -90,6 +85,7 @@ describe('Resource pagination test for Alice :', function() {
 
   it('I should see 10 elements on page by default', function() {
     // Go to resources list
+    helpers.chooseCustomer(customer);
     element(by.cssContainingText('ul.nav-list.views li a', 'Resources')).click();
     expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/resources/');
     // checks elements count on page

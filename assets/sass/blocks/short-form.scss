@@ -4,11 +4,21 @@
     &.full {
         width: 100%;
     } // &.full
+    &.half {
+        width: 50%;
+        margin: 0;
+    } // &.half
+    &.in-profile {
+        @include property(margin-top, 20);
+    } // &.in-profile
     .divider {
         border-top: 1px solid lightgray;
         @include property(padding, 0 10);
-        @include property(padding-top, 25);
+        @include property(padding-top, 10);
         @include property(margin-top, 10);
+        &.br {
+            @include property(margin-top, 30);
+        } //br
     } // .divider
     .form-row {
         @include row;
