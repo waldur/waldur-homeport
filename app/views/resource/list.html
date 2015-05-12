@@ -15,7 +15,7 @@
         <li class="right-sort">
             <a ui-sref="resources.create" class="button">
                 <span class="icon plus"></span>
-                <span>Add Resource</span>
+                <span>Add resource</span>
             </a>
         </li>
     </ul>
@@ -55,13 +55,14 @@
                         ng-class="{'online': resource.state == 'Online', 'offline' : resource.state == 'Offline'}"></div>
                 </div>
                 <div class="additional-cell" ng-hide="collapsedItem">
-                    {{ resource.type }}
+                    {{ resource.type || "VM" }}
                 </div>
                 <div class="additional-cell">
                     <a ui-sref="projects.details({uuid: resource.project_uuid })">{{ resource.project_name }}</a>
                 </div>
                 <div class="additional-cell">
-                    <span ng-repeat="access in resource.access_information">{{ access }}</span>
+                    <span ng-repeat="access in resource.external_ips">{{ access }}</span>
+                    <span ng-if="resource.external_ips.length == 0"><i>No access info</i></span>
                 </div>
                 <div class="additional-cell">
                     <span class="status"
