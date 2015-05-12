@@ -8,6 +8,7 @@
     width: 100%;
     a {
         color: white;
+        text-decoration: none;
     } // a
     .copy {
         float: left;
@@ -15,6 +16,14 @@
     .footer-nav {
         float: right;
         @include clear-list-inline;
+        li + li {
+            &:before {
+                @include inline-middle;
+                content: '|';
+                opacity: 0.4;
+                @include property(margin, 0 10);
+            }
+        }
     } // footer-nav
 } // app-footer
 
