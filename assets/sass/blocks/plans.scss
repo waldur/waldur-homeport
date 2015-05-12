@@ -152,6 +152,7 @@
                 }
                 .plan-price {
                     font-size: rem(14);
+                    @include property(margin-top, 10);
                 }
                 .btn-choice {
                     background-color: rgb(125, 178, 67);
