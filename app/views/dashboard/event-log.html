@@ -21,12 +21,13 @@
                 <div class="list-item">
                     <div>
                         <span class="event" ng-if="event.event_type === EventList.EVENTTYPE.auth_logged_in_with_username">
-                            User <a ui-sref="users.details({uuid: event.user_uuid})" class="name">{{ event.user_username }}</a> with full name
-                            <span class="name">{{ event.user_full_name }}</span>
-                            authenticated successfully with username and password
+                            User <a ui-sref="users.details({uuid: event.user_uuid})" class="name">
+                            <span class="name">{{ event.user_full_name }}</span></a>
+                            has signed in with a username/password.
                         </span>
 
                         <span class="event" ng-if="event.event_type === EventList.EVENTTYPE.role_granted">
+                            <!-- TODO: replace affected_user_username to affected_user_full_name once the data is in LA -->
                             User <a ui-sref="users.details({uuid: event.affected_user_uuid})">{{ event.affected_user_username }}</a>
                             has gained role of {{ event.role_name }} in {{ event.structure_type }}
                             <a ui-sref="projects.details({uuid: event.project_uuid})"
@@ -40,7 +41,7 @@
                         </span>
 
                         <span class="event" ng-if="event.event_type === EventList.EVENTTYPE.user_update_succeeded">
-                            User <a ui-sref="users.details({uuid: event.user_uuid})" class="name">{{ event.user_username }}</a>
+                            User <a ui-sref="users.details({uuid: event.user_uuid})" class="name">{{ event.user_full_name }}</a>
                             has been updated
                         </span>
 
@@ -65,7 +66,7 @@
                         </span>
 
                         <span class="event" ng-if="event.event_type === EventList.EVENTTYPE.customer_creation_succeeded">
-                            Customer <a ui-sref="customers.details({uuid: event.customer_uuid})" class="name">{{ event.customer_name }}</a>
+                            Organization <a ui-sref="customers.details({uuid: event.customer_uuid})" class="name">{{ event.customer_name }}</a>
                             has been created
                         </span>
 
@@ -74,7 +75,7 @@
                         </span>
 
                         <span class="event" ng-if="event.event_type === EventList.EVENTTYPE.customer_update_succeeded">
-                            Customer
+                            Organization
                             <a ui-sref="customers.details({uuid: event.customer_uuid})" class="name">{{ event.customer_name }}</a>
                             has been updated
                         </span>
