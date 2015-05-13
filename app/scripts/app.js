@@ -35,9 +35,6 @@ angular
           },
           'appContent@home' : {
             templateUrl: 'views/home/home.html',
-          },
-          'appFooter@home' : {
-            templateUrl: 'views/partials/app-footer.html',
           }
         },
         resolve: {
@@ -54,9 +51,6 @@ angular
           },
           'appContent@home' : {
             templateUrl: 'views/home/login.html',
-          },
-          'appFooter@home' : {
-            templateUrl: 'views/partials/app-footer.html',
           }
         },
         resolve: {
@@ -78,9 +72,6 @@ angular
           },
           'appContent@initialdata' : {
             templateUrl: 'views/initial-data/initial-data.html',
-          },
-          'appFooter@initialdata' : {
-            templateUrl: 'views/partials/app-footer.html',
           }
         },
         resolve: {
@@ -102,9 +93,6 @@ angular
           },
           'appContent@dashboard' : {
             templateUrl: 'views/dashboard/event-log.html',
-          },
-          'appFooter@dashboard' : {
-            templateUrl: 'views/partials/app-footer.html',
           }
         },
         resolve: {
@@ -127,9 +115,6 @@ angular
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',
-          },
-          'appFooter': {
-            templateUrl: 'views/partials/app-footer.html',
           }
         },
         resolve: {
@@ -146,9 +131,6 @@ angular
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',
-          },
-          'appFooter': {
-            templateUrl: 'views/partials/app-footer.html',
           }
         },
         resolve: {
@@ -174,9 +156,6 @@ angular
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',
-          },
-          'appFooter': {
-            templateUrl: 'views/partials/app-footer.html',
           }
         },
         resolve: {
@@ -193,9 +172,6 @@ angular
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',
-          },
-          'appFooter': {
-            templateUrl: 'views/partials/app-footer.html',
           }
         },
         resolve: {
@@ -212,9 +188,6 @@ angular
             },
           'appHeader': {
               templateUrl: 'views/partials/app-header.html'
-            },
-          'appFooter': {
-              templateUrl: 'views/partials/app-footer.html'
             }
         }
 
@@ -234,9 +207,6 @@ angular
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html'
-          },
-          'appFooter': {
-            templateUrl: 'views/partials/app-footer.html'
           }
         },
         resolve: {
@@ -253,9 +223,6 @@ angular
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html'
-          },
-          'appFooter': {
-            templateUrl: 'views/partials/app-footer.html'
           }
         },
         resolve: {
@@ -281,9 +248,6 @@ angular
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html'
-          },
-          'appFooter': {
-            templateUrl: 'views/partials/app-footer.html'
           }
         },
         resolve: {
@@ -318,9 +282,6 @@ angular
           },
           'tabManageUser@profile.details': {
             templateUrl: 'views/profile/tab-manage.html',
-          },
-          'appFooter': {
-            templateUrl: 'views/partials/app-footer.html',
           }
         },
         resolve: {
@@ -337,9 +298,6 @@ angular
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',
-          },
-          'appFooter': {
-            templateUrl: 'views/partials/app-footer.html',
           }
         },
         resolve: {
@@ -362,9 +320,6 @@ angular
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',
-          },
-          'appFooter': {
-            templateUrl: 'views/partials/app-footer.html',
           }
         },
         resolve: {
@@ -390,9 +345,6 @@ angular
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',
-          },
-          'appFooter': {
-            templateUrl: 'views/partials/app-footer.html',
           }
         },
         resolve: {
@@ -409,9 +361,6 @@ angular
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',
-          },
-          'appFooter': {
-            templateUrl: 'views/partials/app-footer.html',
           }
         },
         resolve: {
@@ -428,9 +377,6 @@ angular
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',
-          },
-          'appFooter': {
-            templateUrl: 'views/partials/app-footer.html',
           }
         },
         resolve: {
@@ -453,9 +399,6 @@ angular
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',
-          },
-          'appFooter': {
-            templateUrl: 'views/partials/app-footer.html',
           }
         },
         resolve: {
@@ -481,9 +424,6 @@ angular
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',
-          },
-          'appFooter': {
-            templateUrl: 'views/partials/app-footer.html',
           }
         },
         resolve: {
@@ -509,9 +449,6 @@ angular
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',
-          },
-          'appFooter': {
-            templateUrl: 'views/partials/app-footer.html',
           }
         },
         resolve: {
@@ -528,9 +465,6 @@ angular
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',
-          },
-          'appFooter': {
-            templateUrl: 'views/partials/app-footer.html',
           }
         },
         resolve: {
@@ -553,9 +487,6 @@ angular
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',
-          },
-          'appFooter': {
-            templateUrl: 'views/partials/app-footer.html',
           }
         },
         resolve: {
@@ -572,9 +503,6 @@ angular
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',
-          },
-          'appFooter': {
-            templateUrl: 'views/partials/app-footer.html',
           }
         },
         resolve: {
@@ -591,9 +519,6 @@ angular
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',
-          },
-          'appFooter': {
-            templateUrl: 'views/partials/app-footer.html',
           }
         },
         resolve: {
