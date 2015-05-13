@@ -38,11 +38,11 @@
       page = page || 1;
       projectPermissionsService.page = page;
       projectPermissionsService.pageSize = 5;
-      vm.projectUsers[username].page = page;
+      vm.userProjects[username].page = page;
       projectPermissionsService.filterByCustomer = false;
       projectPermissionsService.getList(filter).then(function(response) {
-        vm.projectUsers[username].data = response;
-        vm.projectUsers[username].pages = projectPermissionsService.pages;
+        vm.userProjects[username].data = response;
+        vm.userProjects[username].pages = projectPermissionsService.pages;
         $scope.$broadcast('mini-pagination:getNumberList', vm.userProjects[username].pages,
           page, getProjectsForUser, 'projects', uuid);
       });
