@@ -89,7 +89,7 @@
                     </div>
                     <div class="expand">
                         <a class="plus-minus"
-                        ng-click="expandItem=!expandItem"
+                        ng-click="expandItem=!expandItem; UserList.showMore(user)"
                         ng-class="{'plus': !expandItem, 'minus active': expandItem}"></a>
                     </div>
                     <div class="avatar">
@@ -140,7 +140,8 @@
                             </li>
                             <li class="item-list" ng-repeat="project in UserList.userProjects[user.username].data">
                                 <section>
-                                    <a ui-sref="projects.details({uuid: project.uuid})">{{ project.name }}</a>
+                                    <!--TODO add ui-sref="projects.details({uuid: project.project_uuid})" -->
+                                    <a >{{ project.project_name }}</a>
                                 </section>
                                 <section>
                                     {{ project.creation_date }}

@@ -3,18 +3,19 @@
 (function() {
   angular.module('ncsaas')
     .controller('UserListController', [
-      '$rootScope',
       'usersService',
       'projectPermissionsService',
+      '$scope',
       UserListController
     ]);
 
-  function UserListController($location, usersService, projectPermissionsService, $rootScope) {
+  function UserListController(usersService, projectPermissionsService, $scope) {
     var vm = this;
 
     vm.showgroup = false;
     vm.list = [];
     vm.userProjects = {};
+    vm.showMore = showMore;
 
     usersService.getList().then(function(response) {
       vm.list = response;
@@ -38,14 +39,20 @@
       page = page || 1;
       projectPermissionsService.page = page;
       projectPermissionsService.pageSize = 5;
-      vm.projectUsers[username].page = page;
+      vm.userProjects[username].page = page;
       projectPermissionsService.filterByCustomer = false;
       projectPermissionsService.getList(filter).then(function(response) {
-        vm.projectUsers[username].data = response;
-        vm.projectUsers[username].pages = projectPermissionsService.pages;
+        vm.userProjects[username].data = response;
+        vm.userProjects[username].pages = projectPermissionsService.pages;
         $scope.$broadcast('mini-pagination:getNumberList', vm.userProjects[username].pages,
-          page, getProjectsForUser, 'projects', uuid);
+          page, getProjectsForUser, 'projects', username);
       });
+    }
+
+    function showMore(user) {
+      if (!vm.userProjects[user.username]) {
+        getProjectsForUser(user.username);
+      }
     }
 
   }
