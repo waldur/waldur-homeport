@@ -188,6 +188,7 @@
       if (selected) {
         vm.user = selected.originalObject;
         addUser(this.id);
+        getUserList();
       }
     }
 

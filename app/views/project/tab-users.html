@@ -7,7 +7,7 @@
                 <h3 class="app-title">Administrator</h3>
                 <span class="added" ng-repeat="adminUser in ProjectDetailUpdate.users[ProjectDetailUpdate.adminRole]"
                       ng-click="ProjectDetailUpdate.userProjectRemove(adminUser)">
-                    {{ adminUser.user_native_name }}
+                    {{ adminUser.user_full_name }}
                 </span>
                 <angucomplete-alt id="{{ ProjectDetailUpdate.adminRole }}"
                                   ng-click="inputMode=!inputMode"
@@ -30,7 +30,7 @@
                 <h3 class="app-title">Managers</h3>
                 <span class="added" ng-repeat="managerUser in ProjectDetailUpdate.users[ProjectDetailUpdate.managerRole]"
                       ng-click="ProjectDetailUpdate.userProjectRemove(managerUser)">
-                    {{ managerUser.user_native_name }}
+                    {{ managerUser.user_full_name }}
                 </span>
                 <angucomplete-alt id="{{ ProjectDetailUpdate.managerRole }}"
                                   ng-click="inputMode2=!inputMode2"
@@ -40,8 +40,8 @@
                                   selected-object="ProjectDetailUpdate.selectedUsersCallback"
                                   local-data="ProjectDetailUpdate.usersList"
                                   search-fields="full_name"
-                                  title-field="email"
-                                  description-field="full_name"
+                                  title-field="full_name"
+                                  description-field="email"
                                   minlength="1"
                                   clear-selected="true"
                                   input-changed="ProjectDetailUpdate.userSearchInputChanged"
