@@ -32,19 +32,20 @@
         var vm = this;
         usersService.getCurrentUser().then(function(user) {
           /*jshint camelcase: false */
-          customerPermissionsService.userHasCustomerRole(user.username, 'owner').then(function(hasRole) {
-            vm.canSeePlans = hasRole;
+          customerPermissionsService.userHasCustomerRole(user.username, 'owner', $stateParams.uuid).then(
+            function(hasRole) {
+              vm.canSeePlans = hasRole;
 
-            if (vm.canSeePlans || user.is_staff) {
-              customersService.getCustomer($stateParams.uuid).$promise.then(function(customer) {
-                vm.customer = customer;
-                vm.initCurrentPlan(customer);
-              });
-              vm.getList();
-            } else {
-              $state.go('pageNotFound');
-            }
-          });
+              if (vm.canSeePlans || user.is_staff) {
+                customersService.getCustomer($stateParams.uuid).$promise.then(function(customer) {
+                  vm.customer = customer;
+                  vm.initCurrentPlan(customer);
+                });
+                vm.getList();
+              } else {
+                // $state.go('pageNotFound');
+              }
+            });
         });
       },
 
