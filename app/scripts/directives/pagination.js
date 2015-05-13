@@ -36,10 +36,22 @@
           var firstPage,
             lastPage,
             pagesRange,
-            interval = 5;
+            interval = 2;
 
           firstPage = currentPage <= interval ? 1 : currentPage - interval;
           lastPage = currentPage > num - interval ? num : currentPage + interval;
+          if (currentPage >= num - interval) {
+            var finishFirstPage = firstPage - (interval - (num - currentPage));
+            firstPage = finishFirstPage > 0
+              ? finishFirstPage
+              : (finishFirstPage + 1 > 0 ? finishFirstPage + 1 : firstPage);
+          }
+          if (currentPage <= interval) {
+            var startLastPage = lastPage + (interval - currentPage) + 1;
+            lastPage = startLastPage <= num
+              ? startLastPage
+              : (startLastPage - 1 <= num ? startLastPage - 1 : lastPage);
+          }
           pagesRange = [];
           for (var i = firstPage; i <= lastPage; i++) {
             pagesRange.push(i);
