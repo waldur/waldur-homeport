@@ -1,10 +1,10 @@
-<div ng-controller="ProjectDetailUpdateController as controller">
+<div ng-controller="ProjectDetailUpdateController as ProjectDetailUpdate">
 
     <div class="profile-view">
         <section class="content">
-            <h2 class="app-title">{{ controller.project.name }}</h2>
+            <h2 class="app-title">{{ ProjectDetailUpdate.project.name }}</h2>
             <div>
-                <a ui-sref="customers.details({uuid: controller.project.customer.uuid})">{{ controller.project.customer.name }}</a>
+                <a ui-sref="customers.details({uuid: ProjectDetailUpdate.project.customer.uuid})">{{ ProjectDetailUpdate.project.customer.name }}</a>
             </div>
         </section>
         <section class="actions">
@@ -13,9 +13,6 @@
                 <ul class="actions-dropdown" ng-show="openActions">
                     <li>
                         <a class="button-simple">Edit</a>
-                    </li>
-                    <li>
-                        <a ui-sref="projects.add-users({uuid: controller.project.uuid})" class="button-simple">Add user</a>
                     </li>
                     <li>
                         <a class="button-simple">Archive</a>
@@ -29,33 +26,33 @@
     </div>
 
     <ul class="tabs-nav">
-        <li ng-class="{'active': controller.activeTab === 'eventlog'}"
-            ng-click="controller.activeTab = 'eventlog'">
+        <li ng-class="{'active': ProjectDetailUpdate.activeTab === 'eventlog'}"
+            ng-click="ProjectDetailUpdate.activeTab = 'eventlog'">
             Events
         </li>
-        <li ng-class="{'active': controller.activeTab === 'resources'}"
-            ng-click="controller.activeTab = 'resources'">
+        <li ng-class="{'active': ProjectDetailUpdate.activeTab === 'resources'}"
+            ng-click="ProjectDetailUpdate.activeTab = 'resources'">
             Resources
         </li>
-        <li ng-class="{'active': controller.activeTab === 'users'}"
-            ng-click="controller.activeTab = 'users'">
+        <li ng-class="{'active': ProjectDetailUpdate.activeTab === 'users'}"
+            ng-click="ProjectDetailUpdate.activeTab = 'users';ProjectDetailUpdate.activateUserTab();">
             Users
         </li>
     </ul>
 
-    <sectin class="tabs-content" ng-switch="controller.activeTab">
+    <sectin class="tabs-content" ng-switch="ProjectDetailUpdate.activeTab">
         <div class="tab" id="eventlog"
-            ng-class="{'tab-active': controller.activeTab === 'eventlog'}"
+            ng-class="{'tab-active': ProjectDetailUpdate.activeTab === 'eventlog'}"
             ng-switch-when="eventlog">
             <div ui-view="tabEventlog"></div>
         </div>
         <div class="tab" id="projects"
-            ng-class="{'tab-active': controller.activeTab === 'resources'}"
+            ng-class="{'tab-active': ProjectDetailUpdate.activeTab === 'resources'}"
             ng-switch-when="resources">
             <div ui-view="tabResources"></div>
         </div>
         <div class="tab" id="users"
-            ng-class="{'tab-active': controller.activeTab === 'users'}"
+            ng-class="{'tab-active': ProjectDetailUpdate.activeTab === 'users'}"
             ng-switch-when="users">
             <div ui-view="tabUsers"></div>
         </div>

@@ -15,8 +15,10 @@
         if (customerUUID) {
           /*jshint camelcase: false */
           filter.customer_uuid = customerUUID;
+          this.filterByCustomer = false;
+        } else {
+          this.filterByCustomer = true;
         }
-
 
         this.getList(filter).then(function(permissions) {
           for (var i = 0; i < permissions.length; i++) {
@@ -31,6 +33,7 @@
 
         return deferred.promise;
       }
+
     });
     return new ServiceClass();
   }

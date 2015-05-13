@@ -6,7 +6,7 @@ var auth = require('../helpers/auth.js'),
       project: 'bells.org',
       service: 'Stratus',
       template: 'CentOS 7 64-bit',
-      flavor: 'RAM: 512',
+      flavor: 'RAM: 0.5 GB',
       customer: 'Ministry of Bells'
     },
     {
@@ -14,7 +14,7 @@ var auth = require('../helpers/auth.js'),
       project: 'whistles.org',
       service: 'Cumulus',
       template: 'Windows 3.11 jWxL',
-      flavor: 'RAM: 4096',
+      flavor: 'RAM: 4 GB',
       customer: 'Ministry of Whistles'
     },
   ];

@@ -19,6 +19,7 @@
 
 (function() {
   angular.module('ncsaas').constant('USERPROJECTROLE', {
-    admin: 'admin'
+    admin: 'admin',
+    manager: 'manager'
   });
 })();
