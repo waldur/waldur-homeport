@@ -419,44 +419,6 @@ angular
         auth: true
       })
 
-      .state('users.add-to-project', {
-        url: ':uuid/add-to-project',
-        views: {
-          'appContent': {
-            templateUrl: 'views/user/add-to-project.html',
-          },
-          'appHeader': {
-            templateUrl: 'views/partials/app-header.html',
-          },
-          'appFooter': {
-            templateUrl: 'views/partials/app-footer.html',
-          }
-        },
-        resolve: {
-          authenticated: authCheck
-        },
-        auth: true
-      })
-
-      .state('users.remove-from-project', {
-        url: ':uuid/remove-from-project',
-        views: {
-          'appContent': {
-            templateUrl: 'views/user/remove-from-project.html',
-          },
-          'appHeader': {
-            templateUrl: 'views/partials/app-header.html',
-          },
-          'appFooter': {
-            templateUrl: 'views/partials/app-footer.html',
-          }
-        },
-        resolve: {
-          authenticated: authCheck
-        },
-        auth: true
-      })
-
       .state('resources', {
         url: '/resources/',
         abstract: true,
