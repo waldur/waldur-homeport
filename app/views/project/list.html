@@ -144,6 +144,7 @@
                                     <a href="">{{ resource.name }}</a>
                                 </section>
                                 <section>
+                                    <span ng-if="resource.external_ips.length == 0"><i>No access info</i></span>
                                     <span ng-repeat="access in resource.access_information">{{ access }}</span>
                                 </section>
                             </li>

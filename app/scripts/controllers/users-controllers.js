@@ -5,14 +5,16 @@
     .controller('UserListController', [
       '$rootScope',
       'usersService',
+      'projectPermissionsService',
       UserListController
     ]);
 
-  function UserListController($location, usersService, $rootScope) {
+  function UserListController($location, usersService, projectPermissionsService, $rootScope) {
     var vm = this;
 
     vm.showgroup = false;
     vm.list = [];
+    vm.userProjects = {};
 
     usersService.getList().then(function(response) {
       vm.list = response;
@@ -25,6 +27,24 @@
 
       user.$delete(function() {
         vm.list.splice(index, 1);
+      });
+    }
+
+    function getProjectsForUser(username, page) {
+      var filter = {
+        username:username
+      };
+      vm.userProjects[username] = {data:null};
+      page = page || 1;
+      projectPermissionsService.page = page;
+      projectPermissionsService.pageSize = 5;
+      vm.projectUsers[username].page = page;
+      projectPermissionsService.filterByCustomer = false;
+      projectPermissionsService.getList(filter).then(function(response) {
+        vm.projectUsers[username].data = response;
+        vm.projectUsers[username].pages = projectPermissionsService.pages;
+        $scope.$broadcast('mini-pagination:getNumberList', vm.userProjects[username].pages,
+          page, getProjectsForUser, 'projects', uuid);
       });
     }
 

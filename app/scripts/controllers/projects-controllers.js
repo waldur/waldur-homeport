@@ -43,7 +43,7 @@
       vm.projectUsers[uuid] = {data:null};
       page = page || 1;
       projectPermissionsService.page = page;
-      projectPermissionsService.pageSize = 2;
+      projectPermissionsService.pageSize = 5;
       vm.projectUsers[uuid].page = page;
       projectPermissionsService.filterByCustomer = false;
       projectPermissionsService.getList(filter).then(function(response) {
@@ -61,7 +61,7 @@
       vm.projectResources[uuid] = {data:null};
       page = page || 1;
       resourcesService.page = page;
-      resourcesService.pageSize = 2;
+      resourcesService.pageSize = 5;
       vm.projectResources[uuid].page = page;
       resourcesService.filterByCustomer = false;
       resourcesService.getList(filter).then(function(response) {
