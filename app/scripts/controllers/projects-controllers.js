@@ -123,12 +123,15 @@
   angular.module('ncsaas')
     .controller('ProjectDetailUpdateController', [
       '$stateParams',
-      '$rootScope',
       'projectsService',
+      'projectPermissionsService',
+      'USERPROJECTROLE',
+      'usersService',
       ProjectDetailUpdateController
     ]);
 
-  function ProjectDetailUpdateController($stateParams, $rootScope, projectsService) {
+  function ProjectDetailUpdateController(
+    $stateParams, projectsService, projectPermissionsService, USERPROJECTROLE, usersService) {
     var vm = this;
 
     vm.activeTab = 'eventlog';
@@ -137,6 +140,89 @@
       vm.project = response;
     });
     vm.update = update;
+
+    // users tab
+    vm.adminRole = USERPROJECTROLE.admin;
+    vm.managerRole = USERPROJECTROLE.manager;
+    vm.users = {};
+    vm.users[vm.adminRole] = [];
+    vm.users[vm.managerRole] = [];
+    vm.activateUserTab = activateUserTab;
+    vm.usersList = [];
+    vm.userSearchInputChanged = userSearchInputChanged;
+    vm.selectedUsersCallback = selectedUsersCallback;
+    vm.user = null;
+    vm.userProjectRemove = userProjectRemove;
+
+    function getUserList(filter) {
+      usersService.getList(filter).then(function(response) {
+        vm.usersList = response;
+      });
+    }
+
+    function activateUserTab() {
+      if (vm.users[vm.adminRole].length === 0) {
+        getUsers(vm.adminRole);
+      }
+      if (vm.users[vm.managerRole].length === 0) {
+        getUsers(vm.managerRole);
+      }
+      getUserList();
+    }
+
+    function getUsers(role) {
+      var filter = {
+        role: role,
+        project: $stateParams.uuid
+      };
+      projectPermissionsService.getList(filter).then(function(response) {
+        vm.users[role] = response;
+      });
+    }
+
+    function userSearchInputChanged(searchText) {
+      getUserList({full_name: searchText});
+    }
+
+    function selectedUsersCallback(selected) {
+      if (selected) {
+        vm.user = selected.originalObject;
+        addUser(this.id);
+      }
+    }
+
+    function addUser(role) {
+      var instance = projectPermissionsService.$create();
+      instance.user = vm.user.url;
+      instance.project = vm.project.url;
+      instance.role = role;
+      instance.$save(
+        function() {
+          getUsers(role);
+        },
+        function(response) {
+          alert(response.data.non_field_errors);
+        }
+      );
+    }
+
+    function userProjectRemove(userProject) {
+      var role = userProject.role;
+      var index = vm.users[role].indexOf(userProject);
+      var confirmDelete = confirm('Confirm user deletion?');
+      if (confirmDelete) {
+        projectPermissionsService.$delete(userProject.pk).then(
+          function() {
+            vm.users[role].splice(index, 1);
+          },
+          function(response) {
+            alert(response.data.detail);
+          }
+        );
+      } else {
+        alert('User was not deleted.');
+      }
+    }
 
     function update() {
       vm.project.$update();

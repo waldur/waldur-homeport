@@ -5,21 +5,47 @@
         <div class="col full">
             <div class="add-or-remove">
                 <h3 class="app-title">Administrator</h3>
-                <span class="added">Jack Pollack</span>
-                <span class="added">John Doe</span>
-                <input type="text" class="add-label" placeholder="Add"
-                    ng-click="inputMode=!inputMode"
-                    ng-class="{'input': inputMode}">
+                <span class="added" ng-repeat="adminUser in ProjectDetailUpdate.users[ProjectDetailUpdate.adminRole]"
+                      ng-click="ProjectDetailUpdate.userProjectRemove(adminUser)">
+                    {{ adminUser.user_native_name }}
+                </span>
+                <angucomplete-alt id="{{ ProjectDetailUpdate.adminRole }}"
+                                  ng-click="inputMode=!inputMode"
+                                  placeholder="Add"
+                                  pause="100"
+                                  type="text"
+                                  selected-object="ProjectDetailUpdate.selectedUsersCallback"
+                                  local-data="ProjectDetailUpdate.usersList"
+                                  search-fields="full_name"
+                                  title-field="full_name"
+                                  description-field="email"
+                                  minlength="1"
+                                  clear-selected="true"
+                                  input-changed="ProjectDetailUpdate.userSearchInputChanged"
+                                  input-class="add-label {{ inputMode ? 'input': '' }}"></angucomplete-alt>
             </div>
         </div>
-                <div class="col full">
+        <div class="col full">
             <div class="add-or-remove">
                 <h3 class="app-title">Managers</h3>
-                <span class="added">Jack Pollack</span>
-                <span class="added">John Doe</span>
-                <input type="text" class="add-label" placeholder="Add"
-                    ng-click="inputMode2=!inputMode2"
-                    ng-class="{'input': inputMode2}">
+                <span class="added" ng-repeat="managerUser in ProjectDetailUpdate.users[ProjectDetailUpdate.managerRole]"
+                      ng-click="ProjectDetailUpdate.userProjectRemove(managerUser)">
+                    {{ managerUser.user_native_name }}
+                </span>
+                <angucomplete-alt id="{{ ProjectDetailUpdate.managerRole }}"
+                                  ng-click="inputMode2=!inputMode2"
+                                  placeholder="Add"
+                                  pause="100"
+                                  type="text"
+                                  selected-object="ProjectDetailUpdate.selectedUsersCallback"
+                                  local-data="ProjectDetailUpdate.usersList"
+                                  search-fields="full_name"
+                                  title-field="email"
+                                  description-field="full_name"
+                                  minlength="1"
+                                  clear-selected="true"
+                                  input-changed="ProjectDetailUpdate.userSearchInputChanged"
+                                  input-class="add-label {{ inputMode2 ? 'input': '' }}"></angucomplete-alt>
             </div>
         </div>
     </div>
