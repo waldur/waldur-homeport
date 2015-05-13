@@ -135,16 +135,16 @@
                                     <a class="list-sort">Name</a>
                                 </section>
                                 <section>
-                                    <div class="list-sort">Creation date</div>
+                                    <div class="list-sort">Role</div>
                                 </section>
                             </li>
                             <li class="item-list" ng-repeat="project in UserList.userProjects[user.username].data">
                                 <section>
-                                    <!--TODO add ui-sref="projects.details({uuid: project.project_uuid})" -->
-                                    <a >{{ project.project_name }}</a>
+                                    <!--TODO: add ui-sref="projects.details({uuid: project.project_uuid})" once the endpoint supports it -->
+                                    <a href="#">{{ project.project_name }}</a>
                                 </section>
                                 <section>
-                                    {{ project.creation_date }}
+                                    {{ project.role }}
                                 </section>
                             </li>
                         </ul>

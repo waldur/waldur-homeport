@@ -166,6 +166,9 @@
                                     <a class="list-sort">Name</a>
                                 </section>
                                 <section>
+                                    <div class="list-sort">Role</div>
+                                </section>
+                                <section>
                                     <div class="list-sort">Username</div>
                                 </section>
 
@@ -175,7 +178,11 @@
                                     <div class="avatar">
                                         <img gravatar-src="user.email" gravatar-size="100">
                                     </div>
-                                    <a ui-sref="users({uuid: user.uuid})">{{ user.user_full_name }}</a>
+
+                                    <a ui-sref="users.details({uuid: user.user_uuid})">{{ user.user_full_name }}</a>
+                                </section>
+                                 <section>
+                                    <span>{{ user.role }}</span>
                                 </section>
                                 <section>
                                     <span>{{ user.user_username }}</span>
