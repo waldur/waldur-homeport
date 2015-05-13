@@ -3,12 +3,3 @@
     transition-duration: $duration;
     transition-timing-function: $timing;
 }
-
-@keyframes spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
