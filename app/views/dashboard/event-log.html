@@ -23,12 +23,12 @@
                         <span class="event" ng-if="event.event_type === EventList.EVENTTYPE.auth_logged_in_with_username">
                             User <a ui-sref="users.details({uuid: event.user_uuid})" class="name">
                             <span class="name">{{ event.user_full_name }}</span></a>
-                            has signed in with a username/password.
+                            has signed in with a username/password
                         </span>
 
                         <span class="event" ng-if="event.event_type === EventList.EVENTTYPE.role_granted">
                             <!-- TODO: replace affected_user_username to affected_user_full_name once the data is in LA -->
-                            User <a ui-sref="users.details({uuid: event.affected_user_uuid})">{{ event.affected_user_username }}</a>
+                            User <a ui-sref="users.details({uuid: event.affected_user_uuid})" class="name">{{ event.affected_user_username }}</a>
                             has gained role of {{ event.role_name }} in {{ event.structure_type }}
                             <a ui-sref="projects.details({uuid: event.project_uuid})"
                                ng-if="event.structure_type === EventList.EVENTTYPE.role_granted_structure_type_project">

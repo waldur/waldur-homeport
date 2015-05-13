@@ -89,7 +89,7 @@
                     </div>
                     <div class="expand">
                         <a class="plus-minus"
-                        ng-click="expandItem=!expandItem"
+                        ng-click="expandItem=!expandItem; UserList.showMore(user)"
                         ng-class="{'plus': !expandItem, 'minus active': expandItem}"></a>
                     </div>
                     <div class="avatar">
@@ -124,23 +124,10 @@
                     <section>
                         <header>
                             <h4 class="item-title">Connected projects</h4>
-                            <ul class="inline-pagination">
-                                <li>
-                                    <a href="">1</a>
-                                </li>
-                                <li>
-                                    <a href="" class="current">2</a>
-                                </li>
-                                <li>
-                                    <a href="">3</a>
-                                </li>
-                                <li>
-                                    <span>...</span>
-                                </li>
-                                <li>
-                                    <a href="">5</a>
-                                </li>
-                            </ul>
+                            <minipagination page-models="UserList.userProjects"
+                                            page-model-id="user.username"
+                                            page-change="UserList.getProjectsForUser"
+                                            page-entity-name="projects"></minipagination>
                         </header>
                         <ul>
                             <li class="item-list">
@@ -148,15 +135,16 @@
                                     <a class="list-sort">Name</a>
                                 </section>
                                 <section>
-                                    <div class="list-sort">Creation date</div>
+                                    <div class="list-sort">Role</div>
                                 </section>
                             </li>
-                            <li class="item-list">
+                            <li class="item-list" ng-repeat="project in UserList.userProjects[user.username].data">
                                 <section>
-                                    <a href="">Project</a>
+                                    <!--TODO: add ui-sref="projects.details({uuid: project.project_uuid})" once the endpoint supports it -->
+                                    <a href="#">{{ project.project_name }}</a>
                                 </section>
                                 <section>
-                                    Creation date
+                                    {{ project.role }}
                                 </section>
                             </li>
                         </ul>
