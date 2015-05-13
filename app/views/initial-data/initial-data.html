@@ -18,18 +18,11 @@
                 <div class="short-form full">
                     <div class="form-row inputs-centered">
                         <div class="col label">
-                            <label for="">Your name:</label>
+                            <label for="">Your name: </label>
                         </div>
                         <div class="col input input-full">
-                            <input ng-model="InitialData.user.full_name" type="text" placeholder="Full Name" required>
-                            <div class="error arrow-up" ng-show="InitialData.errors.full_name">
-                                <ul class="error-list">
-                                    <li ng-repeat="error in InitialData.errors.full_name">{{ error }}</li>
-                                </ul>
-                            </div>
+                            {{ InitialData.user.full_name }}
                         </div>
-                    </div>
-                    <div class="form-row inputs-centered">
                         <div class="col label">
                             <label for="">Your email:</label>
                         </div>
