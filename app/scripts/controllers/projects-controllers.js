@@ -3,11 +3,12 @@
 (function() {
   angular.module('ncsaas')
     .controller('ProjectListController',
-      ['$rootScope', 'projectsService', 'projectPermissionsService', 'resourcesService', ProjectListController]);
+      ['$rootScope', 'projectsService', 'projectPermissionsService', 'resourcesService', '$scope', ProjectListController]);
 
-  function ProjectListController($rootScope, projectsService, projectPermissionsService, resourcesService) {
+  function ProjectListController($rootScope, projectsService, projectPermissionsService, resourcesService, $scope) {
     var vm = this;
 
+    vm.getUsersForProject = getUsersForProject;
     vm.list = {};
     vm.deleteProject = deleteProject;
     vm.service = projectsService;
@@ -18,6 +19,9 @@
 
     vm.showMore = showMore;
 
+    vm.projectUsers = {};
+    vm.projectResources = {};
+
     $rootScope.$on('currentCustomerUpdated', function() {
       projectsService.page = 1;
       activate();
@@ -25,17 +29,47 @@
 
     function showMore(project) {
       if (!project.users) {
-        projectPermissionsService.filterByCustomer = false;
-        projectPermissionsService.getList({project:project.uuid}).then(function(reponse) {
-          project.users = reponse;
-        });
+        getUsersForProject(project.uuid);
       }
       if (!project.resources) {
-        resourcesService.filterByCustomer = false;
-        resourcesService.getList({project:project.uuid}).then(function(reponse) {
-          project.resources = reponse;
-        });
+        getResourcesForProject(project.uuid);
       }
+    }
+
+    function getUsersForProject(uuid, page) {
+      var filter = {
+        project:uuid
+      };
+      vm.projectUsers[uuid] = {data:null};
+      page = page || 1;
+      projectPermissionsService.page = page;
+      projectPermissionsService.pageSize = 5;
+      vm.projectUsers[uuid].page = page;
+      projectPermissionsService.filterByCustomer = false;
+      projectPermissionsService.getList(filter).then(function(response) {
+        vm.projectUsers[uuid].data = response;
+        vm.projectUsers[uuid].pages = projectPermissionsService.pages;
+        $scope.$broadcast('mini-pagination:getNumberList', vm.projectUsers[uuid].pages,
+          page, getUsersForProject, 'users', uuid);
+      });
+    }
+
+    function getResourcesForProject(uuid, page) {
+      var filter = {
+        project:uuid
+      };
+      vm.projectResources[uuid] = {data:null};
+      page = page || 1;
+      resourcesService.page = page;
+      resourcesService.pageSize = 5;
+      vm.projectResources[uuid].page = page;
+      resourcesService.filterByCustomer = false;
+      resourcesService.getList(filter).then(function(response) {
+        vm.projectResources[uuid].data = response;
+        vm.projectResources[uuid].pages = resourcesService.pages;
+        $scope.$broadcast('mini-pagination:getNumberList', vm.projectResources[uuid].pages,
+          page, getResourcesForProject, 'resources', uuid);
+      });
     }
 
     function deleteProject(project) {

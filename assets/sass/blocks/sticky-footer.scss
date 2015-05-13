@@ -10,4 +10,10 @@
 
 .sticky-footer {
     @include property(height, 50);
+    @include bp(xs) {
+        height: auto;
+    } // xs
+    @include bp(sm) {
+        height: auto;
+    } // sm
 } // sticky-footer

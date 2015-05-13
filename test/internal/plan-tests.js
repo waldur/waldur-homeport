@@ -12,7 +12,7 @@ describe('Test plans ordering for ' + user.username + ':', function() {
   });
 
   it('I should be able to go to customers manage page', function() {
-    element(by.cssContainingText('a.customer-context.drop-active span.active-context', 'Active organization')).click();
+    element(by.cssContainingText('a.customer-context.drop-active span.active-context', 'Active customer')).click();
 
     element(by.cssContainingText('li.dropdown.customers > ul > li > a', 'Manage customers')).click();
     expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/customers/');

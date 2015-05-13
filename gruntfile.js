@@ -173,9 +173,31 @@ module.exports = function(grunt) {
                       src: ['angular-moment.js'],
                       dest: 'app/static/js/angular/',
                       filter: 'isFile'
+                    },
+                    {
+                      expand: true,
+                      cwd: 'bower_components/angular-spinner',
+                      src: ['angular-spinner.min.js'],
+                      dest: 'app/static/js/angular/',
+                      filter: 'isFile'
+                    },
+                    {
+                      expand: true,
+                      cwd: 'bower_components/spin.js',
+                      src: ['spin.js'],
+                      dest: 'app/static/js/',
+                      filter: 'isFile'
+                    },
+                    {
+                      expand: true,
+                      cwd: 'bower_components/angular-loading-spinner',
+                      src: ['angular-loading-spinner.js'],
+                      dest: 'app/static/js/angular/',
+                      filter: 'isFile'
                     }
-                ],
-            },
+
+                ]
+            }
         },
 
         protractor_webdriver: {

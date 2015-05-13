@@ -11,7 +11,8 @@ angular
     'duScroll',
     'ui.gravatar',
     'angucomplete-alt',
-    'angularMoment'])
+    'angularMoment',
+    'ngLoadingSpinner'])
   // urls
   .config(function($stateProvider, $urlRouterProvider) {
 
