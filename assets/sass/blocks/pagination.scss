@@ -1,6 +1,7 @@
 .pagination {
     width: 100%;
     text-align: center;
+    @include property(margin-bottom, 20);
     ul {
         @include clear-list;
         li {

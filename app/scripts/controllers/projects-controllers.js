@@ -128,27 +128,27 @@
     vm.project = projectsService.$create();
     vm.save = save;
 
-    currentStateService.getCustomer().then(function(customer) {
-      vm.project.customer = customer.url;
-    });
-
     function save() {
       // TODO: refactor this function to use named urls and uuid field instead - SAAS-108
-      vm.project.$save(function() {
-        var url = vm.project.url,
-          array = url.split ('/').filter(function(el) {
-            return el.length !== 0;
-          }),
-          uuidNew = array[4];
-        servicesService.filterByCustomer = false;
-        servicesService.getList().then(function(response) {
-          for (var i = 0; response.length > i; i++) {
-            projectCloudMembershipsService.addRow(vm.project.url, response[i].url);
-          }
+      currentStateService.getCustomer().then(function(customer) {
+        vm.project.customer = customer.url;
+
+        vm.project.$save(function() {
+          var url = vm.project.url,
+            array = url.split ('/').filter(function(el) {
+              return el.length !== 0;
+            }),
+            uuidNew = array[4];
+          servicesService.filterByCustomer = false;
+          servicesService.getList().then(function(response) {
+            for (var i = 0; response.length > i; i++) {
+              projectCloudMembershipsService.addRow(vm.project.url, response[i].url);
+            }
+          });
+          $state.go('projects.details', {uuid:uuidNew});
+        }, function(response) {
+          vm.errors = response.data;
         });
-        $state.go('projects.details', {uuid:uuidNew});
-      }, function(response) {
-        vm.errors = response.data;
       });
     }
 
@@ -200,6 +200,7 @@
     vm.usersList = [];
     vm.userSearchInputChanged = userSearchInputChanged;
     vm.selectedUsersCallback = selectedUsersCallback;
+    vm.userProjectRemove = userProjectRemove;
 
     getUserList();
     getProjectUsers();
@@ -294,6 +295,23 @@
       var index = vm.usersInvited.indexOf(user);
 
       vm.usersInvited.splice(index, 1);
+    }
+
+    function userProjectRemove(userProject) {
+      var index = vm.users.indexOf(userProject);
+      var confirmDelete = confirm('Confirm user deletion?');
+      if (confirmDelete) {
+        projectPermissionsService.$delete(userProject.pk).then(
+          function() {
+            vm.users.splice(index, 1);
+          },
+          function(response) {
+            alert(response.data.detail);
+          }
+        );
+      } else {
+        alert('User was not deleted.');
+      }
     }
 
   }

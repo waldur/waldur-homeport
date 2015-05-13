@@ -10,7 +10,8 @@ angular
     'ngResource',
     'duScroll',
     'ui.gravatar',
-    'angucomplete-alt'])
+    'angucomplete-alt',
+    'angularMoment'])
   // urls
   .config(function($stateProvider, $urlRouterProvider) {
 
@@ -20,7 +21,7 @@ angular
       .state('home', {
         url: '/',
         abstract: true,
-        templateUrl: 'views/home/base.html',
+        templateUrl: 'views/partials/base.html',
         resolve: {
           authenticated: notLoggedCheck
         }
@@ -29,14 +30,11 @@ angular
       .state('home.home', {
         url: '',
         views: {
-          'siteHeader@home' : {
+          'appHeader@home' : {
             templateUrl: 'views/partials/site-header.html',
           },
-          'siteContent@home' : {
+          'appContent@home' : {
             templateUrl: 'views/home/home.html',
-          },
-          'siteFooter@home' : {
-            templateUrl: 'views/partials/app-footer.html',
           }
         },
         resolve: {
@@ -48,14 +46,11 @@ angular
         url: 'login/',
         controller: 'AuthController',
         views: {
-          'siteHeader@home' : {
+          'appHeader@home' : {
             templateUrl: 'views/partials/site-header.html',
           },
-          'siteContent@home' : {
+          'appContent@home' : {
             templateUrl: 'views/home/login.html',
-          },
-          'siteFooter@home' : {
-            templateUrl: 'views/partials/app-footer.html',
           }
         },
         resolve: {
@@ -65,21 +60,18 @@ angular
 
       .state('initialdata', {
         url: '/initial-data/',
-        templateUrl: 'views/initial-data/base.html',
+        templateUrl: 'views/partials/base.html',
         abstract: true
       })
 
       .state('initialdata.view', {
         url: '',
         views: {
-          'siteHeader@initialdata' : {
+          'appHeader@initialdata' : {
             templateUrl: 'views/partials/site-header-disabled.html',
           },
-          'siteContent@initialdata' : {
+          'appContent@initialdata' : {
             templateUrl: 'views/initial-data/initial-data.html',
-          },
-          'siteFooter@initialdata' : {
-            templateUrl: 'views/partials/app-footer.html',
           }
         },
         resolve: {
@@ -90,7 +82,7 @@ angular
       .state('dashboard', {
         url: '/dashboard/',
         abstract: true,
-        templateUrl: 'views/dashboard/base.html',
+        templateUrl: 'views/partials/base.html',
       })
 
       .state('dashboard.eventlog', {
@@ -101,9 +93,6 @@ angular
           },
           'appContent@dashboard' : {
             templateUrl: 'views/dashboard/event-log.html',
-          },
-          'appFooter@dashboard' : {
-            templateUrl: 'views/partials/app-footer.html',
           }
         },
         resolve: {
@@ -115,7 +104,7 @@ angular
       .state('projects', {
         url: '/projects/',
         abstract: true,
-        templateUrl: 'views/project/base.html',
+        templateUrl: 'views/partials/base.html',
       })
 
       .state('projects.list', {
@@ -126,9 +115,6 @@ angular
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',
-          },
-          'appFooter': {
-            templateUrl: 'views/partials/app-footer.html',
           }
         },
         resolve: {
@@ -145,9 +131,6 @@ angular
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',
-          },
-          'appFooter': {
-            templateUrl: 'views/partials/app-footer.html',
           }
         },
         resolve: {
@@ -162,9 +145,6 @@ angular
           'appContent': {
             templateUrl: 'views/project/details.html',
           },
-          'controlsList@projects.details' : {
-            templateUrl: 'views/partials/controls-line.html',
-          },
           'tabEventlog@projects.details' : {
             templateUrl: 'views/project/tab-eventlog.html',
           },
@@ -176,9 +156,6 @@ angular
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',
-          },
-          'appFooter': {
-            templateUrl: 'views/partials/app-footer.html',
           }
         },
         resolve: {
@@ -195,9 +172,6 @@ angular
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',
-          },
-          'appFooter': {
-            templateUrl: 'views/partials/app-footer.html',
           }
         },
         resolve: {
@@ -214,9 +188,6 @@ angular
             },
           'appHeader': {
               templateUrl: 'views/partials/app-header.html'
-            },
-          'appFooter': {
-              templateUrl: 'views/partials/app-footer.html'
             }
         }
 
@@ -225,7 +196,7 @@ angular
       .state('services', {
         url: '/services/',
         abstract: true,
-        templateUrl: 'views/service/base.html'
+        templateUrl: 'views/partials/base.html',
       })
 
       .state('services.list', {
@@ -236,9 +207,6 @@ angular
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html'
-          },
-          'appFooter': {
-            templateUrl: 'views/partials/app-footer.html'
           }
         },
         resolve: {
@@ -255,9 +223,6 @@ angular
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html'
-          },
-          'appFooter': {
-            templateUrl: 'views/partials/app-footer.html'
           }
         },
         resolve: {
@@ -283,9 +248,6 @@ angular
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html'
-          },
-          'appFooter': {
-            templateUrl: 'views/partials/app-footer.html'
           }
         },
         resolve: {
@@ -297,7 +259,7 @@ angular
       .state('profile', {
         url: '/profile/',
         abstract: true,
-        templateUrl: 'views/profile/base.html',
+        templateUrl: 'views/partials/base.html',
       })
 
       .state('profile.details', {
@@ -320,9 +282,6 @@ angular
           },
           'tabManageUser@profile.details': {
             templateUrl: 'views/profile/tab-manage.html',
-          },
-          'appFooter': {
-            templateUrl: 'views/partials/app-footer.html',
           }
         },
         resolve: {
@@ -339,9 +298,6 @@ angular
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',
-          },
-          'appFooter': {
-            templateUrl: 'views/partials/app-footer.html',
           }
         },
         resolve: {
@@ -353,7 +309,7 @@ angular
       .state('customers', {
         url: '/customers/',
         abstract: true,
-        templateUrl: 'views/customer/base.html',
+        templateUrl: 'views/partials/base.html',
       })
 
       .state('customers.list', {
@@ -364,9 +320,6 @@ angular
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',
-          },
-          'appFooter': {
-            templateUrl: 'views/partials/app-footer.html',
           }
         },
         resolve: {
@@ -392,9 +345,6 @@ angular
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',
-          },
-          'appFooter': {
-            templateUrl: 'views/partials/app-footer.html',
           }
         },
         resolve: {
@@ -411,9 +361,6 @@ angular
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',
-          },
-          'appFooter': {
-            templateUrl: 'views/partials/app-footer.html',
           }
         },
         resolve: {
@@ -430,9 +377,6 @@ angular
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',
-          },
-          'appFooter': {
-            templateUrl: 'views/partials/app-footer.html',
           }
         },
         resolve: {
@@ -444,7 +388,7 @@ angular
       .state('users', {
         url: '/users/',
         abstract: true,
-        templateUrl: 'views/user/base.html'
+        templateUrl: 'views/partials/base.html',
       })
 
       .state('users.list', {
@@ -455,9 +399,6 @@ angular
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',
-          },
-          'appFooter': {
-            templateUrl: 'views/partials/app-footer.html',
           }
         },
         resolve: {
@@ -472,9 +413,6 @@ angular
           'appContent': {
             templateUrl: 'views/user/details.html',
           },
-          'controlsListUser@users.details' : {
-            templateUrl: 'views/partials/controls-line-user.html',
-          },
           'tabEventlog@users.details': {
             templateUrl: 'views/user/tab-eventlog.html',
           },
@@ -484,14 +422,8 @@ angular
           'tabKeys@users.details': {
             templateUrl: 'views/user/tab-keys.html',
           },
-          'tabManageUser@users.details': {
-            templateUrl: 'views/user/tab-manage.html',
-          },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',
-          },
-          'appFooter': {
-            templateUrl: 'views/partials/app-footer.html',
           }
         },
         resolve: {
@@ -503,7 +435,7 @@ angular
       .state('resources', {
         url: '/resources/',
         abstract: true,
-        templateUrl: 'views/resource/base.html',
+        templateUrl: 'views/partials/base.html',
         resolve: {
           authenticated: authCheck
         }
@@ -517,9 +449,6 @@ angular
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',
-          },
-          'appFooter': {
-            templateUrl: 'views/partials/app-footer.html',
           }
         },
         resolve: {
@@ -536,9 +465,6 @@ angular
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',
-          },
-          'appFooter': {
-            templateUrl: 'views/partials/app-footer.html',
           }
         },
         resolve: {
@@ -550,7 +476,7 @@ angular
       .state('payment', {
         url: '/payment/',
         abstract: true,
-        templateUrl: 'views/payment/base.html',
+        templateUrl: 'views/partials/base.html',
       })
 
       .state('payment.checkout', {
@@ -561,9 +487,6 @@ angular
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',
-          },
-          'appFooter': {
-            templateUrl: 'views/partials/app-footer.html',
           }
         },
         resolve: {
@@ -580,9 +503,22 @@ angular
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
+        auth: true
+      })
+
+      .state('payment.mock', {
+        url: ':uuid/execute/',
+        views: {
+          'appContent': {
+            templateUrl: 'views/payment/mock.html',
           },
-          'appFooter': {
-            templateUrl: 'views/partials/app-footer.html',
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html',
           }
         },
         resolve: {

@@ -3,7 +3,8 @@ var auth = require('../helpers/auth.js'),
   user = auth.getUser('Alice'),
   customer = {'name': 'Ministry of Bells'};
 
-describe('Plans list visibility positive test for user ' + user.username + ':', function() {
+
+describe('Test plans ordering for ' + user.username + ':', function() {
 
   it('I should be able to login', function() {
     auth.login(user);
@@ -24,6 +25,20 @@ describe('Plans list visibility positive test for user ' + user.username + ':', 
     for (var i = 0; i < expectedPlans.length; i++) {
       expect(element(by.cssContainingText('span.plan-name.ng-binding', expectedPlans[i])).isPresent()).toBe(true);
     }
+  });
+
+  it('I should be able to select not current plan', function() {
+    var plan = element(by.css('.plan-item:not(.current-plan)'));
+    plan.click();
+    plan.getText().then(function(text) {
+      element(by.cssContainingText('a', 'Confirm change your Plan')).click();
+      expect(element(by.css('.plan-item.current-plan')).getText()).toBe(text);
+    });
+  });
+
+  it('I should not be able to select current plan', function() {
+    element(by.css('.plan-item.current-plan')).click();
+    expect(element(by.cssContainingText('a.disabled', 'Confirm change your Plan')).isPresent()).toBe(true);
   });
 
   it('I should be able to logout', function() {

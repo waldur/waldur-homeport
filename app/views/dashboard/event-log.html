@@ -1,20 +1,15 @@
-<div>
+<div ng-controller="EventListController as EventList">
 
     <div class="white-box">
         <ul class="sort-list">
             <li class="title">
                 <h2 class="app-title">Events</h2>
             </li>
-            <li>
-                <a class="page-size active">5</a>
-                <a class="page-size">10</a>
-                <a class="page-size">15</a>
-                <a class="page-size">20</a>
-            </li>
+            <pagesize pages-list="EventList" pages-service="EventList.service"></pagesize>
             <li class="search divid">
                 <div class="search-box">
-                    <input type="text" ng-model='UserList.searchInput' ng-keyup="UserList.search()">
-                    <button class="search-button" ng-click="UserList.search()"></button>
+                    <input type="text" ng-model='EventList.searchInput' ng-keyup="EventList.search()">
+                    <button class="search-button" ng-click="EventList.search()"></button>
                 </div>
             </li>
         </ul>
@@ -22,83 +17,80 @@
 
     <div class="white-box clear">
         <ul class="object-list">
-            <li>
+            <li ng-repeat="event in EventList.list">
                 <div class="list-item">
                     <div>
-                        <span class="event">User <a class="name">Walter</a> with full name <span class="name">Walter Lebowsky</span> authenticated successfully with username and password</span>
+                        <span class="event" ng-if="event.event_type === EventList.EVENTTYPE.auth_logged_in_with_username">
+                            User <a ui-sref="users.details({uuid: event.user_uuid})" class="name">
+                            <span class="name">{{ event.user_full_name }}</span></a>
+                            has signed in with a username/password.
+                        </span>
+
+                        <span class="event" ng-if="event.event_type === EventList.EVENTTYPE.role_granted">
+                            <!-- TODO: replace affected_user_username to affected_user_full_name once the data is in LA -->
+                            User <a ui-sref="users.details({uuid: event.affected_user_uuid})">{{ event.affected_user_username }}</a>
+                            has gained role of {{ event.role_name }} in {{ event.structure_type }}
+                            <a ui-sref="projects.details({uuid: event.project_uuid})"
+                               ng-if="event.structure_type === EventList.EVENTTYPE.role_granted_structure_type_project">
+                                {{ event.project_name }}
+                            </a>
+                            <a ui-sref="customers.details({uuid: event.customer_uuid})"
+                               ng-if="event.structure_type === EventList.EVENTTYPE.role_granted_structure_type_customer">
+                                {{ event.customer_name }}
+                            </a>
+                        </span>
+
+                        <span class="event" ng-if="event.event_type === EventList.EVENTTYPE.user_update_succeeded">
+                            User <a ui-sref="users.details({uuid: event.user_uuid})" class="name">{{ event.user_full_name }}</a>
+                            has been updated
+                        </span>
+
+                        <span class="event" ng-if="event.event_type === EventList.EVENTTYPE.project_creation_succeeded">
+                            Project
+                            <a ui-sref="projects.details({uuid: event.project_uuid})" class="name">
+                                {{ event.project_name }}
+                            </a>
+                            has been created
+                        </span>
+
+                        <span class="event" ng-if="event.event_type === EventList.EVENTTYPE.iaas_service_sync_failed">
+                            Cloud service
+                            <a ui-sref="services.details({uuid: event.cloud_account_uuid})" class="name">{{ event.cloud_account_name }}</a>
+                            has failed to sync
+                        </span>
+
+                        <span class="event" ng-if="event.event_type === EventList.EVENTTYPE.iaas_instance_creation_scheduled">
+                            Virtual machine
+                            <a class="name">{{ event.iaas_instance_name }}</a>
+                            creation has been scheduled
+                        </span>
+
+                        <span class="event" ng-if="event.event_type === EventList.EVENTTYPE.customer_creation_succeeded">
+                            Organization <a ui-sref="customers.details({uuid: event.customer_uuid})" class="name">{{ event.customer_name }}</a>
+                            has been created
+                        </span>
+
+                        <span class="event" ng-if="event.event_type === EventList.EVENTTYPE.project_group_creation_succeeded">
+                            Project group <span class="name">{{ event.project_group_name }}</span> has been created
+                        </span>
+
+                        <span class="event" ng-if="event.event_type === EventList.EVENTTYPE.customer_update_succeeded">
+                            Organization
+                            <a ui-sref="customers.details({uuid: event.customer_uuid})" class="name">{{ event.customer_name }}</a>
+                            has been updated
+                        </span>
+
+                        <span class="event" ng-if="!EventList.isTemplateTypeReady(event.event_type)">
+                            {{ event.message }}
+                        </span>
+
+                        <span am-time-ago="event['@timestamp']"></span>
+                        <!--TODO add templates for all event types-->
                     </div>
                     <div class="actions">
-                        <div class="actions-button" ng-show="!UserList.showgroup">
+                        <div class="actions-button" ng-show="!EventList.showgroup">
                             <a class="button" ng-click="openActions1=!openActions1">actions</a>
                             <ul class="actions-dropdown" ng-show="openActions1">
-                                <li>
-                                    <a class="button-simple">Some action for this type</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="list-item">
-                    <div>
-                        <span class="event">Virtual machine <a class="name">New Machine</a> creation has been scheduled.</span>
-                    </div>
-                    <div class="actions">
-                        <div class="actions-button" ng-show="!UserList.showgroup">
-                            <a class="button" ng-click="openActions2=!openActions2">actions</a>
-                            <ul class="actions-dropdown" ng-show="openActions2">
-                                <li>
-                                    <a class="button-simple">Some action for this type</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="list-item">
-                    <div>
-                        <span class="event">Instance <a class="name">OpenStack Instance</a> is already started</span>
-                    </div>
-                    <div class="actions">
-                        <div class="actions-button" ng-show="!UserList.showgroup">
-                            <a class="button" ng-click="openActions3=!openActions3">actions</a>
-                            <ul class="actions-dropdown" ng-show="openActions3">
-                                <li>
-                                    <a class="button-simple">Some action for this type</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="list-item">
-                    <div>
-                        <span class="event">Template service <span class="name">Github public repo</span> has been created.</span>
-                    </div>
-                    <div class="actions">
-                        <div class="actions-button" ng-show="!UserList.showgroup">
-                            <a class="button" ng-click="openActions4=!openActions4">actions</a>
-                            <ul class="actions-dropdown" ng-show="openActions4">
-                                <li>
-                                    <a class="button-simple">Some action for this type</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="list-item">
-                    <div>
-                        <span class="event">Backup schedule for <a class="name">New Machine</a> has been activated.</span>
-                    </div>
-                    <div class="actions">
-                        <div class="actions-button" ng-show="!UserList.showgroup">
-                            <a class="button" ng-click="openActions5=!openActions5">actions</a>
-                            <ul class="actions-dropdown" ng-show="openActions5">
                                 <li>
                                     <a class="button-simple">Some action for this type</a>
                                 </li>
@@ -111,13 +103,7 @@
     </div>
 
     <div class="pagination">
-        <ul>
-            <li><a href="#" class="current">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-        </ul>
+        <pagination pages-list="EventList" pages-service="EventList.service"></pagination>
     </div>
 
 </div>
