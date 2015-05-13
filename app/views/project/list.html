@@ -8,7 +8,7 @@
             <pagesize pages-list="ProjectList" pages-service="ProjectList.service"/></pagesize>
             <li class="search divid">
                 <div class="search-box">
-                    <input type="text" ng-model='ProjectList.searchInput' ng-keyup="ProjectList.search()">
+                    <input type="text" ng-model='ProjectList.searchInput' ng-change="ProjectList.search()">
                     <button class="search-button" ng-click="ProjectList.search()"></button>
                 </div>
             </li>
