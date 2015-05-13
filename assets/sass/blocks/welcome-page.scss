@@ -16,17 +16,45 @@
         width: 40%;
         margin-left: calc(-40% / 2);
         @include bp(xs) {
+            position: static !important;
+            margin: auto;
+            margin-top: 20px !important;
+            margin-bottom: 20px !important;
             width: 95%;
-            margin-left: calc(-95% / 2);
             .white-box {
                 @include property(margin, 10 20);
+                max-height: auto !important;
+                overflow-y: auto;
+                .decision {
+                    @include property(margin, 10 0);
+                    .button-login {
+                        @include property(padding, 8 14);
+                    } // button-login
+                } // decision
+                .button-social {
+                    @include property(padding, 8 14);
+                } // button-social
             } // white-box
         } // xs
         @include bp(sm) {
+            position: static !important;
+            margin: auto;
+            margin-top: 20px !important;
+            margin-bottom: 20px !important;
             width: 85%;
-            margin-left: calc(-85% / 2);
             .white-box {
                 @include property(margin, 10 20);
+                max-height: auto !important;
+                overflow-y: auto;
+                .decision {
+                    @include property(margin, 10 0);
+                    .button-login {
+                        @include property(padding, 8 14);
+                    } // button-login
+                } // decision
+                .button-social {
+                    @include property(padding, 8 14);
+                } // button-social
             } // white-box
         } // sm
         @include bp(md) {
