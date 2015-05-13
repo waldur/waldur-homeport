@@ -44,7 +44,7 @@
         vm.userProjects[username].data = response;
         vm.userProjects[username].pages = projectPermissionsService.pages;
         $scope.$broadcast('mini-pagination:getNumberList', vm.userProjects[username].pages,
-          page, getProjectsForUser, 'projects', uuid);
+          page, getProjectsForUser, 'projects', username);
       });
     }
 
