@@ -1,10 +1,10 @@
 .site-welcome {
     position: relative;
-    // background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzI1YTFjMyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM2NGJjNWIiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
     background: url(../images/decor-image.png);
     background-size: cover;
     overflow: hidden;
     padding-bottom: 314px;
+    @include transition(all, 0.5s, ease);
     &.login {
         height: calc(100vh - 100px);
         padding-bottom: 0;
@@ -15,6 +15,52 @@
         left: 50%;
         width: 40%;
         margin-left: calc(-40% / 2);
+        @include bp(xs) {
+            position: static !important;
+            margin: auto;
+            margin-top: 20px !important;
+            margin-bottom: 20px !important;
+            width: 95%;
+            .white-box {
+                @include property(margin, 10 20);
+                max-height: auto !important;
+                overflow-y: auto;
+                .decision {
+                    @include property(margin, 10 0);
+                    .button-login {
+                        @include property(padding, 8 14);
+                    } // button-login
+                } // decision
+                .button-social {
+                    @include property(padding, 8 14);
+                } // button-social
+            } // white-box
+        } // xs
+        @include bp(sm) {
+            position: static !important;
+            margin: auto;
+            margin-top: 20px !important;
+            margin-bottom: 20px !important;
+            width: 85%;
+            .white-box {
+                @include property(margin, 10 20);
+                max-height: auto !important;
+                overflow-y: auto;
+                .decision {
+                    @include property(margin, 10 0);
+                    .button-login {
+                        @include property(padding, 8 14);
+                    } // button-login
+                } // decision
+                .button-social {
+                    @include property(padding, 8 14);
+                } // button-social
+            } // white-box
+        } // sm
+        @include bp(md) {
+            width: 50%;
+            margin-left: calc(-50% / 2);
+        } // md
         .white-box {
             @include boxshadow(0 2 2 2, rgba(47, 47, 47, 0.23));
             max-height: calc(90vh - 100px) !important;
