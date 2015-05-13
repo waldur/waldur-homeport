@@ -5,6 +5,9 @@
         @include property(margin-bottom, 10);
         @include property(padding-bottom, 10);
     } // app-title
+    .added + .added {
+        @include property(margin-left, 10);
+    } // .added + .added
     .added {
         @include inline-middle;
         background-color: lime;
@@ -26,6 +29,9 @@
             color: rgb(182, 182, 182);
         } // &:after
     } // added
+    .angucomplete-holder {
+        @include inline-middle;
+    }
     .add-label {
         @include inline-middle;
         width: 55px;

@@ -52,7 +52,7 @@ for(var i = 0; i < testData.length; i++) {
 
 var addProjectTestData = [
   {
-    user: auth.getUser('Bob'),
+    user: auth.getUser('Walter'),
     customer: 'Ministry of Whistles'
   },
   {
@@ -71,6 +71,7 @@ for(var i = 0; i < addProjectTestData.length; i++) {
       it('I should be able to login', function() {
         auth.login(user);
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/dashboard/');
+        helpers.chooseCustomer(data.customer);
       });
 
       it('I should be able to go to "project add" page', function() {
@@ -83,7 +84,6 @@ for(var i = 0; i < addProjectTestData.length; i++) {
       });
 
       it('I should be able to add new project', function() {
-        helpers.chooseCustomer(data.customer);
         // fill name
         element(by.model('ProjectAdd.project.name')).sendKeys(projectName);
 
@@ -105,64 +105,59 @@ for(var i = 0; i < addProjectTestData.length; i++) {
   })(data, user, projectName);
 }
 
+var addUserToProjectTestData = [
+  {
+    user: auth.getUser('Walter'),
+    customer: 'Ministry of Bells',
+    adminUser: 'Alice Lebowski',
+    managerUser: 'Charlie Lebowski'
+  }
+];
 
-// TODO: Rewrite this test for new style of adding user to project
-// Notice: Same user cannot be added to the same project again and again, so we need to create new project,
-// before adding users to it
-//
-// var addUserToProjectTestData = [
-//   {
-//     user: auth.getUser('Bob'),
-//     userEmail: 'alice@example.com',
-//     userNotExistEmail: 'notexist@example.com',
-//     customer: 'Ministry of Bells'
-//   }
-// ];
+for(var i = 0; i < addUserToProjectTestData.length; i++) {
+  var data = addUserToProjectTestData[i],
+    user = data.user,
+    projectUrl;
 
-// for(var i = 0; i < addUserToProjectTestData.length; i++) {
-//   var data = addUserToProjectTestData[i],
-//     user = data.user,
-//     projectUrl;
+  (function(data, user) {
+    describe('Customer owner(' + user.username + ') should be able to add user to project:', function() {
+      it('I should be able to login', function() {
+        auth.login(user);
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/dashboard/');
+      });
 
-//   (function(data, user) {
-//     describe('Customer owner(' + user.username + ') should be able to add user to project:', function() {
-//       it('I should be able to login', function() {
-//         auth.login(user);
-//         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/dashboard/');
-//       });
+      it('I should be able to go to "users tab" at project "' + projectName + '"', function() {
+        helpers.chooseCustomer(data.customer);
+        element(by.cssContainingText('ul.nav-list.views li a', 'Projects')).click();
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/projects/');
+        element(by.model('ProjectList.searchInput')).sendKeys(projectName);
+        element(by.cssContainingText('h3.item-title', projectName)).click();
+        projectUrl = browser.getCurrentUrl();
 
-//       it('I should be able to go to "users add project" page for project "' + projectName + '"', function() {
-//         helpers.chooseCustomer(data.customer);
-//         element(by.cssContainingText('ul.nav-list.views li a', 'Projects')).click();
-//         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/projects/');
-//         element(by.model('ProjectList.searchInput')).sendKeys(projectName);
+        element(by.cssContainingText('.tabs-nav li', 'Users')).click();
+        expect(element(by.cssContainingText('.add-or-remove .app-title', 'Administrator')).isPresent()).toBe(true);
+      });
 
-//         element(by.cssContainingText('h3.item-title', projectName)).click();
-//         projectUrl = browser.getCurrentUrl();
+      it('I should be able to add user to project', function() {
+        element(by.css('#admin input')).sendKeys(data.adminUser);
+        element(by.cssContainingText('#admin .angucomplete-row .angucomplete-title', data.adminUser)).click();
+        expect(element(by.cssContainingText('.add-or-remove .added', data.adminUser)).isPresent()).toBe(true);
+        element(by.cssContainingText('.add-or-remove .added', data.adminUser)).click();
+        browser.switchTo().alert().accept();
+        expect(element(by.cssContainingText('.add-or-remove .added', data.adminUser)).isPresent()).toBe(false);
 
-//         element(by.cssContainingText('.actions-button a.button', 'actions')).click();
-//         element(by.cssContainingText('.actions-button a.button-simple', 'Add user')).click();
+        element(by.css('#manager input')).sendKeys(data.managerUser);
+        element(by.cssContainingText('#manager .angucomplete-row .angucomplete-title', data.managerUser)).click();
+        expect(element(by.cssContainingText('.add-or-remove .added', data.managerUser)).isPresent()).toBe(true);
+        element(by.cssContainingText('.add-or-remove .added', data.managerUser)).click();
+        browser.switchTo().alert().accept();
+        expect(element(by.cssContainingText('.add-or-remove .added', data.managerUser)).isPresent()).toBe(false);
+      });
 
-//         expect(element(by.cssContainingText(
-//           'h2.app-title', 'Add users to project ' + projectName)).isPresent()).toBe(true);
-//       });
-
-//       it('I should be able to add user to project', function() {
-//         element(by.model('searchStr')).sendKeys(data.userNotExistEmail);
-//         element(by.cssContainingText('a.button', 'Add user')).click();
-//         expect(element(by.cssContainingText(
-//           '.error.error-standard', data.userNotExistEmail + ' does not exist')).isPresent()).toBe(true);
-
-//         element(by.model('searchStr')).sendKeys(data.userEmail);
-//         element(by.cssContainingText('a.button', 'Add user')).click();
-//         element(by.cssContainingText('a.button-apply', 'Add to project')).click();
-
-//       });
-
-//       it('I should be able to logout', function() {
-//         auth.logout();
-//         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/');
-//       });
-//     });
-//   })(data, user);
-// }
+      it('I should be able to logout', function() {
+        auth.logout();
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/');
+      });
+    });
+  })(data, user);
+}

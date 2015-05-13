@@ -177,7 +177,7 @@ module.exports = function(grunt) {
                     {
                       expand: true,
                       cwd: 'bower_components/angular-spinner',
-                      src: ['angular-spinner.min.js'],
+                      src: ['angular-spinner.min.js', 'angular-spinner.min.js.map'],
                       dest: 'app/static/js/angular/',
                       filter: 'isFile'
                     },
