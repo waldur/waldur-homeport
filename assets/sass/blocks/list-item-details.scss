@@ -12,6 +12,14 @@
             @include property(margin-top, 0);
             @include property(padding-bottom, 10);
             border-top: none;
+            @include bp(xs) {
+                @include property(margin-top, 10);
+                @include property(padding-top, 10);
+            } // xs
+            @include bp(sm) {
+                @include property(margin-top, 10);
+                @include property(padding-top, 10);
+            } // sm
         }
         width: 50%;
         float: left;
@@ -23,18 +31,41 @@
         @include bp(xs) {
             width: 100%;
             float: none;
+            border-top: 1px solid rgb(205, 205, 205) !important;
         } // xs
         @include bp(sm) {
             width: 100%;
             float: none;
+            border-top: 1px solid rgb(205, 205, 205) !important;
         } // sm
     } // > section.half
     > section {
-        + section {
+        width: 100%;
+        @include clearfix;
+        + section:not(.half) {
             @include property(margin-top, 10);
             @include property(padding-top, 10);
             border-top: 1px solid rgb(205, 205, 205);
         }
+        + section {
+            @include property(margin-top, 10);
+            @include property(padding-top, 10);
+            @include bp(xs) {
+                border-top: 1px solid rgb(205, 205, 205) !important;
+            } // xs
+            @include bp(sm) {
+                border-top: 1px solid rgb(205, 205, 205) !important;
+            } // sm
+        }
+        &.on-mobile {
+            display: none;
+            @include bp(xs) {
+                display: block;
+            } // xs
+            @include bp(sm) {
+                display: block;
+            } // sm
+        } // on-mobile
         > header {
             @include property(margin-bottom, 10);
         } // > header
