@@ -36,8 +36,8 @@
 <div class="white-box clear" ng-show="ResourceList.list.length > 0">
     <ul class="object-list">
         <li class="list-item">
-            <div class="checkbox"></div>
-            <div class="name">
+            <div class="expand on-mobile"></div>
+            <div>
                 <a href="#" class="list-sort">Name</a>
             </div>
             <div class="additional-cell">
@@ -56,10 +56,10 @@
         </li>
         <li ng-repeat="resource in ResourceList.list">
             <div class="list-item">
-                <div class="checkbox">
-                    <div class="checkbox" ng-show="controller.showgroup">
-                        <input type="checkbox">
-                    </div>
+                <div class="expand on-mobile">
+                    <a class="plus-minus"
+                        ng-click="expandItem=!expandItem; UserList.showMore(user)"
+                        ng-class="{'plus': !expandItem, 'minus active': expandItem}"></a>
                 </div>
                 <div>
                     <h3 class="item-title">{{ resource.name }}</h3>
@@ -111,6 +111,46 @@
                         </ul>
                     </div>
                 </div>
+            </div>
+            <div class="list-item-details on-mobile"
+                ng-show="expandItem"
+                ng-class="{'opened': expandItem}">
+                <section>
+                    <header>
+                        <h4 class="item-title">Status</h4>
+                    </header>
+                    <span class="status"
+                        ng-class="{'online': resource.state == 'Online', 'offline' : resource.state == 'Offline'}">
+                        {{ resource.state }}</span>
+                </section>
+                <section>
+                    <ul>
+                        <li class="item-list">
+                            <section>
+                                <a class="list-sort">Type</a>
+                            </section>
+                            <section>
+                                <div class="list-sort">Project</div>
+                            </section>
+                            <section>
+                                <div class="list-sort">Access information</div>
+                            </section>
+
+                        </li>
+                        <li class="item-list">
+                            <section>
+                                {{ resource.type || "VM" }}
+                            </section>
+                             <section>
+                                <a ui-sref="projects.details({uuid: resource.project_uuid })">{{ resource.project_name }}</a>
+                            </section>
+                            <section>
+                                <span ng-repeat="access in resource.external_ips">{{ access }}</span>
+                                <span ng-if="resource.external_ips.length == 0"><i>No access info</i></span>
+                            </section>
+                        </li>
+                    </ul>
+                </section>
             </div>
         </li>
     </ul>

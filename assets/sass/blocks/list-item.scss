@@ -33,6 +33,17 @@
         &.expand {
             width: 40px;
             text-align: center;
+            &.on-mobile {
+                display: none;
+                @include bp(xs) {
+                    @include table-cell;
+                    vertical-align: middle;
+                } // xs
+                @include bp(sm) {
+                    @include table-cell;
+                    vertical-align: middle;
+                } // sm
+            } // &.on-mobile
         } // expand
         &.avatar {
             width: 60px;
