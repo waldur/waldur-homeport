@@ -4,54 +4,54 @@
 <section class="view-control">
     <div class="list-item no-cursor">
         <div class="checkbox">
-            <div class="checkbox" ng-show="controller.showgroup">
+            <div class="checkbox" ng-show="ProjectDetailUpdate.showgroup">
                 <input type="checkbox">
             </div>
         </div>
         <div>
-            <div class="view-action-buttons" ng-show="controller.showgroup">
+            <div class="view-action-buttons" ng-show="ProjectDetailUpdate.showgroup">
                 <a class="button start"
-                    ng-click="ResourceList.startResource(resource)"
-                    ng-class="{'disabled': !ResourceList.isOperationAvailable(resource, 'start')}">
+                    ng-click="ProjectDetailUpdate.startResource(resource)"
+                    ng-class="{'disabled': !ProjectDetailUpdate.isOperationAvailable(resource, 'start')}">
                 Start</a>
                 <a class="button stop"
-                    ng-click="ResourceList.stopResource(resource)" title="Stop"
-                    ng-class="{'disabled': !ResourceList.isOperationAvailable(resource, 'stop')}">
+                    ng-click="ProjectDetailUpdate.stopResource(resource)" title="Stop"
+                    ng-class="{'disabled': !ProjectDetailUpdate.isOperationAvailable(resource, 'stop')}">
                 Stop</a>
                 <a class="button restart"
-                    ng-click="ResourceList.restartResource(resource)"
-                    ng-class="{'disabled': !ResourceList.isOperationAvailable(resource, 'restart')}">
+                    ng-click="ProjectDetailUpdate.restartResource(resource)"
+                    ng-class="{'disabled': !ProjectDetailUpdate.isOperationAvailable(resource, 'restart')}">
                 Restart</a>
                 <a class="button remove"
-                    ng-click="ResourceList.deleteResource(resource, $index)">
+                    ng-click="ProjectDetailUpdate.deleteResource(resource, $index)">
                 Remove</a>
             </div>
-            <div class="view-action-buttons-mobile" ng-show="controller.showgroup">
+            <div class="view-action-buttons-mobile" ng-show="ProjectDetailUpdate.showgroup">
                 <div class="actions-button">
                     <a class="button dropdown-active"
                         ng-click="mobileActions=!mobileActions">actions</a>
                     <ul class="actions-dropdown" ng-show="mobileActions">
                         <li>
                             <a class="button-simple start"
-                                ng-click="ResourceList.startResource(resource)"
-                                ng-class="{'disabled': !ResourceList.isOperationAvailable(resource, 'start')}">
+                                ng-click="ProjectDetailUpdate.startResource(resource)"
+                                ng-class="{'disabled': !ProjectDetailUpdate.isOperationAvailable(resource, 'start')}">
                             Start</a>
                         </li>
                         <li>
                             <a class="button-simple stop"
-                                ng-click="ResourceList.stopResource(resource)" title="Stop"
-                                ng-class="{'disabled': !ResourceList.isOperationAvailable(resource, 'stop')}">
+                                ng-click="ProjectDetailUpdate.stopResource(resource)" title="Stop"
+                                ng-class="{'disabled': !ProjectDetailUpdate.isOperationAvailable(resource, 'stop')}">
                             Stop</a>
                         </li>
                         <li>
                             <a class="button-simple restart"
-                                ng-click="ResourceList.restartResource(resource)"
-                                ng-class="{'disabled': !ResourceList.isOperationAvailable(resource, 'restart')}">
+                                ng-click="ProjectDetailUpdate.restartResource(resource)"
+                                ng-class="{'disabled': !ProjectDetailUpdate.isOperationAvailable(resource, 'restart')}">
                             Restart</a>
                         </li>
                         <li>
                             <a class="button-simple remove"
-                                ng-click="ResourceList.deleteResource(resource, $index)">
+                                ng-click="ProjectDetailUpdate.deleteResource(resource, $index)">
                             Remove</a>
                         </li>
                     </ul>
@@ -59,12 +59,12 @@
             </div>
         </div>
         <div class="actions switch">
-            <span class="label-text" ng-class="{'low-grade': !controller.showgroup}">batch</span>
+            <span class="label-text" ng-class="{'low-grade': !ProjectDetailUpdate.showgroup}">batch</span>
             <div class="checkbox-toggle">
-                <input type="checkbox" id="control-types" ng-click="controller.showgroup=!controller.showgroup">
+                <input type="checkbox" id="control-types" ng-click="ProjectDetailUpdate.showgroup=!ProjectDetailUpdate.showgroup">
                 <label for="control-types"></label>
             </div>
-            <span class="label-text special-left" ng-class="{'low-grade': controller.showgroup}">single</span>
+            <span class="label-text special-left" ng-class="{'low-grade': ProjectDetailUpdate.showgroup}">single</span>
         </div>
     </div>
 </section>
@@ -91,10 +91,10 @@
             </div>
             <div class="actions"></div>
         </li>
-        <li ng-repeat="resource in controller.project.resources">
+        <li ng-repeat="resource in ProjectDetailUpdate.project.resources">
             <div class="list-item">
                 <div class="checkbox">
-                    <div class="checkbox" ng-show="controller.showgroup">
+                    <div class="checkbox" ng-show="ProjectDetailUpdate.showgroup">
                         <input type="checkbox">
                     </div>
                 </div>
@@ -118,30 +118,30 @@
                         {{ resource.state }}</span>
                 </div>
                 <div class="actions">
-                    <div class="actions-button" ng-show="!controller.showgroup">
+                    <div class="actions-button" ng-show="!ProjectDetailUpdate.showgroup">
                         <a class="button" ng-click="openActions=!openActions">actions</a>
                         <ul class="actions-dropdown" ng-show="openActions">
                             <li>
                                 <a class="button-simple start"
-                                    ng-click="ResourceList.startResource(resource)"
-                                    ng-class="{'disabled': !ResourceList.isOperationAvailable(resource, 'start')}">
+                                    ng-click="ProjectDetailUpdate.startResource(resource)"
+                                    ng-class="{'disabled': !ProjectDetailUpdate.isOperationAvailable(resource, 'start')}">
                                 Start</a>
                             </li>
                             <li>
                                 <a class="button-simple stop"
-                                    ng-click="ResourceList.stopResource(resource)" title="Stop"
-                                    ng-class="{'disabled': !ResourceList.isOperationAvailable(resource, 'stop')}">
+                                    ng-click="ProjectDetailUpdate.stopResource(resource)" title="Stop"
+                                    ng-class="{'disabled': !ProjectDetailUpdate.isOperationAvailable(resource, 'stop')}">
                                 Stop</a>
                             </li>
                             <li>
                                 <a class="button-simple restart"
-                                    ng-click="ResourceList.restartResource(resource)"
-                                    ng-class="{'disabled': !ResourceList.isOperationAvailable(resource, 'restart')}">
+                                    ng-click="ProjectDetailUpdate.restartResource(resource)"
+                                    ng-class="{'disabled': !ProjectDetailUpdate.isOperationAvailable(resource, 'restart')}">
                                 Restart</a>
                             </li>
                             <li>
                                 <a class="button-simple remove"
-                                    ng-click="ResourceList.deleteResource(resource, $index)">
+                                    ng-click="ProjectDetailUpdate.deleteResource(resource, $index)">
                                 Remove</a>
                             </li>
                         </ul>
@@ -154,6 +154,6 @@
 
 <!-- <div class="pagination">
     <pagination pages-href="#/resources/"
-        pages-list="ResourceList" pages-service="ResourceList.service"></pagination>
+        pages-list="ProjectDetailUpdate" pages-service="ProjectDetailUpdate.service"></pagination>
 </div>
  -->

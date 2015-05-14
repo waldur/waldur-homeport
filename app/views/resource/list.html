@@ -8,7 +8,7 @@
         <pagesize pages-href="#/resources/" pages-list="ResourceList" pages-service="ResourceList.service"></pagesize>
         <li class="search divid">
             <div class="search-box">
-                <input type="text" ng-model='ResourceList.searchInput' ng-keyup="ResourceList.search()">
+                <input type="text" ng-model='ResourceList.searchInput' ng-change="ResourceList.search()">
                 <button class="search-button"></button>
             </div>
         </li>

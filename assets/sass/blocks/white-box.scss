@@ -18,6 +18,15 @@
     &.active {
         box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16);
     } // &.top-level
+    @include bp(xs) {
+        @include property(margin, 20 10);
+    } // xs
+    @include bp(sm) {
+        @include property(margin, 20 10);
+    } // sm
+    @include bp(md) {
+        @include property(margin, 20 30);
+    } // md
     .simple-line {
         @include property(padding, 0 10);
         @include property(margin, 20 0);

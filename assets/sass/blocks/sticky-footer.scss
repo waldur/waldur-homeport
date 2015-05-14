@@ -1,0 +1,19 @@
+.app-wrap {
+    @include property(margin-bottom, -50);
+    min-height: calc(100% - 20px);
+    &:after {
+        content: "";
+        display: block;
+        @include property(height, 50);
+    } // &:after
+} // app-wrap
+
+.sticky-footer {
+    @include property(height, 50);
+    @include bp(xs) {
+        height: auto;
+    } // xs
+    @include bp(sm) {
+        height: auto;
+    } // sm
+} // sticky-footer

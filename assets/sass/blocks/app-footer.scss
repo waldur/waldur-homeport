@@ -6,12 +6,26 @@
     @include property(height, 50);
     @include property(padding-top, 13);
     width: 100%;
+    @include bp(xs) {
+        height: auto;
+    } // xs
+    @include bp(sm) {
+        height: auto;
+    } // sm
     a {
         color: white;
         text-decoration: none;
     } // a
     .copy {
         float: left;
+        @include bp(xs) {
+            display: block;
+            float: none;
+        } // xs
+        @include bp(sm) {
+            display: block;
+            float: none;
+        } // sm
     } // copy
     .footer-nav {
         float: right;
@@ -24,10 +38,15 @@
                 @include property(margin, 0 10);
             }
         }
+        @include bp(xs) {
+            @include property(margin, 10 0 20 0);
+            display: block;
+            float: none;
+        } // xs
+        @include bp(sm) {
+            @include property(margin, 10 0 20 0);
+            display: block;
+            float: none;
+        } // sm
     } // footer-nav
 } // app-footer
-
-.app-footer-fixed {
-    position: absolute;
-    bottom: 0;
-} // &.fixed
