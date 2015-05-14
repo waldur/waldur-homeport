@@ -296,3 +296,43 @@
   }
 
 })();
+
+(function() {
+  angular.module('ncsaas')
+    .controller('ProjectEventTabController', [
+      '$stateParams',
+      'projectsService',
+      'baseEventListController',
+      ProjectEventTabController
+    ]);
+
+  function ProjectEventTabController($stateParams, projectsService, baseEventListController) {
+    var controllerScope = this;
+    var EventController = baseEventListController.extend({
+      project: null,
+
+      init: function() {
+        this.controllerScope = controllerScope;
+        this._super();
+        this.getProject();
+      },
+      getList: function(filter) {
+        filter = filter || {};
+        if (this.project) {
+          filter.search = this.project.name;
+          this._super(filter);
+        }
+      },
+      getProject: function() {
+        var vm = this;
+        projectsService.$get($stateParams.uuid).then(function (response) {
+          vm.project = response;
+          vm.getList();
+        });
+      }
+    });
+
+    controllerScope.__proto__ = new EventController();
+  }
+
+})();

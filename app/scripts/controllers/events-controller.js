@@ -2,18 +2,17 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('EventListController', ['baseControllerListClass', 'eventsService', 'EVENTTYPE', EventListController]);
+    .service('baseEventListController', [
+      'baseControllerListClass', 'eventsService', 'EVENTTYPE', baseEventListController]);
 
-  function EventListController(baseControllerListClass, eventsService, EVENTTYPE) {
-    var controllerScope = this;
-    var EventController = baseControllerListClass.extend({
+  function baseEventListController(baseControllerListClass, eventsService, EVENTTYPE) {
+    var ControllerListClass = baseControllerListClass.extend({
       EVENTTYPE: EVENTTYPE,
 
       init:function() {
         this.service = eventsService;
-        this.controllerScope = controllerScope;
-        this._super();
         this.searchFieldName = 'search';
+        this._super();
       },
       isTemplateTypeReady: function(type) {
         var typesReady = [
@@ -30,6 +29,21 @@
           EVENTTYPE.customer_update_succeeded
         ];
         return ~typesReady.indexOf(type);
+      }
+    });
+
+    return ControllerListClass;
+  }
+
+  angular.module('ncsaas')
+    .controller('EventListController', ['baseEventListController', EventListController]);
+
+  function EventListController(baseEventListController) {
+    var controllerScope = this;
+    var EventController = baseEventListController.extend({
+      init:function() {
+        this.controllerScope = controllerScope;
+        this._super();
       }
     });
 

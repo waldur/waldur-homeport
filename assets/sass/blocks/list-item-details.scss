@@ -3,6 +3,19 @@
     @include property(padding, 10);
     @include property(padding-left, 50);
     @include property(font-size, 16);
+    &.on-mobile {
+        display: none;
+        @include bp(xs) {
+            &.opened {
+                display: block;
+            } // &.opened
+        } // xs
+        @include bp(sm) {
+            &.opened {
+                display: block;
+            } // &.opened
+        } // sm
+    } // &.on-mobile
     &.opened {
         display: block;
     } // &.opened
