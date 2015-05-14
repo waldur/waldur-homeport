@@ -1,0 +1,68 @@
+<span class="event" ng-if="event.event_type === EventList.EVENTTYPE.auth_logged_in_with_username">
+    User
+    <a ui-sref="users.details({uuid: event.user_uuid})" class="name">
+        <span class="name">{{ event.user_full_name }}</span>
+    </a>
+    has signed in with a username/password
+</span>
+
+<span class="event" ng-if="event.event_type === EventList.EVENTTYPE.role_granted">
+    <!-- TODO: replace affected_user_username to affected_user_full_name once the data is in LA -->
+    User <a ui-sref="users.details({uuid: event.affected_user_uuid})" class="name">{{ event.affected_user_username }}</a>
+    has gained role of {{ event.role_name }} in {{ event.structure_type }}
+    <a ui-sref="projects.details({uuid: event.project_uuid})"
+       ng-if="event.structure_type === EventList.EVENTTYPE.role_granted_structure_type_project">
+        {{ event.project_name }}
+    </a>
+    <a ui-sref="customers.details({uuid: event.customer_uuid})"
+       ng-if="event.structure_type === EventList.EVENTTYPE.role_granted_structure_type_customer">
+        {{ event.customer_name }}
+    </a>
+</span>
+
+<span class="event" ng-if="event.event_type === EventList.EVENTTYPE.user_update_succeeded">
+    User <a ui-sref="users.details({uuid: event.user_uuid})" class="name">{{ event.user_full_name }}</a>
+    has been updated
+</span>
+
+<span class="event" ng-if="event.event_type === EventList.EVENTTYPE.project_creation_succeeded">
+    Project
+    <a ui-sref="projects.details({uuid: event.project_uuid})" class="name">
+        {{ event.project_name }}
+    </a>
+    has been created
+</span>
+
+<span class="event" ng-if="event.event_type === EventList.EVENTTYPE.iaas_service_sync_failed">
+    Cloud service
+    <a ui-sref="services.details({uuid: event.cloud_account_uuid})" class="name">{{ event.cloud_account_name }}</a>
+    has failed to sync
+</span>
+
+<span class="event" ng-if="event.event_type === EventList.EVENTTYPE.iaas_instance_creation_scheduled">
+    Virtual machine
+    <a class="name">{{ event.iaas_instance_name }}</a>
+    creation has been scheduled
+</span>
+
+<span class="event" ng-if="event.event_type === EventList.EVENTTYPE.customer_creation_succeeded">
+    Organization <a ui-sref="customers.details({uuid: event.customer_uuid})" class="name">{{ event.customer_name }}</a>
+    has been created
+</span>
+
+<span class="event" ng-if="event.event_type === EventList.EVENTTYPE.project_group_creation_succeeded">
+    Project group <span class="name">{{ event.project_group_name }}</span> has been created
+</span>
+
+<span class="event" ng-if="event.event_type === EventList.EVENTTYPE.customer_update_succeeded">
+    Organization
+    <a ui-sref="customers.details({uuid: event.customer_uuid})" class="name">{{ event.customer_name }}</a>
+    has been updated
+</span>
+
+<span class="event" ng-if="!EventList.isTemplateTypeReady(event.event_type)">
+    {{ event.message }}
+</span>
+
+<span am-time-ago="event['@timestamp']"></span>
+<!--TODO add templates for all event types-->
