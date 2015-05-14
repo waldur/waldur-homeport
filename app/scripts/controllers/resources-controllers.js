@@ -2,43 +2,57 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('ResourceListController', ['baseControllerListClass', 'resourcesService', ResourceListController]);
+    .service('baseResourceListController', ['baseControllerListClass', baseResourceListController]);
 
-  function ResourceListController(baseControllerListClass, resourcesService) {
-    var controllerScope = this;
-    var ResourceController = baseControllerListClass.extend({
-      init:function() {
-        this.service = resourcesService;
-        this.controllerScope = controllerScope;
+  // need for resource tab
+  function baseResourceListController(baseControllerListClass) {
+    var ControllerListClass = baseControllerListClass.extend({
+      init: function() {
         this._super();
         this.searchFieldName = 'name';
       },
       stopResource:function(resource) {
         var vm = this;
-        resourcesService.stopResource(resource.uuid).then(
+        vm.service.stopResource(resource.uuid).then(
           vm.reInitResource.bind(null, resource), vm.handleActionException);
       },
       startResource:function(resource) {
         var vm = this;
-        resourcesService.startResource(resource.uuid).then(
+        vm.service.startResource(resource.uuid).then(
           vm.reInitResource.bind(null, resource), vm.handleActionException);
       },
       restartResource:function(resource) {
         var vm = this;
-        resourcesService.restartResource(resource.uuid).then(
+        vm.service.restartResource(resource.uuid).then(
           vm.reInitResource.bind(null, resource), vm.handleActionException);
       },
       isOperationAvailable:function(resource, operation) {
-        var availableOperations = resourcesService.getAvailableOperations(resource);
+        var availableOperations = this.service.getAvailableOperations(resource);
         operation = operation.toLowerCase();
         return availableOperations.indexOf(operation) !== -1;
       },
       reInitResource:function(resource) {
         var vm = this;
-        resourcesService.$get(resource.uuid).then(function(response) {
+        vm.service.$get(resource.uuid).then(function(response) {
           var index = vm.list.indexOf(resource);
           vm.list[index] = response;
         });
+      }
+    });
+
+    return ControllerListClass;
+  }
+
+  angular.module('ncsaas')
+    .controller('ResourceListController', ['baseResourceListController', 'resourcesService', ResourceListController]);
+
+  function ResourceListController(baseResourceListController, resourcesService) {
+    var controllerScope = this;
+    var ResourceController = baseResourceListController.extend({
+      init:function() {
+        this.service = resourcesService;
+        this.controllerScope = controllerScope;
+        this._super();
       }
     });
 

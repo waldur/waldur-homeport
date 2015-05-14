@@ -267,6 +267,36 @@
 
 })();
 
+(function(){
+
+  angular.module('ncsaas')
+    .controller('ProjectResourcesTabController', [
+      '$stateParams',
+      'baseResourceListController',
+      'resourcesService',
+      ProjectResourcesTabController
+    ]);
+
+  function ProjectResourcesTabController($stateParams, baseResourceListController, resourcesService) {
+    var controllerScope = this;
+    var ResourceController = baseResourceListController.extend({
+      init:function() {
+        this.service = resourcesService;
+        this.controllerScope = controllerScope;
+        this._super();
+      },
+      getList: function(filter) {
+        filter = filter || {};
+        filter.project = $stateParams.uuid;
+        this._super(filter);
+      }
+    });
+
+    controllerScope.__proto__ = new ResourceController();
+  }
+
+})();
+
 (function() {
   angular.module('ncsaas')
     .controller('ProjectEventTabController', [
@@ -281,7 +311,7 @@
     var EventController = baseEventListController.extend({
       project: null,
 
-      init:function() {
+      init: function() {
         this.controllerScope = controllerScope;
         this._super();
         this.getProject();
@@ -295,7 +325,7 @@
       },
       getProject: function() {
         var vm = this;
-        projectsService.$get($stateParams.uuid).then(function(response) {
+        projectsService.$get($stateParams.uuid).then(function (response) {
           vm.project = response;
           vm.getList();
         });
@@ -304,4 +334,5 @@
 
     controllerScope.__proto__ = new EventController();
   }
+
 })();
