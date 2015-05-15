@@ -416,6 +416,9 @@ angular
           'tabKeys@users.details': {
             templateUrl: 'views/user/tab-keys.html',
           },
+          'eventTypes@users.details' : {
+            templateUrl: 'views/events/event-types.html',
+          },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',
           }
