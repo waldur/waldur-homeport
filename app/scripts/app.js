@@ -12,7 +12,8 @@ angular
     'ui.gravatar',
     'angucomplete-alt',
     'angularMoment',
-    'ngLoadingSpinner'])
+    'ngLoadingSpinner',
+    'flash'])
   // urls
   .config(function($stateProvider, $urlRouterProvider) {
 

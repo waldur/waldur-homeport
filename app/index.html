@@ -23,7 +23,7 @@
 
 </head>
 <body ng-controller="MainController">
-
+<flash:messages ng:show="messages"></flash:messages>
 <div ui-view="" class="app-wrap"></div>
 
 <footer class="app-footer sticky-footer">
@@ -46,6 +46,7 @@
 <!-- angular -->
 <script src="static/js/angular/angular.js"></script>
 <script src="static/js/angular/angular-cookies.js"></script>
+<script src="static/js/angular/angular-flash.js"></script>
 <script src="static/js/angular/angular-loader.js"></script>
 <script src="static/js/angular/angular-gravatar.js"></script>
 <script src="static/js/angular/moment.js"></script>

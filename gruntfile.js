@@ -194,7 +194,14 @@ module.exports = function(grunt) {
                       src: ['angular-loading-spinner.js'],
                       dest: 'app/static/js/angular/',
                       filter: 'isFile'
-                    }
+                    },
+                    {
+                      expand: true,
+                      cwd: 'bower_components/angular-flash-messages',
+                      src: ['angular-flash.js'],
+                      dest: 'app/static/js/angular/',
+                      filter: 'isFile'
+                  }
 
                 ]
             }
