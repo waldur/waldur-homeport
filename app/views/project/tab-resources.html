@@ -69,9 +69,6 @@
                     <a href="#" class="list-sort">Type</a>
                 </div>
                 <div class="additional-cell">
-                    <a href="#" class="list-sort">Project</a>
-                </div>
-                <div class="additional-cell">
                     <a href="#" class="list-sort">Access information</a>
                 </div>
                 <div class="additional-cell">
@@ -92,13 +89,11 @@
                             ng-class="{'online': resource.state == 'Online', 'offline' : resource.state == 'Offline'}"></div>
                     </div>
                     <div class="additional-cell" ng-hide="collapsedItem">
-                        {{ resource.type }}
+                        {{ resource.type || "VM" }}
                     </div>
                     <div class="additional-cell">
-                        <a ui-sref="projects.details({uuid: resource.project_uuid })">{{ resource.project_name }}</a>
-                    </div>
-                    <div class="additional-cell">
-                        <span ng-repeat="access in resource.access_information">{{ access }}</span>
+                        <span ng-repeat="access in resource.external_ips">{{ access }}</span>
+                        <span ng-if="resource.external_ips.length == 0"><i>No access info</i></span>
                     </div>
                     <div class="additional-cell">
                         <span class="status"
