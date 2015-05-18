@@ -51,6 +51,9 @@
             }
             deferred.resolve(response);
           }, function(err) {
+            if (err.status === 401) {
+              $rootScope.$broadcast('authService:signout');
+            }
             deferred.reject(err);
           });
         };
