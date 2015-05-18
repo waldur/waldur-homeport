@@ -121,9 +121,8 @@
         this.getUser();
       },
       getList: function(filter) {
-        filter = filter || {};
         if (this.user) {
-          filter.search = this.user.full_name;
+          this.service.defaultFilter.search = this.user.full_name;
           this._super(filter);
         }
       },
@@ -139,4 +138,44 @@
     controllerScope.__proto__ = new EventController();
   }
 
+})();
+
+(function() {
+  angular.module('ncsaas')
+    .controller('UserProjectTabController', [
+      '$stateParams',
+      'usersService',
+      'baseControllerListClass',
+      'projectPermissionsService',
+      UserProjectTabController
+    ]);
+
+  function UserProjectTabController($stateParams, usersService, baseControllerListClass, projectPermissionsService) {
+    var controllerScope = this;
+    var ProjectController = baseControllerListClass.extend({
+      user: null,
+
+      init: function() {
+        this.controllerScope = controllerScope;
+        this.service = projectPermissionsService;
+        this._super();
+        this.getUser();
+      },
+      getList: function(filter) {
+        if (this.user) {
+          this.service.defaultFilter.username = this.user.username;
+          this._super(filter);
+        }
+      },
+      getUser: function() {
+        var vm = this;
+        usersService.$get($stateParams.uuid).then(function (response) {
+          vm.user = response;
+          vm.getList();
+        });
+      }
+    });
+
+    controllerScope.__proto__ = new ProjectController();
+  }
 })();

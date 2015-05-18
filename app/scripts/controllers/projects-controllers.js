@@ -168,7 +168,7 @@
     $stateParams, projectsService, projectPermissionsService, USERPROJECTROLE, usersService) {
     var vm = this;
 
-    vm.activeTab = 'eventlog';
+    vm.activeTab = $stateParams.tab ? $stateParams.tab : 'eventlog';
     vm.project = null;
     projectsService.$get($stateParams.uuid).then(function(response) {
       vm.project = response;
@@ -192,6 +192,10 @@
       usersService.getList(filter).then(function(response) {
         vm.usersList = response;
       });
+    }
+
+    if (vm.activeTab === 'users') {
+      activateUserTab();
     }
 
     function activateUserTab() {
@@ -283,12 +287,8 @@
       init:function() {
         this.service = resourcesService;
         this.controllerScope = controllerScope;
+        this.service.defaultFilter.project = $stateParams.uuid;
         this._super();
-      },
-      getList: function(filter) {
-        filter = filter || {};
-        filter.project = $stateParams.uuid;
-        this._super(filter);
       }
     });
 
@@ -317,9 +317,8 @@
         this.getProject();
       },
       getList: function(filter) {
-        filter = filter || {};
         if (this.project) {
-          filter.search = this.project.name;
+          this.service.defaultFilter.search = this.project.name;
           this._super(filter);
         }
       },

@@ -144,7 +144,7 @@ angular
       })
 
       .state('projects.details', {
-        url: ':uuid/',
+        url: ':uuid/:tab',
         views: {
           'appContent': {
             templateUrl: 'views/project/details.html',
