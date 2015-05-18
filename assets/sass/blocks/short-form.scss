@@ -1,6 +1,12 @@
 .short-form {
     width: 60%;
     margin: 0 auto;
+    @include bp(xs) {
+        width: 98%;
+    } // xs
+    @include bp(sm) {
+        width: 98%;
+    } // sm
     &.full {
         width: 100%;
     } // &.full
