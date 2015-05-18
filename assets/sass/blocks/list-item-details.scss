@@ -25,6 +25,15 @@
             @include property(padding-top, 10);
             border-top: 1px solid rgb(205, 205, 205);
         }
+        &.on-mobile {
+            display: none;
+            @include bp(xs) {
+                display: block;
+            } // xs
+            @include bp(sm) {
+                display: block;
+            } // sm
+        }
         > header {
             @include property(margin-bottom, 10);
         } // > header
