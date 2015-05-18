@@ -13,6 +13,7 @@ angular
     'angucomplete-alt',
     'angularMoment',
     'ngLoadingSpinner',
+    'ngAnimate',
     'flash'])
   // urls
   .config(function($stateProvider, $urlRouterProvider) {

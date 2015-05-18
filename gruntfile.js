@@ -197,11 +197,25 @@ module.exports = function(grunt) {
                     },
                     {
                       expand: true,
-                      cwd: 'bower_components/angular-flash-messages',
+                      cwd: 'bower_components/angular-flash-alert/src',
                       src: ['angular-flash.js'],
                       dest: 'app/static/js/angular/',
                       filter: 'isFile'
-                  }
+                    },
+                    {
+                      expand: true,
+                      cwd: 'bower_components/angular-flash-alert/src',
+                      src: ['angular-flash.css'],
+                      dest: 'app/static/css/',
+                      filter: 'isFile'
+                    },
+                    {
+                      expand: true,
+                      cwd: 'bower_components/angular-animate',
+                      src: ['angular-animate.js'],
+                      dest: 'app/static/js/angular/',
+                      filter: 'isFile'
+                    }
 
                 ]
             }

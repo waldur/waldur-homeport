@@ -13,6 +13,7 @@
 <link rel="stylesheet" type="text/css" href="/static/css/normalize.css">
 <link rel="stylesheet" type="text/css" href="/static/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+<link rel="stylesheet" type="text/css" href="/static/css/angular-flash.css">
 <link rel="stylesheet" type="text/css" href="/static/css/angucomplete-alt.css">
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -23,7 +24,7 @@
 
 </head>
 <body ng-controller="MainController">
-<flash:messages ng:show="messages"></flash:messages>
+<div flash-message="5000" ></div>
 <div ui-view="" class="app-wrap"></div>
 
 <footer class="app-footer sticky-footer">
@@ -45,6 +46,7 @@
 
 <!-- angular -->
 <script src="static/js/angular/angular.js"></script>
+<script src="static/js/angular/angular-animate.js"></script>
 <script src="static/js/angular/angular-cookies.js"></script>
 <script src="static/js/angular/angular-flash.js"></script>
 <script src="static/js/angular/angular-loader.js"></script>
