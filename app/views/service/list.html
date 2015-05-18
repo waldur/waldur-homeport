@@ -1,14 +1,14 @@
-<div ng-controller="ServiceListController as serviceList">
+<div ng-controller="ServiceListController as ServiceList">
 
 <div class="white-box">
     <ul class="sort-list">
         <li class="title">
             <h2 class="app-title">Services</h2>
         </li>
-        <pagesize pages-list="serviceList" pages-service="serviceList.service"></pagesize>
+        <pagesize pages-list="serviceList" pages-service="ServiceList.service"></pagesize>
         <li class="search divid">
             <div class="search-box">
-                <input type="text" ng-model='serviceList.searchInput' ng-change="serviceList.search()">
+                <input type="text" ng-model='ServiceList.searchInput' ng-change="ServiceList.search()">
                 <button class="search-button"></button>
             </div>
         </li>
@@ -19,6 +19,17 @@
             </a>
         </li>
     </ul>
+</div>
+
+<div class="white-box no-styles" ng-show="ServiceList.list.length <= 0">
+    <h2 class="app-title">
+        You have no services yet.
+    </h2>
+    <div class="decision">
+        <div class="col">
+            <a ui-sref="services.create" class="button">Add service</a>
+        </div>
+    </div>
 </div>
 
 <!-- view-control -->
@@ -74,7 +85,7 @@
             </div>
             <div class="actions"></div>
         </li>
-        <li ng-repeat="service in serviceList.list">
+        <li ng-repeat="service in ServiceList.list">
             <div class="list-item" ng-class="{'opened': expandItem}">
                 <div class="checkbox">
                         <div class="checkbox">
@@ -100,7 +111,7 @@
                         <ul class="actions-dropdown" ng-show="openActions">
                             <li>
                                 <a class="button-simple remove"
-                                   ui-sref="services.list" ng-click="serviceList.remove(service)">
+                                   ui-sref="services.list" ng-click="ServiceList.remove(service)">
                                 Remove</a>
                             </li>
                         </ul>
@@ -134,7 +145,7 @@
 </div>
 
 <div class="pagination">
-    <pagination pages-list="serviceList" pages-service="serviceList.service"></pagination>
+    <pagination pages-list="serviceList" pages-service="ServiceList.service"></pagination>
 </div>
 
 </div>
