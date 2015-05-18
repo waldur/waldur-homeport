@@ -11,8 +11,8 @@
    */
 
   angular.module('ncsaas')
-    .service('baseServiceClass', ['$q', 'currentStateService', '$resource', 'ENV', baseServiceClass]);
-  function baseServiceClass($q, currentStateService, $resource, ENV) {
+    .service('baseServiceClass', ['$q', 'currentStateService', '$resource', 'ENV', '$rootScope', baseServiceClass]);
+  function baseServiceClass($q, currentStateService, $resource, ENV, $rootScope) {
     // pageSize, page, pages - default variables, you can change this in your init method or call this._super() in init
     var BaseServiceClass = Class.extend({
       pageSize:null,
@@ -46,6 +46,9 @@
             }
             deferred.resolve(response);
           }, function(err) {
+            if (err.status === 401) {
+              $rootScope.$broadcast('authService:signout');
+            }
             deferred.reject(err);
           });
         };
