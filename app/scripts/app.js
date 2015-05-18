@@ -94,6 +94,9 @@ angular
           },
           'appContent@dashboard' : {
             templateUrl: 'views/dashboard/event-log.html',
+          },
+          'eventTypes@dashboard.eventlog' : {
+            templateUrl: 'views/events/event-types.html',
           }
         },
         resolve: {
@@ -154,6 +157,9 @@ angular
           },
           'tabUsers@projects.details' : {
             templateUrl: 'views/project/tab-users.html',
+          },
+          'eventTypes@projects.details' : {
+            templateUrl: 'views/events/event-types.html',
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',
@@ -409,6 +415,9 @@ angular
           },
           'tabKeys@users.details': {
             templateUrl: 'views/user/tab-keys.html',
+          },
+          'eventTypes@users.details' : {
+            templateUrl: 'views/events/event-types.html',
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',

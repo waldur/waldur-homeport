@@ -114,6 +114,12 @@
                     </div>
                 </div>
                 <div class="list-item-details" ng-show="expandItem">
+                    <section class="on-mobile">
+                        <header>
+                            <h4 class="item-title">Creation date</h4>
+                        </header>
+                        {{ project.created | date:'medium' }}
+                    </section>
                     <section ng-if="project.description">
                         {{ project.description }}
                     </section>

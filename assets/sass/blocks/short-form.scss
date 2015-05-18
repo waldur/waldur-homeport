@@ -33,6 +33,12 @@
             &.label {
                 width: 160px;
                 text-align: right;
+                @include bp(xs) {
+                    text-align: left;
+                } // xs
+                @include bp(sm) {
+                    text-align: left;
+                } // sm
             } // &.label
             &.input {
                 width: calc(100% - 320px);

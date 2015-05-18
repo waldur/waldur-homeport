@@ -208,6 +208,14 @@
             margin-bottom: 10px;
             border-radius: 4px;
             position: relative;
+            @include bp(xs) {
+                height: auto;
+                @include property(margin-top, 30);
+            } //xs
+            @include bp(sm) {
+                height: auto;
+                @include property(margin-top, 30);
+            } //sm
             &:before {
                 -webkit-border-radius: 100%;
                 border-radius: 100%;

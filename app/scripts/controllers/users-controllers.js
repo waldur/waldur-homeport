@@ -100,3 +100,43 @@
   }
 
 })();
+
+(function() {
+  angular.module('ncsaas')
+    .controller('UserEventTabController', [
+      '$stateParams',
+      'usersService',
+      'baseEventListController',
+      UserEventTabController
+    ]);
+
+  function UserEventTabController($stateParams, usersService, baseEventListController) {
+    var controllerScope = this;
+    var EventController = baseEventListController.extend({
+      user: null,
+
+      init: function() {
+        this.controllerScope = controllerScope;
+        this._super();
+        this.getUser();
+      },
+      getList: function(filter) {
+        filter = filter || {};
+        if (this.user) {
+          filter.search = this.user.full_name;
+          this._super(filter);
+        }
+      },
+      getUser: function() {
+        var vm = this;
+        usersService.$get($stateParams.uuid).then(function (response) {
+          vm.user = response;
+          vm.getList();
+        });
+      }
+    });
+
+    controllerScope.__proto__ = new EventController();
+  }
+
+})();

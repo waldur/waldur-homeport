@@ -4,7 +4,6 @@
         li {
             cursor: pointer;
             @include property(padding, 10 15);
-            @include property(border-radius, 4 4 0 0);
             @include property(border-radius, 3 3 0 0);
             position: relative;
             &.active {
@@ -22,6 +21,20 @@
                     left: 0;
                 } // &:before
             } // &.active
+            @include bp(xs) {
+                &.active {
+                    border: none;
+                    border-left: 2px solid rgb(158, 207, 93);
+                    @include property(border-radius, 0);
+                } // &.active
+            } // xs
+            @include bp(sm) {
+                &.active {
+                    border: none;
+                    border-left: 2px solid rgb(158, 207, 93);
+                    @include property(border-radius, 0);
+                } // &.active
+            } // sm
         } // li
     } // > ul.custom-tabs-tabs
     > section.custom-tabs-tabs-content {
