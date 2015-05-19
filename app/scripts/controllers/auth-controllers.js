@@ -2,9 +2,9 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('AuthController', ['$state', '$auth', 'authService', AuthController]);
+    .controller('AuthController', ['$state', 'Flash', 'authService', AuthController]);
 
-  function AuthController($state, $auth, authService) {
+  function AuthController($state, Flash, authService) {
     var vm = this;
     vm.isSignupFormVisible = false;
     vm.signin = signin;
@@ -22,6 +22,7 @@
     }
 
     function loginSuccess() {
+      Flash.create('success', 'Successful authorization!');
       $state.go('dashboard.eventlog');
     }
 
