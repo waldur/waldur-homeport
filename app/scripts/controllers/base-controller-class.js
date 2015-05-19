@@ -40,6 +40,7 @@
       searchInput: '',
       searchFieldName: '', // required in init
       controllerScope: null, // required in init
+      showgroup: false,
 
       init:function() {
         this.setSignalHandler('currentCustomerUpdated', this.currentCustomerUpdatedHandler.bind(this));
