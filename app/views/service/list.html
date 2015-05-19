@@ -108,25 +108,23 @@
                 </div>
             </div>
             <div class="list-item-details" ng-show="expandItem">
-                <section>
-                    <ul>
-                        <li class="item-list">
-                            <section>
-                                <a class="list-sort">Access URL</a>
-                            </section>
-                            <section>
-                                <div class="list-sort">Number of connected projects</div>
-                            </section>
-                        </li>
-                        <li class="item-list">
-                            <section>
-                                <a href="{{ service.auth_url }}">{{ service.auth_url }}</a>
-                            </section>
-                            <section>
-                                {{ service.projects.length }}
-                            </section>
-                        </li>
-                    </ul>
+                <section class="on-mobile">
+                    <header>
+                        <h4 class="item-title">Type</h4>
+                    </header>
+                    OpenStack
+                </section>
+                <section class="half">
+                    <header>
+                        <h4 class="item-title">Access URL</h4>
+                    </header>
+                    <a href="{{ service.auth_url }}">{{ service.auth_url }}</a>
+                </section>
+                <section class="half">
+                    <header>
+                        <h4 class="item-title">Number of connected projects</h4>
+                    </header>
+                    {{ service.projects.length }}
                 </section>
             </div>
         </li>
