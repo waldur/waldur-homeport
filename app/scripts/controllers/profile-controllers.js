@@ -29,7 +29,10 @@
             vm.user.keys = response;
           });
         });
-        vm.customers = customersService.getCustomersList();
+        vm.customers = [];
+        customersService.getList().then(function(response) {
+          vm.customers = response;
+        });
         vm.getProjects();
       },
       getProjects: function() {

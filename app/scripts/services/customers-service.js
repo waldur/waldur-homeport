@@ -8,7 +8,7 @@
   function customersService($q, RawCustomer) {
     /*jshint validthis: true */
     var vm = this;
-    vm.getCustomersList = getCustomersList;
+    vm.getList = getList;
     vm.createCustomer = createCustomer;
     vm.getCustomer = getCustomer;
     vm.getFirst = getFirst;
@@ -18,9 +18,9 @@
       return RawCustomer.getFirst().$promise;
     }
 
-    function getCustomersList(filter) {
+    function getList(filter) {
       filter = filter || null;
-      return RawCustomer.query(filter);
+      return RawCustomer.query(filter).$promise;
     }
 
     function createCustomer() {

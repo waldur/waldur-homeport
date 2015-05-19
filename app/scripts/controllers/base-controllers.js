@@ -9,12 +9,16 @@
   function HeaderController($rootScope, $scope, $state, currentStateService, customersService, usersService) {
     var vm = this;
 
-    vm.customers = customersService.getCustomersList({page_size: 50});
+    vm.customers = [];
     vm.currentUser = {};
     vm.currentCustomer = {};
     vm.menuToggle = menuToggle;
     vm.mobileMenu = mobileMenu;
     vm.setCurrentCustomer = setCurrentCustomer;
+
+    customersService.getList({page_size: 50}).then(function(response) {
+      vm.customers = response;
+    });
 
     // initiate current user
     usersService.getCurrentUser().then(function(response) {
