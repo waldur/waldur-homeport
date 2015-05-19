@@ -3,64 +3,34 @@
 (function() {
   angular.module('ncsaas')
     .controller('ServiceListController',
-      ['$state', 'servicesService', 'customerPermissionsService', 'usersService', ServiceListController]);
+      ['baseControllerListClass', 'servicesService', 'customerPermissionsService', 'usersService', ServiceListController]);
 
-  function ServiceListController($state, servicesService, customerPermissionsService, usersService) {
-    var vm = this;
+  function ServiceListController(baseControllerListClass, servicesService, customerPermissionsService, usersService) {
+    var controllerScope = this;
+    var ServiceController = baseControllerListClass.extend({
+      init:function() {
+        this.service = servicesService;
+        this.controllerScope = controllerScope;
+        this._super();
+        this.searchFieldName = 'name';
+        this.canUserAddService();
+      },
+      canUserAddService: function() {
+        var vm = this;
+        usersService.getCurrentUser().then(function(user) {
+          /*jshint camelcase: false */
+          if (user.is_staff) {
+            vm.canUserAddService = true;
+          }
+          customerPermissionsService.userHasCustomerRole(user.username, 'owner').then(function(hasRole) {
+            vm.canUserAddService = hasRole;
+          });
 
-    vm.list = [];
-
-    // search
-    vm.searchInput = '';
-    vm.search = search;
-    vm.service = servicesService;
-
-    vm.remove = remove;
-
-    function activate() {
-      getList();
-      // init canUserAddService
-      usersService.getCurrentUser().then(function(user) {
-        /*jshint camelcase: false */
-        if (user.is_staff) {
-          vm.canUserAddService = true;
-        }
-        customerPermissionsService.userHasCustomerRole(user.username, 'owner').then(function(hasRole) {
-          vm.canUserAddService = hasRole;
         });
-
-      });
-    }
-
-    function getList(filters) {
-      servicesService.getList(filters).then(function(response) {
-        vm.list = response;
-      });
-    }
-
-    function search() {
-      getList({name: vm.searchInput});
-    }
-
-    function remove(service) {
-      var confirmDelete = confirm('Confirm service deletion?');
-      if (confirmDelete) {
-        var index = vm.list.indexOf(service);
-        service.$delete(function() {
-          vm.list.splice(index, 1);
-        },handleServiceActionException);
       }
-    }
+    });
 
-    function handleServiceActionException(response) {
-      if (response.status === 409) {
-        var message = response.data.status || response.data.detail;
-        alert(message);
-      }
-    }
-
-    activate();
-
+    controllerScope.__proto__ = new ServiceController();
   }
 
 })();
