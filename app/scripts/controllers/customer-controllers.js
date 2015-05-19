@@ -35,7 +35,10 @@
     var vm = this;
 
     vm.activeTab = 'resources';
-    vm.customer = customersService.getCustomer($stateParams.uuid);
+    vm.customer = null;
+    customersService.$get($stateParams.uuid).then(function(response) {
+      vm.customer = response;
+    });
     vm.update = update;
 
     function update() {

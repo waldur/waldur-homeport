@@ -5,14 +5,11 @@
             <li class="title">
                 <h2 class="app-title">Customers</h2>
             </li>
-            <li ng-repeat="pageSize in controlle.pageSizes">
-                <a ng-click="controlle.changePageSize(pageSize)"
-                   ng-class="{active: pageSize === controlle.currentPageSize}">{{pageSize}}</a>
-            </li>
+            <pagesize pages-list="CustomerList" pages-service="CustomerList.service"/></pagesize>
             <li class="search divid">
                 <div class="search-box">
-                    <input type="text" ng-model='controlle.searchInput' ng-change="controlle.search()">
-                    <button class="search-button" ng-click="controlle.search()"></button>
+                    <input type="text" ng-model='CustomerList.searchInput' ng-change="CustomerList.search()">
+                    <button class="search-button" ng-click="CustomerList.search()"></button>
                 </div>
             </li>
             <li class="right-sort">
@@ -97,7 +94,7 @@
                             <a class="button" ng-click="openActions=!openActions">actions</a>
                             <ul class="actions-dropdown" ng-show="openActions">
                                 <li>
-                                    <a class="button-simple">Remove</a>
+                                    <a ng-click="CustomerList.remove(customer)" class="button-simple">Remove</a>
                                 </li>
                             </ul>
                         </div>
