@@ -107,6 +107,8 @@
       listState: null, // required in init
       errors: {},
       controllerScope: null, // required in init
+      detailsState: null,
+      redirectToDetailsPage: false,
 
       init:function() {
         this.instance = this.service.$create();
@@ -118,7 +120,11 @@
         vm.instance.$save(success, error);
         function success() {
           vm.afterSave();
-          $state.go(vm.listState);
+          if (vm.redirectToDetailsPage) {
+            $state.go(vm.detailsState, {uuid: vm.instance.uuid});
+          } else {
+            $state.go(vm.listState);
+          }
         }
         function error(response) {
           vm.errors = response.data;

@@ -67,40 +67,52 @@
   }
 
   angular.module('ncsaas')
-    .controller('ProjectAddController', ['$state', 'projectsService',
-      'currentStateService', 'servicesService', 'projectCloudMembershipsService', ProjectAddController]);
+    .controller('ProjectAddController', ['projectsService', 'currentStateService',
+      'servicesService', 'projectCloudMembershipsService', 'baseControllerAddClass', ProjectAddController]);
 
   function ProjectAddController(
-    $state, projectsService, currentStateService, servicesService, projectCloudMembershipsService) {
-    var vm = this;
-
-    vm.project = projectsService.$create();
-    vm.save = save;
-
-    function save() {
-      // TODO: refactor this function to use named urls and uuid field instead - SAAS-108
-      currentStateService.getCustomer().then(function(customer) {
-        vm.project.customer = customer.url;
-
-        vm.project.$save(function() {
-          var url = vm.project.url,
-            array = url.split ('/').filter(function(el) {
-              return el.length !== 0;
-            }),
-            uuidNew = array[4];
-          servicesService.filterByCustomer = false;
-          servicesService.getList().then(function(response) {
-            for (var i = 0; response.length > i; i++) {
-              projectCloudMembershipsService.addRow(vm.project.url, response[i].url);
-            }
-          });
-          $state.go('projects.details', {uuid:uuidNew});
-        }, function(response) {
-          vm.errors = response.data;
+    projectsService, currentStateService, servicesService, projectCloudMembershipsService, baseControllerAddClass) {
+    var controllerScope = this;
+    var ProjectController = baseControllerAddClass.extend({
+      init: function() {
+        this.service = projectsService;
+        this.controllerScope = controllerScope;
+        this.setSignalHandler('currentCustomerUpdated', this.currentCustomerUpdatedHandler.bind(this));
+        this._super();
+        this.listState = 'projects.list';
+        this.detailsState = 'projects.details';
+        this.redirectToDetailsPage = true;
+        this.project = this.instance;
+      },
+      activate: function() {
+        var vm = this;
+        currentStateService.getCustomer().then(function(customer) {
+          vm.project.customer = customer.url;
         });
-      });
-    }
+      },
+      afterSave: function() {
+        var vm = this;
+        servicesService.filterByCustomer = false;
+        servicesService.getList().then(function(response) {
+          for (var i = 0; response.length > i; i++) {
+            projectCloudMembershipsService.addRow(vm.project.url, response[i].url);
+          }
+        });
+      },
+      currentCustomerUpdatedHandler: function() {
+        var vm = this;
+        vm.activate();
+        /*jshint camelcase: false */
+        if (vm.project.name || vm.project.description) {
+          if (confirm('Clean all fields?')) {
+            vm.project.name = '';
+            vm.project.description = '';
+          }
+        }
+      }
+    });
 
+    controllerScope.__proto__ = new ProjectController();
   }
 
   angular.module('ncsaas')
