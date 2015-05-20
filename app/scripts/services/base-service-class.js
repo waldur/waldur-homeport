@@ -11,8 +11,8 @@
    */
 
   angular.module('ncsaas')
-    .service('baseServiceClass', ['$q', 'currentStateService', '$resource', 'ENV', baseServiceClass]);
-  function baseServiceClass($q, currentStateService, $resource, ENV) {
+    .service('baseServiceClass', ['$q', 'currentStateService', '$resource', 'ENV', '$rootScope', baseServiceClass]);
+  function baseServiceClass($q, currentStateService, $resource, ENV, $rootScope) {
     // pageSize, page, pages - default variables, you can change this in your init method or call this._super() in init
     var BaseServiceClass = Class.extend({
       pageSize:null,
@@ -24,16 +24,21 @@
       customerUuid:null,
 
       init:function() {
-        this.pageSize = 10;
+        this.pageSize = ENV.pageSize;
         this.page = 1;
         this.pages = null;
+        this.defaultFilter = {};
         this.currentStateService = currentStateService;
+        this.pageChangingReset();
       },
 
       getList:function(filter) {
         var vm = this;
         var deferred = $q.defer();
         filter = filter || {};
+        for (var key in this.defaultFilter) {
+          filter[key] = this.defaultFilter[key];
+        }
         var queryList = function() {
           filter.page = vm.page;
           /*jshint camelcase: false */
@@ -46,6 +51,9 @@
             }
             deferred.resolve(response);
           }, function(err) {
+            if (err.status === 401) {
+              $rootScope.$broadcast('authService:signout');
+            }
             deferred.reject(err);
           });
         };
@@ -132,6 +140,13 @@
           }
         );
         return deferred.promise;
+      },
+      pageChangingReset: function() {
+        var vm = this;
+        $rootScope.$on('$stateChangeSuccess', function() {
+          vm.defaultFilter = {};
+          vm.page = 1;
+        });
       }
 
     });

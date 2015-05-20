@@ -1,32 +1,50 @@
-<sortline ></sortline>
+<div ng-controller="UserProjectTabController as UserProjectTab">
+    <div class="white-box">
+        <ul class="sort-list">
+            <pagesize pages-list="UserProjectTab" pages-service="UserProjectTab.service"></pagesize>
+            <li class="search divid">
+                <div class="search-box">
+                    <input type="text" ng-model='UserProjectTab.searchInput' ng-change="UserProjectTab.search()">
+                    <button class="search-button"></button>
+                </div>
+            </li>
+        </ul>
+    </div>
 
-<div class="white-box clear">
-    <ul class="object-list">
-        <li>
-            <div class="list-item">
-                <div class="name">
-                    <a class="list-sort">Name</a>
+    <div class="white-box clear">
+        <ul class="object-list">
+            <li>
+                <div class="list-item">
+                    <div class="name">
+                        <a class="list-sort">Name</a>
+                    </div>
+                    <div class="additional-cell">
+                        <a class="list-sort">Role</a>
+                    </div>
+                    <div class="actions"></div>
                 </div>
-                <div class="additional-cell">
-                    <a class="list-sort">Role</a>
-                </div>
-                <div class="actions"></div>
-            </div>
-        </li>
-        <li>
-            <div class="list-item">
-                <div class="name">
-                    <h3 class="item-title pointer"><a href="ui-sref=">Project name</a></h3>
-                </div>
-                <div class="additional-cell">
-                    Role
-                </div>
-                <div class="actions">
-                    <div class="actions-button">
-                        <a class="button">Manage</a>
+            </li>
+            <li ng-repeat="project in UserProjectTab.list">
+                <div class="list-item">
+                    <div class="name">
+                        <!--TODO add ui-sref="projects.details({uuid: project.project_uuid, tab: 'users'})" projectPermissionsService-->
+                        <h3 class="item-title pointer"><a>
+                            {{ project.project_name }}
+                        </a></h3>
+                    </div>
+                    <div class="additional-cell">
+                        {{ project.role }}
+                    </div>
+                    <div class="actions">
+                        <div class="actions-button">
+                            <a class="button">Manage</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </li>
-    </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="pagination">
+        <pagination pages-list="UserProjectTab" pages-service="UserProjectTab.service"></pagination>
+    </div>
 </div>

@@ -3,26 +3,23 @@
 (function() {
     angular.module('ncsaas')
     .controller('CustomerListController', [
-      '$rootScope',
-      '$location',
       'customersService',
+      'baseControllerListClass',
       CustomerListController
     ]);
 
-  function CustomerListController($rootScope, $location, customersService) {
-    var vm = this;
+  function CustomerListController(customersService, baseControllerListClass) {
+    var controllerScope = this;
+    var CustomerController = baseControllerListClass.extend({
+      init:function() {
+        this.service = customersService;
+        this.controllerScope = controllerScope;
+        this._super();
+        this.searchFieldName = 'name';
+      }
+    });
 
-    vm.list = customersService.getCustomersList();
-    vm.remove = remove;
-    vm.service = customersService;
-
-    function remove(customer) {
-      var index = vm.list.indexOf(customer);
-
-      customer.$delete(function() {
-        vm.list.splice(index, 1);
-      });
-    }
+    controllerScope.__proto__ = new CustomerController();
 
   }
 
@@ -38,7 +35,10 @@
     var vm = this;
 
     vm.activeTab = 'resources';
-    vm.customer = customersService.getCustomer($stateParams.uuid);
+    vm.customer = null;
+    customersService.$get($stateParams.uuid).then(function(response) {
+      vm.customer = response;
+    });
     vm.update = update;
 
     function update() {

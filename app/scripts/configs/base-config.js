@@ -11,6 +11,8 @@ angular.module('ncsaas')
     googleEndpointUrl: 'api-auth/google/',
     facebookClientId: 'facebook client id',
     facebookEndpointUrl: 'api-auth/facebook/',
-    pageSizes: [5, 10, 20, 50]
+    pageSizes: [5, 10, 20, 50],
+    pageSize: 10,
+    topMenuCustomersCount: 50
 
   });

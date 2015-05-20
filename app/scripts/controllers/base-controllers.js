@@ -4,17 +4,25 @@
 (function() {
   angular.module('ncsaas')
     .controller('HeaderController', [
-      '$rootScope', '$scope', '$state', 'currentStateService', 'customersService', 'usersService', HeaderController]);
+      '$rootScope', '$scope', '$state', 'currentStateService', 'customersService', 'usersService', 'ENV', HeaderController]);
 
-  function HeaderController($rootScope, $scope, $state, currentStateService, customersService, usersService) {
+  function HeaderController($rootScope, $scope, $state, currentStateService, customersService, usersService, ENV) {
     var vm = this;
 
-    vm.customers = customersService.getCustomersList({page_size: 50});
+    vm.customers = [];
     vm.currentUser = {};
     vm.currentCustomer = {};
     vm.menuToggle = menuToggle;
     vm.mobileMenu = mobileMenu;
     vm.setCurrentCustomer = setCurrentCustomer;
+
+    // XXX: for top menu customers viewing
+    customersService.pageSize = ENV.topMenuCustomersCount;
+    customersService.getList().then(function(response) {
+      vm.customers = response;
+    });
+    // reset pageSize
+    customersService.pageSize = ENV.pageSize;
 
     // initiate current user
     usersService.getCurrentUser().then(function(response) {

@@ -4,15 +4,34 @@
         @include property(margin-top, 20);
     } // + .row
     .col {
-        &.inital-avatar {
+        &.initial-avatar {
             width: 180px;
-        } // &.inital-avatar
-        &.inital-inputs {
+        } // &.initial-avatar
+        &.initial-inputs {
             width: calc(100% - (180px + 240px));
-        } // &.inital-inputs
-        &.inital-package {
+        } // &.initial-inputs
+        &.initial-package {
             width: 240px;
             text-align: center;
-        } // &.inital-package
+        } // &.initial-package
+        &.initial-avatar,
+        &.initial-inputs,
+        &.initial-package {
+            @include bp(xs) {
+                width: 100%;
+            } // xs
+            @include bp(sm) {
+                width: 100%;
+            } // sm
+        } // &.initial-*
+        @include bp(xs) {
+            width: 100%;
+        } // xs
+        @include bp(sm) {
+            width: 100%;
+        } // sm
     } // .col
+    // &.initial-data-row {
+
+    // } // &.initial-data-row
 } // row

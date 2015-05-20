@@ -1,4 +1,5 @@
 .list-item-details {
+    @include clearfix;
     background-color: #F2F2F2;
     @include property(padding, 10);
     @include property(padding-left, 50);
@@ -19,11 +20,55 @@
     &.opened {
         display: block;
     } // &.opened
+    > section.half {
+        + section.half {
+            @include property(margin-top, 0);
+            @include property(padding-bottom, 10);
+            border-top: none;
+            @include bp(xs) {
+                @include property(margin-top, 10);
+                @include property(padding-top, 10);
+            } // xs
+            @include bp(sm) {
+                @include property(margin-top, 10);
+                @include property(padding-top, 10);
+            } // sm
+        }
+        width: 50%;
+        float: left;
+        &:nth-child(2n+1) {
+            &:after {
+                clear: both;
+            } // &:after
+        } // &:after {}
+        @include bp(xs) {
+            width: 100%;
+            float: none;
+            border-top: 1px solid rgb(205, 205, 205) !important;
+        } // xs
+        @include bp(sm) {
+            width: 100%;
+            float: none;
+            border-top: 1px solid rgb(205, 205, 205) !important;
+        } // sm
+    } // > section.half
     > section {
-        + section {
+        width: 100%;
+        @include clearfix;
+        + section:not(.half) {
             @include property(margin-top, 10);
             @include property(padding-top, 10);
             border-top: 1px solid rgb(205, 205, 205);
+        }
+        + section {
+            @include property(margin-top, 10);
+            @include property(padding-top, 10);
+            @include bp(xs) {
+                border-top: 1px solid rgb(205, 205, 205) !important;
+            } // xs
+            @include bp(sm) {
+                border-top: 1px solid rgb(205, 205, 205) !important;
+            } // sm
         }
         &.on-mobile {
             display: none;
@@ -33,7 +78,7 @@
             @include bp(sm) {
                 display: block;
             } // sm
-        }
+        } // on-mobile
         > header {
             @include property(margin-bottom, 10);
         } // > header
