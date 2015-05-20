@@ -4,76 +4,79 @@
 (function() {
   angular.module('ncsaas')
     .controller('HeaderController', [
-      '$rootScope', '$scope', '$state', 'currentStateService', 'customersService', 'usersService', 'ENV', HeaderController]);
+      '$rootScope', '$scope', '$state', 'currentStateService', 'customersService',
+      'usersService', 'ENV', 'baseControllerClass', HeaderController]);
 
-  function HeaderController($rootScope, $scope, $state, currentStateService, customersService, usersService, ENV) {
-    var vm = this;
+  function HeaderController(
+    $rootScope, $scope, $state, currentStateService, customersService, usersService, ENV, baseControllerClass) {
+    var controllerScope = this;
+    var HeaderControllerClass = baseControllerClass.extend({
+      customers: [],
+      currentUser: {},
+      currentCustomer: {},
+      menuState: {
+        addSomethingMenu: false,
+        customerMenu: false,
+        profileMenu: false
+      },
 
-    vm.customers = [];
-    vm.currentUser = {};
-    vm.currentCustomer = {};
-    vm.menuToggle = menuToggle;
-    vm.mobileMenu = mobileMenu;
-    vm.setCurrentCustomer = setCurrentCustomer;
+      init: function() {
+        this.activate();
+        this.menuItemActive = currentStateService.getActiveItem($state.current.name);
+      },
+      activate: function() {
+        var vm = this;
+        // XXX: for top menu customers viewing
+        customersService.pageSize = ENV.topMenuCustomersCount;
+        customersService.getList().then(function(response) {
+          vm.customers = response;
+        });
+        // reset pageSize
+        customersService.pageSize = ENV.pageSize;
 
-    // XXX: for top menu customers viewing
-    customersService.pageSize = ENV.topMenuCustomersCount;
-    customersService.getList().then(function(response) {
-      vm.customers = response;
-    });
-    // reset pageSize
-    customersService.pageSize = ENV.pageSize;
+        // initiate current user
+        usersService.getCurrentUser().then(function(response) {
+          vm.currentUser = response;
+        });
 
-    // initiate current user
-    usersService.getCurrentUser().then(function(response) {
-      vm.currentUser = response;
-    });
+        // initiate current customer
+        currentStateService.getCustomer().then(function(customer) {
+          vm.currentCustomer = customer;
+        });
 
-    // initiate current customer
-    currentStateService.getCustomer().then(function(customer) {
-      vm.currentCustomer = customer;
-    });
-
-    function setCurrentCustomer(customer) {
-      currentStateService.setCustomer(customer);
-      vm.currentCustomer = customer;
-      $rootScope.$broadcast('currentCustomerUpdated');
-    }
-
-    // top-level menu
-    vm.menuState = {
-      addSomethingMenu : false,
-      customerMenu : false,
-      profileMenu : false
-    };
-    // top-level menu active state
-    vm.menuItemActive = currentStateService.getActiveItem($state.current.name);
-
-    function menuToggle(active, event) {
-      for (var property in vm.menuState) {
-        if (vm.menuState.hasOwnProperty(property)) {
-          if (property !== active) {
-            vm.menuState[property] = false;
+        window.onclick = function() {
+          for (var property in vm.menuState) {
+            if (vm.menuState.hasOwnProperty(property)) {
+              vm.menuState[property] = false;
+            }
+          }
+          $scope.$apply();
+        };
+      },
+      setCurrentCustomer: function(customer) {
+        var vm = this;
+        currentStateService.setCustomer(customer);
+        vm.currentCustomer = customer;
+        $rootScope.$broadcast('currentCustomerUpdated');
+      },
+      menuToggle: function(active, event) {
+        var vm = this;
+        for (var property in vm.menuState) {
+          if (vm.menuState.hasOwnProperty(property)) {
+            if (property !== active) {
+              vm.menuState[property] = false;
+            }
           }
         }
+        event.stopPropagation();
+        vm.menuState[active] = !vm.menuState[active];
+      },
+      mobileMenu: function() {
+        this.showMobileMenu = !this.showMobileMenu;
       }
-      event.stopPropagation();
-      vm.menuState[active] = !vm.menuState[active];
-    }
+    });
 
-    function mobileMenu() {
-      vm.showMobileMenu = !vm.showMobileMenu;
-    }
-
-    window.onclick = function() {
-      for (var property in vm.menuState) {
-        if (vm.menuState.hasOwnProperty(property)) {
-          vm.menuState[property] = false;
-        }
-      }
-      $scope.$apply();
-    };
-
+    controllerScope.__proto__ = new HeaderControllerClass();
   }
 
   angular.module('ncsaas')
