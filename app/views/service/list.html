@@ -21,6 +21,17 @@
     </ul>
 </div>
 
+<div class="white-box no-styles" ng-show="ServiceList.list.length <= 0">
+    <h2 class="app-title">
+        You have no services yet.
+    </h2>
+    <div class="decision">
+        <div class="col">
+            <a ui-sref="services.create" class="button">Add service</a>
+        </div>
+    </div>
+</div>
+
 <!-- view-control -->
 <section class="view-control">
     <div class="list-item no-cursor">
