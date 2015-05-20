@@ -44,14 +44,15 @@
           vm.currentCustomer = customer;
         });
 
-        window.onclick = function() {
-          for (var property in vm.menuState) {
-            if (vm.menuState.hasOwnProperty(property)) {
-              vm.menuState[property] = false;
-            }
+        $rootScope.closeMenu = vm.closeMenu;
+      },
+      closeMenu: function() {
+        var vm = this;
+        for (var property in vm.menuState) {
+          if (vm.menuState.hasOwnProperty(property)) {
+            vm.menuState[property] = false;
           }
-          $scope.$apply();
-        };
+        }
       },
       setCurrentCustomer: function(customer) {
         var vm = this;
