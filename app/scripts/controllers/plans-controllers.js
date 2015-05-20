@@ -37,7 +37,7 @@
               vm.canSeePlans = hasRole;
 
               if (vm.canSeePlans || user.is_staff) {
-                customersService.getCustomer($stateParams.uuid).$promise.then(function(customer) {
+                customersService.$get($stateParams.uuid).then(function(customer) {
                   vm.customer = customer;
                   vm.initCurrentPlan(customer);
                 });

@@ -24,7 +24,7 @@
       customerUuid:null,
 
       init:function() {
-        this.pageSize = 10;
+        this.pageSize = ENV.pageSize;
         this.page = 1;
         this.pages = null;
         this.defaultFilter = {};
