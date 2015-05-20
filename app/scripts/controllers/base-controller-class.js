@@ -116,6 +116,7 @@
         var vm = this;
         vm.instance.$save(success, error);
         function success() {
+          vm.afterSave();
           $state.go(vm.listState);
         }
         function error(response) {
@@ -126,6 +127,7 @@
         var vm = this;
         $state.go(vm.listState);
       },
+      afterSave: function() {},
       activate: function() {}
     });
 

@@ -69,9 +69,9 @@ for(var i = 0; i < testData.length; i++) {
 
       it('I should be able to add new service', function() {
         // fill name
-        element(by.model('ServiceAdd.service.name')).sendKeys(data.name);
+        element(by.model('ServiceAdd.instance.name')).sendKeys(data.name);
         // fill auth_url
-        element(by.model('ServiceAdd.service.auth_url')).sendKeys(data.auth_url);
+        element(by.model('ServiceAdd.instance.auth_url')).sendKeys(data.auth_url);
 
         element(by.cssContainingText('a.button-apply', 'Add service')).click();
 
@@ -79,7 +79,7 @@ for(var i = 0; i < testData.length; i++) {
       });
 
       it('I should be able to find added service "' + data.name + '" in service list', function() {
-        element(by.model('serviceList.searchInput')).sendKeys(data.name);
+        element(by.model('ServiceList.searchInput')).sendKeys(data.name);
         expect(element(by.cssContainingText('h3.item-title a', data.name)).isPresent()).toBe(true);
       });
 

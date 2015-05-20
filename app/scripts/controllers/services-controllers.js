@@ -37,57 +37,46 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('ServiceAddController', ['servicesService', '$state',
-      'currentStateService', '$rootScope', 'projectCloudMembershipsService', 'projectsService', ServiceAddController]);
+    .controller('ServiceAddController', ['servicesService',
+      'currentStateService', 'projectCloudMembershipsService', 'projectsService',
+      'baseControllerAddClass', ServiceAddController]);
 
   function ServiceAddController(
-    servicesService, $state, currentStateService, $rootScope, projectCloudMembershipsService, projectsService) {
-    var vm = this;
-    vm.service = servicesService.$create();
-    vm.save = save;
-    vm.cancel = cancel;
-    vm.projectList = {};
-    vm.custumersList = {};
-
-    function activate() {
-      currentStateService.getCustomer().then(function(customer) {
-        vm.service.customer = customer.url;
-      });
-      /*jshint camelcase: false */
-      if (vm.service.auth_url || vm.service.name) {
-        if (confirm('Clean all fields?')) {
-          vm.service.auth_url = '';
-          vm.service.name = '';
+    servicesService, currentStateService, projectCloudMembershipsService, projectsService, baseControllerAddClass) {
+    var controllerScope = this;
+    var ServiceController = baseControllerAddClass.extend({
+      init: function() {
+        this.service = servicesService;
+        this.controllerScope = controllerScope;
+        this.setSignalHandler('currentCustomerUpdated', this.activate.bind(this));
+        this._super();
+        this.listState = 'services.list';
+      },
+      activate: function() {
+        var vm = this;
+        currentStateService.getCustomer().then(function(customer) {
+          vm.instance.customer = customer.url;
+        });
+        /*jshint camelcase: false */
+        if (vm.instance.auth_url || vm.instance.name) {
+          if (confirm('Clean all fields?')) {
+            vm.instance.auth_url = '';
+            vm.instance.name = '';
+          }
         }
-      }
-    }
-
-    $rootScope.$on('currentCustomerUpdated', activate);
-
-    function save() {
-      vm.service.$save(success, error);
-
-      function success() {
+      },
+      afterSave: function() {
+        var vm = this;
         projectsService.filterByCustomer = false;
         projectsService.getList().then(function(response) {
           for (var i = 0; response.length > i; i++) {
-            projectCloudMembershipsService.addRow(response[i].url, vm.service.url);
+            projectCloudMembershipsService.addRow(response[i].url, vm.instance.url);
           }
         });
-        $state.go('services.list');
       }
+    });
 
-      function error(response) {
-        vm.errors = response.data;
-      }
-    }
-
-    function cancel() {
-      $state.go('services.list');
-    }
-
-    activate();
-
+    controllerScope.__proto__ = new ServiceController();
   }
 
 })();
