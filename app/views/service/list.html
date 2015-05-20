@@ -1,14 +1,14 @@
-<div ng-controller="ServiceListController as serviceList">
+<div ng-controller="ServiceListController as ServiceList">
 
 <div class="white-box">
     <ul class="sort-list">
         <li class="title">
             <h2 class="app-title">Services</h2>
         </li>
-        <pagesize pages-list="serviceList" pages-service="serviceList.service"></pagesize>
+        <pagesize pages-list="ServiceList" pages-service="ServiceList.service"></pagesize>
         <li class="search divid">
             <div class="search-box">
-                <input type="text" ng-model='serviceList.searchInput' ng-change="serviceList.search()">
+                <input type="text" ng-model='ServiceList.searchInput' ng-change="ServiceList.search()">
                 <button class="search-button"></button>
             </div>
         </li>
@@ -25,24 +25,22 @@
 <section class="view-control">
     <div class="list-item no-cursor">
         <div class="checkbox">
-            <div class="checkbox" ng-show="controller.showgroup">
+            <div class="checkbox" ng-show="ServiceList.showgroup">
                 <input type="checkbox">
             </div>
         </div>
         <div>
-            <div class="view-action-buttons" ng-show="controller.showgroup">
-                <a class="button remove"
-                    ng-click="ResourceList.deleteResource(resource, $index)">
+            <div class="view-action-buttons" ng-show="ServiceList.showgroup">
+                <a class="button remove">
                 Remove</a>
             </div>
-            <div class="view-action-buttons-mobile" ng-show="controller.showgroup">
+            <div class="view-action-buttons-mobile" ng-show="ServiceList.showgroup">
                 <div class="actions-button">
                     <a class="button dropdown-active"
                         ng-click="mobileActions=!mobileActions">actions</a>
                     <ul class="actions-dropdown" ng-show="mobileActions">
                         <li>
-                            <a class="button-simple remove"
-                                ng-click="ResourceList.deleteResource(resource, $index)">
+                            <a class="button-simple remove">
                             Remove</a>
                         </li>
                     </ul>
@@ -50,12 +48,12 @@
             </div>
         </div>
         <div class="actions switch">
-            <span class="label-text" ng-class="{'low-grade': !controller.showgroup}">batch</span>
+            <span class="label-text" ng-class="{'low-grade': !ServiceList.showgroup}">batch</span>
             <div class="checkbox-toggle">
-                <input type="checkbox" id="control-types" ng-click="controller.showgroup=!controller.showgroup">
+                <input type="checkbox" id="control-types" ng-click="ServiceList.showgroup=!ServiceList.showgroup">
                 <label for="control-types"></label>
             </div>
-            <span class="label-text special-left" ng-class="{'low-grade': controller.showgroup}">single</span>
+            <span class="label-text special-left" ng-class="{'low-grade': ServiceList.showgroup}">single</span>
         </div>
     </div>
 </section>
@@ -74,11 +72,11 @@
             </div>
             <div class="actions"></div>
         </li>
-        <li ng-repeat="service in serviceList.list">
+        <li ng-repeat="service in ServiceList.list">
             <div class="list-item" ng-class="{'opened': expandItem}">
                 <div class="checkbox">
                         <div class="checkbox">
-                            <input type="checkbox" ng-show="controller.showgroup">
+                            <input type="checkbox" ng-show="ServiceList.showgroup">
                         </div>
                     </div>
                     <div class="expand">
@@ -95,12 +93,12 @@
                     OpenStack
                 </div>
                 <div class="actions">
-                    <div class="actions-button" ng-show="!controller.showgroup">
+                    <div class="actions-button" ng-show="!ServiceList.showgroup">
                         <a class="button" ng-click="openActions=!openActions">actions</a>
                         <ul class="actions-dropdown" ng-show="openActions">
                             <li>
                                 <a class="button-simple remove"
-                                   ui-sref="services.list" ng-click="serviceList.remove(service)">
+                                   ui-sref="services.list" ng-click="ServiceList.remove(service)">
                                 Remove</a>
                             </li>
                         </ul>
@@ -132,7 +130,7 @@
 </div>
 
 <div class="pagination">
-    <pagination pages-list="serviceList" pages-service="serviceList.service"></pagination>
+    <pagination pages-list="ServiceList" pages-service="ServiceList.service"></pagination>
 </div>
 
 </div>
