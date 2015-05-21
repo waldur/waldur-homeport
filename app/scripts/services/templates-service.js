@@ -2,32 +2,24 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('templatesService', ['RawTemplate', templatesService]);
+    .service('templatesService', ['baseServiceClass', templatesService]);
 
-  function templatesService(RawTemplate) {
+  function templatesService(baseServiceClass) {
     /*jshint validthis: true */
-    var vm = this;
-    vm.getTemplateList = getTemplateList;
-
-    function getTemplateList(cloudUUID) {
-      if (cloudUUID) {
-        return RawTemplate.query({cloud: cloudUUID}).$promise;
-      } else {
-        return RawTemplate.query().$promise;
+    var ServiceClass = baseServiceClass.extend({
+      init:function() {
+        this._super();
+        this.endpoint = '/iaas-templates/';
+      },
+      getTemplateList: function(cloudUUID) {
+        if (cloudUUID) {
+          return this.getList({cloud: cloudUUID});
+        } else {
+          return this.getList();
+        }
       }
-
-    }
-
+    });
+    return new ServiceClass();
   }
-
-})();
-
-(function() {
-  angular.module('ncsaas')
-    .factory('RawTemplate', ['ENV', '$resource', RawTemplate]);
-
-    function RawTemplate(ENV, $resource) {
-      return $resource(ENV.apiEndpoint + 'api/iaas-templates/:templateUUID/', {templateUUID:'@uuid'});
-    }
 
 })();
