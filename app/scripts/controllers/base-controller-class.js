@@ -142,3 +142,61 @@
   }
 
 })();
+
+(function() {
+  angular.module('ncsaas')
+    .service('baseControllerDetailUpdateClass', ['$state', 'baseControllerClass', '$stateParams', baseControllerDetailUpdateClass]);
+
+  function baseControllerDetailUpdateClass($state, baseControllerClass, $stateParams) {
+    /**
+     * Use controllerScope.__proto__ = new Controller() in needed controller
+     * use this.controllerScope for changes in event handler
+     * sеt events in this._signals
+     */
+    var ControllerDetailUpdateClass = baseControllerClass.extend({
+      service: null, // required in init
+      detailsState: null, // required in init
+      listState: null, // required in init for details page
+      activeTab: null,
+      model: null,
+
+      init:function() {
+        this._super();
+        this.activate();
+      },
+      update:function() {
+        var vm = this;
+        vm.model.$update(success, error);
+        function success() {
+          vm.afterUpdate();
+          $state.go(vm.detailsState, {uuid: vm.model.uuid});
+        }
+        function error(response) {
+          vm.errors = response.data;
+        }
+      },
+      activate:function() {
+        var vm = this;
+        vm.service.$get($stateParams.uuid).then(function(response) {
+          vm.model = response;
+        });
+      },
+      remove:function() {
+        var vm = this;
+        if (confirm('Confirm deletion?')) {
+          vm.model.$delete(
+            function() {
+              $state.go(vm.listState);
+            },
+            function(errors) {
+              alert(errors.data.detail);
+            }
+          );
+        }
+      },
+      afterUpdate:function() {}
+    });
+
+    return ControllerDetailUpdateClass;
+  }
+})();

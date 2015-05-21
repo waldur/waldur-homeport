@@ -1,4 +1,4 @@
-<div ng-controller="CustomerDetailUpdateController as controller">
+<div ng-controller="CustomerDetailUpdateController as CustomerDetailUpdate">
 
 <!-- profile-view -->
 <div class="profile-view">
@@ -10,28 +10,35 @@
             <div class="col-xs-11 profile-info">
                 <div class="row">
                     <div class="col-xs-12">
-                        <h1 class="profile-name pull-left">{{ controller.customer.name }}</h1>
+                        <h1 class="profile-name pull-left">{{ CustomerDetailUpdate.model.name }}</h1>
                         <ul class="controls pull-right">
                             <li>
-                                <a ui-sref="customers.details({uuid: controller.customer.uuid})" class="crud-controls active"><i class="fa fa-cog"></i> Edit profile</a>
+                                <a ui-sref="customers.details({uuid: CustomerDetailUpdate.model.uuid})" class="crud-controls active"><i class="fa fa-cog"></i> Edit profile</a>
                             </li>
                             <li>
-                                <a href="#/customers/{{ controller.customer.uuid }}/plans/" class="crud-controls"><i class="fa fa-cog"></i> Plans</a>
+                                <a href="#/customers/{{ CustomerDetailUpdate.model.uuid }}/plans/" class="crud-controls"><i class="fa fa-cog"></i> Plans</a>
                             </li>
                             <li>
-                                <a href="#/customers/{{ controller.customer.uuid }}/billing/" class="crud-controls"><i class="fa fa-cog"></i> Billing</a>
+                                <a href="#/customers/{{ CustomerDetailUpdate.model.uuid }}/billing/" class="crud-controls"><i class="fa fa-cog"></i> Billing</a>
                             </li>
                         </ul>
                     </div>
                 </div>
                 <div class="form">
-                    <form action="" ng-submit="controller.update()">
+                    <form ng-submit="CustomerDetailUpdate.update()">
                         <div class="row form-field">
                             <div class="col-xs-6">
-                                <input type="text" class="form-control" ng-model="controller.customer.name" required>
+                                <input type="text" class="form-control" ng-model="CustomerDetailUpdate.model.name" required>
                             </div>
                             <div class="col-xs-2">
-                                <button class="btn btn-primary ng-hide" ng-show="controller.customer.name.length" type="submit">Save</button>
+                                <button class="btn btn-primary ng-hide" ng-show="CustomerDetailUpdate.model.name.length" type="submit">Save</button>
+                            </div>
+                            <div class="error short" ng-show="CustomerDetailUpdate.errors.detail">
+                                <ul class="error-list">
+                                    <li>
+                                        {{ CustomerDetailUpdate.errors.detail }}
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </form>
