@@ -1,6 +1,17 @@
 <div ng-controller="ServiceListController as ServiceList">
 
-<div class="white-box">
+<div class="white-box no-styles" ng-show="ServiceList.list.length <= 0">
+    <h2 class="app-title">
+        You have no services yet.
+    </h2>
+    <div class="decision">
+        <div class="col">
+            <a ui-sref="services.create" class="button">Add service</a>
+        </div>
+    </div>
+</div>
+
+<div class="white-box" ng-show="ServiceList.list.length > 0">
     <ul class="sort-list">
         <li class="title">
             <h2 class="app-title">Services</h2>
@@ -19,17 +30,6 @@
             </a>
         </li>
     </ul>
-</div>
-
-<div class="white-box no-styles" ng-show="ServiceList.list.length <= 0">
-    <h2 class="app-title">
-        You have no services yet.
-    </h2>
-    <div class="decision">
-        <div class="col">
-            <a ui-sref="services.create" class="button">Add service</a>
-        </div>
-    </div>
 </div>
 
 <!-- view-control -->
