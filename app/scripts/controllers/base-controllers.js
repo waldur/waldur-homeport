@@ -79,24 +79,25 @@
   angular.module('ncsaas')
     .controller('MainController', [
       '$q', '$rootScope', '$state', 'authService', 'currentStateService', 'customersService', 'usersService',
-      MainController]);
+      'baseControllerClass', MainController]);
 
-    function MainController($q, $rootScope, $state, authService, currentStateService, customersService, usersService) {
-      $rootScope.logout = logout;
+  function MainController(
+    $q, $rootScope, $state, authService, currentStateService, customersService, usersService, baseControllerClass) {
+    var controllerScope = this;
+    var Controller = baseControllerClass.extend({
 
-      function logout() {
+      init: function() {
+        this.setSignalHandler('$stateChangeSuccess', this.stateChangeSuccessHandler.bind(controllerScope));
+        this._super();
+        $rootScope.logout = this.logout;
+      },
+      logout: function() {
         authService.signout();
         currentStateService.isCustomerDefined = false;
         $state.go('home.login');
-      }
-
-      $rootScope.$on('$stateChangeSuccess', function(event, toState) {
+      },
+      stateChangeSuccessHandler: function(event, toState) {
         $rootScope.bodyClass = currentStateService.getBodyClass(toState.name);
-      });
-
-
-
-      $rootScope.$on('$stateChangeSuccess', function(event, toState) {
         // if user is authenticated - he should have selected customer
         if (authService.isAuthenticated() && !currentStateService.isCustomerDefined) {
           var deferred = $q.defer();
@@ -115,8 +116,11 @@
             }
           });
         }
-      });
-    }
+      }
+    });
+
+    controllerScope.__proto__ = new Controller();
+  }
 
 })();
 
