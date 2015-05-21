@@ -125,7 +125,7 @@
 
   function ProjectDetailUpdateController($stateParams, projectsService, baseControllerDetailUpdateClass) {
     var controllerScope = this;
-    var CustomerController = baseControllerDetailUpdateClass.extend({
+    var Controller = baseControllerDetailUpdateClass.extend({
       activeTab: 'eventlog',
       customer: null,
 
@@ -138,7 +138,7 @@
       }
     });
 
-    controllerScope.__proto__ = new CustomerController();
+    controllerScope.__proto__ = new Controller();
   }
 
 })();
