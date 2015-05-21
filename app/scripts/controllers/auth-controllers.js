@@ -2,55 +2,56 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('AuthController', ['$state', 'Flash', 'authService', AuthController]);
+    .controller('AuthController', ['$state', 'Flash', 'authService', 'baseControllerClass', AuthController]);
 
-  function AuthController($state, Flash, authService) {
-    var vm = this;
-    vm.isSignupFormVisible = false;
-    vm.signin = signin;
-    vm.user = {};
-    vm.hasErrors = hasErrors;
-    vm.getErrors = getErrors;
-    vm.authenticate = authenticate;
+  function AuthController($state, Flash, authService, baseControllerClass) {
+    var controllerScope = this;
+    var Controller = baseControllerClass.extend({
+      isSignupFormVisible: false,
+      user: {},
 
-    function signin() {
-      authService.signin(vm.user.username, vm.user.password).then(loginSuccess, loginError);
-    }
-
-    function authenticate(provider) {
-      authService.authenticate(provider).then(loginSuccess, loginError);
-    }
-
-    function loginSuccess() {
-      Flash.create('success', 'Successful authorization!');
-      $state.go('dashboard.eventlog');
-    }
-
-    function loginError(response) {
-      vm.errors = response.data;
-    }
-
-    function hasErrors() {
-      return vm.errors;
-    }
-
-    function getErrors() {
-      if (vm.errors !== undefined) {
-        var prettyErrors = [];
-        for (var key in vm.errors) {
-          if (vm.errors.hasOwnProperty(key)) {
-            if (Object.prototype.toString.call(vm.errors[key]) === '[object Array]') {
-              prettyErrors.push(key + ': ' + vm.errors[key].join(', '));
-            } else {
-              prettyErrors.push(key + ': ' + vm.errors[key]);
+      init: function() {
+        this._super();
+      },
+      signin: function() {
+        var vm = this;
+        authService.signin(vm.user.username, vm.user.password).then(vm.loginSuccess, vm.loginError.bind(vm));
+      },
+      authenticate: function(provider) {
+        var vm = this;
+        authService.authenticate(provider).then(vm.loginSuccess, vm.loginError.bind(vm));
+      },
+      loginSuccess: function() {
+        Flash.create('success', 'Successful authorization!');
+        $state.go('dashboard.eventlog');
+      },
+      loginError: function(response) {
+        this.errors = response.data;
+      },
+      hasErrors: function() {
+        return this.errors;
+      },
+      getErrors: function() {
+        var vm = this;
+        if (vm.errors !== undefined) {
+          var prettyErrors = [];
+          for (var key in vm.errors) {
+            if (vm.errors.hasOwnProperty(key)) {
+              if (Object.prototype.toString.call(vm.errors[key]) === '[object Array]') {
+                prettyErrors.push(key + ': ' + vm.errors[key].join(', '));
+              } else {
+                prettyErrors.push(key + ': ' + vm.errors[key]);
+              }
             }
           }
+          return prettyErrors;
+        } else {
+          return '';
         }
-        return prettyErrors;
-      } else {
-        return '';
       }
-    }
+    });
+
+    controllerScope.__proto__ = new Controller();
   }
 
 })();
