@@ -54,10 +54,27 @@
       '$stateParams',
       '$rootScope',
       'usersService',
+      'baseControllerDetailUpdateClass',
       UserDetailUpdateController
     ]);
 
-  function UserDetailUpdateController($stateParams, $rootScope, usersService) {
+  function UserDetailUpdateController($stateParams, $rootScope, usersService, baseControllerDetailUpdateClass) {
+    var controllerScope = this;
+    var Controller = baseControllerDetailUpdateClass.extend({
+      activeTab: 'eventlog',
+
+      init:function() {
+        this.service = usersService;
+        this.controllerScope = controllerScope;
+        this._super();
+        this.detailsState = 'customers.details';
+      }
+    });
+
+    controllerScope.__proto__ = new Controller();
+  }
+
+  function UserDetailUpdateControllerOld($stateParams, $rootScope, usersService) {
     var vm = this;
 
     vm.activeTab = 'eventlog';
