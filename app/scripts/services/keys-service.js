@@ -2,54 +2,41 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('keysService', ['$q', 'RawKey', 'usersService', keysService]);
+    .service('keysService', ['$q', 'usersService', 'baseServiceClass', keysService]);
 
-  function keysService($q, RawKey, usersService) {
+  function keysService($q, usersService, baseServiceClass) {
     /*jshint validthis: true */
-    var vm = this;
-    vm.getKeyList = getKeyList;
-    vm.getCurrentUserKeyList = getCurrentUserKeyList;
-    vm.getUserKeys = getUserKeys;
+    var ServiceClass = baseServiceClass.extend({
+      init:function() {
+        this._super();
+        this.endpoint = '/keys/';
+      },
+      getCurrentUserKeyList: function() {
+        var deferred = $q.defer(),
+          vm = this;
+        usersService.getCurrentUser().then(initKeys, reject);
 
-    function getKeyList() {
-      return RawKey.query().$promise;
-    }
+        function initKeys(user) {
+          /*jshint camelcase: false */
+          vm.getUserKeys(user.uuid).then(
+            function(keys) {
+              deferred.resolve(keys);
+            },
+            reject
+          );
+        }
 
-    function getCurrentUserKeyList() {
-      var deferred = $q.defer();
-      usersService.getCurrentUser().then(initKeys, reject);
+        function reject(error) {
+          deferred.reject(error);
+        }
 
-      function initKeys(user) {
-        /*jshint camelcase: false */
-        getUserKeys(user.uuid).then(
-          function(keys) {
-            deferred.resolve(keys);
-          },
-          reject
-        );
+        return deferred.promise;
+      },
+      getUserKeys: function(userUuid) {
+        return this.getList({user_uuid: userUuid});
       }
-
-      function reject(error) {
-        deferred.reject(error);
-      }
-
-      return deferred.promise;
-    }
-
-    function getUserKeys(userUuid) {
-      return RawKey.query({user_uuid: userUuid}).$promise;
-    }
-
+    });
+    return new ServiceClass();
   }
-
-})();
-
-(function() {
-  angular.module('ncsaas')
-    .factory('RawKey', ['ENV', '$resource', RawKey]);
-
-    function RawKey(ENV, $resource) {
-      return $resource(ENV.apiEndpoint + 'api/keys/:keyUUID/', {keyUUID:'@uuid'});
-    }
 
 })();
