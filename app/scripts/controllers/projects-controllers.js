@@ -159,8 +159,8 @@
     $stateParams, projectsService, projectPermissionsService, USERPROJECTROLE, usersService, baseControllerClass) {
     var controllerScope = this;
     var Controller = baseControllerClass.extend({
-      users: {},
-      usersList: [],
+      users: {}, // users with role in project
+      usersListForAutoComplete: [],
       user: null,
       project: null,
 
@@ -175,23 +175,23 @@
       activate: function() {
         var vm = this;
         if (this.users[this.adminRole].length === 0) {
-          this.getUsers(this.adminRole);
+          this.getUsersForProject(this.adminRole);
         }
         if (this.users[this.managerRole].length === 0) {
-          this.getUsers(this.managerRole);
+          this.getUsersForProject(this.managerRole);
         }
         projectsService.$get($stateParams.uuid).then(function(response) {
           vm.project = response;
         });
-        this.getUserList();
+        this.getUserListForAutoComplete();
       },
-      getUserList: function(filter) {
+      getUserListForAutoComplete: function(filter) {
         var vm = this;
         usersService.getList(filter).then(function(response) {
-          vm.usersList = response;
+          vm.usersListForAutoComplete = response;
         });
       },
-      getUsers: function(role) {
+      getUsersForProject: function(role) {
         var vm = this;
         var filter = {
           role: role,
@@ -202,13 +202,13 @@
         });
       },
       userSearchInputChanged: function(searchText) {
-        controllerScope.getUserList({full_name: searchText});
+        controllerScope.getUserListForAutoComplete({full_name: searchText});
       },
       selectedUsersCallback: function(selected) {
         if (selected) {
           controllerScope.user = selected.originalObject;
           controllerScope.addUser(this.id);
-          controllerScope.getUserList();
+          controllerScope.getUserListForAutoComplete();
         }
       },
       addUser: function(role) {
@@ -219,7 +219,7 @@
         instance.role = role;
         instance.$save(
           function() {
-            vm.getUsers(role);
+            vm.getUsersForProject(role);
           },
           function(response) {
             alert(response.data.non_field_errors);
