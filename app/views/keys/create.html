@@ -1,0 +1,69 @@
+<div ng-controller="KeyAddController as KeyAdd">
+
+<div class="white-box">
+    <ul class="sort-list">
+        <li class="title">
+            <h2 class="app-title">Add project</h2>
+        </li>
+    </ul>
+</div>
+
+<div class="white-box">
+    <section class="short-form">
+        <div class="form-row">
+            <div class="col label">
+                <label for="">Key name</label>
+            </div>
+            <div class="col input">
+                <input type="text" placeholder="My Key" ng-model="KeyAdd.key.name">
+                <div class="error arrow-up" ng-show="KeyAdd.errors.name">
+                    <ul class="error-list">
+                        <li ng-repeat="error in KeyAdd.errors.name">{{ error }}</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col description">
+                <article class="light-description">
+                    <!-- empty label -->
+                </article>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col label">
+                <label for="">SSH key</label>
+            </div>
+            <div class="col input">
+                <textarea class="normal"
+                    ng-model="KeyAdd.key.public_key"></textarea>
+            </div>
+            <div class="col description">
+                <article class="light-description">
+                    <!-- empty label -->
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- non field errors -->
+    <div class="simple-line" ng-show="KeyAdd.errors.non_field_errors">
+        <div class="error">
+            <ul class="error-list">
+                <li ng-repeat="error in KeyAdd.errors.non_field_errors">
+                    {{ error }}
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- /non field errors -->
+
+    <div class="decision">
+        <div class="col">
+            <a class="button-cancel" ng-click="KeyAdd.cancel()">Cancel</a>
+        </div>
+        <div class="col">
+            <a class="button-apply" ng-click="KeyAdd.save()">Add key</a>
+        </div>
+    </div>
+</div>
+
+</div>
