@@ -3,6 +3,12 @@
     @include property(margin, 20 60);
     @include property(margin-bottom, -20);
     @include property(padding-left, 10);
+    @include bp(xs) {
+        @include property(margin, 20 10);
+    } // xs
+    @include bp(sm) {
+        @include property(margin, 20 10);
+    } // sm
     li {
         cursor: pointer;
         @include property(padding, 10 15);

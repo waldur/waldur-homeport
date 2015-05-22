@@ -2,16 +2,74 @@
     @include table;
     @include property(padding, 40 60);
     background-color: white;
+    @include bp(xs) {
+        display: block;
+        @include property(padding, 20 20);
+    } // xs
+    @include bp(sm) {
+        display: block;
+        @include property(padding, 20 20);
+    } // sm
     > section {
         @include table-cell;
         @include property(padding, 0 10);
         &.avatar {
             @include property(width, 80);
+            @include bp(xs) {
+                width: 100%;
+                img {
+                    @include inline-middle;
+                } // img
+            } // xs
+            @include bp(sm) {
+                width: 100%;
+                img {
+                    @include inline-middle;
+                } // img
+            } // sm
         } // &.avatar
         &.content {} // &.content
         &.actions {
             text-align: right;
             @include property(width, 120);
+            @include bp(xs) {
+                width: 100%;
+                text-align: center;
+                .actions-dropdown {
+                    width: 60%;
+                    right: auto;
+                    left: 50%;
+                    margin-left: calc(-60% / 2);
+                    text-align: left;
+                } // actions-dropdown
+            } // xs
+            @include bp(sm) {
+                width: 100%;
+                text-align: center;
+                .actions-dropdown {
+                    width: 60%;
+                    right: auto;
+                    left: 50%;
+                    margin-left: calc(-60% / 2);
+                    text-align: left;
+                } // actions-dropdown
+            } // sm
         } // &.actions
+        @include bp(xs) {
+            display: block;
+            width: 100%;
+            text-align: center;
+            + section {
+                @include property(margin-top, 20);
+            }
+        } // xs
+        @include bp(sm) {
+            display: block;
+            width: 100%;
+            text-align: center;
+            + section {
+                @include property(margin-top, 20);
+            }
+        } // sm
     } // > section
 } // profile-view
