@@ -9,6 +9,7 @@
     var Controller = baseControllerClass.extend({
       isSignupFormVisible: false,
       user: {},
+      errors: {},
 
       init: function() {
         this._super();
@@ -26,7 +27,11 @@
         $state.go('dashboard.eventlog');
       },
       loginError: function(response) {
-        this.errors = response.data;
+        if (response.status != 400) {
+          this.errors[response.status] = response.statusText + ' Authorization failed';
+        } else {
+          this.errors = response.data;
+        }
       },
       hasErrors: function() {
         return this.errors;
