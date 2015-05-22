@@ -2,9 +2,9 @@
 
     <div class="profile-view">
         <section class="content">
-            <h2 class="app-title">{{ ProjectDetailUpdate.project.name }}</h2>
+            <h2 class="app-title">{{ ProjectDetailUpdate.model.name }}</h2>
             <div>
-                <a ui-sref="customers.details({uuid: ProjectDetailUpdate.project.customer.uuid})">{{ ProjectDetailUpdate.project.customer.name }}</a>
+                <a ui-sref="customers.details({uuid: ProjectDetailUpdate.model.customer.uuid})">{{ ProjectDetailUpdate.model.customer.name }}</a>
             </div>
         </section>
         <section class="actions">
@@ -12,7 +12,7 @@
                 <a class="button" ng-click="openActions=!openActions">actions</a>
                 <ul class="actions-dropdown" ng-show="openActions">
                     <li>
-                        <a class="button-simple">Edit</a>
+                        <a ui-sref="projects.update({uuid: ProjectDetailUpdate.model.uuid})" class="button-simple">Edit</a>
                     </li>
                     <li>
                         <a class="button-simple">Archive</a>

@@ -179,6 +179,18 @@ angular
           'appContent': {
             templateUrl: 'views/project/update.html',
           },
+          'tabEventlog@projects.update' : {
+            templateUrl: 'views/project/tab-eventlog.html',
+          },
+          'tabResources@projects.update' : {
+            templateUrl: 'views/project/tab-resources.html',
+          },
+          'tabUsers@projects.update' : {
+            templateUrl: 'views/project/tab-users.html',
+          },
+          'eventTypes@projects.update' : {
+            templateUrl: 'views/events/event-types.html',
+          },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',
           }
