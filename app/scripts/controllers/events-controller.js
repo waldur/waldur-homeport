@@ -12,6 +12,7 @@
       init:function() {
         this.service = eventsService;
         this.searchFieldName = 'search';
+        this.searchFilterNames = {search: 'All'};
         this._super();
       },
       isTemplateTypeReady: function(type) {

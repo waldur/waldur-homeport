@@ -13,12 +13,7 @@
                 </div>
             </li>
             <li>
-                <div class="toggle-filters">
-                    <span class="filter"
-                        ng-repeat="filter in [1,2,3,4,5]"
-                        ng-click="activeFilter=!activeFilter"
-                        ng-class="{'active': activeFilter}">Filter name</span>
-                </div>
+                <filter-list filter-controller="EventList"></filter-list>
             </li>
         </ul>
     </div>

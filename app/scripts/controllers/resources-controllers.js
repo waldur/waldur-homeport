@@ -10,6 +10,13 @@
       init: function() {
         this._super();
         this.searchFieldName = 'name';
+        this.searchFilterNames = {
+          name: 'Name',
+          project: 'Project name',
+          project_group: 'Project group name',
+          template_name: 'Template name',
+          description: 'Description'
+        };
       },
       stopResource:function(resource) {
         var vm = this;

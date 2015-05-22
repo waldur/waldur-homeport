@@ -1,0 +1,6 @@
+<div class="toggle-filters">
+    <span class="filter"
+          ng-repeat="(filter, name)  in filterController.searchFilterNames"
+          ng-click="filterController.searchFieldName=filter;search()"
+          ng-class="{'active': filterController.searchFieldName === filter}">{{ name }}</span>
+</div>
