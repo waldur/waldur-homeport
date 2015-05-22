@@ -2,31 +2,30 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('ProfileController', ['usersService', 'customersService',
-      'projectsService', 'baseControllerClass', 'authService', 'keysService', ProfileController]);
+    .controller('DetailUpdateProfileController', ['usersService', 'customersService',
+      'projectsService', 'baseControllerDetailUpdateClass', 'authService', 'keysService', DetailUpdateProfileController]);
 
-  function ProfileController(
-    usersService, customersService, projectsService, baseControllerClass, authService, keysService) {
+  function DetailUpdateProfileController(
+    usersService, customersService, projectsService, baseControllerDetailUpdateClass, authService, keysService) {
     var controllerScope = this;
-    var Controller = baseControllerClass.extend({
+    var Controller = baseControllerDetailUpdateClass.extend({
       activeTab: 'eventlog',
-      user: {},
       customers: {},
       projects: {},
-      controllerScope: null,
 
-      init: function() {
+      init:function() {
         this.setSignalHandler('currentCustomerUpdated', this.getProjects.bind(controllerScope));
+        this.service = usersService;
+        this.controllerScope = controllerScope;
         this._super();
-        this.activate();
+        this.detailsState = 'profile.details';
       },
       activate: function() {
         var vm = this;
-        vm.user = null;
         usersService.getCurrentUser(true).then(function(response) {
-          vm.user = response;
-          keysService.getUserKeys(vm.user.uuid).then(function(response) {
-            vm.user.keys = response;
+          vm.model = response;
+          keysService.getUserKeys(vm.model.uuid).then(function(response) {
+            vm.model.keys = response;
           });
         });
         vm.customers = [];
@@ -43,7 +42,7 @@
       },
       deleteAccount: function() {
         if (confirm('Are you sure you want to delete your account?')) {
-          this.user.$delete(
+          this.model.$delete(
             authService.signout,
             function(errors) {
               alert(errors.data.detail);
@@ -55,38 +54,4 @@
 
     controllerScope.__proto__ = new Controller();
   }
-
-})();
-
-
-(function() {
-  angular.module('ncsaas')
-    .controller('UpdateProfileController', ['usersService', '$state', UpdateProfileController]);
-
-  function UpdateProfileController(usersService, $state) {
-    var vm = this;
-
-    vm.activeTab = 'eventlog';
-    vm.user = {};
-    vm.errors = {};
-    vm.update = update;
-
-    usersService.getCurrentUser().then(function(response) {
-      vm.user = response;
-    });
-
-    function update() {
-      vm.user.$update(success, error);
-
-      function success() {
-        $state.go('profile.details');
-      }
-
-      function error(response) {
-        vm.errors = response.data;
-      }
-    }
-
-  }
-
 })();

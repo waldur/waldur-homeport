@@ -1,14 +1,14 @@
-<div ng-controller="UpdateProfileController as UpdateProfile">
+<div ng-controller="DetailUpdateProfileController as UpdateProfile">
 
     <div class="profile-view">
         <section class="avatar">
             <span class="avatar big">
-                <img gravatar-src="UpdateProfile.user.email" alt="" class="avatar-img">
+                <img gravatar-src="UpdateProfile.model.email" alt="" class="avatar-img">
             </span>
         </section>
         <section class="content">
-            <h2 class="app-title">{{ UpdateProfile.user.full_name }}</h2>
-            <span>({{ UpdateProfile.user.username }})</span>
+            <h2 class="app-title">{{ UpdateProfile.model.full_name }}</h2>
+            <span>({{ UpdateProfile.model.username }})</span>
             <div>
                 <div class="short-form half in-profile">
                     <div class="form-row">
@@ -16,7 +16,7 @@
                             <label>My email</label>
                         </div>
                         <div class="col input-full">
-                            <input type="text" class="form-control" ng-model="UpdateProfile.user.email" required>
+                            <input type="text" class="form-control" ng-model="UpdateProfile.model.email" required>
                             <div class="error short" ng-show="UpdateProfile.errors.email">
                                 <ul class="error-list">
                                     <li ng-repeat="error in UpdateProfile.errors.email">
@@ -33,7 +33,7 @@
                                     <a ui-sref="profile.details" class="button-cancel">Cancel</a>
                                 </div>
                                 <div class="col">
-                                    <button class="button-apply" ng-click="UpdateProfile.update()" ng-show="UpdateProfile.user.email.length" type="submit">Save</button>
+                                    <button class="button-apply" ng-click="UpdateProfile.update()" ng-show="UpdateProfile.model.email.length" type="submit">Save</button>
                                 </div>
                             </div>
                         </div>
