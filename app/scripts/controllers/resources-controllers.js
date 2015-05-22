@@ -114,7 +114,7 @@
         servicesService.$get(uuid).then(function(response) {
           var service = response;
           vm.flavorList = service.flavors;
-          templatesService.getTemplateList(service.uuid).then(function(response) {
+          templatesService.getList({cloud: service.uuid}).then(function(response) {
             vm.templateList = response;
           });
           vm.selectedService = projectCloudMemberships;

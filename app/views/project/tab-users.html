@@ -1,52 +1,55 @@
-<sortline ></sortline>
+<div ng-controller="ProjectUsersTabController as ProjectUsersTab">
+    <sortline ></sortline>
 
-<div class="white-box">
-    <div class="row">
-        <div class="col full">
-            <div class="add-or-remove">
-                <h3 class="app-title">Administrator</h3>
-                <span class="added" ng-repeat="adminUser in ProjectDetailUpdate.users[ProjectDetailUpdate.adminRole]"
-                      ng-click="ProjectDetailUpdate.userProjectRemove(adminUser)">
+    <div class="white-box">
+        <div class="row">
+            <div class="col full">
+                <div class="add-or-remove">
+                    <h3 class="app-title">Administrator</h3>
+                <span class="added" ng-repeat="adminUser in ProjectUsersTab.users[ProjectUsersTab.adminRole]"
+                      ng-click="ProjectUsersTab.userProjectRemove(adminUser)">
                     {{ adminUser.user_full_name }}
                 </span>
-                <angucomplete-alt id="{{ ProjectDetailUpdate.adminRole }}"
-                                  ng-click="inputMode=!inputMode"
-                                  placeholder="Add"
-                                  pause="100"
-                                  type="text"
-                                  selected-object="ProjectDetailUpdate.selectedUsersCallback"
-                                  local-data="ProjectDetailUpdate.usersList"
-                                  search-fields="full_name"
-                                  title-field="full_name"
-                                  description-field="email"
-                                  minlength="1"
-                                  clear-selected="true"
-                                  input-changed="ProjectDetailUpdate.userSearchInputChanged"
-                                  input-class="add-label {{ inputMode ? 'input': '' }}"></angucomplete-alt>
+                    <angucomplete-alt id="{{ ProjectUsersTab.adminRole }}"
+                                      ng-click="inputMode=!inputMode"
+                                      placeholder="Add"
+                                      pause="100"
+                                      type="text"
+                                      selected-object="ProjectUsersTab.selectedUsersCallback"
+                                      local-data="ProjectUsersTab.usersListForAutoComplete"
+                                      search-fields="full_name"
+                                      title-field="full_name"
+                                      description-field="email"
+                                      minlength="1"
+                                      clear-selected="true"
+                                      input-changed="ProjectUsersTab.userSearchInputChanged"
+                                      input-class="add-label {{ inputMode ? 'input': '' }}"></angucomplete-alt>
+                </div>
             </div>
-        </div>
-        <div class="col full">
-            <div class="add-or-remove">
-                <h3 class="app-title">Managers</h3>
-                <span class="added" ng-repeat="managerUser in ProjectDetailUpdate.users[ProjectDetailUpdate.managerRole]"
-                      ng-click="ProjectDetailUpdate.userProjectRemove(managerUser)">
+            <div class="col full">
+                <div class="add-or-remove">
+                    <h3 class="app-title">Managers</h3>
+                <span class="added" ng-repeat="managerUser in ProjectUsersTab.users[ProjectUsersTab.managerRole]"
+                      ng-click="ProjectUsersTab.userProjectRemove(managerUser)">
                     {{ managerUser.user_full_name }}
                 </span>
-                <angucomplete-alt id="{{ ProjectDetailUpdate.managerRole }}"
-                                  ng-click="inputMode2=!inputMode2"
-                                  placeholder="Add"
-                                  pause="100"
-                                  type="text"
-                                  selected-object="ProjectDetailUpdate.selectedUsersCallback"
-                                  local-data="ProjectDetailUpdate.usersList"
-                                  search-fields="full_name"
-                                  title-field="full_name"
-                                  description-field="email"
-                                  minlength="1"
-                                  clear-selected="true"
-                                  input-changed="ProjectDetailUpdate.userSearchInputChanged"
-                                  input-class="add-label {{ inputMode2 ? 'input': '' }}"></angucomplete-alt>
+                    <angucomplete-alt id="{{ ProjectUsersTab.managerRole }}"
+                                      ng-click="inputMode2=!inputMode2"
+                                      placeholder="Add"
+                                      pause="100"
+                                      type="text"
+                                      selected-object="ProjectUsersTab.selectedUsersCallback"
+                                      local-data="ProjectUsersTab.usersListForAutoComplete"
+                                      search-fields="full_name"
+                                      title-field="full_name"
+                                      description-field="email"
+                                      minlength="1"
+                                      clear-selected="true"
+                                      input-changed="ProjectUsersTab.userSearchInputChanged"
+                                      input-class="add-label {{ inputMode2 ? 'input': '' }}"></angucomplete-alt>
+                </div>
             </div>
         </div>
     </div>
 </div>
+

@@ -1,16 +1,16 @@
-<div ng-controller="ProfileController as DetailsProfile">
+<div ng-controller="DetailUpdateProfileController as DetailsProfile">
 
     <div class="profile-view">
         <section class="avatar">
             <span class="avatar big">
-                <img gravatar-src="DetailsProfile.user.email" alt="" class="avatar-img">
+                <img gravatar-src="DetailsProfile.model.email" alt="" class="avatar-img">
             </span>
         </section>
         <section class="content">
-            <h2 class="app-title">{{ DetailsProfile.user.full_name }}</h2>
-            <span>({{ DetailsProfile.user.username }})</span>
+            <h2 class="app-title">{{ DetailsProfile.model.full_name }}</h2>
+            <span>({{ DetailsProfile.model.username }})</span>
             <div>
-                <a href="mailto:{{ DetailsProfile.user.email }}">{{ DetailsProfile.user.email }}</a>
+                <a href="mailto:{{ DetailsProfile.model.email }}">{{ DetailsProfile.model.email }}</a>
             </div>
         </section>
         <section class="actions">

@@ -51,27 +51,25 @@
 
   angular.module('ncsaas')
     .controller('UserDetailUpdateController', [
-      '$stateParams',
-      '$rootScope',
       'usersService',
+      'baseControllerDetailUpdateClass',
       UserDetailUpdateController
     ]);
 
-  function UserDetailUpdateController($stateParams, $rootScope, usersService) {
-    var vm = this;
+  function UserDetailUpdateController(usersService, baseControllerDetailUpdateClass) {
+    var controllerScope = this;
+    var Controller = baseControllerDetailUpdateClass.extend({
+      activeTab: 'eventlog',
 
-    vm.activeTab = 'eventlog';
-    vm.user = null;
-    
-    usersService.$get($stateParams.uuid).then(function(response) {
-      vm.user = response;
+      init:function() {
+        this.service = usersService;
+        this.controllerScope = controllerScope;
+        this._super();
+        this.detailsState = 'customers.details';
+      }
     });
-    vm.update = update;
 
-    function update() {
-      vm.user.$update();
-    }
-
+    controllerScope.__proto__ = new Controller();
   }
 
 })();
