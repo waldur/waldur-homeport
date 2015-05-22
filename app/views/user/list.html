@@ -26,7 +26,10 @@
         <div class="list-item no-cursor">
             <div class="checkbox">
                 <div class="checkbox" ng-show="UserList.showgroup">
-                    <input type="checkbox">
+                    <input type="checkbox"
+                        ng-model="UserList.master"
+                        ng-checked="UserList.masterChecked"
+                        ng-click="UserList.masterChange()">
                 </div>
             </div>
             <div>
@@ -80,7 +83,9 @@
                 <div class="list-item" ng-class="{'opened': expandItem}">
                     <div class="checkbox">
                         <div class="checkbox">
-                            <input type="checkbox" ng-show="UserList.showgroup">
+                            <input type="checkbox" ng-show="UserList.showgroup"
+                                ng-model="UserList.isSelected[user.uuid]"
+                                ng-click="UserList.isSelectedChange()">
                         </div>
                     </div>
                     <div class="expand">

@@ -41,6 +41,9 @@
       searchFieldName: '', // required in init
       controllerScope: null, // required in init
       showgroup: false, // for showing group buttons and checkboxes in list view
+      // checkboxes
+      masterChecked:false,
+      isSelected: {},
 
       init:function() {
         this.setSignalHandler('currentCustomerUpdated', this.currentCustomerUpdatedHandler.bind(this));
@@ -82,6 +85,32 @@
         var vm = this.controllerScope;
         vm.service.page = 1;
         vm.getList();
+      },
+      // checkboxes
+      masterChange: function() {
+        this.master = !this.masterChecked;
+        this.masterChecked = !this.masterChecked;
+        if (!this.masterChecked) {
+          this.isSelected = {};
+        } else {
+          this.checkAll();
+        }
+      },
+      isSelectedChange: function() {
+        this.masterChecked = this.checkForSelected();
+      },
+      checkForSelected: function() {
+        for (var uuid in this.isSelected) {
+          if (this.isSelected[uuid]) {
+            return true;
+          }
+        }
+        return false;
+      },
+      checkAll: function() {
+        for (var i = 0; this.list.length > i; i++) {
+          this.isSelected[this.list[i].uuid] = true;
+        }
       }
     });
 
