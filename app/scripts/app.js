@@ -381,28 +381,6 @@ angular
         auth: true
       })
 
-      .state('keys', {
-        url: '/keys/',
-        abstract: true,
-        templateUrl: 'views/partials/base.html',
-      })
-
-      .state('keys.create', {
-        url: 'add/',
-        views: {
-          'appContent': {
-            templateUrl: 'views/keys/create.html',
-          },
-          'appHeader': {
-            templateUrl: 'views/partials/app-header.html',
-          }
-        },
-        resolve: {
-          authenticated: authCheck
-        },
-        auth: true
-      })
-
       .state('users', {
         url: '/users/',
         abstract: true,
