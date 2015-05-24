@@ -152,3 +152,28 @@
     controllerScope.__proto__ = new ProjectController();
   }
 })();
+
+(function() {
+  angular.module('ncsaas')
+    .controller('UserKeyTabController', [
+      '$stateParams',
+      'keysService',
+      'baseControllerListClass',
+      UserKeyTabController
+    ]);
+
+  function UserKeyTabController($stateParams, keysService, baseControllerListClass) {
+    var controllerScope = this;
+    var Controller = baseControllerListClass.extend({
+      init: function() {
+        this.controllerScope = controllerScope;
+        this.service = keysService;
+        this.service.defaultFilter.user_uuid = $stateParams.uuid;
+        this._super();
+      }
+    });
+
+    controllerScope.__proto__ = new Controller();
+  }
+
+})();
