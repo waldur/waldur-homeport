@@ -4,7 +4,7 @@ input[type="password"] {
     border: 1px solid #D8D8D8;
     box-shadow: none;
     @include property(border-radius, 1);
-    @include property(padding, 6 10);
+    @include property(padding, 10 10);
     @include property(font-size, 16);
 }
 
@@ -49,7 +49,8 @@ textarea {
         color: #565656;
     }
     select {
-        @include property(padding, 6 10);
+        @include property(padding, 10 10);
+        @include property(padding-top, 12);
         @include property(padding-right, 25);
         cursor: pointer;
         background: transparent;
