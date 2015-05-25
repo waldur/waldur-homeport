@@ -2,9 +2,9 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('AuthController', ['$state', 'Flash', 'authService', 'baseControllerClass', AuthController]);
+    .controller('AuthController', ['$state', 'authService', 'baseControllerClass', AuthController]);
 
-  function AuthController($state, Flash, authService, baseControllerClass) {
+  function AuthController($state, authService, baseControllerClass) {
     var controllerScope = this;
     var Controller = baseControllerClass.extend({
       isSignupFormVisible: false,
@@ -16,14 +16,14 @@
       },
       signin: function() {
         var vm = this;
-        authService.signin(vm.user.username, vm.user.password).then(vm.loginSuccess, vm.loginError.bind(vm));
+        authService.signin(vm.user.username, vm.user.password).then(vm.loginSuccess.bind(vm), vm.loginError.bind(vm));
       },
       authenticate: function(provider) {
         var vm = this;
-        authService.authenticate(provider).then(vm.loginSuccess, vm.loginError.bind(vm));
+        authService.authenticate(provider).then(vm.loginSuccess.bind(vm), vm.loginError.bind(vm));
       },
       loginSuccess: function() {
-        Flash.create('success', 'Successful authorization!');
+        this.successFlash('Successful authorization!');
         $state.go('dashboard.eventlog');
       },
       loginError: function(response) {

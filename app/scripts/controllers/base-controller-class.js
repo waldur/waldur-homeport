@@ -1,8 +1,8 @@
 (function(){
   angular.module('ncsaas')
-    .service('baseControllerClass', ['$rootScope', baseControllerClass]);
+    .service('baseControllerClass', ['$rootScope', 'Flash', baseControllerClass]);
 
-  function baseControllerClass($rootScope) {
+  function baseControllerClass($rootScope, Flash) {
     var ControllerClass = Class.extend({
       _signals: {},
 
@@ -16,6 +16,12 @@
         for (var eventName in this._signals) {
           $rootScope.$on(eventName, this._signals[eventName]);
         }
+      },
+      successFlash: function(message) {
+        this.flashMessage('success', message);
+      },
+      flashMessage: function(type, message) {
+        Flash.create(type, message);
       }
     });
 
@@ -109,6 +115,7 @@
       controllerScope: null, // required in init
       detailsState: null,
       redirectToDetailsPage: false,
+      successMessage: 'Saved successfully',
 
       init:function() {
         this.instance = this.service.$create();
@@ -120,6 +127,7 @@
         vm.instance.$save(success, error);
         function success() {
           vm.afterSave();
+          vm.successFlash(vm.successMessage);
           if (vm.redirectToDetailsPage) {
             $state.go(vm.detailsState, {uuid: vm.instance.uuid});
           } else {
