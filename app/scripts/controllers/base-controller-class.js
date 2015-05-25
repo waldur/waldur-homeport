@@ -41,6 +41,8 @@
       searchFieldName: '', // required in init
       controllerScope: null, // required in init
       showgroup: false, // for showing group buttons and checkboxes in list view
+      // checkboxes
+      selectedInstances: [],
 
       init:function() {
         this.setSignalHandler('currentCustomerUpdated', this.currentCustomerUpdatedHandler.bind(this));
@@ -78,11 +80,29 @@
           alert(message);
         }
       },
+      changeAllSelectedInstances: function() {
+        if (this.selectedInstances.length) {
+          this.selectedInstances = [];
+        } else {
+          this.selectedInstances = this.list.slice();
+        }
+      },
+      changeInstanceSelection: function(instance) {
+        var index = this.selectedInstances.indexOf(instance);
+        if (index !== -1) {
+          this.selectedInstances.splice(index, 1);
+        } else {
+          this.selectedInstances.push(instance);
+        }
+      },
+      isInstanceSelected: function(instance) {
+        return this.selectedInstances.indexOf(instance) !== -1;
+      },
       currentCustomerUpdatedHandler: function() {
         var vm = this.controllerScope;
         vm.service.page = 1;
         vm.getList();
-      }
+      },
     });
 
     return ControllerListClass;
