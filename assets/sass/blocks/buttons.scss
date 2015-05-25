@@ -25,8 +25,8 @@
 .button-cancel {
     @include inline-middle;
     @include property(border-radius, 2);
-    @include property(padding, 4 6);
-    @include property(padding-top, 6);
+    @include property(padding, 10 10);
+    @include property(padding-top, 12);
     @include property(font-size, 16);
     line-height: 1;
     color: #444;
@@ -34,18 +34,18 @@
 .button-apply {
     @include inline-middle;
     @include property(border-radius, 2);
-    @include property(padding, 4 6);
-    @include property(padding-top, 6);
+    @include property(padding, 10 10);
+    @include property(padding-top, 12);
     @include property(font-size, 16);
     line-height: 1;
-    background-color: rgb(36, 118, 160);
+    background-color: #29B958;
     color: #fff;
 } // button-apply
 .button-select {
     @include inline-middle;
     @include property(border-radius, 2);
-    @include property(padding, 4 6);
-    @include property(padding-top, 6);
+    @include property(padding, 10 10);
+    @include property(padding-top, 12);
     @include property(font-size, 16);
     line-height: 1;
     background-color: #7db243;
