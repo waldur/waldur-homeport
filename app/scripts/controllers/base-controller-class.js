@@ -42,8 +42,7 @@
       controllerScope: null, // required in init
       showgroup: false, // for showing group buttons and checkboxes in list view
       // checkboxes
-      masterChecked:false,
-      isSelected: {},
+      selectedInstances: [],
 
       init:function() {
         this.setSignalHandler('currentCustomerUpdated', this.currentCustomerUpdatedHandler.bind(this));
@@ -81,37 +80,29 @@
           alert(message);
         }
       },
+      changeAllSelectedInstances: function() {
+        if (this.selectedInstances.length) {
+          this.selectedInstances = [];
+        } else {
+          this.selectedInstances = this.list.slice();
+        }
+      },
+      changeInstanceSelection: function(instance) {
+        var index = this.selectedInstances.indexOf(instance);
+        if (index !== -1) {
+          this.selectedInstances.splice(index, 1);
+        } else {
+          this.selectedInstances.push(instance);
+        }
+      },
+      isInstanceSelected: function(instance) {
+        return this.selectedInstances.indexOf(instance) !== -1;
+      },
       currentCustomerUpdatedHandler: function() {
         var vm = this.controllerScope;
         vm.service.page = 1;
         vm.getList();
       },
-      // checkboxes
-      masterChange: function() {
-        this.master = !this.masterChecked;
-        this.masterChecked = !this.masterChecked;
-        if (!this.masterChecked) {
-          this.isSelected = {};
-        } else {
-          this.checkAll();
-        }
-      },
-      isSelectedChange: function() {
-        this.masterChecked = this.checkForSelected();
-      },
-      checkForSelected: function() {
-        for (var uuid in this.isSelected) {
-          if (this.isSelected[uuid]) {
-            return true;
-          }
-        }
-        return false;
-      },
-      checkAll: function() {
-        for (var i = 0; this.list.length > i; i++) {
-          this.isSelected[this.list[i].uuid] = true;
-        }
-      }
     });
 
     return ControllerListClass;

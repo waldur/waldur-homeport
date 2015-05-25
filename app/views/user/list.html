@@ -27,9 +27,8 @@
             <div class="checkbox">
                 <div class="checkbox" ng-show="UserList.showgroup">
                     <input type="checkbox"
-                        ng-model="UserList.master"
-                        ng-checked="UserList.masterChecked"
-                        ng-click="UserList.masterChange()">
+                        ng-checked="UserList.selectedInstances.length"
+                        ng-click="UserList.changeAllSelectedInstances()">
                 </div>
             </div>
             <div>
@@ -84,8 +83,8 @@
                     <div class="checkbox">
                         <div class="checkbox">
                             <input type="checkbox" ng-show="UserList.showgroup"
-                                ng-model="UserList.isSelected[user.uuid]"
-                                ng-click="UserList.isSelectedChange()">
+                                ng-checked="UserList.isInstanceSelected(user)"
+                                ng-click="UserList.changeInstanceSelection(user)">
                         </div>
                     </div>
                     <div class="expand">
