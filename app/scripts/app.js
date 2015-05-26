@@ -107,6 +107,28 @@ angular
         auth: true
       })
 
+      .state('appstore', {
+        url: '/appstore/',
+        abstract: true,
+        templateUrl: 'views/partials/base.html',
+      })
+
+      .state('appstore.store', {
+        url: '',
+        views: {
+          'appContent': {
+            templateUrl: 'views/appstore/store.html',
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
+        auth: true
+      })
+
       .state('projects', {
         url: '/projects/',
         abstract: true,
