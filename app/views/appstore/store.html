@@ -13,32 +13,32 @@
     <!-- service-choice -->
     <div class="appstore-templates">
         <!-- service -->
-        <div class="appstore-template">
+        <div class="appstore-template state">
             <div class="icon">
                 <img src="/static/images/icons/icon_openstack_small.png" alt="" class="icon">
             </div>
             <div class="description">
-                <h3>service.cloud_name</h3>
+                <h3>Virtual Machine</h3>
             </div>
         </div>
         <!-- /service -->
         <!-- service -->
-        <div class="appstore-template">
+        <div class="appstore-template no-active">
             <div class="icon">
                 <img src="/static/images/icons/icon_openstack_small.png" alt="" class="icon">
             </div>
             <div class="description">
-                <h3>service.cloud_name</h3>
+                <h3>Repository</h3>
             </div>
         </div>
         <!-- /service -->
         <!-- service -->
-        <div class="appstore-template">
+        <div class="appstore-template no-active">
             <div class="icon">
                 <img src="/static/images/icons/icon_openstack_small.png" alt="" class="icon">
             </div>
             <div class="description">
-                <h3>service.cloud_name</h3>
+                <h3>Something else</h3>
             </div>
         </div>
         <!-- /service -->
@@ -56,7 +56,7 @@
                 <section class="short-form full">
                     <div class="form-row">
                         <div class="col label">
-                            <label for="">Service name:</label>
+                            <label for="">Instance name:</label>
                         </div>
                         <div class="col input">
                             <input type="text" placeholder="OpenStack Testbed" ng-model="ServiceAdd.instance.name">
@@ -74,15 +74,10 @@
                     </div>
                     <div class="form-row">
                         <div class="col label">
-                            <label for="">Auth URL:</label>
+                            <label for="">Instance description:</label>
                         </div>
                         <div class="col input">
-                            <input type="text" placeholder="http://keystone.example.com:5000/v2.0" ng-model="ServiceAdd.instance.auth_url">
-                            <div class="error arrow-up" ng-show="ServiceAdd.errors.auth_url">
-                                <ul class="error-list">
-                                    <li ng-repeat="error in ServiceAdd.errors.auth_url">{{ error }}</li>
-                                </ul>
-                            </div>
+                            <textarea name="" id="" cols="30" rows="10"></textarea>
                         </div>
                         <div class="col description">
                             <article class="light-description">
@@ -98,32 +93,32 @@
                 <!-- instance templates -->
                 <div class="appstore-templates">
                     <!-- service -->
-                    <div class="appstore-template half">
+                    <div class="appstore-template half no-active">
                         <div class="icon">
                             <img src="/static/images/icons/icon_openstack_small.png" alt="" class="icon">
                         </div>
                         <div class="description">
-                            <h3>service cloud_name</h3>
+                            <h3>AWS</h3>
                         </div>
                     </div>
                     <!-- /service -->
                     <!-- service -->
-                    <div class="appstore-template half">
+                    <div class="appstore-template half no-active">
                         <div class="icon">
                             <img src="/static/images/icons/icon_openstack_small.png" alt="" class="icon">
                         </div>
                         <div class="description">
-                            <h3>service cloud_name</h3>
+                            <h3>OpenStack</h3>
                         </div>
                     </div>
                     <!-- /service -->
                     <!-- service -->
-                    <div class="appstore-template half">
+                    <div class="appstore-template half state">
                         <div class="icon">
                             <img src="/static/images/icons/icon_openstack_small.png" alt="" class="icon">
                         </div>
                         <div class="description">
-                            <h3>service cloud_name</h3>
+                            <h3>Digital Ocean</h3>
                         </div>
                     </div>
                     <!-- /service -->
@@ -133,13 +128,64 @@
 
             <div class="content-block">
                 <article class="normal-description">
-                    asd
+                    <p>
+                        This choice include some few good things for you. By first AWS give you a
+                        one year of free testdrive. So ip you want, ip you on Philippines, you should
+                        allways include ‘p’ instead ‘f’. And AWS also pretty nice.
+                    </p>
+                    <ul>
+                        <li>* Some feature</li>
+                        <li>* Another Feature</li>
+                    </ul>
                 </article>
             </div>
 
             <div class="content-block">
                 <!-- instance templates -->
                 <div class="appstore-templates">
+                    <!-- service -->
+                    <div class="appstore-template full state">
+                        <div class="icon">
+                            <img src="/static/images/icons/icon_openstack_small.png" alt="" class="icon">
+                        </div>
+                        <div class="description top">
+                            <div class="row">
+                                <div class="col top half">
+                                    <div class="form-box">
+                                        <div class="custom-select project inline-elem">
+                                            <select>
+                                                <option value="">Choose project</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <article class="normal-description">
+                                        <ul>
+                                            <li>Processor: 1.4 Ghz</li>
+                                            <li>RAM: 256</li>
+                                            <li>HDD: 10Gb</li>
+                                        </ul>
+                                    </article>
+                                </div>
+                                <div class="col top half">
+                                    <article class="normal-description">
+                                        <ul>
+                                            <li>* Free upload traffic</li>
+                                            <li>* Some feature</li>
+                                        </ul>
+                                        <p>
+                                            Here goes some interestiong
+                                            text about this tempate
+                                            And awesome choice!
+                                        </p>
+                                    </article>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="description bottom-price">
+                            <span class="price-tag state">$100</span>
+                        </div>
+                    </div>
+                    <!-- /service -->
                     <!-- service -->
                     <div class="appstore-template full">
                         <div class="icon">
@@ -148,24 +194,94 @@
                         <div class="description top">
                             <div class="row">
                                 <div class="col top half">
-                                    <h3>service cloud_name</h3>
-                                    <article class="light-description">
-                                        sdsd
+                                    <div class="form-box">
+                                        <div class="custom-select project inline-elem">
+                                            <select>
+                                                <option value="">Choose project</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <article class="normal-description">
+                                        <ul>
+                                            <li>Processor: 1.4 Ghz</li>
+                                            <li>RAM: 256</li>
+                                            <li>HDD: 10Gb</li>
+                                        </ul>
                                     </article>
                                 </div>
                                 <div class="col top half">
-                                    <h3>service cloud_name</h3>
-                                    <article class="light-description">
-                                        asd
+                                    <article class="normal-description">
+                                        <ul>
+                                            <li>* Free upload traffic</li>
+                                            <li>* Some feature</li>
+                                        </ul>
+                                        <p>
+                                            Here goes some interestiong
+                                            text about this tempate
+                                            And awesome choice!
+                                        </p>
                                     </article>
                                 </div>
                             </div>
+                        </div>
+                        <div class="description bottom-price">
+                            <span class="price-tag">$100</span>
                         </div>
                     </div>
                     <!-- /service -->
                 </div>
                 <!-- /instance templates -->
             </div>
+
+            <div class="content-block">
+                <h2 class="app-title">Additional options</h2>
+            </div>
+
+            <div class="content-block">
+                <!-- instance templates -->
+                <div class="appstore-templates">
+                    <!-- service -->
+                    <div class="appstore-template full state">
+                        <div class="icon">
+                            <img src="/static/images/icons/icon_openstack_small.png" alt="" class="icon">
+                        </div>
+                        <div class="description top">
+                            <article class="normal-description">
+                                <ul>
+                                    <li>Processor: 1.4 Ghz</li>
+                                    <li>RAM: 256</li>
+                                    <li>HDD: 10Gb</li>
+                                </ul>
+                            </article>
+                        </div>
+                        <div class="description bottom-price">
+                            <span class="price-tag state">$100</span>
+                        </div>
+                    </div>
+                    <!-- /service -->
+                    <!-- service -->
+                    <div class="appstore-template full state">
+                        <div class="icon">
+                            <img src="/static/images/icons/icon_openstack_small.png" alt="" class="icon">
+                        </div>
+                        <div class="description top">
+                            <article class="normal-description">
+                                <ul>
+                                    <li>Processor: 1.4 Ghz</li>
+                                    <li>RAM: 256</li>
+                                    <li>HDD: 10Gb</li>
+                                </ul>
+                            </article>
+                        </div>
+                        <div class="description bottom-price">
+                            <span class="price-tag state">$100</span>
+                        </div>
+                    </div>
+                    <!-- /service -->
+                </div>
+                <!-- /instance templates -->
+            </div>
+
         </div>
         <!-- /content -->
 

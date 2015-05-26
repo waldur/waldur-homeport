@@ -15,4 +15,13 @@
         width: calc(33%);
         min-height: 300px;
     } // checkout
+    // components
+    .price-tag {
+        @include property(font-size, 20px);
+        font-weight: 700;
+        color: #626262;
+        &.state {
+            color: #417505;
+        } // &.state
+    } // price-tag
 } // appstore-checkout

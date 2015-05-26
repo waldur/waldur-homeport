@@ -7,6 +7,7 @@
         border-radius: 3px;
         width: calc(33.3333% - 20px);
         display: flex;
+        flex-wrap: wrap;
         align-items: center;
         padding: 10px;
         margin: 10px;
@@ -61,6 +62,17 @@
             &.top {
                 align-self: flex-start;
             } // &.top
+            .col {
+                padding: 15px 10px;
+            } // .col
+            &.bottom-price {
+                border-top: 1px solid rgb(202, 202, 202);
+                width: calc(100% + 20px);
+                margin-left: -10px;
+                margin-right: -10px;
+                padding-top: 10px;
+                text-align: center;
+            } // &.bottom-price
             h3 {
                 margin: 0;
                 font-size: rem(18);
