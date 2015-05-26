@@ -1,6 +1,6 @@
 .appstore-templates {
     display: flex;
-    flex-wrap: wrap-reverse;
+    flex-wrap: wrap;
     margin-left: -10px;
     margin-right: -10px;
     .appstore-template {
@@ -13,6 +13,12 @@
         border: 1px solid rgb(202, 202, 202);
         position: relative;
         cursor: pointer;
+        &.half {
+            width: calc(50% - 20px);
+        } // half
+        &.full {
+            width: calc(100% - 20px);
+        } // full
         @include bp(xs) {
             width: calc(100% - 20px);
         } // xs
@@ -52,6 +58,9 @@
             &.full {
                 width: 100%;
             } // &.full
+            &.top {
+                align-self: flex-start;
+            } // &.top
             h3 {
                 margin: 0;
                 font-size: rem(18);
