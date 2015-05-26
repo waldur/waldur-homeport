@@ -1,0 +1,183 @@
+<div>
+
+<div class="white-box">
+    <ul class="sort-list">
+        <li class="title">
+            <h2 class="app-title">Appstore</h2>
+        </li>
+    </ul>
+</div>
+
+<div class="white-box">
+
+    <!-- service-choice -->
+    <div class="appstore-templates">
+        <!-- service -->
+        <div class="appstore-template">
+            <div class="icon">
+                <img src="/static/images/icons/icon_openstack_small.png" alt="" class="icon">
+            </div>
+            <div class="description">
+                <h3>service.cloud_name</h3>
+            </div>
+        </div>
+        <!-- /service -->
+        <!-- service -->
+        <div class="appstore-template">
+            <div class="icon">
+                <img src="/static/images/icons/icon_openstack_small.png" alt="" class="icon">
+            </div>
+            <div class="description">
+                <h3>service.cloud_name</h3>
+            </div>
+        </div>
+        <!-- /service -->
+        <!-- service -->
+        <div class="appstore-template">
+            <div class="icon">
+                <img src="/static/images/icons/icon_openstack_small.png" alt="" class="icon">
+            </div>
+            <div class="description">
+                <h3>service.cloud_name</h3>
+            </div>
+        </div>
+        <!-- /service -->
+    </div>
+    <!-- /service-choice -->
+
+    <!-- appstore-checkout -->
+    <div class="appstore-checkout">
+
+        <!-- content -->
+        <div class="content">
+
+            <div class="content-block">
+                <!-- Instance form  -->
+                <section class="short-form full">
+                    <div class="form-row">
+                        <div class="col label">
+                            <label for="">Service name:</label>
+                        </div>
+                        <div class="col input">
+                            <input type="text" placeholder="OpenStack Testbed" ng-model="ServiceAdd.instance.name">
+                            <div class="error arrow-up" ng-show="ServiceAdd.errors.name">
+                                <ul class="error-list">
+                                    <li ng-repeat="error in ServiceAdd.errors.name">{{ error }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col description">
+                            <article class="light-description">
+                                Name of the service
+                            </article>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col label">
+                            <label for="">Auth URL:</label>
+                        </div>
+                        <div class="col input">
+                            <input type="text" placeholder="http://keystone.example.com:5000/v2.0" ng-model="ServiceAdd.instance.auth_url">
+                            <div class="error arrow-up" ng-show="ServiceAdd.errors.auth_url">
+                                <ul class="error-list">
+                                    <li ng-repeat="error in ServiceAdd.errors.auth_url">{{ error }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col description">
+                            <article class="light-description">
+                                URL of supported OpenStack Keystone
+                            </article>
+                        </div>
+                    </div>
+                </section>
+                <!-- /Instance form -->
+            </div>
+
+            <div class="content-block">
+                <!-- instance templates -->
+                <div class="appstore-templates">
+                    <!-- service -->
+                    <div class="appstore-template half">
+                        <div class="icon">
+                            <img src="/static/images/icons/icon_openstack_small.png" alt="" class="icon">
+                        </div>
+                        <div class="description">
+                            <h3>service cloud_name</h3>
+                        </div>
+                    </div>
+                    <!-- /service -->
+                    <!-- service -->
+                    <div class="appstore-template half">
+                        <div class="icon">
+                            <img src="/static/images/icons/icon_openstack_small.png" alt="" class="icon">
+                        </div>
+                        <div class="description">
+                            <h3>service cloud_name</h3>
+                        </div>
+                    </div>
+                    <!-- /service -->
+                    <!-- service -->
+                    <div class="appstore-template half">
+                        <div class="icon">
+                            <img src="/static/images/icons/icon_openstack_small.png" alt="" class="icon">
+                        </div>
+                        <div class="description">
+                            <h3>service cloud_name</h3>
+                        </div>
+                    </div>
+                    <!-- /service -->
+                </div>
+                <!-- /instance templates -->
+            </div>
+
+            <div class="content-block">
+                <article class="normal-description">
+                    asd
+                </article>
+            </div>
+
+            <div class="content-block">
+                <!-- instance templates -->
+                <div class="appstore-templates">
+                    <!-- service -->
+                    <div class="appstore-template full">
+                        <div class="icon">
+                            <img src="/static/images/icons/icon_openstack_small.png" alt="" class="icon">
+                        </div>
+                        <div class="description top">
+                            <div class="row">
+                                <div class="col top half">
+                                    <h3>service cloud_name</h3>
+                                    <article class="light-description">
+                                        sdsd
+                                    </article>
+                                </div>
+                                <div class="col top half">
+                                    <h3>service cloud_name</h3>
+                                    <article class="light-description">
+                                        asd
+                                    </article>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /service -->
+                </div>
+                <!-- /instance templates -->
+            </div>
+        </div>
+        <!-- /content -->
+
+        <!-- checkout -->
+        <div class="checkout">
+
+        </div>
+        <!-- /checkout -->
+
+    </div>
+    <!-- /appstore-checkout -->
+
+</div>
+
+</div>
