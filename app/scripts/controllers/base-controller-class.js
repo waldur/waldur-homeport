@@ -115,7 +115,7 @@
       controllerScope: null, // required in init
       detailsState: null,
       redirectToDetailsPage: false,
-      successMessage: 'Saved successfully',
+      successMessage: 'Saving succeeded.',
 
       init:function() {
         this.instance = this.service.$create();
