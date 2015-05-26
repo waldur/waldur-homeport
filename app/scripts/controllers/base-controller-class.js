@@ -41,11 +41,16 @@
       searchFieldName: '', // required in init
       controllerScope: null, // required in init
       showgroup: false, // for showing group buttons and checkboxes in list view
+      // checkboxes
+      selectedInstances: [],
+      uniqueModelKeyName: 'uuid',
 
       init:function() {
         this.setSignalHandler('currentCustomerUpdated', this.currentCustomerUpdatedHandler.bind(this));
         this._super();
         this.getList();
+        // reset after state change
+        this.selectedInstances = [];
       },
       getList:function(filter) {
         var vm = this;
@@ -66,6 +71,7 @@
         var confirmDelete = confirm('Confirm deletion?');
         if (confirmDelete) {
           model.$delete(function() {
+            vm.afterInstanceRemove(model);
             vm.list.splice(index, 1);
           }, vm.handleActionException);
         } else {
@@ -78,10 +84,36 @@
           alert(message);
         }
       },
+      changeAllSelectedInstances: function() {
+        if (this.selectedInstances.length) {
+          this.selectedInstances = [];
+        } else {
+          for (var i = 0; i < this.list.length; i++) {
+            this.selectedInstances.push(this.list[i][this.uniqueModelKeyName]);
+          }
+        }
+      },
+      changeInstanceSelection: function(instance) {
+        var index = this.selectedInstances.indexOf(instance[this.uniqueModelKeyName]);
+        if (index !== -1) {
+          this.selectedInstances.splice(index, 1);
+        } else {
+          this.selectedInstances.push(instance[this.uniqueModelKeyName]);
+        }
+      },
+      isInstanceSelected: function(instance) {
+        return this.selectedInstances.indexOf(instance[this.uniqueModelKeyName]) !== -1;
+      },
       currentCustomerUpdatedHandler: function() {
         var vm = this.controllerScope;
         vm.service.page = 1;
         vm.getList();
+      },
+      afterInstanceRemove: function(instance) {
+        var index = this.selectedInstances.indexOf(instance[this.uniqueModelKeyName]);
+        if (index !== -1) {
+          this.selectedInstances.splice(index, 1);
+        }
       }
     });
 
