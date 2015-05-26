@@ -111,7 +111,7 @@
       },
       afterInstanceRemove: function(instance) {
         var index = this.selectedInstances.indexOf(instance[this.uniqueModelKeyName]);
-        if (~index) {
+        if (index !== -1) {
           this.selectedInstances.splice(index, 1);
         }
       }
