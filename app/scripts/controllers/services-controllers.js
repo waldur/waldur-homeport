@@ -49,7 +49,6 @@
         this.service = servicesService;
         this.controllerScope = controllerScope;
         this.setSignalHandler('currentCustomerUpdated', this.activate.bind(this));
-        this.name = 'service';
         this._super();
         this.listState = 'services.list';
       },

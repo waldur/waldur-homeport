@@ -78,7 +78,6 @@
         this.service = projectsService;
         this.controllerScope = controllerScope;
         this.setSignalHandler('currentCustomerUpdated', this.currentCustomerUpdatedHandler.bind(this));
-        this.name = 'project';
         this._super();
         this.listState = 'projects.list';
         this.detailsState = 'projects.details';
