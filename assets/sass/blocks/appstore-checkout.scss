@@ -1,0 +1,18 @@
+.appstore-checkout {
+    @include property(margin-top, 20);
+    @include flex;
+    flex-wrap: nowrap;
+    .content {
+        width: calc(68%);
+        min-height: 300px;
+        .content-block {
+            + .content-block {
+                @include property(margin-top, 20);
+            } // + content-block
+        } // content-block
+    } // content
+    .checkout {
+        width: calc(33%);
+        min-height: 300px;
+    } // checkout
+} // appstore-checkout
