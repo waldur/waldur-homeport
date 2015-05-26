@@ -23,12 +23,12 @@
         authService.authenticate(provider).then(vm.loginSuccess.bind(vm), vm.loginError.bind(vm));
       },
       loginSuccess: function() {
-        this.successFlash('Successful authorization!');
+        this.successFlash('Successfully logged in');
         $state.go('dashboard.eventlog');
       },
       loginError: function(response) {
         if (response.status != 400) {
-          this.errors[response.status] = response.statusText + ' Authorization failed';
+          this.errors[response.status] = response.statusText + ' Authentication failed';
         } else {
           this.errors = response.data;
         }
