@@ -12,7 +12,23 @@
       init:function() {
         this.service = eventsService;
         this.searchFieldName = 'search';
-        this.searchFilterNames = {search: 'All'};
+        this.searchFilters = [
+          {
+            name: 'event_type',
+            title: 'Logged in',
+            value: EVENTTYPE.auth_logged_in_with_username
+          },
+          {
+            name: 'event_type',
+            title: 'Project creation',
+            value: EVENTTYPE.project_creation_succeeded
+          },
+          {
+            name: 'event_type',
+            title: 'Customer creation',
+            value: EVENTTYPE.customer_creation_succeeded
+          }
+        ];
         this._super();
       },
       isTemplateTypeReady: function(type) {

@@ -41,7 +41,9 @@
       searchFieldName: '', // required in init
       controllerScope: null, // required in init
       showgroup: false, // for showing group buttons and checkboxes in list view
-      searchFilterNames: {},
+      // filters
+      searchFilters: [], // should contains array of objects {name: 'name', title: 'Title', value: 'value'}
+      chosenFilters: [],
 
       init:function() {
         this.setSignalHandler('currentCustomerUpdated', this.currentCustomerUpdatedHandler.bind(this));

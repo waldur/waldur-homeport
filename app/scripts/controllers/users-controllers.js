@@ -20,6 +20,18 @@
         this.controllerScope = controllerScope;
         this._super();
         this.searchFieldName = 'full_name';
+        this.searchFilters = [
+          {
+            name: 'potential',
+            title: 'Potential',
+            value: true
+          },
+          {
+            name: 'organization_claimed',
+            title: 'Organization claimed',
+            value: true
+          }
+        ];
       },
       showMore: function(user) {
         if (!this.userProjects[user.username]) {
