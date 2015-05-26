@@ -89,6 +89,7 @@
         this.service = resourcesService;
         this.controllerScope = controllerScope;
         this.setSignalHandler('currentCustomerUpdated', this.currentCustomerUpdatedHandler.bind(this));
+        this.name = 'resource';
         this._super();
         this.listState = 'resources.list';
         this.resource = this.instance;

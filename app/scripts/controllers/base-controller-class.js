@@ -115,7 +115,8 @@
       controllerScope: null, // required in init
       detailsState: null,
       redirectToDetailsPage: false,
-      successMessage: 'Saving succeeded.',
+      name: 'entity',
+      successMessage: 'Saving of {vm_name} succeeded.',
 
       init:function() {
         this.instance = this.service.$create();
@@ -127,7 +128,7 @@
         vm.instance.$save(success, error);
         function success() {
           vm.afterSave();
-          vm.successFlash(vm.successMessage);
+          vm.successFlash(vm.successMessage.replace('{vm_name}', vm.name));
           if (vm.redirectToDetailsPage) {
             $state.go(vm.detailsState, {uuid: vm.instance.uuid});
           } else {

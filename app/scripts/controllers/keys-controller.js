@@ -8,6 +8,7 @@
       init: function() {
         this.service = keysService;
         this.controllerScope = controllerScope;
+        this.name = 'key';
         this._super();
         this.listState = 'dashboard.eventlog';
       }
