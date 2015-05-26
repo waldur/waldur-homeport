@@ -3,7 +3,9 @@
     @include flex;
     flex-wrap: nowrap;
     .content {
-        width: calc(68%);
+        width: calc(100% - 280px);
+        box-sizing: border-box;
+        padding-right: 40px;
         min-height: 300px;
         .content-block {
             + .content-block {
@@ -12,7 +14,8 @@
         } // content-block
     } // content
     .checkout {
-        width: calc(33%);
+        width: calc(280px);
+        padding: 0 20px;
         min-height: 300px;
     } // checkout
     // components
@@ -25,3 +28,53 @@
         } // &.state
     } // price-tag
 } // appstore-checkout
+
+.checkout-main {
+    @include property(padding, 20);
+    background-color: #F4F4F4;
+    .checkout-block {
+        + .checkout-block {
+            @include property(margin-top, 20);
+        } // + checkout-block
+        &.centered {
+            text-align: center;
+        } // &.centered
+    } // checkout-block
+    .instance-info {
+        > * + * {
+            @include property(margin-top, 5);
+        } // > * + *
+        strong, span {
+            display: block;
+        } // strong, span
+        span {
+            color: #B8B7B7;
+        } // span
+        strong {
+            color: black;
+        } // strong
+    } // instance-info
+    .checkout-title {
+        border-bottom: 1px solid rgb(216, 216, 216);
+        padding-bottom: 20px;
+    } // checkout-title
+    .checkout-items {
+        .row + .row {
+            border-top: 1px solid rgb(216, 216, 216);
+            padding-top: 10px;
+            margin-top: 10px;
+        }
+        .col.half {
+            width: 50%;
+        }
+    } // checkout-items
+    .checkout-item {
+        text-align: left;
+        .app-title {
+            margin-bottom: 0px;
+        } // .app-title
+    } // checkout-item
+    .checkout-item-price {
+        text-align: right;
+    } //checkout-item-price
+} // checkout-main
