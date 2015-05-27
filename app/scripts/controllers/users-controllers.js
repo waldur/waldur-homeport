@@ -23,12 +23,7 @@
         this.searchFilters = [
           {
             name: 'potential',
-            title: 'Potential',
-            value: true
-          },
-          {
-            name: 'organization_claimed',
-            title: 'Organization claimed',
+            title: 'Colleagues',
             value: true
           }
         ];
