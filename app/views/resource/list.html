@@ -1,6 +1,6 @@
 <div ng-controller="ResourceListController as ResourceList">
 
-<div class="white-box" ng-show="ResourceList.list.length > 0">
+<div class="white-box" ng-show="ResourceList.list.length > 0 || ResourceList.searchInput">
     <ul class="sort-list">
         <li class="title">
             <h2 class="app-title">Resources</h2>
@@ -12,6 +12,9 @@
                 <button class="search-button"></button>
             </div>
         </li>
+        <li>
+            <filter-list filter-controller="ResourceList"></filter-list>
+        </li>
         <li class="right-sort">
             <a ui-sref="resources.create" class="button">
                 <span class="icon plus"></span>
@@ -21,7 +24,7 @@
     </ul>
 </div>
 
-<div class="white-box no-styles" ng-show="ResourceList.list.length <= 0">
+<div class="white-box no-styles" ng-show="ResourceList.list.length <= 0 && !ResourceList.searchInput">
     <h2 class="app-title">
         You have no resources yet.
     </h2>
@@ -32,7 +35,7 @@
     </div>
 </div>
 
-<div class="white-box clear" ng-show="ResourceList.list.length > 0">
+<div class="white-box clear" ng-show="ResourceList.list.length > 0 || ResourceList.searchInput">
     <ul class="object-list">
         <li class="list-item">
             <div class="expand on-mobile"></div>

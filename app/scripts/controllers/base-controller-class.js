@@ -50,6 +50,9 @@
       // checkboxes
       selectedInstances: [],
       uniqueModelKeyName: 'uuid',
+      // filters
+      searchFilters: [], // should contains array of objects {name: 'name', title: 'Title', value: 'value'}
+      chosenFilters: [],
 
       init:function() {
         this.setSignalHandler('currentCustomerUpdated', this.currentCustomerUpdatedHandler.bind(this));
