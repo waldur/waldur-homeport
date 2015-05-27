@@ -70,7 +70,7 @@
         } // &.customers
         > a {
             @include property(font-size, 16);
-            @include property(padding, 0 20);
+            @include property(padding, 0 15);
             @include property(padding-top, 13);
             @include property(height, 50);
             display: block;
