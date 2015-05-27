@@ -39,7 +39,8 @@
       resources: ['resources.list', 'resources.create'],
       projects: ['projects.list', 'projects.details', 'projects.update', 'projects.create', 'projects.add-users'],
       services: ['services.list', 'services.create', 'services.details'],
-      users: ['users.list', 'users.details']
+      users: ['users.list', 'users.details'],
+      appstore: ['appstore.store']
     };
 
     function getActiveItem(stateName) {
