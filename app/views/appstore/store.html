@@ -18,7 +18,7 @@
                 <img src="/static/images/instance.png" alt="" class="icon">
             </div>
             <div class="description">
-                <h3>Virtual Machine</h3>
+                <h3>Virtual infrastructure</h3>
             </div>
         </div>
         <!-- /service -->
@@ -28,7 +28,7 @@
                 <img src="/static/images/repository.png" alt="" class="icon">
             </div>
             <div class="description">
-                <h3>Repository</h3>
+                <h3>Project management</h3>
             </div>
         </div>
         <!-- /service -->
@@ -38,7 +38,7 @@
                 <img src="/static/images/flat-display.png" alt="" class="icon">
             </div>
             <div class="description">
-                <h3>Something else</h3>
+                <h3>ERP products</h3>
             </div>
         </div>
         <!-- /service -->
@@ -54,30 +54,44 @@
             <div class="content-block">
                 <!-- Instance form  -->
                 <section class="short-form full">
-                    <div class="form-row">
+                   <div class="form-row">
                         <div class="col label">
-                            <label for="">Instance name:</label>
+                            <label for="">Project:</label>
                         </div>
                         <div class="col input">
-                            <input type="text" placeholder="OpenStack Testbed" ng-model="ServiceAdd.instance.name">
+                            <div class="custom-select project inline-elem">
+                                <select>
+                                    <option value="">Choose project</option>
+                                    <option value="">Awesome project</option>
+                                    <option value="">DR site</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col description">
+                            <article class="light-description">
+                                The project where provisioned resource will be used.
+                            </article>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col label">
+                            <label for="">Virtual machine name:</label>
+                        </div>
+                        <div class="col input">
+                            <input type="text" placeholder="My Resource" ng-model="ServiceAdd.instance.name">
                             <div class="error arrow-up" ng-show="ServiceAdd.errors.name">
                                 <ul class="error-list">
                                     <li ng-repeat="error in ServiceAdd.errors.name">{{ error }}</li>
                                 </ul>
                             </div>
                         </div>
-                        <div class="col description">
-                            <article class="light-description">
-                                Name of the service
-                            </article>
-                        </div>
                     </div>
                     <div class="form-row">
                         <div class="col label">
-                            <label for="">Instance description:</label>
+                            <label for="">Description:</label>
                         </div>
                         <div class="col input">
-                            <textarea name="" id="" cols="30" rows="10"></textarea>
+                            <textarea name="" id="" cols="30" rows="3"></textarea>
                         </div>
                         <div class="col description">
                             <article class="light-description">
@@ -95,12 +109,13 @@
                     <!-- service -->
                     <div class="appstore-template half no-active">
                         <div class="icon">
-                            <img src="/static/images/icons/icon_aws_small.png" alt="" class="icon">
+                            <img src="/static/images/icons/icon_digitalocean_small.png" alt="" class="icon">
                         </div>
                         <div class="description">
-                            <h3>AWS</h3>
+                            <h3>Digital Ocean</h3>
                         </div>
                     </div>
+
                     <!-- /service -->
                     <!-- service -->
                     <div class="appstore-template half no-active">
@@ -108,17 +123,17 @@
                             <img src="/static/images/icons/icon_openstack_small.png" alt="" class="icon">
                         </div>
                         <div class="description">
-                            <h3>OpenStack</h3>
+                            <h3>Muscat Data Center</h3>
                         </div>
                     </div>
                     <!-- /service -->
                     <!-- service -->
                     <div class="appstore-template half state">
                         <div class="icon">
-                            <img src="/static/images/icons/icon_digitalocean_small.png" alt="" class="icon">
+                            <img src="/static/images/icons/icon_openstack_small.png" alt="" class="icon">
                         </div>
                         <div class="description">
-                            <h3>Digital Ocean</h3>
+                            <h3>Salalah Data Center</h3>
                         </div>
                     </div>
                     <!-- /service -->
@@ -129,14 +144,9 @@
             <div class="content-block">
                 <article class="normal-description">
                     <p>
-                        This choice include some few good things for you. By first AWS give you a
-                        one year of free testdrive. So ip you want, ip you on Philippines, you should
-                        allways include ‘p’ instead ‘f’. And AWS also pretty nice.
+                        Please configure the virtual machine to be provisioned by picking its size and the
+                        operating system. In addition, you can choose to order added-value services for this purchase.
                     </p>
-                    <ul>
-                        <li>* Some feature</li>
-                        <li>* Another Feature</li>
-                    </ul>
                 </article>
             </div>
 
@@ -146,7 +156,7 @@
                     <!-- service -->
                     <div class="appstore-template full state">
                         <div class="icon">
-                            <img src="/static/images/icons/icon_digitalocean_small.png" alt="" class="icon">
+                            <img src="/static/images/icons/icon_openstack_small.png" alt="" class="icon">
                         </div>
                         <div class="description top">
                             <div class="row">
@@ -154,28 +164,28 @@
                                     <div class="form-box">
                                         <div class="custom-select project inline-elem">
                                             <select>
-                                                <option value="">Choose project</option>
+                                                <option value="">Choose OS</option>
+                                                <option value="">Ubuntu Linux 14.04</option>
+                                                <option value="">MS Windows Server 2012</option>
                                             </select>
                                         </div>
                                     </div>
                                     <article class="normal-description">
                                         <ul>
                                             <li>Processor: 1.4 Ghz</li>
-                                            <li>RAM: 256</li>
-                                            <li>HDD: 10Gb</li>
+                                            <li>RAM: 1024</li>
+                                            <li>HDD: 50Gb</li>
                                         </ul>
                                     </article>
                                 </div>
                                 <div class="col top half">
                                     <article class="normal-description">
                                         <ul>
-                                            <li>* Free upload traffic</li>
-                                            <li>* Some feature</li>
+                                            <li>* Free incoming traffic</li>
+                                            <li>* Managed infrastructure</li>
                                         </ul>
                                         <p>
-                                            Here goes some interestiong
-                                            text about this tempate
-                                            And awesome choice!
+                                            A small-size VM for the non-demanding applications.
                                         </p>
                                     </article>
                                 </div>
@@ -189,7 +199,7 @@
                     <!-- service -->
                     <div class="appstore-template full">
                         <div class="icon">
-                            <img src="/static/images/icons/icon_digitalocean_small.png" alt="" class="icon">
+                            <img src="/static/images/icons/icon_openstack_small.png" alt="" class="icon">
                         </div>
                         <div class="description top">
                             <div class="row">
@@ -197,35 +207,36 @@
                                     <div class="form-box">
                                         <div class="custom-select project inline-elem">
                                             <select>
-                                                <option value="">Choose project</option>
+                                                <option value="">Choose OS</option>
+                                                <option value="">Ubuntu Linux 14.04</option>
+                                                <option value="">MS Windows Server 2012</option>
+
                                             </select>
                                         </div>
                                     </div>
                                     <article class="normal-description">
                                         <ul>
                                             <li>Processor: 1.4 Ghz</li>
-                                            <li>RAM: 256</li>
-                                            <li>HDD: 10Gb</li>
+                                            <li>RAM: 2048</li>
+                                            <li>HDD: 100Gb</li>
                                         </ul>
                                     </article>
                                 </div>
                                 <div class="col top half">
                                     <article class="normal-description">
                                         <ul>
-                                            <li>* Free upload traffic</li>
-                                            <li>* Some feature</li>
+                                            <li>* Free incoming traffic</li>
+                                            <li>* Managed infrastructure</li>
                                         </ul>
                                         <p>
-                                            Here goes some interestiong
-                                            text about this tempate
-                                            And awesome choice!
+                                            A mid-size VM for hosting larger applications like ERM or CMS.
                                         </p>
                                     </article>
                                 </div>
                             </div>
                         </div>
                         <div class="description bottom-price">
-                            <span class="price-tag">$100</span>
+                            <span class="price-tag">$200</span>
                         </div>
                     </div>
                     <!-- /service -->
@@ -241,43 +252,112 @@
                 <!-- instance templates -->
                 <div class="appstore-templates">
                     <!-- service -->
+                     <div class="appstore-template full">
+                        <div class="icon">
+                            <img src="/static/images/logo.png" alt="" class="icon">
+                        </div>
+                        <div class="description top">
+                            <h2>Bronze support</h2>
+                            <article class="normal-description">
+                                <p>Bronze support includes:
+                                </p>
+                                <ul>
+                                    <li>* Phone assistance during working hours</li>
+                                    <li>* Upgrades of the OS</li>
+                                </ul>
+
+                            </article>
+                        </div>
+                        <div class="description bottom-price">
+                            <span class="price-tag">$49 per month</span>
+                        </div>
+                    </div>
                     <div class="appstore-template full state">
                         <div class="icon">
                             <img src="/static/images/logo.png" alt="" class="icon">
                         </div>
                         <div class="description top">
+                            <h2>Golden support</h2>
                             <article class="normal-description">
+                                <p>Golden support includes:
+                                </p>
                                 <ul>
-                                    <li>Processor: 1.4 Ghz</li>
-                                    <li>RAM: 256</li>
-                                    <li>HDD: 10Gb</li>
+                                    <li>* Phone assistance 24/7</li>
+                                    <li>* Upgrades of the OS</li>
                                 </ul>
+
                             </article>
                         </div>
                         <div class="description bottom-price">
-                            <span class="price-tag state">$100</span>
+                            <span class="price-tag state">$299 per month</span>
                         </div>
                     </div>
                     <!-- /service -->
                     <!-- service -->
-                    <div class="appstore-template full state">
+                    <div class="appstore-template full">
                         <div class="icon">
                             <img src="/static/images/logo.png" alt="" class="icon">
                         </div>
                         <div class="description top">
-                            <article class="normal-description">
-                                <ul>
-                                    <li>Processor: 1.4 Ghz</li>
-                                    <li>RAM: 256</li>
-                                    <li>HDD: 10Gb</li>
-                                </ul>
-                            </article>
+                            <h2>Backup</h2>
+                            <div class="custom-select project inline-elem">
+                                <select>
+                                    <option value="">Choose frequency</option>
+                                    <option value="">Daily</option>
+                                    <option value="">Weekly</option>
+
+                                </select>
+                            </div>
                         </div>
                         <div class="description bottom-price">
-                            <span class="price-tag state">$100</span>
+                            <span class="price-tag">$9 per month </span>
                         </div>
                     </div>
                     <!-- /service -->
+                    <!-- service -->
+                    <div class="appstore-template full">
+                        <div class="icon">
+                            <img src="/static/images/logo.png" alt="" class="icon">
+                        </div>
+                        <div class="description top">
+                            <h2>Disaster recovery</h2>
+                            <div class="custom-select project inline-elem">
+                                <select>
+                                    <option value="">Choose location</option>
+                                    <option value="">Muscat</option>
+                                    <option value="">Dubai</option>
+                                    <option value="">AWS Ireland</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="description bottom-price">
+                            <span class="price-tag">$30 per GB</span>
+                        </div>
+                    </div>
+                    <!-- /service -->
+
+                    <!-- service -->
+                    <div class="appstore-template full">
+                        <div class="icon">
+                            <img src="/static/images/logo.png" alt="" class="icon">
+                        </div>
+                        <div class="description top">
+                            <h2>Architecture consultancy</h2>
+                            <div class="custom-select project inline-elem">
+                                <select>
+                                    <option value="">Choose duration</option>
+                                    <option value="">1 hour</option>
+                                    <option value="">10 hours</option>
+                                    <option value="">40 hours</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="description bottom-price">
+                            <span class="price-tag">$20 per hour</span>
+                        </div>
+                    </div>
+                    <!-- /service -->
+
                 </div>
                 <!-- /instance templates -->
             </div>
@@ -297,7 +377,7 @@
 
                 <div class="checkout-block centered">
                     <div class="instance-info">
-                        <strong>Instance 1</strong>
+                        <strong>My Resource</strong>
                         <span>for</span>
                         <strong>Awesome Project</strong>
                     </div>
@@ -306,9 +386,9 @@
                 <div class="checkout-block checkout-items">
                     <div class="row">
                         <div class="col top half checkout-item">
-                            <h4 class="app-title">AWS</h4>
+                            <h4 class="app-title">Small VM</h4>
                             <article class="light-description">
-                                Template 1
+                                Salalah Data Center
                             </article>
                         </div>
                         <div class="col top half checkout-item-price">
@@ -317,13 +397,13 @@
                     </div>
                     <div class="row">
                         <div class="col top half checkout-item">
-                            <h4 class="app-title">AWS</h4>
+                            <h4 class="app-title">Support</h4>
                             <article class="light-description">
-                                Template 1
+                                Golden level
                             </article>
                         </div>
                         <div class="col top half checkout-item-price">
-                            <span class="price-tag state">$300</span>
+                            <span class="price-tag state">$299</span>
                         </div>
                     </div>
                 </div>
@@ -331,7 +411,7 @@
                 <div class="checkout-block centered">
                     <h3 class="app-title">Total</h3>
                     <div>
-                        <span class="price-tag state">$100999</span>
+                        <span class="price-tag state">$599 per month</span>
                     </div>
                 </div>
 
