@@ -1,0 +1,9 @@
+.list-blocks {
+    @include clear-list-inline;
+    li + li {
+        margin-left: 10px;
+    } // li + li
+    li {
+        border: none !important;
+    } // li
+} // list-blocks
