@@ -12,6 +12,9 @@
                     <button class="search-button" ng-click="UserList.search()"></button>
                 </div>
             </li>
+            <li>
+                <filter-list filter-controller="UserList"></filter-list>
+            </li>
             <!--li class="right-sort">
                 <a class="button">
                     <span class="icon plus"></span>
@@ -26,7 +29,9 @@
         <div class="list-item no-cursor">
             <div class="checkbox">
                 <div class="checkbox" ng-show="UserList.showgroup">
-                    <input type="checkbox">
+                    <input type="checkbox"
+                        ng-checked="UserList.selectedInstances.length"
+                        ng-click="UserList.changeAllSelectedInstances()">
                 </div>
             </div>
             <div>
@@ -80,7 +85,9 @@
                 <div class="list-item" ng-class="{'opened': expandItem}">
                     <div class="checkbox">
                         <div class="checkbox">
-                            <input type="checkbox" ng-show="UserList.showgroup">
+                            <input type="checkbox" ng-show="UserList.showgroup"
+                                ng-checked="UserList.isInstanceSelected(user)"
+                                ng-click="UserList.changeInstanceSelection(user)">
                         </div>
                     </div>
                     <div class="expand">

@@ -1,5 +1,15 @@
 <div ng-controller="ProjectEventTabController as EventList">
-    <sortline ></sortline>
+    <div class="white-box">
+        <ul class="sort-list">
+            <pagesize pages-list="EventList" pages-service="EventList.service"></pagesize>
+            <li class="search divid">
+                <div class="search-box">
+                    <input type="text" ng-model='EventList.searchInput' ng-change="EventList.search()">
+                    <button class="search-button"></button>
+                </div>
+            </li>
+        </ul>
+    </div>
 
     <div class="white-box clear">
         <ul class="object-list">

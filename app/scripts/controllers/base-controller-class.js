@@ -1,8 +1,8 @@
 (function(){
   angular.module('ncsaas')
-    .service('baseControllerClass', ['$rootScope', baseControllerClass]);
+    .service('baseControllerClass', ['$rootScope', 'Flash', baseControllerClass]);
 
-  function baseControllerClass($rootScope) {
+  function baseControllerClass($rootScope, Flash) {
     var ControllerClass = Class.extend({
       _signals: {},
 
@@ -16,6 +16,12 @@
         for (var eventName in this._signals) {
           $rootScope.$on(eventName, this._signals[eventName]);
         }
+      },
+      successFlash: function(message) {
+        this.flashMessage('success', message);
+      },
+      flashMessage: function(type, message) {
+        Flash.create(type, message);
       }
     });
 
@@ -41,11 +47,19 @@
       searchFieldName: '', // required in init
       controllerScope: null, // required in init
       showgroup: false, // for showing group buttons and checkboxes in list view
+      // checkboxes
+      selectedInstances: [],
+      uniqueModelKeyName: 'uuid',
+      // filters
+      searchFilters: [], // should contains array of objects {name: 'name', title: 'Title', value: 'value'}
+      chosenFilters: [],
 
       init:function() {
         this.setSignalHandler('currentCustomerUpdated', this.currentCustomerUpdatedHandler.bind(this));
         this._super();
         this.getList();
+        // reset after state change
+        this.selectedInstances = [];
       },
       getList:function(filter) {
         var vm = this;
@@ -66,6 +80,7 @@
         var confirmDelete = confirm('Confirm deletion?');
         if (confirmDelete) {
           model.$delete(function() {
+            vm.afterInstanceRemove(model);
             vm.list.splice(index, 1);
           }, vm.handleActionException);
         } else {
@@ -78,10 +93,36 @@
           alert(message);
         }
       },
+      changeAllSelectedInstances: function() {
+        if (this.selectedInstances.length) {
+          this.selectedInstances = [];
+        } else {
+          for (var i = 0; i < this.list.length; i++) {
+            this.selectedInstances.push(this.list[i][this.uniqueModelKeyName]);
+          }
+        }
+      },
+      changeInstanceSelection: function(instance) {
+        var index = this.selectedInstances.indexOf(instance[this.uniqueModelKeyName]);
+        if (index !== -1) {
+          this.selectedInstances.splice(index, 1);
+        } else {
+          this.selectedInstances.push(instance[this.uniqueModelKeyName]);
+        }
+      },
+      isInstanceSelected: function(instance) {
+        return this.selectedInstances.indexOf(instance[this.uniqueModelKeyName]) !== -1;
+      },
       currentCustomerUpdatedHandler: function() {
         var vm = this.controllerScope;
         vm.service.page = 1;
         vm.getList();
+      },
+      afterInstanceRemove: function(instance) {
+        var index = this.selectedInstances.indexOf(instance[this.uniqueModelKeyName]);
+        if (index !== -1) {
+          this.selectedInstances.splice(index, 1);
+        }
       }
     });
 
@@ -109,6 +150,7 @@
       controllerScope: null, // required in init
       detailsState: null,
       redirectToDetailsPage: false,
+      successMessage: 'Saving of {vm_name} was successful.',
 
       init:function() {
         this.instance = this.service.$create();
@@ -120,6 +162,7 @@
         vm.instance.$save(success, error);
         function success() {
           vm.afterSave();
+          vm.successFlash(vm.successMessage.replace('{vm_name}', vm.instance.name));
           if (vm.redirectToDetailsPage) {
             $state.go(vm.detailsState, {uuid: vm.instance.uuid});
           } else {

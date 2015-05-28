@@ -3,7 +3,7 @@
 <div class="white-box">
     <ul class="sort-list">
         <li class="title">
-            <h2 class="app-title">Welcome to NodeConductor!</h2>
+            <h2 class="app-title">Welcome to NodeConductor, {{ InitialData.user.full_name }}!</h2>
         </li>
     </ul>
 </div>
@@ -12,17 +12,15 @@
     <form ng-submit="InitialData.save()">
         <section class="row top initial-data-row">
             <div class="col initial-avatar">
-                <img src="/static/images/user-avatar.jpg" alt="" class="avatar-img">
+                <img gravatar-src="InitialData.user.email" alt="" class="avatar-img">
+                <br>
+                <article class="light-description">
+                To change your picture please update it at <a href="http://gravatar.com/">http://gravatar.com/</a>.
+                </article>
             </div>
             <div class="col initial-inputs">
                 <div class="short-form full">
                     <div class="form-row inputs-centered">
-                        <div class="col label">
-                            <label for="">Your name: </label>
-                        </div>
-                        <div class="col input input-full">
-                            {{ InitialData.user.full_name }}
-                        </div>
                         <div class="col label">
                             <label for="">Your email:</label>
                         </div>
