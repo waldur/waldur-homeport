@@ -3,7 +3,8 @@
     <a ui-sref="users.details({uuid: event.user_uuid})" class="name">
         <span class="name">{{ event.user_full_name }}</span>
     </a>
-    has signed in with a username/password from {{ event.host }}
+    has signed in with a username/password
+    <!--TODO add  from {{ event.ip }}  NC-529-->
 </span>
 
 <span class="event" ng-if="event.event_type === EventList.EVENTTYPE.role_granted">
