@@ -33,6 +33,10 @@
     @include property(padding, 20);
     background-color: #FDFBE9;
     border-radius: 4px;
+    &.fixed {
+        position: fixed;
+        top: 80px;
+    } // &.fixed
     .checkout-block {
         + .checkout-block {
             @include property(margin-top, 20);
