@@ -61,6 +61,12 @@
     has been updated
 </span>
 
+<span class="event" ng-if="event.event_type === EventList.EVENTTYPE.user_password_updated">
+    Password has been changed for user
+    <a ui-sref="users.details({uuid: event.affected_user_uuid})" class="name">
+        <span class="name">{{ event.affected_user_full_name }}</span></a>
+</span>
+
 <span class="event" ng-if="event.event_type === EventList.EVENTTYPE.user_activated">
     User
     <a ui-sref="users.details({uuid: event.affected_user_uuid})" class="name">
