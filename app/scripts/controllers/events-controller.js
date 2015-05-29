@@ -44,6 +44,8 @@
           EVENTTYPE.customer_creation_succeeded,
           EVENTTYPE.project_group_creation_succeeded,
           EVENTTYPE.customer_update_succeeded,
+          EVENTTYPE.user_activated,
+          EVENTTYPE.user_deactivated,
           EVENTTYPE.user_password_updated
         ];
         return ~typesReady.indexOf(type);
