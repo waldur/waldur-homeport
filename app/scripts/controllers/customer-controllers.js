@@ -5,10 +5,11 @@
     .controller('CustomerListController', [
       'customersService',
       'baseControllerListClass',
+      'usersService',
       CustomerListController
     ]);
 
-  function CustomerListController(customersService, baseControllerListClass) {
+  function CustomerListController(customersService, baseControllerListClass, usersService) {
     var controllerScope = this;
     var CustomerController = baseControllerListClass.extend({
       init:function() {
@@ -16,6 +17,13 @@
         this.controllerScope = controllerScope;
         this._super();
         this.searchFieldName = 'name';
+      },
+      isOwner: function(customer) {
+        for (var i = 0; i < customer.owners.length; i++) {
+          if (usersService.currentUser.uuid === customer.owners[i].uuid) {
+            return true;
+          }
+        }
       }
     });
 
