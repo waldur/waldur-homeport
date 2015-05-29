@@ -336,6 +336,23 @@ angular
         auth: true
       })
 
+
+      .state('customers.create', {
+        url: 'add/',
+        views: {
+          'appContent': {
+            templateUrl: 'views/customer/create.html'
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html'
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
+        auth: true
+      })
+
       .state('customers.details', {
         url: ':uuid/',
         views: {

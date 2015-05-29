@@ -48,3 +48,33 @@
   }
 
 })();
+
+(function() {
+  angular.module('ncsaas')
+    .controller('CustomerAddController', ['customersService', 'baseControllerAddClass', CustomerAddController]);
+
+  function CustomerAddController(customersService, baseControllerAddClass) {
+    var controllerScope = this;
+    var Controller = baseControllerAddClass.extend({
+      init: function() {
+        this.service = customersService;
+        this.controllerScope = controllerScope;
+        this.setSignalHandler('currentCustomerUpdated', this.currentCustomerUpdatedHandler.bind(this));
+        this._super();
+        this.listState = 'customers.list';
+        this.detailsState = 'customers.details';
+        this.redirectToDetailsPage = true;
+      },
+      currentCustomerUpdatedHandler: function() {
+        if (this.instance.name || this.instance.contact_details) {
+          if (confirm('Clean all fields?')) {
+            this.instance.name = '';
+            this.instance.contact_details = '';
+          }
+        }
+      }
+    });
+
+    controllerScope.__proto__ = new Controller();
+  }
+})();
