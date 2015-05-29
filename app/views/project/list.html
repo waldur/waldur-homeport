@@ -132,23 +132,9 @@
                                             page-change="ProjectList.getResourcesForProject"
                                             page-entity-name="resources"></minipagination>
                         </header>
-                        <ul>
-                            <li class="item-list">
-                                <section>
-                                    <a class="list-sort">Name</a>
-                                </section>
-                                <section>
-                                    <div class="list-sort">Access information</div>
-                                </section>
-                            </li>
-                            <li class="item-list" ng-repeat="resource in ProjectList.projectResources[project.uuid].data">
-                                <section>
-                                    <a href="">{{ resource.name }}</a>
-                                </section>
-                                <section>
-                                    <span ng-if="resource.external_ips.length == 0"><i>No access info</i></span>
-                                    <span ng-repeat="access in resource.access_information">{{ access }}</span>
-                                </section>
+                        <ul class="list-blocks">
+                            <li ng-repeat="resource in ProjectList.projectResources[project.uuid].data">
+                                <a>{{ resource.name }}</a>
                             </li>
                         </ul>
                     </section>
@@ -162,33 +148,12 @@
                                             page-change="ProjectList.getUsersForProject"
                                             page-entity-name="users"></minipagination>
                         </header>
-                        <ul>
-                            <li class="item-list">
-                                <section>
-                                    <a class="list-sort">Name</a>
-                                </section>
-                                <section>
-                                    <div class="list-sort">Role</div>
-                                </section>
-                                <section>
-                                    <div class="list-sort">Username</div>
-                                </section>
-
-                            </li>
-                            <li class="item-list" ng-repeat="user in ProjectList.projectUsers[project.uuid].data">
-                                <section>
-                                    <div class="avatar">
-                                        <img gravatar-src="user.email" gravatar-size="100">
-                                    </div>
-
-                                    <a ui-sref="users.details({uuid: user.user_uuid})">{{ user.user_full_name }}</a>
-                                </section>
-                                 <section>
-                                    <span>{{ user.role }}</span>
-                                </section>
-                                <section>
-                                    <span>{{ user.user_username }}</span>
-                                </section>
+                        <ul class="list-blocks">
+                            <li ng-repeat="user in ProjectList.projectUsers[project.uuid].data">
+                                <div class="avatar small">
+                                    <img gravatar-src="user.email" gravatar-size="60">
+                                </div>
+                                <a ui-sref="users.details({uuid: user.user_uuid})">{{ user.user_full_name }}</a>
                             </li>
                         </ul>
                     </section>

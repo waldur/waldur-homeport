@@ -28,7 +28,23 @@
                 } // img
             } // sm
         } // &.avatar
-        &.content {} // &.content
+        &.content {
+            .profile-edit {
+                width: 300px;
+                margin-top: 20px;
+                > section {
+                    + section {
+                        margin-top: 20px;
+                    } // > section
+                } // > section
+                .save {
+                    text-align: left;
+                    .button-apply {
+                        margin-left: 10px;
+                    } // button-apply
+                } // save
+            } // profile-edit
+        } // &.content
         &.actions {
             text-align: right;
             @include property(width, 120);

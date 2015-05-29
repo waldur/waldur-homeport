@@ -4,7 +4,7 @@ input[type="password"] {
     border: 1px solid #D8D8D8;
     box-shadow: none;
     @include property(border-radius, 1);
-    @include property(padding, 10 10);
+    @include property(padding, 5 10);
     @include property(font-size, 16);
 }
 
