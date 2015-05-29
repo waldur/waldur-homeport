@@ -1,4 +1,4 @@
-<div>
+<div ng-controller="AppStoreController as AppStore">
 
 <div class="white-box">
     <ul class="sort-list">
@@ -60,10 +60,10 @@
                         </div>
                         <div class="col input">
                             <div class="custom-select project inline-elem">
-                                <select>
+                                <select ng-model="AppStore.selectedProject"
+                                        ng-options="project as project.name for project in AppStore.projectList"
+                                        ng-change="AppStore.setProject(AppStore.selectedProject)">
                                     <option value="">Choose project</option>
-                                    <option value="">Awesome project</option>
-                                    <option value="">DR site</option>
                                 </select>
                             </div>
                         </div>
@@ -78,10 +78,10 @@
                             <label for="">Virtual machine name:</label>
                         </div>
                         <div class="col input">
-                            <input type="text" placeholder="My Resource" ng-model="ServiceAdd.instance.name">
-                            <div class="error arrow-up" ng-show="ServiceAdd.errors.name">
+                            <input type="text" placeholder="My Resource" ng-model="AppStore.instance.name">
+                            <div class="error arrow-up" ng-show="AppStore.errors.name">
                                 <ul class="error-list">
-                                    <li ng-repeat="error in ServiceAdd.errors.name">{{ error }}</li>
+                                    <li ng-repeat="error in AppStore.errors.name">{{ error }}</li>
                                 </ul>
                             </div>
                         </div>
@@ -103,45 +103,26 @@
                 <!-- /Instance form -->
             </div>
 
-            <div class="content-block">
+            <div class="content-block" ng-show="AppStore.showServices">
                 <!-- instance templates -->
                 <div class="appstore-templates">
                     <!-- service -->
-                    <div class="appstore-template half no-active">
+                    <div class="appstore-template half"
+                         ng-repeat="service in AppStore.serviceList"
+                         ng-click="AppStore.setService(service)"
+                         ng-class="{'state': AppStore.selectedService == service}">
                         <div class="icon">
                             <img src="/static/images/icons/icon_digitalocean_small.png" alt="" class="icon">
                         </div>
                         <div class="description">
-                            <h3>Digital Ocean</h3>
+                            <h3>{{ service.cloud_name }}</h3>
                         </div>
                     </div>
-
-                    <!-- /service -->
-                    <!-- service -->
-                    <div class="appstore-template half no-active">
-                        <div class="icon">
-                            <img src="/static/images/icons/icon_openstack_small.png" alt="" class="icon">
-                        </div>
-                        <div class="description">
-                            <h3>Muscat Data Center</h3>
-                        </div>
-                    </div>
-                    <!-- /service -->
-                    <!-- service -->
-                    <div class="appstore-template half state">
-                        <div class="icon">
-                            <img src="/static/images/icons/icon_openstack_small.png" alt="" class="icon">
-                        </div>
-                        <div class="description">
-                            <h3>Salalah Data Center</h3>
-                        </div>
-                    </div>
-                    <!-- /service -->
                 </div>
                 <!-- /instance templates -->
             </div>
 
-            <div class="content-block">
+            <div class="content-block" ng-show="AppStore.showFlavors">
                 <article class="normal-description">
                     <p>
                         Please configure the virtual machine to be provisioned by picking its size and the
@@ -150,11 +131,14 @@
                 </article>
             </div>
 
-            <div class="content-block">
+            <div class="content-block" ng-show="AppStore.showFlavors">
                 <!-- instance templates -->
                 <div class="appstore-templates">
                     <!-- service -->
-                    <div class="appstore-template full state">
+                    <div class="appstore-template full"
+                         ng-repeat="flavor in AppStore.flavorList"
+                         ng-click="AppStore.setFlavor(flavor)"
+                         ng-class="{'state': AppStore.selectedFlavor == flavor}">
                         <div class="icon">
                             <img src="/static/images/icons/icon_openstack_small.png" alt="" class="icon">
                         </div>
@@ -163,18 +147,23 @@
                                 <div class="col top half">
                                     <div class="form-box">
                                         <div class="custom-select project inline-elem">
-                                            <select>
+                                            <select ng-model="AppStore.instance.template"
+                                                ng-options="template.url as template.name for template in AppStore.templateList">
                                                 <option value="">Choose OS</option>
-                                                <option value="">Ubuntu Linux 14.04</option>
-                                                <option value="">MS Windows Server 2012</option>
                                             </select>
                                         </div>
                                     </div>
                                     <article class="normal-description">
                                         <ul>
-                                            <li>Processor: 1.4 Ghz</li>
-                                            <li>RAM: 1024</li>
-                                            <li>HDD: 50Gb</li>
+                                            <li>
+                                                Processor: {{ flavor.cores }}
+                                            </li>
+                                            <li>
+                                                RAM: {{ flavor.ram / 1024 }} GB
+                                            </li>
+                                            <li>
+                                                HDD: {{ flavor.disk / 1024 }} GB
+                                            </li>
                                         </ul>
                                     </article>
                                 </div>
@@ -196,59 +185,15 @@
                         </div>
                     </div>
                     <!-- /service -->
-                    <!-- service -->
-                    <div class="appstore-template full">
-                        <div class="icon">
-                            <img src="/static/images/icons/icon_openstack_small.png" alt="" class="icon">
-                        </div>
-                        <div class="description top">
-                            <div class="row">
-                                <div class="col top half">
-                                    <div class="form-box">
-                                        <div class="custom-select project inline-elem">
-                                            <select>
-                                                <option value="">Choose OS</option>
-                                                <option value="">Ubuntu Linux 14.04</option>
-                                                <option value="">MS Windows Server 2012</option>
-
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <article class="normal-description">
-                                        <ul>
-                                            <li>Processor: 1.4 Ghz</li>
-                                            <li>RAM: 2048</li>
-                                            <li>HDD: 100Gb</li>
-                                        </ul>
-                                    </article>
-                                </div>
-                                <div class="col top half">
-                                    <article class="normal-description">
-                                        <ul>
-                                            <li>* Free incoming traffic</li>
-                                            <li>* Managed infrastructure</li>
-                                        </ul>
-                                        <p>
-                                            A mid-size VM for hosting larger applications like ERM or CMS.
-                                        </p>
-                                    </article>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="description bottom-price">
-                            <span class="price-tag">$200</span>
-                        </div>
-                    </div>
-                    <!-- /service -->
                 </div>
                 <!-- /instance templates -->
             </div>
 
-            <div class="content-block">
+            <div class="content-block" ng-show="AppStore.showOptions">
                 <h2 class="app-title">Additional options</h2>
             </div>
 
-            <div class="content-block">
+            <div class="content-block" ng-show="AppStore.showOptions">
                 <!-- instance templates -->
                 <div class="appstore-templates">
                     <!-- service -->
