@@ -9,36 +9,21 @@
         <section class="content">
             <h2 class="app-title">{{ UpdateProfile.model.full_name }}</h2>
             <span>({{ UpdateProfile.model.username }})</span>
-            <div>
-                <div class="short-form half in-profile">
-                    <div class="form-row">
-                        <div class="col label">
-                            <label>My email</label>
-                        </div>
-                        <div class="col input-full">
-                            <input type="text" class="form-control" ng-model="UpdateProfile.model.email" required>
-                            <div class="error short" ng-show="UpdateProfile.errors.email">
-                                <ul class="error-list">
-                                    <li ng-repeat="error in UpdateProfile.errors.email">
-                                        {{ error }}
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+            <div class="profile-edit">
+                <section>
+                    <input type="text" class="form-control" ng-model="UpdateProfile.model.email" required>
+                    <div class="error short" ng-show="UpdateProfile.errors.email">
+                        <ul class="error-list">
+                            <li ng-repeat="error in UpdateProfile.errors.email">
+                                {{ error }}
+                            </li>
+                        </ul>
                     </div>
-                    <div class="form-row">
-                        <div class="col full">
-                            <div class="decision">
-                                <div class="col">
-                                    <a ui-sref="profile.details" class="button-cancel">Cancel</a>
-                                </div>
-                                <div class="col">
-                                    <button class="button-apply" ng-click="UpdateProfile.update()" ng-show="UpdateProfile.model.email.length" type="submit">Save</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </section>
+                <section class="save">
+                    <a ui-sref="profile.details" class="button-cancel">Cancel</a>
+                    <button class="button-apply" ng-click="UpdateProfile.update()" ng-show="UpdateProfile.model.email.length" type="submit">Save</button>
+                </section>
             </div>
         </section>
         <section class="actions">
@@ -52,64 +37,4 @@
             </div>
         </section>
     </div>
-
-    <ul class="tabs-nav">
-        <li ng-class="{'active': UpdateProfile.activeTab === 'eventlog'}"
-            ng-click="UpdateProfile.activeTab = 'eventlog'">
-            Events
-        </li>
-        <li ng-class="{'active': UpdateProfile.activeTab === 'projects'}"
-            ng-click="UpdateProfile.activeTab = 'projects'">
-            Projects
-        </li>
-        <li ng-class="{'active': UpdateProfile.activeTab === 'keys'}"
-            ng-click="UpdateProfile.activeTab = 'keys'">
-            SSH Keys
-        </li>
-        <li ng-class="{'active': UpdateProfile.activeTab === 'manageuser'}"
-            ng-click="UpdateProfile.activeTab = 'manageuser'">
-            Manage User
-        </li>
-    </ul>
-
-    <div class="white-box">
-        <ul class="sort-list">
-            <li>
-                <a href="{{pagesHref}}" class="page-size active">5</a>
-                <a href="{{pagesHref}}" class="page-size">10</a>
-                <a href="{{pagesHref}}" class="page-size">15</a>
-                <a href="{{pagesHref}}" class="page-size">20</a>
-            </li>
-            <li class="search divid">
-                <div class="search-box">
-                    <input type="text" ng-model='ProjectList.searchInput' ng-change="ProjectList.search()">
-                    <button class="search-button" ng-click="ProjectList.search()"></button>
-                </div>
-            </li>
-        </ul>
-    </div>
-
-    <sectin class="tabs-content" ng-switch="UpdateProfile.activeTab">
-        <div class="tab" id="eventlog"
-            ng-class="{'tab-active': UpdateProfile.activeTab === 'eventlog'}"
-            ng-switch-when="eventlog">
-            <div ui-view="tabEventlog"></div>
-        </div>
-        <div class="tab" id="projects"
-            ng-class="{'tab-active': UpdateProfile.activeTab === 'projects'}"
-            ng-switch-when="projects">
-            <div ui-view="tabProjects"></div>
-        </div>
-        <div class="tab" id="keys"
-            ng-class="{'tab-active': UpdateProfile.activeTab === 'keys'}"
-            ng-switch-when="keys">
-            <div ui-view="tabKeys"></div>
-        </div>
-        <div class="tab" id="manageuser"
-            ng-class="{'tab-active': UpdateProfile.activeTab === 'manageuser'}"
-            ng-switch-when="manageuser">
-            <div ui-view="tabManageUser"></div>
-        </div>
-    </sectin>
-
 </div>
