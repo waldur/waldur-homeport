@@ -4,6 +4,12 @@
     &.big {
         width: 100%;
     } // &.big
+    &.small {
+        @include property(width, 20);
+        img {
+            margin-top: -3px;
+        }
+    } // &.small
     &.offset-right {
         @include property(margin-right, 6);
     } // &.offset-right
