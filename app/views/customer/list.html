@@ -81,16 +81,11 @@
                             ng-click="expandItem=!expandItem"
                             ng-class="{'plus': !expandItem, 'minus active': expandItem}"></a>
                     </div>
-                    <div class="avatar">
-                        <span class="avatar">
-                            <img src="/static/images/user-avatar.jpg" alt="" class="avatar-img">
-                        </span>
-                    </div>
                     <div>
                         <h3 class="item-title"><a ui-sref="customers.details({uuid: customer.uuid})">{{ customer.name }}</a></h3>
                     </div>
                     <div class="actions">
-                        <div class="actions-button" ng-show="!CustomerList.showgroup">
+                        <div class="actions-button" ng-show="!CustomerList.showgroup && CustomerList.isOwner(customer)">
                             <a class="button" ng-click="openActions=!openActions">actions</a>
                             <ul class="actions-dropdown" ng-show="openActions">
                                 <li>

@@ -72,6 +72,7 @@
         var vm = this;
         var filter = {};
         filter[vm.searchFieldName] = vm.searchInput;
+        this.currentPage = this.service.page = 1;
         this.getList(filter);
       },
       remove:function(model) {
