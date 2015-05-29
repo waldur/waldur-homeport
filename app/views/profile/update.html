@@ -9,31 +9,21 @@
         <section class="content">
             <h2 class="app-title">{{ UpdateProfile.model.full_name }}</h2>
             <span>({{ UpdateProfile.model.username }})</span>
-            <div class="col input-full">
-                <input type="text" class="form-control" ng-model="UpdateProfile.model.email" required>
-                <div class="error short" ng-show="UpdateProfile.errors.email">
-                    <ul class="error-list">
-                        <li ng-repeat="error in UpdateProfile.errors.email">
-                            {{ error }}
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div>
-                <div class="short-form half in-profile">
-                    <div class="form-row">
-                        <div class="col full">
-                            <div class="decision">
-                                <div class="col">
-                                    <a ui-sref="profile.details" class="button-cancel">Cancel</a>
-                                </div>
-                                <div class="col">
-                                    <button class="button-apply" ng-click="UpdateProfile.update()" ng-show="UpdateProfile.model.email.length" type="submit">Save</button>
-                                </div>
-                            </div>
-                        </div>
+            <div class="profile-edit">
+                <section>
+                    <input type="text" class="form-control" ng-model="UpdateProfile.model.email" required>
+                    <div class="error short" ng-show="UpdateProfile.errors.email">
+                        <ul class="error-list">
+                            <li ng-repeat="error in UpdateProfile.errors.email">
+                                {{ error }}
+                            </li>
+                        </ul>
                     </div>
-                </div>
+                </section>
+                <section class="save">
+                    <a ui-sref="profile.details" class="button-cancel">Cancel</a>
+                    <button class="button-apply" ng-click="UpdateProfile.update()" ng-show="UpdateProfile.model.email.length" type="submit">Save</button>
+                </section>
             </div>
         </section>
         <section class="actions">
