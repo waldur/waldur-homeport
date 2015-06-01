@@ -1,9 +1,8 @@
 .list-item-details {
     @include clearfix;
-    background-color: #F2F2F2;
-    @include property(padding, 10);
-    @include property(padding-left, 50);
+    @include property(padding, 25 0);
     @include property(font-size, 16);
+    border-top: 1px solid rgb(220, 220, 220);
     &.on-mobile {
         display: none;
         @include bp(xs) {
@@ -44,12 +43,12 @@
         @include bp(xs) {
             width: 100%;
             float: none;
-            border-top: 1px solid rgb(205, 205, 205) !important;
+            border-top: 1px solid rgb(220, 220, 220) !important;
         } // xs
         @include bp(sm) {
             width: 100%;
             float: none;
-            border-top: 1px solid rgb(205, 205, 205) !important;
+            border-top: 1px solid rgb(220, 220, 220) !important;
         } // sm
     } // > section.half
     > section {
@@ -58,16 +57,16 @@
         + section:not(.half) {
             @include property(margin-top, 10);
             @include property(padding-top, 10);
-            border-top: 1px solid rgb(205, 205, 205);
+            border-top: 1px solid rgb(220, 220, 220);
         }
         + section {
             @include property(margin-top, 10);
             @include property(padding-top, 10);
             @include bp(xs) {
-                border-top: 1px solid rgb(205, 205, 205) !important;
+                border-top: 1px solid rgb(220, 220, 220) !important;
             } // xs
             @include bp(sm) {
-                border-top: 1px solid rgb(205, 205, 205) !important;
+                border-top: 1px solid rgb(220, 220, 220) !important;
             } // sm
         }
         &.on-mobile {
