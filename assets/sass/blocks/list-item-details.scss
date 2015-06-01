@@ -61,12 +61,6 @@
         + section {
             @include property(margin-top, 10);
             @include property(padding-top, 10);
-            @include bp(xs) {
-                border-top: 1px solid rgb(220, 220, 220) !important;
-            } // xs
-            @include bp(sm) {
-                border-top: 1px solid rgb(220, 220, 220) !important;
-            } // sm
         }
         &.on-mobile {
             display: none;
