@@ -9,6 +9,11 @@
     padding: 25px 0;
     line-height: 1;
     min-height: 38px;
+    &.list {
+        &:hover {
+            background-color: #FFFAE5;
+        } // &:hover
+    }// &.list
     &.pointer {
         cursor: pointer;
     } // pointer
