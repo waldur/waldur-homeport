@@ -82,6 +82,27 @@ angular
         }
       })
 
+      .state('support', {
+        url: '/support/',
+        templateUrl: 'views/partials/base.html',
+        abstract: true
+      })
+
+      .state('support.tickets', {
+        url: '',
+        views: {
+          'appHeader@support' : {
+            templateUrl: 'views/partials/app-header.html',
+          },
+          'appContent@support' : {
+            templateUrl: 'views/support/tickets.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        }
+      })
+
       .state('dashboard', {
         url: '/dashboard/',
         abstract: true,
