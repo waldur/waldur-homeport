@@ -22,8 +22,10 @@
 
     <div class="white-box">
         <ul class="object-list">
-            <li ng-repeat="ticket in [1, 2, 3]" ng-click="openTicket=!openTicket">
-                <div class="list-item pointer" ng-class="{'opened': expandItem}">
+            <li ng-repeat="ticket in [1, 2, 3]">
+                <div class="list-item pointer"
+                    ng-class="{'opened': expandItem}"
+                    ng-click="openTicket=!openTicket">
                     <div class="status">
                         <div class="status-circle" ng-class="{'green': $index === 0}"></div>
                     </div>
@@ -48,7 +50,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="list-item-details" ng-show="openTicket" stoppropagation>
+                <div class="list-item-details" ng-show="openTicket">
                     <!-- ticket content -->
                     <section detailscontent="status avatar">
                         <article class="normal-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis gravida malesuada. Pellentesque porttitor finibus nisl vitae auctor. Morbi non magna et magna blandit auctor et eget lorem. Etiam scelerisque, metus eget hendrerit commodo, metus mauris placerat sem, non tempus sem sem non leo. Fusce accumsan fermentum vehicula. Aenean arcu purus, iaculis sit amet laoreet a, rutrum nec risus. Vestibulum commodo consectetur vehicula.</article>
