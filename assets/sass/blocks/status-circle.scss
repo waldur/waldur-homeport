@@ -9,26 +9,28 @@
 } // status
 
 .status-circle {
-    display: none;
-    @include property(width, 12);
-    @include property(height, 12);
+    @include property(width, 10);
+    @include property(height, 10);
     border-radius: 100%;
-    border: 1px solid white;
-    box-shadow: 0px 0px 5px rgba(118, 118, 118, 0.43);
-    position: relative;
-    @include property(left, 5);
-    @include property(top, -1);
     background-color: silver;
-    &.online {
+    &.online,
+    &.green {
         background-color: #6abb6a;
     } // online
-    &.offline {
+    &.offline,
+    &.gray {
         background-color: #e74c3c;
     } // offline
-    @include bp(xs) {
-        @include inline-middle;
-    } // xs
-    @include bp(sm) {
-        @include inline-middle;
-    } // sm
+    &.resource {
+        display: none;
+        position: relative;
+        @include property(left, 5);
+        @include property(top, -1);
+        @include bp(xs) {
+            @include inline-middle;
+        } // xs
+        @include bp(sm) {
+            @include inline-middle;
+        } // sm
+    } // &.resource
 } // status-circle
