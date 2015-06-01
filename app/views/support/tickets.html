@@ -24,6 +24,7 @@
         <ul class="object-list">
             <li ng-repeat="ticket in [1, 2, 3]">
                 <div class="list-item" ng-class="{'opened': expandItem}">
+                    <div class="status"></div>
                     <div class="avatar">
                         <span class="avatar">
                             <img gravatar-src="user.email" gravatar-size="100" alt="" class="avatar-img">
@@ -46,55 +47,31 @@
                     </div>
                 </div>
                 <div class="list-item-details" ng-show="openTicket">
-                    <section class="on-mobile">
-                        <header>
-                            <h4 class="item-title">Creation date</h4>
-                        </header>
-                        {{ project.created | date:'medium' }}
+                    <!-- ticket content -->
+                    <section detailscontent="status avatar">
+                        <article class="normal-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis gravida malesuada. Pellentesque porttitor finibus nisl vitae auctor. Morbi non magna et magna blandit auctor et eget lorem. Etiam scelerisque, metus eget hendrerit commodo, metus mauris placerat sem, non tempus sem sem non leo. Fusce accumsan fermentum vehicula. Aenean arcu purus, iaculis sit amet laoreet a, rutrum nec risus. Vestibulum commodo consectetur vehicula.</article>
                     </section>
-                    <section ng-if="project.description">
-                        {{ project.description }}
+                    <!-- /ticket content -->
+                    <!-- answer -->
+                    <div class="list-item">
+                        <div class="status"></div>
+                        <div class="avatar">
+                            <span class="avatar">
+                                <img gravatar-src="user.email" gravatar-size="100" alt="" class="avatar-img">
+                            </span>
+                        </div>
+                        <div class="name">
+                            <span class="subtitle">
+                                <strong>Ilja Livenson</strong> answer 06/06/14 at 20:57 UTC - 1day ago
+                            </span>
+                        </div>
+                    </div>
+                    <section detailscontent="status avatar">
+                        <article class="normal-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis gravida malesuada. Pellentesque porttitor finibus nisl vitae auctor. Morbi non magna et magna blandit auctor et eget lorem. Etiam scelerisque, metus eget hendrerit commodo, metus mauris placerat sem, non tempus sem sem non leo. Fusce accumsan fermentum vehicula. Aenean arcu purus, iaculis sit amet laoreet a, rutrum nec risus. Vestibulum commodo consectetur vehicula.</article>
                     </section>
-                    <section>
-                        <header>
-                            <h4 class="item-title">Resources</h4>
-
-                            <minipagination page-models="ProjectList.projectResources"
-                                            page-model-id="project.uuid"
-                                            page-change="ProjectList.getResourcesForProject"
-                                            page-entity-name="resources"></minipagination>
-                        </header>
-                        <ul class="list-blocks">
-                            <li ng-repeat="resource in ProjectList.projectResources[project.uuid].data">
-                                <a>{{ resource.name }}</a>
-                            </li>
-                        </ul>
-                    </section>
-                    <!-- asas -->
-                    <section>
-                        <header>
-                            <h4 class="item-title">Users</h4>
-
-                            <minipagination page-models="ProjectList.projectUsers"
-                                            page-model-id="project.uuid"
-                                            page-change="ProjectList.getUsersForProject"
-                                            page-entity-name="users"></minipagination>
-                        </header>
-                        <ul class="list-blocks">
-                            <li ng-repeat="user in ProjectList.projectUsers[project.uuid].data">
-                                <div class="avatar small">
-                                    <img gravatar-src="user.email" gravatar-size="60">
-                                </div>
-                                <a ui-sref="users.details({uuid: user.user_uuid})">{{ user.user_full_name }}</a>
-                            </li>
-                        </ul>
-                    </section>
+                    <!-- /answer -->
                 </div>
             </li>
         </ul>
     </div>
-
-<!--     <div class="pagination">
-        <pagination pages-list="ProjectList" pages-service="ProjectList.service"></pagination>
-    </div> -->
 </div>
