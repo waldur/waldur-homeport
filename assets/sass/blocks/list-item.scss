@@ -15,6 +15,25 @@
             background-color: #FFFAE5;
         } // &:hover
     }// &.list
+    &.resources {
+        &.on-desktop {
+            @include bp(xs) {
+                display: none;
+            } // xs
+            @include bp(sm) {
+                display: none;
+            } // sm
+        } // &.on-desktop
+        &.on-mobile {
+            display: none;
+            @include bp(xs) {
+                @include table;
+            } // xs
+            @include bp(sm) {
+                @include table;
+            } // sm
+        } // &.on-mobile
+    } // &.resources
     &.pointer {
         cursor: pointer;
     } // pointer
