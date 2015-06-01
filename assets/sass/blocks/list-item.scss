@@ -8,7 +8,8 @@
     @include property(font-size, 16);
     padding: 25px 0;
     line-height: 1;
-    min-height: 38px;
+    min-height: 80px;
+    box-sizing: border-box;
     &.list {
         &:hover {
             background-color: #FFFAE5;
