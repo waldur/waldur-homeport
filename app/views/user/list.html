@@ -84,7 +84,7 @@
                 <div class="list-item list pointer" ng-class="{'opened': expandItem}"
                     ng-click="expandItem=!expandItem; UserList.showMore(user)">
                     <div class="checkbox">
-                        <div class="checkbox">
+                        <div class="checkbox" stoppropagation>
                             <input type="checkbox" ng-show="UserList.showgroup"
                                 ng-checked="UserList.isInstanceSelected(user)"
                                 ng-click="UserList.changeInstanceSelection(user)">

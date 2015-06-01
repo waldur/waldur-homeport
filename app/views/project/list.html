@@ -82,7 +82,7 @@
                 <div class="list-item list pointer" ng-class="{'opened': expandItem}"
                     ng-click="expandItem=!expandItem; ProjectList.showMore(project)">
                     <div class="checkbox">
-                        <div class="checkbox">
+                        <div class="checkbox" stoppropagation>
                             <input type="checkbox" ng-show="ProjectList.showgroup">
                         </div>
                     </div>
