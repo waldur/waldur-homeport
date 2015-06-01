@@ -6,9 +6,9 @@
 .list-item {
     @include table;
     @include property(font-size, 16);
-    padding: 25px 0;
+    padding: 15px 0;
     line-height: 1;
-    min-height: 80px;
+    min-height: 70px;
     box-sizing: border-box;
     &.list {
         &:hover {
