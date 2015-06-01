@@ -104,6 +104,27 @@
                     } // &:after
                 } // &.drop-active
             } // &.active
+            &.support {
+                @include inline-middle;
+                width: 30px;
+                height: 30px;
+                // border: 1px solid white;
+                background-color: rgb(130, 176, 70);
+                border-radius: 100%;
+                padding: 0;
+                position: relative;
+                top: 10px;
+                margin: 0 5px;
+                color: #9ECF5D;
+                &:before {
+                    @include icon-fa;
+                    content: '\f128';
+                    font-size: 20px;
+                    position: absolute;
+                    top: 6px;
+                    left: 8px;
+                } // &:before
+            }
             &.logo {
                 @include property(width, 50);
                 @include property(height, 50);
