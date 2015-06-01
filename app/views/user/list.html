@@ -81,7 +81,7 @@
                 </div>
             </li>
             <li ng-repeat="user in UserList.list">
-                <div class="list-item pointer" ng-class="{'opened': expandItem}"
+                <div class="list-item list pointer" ng-class="{'opened': expandItem}"
                     ng-click="expandItem=!expandItem; UserList.showMore(user)">
                     <div class="checkbox">
                         <div class="checkbox">
@@ -90,11 +90,6 @@
                                 ng-click="UserList.changeInstanceSelection(user)">
                         </div>
                     </div>
-<!--                     <div class="expand">
-                        <a class="plus-minus"
-                        ng-click="expandItem=!expandItem; UserList.showMore(user)"
-                        ng-class="{'plus': !expandItem, 'minus active': expandItem}"></a>
-                    </div> -->
                     <div class="avatar">
                         <span class="avatar">
                             <img gravatar-src="user.email" gravatar-size="100" alt="" class="avatar-img">
