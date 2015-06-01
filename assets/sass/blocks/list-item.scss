@@ -9,6 +9,9 @@
     padding: 25px 0;
     line-height: 1;
     min-height: 38px;
+    &.pointer {
+        cursor: pointer;
+    } // pointer
     &.no-cursor {
         cursor: default;
     } // &.no-cursor
@@ -26,6 +29,8 @@
         // custom-cells
         &.status {
             width: 20px;
+            text-align: left;
+            padding: 0;
         } // &.status
         &.checkbox {
             width: 40px;
@@ -47,11 +52,17 @@
             } // &.on-mobile
         } // expand
         &.name {
+            a {
+                &:hover {
+                    text-decoration: underline;
+                } // &:hover
+            } // a
             .item-title {
                 font-weight: 400;
             } // item-title
             .subtitle {
                 display: block;
+                margin-top: 6px;
                 @include property(font-size, 14);
                 color: #8F8F8F;
             } // subtitle
@@ -78,17 +89,24 @@
                     border: transparent;
                     background-color: #EAEAEA;
                     color: #949494;
-                    &.active {
+                    &.active,
+                    &:hover {
                         color: #000;
-                    } // &.active
+                    } // &.active, &:hover
                     &.view {
                         &:before {
                             @include icon-fa;
                             content: '\f06e';
-                        }
-                    }
-                }
-            }
+                        } // &:before
+                    } // &.view
+                    &.reopen {
+                        &:before {
+                            @include icon-fa;
+                            content: '\f01e';
+                        } // &:before
+                    } // &.reopen
+                } // button
+            } // actions-button
         } // actions-box
         &.ministatus {
             display: none;
