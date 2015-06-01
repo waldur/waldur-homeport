@@ -6,18 +6,16 @@
 .list-item {
     @include table;
     @include property(font-size, 16);
+    padding: 25px 0;
     line-height: 1;
     min-height: 38px;
     &.no-cursor {
         cursor: default;
     } // &.no-cursor
-    &.opened {
-        background-color: #F2F2F2;
-    } // &.opened
     > * {
         @include table-cell;
         vertical-align: middle;
-        @include property(padding, 5 10);
+        @include property(padding, 0 10);
         // flex: 1 1 0%;
         &:nth-child(1) {
             @include property(padding-left, 10);
@@ -26,6 +24,9 @@
             @include property(padding-right, 10);
         } // &:nth-child(1)
         // custom-cells
+        &.status {
+            width: 20px;
+        } // &.status
         &.checkbox {
             width: 40px;
             text-align: center;
@@ -45,9 +46,20 @@
                 } // sm
             } // &.on-mobile
         } // expand
+        &.name {
+            .item-title {
+                font-weight: 400;
+            } // item-title
+            .subtitle {
+                display: block;
+                @include property(font-size, 14);
+                color: #8F8F8F;
+            } // subtitle
+        } // &.name
         &.avatar {
-            width: 60px;
+            width: 40px;
             text-align: center;
+            @include property(padding, 0);
             .avatar {
                 @include property(width, 30);
             } // .avatar
@@ -61,6 +73,22 @@
                     @include property(top, -3);
                 }
             } // &.switch
+            .actions-button {
+                .button {
+                    border: transparent;
+                    background-color: #EAEAEA;
+                    color: #949494;
+                    &.active {
+                        color: #000;
+                    } // &.active
+                    &.view {
+                        &:before {
+                            @include icon-fa;
+                            content: '\f06e';
+                        }
+                    }
+                }
+            }
         } // actions-box
         &.ministatus {
             display: none;
