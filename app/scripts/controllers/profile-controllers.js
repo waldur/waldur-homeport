@@ -38,7 +38,7 @@
         vm.getProjects();
 
         this.LANGUAGE_CHOICES = LANGUAGE.CHOICES;
-        this.selectedLanguage = $translate.use() || LANGUAGE.DEFAULT;
+        this.selectedLanguage = $translate.use();
       },
       getProjects: function() {
         var vm = this;

@@ -609,4 +609,20 @@ angular
       }
     }
 
+  angular.module('ncsaas').run(['$translate', 'LANGUAGE',
+    function($translate, LANGUAGE){
+
+      // Check if current language is listed in choices
+      function isValid(current) {
+        for (var i in LANGUAGE.CHOICES)
+          if (LANGUAGE.CHOICES[i].code == current)
+            return true;
+        return false;
+      }
+
+      // Switch to default language if current choice is invalid
+      var current = $translate.use();
+      if (!isValid)
+         $translate.use(LANGUAGE.DEFAULT);
+  }])
 })();
