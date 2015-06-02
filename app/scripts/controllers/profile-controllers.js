@@ -3,10 +3,13 @@
 (function() {
   angular.module('ncsaas')
     .controller('DetailUpdateProfileController', ['usersService', 'customersService',
-      'projectsService', 'baseControllerDetailUpdateClass', 'authService', 'keysService', DetailUpdateProfileController]);
+      'projectsService', 'baseControllerDetailUpdateClass', 'authService', 'keysService',
+      '$translate', 'LANGUAGE',
+      DetailUpdateProfileController]);
 
   function DetailUpdateProfileController(
-    usersService, customersService, projectsService, baseControllerDetailUpdateClass, authService, keysService) {
+    usersService, customersService, projectsService, baseControllerDetailUpdateClass, authService, keysService, 
+    $translate, LANGUAGE) {
     var controllerScope = this;
     var Controller = baseControllerDetailUpdateClass.extend({
       activeTab: 'eventlog',
@@ -33,6 +36,9 @@
           vm.customers = response;
         });
         vm.getProjects();
+
+        this.LANGUAGE_CHOICES = LANGUAGE.CHOICES;
+        this.selectedLanguage = $translate.use() || LANGUAGE.DEFAULT;
       },
       getProjects: function() {
         var vm = this;
@@ -49,6 +55,10 @@
             }
           );
         }
+      },
+
+      changeLanguage: function() {
+        $translate.use(this.selectedLanguage);
       }
     });
 

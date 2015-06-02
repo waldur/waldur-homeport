@@ -14,6 +14,7 @@ angular
     'angularMoment',
     'ngLoadingSpinner',
     'ngAnimate',
+    'pascalprecht.translate',
     'flash'])
   // urls
   .config(function($stateProvider, $urlRouterProvider) {
