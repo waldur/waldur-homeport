@@ -31,12 +31,12 @@
         </li>
     </ul>
 
-    <sectin class="tabs-content" ng-switch="ServiceDetailUpdate.activeTab">
+    <section class="tabs-content" ng-switch="ServiceDetailUpdate.activeTab">
         <div class="tab" id="projects"
             ng-class="{'tab-active': ServiceDetailUpdate.activeTab === 'projects'}"
             ng-switch-when="projects">
             <div ui-view="tabProjects"></div>
         </div>
-    </sectin>
+    </section>
 
 </div>
