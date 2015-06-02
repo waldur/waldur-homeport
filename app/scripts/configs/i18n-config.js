@@ -8,6 +8,7 @@
             prefix: 'static/js/i18n/locale-',
             suffix: '.json'
         });
+        $translateProvider.useSanitizeValueStrategy('escaped');
     }]);
 
   angular.module('ncsaas')
