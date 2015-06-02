@@ -163,6 +163,9 @@ angular
           'eventTypes@projects.details' : {
             templateUrl: 'views/events/event-types.html',
           },
+          'tabServices@projects.details' : {
+            templateUrl: 'views/project/tab-services.html',
+          },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',
           }

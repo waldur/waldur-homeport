@@ -1,0 +1,14 @@
+<div ng-controller="ProjectServiceTabController as ProjectServiceTab">
+    <div class="white-box">
+        <div class="row">
+            <div class="col full">
+                <div class="add-or-remove">
+                    <h3 class="app-title">OpenStack</h3>
+                    <span class="added" ng-repeat="service in ProjectServiceTab.projectServices">
+                        {{ service.cloud_name }}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
