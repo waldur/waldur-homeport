@@ -315,3 +315,44 @@
   }
 
 })();
+
+
+(function() {
+  angular.module('ncsaas')
+    .controller('ProjectServiceTabController', [
+      '$stateParams',
+      'projectsService',
+      'baseControllerClass',
+      'projectCloudMembershipsService',
+      ProjectServiceTabController
+    ]);
+
+  function ProjectServiceTabController(
+    $stateParams, projectsService, baseControllerClass, projectCloudMembershipsService) {
+    var controllerScope = this;
+    var Controller = baseControllerClass.extend({
+      project: null,
+      projectServices: [],
+
+      init: function() {
+        this._super();
+        this.activate();
+      },
+      activate: function() {
+        var vm = this;
+        projectsService.$get($stateParams.uuid).then(function(response) {
+          vm.project = response;
+        });
+        vm.getProjectServices();
+      },
+      getProjectServices: function() {
+        var vm = this;
+        projectCloudMembershipsService.getList({project: $stateParams.uuid}).then(function(response) {
+          vm.projectServices = response;
+        });
+      }
+    });
+
+    controllerScope.__proto__ = new Controller();
+  }
+})();
