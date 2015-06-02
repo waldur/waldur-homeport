@@ -90,6 +90,7 @@
     var controllerScope = this;
     var Controller = baseControllerClass.extend({
       service: null,
+      activeTab: 'projects',
 
       init:function() {
         this._super();
@@ -112,6 +113,46 @@
             }
           );
         }
+      }
+    });
+
+    controllerScope.__proto__ = new Controller();
+  }
+})();
+
+(function() {
+  angular.module('ncsaas')
+    .controller('ServiceProjectTabController', [
+      '$stateParams',
+      'servicesService',
+      'baseControllerClass',
+      'projectCloudMembershipsService',
+      ServiceProjectTabController
+    ]);
+
+  function ServiceProjectTabController(
+    $stateParams, servicesService, baseControllerClass, projectCloudMembershipsService) {
+    var controllerScope = this;
+    var Controller = baseControllerClass.extend({
+      service: null,
+      serviceProjects: [],
+
+      init: function() {
+        this._super();
+        this.activate();
+      },
+      activate: function() {
+        var vm = this;
+        servicesService.$get($stateParams.uuid).then(function(response) {
+          vm.service = response;
+        });
+        vm.getServiceProjects();
+      },
+      getServiceProjects: function() {
+        var vm = this;
+        projectCloudMembershipsService.getList({cloud: $stateParams.uuid}).then(function(response) {
+          vm.serviceProjects = response;
+        });
       }
     });
 

@@ -24,16 +24,7 @@
         </section>
     </div>
 
-    <!--TODO implement tabs functional -->
-    <!--<ul class="tabs-nav">
-        <li ng-class="{'active': ServiceDetailUpdate.activeTab === 'eventlog'}"
-            ng-click="ServiceDetailUpdate.activeTab = 'eventlog'">
-            Events
-        </li>
-        <li ng-class="{'active': ServiceDetailUpdate.activeTab === 'resources'}"
-            ng-click="ServiceDetailUpdate.activeTab = 'resources'">
-            Resources
-        </li>
+    <ul class="tabs-nav">
         <li ng-class="{'active': ServiceDetailUpdate.activeTab === 'projects'}"
             ng-click="ServiceDetailUpdate.activeTab = 'projects'">
             Projects
@@ -41,26 +32,11 @@
     </ul>
 
     <sectin class="tabs-content" ng-switch="ServiceDetailUpdate.activeTab">
-        <div class="tab" id="eventlog"
-            ng-class="{'tab-active': ServiceDetailUpdate.activeTab === 'eventlog'}"
-            ng-switch-when="eventlog">
-            <div ui-view="tabEventlog"></div>
-        </div>
         <div class="tab" id="projects"
             ng-class="{'tab-active': ServiceDetailUpdate.activeTab === 'projects'}"
             ng-switch-when="projects">
             <div ui-view="tabProjects"></div>
         </div>
-        <div class="tab" id="keys"
-            ng-class="{'tab-active': ServiceDetailUpdate.activeTab === 'keys'}"
-            ng-switch-when="keys">
-            <div ui-view="tabKeys"></div>
-        </div>
-        <div class="tab" id="manageuser"
-            ng-class="{'tab-active': ServiceDetailUpdate.activeTab === 'manageuser'}"
-            ng-switch-when="manageuser">
-            <div ui-view="tabManageUser"></div>
-        </div>
-    </sectin>-->
+    </sectin>
 
 </div>
