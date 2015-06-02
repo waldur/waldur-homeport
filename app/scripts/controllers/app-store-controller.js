@@ -2,11 +2,11 @@
   angular.module('ncsaas')
     .controller('AppStoreController', [
       'baseControllerAddClass', 'resourcesService', 'projectsService', 'projectCloudMembershipsService',
-      'templatesService', 'servicesService', AppStoreController]);
+      'templatesService', 'servicesService', 'currentStateService', 'ENV', AppStoreController]);
 
   function AppStoreController(
     baseControllerAddClass, resourcesService, projectsService, projectCloudMembershipsService, templatesService,
-    servicesService) {
+    servicesService, currentStateService, ENV) {
     var controllerScope = this;
     var Controller = baseControllerAddClass.extend({
       showServices: false,
@@ -19,6 +19,11 @@
       projectList: [],
       templateList:[],
       selectedProject: null,
+      customer: null,
+      resourcePrice: 0,
+      addonsPrice: 0,
+      addonsList: [],
+      selectedAddons: [],
 
       init:function() {
         this.service = resourcesService;
@@ -26,6 +31,7 @@
         this.setSignalHandler('currentCustomerUpdated', this.currentCustomerUpdatedHandler.bind(this));
         this._super();
         this.listState = 'resources.list';
+        this.servieIcon = ENV.serviceIcon;
       },
       activate:function() {
         var vm = this;
@@ -33,6 +39,24 @@
         projectsService.getList().then(function(response) {
           vm.projectList = response;
         });
+        currentStateService.getCustomer().then(function(customer) {
+          vm.customer = customer;
+        });
+        // XXX: Additional options
+        vm.addonsList = [
+          {
+            name: 'Bronze support',
+            description: 'Phone assistance during working hours'
+          },
+          {
+            name: 'Golden support',
+            description: 'Phone assistance 24/7'
+          },
+          {
+            name: 'Backup',
+            options: ['Daily', 'Weekly']
+          }
+        ];
       },
       setProject:function(project) {
         var vm = this;
@@ -67,6 +91,17 @@
         vm.instance.flavor = flavor.url;
         vm.selectedFlavor = flavor;
         vm.showOptions = true;
+      },
+      setAddon:function(addon) {
+        if (!this.isSelectedAddon(addon)) {
+          this.selectedAddons.push(addon);
+        } else {
+          var index = this.selectedAddons.indexOf(addon);
+          this.selectedAddons.splice(index, 1);
+        }
+      },
+      isSelectedAddon:function(addon) {
+        return this.selectedAddons.indexOf(addon) !== -1;
       },
       currentCustomerUpdatedHandler:function() {
         var vm = this.controllerScope;

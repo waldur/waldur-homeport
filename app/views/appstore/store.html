@@ -140,15 +140,15 @@
                          ng-click="AppStore.setFlavor(flavor)"
                          ng-class="{'state': AppStore.selectedFlavor == flavor}">
                         <div class="icon">
-                            <img src="/static/images/icons/icon_openstack_small.png" alt="" class="icon">
+                            <img ng-src="{{ AppStore.servieIcon }}"alt="" class="icon">
                         </div>
                         <div class="description top">
                             <div class="row">
                                 <div class="col top half">
                                     <div class="form-box">
                                         <div class="custom-select project inline-elem">
-                                            <select ng-model="AppStore.instance.template"
-                                                ng-options="template.url as template.name for template in AppStore.templateList">
+                                            <select ng-model="AppStore.flavor[$index].template"
+                                                ng-options="template as template.name for template in AppStore.templateList">
                                                 <option value="">Choose OS</option>
                                             </select>
                                         </div>
@@ -169,13 +169,7 @@
                                 </div>
                                 <div class="col top half">
                                     <article class="normal-description">
-                                        <ul>
-                                            <li>* Free incoming traffic</li>
-                                            <li>* Managed infrastructure</li>
-                                        </ul>
-                                        <p>
-                                            A small-size VM for the non-demanding applications.
-                                        </p>
+                                        {{ AppStore.flavor[$index].template.description }}
                                     </article>
                                 </div>
                             </div>
@@ -197,108 +191,27 @@
                 <!-- instance templates -->
                 <div class="appstore-templates">
                     <!-- service -->
-                     <div class="appstore-template full">
+                     <div class="appstore-template full"
+                          ng-repeat="addon in AppStore.addonsList"
+                          ng-click="AppStore.setAddon(addon)"
+                          ng-class="{'state': AppStore.isSelectedAddon(addon)}">
                         <div class="icon">
                             <img src="/static/images/logo.png" alt="" class="icon">
                         </div>
                         <div class="description top">
-                            <h2>Bronze support</h2>
-                            <article class="normal-description">
-                                <p>Bronze support includes:
-                                </p>
-                                <ul>
-                                    <li>* Phone assistance during working hours</li>
-                                    <li>* Upgrades of the OS</li>
-                                </ul>
-
+                            <h2>{{ addon.name }}</h2>
+                            <article class="normal-description" ng-show="addon.description">
+                                {{ addon.description }}
                             </article>
+                            <div class="custom-select project inline-elem" ng-show="addon.options">
+                                <select>
+                                    <option value="">Choose</option>
+                                    <option ng-repeat="option in addon.options" value="{{ option }}">{{ option }}</option>
+                                </select>
+                            </div>
                         </div>
                         <div class="description bottom-price">
                             <span class="price-tag">$49 per month</span>
-                        </div>
-                    </div>
-                    <div class="appstore-template full state">
-                        <div class="icon">
-                            <img src="/static/images/logo.png" alt="" class="icon">
-                        </div>
-                        <div class="description top">
-                            <h2>Golden support</h2>
-                            <article class="normal-description">
-                                <p>Golden support includes:
-                                </p>
-                                <ul>
-                                    <li>* Phone assistance 24/7</li>
-                                    <li>* Upgrades of the OS</li>
-                                </ul>
-
-                            </article>
-                        </div>
-                        <div class="description bottom-price">
-                            <span class="price-tag state">$299 per month</span>
-                        </div>
-                    </div>
-                    <!-- /service -->
-                    <!-- service -->
-                    <div class="appstore-template full">
-                        <div class="icon">
-                            <img src="/static/images/logo.png" alt="" class="icon">
-                        </div>
-                        <div class="description top">
-                            <h2>Backup</h2>
-                            <div class="custom-select project inline-elem">
-                                <select>
-                                    <option value="">Choose frequency</option>
-                                    <option value="">Daily</option>
-                                    <option value="">Weekly</option>
-
-                                </select>
-                            </div>
-                        </div>
-                        <div class="description bottom-price">
-                            <span class="price-tag">$9 per month </span>
-                        </div>
-                    </div>
-                    <!-- /service -->
-                    <!-- service -->
-                    <div class="appstore-template full">
-                        <div class="icon">
-                            <img src="/static/images/logo.png" alt="" class="icon">
-                        </div>
-                        <div class="description top">
-                            <h2>Disaster recovery</h2>
-                            <div class="custom-select project inline-elem">
-                                <select>
-                                    <option value="">Choose location</option>
-                                    <option value="">Muscat</option>
-                                    <option value="">Dubai</option>
-                                    <option value="">AWS Ireland</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="description bottom-price">
-                            <span class="price-tag">$30 per GB</span>
-                        </div>
-                    </div>
-                    <!-- /service -->
-
-                    <!-- service -->
-                    <div class="appstore-template full">
-                        <div class="icon">
-                            <img src="/static/images/logo.png" alt="" class="icon">
-                        </div>
-                        <div class="description top">
-                            <h2>Architecture consultancy</h2>
-                            <div class="custom-select project inline-elem">
-                                <select>
-                                    <option value="">Choose duration</option>
-                                    <option value="">1 hour</option>
-                                    <option value="">10 hours</option>
-                                    <option value="">40 hours</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="description bottom-price">
-                            <span class="price-tag">$20 per hour</span>
                         </div>
                     </div>
                     <!-- /service -->
@@ -320,15 +233,15 @@
                     <h3 class="app-title">Checkout</h3>
                     <div class="active-customer">
                         <span>Charged to</span>
-                        <span>Ministry of Bells</span>
+                        <span>{{ AppStore.customer.name }}</span>
                     </div>
                 </div>
 
                 <div class="checkout-block centered">
                     <div class="instance-info">
-                        <strong>My Resource</strong>
-                        <span>for</span>
-                        <strong>Awesome Project</strong>
+                        <strong>{{ AppStore.instance.name }}</strong>
+                        <span ng-show="AppStore.instance.name && AppStore.selectedProject">for</span>
+                        <strong>{{ AppStore.selectedProject.name }}</strong>
                     </div>
                 </div>
 
@@ -341,7 +254,7 @@
                             </article>
                         </div>
                         <div class="col top half checkout-item-price">
-                            <span class="price-tag state">$300</span>
+                            <span class="price-tag state">${{ AppStore.resourcePrice }}</span>
                         </div>
                     </div>
                     <div class="row">
@@ -352,7 +265,7 @@
                             </article>
                         </div>
                         <div class="col top half checkout-item-price">
-                            <span class="price-tag state">$299</span>
+                            <span class="price-tag state">${{ AppStore.addonsPrice }}</span>
                         </div>
                     </div>
                 </div>
@@ -360,7 +273,7 @@
                 <div class="checkout-block centered">
                     <h3 class="app-title">Total</h3>
                     <div>
-                        <span class="price-tag state">$599 per month</span>
+                        <span class="price-tag state">${{ AppStore.resourcePrice + AppStore.addonsPrice }} per month</span>
                     </div>
                 </div>
 
