@@ -13,11 +13,11 @@ msgstr ""
 
 #: app/views/profile/update.html:29
 msgid "Cancel"
-msgstr "Tühistama"
+msgstr "Tühista"
 
 #: app/views/partials/app-header.html:18
 msgid "Dashboard"
-msgstr "Armatuurlaud"
+msgstr "Töölaud"
 
 #: app/views/partials/app-header.html:26
 msgid "Projects"
