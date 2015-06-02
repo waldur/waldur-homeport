@@ -51,3 +51,12 @@ page-size directive calling looks like:
 pages-list - list controller
 pages-service - list model
 pages-href is not required, current url by default
+
+## Multilingual user interface
+
+Workflow looks as following:
+1) Markup HTML using `translate` directive. For example:
+`<h1 translate>Hello!</h1>`
+2) Run `grunt nggettext_extract`. It will extract strings from HTML files and put it in `i18n/template.pot`. Doc: https://angular-gettext.rocketeer.be/dev-guide/annotate/
+3) Create or edit PO files in i18n directory. You can merge new string from POT to PO using `poedit`.
+4) Run `grunt po2json_angular_translate`. It will convert PO files to JSON files at `static/js/i18n/locale-LANGUAGECODE.json`
