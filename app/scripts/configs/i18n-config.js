@@ -11,14 +11,9 @@
     }]);
 
   angular.module('ncsaas')
-    .constant('LANGUAGE', {
+    .value('LANGUAGE', {
         CHOICES: [
-          {code: 'ar', label: 'Arabic'},
-          {code: 'en', label: 'English'},
-          {code: 'et', label: 'Estonian'},
-          {code: 'fi', label: 'Finnish'},
-          {code: 'ru', label: 'Russian'},
-          {code: 'uk', label: 'Ukrainian'}
+            {code: 'en', label: 'English'}
         ],
         DEFAULT: 'en'
     });
