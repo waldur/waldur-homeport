@@ -13,28 +13,28 @@ msgstr ""
 
 #: app/views/profile/update.html:29
 msgid "Cancel"
-msgstr ""
+msgstr "Cancel"
 
 #: app/views/partials/app-header.html:18
 msgid "Dashboard"
-msgstr ""
+msgstr "Dashboard"
 
 #: app/views/partials/app-header.html:26
 msgid "Projects"
-msgstr ""
+msgstr "Projects"
 
 #: app/views/partials/app-header.html:22
 msgid "Resources"
-msgstr ""
+msgstr "Resources"
 
 #: app/views/profile/update.html:30
 msgid "Save"
-msgstr ""
+msgstr "Save"
 
 #: app/views/partials/app-header.html:30
 msgid "Services"
-msgstr ""
+msgstr "Services"
 
 #: app/views/partials/app-header.html:34
 msgid "Users"
-msgstr ""
+msgstr "Users"
