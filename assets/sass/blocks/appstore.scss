@@ -1,18 +1,28 @@
 .appstore-templates {
     display: flex;
-    flex-wrap: wrap-reverse;
+    flex-wrap: wrap;
     margin-left: -10px;
     margin-right: -10px;
     .appstore-template {
         border-radius: 3px;
         width: calc(33.3333% - 20px);
         display: flex;
+        flex-wrap: wrap;
         align-items: center;
         padding: 10px;
         margin: 10px;
         border: 1px solid rgb(202, 202, 202);
         position: relative;
         cursor: pointer;
+        &.no-active {
+            opacity: 0.6;
+        } // &.no-active
+        &.half {
+            width: calc(50% - 20px);
+        } // half
+        &.full {
+            width: calc(100% - 20px);
+        } // full
         @include bp(xs) {
             width: calc(100% - 20px);
         } // xs
@@ -52,6 +62,21 @@
             &.full {
                 width: 100%;
             } // &.full
+            &.top {
+                align-self: flex-start;
+            } // &.top
+            .col {
+                padding: 15px 10px;
+            } // .col
+            &.bottom-price {
+                margin-top: 20px;
+                border-top: 1px solid rgb(202, 202, 202);
+                width: calc(100% + 20px);
+                margin-left: -10px;
+                margin-right: -10px;
+                padding-top: 10px;
+                text-align: center;
+            } // &.bottom-price
             h3 {
                 margin: 0;
                 font-size: rem(18);

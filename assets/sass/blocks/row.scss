@@ -4,6 +4,12 @@
         @include property(margin-top, 20);
     } // + .row
     .col {
+        &.top {
+            align-item: flex-start;
+        } // &.top
+        &.half {
+            width: calc(50% - 20px);
+        } // &.half
         &.initial-avatar {
             width: 180px;
         } // &.initial-avatar
@@ -30,6 +36,12 @@
         @include bp(sm) {
             width: 100%;
         } // sm
+        h1, h2, h3, h4, h5, h6 {
+            margin-bottom: 20px;
+        } // h1, h2, h3, h4, h5, h6
+        .form-box {
+            margin-bottom: 20px;
+        } // form-box
     } // .col
     // &.initial-data-row {
 
