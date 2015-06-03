@@ -59,6 +59,9 @@
             @include bp(md) {
                 display: none;
             } // md
+            @include bp(lightmd) {
+                display: none;
+            } // lightmd
         } // &.add-something
         &.customers {
             @include bp(sm) {

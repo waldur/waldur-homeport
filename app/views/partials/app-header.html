@@ -78,7 +78,8 @@
                     </ul>
                 </li>
                 <li>
-                    <a ui-sref="support.tickets" class="support"></a>
+                    <a ui-sref="support.tickets" class="support"
+                        ng-class="{'active': Header.menuItemActive === 'support'}"></a>
                 </li>
                 <li class="dropdown">
                     <a class="user-area drop-active" ng-click="Header.menuToggle('profileMenu', $event)"
@@ -104,9 +105,8 @@
                         <li class="on-tablet">
                             <a href="" class="user">Invite user</a>
                         </li>
-                        <li class="divider on-tablet"></li>
-
-                        <li class="on-tablet" ng-repeat="customer in Header.customers">
+                        <li class="divider on-tablet customers"></li>
+                        <li class="on-tablet customers" ng-repeat="customer in Header.customers">
                             <a ng-click="Header.setCurrentCustomer(customer)"
                                 ng-class="{'current': customer.uuid == Header.currentCustomer.uuid}">{{ customer.name }}</a>
                         </li>

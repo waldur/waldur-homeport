@@ -38,7 +38,26 @@
             @include bp(md) {
                 display: block;
             } // md
+            @include bp(lightmd) {
+                display: block;
+            } // lightmd
+            &.customers {
+                @include bp(sm) {
+                    display: block;
+                } // sm
+                @include bp(md) {
+                    display: block;
+                } // md
+                @include bp(lightmd) {
+                    display: none;
+                } // lightmd
+            } // &.customers
         } // &.on-tablet
+        &.customers {
+            @include bp(lightmd) {
+                display: block;
+            } // lightmd
+        } // customers
         > a {
             display: block;
             @include property(font-size, 14);
