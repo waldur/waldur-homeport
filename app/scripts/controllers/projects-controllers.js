@@ -384,6 +384,23 @@
             alert(response.data.non_field_errors);
           }
         );
+      },
+      projectServiceRemove: function(projectService) {
+        var vm = this;
+        var index = vm.projectServices.indexOf(projectService);
+        var confirmDelete = confirm('Confirm service deletion?');
+        if (confirmDelete) {
+          projectService.$delete().then(
+            function() {
+              vm.projectServices.splice(index, 1);
+            },
+            function(response) {
+              alert(response.data.detail);
+            }
+          );
+        } else {
+          alert('Service was not deleted.');
+        }
       }
     });
 
