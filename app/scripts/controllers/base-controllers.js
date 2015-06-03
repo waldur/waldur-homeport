@@ -47,7 +47,7 @@
         $rootScope.closeMenu = vm.closeMenu;
       },
       closeMenu: function() {
-        var vm = this;
+        var vm = controllerScope;
         for (var property in vm.menuState) {
           if (vm.menuState.hasOwnProperty(property)) {
             vm.menuState[property] = false;

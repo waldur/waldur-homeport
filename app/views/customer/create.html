@@ -56,6 +56,15 @@
             </div>
         </div>
         <!-- /non field errors -->
+        <div class="simple-line" ng-show="CustomerAdd.errors.detail">
+            <div class="error">
+                <ul class="error-list">
+                    <li>
+                        {{ CustomerAdd.errors.detail }}
+                    </li>
+                </ul>
+            </div>
+        </div>
 
         <div class="decision">
             <div class="col">

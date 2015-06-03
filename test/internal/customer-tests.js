@@ -6,7 +6,7 @@ var auth = require('../helpers/auth.js'),
       customer: 'Ministry of Whistles'
     },
     {
-      user: auth.getUser('Alice'),
+      user: auth.getUser('Walter'),
       customer: 'Ministry of Bells'
     }
   ];
@@ -27,7 +27,7 @@ for(var i = 0; i < addCustomerTestData.length; i++) {
       it('I should be able to go to "customer add" page', function() {
         element(by.css('.dropdown.customers .active-context')).click();
         element(by.cssContainingText('.dropdown.customers .nav-sublist li a', 'Manage customers')).click();
-        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/customer/');
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/customers/');
 
         element(by.css('.right-sort a')).click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/customers/add/');
