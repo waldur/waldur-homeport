@@ -3,22 +3,29 @@
     $bp-xs-helpdesk: "(min-width : 480px) and (max-width : 768px)";
     $bp-sm: "(min-width : 768px) and (max-width : 992px)";
     $bp-md: "(min-width : 992px) and (max-width : 1200px)";
+    $bp-prelg: "(min-width : 1200px) and (max-width : 1260px)";
     $bp-lg: "(min-width : 1200px)";
 
-    // extrasmall mobile
+    // extrasmall – mobile
     @if $point == xs {
         @media #{$bp-xs} { @content; }
         @media #{$bp-xs-helpdesk} { @content; }
     }
-    // small (not only mobile)
+    // small – (not only mobile)
     @if $point == sm {
         @media #{$bp-sm} { @content; }
     }
-    // medium smallscreen laptop & tablets & some mobile
+    // medium – smallscreen laptop & tablets & some mobile
     @if $point == md {
         @media #{$bp-md} { @content; }
     }
-    // medium big screens
+    @if $point == lightmd {
+        @media #{$bp-prelg} { @content; }
+    }
+    @if $point == prelg {
+        @media #{$bp-prelg} { @content; }
+    }
+    // medium – big screens
     @if $point == lg {
         @media #{$bp-lg} { @content; }
     }
