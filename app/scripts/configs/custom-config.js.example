@@ -10,3 +10,15 @@ angular.module('ncsaas')
     facebookClientId: '654736081301402',
 
   });
+
+angular.module('ncsaas')
+  .value('LANGUAGE', {
+    CHOICES: [
+      {code: 'en', label: 'English'},
+      {code: 'et', label: 'Estonian'},
+      {code: 'fi', label: 'Finnish'},
+      {code: 'ru', label: 'Russian'},
+      {code: 'uk', label: 'Ukrainian'}
+    ],
+    DEFAULT: 'en'
+});

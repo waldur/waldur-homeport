@@ -215,8 +215,35 @@ module.exports = function(grunt) {
                       src: ['angular-animate.js'],
                       dest: 'app/static/js/angular/',
                       filter: 'isFile'
+                    },
+                    {
+                      expand: true,
+                      cwd: 'bower_components/angular-translate',
+                      src: ['angular-translate.js'],
+                      dest: 'app/static/js/angular/',
+                      filter: 'isFile'
+                    },
+                    {
+                      expand: true,
+                      cwd: 'bower_components/angular-translate-storage-cookie',
+                      src: ['angular-translate-storage-cookie.js'],
+                      dest: 'app/static/js/angular/',
+                      filter: 'isFile'
+                    },
+                    {
+                      expand: true,
+                      cwd: 'bower_components/angular-translate-storage-local',
+                      src: ['angular-translate-storage-local.js'],
+                      dest: 'app/static/js/angular/',
+                      filter: 'isFile'
+                    },
+                    {
+                      expand: true,
+                      cwd: 'bower_components/angular-translate-loader-static-files',
+                      src: ['angular-translate-loader-static-files.js'],
+                      dest: 'app/static/js/angular/',
+                      filter: 'isFile'
                     }
-
                 ]
             }
         },
@@ -292,6 +319,25 @@ module.exports = function(grunt) {
             }
         },
 
+        nggettext_extract: {
+            pot: {
+                files: {
+                  'i18n/template.pot': ['app/views/**/*.html']
+                }
+            },
+        },
+
+        po2json_angular_translate: {
+            app: {
+                options: {
+                    pretty: true
+                },
+                files: {
+                  'app/static/js/i18n/': ['i18n/*.po'],
+                }
+            }
+        },
+
     });
 
     require('load-grunt-tasks')(grunt);
@@ -304,5 +350,8 @@ module.exports = function(grunt) {
     grunt.registerTask('default', ['run']);
     grunt.registerTask('test',
         ['connect:test', 'imagemin', 'sass', 'autoprefixer', 'protractor_webdriver:test', 'protractor:test']);
+
+    grunt.loadNpmTasks('grunt-angular-gettext');
+    grunt.loadNpmTasks('grunt-po2json-angular-translate');
 
 };
