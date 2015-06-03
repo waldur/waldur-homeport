@@ -91,7 +91,7 @@
                             <label for="">Description:</label>
                         </div>
                         <div class="col input">
-                            <textarea name="" id="" cols="30" rows="3"></textarea>
+                            <textarea cols="30" rows="3" ng-model="AppStore.instance.description"></textarea>
                         </div>
                         <div class="col description">
                             <article class="light-description">
@@ -140,7 +140,7 @@
                          ng-click="AppStore.setFlavor(flavor)"
                          ng-class="{'state': AppStore.selectedFlavor == flavor}">
                         <div class="icon">
-                            <img ng-src="{{ AppStore.servieIcon }}"alt="" class="icon">
+                            <img ng-src="{{ AppStore.serviceIcon }}"alt="" class="icon">
                         </div>
                         <div class="description top">
                             <div class="row">
@@ -148,7 +148,8 @@
                                     <div class="form-box">
                                         <div class="custom-select project inline-elem">
                                             <select ng-model="AppStore.flavor[$index].template"
-                                                ng-options="template as template.name for template in AppStore.templateList">
+                                                ng-options="template as template.name for template in AppStore.templateList"
+                                                ng-change="AppStore.setTemplate(AppStore.flavor[$index].template)">
                                                 <option value="">Choose OS</option>
                                             </select>
                                         </div>
@@ -279,7 +280,7 @@
 
                 <div class="decision">
                     <div class="col">
-                        <a class="button-apply">Checkout</a>
+                        <a ng-click="AppStore.save()" class="button-apply">Checkout</a>
                     </div>
                 </div>
 

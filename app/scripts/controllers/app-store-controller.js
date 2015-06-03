@@ -24,6 +24,7 @@
       addonsPrice: 0,
       addonsList: [],
       selectedAddons: [],
+      successMessage: 'Purchase of {vm_name} was successful.',
 
       init:function() {
         this.service = resourcesService;
@@ -31,7 +32,7 @@
         this.setSignalHandler('currentCustomerUpdated', this.currentCustomerUpdatedHandler.bind(this));
         this._super();
         this.listState = 'resources.list';
-        this.servieIcon = ENV.serviceIcon;
+        this.serviceIcon = ENV.serviceIcon;
       },
       activate:function() {
         var vm = this;
@@ -91,6 +92,9 @@
         vm.instance.flavor = flavor.url;
         vm.selectedFlavor = flavor;
         vm.showOptions = true;
+      },
+      setTemplate:function(tamplate) {
+        this.instance.template = tamplate.url;
       },
       setAddon:function(addon) {
         if (!this.isSelectedAddon(addon)) {
