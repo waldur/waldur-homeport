@@ -103,6 +103,21 @@ angular
         }
       })
 
+      .state('support.create', {
+        url: 'add/',
+        views: {
+          'appHeader@support' : {
+            templateUrl: 'views/partials/app-header.html',
+          },
+          'appContent@support' : {
+            templateUrl: 'views/support/create.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        }
+      })
+
       .state('dashboard', {
         url: '/dashboard/',
         abstract: true,
