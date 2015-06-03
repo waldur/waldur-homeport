@@ -38,6 +38,10 @@
             ng-click="ProjectDetailUpdate.activeTab = 'users';ProjectDetailUpdate.activateUserTab();">
             Users
         </li>
+        <li ng-class="{'active': ProjectDetailUpdate.activeTab === 'services'}"
+            ng-click="ProjectDetailUpdate.activeTab = 'services';">
+            Services
+        </li>
     </ul>
 
     <sectin class="tabs-content" ng-switch="ProjectDetailUpdate.activeTab">
@@ -55,6 +59,11 @@
             ng-class="{'tab-active': ProjectDetailUpdate.activeTab === 'users'}"
             ng-switch-when="users">
             <div ui-view="tabUsers"></div>
+        </div>
+        <div class="tab" id="services"
+            ng-class="{'tab-active': ProjectDetailUpdate.activeTab === 'services'}"
+            ng-switch-when="services">
+            <div ui-view="tabServices"></div>
         </div>
     </sectin>
 
