@@ -70,7 +70,7 @@
         } // &.customers
         > a {
             @include property(font-size, 16);
-            @include property(padding, 0 20);
+            @include property(padding, 0 15);
             @include property(padding-top, 13);
             @include property(height, 50);
             display: block;
@@ -162,6 +162,37 @@
                     transform: translate(1.1, 1.1);
                 } // &:before
             } // &.service
+            &.appstore {
+                display: inline-block;
+                background-color: #FDD11D;
+                padding: 4px 8px;
+                margin: 0px 12px;
+                top: 9px;
+                position: relative;
+                border-radius: 3px;
+                height: auto;
+                &.active {
+                    margin: 0;
+                    position: static;
+                    border-radius: 0;
+                    @include property(font-size, 16);
+                    @include property(padding, 0 20);
+                    @include property(padding-top, 13);
+                    @include property(height, 50);
+                    display: block;
+                    color: #1F3305;
+                    text-decoration: none;
+                } // &.active
+                &:before {
+                    position: relative;
+                    @include property(top, -1);
+                    @include property(margin-right, 5);
+                    @include inline-middle;
+                    @include icon-fa;
+                    content: '\f0c2';
+                    transform: translate(1.1, 1.1);
+                } // &:before
+            } // &.appstore
             &.project {
                 &:before {
                     position: relative;

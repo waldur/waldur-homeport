@@ -1,0 +1,298 @@
+<div ng-controller="AppStoreController as AppStore">
+
+<div class="white-box">
+    <ul class="sort-list">
+        <li class="title">
+            <h2 class="app-title">Appstore</h2>
+        </li>
+    </ul>
+</div>
+
+<div class="white-box">
+
+    <!-- service-choice -->
+    <div class="appstore-templates">
+        <!-- service -->
+        <div class="appstore-template state">
+            <div class="icon">
+                <img src="/static/images/instance.png" alt="" class="icon">
+            </div>
+            <div class="description">
+                <h3>Virtual infrastructure</h3>
+            </div>
+        </div>
+        <!-- /service -->
+        <!-- service -->
+        <div class="appstore-template no-active">
+            <div class="icon">
+                <img src="/static/images/repository.png" alt="" class="icon">
+            </div>
+            <div class="description">
+                <h3>Project management</h3>
+            </div>
+        </div>
+        <!-- /service -->
+        <!-- service -->
+        <div class="appstore-template no-active">
+            <div class="icon">
+                <img src="/static/images/flat-display.png" alt="" class="icon">
+            </div>
+            <div class="description">
+                <h3>ERP products</h3>
+            </div>
+        </div>
+        <!-- /service -->
+    </div>
+    <!-- /service-choice -->
+
+    <!-- appstore-checkout -->
+    <div class="appstore-checkout">
+
+        <!-- content -->
+        <div class="content">
+
+            <div class="content-block">
+                <!-- Instance form  -->
+                <section class="short-form full">
+                   <div class="form-row">
+                        <div class="col label">
+                            <label for="">Project:</label>
+                        </div>
+                        <div class="col input">
+                            <div class="custom-select project inline-elem">
+                                <select ng-model="AppStore.selectedProject"
+                                        ng-options="project as project.name for project in AppStore.projectList"
+                                        ng-change="AppStore.setProject(AppStore.selectedProject)">
+                                    <option value="">Choose project</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col description">
+                            <article class="light-description">
+                                The project where provisioned resource will be used.
+                            </article>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col label">
+                            <label for="">Virtual machine name:</label>
+                        </div>
+                        <div class="col input">
+                            <input type="text" placeholder="My Resource" ng-model="AppStore.instance.name">
+                            <div class="error arrow-up" ng-show="AppStore.errors.name">
+                                <ul class="error-list">
+                                    <li ng-repeat="error in AppStore.errors.name">{{ error }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col label">
+                            <label for="">Description:</label>
+                        </div>
+                        <div class="col input">
+                            <textarea cols="30" rows="3" ng-model="AppStore.instance.description"></textarea>
+                        </div>
+                        <div class="col description">
+                            <article class="light-description">
+                                URL of supported OpenStack Keystone
+                            </article>
+                        </div>
+                    </div>
+                </section>
+                <!-- /Instance form -->
+            </div>
+
+            <div class="content-block" ng-show="AppStore.showServices">
+                <!-- instance templates -->
+                <div class="appstore-templates">
+                    <!-- service -->
+                    <div class="appstore-template half"
+                         ng-repeat="service in AppStore.serviceList"
+                         ng-click="AppStore.setService(service)"
+                         ng-class="{'state': AppStore.selectedService == service}">
+                        <div class="icon">
+                            <img src="/static/images/icons/icon_digitalocean_small.png" alt="" class="icon">
+                        </div>
+                        <div class="description">
+                            <h3>{{ service.cloud_name }}</h3>
+                        </div>
+                    </div>
+                </div>
+                <!-- /instance templates -->
+            </div>
+
+            <div class="content-block" ng-show="AppStore.showFlavors">
+                <article class="normal-description">
+                    <p>
+                        Please configure the virtual machine to be provisioned by picking its size and the
+                        operating system. In addition, you can choose to order added-value services for this purchase.
+                    </p>
+                </article>
+            </div>
+
+            <div class="content-block" ng-show="AppStore.showFlavors">
+                <!-- instance templates -->
+                <div class="appstore-templates">
+                    <!-- service -->
+                    <div class="appstore-template full"
+                         ng-repeat="flavor in AppStore.flavorList"
+                         ng-click="AppStore.setFlavor(flavor)"
+                         ng-class="{'state': AppStore.selectedFlavor == flavor}">
+                        <div class="icon">
+                            <img ng-src="{{ AppStore.serviceIcon }}"alt="" class="icon">
+                        </div>
+                        <div class="description top">
+                            <div class="row">
+                                <div class="col top half">
+                                    <div class="form-box">
+                                        <div class="custom-select project inline-elem">
+                                            <select ng-model="AppStore.flavor[$index].template"
+                                                ng-options="template as template.name for template in AppStore.templateList"
+                                                ng-change="AppStore.setTemplate(AppStore.flavor[$index].template)">
+                                                <option value="">Choose OS</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <article class="normal-description">
+                                        <ul>
+                                            <li>
+                                                Processor: {{ flavor.cores }}
+                                            </li>
+                                            <li>
+                                                RAM: {{ flavor.ram / 1024 }} GB
+                                            </li>
+                                            <li>
+                                                HDD: {{ flavor.disk / 1024 }} GB
+                                            </li>
+                                        </ul>
+                                    </article>
+                                </div>
+                                <div class="col top half">
+                                    <article class="normal-description">
+                                        {{ AppStore.flavor[$index].template.description }}
+                                    </article>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="description bottom-price">
+                            <span class="price-tag state">$100</span>
+                        </div>
+                    </div>
+                    <!-- /service -->
+                </div>
+                <!-- /instance templates -->
+            </div>
+
+            <div class="content-block" ng-show="AppStore.showOptions">
+                <h2 class="app-title">Additional options</h2>
+            </div>
+
+            <div class="content-block" ng-show="AppStore.showOptions">
+                <!-- instance templates -->
+                <div class="appstore-templates">
+                    <!-- service -->
+                     <div class="appstore-template full"
+                          ng-repeat="addon in AppStore.addonsList"
+                          ng-click="AppStore.setAddon(addon)"
+                          ng-class="{'state': AppStore.isSelectedAddon(addon)}">
+                        <div class="icon">
+                            <img src="/static/images/logo.png" alt="" class="icon">
+                        </div>
+                        <div class="description top">
+                            <h2>{{ addon.name }}</h2>
+                            <article class="normal-description" ng-show="addon.description">
+                                {{ addon.description }}
+                            </article>
+                            <div class="custom-select project inline-elem" ng-show="addon.options">
+                                <select>
+                                    <option value="">Choose</option>
+                                    <option ng-repeat="option in addon.options" value="{{ option }}">{{ option }}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="description bottom-price">
+                            <span class="price-tag">$49 per month</span>
+                        </div>
+                    </div>
+                    <!-- /service -->
+
+                </div>
+                <!-- /instance templates -->
+            </div>
+
+        </div>
+        <!-- /content -->
+
+        <!-- checkout -->
+        <div class="checkout">
+
+            <!-- checkout-main -->
+            <div class="checkout-main" fixed-when-scroll>
+
+                <div class="checkout-block centered checkout-title">
+                    <h3 class="app-title">Checkout</h3>
+                    <div class="active-customer">
+                        <span>Charged to</span>
+                        <span>{{ AppStore.customer.name }}</span>
+                    </div>
+                </div>
+
+                <div class="checkout-block centered">
+                    <div class="instance-info">
+                        <strong>{{ AppStore.instance.name }}</strong>
+                        <span ng-show="AppStore.instance.name && AppStore.selectedProject">for</span>
+                        <strong>{{ AppStore.selectedProject.name }}</strong>
+                    </div>
+                </div>
+
+                <div class="checkout-block checkout-items">
+                    <div class="row">
+                        <div class="col top half checkout-item">
+                            <h4 class="app-title">Small VM</h4>
+                            <article class="light-description">
+                                Salalah Data Center
+                            </article>
+                        </div>
+                        <div class="col top half checkout-item-price">
+                            <span class="price-tag state">${{ AppStore.resourcePrice }}</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col top half checkout-item">
+                            <h4 class="app-title">Support</h4>
+                            <article class="light-description">
+                                Golden level
+                            </article>
+                        </div>
+                        <div class="col top half checkout-item-price">
+                            <span class="price-tag state">${{ AppStore.addonsPrice }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="checkout-block centered">
+                    <h3 class="app-title">Total</h3>
+                    <div>
+                        <span class="price-tag state">${{ AppStore.resourcePrice + AppStore.addonsPrice }} per month</span>
+                    </div>
+                </div>
+
+                <div class="decision">
+                    <div class="col">
+                        <a ng-click="AppStore.save()" class="button-apply">Checkout</a>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /checkout-main -->
+
+        </div>
+        <!-- /checkout -->
+
+    </div>
+    <!-- /appstore-checkout -->
+
+</div>
+
+</div>

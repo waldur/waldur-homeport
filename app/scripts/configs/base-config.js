@@ -13,6 +13,7 @@ angular.module('ncsaas')
     facebookEndpointUrl: 'api-auth/facebook/',
     pageSizes: [5, 10, 20, 50],
     pageSize: 10,
-    topMenuCustomersCount: 50
+    topMenuCustomersCount: 50,
+    serviceIcon: '/static/images/icons/icon_openstack_small.png'
 
   });
