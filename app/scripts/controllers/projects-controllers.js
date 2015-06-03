@@ -324,15 +324,18 @@
       'projectsService',
       'baseControllerClass',
       'projectCloudMembershipsService',
+      'servicesService',
       ProjectServiceTabController
     ]);
 
   function ProjectServiceTabController(
-    $stateParams, projectsService, baseControllerClass, projectCloudMembershipsService) {
+    $stateParams, projectsService, baseControllerClass, projectCloudMembershipsService, servicesService) {
     var controllerScope = this;
     var Controller = baseControllerClass.extend({
       project: null,
       projectServices: [],
+      servicesListForAutoComplete: [],
+      selectedService: null,
 
       init: function() {
         this._super();
@@ -344,12 +347,43 @@
           vm.project = response;
         });
         vm.getProjectServices();
+        vm.getServicesListForAutoComplete();
       },
       getProjectServices: function() {
         var vm = this;
         projectCloudMembershipsService.getList({project: $stateParams.uuid}).then(function(response) {
           vm.projectServices = response;
         });
+      },
+      getServicesListForAutoComplete: function(filter) {
+        var vm = this;
+        servicesService.getList(filter).then(function(response) {
+          vm.servicesListForAutoComplete = response;
+        });
+      },
+      serviceSearchInputChanged: function(searchText) {
+        controllerScope.getServicesListForAutoComplete({name: searchText});
+      },
+      selectedServicesCallback: function(selected) {
+        if (selected) {
+          controllerScope.selectedService = selected.originalObject;
+          controllerScope.addService();
+          controllerScope.getServicesListForAutoComplete();
+        }
+      },
+      addService: function() {
+        var vm = this;
+        var instance = projectCloudMembershipsService.$create();
+        instance.cloud = vm.selectedService.url;
+        instance.project = vm.project.url;
+        instance.$save(
+          function() {
+            vm.getProjectServices();
+          },
+          function(response) {
+            alert(response.data.non_field_errors);
+          }
+        );
       }
     });
 
