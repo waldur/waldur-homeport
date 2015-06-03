@@ -646,7 +646,7 @@ angular
 
       // Switch to default language if current choice is invalid
       var current = $translate.use();
-      if (!isValid) {
+      if (!isValid(current)) {
          $translate.use(LANGUAGE.DEFAULT);
       }
   }])
