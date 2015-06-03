@@ -4,7 +4,8 @@
             <div class="col full">
                 <div class="add-or-remove">
                     <h3 class="app-title">OpenStack</h3>
-                    <span class="added" ng-repeat="service in ProjectServiceTab.projectServices">
+                    <span class="added" ng-repeat="service in ProjectServiceTab.projectServices"
+                          ng-click="ProjectServiceTab.projectServiceRemove(service)">
                         {{ service.cloud_name }}
                     </span>
                     <angucomplete-alt ng-click="inputMode=!inputMode"
