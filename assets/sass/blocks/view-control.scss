@@ -1,4 +1,5 @@
 .view-control {
+    padding: 20px;
     @include property(margin, 20 60);
     .view-action-buttons {
         @include bp(xs) {
