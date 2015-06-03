@@ -7,6 +7,19 @@
                     <span class="added" ng-repeat="service in ProjectServiceTab.projectServices">
                         {{ service.cloud_name }}
                     </span>
+                    <angucomplete-alt ng-click="inputMode=!inputMode"
+                                      placeholder="Add"
+                                      pause="100"
+                                      type="text"
+                                      selected-object="ProjectServiceTab.selectedServicesCallback"
+                                      local-data="ProjectServiceTab.servicesListForAutoComplete"
+                                      search-fields="name"
+                                      title-field="name"
+                                      description-field="auth_url"
+                                      minlength="1"
+                                      clear-selected="true"
+                                      input-changed="ProjectServiceTab.serviceSearchInputChanged"
+                                      input-class="add-label {{ inputMode ? 'input': '' }}"></angucomplete-alt>
                 </div>
             </div>
         </div>
