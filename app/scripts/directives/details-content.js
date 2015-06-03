@@ -13,7 +13,7 @@
             'avatar': 40,
             'expand': 40
           }
-          var paddingToSet = 10;
+          var paddingToSet = 20;
           var a = attrs.detailscontent.split(" ");
 
           for (var i=0; i<a.length; i++) {

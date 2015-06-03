@@ -9,6 +9,7 @@
 } // status
 
 .status-circle {
+    @include inline-middle;
     @include property(width, 10);
     @include property(height, 10);
     border-radius: 100%;
