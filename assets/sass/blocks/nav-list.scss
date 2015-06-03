@@ -116,6 +116,10 @@
                 top: 10px;
                 margin: 0 5px;
                 color: #9ECF5D;
+                &:hover, &.active {
+                    background-color: #FDD11D;
+                    color: black;
+                } // &:hover, &.active
                 &:before {
                     @include icon-fa;
                     content: '\f128';
