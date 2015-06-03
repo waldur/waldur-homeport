@@ -28,6 +28,7 @@
         var vm = this;
         // XXX: for top menu customers viewing
         customersService.pageSize = ENV.topMenuCustomersCount;
+        customersService.cacheTime = ENV.topMenuCustomersCacheTime;
         customersService.getList().then(function(response) {
           vm.customers = response;
         });

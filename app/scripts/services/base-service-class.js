@@ -11,8 +11,9 @@
    */
 
   angular.module('ncsaas')
-    .service('baseServiceClass', ['$q', 'currentStateService', '$resource', 'ENV', '$rootScope', baseServiceClass]);
-  function baseServiceClass($q, currentStateService, $resource, ENV, $rootScope) {
+    .service('baseServiceClass', [
+      '$q', 'currentStateService', '$resource', 'ENV', '$rootScope', 'listCache', baseServiceClass]);
+  function baseServiceClass($q, currentStateService, $resource, ENV, $rootScope, listCache) {
     // pageSize, page, pages - default variables, you can change this in your init method or call this._super() in init
     var BaseServiceClass = Class.extend({
       pageSize:null,
@@ -22,6 +23,7 @@
       endpoint:null,
       filterByCustomer: true,
       customerUuid:null,
+      cacheTime: 0,
 
       init:function() {
         this.pageSize = ENV.pageSize;
@@ -30,6 +32,7 @@
         this.defaultFilter = {};
         this.currentStateService = currentStateService;
         this.pageChangingReset();
+        this.cacheTime = 0;
       },
 
       getList:function(filter) {
@@ -43,19 +46,30 @@
           filter.page = vm.page;
           /*jshint camelcase: false */
           filter.page_size = vm.pageSize;
-          vm.getFactory(true).query(filter, function(response, responseHeaders) {
-            var header = responseHeaders(),
-              objQuantity = !header['x-result-count'] ? null : header['x-result-count'];
-            if (objQuantity) {
-              vm.pages = Math.ceil(objQuantity/vm.pageSize);
-            }
-            deferred.resolve(response);
-          }, function(err) {
-            if (err.status === 401) {
-              $rootScope.$broadcast('authService:signout');
-            }
-            deferred.reject(err);
-          });
+          var cacheKey = vm.endpoint + JSON.stringify(filter);
+          var cache = listCache.get(cacheKey);
+          if (vm.cacheTime > 0 && cache && cache.time > new Date().getTime()) {
+            deferred.resolve(cache.data);
+          } else {
+            vm.getFactory(true).query(filter, function(response, responseHeaders) {
+              var header = responseHeaders(),
+                objQuantity = !header['x-result-count'] ? null : header['x-result-count'];
+              if (objQuantity) {
+                vm.pages = Math.ceil(objQuantity/vm.pageSize);
+              }
+              if (vm.cacheTime > 0) {
+                var cacheTime = new Date().getTime() + (vm.cacheTime * 1000);
+                listCache.put(cacheKey, {data: response, time: cacheTime});
+              }
+              deferred.resolve(response);
+            }, function(err) {
+              if (err.status === 401) {
+                $rootScope.$broadcast('authService:signout');
+              }
+              deferred.reject(err);
+            });
+          }
+
         };
 
         if (vm.currentStateService == null || !vm.filterByCustomer) {
@@ -153,4 +167,11 @@
 
     return BaseServiceClass;
   }
+})();
+
+(function() {
+  angular.module('ncsaas')
+    .factory('listCache', ['$cacheFactory', function($cacheFactory) {
+      return $cacheFactory('list-cache');
+    }]);
 })();
