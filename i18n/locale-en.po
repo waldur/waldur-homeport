@@ -1,0 +1,40 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"X-Generator: Poedit 1.5.4\n"
+"Language: en\n"
+
+#: app/views/profile/update.html:29
+msgid "Cancel"
+msgstr "Cancel"
+
+#: app/views/partials/app-header.html:18
+msgid "Dashboard"
+msgstr "Dashboard"
+
+#: app/views/partials/app-header.html:26
+msgid "Projects"
+msgstr "Projects"
+
+#: app/views/partials/app-header.html:22
+msgid "Resources"
+msgstr "Resources"
+
+#: app/views/profile/update.html:30
+msgid "Save"
+msgstr "Save"
+
+#: app/views/partials/app-header.html:30
+msgid "Services"
+msgstr "Services"
+
+#: app/views/partials/app-header.html:34
+msgid "Users"
+msgstr "Users"

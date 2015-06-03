@@ -14,6 +14,7 @@ angular
     'angularMoment',
     'ngLoadingSpinner',
     'ngAnimate',
+    'pascalprecht.translate',
     'flash'])
   // urls
   .config(function($stateProvider, $urlRouterProvider) {
@@ -162,6 +163,9 @@ angular
           },
           'eventTypes@projects.details' : {
             templateUrl: 'views/events/event-types.html',
+          },
+          'tabServices@projects.details' : {
+            templateUrl: 'views/project/tab-services.html',
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',
@@ -622,4 +626,23 @@ angular
       }
     }
 
+  angular.module('ncsaas').run(['$translate', 'LANGUAGE',
+    function($translate, LANGUAGE) {
+
+      // Check if current language is listed in choices
+      function isValid(current) {
+        for (var i in LANGUAGE.CHOICES) {
+          if (LANGUAGE.CHOICES[i].code == current) {
+            return true;
+          }
+        }
+        return false;
+      }
+
+      // Switch to default language if current choice is invalid
+      var current = $translate.use();
+      if (!isValid) {
+         $translate.use(LANGUAGE.DEFAULT);
+      }
+  }])
 })();
