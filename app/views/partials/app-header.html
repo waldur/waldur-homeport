@@ -133,6 +133,10 @@
             <!-- views nav -->
             <ul class="nav-list-side">
                 <li>
+                    <a ui-sref="dashboard.eventlog"
+                        ng-class="{'active': Header.menuItemActive === 'dashboard'}" class="dashboard">Dashboard</a>
+                </li>
+                <li>
                     <a ui-sref="resources.list"
                         ng-class="{'active': Header.menuItemActive === 'resources'}" class="resource">Resources</a>
                 </li>
@@ -187,6 +191,10 @@
                             <a ui-sref="customers.list" class="manage">Manage customers</a>
                         </li>
                     </ul>
+                </li>
+                <li>
+                    <a ui-sref="users.list"
+                        ng-class="{'active': Header.menuItemActive === 'suppot'}" class="support">Support</a>
                 </li>
                 <li class="dropdown">
                     <a href="" class="user-area drop-active" ng-click="Header.menuToggle('profileMenu', $event)"
