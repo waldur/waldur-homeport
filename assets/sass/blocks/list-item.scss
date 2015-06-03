@@ -10,6 +10,10 @@
     line-height: 1;
     min-height: 70px;
     box-sizing: border-box;
+    &.list-header {
+        min-height: 40px;
+        padding: 5px 0;
+    } // &.list-header
     &.list {
         &:hover {
             background-color: #FFFAE5;
