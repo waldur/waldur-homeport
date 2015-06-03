@@ -79,6 +79,28 @@
                     } // sm
                 } // user-name
             } // &.user-area
+            &.dashboard {
+                &:before {
+                    position: relative;
+                    @include property(top, -3);
+                    @include property(margin-right, 5);
+                    @include inline-middle;
+                    @include icon-fa;
+                    content: '\f0e4';
+                    transform: translate(1.1, 1.1);
+                } // &:before
+            } // &.dashboard
+            &.support {
+                &:before {
+                    position: relative;
+                    @include property(top, -3);
+                    @include property(margin-right, 5);
+                    @include inline-middle;
+                    @include icon-fa;
+                    content: '\f128';
+                    transform: translate(1.1, 1.1);
+                } // &:before
+            } // &.support
             &.service {
                 &:before {
                     position: relative;

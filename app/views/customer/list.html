@@ -60,32 +60,35 @@
     <div class="white-box clear">
         <ul class="object-list">
             <li>
-                <div class="list-item">
+                <div class="list-item list-header">
                     <div class="checkbox"></div>
-                    <div class="avatar"></div>
-                    <div>
+                    <div class="name">
                         <a class="list-sort">Name</a>
                     </div>
                     <div class="actions"></div>
                 </div>
             </li>
             <li ng-repeat="customer in CustomerList.list">
-                <div class="list-item">
+                <div class="list-item list pointer" ng-click="expandItem=!expandItem">
                     <div class="checkbox">
-                        <div class="checkbox">
+                        <div class="checkbox" stoppropagation>
                             <input type="checkbox" ng-show="CustomerList.showgroup">
                         </div>
                     </div>
-                    <div class="expand">
+                    <!-- <div class="expand">
                         <a class="plus-minus"
                             ng-click="expandItem=!expandItem"
                             ng-class="{'plus': !expandItem, 'minus active': expandItem}"></a>
-                    </div>
-                    <div>
-                        <h3 class="item-title"><a ui-sref="customers.details({uuid: customer.uuid})">{{ customer.name }}</a></h3>
+                    </div> -->
+                    <div class="name">
+                        <h3 class="item-title">
+                            <a ui-sref="customers.details({uuid: customer.uuid})" stoppropagation>{{ customer.name }}</a>
+                        </h3>
                     </div>
                     <div class="actions">
-                        <div class="actions-button" ng-show="!CustomerList.showgroup && CustomerList.isOwner(customer)">
+                        <div class="actions-button"
+                            ng-show="!CustomerList.showgroup && CustomerList.isOwner(customer)"
+                            stoppropagation>
                             <a class="button" ng-click="openActions=!openActions">actions</a>
                             <ul class="actions-dropdown" ng-show="openActions">
                                 <li>
@@ -96,7 +99,7 @@
                     </div>
                 </div>
                 <div class="list-item-details" ng-show="expandItem">
-                    <section>
+                    <section detailscontent="checkbox">
                         <header>
                             <h4 class="item-title">Services</h4>
                             <ul class="inline-pagination">

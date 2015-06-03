@@ -40,7 +40,7 @@
       projects: ['projects.list', 'projects.details', 'projects.update', 'projects.create', 'projects.add-users'],
       services: ['services.list', 'services.create', 'services.details'],
       users: ['users.list', 'users.details'],
-      appstore: ['appstore.store']
+      support: ['support.tickets', 'support.create']
     };
 
     function getActiveItem(stateName) {

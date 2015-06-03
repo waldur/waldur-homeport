@@ -70,11 +70,10 @@
 </section>
 <!-- /view-control -->
 
-<div class="white-box clear" ng-show="ServiceList.list.length > 0">
+<div class="white-box" ng-show="ServiceList.list.length > 0">
     <ul class="object-list">
-        <li class="list-item">
+        <li class="list-item list-header">
             <div class="checkbox"></div>
-            <div class="expand"></div>
             <div class="name">
                 <a href="#" class="list-sort">Name</a>
             </div>
@@ -84,27 +83,23 @@
             <div class="actions"></div>
         </li>
         <li ng-repeat="service in ServiceList.list">
-            <div class="list-item" ng-class="{'opened': expandItem}">
+            <div class="list-item list pointer" ng-class="{'opened': expandItem}"
+                ng-click="expandItem=!expandItem">
                 <div class="checkbox">
-                        <div class="checkbox">
+                        <div class="checkbox" stoppropagation>
                             <input type="checkbox" ng-show="ServiceList.showgroup">
                         </div>
                     </div>
-                    <div class="expand">
-                        <a class="plus-minus"
-                        ng-click="expandItem=!expandItem"
-                        ng-class="{'plus': !expandItem, 'minus active': expandItem}"></a>
-                    </div>
-                <div>
+                <div class="name">
                     <h3 class="item-title">
-                        <a ui-sref="services.details({uuid: service.uuid})">{{ service.name }}</a>
+                        <a ui-sref="services.details({uuid: service.uuid})" stoppropagation>{{ service.name }}</a>
                     </h3>
                 </div>
                 <div class="additional-cell" ng-hide="collapsedItem">
                     OpenStack
                 </div>
                 <div class="actions">
-                    <div class="actions-button" ng-show="!ServiceList.showgroup">
+                    <div class="actions-button" ng-show="!ServiceList.showgroup" stoppropagation>
                         <a class="button" ng-click="openActions=!openActions">actions</a>
                         <ul class="actions-dropdown" ng-show="openActions">
                             <li>
@@ -123,7 +118,7 @@
                     </header>
                     OpenStack
                 </section>
-                <section class="half">
+                <section class="half" detailscontent="checkbox">
                     <header>
                         <h4 class="item-title">Access URL</h4>
                     </header>

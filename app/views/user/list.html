@@ -62,12 +62,11 @@
     </section>
     <!-- /view-control -->
 
-    <div class="white-box clear">
+    <div class="white-box">
         <ul class="object-list">
             <li>
-                <div class="list-item">
+                <div class="list-item list-header">
                     <div class="checkbox"></div>
-                    <div class="expand"></div>
                     <div class="avatar"></div>
                     <div>
                         <a class="list-sort">Name</a>
@@ -82,26 +81,24 @@
                 </div>
             </li>
             <li ng-repeat="user in UserList.list">
-                <div class="list-item" ng-class="{'opened': expandItem}">
+                <div class="list-item list pointer" ng-class="{'opened': expandItem}"
+                    ng-click="expandItem=!expandItem; UserList.showMore(user)">
                     <div class="checkbox">
-                        <div class="checkbox">
+                        <div class="checkbox" stoppropagation>
                             <input type="checkbox" ng-show="UserList.showgroup"
                                 ng-checked="UserList.isInstanceSelected(user)"
                                 ng-click="UserList.changeInstanceSelection(user)">
                         </div>
-                    </div>
-                    <div class="expand">
-                        <a class="plus-minus"
-                        ng-click="expandItem=!expandItem; UserList.showMore(user)"
-                        ng-class="{'plus': !expandItem, 'minus active': expandItem}"></a>
                     </div>
                     <div class="avatar">
                         <span class="avatar">
                             <img gravatar-src="user.email" gravatar-size="100" alt="" class="avatar-img">
                         </span>
                     </div>
-                    <div>
-                        <h3 class="item-title"><a ui-sref="users.details({uuid: user.uuid})">{{ user.full_name }}</a></h3>
+                    <div class="name">
+                        <h3 class="item-title">
+                            <a ui-sref="users.details({uuid: user.uuid})" stoppropagation>{{ user.full_name }}</a>
+                        </h3>
                     </div>
                     <div class="additional-cell">
                         {{ user.email }}
@@ -110,7 +107,7 @@
                         {{ user.username }}
                     </div>
                     <div class="actions">
-                        <div class="actions-button" ng-show="!UserList.showgroup">
+                        <div class="actions-button" ng-show="!UserList.showgroup" stoppropagation>
                             <a class="button" ng-click="openActions=!openActions">actions</a>
                             <ul class="actions-dropdown" ng-show="openActions">
                                 <li>
@@ -133,7 +130,7 @@
                         </header>
                         {{ user.username }}
                     </section>
-                    <section>
+                    <section detailscontent="checkbox avatar">
                         <header>
                             <h4 class="item-title">Connected projects</h4>
                             <minipagination page-models="UserList.userProjects"

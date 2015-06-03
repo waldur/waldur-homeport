@@ -81,6 +81,10 @@
                         </li>
                     </ul>
                 </li>
+                <li>
+                    <a ui-sref="support.tickets" class="support"
+                        ng-class="{'active': Header.menuItemActive === 'support'}"></a>
+                </li>
                 <li class="dropdown">
                     <a class="user-area drop-active" ng-click="Header.menuToggle('profileMenu', $event)"
                         ng-class="{'active': Header.menuState.profileMenu}">
@@ -105,9 +109,8 @@
                         <li class="on-tablet">
                             <a href="" class="user">Invite user</a>
                         </li>
-                        <li class="divider on-tablet"></li>
-
-                        <li class="on-tablet" ng-repeat="customer in Header.customers">
+                        <li class="divider on-tablet customers"></li>
+                        <li class="on-tablet customers" ng-repeat="customer in Header.customers">
                             <a ng-click="Header.setCurrentCustomer(customer)"
                                 ng-class="{'current': customer.uuid == Header.currentCustomer.uuid}">{{ customer.name }}</a>
                         </li>
@@ -133,6 +136,10 @@
         <nav>
             <!-- views nav -->
             <ul class="nav-list-side">
+                <li>
+                    <a ui-sref="dashboard.eventlog"
+                        ng-class="{'active': Header.menuItemActive === 'dashboard'}" class="dashboard">Dashboard</a>
+                </li>
                 <li>
                     <a ui-sref="resources.list"
                         ng-class="{'active': Header.menuItemActive === 'resources'}" class="resource">Resources</a>
@@ -192,6 +199,10 @@
                             <a ui-sref="customers.list" class="manage">Manage customers</a>
                         </li>
                     </ul>
+                </li>
+                <li>
+                    <a ui-sref="users.list"
+                        ng-class="{'active': Header.menuItemActive === 'suppot'}" class="support">Support</a>
                 </li>
                 <li class="dropdown">
                     <a href="" class="user-area drop-active" ng-click="Header.menuToggle('profileMenu', $event)"
