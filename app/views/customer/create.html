@@ -1,0 +1,79 @@
+<div ng-controller="CustomerAddController as CustomerAdd">
+
+    <div class="white-box">
+        <ul class="sort-list">
+            <li class="title">
+                <h2 class="app-title">Add customer</h2>
+            </li>
+        </ul>
+    </div>
+
+    <div class="white-box">
+        <section class="short-form">
+            <div class="form-row">
+                <div class="col label">
+                    <label for="">Customer name</label>
+                </div>
+                <div class="col input">
+                    <input type="text" placeholder="name" ng-model="CustomerAdd.instance.name">
+                    <div class="error arrow-up" ng-show="CustomerAdd.errors.name">
+                        <ul class="error-list">
+                            <li ng-repeat="error in CustomerAdd.errors.name">{{ error }}</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col description">
+                    <article class="light-description">
+
+                    </article>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col label">
+                    <label for="">Customer contact details</label>
+                </div>
+                <div class="col input">
+                <textarea class="normal"
+                          placeholder="Customer contact details"
+                          ng-model="CustomerAdd.instance.contact_details"></textarea>
+                </div>
+                <div class="col description">
+                    <article class="light-description">
+
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- non field errors -->
+        <div class="simple-line" ng-show="CustomerAdd.errors.non_field_errors">
+            <div class="error">
+                <ul class="error-list">
+                    <li ng-repeat="error in CustomerAdd.errors.non_field_errors">
+                        {{ error }}
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- /non field errors -->
+        <div class="simple-line" ng-show="CustomerAdd.errors.detail">
+            <div class="error">
+                <ul class="error-list">
+                    <li>
+                        {{ CustomerAdd.errors.detail }}
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="decision">
+            <div class="col">
+                <a class="button-cancel" ng-click="CustomerAdd.cancel()">Cancel</a>
+            </div>
+            <div class="col">
+                <a class="button-apply" ng-click="CustomerAdd.save()">Create customer</a>
+            </div>
+        </div>
+    </div>
+
+</div>
