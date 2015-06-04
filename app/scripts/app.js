@@ -18,6 +18,8 @@ angular
     'flash'])
   // urls
   .config(function($stateProvider, $urlRouterProvider) {
+    var initialDataState = 'initialdata.view',
+      initialDataStatePath = '/initial-data/';
 
     $urlRouterProvider.otherwise('/');
 
@@ -63,12 +65,12 @@ angular
       })
 
       .state('initialdata', {
-        url: '/initial-data/',
+        url: initialDataStatePath,
         templateUrl: 'views/partials/base.html',
         abstract: true
       })
 
-      .state('initialdata.view', {
+      .state(initialDataState, {
         url: '',
         views: {
           'appHeader@initialdata' : {
@@ -645,14 +647,24 @@ angular
         auth: false
       });
 
-    function authCheck($q, $location, $auth) {
+    function authCheck($q, $location, $auth, usersService) {
       var deferred = $q.defer();
-
+      var vm = this;
       if (!$auth.isAuthenticated()) {
         // can't use $state because its will throw recursion error
         $location.path('/login/');
       } else {
-        deferred.resolve();
+        if (vm.self.name !== initialDataState) {
+          usersService.getCurrentUser().then(function(response) {
+            if (!response.full_name || !response.email) {
+              $location.path(initialDataStatePath);
+            } else {
+              deferred.resolve();
+            }
+          });
+        } else {
+          deferred.resolve();
+        }
       }
 
       return deferred.promise;
