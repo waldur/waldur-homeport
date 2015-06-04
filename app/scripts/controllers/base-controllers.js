@@ -113,14 +113,6 @@
           });
           currentStateService.setCustomer(deferred.promise);
         }
-        /*jshint camelcase: false */
-        if (toState.auth) {
-          usersService.getCurrentUser().then(function(response) {
-            if (!response.full_name || !response.email) {
-              $state.go('initialdata.view');
-            }
-          });
-        }
       }
     });
 
