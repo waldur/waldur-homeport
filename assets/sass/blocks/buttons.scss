@@ -7,7 +7,6 @@
     @include property(border-radius, 2);
     @include property(padding, 4 6);
     @include property(padding-top, 6);
-    @include property(font-size, 16);
     background-color: #f5f5f5;
     background-image: linear-gradient(top,#f5f5f5,#f1f1f1);
     border: 1px solid rgba(0,0,0,0.1);
@@ -27,7 +26,6 @@
     @include property(border-radius, 2);
     @include property(padding, 10 10);
     @include property(padding-top, 12);
-    @include property(font-size, 16);
     line-height: 1;
     color: #444;
 } // button-cancel
@@ -36,7 +34,6 @@
     @include property(border-radius, 2);
     @include property(padding, 10 10);
     @include property(padding-top, 12);
-    @include property(font-size, 16);
     line-height: 1;
     background-color: #29B958;
     color: #fff;
@@ -46,7 +43,6 @@
     @include property(border-radius, 2);
     @include property(padding, 10 10);
     @include property(padding-top, 12);
-    @include property(font-size, 16);
     line-height: 1;
     background-color: #7db243;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.28);
@@ -63,7 +59,6 @@
     @include inline-middle;
     @include property(border-radius, 2);
     @include property(padding, 12 15);
-    @include property(font-size, 16);
     line-height: 1;
     background-color: #7db243;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.28);
@@ -111,7 +106,6 @@
     @include inline-middle;
     @include property(border-radius, 2);
     @include property(padding, 4 6);
-    @include property(font-size, 16);
     color: #444;
     line-height: 1;
     text-decoration: none;

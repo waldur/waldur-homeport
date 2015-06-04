@@ -22,7 +22,6 @@
             } // md
         } // &.customers
         > a {
-            @include property(font-size, 16);
             @include property(padding, 0 20);
             @include property(padding-top, 10);
             @include property(height, 50);

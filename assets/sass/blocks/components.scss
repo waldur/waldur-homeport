@@ -5,7 +5,6 @@ input[type="password"] {
     box-shadow: none;
     @include property(border-radius, 1);
     @include property(padding, 5 10);
-    @include property(font-size, 16);
 }
 
 textarea {
@@ -13,7 +12,6 @@ textarea {
     box-shadow: none;
     @include property(border-radius, 1);
     @include property(padding, 6 10);
-    @include property(font-size, 16);
     width: 100%;
     max-width: 100%;
     &.small {
