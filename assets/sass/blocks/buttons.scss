@@ -50,7 +50,7 @@
     border-bottom: 2px solid #2d6c09;
     color: #fff;
     &.inhome-plans {
-        @include property(font-size, 20);
+        @include property(font-size, $big-font);
         @include property(padding, 6 12);
         @include property(padding-top, 8);
     }
@@ -79,7 +79,7 @@
         &:before {
             @include property(margin-right, 10);
             @include icon-fa;
-            @include property(font-size, 20);
+            @include property(font-size, $big-font);
         } // &:before
     } // span
     &.facebook {
@@ -111,7 +111,7 @@
     text-decoration: none;
     &.in-dropdown {
         @include property(padding, 0 2);
-        @include property(font-size, 14);
+        @include property(font-size, $small-font);
         &:hover {
             background-color: transparent;
         } // &:hover

@@ -64,7 +64,7 @@
                 } // span
                 .customer-name {} // customer-name
                 .active-context {
-                    font-size: rem(12);
+                    @include property(font-size, $extra-small-font);
                 } // active-context
             } // &.customer-context
             &.user-area {

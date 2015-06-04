@@ -92,7 +92,7 @@
             .subtitle {
                 display: block;
                 margin-top: 6px;
-                @include property(font-size, 14);
+                @include property(font-size, $small-font);
                 color: #8F8F8F;
             } // subtitle
         } // &.name
