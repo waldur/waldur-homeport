@@ -7,6 +7,7 @@
       _signals: {},
 
       init:function() {
+        this.deregisterEvent('currentCustomerUpdated'); // clear currentCustomerUpdated event handlers
         this.registerEventHandlers();
       },
       setSignalHandler: function(signalName, handlerFunction) {
@@ -22,6 +23,9 @@
       },
       flashMessage: function(type, message) {
         Flash.create(type, message);
+      },
+      deregisterEvent: function(eventName) {
+        $rootScope.$$listeners[eventName] = [];
       }
     });
 
