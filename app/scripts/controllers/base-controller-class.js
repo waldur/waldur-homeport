@@ -53,6 +53,7 @@
       // filters
       searchFilters: [], // should contains array of objects {name: 'name', title: 'Title', value: 'value'}
       chosenFilters: [],
+      cacheTime: 0,
 
       init:function() {
         this.setSignalHandler('currentCustomerUpdated', this.currentCustomerUpdatedHandler.bind(this));
@@ -64,6 +65,7 @@
       getList:function(filter) {
         var vm = this;
         filter = filter || {};
+        vm.service.cacheTime = vm.cacheTime;
         vm.service.getList(filter).then(function(response) {
           vm.list = response;
         });
