@@ -11,6 +11,12 @@
     line-height: 1;
     min-height: 70px;
     box-sizing: border-box;
+    @include bp(xs) {
+        padding-left: 0;
+    } // xs
+    @include bp(sm) {
+        padding-left: 0;
+    } // sm
     &.list-header {
         min-height: 40px;
         padding: 5px 0;
@@ -58,13 +64,20 @@
         } // &:nth-child(1)
         // custom-cells
         &.status {
-            width: 20px;
+            width: 40px;
             text-align: left;
-            padding: 0;
         } // &.status
         &.checkbox {
             width: 40px;
             text-align: center;
+            @include bp(xs) {
+                width: 20px;
+                padding: 0;
+            } // xs
+            @include bp(sm) {
+                width: 20px;
+                padding: 0;
+            } // sm
         } // checkbox-box
         &.expand {
             width: 40px;
