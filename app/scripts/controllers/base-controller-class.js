@@ -58,6 +58,7 @@
       searchFilters: [], // should contains array of objects {name: 'name', title: 'Title', value: 'value'}
       chosenFilters: [],
       cacheTime: 0,
+      controlPanelShow: true,
 
       init:function() {
         this.setSignalHandler('currentCustomerUpdated', this.currentCustomerUpdatedHandler.bind(this));
