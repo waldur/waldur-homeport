@@ -1,6 +1,7 @@
 .nav-list {
     @include clear-list-inline;
     @include clearfix;
+    position: relative;
     &.in-home {
         > li {
             > a {
@@ -26,6 +27,19 @@
     } // &.mobile
     > li {
         float: left;
+        &.logo-box {
+            position: absolute;
+            left: -50px;
+            @include bp(xs) {
+                display: none;
+            } // xs
+            @include bp(sm) {
+                display: none;
+            } // sm
+            @include bp(md) {
+                display: none;
+            } // md
+        } // logo-box
         &:not(.logo-box):not(.mobile-trigger):not(.node-conductor) {
             @include bp(xs) {
                 display: none;
@@ -63,6 +77,14 @@
                 display: none;
             } // lightmd
         } // &.add-something
+        &.customer-support {
+            @include bp(sm) {
+                display: none;
+            } // sm
+            @include bp(md) {
+                display: none;
+            } // md
+        } // &.customer-support
         &.customers {
             @include bp(sm) {
                 display: none;
@@ -72,7 +94,7 @@
             } // md
         } // &.customers
         > a {
-            @include property(padding, 0 15);
+            @include property(padding, 0 10);
             @include property(padding-top, 13);
             @include property(height, 50);
             display: block;
@@ -130,7 +152,7 @@
                     top: 6px;
                     left: 8px;
                 } // &:before
-            }
+            } // &.support
             &.logo {
                 @include property(width, 50);
                 @include property(height, 50);
@@ -153,6 +175,31 @@
                     @include property(font-size, $extra-small-font);
                 } // active-context
             } // &.customer-context
+            &.support {
+                @include inline-middle;
+                width: 30px;
+                height: 30px;
+                // border: 1px solid white;
+                background-color: rgb(130, 176, 70);
+                border-radius: 100%;
+                padding: 0;
+                position: relative;
+                top: 10px;
+                margin: 0 5px;
+                color: #9ECF5D;
+                &:hover, &.active {
+                    background-color: #FDD11D;
+                    color: black;
+                } // &:hover, &.active
+                &:before {
+                    @include icon-fa;
+                    content: '\f128';
+                    font-size: 20px;
+                    position: absolute;
+                    top: 6px;
+                    left: 8px;
+                } // &:before
+            } // &.support
             &.user-area {
                 @include property(padding-top, 5);
                 .user-name {
@@ -189,6 +236,19 @@
                     transform: translate(1.1, 1.1);
                 } // &:before
             } // &.service
+            &.lang {
+                display: inline-block;
+                background-color: #82B046;
+                color: rgb(158, 207, 93);
+                padding: 4px;
+                margin: 0px 5px;
+                top: 13px;
+                position: relative;
+                border-radius: 3px;
+                height: auto;
+                line-height: 1;
+                @include property(font-size, $small-font);
+            } // &.lang
             &.appstore {
                 display: inline-block;
                 background-color: #FDD11D;

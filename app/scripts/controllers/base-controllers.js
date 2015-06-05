@@ -5,10 +5,11 @@
   angular.module('ncsaas')
     .controller('HeaderController', [
       '$rootScope', '$scope', '$state', 'currentStateService', 'customersService',
-      'usersService', 'ENV', 'baseControllerClass', HeaderController]);
+      'usersService', 'ENV', 'baseControllerClass', '$translate', 'LANGUAGE', HeaderController]);
 
   function HeaderController(
-    $rootScope, $scope, $state, currentStateService, customersService, usersService, ENV, baseControllerClass) {
+    $rootScope, $scope, $state, currentStateService, customersService, usersService,
+    ENV, baseControllerClass, $translate, LANGUAGE) {
     var controllerScope = this;
     var HeaderControllerClass = baseControllerClass.extend({
       customers: [],
@@ -17,7 +18,8 @@
       menuState: {
         addSomethingMenu: false,
         customerMenu: false,
-        profileMenu: false
+        profileMenu: false,
+        LangMenu: false
       },
 
       init: function() {
@@ -28,6 +30,7 @@
         var vm = this;
         // XXX: for top menu customers viewing
         customersService.pageSize = ENV.topMenuCustomersCount;
+        customersService.cacheTime = ENV.topMenuCustomersCacheTime;
         customersService.getList().then(function(response) {
           vm.customers = response;
         });
@@ -45,9 +48,26 @@
         });
 
         $rootScope.closeMenu = vm.closeMenu;
+
+        this.LANGUAGE_CHOICES = LANGUAGE.CHOICES;
+        this.currentLanguage = this.findLanguageByCode($translate.use());
       },
+
+      changeLanguage: function(language) {
+        this.currentLanguage = language;
+        $translate.use(this.currentLanguage.code);
+      },
+
+      findLanguageByCode: function(code) {
+        for (var i=0; i<LANGUAGE.CHOICES.length; i++) {
+          if (LANGUAGE.CHOICES[i].code == code) {
+            return LANGUAGE.CHOICES[i];
+          }
+        }
+      },
+
       closeMenu: function() {
-        var vm = this;
+        var vm = controllerScope;
         for (var property in vm.menuState) {
           if (vm.menuState.hasOwnProperty(property)) {
             vm.menuState[property] = false;
@@ -111,14 +131,6 @@
             });
           });
           currentStateService.setCustomer(deferred.promise);
-        }
-        /*jshint camelcase: false */
-        if (toState.auth) {
-          usersService.getCurrentUser().then(function(response) {
-            if (!response.full_name || !response.email) {
-              $state.go('initialdata.view');
-            }
-          });
         }
       }
     });

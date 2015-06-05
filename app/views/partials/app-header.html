@@ -4,7 +4,7 @@
         <nav class="container">
             <!-- views nav -->
             <ul class="nav-list views">
-                <li class="logo-box">
+                <li class="logo-box" applogo>
                     <a href="" class="logo"></a>
                 </li>
                 <li class="mobile-trigger">
@@ -81,7 +81,7 @@
                         </li>
                     </ul>
                 </li>
-                <li>
+                <li class="customer-support">
                     <a ui-sref="support.tickets" class="support"
                         ng-class="{'active': Header.menuItemActive === 'support'}"></a>
                 </li>
@@ -114,9 +114,13 @@
                             <a ng-click="Header.setCurrentCustomer(customer)"
                                 ng-class="{'current': customer.uuid == Header.currentCustomer.uuid}">{{ customer.name }}</a>
                         </li>
+                        <li class="divider on-tablet customers"></li>
+                        <li class="on-tablet customers">
+                            <a ui-sref="customers.list" class="manage">Manage customers</a>
+                        </li>
                         <li class="divider on-tablet"></li>
                         <li class="on-tablet">
-                            <a ui-sref="customers.list" class="manage">Manage customers</a>
+                            <a href="#">Support</a>
                         </li>
                         <li class="divider on-tablet"></li>
                         <li>
@@ -124,6 +128,14 @@
                         </li>
                         <li>
                             <a ng-click="logout()">Logout</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown" ng-show="Header.LANGUAGE_CHOICES.length>1" ng-click="Header.menuToggle('langMenu', $event)">
+                    <a href="#" class="lang" title="{{ Header.currentLanguage.label }}">{{ Header.currentLanguage.code | uppercase }}</a>
+                    <ul class="nav-sublist lang" ng-show="Header.menuState.langMenu">
+                        <li ng-repeat="language in Header.LANGUAGE_CHOICES" ng-click="Header.changeLanguage(language)" ng-hide="language.code==Header.currentLanguage.code">
+                            <a href="#">{{ language.label}}</a>
                         </li>
                     </ul>
                 </li>
@@ -223,7 +235,6 @@
                             <a ui-sref="resources.create" class="resource">Add resource</a>
                         </li>
                         <li class="divider on-tablet"></li>
-
                         <li class="on-tablet" ng-repeat="customer in Header.customers">
                             <a ng-click="Header.setCurrentCustomer(customer)"
                                 ng-class="{'current': customer.uuid == Header.currentCustomer.uuid}">{{ customer.name }}</a>

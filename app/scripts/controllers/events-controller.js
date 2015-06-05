@@ -56,13 +56,14 @@
   }
 
   angular.module('ncsaas')
-    .controller('EventListController', ['baseEventListController', EventListController]);
+    .controller('EventListController', ['baseEventListController', 'ENV', EventListController]);
 
-  function EventListController(baseEventListController) {
+  function EventListController(baseEventListController, ENV) {
     var controllerScope = this;
     var EventController = baseEventListController.extend({
       init:function() {
         this.controllerScope = controllerScope;
+        this.cacheTime = ENV.dashboardEventsCacheTime;
         this._super();
       }
     });

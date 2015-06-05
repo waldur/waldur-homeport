@@ -12,6 +12,15 @@
     border: 1px solid rgb(221, 221, 221);
     border-top: none;
     border-bottom: 2px solid #8E8E8E;
+    &.lang {
+        width: 120px;
+        margin-left: 0;
+        left: auto;
+        right: 0;
+        a {
+            padding: 5px 15px;
+        } // a
+    } // lang
     &.user-area {
         @include bp(md) {
             margin-left: 0;

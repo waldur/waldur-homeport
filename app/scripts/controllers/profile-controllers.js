@@ -4,12 +4,10 @@
   angular.module('ncsaas')
     .controller('DetailUpdateProfileController', ['usersService', 'customersService',
       'projectsService', 'baseControllerDetailUpdateClass', 'authService', 'keysService',
-      '$translate', 'LANGUAGE',
       DetailUpdateProfileController]);
 
   function DetailUpdateProfileController(
-    usersService, customersService, projectsService, baseControllerDetailUpdateClass, authService, keysService, 
-    $translate, LANGUAGE) {
+    usersService, customersService, projectsService, baseControllerDetailUpdateClass, authService, keysService) {
     var controllerScope = this;
     var Controller = baseControllerDetailUpdateClass.extend({
       activeTab: 'eventlog',
@@ -36,9 +34,6 @@
           vm.customers = response;
         });
         vm.getProjects();
-
-        this.LANGUAGE_CHOICES = LANGUAGE.CHOICES;
-        this.selectedLanguage = $translate.use();
       },
       getProjects: function() {
         var vm = this;
@@ -55,10 +50,6 @@
             }
           );
         }
-      },
-
-      changeLanguage: function() {
-        $translate.use(this.selectedLanguage);
       }
     });
 

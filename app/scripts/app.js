@@ -18,6 +18,8 @@ angular
     'flash'])
   // urls
   .config(function($stateProvider, $urlRouterProvider) {
+    var initialDataState = 'initialdata.view',
+      initialDataStatePath = '/initial-data/';
 
     $urlRouterProvider.otherwise('/');
 
@@ -63,12 +65,12 @@ angular
       })
 
       .state('initialdata', {
-        url: '/initial-data/',
+        url: initialDataStatePath,
         templateUrl: 'views/partials/base.html',
         abstract: true
       })
 
-      .state('initialdata.view', {
+      .state(initialDataState, {
         url: '',
         views: {
           'appHeader@initialdata' : {
@@ -398,6 +400,23 @@ angular
         auth: true
       })
 
+
+      .state('customers.create', {
+        url: 'add/',
+        views: {
+          'appContent': {
+            templateUrl: 'views/customer/create.html'
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html'
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
+        auth: true
+      })
+
       .state('customers.details', {
         url: ':uuid/',
         views: {
@@ -628,14 +647,24 @@ angular
         auth: false
       });
 
-    function authCheck($q, $location, $auth) {
+    function authCheck($q, $location, $auth, usersService) {
       var deferred = $q.defer();
-
+      var vm = this;
       if (!$auth.isAuthenticated()) {
         // can't use $state because its will throw recursion error
         $location.path('/login/');
       } else {
-        deferred.resolve();
+        if (vm.self.name !== initialDataState) {
+          usersService.getCurrentUser().then(function(response) {
+            if (!response.full_name || !response.email) {
+              $location.path(initialDataStatePath);
+            } else {
+              deferred.resolve();
+            }
+          });
+        } else {
+          deferred.resolve();
+        }
       }
 
       return deferred.promise;
@@ -672,7 +701,7 @@ angular
 
       // Check if current language is listed in choices
       function isValid(current) {
-        for (var i in LANGUAGE.CHOICES) {
+        for (var i=0; i<LANGUAGE.CHOICES.length; i++) {
           if (LANGUAGE.CHOICES[i].code == current) {
             return true;
           }
