@@ -1,36 +1,6 @@
 var auth = require('../helpers/auth.js'),
-  helpers = require('../helpers/helpers.js'),
-  users = [auth.getUser('Charlie'), auth.getUser('Dave')];
+  helpers = require('../helpers/helpers.js');
 
-for(var i=0; i < users.length; i++) {
-  var user = users[i];
-
-  (function(user) {
-    describe('Test ' + user.username + ' can not go to "service add" page:', function() {
-
-      it('I should be able to login', function() {
-        auth.login(user);
-        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/dashboard/');
-      });
-
-      it('I should be able to go to services list', function() {
-        element(by.cssContainingText('ul.nav-list.views li a', 'Services')).click();
-        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/services/');
-      });
-
-      // TODO no button "Add service" on page list
-      xit('"Add service" should be disabled', function() {
-        expect(element(by.cssContainingText('div.disabled', 'Add service')).isPresent()).toBe(true);
-      });
-
-      it('I should be able to logout', function() {
-        auth.logout();
-        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/');
-      });
-    });
-  })(user);
-
-}
 
 /*jshint camelcase: false */
 var testData = [
@@ -53,15 +23,7 @@ for(var i = 0; i < testData.length; i++) {
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/dashboard/');
       });
 
-      it('I should be able to go to services list', function() {
-        element(by.cssContainingText('ul.nav-list.views li a', 'Services')).click();
-        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/services/');
-      });
-
       it('I should be able to go to "service add" page', function() {
-        element(by.cssContainingText('ul.nav-list.views li a', 'Services')).click();
-        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/services/');
-
         element(by.css('li.add-something > a')).click();
         element(by.cssContainingText('li.add-something li a.service', 'Add service')).click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/services/add/');
