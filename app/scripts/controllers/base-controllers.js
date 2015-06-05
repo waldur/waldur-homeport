@@ -59,7 +59,7 @@
       },
 
       findLanguageByCode: function(code) {
-        for (var i in LANGUAGE.CHOICES) {
+        for (var i=0; i<LANGUAGE.CHOICES.length; i++) {
           if (LANGUAGE.CHOICES[i].code == code) {
             return LANGUAGE.CHOICES[i];
           }
