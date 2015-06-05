@@ -5,10 +5,11 @@
   angular.module('ncsaas')
     .controller('HeaderController', [
       '$rootScope', '$scope', '$state', 'currentStateService', 'customersService',
-      'usersService', 'ENV', 'baseControllerClass', HeaderController]);
+      'usersService', 'ENV', 'baseControllerClass', '$translate', 'LANGUAGE', HeaderController]);
 
   function HeaderController(
-    $rootScope, $scope, $state, currentStateService, customersService, usersService, ENV, baseControllerClass) {
+    $rootScope, $scope, $state, currentStateService, customersService, usersService,
+    ENV, baseControllerClass, $translate, LANGUAGE) {
     var controllerScope = this;
     var HeaderControllerClass = baseControllerClass.extend({
       customers: [],
@@ -47,7 +48,24 @@
         });
 
         $rootScope.closeMenu = vm.closeMenu;
+
+        this.LANGUAGE_CHOICES = LANGUAGE.CHOICES;
+        this.currentLanguage = this.findLanguageByCode($translate.use());
       },
+
+      changeLanguage: function(language) {
+        this.currentLanguage = language;
+        $translate.use(this.currentLanguage.code);
+      },
+
+      findLanguageByCode: function(code) {
+        for (var i in LANGUAGE.CHOICES) {
+          if (LANGUAGE.CHOICES[i].code == code) {
+            return LANGUAGE.CHOICES[i];
+          }
+        }
+      },
+
       closeMenu: function() {
         var vm = controllerScope;
         for (var property in vm.menuState) {

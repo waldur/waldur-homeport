@@ -131,14 +131,11 @@
                         </li>
                     </ul>
                 </li>
-                <li class="dropdown" ng-click="Header.menuToggle('langMenu', $event)">
-                    <a href="#" class="lang">En</a>
+                <li class="dropdown" ng-show="Header.LANGUAGE_CHOICES.length>1" ng-click="Header.menuToggle('langMenu', $event)">
+                    <a href="#" class="lang" title="{{ Header.currentLanguage.label }}">{{ Header.currentLanguage.code | uppercase }}</a>
                     <ul class="nav-sublist lang" ng-show="Header.menuState.langMenu">
-                        <li>
-                            <a href="">Eng</a>
-                        </li>
-                        <li>
-                            <a href="">Arab</a>
+                        <li ng-repeat="language in Header.LANGUAGE_CHOICES" ng-click="Header.changeLanguage(language)" ng-hide="language.code==Header.currentLanguage.code">
+                            <a href="#">{{ language.label}}</a>
                         </li>
                     </ul>
                 </li>

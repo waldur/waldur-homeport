@@ -20,11 +20,6 @@
                         </ul>
                     </div>
                 </section>
-                <section>
-                <div class="custom-select project inline-elem" ng-show="UpdateProfile.LANGUAGE_CHOICES.length > 1">
-                    <select class="form-control" ng-options="item.code as item.label for item in UpdateProfile.LANGUAGE_CHOICES" ng-model="UpdateProfile.selectedLanguage" ng-change="UpdateProfile.changeLanguage()"></select>
-                </div>
-                </section>
                 <section class="save">
                     <a ui-sref="profile.details" class="button-cancel" translate>Cancel</a>
                     <button class="button-apply" ng-click="UpdateProfile.update()" ng-show="UpdateProfile.model.email.length" type="submit" translate>Save</button>
