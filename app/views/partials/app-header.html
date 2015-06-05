@@ -81,7 +81,7 @@
                         </li>
                     </ul>
                 </li>
-                <li>
+                <li class="customer-support">
                     <a ui-sref="support.tickets" class="support"
                         ng-class="{'active': Header.menuItemActive === 'support'}"></a>
                 </li>
@@ -114,9 +114,13 @@
                             <a ng-click="Header.setCurrentCustomer(customer)"
                                 ng-class="{'current': customer.uuid == Header.currentCustomer.uuid}">{{ customer.name }}</a>
                         </li>
+                        <li class="divider on-tablet customers"></li>
+                        <li class="on-tablet customers">
+                            <a ui-sref="customers.list" class="manage">Manage customers</a>
+                        </li>
                         <li class="divider on-tablet"></li>
                         <li class="on-tablet">
-                            <a ui-sref="customers.list" class="manage">Manage customers</a>
+                            <a href="#">Support</a>
                         </li>
                         <li class="divider on-tablet"></li>
                         <li>
@@ -223,7 +227,6 @@
                             <a ui-sref="resources.create" class="resource">Add resource</a>
                         </li>
                         <li class="divider on-tablet"></li>
-
                         <li class="on-tablet" ng-repeat="customer in Header.customers">
                             <a ng-click="Header.setCurrentCustomer(customer)"
                                 ng-class="{'current': customer.uuid == Header.currentCustomer.uuid}">{{ customer.name }}</a>
