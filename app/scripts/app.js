@@ -277,6 +277,9 @@ angular
           'appContent': {
             templateUrl: 'views/service/list.html'
           },
+          'listTemplate@services.list' : {
+            templateUrl: 'views/service/list-template.html'
+          },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html'
           }
@@ -431,6 +434,9 @@ angular
           },
           'tabServices@customers.details': {
             templateUrl: 'views/customer/tab-services.html',
+          },
+          'listTemplate@customers.details' : {
+            templateUrl: 'views/service/list-template.html'
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',
