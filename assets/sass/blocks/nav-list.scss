@@ -30,6 +30,15 @@
         &.logo-box {
             position: absolute;
             left: -50px;
+            @include bp(xs) {
+                display: none;
+            } // xs
+            @include bp(sm) {
+                display: none;
+            } // sm
+            @include bp(md) {
+                display: none;
+            } // md
         } // logo-box
         &:not(.logo-box):not(.mobile-trigger):not(.node-conductor) {
             @include bp(xs) {

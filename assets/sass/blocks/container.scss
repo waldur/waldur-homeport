@@ -5,4 +5,10 @@
     @include bp(xs) {
         @include property(padding, 0 10);
     } // xs
+    @include bp(sm) {
+        @include property(padding, 0 10);
+    } // sm
+    @include bp(md) {
+        @include property(padding, 0 30);
+    } // md
 } // container
