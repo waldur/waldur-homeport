@@ -7,11 +7,10 @@
       'usersService',
       'projectPermissionsService',
       '$scope',
-      'ENV',
       UserListController
     ]);
 
-  function UserListController(baseControllerListClass, usersService, projectPermissionsService, $scope, ENV) {
+  function UserListController(baseControllerListClass, usersService, projectPermissionsService, $scope) {
     var controllerScope = this;
     var UserController = baseControllerListClass.extend({
       userProjects: {},
@@ -28,7 +27,6 @@
             value: true
           }
         ];
-        this.controlPanelShow = ENV.userListControlPanelShow;
       },
       showMore: function(user) {
         if (!this.userProjects[user.username]) {

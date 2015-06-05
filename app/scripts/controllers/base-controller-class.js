@@ -36,9 +36,9 @@
 (function(){
 
   angular.module('ncsaas')
-    .service('baseControllerListClass', ['baseControllerClass', baseControllerListClass]);
+    .service('baseControllerListClass', ['baseControllerClass', 'ENV', baseControllerListClass]);
 
-  function baseControllerListClass(baseControllerClass) {
+  function baseControllerListClass(baseControllerClass, ENV) {
     /**
      * Use controllerScope.__proto__ = new Controller() in needed controller
      * use this.controllerScope for changes in event handler
@@ -66,6 +66,7 @@
         this.getList();
         // reset after state change
         this.selectedInstances = [];
+        this.controlPanelShow = ENV.userListControlPanelShow;
       },
       getList:function(filter) {
         var vm = this;
