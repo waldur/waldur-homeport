@@ -4,7 +4,7 @@
         <nav class="container">
             <!-- views nav -->
             <ul class="nav-list views">
-                <li class="logo-box">
+                <li class="logo-box" applogo>
                     <a href="" class="logo"></a>
                 </li>
                 <li class="mobile-trigger">
@@ -128,6 +128,17 @@
                         </li>
                         <li>
                             <a ng-click="logout()">Logout</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown" ng-click="Header.menuToggle('langMenu', $event)">
+                    <a href="#" class="lang">En</a>
+                    <ul class="nav-sublist lang" ng-show="Header.menuState.langMenu">
+                        <li>
+                            <a href="">Eng</a>
+                        </li>
+                        <li>
+                            <a href="">Arab</a>
                         </li>
                     </ul>
                 </li>

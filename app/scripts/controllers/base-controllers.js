@@ -17,7 +17,8 @@
       menuState: {
         addSomethingMenu: false,
         customerMenu: false,
-        profileMenu: false
+        profileMenu: false,
+        LangMenu: false
       },
 
       init: function() {

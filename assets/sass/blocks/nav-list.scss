@@ -228,6 +228,19 @@
                     transform: translate(1.1, 1.1);
                 } // &:before
             } // &.service
+            &.lang {
+                display: inline-block;
+                background-color: #82B046;
+                color: rgb(158, 207, 93);
+                padding: 4px;
+                margin: 0px 5px;
+                top: 13px;
+                position: relative;
+                border-radius: 3px;
+                height: auto;
+                line-height: 1;
+                @include property(font-size, $small-font);
+            } // &.lang
             &.appstore {
                 display: inline-block;
                 background-color: #FDD11D;
