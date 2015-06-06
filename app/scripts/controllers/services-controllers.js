@@ -2,15 +2,16 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('ServiceListController',
-      ['baseControllerListClass', 'servicesService', 'customerPermissionsService', 'usersService', ServiceListController]);
+    .service('baseServiceListController', [
+      'baseControllerListClass', 'customerPermissionsService', 'usersService', 'servicesService',
+      baseServiceListController]);
 
-  function ServiceListController(baseControllerListClass, servicesService, customerPermissionsService, usersService) {
-    var controllerScope = this;
-    var ServiceController = baseControllerListClass.extend({
-      init:function() {
+  // need for service tab
+  function baseServiceListController(
+    baseControllerListClass, customerPermissionsService, usersService, servicesService) {
+    var ControllerListClass = baseControllerListClass.extend({
+      init: function() {
         this.service = servicesService;
-        this.controllerScope = controllerScope;
         this._super();
         this.searchFieldName = 'name';
         this.canUserAddService();
@@ -27,6 +28,22 @@
           });
 
         });
+      }
+    });
+
+    return ControllerListClass;
+  }
+
+  angular.module('ncsaas')
+    .controller('ServiceListController',
+      ['baseServiceListController', ServiceListController]);
+
+  function ServiceListController(baseServiceListController) {
+    var controllerScope = this;
+    var ServiceController = baseServiceListController.extend({
+      init:function() {
+        this.controllerScope = controllerScope;
+        this._super();
       }
     });
 

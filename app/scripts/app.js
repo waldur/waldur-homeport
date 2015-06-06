@@ -277,6 +277,9 @@ angular
           'appContent': {
             templateUrl: 'views/service/list.html'
           },
+          'listTemplate@services.list' : {
+            templateUrl: 'views/service/list-template.html'
+          },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html'
           }
@@ -437,6 +440,9 @@ angular
           },
           'tabServices@customers.details': {
             templateUrl: 'views/customer/tab-services.html',
+          },
+          'listTemplate@customers.details' : {
+            templateUrl: 'views/service/list-template.html'
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',
@@ -710,7 +716,7 @@ angular
 
       // Check if current language is listed in choices
       function isValid(current) {
-        for (var i in LANGUAGE.CHOICES) {
+        for (var i=0; i<LANGUAGE.CHOICES.length; i++) {
           if (LANGUAGE.CHOICES[i].code == current) {
             return true;
           }

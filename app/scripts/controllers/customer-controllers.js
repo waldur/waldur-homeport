@@ -86,3 +86,30 @@
     controllerScope.__proto__ = new Controller();
   }
 })();
+
+(function() {
+  angular.module('ncsaas')
+    .controller('CustomerServiceTabController', [
+      '$stateParams',
+      'baseServiceListController',
+      'servicesService',
+      CustomerServiceTabController
+    ]);
+
+  function CustomerServiceTabController($stateParams, baseServiceListController, servicesService) {
+    var controllerScope = this;
+    var Controller = baseServiceListController.extend({
+      init: function() {
+        this.service = servicesService;
+        this.controllerScope = controllerScope;
+        this.service.defaultFilter.customer = $stateParams.uuid;
+        this.service.filterByCustomer = false;
+        this._super();
+        this.deregisterEvent('currentCustomerUpdated');
+      }
+    });
+
+    controllerScope.__proto__ = new Controller();
+  }
+
+})();
