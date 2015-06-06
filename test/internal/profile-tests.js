@@ -25,8 +25,8 @@ for(var i=0; i < users.length; i++) {
       });
 
       it('I should be able to go to profile', function() {
-        element(by.css('header > nav > ul.nav-list.context > li:nth-child(3) > a')).click();
-        element(by.cssContainingText('ul.nav-list.context > li:nth-child(3) > ul > li > a', 'Profile')).click();
+        element(by.css('header > nav > ul.nav-list.context > li:nth-child(4) > a')).click();
+        element(by.cssContainingText('ul.nav-list.context > li:nth-child(4) > ul > li > a', 'Profile')).click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/profile/');
         expect(element(by.css('h2.app-title')).getText()).toContain(user.username);
       });
@@ -36,8 +36,8 @@ for(var i=0; i < users.length; i++) {
         var currentEmail = element(by.css('.profile-view .content a.ng-binding')).getText();
 
         function setEmail(email) {
-          element(by.model('UpdateProfile.user.email')).clear();
-          element(by.model('UpdateProfile.user.email')).sendKeys(email);
+          element(by.model('UpdateProfile.model.email')).clear();
+          element(by.model('UpdateProfile.model.email')).sendKeys(email);
           element(by.cssContainingText('.button-apply', 'Save')).click();
         }
 

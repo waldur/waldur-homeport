@@ -1,0 +1,60 @@
+<div class="profile-view">
+    <section class="avatar">
+            <span class="avatar big">
+                <img gravatar-src="UserDetailUpdate.model.email" class="avatar-img" gravatar-size="100">
+            </span>
+    </section>
+    <section class="content">
+        <h2 class="app-title">{{ UserDetailUpdate.model.full_name }}</h2>
+        <span>({{ UserDetailUpdate.model.username }})</span>
+        <div>
+            <a href="mailto:{{ UserDetailUpdate.model.email }}">{{ UserDetailUpdate.model.email }}</a>
+        </div>
+    </section>
+    <section class="actions" ng-show="UserDetailUpdate.model.uuid === UserDetailUpdate.currentUser.uuid">
+        <div class="actions-button">
+            <a class="button" ng-click="openActions=!openActions">actions</a>
+            <ul class="actions-dropdown" ng-show="openActions">
+                <li>
+                    <a ui-sref="profile.update" class="button-simple">Edit profile</a>
+                </li>
+                <li>
+                    <a class="button-simple button-delete" ng-click="DetailsProfile.deleteAccount()">Delete my account</a>
+                </li>
+            </ul>
+        </div>
+    </section>
+</div>
+
+<ul class="tabs-nav">
+    <li ng-class="{'active': UserDetailUpdate.activeTab === 'eventlog'}"
+        ng-click="UserDetailUpdate.activeTab = 'eventlog'">
+        Events
+    </li>
+    <li ng-class="{'active': UserDetailUpdate.activeTab === 'keys'}"
+        ng-click="UserDetailUpdate.activeTab = 'keys'">
+        SSH Keys
+    </li>
+    <li ng-class="{'active': UserDetailUpdate.activeTab === 'projects'}"
+        ng-click="UserDetailUpdate.activeTab = 'projects'">
+        Projects
+    </li>
+</ul>
+
+<sectin class="tabs-content" ng-switch="UserDetailUpdate.activeTab">
+    <div class="tab" id="eventlog"
+         ng-class="{'tab-active': UserDetailUpdate.activeTab === 'eventlog'}"
+         ng-switch-when="eventlog">
+        <div ui-view="tabEventlog"></div>
+    </div>
+    <div class="tab" id="keys"
+         ng-class="{'tab-active': UserDetailUpdate.activeTab === 'keys'}"
+         ng-switch-when="keys">
+        <div ui-view="tabKeys"></div>
+    </div>
+    <div class="tab" id="projects"
+         ng-class="{'tab-active': UserDetailUpdate.activeTab === 'projects'}"
+         ng-switch-when="projects">
+        <div ui-view="tabProjects"></div>
+    </div>
+</sectin>
