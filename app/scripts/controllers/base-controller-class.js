@@ -66,7 +66,7 @@
         this.getList();
         // reset after state change
         this.selectedInstances = [];
-        this.controlPanelShow = ENV.userListControlPanelShow;
+        this.controlPanelShow = ENV.listControlPanelShow;
       },
       getList:function(filter) {
         var vm = this;
