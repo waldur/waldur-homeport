@@ -1,6 +1,18 @@
 .view-control {
     padding: 0 20px;
     @include property(margin, 20 60);
+    @include bp(xs) {
+        @include property(margin, 20 10);
+        .actions {
+            padding-right: 24px;
+        } // actions
+    } // xs
+    @include bp(sm) {
+        @include property(margin, 20 10);
+        .actions {
+            padding-right: 24px;
+        } // actions
+    } // sm
     .view-action-buttons {
         @include bp(xs) {
             display: none;
