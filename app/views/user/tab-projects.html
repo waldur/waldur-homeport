@@ -27,8 +27,7 @@
             <li ng-repeat="project in UserProjectTab.list">
                 <div class="list-item">
                     <div class="name">
-                        <!--TODO add ui-sref="projects.details({uuid: project.project_uuid, tab: 'users'})" projectPermissionsService-->
-                        <h3 class="item-title pointer"><a>
+                        <h3 class="item-title pointer"><a ui-sref="projects.details({uuid: project.project_uuid, tab: 'users'})">
                             {{ project.project_name }}
                         </a></h3>
                     </div>
