@@ -36,9 +36,9 @@
 (function(){
 
   angular.module('ncsaas')
-    .service('baseControllerListClass', ['baseControllerClass', baseControllerListClass]);
+    .service('baseControllerListClass', ['baseControllerClass', 'ENV', baseControllerListClass]);
 
-  function baseControllerListClass(baseControllerClass) {
+  function baseControllerListClass(baseControllerClass, ENV) {
     /**
      * Use controllerScope.__proto__ = new Controller() in needed controller
      * use this.controllerScope for changes in event handler
@@ -58,6 +58,7 @@
       searchFilters: [], // should contains array of objects {name: 'name', title: 'Title', value: 'value'}
       chosenFilters: [],
       cacheTime: 0,
+      controlPanelShow: true,
 
       init:function() {
         this.setSignalHandler('currentCustomerUpdated', this.currentCustomerUpdatedHandler.bind(this));
@@ -65,6 +66,7 @@
         this.getList();
         // reset after state change
         this.selectedInstances = [];
+        this.controlPanelShow = ENV.listControlPanelShow;
       },
       getList:function(filter) {
         var vm = this;
