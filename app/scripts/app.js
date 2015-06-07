@@ -347,13 +347,19 @@ angular
             templateUrl: 'views/profile/details.html',
           },
           'tabEventlog@profile.details': {
-            templateUrl: 'views/profile/tab-eventlog.html',
+            templateUrl: 'views/user/tab-eventlog.html',
           },
           'tabProjects@profile.details': {
-            templateUrl: 'views/profile/tab-projects.html',
+            templateUrl: 'views/user/tab-projects.html',
           },
           'tabKeys@profile.details': {
-            templateUrl: 'views/profile/tab-keys.html',
+            templateUrl: 'views/user/tab-keys.html',
+          },
+          'eventTypes@profile.details' : {
+            templateUrl: 'views/events/event-types.html',
+          },
+          'detailsTemplate@profile.details' : {
+            templateUrl: 'views/user/details-template.html',
           },
           'tabManageUser@profile.details': {
             templateUrl: 'views/profile/tab-manage.html',
@@ -519,6 +525,9 @@ angular
           },
           'eventTypes@users.details' : {
             templateUrl: 'views/events/event-types.html',
+          },
+          'detailsTemplate@users.details' : {
+            templateUrl: 'views/user/details-template.html',
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',

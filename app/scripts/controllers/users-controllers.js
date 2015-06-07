@@ -57,19 +57,63 @@
   }
 
   angular.module('ncsaas')
-    .controller('UserDetailUpdateController', [
-      'usersService',
+    .service('baseUserDetailUpdateController', [
       'baseControllerDetailUpdateClass',
+      'usersService',
+      'authService',
+      '$translate',
+      'LANGUAGE',
+      baseUserDetailUpdateController
+    ]);
+
+  // need for profile page
+  function baseUserDetailUpdateController(
+    baseControllerDetailUpdateClass, usersService, authService, $translate, LANGUAGE) {
+    var ControllerClass = baseControllerDetailUpdateClass.extend({
+      activeTab: 'eventlog',
+      currentUser: null,
+
+      init: function() {
+        this.service = usersService;
+        this.getCurrentUser();
+        this._super();
+        this.LANGUAGE_CHOICES = LANGUAGE.CHOICES;
+        this.selectedLanguage = $translate.use();
+      },
+      getCurrentUser: function() {
+        var vm = this;
+        usersService.getCurrentUser().then(function(response) {
+          vm.currentUser = response;
+        });
+      },
+      deleteAccount: function() {
+        if (confirm('Are you sure you want to delete account?')) {
+          this.model.$delete(
+            authService.signout,
+            function(errors) {
+              alert(errors.data.detail);
+            }
+          );
+        }
+      },
+      changeLanguage: function() {
+        $translate.use(this.selectedLanguage);
+      }
+    });
+
+    return ControllerClass;
+  }
+
+  angular.module('ncsaas')
+    .controller('UserDetailUpdateController', [
+      'baseUserDetailUpdateController',
       UserDetailUpdateController
     ]);
 
-  function UserDetailUpdateController(usersService, baseControllerDetailUpdateClass) {
+  function UserDetailUpdateController(baseUserDetailUpdateController) {
     var controllerScope = this;
-    var Controller = baseControllerDetailUpdateClass.extend({
-      activeTab: 'eventlog',
-
+    var Controller = baseUserDetailUpdateController.extend({
       init:function() {
-        this.service = usersService;
         this.controllerScope = controllerScope;
         this._super();
         this.detailsState = 'customers.details';
@@ -108,10 +152,17 @@
       },
       getUser: function() {
         var vm = this;
-        usersService.$get($stateParams.uuid).then(function (response) {
-          vm.user = response;
-          vm.getList();
-        });
+        if ($stateParams.uuid) {
+          usersService.$get($stateParams.uuid).then(function (response) {
+            vm.user = response;
+            vm.getList();
+          });
+        } else {
+          usersService.getCurrentUser().then(function(response) {
+            vm.user = response;
+            vm.getList();
+          });
+        }
       }
     });
 
@@ -149,10 +200,17 @@
       },
       getUser: function() {
         var vm = this;
-        usersService.$get($stateParams.uuid).then(function (response) {
-          vm.user = response;
-          vm.getList();
-        });
+        if ($stateParams.uuid) {
+          usersService.$get($stateParams.uuid).then(function (response) {
+            vm.user = response;
+            vm.getList();
+          });
+        } else {
+          usersService.getCurrentUser().then(function(response) {
+            vm.user = response;
+            vm.getList();
+          });
+        }
       }
     });
 
@@ -166,17 +224,37 @@
       '$stateParams',
       'keysService',
       'baseControllerListClass',
+      'usersService',
       UserKeyTabController
     ]);
 
-  function UserKeyTabController($stateParams, keysService, baseControllerListClass) {
+  function UserKeyTabController($stateParams, keysService, baseControllerListClass, usersService) {
     var controllerScope = this;
     var Controller = baseControllerListClass.extend({
+      user: {},
+
       init: function() {
         this.controllerScope = controllerScope;
         this.service = keysService;
-        this.service.defaultFilter.user_uuid = $stateParams.uuid;
+        if ($stateParams.uuid) {
+          this.user.uuid = $stateParams.uuid;
+        } else {
+          this.getCurrentUser();
+        }
         this._super();
+      },
+      getList: function(filter) {
+        if (this.user.uuid) {
+          this.service.defaultFilter.user_uuid = this.user.uuid;
+          this._super(filter);
+        }
+      },
+      getCurrentUser: function() {
+        var vm = this;
+        usersService.getCurrentUser().then(function(response) {
+          vm.user = response;
+          vm.getList();
+        });
       }
     });
 
