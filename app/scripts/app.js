@@ -509,7 +509,7 @@ angular
       })
 
       .state('users.details', {
-        url: '/users/:uuid/',
+        url: ':uuid/',
         views: {
           'appContent': {
             templateUrl: 'views/user/details.html',
