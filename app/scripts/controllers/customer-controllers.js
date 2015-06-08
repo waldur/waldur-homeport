@@ -17,10 +17,11 @@
         this.controllerScope = controllerScope;
         this._super();
         this.searchFieldName = 'name';
+        this.currentUser = usersService.currentUser;
       },
       isOwner: function(customer) {
         for (var i = 0; i < customer.owners.length; i++) {
-          if (usersService.currentUser.uuid === customer.owners[i].uuid) {
+          if (this.currentUser.uuid === customer.owners[i].uuid || this.currentUser.is_staff) {
             return true;
           }
         }

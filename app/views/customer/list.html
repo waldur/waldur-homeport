@@ -92,7 +92,10 @@
                             <a class="button" ng-click="openActions=!openActions">actions</a>
                             <ul class="actions-dropdown" ng-show="openActions">
                                 <li>
-                                    <a ng-click="CustomerList.remove(customer)" class="button-simple">Remove</a>
+                                    <a ng-show="CustomerList.currentUser.is_staff"
+                                       ng-click="CustomerList.remove(customer)" class="button-simple">Remove</a>
+                                    <a ng-show="!CustomerList.currentUser.is_staff"
+                                       ui-sref="support.create" class="button-simple">Remove</a>
                                 </li>
                                 <li>
                                     <a ui-sref="services.create" class="button-simple">Add service</a>
