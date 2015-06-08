@@ -27,6 +27,12 @@
             value: true
           }
         ];
+        this.actionButtonsListItems = [
+          {
+            title: 'User action placeholder',
+            click: function(user) {}
+          }
+        ];
       },
       showMore: function(user) {
         if (!this.userProjects[user.username]) {

@@ -1,0 +1,8 @@
+<div class="actions-button" stoppropagation>
+    <a class="button" ng-click="openActionsListTrigger()">actions</a>
+    <ul class="actions-dropdown" ng-show="buttonController.actionButtonsList[$id]">
+        <li ng-repeat="button in buttonList">
+            <a ng-click="button.clickFunction(buttonModel)" class="button-simple">{{ button.title }}</a>
+        </li>
+    </ul>
+</div>
