@@ -23,7 +23,7 @@
                   return el.length !== 0;
                 }),
                 customerUUID = array[4];
-              $state.go('customers.plans', {uuid:customerUUID});
+              $state.go('organizations.plans', {uuid:customerUUID});
             }, function(error) {
               alert(error.data.detail);
             });

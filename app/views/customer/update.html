@@ -13,13 +13,14 @@
                         <h1 class="profile-name pull-left">{{ CustomerDetailUpdate.model.name }}</h1>
                         <ul class="controls pull-right">
                             <li>
-                                <a ui-sref="customers.details({uuid: CustomerDetailUpdate.model.uuid})" class="crud-controls active"><i class="fa fa-cog"></i> Edit profile</a>
+                                <a ui-sref="organizations.details({uuid: CustomerDetailUpdate.model.uuid})" class="crud-controls active"><i class="fa fa-cog"></i> Edit profile</a>
                             </li>
                             <li>
-                                <a href="#/customers/{{ CustomerDetailUpdate.model.uuid }}/plans/" class="crud-controls"><i class="fa fa-cog"></i> Plans</a>
+                                <a ui-sref="organizations.plans({uuid: CustomerDetailUpdate.model.uuid})" class="crud-controls"><i class="fa fa-cog"></i> Plans</a>
                             </li>
                             <li>
-                                <a href="#/customers/{{ CustomerDetailUpdate.model.uuid }}/billing/" class="crud-controls"><i class="fa fa-cog"></i> Billing</a>
+                                <!--TODO ui-sref="organizations.billing({uuid: CustomerDetailUpdate.model.uuid })"-->
+                                <a  class="crud-controls"><i class="fa fa-cog"></i> Billing</a>
                             </li>
                         </ul>
                     </div>
