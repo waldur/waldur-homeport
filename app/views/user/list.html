@@ -34,22 +34,6 @@
                         ng-click="UserList.changeAllSelectedInstances()">
                 </div>
             </div>
-            <div>
-                <div class="view-action-buttons" ng-show="UserList.showgroup">
-                    <a class="button">User action placeholder</a>
-                </div>
-                <div class="view-action-buttons-mobile" ng-show="UserList.showgroup">
-                    <div class="actions-button">
-                        <a class="button dropdown-active"
-                            ng-click="mobileActions=!mobileActions">actions</a>
-                        <ul class="actions-dropdown" ng-show="mobileActions">
-                            <li>
-                                <a class="button-simple">User action placeholder</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
             <div class="actions switch">
                 <span class="label-text" ng-class="{'low-grade': !UserList.showgroup}">batch</span>
                 <div class="checkbox-toggle">
@@ -62,7 +46,7 @@
     </section>
     <!-- /view-control -->
 
-    <div class="white-box">
+    <div class="white-box" ng-show="UserList.list.length > 0">
         <ul class="object-list">
             <li>
                 <div class="list-item list-header">
@@ -106,24 +90,6 @@
                     <div class="additional-cell">
                         {{ user.username }}
                     </div>
-                    <div class="actions">
-                        <div class="actions-button" ng-show="!UserList.showgroup" stoppropagation>
-                            <a class="button" ng-click="openActions=!openActions">actions</a>
-                            <ul class="actions-dropdown" ng-show="openActions">
-                                <li>
-                                    <a class="button-simple">User action placeholder</a>
-                                </li>
-                                <li>
-                                    <span>Add to project</span>
-                                    <div class="custom-select project inline-elem">
-                                        <select>
-                                            <option value="">Choose project</option>
-                                        </select>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
                 </div>
                 <div class="list-item-details" ng-show="expandItem" ng-class="{'opened': expandItem}">
                     <section class="on-mobile">
@@ -145,12 +111,8 @@
                                             page-model-id="user.username"
                                             page-change="UserList.getProjectsForUser"
                                             page-entity-name="projects"></minipagination>
-                            <a class="button inlist-action">Manage</a>
-                            <article class="light-description">
-                                You can add or remove this user to/from project.
-                            </article>
                         </header>
-                        <ul>
+                        <ul ng-show="UserList.userProjects[user.username].data">
                             <li class="item-list">
                                 <section>
                                     <a class="list-sort">Name</a>
@@ -161,14 +123,18 @@
                             </li>
                             <li class="item-list" ng-repeat="project in UserList.userProjects[user.username].data">
                                 <section>
-                                    <!--TODO: add ui-sref="projects.details({uuid: project.project_uuid})" once the endpoint supports it -->
-                                    <a href="#">{{ project.project_name }}</a>
+                                    <a ui-sref="projects.details({uuid: project.project_uuid})">{{ project.project_name }}</a>
                                 </section>
                                 <section>
                                     {{ project.role }}
                                 </section>
+                                <!-- TODO: enable and make it point to projects.details.permission tab --!>
+                                <!-- a class="button inlist-action">Manage</a -->
                             </li>
                         </ul>
+                        <article class="light-description">
+                            To add this user to a new project, please <a ui-sref="projects.list">find it</a> and give user a role.
+                        </article>
                     </section>
                 </div>
             </li>
