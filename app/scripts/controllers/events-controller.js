@@ -25,7 +25,7 @@
           },
           {
             name: 'event_type',
-            title: 'Customer creation',
+            title: 'Organization creation',
             value: EVENTTYPE.customer_creation_succeeded
           }
         ];

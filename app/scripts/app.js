@@ -387,13 +387,13 @@ angular
         auth: true
       })
 
-      .state('customers', {
-        url: '/customers/',
+      .state('organizations', {
+        url: '/organizations/',
         abstract: true,
         templateUrl: 'views/partials/base.html',
       })
 
-      .state('customers.list', {
+      .state('organizations.list', {
         url: '',
         views: {
           'appContent': {
@@ -410,7 +410,7 @@ angular
       })
 
 
-      .state('customers.create', {
+      .state('organizations.create', {
         url: 'add/',
         views: {
           'appContent': {
@@ -426,22 +426,22 @@ angular
         auth: true
       })
 
-      .state('customers.details', {
+      .state('organizations.details', {
         url: ':uuid/',
         views: {
           'appContent': {
             templateUrl: 'views/customer/details.html',
           },
-          'tabResources@customers.details': {
+          'tabResources@organizations.details': {
             templateUrl: 'views/customer/tab-resources.html',
           },
-          'tabProjects@customers.details': {
+          'tabProjects@organizations.details': {
             templateUrl: 'views/customer/tab-projects.html',
           },
-          'tabServices@customers.details': {
+          'tabServices@organizations.details': {
             templateUrl: 'views/customer/tab-services.html',
           },
-          'listTemplate@customers.details' : {
+          'listTemplate@organizations.details' : {
             templateUrl: 'views/service/list-template.html'
           },
           'appHeader': {
@@ -454,7 +454,7 @@ angular
         auth: true
       })
 
-      .state('customers.edit', {
+      .state('organizations.edit', {
         url: ':uuid/edit/',
         views: {
           'appContent': {
@@ -470,7 +470,7 @@ angular
         auth: true
       })
 
-      .state('customers.plans', {
+      .state('organizations.plans', {
         url: ':uuid/plans/',
         views: {
           'appContent': {

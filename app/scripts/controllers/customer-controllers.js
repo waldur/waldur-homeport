@@ -48,7 +48,7 @@
         this.service = customersService;
         this.controllerScope = controllerScope;
         this._super();
-        this.detailsState = 'customers.details';
+        this.detailsState = 'organizations.details';
       }
     });
 
@@ -69,8 +69,8 @@
         this.controllerScope = controllerScope;
         this.setSignalHandler('currentCustomerUpdated', this.currentCustomerUpdatedHandler.bind(this));
         this._super();
-        this.listState = 'customers.list';
-        this.detailsState = 'customers.details';
+        this.listState = 'organizations.list';
+        this.detailsState = 'organizations.details';
         this.redirectToDetailsPage = true;
       },
       currentCustomerUpdatedHandler: function() {

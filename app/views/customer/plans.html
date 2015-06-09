@@ -7,7 +7,7 @@
             </span>
         </section>
         <section class="content">
-            <h2 class="app-title"><a ui-sref="customers.details({uuid: PlanList.customer.uuid})">{{ PlanList.customer.name }}</a></h2>
+            <h2 class="app-title"><a ui-sref="organizations.details({uuid: PlanList.customer.uuid})">{{ PlanList.customer.name }}</a></h2>
             <div>
                 <h4 class="app-title">Choose new plan</h4>
             </div>
@@ -40,7 +40,7 @@
                 <a class="button" ng-click="openActions=!openActions">actions</a>
                 <ul class="actions-dropdown" ng-show="openActions">
                     <li>
-                        <a ui-sref="customers.edit({uuid: PlanList.customer.uuid})" class="button-simple">Edit profile</a>
+                        <a ui-sref="organizations.edit({uuid: PlanList.customer.uuid})" class="button-simple">Edit profile</a>
                     </li>
                     <li>
                         <span class="button-simple active">Plans</span>

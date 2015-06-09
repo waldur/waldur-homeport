@@ -61,7 +61,7 @@
       },
 
       cancel: function() {
-        $state.go('customers.details', {uuid:$stateParams.uuid});
+        $state.go('organizations.details', {uuid:$stateParams.uuid});
       },
 
       initCustomerOwnership: function() {

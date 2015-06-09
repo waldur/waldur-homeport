@@ -64,7 +64,7 @@
                 <li class="dropdown customers">
                     <a class="customer-context drop-active" ng-click="Header.menuToggle('customerMenu', $event)"
                         ng-class="{'active': Header.menuState.customerMenu}">
-                        <span class="active-context">Active customer</span>
+                        <span class="active-context">Active organization</span>
                         <span class="customer-name">{{ Header.currentCustomer.name }}</span>
                     </a>
                     <ul class="nav-sublist" ng-show="Header.menuState.customerMenu">
@@ -73,7 +73,7 @@
                                 ng-class="{'current': customer.uuid == Header.currentCustomer.uuid}">{{ customer.name }}</a>
                         </li>
                         <li>
-                            <a ui-sref="customers.list" class="manage">Manage customers</a>
+                            <a ui-sref="organizations.list" class="manage">Manage organizations</a>
                         </li>
                     </ul>
                 </li>
@@ -112,7 +112,7 @@
                         </li>
                         <li class="divider on-tablet customers"></li>
                         <li class="on-tablet customers">
-                            <a ui-sref="customers.list" class="manage">Manage customers</a>
+                            <a ui-sref="organizations.list" class="manage">Manage organizations</a>
                         </li>
                         <li class="divider on-tablet"></li>
                         <li class="on-tablet">
@@ -192,7 +192,7 @@
                     <a class="customer-context drop-active" ng-click="Header.menuToggle('customerMenu', $event)"
                         ng-class="{'active': Header.menuState.customerMenu}">
                         <span class="customer-name">{{ Header.currentCustomer.name }}</span>
-                        <span class="active-context">Active customer</span>
+                        <span class="active-context">Active organization</span>
                     </a>
                     <ul class="nav-sublist-side" ng-show="Header.menuState.customerMenu">
                         <li ng-repeat="customer in Header.customers">
@@ -200,7 +200,7 @@
                                 ng-class="{'current': customer.uuid == Header.currentCustomer.uuid}">{{ customer.name }}</a>
                         </li>
                         <li>
-                            <a ui-sref="customers.list" class="manage">Manage customers</a>
+                            <a ui-sref="organizations.list" class="manage">Manage organizations</a>
                         </li>
                     </ul>
                 </li>
@@ -233,7 +233,7 @@
                         </li>
                         <li class="divider on-tablet"></li>
                         <li class="on-tablet">
-                            <a ui-sref="customers.list" class="manage">Manage customers</a>
+                            <a ui-sref="organizations.list" class="manage">Manage organizations</a>
                         </li>
                         <li class="divider on-tablet"></li>
                         <li>

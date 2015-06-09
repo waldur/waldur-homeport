@@ -15,7 +15,7 @@
        ng-if="event.structure_type === EventList.EVENTTYPE.role_granted_structure_type_project">
         {{ event.project_name }}
     </a>
-    <a ui-sref="customers.details({uuid: event.customer_uuid})"
+    <a ui-sref="organizations.details({uuid: event.customer_uuid})"
        ng-if="event.structure_type === EventList.EVENTTYPE.role_granted_structure_type_customer">
         {{ event.customer_name }}
     </a>
@@ -47,7 +47,7 @@
 </span>
 
 <span class="event" ng-if="event.event_type === EventList.EVENTTYPE.customer_creation_succeeded">
-    Organization <a ui-sref="customers.details({uuid: event.customer_uuid})" class="name">{{ event.customer_name }}</a>
+    Organization <a ui-sref="organizations.details({uuid: event.customer_uuid})" class="name">{{ event.customer_name }}</a>
     has been created
 </span>
 
@@ -57,7 +57,7 @@
 
 <span class="event" ng-if="event.event_type === EventList.EVENTTYPE.customer_update_succeeded">
     Organization
-    <a ui-sref="customers.details({uuid: event.customer_uuid})" class="name">{{ event.customer_name }}</a>
+    <a ui-sref="organizations.details({uuid: event.customer_uuid})" class="name">{{ event.customer_name }}</a>
     has been updated
 </span>
 
