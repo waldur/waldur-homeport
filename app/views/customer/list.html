@@ -87,12 +87,15 @@
                     </div>
                     <div class="actions">
                         <div class="actions-button"
-                            ng-show="!CustomerList.showgroup && CustomerList.isOwner(customer)"
+                            ng-show="!CustomerList.showgroup && CustomerList.isOwnerOrStaff(customer)"
                             stoppropagation>
                             <a class="button" ng-click="openActions=!openActions">actions</a>
                             <ul class="actions-dropdown" ng-show="openActions">
                                 <li>
-                                    <a ng-click="CustomerList.remove(customer)" class="button-simple">Remove</a>
+                                    <a ng-show="CustomerList.currentUserIsStaff()"
+                                       ng-click="CustomerList.remove(customer)" class="button-simple">Remove</a>
+                                    <a ng-show="!CustomerList.currentUserIsStaff()"
+                                       ui-sref="support.create" class="button-simple">Remove</a>
                                 </li>
                                 <li>
                                     <a ui-sref="services.create" class="button-simple">Add service</a>

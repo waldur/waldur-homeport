@@ -17,13 +17,18 @@
         this.controllerScope = controllerScope;
         this._super();
         this.searchFieldName = 'name';
+        this.currentUser = usersService.currentUser;
       },
-      isOwner: function(customer) {
+      isOwnerOrStaff: function(customer) {
+        if (this.currentUserIsStaff()) return true;
         for (var i = 0; i < customer.owners.length; i++) {
-          if (usersService.currentUser.uuid === customer.owners[i].uuid) {
+          if (this.currentUser.uuid === customer.owners[i].uuid) {
             return true;
           }
         }
+      },
+      currentUserIsStaff: function() {
+        return this.currentUser.is_staff;
       }
     });
 
