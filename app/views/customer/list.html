@@ -3,7 +3,7 @@
     <div class="white-box">
         <ul class="sort-list">
             <li class="title">
-                <h2 class="app-title">Customers</h2>
+                <h2 class="app-title">Organizations</h2>
             </li>
             <pagesize pages-list="CustomerList" pages-service="CustomerList.service"/></pagesize>
             <li class="search divid">
@@ -13,9 +13,9 @@
                 </div>
             </li>
             <li class="right-sort">
-                <a ui-sref="customers.create" class="button">
+                <a ui-sref="organizations.create" class="button">
                     <span class="icon plus"></span>
-                    <span>Add customer</span>
+                    <span>Add organization</span>
                 </a>
             </li>
         </ul>
@@ -82,17 +82,20 @@
                     </div> -->
                     <div class="name">
                         <h3 class="item-title">
-                            <a ui-sref="customers.details({uuid: customer.uuid})" stoppropagation>{{ customer.name }}</a>
+                            <a ui-sref="organizations.details({uuid: customer.uuid})" stoppropagation>{{ customer.name }}</a>
                         </h3>
                     </div>
                     <div class="actions">
                         <div class="actions-button"
-                            ng-show="!CustomerList.showgroup && CustomerList.isOwner(customer)"
+                            ng-show="!CustomerList.showgroup && CustomerList.isOwnerOrStaff(customer)"
                             stoppropagation>
                             <a class="button" ng-click="openActions=!openActions">actions</a>
                             <ul class="actions-dropdown" ng-show="openActions">
                                 <li>
-                                    <a ng-click="CustomerList.remove(customer)" class="button-simple">Remove</a>
+                                    <a ng-show="CustomerList.currentUserIsStaff()"
+                                       ng-click="CustomerList.remove(customer)" class="button-simple">Remove</a>
+                                    <a ng-show="!CustomerList.currentUserIsStaff()"
+                                       ui-sref="support.create" class="button-simple">Remove</a>
                                 </li>
                                 <li>
                                     <a ui-sref="services.create" class="button-simple">Add service</a>

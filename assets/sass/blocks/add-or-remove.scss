@@ -24,7 +24,7 @@
             @include icon-fa;
             content: '\f00d';
             @include property(top, -1);
-            @include property(font-size, 11);
+            @include property(font-size, $extra-small-font);
             @include property(margin-left, 5);
             color: rgb(182, 182, 182);
         } // &:after

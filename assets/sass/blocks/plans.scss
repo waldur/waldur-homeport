@@ -54,7 +54,7 @@
         &:before {
             content: 'current';
             position: absolute;
-            @include property(font-size, 12);
+            @include property(font-size, $extra-small-font);
             @include property(top, -20);
             @include property(right, 20);
             color: rgb(176, 176, 176);
@@ -64,7 +64,7 @@
             font-family: FontAwesome;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-            font-size: rem(20);
+            @include property(font-size, $big-font);
             text-align: center;
             background-color: rgb(176, 176, 176);
             color: #fff;
@@ -84,7 +84,7 @@
         &:before {
             content: 'new';
             position: absolute;
-            @include property(font-size, 12);
+            @include property(font-size, $extra-small-font);
             @include property(top, -20);
             @include property(right, 20);
             color: rgb(62, 171, 84);
@@ -151,7 +151,7 @@
                     display: block;
                 }
                 .plan-price {
-                    font-size: rem(14);
+                    @include property(font-size, $small-font);
                     @include property(margin-top, 10);
                 }
                 .btn-choice {

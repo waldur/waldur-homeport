@@ -37,7 +37,7 @@
                 font-family: FontAwesome;
                 -webkit-font-smoothing: antialiased;
                 -moz-osx-font-smoothing: grayscale;
-                font-size: rem(20);
+                @include property(font-size, $big-font);
                 text-align: center;
                 background-color: rgb(62, 171, 84);
                 color: #fff;
@@ -79,9 +79,9 @@
             } // &.bottom-price
             h3 {
                 margin: 0;
-                font-size: rem(18);
-                &.small {
-                    font-size: rem(15);
+                @include property(font-size, $big-font);
+                &.small {;
+                    @include property(font-size, $small-font);
                 } // &.small
             } // h3
             article {
@@ -95,9 +95,6 @@
                     &.hardware {
                         [class^="flaticon-"] {
                             margin-right: 10px;
-                            &:before {
-                                font-size: rem(16);
-                            } // &:before
                         } // [class^="flaticon-"]
                     } // &.hardware
                 } // ul

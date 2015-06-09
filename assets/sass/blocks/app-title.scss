@@ -29,13 +29,13 @@ h3.app-title {
     @include property(font-size, 22);
 } // h3.app-title
 h4.app-title {
-    @include property(font-size, 20);
+    @include property(font-size, $huge-font);
 } // h4.app-title
 h5.app-title {
-    @include property(font-size, 18);
+    @include property(font-size, $big-font);
 } // h5.app-title
 h6.app-title {
-    @include property(font-size, 16);
+    @include property(font-size, $normal-font);
 } // h6.app-title
 
 h1.item-title,
@@ -66,17 +66,17 @@ h1.item-title {
     @include property(font-size, 22);
 } // h1.item-title
 h2.item-title {
-    @include property(font-size, 20);
+    @include property(font-size, $huge-font);
 } // h2.item-title
 h3.item-title {
-    @include property(font-size, 18);
+    @include property(font-size, $big-font);
 } // h3.item-title
 h4.item-title {
-    @include property(font-size, 16);
+    @include property(font-size, $normal-font);
 } // h4.item-title
 h5.item-title {
-    @include property(font-size, 16);
+    @include property(font-size, $normal-font);
 } // h5.item-title
 h6.item-title {
-    @include property(font-size, 16);
+    @include property(font-size, $normal-font);
 } // h6.item-title

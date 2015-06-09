@@ -2,7 +2,7 @@
     background-color: #565656;
     color: white;
     box-sizing: border-box;
-    @include property(font-size, 15);
+    @include property(font-size, $small-font);
     @include property(height, 50);
     @include property(padding-top, 13);
     width: 100%;

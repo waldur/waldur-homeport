@@ -1,7 +1,7 @@
 .list-item-details {
     @include clearfix;
     @include property(padding, 25 0);
-    @include property(font-size, 16);
+    border-top: 1px solid rgb(220, 220, 220);
     &.on-mobile {
         display: none;
         @include bp(xs) {
