@@ -71,7 +71,7 @@
             input[type=text],
             input[type=password] {
                 width: 100%;
-                @include property(font-size, 20);
+                @include property(font-size, $big-font);
                 text-align: center;
             } // input[type=text], input[type=password]
         } // row-login
@@ -87,7 +87,7 @@
     .welcome-title {
         margin-top: 40px;
         font-weight: 200;
-        font-size: rem(45);
+        @include property(font-size, 45);
         line-height: 1;
         color: #fff;
         margin: 30px 0;
@@ -230,7 +230,7 @@
                 text-align: center;
                 box-sizing: border-box;
                 padding-top: 14px;
-                font-size: 24px;
+                @include property(font-size, 24);
                 font-family: FontAwesome;
             }
             &.mobile {

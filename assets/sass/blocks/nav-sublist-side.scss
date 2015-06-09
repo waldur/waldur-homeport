@@ -33,7 +33,7 @@
         } // &.on-tablet
         > a {
             display: block;
-            @include property(font-size, 14);
+            @include property(font-size, $small-font);
             @include property(padding, 10 30);
             @include property(padding-left, 55);
             line-height: 1;

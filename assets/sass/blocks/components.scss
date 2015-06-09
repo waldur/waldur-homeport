@@ -5,7 +5,6 @@ input[type="password"] {
     box-shadow: none;
     @include property(border-radius, 1);
     @include property(padding, 5 10);
-    @include property(font-size, 16);
 }
 
 textarea {
@@ -13,7 +12,6 @@ textarea {
     box-shadow: none;
     @include property(border-radius, 1);
     @include property(padding, 6 10);
-    @include property(font-size, 16);
     width: 100%;
     max-width: 100%;
     &.small {
@@ -44,7 +42,7 @@ textarea {
         top: calc(50% - 7px);
         right: 5px;
         font-family: FontAwesome;
-        @include property(font-size, 11);
+        @include property(font-size, $extra-small-font);
         line-height: 1;
         color: #565656;
     }
@@ -297,7 +295,7 @@ textarea {
     color: white;
     background: rgb(202, 59, 59);
     line-height: 1;
-    @include property(font-size, 14);
+    @include property(font-size, $small-font);
     @include property(border-radius, 3);
     @include property(margin, 10 0);
     @include property(padding, 4 8);
@@ -305,7 +303,7 @@ textarea {
         @include property(width, 200);
     } // &.short
     &.error-small {
-        @include property(font-size, 12);
+        @include property(font-size, $small-font);
     } // &.error-small
     &.arrow-down {
         position: relative;

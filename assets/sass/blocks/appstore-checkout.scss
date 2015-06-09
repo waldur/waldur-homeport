@@ -20,7 +20,7 @@
     } // checkout
     // components
     .price-tag {
-        @include property(font-size, 20px);
+        @include property(font-size, $big-font);
         font-weight: 700;
         color: #626262;
         &.state {
@@ -83,7 +83,7 @@
         text-align: left;
         .app-title {
             margin-bottom: 0px;
-            @include property(font-size, 15);
+            @include property(font-size, $small-font);
         } // .app-title
     } // checkout-item
     .checkout-item-price {

@@ -22,7 +22,6 @@
             } // md
         } // &.customers
         > a {
-            @include property(font-size, 16);
             @include property(padding, 0 20);
             @include property(padding-top, 10);
             @include property(height, 50);
@@ -65,7 +64,7 @@
                 } // span
                 .customer-name {} // customer-name
                 .active-context {
-                    font-size: rem(12);
+                    @include property(font-size, $extra-small-font);
                 } // active-context
             } // &.customer-context
             &.user-area {

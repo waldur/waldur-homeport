@@ -55,7 +55,7 @@
             display: none;
             h2 {
                 @include inline-middle;
-                @include property(font-size, 20);
+                @include property(font-size, $big-font);
                 @include property(padding-top, 16);
                 margin: 0;
             } // h2
@@ -94,7 +94,6 @@
             } // md
         } // &.customers
         > a {
-            @include property(font-size, 16);
             @include property(padding, 0 10);
             @include property(padding-top, 13);
             @include property(height, 50);
@@ -148,7 +147,7 @@
                 &:before {
                     @include icon-fa;
                     content: '\f128';
-                    font-size: 20px;
+                    @include property(ont-size, $big-font);
                     position: absolute;
                     top: 6px;
                     left: 8px;
@@ -173,7 +172,7 @@
                     @include elipsis;
                 } // customer-name
                 .active-context {
-                    font-size: rem(12);
+                    @include property(font-size, $extra-small-font);
                 } // active-context
             } // &.customer-context
             &.support {
@@ -263,7 +262,6 @@
                     margin: 0;
                     position: static;
                     border-radius: 0;
-                    @include property(font-size, 16);
                     @include property(padding, 0 20);
                     @include property(padding-top, 13);
                     @include property(height, 50);
