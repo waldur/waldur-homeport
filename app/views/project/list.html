@@ -108,7 +108,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="list-item-details" ng-show="expandItem">
+                <div class="list-item-details" ng-show="expandItem" ng-class="{'opened': expandItem}">
                     <section class="on-mobile">
                         <header>
                             <h4 class="item-title">Creation date</h4>
@@ -126,6 +126,10 @@
                                             page-model-id="project.uuid"
                                             page-change="ProjectList.getResourcesForProject"
                                             page-entity-name="resources"></minipagination>
+                            <article class="light-description">
+                                Resources which using in project.
+                            </article>
+                            <a class="button inlist-action">Manage</a>
                         </header>
                         <ul class="list-blocks">
                             <li ng-repeat="resource in ProjectList.projectResources[project.uuid].data">
@@ -142,6 +146,10 @@
                                             page-model-id="project.uuid"
                                             page-change="ProjectList.getUsersForProject"
                                             page-entity-name="users"></minipagination>
+                            <article class="light-description">
+                                Resources which connection in project.
+                            </article>
+                            <a class="button inlist-action">Manage</a>
                         </header>
                         <ul class="list-blocks">
                             <li ng-repeat="user in ProjectList.projectUsers[project.uuid].data">

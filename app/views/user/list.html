@@ -81,7 +81,7 @@
                 </div>
             </li>
             <li ng-repeat="user in UserList.list">
-                <div class="list-item list pointer" ng-class="{'opened': expandItem}"
+                <div class="list-item list pointer"
                     ng-click="expandItem=!expandItem; UserList.showMore(user)">
                     <div class="checkbox">
                         <div class="checkbox" stoppropagation>
@@ -113,11 +113,19 @@
                                 <li>
                                     <a class="button-simple">User action placeholder</a>
                                 </li>
+                                <li>
+                                    <span>Add to project</span>
+                                    <div class="custom-select project inline-elem">
+                                        <select>
+                                            <option value="">Choose project</option>
+                                        </select>
+                                    </div>
+                                </li>
                             </ul>
                         </div>
                     </div>
                 </div>
-                <div class="list-item-details" ng-show="expandItem">
+                <div class="list-item-details" ng-show="expandItem" ng-class="{'opened': expandItem}">
                     <section class="on-mobile">
                         <header>
                             <h4 class="item-title">E-mail</h4>
@@ -137,6 +145,10 @@
                                             page-model-id="user.username"
                                             page-change="UserList.getProjectsForUser"
                                             page-entity-name="projects"></minipagination>
+                            <a class="button inlist-action">Manage</a>
+                            <article class="light-description">
+                                You can add or remove this user to/from project.
+                            </article>
                         </header>
                         <ul>
                             <li class="item-list">
