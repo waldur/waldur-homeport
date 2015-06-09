@@ -19,12 +19,16 @@
         this.searchFieldName = 'name';
         this.currentUser = usersService.currentUser;
       },
-      isOwner: function(customer) {
+      isOwnerOrStaff: function(customer) {
+        if (this.currentUserIsStaff()) return true;
         for (var i = 0; i < customer.owners.length; i++) {
-          if (this.currentUser.uuid === customer.owners[i].uuid || this.currentUser.is_staff) {
+          if (this.currentUser.uuid === customer.owners[i].uuid) {
             return true;
           }
         }
+      },
+      currentUserIsStaff: function() {
+        return this.currentUser.is_staff;
       }
     });
 
