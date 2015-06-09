@@ -172,11 +172,7 @@
         function success() {
           vm.afterSave();
           vm.successFlash(vm.successMessage.replace('{vm_name}', vm.instance.name));
-          if (vm.redirectToDetailsPage) {
-            $state.go(vm.detailsState, {uuid: vm.instance.uuid});
-          } else {
-            $state.go(vm.listState);
-          }
+          vm.successRedirect();
         }
         function error(response) {
           vm.errors = response.data;
@@ -187,7 +183,14 @@
         $state.go(vm.listState);
       },
       afterSave: function() {},
-      activate: function() {}
+      activate: function() {},
+      successRedirect: function() {
+        if (this.redirectToDetailsPage) {
+          $state.go(this.detailsState, {uuid: this.instance.uuid});
+        } else {
+          $state.go(this.listState);
+        }
+      }
     });
 
     return ControllerAddClass;
@@ -215,6 +218,7 @@
       init:function() {
         this._super();
         this.activate();
+        this.activeTab = $stateParams.tab ? $stateParams.tab : this.activeTab;
       },
       update:function() {
         var vm = this;
