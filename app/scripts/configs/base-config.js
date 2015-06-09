@@ -17,6 +17,7 @@ angular.module('ncsaas')
     serviceIcon: '/static/images/icons/icon_openstack_small.png',
     topMenuCustomersCacheTime: 60 * 10, // seconds
     dashboardEventsCacheTime: 60, // seconds
-    listControlPanelShow: false
+    listControlPanelShow: false,
+    currentCustomerUuidStorageKey: 'currentCustomerUuid'
 
   });
