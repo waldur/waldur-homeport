@@ -26,25 +26,25 @@ for(var i = 0; i < addCustomerTestData.length; i++) {
 
       it('I should be able to go to "customer add" page', function() {
         element(by.css('.dropdown.customers .active-context')).click();
-        element(by.cssContainingText('.dropdown.customers .nav-sublist li a', 'Manage customers')).click();
-        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/customers/');
+        element(by.cssContainingText('.dropdown.customers .nav-sublist li a', 'Manage organizations')).click();
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/organizations/');
 
         element(by.css('.right-sort a')).click();
-        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/customers/add/');
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/organizations/add/');
       });
 
       it('I should be able to add new customer', function() {
         // fill name
         element(by.model('CustomerAdd.instance.name')).sendKeys(customerName);
 
-        element(by.cssContainingText('a.button-apply', 'Create customer')).click();
+        element(by.cssContainingText('a.button-apply', 'Create organization')).click();
 
         expect(element(by.cssContainingText('h2.app-title', customerName)).isPresent()).toBe(true);
       });
 
       it('I should be able to see ' + customerName + ' at customers list page', function() {
         element(by.css('.dropdown.customers .active-context')).click();
-        element(by.cssContainingText('.dropdown.customers .nav-sublist li a', 'Manage customers')).click();
+        element(by.cssContainingText('.dropdown.customers .nav-sublist li a', 'Manage organizations')).click();
         element(by.model('CustomerList.searchInput')).sendKeys(customerName);
         expect(element(by.cssContainingText('h3.item-title a', customerName)).isPresent()).toBe(true);
       });

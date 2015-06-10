@@ -27,13 +27,18 @@
             state: 'services.create'
           }
         ];
+        this.currentUser = usersService.currentUser;
       },
-      isOwner: function(customer) {
+      isOwnerOrStaff: function(customer) {
+        if (this.currentUserIsStaff()) return true;
         for (var i = 0; i < customer.owners.length; i++) {
-          if (usersService.currentUser.uuid === customer.owners[i].uuid) {
+          if (this.currentUser.uuid === customer.owners[i].uuid) {
             return true;
           }
         }
+      },
+      currentUserIsStaff: function() {
+        return this.currentUser.is_staff;
       }
     });
 
@@ -58,7 +63,7 @@
         this.service = customersService;
         this.controllerScope = controllerScope;
         this._super();
-        this.detailsState = 'customers.details';
+        this.detailsState = 'organizations.details';
       }
     });
 
@@ -79,8 +84,8 @@
         this.controllerScope = controllerScope;
         this.setSignalHandler('currentCustomerUpdated', this.currentCustomerUpdatedHandler.bind(this));
         this._super();
-        this.listState = 'customers.list';
-        this.detailsState = 'customers.details';
+        this.listState = 'organizations.list';
+        this.detailsState = 'organizations.details';
         this.redirectToDetailsPage = true;
       },
       currentCustomerUpdatedHandler: function() {

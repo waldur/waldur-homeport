@@ -5,11 +5,11 @@
   angular.module('ncsaas')
     .controller('HeaderController', [
       '$rootScope', '$scope', '$state', 'currentStateService', 'customersService',
-      'usersService', 'ENV', 'baseControllerClass', '$translate', 'LANGUAGE', HeaderController]);
+      'usersService', 'ENV', 'baseControllerClass', '$translate', 'LANGUAGE', '$window', HeaderController]);
 
   function HeaderController(
     $rootScope, $scope, $state, currentStateService, customersService, usersService,
-    ENV, baseControllerClass, $translate, LANGUAGE) {
+    ENV, baseControllerClass, $translate, LANGUAGE, $window) {
     var controllerScope = this;
     var HeaderControllerClass = baseControllerClass.extend({
       customers: [],
@@ -76,6 +76,7 @@
       },
       setCurrentCustomer: function(customer) {
         var vm = this;
+        $window.localStorage[ENV.currentCustomerUuidStorageKey] = customer.uuid;
         currentStateService.setCustomer(customer);
         vm.currentCustomer = customer;
         $rootScope.$broadcast('currentCustomerUpdated');
@@ -103,10 +104,11 @@
   angular.module('ncsaas')
     .controller('MainController', [
       '$q', '$rootScope', '$state', 'authService', 'currentStateService', 'customersService', 'usersService',
-      'baseControllerClass', MainController]);
+      'baseControllerClass', '$window', 'ENV', MainController]);
 
   function MainController(
-    $q, $rootScope, $state, authService, currentStateService, customersService, usersService, baseControllerClass) {
+    $q, $rootScope, $state, authService, currentStateService, customersService, usersService, baseControllerClass,
+    $window, ENV) {
     var controllerScope = this;
     var Controller = baseControllerClass.extend({
 
@@ -126,9 +128,15 @@
         if (authService.isAuthenticated() && !currentStateService.isCustomerDefined) {
           var deferred = $q.defer();
           usersService.getCurrentUser().then(function(user) {
-            customersService.getPersonalOrFirstCustomer(user.username).then(function(customer) {
-              deferred.resolve(customer);
-            });
+            if($window.localStorage[ENV.currentCustomerUuidStorageKey]) {
+              customersService.$get($window.localStorage[ENV.currentCustomerUuidStorageKey]).then(function(customer) {
+                deferred.resolve(customer);
+              });
+            } else {
+              customersService.getPersonalOrFirstCustomer(user.username).then(function(customer) {
+                deferred.resolve(customer);
+              });
+            }
           });
           currentStateService.setCustomer(deferred.promise);
         }

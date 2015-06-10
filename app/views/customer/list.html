@@ -3,7 +3,7 @@
     <div class="white-box">
         <ul class="sort-list">
             <li class="title">
-                <h2 class="app-title">Customers</h2>
+                <h2 class="app-title">Organizations</h2>
             </li>
             <pagesize pages-list="CustomerList" pages-service="CustomerList.service"/></pagesize>
             <li class="search divid">
@@ -13,9 +13,9 @@
                 </div>
             </li>
             <li class="right-sort">
-                <a ui-sref="customers.create" class="button">
+                <a ui-sref="organizations.create" class="button">
                     <span class="icon plus"></span>
-                    <span>Add customer</span>
+                    <span>Add organization</span>
                 </a>
             </li>
         </ul>
@@ -82,13 +82,13 @@
                     </div> -->
                     <div class="name">
                         <h3 class="item-title">
-                            <a ui-sref="customers.details({uuid: customer.uuid})" stoppropagation>{{ customer.name }}</a>
+                            <a ui-sref="organizations.details({uuid: customer.uuid})" stoppropagation>{{ customer.name }}</a>
                         </h3>
                     </div>
                     <div class="actions">
                         <action-button button-list="CustomerList.actionButtonsListItems"
                                        button-controller="CustomerList"
-                                       ng-show="!CustomerList.showgroup"
+                                       ng-show="!CustomerList.showgroup && CustomerList.isOwnerOrStaff(customer)"
                                        button-model="customer"></action-button>
                     </div>
                 </div>

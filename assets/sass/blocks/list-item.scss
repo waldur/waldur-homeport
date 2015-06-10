@@ -5,7 +5,6 @@
 
 .list-item {
     @include table;
-    @include property(font-size, 16);
     padding: 15px 0;
     padding-left: 10px;
     line-height: 1;
@@ -106,7 +105,7 @@
             .subtitle {
                 display: block;
                 margin-top: 6px;
-                @include property(font-size, 14);
+                @include property(font-size, $small-font);
                 color: #8F8F8F;
             } // subtitle
         } // &.name
