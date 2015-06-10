@@ -10,6 +10,28 @@
       init: function() {
         this._super();
         this.searchFieldName = 'name';
+        this.actionButtonsListItems = [
+          {
+            title: 'Start',
+            clickFunction: this.startResource.bind(this.controllerScope),
+            isDisabled: this.isOperationAvailable.bind(this.controllerScope, 'start')
+          },
+          {
+            title: 'Stop',
+            clickFunction: this.stopResource.bind(this.controllerScope),
+            isDisabled: this.isOperationAvailable.bind(this.controllerScope, 'stop')
+          },
+          {
+            title: 'Restart',
+            clickFunction: this.restartResource.bind(this.controllerScope),
+            isDisabled: this.isOperationAvailable.bind(this.controllerScope, 'restart')
+          },
+          {
+            title: 'Remove',
+            clickFunction: this.remove.bind(this.controllerScope),
+            className: 'remove'
+          }
+        ];
       },
       stopResource:function(resource) {
         var vm = this;
@@ -26,7 +48,7 @@
         vm.service.restartResource(resource.uuid).then(
           vm.reInitResource.bind(null, resource), vm.handleActionException);
       },
-      isOperationAvailable:function(resource, operation) {
+      isOperationAvailable:function(operation, resource) {
         var availableOperations = this.service.getAvailableOperations(resource);
         operation = operation.toLowerCase();
         return availableOperations.indexOf(operation) !== -1;

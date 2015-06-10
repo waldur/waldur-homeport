@@ -29,6 +29,12 @@
             value: EVENTTYPE.customer_creation_succeeded
           }
         ];
+        this.actionButtonsListItems = [
+          {
+            title: 'Some action for this type',
+            clickFunction: function() {}
+          }
+        ];
         this._super();
       },
       isTemplateTypeReady: function(type) {

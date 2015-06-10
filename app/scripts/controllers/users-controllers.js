@@ -27,6 +27,12 @@
             value: true
           }
         ];
+        this.actionButtonsListItems = [
+          {
+            title: 'User action placeholder',
+            clickFunction: function(user) {}
+          }
+        ];
       },
       showMore: function(user) {
         if (!this.userProjects[user.username]) {
@@ -242,6 +248,12 @@
           this.getCurrentUser();
         }
         this._super();
+        this.actionButtonsListItems = [
+          {
+            title: 'Remove',
+            clickFunction: this.remove.bind(controllerScope)
+          }
+        ];
       },
       getList: function(filter) {
         if (this.user.uuid) {

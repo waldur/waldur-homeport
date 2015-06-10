@@ -107,14 +107,10 @@
                         {{ user.username }}
                     </div>
                     <div class="actions">
-                        <div class="actions-button" ng-show="!UserList.showgroup" stoppropagation>
-                            <a class="button" ng-click="openActions=!openActions">actions</a>
-                            <ul class="actions-dropdown" ng-show="openActions">
-                                <li>
-                                    <a class="button-simple">User action placeholder</a>
-                                </li>
-                            </ul>
-                        </div>
+                        <action-button button-list="UserList.actionButtonsListItems"
+                                       button-controller="UserList"
+                                       ng-show="!UserList.showgroup"
+                                       button-model="user"></action-button>
                     </div>
                 </div>
                 <div class="list-item-details" ng-show="expandItem">

@@ -78,34 +78,10 @@
                         {{ resource.state }}</span>
                 </div>
                 <div class="actions">
-                    <div class="actions-button" ng-show="!controller.showgroup">
-                        <a class="button" ng-click="openActions=!openActions">actions</a>
-                        <ul class="actions-dropdown" ng-show="openActions">
-                            <li>
-                                <a class="button-simple start"
-                                    ng-click="ResourceList.startResource(resource)"
-                                    ng-class="{'disabled': !ResourceList.isOperationAvailable(resource, 'start')}">
-                                Start</a>
-                            </li>
-                            <li>
-                                <a class="button-simple stop"
-                                    ng-click="ResourceList.stopResource(resource)" title="Stop"
-                                    ng-class="{'disabled': !ResourceList.isOperationAvailable(resource, 'stop')}">
-                                Stop</a>
-                            </li>
-                            <li>
-                                <a class="button-simple restart"
-                                    ng-click="ResourceList.restartResource(resource)"
-                                    ng-class="{'disabled': !ResourceList.isOperationAvailable(resource, 'restart')}">
-                                Restart</a>
-                            </li>
-                            <li>
-                                <a class="button-simple remove"
-                                    ng-click="ResourceList.remove(resource)">
-                                Remove</a>
-                            </li>
-                        </ul>
-                    </div>
+                    <action-button button-list="ResourceList.actionButtonsListItems"
+                                   button-controller="ResourceList"
+                                   ng-show="!ResourceList.showgroup"
+                                   button-model="resource"></action-button>
                 </div>
             </div>
             <div class="list-item list pointer resources on-mobile"
@@ -136,20 +112,17 @@
                         <ul class="actions-dropdown" ng-show="openActions">
                             <li>
                                 <a class="button-simple start"
-                                    ng-click="ResourceList.startResource(resource)"
-                                    ng-class="{'disabled': !ResourceList.isOperationAvailable(resource, 'start')}">
+                                    ng-click="ResourceList.startResource(resource)">
                                 Start</a>
                             </li>
                             <li>
                                 <a class="button-simple stop"
-                                    ng-click="ResourceList.stopResource(resource)" title="Stop"
-                                    ng-class="{'disabled': !ResourceList.isOperationAvailable(resource, 'stop')}">
+                                    ng-click="ResourceList.stopResource(resource)" title="Stop">
                                 Stop</a>
                             </li>
                             <li>
                                 <a class="button-simple restart"
-                                    ng-click="ResourceList.restartResource(resource)"
-                                    ng-class="{'disabled': !ResourceList.isOperationAvailable(resource, 'restart')}">
+                                    ng-click="ResourceList.restartResource(resource)">
                                 Restart</a>
                             </li>
                             <li>

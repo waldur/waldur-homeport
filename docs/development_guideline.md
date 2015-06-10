@@ -64,3 +64,27 @@ Workflow looks as following:
  3. Create or edit PO files in i18n directory. You can merge new string from POT to PO using `poedit`.
 
  4. Run `grunt po2json_angular_translate`. It will convert PO files to JSON files at `static/js/i18n/locale-LANGUAGECODE.json`
+
+### Active button directive
+
+Active button directive calling looks like:
+
+`<action-button button-list="CustomerList.actionButtonsListItems"
+    button-controller="CustomerList"
+    button-model="customer"></action-button>`
+    
+button-list - array of objects.
+
+ - object params:
+  1. title - title of button
+ 
+  2. clickFunction - function for click. In button template: `ng-click="button.clickFunction(buttonModel)"`
+ 
+  3. className - class for button. In button template: `class="button-simple {{ button.className }}"`
+ 
+  4. isDisabled - function for checking button status. In button template:
+   `ng-class="{'disabled': button.isDisabled && !button.isDisabled(buttonModel)}"`
+  
+button-controller - controller of list page
+
+button-model - model of item
