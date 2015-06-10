@@ -40,7 +40,7 @@ for(var i = 0; i < testData.length; i++) {
 
         element(by.cssContainingText('a.button-apply', 'Add key')).click();
 
-        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/dashboard/');
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/profile/keys');
       });
 
       it('I should be able to logout', function() {
