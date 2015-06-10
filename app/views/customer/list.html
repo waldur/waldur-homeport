@@ -86,19 +86,10 @@
                         </h3>
                     </div>
                     <div class="actions">
-                        <div class="actions-button"
-                            ng-show="!CustomerList.showgroup && CustomerList.isOwner(customer)"
-                            stoppropagation>
-                            <a class="button" ng-click="openActions=!openActions">actions</a>
-                            <ul class="actions-dropdown" ng-show="openActions">
-                                <li>
-                                    <a ng-click="CustomerList.remove(customer)" class="button-simple">Remove</a>
-                                </li>
-                                <li>
-                                    <a ui-sref="services.create" class="button-simple">Add service</a>
-                                </li>
-                            </ul>
-                        </div>
+                        <action-button button-list="CustomerList.actionButtonsListItems"
+                                       button-controller="CustomerList"
+                                       ng-show="!CustomerList.showgroup"
+                                       button-model="customer"></action-button>
                     </div>
                 </div>
                 <div class="list-item-details" ng-show="expandItem">

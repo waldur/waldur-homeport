@@ -17,6 +17,16 @@
         this.controllerScope = controllerScope;
         this._super();
         this.searchFieldName = 'name';
+        this.actionButtonsListItems = [
+          {
+            title: 'Remove',
+            clickFunction: this.remove.bind(controllerScope)
+          },
+          {
+            title: 'Add service',
+            state: 'services.create'
+          }
+        ];
       },
       isOwner: function(customer) {
         for (var i = 0; i < customer.owners.length; i++) {

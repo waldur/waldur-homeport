@@ -77,15 +77,10 @@
                         {{ key.fingerprint }}
                     </div>
                     <div class="actions">
-                        <div class="actions-button" ng-show="!UserKeyTab.showgroup">
-                            <a class="button" ng-click="openActions=!openActions">actions</a>
-                            <ul class="actions-dropdown" ng-show="openActions">
-                                <li>
-                                    <a ng-click="UserKeyTab.remove(key)" class="button-simple remove">
-                                        Remove</a>
-                                </li>
-                            </ul>
-                        </div>
+                        <action-button button-list="UserKeyTab.actionButtonsListItems"
+                                       button-controller="UserKeyTab"
+                                       ng-show="!UserKeyTab.showgroup"
+                                       button-model="key"></action-button>
                     </div>
                 </div>
             </li>

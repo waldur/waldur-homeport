@@ -30,7 +30,7 @@
         this.actionButtonsListItems = [
           {
             title: 'User action placeholder',
-            click: function(user) {}
+            clickFunction: function(user) {}
           }
         ];
       },
@@ -248,6 +248,12 @@
           this.getCurrentUser();
         }
         this._super();
+        this.actionButtonsListItems = [
+          {
+            title: 'Remove',
+            clickFunction: this.remove.bind(controllerScope)
+          }
+        ];
       },
       getList: function(filter) {
         if (this.user.uuid) {
