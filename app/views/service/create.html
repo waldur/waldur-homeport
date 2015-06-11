@@ -61,7 +61,8 @@
             </div>
             <div class="col full">
                 <div>
-                    <input type="checkbox" id="openstackdummy" ng-model="ServiceAdd.instance.dummy">
+                    <input type="checkbox" id="openstackdummy" ng-model="ServiceAdd.instance.dummy"
+                           ng-change="ServiceAdd.dummyCheckboxChange()">
                     <label for="openstackdummy">
                         Dummy
                     </label>
@@ -97,7 +98,8 @@
                 <label for="">Auth URL:</label>
             </div>
             <div class="col input">
-                <input type="text" placeholder="http://keystone.example.com:5000/v2.0" ng-model="ServiceAdd.instance.auth_url">
+                <input type="text" placeholder="http://keystone.example.com:5000/v2.0"
+                       ng-model="ServiceAdd.instance.auth_url" ng-disabled="ServiceAdd.instance.dummy">
                 <div class="error arrow-up" ng-show="ServiceAdd.errors.auth_url">
                     <ul class="error-list">
                         <li ng-repeat="error in ServiceAdd.errors.auth_url">{{ error }}</li>

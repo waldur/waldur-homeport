@@ -96,6 +96,9 @@
             projectCloudMembershipsService.addRow(response[i].url, vm.instance.url);
           }
         });
+      },
+      dummyCheckboxChange: function() {
+        this.instance.auth_url = this.instance.dummy ? 'http://keystone.example.com:5000/v2.0' : '';
       }
     });
 
