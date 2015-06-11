@@ -46,14 +46,10 @@
                 </div>
                 <div class="view-action-buttons-mobile" ng-show="BackupList.showgroup">
                     <div class="actions-button">
-                        <a class="button dropdown-active"
-                           ng-click="mobileActions=!mobileActions">actions</a>
-                        <ul class="actions-dropdown" ng-show="mobileActions">
-                            <li>
-                                <a class="button-simple remove">
-                                    Remove</a>
-                            </li>
-                        </ul>
+                        <action-button button-list="BackupList.actionButtonsListItems"
+                                       button-controller="BackupList"
+                                       ng-show="mobileActions"
+                                       button-model="backup"></action-button>
                     </div>
                 </div>
             </div>
@@ -80,6 +76,10 @@
                     <a href="#" class="list-sort">State</a>
                 </div>
                 <div class="additional-cell">
+                    <a href="#" class="list-sort">Kept</a>
+                </div>
+                <!--TODO add source name-->
+                <div class="additional-cell">
                     <a href="#" class="list-sort">Date</a>
                 </div>
                 <div class="actions"></div>
@@ -100,6 +100,10 @@
                     <div class="additional-cell">
                         {{ backup.state }}
                     </div>
+                    <div class="additional-cell">
+                        {{ backup.kept_until ? backup.kept_until : 'kept forever' }}
+                    </div>
+                    <!--TODO add source name-->
                     <div class="additional-cell">
                         <span am-time-ago="backup.created_at"></span>
                     </div>
