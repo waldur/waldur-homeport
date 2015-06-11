@@ -660,6 +660,27 @@ angular
         url: '/error/404/',
         templateUrl: 'views/404.html',
         auth: false
+      })
+
+      .state('backups', {
+        url: '/backups/',
+        abstract: true,
+        templateUrl: 'views/partials/base.html',
+      })
+      .state('backups.list', {
+        url: '',
+        views: {
+          'appContent': {
+            templateUrl: 'views/backup/list.html',
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
+        auth: true
       });
 
     function authCheck($q, $location, $auth, usersService) {
