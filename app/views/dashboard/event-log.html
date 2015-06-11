@@ -26,14 +26,10 @@
                         <div ui-view="eventTypes"></div>
                     </div>
                     <div class="actions">
-                        <div class="actions-button" ng-show="!EventList.showgroup">
-                            <a class="button" ng-click="openActions1=!openActions1">actions</a>
-                            <ul class="actions-dropdown" ng-show="openActions1">
-                                <li>
-                                    <a class="button-simple">Some action for this type</a>
-                                </li>
-                            </ul>
-                        </div>
+                        <action-button button-list="EventList.actionButtonsListItems"
+                                       button-controller="EventList"
+                                       ng-show="!EventList.showgroup"
+                                       button-model="event"></action-button>
                     </div>
                 </div>
             </li>

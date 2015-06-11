@@ -18,6 +18,20 @@
         this._super();
         this.searchFieldName = 'name';
         this.currentUser = usersService.currentUser;
+        this.actionButtonsListItems = [
+          {
+            title: 'Remove'
+          },
+          {
+            title: 'Add service',
+            state: 'services.create'
+          }
+        ];
+        if (this.currentUserIsStaff()) {
+          this.actionButtonsListItems[0].clickFunction = this.remove.bind(controllerScope);
+        } else {
+          this.actionButtonsListItems[0].state = 'support.create';
+        }
       },
       isOwnerOrStaff: function(customer) {
         if (this.currentUserIsStaff()) return true;

@@ -338,7 +338,7 @@ angular
       })
 
       .state('profile.details', {
-        url: '',
+        url: ':tab',
         views: {
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',

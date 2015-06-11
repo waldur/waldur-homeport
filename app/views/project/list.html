@@ -91,17 +91,10 @@
                         {{ project.created | date:'medium' }}
                     </div>
                     <div class="actions">
-                        <div class="actions-button" stoppropagation>
-                            <a class="button" ng-click="openActions=!openActions" ng-show="!ProjectList.showgroup">actions</a>
-                            <ul class="actions-dropdown" ng-show="openActions">
-                                <li>
-                                <a class="button-simple" ui-sref="projects.update({uuid: project.uuid})">Edit</a>
-                                </li>
-                                <li>
-                                    <a class="button-simple remove" ng-click="ProjectList.remove(project)">Delete</a>
-                                </li>
-                            </ul>
-                        </div>
+                        <action-button button-list="ProjectList.actionButtonsListItems"
+                                       button-controller="ProjectList"
+                                       ng-show="!ProjectList.showgroup"
+                                       button-model="project"></action-button>
                     </div>
                 </div>
                 <div class="list-item-details" ng-show="expandItem" ng-class="{'opened': expandItem}">

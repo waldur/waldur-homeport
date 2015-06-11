@@ -15,6 +15,12 @@
         this._super();
         this.searchFieldName = 'name';
         this.canUserAddService();
+        this.actionButtonsListItems = [
+          {
+            title: 'Remove',
+            clickFunction: this.remove.bind(this.controllerScope)
+          }
+        ];
       },
       canUserAddService: function() {
         var vm = this;

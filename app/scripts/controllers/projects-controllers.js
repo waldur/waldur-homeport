@@ -16,6 +16,16 @@
         this.controllerScope = controllerScope;
         this._super();
         this.searchFieldName = 'name';
+        this.actionButtonsListItems = [
+          {
+            title: 'Archive',
+            clickFunction: function(project) {}
+          },
+          {
+            title: 'Delete',
+            clickFunction: this.remove.bind(controllerScope)
+          }
+        ];
       },
       showMore: function(project) {
         if (!this.projectUsers[project.uuid]) {

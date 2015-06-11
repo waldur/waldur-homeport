@@ -97,16 +97,10 @@
                     OpenStack
                 </div>
                 <div class="actions">
-                    <div class="actions-button" ng-show="!ServiceList.showgroup" stoppropagation>
-                        <a class="button" ng-click="openActions=!openActions">actions</a>
-                        <ul class="actions-dropdown" ng-show="openActions">
-                            <li>
-                                <a class="button-simple remove"
-                                   ui-sref="services.list" ng-click="ServiceList.remove(service)">
-                                Remove</a>
-                            </li>
-                        </ul>
-                    </div>
+                    <action-button button-list="ServiceList.actionButtonsListItems"
+                                   button-controller="ServiceList"
+                                   ng-show="!ServiceList.showgroup"
+                                   button-model="service"></action-button>
                 </div>
             </div>
             <div class="list-item-details" ng-show="expandItem" ng-class="{'opened': expandItem}">
