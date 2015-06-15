@@ -171,7 +171,7 @@
         vm.instance.$save(success, error);
         function success() {
           vm.afterSave();
-          vm.successFlash(vm.successMessage.replace('{vm_name}', vm.instance.name));
+          vm.successFlash(vm.getSuccessMessage());
           vm.successRedirect();
         }
         function error(response) {
@@ -190,6 +190,9 @@
         } else {
           $state.go(this.listState);
         }
+      },
+      getSuccessMessage: function() {
+        return this.successMessage.replace('{vm_name}', this.instance.name);
       }
     });
 

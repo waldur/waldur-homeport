@@ -5,7 +5,7 @@
         </h2>
         <div class="decision">
             <div class="col">
-                <a class="button"></a>
+                <a ui-sref="backups.create" class="button">Create a backup</a>
             </div>
         </div>
     </div>
@@ -23,9 +23,9 @@
                 </div>
             </li>
             <li class="right-sort">
-                <a class="button">
+                <a ui-sref="backups.create" class="button">
                     <span class="icon plus"></span>
-                    <span></span>
+                    <span>Create a backup</span>
                 </a>
             </li>
         </ul>
@@ -121,6 +121,4 @@
     <div class="pagination" ng-show="BackupList.list.length > 0 || BackupList.searchInput">
         <pagination pages-list="BackupList" pages-service="BackupList.service"></pagination>
     </div>
-
-
 </div>
