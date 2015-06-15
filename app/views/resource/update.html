@@ -1,0 +1,36 @@
+<div ng-controller="ResourceDetailUpdateController as ResourceDetailUpdate">
+    <div class="profile-view">
+        <section class="content">
+            <div class="profile-edit">
+                <section>
+                    <input type="text" class="form-control" ng-model="ResourceDetailUpdate.model.name" required>
+                    <div class="error short" ng-show="ResourceDetailUpdate.errors.name">
+                        <ul class="error-list">
+                            <li ng-repeat="error in ResourceDetailUpdate.errors.name">
+                                {{ error }}
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+                <section class="save">
+                    <a ui-sref="resources.details({uuid:ResourceDetailUpdate.model.uuid})" class="button-cancel" translate>Cancel</a>
+                    <button class="button-apply" ng-click="ResourceDetailUpdate.update()" ng-show="ResourceDetailUpdate.model.name.length" type="submit" translate>Save</button>
+                </section>
+            </div>
+        </section>
+        <section class="actions">
+            <div class="actions-button">
+                <a class="button" ng-click="openActions=!openActions">actions</a>
+                <ul class="actions-dropdown" ng-show="openActions">
+                    <li>
+                        <a class="button-simple">Backup</a>
+                    </li>
+                    <li>
+                        <a class="button-simple" ng-click="ResourceDetailUpdate.remove()">Delete</a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </div>
+    <div ui-view="tabs"></div>
+</div>
