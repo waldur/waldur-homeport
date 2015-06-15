@@ -49,6 +49,11 @@ for(var i = 0; i < testData.length; i++) {
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/backups/');
       });
 
+      it('I should be able to find added backup in backups list', function() {
+        element(by.model('BackupList.searchInput')).sendKeys(data.description);
+        expect(element(by.cssContainingText('h3.item-title a', data.description)).isPresent()).toBe(true);
+      });
+
       it('I should be able to logout', function() {
         auth.logout();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/');

@@ -15,7 +15,7 @@
         this.service = backupsService;
         this.controllerScope = controllerScope;
         this._super();
-        this.searchFieldName = 'search';
+        this.searchFieldName = 'description';
         this.actionButtonsListItems = [];
       }
     });
