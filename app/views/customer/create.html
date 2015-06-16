@@ -33,11 +33,10 @@
                     <label for="">Registration code</label>
                 </div>
                 <div class="col input">
-                    <!--TODO use registration code field when endPoint will be ready-->
-                    <input type="text" placeholder="code" ng-model="CustomerAdd.instance.abbreviation">
-                    <div class="error arrow-up" ng-show="CustomerAdd.errors.abbreviation">
+                    <input type="text" placeholder="code" ng-model="CustomerAdd.instance.registration_code">
+                    <div class="error arrow-up" ng-show="CustomerAdd.errors.registration_code">
                         <ul class="error-list">
-                            <li ng-repeat="error in CustomerAdd.errors.abbreviation">{{ error }}</li>
+                            <li ng-repeat="error in CustomerAdd.errors.registration_code">{{ error }}</li>
                         </ul>
                     </div>
                 </div>
