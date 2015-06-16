@@ -580,6 +580,50 @@ angular
         auth: true
       })
 
+      .state('resources.details', {
+        url: ':uuid/:tab',
+        views: {
+          'appContent': {
+            templateUrl: 'views/resource/details.html',
+          },
+          'tabBackups@resources.details': {
+            templateUrl: 'views/resource/tab-backups.html',
+          },
+          'tabs@resources.details': {
+            templateUrl: 'views/resource/tabs.html',
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
+        auth: true
+      })
+
+      .state('resources.update', {
+        url: ':uuid/edit/:tab',
+        views: {
+          'appContent': {
+            templateUrl: 'views/resource/update.html',
+          },
+          'tabBackups@resources.update': {
+            templateUrl: 'views/resource/tab-backups.html',
+          },
+          'tabs@resources.update': {
+            templateUrl: 'views/resource/tabs.html',
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
+        auth: true
+      })
+
       .state('payment', {
         url: '/payment/',
         abstract: true,
@@ -672,6 +716,21 @@ angular
         views: {
           'appContent': {
             templateUrl: 'views/backup/list.html',
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
+        auth: true
+      })
+      .state('backups.create', {
+        url: 'add/',
+        views: {
+          'appContent': {
+            templateUrl: 'views/backup/create.html',
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',

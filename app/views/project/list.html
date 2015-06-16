@@ -140,7 +140,7 @@
                             <li ng-repeat="user in ProjectList.projectUsers[project.uuid].data">
                                 <section>
                                     <div class="avatar small">
-                                        <img gravatar-src="user.email" gravatar-size="60">
+                                        <img gravatar-src="user.user_email" gravatar-size="60">
                                     </div>
                                     <a ui-sref="users.details({uuid: user.user_uuid})">{{ user.user_full_name }}</a>
                                 </section>

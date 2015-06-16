@@ -190,3 +190,30 @@
     controllerScope.__proto__ = new ResourceController();
   }
 })();
+
+(function() {
+  angular.module('ncsaas')
+      .controller('ResourceDetailUpdateController', [
+        '$stateParams',
+        'resourcesService',
+        'baseControllerDetailUpdateClass',
+        ResourceDetailUpdateController
+      ]);
+
+  function ResourceDetailUpdateController($stateParams, resourcesService, baseControllerDetailUpdateClass) {
+    var controllerScope = this;
+    var Controller = baseControllerDetailUpdateClass.extend({
+      activeTab: 'backups',
+
+      init:function() {
+        this.service = resourcesService;
+        this.controllerScope = controllerScope;
+        this._super();
+        this.detailsState = 'resources.details';
+        this.activeTab = $stateParams.tab ? $stateParams.tab : this.activeTab;
+      }
+    });
+
+    controllerScope.__proto__ = new Controller();
+  }
+})();
