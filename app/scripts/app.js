@@ -740,6 +740,21 @@ angular
           authenticated: authCheck
         },
         auth: true
+      })
+      .state('backups.restore', {
+        url: ':uuid/restore/',
+        views: {
+          'appContent': {
+            templateUrl: 'views/backup/restore.html',
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
+        auth: true
       });
 
     function authCheck($q, $location, $auth, usersService) {
