@@ -64,11 +64,9 @@
 
 
   angular.module('ncsaas')
-    .controller('IssueAddController', ['issuesService', 'currentStateService',
-      'baseControllerAddClass', IssueAddController]);
+    .controller('IssueAddController', ['issuesService', 'baseControllerAddClass', IssueAddController]);
 
-  function IssueAddController(
-    issuesService, currentStateService, baseControllerAddClass) {
+  function IssueAddController(issuesService, baseControllerAddClass) {
     var controllerScope = this;
     var controllerClass = baseControllerAddClass.extend({
       init: function() {
@@ -78,7 +76,7 @@
         this.listState = 'support.list';
         this.issue = this.instance;
       },
-      save:function() {
+      save: function() {
         var vm = this;
         vm.instance.$save(success, error);
         function success() {

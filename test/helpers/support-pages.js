@@ -14,7 +14,7 @@ ListIssuesPage.prototype = {
   expandIssue: function(summary) {
     element(by.cssContainingText('div.list-item', summary)).click();
   }
-}
+};
 
 function IssueCommentsFragment () {}
 
@@ -30,7 +30,7 @@ IssueCommentsFragment.prototype = {
   contains: function(text) {
     return element(by.cssContainingText('article.normal-description', text)).isPresent();
   }
-}
+};
 
 function CreateIssuePage() {
   expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/support/add/');

@@ -46,4 +46,4 @@ describe('List and create issue', function() {
     comments.submit();
     expect(comments.contains(text)).toBe(true);
   })
-})
+});

@@ -3,9 +3,9 @@
 
 (function () {
   angular.module('ncsaas')
-    .service('issuesService', ['$q', 'baseServiceClass', issuesService]);
+    .service('issuesService', ['baseServiceClass', issuesService]);
 
-  function issuesService($q, baseServiceClass) {
+  function issuesService(baseServiceClass) {
     var ServiceClass = baseServiceClass.extend({
       init: function() {
         this._super();
