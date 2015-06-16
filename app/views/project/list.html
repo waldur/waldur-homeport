@@ -30,8 +30,7 @@
             </div>
             <div>
                 <div class="view-action-buttons" ng-show="ProjectList.showgroup">
-                    <a class="button">Add user</a>
-                    <a class="button">Archive</a>
+                    <a class="button" ui-sref="projects.update({uuid: project.uuid})">Edit</a>
                     <a class="button" ng-click="ProjectList.remove(project)">Delete</a>
                 </div>
                 <div class="view-action-buttons-mobile" ng-show="ProjectList.showgroup">
@@ -40,13 +39,10 @@
                             ng-click="mobileActions=!mobileActions">actions</a>
                         <ul class="actions-dropdown" ng-show="mobileActions">
                             <li>
-                                <a class="button-simple">Add user</a>
+                                <a class="button-simple" ui-sref="projects.update({uuid: project.uuid})">Edit</a>
                             </li>
                             <li>
-                                <a class="button-simple">Archive</a>
-                            </li>
-                            <li>
-                                <a class="button-simple" ng-click="ProjectList.remove(project)">Delete</a>
+                                <a class="button-simple remove" ng-click="ProjectList.remove(project)">Delete</a>
                             </li>
                         </ul>
                     </div>
@@ -101,7 +97,7 @@
                                        button-model="project"></action-button>
                     </div>
                 </div>
-                <div class="list-item-details" ng-show="expandItem">
+                <div class="list-item-details" ng-show="expandItem" ng-class="{'opened': expandItem}">
                     <section class="on-mobile">
                         <header>
                             <h4 class="item-title">Creation date</h4>
@@ -125,6 +121,10 @@
                                 <a>{{ resource.name }}</a>
                             </li>
                         </ul>
+                         <article class="light-description">
+                            New resources could be added through <a ui-sref="appstore.store">AppStore</a>.
+                        </article>
+
                     </section>
                     <!-- asas -->
                     <section detailscontent="checkbox">
@@ -138,12 +138,18 @@
                         </header>
                         <ul class="list-blocks">
                             <li ng-repeat="user in ProjectList.projectUsers[project.uuid].data">
-                                <div class="avatar small">
-                                    <img gravatar-src="user.email" gravatar-size="60">
-                                </div>
-                                <a ui-sref="users.details({uuid: user.user_uuid})">{{ user.user_full_name }}</a>
+                                <section>
+                                    <div class="avatar small">
+                                        <img gravatar-src="user.user_email" gravatar-size="60">
+                                    </div>
+                                    <a ui-sref="users.details({uuid: user.user_uuid})">{{ user.user_full_name }}</a>
+                                </section>
                             </li>
                         </ul>
+                        <article class="light-description">
+                            Manage users through <a ui-sref="projects.details({uuid: project.uuid})">project details</a>.
+                        </article>
+
                     </section>
                 </div>
             </li>

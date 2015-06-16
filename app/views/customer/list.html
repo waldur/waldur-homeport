@@ -92,7 +92,7 @@
                                        button-model="customer"></action-button>
                     </div>
                 </div>
-                <div class="list-item-details" ng-show="expandItem">
+                <div class="list-item-details" ng-show="expandItem" ng-class="{'opened': expandItem}">
                     <section detailscontent="checkbox">
                         <header>
                             <h4 class="item-title">Services</h4>
@@ -113,6 +113,10 @@
                                     <a href="">5</a>
                                 </li>
                             </ul>
+                            <article class="light-description">
+                                Connected services for this customer.
+                            </article>
+                            <a ui-sref="services.list" class="button inlist-action">Manage</a>
                         </header>
                         <ul>
                             <li class="item-list">

@@ -23,7 +23,6 @@
         authService.authenticate(provider).then(vm.loginSuccess.bind(vm), vm.loginError.bind(vm));
       },
       loginSuccess: function() {
-        this.successFlash('Successfully logged in');
         $state.go('dashboard.eventlog');
       },
       loginError: function(response) {
