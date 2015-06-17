@@ -2,9 +2,9 @@
 
 (function() {
   angular.module('ncsaas')
-    .directive('actionButton', [actionButton]);
+    .directive('actionButton', ['$rootScope', actionButton]);
 
-  function actionButton() {
+  function actionButton($rootScope) {
     return {
       restrict: 'E',
       templateUrl: "views/directives/action-button.html",
@@ -27,11 +27,14 @@
           controller.actionButtonsList[scope.$id] = !controller.actionButtonsList[scope.$id];
         }
 
-        scope.$on('actionButton:close', function() {
+        function closeAll() {
           for (var i = 0; controller.actionButtonsList.length > i; i++) {
             controller.actionButtonsList[i] = false;
           }
-        });
+        }
+
+        scope.$on('actionButton:close', closeAll);
+        $rootScope.$on('clicked-out', closeAll);
       }
     };
   }
