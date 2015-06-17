@@ -138,6 +138,15 @@
                     transform: translate(1.1, 1.1);
                 } // &:before
             } // invite-user
+            &.import {
+                &:before {
+                    position: absolute;
+                    @include icon-fa;
+                    @include property(left, 10);
+                    content: '\f0ed';
+                    transform: translate(1.1, 1.1);
+                } // &:before
+            } // import
         } // > a
     } // > li
 } // nav-sublist
