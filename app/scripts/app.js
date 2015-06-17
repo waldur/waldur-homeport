@@ -91,14 +91,14 @@ angular
         abstract: true
       })
 
-      .state('support.tickets', {
+      .state('support.list', {
         url: '',
         views: {
           'appHeader@support' : {
             templateUrl: 'views/partials/app-header.html',
           },
           'appContent@support' : {
-            templateUrl: 'views/support/tickets.html',
+            templateUrl: 'views/support/list.html',
           }
         },
         resolve: {
@@ -109,10 +109,10 @@ angular
       .state('support.create', {
         url: 'add/',
         views: {
-          'appHeader@support' : {
+          'appHeader' : {
             templateUrl: 'views/partials/app-header.html',
           },
-          'appContent@support' : {
+          'appContent' : {
             templateUrl: 'views/support/create.html',
           }
         },
