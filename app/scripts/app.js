@@ -711,6 +711,7 @@ angular
         abstract: true,
         templateUrl: 'views/partials/base.html',
       })
+
       .state('backups.list', {
         url: '',
         views: {
@@ -726,11 +727,37 @@ angular
         },
         auth: true
       })
+
       .state('backups.create', {
         url: 'add/',
         views: {
           'appContent': {
             templateUrl: 'views/backup/create.html',
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
+        auth: true
+      })
+
+      .state('backup-schedules', {
+        url: '/backup-schedules/',
+        abstract: true,
+        templateUrl: 'views/partials/base.html',
+        resolve: {
+          authenticated: authCheck
+        }
+      })
+
+      .state('backup-schedules.create', {
+        url: 'add/',
+        views: {
+          'appContent': {
+            templateUrl: 'views/backup-schedules/create.html',
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',
