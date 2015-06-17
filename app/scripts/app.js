@@ -121,6 +121,27 @@ angular
         }
       })
 
+      .state('import', {
+        url: '/import/',
+        templateUrl: 'views/partials/base.html',
+        abstract: true
+      })
+
+      .state('import.import', {
+        url: '',
+        views: {
+          'appHeader@import' : {
+            templateUrl: 'views/partials/app-header.html',
+          },
+          'appContent@import' : {
+            templateUrl: 'views/import/import.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        }
+      })
+
       .state('dashboard', {
         url: '/dashboard/',
         abstract: true,

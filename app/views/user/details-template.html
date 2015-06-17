@@ -15,6 +15,9 @@
         <div class="actions-button">
             <a class="button" ng-click="openActions=!openActions">actions</a>
             <ul class="actions-dropdown" ng-show="openActions">
+                <li ng-if="UserDetailUpdate.showImport">
+                    <a ui-sref="import.import" class="button-simple">Import resources from service</a>
+                </li>
                 <li>
                     <a ui-sref="profile.update" class="button-simple">Edit profile</a>
                 </li>

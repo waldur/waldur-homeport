@@ -1,0 +1,96 @@
+<div>
+
+    <div class="white-box">
+        <ul class="sort-list">
+            <li class="title">
+                <h2 class="app-title">Import resources from service</h2>
+            </li>
+        </ul>
+    </div>
+
+    <div class="white-box">
+        <div class="short-form full">
+            <div class="form-row">
+                <div class="col full">
+                    <h3 class="app-title">Select Service</h3>
+                </div>
+                <div class="col full">
+                    <!-- Select service -->
+                    <div class="appstore-templates">
+                        <!-- service -->
+                        <div class="appstore-template">
+                            <div class="icon">
+                                <img src="/static/images/icons/icon_aws_small.png" alt="" class="icon">
+                            </div>
+                            <div class="description">
+                                <h3>Amazon Web Services</h3>
+                            </div>
+                        </div>
+                        <!-- service -->
+                        <div class="appstore-template">
+                            <div class="icon">
+                                <img src="/static/images/icons/icon_digitalocean_small.png" alt="" class="icon">
+                            </div>
+                            <div class="description">
+                                <h3>Digital Ocean</h3>
+                            </div>
+                        </div>
+                        <!-- service -->
+                        <div class="appstore-template">
+                            <div class="icon">
+                                <img src="/static/images/icons/icon_openstack_small.png" alt="" class="icon">
+                            </div>
+                            <div class="description">
+                                <h3>OpenStack</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /Select service -->
+                </div>
+                <div class="col full">
+                    <h3 class="app-title">Select resources</h3>
+                </div>
+                <div class="col full">
+                    <ul class="object-list">
+                        <li ng-click="checkItem=!checkItem" ng-repeat="ticket in [1, 2, 3]">
+                            <div class="list-item pointer">
+                                <div class="checkbox" stoppropagation>
+                                    <input type="checkbox" ng-checked="checkItem">
+                                </div>
+                                <div class="name">
+                                    <h3 class="item-title">
+                                        <a>Instance name</a>
+                                    </h3>
+                                    <article class="descriptoin-light">
+                                        Processor 1.4 / RAM 512 / HDD 2GB
+                                    </article>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="decision">
+            <div class="col select-project">
+                <article class="descriptoin-light">
+                    Selected resources will be imported into
+                </article>
+                <div class="custom-select project inline-elem">
+                    <select>
+                        <option value="">Choose project</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="decision">
+            <div class="col">
+                <a class="button-apply" ng-click="ProjectAdd.save()">Import</a>
+            </div>
+        </div>
+
+    </div>
+
+</div>

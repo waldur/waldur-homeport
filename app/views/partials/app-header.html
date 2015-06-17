@@ -59,6 +59,9 @@
                         <li>
                             <a href="" class="user">Invite user</a>
                         </li>
+                        <li ng-show="Header.showImport">
+                            <a ui-sref="import.import" class="import">Import resources from service</a>
+                        </li>
                     </ul>
                 </li>
                 <li class="dropdown customers">
@@ -104,6 +107,9 @@
                         </li>
                         <li class="on-tablet">
                             <a href="" class="user">Invite user</a>
+                        </li>
+                        <li class="on-tablet" ng-show="Header.showImport">
+                            <a ui-sref="import.import" class="import">Import resources from service</a>
                         </li>
                         <li class="divider on-tablet customers"></li>
                         <li class="on-tablet customers" ng-repeat="customer in Header.customers">
@@ -185,6 +191,9 @@
                         </li>
                         <li>
                             <a href="" class="user">Invite user</a>
+                        </li>
+                        <li ng-show="Header.showImport">
+                            <a ui-sref="import.import" class="import">Import resources from service</a>
                         </li>
                     </ul>
                 </li>
