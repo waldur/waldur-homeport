@@ -15,8 +15,8 @@
           {
             operation: {
               method: 'POST',
-              url: endpoint + '/:operation/',
-              params: {key: '@key', UUID: '@uuid', operation: '@operation'}
+              url: endpoint,
+              params: {key: '@key', UUID: '@uuid'}
             },
             update: {
               method: 'PUT'
