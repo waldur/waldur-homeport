@@ -18,6 +18,7 @@ angular.module('ncsaas')
     topMenuCustomersCacheTime: 60 * 10, // seconds
     dashboardEventsCacheTime: 60, // seconds
     listControlPanelShow: false,
-    currentCustomerUuidStorageKey: 'currentCustomerUuid'
+    currentCustomerUuidStorageKey: 'currentCustomerUuid',
+    showImport: false
 
   });
