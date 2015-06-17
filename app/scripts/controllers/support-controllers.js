@@ -75,6 +75,8 @@
         this._super();
         this.listState = 'support.list';
         this.issue = this.instance;
+        this.issue.summary = "";
+        this.issue.description = "";
       },
       save: function() {
         var vm = this;
