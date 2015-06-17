@@ -15,6 +15,7 @@
       customers: [],
       currentUser: {},
       currentCustomer: {},
+      showImport: ENV.showImport,
       menuState: {
         addSomethingMenu: false,
         customerMenu: false,
