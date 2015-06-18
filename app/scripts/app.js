@@ -142,6 +142,27 @@ angular
         }
       })
 
+      .state('compare', {
+        url: '/compare/',
+        templateUrl: 'views/partials/base.html',
+        abstract: true
+      })
+
+      .state('compare.vms', {
+        url: '',
+        views: {
+          'appHeader@compare' : {
+            templateUrl: 'views/partials/app-header.html',
+          },
+          'appContent@compare' : {
+            templateUrl: 'views/compare/table.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        }
+      })
+
       .state('dashboard', {
         url: '/dashboard/',
         abstract: true,
