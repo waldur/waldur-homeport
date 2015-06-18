@@ -1,5 +1,8 @@
 .actions-button {
     position: relative;
+    &.sort-by-value {
+        display: inline-block;
+    } // &.sort-by-value
     ul.actions-dropdown {
         @include clear-list;
         position: absolute;
@@ -13,6 +16,10 @@
         background-color: white;
         border: 1px solid #CBCBCB;
         box-shadow: 0px 0px 8px rgba(139, 139, 139, 0.39);
+        &.sort-by-value {
+            left: 50%;
+            right: auto;
+        } // &.sort-by-value
         > li + li {
             @include property(margin-top, 5);
             @include property(padding-top, 5);
