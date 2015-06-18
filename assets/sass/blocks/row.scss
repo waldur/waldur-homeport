@@ -10,6 +10,17 @@
         &.half {
             width: calc(50% - 20px);
         } // &.half
+        &.mobile-half {
+            width: calc(50% - 20px);
+            @include bp(xs) {
+                width: 50%;
+                flex: 1 50%;
+            } // xs
+            @include bp(sm) {
+                width: 50%;
+                flex: 1 50%;
+            } // sm
+        } // &.mobile-half
         &.initial-avatar {
             width: 180px;
         } // &.initial-avatar
