@@ -54,7 +54,15 @@
         @include table-cell;
         vertical-align: middle;
         @include property(padding, 0 10);
-        // flex: 1 1 0%;
+        &.on-mobile {
+            display: none;
+            @include bp(xs) {
+                @include table-cell;
+            } // xs
+            @include bp(sm) {
+                @include table-cell;
+            } // sm
+        } // on-mobile
         &:nth-child(1) {
             @include property(padding-left, 10);
         } // &:nth-child(1)
@@ -147,6 +155,12 @@
                             content: '\f01e';
                         } // &:before
                     } // &.reopen
+                    &.expand {
+                        &:before {
+                            @include icon-fa;
+                            content: '\f06e';
+                        } // &:before
+                    } // &.expand
                 } // button
             } // actions-button
         } // actions-box
