@@ -243,6 +243,20 @@ module.exports = function(grunt) {
                       src: ['angular-translate-loader-static-files.js'],
                       dest: 'app/static/js/angular/',
                       filter: 'isFile'
+                    },
+                    {
+                      expand: true,
+                      cwd: 'bower_components/angular-cron-jobs/dist',
+                      src: ['angular-cron-jobs.js'],
+                      dest: 'app/static/js/angular/',
+                      filter: 'isFile'
+                    },
+                    {
+                      expand: true,
+                      cwd: 'bower_components/angular-cron-jobs/dist',
+                      src: ['angular-cron-jobs.css'],
+                      dest: 'app/static/css/',
+                      filter: 'isFile'
                     }
                 ]
             }

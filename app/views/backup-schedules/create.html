@@ -78,14 +78,7 @@
             <div class="form-row">
                 <div class="col label">Schedule</div>
                 <div class="col input">
-                    <input name="schedule" type="text" ng-model="BackupSchedulesAdd.instance.schedule">
-                    <div class="error arrow-up" ng-show="BackupSchedulesAdd.errors.schedule">
-                        <ul class="error-list">
-                            <li ng-repeat="error in BackupSchedulesAdd.errors.schedule">
-                                {{ error }}
-                            </li>
-                        </ul>
-                    </div>
+                    <cron-selection output="BackupSchedulesAdd.instance.schedule"></cron-selection>
                 </div>
             </div>
             <div class="decision">

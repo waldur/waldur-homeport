@@ -8,7 +8,11 @@ var testData = [
     description: "desr1" + helpers.getUUID(),
     retention_time: 11,
     maximal_number_of_backups: 12,
-    schedule: "1 1 1 1 1",
+    schedule: {
+      period: 'Year',
+      day: '6th',
+      month: 'March'
+    },
     backup_source_name: "resource#0",
     customer: 'Ministry of Bells'
   },
@@ -17,7 +21,9 @@ var testData = [
     description: "desr2" + helpers.getUUID(),
     retention_time: 23,
     maximal_number_of_backups: 44,
-    schedule: "1 1 1 1 2",
+    schedule: {
+      period: 'Day'
+    },
     backup_source_name: "resource#0",
     customer: 'Ministry of Bells'
   }
@@ -43,7 +49,13 @@ for(var i = 0; i < testData.length; i++) {
         element(by.model('BackupSchedulesAdd.instance.description')).sendKeys(data.description);
         element(by.model('BackupSchedulesAdd.instance.retention_time')).sendKeys(data.retention_time);
         element(by.model('BackupSchedulesAdd.instance.maximal_number_of_backups')).sendKeys(data.maximal_number_of_backups);
-        element(by.model('BackupSchedulesAdd.instance.schedule')).sendKeys(data.schedule);
+        element(by.cssContainingText('option', data.schedule.period)).click();
+        if (data.schedule.month) {
+          element(by.cssContainingText('option', data.schedule.month)).click();
+        }
+        if (data.schedule.day) {
+          element(by.cssContainingText('option', data.schedule.day)).click();
+        }
         element(by.model('searchStr')).sendKeys(data.backup_source_name);
         element(by.cssContainingText('.angucomplete-row .angucomplete-title', data.backup_source_name)).click();
 

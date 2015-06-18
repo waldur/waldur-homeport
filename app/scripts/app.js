@@ -15,6 +15,7 @@ angular
     'ngLoadingSpinner',
     'ngAnimate',
     'pascalprecht.translate',
+    'angular-cron-jobs',
     'flash'])
   // urls
   .config(function($stateProvider, $urlRouterProvider) {
