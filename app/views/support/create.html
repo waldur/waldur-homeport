@@ -1,15 +1,9 @@
-<div>
+<div ng-controller="IssueAddController as IssueAdd">
 
     <div class="white-box">
         <ul class="sort-list">
             <li class="title">
-                <h2 class="app-title">Organization support</h2>
-            </li>
-            <li class="search divid">
-                <div class="search-box">
-                    <input type="text">
-                    <button class="search-button"></button>
-                </div>
+                <h2 class="app-title">Add ticket</h2>
             </li>
         </ul>
     </div>
@@ -21,10 +15,10 @@
                     <label for="">Ticket name</label>
                 </div>
                 <div class="col input">
-                    <input type="text" placeholder="Problem">
-                    <div class="error arrow-up" style="display: none;">
+                    <input type="text" placeholder="Problem" ng-model="IssueAdd.issue.summary">
+                    <div class="error arrow-up" ng-show="IssueAdd.errors.summary">
                         <ul class="error-list">
-                            <li ng-repeat="error in errors.name">{{ error }}</li>
+                            <li ng-repeat="error in IssueAdd.errors.summary">{{ error }}</li>
                         </ul>
                     </div>
                 </div>
@@ -39,8 +33,12 @@
                     <label for="">Ticket description</label>
                 </div>
                 <div class="col input">
-                    <textarea class="normal"
-                        placeholder="Problem description"></textarea>
+                    <textarea class="normal" placeholder="Problem description" ng-model="IssueAdd.issue.description"></textarea>
+                    <div class="error arrow-up" ng-show="IssueAdd.errors.description">
+                        <ul class="error-list">
+                            <li ng-repeat="error in IssueAdd.errors.description">{{ error }}</li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="col description">
                     <article class="light-description">
@@ -51,10 +49,10 @@
         </section>
 
         <!-- non field errors -->
-        <div class="simple-line" ng-show="errors.non_field_errors">
+        <div class="simple-line" ng-show="IssueAdd.errors.non_field_errors">
             <div class="error">
                 <ul class="error-list">
-                    <li ng-repeat="error in errors.non_field_errors">
+                    <li ng-repeat="error in IssueAdd.errors.non_field_errors">
                         {{ error }}
                     </li>
                 </ul>
@@ -64,10 +62,10 @@
 
         <div class="decision">
             <div class="col">
-                <a class="button-cancel">Cancel</a>
+                <a class="button-cancel" ng-click="IssueAdd.cancel()">Cancel</a>
             </div>
             <div class="col">
-                <a class="button-apply">Open ticket</a>
+                <a class="button-apply" ng-click="IssueAdd.save()">Open ticket</a>
             </div>
         </div>
     </div>

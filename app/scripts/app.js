@@ -15,6 +15,7 @@ angular
     'ngLoadingSpinner',
     'ngAnimate',
     'pascalprecht.translate',
+    'angular-cron-jobs',
     'flash'])
   // urls
   .config(function($stateProvider, $urlRouterProvider) {
@@ -91,14 +92,14 @@ angular
         abstract: true
       })
 
-      .state('support.tickets', {
+      .state('support.list', {
         url: '',
         views: {
           'appHeader@support' : {
             templateUrl: 'views/partials/app-header.html',
           },
           'appContent@support' : {
-            templateUrl: 'views/support/tickets.html',
+            templateUrl: 'views/support/list.html',
           }
         },
         resolve: {
@@ -109,11 +110,32 @@ angular
       .state('support.create', {
         url: 'add/',
         views: {
-          'appHeader@support' : {
+          'appHeader' : {
             templateUrl: 'views/partials/app-header.html',
           },
-          'appContent@support' : {
+          'appContent' : {
             templateUrl: 'views/support/create.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        }
+      })
+
+      .state('import', {
+        url: '/import/',
+        templateUrl: 'views/partials/base.html',
+        abstract: true
+      })
+
+      .state('import.import', {
+        url: '',
+        views: {
+          'appHeader@import' : {
+            templateUrl: 'views/partials/app-header.html',
+          },
+          'appContent@import' : {
+            templateUrl: 'views/import/import.html',
           }
         },
         resolve: {
@@ -711,6 +733,7 @@ angular
         abstract: true,
         templateUrl: 'views/partials/base.html',
       })
+
       .state('backups.list', {
         url: '',
         views: {
@@ -726,11 +749,37 @@ angular
         },
         auth: true
       })
+
       .state('backups.create', {
         url: 'add/',
         views: {
           'appContent': {
             templateUrl: 'views/backup/create.html',
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
+        auth: true
+      })
+
+      .state('backup-schedules', {
+        url: '/backup-schedules/',
+        abstract: true,
+        templateUrl: 'views/partials/base.html',
+        resolve: {
+          authenticated: authCheck
+        }
+      })
+
+      .state('backup-schedules.create', {
+        url: 'add/',
+        views: {
+          'appContent': {
+            templateUrl: 'views/backup-schedules/create.html',
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',

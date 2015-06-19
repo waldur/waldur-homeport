@@ -30,11 +30,29 @@
             </div>
             <div class="form-row">
                 <div class="col label">
+                    <label for="">Registration code</label>
+                </div>
+                <div class="col input">
+                    <input type="text" placeholder="code" ng-model="CustomerAdd.instance.registration_code">
+                    <div class="error arrow-up" ng-show="CustomerAdd.errors.registration_code">
+                        <ul class="error-list">
+                            <li ng-repeat="error in CustomerAdd.errors.registration_code">{{ error }}</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col description">
+                    <article class="light-description">
+
+                    </article>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col label">
                     <label for="">Organization contact details</label>
                 </div>
                 <div class="col input">
                 <textarea class="normal"
-                          placeholder="Customer contact details"
+                          placeholder="Organization contact details"
                           ng-model="CustomerAdd.instance.contact_details"></textarea>
                 </div>
                 <div class="col description">

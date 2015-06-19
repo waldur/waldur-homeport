@@ -1,0 +1,95 @@
+<div ng-controller="BackupSchedulesAddController as BackupSchedulesAdd">
+
+    <div class="profile-view">
+        <section class="content">
+            <h2 class="app-title">Add backups schedules</h2>
+        </section>
+    </div>
+    <div class="white-box">
+        <section class="short-form">
+            <div class="form-row">
+                <div class="col label">Description</div>
+                <div class="col input">
+                    <input name="description" type="text" ng-model="BackupSchedulesAdd.instance.description">
+                    <div class="error arrow-up" ng-show="BackupSchedulesAdd.errors.description">
+                        <ul class="error-list">
+                            <li ng-repeat="error in BackupSchedulesAdd.errors.description">
+                                {{ error }}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col label">Retention time</div>
+                <div class="col input">
+                    <input name="retention_time" type="text" ng-model="BackupSchedulesAdd.instance.retention_time">
+                    <div class="error arrow-up" ng-show="BackupSchedulesAdd.errors.retention_time">
+                        <ul class="error-list">
+                            <li ng-repeat="error in BackupSchedulesAdd.errors.retention_time">
+                                {{ error }}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col description">
+                    <article class="light-description">
+                        in days
+                    </article>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col label">
+                    <label>Backup source</label>
+                </div>
+                <div class="col input">
+                    <angucomplete-alt placeholder="start typing the name of the resource"
+                                      pause="100"
+                                      type="text"
+                                      selected-object="BackupSchedulesAdd.selectedSourceCallback"
+                                      local-data="BackupSchedulesAdd.sourcesListForAutoComplete"
+                                      search-fields="name"
+                                      title-field="name"
+                                      description-field="project_name"
+                                      minlength="1"
+                                      input-changed="BackupSchedulesAdd.sourceSearchInputChanged"></angucomplete-alt>
+                    <div class="error arrow-up" ng-show="BackupSchedulesAdd.errors.backup_source">
+                        <ul class="error-list">
+                            <li ng-repeat="error in BackupSchedulesAdd.errors.backup_source">
+                                {{ error }}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col label">Maximal number of backups</div>
+                <div class="col input">
+                    <input name="maximal_number_of_backups" type="text" ng-model="BackupSchedulesAdd.instance.maximal_number_of_backups">
+                    <div class="error arrow-up" ng-show="BackupSchedulesAdd.errors.maximal_number_of_backups">
+                        <ul class="error-list">
+                            <li ng-repeat="error in BackupSchedulesAdd.errors.maximal_number_of_backups">
+                                {{ error }}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col label">Schedule</div>
+                <div class="col input">
+                    <cron-selection output="BackupSchedulesAdd.instance.schedule"></cron-selection>
+                </div>
+            </div>
+            <div class="decision">
+                <div class="col">
+                    <a class="button-cancel" ng-click="BackupSchedulesAdd.close()">Cancel</a>
+                </div>
+                <div class="col">
+                    <a class="button-apply" ng-click="BackupSchedulesAdd.save()">Add schedule</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+</div>
