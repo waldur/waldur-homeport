@@ -101,10 +101,11 @@
   function RestoreBackupController(backupsService, baseControllerAddClass, flavorsService, $stateParams) {
     var controllerScope = this;
     var Controller = baseControllerAddClass.extend({
-      flavorsListForAutoComplete: [],
+      flavorsList: [],
       flavor: null,
       resourceName: null,
       backup: null,
+      selectedFlavor: null,
 
       init: function() {
         this.service = backupsService;
@@ -120,20 +121,11 @@
           vm.backup = response;
         });
       },
-      getFlavors: function(name) {
-        var vm = this,
-          filter = name ? {name: name} : {};
-        flavorsService.getList(filter).then(function(response) {
-          vm.flavorsListForAutoComplete = response;
+      getFlavors: function() {
+        var vm = this;
+        flavorsService.getList().then(function(response) {
+          vm.flavorsList = response;
         });
-      },
-      flavorSearchInputChanged: function(searchText) {
-        controllerScope.getFlavors(searchText);
-      },
-      selectedFlavorCallback: function(selected) {
-        if (selected) {
-          controllerScope.flavor = selected.originalObject.url;
-        }
       },
       save: function() {
         var vm = this,
@@ -154,6 +146,9 @@
           vm.successRedirect();
         }
         function error(response) {
+          if (response.status === 409) {
+            alert(response.data.detail);
+          }
           vm.errors = response.data;
         }
       }

@@ -28,30 +28,34 @@
                     </article>
                 </div>
             </div>
+
             <div class="form-row">
                 <div class="col label">
-                    <label for="">Flavor</label>
+                    <h4 class="app-title">Flavor</h4>
                 </div>
                 <div class="col input">
-                    <angucomplete-alt placeholder="start typing the name of the flavor"
-                                      pause="100"
-                                      type="text"
-                                      selected-object="RestoreBackup.selectedFlavorCallback"
-                                      local-data="RestoreBackup.flavorsListForAutoComplete"
-                                      search-fields="name"
-                                      title-field="name"
-                                      minlength="1"
-                                      input-changed="RestoreBackup.flavorSearchInputChanged"></angucomplete-alt>
-                    <div class="error arrow-up" ng-show="RestoreBackup.errors.flavor">
-                        <ul class="error-list">
-                            <li ng-repeat="error in RestoreBackup.errors.flavor">{{ error }}</li>
-                        </ul>
+                    <div class="restore-backup-flavors">
+                        <div class="appstore-template" ng-repeat="flavor in RestoreBackup.flavorsList" ng-click="RestoreBackup.setFlavor(flavor)" ng-class="{'state': RestoreBackup.selectedFlavor == flavor}">
+                            <div class="description">
+                                <article class="light-description">
+                                    <ul class="hardware">
+                                        <li>
+                                            <i class="flaticon-computer33"></i>
+                                            CPUs: {{ flavor.cores }}
+                                        </li>
+                                        <li>
+                                            <i class="flaticon-random"></i>
+                                            RAM: {{ flavor.ram / 1024 }} GB
+                                        </li>
+                                        <li>
+                                            <i class="flaticon-hardware1"></i>
+                                            Disk: {{ flavor.disk / 1024 }} GB
+                                        </li>
+                                    </ul>
+                                </article>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="col description">
-                    <article class="light-description">
-
-                    </article>
                 </div>
             </div>
         </section>
