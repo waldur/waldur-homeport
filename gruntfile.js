@@ -257,7 +257,14 @@ module.exports = function(grunt) {
                       src: ['angular-cron-jobs.css'],
                       dest: 'app/static/css/',
                       filter: 'isFile'
-                    }
+                    },
+                    {
+                      expand: true,
+                      cwd: 'bower_components/ng-file-upload/',
+                      src: ['ng-file-upload.js'],
+                      dest: 'app/static/js/angular',
+                      filter: 'isFile'
+                    },
                 ]
             }
         },

@@ -3,8 +3,29 @@
     <div class="profile-view">
         <section class="avatar">
             <span class="avatar big">
-                <img src="/static/images/user-avatar.jpg" alt="" class="avatar-img">
+                <img ng-src="{{CustomerDetailUpdate.imageUrl}}" alt="" class="avatar-img"
+                    ng-hide="CustomerDetailUpdate.files.length">
+
+                <img ngf-src="CustomerDetailUpdate.files[0]" alt="" class="avatar-img"
+                    ng-show="CustomerDetailUpdate.files.length">
             </span>
+        </section>
+        <section class="content" ng-show="CustomerDetailUpdate.isOwnerOrStaff(CustomerDetailUpdate.model)">
+            <a class="button" ngf-select ngf-accept="'image/*'"
+                ng-hide="CustomerDetailUpdate.files.length"
+                ng-model="CustomerDetailUpdate.files">New logo</a>
+
+            <a class="button"
+                ng-show="CustomerDetailUpdate.model.image && CustomerDetailUpdate.files.length==0"
+                ng-click="CustomerDetailUpdate.deleteImage()">Delete</a>
+
+            <a class="button"
+                ng-show="CustomerDetailUpdate.files.length"
+                ng-click="CustomerDetailUpdate.uploadImage()">Save</a>
+
+            <a class="button"
+                ng-show="CustomerDetailUpdate.files.length"
+                ng-click="CustomerDetailUpdate.files=[]">Cancel</a>
         </section>
         <section class="content">
             <h2 class="app-title">{{ CustomerDetailUpdate.model.name }}</h2>

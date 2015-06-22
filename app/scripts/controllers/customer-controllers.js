@@ -54,20 +54,71 @@
     .controller('CustomerDetailUpdateController', [
       'baseControllerDetailUpdateClass',
       'customersService',
+      'customerImageService',
+      'usersService',
+      'Flash',
+      'ENV',
       CustomerDetailUpdateController
     ]);
 
-  function CustomerDetailUpdateController(baseControllerDetailUpdateClass, customersService) {
+  function CustomerDetailUpdateController(baseControllerDetailUpdateClass,
+    customersService, customerImageService, usersService, Flash, ENV) {
     var controllerScope = this;
     var CustomerController = baseControllerDetailUpdateClass.extend({
       activeTab: 'resources',
       customer: null,
+      files: [],
 
-      init:function() {
+      init: function() {
         this.service = customersService;
         this.controllerScope = controllerScope;
         this._super();
         this.detailsState = 'organizations.details';
+        this.currentUser = usersService.currentUser;
+      },
+
+      isOwnerOrStaff: function(customer) {
+        if (this.currentUser.is_staff) return true;
+        for (var i = 0; i < customer.owners.length; i++) {
+          if (this.currentUser.uuid === customer.owners[i].uuid) {
+            return true;
+          }
+        }
+      },
+
+      afterActivate: function() {
+        controllerScope.updateImageUrl();
+      },
+
+      updateImageUrl: function() {
+        controllerScope.imageUrl = controllerScope.model.image || ENV.defaultCustomerIcon;
+      },
+
+      uploadImage: function() {
+        customerImageService.create({
+          uuid: controllerScope.model.uuid,
+          file: controllerScope.files[0]
+        }).then(function (response) {
+          controllerScope.files = [];
+          controllerScope.model.image = response.data.image;
+          controllerScope.updateImageUrl();
+          Flash.create('success', 'Customer image is uploaded');
+        }, function (response) {
+          Flash.create('warning', response.data.image);
+        });
+      },
+
+      deleteImage: function() {
+        controllerScope.model.image = null;
+        customerImageService.delete({
+          uuid: controllerScope.model.uuid
+        }).then(function (response) {
+          Flash.create('success', 'Customer image is deleted');
+          controllerScope.model.image = null;
+          controllerScope.updateImageUrl();
+        }, function (response) {
+          Flash.create('warning', response.data.errors);
+        });
       }
     });
 

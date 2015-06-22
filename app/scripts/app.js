@@ -16,7 +16,8 @@ angular
     'ngAnimate',
     'pascalprecht.translate',
     'angular-cron-jobs',
-    'flash'])
+    'flash',
+    'ngFileUpload'])
   // urls
   .config(function($stateProvider, $urlRouterProvider) {
     var initialDataState = 'initialdata.view',
