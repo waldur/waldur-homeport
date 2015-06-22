@@ -127,6 +127,10 @@
           vm.flavorsList = response;
         });
       },
+      setFlavor: function(flavor) {
+        controllerScope.selectedFlavor = flavor;
+        controllerScope.flavor = flavor.url;
+      },
       save: function() {
         var vm = this,
           inputs = {};
