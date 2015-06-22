@@ -21,7 +21,7 @@
     <div class="white-box">
         <ul class="object-list">
             <li ng-repeat="event in EventList.list">
-                <div class="list-item">
+                <div class="list-item dash {{ event.event_type }}">
                     <div>
                         <div ui-view="eventTypes"></div>
                     </div>

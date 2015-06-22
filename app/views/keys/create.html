@@ -14,7 +14,7 @@
                 <div class="col label">
                     <label for="">Key name</label>
                 </div>
-                <div class="col input">
+                <div class="col input input-full">
                     <input type="text" placeholder="Key name" ng-model="KeyAdd.instance.name">
                     <div class="error arrow-up" ng-show="KeyAdd.errors.name">
                         <ul class="error-list">
@@ -22,18 +22,13 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col description">
-                    <article class="light-description">
-
-                    </article>
-                </div>
             </div>
             <div class="form-row">
                 <div class="col label">
                     <label for="">Public key</label>
                 </div>
-                <div class="col input">
-                    <textarea class="normal"
+                <div class="col input input-full">
+                    <textarea class="full"
                           placeholder="Public key"
                           ng-model="KeyAdd.instance.public_key"></textarea>
                     <div class="error arrow-up" ng-show="KeyAdd.errors.public_key">
@@ -41,11 +36,6 @@
                             <li ng-repeat="error in KeyAdd.errors.public_key">{{ error }}</li>
                         </ul>
                     </div>
-                </div>
-                <div class="col description">
-                    <article class="light-description">
-
-                    </article>
                 </div>
             </div>
         </section>
