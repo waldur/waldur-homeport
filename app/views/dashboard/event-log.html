@@ -5,15 +5,12 @@
             <li class="title">
                 <h2 class="app-title">Events</h2>
             </li>
-            <pagesize pages-list="EventList" pages-service="EventList.service"></pagesize>
+            <filter-list filter-controller="EventList"></filter-list>
             <li class="search divid">
                 <div class="search-box">
                     <input type="text" ng-model='EventList.searchInput' ng-change="EventList.search()">
                     <button class="search-button" ng-click="EventList.search()"></button>
                 </div>
-            </li>
-            <li>
-                <filter-list filter-controller="EventList"></filter-list>
             </li>
         </ul>
     </div>
