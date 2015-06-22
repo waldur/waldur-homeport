@@ -16,7 +16,9 @@ angular
     'ngAnimate',
     'pascalprecht.translate',
     'angular-cron-jobs',
-    'flash'])
+    'flash',
+    'chart.js'
+  ])
   // urls
   .config(function($stateProvider, $urlRouterProvider) {
     var initialDataState = 'initialdata.view',
@@ -780,6 +782,26 @@ angular
         views: {
           'appContent': {
             templateUrl: 'views/backup-schedules/create.html',
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
+        auth: true
+      })
+      .state('statistics', {
+        url: '/statistics/',
+        abstract: true,
+        templateUrl: 'views/partials/base.html'
+      })
+      .state('statistics.projects-statistic', {
+        url: 'projects-statistic/',
+        views: {
+          'appContent': {
+            templateUrl: 'views/statistic/projects-statistic.html',
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',
