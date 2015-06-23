@@ -12,11 +12,12 @@
       scope: {
         helpText: '@'
       },
-      link: function ($scope, element) {
+      link: function (scope, element) {
         var trigger = element;
         var text = trigger.find('span');
+
         trigger.css('position', 'relative');
-        trigger.bind('click', function(){
+        trigger.bind('click', function(event){
           if (!text.hasClass('active')) {
             text.addClass('active');
             text.css({
@@ -28,7 +29,12 @@
           } else {
             text.removeClass('active');
           }
+          event.stopPropagation();
         });
+        $document.bind('click', function() {
+          text.removeClass('active');
+        })
+
       }
     };
   }
