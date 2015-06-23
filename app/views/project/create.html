@@ -15,7 +15,7 @@
                 <label for="">Project name</label>
             </div>
             <div class="col input input-full">
-                <input type="text" placeholder="Webshop" ng-model="ProjectAdd.project.name">
+                <input type="text" ng-model="ProjectAdd.project.name">
                 <div class="error arrow-up" ng-show="ProjectAdd.errors.name">
                     <ul class="error-list">
                         <li ng-repeat="error in ProjectAdd.errors.name">{{ error }}</li>
@@ -29,7 +29,6 @@
             </div>
             <div class="col input input-full">
                 <textarea class="full"
-                    placeholder="Project description"
                     ng-model="ProjectAdd.project.description"></textarea>
             </div>
         </div>

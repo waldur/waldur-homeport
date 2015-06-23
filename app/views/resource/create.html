@@ -20,7 +20,7 @@
                 <label for="">Name</label>
             </div>
             <div class="col input input-full">
-                <input type="text" placeholder="Test VM" ng-model="ResourceAdd.resource.name">
+                <input type="text" ng-model="ResourceAdd.resource.name">
                 <div class="error arrow-up" ng-show="ResourceAdd.errors.name">
                     <ul class="error-list">
                         <li ng-repeat="error in ResourceAdd.errors.name">{{ error }}</li>

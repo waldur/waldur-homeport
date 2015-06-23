@@ -80,7 +80,7 @@
                 <label for="">Service name:</label>
             </div>
             <div class="col input input-full">
-                <input type="text" placeholder="OpenStack Testbed" ng-model="ServiceAdd.instance.name">
+                <input type="text" ng-model="ServiceAdd.instance.name">
                 <div class="error arrow-up" ng-show="ServiceAdd.errors.name">
                     <ul class="error-list">
                         <li ng-repeat="error in ServiceAdd.errors.name">{{ error }}</li>
@@ -93,7 +93,7 @@
                 <label for="">Auth URL:</label>
             </div>
             <div class="col input input-full">
-                <input type="text" placeholder="http://keystone.example.com:5000/v2.0"
+                <input type="text"
                        ng-model="ServiceAdd.instance.auth_url" ng-disabled="ServiceAdd.instance.dummy">
                 <div class="error arrow-up" ng-show="ServiceAdd.errors.auth_url">
                     <ul class="error-list">

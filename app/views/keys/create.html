@@ -15,7 +15,7 @@
                     <label for="">Key name</label>
                 </div>
                 <div class="col input input-full">
-                    <input type="text" placeholder="Key name" ng-model="KeyAdd.instance.name">
+                    <input type="text" ng-model="KeyAdd.instance.name">
                     <div class="error arrow-up" ng-show="KeyAdd.errors.name">
                         <ul class="error-list">
                             <li ng-repeat="error in KeyAdd.errors.name">{{ error }}</li>
@@ -29,7 +29,6 @@
                 </div>
                 <div class="col input input-full">
                     <textarea class="full"
-                          placeholder="Public key"
                           ng-model="KeyAdd.instance.public_key"></textarea>
                     <div class="error arrow-up" ng-show="KeyAdd.errors.public_key">
                         <ul class="error-list">
@@ -54,10 +53,10 @@
 
         <div class="decision">
             <div class="col">
-                <a class="button-cancel" ng-click="KeyAdd.cancel()">Cancel</a>
+                <a class="button-apply" ng-click="KeyAdd.save()">Add key</a>
             </div>
             <div class="col">
-                <a class="button-apply" ng-click="KeyAdd.save()">Add key</a>
+                <a class="button-cancel" ng-click="KeyAdd.cancel()">Cancel</a>
             </div>
         </div>
     </div>
