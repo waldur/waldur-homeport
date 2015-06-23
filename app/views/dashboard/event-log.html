@@ -15,7 +15,7 @@
         </ul>
     </div>
 
-    <div class="white-box">
+    <div class="white-box" ng-show="EventList.list.length > 0 && !EventList.searchInput">
         <ul class="object-list">
             <li ng-repeat="event in EventList.list">
                 <div class="list-item dash {{ event.event_type }}">
