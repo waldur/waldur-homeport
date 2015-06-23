@@ -90,10 +90,13 @@
         </div>
         <div class="form-row">
             <div class="col label">
-                <label for="">Auth URL:</label>
+                <label for="">
+                    <helpicon help-text="Service Auth URL"></helpicon>
+                    Auth URL:
+                </label>
             </div>
             <div class="col input input-full">
-                <input type="text"
+                <input type="text" class="with-help"
                        ng-model="ServiceAdd.instance.auth_url" ng-disabled="ServiceAdd.instance.dummy">
                 <div class="error arrow-up" ng-show="ServiceAdd.errors.auth_url">
                     <ul class="error-list">
