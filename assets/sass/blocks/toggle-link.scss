@@ -1,0 +1,28 @@
+.toggle-link {
+    + .toggle-link {
+        margin-left: 10px;
+    } // + toggle-link
+    @include inline-middle;
+    cursor: pointer;
+    padding: 0px 6px;
+    border-radius: 3px;
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+    color: rgb(0, 0, 0);
+    &:after {
+        position: relative;
+        @include icon-fa;
+        content: '\f00c';
+        @include property(top, -1);
+        @include property(font-size, $extra-small-font);
+        @include property(margin-left, 5);
+        color: rgb(182, 182, 182);
+    } // &:after
+    &.active {
+        background-color: #f5f5f5;
+        &:after {
+            color: #3AA153;
+        } // &:after
+    } // &.active
+} // toggle-link
