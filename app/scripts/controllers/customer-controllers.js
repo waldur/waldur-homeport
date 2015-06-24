@@ -104,7 +104,7 @@
           controllerScope.updateImageUrl();
           Flash.create('success', 'Customer image is uploaded');
         }, function (response) {
-          Flash.create('warning', response.data.image);
+          Flash.create('warning', 'Unable to upload image');
         });
       },
 
@@ -117,7 +117,7 @@
           controllerScope.model.image = null;
           controllerScope.updateImageUrl();
         }, function (response) {
-          Flash.create('warning', response.data.errors);
+          Flash.create('warning', 'Unable to delete image');
         });
       }
     });
