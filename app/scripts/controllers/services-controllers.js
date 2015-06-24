@@ -60,12 +60,22 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('ServiceAddController', ['servicesService',
-      'currentStateService', 'projectCloudMembershipsService', 'projectsService',
-      'baseControllerAddClass', ServiceAddController]);
+    .controller('ServiceAddController', [
+      'servicesService',
+      'digitalOceanService',
+      'currentStateService',
+      'projectCloudMembershipsService',
+      'projectsService',
+      'baseControllerAddClass',
+      ServiceAddController]);
 
   function ServiceAddController(
-    servicesService, currentStateService, projectCloudMembershipsService, projectsService, baseControllerAddClass) {
+    servicesService,
+    digitalOceanService,
+    currentStateService,
+    projectCloudMembershipsService,
+    projectsService,
+    baseControllerAddClass) {
     var controllerScope = this;
     var ServiceController = baseControllerAddClass.extend({
       init: function() {
@@ -74,6 +84,35 @@
         this.setSignalHandler('currentCustomerUpdated', this.activate.bind(this));
         this._super();
         this.listState = 'services.list';
+        this.selectedService = this.serviceList[0];
+      },
+      serviceList: [
+        {
+          icon: '/static/images/icons/icon_openstack_small.png',
+          name: 'OpenStack',
+          id: 'openstack',
+          service: servicesService
+        },
+        {
+          icon: '/static/images/icons/icon_digitalocean_small.png',
+          name: 'Digital Ocean',
+          id: 'digitalocean',
+          service: digitalOceanService
+        },
+        {
+          icon: '/static/images/icons/icon_aws_small.png',
+          name: 'AWS',
+          id: 'aws',
+          service: null
+        }
+      ],
+      setService: function(choice) {
+        this.selectedService = choice;
+        var instance = choice.service.$create();
+        instance.customer = this.instance.customer;
+        instance.auth_url = this.instance.auth_url;
+        instance.token = this.instance.token;
+        this.instance = instance;
       },
       activate: function() {
         var vm = this;
@@ -81,21 +120,24 @@
           vm.instance.customer = customer.url;
         });
         /*jshint camelcase: false */
-        if (vm.instance.auth_url || vm.instance.name) {
+        if (vm.instance.auth_url || vm.instance.name || vm.instance.token) {
           if (confirm('Clean all fields?')) {
             vm.instance.auth_url = '';
             vm.instance.name = '';
+            vm.instance.token = '';
           }
         }
       },
       afterSave: function() {
         var vm = this;
         projectsService.filterByCustomer = false;
-        projectsService.getList().then(function(response) {
-          for (var i = 0; response.length > i; i++) {
-            projectCloudMembershipsService.addRow(response[i].url, vm.instance.url);
-          }
-        });
+        if (this.selectedService.id == 'openstack') {
+          projectsService.getList().then(function(response) {
+            for (var i = 0; response.length > i; i++) {
+              projectCloudMembershipsService.addRow(response[i].url, vm.instance.url);
+            }
+          });
+        }
       },
       dummyCheckboxChange: function() {
         this.instance.auth_url = this.instance.dummy ? 'http://keystone.example.com:5000/v2.0' : '';
