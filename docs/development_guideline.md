@@ -107,3 +107,4 @@ Config file settings:
  dashboardEventsCacheTime:      time to store events in browser cache
  listControlPanelShow:          variable for displaying action switcher panel: true to show, false to hide
  currentCustomerUuidStorageKey: key for localStorage to ged customer uuid for customer selected in top menu
+ addonsList:                    additional options for virtual machine purchase on appstore page

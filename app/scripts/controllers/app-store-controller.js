@@ -44,20 +44,7 @@
           vm.customer = customer;
         });
         // XXX: Additional options
-        vm.addonsList = [
-          {
-            name: 'Bronze support',
-            description: 'Phone assistance during working hours'
-          },
-          {
-            name: 'Golden support',
-            description: 'Phone assistance 24/7'
-          },
-          {
-            name: 'Backup',
-            options: ['Daily', 'Weekly']
-          }
-        ];
+        vm.addonsList = ENV.addonsList;
       },
       setProject:function(project) {
         var vm = this;
