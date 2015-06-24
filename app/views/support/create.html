@@ -12,9 +12,9 @@
         <section class="short-form">
             <div class="form-row">
                 <div class="col label">
-                    <label for="">Ticket name</label>
+                    <label for="">Ticket name:</label>
                 </div>
-                <div class="col input">
+                <div class="col input input-full">
                     <input type="text" placeholder="Problem" ng-model="IssueAdd.issue.summary">
                     <div class="error arrow-up" ng-show="IssueAdd.errors.summary">
                         <ul class="error-list">
@@ -22,28 +22,18 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col description">
-                    <article class="light-description">
-                        Human-friendly label
-                    </article>
-                </div>
             </div>
             <div class="form-row">
                 <div class="col label">
-                    <label for="">Ticket description</label>
+                    <label for="">Ticket description:</label>
                 </div>
-                <div class="col input">
-                    <textarea class="normal" placeholder="Problem description" ng-model="IssueAdd.issue.description"></textarea>
+                <div class="col input input-full">
+                    <textarea class="full" placeholder="Problem description" ng-model="IssueAdd.issue.description"></textarea>
                     <div class="error arrow-up" ng-show="IssueAdd.errors.description">
                         <ul class="error-list">
                             <li ng-repeat="error in IssueAdd.errors.description">{{ error }}</li>
                         </ul>
                     </div>
-                </div>
-                <div class="col description">
-                    <article class="light-description">
-                        Define what's going wrong
-                    </article>
                 </div>
             </div>
         </section>
