@@ -3,15 +3,22 @@
 (function() {
   angular.module('ncsaas')
     .service('baseServiceListController', [
-      'baseControllerListClass', 'customerPermissionsService', 'usersService', 'servicesService',
+      'baseControllerListClass',
+      'customerPermissionsService',
+      'usersService',
+      'joinService',
       baseServiceListController]);
 
   // need for service tab
   function baseServiceListController(
-    baseControllerListClass, customerPermissionsService, usersService, servicesService) {
+    baseControllerListClass,
+    customerPermissionsService,
+    usersService,
+    joinService
+    ) {
     var ControllerListClass = baseControllerListClass.extend({
       init: function() {
-        this.service = servicesService;
+        this.service = joinService;
         this._super();
         this.searchFieldName = 'name';
         this.canUserAddService();
@@ -22,6 +29,7 @@
           }
         ];
       },
+
       canUserAddService: function() {
         var vm = this;
         usersService.getCurrentUser().then(function(user) {
@@ -32,7 +40,6 @@
           customerPermissionsService.userHasCustomerRole(user.username, 'owner').then(function(hasRole) {
             vm.canUserAddService = hasRole;
           });
-
         });
       }
     });
@@ -152,9 +159,9 @@
 (function() {
   angular.module('ncsaas')
     .controller('ServiceDetailUpdateController',
-      ['baseControllerClass', 'servicesService', '$stateParams', '$state', ServiceDetailUpdateController]);
+      ['baseControllerClass', 'joinService', '$stateParams', '$state', ServiceDetailUpdateController]);
 
-  function ServiceDetailUpdateController(baseControllerClass, servicesService, $stateParams, $state) {
+  function ServiceDetailUpdateController(baseControllerClass, joinService, $stateParams, $state) {
     var controllerScope = this;
     var Controller = baseControllerClass.extend({
       service: null,
@@ -166,7 +173,7 @@
       },
       activate:function() {
         var vm = this;
-        servicesService.$get($stateParams.uuid).then(function(response) {
+        joinService.$get($stateParams.uuid).then(function(response) {
           vm.service = response;
         });
       },
