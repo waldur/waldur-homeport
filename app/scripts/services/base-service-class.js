@@ -24,6 +24,7 @@
       filterByCustomer: true,
       customerUuid:null,
       cacheTime: 0,
+      endpointPostfix: '',
 
       init:function() {
         this.pageSize = ENV.pageSize;
@@ -142,7 +143,7 @@
       },
 
       getEndpoint:function(isList) {
-        return this.endpoint;
+        return this.endpoint + this.endpointPostfix;
       },
 
       // helper, that adds functions to promise
