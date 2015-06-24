@@ -70,6 +70,7 @@
     .controller('ServiceAddController', [
       'servicesService',
       'digitalOceanService',
+      'digitalOceanServiceProjectLinkService',
       'currentStateService',
       'projectCloudMembershipsService',
       'projectsService',
@@ -79,6 +80,7 @@
   function ServiceAddController(
     servicesService,
     digitalOceanService,
+    digitalOceanServiceProjectLinkService,
     currentStateService,
     projectCloudMembershipsService,
     projectsService,
@@ -135,17 +137,30 @@
           }
         }
       },
+
       afterSave: function() {
         var vm = this;
         projectsService.filterByCustomer = false;
+
+        projectsService.getList().then(function(response) {
+          for (var i = 0; response.length > i; i++) {
+            vm.addServiceProjectLink(vm.instance, response[i]);
+          }
+        });
+      },
+
+      addServiceProjectLink: function(service, project){
         if (this.selectedService.id == 'openstack') {
-          projectsService.getList().then(function(response) {
-            for (var i = 0; response.length > i; i++) {
-              projectCloudMembershipsService.addRow(response[i].url, vm.instance.url);
-            }
-          });
+          projectCloudMembershipsService.addRow(project.url, service.url);
+        }
+        if (this.selectedService.id == 'digitalocean') {
+          var instance = digitalOceanServiceProjectLinkService.$create();
+          instance.project = project.url;
+          instance.service = service.url;
+          instance.$save();
         }
       },
+
       dummyCheckboxChange: function() {
         this.instance.auth_url = this.instance.dummy ? 'http://keystone.example.com:5000/v2.0' : '';
       }

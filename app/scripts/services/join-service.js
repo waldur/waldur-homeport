@@ -39,10 +39,12 @@
       },
 
       $get: function(uuid) {
+        var self = this;
         var deferred = $q.defer();
         for (var i = 0; i < this.providers.length; i++) {
           this.providers[i].$get(uuid).then(function(response){
             if (response){
+              self.setProviderForService(response);
               deferred.resolve(response);
             }
           });
