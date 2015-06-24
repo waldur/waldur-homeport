@@ -250,24 +250,16 @@
                 @include property(font-size, $small-font);
             } // &.lang
             &.appstore {
-                display: inline-block;
-                background-color: #FDD11D;
-                padding: 4px 8px;
-                margin: 0px 12px;
-                top: 9px;
+                // display: inline-block;
+                background-color: #B0DA79;
+                // padding: 4px 8px;
+                // margin: 0px 12px;
+                // top: 9px;
                 position: relative;
-                border-radius: 3px;
-                height: auto;
+                // border-radius: 3px;
                 &.active {
-                    margin: 0;
-                    position: static;
-                    border-radius: 0;
-                    @include property(padding, 0 20);
-                    @include property(padding-top, 13);
-                    @include property(height, 50);
-                    display: block;
+                    background-color: #FDD11D;
                     color: #1F3305;
-                    text-decoration: none;
                 } // &.active
                 &:before {
                     position: relative;

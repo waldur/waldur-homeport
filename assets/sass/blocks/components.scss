@@ -46,9 +46,12 @@ textarea {
         line-height: 1;
         color: #565656;
     }
+    &.full {
+        width: 100%;
+    } // &.full
     select {
-        @include property(padding, 10 10);
-        @include property(padding-top, 12);
+        @include property(padding, 5 10);
+        @include property(padding-top, 7);
         @include property(padding-right, 25);
         cursor: pointer;
         background: transparent;
@@ -56,6 +59,9 @@ textarea {
         -moz-appearance: none;
         border: none;
         outline: 0;
+        &.full {
+            width: 100%;
+        } // &.full
     } // select
 } // custom-select
 

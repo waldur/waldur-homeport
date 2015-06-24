@@ -10,6 +10,8 @@
       init:function() {
         this._super();
         this.endpoint = '/backups/';
+        this.deleteBackup = this.operation.bind(this, 'delete');
+        this.restoreBackup = this.operation.bind(this, 'restore');
       }
     });
     return new ServiceClass();

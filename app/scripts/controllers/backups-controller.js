@@ -5,10 +5,11 @@
     .controller('BackupListController', [
       'backupsService',
       'baseControllerListClass',
+      '$state',
       BackupListController
     ]);
 
-  function BackupListController(backupsService, baseControllerListClass) {
+  function BackupListController(backupsService, baseControllerListClass, $state) {
     var controllerScope = this;
     var Controller = baseControllerListClass.extend({
       init:function() {
@@ -16,7 +17,24 @@
         this.controllerScope = controllerScope;
         this._super();
         this.searchFieldName = 'description';
-        this.actionButtonsListItems = [];
+        this.actionButtonsListItems = [
+          {
+            title: 'Restore',
+            clickFunction: this.restoreBackup.bind(this.controllerScope)
+          },
+          {
+            title: 'Remove',
+            clickFunction: this.deleteBackup.bind(this.controllerScope)
+          }
+        ];
+      },
+      deleteBackup:function(backup) {
+        var vm = this;
+        vm.service.deleteBackup(backup.uuid).then(
+          vm.getList, vm.handleActionException);
+      },
+      restoreBackup:function(backup) {
+        $state.go('backups.restore', {uuid: backup.uuid});
       }
     });
 
@@ -64,6 +82,81 @@
       getSuccessMessage: function() {
         return this.successMessage.replace('{vm_name}', this.instance.description);
       }
+    });
+
+    controllerScope.__proto__ = new Controller();
+  }
+})();
+
+(function() {
+  angular.module('ncsaas')
+    .controller('RestoreBackupController', [
+      'backupsService',
+      'baseControllerAddClass',
+      'flavorsService',
+      '$stateParams',
+      RestoreBackupController
+    ]);
+
+  function RestoreBackupController(backupsService, baseControllerAddClass, flavorsService, $stateParams) {
+    var controllerScope = this;
+    var Controller = baseControllerAddClass.extend({
+      flavorsList: [],
+      flavor: null,
+      resourceName: null,
+      backup: null,
+      selectedFlavor: null,
+
+      init: function() {
+        this.service = backupsService;
+        this.controllerScope = controllerScope;
+        this._super();
+        this.listState = 'backups.list';
+        this.getFlavors();
+        this.successMessage = 'Restoring of {vm_name} was successful.'
+      },
+      activate: function () {
+        var vm = this;
+        backupsService.$get($stateParams.uuid).then(function(response) {
+          vm.backup = response;
+        });
+      },
+      getFlavors: function() {
+        var vm = this;
+        flavorsService.getList().then(function(response) {
+          vm.flavorsList = response;
+        });
+      },
+      setFlavor: function(flavor) {
+        controllerScope.selectedFlavor = flavor;
+        controllerScope.flavor = flavor.url;
+      },
+      save: function() {
+        var vm = this,
+          inputs = {};
+        if (vm.flavor) {
+          inputs.flavor = vm.flavor;
+        } else {
+          vm.errors.flavor = ['This field is required.'];
+          return;
+        }
+        if (vm.resourceName) {
+          inputs.name = vm.resourceName;
+        }
+        vm.service.restoreBackup($stateParams.uuid, inputs).then(success, error);
+        function success() {
+          vm.afterSave();
+          vm.successFlash(vm.getSuccessMessage());
+          vm.successRedirect();
+        }
+        function error(response) {
+          if (response.status === 409) {
+            alert(response.data.detail);
+          }
+          vm.errors = response.data;
+        }
+      }
+
     });
 
     controllerScope.__proto__ = new Controller();
