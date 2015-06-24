@@ -74,6 +74,7 @@
             vm.menuState[property] = false;
           }
         }
+        $rootScope.$broadcast('clicked-out');
       },
       setCurrentCustomer: function(customer) {
         var vm = this;
