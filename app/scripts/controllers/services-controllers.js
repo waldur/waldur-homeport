@@ -70,9 +70,8 @@
     .controller('ServiceAddController', [
       'servicesService',
       'digitalOceanService',
-      'digitalOceanServiceProjectLinkService',
+      'joinServiceProjectLinkService',
       'currentStateService',
-      'projectCloudMembershipsService',
       'projectsService',
       'baseControllerAddClass',
       ServiceAddController]);
@@ -80,9 +79,8 @@
   function ServiceAddController(
     servicesService,
     digitalOceanService,
-    digitalOceanServiceProjectLinkService,
+    joinServiceProjectLinkService,
     currentStateService,
-    projectCloudMembershipsService,
     projectsService,
     baseControllerAddClass) {
     var controllerScope = this;
@@ -144,21 +142,9 @@
 
         projectsService.getList().then(function(response) {
           for (var i = 0; response.length > i; i++) {
-            vm.addServiceProjectLink(vm.instance, response[i]);
+            joinServiceProjectLinkService.add(response[i], vm.instance);
           }
         });
-      },
-
-      addServiceProjectLink: function(service, project){
-        if (this.selectedService.id == 'openstack') {
-          projectCloudMembershipsService.addRow(project.url, service.url);
-        }
-        if (this.selectedService.id == 'digitalocean') {
-          var instance = digitalOceanServiceProjectLinkService.$create();
-          instance.project = project.url;
-          instance.service = service.url;
-          instance.$save();
-        }
       },
 
       dummyCheckboxChange: function() {
@@ -214,14 +200,17 @@
   angular.module('ncsaas')
     .controller('ServiceProjectTabController', [
       '$stateParams',
-      'servicesService',
+      'joinService',
       'baseControllerClass',
-      'projectCloudMembershipsService',
+      'joinServiceProjectLinkService',
       ServiceProjectTabController
     ]);
 
   function ServiceProjectTabController(
-    $stateParams, servicesService, baseControllerClass, projectCloudMembershipsService) {
+    $stateParams,
+    joinService,
+    baseControllerClass,
+    joinServiceProjectLinkService) {
     var controllerScope = this;
     var Controller = baseControllerClass.extend({
       service: null,
@@ -233,14 +222,14 @@
       },
       activate: function() {
         var vm = this;
-        servicesService.$get($stateParams.uuid).then(function(response) {
+        joinService.$get($stateParams.uuid).then(function(response) {
           vm.service = response;
+          vm.getServiceProjects();
         });
-        vm.getServiceProjects();
       },
       getServiceProjects: function() {
         var vm = this;
-        projectCloudMembershipsService.getList({cloud: $stateParams.uuid}).then(function(response) {
+        joinServiceProjectLinkService.getList(vm.service).then(function(response) {
           vm.serviceProjects = response;
         });
       }
