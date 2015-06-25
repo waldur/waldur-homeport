@@ -41,7 +41,7 @@
                     </div>
                     <!-- /Select service -->
                 </div>
-                <div class="col full" ng-show="ImportResource.selectedService">
+                <div class="col full" ng-show="ImportResource.resources.length">
                     <h3 class="app-title">Select resources</h3>
                     <ul class="object-list">
                         <li ng-click="ImportResource.toggleResource(resource)"
@@ -55,7 +55,8 @@
                                         <a>{{ resource.name }}</a>
                                     </h3>
                                     <article class="descriptoin-light">
-                                        Processor: {{ resource.cores }} /
+                                        OS: {{ resource.kernel }} /
+                                        CPU: {{ resource.cores }}  /
                                         RAM: {{ resource.ram }} MB /
                                         HDD: {{ resource.disk / 1024 }} GB
                                     </article>
@@ -67,7 +68,7 @@
             </div>
         </div>
 
-        <div class="decision" ng-show="ImportResource.selectedService">
+        <div class="decision" ng-show="ImportResource.resources.length">
             <div class="col select-project">
                 <article class="descriptoin-light">
                     Selected resources will be imported into
@@ -81,7 +82,7 @@
             </div>
         </div>
 
-        <div class="decision" ng-show="ImportResource.selectedService">
+        <div class="decision" ng-show="ImportResource.resources.length">
             <div class="col">
                 <a class="button-apply"
                    ng-class="{'disabled': !ImportResource.canImport()}"

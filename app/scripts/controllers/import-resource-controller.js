@@ -77,12 +77,16 @@
       },
 
       save: function() {
-        for (var i = 0; i < controllerScope.selectedResources.length; i++) {
-          var instance = digitalOceanLinkService.$create();
-          instance.backend_id = controllerScope.selectedResources[i].id;
-          instance.service_project_link = controllerScope.selectedProject;
-          console.log(instance);
-        };
+        var service_uuid = controllerScope.selectedService.uuid;
+        var project_url = controllerScope.selectedProject.url;
+
+        angular.forEach(controllerScope.selectedResources, function(droplet){
+          digitalOceanLinkService.add({
+            service_uuid: service_uuid,
+            project_url: project_url,
+            droplet_id: droplet.id
+          });
+        })
       }
     });
     controllerScope.__proto__ = new Controller();
