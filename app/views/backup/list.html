@@ -32,7 +32,7 @@
     </div>
 
     <!-- view-control -->
-    <section class="view-control" ng-show="BackupList.list.length > 0 || BackupList.searchInput">
+    <section class="view-control" ng-show="(BackupList.list.length > 0 || BackupList.searchInput) && BackupList.controlPanelShow">
         <div class="list-item no-cursor">
             <div class="checkbox">
                 <div class="checkbox" ng-show="BackupList.showgroup">

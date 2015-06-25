@@ -20,6 +20,21 @@ angular.module('ncsaas')
     dashboardEventsCacheTime: 60, // seconds
     listControlPanelShow: false,
     currentCustomerUuidStorageKey: 'currentCustomerUuid',
-    showImport: false
+    showImport: false,
+
+    addonsList : [
+      {
+        name: 'Bronze support',
+        description: 'Phone assistance during working hours'
+      },
+      {
+        name: 'Golden support',
+        description: 'Phone assistance 24/7'
+      },
+      {
+        name: 'Backup',
+        options: ['Daily', 'Weekly']
+      }
+    ]
 
   });
