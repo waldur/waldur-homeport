@@ -28,8 +28,7 @@
                     ng-class="{'opened': openIssue}"
                     ng-click="openIssue=!openIssue; IssueList.showMore(issue)">
                     <div class="status">
-                        <div class="subtitle">{{ issue.status }}</div>
-                        <div ng-show="issue.resolution">({{ issue.resolution }})</div>
+                        <div class="status-circle" ng-class="{'green': issue.resolution}"></div>
                     </div>
                     <div class="avatar">
                         <span class="avatar">
