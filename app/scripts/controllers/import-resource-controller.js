@@ -79,6 +79,7 @@
       save: function() {
         var service_uuid = controllerScope.selectedService.uuid;
         var project_url = controllerScope.selectedProject.url;
+        var project_uuid = controllerScope.selectedProject.uuid;
 
         angular.forEach(controllerScope.selectedResources, function(droplet){
           digitalOceanLinkService.add({
@@ -87,6 +88,7 @@
             droplet_id: droplet.id
           });
         })
+        $state.go('projects.details', {uuid: project_uuid, tab: 'resources'});
       }
     });
     controllerScope.__proto__ = new Controller();
