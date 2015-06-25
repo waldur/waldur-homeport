@@ -17,7 +17,8 @@ angular
     'pascalprecht.translate',
     'angular-cron-jobs',
     'flash',
-    'chart.js'
+    'chart.js',
+    'ngFileUpload'
   ])
   // urls
   .config(function($stateProvider, $urlRouterProvider) {
