@@ -18,6 +18,8 @@ angular
     'angular-cron-jobs',
     'flash',
     'chart.js',
+    'angulartics',
+    'angulartics.google.analytics',
     'ngFileUpload'
   ])
   // urls

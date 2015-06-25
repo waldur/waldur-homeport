@@ -265,6 +265,8 @@ module.exports = function(grunt) {
                       dest: 'app/static/js/angular',
                       filter: 'isFile'
                     },
+                    {
+                      expand: true,
                       cwd: 'bower_components/angular-chart.js/dist',
                       src: ['angular-chart.js'],
                       dest: 'app/static/js/angular/',
@@ -282,6 +284,20 @@ module.exports = function(grunt) {
                       cwd: 'bower_components/angular-chart.js/dist',
                       src: ['angular-chart.css'],
                       dest: 'app/static/css/',
+                      filter: 'isFile'
+                    },
+                    {
+                      expand: true,
+                      cwd: 'bower_components/angulartics/src',
+                      src: ['angulartics.js'],
+                      dest: 'app/static/js/angular',
+                      filter: 'isFile'
+                    },
+                    {
+                      expand: true,
+                      cwd: 'bower_components/angulartics/src',
+                      src: ['angulartics-ga.js'],
+                      dest: 'app/static/js/angular',
                       filter: 'isFile'
                     }
                 ]
