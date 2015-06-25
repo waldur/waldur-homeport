@@ -88,3 +88,23 @@ button-list - array of objects.
 button-controller - controller of list page
 
 button-model - model of item
+
+## Base configuration file base-config.js
+
+Base configuration file variables are overridden in custom-config.js
+Config file settings:
+ name:                          environment name
+ apiEndpoint:                   rest server address
+ googleClientId:                google client id
+ googleEndpointUrl:             google api url
+ facebookClientId:              facebook client id
+ facebookEndpointUrl:           facebook api url
+ pageSizes:                     page size step to display different types of lists
+ pageSize:                      default page size
+ topMenuCustomersCount:         top menu customers quantity
+ serviceIcon:                   image to display on appstore page
+ topMenuCustomersCacheTime:     time to store customers in browser cache
+ dashboardEventsCacheTime:      time to store events in browser cache
+ listControlPanelShow:          variable for displaying action switcher panel: true to show, false to hide
+ currentCustomerUuidStorageKey: key for localStorage to ged customer uuid for customer selected in top menu
+ addonsList:                    additional options for virtual machine purchase on appstore page
