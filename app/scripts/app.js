@@ -17,7 +17,9 @@ angular
     'pascalprecht.translate',
     'angular-cron-jobs',
     'flash',
-    'chart.js'
+    'chart.js',
+    'angulartics',
+    'angulartics.google.analytics'
   ])
   // urls
   .config(function($stateProvider, $urlRouterProvider) {
