@@ -73,15 +73,11 @@
         </div>
         <div class="form-row" ng-show="ServiceAdd.selectedService.id == 'openstack'">
             <div class="col label">
-                <label for="authUrl">Auth URL:</label>
+                <label for="authUrl"><helpicon help-text="Service Auth URL"></helpicon> Auth URL:</label>
             </div>
             <div class="col input">
                 <input type="text" placeholder="http://keystone.example.com:5000/v2.0"
                        ng-model="ServiceAdd.instance.auth_url" ng-disabled="ServiceAdd.instance.dummy" id="authUrl">
-                <label for="">
-                    <helpicon help-text="Service Auth URL"></helpicon>
-                    Auth URL:
-                </label>
             </div>
             <div class="col input input-full">
                 <input type="text" class="with-help"
