@@ -329,7 +329,7 @@ angular
       })
 
       .state('services.details', {
-        url: ':uuid/',
+        url: ':provider/:uuid/',
         views: {
           'appContent': {
             templateUrl: 'views/service/details.html'

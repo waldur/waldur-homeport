@@ -38,18 +38,19 @@
         return deferred.promise;
       },
 
-      $get: function(uuid) {
+      $get: function(provider, uuid) {
         var self = this;
-        var deferred = $q.defer();
-        for (var i = 0; i < this.providers.length; i++) {
-          this.providers[i].$get(uuid).then(function(response){
-            if (response){
-              self.setDescription(response);
-              deferred.resolve(response);
-            }
-          });
-        };
-        return deferred.promise;
+        if (provider == 'digitalocean') {
+          return digitalOceanService.$get(uuid).then(function(response){
+            self.setDescription(response);
+            return response;
+          })
+        } else if (provider == 'openstack') {
+          return servicesService.$get(uuid).then(function(response){
+            self.setDescription(response);
+            return response;
+          })
+        }
       },
 
       flattenList: function(items) {
@@ -64,10 +65,10 @@
 
       setDescription: function(service) {
         if (service.url.indexOf('digitalocean') > -1) {
-          service.provider = 'DigitalOcean';
+          service.provider = 'digitalocean';
           service.icon = '/static/images/icons/icon_digitalocean_small.png';
         } else if (service.url.indexOf('cloud') > -1) {
-          service.provider = 'OpenStack';
+          service.provider = 'openstack';
           service.icon = '/static/images/icons/icon_openstack_small.png';
         }
       }

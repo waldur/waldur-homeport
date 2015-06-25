@@ -20,12 +20,7 @@
     var ServiceClass = baseServiceClass.extend({
       getList: function(service) {
         if (service.url.indexOf('digitalocean') > -1) {
-          var deferred = $q.defer();
-          for (var i = 0; i < service.projects.length; i++) {
-            service.projects[i].project_name = service.projects[i].name;
-          };
-          deferred.resolve(service.projects);
-          return deferred.promise;
+          return digitalOceanServiceProjectLinkService.getList();
         } else {
           return projectCloudMembershipsService.getList({cloud: service.uuid});
         }

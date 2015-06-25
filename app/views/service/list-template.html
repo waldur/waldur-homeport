@@ -90,7 +90,7 @@
                     </div>
                 <div class="name">
                     <h3 class="item-title">
-                        <a ui-sref="services.details({uuid: service.uuid})" stoppropagation>{{ service.name }}</a>
+                        <a ui-sref="services.details({uuid: service.uuid, provider: service.provider})" stoppropagation>{{ service.name }}</a>
                     </h3>
                 </div>
                 <div class="additional-cell" ng-hide="collapsedItem">

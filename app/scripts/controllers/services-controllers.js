@@ -174,7 +174,7 @@
       },
       activate:function() {
         var vm = this;
-        joinService.$get($stateParams.uuid).then(function(response) {
+        joinService.$get($stateParams.provider, $stateParams.uuid).then(function(response) {
           vm.service = response;
         });
       },
@@ -222,7 +222,7 @@
       },
       activate: function() {
         var vm = this;
-        joinService.$get($stateParams.uuid).then(function(response) {
+        joinService.$get($stateParams.provider, $stateParams.uuid).then(function(response) {
           vm.service = response;
           vm.getServiceProjects();
         });
