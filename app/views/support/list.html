@@ -3,7 +3,7 @@
     <div class="white-box">
         <ul class="sort-list">
             <li class="title">
-                <h2 class="app-title">Organization support</h2>
+                <h2 class="app-title">Support</h2>
             </li>
             <pagesize pages-list="IssueList" pages-service="IssueList.service"/></pagesize>
             <li class="search divid">
@@ -28,7 +28,7 @@
                     ng-class="{'opened': openIssue}"
                     ng-click="openIssue=!openIssue; IssueList.showMore(issue)">
                     <div class="status">
-                        <div class="status-circle" class="green"></div>
+                        <div class="status-circle" ng-class="{'green': issue.resolution}"></div>
                     </div>
                     <div class="avatar">
                         <span class="avatar">
@@ -45,9 +45,7 @@
                     </div>
                     <div class="actions">
                         <div class="actions-button">
-                            <a class="button reopen"
-                                ng-show="$index != 0"
-                                stoppropagation></a>
+                            <a class="button reopen" stoppropagation ng-click="IssueList.getCommentsForIssue(issue.key)"></a>
                         </div>
                     </div>
                 </div>
