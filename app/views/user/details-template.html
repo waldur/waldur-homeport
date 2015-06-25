@@ -6,7 +6,9 @@
     </section>
     <section class="content">
         <h2 class="app-title">{{ UserDetailUpdate.model.full_name }}</h2>
-        <span>({{ UserDetailUpdate.model.username }})</span>
+        <span ng-if="!UserDetailUpdate.model.full_name || UserDetailUpdate.model.full_name === ''">
+            ({{ UserDetailUpdate.model.username }})
+        </span>
         <div>
             <a href="mailto:{{ UserDetailUpdate.model.email }}">{{ UserDetailUpdate.model.email }}</a>
         </div>

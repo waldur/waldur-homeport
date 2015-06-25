@@ -16,7 +16,12 @@ angular
     'ngAnimate',
     'pascalprecht.translate',
     'angular-cron-jobs',
-    'flash'])
+    'flash',
+    'chart.js',
+    'angulartics',
+    'angulartics.google.analytics',
+    'ngFileUpload'
+  ])
   // urls
   .config(function($stateProvider, $urlRouterProvider) {
     var initialDataState = 'initialdata.view',
@@ -136,6 +141,27 @@ angular
           },
           'appContent@import' : {
             templateUrl: 'views/import/import.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        }
+      })
+
+      .state('compare', {
+        url: '/compare/',
+        templateUrl: 'views/partials/base.html',
+        abstract: true
+      })
+
+      .state('compare.vms', {
+        url: '',
+        views: {
+          'appHeader@compare' : {
+            templateUrl: 'views/partials/app-header.html',
+          },
+          'appContent@compare' : {
+            templateUrl: 'views/compare/table.html',
           }
         },
         resolve: {
@@ -780,6 +806,41 @@ angular
         views: {
           'appContent': {
             templateUrl: 'views/backup-schedules/create.html',
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
+        auth: true
+      })
+      .state('statistics', {
+        url: '/statistics/',
+        abstract: true,
+        templateUrl: 'views/partials/base.html'
+      })
+      .state('statistics.projects-statistic', {
+        url: 'projects-statistic/',
+        views: {
+          'appContent': {
+            templateUrl: 'views/statistic/projects-statistic.html',
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
+        auth: true
+      })
+      .state('backups.restore', {
+        url: ':uuid/restore/',
+        views: {
+          'appContent': {
+            templateUrl: 'views/backup/restore.html',
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',

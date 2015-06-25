@@ -24,6 +24,7 @@
       filterByCustomer: true,
       customerUuid:null,
       cacheTime: 0,
+      endpointPostfix: '',
 
       init:function() {
         this.pageSize = ENV.pageSize;
@@ -102,9 +103,16 @@
         return deferred.promise;
       },
 
-      operation:function(operation, uuid) {
-        var deferred = $q.defer();
-        this.getFactory(false).operation({uuid: uuid, operation: operation}).$promise.then(function(response){
+      operation:function(operation, uuid, inputs) {
+        var deferred = $q.defer(),
+          parameters = {
+            uuid: uuid,
+            operation: operation
+          };
+        for (var inputName in inputs) {
+          parameters[inputName] = inputs[inputName];
+        }
+        this.getFactory(false).operation(parameters).$promise.then(function(response){
           deferred.resolve(response);
         }, function(err) {
           deferred.reject(err);
@@ -135,7 +143,7 @@
       },
 
       getEndpoint:function(isList) {
-        return this.endpoint;
+        return this.endpoint + this.endpointPostfix;
       },
 
       // helper, that adds functions to promise

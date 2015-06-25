@@ -1,0 +1,48 @@
+.help-icon {
+    @include inline-middle;
+    cursor: pointer;
+    position: relative;
+    top: -1px;
+    &:before {
+        @include icon-fa;
+        content: '\f059';
+    } // &:before
+    span {
+        display: none;
+        position: absolute;
+        min-width: 100px;
+        max-width: 200px;
+        padding: 10px;
+        border-radius: 2px;
+        text-align: center;
+        @include property(font-size, $extra-small-font);
+        line-height: 1;
+        background-color: rgba(0, 0, 0, 0.8);
+        color: white;
+        &.active {
+            display: block;
+        } // &.active
+        .decor {
+            display: block;
+            position: absolute;
+            width: 12px;
+            height: 5px;
+            bottom: -5px;
+            left: 50%;
+            margin-left: calc(-8px / 2);
+            z-index: 12;
+            overflow: hidden;
+            &:after {
+                position: absolute;
+                display: block;
+                bottom: 3px;
+                left: 0;
+                content: '';
+                background-color: rgba(0, 0, 0, 0.8);
+                width: 8px;
+                height: 8px;
+                transform: rotate(45deg);
+            } // &:after
+        } // .decor
+    } // span
+} // help-icon

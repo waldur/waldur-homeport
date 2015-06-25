@@ -17,29 +17,28 @@
     <section class="short-form">
         <div class="form-row">
             <div class="col label">
-                <label for="">Name</label>
+                <label for="">Name :</label>
             </div>
-            <div class="col input">
-                <input type="text" placeholder="Test VM" ng-model="ResourceAdd.resource.name">
+            <div class="col input input-full">
+                <input type="text" ng-model="ResourceAdd.resource.name">
                 <div class="error arrow-up" ng-show="ResourceAdd.errors.name">
                     <ul class="error-list">
                         <li ng-repeat="error in ResourceAdd.errors.name">{{ error }}</li>
                     </ul>
                 </div>
             </div>
-            <div class="col description">
-                <article class="light-description">
-                    Human-friendly label
-                </article>
-            </div>
         </div>
         <div class="form-row">
             <div class="col label">
-                <label for="">Project</label>
+                <label for="">
+                    <helpicon help-text="The project where provisioned resource will be used."></helpicon>
+                    Project:
+                </label>
             </div>
-            <div class="col input">
-                <div class="custom-select project inline-elem">
-                    <select ng-model="ResourceAdd.selectedProject"
+            <div class="col input input-full">
+                <div class="custom-select project inline-elem full">
+                    <select class="full"
+                        ng-model="ResourceAdd.selectedProject"
                         ng-options="project as project.name for project in ResourceAdd.projectList"
                         ng-change="ResourceAdd.setProject(ResourceAdd.selectedProject)">
                         <option value="">Choose project</option>
@@ -50,11 +49,6 @@
                         <li ng-repeat="error in ResourceAdd.errors.project">{{ error }}</li>
                     </ul>
                 </div>
-            </div>
-            <div class="col description">
-                <article class="light-description">
-                    Resources are assigned to projects
-                </article>
             </div>
         </div>
 
@@ -189,10 +183,10 @@
 
     <div class="decision">
         <div class="col">
-            <a class="button-cancel" ng-click="ResourceAdd.cancel()">Cancel</a>
+            <a class="button-apply" ng-click="ResourceAdd.save()">Add resource</a>
         </div>
         <div class="col">
-            <a class="button-apply" ng-click="ResourceAdd.save()">Add resource</a>
+            <a class="button-cancel" ng-click="ResourceAdd.cancel()">Cancel</a>
         </div>
     </div>
 </div>
