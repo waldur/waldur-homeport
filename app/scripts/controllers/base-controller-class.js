@@ -238,6 +238,7 @@
         var vm = this;
         vm.service.$get($stateParams.uuid).then(function(response) {
           vm.model = response;
+          vm.afterActivate();
         });
       },
       remove:function() {
@@ -253,7 +254,8 @@
           );
         }
       },
-      afterUpdate:function() {}
+      afterUpdate:function() {},
+      afterActivate: function() {}
     });
 
     return ControllerDetailUpdateClass;

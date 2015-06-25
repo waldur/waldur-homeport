@@ -19,7 +19,8 @@ angular
     'flash',
     'chart.js',
     'angulartics',
-    'angulartics.google.analytics'
+    'angulartics.google.analytics',
+    'ngFileUpload'
   ])
   // urls
   .config(function($stateProvider, $urlRouterProvider) {

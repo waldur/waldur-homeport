@@ -260,6 +260,11 @@ module.exports = function(grunt) {
                     },
                     {
                       expand: true,
+                      cwd: 'bower_components/ng-file-upload/',
+                      src: ['ng-file-upload.js'],
+                      dest: 'app/static/js/angular',
+                      filter: 'isFile'
+                    },
                       cwd: 'bower_components/angular-chart.js/dist',
                       src: ['angular-chart.js'],
                       dest: 'app/static/js/angular/',
