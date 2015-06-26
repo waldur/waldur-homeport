@@ -101,6 +101,8 @@
           promises.push(promise);
         };
 
+        self.flashMessage('success', 'Wait while importing droplets');
+
         $q.all(promises).then(function(response){
           $state.go('projects.details', {uuid: project_uuid, tab: 'resources'});
         }, function(){

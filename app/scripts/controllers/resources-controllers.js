@@ -35,18 +35,18 @@
       },
       stopResource:function(resource) {
         var vm = this;
-        vm.service.stopResource(resource.uuid).then(
-          vm.reInitResource.bind(null, resource), vm.handleActionException);
+        vm.service.stopResource(resource).then(
+          vm.reInitResource.bind(vm, resource), vm.handleActionException);
       },
       startResource:function(resource) {
         var vm = this;
-        vm.service.startResource(resource.uuid).then(
-          vm.reInitResource.bind(null, resource), vm.handleActionException);
+        vm.service.startResource(resource).then(
+          vm.reInitResource.bind(vm, resource), vm.handleActionException);
       },
       restartResource:function(resource) {
         var vm = this;
-        vm.service.restartResource(resource.uuid).then(
-          vm.reInitResource.bind(null, resource), vm.handleActionException);
+        vm.service.restartResource(resource).then(
+          vm.reInitResource.bind(vm, resource), vm.handleActionException);
       },
       isOperationAvailable:function(operation, resource) {
         var availableOperations = this.service.getAvailableOperations(resource);
@@ -55,7 +55,7 @@
       },
       reInitResource:function(resource) {
         var vm = this;
-        vm.service.$get(resource.uuid).then(function(response) {
+        vm.service.$get(resource).then(function(response) {
           var index = vm.list.indexOf(resource);
           vm.list[index] = response;
         });
@@ -66,13 +66,13 @@
   }
 
   angular.module('ncsaas')
-    .controller('ResourceListController', ['baseResourceListController', 'resourcesService', ResourceListController]);
+    .controller('ResourceListController', ['baseResourceListController', 'joinResourcesService', ResourceListController]);
 
-  function ResourceListController(baseResourceListController, resourcesService) {
+  function ResourceListController(baseResourceListController, joinResourcesService) {
     var controllerScope = this;
     var ResourceController = baseResourceListController.extend({
       init:function() {
-        this.service = resourcesService;
+        this.service = joinResourcesService;
         this.controllerScope = controllerScope;
         this._super();
       }

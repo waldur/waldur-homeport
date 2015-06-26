@@ -19,6 +19,25 @@
     var ServiceClass = baseServiceClass.extend({
       providers: [resourcesService, digitalOceanResourcesService],
 
+      init: function() {
+        this._super();
+        this.stopResource = this.doOperation.bind(this, 'stop');
+        this.startResource = this.doOperation.bind(this, 'start');
+        this.restartResource = this.doOperation.bind(this, 'restart');
+      },
+
+      getProvider: function(resource) {
+        var provider = resourcesService;
+        if (resource.url.indexOf('digitalocean') > -1) {
+          provider = digitalOceanResourcesService;
+        }
+        return provider;
+      },
+
+      $get: function(resource) {
+        return this.getProvider(resource).$get(resource.uuid);
+      },
+
       getList: function(filter) {
         var self = this;
         var promises = [];
@@ -44,11 +63,15 @@
         return result;
       },
 
-      getAvailableOperations:function(resource) {
+      getAvailableOperations: function(resource) {
         var state = resource.state.toLowerCase();
         if (state === 'online') {return ['stop', 'restart'];}
         if (state === 'offline') {return ['start', 'delete'];}
         return [];
+      },
+
+      doOperation: function(operation, resource) {
+        return this.getProvider(resource).operation(operation, resource.uuid);
       }
     });
     return new ServiceClass();
