@@ -41,6 +41,11 @@
                     </div>
                     <!-- /Select service -->
                 </div>
+                <div class="col full" ng-show="ImportResource.noResources">
+                    <h2 class="app-title">
+                        There are no resources available for import in this service.
+                    </h2>
+                </div>
                 <div class="col full" ng-show="ImportResource.resources.length">
                     <h3 class="app-title">Select resources</h3>
                     <ul class="object-list">
@@ -48,7 +53,7 @@
                             ng-repeat="resource in ImportResource.resources">
                             <div class="list-item pointer">
                                 <div class="checkbox" stoppropagation>
-                                    <input type="checkbox" ng-checked="resource.checked">
+                                    <input type="checkbox" ng-checked="resource.checked" ng-click="ImportResource.toggleResource(resource)">
                                 </div>
                                 <div class="name">
                                     <h3 class="item-title">

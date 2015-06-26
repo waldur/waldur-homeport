@@ -7,17 +7,23 @@
       'digitalOceanLinkService',
       'joinService',
       'joinServiceProjectLinkService',
+      '$state',
+      '$q',
       ImportResourceController]);
 
   function ImportResourceController(
     baseControllerClass,
     digitalOceanLinkService,
     joinService,
-    joinServiceProjectLinkService
+    joinServiceProjectLinkService,
+    $state,
+    $q
     ) {
     var controllerScope = this;
     var Controller = baseControllerClass.extend({
       selectedResources: [],
+      resources: [],
+      noResources: false,
 
       init: function() {
         this.controllerScope = controllerScope;
@@ -52,9 +58,11 @@
       getResourcesForService: function(service) {
         var self = this;
         controllerScope.resources = [];
+        controllerScope.noResources = false;
         digitalOceanLinkService.getList({uuid: service.uuid}).then(function(response){
           controllerScope.resources = response;
         }, function(){
+          controllerScope.noResources = true;
           self.flashMessage('warning', 'Unable to get list of resources for service');
         });
       },
@@ -77,18 +85,27 @@
       },
 
       save: function() {
+        var self = this;
         var service_uuid = controllerScope.selectedService.uuid;
         var project_url = controllerScope.selectedProject.url;
         var project_uuid = controllerScope.selectedProject.uuid;
 
-        angular.forEach(controllerScope.selectedResources, function(droplet){
-          digitalOceanLinkService.add({
+        var promises = [];
+        for (var i = 0; i < controllerScope.selectedResources.length; i++) {
+          var droplet = controllerScope.selectedResources[i];
+          var promise = digitalOceanLinkService.add({
             service_uuid: service_uuid,
             project_url: project_url,
             droplet_id: droplet.id
           });
+          promises.push(promise);
+        };
+
+        $q.all(promises).then(function(response){
+          $state.go('projects.details', {uuid: project_uuid, tab: 'resources'});
+        }, function(){
+          self.flashMessage('warning', 'Unable to import droplets');
         })
-        $state.go('projects.details', {uuid: project_uuid, tab: 'resources'});
       }
     });
     controllerScope.__proto__ = new Controller();
