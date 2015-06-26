@@ -62,7 +62,7 @@
             <div class="col label">
                 <label for="serviceName">Service name:</label>
             </div>
-            <div class="col input">
+            <div class="col input input-full">
                 <input type="text" placeholder="Service Testbed" ng-model="ServiceAdd.instance.name" id="serviceName">
                 <div class="error arrow-up" ng-show="ServiceAdd.errors.name">
                     <ul class="error-list">
@@ -73,14 +73,11 @@
         </div>
         <div class="form-row" ng-show="ServiceAdd.selectedService.id == 'openstack'">
             <div class="col label">
-                <label for="authUrl"><helpicon help-text="Service Auth URL"></helpicon> Auth URL:</label>
-            </div>
-            <div class="col input">
-                <input type="text" placeholder="http://keystone.example.com:5000/v2.0"
-                       ng-model="ServiceAdd.instance.auth_url" ng-disabled="ServiceAdd.instance.dummy" id="authUrl">
+                <label for="authUrl"><helpicon help-text="Service Auth URL"></helpicon>  Auth URL:</label>
             </div>
             <div class="col input input-full">
-                <input type="text" class="with-help"
+                <input type="text" class="with-help" id="authUrl"
+                       placeholder="http://keystone.example.com:5000/v2.0"
                        ng-model="ServiceAdd.instance.auth_url" ng-disabled="ServiceAdd.instance.dummy">
                 <div class="error arrow-up" ng-show="ServiceAdd.errors.auth_url">
                     <ul class="error-list">
@@ -91,20 +88,15 @@
         </div>
         <div class="form-row" ng-show="ServiceAdd.selectedService.id == 'digitalocean'">
             <div class="col label">
-                <label for="token">Auth token:</label>
+                <label for="token"><helpicon help-text="It is used for authentication instead of a password"></helpicon> Auth token:</label>
             </div>
-            <div class="col input">
+            <div class="col input input-full">
                 <input type="text" ng-model="ServiceAdd.instance.token" id="token">
                 <div class="error arrow-up" ng-show="ServiceAdd.errors.token">
                     <ul class="error-list">
                         <li ng-repeat="error in ServiceAdd.errors.token">{{ error }}</li>
                     </ul>
                 </div>
-            </div>
-            <div class="col description">
-                <article class="light-description">
-                     It is used for authentication instead of a password
-                </article>
             </div>
         </div>
     </section>
