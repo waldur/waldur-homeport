@@ -748,10 +748,26 @@ angular
         auth: true
       })
 
-      .state('pageNotFound', {
-        url: '/error/404/',
-        templateUrl: 'views/404.html',
-        auth: false
+      .state('errorPage', {
+        url: '/error/',
+        templateUrl: 'views/partials/base.html',
+        abstract: true,
+      })
+
+      .state('errorPage.notFound', {
+        url: '404/',
+        views: {
+          'appContent': {
+            templateUrl: 'views/404.html',
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
+        auth: true
       })
 
       .state('backups', {
