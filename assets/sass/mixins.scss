@@ -5,12 +5,6 @@
     transition-timing-function: $timing;
 }
 
-// fonts
-@mixin remany($property, $value) {
-    font-size: $property + px;
-    font-size: rem($value);
-}
-
 // lists
 @mixin clear-list {
     margin: 0;
