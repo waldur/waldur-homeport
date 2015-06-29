@@ -506,7 +506,19 @@ angular
         url: ':uuid/edit/',
         views: {
           'appContent': {
-            templateUrl: 'views/customer/update.html',
+            templateUrl: 'views/customer/details.html',
+          },
+          'tabResources@organizations.details': {
+            templateUrl: 'views/customer/tab-resources.html',
+          },
+          'tabProjects@organizations.details': {
+            templateUrl: 'views/customer/tab-projects.html',
+          },
+          'tabServices@organizations.details': {
+            templateUrl: 'views/customer/tab-services.html',
+          },
+          'listTemplate@organizations.details' : {
+            templateUrl: 'views/service/list-template.html'
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',
