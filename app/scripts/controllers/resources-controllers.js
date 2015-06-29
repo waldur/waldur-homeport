@@ -217,3 +217,24 @@
     controllerScope.__proto__ = new Controller();
   }
 })();
+
+(function() {
+  angular.module('ncsaas')
+    .controller('ResourceBackupListTabController', [
+        '$stateParams',
+        'BaseBackupListController',
+        ResourceBackupListTabController
+      ]);
+
+    function ResourceBackupListTabController($stateParams, BaseBackupListController) {
+        var controllerScope = this;
+        var Controller = BaseBackupListController.extend({
+            getList: function(filter) {
+              this.service.defaultFilter.resource_uuid = $stateParams.uuid;
+              this._super(filter);
+            }
+        });
+
+      controllerScope.__proto__ = new Controller();
+  }
+})();
