@@ -15,7 +15,6 @@
             <li class="title">
                 <h2 class="app-title">Backups</h2>
             </li>
-            <pagesize pages-list="BackupList" pages-service="BackupList.service"></pagesize>
             <li class="search divid">
                 <div class="search-box">
                     <input type="text" ng-model='BackupList.searchInput' ng-change="BackupList.search()">
@@ -118,7 +117,5 @@
         </ul>
     </div>
 
-    <div class="pagination" ng-show="BackupList.list.length > 0 || BackupList.searchInput">
-        <pagination pages-list="BackupList" pages-service="BackupList.service"></pagination>
-    </div>
+    <pagination pages-list="BackupList" pages-service="BackupList.service"></pagination>
 </div>

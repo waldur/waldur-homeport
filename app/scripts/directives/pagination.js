@@ -3,9 +3,9 @@
 (function() {
 
   angular.module('ncsaas')
-    .directive('pagination', ['$state', pagination]);
+    .directive('pagination', ['$state', 'ENV', pagination]);
 
-  function pagination($state) {
+  function pagination($state, ENV) {
     return {
       restrict: 'E',
       templateUrl: "views/directives/pagination.html",
@@ -19,10 +19,24 @@
         var pagesController = $scope.pagesList,
           pagesService = $scope.pagesService;
         $scope.pagesHref = $scope.pagesHref || $state.href($state.current.name, $state.params, {absolute: true});
+
+        pagesController.pageSizes = pagesController.pageSizes || ENV.pageSizes;
         pagesController.currentPageSize = pagesController.currentPageSize || pagesService.pageSize;
+        pagesController.changePageSize = changePageSize;
         pagesController.currentPage = pagesController.currentPage || pagesService.page;
         pagesController.changePage = changePage;
         pagesController.getNumber = getNumber;
+
+        function changePageSize(pageSize) {
+          pagesController.currentPageSize = pageSize;
+          pagesController.currentPage = 1;
+          pagesService.page = 1;
+          pagesService.pageSize = pageSize;
+          pagesService.getList().then(function(response) {
+            pagesController.pages = pagesService.pages;
+            pagesController.list = response;
+          });
+        }
 
         function changePage(page) {
           pagesController.currentPage = page;

@@ -1,16 +1,24 @@
-<div class="pagination">
-    <ul ng-show="pagesList.service.pages">
-        <li>
-            <a href="{{pagesHref}}"
-              ng-class="{'disabled': pagesList.currentPage === 1}"
-              ng-click="pagesList.changePage(1)">First</a>
-            <a href="{{pagesHref}}" ng-repeat="pageNumber in  pagesList.getNumber(pagesList.service.pages, pagesList.currentPage)"
-               ng-class="{current: (pageNumber) === pagesList.currentPage}"
-               ng-click="pagesList.changePage(pageNumber)">{{pageNumber}}</a>
-            <a href="{{pagesHref}}"
-              ng-class="{'disabled': pagesList.currentPage == pagesList.service.pages}"
-              ng-click="pagesList.changePage(pagesList.service.pages)">Last</a>
-        </li>
+<div class="white-box pagination" style="padding-bottom: 45px" ng-show="pagesList.service.resultCount > 5">
+    <div class="column">Showing {{ pagesList.service.sliceStart }}-{{ pagesList.service.sliceEnd }} of {{ pagesList.service.resultCount }}</div>
 
-    </ul>
+    <div class="body">
+      <div ng-show="pagesList.service.pages">
+          <a href="{{pagesHref}}"
+            ng-class="{'disabled': pagesList.currentPage === 1}"
+            ng-click="pagesList.changePage(1)">First</a>
+          <a href="{{pagesHref}}" ng-repeat="pageNumber in  pagesList.getNumber(pagesList.service.pages, pagesList.currentPage)"
+             ng-class="{current: (pageNumber) === pagesList.currentPage}"
+             ng-click="pagesList.changePage(pageNumber)">{{pageNumber}}</a>
+          <a href="{{pagesHref}}"
+            ng-class="{'disabled': pagesList.currentPage == pagesList.service.pages}"
+            ng-click="pagesList.changePage(pagesList.service.pages)">Last</a>
+      </div>
+    </div>
+
+    <div class="column">Entries per page:
+        <a href="{{pagesHref}}" class="page-size"
+           ng-repeat="pageSize in pagesList.pageSizes"
+           ng-click="pagesList.changePageSize(pageSize)"
+           ng-class="{active: pageSize === pagesList.currentPageSize}">{{pageSize}}</a>
+    </div>
 </div>

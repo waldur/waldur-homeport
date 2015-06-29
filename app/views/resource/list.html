@@ -5,7 +5,6 @@
         <li class="title">
             <h2 class="app-title">Resources</h2>
         </li>
-        <pagesize pages-href="#/resources/" pages-list="ResourceList" pages-service="ResourceList.service"></pagesize>
         <li class="search divid">
             <div class="search-box">
                 <input type="text" ng-model='ResourceList.searchInput' ng-change="ResourceList.search()">
@@ -178,9 +177,6 @@
     </ul>
 </div>
 
-<div class="pagination">
-    <pagination pages-href="#/resources/"
-        pages-list="ResourceList" pages-service="ResourceList.service"></pagination>
-</div>
 
+<pagination pages-list="ResourceList" pages-service="ResourceList.service"></pagination>
 </div>

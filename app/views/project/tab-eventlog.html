@@ -1,7 +1,6 @@
 <div ng-controller="ProjectEventTabController as EventList">
     <div class="white-box">
         <ul class="sort-list">
-            <pagesize pages-list="EventList" pages-service="EventList.service"></pagesize>
             <li class="search divid">
                 <div class="search-box">
                     <input type="text" ng-model='EventList.searchInput' ng-change="EventList.search()">
@@ -29,7 +28,5 @@
         </ul>
     </div>
 
-    <div class="pagination">
-        <pagination pages-list="EventList" pages-service="EventList.service"></pagination>
-    </div>
+    <pagination pages-list="EventList" pages-service="EventList.service"></pagination>
 </div>
