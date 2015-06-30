@@ -66,13 +66,13 @@
   }
 
   angular.module('ncsaas')
-    .controller('ResourceListController', ['baseResourceListController', 'joinResourcesService', ResourceListController]);
+    .controller('ResourceListController', ['baseResourceListController', 'resourcesService', ResourceListController]);
 
-  function ResourceListController(baseResourceListController, joinResourcesService) {
+  function ResourceListController(baseResourceListController, resourcesService) {
     var controllerScope = this;
     var ResourceController = baseResourceListController.extend({
       init:function() {
-        this.service = joinResourcesService;
+        this.service = resourcesService;
         this.controllerScope = controllerScope;
         this._super();
       }
