@@ -58,11 +58,21 @@
       'usersService',
       'Flash',
       'ENV',
+      '$state',
+      '$stateParams',
       CustomerDetailUpdateController
     ]);
 
-  function CustomerDetailUpdateController(baseControllerDetailUpdateClass,
-    customersService, customerImageService, usersService, Flash, ENV) {
+  function CustomerDetailUpdateController(
+    baseControllerDetailUpdateClass,
+    customersService,
+    customerImageService,
+    usersService,
+    Flash,
+    ENV,
+    $state,
+    $stateParams
+    ) {
     var controllerScope = this;
     var CustomerController = baseControllerDetailUpdateClass.extend({
       activeTab: 'resources',
@@ -119,6 +129,14 @@
         }, function (response) {
           Flash.create('warning', 'Unable to delete image');
         });
+      },
+
+      cancel: function() {
+        $state.go(this.detailsState, {uuid: $stateParams.uuid});
+      },
+
+      afterUpdate: function() {
+        this.successFlash('Customer is updated');
       }
     });
 

@@ -1,0 +1,76 @@
+<div ng-controller="CustomerDetailUpdateController as CustomerUpdate">
+
+    <div class="white-box">
+        <ul class="sort-list">
+            <li class="title">
+                <h2 class="app-title">Edit organization</h2>
+            </li>
+        </ul>
+    </div>
+
+    <div class="white-box">
+        <section class="short-form">
+            <div class="form-row">
+                <div class="col label">
+                    <label for="name">Organization name:</label>
+                </div>
+                <div class="col input input-full">
+                    <input type="text" id="name" ng-model="CustomerUpdate.model.name">
+                    <div class="error arrow-up" ng-show="CustomerUpdate.errors.name">
+                        <ul class="error-list">
+                            <li ng-repeat="error in CustomerUpdate.errors.name">{{ error }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col label">
+                    <label for="native_name">Native name:</label>
+                </div>
+                <div class="col input input-full">
+                    <input type="text" id="native_name" ng-model="CustomerUpdate.model.native_name">
+                    <div class="error arrow-up" ng-show="CustomerUpdate.errors.native_name">
+                        <ul class="error-list">
+                            <li ng-repeat="error in CustomerUpdate.errors.native_name">{{ error }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col label">
+                    <label for="abbreviation">Abbreviation:</label>
+                </div>
+                <div class="col input input-full">
+                    <input type="text" id="abbreviation" ng-model="CustomerUpdate.model.abbreviation">
+                    <div class="error arrow-up" ng-show="CustomerUpdate.errors.abbreviation">
+                        <ul class="error-list">
+                            <li ng-repeat="error in CustomerUpdate.errors.abbreviation">{{ error }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col label">
+                    <label for="contact_details">Contact details:</label>
+                </div>
+                <div class="col input input-full">
+                    <input type="text" id="contact_details" ng-model="CustomerUpdate.model.contact_details">
+                    <div class="error arrow-up" ng-show="CustomerUpdate.errors.contact_details">
+                        <ul class="error-list">
+                            <li ng-repeat="error in CustomerUpdate.errors.contact_details">{{ error }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="decision">
+            <div class="col">
+                <a class="button-cancel" ng-click="CustomerUpdate.cancel()">Cancel</a>
+            </div>
+            <div class="col">
+                <a class="button-apply" ng-click="CustomerUpdate.update()">Save</a>
+            </div>
+        </div>
+    </div>
+</div>
