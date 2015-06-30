@@ -195,12 +195,13 @@
   angular.module('ncsaas')
       .controller('ResourceDetailUpdateController', [
         '$stateParams',
+        '$scope',
         'resourcesService',
         'baseControllerDetailUpdateClass',
         ResourceDetailUpdateController
       ]);
 
-  function ResourceDetailUpdateController($stateParams, resourcesService, baseControllerDetailUpdateClass) {
+  function ResourceDetailUpdateController($stateParams, $scope, resourcesService, baseControllerDetailUpdateClass) {
     var controllerScope = this;
     var Controller = baseControllerDetailUpdateClass.extend({
       activeTab: 'backups',
@@ -211,6 +212,10 @@
         this._super();
         this.detailsState = 'resources.details';
         this.activeTab = $stateParams.tab ? $stateParams.tab : this.activeTab;
+      },
+
+      afterActivate: function() {
+        $scope.$broadcast('resourceLoaded', this.model);
       }
     });
 
@@ -221,18 +226,22 @@
 (function() {
   angular.module('ncsaas')
     .controller('ResourceBackupListTabController', [
-        '$stateParams',
+        '$scope',
         'BaseBackupListController',
         ResourceBackupListTabController
       ]);
 
-    function ResourceBackupListTabController($stateParams, BaseBackupListController) {
+    function ResourceBackupListTabController($scope, BaseBackupListController) {
         var controllerScope = this;
         var Controller = BaseBackupListController.extend({
-            getList: function(filter) {
-              this.service.defaultFilter.resource_uuid = $stateParams.uuid;
-              this._super(filter);
-            }
+          getList: function(filter) {
+            var vm = this;
+            var fn = this._super;
+            $scope.$on('resourceLoaded', function(event, resource){
+              vm.service.defaultFilter.backup_source = resource.url;
+              fn.apply(vm, filter);
+            })
+          }
         });
 
       controllerScope.__proto__ = new Controller();
