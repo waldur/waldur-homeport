@@ -5,10 +5,10 @@
     </li>
 </ul>
 
-<sectin class="tabs-content" ng-switch="ResourceDetailUpdate.activeTab">
+<section class="tabs-content" ng-switch="ResourceDetailUpdate.activeTab">
     <div class="tab" id="backups"
          ng-class="{'tab-active':ResourceDetailUpdate.activeTab === 'backups'}"
          ng-switch-when="backups">
         <div ui-view="tabBackups"></div>
     </div>
-</sectin>
+</section>
