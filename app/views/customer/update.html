@@ -12,9 +12,9 @@
         <section class="short-form">
             <div class="form-row">
                 <div class="col label">
-                    <label for="name">Organization name:</label>
+                    <label for="name">Organization name</label>
                 </div>
-                <div class="col input input-full">
+                <div class="col input">
                     <input type="text" id="name" ng-model="CustomerUpdate.model.name">
                     <div class="error arrow-up" ng-show="CustomerUpdate.errors.name">
                         <ul class="error-list">
@@ -25,36 +25,23 @@
             </div>
             <div class="form-row">
                 <div class="col label">
-                    <label for="native_name">Native name:</label>
+                    <label for="registration_code">Registration code</label>
                 </div>
-                <div class="col input input-full">
-                    <input type="text" id="native_name" ng-model="CustomerUpdate.model.native_name">
-                    <div class="error arrow-up" ng-show="CustomerUpdate.errors.native_name">
+                <div class="col input">
+                    <input type="text" id="registration_code" ng-model="CustomerUpdate.model.registration_code">
+                    <div class="error arrow-up" ng-show="CustomerUpdate.errors.registration_code">
                         <ul class="error-list">
-                            <li ng-repeat="error in CustomerUpdate.errors.native_name">{{ error }}</li>
+                            <li ng-repeat="error in CustomerUpdate.errors.registration_code">{{ error }}</li>
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="form-row">
                 <div class="col label">
-                    <label for="abbreviation">Abbreviation:</label>
+                    <label for="contact_details">Contact details</label>
                 </div>
-                <div class="col input input-full">
-                    <input type="text" id="abbreviation" ng-model="CustomerUpdate.model.abbreviation">
-                    <div class="error arrow-up" ng-show="CustomerUpdate.errors.abbreviation">
-                        <ul class="error-list">
-                            <li ng-repeat="error in CustomerUpdate.errors.abbreviation">{{ error }}</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="col label">
-                    <label for="contact_details">Contact details:</label>
-                </div>
-                <div class="col input input-full">
-                    <input type="text" id="contact_details" ng-model="CustomerUpdate.model.contact_details">
+                <div class="col input">
+                    <textarea id="contact_details" ng-model="CustomerUpdate.model.contact_details"></textarea>
                     <div class="error arrow-up" ng-show="CustomerUpdate.errors.contact_details">
                         <ul class="error-list">
                             <li ng-repeat="error in CustomerUpdate.errors.contact_details">{{ error }}</li>
