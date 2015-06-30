@@ -58,7 +58,7 @@
         <li ng-repeat="resource in ResourceList.list">
             <div class="list-item resources on-desktop">
                 <div class="name">
-                    <h3 class="item-title">{{ resource.name }}</h3>
+                    <h3 class="item-title"><a ui-sref="resources.details({uuid: resource.uuid})">{{ resource.name }}</a></h3>
                     <div class="status-circle resource"
                         ng-class="{'online': resource.state == 'Online', 'offline' : resource.state == 'Offline'}"></div>
                 </div>
