@@ -108,3 +108,54 @@ Config file settings:
  listControlPanelShow:          variable for displaying action switcher panel: true to show, false to hide
  currentCustomerUuidStorageKey: key for localStorage to ged customer uuid for customer selected in top menu
  addonsList:                    additional options for virtual machine purchase on appstore page
+
+## Entity list directive
+
+ Directive is used for displaying different lists throughout project. 
+ Sample directive usage: 
+  `<entitylist entity-list="UserList"
+      entity-service="UserList.service"
+      entity-buttons="UserList.actionButtonsListItems"
+      entity-options="UserList.entityOptions"></entitylist>`
+  
+  Directive parameters:
+   1. entity-list - current controller
+   2. entity-service - service for controller
+   3. entity-buttons - action buttons for list rows (action-button directive)
+   4. entity-options - object with list of field properties. Partly described in 
+       ENTITYLISTFIELDTYPES constant. entityOptions object is defined in controller
+   entityOptions sample:
+    `this.entityOptions = {
+      entityData: {
+        title: 'Users',
+        noDataText: 'No users yet.'
+      },
+      list: [
+        {
+          type: ENTITYLISTFIELDTYPES.avatarPictureField,
+          className: 'avatar'
+        },
+        {
+          name: 'Name',  // Display name of list column
+          propertyName: 'full_name', // name of field to display in column
+          emptyText: '', // text to output if field value is empty
+          type: ENTITYLISTFIELDTYPES.link, // field type - see ENTITYLISTFIELDTYPES constant for types list
+          link: 'users.details({uuid: user.uuid})', // ui-sref attr value
+          className: 'name' // class name for field html element
+        }
+      ]
+    }`
+    Where entityOptions.list is list of fields to display,
+     entityOptions.entityData - variables to display at list header
+
+## ENTITYLISTFIELDTYPES constant (entity-list directive)
+
+ Container for different types of fields in entities lists - backups list, resources list, users list etc
+  date:                    date in days ago
+  dateCreated:             date field
+  name:                    name of entity
+  link:                    field with link
+  entityAccessInfoField:   constant for entity AccessInfo field
+  entityStatusField:       constant for entity Status field
+  avatarPictureField:      field with avatar
+  noType:                  default field type
