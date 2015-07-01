@@ -17,6 +17,11 @@
     .column {
         width: 25%;
         float: left;
+        padding-top: 6px;
+
+        &.right {
+            text-align: right;
+        }
     }
 
     .body {
