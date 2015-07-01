@@ -1,23 +1,20 @@
-<div ng-controller="BackupListController as BackupList">
-
-    <div ui-view="backupListContent"></div>
-
-    <div class="white-box no-styles" ng-show="BackupList.list.length <= 0 && !BackupList.searchInput">
-        <h2 class="app-title">
+<div class="white-box no-styles" ng-show="BackupList.list.length <= 0 && !BackupList.searchInput">
+    <h2 class="app-title">
             You have no backups yet.
         </h2>
-        <div class="decision">
+    <div class="decision">
             <div class="col">
                 <a ui-sref="backups.create" class="button">Create a backup</a>
             </div>
         </div>
-    </div>
+</div>
 
-    <div class="white-box" ng-show="BackupList.list.length > 0 || BackupList.searchInput">
+<div class="white-box" ng-show="BackupList.list.length > 0 || BackupList.searchInput">
         <ul class="sort-list">
             <li class="title">
                 <h2 class="app-title">Backups</h2>
             </li>
+            <pagesize pages-list="BackupList" pages-service="BackupList.service"></pagesize>
             <li class="search divid">
                 <div class="search-box">
                     <input type="text" ng-model='BackupList.searchInput' ng-change="BackupList.search()">
@@ -33,8 +30,8 @@
         </ul>
     </div>
 
-    <!-- view-control -->
-    <section class="view-control" ng-show="(BackupList.list.length > 0 || BackupList.searchInput) && BackupList.controlPanelShow">
+<!-- view-control -->
+<section class="view-control" ng-show="BackupList.list.length > 0 || BackupList.searchInput">
         <div class="list-item no-cursor">
             <div class="checkbox">
                 <div class="checkbox" ng-show="BackupList.showgroup">
@@ -49,9 +46,9 @@
                 <div class="view-action-buttons-mobile" ng-show="BackupList.showgroup">
                     <div class="actions-button">
                         <action-button button-list="BackupList.actionButtonsListItems"
-                                       button-controller="BackupList"
-                                       ng-show="mobileActions"
-                                       button-model="backup"></action-button>
+                                                                           button-controller="BackupList"
+                                                                           ng-show="mobileActions"
+                                                                           button-model="backup"></action-button>
                     </div>
                 </div>
             </div>
@@ -65,9 +62,9 @@
             </div>
         </div>
     </section>
-    <!-- /view-control -->
+<!-- /view-control -->
 
-    <div class="white-box" ng-show="BackupList.list.length > 0 || BackupList.searchInput">
+<div class="white-box" ng-show="BackupList.list.length > 0 || BackupList.searchInput">
         <ul class="object-list">
             <li class="list-item list-header">
                 <div class="checkbox"></div>
@@ -80,7 +77,9 @@
                 <div class="additional-cell">
                     <a href="#" class="list-sort">Kept</a>
                 </div>
-                <!--TODO add source name-->
+                <div class="additional-cell">
+                    <a href="#" class="list-sort">Source name</a>
+                </div>
                 <div class="additional-cell">
                     <a href="#" class="list-sort">Date</a>
                 </div>
@@ -88,7 +87,7 @@
             </li>
             <li ng-repeat="backup in BackupList.list">
                 <div class="list-item list pointer" ng-class="{'opened': expandItem}"
-                     ng-click="expandItem=!expandItem">
+                                       ng-click="expandItem=!expandItem">
                     <div class="checkbox">
                         <div class="checkbox" stoppropagation>
                             <input type="checkbox" ng-show="BackupList.showgroup">
@@ -105,20 +104,23 @@
                     <div class="additional-cell">
                         {{ backup.kept_until ? backup.kept_until : 'kept forever' }}
                     </div>
-                    <!--TODO add source name-->
+                    <div class="additional-cell">
+                        {{ backup.backup_source_name }}
+                    </div>
                     <div class="additional-cell">
                         <span am-time-ago="backup.created_at"></span>
                     </div>
                     <div class="actions">
                         <action-button button-list="BackupList.actionButtonsListItems"
-                                       button-controller="BackupList"
-                                       ng-show="!BackupList.showgroup"
-                                       button-model="backup"></action-button>
+                                                                           button-controller="BackupList"
+                                                                           ng-show="!BackupList.showgroup"
+                                                                           button-model="backup"></action-button>
                     </div>
                 </div>
             </li>
         </ul>
     </div>
 
-    <pagination pages-list="BackupList" pages-service="BackupList.service"></pagination>
+<div class="pagination" ng-show="BackupList.list.length > 0 || BackupList.searchInput">
+        <pagination pages-list="BackupList" pages-service="BackupList.service"></pagination>
 </div>

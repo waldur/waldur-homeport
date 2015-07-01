@@ -2,14 +2,14 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('BackupListController', [
+    .service('BaseBackupListController', [
       'backupsService',
       'baseControllerListClass',
       '$state',
-      BackupListController
+      BaseBackupListController
     ]);
 
-  function BackupListController(backupsService, baseControllerListClass, $state) {
+  function BaseBackupListController(backupsService, baseControllerListClass, $state) {
     var controllerScope = this;
     var Controller = baseControllerListClass.extend({
       init:function() {
@@ -38,8 +38,24 @@
       }
     });
 
-    controllerScope.__proto__ = new Controller();
+    return Controller;
 
+  }
+})();
+
+(function() {
+angular.module('ncsaas')
+  .controller('BackupListController', [
+      'BaseBackupListController',
+      BackupListController
+  ]);
+
+  function BackupListController(BaseBackupListController) {
+    var controllerScope = this;
+      var Controller = BaseBackupListController.extend({
+      });
+
+    controllerScope.__proto__ = new Controller();
   }
 })();
 

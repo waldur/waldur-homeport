@@ -640,6 +640,9 @@ angular
           'tabBackups@resources.details': {
             templateUrl: 'views/resource/tab-backups.html',
           },
+          'backupListContent@resources.details' : {
+            templateUrl: 'views/backup/backup-list-content.html',
+          },
           'tabs@resources.details': {
             templateUrl: 'views/resource/tabs.html',
           },
@@ -784,6 +787,9 @@ angular
         views: {
           'appContent': {
             templateUrl: 'views/backup/list.html',
+          },
+          'backupListContent@backups.list' : {
+            templateUrl: 'views/backup/backup-list-content.html',
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',
