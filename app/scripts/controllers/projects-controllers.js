@@ -267,19 +267,19 @@
     .controller('ProjectResourcesTabController', [
       '$stateParams',
       'baseResourceListController',
-      'joinResourcesService',
+      'resourcesService',
       ProjectResourcesTabController
     ]);
 
   function ProjectResourcesTabController(
     $stateParams,
     baseResourceListController,
-    joinResourcesService
+    resourcesService
     ) {
     var controllerScope = this;
     var ResourceController = baseResourceListController.extend({
       init:function() {
-        this.service = joinResourcesService;
+        this.service = resourcesService;
         this.controllerScope = controllerScope;
         this.service.defaultFilter.project = $stateParams.uuid;
         this._super();
