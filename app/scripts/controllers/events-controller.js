@@ -86,6 +86,7 @@
         this.controllerScope = controllerScope;
         this.cacheTime = ENV.dashboardEventsCacheTime;
         this._super();
+        this.activeTab = 'activity';
         this.data = {
           labels: ["January", "February", "March", "April", "May", "June", "July"],
           datasets: [

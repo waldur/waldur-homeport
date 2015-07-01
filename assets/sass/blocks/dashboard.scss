@@ -2,6 +2,12 @@
   clear: both;
 }
 .event-log {
+  h2{
+    float: left;
+    display: block;
+    margin-top: 5px;
+    margin-right: 15px;
+  }
   canvas {
     margin:0 auto;
     width: 104% !important;
@@ -16,9 +22,12 @@
   }
   color:$dashboard-black;
   .white-box {
+    min-height: 73px;
     padding: 20px 40px;
     .button-apply {
       float: right;
+      height: 33px;
+      line-height: 12px;
     }
   }
   .event-nav {
@@ -30,17 +39,22 @@
         position: relative;
         text-decoration: none;
         color:$dashboard-black;
+        border-bottom:1px dashed $dashboard-green;
       }
       &.active {
        a {
+         border-bottom-style:solid;
          &:after {
            content: "";
-           height: 1px;
-           width: 100%;
-           background: $dashboard-green;
            position: absolute;
-           bottom:-5px;
-           left: 0;
+           bottom: -6px;
+           left: 50%;
+           margin-left: -5px;
+           width: 0px;
+           height: 0px;
+           border-style: solid;
+           border-width: 6px 5px 0px;
+           border-color: $dashboard-green transparent;
          }
        }
       }
@@ -150,12 +164,14 @@
     }
   }
   .row {
+    padding-left: 45px;
+    padding-right: 45px;
     .half-block {
       width: 50%;
       float: left;
-
+      padding: 1%;
       .white-box {
-
+        margin:0 !important;
       }
       &:nth-child(2n-1) {
         .white-box {
@@ -276,6 +292,23 @@
           text-align: center;
           margin-top: 15px;
           color: $dashboard-green;
+        }
+      }
+    }
+    .quard-block{
+      width: 25%;
+      min-width: 350px;
+      .white-box{
+        margin:20px 20px;
+      }
+      &:first-child{
+        .white-box {
+          margin-left: 60px;
+        }
+      }
+      &:last-child{
+        .white-box {
+          margin-right: 60px  ;
         }
       }
     }
