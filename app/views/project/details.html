@@ -44,7 +44,7 @@
         </li>
     </ul>
 
-    <sectin class="tabs-content" ng-switch="ProjectDetailUpdate.activeTab">
+    <section class="tabs-content" ng-switch="ProjectDetailUpdate.activeTab">
         <div class="tab" id="eventlog"
             ng-class="{'tab-active': ProjectDetailUpdate.activeTab === 'eventlog'}"
             ng-switch-when="eventlog">
@@ -65,6 +65,6 @@
             ng-switch-when="services">
             <div ui-view="tabServices"></div>
         </div>
-    </sectin>
+    </section>
 
 </div>
