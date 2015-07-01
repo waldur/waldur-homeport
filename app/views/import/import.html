@@ -46,25 +46,53 @@
                         There are no resources available for import in this service.
                     </h2>
                 </div>
-                <div class="col full" ng-show="ImportResource.resources.length">
-                    <h3 class="app-title">Select resources</h3>
+                <div class="col full" ng-show="ImportResource.selectedService">
+                    <h3 class="app-title">Resources</h3>
                     <ul class="object-list">
-                        <li ng-click="ImportResource.toggleResource(resource)"
-                            ng-repeat="resource in ImportResource.resources">
-                            <div class="list-item pointer">
-                                <div class="checkbox" stoppropagation>
-                                    <input type="checkbox" ng-checked="resource.checked" ng-click="ImportResource.toggleResource(resource)">
+                        <li ng-repeat="resource in ImportResource.importedResources">
+                            <div class="list-item">
+                                <div class="checkbox">
+                                    <input type="checkbox" disabled>
                                 </div>
                                 <div class="name">
                                     <h3 class="item-title">
                                         <a>{{ resource.name }}</a>
                                     </h3>
-                                    <article class="descriptoin-light">
-                                        OS: {{ resource.kernel }} /
-                                        CPU: {{ resource.cores }}  /
-                                        RAM: {{ resource.ram }} MB /
-                                        HDD: {{ resource.disk / 1024 }} GB
-                                    </article>
+                                </div>
+                                <div class="additional-cell">
+                                    CPU: {{ resource.cores }}  /
+                                    RAM: {{ resource.ram }} MB /
+                                    HDD: {{ resource.disk / 1024 }} GB
+                                </div>
+                                <div class="additional-cell">
+                                    <span class="status">Imported to {{ resource.project_name }}</span>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li ng-click="ImportResource.toggleResource(resource)"
+                            ng-repeat="resource in ImportResource.importableResources">
+                            <div class="list-item pointer">
+                                <div class="checkbox" ng-switch="resource.status">
+                                    <input type="checkbox" ng-checked="resource.checked" ng-click="ImportResource.toggleResource(resource)" ng-switch-when="ready">
+                                    <input type="checkbox" disabled ng-switch-when="success">
+                                    <input type="checkbox" disabled ng-switch-when="progress">
+                                </div>
+                                <div class="name">
+                                    <h3 class="item-title">
+                                        <a>{{ resource.name }}</a>
+                                    </h3>
+                                </div>
+                                <div class="additional-cell">
+                                    CPU: {{ resource.cores }}  /
+                                    RAM: {{ resource.ram }} MB /
+                                    HDD: {{ resource.disk / 1024 }} GB
+                                </div>
+                                <div class="additional-cell" ng-switch="resource.status">
+                                    <span class="status online" ng-switch-when="ready">Available for import</span>
+                                    <span class="status" ng-switch-when="progress">In progress</span>
+                                    <span class="status online" ng-switch-when="success">Imported to {{ ImportResource.selectedProject.name }}</span>
+                                    <span class="status offline" ng-switch-when="failed">Failed</span>
                                 </div>
                             </div>
                         </li>
@@ -73,7 +101,7 @@
             </div>
         </div>
 
-        <div class="decision" ng-show="ImportResource.resources.length">
+        <div class="decision" ng-show="ImportResource.importableResources.length">
             <div class="col select-project">
                 <article class="descriptoin-light">
                     Selected resources will be imported into
@@ -87,7 +115,7 @@
             </div>
         </div>
 
-        <div class="decision" ng-show="ImportResource.resources.length">
+        <div class="decision" ng-show="ImportResource.importableResources.length">
             <div class="col">
                 <a class="button-apply"
                    ng-class="{'disabled': !ImportResource.canImport()}"
