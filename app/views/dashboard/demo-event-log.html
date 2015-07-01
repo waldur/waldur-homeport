@@ -9,12 +9,12 @@
                 <a ng-click="EventList.activeTab = 'costs'">Costs</a>
             </li>
         </ul>
-        <div class="button-apply"  ng-show="EventList.activeTab == 'costs'">
+        <div class="button-apply"  ng-show="EventList.activeTab == 'activity'">
             Add new project
         </div>
         <div class="clear"></div>
     </div>
-    <div ng-show="EventList.activeTab == 'activity'">
+    <div ng-show="EventList.activeTab == 'costs'">
         <div class="white-box big-chart">
             <canvas tc-chartjs chart-type="line" chart-data="EventList.data" width="1120" height="180"></canvas>
             <div class="clear"></div>
@@ -120,7 +120,7 @@
         </div>
 
     </div>
-    <div ng-show="EventList.activeTab == 'costs'">
+    <div ng-show="EventList.activeTab == 'activity'">
         <div class="row">
             <div ng-repeat="project in [0,1]" class="half-block graph">
                 <div class="white-box">
