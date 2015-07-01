@@ -4,10 +4,11 @@
 .event-log {
   canvas {
     margin:0 auto;
-    width: 100% !important;
+    width: 104% !important;
   }
   .big-chart {
     position: relative;
+    overflow: hidden;
   }
   ul {
     margin:0;
