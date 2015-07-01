@@ -3,9 +3,9 @@
 (function() {
 
   angular.module('ncsaas')
-    .directive('entitylist', ['ENV', '$state', entityList]);
+    .directive('entitylist', [entityList]);
 
-  function entityList(ENV, $state) {
+  function entityList() {
     return {
       restrict: 'E',
       templateUrl: "views/directives/entity-list.html",

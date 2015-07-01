@@ -48,9 +48,11 @@
                     <a class="button remove">
                         Remove</a>
                 </div>
-                <div class="view-action-buttons-mobile" ng-show="entityList.showgroup">
+                <div class="view-action-buttons-mobile"
+                     ng-if="!entityOptions.entityData.hideActionButtons"
+                     ng-show="entityList.showgroup">
                     <div class="actions-button">
-                        <action-button button-list="entityList.actionButtonsListItems"
+                        <action-button button-list="entityButtons"
                                        button-controller="entityList"
                                        ng-show="mobileActions"
                                        button-model="entity"></action-button>
@@ -113,11 +115,12 @@
                         <span ng-switch-default>{{ entity[field.propertyName] ? entity[field.propertyName] : field.emptyText }}</span>
 
                     </div>
-                    <div class="actions">
-                        <action-button button-list="entityButtons"
-                                       button-controller="entityList"
-                                       ng-show="!entityList.showgroup"
-                                       button-model="entity"></action-button>
+                    <div class="actions" >
+                        <action-button
+                                ng-if="!entityOptions.entityData.hideActionButtons" button-list="entityButtons"
+                                button-controller="entityList"
+                                ng-show="!entityList.showgroup"
+                                button-model="entity"></action-button>
                     </div>
                 </div>
             </li>

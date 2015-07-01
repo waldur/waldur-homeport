@@ -37,7 +37,8 @@
         this.entityOptions = {
           entityData: {
             title: 'Users',
-            noDataText: 'No users yet.'
+            noDataText: 'No users yet.',
+            hideActionButtons: true
           },
           list: [
             {
