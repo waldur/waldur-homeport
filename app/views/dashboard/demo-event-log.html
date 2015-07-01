@@ -9,9 +9,10 @@
                 <a ng-click="EventList.activeTab = 'costs'">Costs</a>
             </li>
         </ul>
-        <div class="button-apply"  ng-show="EventList.activeTab == 'activity'">
+        <div class="button-apply" ng-show="EventList.activeTab == 'activity'">
             Add new project
         </div>
+
         <div class="clear"></div>
     </div>
     <div ng-show="EventList.activeTab == 'costs'">
@@ -124,7 +125,7 @@
         <div class="row">
             <div ng-repeat="project in [0,1]" class="half-block graph">
                 <div class="white-box">
-                    <h3>Project name</h3>
+                    <h3>Project name: Public website {{ project }}</h3>
                     <ul class="counters">
                         <li class="active-alert">
                             <div class="counter-name">Active alerts</div>
@@ -132,11 +133,11 @@
                         </li>
                         <li class="resources empty">
                             <div class="counter-name">Resources</div>
-                            <div class="counter">0</div>
+                            <div class="counter">10</div>
                         </li>
                         <li class="services empty">
                             <div class="counter-name">Services</div>
-                            <div class="counter">0</div>
+                            <div class="counter">1</div>
                         </li>
                         <li class="people">
                             <div class="counter-name">People</div>
@@ -146,59 +147,18 @@
                     </ul>
                     <div class="clear"></div>
                     <div class="chart">
-                        <canvas tc-chartjs chart-type="line" chart-data="EventList.data" width="420" height="180"></canvas>
+                        <canvas tc-chartjs chart-type="line" chart-options="EventList.chartOptions" chart-data="EventList.data" width="400" height="120"></canvas>
                     </div>
                 </div>
             </div>
         </div>
         <a class="center-link" href="#">Show all projects</a>
-        <div class="row" >
-            <div ng-repeat="project in [0,1,2,3]" class="half-block quard-block graph">
-                <div class="white-box">
-                    <h3>Project name</h3>
-                    <ul class="counters">
-                        <li class="active-alert">
-                            <div class="counter-name">Active alerts</div>
-                            <div class="counter">2</div>
-                        </li>
-                        <li class="resources empty">
-                            <div class="counter-name">Resources</div>
-                            <div class="counter">0</div>
-                        </li>
-                        <li class="services empty">
-                            <div class="counter-name">Services</div>
-                            <div class="counter">0</div>
-                        </li>
-                        <li class="people">
-                            <div class="counter-name">People</div>
-                            <div class="counter">2</div>
-                        </li>
-
-                    </ul>
-                    <div class="clear"></div>
-                    <div class="chart">
-                        <canvas tc-chartjs chart-type="line" chart-data="EventList.data" width="220" height="100"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="row">
             <div class="half-block alerts-list">
                 <h3>Alerts</h3>
                 <div class="white-box">
                     <ul>
                         <li class="fail">
-                            <div class="left-p">
-                                <div class="icon"></div>
-                                <span>Critical CPU level </span>
-                            </div>
-                            <div class="right-p">
-                                <span class="date">20 June 2015</span>
-                                <span class="time">19:31</span>
-                            </div>
-                            <div class="clear"></div>
-                        </li>
-                        <li>
                             <div class="left-p">
                                 <div class="icon"></div>
                                 <span>Critical CPU level </span>
@@ -275,64 +235,58 @@
                         <li>
                             <div class="left-p">
 
-                                <span>Critical CPU level </span>
+                                <span>Project XXX was created</span>
                             </div>
                             <div class="right-p">
-                                <span class="date">20 June 2015</span>
-                                <span class="time">19:31</span>
+                                <span class="date">4 minutes ago</span>
                             </div>
                             <div class="clear"></div>
                         </li>
                         <li>
                             <div class="left-p">
 
-                                <span>Critical CPU level </span>
+                                <span>Project XXX was created</span>
                             </div>
                             <div class="right-p">
-                                <span class="date">20 June 2015</span>
-                                <span class="time">19:31</span>
+                                <span class="date">4 minutes ago</span>
                             </div>
                             <div class="clear"></div>
                         </li>
                         <li>
                             <div class="left-p">
 
-                                <span>Critical CPU level </span>
+                                <span>Project XXX was created</span>
                             </div>
                             <div class="right-p">
-                                <span class="date">20 June 2015</span>
-                                <span class="time">19:31</span>
+                                <span class="date">4 minutes ago</span>
                             </div>
                             <div class="clear"></div>
                         </li>
                         <li>
                             <div class="left-p">
 
-                                <span>Critical CPU level </span>
+                                <span>Project XXX was created</span>
                             </div>
                             <div class="right-p">
-                                <span class="date">20 June 2015</span>
-                                <span class="time">19:31</span>
+                                <span class="date">4 minutes ago</span>
                             </div>
                             <div class="clear"></div>
                         </li>
                         <li>
                             <div class="left-p">
-                                <span>Critical CPU level </span>
+                                <span>Project XXX was created</span>
                             </div>
                             <div class="right-p">
-                                <span class="date">20 June 2015</span>
-                                <span class="time">19:31</span>
+                                <span class="date">4 minutes ago</span>
                             </div>
                             <div class="clear"></div>
                         </li>
                         <li>
                             <div class="left-p">
-                                <span>Critical CPU level </span>
+                                <span>Project XXX has been created</span>
                             </div>
                             <div class="right-p">
-                                <span class="date">20 June 2015</span>
-                                <span class="time">19:31</span>
+                                <span class="date">4 minutes ago</span>
                             </div>
                             <div class="clear"></div>
                         </li>
