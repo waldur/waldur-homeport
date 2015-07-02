@@ -35,17 +35,17 @@
       },
       stopResource:function(resource) {
         var vm = this;
-        vm.service.stopResource(resource).then(
+        vm.service.stopResource(resource.uuid).then(
           vm.reInitResource.bind(vm, resource), vm.handleActionException);
       },
       startResource:function(resource) {
         var vm = this;
-        vm.service.startResource(resource).then(
+        vm.service.startResource(resource.uuid).then(
           vm.reInitResource.bind(vm, resource), vm.handleActionException);
       },
       restartResource:function(resource) {
         var vm = this;
-        vm.service.restartResource(resource).then(
+        vm.service.restartResource(resource.uuid).then(
           vm.reInitResource.bind(vm, resource), vm.handleActionException);
       },
       isOperationAvailable:function(operation, resource) {
@@ -55,7 +55,7 @@
       },
       reInitResource:function(resource) {
         var vm = this;
-        vm.service.$get(resource).then(function(response) {
+        vm.service.$get(resource.uuid).then(function(response) {
           var index = vm.list.indexOf(resource);
           vm.list[index] = response;
         });
@@ -66,13 +66,29 @@
   }
 
   angular.module('ncsaas')
-    .controller('ResourceListController', ['baseResourceListController', 'joinResourcesService', ResourceListController]);
+    .controller('ResourceListController', ['baseResourceListController', 'resourcesService', ResourceListController]);
 
-  function ResourceListController(baseResourceListController, joinResourcesService) {
+  function ResourceListController(baseResourceListController, resourcesService) {
     var controllerScope = this;
     var ResourceController = baseResourceListController.extend({
       init:function() {
-        this.service = joinResourcesService;
+        this.service = resourcesService;
+        this.controllerScope = controllerScope;
+        this._super();
+      }
+    });
+
+    controllerScope.__proto__ = new ResourceController();
+  }
+
+  angular.module('ncsaas')
+    .controller('DigitalOceanListController', ['baseResourceListController', 'digitalOceanResourcesService', DigitalOceanListController]);
+
+  function DigitalOceanListController(baseResourceListController, digitalOceanResourcesService) {
+    var controllerScope = this;
+    var ResourceController = baseResourceListController.extend({
+      init:function() {
+        this.service = digitalOceanResourcesService;
         this.controllerScope = controllerScope;
         this._super();
       }

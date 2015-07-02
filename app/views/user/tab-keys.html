@@ -1,7 +1,6 @@
 <div ng-controller="UserKeyTabController as UserKeyTab">
     <div class="white-box">
         <ul class="sort-list">
-            <pagesize pages-list="UserKeyTab" pages-service="UserKeyTab.service"></pagesize>
             <li class="search divid">
                 <div class="search-box">
                     <input type="text" ng-model='UserKeyTab.searchInput' ng-change="UserKeyTab.search()">
@@ -92,7 +91,5 @@
             </li>
         </ul>
     </div>
-    <div class="pagination">
-        <pagination pages-list="UserKeyTab" pages-service="UserKeyTab.service"></pagination>
-    </div>
+    <pagination pages-list="UserKeyTab" pages-service="UserKeyTab.service"></pagination>
 </div>
