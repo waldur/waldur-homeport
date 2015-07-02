@@ -131,10 +131,6 @@
         });
       },
 
-      cancel: function() {
-        $state.go(this.detailsState, {uuid: $stateParams.uuid});
-      },
-
       afterUpdate: function() {
         this.successFlash('Customer is updated');
       }

@@ -63,7 +63,6 @@
       'projects.details',
       'projects.update',
       'organizations.details',
-      'organizations.edit',
       'customer-plans',
       'users.details',
       'home',
