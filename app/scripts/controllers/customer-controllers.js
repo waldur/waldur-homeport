@@ -58,8 +58,6 @@
       'usersService',
       'Flash',
       'ENV',
-      '$state',
-      '$stateParams',
       CustomerDetailUpdateController
     ]);
 
@@ -69,9 +67,7 @@
     customerImageService,
     usersService,
     Flash,
-    ENV,
-    $state,
-    $stateParams
+    ENV
     ) {
     var controllerScope = this;
     var CustomerController = baseControllerDetailUpdateClass.extend({
