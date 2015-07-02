@@ -1,0 +1,307 @@
+<div ng-controller="DemoEventListController as EventList" class="event-log">
+    <div class="white-box">
+        <h2 class="app-title">Dashboard</h2>
+        <ul class="sort-list event-nav">
+            <li ng-class="{'active':EventList.activeTab == 'activity'}">
+                <a ng-click="EventList.activeTab = 'activity'">Activity</a>
+            </li>
+            <li ng-class="{'active':EventList.activeTab == 'costs'}">
+                <a ng-click="EventList.activeTab = 'costs'">Costs</a>
+            </li>
+        </ul>
+        <div class="button-apply" ng-show="EventList.activeTab == 'activity'">
+            Add new project
+        </div>
+
+        <div class="clear"></div>
+    </div>
+    <div ng-show="EventList.activeTab == 'costs'">
+        <div class="white-box big-chart">
+            <canvas tc-chartjs chart-type="line" chart-data="EventList.data" width="1120" height="180"></canvas>
+            <div class="clear"></div>
+        </div>
+        <div class="white-box">
+            <div class="table-block">
+                <div class="title">
+                    <ul class="sort-list">
+                        <li>
+                            <span class="month">July 2015</span>
+                        </li>
+                        <li>
+                            <div class="icon"></div>
+                            <a href="#">Services (<span>3</span>)</a>
+                        </li>
+                        <li class="active">
+                            <div class="icon"></div>
+                            <a href="#">Projects (<span>3</span>)</a>
+                        </li>
+                        <li>
+                            <div class="icon"></div>
+                            <a href="#">Resources (<span>3</span>)</a>
+                        </li>
+                    </ul>
+                    <div class="total-cost">
+                        <span class="table-alert"></span>
+                        <span class="cost">Total cost 240</span>
+                        <div class="icon"></div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="table services">
+                    <div class="tr th">
+                        <div class="td service-name"><span>Service name</span></div>
+                        <div class="td service-title"><span>VMs</span></div>
+                        <div class="td service-title"><span>Licenses </span></div>
+                        <div class="td service-name"><span>Cost drilldown</span></div>
+                    </div>
+                    <div class="tr">
+                        <div class="td service-name"><span>Service name</span></div>
+                        <div class="td service-title"><span>Title</span></div>
+                        <div class="td service-name"><span>Cost drilldown</span></div>
+                    </div>
+                    <div class="tr">
+                        <div class="td service-name"><span>Service name</span></div>
+                        <div class="td service-title"><span>Title</span></div>
+                        <div class="td service-name"><span>Cost drilldown</span></div>
+                    </div>
+                    <div class="tr">
+                        <div class="td service-name"><span>Service name</span></div>
+                        <div class="td service-title"><span>Title</span></div>
+                        <div class="td service-name"><span>Cost drilldown</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="table-block">
+                <div class="title">
+                    <ul class="sort-list">
+                        <li><span class="month">June 2015</span></li>
+                        <li class="active">
+                            <div class="icon"></div>
+                            <a href="#">Services (<span>3</span>)</a>
+                        </li>
+                        <li>
+                            <div class="icon"></div>
+                            <a href="#">Services (<span>3</span>)</a>
+                        </li>
+                        <li>
+                            <div class="icon"></div>
+                            <a href="#">Services (<span>3</span>)</a>
+                        </li>
+                    </ul>
+                    <div class="total-cost">
+                        <span class="table-alert">Projected</span>
+                        <span class="cost">Total cost 240</span>
+                        <div class="icon"></div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="table services">
+                    <div class="tr th">
+                        <div class="td service-name"><span>Service name</span></div>
+                        <div class="td service-title"><span>Title</span></div>
+                        <div class="td service-name"><span>Cost drilldown</span></div>
+                    </div>
+                    <div class="tr">
+                        <div class="td service-name"><span>Service name</span></div>
+                        <div class="td service-title"><span>Title</span></div>
+                        <div class="td service-name"><span>Cost drilldown</span></div>
+                    </div>
+                    <div class="tr">
+                        <div class="td service-name"><span>Service name</span></div>
+                        <div class="td service-title"><span>Title</span></div>
+                        <div class="td service-name"><span>Cost drilldown</span></div>
+                    </div>
+                    <div class="tr">
+                        <div class="td service-name"><span>Service name</span></div>
+                        <div class="td service-title"><span>Title</span></div>
+                        <div class="td service-name"><span>Cost drilldown</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div ng-show="EventList.activeTab == 'activity'">
+        <div class="row">
+            <div ng-repeat="project in [0,1]" class="half-block graph">
+                <div class="white-box">
+                    <h3>Project name: Public website {{ project }}</h3>
+                    <ul class="counters">
+                        <li class="active-alert">
+                            <div class="counter-name">Active alerts</div>
+                            <div class="counter">2</div>
+                        </li>
+                        <li class="resources empty">
+                            <div class="counter-name">Resources</div>
+                            <div class="counter">10</div>
+                        </li>
+                        <li class="services empty">
+                            <div class="counter-name">Services</div>
+                            <div class="counter">1</div>
+                        </li>
+                        <li class="people">
+                            <div class="counter-name">People</div>
+                            <div class="counter">2</div>
+                        </li>
+
+                    </ul>
+                    <div class="clear"></div>
+                    <div class="chart">
+                        <canvas tc-chartjs chart-type="line" chart-options="EventList.chartOptions" chart-data="EventList.data" width="400" height="120"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a class="center-link" href="#">Show all projects</a>
+        <div class="row">
+            <div class="half-block alerts-list">
+                <h3>Alerts</h3>
+                <div class="white-box">
+                    <ul>
+                        <li class="fail">
+                            <div class="left-p">
+                                <div class="icon"></div>
+                                <span>Critical CPU level </span>
+                            </div>
+                            <div class="right-p">
+                                <span class="date">20 June 2015</span>
+                                <span class="time">19:31</span>
+                            </div>
+                            <div class="clear"></div>
+                        </li>
+                        <li>
+                            <div class="left-p">
+                                <div class="icon"></div>
+                                <span>Critical CPU level </span>
+                            </div>
+                            <div class="right-p">
+                                <span class="date">20 June 2015</span>
+                                <span class="time">19:31</span>
+                            </div>
+                            <div class="clear"></div>
+                        </li>
+                        <li>
+                            <div class="left-p">
+                                <div class="icon"></div>
+                                <span>Critical CPU level </span>
+                            </div>
+                            <div class="right-p">
+                                <span class="date">20 June 2015</span>
+                                <span class="time">19:31</span>
+                            </div>
+                            <div class="clear"></div>
+                        </li>
+                        <li>
+                            <div class="left-p">
+                                <div class="icon"></div>
+                                <span>Critical CPU level </span>
+                            </div>
+                            <div class="right-p">
+                                <span class="date">20 June 2015</span>
+                                <span class="time">19:31</span>
+                            </div>
+                            <div class="clear"></div>
+                        </li>
+                        <li>
+                            <div class="left-p">
+                                <div class="icon"></div>
+                                <span>Critical CPU level </span>
+                            </div>
+                            <div class="right-p">
+                                <span class="date">20 June 2015</span>
+                                <span class="time">19:31</span>
+                            </div>
+                            <div class="clear"></div>
+                        </li>
+                        <li>
+                            <div class="left-p">
+                                <div class="icon"></div>
+                                <span>Critical CPU level </span>
+                            </div>
+                            <div class="right-p">
+                                <span class="date">20 June 2015</span>
+                                <span class="time">19:31</span>
+                            </div>
+                            <div class="clear"></div>
+                        </li>
+                    </ul>
+                </div>
+                <a class="show-all" href="#">Show all alerts</a>
+            </div>
+            <div class="half-block alerts-list">
+                <h3>Events</h3>
+                <div class="white-box">
+                    <ul>
+                        <li>
+                            <div class="left-p">
+
+                                <span>Project XXX was created</span>
+                            </div>
+                            <div class="right-p">
+                                <span class="date">4 minutes ago</span>
+                            </div>
+                            <div class="clear"></div>
+                        </li>
+                        <li>
+                            <div class="left-p">
+
+                                <span>Project XXX was created</span>
+                            </div>
+                            <div class="right-p">
+                                <span class="date">4 minutes ago</span>
+                            </div>
+                            <div class="clear"></div>
+                        </li>
+                        <li>
+                            <div class="left-p">
+
+                                <span>Project XXX was created</span>
+                            </div>
+                            <div class="right-p">
+                                <span class="date">4 minutes ago</span>
+                            </div>
+                            <div class="clear"></div>
+                        </li>
+                        <li>
+                            <div class="left-p">
+
+                                <span>Project XXX was created</span>
+                            </div>
+                            <div class="right-p">
+                                <span class="date">4 minutes ago</span>
+                            </div>
+                            <div class="clear"></div>
+                        </li>
+                        <li>
+                            <div class="left-p">
+                                <span>Project XXX was created</span>
+                            </div>
+                            <div class="right-p">
+                                <span class="date">4 minutes ago</span>
+                            </div>
+                            <div class="clear"></div>
+                        </li>
+                        <li>
+                            <div class="left-p">
+                                <span>Project XXX has been created</span>
+                            </div>
+                            <div class="right-p">
+                                <span class="date">4 minutes ago</span>
+                            </div>
+                            <div class="clear"></div>
+                        </li>
+
+                    </ul>
+                </div>
+                <a class="show-all" href="#">Show all events</a>
+            </div>
+
+
+        </div>
+        <div class="clear"></div>
+
+    </div>
+
+
+
+</div>

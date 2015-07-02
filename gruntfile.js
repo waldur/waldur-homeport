@@ -267,8 +267,8 @@ module.exports = function(grunt) {
                     },
                     {
                       expand: true,
-                      cwd: 'bower_components/angular-chart.js/dist',
-                      src: ['angular-chart.js'],
+                      cwd: 'bower_components/tc-angular-chartjs/dist',
+                      src: ['tc-angular-chartjs.js'],
                       dest: 'app/static/js/angular/',
                       filter: 'isFile'
                     },

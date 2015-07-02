@@ -17,7 +17,7 @@ angular
     'pascalprecht.translate',
     'angular-cron-jobs',
     'flash',
-    'chart.js',
+    'tc.chartjs',
     'angulartics',
     'angulartics.google.analytics',
     'ngFileUpload'
@@ -194,6 +194,24 @@ angular
         auth: true
       })
 
+      .state('dashboard.demoeventlog', {
+        url: 'demo/',
+        views: {
+          'appHeader@dashboard' : {
+            templateUrl: 'views/partials/app-header.html',
+          },
+          'appContent@dashboard' : {
+            templateUrl: 'views/dashboard/demo-event-log.html',
+          },
+          'eventTypes@dashboard.demoeventlog' : {
+            templateUrl: 'views/events/event-types.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
+        auth: true
+      })
       .state('appstore', {
         url: '/appstore/',
         abstract: true,
@@ -601,6 +619,9 @@ angular
         views: {
           'appContent': {
             templateUrl: 'views/resource/list.html',
+          },
+          'listTemplate@resources.list': {
+            templateUrl: 'views/resource/list-template.html',
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',

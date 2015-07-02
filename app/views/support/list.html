@@ -5,7 +5,6 @@
             <li class="title">
                 <h2 class="app-title">Support</h2>
             </li>
-            <pagesize pages-list="IssueList" pages-service="IssueList.service"/></pagesize>
             <li class="search divid">
                 <div class="search-box">
                     <input type="text" ng-model='IssueList.searchInput' ng-change="IssueList.search()">
@@ -99,7 +98,5 @@
             </li>
         </ul>
     </div>
-    <div class="pagination">
-        <pagination pages-list="IssueList" pages-service="IssueList.service"></pagination>
-    </div>
+    <pagination pages-list="IssueList" pages-service="IssueList.service"></pagination>
 </div>

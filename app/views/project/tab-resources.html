@@ -1,7 +1,6 @@
 <div ng-controller="ProjectResourcesTabController as ProjectResourcesTab">
     <div class="white-box">
         <ul class="sort-list">
-            <pagesize pages-list="ProjectResourcesTab" pages-service="ProjectResourcesTab.service"></pagesize>
             <li class="search divid">
                 <div class="search-box">
                     <input type="text" ng-model='ProjectResourcesTab.searchInput' ng-change="ProjectResourcesTab.search()">
@@ -111,7 +110,5 @@
         </ul>
     </div>
 
-  <div class="pagination">
     <pagination pages-list="ProjectResourcesTab" pages-service="ProjectResourcesTab.service"></pagination>
-  </div>
 </div>
