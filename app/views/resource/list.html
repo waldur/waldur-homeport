@@ -1,17 +1,21 @@
-<div class="profile-view">
-    <section class="content">
-        <h2 class="app-title">Resources</h2>
-    </section>
-
-    <section class="actions">
-        <div class="actions-button">
-            <a ui-sref="resources.create" class="button">
+<div class="white-box">
+    <ul class="sort-list">
+        <li class="title">
+            <h2 class="app-title">Resources</h2>
+        </li>
+        <li class="right-sort">
+            <a ui-sref="appstore.store" class="button">
                 <span class="icon plus"></span>
-                <span>Add</span>
+                <span>Add resource</span>
             </a>
-        </div>
-    </section>
+            <a ui-sref="import.import" class="button">
+                <span class="icon plus"></span>
+                Import resource
+            </a>
+        </li>
+    </ul>
 </div>
+
 
 <ul class="tabs-nav" ng-init="activeTab = 'openstack'">
     <li ng-class="{'active': activeTab === 'openstack'}"
