@@ -76,6 +76,9 @@
             response[i].status = 'ready';
           };
           controllerScope.importableResources = response;
+          if (response.length == 0){
+            controllerScope.noResources = true;
+          }
         }, function(){
           controllerScope.noResources = true;
           self.flashMessage('warning', 'Unable to get list of resources for service');

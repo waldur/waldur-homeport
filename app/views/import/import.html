@@ -41,19 +41,16 @@
                     </div>
                     <!-- /Select service -->
                 </div>
-                <div class="col full" ng-show="ImportResource.noResources">
-                    <h2 class="app-title">
-                        There are no resources available for import in this service.
-                    </h2>
-                </div>
-                <div class="col full" ng-show="ImportResource.selectedService">
-                    <h3 class="app-title">Resources</h3>
+                <a class="toggle-link pull-right"
+                   ng-show="ImportResource.importedResources.length"
+                   ng-click="showImportedResources=!showImportedResources"
+                   ng-class="{'active': showImportedResources}">
+                   Show imported resources ({{ ImportResource.importedResources.length }})
+                </a>
+                <div class="col full" ng-show="showImportedResources && ImportResource.importedResources.length">
                     <ul class="object-list">
                         <li ng-repeat="resource in ImportResource.importedResources">
                             <div class="list-item">
-                                <div class="checkbox">
-                                    <input type="checkbox" disabled>
-                                </div>
                                 <div class="name">
                                     <h3 class="item-title">
                                         <a>{{ resource.name }}</a>
@@ -65,11 +62,20 @@
                                     HDD: {{ resource.disk / 1024 }} GB
                                 </div>
                                 <div class="additional-cell">
-                                    <span class="status">Imported to {{ resource.project_name }}</span>
+                                    <span class="status">Imported to <a ui-sref="projects.details({uuid: resource.project_uuid})">{{ resource.project_name }}</a></span>
                                 </div>
                             </div>
                         </li>
-
+                    </ul>
+                </div>
+                <div class="col full" ng-show="ImportResource.noResources">
+                    <h2 class="app-title centered">
+                        There are no resources available for import in this service.
+                    </h2>
+                </div>
+                <div class="col full" ng-show="ImportResource.importableResources.length">
+                    <h3 class="app-title">Resources</h3>
+                    <ul class="object-list">
                         <li ng-click="ImportResource.toggleResource(resource)"
                             ng-repeat="resource in ImportResource.importableResources">
                             <div class="list-item pointer">
@@ -91,7 +97,11 @@
                                 <div class="additional-cell" ng-switch="resource.status">
                                     <span class="status online" ng-switch-when="ready">Available for import</span>
                                     <span class="status" ng-switch-when="progress">In progress</span>
-                                    <span class="status online" ng-switch-when="success">Imported to {{ ImportResource.selectedProject.name }}</span>
+                                    <span class="status online" ng-switch-when="success">
+                                        Imported to <a ui-sref="projects.details({uuid: ImportResource.selectedProject.uuid})">
+                                            {{ ImportResource.selectedProject.name }}
+                                        </a>
+                                    </span>
                                     <span class="status offline" ng-switch-when="failed">Failed</span>
                                 </div>
                             </div>
