@@ -3,15 +3,22 @@
 (function() {
   angular.module('ncsaas')
     .service('baseServiceListController', [
-      'baseControllerListClass', 'customerPermissionsService', 'usersService', 'servicesService',
+      'baseControllerListClass',
+      'customerPermissionsService',
+      'usersService',
+      'joinService',
       baseServiceListController]);
 
   // need for service tab
   function baseServiceListController(
-    baseControllerListClass, customerPermissionsService, usersService, servicesService) {
+    baseControllerListClass,
+    customerPermissionsService,
+    usersService,
+    joinService
+    ) {
     var ControllerListClass = baseControllerListClass.extend({
       init: function() {
-        this.service = servicesService;
+        this.service = joinService;
         this._super();
         this.searchFieldName = 'name';
         this.canUserAddService();
@@ -22,6 +29,7 @@
           }
         ];
       },
+
       canUserAddService: function() {
         var vm = this;
         usersService.getCurrentUser().then(function(user) {
@@ -32,7 +40,6 @@
           customerPermissionsService.userHasCustomerRole(user.username, 'owner').then(function(hasRole) {
             vm.canUserAddService = hasRole;
           });
-
         });
       }
     });
@@ -60,12 +67,22 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('ServiceAddController', ['servicesService',
-      'currentStateService', 'projectCloudMembershipsService', 'projectsService',
-      'baseControllerAddClass', ServiceAddController]);
+    .controller('ServiceAddController', [
+      'servicesService',
+      'digitalOceanService',
+      'joinServiceProjectLinkService',
+      'currentStateService',
+      'projectsService',
+      'baseControllerAddClass',
+      ServiceAddController]);
 
   function ServiceAddController(
-    servicesService, currentStateService, projectCloudMembershipsService, projectsService, baseControllerAddClass) {
+    servicesService,
+    digitalOceanService,
+    joinServiceProjectLinkService,
+    currentStateService,
+    projectsService,
+    baseControllerAddClass) {
     var controllerScope = this;
     var ServiceController = baseControllerAddClass.extend({
       init: function() {
@@ -74,6 +91,35 @@
         this.setSignalHandler('currentCustomerUpdated', this.activate.bind(this));
         this._super();
         this.listState = 'services.list';
+        this.selectedService = this.serviceList[0];
+      },
+      serviceList: [
+        {
+          icon: '/static/images/icons/icon_openstack_small.png',
+          name: 'OpenStack',
+          id: 'openstack',
+          service: servicesService
+        },
+        {
+          icon: '/static/images/icons/icon_digitalocean_small.png',
+          name: 'Digital Ocean',
+          id: 'digitalocean',
+          service: digitalOceanService
+        },
+        {
+          icon: '/static/images/icons/icon_aws_small.png',
+          name: 'AWS',
+          id: 'aws',
+          service: null
+        }
+      ],
+      setService: function(choice) {
+        this.selectedService = choice;
+        var instance = choice.service.$create();
+        instance.customer = this.instance.customer;
+        instance.auth_url = this.instance.auth_url;
+        instance.token = this.instance.token;
+        this.instance = instance;
       },
       activate: function() {
         var vm = this;
@@ -81,22 +127,26 @@
           vm.instance.customer = customer.url;
         });
         /*jshint camelcase: false */
-        if (vm.instance.auth_url || vm.instance.name) {
+        if (vm.instance.auth_url || vm.instance.name || vm.instance.token) {
           if (confirm('Clean all fields?')) {
             vm.instance.auth_url = '';
             vm.instance.name = '';
+            vm.instance.token = '';
           }
         }
       },
+
       afterSave: function() {
         var vm = this;
         projectsService.filterByCustomer = false;
+
         projectsService.getList().then(function(response) {
           for (var i = 0; response.length > i; i++) {
-            projectCloudMembershipsService.addRow(response[i].url, vm.instance.url);
+            joinServiceProjectLinkService.add(response[i], vm.instance);
           }
         });
       },
+
       dummyCheckboxChange: function() {
         this.instance.auth_url = this.instance.dummy ? 'http://keystone.example.com:5000/v2.0' : '';
       }
@@ -110,9 +160,9 @@
 (function() {
   angular.module('ncsaas')
     .controller('ServiceDetailUpdateController',
-      ['baseControllerClass', 'servicesService', '$stateParams', '$state', ServiceDetailUpdateController]);
+      ['baseControllerClass', 'joinService', '$stateParams', '$state', ServiceDetailUpdateController]);
 
-  function ServiceDetailUpdateController(baseControllerClass, servicesService, $stateParams, $state) {
+  function ServiceDetailUpdateController(baseControllerClass, joinService, $stateParams, $state) {
     var controllerScope = this;
     var Controller = baseControllerClass.extend({
       service: null,
@@ -124,7 +174,7 @@
       },
       activate:function() {
         var vm = this;
-        servicesService.$get($stateParams.uuid).then(function(response) {
+        joinService.$get($stateParams.provider, $stateParams.uuid).then(function(response) {
           vm.service = response;
         });
       },
@@ -150,14 +200,17 @@
   angular.module('ncsaas')
     .controller('ServiceProjectTabController', [
       '$stateParams',
-      'servicesService',
+      'joinService',
       'baseControllerClass',
-      'projectCloudMembershipsService',
+      'joinServiceProjectLinkService',
       ServiceProjectTabController
     ]);
 
   function ServiceProjectTabController(
-    $stateParams, servicesService, baseControllerClass, projectCloudMembershipsService) {
+    $stateParams,
+    joinService,
+    baseControllerClass,
+    joinServiceProjectLinkService) {
     var controllerScope = this;
     var Controller = baseControllerClass.extend({
       service: null,
@@ -169,14 +222,14 @@
       },
       activate: function() {
         var vm = this;
-        servicesService.$get($stateParams.uuid).then(function(response) {
+        joinService.$get($stateParams.provider, $stateParams.uuid).then(function(response) {
           vm.service = response;
+          vm.getServiceProjects();
         });
-        vm.getServiceProjects();
       },
       getServiceProjects: function() {
         var vm = this;
-        projectCloudMembershipsService.getList({cloud: $stateParams.uuid}).then(function(response) {
+        joinServiceProjectLinkService.getList(vm.service).then(function(response) {
           vm.serviceProjects = response;
         });
       }

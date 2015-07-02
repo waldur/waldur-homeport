@@ -36,17 +36,17 @@
       stopResource:function(resource) {
         var vm = this;
         vm.service.stopResource(resource.uuid).then(
-          vm.reInitResource.bind(null, resource), vm.handleActionException);
+          vm.reInitResource.bind(vm, resource), vm.handleActionException);
       },
       startResource:function(resource) {
         var vm = this;
         vm.service.startResource(resource.uuid).then(
-          vm.reInitResource.bind(null, resource), vm.handleActionException);
+          vm.reInitResource.bind(vm, resource), vm.handleActionException);
       },
       restartResource:function(resource) {
         var vm = this;
         vm.service.restartResource(resource.uuid).then(
-          vm.reInitResource.bind(null, resource), vm.handleActionException);
+          vm.reInitResource.bind(vm, resource), vm.handleActionException);
       },
       isOperationAvailable:function(operation, resource) {
         var availableOperations = this.service.getAvailableOperations(resource);
@@ -73,6 +73,22 @@
     var ResourceController = baseResourceListController.extend({
       init:function() {
         this.service = resourcesService;
+        this.controllerScope = controllerScope;
+        this._super();
+      }
+    });
+
+    controllerScope.__proto__ = new ResourceController();
+  }
+
+  angular.module('ncsaas')
+    .controller('DigitalOceanListController', ['baseResourceListController', 'digitalOceanResourcesService', DigitalOceanListController]);
+
+  function DigitalOceanListController(baseResourceListController, digitalOceanResourcesService) {
+    var controllerScope = this;
+    var ResourceController = baseResourceListController.extend({
+      init:function() {
+        this.service = digitalOceanResourcesService;
         this.controllerScope = controllerScope;
         this._super();
       }
@@ -195,12 +211,13 @@
   angular.module('ncsaas')
       .controller('ResourceDetailUpdateController', [
         '$stateParams',
+        '$scope',
         'resourcesService',
         'baseControllerDetailUpdateClass',
         ResourceDetailUpdateController
       ]);
 
-  function ResourceDetailUpdateController($stateParams, resourcesService, baseControllerDetailUpdateClass) {
+  function ResourceDetailUpdateController($stateParams, $scope, resourcesService, baseControllerDetailUpdateClass) {
     var controllerScope = this;
     var Controller = baseControllerDetailUpdateClass.extend({
       activeTab: 'backups',
@@ -211,9 +228,38 @@
         this._super();
         this.detailsState = 'resources.details';
         this.activeTab = $stateParams.tab ? $stateParams.tab : this.activeTab;
+      },
+
+      afterActivate: function() {
+        $scope.$broadcast('resourceLoaded', this.model);
       }
     });
 
     controllerScope.__proto__ = new Controller();
+  }
+})();
+
+(function() {
+  angular.module('ncsaas')
+    .controller('ResourceBackupListTabController', [
+        '$scope',
+        'BaseBackupListController',
+        ResourceBackupListTabController
+      ]);
+
+    function ResourceBackupListTabController($scope, BaseBackupListController) {
+        var controllerScope = this;
+        var Controller = BaseBackupListController.extend({
+          getList: function(filter) {
+            var vm = this;
+            var fn = this._super;
+            $scope.$on('resourceLoaded', function(event, resource){
+              vm.service.defaultFilter.backup_source = resource.url;
+              fn.apply(vm, filter);
+            })
+          }
+        });
+
+      controllerScope.__proto__ = new Controller();
   }
 })();

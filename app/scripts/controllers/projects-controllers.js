@@ -271,7 +271,11 @@
       ProjectResourcesTabController
     ]);
 
-  function ProjectResourcesTabController($stateParams, baseResourceListController, resourcesService) {
+  function ProjectResourcesTabController(
+    $stateParams,
+    baseResourceListController,
+    resourcesService
+    ) {
     var controllerScope = this;
     var ResourceController = baseResourceListController.extend({
       init:function() {

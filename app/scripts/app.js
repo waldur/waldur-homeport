@@ -17,7 +17,7 @@ angular
     'pascalprecht.translate',
     'angular-cron-jobs',
     'flash',
-    'chart.js',
+    'tc.chartjs',
     'angulartics',
     'angulartics.google.analytics',
     'ngFileUpload'
@@ -194,6 +194,24 @@ angular
         auth: true
       })
 
+      .state('dashboard.demoeventlog', {
+        url: 'demo/',
+        views: {
+          'appHeader@dashboard' : {
+            templateUrl: 'views/partials/app-header.html',
+          },
+          'appContent@dashboard' : {
+            templateUrl: 'views/dashboard/demo-event-log.html',
+          },
+          'eventTypes@dashboard.demoeventlog' : {
+            templateUrl: 'views/events/event-types.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
+        auth: true
+      })
       .state('appstore', {
         url: '/appstore/',
         abstract: true,
@@ -355,7 +373,7 @@ angular
       })
 
       .state('services.details', {
-        url: ':uuid/',
+        url: ':provider/:uuid/',
         views: {
           'appContent': {
             templateUrl: 'views/service/details.html'
@@ -602,6 +620,9 @@ angular
           'appContent': {
             templateUrl: 'views/resource/list.html',
           },
+          'listTemplate@resources.list': {
+            templateUrl: 'views/resource/list-template.html',
+          },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',
           }
@@ -636,6 +657,9 @@ angular
           },
           'tabBackups@resources.details': {
             templateUrl: 'views/resource/tab-backups.html',
+          },
+          'backupListContent@resources.details' : {
+            templateUrl: 'views/backup/backup-list-content.html',
           },
           'tabs@resources.details': {
             templateUrl: 'views/resource/tabs.html',
@@ -781,6 +805,9 @@ angular
         views: {
           'appContent': {
             templateUrl: 'views/backup/list.html',
+          },
+          'backupListContent@backups.list' : {
+            templateUrl: 'views/backup/backup-list-content.html',
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',

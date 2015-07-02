@@ -14,7 +14,6 @@
         <li class="title">
             <h2 class="app-title">Services</h2>
         </li>
-        <pagesize pages-list="ServiceList" pages-service="ServiceList.service"></pagesize>
         <li class="search divid">
             <div class="search-box">
                 <input type="text" ng-model='ServiceList.searchInput' ng-change="ServiceList.search()">
@@ -90,11 +89,11 @@
                     </div>
                 <div class="name">
                     <h3 class="item-title">
-                        <a ui-sref="services.details({uuid: service.uuid})" stoppropagation>{{ service.name }}</a>
+                        <a ui-sref="services.details({uuid: service.uuid, provider: service.provider})" stoppropagation>{{ service.name }}</a>
                     </h3>
                 </div>
                 <div class="additional-cell" ng-hide="collapsedItem">
-                    OpenStack
+                    {{ service.provider }}
                 </div>
                 <div class="actions">
                     <action-button button-list="ServiceList.actionButtonsListItems"
@@ -127,7 +126,4 @@
     </ul>
 </div>
 
-<div class="pagination" ng-show="ServiceList.list.length > 0 || ServiceList.searchInput">
-    <pagination pages-list="ServiceList" pages-service="ServiceList.service"></pagination>
-</div>
-
+<pagination pages-list="ServiceList" pages-service="ServiceList.service"></pagination>

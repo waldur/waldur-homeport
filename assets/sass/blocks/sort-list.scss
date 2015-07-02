@@ -35,31 +35,4 @@
             @include property(margin-bottom, -4);
         }
     } // li
-    .page-size + .page-size {
-        @include property(margin-left, 15);
-    } // .page-size + .page-size
-    a.page-size {
-        @include inline-middle;
-        @include property(padding-top, 10);
-        line-height: 1;
-        color: #333;
-        text-decoration: none;
-        border-bottom: 1px dashed #C5C5C5;
-        position: relative;
-        &.active {
-            border-bottom: 1px solid #27AE60;
-            &:after {
-                content: "";
-                position: absolute;
-                bottom: -6px;
-                left: 50%;
-                margin-left: -5px;
-                width: 0px;
-                height: 0px;
-                border-style: solid;
-                border-width: 6px 5px 0px;
-                border-color: #27AE60 transparent
-            } // &:after
-        } // &.active
-    } // a
 } // sort-list
