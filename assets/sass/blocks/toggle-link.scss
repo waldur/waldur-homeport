@@ -25,4 +25,8 @@
             color: #3AA153;
         } // &:after
     } // &.active
+    &.pull-right {
+        width: 100%;
+        text-align: right;
+    }
 } // toggle-link
