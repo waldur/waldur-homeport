@@ -34,7 +34,6 @@
         ];
         this.entityOptions = {
           entityData: {
-            title: 'Resources',
             noDataText: 'You have no resources yet.'
           },
           list: [
