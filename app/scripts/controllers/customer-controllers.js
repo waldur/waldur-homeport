@@ -128,7 +128,7 @@
       },
 
       afterUpdate: function() {
-        this.successFlash('Customer is updated');
+        this.successFlash('Customer {} is updated'.replace('{}', controllerScope.model.name));
       }
     });
 
