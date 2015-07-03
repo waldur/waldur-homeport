@@ -43,7 +43,8 @@
           list: [
             {
               type: ENTITYLISTFIELDTYPES.avatarPictureField,
-              className: 'avatar'
+              className: 'avatar',
+              showForMobile: ENTITYLISTFIELDTYPES.showForMobile
             },
             {
               name: 'Name',
@@ -51,7 +52,8 @@
               emptyText: '',
               type: ENTITYLISTFIELDTYPES.name,
               link: 'users.details({uuid: entity.uuid})',
-              className: 'name'
+              className: 'name',
+              showForMobile: ENTITYLISTFIELDTYPES.showForMobile
             },
             {
               name: 'Email',

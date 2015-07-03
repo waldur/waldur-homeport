@@ -6,10 +6,11 @@
       'backupsService',
       'baseControllerListClass',
       '$state',
+      'ENTITYLISTFIELDTYPES',
       BaseBackupListController
     ]);
 
-  function BaseBackupListController(backupsService, baseControllerListClass, $state) {
+  function BaseBackupListController(backupsService, baseControllerListClass, $state, ENTITYLISTFIELDTYPES) {
     var controllerScope = this;
     var Controller = baseControllerListClass.extend({
       init:function() {
@@ -27,6 +28,42 @@
             clickFunction: this.deleteBackup.bind(this.controllerScope)
           }
         ];
+        this.entityOptions = {
+          entityData: {
+            title: 'Backups',
+            createLink: 'backups.create',
+            createLinkText: 'Create a backup',
+            noDataText: 'You have no backups yet.'
+          },
+          list: [
+            {
+              name: 'Description',
+              propertyName: 'description',
+              emptyText: '',
+              type: 'link',
+              link: '',
+              showForMobile: ENTITYLISTFIELDTYPES.showForMobile
+            },
+            {
+              name: 'State',
+              propertyName: 'state',
+              emptyText: '',
+              type: false
+            },
+            {
+              name: 'Kept',
+              propertyName: 'kept_until',
+              emptyText: 'kept forever',
+              type: false
+            },
+            {
+              name: 'Date',
+              propertyName: 'created_at',
+              emptyText: '',
+              type: 'date'
+            }
+          ]
+        };
       },
       deleteBackup:function(backup) {
         var vm = this;

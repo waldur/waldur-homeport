@@ -32,6 +32,7 @@
       entityAccessInfoField: 'entityAccessInfo',
       entityStatusField: 'entityStatus',
       avatarPictureField: 'avatar',
-      noType: false
+      noType: false,
+      showForMobile: true
     })
 })();

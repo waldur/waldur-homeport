@@ -169,4 +169,5 @@ Config file settings:
     entityStatusField:       constant for entity Status field  
     avatarPictureField:      field with avatar  
     noType:                  default field type
+    showForMobile:           add class to show field on mobile devices
   

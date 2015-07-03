@@ -2,10 +2,10 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('baseResourceListController', ['baseControllerListClass', baseResourceListController]);
+    .service('baseResourceListController', ['baseControllerListClass', 'ENTITYLISTFIELDTYPES', baseResourceListController]);
 
   // need for resource tab
-  function baseResourceListController(baseControllerListClass) {
+  function baseResourceListController(baseControllerListClass, ENTITYLISTFIELDTYPES) {
     var ControllerListClass = baseControllerListClass.extend({
       init: function() {
         this._super();
@@ -32,6 +32,43 @@
             className: 'remove'
           }
         ];
+        this.entityOptions = {
+          entityData: {
+            title: 'Resources',
+            noDataText: 'You have no resources yet.'
+          },
+          list: [
+            {
+              name: 'Name',
+              propertyName: 'name',
+              emptyText: '',
+              type: 'link',
+              link: 'resources.details({uuid: entity.uuid})',
+              showForMobile: ENTITYLISTFIELDTYPES.showForMobile
+            },
+            {
+              name: 'Project',
+              propertyName: 'project_name',
+              emptyText: '',
+              type: 'link',
+              link: 'projects.details({uuid: entity.project_uuid })'
+            },
+            {
+              name: 'Access information',
+              propertyName: 'access_information',
+              emptyText: 'No access info',
+              type: 'entityAccessInfo'
+            },
+            {
+              name: 'Status',
+              propertyName: 'state',
+              emptyText: '',
+              type: 'entityStatus'
+
+            }
+          ]
+        };
+
       },
       stopResource:function(resource) {
         var vm = this;

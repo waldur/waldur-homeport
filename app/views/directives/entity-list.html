@@ -2,7 +2,7 @@
 
     <div class="white-box" ng-show="entityList.list.length > 0 || entityList.searchInput">
         <ul class="sort-list">
-            <li class="title">
+            <li ng-if="entityOptions.entityData.title != 'Resources'" class="title">
                 <h2 class="app-title">{{ entityOptions.entityData.title }}</h2>
             </li>
             <li class="search divid">
@@ -81,14 +81,17 @@
                 <div class="actions"></div>
             </li>
             <li ng-repeat="entity in entityList.list">
-                <div class="list-item list pointer" ng-class="{'opened': expandItem}"
+                <div class="list-item list pointer" ng-class="{'opened': expandItem}    "
                      ng-click="expandItem=!expandItem">
                     <div class="checkbox">
                         <div class="checkbox" stoppropagation>
                             <input type="checkbox" ng-show="entityList.showgroup">
                         </div>
                     </div>
-                    <div ng-repeat="field in entityOptions.list" ng-switch="field.type" class="additional-cell {{ field.className }}">
+                    <div ng-repeat="field in entityOptions.list"
+                         ng-switch="field.type"
+                         ng-class="{ 'display-for-mobile' : field.showForMobile }"
+                         class="additional-cell {{ field.className }}">
 
                         <span ng-switch-when="avatar" class="avatar">
                             <img gravatar-src="entity.email" gravatar-size="100" alt="" class="avatar-img">

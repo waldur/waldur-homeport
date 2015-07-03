@@ -620,9 +620,6 @@ angular
           'appContent': {
             templateUrl: 'views/resource/list.html',
           },
-          'listTemplate@resources.list': {
-            templateUrl: 'views/resource/list-template.html',
-          },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',
           }

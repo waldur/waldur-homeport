@@ -29,14 +29,21 @@
         ng-class="{'tab-active': activeTab === 'openstack'}"
         ng-switch-when="openstack">
         <div ng-controller="ResourceListController as ResourceList">
-            <div ui-view="listTemplate"></div>
+            <entitylist entity-list="ResourceList"
+                        entity-service="ResourceList.service"
+                        entity-buttons="ResourceList.actionButtonsListItems"
+                        entity-options="ResourceList.entityOptions"></entitylist>
+
         </div>
     </div>
     <div class="tab" id="digitalocean"
         ng-class="{'tab-active': activeTab === 'digitalocean'}"
         ng-switch-when="digitalocean">
         <div ng-controller="DigitalOceanListController as ResourceList">
-            <div ui-view="listTemplate"></div>
+            <entitylist entity-list="ResourceList"
+                        entity-service="ResourceList.service"
+                        entity-buttons="ResourceList.actionButtonsListItems"
+                        entity-options="ResourceList.entityOptions"></entitylist>
         </div>
     </div>
 </section>
