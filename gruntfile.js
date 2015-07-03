@@ -299,6 +299,20 @@ module.exports = function(grunt) {
                       src: ['angulartics-ga.js'],
                       dest: 'app/static/js/angular',
                       filter: 'isFile'
+                    },
+                    {
+                      expand: true,
+                      cwd: 'bower_components/angular-xeditable/dist/js/',
+                      src: ['xeditable.js'],
+                      dest: 'app/static/js/angular',
+                      filter: 'isFile'
+                    },
+                    {
+                      expand: true,
+                      cwd: 'bower_components/angular-xeditable/dist/css/',
+                      src: ['xeditable.css'],
+                      dest: 'app/static/css/',
+                      filter: 'isFile'
                     }
                 ]
             }

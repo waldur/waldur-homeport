@@ -61,8 +61,14 @@
       CustomerDetailUpdateController
     ]);
 
-  function CustomerDetailUpdateController(baseControllerDetailUpdateClass,
-    customersService, customerImageService, usersService, Flash, ENV) {
+  function CustomerDetailUpdateController(
+    baseControllerDetailUpdateClass,
+    customersService,
+    customerImageService,
+    usersService,
+    Flash,
+    ENV
+    ) {
     var controllerScope = this;
     var CustomerController = baseControllerDetailUpdateClass.extend({
       activeTab: 'resources',
@@ -119,6 +125,10 @@
         }, function (response) {
           Flash.create('warning', 'Unable to delete image');
         });
+      },
+
+      afterUpdate: function() {
+        this.successFlash('Customer {} is updated'.replace('{}', controllerScope.model.name));
       }
     });
 
