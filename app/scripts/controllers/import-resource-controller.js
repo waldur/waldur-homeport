@@ -60,7 +60,7 @@
       getImportedResourcesForService: function(service) {
         var self = this;
         controllerScope.importedResources = [];
-        digitalOceanResourcesService.getList({uuid: service.uuid}).then(function(response){
+        digitalOceanResourcesService.getList({service_uuid: service.uuid}).then(function(response){
           controllerScope.importedResources = response;
         }, function(){
           self.flashMessage('warning', 'Unable to get list of imported resources');
