@@ -92,43 +92,52 @@ button-model - model of item
 ## Base configuration file base-config.js
 
 Base configuration file variables are overridden in custom-config.js
+
 Config file settings:
- name:                          environment name
- apiEndpoint:                   rest server address
- googleClientId:                google client id
- googleEndpointUrl:             google api url
- facebookClientId:              facebook client id
- facebookEndpointUrl:           facebook api url
- pageSizes:                     page size step to display different types of lists
- pageSize:                      default page size
- topMenuCustomersCount:         top menu customers quantity
- serviceIcon:                   image to display on appstore page
- topMenuCustomersCacheTime:     time to store customers in browser cache
- dashboardEventsCacheTime:      time to store events in browser cache
- listControlPanelShow:          variable for displaying action switcher panel: true to show, false to hide
- currentCustomerUuidStorageKey: key for localStorage to ged customer uuid for customer selected in top menu
- addonsList:                    additional options for virtual machine purchase on appstore page
+
+    name:                          environment name  
+    apiEndpoint:                   rest server address   
+    googleClientId:                google client id   
+    googleEndpointUrl:             google api url   
+    facebookClientId:              facebook client id   
+    facebookEndpointUrl:           facebook api url   
+    pageSizes:                     page size step to display different types of lists   
+    pageSize:                      default page size   
+    topMenuCustomersCount:         top menu customers quantity  
+    serviceIcon:                   image to display on appstore page  
+    topMenuCustomersCacheTime:     time to store customers in browser cache  
+    dashboardEventsCacheTime:      time to store events in browser cache  
+    listControlPanelShow:          variable for displaying action switcher panel: true to show, false to hide 
+    currentCustomerUuidStorageKey: key for localStorage to ged customer uuid for customer selected in top menu 
+    addonsList:                    additional options for virtual machine purchase on appstore page
+ 
 
 ## Entity list directive
 
- Directive is used for displaying different lists throughout project. 
- Sample directive usage: 
-  `<entitylist entity-list="UserList"
-      entity-service="UserList.service"
-      entity-buttons="UserList.actionButtonsListItems"
-      entity-options="UserList.entityOptions"></entitylist>`
+ Directive is used for displaying different lists throughout project.  
+ Sample directive usage:  
+ 
+    <entitylist entity-list="UserList" 
+                  entity-service="UserList.service" 
+                  entity-buttons="UserList.actionButtonsListItems" 
+                  entity-options="UserList.entityOptions"></entitylist>
   
   Directive parameters:
-   1. entity-list - current controller
-   2. entity-service - service for controller
-   3. entity-buttons - action buttons for list rows (action-button directive)
-   4. entity-options - object with list of field properties. Partly described in 
+  
+  
+   1. entity-list - current controller      
+   2. entity-service - service for controller   
+   3. entity-buttons - action buttons for list rows (action-button directive)   
+   4. entity-options - object with list of field properties. Partly described in    
        ENTITYLISTFIELDTYPES constant. entityOptions object is defined in controller
+              
    entityOptions sample:
-    `this.entityOptions = {
+   
+    this.entityOptions = {
       entityData: {
         title: 'Users',
         noDataText: 'No users yet.'
+        createLink: '' // Param to check if entity can be added to list
       },
       list: [
         {
@@ -144,18 +153,20 @@ Config file settings:
           className: 'name' // class name for field html element
         }
       ]
-    }`
-    Where entityOptions.list is list of fields to display,
-     entityOptions.entityData - variables to display at list header
+    }    
+  Where entityOptions.list is list of fields to display,  
+  entityOptions.entityData - variables to display at list header
 
 ## ENTITYLISTFIELDTYPES constant (entity-list directive)
 
  Container for different types of fields in entities lists - backups list, resources list, users list etc
-  date:                    date in days ago
-  dateCreated:             date field
-  name:                    name of entity
-  link:                    field with link
-  entityAccessInfoField:   constant for entity AccessInfo field
-  entityStatusField:       constant for entity Status field
-  avatarPictureField:      field with avatar
-  noType:                  default field type
+ 
+    date:                    date in days ago  
+    dateCreated:             date field  
+    name:                    name of entity  
+    link:                    field with link  
+    entityAccessInfoField:   constant for entity AccessInfo field  
+    entityStatusField:       constant for entity Status field  
+    avatarPictureField:      field with avatar  
+    noType:                  default field type
+  
