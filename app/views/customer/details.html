@@ -10,7 +10,7 @@
                     ng-show="CustomerDetailUpdate.files.length">
             </span>
         </section>
-        <section class="content" style="width: 200px" ng-show="CustomerDetailUpdate.isOwnerOrStaff(CustomerDetailUpdate.model)">
+        <section class="avatar-edit" ng-show="CustomerDetailUpdate.isOwnerOrStaff(CustomerDetailUpdate.model)">
             <a class="button" ngf-select ngf-accept="'image/*'"
                 ng-hide="CustomerDetailUpdate.files.length"
                 ng-model="CustomerDetailUpdate.files">New logo</a>
