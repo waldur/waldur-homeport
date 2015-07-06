@@ -40,7 +40,7 @@
               name: 'Description',
               propertyName: 'description',
               emptyText: '',
-              type: 'link',
+              type: ENTITYLISTFIELDTYPES.link,
               link: '',
               showForMobile: ENTITYLISTFIELDTYPES.showForMobile
             },
@@ -48,19 +48,19 @@
               name: 'State',
               propertyName: 'state',
               emptyText: '',
-              type: false
+              type: ENTITYLISTFIELDTYPES.noType
             },
             {
               name: 'Kept',
               propertyName: 'kept_until',
               emptyText: 'kept forever',
-              type: false
+              type: ENTITYLISTFIELDTYPES.noType
             },
             {
               name: 'Date',
               propertyName: 'created_at',
               emptyText: '',
-              type: 'date'
+              type: ENTITYLISTFIELDTYPES.date
             }
           ]
         };

@@ -110,6 +110,8 @@ Config file settings:
     listControlPanelShow:          variable for displaying action switcher panel: true to show, false to hide 
     currentCustomerUuidStorageKey: key for localStorage to ged customer uuid for customer selected in top menu 
     addonsList:                    additional options for virtual machine purchase on appstore page
+    resourceOfflineStatus:                 value for offline fields received from server
+    resourceOnlineStatus:                  value for online fields received from server
  
 
 ## Entity list directive
@@ -156,18 +158,60 @@ Config file settings:
     }    
   Where entityOptions.list is list of fields to display,  
   entityOptions.entityData - variables to display at list header
+  
+  Required fields for list types:  
+  entityStatusField: onlineStatus, offlineStatus  
+  link: link
 
 ## ENTITYLISTFIELDTYPES constant (entity-list directive)
 
  Container for different types of fields in entities lists - backups list, resources list, users list etc
+ Every type has list of fields for proper display. 
  
-    date:                    date in days ago  
-    dateCreated:             date field  
+    date:                    date in days ago
+        name          - string - name of column, required
+        propertyName  - string - name of field, required
+        className     - string - css class name for field, optional
+        emptyText     - string -  text to display for field with no value, required
+    dateCreated:             date field 
+        name          - string - name of field, required
+        propertyName  - string - name of field, required
+        className     - string - css class name for field, optional
+        emptyText     - string -  text to display for field with no value, required        
     name:                    name of entity  
+        name          - string - name of column, required
+        propertyName  - string - name of field, required
+        emptyText     - string -  text to display for field with no value, required
+        link          - string - link for ui-sref attribute, required
+        className     - string - css class name for field, optional
+        showForMobile - string, constant - constant to show field on mobile devices, required
     link:                    field with link  
-    entityAccessInfoField:   constant for entity AccessInfo field  
+        name          - string - name of column, required
+        propertyName  - string - name of field, required
+        className     - string - css class name for field, optional
+        emptyText     - string -  text to display for field with no value, required
+        link          - string - link for ui-sref attribute, required
+        showForMobile - string, constant - constant to show field on mobile devices, required  
+    listInField:   constant for entity AccessInfo field  
+        name          - string - name of column, required
+        propertyName  - string - name of field, required
+        className     - string - css class name for field, optional
+        emptyText     - string -  text to display for field with no value, required
     entityStatusField:       constant for entity Status field  
-    avatarPictureField:      field with avatar  
+        name          - string - name of column, required
+        propertyName  - string - name of field, required
+        className     - string - css class name for field, optional
+        emptyText     - string -  text to display for field with no value, required
+        onlineStatus  - string, constant - constant in ENV.onlineStatus
+        offlineStatus - string, constant - constant in  ENV.offlineStatus
+    avatarPictureField:      field with avatar      
+        className     - string - css class name for field, optional
+        showForMobile - string, constant - constant to show field on mobile devices, required
     noType:                  default field type
+        name          - string - name of column, required
+        propertyName  - string - name of field, required
+        className     - string - css class name for field, optional
+        emptyText     - string -  text to display for field with no value, required
+    
     showForMobile:           add class to show field on mobile devices
   

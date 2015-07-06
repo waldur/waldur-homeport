@@ -31,6 +31,7 @@
       link: 'link',
       entityAccessInfoField: 'entityAccessInfo',
       entityStatusField: 'entityStatus',
+      listInField: 'listInField',
       avatarPictureField: 'avatar',
       noType: false,
       showForMobile: true

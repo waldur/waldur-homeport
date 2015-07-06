@@ -8,7 +8,7 @@
             <li class="search divid">
                 <div class="search-box">
                     <input type="text" ng-model='entityList.searchInput' ng-change="entityList.search()">
-                    <button class="search-button"></button>
+                    <button class="search-button" ng-click="entityList.search()"></button>
                 </div>
             </li>
             <li>
@@ -94,21 +94,22 @@
                         <a ng-switch-when="link" ng-if="field.link" ui-sref="{{ field.link }}" stoppropagation>{{ entity[field.propertyName] }}</a>
                         <a ng-switch-when="link" ng-if="!field.link" stoppropagation>{{ entity[field.propertyName] }}</a>
                         <span ng-switch-when="date" am-time-ago="entity[field.propertyName]"></span>
-                        <span ng-switch-when="dateCreated">{{ entity.created | date:'medium' }}</span>
+                        <span ng-switch-when="dateCreated">{{ entity[field.propertyName] | date:'medium' }}</span>
 
-                        <span ng-switch-when="entityAccessInfo" ng-repeat="access in entity.external_ips">{{ access }}</span>
-                        <span ng-switch-when="entityAccessInfo" ng-if="entity.external_ips.length == 0"><i>No access info</i></span>
+                        <span ng-switch-when="listInField" ng-repeat="fieldListItem in entity[field.propertyName]">{{ fieldListItem }}</span>
+                        <span ng-switch-when="listInField" ng-if="entity[field.propertyName].length == 0"><i>{{ field.emptyText }}</i></span>
 
                         <span ng-switch-when="entityStatus" class="status"
-                              ng-class="{'online': entity.state == 'Online', 'offline' : entity.state == 'Offline'}">
-                            {{ entity.state }}</span>
+                              ng-class="{'online': entity[field.propertyName] == field.onlineStatus, 'offline' : entity[field.propertyName] == field.offlineStatus}">
+                            {{ entity[field.propertyName] }}</span>
 
                         <span ng-switch-default>{{ entity[field.propertyName] ? entity[field.propertyName] : field.emptyText }}</span>
 
                     </div>
-                    <div class="actions" >
+                    <div class="actions">
                         <action-button
-                                ng-if="!entityOptions.entityData.hideActionButtons" button-list="entityButtons"
+                                ng-if="!entityOptions.entityData.hideActionButtons"
+                                button-list="entityButtons"
                                 button-controller="entityList"
                                 ng-show="!entityList.showgroup"
                                 button-model="entity"></action-button>
@@ -118,8 +119,6 @@
         </ul>
     </div>
 
-    <div class="pagination" ng-show="entityList.list.length > 0 || entityList.searchInput">
-        <pagination pages-list="entityList" pages-service="entityList.service"></pagination>
-    </div>
+    <pagination pages-list="entityList" pages-service="entityList.service"></pagination>
 
 </div>

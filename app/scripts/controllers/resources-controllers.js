@@ -2,10 +2,10 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('baseResourceListController', ['baseControllerListClass', 'ENTITYLISTFIELDTYPES', baseResourceListController]);
+    .service('baseResourceListController', ['baseControllerListClass', 'ENV', 'ENTITYLISTFIELDTYPES', baseResourceListController]);
 
   // need for resource tab
-  function baseResourceListController(baseControllerListClass, ENTITYLISTFIELDTYPES) {
+  function baseResourceListController(baseControllerListClass, ENV, ENTITYLISTFIELDTYPES) {
     var ControllerListClass = baseControllerListClass.extend({
       init: function() {
         this._super();
@@ -41,7 +41,7 @@
               name: 'Name',
               propertyName: 'name',
               emptyText: '',
-              type: 'link',
+              type: ENTITYLISTFIELDTYPES.link,
               link: 'resources.details({uuid: entity.uuid})',
               showForMobile: ENTITYLISTFIELDTYPES.showForMobile
             },
@@ -49,20 +49,22 @@
               name: 'Project',
               propertyName: 'project_name',
               emptyText: '',
-              type: 'link',
+              type: ENTITYLISTFIELDTYPES.link,
               link: 'projects.details({uuid: entity.project_uuid })'
             },
             {
               name: 'Access information',
-              propertyName: 'access_information',
+              propertyName: 'external_ips',
               emptyText: 'No access info',
-              type: 'entityAccessInfo'
+              type: ENTITYLISTFIELDTYPES.listInField
             },
             {
               name: 'Status',
               propertyName: 'state',
               emptyText: '',
-              type: 'entityStatus'
+              type: ENTITYLISTFIELDTYPES.entityStatusField,
+              onlineStatus: ENV.resourceOnlineStatus,
+              offlineStatus: ENV.resourceOfflineStatus
 
             }
           ]
