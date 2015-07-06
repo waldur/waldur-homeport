@@ -11,11 +11,9 @@
     ]);
 
   function BaseBackupListController(backupsService, baseControllerListClass, $state, ENTITYLISTFIELDTYPES) {
-    var controllerScope = this;
     var Controller = baseControllerListClass.extend({
       init:function() {
         this.service = backupsService;
-        this.controllerScope = controllerScope;
         this._super();
         this.searchFieldName = 'description';
         this.actionButtonsListItems = [
@@ -33,7 +31,9 @@
             title: 'Backups',
             createLink: 'backups.create',
             createLinkText: 'Create a backup',
-            noDataText: 'You have no backups yet.'
+            noDataText: 'You have no backups yet.',
+            expandable: false
+
           },
           list: [
             {
@@ -64,8 +64,10 @@
       },
       deleteBackup:function(backup) {
         var vm = this;
-        vm.service.deleteBackup(backup.uuid).then(
-          vm.getList, vm.handleActionException);
+        if (confirm("Confirm deletion")) {
+          vm.service.deleteBackup(backup.uuid).then(
+            vm.getList, vm.handleActionException);
+        }
       },
       restoreBackup:function(backup) {
         $state.go('backups.restore', {uuid: backup.uuid});
@@ -87,6 +89,10 @@ angular.module('ncsaas')
   function BackupListController(BaseBackupListController) {
     var controllerScope = this;
       var Controller = BaseBackupListController.extend({
+        init:function() {
+          this.controllerScope = controllerScope;
+          this._super();
+        }
       });
 
     controllerScope.__proto__ = new Controller();

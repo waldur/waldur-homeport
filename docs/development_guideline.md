@@ -138,8 +138,11 @@ Config file settings:
     this.entityOptions = {
       entityData: {
         title: 'Users',
-        noDataText: 'No users yet.'
-        createLink: '' // Param to check if entity can be added to list
+        noDataText: 'No users yet.',
+        createLink: '', // Param to check if entity can be added to list
+        createLinkText: 'Create a backup', // text for link
+        expandable: false, // for entity element to be expandable or not
+        hideActionButtons: true // hide or show buttons with actions 
       },
       list: [
         {
