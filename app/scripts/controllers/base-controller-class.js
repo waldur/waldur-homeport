@@ -239,6 +239,8 @@
         vm.service.$get($stateParams.uuid).then(function(response) {
           vm.model = response;
           vm.afterActivate();
+        }, function() {
+          $state.go('errorPage.notFound');
         });
       },
       remove:function() {
