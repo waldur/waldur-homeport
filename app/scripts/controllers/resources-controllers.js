@@ -40,7 +40,6 @@
             {
               name: 'Name',
               propertyName: 'name',
-              emptyText: '',
               type: ENTITYLISTFIELDTYPES.link,
               link: 'resources.details({uuid: entity.uuid})',
               showForMobile: ENTITYLISTFIELDTYPES.showForMobile
@@ -48,7 +47,6 @@
             {
               name: 'Project',
               propertyName: 'project_name',
-              emptyText: '',
               type: ENTITYLISTFIELDTYPES.link,
               link: 'projects.details({uuid: entity.project_uuid })'
             },
@@ -61,7 +59,6 @@
             {
               name: 'Status',
               propertyName: 'state',
-              emptyText: '',
               type: ENTITYLISTFIELDTYPES.entityStatusField,
               onlineStatus: ENV.resourceOnlineStatus,
               offlineStatus: ENV.resourceOfflineStatus

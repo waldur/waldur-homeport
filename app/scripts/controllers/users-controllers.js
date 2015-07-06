@@ -49,7 +49,6 @@
             {
               name: 'Name',
               propertyName: 'full_name',
-              emptyText: '',
               type: ENTITYLISTFIELDTYPES.name,
               link: 'users.details({uuid: entity.uuid})',
               className: 'name',
@@ -58,13 +57,11 @@
             {
               name: 'Email',
               propertyName: 'email',
-              emptyText: '',
               type: ENTITYLISTFIELDTYPES.noType
             },
             {
               name: 'Username',
               propertyName: 'username',
-              emptyText: '',
               type: ENTITYLISTFIELDTYPES.noType
             }
           ]

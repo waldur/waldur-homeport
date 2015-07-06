@@ -39,7 +39,6 @@
             {
               name: 'Description',
               propertyName: 'description',
-              emptyText: '',
               type: ENTITYLISTFIELDTYPES.link,
               link: '',
               showForMobile: ENTITYLISTFIELDTYPES.showForMobile
@@ -47,7 +46,6 @@
             {
               name: 'State',
               propertyName: 'state',
-              emptyText: '',
               type: ENTITYLISTFIELDTYPES.noType
             },
             {
@@ -59,7 +57,6 @@
             {
               name: 'Date',
               propertyName: 'created_at',
-              emptyText: '',
               type: ENTITYLISTFIELDTYPES.date
             }
           ]

@@ -214,4 +214,4 @@ Config file settings:
         emptyText     - string -  text to display for field with no value, required
     
     showForMobile:           add class to show field on mobile devices
-  
+
