@@ -29,7 +29,9 @@
         </h2>
         <div ng-if="entityOptions.entityData.createLink" class="decision">
             <div class="col">
-                <a ui-sref="{{ entityOptions.entityData.createLink }}" class="button">{{ entityOptions.entityData.createLinkText }}</a>
+                <a ui-sref="{{ entityOptions.entityData.createLink }}" class="button">
+                    {{ entityOptions.entityData.createLinkText }}
+                </a>
             </div>
         </div>
     </div>
@@ -63,7 +65,7 @@
             <li class="list-item list-header">
                 <div class="checkbox"></div>
                 <div ng-repeat="fieldHead in entityOptions.list" class="additional-cell {{ fieldHead.className }}">
-                    <a href="#" class="list-sort">{{ fieldHead.name }}</a>
+                    <a class="list-sort">{{ fieldHead.name }}</a>
                 </div>
                 <div class="actions"></div>
             </li>
@@ -87,23 +89,36 @@
                         </span>
 
                         <h3 ng-switch-when="name" class="item-title">
-                            <a ng-if="field.link" ui-sref="{{ field.link }}" stoppropagation>{{ entity[field.propertyName] }}</a>
+                            <a ng-if="field.link" ui-sref="{{ field.link }}" stoppropagation>
+                                {{ entity[field.propertyName] }}
+                            </a>
                             <a ng-if="!field.link" stoppropagation>{{ entity[field.propertyName] }}</a>
                         </h3>
 
-                        <a ng-switch-when="link" ng-if="field.link" ui-sref="{{ field.link }}" stoppropagation>{{ entity[field.propertyName] }}</a>
-                        <a ng-switch-when="link" ng-if="!field.link" stoppropagation>{{ entity[field.propertyName] }}</a>
+                        <a ng-switch-when="link" ng-if="field.link" ui-sref="{{ field.link }}" stoppropagation>
+                            {{ entity[field.propertyName] }}
+                        </a>
+                        <a ng-switch-when="link" ng-if="!field.link" stoppropagation>
+                            {{ entity[field.propertyName] }}
+                        </a>
                         <span ng-switch-when="date" am-time-ago="entity[field.propertyName]"></span>
                         <span ng-switch-when="dateCreated">{{ entity[field.propertyName] | date:'medium' }}</span>
 
-                        <span ng-switch-when="listInField" ng-repeat="fieldListItem in entity[field.propertyName]">{{ fieldListItem }}</span>
-                        <span ng-switch-when="listInField" ng-if="entity[field.propertyName].length == 0"><i>{{ field.emptyText }}</i></span>
+                        <span ng-switch-when="listInField" ng-repeat="fieldListItem in entity[field.propertyName]">
+                            {{ fieldListItem }}
+                        </span>
+                        <span ng-switch-when="listInField" ng-if="entity[field.propertyName].length == 0">
+                            <i>{{ field.emptyText }}</i>
+                        </span>
 
                         <span ng-switch-when="entityStatus" class="status"
-                              ng-class="{'online': entity[field.propertyName] == field.onlineStatus, 'offline' : entity[field.propertyName] == field.offlineStatus}">
+                              ng-class="{'online': entity[field.propertyName] == field.onlineStatus,
+                               'offline' : entity[field.propertyName] == field.offlineStatus}">
                             {{ entity[field.propertyName] }}</span>
 
-                        <span ng-switch-default>{{ entity[field.propertyName] ? entity[field.propertyName] : field.emptyText }}</span>
+                        <span ng-switch-default>
+                            {{ entity[field.propertyName] ? entity[field.propertyName] : field.emptyText }}
+                        </span>
 
                     </div>
                     <div class="actions">
