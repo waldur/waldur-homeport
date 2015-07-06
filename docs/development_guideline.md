@@ -92,19 +92,129 @@ button-model - model of item
 ## Base configuration file base-config.js
 
 Base configuration file variables are overridden in custom-config.js
+
 Config file settings:
- name:                          environment name
- apiEndpoint:                   rest server address
- googleClientId:                google client id
- googleEndpointUrl:             google api url
- facebookClientId:              facebook client id
- facebookEndpointUrl:           facebook api url
- pageSizes:                     page size step to display different types of lists
- pageSize:                      default page size
- topMenuCustomersCount:         top menu customers quantity
- serviceIcon:                   image to display on appstore page
- topMenuCustomersCacheTime:     time to store customers in browser cache
- dashboardEventsCacheTime:      time to store events in browser cache
- listControlPanelShow:          variable for displaying action switcher panel: true to show, false to hide
- currentCustomerUuidStorageKey: key for localStorage to ged customer uuid for customer selected in top menu
- addonsList:                    additional options for virtual machine purchase on appstore page
+
+    name:                          environment name  
+    apiEndpoint:                   rest server address   
+    googleClientId:                google client id   
+    googleEndpointUrl:             google api url   
+    facebookClientId:              facebook client id   
+    facebookEndpointUrl:           facebook api url   
+    pageSizes:                     page size step to display different types of lists   
+    pageSize:                      default page size   
+    topMenuCustomersCount:         top menu customers quantity  
+    serviceIcon:                   image to display on appstore page  
+    topMenuCustomersCacheTime:     time to store customers in browser cache  
+    dashboardEventsCacheTime:      time to store events in browser cache  
+    listControlPanelShow:          variable for displaying action switcher panel: true to show, false to hide 
+    currentCustomerUuidStorageKey: key for localStorage to ged customer uuid for customer selected in top menu 
+    addonsList:                    additional options for virtual machine purchase on appstore page
+    resourceOfflineStatus:                 value for offline fields received from server
+    resourceOnlineStatus:                  value for online fields received from server
+ 
+
+## Entity list directive
+
+ Directive is used for displaying different lists throughout project.  
+ Sample directive usage:  
+ 
+    <entitylist entity-list="UserList" 
+                  entity-service="UserList.service" 
+                  entity-buttons="UserList.actionButtonsListItems" 
+                  entity-options="UserList.entityOptions"></entitylist>
+  
+  Directive parameters:
+  
+  
+   1. entity-list - current controller      
+   2. entity-service - service for controller   
+   3. entity-buttons - action buttons for list rows (action-button directive)   
+   4. entity-options - object with list of field properties. Partly described in    
+       ENTITYLISTFIELDTYPES constant. entityOptions object is defined in controller
+              
+   entityOptions sample:
+   
+    this.entityOptions = {
+      entityData: {
+        title: 'Users',
+        noDataText: 'No users yet.',
+        createLink: '', // Param to check if entity can be added to list
+        createLinkText: 'Create a backup', // text for link
+        expandable: false, // for entity element to be expandable or not
+        hideActionButtons: true // hide or show buttons with actions 
+      },
+      list: [
+        {
+          type: ENTITYLISTFIELDTYPES.avatarPictureField,
+          className: 'avatar'
+        },
+        {
+          name: 'Name',  // Display name of list column
+          propertyName: 'full_name', // name of field to display in column
+          emptyText: '', // text to output if field value is empty
+          type: ENTITYLISTFIELDTYPES.link, // field type - see ENTITYLISTFIELDTYPES constant for types list
+          link: 'users.details({uuid: user.uuid})', // ui-sref attr value
+          className: 'name' // class name for field html element
+        }
+      ]
+    }    
+  Where entityOptions.list is list of fields to display,  
+  entityOptions.entityData - variables to display at list header
+  
+  Required fields for list types:  
+  entityStatusField: onlineStatus, offlineStatus  
+  link: link
+
+## ENTITYLISTFIELDTYPES constant (entity-list directive)
+
+ Container for different types of fields in entities lists - backups list, resources list, users list etc
+ Every type has list of fields for proper display. 
+ 
+    date:                    date in days ago
+        name          - string - name of column, required
+        propertyName  - string - name of field, required
+        className     - string - css class name for field, optional
+        emptyText     - string -  text to display for field with no value, required
+    dateCreated:             date field 
+        name          - string - name of field, required
+        propertyName  - string - name of field, required
+        className     - string - css class name for field, optional
+        emptyText     - string -  text to display for field with no value, required        
+    name:                    name of entity  
+        name          - string - name of column, required
+        propertyName  - string - name of field, required
+        emptyText     - string -  text to display for field with no value, required
+        link          - string - link for ui-sref attribute, required
+        className     - string - css class name for field, optional
+        showForMobile - string, constant - constant to show field on mobile devices, required
+    link:                    field with link  
+        name          - string - name of column, required
+        propertyName  - string - name of field, required
+        className     - string - css class name for field, optional
+        emptyText     - string -  text to display for field with no value, required
+        link          - string - link for ui-sref attribute, required
+        showForMobile - string, constant - constant to show field on mobile devices, required  
+    listInField:   constant for entity AccessInfo field  
+        name          - string - name of column, required
+        propertyName  - string - name of field, required
+        className     - string - css class name for field, optional
+        emptyText     - string -  text to display for field with no value, required
+    entityStatusField:       constant for entity Status field  
+        name          - string - name of column, required
+        propertyName  - string - name of field, required
+        className     - string - css class name for field, optional
+        emptyText     - string -  text to display for field with no value, required
+        onlineStatus  - string, constant - constant in ENV.onlineStatus
+        offlineStatus - string, constant - constant in  ENV.offlineStatus
+    avatarPictureField:      field with avatar      
+        className     - string - css class name for field, optional
+        showForMobile - string, constant - constant to show field on mobile devices, required
+    noType:                  default field type
+        name          - string - name of column, required
+        propertyName  - string - name of field, required
+        className     - string - css class name for field, optional
+        emptyText     - string -  text to display for field with no value, required
+    
+    showForMobile:           add class to show field on mobile devices
+

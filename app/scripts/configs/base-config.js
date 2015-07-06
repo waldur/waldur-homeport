@@ -21,6 +21,8 @@ angular.module('ncsaas')
     listControlPanelShow: false,
     currentCustomerUuidStorageKey: 'currentCustomerUuid',
     showImport: false,
+    resourceOfflineStatus: 'Offline',
+    resourceOnlineStatus: 'Online',
 
     addonsList : [
       {

@@ -206,12 +206,14 @@
             } // sm
         } // &.ministatus
         &.additional-cell {
-            @include bp(xs) {
-                display: none;
-            } // xs
-            @include bp(sm) {
-                display: none;
-            } // sm
+            &:not(.display-for-mobile){
+                @include bp(xs) {
+                    display: none;
+                } // xs
+                @include bp(sm) {
+                    display: none;
+                } // sm
+            }
         } // &.additional-cell
         .more-details {
             @include property(margin-left, 10);

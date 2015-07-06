@@ -2,10 +2,10 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('baseResourceListController', ['baseControllerListClass', baseResourceListController]);
+    .service('baseResourceListController', ['baseControllerListClass', 'ENV', 'ENTITYLISTFIELDTYPES', baseResourceListController]);
 
   // need for resource tab
-  function baseResourceListController(baseControllerListClass) {
+  function baseResourceListController(baseControllerListClass, ENV, ENTITYLISTFIELDTYPES) {
     var ControllerListClass = baseControllerListClass.extend({
       init: function() {
         this._super();
@@ -32,6 +32,41 @@
             className: 'remove'
           }
         ];
+        this.entityOptions = {
+          entityData: {
+            noDataText: 'You have no resources yet.'
+          },
+          list: [
+            {
+              name: 'Name',
+              propertyName: 'name',
+              type: ENTITYLISTFIELDTYPES.link,
+              link: 'resources.details({uuid: entity.uuid})',
+              showForMobile: ENTITYLISTFIELDTYPES.showForMobile
+            },
+            {
+              name: 'Project',
+              propertyName: 'project_name',
+              type: ENTITYLISTFIELDTYPES.link,
+              link: 'projects.details({uuid: entity.project_uuid })'
+            },
+            {
+              name: 'Access information',
+              propertyName: 'external_ips',
+              emptyText: 'No access info',
+              type: ENTITYLISTFIELDTYPES.listInField
+            },
+            {
+              name: 'Status',
+              propertyName: 'state',
+              type: ENTITYLISTFIELDTYPES.entityStatusField,
+              onlineStatus: ENV.resourceOnlineStatus,
+              offlineStatus: ENV.resourceOfflineStatus
+
+            }
+          ]
+        };
+
       },
       stopResource:function(resource) {
         var vm = this;
@@ -250,6 +285,10 @@
     function ResourceBackupListTabController($scope, BaseBackupListController) {
         var controllerScope = this;
         var Controller = BaseBackupListController.extend({
+          init:function() {
+            this.controllerScope = controllerScope;
+            this._super();
+          },
           getList: function(filter) {
             var vm = this;
             var fn = this._super;

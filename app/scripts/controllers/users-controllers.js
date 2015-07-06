@@ -7,10 +7,11 @@
       'usersService',
       'projectPermissionsService',
       '$scope',
+      'ENTITYLISTFIELDTYPES',
       UserListController
     ]);
 
-  function UserListController(baseControllerListClass, usersService, projectPermissionsService, $scope) {
+  function UserListController(baseControllerListClass, usersService, projectPermissionsService, $scope, ENTITYLISTFIELDTYPES) {
     var controllerScope = this;
     var UserController = baseControllerListClass.extend({
       userProjects: {},
@@ -33,6 +34,38 @@
             clickFunction: function(user) {}
           }
         ];
+        this.entityOptions = {
+          entityData: {
+            title: 'Users',
+            noDataText: 'No users yet.',
+            hideActionButtons: true
+          },
+          list: [
+            {
+              type: ENTITYLISTFIELDTYPES.avatarPictureField,
+              className: 'avatar',
+              showForMobile: ENTITYLISTFIELDTYPES.showForMobile
+            },
+            {
+              name: 'Name',
+              propertyName: 'full_name',
+              type: ENTITYLISTFIELDTYPES.name,
+              link: 'users.details({uuid: entity.uuid})',
+              className: 'name',
+              showForMobile: ENTITYLISTFIELDTYPES.showForMobile
+            },
+            {
+              name: 'Email',
+              propertyName: 'email',
+              type: ENTITYLISTFIELDTYPES.noType
+            },
+            {
+              name: 'Username',
+              propertyName: 'username',
+              type: ENTITYLISTFIELDTYPES.noType
+            }
+          ]
+        };
       },
       showMore: function(user) {
         if (!this.userProjects[user.username]) {
