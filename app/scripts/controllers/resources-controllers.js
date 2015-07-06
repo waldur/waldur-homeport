@@ -285,6 +285,10 @@
     function ResourceBackupListTabController($scope, BaseBackupListController) {
         var controllerScope = this;
         var Controller = BaseBackupListController.extend({
+          init:function() {
+            this.controllerScope = controllerScope;
+            this._super();
+          },
           getList: function(filter) {
             var vm = this;
             var fn = this._super;
