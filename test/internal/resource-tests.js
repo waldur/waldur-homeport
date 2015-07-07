@@ -37,30 +37,29 @@ for(var i = 0; i < testData.length; i++) {
         element(by.cssContainingText('ul.nav-list.views li a', 'Resources')).click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/resources/');
 
-        element(by.css('li.add-something > a')).click();
-        element(by.cssContainingText('li.add-something li a.resource', 'Add resource')).click();
-        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/resources/add/');
+        element(by.cssContainingText('li.right-sort span', 'Add resource')).click();
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/appstore/');
       });
 
       it('I should be able to add new resource', function() {
-        element(by.model('ResourceAdd.resource.name')).sendKeys(resourceName);
+        element(by.model('AppStore.instance.name')).sendKeys(resourceName);
         // choose project
         element(by.cssContainingText('option', data.project)).click();
         // choose service
         element(by.cssContainingText('h3', data.service)).click();
         // choose template
-        element(by.cssContainingText('h3', data.template)).click();
+        element(by.cssContainingText('option', data.template)).click();
         // choose flavor
         element(by.cssContainingText('li', data.flavor)).click();
 
-        element(by.cssContainingText('a.button-apply', 'Add resource')).click();
+        element(by.cssContainingText('a.button-apply', 'Checkout')).click();
 
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/resources/');
       });
 
       it('I should be able to find added resource in resource list', function() {
-        element(by.model('ResourceList.searchInput')).sendKeys(resourceName);
-        expect(element(by.cssContainingText('h3.item-title', resourceName)).isPresent()).toBe(true);
+        element(by.model('entityList.searchInput')).sendKeys(resourceName);
+        expect(element(by.cssContainingText('h3.item-title a', resourceName)).isPresent()).toBe(true);
       });
 
       it('I should be able to logout', function() {
@@ -95,7 +94,7 @@ describe('Resource pagination test for Alice :', function() {
 
   it('After click on pagination size 5 I should see 5 elements on page', function() {
     // choose pagination size: 5
-    element(by.cssContainingText('ul.sort-list li a', '5')).click();
+    element(by.cssContainingText('.pagination .column.right a', '5')).click();
     // check elements count on page
     var elements = element.all(by.css('h3.item-title'));
     expect(elements.count()).toEqual(5);

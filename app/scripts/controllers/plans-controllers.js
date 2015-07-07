@@ -43,7 +43,7 @@
                 });
                 vm.getList();
               } else {
-                $state.go('pageNotFound');
+                $state.go('errorPage.notFound');
               }
             });
         });

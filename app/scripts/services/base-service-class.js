@@ -19,11 +19,13 @@
       pageSize:null,
       page:null,
       pages:null,
+      resultCount:null,
       currentStateService:null,
       endpoint:null,
       filterByCustomer: true,
       customerUuid:null,
       cacheTime: 0,
+      endpointPostfix: '',
 
       init:function() {
         this.pageSize = ENV.pageSize;
@@ -52,10 +54,12 @@
             deferred.resolve(cache.data);
           } else {
             vm.getFactory(true).query(filter, function(response, responseHeaders) {
-              var header = responseHeaders(),
-                objQuantity = !header['x-result-count'] ? null : header['x-result-count'];
-              if (objQuantity) {
-                vm.pages = Math.ceil(objQuantity/vm.pageSize);
+              var header = responseHeaders();
+              vm.resultCount = !header['x-result-count'] ? null : header['x-result-count'];
+              if (vm.resultCount) {
+                vm.pages = Math.ceil(vm.resultCount/vm.pageSize);
+                vm.sliceStart = (vm.page - 1) * vm.pageSize + 1;
+                vm.sliceEnd = Math.min(vm.resultCount, vm.page * vm.pageSize)
               }
               if (vm.cacheTime > 0) {
                 var cacheTime = new Date().getTime() + (vm.cacheTime * 1000);
@@ -102,9 +106,16 @@
         return deferred.promise;
       },
 
-      operation:function(operation, uuid) {
-        var deferred = $q.defer();
-        this.getFactory(false).operation({uuid: uuid, operation: operation}).$promise.then(function(response){
+      operation:function(operation, uuid, inputs) {
+        var deferred = $q.defer(),
+          parameters = {
+            uuid: uuid,
+            operation: operation
+          };
+        for (var inputName in inputs) {
+          parameters[inputName] = inputs[inputName];
+        }
+        this.getFactory(false).operation(parameters).$promise.then(function(response){
           deferred.resolve(response);
         }, function(err) {
           deferred.reject(err);
@@ -135,7 +146,7 @@
       },
 
       getEndpoint:function(isList) {
-        return this.endpoint;
+        return this.endpoint + this.endpointPostfix;
       },
 
       // helper, that adds functions to promise

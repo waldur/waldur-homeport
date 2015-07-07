@@ -36,7 +36,7 @@
 
 <span class="event" ng-if="event.event_type === EventList.EVENTTYPE.iaas_service_sync_failed">
     Cloud service
-    <a ui-sref="services.details({uuid: event.cloud_account_uuid})" class="name">{{ event.cloud_account_name }}</a>
+    <a ui-sref="services.details({uuid: event.cloud_account_uuid, provider: 'openstack'})" class="name">{{ event.cloud_account_name }}</a>
     has failed to sync
 </span>
 

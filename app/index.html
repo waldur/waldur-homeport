@@ -15,12 +15,23 @@
 <link rel="stylesheet" type="text/css" href="/static/css/style.css">
 <link rel="stylesheet" type="text/css" href="/static/css/angular-flash.css">
 <link rel="stylesheet" type="text/css" href="/static/css/angucomplete-alt.css">
+<link rel="stylesheet" type="text/css" href="/static/css/angular-chart.css">
+<link rel="stylesheet" type="text/css" href="/static/css/xeditable.css">
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
   <script src="/static/js/html5shiv.min.js"></script>
   <script src="/static/js/respond.min.js"></script>
 <![endif]-->
+
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-34543419-4', 'auto');
+</script>
+
 
 </head>
 <body ng-controller="MainController" ng-click="closeMenu()">
@@ -47,10 +58,13 @@
 <script src="static/js/angular/angular.js"></script>
 <script src="static/js/angular/angular-animate.js"></script>
 <script src="static/js/angular/angular-cookies.js"></script>
+<script src="static/js/angular/angular-cron-jobs.js"></script>
 <script src="static/js/angular/angular-flash.js"></script>
 <script src="static/js/angular/angular-loader.js"></script>
 <script src="static/js/angular/angular-gravatar.js"></script>
 <script src="static/js/angular/moment.js"></script>
+<script src="static/js/angular/angulartics.js"></script>
+<script src="static/js/angular/angulartics-ga.js"></script>
 <script src="static/js/angular/angular-moment.js"></script>
 <script src="static/js/angular/angular-resource.js"></script>
 <script src="static/js/angular/angular-scroll.js"></script>
@@ -63,8 +77,11 @@
 <script src="static/js/angular/angular-translate-storage-cookie.js"></script>
 <script src="static/js/angular/angular-translate-storage-local.js"></script>
 <script src="static/js/angular/angular-translate-loader-static-files.js"></script>
+<script src="static/js/angular/ng-file-upload.js"></script>
 <script src="static/js/spin.js"></script>
-
+<script src="static/js/Chart.js"></script>
+<script src="static/js/angular/tc-angular-chartjs.js"></script>
+<script src="static/js/angular/xeditable.js"></script>
 <!-- libs -->
 <script src="scripts/class.js"></script>
 
@@ -80,10 +97,13 @@
 <!-- controllers -->
 <script src="scripts/controllers/app-store-controller.js"></script>
 <script src="scripts/controllers/auth-controllers.js"></script>
+<script src="scripts/controllers/backups-controller.js"></script>
 <script src="scripts/controllers/base-controllers.js"></script>
 <script src="scripts/controllers/base-controller-class.js"></script>
+<script src="scripts/controllers/backup-schedules-controllers.js"></script>
 <script src="scripts/controllers/customer-controllers.js"></script>
 <script src="scripts/controllers/events-controller.js"></script>
+<script src="scripts/controllers/import-resource-controller.js"></script>
 <script src="scripts/controllers/initial-data-controller.js"></script>
 <script src="scripts/controllers/keys-controller.js"></script>
 <script src="scripts/controllers/payments-controllers.js"></script>
@@ -92,14 +112,26 @@
 <script src="scripts/controllers/projects-controllers.js"></script>
 <script src="scripts/controllers/resources-controllers.js"></script>
 <script src="scripts/controllers/services-controllers.js"></script>
+<script src="scripts/controllers/statistic-controllers.js"></script>
 <script src="scripts/controllers/users-controllers.js"></script>
+<script src="scripts/controllers/support-controllers.js"></script>
 <!-- services -->
 <script src="scripts/services/auth-service.js"></script>
+<script src="scripts/services/backups-service.js"></script>
+<script src="scripts/services/backup-schedules-service.js"></script>
 <script src="scripts/services/base-service-class.js"></script>
 <script src="scripts/services/current-state-service.js"></script>
 <script src="scripts/services/customer-permissions-service.js"></script>
 <script src="scripts/services/customers-service.js"></script>
+<script src="scripts/services/digitalocean-link-service.js"></script>
+<script src="scripts/services/digitalocean-resources-service.js"></script>
+<script src="scripts/services/digitalocean-service.js"></script>
+<script src="scripts/services/digitalocean-service-project-link-service.js"></script>
+<script src="scripts/services/join-service.js"></script>
+<script src="scripts/services/join-service-project-link-service.js"></script>
+<script src="scripts/services/customer-image-service.js"></script>
 <script src="scripts/services/events-service.js"></script>
+<script src="scripts/services/flavors-service.js"></script>
 <script src="scripts/services/keys-service.js"></script>
 <script src="scripts/services/orders-service.js"></script>
 <script src="scripts/services/plan-customers-service.js"></script>
@@ -109,19 +141,25 @@
 <script src="scripts/services/projects-service.js"></script>
 <script src="scripts/services/resources-service.js"></script>
 <script src="scripts/services/services-service.js"></script>
+<script src="scripts/services/statistics-service.js"></script>
 <script src="scripts/services/templates-service.js"></script>
 <script src="scripts/services/users-service.js"></script>
+<script src="scripts/services/issues-service.js"></script>
+<script src="scripts/services/issue-comments-service.js"></script>
 <!-- directives -->
+<script src="scripts/directives/action-button.js"></script>
 <script src="scripts/directives/filter-list.js"></script>
 <script src="scripts/directives/footer-position.js"></script>
 <script src="scripts/directives/login-box.js"></script>
 <script src="scripts/directives/mini-pagination.js"></script>
 <script src="scripts/directives/pagination.js"></script>
-<script src="scripts/directives/page-size.js"></script>
 <script src="scripts/directives/sort-line.js"></script>
 <script src="scripts/directives/details-content.js"></script>
 <script src="scripts/directives/stoppropagation.js"></script>
 <script src="scripts/directives/fixed-when-scroll.js"></script>
+<script src="scripts/directives/abs-center.js"></script>
+<script src="scripts/directives/help-icon.js"></script>
+<script src="scripts/directives/entity-list.js"></script>
 
 <span us-spinner></span>
 

@@ -171,7 +171,7 @@
         vm.instance.$save(success, error);
         function success() {
           vm.afterSave();
-          vm.successFlash(vm.successMessage.replace('{vm_name}', vm.instance.name));
+          vm.successFlash(vm.getSuccessMessage());
           vm.successRedirect();
         }
         function error(response) {
@@ -190,6 +190,9 @@
         } else {
           $state.go(this.listState);
         }
+      },
+      getSuccessMessage: function() {
+        return this.successMessage.replace('{vm_name}', this.instance.name);
       }
     });
 
@@ -235,6 +238,9 @@
         var vm = this;
         vm.service.$get($stateParams.uuid).then(function(response) {
           vm.model = response;
+          vm.afterActivate();
+        }, function() {
+          $state.go('errorPage.notFound');
         });
       },
       remove:function() {
@@ -250,7 +256,8 @@
           );
         }
       },
-      afterUpdate:function() {}
+      afterUpdate:function() {},
+      afterActivate: function() {}
     });
 
     return ControllerDetailUpdateClass;

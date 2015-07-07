@@ -36,6 +36,7 @@
             align-items: center;
         } // &.inputs-centered
         .col {
+            padding: 0;
             &.label {
                 width: 160px;
                 text-align: right;
@@ -45,6 +46,10 @@
                 @include bp(sm) {
                     text-align: left;
                 } // sm
+                label {
+                    @include inline-middle;
+                    padding: 3px 10px;
+                }
             } // &.label
             &.input {
                 width: calc(100% - 320px);

@@ -24,32 +24,15 @@
                             <!-- template-choice -->
                             <div class="appstore-templates">
                                 <!-- template -->
-                                <div class="appstore-template state">
+                                <div class="appstore-template"
+                                    ng-repeat="service in ServiceAdd.serviceList"
+                                    ng-class="{'state': ServiceAdd.selectedService == service}"
+                                    ng-click="ServiceAdd.setService(service)">
                                     <div class="icon">
-                                        <img src="/static/images/icons/icon_openstack_small.png" alt="" class="icon">
+                                        <img ng-src="{{ service.icon }}" alt="" class="icon">
                                     </div>
                                     <div class="description">
-                                        <h3>OpenStack</h3>
-                                    </div>
-                                </div>
-                                <!-- /template -->
-                                <!-- template -->
-                                <div class="appstore-template">
-                                    <div class="icon">
-                                        <img src="/static/images/icons/icon_digitalocean_small.png" alt="" class="icon">
-                                    </div>
-                                    <div class="description">
-                                        <h3>Digital Ocean</h3>
-                                    </div>
-                                </div>
-                                <!-- /template -->
-                                <!-- template -->
-                                <div class="appstore-template">
-                                    <div class="icon">
-                                        <img src="/static/images/icons/icon_aws_small.png" alt="" class="icon">
-                                    </div>
-                                    <div class="description">
-                                        <h3>AWS</h3>
+                                        <h3>{{ service.name }}</h3>
                                     </div>
                                 </div>
                                 <!-- /template -->
@@ -59,9 +42,10 @@
                     </section>
                 </div>
             </div>
-            <div class="col full">
+            <div class="col full" ng-show="ServiceAdd.selectedService.id == 'openstack'">
                 <div>
-                    <input type="checkbox" id="openstackdummy" ng-model="ServiceAdd.instance.dummy">
+                    <input type="checkbox" id="openstackdummy" ng-model="ServiceAdd.instance.dummy"
+                           ng-change="ServiceAdd.dummyCheckboxChange()">
                     <label for="openstackdummy">
                         Dummy
                     </label>
@@ -76,47 +60,52 @@
         <div class="divider"></div>
         <div class="form-row">
             <div class="col label">
-                <label for="">Service name:</label>
+                <label for="serviceName">Service name:</label>
             </div>
-            <div class="col input">
-                <input type="text" placeholder="OpenStack Testbed" ng-model="ServiceAdd.instance.name">
+            <div class="col input input-full">
+                <input type="text" placeholder="Service Testbed" ng-model="ServiceAdd.instance.name" id="serviceName">
                 <div class="error arrow-up" ng-show="ServiceAdd.errors.name">
                     <ul class="error-list">
                         <li ng-repeat="error in ServiceAdd.errors.name">{{ error }}</li>
                     </ul>
                 </div>
             </div>
-            <div class="col description">
-                <article class="light-description">
-                    Name of the service
-                </article>
-            </div>
         </div>
-        <div class="form-row">
+        <div class="form-row" ng-show="ServiceAdd.selectedService.id == 'openstack'">
             <div class="col label">
-                <label for="">Auth URL:</label>
+                <label for="authUrl"><helpicon help-text="Service Auth URL"></helpicon>  Auth URL:</label>
             </div>
-            <div class="col input">
-                <input type="text" placeholder="http://keystone.example.com:5000/v2.0" ng-model="ServiceAdd.instance.auth_url">
+            <div class="col input input-full">
+                <input type="text" class="with-help" id="authUrl"
+                       placeholder="http://keystone.example.com:5000/v2.0"
+                       ng-model="ServiceAdd.instance.auth_url" ng-disabled="ServiceAdd.instance.dummy">
                 <div class="error arrow-up" ng-show="ServiceAdd.errors.auth_url">
                     <ul class="error-list">
                         <li ng-repeat="error in ServiceAdd.errors.auth_url">{{ error }}</li>
                     </ul>
                 </div>
             </div>
-            <div class="col description">
-                <article class="light-description">
-                    URL of supported OpenStack Keystone
-                </article>
+        </div>
+        <div class="form-row" ng-show="ServiceAdd.selectedService.id == 'digitalocean'">
+            <div class="col label">
+                <label for="token"><helpicon help-text="It is used for authentication instead of a password"></helpicon> Auth token:</label>
+            </div>
+            <div class="col input input-full">
+                <input type="text" ng-model="ServiceAdd.instance.token" id="token">
+                <div class="error arrow-up" ng-show="ServiceAdd.errors.token">
+                    <ul class="error-list">
+                        <li ng-repeat="error in ServiceAdd.errors.token">{{ error }}</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- non field errors -->
-    <div class="simple-line" ng-show="controller.errors.non_field_errors">
+    <div class="simple-line" ng-show="ServiceAdd.errors.non_field_errors">
         <div class="error">
             <ul class="error-list">
-                <li ng-repeat="error in controller.errors.non_field_errors">
+                <li ng-repeat="error in ServiceAdd.errors.non_field_errors">
                     {{ error }}
                 </li>
             </ul>
@@ -126,10 +115,10 @@
 
     <div class="decision">
         <div class="col">
-            <a class="button-cancel" ng-click="ServiceAdd.cancel()">Cancel</a>
+            <a class="button-apply" ng-click="ServiceAdd.save()">Add service</a>
         </div>
         <div class="col">
-            <a class="button-apply" ng-click="ServiceAdd.save()">Add service</a>
+            <a class="button-cancel" ng-click="ServiceAdd.cancel()">Cancel</a>
         </div>
     </div>
 </div>

@@ -19,6 +19,7 @@
         right: 0;
         a {
             padding: 5px 15px;
+            padding-left: 30px;
         } // a
     } // lang
     &.user-area {
@@ -138,6 +139,15 @@
                     transform: translate(1.1, 1.1);
                 } // &:before
             } // invite-user
+            &.import {
+                &:before {
+                    position: absolute;
+                    @include icon-fa;
+                    @include property(left, 10);
+                    content: '\f0ed';
+                    transform: translate(1.1, 1.1);
+                } // &:before
+            } // import
         } // > a
     } // > li
 } // nav-sublist

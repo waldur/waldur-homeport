@@ -12,35 +12,38 @@
         <section class="short-form">
             <div class="form-row">
                 <div class="col label">
-                    <label for="">Organization name</label>
+                    <label for="name">Organization name</label>
                 </div>
                 <div class="col input">
-                    <input type="text" placeholder="name" ng-model="CustomerAdd.instance.name">
+                    <input type="text" id="name" placeholder="name" ng-model="CustomerAdd.instance.name">
                     <div class="error arrow-up" ng-show="CustomerAdd.errors.name">
                         <ul class="error-list">
                             <li ng-repeat="error in CustomerAdd.errors.name">{{ error }}</li>
                         </ul>
                     </div>
                 </div>
-                <div class="col description">
-                    <article class="light-description">
-
-                    </article>
+            </div>
+            <div class="form-row">
+                <div class="col label">
+                    <label for="registration_code">Registration code</label>
+                </div>
+                <div class="col input">
+                    <input type="text" id="registration_code" placeholder="code" ng-model="CustomerAdd.instance.registration_code">
+                    <div class="error arrow-up" ng-show="CustomerAdd.errors.registration_code">
+                        <ul class="error-list">
+                            <li ng-repeat="error in CustomerAdd.errors.registration_code">{{ error }}</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <div class="form-row">
                 <div class="col label">
-                    <label for="">Organization contact details</label>
+                    <label for="contact_details">Contact details</label>
                 </div>
                 <div class="col input">
-                <textarea class="normal"
-                          placeholder="Customer contact details"
+                <textarea id="contact_details"
+                          placeholder="Organization contact details"
                           ng-model="CustomerAdd.instance.contact_details"></textarea>
-                </div>
-                <div class="col description">
-                    <article class="light-description">
-
-                    </article>
                 </div>
             </div>
         </section>

@@ -2,31 +2,88 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('baseResourceListController', ['baseControllerListClass', baseResourceListController]);
+    .service('baseResourceListController', ['baseControllerListClass', 'ENV', 'ENTITYLISTFIELDTYPES', baseResourceListController]);
 
   // need for resource tab
-  function baseResourceListController(baseControllerListClass) {
+  function baseResourceListController(baseControllerListClass, ENV, ENTITYLISTFIELDTYPES) {
     var ControllerListClass = baseControllerListClass.extend({
       init: function() {
         this._super();
         this.searchFieldName = 'name';
+        this.actionButtonsListItems = [
+          {
+            title: 'Start',
+            clickFunction: this.startResource.bind(this.controllerScope),
+            isDisabled: this.isOperationAvailable.bind(this.controllerScope, 'start')
+          },
+          {
+            title: 'Stop',
+            clickFunction: this.stopResource.bind(this.controllerScope),
+            isDisabled: this.isOperationAvailable.bind(this.controllerScope, 'stop')
+          },
+          {
+            title: 'Restart',
+            clickFunction: this.restartResource.bind(this.controllerScope),
+            isDisabled: this.isOperationAvailable.bind(this.controllerScope, 'restart')
+          },
+          {
+            title: 'Remove',
+            clickFunction: this.remove.bind(this.controllerScope),
+            className: 'remove'
+          }
+        ];
+        this.entityOptions = {
+          entityData: {
+            noDataText: 'You have no resources yet.'
+          },
+          list: [
+            {
+              name: 'Name',
+              propertyName: 'name',
+              type: ENTITYLISTFIELDTYPES.name,
+              link: 'resources.details({uuid: entity.uuid})',
+              showForMobile: ENTITYLISTFIELDTYPES.showForMobile
+            },
+            {
+              name: 'Project',
+              propertyName: 'project_name',
+              type: ENTITYLISTFIELDTYPES.link,
+              link: 'projects.details({uuid: entity.project_uuid })'
+            },
+            {
+              name: 'Access information',
+              propertyName: 'external_ips',
+              emptyText: 'No access info',
+              type: ENTITYLISTFIELDTYPES.listInField
+            },
+            {
+              name: 'Status',
+              propertyName: 'state',
+              type: ENTITYLISTFIELDTYPES.entityStatusField,
+              onlineStatus: ENV.resourceOnlineStatus,
+              offlineStatus: ENV.resourceOfflineStatus
+
+            }
+          ]
+        };
+
       },
       stopResource:function(resource) {
         var vm = this;
         vm.service.stopResource(resource.uuid).then(
-          vm.reInitResource.bind(null, resource), vm.handleActionException);
+          vm.reInitResource.bind(vm, resource), vm.handleActionException);
       },
       startResource:function(resource) {
         var vm = this;
         vm.service.startResource(resource.uuid).then(
-          vm.reInitResource.bind(null, resource), vm.handleActionException);
+          vm.reInitResource.bind(vm, resource), vm.handleActionException);
       },
       restartResource:function(resource) {
         var vm = this;
         vm.service.restartResource(resource.uuid).then(
-          vm.reInitResource.bind(null, resource), vm.handleActionException);
+          vm.reInitResource.bind(vm, resource), vm.handleActionException);
       },
-      isOperationAvailable:function(resource, operation) {
+      isOperationAvailable:function(operation, resource) {
         var availableOperations = this.service.getAvailableOperations(resource);
         operation = operation.toLowerCase();
         return availableOperations.indexOf(operation) !== -1;
@@ -51,6 +108,22 @@
     var ResourceController = baseResourceListController.extend({
       init:function() {
         this.service = resourcesService;
+        this.controllerScope = controllerScope;
+        this._super();
+      }
+    });
+
+    controllerScope.__proto__ = new ResourceController();
+  }
+
+  angular.module('ncsaas')
+    .controller('DigitalOceanListController', ['baseResourceListController', 'digitalOceanResourcesService', DigitalOceanListController]);
+
+  function DigitalOceanListController(baseResourceListController, digitalOceanResourcesService) {
+    var controllerScope = this;
+    var ResourceController = baseResourceListController.extend({
+      init:function() {
+        this.service = digitalOceanResourcesService;
         this.controllerScope = controllerScope;
         this._super();
       }
@@ -166,5 +239,66 @@
     });
 
     controllerScope.__proto__ = new ResourceController();
+  }
+})();
+
+(function() {
+  angular.module('ncsaas')
+      .controller('ResourceDetailUpdateController', [
+        '$stateParams',
+        '$scope',
+        'resourcesService',
+        'baseControllerDetailUpdateClass',
+        ResourceDetailUpdateController
+      ]);
+
+  function ResourceDetailUpdateController($stateParams, $scope, resourcesService, baseControllerDetailUpdateClass) {
+    var controllerScope = this;
+    var Controller = baseControllerDetailUpdateClass.extend({
+      activeTab: 'backups',
+
+      init:function() {
+        this.service = resourcesService;
+        this.controllerScope = controllerScope;
+        this._super();
+        this.detailsState = 'resources.details';
+        this.activeTab = $stateParams.tab ? $stateParams.tab : this.activeTab;
+      },
+
+      afterActivate: function() {
+        $scope.$broadcast('resourceLoaded', this.model);
+      }
+    });
+
+    controllerScope.__proto__ = new Controller();
+  }
+})();
+
+(function() {
+  angular.module('ncsaas')
+    .controller('ResourceBackupListTabController', [
+        '$scope',
+        'BaseBackupListController',
+        ResourceBackupListTabController
+      ]);
+
+    function ResourceBackupListTabController($scope, BaseBackupListController) {
+        var controllerScope = this;
+        var Controller = BaseBackupListController.extend({
+          init:function() {
+            this.controllerScope = controllerScope;
+            this._super();
+          },
+          getList: function(filter) {
+            var vm = this;
+            var fn = this._super;
+            $scope.$on('resourceLoaded', function(event, resource){
+              vm.service.defaultFilter.backup_source = resource.url;
+              fn.apply(vm, filter);
+            })
+          }
+        });
+
+      controllerScope.__proto__ = new Controller();
   }
 })();

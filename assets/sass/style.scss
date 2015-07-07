@@ -1,6 +1,3 @@
-// functions & mixins
-@import "functions/rem.scss";
-
 // mixins
 @import "mixins/mediaqueries.scss ";
 @import "mixins/propertis.scss";
@@ -14,6 +11,7 @@
 
 // blocks
 @import "blocks/components.scss";
+@import "blocks/cron-jobs-directive.scss";
 @import "blocks/app-header.scss";
 @import "blocks/nav-list.scss";
 @import "blocks/container.scss";
@@ -60,3 +58,9 @@
 @import "blocks/list-blocks.scss";
 @import "blocks/comment-form.scss";
 @import "blocks/flash-message.scss";
+@import "blocks/toggle-link.scss";
+@import "blocks/help-icon.scss";
+@import "blocks/backup.scss";
+@import "blocks/error-404.scss";
+@import "blocks/dashboard.scss";
+@import "blocks/editable.scss";

@@ -1,0 +1,29 @@
+<div ng-controller="ResourceDetailUpdateController as ResourceDetailUpdate">
+
+    <div class="profile-view">
+        <section class="content">
+            <h2 class="app-title">{{ ResourceDetailUpdate.model.name }}</h2>
+            <div>
+                {{ResourceDetailUpdate.model.description }}
+            </div>
+        </section>
+        <section class="actions">
+            <div class="actions-button">
+                <a class="button" ng-click="openActions=!openActions">actions</a>
+                <ul class="actions-dropdown" ng-show="openActions">
+                    <li>
+                        <a ui-sref="resources.update({uuid:ResourceDetailUpdate.model.uuid})" class="button-simple">Edit</a>
+                    </li>
+                    <li>
+                        <a class="button-simple">Backup</a>
+                    </li>
+                    <li>
+                        <a class="button-simple" ng-click="ResourceDetailUpdate.remove()">Delete</a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </div>
+    <div ui-view="tabs"></div>
+
+</div>

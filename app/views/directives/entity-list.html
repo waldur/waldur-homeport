@@ -1,0 +1,139 @@
+<div>
+
+    <div class="white-box" ng-show="entityList.list.length > 0 || entityList.searchInput">
+        <ul class="sort-list">
+            <li ng-if="entityOptions.entityData.title" class="title">
+                <h2 class="app-title">{{ entityOptions.entityData.title }}</h2>
+            </li>
+            <li class="search divid">
+                <div class="search-box">
+                    <input type="text" ng-model='entityList.searchInput' ng-change="entityList.search()">
+                    <button class="search-button" ng-click="entityList.search()"></button>
+                </div>
+            </li>
+            <li>
+                <filter-list filter-controller="entityList"></filter-list>
+            </li>
+            <li ng-if="entityOptions.entityData.createLink" class="right-sort">
+                <a ui-sref="{{ entityOptions.entityData.createLink }}" class="button">
+                    <span class="icon plus"></span>
+                    <span>{{ entityOptions.entityData.createLinkText }}</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="white-box no-styles" ng-show="entityList.list.length == 0 && !entityList.searchInput">
+        <h2 class="app-title">
+            {{ entityOptions.entityData.noDataText }}
+        </h2>
+        <div ng-if="entityOptions.entityData.createLink" class="decision">
+            <div class="col">
+                <a ui-sref="{{ entityOptions.entityData.createLink }}" class="button">
+                    {{ entityOptions.entityData.createLinkText }}
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- view-control -->
+    <!-- TODO: this functionality is not relevant and should be disabled until corresponding backend is ready. -->
+    <section class="view-control" ng-if="(entityList.list.length > 0 || entityList.searchInput) && entityList.controlPanelShow">
+        <div class="list-item no-cursor">
+            <div>
+                <div class="checkbox" ng-show="entityList.showgroup">
+                    <input type="checkbox"
+                           ng-checked="entityList.selectedInstances.length"
+                           ng-click="entityList.changeAllSelectedInstances()">
+                </div>
+            </div>
+            <div class="actions switch">
+                <span class="label-text" ng-class="{'low-grade': !entityList.showgroup}">batch</span>
+                <div class="checkbox-toggle">
+                    <input type="checkbox" id="control-types" ng-click="entityList.showgroup=!entityList.showgroup">
+                    <label for="control-types"></label>
+                </div>
+                <span class="label-text special-left" ng-class="{'low-grade': entityList.showgroup}">single</span>
+            </div>
+        </div>
+    </section>
+    <!-- /view-control -->
+
+
+    <div class="white-box" ng-show="entityList.list.length > 0 || entityList.searchInput">
+        <ul class="object-list">
+            <li class="list-item list-header">
+                <div class="checkbox"></div>
+                <div ng-repeat="fieldHead in entityOptions.list" class="additional-cell {{ fieldHead.className }}">
+                    <a class="list-sort">{{ fieldHead.name }}</a>
+                </div>
+                <div class="actions"></div>
+            </li>
+            <li ng-repeat="entity in entityList.list">
+                <div class="list-item list" ng-class="{'opened': expandItem, 'pointer' : entityList.entityData.expandable}"
+                     ng-click="expandItem=!expandItem">
+                    <div class="checkbox">
+                        <div class="checkbox" stoppropagation>
+                            <input type="checkbox" ng-show="entityList.showgroup"
+                                   ng-checked="entityList.isInstanceSelected(entity)"
+                                   ng-click="entityList.changeInstanceSelection(entity)">
+                        </div>
+                    </div>
+                    <div ng-repeat="field in entityOptions.list"
+                         ng-switch="field.type"
+                         ng-class="{ 'display-for-mobile' : field.showForMobile }"
+                         class="additional-cell {{ field.className }}">
+
+                        <span ng-switch-when="avatar" class="avatar">
+                            <img gravatar-src="entity.email" gravatar-size="100" alt="" class="avatar-img">
+                        </span>
+
+                        <h3 ng-switch-when="name" class="item-title">
+                            <a ng-if="field.link" ui-sref="{{ field.link }}" stoppropagation>
+                                {{ entity[field.propertyName] }}
+                            </a>
+                            <a ng-if="!field.link" stoppropagation>{{ entity[field.propertyName] }}</a>
+                        </h3>
+
+                        <a ng-switch-when="link" ng-if="field.link" ui-sref="{{ field.link }}" stoppropagation>
+                            {{ entity[field.propertyName] }}
+                        </a>
+                        <a ng-switch-when="link" ng-if="!field.link" stoppropagation>
+                            {{ entity[field.propertyName] }}
+                        </a>
+                        <span ng-switch-when="date" am-time-ago="entity[field.propertyName]"></span>
+                        <span ng-switch-when="dateCreated">{{ entity[field.propertyName] | date:'medium' }}</span>
+
+                        <span ng-switch-when="listInField" ng-repeat="fieldListItem in entity[field.propertyName]">
+                            {{ fieldListItem }}
+                        </span>
+                        <span ng-switch-when="listInField" ng-if="entity[field.propertyName].length == 0">
+                            <i>{{ field.emptyText }}</i>
+                        </span>
+
+                        <span ng-switch-when="entityStatus" class="status"
+                              ng-class="{'online': entity[field.propertyName] == field.onlineStatus,
+                               'offline' : entity[field.propertyName] == field.offlineStatus}">
+                            {{ entity[field.propertyName] }}</span>
+
+                        <span ng-switch-default>
+                            {{ entity[field.propertyName] ? entity[field.propertyName] : field.emptyText }}
+                        </span>
+
+                    </div>
+                    <div class="actions">
+                        <action-button
+                                ng-if="!entityOptions.entityData.hideActionButtons"
+                                button-list="entityButtons"
+                                button-controller="entityList"
+                                ng-show="!entityList.showgroup"
+                                button-model="entity"></action-button>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <pagination pages-list="entityList" pages-service="entityList.service"></pagination>
+
+</div>

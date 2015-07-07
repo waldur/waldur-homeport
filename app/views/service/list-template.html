@@ -14,7 +14,6 @@
         <li class="title">
             <h2 class="app-title">Services</h2>
         </li>
-        <pagesize pages-list="ServiceList" pages-service="ServiceList.service"></pagesize>
         <li class="search divid">
             <div class="search-box">
                 <input type="text" ng-model='ServiceList.searchInput' ng-change="ServiceList.search()">
@@ -31,7 +30,7 @@
 </div>
 
 <!-- view-control -->
-<section class="view-control" ng-show="ServiceList.list.length > 0 || ServiceList.searchInput">
+<section class="view-control" ng-show="ServicesList.controlPanelShow && ServiceList.list.length > 0 || ServiceList.searchInput">
     <div class="list-item no-cursor">
         <div class="checkbox">
             <div class="checkbox" ng-show="ServiceList.showgroup">
@@ -90,26 +89,20 @@
                     </div>
                 <div class="name">
                     <h3 class="item-title">
-                        <a ui-sref="services.details({uuid: service.uuid})" stoppropagation>{{ service.name }}</a>
+                        <a ui-sref="services.details({uuid: service.uuid, provider: service.provider})" stoppropagation>{{ service.name }}</a>
                     </h3>
                 </div>
                 <div class="additional-cell" ng-hide="collapsedItem">
-                    OpenStack
+                    {{ service.provider }}
                 </div>
                 <div class="actions">
-                    <div class="actions-button" ng-show="!ServiceList.showgroup" stoppropagation>
-                        <a class="button" ng-click="openActions=!openActions">actions</a>
-                        <ul class="actions-dropdown" ng-show="openActions">
-                            <li>
-                                <a class="button-simple remove"
-                                   ui-sref="services.list" ng-click="ServiceList.remove(service)">
-                                Remove</a>
-                            </li>
-                        </ul>
-                    </div>
+                    <action-button button-list="ServiceList.actionButtonsListItems"
+                                   button-controller="ServiceList"
+                                   ng-show="!ServiceList.showgroup"
+                                   button-model="service"></action-button>
                 </div>
             </div>
-            <div class="list-item-details" ng-show="expandItem">
+            <div class="list-item-details" ng-show="expandItem" ng-class="{'opened': expandItem}">
                 <section class="on-mobile">
                     <header>
                         <h4 class="item-title">Type</h4>
@@ -133,7 +126,4 @@
     </ul>
 </div>
 
-<div class="pagination" ng-show="ServiceList.list.length > 0 || ServiceList.searchInput">
-    <pagination pages-list="ServiceList" pages-service="ServiceList.service"></pagination>
-</div>
-
+<pagination pages-list="ServiceList" pages-service="ServiceList.service"></pagination>

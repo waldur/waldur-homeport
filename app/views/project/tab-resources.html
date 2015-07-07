@@ -1,7 +1,6 @@
 <div ng-controller="ProjectResourcesTabController as ProjectResourcesTab">
     <div class="white-box">
         <ul class="sort-list">
-            <pagesize pages-list="ProjectResourcesTab" pages-service="ProjectResourcesTab.service"></pagesize>
             <li class="search divid">
                 <div class="search-box">
                     <input type="text" ng-model='ProjectResourcesTab.searchInput' ng-change="ProjectResourcesTab.search()">
@@ -101,41 +100,15 @@
                             {{ resource.state }}</span>
                     </div>
                     <div class="actions">
-                        <div class="actions-button" ng-show="!ProjectResourcesTab.showgroup">
-                            <a class="button" ng-click="openActions=!openActions">actions</a>
-                            <ul class="actions-dropdown" ng-show="openActions">
-                                <li>
-                                    <a class="button-simple start"
-                                        ng-click="ProjectResourcesTab.startResource(resource)"
-                                        ng-class="{'disabled': !ProjectResourcesTab.isOperationAvailable(resource, 'start')}">
-                                    Start</a>
-                                </li>
-                                <li>
-                                    <a class="button-simple stop"
-                                        ng-click="ProjectResourcesTab.stopResource(resource)" title="Stop"
-                                        ng-class="{'disabled': !ProjectResourcesTab.isOperationAvailable(resource, 'stop')}">
-                                    Stop</a>
-                                </li>
-                                <li>
-                                    <a class="button-simple restart"
-                                        ng-click="ProjectResourcesTab.restartResource(resource)"
-                                        ng-class="{'disabled': !ProjectResourcesTab.isOperationAvailable(resource, 'restart')}">
-                                    Restart</a>
-                                </li>
-                                <li>
-                                    <a class="button-simple remove"
-                                        ng-click="ProjectResourcesTab.remove(resource)">
-                                    Remove</a>
-                                </li>
-                            </ul>
-                        </div>
+                        <action-button button-list="ProjectResourcesTab.actionButtonsListItems"
+                                       button-controller="ProjectResourcesTab"
+                                       ng-show="!ProjectResourcesTab.showgroup"
+                                       button-model="resource"></action-button>
                     </div>
                 </div>
             </li>
         </ul>
     </div>
 
-  <div class="pagination">
     <pagination pages-list="ProjectResourcesTab" pages-service="ProjectResourcesTab.service"></pagination>
-  </div>
 </div>

@@ -1,0 +1,17 @@
+<div ng-controller="StatisticProjectsController as StatisticProjects">
+    <div class="white-box">
+        <ul class="sort-list">
+            <li class="title">
+                <h2 class="app-title">Projects statistic</h2>
+            </li>
+        </ul>
+    </div>
+
+    <div class="white-box">
+        <div class="statistics-box" ng-if="StatisticProjects.statistic">
+            <canvas class="chart chart-line" data="StatisticProjects.statistic.data"
+                    labels="StatisticProjects.statistic.labels" legend="false" series="series"
+                    click="onClick"></canvas>
+        </div>
+    </div>
+</div>

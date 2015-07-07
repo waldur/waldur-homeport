@@ -1,0 +1,102 @@
+<div ng-controller="IssueListController as IssueList">
+
+    <div class="white-box">
+        <ul class="sort-list">
+            <li class="title">
+                <h2 class="app-title">Support</h2>
+            </li>
+            <li class="search divid">
+                <div class="search-box">
+                    <input type="text" ng-model='IssueList.searchInput' ng-change="IssueList.search()">
+                    <button class="search-button" ng-click="IssueList.search()"></button>
+                </div>
+            </li>
+            <li class="right-sort">
+                <a ui-sref="support.create" class="button">
+                    <span class="icon plus"></span>
+                    <span>Create ticket</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="white-box">
+        <ul class="object-list">
+            <li ng-repeat="issue in IssueList.list">
+                <div class="list-item list pointer"
+                    ng-class="{'opened': openIssue}"
+                    ng-click="openIssue=!openIssue; IssueList.showMore(issue)">
+                    <div class="status">
+                        <div class="status-circle" ng-class="{'green': issue.resolution}"></div>
+                    </div>
+                    <div class="avatar">
+                        <span class="avatar">
+                            <img ng-show="issue.assignee" gravatar-src="issue.assignee.emailAddress" gravatar-size="100" alt="" class="avatar-img">
+                        </span>
+                    </div>
+                    <div class="name">
+                        <h3 class="item-title pointer">
+                            <a stoppropagation>{{ issue.summary }}</a>
+                        </h3>
+                        <span class="subtitle">
+                            #{{ issue.key }} - Created on {{ issue.created | date:'medium' }}
+                        </span>
+                    </div>
+                    <div class="actions">
+                        <div class="actions-button">
+                            <a class="button reopen" stoppropagation ng-click="IssueList.getCommentsForIssue(issue.key)"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-item-details" ng-show="openIssue">
+                    <!-- issue content -->
+                    <section detailscontent="status avatar">
+                        <article class="normal-description">{{ issue.description }}</article>
+                    </section>
+                    <!-- /issue content -->
+
+
+                    <minipagination page-models="IssueList.issueComments"
+                                    page-model-id="issue.key"
+                                    page-change="IssueList.getCommentsForIssue"
+                                    page-entity-name="comments"></minipagination>
+
+                    <!-- answer -->
+                    <div ng-repeat="comment in IssueList.issueComments[issue.key].data">
+                        <div class="list-item">
+                            <div class="status"></div>
+                            <div class="avatar">
+                                <span class="avatar">
+                                    <img gravatar-src="comment.author.emailAddress" gravatar-size="100" alt="" class="avatar-img">
+                                </span>
+                            </div>
+                            <div class="name">
+                                <span class="subtitle">
+                                    <strong>{{ comment.author.displayName }}</strong> answer {{ comment.created | date:'medium' }}
+                                </span>
+                            </div>
+                        </div>
+                        <section detailscontent="status avatar">
+                            <article class="normal-description">{{ comment.body }}</article>
+                        </section>
+                    </div>
+                    <!-- /answer -->
+                    <!-- comment form -->
+                    <section detailscontent="status avatar">
+                        <div class="comment-form">
+                            <label for="">Leave message</label>
+                            <textarea name="" id="" cols="30" rows="10" ng-model="issue.newCommentBody"></textarea>
+                            <div class="decision">
+                                <div class="col">
+                                    <a class="button-apply" ng-click="IssueList.addComment(issue)" ng-class="{'disabled': issue.newCommentSaving}">Submit message</a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- /comment form -->
+                </div>
+            </li>
+        </ul>
+    </div>
+    <pagination pages-list="IssueList" pages-service="IssueList.service"></pagination>
+</div>

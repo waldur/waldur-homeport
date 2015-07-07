@@ -15,9 +15,28 @@ angular.module('ncsaas')
     pageSize: 10,
     topMenuCustomersCount: 50,
     serviceIcon: '/static/images/icons/icon_openstack_small.png',
+    defaultCustomerIcon: '/static/images/logo.png',
     topMenuCustomersCacheTime: 60 * 10, // seconds
     dashboardEventsCacheTime: 60, // seconds
     listControlPanelShow: false,
-    currentCustomerUuidStorageKey: 'currentCustomerUuid'
+    currentCustomerUuidStorageKey: 'currentCustomerUuid',
+    showImport: false,
+    resourceOfflineStatus: 'Offline',
+    resourceOnlineStatus: 'Online',
+
+    addonsList : [
+      {
+        name: 'Bronze support',
+        description: 'Phone assistance during working hours'
+      },
+      {
+        name: 'Golden support',
+        description: 'Phone assistance 24/7'
+      },
+      {
+        name: 'Backup',
+        options: ['Daily', 'Weekly']
+      }
+    ]
 
   });

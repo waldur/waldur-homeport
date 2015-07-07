@@ -2,6 +2,11 @@
     @include transition(all, 0.1s, ease);
 }
 
+.inlist-action {
+    float: right;
+    margin-right: 10px;
+} // inlist-action
+
 .button {
     @include inline-middle;
     @include property(border-radius, 2);

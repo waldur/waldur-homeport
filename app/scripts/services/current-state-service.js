@@ -35,12 +35,13 @@
 
     // Active menuItem
     var urlList = {
+      appstore: ['appstore.store'],
       dashboard: ['dashboard.eventlog'],
       resources: ['resources.list', 'resources.create'],
       projects: ['projects.list', 'projects.details', 'projects.update', 'projects.create', 'projects.add-users'],
       services: ['services.list', 'services.create', 'services.details'],
       users: ['users.list', 'users.details'],
-      support: ['support.tickets', 'support.create']
+      support: ['support.list', 'support.create']
     };
 
     function getActiveItem(stateName) {
@@ -62,7 +63,6 @@
       'projects.details',
       'projects.update',
       'organizations.details',
-      'organizations.edit',
       'customer-plans',
       'users.details',
       'home',

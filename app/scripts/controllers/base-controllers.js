@@ -15,6 +15,7 @@
       customers: [],
       currentUser: {},
       currentCustomer: {},
+      showImport: ENV.showImport,
       menuState: {
         addSomethingMenu: false,
         customerMenu: false,
@@ -73,6 +74,7 @@
             vm.menuState[property] = false;
           }
         }
+        $rootScope.$broadcast('clicked-out');
       },
       setCurrentCustomer: function(customer) {
         var vm = this;

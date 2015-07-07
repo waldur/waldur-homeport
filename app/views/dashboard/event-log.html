@@ -5,43 +5,33 @@
             <li class="title">
                 <h2 class="app-title">Events</h2>
             </li>
-            <pagesize pages-list="EventList" pages-service="EventList.service"></pagesize>
+            <filter-list filter-controller="EventList"></filter-list>
             <li class="search divid">
                 <div class="search-box">
                     <input type="text" ng-model='EventList.searchInput' ng-change="EventList.search()">
                     <button class="search-button" ng-click="EventList.search()"></button>
                 </div>
             </li>
-            <li>
-                <filter-list filter-controller="EventList"></filter-list>
-            </li>
         </ul>
     </div>
 
-    <div class="white-box">
+    <div class="white-box" ng-show="EventList.list.length > 0 && !EventList.searchInput">
         <ul class="object-list">
             <li ng-repeat="event in EventList.list">
-                <div class="list-item">
+                <div class="list-item dash {{ event.event_type }}">
                     <div>
                         <div ui-view="eventTypes"></div>
                     </div>
                     <div class="actions">
-                        <div class="actions-button" ng-show="!EventList.showgroup">
-                            <a class="button" ng-click="openActions1=!openActions1">actions</a>
-                            <ul class="actions-dropdown" ng-show="openActions1">
-                                <li>
-                                    <a class="button-simple">Some action for this type</a>
-                                </li>
-                            </ul>
-                        </div>
+                        <action-button button-list="EventList.actionButtonsListItems"
+                                       button-controller="EventList"
+                                       ng-show="!EventList.showgroup"
+                                       button-model="event"></action-button>
                     </div>
                 </div>
             </li>
         </ul>
     </div>
 
-    <div class="pagination">
-        <pagination pages-list="EventList" pages-service="EventList.service"></pagination>
-    </div>
-
+    <pagination pages-list="EventList" pages-service="EventList.service"></pagination>
 </div>

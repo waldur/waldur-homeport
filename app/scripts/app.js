@@ -15,7 +15,14 @@ angular
     'ngLoadingSpinner',
     'ngAnimate',
     'pascalprecht.translate',
-    'flash'])
+    'angular-cron-jobs',
+    'flash',
+    'tc.chartjs',
+    'angulartics',
+    'angulartics.google.analytics',
+    'ngFileUpload',
+    'xeditable'
+  ])
   // urls
   .config(function($stateProvider, $urlRouterProvider) {
     var initialDataState = 'initialdata.view',
@@ -91,14 +98,14 @@ angular
         abstract: true
       })
 
-      .state('support.tickets', {
+      .state('support.list', {
         url: '',
         views: {
           'appHeader@support' : {
             templateUrl: 'views/partials/app-header.html',
           },
           'appContent@support' : {
-            templateUrl: 'views/support/tickets.html',
+            templateUrl: 'views/support/list.html',
           }
         },
         resolve: {
@@ -109,11 +116,53 @@ angular
       .state('support.create', {
         url: 'add/',
         views: {
-          'appHeader@support' : {
+          'appHeader' : {
             templateUrl: 'views/partials/app-header.html',
           },
-          'appContent@support' : {
+          'appContent' : {
             templateUrl: 'views/support/create.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        }
+      })
+
+      .state('import', {
+        url: '/import/',
+        templateUrl: 'views/partials/base.html',
+        abstract: true
+      })
+
+      .state('import.import', {
+        url: '',
+        views: {
+          'appHeader@import' : {
+            templateUrl: 'views/partials/app-header.html',
+          },
+          'appContent@import' : {
+            templateUrl: 'views/import/import.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        }
+      })
+
+      .state('compare', {
+        url: '/compare/',
+        templateUrl: 'views/partials/base.html',
+        abstract: true
+      })
+
+      .state('compare.vms', {
+        url: '',
+        views: {
+          'appHeader@compare' : {
+            templateUrl: 'views/partials/app-header.html',
+          },
+          'appContent@compare' : {
+            templateUrl: 'views/compare/table.html',
           }
         },
         resolve: {
@@ -146,6 +195,24 @@ angular
         auth: true
       })
 
+      .state('dashboard.demoeventlog', {
+        url: 'demo/',
+        views: {
+          'appHeader@dashboard' : {
+            templateUrl: 'views/partials/app-header.html',
+          },
+          'appContent@dashboard' : {
+            templateUrl: 'views/dashboard/demo-event-log.html',
+          },
+          'eventTypes@dashboard.demoeventlog' : {
+            templateUrl: 'views/events/event-types.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
+        auth: true
+      })
       .state('appstore', {
         url: '/appstore/',
         abstract: true,
@@ -307,7 +374,7 @@ angular
       })
 
       .state('services.details', {
-        url: ':uuid/',
+        url: ':provider/:uuid/',
         views: {
           'appContent': {
             templateUrl: 'views/service/details.html'
@@ -454,22 +521,6 @@ angular
         auth: true
       })
 
-      .state('organizations.edit', {
-        url: ':uuid/edit/',
-        views: {
-          'appContent': {
-            templateUrl: 'views/customer/update.html',
-          },
-          'appHeader': {
-            templateUrl: 'views/partials/app-header.html',
-          }
-        },
-        resolve: {
-          authenticated: authCheck
-        },
-        auth: true
-      })
-
       .state('organizations.plans', {
         url: ':uuid/plans/',
         views: {
@@ -580,6 +631,53 @@ angular
         auth: true
       })
 
+      .state('resources.details', {
+        url: ':uuid/:tab',
+        views: {
+          'appContent': {
+            templateUrl: 'views/resource/details.html',
+          },
+          'tabBackups@resources.details': {
+            templateUrl: 'views/resource/tab-backups.html',
+          },
+          'backupListContent@resources.details' : {
+            templateUrl: 'views/backup/backup-list-content.html',
+          },
+          'tabs@resources.details': {
+            templateUrl: 'views/resource/tabs.html',
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
+        auth: true
+      })
+
+      .state('resources.update', {
+        url: ':uuid/edit/:tab',
+        views: {
+          'appContent': {
+            templateUrl: 'views/resource/update.html',
+          },
+          'tabBackups@resources.update': {
+            templateUrl: 'views/resource/tab-backups.html',
+          },
+          'tabs@resources.update': {
+            templateUrl: 'views/resource/tabs.html',
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
+        auth: true
+      })
+
       .state('payment', {
         url: '/payment/',
         abstract: true,
@@ -656,10 +754,127 @@ angular
         auth: true
       })
 
-      .state('pageNotFound', {
-        url: '/error/404/',
-        templateUrl: 'views/404.html',
-        auth: false
+      .state('errorPage', {
+        url: '/error/',
+        templateUrl: 'views/partials/base.html',
+        abstract: true,
+      })
+
+      .state('errorPage.notFound', {
+        url: '404/',
+        views: {
+          'appContent': {
+            templateUrl: 'views/404.html',
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
+        auth: true
+      })
+
+      .state('backups', {
+        url: '/backups/',
+        abstract: true,
+        templateUrl: 'views/partials/base.html',
+      })
+
+      .state('backups.list', {
+        url: '',
+        views: {
+          'appContent': {
+            templateUrl: 'views/backup/list.html',
+          },
+          'backupListContent@backups.list' : {
+            templateUrl: 'views/backup/backup-list-content.html',
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
+        auth: true
+      })
+
+      .state('backups.create', {
+        url: 'add/',
+        views: {
+          'appContent': {
+            templateUrl: 'views/backup/create.html',
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
+        auth: true
+      })
+
+      .state('backup-schedules', {
+        url: '/backup-schedules/',
+        abstract: true,
+        templateUrl: 'views/partials/base.html',
+        resolve: {
+          authenticated: authCheck
+        }
+      })
+
+      .state('backup-schedules.create', {
+        url: 'add/',
+        views: {
+          'appContent': {
+            templateUrl: 'views/backup-schedules/create.html',
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
+        auth: true
+      })
+      .state('statistics', {
+        url: '/statistics/',
+        abstract: true,
+        templateUrl: 'views/partials/base.html'
+      })
+      .state('statistics.projects-statistic', {
+        url: 'projects-statistic/',
+        views: {
+          'appContent': {
+            templateUrl: 'views/statistic/projects-statistic.html',
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
+        auth: true
+      })
+      .state('backups.restore', {
+        url: ':uuid/restore/',
+        views: {
+          'appContent': {
+            templateUrl: 'views/backup/restore.html',
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
+        auth: true
       });
 
     function authCheck($q, $location, $auth, usersService) {
