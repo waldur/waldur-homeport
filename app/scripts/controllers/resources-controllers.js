@@ -40,7 +40,7 @@
             {
               name: 'Name',
               propertyName: 'name',
-              type: ENTITYLISTFIELDTYPES.link,
+              type: ENTITYLISTFIELDTYPES.name,
               link: 'resources.details({uuid: entity.uuid})',
               showForMobile: ENTITYLISTFIELDTYPES.showForMobile
             },
