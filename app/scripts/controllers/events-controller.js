@@ -102,26 +102,37 @@
             }
           ]
         };
-         this.costData = {
+        this.costData = {
           labels: ["January", "February", "March", "April", "May", "June", "July"],
           datasets: [
             {
               label: "Events",
-              fillColor: "rgba(220,220,220,0.2)",
-              strokeColor: "rgba(220,220,220,1)",
-              pointColor: "rgba(220,220,220,1)",
+              fillColor: "rgba(123, 166, 196,0.5)",
+              strokeColor: "rgba(123, 166, 196,1)",
+              pointColor: "rgba(123, 166, 196,1)",
               pointStrokeColor: "#fff",
               pointHighlightFill: "#fff",
-              pointHighlightStroke: "rgba(220,220,220,1)",
-              data: [65, 59, 80, 81, 56, 55, 40]
+              pointHighlightStroke: "rgba(123, 166, 196,1)",
+              data: [0, 59, 80, 81, 56, 55, 40]
+            },
+            {
+              label: "Alerts",
+              fillColor: "rgba(206, 230, 174,0.5)",
+              strokeColor: "rgba(206, 230, 174,1)",
+              pointColor: "rgba(206, 230, 174,1)",
+              pointStrokeColor: "#fff",
+              pointHighlightFill: "#fff",
+              pointHighlightStroke: "rgba(206, 230, 174,1)",
+              data: [0, 48, 40, 19, 86, 27, 90]
             }
           ]
         };
 
         this.chartOptions = {
-            responsive: true,
-            scaleShowGridLines : false
-         };
+          responsive: true,
+          scaleShowVerticalLines: false,
+          scaleShowGridLines : false
+        };
       }
     });
 

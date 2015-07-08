@@ -20,7 +20,7 @@
          ng-class="{'active-content':EventList.activeTab == 'costs',
          'unactive-content':EventList.activeTab == 'activity'}">
         <div class="white-box big-chart">
-            <canvas tc-chartjs chart-type="line" chart-data="EventList.data" width="1120" height="180"></canvas>
+            <canvas tc-chartjs chart-type="line" chart-data="EventList.costData" width="1120" height="180"></canvas>
             <div class="clear"></div>
         </div>
         <div class="white-box">
@@ -43,33 +43,36 @@
                             <a href="#">Resources (<span>3</span>)</a>
                         </li>
                     </ul>
-                    <div class="total-cost">
+                    <div class="total-cost" ng-click="openedProject = !openedProject">
                         <span class="table-alert"></span>
                         <span class="cost">Total cost 240</span>
-                        <div class="icon"></div>
+                        <div class="icon" ng-class="{'opened-icon': openedProject}"></div>
                     </div>
                     <div class="clear"></div>
                 </div>
-                <div class="table services">
+                <div class="table services" ng-show="!openedProject">
                     <div class="tr th">
-                        <div class="td service-name"><span>Service name</span></div>
+                        <div class="td service-name"><span>Project name</span></div>
                         <div class="td service-title"><span>VMs</span></div>
                         <div class="td service-title"><span>Licenses </span></div>
                         <div class="td service-name"><span>Cost drilldown</span></div>
                     </div>
                     <div class="tr">
-                        <div class="td service-name"><span>Service name</span></div>
+                        <div class="td service-name"><span>Project name</span></div>
                         <div class="td service-title"><span>Title</span></div>
+                        <div class="td service-title"><span>1</span></div>
                         <div class="td service-name"><span>Cost drilldown</span></div>
                     </div>
                     <div class="tr">
-                        <div class="td service-name"><span>Service name</span></div>
+                        <div class="td service-name"><span>Project name</span></div>
                         <div class="td service-title"><span>Title</span></div>
+                        <div class="td service-title"><span>1</span></div>
                         <div class="td service-name"><span>Cost drilldown</span></div>
                     </div>
                     <div class="tr">
-                        <div class="td service-name"><span>Service name</span></div>
+                        <div class="td service-name"><span>Project name</span></div>
                         <div class="td service-title"><span>Title</span></div>
+                        <div class="td service-title"><span>1</span></div>
                         <div class="td service-name"><span>Cost drilldown</span></div>
                     </div>
                 </div>
@@ -91,14 +94,14 @@
                             <a href="#">Services (<span>3</span>)</a>
                         </li>
                     </ul>
-                    <div class="total-cost">
+                    <div class="total-cost" ng-click="openedServices = !openedServices">
                         <span class="table-alert">Projected</span>
                         <span class="cost">Total cost 240</span>
-                        <div class="icon"></div>
+                        <div class="icon" ng-class="{'opened-icon': openedSrvices}"></div>
                     </div>
                     <div class="clear"></div>
                 </div>
-                <div class="table services">
+                <div class="table services" ng-show="!openedServices">
                     <div class="tr th">
                         <div class="td service-name"><span>Service name</span></div>
                         <div class="td service-title"><span>Title</span></div>
@@ -237,7 +240,7 @@
                 <a class="show-all" href="#">Show all alerts</a>
             </div>
             <div class="half-block alerts-list">
-                <h3>Events</h3>
+                <h3>Recent Events</h3>
                 <div class="white-box">
                     <ul>
                         <li>
@@ -301,7 +304,7 @@
 
                     </ul>
                 </div>
-                <a class="show-all" href="#">Show all events</a>
+                <a class="show-all" href="#">Show all recent events</a>
             </div>
 
 

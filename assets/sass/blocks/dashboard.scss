@@ -103,6 +103,9 @@
   }
   .table-block {
     margin-bottom: 20px;
+    &:not(:first-child) {
+      margin-top: 50px;
+    }
     .title {
       margin-bottom: 25px;
       .sort-list {
@@ -166,6 +169,9 @@
           float: right;
           margin-top: 4px;
           margin-left: 25px;
+          &.opened-icon {
+            background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAMAAAAolt3jAAAATlBMVEUormAormAormAormAormAormAormAormAormAormAormAormAormAormAormAormAormAormAormAormAormAormAormAormAormAormBmPtXgAAAAAXRSTlMAQObYZgAAAAFiS0dEAIgFHUgAAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQffBwgKOwEeCqrdAAAAWklEQVQI11WO2Q3AMAxCGSCnc5X9F23sKFb7fgxCCQBKmbPiMmiM4+h8MqVbGJvqFjVODICQAgRmLHshYr882/I2kAuZ12+RTs/t26ef60P+M3xI99V1zmLiBWC2CnmvBzYdAAAAAElFTkSuQmCC') no-repeat;
+          }
         }
       }
     }
@@ -190,6 +196,7 @@
           &:last-child {
             float: right;
             text-align: right;
+            margin-right: 20px;
           }
         }
         &.th {
@@ -266,9 +273,10 @@
           position: relative;
           .label{
             position: absolute;
-            top: 0%;
-            left: 5%;
+            top: -8%;
+            left: 0%;
             font-size: 12px;
+            font-weight: bold;
           }
         }
       }
@@ -276,12 +284,12 @@
         h3 {
           text-transform: uppercase;
           color: $dashboard-green;
-          margin-left: 60px;
+          margin-left: 10px;
           padding-left: 35px;
         }
         &:nth-child(2) {
           h3 {
-            margin-left: 10px;
+            margin-left: 4px;
           }
         }
         .white-box {
@@ -312,6 +320,7 @@
                   width: 43px;
                   height: 41px;
                   float: left;
+                  margin-left: -8px;
                 }
                 span {
                   float: left;
