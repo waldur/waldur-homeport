@@ -229,9 +229,9 @@ Config file settings:
         ng-show="expandItem" 
         ng-class="{'opened': expandItem}" 
         class="list-item-details" 
-        expandable-element="entity" // entity item
-        expandable-list="entityList" // entity controller
-        expandable-options="item"></expandableitem> // options array 
+        expandable-element="entity" <!-- entity item -->
+        expandable-list="entityList" <!-- entity controller -->
+        expandable-options="item"></expandableitem> <!-- options array -->
   
   
   Expandable item shows one section of information, so it is used within a loop to          
@@ -244,11 +244,11 @@ Config file settings:
       {
         // options for current information section
         isList: true, // is information given in a list
-        expandableTitle: 'Connected projects', // section title
-        articleBlockText: 'Manage users through',
-        entitiesLinkRef: 'projects.list',
-        entitiesLinkText: 'project details',
+        sectionTitleTitle: 'Connected projects', // section title
         addItemBlock: true, // display adding item instructions block
+        articleBlockText: 'Manage users through', // text in article section
+        entitiesLinkRef: 'projects.list', // link ref to entities list
+        entitiesLinkText: 'project details', // text for entities link
         listKey: 'userProjects',
         // object with options for minipagination directive
         minipaginationData:
@@ -258,12 +258,16 @@ Config file settings:
           pageChange: 'getProjectsForUser',
           pageEntityName: 'projects'
         },
-        // types to display in list section
+        // types to display in list section (could be one or more objects in the list)
         list: [
           {
-            entityDetailsLink: 'projects.details({uuid: element.project_uuid})',
-            entityDetailsLinkText: 'project_name',
-            type: 'connectedProjects'
+            entityDetailsLink: 'projects.details({uuid: element.project_uuid})', // required
+            entityDetailsLinkText: 'project_name', // required
+            type: 'link'
+          },
+          {
+            avatarSrc: 'email', // required
+            type: 'avatar'
           }
         ]
       }

@@ -8,7 +8,7 @@
   function expandableItem() {
     return {
       restrict: 'E',
-      templateUrl: "views/directives/expandable-item.html",
+      templateUrl: 'views/directives/expandable-item.html',
       replace: true,
       scope: {
         expandableElement: '=',

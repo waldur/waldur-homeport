@@ -37,7 +37,7 @@
         this.expandableOptions = [
           {
             isList: true,
-            expandableTitle: 'Connected projects',
+            sectionTitle: 'Connected projects',
             articleBlockText: 'Manage users through',
             entitiesLinkRef: 'projects.list',
             entitiesLinkText: 'project details',
