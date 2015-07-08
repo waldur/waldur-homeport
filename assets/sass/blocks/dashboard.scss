@@ -6,7 +6,7 @@
     animation: content-show .5s 1 ease-out;
     padding-top: 0px;
   }
-  .unactive-content {
+  .inactive-content {
     animation: content-hide .2s 1 ease-out;
   }
   h2 {
@@ -86,15 +86,15 @@
            }
          }
        }
-      &.unactive {
+      &.inactive {
         a {
           &:before{
             opacity: 0;
-            animation: unactive-line .1s 1 linear;
+            animation: inactive-line .1s 1 linear;
           }
           &:after {
             opacity: 0;
-            animation: unactive-triangle  .1s 1 linear;
+            animation: inactive-triangle  .1s 1 linear;
           }
         }
       }
@@ -381,7 +381,7 @@
     width: 100%;
   }
 }
-@keyframes unactive-line {
+@keyframes inactive-line {
   0% {
     left: 0;
     opacity: 1;
@@ -407,7 +407,7 @@
     bottom: -6px;
   }
 }
-@keyframes unactive-triangle {
+@keyframes inactive-triangle {
   0% {
     opacity: 1;
     bottom: -6px;

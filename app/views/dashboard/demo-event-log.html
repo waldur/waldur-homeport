@@ -2,11 +2,10 @@
     <div class="white-box">
         <h2 class="app-title">Dashboard</h2>
         <ul class="sort-list event-nav">
-            <li ng-class="{'active':EventList.activeTab == 'activity','unactive':EventList.activeTab == 'costs'}"
-                ng-animate="{ enter: 'animation-enter', leave: 'animation-leave'}">
+            <li ng-class="{'active':EventList.activeTab == 'activity','inactive':EventList.activeTab == 'costs'}">
                 <a ng-click="EventList.activeTab = 'activity'">Activity</a>
             </li>
-            <li ng-class="{'active':EventList.activeTab == 'costs','unactive':EventList.activeTab == 'activity'}">
+            <li ng-class="{'active':EventList.activeTab == 'costs','inactive':EventList.activeTab == 'activity'}">
                 <a ng-click="EventList.activeTab = 'costs'">Costs</a>
             </li>
         </ul>
@@ -18,7 +17,7 @@
     </div>
     <div ng-show="EventList.activeTab == 'costs'"
          ng-class="{'active-content':EventList.activeTab == 'costs',
-         'unactive-content':EventList.activeTab == 'activity'}">
+         'inactive-content':EventList.activeTab == 'activity'}">
         <div class="white-box big-chart">
             <canvas tc-chartjs chart-type="line" chart-data="EventList.costData" width="1120" height="180"></canvas>
             <div class="clear"></div>
@@ -97,7 +96,7 @@
                     <div class="total-cost" ng-click="openedServices = !openedServices">
                         <span class="table-alert">Projected</span>
                         <span class="cost">Total cost 240</span>
-                        <div class="icon" ng-class="{'opened-icon': openedSrvices}"></div>
+                        <div class="icon" ng-class="{'opened-icon': openedServices}"></div>
                     </div>
                     <div class="clear"></div>
                 </div>
@@ -129,7 +128,7 @@
     </div>
     <div ng-show="EventList.activeTab == 'activity'"
          ng-class="{'active-content':EventList.activeTab == 'activity',
-                    'unactive-content':EventList.activeTab == 'costs'}">
+                    'inactive-content':EventList.activeTab == 'costs'}">
         <div class="row">
             <div ng-repeat="project in [0,1]" class="half-block graph">
                 <div class="white-box">
