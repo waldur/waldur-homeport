@@ -19,7 +19,6 @@
         scope.pageModels = scope.expandableList[scope.expandableOptions.listKey];
         scope.pageModelId = scope.expandableElement[scope.expandableOptions.minipaginationData.pageModelId];
         scope.pageChange = scope.expandableList[scope.expandableOptions.minipaginationData.pageChange];
-        scope.pageEntityName = scope.expandableOptions.minipaginationData.pageEntityName;
       }
     };
   }
