@@ -38,7 +38,6 @@
           $scope.change[paginationKey] = pageChange;
           $scope.pageCurrent[paginationKey] = current;
           $scope.pageCount[paginationKey] = current;
-          $scope.paginationKey = paginationKey;
         }
 
         function getNumberList(num, currentPage) {
