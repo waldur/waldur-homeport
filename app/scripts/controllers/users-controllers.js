@@ -6,12 +6,12 @@
       'baseControllerListClass',
       'usersService',
       'projectPermissionsService',
-      '$scope',
+      '$rootScope',
       'ENTITYLISTFIELDTYPES',
       UserListController
     ]);
 
-  function UserListController(baseControllerListClass, usersService, projectPermissionsService, $scope, ENTITYLISTFIELDTYPES) {
+  function UserListController(baseControllerListClass, usersService, projectPermissionsService, $rootScope, ENTITYLISTFIELDTYPES) {
     var controllerScope = this;
     var UserController = baseControllerListClass.extend({
       userProjects: {},
@@ -32,6 +32,31 @@
           {
             title: 'User action placeholder',
             clickFunction: function(user) {}
+          }
+        ];
+        this.expandableOptions = [
+          {
+            isList: true,
+            expandableTitle: 'Connected projects',
+            articleBlockText: 'Manage users through',
+            entitiesLinkRef: 'projects.list',
+            entitiesLinkText: 'project details',
+            addItemBlock: true,
+            listKey: 'userProjects',
+            minipaginationData:
+            {
+              pageModels: 'userProjects',
+              pageModelId: 'username',
+              pageChange: 'getProjectsForUser',
+              pageEntityName: 'projects'
+            },
+            list: [
+              {
+                entityDetailsLink: 'projects.details({uuid: element.project_uuid})',
+                entityDetailsLinkText: 'project_name',
+                type: 'link'
+              }
+            ]
           }
         ];
         this.entityOptions = {
@@ -86,7 +111,7 @@
         projectPermissionsService.getList(filter).then(function(response) {
           vm.userProjects[username].data = response;
           vm.userProjects[username].pages = projectPermissionsService.pages;
-          $scope.$broadcast('mini-pagination:getNumberList', vm.userProjects[username].pages,
+          $rootScope.$broadcast('mini-pagination:getNumberList', vm.userProjects[username].pages,
             page, vm.getProjectsForUser.bind(vm), 'projects', username);
         });
       }

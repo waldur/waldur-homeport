@@ -218,3 +218,55 @@ Config file settings:
     
     showForMobile:           add class to show field on mobile devices
 
+## Expandableitem directive
+
+  Directive is used to show additional information in list elements.   
+  Directive is placed in entity-list.html file:
+  
+   
+    <expandableitem ng-if="entityList.expandableOptions"  
+        ng-repeat="item in entityList.expandableOptions"   
+        ng-show="expandItem" 
+        ng-class="{'opened': expandItem}" 
+        class="list-item-details" 
+        expandable-element="entity" // entity item
+        expandable-list="entityList" // entity controller
+        expandable-options="item"></expandableitem> // options array 
+  
+  
+  Expandable item shows one section of information, so it is used within a loop to          
+  display multiple sections if necessary.
+  As entity-list directive, expandableitem requires an object with settings
+  in corresponding controllers init function:
+  
+  
+    this.expandableOptions = [
+      {
+        // options for current information section
+        isList: true, // is information given in a list
+        expandableTitle: 'Connected projects', // section title
+        articleBlockText: 'Manage users through',
+        entitiesLinkRef: 'projects.list',
+        entitiesLinkText: 'project details',
+        addItemBlock: true, // display adding item instructions block
+        listKey: 'userProjects',
+        // object with options for minipagination directive
+        minipaginationData:
+        {
+          pageModels: 'userProjects',
+          pageModelId: 'username',
+          pageChange: 'getProjectsForUser',
+          pageEntityName: 'projects'
+        },
+        // types to display in list section
+        list: [
+          {
+            entityDetailsLink: 'projects.details({uuid: element.project_uuid})',
+            entityDetailsLinkText: 'project_name',
+            type: 'connectedProjects'
+          }
+        ]
+      }
+    ];  
+  
+   

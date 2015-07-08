@@ -1,0 +1,25 @@
+<section detailscontent="checkbox avatar">
+    <header>
+        <h4 class="item-title">{{ expandableOptions.expandableTitle }}</h4>
+        <minipagination
+                page-models="pageModels"
+                page-model-id="pageModelId"
+                page-change="pageChange"
+                page-entity-name="{{ pageEntityName }}"></minipagination>
+    </header>
+    <ul ng-if="expandableOptions.isList" class="list-blocks">
+        <li class="item-list" ng-repeat="element in pageModels[pageModelId].data">
+            <section>
+                <span ng-repeat="item in expandableOptions.list" ng-switch="item.type">
+                    <div class="avatar small" ng-switch-when="avatar">
+                        <img gravatar-src="element[item.avatarSrc]" gravatar-size="60">
+                    </div>
+                    <a ui-sref="{{ item.entityDetailsLink }}" ng-switch-when="link">{{ element[item.entityDetailsLinkText] }}</a>
+                </span>
+            </section>
+        </li>
+    </ul>
+    <article ng-if="expandableOptions.addItemBlock" class="light-description">
+        {{ expandableOptions.articleBlockText }} <a ui-sref="{{ expandableOptions.entitiesLinkRef }}">{{ expandableOptions.entitiesLinkText }}</a>.
+    </article>
+</section>

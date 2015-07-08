@@ -2,9 +2,9 @@
 
 (function() {
   angular.module('ncsaas')
-    .directive('minipagination', ['$state', miniPagination]);
+    .directive('minipagination', ['$state', '$rootScope', miniPagination]);
 
-  function miniPagination($state) {
+  function miniPagination($state, $rootScope) {
     return {
       restrict: 'E',
       templateUrl: "views/directives/mini-pagination.html",
@@ -28,7 +28,7 @@
           initPagination(model.pages, model.page, $scope.pageChange, $scope.pageEntityName, modelId)
         }
 
-        $scope.$on('mini-pagination:getNumberList', function (event, count, current, pageChange, entityName, uuid) {
+        $rootScope.$on('mini-pagination:getNumberList', function (event, count, current, pageChange, entityName, uuid) {
           initPagination(count, current, pageChange, entityName, uuid);
         });
 
@@ -38,6 +38,7 @@
           $scope.change[paginationKey] = pageChange;
           $scope.pageCurrent[paginationKey] = current;
           $scope.pageCount[paginationKey] = current;
+          $scope.paginationKey = paginationKey;
         }
 
         function getNumberList(num, currentPage) {
