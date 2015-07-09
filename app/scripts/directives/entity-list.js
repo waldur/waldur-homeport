@@ -15,7 +15,9 @@
         entityList: '=',
         entityService: '=',
         entityButtons: '=',
-        entityOptions: '='
+        entityOptions: '=',
+        optionsForExpandable: '=entityExpandableOptions',
+        optionsForMinipagination: '=entityMinipaginationOptions'
       }
     };
   }

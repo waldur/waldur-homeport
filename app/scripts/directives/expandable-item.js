@@ -13,12 +13,13 @@
       scope: {
         expandableElement: '=',
         expandableList: '=',
-        expandableOptions: '='
+        expandableOptions: '=',
+        minipaginationOptions: '='
       },
       link: function(scope) {
-        scope.pageModels = scope.expandableList[scope.expandableOptions.listKey];
-        scope.pageModelId = scope.expandableElement[scope.expandableOptions.minipaginationData.pageModelId];
-        scope.pageChange = scope.expandableList[scope.expandableOptions.minipaginationData.pageChange];
+        console.log(scope);
+        scope.pageModels = scope.expandableList[scope.expandableOptions.pageModels];
+        scope.pageModelId = scope.expandableElement[scope.expandableOptions.pageModelId];
       }
     };
   }

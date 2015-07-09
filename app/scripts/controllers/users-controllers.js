@@ -34,31 +34,6 @@
             clickFunction: function(user) {}
           }
         ];
-        this.expandableOptions = [
-          {
-            isList: true,
-            sectionTitle: 'Connected projects',
-            articleBlockText: 'Manage users through',
-            entitiesLinkRef: 'projects.list',
-            entitiesLinkText: 'project details',
-            addItemBlock: true,
-            listKey: 'userProjects',
-            minipaginationData:
-            {
-              pageModels: 'userProjects',
-              pageModelId: 'username',
-              pageChange: 'getProjectsForUser',
-              pageEntityName: 'projects'
-            },
-            list: [
-              {
-                entityDetailsLink: 'projects.details({uuid: element.project_uuid})',
-                entityDetailsLinkText: 'project_name',
-                type: 'link'
-              }
-            ]
-          }
-        ];
         this.entityOptions = {
           entityData: {
             title: 'Users',
@@ -91,6 +66,33 @@
             }
           ]
         };
+        this.expandableOptions = [
+          {
+            isList: true,
+            sectionTitle: 'Connected projects',
+            articleBlockText: 'Manage users through',
+            entitiesLinkRef: 'projects.list',
+            entitiesLinkText: 'project details',
+            addItemBlock: true,
+            pageModels: 'userProjects',
+            pageModelId: 'username',
+            list: [
+              {
+                entityDetailsLink: 'projects.details({uuid: element.project_uuid})',
+                entityDetailsLinkText: 'project_name',
+                type: 'link'
+              }
+            ]
+          }
+        ];
+        this.minipaginationData = [
+          {
+            pageModels: 'userProjects',
+            pageModelId: 'username',
+            pageChange: 'getProjectsForUser',
+            pageEntityName: 'projects'
+          }
+        ];
       },
       showMore: function(user) {
         if (!this.userProjects[user.username]) {

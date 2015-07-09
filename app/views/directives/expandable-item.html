@@ -1,11 +1,11 @@
 <section detailscontent="checkbox avatar">
     <header>
         <h4 class="item-title">{{ expandableOptions.sectionTitle }}</h4>
-        <minipagination
-                page-models="pageModels"
-                page-model-id="expandableElement[expandableOptions.minipaginationData.pageModelId]"
-                page-change="pageChange"
-                page-entity-name="{{ expandableOptions.minipaginationData.pageEntityName }}"></minipagination>
+        <minipagination ng-if="minipaginationOptions"
+                page-models="expandableList[minipaginationOptions.pageModels]"
+                page-model-id="expandableElement[minipaginationOptions.pageModelId]"
+                page-change="expandableList[minipaginationOptions.pageChange]"
+                page-entity-name="{{ minipaginationOptions.pageEntityName }}"></minipagination>
 
     </header>
     <ul ng-if="expandableOptions.isList" class="list-blocks">

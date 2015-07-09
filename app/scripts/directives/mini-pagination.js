@@ -10,8 +10,8 @@
       templateUrl: "views/directives/mini-pagination.html",
       replace: true,
       scope: {
-        pageModels: '@',
-        pageChange: '@',
+        pageModels: '=',
+        pageChange: '=',
         pageModelId: '=',
         pageEntityName: '@'
       },
