@@ -31,7 +31,9 @@
             title: 'Backups',
             createLink: 'backups.create',
             createLinkText: 'Create a backup',
-            noDataText: 'You have no backups yet.'
+            noDataText: 'You have no backups yet.',
+            expandable: false
+
           },
           list: [
             {

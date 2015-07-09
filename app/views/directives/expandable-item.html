@@ -1,15 +1,15 @@
 <section detailscontent="checkbox avatar">
     <header>
         <h4 class="item-title">{{ expandableOptions.sectionTitle }}</h4>
-        <minipagination ng-if="minipaginationOptions"
-                page-models="expandableList[minipaginationOptions.pageModels]"
-                page-model-id="expandableElement[minipaginationOptions.pageModelId]"
-                page-change="expandableList[minipaginationOptions.pageChange]"
-                page-entity-name="{{ minipaginationOptions.pageEntityName }}"></minipagination>
+        <minipagination
+                page-models="expandableList[expandableOptions.listKey]"
+                page-model-id="expandableElement[expandableOptions.modelId]"
+                page-change="expandableList[expandableOptions.minipaginationData.pageChange]"
+                page-entity-name="{{ expandableOptions.minipaginationData.pageEntityName }}"></minipagination>
 
     </header>
     <ul ng-if="expandableOptions.isList" class="list-blocks">
-        <li class="item-list" ng-repeat="element in pageModels[pageModelId].data">
+        <li class="item-list" ng-repeat="element in pageModels[modelId].data">
             <section>
                 <span ng-repeat="item in expandableOptions.list" ng-switch="item.type">
                     <div class="avatar small" ng-switch-when="avatar">

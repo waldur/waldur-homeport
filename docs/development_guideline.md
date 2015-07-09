@@ -122,9 +122,7 @@ Config file settings:
     <entitylist entity-list="UserList" 
                   entity-service="UserList.service" 
                   entity-buttons="UserList.actionButtonsListItems" 
-                  entity-options="UserList.entityOptions"
-                  entity-expandable-options="UserList.expandableOptions"
-                  entity-minipagination-options="UserList.minipaginationData"></entitylist>
+                  entity-options="UserList.entityOptions"></entitylist>
   
   Directive parameters:
   
@@ -134,8 +132,6 @@ Config file settings:
    3. entity-buttons - action buttons for list rows (action-button directive)   
    4. entity-options - object with list of field properties. Partly described in    
        ENTITYLISTFIELDTYPES constant. entityOptions object is defined in controller
-   5. entity-expandable-options - options array for expandable item directive 
-   6. entity-minipagination-options - options array for minipagination directive
               
    entityOptions sample:
    
@@ -145,6 +141,7 @@ Config file settings:
         noDataText: 'No users yet.',
         createLink: '', // Param to check if entity can be added to list
         createLinkText: 'Create a backup', // text for link
+        expandable: false, // for entity element to be expandable or not
         hideActionButtons: true // hide or show buttons with actions 
       },
       list: [
@@ -224,60 +221,55 @@ Config file settings:
 ## Expandableitem directive
 
   Directive is used to show additional information in list elements.   
-  Directive is placed in entity-list.html file:  
+  Directive is placed in entity-list.html file:
+  
    
-    <expandableitem ng-if="optionsForExpandable"
-        ng-repeat="item in optionsForExpandable"
-        ng-show="expandItem" ng-class="{'opened': expandItem}"
-        class="list-item-details"
+    <expandableitem ng-if="entityList.expandableOptions"  
+        ng-repeat="item in entityList.expandableOptions"   
+        ng-show="expandItem" 
+        ng-class="{'opened': expandItem}" 
+        class="list-item-details" 
         expandable-element="entity" <!-- entity item -->
         expandable-list="entityList" <!-- entity controller -->
-        expandable-options="item" <!-- options array -->
-        minipagination-options="optionsForMinipagination[$index]" <!-- options for minipagination -->
-        ></expandableitem>
+        expandable-options="item"></expandableitem> <!-- options array -->
   
   
   Expandable item shows one section of information, so it is used within a loop to          
   display multiple sections if necessary.
   As entity-list directive, expandableitem requires an object with settings
-  in corresponding controllers init function:  
-    
-    // array with options for expandable item directive
-    this.expandableOptions = {
-      projects: {
+  in corresponding controllers init function:
+  
+  
+    this.expandableOptions = [
+      {
         // options for current information section
         isList: true, // is information given in a list
         sectionTitle: 'Connected projects', // section title
         addItemBlock: true, // display adding item instructions block
         articleBlockText: 'Manage users through', // text in article section
-        entitiesLinkRef: 'projects.list', // link ref to entities list
+        entitiesLinkRef: 'projects.list', // link state to entities list
         entitiesLinkText: 'project details', // text for entities link
-        pageModels: 'userProjects', // attribute for display list in isList section
-        pageModelId: 'username', // attribute for data list in isList section        
+        listKey: 'userProjects', // list controller key for list in expandable block
+        modelId: 'username', // model key for getting id
+        // object with options for minipagination directive
+        minipaginationData:
+        {
+          pageChange: 'getProjectsForUser', // list controller key for callback function
+          pageEntityName: 'projects' // entity name for sublist
+        },
         // types to display in list section (could be one or more objects in the list)
         list: [
           {
-            entityDetailsLink: 'projects.details({uuid: element.project_uuid})', // required
-            entityDetailsLinkText: 'project_name', // required
-            type: 'link'
+            entityDetailsLink: 'projects.details({uuid: element.project_uuid})', // state for link
+            entityDetailsLinkText: 'project_name', // field key
+            type: 'link' // type of field
           },
           {
-            avatarSrc: 'email', // required
-            type: 'avatar'
+            avatarSrc: 'email', // field key
+            type: 'avatar' // type of field
           }
         ]
       }
-    };  
-    
-  Property for minipagination that should be displayed within expandable section
-  should have same name:
-    
-    // array with options for minipagination directive
-    this.minipaginationData = {
-      projects: {
-        pageModels: 'userProjects', // list controller key for models list to display
-        pageModelId: 'username', // key to get model
-        pageChange: 'getProjectsForUser', // list controller key for method to retrieve models
-        pageEntityName: 'projects' // entity name for sublist
-      }
-    };  
+    ];  
+  
+   

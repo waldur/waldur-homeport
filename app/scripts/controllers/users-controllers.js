@@ -15,6 +15,7 @@
     var controllerScope = this;
     var UserController = baseControllerListClass.extend({
       userProjects: {},
+      expandableProjectsKey: 'projects',
 
       init:function() {
         this.service = usersService;
@@ -34,11 +35,36 @@
             clickFunction: function(user) {}
           }
         ];
+        this.expandableOptions = [
+          {
+            isList: true,
+            sectionTitle: 'Connected projects',
+            articleBlockText: 'Manage users through',
+            entitiesLinkRef: 'projects.list',
+            entitiesLinkText: 'project details',
+            addItemBlock: true,
+            listKey: 'userProjects',
+            modelId: 'username',
+            minipaginationData:
+            {
+              pageChange: 'getProjectsForUser',
+              pageEntityName: this.expandableProjectsKey
+            },
+            list: [
+              {
+                entityDetailsLink: 'projects.details({uuid: element.project_uuid})',
+                entityDetailsLinkText: 'project_name',
+                type: 'link'
+              }
+            ]
+          }
+        ];
         this.entityOptions = {
           entityData: {
             title: 'Users',
             noDataText: 'No users yet.',
-            hideActionButtons: true
+            hideActionButtons: true,
+            expandable: true
           },
           list: [
             {
@@ -66,33 +92,6 @@
             }
           ]
         };
-        this.expandableOptions = {
-          projects: {
-            isList: true,
-            sectionTitle: 'Connected projects',
-            articleBlockText: 'Manage users through',
-            entitiesLinkRef: 'projects.list',
-            entitiesLinkText: 'project details',
-            addItemBlock: true,
-            pageModels: 'userProjects',
-            pageModelId: 'username',
-            list: [
-              {
-                entityDetailsLink: 'projects.details({uuid: element.project_uuid})',
-                entityDetailsLinkText: 'project_name',
-                type: 'link'
-              }
-            ]
-          }
-        };
-        this.minipaginationData = {
-          projects: {
-            pageModels: 'userProjects',
-            pageModelId: 'username',
-            pageChange: 'getProjectsForUser',
-            pageEntityName: 'projects'
-          }
-        };
       },
       showMore: function(user) {
         if (!this.userProjects[user.username]) {
@@ -100,7 +99,7 @@
         }
       },
       getProjectsForUser: function(username, page) {
-        var vm = this;
+        var vm = controllerScope;
         var filter = {
           username:username
         };
@@ -114,7 +113,7 @@
           vm.userProjects[username].data = response;
           vm.userProjects[username].pages = projectPermissionsService.pages;
           $rootScope.$broadcast('mini-pagination:getNumberList', vm.userProjects[username].pages,
-            page, vm.getProjectsForUser.bind(vm), 'projects', username);
+            page, vm.getProjectsForUser.bind(vm), vm.expandableProjectsKey, username);
         });
       }
     });

@@ -70,7 +70,7 @@
                 <div class="actions"></div>
             </li>
             <li ng-repeat="entity in entityList.list">
-                <div class="list-item list" ng-class="{'opened': expandItem, 'pointer' : optionsForExpandable}"
+                <div class="list-item list" ng-class="{'opened': expandItem, 'pointer' : entityOptions.entityData.expandable}"
                      ng-click="expandItem=!expandItem; entityList.showMore(entity)">
                     <div class="checkbox">
                         <div class="checkbox" stoppropagation>
@@ -131,14 +131,13 @@
                     </div>
                 </div>
 
-                <expandableitem ng-if="optionsForExpandable"
-                                ng-repeat="(key, item) in optionsForExpandable"
+                <expandableitem ng-if="entityList.expandableOptions"
+                                ng-repeat="item in entityList.expandableOptions"
                                 ng-show="expandItem" ng-class="{'opened': expandItem}"
                                 class="list-item-details"
                                 expandable-element="entity"
                                 expandable-list="entityList"
-                                expandable-options="item"
-                                minipagination-options="optionsForMinipagination[key]"></expandableitem>
+                                expandable-options="item"></expandableitem>
 
             </li>
         </ul>
