@@ -66,8 +66,8 @@
             }
           ]
         };
-        this.expandableOptions = [
-          {
+        this.expandableOptions = {
+          projects: {
             isList: true,
             sectionTitle: 'Connected projects',
             articleBlockText: 'Manage users through',
@@ -84,15 +84,15 @@
               }
             ]
           }
-        ];
-        this.minipaginationData = [
-          {
+        };
+        this.minipaginationData = {
+          projects: {
             pageModels: 'userProjects',
             pageModelId: 'username',
             pageChange: 'getProjectsForUser',
             pageEntityName: 'projects'
           }
-        ];
+        };
       },
       showMore: function(user) {
         if (!this.userProjects[user.username]) {

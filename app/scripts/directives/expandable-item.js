@@ -17,7 +17,6 @@
         minipaginationOptions: '='
       },
       link: function(scope) {
-        console.log(scope);
         scope.pageModels = scope.expandableList[scope.expandableOptions.pageModels];
         scope.pageModelId = scope.expandableElement[scope.expandableOptions.pageModelId];
       }

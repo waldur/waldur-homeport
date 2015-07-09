@@ -243,8 +243,8 @@ Config file settings:
   in corresponding controllers init function:  
     
     // array with options for expandable item directive
-    this.expandableOptions = [
-      {
+    this.expandableOptions = {
+      projects: {
         // options for current information section
         isList: true, // is information given in a list
         sectionTitle: 'Connected projects', // section title
@@ -267,14 +267,17 @@ Config file settings:
           }
         ]
       }
-    ];  
+    };  
+    
+  Property for minipagination that should be displayed within expandable section
+  should have same name:
     
     // array with options for minipagination directive
-    this.minipaginationData = [
-      {
-        pageModels: 'userProjects',
-        pageModelId: 'username',
-        pageChange: 'getProjectsForUser',
-        pageEntityName: 'projects'
+    this.minipaginationData = {
+      projects: {
+        pageModels: 'userProjects', // list controller key for models list to display
+        pageModelId: 'username', // key to get model
+        pageChange: 'getProjectsForUser', // list controller key for method to retrieve models
+        pageEntityName: 'projects' // entity name for sublist
       }
-    ];  
+    };  

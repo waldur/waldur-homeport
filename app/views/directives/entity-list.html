@@ -132,13 +132,13 @@
                 </div>
 
                 <expandableitem ng-if="optionsForExpandable"
-                                ng-repeat="item in optionsForExpandable"
+                                ng-repeat="(key, item) in optionsForExpandable"
                                 ng-show="expandItem" ng-class="{'opened': expandItem}"
                                 class="list-item-details"
                                 expandable-element="entity"
                                 expandable-list="entityList"
                                 expandable-options="item"
-                                minipagination-options="optionsForMinipagination[$index]"></expandableitem>
+                                minipagination-options="optionsForMinipagination[key]"></expandableitem>
 
             </li>
         </ul>
