@@ -5,12 +5,12 @@
   angular.module('ncsaas')
     .controller('HeaderController', [
       '$rootScope', '$scope', '$state', 'currentStateService', 'customersService',
-      'usersService', 'ENV', 'baseControllerClass', '$translate', 'LANGUAGE', '$window', 'projectsService',
+      'usersService', 'ENV', 'baseControllerClass', '$translate', 'LANGUAGE', '$window', 'projectsService', '$q',
       HeaderController]);
 
   function HeaderController(
     $rootScope, $scope, $state, currentStateService, customersService, usersService,
-    ENV, baseControllerClass, $translate, LANGUAGE, $window, projectsService) {
+    ENV, baseControllerClass, $translate, LANGUAGE, $window, projectsService, $q) {
     var controllerScope = this;
     var HeaderControllerClass = baseControllerClass.extend({
       customers: [],
@@ -29,6 +29,8 @@
       init: function() {
         this.activate();
         this.menuItemActive = currentStateService.getActiveItem($state.current.name);
+        this.setSignalHandler('currentCustomerUpdated', this.currentCustomerUpdatedHandler.bind(controllerScope));
+        this._super();
       },
       activate: function() {
         var vm = this;
@@ -41,9 +43,8 @@
         // reset pageSize
         customersService.pageSize = ENV.pageSize;
 
-        projectsService.getList().then(function(response) {
-          vm.projects = response;
-        });
+        vm.getProjectList();
+
         // initiate current user
         usersService.getCurrentUser().then(function(response) {
           vm.currentUser = response;
@@ -114,6 +115,32 @@
       },
       mobileMenu: function() {
         this.showMobileMenu = !this.showMobileMenu;
+      },
+      currentCustomerUpdatedHandler: function() {
+        var vm = this;
+        this.getProjectList().then(function(response) {
+          if($window.localStorage[ENV.currentProjectUuidStorageKey]) {
+            var uuids = response.map(function(project) {
+              return project.uuid;
+            });
+            if (!uuids.indexOf($window.localStorage[ENV.currentProjectUuidStorageKey]) + 1) {
+              projectsService.getFirst().then(function(firstProject) {
+                vm.setCurrentProject(firstProject);
+              });
+            }
+          }
+        });
+      },
+      getProjectList: function() {
+        var vm = this,
+          deferred = $q.defer();
+        projectsService.cacheTime = ENV.topMenuProjectsCacheTime;
+        projectsService.getList().then(function(response) {
+          vm.projects = response;
+          deferred.resolve(response);
+        });
+
+        return deferred.promise;
       }
     });
 
@@ -142,6 +169,7 @@
         $state.go('home.login');
       },
       stateChangeSuccessHandler: function(event, toState) {
+        this.deregisterEvent('currentCustomerUpdated'); // clear currentCustomerUpdated event handlers
         $rootScope.bodyClass = currentStateService.getBodyClass(toState.name);
         // if user is authenticated - he should have selected customer
         if (authService.isAuthenticated() && !currentStateService.isCustomerDefined) {
