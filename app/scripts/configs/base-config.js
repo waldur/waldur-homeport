@@ -20,6 +20,7 @@ angular.module('ncsaas')
     dashboardEventsCacheTime: 60, // seconds
     listControlPanelShow: false,
     currentCustomerUuidStorageKey: 'currentCustomerUuid',
+    currentProjectUuidStorageKey: 'currentProjectUuid',
     showImport: false,
     resourceOfflineStatus: 'Offline',
     resourceOnlineStatus: 'Online',

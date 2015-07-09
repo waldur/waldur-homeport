@@ -5,16 +5,19 @@
   angular.module('ncsaas')
     .controller('HeaderController', [
       '$rootScope', '$scope', '$state', 'currentStateService', 'customersService',
-      'usersService', 'ENV', 'baseControllerClass', '$translate', 'LANGUAGE', '$window', HeaderController]);
+      'usersService', 'ENV', 'baseControllerClass', '$translate', 'LANGUAGE', '$window', 'projectsService',
+      HeaderController]);
 
   function HeaderController(
     $rootScope, $scope, $state, currentStateService, customersService, usersService,
-    ENV, baseControllerClass, $translate, LANGUAGE, $window) {
+    ENV, baseControllerClass, $translate, LANGUAGE, $window, projectsService) {
     var controllerScope = this;
     var HeaderControllerClass = baseControllerClass.extend({
       customers: [],
       currentUser: {},
       currentCustomer: {},
+      projects: [],
+      currentProject: {},
       showImport: ENV.showImport,
       menuState: {
         addSomethingMenu: false,
@@ -38,6 +41,9 @@
         // reset pageSize
         customersService.pageSize = ENV.pageSize;
 
+        projectsService.getList().then(function(response) {
+          vm.projects = response;
+        });
         // initiate current user
         usersService.getCurrentUser().then(function(response) {
           vm.currentUser = response;
@@ -46,6 +52,10 @@
         // initiate current customer
         currentStateService.getCustomer().then(function(customer) {
           vm.currentCustomer = customer;
+        });
+
+        currentStateService.getProject().then(function(project) {
+          vm.currentProject = project;
         });
 
         $rootScope.closeMenu = vm.closeMenu;
@@ -83,6 +93,13 @@
         vm.currentCustomer = customer;
         $rootScope.$broadcast('currentCustomerUpdated');
       },
+      setCurrentProject: function(project) {
+        var vm = this;
+        $window.localStorage[ENV.currentProjectUuidStorageKey] = project.uuid;
+        currentStateService.setProject(project);
+        vm.currentProject = project;
+        $rootScope.$broadcast('currentProjectUpdated');
+      },
       menuToggle: function(active, event) {
         var vm = this;
         for (var property in vm.menuState) {
@@ -106,11 +123,11 @@
   angular.module('ncsaas')
     .controller('MainController', [
       '$q', '$rootScope', '$state', 'authService', 'currentStateService', 'customersService', 'usersService',
-      'baseControllerClass', '$window', 'ENV', MainController]);
+      'baseControllerClass', '$window', 'ENV', 'projectsService', MainController]);
 
   function MainController(
     $q, $rootScope, $state, authService, currentStateService, customersService, usersService, baseControllerClass,
-    $window, ENV) {
+    $window, ENV, projectsService) {
     var controllerScope = this;
     var Controller = baseControllerClass.extend({
 
@@ -128,19 +145,35 @@
         $rootScope.bodyClass = currentStateService.getBodyClass(toState.name);
         // if user is authenticated - he should have selected customer
         if (authService.isAuthenticated() && !currentStateService.isCustomerDefined) {
-          var deferred = $q.defer();
+          var deferred = $q.defer(),
+            projectDeferred = $q.defer();
           usersService.getCurrentUser().then(function(user) {
             if($window.localStorage[ENV.currentCustomerUuidStorageKey]) {
               customersService.$get($window.localStorage[ENV.currentCustomerUuidStorageKey]).then(function(customer) {
                 deferred.resolve(customer);
+                getProject()
               });
             } else {
               customersService.getPersonalOrFirstCustomer(user.username).then(function(customer) {
                 deferred.resolve(customer);
+                getProject()
               });
             }
           });
           currentStateService.setCustomer(deferred.promise);
+          currentStateService.setProject(projectDeferred.promise);
+        }
+
+        function getProject() {
+          if ($window.localStorage[ENV.currentProjectUuidStorageKey]) {
+            projectsService.$get($window.localStorage[ENV.currentProjectUuidStorageKey]).then(function(response) {
+              projectDeferred.resolve(response);
+            });
+          } else {
+            projectsService.getFirst().then(function(response) {
+              projectDeferred.resolve(response);
+            });
+          }
         }
       }
     });

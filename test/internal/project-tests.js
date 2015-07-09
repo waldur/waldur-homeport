@@ -25,7 +25,8 @@ for(var i = 0; i < testData.length; i++) {
       });
 
       it('I should be able to go to projects list', function() {
-        element(by.cssContainingText('ul.nav-list.views li a', 'Projects')).click();
+        element(by.css('.dropdown.project-dropdown .project-context')).click();
+        element(by.cssContainingText('.dropdown.project-dropdown .nav-sublist li a', 'Manage projects')).click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/projects/');
         helpers.chooseCustomer(customer);
       });
@@ -75,7 +76,8 @@ for(var i = 0; i < addProjectTestData.length; i++) {
       });
 
       it('I should be able to go to "project add" page', function() {
-        element(by.cssContainingText('ul.nav-list.views li a', 'Project')).click();
+        element(by.css('.dropdown.project-dropdown .project-context')).click();
+        element(by.cssContainingText('.dropdown.project-dropdown .nav-sublist li a', 'Manage projects')).click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/projects/');
 
         element(by.css('li.add-something > a')).click();
@@ -93,7 +95,8 @@ for(var i = 0; i < addProjectTestData.length; i++) {
       });
 
       it('I should be able to see ' + projectName + ' at projects list page', function() {
-        element(by.cssContainingText('ul.nav-list.views li a', 'Project')).click();
+        element(by.css('.dropdown.project-dropdown .project-context')).click();
+        element(by.cssContainingText('.dropdown.project-dropdown .nav-sublist li a', 'Manage projects')).click();
         element(by.model('ProjectList.searchInput')).sendKeys(projectName);
       });
 
@@ -128,7 +131,8 @@ for(var i = 0; i < addUserToProjectTestData.length; i++) {
 
       it('I should be able to go to "users tab" at project "' + projectName + '"', function() {
         helpers.chooseCustomer(data.customer);
-        element(by.cssContainingText('ul.nav-list.views li a', 'Projects')).click();
+        element(by.css('.dropdown.project-dropdown .project-context')).click();
+        element(by.cssContainingText('.dropdown.project-dropdown .nav-sublist li a', 'Manage projects')).click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/projects/');
         element(by.model('ProjectList.searchInput')).sendKeys(projectName);
         element(by.cssContainingText('h3.item-title', projectName)).click();

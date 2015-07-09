@@ -175,6 +175,9 @@
                     @include property(font-size, $extra-small-font);
                 } // active-context
             } // &.customer-context
+            &.project-context {
+                @extend .customer-context;
+            }
             &.support {
                 @include inline-middle;
                 width: 30px;
@@ -309,5 +312,13 @@
                 @include property(font-size, 24);
             } // &.mobile-trigger-link
         } // > a
+        &.project-dropdown {
+            background: #4fb447;
+            > a {
+                span {
+                    color: #ffffff;
+                }
+            }
+        }
     } // > li
 } // nav-list
