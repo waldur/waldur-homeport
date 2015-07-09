@@ -3,9 +3,9 @@
 (function() {
   angular.module('ncsaas')
     .controller('IssueListController',
-      ['baseControllerListClass', 'issuesService', 'issueCommentsService', '$scope', IssueListController]);
+      ['baseControllerListClass', 'issuesService', 'issueCommentsService', '$rootScope', IssueListController]);
 
-  function IssueListController(baseControllerListClass, issuesService, issueCommentsService, $scope) {
+  function IssueListController(baseControllerListClass, issuesService, issueCommentsService, $rootScope) {
     var controllerScope = this;
     var controllerClass = baseControllerListClass.extend({
       issueComments: {},
@@ -35,7 +35,7 @@
         issueCommentsService.getList(filter).then(function(response) {
           vm.issueComments[key].data = response;
           vm.issueComments[key].pages = issueCommentsService.pages;
-          $scope.$broadcast('mini-pagination:getNumberList', vm.issueComments[key].pages,
+          $rootScope.$broadcast('mini-pagination:getNumberList', vm.issueComments[key].pages,
             page, vm.getCommentsForIssue.bind(vm), 'comments', key);
         });
       },

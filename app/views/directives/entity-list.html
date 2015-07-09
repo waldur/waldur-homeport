@@ -70,8 +70,8 @@
                 <div class="actions"></div>
             </li>
             <li ng-repeat="entity in entityList.list">
-                <div class="list-item list" ng-class="{'opened': expandItem, 'pointer' : entityList.entityData.expandable}"
-                     ng-click="expandItem=!expandItem">
+                <div class="list-item list" ng-class="{'opened': expandItem, 'pointer' : entityOptions.entityData.expandable}"
+                     ng-click="expandItem=!expandItem; entityList.showMore(entity)">
                     <div class="checkbox">
                         <div class="checkbox" stoppropagation>
                             <input type="checkbox" ng-show="entityList.showgroup"
@@ -130,6 +130,15 @@
                                 button-model="entity"></action-button>
                     </div>
                 </div>
+
+                <expandableitem ng-if="entityList.expandableOptions"
+                                ng-repeat="item in entityList.expandableOptions"
+                                ng-show="expandItem" ng-class="{'opened': expandItem}"
+                                class="list-item-details"
+                                expandable-element="entity"
+                                expandable-list="entityList"
+                                expandable-options="item"></expandableitem>
+
             </li>
         </ul>
     </div>

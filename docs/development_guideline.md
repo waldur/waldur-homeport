@@ -218,3 +218,58 @@ Config file settings:
     
     showForMobile:           add class to show field on mobile devices
 
+## Expandableitem directive
+
+  Directive is used to show additional information in list elements.   
+  Directive is placed in entity-list.html file:
+  
+   
+    <expandableitem ng-if="entityList.expandableOptions"  
+        ng-repeat="item in entityList.expandableOptions"   
+        ng-show="expandItem" 
+        ng-class="{'opened': expandItem}" 
+        class="list-item-details" 
+        expandable-element="entity" <!-- entity item -->
+        expandable-list="entityList" <!-- entity controller -->
+        expandable-options="item"></expandableitem> <!-- options array -->
+  
+  
+  Expandable item shows one section of information, so it is used within a loop to          
+  display multiple sections if necessary.
+  As entity-list directive, expandableitem requires an object with settings
+  in corresponding controllers init function:
+  
+  
+    this.expandableOptions = [
+      {
+        // options for current information section
+        isList: true, // is information given in a list
+        sectionTitle: 'Connected projects', // section title
+        addItemBlock: true, // display adding item instructions block
+        articleBlockText: 'Manage users through', // text in article section
+        entitiesLinkRef: 'projects.list', // link state to entities list
+        entitiesLinkText: 'project details', // text for entities link
+        listKey: 'userProjects', // list controller key for list in expandable block
+        modelId: 'username', // model key for getting id
+        // object with options for minipagination directive
+        minipaginationData:
+        {
+          pageChange: 'getProjectsForUser', // list controller key for callback function
+          pageEntityName: 'projects' // entity name for sublist
+        },
+        // types to display in list section (could be one or more objects in the list)
+        list: [
+          {
+            entityDetailsLink: 'projects.details({uuid: element.project_uuid})', // state for link
+            entityDetailsLinkText: 'project_name', // field key
+            type: 'link' // type of field
+          },
+          {
+            avatarSrc: 'email', // field key
+            type: 'avatar' // type of field
+          }
+        ]
+      }
+    ];  
+  
+   
