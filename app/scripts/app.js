@@ -657,7 +657,7 @@ angular
       })
 
       .state('resources.details-demo', {
-        url: 'demo-resources',
+        url: 'demo-resources/:uuid/',
         views: {
           'appContent': {
             templateUrl: 'views/resource/details-demo.html',
