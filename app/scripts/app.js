@@ -671,6 +671,31 @@ angular
         auth: true
       })
 
+      .state('resources.details-demo', {
+        url: 'demo-resources',
+        views: {
+          'appContent': {
+            templateUrl: 'views/resource/details-demo.html',
+          },
+          'tabBackups@resources.details-demo': {
+            templateUrl: 'views/resource/tab-backups.html',
+          },
+          'backupListContent@resources.details-demo' : {
+            templateUrl: 'views/backup/backup-list-content.html',
+          },
+          'tabs@resources.details-demo': {
+            templateUrl: 'views/resource/tabs.html',
+          },
+          'appHeader': {
+            templateUrl: 'views/partials/app-header.html',
+          }
+        },
+        resolve: {
+          authenticated: authCheck
+        },
+        auth: true
+      })
+
       .state('resources.update', {
         url: ':uuid/edit/:tab',
         views: {

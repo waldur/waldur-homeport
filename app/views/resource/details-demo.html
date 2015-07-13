@@ -1,0 +1,59 @@
+<div ng-controller="ResourceDetailUpdateController as ResourceDetailUpdate">
+    <section class="title-wrapper">
+        <div class="container">
+            <h1>Resources</h1>
+            <ul class="sort-list event-nav">
+                <li class="active" ng-class="{'active':EventList.activeTab == 'activity','unactive':EventList.activeTab == 'costs'}"
+                    ng-animate="{ enter: 'animation-enter', leave: 'animation-leave'}">
+                    <a ng-click="EventList.activeTab = 'activity'">Activity</a>
+                </li>
+                <li ng-class="{'active':EventList.activeTab == 'costs','unactive':EventList.activeTab == 'activity'}">
+                    <a ng-click="EventList.activeTab = 'costs'">Costs</a>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <section class="resources-content">
+        <div class="container">
+            <div class="tabs-wrapper">
+                <aside>
+                    <div class="input-group">
+                        <input type="search" placeholder="Search"/>
+                    </div>
+                    <ul class="tabs-links">
+                        <li class="active">VMs (<span>5</span>)</li>
+                        <li>VMs (<span>5</span>)</li>
+                    </ul>
+                </aside>
+                <div class="tab-content">
+                    <div class="tab-title">
+                        <ul class="ng-isolate-scope">
+                            <a class="toggle-link ng-binding ng-scope active">IaaS</a>
+                            <a class="toggle-link ng-binding ng-scope">PaaS</a>
+                            <a class="toggle-link ng-binding ng-scope">SaaS</a>
+                        </ul>
+                        <select name="" id="" class="dropdown">
+                            <option value="1">Actions</option>
+                        </select>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="table">
+                        <div class="tr th">
+                            <div class="td">Name</div>
+                            <div class="td">Flavor</div>
+                            <div class="td access">Access</div>
+                            <div class="td">Status</div>
+                        </div>
+                        <div class="tr">
+                            <div class="td">Atlassian <span class="teg">SaaS</span></div>
+                            <div class="td">1</div>
+                            <div class="td access">atlassian.com</div>
+                            <div class="td status">configure</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </section>
+</div>
