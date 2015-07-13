@@ -81,11 +81,12 @@
                     </div>
                     <div ng-repeat="field in entityOptions.list"
                          ng-switch="field.type"
-                         ng-class="{ 'display-for-mobile' : field.showForMobile }"
+                         ng-class="{ 'display-for-mobile' : field.showForMobile, 'status': field.type == 'statusCircle' }"
                          class="additional-cell {{ field.className }}">
+                        <div ng-switch-when="statusCircle" class="status-circle" ng-class="{'green': entity[field.propertyName]}"></div>
 
                         <span ng-switch-when="avatar" class="avatar">
-                            <img gravatar-src="entity.email" gravatar-size="100" alt="" class="avatar-img">
+                            <img gravatar-src="field.avatarArraySrc ? entity[field.avatarArraySrc[0]][field.avatarArraySrc[1]] : entity[field.avatarSrc]" gravatar-size="100" alt="" class="avatar-img">
                         </span>
 
                         <h3 ng-switch-when="name" class="item-title">
@@ -93,6 +94,9 @@
                                 {{ entity[field.propertyName] }}
                             </a>
                             <a ng-if="!field.link" stoppropagation>{{ entity[field.propertyName] }}</a>
+                            <span ng-if="field.subtitle" class="subtitle">
+                                #{{ entity.key }} - Created on {{ entity.created | date:'medium' }}
+                            </span>
                         </h3>
 
                         <a ng-switch-when="link" ng-if="field.link" ui-sref="{{ field.link }}" stoppropagation>
@@ -126,6 +130,7 @@
                                 ng-if="!entityOptions.entityData.hideActionButtons"
                                 button-list="entityButtons"
                                 button-controller="entityList"
+                                button-type="{{ entityOptions.entityData.actionButtonsType }}"
                                 ng-show="!entityList.showgroup"
                                 button-model="entity"></action-button>
                     </div>
@@ -137,7 +142,8 @@
                                 class="list-item-details"
                                 expandable-element="entity"
                                 expandable-list="entityList"
-                                expandable-options="item"></expandableitem>
+                                expandable-options="item">
+                </expandableitem>
 
             </li>
         </ul>

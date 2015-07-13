@@ -7,3 +7,9 @@
         border: none !important;
     } // li
 } // list-blocks
+.list-blocks-support {
+    @include clear-list-inline;
+    .support-answer {
+        padding-left: 100px;
+    }
+}

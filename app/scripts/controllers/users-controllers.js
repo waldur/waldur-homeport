@@ -43,6 +43,7 @@
             entitiesLinkRef: 'projects.list',
             entitiesLinkText: 'project details',
             addItemBlock: true,
+            headBlock: 'heading',
             listKey: 'userProjects',
             modelId: 'username',
             minipaginationData:
@@ -70,6 +71,7 @@
             {
               type: ENTITYLISTFIELDTYPES.avatarPictureField,
               className: 'avatar',
+              avatarSrc: 'email',
               showForMobile: ENTITYLISTFIELDTYPES.showForMobile
             },
             {

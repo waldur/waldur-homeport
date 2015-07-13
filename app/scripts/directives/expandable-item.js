@@ -8,8 +8,7 @@
   function expandableItem() {
     return {
       restrict: 'E',
-      templateUrl: 'views/directives/expandable-item.html',
-      replace: true,
+      template: '<div ng-include="contentUrl"></div>',
       scope: {
         expandableElement: '=',
         expandableList: '=',
@@ -18,6 +17,9 @@
       link: function(scope) {
         scope.pageModels = scope.expandableList[scope.expandableOptions.listKey];
         scope.modelId = scope.expandableElement[scope.expandableOptions.modelId];
+        scope.contentUrl = scope.expandableOptions.directiveTypeSupport
+          ? 'views/directives/expandable-item/expandable-item-'+ scope.expandableOptions.directiveTypeSupport +'.html'
+          : 'views/directives/expandable-item/expandable-item.html';
       }
     };
   }
