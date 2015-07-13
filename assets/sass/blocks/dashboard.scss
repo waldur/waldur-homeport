@@ -349,10 +349,10 @@
       display: block;
       position: relative;
       text-decoration: none;
-      color:$dashboard-black;
-      border-bottom:1px dashed $dashboard-green;
+      color: $dashboard-black;
+      border-bottom: 1px dashed $dashboard-green;
       &:before {
-        content:"";
+        content: "";
         display: block;
         width: 0;
         height: 1px;
@@ -377,7 +377,7 @@
     }
     &.active {
       a {
-        &:before{
+        &:before {
           opacity: 1;
           width: 100%;
           left: 0;
@@ -392,17 +392,18 @@
     }
     &.inactive {
       a {
-        &:before{
+        &:before {
           opacity: 0;
           animation: inactive-line .1s 1 linear;
         }
         &:after {
           opacity: 0;
-          animation: inactive-triangle  .1s 1 linear;
+          animation: inactive-triangle .1s 1 linear;
         }
       }
     }
   }
+}
 @keyframes active-line {
   0% {
     left: 0;
