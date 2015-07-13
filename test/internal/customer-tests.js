@@ -49,6 +49,16 @@ for(var i = 0; i < addCustomerTestData.length; i++) {
         expect(element(by.cssContainingText('h3.item-title a', customerName)).isPresent()).toBe(true);
       });
 
+      it('I should be able to edit customer' + customerName, function() {
+        element(by.cssContainingText('h3.item-title a', customerName)).click();
+        element(by.cssContainingText('a.button', 'actions')).click();
+        element(by.cssContainingText('a.button-simple', 'Edit profile')).click();
+
+        element(by.model('CustomerUpdate.model.name')).sendKeys('NEW NAME');
+        element(by.cssContainingText('a.button-apply', 'Save')).click();
+        expect(element(by.cssContainingText('h2.app-title', 'NEW NAME')).isPresent()).toBe(true);
+      });
+
       it('I should be able to logout', function() {
         auth.logout();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/');

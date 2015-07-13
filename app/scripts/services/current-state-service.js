@@ -18,16 +18,28 @@
     vm.getActiveItem = getActiveItem;
     vm.getBodyClass = getBodyClass;
 
+    vm.getProject = getProject;
+    vm.setProject = setProject;
+
     // private variables:
-    var customer = null;
+    var customer = null,
+      project = null;
 
     function getCustomer() {
       return customer;
     }
 
+    function getProject() {
+      return project;
+    }
+
     function setCustomer(newCustomer) {
       vm.isCustomerDefined = true;
       customer = $q.when(newCustomer);
+    }
+
+    function setProject(newProject) {
+      project = $q.when(newProject);
     }
 
     // XXX: getActiveItem and getBodyClass methods have to be moved to apps.js for code consistency.
@@ -63,7 +75,6 @@
       'projects.details',
       'projects.update',
       'organizations.details',
-      'organizations.edit',
       'customer-plans',
       'users.details',
       'home',

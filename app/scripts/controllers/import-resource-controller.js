@@ -5,24 +5,23 @@
     .controller('ImportResourceController',
       ['baseControllerClass',
       'digitalOceanLinkService',
+      'digitalOceanResourcesService',
       'joinService',
       'joinServiceProjectLinkService',
-      '$state',
-      '$q',
       ImportResourceController]);
 
   function ImportResourceController(
     baseControllerClass,
     digitalOceanLinkService,
+    digitalOceanResourcesService,
     joinService,
-    joinServiceProjectLinkService,
-    $state,
-    $q
+    joinServiceProjectLinkService
     ) {
     var controllerScope = this;
     var Controller = baseControllerClass.extend({
       selectedResources: [],
-      resources: [],
+      importableResources: [],
+      importedResources: [],
       noResources: false,
 
       init: function() {
@@ -31,13 +30,15 @@
       },
 
       toggleResource: function(resource){
-        controllerScope.selectedResources = [];
-        resource.checked =! resource.checked;
-        for (var i = 0; i < controllerScope.resources.length; i++) {
-          if (controllerScope.resources[i].checked){
-            controllerScope.selectedResources.push(controllerScope.resources[i]);
+        if (resource.status == 'ready' || resource.status == 'success'){
+          controllerScope.selectedResources = [];
+          resource.checked =! resource.checked;
+          for (var i = 0; i < controllerScope.importableResources.length; i++) {
+            if (controllerScope.importableResources[i].checked){
+              controllerScope.selectedResources.push(controllerScope.importableResources[i]);
+            }
           }
-        };
+        }
       },
 
       getServices: function() {
@@ -52,15 +53,32 @@
       setService: function(service) {
         controllerScope.selectedService = service;
         this.getResourcesForService(service);
+        this.getImportedResourcesForService(service);
         this.getProjectsForService(service)
+      },
+
+      getImportedResourcesForService: function(service) {
+        var self = this;
+        controllerScope.importedResources = [];
+        digitalOceanResourcesService.getList({service_uuid: service.uuid}).then(function(response){
+          controllerScope.importedResources = response;
+        }, function(){
+          self.flashMessage('warning', 'Unable to get list of imported resources');
+        });
       },
 
       getResourcesForService: function(service) {
         var self = this;
-        controllerScope.resources = [];
+        controllerScope.importableResources = [];
         controllerScope.noResources = false;
         digitalOceanLinkService.getList({uuid: service.uuid}).then(function(response){
-          controllerScope.resources = response;
+          for (var i = 0; i < response.length; i++) {
+            response[i].status = 'ready';
+          };
+          controllerScope.importableResources = response;
+          if (response.length == 0){
+            controllerScope.noResources = true;
+          }
         }, function(){
           controllerScope.noResources = true;
           self.flashMessage('warning', 'Unable to get list of resources for service');
@@ -90,24 +108,22 @@
         var project_url = controllerScope.selectedProject.url;
         var project_uuid = controllerScope.selectedProject.uuid;
 
-        var promises = [];
-        for (var i = 0; i < controllerScope.selectedResources.length; i++) {
-          var droplet = controllerScope.selectedResources[i];
-          var promise = digitalOceanLinkService.add({
+        controllerScope.selectedResources.map(function(resource){
+          resource.status = 'progress';
+          digitalOceanLinkService.add({
             service_uuid: service_uuid,
             project_url: project_url,
-            droplet_id: droplet.id
-          });
-          promises.push(promise);
-        };
-
-        self.flashMessage('success', 'Wait while importing droplets');
-
-        $q.all(promises).then(function(response){
-          $state.go('projects.details', {uuid: project_uuid, tab: 'resources'});
-        }, function(){
-          self.flashMessage('warning', 'Unable to import droplets');
+            droplet_id: resource.id
+          }).then(function(){
+            resource.status = 'success';
+            self.toggleResource(resource);
+          }, function(){
+            self.flashMessage('warning', 'Unable to import resource ' + resource.name);
+            resource.status = 'failed';
+          })
         })
+
+        self.flashMessage('success', 'Wait while importing resources');
       }
     });
     controllerScope.__proto__ = new Controller();

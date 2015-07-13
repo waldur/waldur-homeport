@@ -28,6 +28,9 @@
                 } // img
             } // sm
         } // &.avatar
+        &.avatar-edit {
+            width: 180px;
+        }
         &.content {
             .profile-edit {
                 width: 300px;

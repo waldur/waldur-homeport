@@ -7,7 +7,6 @@
       _signals: {},
 
       init:function() {
-        this.deregisterEvent('currentCustomerUpdated'); // clear currentCustomerUpdated event handlers
         this.registerEventHandlers();
       },
       setSignalHandler: function(signalName, handlerFunction) {
@@ -239,6 +238,8 @@
         vm.service.$get($stateParams.uuid).then(function(response) {
           vm.model = response;
           vm.afterActivate();
+        }, function() {
+          $state.go('errorPage.notFound');
         });
       },
       remove:function() {

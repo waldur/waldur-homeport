@@ -53,7 +53,8 @@
 
     function signout(){
       delete $http.defaults.headers.common.Authorization;
-      delete $window.localStorage[ENV.currentCustomerUuidStorageKey]
+      delete $window.localStorage[ENV.currentCustomerUuidStorageKey];
+      delete $window.localStorage[ENV.currentProjectUuidStorageKey];
       vm.user = {isAuthenticated: false};
       usersService.currentUser = null;
       $auth.logout();

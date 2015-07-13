@@ -3,9 +3,9 @@
 (function() {
   angular.module('ncsaas')
     .controller('ProjectListController',
-      ['baseControllerListClass', 'projectsService', 'projectPermissionsService', 'resourcesService', '$scope', ProjectListController]);
+      ['baseControllerListClass', 'projectsService', 'projectPermissionsService', 'resourcesService', '$rootScope', ProjectListController]);
 
-  function ProjectListController(baseControllerListClass, projectsService, projectPermissionsService, resourcesService, $scope) {
+  function ProjectListController(baseControllerListClass, projectsService, projectPermissionsService, resourcesService, $rootScope) {
     var controllerScope = this;
     var CustomerController = baseControllerListClass.extend({
       projectUsers: {},
@@ -49,7 +49,7 @@
         projectPermissionsService.getList(filter).then(function(response) {
           vm.projectUsers[uuid].data = response;
           vm.projectUsers[uuid].pages = projectPermissionsService.pages;
-          $scope.$broadcast('mini-pagination:getNumberList', vm.projectUsers[uuid].pages,
+          $rootScope.$broadcast('mini-pagination:getNumberList', vm.projectUsers[uuid].pages,
             page, vm.getUsersForProject.bind(vm), 'users', uuid);
         });
       },
@@ -67,7 +67,7 @@
         resourcesService.getList(filter).then(function(response) {
           vm.projectResources[uuid].data = response;
           vm.projectResources[uuid].pages = resourcesService.pages;
-          $scope.$broadcast('mini-pagination:getNumberList', vm.projectResources[uuid].pages,
+          $rootScope.$broadcast('mini-pagination:getNumberList', vm.projectResources[uuid].pages,
             page, vm.getResourcesForProject.bind(vm), 'resources', uuid);
         });
       }
@@ -267,19 +267,19 @@
     .controller('ProjectResourcesTabController', [
       '$stateParams',
       'baseResourceListController',
-      'joinResourcesService',
+      'resourcesService',
       ProjectResourcesTabController
     ]);
 
   function ProjectResourcesTabController(
     $stateParams,
     baseResourceListController,
-    joinResourcesService
+    resourcesService
     ) {
     var controllerScope = this;
     var ResourceController = baseResourceListController.extend({
       init:function() {
-        this.service = joinResourcesService;
+        this.service = resourcesService;
         this.controllerScope = controllerScope;
         this.service.defaultFilter.project = $stateParams.uuid;
         this._super();

@@ -17,10 +17,14 @@ angular.module('ncsaas')
     serviceIcon: '/static/images/icons/icon_openstack_small.png',
     defaultCustomerIcon: '/static/images/logo.png',
     topMenuCustomersCacheTime: 60 * 10, // seconds
+    topMenuProjectsCacheTime: 60 * 10, // seconds
     dashboardEventsCacheTime: 60, // seconds
     listControlPanelShow: false,
     currentCustomerUuidStorageKey: 'currentCustomerUuid',
+    currentProjectUuidStorageKey: 'currentProjectUuid',
     showImport: false,
+    resourceOfflineStatus: 'Offline',
+    resourceOnlineStatus: 'Online',
 
     addonsList : [
       {

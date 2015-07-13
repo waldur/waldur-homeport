@@ -20,7 +20,8 @@ angular
     'tc.chartjs',
     'angulartics',
     'angulartics.google.analytics',
-    'ngFileUpload'
+    'ngFileUpload',
+    'xeditable'
   ])
   // urls
   .config(function($stateProvider, $urlRouterProvider) {
@@ -509,22 +510,6 @@ angular
           },
           'listTemplate@organizations.details' : {
             templateUrl: 'views/service/list-template.html'
-          },
-          'appHeader': {
-            templateUrl: 'views/partials/app-header.html',
-          }
-        },
-        resolve: {
-          authenticated: authCheck
-        },
-        auth: true
-      })
-
-      .state('organizations.edit', {
-        url: ':uuid/edit/',
-        views: {
-          'appContent': {
-            templateUrl: 'views/customer/update.html',
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',

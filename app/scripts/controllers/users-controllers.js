@@ -6,14 +6,16 @@
       'baseControllerListClass',
       'usersService',
       'projectPermissionsService',
-      '$scope',
+      '$rootScope',
+      'ENTITYLISTFIELDTYPES',
       UserListController
     ]);
 
-  function UserListController(baseControllerListClass, usersService, projectPermissionsService, $scope) {
+  function UserListController(baseControllerListClass, usersService, projectPermissionsService, $rootScope, ENTITYLISTFIELDTYPES) {
     var controllerScope = this;
     var UserController = baseControllerListClass.extend({
       userProjects: {},
+      expandableProjectsKey: 'projects',
 
       init:function() {
         this.service = usersService;
@@ -33,6 +35,63 @@
             clickFunction: function(user) {}
           }
         ];
+        this.expandableOptions = [
+          {
+            isList: true,
+            sectionTitle: 'Connected projects',
+            articleBlockText: 'Manage users through',
+            entitiesLinkRef: 'projects.list',
+            entitiesLinkText: 'project details',
+            addItemBlock: true,
+            listKey: 'userProjects',
+            modelId: 'username',
+            minipaginationData:
+            {
+              pageChange: 'getProjectsForUser',
+              pageEntityName: this.expandableProjectsKey
+            },
+            list: [
+              {
+                entityDetailsLink: 'projects.details({uuid: element.project_uuid})',
+                entityDetailsLinkText: 'project_name',
+                type: 'link'
+              }
+            ]
+          }
+        ];
+        this.entityOptions = {
+          entityData: {
+            title: 'Users',
+            noDataText: 'No users yet.',
+            hideActionButtons: true,
+            expandable: true
+          },
+          list: [
+            {
+              type: ENTITYLISTFIELDTYPES.avatarPictureField,
+              className: 'avatar',
+              showForMobile: ENTITYLISTFIELDTYPES.showForMobile
+            },
+            {
+              name: 'Name',
+              propertyName: 'full_name',
+              type: ENTITYLISTFIELDTYPES.name,
+              link: 'users.details({uuid: entity.uuid})',
+              className: 'name',
+              showForMobile: ENTITYLISTFIELDTYPES.showForMobile
+            },
+            {
+              name: 'Email',
+              propertyName: 'email',
+              type: ENTITYLISTFIELDTYPES.noType
+            },
+            {
+              name: 'Username',
+              propertyName: 'username',
+              type: ENTITYLISTFIELDTYPES.noType
+            }
+          ]
+        };
       },
       showMore: function(user) {
         if (!this.userProjects[user.username]) {
@@ -40,7 +99,7 @@
         }
       },
       getProjectsForUser: function(username, page) {
-        var vm = this;
+        var vm = controllerScope;
         var filter = {
           username:username
         };
@@ -53,8 +112,8 @@
         projectPermissionsService.getList(filter).then(function(response) {
           vm.userProjects[username].data = response;
           vm.userProjects[username].pages = projectPermissionsService.pages;
-          $scope.$broadcast('mini-pagination:getNumberList', vm.userProjects[username].pages,
-            page, vm.getProjectsForUser.bind(vm), 'projects', username);
+          $rootScope.$broadcast('mini-pagination:getNumberList', vm.userProjects[username].pages,
+            page, vm.getProjectsForUser.bind(vm), vm.expandableProjectsKey, username);
         });
       }
     });

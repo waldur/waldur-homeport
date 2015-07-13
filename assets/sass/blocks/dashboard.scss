@@ -2,7 +2,14 @@
   clear: both;
 }
 .event-log {
-  h2{
+  .active-content {
+    animation: content-show .5s 1 ease-out;
+    padding-top: 0px;
+  }
+  .inactive-content {
+    animation: content-hide .2s 1 ease-out;
+  }
+  h2 {
     float: left;
     display: block;
     margin-top: 5px;
@@ -33,6 +40,9 @@
 
   .table-block {
     margin-bottom: 20px;
+    &:not(:first-child) {
+      margin-top: 50px;
+    }
     .title {
       margin-bottom: 25px;
       .sort-list {
@@ -96,10 +106,47 @@
           float: right;
           margin-top: 4px;
           margin-left: 25px;
+          &.opened-icon {
+            background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAMAAAAolt3jAAAATlBMVEUormAormAormAormAormAormAormAormAormAormAormAormAormAormAormAormAormAormAormAormAormAormAormAormAormAormBmPtXgAAAAAXRSTlMAQObYZgAAAAFiS0dEAIgFHUgAAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQffBwgKOwEeCqrdAAAAWklEQVQI11WO2Q3AMAxCGSCnc5X9F23sKFb7fgxCCQBKmbPiMmiM4+h8MqVbGJvqFjVODICQAgRmLHshYr882/I2kAuZ12+RTs/t26ef60P+M3xI99V1zmLiBWC2CnmvBzYdAAAAAElFTkSuQmCC') no-repeat;
+          }
         }
       }
     }
 
+    .table {
+      border:1px solid #cccaca;
+      padding-bottom: 10px;
+      .tr {
+        position: relative;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        padding: 0 20px;
+        .td {
+          float: left;
+          width: 20%;
+          &:nth-child(1) {
+            text-align: left;
+          }
+          &:first-child {
+            font-weight: bold;
+          }
+          &:last-child {
+            float: right;
+            text-align: right;
+            margin-right: 20px;
+          }
+        }
+        &.th {
+          font-weight: bold;
+        }
+        &:nth-child(2n-1) {
+          height: 50px;
+          line-height: 50px;
+          background: $table-gray;
+        }
+      }
+    }
   }
   .row {
     padding-left: 45px;
@@ -114,7 +161,6 @@
       &:nth-child(2n-1) {
         .white-box {
           margin-right: 10px;
-
         }
       }
       &:nth-child(2n) {
@@ -132,7 +178,6 @@
             list-style: none;
             float: left;
             width: 30%;
-
             .counter-name {
 
             }
@@ -162,19 +207,27 @@
           }
         }
         .chart {
-          margin-top: 15px;
+          margin-top: 25px;
+          position: relative;
+          .label{
+            position: absolute;
+            top: -8%;
+            left: 0%;
+            font-size: 12px;
+            font-weight: bold;
+          }
         }
       }
       &.alerts-list {
         h3 {
           text-transform: uppercase;
           color: $dashboard-green;
-          margin-left: 60px;
+          margin-left: 10px;
           padding-left: 35px;
         }
         &:nth-child(2) {
           h3 {
-            margin-left: 10px;
+            margin-left: 4px;
           }
         }
         .white-box {
@@ -205,6 +258,7 @@
                   width: 43px;
                   height: 41px;
                   float: left;
+                  margin-left: -8px;
                 }
                 span {
                   float: left;
@@ -215,9 +269,6 @@
                 float: right;
                 .date {
                   color: #929391;
-                }
-                .time {
-
                 }
               }
             }
@@ -233,20 +284,20 @@
         }
       }
     }
-    .quard-block{
+    .quard-block {
       width: 25%;
       min-width: 350px;
-      .white-box{
+      .white-box {
         margin:20px 20px;
       }
-      &:first-child{
+      &:first-child {
         .white-box {
           margin-left: 60px;
         }
       }
-      &:last-child{
+      &:last-child {
         .white-box {
-          margin-right: 60px  ;
+          margin-right: 60px;
         }
       }
     }
@@ -300,23 +351,131 @@
       text-decoration: none;
       color:$dashboard-black;
       border-bottom:1px dashed $dashboard-green;
+      &:before {
+        content:"";
+        display: block;
+        width: 0;
+        height: 1px;
+        background: $dashboard-green;
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+      }
+      &:after {
+        content: "";
+        position: absolute;
+        bottom: 0px;
+        left: 50%;
+        margin-left: -5px;
+        width: 0px;
+        height: 0px;
+        border-style: solid;
+        border-width: 6px 5px 0px;
+        border-color: $dashboard-green transparent;
+        opacity: 0;
+      }
     }
     &.active {
       a {
-        border-bottom-style:solid;
+        &:before{
+          opacity: 1;
+          width: 100%;
+          left: 0;
+          animation: active-line .1s 1 linear;
+        }
         &:after {
-          content: "";
-          position: absolute;
+          opacity: 1;
           bottom: -6px;
-          left: 50%;
-          margin-left: -5px;
-          width: 0px;
-          height: 0px;
-          border-style: solid;
-          border-width: 6px 5px 0px;
-          border-color: $dashboard-green transparent;
+          animation: active-triangle .1s 1 linear;
         }
       }
     }
+    &.inactive {
+      a {
+        &:before{
+          opacity: 0;
+          animation: inactive-line .1s 1 linear;
+        }
+        &:after {
+          opacity: 0;
+          animation: inactive-triangle  .1s 1 linear;
+        }
+      }
+    }
+  }
+@keyframes active-line {
+  0% {
+    left: 0;
+    opacity: 0;
+    width: 0;
+  }
+  100% {
+    opacity: 1;
+    width: 100%;
+  }
+}
+@keyframes inactive-line {
+  0% {
+    left: 0;
+    opacity: 1;
+    width: 100%;
+  }
+  100% {
+    opacity: 0;
+    width: 0%;
+    left:100%
+  }
+}
+@keyframes active-triangle {
+  0% {
+    bottom:0;
+    opacity: 0;
+  }
+  50%{
+    bottom:0;
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    bottom: -6px;
+  }
+}
+@keyframes inactive-triangle {
+  0% {
+    opacity: 1;
+    bottom: -6px;
+  }
+  50%{
+    opacity: 1;
+    bottom: -6px;
+  }
+  100% {
+    bottom:0;
+    opacity: 0;
+  }
+}
+@keyframes content-show {
+  0% {
+    opacity: 0;
+    padding-top: 50px;
+  }
+  20% {
+    opacity: 0;
+    padding-top: 50px;
+  }
+  100% {
+    opacity: 1;
+    padding-top: 0;
+  }
+}
+@keyframes content-hide {
+  0% {
+    opacity: 1;
+    padding-top: 0;
+
+  }
+  100% {
+    opacity: 0;
+    padding-top: 50px;
   }
 }
