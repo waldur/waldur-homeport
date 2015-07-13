@@ -18,14 +18,16 @@
                     <div class="avatar small" ng-switch-when="avatar">
                         <img gravatar-src="element[item.avatarSrc]" gravatar-size="60">
                     </div>
-                    <a ui-sref="{{ item.entityDetailsLink }}" ng-switch-when="link">{{ element[item.entityDetailsLinkText] }}</a>
+                    <a ui-sref="{{ item.entityDetailsLink }}"
+                       ng-switch-when="link">{{ element[item.entityDetailsLinkText] }}</a>
                 </span>
             </section>
         </li>
     </ul>
 
     <article ng-if="expandableOptions.addItemBlock" class="light-description">
-        {{ expandableOptions.articleBlockText }} <a ui-sref="{{ expandableOptions.entitiesLinkRef }}">{{ expandableOptions.entitiesLinkText }}</a>.
+        {{ expandableOptions.articleBlockText }}
+        <a ui-sref="{{ expandableOptions.entitiesLinkRef }}">{{ expandableOptions.entitiesLinkText }}</a>.
     </article>
 
 </section>

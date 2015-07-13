@@ -86,7 +86,8 @@
                         <div ng-switch-when="statusCircle" class="status-circle" ng-class="{'green': entity[field.propertyName]}"></div>
 
                         <span ng-switch-when="avatar" class="avatar">
-                            <img gravatar-src="field.avatarArraySrc ? entity[field.avatarArraySrc[0]][field.avatarArraySrc[1]] : entity[field.avatarSrc]" gravatar-size="100" alt="" class="avatar-img">
+                            <img gravatar-src="field.avatarArraySrc ? entity[field.avatarArraySrc[0]][field.avatarArraySrc[1]] : entity[field.avatarSrc]"
+                                 gravatar-size="100" alt="" class="avatar-img">
                         </span>
 
                         <h3 ng-switch-when="name" class="item-title">

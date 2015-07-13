@@ -6,11 +6,12 @@
       ['baseControllerListClass', 'issuesService', 'issueCommentsService',
         '$rootScope', 'ENTITYLISTFIELDTYPES', IssueListController]);
 
-  function IssueListController(baseControllerListClass, issuesService, issueCommentsService, $rootScope, ENTITYLISTFIELDTYPES) {
+  function IssueListController(
+    baseControllerListClass, issuesService, issueCommentsService, $rootScope, ENTITYLISTFIELDTYPES) {
     var controllerScope = this;
     var controllerClass = baseControllerListClass.extend({
       issueComments: {},
-      expandableProjectsKey: 'comments',
+      expandableCommentsKey: 'comments',
 
       init:function() {
         this.service = issuesService;
@@ -64,11 +65,11 @@
             answersBlock: true,
             listKey: 'issueComments',
             modelId: 'key',
-            directiveTypeSupport: 'support',
+            viewType: 'support',
             minipaginationData:
             {
               pageChange: 'getCommentsForIssue',
-              pageEntityName: this.expandableProjectsKey
+              pageEntityName: this.expandableCommentsKey
             }
           }
         ];
@@ -93,7 +94,7 @@
           vm.issueComments[key].data = response;
           vm.issueComments[key].pages = issueCommentsService.pages;
           $rootScope.$broadcast('mini-pagination:getNumberList', vm.issueComments[key].pages,
-            page, vm.getCommentsForIssue.bind(vm), vm.expandableProjectsKey, key);
+            page, vm.getCommentsForIssue.bind(vm), vm.expandableCommentsKey, key);
         });
       },
       addComment: function(issue) {

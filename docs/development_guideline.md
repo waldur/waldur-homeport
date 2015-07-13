@@ -257,7 +257,7 @@ Config file settings:
         headBlock: 'description', // 'description' or 'header' to use either layout
         hasAnswerForm: true, // if section has feedback form (for support list)
         answersBlock: true, // if section displays answers (for support list)
-        directiveTypeSupport: 'support' // filename suffix for template file 
+        viewType: 'support' // filename suffix for template file 
                     
         // object with options for minipagination directive
         minipaginationData:

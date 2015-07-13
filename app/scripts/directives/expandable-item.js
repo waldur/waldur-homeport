@@ -6,6 +6,8 @@
     .directive('expandableitem', [expandableItem]);
 
   function expandableItem() {
+    var directiveViewPath = 'views/directives/expandable-item/',
+      defaultView = directiveViewPath + 'expandable-item.html';
     return {
       restrict: 'E',
       template: '<div ng-include="contentUrl"></div>',
@@ -17,9 +19,9 @@
       link: function(scope) {
         scope.pageModels = scope.expandableList[scope.expandableOptions.listKey];
         scope.modelId = scope.expandableElement[scope.expandableOptions.modelId];
-        scope.contentUrl = scope.expandableOptions.directiveTypeSupport
-          ? 'views/directives/expandable-item/expandable-item-'+ scope.expandableOptions.directiveTypeSupport +'.html'
-          : 'views/directives/expandable-item/expandable-item.html';
+        scope.contentUrl = scope.expandableOptions.viewType
+          ? directiveViewPath + 'expandable-item-' + scope.expandableOptions.viewType + '.html'
+          : defaultView;
       }
     };
   }
