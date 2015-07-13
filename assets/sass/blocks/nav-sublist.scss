@@ -1,17 +1,13 @@
 .nav-sublist {
     @include clear-list;
     @include property(top, 50);
-    @include property(width, 180);
+    @include property(width, 220);
     @include property(margin-left, -90);
     @include property(border-radius, 0 0 4 4);
-    @include property(padding, 5 0);
-    @include property(padding-top, 20);
     left: 50%;
     position: absolute;
-    background-color: #F0F0F0;
-    border: 1px solid rgb(221, 221, 221);
-    border-top: none;
-    border-bottom: 2px solid #8E8E8E;
+    background-color: #4fb547;
+    overflow: hidden;
     &.lang {
         width: 120px;
         margin-left: 0;
@@ -35,11 +31,18 @@
         } // lg
     } // &.user-area
     > li {
+        padding-top: 1px;
+        margin-top: -1px;
+        padding-bottom: 1px;
+        margin-bottom: -1px;
         &.divider {
             @include property(height, 1);
             @include property(margin, 5 0);
             background-color: #ADADAD;
         } // & divider
+        &:hover, &:active {
+            background-color: #409a3c;
+        } // &:hover, &:active
         &.on-tablet {
             display: none;
             @include bp(sm) {
@@ -71,39 +74,38 @@
         > a {
             display: block;
             @include property(font-size, $small-font);
-            @include property(padding, 5 20);
-            @include property(padding-left, 35);
+            @include property(margin, 0 10);
+            @include property(padding, 10 5);
             line-height: 1;
-            color: rgb(73, 73, 73);
+            color: #ffffff;
             font-weight: normal;
             text-decoration: none;
-            word-wrap: break-word;
-            &:hover, &:active {
-                background-color: #fff;
-            } // &:hover, &:active
+            text-overflow: ellipsis;
+            border-bottom: 1px solid #47a340;
+            span {
+                &:first-child {
+                    text-overflow: ellipsis;
+                    max-width: 130px;
+                    display: inline-block;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    height: 15px;
+                }
+                &:last-child {
+                    color: #35853b;
+                    display: inline-block;
+                    float: right;
+                }
+            }
             &:before {
                 color: #0E8032;
             } // &:beore
             &.current {
                 position: relative;
-                &:before {
-                    position: absolute;
-                    @include icon-fa;
-                    @include property(left, 10);
-                    content: '\f00c';
-                    transform: translate(1.1, 1.1);
-                } // &:before
+                color: #35853b;
             } // &.current
-            &.manage {
-                &:before {
-                    position: absolute;
-                    @include icon-fa;
-                    @include property(left, 10);
-                    content: '\f1ad';
-                    transform: translate(1.1, 1.1);
-                } // &:before
-            } // &.manage
             &.service {
+                padding-left: 20px;
                 &:before {
                     position: absolute;
                     @include icon-fa;
@@ -113,6 +115,7 @@
                 } // &:before
             } // &.service
             &.project {
+                padding-left: 20px;
                 &:before {
                     position: absolute;
                     @include icon-fa;
@@ -131,6 +134,7 @@
                 } // &:before
             } // &.resource
             &.user {
+                padding-left: 20px;
                 &:before {
                     position: absolute;
                     @include icon-fa;
@@ -149,5 +153,12 @@
                 } // &:before
             } // import
         } // > a
+        &.manage-item {
+            background-color: #eeeded;
+            a {
+                color: #4fb547;
+                border-width: 0;
+            }
+        }
     } // > li
 } // nav-sublist

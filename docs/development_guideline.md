@@ -105,10 +105,12 @@ Config file settings:
     pageSize:                      default page size   
     topMenuCustomersCount:         top menu customers quantity  
     serviceIcon:                   image to display on appstore page  
-    topMenuCustomersCacheTime:     time to store customers in browser cache  
+    topMenuCustomersCacheTime:     time to store customers in browser cache 
+    topMenuProjectsCacheTime:      time to store projects in browser cache
     dashboardEventsCacheTime:      time to store events in browser cache  
     listControlPanelShow:          variable for displaying action switcher panel: true to show, false to hide 
     currentCustomerUuidStorageKey: key for localStorage to ged customer uuid for customer selected in top menu 
+    currentProjectUuidStorageKey:  key for localStorage to ged project uuid for project selected in top menu 
     addonsList:                    additional options for virtual machine purchase on appstore page
     resourceOfflineStatus:                 value for offline fields received from server
     resourceOnlineStatus:                  value for online fields received from server

@@ -7,7 +7,6 @@
       _signals: {},
 
       init:function() {
-        this.deregisterEvent('currentCustomerUpdated'); // clear currentCustomerUpdated event handlers
         this.registerEventHandlers();
       },
       setSignalHandler: function(signalName, handlerFunction) {

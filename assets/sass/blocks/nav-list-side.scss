@@ -21,6 +21,9 @@
                 display: none;
             } // md
         } // &.customers
+        .projects {
+            @extend .customers;
+        }
         > a {
             @include property(padding, 0 20);
             @include property(padding-top, 10);
@@ -67,6 +70,9 @@
                     @include property(font-size, $extra-small-font);
                 } // active-context
             } // &.customer-context
+            &.project-context {
+                @extend .customer-context
+            }
             &.user-area {
                 @include property(padding-top, 5);
                 .user-name {
