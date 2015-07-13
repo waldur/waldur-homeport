@@ -1,7 +1,10 @@
 .nav-list {
+    $navListBackgroundColor: #409a3c;
     @include clear-list-inline;
     @include clearfix;
-    position: relative;
+    &.views {
+        position: relative;
+    }
     &.in-home {
         > li {
             > a {
@@ -26,10 +29,11 @@
         } // xs
     } // &.mobile
     > li {
-        float: left;
+        float: left;;
         &.logo-box {
             position: absolute;
-            left: -50px;
+            left: -15px;
+            z-index: 1;
             @include bp(xs) {
                 display: none;
             } // xs
@@ -44,6 +48,25 @@
             @include bp(xs) {
                 display: none;
             } // xs
+        }
+        &.dashboard-menu-item {
+            background-color: $navListBackgroundColor;
+            position: relative;
+            $padding: 85px;
+            padding-left: $padding;
+            margin-left: 25-$padding;
+            &:after {
+                content: "";
+                width: 0;
+                height: 0;
+                border: 25px solid transparent;
+                border-left-color: $navListBackgroundColor;
+                border-right: 0;
+                position: absolute;
+                right: -25px;
+                top: 0;
+                z-index: 1;
+            }
         }
         &.mobile-trigger {
             display: none;
@@ -65,6 +88,18 @@
         } // &..node-conductor
         &.dropdown {
             position: relative;
+            > a {
+                &:after {
+                    z-index: 12;
+                    content: '';
+                    display: block;
+                    position: absolute;
+                    border: 5px solid transparent;
+                    border-top-color: #fff;
+                    right: 3px;
+                    bottom: 10px;
+                } // &:after
+            }
         } // &.dropdown
         &.add-something {
             @include bp(sm) {
@@ -76,6 +111,11 @@
             @include bp(lightmd) {
                 display: none;
             } // lightmd
+            a {
+                &:after {
+                    border-width: 0;
+                }
+            }
         } // &.add-something
         &.customer-support {
             @include bp(sm) {
@@ -92,13 +132,28 @@
             @include bp(md) {
                 display: none;
             } // md
+            $backgroundColor: #4fb547;
+            background-color: $backgroundColor;
+            padding-left: 20px;
+            &:after {
+                content: "";
+                width: 0;
+                height: 0;
+                border: 25px solid transparent;
+                border-left-color: $backgroundColor;
+                border-right: 0;
+                position: absolute;
+                right: -25px;
+                top: 0;
+                z-index: 1;
+            }
         } // &.customers
         > a {
-            @include property(padding, 0 10);
+            @include property(padding, 0 15);
             @include property(padding-top, 13);
             @include property(height, 50);
             display: block;
-            color: #1F3305;
+            color: #ffffff;
             text-decoration: none;
             @include bp(sm) {
                 @include property(padding, 0 10);
@@ -110,30 +165,25 @@
             } // md
             &.active {
                 color: white;
-                background-color: #76AE2C;
                 position: relative;
+                &:not(.drop-active) {
+                    span {
+                        border-bottom: 1px solid #ffffff;
+                    }
+                }
                 &.drop-active {
                     &:after {
-                        z-index: 12;
-                        content: '';
-                        display: block;
-                        position: absolute;
-                        background-color: #76ae2c;
-                        width: 12px;
-                        height: 12px;
-                        bottom: -6px;
-                        left: 50%;
-                        margin-left: calc(-12px / 2);
-                        transform: rotate(45deg);
-                    } // &:after
-                } // &.drop-active
+                        border-top-color: transparent;
+                        border-bottom-color: #fff;
+                        bottom: 14px;
+                    }
+                }
             } // &.active
             &.support {
                 @include inline-middle;
-                width: 30px;
-                height: 30px;
-                // border: 1px solid white;
-                background-color: rgb(130, 176, 70);
+                width: 20px;
+                height: 20px;
+                background-color: #409a3c;
                 border-radius: 100%;
                 padding: 0;
                 position: relative;
@@ -147,7 +197,7 @@
                 &:before {
                     @include icon-fa;
                     content: '\f128';
-                    @include property(ont-size, $big-font);
+                    @include property(ont-size, $extra-small-font);
                     position: absolute;
                     top: 6px;
                     left: 8px;
@@ -180,14 +230,13 @@
             }
             &.support {
                 @include inline-middle;
-                width: 30px;
-                height: 30px;
-                // border: 1px solid white;
-                background-color: rgb(130, 176, 70);
+                width: 15px;
+                height: 15px;
+                background-color: #409a3c;
                 border-radius: 100%;
                 padding: 0;
                 position: relative;
-                top: 10px;
+                top: 13px;
                 margin: 0 5px;
                 color: #9ECF5D;
                 &:hover, &.active {
@@ -197,10 +246,10 @@
                 &:before {
                     @include icon-fa;
                     content: '\f128';
-                    font-size: 20px;
+                    font-size: 14px;
                     position: absolute;
-                    top: 6px;
-                    left: 8px;
+                    top: 1px;
+                    left: 4px;
                 } // &:before
             } // &.support
             &.user-area {
@@ -216,18 +265,15 @@
                         display: none;
                     } // sm
                 } // user-name
+                &:after {
+                    bottom: 15px;
+                }
+                &.active {
+                    &:after {
+                        bottom: 19px;
+                    }
+                }
             } // &.user-area
-            &.dashboard {
-                &:before {
-                    position: relative;
-                    @include property(top, -3);
-                    @include property(margin-right, 5);
-                    @include inline-middle;
-                    @include icon-fa;
-                    content: '\f0e4';
-                    transform: translate(1.1, 1.1);
-                } // &:before
-            } // &.dashboard
             &.service {
                 &:before {
                     position: relative;
@@ -251,51 +297,20 @@
                 height: auto;
                 line-height: 1;
                 @include property(font-size, $small-font);
+                &:after {
+                    border-width: 0;
+                }
             } // &.lang
             &.appstore {
-                // display: inline-block;
-                background-color: #B0DA79;
-                // padding: 4px 8px;
-                // margin: 0px 12px;
-                // top: 9px;
+                color: #fff200;
                 position: relative;
-                // border-radius: 3px;
+                text-transform: uppercase;
                 &.active {
-                    background-color: #FDD11D;
-                    color: #1F3305;
+                    span {
+                        border-color: #fff200;
+                    }
                 } // &.active
-                &:before {
-                    position: relative;
-                    @include property(top, -1);
-                    @include property(margin-right, 5);
-                    @include inline-middle;
-                    @include icon-fa;
-                    content: '\f0c2';
-                    transform: translate(1.1, 1.1);
-                } // &:before
             } // &.appstore
-            &.project {
-                &:before {
-                    position: relative;
-                    @include property(top, -1);
-                    @include property(margin-right, 5);
-                    @include inline-middle;
-                    @include icon-fa;
-                    content: '\f07c';
-                    transform: translate(1.1, 1.1);
-                } // &:before
-            } // &.project
-            &.resource {
-                &:before {
-                    position: relative;
-                    @include property(top, -1);
-                    @include property(margin-right, 5);
-                    @include inline-middle;
-                    @include icon-fa;
-                    content: '\f233';
-                    transform: translate(1.1, 1.1);
-                } // &:before
-            } // &.resource
             &.user {
                 &:before {
                     position: relative;
@@ -313,7 +328,9 @@
             } // &.mobile-trigger-link
         } // > a
         &.project-dropdown {
-            background: #4fb447;
+            $backgroundColor: #8dc63f;
+            background: $backgroundColor;
+            padding-left: 20px;
             > a {
                 span {
                     color: #ffffff;
