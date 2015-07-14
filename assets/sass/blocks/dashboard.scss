@@ -332,9 +332,12 @@
       &.number {
         width: 80px;
       }
-      &:nth-child(1) {
-        text-align: left;
+      &.visual-status {
+        width: 40px;
+      }
+      &.name {
         width: 225px;
+        text-align: left;
       }
       &:first-child {
         font-weight: bold;

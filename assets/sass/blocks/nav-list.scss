@@ -50,6 +50,12 @@
             } // xs
         }
         &.dashboard-menu-item {
+            @include bp(sm) {
+                margin-right: 20px;
+            } // sm
+            @include bp(md) {
+                margin-right: 20px;
+            } // md
             background-color: $navListBackgroundColor;
             position: relative;
             $padding: 85px;
@@ -98,6 +104,9 @@
                     border-top-color: #fff;
                     right: 3px;
                     bottom: 16px;
+                    @include bp(sm) {
+                        display: none;
+                    } // sm
                 } // &:after
             }
         } // &.dropdown
@@ -148,6 +157,7 @@
                 z-index: 1;
             }
         } // &.customers
+
         > a {
             @include property(padding, 0 15);
             @include property(padding-top, 13);
@@ -321,6 +331,12 @@
             } // &.mobile-trigger-link
         } // > a
         &.project-dropdown {
+            @include bp(sm) {
+                display: none;
+            } // sm
+            @include bp(md) {
+                display: none;
+            } // md
             $backgroundColor: #8dc63f;
             background: $backgroundColor;
             padding-left: 20px;

@@ -110,10 +110,7 @@
                             <a ui-sref="projects.create" class="project">Add project</a>
                         </li>
                         <li class="on-tablet">
-                            <a ui-sref="resources.create" class="resource">Add resource</a>
-                        </li>
-                        <li class="on-tablet">
-                            <a ui-sref="keys.create" class="resource">Add SSH key</a>
+                            <a ui-sref="keys.create" class="ssh-key">Add SSH key</a>
                         </li>
                         <li class="on-tablet">
                             <a href="" class="user">Invite user</a>
@@ -121,20 +118,29 @@
                         <li class="on-tablet" ng-show="Header.showImport">
                             <a ui-sref="import.import" class="import">Import resources from service</a>
                         </li>
-                        <li class="divider on-tablet customers"></li>
-                        <li class="on-tablet customers" ng-repeat="customer in Header.customers">
+                        <li class="on-tablet" stoppropagation ng-click="showOrganizations = !showOrganizations">
+                            <a>Choose organization</a>
+                        </li>
+                        <li class="on-tablet customers" ng-show="showOrganizations" ng-repeat="customer in Header.customers">
                             <a ng-click="Header.setCurrentCustomer(customer)"
                                 ng-class="{'current': customer.uuid == Header.currentCustomer.uuid}">{{ customer.name }}</a>
                         </li>
-                        <li class="divider on-tablet customers"></li>
                         <li class="on-tablet customers">
                             <a ui-sref="organizations.list" class="manage">Manage organizations</a>
                         </li>
-                        <li class="divider on-tablet"></li>
+                        <li class="on-tablet" stoppropagation ng-click="showProjects = !showProjects">
+                            <a>Choose project</a>
+                        </li>
+                        <li class="on-tablet customers" ng-show="showProjects" ng-repeat="project in Header.projects">
+                            <a ng-click="Header.setCurrentProject(project)"
+                               ng-class="{'current': project.uuid == Header.currentProject.uuid}">{{ project.name }}</a>
+                        </li>
+                        <li class="on-tablet customers">
+                            <a ui-sref="projects.list" class="manage">Manage projects</a>
+                        </li>
                         <li class="on-tablet">
                             <a href="#">Support</a>
                         </li>
-                        <li class="divider on-tablet"></li>
                         <li>
                             <a ui-sref="profile.details" class="">Profile</a>
                         </li>

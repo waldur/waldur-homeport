@@ -19,6 +19,12 @@
     position: relative;
   }
   aside {
+    .open-tabs {
+      @include bp(xs) {
+        display: inline-block;
+      } // xs
+      display: none;
+    }
     position: absolute;
     width: 170px;
     z-index: 1;
@@ -31,6 +37,10 @@
     .input-group{
       margin-top: 40px;
       input {
+        @include bp(xs) {
+          width: 100%;
+          background-position: 97% 50%;
+        } // xs
         width: 152px;
         height: 32px;
         margin-bottom: 3px;
@@ -58,6 +68,12 @@
       }
     }
     .tabs-links {
+      @include bp(xs) {
+        display: none;
+        &.tabs-opened {
+          display: block;
+        }
+      } // xs
       list-style: none;
       padding: 0;
       margin-right: -2px;
@@ -87,6 +103,7 @@
     margin-bottom: 20px;
     @include bp(xs) {
       margin-left: 0;
+      padding: 10px;
     } // xs
     .tab-title {
       ul {
@@ -152,7 +169,6 @@
             text-align: left;
           }
           &.status {
-            text-align: right;
             color: $gray-text;
           }
           .teg {
