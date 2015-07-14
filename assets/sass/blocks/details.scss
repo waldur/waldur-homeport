@@ -24,6 +24,10 @@
     z-index: 1;
     top: 0;
     left: 0;
+    @include bp(xs) {
+      position: inherit;
+      width: 100%;
+    } // xs
     .input-group{
       margin-top: 40px;
       input {
@@ -81,6 +85,9 @@
     min-height: 370px;
     box-shadow: -2px 2px 2px 0px rgba(237,237,237,1);
     margin-bottom: 20px;
+    @include bp(xs) {
+      margin-left: 0;
+    } // xs
     .tab-title {
       ul {
         list-style: none;
@@ -141,9 +148,6 @@
         padding: 0;
         .td {
           font-weight: normal;
-          &:last-child {
-            text-align: left;
-          }
           &.access{
             text-align: left;
           }

@@ -317,19 +317,43 @@
     line-height: 30px;
     text-align: center;
     padding: 0 20px;
+    table-layout: fixed;
+    display: table;
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    > * {
+      display: table-cell;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      vertical-align: middle;
+    }
     .td {
-      float: left;
-      width: 20%;
+      &.number {
+        width: 80px;
+      }
       &:nth-child(1) {
         text-align: left;
+        width: 225px;
       }
       &:first-child {
         font-weight: bold;
       }
       &:last-child {
-        float: right;
         text-align: right;
       }
+      @include bp(xs) {
+        width: 30%;
+        &:not(.display-for-mobile) {
+          display: none;
+        }
+      } // xs
+      @include bp(sm) {
+        width: 30%;
+        &:not(.display-for-mobile) {
+          display: none;
+        }
+      } // sm
     }
     &.th {
       font-weight: bold;
