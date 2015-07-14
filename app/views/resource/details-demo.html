@@ -2,15 +2,6 @@
     <section class="title-wrapper">
         <div class="container">
             <h1>Resources</h1>
-            <ul class="sort-list event-nav">
-                <li class="active" ng-class="{'active':EventList.activeTab == 'activity','unactive':EventList.activeTab == 'costs'}"
-                    ng-animate="{ enter: 'animation-enter', leave: 'animation-leave'}">
-                    <a ng-click="EventList.activeTab = 'activity'">Activity</a>
-                </li>
-                <li ng-class="{'active':EventList.activeTab == 'costs','unactive':EventList.activeTab == 'activity'}">
-                    <a ng-click="EventList.activeTab = 'costs'">Costs</a>
-                </li>
-            </ul>
         </div>
     </section>
     <section class="resources-content">

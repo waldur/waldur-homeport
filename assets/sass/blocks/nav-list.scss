@@ -97,7 +97,7 @@
                     border: 5px solid transparent;
                     border-top-color: #fff;
                     right: 3px;
-                    bottom: 10px;
+                    bottom: 16px;
                 } // &:after
             }
         } // &.dropdown
@@ -175,7 +175,7 @@
                     &:after {
                         border-top-color: transparent;
                         border-bottom-color: #fff;
-                        bottom: 14px;
+                        bottom: 19px;
                     }
                 }
             } // &.active
@@ -212,13 +212,14 @@
                 background-image: url('/static/images/logo.png');
             } // &.logo
             &.customer-context {
-                @include property(padding-top, 12);
+                @include property(padding-top, 7);
                 span {
                     display: block;
                     line-height: 1;
                 } // span
                 .customer-name {
                     max-width: 180px;
+                    height: 18px;
                     @include elipsis;
                 } // customer-name
                 .active-context {
@@ -265,14 +266,6 @@
                         display: none;
                     } // sm
                 } // user-name
-                &:after {
-                    bottom: 15px;
-                }
-                &.active {
-                    &:after {
-                        bottom: 19px;
-                    }
-                }
             } // &.user-area
             &.service {
                 &:before {
