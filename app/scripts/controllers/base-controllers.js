@@ -124,10 +124,16 @@
               return project.uuid;
             });
             if (!uuids.indexOf($window.localStorage[ENV.currentProjectUuidStorageKey]) + 1) {
-              projectsService.getFirst().then(function(firstProject) {
-                vm.setCurrentProject(firstProject);
-              });
+              setFirstProject();
             }
+          } else {
+            setFirstProject();
+          }
+
+          function setFirstProject() {
+            projectsService.getFirst().then(function(firstProject) {
+              vm.setCurrentProject(firstProject);
+            });
           }
         });
       },
@@ -180,8 +186,12 @@
               customersService.$get($window.localStorage[ENV.currentCustomerUuidStorageKey]).then(function(customer) {
                 deferred.resolve(customer);
                 getProject()
-              });
+              }, setPersonalOrFirstCustomer);
             } else {
+              setPersonalOrFirstCustomer();
+            }
+
+            function setPersonalOrFirstCustomer() {
               customersService.getPersonalOrFirstCustomer(user.username).then(function(customer) {
                 deferred.resolve(customer);
                 getProject()
@@ -196,8 +206,11 @@
           if ($window.localStorage[ENV.currentProjectUuidStorageKey]) {
             projectsService.$get($window.localStorage[ENV.currentProjectUuidStorageKey]).then(function(response) {
               projectDeferred.resolve(response);
-            });
+            }, getFirstProject);
           } else {
+            getFirstProject();
+          }
+          function getFirstProject() {
             projectsService.getFirst().then(function(response) {
               projectDeferred.resolve(response);
             });

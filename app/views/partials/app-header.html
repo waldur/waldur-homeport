@@ -118,7 +118,7 @@
                         <li class="on-tablet" ng-show="Header.showImport">
                             <a ui-sref="import.import" class="import">Import resources from service</a>
                         </li>
-                        <li class="on-tablet" stoppropagation ng-click="showOrganizations = !showOrganizations">
+                        <li class="on-tablet customers" stoppropagation ng-click="showOrganizations = !showOrganizations">
                             <a>Choose organization</a>
                         </li>
                         <li class="on-tablet customers" ng-show="showOrganizations" ng-repeat="customer in Header.customers">
@@ -128,7 +128,7 @@
                         <li class="on-tablet customers">
                             <a ui-sref="organizations.list" class="manage">Manage organizations</a>
                         </li>
-                        <li class="on-tablet" stoppropagation ng-click="showProjects = !showProjects">
+                        <li class="on-tablet customers" stoppropagation ng-click="showProjects = !showProjects">
                             <a>Choose project</a>
                         </li>
                         <li class="on-tablet customers" ng-show="showProjects" ng-repeat="project in Header.projects">
