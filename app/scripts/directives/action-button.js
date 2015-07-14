@@ -12,7 +12,8 @@
       scope: {
         buttonList: '=', // should be [{title: 'Click', clickFunction: function(model) {}}]
         buttonController: '=',
-        buttonModel: '=' // using in ng-click="button.clickFunction(buttonModel)"
+        buttonModel: '=', // using in ng-click="button.clickFunction(buttonModel)"
+        buttonType: '@'
       },
       link: function (scope) {
         var controller = scope.buttonController;

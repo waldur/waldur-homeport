@@ -3,18 +3,76 @@
 (function() {
   angular.module('ncsaas')
     .controller('IssueListController',
-      ['baseControllerListClass', 'issuesService', 'issueCommentsService', '$rootScope', IssueListController]);
+      ['baseControllerListClass', 'issuesService', 'issueCommentsService',
+        '$rootScope', 'ENTITYLISTFIELDTYPES', IssueListController]);
 
-  function IssueListController(baseControllerListClass, issuesService, issueCommentsService, $rootScope) {
+  function IssueListController(
+    baseControllerListClass, issuesService, issueCommentsService, $rootScope, ENTITYLISTFIELDTYPES) {
     var controllerScope = this;
     var controllerClass = baseControllerListClass.extend({
       issueComments: {},
+      expandableCommentsKey: 'comments',
 
       init:function() {
         this.service = issuesService;
         this.controllerScope = controllerScope;
         this._super();
         this.searchFieldName = 'search';
+        this.actionButtonsListItems = [
+          {
+            title: 'Some action for this type',
+            clickFunction: function() {}
+          }
+        ];
+        this.entityOptions = {
+          entityData: {
+            title: 'Support',
+            createLink: 'support.create',
+            createLinkText: 'Create ticket',
+            noDataText: 'No tickets yet.',
+            hideActionButtons: false,
+            actionButtonsType: 'refresh'
+          },
+          list: [
+            {
+              type: ENTITYLISTFIELDTYPES.statusCircle,
+              propertyName: 'resolution'
+            },
+            {
+              className: 'avatar',
+              avatarArraySrc: [
+                'assignee',
+                'emailAddress'
+              ],
+              showForMobile: ENTITYLISTFIELDTYPES.showForMobile,
+              type: ENTITYLISTFIELDTYPES.avatarPictureField
+            },
+            {
+              propertyName: 'summary',
+              className: 'name',
+              subtitle: ENTITYLISTFIELDTYPES.subtitle,
+              showForMobile: ENTITYLISTFIELDTYPES.showForMobile,
+              type: ENTITYLISTFIELDTYPES.name
+            }
+          ]
+        };
+        this.expandableOptions = [
+          {
+            isList: false,
+            addItemBlock: false,
+            headBlock: 'description',
+            hasAnswerForm: true,
+            answersBlock: true,
+            listKey: 'issueComments',
+            modelId: 'key',
+            viewType: 'support',
+            minipaginationData:
+            {
+              pageChange: 'getCommentsForIssue',
+              pageEntityName: this.expandableCommentsKey
+            }
+          }
+        ];
       },
       showMore: function(issue) {
         if (!this.issueComments[issue.key]) {
@@ -36,7 +94,7 @@
           vm.issueComments[key].data = response;
           vm.issueComments[key].pages = issueCommentsService.pages;
           $rootScope.$broadcast('mini-pagination:getNumberList', vm.issueComments[key].pages,
-            page, vm.getCommentsForIssue.bind(vm), 'comments', key);
+            page, vm.getCommentsForIssue.bind(vm), vm.expandableCommentsKey, key);
         });
       },
       addComment: function(issue) {

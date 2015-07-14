@@ -34,6 +34,8 @@
       listInField: 'listInField',
       avatarPictureField: 'avatar',
       noType: false,
-      showForMobile: true
+      showForMobile: true,
+      statusCircle: 'statusCircle',
+      subtitle: true
     })
 })();
