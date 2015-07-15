@@ -15,7 +15,7 @@
         right: 0;
         a {
             padding: 5px 15px;
-            padding-left: 30px;
+            padding-left: 18px;
         } // a
     } // lang
     &.user-area {
@@ -76,6 +76,7 @@
             @include property(font-size, $small-font);
             @include property(margin, 0 10);
             @include property(padding, 10 5);
+            padding-left: 18px;
             line-height: 1;
             color: #ffffff;
             font-weight: normal;
@@ -102,7 +103,15 @@
             } // &:beore
             &.current {
                 position: relative;
-                color: #35853b;
+                color: #fff;
+                &:before {
+                    position: absolute;
+                    @include icon-fa;
+                    content: '\f05d';
+                    transform: translate(1.1, 1.1);
+                    color: #fff;
+                    left: 0px;
+                } // &:before
             } // &.current
             &.service {
                 padding-left: 20px;

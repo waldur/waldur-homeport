@@ -37,70 +37,7 @@
       line-height: 12px;
     }
   }
-  .event-nav {
-    margin-top: 5px;
-    float: left;
-    li {
-      a {
-        display: block;
-        position: relative;
-        text-decoration: none;
-        color:$dashboard-black;
-        border-bottom:1px dashed $dashboard-green;
-        &:before {
-          content:"";
-          display: block;
-          width: 0;
-          height: 1px;
-          background: $dashboard-green;
-          position: absolute;
-          bottom: -1px;
-          left: 0;
-        }
-        &:after {
-          content: "";
-          position: absolute;
-          bottom: 0px;
-          left: 50%;
-          margin-left: -5px;
-          width: 0px;
-          height: 0px;
-          border-style: solid;
-          border-width: 6px 5px 0px;
-          border-color: $dashboard-green transparent;
-          opacity: 0;
-        }
-      }
-      &.active {
-         a {
-           &:before{
-             opacity: 1;
-             width: 100%;
-             left: 0;
-             animation: active-line .1s 1 linear;
-           }
-           &:after {
-             opacity: 1;
-             bottom: -6px;
-             animation: active-triangle .1s 1 linear;
-           }
-         }
-       }
-      &.inactive {
-        a {
-          &:before{
-            opacity: 0;
-            animation: inactive-line .1s 1 linear;
-          }
-          &:after {
-            opacity: 0;
-            animation: inactive-triangle  .1s 1 linear;
-          }
-        }
-      }
-    }
 
-  }
   .table-block {
     margin-bottom: 20px;
     &:not(:first-child) {
@@ -175,6 +112,7 @@
         }
       }
     }
+
     .table {
       border:1px solid #cccaca;
       padding-bottom: 10px;
@@ -368,6 +306,129 @@
     display: block;
     text-align: center;
     color: $dashboard-green;
+  }
+}
+.table {
+  border:1px solid #cccaca;
+  padding-bottom: 10px;
+  .tr {
+    position: relative;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    padding: 0 20px;
+    table-layout: fixed;
+    display: table;
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    > * {
+      display: table-cell;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      vertical-align: middle;
+    }
+    .td {
+      &.number {
+        width: 80px;
+      }
+      &.visual-status {
+        width: 40px;
+      }
+      &.name {
+        width: 225px;
+        text-align: left;
+      }
+      &:first-child {
+        font-weight: bold;
+      }
+      &:last-child {
+        text-align: right;
+      }
+      @include bp(xs) {
+        width: 30%;
+        &:not(.display-for-mobile) {
+          display: none;
+        }
+      } // xs
+      @include bp(sm) {
+        width: 30%;
+        &:not(.display-for-mobile) {
+          display: none;
+        }
+      } // sm
+    }
+    &.th {
+      font-weight: bold;
+    }
+    &:nth-child(2n-1) {
+      height: 50px;
+      line-height: 50px;
+      background: $table-gray;
+    }
+  }
+}
+.event-nav {
+  margin-top: 5px;
+  float: left;
+  li {
+    a {
+      display: block;
+      position: relative;
+      text-decoration: none;
+      color: $dashboard-black;
+      border-bottom: 1px dashed $dashboard-green;
+      &:before {
+        content: "";
+        display: block;
+        width: 0;
+        height: 1px;
+        background: $dashboard-green;
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+      }
+      &:after {
+        content: "";
+        position: absolute;
+        bottom: 0px;
+        left: 50%;
+        margin-left: -5px;
+        width: 0px;
+        height: 0px;
+        border-style: solid;
+        border-width: 6px 5px 0px;
+        border-color: $dashboard-green transparent;
+        opacity: 0;
+      }
+    }
+    &.active {
+      a {
+        &:before {
+          opacity: 1;
+          width: 100%;
+          left: 0;
+          animation: active-line .1s 1 linear;
+        }
+        &:after {
+          opacity: 1;
+          bottom: -6px;
+          animation: active-triangle .1s 1 linear;
+        }
+      }
+    }
+    &.inactive {
+      a {
+        &:before {
+          opacity: 0;
+          animation: inactive-line .1s 1 linear;
+        }
+        &:after {
+          opacity: 0;
+          animation: inactive-triangle .1s 1 linear;
+        }
+      }
+    }
   }
 }
 @keyframes active-line {
