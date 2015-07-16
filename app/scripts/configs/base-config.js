@@ -26,6 +26,9 @@ angular.module('ncsaas')
     resourceOfflineStatus: 'Offline',
     resourceOnlineStatus: 'Online',
 
+    // build version
+    buildId: 'develop',
+
     addonsList : [
       {
         name: 'Bronze support',

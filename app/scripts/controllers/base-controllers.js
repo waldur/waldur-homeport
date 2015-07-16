@@ -167,6 +167,7 @@
       init: function() {
         this.setSignalHandler('$stateChangeSuccess', this.stateChangeSuccessHandler.bind(controllerScope));
         this._super();
+        $rootScope.buildId = ENV.buildId;
         $rootScope.logout = this.logout;
       },
       logout: function() {
