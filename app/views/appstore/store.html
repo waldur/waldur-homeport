@@ -52,7 +52,7 @@
                         <!-- service -->
                         <div class="appstore-template"
                              ng-repeat="(name, service) in AppStore.servicesList"
-                             ng-click="AppStore.setService(service)"
+                             ng-click="AppStore.setService(service, name)"
                              ng-class="{'state': AppStore.selectedService == service}">
                             <div class="icon">
                                 <img ng-src="/static/images/appstore/icon-{{ name }}.png" alt="">
@@ -63,9 +63,9 @@
                     </div>
                 </section>
                 <section class="step-3" ng-show="AppStore.thirdStep">
-                    <div class="step-title"><span>Step 3: CONFIGURE OpenStack DROPLET</span></div>
+                    <div class="step-title"><span>Step 3: CONFIGURE {{ AppStore.selectedServiceName }} RESOURCE</span></div>
                     <form action="">
-                        <div ng-repeat="(name, stringField) in AppStore.formOptions[AppStore.FIELD_TYPES.string]">
+                        <div class="string-field" ng-repeat="(name, stringField) in AppStore.formOptions[AppStore.FIELD_TYPES.string]">
                             <label for="{{ name }}">{{ stringField.label }}</label>
                             <input type="text" id="{{ name }}"  ng-model="AppStore.instance[name]"/>
                             <div class="error arrow-up" ng-show="AppStore.errors[name]">
@@ -141,7 +141,7 @@
                         </div>
                         <div class="clear"></div>
                     </div>
-                    <button ng-click="AppStore.save()">
+                    <button ng-class="{'disabled': AppStore.canSave()}" ng-click="AppStore.save()">
                         <img src="/static/images/appstore/icon-curt.png" alt=""/>
                         <span>Purchase</span>
                     </button>
@@ -151,7 +151,7 @@
                 <h2>
                     checkout summary
                 </h2>
-                <p>Changed to <a href="#"> Helen Hokk</a></p>
+                <p>Charged to <a href="#"> Helen Hokk</a></p>
 
                 <ul class="ap-aside-block">
                     <li>

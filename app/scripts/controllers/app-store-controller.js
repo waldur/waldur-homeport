@@ -18,12 +18,10 @@
 
       secondStep: true,
       thirdStep: false,
-
       activeTab: null,
-
       successMessage: 'Purchase of {vm_name} was successful.',
-
       formOptions: {},
+      allFormOptions: {},
 
       init:function() {
         this.service = servicesService;
@@ -38,9 +36,10 @@
           vm.servicesList = response;
         });
       },
-      setService:function(service) {
+      setService:function(service, name) {
         var vm = this;
         vm.selectedService = service;
+        vm.selectedServiceName = name;
         vm.thirdStep = true;
         if (service.resources.Droplet) {
           vm.instance = servicesService.$create(service.resources.Droplet);
@@ -53,7 +52,8 @@
         }
       },
       setFormOptions: function(formOptions) {
-        for (name in formOptions) {
+        this.allFormOptions = formOptions;
+        for (var name in formOptions) {
           if (!formOptions[name].read_only && name != this.UNIQUE_FIELDS.service_project_link) {
             this.formOptions[formOptions[name].type] = this.formOptions[formOptions[name].type] || {};
             if (name == this.UNIQUE_FIELDS[name]) {
@@ -75,6 +75,25 @@
         currentStateService.getProject().then(function(response) {
           vm.instance[vm.UNIQUE_FIELDS.service_project_link] = response.url;
         });
+      },
+      canSave: function() {
+        for (var name in this.formOptions) {
+          if (this.formOptions[name].required && !this.instance[name]) {
+            return false;
+          }
+        }
+        return true;
+      },
+      onError: function() {
+        var message = '';
+        for (var name in this.errors) {
+          if (this.allFormOptions[name]) {
+            message += this.allFormOptions[name].label + ': ' + this.errors[name] + '<br/>';
+          } else {
+            message += name+ ': ' + this.errors[name] + '<br/>';
+          }
+        }
+        this.errorFlash(message);
       }
     });
 
