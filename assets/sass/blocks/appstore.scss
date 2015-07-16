@@ -4,7 +4,10 @@
     margin-left: -10px;
     margin-right: -10px;
     .appstore-template {
-        border-radius: 3px;
+        -webkit-box-shadow: 0px 2px 2px 0px #ededed;
+        -moz-box-shadow:    0px 2px 2px 0px #ededed;
+        box-shadow:         0px 2px 2px 0px #ededed;
+        border-radius: 0px;
         width: calc(33.3333% - 20px);
         display: flex;
         flex-wrap: wrap;
@@ -14,8 +17,9 @@
         border: 1px solid rgb(202, 202, 202);
         position: relative;
         cursor: pointer;
+        background: #fff;
         &.no-active {
-            opacity: 0.6;
+            opacity: 1;
         } // &.no-active
         &.half {
             width: calc(50% - 20px);
@@ -41,17 +45,20 @@
                 text-align: center;
                 background-color: rgb(62, 171, 84);
                 color: #fff;
-                width: 26px;
-                height: 26px;
+                width: 18px;
+                height: 18px;
                 border-radius: 100%;
                 position: absolute;
-                right: -10px;
-                top: -10px;
+                left: 50%;
+                margin-left: -9px;
+                bottom: -9px;
+                line-height: 19px;
+                font-size: 12px;
             } // &:after
         } // &.state
         .icon {
             // display: flex;
-            width: 80px;
+            width: 45px;
             text-align: center;
         } // icon
         .description {
@@ -102,3 +109,335 @@
         } // description
     } // appstore-template
 } // appstore-templates
+.appstore-wrapper {
+    padding-right: 320px;
+    position: relative;
+    @include bp(xs) {
+        padding-right: 0;
+    } // xs
+    .appstore-content {
+        h2 {
+            font-weight: bold;
+            font-size: 16px;
+            color: $dashboard-green;
+            text-transform: uppercase;
+            margin-top: 20px;
+            margin-bottom: 12px;
+        }
+        section {
+            padding-bottom: 20px;
+            .appstore-template {
+                height: 110px;
+                text-align: center;
+                display: table;
+                padding-top: 25px;
+                position: relative;
+                font-size: 16px;
+                font-weight: bold;
+                span {
+                    display: block;
+                    width: 93%;
+                    color: $dashboard-green;
+                    font-size: 14px;
+                    position: absolute;
+                    bottom: 10px;
+                }
+
+                .icon{
+                    display: inline-block;
+                    position: relative;
+                    height: 45px;
+                    img{
+                        display: inline;
+
+                    }
+
+                }
+                h3 {
+                    display: inline;
+                    font-weight: bold;
+                    font-size: 16px;
+                    padding-left: 10px;
+                }
+
+            }
+            .step-title {
+                position: relative;
+                text-align: center;
+                font-size: 16px;
+                color: $dashboard-green;
+                font-weight: bold;
+                margin-bottom: 23px;
+                border-bottom: 1px solid $dashboard-green;
+                height: 12px;
+                span {
+                    background-color: $main-background-color;
+                    padding: 0 15px;
+                }
+            }
+            &.step-2 {
+                .appstore-template {
+                    padding-top: 30px;
+                }
+
+            }
+            &.step-3 {
+                .step-title {
+                    &:before {
+                        width: 25%;
+                    }
+                    &:after {
+                        width: 25%;
+                    }
+                }
+            }
+            form {
+                label {
+                    display: block;
+                    font-size: 16px;
+                    font-weight: bold;
+                    color: #000;
+                }
+                input[type="text"] {
+                    width: 262px;
+                    height: 32px;
+                    border-radius: 3px;
+                }
+            }
+            .operating-system {
+                margin-top: 30px;
+                .tabs-wrapper {
+                    margin-top: 30px;
+                    position: relative;
+                    padding-left: 170px;
+                    .tabs-links {
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+                        list-style: none;
+                        margin: 0;
+                        padding: 0;
+                        display: block;
+                        width: 170px;
+                        z-index: 1;
+                        li {
+                            height: 47px;
+                            line-height: 49px;
+                            cursor: pointer;
+                            display: block;
+                            width: 170px;
+                            padding-left: 14px;
+                            &.active {
+                                background: #fff;
+                                font-weight: 600;
+                                -webkit-box-shadow: -1px 1px 2px 0px #ededed;
+                                -moz-box-shadow:    -1px 1px 2px 0px #ededed;
+                                box-shadow:         -1px 1px  2px 0px #ededed;
+                            }
+                        }
+                    }
+                    .tabs-content {
+                        padding: 24px 15px;
+                        background: #fff;
+                        position: relative;
+                        overflow: auto;
+                        height: 141px;
+                        box-sizing: border-box;
+                        -webkit-box-shadow: -1px 1px 2px 0px #ededed;
+                        -moz-box-shadow:    -1px 1px 2px 0px #ededed;
+                        box-shadow:         -1px 1px  2px 0px #ededed;
+                        ul {
+                            list-style: none;
+                            padding: 0;
+                            margin: 0;
+                            li {
+                                width: 120px;
+                                text-align: center;
+                                float: left;
+                                cursor: pointer;
+                                border:1px solid #fff;
+                                &.active {
+                                    border-color: $dashboard-green;
+                                }
+                                .icon {
+                                    width: 70px;
+                                    height: 57px;
+                                    position: relative;
+                                    margin: 0 auto;
+                                    img {
+                                        display: inline;
+                                    }
+                                }
+                                span {
+                                    margin-top: 10px;
+                                    display: block;
+                                    text-align: center;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .configuration {
+                margin-top: 30px;
+                ul {
+
+                    list-style: none;
+                    margin: 0;
+                    padding: 0;
+                    padding-top: 20px;
+                    li {
+                        text-align: center;
+                        padding: 25px;
+                        float: left;
+                        width: 165px;
+                        margin-right: 8px;
+                        background: #fff;
+                        border:1px solid #fff;
+                        cursor: pointer;
+                        height: 125px;
+                        box-sizing: border-box;
+                        font-weight: bold;
+                        &.state {
+                            border: 1px solid $dashboard-green;
+                            &:after {
+                                // content: '\f058';
+                                content: '\f00c';
+                                font-family: FontAwesome;
+                                -webkit-font-smoothing: antialiased;
+                                -moz-osx-font-smoothing: grayscale;
+                                @include property(font-size, $big-font);
+                                text-align: center;
+                                background-color: $dashboard-green;
+                                color: #fff;
+                                width: 26px;
+                                height: 26px;
+                                border-radius: 100%;
+                                position: absolute;
+                                left: 50%;
+                                margin-left: -13px;
+                                bottom: -13px;
+                            } // &:after
+                        } // &.state
+                        h3 {
+                            color: $dashboard-green;
+                            font-size: 28px;
+                            font-weight: bold;
+                            margin: 0;
+                        }
+                        h4 {
+                            font-size: 16px;
+                            margin: 0;
+                        }
+                        span {
+                            font-size: 16px;
+                        }
+                    }
+                }
+            }
+            .keys {
+                margin-top: 30px;
+                .appstore-template {
+                    height: 80px;
+                    margin-top: 20px;
+                }
+            }
+            button {
+                margin-top: 15px;
+                display: block;
+                width: 100%;
+                border-radius: 5px;
+                background: #d7d9d6;
+                text-align: center;
+                height: 50px;
+                line-height: 50px;
+                img {
+                    display: inline;
+                    margin-top: 15px;
+                    margin-right: 10px;
+
+                }
+                span {
+                    color: #FFF;
+                    font-size: 16px;
+                    font-weight: bold;
+                }
+
+            }
+        }
+    }
+    .appstore-aside {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 300px;
+        @include bp(xs) {
+            position: inherit;
+            width: 100%;
+        } // xs
+        h2 {
+            font-weight: bold;
+            font-size: 16px;
+            color: $dashboard-green;
+            text-transform: uppercase;
+            margin: 0;
+        }
+        p {
+            margin: 0;
+            font-size: 10px;
+            color: #9d9f9c;
+            a {
+                color: $dashboard-green;
+            }
+        }
+        .ap-aside-block {
+            margin-top: 15px;
+            background: #FFF;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            padding-top: 10px;
+            li {
+                padding: 15px 25px;
+                height: 75px;
+                position: relative;
+                &:after {
+                    content: "";
+                    width: 84%;
+                    height: 1px;
+                    border-bottom: 1px solid #ececec;
+                    display: block;
+                    position: absolute;
+                    bottom: 0;
+                }
+                .descr {
+                    float: left;
+                    width: 70%;
+                    overflow: hidden;
+                    font-size: 16px;
+                    text-align: left;
+                    span {
+                        display: block;
+                    }
+                }
+                .price {
+                    width: 30%;
+                    font-weight: bold;
+                    line-height: 50px;
+                    text-align: right;
+                    float: left;
+                }
+                &.total {
+                    font-weight: bold;
+                    background: #ececec;
+                    margin-top: -1px;
+                    .price {
+                        font-size: 41px;
+                        color: $dashboard-green;
+                    }
+
+                }
+            }
+        }
+    }
+}

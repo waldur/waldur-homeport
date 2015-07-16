@@ -4,17 +4,22 @@ var auth = require('../helpers/auth.js'),
     {
       user: auth.getUser('Charlie'),
       project: 'bells.org',
-      service: 'Stratus',
-      template: 'CentOS 7 64-bit',
-      flavor: 'RAM: 0.5 GB',
+      service: 'DigitalOcean',
+      image: '',
+      region: '',
+      project: '',
+      size: '',
+      key: '',
       customer: 'Ministry of Bells'
     },
     {
       user: auth.getUser('Dave'),
-      project: 'whistles.org',
-      service: 'Cumulus',
-      template: 'Windows 3.11 jWxL',
-      flavor: 'RAM: 4 GB',
+      service: 'DigitalOcean',
+      image: '',
+      region: '',
+      project: '',
+      size: '',
+      key: '',
       customer: 'Ministry of Whistles'
     }
   ];
@@ -39,15 +44,10 @@ for(var i = 0; i < testData.length; i++) {
       });
 
       it('I should be able to add new resource', function() {
-        element(by.model('AppStore.instance.name')).sendKeys(resourceName);
-        // choose project
-        element(by.cssContainingText('option', data.project)).click();
         // choose service
         element(by.cssContainingText('h3', data.service)).click();
-        // choose template
-        element(by.cssContainingText('option', data.template)).click();
-        // choose flavor
-        element(by.cssContainingText('li', data.flavor)).click();
+        // set name
+        element(by.model('AppStore.instance.name')).sendKeys(resourceName);
 
         element(by.cssContainingText('a.button-apply', 'Checkout')).click();
 

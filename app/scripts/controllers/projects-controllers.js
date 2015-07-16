@@ -78,10 +78,10 @@
 
   angular.module('ncsaas')
     .controller('ProjectAddController', ['projectsService', 'currentStateService',
-      'servicesService', 'projectCloudMembershipsService', 'baseControllerAddClass', ProjectAddController]);
+      'cloudsService', 'projectCloudMembershipsService', 'baseControllerAddClass', ProjectAddController]);
 
   function ProjectAddController(
-    projectsService, currentStateService, servicesService, projectCloudMembershipsService, baseControllerAddClass) {
+    projectsService, currentStateService, cloudsService, projectCloudMembershipsService, baseControllerAddClass) {
     var controllerScope = this;
     var ProjectController = baseControllerAddClass.extend({
       init: function() {
@@ -102,8 +102,8 @@
       },
       afterSave: function() {
         var vm = this;
-        servicesService.filterByCustomer = false;
-        servicesService.getList().then(function(response) {
+        cloudsService.filterByCustomer = false;
+        cloudsService.getList().then(function(response) {
           for (var i = 0; response.length > i; i++) {
             projectCloudMembershipsService.addRow(vm.project.url, response[i].url);
           }
@@ -338,12 +338,12 @@
       'projectsService',
       'baseControllerClass',
       'projectCloudMembershipsService',
-      'servicesService',
+      'cloudsService',
       ProjectServiceTabController
     ]);
 
   function ProjectServiceTabController(
-    $stateParams, projectsService, baseControllerClass, projectCloudMembershipsService, servicesService) {
+    $stateParams, projectsService, baseControllerClass, projectCloudMembershipsService, cloudsService) {
     var controllerScope = this;
     var Controller = baseControllerClass.extend({
       project: null,
@@ -371,7 +371,7 @@
       },
       getServicesListForAutoComplete: function(filter) {
         var vm = this;
-        servicesService.getList(filter).then(function(response) {
+        cloudsService.getList(filter).then(function(response) {
           vm.servicesListForAutoComplete = response;
         });
       },
