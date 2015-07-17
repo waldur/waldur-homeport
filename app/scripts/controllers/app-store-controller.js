@@ -18,6 +18,8 @@
 
       secondStep: false,
       thirdStep: false,
+      resourceTypesBlock: false,
+
       activeTab: null,
       successMessage: 'Purchase of {vm_name} was successful.',
       formOptions: {},
@@ -25,6 +27,7 @@
       selectedService: {},
       selectedServiceName: null,
       selectedCategory: {},
+      selectedResourceType: null,
 
       init:function() {
         this.service = servicesService;
@@ -43,24 +46,40 @@
       setCategory: function(category) {
         this.selectedCategory = category;
         this.secondStep = true;
+        this.selectedService = {};
+        this.selectedServiceName = null;
+        this.resourceTypesBlock = false;
+        this.thirdStep = false;
       },
       setService:function(service) {
+        this.selectedService = this.servicesList[service];
+        this.selectedServiceName = service;
+        this.resourceTypesBlock = true;
+        this.thirdStep = false;
+        this.formOptions = {};
+        if (this.selectedService) {
+          var types = Object.keys(this.selectedService.resources);
+          if (types.length === 1) {
+            this.setResourceType(types[0]);
+          }
+        }
+      },
+      setResourceType: function(type) {
         var vm = this;
-        vm.selectedService = vm.servicesList[service];
-        vm.selectedServiceName = service;
+        vm.selectedResourceType = type;
         vm.thirdStep = true;
-        if (vm.selectedService.resources.Droplet) {
-          vm.instance = servicesService.$create(vm.selectedService.resources.Droplet);
+        vm.formOptions = {};
+        if (vm.selectedService.resources[vm.selectedResourceType]) {
+          vm.instance = servicesService.$create(vm.selectedService.resources[vm.selectedResourceType]);
           vm.setCurrentProject();
-          servicesService.getOption(vm.selectedService.resources.Droplet).then(function(response) {
+          servicesService.getOption(vm.selectedService.resources[vm.selectedResourceType]).then(function(response) {
             vm.setFormOptions(response.actions.POST);
           });
-        } else {
-          vm.formOptions = {};
         }
       },
       setFormOptions: function(formOptions) {
         this.allFormOptions = formOptions;
+        this.activeTab = null;
         for (var name in formOptions) {
           if (!formOptions[name].read_only && name != this.UNIQUE_FIELDS.service_project_link) {
             this.formOptions[formOptions[name].type] = this.formOptions[formOptions[name].type] || {};
@@ -85,8 +104,8 @@
         });
       },
       canSave: function() {
-        for (var name in this.formOptions) {
-          if (this.formOptions[name].required && !this.instance[name]) {
+        for (var name in this.allFormOptions) {
+          if (this.allFormOptions[name].required && !this.instance[name]) {
             return false;
           }
         }
