@@ -173,6 +173,10 @@
                 span {
                     background-color: $main-background-color;
                     padding: 0 15px;
+                    &.service-name {
+                        text-transform: uppercase;
+                        padding: 0;
+                    }
                 }
             }
             &.step-2 {
@@ -350,10 +354,13 @@
                 display: block;
                 width: 100%;
                 border-radius: 5px;
-                background: #d7d9d6;
+                background: #50b848;
                 text-align: center;
                 height: 50px;
                 line-height: 50px;
+                &.disabled {
+                    background: #d7d9d6;
+                }
                 @include bp(xs) {
                     margin-top: 300px;
                     margin-bottom: -365px;

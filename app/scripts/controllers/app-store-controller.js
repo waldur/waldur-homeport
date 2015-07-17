@@ -1,9 +1,9 @@
 (function() {
   angular.module('ncsaas')
     .controller('AppStoreController', [
-      'baseControllerAddClass', 'servicesService', 'currentStateService', AppStoreController]);
+      'baseControllerAddClass', 'servicesService', 'currentStateService', 'ENV', AppStoreController]);
 
-  function AppStoreController(baseControllerAddClass, servicesService, currentStateService) {
+  function AppStoreController(baseControllerAddClass, servicesService, currentStateService, ENV) {
     var controllerScope = this;
     var Controller = baseControllerAddClass.extend({
       UNIQUE_FIELDS: {
@@ -16,12 +16,15 @@
         field: 'field'
       },
 
-      secondStep: true,
+      secondStep: false,
       thirdStep: false,
       activeTab: null,
       successMessage: 'Purchase of {vm_name} was successful.',
       formOptions: {},
       allFormOptions: {},
+      selectedService: {},
+      selectedServiceName: null,
+      selectedCategory: {},
 
       init:function() {
         this.service = servicesService;
@@ -29,6 +32,7 @@
         this.setSignalHandler('currentProjectUpdated', this.setCurrentProject.bind(controllerScope));
         this._super();
         this.listState = 'resources.list';
+        this.categories = ENV.appStoreCategories;
       },
       activate:function() {
         var vm = this;
@@ -36,15 +40,19 @@
           vm.servicesList = response;
         });
       },
-      setService:function(service, name) {
+      setCategory: function(category) {
+        this.selectedCategory = category;
+        this.secondStep = true;
+      },
+      setService:function(service) {
         var vm = this;
-        vm.selectedService = service;
-        vm.selectedServiceName = name;
+        vm.selectedService = vm.servicesList[service];
+        vm.selectedServiceName = service;
         vm.thirdStep = true;
-        if (service.resources.Droplet) {
-          vm.instance = servicesService.$create(service.resources.Droplet);
+        if (vm.selectedService.resources.Droplet) {
+          vm.instance = servicesService.$create(vm.selectedService.resources.Droplet);
           vm.setCurrentProject();
-          servicesService.getOption(service.resources.Droplet).then(function(response) {
+          servicesService.getOption(vm.selectedService.resources.Droplet).then(function(response) {
             vm.setFormOptions(response.actions.POST);
           });
         } else {

@@ -9,41 +9,20 @@
                         <span>Step 1: Choose category</span>
                     </div>
                     <div class="appstore-templates">
-                        <!-- service -->
-                        <div class="appstore-template state">
+                        <!-- category -->
+                        <div class="appstore-template"
+                             ng-repeat="category in AppStore.categories"
+                             ng-click="AppStore.setCategory(category)"
+                             ng-class="{'state': AppStore.selectedCategory == category}">
                             <div class="icon">
-                                <img src="/static/images/appstore/icon-VMs.png" alt="" class="icon">
+                                <img ng-src="static/images/appstore/icon-{{ category.name }}.png" alt="">
                             </div>
-                            <h3>VMs</h3>
-                        <span>
-                            Compare
-                        </span>
+                            <h3>{{ category.name }}</h3>
+                            <span>
+                                Compare
+                            </span>
                         </div>
-                        <!-- /service -->
-                        <!-- service -->
-                        <div class="appstore-template no-active">
-                            <div class="icon">
-                                <img src="/static/images/appstore/icon-applications.png" alt="" >
-                            </div>
-
-                            <h3>APPLICATIONS</h3>
-
-                         <span>
-                            Compare
-                        </span>
-                        </div>
-                        <!-- /service -->
-                        <!-- service -->
-                        <div class="appstore-template no-active">
-                            <div class="icon">
-                                <img src="/static/images/appstore/icon-support.png" alt="">
-                            </div>
-                            <h3>SUPPORT</h3>
-                         <span>
-                            Compare
-                        </span>
-                        </div>
-                        <!-- /service -->
+                        <!-- /category -->
                     </div>
                 </section>
                 <section class="step-2" ng-show="AppStore.secondStep">
@@ -51,19 +30,23 @@
                     <div class="appstore-templates">
                         <!-- service -->
                         <div class="appstore-template"
-                             ng-repeat="(name, service) in AppStore.servicesList"
-                             ng-click="AppStore.setService(service, name)"
-                             ng-class="{'state': AppStore.selectedService == service}">
+                             ng-repeat="service in AppStore.selectedCategory.services"
+                             ng-click="AppStore.setService(service)"
+                             ng-class="{'state': AppStore.selectedServiceName == service}">
                             <div class="icon">
-                                <img ng-src="/static/images/appstore/icon-{{ name }}.png" alt="">
+                                <img ng-src="/static/images/appstore/icon-{{ service }}.png" alt="">
                             </div>
-                            <h3>{{ name }}</h3>
+                            <h3>{{ service }}</h3>
                         </div>
                         <!-- /service -->
                     </div>
                 </section>
                 <section class="step-3" ng-show="AppStore.thirdStep">
-                    <div class="step-title"><span>Step 3: CONFIGURE {{ AppStore.selectedServiceName }} RESOURCE</span></div>
+                    <div class="step-title">
+                        <span>
+                            Step 3: CONFIGURE <span class="service-name">{{ AppStore.selectedServiceName }}</span> RESOURCE
+                        </span>
+                    </div>
                     <form action="">
                         <div class="string-field" ng-repeat="(name, stringField) in AppStore.formOptions[AppStore.FIELD_TYPES.string]">
                             <label for="{{ name }}">{{ stringField.label }}</label>
@@ -91,11 +74,17 @@
                                 <ul>
                                     <li ng-repeat="choice in field.choices"
                                         ng-click="AppStore.doChoice(name, choice)"
-                                        ng-class="{'state': AppStore.instance[name] == choice.value}">
+                                        ng-class="{'active': AppStore.instance[name] == choice.value}">
                                         <div class="icon">
                                             <img src="/static/images/appstore/icon-cloud.png" alt=""/>
                                         </div>
                                         <span>{{ choice.display_name }}</span>
+                                    </li>
+                                    <li class="active">
+                                        <div class="icon">
+                                            <img src="/static/images/appstore/icon-cloud.png" alt=""/>
+                                        </div>
+                                        <span>Selected</span>
                                     </li>
                                     <li>
                                         <div class="icon">
