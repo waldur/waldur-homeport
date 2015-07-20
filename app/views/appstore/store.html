@@ -194,7 +194,7 @@
     </div>
     <div class="project-alert-message" ng-show="AppStore.showProjectAlertMessage">
         <p>
-            There are no {{ AppStore.selectedServiceName }} accounts available to this project.
+            There are no {{ AppStore.selectedServiceName }} accounts available to the current project.<br />
             You can add a new one or allow access to an existing one in
             <a ui-sref="organizations.details({uuid: AppStore.currentCustomer.uuid, tab: 'services'})">provider management</a>.
             <span ng-click="AppStore.showProjectAlertMessage = false">&#x2716;</span>
