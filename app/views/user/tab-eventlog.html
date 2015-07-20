@@ -1,32 +1,7 @@
 <div ng-controller="UserEventTabController as EventList">
-    <div class="white-box">
-        <ul class="sort-list">
-            <li class="search divid">
-                <div class="search-box">
-                    <input type="text" ng-model='EventList.searchInput' ng-change="EventList.search()">
-                    <button class="search-button"></button>
-                </div>
-            </li>
-        </ul>
-    </div>
-
-    <div class="white-box clear">
-        <ul class="object-list">
-            <li ng-repeat="event in EventList.list">
-                <div class="list-item">
-                    <div>
-                        <div ui-view="eventTypes"></div>
-                    </div>
-                    <div class="actions">
-                        <action-button button-list="EventList.actionButtonsListItems"
-                                       button-controller="EventList"
-                                       ng-show="!EventList.showgroup"
-                                       button-model="event"></action-button>
-                    </div>
-                </div>
-            </li>
-        </ul>
-    </div>
-
-    <pagination pages-list="EventList" pages-service="EventList.service"></pagination>
+    <entitylist entity-list="EventList"
+                entity-service="EventList.service"
+                entity-buttons="EventList.actionButtonsListItems"
+                entity-options="EventList.entityOptions"
+                entity-view-type="new"></entitylist>
 </div>

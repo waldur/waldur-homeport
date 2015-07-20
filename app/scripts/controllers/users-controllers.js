@@ -137,7 +137,7 @@
   function baseUserDetailUpdateController(
     baseControllerDetailUpdateClass, usersService, authService, $translate, LANGUAGE) {
     var ControllerClass = baseControllerDetailUpdateClass.extend({
-      activeTab: 'eventlog',
+      activeTab: 'keys',
       currentUser: null,
 
       init: function() {
@@ -198,10 +198,11 @@
       '$stateParams',
       'usersService',
       'baseEventListController',
+      'ENTITYLISTFIELDTYPES',
       UserEventTabController
     ]);
 
-  function UserEventTabController($stateParams, usersService, baseEventListController) {
+  function UserEventTabController($stateParams, usersService, baseEventListController, ENTITYLISTFIELDTYPES) {
     var controllerScope = this;
     var EventController = baseEventListController.extend({
       user: null,
@@ -210,6 +211,24 @@
         this.controllerScope = controllerScope;
         this._super();
         this.getUser();
+        this.entityOptions = {
+          entityData: {
+            noDataText: 'No events yet.',
+            hideActionButtons: true
+          },
+          list: [
+            {
+              type: ENTITYLISTFIELDTYPES.noType,
+              propertyName: 'message',
+              showForMobile: true,
+              className: 'event-message'
+            },
+            {
+              type: ENTITYLISTFIELDTYPES.date,
+              propertyName: '@timestamp'
+            }
+          ]
+        };
       },
       getList: function(filter) {
         if (this.user) {
@@ -292,10 +311,11 @@
       'keysService',
       'baseControllerListClass',
       'usersService',
+      'ENTITYLISTFIELDTYPES',
       UserKeyTabController
     ]);
 
-  function UserKeyTabController($stateParams, keysService, baseControllerListClass, usersService) {
+  function UserKeyTabController($stateParams, keysService, baseControllerListClass, usersService, ENTITYLISTFIELDTYPES) {
     var controllerScope = this;
     var Controller = baseControllerListClass.extend({
       user: {},
@@ -309,6 +329,35 @@
           this.getCurrentUser();
         }
         this._super();
+
+        this.entityOptions = {
+          entityData: {
+            noDataText: 'No keys yet.',
+            createLink: 'keys.create',
+            createLinkText: 'Add SSH Key'
+          },
+          list: [
+            {
+              type: ENTITYLISTFIELDTYPES.noType,
+              propertyName: 'name',
+              name: 'Title',
+              className: 'title',
+              showForMobile: true
+            },
+            {
+              type: ENTITYLISTFIELDTYPES.noType,
+              propertyName: 'fingerprint',
+              name: 'Fingerprint',
+              className: 'fingerprint'
+            },
+            {
+              type: ENTITYLISTFIELDTYPES.date,
+              propertyName: '',
+              name: 'Added',
+              className: 'added'
+            }
+          ]
+        };
         this.actionButtonsListItems = [
           {
             title: 'Remove',

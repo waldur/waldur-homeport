@@ -31,4 +31,22 @@
             }
         }
     } // ul.actions-dropdown
+    ul.one-action-button {
+        list-style: none;
+        li {
+            a {
+                font-size: 16px;
+                color: #f37121;
+                cursor: pointer;
+                position: absolute;
+                white-space: nowrap;
+                right: 0;
+                top: -12px;
+                @include bp(xs) {
+                    width: 100px;
+                    white-space: normal;
+                } // xs
+            }
+        }
+    }
 } // actions-button

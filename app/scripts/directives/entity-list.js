@@ -6,16 +6,23 @@
     .directive('entitylist', [entityList]);
 
   function entityList() {
+    var directiveViewPath = 'views/directives/entity-list/',
+      defaultView = directiveViewPath + 'entity-list.html';
     return {
       restrict: 'E',
-      templateUrl: "views/directives/entity-list.html",
-      replace: true,
+      template: '<div ng-include="contentUrl"></div>',
       scope: {
         entityHref: '@',
         entityList: '=',
         entityService: '=',
         entityButtons: '=',
-        entityOptions: '='
+        entityOptions: '=',
+        entityViewType: '@'
+      },
+      link: function(scope) {
+        scope.contentUrl = scope.entityViewType
+          ? directiveViewPath + 'entity-list-' + scope.entityViewType + '.html'
+          : defaultView;
       }
     };
   }
