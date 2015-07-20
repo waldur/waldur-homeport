@@ -1,6 +1,44 @@
 <section class="title-wrapper">
     <div class="container">
         <h1>profile</h1>
+        <div class="user-about">
+            <div class="img-wrapper">
+                <img gravatar-src="UserDetailUpdate.model.email" class="avatar-img" gravatar-size="100">
+            </div>
+            <div class="about">
+                <span class="user-name">
+                    <span>
+                        {{ UserDetailUpdate.model.full_name }}
+                    </span>
+                </span>
+                <span ng-if="!UserDetailUpdate.model.full_name || UserDetailUpdate.model.full_name === ''">
+                    ({{ UserDetailUpdate.model.username }})
+                </span>
+
+                <div class="user-email"
+                     ng-if="UserDetailUpdate.currentUser.uuid === UserDetailUpdate.model.uuid">
+                    <span editable-text="UserDetailUpdate.model.email"
+                          e-form="userEmail"
+                          buttons="no"
+                          onbeforesave="UserDetailUpdate.update()"
+                          title="Click to edit email">
+                        {{ UserDetailUpdate.model.email }}
+                    </span>
+                    <div class="icon" ng-click="userEmail.$show()" ng-hide="userEmail.$visible"></div>
+                    <div class="clear"></div>
+                </div>
+                <div class="user-email"
+                     ng-if="UserDetailUpdate.currentUser.uuid != UserDetailUpdate.model.uuid">
+                    <span>{{ UserDetailUpdate.model.email }}</span>
+                    <div class="clear"></div>
+                </div>
+                <p>
+                    Joined on 26 Aug 2014
+                </p>
+
+            </div>
+            <div class="clear"></div>
+        </div>
     </div>
 </section>
 <div class="profile-content">
@@ -17,7 +55,8 @@
                         SSH Keys
                     </li>
                     <li ng-class="{'active': UserDetailUpdate.activeTab === 'notifications'}"
-                        ng-click="UserDetailUpdate.activeTab = 'notifications'">
+                        ng-click="UserDetailUpdate.activeTab = 'notifications'"
+                        ng-if="UserDetailUpdate.currentUser.uuid === UserDetailUpdate.model.uuid">
                         Notifications
                     </li>
                     <li ng-class="{'active': UserDetailUpdate.activeTab === 'eventlog'}"
@@ -25,7 +64,8 @@
                         Eventlog
                     </li>
                     <li ng-class="{'active': UserDetailUpdate.activeTab === 'password'}"
-                        ng-click="UserDetailUpdate.activeTab = 'password'">
+                        ng-click="UserDetailUpdate.activeTab = 'password'"
+                        ng-if="UserDetailUpdate.currentUser.uuid === UserDetailUpdate.model.uuid">
                         Password
                     </li>
                 </ul>
@@ -77,43 +117,6 @@
                 <div class="tab" id="eventlog"
                      ng-class="{'tab-active': UserDetailUpdate.activeTab === 'eventlog'}"
                      ng-switch-when="eventlog">
-                    <div class="tab-title">
-                        <div class="user-about">
-                            <div class="img-wrapper">
-                                <img gravatar-src="UserDetailUpdate.model.email" class="avatar-img" gravatar-size="100">
-                            </div>
-                            <div class="about">
-                                <span class="user-name">
-                                    <span editable-text="UserDetailUpdate.model.full_name"
-                                          buttons="no"
-                                          onbeforesave="UserDetailUpdate.update()"
-                                          title="Click to edit name">
-                                        {{ UserDetailUpdate.model.full_name }}
-                                    </span>
-                                </span>
-                                <span ng-if="!UserDetailUpdate.model.full_name || UserDetailUpdate.model.full_name === ''">
-                                    ({{ UserDetailUpdate.model.username }})
-                                </span>
-
-                                <div class="user-email">
-                                    <span editable-text="UserDetailUpdate.model.email"
-                                          buttons="no"
-                                          onbeforesave="UserDetailUpdate.update()"
-                                          title="Click to edit email">
-                                        {{ UserDetailUpdate.model.email }}
-                                    </span>
-                                    <div class="icon"></div>
-                                    <div class="clear"></div>
-                                </div>
-                                <p>
-                                    Joined on 26 Aug 2014
-                                </p>
-
-                            </div>
-                            <div class="clear"></div>
-                        </div>
-                        <div class="clear"></div>
-                    </div>
                     <div ui-view="tabEventlog"></div>
                 </div>
                 <div class="tab" id="password"

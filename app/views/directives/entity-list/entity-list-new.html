@@ -46,7 +46,7 @@
     <!-- /view-control -->
 
     <div class="table" ng-show="entityList.list.length > 0 || entityList.searchInput">
-        <div class="tr th">
+        <div class="tr th" ng-hide="entityOptions.entityData.hideTableHead">
             <div ng-repeat="fieldHead in entityOptions.list"
                  class="td {{ fieldHead.className }}"
                  ng-class="{'display-for-mobile' : field.showForMobile}">

@@ -214,7 +214,8 @@
         this.entityOptions = {
           entityData: {
             noDataText: 'No events yet.',
-            hideActionButtons: true
+            hideActionButtons: true,
+            hideTableHead: true
           },
           list: [
             {
