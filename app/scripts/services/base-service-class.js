@@ -91,8 +91,8 @@
         return deferred.promise;
       },
 
-      $create:function() {
-        var Instance = this.getFactory(false);
+      $create:function(endpointUrl) {
+        var Instance = this.getFactory(false, null, endpointUrl);
         return new Instance();
       },
 
@@ -123,10 +123,11 @@
         return deferred.promise;
       },
 
-      getFactory:function(isList, endpoint) {
+      getFactory:function(isList, endpoint, endpointUrl) {
         endpoint = endpoint || this.getEndpoint(isList);
+        endpointUrl = endpointUrl || ENV.apiEndpoint + 'api' + endpoint;
         /*jshint camelcase: false */
-        return $resource(ENV.apiEndpoint + 'api' + endpoint + ':UUID/', {UUID:'@uuid',
+        return $resource(endpointUrl + ':UUID/', {UUID:'@uuid',
             page_size:'@page_size', page:'@page'},
           {
             operation: {
@@ -136,6 +137,9 @@
             },
             update: {
               method: 'PUT'
+            },
+            options: {
+              method: 'OPTIONS'
             }
           }
         );
@@ -172,8 +176,10 @@
           vm.defaultFilter = {};
           vm.page = 1;
         });
+      },
+      getOption: function(endpointUrl) {
+        return this.getFactory(false, null, endpointUrl).options().$promise;
       }
-
     });
 
     return BaseServiceClass;

@@ -68,7 +68,7 @@
 (function() {
   angular.module('ncsaas')
     .controller('ServiceAddController', [
-      'servicesService',
+      'cloudsService',
       'digitalOceanService',
       'joinServiceProjectLinkService',
       'currentStateService',
@@ -77,7 +77,7 @@
       ServiceAddController]);
 
   function ServiceAddController(
-    servicesService,
+    cloudsService,
     digitalOceanService,
     joinServiceProjectLinkService,
     currentStateService,
@@ -86,7 +86,7 @@
     var controllerScope = this;
     var ServiceController = baseControllerAddClass.extend({
       init: function() {
-        this.service = servicesService;
+        this.service = cloudsService;
         this.controllerScope = controllerScope;
         this.setSignalHandler('currentCustomerUpdated', this.activate.bind(this));
         this._super();
@@ -98,7 +98,7 @@
           icon: '/static/images/icons/icon_openstack_small.png',
           name: 'OpenStack',
           id: 'openstack',
-          service: servicesService
+          service: cloudsService
         },
         {
           icon: '/static/images/icons/icon_digitalocean_small.png',

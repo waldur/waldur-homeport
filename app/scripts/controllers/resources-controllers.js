@@ -138,12 +138,12 @@
   angular.module('ncsaas')
     .controller('ResourceAddController',
     ['resourcesService', 'projectCloudMembershipsService', 'projectsService',
-      'keysService', 'templatesService', 'baseControllerAddClass', 'servicesService',
+      'keysService', 'templatesService', 'baseControllerAddClass', 'cloudsService',
       ResourceAddController]);
 
   function ResourceAddController(
     resourcesService, projectCloudMembershipsService, projectsService, keysService,
-    templatesService, baseControllerAddClass, servicesService) {
+    templatesService, baseControllerAddClass, cloudsService) {
     var controllerScope = this;
     var ResourceController = baseControllerAddClass.extend({
       showServices: false,
@@ -184,7 +184,7 @@
             return el.length !== 0;
           }),
           uuid = array[4];
-        servicesService.$get(uuid).then(function(response) {
+        cloudsService.$get(uuid).then(function(response) {
           var service = response;
           vm.flavorList = service.flavors;
           templatesService.getList({cloud: service.uuid}).then(function(response) {

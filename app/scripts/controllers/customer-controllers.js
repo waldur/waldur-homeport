@@ -172,15 +172,15 @@
     .controller('CustomerServiceTabController', [
       '$stateParams',
       'baseServiceListController',
-      'servicesService',
+      'cloudsService',
       CustomerServiceTabController
     ]);
 
-  function CustomerServiceTabController($stateParams, baseServiceListController, servicesService) {
+  function CustomerServiceTabController($stateParams, baseServiceListController, cloudsService) {
     var controllerScope = this;
     var Controller = baseServiceListController.extend({
       init: function() {
-        this.service = servicesService;
+        this.service = cloudsService;
         this.controllerScope = controllerScope;
         this.service.defaultFilter.customer = $stateParams.uuid;
         this.service.filterByCustomer = false;

@@ -6,7 +6,7 @@
     .service('joinService', [
       '$q',
       'baseServiceClass',
-      'servicesService',
+      'cloudsService',
       'digitalOceanService',
       joinService
     ]);
@@ -14,11 +14,11 @@
   function joinService(
     $q,
     baseServiceClass,
-    servicesService,
+    cloudsService,
     digitalOceanService
   ) {
     var ServiceClass = baseServiceClass.extend({
-      providers: [servicesService, digitalOceanService],
+      providers: [cloudsService, digitalOceanService],
 
       getList: function(filter) {
         var self = this;
@@ -46,7 +46,7 @@
             return response;
           })
         } else if (provider == 'openstack') {
-          return servicesService.$get(uuid).then(function(response){
+          return cloudsService.$get(uuid).then(function(response){
             self.setDescription(response);
             return response;
           })

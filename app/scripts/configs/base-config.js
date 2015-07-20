@@ -42,6 +42,20 @@ angular.module('ncsaas')
         name: 'Backup',
         options: ['Daily', 'Weekly']
       }
+    ],
+    appStoreCategories: [
+      {
+        name: 'VMs',
+        services: ['DigitalOcean', 'OpenStack']
+      },
+      {
+        name: 'APPLICATIONS',
+        services: ['Oracle', 'GitLab']
+      },
+      {
+        name: 'SUPPORT',
+        services: []
+      }
     ]
 
   });

@@ -1,109 +1,132 @@
 (function() {
   angular.module('ncsaas')
     .controller('AppStoreController', [
-      'baseControllerAddClass', 'resourcesService', 'projectsService', 'projectCloudMembershipsService',
-      'templatesService', 'servicesService', 'currentStateService', 'ENV', AppStoreController]);
+      'baseControllerAddClass', 'servicesService', 'currentStateService', 'ENV', AppStoreController]);
 
-  function AppStoreController(
-    baseControllerAddClass, resourcesService, projectsService, projectCloudMembershipsService, templatesService,
-    servicesService, currentStateService, ENV) {
+  function AppStoreController(baseControllerAddClass, servicesService, currentStateService, ENV) {
     var controllerScope = this;
     var Controller = baseControllerAddClass.extend({
-      showServices: false,
-      showOptions: false,
-      showTemplates: false,
-      showKeys: false,
+      UNIQUE_FIELDS: {
+        service_project_link: 'service_project_link',
+        ssh_public_key: 'ssh_public_key',
+        configuration: 'configuration'
+      },
+      FIELD_TYPES: {
+        string: 'string',
+        field: 'field'
+      },
 
-      serviceList: [],
-      flavorList: [],
-      projectList: [],
-      templateList:[],
-      selectedProject: null,
-      customer: null,
-      resourcePrice: 0,
-      addonsPrice: 0,
-      addonsList: [],
-      selectedAddons: [],
+      secondStep: false,
+      thirdStep: false,
+      resourceTypesBlock: false,
+
+      activeTab: null,
       successMessage: 'Purchase of {vm_name} was successful.',
+      formOptions: {},
+      allFormOptions: {},
+      selectedService: {},
+      selectedServiceName: null,
+      selectedCategory: {},
+      selectedResourceType: null,
+
+      configureStepNumber: 4,
 
       init:function() {
-        this.service = resourcesService;
+        this.service = servicesService;
         this.controllerScope = controllerScope;
-        this.setSignalHandler('currentCustomerUpdated', this.currentCustomerUpdatedHandler.bind(this));
+        this.setSignalHandler('currentProjectUpdated', this.setCurrentProject.bind(controllerScope));
         this._super();
         this.listState = 'resources.list';
-        this.serviceIcon = ENV.serviceIcon;
+        this.categories = ENV.appStoreCategories;
       },
       activate:function() {
         var vm = this;
-        // projects
-        projectsService.getList().then(function(response) {
-          vm.projectList = response;
-        });
-        currentStateService.getCustomer().then(function(customer) {
-          vm.customer = customer;
-        });
-        // XXX: Additional options
-        vm.addonsList = ENV.addonsList;
-      },
-      setProject:function(project) {
-        var vm = this;
-        if (project) {
-          vm.instance.project = project.url;
-          vm.showServices = true;
-          // projectCloudMemberships
-          projectCloudMembershipsService.getList({project: project.uuid}).then(function(response) {
-            vm.serviceList = response;
-          });
-        } else {
-          vm.serviceList = {};
-        }
-        vm.showFlavors = false;
-        vm.showOptions = false;
-      },
-      setService:function(projectCloudMemberships) {
-        var vm = this;
-        servicesService.$get(projectCloudMemberships.cloud_uuid).then(function(response) {
-          var service = response;
-          vm.flavorList = service.flavors;
-          templatesService.getList({cloud: service.uuid}).then(function(response) {
-            vm.templateList = response;
-          });
-          vm.selectedService = projectCloudMemberships;
-          vm.showFlavors = true;
-          vm.showOptions = false;
+        servicesService.getServicesList().then(function(response) {
+          vm.servicesList = response;
         });
       },
-      setFlavor:function(flavor) {
-        var vm = this;
-        vm.instance.flavor = flavor.url;
-        vm.selectedFlavor = flavor;
-        vm.showOptions = true;
+      setCategory: function(category) {
+        this.selectedCategory = category;
+        this.secondStep = true;
+        this.selectedService = {};
+        this.selectedServiceName = null;
+        this.resourceTypesBlock = false;
+        this.thirdStep = false;
       },
-      setTemplate:function(tamplate) {
-        this.instance.template = tamplate.url;
-      },
-      setAddon:function(addon) {
-        if (!this.isSelectedAddon(addon)) {
-          this.selectedAddons.push(addon);
-        } else {
-          var index = this.selectedAddons.indexOf(addon);
-          this.selectedAddons.splice(index, 1);
+      setService:function(service) {
+        this.selectedService = this.servicesList[service];
+        this.selectedServiceName = service;
+        this.resourceTypesBlock = true;
+        this.thirdStep = false;
+        this.formOptions = {};
+        if (this.selectedService) {
+          var types = Object.keys(this.selectedService.resources);
+          if (types.length === 1) {
+            this.setResourceType(types[0]);
+            this.resourceTypesBlock = false;
+            this.configureStepNumber = 3;
+          } else {
+            this.configureStepNumber = 4;
+          }
         }
       },
-      isSelectedAddon:function(addon) {
-        return this.selectedAddons.indexOf(addon) !== -1;
+      setResourceType: function(type) {
+        var vm = this;
+        vm.selectedResourceType = type;
+        vm.thirdStep = true;
+        vm.formOptions = {};
+        if (vm.selectedService.resources[vm.selectedResourceType]) {
+          vm.instance = servicesService.$create(vm.selectedService.resources[vm.selectedResourceType]);
+          vm.setCurrentProject();
+          servicesService.getOption(vm.selectedService.resources[vm.selectedResourceType]).then(function(response) {
+            vm.setFormOptions(response.actions.POST);
+          });
+        }
       },
-      currentCustomerUpdatedHandler:function() {
-        var vm = this.controllerScope;
-        vm.showFlavors = false;
-        vm.showOptions = false;
-        vm.selectedProject = null;
-        vm.serviceList = [];
-        vm.projectList = [];
-        vm.templateList = [];
-        vm.flavorList = [];
-        vm.activate();
+      setFormOptions: function(formOptions) {
+        this.allFormOptions = formOptions;
+        this.activeTab = null;
+        for (var name in formOptions) {
+          if (!formOptions[name].read_only && name != this.UNIQUE_FIELDS.service_project_link) {
+            this.formOptions[formOptions[name].type] = this.formOptions[formOptions[name].type] || {};
+            if (name == this.UNIQUE_FIELDS[name]) {
+              this.formOptions[name] = formOptions[name];
+            } else {
+              if (!this.activeTab && formOptions[name].type == this.FIELD_TYPES.field) {
+                this.activeTab = name;
+              }
+              this.formOptions[formOptions[name].type][name] = formOptions[name];
+            }
+          }
+        }
+      },
+      doChoice: function(name, choice) {
+        this.instance[name] = choice.value;
+      },
+      setCurrentProject: function() {
+        var vm = this;
+        currentStateService.getProject().then(function(response) {
+          vm.instance[vm.UNIQUE_FIELDS.service_project_link] = response.url;
+        });
+      },
+      canSave: function() {
+        for (var name in this.allFormOptions) {
+          if (this.allFormOptions[name].required && !this.instance[name]) {
+            return false;
+          }
+        }
+        return true;
+      },
+      onError: function() {
+        var message = '';
+        for (var name in this.errors) {
+          if (this.allFormOptions[name]) {
+            message += this.allFormOptions[name].label + ': ' + this.errors[name] + '<br/>';
+          } else {
+            message += name+ ': ' + this.errors[name] + '<br/>';
+          }
+        }
+        this.errorFlash(message);
       }
     });
 

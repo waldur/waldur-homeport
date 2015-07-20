@@ -20,6 +20,9 @@
       successFlash: function(message) {
         this.flashMessage('success', message);
       },
+      errorFlash: function(message) {
+        this.flashMessage('danger', message);
+      },
       flashMessage: function(type, message) {
         Flash.create(type, message);
       },
@@ -175,6 +178,7 @@
         }
         function error(response) {
           vm.errors = response.data;
+          vm.onError();
         }
       },
       cancel: function() {
@@ -192,7 +196,8 @@
       },
       getSuccessMessage: function() {
         return this.successMessage.replace('{vm_name}', this.instance.name);
-      }
+      },
+      onError: function() {}
     });
 
     return ControllerAddClass;
