@@ -23,13 +23,13 @@
           if (!isFilterChosen(filter)) {
             controller.chosenFilters.push(filter);
             values = getFiltersWithSameName(filter);
-            controller.service.defaultFilter[filter.name] = values.length > 0 ? values.join() : filter.value;
+            controller.service.defaultFilter[filter.name] = values.length > 0 ? values : filter.value;
           } else {
             var index = controller.chosenFilters.indexOf(filter);
             controller.chosenFilters.splice(index, 1);
             values = getFiltersWithSameName(filter);
             if (values.length > 0) {
-              controller.service.defaultFilter[filter.name] = values.join();
+              controller.service.defaultFilter[filter.name] = values;
             } else {
               delete controller.service.defaultFilter[filter.name];
             }
