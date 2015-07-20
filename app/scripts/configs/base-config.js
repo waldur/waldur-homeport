@@ -5,6 +5,7 @@ angular.module('ncsaas')
     // general config
     name: '',
     apiEndpoint: 'http://localhost:8080/',
+    // apiEndpoint: 'http://rest-test.nodeconductor.com/',
 
     // auth config
     googleClientId: 'google client id',

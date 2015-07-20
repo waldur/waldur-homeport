@@ -1,7 +1,19 @@
-<div ng-controller="ResourceDetailUpdateController as ResourceDetailUpdate">
+<div>
     <section class="title-wrapper">
         <div class="container">
             <h1>Resources</h1>
+            <ul class="sort-list">
+                <li class="right-sort">
+                    <a ui-sref="appstore.store" class="button">
+                        <span class="icon plus"></span>
+                        <span>Add resource</span>
+                    </a>
+                    <a ui-sref="import.import" class="button">
+                        <span class="icon plus"></span>
+                        Import resource
+                    </a>
+                </li>
+            </ul>
         </div>
     </section>
     <section class="resources-content">
@@ -11,51 +23,51 @@
                     <div class="input-group">
                         <input type="search" placeholder="Search"/>
                     </div>
-                    <a class="open-tabs button" ng-click="openTabs = !openTabs">Tabs</a>
-                    <ul class="tabs-links" ng-class="{'tabs-opened': openTabs}">
-                        <li class="active">VMs (<span>5</span>)</li>
-                        <li>Applications (<span>5</span>)</li>
-                        <li>Backups (<span>5</span>)</li>
-                        <li>People (<span>4</span>)</li>
-                        <li>Providers (<span>3</span>)</li>
+                    <ul class="tabs-links" ng-init="activeTab='VMs'">
+                        <li ng-click="activeTab='VMs'"
+                            ng-class="{'active': activeTab=='VMs'}">VMs (<span>5</span>)</li>
+
+                        <li ng-click="activeTab='Applications'"
+                            ng-class="{'active': activeTab=='Applications'}">Applications (<span>5</span>)</li>
+
+                        <li ng-click="activeTab='Backups'"
+                            ng-class="{'active': activeTab=='Backups'}">Backups (<span>5</span>)</li>
+
+                        <li ng-click="activeTab='People'"
+                            ng-class="{'active': activeTab=='People'}">People (<span>4</span>)</li>
+
+                        <li ng-click="activeTab='Providers'"
+                            ng-class="{'active': activeTab=='Providers'}">Providers (<span>3</span>)</li>
                     </ul>
                 </aside>
-                <div class="tab-content">
-                    <div class="tab-title">
-                        <ul class="ng-isolate-scope">
-                            <a class="toggle-link ng-binding ng-scope active">OpenStack</a>
-                            <a class="toggle-link ng-binding ng-scope">Digital Ocean</a>
-                            <a class="toggle-link ng-binding ng-scope">AWS EC2</a>
-                        </ul>
-                        <div class="clear"></div>
-                    </div>
-                    <div class="table">
-                        <div class="tr th">
-                            <div class="td visual-status display-for-mobile"></div>
-                            <div class="td name display-for-mobile">Name</div>
-                            <div class="td number">Flavor</div>
-                            <div class="td access">Access</div>
-                            <div class="td">Actions</div>
-                        </div>
-                        <div class="tr">
-                            <div class="td visual-status display-for-mobile">
-                                <div class="status-circle green"></div>
-                            </div>
-                            <div class="td name display-for-mobile">public-web.example.com <span class="teg">DO</span></div>
-                            <div class="td number">1</div>
-                            <div class="td access">root@192.168.0.1, key X</div>
-                            <div class="td status">configure</div>
-                        </div>
-                        <div class="tr">
-                            <div class="td visual-status display-for-mobile">
-                                <div class="status-circle"></div>
-                            </div>
-                            <div class="td name display-for-mobile">public-web.example.com <span class="teg">DO</span></div>
-                            <div class="td number">1</div>
-                            <div class="td access">root@192.168.0.1, key X</div>
-                            <div class="td status">configure</div>
-                        </div>
-                    </div>
+                <div class="tab-content" ng-switch="activeTab">
+                    <entitylist ng-switch-when="VMs"
+                                ng-controller="ResourceListController as ResourceList"
+                                entity-list="ResourceList"
+                                entity-service="ResourceList.service"
+                                entity-buttons="ResourceList.actionButtonsListItems"
+                                entity-options="ResourceList.entityOptions"></entitylist>
+
+                    <entitylist ng-switch-when="Backups"
+                                ng-controller="BackupListController as ResourceList"
+                                entity-list="ResourceList"
+                                entity-service="ResourceList.service"
+                                entity-buttons="ResourceList.actionButtonsListItems"
+                                entity-options="ResourceList.entityOptions"></entitylist>
+
+                    <entitylist ng-switch-when="People"
+                                ng-controller="UserListController as ResourceList"
+                                entity-list="ResourceList"
+                                entity-service="ResourceList.service"
+                                entity-buttons="ResourceList.actionButtonsListItems"
+                                entity-options="ResourceList.entityOptions"></entitylist>
+
+                    <entitylist ng-switch-when="Providers"
+                                ng-controller="ServiceListController as ResourceList"
+                                entity-list="ResourceList"
+                                entity-service="ResourceList.service"
+                                entity-buttons="ResourceList.actionButtonsListItems"
+                                entity-options="ResourceList.entityOptions"></entitylist>
                 </div>
             </div>
             <div class="clear"></div>

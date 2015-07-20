@@ -48,7 +48,7 @@
                 <a href="mailto:info@opennodecloud.com">Support</a>
             </li>
             <li>
-                Build: {{ buildId }}
+                Build: <span ng-bind="::buildId"></span>
             </li>
         </ul>
     </div>
@@ -127,6 +127,7 @@
 <script src="scripts/services/digitalocean-resources-service.js"></script>
 <script src="scripts/services/digitalocean-service.js"></script>
 <script src="scripts/services/digitalocean-service-project-link-service.js"></script>
+<script src="scripts/services/openstack-service.js"></script>
 <script src="scripts/services/join-service.js"></script>
 <script src="scripts/services/join-service-project-link-service.js"></script>
 <script src="scripts/services/customer-image-service.js"></script>

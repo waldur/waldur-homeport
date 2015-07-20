@@ -49,14 +49,29 @@
 
   angular.module('ncsaas')
     .controller('ServiceListController',
-      ['baseServiceListController', ServiceListController]);
+      ['baseServiceListController', 'ENTITYLISTFIELDTYPES', ServiceListController]);
 
-  function ServiceListController(baseServiceListController) {
+  function ServiceListController(baseServiceListController, ENTITYLISTFIELDTYPES) {
     var controllerScope = this;
     var ServiceController = baseServiceListController.extend({
       init:function() {
         this.controllerScope = controllerScope;
         this._super();
+        this.entityOptions = {
+          entityData: {
+            noDataText: 'No services yet.'
+          },
+          list: [
+            {
+              name: 'Name',
+              propertyName: 'name',
+              type: ENTITYLISTFIELDTYPES.name,
+              link: 'services.details({uuid: entity.uuid, provider: entity.provider})',
+              className: 'name',
+              showForMobile: ENTITYLISTFIELDTYPES.showForMobile
+            }
+          ]
+        };
       }
     });
 

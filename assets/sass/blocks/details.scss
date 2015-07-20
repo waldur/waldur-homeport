@@ -185,3 +185,44 @@
     }
   }
 }
+
+.resources-content .white-box {
+  padding: 0px;
+  margin: 0px;
+  border: none;
+  box-shadow: none;
+}
+
+.resources-content .list-header {
+  padding-top: 16px;
+}
+
+.resources-content .list-item {
+  min-height: 0px;
+  padding: 9px;
+}
+
+.resources-content .additional-cell {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.resources-content .list-item:hover {
+  background: none;
+}
+
+.resources-content a.list-sort {
+  text-align: left;
+  color: rgb(48, 48, 48);
+  padding-top: 10px;
+}
+
+.resources-content li.search {
+  display: none;
+}
+
+.resources-content h3.item-title {
+  font-weight: normal;
+  font-size: 16px;
+}

@@ -38,11 +38,21 @@
           },
           list: [
             {
+              type: ENTITYLISTFIELDTYPES.statusCircle,
+              propertyName: 'state',
+              onlineStatus: ENV.resourceOnlineStatus
+            },
+            {
               name: 'Name',
               propertyName: 'name',
               type: ENTITYLISTFIELDTYPES.name,
-              link: 'resources.details({uuid: entity.uuid})',
+              link: 'resources.details({uuid: entity.uuid, service_type: entity.service_type})',
               showForMobile: ENTITYLISTFIELDTYPES.showForMobile
+            },
+            {
+              name: 'Type',
+              propertyName: 'resource_type',
+              type: ENTITYLISTFIELDTYPES.noType
             },
             {
               name: 'Project',
@@ -51,22 +61,30 @@
               link: 'projects.details({uuid: entity.project_uuid })'
             },
             {
-              name: 'Access information',
+              name: 'Access',
               propertyName: 'external_ips',
               emptyText: 'No access info',
               type: ENTITYLISTFIELDTYPES.listInField
-            },
-            {
-              name: 'Status',
-              propertyName: 'state',
-              type: ENTITYLISTFIELDTYPES.entityStatusField,
-              onlineStatus: ENV.resourceOnlineStatus,
-              offlineStatus: ENV.resourceOfflineStatus
-
             }
           ]
         };
-
+        this.searchFilters = [
+          {
+            name: 'resource_type',
+            title: 'OpenStack',
+            value: 'IaaS.Instance'
+          },
+          {
+            name: 'resource_type',
+            title: 'DigitalOcean',
+            value: 'DigitalOcean.Droplet'
+          },
+          {
+            name: 'resource_type',
+            title: 'AWS EC2',
+            value: 'Amazon.EC2'
+          }
+        ];
       },
       stopResource:function(resource) {
         var vm = this;
@@ -108,22 +126,6 @@
     var ResourceController = baseResourceListController.extend({
       init:function() {
         this.service = resourcesService;
-        this.controllerScope = controllerScope;
-        this._super();
-      }
-    });
-
-    controllerScope.__proto__ = new ResourceController();
-  }
-
-  angular.module('ncsaas')
-    .controller('DigitalOceanListController', ['baseResourceListController', 'digitalOceanResourcesService', DigitalOceanListController]);
-
-  function DigitalOceanListController(baseResourceListController, digitalOceanResourcesService) {
-    var controllerScope = this;
-    var ResourceController = baseResourceListController.extend({
-      init:function() {
-        this.service = digitalOceanResourcesService;
         this.controllerScope = controllerScope;
         this._super();
       }
@@ -247,18 +249,25 @@
       .controller('ResourceDetailUpdateController', [
         '$stateParams',
         '$scope',
-        'resourcesService',
+        'digitalOceanResourcesService',
+        'openstackService',
         'baseControllerDetailUpdateClass',
         ResourceDetailUpdateController
       ]);
 
-  function ResourceDetailUpdateController($stateParams, $scope, resourcesService, baseControllerDetailUpdateClass) {
+  function ResourceDetailUpdateController(
+    $stateParams,
+    $scope,
+    digitalOceanResourcesService,
+    openstackService,
+    baseControllerDetailUpdateClass) {
     var controllerScope = this;
     var Controller = baseControllerDetailUpdateClass.extend({
       activeTab: 'backups',
 
       init:function() {
-        this.service = resourcesService;
+        this.service_type = $stateParams.service_type;
+        this.service = this.service_type == 'IaaS' ? openstackService : digitalOceanResourcesService;
         this.controllerScope = controllerScope;
         this._super();
         this.detailsState = 'resources.details';
