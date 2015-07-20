@@ -277,9 +277,6 @@
     height: 66px;
     margin-right: 18px;
     overflow: hidden;
-    img {
-
-    }
   }
   .about {
     .editable-click {
@@ -317,6 +314,7 @@
         float: left;
         margin-left: 10px;
         margin-top: 4px;
+        cursor: pointer;
       }
     }
     p {
