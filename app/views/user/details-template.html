@@ -1,65 +1,147 @@
-<div class="profile-view">
-    <section class="avatar">
-            <span class="avatar big">
+<section class="title-wrapper">
+    <div class="container">
+        <h1>profile</h1>
+        <div class="user-about">
+            <div class="img-wrapper">
                 <img gravatar-src="UserDetailUpdate.model.email" class="avatar-img" gravatar-size="100">
-            </span>
-    </section>
-    <section class="content">
-        <h2 class="app-title">{{ UserDetailUpdate.model.full_name }}</h2>
-        <span ng-if="!UserDetailUpdate.model.full_name || UserDetailUpdate.model.full_name === ''">
-            ({{ UserDetailUpdate.model.username }})
-        </span>
-        <div>
-            <a href="mailto:{{ UserDetailUpdate.model.email }}">{{ UserDetailUpdate.model.email }}</a>
+            </div>
+            <div class="about">
+                <span class="user-name">
+                    <span>
+                        {{ UserDetailUpdate.model.full_name }}
+                    </span>
+                </span>
+                <span ng-if="!UserDetailUpdate.model.full_name || UserDetailUpdate.model.full_name === ''">
+                    ({{ UserDetailUpdate.model.username }})
+                </span>
+
+                <div class="user-email"
+                     ng-if="UserDetailUpdate.currentUser.uuid === UserDetailUpdate.model.uuid">
+                    <span editable-text="UserDetailUpdate.model.email"
+                          e-form="userEmail"
+                          buttons="no"
+                          onbeforesave="UserDetailUpdate.update()"
+                          title="Click to edit email">
+                        {{ UserDetailUpdate.model.email }}
+                    </span>
+                    <div class="icon" ng-click="userEmail.$show()" ng-hide="userEmail.$visible"></div>
+                    <div class="clear"></div>
+                </div>
+                <div class="user-email"
+                     ng-if="UserDetailUpdate.currentUser.uuid != UserDetailUpdate.model.uuid">
+                    <span>{{ UserDetailUpdate.model.email }}</span>
+                    <div class="clear"></div>
+                </div>
+                <p>
+                    <!--TODO: A date will be received from REST after resolve SAAS-514-->
+                    Joined on 26 Aug 2014
+                </p>
+
+            </div>
+            <div class="clear"></div>
         </div>
-    </section>
-    <section class="actions" ng-show="UserDetailUpdate.model.uuid === UserDetailUpdate.currentUser.uuid">
-        <div class="actions-button">
-            <a class="button" ng-click="openActions=!openActions">actions</a>
-            <ul class="actions-dropdown" ng-show="openActions">
-                <li ng-if="UserDetailUpdate.showImport">
-                    <a ui-sref="import.import" class="button-simple">Import resources from service</a>
-                </li>
-                <li>
-                    <a ui-sref="profile.update" class="button-simple">Edit profile</a>
-                </li>
-                <li>
-                    <a class="button-simple button-delete" ng-click="DetailsProfile.deleteAccount()">Delete my account</a>
-                </li>
-            </ul>
+    </div>
+</section>
+<div class="profile-content">
+    <div class="container">
+        <div class="tabs-wrapper">
+            <aside>
+                <div class="input-group">
+                    <input type="search" placeholder="Search"/>
+                </div>
+                <a class="open-tabs button" ng-click="openTabs = !openTabs">Tabs</a>
+                <ul class="tabs-links" ng-class="{'tabs-opened': openTabs}">
+                    <li ng-class="{'active': UserDetailUpdate.activeTab === 'keys'}"
+                        ng-click="UserDetailUpdate.activeTab = 'keys'">
+                        SSH Keys
+                    </li>
+                    <li ng-class="{'active': UserDetailUpdate.activeTab === 'notifications'}"
+                        ng-click="UserDetailUpdate.activeTab = 'notifications'"
+                        ng-if="UserDetailUpdate.currentUser.uuid === UserDetailUpdate.model.uuid">
+                        Notifications
+                    </li>
+                    <li ng-class="{'active': UserDetailUpdate.activeTab === 'eventlog'}"
+                        ng-click="UserDetailUpdate.activeTab = 'eventlog'">
+                        Event log
+                    </li>
+                    <li ng-class="{'active': UserDetailUpdate.activeTab === 'password'}"
+                        ng-click="UserDetailUpdate.activeTab = 'password'"
+                        ng-if="UserDetailUpdate.currentUser.uuid === UserDetailUpdate.model.uuid">
+                        Password
+                    </li>
+                </ul>
+            </aside>
+            <div class="tab-content" ng-switch="UserDetailUpdate.activeTab">
+                <div class="tab" id="keys"
+                     ng-class="{'tab-active': UserDetailUpdate.activeTab === 'keys'}"
+                     ng-switch-when="keys">
+                    <div ui-view="tabKeys"></div>
+                </div>
+                <div class="tab" id="notifications"
+                     ng-class="{'tab-active': UserDetailUpdate.activeTab === 'notifications'}"
+                     ng-switch-when="notifications">
+                    <div class="notif-wrapper">
+                        <h2>subscribed to</h2>
+                        <ul>
+                            <li>
+                                <input type="checkbox" id="event-login"/>
+                                <label for="event-login"><span>Login events</span></label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="critical"
+                                       ng-model="criticalAlerts"
+                                       ng-class="{'opened': criticalAlerts}"/>
+                                <label for="critical"><span>Critical alerts</span></label>
+                                <div class="critical" ng-show="criticalAlerts">
+                                    <h2>critical alerts</h2>
+                                    <form action="">
+                                        <input type="checkbox" id="s-flag"/><label for="s-flag">Subscribed</label>
+                                        <label for="s-email">Notification email</label>
+                                        <input id="s-email" type="email"/>
+                                        <label for="json">Event webhook (JSON)</label>
+                                        <input id="json" type="text"/>
+                                    </form>
+                                </div>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="invites"/>
+                                <label for="invites"><span>User invites</span></label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="warnings"/>
+                                <label for="warnings"><span>Warnings</span></label>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+                <div class="tab" id="eventlog"
+                     ng-class="{'tab-active': UserDetailUpdate.activeTab === 'eventlog'}"
+                     ng-switch-when="eventlog">
+                    <div ui-view="tabEventlog"></div>
+                </div>
+                <div class="tab" id="password"
+                     ng-class="{'tab-active': UserDetailUpdate.activeTab === 'password'}"
+                     ng-switch-when="password">
+                    <ul class="password">
+                        <li>
+                            <label for="old">Old password</label>
+                            <input id="old" type="text"/>
+                        </li>
+                        <li>
+                            <label for="new">New password</label>
+                            <input id="new" type="text"/>
+                        </li>
+                        <li>
+                            <label for="repeat">Repeat new password</label>
+                            <input id="repeat" type="text"/>
+                        </li>
+                        <li>
+                            <a href="#" class="green-btn">Save password</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-    </section>
+    </div>
 </div>
-
-<ul class="tabs-nav">
-    <li ng-class="{'active': UserDetailUpdate.activeTab === 'eventlog'}"
-        ng-click="UserDetailUpdate.activeTab = 'eventlog'">
-        Events
-    </li>
-    <li ng-class="{'active': UserDetailUpdate.activeTab === 'keys'}"
-        ng-click="UserDetailUpdate.activeTab = 'keys'">
-        SSH Keys
-    </li>
-    <li ng-class="{'active': UserDetailUpdate.activeTab === 'projects'}"
-        ng-click="UserDetailUpdate.activeTab = 'projects'">
-        Projects
-    </li>
-</ul>
-
-<sectin class="tabs-content" ng-switch="UserDetailUpdate.activeTab">
-    <div class="tab" id="eventlog"
-         ng-class="{'tab-active': UserDetailUpdate.activeTab === 'eventlog'}"
-         ng-switch-when="eventlog">
-        <div ui-view="tabEventlog"></div>
-    </div>
-    <div class="tab" id="keys"
-         ng-class="{'tab-active': UserDetailUpdate.activeTab === 'keys'}"
-         ng-switch-when="keys">
-        <div ui-view="tabKeys"></div>
-    </div>
-    <div class="tab" id="projects"
-         ng-class="{'tab-active': UserDetailUpdate.activeTab === 'projects'}"
-         ng-switch-when="projects">
-        <div ui-view="tabProjects"></div>
-    </div>
-</sectin>

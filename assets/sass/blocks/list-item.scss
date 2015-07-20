@@ -3,6 +3,10 @@
     z-index: 10;
 } // more-details
 
+.empty-list-message {
+    text-align: center;
+}
+
 .list-item {
     @include table;
     padding: 15px 0;
