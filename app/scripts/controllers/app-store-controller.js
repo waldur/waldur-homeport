@@ -29,6 +29,8 @@
       selectedCategory: {},
       selectedResourceType: null,
 
+      configureStepNumber: 4,
+
       init:function() {
         this.service = servicesService;
         this.controllerScope = controllerScope;
@@ -61,6 +63,10 @@
           var types = Object.keys(this.selectedService.resources);
           if (types.length === 1) {
             this.setResourceType(types[0]);
+            this.resourceTypesBlock = false;
+            this.configureStepNumber = 3;
+          } else {
+            this.configureStepNumber = 4;
           }
         }
       },
