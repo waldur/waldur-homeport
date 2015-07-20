@@ -63,8 +63,8 @@
     <div class="white-box" ng-show="entityList.list.length > 0 || entityList.searchInput">
         <ul class="object-list">
             <li class="list-item list-header">
-                <div class="checkbox"></div>
-                <div ng-repeat="fieldHead in entityOptions.list" class="additional-cell {{ fieldHead.className }}">
+                <div class="checkbox" ng-show="entityList.controlPanelShow"></div>
+                <div ng-repeat="fieldHead in entityOptions.list" class="additional-cell {{ fieldHead.className }}" ng-show="fieldHead.type != 'statusCircle'">
                     <a class="list-sort">{{ fieldHead.name }}</a>
                 </div>
                 <div class="actions"></div>
@@ -72,7 +72,7 @@
             <li ng-repeat="entity in entityList.list">
                 <div class="list-item list" ng-class="{'opened': expandItem, 'pointer' : entityOptions.entityData.expandable}"
                      ng-click="expandItem=!expandItem; entityList.showMore(entity)">
-                    <div class="checkbox">
+                    <div class="checkbox" ng-show="entityList.controlPanelShow">
                         <div class="checkbox" stoppropagation>
                             <input type="checkbox" ng-show="entityList.showgroup"
                                    ng-checked="entityList.isInstanceSelected(entity)"
@@ -83,7 +83,10 @@
                          ng-switch="field.type"
                          ng-class="{ 'display-for-mobile' : field.showForMobile, 'status': field.type == 'statusCircle' }"
                          class="additional-cell {{ field.className }}">
-                        <div ng-switch-when="statusCircle" class="status-circle" ng-class="{'green': entity[field.propertyName]}"></div>
+                        <div ng-switch-when="statusCircle"
+                             class="status-circle"
+                             ng-class="{'green': entity[field.propertyName]==field.onlineStatus}"
+                             title="{{ entity[field.propertyName] }}"></div>
 
                         <span ng-switch-when="avatar" class="avatar">
                             <img gravatar-src="field.avatarArraySrc ? entity[field.avatarArraySrc[0]][field.avatarArraySrc[1]] : entity[field.avatarSrc]"
