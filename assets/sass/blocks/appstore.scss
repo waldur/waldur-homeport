@@ -456,3 +456,27 @@
         }
     }
 }
+
+.project-alert-message {
+    $shadow: 0px 2px 2px 0px #ededed;
+    position: fixed;
+    top: 40%;
+    width: 100%;
+    padding: 0 20%;
+    p {
+        background-color: #ffffff;
+        padding: 20px;
+        -webkit-box-shadow: $shadow;
+        -moz-box-shadow:    $shadow;
+        box-shadow:         $shadow;
+        position: relative;
+        padding-top: 40px;
+        border: 1px solid #cacaca;
+        span {
+            position: absolute;
+            top: 5px;
+            right: 8px;
+            cursor: pointer;
+        }
+    }
+}
