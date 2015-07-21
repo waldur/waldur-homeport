@@ -34,7 +34,15 @@ module.exports = function(grunt) {
         cssmin: {
             combine: {
                 files: {
-                    'app/static/css/style.min.css': ['app/static/css/style.css']
+                    'app/static/css/style.min.css': [
+                        'app/static/css/normalize.css',
+                        'app/static/css/font-awesome.min.css',
+                        'app/static/css/style.css',
+                        'app/static/css/angular-flash.css',
+                        'app/static/css/angucomplete-alt.css',
+                        'app/static/css/angular-chart.css',
+                        'app/static/css/xeditable.css'
+                    ]
                 }
             }
         },
@@ -357,13 +365,17 @@ module.exports = function(grunt) {
             options: {
                 livereload: true
             },
-            css: {
+            sass: {
                 files: ['assets/sass/*.scss', 'assets/sass/*/*.scss'],
                 tasks: ['sass', 'autoprefixer'],
                 options: {
                     spawn: false,
                     livereload: false,
                 }
+            },
+            css: {
+              files: ['app/static/css/*.css', '!app/static/css/style.min.css'],
+              tasks: ['cssmin'],
             },
             autoprefixer: {
                 files: 'assets/css/**',
@@ -372,6 +384,22 @@ module.exports = function(grunt) {
             images: {
                 files: ['assets/images/*.{png,jpg,gif}'],
                 tasks: ['imagemin'],
+            },
+            scripts: {
+                files: 'app/scripts/**/*.js',
+                tasks: ['concat', 'uglify'],
+                options: {
+                    debounceDelay: 1000
+                }
+            }
+        },
+
+        focus: {
+            dev: {
+                include: ['sass', 'autoprefixer', 'images']
+            },
+            prod: {
+                include: ['sass', 'css', 'autoprefixer', 'images', 'scripts']
             }
         },
 
@@ -408,6 +436,72 @@ module.exports = function(grunt) {
             }
         },
 
+        concat: {
+            build: {
+                src: [
+                    'app/static/js/angular/angular.js',
+                    'app/static/js/angular/angular-animate.js',
+                    'app/static/js/angular/angular-cookies.js',
+                    'app/static/js/angular/angular-cron-jobs.js',
+                    'app/static/js/angular/angular-flash.js',
+                    'app/static/js/angular/angular-loader.js',
+                    'app/static/js/angular/angular-gravatar.js',
+                    'app/static/js/angular/moment.js',
+                    'app/static/js/angular/angulartics.js',
+                    'app/static/js/angular/angulartics-ga.js',
+                    'app/static/js/angular/angular-moment.js',
+                    'app/static/js/angular/angular-resource.js',
+                    'app/static/js/angular/angular-scroll.js',
+                    'app/static/js/angular/angular-ui-router.js',
+                    'app/static/js/angular/angucomplete-alt.js',
+                    'app/static/js/angular/satellizer.js',
+                    'app/static/js/angular/angular-spinner.min.js',
+                    'app/static/js/angular/angular-loading-spinner.js',
+                    'app/static/js/angular/angular-translate.js',
+                    'app/static/js/angular/angular-translate-storage-cookie.js',
+                    'app/static/js/angular/angular-translate-storage-local.js',
+                    'app/static/js/angular/angular-translate-loader-static-files.js',
+                    'app/static/js/angular/ng-file-upload.js',
+                    'app/static/js/spin.js',
+                    'app/static/js/Chart.js',
+                    'app/static/js/angular/tc-angular-chartjs.js',
+                    'app/static/js/angular/xeditable.js',
+                    'app/scripts/*.js',
+                    'app/scripts/configs/*.js',
+                    'app/scripts/controllers/*.js',
+                    'app/scripts/configs/*.js',
+                    'app/scripts/directives/*.js',
+                    'app/scripts/services/*.js'
+                ],
+                dest: 'app/static/js/main/main.js'
+            }
+        },
+        uglify: {
+            options: {
+                report: 'min',
+                mangle: false
+            },
+            my_target: {
+                files: {
+                    'app/static/js/main/main.min.js': ['app/static/js/main/main.js']
+                }
+            }
+        },
+        env : {
+            dev: {
+                NODE_ENV : 'DEVELOPMENT'
+            },
+            prod : {
+                NODE_ENV : 'PRODUCTION'
+            }
+        },
+        preprocess : {
+            index : {
+                src : 'app/index-template.html',
+                dest : 'app/index.html'
+            }
+        }
+
     });
 
     require('load-grunt-tasks')(grunt);
@@ -415,7 +509,7 @@ module.exports = function(grunt) {
     grunt.registerTask(
         'build', ['copy', 'imagemin', 'sass', 'autoprefixer', 'cssmin']);
     grunt.registerTask(
-        'run', ['copy', 'connect:server', 'imagemin', 'sass', 'autoprefixer', 'watch']);
+        'run', ['copy', 'env:dev', 'preprocess:index', 'connect:server', 'imagemin', 'sass', 'autoprefixer', 'focus:dev']);
     grunt.registerTask('serve', ['connect',]);
     grunt.registerTask('default', ['run']);
     grunt.registerTask('test',
@@ -423,5 +517,9 @@ module.exports = function(grunt) {
 
     grunt.loadNpmTasks('grunt-angular-gettext');
     grunt.loadNpmTasks('grunt-po2json-angular-translate');
+
+    grunt.registerTask(
+      'prod', ['copy', 'env:prod', 'preprocess:index', 'connect:server', 'imagemin', 'sass', 'autoprefixer', 'concat',
+        'uglify', 'cssmin', 'focus:prod']);
 
 };

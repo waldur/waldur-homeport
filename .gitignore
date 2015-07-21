@@ -36,3 +36,6 @@ app/scripts/configs/custom-config.js
 
 # i18n
 *.mo
+
+# index file
+app/index.html
