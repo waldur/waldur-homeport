@@ -603,7 +603,7 @@ angular
         url: '',
         views: {
           'appContent': {
-            templateUrl: 'views/resource/details-demo.html',
+            templateUrl: 'views/resource/list.html',
           },
           'appHeader': {
             templateUrl: 'views/partials/app-header.html',

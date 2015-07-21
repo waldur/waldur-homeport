@@ -1,6 +1,6 @@
 <div>
 
-    <div class="white-box" ng-show="entityList.list.length > 0 || entityList.searchInput">
+    <div class="white-box" ng-show="entityList.list.length > 0 || entityList.searchInput || entityList.chosenFilters">
         <ul class="sort-list">
             <li ng-if="entityOptions.entityData.title" class="title">
                 <h2 class="app-title">{{ entityOptions.entityData.title }}</h2>
@@ -23,7 +23,7 @@
         </ul>
     </div>
 
-    <div class="white-box no-styles" ng-show="entityList.list.length == 0 && !entityList.searchInput">
+    <div class="white-box no-styles" ng-show="entityList.list.length == 0 && !entityList.searchInput && !entityList.chosenFilters">
         <h2 class="app-title">
             {{ entityOptions.entityData.noDataText }}
         </h2>
