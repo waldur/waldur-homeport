@@ -96,18 +96,20 @@
           vm.list[index] = response;
         });
       },
-      prepareFilters: function($scope) {
-        this.service.defaultFilter['resource_type'] = [];
-        for (var i = 0; i < this.searchFilters.length; i++) {
-          var filter = this.searchFilters[i];
-          this.chosenFilters.push(filter);
-          this.service.defaultFilter['resource_type'].push(filter.value);
-        };
+      connectSearchInput: function($scope) {
         var vm = this;
         $scope.$on('search', function(event, searchInput){
           vm.searchInput = searchInput;
           vm.search();
         })
+        for (var i = 0; i < vm.searchFilters.length; i++) {
+          var filter = vm.searchFilters[i];
+          vm.service.defaultFilter[filter.name] = [];
+        };
+        for (var i = 0; i < vm.searchFilters.length; i++) {
+          var filter = vm.searchFilters[i];
+          vm.service.defaultFilter[filter.name].push(filter.value);
+        };
       }
     });
 
@@ -117,11 +119,13 @@
   angular.module('ncsaas')
     .controller('ResourceListController', [
       'baseResourceListController',
+      'ENTITYLISTFIELDTYPES',
+      'ENV',
       'resourcesService',
       '$scope',
       ResourceListController]);
 
-  function ResourceListController(baseResourceListController, resourcesService, $scope) {
+  function ResourceListController(baseResourceListController, ENTITYLISTFIELDTYPES, ENV, resourcesService, $scope) {
     var controllerScope = this;
     var ResourceController = baseResourceListController.extend({
       init:function() {
@@ -144,7 +148,39 @@
             value: 'Amazon.EC2'
           }
         ];
-        this.prepareFilters($scope);
+        this.selectAll = true;
+        this.entityOptions = {
+          entityData: {
+            noDataText: 'You have no applications yet.'
+          },
+          list: [
+            {
+              type: ENTITYLISTFIELDTYPES.statusCircle,
+              propertyName: 'state',
+              onlineStatus: ENV.resourceOnlineStatus
+            },
+            {
+              name: 'Name',
+              propertyName: 'name',
+              type: ENTITYLISTFIELDTYPES.name,
+              link: 'resources.details({uuid: entity.uuid, service_type: entity.service_type})',
+              showForMobile: ENTITYLISTFIELDTYPES.showForMobile
+            },
+            {
+              name: 'Type',
+              propertyName: 'resource_type',
+              type: ENTITYLISTFIELDTYPES.noType
+            },
+            {
+              name: 'Project',
+              propertyName: 'project_name',
+              type: ENTITYLISTFIELDTYPES.link,
+              link: 'projects.details({uuid: entity.project_uuid })'
+            }
+          ]
+        };
+
+        this.connectSearchInput($scope);
         this._super();
       }
     });
@@ -177,7 +213,8 @@
             value: 'GitLab.Project'
           }
         ];
-        this.prepareFilters($scope);
+        this.selectAll = true;
+        this.connectSearchInput($scope);
         this._super();
       }
     });
@@ -364,9 +401,9 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('ResourceDemoController', ['$scope', ResourceDemoController]);
+    .controller('ResourceController', ['$scope', ResourceController]);
 
-    function ResourceDemoController($scope) {
+    function ResourceController($scope) {
       $scope.search = function() {
         $scope.$broadcast('search', $scope.searchText);
       }
