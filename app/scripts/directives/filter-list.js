@@ -34,6 +34,8 @@
               delete controller.service.defaultFilter[filter.name];
             }
           }
+          controller.currentPage = 1;
+          controller.service.page = 1;
           controller.getList();
         }
 

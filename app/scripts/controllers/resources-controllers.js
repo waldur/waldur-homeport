@@ -68,23 +68,6 @@
             }
           ]
         };
-        this.searchFilters = [
-          {
-            name: 'resource_type',
-            title: 'OpenStack',
-            value: 'IaaS.Instance'
-          },
-          {
-            name: 'resource_type',
-            title: 'DigitalOcean',
-            value: 'DigitalOcean.Droplet'
-          },
-          {
-            name: 'resource_type',
-            title: 'AWS EC2',
-            value: 'Amazon.EC2'
-          }
-        ];
       },
       stopResource:function(resource) {
         var vm = this;
@@ -112,6 +95,19 @@
           var index = vm.list.indexOf(resource);
           vm.list[index] = response;
         });
+      },
+      prepareFilters: function($scope) {
+        this.service.defaultFilter['resource_type'] = [];
+        for (var i = 0; i < this.searchFilters.length; i++) {
+          var filter = this.searchFilters[i];
+          this.chosenFilters.push(filter);
+          this.service.defaultFilter['resource_type'].push(filter.value);
+        };
+        var vm = this;
+        $scope.$on('search', function(event, searchInput){
+          vm.searchInput = searchInput;
+          vm.search();
+        })
       }
     });
 
@@ -119,14 +115,36 @@
   }
 
   angular.module('ncsaas')
-    .controller('ResourceListController', ['baseResourceListController', 'resourcesService', ResourceListController]);
+    .controller('ResourceListController', [
+      'baseResourceListController',
+      'resourcesService',
+      '$scope',
+      ResourceListController]);
 
-  function ResourceListController(baseResourceListController, resourcesService) {
+  function ResourceListController(baseResourceListController, resourcesService, $scope) {
     var controllerScope = this;
     var ResourceController = baseResourceListController.extend({
       init:function() {
         this.service = resourcesService;
         this.controllerScope = controllerScope;
+        this.searchFilters = [
+          {
+            name: 'resource_type',
+            title: 'OpenStack',
+            value: 'IaaS.Instance'
+          },
+          {
+            name: 'resource_type',
+            title: 'DigitalOcean',
+            value: 'DigitalOcean.Droplet'
+          },
+          {
+            name: 'resource_type',
+            title: 'AWS EC2',
+            value: 'Amazon.EC2'
+          }
+        ];
+        this.prepareFilters($scope);
         this._super();
       }
     });
@@ -134,6 +152,37 @@
     controllerScope.__proto__ = new ResourceController();
   }
 
+  angular.module('ncsaas')
+    .controller('ApplicationListController', [
+      'baseResourceListController',
+      'resourcesService',
+      '$scope',
+      ApplicationListController]);
+
+  function ApplicationListController(baseResourceListController, resourcesService, $scope) {
+    var controllerScope = this;
+    var ResourceController = baseResourceListController.extend({
+      init:function() {
+        this.service = resourcesService;
+        this.controllerScope = controllerScope;
+        this.searchFilters = [
+          {
+            name: 'resource_type',
+            title: 'Oracle',
+            value: 'Oracle.Database'
+          },
+          {
+            name: 'resource_type',
+            title: 'GitLab',
+            value: 'GitLab.Project'
+          }
+        ];
+        this.prepareFilters($scope);
+        this._super();
+      }
+    });
+    controllerScope.__proto__ = new ResourceController();
+  }
 })();
 
 (function() {
@@ -310,4 +359,16 @@
 
       controllerScope.__proto__ = new Controller();
   }
+})();
+
+
+(function() {
+  angular.module('ncsaas')
+    .controller('ResourceDemoController', ['$scope', ResourceDemoController]);
+
+    function ResourceDemoController($scope) {
+      $scope.search = function() {
+        $scope.$broadcast('search', $scope.searchText);
+      }
+    }
 })();

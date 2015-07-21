@@ -1,16 +1,28 @@
-<div>
+<div ng-controller="ResourceDemoController">
     <section class="title-wrapper">
         <div class="container">
             <h1>Resources</h1>
-            <ul class="sort-list">
+            <ul class="sort-list" ng-show="activeTab=='VMs'">
                 <li class="right-sort">
                     <a ui-sref="appstore.store" class="button">
                         <span class="icon plus"></span>
-                        <span>Add resource</span>
+                        <span>Add VM</span>
                     </a>
                     <a ui-sref="import.import" class="button">
                         <span class="icon plus"></span>
-                        Import resource
+                        Import VM
+                    </a>
+                </li>
+            </ul>
+            <ul class="sort-list" ng-show="activeTab=='Applications'">
+                <li class="right-sort">
+                    <a ui-sref="appstore.store" class="button">
+                        <span class="icon plus"></span>
+                        <span>Add app</span>
+                    </a>
+                    <a ui-sref="import.import" class="button">
+                        <span class="icon plus"></span>
+                        Import app
                     </a>
                 </li>
             </ul>
@@ -21,7 +33,7 @@
             <div class="tabs-wrapper">
                 <aside>
                     <div class="input-group">
-                        <input type="search" placeholder="Search"/>
+                        <input type="search" placeholder="Search" ng-model="searchText" ng-change="search()"/>
                     </div>
                     <ul class="tabs-links" ng-init="activeTab='VMs'">
                         <li ng-click="activeTab='VMs'"
@@ -43,6 +55,13 @@
                 <div class="tab-content" ng-switch="activeTab">
                     <entitylist ng-switch-when="VMs"
                                 ng-controller="ResourceListController as ResourceList"
+                                entity-list="ResourceList"
+                                entity-service="ResourceList.service"
+                                entity-buttons="ResourceList.actionButtonsListItems"
+                                entity-options="ResourceList.entityOptions"></entitylist>
+
+                    <entitylist ng-switch-when="Applications"
+                                ng-controller="ApplicationListController as ResourceList"
                                 entity-list="ResourceList"
                                 entity-service="ResourceList.service"
                                 entity-buttons="ResourceList.actionButtonsListItems"
