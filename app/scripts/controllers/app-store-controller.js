@@ -19,6 +19,7 @@
       secondStep: false,
       thirdStep: false,
       resourceTypesBlock: false,
+      showProjectAlertMessage: false,
 
       activeTab: null,
       successMessage: 'Purchase of {vm_name} was successful.',
@@ -28,6 +29,7 @@
       selectedServiceName: null,
       selectedCategory: {},
       selectedResourceType: null,
+      currentCustomer: {},
 
       configureStepNumber: 4,
 
@@ -44,6 +46,9 @@
         servicesService.getServicesList().then(function(response) {
           vm.servicesList = response;
         });
+        currentStateService.getCustomer().then(function(response) {
+          vm.currentCustomer = response;
+        })
       },
       setCategory: function(category) {
         this.selectedCategory = category;
@@ -77,9 +82,9 @@
         vm.formOptions = {};
         if (vm.selectedService.resources[vm.selectedResourceType]) {
           vm.instance = servicesService.$create(vm.selectedService.resources[vm.selectedResourceType]);
-          vm.setCurrentProject();
           servicesService.getOption(vm.selectedService.resources[vm.selectedResourceType]).then(function(response) {
             vm.setFormOptions(response.actions.POST);
+            vm.setCurrentProject();
           });
         }
       },
@@ -106,8 +111,23 @@
       setCurrentProject: function() {
         var vm = this;
         currentStateService.getProject().then(function(response) {
-          vm.instance[vm.UNIQUE_FIELDS.service_project_link] = response.url;
+          if (vm.isAvailableProject(response)) {
+            vm.instance[vm.UNIQUE_FIELDS.service_project_link] = response.url;
+          } else {
+            vm.showProjectAlertMessage = true;
+            vm.formOptions = {};
+            vm.thirdStep = false;
+          }
         });
+      },
+      isAvailableProject: function(currentProject) {
+        if (this.allFormOptions[this.UNIQUE_FIELDS.service_project_link]) {
+          var projectLinks = this.allFormOptions[this.UNIQUE_FIELDS.service_project_link].choices.map(function(choice) {
+            return choice.value;
+          });
+          return projectLinks.indexOf(currentProject.url) + 1;
+        }
+        return false;
       },
       canSave: function() {
         for (var name in this.allFormOptions) {
