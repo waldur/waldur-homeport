@@ -53,40 +53,45 @@
                     </ul>
                 </aside>
                 <div class="tab-content" ng-switch="activeTab">
-                    <entitylist ng-switch-when="VMs"
-                                ng-controller="ResourceListController as ResourceList"
-                                entity-list="ResourceList"
-                                entity-service="ResourceList.service"
-                                entity-buttons="ResourceList.actionButtonsListItems"
-                                entity-options="ResourceList.entityOptions"></entitylist>
+                    <div ng-switch-when="VMs"
+                         ng-controller="ResourceListController as ResourceList">
+                         <entitylist entity-list="ResourceList"
+                                     entity-service="ResourceList.service"
+                                     entity-buttons="ResourceList.actionButtonsListItems"
+                                     entity-options="ResourceList.entityOptions"></entitylist>
+                    </div>
 
-                    <entitylist ng-switch-when="Applications"
-                                ng-controller="ApplicationListController as ResourceList"
-                                entity-list="ResourceList"
-                                entity-service="ResourceList.service"
-                                entity-buttons="ResourceList.actionButtonsListItems"
-                                entity-options="ResourceList.entityOptions"></entitylist>
+                    <div ng-switch-when="Applications"
+                         ng-controller="ApplicationListController as ResourceList">
+                         <entitylist entity-list="ResourceList"
+                                     entity-service="ResourceList.service"
+                                     entity-buttons="ResourceList.actionButtonsListItems"
+                                     entity-options="ResourceList.entityOptions"></entitylist>
+                    </div>
 
-                    <entitylist ng-switch-when="Backups"
-                                ng-controller="BackupListController as ResourceList"
-                                entity-list="ResourceList"
-                                entity-service="ResourceList.service"
-                                entity-buttons="ResourceList.actionButtonsListItems"
-                                entity-options="ResourceList.entityOptions"></entitylist>
+                    <div ng-switch-when="Backups"
+                         ng-controller="BackupListController as ResourceList">
+                         <entitylist entity-list="ResourceList"
+                                     entity-service="ResourceList.service"
+                                     entity-buttons="ResourceList.actionButtonsListItems"
+                                     entity-options="ResourceList.entityOptions"></entitylist>
+                    </div>
 
-                    <entitylist ng-switch-when="People"
-                                ng-controller="UserListController as ResourceList"
-                                entity-list="ResourceList"
-                                entity-service="ResourceList.service"
-                                entity-buttons="ResourceList.actionButtonsListItems"
-                                entity-options="ResourceList.entityOptions"></entitylist>
+                    <div ng-switch-when="People"
+                         ng-controller="UserListController as ResourceList">
+                         <entitylist entity-list="ResourceList"
+                                     entity-service="ResourceList.service"
+                                     entity-buttons="ResourceList.actionButtonsListItems"
+                                     entity-options="ResourceList.entityOptions"></entitylist>
+                    </div>
 
-                    <entitylist ng-switch-when="Providers"
-                                ng-controller="ServiceListController as ResourceList"
-                                entity-list="ResourceList"
-                                entity-service="ResourceList.service"
-                                entity-buttons="ResourceList.actionButtonsListItems"
-                                entity-options="ResourceList.entityOptions"></entitylist>
+                    <div ng-switch-when="Providers"
+                         ng-controller="ServiceListController as ResourceList">
+                         <entitylist entity-list="ResourceList"
+                                     entity-service="ResourceList.service"
+                                     entity-buttons="ResourceList.actionButtonsListItems"
+                                     entity-options="ResourceList.entityOptions"></entitylist>
+                    </div>
                 </div>
             </div>
             <div class="clear"></div>
