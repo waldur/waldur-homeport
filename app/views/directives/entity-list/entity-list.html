@@ -1,6 +1,6 @@
 <div>
 
-    <div class="white-box" ng-show="entityList.list.length > 0 || entityList.searchInput || entityList.chosenFilters">
+    <div class="white-box" ng-show="entityList.list.length > 0 || entityList.searchInput || entityList.chosenFilters.length">
         <ul class="sort-list">
             <li ng-if="entityOptions.entityData.title" class="title">
                 <h2 class="app-title">{{ entityOptions.entityData.title }}</h2>
@@ -14,23 +14,34 @@
             <li>
                 <filter-list filter-controller="entityList"></filter-list>
             </li>
-            <li ng-if="entityOptions.entityData.createLink" class="right-sort">
-                <a ui-sref="{{ entityOptions.entityData.createLink }}" class="button">
+            <li class="right-sort">
+                <a ng-if="entityOptions.entityData.createLink"
+                   ui-sref="{{ entityOptions.entityData.createLink }}" class="button">
                     <span class="icon plus"></span>
                     <span>{{ entityOptions.entityData.createLinkText }}</span>
+                </a>
+                <a ng-if="entityOptions.entityData.importLink"
+                   ui-sref="{{ entityOptions.entityData.importLink }}" class="button">
+                    <span class="icon plus"></span>
+                    <span>{{ entityOptions.entityData.importLinkText }}</span>
                 </a>
             </li>
         </ul>
     </div>
 
-    <div class="white-box no-styles" ng-show="entityList.list.length == 0 && !entityList.searchInput && !entityList.chosenFilters">
+    <div class="white-box no-styles" ng-show="entityList.list.length == 0 && !entityList.searchInput && !entityList.chosenFilters.length">
         <h2 class="app-title">
             {{ entityOptions.entityData.noDataText }}
         </h2>
-        <div ng-if="entityOptions.entityData.createLink" class="decision">
+        <div class="decision">
             <div class="col">
-                <a ui-sref="{{ entityOptions.entityData.createLink }}" class="button">
+                <a ng-if="entityOptions.entityData.createLink"
+                   ui-sref="{{ entityOptions.entityData.createLink }}" class="button">
                     {{ entityOptions.entityData.createLinkText }}
+                </a>
+                <a ng-if="entityOptions.entityData.importLink"
+                   ui-sref="{{ entityOptions.entityData.importLink }}" class="button">
+                    {{ entityOptions.entityData.importLinkText }}
                 </a>
             </div>
         </div>

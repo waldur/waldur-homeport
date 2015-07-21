@@ -149,9 +149,16 @@
           }
         ];
         this.selectAll = true;
+        this.connectSearchInput($scope);
+        this._super();
+
         this.entityOptions = {
           entityData: {
-            noDataText: 'You have no applications yet.'
+            noDataText: 'You have no resources yet.',
+            createLink: 'resources.create',
+            createLinkText: 'Create VM',
+            importLink: 'import.import',
+            importLinkText: 'Import VM'
           },
           list: [
             {
@@ -179,9 +186,6 @@
             }
           ]
         };
-
-        this.connectSearchInput($scope);
-        this._super();
       }
     });
 
@@ -191,11 +195,13 @@
   angular.module('ncsaas')
     .controller('ApplicationListController', [
       'baseResourceListController',
+      'ENTITYLISTFIELDTYPES',
+      'ENV',
       'resourcesService',
       '$scope',
       ApplicationListController]);
 
-  function ApplicationListController(baseResourceListController, resourcesService, $scope) {
+  function ApplicationListController(baseResourceListController, ENTITYLISTFIELDTYPES, ENV, resourcesService, $scope) {
     var controllerScope = this;
     var ResourceController = baseResourceListController.extend({
       init:function() {
@@ -216,6 +222,40 @@
         this.selectAll = true;
         this.connectSearchInput($scope);
         this._super();
+        this.entityOptions = {
+          entityData: {
+            noDataText: 'You have no applications yet.',
+            createLink: 'resources.create',
+            createLinkText: 'Create app',
+            importLink: 'import.import',
+            importLinkText: 'Import app'
+          },
+          list: [
+            {
+              type: ENTITYLISTFIELDTYPES.statusCircle,
+              propertyName: 'state',
+              onlineStatus: ENV.resourceOnlineStatus
+            },
+            {
+              name: 'Name',
+              propertyName: 'name',
+              type: ENTITYLISTFIELDTYPES.name,
+              link: 'resources.details({uuid: entity.uuid, service_type: entity.service_type})',
+              showForMobile: ENTITYLISTFIELDTYPES.showForMobile
+            },
+            {
+              name: 'Type',
+              propertyName: 'resource_type',
+              type: ENTITYLISTFIELDTYPES.noType
+            },
+            {
+              name: 'Project',
+              propertyName: 'project_name',
+              type: ENTITYLISTFIELDTYPES.link,
+              link: 'projects.details({uuid: entity.project_uuid })'
+            }
+          ]
+        };
       }
     });
     controllerScope.__proto__ = new ResourceController();
