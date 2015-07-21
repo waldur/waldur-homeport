@@ -465,13 +465,13 @@
     padding: 0 20%;
     p {
         background-color: #ffffff;
-        padding: 20px;
+        padding: 30px 20px;
         -webkit-box-shadow: $shadow;
         -moz-box-shadow:    $shadow;
         box-shadow:         $shadow;
         position: relative;
-        padding-top: 40px;
         border: 1px solid #cacaca;
+        text-align: center;
         span {
             position: absolute;
             top: 5px;
