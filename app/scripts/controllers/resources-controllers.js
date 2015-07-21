@@ -155,7 +155,7 @@
         this.entityOptions = {
           entityData: {
             noDataText: 'You have no resources yet.',
-            createLink: 'resources.create',
+            createLink: 'appstore.store',
             createLinkText: 'Create VM',
             importLink: 'import.import',
             importLinkText: 'Import VM'
@@ -225,7 +225,7 @@
         this.entityOptions = {
           entityData: {
             noDataText: 'You have no applications yet.',
-            createLink: 'resources.create',
+            createLink: 'appstore.store',
             createLinkText: 'Create app',
             importLink: 'import.import',
             importLinkText: 'Import app'
