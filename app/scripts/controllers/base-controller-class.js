@@ -61,6 +61,7 @@
 
       init:function() {
         this.setSignalHandler('currentCustomerUpdated', this.currentCustomerUpdatedHandler.bind(this));
+        this.service.page = 1;
         this._super();
         this.getList();
         // reset after state change

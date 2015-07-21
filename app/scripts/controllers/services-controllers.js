@@ -59,7 +59,9 @@
         this._super();
         this.entityOptions = {
           entityData: {
-            noDataText: 'No services yet.'
+            noDataText: 'No services yet.',
+            createLink: 'services.create',
+            createLinkText: 'Create service',
           },
           list: [
             {
