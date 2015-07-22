@@ -15,7 +15,7 @@
                              ng-click="AppStore.setCategory(category)"
                              ng-class="{'state': AppStore.selectedCategory == category}">
                             <div class="icon">
-                                <img ng-src="static/images/appstore/icon-{{ category.name }}.png" alt="">
+                                <img ng-src="static/images/appstore/icon-{{ category.name.toLowerCase() }}.png" alt="">
                             </div>
                             <h3>{{ category.name }}</h3>
                             <span>
