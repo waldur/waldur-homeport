@@ -519,7 +519,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-po2json-angular-translate');
 
     grunt.registerTask(
-      'prod', ['copy', 'env:prod', 'preprocess:index', 'connect:server', 'imagemin', 'sass', 'autoprefixer', 'concat',
+      'prod', ['copy', 'env:prod', 'preprocess:index', 'imagemin', 'sass', 'autoprefixer', 'concat',
         'uglify', 'cssmin', 'focus:prod']);
 
 };
