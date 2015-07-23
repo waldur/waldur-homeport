@@ -58,6 +58,7 @@
       'usersService',
       'Flash',
       'ENV',
+      '$stateParams',
       CustomerDetailUpdateController
     ]);
 
@@ -67,13 +68,15 @@
     customerImageService,
     usersService,
     Flash,
-    ENV
+    ENV,
+    $stateParams
     ) {
     var controllerScope = this;
     var CustomerController = baseControllerDetailUpdateClass.extend({
       activeTab: 'resources',
       customer: null,
       files: [],
+      canEdit: false,
 
       init: function() {
         this.service = customersService;
@@ -81,6 +84,39 @@
         this._super();
         this.detailsState = 'organizations.details';
         this.currentUser = usersService.currentUser;
+        this.detailsViewOptions = {
+          title: 'Customer',
+          activeTab: $stateParams.tab ? $stateParams.tab : this.activeTab,
+          hasLogo: true,
+          aboutFields: [
+            {
+              fieldKey: 'name',
+              isEditable: true,
+              className: 'name'
+            },
+            {
+              fieldKey: 'contact_details',
+              isEditable: true
+            }
+          ],
+          tabs: [
+            {
+              title: 'Resources',
+              key: 'resources',
+              viewName: 'tabResources'
+            },
+            {
+              title: 'Projects',
+              key: 'projects',
+              viewName: 'tabProjects'
+            },
+            {
+              title: 'Services',
+              key: 'services',
+              viewName: 'tabServices'
+            }
+          ]
+        };
       },
 
       isOwnerOrStaff: function(customer) {
@@ -93,6 +129,7 @@
       },
 
       afterActivate: function() {
+        controllerScope.canEdit = controllerScope.isOwnerOrStaff(controllerScope.model);
         controllerScope.updateImageUrl();
       },
 
@@ -173,10 +210,11 @@
       '$stateParams',
       'baseServiceListController',
       'cloudsService',
+      'ENTITYLISTFIELDTYPES',
       CustomerServiceTabController
     ]);
 
-  function CustomerServiceTabController($stateParams, baseServiceListController, cloudsService) {
+  function CustomerServiceTabController($stateParams, baseServiceListController, cloudsService, ENTITYLISTFIELDTYPES) {
     var controllerScope = this;
     var Controller = baseServiceListController.extend({
       init: function() {
@@ -186,6 +224,26 @@
         this.service.filterByCustomer = false;
         this._super();
         this.deregisterEvent('currentCustomerUpdated');
+
+        this.entityOptions = {
+          entityData: {
+            noDataText: 'You have no services yet.'
+          },
+          list: [
+            {
+              name: 'Name',
+              propertyName: 'name',
+              type: ENTITYLISTFIELDTYPES.name,
+              link: 'services.details({uuid: entity.uuid})',
+              showForMobile: ENTITYLISTFIELDTYPES.showForMobile
+            },
+            {
+              name: 'Type',
+              propertyName: 'provider',
+              type: ENTITYLISTFIELDTYPES.noType
+            }
+          ]
+        };
       }
     });
 
@@ -193,3 +251,92 @@
   }
 
 })();
+
+
+(function() {
+
+  angular.module('ncsaas')
+    .controller('CustomerProjectTabController', [
+      '$stateParams',
+      'baseControllerListClass',
+      'projectsService',
+      'ENTITYLISTFIELDTYPES',
+      CustomerProjectTabController
+    ]);
+
+  function CustomerProjectTabController($stateParams, baseControllerListClass, projectsService, ENTITYLISTFIELDTYPES) {
+    var controllerScope = this;
+    var Controller = baseControllerListClass.extend({
+      init: function() {
+        this.service = projectsService;
+        this.controllerScope = controllerScope;
+        this.service.defaultFilter.customer = $stateParams.uuid;
+        this.service.filterByCustomer = false;
+        this._super();
+        this.deregisterEvent('currentCustomerUpdated');
+        this.actionButtonsListItems = [
+          {
+            title: 'Archive',
+            clickFunction: function(project) {}
+          },
+          {
+            title: 'Delete',
+            clickFunction: this.remove.bind(controllerScope)
+          }
+        ];
+        this.entityOptions = {
+          entityData: {
+            noDataText: 'You have no projects yet.'
+          },
+          list: [
+            {
+              name: 'Name',
+              propertyName: 'name',
+              type: ENTITYLISTFIELDTYPES.name,
+              link: 'projects.details({uuid: entity.uuid})',
+              showForMobile: ENTITYLISTFIELDTYPES.showForMobile
+            },
+            {
+              name: 'Creation date',
+              propertyName: 'created',
+              type: ENTITYLISTFIELDTYPES.dateCreated
+            }
+          ]
+        };
+      }
+    });
+
+    controllerScope.__proto__ = new Controller();
+  }
+})();
+
+(function() {
+
+  angular.module('ncsaas')
+    .controller('CustomersResourceTabController', [
+      '$stateParams',
+      'baseResourceListController',
+      'resourcesService',
+      CustomersResourceTabController
+    ]);
+
+  function CustomersResourceTabController(
+    $stateParams,
+    baseResourceListController,
+    resourcesService
+  ) {
+    var controllerScope = this;
+    var ResourceController = baseResourceListController.extend({
+      init:function() {
+        this.service = resourcesService;
+        this.controllerScope = controllerScope;
+        this.service.defaultFilter.customer = $stateParams.uuid;
+        this._super();
+      }
+    });
+
+    controllerScope.__proto__ = new ResourceController();
+  }
+
+})();
+

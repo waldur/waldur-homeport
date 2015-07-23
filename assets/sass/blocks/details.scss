@@ -278,6 +278,15 @@
     margin-right: 18px;
     overflow: hidden;
   }
+  .icon {
+    width: 17px;
+    height: 15px;
+    background: url("/static/images/edit-icon.png") no-repeat;
+    float: left;
+    margin-left: 10px;
+    margin-top: 4px;
+    cursor: pointer;
+  }
   .about {
     .editable-click {
       border: 0;
@@ -307,15 +316,6 @@
         float: left;
         font-weight: bold;
       }
-      .icon {
-        width: 17px;
-        height: 15px;
-        background: url("/static/images/edit-icon.png") no-repeat;
-        float: left;
-        margin-left: 10px;
-        margin-top: 4px;
-        cursor: pointer;
-      }
     }
     p {
       font-size: 15px;
@@ -324,6 +324,27 @@
       line-height: 10px;
     }
 
+  }
+}
+.details-about {
+  @extend .user-about;
+  .name {
+    font-size: 24px;
+    font-weight: bold;
+    float: left;
+  }
+  .profile-logo {
+    margin: 0 10px 10px 0;
+    display: inline-block;
+    float: left;
+    .avatar-edit {
+      float: left;
+    }
+    .avatar {
+      float: left;
+      width: 80px;
+      margin-right: 5px;
+    }
   }
 }
 .password {
