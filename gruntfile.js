@@ -522,4 +522,8 @@ module.exports = function(grunt) {
       'prod', ['copy', 'env:prod', 'preprocess:index', 'imagemin', 'sass', 'autoprefixer', 'concat',
         'uglify', 'cssmin', 'focus:prod']);
 
+    grunt.registerTask(
+      'prodbatch', ['copy', 'env:prod', 'preprocess:index', 'imagemin', 'sass', 'autoprefixer', 'concat',
+        'uglify', 'cssmin']);
+
 };
