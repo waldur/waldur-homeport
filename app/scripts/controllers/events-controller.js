@@ -77,9 +77,22 @@
     controllerScope.__proto__ = new EventController();
   }
   angular.module('ncsaas')
-    .controller('DemoEventListController', ['baseEventListController', 'ENV', DemoEventListController]);
+    .controller('DemoEventListController', [
+      'baseEventListController',
+      'projectsService',
+      'alertsService',
+      'eventsService',
+      'eventStatisticsService',
+      'ENV',
+      DemoEventListController]);
 
-  function DemoEventListController(baseEventListController, ENV) {
+  function DemoEventListController(
+    baseEventListController,
+    projectsService,
+    alertsService,
+    eventsService,
+    eventStatisticsService,
+    ENV) {
     var controllerScope = this;
     var EventController = baseEventListController.extend({
       init:function() {
@@ -87,21 +100,6 @@
         this.cacheTime = ENV.dashboardEventsCacheTime;
         this._super();
         this.activeTab = 'activity';
-        this.data = {
-          labels: ["Monday", "Tuesday", "Wednsday", "Thursday", "Friday", "Saturday", "Sunday"],
-          datasets: [
-            {
-              label: "Events",
-              fillColor: "rgba(220,220,220,0.2)",
-              strokeColor: "rgba(220,220,220,1)",
-              pointColor: "rgba(220,220,220,1)",
-              pointStrokeColor: "#fff",
-              pointHighlightFill: "#fff",
-              pointHighlightStroke: "rgba(220,220,220,1)",
-              data: [65, 59, 80, 81, 56, 55, 40]
-            }
-          ]
-        };
         this.costData = {
           labels: ["January", "February", "March", "April", "May", "June", "July"],
           datasets: [
@@ -133,6 +131,81 @@
           scaleShowVerticalLines: false,
           scaleShowGridLines : false
         };
+
+        this.getProjects();
+        this.getEventsList();
+        this.getAlerts();
+      },
+
+      getAlerts: function (project) {
+        var vm = this;
+        alertsService.getList().then(function(response){
+          vm.alerts = response;
+        })
+      },
+
+      getEventsList: function (project) {
+        var vm = this;
+        eventsService.getList().then(function(response){
+          vm.events = response;
+        })
+      },
+
+      getProjects: function() {
+        var vm = this;
+        projectsService.getList().then(function(response) {
+          vm.projects = response;
+          vm.projects.forEach(function(project){
+            vm.getResources(project);
+            vm.getEventsStatistics(project);
+          })
+        });
+      },
+
+      getResources: function (project) {
+        for (var i = 0; i < project.quotas.length; i++) {
+          if (project.quotas[i].name == 'nc_resource_count') {
+            project.resources = project.quotas[i].usage;
+          } else if (project.quotas[i].name == 'nc_service_count') {
+            project.services = project.quotas[i].usage;
+          }
+        }
+      },
+
+      getEventsStatistics: function (project) {
+        var end = moment.utc().unix();
+        var start = moment.utc().subtract(1, 'week').unix();
+        eventStatisticsService.getList({
+          'start': start,
+          'end': end,
+          'points_count': 7 // days in week
+        }).then(function(response){
+          var labels = [];
+          var points = [];
+          for (var i = 0; i < response.length; i++) {
+            var date = moment.unix(response[i].point);
+            var day = date.format('dddd');
+            var value = response[i].object.count;
+            labels.push(day);
+            points.push(value);
+          };
+
+          project.chartData = {
+            labels: labels,
+            datasets: [
+              {
+                label: "Events",
+                fillColor: "rgba(220,220,220,0.2)",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: points
+              }
+            ]
+          };
+        })
       }
     });
 

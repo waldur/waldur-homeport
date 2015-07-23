@@ -9,7 +9,7 @@
                 <a ng-click="EventList.activeTab = 'costs'">Costs</a>
             </li>
         </ul>
-        <div class="button-apply" ng-show="EventList.activeTab == 'activity'">
+        <div ui-sref="projects.create" class="button-apply" ng-show="EventList.activeTab == 'activity'">
             Add new project
         </div>
 
@@ -130,188 +130,79 @@
          ng-class="{'active-content':EventList.activeTab == 'activity',
                     'inactive-content':EventList.activeTab == 'costs'}">
         <div class="row">
-            <div ng-repeat="project in [0,1]" class="half-block graph">
+            <div ng-repeat="project in EventList.projects" class="half-block graph">
                 <div class="white-box">
-                    <h3>Project name: Public website {{ project }}</h3>
+                    <h3 ui-sref="projects.details({uuid: project.uuid})">Project name: {{ project.name }}</h3>
                     <ul class="counters">
                         <li class="active-alert">
                             <div class="counter-name">Active alerts</div>
-                            <div class="counter">2</div>
+                            <div class="counter" ng-bind="project.alertsCount"></div>
                         </li>
                         <li class="resources empty">
                             <div class="counter-name">Resources</div>
-                            <div class="counter">10</div>
+                            <div class="counter" ng-bind="project.resources"></div>
                         </li>
                         <li class="services empty">
                             <div class="counter-name">Services</div>
-                            <div class="counter">1</div>
+                            <div class="counter" ng-bind="project.services"></div>
                         </li>
                         <li class="people">
                             <div class="counter-name">People</div>
-                            <div class="counter">2</div>
+                            <div class="counter" ng-bind="project.users"></div>
                         </li>
 
                     </ul>
                     <div class="clear"></div>
                     <div class="chart">
                         <div class="label">No of events per day</div>
-                        <canvas tc-chartjs chart-type="line"
+                        <canvas ng-if="project.chartData"
                                 chart-options="EventList.chartOptions"
-                                chart-data="EventList.data" width="400" height="120"></canvas>
+                                chart-data="project.chartData"
+                                tc-chartjs chart-type="line"
+                                width="400" height="120"></canvas>
                     </div>
                 </div>
             </div>
         </div>
-        <a class="center-link" href="#">Show all projects</a>
+        <a ui-sref="projects.list" class="center-link">Show all projects</a>
         <div class="row">
             <div class="half-block alerts-list">
                 <h3>Alerts</h3>
                 <div class="white-box">
                     <ul>
-                        <li class="fail">
+                        <li ng-repeat="alert in EventList.alerts" ng-class="{'fail': alert.severity=='error'}">
                             <div class="left-p">
                                 <div class="icon"></div>
-                                <span>Critical CPU level </span>
+                                <span ng-bind="::alert.message"></span>
                             </div>
                             <div class="right-p">
-                                <span class="date">20 June 2015</span>
-                                <span class="time">19:31</span>
-                            </div>
-                            <div class="clear"></div>
-                        </li>
-                        <li>
-                            <div class="left-p">
-                                <div class="icon"></div>
-                                <span>Critical CPU level </span>
-                            </div>
-                            <div class="right-p">
-                                <span class="date">20 June 2015</span>
-                                <span class="time">19:31</span>
-                            </div>
-                            <div class="clear"></div>
-                        </li>
-                        <li>
-                            <div class="left-p">
-                                <div class="icon"></div>
-                                <span>Critical CPU level </span>
-                            </div>
-                            <div class="right-p">
-                                <span class="date">20 June 2015</span>
-                                <span class="time">19:31</span>
-                            </div>
-                            <div class="clear"></div>
-                        </li>
-                        <li>
-                            <div class="left-p">
-                                <div class="icon"></div>
-                                <span>Critical CPU level </span>
-                            </div>
-                            <div class="right-p">
-                                <span class="date">20 June 2015</span>
-                                <span class="time">19:31</span>
-                            </div>
-                            <div class="clear"></div>
-                        </li>
-                        <li>
-                            <div class="left-p">
-                                <div class="icon"></div>
-                                <span>Critical CPU level </span>
-                            </div>
-                            <div class="right-p">
-                                <span class="date">20 June 2015</span>
-                                <span class="time">19:31</span>
-                            </div>
-                            <div class="clear"></div>
-                        </li>
-                        <li>
-                            <div class="left-p">
-                                <div class="icon"></div>
-                                <span>Critical CPU level </span>
-                            </div>
-                            <div class="right-p">
-                                <span class="date">20 June 2015</span>
-                                <span class="time">19:31</span>
+                                <span class="date" ng-bind="alert.created"></span>
+                                <span class="time"></span>
                             </div>
                             <div class="clear"></div>
                         </li>
                     </ul>
                 </div>
-                <a class="show-all" href="#">Show all alerts</a>
+                <a class="show-all">Show all alerts</a>
             </div>
             <div class="half-block alerts-list">
                 <h3>Recent Events</h3>
                 <div class="white-box">
                     <ul>
-                        <li>
+                        <li ng-repeat="event in EventList.events">
                             <div class="left-p">
-
-                                <span>Project XXX was created</span>
+                                <span ng-bind="event.message"></span>
                             </div>
                             <div class="right-p">
-                                <span class="date">4 minutes ago</span>
+                                <span class="date" am-time-ago="event['@timestamp']"></span>
                             </div>
                             <div class="clear"></div>
                         </li>
-                        <li>
-                            <div class="left-p">
-
-                                <span>Project XXX was created</span>
-                            </div>
-                            <div class="right-p">
-                                <span class="date">4 minutes ago</span>
-                            </div>
-                            <div class="clear"></div>
-                        </li>
-                        <li>
-                            <div class="left-p">
-
-                                <span>Project XXX was created</span>
-                            </div>
-                            <div class="right-p">
-                                <span class="date">4 minutes ago</span>
-                            </div>
-                            <div class="clear"></div>
-                        </li>
-                        <li>
-                            <div class="left-p">
-
-                                <span>Project XXX was created</span>
-                            </div>
-                            <div class="right-p">
-                                <span class="date">4 minutes ago</span>
-                            </div>
-                            <div class="clear"></div>
-                        </li>
-                        <li>
-                            <div class="left-p">
-                                <span>Project XXX was created</span>
-                            </div>
-                            <div class="right-p">
-                                <span class="date">4 minutes ago</span>
-                            </div>
-                            <div class="clear"></div>
-                        </li>
-                        <li>
-                            <div class="left-p">
-                                <span>Project XXX has been created</span>
-                            </div>
-                            <div class="right-p">
-                                <span class="date">4 minutes ago</span>
-                            </div>
-                            <div class="clear"></div>
-                        </li>
-
                     </ul>
                 </div>
-                <a class="show-all" href="#">Show all recent events</a>
+                <a class="show-all">Show all recent events</a>
             </div>
-
-
         </div>
         <div class="clear"></div>
-
     </div>
-
-
-
 </div>
