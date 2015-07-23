@@ -15,7 +15,7 @@
                              ng-click="AppStore.setCategory(category)"
                              ng-class="{'state': AppStore.selectedCategory == category}">
                             <div class="icon">
-                                <img ng-src="static/images/appstore/icon-{{ category.name }}.png" alt="">
+                                <img ng-src="static/images/appstore/icon-{{ category.name.toLowerCase() }}.png" alt="">
                             </div>
                             <h3>{{ category.name }}</h3>
                             <span>
@@ -29,12 +29,12 @@
                     <div class="step-title"><span>Step 2: Choose provider</span></div>
                     <div class="appstore-templates">
                         <!-- service -->
-                        <div class="appstore-template"
+                        <div class="appstore-template {{ service.toLowerCase() }}"
                              ng-repeat="service in AppStore.selectedCategory.services"
                              ng-click="AppStore.setService(service)"
                              ng-class="{'state': AppStore.selectedServiceName == service}">
                             <div class="icon">
-                                <img ng-src="/static/images/appstore/icon-{{ service }}.png" alt="">
+                                <img ng-src="/static/images/appstore/icon-{{ service.toLowerCase() }}.png" alt="">
                             </div>
                             <h3>{{ service }}</h3>
                         </div>
