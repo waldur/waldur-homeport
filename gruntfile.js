@@ -481,24 +481,24 @@ module.exports = function(grunt) {
                 report: 'min',
                 mangle: false
             },
-            my_target: {
+            main: {
                 files: {
                     'app/static/js/main/main.min.js': ['app/static/js/main/main.js']
                 }
             }
         },
-        env : {
+        env: {
             dev: {
-                NODE_ENV : 'DEVELOPMENT'
+                NODE_ENV: 'DEVELOPMENT'
             },
             prod : {
-                NODE_ENV : 'PRODUCTION'
+                NODE_ENV: 'PRODUCTION'
             }
         },
-        preprocess : {
-            index : {
-                src : 'app/index-template.html',
-                dest : 'app/index.html'
+        preprocess: {
+            index: {
+                src: 'app/index-template.html',
+                dest: 'app/index.html'
             }
         }
 
