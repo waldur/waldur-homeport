@@ -13,19 +13,19 @@
                     </div>
                     <ul class="tabs-links" ng-init="activeTab='VMs'">
                         <li ng-click="activeTab='VMs'"
-                            ng-class="{'active': activeTab=='VMs'}">VMs (<span>5</span>)</li>
+                            ng-class="{'active': activeTab=='VMs'}">VMs <b ng-if="::count">(<span ng-bind="::count.vms"></span>)</b></li>
 
                         <li ng-click="activeTab='Applications'"
-                            ng-class="{'active': activeTab=='Applications'}">Applications (<span>5</span>)</li>
+                            ng-class="{'active': activeTab=='Applications'}">Applications <b ng-if="::count">(<span ng-bind="::count.apps"></span>)</b></li>
 
                         <li ng-click="activeTab='Backups'"
-                            ng-class="{'active': activeTab=='Backups'}">Backups (<span>5</span>)</li>
+                            ng-class="{'active': activeTab=='Backups'}">Backups <b ng-if="::count">(<span ng-bind="::count.backups"></span>)</b></li>
 
                         <li ng-click="activeTab='People'"
-                            ng-class="{'active': activeTab=='People'}">People (<span>4</span>)</li>
+                            ng-class="{'active': activeTab=='People'}">People <b ng-if="::count">(<span ng-bind="::count.users"></span>)</b></li>
 
                         <li ng-click="activeTab='Providers'"
-                            ng-class="{'active': activeTab=='Providers'}">Providers (<span>3</span>)</li>
+                            ng-class="{'active': activeTab=='Providers'}">Providers <b ng-if="::count">(<span ng-bind="::count.services"></span>)</b></li>
                     </ul>
                 </aside>
                 <div class="tab-content" ng-switch="activeTab">
