@@ -269,7 +269,7 @@
       getService: function() {
         this.resource_type = $stateParams.resource_type;
         var services = {
-          'IaaS': openstackInstancesService,
+          'Instance': openstackInstancesService,
           'Droplet': digitalOceanResourcesService
         };
         return services[this.resource_type];

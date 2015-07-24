@@ -515,10 +515,10 @@
 
       getList: function(filter) {
         var vm = this;
-        var fn = this._super;
+        var fn = this._super.bind(this);
         currentStateService.getProject().then(function(project){
           vm.service.defaultFilter.project_uuid = project.uuid;
-          fn.apply(vm, filter);
+          fn(filter);
         })
       }
     });
