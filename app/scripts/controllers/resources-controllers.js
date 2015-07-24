@@ -50,7 +50,7 @@
               name: 'Name',
               propertyName: 'name',
               type: ENTITYLISTFIELDTYPES.name,
-              link: 'resources.details({uuid: entity.uuid, service_type: entity.service_type})',
+              link: 'resources.details({uuid: entity.uuid, resource_type: entity.resource_type})',
               showForMobile: ENTITYLISTFIELDTYPES.showForMobile
             },
             {
@@ -243,7 +243,7 @@
         '$stateParams',
         '$scope',
         'digitalOceanResourcesService',
-        'openstackService',
+        'openstackInstancesService',
         'baseControllerDetailUpdateClass',
         ResourceDetailUpdateController
       ]);
@@ -252,19 +252,27 @@
     $stateParams,
     $scope,
     digitalOceanResourcesService,
-    openstackService,
+    openstackInstancesService,
     baseControllerDetailUpdateClass) {
     var controllerScope = this;
     var Controller = baseControllerDetailUpdateClass.extend({
       activeTab: 'backups',
 
       init:function() {
-        this.service_type = $stateParams.service_type;
-        this.service = this.service_type == 'IaaS' ? openstackService : digitalOceanResourcesService;
+        this.service = this.getService();
         this.controllerScope = controllerScope;
         this._super();
         this.detailsState = 'resources.details';
         this.activeTab = $stateParams.tab ? $stateParams.tab : this.activeTab;
+      },
+
+      getService: function() {
+        this.resource_type = $stateParams.resource_type;
+        var services = {
+          'IaaS': openstackInstancesService,
+          'Droplet': digitalOceanResourcesService
+        };
+        return services[this.resource_type];
       },
 
       afterActivate: function() {

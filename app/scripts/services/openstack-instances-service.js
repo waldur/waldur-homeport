@@ -2,9 +2,9 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('openstackService', ['baseServiceClass', openstackService]);
+    .service('openstackInstancesService', ['baseServiceClass', openstackInstancesService]);
 
-  function openstackService(baseServiceClass) {
+  function openstackInstancesService(baseServiceClass) {
     var ServiceClass = baseServiceClass.extend({
       init:function() {
         this._super();

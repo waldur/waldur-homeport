@@ -633,7 +633,7 @@
         })
 
         .state('resources.details', {
-          url: ':service_type/:uuid/:tab',
+          url: ':resource_type/:uuid/:tab',
           views: {
             'appContent': {
               templateUrl: 'views/resource/details.html',
@@ -658,7 +658,7 @@
         })
 
         .state('resources.update', {
-          url: ':service_type/:uuid/edit/:tab',
+          url: ':resource_type/:uuid/edit/:tab',
           views: {
             'appContent': {
               templateUrl: 'views/resource/update.html',
