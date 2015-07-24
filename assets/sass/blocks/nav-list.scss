@@ -45,7 +45,12 @@
                 display: none;
             } // md
         } // logo-box
-        &:not(.logo-box):not(.mobile-trigger):not(.node-conductor) {
+        &:not(.logo-box):not(.mobile-trigger):not(.customers):not(.project-dropdown):not(.user-dropdown) {
+            @include bp(sm) {
+                display: none;
+            } // xs
+        }
+        &:not(.logo-box):not(.mobile-trigger):not(.customers):not(.project-dropdown) {
             @include bp(xs) {
                 display: none;
             } // xs
@@ -56,6 +61,7 @@
             } // sm
             @include bp(md) {
                 margin-right: 20px;
+                padding-left: 45px;
             } // md
             background-color: $navListBackgroundColor;
             position: relative;
@@ -78,6 +84,9 @@
         &.mobile-trigger {
             display: none;
             @include bp(xs) {
+                display: block;
+            } // xs
+            @include bp(sm) {
                 display: block;
             } // xs
         } // .mobile-trigger
@@ -105,9 +114,6 @@
                     border-top-color: #fff;
                     right: 3px;
                     bottom: 16px;
-                    @include bp(sm) {
-                        display: none;
-                    } // sm
                 } // &:after
             }
         } // &.dropdown
@@ -136,15 +142,34 @@
             } // md
         } // &.customer-support
         &.customers {
-            @include bp(sm) {
-                display: none;
-            } // sm
-            @include bp(md) {
-                display: none;
-            } // md
             $backgroundColor: #4fb547;
             background-color: $backgroundColor;
             padding-left: 20px;
+            @include bp(md) {
+                padding-left: 0;
+            } // md
+            @include bp(xs) {
+                padding-left: 0;
+                a {
+                    padding-left: 0;
+                    padding-right: 0;
+                    &:after {
+                        right: -10px;
+                    }
+                    &.customer-context {
+                        .customer-name {
+                            max-width: 105px;
+                        }
+                    }
+                }
+            } // md
+            @include bp(sm) {
+                a {
+                    &:after {
+                        right: -10px;
+                    }
+                }
+            }
             &:after {
                 content: "";
                 width: 0;
@@ -231,6 +256,9 @@
                 .customer-name {
                     max-width: 140px;
                     height: 18px;
+                    @include bp(md) {
+                        max-width: 130px;
+                    } // md
                     @include elipsis;
                 } // customer-name
                 .active-context {
@@ -265,6 +293,11 @@
                 } // &:before
             } // &.support
             &.user-area {
+                &:after {
+                    @include bp(sm) {
+                        display: none;
+                    } // sm
+                }
                 @include property(padding-top, 5);
                 .user-name {
                     @include elipsis;
@@ -276,6 +309,9 @@
                     @include bp(sm) {
                         display: none;
                     } // sm
+                    @include bp(md) {
+                        max-width: 160px;
+                    } // md
                 } // user-name
             } // &.user-area
             &.service {
@@ -332,16 +368,33 @@
             } // &.mobile-trigger-link
         } // > a
         &.project-dropdown {
-            @include bp(sm) {
-                display: none;
-            } // sm
-            @include bp(md) {
-                display: none;
-            } // md
             $backgroundColor: #8dc63f;
             background: $backgroundColor;
             padding-left: 20px;
             margin-right: 20px;
+            @include bp(xs) {
+                margin-right: 0;
+                a {
+                    &.project-context {
+                        padding-left: 7px;
+                        padding-right: 0;
+                        .customer-name {
+                            max-width: 105px;
+                        }
+                    }
+                    &:after {
+                        right: -10px;
+                    }
+                }
+            }
+            @include bp(sm) {
+                a {
+                    &:after {
+                        right: -10px;
+                    }
+                }
+            }
+
             &:after {
                 content: "";
                 width: 0;
