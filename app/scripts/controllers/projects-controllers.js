@@ -603,6 +603,7 @@ angular.module('ncsaas')
       'projectPermissionsService',
       'currentStateService',
       'ENTITYLISTFIELDTYPES',
+      '$scope', 
       ProjectUsersTabController
     ]);
 
@@ -610,12 +611,14 @@ angular.module('ncsaas')
     baseControllerListClass,
     projectPermissionsService,
     currentStateService,
-    ENTITYLISTFIELDTYPES) {
+    ENTITYLISTFIELDTYPES,
+    $scope) {
 
     var controllerScope = this;
     var controllerClass = baseControllerListClass.extend({
       init: function() {
         this.controllerScope = controllerScope;
+        this.searchFieldName = 'name';
         this.service = projectPermissionsService;
 
         this.setSignalHandler('currentProjectUpdated', this.setCurrentProject.bind(controllerScope));
@@ -656,7 +659,14 @@ angular.module('ncsaas')
               type: ENTITYLISTFIELDTYPES.noType
             }
           ]
-        }
+        };
+
+        var vm = this;
+        $scope.$on('search', function(event, searchInput){
+          vm.searchInput = searchInput;
+          vm.search();
+        })
+
       },
       getList: function(filter) {
         var vm = this;
@@ -710,7 +720,7 @@ angular.module('ncsaas')
               name: 'Name',
               propertyName: 'service_name',
               type: ENTITYLISTFIELDTYPES.name,
-              link: 'services.details({uuid: entity.service_uuid, provider: entity.provider})',
+              link: 'services.details({uuid: entity.service_uuid, provider: entity.resource_type})',
               className: 'name'
             }
           ]

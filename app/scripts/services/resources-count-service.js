@@ -22,8 +22,6 @@
       'resources': factory('resources'),
       'backups': factory('backups'),
       'users': factory('project-permissions'),
-      'openstack': factory('project-cloud-memberships'),
-      'digitalocean': factory('digitalocean-service-project-link'),
     }
   }
 })();

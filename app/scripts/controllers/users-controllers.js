@@ -7,12 +7,11 @@
       'usersService',
       'projectPermissionsService',
       '$rootScope',
-      '$scope',
       'ENTITYLISTFIELDTYPES',
       UserListController
     ]);
 
-  function UserListController(baseControllerListClass, usersService, projectPermissionsService, $rootScope, $scope, ENTITYLISTFIELDTYPES) {
+  function UserListController(baseControllerListClass, usersService, projectPermissionsService, $rootScope, ENTITYLISTFIELDTYPES) {
     var controllerScope = this;
     var UserController = baseControllerListClass.extend({
       userProjects: {},
@@ -95,11 +94,6 @@
             }
           ]
         };
-        var vm = this;
-        $scope.$on('search', function(event, searchInput){
-          vm.searchInput = searchInput;
-          vm.search();
-        })
       },
       showMore: function(user) {
         if (!this.userProjects[user.username]) {
@@ -310,7 +304,6 @@
     controllerScope.__proto__ = new ProjectController();
   }
 })();
-
 
 (function() {
   angular.module('ncsaas')

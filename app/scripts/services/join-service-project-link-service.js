@@ -40,6 +40,13 @@
             for (var i = 0; i < responses.length; i++) {
               results = results.concat(responses[i]);
             };
+            for (var i = 0; i < results.length; i++) {
+              if (results[i].url.indexOf('digitalocean') > -1) {
+                results[i].resource_type = 'digitalocean';
+              } else {
+                results[i].resource_type = 'openstack';
+              }
+            };
             deferred.resolve(results);
           })
           return deferred.promise;
