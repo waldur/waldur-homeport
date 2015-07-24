@@ -112,96 +112,21 @@
   }
 
   angular.module('ncsaas')
-    .controller('ResourceListController', [
-      'baseResourceListController',
-      'ENTITYLISTFIELDTYPES',
-      'ENV',
-      'resourcesService',
-      '$scope',
-      'currentStateService',
-      ResourceListController]);
+    .controller('ResourceListController', ['baseResourceListController', 'resourcesService', ResourceListController]);
 
-  function ResourceListController(
-    baseResourceListController,
-    ENTITYLISTFIELDTYPES,
-    ENV,
-    resourcesService,
-    $scope,
-    currentStateService) {
+  function ResourceListController(baseResourceListController, resourcesService) {
     var controllerScope = this;
     var ResourceController = baseResourceListController.extend({
       init:function() {
         this.service = resourcesService;
         this.controllerScope = controllerScope;
-        this.searchFilters = [
-          {
-            name: 'resource_type',
-            title: 'OpenStack',
-            value: 'IaaS.Instance'
-          },
-          {
-            name: 'resource_type',
-            title: 'DigitalOcean',
-            value: 'DigitalOcean.Droplet'
-          },
-          {
-            name: 'resource_type',
-            title: 'AWS EC2',
-            value: 'Amazon.EC2'
-          }
-        ];
-        this.selectAll = true;
-        this.connectSearchInput($scope);
         this._super();
-      },
-
-      getList: function(filter) {
-        var vm = this;
-        var fn = this._super;
-        currentStateService.getProject().then(function(project){
-          vm.service.defaultFilter.project_uuid = project.uuid;
-          fn.apply(vm, filter);
-        })
       }
     });
 
     controllerScope.__proto__ = new ResourceController();
   }
 
-  angular.module('ncsaas')
-    .controller('ApplicationListController', [
-      'baseResourceListController',
-      'ENTITYLISTFIELDTYPES',
-      'ENV',
-      'resourcesService',
-      '$scope',
-      ApplicationListController]);
-
-  function ApplicationListController(baseResourceListController, ENTITYLISTFIELDTYPES, ENV, resourcesService, $scope) {
-    var controllerScope = this;
-    var ResourceController = baseResourceListController.extend({
-      init:function() {
-        this.service = resourcesService;
-        this.controllerScope = controllerScope;
-        this.searchFilters = [
-          {
-            name: 'resource_type',
-            title: 'Oracle',
-            value: 'Oracle.Database'
-          },
-          {
-            name: 'resource_type',
-            title: 'GitLab',
-            value: 'GitLab.Project'
-          }
-        ];
-        this.selectAll = true;
-        this.connectSearchInput($scope);
-        this._super();
-      }
-    });
-    controllerScope.__proto__ = new ResourceController();
-  }
 })();
 
 (function() {
@@ -378,47 +303,4 @@
 
       controllerScope.__proto__ = new Controller();
   }
-})();
-
-
-(function() {
-  angular.module('ncsaas')
-    .controller('ResourceController', [
-      '$scope',
-      '$rootScope',
-      '$q',
-      'currentStateService',
-      'resourcesCountService',
-      ResourceController]);
-
-    function ResourceController($scope, $rootScope, $q, currentStateService, resourcesCountService) {
-      $scope.search = function() {
-        $scope.$broadcast('search', $scope.searchText);
-      }
-
-      setCurrentProject();
-      $rootScope.$on('currentProjectUpdated', setCurrentProject);
-
-      function setCurrentProject() {
-        currentStateService.getProject().then(function(project) {
-          $q.all([
-            resourcesCountService.resources({'project_uuid': project.uuid, 'resource_type': ['DigitalOcean.Droplet', 'IaaS.Instance']}),
-            resourcesCountService.resources({'project_uuid': project.uuid, 'resource_type': ['Oracle.Database', 'GitLab.Project']}),
-            resourcesCountService.backups({'project_uuid': project.uuid}),
-            resourcesCountService.users({'project': project.uuid}),
-          ]).then(function(responses){
-            $scope.count = {};
-            $scope.count.vms = responses[0];
-            $scope.count.apps = responses[1];
-            $scope.count.backups = responses[2];
-            $scope.count.users = responses[3];
-            for (var i = 0; i < project.quotas.length; i++) {
-              if (project.quotas[i].name == 'nc_service_count') {
-                $scope.count.services = project.quotas[i].usage;
-              }
-            }
-          })
-        });
-      }
-    }
 })();

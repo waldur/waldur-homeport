@@ -1,4 +1,4 @@
-<div ng-controller="ResourceController">
+<div ng-controller="ProjectStatsController">
     <section class="title-wrapper">
         <div class="container">
             <h1>Resources</h1>
@@ -30,7 +30,7 @@
                 </aside>
                 <div class="tab-content" ng-switch="activeTab">
                     <div ng-switch-when="VMs"
-                         ng-controller="ResourceListController as ResourceList">
+                         ng-controller="ProjectResourcesTabController as ResourceList">
                          <entitylist entity-list="ResourceList"
                                      entity-service="ResourceList.service"
                                      entity-buttons="ResourceList.actionButtonsListItems"
@@ -38,7 +38,7 @@
                     </div>
 
                     <div ng-switch-when="Applications"
-                         ng-controller="ApplicationListController as ResourceList">
+                         ng-controller="ProjectApplicationsTabController as ResourceList">
                          <entitylist entity-list="ResourceList"
                                      entity-service="ResourceList.service"
                                      entity-buttons="ResourceList.actionButtonsListItems"
@@ -46,7 +46,7 @@
                     </div>
 
                     <div ng-switch-when="Backups"
-                         ng-controller="BackupListController as ResourceList">
+                         ng-controller="ProjectBackupsTabController as ResourceList">
                          <entitylist entity-list="ResourceList"
                                      entity-service="ResourceList.service"
                                      entity-buttons="ResourceList.actionButtonsListItems"
@@ -54,7 +54,7 @@
                     </div>
 
                     <div ng-switch-when="People"
-                         ng-controller="UserProjectResourcesController as ResourceList">
+                         ng-controller="ProjectUsersTabController as ResourceList">
                          <entitylist entity-list="ResourceList"
                                      entity-service="ResourceList.service"
                                      entity-buttons="ResourceList.actionButtonsListItems"
@@ -62,7 +62,7 @@
                     </div>
 
                     <div ng-switch-when="Providers"
-                         ng-controller="ProjectServiceListController as ResourceList">
+                         ng-controller="ProjectServicesTabController as ResourceList">
                          <entitylist entity-list="ResourceList"
                                      entity-service="ResourceList.service"
                                      entity-buttons="ResourceList.actionButtonsListItems"

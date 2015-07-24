@@ -114,7 +114,7 @@
               name: 'Name',
               propertyName: 'service_name',
               type: ENTITYLISTFIELDTYPES.name,
-              link: 'services.details({uuid: entity.service_uuid})',
+              link: 'services.details({uuid: entity.service_uuid, provider: entity.provider})',
               className: 'name'
             }
           ]
