@@ -34,7 +34,11 @@
         ];
         this.entityOptions = {
           entityData: {
-            noDataText: 'You have no resources yet.'
+            noDataText: 'You have no resources yet.',
+            createLink: 'appstore.store',
+            createLinkText: 'Create',
+            importLink: 'import.import',
+            importLinkText: 'Import'
           },
           list: [
             {
@@ -53,12 +57,6 @@
               name: 'Type',
               propertyName: 'resource_type',
               type: ENTITYLISTFIELDTYPES.noType
-            },
-            {
-              name: 'Project',
-              propertyName: 'project_name',
-              type: ENTITYLISTFIELDTYPES.link,
-              link: 'projects.details({uuid: entity.project_uuid })'
             },
             {
               name: 'Access',
@@ -151,41 +149,6 @@
         this.selectAll = true;
         this.connectSearchInput($scope);
         this._super();
-
-        this.entityOptions = {
-          entityData: {
-            noDataText: 'You have no resources yet.',
-            createLink: 'appstore.store',
-            createLinkText: 'Create VM',
-            importLink: 'import.import',
-            importLinkText: 'Import VM'
-          },
-          list: [
-            {
-              type: ENTITYLISTFIELDTYPES.statusCircle,
-              propertyName: 'state',
-              onlineStatus: ENV.resourceOnlineStatus
-            },
-            {
-              name: 'Name',
-              propertyName: 'name',
-              type: ENTITYLISTFIELDTYPES.name,
-              link: 'resources.details({uuid: entity.uuid, service_type: entity.service_type})',
-              showForMobile: ENTITYLISTFIELDTYPES.showForMobile
-            },
-            {
-              name: 'Type',
-              propertyName: 'resource_type',
-              type: ENTITYLISTFIELDTYPES.noType
-            },
-            {
-              name: 'Project',
-              propertyName: 'project_name',
-              type: ENTITYLISTFIELDTYPES.link,
-              link: 'projects.details({uuid: entity.project_uuid })'
-            }
-          ]
-        };
       }
     });
 
@@ -222,40 +185,6 @@
         this.selectAll = true;
         this.connectSearchInput($scope);
         this._super();
-        this.entityOptions = {
-          entityData: {
-            noDataText: 'You have no applications yet.',
-            createLink: 'appstore.store',
-            createLinkText: 'Create app',
-            importLink: 'import.import',
-            importLinkText: 'Import app'
-          },
-          list: [
-            {
-              type: ENTITYLISTFIELDTYPES.statusCircle,
-              propertyName: 'state',
-              onlineStatus: ENV.resourceOnlineStatus
-            },
-            {
-              name: 'Name',
-              propertyName: 'name',
-              type: ENTITYLISTFIELDTYPES.name,
-              link: 'resources.details({uuid: entity.uuid, service_type: entity.service_type})',
-              showForMobile: ENTITYLISTFIELDTYPES.showForMobile
-            },
-            {
-              name: 'Type',
-              propertyName: 'resource_type',
-              type: ENTITYLISTFIELDTYPES.noType
-            },
-            {
-              name: 'Project',
-              propertyName: 'project_name',
-              type: ENTITYLISTFIELDTYPES.link,
-              link: 'projects.details({uuid: entity.project_uuid })'
-            }
-          ]
-        };
       }
     });
     controllerScope.__proto__ = new ResourceController();
@@ -441,11 +370,41 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('ResourceController', ['$scope', ResourceController]);
+    .controller('ResourceController', [
+      '$scope',
+      '$q',
+      'currentStateService',
+      'resourcesCountService',
+      ResourceController]);
 
-    function ResourceController($scope) {
+    function ResourceController($scope, $q, currentStateService, resourcesCountService) {
       $scope.search = function() {
         $scope.$broadcast('search', $scope.searchText);
+      }
+
+      setCurrentProject();
+      $scope.$on('currentProjectUpdated', setCurrentProject);
+
+      function setCurrentProject() {
+        currentStateService.getProject().then(function(project) {
+          $q.all([
+            resourcesCountService.resources({'project_uuid': project.uuid, 'resource_type': ['DigitalOcean.Droplet', 'IaaS.Instance']}),
+            resourcesCountService.resources({'project_uuid': project.uuid, 'resource_type': ['Oracle.Database', 'GitLab.Project']}),
+            resourcesCountService.backups({'project_uuid': project.uuid}),
+            resourcesCountService.users({'project': project.uuid}),
+          ]).then(function(responses){
+            $scope.count = {};
+            $scope.count.vms = responses[0];
+            $scope.count.apps = responses[1];
+            $scope.count.backups = responses[2];
+            $scope.count.users = responses[3];
+            for (var i = 0; i < project.quotas.length; i++) {
+              if (project.quotas[i].name == 'nc_service_count') {
+                $scope.count.services = project.quotas[i].usage;
+              }
+            }
+          })
+        });
       }
     }
 })();
