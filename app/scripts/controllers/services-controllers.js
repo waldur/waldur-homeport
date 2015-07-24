@@ -4,6 +4,7 @@
   angular.module('ncsaas')
     .service('baseServiceListController', [
       'baseControllerListClass',
+      'ENTITYLISTFIELDTYPES',
       'customerPermissionsService',
       'usersService',
       'joinService',
@@ -12,6 +13,7 @@
   // need for service tab
   function baseServiceListController(
     baseControllerListClass,
+    ENTITYLISTFIELDTYPES,
     customerPermissionsService,
     usersService,
     joinService
@@ -28,6 +30,22 @@
             clickFunction: this.remove.bind(this.controllerScope)
           }
         ];
+        this.entityOptions = {
+          entityData: {
+            noDataText: 'No services yet.',
+            createLink: 'services.create',
+            createLinkText: 'Create service',
+          },
+          list: [
+            {
+              name: 'Name',
+              propertyName: 'name',
+              type: ENTITYLISTFIELDTYPES.name,
+              link: 'services.details({uuid: entity.uuid, provider: entity.provider})',
+              className: 'name'
+            }
+          ]
+        };
       },
 
       canUserAddService: function() {
@@ -49,14 +67,42 @@
 
   angular.module('ncsaas')
     .controller('ServiceListController',
-      ['baseServiceListController', 'ENTITYLISTFIELDTYPES', ServiceListController]);
+      ['baseServiceListController', ServiceListController]);
 
-  function ServiceListController(baseServiceListController, ENTITYLISTFIELDTYPES) {
+  function ServiceListController(baseServiceListController) {
     var controllerScope = this;
     var ServiceController = baseServiceListController.extend({
       init:function() {
         this.controllerScope = controllerScope;
         this._super();
+
+      }
+    });
+
+    controllerScope.__proto__ = new ServiceController();
+  }
+
+  angular.module('ncsaas')
+    .controller('ProjectServiceListController',
+      ['baseControllerListClass',
+      'joinServiceProjectLinkService',
+      'currentStateService',
+      'ENTITYLISTFIELDTYPES',
+      ProjectServiceListController]);
+
+  function ProjectServiceListController(
+    baseControllerListClass,
+    joinServiceProjectLinkService,
+    currentStateService,
+    ENTITYLISTFIELDTYPES) {
+    var controllerScope = this;
+    var ServiceController = baseControllerListClass.extend({
+      init:function() {
+        this.service = joinServiceProjectLinkService;
+        this.controllerScope = controllerScope;
+        this.setSignalHandler('currentProjectUpdated', this.setCurrentProject.bind(controllerScope));
+        this._super();
+
         this.entityOptions = {
           entityData: {
             noDataText: 'No services yet.',
@@ -66,14 +112,25 @@
           list: [
             {
               name: 'Name',
-              propertyName: 'name',
+              propertyName: 'service_name',
               type: ENTITYLISTFIELDTYPES.name,
-              link: 'services.details({uuid: entity.uuid, provider: entity.provider})',
-              className: 'name',
-              showForMobile: ENTITYLISTFIELDTYPES.showForMobile
+              link: 'services.details({uuid: entity.service_uuid})',
+              className: 'name'
             }
           ]
         };
+      },
+
+      setCurrentProject: function() {
+        this.getList();
+      },
+
+      getList: function(filter) {
+        var vm = this;
+        var fn = this._super.bind(vm);
+        currentStateService.getProject().then(function(project){
+          fn({'project_uuid': project.uuid});
+        })
       }
     });
 
@@ -246,7 +303,7 @@
       },
       getServiceProjects: function() {
         var vm = this;
-        joinServiceProjectLinkService.getList(vm.service).then(function(response) {
+        joinServiceProjectLinkService.getList({'service': vm.service}).then(function(response) {
           vm.serviceProjects = response;
         });
       }

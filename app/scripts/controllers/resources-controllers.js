@@ -100,10 +100,7 @@
           vm.searchInput = searchInput;
           vm.search();
         })
-        for (var i = 0; i < vm.searchFilters.length; i++) {
-          var filter = vm.searchFilters[i];
-          vm.service.defaultFilter[filter.name] = [];
-        };
+        vm.service.defaultFilter['resource_type'] = [];
         for (var i = 0; i < vm.searchFilters.length; i++) {
           var filter = vm.searchFilters[i];
           vm.service.defaultFilter[filter.name].push(filter.value);
@@ -121,9 +118,16 @@
       'ENV',
       'resourcesService',
       '$scope',
+      'currentStateService',
       ResourceListController]);
 
-  function ResourceListController(baseResourceListController, ENTITYLISTFIELDTYPES, ENV, resourcesService, $scope) {
+  function ResourceListController(
+    baseResourceListController,
+    ENTITYLISTFIELDTYPES,
+    ENV,
+    resourcesService,
+    $scope,
+    currentStateService) {
     var controllerScope = this;
     var ResourceController = baseResourceListController.extend({
       init:function() {
@@ -149,6 +153,15 @@
         this.selectAll = true;
         this.connectSearchInput($scope);
         this._super();
+      },
+
+      getList: function(filter) {
+        var vm = this;
+        var fn = this._super;
+        currentStateService.getProject().then(function(project){
+          vm.service.defaultFilter.project_uuid = project.uuid;
+          fn.apply(vm, filter);
+        })
       }
     });
 
@@ -372,18 +385,19 @@
   angular.module('ncsaas')
     .controller('ResourceController', [
       '$scope',
+      '$rootScope',
       '$q',
       'currentStateService',
       'resourcesCountService',
       ResourceController]);
 
-    function ResourceController($scope, $q, currentStateService, resourcesCountService) {
+    function ResourceController($scope, $rootScope, $q, currentStateService, resourcesCountService) {
       $scope.search = function() {
         $scope.$broadcast('search', $scope.searchText);
       }
 
       setCurrentProject();
-      $scope.$on('currentProjectUpdated', setCurrentProject);
+      $rootScope.$on('currentProjectUpdated', setCurrentProject);
 
       function setCurrentProject() {
         currentStateService.getProject().then(function(project) {

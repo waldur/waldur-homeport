@@ -88,7 +88,7 @@
       getProjectsForService: function(service) {
         var self = this;
         controllerScope.projectList = [];
-        joinServiceProjectLinkService.getList(service).then(function(projects){
+        joinServiceProjectLinkService.getList({'service':service}).then(function(projects){
           controllerScope.projectList = projects;
           if (projects.length == 1) {
             controllerScope.selectedProject = projects[0];

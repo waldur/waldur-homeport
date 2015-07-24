@@ -329,17 +329,11 @@
 
     var controllerScope = this;
     var controllerClass = baseControllerListClass.extend({
-      getList: function(filter) {
-        var vm = this;
-        var getList = this._super.bind(this);
-        currentStateService.getProject().then(function(project) {
-          vm.service.defaultFilter.project = project.uuid;
-          getList(filter);
-        })
-      },
       init: function() {
         this.controllerScope = controllerScope;
         this.service = projectPermissionsService;
+
+        this.setSignalHandler('currentProjectUpdated', this.setCurrentProject.bind(controllerScope));
         this._super();
 
         this.entityOptions = {
@@ -378,7 +372,19 @@
             }
           ]
         }
-      }
+      },
+      getList: function(filter) {
+        var vm = this;
+        var getList = this._super.bind(this);
+        currentStateService.getProject().then(function(project) {
+          vm.service.defaultFilter.project = project.uuid;
+          getList(filter);
+        })
+      },
+
+      setCurrentProject: function() {
+        this.getList();
+      },
     });
 
     controllerScope.__proto__ = new controllerClass();
