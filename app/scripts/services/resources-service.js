@@ -21,6 +21,19 @@
 
       getList: function(filter) {
         var vm = this;
+
+        if (filter.resource_type) {
+          var url = this.getListUrl(filter.resource_type);
+          var deferred = $q.defer();
+
+          $http.get(url, {'params': filter}).success(function(response) {
+            deferred.resolve(response);
+          }).error(function(err) {
+            deferred.reject(err);
+          });
+          return deferred.promise;
+        }
+
         return this._super(filter).then(function(resources) {
           angular.forEach(resources, vm.initResource)
           return resources;
@@ -37,7 +50,7 @@
 
         resource.$update = function(success, error) {
           var url = vm.getDetailUrl(resource.resource_type, resource.uuid);
-          $http.put(url, resource).success(success).error(error);
+          $http.put(url, {'data': resource}).success(success).error(error);
         }
       },
 
@@ -52,14 +65,9 @@
         });
       },
 
-      getDetailUrl: function(resource_type, uuid) {
-        var endpoint = this.endpoints[resource_type];
-        return ENV.apiEndpoint + 'api' + endpoint + uuid + '/';;
-      },
-
       operation: function(operation, resource_type, uuid) {
         var vm = this;
-        var url = vm.getDetailUrl(resource_type, uuid) + operation + '/';
+        var url = this.getActionUrl(resource_type, uuid, operation);
         var deferred = $q.defer();
 
         $http.post(url).success(function(response) {
@@ -75,6 +83,19 @@
         if (state === 'online') {return ['stop', 'restart'];}
         if (state === 'offline') {return ['start', 'delete'];}
         return [];
+      },
+
+      getActionUrl: function(resource_type, uuid, action) {
+        return this.getDetailUrl(resource_type, uuid) + action + '/';
+      },
+
+      getDetailUrl: function(resource_type, uuid) {
+        return this.getListUrl(resource_type) + uuid + '/';;
+      },
+
+      getListUrl: function(resource_type) {
+        var endpoint = this.endpoints[resource_type];
+        return ENV.apiEndpoint + 'api' + endpoint;
       }
     });
     return new ServiceClass();

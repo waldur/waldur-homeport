@@ -5,7 +5,7 @@
     .controller('ImportResourceController',
       ['baseControllerClass',
       'digitalOceanLinkService',
-      'digitalOceanResourcesService',
+      'resourcesService',
       'joinService',
       'joinServiceProjectLinkService',
       ImportResourceController]);
@@ -13,7 +13,7 @@
   function ImportResourceController(
     baseControllerClass,
     digitalOceanLinkService,
-    digitalOceanResourcesService,
+    resourcesService,
     joinService,
     joinServiceProjectLinkService
     ) {
@@ -60,7 +60,8 @@
       getImportedResourcesForService: function(service) {
         var self = this;
         controllerScope.importedResources = [];
-        digitalOceanResourcesService.getList({service_uuid: service.uuid}).then(function(response){
+        var query = {'resource_type': service.resource_type, 'service_uuid': service.uuid};
+        resourcesService.getList(query).then(function(response){
           controllerScope.importedResources = response;
         }, function(){
           self.flashMessage('warning', 'Unable to get list of imported resources');

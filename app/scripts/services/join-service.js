@@ -67,9 +67,11 @@
         if (service.url.indexOf('digitalocean') > -1) {
           service.provider = 'digitalocean';
           service.icon = '/static/images/icons/icon_digitalocean_small.png';
+          service.resource_type = 'Droplet';
         } else if (service.url.indexOf('cloud') > -1) {
           service.provider = 'openstack';
           service.icon = '/static/images/icons/icon_openstack_small.png';
+          service.resource_type = 'Instance';
         }
       }
     });
