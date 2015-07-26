@@ -436,7 +436,7 @@
 
     function ProjectStatsController($scope, $rootScope, $q, currentStateService, resourcesCountService) {
       $scope.search = function() {
-        $scope.$broadcast('search', $scope.searchText);
+        $rootScope.$broadcast('searchInputChanged', $scope.searchText);
       }
 
       setCurrentProject();
@@ -468,22 +468,65 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('ProjectResourcesTabController', [
+    .service('BaseProjectResourcesTabController', [
       'baseResourceListController',
-      'resourcesService',
-      '$scope',
       'currentStateService',
+      'resourcesService',
+      BaseProjectResourcesTabController]);
+
+    function BaseProjectResourcesTabController(
+      baseResourceListController,
+      currentStateService,
+      resourcesService) {
+
+      var controllerClass = baseResourceListController.extend({
+        init: function() {
+          this.service = resourcesService;
+
+          this.service.defaultFilter['resource_type'] = [];
+          for (var i = 0; i < this.searchFilters.length; i++) {
+            var filter = this.searchFilters[i];
+            this.service.defaultFilter[filter.name].push(filter.value);
+          }
+
+          this.setSignalHandler('currentProjectUpdated', this.setCurrentProject.bind(this));
+          this.setSignalHandler('searchInputChanged', this.onSearchInputChanged.bind(this));
+          this.selectAll = true;
+          this._super();
+        },
+
+        setCurrentProject: function() {
+          this.getList();
+        },
+
+        getList: function(filter) {
+          var vm = this;
+          var fn = this._super.bind(this);
+          currentStateService.getProject().then(function(project){
+            vm.service.defaultFilter.project_uuid = project.uuid;
+            fn(filter);
+          })
+        },
+
+        onSearchInputChanged: function(event, searchInput) {
+          this.searchInput = searchInput;
+          this.search();
+        }
+      })
+      return controllerClass;
+    }
+})();
+
+(function() {
+  angular.module('ncsaas')
+    .controller('ProjectResourcesTabController', [
+      'BaseProjectResourcesTabController',
       ProjectResourcesTabController]);
 
-  function ProjectResourcesTabController(
-    baseResourceListController,
-    resourcesService,
-    $scope,
-    currentStateService) {
+  function ProjectResourcesTabController(BaseProjectResourcesTabController) {
     var controllerScope = this;
-    var ResourceController = baseResourceListController.extend({
+    var ResourceController = BaseProjectResourcesTabController.extend({
       init:function() {
-        this.service = resourcesService;
         this.controllerScope = controllerScope;
         this.searchFilters = [
           {
@@ -502,24 +545,11 @@
             value: 'Amazon.EC2'
           }
         ];
-        this.selectAll = true;
-        this.connectSearchInput($scope);
-        this.setSignalHandler('currentProjectUpdated', this.setCurrentProject.bind(controllerScope));
-
         this._super();
-      },
 
-      setCurrentProject: function() {
-        this.getList();
-      },
-
-      getList: function(filter) {
-        var vm = this;
-        var fn = this._super.bind(this);
-        currentStateService.getProject().then(function(project){
-          vm.service.defaultFilter.project_uuid = project.uuid;
-          fn(filter);
-        })
+        this.entityOptions.entityData.noDataText = 'You have no VMs yet';
+        this.entityOptions.entityData.createLinkText = 'Create VM';
+        this.entityOptions.entityData.importLinkText = 'Import VM';
       }
     });
 
@@ -528,16 +558,13 @@
 
   angular.module('ncsaas')
     .controller('ProjectApplicationsTabController', [
-      'baseResourceListController',
-      'resourcesService',
-      '$scope',
+      'BaseProjectResourcesTabController',
       ProjectApplicationsTabController]);
 
-  function ProjectApplicationsTabController(baseResourceListController, resourcesService, $scope) {
+  function ProjectApplicationsTabController(BaseProjectResourcesTabController) {
     var controllerScope = this;
-    var ResourceController = baseResourceListController.extend({
+    var ResourceController = BaseProjectResourcesTabController.extend({
       init:function() {
-        this.service = resourcesService;
         this.controllerScope = controllerScope;
         this.searchFilters = [
           {
@@ -551,9 +578,11 @@
             value: 'GitLab.Project'
           }
         ];
-        this.selectAll = true;
-        this.connectSearchInput($scope);
         this._super();
+
+        this.entityOptions.entityData.noDataText = 'You have no applications yet';
+        this.entityOptions.entityData.createLinkText = 'Create application';
+        this.entityOptions.entityData.importLinkText = 'Import application';
       }
     });
     controllerScope.__proto__ = new ResourceController();
@@ -627,6 +656,8 @@ angular.module('ncsaas')
         this.entityOptions = {
           entityData: {
             noDataText: 'You have no users',
+            createLink: 'users.list', // TODO: Implement view for creating users
+            createLinkText: 'Add user'
           },
           list: [
             {
@@ -694,13 +725,15 @@ angular.module('ncsaas')
       'joinServiceProjectLinkService',
       'currentStateService',
       'ENTITYLISTFIELDTYPES',
+      'ENV',
       ProjectServicesTabController]);
 
   function ProjectServicesTabController(
     baseControllerListClass,
     joinServiceProjectLinkService,
     currentStateService,
-    ENTITYLISTFIELDTYPES) {
+    ENTITYLISTFIELDTYPES,
+    ENV) {
     var controllerScope = this;
     var ServiceController = baseControllerListClass.extend({
       init:function() {
@@ -717,11 +750,21 @@ angular.module('ncsaas')
           },
           list: [
             {
+              type: ENTITYLISTFIELDTYPES.statusCircle,
+              propertyName: 'state',
+              onlineStatus: ENV.resourceOnlineStatus
+            },
+            {
               name: 'Name',
               propertyName: 'service_name',
               type: ENTITYLISTFIELDTYPES.name,
               link: 'services.details({uuid: entity.service_uuid, provider: entity.resource_type})',
               className: 'name'
+            },
+            {
+              name: 'Type',
+              propertyName: 'resource_type',
+              type: ENTITYLISTFIELDTYPES.noType
             }
           ]
         };

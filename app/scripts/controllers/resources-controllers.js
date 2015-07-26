@@ -87,18 +87,6 @@
           var index = vm.list.indexOf(resource);
           vm.list[index] = response;
         });
-      },
-      connectSearchInput: function($scope) {
-        var vm = this;
-        $scope.$on('search', function(event, searchInput){
-          vm.searchInput = searchInput;
-          vm.search();
-        })
-        vm.service.defaultFilter['resource_type'] = [];
-        for (var i = 0; i < vm.searchFilters.length; i++) {
-          var filter = vm.searchFilters[i];
-          vm.service.defaultFilter[filter.name].push(filter.value);
-        };
       }
     });
 
