@@ -69,17 +69,17 @@
       },
       stopResource:function(resource) {
         var vm = this;
-        vm.service.stopResource(resource.uuid).then(
+        vm.service.stopResource(resource.resource_type, resource.uuid).then(
           vm.reInitResource.bind(vm, resource), vm.handleActionException);
       },
       startResource:function(resource) {
         var vm = this;
-        vm.service.startResource(resource.uuid).then(
+        vm.service.startResource(resource.resource_type, resource.uuid).then(
           vm.reInitResource.bind(vm, resource), vm.handleActionException);
       },
       restartResource:function(resource) {
         var vm = this;
-        vm.service.restartResource(resource.uuid).then(
+        vm.service.restartResource(resource.resource_type, resource.uuid).then(
           vm.reInitResource.bind(vm, resource), vm.handleActionException);
       },
       isOperationAvailable:function(operation, resource) {
@@ -89,7 +89,7 @@
       },
       reInitResource:function(resource) {
         var vm = this;
-        vm.service.$get(resource.uuid).then(function(response) {
+        vm.service.$get(resource.resource_type, resource.uuid).then(function(response) {
           var index = vm.list.indexOf(resource);
           vm.list[index] = response;
         });
@@ -242,8 +242,8 @@
       .controller('ResourceDetailUpdateController', [
         '$stateParams',
         '$scope',
-        'digitalOceanResourcesService',
-        'openstackInstancesService',
+        '$state',
+        'resourcesService',
         'baseControllerDetailUpdateClass',
         ResourceDetailUpdateController
       ]);
@@ -251,32 +251,39 @@
   function ResourceDetailUpdateController(
     $stateParams,
     $scope,
-    digitalOceanResourcesService,
-    openstackInstancesService,
+    $state,
+    resourcesService,
     baseControllerDetailUpdateClass) {
     var controllerScope = this;
     var Controller = baseControllerDetailUpdateClass.extend({
       activeTab: 'backups',
 
       init:function() {
-        this.service = this.getService();
+        this.service = resourcesService;
         this.controllerScope = controllerScope;
         this._super();
-        this.detailsState = 'resources.details';
         this.activeTab = $stateParams.tab ? $stateParams.tab : this.activeTab;
       },
 
-      getService: function() {
-        this.resource_type = $stateParams.resource_type;
-        var services = {
-          'Instance': openstackInstancesService,
-          'Droplet': digitalOceanResourcesService
-        };
-        return services[this.resource_type];
+      activate:function() {
+        var vm = this;
+        vm.service.$get($stateParams.resource_type, $stateParams.uuid).then(function(response) {
+          vm.model = response;
+          $scope.$broadcast('resourceLoaded', vm.model);
+        }, function() {
+          $state.go('errorPage.notFound');
+        });
       },
 
-      afterActivate: function() {
-        $scope.$broadcast('resourceLoaded', this.model);
+      update:function() {
+        var vm = this;
+        vm.model.$update(success, error);
+        function success() {
+          $state.go('resources.details', {'resource_type': $stateParams.resource_type, 'uuid': vm.model.uuid});
+        }
+        function error(response) {
+          vm.errors = response.data;
+        }
       }
     });
 
