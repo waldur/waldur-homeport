@@ -13,16 +13,14 @@
 
       init:function() {
         this._super();
-        this.stopResource = this.operation.bind(this, 'stop');
-        this.startResource = this.operation.bind(this, 'start');
-        this.restartResource = this.operation.bind(this, 'restart');
         this.endpoint = '/resources/';
       },
 
       getList: function(filter) {
         var vm = this;
+        filter = filter || {};
 
-        if (filter.resource_type) {
+        if ('resource_type' in filter) {
           var url = this.getListUrl(filter.resource_type);
           var deferred = $q.defer();
 
@@ -35,7 +33,9 @@
         }
 
         return this._super(filter).then(function(resources) {
-          angular.forEach(resources, vm.initResource)
+          angular.forEach(resources, function(resource) {
+            vm.initResource(resource);
+          });
           return resources;
         })
       },
@@ -52,6 +52,11 @@
           var url = vm.getDetailUrl(resource.resource_type, resource.uuid);
           $http.put(url, {'data': resource}).success(success).error(error);
         }
+
+        resource.$action = function(action, success, error) {
+          var url = vm.getActionUrl(resource.resource_type, resource.uuid, action);
+          $http.post(url).success(success).error(error);
+        }
       },
 
       $get: function(resource_type, uuid) {
@@ -63,19 +68,6 @@
           vm.initResource(resource);
           return resource;
         });
-      },
-
-      operation: function(operation, resource_type, uuid) {
-        var vm = this;
-        var url = this.getActionUrl(resource_type, uuid, operation);
-        var deferred = $q.defer();
-
-        $http.post(url).success(function(response) {
-          deferred.resolve(response);
-        }).error(function(err) {
-          deferred.reject(err);
-        });
-        return deferred.promise;
       },
 
       getAvailableOperations: function(resource) {

@@ -68,19 +68,13 @@
         };
       },
       stopResource:function(resource) {
-        var vm = this;
-        vm.service.stopResource(resource.resource_type, resource.uuid).then(
-          vm.reInitResource.bind(vm, resource), vm.handleActionException);
+        resource.$action('stop', this.reInitResource.bind(this, resource), this.handleActionException);
       },
       startResource:function(resource) {
-        var vm = this;
-        vm.service.startResource(resource.resource_type, resource.uuid).then(
-          vm.reInitResource.bind(vm, resource), vm.handleActionException);
+        resource.$action('start', this.reInitResource.bind(this, resource), this.handleActionException);
       },
       restartResource:function(resource) {
-        var vm = this;
-        vm.service.restartResource(resource.resource_type, resource.uuid).then(
-          vm.reInitResource.bind(vm, resource), vm.handleActionException);
+        resource.$action('restart', this.reInitResource.bind(this, resource), this.handleActionException);
       },
       isOperationAvailable:function(operation, resource) {
         var availableOperations = this.service.getAvailableOperations(resource);
