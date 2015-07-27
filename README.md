@@ -31,12 +31,13 @@ __Installation steps__:
 
 4. Configure `custom-config.js`
 
-5. Run application in development mode:
+5. Run application:
 
-        grunt
+    `grunt` - in development mode
+
+    `grunt prod` - in production mode
 
 6. Listen on `//localhost:8000`
-
 
 ## Backend
 
