@@ -3,6 +3,7 @@
     display: flex;
     -webkit-flex-flow: row wrap;
     position: relative;
+    min-height: 15px;
     li {
         @include property(padding, 0 10);
         &:nth-child(1) {
@@ -29,6 +30,7 @@
         &.right-sort {
             position: absolute;
             right: 0px;
+            top: 0px;
         } // &.right-sort
         .app-title {
             @include inline-middle;

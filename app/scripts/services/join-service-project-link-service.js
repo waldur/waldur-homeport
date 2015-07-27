@@ -8,6 +8,7 @@
       'baseServiceClass',
       'projectCloudMembershipsService',
       'digitalOceanServiceProjectLinkService',
+      'projectsService',
       joinServiceProjectLinkService
     ]);
 
@@ -15,7 +16,8 @@
     $q,
     baseServiceClass,
     projectCloudMembershipsService,
-    digitalOceanServiceProjectLinkService
+    digitalOceanServiceProjectLinkService,
+    projectsService
   ) {
     var ServiceClass = baseServiceClass.extend({
       getList: function(params) {
@@ -31,25 +33,16 @@
             return projectCloudMembershipsService.getList({cloud: params.service.uuid});
           }
         } else if (params.project_uuid) {
-          var deferred = $q.defer();
-          $q.all([
-            projectCloudMembershipsService.getList({project: params.project_uuid}),
-            digitalOceanServiceProjectLinkService.getList({project_uuid: params.project_uuid})
-          ]).then(function(responses){
-            var results = [];
-            for (var i = 0; i < responses.length; i++) {
-              results = results.concat(responses[i]);
-            };
-            for (var i = 0; i < results.length; i++) {
-              if (results[i].url.indexOf('digitalocean') > -1) {
-                results[i].resource_type = 'digitalocean';
+          return projectsService.$get(params.project_uuid).then(function(project) {
+            project.services.forEach(function(project) {
+              if (project.url.indexOf('digitalocean') > -1) {
+                project.resource_type = 'digitalocean';
               } else {
-                results[i].resource_type = 'openstack';
+                project.resource_type = 'openstack';
               }
-            };
-            deferred.resolve(results);
+            })
+            return project.services;
           })
-          return deferred.promise;
         }
       },
 

@@ -16,13 +16,11 @@
             </li>
             <li class="right-sort">
                 <a ng-if="entityOptions.entityData.createLink"
-                   ui-sref="{{ entityOptions.entityData.createLink }}" class="button">
-                    <span class="icon plus"></span>
+                   ui-sref="{{ entityOptions.entityData.createLink }}" class="green-btn">
                     <span>{{ entityOptions.entityData.createLinkText }}</span>
                 </a>
                 <a ng-if="entityOptions.entityData.importLink"
-                   ui-sref="{{ entityOptions.entityData.importLink }}" class="button">
-                    <span class="icon plus"></span>
+                   ui-sref="{{ entityOptions.entityData.importLink }}" class="green-btn">
                     <span>{{ entityOptions.entityData.importLinkText }}</span>
                 </a>
             </li>
@@ -36,11 +34,11 @@
         <div class="decision">
             <div class="col">
                 <a ng-if="entityOptions.entityData.createLink"
-                   ui-sref="{{ entityOptions.entityData.createLink }}" class="button">
+                   ui-sref="{{ entityOptions.entityData.createLink }}" class="green-btn">
                     {{ entityOptions.entityData.createLinkText }}
                 </a>
                 <a ng-if="entityOptions.entityData.importLink"
-                   ui-sref="{{ entityOptions.entityData.importLink }}" class="button">
+                   ui-sref="{{ entityOptions.entityData.importLink }}" class="green-btn">
                     {{ entityOptions.entityData.importLinkText }}
                 </a>
             </div>

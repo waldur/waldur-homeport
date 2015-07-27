@@ -449,17 +449,13 @@
             resourcesCountService.resources({'project_uuid': project.uuid, 'resource_type': ['Oracle.Database', 'GitLab.Project']}),
             resourcesCountService.backups({'project_uuid': project.uuid}),
             resourcesCountService.users({'project': project.uuid}),
-          ]).then(function(responses){
+          ]).then(function(responses) {
             $scope.count = {};
             $scope.count.vms = responses[0];
             $scope.count.apps = responses[1];
             $scope.count.backups = responses[2];
             $scope.count.users = responses[3];
-            for (var i = 0; i < project.quotas.length; i++) {
-              if (project.quotas[i].name == 'nc_service_count') {
-                $scope.count.services = project.quotas[i].usage;
-              }
-            }
+            $scope.count.services = project.services.length;
           })
         });
       }
@@ -602,6 +598,7 @@ angular.module('ncsaas')
         init:function() {
           this.controllerScope = controllerScope;
           this.setSignalHandler('currentProjectUpdated', this.setCurrentProject.bind(controllerScope));
+          this.setSignalHandler('searchInputChanged', this.onSearchInputChanged.bind(this));
           this._super();
         },
 
@@ -616,6 +613,11 @@ angular.module('ncsaas')
             vm.service.defaultFilter.project_uuid = project.uuid;
             fn.apply(vm, filter);
           })
+        },
+
+        onSearchInputChanged: function(event, searchInput) {
+          this.searchInput = searchInput;
+          this.search();
         }
 
       });
@@ -632,7 +634,6 @@ angular.module('ncsaas')
       'projectPermissionsService',
       'currentStateService',
       'ENTITYLISTFIELDTYPES',
-      '$scope', 
       ProjectUsersTabController
     ]);
 
@@ -640,8 +641,7 @@ angular.module('ncsaas')
     baseControllerListClass,
     projectPermissionsService,
     currentStateService,
-    ENTITYLISTFIELDTYPES,
-    $scope) {
+    ENTITYLISTFIELDTYPES) {
 
     var controllerScope = this;
     var controllerClass = baseControllerListClass.extend({
@@ -651,13 +651,14 @@ angular.module('ncsaas')
         this.service = projectPermissionsService;
 
         this.setSignalHandler('currentProjectUpdated', this.setCurrentProject.bind(controllerScope));
+        this.setSignalHandler('searchInputChanged', this.onSearchInputChanged.bind(this));
         this._super();
 
         this.entityOptions = {
           entityData: {
             noDataText: 'You have no users',
-            createLink: 'users.list', // TODO: Implement view for creating users
-            createLinkText: 'Add user'
+            createLink: 'users.list', // TODO: Implement view for inviting users
+            createLinkText: 'Invite user'
           },
           list: [
             {
@@ -691,13 +692,6 @@ angular.module('ncsaas')
             }
           ]
         };
-
-        var vm = this;
-        $scope.$on('search', function(event, searchInput){
-          vm.searchInput = searchInput;
-          vm.search();
-        })
-
       },
       getList: function(filter) {
         var vm = this;
@@ -711,6 +705,11 @@ angular.module('ncsaas')
       setCurrentProject: function() {
         this.getList();
       },
+
+      onSearchInputChanged: function(event, searchInput) {
+        this.searchInput = searchInput;
+        this.search();
+      }
     });
 
     controllerScope.__proto__ = new controllerClass();
@@ -740,6 +739,7 @@ angular.module('ncsaas')
         this.service = joinServiceProjectLinkService;
         this.controllerScope = controllerScope;
         this.setSignalHandler('currentProjectUpdated', this.setCurrentProject.bind(controllerScope));
+        this.setSignalHandler('searchInputChanged', this.onSearchInputChanged.bind(this));
         this._super();
 
         this.entityOptions = {
@@ -756,14 +756,14 @@ angular.module('ncsaas')
             },
             {
               name: 'Name',
-              propertyName: 'service_name',
+              propertyName: 'name',
               type: ENTITYLISTFIELDTYPES.name,
-              link: 'services.details({uuid: entity.service_uuid, provider: entity.resource_type})',
+              link: 'services.details({uuid: entity.uuid, provider: entity.type})',
               className: 'name'
             },
             {
               name: 'Type',
-              propertyName: 'resource_type',
+              propertyName: 'type',
               type: ENTITYLISTFIELDTYPES.noType
             }
           ]
@@ -780,6 +780,11 @@ angular.module('ncsaas')
         currentStateService.getProject().then(function(project){
           fn({'project_uuid': project.uuid});
         })
+      },
+
+      onSearchInputChanged: function(event, searchInput) {
+        this.searchInput = searchInput;
+        this.search();
       }
     });
 

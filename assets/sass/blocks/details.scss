@@ -115,6 +115,7 @@
     margin-left: 170px;
     background: #fff;
     padding: 40px;
+    padding-top: 20px;
     min-height: 370px;
     box-shadow: -2px 2px 2px 0px rgba(237,237,237,1);
     margin-bottom: 20px;
@@ -207,6 +208,21 @@
   }
 }
 
+.green-btn {
+  display: block;
+  float: right;
+  background: #50b848;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #FFF;
+  font-weight: bold;
+  height: 32px;
+  padding: 0 20px;
+  line-height: 32px;
+  text-decoration: none;
+  margin-left: 10px;
+}
+
 .profile-content {
   @extend .resources-content;
   a {
@@ -225,18 +241,6 @@
       margin-top: 0;
     }
 
-  }
-  .green-btn {
-    display: block;
-    float: right;
-    background: #50b848;
-    border-radius: 5px;
-    font-size: 16px;
-    color: #FFF;
-    font-weight: bold;
-    height: 32px;
-    padding: 0 20px;
-    line-height: 32px;
   }
   .table {
     margin: 27px 0;
