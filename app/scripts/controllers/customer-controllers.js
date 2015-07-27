@@ -85,7 +85,7 @@
         this.detailsState = 'organizations.details';
         this.currentUser = usersService.currentUser;
         this.detailsViewOptions = {
-          title: 'Customer',
+          title: 'Organization',
           activeTab: $stateParams.tab ? $stateParams.tab : this.activeTab,
           hasLogo: true,
           aboutFields: [
