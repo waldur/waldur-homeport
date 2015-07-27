@@ -88,7 +88,7 @@
       init: function() {
         this.service = projectsService;
         this.controllerScope = controllerScope;
-        this.setSignalHandler('currentCustomerUpdated', this.currentCustomerUpdatedHandler.bind(this));
+        $scope.$on('currentCustomerUpdated', this.currentCustomerUpdatedHandler.bind(this));
         this._super();
         this.listState = 'projects.list';
         this.detailsState = 'projects.details';
@@ -440,7 +440,7 @@
       }
 
       setCurrentProject();
-      $rootScope.$on('currentProjectUpdated', setCurrentProject);
+      $scope.$on('currentProjectUpdated', setCurrentProject);
 
       function setCurrentProject() {
         currentStateService.getProject().then(function(project) {
@@ -466,13 +466,11 @@
   angular.module('ncsaas')
     .service('BaseProjectResourcesTabController', [
       'baseResourceListController',
-      'currentStateService',
       'resourcesService',
       BaseProjectResourcesTabController]);
 
     function BaseProjectResourcesTabController(
       baseResourceListController,
-      currentStateService,
       resourcesService) {
 
       var controllerClass = baseResourceListController.extend({
@@ -485,28 +483,8 @@
             this.service.defaultFilter[filter.name].push(filter.value);
           }
 
-          this.setSignalHandler('currentProjectUpdated', this.setCurrentProject.bind(this));
-          this.setSignalHandler('searchInputChanged', this.onSearchInputChanged.bind(this));
           this.selectAll = true;
           this._super();
-        },
-
-        setCurrentProject: function() {
-          this.getList();
-        },
-
-        getList: function(filter) {
-          var vm = this;
-          var fn = this._super.bind(this);
-          currentStateService.getProject().then(function(project){
-            vm.service.defaultFilter.project_uuid = project.uuid;
-            fn(filter);
-          })
-        },
-
-        onSearchInputChanged: function(event, searchInput) {
-          this.searchInput = searchInput;
-          this.search();
         }
       })
       return controllerClass;
@@ -517,9 +495,11 @@
   angular.module('ncsaas')
     .controller('ProjectResourcesTabController', [
       'BaseProjectResourcesTabController',
+      'currentStateService',
+      '$scope',
       ProjectResourcesTabController]);
 
-  function ProjectResourcesTabController(BaseProjectResourcesTabController) {
+  function ProjectResourcesTabController(BaseProjectResourcesTabController, currentStateService, $scope) {
     var controllerScope = this;
     var ResourceController = BaseProjectResourcesTabController.extend({
       init:function() {
@@ -541,11 +521,36 @@
             value: 'Amazon.EC2'
           }
         ];
+        this.searchFieldName = 'name';
         this._super();
 
         this.entityOptions.entityData.noDataText = 'You have no VMs yet';
         this.entityOptions.entityData.createLinkText = 'Create VM';
         this.entityOptions.entityData.importLinkText = 'Import VM';
+
+        $scope.$on('currentProjectUpdated', this.setCurrentProject.bind(this));
+        $scope.$on('searchInputChanged', this.onSearchInputChanged.bind(this));
+      },
+
+      registerEventHandlers: function() {},
+
+      setCurrentProject: function() {
+        this.getList();
+      },
+
+      getList: function(filter) {
+        var vm = this;
+        var fn = this._super.bind(vm);
+        filter = filter || {};
+        currentStateService.getProject().then(function(project){
+          filter['project_uuid'] = project.uuid;
+          fn(filter);
+        })
+      },
+
+      onSearchInputChanged: function(event, searchInput) {
+        this.searchInput = searchInput;
+        this.search();
       }
     });
 
@@ -554,10 +559,10 @@
 
   angular.module('ncsaas')
     .controller('ProjectApplicationsTabController', [
-      'BaseProjectResourcesTabController',
+      'BaseProjectResourcesTabController', '$scope', 'currentStateService',
       ProjectApplicationsTabController]);
 
-  function ProjectApplicationsTabController(BaseProjectResourcesTabController) {
+  function ProjectApplicationsTabController(BaseProjectResourcesTabController, $scope, currentStateService) {
     var controllerScope = this;
     var ResourceController = BaseProjectResourcesTabController.extend({
       init:function() {
@@ -579,6 +584,30 @@
         this.entityOptions.entityData.noDataText = 'You have no applications yet';
         this.entityOptions.entityData.createLinkText = 'Create application';
         this.entityOptions.entityData.importLinkText = 'Import application';
+
+        $scope.$on('currentProjectUpdated', this.setCurrentProject.bind(this));
+        $scope.$on('searchInputChanged', this.onSearchInputChanged.bind(this));
+      },
+
+      registerEventHandlers: function() {},
+
+      setCurrentProject: function() {
+        this.getList();
+      },
+
+      getList: function(filter) {
+        var vm = this;
+        var fn = this._super.bind(vm);
+        filter = filter || {};
+        currentStateService.getProject().then(function(project){
+          filter['project_uuid'] = project.uuid;
+          fn(filter);
+        })
+      },
+
+      onSearchInputChanged: function(event, searchInput) {
+        this.searchInput = searchInput;
+        this.search();
       }
     });
     controllerScope.__proto__ = new ResourceController();
@@ -588,30 +617,32 @@
 (function() {
 angular.module('ncsaas')
   .controller('ProjectBackupsTabController', [
-      'BaseBackupListController', 'currentStateService',
+      'BaseBackupListController', '$scope', 'currentStateService',
       ProjectBackupsTabController
   ]);
 
-  function ProjectBackupsTabController(BaseBackupListController, currentStateService) {
+  function ProjectBackupsTabController(BaseBackupListController, $scope, currentStateService) {
     var controllerScope = this;
       var Controller = BaseBackupListController.extend({
         init:function() {
           this.controllerScope = controllerScope;
-          this.setSignalHandler('currentProjectUpdated', this.setCurrentProject.bind(controllerScope));
-          this.setSignalHandler('searchInputChanged', this.onSearchInputChanged.bind(this));
           this._super();
+
+          $scope.$on('currentProjectUpdated', this.setCurrentProject.bind(this));
+          $scope.$on('searchInputChanged', this.onSearchInputChanged.bind(this));
         },
 
-        setCurrentProject: function () {
+        registerEventHandlers: function() {},
+
+        setCurrentProject: function() {
           this.getList();
         },
 
         getList: function(filter) {
           var vm = this;
-          var fn = this._super;
+          var fn = this._super.bind(vm);
           currentStateService.getProject().then(function(project){
-            vm.service.defaultFilter.project_uuid = project.uuid;
-            fn.apply(vm, filter);
+            fn({'project_uuid': project.uuid});
           })
         },
 
@@ -619,7 +650,6 @@ angular.module('ncsaas')
           this.searchInput = searchInput;
           this.search();
         }
-
       });
 
     controllerScope.__proto__ = new Controller();
@@ -631,7 +661,8 @@ angular.module('ncsaas')
   angular.module('ncsaas')
     .controller('ProjectUsersTabController', [
       'baseControllerListClass',
-      'projectPermissionsService',
+      'usersService',
+      '$scope',
       'currentStateService',
       'ENTITYLISTFIELDTYPES',
       ProjectUsersTabController
@@ -639,7 +670,8 @@ angular.module('ncsaas')
 
   function ProjectUsersTabController(
     baseControllerListClass,
-    projectPermissionsService,
+    usersService,
+    $scope,
     currentStateService,
     ENTITYLISTFIELDTYPES) {
 
@@ -647,12 +679,9 @@ angular.module('ncsaas')
     var controllerClass = baseControllerListClass.extend({
       init: function() {
         this.controllerScope = controllerScope;
-        this.searchFieldName = 'name';
-        this.service = projectPermissionsService;
-
-        this.setSignalHandler('currentProjectUpdated', this.setCurrentProject.bind(controllerScope));
-        this.setSignalHandler('searchInputChanged', this.onSearchInputChanged.bind(this));
+        this.service = usersService;
         this._super();
+        this.searchFieldName = 'full_name';
 
         this.entityOptions = {
           entityData: {
@@ -664,46 +693,48 @@ angular.module('ncsaas')
             {
               type: ENTITYLISTFIELDTYPES.avatarPictureField,
               className: 'avatar',
-              avatarSrc: 'user_email',
+              avatarSrc: 'email',
               showForMobile: ENTITYLISTFIELDTYPES.showForMobile
             },
             {
               name: 'Name',
-              propertyName: 'user_full_name',
+              propertyName: 'full_name',
               type: ENTITYLISTFIELDTYPES.name,
-              link: 'users.details({uuid: entity.user_uuid})',
+              link: 'users.details({uuid: entity.uuid})',
               className: 'name',
               showForMobile: ENTITYLISTFIELDTYPES.showForMobile
             },
             {
-              name: 'Role',
-              propertyName: 'role',
-              type: ENTITYLISTFIELDTYPES.noType
-            },
-            {
               name: 'Email',
-              propertyName: 'user_email',
+              propertyName: 'email',
               type: ENTITYLISTFIELDTYPES.noType
             },
             {
               name: 'Username',
-              propertyName: 'user_username',
+              propertyName: 'username',
               type: ENTITYLISTFIELDTYPES.noType
             }
           ]
         };
+
+        $scope.$on('currentProjectUpdated', this.setCurrentProject.bind(this));
+        $scope.$on('searchInputChanged', this.onSearchInputChanged.bind(this));
       },
-      getList: function(filter) {
-        var vm = this;
-        var getList = this._super.bind(this);
-        currentStateService.getProject().then(function(project) {
-          vm.service.defaultFilter.project = project.uuid;
-          getList(filter);
-        })
-      },
+
+      registerEventHandlers: function() {},
 
       setCurrentProject: function() {
         this.getList();
+      },
+
+      getList: function(filter) {
+        var vm = this;
+        var fn = this._super.bind(vm);
+        filter = filter || {};
+        currentStateService.getProject().then(function(project){
+          filter['project_uuid'] = project.uuid;
+          fn(filter);
+        })
       },
 
       onSearchInputChanged: function(event, searchInput) {
@@ -725,6 +756,7 @@ angular.module('ncsaas')
       'currentStateService',
       'ENTITYLISTFIELDTYPES',
       'ENV',
+      '$scope',
       ProjectServicesTabController]);
 
   function ProjectServicesTabController(
@@ -732,14 +764,13 @@ angular.module('ncsaas')
     joinServiceProjectLinkService,
     currentStateService,
     ENTITYLISTFIELDTYPES,
-    ENV) {
+    ENV,
+    $scope) {
     var controllerScope = this;
     var ServiceController = baseControllerListClass.extend({
-      init:function() {
+      init: function() {
         this.service = joinServiceProjectLinkService;
         this.controllerScope = controllerScope;
-        this.setSignalHandler('currentProjectUpdated', this.setCurrentProject.bind(controllerScope));
-        this.setSignalHandler('searchInputChanged', this.onSearchInputChanged.bind(this));
         this._super();
 
         this.entityOptions = {
@@ -768,7 +799,12 @@ angular.module('ncsaas')
             }
           ]
         };
+
+        $scope.$on('currentProjectUpdated', this.setCurrentProject.bind(this));
+        $scope.$on('searchInputChanged', this.onSearchInputChanged.bind(this));
       },
+
+      registerEventHandlers: function() {},
 
       setCurrentProject: function() {
         this.getList();
@@ -777,8 +813,10 @@ angular.module('ncsaas')
       getList: function(filter) {
         var vm = this;
         var fn = this._super.bind(vm);
+        filter = filter || {};
         currentStateService.getProject().then(function(project){
-          fn({'project_uuid': project.uuid});
+          filter['project_uuid'] = project.uuid;
+          fn(filter);
         })
       },
 
@@ -786,6 +824,7 @@ angular.module('ncsaas')
         this.searchInput = searchInput;
         this.search();
       }
+
     });
 
     controllerScope.__proto__ = new ServiceController();
