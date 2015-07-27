@@ -1,0 +1,192 @@
+.initial-data-page {
+  width: 430px;
+  margin: 0 auto;
+  h2 {
+    color: $dashboard-green;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 25px;
+    margin-left: 25px;
+  }
+  input[type="text"],select {
+    border-radius: 4px;
+    width: 226px;
+    box-sizing: border-box;
+    height: 32px;
+    margin-bottom: 7px;
+  }
+  label {
+    font-weight: bold;
+    display: block;
+    font-size: 15px;
+  }
+  .first-step {
+    .logo {
+      float: left;
+      margin-left: 25px;
+
+      .img-wrapper {
+        position: relative;
+        width: 67px;
+        height: 67px;
+        border-radius: 5px;
+        overflow: hidden;
+        margin-bottom: 7px;
+        img {
+          position: absolute;
+          left: 0;
+          top: 0;
+        }
+      }
+    }
+    .fields {
+      margin-right: 20px;
+    }
+  }
+  .green-btn {
+    display: block;
+    background: #50b848;
+    border-radius: 3px;
+    font-size: 16px;
+    color: #FFF;
+    font-weight: bold;
+    height: 32px;
+    padding: 0 20px;
+    line-height: 32px;
+  }
+  .second-step {
+    .icon-block {
+      float: left;
+      width: 150px;
+      text-align: center;
+      margin-top: 10px;
+      span {
+        font-weight: bold;
+        margin-top: 5px;
+      }
+      .info {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        background: $dashboard-green;
+        border-radius: 50%;
+        content: "?";
+        color: #fff;
+        line-height: 20px;
+        text-align: center;
+        margin-top: 5px;
+        margin-left: 5px;
+
+      }
+    }
+
+  }
+  .fields {
+    float: right;
+    width: 226px;
+  }
+  .fields-block {
+    padding: 20px;
+    background: #fff;
+    position: relative;
+    margin-bottom: 20px;
+    border: 2px solid $dashboard-green;
+    &.state {
+      .remove-service {
+        display: block;
+        position: absolute;
+        width: 20px;
+        height: 19px;
+        top: -10px;
+        right: -10px;
+        color: #fff;
+        text-align: center;
+        line-height: 20px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 16px;
+        background: $dashboard-green;
+      }
+    }
+
+
+    &.green {
+      background: #e8f4e1;
+      .select-block {
+        float: left;
+      }
+      a {
+        float: left;
+        margin-top: 24px;
+        margin-left: 10px;
+        text-align: center;
+      }
+    }
+    .icon-block {
+      img {
+        margin: 10px auto;
+      }
+    }
+  }
+  .button-block {
+    a {
+      width: 376px;
+      height: 50px;
+      line-height: 50px;
+      margin: 20px auto;
+      text-align: center;
+    }
+  }
+  @include bp(xs) {
+    width: calc(100% - 20px);
+    h2 {
+      margin-left: 0;
+    }
+    .first-step {
+      .logo {
+        margin-left: 0;
+        float: none;
+        .img-wrapper {
+          float: left;
+        }
+        a {
+          float: right;
+          text-align: center;
+          width: 200px;
+        }
+      }
+      .fields {
+        margin-right: auto;
+      }
+    }
+    .fields {
+      margin: 0 auto;
+      float: none;
+    }
+    .second-step {
+      .icon-block {
+        float: none;
+        margin: 0 auto;
+      }
+      .fields-block.green {
+        .select-block {
+          width: 226px;
+          float: none;
+          margin: 0 auto;
+        }
+        a {
+          float: none;
+          margin: 0 auto;
+          width: 226px;
+        }
+      }
+    }
+    .button-block {
+      a {
+        width: calc(100% - 20px);
+        margin-bottom: 30px;
+      }
+    }
+
+  } // xs
+}

@@ -70,3 +70,48 @@
   }
 
 })();
+
+(function() {
+
+  angular.module('ncsaas')
+    .controller('InitialDataControllerDemo',
+    ['usersService', 'servicesService', 'baseControllerClass', InitialDataControllerDemo]);
+
+  function InitialDataControllerDemo(usersService, servicesService, baseControllerClass) {
+    var controllerScope = this;
+    var Controller = baseControllerClass.extend({
+      user: {},
+      services: {},
+      chosenService: null,
+      chosenServices: [],
+
+      init: function() {
+        this._super();
+        this.activate();
+      },
+      activate: function() {
+        var vm = this;
+        usersService.getCurrentUser().then(function(response) {
+          vm.user = response;
+        });
+        servicesService.getServicesList().then(function(response) {
+          vm.services = response;
+        });
+      },
+      addService: function() {
+        if (this.chosenService && !(this.chosenServices.lastIndexOf(this.chosenService) + 1)) {
+          this.chosenServices.push(this.chosenService);
+        }
+      },
+      removeService: function(service) {
+        var index = this.chosenServices.lastIndexOf(service);
+        if (index + 1) {
+          this.chosenServices.splice(index, 1);
+        }
+      }
+    });
+
+    controllerScope.__proto__ = new Controller();
+  }
+
+})();
