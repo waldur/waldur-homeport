@@ -131,7 +131,8 @@
         this.chartOptions = {
           responsive: true,
           scaleShowVerticalLines: false,
-          scaleShowGridLines : false
+          scaleShowGridLines: false,
+          bezierCurve: false
         };
       }
     });
