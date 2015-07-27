@@ -21,7 +21,7 @@
     return {
       'resources': factory('resources'),
       'backups': factory('backups'),
-      'users': factory('project-permissions'),
+      'users': factory('users'),
     }
   }
 })();
