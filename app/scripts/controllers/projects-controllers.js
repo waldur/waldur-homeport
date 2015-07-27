@@ -544,6 +544,7 @@
         filter = filter || {};
         currentStateService.getProject().then(function(project){
           filter['project_uuid'] = project.uuid;
+          vm.service.defaultFilter.project_uuid = project.uuid;
           fn(filter);
         })
       },
@@ -601,6 +602,7 @@
         filter = filter || {};
         currentStateService.getProject().then(function(project){
           filter['project_uuid'] = project.uuid;
+          vm.service.defaultFilter.project_uuid = project.uuid;
           fn(filter);
         })
       },
@@ -641,8 +643,11 @@ angular.module('ncsaas')
         getList: function(filter) {
           var vm = this;
           var fn = this._super.bind(vm);
+          filter = filter || {};
           currentStateService.getProject().then(function(project){
-            fn({'project_uuid': project.uuid});
+            filter['project_uuid'] = project.uuid;
+            vm.service.defaultFilter.project_uuid = project.uuid;
+            fn(filter);
           })
         },
 
@@ -733,6 +738,7 @@ angular.module('ncsaas')
         filter = filter || {};
         currentStateService.getProject().then(function(project){
           filter['project_uuid'] = project.uuid;
+          vm.service.defaultFilter.project_uuid = project.uuid;
           fn(filter);
         })
       },
@@ -816,6 +822,7 @@ angular.module('ncsaas')
         filter = filter || {};
         currentStateService.getProject().then(function(project){
           filter['project_uuid'] = project.uuid;
+          vm.service.defaultFilter.project_uuid = project.uuid;
           fn(filter);
         })
       },

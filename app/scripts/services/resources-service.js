@@ -7,8 +7,8 @@
   function resourcesService(baseServiceClass, ENV, $http, $q) {
     var ServiceClass = baseServiceClass.extend({
       endpoints: {
-        'Instance': '/instances/',
-        'Droplet': '/digitalocean-droplets/'
+        'IaaS.Instance': '/instances/',
+        'DigitalOcean.Droplet': '/digitalocean-droplets/'
       },
 
       init:function() {
