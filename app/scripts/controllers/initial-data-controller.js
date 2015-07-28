@@ -75,9 +75,11 @@
 
   angular.module('ncsaas')
     .controller('InitialDataControllerDemo',
-    ['usersService', 'servicesService', 'baseControllerClass', InitialDataControllerDemo]);
+    ['usersService', 'servicesService', 'baseControllerClass', 'currentStateService',
+      'planCustomersService', InitialDataControllerDemo]);
 
-  function InitialDataControllerDemo(usersService, servicesService, baseControllerClass) {
+  function InitialDataControllerDemo(
+    usersService, servicesService, baseControllerClass, currentStateService, planCustomersService) {
     var controllerScope = this;
     var Controller = baseControllerClass.extend({
       user: {},
@@ -96,6 +98,13 @@
         });
         servicesService.getServicesList().then(function(response) {
           vm.services = response;
+        });
+        currentStateService.getCustomer().then(function(customer) {
+          planCustomersService.getList({customer: customer.uuid}).then(function(planCustomers) {
+            if (planCustomers.length !== 0) {
+              vm.plan = planCustomers[0].plan;
+            }
+          });
         });
       },
       addService: function() {

@@ -1,12 +1,17 @@
 <div ng-controller="InitialDataControllerDemo as InitialData">
     <div class="initial-data-page">
         <div class="first-step">
-            <h2>STEP 1: Tell us more about yourself</h2>
+            <h2>Welcome to NodeConductor, {{ InitialData.user.full_name }}</h2>
+            <p>Nodeconductor is a cloud management platform for
+                project-based resouce management. </p>
             <div class="logo">
                 <div class="img-wrapper">
                     <img gravatar-src="InitialData.user.email" alt=""/>
                 </div>
-                <a class="green-btn">Select a icon</a>
+                <span class="manage-gravatar">
+                    Manage at
+                    <a href="//gravatar.com" target="_blank">gravatar.com</a>
+                </span>
                 <div class="clear"></div>
             </div>
             <div class="fields">
@@ -17,8 +22,24 @@
             </div>
             <div class="clear"></div>
         </div>
+        <aside>
+            <p>
+                <span>Your current plan is a <a>{{ InitialData.plan.name }}</a></span><br/>
+                You can upgrade plan in your profile.
+            </p>
+            <div class="col initial-package">
+                <span class="plan-name">{{ InitialData.plan.name }}</span>
+                <div class="plan-item">
+                    <table>
+                        <tr ng-repeat="quota in InitialData.plan.quotas">
+                            <td>{{ quota.value }} {{ quota.name }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </aside>
         <div class="second-step">
-            <h2>STEP 2: Enter access codes</h2>
+            <h2>Enter access codes</h2>
             <div class="fields-block state">
                 <div class="icon-block">
                     <img src="/static/images/appstore/icon-aws.png" alt=""/>
@@ -72,7 +93,9 @@
             </div>
             <div class="button-block">
                 <a class="green-btn">Let’s get started</a>
+                <span>By continuing you agree to the <a>Terms of Service</a>.</span>
             </div>
+            <div class="clear"></div>
         </div>
     </div>
 </div>
