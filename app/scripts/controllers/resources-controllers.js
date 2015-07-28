@@ -34,54 +34,47 @@
         ];
         this.entityOptions = {
           entityData: {
-            noDataText: 'You have no resources yet.'
+            noDataText: 'You have no resources yet.',
+            createLink: 'appstore.store',
+            createLinkText: 'Create',
+            importLink: 'import.import',
+            importLinkText: 'Import'
           },
           list: [
+            {
+              type: ENTITYLISTFIELDTYPES.statusCircle,
+              propertyName: 'state',
+              onlineStatus: ENV.resourceOnlineStatus
+            },
             {
               name: 'Name',
               propertyName: 'name',
               type: ENTITYLISTFIELDTYPES.name,
-              link: 'resources.details({uuid: entity.uuid})',
+              link: 'resources.details({uuid: entity.uuid, resource_type: entity.resource_type})',
               showForMobile: ENTITYLISTFIELDTYPES.showForMobile
             },
             {
-              name: 'Project',
-              propertyName: 'project_name',
-              type: ENTITYLISTFIELDTYPES.link,
-              link: 'projects.details({uuid: entity.project_uuid })'
+              name: 'Type',
+              propertyName: 'resource_type',
+              type: ENTITYLISTFIELDTYPES.noType
             },
             {
-              name: 'Access information',
+              name: 'Access',
               propertyName: 'external_ips',
               emptyText: 'No access info',
               type: ENTITYLISTFIELDTYPES.listInField
-            },
-            {
-              name: 'Status',
-              propertyName: 'state',
-              type: ENTITYLISTFIELDTYPES.entityStatusField,
-              onlineStatus: ENV.resourceOnlineStatus,
-              offlineStatus: ENV.resourceOfflineStatus
-
             }
           ]
         };
-
       },
       stopResource:function(resource) {
-        var vm = this;
-        vm.service.stopResource(resource.uuid).then(
-          vm.reInitResource.bind(vm, resource), vm.handleActionException);
+        resource.$action('stop', this.reInitResource.bind(this, resource), this.handleActionException);
       },
       startResource:function(resource) {
-        var vm = this;
-        vm.service.startResource(resource.uuid).then(
-          vm.reInitResource.bind(vm, resource), vm.handleActionException);
+        resource.$action('start', this.reInitResource.bind(this, resource), this.handleActionException);
       },
       restartResource:function(resource) {
-        var vm = this;
-        vm.service.restartResource(resource.uuid).then(
-          vm.reInitResource.bind(vm, resource), vm.handleActionException);
+        resource.$action('restart', this.reInitResource.bind(this, resource), this.handleActionException);
       },
       isOperationAvailable:function(operation, resource) {
         var availableOperations = this.service.getAvailableOperations(resource);
@@ -90,7 +83,7 @@
       },
       reInitResource:function(resource) {
         var vm = this;
-        vm.service.$get(resource.uuid).then(function(response) {
+        vm.service.$get(resource.resource_type, resource.uuid).then(function(response) {
           var index = vm.list.indexOf(resource);
           vm.list[index] = response;
         });
@@ -108,22 +101,6 @@
     var ResourceController = baseResourceListController.extend({
       init:function() {
         this.service = resourcesService;
-        this.controllerScope = controllerScope;
-        this._super();
-      }
-    });
-
-    controllerScope.__proto__ = new ResourceController();
-  }
-
-  angular.module('ncsaas')
-    .controller('DigitalOceanListController', ['baseResourceListController', 'digitalOceanResourcesService', DigitalOceanListController]);
-
-  function DigitalOceanListController(baseResourceListController, digitalOceanResourcesService) {
-    var controllerScope = this;
-    var ResourceController = baseResourceListController.extend({
-      init:function() {
-        this.service = digitalOceanResourcesService;
         this.controllerScope = controllerScope;
         this._super();
       }
@@ -247,12 +224,18 @@
       .controller('ResourceDetailUpdateController', [
         '$stateParams',
         '$scope',
+        '$state',
         'resourcesService',
         'baseControllerDetailUpdateClass',
         ResourceDetailUpdateController
       ]);
 
-  function ResourceDetailUpdateController($stateParams, $scope, resourcesService, baseControllerDetailUpdateClass) {
+  function ResourceDetailUpdateController(
+    $stateParams,
+    $scope,
+    $state,
+    resourcesService,
+    baseControllerDetailUpdateClass) {
     var controllerScope = this;
     var Controller = baseControllerDetailUpdateClass.extend({
       activeTab: 'backups',
@@ -261,12 +244,28 @@
         this.service = resourcesService;
         this.controllerScope = controllerScope;
         this._super();
-        this.detailsState = 'resources.details';
         this.activeTab = $stateParams.tab ? $stateParams.tab : this.activeTab;
       },
 
-      afterActivate: function() {
-        $scope.$broadcast('resourceLoaded', this.model);
+      activate:function() {
+        var vm = this;
+        vm.service.$get($stateParams.resource_type, $stateParams.uuid).then(function(response) {
+          vm.model = response;
+          $scope.$broadcast('resourceLoaded', vm.model);
+        }, function() {
+          $state.go('errorPage.notFound');
+        });
+      },
+
+      update:function() {
+        var vm = this;
+        vm.model.$update(success, error);
+        function success() {
+          $state.go('resources.details', {'resource_type': $stateParams.resource_type, 'uuid': vm.model.uuid});
+        }
+        function error(response) {
+          vm.errors = response.data;
+        }
       }
     });
 
