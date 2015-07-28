@@ -27,6 +27,12 @@
       init: function() {
         this.controllerScope = controllerScope;
         this.getServices();
+        this.setSignalHandler('currentCustomerUpdated', this.currentCustomerUpdatedHandler.bind(controllerScope));
+        this._super();
+      },
+
+      currentCustomerUpdatedHandler: function() {
+        this.getServices();
       },
 
       toggleResource: function(resource){
