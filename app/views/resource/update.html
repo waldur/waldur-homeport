@@ -13,7 +13,7 @@
                     </div>
                 </section>
                 <section class="save">
-                    <a ui-sref="resources.details({uuid:ResourceDetailUpdate.model.uuid})" class="button-cancel" translate>Cancel</a>
+                    <a ui-sref="resources.details({uuid:ResourceDetailUpdate.model.uuid, resource_type: ResourceDetailUpdate.resource_type})" class="button-cancel" translate>Cancel</a>
                     <button class="button-apply" ng-click="ResourceDetailUpdate.update()" ng-show="ResourceDetailUpdate.model.name.length" type="submit" translate>Save</button>
                 </section>
             </div>

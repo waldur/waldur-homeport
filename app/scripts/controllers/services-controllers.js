@@ -4,6 +4,7 @@
   angular.module('ncsaas')
     .service('baseServiceListController', [
       'baseControllerListClass',
+      'ENTITYLISTFIELDTYPES',
       'customerPermissionsService',
       'usersService',
       'joinService',
@@ -12,6 +13,7 @@
   // need for service tab
   function baseServiceListController(
     baseControllerListClass,
+    ENTITYLISTFIELDTYPES,
     customerPermissionsService,
     usersService,
     joinService
@@ -28,6 +30,22 @@
             clickFunction: this.remove.bind(this.controllerScope)
           }
         ];
+        this.entityOptions = {
+          entityData: {
+            noDataText: 'No services yet.',
+            createLink: 'services.create',
+            createLinkText: 'Create service',
+          },
+          list: [
+            {
+              name: 'Name',
+              propertyName: 'name',
+              type: ENTITYLISTFIELDTYPES.name,
+              link: 'services.details({uuid: entity.uuid, provider: entity.provider})',
+              className: 'name'
+            }
+          ]
+        };
       },
 
       canUserAddService: function() {
@@ -57,6 +75,7 @@
       init:function() {
         this.controllerScope = controllerScope;
         this._super();
+
       }
     });
 
@@ -229,7 +248,7 @@
       },
       getServiceProjects: function() {
         var vm = this;
-        joinServiceProjectLinkService.getList(vm.service).then(function(response) {
+        joinServiceProjectLinkService.getList({'service': vm.service}).then(function(response) {
           vm.serviceProjects = response;
         });
       }

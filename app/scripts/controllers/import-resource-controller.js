@@ -5,7 +5,7 @@
     .controller('ImportResourceController',
       ['baseControllerClass',
       'digitalOceanLinkService',
-      'digitalOceanResourcesService',
+      'resourcesService',
       'joinService',
       'joinServiceProjectLinkService',
       ImportResourceController]);
@@ -13,7 +13,7 @@
   function ImportResourceController(
     baseControllerClass,
     digitalOceanLinkService,
-    digitalOceanResourcesService,
+    resourcesService,
     joinService,
     joinServiceProjectLinkService
     ) {
@@ -26,6 +26,12 @@
 
       init: function() {
         this.controllerScope = controllerScope;
+        this.getServices();
+        this.setSignalHandler('currentCustomerUpdated', this.currentCustomerUpdatedHandler.bind(controllerScope));
+        this._super();
+      },
+
+      currentCustomerUpdatedHandler: function() {
         this.getServices();
       },
 
@@ -60,7 +66,8 @@
       getImportedResourcesForService: function(service) {
         var self = this;
         controllerScope.importedResources = [];
-        digitalOceanResourcesService.getList({service_uuid: service.uuid}).then(function(response){
+        var query = {'resource_type': service.resource_type, 'service_uuid': service.uuid};
+        resourcesService.getList(query).then(function(response){
           controllerScope.importedResources = response;
         }, function(){
           self.flashMessage('warning', 'Unable to get list of imported resources');
@@ -88,7 +95,7 @@
       getProjectsForService: function(service) {
         var self = this;
         controllerScope.projectList = [];
-        joinServiceProjectLinkService.getList(service).then(function(projects){
+        joinServiceProjectLinkService.getList({'service':service}).then(function(projects){
           controllerScope.projectList = projects;
           if (projects.length == 1) {
             controllerScope.selectedProject = projects[0];
