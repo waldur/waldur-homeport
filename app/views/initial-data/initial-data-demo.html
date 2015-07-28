@@ -2,8 +2,7 @@
     <div class="initial-data-page">
         <div class="first-step">
             <h2>Welcome to NodeConductor, {{ InitialData.user.full_name }}</h2>
-            <p>Nodeconductor is a cloud management platform for
-                project-based resouce management. </p>
+            <p>Get your cloud expenses under control with just <b>1</b> click!</p>
             <div class="logo">
                 <div class="img-wrapper">
                     <img gravatar-src="InitialData.user.email" alt=""/>
@@ -24,15 +23,15 @@
         </div>
         <aside>
             <p>
-                <span>Your current plan is a <a>{{ InitialData.plan.name }}</a></span><br/>
-                You can upgrade plan in your profile.
+                <span>You are on a forever free plan!</span><br/>
+                If you need more analytical power please upgrade your plan.
             </p>
             <div class="col initial-package">
-                <span class="plan-name">{{ InitialData.plan.name }}</span>
+                <span class="plan-name">Free plan</span>
                 <div class="plan-item">
                     <table>
                         <tr ng-repeat="quota in InitialData.plan.quotas">
-                            <td>{{ quota.value }} {{ quota.name }}</td>
+                            <td>{{ quota.value }} {{ InitialData.getPrettyQuotaName(quota.name) }}</td>
                         </tr>
                     </table>
                 </div>
@@ -58,11 +57,11 @@
             <div class="fields-block state">
                 <div class="icon-block">
                     <img src="/static/images/appstore/icon-DigitalOcean.png" alt=""/>
-                    <span>Digital Ocean</span>
+                    <span>DigitalOcean</span>
                     <span class="info">?</span>
                 </div>
                 <div class="fields">
-                    <label>Digital Ocean Token</label>
+                    <label>DigitalOcean Token</label>
                     <input type="text"/>
                 </div>
                 <div class="clear"></div>
@@ -83,7 +82,7 @@
             </div>
             <div class="fields-block green">
                 <div class="select-block">
-                    <label for="">Choose a service</label>
+                    <label for="">Add another service</label>
                     <select ng-model="InitialData.chosenService"
                             ng-options="key as key for (key, value) in InitialData.services">
                     </select>
