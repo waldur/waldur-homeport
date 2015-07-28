@@ -134,6 +134,20 @@
                 position: relative;
                 font-size: 16px;
                 font-weight: bold;
+                &.gitlab {
+                    h3 {
+                        display: none;
+                    }
+                    .icon {
+                        width: 150px;
+                    }
+                }
+                &.oracle {
+                    @extend .gitlab;
+                    .icon {
+                        padding-top: 15px;
+                    }
+                }
                 span {
                     display: block;
                     width: 93%;
@@ -147,6 +161,9 @@
                     display: inline-block;
                     position: relative;
                     height: 45px;
+                    &.unique-icon {
+                        width: 150px;
+                    }
                     img{
                         display: inline;
 
