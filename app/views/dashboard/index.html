@@ -136,19 +136,19 @@
                     <ul class="counters">
                         <li class="active-alert">
                             <div class="counter-name">Active alerts</div>
-                            <div class="counter" ng-bind="project.alertsCount"></div>
+                            <div class="counter" ng-bind="project.count.alerts"></div>
                         </li>
                         <li class="resources empty">
                             <div class="counter-name">Resources</div>
-                            <div class="counter" ng-bind="project.resources"></div>
+                            <div class="counter" ng-bind="project.count.resources"></div>
                         </li>
                         <li class="services empty">
                             <div class="counter-name">Services</div>
-                            <div class="counter" ng-bind="project.services"></div>
+                            <div class="counter" ng-bind="project.count.services"></div>
                         </li>
                         <li class="people">
                             <div class="counter-name">People</div>
-                            <div class="counter" ng-bind="project.users"></div>
+                            <div class="counter" ng-bind="project.count.users"></div>
                         </li>
 
                     </ul>
@@ -176,7 +176,7 @@
                                 <span ng-bind="::alert.message"></span>
                             </div>
                             <div class="right-p">
-                                <span class="date" ng-bind="alert.created"></span>
+                                <span class="date" am-time-ago="alert.created"></span>
                                 <span class="time"></span>
                             </div>
                             <div class="clear"></div>
@@ -191,7 +191,7 @@
                     <ul>
                         <li ng-repeat="event in EventList.events">
                             <div class="left-p">
-                                <span ng-bind="event.message"></span>
+                                <span ng-bind="::event.message"></span>
                             </div>
                             <div class="right-p">
                                 <span class="date" am-time-ago="event['@timestamp']"></span>

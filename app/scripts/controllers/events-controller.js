@@ -78,20 +78,26 @@
   }
   angular.module('ncsaas')
     .controller('DashboardIndexController', [
+      '$scope',
       'baseEventListController',
       'projectsService',
       'alertsService',
       'eventsService',
       'eventStatisticsService',
+      'resourcesCountService',
+      'currentStateService',
       'ENV',
       DashboardIndexController]);
 
   function DashboardIndexController(
+    $scope,
     baseEventListController,
     projectsService,
     alertsService,
     eventsService,
     eventStatisticsService,
+    resourcesCountService,
+    currentStateService,
     ENV) {
     var controllerScope = this;
     var EventController = baseEventListController.extend({
@@ -133,50 +139,60 @@
           bezierCurve: false
         };
 
-        this.getProjects();
-        this.getEventsList();
-        this.getAlerts();
+        $scope.$on('currentCustomerUpdated', this.onCustomerUpdate.bind(this))
+        this.onCustomerUpdate();
       },
 
-      getAlerts: function (project) {
+      onCustomerUpdate: function() {
+        this.getCustomerProjects();
+        this.getCustomerEvents();
+        this.getCustomerAlerts();
+      },
+
+      getCustomerAlerts: function () {
         var vm = this;
         alertsService.getList().then(function(response){
           vm.alerts = response;
         })
       },
 
-      getEventsList: function (project) {
+      getCustomerEvents: function () {
         var vm = this;
         eventsService.getList().then(function(response){
           vm.events = response;
         })
       },
 
-      getProjects: function() {
+      getCustomerProjects: function() {
         var vm = this;
         projectsService.getList().then(function(response) {
           vm.projects = response;
           vm.projects.forEach(function(project){
-            vm.getResources(project);
-            vm.getEventsStatistics(project);
+            vm.getProjectResources(project);
+            vm.getProjectEvents(project);
           })
         });
       },
 
-      getResources: function (project) {
-        for (var i = 0; i < project.quotas.length; i++) {
-          if (project.quotas[i].name == 'nc_resource_count') {
-            project.resources = project.quotas[i].usage;
-          } else if (project.quotas[i].name == 'nc_service_count') {
-            project.services = project.quotas[i].usage;
-          }
-        }
+      getProjectResources: function (project) {
+        project.count = {};
+        project.count.services = project.services.length;
+        resourcesCountService.users({'project': project.uuid}).then(function(count) {
+          project.count.users = count;
+        })
+        resourcesCountService.resources({'project_uuid': project.uuid}).then(function(count) {
+          project.count.resources = count;
+        })
+        resourcesCountService.alerts({'scope': project.url}).then(function(count) {
+          project.count.alerts = count;
+        })
       },
 
-      getEventsStatistics: function (project) {
+      getProjectEvents: function (project) {
         var end = moment.utc().unix();
         var start = moment.utc().subtract(1, 'week').unix();
         eventStatisticsService.getList({
+          'scope': project.url,
           'start': start,
           'end': end,
           'points_count': 7 // days in week
