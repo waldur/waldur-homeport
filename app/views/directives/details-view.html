@@ -1,0 +1,82 @@
+<div>
+    <section class="title-wrapper">
+        <div class="container">
+            <div class="left-side">
+                <h1 ng-if="options.title ">{{ options.title }}</h1>
+                <a ng-if="options.listState" ui-sref="{{ options.listState }}"
+                   class="back-to-list green-btn">Back to list</a>
+            </div>
+            <div class="details-about">
+
+                <div ng-if="options.hasLogo" class="profile-logo">
+                    <section class="avatar">
+                        <span class="avatar big">
+                            <img ng-src="{{controller.imageUrl}}" alt="" class="avatar-img"
+                                 ng-hide="controller.files.length">
+
+                            <img ngf-src="controller.files[0]" alt="" class="avatar-img"
+                                 ng-show="controller.files.length">
+                        </span>
+                    </section>
+                    <section class="avatar-edit" ng-show="controller.canEdit">
+                        <a class="button" ngf-select ngf-accept="'image/*'"
+                           ng-hide="controller.files.length"
+                           ng-model="controller.files">New logo</a>
+
+                        <a class="button"
+                           ng-show="controller.model.image && controller.files.length==0"
+                           ng-click="controller.deleteImage()">Delete</a>
+
+                        <a class="button"
+                           ng-show="controller.files.length"
+                           ng-click="controller.uploadImage()">Save</a>
+
+                        <a class="button"
+                           ng-show="controller.files.length"
+                           ng-click="controller.files=[]">Cancel</a>
+                    </section>
+                </div>
+
+                <span ng-repeat="field in options.aboutFields">
+                    <span class="{{ field.className }}"
+                          ng-if="!field.isEditable || !controller.canEdit">{{ controller.model[field.fieldKey] }}</span>
+                    <span editable-text="controller.model[field.fieldKey]"
+                          buttons="no"
+                          onbeforesave="controller.update()"
+                          ng-if="field.isEditable && controller.canEdit"
+                          class="{{ field.className }}"
+                          title="Click to edit">
+                        {{ controller.model[field.fieldKey] }}
+                    </span>
+                </span>
+            </div>
+        </div>
+    </section>
+    <div class="profile-content">
+        <div class="container">
+            <div class="tabs-wrapper">
+                <aside>
+                    <div class="input-group">
+                        <input type="search" placeholder="Search"/>
+                    </div>
+                    <a class="open-tabs button" ng-click="openTabs = !openTabs">Tabs</a>
+                    <ul class="tabs-links" ng-class="{'tabs-opened': openTabs}">
+                        <li ng-class="{'active': options.activeTab === tab.key}"
+                            ng-click="options.activeTab = tab.key"
+                            ng-repeat="tab in options.tabs">
+                            {{ tab.title }}
+                        </li>
+                    </ul>
+                </aside>
+                <div class="tab-content">
+                    <div class="tab" id="{{ tabContent.key }}"
+                         ng-class="{'tab-active': options.activeTab === tabContent.key}"
+                         ng-if="tabContent.key == options.activeTab"
+                         ng-repeat="tabContent in options.tabs">
+                        <div ui-view="{{ tabContent.viewName }}"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
