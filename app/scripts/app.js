@@ -177,8 +177,27 @@
           templateUrl: 'views/partials/base.html',
         })
 
-        .state('dashboard.eventlog', {
+        .state('dashboard.index', {
           url: '',
+          views: {
+            'appHeader@dashboard' : {
+              templateUrl: 'views/partials/app-header.html',
+            },
+            'appContent@dashboard' : {
+              templateUrl: 'views/dashboard/index.html',
+            },
+            'eventTypes@dashboard.index' : {
+              templateUrl: 'views/events/event-types.html',
+            }
+          },
+          resolve: {
+            authenticated: authCheck
+          },
+          auth: true
+        })
+
+        .state('dashboard.eventlog', {
+          url: '/events/',
           views: {
             'appHeader@dashboard' : {
               templateUrl: 'views/partials/app-header.html',
@@ -196,24 +215,6 @@
           auth: true
         })
 
-        .state('dashboard.demoeventlog', {
-          url: 'demo/',
-          views: {
-            'appHeader@dashboard' : {
-              templateUrl: 'views/partials/app-header.html',
-            },
-            'appContent@dashboard' : {
-              templateUrl: 'views/dashboard/demo-event-log.html',
-            },
-            'eventTypes@dashboard.demoeventlog' : {
-              templateUrl: 'views/events/event-types.html',
-            }
-          },
-          resolve: {
-            authenticated: authCheck
-          },
-          auth: true
-        })
         .state('appstore', {
           url: '/appstore/',
           abstract: true,

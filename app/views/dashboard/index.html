@@ -1,4 +1,4 @@
-<div ng-controller="DemoEventListController as EventList" class="event-log">
+<div ng-controller="DashboardIndexController as EventList" class="event-log">
     <div class="white-box">
         <h2 class="app-title">Dashboard</h2>
         <ul class="sort-list event-nav">
@@ -200,7 +200,7 @@
                         </li>
                     </ul>
                 </div>
-                <a class="show-all">Show all recent events</a>
+                <a class="show-all" ui-sref="dashboard.eventlog">Show all recent events</a>
             </div>
         </div>
         <div class="clear"></div>

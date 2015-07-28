@@ -77,16 +77,16 @@
     controllerScope.__proto__ = new EventController();
   }
   angular.module('ncsaas')
-    .controller('DemoEventListController', [
+    .controller('DashboardIndexController', [
       'baseEventListController',
       'projectsService',
       'alertsService',
       'eventsService',
       'eventStatisticsService',
       'ENV',
-      DemoEventListController]);
+      DashboardIndexController]);
 
-  function DemoEventListController(
+  function DashboardIndexController(
     baseEventListController,
     projectsService,
     alertsService,
