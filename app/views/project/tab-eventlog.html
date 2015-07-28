@@ -1,16 +1,6 @@
 <div ng-controller="ProjectEventTabController as EventList">
-    <div class="white-box">
-        <ul class="sort-list">
-            <li class="search divid">
-                <div class="search-box">
-                    <input type="text" ng-model='EventList.searchInput' ng-change="EventList.search()">
-                    <button class="search-button"></button>
-                </div>
-            </li>
-        </ul>
-    </div>
 
-    <div class="white-box clear">
+    <div class="clear">
         <ul class="object-list">
             <li ng-repeat="event in EventList.list">
                 <div class="list-item">

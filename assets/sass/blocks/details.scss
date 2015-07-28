@@ -1,14 +1,39 @@
+.green-btn {
+  display: block;
+  float: right;
+  background: #50b848;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #FFF;
+  font-weight: 700;
+  height: 32px;
+  padding: 0 20px;
+  line-height: 32px;
+  text-decoration: none;
+  margin-left: 10px;
+}
 .title-wrapper {
   min-height: 70px;
   padding-top: 15px;
-  h1 {
+  .left-side {
     float: left;
-    text-transform: uppercase;
-    display: block;
-    font-weight: bold;
-    color: $dashboard-green;
-    font-size: 16px;
-    width: 180px;
+    width: 170px;
+    margin-bottom: 10px;
+    margin-right: 40px;
+    .green-btn {
+      float: none;
+      text-align: center;
+      margin-left: 0;
+    }
+    h1 {
+      text-transform: uppercase;
+      display: block;
+      font-weight: bold;
+      color: $dashboard-green;
+      font-size: 16px;
+      margin-top: 0;
+    }
   }
   ul {
     margin-left: 30px;
@@ -208,21 +233,6 @@
   }
 }
 
-.green-btn {
-  display: block;
-  float: right;
-  background: #50b848;
-  border-radius: 5px;
-  font-size: 16px;
-  color: #FFF;
-  font-weight: bold;
-  height: 32px;
-  padding: 0 20px;
-  line-height: 32px;
-  text-decoration: none;
-  margin-left: 10px;
-}
-
 .profile-content {
   @extend .resources-content;
   a {
@@ -241,6 +251,9 @@
       margin-top: 0;
     }
 
+  }
+  .green-btn {
+    float: right;
   }
   .table {
     margin: 27px 0;
@@ -276,6 +289,15 @@
     margin-right: 18px;
     overflow: hidden;
   }
+  .icon {
+    width: 17px;
+    height: 15px;
+    background: url("/static/images/edit-icon.png") no-repeat;
+    float: left;
+    margin-left: 10px;
+    margin-top: 4px;
+    cursor: pointer;
+  }
   .about {
     .editable-click {
       border: 0;
@@ -305,15 +327,6 @@
         float: left;
         font-weight: bold;
       }
-      .icon {
-        width: 17px;
-        height: 15px;
-        background: url("/static/images/edit-icon.png") no-repeat;
-        float: left;
-        margin-left: 10px;
-        margin-top: 4px;
-        cursor: pointer;
-      }
     }
     p {
       font-size: 15px;
@@ -322,6 +335,27 @@
       line-height: 10px;
     }
 
+  }
+}
+.details-about {
+  @extend .user-about;
+  .name {
+    font-size: 24px;
+    font-weight: bold;
+    float: left;
+  }
+  .profile-logo {
+    margin: 0 10px 10px 0;
+    display: inline-block;
+    float: left;
+    .avatar-edit {
+      float: left;
+    }
+    .avatar {
+      float: left;
+      width: 80px;
+      margin-right: 5px;
+    }
   }
 }
 .password {

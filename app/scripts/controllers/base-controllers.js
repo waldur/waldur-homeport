@@ -206,7 +206,13 @@
         function getProject() {
           if ($window.localStorage[ENV.currentProjectUuidStorageKey]) {
             projectsService.$get($window.localStorage[ENV.currentProjectUuidStorageKey]).then(function(response) {
-              projectDeferred.resolve(response);
+              currentStateService.getCustomer().then(function(customer) {
+                if (response.customer_uuid == customer.uuid) {
+                  projectDeferred.resolve(response);
+                } else {
+                  getFirstProject();
+                }
+              });
             }, getFirstProject);
           } else {
             getFirstProject();

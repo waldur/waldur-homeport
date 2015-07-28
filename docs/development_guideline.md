@@ -281,3 +281,66 @@ Config file settings:
     ];  
   
    
+## details-view directive
+
+  Directive is used to show details profile
+  
+  Details view directive calling looks like:
+  
+    <details-view details-options="CustomerDetailUpdate.detailsViewOptions"
+                  details-controller="CustomerDetailUpdate"></details-view>
+    
+  - details-options - object of directive options
+  - details-controller - current controller
+  
+  Options object looks like:
+    
+    this.detailsViewOptions = {
+      title: 'Customer',
+      activeTab: $stateParams.tab ? $stateParams.tab : this.activeTab,
+      hasLogo: true,
+      listState: 'organizations.list',
+      aboutFields: [
+        {
+          fieldKey: 'name',
+          isEditable: true,
+          className: 'name'
+        },
+        {
+          fieldKey: 'contact_details',
+          isEditable: true
+        }
+      ],
+      tabs: [
+        {
+          title: 'Resources',
+          key: 'resources',
+          viewName: 'tabResources'
+        },
+        {
+          title: 'Projects',
+          key: 'projects',
+          viewName: 'tabProjects'
+        },
+        {
+          title: 'Services',
+          key: 'services',
+          viewName: 'tabServices'
+        }
+      ]
+    };
+  
+  Options object
+  
+    title       - string - name of entity
+    activeTab   - string - key of tab witch should be active at first
+    hasLogo     - bool   - state of logo showing 
+    listState   - string - link to list page
+    aboutFields - array  - objects with options for fields
+        fieldKey   - string - key for filed
+        isEditable - bool   - state of using edit in place directive
+        className  - string - class name for field
+    tabs        - array  - objects with options for tabs
+        title      - string - title of tab
+        key        - string - key of tab
+        viewName   - string - key for tab view

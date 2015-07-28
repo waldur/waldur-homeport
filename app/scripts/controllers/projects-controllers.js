@@ -138,13 +138,50 @@
     var Controller = baseControllerDetailUpdateClass.extend({
       activeTab: 'eventlog',
       customer: null,
+      canEdit: false,
 
       init:function() {
         this.service = projectsService;
         this.controllerScope = controllerScope;
         this._super();
         this.detailsState = 'projects.details';
-        this.activeTab = $stateParams.tab ? $stateParams.tab : this.activeTab;
+        this.detailsViewOptions = {
+          title: 'Project',
+          activeTab: $stateParams.tab ? $stateParams.tab : this.activeTab,
+          listState: 'projects.list',
+          aboutFields: [
+            {
+              fieldKey: 'name',
+              isEditable: true,
+              className: 'name'
+            }
+          ],
+          tabs: [
+            {
+              title: 'Events',
+              key: 'eventlog',
+              viewName: 'tabEventlog'
+            },
+            {
+              title: 'Resources',
+              key: 'resources',
+              viewName: 'tabResources'
+            },
+            {
+              title: 'Users',
+              key: 'users',
+              viewName: 'tabUsers'
+            },
+            {
+              title: 'Services',
+              key: 'services',
+              viewName: 'tabServices'
+            }
+          ]
+        };
+      },
+      afterActivate: function() {
+        controllerScope.canEdit = controllerScope.model;
       }
     });
 
