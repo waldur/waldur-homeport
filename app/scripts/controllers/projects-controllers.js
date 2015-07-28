@@ -664,93 +664,120 @@ angular.module('ncsaas')
 
 (function() {
   angular.module('ncsaas')
-    .controller('ProjectUsersTabController', [
-      'baseControllerListClass',
-      'usersService',
+    .controller('ProjectUsersTabController2', [
       '$scope',
       'currentStateService',
-      'ENTITYLISTFIELDTYPES',
-      ProjectUsersTabController
+      'projectsService',
+      'projectPermissionsService',
+      'USERPROJECTROLE',
+      'usersService',
+      'baseControllerClass',
+      ProjectUsersTabController2
     ]);
 
-  function ProjectUsersTabController(
-    baseControllerListClass,
-    usersService,
+  function ProjectUsersTabController2(
     $scope,
     currentStateService,
-    ENTITYLISTFIELDTYPES) {
-
+    projectsService,
+    projectPermissionsService,
+    USERPROJECTROLE,
+    usersService,
+    baseControllerClass) {
     var controllerScope = this;
-    var controllerClass = baseControllerListClass.extend({
+    var Controller = baseControllerClass.extend({
+      users: {}, // users with role in project
+      usersListForAutoComplete: [],
+      user: null,
+      project: null,
+
       init: function() {
-        this.controllerScope = controllerScope;
-        this.service = usersService;
         this._super();
-        this.searchFieldName = 'full_name';
-
-        this.entityOptions = {
-          entityData: {
-            noDataText: 'You have no users',
-            createLink: 'users.list', // TODO: Implement view for inviting users
-            createLinkText: 'Invite user'
-          },
-          list: [
-            {
-              type: ENTITYLISTFIELDTYPES.avatarPictureField,
-              className: 'avatar',
-              avatarSrc: 'email',
-              showForMobile: ENTITYLISTFIELDTYPES.showForMobile
-            },
-            {
-              name: 'Name',
-              propertyName: 'full_name',
-              type: ENTITYLISTFIELDTYPES.name,
-              link: 'users.details({uuid: entity.uuid})',
-              className: 'name',
-              showForMobile: ENTITYLISTFIELDTYPES.showForMobile
-            },
-            {
-              name: 'Email',
-              propertyName: 'email',
-              type: ENTITYLISTFIELDTYPES.noType
-            },
-            {
-              name: 'Username',
-              propertyName: 'username',
-              type: ENTITYLISTFIELDTYPES.noType
-            }
-          ]
-        };
-
+        this.adminRole = USERPROJECTROLE.admin;
+        this.managerRole = USERPROJECTROLE.manager;
+        this.users[this.adminRole] = [];
+        this.users[this.managerRole] = [];
+        this.activate();
         $scope.$on('currentProjectUpdated', this.setCurrentProject.bind(this));
-        $scope.$on('searchInputChanged', this.onSearchInputChanged.bind(this));
       },
 
       registerEventHandlers: function() {},
 
       setCurrentProject: function() {
-        this.getList();
+        this.activate();
       },
 
-      getList: function(filter) {
+      activate: function() {
         var vm = this;
-        var fn = this._super.bind(vm);
-        filter = filter || {};
         currentStateService.getProject().then(function(project){
-          filter['project_uuid'] = project.uuid;
-          vm.service.defaultFilter.project_uuid = project.uuid;
-          fn(filter);
-        })
+          vm.project = project;
+          vm.getUsersForProject(vm.adminRole);
+          vm.getUsersForProject(vm.managerRole);
+        });
+        this.getUserListForAutoComplete();
       },
-
-      onSearchInputChanged: function(event, searchInput) {
-        this.searchInput = searchInput;
-        this.search();
+      getUserListForAutoComplete: function(filter) {
+        var vm = this;
+        usersService.getList(filter).then(function(response) {
+          vm.usersListForAutoComplete = response;
+        });
+      },
+      getUsersForProject: function(role) {
+        var vm = this;
+        projectPermissionsService.getList({
+          role: role,
+          project: vm.project.uuid
+        }).then(function(response) {
+          vm.users[role] = response;
+        });
+      },
+      userSearchInputChanged: function(searchText) {
+        controllerScope.getUserListForAutoComplete({full_name: searchText});
+      },
+      selectedUsersCallback: function(selected) {
+        if (selected) {
+          controllerScope.user = selected.originalObject;
+          controllerScope.addUser(this.id);
+          controllerScope.getUserListForAutoComplete();
+        }
+      },
+      addUser: function(role) {
+        var vm = this;
+        var instance = projectPermissionsService.$create();
+        instance.user = vm.user.url;
+        instance.project = vm.project.url;
+        instance.role = role;
+        instance.$save(
+          function() {
+            vm.getUsersForProject(role);
+          },
+          function(response) {
+            alert(response.data.non_field_errors);
+          }
+        );
+      },
+      userProjectRemove: function(userProject) {
+        var vm = this;
+        var role = userProject.role;
+        var index = vm.users[role].indexOf(userProject);
+        var confirmDelete = confirm('Confirm user deletion?');
+        if (confirmDelete) {
+          projectPermissionsService.$delete(userProject.pk).then(
+            function() {
+              vm.users[role].splice(index, 1);
+            },
+            function(response) {
+              alert(response.data.detail);
+            }
+          );
+        } else {
+          alert('User was not deleted.');
+        }
       }
     });
 
-    controllerScope.__proto__ = new controllerClass();
+    controllerScope.__proto__ = new Controller();
   }
+
 })();
 
 
