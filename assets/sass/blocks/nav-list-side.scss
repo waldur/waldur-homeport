@@ -1,6 +1,15 @@
 .nav-list-side {
     @include clear-list;
     @include clearfix;
+    &:not(:last-child) {
+        > li {
+            &:not(:last-child) {
+                > a {
+                    border-bottom: 1px solid #47a340;
+                }
+            }
+        }
+    }
     > li {
         &.dropdown {
             position: relative;
@@ -25,7 +34,7 @@
             @extend .customers;
         }
         > a {
-            @include property(padding, 0 20);
+            @include property(margin, 0 20);
             @include property(padding-top, 10);
             @include property(height, 50);
             display: block;
@@ -33,8 +42,10 @@
             text-decoration: none;
             &.active {
                 color: white;
-                background-color: #76AE2C;
                 position: relative;
+                span {
+                    border-bottom: 1px solid white;
+                }
                 &.drop-active {
                     &:after {
                         z-index: 12;
@@ -84,17 +95,6 @@
                     } // sm
                 } // user-name
             } // &.user-area
-            &.dashboard {
-                &:before {
-                    position: relative;
-                    @include property(top, -3);
-                    @include property(margin-right, 5);
-                    @include inline-middle;
-                    @include icon-fa;
-                    content: '\f0e4';
-                    transform: translate(1.1, 1.1);
-                } // &:before
-            } // &.dashboard
             &.support {
                 &:before {
                     position: relative;
@@ -128,17 +128,6 @@
                     transform: translate(1.1, 1.1);
                 } // &:before
             } // &.project
-            &.resource {
-                &:before {
-                    position: relative;
-                    @include property(top, -1);
-                    @include property(margin-right, 5);
-                    @include inline-middle;
-                    @include icon-fa;
-                    content: '\f233';
-                    transform: translate(1.1, 1.1);
-                } // &:before
-            } // &.resource
             &.user {
                 &:before {
                     position: relative;
@@ -150,6 +139,16 @@
                     transform: translate(1.1, 1.1);
                 } // &:before
             } // invite-user
+            &.appstore {
+                $textColor: #fff200;
+                color: $textColor;
+                text-transform: uppercase;
+                &.active {
+                    span {
+                        border-color: $textColor;
+                    }
+                }
+            }
             &.mobile-trigger-link {
                 @include property(padding-top, 12);
                 @include property(font-size, 24);

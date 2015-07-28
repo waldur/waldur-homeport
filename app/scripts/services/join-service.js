@@ -40,12 +40,12 @@
 
       $get: function(provider, uuid) {
         var self = this;
-        if (provider == 'digitalocean') {
+        if (provider == 'DigitalOcean') {
           return digitalOceanService.$get(uuid).then(function(response){
             self.setDescription(response);
             return response;
           })
-        } else if (provider == 'openstack') {
+        } else if (provider == 'IaaS') {
           return cloudsService.$get(uuid).then(function(response){
             self.setDescription(response);
             return response;
@@ -65,11 +65,13 @@
 
       setDescription: function(service) {
         if (service.url.indexOf('digitalocean') > -1) {
-          service.provider = 'digitalocean';
+          service.provider = 'DigitalOcean';
           service.icon = '/static/images/icons/icon_digitalocean_small.png';
+          service.resource_type = 'DigitalOcean.Droplet';
         } else if (service.url.indexOf('cloud') > -1) {
-          service.provider = 'openstack';
+          service.provider = 'IaaS';
           service.icon = '/static/images/icons/icon_openstack_small.png';
+          service.resource_type = 'IaaS.Instance';
         }
       }
     });
