@@ -1,7 +1,11 @@
 <div>
     <section class="title-wrapper">
         <div class="container">
-            <h1>{{ options.title }}</h1>
+            <div class="left-side">
+                <h1 ng-if="options.title ">{{ options.title }}</h1>
+                <a ng-if="options.listState" ui-sref="{{ options.listState }}"
+                   class="back-to-list green-btn">Back to list</a>
+            </div>
             <div class="details-about">
 
                 <div ng-if="options.hasLogo" class="profile-logo">

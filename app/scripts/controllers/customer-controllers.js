@@ -88,6 +88,7 @@
           title: 'Organization',
           activeTab: $stateParams.tab ? $stateParams.tab : this.activeTab,
           hasLogo: true,
+          listState: 'organizations.list',
           aboutFields: [
             {
               fieldKey: 'name',

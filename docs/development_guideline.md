@@ -299,6 +299,7 @@ Config file settings:
       title: 'Customer',
       activeTab: $stateParams.tab ? $stateParams.tab : this.activeTab,
       hasLogo: true,
+      listState: 'organizations.list',
       aboutFields: [
         {
           fieldKey: 'name',
@@ -334,6 +335,7 @@ Config file settings:
     title       - string - name of entity
     activeTab   - string - key of tab witch should be active at first
     hasLogo     - bool   - state of logo showing 
+    listState   - string - link to list page
     aboutFields - array  - objects with options for fields
         fieldKey   - string - key for filed
         isEditable - bool   - state of using edit in place directive
