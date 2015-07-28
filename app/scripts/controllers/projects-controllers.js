@@ -458,3 +458,445 @@
     controllerScope.__proto__ = new Controller();
   }
 })();
+
+
+(function() {
+  angular.module('ncsaas')
+    .controller('ProjectStatsController', [
+      '$scope',
+      '$rootScope',
+      '$q',
+      'currentStateService',
+      'resourcesCountService',
+      ProjectStatsController]);
+
+    function ProjectStatsController($scope, $rootScope, $q, currentStateService, resourcesCountService) {
+      $scope.search = function() {
+        $rootScope.$broadcast('searchInputChanged', $scope.searchText);
+      }
+
+      setCurrentProject();
+      $scope.$on('currentProjectUpdated', setCurrentProject);
+
+      function setCurrentProject() {
+        currentStateService.getProject().then(function(project) {
+          $q.all([
+            resourcesCountService.resources({'project_uuid': project.uuid, 'resource_type': ['DigitalOcean.Droplet', 'IaaS.Instance']}),
+            resourcesCountService.resources({'project_uuid': project.uuid, 'resource_type': ['Oracle.Database', 'GitLab.Project']}),
+            resourcesCountService.backups({'project_uuid': project.uuid}),
+            resourcesCountService.users({'project': project.uuid}),
+          ]).then(function(responses) {
+            $scope.count = {};
+            $scope.count.vms = responses[0];
+            $scope.count.apps = responses[1];
+            $scope.count.backups = responses[2];
+            $scope.count.users = responses[3];
+            $scope.count.services = project.services.length;
+          })
+        });
+      }
+    }
+})();
+
+(function() {
+  angular.module('ncsaas')
+    .service('BaseProjectResourcesTabController', [
+      'baseResourceListController',
+      'resourcesService',
+      BaseProjectResourcesTabController]);
+
+    function BaseProjectResourcesTabController(
+      baseResourceListController,
+      resourcesService) {
+
+      var controllerClass = baseResourceListController.extend({
+        init: function() {
+          this.service = resourcesService;
+
+          this.service.defaultFilter['resource_type'] = [];
+          for (var i = 0; i < this.searchFilters.length; i++) {
+            var filter = this.searchFilters[i];
+            this.service.defaultFilter[filter.name].push(filter.value);
+          }
+
+          this.selectAll = true;
+          this._super();
+        }
+      })
+      return controllerClass;
+    }
+})();
+
+(function() {
+  angular.module('ncsaas')
+    .controller('ProjectResourcesTabController', [
+      'BaseProjectResourcesTabController',
+      'currentStateService',
+      '$scope',
+      ProjectResourcesTabController]);
+
+  function ProjectResourcesTabController(BaseProjectResourcesTabController, currentStateService, $scope) {
+    var controllerScope = this;
+    var ResourceController = BaseProjectResourcesTabController.extend({
+      init:function() {
+        this.controllerScope = controllerScope;
+        this.searchFilters = [
+          {
+            name: 'resource_type',
+            title: 'OpenStack',
+            value: 'IaaS.Instance'
+          },
+          {
+            name: 'resource_type',
+            title: 'DigitalOcean',
+            value: 'DigitalOcean.Droplet'
+          },
+          {
+            name: 'resource_type',
+            title: 'AWS EC2',
+            value: 'Amazon.EC2'
+          }
+        ];
+        this.searchFieldName = 'name';
+        this._super();
+
+        this.entityOptions.entityData.noDataText = 'You have no VMs yet';
+        this.entityOptions.entityData.createLinkText = 'Create VM';
+        this.entityOptions.entityData.importLinkText = 'Import VM';
+
+        $scope.$on('currentProjectUpdated', this.setCurrentProject.bind(this));
+        $scope.$on('searchInputChanged', this.onSearchInputChanged.bind(this));
+      },
+
+      registerEventHandlers: function() {},
+
+      setCurrentProject: function() {
+        this.getList();
+      },
+
+      getList: function(filter) {
+        var vm = this;
+        var fn = this._super.bind(vm);
+        filter = filter || {};
+        currentStateService.getProject().then(function(project){
+          filter['project_uuid'] = project.uuid;
+          vm.service.defaultFilter.project_uuid = project.uuid;
+          fn(filter);
+        })
+      },
+
+      onSearchInputChanged: function(event, searchInput) {
+        this.searchInput = searchInput;
+        this.search();
+      }
+    });
+
+    controllerScope.__proto__ = new ResourceController();
+  }
+
+  angular.module('ncsaas')
+    .controller('ProjectApplicationsTabController', [
+      'BaseProjectResourcesTabController', '$scope', 'currentStateService',
+      ProjectApplicationsTabController]);
+
+  function ProjectApplicationsTabController(BaseProjectResourcesTabController, $scope, currentStateService) {
+    var controllerScope = this;
+    var ResourceController = BaseProjectResourcesTabController.extend({
+      init:function() {
+        this.controllerScope = controllerScope;
+        this.searchFilters = [
+          {
+            name: 'resource_type',
+            title: 'Oracle',
+            value: 'Oracle.Database'
+          },
+          {
+            name: 'resource_type',
+            title: 'GitLab',
+            value: 'GitLab.Project'
+          }
+        ];
+        this._super();
+
+        this.entityOptions.entityData.noDataText = 'You have no applications yet';
+        this.entityOptions.entityData.createLinkText = 'Create application';
+        this.entityOptions.entityData.importLinkText = 'Import application';
+
+        $scope.$on('currentProjectUpdated', this.setCurrentProject.bind(this));
+        $scope.$on('searchInputChanged', this.onSearchInputChanged.bind(this));
+      },
+
+      registerEventHandlers: function() {},
+
+      setCurrentProject: function() {
+        this.getList();
+      },
+
+      getList: function(filter) {
+        var vm = this;
+        var fn = this._super.bind(vm);
+        filter = filter || {};
+        currentStateService.getProject().then(function(project){
+          filter['project_uuid'] = project.uuid;
+          vm.service.defaultFilter.project_uuid = project.uuid;
+          fn(filter);
+        })
+      },
+
+      onSearchInputChanged: function(event, searchInput) {
+        this.searchInput = searchInput;
+        this.search();
+      }
+    });
+    controllerScope.__proto__ = new ResourceController();
+  }
+})();
+
+(function() {
+angular.module('ncsaas')
+  .controller('ProjectBackupsTabController', [
+      'BaseBackupListController', '$scope', 'currentStateService',
+      ProjectBackupsTabController
+  ]);
+
+  function ProjectBackupsTabController(BaseBackupListController, $scope, currentStateService) {
+    var controllerScope = this;
+      var Controller = BaseBackupListController.extend({
+        init:function() {
+          this.controllerScope = controllerScope;
+          this._super();
+
+          $scope.$on('currentProjectUpdated', this.setCurrentProject.bind(this));
+          $scope.$on('searchInputChanged', this.onSearchInputChanged.bind(this));
+        },
+
+        registerEventHandlers: function() {},
+
+        setCurrentProject: function() {
+          this.getList();
+        },
+
+        getList: function(filter) {
+          var vm = this;
+          var fn = this._super.bind(vm);
+          filter = filter || {};
+          currentStateService.getProject().then(function(project){
+            filter['project_uuid'] = project.uuid;
+            vm.service.defaultFilter.project_uuid = project.uuid;
+            fn(filter);
+          })
+        },
+
+        onSearchInputChanged: function(event, searchInput) {
+          this.searchInput = searchInput;
+          this.search();
+        }
+      });
+
+    controllerScope.__proto__ = new Controller();
+  }
+})();
+
+
+(function() {
+  angular.module('ncsaas')
+    .controller('ProjectUsersTabController2', [
+      '$scope',
+      'currentStateService',
+      'projectsService',
+      'projectPermissionsService',
+      'USERPROJECTROLE',
+      'usersService',
+      'baseControllerClass',
+      ProjectUsersTabController2
+    ]);
+
+  function ProjectUsersTabController2(
+    $scope,
+    currentStateService,
+    projectsService,
+    projectPermissionsService,
+    USERPROJECTROLE,
+    usersService,
+    baseControllerClass) {
+    var controllerScope = this;
+    var Controller = baseControllerClass.extend({
+      users: {}, // users with role in project
+      usersListForAutoComplete: [],
+      user: null,
+      project: null,
+
+      init: function() {
+        this._super();
+        this.adminRole = USERPROJECTROLE.admin;
+        this.managerRole = USERPROJECTROLE.manager;
+        this.users[this.adminRole] = [];
+        this.users[this.managerRole] = [];
+        this.activate();
+        $scope.$on('currentProjectUpdated', this.setCurrentProject.bind(this));
+      },
+
+      registerEventHandlers: function() {},
+
+      setCurrentProject: function() {
+        this.activate();
+      },
+
+      activate: function() {
+        var vm = this;
+        currentStateService.getProject().then(function(project){
+          vm.project = project;
+          vm.getUsersForProject(vm.adminRole);
+          vm.getUsersForProject(vm.managerRole);
+        });
+        this.getUserListForAutoComplete();
+      },
+      getUserListForAutoComplete: function(filter) {
+        var vm = this;
+        usersService.getList(filter).then(function(response) {
+          vm.usersListForAutoComplete = response;
+        });
+      },
+      getUsersForProject: function(role) {
+        var vm = this;
+        projectPermissionsService.getList({
+          role: role,
+          project: vm.project.uuid
+        }).then(function(response) {
+          vm.users[role] = response;
+        });
+      },
+      userSearchInputChanged: function(searchText) {
+        controllerScope.getUserListForAutoComplete({full_name: searchText});
+      },
+      selectedUsersCallback: function(selected) {
+        if (selected) {
+          controllerScope.user = selected.originalObject;
+          controllerScope.addUser(this.id);
+          controllerScope.getUserListForAutoComplete();
+        }
+      },
+      addUser: function(role) {
+        var vm = this;
+        var instance = projectPermissionsService.$create();
+        instance.user = vm.user.url;
+        instance.project = vm.project.url;
+        instance.role = role;
+        instance.$save(
+          function() {
+            vm.getUsersForProject(role);
+          },
+          function(response) {
+            alert(response.data.non_field_errors);
+          }
+        );
+      },
+      userProjectRemove: function(userProject) {
+        var vm = this;
+        var role = userProject.role;
+        var index = vm.users[role].indexOf(userProject);
+        var confirmDelete = confirm('Confirm user deletion?');
+        if (confirmDelete) {
+          projectPermissionsService.$delete(userProject.pk).then(
+            function() {
+              vm.users[role].splice(index, 1);
+            },
+            function(response) {
+              alert(response.data.detail);
+            }
+          );
+        } else {
+          alert('User was not deleted.');
+        }
+      }
+    });
+
+    controllerScope.__proto__ = new Controller();
+  }
+
+})();
+
+
+(function() {
+  angular.module('ncsaas')
+    .controller('ProjectServicesTabController',
+      ['baseControllerListClass',
+      'joinServiceProjectLinkService',
+      'currentStateService',
+      'ENTITYLISTFIELDTYPES',
+      'ENV',
+      '$scope',
+      ProjectServicesTabController]);
+
+  function ProjectServicesTabController(
+    baseControllerListClass,
+    joinServiceProjectLinkService,
+    currentStateService,
+    ENTITYLISTFIELDTYPES,
+    ENV,
+    $scope) {
+    var controllerScope = this;
+    var ServiceController = baseControllerListClass.extend({
+      init: function() {
+        this.service = joinServiceProjectLinkService;
+        this.controllerScope = controllerScope;
+        this._super();
+
+        this.entityOptions = {
+          entityData: {
+            noDataText: 'No providers yet',
+            createLink: 'services.create',
+            createLinkText: 'Create provider',
+          },
+          list: [
+            {
+              type: ENTITYLISTFIELDTYPES.statusCircle,
+              propertyName: 'state',
+              onlineStatus: ENV.resourceOnlineStatus
+            },
+            {
+              name: 'Name',
+              propertyName: 'name',
+              type: ENTITYLISTFIELDTYPES.name,
+              link: 'services.details({uuid: entity.uuid, provider: entity.type})',
+              className: 'name'
+            },
+            {
+              name: 'Type',
+              propertyName: 'type',
+              type: ENTITYLISTFIELDTYPES.noType
+            }
+          ]
+        };
+
+        $scope.$on('currentProjectUpdated', this.setCurrentProject.bind(this));
+        $scope.$on('searchInputChanged', this.onSearchInputChanged.bind(this));
+      },
+
+      registerEventHandlers: function() {},
+
+      setCurrentProject: function() {
+        this.getList();
+      },
+
+      getList: function(filter) {
+        var vm = this;
+        var fn = this._super.bind(vm);
+        filter = filter || {};
+        currentStateService.getProject().then(function(project){
+          filter['project_uuid'] = project.uuid;
+          vm.service.defaultFilter.project_uuid = project.uuid;
+          fn(filter);
+        })
+      },
+
+      onSearchInputChanged: function(event, searchInput) {
+        this.searchInput = searchInput;
+        this.search();
+      }
+
+    });
+
+    controllerScope.__proto__ = new ServiceController();
+  }
+})();

@@ -1,7 +1,7 @@
 <li>
     <a class="toggle-link"
         ng-repeat="filter in filterController.searchFilters"
-        ng-click="startFilter(filter)"
+        ng-click="toggleFilter(filter)"
         ng-class="{'active': isFilterChosen(filter)}">{{ filter.title }}</a>
 </li>
 

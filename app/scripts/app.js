@@ -13,7 +13,6 @@
       'ui.gravatar',
       'angucomplete-alt',
       'angularMoment',
-      'ngLoadingSpinner',
       'ngAnimate',
       'pascalprecht.translate',
       'angular-cron-jobs',
@@ -22,7 +21,8 @@
       'angulartics',
       'angulartics.google.analytics',
       'ngFileUpload',
-      'xeditable'
+      'xeditable',
+      'blockUI'
     ])
     // urls
     .config(function($stateProvider, $urlRouterProvider) {
@@ -633,7 +633,7 @@
         })
 
         .state('resources.details', {
-          url: ':uuid/:tab',
+          url: ':resource_type/:uuid/:tab',
           views: {
             'appContent': {
               templateUrl: 'views/resource/details.html',
@@ -657,33 +657,8 @@
           auth: true
         })
 
-        .state('resources.details-demo', {
-          url: 'demo-resources/:uuid/',
-          views: {
-            'appContent': {
-              templateUrl: 'views/resource/details-demo.html',
-            },
-            'tabBackups@resources.details-demo': {
-              templateUrl: 'views/resource/tab-backups.html',
-            },
-            'backupListContent@resources.details-demo' : {
-              templateUrl: 'views/backup/backup-list-content.html',
-            },
-            'tabs@resources.details-demo': {
-              templateUrl: 'views/resource/tabs.html',
-            },
-            'appHeader': {
-              templateUrl: 'views/partials/app-header.html',
-            }
-          },
-          resolve: {
-            authenticated: authCheck
-          },
-          auth: true
-        })
-
         .state('resources.update', {
-          url: ':uuid/edit/:tab',
+          url: ':resource_type/:uuid/edit/:tab',
           views: {
             'appContent': {
               templateUrl: 'views/resource/update.html',
@@ -974,3 +949,26 @@
   })();
 })();
 
+(function() {
+  angular.module('ncsaas')
+    .factory('myHttpInterceptor', function($q, Flash) {
+      return {
+        'responseError': function(rejection) {
+          var message = rejection.status ? (rejection.status + ': ' + rejection.statusText) : 'Connection error';
+          if (rejection.data && rejection.data.non_field_errors) {
+            message += ' ' + rejection.data.non_field_errors;
+          }
+          Flash.create('danger', message);
+          return $q.reject(rejection);
+        }
+      };
+    });
+
+  angular.module('ncsaas')
+    .config(['$httpProvider', 'blockUIConfig', errorsHandler]);
+
+  function errorsHandler($httpProvider, blockUIConfig) {
+    blockUIConfig.delay = 500;
+    $httpProvider.interceptors.push('myHttpInterceptor');
+  }
+})();
