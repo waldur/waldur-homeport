@@ -197,7 +197,7 @@
         })
 
         .state('dashboard.eventlog', {
-          url: '/events/',
+          url: 'events/',
           views: {
             'appHeader@dashboard' : {
               templateUrl: 'views/partials/app-header.html',

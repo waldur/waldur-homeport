@@ -62,15 +62,41 @@
   }
 
   angular.module('ncsaas')
-    .controller('EventListController', ['baseEventListController', 'ENV', EventListController]);
+    .controller('EventListController', [
+      '$scope',
+      'baseEventListController',
+      'currentStateService',
+      'ENV',
+      EventListController]);
 
-  function EventListController(baseEventListController, ENV) {
+  function EventListController(
+    $scope,
+    baseEventListController,
+    currentStateService,
+    ENV) {
     var controllerScope = this;
     var EventController = baseEventListController.extend({
       init:function() {
         this.controllerScope = controllerScope;
         this.cacheTime = ENV.dashboardEventsCacheTime;
         this._super();
+
+        $scope.$on('currentCustomerUpdated', this.onCustomerUpdate.bind(this));
+      },
+
+      onCustomerUpdate: function() {
+        this.getList();
+      },
+
+      getList: function(filter) {
+        var vm = this;
+        var fn = this._super.bind(vm);
+        filter = filter || {};
+        currentStateService.getCustomer().then(function(customer){
+          filter['scope'] = customer.url;
+          vm.service.defaultFilter.scope = customer.url;
+          fn(filter);
+        })
       }
     });
 
@@ -139,7 +165,7 @@
           bezierCurve: false
         };
 
-        $scope.$on('currentCustomerUpdated', this.onCustomerUpdate.bind(this))
+        $scope.$on('currentCustomerUpdated', this.onCustomerUpdate.bind(this));
         this.onCustomerUpdate();
       },
 
@@ -151,15 +177,19 @@
 
       getCustomerAlerts: function () {
         var vm = this;
-        alertsService.getList().then(function(response){
-          vm.alerts = response;
+        currentStateService.getCustomer().then(function(customer) {
+          alertsService.getList({'aggregate': 'customer', 'uuid': customer.uuid}).then(function(response){
+            vm.alerts = response;
+          })
         })
       },
 
       getCustomerEvents: function () {
         var vm = this;
-        eventsService.getList().then(function(response){
-          vm.events = response;
+        currentStateService.getCustomer().then(function(customer) {
+          eventsService.getList({'scope': customer.url}).then(function(response){
+            vm.events = response;
+          })
         })
       },
 
