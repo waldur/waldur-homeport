@@ -1,6 +1,5 @@
 'use strict';
 
-
 (function() {
   angular.module('ncsaas')
     .controller('ProjectListController',
@@ -88,7 +87,7 @@
       init: function() {
         this.service = projectsService;
         this.controllerScope = controllerScope;
-        $scope.$on('currentCustomerUpdated', this.currentCustomerUpdatedHandler.bind(this));
+        this.setSignalHandler('currentCustomerUpdated', this.currentCustomerUpdatedHandler.bind(this));
         this._super();
         this.listState = 'projects.list';
         this.detailsState = 'projects.details';
