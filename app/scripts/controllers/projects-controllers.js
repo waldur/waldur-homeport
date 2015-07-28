@@ -448,7 +448,7 @@
             resourcesCountService.resources({'project_uuid': project.uuid, 'resource_type': ['DigitalOcean.Droplet', 'IaaS.Instance']}),
             resourcesCountService.resources({'project_uuid': project.uuid, 'resource_type': ['Oracle.Database', 'GitLab.Project']}),
             resourcesCountService.backups({'project_uuid': project.uuid}),
-            resourcesCountService.users({'project_uuid': project.uuid}),
+            resourcesCountService.users({'project': project.uuid}),
           ]).then(function(responses) {
             $scope.count = {};
             $scope.count.vms = responses[0];
