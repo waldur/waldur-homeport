@@ -264,6 +264,10 @@
                 span {
                   float: left;
                   display: block;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  white-space: nowrap;
+                  width: 350px;
                 }
               }
               .right-p {
