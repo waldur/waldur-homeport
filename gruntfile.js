@@ -41,7 +41,8 @@ module.exports = function(grunt) {
                         'app/static/css/angular-flash.css',
                         'app/static/css/angucomplete-alt.css',
                         'app/static/css/angular-chart.css',
-                        'app/static/css/xeditable.css'
+                        'app/static/css/xeditable.css',
+                        'app/static/css/angular-block-ui.css'
                     ]
                 }
             }
@@ -184,27 +185,6 @@ module.exports = function(grunt) {
                     },
                     {
                       expand: true,
-                      cwd: 'bower_components/angular-spinner',
-                      src: ['angular-spinner.min.js', 'angular-spinner.min.js.map'],
-                      dest: 'app/static/js/angular/',
-                      filter: 'isFile'
-                    },
-                    {
-                      expand: true,
-                      cwd: 'bower_components/spin.js',
-                      src: ['spin.js'],
-                      dest: 'app/static/js/',
-                      filter: 'isFile'
-                    },
-                    {
-                      expand: true,
-                      cwd: 'bower_components/angular-loading-spinner',
-                      src: ['angular-loading-spinner.js'],
-                      dest: 'app/static/js/angular/',
-                      filter: 'isFile'
-                    },
-                    {
-                      expand: true,
                       cwd: 'bower_components/angular-flash-alert/src',
                       src: ['angular-flash.js'],
                       dest: 'app/static/js/angular/',
@@ -321,6 +301,20 @@ module.exports = function(grunt) {
                       src: ['xeditable.css'],
                       dest: 'app/static/css/',
                       filter: 'isFile'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/angular-block-ui/dist/',
+                        src: ['angular-block-ui.js'],
+                        dest: 'app/static/js/angular/',
+                        filter: 'isFile'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/angular-block-ui/dist/',
+                        src: ['angular-block-ui.css'],
+                        dest: 'app/static/css/',
+                        filter: 'isFile'
                     }
                 ]
             }
@@ -455,14 +449,11 @@ module.exports = function(grunt) {
                     'app/static/js/angular/angular-ui-router.js',
                     'app/static/js/angular/angucomplete-alt.js',
                     'app/static/js/angular/satellizer.js',
-                    'app/static/js/angular/angular-spinner.min.js',
-                    'app/static/js/angular/angular-loading-spinner.js',
                     'app/static/js/angular/angular-translate.js',
                     'app/static/js/angular/angular-translate-storage-cookie.js',
                     'app/static/js/angular/angular-translate-storage-local.js',
                     'app/static/js/angular/angular-translate-loader-static-files.js',
                     'app/static/js/angular/ng-file-upload.js',
-                    'app/static/js/spin.js',
                     'app/static/js/Chart.js',
                     'app/static/js/angular/tc-angular-chartjs.js',
                     'app/static/js/angular/xeditable.js',
@@ -471,7 +462,8 @@ module.exports = function(grunt) {
                     'app/scripts/controllers/*.js',
                     'app/scripts/configs/*.js',
                     'app/scripts/directives/*.js',
-                    'app/scripts/services/*.js'
+                    'app/scripts/services/*.js',
+                    'app/static/js/angular/angular-block-ui.js'
                 ],
                 dest: 'app/static/js/main/main.js'
             }
