@@ -169,11 +169,19 @@
           margin-left: 10px;
         }
       }
+
+      h3 {
+        text-transform: uppercase;
+        color: $dashboard-green;
+        margin-left: 10px;
+        padding-left: 35px;
+      }
+
       .graph {
         min-height: 20px;
         border-bottom: 1px solid #ebebeb;
 
-        h3 {
+        h4 {
           font-weight: bold;
           font-size: 16px;
           margin: 0px;
@@ -245,12 +253,6 @@
         }
       }
       .alerts-list {
-        h3 {
-          text-transform: uppercase;
-          color: $dashboard-green;
-          margin-left: 10px;
-          padding-left: 35px;
-        }
         &:nth-child(2) {
           h3 {
             margin-left: 4px;

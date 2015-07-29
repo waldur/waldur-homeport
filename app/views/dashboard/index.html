@@ -131,8 +131,10 @@
                     'inactive-content':DashboardController.activeTab == 'costs'}">
         <div class="row">
             <div class="half-block">
-                <div ng-repeat="project in DashboardController.projects" ng-click="DashboardController.selectProject(project)" class="white-box graph">
-                    <h3 ng-class="{'current': project.selected}">Project name: {{ project.name }}</h3>
+                <h3>Projects</h3>
+                <div ng-repeat="project in DashboardController.projects" class="white-box graph">
+                    <h4 ng-click="DashboardController.selectProject(project)"
+                        ng-class="{'current': project.selected}">Project name: {{ project.name }}</h4>
                     <div ng-if="project.selected" class="body">
                         <ul class="counters">
                             <li class="active-alert">
@@ -184,7 +186,7 @@
                             </li>
                         </ul>
                     </div>
-                    <a class="show-all">Show all alerts</a>
+                    <a class="show-all" ui-sref="dashboard.alerts">Show all alerts</a>
                 </div>
                 <div class="alerts-list" ng-if="DashboardController.events.length">
                     <h3>Recent Events</h3>

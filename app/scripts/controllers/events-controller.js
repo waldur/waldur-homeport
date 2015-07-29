@@ -102,6 +102,66 @@
 
     controllerScope.__proto__ = new EventController();
   }
+
+  angular.module('ncsaas')
+    .controller('CustomerAlertsListController', [
+      '$scope',
+      'baseControllerListClass',
+      'currentStateService',
+      'alertsService',
+      'ENTITYLISTFIELDTYPES',
+      CustomerAlertsListController]);
+
+  function CustomerAlertsListController(
+    $scope,
+    baseControllerListClass,
+    currentStateService,
+    alertsService,
+    ENTITYLISTFIELDTYPES) {
+    var controllerScope = this;
+    var controllerClass = baseControllerListClass.extend({
+      init: function() {
+        this.controllerScope = controllerScope;
+        this.service = alertsService;
+        this._super();
+
+        this.entityOptions = {
+          entityData: {
+            noDataText: 'No alerts yet'
+          },
+          list: [
+            {
+              name: 'Message',
+              propertyName: 'message',
+              type: ENTITYLISTFIELDTYPES.noType
+            }
+          ]
+        };
+
+        $scope.$on('currentCustomerUpdated', this.onCustomerUpdate.bind(this));
+      },
+
+      onCustomerUpdate: function() {
+        this.getList();
+      },
+
+      getList: function(filter) {
+        var vm = this;
+        var fn = this._super.bind(vm);
+        filter = filter || {};
+        currentStateService.getCustomer().then(function(customer){
+          filter['aggregate'] = 'customer';
+          filter['uuid'] = customer.uuid;
+          vm.service.defaultFilter.aggregate = 'customer';
+          vm.service.defaultFilter.uuid = customer.uuid;
+          fn(filter);
+        })
+      }
+    });
+
+    controllerScope.__proto__ = new controllerClass();
+  }
+
   angular.module('ncsaas')
     .controller('DashboardIndexController', [
       '$scope',
