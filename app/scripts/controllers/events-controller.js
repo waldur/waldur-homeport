@@ -169,6 +169,12 @@
         this.onCustomerUpdate();
       },
 
+      selectProject: function (project) {
+        project.selected=!project.selected;
+        this.getProjectResources(project);
+        this.getProjectEvents(project);
+      },
+
       onCustomerUpdate: function() {
         this.getCustomerProjects();
         this.getCustomerEvents();
@@ -197,14 +203,14 @@
         var vm = this;
         projectsService.getList().then(function(response) {
           vm.projects = response;
-          vm.projects.forEach(function(project){
-            vm.getProjectResources(project);
-            vm.getProjectEvents(project);
-          })
+          vm.selectProject(vm.projects[0]);
         });
       },
 
       getProjectResources: function (project) {
+        if (project.count) {
+          return;
+        }
         project.count = {};
         project.count.services = project.services.length;
         resourcesCountService.users({'project': project.uuid}).then(function(count) {
@@ -216,10 +222,12 @@
         resourcesCountService.alerts({'scope': project.url}).then(function(count) {
           project.count.alerts = count;
         })
-        this.projects[0].selected = true;
       },
 
       getProjectEvents: function (project) {
+        if (project.chartData) {
+          return;
+        }
         var end = moment.utc().unix();
         var count = 7;
         var start = moment.utc().subtract(count + 1, 'days').unix();
