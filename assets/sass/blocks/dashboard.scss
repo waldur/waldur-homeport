@@ -169,10 +169,35 @@
           margin-left: 10px;
         }
       }
-      &.graph {
+      .graph {
+        min-height: 20px;
+        border-bottom: 1px solid #ebebeb;
+
         h3 {
           font-weight: bold;
           font-size: 16px;
+          margin: 0px;
+          position: relative;
+
+          &.current:before {
+              position: absolute;
+              @include icon-fa;
+              content: '\f13a';
+              transform: translate(1.1, 1.1);
+              color: $dashboard-green;
+              right: 0px;
+          } // &:before
+          &:before {
+              position: absolute;
+              @include icon-fa;
+              content: '\f138';
+              transform: translate(1.1, 1.1);
+              color: $dashboard-green;
+              right: 0px;
+          } // &:before
+        }
+        .body {
+          margin-top: 20px;
         }
         ul {
           li {
@@ -219,7 +244,7 @@
           }
         }
       }
-      &.alerts-list {
+      .alerts-list {
         h3 {
           text-transform: uppercase;
           color: $dashboard-green;
@@ -311,6 +336,7 @@
     display: block;
     text-align: center;
     color: $dashboard-green;
+    margin-top: 15px;
   }
 }
 .table {

@@ -130,77 +130,79 @@
          ng-class="{'active-content':EventList.activeTab == 'activity',
                     'inactive-content':EventList.activeTab == 'costs'}">
         <div class="row">
-            <div ng-repeat="project in EventList.projects" class="half-block graph">
-                <div class="white-box">
-                    <h3 ui-sref="projects.details({uuid: project.uuid})">Project name: {{ project.name }}</h3>
-                    <ul class="counters">
-                        <li class="active-alert">
-                            <div class="counter-name">Active alerts</div>
-                            <div class="counter" ng-bind="project.count.alerts"></div>
-                        </li>
-                        <li class="resources empty">
-                            <div class="counter-name">Resources</div>
-                            <div class="counter" ng-bind="project.count.resources"></div>
-                        </li>
-                        <li class="services empty">
-                            <div class="counter-name">Services</div>
-                            <div class="counter" ng-bind="project.count.services"></div>
-                        </li>
-                        <li class="people">
-                            <div class="counter-name">People</div>
-                            <div class="counter" ng-bind="project.count.users"></div>
-                        </li>
+            <div class="half-block">
+                <div ng-repeat="project in EventList.projects" ng-click="project.selected=!project.selected" class="white-box graph">
+                    <h3 ng-class="{'current': project.selected}">Project name: {{ project.name }}</h3>
+                    <div ng-if="project.selected" class="body">
+                        <ul class="counters">
+                            <li class="active-alert">
+                                <div class="counter-name">Active alerts</div>
+                                <div class="counter" ng-bind="project.count.alerts"></div>
+                            </li>
+                            <li class="resources empty">
+                                <div class="counter-name">Resources</div>
+                                <div class="counter" ng-bind="project.count.resources"></div>
+                            </li>
+                            <li class="services empty">
+                                <div class="counter-name">Services</div>
+                                <div class="counter" ng-bind="project.count.services"></div>
+                            </li>
+                            <li class="people">
+                                <div class="counter-name">People</div>
+                                <div class="counter" ng-bind="project.count.users"></div>
+                            </li>
 
-                    </ul>
-                    <div class="clear"></div>
-                    <div class="chart">
-                        <div class="label">No of events per day</div>
-                        <canvas ng-if="project.chartData"
-                                chart-options="EventList.chartOptions"
-                                chart-data="project.chartData"
-                                tc-chartjs chart-type="line"
-                                width="400" height="120"></canvas>
+                        </ul>
+                        <div class="clear"></div>
+                        <div class="chart">
+                            <div class="label">No of events per day</div>
+                            <canvas ng-if="project.chartData"
+                                    chart-options="EventList.chartOptions"
+                                    chart-data="project.chartData"
+                                    tc-chartjs chart-type="line"
+                                    width="400" height="120"></canvas>
+                        </div>
                     </div>
                 </div>
+                <a ng-if="EventList.projects.length" ui-sref="projects.list" class="center-link">Show all projects</a>
             </div>
-        </div>
-        <a ui-sref="projects.list" class="center-link">Show all projects</a>
-        <div class="row">
-            <div class="half-block alerts-list">
-                <h3>Alerts</h3>
-                <div class="white-box">
-                    <ul>
-                        <li ng-repeat="alert in EventList.alerts" ng-class="{'fail': alert.severity=='error'}">
-                            <div class="left-p">
-                                <div class="icon"></div>
-                                <span ng-bind="::alert.message"></span>
-                            </div>
-                            <div class="right-p">
-                                <span class="date" am-time-ago="alert.created"></span>
-                                <span class="time"></span>
-                            </div>
-                            <div class="clear"></div>
-                        </li>
-                    </ul>
+            <div class="half-block">
+                <div class="alerts-list" ng-if="EventList.alerts.length">
+                    <h3>Alerts</h3>
+                    <div class="white-box">
+                        <ul>
+                            <li ng-repeat="alert in EventList.alerts" ng-class="{'fail': alert.severity=='error'}">
+                                <div class="left-p">
+                                    <div class="icon"></div>
+                                    <span ng-bind="::alert.message"></span>
+                                </div>
+                                <div class="right-p">
+                                    <span class="date" am-time-ago="alert.created"></span>
+                                    <span class="time"></span>
+                                </div>
+                                <div class="clear"></div>
+                            </li>
+                        </ul>
+                    </div>
+                    <a class="show-all">Show all alerts</a>
                 </div>
-                <a class="show-all">Show all alerts</a>
-            </div>
-            <div class="half-block alerts-list">
-                <h3>Recent Events</h3>
-                <div class="white-box">
-                    <ul>
-                        <li ng-repeat="event in EventList.events">
-                            <div class="left-p">
-                                <span ng-bind="::event.message"></span>
-                            </div>
-                            <div class="right-p">
-                                <span class="date" am-time-ago="event['@timestamp']"></span>
-                            </div>
-                            <div class="clear"></div>
-                        </li>
-                    </ul>
+                <div class="alerts-list" ng-if="EventList.events.length">
+                    <h3>Recent Events</h3>
+                    <div class="white-box">
+                        <ul>
+                            <li ng-repeat="event in EventList.events">
+                                <div class="left-p">
+                                    <span ng-bind="::event.message"></span>
+                                </div>
+                                <div class="right-p">
+                                    <span class="date" am-time-ago="event['@timestamp']"></span>
+                                </div>
+                                <div class="clear"></div>
+                            </li>
+                        </ul>
+                    </div>
+                    <a class="show-all" ui-sref="dashboard.eventlog">Show all recent events</a>
                 </div>
-                <a class="show-all" ui-sref="dashboard.eventlog">Show all recent events</a>
             </div>
         </div>
         <div class="clear"></div>

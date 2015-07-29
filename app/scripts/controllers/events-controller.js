@@ -216,6 +216,7 @@
         resourcesCountService.alerts({'scope': project.url}).then(function(count) {
           project.count.alerts = count;
         })
+        this.projects[0].selected = true;
       },
 
       getProjectEvents: function (project) {
@@ -227,7 +228,7 @@
           'start': start,
           'end': end,
           'points_count': count + 1
-        }).then(function(response){
+        }).then(function(response) {
           var labels = [];
           var total = [];
           for (var i = 0; i < response.length; i++) {
