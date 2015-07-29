@@ -110,12 +110,7 @@
       // XXX: This is quick fix, we need to get display names from backend, but currently quotas on backend do not
       // have display names
       getPrettyQuotaName: function(name) {
-        var prettyNames = {
-          'nc_user_count': 'users',
-          'nc_resource_count': 'resources',
-          'nc_project_count': 'projects'
-        };
-        return prettyNames[name];
+        return name.replace(/nc_|_count/gi,'');
       },
 
       addService: function() {

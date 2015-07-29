@@ -35,7 +35,8 @@
     p {
       span {
         font-weight: bold;
-        a {
+        white-space: nowrap;
+        b {
           color: $dashboard-green;
         }
       }
