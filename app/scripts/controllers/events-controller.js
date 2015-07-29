@@ -86,7 +86,7 @@
         var vm = this;
         var fn = this._super.bind(vm);
         filter = filter || {};
-        currentStateService.getCustomer().then(function(customer){
+        currentStateService.getCustomer().then(function(customer) {
           filter['scope'] = customer.url;
           vm.service.defaultFilter.scope = customer.url;
           fn(filter);
@@ -143,9 +143,7 @@
         var vm = this;
         var fn = this._super.bind(vm);
         filter = filter || {};
-        currentStateService.getCustomer().then(function(customer){
-          filter['aggregate'] = 'customer';
-          filter['uuid'] = customer.uuid;
+        currentStateService.getCustomer().then(function(customer) {
           vm.service.defaultFilter.aggregate = 'customer';
           vm.service.defaultFilter.uuid = customer.uuid;
           fn(filter);
@@ -222,37 +220,32 @@
         $scope.$on('currentCustomerUpdated', this.onCustomerUpdate.bind(this));
         this.onCustomerUpdate();
       },
-
       selectProject: function (project) {
         project.selected=!project.selected;
         this.getProjectResources(project);
         this.getProjectEvents(project);
       },
-
       onCustomerUpdate: function() {
         this.getCustomerProjects();
         this.getCustomerEvents();
         this.getCustomerAlerts();
       },
-
       getCustomerAlerts: function () {
         var vm = this;
         currentStateService.getCustomer().then(function(customer) {
-          alertsService.getList({'aggregate': 'customer', 'uuid': customer.uuid}).then(function(response){
+          alertsService.getList({'aggregate': 'customer', 'uuid': customer.uuid}).then(function(response) {
             vm.alerts = response;
           })
         })
       },
-
       getCustomerEvents: function () {
         var vm = this;
         currentStateService.getCustomer().then(function(customer) {
-          eventsService.getList({'scope': customer.url}).then(function(response){
+          eventsService.getList({'scope': customer.url}).then(function(response) {
             vm.events = response;
           })
         })
       },
-
       getCustomerProjects: function() {
         var vm = this;
         projectsService.getList().then(function(response) {
@@ -260,7 +253,6 @@
           vm.selectProject(vm.projects[0]);
         });
       },
-
       getProjectResources: function (project) {
         if (project.count) {
           return;
@@ -277,7 +269,6 @@
           project.count.alerts = count;
         })
       },
-
       getProjectEvents: function (project) {
         if (project.chartData) {
           return;
