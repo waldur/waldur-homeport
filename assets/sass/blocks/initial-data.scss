@@ -10,8 +10,14 @@
     right: -10px;
     padding-top: 15px;
     padding-left: 20px;
+    .initial-package {
+      text-align: center;
+      .plan-name {
+        font-weight: bold;
+      }
+    }
     .plan-item {
-      margin-left: -20px;
+      margin: 0 auto;
       width: 185px;
       @include property(border-radius, 3);
       @include boxshadow(0 2 2 0, #ededed);

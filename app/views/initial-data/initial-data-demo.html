@@ -23,7 +23,7 @@
         </div>
         <aside>
             <p>
-                <span>You are on a forever free plan <b>{{ InitialData.plan.name }}</b>!</span><br/>
+                <span>You are on a forever free plan!</span><br/>
                 If you need more analytical power please upgrade your plan.
             </p>
             <div class="col initial-package">
@@ -31,7 +31,7 @@
                 <div class="plan-item">
                     <table>
                         <tr ng-repeat="quota in InitialData.plan.quotas">
-                            <td>{{ quota.value }} {{ InitialData.getPrettyQuotaName(quota.name) }}</td>
+                            <td>{{ quota.value }} {{ InitialData.getPrettyQuotaName(quota.name, quota.value) }}</td>
                         </tr>
                     </table>
                 </div>

@@ -109,8 +109,8 @@
       },
       // XXX: This is quick fix, we need to get display names from backend, but currently quotas on backend do not
       // have display names
-      getPrettyQuotaName: function(name) {
-        return name.replace(/nc_|_count/gi,'');
+      getPrettyQuotaName: function(name, count) {
+        return name.replace(/nc_|_count/gi,'') + (count > 1 ? 's' : '');
       },
 
       addService: function() {
