@@ -220,22 +220,30 @@
 
       getProjectEvents: function (project) {
         var end = moment.utc().unix();
-        var start = moment.utc().subtract(1, 'week').unix();
+        var count = 7;
+        var start = moment.utc().subtract(count + 1, 'days').unix();
         eventStatisticsService.getList({
           'scope': project.url,
           'start': start,
           'end': end,
-          'points_count': 7 // days in week
+          'points_count': count + 1
         }).then(function(response){
           var labels = [];
-          var points = [];
+          var total = [];
           for (var i = 0; i < response.length; i++) {
             var date = moment.unix(response[i].point);
             var day = date.format('dddd');
             var value = response[i].object.count;
             labels.push(day);
-            points.push(value);
-          };
+            total.push(value);
+          }
+
+          var points = [];
+          for (var i = 1; i < total.length; i++) {
+            points[i] = total[i] - total[i-1];
+          }
+          labels.shift();
+          points.shift();
 
           project.chartData = {
             labels: labels,
