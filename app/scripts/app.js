@@ -92,6 +92,20 @@
             authenticated: authCheck
           }
         })
+        .state('initialdata.demo', {
+          url: 'demo/',
+          views: {
+            'appHeader@initialdata' : {
+              templateUrl: 'views/partials/site-header-initial.html',
+            },
+            'appContent@initialdata' : {
+              templateUrl: 'views/initial-data/initial-data-demo.html',
+            }
+          },
+          resolve: {
+            authenticated: authCheck
+          }
+        })
 
         .state('support', {
           url: '/support/',

@@ -70,3 +70,63 @@
   }
 
 })();
+
+(function() {
+
+  angular.module('ncsaas')
+    .controller('InitialDataControllerDemo',
+    ['usersService', 'servicesService', 'baseControllerClass', 'currentStateService',
+      'planCustomersService', InitialDataControllerDemo]);
+
+  function InitialDataControllerDemo(
+    usersService, servicesService, baseControllerClass, currentStateService, planCustomersService) {
+    var controllerScope = this;
+    var Controller = baseControllerClass.extend({
+      user: {},
+      services: {},
+      chosenService: null,
+      chosenServices: [],
+
+      init: function() {
+        this._super();
+        this.activate();
+      },
+      activate: function() {
+        var vm = this;
+        usersService.getCurrentUser().then(function(response) {
+          vm.user = response;
+        });
+        servicesService.getServicesList().then(function(response) {
+          vm.services = response;
+        });
+        currentStateService.getCustomer().then(function(customer) {
+          planCustomersService.getList({customer: customer.uuid}).then(function(planCustomers) {
+            if (planCustomers.length !== 0) {
+              vm.plan = planCustomers[0].plan;
+            }
+          });
+        });
+      },
+      // XXX: This is quick fix, we need to get display names from backend, but currently quotas on backend do not
+      // have display names
+      getPrettyQuotaName: function(name, count) {
+        return name.replace(/nc_|_count/gi,'') + (count > 1 ? 's' : '');
+      },
+
+      addService: function() {
+        if (this.chosenService && !(this.chosenServices.lastIndexOf(this.chosenService) + 1)) {
+          this.chosenServices.push(this.chosenService);
+        }
+      },
+      removeService: function(service) {
+        var index = this.chosenServices.lastIndexOf(service);
+        if (index + 1) {
+          this.chosenServices.splice(index, 1);
+        }
+      }
+    });
+
+    controllerScope.__proto__ = new Controller();
+  }
+
+})();

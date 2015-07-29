@@ -1,3 +1,5 @@
+@charset "UTF-8";
+
 .nav-list {
     $navListBackgroundColor: #409a3c;
     @include clear-list-inline;
@@ -414,4 +416,45 @@
             }
         }
     } // > li
+    &.initial {
+        &.context {
+            li {
+                &.logout-box {
+                    @include bp(xs) {
+                        display: block;
+                    }
+                    @include bp(sm) {
+                        display: block;
+                    }
+                    @include bp(md) {
+                        display: block;
+                    }
+                }
+            }
+        }
+        .logo-box {
+            @include bp(xs) {
+                display: block;
+            }
+            @include bp(sm) {
+                display: block;
+            }
+            @include bp(md) {
+                display: block;
+            }
+            $padding: 50px;
+            padding-left: $padding;
+            margin-left: -$padding;
+            background-color: #409a3c;
+        }
+        .logout {
+            @include bp(xs) {
+                display: block;
+            }
+            &:after {
+                content: "✕";
+                margin-left: 10px;
+            }
+        }
+    }
 } // nav-list

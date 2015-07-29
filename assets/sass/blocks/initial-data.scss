@@ -1,0 +1,286 @@
+.initial-data-page {
+  width: 730px;
+  margin: 0 auto;
+  padding-right: 300px;
+  position: relative;
+  aside {
+    position: absolute;
+    width: 285px;
+    top: 0;
+    right: -10px;
+    padding-top: 15px;
+    padding-left: 20px;
+    .initial-package {
+      text-align: center;
+      .plan-name {
+        font-weight: bold;
+      }
+    }
+    .plan-item {
+      margin: 0 auto;
+      width: 185px;
+      @include property(border-radius, 3);
+      @include boxshadow(0 2 2 0, #ededed);
+      border: 1px solid #dedede;
+      overflow: hidden;
+      cursor: default;
+      table {
+        border-width: 0;
+        tr {
+          td {
+            text-align: left;
+            padding-left: 20px;
+          }
+          background-color: #ffffff;
+          &:nth-child(even) td {
+            background-color: #f6f6f6;
+          }
+        }
+      }
+    }
+    p {
+      span {
+        font-weight: bold;
+        white-space: nowrap;
+        b {
+          color: $dashboard-green;
+        }
+      }
+    }
+  }
+  h2 {
+    color: $dashboard-green;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    margin-top: 25px;
+  }
+  input[type="text"],select {
+    border-radius: 4px;
+    width: 226px;
+    box-sizing: border-box;
+    height: 32px;
+    margin-bottom: 7px;
+  }
+  label {
+    font-weight: bold;
+    display: block;
+    font-size: 15px;
+  }
+  .first-step {
+    padding-left: 25px;
+    .logo {
+      float: left;
+      .manage-gravatar {
+        width: 100px;
+        display: inline-block;
+        line-height: 16px;
+        font-size: 12px;
+        padding-top: 15px;
+        a {
+          color: $dashboard-green;
+          text-decoration: none;
+        }
+      }
+      .img-wrapper {
+        position: relative;
+        width: 67px;
+        height: 67px;
+        border-radius: 5px;
+        overflow: hidden;
+        margin-bottom: 7px;
+        img {
+          position: absolute;
+          left: 0;
+          top: 0;
+        }
+      }
+    }
+    .fields {
+      width: 305px;
+      input[type="text"] {
+        width: 100%;
+      }
+    }
+  }
+  .green-btn {
+    display: block;
+    background: #50b848;
+    border-radius: 3px;
+    font-size: 16px;
+    color: #FFF;
+    font-weight: bold;
+    height: 32px;
+    padding: 0 20px;
+    line-height: 32px;
+  }
+  .second-step {
+    padding-left: 25px;
+    .icon-block {
+      float: left;
+      width: 150px;
+      text-align: center;
+      margin-top: 10px;
+      span {
+        font-weight: bold;
+        margin-top: 5px;
+      }
+      .info {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        background: $dashboard-green;
+        border-radius: 50%;
+        content: "?";
+        color: #fff;
+        line-height: 20px;
+        text-align: center;
+        margin-top: 5px;
+        margin-left: 5px;
+
+      }
+    }
+
+  }
+  .fields {
+    float: right;
+    width: 226px;
+  }
+  .fields-block {
+    padding: 20px;
+    background: #fff;
+    position: relative;
+    margin-bottom: 20px;
+    border: 2px solid $dashboard-green;
+    margin-left: -25px;
+    @include property(border-radius, 3);
+    @include boxshadow(0 2 2 0, #ededed);
+    &.state {
+      .remove-service {
+        display: block;
+        position: absolute;
+        width: 20px;
+        height: 19px;
+        top: -10px;
+        right: -10px;
+        color: #fff;
+        text-align: center;
+        line-height: 20px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 16px;
+        background: $dashboard-green;
+      }
+    }
+
+
+    &.green {
+      background: #e8f4e1;
+      .select-block {
+        float: left;
+      }
+      a {
+        float: left;
+        margin-top: 24px;
+        margin-left: 10px;
+        text-align: center;
+        width: 147px;
+      }
+    }
+    .icon-block {
+      img {
+        margin: 10px auto;
+      }
+    }
+  }
+  .button-block {
+    margin-left: -25px;
+    padding: 0 23px;
+    padding-bottom: 40px;
+    > a {
+      width: 100%;
+      height: 50px;
+      line-height: 50px;
+      text-align: center;
+    }
+    span {
+      padding-top: 13px;
+      display: inline-block;
+      a {
+        color: $dashboard-green;
+      }
+    }
+  }
+  @include bp(xs) {
+    width: calc(100% - 20px);
+    padding-right: 0;
+    aside {
+      position: relative;
+      right: 0;
+      padding-left: 0;
+      .plan-item {
+        margin-left: 0;
+
+      }
+    }
+    h2 {
+      margin-left: 0;
+    }
+    .fields-block {
+      margin-left: 0;
+    }
+    .first-step {
+      padding-left: 0;
+      .logo {
+        margin-left: 0;
+        float: none;
+        text-align: center;
+        .img-wrapper {
+          display: inline-block;
+        }
+        .manage-gravatar {
+          width: 100%;
+          display: block;
+        }
+        > a {
+          float: right;
+          text-align: center;
+          width: 200px;
+        }
+      }
+      .fields {
+        margin-right: auto;
+      }
+    }
+    .fields {
+      margin: 0 auto;
+      float: none;
+    }
+    .second-step {
+      padding-left: 0;
+      .icon-block {
+        float: none;
+        margin: 0 auto;
+      }
+      .fields-block.green {
+        .select-block {
+          width: 226px;
+          float: none;
+          margin: 0 auto;
+        }
+        a {
+          float: none;
+          margin: 0 auto;
+          width: 226px;
+        }
+      }
+    }
+    .button-block {
+      a {
+        width: calc(100% - 20px);
+        margin-bottom: 30px;
+      }
+    }
+
+  } // xs
+}
