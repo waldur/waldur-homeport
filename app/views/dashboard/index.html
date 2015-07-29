@@ -134,7 +134,7 @@
                 <h3>Projects</h3>
                 <div ng-repeat="project in DashboardController.projects" class="white-box graph">
                     <h4 ng-click="DashboardController.selectProject(project)"
-                        ng-class="{'current': project.selected}">Project name: {{ project.name }}</h4>
+                        ng-class="{'current': project.selected}"><a ui-sref="projects.details({uuid: project.uuid})">{{ project.name }}</a></h4>
                     <div ng-if="project.selected" class="body">
                         <ul class="counters">
                             <li class="active-alert">
@@ -169,7 +169,7 @@
                 <a ng-if="DashboardController.projects.length" ui-sref="projects.list" class="center-link">Show all projects</a>
             </div>
             <div class="half-block">
-                <div class="alerts-list" ng-if="DashboardController.alerts.length">
+                <div class="alerts-list">
                     <h3>Alerts</h3>
                     <div class="white-box">
                         <ul>
@@ -185,11 +185,14 @@
                                 <div class="clear"></div>
                             </li>
                         </ul>
+                        <div class="placeholder" ng-if="DashboardController.alerts.length==0">
+                         No alerts yet
+                        </div>
                     </div>
-                    <a class="show-all" ui-sref="dashboard.alerts">Show all alerts</a>
+                    <a class="show-all" ui-sref="dashboard.alerts" ng-if="DashboardController.alerts.length">Show all alerts</a>
                 </div>
                 <div class="alerts-list" ng-if="DashboardController.events.length">
-                    <h3>Recent Events</h3>
+                    <h3>Recent events</h3>
                     <div class="white-box">
                         <ul>
                             <li ng-repeat="event in DashboardController.events">
@@ -202,6 +205,9 @@
                                 <div class="clear"></div>
                             </li>
                         </ul>
+                        <div class="placeholder" ng-if="DashboardController.events.length==0">
+                         No events yet
+                        </div>
                     </div>
                     <a class="show-all" ui-sref="dashboard.eventlog">Show all recent events</a>
                 </div>

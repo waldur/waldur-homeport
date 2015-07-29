@@ -187,6 +187,11 @@
           margin: 0px;
           position: relative;
 
+          a {
+            font-weight: normal;
+            color: #28ae60;
+          }
+
           &.current:before {
               position: absolute;
               @include icon-fa;
@@ -261,6 +266,11 @@
         .white-box {
           padding-bottom: 0;
           padding-top: 0;
+
+          .placeholder {
+            padding-top: 25px;
+          }
+
           ul {
             li {
               list-style: none;
