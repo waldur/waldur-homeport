@@ -114,6 +114,7 @@ Config file settings:
     addonsList:                    additional options for virtual machine purchase on appstore page
     resourceOfflineStatus:                 value for offline fields received from server
     resourceOnlineStatus:                  value for online fields received from server
+    IntercomAppId:                 app id for Intercom statistic
  
 
 ## Entity list directive

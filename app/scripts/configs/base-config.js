@@ -56,6 +56,7 @@ angular.module('ncsaas')
         name: 'SUPPORT',
         services: []
       }
-    ]
+    ],
+    IntercomAppId: 'xfbbcxck'
 
   });
