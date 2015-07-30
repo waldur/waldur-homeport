@@ -261,13 +261,13 @@
         project.count.services = project.services.length;
         resourcesCountService.users({'project': project.uuid}).then(function(count) {
           project.count.users = count;
-        })
+        });
         resourcesCountService.resources({'project_uuid': project.uuid}).then(function(count) {
           project.count.resources = count;
-        })
+        });
         resourcesCountService.alerts({'scope': project.url}).then(function(count) {
           project.count.alerts = count;
-        })
+        });
       },
       getProjectEvents: function (project) {
         if (project.chartData) {
