@@ -234,6 +234,8 @@
       },
       getUserListForAutoComplete: function(filter) {
         var vm = this;
+        filter = filter || {};
+        filter['DONTBLOCK'] = 1;
         usersService.getList(filter).then(function(response) {
           vm.usersListForAutoComplete = response;
         });
@@ -755,6 +757,8 @@ angular.module('ncsaas')
       },
       getUserListForAutoComplete: function(filter) {
         var vm = this;
+        filter = filter || {};
+        filter['DONTBLOCK'] = 1;
         usersService.getList(filter).then(function(response) {
           vm.usersListForAutoComplete = response;
         });
