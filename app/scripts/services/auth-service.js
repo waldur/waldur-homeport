@@ -58,6 +58,7 @@
       vm.user = {isAuthenticated: false};
       usersService.currentUser = null;
       $auth.logout();
+      window.Intercom('shutdown');
     }
 
     function setAuthHeader(token) {
