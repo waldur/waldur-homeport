@@ -128,7 +128,7 @@
         endpointUrl = endpointUrl || ENV.apiEndpoint + 'api' + endpoint;
         /*jshint camelcase: false */
         return $resource(endpointUrl + ':UUID/', {UUID:'@uuid',
-            page_size:'@page_size', page:'@page'},
+            page_size:'@page_size', page:'@page', 'DONTBLOCK': '@DONTBLOCK'},
           {
             operation: {
               method:'POST',

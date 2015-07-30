@@ -984,5 +984,12 @@
   function errorsHandler($httpProvider, blockUIConfig) {
     blockUIConfig.delay = 500;
     $httpProvider.interceptors.push('myHttpInterceptor');
+
+    blockUIConfig.requestFilter = function(config) {
+      if(config.hasOwnProperty('params') && config.params.hasOwnProperty('DONTBLOCK')) {
+        delete config.params.DONTBLOCK;
+        return false;
+      }
+    };
   }
 })();
