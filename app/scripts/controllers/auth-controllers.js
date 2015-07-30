@@ -23,7 +23,7 @@
         authService.authenticate(provider).then(vm.loginSuccess.bind(vm), vm.loginError.bind(vm));
       },
       loginSuccess: function() {
-        $state.go('dashboard.eventlog');
+        $state.go('dashboard.index');
       },
       loginError: function(response) {
         if (response.status != 400) {

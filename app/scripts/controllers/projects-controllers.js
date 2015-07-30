@@ -349,8 +349,10 @@
       },
       getList: function(filter) {
         if (this.project) {
-          this.service.defaultFilter.search = this.project.name;
+          this.service.defaultFilter.scope = this.project.url;
           this._super(filter);
+        } else {
+          this.getProject();
         }
       },
       getProject: function() {
