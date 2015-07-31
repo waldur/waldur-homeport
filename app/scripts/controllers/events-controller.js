@@ -155,9 +155,83 @@
   }
 
   angular.module('ncsaas')
-    .controller('DashboardIndexController', [
+    .controller('DashboardCostController', [
       '$scope',
-      'baseEventListController',
+      'baseControllerClass',
+      'priceEstimationService',
+      'currentStateService',
+      DashboardCostController]);
+
+  function DashboardCostController(
+    $scope,
+    baseControllerClass,
+    priceEstimationService,
+    currentStateService) {
+    var controllerScope = this;
+    var EventController = baseControllerClass.extend({
+      init: function() {
+        this.controllerScope = controllerScope;
+
+        $scope.$on('currentCustomerUpdated', this.onCustomerUpdate.bind(this));
+        this.onCustomerUpdate();
+      },
+
+      onCustomerUpdate: function() {
+        this.getMonthPrices();
+      },
+
+      getMonthPrices: function() {
+        var vm = this;
+        currentStateService.getCustomer().then(function(customer) {
+          priceEstimationService.getList({scope: customer.url}).then(function(rows) {
+            vm.processChartData(rows);
+            vm.processTableData(rows)
+          })
+        })
+      },
+
+      processChartData: function(rows) {
+        var labels = [];
+        var totals = [];
+        rows.forEach(function(row) {
+          labels.push(moment(row.month, 'MM').format('MMMM'));
+          totals.push(row.total);
+        })
+
+        this.costData = {
+          labels: labels,
+          datasets: [
+            {
+              fillColor: "rgba(123, 166, 196,0.5)",
+              strokeColor: "rgba(123, 166, 196,1)",
+              pointColor: "rgba(123, 166, 196,1)",
+              pointStrokeColor: "#fff",
+              pointHighlightFill: "#fff",
+              pointHighlightStroke: "rgba(123, 166, 196,1)",
+              data: totals
+            }
+          ]
+        };
+      },
+
+      processTableData: function(rows) {
+        this.rows = [];
+        for (var i = 0; i < rows.length; i++) {
+          var row = rows[i];
+          var label = moment(row.month, 'MM').format('MMMM') + ' ' + row.year;
+          this.rows.push({label: label, total: row.total});
+        }
+      }
+    });
+
+    controllerScope.__proto__ = new EventController();
+  }
+
+
+  angular.module('ncsaas')
+    .controller('DashboardActivityController', [
+      '$scope',
+      'baseControllerClass',
       'projectsService',
       'alertsService',
       'eventsService',
@@ -165,11 +239,11 @@
       'resourcesCountService',
       'currentStateService',
       'ENV',
-      DashboardIndexController]);
+      DashboardActivityController]);
 
-  function DashboardIndexController(
+  function DashboardActivityController(
     $scope,
-    baseEventListController,
+    baseControllerClass,
     projectsService,
     alertsService,
     eventsService,
@@ -178,38 +252,12 @@
     currentStateService,
     ENV) {
     var controllerScope = this;
-    var EventController = baseEventListController.extend({
+    var EventController = baseControllerClass.extend({
       init:function() {
         this.controllerScope = controllerScope;
         this.cacheTime = ENV.dashboardEventsCacheTime;
         this._super();
         this.activeTab = 'activity';
-        this.costData = {
-          labels: ["January", "February", "March", "April", "May", "June", "July"],
-          datasets: [
-            {
-              label: "Events",
-              fillColor: "rgba(123, 166, 196,0.5)",
-              strokeColor: "rgba(123, 166, 196,1)",
-              pointColor: "rgba(123, 166, 196,1)",
-              pointStrokeColor: "#fff",
-              pointHighlightFill: "#fff",
-              pointHighlightStroke: "rgba(123, 166, 196,1)",
-              data: [0, 59, 80, 81, 56, 55, 40]
-            },
-            {
-              label: "Alerts",
-              fillColor: "rgba(206, 230, 174,0.5)",
-              strokeColor: "rgba(206, 230, 174,1)",
-              pointColor: "rgba(206, 230, 174,1)",
-              pointStrokeColor: "#fff",
-              pointHighlightFill: "#fff",
-              pointHighlightStroke: "rgba(206, 230, 174,1)",
-              data: [0, 48, 40, 19, 86, 27, 90]
-            }
-          ]
-        };
-
         this.chartOptions = {
           responsive: true,
           scaleShowVerticalLines: false,
