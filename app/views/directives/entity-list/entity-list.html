@@ -1,5 +1,6 @@
 <div>
-
+    <list-cache-reset list-controller="entityList"
+                      list-service="entityService"></list-cache-reset>
     <div class="white-box" ng-show="entityList.list.length > 0 || entityList.searchInput || entityList.chosenFilters.length">
         <ul class="sort-list">
             <li ng-if="entityOptions.entityData.title" class="title">

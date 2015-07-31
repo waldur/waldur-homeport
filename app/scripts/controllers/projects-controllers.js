@@ -352,9 +352,9 @@
       getList: function(filter) {
         if (this.project) {
           this.service.defaultFilter.scope = this.project.url;
-          this._super(filter);
+          return this._super(filter);
         } else {
-          this.getProject();
+          return this.getProject();
         }
       },
       getProject: function() {
@@ -582,7 +582,7 @@
         var vm = this;
         var fn = this._super.bind(vm);
         filter = filter || {};
-        currentStateService.getProject().then(function(project){
+        return currentStateService.getProject().then(function(project){
           filter['project_uuid'] = project.uuid;
           vm.service.defaultFilter.project_uuid = project.uuid;
           fn(filter);
@@ -640,7 +640,7 @@
         var vm = this;
         var fn = this._super.bind(vm);
         filter = filter || {};
-        currentStateService.getProject().then(function(project){
+        return currentStateService.getProject().then(function(project){
           filter['project_uuid'] = project.uuid;
           vm.service.defaultFilter.project_uuid = project.uuid;
           fn(filter);
@@ -684,7 +684,7 @@ angular.module('ncsaas')
           var vm = this;
           var fn = this._super.bind(vm);
           filter = filter || {};
-          currentStateService.getProject().then(function(project){
+          return currentStateService.getProject().then(function(project){
             filter['project_uuid'] = project.uuid;
             vm.service.defaultFilter.project_uuid = project.uuid;
             fn(filter);
@@ -889,7 +889,7 @@ angular.module('ncsaas')
         var vm = this;
         var fn = this._super.bind(vm);
         filter = filter || {};
-        currentStateService.getProject().then(function(project){
+        return currentStateService.getProject().then(function(project){
           filter['project_uuid'] = project.uuid;
           vm.service.defaultFilter.project_uuid = project.uuid;
           fn(filter);

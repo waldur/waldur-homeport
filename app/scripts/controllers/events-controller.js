@@ -86,11 +86,11 @@
         var vm = this;
         var fn = this._super.bind(vm);
         filter = filter || {};
-        currentStateService.getCustomer().then(function(customer) {
+        return currentStateService.getCustomer().then(function(customer) {
           filter['scope'] = customer.url;
           vm.service.defaultFilter.scope = customer.url;
           fn(filter);
-        })
+        });
       }
     });
 
@@ -143,7 +143,7 @@
         var vm = this;
         var fn = this._super.bind(vm);
         filter = filter || {};
-        currentStateService.getCustomer().then(function(customer) {
+        return currentStateService.getCustomer().then(function(customer) {
           vm.service.defaultFilter.aggregate = 'customer';
           vm.service.defaultFilter.uuid = customer.uuid;
           fn(filter);

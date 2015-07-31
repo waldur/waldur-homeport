@@ -1,5 +1,6 @@
 <div>
-
+    <list-cache-reset list-controller="entityList"
+                      list-service="entityService"></list-cache-reset>
     <div class="tab-title" ng-show="entityList.list.length > 0 || entityList.searchInput">
         <a ui-sref="{{ entityOptions.entityData.createLink }}"
            ng-if="entityOptions.entityData.createLink"
