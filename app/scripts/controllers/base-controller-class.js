@@ -28,6 +28,9 @@
       },
       deregisterEvent: function(eventName) {
         $rootScope.$$listeners[eventName] = [];
+      },
+      updateIntercom: function() {
+        window.Intercom('update');
       }
     });
 
@@ -71,6 +74,7 @@
         // reset after state change
         this.selectedInstances = [];
         this.controlPanelShow = ENV.listControlPanelShow;
+        this.updateIntercom();
       },
       getList:function(filter) {
         var vm = this;

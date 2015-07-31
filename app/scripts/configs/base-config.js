@@ -57,6 +57,7 @@ angular.module('ncsaas')
         services: []
       }
     ],
+    IntercomAppId: 'xfbbcxck',
     defaultListCacheTime: 60 * 10
 
   });
