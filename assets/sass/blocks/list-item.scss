@@ -225,3 +225,24 @@
         } // more-details
     } // > div
 } // list-item
+
+.list-page {
+    .list-box {
+        position: relative;
+        .list-cache-reset {
+            top: -69px;
+            right: 20px;
+        }
+    }
+    .sort-list {
+        li {
+            &.right-sort {
+                right: 30px;
+            }
+        }
+    }
+}
+
+.tab-title {
+    padding-right: 5px;
+}

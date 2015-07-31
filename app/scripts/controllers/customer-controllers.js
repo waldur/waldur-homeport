@@ -6,10 +6,11 @@
       'customersService',
       'baseControllerListClass',
       'usersService',
+      'ENTITYLISTFIELDTYPES',
       CustomerListController
     ]);
 
-  function CustomerListController(customersService, baseControllerListClass, usersService) {
+  function CustomerListController(customersService, baseControllerListClass, usersService, ENTITYLISTFIELDTYPES) {
     var controllerScope = this;
     var CustomerController = baseControllerListClass.extend({
       init:function() {
@@ -32,6 +33,23 @@
         } else {
           this.actionButtonsListItems[0].state = 'support.create';
         }
+        this.entityOptions = {
+          entityData: {
+            noDataText: 'You have no organizations yet.',
+            title: 'Organizations',
+            createLink: 'organizations.create',
+            createLinkText: 'Add organization'
+          },
+          list: [
+            {
+              name: 'Name',
+              propertyName: 'name',
+              type: ENTITYLISTFIELDTYPES.name,
+              link: 'organizations.details({uuid: entity.uuid})',
+              showForMobile: ENTITYLISTFIELDTYPES.showForMobile
+            }
+          ]
+        };
       },
       isOwnerOrStaff: function(customer) {
         if (this.currentUserIsStaff()) return true;

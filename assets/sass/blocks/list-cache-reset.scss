@@ -1,5 +1,7 @@
 .list-cache-reset {
-  float: right;
+  position: absolute;
+  right: 10px;
+  top: 21px;
   a {
     display: inline-block;
     background-color: $dashboard-green;

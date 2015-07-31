@@ -2,13 +2,13 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('currentStateService', ['$q', currentStateService]);
+    .service('currentStateService', ['$q', '$window', 'ENV', currentStateService]);
 
   /**
    * This service contains values of objects, that affect current displayed data.
    * Notice: CurrentStateService can not make any backend calls. It stores only selected on user-side objects.
    */
-  function currentStateService($q) {
+  function currentStateService($q, $window, ENV) {
     /*jshint validthis: true */
     var vm = this;
     vm.getCustomer = getCustomer;
@@ -36,10 +36,16 @@
     function setCustomer(newCustomer) {
       vm.isCustomerDefined = true;
       customer = $q.when(newCustomer);
+      customer.then(function(response) {
+        $window.localStorage[ENV.currentCustomerUuidStorageKey] = response.uuid;
+      })
     }
 
     function setProject(newProject) {
       project = $q.when(newProject);
+      project.then(function(response) {
+        $window.localStorage[ENV.currentProjectUuidStorageKey] = response.uuid;
+      });
     }
 
     // XXX: getActiveItem and getBodyClass methods have to be moved to apps.js for code consistency.

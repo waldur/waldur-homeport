@@ -89,14 +89,12 @@
       },
       setCurrentCustomer: function(customer) {
         var vm = this;
-        $window.localStorage[ENV.currentCustomerUuidStorageKey] = customer.uuid;
         currentStateService.setCustomer(customer);
         vm.currentCustomer = customer;
         $rootScope.$broadcast('currentCustomerUpdated');
       },
       setCurrentProject: function(project) {
         var vm = this;
-        $window.localStorage[ENV.currentProjectUuidStorageKey] = project.uuid;
         currentStateService.setProject(project);
         vm.currentProject = project;
         $rootScope.$broadcast('currentProjectUpdated');
