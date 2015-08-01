@@ -3,13 +3,17 @@
 (function() {
   angular.module('ncsaas')
     .controller('ProjectListController',
-      ['baseControllerListClass', 'projectsService', 'projectPermissionsService', 'resourcesService', '$rootScope', ProjectListController]);
+      ['baseControllerListClass', 'projectsService', 'projectPermissionsService', 'resourcesService',
+        '$rootScope', 'ENTITYLISTFIELDTYPES', ProjectListController]);
 
-  function ProjectListController(baseControllerListClass, projectsService, projectPermissionsService, resourcesService, $rootScope) {
+  function ProjectListController(
+    baseControllerListClass, projectsService, projectPermissionsService, resourcesService, $rootScope, ENTITYLISTFIELDTYPES) {
     var controllerScope = this;
     var CustomerController = baseControllerListClass.extend({
       projectUsers: {},
       projectResources: {},
+      expandableResourcesKey: 'resources',
+      expandableUsersKey: 'users',
 
       init:function() {
         this.service = projectsService;
@@ -24,6 +28,81 @@
           {
             title: 'Delete',
             clickFunction: this.remove.bind(controllerScope)
+          }
+        ];
+        this.entityOptions = {
+          entityData: {
+            noDataText: 'You have no projects yet.',
+            title: 'Projects',
+            createLink: 'projects.create',
+            createLinkText: 'Add project',
+            expandable: true
+          },
+          list: [
+            {
+              name: 'Name',
+              propertyName: 'name',
+              type: ENTITYLISTFIELDTYPES.name,
+              link: 'projects.details({uuid: entity.uuid})',
+              showForMobile: ENTITYLISTFIELDTYPES.showForMobile
+            },
+            {
+              name: 'Creation date',
+              propertyName: 'created',
+              type: ENTITYLISTFIELDTYPES.dateCreated
+            }
+          ]
+        };
+        this.expandableOptions = [
+          {
+            isList: true,
+            sectionTitle: 'Resources',
+            articleBlockText: 'New resources could be added through',
+            entitiesLinkRef: 'appstore.store',
+            entitiesLinkText: 'AppStore',
+            addItemBlock: true,
+            headBlock: 'heading',
+            listKey: 'projectResources',
+            modelId: 'uuid',
+            minipaginationData:
+            {
+              pageChange: 'getResourcesForProject',
+              pageEntityName: this.expandableResourcesKey
+            },
+            list: [
+              {
+                entityDetailsLink: 'resources.details({uuid: element.uuid})',
+                entityDetailsLinkText: 'name',
+                type: 'link'
+              }
+            ]
+          },
+          {
+            isList: true,
+            sectionTitle: 'Users',
+            articleBlockText: 'Manage users through',
+            entitiesLinkRef: 'projects.details({uuid: expandableElement.uuid})',
+            entitiesLinkText: 'project details',
+            addItemBlock: true,
+            headBlock: 'heading',
+            listKey: 'projectUsers',
+            modelId: 'uuid',
+            minipaginationData:
+            {
+              pageChange: 'getUsersForProject',
+              pageEntityName: this.expandableUsersKey
+            },
+            list: [
+              {
+                avatarSrc: 'user_email',
+                type: 'avatar'
+              },
+              {
+                entityDetailsLink: 'users.details({uuid: element.user_uuid})',
+                entityDetailsLinkText: 'user_full_name',
+                type: 'link'
+              }
+            ]
           }
         ];
       },
@@ -50,7 +129,7 @@
           vm.projectUsers[uuid].data = response;
           vm.projectUsers[uuid].pages = projectPermissionsService.pages;
           $rootScope.$broadcast('mini-pagination:getNumberList', vm.projectUsers[uuid].pages,
-            page, vm.getUsersForProject.bind(vm), 'users', uuid);
+            page, vm.getUsersForProject.bind(vm), vm.expandableUsersKey, uuid);
         });
       },
       getResourcesForProject: function(uuid, page) {
@@ -68,7 +147,7 @@
           vm.projectResources[uuid].data = response;
           vm.projectResources[uuid].pages = resourcesService.pages;
           $rootScope.$broadcast('mini-pagination:getNumberList', vm.projectResources[uuid].pages,
-            page, vm.getResourcesForProject.bind(vm), 'resources', uuid);
+            page, vm.getResourcesForProject.bind(vm), vm.expandableResourcesKey, uuid);
         });
       }
     });
@@ -352,9 +431,9 @@
       getList: function(filter) {
         if (this.project) {
           this.service.defaultFilter.scope = this.project.url;
-          this._super(filter);
+          return this._super(filter);
         } else {
-          this.getProject();
+          return this.getProject();
         }
       },
       getProject: function() {
@@ -582,7 +661,7 @@
         var vm = this;
         var fn = this._super.bind(vm);
         filter = filter || {};
-        currentStateService.getProject().then(function(project){
+        return currentStateService.getProject().then(function(project){
           filter['project_uuid'] = project.uuid;
           vm.service.defaultFilter.project_uuid = project.uuid;
           fn(filter);
@@ -640,7 +719,7 @@
         var vm = this;
         var fn = this._super.bind(vm);
         filter = filter || {};
-        currentStateService.getProject().then(function(project){
+        return currentStateService.getProject().then(function(project){
           filter['project_uuid'] = project.uuid;
           vm.service.defaultFilter.project_uuid = project.uuid;
           fn(filter);
@@ -684,7 +763,7 @@ angular.module('ncsaas')
           var vm = this;
           var fn = this._super.bind(vm);
           filter = filter || {};
-          currentStateService.getProject().then(function(project){
+          return currentStateService.getProject().then(function(project){
             filter['project_uuid'] = project.uuid;
             vm.service.defaultFilter.project_uuid = project.uuid;
             fn(filter);
@@ -889,7 +968,7 @@ angular.module('ncsaas')
         var vm = this;
         var fn = this._super.bind(vm);
         filter = filter || {};
-        currentStateService.getProject().then(function(project){
+        return currentStateService.getProject().then(function(project){
           filter['project_uuid'] = project.uuid;
           vm.service.defaultFilter.project_uuid = project.uuid;
           fn(filter);

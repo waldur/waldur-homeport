@@ -240,12 +240,12 @@
       getUser: function() {
         var vm = this;
         if ($stateParams.uuid) {
-          usersService.$get($stateParams.uuid).then(function (response) {
+          return usersService.$get($stateParams.uuid).then(function (response) {
             vm.user = response;
             vm.getList();
           });
         } else {
-          usersService.getCurrentUser().then(function(response) {
+          return usersService.getCurrentUser().then(function(response) {
             vm.user = response;
             vm.getList();
           });
@@ -282,7 +282,7 @@
       getList: function(filter) {
         if (this.user) {
           this.service.defaultFilter.username = this.user.username;
-          this._super(filter);
+          return this._super(filter);
         }
       },
       getUser: function() {
@@ -369,7 +369,7 @@
       getList: function(filter) {
         if (this.user.uuid) {
           this.service.defaultFilter.user_uuid = this.user.uuid;
-          this._super(filter);
+          return this._super(filter);
         }
       },
       getCurrentUser: function() {

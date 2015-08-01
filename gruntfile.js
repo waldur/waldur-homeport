@@ -385,12 +385,16 @@ module.exports = function(grunt) {
                 options: {
                     debounceDelay: 1000
                 }
+            },
+            index: {
+              files: 'app/index-template.html',
+              tasks: ['preprocess:index']
             }
         },
 
         focus: {
             dev: {
-                include: ['sass', 'autoprefixer', 'images']
+                include: ['sass', 'autoprefixer', 'images', 'index']
             },
             prod: {
                 include: ['sass', 'css', 'autoprefixer', 'images', 'scripts']

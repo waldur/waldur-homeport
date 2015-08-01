@@ -1,5 +1,4 @@
 <div>
-
     <div class="white-box" ng-show="entityList.list.length > 0 || entityList.searchInput || entityList.chosenFilters.length">
         <ul class="sort-list">
             <li ng-if="entityOptions.entityData.title" class="title">
@@ -28,6 +27,9 @@
     </div>
 
     <div class="white-box no-styles" ng-show="entityList.list.length == 0 && !entityList.searchInput && !entityList.chosenFilters.length">
+
+        <list-cache-reset list-controller="entityList"
+                          list-service="entityService"></list-cache-reset>
         <h2 class="app-title">
             {{ entityOptions.entityData.noDataText }}
         </h2>
@@ -69,7 +71,9 @@
     <!-- /view-control -->
 
 
-    <div class="white-box" ng-show="entityList.list.length > 0 || entityList.searchInput">
+    <div class="white-box list-box" ng-show="entityList.list.length > 0 || entityList.searchInput">
+        <list-cache-reset list-controller="entityList"
+                          list-service="entityService"></list-cache-reset>
         <ul class="object-list">
             <li class="list-item list-header">
                 <div class="checkbox" ng-show="entityList.controlPanelShow"></div>

@@ -44,7 +44,8 @@
             {
               type: ENTITYLISTFIELDTYPES.statusCircle,
               propertyName: 'state',
-              onlineStatus: ENV.resourceOnlineStatus
+              onlineStatus: ENV.resourceOnlineStatus,
+              className: 'visual-status'
             },
             {
               name: 'Name',

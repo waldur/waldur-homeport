@@ -62,12 +62,13 @@
       // filters
       searchFilters: [], // should contains array of objects {name: 'name', title: 'Title', value: 'value'}
       chosenFilters: [],
-      cacheTime: 0,
+      cacheTime: ENV.defaultListCacheTime,
       controlPanelShow: true,
 
       init:function() {
         this.setSignalHandler('currentCustomerUpdated', this.currentCustomerUpdatedHandler.bind(this));
         this.service.page = 1;
+        this.service.cacheTime = this.cacheTime;
         this._super();
         this.getList();
         // reset after state change
@@ -79,7 +80,7 @@
         var vm = this;
         filter = filter || {};
         vm.service.cacheTime = vm.cacheTime;
-        vm.service.getList(filter).then(function(response) {
+        return vm.service.getList(filter).then(function(response) {
           vm.list = response;
         });
       },
