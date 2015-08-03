@@ -8,24 +8,45 @@
         </ul>
     </div>
 
-    <div class="white-box no-styles" ng-show="ImportResource.services.length == 0">
-        <h2 class="app-title">
-            You don't have any services yet.
-        </h2>
-        <div class="decision">
-            <div class="col">
-                <a ui-sref="services.create" class="button">Create new service</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="white-box" ng-show="ImportResource.services.length>0">
+    <div class="white-box">
         <div class="short-form full">
-            <div class="form-row">
-                <div class="col full">
-                    <h3 class="app-title">Select Service</h3>
-                    <!-- Select service -->
+            <div class="appstore-content">
+                <section class="step-1">
+                    <div class="step-title">
+                        <span>Step 1: Choose category</span>
+                    </div>
                     <div class="appstore-templates">
+                        <!-- category -->
+                        <div class="appstore-template"
+                             ng-repeat="category in ImportResource.categories"
+                             ng-click="ImportResource.setCategory(category)"
+                             ng-class="{'state': ImportResource.selectedCategory == category}">
+                            <div class="icon">
+                                <img ng-src="static/images/appstore/icon-{{ category.name.toLowerCase() }}.png" alt="">
+                            </div>
+                            <h3>{{ category.name }}</h3>
+                        </div>
+                        <!-- /category -->
+                    </div>
+                </section>
+            </div>
+            <div class="form-row" ng-show="ImportResource.secondStep">
+                <div class="col full">
+                    <div class="step-title"><span>Step 2: Select Service</span></div>
+                    <!-- Select service -->
+
+                    <div class="white-box no-styles" ng-show="ImportResource.services.length == 0">
+                        <h2 class="app-title">
+                            You don't have any services yet.
+                        </h2>
+                        <div class="decision">
+                            <div class="col">
+                                <a ui-sref="services.create" class="button">Create new service</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="appstore-templates">
+
                         <!-- service -->
                         <div ng-repeat="service in ImportResource.services"
                              ng-class="{'state': ImportResource.selectedService == service}"
@@ -107,20 +128,6 @@
                             </div>
                         </li>
                     </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="decision" ng-show="ImportResource.importableResources.length">
-            <div class="col select-project">
-                <article class="descriptoin-light">
-                    Selected resources will be imported into
-                </article>
-                <div class="custom-select project inline-elem">
-                    <select ng-model="ImportResource.selectedProject"
-                        ng-options="project as project.project_name for project in ImportResource.projectList">
-                        <option value="">Choose project</option>
-                    </select>
                 </div>
             </div>
         </div>
