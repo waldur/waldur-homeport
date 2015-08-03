@@ -18,7 +18,9 @@
                                 <img ng-src="static/images/appstore/icon-{{ category.name.toLowerCase() }}.png" alt="">
                             </div>
                             <h3>{{ category.name }}</h3>
-                            <span>
+                            <span class="compare" stoppropagation
+                                  ng-click="AppStore.setCompare(category.name)"
+                                  ng-class="{'compare-active': (AppStore.compare.indexOf(category.name) + 1)}">
                                 Compare
                             </span>
                         </div>
@@ -29,14 +31,15 @@
                     <div class="step-title"><span>Step 2: Choose provider</span></div>
                     <div class="appstore-templates">
                         <!-- service -->
-                        <div class="appstore-template {{ service.toLowerCase() }}"
-                             ng-repeat="service in AppStore.selectedCategory.services"
-                             ng-click="AppStore.setService(service)"
-                             ng-class="{'state': AppStore.selectedServiceName == service}">
+                        <div class="appstore-template {{ service.type.toLowerCase() }}"
+                             ng-repeat="service in AppStore.currentProject.services"
+                             ng-click="AppStore.setService(service.type)"
+                             ng-class="{'state': AppStore.selectedServiceName == service.type}"
+                             ng-if="AppStore.selectedCategory.services.indexOf(service.type) + 1">
                             <div class="icon">
-                                <img ng-src="/static/images/appstore/icon-{{ service.toLowerCase() }}.png" alt="">
+                                <img ng-src="/static/images/appstore/icon-{{ service.type.toLowerCase() }}.png" alt="">
                             </div>
-                            <h3>{{ service }}</h3>
+                            <h3>{{ service.type }}</h3>
                         </div>
                         <!-- /service -->
                     </div>
@@ -157,7 +160,10 @@
                 <h2>
                     checkout summary
                 </h2>
-                <p>Charged to <a href="#"> Helen Hokk</a></p>
+                <p>
+                    Charged to
+                    <a ui-sref="organizations.details({uuid: AppStore.currentCustomer.uuid})">{{ AppStore.currentCustomer.name }}</a>
+                </p>
 
                 <ul class="ap-aside-block">
                     <li>
@@ -179,10 +185,11 @@
                     </li>
                     <li class="total">
                         <div class="descr">
-                            <span>Small VM</span>
-                            <span>Salalah Data Center</span>
+                            <span ng-show="AppStore.selectedServiceName">{{ AppStore.selectedServiceName }}</span>
+                            <span ng-show="!AppStore.selectedServiceName">No chosen provider</span>
+                            <span>{{ AppStore.instance.name }} {{ AppStore.selectedResourceType }}</span>
                         </div>
-                        <div class="price">$0</div>
+                        <div class="price">${{ AppStore.total }}</div>
                         <div class="clear"></div>
                     </li>
                 </ul>
@@ -191,13 +198,5 @@
 
         </div>
 
-    </div>
-    <div class="project-alert-message" ng-show="AppStore.showProjectAlertMessage">
-        <p>
-            There are no {{ AppStore.selectedServiceName }} accounts available to the current project.<br />
-            You can add a new one or allow access to an existing one in
-            <a ui-sref="organizations.details({uuid: AppStore.currentCustomer.uuid, tab: 'services'})">provider management</a>.
-            <span ng-click="AppStore.showProjectAlertMessage = false">&#x2716;</span>
-        </p>
     </div>
 </div>

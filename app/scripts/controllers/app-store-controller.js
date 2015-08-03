@@ -19,7 +19,6 @@
       secondStep: false,
       thirdStep: false,
       resourceTypesBlock: false,
-      showProjectAlertMessage: false,
 
       activeTab: null,
       successMessage: 'Purchase of {vm_name} was successful.',
@@ -30,8 +29,14 @@
       selectedCategory: {},
       selectedResourceType: null,
       currentCustomer: {},
+      currentProject: {},
+      compare: [],
 
       configureStepNumber: 4,
+
+      // cart
+      total: 0,
+
 
       init:function() {
         this.service = servicesService;
@@ -48,7 +53,8 @@
         });
         currentStateService.getCustomer().then(function(response) {
           vm.currentCustomer = response;
-        })
+        });
+        vm.setCurrentProject();
       },
       setCategory: function(category) {
         this.selectedCategory = category;
@@ -84,7 +90,7 @@
           vm.instance = servicesService.$create(vm.selectedService.resources[vm.selectedResourceType]);
           servicesService.getOption(vm.selectedService.resources[vm.selectedResourceType]).then(function(response) {
             vm.setFormOptions(response.actions.POST);
-            vm.setCurrentProject();
+            vm.instance[vm.UNIQUE_FIELDS.service_project_link] = vm.currentProject.url;
           });
         }
       },
@@ -111,23 +117,8 @@
       setCurrentProject: function() {
         var vm = this;
         currentStateService.getProject().then(function(response) {
-          if (vm.isAvailableProject(response)) {
-            vm.instance[vm.UNIQUE_FIELDS.service_project_link] = response.url;
-          } else {
-            vm.showProjectAlertMessage = true;
-            vm.formOptions = {};
-            vm.thirdStep = false;
-          }
+          vm.currentProject = response;
         });
-      },
-      isAvailableProject: function(currentProject) {
-        if (this.allFormOptions[this.UNIQUE_FIELDS.service_project_link]) {
-          var projectLinks = this.allFormOptions[this.UNIQUE_FIELDS.service_project_link].choices.map(function(choice) {
-            return choice.value;
-          });
-          return projectLinks.indexOf(currentProject.url) + 1;
-        }
-        return false;
       },
       canSave: function() {
         for (var name in this.allFormOptions) {
@@ -147,6 +138,14 @@
           }
         }
         this.errorFlash(message);
+      },
+      setCompare: function(categoryName) {
+        var index = this.compare.indexOf(categoryName);
+        if (index + 1) {
+          this.compare.splice(index, 1);
+        } else {
+          this.compare.push(categoryName);
+        }
       }
     });
 

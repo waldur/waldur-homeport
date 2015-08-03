@@ -151,10 +151,13 @@
                 span {
                     display: block;
                     width: 93%;
-                    color: $dashboard-green;
+                    color: #ccc;
                     font-size: 14px;
                     position: absolute;
                     bottom: 10px;
+                    &.compare-active {
+                        color: $dashboard-green;
+                    }
                 }
 
                 .icon{
