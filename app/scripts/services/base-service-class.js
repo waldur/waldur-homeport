@@ -55,6 +55,7 @@
             deferred.resolve(cache.data);
           } else {
             vm.cacheReset = false;
+            listCache.put(cacheKey, {data: null, time: 0});
             vm.getFactory(true).query(filter, function(response, responseHeaders) {
               var header = responseHeaders();
               vm.resultCount = !header['x-result-count'] ? null : header['x-result-count'];

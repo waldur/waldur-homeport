@@ -5,12 +5,12 @@
   angular.module('ncsaas')
     .controller('HeaderController', [
       '$rootScope', '$scope', '$state', 'currentStateService', 'customersService',
-      'usersService', 'ENV', 'baseControllerClass', '$translate', 'LANGUAGE', '$window', 'projectsService', '$q',
+      'usersService', 'ENV', 'baseControllerClass', '$translate', 'LANGUAGE', '$window', 'projectsService', '$q', 'blockUI',
       HeaderController]);
 
   function HeaderController(
     $rootScope, $scope, $state, currentStateService, customersService, usersService,
-    ENV, baseControllerClass, $translate, LANGUAGE, $window, projectsService, $q) {
+    ENV, baseControllerClass, $translate, LANGUAGE, $window, projectsService, $q, blockUI) {
     var controllerScope = this;
     var HeaderControllerClass = baseControllerClass.extend({
       customers: [],
@@ -30,6 +30,7 @@
         this.activate();
         this.menuItemActive = currentStateService.getActiveItem($state.current.name);
         this.setSignalHandler('currentCustomerUpdated', this.currentCustomerUpdatedHandler.bind(controllerScope));
+        this.setSignalHandler('refreshProjectList', this.refreshProjectListHandler.bind(controllerScope));
         this._super();
       },
       activate: function() {
@@ -122,25 +123,47 @@
               return project.uuid;
             });
             if (!uuids.indexOf($window.localStorage[ENV.currentProjectUuidStorageKey]) + 1) {
-              setFirstProject();
+              vm.setFirstProject();
             }
           } else {
-            setFirstProject();
-          }
-
-          function setFirstProject() {
-            projectsService.getFirst().then(function(firstProject) {
-              vm.setCurrentProject(firstProject);
-            });
+            vm.setFirstProject();
           }
         });
       },
-      getProjectList: function() {
+      setFirstProject: function() {
+        var vm = this;
+        projectsService.getFirst().then(function(firstProject) {
+          vm.setCurrentProject(firstProject);
+        });
+      },
+      refreshProjectListHandler: function(event, model) {
+        var vm = this,
+          projectUuids,
+          key;
+        projectUuids = vm.projects.map(function(obj) {
+          return obj.uuid;
+        });
+        key = projectUuids.indexOf(model.uuid);
+        vm.getProjectList(true);
+        if (key + 1) {
+          currentStateService.getProject().then(function(currentProject) {
+            vm.projects.splice(key, 1);
+            if (model.uuid == currentProject.uuid) {
+              vm.setFirstProject();
+            }
+          });
+        }
+      },
+      getProjectList: function(cacheReset) {
         var vm = this,
           deferred = $q.defer();
         projectsService.cacheTime = ENV.topMenuProjectsCacheTime;
+        projectsService.cacheReset = cacheReset;
+        var projectMenu = blockUI.instances.get('project-menu');
+        projectMenu.start();
         projectsService.getList().then(function(response) {
           vm.projects = response;
+          projectMenu.stop();
           deferred.resolve(response);
         });
 
@@ -175,6 +198,7 @@
       },
       stateChangeSuccessHandler: function(event, toState) {
         this.deregisterEvent('currentCustomerUpdated'); // clear currentCustomerUpdated event handlers
+        this.deregisterEvent('refreshProjectList'); // clear refreshProjectList event handlers
         $rootScope.bodyClass = currentStateService.getBodyClass(toState.name);
         // if user is authenticated - he should have selected customer
         if (authService.isAuthenticated() && !currentStateService.isCustomerDefined) {
