@@ -133,8 +133,11 @@
             <div class="half-block">
                 <h3>Projects</h3>
                 <div ng-repeat="project in DashboardController.projects" class="white-box graph">
-                    <h4 ng-click="DashboardController.selectProject(project)"
-                        ng-class="{'current': project.selected}"><a ui-sref="projects.details({uuid: project.uuid})">{{ project.name }}</a></h4>
+                    <div ng-click="DashboardController.selectProject(project)" class="graph-head">
+                        <h4 ng-class="{'current': project.selected}">
+                            <a stoppropagation ui-sref="projects.details({uuid: project.uuid})">{{ project.name }}</a>
+                        </h4>
+                    </div>
                     <div ng-if="project.selected" class="body">
                         <ul class="counters">
                             <li class="active-alert">
