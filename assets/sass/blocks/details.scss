@@ -147,6 +147,10 @@
     @include bp(xs) {
       margin-left: 0;
       padding: 10px;
+      .list-cache-reset {
+        right: 2px;
+        top: 34px;
+      }
     } // xs
     .tab-title {
       ul {
