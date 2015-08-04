@@ -183,9 +183,10 @@
       getMonthPrices: function() {
         var vm = this;
         currentStateService.getCustomer().then(function(customer) {
-          priceEstimationService.getList({scope: customer.url}).then(function(rows) {
+          priceEstimationService.pageSize = 1000;
+          priceEstimationService.getList().then(function(rows) {
             vm.processChartData(rows);
-            vm.processTableData(rows)
+            vm.processTableData(rows);
           })
         })
       },
@@ -194,8 +195,10 @@
         var labels = [];
         var totals = [];
         rows.forEach(function(row) {
-          labels.push(moment(row.month, 'MM').format('MMMM'));
-          totals.push(row.total);
+          if (row.scope_type == 'customer') {
+            labels.push(moment(row.month, 'MM').format('MMMM'));
+            totals.push(row.total);
+          }
         })
 
         this.costData = {
@@ -215,12 +218,47 @@
       },
 
       processTableData: function(rows) {
-        this.rows = [];
+        var results = {};
         for (var i = 0; i < rows.length; i++) {
           var row = rows[i];
-          var label = moment(row.month, 'MM').format('MMMM') + ' ' + row.year;
-          this.rows.push({label: label, total: row.total});
+          var date = moment(row.month, 'MM').format('MMMM') + ' ' + row.year;
+          if (!results.hasOwnProperty(date)) {
+            results[date] = {
+              total: 0,
+              projects: [],
+              services: [],
+              resources: []
+            }
+          }
+          if (row.scope_type == 'customer') {
+            results[date].total = row.total;
+          }
+          if (row.scope_type == 'project') {
+            results[date].projects.push(row);
+          }
+          if (row.scope_type == 'resource') {
+            results[date].resources.push(row);
+          }
+          if (row.scope_type == 'service') {
+            results[date].services.push(row);
+          }
+          if (row.scope_type == 'serviceprojectlink') {
+            results[date].services.push(row);
+          }
         }
+        var table = [];
+        for (var date in results) {
+          var row = results[date];
+          table.push({
+            date: date,
+            total: row.total,
+            projects: row.projects,
+            services: row.services,
+            resources: row.resources
+          })
+        }
+        console.log(table);
+        this.table = table;
       }
     });
 
