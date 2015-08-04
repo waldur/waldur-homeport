@@ -240,12 +240,32 @@
     var controllerScope = this;
     var Controller = baseControllerDetailUpdateClass.extend({
       activeTab: 'backups',
+      canEdit: true,
 
       init:function() {
         this.service = resourcesService;
         this.controllerScope = controllerScope;
         this._super();
         this.activeTab = $stateParams.tab ? $stateParams.tab : this.activeTab;
+        this.detailsViewOptions = {
+          title: 'Resource',
+          activeTab: $stateParams.tab ? $stateParams.tab : this.activeTab,
+          listState: 'resources.list',
+          aboutFields: [
+            {
+              fieldKey: 'name',
+              isEditable: true,
+              className: 'name'
+            }
+          ],
+          tabs: [
+            {
+              title: 'Backups',
+              key: 'backups',
+              viewName: 'tabBackups'
+            }
+          ]
+        };
       },
 
       activate:function() {
