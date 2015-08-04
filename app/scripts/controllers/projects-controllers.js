@@ -114,6 +114,10 @@
           this.getResourcesForProject(project.uuid);
         }
       },
+      afterInstanceRemove: function(instance) {
+        $rootScope.$broadcast('refresProjecthList', instance);
+        this._super(instance);
+      },
       getUsersForProject: function(uuid, page) {
         var vm = this;
         var filter = {
@@ -157,10 +161,10 @@
 
   angular.module('ncsaas')
     .controller('ProjectAddController', ['projectsService', 'currentStateService',
-      'cloudsService', 'projectCloudMembershipsService', 'baseControllerAddClass', ProjectAddController]);
+      'cloudsService', 'projectCloudMembershipsService', 'baseControllerAddClass', '$rootScope', ProjectAddController]);
 
   function ProjectAddController(
-    projectsService, currentStateService, cloudsService, projectCloudMembershipsService, baseControllerAddClass) {
+    projectsService, currentStateService, cloudsService, projectCloudMembershipsService, baseControllerAddClass, $rootScope) {
     var controllerScope = this;
     var ProjectController = baseControllerAddClass.extend({
       init: function() {
@@ -187,6 +191,7 @@
             projectCloudMembershipsService.addRow(vm.project.url, response[i].url);
           }
         });
+        $rootScope.$broadcast('refreshProjectList', vm.instance);
       },
       currentCustomerUpdatedHandler: function() {
         var vm = this;
