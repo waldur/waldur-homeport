@@ -46,15 +46,22 @@ angular.module('ncsaas')
     appStoreCategories: [
       {
         name: 'VMs',
+        type: 'provider',
         services: ['DigitalOcean', 'OpenStack']
       },
       {
         name: 'APPLICATIONS',
+        type: 'provider',
         services: ['Oracle', 'GitLab']
       },
       {
         name: 'SUPPORT',
-        services: []
+        type: 'package',
+        packages: [
+          {name: 'Support package A', type: 'low SLA level'},
+          {name: 'Support package B', type: 'medium SLA level'},
+          {name: 'Support package C', type: 'high SLA level'}
+        ]
       }
     ],
     IntercomAppId: 'xfbbcxck',
