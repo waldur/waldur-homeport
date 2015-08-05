@@ -257,7 +257,6 @@
             resources: row.resources
           })
         }
-        console.log(table);
         this.table = table;
       }
     });
