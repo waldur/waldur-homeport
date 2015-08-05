@@ -51,25 +51,25 @@
                 </div>
                 <div class="table services" ng-show="!openedProject">
                     <div class="tr th">
-                        <div class="td service-name"><span>Project name</span></div>
+                        <div class="td service-name display-for-mobile"><span>Project name</span></div>
                         <div class="td service-title"><span>VMs</span></div>
                         <div class="td service-title"><span>Licenses </span></div>
                         <div class="td service-name"><span>Cost drilldown</span></div>
                     </div>
                     <div class="tr">
-                        <div class="td service-name"><span>Project name</span></div>
+                        <div class="td service-name display-for-mobile"><span>Project name</span></div>
                         <div class="td service-title"><span>Title</span></div>
                         <div class="td service-title"><span>1</span></div>
                         <div class="td service-name"><span>Cost drilldown</span></div>
                     </div>
                     <div class="tr">
-                        <div class="td service-name"><span>Project name</span></div>
+                        <div class="td service-name display-for-mobile"><span>Project name</span></div>
                         <div class="td service-title"><span>Title</span></div>
                         <div class="td service-title"><span>1</span></div>
                         <div class="td service-name"><span>Cost drilldown</span></div>
                     </div>
                     <div class="tr">
-                        <div class="td service-name"><span>Project name</span></div>
+                        <div class="td service-name display-for-mobile"><span>Project name</span></div>
                         <div class="td service-title"><span>Title</span></div>
                         <div class="td service-title"><span>1</span></div>
                         <div class="td service-name"><span>Cost drilldown</span></div>
@@ -102,22 +102,22 @@
                 </div>
                 <div class="table services" ng-show="!openedServices">
                     <div class="tr th">
-                        <div class="td service-name"><span>Service name</span></div>
+                        <div class="td service-name display-for-mobile"><span>Service name</span></div>
                         <div class="td service-title"><span>Title</span></div>
                         <div class="td service-name"><span>Cost drilldown</span></div>
                     </div>
                     <div class="tr">
-                        <div class="td service-name"><span>Service name</span></div>
+                        <div class="td service-name display-for-mobile"><span>Service name</span></div>
                         <div class="td service-title"><span>Title</span></div>
                         <div class="td service-name"><span>Cost drilldown</span></div>
                     </div>
                     <div class="tr">
-                        <div class="td service-name"><span>Service name</span></div>
+                        <div class="td service-name display-for-mobile"><span>Service name</span></div>
                         <div class="td service-title"><span>Title</span></div>
                         <div class="td service-name"><span>Cost drilldown</span></div>
                     </div>
                     <div class="tr">
-                        <div class="td service-name"><span>Service name</span></div>
+                        <div class="td service-name display-for-mobile"><span>Service name</span></div>
                         <div class="td service-title"><span>Title</span></div>
                         <div class="td service-name"><span>Cost drilldown</span></div>
                     </div>
@@ -134,7 +134,10 @@
                 <h3>Projects</h3>
                 <div ng-repeat="project in DashboardController.projects" class="white-box graph">
                     <h4 ng-click="DashboardController.selectProject(project)"
-                        ng-class="{'current': project.selected}"><a ui-sref="projects.details({uuid: project.uuid})">{{ project.name }}</a></h4>
+                        ng-class="{'current': project.selected}">
+                        <a ui-sref="projects.details({uuid: project.uuid})">{{ project.name }}</a>
+                        <span class="status active">active</span>
+                    </h4>
                     <div ng-if="project.selected" class="body">
                         <ul class="counters">
                             <li class="active-alert">
@@ -175,7 +178,6 @@
                         <ul>
                             <li ng-repeat="alert in DashboardController.alerts" ng-class="{'fail': alert.severity=='error'}">
                                 <div class="left-p">
-                                    <div class="icon"></div>
                                     <span ng-bind="::alert.message"></span>
                                 </div>
                                 <div class="right-p">
@@ -195,7 +197,9 @@
                     <h3>Recent events</h3>
                     <div class="white-box">
                         <ul>
-                            <li ng-repeat="event in DashboardController.events">
+                            <li ng-repeat="event in DashboardController.events"
+                                class="recent-alert" ng-class="{'error-event': event.levelname == 'ERROR'}">
+                                <div class="icon"></div>
                                 <div class="left-p">
                                     <span ng-bind="::event.message"></span>
                                 </div>
