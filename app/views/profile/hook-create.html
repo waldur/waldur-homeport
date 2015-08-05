@@ -1,0 +1,63 @@
+<div ng-controller="HookCreateController as HookController">
+
+<div class="white-box">
+    <ul class="sort-list">
+        <li class="title">
+            <h2 class="app-title">Add notification</h2>
+        </li>
+    </ul>
+</div>
+
+<div class="white-box">
+    <section class="short-form">
+        <div class="form-row">
+            <div class="col label">
+                <label class="text" for="email">Email</label>
+            </div>
+            <div class="col input input-full">
+                <input type="text" id="email" ng-model="HookController.instance.email"/>
+                <div class="error arrow-up" ng-show="HookController.errors.email">
+                    <ul class="error-list">
+                        <li ng-repeat="error in HookController.errors.email">{{ error }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col label"></div>
+            <div class="col input">
+                <div class="notif-wrapper">
+                <ul>
+                    <li ng-repeat="entity in HookController.entities">
+                        <input type="checkbox" id="email_{{ entity.id }}" ng-checked="HookController.entity.selected" ng-click="HookController.updateEvents()"/>
+                        <label for="email_{{ entity.id }}"><span ng-bind="entity.label"></span></label>
+                    </li>
+                </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- non field errors -->
+    <div class="simple-line" ng-show="HookController.errors.non_field_errors">
+        <div class="error">
+            <ul class="error-list">
+                <li ng-repeat="error in HookController.errors.non_field_errors">
+                    {{ error }}
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- /non field errors -->
+
+    <div class="decision">
+        <div class="col">
+            <a class="button-apply" ng-click="HookController.save()">Create</a>
+        </div>
+        <div class="col">
+            <a class="button-cancel" ng-click="HookController.cancel()">Cancel</a>
+        </div>
+    </div>
+</div>
+
+</div>
