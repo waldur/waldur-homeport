@@ -155,6 +155,13 @@
   }
 
   angular.module('ncsaas')
+    .controller('DashboardIndexController', ['$scope', '$stateParams', DashboardIndexController]);
+
+    function DashboardIndexController($scope, $stateParams) {
+      $scope.activeTab = $stateParams.tab || 'activity';
+    }
+
+  angular.module('ncsaas')
     .controller('DashboardCostController', [
       '$scope',
       'baseControllerClass',
@@ -177,18 +184,12 @@
       },
 
       onCustomerUpdate: function() {
-        this.getMonthPrices();
-      },
-
-      getMonthPrices: function() {
         var vm = this;
-        currentStateService.getCustomer().then(function(customer) {
-          priceEstimationService.pageSize = 1000;
-          priceEstimationService.getList().then(function(rows) {
-            vm.processChartData(rows);
-            vm.processTableData(rows);
-          })
-        })
+        priceEstimationService.pageSize = 1000;
+        priceEstimationService.getList().then(function(rows) {
+          vm.processChartData(rows);
+          vm.processTableData(rows);
+        });
       },
 
       processChartData: function(rows) {
@@ -199,7 +200,7 @@
             labels.push(moment(row.month, 'MM').format('MMMM'));
             totals.push(row.total);
           }
-        })
+        });
 
         this.costData = {
           labels: labels,
@@ -255,7 +256,7 @@
             projects: row.projects,
             services: row.services,
             resources: row.resources
-          })
+          });
         }
         this.table = table;
       }
