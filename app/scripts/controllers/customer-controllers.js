@@ -183,7 +183,7 @@
           controllerScope.files = [];
           controllerScope.model.image = response.data.image;
           controllerScope.updateImageUrl();
-          Flash.create('success', 'Customer image is uploaded');
+          Flash.create('success', 'Organization image is uploaded');
         }, function (response) {
           Flash.create('warning', 'Unable to upload image');
         });
@@ -194,7 +194,7 @@
         customerImageService.delete({
           uuid: controllerScope.model.uuid
         }).then(function (response) {
-          Flash.create('success', 'Customer image is deleted');
+          Flash.create('success', 'Organization image is deleted');
           controllerScope.model.image = null;
           controllerScope.updateImageUrl();
         }, function (response) {
@@ -203,7 +203,7 @@
       },
 
       afterUpdate: function() {
-        this.successFlash('Customer {} is updated'.replace('{}', controllerScope.model.name));
+        this.successFlash('Organization {} is updated'.replace('{}', controllerScope.model.name));
       }
     });
 

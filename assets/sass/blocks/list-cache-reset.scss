@@ -2,23 +2,9 @@
   position: absolute;
   right: 10px;
   top: 21px;
-  a {
-    display: inline-block;
-    background-color: $dashboard-green;
-    @include property(border-radius, 3);
-    @include boxshadow(0 2 2 0, #ededed);
-    color: #ffffff;
-    line-height: 0;
-    padding: 5px;
-    font-size: 0;
+  .icon-button {
     &:before {
-      @include icon-fa;
       content: "\f021";
-      font-size: 20px;
-      height: 20px;
-      width: 20px;
-      display: inline-block;
-      text-align: center;
     }
     &.processing {
       &:before {

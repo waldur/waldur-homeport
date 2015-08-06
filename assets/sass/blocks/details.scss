@@ -27,11 +27,9 @@
       margin-left: 0;
     }
     h1 {
-      text-transform: uppercase;
       display: block;
       font-weight: bold;
-      color: $dashboard-green;
-      font-size: 16px;
+      font-size: 24px;
       margin-top: 0;
     }
   }
@@ -384,7 +382,7 @@
       right: 0;
       top: 125%;
       border: 1px solid #edebeb;
-      background: #fff;
+      background: $main-background-color;
       z-index: 10;
       padding: 25px;
       box-sizing: border-box;
@@ -409,7 +407,7 @@
         height: 0;
         border-style: solid;
         border-width: 0 10.5px 9px 10.5px;
-        border-color: transparent transparent #ffffff transparent;
+        border-color: transparent transparent $main-background-color transparent;
         top: -9px;
         right: 138px;
       }
