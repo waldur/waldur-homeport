@@ -30,6 +30,10 @@
     }
 
     function annotate(item) {
+      // Determine type of hook (ie web or email) by its URL in backend
+      // so that type-specific URL for UI can be constructed ie
+      // {'url': 'http://example.com/api/hooks-email/78119a72129e41b5ac749d64663818b0/'}
+      // {'$type': 'email'}
       for (var type in endpoints) {
         if (item.url.indexOf(endpoints[type]) != -1) {
           item.$type = type;

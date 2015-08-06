@@ -125,7 +125,6 @@
         this.types = hooksService.types();
         this.instance.$type = this.types[0];
       },
-
       fillRows: function() {
         var vm = this;
         this.rows = eventRegistry.entities.map(function(entity) {
@@ -135,7 +134,6 @@
           }
         });
       },
-
       getEntities: function() {
         var entities = [];
         for (var i = 0; i < this.rows.length; i++) {
@@ -146,29 +144,18 @@
         }
         return entities;
       },
-
-      save:function() {
-        var vm = this;
-        vm.instance.event_types = eventRegistry.entities_to_types(this.getEntities());
-        vm.instance.$save(success, error);
-        function success() {
-          vm.successFlash(vm.getSuccessMessage());
-          vm.gotoList();
-        }
-        function error(response) {
-          vm.errors = response.data;
-          vm.onError();
-        }
+      beforeSave: function() {
+        this.instance.event_types = eventRegistry.entities_to_types(this.getEntities());
       },
-
+      successRedirect: function() {
+        this.gotoList();
+      },
       getSuccessMessage: function() {
         return 'Notification has been created';
       },
-
       cancel: function() {
         this.gotoList();
       },
-
       gotoList: function() {
         $state.go('profile.details', {'tab': 'notifications'});
       }
@@ -202,17 +189,12 @@
         this.service = hooksService;
         this._super();
       },
-
-      activate: function() {
-        var vm = this;
-        hooksService.$get($stateParams.type, $stateParams.uuid).then(function(response) {
-          vm.model = response;
-          vm.fillRows();
-        }, function() {
-          $state.go('errorPage.notFound');
-        });
+      getModel: function() {
+        return hooksService.$get($stateParams.type, $stateParams.uuid);
       },
-
+      afterActivate: function() {
+        this.fillRows();
+      },
       fillRows: function() {
         var entities = eventRegistry.types_to_entities(this.model.event_types);
         this.rows = eventRegistry.entities.map(function(entity) {
@@ -222,7 +204,6 @@
           }
         });
       },
-
       getEntities: function() {
         var entities = [];
         for (var i = 0; i < this.rows.length; i++) {
@@ -233,23 +214,15 @@
         }
         return entities;
       },
-
-      update: function() {
+      beforeUpdate: function() {
         this.model.event_types = eventRegistry.entities_to_types(this.getEntities());
-        var vm = this;
-        vm.model.$update(success, error);
-        function success() {
-          vm.gotoList();
-        }
-        function error(response) {
-          vm.errors = response.data;
-        }
       },
-
+      successRedirect: function() {
+        this.gotoList();
+      },
       cancel: function() {
         this.gotoList();
       },
-
       gotoList: function() {
         $state.go('profile.details', {'tab': 'notifications'});
       }

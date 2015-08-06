@@ -6,7 +6,7 @@
     var ControllerClass = Class.extend({
       _signals: {},
 
-      init:function() {
+      init: function() {
         this.registerEventHandlers();
       },
       setSignalHandler: function(signalName, handlerFunction) {
@@ -65,7 +65,7 @@
       cacheTime: 0,
       controlPanelShow: true,
 
-      init:function() {
+      init: function() {
         this.setSignalHandler('currentCustomerUpdated', this.currentCustomerUpdatedHandler.bind(this));
         this.service.page = 1;
         this._super();
@@ -75,7 +75,7 @@
         this.controlPanelShow = ENV.listControlPanelShow;
         this.updateIntercom();
       },
-      getList:function(filter) {
+      getList: function(filter) {
         var vm = this;
         filter = filter || {};
         vm.service.cacheTime = vm.cacheTime;
@@ -83,14 +83,14 @@
           vm.list = response;
         });
       },
-      search:function() {
+      search: function() {
         var vm = this;
         var filter = {};
         filter[vm.searchFieldName] = vm.searchInput;
         this.currentPage = this.service.page = 1;
         this.getList(filter);
       },
-      remove:function(model) {
+      remove: function(model) {
         var vm = this;
         var index = vm.list.indexOf(model);
         var confirmDelete = confirm('Confirm deletion?');
@@ -168,13 +168,14 @@
       redirectToDetailsPage: false,
       successMessage: 'Saving of {vm_name} was successful.',
 
-      init:function() {
+      init: function() {
         this.instance = this.service.$create();
         this.activate();
         this._super();
       },
-      save:function() {
+      save: function() {
         var vm = this;
+        vm.beforeSave();
         vm.instance.$save(success, error);
         function success() {
           vm.afterSave();
@@ -190,6 +191,7 @@
         var vm = this;
         $state.go(vm.listState);
       },
+      beforeSave: function() {},
       afterSave: function() {},
       activate: function() {},
       successRedirect: function() {
@@ -227,32 +229,36 @@
       activeTab: null,
       model: null,
 
-      init:function() {
+      init: function() {
         this._super();
         this.activate();
         this.activeTab = $stateParams.tab ? $stateParams.tab : this.activeTab;
       },
-      update:function() {
+      update: function() {
         var vm = this;
+        vm.beforeUpdate();
         vm.model.$update(success, error);
         function success() {
           vm.afterUpdate();
-          $state.go(vm.detailsState, {uuid: vm.model.uuid});
+          vm.successRedirect();
         }
         function error(response) {
           vm.errors = response.data;
         }
       },
-      activate:function() {
+      activate: function() {
         var vm = this;
-        vm.service.$get($stateParams.uuid).then(function(response) {
+        vm.getModel().then(function(response) {
           vm.model = response;
           vm.afterActivate();
         }, function() {
           $state.go('errorPage.notFound');
         });
       },
-      remove:function() {
+      getModel: function() {
+        return this.service.$get($stateParams.uuid);
+      },
+      remove: function() {
         var vm = this;
         if (confirm('Confirm deletion?')) {
           vm.model.$delete(
@@ -265,7 +271,11 @@
           );
         }
       },
-      afterUpdate:function() {},
+      successRedirect: function() {
+        $state.go(this.detailsState, {uuid: this.model.uuid});
+      },
+      beforeUpdate: function() {},
+      afterUpdate: function() {},
       afterActivate: function() {}
     });
 
