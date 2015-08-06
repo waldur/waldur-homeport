@@ -78,3 +78,41 @@
     user_update_succeeded: 'user_update_succeeded'
   });
 })();
+
+(function() {
+    angular.module('ncsaas').service('eventRegistry', ['EVENTTYPE', eventRegistry]);
+
+    function eventRegistry(EVENTTYPE) {
+        var entities = [];
+        for(var type in EVENTTYPE) {
+            var entity = type_to_entity(type);
+            if (entities.indexOf(entity) == -1) {
+              entities.push(entity);
+            }
+        }
+        entities.sort(function(a, b) {
+          return a.localeCompare(b);
+        });
+
+        function type_to_entity(type) {
+            return type.split("_")[0];
+        }
+
+        return {
+            entities: entities,
+            types_to_entities: function(types) {
+                return types.map(type_to_entity);
+            },
+            entities_to_types: function(entities) {
+                var types = [];
+                for(var type in EVENTTYPE) {
+                    var entity = type_to_entity(type);
+                    if (entities.indexOf(entity) != -1) {
+                        types.push(type);
+                    }
+                }
+                return types;
+            }
+        }
+    }
+})();

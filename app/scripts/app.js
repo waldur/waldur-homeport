@@ -506,7 +506,7 @@
           url: 'hooks/:type/:uuid/',
           views: {
             'appContent': {
-              templateUrl: 'views/profile/hook-create.html',
+              templateUrl: 'views/profile/hook-update.html',
             },
             'appHeader': {
               templateUrl: 'views/partials/app-header.html',

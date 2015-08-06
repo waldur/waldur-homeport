@@ -36,6 +36,13 @@
   }
 })();
 
+(function() {
+  angular.module('ncsaas').filter('titleCase', function() {
+    return function(input) {
+      return input.charAt(0).toUpperCase() + input.slice(1);
+    }
+  })
+})();
 
 (function() {
   angular.module('ncsaas')
@@ -98,7 +105,7 @@
     .controller('HookCreateController', [
       'baseControllerAddClass',
       'hooksService',
-      'EVENTTYPE',
+      'eventRegistry',
       '$state',
       HookCreateController
     ]);
@@ -106,7 +113,7 @@
   function HookCreateController(
     baseControllerAddClass,
     hooksService,
-    EVENTTYPE,
+    eventRegistry,
     $state) {
     var controllerScope = this;
     var Controller = baseControllerAddClass.extend({
@@ -114,51 +121,135 @@
         this.controllerScope = controllerScope;
         this.service = hooksService;
         this._super();
-        this.getEventTypes();
+        this.fillRows();
         this.instance.$type = 'email';
       },
 
-      getEventTypes: function() {
-        var entities = [];
-        var events = {};
-        for(var event_type in EVENTTYPE) {
-            var entity = event_type.split("_")[0];
-            if (entities.indexOf(entity) == -1) {
-              entities.push(entity);
-              events[entity] = [];
-            }
-            events[entity].push(event_type);
-        }
-        entities.sort(function(a, b) {
-          return a.localeCompare(b);
-        });
-
-        this.entities = [];
-        for (var i = 0; i < entities.length; i++) {
-          this.entities.push({
-            id: entities[i],
-            label: this.entityLabel(entities[i]),
+      fillRows: function() {
+        var vm = this;
+        this.rows = eventRegistry.entities.map(function(entity) {
+          return {
+            id: entity,
             selected: false
-          })
-        }
+          }
+        });
       },
 
-      entityLabel: function(entity) {
-        return entity.charAt(0).toUpperCase() + entity.slice(1) + ' events';
-      },
-
-      updateEvents: function() {
-        this.instance.event_types = [];
-        for (var i = 0; i < this.entities.length; i++) {
-          for(var event_type in EVENTTYPE) {
-            if (event_type.startsWith(this.entities[i].id)) {
-              this.instance.event_types.push(event_type);
-            }
+      getEntities: function() {
+        var entities = [];
+        for (var i = 0; i < this.rows.length; i++) {
+          var row = this.rows[i];
+          if (row.selected) {
+            entities.push(row.id);
           }
         }
+        return entities;
       },
 
-      successRedirect: function() {
+      save:function() {
+        var vm = this;
+        vm.instance.event_types = eventRegistry.entities_to_types(this.getEntities());
+        vm.instance.$save(success, error);
+        function success() {
+          vm.successFlash(vm.getSuccessMessage());
+          this.gotoList();
+        }
+        function error(response) {
+          vm.errors = response.data;
+          vm.onError();
+        }
+      },
+
+      getSuccessMessage: function() {
+        return 'Notification has been created';
+      },
+
+      cancel: function() {
+        this.gotoList();
+      },
+
+      gotoList: function() {
+        $state.go('profile.details', {'tab': 'notifications'});
+      }
+    });
+
+    controllerScope.__proto__ = new Controller();
+  }
+})();
+
+(function() {
+  angular.module('ncsaas')
+    .controller('HookUpdateController', [
+      'baseControllerDetailUpdateClass',
+      'hooksService',
+      'eventRegistry',
+      '$state',
+      '$stateParams',
+      HookUpdateController
+    ]);
+
+  function HookUpdateController(
+    baseControllerDetailUpdateClass,
+    hooksService,
+    eventRegistry,
+    $state,
+    $stateParams) {
+    var controllerScope = this;
+    var Controller = baseControllerDetailUpdateClass.extend({
+      init: function() {
+        this.controllerScope = controllerScope;
+        this.service = hooksService;
+        this._super();
+      },
+
+      activate: function() {
+        var vm = this;
+        hooksService.$get($stateParams.type, $stateParams.uuid).then(function(response) {
+          vm.model = response;
+          vm.fillRows();
+        }, function() {
+          $state.go('errorPage.notFound');
+        });
+      },
+
+      fillRows: function() {
+        var entities = eventRegistry.types_to_entities(this.model.event_types);
+        this.rows = eventRegistry.entities.map(function(entity) {
+          return {
+            id: entity,
+            selected: entities.indexOf(entity) != -1
+          }
+        });
+      },
+
+      getEntities: function() {
+        var entities = [];
+        for (var i = 0; i < this.rows.length; i++) {
+          var row = this.rows[i];
+          if (row.selected) {
+            entities.push(row.id);
+          }
+        }
+        return entities;
+      },
+
+      update: function() {
+        this.model.event_types = eventRegistry.entities_to_types(this.getEntities());
+        var vm = this;
+        vm.model.$update(success, error);
+        function success() {
+          vm.gotoList();
+        }
+        function error(response) {
+          vm.errors = response.data;
+        }
+      },
+
+      cancel: function() {
+        this.gotoList();
+      },
+
+      gotoList: function() {
         $state.go('profile.details', {'tab': 'notifications'});
       }
     });

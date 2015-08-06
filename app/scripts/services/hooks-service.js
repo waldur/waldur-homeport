@@ -37,14 +37,19 @@
       };
     }
 
+    function cleanData(resource) {
+      var data = {};
+      for(var key in resource) {
+        if (key.charAt(0) != '$') {
+          data[key] = resource[key];
+        }
+      }
+      return data;
+    }
+
     function initResource(resource) {
       resource.$save = function(success, error) {
-        var data = {};
-        for(var key in resource) {
-          if (key.charAt(0) != '$') {
-            data[key] = resource[key];
-          }
-        }
+        var data = cleanData(resource);
         var url = getListUrl(resource.$type);
         $http.post(url, data).success(success).error(error);
       }
@@ -55,8 +60,9 @@
       }
 
       resource.$update = function(success, error) {
+        var data = cleanData(resource);
         var url = getDetailUrl(resource.$type, resource.uuid);
-        $http.put(url, resource).success(success).error(error);
+        $http.put(url, data).success(success).error(error);
       }
     }
 
@@ -69,16 +75,21 @@
           })
           promises.push(promise);
         };
-        var deferred = $q.defer();
-        $q.all(promises).then(function(responses) {
+        return $q.all(promises).then(function(responses) {
           var items = flattenList(responses);
           angular.forEach(items, annotate);
           angular.forEach(items, initResource);
-          deferred.resolve(items);
-        }, function(){
-          deferred.reject();
+          return items;
         });
-        return deferred.promise;
+      },
+
+      $get: function(type, uuid) {
+        return $http.get(getDetailUrl(type, uuid)).then(function(response) {
+          var resource = response.data;
+          resource.$type = type;
+          initResource(resource);
+          return resource;
+        })
       },
 
       $create: function() {
