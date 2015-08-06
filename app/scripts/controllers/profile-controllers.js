@@ -122,7 +122,8 @@
         this.service = hooksService;
         this._super();
         this.fillRows();
-        this.instance.$type = 'email';
+        this.types = hooksService.types();
+        this.instance.$type = this.types[0];
       },
 
       fillRows: function() {
@@ -152,7 +153,7 @@
         vm.instance.$save(success, error);
         function success() {
           vm.successFlash(vm.getSuccessMessage());
-          this.gotoList();
+          vm.gotoList();
         }
         function error(response) {
           vm.errors = response.data;

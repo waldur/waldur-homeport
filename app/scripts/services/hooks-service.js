@@ -67,6 +67,13 @@
     }
 
     return {
+      types: function() {
+        var types = [];
+        for (var type in endpoints) {
+          types.push(type);
+        }
+        return types;
+      },
       getList: function(filter) {
         var promises = [];
         for (var type in endpoints) {

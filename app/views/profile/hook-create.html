@@ -12,9 +12,24 @@
     <section class="short-form">
         <div class="form-row">
             <div class="col label">
-                <label class="text" for="email">Email</label>
+                <label class="text" for="type">Notification method</label>
             </div>
             <div class="col input input-full">
+                <div class="custom-select">
+                <select id="type"
+                        ng-model="HookController.instance.$type"
+                        ng-options="type as type for type in HookController.types">
+                    <option value="">Select notification method</option>
+                </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row" ng-if="HookController.instance.$type == 'email'">
+            <div class="col label">
+                <label class="text" for="email">Email</label>
+            </div>
+            <div class="col input">
                 <input type="text" id="email" ng-model="HookController.instance.email"/>
                 <div class="error arrow-up" ng-show="HookController.errors.email">
                     <ul class="error-list">
@@ -23,6 +38,21 @@
                 </div>
             </div>
         </div>
+
+        <div class="form-row" ng-if="HookController.instance.$type == 'web'">
+            <div class="col label">
+                <label class="text" for="destination_url">URL</label>
+            </div>
+            <div class="col input">
+                <input type="text" id="destination_url" ng-model="HookController.instance.destination_url"/>
+                <div class="error arrow-up" ng-show="HookController.errors.destination_url">
+                    <ul class="error-list">
+                        <li ng-repeat="error in HookController.errors.destination_url">{{ error }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
         <div class="form-row">
             <div class="col label"></div>
             <div class="col input">

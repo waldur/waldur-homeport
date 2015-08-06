@@ -10,15 +10,28 @@
 
 <div class="white-box">
     <section class="short-form">
-        <div class="form-row">
+        <div class="form-row" ng-if="HookController.model.$type == 'email'">
             <div class="col label">
                 <label class="text" for="email">Email</label>
             </div>
-            <div class="col input input-full">
+            <div class="col input">
                 <input type="text" id="email" ng-model="HookController.model.email"/>
                 <div class="error arrow-up" ng-show="HookController.errors.email">
                     <ul class="error-list">
                         <li ng-repeat="error in HookController.errors.email">{{ error }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="form-row" ng-if="HookController.model.$type == 'web'">
+            <div class="col label">
+                <label class="text" for="destination_url">URL</label>
+            </div>
+            <div class="col input">
+                <input type="text" id="destination_url" ng-model="HookController.model.destination_url"/>
+                <div class="error arrow-up" ng-show="HookController.errors.destination_url">
+                    <ul class="error-list">
+                        <li ng-repeat="error in HookController.errors.destination_url">{{ error }}</li>
                     </ul>
                 </div>
             </div>
