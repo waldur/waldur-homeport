@@ -32,6 +32,8 @@
       currentCustomer: {},
 
       configureStepNumber: 4,
+      selectedPackageName: null,
+      agreementShow: false,
 
       init:function() {
         this.service = servicesService;

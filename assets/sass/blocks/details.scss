@@ -27,11 +27,9 @@
       margin-left: 0;
     }
     h1 {
-      text-transform: uppercase;
       display: block;
       font-weight: bold;
-      color: $dashboard-green;
-      font-size: 16px;
+      font-size: 24px;
       margin-top: 0;
     }
   }
@@ -362,6 +360,116 @@
     }
   }
 }
+.balance-block {
+  position: relative;
+  .right-block {
+    float: right;
+    position: absolute;
+    right: 60px;
+    top: -5px;
+    .balance {
+      text-align: right;
+      font-size: 20px;
+      margin-bottom: 10px;
+      margin-top: 15px;
+      .bold {
+        font-weight: bold;
+      }
+    }
+    .buttons {
+      .green-btn {
+
+      }
+    }
+    .tooltip {
+      position: absolute;
+      right: 0;
+      top: 125%;
+      border: 1px solid #edebeb;
+      background: $main-background-color;
+      z-index: 10;
+      padding: 25px;
+      box-sizing: border-box;
+      &:before {
+        content: "";
+        position: absolute;
+        display: block;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 0 11.5px 10px 11.5px;
+        border-color: transparent transparent #edebeb transparent;
+        top: -10px;
+        right: 137px;
+
+      }
+      &:after {
+        content: "";
+        position: absolute;
+        display: block;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 0 10.5px 9px 10.5px;
+        border-color: transparent transparent $main-background-color transparent;
+        top: -9px;
+        right: 138px;
+      }
+      &.graph-tooltip {
+        width: 450px;
+        height: 105px;
+        color: #000;
+        padding: 15px;
+        canvas {
+          width: 400px!important;
+          height: 75px!important;
+        }
+        &:before {
+          right: 31px;
+        }
+        &:after {
+          right: 32px;
+        }
+      }
+      &.amount-tooltip {
+        width: 284px;
+        height: 165px;
+      }
+      .tooltip-title {
+
+        h3 {
+          float: left;
+          font-size: 16px;
+          margin: 0;
+          margin-bottom: 20px;
+          font-weight: bold;
+        }
+        .close {
+          float: right;
+          font-size: 20px;
+          background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDIxIDc5LjE1NTc3MiwgMjAxNC8wMS8xMy0xOTo0NDowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTQgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OEYwRTM0NkYyRkJGMTFFNUIzOUVDRUI5OTVDOTgxNzQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OEYwRTM0NzAyRkJGMTFFNUIzOUVDRUI5OTVDOTgxNzQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4RjBFMzQ2RDJGQkYxMUU1QjM5RUNFQjk5NUM5ODE3NCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4RjBFMzQ2RTJGQkYxMUU1QjM5RUNFQjk5NUM5ODE3NCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pq4ub24AAACsSURBVHjaYmBgYGAC4rVAnAPEDP///8eKoSAdiHcCMTOIsxqkHoqzsWmGgmwkddtBApFIAv+hfHyaQDgNl0QgkqZqNDmwq5BNzUVT4AvENWhiMXA9aE5CV4jbC1gCoR6LJi/0QGNiwARvsYgpYogQCL3/uKIKn6YIII7FpRmXpgwkR0VijQ4gSMLrJOyaM0GCM4hMcsiaQcmUgRGIZ0MTMKFEDvL3KlDGAAgwAAiJ0bTylyl8AAAAAElFTkSuQmCC") no-repeat;
+          background-size: cover;
+          width: 14px;
+          height: 14px;
+          opacity: 1;
+        }
+      }
+      select {
+        width: 100%;
+        height: 31px;
+        border-radius: 3px;
+        margin-bottom: 15px;
+      }
+      .green-btn {
+        width: 100%;
+        margin-bottom: 15px;
+        text-align: center;
+      }
+    }
+  }
+}
+
+
 .password {
   list-style: none;
   padding: 0;
