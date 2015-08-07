@@ -486,6 +486,38 @@
           auth: true
         })
 
+        .state('profile.hook-create', {
+          url: 'hooks/create/',
+          views: {
+            'appContent': {
+              templateUrl: 'views/profile/hook-create.html',
+            },
+            'appHeader': {
+              templateUrl: 'views/partials/app-header.html',
+            }
+          },
+          resolve: {
+            authenticated: authCheck
+          },
+          auth: true
+        })
+
+        .state('profile.hook-details', {
+          url: 'hooks/:type/:uuid/',
+          views: {
+            'appContent': {
+              templateUrl: 'views/profile/hook-update.html',
+            },
+            'appHeader': {
+              templateUrl: 'views/partials/app-header.html',
+            }
+          },
+          resolve: {
+            authenticated: authCheck
+          },
+          auth: true
+        })
+
         .state('organizations', {
           url: '/organizations/',
           abstract: true,
