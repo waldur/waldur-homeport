@@ -165,6 +165,7 @@
       'resourcesCountService',
       'currentStateService',
       'ENV',
+      '$window',
       DashboardIndexController]);
 
   function DashboardIndexController(
@@ -176,9 +177,11 @@
     eventStatisticsService,
     resourcesCountService,
     currentStateService,
-    ENV) {
+    ENV,
+    $window) {
     var controllerScope = this;
     var EventController = baseEventListController.extend({
+      showGraph: true,
       init:function() {
         this.controllerScope = controllerScope;
         this.cacheTime = ENV.dashboardEventsCacheTime;
@@ -212,13 +215,25 @@
 
         this.chartOptions = {
           responsive: true,
-          scaleShowVerticalLines: false,
-          scaleShowGridLines: false,
-          bezierCurve: false
+          maintainAspectRatio: true
         };
 
         $scope.$on('currentCustomerUpdated', this.onCustomerUpdate.bind(this));
         this.onCustomerUpdate();
+        this.resizeControl();
+      },
+      resizeControl: function() {
+        var vm = this;
+
+        var window = angular.element($window);
+        window.bind('resize', function () {
+          vm.showGraph = false;
+          setTimeout(function() {
+            vm.showGraph = true;
+            $scope.$apply();
+          }, 0);
+          $scope.$apply();
+        });
       },
       selectProject: function (project) {
         project.selected=!project.selected;

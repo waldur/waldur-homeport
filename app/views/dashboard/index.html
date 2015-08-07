@@ -163,7 +163,7 @@
                         <div class="clear"></div>
                         <div class="chart">
                             <div class="label">No of events per day</div>
-                            <canvas ng-if="project.chartData"
+                            <canvas ng-if="project.chartData && DashboardController.showGraph"
                                     chart-options="DashboardController.chartOptions"
                                     chart-data="project.chartData"
                                     tc-chartjs chart-type="line"
