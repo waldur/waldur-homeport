@@ -23,7 +23,7 @@
                 </div>
             </div>
         </div>
-        <div class="form-row" ng-if="HookController.model.$type == 'web'">
+        <div class="form-row" ng-if="HookController.model.$type == 'webhook'">
             <div class="col label">
                 <label class="text" for="destination_url">URL</label>
             </div>
@@ -40,12 +40,21 @@
             <div class="col label"></div>
             <div class="col input">
                 <div class="notif-wrapper">
-                <ul>
-                    <li ng-repeat="row in HookController.rows">
-                        <input type="checkbox" id="email_{{ row.id }}" ng-model="row.selected"/>
-                        <label for="email_{{ row.id }}"><span>{{ ::row.id|titleCase }} events</span></label>
-                    </li>
-                </ul>
+                    <input type="checkbox" id="is_active" ng-model="HookController.model.is_active"/>
+                    <label class="text" for="is_active">Enabled</label>
+                </div>
+            </div>
+        </div>
+        <div class="form-row" ng-show="HookController.model.is_active">
+            <div class="col label"></div>
+            <div class="col input">
+                <div class="notif-wrapper">
+                    <ul>
+                        <li ng-repeat="row in HookController.rows">
+                            <input type="checkbox" id="email_{{ row.id }}" ng-model="row.selected"/>
+                            <label for="email_{{ row.id }}"><span>{{ ::row.id|titleCase }} events</span></label>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>

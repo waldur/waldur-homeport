@@ -81,8 +81,10 @@
         vm.service.cacheTime = vm.cacheTime;
         vm.service.getList(filter).then(function(response) {
           vm.list = response;
+          vm.afterGetList();
         });
       },
+      afterGetList: function() {},
       search: function() {
         var vm = this;
         var filter = {};

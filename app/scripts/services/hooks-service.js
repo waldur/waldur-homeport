@@ -7,7 +7,7 @@
   function hooksService($http, $q, ENV) {
     var endpoints = {
       'email': '/hooks-email/',
-      'web': '/hooks-web/',
+      'webhook': '/hooks-web/',
     };
 
     function getListUrl(type) {
@@ -55,7 +55,9 @@
       resource.$save = function(success, error) {
         var data = cleanData(resource);
         var url = getListUrl(resource.$type);
-        $http.post(url, data).success(success).error(error);
+        $http.post(url, data).success(success).error(function(response){
+          error({data: response});
+        });
       }
 
       resource.$delete = function(success, error) {
@@ -66,7 +68,9 @@
       resource.$update = function(success, error) {
         var data = cleanData(resource);
         var url = getDetailUrl(resource.$type, resource.uuid);
-        $http.put(url, data).success(success).error(error);
+        $http.put(url, data).success(success).error(function(response){
+          error({data: response});
+        });
       }
     }
 

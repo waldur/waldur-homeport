@@ -18,7 +18,7 @@
                 <div class="custom-select">
                 <select id="type"
                         ng-model="HookController.instance.$type"
-                        ng-options="type as type for type in HookController.types">
+                        ng-options="type as (type|titleCase) for type in HookController.types">
                     <option value="">Select notification method</option>
                 </select>
                 </div>
@@ -39,7 +39,7 @@
             </div>
         </div>
 
-        <div class="form-row" ng-if="HookController.instance.$type == 'web'">
+        <div class="form-row" ng-if="HookController.instance.$type == 'webhook'">
             <div class="col label">
                 <label class="text" for="destination_url">URL</label>
             </div>

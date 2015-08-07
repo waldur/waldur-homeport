@@ -48,14 +48,18 @@
   angular.module('ncsaas')
     .controller('HookListController', [
       'baseControllerListClass',
+      '$filter',
       'hooksService',
+      'eventRegistry',
       'ENTITYLISTFIELDTYPES',
       HookListController
     ]);
 
   function HookListController(
     baseControllerListClass,
+    $filter,
     hooksService,
+    eventRegistry,
     ENTITYLISTFIELDTYPES) {
     var controllerScope = this;
     var Controller = baseControllerListClass.extend({
@@ -82,16 +86,37 @@
             {
               type: ENTITYLISTFIELDTYPES.statusCircle,
               propertyName: 'is_active',
-              onlineStatus: true
+              onlineStatus: true,
+              showForMobile: ENTITYLISTFIELDTYPES.showForMobile
             },
             {
-              name: 'Notification method',
-              propertyName: '$type',
+              type: ENTITYLISTFIELDTYPES.name,
+              propertyName: 'label',
+              name: 'Method',
               link: 'profile.hook-details({type: entity.$type, uuid: entity.uuid})',
-              type: ENTITYLISTFIELDTYPES.name
+              showForMobile: ENTITYLISTFIELDTYPES.showForMobile
+            },
+            {
+              type: ENTITYLISTFIELDTYPES.noType,
+              propertyName: 'destination',
+              name: 'Destination',
+              showForMobile: ENTITYLISTFIELDTYPES.showForMobile
+            },
+            {
+              type: ENTITYLISTFIELDTYPES.listInField,
+              propertyName: 'entities',
+              name: 'Events'
             }
           ]
         };
+      },
+
+      afterGetList: function() {
+        this.list.forEach(function(item) {
+          item.label = $filter('titleCase')(item.$type);
+          item.destination = item.destination_url || item.email;
+          item.entities = eventRegistry.types_to_entities(item.event_types);
+        })
       }
     });
 
