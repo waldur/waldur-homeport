@@ -57,7 +57,7 @@
     } // dash
     &.list {
         &:hover {
-            background-color: #FFFAE5;
+            background-color: $expandable-hover;
         } // &:hover
     }// &.list
     &.resources {
