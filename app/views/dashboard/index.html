@@ -4,220 +4,26 @@
     </div>
     <div class="white-box">
         <ul class="sort-list event-nav">
-            <li ng-class="{'active':DashboardController.activeTab == 'activity','inactive':DashboardController.activeTab == 'costs'}">
-                <a ng-click="DashboardController.activeTab = 'activity'">Activity</a>
+            <li ng-class="{'active':activeTab == 'activity','inactive':activeTab == 'costs'}">
+                <a ng-click="activeTab = 'activity'">Activity</a>
             </li>
-            <li ng-class="{'active':DashboardController.activeTab == 'costs','inactive':DashboardController.activeTab == 'activity'}">
-                <a ng-click="DashboardController.activeTab = 'costs'">Costs</a>
+            <li ng-class="{'active':activeTab == 'costs','inactive':activeTab == 'activity'}">
+                <a ng-click="activeTab = 'costs'">Costs</a>
             </li>
         </ul>
-        <div ui-sref="projects.create" class="button-apply" ng-show="DashboardController.activeTab == 'activity'">
+        <div ui-sref="projects.create" class="button-apply" ng-show="activeTab == 'activity'">
             Add new project
         </div>
 
         <div class="clear"></div>
     </div>
-    <div ng-show="DashboardController.activeTab == 'costs'"
-         ng-class="{'active-content':DashboardController.activeTab == 'costs',
-         'inactive-content':DashboardController.activeTab == 'activity'}">
-        <div class="white-box big-chart">
-            <canvas tc-chartjs chart-type="line" chart-data="DashboardController.costData" width="1120" height="180"></canvas>
-            <div class="clear"></div>
-        </div>
-        <div class="white-box">
-            <div class="table-block">
-                <div class="title">
-                    <ul class="sort-list">
-                        <li>
-                            <span class="month">July 2015</span>
-                        </li>
-                        <li>
-                            <div class="icon"></div>
-                            <a href="#">Services (<span>3</span>)</a>
-                        </li>
-                        <li class="active">
-                            <div class="icon"></div>
-                            <a href="#">Projects (<span>3</span>)</a>
-                        </li>
-                        <li>
-                            <div class="icon"></div>
-                            <a href="#">Resources (<span>3</span>)</a>
-                        </li>
-                    </ul>
-                    <div class="total-cost" ng-click="openedProject = !openedProject">
-                        <span class="table-alert"></span>
-                        <span class="cost">Total cost 240</span>
-                        <div class="icon" ng-class="{'opened-icon': openedProject}"></div>
-                    </div>
-                    <div class="clear"></div>
-                </div>
-                <div class="table services" ng-show="!openedProject">
-                    <div class="tr th">
-                        <div class="td service-name"><span>Project name</span></div>
-                        <div class="td service-title"><span>VMs</span></div>
-                        <div class="td service-title"><span>Licenses </span></div>
-                        <div class="td service-name"><span>Cost drilldown</span></div>
-                    </div>
-                    <div class="tr">
-                        <div class="td service-name"><span>Project name</span></div>
-                        <div class="td service-title"><span>Title</span></div>
-                        <div class="td service-title"><span>1</span></div>
-                        <div class="td service-name"><span>Cost drilldown</span></div>
-                    </div>
-                    <div class="tr">
-                        <div class="td service-name"><span>Project name</span></div>
-                        <div class="td service-title"><span>Title</span></div>
-                        <div class="td service-title"><span>1</span></div>
-                        <div class="td service-name"><span>Cost drilldown</span></div>
-                    </div>
-                    <div class="tr">
-                        <div class="td service-name"><span>Project name</span></div>
-                        <div class="td service-title"><span>Title</span></div>
-                        <div class="td service-title"><span>1</span></div>
-                        <div class="td service-name"><span>Cost drilldown</span></div>
-                    </div>
-                </div>
-            </div>
-            <div class="table-block">
-                <div class="title">
-                    <ul class="sort-list">
-                        <li><span class="month">June 2015</span></li>
-                        <li class="active">
-                            <div class="icon"></div>
-                            <a href="#">Services (<span>3</span>)</a>
-                        </li>
-                        <li>
-                            <div class="icon"></div>
-                            <a href="#">Services (<span>3</span>)</a>
-                        </li>
-                        <li>
-                            <div class="icon"></div>
-                            <a href="#">Services (<span>3</span>)</a>
-                        </li>
-                    </ul>
-                    <div class="total-cost" ng-click="openedServices = !openedServices">
-                        <span class="table-alert">Projected</span>
-                        <span class="cost">Total cost 240</span>
-                        <div class="icon" ng-class="{'opened-icon': openedServices}"></div>
-                    </div>
-                    <div class="clear"></div>
-                </div>
-                <div class="table services" ng-show="!openedServices">
-                    <div class="tr th">
-                        <div class="td service-name"><span>Service name</span></div>
-                        <div class="td service-title"><span>Title</span></div>
-                        <div class="td service-name"><span>Cost drilldown</span></div>
-                    </div>
-                    <div class="tr">
-                        <div class="td service-name"><span>Service name</span></div>
-                        <div class="td service-title"><span>Title</span></div>
-                        <div class="td service-name"><span>Cost drilldown</span></div>
-                    </div>
-                    <div class="tr">
-                        <div class="td service-name"><span>Service name</span></div>
-                        <div class="td service-title"><span>Title</span></div>
-                        <div class="td service-name"><span>Cost drilldown</span></div>
-                    </div>
-                    <div class="tr">
-                        <div class="td service-name"><span>Service name</span></div>
-                        <div class="td service-title"><span>Title</span></div>
-                        <div class="td service-name"><span>Cost drilldown</span></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+    <div ng-if="activeTab == 'costs'"
+         ng-class="{'active-content':activeTab == 'costs', 'inactive-content':activeTab == 'activity'}">
+         <div ui-view="costTab"></div>
     </div>
-    <div ng-show="DashboardController.activeTab == 'activity'"
-         ng-class="{'active-content':DashboardController.activeTab == 'activity',
-                    'inactive-content':DashboardController.activeTab == 'costs'}">
-        <div class="row">
-            <div class="half-block">
-                <h3>Projects</h3>
-                <div ng-repeat="project in DashboardController.projects" class="white-box graph">
-                    <div ng-click="DashboardController.selectProject(project)" class="graph-head">
-                        <h4 ng-class="{'current': project.selected}">
-                            <a stoppropagation ui-sref="projects.details({uuid: project.uuid})">{{ project.name }}</a>
-                        </h4>
-                    </div>
-                    <div ng-if="project.selected" class="body">
-                        <ul class="counters">
-                            <li class="active-alert">
-                                <div class="counter-name">Active alerts</div>
-                                <div class="counter" ng-bind="project.count.alerts"></div>
-                            </li>
-                            <li class="resources empty">
-                                <div class="counter-name">Resources</div>
-                                <div class="counter" ng-bind="project.count.resources"></div>
-                            </li>
-                            <li class="services empty">
-                                <div class="counter-name">Services</div>
-                                <div class="counter" ng-bind="project.count.services"></div>
-                            </li>
-                            <li class="people">
-                                <div class="counter-name">People</div>
-                                <div class="counter" ng-bind="project.count.users"></div>
-                            </li>
-
-                        </ul>
-                        <div class="clear"></div>
-                        <div class="chart">
-                            <div class="label">No of events per day</div>
-                            <canvas ng-if="project.chartData"
-                                    chart-options="DashboardController.chartOptions"
-                                    chart-data="project.chartData"
-                                    tc-chartjs chart-type="line"
-                                    width="400" height="120"></canvas>
-                        </div>
-                    </div>
-                </div>
-                <a ng-if="DashboardController.projects.length" ui-sref="projects.list" class="center-link">Show all projects</a>
-            </div>
-            <div class="half-block">
-                <div class="alerts-list">
-                    <h3>Alerts</h3>
-                    <div class="white-box">
-                        <ul>
-                            <li ng-repeat="alert in DashboardController.alerts" ng-class="{'fail': alert.severity=='error'}">
-                                <div class="left-p">
-                                    <div class="icon"></div>
-                                    <span ng-bind="::alert.message"></span>
-                                </div>
-                                <div class="right-p">
-                                    <span class="date" am-time-ago="alert.created"></span>
-                                    <span class="time"></span>
-                                </div>
-                                <div class="clear"></div>
-                            </li>
-                        </ul>
-                        <div class="placeholder" ng-if="DashboardController.alerts.length==0">
-                         No active alerts
-                        </div>
-                    </div>
-                    <a class="show-all" ui-sref="dashboard.alerts" ng-if="DashboardController.alerts.length">Show all alerts</a>
-                </div>
-                <div class="alerts-list" ng-if="DashboardController.events.length">
-                    <h3>Recent events</h3>
-                    <div class="white-box">
-                        <ul>
-                            <li ng-repeat="event in DashboardController.events">
-                                <div class="left-p">
-                                    <span ng-bind="::event.message"></span>
-                                </div>
-                                <div class="right-p">
-                                    <span class="date" am-time-ago="event['@timestamp']"></span>
-                                </div>
-                                <div class="clear"></div>
-                            </li>
-                        </ul>
-                        <div class="placeholder" ng-if="DashboardController.events.length==0">
-                         No events yet
-                        </div>
-                    </div>
-                    <a class="show-all" ui-sref="dashboard.eventlog">Show all recent events</a>
-                </div>
-            </div>
-        </div>
-        <div class="clear"></div>
+    <div ng-if="activeTab == 'activity'"
+         ng-class="{'active-content':activeTab == 'activity',
+                    'inactive-content':activeTab == 'costs'}">
+        <div ui-view="activityTab"></div>
     </div>
 </div>

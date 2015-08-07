@@ -30,7 +30,7 @@
   color:$dashboard-black;
   .white-box {
     min-height: 73px;
-    padding: 20px 40px;
+    padding: 20px 20px;
     .button-apply {
       float: right;
       height: 33px;
@@ -40,12 +40,14 @@
   }
 
   .table-block {
-    margin-bottom: 20px;
     &:not(:first-child) {
-      margin-top: 50px;
+      margin-top: 5px;
     }
     .title {
-      margin-bottom: 25px;
+      padding: 16px;
+      &:hover {
+        background-color: $expandable-hover;
+      }
       .sort-list {
         float: left;
         li {
@@ -119,13 +121,13 @@
       padding-bottom: 10px;
       .tr {
         position: relative;
-        height: 30px;
-        line-height: 30px;
+        height: 50px;
+        line-height: 50px;
         text-align: center;
         padding: 0 20px;
         .td {
           float: left;
-          width: 20%;
+          width: 30%;
           &:nth-child(1) {
             text-align: left;
           }
