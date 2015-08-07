@@ -87,6 +87,7 @@
               type: ENTITYLISTFIELDTYPES.statusCircle,
               propertyName: 'is_active',
               onlineStatus: true,
+              className: 'statusCircle',
               showForMobile: ENTITYLISTFIELDTYPES.showForMobile
             },
             {
@@ -99,8 +100,7 @@
             {
               type: ENTITYLISTFIELDTYPES.noType,
               propertyName: 'destination',
-              name: 'Destination',
-              showForMobile: ENTITYLISTFIELDTYPES.showForMobile
+              name: 'Destination'
             },
             {
               type: ENTITYLISTFIELDTYPES.listInField,

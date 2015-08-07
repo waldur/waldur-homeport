@@ -96,6 +96,7 @@
                     entities.push(entity)
                 }
             }
+            entities.sort();
             return entities;
         }
 
@@ -107,6 +108,7 @@
                     types.push(type);
                 }
             }
+            types.sort();
             return types;
         }
 

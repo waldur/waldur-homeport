@@ -218,6 +218,9 @@
                     display: none;
                 } // sm
             }
+            &.statusCircle {
+                width: 40px;
+            }
         } // &.additional-cell
         .more-details {
             @include property(margin-left, 10);
