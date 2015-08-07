@@ -1,6 +1,8 @@
 <div ng-controller="DashboardIndexController as DashboardController" class="event-log">
+    <div class="container">
+        <h1>Dashboard</h1>
+    </div>
     <div class="white-box">
-        <h2 class="app-title">Dashboard</h2>
         <ul class="sort-list event-nav">
             <li ng-class="{'active':DashboardController.activeTab == 'activity','inactive':DashboardController.activeTab == 'costs'}">
                 <a ng-click="DashboardController.activeTab = 'activity'">Activity</a>

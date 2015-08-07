@@ -1,9 +1,9 @@
 <div>
+    <div class="container" ng-if="entityOptions.entityData.title">
+        <h1>{{ entityOptions.entityData.title }}</h1>
+    </div>
     <div class="white-box" ng-show="entityList.list.length > 0 || entityList.searchInput || entityList.chosenFilters.length">
         <ul class="sort-list">
-            <li ng-if="entityOptions.entityData.title" class="title">
-                <h2 class="app-title">{{ entityOptions.entityData.title }}</h2>
-            </li>
             <li class="search divid">
                 <div class="search-box">
                     <input type="text" ng-model='entityList.searchInput' ng-change="entityList.search()">
