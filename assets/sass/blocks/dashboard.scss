@@ -60,7 +60,10 @@
       margin-top: 50px;
     }
     .title {
-      margin-bottom: 25px;
+      padding: 16px;
+      &:hover {
+        background-color: $expandable-hover;
+      }
       .sort-list {
         float: left;
         li {
@@ -143,13 +146,13 @@
       padding-bottom: 10px;
       .tr {
         position: relative;
-        height: 30px;
-        line-height: 30px;
+        height: 50px;
+        line-height: 50px;
         text-align: center;
         padding: 0 20px;
         .td {
           float: left;
-          width: 20%;
+          width: 30%;
           &:nth-child(1) {
             text-align: left;
           }
@@ -288,14 +291,10 @@
           } // &:before
           @include bp(xs) {
             &:before {
-              font-size: 40px;
               right: 10px;
-              top: -8px;
             }
             &.current:before {
-              font-size: 40px;
               right: 10px;
-              top: -8px;
             }
           }
         }

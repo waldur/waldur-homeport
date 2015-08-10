@@ -941,6 +941,7 @@ angular.module('ncsaas')
           list: [
             {
               type: ENTITYLISTFIELDTYPES.statusCircle,
+              className: 'statusCircle',
               propertyName: 'state',
               onlineStatus: ENV.resourceOnlineStatus
             },

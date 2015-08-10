@@ -192,15 +192,21 @@
         })
 
         .state('dashboard.index', {
-          url: '',
+          url: ':tab',
           views: {
-            'appHeader@dashboard' : {
+            'appHeader@dashboard': {
               templateUrl: 'views/partials/app-header.html',
             },
-            'appContent@dashboard' : {
+            'appContent@dashboard': {
               templateUrl: 'views/dashboard/index.html',
             },
-            'eventTypes@dashboard.index' : {
+            'activityTab@dashboard.index': {
+              templateUrl: 'views/dashboard/activity-tab.html',
+            },
+            'costTab@dashboard.index': {
+              templateUrl: 'views/dashboard/cost-tab.html',
+            },
+            'eventTypes@dashboard.index': {
               templateUrl: 'views/events/event-types.html',
             }
           },
@@ -486,6 +492,38 @@
           auth: true
         })
 
+        .state('profile.hook-create', {
+          url: 'hooks/create/',
+          views: {
+            'appContent': {
+              templateUrl: 'views/profile/hook-create.html',
+            },
+            'appHeader': {
+              templateUrl: 'views/partials/app-header.html',
+            }
+          },
+          resolve: {
+            authenticated: authCheck
+          },
+          auth: true
+        })
+
+        .state('profile.hook-details', {
+          url: 'hooks/:type/:uuid/',
+          views: {
+            'appContent': {
+              templateUrl: 'views/profile/hook-update.html',
+            },
+            'appHeader': {
+              templateUrl: 'views/partials/app-header.html',
+            }
+          },
+          resolve: {
+            authenticated: authCheck
+          },
+          auth: true
+        })
+
         .state('organizations', {
           url: '/organizations/',
           abstract: true,
@@ -507,7 +545,6 @@
           },
           auth: true
         })
-
 
         .state('organizations.create', {
           url: 'add/',
