@@ -1,0 +1,11 @@
+.instruction-page {
+  .instruction-image {
+    width: 50%;
+    float: left;
+    min-width: 260px;
+  }
+  .instruction-content {
+    @extend .instruction-image;
+    padding-left: 10px;
+  }
+}
