@@ -404,7 +404,24 @@
       init:function() {
         this.service = resourcesService;
         this.controllerScope = controllerScope;
-        this.service.defaultFilter.project = $stateParams.uuid;
+        this.service.defaultFilter.project_uuid = $stateParams.uuid;
+        this.searchFilters = [
+          {
+            name: 'resource_type',
+            title: 'OpenStack',
+            value: 'IaaS.Instance'
+          },
+          {
+            name: 'resource_type',
+            title: 'DigitalOcean',
+            value: 'DigitalOcean.Droplet'
+          },
+          {
+            name: 'resource_type',
+            title: 'AWS EC2',
+            value: 'Amazon.EC2'
+          }
+        ];
         this._super();
       }
     });
@@ -610,20 +627,20 @@
           this.selectAll = true;
           this._super();
         }
-      })
+      });
       return controllerClass;
     }
 })();
 
 (function() {
   angular.module('ncsaas')
-    .controller('ProjectResourcesTabController', [
+    .controller('ResourceProjectsTabController', [
       'BaseProjectResourcesTabController',
       'currentStateService',
       '$scope',
-      ProjectResourcesTabController]);
+      ResourceProjectsTabController]);
 
-  function ProjectResourcesTabController(BaseProjectResourcesTabController, currentStateService, $scope) {
+  function ResourceProjectsTabController(BaseProjectResourcesTabController, currentStateService, $scope) {
     var controllerScope = this;
     var ResourceController = BaseProjectResourcesTabController.extend({
       init:function() {
@@ -670,7 +687,7 @@
           filter['project_uuid'] = project.uuid;
           vm.service.defaultFilter.project_uuid = project.uuid;
           fn(filter);
-        })
+        });
       },
 
       onSearchInputChanged: function(event, searchInput) {
@@ -788,7 +805,7 @@ angular.module('ncsaas')
 
 (function() {
   angular.module('ncsaas')
-    .controller('ProjectUsersTabController2', [
+    .controller('ResourceProjectUsersTabController', [
       '$scope',
       'currentStateService',
       'projectsService',
@@ -796,10 +813,10 @@ angular.module('ncsaas')
       'USERPROJECTROLE',
       'usersService',
       'baseControllerClass',
-      ProjectUsersTabController2
+      ResourceProjectUsersTabController
     ]);
 
-  function ProjectUsersTabController2(
+  function ResourceProjectUsersTabController(
     $scope,
     currentStateService,
     projectsService,
