@@ -276,8 +276,7 @@
         vm.canEdit = vm.model;
         $q.all([
           resourcesCountService.events({'scope': vm.model.url}),
-          resourcesCountService.resources({'project_uuid': vm.model.uuid,
-            'resource_type': ['DigitalOcean.Droplet', 'IaaS.Instance']}),
+          resourcesCountService.resources({'project_uuid': vm.model.uuid}),
           resourcesCountService.users({'project': vm.model.uuid}),
           resourcesCountService.projectCloud({'project': vm.model.uuid})
         ]).then(function(responses) {
