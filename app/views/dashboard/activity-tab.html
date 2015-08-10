@@ -30,7 +30,7 @@
                 <div class="clear"></div>
                 <div class="chart">
                     <div class="label">No of events per day</div>
-                    <canvas ng-if="project.chartData"
+                    <canvas ng-if="project.chartData && DashboardController.showGraph"
                             chart-options="DashboardController.chartOptions"
                             chart-data="project.chartData"
                             tc-chartjs chart-type="line"
@@ -47,7 +47,6 @@
                 <ul>
                     <li ng-repeat="alert in DashboardController.alerts" ng-class="{'fail': alert.severity=='error'}">
                         <div class="left-p">
-                            <div class="icon"></div>
                             <span ng-bind="::alert.message"></span>
                         </div>
                         <div class="right-p">
@@ -58,7 +57,7 @@
                     </li>
                 </ul>
                 <div class="placeholder" ng-if="DashboardController.alerts.length==0">
-                 No active alerts
+                    No active alerts
                 </div>
             </div>
             <a class="show-all" ui-sref="dashboard.alerts" ng-if="DashboardController.alerts.length">Show all alerts</a>
@@ -67,7 +66,9 @@
             <h3>Recent events</h3>
             <div class="white-box">
                 <ul>
-                    <li ng-repeat="event in DashboardController.events">
+                    <li ng-repeat="event in DashboardController.events"
+                        class="recent-alert" ng-class="{'error-event': event.levelname == 'ERROR'}">
+                        <div class="icon"></div>
                         <div class="left-p">
                             <span ng-bind="::event.message"></span>
                         </div>
@@ -78,7 +79,7 @@
                     </li>
                 </ul>
                 <div class="placeholder" ng-if="DashboardController.events.length==0">
-                 No events yet
+                    No events yet
                 </div>
             </div>
             <a class="show-all" ui-sref="dashboard.eventlog">Show all recent events</a>
