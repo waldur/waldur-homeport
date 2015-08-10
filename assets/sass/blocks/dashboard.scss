@@ -223,7 +223,7 @@
         .graph-head {
           padding: 20px 40px 20px 40px;
           @include bp(xs) {
-            padding: 0;
+            padding: 20px 0;
           }
         }
         .graph-head:hover {
@@ -231,14 +231,13 @@
         }
 
         @include bp(xs) {
-          padding: 5px 0px;
+          padding: 0;
           box-sizing: border-box;
           box-shadow: none;
           border: 0;
           border-bottom: 1px solid #ebebeb;
           overflow: hidden;
           min-height: 54px;
-          padding-top: 14px;
         }
         h4 {
           font-weight: bold;
