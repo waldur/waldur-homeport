@@ -404,7 +404,7 @@
       init:function() {
         this.service = resourcesService;
         this.controllerScope = controllerScope;
-        this.service.defaultFilter.project = $stateParams.uuid;
+        this.service.defaultFilter.project_uuid = $stateParams.uuid;
         this.searchFilters = [
           {
             name: 'resource_type',
