@@ -277,6 +277,7 @@
       'resourcesCountService',
       'currentStateService',
       'ENV',
+      '$window',
       DashboardActivityController]);
 
   function DashboardActivityController(
@@ -288,9 +289,11 @@
     eventStatisticsService,
     resourcesCountService,
     currentStateService,
-    ENV) {
+    ENV,
+    $window) {
     var controllerScope = this;
     var EventController = baseControllerClass.extend({
+      showGraph: true,
       init:function() {
         this.controllerScope = controllerScope;
         this.cacheTime = ENV.dashboardEventsCacheTime;
@@ -305,6 +308,20 @@
 
         $scope.$on('currentCustomerUpdated', this.onCustomerUpdate.bind(this));
         this.onCustomerUpdate();
+        this.resizeControl();
+      },
+      resizeControl: function() {
+        var vm = this;
+
+        var window = angular.element($window);
+        window.bind('resize', function () {
+          vm.showGraph = false;
+          setTimeout(function() {
+            vm.showGraph = true;
+            $scope.$apply();
+          }, 0);
+          $scope.$apply();
+        });
       },
       selectProject: function (project) {
         project.selected=!project.selected;
