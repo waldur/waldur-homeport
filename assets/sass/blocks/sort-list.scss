@@ -3,16 +3,13 @@
     display: flex;
     -webkit-flex-flow: row wrap;
     position: relative;
-    min-height: 44px;
+    min-height: 30px;
     li {
         @include property(padding, 0 10);
         @include property(padding-right, 0);
         &:nth-child(1) {
             @include property(padding-left, 0);
         } // &:nth-child(1)
-        &.divid {
-            border-left: 1px solid #C0C0C0;
-        } // &.divid
         &.title {
             @include bp(xs) {
                 flex: 1 100%;

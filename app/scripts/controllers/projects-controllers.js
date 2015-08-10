@@ -214,10 +214,13 @@
       '$stateParams',
       'projectsService',
       'baseControllerDetailUpdateClass',
+      'resourcesCountService',
+      '$q',
       ProjectDetailUpdateController
     ]);
 
-  function ProjectDetailUpdateController($stateParams, projectsService, baseControllerDetailUpdateClass) {
+  function ProjectDetailUpdateController($stateParams, projectsService, baseControllerDetailUpdateClass,
+                                         resourcesCountService, $q) {
     var controllerScope = this;
     var Controller = baseControllerDetailUpdateClass.extend({
       activeTab: 'eventlog',
@@ -244,28 +247,45 @@
             {
               title: 'Events',
               key: 'eventlog',
-              viewName: 'tabEventlog'
+              viewName: 'tabEventlog',
+              count: 0
             },
             {
               title: 'Resources',
               key: 'resources',
-              viewName: 'tabResources'
+              viewName: 'tabResources',
+              count: 0
             },
             {
               title: 'Users',
               key: 'users',
-              viewName: 'tabUsers'
+              viewName: 'tabUsers',
+              count: 0
             },
             {
               title: 'Services',
               key: 'services',
-              viewName: 'tabServices'
+              viewName: 'tabServices',
+              count: 0
             }
           ]
         };
       },
       afterActivate: function() {
-        controllerScope.canEdit = controllerScope.model;
+        var vm = controllerScope;
+        vm.canEdit = vm.model;
+        $q.all([
+          resourcesCountService.events({'scope': vm.model.url}),
+          resourcesCountService.resources({'project_uuid': vm.model.uuid,
+            'resource_type': ['DigitalOcean.Droplet', 'IaaS.Instance']}),
+          resourcesCountService.users({'project': vm.model.uuid}),
+          resourcesCountService.projectCloud({'project': vm.model.uuid})
+        ]).then(function(responses) {
+          vm.detailsViewOptions.tabs[0].count = responses[0];
+          vm.detailsViewOptions.tabs[1].count = responses[1];
+          vm.detailsViewOptions.tabs[2].count = responses[2];
+          vm.detailsViewOptions.tabs[3].count = responses[3];
+        });
       }
     });
 
