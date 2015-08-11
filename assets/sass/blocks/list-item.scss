@@ -172,12 +172,6 @@
             .actions-button {
                 .button {
                     border: transparent;
-                    background-color: #EAEAEA;
-                    color: #949494;
-                    &.active,
-                    &:hover {
-                        color: #000;
-                    } // &.active, &:hover
                     &.view {
                         &:before {
                             @include icon-fa;

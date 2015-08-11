@@ -789,7 +789,7 @@ angular.module('ncsaas')
         init:function() {
           this.controllerScope = controllerScope;
           this._super();
-
+          this.entityOptions.entityData.title = null;
           $scope.$on('currentProjectUpdated', this.setCurrentProject.bind(this));
           $scope.$on('searchInputChanged', this.onSearchInputChanged.bind(this));
         },
