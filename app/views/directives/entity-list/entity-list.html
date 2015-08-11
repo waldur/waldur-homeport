@@ -15,11 +15,11 @@
             </li>
             <li class="right-sort">
                 <a ng-if="entityOptions.entityData.createLink"
-                   ui-sref="{{ entityOptions.entityData.createLink }}" class="green-btn">
+                   ui-sref="{{ entityOptions.entityData.createLink }}" class="button">
                     <span>{{ entityOptions.entityData.createLinkText }}</span>
                 </a>
                 <a ng-if="entityOptions.entityData.importLink"
-                   ui-sref="{{ entityOptions.entityData.importLink }}" class="green-btn">
+                   ui-sref="{{ entityOptions.entityData.importLink }}" class="button">
                     <span>{{ entityOptions.entityData.importLinkText }}</span>
                 </a>
             </li>
@@ -36,11 +36,11 @@
         <div class="decision">
             <div class="col">
                 <a ng-if="entityOptions.entityData.createLink"
-                   ui-sref="{{ entityOptions.entityData.createLink }}" class="green-btn">
+                   ui-sref="{{ entityOptions.entityData.createLink }}" class="button">
                     {{ entityOptions.entityData.createLinkText }}
                 </a>
                 <a ng-if="entityOptions.entityData.importLink"
-                   ui-sref="{{ entityOptions.entityData.importLink }}" class="green-btn">
+                   ui-sref="{{ entityOptions.entityData.importLink }}" class="button">
                     {{ entityOptions.entityData.importLinkText }}
                 </a>
             </div>
@@ -77,7 +77,8 @@
         <ul class="object-list">
             <li class="list-item list-header">
                 <div class="checkbox" ng-show="entityList.controlPanelShow"></div>
-                <div ng-repeat="fieldHead in entityOptions.list" class="additional-cell {{ fieldHead.className }}">
+                <div ng-repeat="fieldHead in entityOptions.list" class="additional-cell {{ fieldHead.className }}"
+                     ng-class="{ 'display-for-mobile' : fieldHead.showForMobile, 'status': fieldHead.type == 'statusCircle' }">
                     <a class="list-sort">{{ fieldHead.name }}</a>
                 </div>
                 <div class="actions"></div>

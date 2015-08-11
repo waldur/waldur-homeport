@@ -10,8 +10,8 @@
                     </span>
             </div>
             <div class="buttons">
-                <a class="green-btn" ng-click="graphTooltip = !graphTooltip; amountTooltip = false;">History</a>
-                <a class="green-btn" ng-click="amountTooltip = !amountTooltip; graphTooltip = false;">Top-up</a>
+                <a class="button" ng-click="amountTooltip = !amountTooltip; graphTooltip = false;">Top-up</a>
+                <a class="button" ng-click="graphTooltip = !graphTooltip; amountTooltip = false;">History</a>
             </div>
             <div class="tooltip graph-tooltip" ng-show="graphTooltip">
                 <canvas chart-options="CustomerDetailUpdate.chartOptions"
@@ -29,7 +29,7 @@
                 <select name="amount" id="amount">
                     <option value="1">1</option>
                 </select>
-                <a class="green-btn">
+                <a class="button">
                     Add credit
                 </a>
             </div>
