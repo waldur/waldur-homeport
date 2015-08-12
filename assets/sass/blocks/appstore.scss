@@ -453,6 +453,10 @@
                     text-align: left;
                     span {
                         display: block;
+                        width: 180px;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
                     }
                 }
                 .price {
@@ -467,7 +471,7 @@
                     background: #ececec;
                     margin-top: -1px;
                     .price {
-                        font-size: 41px;
+                        font-size: 34px;
                         color: $dashboard-green;
                     }
 

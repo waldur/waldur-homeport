@@ -1,9 +1,11 @@
 (function() {
   angular.module('ncsaas')
     .controller('AppStoreController', [
-      'baseControllerAddClass', 'servicesService', 'currentStateService', 'ENV', AppStoreController]);
+      'baseControllerAddClass', 'servicesService', 'currentStateService', 'ENV', 'defaultPriceListItemsService', 'blockUI',
+      AppStoreController]);
 
-  function AppStoreController(baseControllerAddClass, servicesService, currentStateService, ENV) {
+  function AppStoreController(baseControllerAddClass, servicesService, currentStateService, ENV,
+                              defaultPriceListItemsService, blockUI) {
     var controllerScope = this;
     var Controller = baseControllerAddClass.extend({
       UNIQUE_FIELDS: {
@@ -13,7 +15,8 @@
       },
       FIELD_TYPES: {
         string: 'string',
-        field: 'field'
+        field: 'field',
+        integer: 'integer'
       },
 
       secondStep: false,
@@ -31,12 +34,15 @@
       currentCustomer: {},
       currentProject: {},
       compare: [],
+      providers: [],
+      services: {},
 
       configureStepNumber: 4,
 
       // cart
       total: 0,
-
+      defaultPriceListItems: [],
+      priceItems: [],
 
       init:function() {
         this.service = servicesService;
@@ -63,6 +69,16 @@
         this.selectedServiceName = null;
         this.resourceTypesBlock = false;
         this.thirdStep = false;
+        for (var i = 0; i < this.currentProject.services.length; i++) {
+          var service = this.currentProject.services[i];
+          if (service.state != 'Erred'
+            && (this.selectedCategory.services.indexOf(service.type) + 1)
+            && !(this.providers.indexOf(service.type) + 1)
+          ) {
+            this.providers.push(service.type);
+            this.services[service.type] = service;
+          }
+        }
       },
       setService:function(service) {
         this.selectedService = this.servicesList[service];
@@ -90,9 +106,21 @@
           vm.instance = servicesService.$create(vm.selectedService.resources[vm.selectedResourceType]);
           servicesService.getOption(vm.selectedService.resources[vm.selectedResourceType]).then(function(response) {
             vm.setFormOptions(response.actions.POST);
-            vm.instance[vm.UNIQUE_FIELDS.service_project_link] = vm.currentProject.url;
+            vm.setServiceProjectLink(response.actions.POST);
           });
         }
+      },
+      setServiceProjectLink: function(formOptions) {
+        var links = formOptions[this.UNIQUE_FIELDS.service_project_link].choices;
+        var linkName = this.services[this.selectedServiceName].name + ' | ' + this.currentProject.name;
+        var link = '';
+        for (var i = 0; i < links.length; i++) {
+          if (links[i].display_name == linkName) {
+            link = links[i].value;
+            break;
+          }
+        }
+        this.instance[this.UNIQUE_FIELDS.service_project_link] = link;
       },
       setFormOptions: function(formOptions) {
         this.allFormOptions = formOptions;
@@ -112,12 +140,61 @@
         }
       },
       doChoice: function(name, choice) {
+        var vm = this;
         this.instance[name] = choice.value;
+        if (vm.defaultPriceListItems.length) {
+          vm.setPriceItem(name, choice);
+        } else {
+          defaultPriceListItemsService.getList().then(function(response) {
+            vm.defaultPriceListItems = response;
+            vm.setPriceItem(name, choice);
+          });
+        }
+      },
+      setPriceItem: function(name, choice) {
+        var itemTypes,
+          index,
+          price = 0,
+          item;
+
+        itemTypes = this.priceItems.map(function(item) {
+          return item.type;
+        });
+        index = itemTypes.indexOf(name);
+        if (index + 1) {
+          this.priceItems.splice(index, 1);
+        }
+        for (var i = 0; i < this.defaultPriceListItems.length; i++) {
+          var priceItem = this.defaultPriceListItems[i];
+          if (priceItem.item_type == name
+            && ((choice.display_name.indexOf(priceItem.key) > -1)
+            || (priceItem.resource_content_type.indexOf(this.selectedResourceType.toLowerCase()) > -1))
+          ) {
+            price = priceItem.value;
+            break;
+          }
+        }
+        item = {
+          type: name,
+          name: choice.display_name,
+          price: price
+        };
+        this.priceItems.push(item);
+        this.countTotal();
+      },
+      countTotal: function() {
+        this.total = 0;
+        for (var i = 0; i < this.priceItems.length; i++) {
+          this.total += this.priceItems[i].price * 1;
+        }
       },
       setCurrentProject: function() {
         var vm = this;
+        var myBlockUI = blockUI.instances.get('myBlockUI');
+        myBlockUI.start();
         currentStateService.getProject().then(function(response) {
           vm.currentProject = response;
+          myBlockUI.stop();
         });
       },
       canSave: function() {
