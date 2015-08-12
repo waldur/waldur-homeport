@@ -33,8 +33,7 @@
                     <div class="clear"></div>
                 </div>
                 <p>
-                    <!--TODO: A date will be received from REST after resolve SAAS-514-->
-                    Joined on 26 Aug 2014
+                    Joined on {{ UserDetailUpdate.model.date_joined | date:'dd MMMM yyyy' }}
                 </p>
 
             </div>
