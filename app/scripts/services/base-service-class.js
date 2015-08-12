@@ -25,6 +25,7 @@
       filterByCustomer: true,
       customerUuid:null,
       cacheTime: 0,
+      cacheReset: false,
       endpointPostfix: '',
 
       init:function() {
@@ -50,9 +51,11 @@
           filter.page_size = vm.pageSize;
           var cacheKey = vm.endpoint + JSON.stringify(filter);
           var cache = listCache.get(cacheKey);
-          if (vm.cacheTime > 0 && cache && cache.time > new Date().getTime()) {
+          if (!vm.cacheReset && vm.cacheTime > 0 && cache && cache.time > new Date().getTime()) {
             deferred.resolve(cache.data);
           } else {
+            vm.cacheReset = false;
+            listCache.put(cacheKey, {data: null, time: 0});
             vm.getFactory(true).query(filter, function(response, responseHeaders) {
               var header = responseHeaders();
               vm.resultCount = !header['x-result-count'] ? null : header['x-result-count'];

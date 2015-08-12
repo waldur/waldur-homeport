@@ -1,10 +1,9 @@
 <div>
-
+    <div class="container" ng-if="entityOptions.entityData.title">
+        <h1>{{ entityOptions.entityData.title }}</h1>
+    </div>
     <div class="white-box" ng-show="entityList.list.length > 0 || entityList.searchInput || entityList.chosenFilters.length">
         <ul class="sort-list">
-            <li ng-if="entityOptions.entityData.title" class="title">
-                <h2 class="app-title">{{ entityOptions.entityData.title }}</h2>
-            </li>
             <li class="search divid">
                 <div class="search-box">
                     <input type="text" ng-model='entityList.searchInput' ng-change="entityList.search()">
@@ -16,11 +15,11 @@
             </li>
             <li class="right-sort">
                 <a ng-if="entityOptions.entityData.createLink"
-                   ui-sref="{{ entityOptions.entityData.createLink }}" class="green-btn">
+                   ui-sref="{{ entityOptions.entityData.createLink }}" class="button">
                     <span>{{ entityOptions.entityData.createLinkText }}</span>
                 </a>
                 <a ng-if="entityOptions.entityData.importLink"
-                   ui-sref="{{ entityOptions.entityData.importLink }}" class="green-btn">
+                   ui-sref="{{ entityOptions.entityData.importLink }}" class="button">
                     <span>{{ entityOptions.entityData.importLinkText }}</span>
                 </a>
             </li>
@@ -28,17 +27,20 @@
     </div>
 
     <div class="white-box no-styles" ng-show="entityList.list.length == 0 && !entityList.searchInput && !entityList.chosenFilters.length">
+
+        <list-cache-reset list-controller="entityList"
+                          list-service="entityService"></list-cache-reset>
         <h2 class="app-title">
             {{ entityOptions.entityData.noDataText }}
         </h2>
         <div class="decision">
             <div class="col">
                 <a ng-if="entityOptions.entityData.createLink"
-                   ui-sref="{{ entityOptions.entityData.createLink }}" class="green-btn">
+                   ui-sref="{{ entityOptions.entityData.createLink }}" class="button">
                     {{ entityOptions.entityData.createLinkText }}
                 </a>
                 <a ng-if="entityOptions.entityData.importLink"
-                   ui-sref="{{ entityOptions.entityData.importLink }}" class="green-btn">
+                   ui-sref="{{ entityOptions.entityData.importLink }}" class="button">
                     {{ entityOptions.entityData.importLinkText }}
                 </a>
             </div>
@@ -69,11 +71,14 @@
     <!-- /view-control -->
 
 
-    <div class="white-box" ng-show="entityList.list.length > 0 || entityList.searchInput">
+    <div class="white-box list-box" ng-show="entityList.list.length > 0 || entityList.searchInput">
+        <list-cache-reset list-controller="entityList"
+                          list-service="entityService"></list-cache-reset>
         <ul class="object-list">
             <li class="list-item list-header">
                 <div class="checkbox" ng-show="entityList.controlPanelShow"></div>
-                <div ng-repeat="fieldHead in entityOptions.list" class="additional-cell {{ fieldHead.className }}" ng-show="fieldHead.type != 'statusCircle'">
+                <div ng-repeat="fieldHead in entityOptions.list" class="additional-cell {{ fieldHead.className }}"
+                     ng-class="{ 'display-for-mobile' : fieldHead.showForMobile, 'status': fieldHead.type == 'statusCircle' }">
                     <a class="list-sort">{{ fieldHead.name }}</a>
                 </div>
                 <div class="actions"></div>

@@ -6,10 +6,11 @@
       'customersService',
       'baseControllerListClass',
       'usersService',
+      'ENTITYLISTFIELDTYPES',
       CustomerListController
     ]);
 
-  function CustomerListController(customersService, baseControllerListClass, usersService) {
+  function CustomerListController(customersService, baseControllerListClass, usersService, ENTITYLISTFIELDTYPES) {
     var controllerScope = this;
     var CustomerController = baseControllerListClass.extend({
       init:function() {
@@ -32,6 +33,23 @@
         } else {
           this.actionButtonsListItems[0].state = 'support.create';
         }
+        this.entityOptions = {
+          entityData: {
+            noDataText: 'You have no organizations yet.',
+            title: 'Organizations',
+            createLink: 'organizations.create',
+            createLinkText: 'Add organization'
+          },
+          list: [
+            {
+              name: 'Name',
+              propertyName: 'name',
+              type: ENTITYLISTFIELDTYPES.name,
+              link: 'organizations.details({uuid: entity.uuid})',
+              showForMobile: ENTITYLISTFIELDTYPES.showForMobile
+            }
+          ]
+        };
       },
       isOwnerOrStaff: function(customer) {
         if (this.currentUserIsStaff()) return true;
@@ -84,6 +102,25 @@
         this._super();
         this.detailsState = 'organizations.details';
         this.currentUser = usersService.currentUser;
+        this.chartData = {
+          labels: ["Monday", "Tuesday", "Wednsday", "Thursday", "Friday", "Saturday", "Sunday"],
+          datasets: [
+            {
+              label: "Events",
+              fillColor: "rgba(220,220,220,0.2)",
+              strokeColor: "rgba(220,220,220,1)",
+              pointColor: "rgba(220,220,220,1)",
+              pointStrokeColor: "#fff",
+              pointHighlightFill: "#fff",
+              pointHighlightStroke: "rgba(220,220,220,1)",
+              data: [65, 59, 80, 81, 56, 55, 40]
+            }
+          ]
+        };
+        this.chartOptions = {
+          responsive: true,
+          scaleShowGridLines : false
+        };
         this.detailsViewOptions = {
           title: 'Organization',
           activeTab: $stateParams.tab ? $stateParams.tab : this.activeTab,
@@ -146,7 +183,7 @@
           controllerScope.files = [];
           controllerScope.model.image = response.data.image;
           controllerScope.updateImageUrl();
-          Flash.create('success', 'Customer image is uploaded');
+          Flash.create('success', 'Organization image is uploaded');
         }, function (response) {
           Flash.create('warning', 'Unable to upload image');
         });
@@ -157,7 +194,7 @@
         customerImageService.delete({
           uuid: controllerScope.model.uuid
         }).then(function (response) {
-          Flash.create('success', 'Customer image is deleted');
+          Flash.create('success', 'Organization image is deleted');
           controllerScope.model.image = null;
           controllerScope.updateImageUrl();
         }, function (response) {
@@ -166,7 +203,7 @@
       },
 
       afterUpdate: function() {
-        this.successFlash('Customer {} is updated'.replace('{}', controllerScope.model.name));
+        this.successFlash('Organization {} is updated'.replace('{}', controllerScope.model.name));
       }
     });
 

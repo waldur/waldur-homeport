@@ -1,0 +1,28 @@
+.list-cache-reset {
+  position: absolute;
+  right: 10px;
+  top: 21px;
+  .icon-button {
+    &:before {
+      content: "\f021";
+    }
+    &.processing {
+      &:before {
+        animation-name: spin;
+        animation-duration: 600ms;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+        z-index: 100;
+      }
+    }
+  }
+  @keyframes spin {
+    from {
+      transform:rotate(0deg);
+    }
+    to {
+      transform:rotate(360deg);
+    }
+  }
+}
+

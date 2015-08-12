@@ -1,9 +1,7 @@
 <div ng-controller="ProjectStatsController">
-    <section class="title-wrapper">
-        <div class="container">
-            <h1>Resources</h1>
-        </div>
-    </section>
+    <div class="container">
+        <h1>Resources</h1>
+    </div>
     <section class="resources-content">
         <div class="container">
             <div class="tabs-wrapper">
@@ -30,7 +28,7 @@
                 </aside>
                 <div class="tab-content" ng-switch="activeTab">
                     <div ng-switch-when="VMs"
-                         ng-controller="ProjectResourcesTabController as ResourceList">
+                         ng-controller="ResourceProjectsTabController as ResourceList">
                          <entitylist entity-list="ResourceList"
                                      entity-service="ResourceList.service"
                                      entity-buttons="ResourceList.actionButtonsListItems"
@@ -54,7 +52,7 @@
                     </div>
 
                     <div ng-switch-when="People"
-                         ng-controller="ProjectUsersTabController2 as ProjectUsersTab">
+                         ng-controller="ResourceProjectUsersTabController as ProjectUsersTab">
                         <div class="white-box">
                             <div class="row">
                                 <div class="col full">

@@ -339,7 +339,7 @@ Config file settings:
     listState   - string - link to list page
     aboutFields - array  - objects with options for fields
         fieldKey   - string - key for filed
-        isEditable - bool   - state of using edit in place directive
+        isEditable - bool   - state of using edit in place directive (in controller should be 'canEdit' variable)
         className  - string - class name for field
     tabs        - array  - objects with options for tabs
         title      - string - title of tab

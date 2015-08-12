@@ -38,6 +38,8 @@
       services: {},
 
       configureStepNumber: 4,
+      selectedPackageName: null,
+      agreementShow: false,
 
       // cart
       total: 0,
@@ -190,7 +192,7 @@
       },
       setCurrentProject: function() {
         var vm = this;
-        var myBlockUI = blockUI.instances.get('myBlockUI');
+        var myBlockUI = blockUI.instances.get('store-content');
         myBlockUI.start();
         currentStateService.getProject().then(function(response) {
           vm.currentProject = response;

@@ -1,15 +1,18 @@
 <div>
-
+    <list-cache-reset list-controller="entityList"
+                      list-service="entityService"></list-cache-reset>
     <div class="tab-title" ng-show="entityList.list.length > 0 || entityList.searchInput">
         <a ui-sref="{{ entityOptions.entityData.createLink }}"
            ng-if="entityOptions.entityData.createLink"
-           class="green-btn">
+           class="button">
             {{ entityOptions.entityData.createLinkText }}
         </a>
         <div class="clear"></div>
     </div>
 
     <div class="empty-list-message" ng-show="entityList.list.length == 0 && !entityList.searchInput">
+        <list-cache-reset list-controller="entityList"
+                          list-service="entityService"></list-cache-reset>
         <h2 class="app-title">
             {{ entityOptions.entityData.noDataText }}
         </h2>
@@ -46,6 +49,8 @@
     <!-- /view-control -->
 
     <div class="table" ng-show="entityList.list.length > 0 || entityList.searchInput">
+        <list-cache-reset list-controller="entityList"
+                          list-service="entityService"></list-cache-reset>
         <div class="tr th" ng-hide="entityOptions.entityData.hideTableHead">
             <div ng-repeat="fieldHead in entityOptions.list"
                  class="td {{ fieldHead.className }}"

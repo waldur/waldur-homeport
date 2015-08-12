@@ -3,15 +3,13 @@
     display: flex;
     -webkit-flex-flow: row wrap;
     position: relative;
-    min-height: 15px;
+    min-height: 30px;
     li {
         @include property(padding, 0 10);
+        @include property(padding-right, 0);
         &:nth-child(1) {
             @include property(padding-left, 0);
         } // &:nth-child(1)
-        &.divid {
-            border-left: 1px solid #C0C0C0;
-        } // &.divid
         &.title {
             @include bp(xs) {
                 flex: 1 100%;
@@ -29,7 +27,7 @@
         } // &.search
         &.right-sort {
             position: absolute;
-            right: 0px;
+            right: 5px;
             top: 0px;
         } // &.right-sort
         .app-title {

@@ -33,8 +33,7 @@
                     <div class="clear"></div>
                 </div>
                 <p>
-                    <!--TODO: A date will be received from REST after resolve SAAS-514-->
-                    Joined on 26 Aug 2014
+                    Joined on {{ UserDetailUpdate.model.date_joined | date:'dd MMMM yyyy' }}
                 </p>
 
             </div>
@@ -80,40 +79,13 @@
                 <div class="tab" id="notifications"
                      ng-class="{'tab-active': UserDetailUpdate.activeTab === 'notifications'}"
                      ng-switch-when="notifications">
-                    <div class="notif-wrapper">
-                        <h2>subscribed to</h2>
-                        <ul>
-                            <li>
-                                <input type="checkbox" id="event-login"/>
-                                <label for="event-login"><span>Login events</span></label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="critical"
-                                       ng-model="criticalAlerts"
-                                       ng-class="{'opened': criticalAlerts}"/>
-                                <label for="critical"><span>Critical alerts</span></label>
-                                <div class="critical" ng-show="criticalAlerts">
-                                    <h2>critical alerts</h2>
-                                    <form action="">
-                                        <input type="checkbox" id="s-flag"/><label for="s-flag">Subscribed</label>
-                                        <label for="s-email">Notification email</label>
-                                        <input id="s-email" type="email"/>
-                                        <label for="json">Event webhook (JSON)</label>
-                                        <input id="json" type="text"/>
-                                    </form>
-                                </div>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="invites"/>
-                                <label for="invites"><span>User invites</span></label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="warnings"/>
-                                <label for="warnings"><span>Warnings</span></label>
-                            </li>
-                        </ul>
-
-                    </div>
+                     <div ng-controller="HookListController as HookListController">
+                         <entitylist
+                             entity-list="HookListController"
+                             entity-service="HookListController.service"
+                             entity-buttons="HookListController.actionButtonsListItems"
+                             entity-options="HookListController.entityOptions"></entitylist>
+                     </div>
                 </div>
                 <div class="tab" id="eventlog"
                      ng-class="{'tab-active': UserDetailUpdate.activeTab === 'eventlog'}"
@@ -137,7 +109,7 @@
                             <input id="repeat" type="text"/>
                         </li>
                         <li>
-                            <a href="#" class="green-btn">Save password</a>
+                            <a href="#" class="button">Save password</a>
                         </li>
                     </ul>
                 </div>

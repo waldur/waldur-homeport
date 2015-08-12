@@ -8,6 +8,12 @@
     position: absolute;
     background-color: #4fb547;
     overflow: hidden;
+    &.block-ui {
+        position: absolute;
+        .block-ui-message {
+            padding: 10px;
+        }
+    }
     &.lang {
         width: 120px;
         margin-left: 0;
