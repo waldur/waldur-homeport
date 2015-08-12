@@ -192,6 +192,17 @@
       },
       setCurrentProject: function() {
         var vm = this;
+        vm.selectedCategory = null;
+        vm.secondStep = false;
+        vm.thirdStep = false;
+        vm.selectedService = {};
+        vm.selectedServiceName = null;
+        vm.resourceTypesBlock = false;
+        vm.formOptions = null;
+        vm.priceItems = [];
+        vm.selectedResourceType = null;
+        vm.instance = null;
+        vm.countTotal();
         var myBlockUI = blockUI.instances.get('store-content');
         myBlockUI.start();
         currentStateService.getProject().then(function(response) {
@@ -200,6 +211,9 @@
         });
       },
       canSave: function() {
+        if (!this.instance) {
+          return false;
+        }
         for (var name in this.allFormOptions) {
           if (this.allFormOptions[name].required && !this.instance[name]) {
             return false;
