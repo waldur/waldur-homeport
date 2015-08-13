@@ -207,7 +207,7 @@
 
       h3 {
         text-transform: uppercase;
-        color: $dashboard-green;
+        color: #353634;
         margin-left: 10px;
         padding-left: 35px;
         @include bp(xs) {
@@ -225,9 +225,12 @@
           @include bp(xs) {
             padding: 20px 0;
           }
-        }
-        .graph-head:hover {
-          background-color: $expandable-hover;
+          &.active {
+            background-color: $expandable-hover;
+          }
+          &:hover {
+            background-color: $expandable-hover;
+          }
         }
 
         @include bp(xs) {
@@ -245,7 +248,8 @@
           margin: 0px;
           position: relative;
           a {
-            font-weight: normal;
+            font-weight: bold;
+            font-size:17px;
             color: #28ae60;
             @include bp(xs) {
               color: #000;
