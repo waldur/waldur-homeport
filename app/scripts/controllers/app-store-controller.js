@@ -2,10 +2,10 @@
   angular.module('ncsaas')
     .controller('AppStoreController', [
       'baseControllerAddClass', 'servicesService', 'currentStateService', 'ENV', 'defaultPriceListItemsService', 'blockUI',
-      AppStoreController]);
+      '$state', AppStoreController]);
 
   function AppStoreController(baseControllerAddClass, servicesService, currentStateService, ENV,
-                              defaultPriceListItemsService, blockUI) {
+                              defaultPriceListItemsService, blockUI, $state) {
     var controllerScope = this;
     var Controller = baseControllerAddClass.extend({
       UNIQUE_FIELDS: {
@@ -36,6 +36,7 @@
       compare: [],
       providers: [],
       services: {},
+      categoryProviders: {},
 
       configureStepNumber: 4,
       selectedPackageName: null,
@@ -52,17 +53,16 @@
         this.setSignalHandler('currentProjectUpdated', this.setCurrentProject.bind(controllerScope));
         this._super();
         this.listState = 'resources.list';
-        this.categories = ENV.appStoreCategories;
       },
       activate:function() {
         var vm = this;
         servicesService.getServicesList().then(function(response) {
           vm.servicesList = response;
+          vm.setCurrentProject();
         });
         currentStateService.getCustomer().then(function(response) {
           vm.currentCustomer = response;
         });
-        vm.setCurrentProject();
       },
       setCategory: function(category) {
         this.selectedCategory = category;
@@ -71,16 +71,7 @@
         this.selectedServiceName = null;
         this.resourceTypesBlock = false;
         this.thirdStep = false;
-        for (var i = 0; i < this.currentProject.services.length; i++) {
-          var service = this.currentProject.services[i];
-          if (service.state != 'Erred'
-            && (this.selectedCategory.services.indexOf(service.type) + 1)
-            && !(this.providers.indexOf(service.type) + 1)
-          ) {
-            this.providers.push(service.type);
-            this.services[service.type] = service;
-          }
-        }
+        this.providers = this.categoryProviders[this.selectedCategory.name];
       },
       setService:function(service) {
         this.selectedService = this.servicesList[service];
@@ -192,6 +183,8 @@
       },
       setCurrentProject: function() {
         var vm = this;
+        var categories = ENV.appStoreCategories;
+        vm.categories = [];
         vm.selectedCategory = null;
         vm.secondStep = false;
         vm.thirdStep = false;
@@ -207,6 +200,28 @@
         myBlockUI.start();
         currentStateService.getProject().then(function(response) {
           vm.currentProject = response;
+          for (var j = 0; j < categories.length; j++) {
+            var category = categories[j];
+            vm.categoryProviders[category.name] = [];
+            for (var i = 0; i < vm.currentProject.services.length; i++) {
+              var service = vm.currentProject.services[i];
+              if (service.state != 'Erred'
+                && category.services
+                && (category.services.indexOf(service.type) + 1)
+                && !(vm.categoryProviders[category.name].indexOf(service.type) + 1)
+              ) {
+                vm.categoryProviders[category.name].push(service.type);
+                vm.services[service.type] = service;
+              }
+            }
+            if (vm.categoryProviders[category.name].length > 0 || category.name == 'SUPPORT') {
+              vm.categories.push(category);
+            }
+          }
+          if (vm.categories.length == 0) {
+            alert("No services!");
+            $state.go('resources.list', {tab: 'Providers'});
+          }
           myBlockUI.stop();
         });
       },
