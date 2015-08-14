@@ -208,7 +208,7 @@
       h3 {
         text-transform: uppercase;
         color: #353634;
-        margin-left: 10px;
+        margin-left: 4px;
         padding-left: 35px;
         @include bp(xs) {
           padding-left: 0;
@@ -231,6 +231,9 @@
           &:hover {
             background-color: $expandable-hover;
           }
+        }
+        .graph-head:hover {
+          background-color: $expandable-hover;
         }
 
         @include bp(xs) {
