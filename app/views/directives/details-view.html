@@ -41,13 +41,16 @@
                     <span class="{{ field.className }}"
                           ng-if="!field.isEditable || !controller.canEdit">{{ controller.model[field.fieldKey] }}</span>
                     <span editable-text="controller.model[field.fieldKey]"
+                          e-form="rowform"
                           buttons="no"
                           onbeforesave="controller.update()"
-                          ng-if="field.isEditable && controller.canEdit"
+                          ng-show="field.isEditable && controller.canEdit"
                           class="{{ field.className }}"
                           title="Click to edit">
                         {{ controller.model[field.fieldKey] }}
                     </span>
+                    <div class="icon" ng-click="rowform.$show()" ng-hide="rowform.$visible"></div>
+                    <div class="clear"></div>
                 </span>
             </div>
         </div>
