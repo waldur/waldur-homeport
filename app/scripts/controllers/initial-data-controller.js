@@ -3,11 +3,11 @@
 (function() {
   angular.module('ncsaas')
     .controller('InitialDataController',
-      ['usersService', 'planCustomersService', 'currentStateService', '$state',
+      ['usersService', 'agreementsService', 'currentStateService', '$state',
         'baseControllerClass', InitialDataController]);
 
   function InitialDataController(
-    usersService, planCustomersService, currentStateService, $state, baseControllerClass) {
+    usersService, agreementsService, currentStateService, $state, baseControllerClass) {
     /*jshint camelcase: false */
     var controllerScope = this;
     var Controller = baseControllerClass.extend({
@@ -29,9 +29,9 @@
         });
 
         currentStateService.getCustomer().then(function(customer) {
-          planCustomersService.getList({customer: customer.uuid}).then(function(planCustomers) {
-            if (planCustomers.length !== 0) {
-              vm.plan = planCustomers[0].plan;
+          agreementsService.getList({customer: customer.uuid}).then(function(agreements) {
+            if (agreements.length !== 0) {
+              vm.plan = agreements[0].plan;
             }
           });
         });
@@ -75,11 +75,27 @@
 
   angular.module('ncsaas')
     .controller('InitialDataControllerDemo',
-    ['usersService', 'servicesService', 'baseControllerClass', 'currentStateService',
-      'planCustomersService', InitialDataControllerDemo]);
+    ['usersService',
+     'servicesService',
+     'baseControllerClass',
+     'currentStateService',
+     'agreementsService',
+     'customersService',
+     'joinService',
+     '$q',
+     '$state',
+     InitialDataControllerDemo]);
 
   function InitialDataControllerDemo(
-    usersService, servicesService, baseControllerClass, currentStateService, planCustomersService) {
+    usersService,
+    servicesService,
+    baseControllerClass,
+    currentStateService,
+    agreementsService,
+    customersService,
+    joinService,
+    $q,
+    $state) {
     var controllerScope = this;
     var Controller = baseControllerClass.extend({
       user: {},
@@ -92,17 +108,30 @@
         this.activate();
       },
       activate: function() {
+        this.getUser();
+        this.getServices();
+        this.getCustomer();
+      },
+      getUser: function() {
         var vm = this;
         usersService.getCurrentUser().then(function(response) {
           vm.user = response;
         });
-        servicesService.getServicesList().then(function(response) {
-          vm.services = response;
+      },
+      getServices: function() {
+        var vm = this;
+        servicesService.getServicesOptions().then(function(service_options) {
+          vm.service_options = service_options;
+          console.log(service_options)
         });
+      },
+      getCustomer: function() {
+        var vm = this;
         currentStateService.getCustomer().then(function(customer) {
-          planCustomersService.getList({customer: customer.uuid}).then(function(planCustomers) {
-            if (planCustomers.length !== 0) {
-              vm.plan = planCustomers[0].plan;
+          vm.customer = customer;
+          agreementsService.getList({customer: customer.uuid}).then(function(agreements) {
+            if (agreements.length !== 0) {
+              vm.agreement = agreements[0];
             }
           });
         });
@@ -112,10 +141,16 @@
       getPrettyQuotaName: function(name, count) {
         return name.replace(/nc_|_count/gi,'') + (count > 1 ? 's' : '');
       },
-
-      addService: function() {
-        if (this.chosenService && !(this.chosenServices.lastIndexOf(this.chosenService) + 1)) {
-          this.chosenServices.push(this.chosenService);
+      addService: function(service) {
+        this.chosenServices.push(service);
+      },
+      addChosenService: function() {
+        if (!this.chosenService) {
+          return;
+        }
+        var service = this.service_options[this.chosenService];
+        if (!(this.chosenServices.lastIndexOf(service) + 1)) {
+          this.addService(service);
         }
       },
       removeService: function(service) {
@@ -123,6 +158,49 @@
         if (index + 1) {
           this.chosenServices.splice(index, 1);
         }
+      },
+      saveServices: function() {
+        var vm = this;
+        var promises = this.chosenServices.map(function(service){
+          service.non_field_errors = {};
+          var options = vm.prepareServiceOptions(service);
+          return joinService.createService(service.url, options);
+        });
+        return $q.all(promises);
+      },
+      prepareServiceOptions: function(service){
+        var result = {};
+        for (var i = 0; i < service.options.length; i++) {
+          var option = service.options[i];
+          if (option.value) {
+            result[option.key] = option.value;
+          }
+          result['customer'] = this.customer.url;
+          result['name'] = service.name;
+        }
+        return result;
+      },
+      save: function() {
+        var vm = this;
+        if (!vm.user.email) {
+          var errorText = 'This field is required';
+          vm.errors.email = [errorText];
+          return;
+        }
+        vm.user.$update().then(function(){
+          vm.customer.$update().then(function(){
+            vm.saveServices().then(function(responses){
+              usersService.currentUser = null;
+              $state.go('dashboard.index');
+            }, function(response){
+              for (var i = 0; i < vm.chosenServices.length; i++) {
+                if (vm.chosenServices[i].name == response.config.data.name) {
+                  vm.chosenServices[i].non_field_errors = response.data.non_field_errors;
+                }
+              }
+            })
+          })
+        })
       }
     });
 

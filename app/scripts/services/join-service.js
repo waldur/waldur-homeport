@@ -5,6 +5,8 @@
   angular.module('ncsaas')
     .service('joinService', [
       '$q',
+      '$http',
+      'ENV',
       'baseServiceClass',
       'cloudsService',
       'digitalOceanService',
@@ -13,6 +15,8 @@
 
   function joinService(
     $q,
+    $http,
+    ENV,
     baseServiceClass,
     cloudsService,
     digitalOceanService
@@ -51,6 +55,10 @@
             return response;
           })
         }
+      },
+
+      createService: function(url, options) {
+        return $http.post(url, options);
       },
 
       flattenList: function(items) {

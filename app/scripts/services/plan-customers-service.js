@@ -2,14 +2,14 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('planCustomersService', ['baseServiceClass', planCustomersService]);
+    .service('agreementsService', ['baseServiceClass', agreementsService]);
 
-  function planCustomersService(baseServiceClass) {
+  function agreementsService(baseServiceClass) {
     /*jshint validthis: true */
     var ServiceClass = baseServiceClass.extend({
       init:function() {
         this._super();
-        this.endpoint = '/plan-customers/';
+        this.endpoint = '/agreements/';
         this.filterByCustomer = false;
       }
     });

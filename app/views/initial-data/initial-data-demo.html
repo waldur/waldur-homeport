@@ -14,10 +14,10 @@
                 <div class="clear"></div>
             </div>
             <div class="fields">
-                <label>Email</label>
-                <input type="text" ng-model="InitialData.user.email"/>
-                <label>Organization name</label>
-                <input type="text"/>
+                <label for="email">Email</label>
+                <input id="email" type="text" ng-model="InitialData.user.email"/>
+                <label for="customer_name">Organization name</label>
+                <input id="customer_name" ng-model="InitialData.customer.name" type="text"/>
             </div>
             <div class="clear"></div>
         </div>
@@ -30,7 +30,7 @@
                 <span class="plan-name">Free plan</span>
                 <div class="plan-item">
                     <table>
-                        <tr ng-repeat="quota in InitialData.plan.quotas">
+                        <tr ng-repeat="quota in InitialData.agreement.quotas">
                             <td>{{ quota.value }} {{ InitialData.getPrettyQuotaName(quota.name, quota.value) }}</td>
                         </tr>
                     </table>
@@ -39,59 +39,34 @@
         </aside>
         <div class="second-step">
             <h2>Enter access codes</h2>
-            <div class="fields-block state">
-                <div class="icon-block">
-                    <img src="/static/images/appstore/icon-aws.png" alt=""/>
-                    <span>AWS EC2</span>
-                    <span class="info">?</span>
-                </div>
-                <div class="fields">
-                    <label>AWS User code</label>
-                    <input type="text"/>
-                    <label>AWS Token</label>
-                    <input type="text"/>
-                </div>
-                <div class="clear"></div>
-                <span class="remove-service">✖</span>
-            </div>
-            <div class="fields-block state">
-                <div class="icon-block">
-                    <img src="/static/images/appstore/icon-DigitalOcean.png" alt=""/>
-                    <span>DigitalOcean</span>
-                    <span class="info">?</span>
-                </div>
-                <div class="fields">
-                    <label>DigitalOcean Token</label>
-                    <input type="text"/>
-                </div>
-                <div class="clear"></div>
-                <span class="remove-service">✖</span>
-            </div>
             <div class="fields-block state" ng-repeat="service in InitialData.chosenServices">
                 <div class="icon-block">
-                    <img ng-src="/static/images/appstore/icon-{{ service.toLowerCase() }}.png"/>
-                    <span>{{ service }}</span>
+                    <img ng-src="/static/images/appstore/icon-{{ service.name.toLowerCase() }}.png"/>
+                    <span>{{ service.name }}</span>
                     <span class="info">?</span>
                 </div>
-                <div class="fields">
-                    <label>{{ service }} Token</label>
-                    <input type="text"/>
+                <div ng-repeat="option in service.options" class="fields">
+                    <label><helpicon help-text="{{ ::option.help_text }}" ng-if="option.help_text"></helpicon> {{ ::option.label }}</label>
+                    <input ng-model="option.value" type="text"/>
+                </div>
+                <div ng-repeat="error in service.non_field_errors" class="fields">
+                    {{ error }}
                 </div>
                 <div class="clear"></div>
                 <span class="remove-service" ng-click="InitialData.removeService(service)">✖</span>
             </div>
             <div class="fields-block green">
                 <div class="select-block">
-                    <label for="">Add another service</label>
+                    <label>Add another service</label>
                     <select ng-model="InitialData.chosenService"
-                            ng-options="key as key for (key, value) in InitialData.services">
+                            ng-options="key as key for (key, value) in InitialData.service_options">
                     </select>
                 </div>
-                <a class="button" ng-click="InitialData.addService()">Add service</a>
+                <a class="button" ng-click="InitialData.addChosenService()">Add service</a>
                 <div class="clear"></div>
             </div>
             <div class="button-block">
-                <a class="button">Let’s get started</a>
+                <a class="button" ng-click="InitialData.save()">Let’s get started</a>
                 <span>By continuing you agree to the <a>Terms of Service</a>.</span>
             </div>
             <div class="clear"></div>
