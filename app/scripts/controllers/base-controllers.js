@@ -136,22 +136,37 @@
           vm.setCurrentProject(firstProject);
         });
       },
-      refreshProjectListHandler: function(event, model) {
+      refreshProjectListHandler: function(event, params) {
         var vm = this,
           projectUuids,
-          key;
+          key,
+          model = params.model;
         projectUuids = vm.projects.map(function(obj) {
           return obj.uuid;
         });
         key = projectUuids.indexOf(model.uuid);
-        vm.getProjectList(true);
         if (key + 1) {
-          currentStateService.getProject().then(function(currentProject) {
-            vm.projects.splice(key, 1);
-            if (model.uuid == currentProject.uuid) {
-              vm.setFirstProject();
+          vm.projects[key].name = model.name;
+          if (vm.currentProject) {
+            if (model.uuid == vm.currentProject.uuid) {
+              if (params.update) {
+                vm.currentProject = model;
+                vm.setCurrentProject(model);
+                vm.projects[key] = model;
+                projectsService.cacheReset = true;
+              } else {
+                vm.setFirstProject();
+                vm.getProjectList(true);
+              }
             }
-          });
+          } else {
+            vm.getProjectList(true);
+            currentStateService.getProject().then(function(currentProject) {
+              if (model.uuid == currentProject.uuid) {
+                vm.setFirstProject();
+              }
+            });
+          }
         }
       },
       getProjectList: function(cacheReset) {

@@ -115,7 +115,7 @@
         }
       },
       afterInstanceRemove: function(instance) {
-        $rootScope.$broadcast('refreshProjectList', instance);
+        $rootScope.$broadcast('refreshProjectList', {model: instance});
         this._super(instance);
       },
       getUsersForProject: function(uuid, page) {
@@ -191,7 +191,7 @@
             projectCloudMembershipsService.addRow(vm.project.url, response[i].url);
           }
         });
-        $rootScope.$broadcast('refreshProjectList', vm.instance);
+        $rootScope.$broadcast('refreshProjectList', {model: vm.instance});
       },
       currentCustomerUpdatedHandler: function() {
         var vm = this;
@@ -288,7 +288,7 @@
         });
       },
       afterUpdate: function() {
-        $rootScope.$broadcast('refreshProjectList', this.model);
+        $rootScope.$broadcast('refreshProjectList', {model: this.model, update: true});
       }
     });
 
