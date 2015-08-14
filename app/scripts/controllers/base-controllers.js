@@ -140,17 +140,23 @@
         var vm = this,
           projectUuids,
           key;
-        projectUuids = vm.projects.map(function(obj) {
-          return obj.uuid;
-        });
-        key = projectUuids.indexOf(model.uuid);
         vm.getProjectList(true);
-        if (key + 1) {
-          currentStateService.getProject().then(function(currentProject) {
-            vm.projects.splice(key, 1);
-            if (model.uuid == currentProject.uuid) {
-              vm.setFirstProject();
-            }
+        if (model) {
+          projectUuids = vm.projects.map(function(obj) {
+            return obj.uuid;
+          });
+          key = projectUuids.indexOf(model.uuid);
+          if (key + 1) {
+            currentStateService.getProject().then(function(currentProject) {
+              vm.projects.splice(key, 1);
+              if (model.uuid == currentProject.uuid) {
+                vm.setFirstProject();
+              }
+            });
+          }
+        } else {
+          projectsService.$get($window.localStorage[ENV.currentProjectUuidStorageKey]).then(function(response) {
+            vm.setCurrentProject(response);
           });
         }
       },
