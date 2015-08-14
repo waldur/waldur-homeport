@@ -93,6 +93,8 @@
       'currentStateService',
       'projectsService',
       'baseControllerAddClass',
+      '$q',
+      '$rootScope',
       ServiceAddController]);
 
   function ServiceAddController(
@@ -101,7 +103,9 @@
     joinServiceProjectLinkService,
     currentStateService,
     projectsService,
-    baseControllerAddClass) {
+    baseControllerAddClass,
+    $q,
+    $rootScope) {
     var controllerScope = this;
     var ServiceController = baseControllerAddClass.extend({
       init: function() {
@@ -157,12 +161,14 @@
 
       afterSave: function() {
         var vm = this;
-        projectsService.filterByCustomer = false;
-
         projectsService.getList().then(function(response) {
+          var promises = [];
           for (var i = 0; response.length > i; i++) {
-            joinServiceProjectLinkService.add(response[i], vm.instance);
+            promises.push(joinServiceProjectLinkService.add(response[i], vm.instance));
           }
+          $q.all(promises).then(function() {
+            $rootScope.$broadcast('refreshProjectList');
+          });
         });
       },
 

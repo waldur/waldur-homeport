@@ -669,7 +669,7 @@
         })
 
         .state('resources.list', {
-          url: '',
+          url: ':tab',
           views: {
             'appContent': {
               templateUrl: 'views/resource/list.html',

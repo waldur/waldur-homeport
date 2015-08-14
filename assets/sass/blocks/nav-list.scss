@@ -78,7 +78,7 @@
                 border-left-color: $navListBackgroundColor;
                 border-right: 0;
                 position: absolute;
-                right: -25px;
+                left: 100%;
                 top: 0;
                 z-index: 1;
             }
@@ -180,7 +180,7 @@
                 border-left-color: $backgroundColor;
                 border-right: 0;
                 position: absolute;
-                right: -25px;
+                left: 100%;
                 top: 0;
                 z-index: 1;
             }
@@ -405,7 +405,7 @@
                 border-left-color: $backgroundColor;
                 border-right: 0;
                 position: absolute;
-                right: -25px;
+                left: 100%;
                 top: 0;
                 z-index: 1;
             }

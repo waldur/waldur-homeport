@@ -596,12 +596,15 @@
       '$q',
       'currentStateService',
       'resourcesCountService',
+      '$stateParams',
       ProjectStatsController]);
 
-    function ProjectStatsController($scope, $rootScope, $q, currentStateService, resourcesCountService) {
+    function ProjectStatsController($scope, $rootScope, $q, currentStateService, resourcesCountService, $stateParams) {
       $scope.search = function() {
         $rootScope.$broadcast('searchInputChanged', $scope.searchText);
-      }
+      };
+
+      $scope.activeTab = $stateParams.tab ? $stateParams.tab : 'VMs';
 
       setCurrentProject();
       $scope.$on('currentProjectUpdated', setCurrentProject);
