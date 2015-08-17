@@ -6,7 +6,6 @@
     .service('joinService', [
       '$q',
       '$http',
-      'ENV',
       'baseServiceClass',
       'cloudsService',
       'digitalOceanService',
@@ -16,7 +15,6 @@
   function joinService(
     $q,
     $http,
-    ENV,
     baseServiceClass,
     cloudsService,
     digitalOceanService

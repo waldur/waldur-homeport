@@ -82,24 +82,10 @@
           url: '',
           views: {
             'appHeader@initialdata' : {
-              templateUrl: 'views/partials/site-header-disabled.html',
-            },
-            'appContent@initialdata' : {
-              templateUrl: 'views/initial-data/initial-data.html',
-            }
-          },
-          resolve: {
-            authenticated: authCheck
-          }
-        })
-        .state('initialdata.demo', {
-          url: 'demo/',
-          views: {
-            'appHeader@initialdata' : {
               templateUrl: 'views/partials/site-header-initial.html',
             },
             'appContent@initialdata' : {
-              templateUrl: 'views/initial-data/initial-data-demo.html',
+              templateUrl: 'views/initial-data/initial-data.html',
             }
           },
           resolve: {

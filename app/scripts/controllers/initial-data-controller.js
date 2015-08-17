@@ -1,98 +1,25 @@
 'use strict';
 
 (function() {
+
   angular.module('ncsaas')
     .controller('InitialDataController',
-      ['usersService', 'agreementsService', 'currentStateService', '$state',
-        'baseControllerClass', InitialDataController]);
-
-  function InitialDataController(
-    usersService, agreementsService, currentStateService, $state, baseControllerClass) {
-    /*jshint camelcase: false */
-    var controllerScope = this;
-    var Controller = baseControllerClass.extend({
-      user: null,
-      errors: {},
-      plan: {},
-
-      init: function() {
-        this._super();
-        this.activate();
-      },
-      activate: function() {
-        var vm = this;
-        usersService.getCurrentUser().then(function(response) {
-          vm.user = response;
-          if (response.email) {
-            $state.go('dashboard.index');
-          }
-        });
-
-        currentStateService.getCustomer().then(function(customer) {
-          agreementsService.getList({customer: customer.uuid}).then(function(agreements) {
-            if (agreements.length !== 0) {
-              vm.plan = agreements[0].plan;
-            }
-          });
-        });
-      },
-      // XXX: This is quick fix, we need to get display names from backend, but currently quotas on backend do not
-      // have display names
-      getPrettyQuotaName: function(name) {
-        var prettyNames = {
-          'nc_user_count': 'users',
-          'nc_resource_count': 'resources',
-          'nc_project_count': 'projects'
-        };
-        return prettyNames[name];
-      },
-      save: function() {
-        var vm = this;
-        if (vm.user.email) {
-          vm.user.$update(
-            function() {
-              usersService.currentUser = null;
-              $state.go('dashboard.index');
-            },
-            function(error) {
-              vm.errors = error.data;
-            }
-          );
-        } else {
-          var errorText = 'This field is required';
-          vm.errors.email = [errorText];
-        }
-      }
-
-    });
-
-    controllerScope.__proto__ = new Controller();
-  }
-
-})();
-
-(function() {
-
-  angular.module('ncsaas')
-    .controller('InitialDataControllerDemo',
     ['usersService',
      'servicesService',
      'baseControllerClass',
      'currentStateService',
      'agreementsService',
-     'customersService',
      'joinService',
      '$q',
      '$state',
-     InitialDataControllerDemo]);
+     InitialDataController]);
 
-  function InitialDataControllerDemo(
+  function InitialDataController(
     usersService,
     servicesService,
     baseControllerClass,
     currentStateService,
     agreementsService,
-    customersService,
     joinService,
     $q,
     $state) {
@@ -191,7 +118,7 @@
           vm.user.errors = {email: 'This field is required'};
           return;
         }
-        function serviceSuccess(response) {
+        function serviceSuccess() {
           usersService.currentUser = null;
           $state.go('dashboard.index');
         }
@@ -204,7 +131,7 @@
             }
           }
         }
-        function userSuccess(argument) {
+        function userSuccess() {
           vm.customer.$update().then(function() {
             vm.saveServices().then(serviceSuccess, serviceError);
           });
