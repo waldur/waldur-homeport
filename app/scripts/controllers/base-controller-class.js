@@ -218,9 +218,10 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('baseControllerDetailUpdateClass', ['$state', 'baseControllerClass', '$stateParams', baseControllerDetailUpdateClass]);
+    .service('baseControllerDetailUpdateClass', ['$state', 'baseControllerClass', '$stateParams', '$q',
+      baseControllerDetailUpdateClass]);
 
-  function baseControllerDetailUpdateClass($state, baseControllerClass, $stateParams) {
+  function baseControllerDetailUpdateClass($state, baseControllerClass, $stateParams, $q) {
     /**
      * Use controllerScope.__proto__ = new Controller() in needed controller
      * use this.controllerScope for changes in event handler
@@ -240,15 +241,19 @@
       },
       update: function() {
         var vm = this;
+        var d = $q.defer();
         vm.beforeUpdate();
         vm.model.$update(success, error);
         function success() {
           vm.afterUpdate();
           vm.successRedirect();
+          d.resolve();
         }
         function error(response) {
           vm.errors = response.data;
+          d.reject(vm.errors);
         }
+        return d.promise;
       },
       activate: function() {
         var vm = this;

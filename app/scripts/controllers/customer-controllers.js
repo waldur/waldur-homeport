@@ -77,6 +77,8 @@
       'Flash',
       'ENV',
       '$stateParams',
+      '$rootScope',
+      '$q',
       CustomerDetailUpdateController
     ]);
 
@@ -87,7 +89,9 @@
     usersService,
     Flash,
     ENV,
-    $stateParams
+    $stateParams,
+    $rootScope,
+    $q
     ) {
     var controllerScope = this;
     var CustomerController = baseControllerDetailUpdateClass.extend({
@@ -201,9 +205,17 @@
           Flash.create('warning', 'Unable to delete image');
         });
       },
-
+      update: function(data) {
+        var d = $q.defer();
+        if (data) {
+          return this._super();
+        }
+        d.resolve('Name is empty!');
+        return d.promise;
+      },
       afterUpdate: function() {
         this.successFlash('Organization {} is updated'.replace('{}', controllerScope.model.name));
+        $rootScope.$broadcast('refreshCustomerList', {model: this.model, update: true});
       }
     });
 

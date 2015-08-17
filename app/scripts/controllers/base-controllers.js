@@ -31,6 +31,7 @@
         this.menuItemActive = currentStateService.getActiveItem($state.current.name);
         this.setSignalHandler('currentCustomerUpdated', this.currentCustomerUpdatedHandler.bind(controllerScope));
         this.setSignalHandler('refreshProjectList', this.refreshProjectListHandler.bind(controllerScope));
+        this.setSignalHandler('refreshCustomerList', this.refreshCustomerListHandler.bind(controllerScope));
         this._super();
       },
       activate: function() {
@@ -139,20 +140,26 @@
       refreshProjectListHandler: function(event, params) {
         var vm = this,
           projectUuids,
-          key,
+          currentProjectKey,
+          model;
+        if (params) {
           model = params.model;
-        projectUuids = vm.projects.map(function(obj) {
-          return obj.uuid;
-        });
-        key = projectUuids.indexOf(model.uuid);
-        if (key + 1) {
-          vm.projects[key].name = model.name;
+          projectUuids = vm.projects.map(function(obj) {
+            return obj.uuid;
+          });
+          currentProjectKey = projectUuids.indexOf(model.uuid);
+        } else {
+          vm.setFirstProject();
+          vm.getProjectList(true);
+        }
+        if (params && currentProjectKey + 1) {
+          vm.projects[currentProjectKey].name = model.name;
           if (vm.currentProject) {
             if (model.uuid == vm.currentProject.uuid) {
               if (params.update) {
                 vm.currentProject = model;
                 vm.setCurrentProject(model);
-                vm.projects[key] = model;
+                vm.projects[currentProjectKey] = model;
                 projectsService.cacheReset = true;
               } else {
                 vm.setFirstProject();
@@ -169,6 +176,47 @@
           }
         }
       },
+      refreshCustomerListHandler: function(event, params) {
+        var vm = this,
+          customerUuids,
+          key,
+          model = params.model;
+        customerUuids = vm.customers.map(function(obj) {
+          return obj.uuid;
+        });
+        key = customerUuids.indexOf(model.uuid);
+        if (key + 1) {
+          vm.customers[key].name = model.name;
+          if (vm.currentCustomer) {
+            if (model.uuid == vm.currentCustomer.uuid) {
+              if (params.update) {
+                vm.currentCustomer = model;
+                vm.setCurrentCustomer(model);
+                vm.customers[key] = model;
+                customersService.cacheReset = true;
+              } else {
+                vm.setFirstCustomer();
+                vm.refreshProjectListHandler();
+                vm.getCustomerList(true);
+              }
+            }
+          } else {
+            vm.getCustomerList(true);
+            currentStateService.getCustomer().then(function(currentCustomer) {
+              if (model.uuid == currentCustomer.uuid) {
+                vm.setFirstCustomer();
+                vm.refreshProjectListHandler();
+              }
+            });
+          }
+        }
+      },
+      setFirstCustomer: function() {
+        var vm = this;
+        customersService.getFirst().then(function(firstCustomer) {
+          vm.setCurrentCustomer(firstCustomer);
+        });
+      },
       getProjectList: function(cacheReset) {
         var vm = this,
           deferred = $q.defer();
@@ -179,6 +227,21 @@
         projectsService.getList().then(function(response) {
           vm.projects = response;
           projectMenu.stop();
+          deferred.resolve(response);
+        });
+
+        return deferred.promise;
+      },
+      getCustomerList: function(cacheReset) {
+        var vm = this,
+          deferred = $q.defer();
+        customersService.cacheTime = ENV.topMenuCustomerCacheTime;
+        customersService.cacheReset = cacheReset;
+        var customerMenu = blockUI.instances.get('customer-menu');
+        customerMenu.start();
+        customersService.getList().then(function(response) {
+          vm.customers = response;
+          customerMenu.stop();
           deferred.resolve(response);
         });
 
