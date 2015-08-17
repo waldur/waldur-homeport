@@ -1,7 +1,7 @@
  <div ng-controller="DashboardCostController as DashboardController">
      <div class="white-box empty-data-block" ng-show="DashboardController.table.length == 0">
          <h2>You have no resources yet</h2>
-         <a ui-sref="appstore.store" class="button">Add resource</a>
+         <a ui-sref="import.import" class="button">Import resources</a>
      </div>
      <div class="white-box big-chart" ng-if="DashboardController.table.length > 0">
         <canvas tc-chartjs chart-type="line" chart-data="DashboardController.costData" width="1120" height="180"></canvas>
