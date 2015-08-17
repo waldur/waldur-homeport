@@ -77,6 +77,8 @@
       'Flash',
       'ENV',
       '$stateParams',
+      '$rootScope',
+      '$q',
       CustomerDetailUpdateController
     ]);
 
@@ -87,7 +89,9 @@
     usersService,
     Flash,
     ENV,
-    $stateParams
+    $stateParams,
+    $rootScope,
+    $q
     ) {
     var controllerScope = this;
     var CustomerController = baseControllerDetailUpdateClass.extend({
@@ -134,7 +138,8 @@
             },
             {
               fieldKey: 'contact_details',
-              isEditable: true
+              isEditable: true,
+              className: 'details'
             }
           ],
           tabs: [
@@ -201,9 +206,18 @@
           Flash.create('warning', 'Unable to delete image');
         });
       },
-
+      update: function(data, fieldName) {
+        debugger;
+        var d = $q.defer();
+        if (data || fieldName != 'name') {
+          return this._super();
+        }
+        d.resolve('This field is required.');
+        return d.promise;
+      },
       afterUpdate: function() {
         this.successFlash('Organization {} is updated'.replace('{}', controllerScope.model.name));
+        $rootScope.$broadcast('refreshCustomerList', {model: this.model, update: true});
       }
     });
 
