@@ -44,7 +44,7 @@
                 <div class="icon-block">
                     <img ng-src="/static/images/appstore/icon-{{ service.name.toLowerCase() }}.png"/>
                     <span>{{ service.name }}</span>
-                    <span class="info">?</span>
+                    <a ui-sref="help.details({ name: service.name })" target="_blank" class="info">?</a>
                 </div>
                 <div ng-repeat="option in service.options" class="fields">
                     <label>{{ ::option.help_text||option.label }}</label>

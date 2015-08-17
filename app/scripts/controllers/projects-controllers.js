@@ -115,7 +115,7 @@
         }
       },
       afterInstanceRemove: function(instance) {
-        $rootScope.$broadcast('refresProjecthList', instance);
+        $rootScope.$broadcast('refreshProjectList', {model: instance});
         this._super(instance);
       },
       getUsersForProject: function(uuid, page) {
@@ -191,7 +191,7 @@
             projectCloudMembershipsService.addRow(vm.project.url, response[i].url);
           }
         });
-        $rootScope.$broadcast('refreshProjectList', vm.instance);
+        $rootScope.$broadcast('refreshProjectList', {model: vm.instance});
       },
       currentCustomerUpdatedHandler: function() {
         var vm = this;
@@ -216,11 +216,12 @@
       'baseControllerDetailUpdateClass',
       'resourcesCountService',
       '$q',
+      "$rootScope",
       ProjectDetailUpdateController
     ]);
 
   function ProjectDetailUpdateController($stateParams, projectsService, baseControllerDetailUpdateClass,
-                                         resourcesCountService, $q) {
+                                         resourcesCountService, $q, $rootScope) {
     var controllerScope = this;
     var Controller = baseControllerDetailUpdateClass.extend({
       activeTab: 'eventlog',
@@ -285,6 +286,9 @@
           vm.detailsViewOptions.tabs[2].count = responses[2];
           vm.detailsViewOptions.tabs[3].count = responses[3];
         });
+      },
+      afterUpdate: function() {
+        $rootScope.$broadcast('refreshProjectList', {model: this.model, update: true});
       }
     });
 
@@ -592,12 +596,15 @@
       '$q',
       'currentStateService',
       'resourcesCountService',
+      '$stateParams',
       ProjectStatsController]);
 
-    function ProjectStatsController($scope, $rootScope, $q, currentStateService, resourcesCountService) {
+    function ProjectStatsController($scope, $rootScope, $q, currentStateService, resourcesCountService, $stateParams) {
       $scope.search = function() {
         $rootScope.$broadcast('searchInputChanged', $scope.searchText);
-      }
+      };
+
+      $scope.activeTab = $stateParams.tab ? $stateParams.tab : 'VMs';
 
       setCurrentProject();
       $scope.$on('currentProjectUpdated', setCurrentProject);

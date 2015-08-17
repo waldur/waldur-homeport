@@ -2,7 +2,7 @@
 
     <div class="container">
         <div class="appstore-wrapper">
-            <div class="appstore-content">
+            <div class="appstore-content" block-ui="store-content">
                 <h1>Appstore</h1>
                 <section class="step-1">
                     <div class="step-title">
@@ -18,7 +18,9 @@
                                 <img ng-src="static/images/appstore/icon-{{ category.name.toLowerCase() }}.png" alt="">
                             </div>
                             <h3>{{ category.name }}</h3>
-                            <span>
+                            <span class="compare" stoppropagation
+                                  ng-click="AppStore.setCompare(category.name)"
+                                  ng-class="{'compare-active': (AppStore.compare.indexOf(category.name) + 1)}">
                                 Compare
                             </span>
                         </div>
@@ -33,8 +35,8 @@
                     </div>
                     <div class="appstore-templates" ng-if="AppStore.selectedCategory.type == 'provider'">
                         <!-- service -->
-                        <div class="appstore-template {{ service.toLowerCase() }}"
-                             ng-repeat="service in AppStore.selectedCategory.services"
+                        <div class="appstore-template {{ service.type.toLowerCase() }}"
+                             ng-repeat="service in AppStore.providers"
                              ng-click="AppStore.setService(service)"
                              ng-class="{'state': AppStore.selectedServiceName == service}">
                             <div class="icon">
@@ -91,6 +93,16 @@
                                 </ul>
                             </div>
                         </div>
+                        <div class="string-field"
+                             ng-repeat="(name, stringField) in AppStore.formOptions[AppStore.FIELD_TYPES.integer]">
+                            <label for="{{ name }}">{{ stringField.label }}</label>
+                            <input type="text" id="{{ name }}"  ng-model="AppStore.instance[name]"/>
+                            <div class="error arrow-up" ng-show="AppStore.errors[name]">
+                                <ul class="error-list">
+                                    <li ng-repeat="error in AppStore.errors[name]">{{ error }}</li>
+                                </ul>
+                            </div>
+                        </div>
                     </form>
                     <div class="operating-system">
 
@@ -113,24 +125,6 @@
                                             <img src="/static/images/appstore/icon-cloud.png" alt=""/>
                                         </div>
                                         <span>{{ choice.display_name }}</span>
-                                    </li>
-                                    <li class="active">
-                                        <div class="icon">
-                                            <img src="/static/images/appstore/icon-cloud.png" alt=""/>
-                                        </div>
-                                        <span>Selected</span>
-                                    </li>
-                                    <li>
-                                        <div class="icon">
-                                            <img src="/static/images/appstore/icon-cloud.png" alt=""/>
-                                        </div>
-                                        <span>{{ name }}</span>
-                                    </li>
-                                    <li>
-                                        <div class="icon">
-                                            <img src="/static/images/appstore/icon-cloud.png" alt=""/>
-                                        </div>
-                                        <span>{{ name }}</span>
                                     </li>
                                     <div class="clear"></div>
                                 </ul>
@@ -216,32 +210,28 @@
                 <h2>
                     checkout summary
                 </h2>
-                <p>Charged to <a href="#"> Helen Hokk</a></p>
+                <p>
+                    Charged to
+                    <a ui-sref="organizations.details({uuid: AppStore.currentCustomer.uuid})">{{ AppStore.currentCustomer.name }}</a>
+                </p>
 
                 <ul class="ap-aside-block">
-                    <li>
+                    <li ng-repeat="item in AppStore.priceItems">
                         <div class="descr">
-                            <span>Small VM</span>
-                            <span>Salalah Data Center</span>
+                            <span>{{ item.type }}</span>
+                            <span>{{ item.name }}</span>
                         </div>
 
-                        <div class="price">$0</div>
-                        <div class="clear"></div>
-                    </li>
-                    <li>
-                        <div class="descr">
-                            <span>Small VM</span>
-                            <span>Salalah Data Center</span>
-                        </div>
-                        <div class="price">$0</div>
+                        <div class="price">{{ item.price | currency:'$' }}</div>
                         <div class="clear"></div>
                     </li>
                     <li class="total">
                         <div class="descr">
-                            <span>Small VM</span>
-                            <span>Salalah Data Center</span>
+                            <span ng-show="AppStore.selectedServiceName">{{ AppStore.selectedServiceName }}</span>
+                            <span ng-show="!AppStore.selectedServiceName">No chosen provider</span>
+                            <span>{{ AppStore.instance.name }} {{ AppStore.selectedResourceType }}</span>
                         </div>
-                        <div class="price">$0</div>
+                        <div class="price">{{ AppStore.total | currency:'$' }}</div>
                         <div class="clear"></div>
                     </li>
                 </ul>

@@ -9,7 +9,7 @@
                     <div class="input-group">
                         <input type="search" placeholder="Search" ng-model="searchText" ng-change="search()"/>
                     </div>
-                    <ul class="tabs-links" ng-init="activeTab='VMs'">
+                    <ul class="tabs-links">
                         <li ng-click="activeTab='VMs'"
                             ng-class="{'active': activeTab=='VMs'}">VMs <span ng-if="count">(<span ng-bind="count.vms"></span>)</span></li>
 

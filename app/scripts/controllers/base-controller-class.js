@@ -15,6 +15,7 @@
       registerEventHandlers: function() {
         for (var eventName in this._signals) {
           $rootScope.$on(eventName, this._signals[eventName]);
+          delete this._signals[eventName];
         }
       },
       successFlash: function(message) {

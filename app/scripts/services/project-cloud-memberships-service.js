@@ -15,7 +15,7 @@
         var instance = this.$create();
         instance.project = project;
         instance.cloud = cloud;
-        instance.$save();
+        return instance.$save();
       }
     });
     return new ServiceClass();

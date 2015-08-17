@@ -31,6 +31,7 @@
         this.menuItemActive = currentStateService.getActiveItem($state.current.name);
         this.setSignalHandler('currentCustomerUpdated', this.currentCustomerUpdatedHandler.bind(controllerScope));
         this.setSignalHandler('refreshProjectList', this.refreshProjectListHandler.bind(controllerScope));
+        this.setSignalHandler('refreshCustomerList', this.refreshCustomerListHandler.bind(controllerScope));
         this._super();
       },
       activate: function() {
@@ -136,23 +137,83 @@
           vm.setCurrentProject(firstProject);
         });
       },
-      refreshProjectListHandler: function(event, model) {
+      refreshProjectListHandler: function(event, params) {
         var vm = this,
           projectUuids,
-          key;
-        projectUuids = vm.projects.map(function(obj) {
+          currentProjectKey,
+          model;
+        if (params) {
+          model = params.model;
+          projectUuids = vm.projects.map(function(obj) {
+            return obj.uuid;
+          });
+          currentProjectKey = projectUuids.indexOf(model.uuid);
+        } else {
+          vm.setFirstProject();
+          vm.getProjectList(true);
+        }
+        if (params && currentProjectKey + 1) {
+          vm.projects[currentProjectKey].name = model.name;
+          if (vm.currentProject) {
+            if (model.uuid == vm.currentProject.uuid) {
+              if (params.update) {
+                vm.currentProject = model;
+                vm.setCurrentProject(model);
+                vm.projects[currentProjectKey] = model;
+                projectsService.cacheReset = true;
+              } else {
+                vm.setFirstProject();
+                vm.getProjectList(true);
+              }
+            }
+          } else {
+            vm.getProjectList(true);
+            currentStateService.getProject().then(function(currentProject) {
+              if (model.uuid == currentProject.uuid) {
+                vm.setFirstProject();
+              }
+            });
+          }
+        }
+      },
+      refreshCustomerListHandler: function(event, params) {
+        var vm = this,
+          customerUuids,
+          key,
+          model = params.model;
+        customerUuids = vm.customers.map(function(obj) {
           return obj.uuid;
         });
-        key = projectUuids.indexOf(model.uuid);
-        vm.getProjectList(true);
+        key = customerUuids.indexOf(model.uuid);
         if (key + 1) {
-          currentStateService.getProject().then(function(currentProject) {
-            vm.projects.splice(key, 1);
-            if (model.uuid == currentProject.uuid) {
-              vm.setFirstProject();
+          vm.customers[key].name = model.name;
+          if (vm.currentCustomer) {
+            if (model.uuid == vm.currentCustomer.uuid) {
+              if (params.update) {
+                vm.currentCustomer = model;
+                vm.setCurrentCustomer(model);
+                vm.customers[key] = model;
+                customersService.cacheReset = true;
+              } else {
+                vm.setFirstCustomer();
+                vm.getCustomerList(true);
+              }
             }
-          });
+          } else {
+            vm.getCustomerList(true);
+            currentStateService.getCustomer().then(function(currentCustomer) {
+              if (model.uuid == currentCustomer.uuid) {
+                vm.setFirstCustomer();
+              }
+            });
+          }
         }
+      },
+      setFirstCustomer: function() {
+        var vm = this;
+        customersService.getFirst().then(function(firstCustomer) {
+          vm.setCurrentCustomer(firstCustomer);
+        });
       },
       getProjectList: function(cacheReset) {
         var vm = this,
@@ -164,6 +225,21 @@
         projectsService.getList().then(function(response) {
           vm.projects = response;
           projectMenu.stop();
+          deferred.resolve(response);
+        });
+
+        return deferred.promise;
+      },
+      getCustomerList: function(cacheReset) {
+        var vm = this,
+          deferred = $q.defer();
+        customersService.cacheTime = ENV.topMenuCustomerCacheTime;
+        customersService.cacheReset = cacheReset;
+        var customerMenu = blockUI.instances.get('customer-menu');
+        customerMenu.start();
+        customersService.getList().then(function(response) {
+          vm.customers = response;
+          customerMenu.stop();
           deferred.resolve(response);
         });
 

@@ -655,7 +655,7 @@
         })
 
         .state('resources.list', {
-          url: '',
+          url: ':tab',
           views: {
             'appContent': {
               templateUrl: 'views/resource/list.html',
@@ -921,6 +921,41 @@
           views: {
             'appContent': {
               templateUrl: 'views/backup/restore.html',
+            },
+            'appHeader': {
+              templateUrl: 'views/partials/app-header.html',
+            }
+          },
+          resolve: {
+            authenticated: authCheck
+          },
+          auth: true
+        })
+        .state('help', {
+          url: '/help/',
+          abstract: true,
+          templateUrl: 'views/partials/base.html',
+        })
+        .state('help.list', {
+          url: '',
+          views: {
+            'appContent': {
+              templateUrl: 'views/help/list.html',
+            },
+            'appHeader': {
+              templateUrl: 'views/partials/app-header.html',
+            }
+          },
+          resolve: {
+            authenticated: authCheck
+          },
+          auth: true
+        })
+        .state('help.details', {
+          url: ':name/',
+          views: {
+            'appContent': {
+              templateUrl: 'views/help/details.html',
             },
             'appHeader': {
               templateUrl: 'views/partials/app-header.html',

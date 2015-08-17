@@ -48,9 +48,9 @@
           var instance = digitalOceanServiceProjectLinkService.$create();
           instance.project = project.url;
           instance.service = service.url;
-          instance.$save();
+          return instance.$save();
         } else {
-          projectCloudMembershipsService.addRow(project.url, service.url);
+          return projectCloudMembershipsService.addRow(project.url, service.url);
         }
       }
     });

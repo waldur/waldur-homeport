@@ -65,6 +65,20 @@ angular.module('ncsaas')
       }
     ],
     IntercomAppId: 'xfbbcxck',
-    defaultListCacheTime: 60 * 10
+    defaultListCacheTime: 60 * 10,
+    helpList: [
+      {
+        name: 'Azure',
+        link: 'https://msdn.microsoft.com/en-us/library/azure/gg551722.aspx'
+      },
+      {
+        name: 'AWS',
+        link: 'http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSGettingStartedGuide/AWSCredentials.html'
+      },
+      {
+        name: 'DigitalOcean',
+        link: 'https://www.digitalocean.com/community/tutorials/how-to-use-the-digitalocean-api-v2'
+      }
+    ]
 
   });
