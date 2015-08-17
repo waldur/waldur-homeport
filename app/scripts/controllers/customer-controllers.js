@@ -138,7 +138,8 @@
             },
             {
               fieldKey: 'contact_details',
-              isEditable: true
+              isEditable: true,
+              className: 'details'
             }
           ],
           tabs: [
@@ -205,12 +206,13 @@
           Flash.create('warning', 'Unable to delete image');
         });
       },
-      update: function(data) {
+      update: function(data, fieldName) {
+        debugger;
         var d = $q.defer();
-        if (data) {
+        if (data || fieldName != 'name') {
           return this._super();
         }
-        d.resolve('Name is empty!');
+        d.resolve('This field is required.');
         return d.promise;
       },
       afterUpdate: function() {

@@ -196,7 +196,6 @@
                 customersService.cacheReset = true;
               } else {
                 vm.setFirstCustomer();
-                vm.refreshProjectListHandler();
                 vm.getCustomerList(true);
               }
             }
@@ -205,7 +204,6 @@
             currentStateService.getCustomer().then(function(currentCustomer) {
               if (model.uuid == currentCustomer.uuid) {
                 vm.setFirstCustomer();
-                vm.refreshProjectListHandler();
               }
             });
           }
