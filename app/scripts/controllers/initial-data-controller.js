@@ -122,7 +122,6 @@
         var vm = this;
         servicesService.getServicesOptions().then(function(service_options) {
           vm.service_options = service_options;
-          console.log(service_options)
         });
       },
       getCustomer: function() {
@@ -149,6 +148,7 @@
           return;
         }
         var service = this.service_options[this.chosenService];
+        service.saved = false;
         if (!(this.chosenServices.lastIndexOf(service) + 1)) {
           this.addService(service);
         }
@@ -161,10 +161,15 @@
       },
       saveServices: function() {
         var vm = this;
-        var promises = this.chosenServices.map(function(service){
+        var unsavedServices = this.chosenServices.filter(function(service) {
+          return !service.saved;
+        });
+        var promises = unsavedServices.map(function(service) {
           service.non_field_errors = {};
           var options = vm.prepareServiceOptions(service);
-          return joinService.createService(service.url, options);
+          return joinService.createService(service.url, options).then(function() {
+            service.saved = true;
+          });
         });
         return $q.all(promises);
       },
@@ -183,24 +188,31 @@
       save: function() {
         var vm = this;
         if (!vm.user.email) {
-          var errorText = 'This field is required';
-          vm.errors.email = [errorText];
+          vm.user.errors = {email: 'This field is required'};
           return;
         }
-        vm.user.$update().then(function(){
-          vm.customer.$update().then(function(){
-            vm.saveServices().then(function(responses){
-              usersService.currentUser = null;
-              $state.go('dashboard.index');
-            }, function(response){
-              for (var i = 0; i < vm.chosenServices.length; i++) {
-                if (vm.chosenServices[i].name == response.config.data.name) {
-                  vm.chosenServices[i].non_field_errors = response.data.non_field_errors;
-                }
-              }
-            })
-          })
-        })
+        function serviceSuccess(response) {
+          usersService.currentUser = null;
+          $state.go('dashboard.index');
+        }
+        function serviceError(response) {
+          for (var i = 0; i < vm.chosenServices.length; i++) {
+            var serviceName = response.config.data.name;
+            var service = vm.chosenServices[i];
+            if (service.name == serviceName) {
+              service.errors = response.data;
+            }
+          }
+        }
+        function userSuccess(argument) {
+          vm.customer.$update().then(function() {
+            vm.saveServices().then(serviceSuccess, serviceError);
+          });
+        }
+        function userError(response) {
+          vm.user.errors = response.data;
+        }
+        vm.user.$update().then(userSuccess, userError);
       }
     });
 
