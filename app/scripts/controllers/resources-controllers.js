@@ -297,27 +297,33 @@
 (function() {
   angular.module('ncsaas')
     .controller('ResourceBackupListTabController', [
-        '$scope',
-        'BaseBackupListController',
-        ResourceBackupListTabController
+      'currentStateService',
+      'BaseBackupListController',
+      '$stateParams',
+      ResourceBackupListTabController
       ]);
 
-    function ResourceBackupListTabController($scope, BaseBackupListController) {
-        var controllerScope = this;
-        var Controller = BaseBackupListController.extend({
-          init:function() {
-            this.controllerScope = controllerScope;
-            this._super();
-          },
-          getList: function(filter) {
-            var vm = this;
-            var fn = this._super;
-            $scope.$on('resourceLoaded', function(event, resource){
-              vm.service.defaultFilter.backup_source = resource.url;
-              fn.apply(vm, filter);
-            })
+    function ResourceBackupListTabController(currentStateService, BaseBackupListController, $stateParams) {
+      var controllerScope = this;
+      var Controller = BaseBackupListController.extend({
+        init:function() {
+          this.controllerScope = controllerScope;
+          this._super();
+        },
+        getList: function(filter) {
+          var vm = this;
+          if ($stateParams.uuid) {
+            this.service.defaultFilter.project_uuid = $stateParams.uuid;
+            this._super(filter);
+          } else {
+            var fn = this._super.bind(controllerScope);
+            currentStateService.getProject().then(function(response) {
+              vm.service.defaultFilter.project_uuid = response.uuid;
+              fn(filter);
+            });
           }
-        });
+        }
+      });
 
       controllerScope.__proto__ = new Controller();
   }

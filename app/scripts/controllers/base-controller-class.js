@@ -276,7 +276,9 @@
         }
       },
       successRedirect: function() {
-        $state.go(this.detailsState, {uuid: this.model.uuid});
+        if (this.detailsState) {
+          $state.go(this.detailsState, {uuid: this.model.uuid});
+        }
       },
       beforeUpdate: function() {},
       afterUpdate: function() {},
