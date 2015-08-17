@@ -1,9 +1,16 @@
  <div ng-controller="DashboardCostController as DashboardController">
-     <div class="white-box big-chart">
-        <canvas tc-chartjs chart-type="line" chart-data="DashboardController.costData" width="1120" height="180"></canvas>
+     <div class="white-box empty-data-block" ng-show="DashboardController.table.length == 0">
+         <h1>Not enough data for cost analysis</h1>
+         <h2>Please import resources or add more providers</h2>
+         <a ui-sref="import.import" class="button">Import resources</a>
+         <a ui-sref="services.create" class="button">Add providers</a>
+
+     </div>
+     <div class="white-box big-chart" ng-if="DashboardController.table.length > 0">
+        <canvas tc-chartjs chart-type="line" chart-options="DashboardController.chartOptions" chart-data="DashboardController.costData" width="1120" height="180"></canvas>
         <div class="clear"></div>
     </div>
-    <div class="white-box">
+    <div class="white-box" ng-if="DashboardController.table.length > 0">
         <div class="table-block" ng-repeat="row in DashboardController.table">
             <div class="title" ng-click="tabOpened = !tabOpened; activeTab='services'">
                 <ul class="sort-list">

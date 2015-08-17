@@ -197,10 +197,16 @@
         var totals = [];
         rows.forEach(function(row) {
           if (row.scope_type == 'customer') {
-            labels.push(moment(row.month, 'MM').format('MMMM'));
-            totals.push(row.total);
+            labels.unshift(moment(row.month, 'MM').format('MMMM'));
+            totals.unshift(row.total);
           }
         });
+
+      this.chartOptions = {
+          bezierCurve: false,
+          responsive: true,
+          animationEasing: "linear"
+        };
 
         this.costData = {
           labels: labels,
