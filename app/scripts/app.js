@@ -944,6 +944,41 @@
             authenticated: authCheck
           },
           auth: true
+        })
+        .state('help', {
+          url: '/help/',
+          abstract: true,
+          templateUrl: 'views/partials/base.html',
+        })
+        .state('help.list', {
+          url: '',
+          views: {
+            'appContent': {
+              templateUrl: 'views/help/list.html',
+            },
+            'appHeader': {
+              templateUrl: 'views/partials/app-header.html',
+            }
+          },
+          resolve: {
+            authenticated: authCheck
+          },
+          auth: true
+        })
+        .state('help.details', {
+          url: ':name/',
+          views: {
+            'appContent': {
+              templateUrl: 'views/help/details.html',
+            },
+            'appHeader': {
+              templateUrl: 'views/partials/app-header.html',
+            }
+          },
+          resolve: {
+            authenticated: authCheck
+          },
+          auth: true
         });
 
       function authCheck($q, $location, $auth, usersService) {

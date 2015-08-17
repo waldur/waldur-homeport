@@ -1,0 +1,24 @@
+<div ng-controller="HelpListController as HelpList">
+    <div class="container">
+        <h1>Instructions</h1>
+    </div>
+
+    <div class="white-box list-box">
+        <ul class="object-list">
+            <li class="list-item list-header">
+                <div class="additional-cell display-for-mobile">
+                    <a class="list-sort">Name</a>
+                </div>
+            </li>
+            <li class="list-item" ng-repeat="item in HelpList.list">
+                <div class="additional-cell display-for-mobile">
+                    <h3 class="item-title">
+                        <a ui-sref="help.details({name: item.name})" stoppropagation>
+                            {{ item.name }}
+                        </a>
+                    </h3>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

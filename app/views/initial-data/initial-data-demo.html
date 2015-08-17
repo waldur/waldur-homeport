@@ -43,7 +43,7 @@
                 <div class="icon-block">
                     <img src="/static/images/appstore/icon-aws.png" alt=""/>
                     <span>AWS EC2</span>
-                    <span class="info">?</span>
+                    <a ui-sref="help.details({name: 'AWS'})" target="_blank"  class="info">?</a>
                 </div>
                 <div class="fields">
                     <label>AWS User code</label>
@@ -58,7 +58,7 @@
                 <div class="icon-block">
                     <img src="/static/images/appstore/icon-DigitalOcean.png" alt=""/>
                     <span>DigitalOcean</span>
-                    <span class="info">?</span>
+                    <a ui-sref="help.details({name: 'DigitalOcean'})" target="_blank"  class="info">?</a>
                 </div>
                 <div class="fields">
                     <label>DigitalOcean Token</label>
@@ -71,7 +71,7 @@
                 <div class="icon-block">
                     <img ng-src="/static/images/appstore/icon-{{ service.toLowerCase() }}.png"/>
                     <span>{{ service }}</span>
-                    <span class="info">?</span>
+                    <a ui-sref="help.details({name: service})" target="_blank" class="info">?</a>
                 </div>
                 <div class="fields">
                     <label>{{ service }} Token</label>
