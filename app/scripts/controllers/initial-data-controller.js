@@ -49,6 +49,8 @@
         var vm = this;
         servicesService.getServicesOptions().then(function(service_options) {
           vm.service_options = service_options;
+          vm.addChosenService('Amazon');
+          vm.addChosenService('DigitalOcean');
         });
       },
       getCustomer: function() {
@@ -67,18 +69,20 @@
       getPrettyQuotaName: function(name, count) {
         return name.replace(/nc_|_count/gi,'') + (count > 1 ? 's' : '');
       },
-      addService: function(service) {
-        this.chosenServices.push(service);
-      },
-      addChosenService: function() {
-        if (!this.chosenService) {
+      addChosenService: function(name) {
+        if (!name) {
+          name = this.chosenService;
+        }
+        if (!name) {
           return;
         }
-        var service = this.service_options[this.chosenService];
-        service.saved = false;
-        if (!(this.chosenServices.lastIndexOf(service) + 1)) {
-          this.addService(service);
+        var service = this.service_options[name];
+        if (!service) {
+          return;
         }
+        service.saved = false;
+        service.id = this.chosenServices.length;
+        this.chosenServices.push(angular.copy(service));
       },
       removeService: function(service) {
         var index = this.chosenServices.lastIndexOf(service);
@@ -89,13 +93,14 @@
       saveServices: function() {
         var vm = this;
         var unsavedServices = this.chosenServices.filter(function(service) {
+          service.errors = {};
           return !service.saved;
         });
         var promises = unsavedServices.map(function(service) {
-          service.non_field_errors = {};
           var options = vm.prepareServiceOptions(service);
           return joinService.createService(service.url, options).then(function() {
             service.saved = true;
+            service.errors = {};
           });
         });
         return $q.all(promises);
@@ -109,6 +114,7 @@
           }
           result['customer'] = this.customer.url;
           result['name'] = service.name;
+          result['id'] = service.id;
         }
         return result;
       },
@@ -124,9 +130,8 @@
         }
         function serviceError(response) {
           for (var i = 0; i < vm.chosenServices.length; i++) {
-            var serviceName = response.config.data.name;
             var service = vm.chosenServices[i];
-            if (service.name == serviceName) {
+            if (service.id == response.config.data.id) {
               service.errors = response.data;
             }
           }

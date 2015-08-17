@@ -30,6 +30,7 @@
       },
 
       getServicesOptions: function() {
+        // Collect parameters required for creating new services
         var vm = this,
           deferred = $q.defer();
 
@@ -38,7 +39,7 @@
         } else {
           vm.service_options = {};
           var blacklist = ['customer', 'customer_name', 'customer_native_name', 'dummy',
-                           'name', 'projects', 'settings', 'url', 'username', 'uuid'];
+                           'name', 'projects', 'settings', 'url', 'uuid'];
 
           vm.getServicesList().then(function(services) {
             var promises = [];
