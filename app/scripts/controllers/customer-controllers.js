@@ -79,6 +79,7 @@
       '$stateParams',
       '$rootScope',
       '$q',
+      'resourcesCountService',
       CustomerDetailUpdateController
     ]);
 
@@ -91,7 +92,8 @@
     ENV,
     $stateParams,
     $rootScope,
-    $q
+    $q,
+    resourcesCountService
     ) {
     var controllerScope = this;
     var CustomerController = baseControllerDetailUpdateClass.extend({
@@ -134,12 +136,14 @@
             {
               fieldKey: 'name',
               isEditable: true,
-              className: 'name'
+              className: 'name',
+              emptyText: 'Add name'
             },
             {
               fieldKey: 'contact_details',
               isEditable: true,
-              className: 'details'
+              className: 'details',
+              emptyText: 'Add contact details'
             }
           ],
           tabs: [
@@ -172,8 +176,19 @@
       },
 
       afterActivate: function() {
+        var vm = this;
         controllerScope.canEdit = controllerScope.isOwnerOrStaff(controllerScope.model);
         controllerScope.updateImageUrl();
+        $q.all([
+          resourcesCountService.resources({'customer': vm.model.uuid}),
+          resourcesCountService.projects({'customer': vm.model.uuid}),
+          resourcesCountService.digitalocean({'customer': vm.model.uuid}),
+          resourcesCountService.clouds({'customer': vm.model.uuid})
+        ]).then(function(responses) {
+          vm.detailsViewOptions.tabs[0].count = responses[0];
+          vm.detailsViewOptions.tabs[1].count = responses[1];
+          vm.detailsViewOptions.tabs[2].count = responses[2] + responses[3];
+        });
       },
 
       updateImageUrl: function() {

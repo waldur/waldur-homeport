@@ -239,7 +239,7 @@
         this.detailsViewOptions = {
           title: 'Project',
           activeTab: $stateParams.tab ? $stateParams.tab : this.activeTab,
-          listState: 'projects.list',
+          listState: $stateParams.uuid ? 'projects.list' : null,
           aboutFields: [
             {
               fieldKey: 'name',

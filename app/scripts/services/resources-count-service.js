@@ -24,7 +24,10 @@
       'users': factory('project-permissions'),
       'alerts': factory('alerts'),
       'events': factory('events'),
-      'projectCloud': factory('project-cloud-memberships')
+      'projectCloud': factory('project-cloud-memberships'),
+      'projects': factory('projects'),
+      'digitalocean': factory('digitalocean'),
+      'clouds': factory('clouds')
     }
   }
 })();
