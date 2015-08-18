@@ -27,7 +27,7 @@
                         <span class="customer-name">{{ Header.currentCustomer.name }}</span>
                     </a>
                     <ul class="nav-sublist" ng-show="Header.menuState.customerMenu">
-                        <li ng-repeat="customer in Header.customers">
+                        <li ng-repeat="customer in Header.customers" ng-if="customer.uuid != Header.currentCustomer.uuid">
                             <a ng-click="Header.setCurrentCustomer(customer)"
                                ng-class="{'current': customer.uuid == Header.currentCustomer.uuid}">{{ customer.name }}</a>
                         </li>
@@ -43,7 +43,7 @@
                         <span class="customer-name">{{ Header.currentProject.name ? Header.currentProject.name : 'No project' }}</span>
                     </a>
                     <ul block-ui="project-menu" class="nav-sublist" ng-show="Header.menuState.projectMenu">
-                        <li ng-repeat="project in Header.projects">
+                        <li ng-repeat="project in Header.projects" ng-if="project.uuid != Header.currentProject.uuid">
                             <a ng-click="Header.setCurrentProject(project)"
                                ng-class="{'current': project.uuid == Header.currentProject.uuid}">
                                 <span>{{ project.name }}</span>
