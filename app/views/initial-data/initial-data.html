@@ -48,8 +48,13 @@
                 </div>
                 <div ng-repeat="option in service.options" class="fields">
                     <label>{{ ::option.help_text||option.label }}</label>
-                    <input ng-model="option.value" type="text" ng-if="!service.saved"/>
-                    <input ng-model="option.value" type="text" disabled ng-if="service.saved"/>
+                    <input ng-model="option.value" type="text" ng-if="!option.choices && !service.saved"/>
+                    <input ng-model="option.value" type="text" disabled ng-if="!option.choices && service.saved"/>
+                    <select ng-if="option.choices"
+                            ng-model="option.value"
+                            ng-init="option.value=option.choices[0].value"
+                            ng-options="item.value as item.display_name for item in option.choices">
+                    </select>
                     <div ng-repeat="error in service.errors[option.key]" ng-bind="error"></div>
                 </div>
                 <div ng-if="service.saved" class="fields">

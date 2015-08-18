@@ -39,7 +39,7 @@
         } else {
           vm.service_options = {};
           var blacklist = ['customer', 'customer_name', 'customer_native_name', 'dummy',
-                           'name', 'projects', 'settings', 'url', 'uuid'];
+                           'name', 'projects', 'settings', 'url', 'uuid', 'cpu_overcommit_ratio'];
 
           vm.getServicesList().then(function(services) {
             var promises = [];
@@ -59,11 +59,15 @@
                 for(var key in options) {
                   var option = options[key];
                   if (!option.read_only && blacklist.indexOf(key) == -1) {
-                    vm.service_options[name].options.push({
+                    var item = {
                       key: key,
                       label: option.label,
                       help_text: option.help_text
-                    });
+                    };
+                    if (option.choices) {
+                      item.choices = option.choices;
+                    }
+                    vm.service_options[name].options.push(item);
                   }
                 }
               }

@@ -135,6 +135,10 @@
   .fields {
     float: right;
     width: 226px;
+
+    select {
+      background-color: white;
+    }
   }
   .fields-block {
     padding: 20px;

@@ -72,7 +72,7 @@ angular.module('ncsaas')
         link: 'https://msdn.microsoft.com/en-us/library/azure/gg551722.aspx'
       },
       {
-        name: 'AWS',
+        name: 'Amazon',
         link: 'http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSGettingStartedGuide/AWSCredentials.html'
       },
       {
