@@ -55,12 +55,9 @@
   }
 
   .table-block {
-    margin-bottom: 20px;
-    &:not(:first-child) {
-      margin-top: 50px;
-    }
+    margin-bottom: 0;
     .title {
-      padding: 16px;
+      padding: 10px 16px 4px;
       &:hover {
         background-color: $expandable-hover;
       }
