@@ -79,6 +79,18 @@ angular.module('ncsaas')
         name: 'DigitalOcean',
         link: 'https://www.digitalocean.com/community/tutorials/how-to-use-the-digitalocean-api-v2'
       }
-    ]
+    ],
+    toBeFeatures: [
+      'openStackPrivateCloud',
+      'appstore',
+      'pricelistsCompare',
+      'prePaid',
+      'support',
+      'monitoring',
+      'users',
+      'backups',
+      'services'
+    ],
+    featuresVisible: false
 
   });
