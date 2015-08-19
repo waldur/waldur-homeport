@@ -981,23 +981,27 @@
           auth: true
         });
 
-      function authCheck($q, $location, $auth, usersService) {
+      function authCheck($q, $location, $auth, usersService, ENV) {
         var deferred = $q.defer();
         var vm = this;
         if (!$auth.isAuthenticated()) {
           // can't use $state because its will throw recursion error
           $location.path('/login/');
         } else {
-          if (vm.self.name !== initialDataState) {
-            usersService.getCurrentUser().then(function(response) {
-              if (!response.full_name || !response.email) {
-                $location.path(initialDataStatePath);
-              } else {
-                deferred.resolve();
-              }
-            });
+          if (!ENV.featuresVisible && ENV.toBeFeatures.indexOf(vm.url.prefix.replace(/\//g, '')) !== -1) {
+            $location.path('/error/404/');
           } else {
-            deferred.resolve();
+            if (vm.self.name !== initialDataState) {
+              usersService.getCurrentUser().then(function(response) {
+                if (!response.full_name || !response.email) {
+                  $location.path(initialDataStatePath);
+                } else {
+                  deferred.resolve();
+                }
+              });
+            } else {
+              deferred.resolve();
+            }
           }
         }
 

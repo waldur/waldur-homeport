@@ -17,9 +17,11 @@
                             ng-class="{'active': activeTab=='Applications'}">Applications <span ng-if="count">(<span ng-bind="count.apps"></span>)</span></li>
 
                         <li ng-click="activeTab='Backups'"
+                            visible="backups"
                             ng-class="{'active': activeTab=='Backups'}">Backups <span ng-if="count">(<span ng-bind="count.backups"></span>)</span></li>
 
                         <li ng-click="activeTab='People'"
+                            visible="users"
                             ng-class="{'active': activeTab=='People'}">People <span ng-if="count">(<span ng-bind="count.users"></span>)</span></li>
 
                         <li ng-click="activeTab='Providers'"
