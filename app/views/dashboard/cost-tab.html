@@ -10,35 +10,36 @@
         <canvas tc-chartjs chart-type="line" chart-options="DashboardController.chartOptions" chart-data="DashboardController.costData" width="1120" height="180"></canvas>
         <div class="clear"></div>
     </div>
-    <div class="white-box" ng-if="DashboardController.table.length > 0">
+    <div class="white-box table-list" ng-if="DashboardController.table.length > 0">
         <div class="table-block" ng-repeat="row in DashboardController.table">
-            <div class="title" ng-click="tabOpened = !tabOpened; activeTab='services'">
+            <div class="title" ng-click="row.selected = !row.selected; row.activeTab='services'"
+                 ng-class="{'active': row.selected}">
                 <ul class="sort-list">
                     <li>
                         <span class="month" ng-bind="::row.date"></span>
                     </li>
                     <li>
                         <div class="icon"></div>
-                        <a stoppropagation ng-click="tabOpened=true; activeTab='services'" ng-class="{'active': tabOpened && activeTab=='services'}">Services (<span ng-bind="::row.services.length"></span>)</a>
+                        <a stoppropagation ng-click="row.selected=true; row.activeTab='services'" ng-class="{'active': row.selected && row.activeTab=='services'}">Services (<span ng-bind="::row.services.length"></span>)</a>
                     </li>
                     <li>
                         <div class="icon"></div>
-                        <a stoppropagation ng-click="tabOpened=true; activeTab='projects'" ng-class="{'active': tabOpened && activeTab=='projects'}">Projects (<span ng-bind="::row.projects.length"></span>)</a>
+                        <a stoppropagation ng-click="row.selected=true; row.activeTab='projects'" ng-class="{'active': row.selected && row.activeTab=='projects'}">Projects (<span ng-bind="::row.projects.length"></span>)</a>
                     </li>
                     <li>
                         <div class="icon"></div>
-                        <a stoppropagation ng-click="tabOpened=true; activeTab='resources'" ng-class="{'active': tabOpened && activeTab=='resources'}">Resources (<span ng-bind="::row.resources.length"></span>)</a>
+                        <a stoppropagation ng-click="row.selected=true; row.activeTab='resources'" ng-class="{'active': row.selected && row.activeTab=='resources'}">Resources (<span ng-bind="::row.resources.length"></span>)</a>
                     </li>
                 </ul>
                 <div class="total-cost">
                     <span class="table-alert"></span>
                     <span class="cost">Total cost {{ row.total }}</span>
-                    <div class="icon" ng-class="{'opened-icon': tabOpened}"></div>
+                    <div class="icon" ng-class="{'opened-icon': row.selected}"></div>
                 </div>
                 <div class="clear"></div>
             </div>
-            <div ng-if="tabOpened">
-                <div class="table services" ng-show="activeTab=='projects'">
+            <div ng-if="row.selected">
+                <div class="table services" ng-show="row.activeTab=='projects'">
                     <div class="tr th">
                         <div class="td service-name display-for-mobile"><span>Project name</span></div>
                         <div class="td service-name"><span>Cost</span></div>
@@ -48,7 +49,7 @@
                         <div class="td service-name"><span ng-bind="::service.total"></span></div>
                     </div>
                 </div>
-                <div class="table services" ng-show="activeTab=='services'">
+                <div class="table services" ng-show="row.activeTab=='services'">
                     <div class="tr th">
                         <div class="td service-name display-for-mobile"><span>Service name</span></div>
                         <div class="td service-name"><span>Cost</span></div>
@@ -58,7 +59,7 @@
                         <div class="td service-name"><span ng-bind="::service.total"></span></div>
                     </div>
                 </div>
-                <div class="table services" ng-show="activeTab=='resources'">
+                <div class="table services" ng-show="row.activeTab=='resources'">
                     <div class="tr th">
                         <div class="td service-name display-for-mobile"><span>Resource name</span></div>
                         <div class="td service-name"><span>Cost</span></div>

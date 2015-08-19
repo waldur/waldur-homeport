@@ -264,6 +264,10 @@
             resources: row.resources
           });
         }
+        if (table.length > 0) {
+          table[0].selected = true;
+          table[0].activeTab = 'services';
+        }
         this.table = table;
       }
     });
