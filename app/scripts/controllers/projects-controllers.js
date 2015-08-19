@@ -161,12 +161,16 @@
 
   angular.module('ncsaas')
     .controller('ProjectAddController', ['projectsService', 'currentStateService',
-      'cloudsService', 'projectCloudMembershipsService', 'baseControllerAddClass', '$rootScope', ProjectAddController]);
+      'cloudsService', 'projectCloudMembershipsService', 'baseControllerAddClass',
+      '$rootScope', 'projectPermissionsService', 'usersService', ProjectAddController]);
 
   function ProjectAddController(
-    projectsService, currentStateService, cloudsService, projectCloudMembershipsService, baseControllerAddClass, $rootScope) {
+    projectsService, currentStateService, cloudsService, projectCloudMembershipsService, baseControllerAddClass,
+    $rootScope, projectPermissionsService, usersService) {
     var controllerScope = this;
     var ProjectController = baseControllerAddClass.extend({
+      userRole: 'admin',
+      user: {},
       init: function() {
         this.service = projectsService;
         this.controllerScope = controllerScope;
@@ -182,6 +186,9 @@
         currentStateService.getCustomer().then(function(customer) {
           vm.project.customer = customer.url;
         });
+        usersService.getCurrentUser().then(function(user) {
+          vm.user = user;
+        });
       },
       afterSave: function() {
         var vm = this;
@@ -190,6 +197,7 @@
             projectCloudMembershipsService.addRow(vm.project.url, response[i].url);
           }
         });
+        vm.addUser();
         $rootScope.$broadcast('refreshProjectList', {model: vm.instance, new: true});
       },
       currentCustomerUpdatedHandler: function() {
@@ -202,6 +210,14 @@
             vm.project.description = '';
           }
         }
+      },
+      addUser: function() {
+        var vm = this;
+        var instance = projectPermissionsService.$create();
+        instance.user = vm.user.url;
+        instance.project = vm.project.url;
+        instance.role = vm.userRole;
+        instance.$save();
       }
     });
 
