@@ -24,7 +24,7 @@
             title: 'Remove'
           },
           {
-            title: 'Add service',
+            title: 'Add provider',
             state: 'services.create'
           }
         ];
@@ -158,7 +158,7 @@
               viewName: 'tabProjects'
             },
             {
-              title: 'Services',
+              title: 'Providers',
               key: 'services',
               viewName: 'tabServices'
             }
@@ -294,14 +294,14 @@
 
         this.entityOptions = {
           entityData: {
-            noDataText: 'You have no services yet.'
+            noDataText: 'You have no providers yet.'
           },
           list: [
             {
               name: 'Name',
               propertyName: 'name',
               type: ENTITYLISTFIELDTYPES.name,
-              link: 'services.details({uuid: entity.uuid})',
+              link: 'services.details({uuid: entity.uuid, provider: entity.provider})',
               showForMobile: ENTITYLISTFIELDTYPES.showForMobile
             },
             {
