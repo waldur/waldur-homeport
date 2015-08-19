@@ -4,11 +4,11 @@
   angular.module('ncsaas')
     .controller('PlansListController',
       ['baseControllerListClass', 'plansService', 'customersService', 'usersService', 'customerPermissionsService',
-       'planCustomersService', 'ordersService', '$stateParams', '$state', PlansListController]);
+       'agreementsService', '$stateParams', '$state', PlansListController]);
 
   function PlansListController(
       baseControllerListClass, plansService, customersService, usersService, customerPermissionsService,
-      planCustomersService, ordersService, $stateParams, $state) {
+      agreementsService, $stateParams, $state) {
     var controllerScope = this;
     var Controller = baseControllerListClass.extend({
       init:function() {
@@ -20,7 +20,7 @@
 
       initCurrentPlan: function(customer) {
         var vm = this;
-        planCustomersService.getList({customer: customer.uuid}).then(function(planCustomers) {
+        agreementsService.getList({customer: customer.uuid}).then(function(planCustomers) {
           if (planCustomers.length !== 0) {
             vm.currentPlan = planCustomers[0].plan;
           }
@@ -88,7 +88,7 @@
 
       createOrder: function() {
         var vm = this,
-          order = ordersService.$create();
+          order = agreementsService.$create();
         if (vm.selectedPlan !== null) {
           order.plan = vm.selectedPlan.url;
           order.customer = vm.customer.url;

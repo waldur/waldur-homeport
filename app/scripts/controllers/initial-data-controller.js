@@ -1,85 +1,28 @@
 'use strict';
 
 (function() {
+
   angular.module('ncsaas')
     .controller('InitialDataController',
-      ['usersService', 'planCustomersService', 'currentStateService', '$state',
-        'baseControllerClass', InitialDataController]);
+    ['usersService',
+     'servicesService',
+     'baseControllerClass',
+     'currentStateService',
+     'agreementsService',
+     'joinService',
+     '$q',
+     '$state',
+     InitialDataController]);
 
   function InitialDataController(
-    usersService, planCustomersService, currentStateService, $state, baseControllerClass) {
-    /*jshint camelcase: false */
-    var controllerScope = this;
-    var Controller = baseControllerClass.extend({
-      user: null,
-      errors: {},
-      plan: {},
-
-      init: function() {
-        this._super();
-        this.activate();
-      },
-      activate: function() {
-        var vm = this;
-        usersService.getCurrentUser().then(function(response) {
-          vm.user = response;
-          if (response.email) {
-            $state.go('dashboard.index');
-          }
-        });
-
-        currentStateService.getCustomer().then(function(customer) {
-          planCustomersService.getList({customer: customer.uuid}).then(function(planCustomers) {
-            if (planCustomers.length !== 0) {
-              vm.plan = planCustomers[0].plan;
-            }
-          });
-        });
-      },
-      // XXX: This is quick fix, we need to get display names from backend, but currently quotas on backend do not
-      // have display names
-      getPrettyQuotaName: function(name) {
-        var prettyNames = {
-          'nc_user_count': 'users',
-          'nc_resource_count': 'resources',
-          'nc_project_count': 'projects'
-        };
-        return prettyNames[name];
-      },
-      save: function() {
-        var vm = this;
-        if (vm.user.email) {
-          vm.user.$update(
-            function() {
-              usersService.currentUser = null;
-              $state.go('dashboard.index');
-            },
-            function(error) {
-              vm.errors = error.data;
-            }
-          );
-        } else {
-          var errorText = 'This field is required';
-          vm.errors.email = [errorText];
-        }
-      }
-
-    });
-
-    controllerScope.__proto__ = new Controller();
-  }
-
-})();
-
-(function() {
-
-  angular.module('ncsaas')
-    .controller('InitialDataControllerDemo',
-    ['usersService', 'servicesService', 'baseControllerClass', 'currentStateService',
-      'planCustomersService', InitialDataControllerDemo]);
-
-  function InitialDataControllerDemo(
-    usersService, servicesService, baseControllerClass, currentStateService, planCustomersService) {
+    usersService,
+    servicesService,
+    baseControllerClass,
+    currentStateService,
+    agreementsService,
+    joinService,
+    $q,
+    $state) {
     var controllerScope = this;
     var Controller = baseControllerClass.extend({
       user: {},
@@ -92,17 +35,31 @@
         this.activate();
       },
       activate: function() {
+        this.getUser();
+        this.getServices();
+        this.getCustomer();
+      },
+      getUser: function() {
         var vm = this;
         usersService.getCurrentUser().then(function(response) {
           vm.user = response;
         });
-        servicesService.getServicesList().then(function(response) {
-          vm.services = response;
+      },
+      getServices: function() {
+        var vm = this;
+        servicesService.getServicesOptions().then(function(service_options) {
+          vm.service_options = service_options;
+          vm.addChosenService('Amazon');
+          vm.addChosenService('DigitalOcean');
         });
+      },
+      getCustomer: function() {
+        var vm = this;
         currentStateService.getCustomer().then(function(customer) {
-          planCustomersService.getList({customer: customer.uuid}).then(function(planCustomers) {
-            if (planCustomers.length !== 0) {
-              vm.plan = planCustomers[0].plan;
+          vm.customer = customer;
+          agreementsService.getList({customer: customer.uuid}).then(function(agreements) {
+            if (agreements.length !== 0) {
+              vm.agreement = agreements[0];
             }
           });
         });
@@ -112,17 +69,74 @@
       getPrettyQuotaName: function(name, count) {
         return name.replace(/nc_|_count/gi,'') + (count > 1 ? 's' : '');
       },
-
-      addService: function() {
-        if (this.chosenService && !(this.chosenServices.lastIndexOf(this.chosenService) + 1)) {
-          this.chosenServices.push(this.chosenService);
+      addChosenService: function(name) {
+        if (!name) {
+          name = this.chosenService;
         }
+        if (!name) {
+          return;
+        }
+        var service = this.service_options[name];
+        if (!service) {
+          return;
+        }
+        service.saved = false;
+        this.chosenServices.push(angular.copy(service));
       },
       removeService: function(service) {
         var index = this.chosenServices.lastIndexOf(service);
         if (index + 1) {
           this.chosenServices.splice(index, 1);
         }
+      },
+      saveServices: function() {
+        var vm = this;
+        var unsavedServices = this.chosenServices.filter(function(service) {
+          service.errors = {};
+          return !service.saved;
+        });
+        var promises = unsavedServices.map(function(service) {
+          var options = vm.prepareServiceOptions(service);
+
+          return joinService.createService(service.url, options).success(function() {
+            service.saved = true;
+            service.errors = {};
+          }).error(function(errors) {
+            service.errors = errors;
+          });
+        });
+        return $q.all(promises);
+      },
+      prepareServiceOptions: function(service){
+        var result = {};
+        for (var i = 0; i < service.options.length; i++) {
+          var option = service.options[i];
+          if (option.value) {
+            result[option.key] = option.value;
+          }
+          result['customer'] = this.customer.url;
+          result['name'] = service.name;
+        }
+        return result;
+      },
+      saveUser: function() {
+        var vm = this;
+        return vm.user.$update(function() {
+          console.log('User has been saved');
+        }, function(response) {
+          vm.user.errors = response.data;
+        });
+      },
+      save: function() {
+        var vm = this;
+        if (!vm.user.email) {
+          vm.user.errors = {email: 'This field is required'};
+          return;
+        }
+        $q.all([vm.saveUser(), vm.customer.$update(), vm.saveServices()]).then(function() {
+          usersService.currentUser = null;
+          $state.go('dashboard.index');
+        });
       }
     });
 
