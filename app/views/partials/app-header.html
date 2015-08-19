@@ -83,7 +83,7 @@
                     </a>
                     <ul class="nav-sublist" ng-show="Header.menuState.addSomethingMenu">
                         <li visible="services">
-                            <a ui-sref="services.create" class="service">Add service</a>
+                            <a ui-sref="services.create" class="service">Add provider</a>
                         </li>
                         <li visible="projects">
                             <a ui-sref="projects.create" class="project">Add project</a>
@@ -95,7 +95,7 @@
                             <a href="" class="user">Invite user</a>
                         </li>
                         <li visible="import" ng-if="::Header.showImport">
-                            <a ui-sref="import.import" class="import">Import resources from service</a>
+                            <a ui-sref="import.import" class="import">Import resources from provider</a>
                         </li>
                     </ul>
                 </li>
@@ -109,7 +109,7 @@
                     </a>
                     <ul class="nav-sublist user-area" ng-show="Header.menuState.profileMenu">
                         <li visible="services" class="on-tablet">
-                            <a ui-sref="services.create" class="service">Add service</a>
+                            <a ui-sref="services.create" class="service">Add provider</a>
                         </li>
                         <li visible="projects" class="on-tablet">
                             <a ui-sref="projects.create" class="project">Add project</a>
@@ -121,13 +121,13 @@
                             <a href="" class="user">Invite user</a>
                         </li>
                         <li visible="import" ng-if="::Header.showImport" class="on-tablet">
-                            <a ui-sref="import.import" class="import">Import resources from service</a>
+                            <a ui-sref="import.import" class="import">Import resources from provider</a>
                         </li>
                         <li visible="support" class="on-tablet">
                             <a ui-sref="support.list">Support</a>
                         </li>
                         <li>
-                            <a ui-sref="profile.details" class="">Profile</a>
+                            <a ui-sref="profile.details">Profile</a>
                         </li>
                         <li>
                             <a ng-click="logout()">Logout</a>
@@ -185,7 +185,7 @@
                     </a>
                     <ul class="nav-sublist-side" ng-show="Header.menuState.addSomethingMenu">
                         <li visible="services">
-                            <a ui-sref="services.create" class="service">Add service</a>
+                            <a ui-sref="services.create" class="service">Add provider</a>
                         </li>
                         <li visible="projects">
                             <a ui-sref="projects.create" class="project">Add project</a>
@@ -197,7 +197,7 @@
                             <a visible="users" href="" class="user">Invite user</a>
                         </li>
                         <li visible="import" ng-if="::Header.showImport">
-                            <a ui-sref="import.import" class="import">Import resources from service</a>
+                            <a ui-sref="import.import" class="import">Import resources from provider</a>
                         </li>
                     </ul>
                 </li>
@@ -215,7 +215,7 @@
                     </a>
                     <ul class="nav-sublist-side user-area" ng-show="Header.menuState.profileMenu">
                         <li visible="services" class="on-tablet">
-                            <a ui-sref="services.create" class="service">Add service</a>
+                            <a ui-sref="services.create" class="service">Add provider</a>
                         </li>
                         <li visible="projects" class="on-tablet">
                             <a ui-sref="projects.create" class="project">Add project</a>
