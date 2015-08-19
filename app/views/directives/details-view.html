@@ -47,7 +47,7 @@
                           ng-show="field.isEditable && controller.canEdit"
                           class="{{ field.className }}"
                           title="Click to edit">
-                        {{ controller.model[field.fieldKey] }}
+                        {{ controller.model[field.fieldKey] || field.emptyText }}
                     </span>
                     <div class="icon" ng-click="rowform.$show()" ng-hide="rowform.$visible"></div>
                     <div class="clear"></div>

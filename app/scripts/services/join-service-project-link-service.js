@@ -23,6 +23,7 @@
   ) {
     var ServiceClass = baseServiceClass.extend({
       getList: function(params) {
+        var vm = this;
         if (params.service) {
           if (params.service.url.indexOf('digitalocean') > -1) {
             var deferred = $q.defer();
@@ -34,8 +35,12 @@
           } else {
             return projectCloudMembershipsService.getList({cloud: params.service.uuid});
           }
-        } else if (params.project_uuid) {
-          var vm = this;
+        } else if (this.defaultFilter.project_uuid) {
+          return projectsService.$get(this.defaultFilter.project_uuid).then(function(project) {
+            vm.list = project.services;
+            return vm.list;
+          });
+        } else {
           return currentStateService.getProject().then(function(project) {
             vm.list = project.services;
             return vm.list;

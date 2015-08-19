@@ -43,7 +43,7 @@
               name: 'Name',
               propertyName: 'name',
               type: ENTITYLISTFIELDTYPES.name,
-              link: 'projects.details({uuid: entity.uuid})',
+              link: 'resources.details({uuid: entity.uuid})',
               showForMobile: ENTITYLISTFIELDTYPES.showForMobile
             },
             {
@@ -232,11 +232,12 @@
       'resourcesCountService',
       '$q',
       "$rootScope",
+      'currentStateService',
       ProjectDetailUpdateController
     ]);
 
   function ProjectDetailUpdateController($stateParams, projectsService, baseControllerDetailUpdateClass,
-                                         resourcesCountService, $q, $rootScope) {
+                                         resourcesCountService, $q, $rootScope, currentStateService) {
     var controllerScope = this;
     var Controller = baseControllerDetailUpdateClass.extend({
       activeTab: 'eventlog',
@@ -246,12 +247,14 @@
       init:function() {
         this.service = projectsService;
         this.controllerScope = controllerScope;
+        if (!$stateParams.uuid) {
+          this.setSignalHandler('currentProjectUpdated', this.activate.bind(controllerScope));
+        }
         this._super();
-        this.detailsState = 'projects.details';
         this.detailsViewOptions = {
           title: 'Project',
           activeTab: $stateParams.tab ? $stateParams.tab : this.activeTab,
-          listState: 'projects.list',
+          listState: $stateParams.uuid ? 'projects.list' : null,
           aboutFields: [
             {
               fieldKey: 'name',
@@ -267,21 +270,33 @@
               count: 0
             },
             {
-              title: 'Resources',
-              key: 'resources',
+              title: 'VMs',
+              key: 'VMs',
               viewName: 'tabResources',
               count: 0
             },
             {
-              title: 'Users',
-              key: 'users',
+              title: 'Applications',
+              key: 'applications',
+              viewName: 'tabApplications',
+              count: 0
+            },
+            {
+              title: 'Backups',
+              key: 'backups',
+              viewName: 'tabBackups',
+              count: 0
+            },
+            {
+              title: 'People',
+              key: 'people',
               viewName: 'tabUsers',
               count: 0
             },
             {
-              title: 'Services',
-              key: 'services',
-              viewName: 'tabServices',
+              title: 'Providers',
+              key: 'providers',
+              viewName: 'tabProviders',
               count: 0
             }
           ]
@@ -292,18 +307,28 @@
         vm.canEdit = vm.model;
         $q.all([
           resourcesCountService.events({'scope': vm.model.url}),
-          resourcesCountService.resources({'project_uuid': vm.model.uuid}),
-          resourcesCountService.users({'project': vm.model.uuid}),
-          resourcesCountService.projectCloud({'project': vm.model.uuid})
+          resourcesCountService.resources({'project_uuid': vm.model.uuid, 'resource_type': ['DigitalOcean.Droplet', 'IaaS.Instance']}),
+          resourcesCountService.resources({'project_uuid': vm.model.uuid, 'resource_type': ['Oracle.Database', 'GitLab.Project']}),
+          resourcesCountService.backups({'project_uuid': vm.model.uuid}),
+          resourcesCountService.users({'project': vm.model.uuid})
         ]).then(function(responses) {
           vm.detailsViewOptions.tabs[0].count = responses[0];
           vm.detailsViewOptions.tabs[1].count = responses[1];
           vm.detailsViewOptions.tabs[2].count = responses[2];
           vm.detailsViewOptions.tabs[3].count = responses[3];
+          vm.detailsViewOptions.tabs[4].count = responses[4];
+          vm.detailsViewOptions.tabs[5].count = vm.model.services.length;
         });
       },
       afterUpdate: function() {
         $rootScope.$broadcast('refreshProjectList', {model: this.model, update: true});
+      },
+      getModel: function() {
+        if ($stateParams.uuid) {
+          return this.service.$get($stateParams.uuid);
+        } else {
+          return currentStateService.getProject();
+        }
       }
     });
 
@@ -321,11 +346,13 @@
       'USERPROJECTROLE',
       'usersService',
       'baseControllerClass',
+      'currentStateService',
       ProjectUsersTabController
     ]);
 
   function ProjectUsersTabController(
-    $stateParams, projectsService, projectPermissionsService, USERPROJECTROLE, usersService, baseControllerClass) {
+    $stateParams, projectsService, projectPermissionsService, USERPROJECTROLE, usersService, baseControllerClass,
+    currentStateService) {
     var controllerScope = this;
     var Controller = baseControllerClass.extend({
       users: {}, // users with role in project
@@ -334,6 +361,7 @@
       project: null,
 
       init: function() {
+        this.setSignalHandler('currentProjectUpdated', this.activate.bind(controllerScope));
         this._super();
         this.adminRole = USERPROJECTROLE.admin;
         this.managerRole = USERPROJECTROLE.manager;
@@ -343,16 +371,24 @@
       },
       activate: function() {
         var vm = this;
-        if (this.users[this.adminRole].length === 0) {
-          this.getUsersForProject(this.adminRole);
+
+        if ($stateParams.uuid) {
+          projectsService.$get($stateParams.uuid).then(function(response) {
+            vm.project = response;
+            vm.getUsers();
+          });
+        } else {
+          currentStateService.getProject().then(function(response) {
+            vm.project = response;
+            vm.getUsers();
+          });
         }
-        if (this.users[this.managerRole].length === 0) {
-          this.getUsersForProject(this.managerRole);
-        }
-        projectsService.$get($stateParams.uuid).then(function(response) {
-          vm.project = response;
-        });
+
         this.getUserListForAutoComplete();
+      },
+      getUsers: function() {
+        this.getUsersForProject(this.adminRole);
+        this.getUsersForProject(this.managerRole);
       },
       getUserListForAutoComplete: function(filter) {
         var vm = this;
@@ -366,7 +402,7 @@
         var vm = this;
         var filter = {
           role: role,
-          project: $stateParams.uuid
+          project: vm.project.uuid
         };
         projectPermissionsService.getList(filter).then(function(response) {
           vm.users[role] = response;
@@ -427,22 +463,23 @@
   angular.module('ncsaas')
     .controller('ProjectResourcesTabController', [
       '$stateParams',
-      'baseResourceListController',
+      'BaseProjectResourcesTabController',
       'resourcesService',
+      'currentStateService',
       ProjectResourcesTabController
     ]);
 
   function ProjectResourcesTabController(
     $stateParams,
-    baseResourceListController,
-    resourcesService
+    BaseProjectResourcesTabController,
+    resourcesService,
+    currentStateService
     ) {
     var controllerScope = this;
-    var ResourceController = baseResourceListController.extend({
+    var ResourceController = BaseProjectResourcesTabController.extend({
       init:function() {
         this.service = resourcesService;
         this.controllerScope = controllerScope;
-        this.service.defaultFilter.project_uuid = $stateParams.uuid;
         this.searchFilters = [
           {
             name: 'resource_type',
@@ -460,7 +497,25 @@
             value: 'Amazon.EC2'
           }
         ];
-        this._super();
+        if ($stateParams.uuid) {
+          this.service.defaultFilter.project_uuid = $stateParams.uuid;
+          this._super();
+        } else {
+          var fn = this._super.bind(this);
+          var vm = this;
+          this.setSignalHandler('currentProjectUpdated', this.currentProjectUpdate.bind(controllerScope));
+          currentStateService.getProject().then(function(response) {
+            vm.service.defaultFilter.project_uuid = response.uuid;
+            fn();
+          });
+        }
+      },
+      currentProjectUpdate: function() {
+        var vm = this;
+        currentStateService.getProject().then(function(response) {
+          vm.service.defaultFilter.project_uuid = response.uuid;
+          vm.getList();
+        });
       }
     });
 
@@ -475,16 +530,20 @@
       '$stateParams',
       'projectsService',
       'baseEventListController',
+      'currentStateService',
       ProjectEventTabController
     ]);
 
-  function ProjectEventTabController($stateParams, projectsService, baseEventListController) {
+  function ProjectEventTabController($stateParams, projectsService, baseEventListController, currentStateService) {
     var controllerScope = this;
     var EventController = baseEventListController.extend({
       project: null,
 
       init: function() {
         this.controllerScope = controllerScope;
+        if (!$stateParams.uuid) {
+          this.setSignalHandler('currentProjectUpdated', this.getProject.bind(controllerScope));
+        }
         this._super();
         this.getProject();
       },
@@ -498,10 +557,17 @@
       },
       getProject: function() {
         var vm = this;
-        projectsService.$get($stateParams.uuid).then(function (response) {
-          vm.project = response;
-          vm.getList();
-        });
+        if ($stateParams.uuid) {
+          projectsService.$get($stateParams.uuid).then(function(response) {
+            vm.project = response;
+            vm.getList();
+          });
+        } else {
+          currentStateService.getProject().then(function(response) {
+            vm.project = response;
+            vm.getList();
+          });
+        }
       }
     });
 
@@ -976,6 +1042,8 @@ angular.module('ncsaas')
       'ENTITYLISTFIELDTYPES',
       'ENV',
       '$scope',
+      '$stateParams',
+      'projectsService',
       ProjectServicesTabController]);
 
   function ProjectServicesTabController(
@@ -984,14 +1052,16 @@ angular.module('ncsaas')
     currentStateService,
     ENTITYLISTFIELDTYPES,
     ENV,
-    $scope) {
+    $scope,
+    $stateParams,
+    projectsService) {
     var controllerScope = this;
     var ServiceController = baseControllerListClass.extend({
       init: function() {
         this.service = joinServiceProjectLinkService;
         this.controllerScope = controllerScope;
+        this.setSignalHandler('currentProjectUpdated', this.setCurrentProject.bind(controllerScope));
         this._super();
-
         this.entityOptions = {
           entityData: {
             noDataText: 'No providers yet',
@@ -1020,11 +1090,8 @@ angular.module('ncsaas')
           ]
         };
 
-        $scope.$on('currentProjectUpdated', this.setCurrentProject.bind(this));
         $scope.$on('searchInputChanged', this.onSearchInputChanged.bind(this));
       },
-
-      registerEventHandlers: function() {},
 
       setCurrentProject: function() {
         this.getList();
@@ -1032,13 +1099,18 @@ angular.module('ncsaas')
 
       getList: function(filter) {
         var vm = this;
-        var fn = this._super.bind(vm);
-        filter = filter || {};
-        return currentStateService.getProject().then(function(project){
-          filter['project_uuid'] = project.uuid;
-          vm.service.defaultFilter.project_uuid = project.uuid;
-          fn(filter);
-        })
+        var fn = this._super.bind(controllerScope);
+        if ($stateParams.uuid) {
+          return projectsService.$get($stateParams.uuid).then(function(project) {
+            vm.service.defaultFilter.project_uuid = project.uuid;
+            fn(filter);
+          });
+        } else {
+          return currentStateService.getProject().then(function(project) {
+            vm.service.defaultFilter.project_uuid = project.uuid;
+            fn(filter);
+          });
+        }
       },
 
       onSearchInputChanged: function(event, searchInput) {

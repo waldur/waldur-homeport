@@ -2,6 +2,7 @@
   position: absolute;
   right: 10px;
   top: 21px;
+  z-index: 1;
   .icon-button {
     &:before {
       content: "\f021";
