@@ -917,6 +917,7 @@ angular.module('ncsaas')
         instance.$save(
           function() {
             vm.getUsersForProject(role);
+            projectsService.clearCacheOfNextRequest();
           },
           function(response) {
             alert(response.data.non_field_errors);
@@ -932,6 +933,7 @@ angular.module('ncsaas')
           projectPermissionsService.$delete(userProject.pk).then(
             function() {
               vm.users[role].splice(index, 1);
+              projectsService.clearCacheOfNextRequest();
             },
             function(response) {
               alert(response.data.detail);
