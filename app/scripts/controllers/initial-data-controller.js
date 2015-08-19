@@ -81,7 +81,6 @@
           return;
         }
         service.saved = false;
-        service.id = this.chosenServices.length;
         this.chosenServices.push(angular.copy(service));
       },
       removeService: function(service) {
@@ -98,9 +97,12 @@
         });
         var promises = unsavedServices.map(function(service) {
           var options = vm.prepareServiceOptions(service);
-          return joinService.createService(service.url, options).then(function() {
+
+          return joinService.createService(service.url, options).success(function() {
             service.saved = true;
             service.errors = {};
+          }).error(function(errors) {
+            service.errors = errors;
           });
         });
         return $q.all(promises);
@@ -114,9 +116,16 @@
           }
           result['customer'] = this.customer.url;
           result['name'] = service.name;
-          result['id'] = service.id;
         }
         return result;
+      },
+      saveUser: function() {
+        var vm = this;
+        return vm.user.$update(function() {
+          console.log('User has been saved');
+        }, function(response) {
+          vm.user.errors = response.data;
+        });
       },
       save: function() {
         var vm = this;
@@ -124,27 +133,10 @@
           vm.user.errors = {email: 'This field is required'};
           return;
         }
-        function serviceSuccess() {
+        $q.all([vm.saveUser(), vm.customer.$update(), vm.saveServices()]).then(function() {
           usersService.currentUser = null;
           $state.go('dashboard.index');
-        }
-        function serviceError(response) {
-          for (var i = 0; i < vm.chosenServices.length; i++) {
-            var service = vm.chosenServices[i];
-            if (service.id == response.config.data.id) {
-              service.errors = response.data;
-            }
-          }
-        }
-        function userSuccess() {
-          vm.customer.$update().then(function() {
-            vm.saveServices().then(serviceSuccess, serviceError);
-          });
-        }
-        function userError(response) {
-          vm.user.errors = response.data;
-        }
-        vm.user.$update().then(userSuccess, userError);
+        });
       }
     });
 
