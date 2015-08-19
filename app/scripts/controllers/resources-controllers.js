@@ -67,6 +67,10 @@
             }
           ]
         };
+        if (!ENV.featuresVisible && ENV.toBeFeatures.indexOf('appstore') !== -1) {
+          delete this.entityOptions.entityData.createLink;
+          delete this.entityOptions.entityData.createLinkText;
+        }
       },
       stopResource:function(resource) {
         resource.$action('stop', this.reInitResource.bind(this, resource), this.handleActionException);

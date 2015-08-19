@@ -148,32 +148,30 @@
             return obj.uuid;
           });
           currentProjectKey = projectUuids.indexOf(model.uuid);
+          if (params.update) {
+            if (currentProjectKey + 1) {
+              vm.projects[currentProjectKey] = model;
+            }
+            if (model.uuid == vm.currentProject.uuid) {
+              vm.currentProject = model;
+              vm.setCurrentProject(model);
+            }
+          }
+          if (params.new) {
+            vm.projects.push(model);
+          }
+          if (params.remove) {
+            if (currentProjectKey + 1) {
+              vm.projects.splice(currentProjectKey, 1);
+            }
+            if (model.uuid == vm.currentProject.uuid) {
+              vm.setFirstProject();
+            }
+          }
+          projectsService.cacheReset = true;
         } else {
           vm.setFirstProject();
           vm.getProjectList(true);
-        }
-        if (params && currentProjectKey + 1) {
-          vm.projects[currentProjectKey].name = model.name;
-          if (vm.currentProject) {
-            if (model.uuid == vm.currentProject.uuid) {
-              if (params.update) {
-                vm.currentProject = model;
-                vm.setCurrentProject(model);
-                vm.projects[currentProjectKey] = model;
-                projectsService.cacheReset = true;
-              } else {
-                vm.setFirstProject();
-                vm.getProjectList(true);
-              }
-            }
-          } else {
-            vm.getProjectList(true);
-            currentStateService.getProject().then(function(currentProject) {
-              if (model.uuid == currentProject.uuid) {
-                vm.setFirstProject();
-              }
-            });
-          }
         }
       },
       refreshCustomerListHandler: function(event, params) {
