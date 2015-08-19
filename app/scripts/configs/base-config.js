@@ -88,8 +88,7 @@ angular.module('ncsaas')
       'support',
       'monitoring',
       'users',
-      'backups',
-      'services'
+      'backups'
     ],
     featuresVisible: false
 

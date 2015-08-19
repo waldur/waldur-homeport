@@ -94,7 +94,7 @@
                         <li visible="users">
                             <a href="" class="user">Invite user</a>
                         </li>
-                        <li visible="import" ng-show="Header.showImport">
+                        <li visible="import" ng-if="::Header.showImport">
                             <a ui-sref="import.import" class="import">Import resources from service</a>
                         </li>
                     </ul>
@@ -108,23 +108,23 @@
                         <span class="user-name">{{ Header.currentUser.full_name }}</span>
                     </a>
                     <ul class="nav-sublist user-area" ng-show="Header.menuState.profileMenu">
-                        <li class="on-tablet">
+                        <li visible="services" class="on-tablet">
                             <a ui-sref="services.create" class="service">Add service</a>
                         </li>
-                        <li class="on-tablet">
+                        <li visible="projects" class="on-tablet">
                             <a ui-sref="projects.create" class="project">Add project</a>
                         </li>
-                        <li class="on-tablet">
+                        <li visible="keys" class="on-tablet">
                             <a ui-sref="keys.create" class="ssh-key">Add SSH key</a>
                         </li>
-                        <li class="on-tablet">
+                        <li visible="users" class="on-tablet">
                             <a href="" class="user">Invite user</a>
                         </li>
-                        <li class="on-tablet" ng-show="Header.showImport">
+                        <li visible="import" ng-if="::Header.showImport" class="on-tablet">
                             <a ui-sref="import.import" class="import">Import resources from service</a>
                         </li>
-                        <li class="on-tablet">
-                            <a href="#">Support</a>
+                        <li visible="support" class="on-tablet">
+                            <a ui-sref="support.list">Support</a>
                         </li>
                         <li>
                             <a ui-sref="profile.details" class="">Profile</a>
@@ -139,11 +139,11 @@
                        ng-class="{'active': Header.menuItemActive === 'support'}"></a>
                 </li>
                 <li class="dropdown" ng-show="Header.LANGUAGE_CHOICES.length>1" ng-click="Header.menuToggle('langMenu', $event)">
-                    <a href="#" class="lang" title="{{ Header.currentLanguage.label }}">{{ Header.currentLanguage.code | uppercase }}</a>
+                    <a class="lang" title="{{ Header.currentLanguage.label }}">{{ Header.currentLanguage.code | uppercase }}</a>
                     <ul class="nav-sublist lang" ng-show="Header.menuState.langMenu">
                         <li ng-repeat="language in Header.LANGUAGE_CHOICES"
                             ng-click="Header.changeLanguage(language)">
-                            <a href="#" ng-class="{'current': language.code==Header.currentLanguage.code}">{{ language.label}}</a>
+                            <a ng-class="{'current': language.code==Header.currentLanguage.code}">{{ language.label}}</a>
                         </li>
                     </ul>
                 </li>
@@ -194,16 +194,16 @@
                             <a ui-sref="resources.create" class="resource">Add resource</a>
                         </li>
                         <li visible="users">
-                            <a href="" class="user">Invite user</a>
+                            <a visible="users" href="" class="user">Invite user</a>
                         </li>
-                        <li visible="import" ng-show="Header.showImport">
+                        <li visible="import" ng-if="::Header.showImport">
                             <a ui-sref="import.import" class="import">Import resources from service</a>
                         </li>
                     </ul>
                 </li>
                 <li visible="support">
                     <a ui-sref="users.list"
-                        ng-class="{'active': Header.menuItemActive === 'suppot'}" class="support">Support</a>
+                        ng-class="{'active': Header.menuItemActive === 'support'}" class="support">Support</a>
                 </li>
                 <li class="dropdown">
                     <a href="" class="user-area drop-active" ng-click="Header.menuToggle('profileMenu', $event)"
@@ -214,27 +214,27 @@
                         <span class="user-name">{{ Header.currentUser.full_name }}</span>
                     </a>
                     <ul class="nav-sublist-side user-area" ng-show="Header.menuState.profileMenu">
-                        <li class="on-tablet">
+                        <li visible="services" class="on-tablet">
                             <a ui-sref="services.create" class="service">Add service</a>
                         </li>
-                        <li class="on-tablet">
+                        <li visible="projects" class="on-tablet">
                             <a ui-sref="projects.create" class="project">Add project</a>
                         </li>
-                        <li class="on-tablet">
+                        <li visible="resources" class="on-tablet">
                             <a ui-sref="resources.create" class="resource">Add resource</a>
                         </li>
                         <li class="divider on-tablet"></li>
-                        <li class="on-tablet" ng-repeat="customer in Header.customers">
+                        <li visible="customers" class="on-tablet" ng-repeat="customer in Header.customers">
                             <a ng-click="Header.setCurrentCustomer(customer)"
                                 ng-class="{'current': customer.uuid == Header.currentCustomer.uuid}">{{ customer.name }}</a>
                         </li>
                         <li class="divider on-tablet"></li>
-                        <li class="on-tablet">
+                        <li visible="customers" class="on-tablet">
                             <a ui-sref="organizations.list" class="manage">Manage organizations</a>
                         </li>
                         <li class="divider on-tablet"></li>
                         <li>
-                            <a ui-sref="profile" class="">Profile</a>
+                            <a ui-sref="profile">Profile</a>
                         </li>
                         <li>
                             <a ng-click="logout()">Logout</a>
