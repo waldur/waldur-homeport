@@ -87,93 +87,114 @@
 (function() {
   angular.module('ncsaas')
     .controller('ServiceAddController', [
-      'cloudsService',
-      'digitalOceanService',
+      'servicesService',
       'joinServiceProjectLinkService',
+      'joinService',
       'currentStateService',
       'projectsService',
-      'baseControllerAddClass',
+      'baseControllerClass',
       '$q',
+      '$state',
       '$rootScope',
       ServiceAddController]);
 
   function ServiceAddController(
-    cloudsService,
-    digitalOceanService,
+    servicesService,
     joinServiceProjectLinkService,
+    joinService,
     currentStateService,
     projectsService,
-    baseControllerAddClass,
+    baseControllerClass,
     $q,
+    $state,
     $rootScope) {
     var controllerScope = this;
-    var ServiceController = baseControllerAddClass.extend({
+    var ServiceController = baseControllerClass.extend({
       init: function() {
-        this.service = cloudsService;
         this.controllerScope = controllerScope;
         this.setSignalHandler('currentCustomerUpdated', this.activate.bind(this));
         this._super();
-        this.listState = 'services.list';
-        this.selectedService = this.serviceList[0];
+        this.activate();
       },
-      serviceList: [
+      categories: [
         {
-          icon: '/static/images/icons/icon_openstack_small.png',
-          name: 'OpenStack',
-          id: 'openstack',
-          service: cloudsService
+          name: 'Virtual machines',
+          services: ['Amazon', 'Azure', 'DigitalOcean', 'OpenStack'],
         },
         {
-          icon: '/static/images/icons/icon_digitalocean_small.png',
-          name: 'Digital Ocean',
-          id: 'digitalocean',
-          service: digitalOceanService
-        },
-        {
-          icon: '/static/images/icons/icon_aws_small.png',
-          name: 'AWS',
-          id: 'aws',
-          service: null
+          name: 'Applications',
+          services: ['Oracle', 'GitLab']
         }
       ],
-      setService: function(choice) {
-        this.selectedService = choice;
-        var instance = choice.service.$create();
-        instance.customer = this.instance.customer;
-        instance.auth_url = this.instance.auth_url;
-        instance.token = this.instance.token;
-        this.instance = instance;
+      setService: function(service) {
+        this.service = service;
+        this.service.serviceName = service.name;
+      },
+      setCategory: function(category) {
+        this.category = category;
+        this.categoryServices = [];
+        for (var i = 0; i < category.services.length; i++) {
+          var name = category.services[i];
+          var service = this.services[name];
+          this.categoryServices.push(service);
+        }
+        this.setService(this.categoryServices[0]);
       },
       activate: function() {
         var vm = this;
         currentStateService.getCustomer().then(function(customer) {
-          vm.instance.customer = customer.url;
+          vm.customer = customer;
         });
-        /*jshint camelcase: false */
-        if (vm.instance.auth_url || vm.instance.name || vm.instance.token) {
-          if (confirm('Clean all fields?')) {
-            vm.instance.auth_url = '';
-            vm.instance.name = '';
-            vm.instance.token = '';
-          }
-        }
+        servicesService.getServicesOptions().then(function(services) {
+          vm.services = services;
+          vm.setCategory(vm.categories[0]);
+        });
       },
 
-      afterSave: function() {
+      save: function() {
         var vm = this;
-        projectsService.getList().then(function(response) {
+        this.createService(vm.service).then(function() {
+          vm.flashMessage('info', 'Provider has been created');
+          $state.go('services.list');
+        }, function(response) {
+          vm.errors = response.data;
+        });
+      },
+
+      createService: function(service) {
+        var options = this.prepareServiceOptions(service);
+        var vm = this;
+        return joinService.createService(service.url, options).success(function() {
+          vm.errors = {};
+        }).error(function(errors) {
+          vm.errors = errors;
+        });
+      },
+
+      prepareServiceOptions: function(service){
+        var result = {};
+        for (var i = 0; i < service.options.length; i++) {
+          var option = service.options[i];
+          if (option.value) {
+            result[option.key] = option.value;
+          }
+          result['customer'] = this.customer.url;
+          result['name'] = service.serviceName;
+        }
+        return result;
+      },
+
+      connectServiceWithProjects: function(service) {
+        var vm = this;
+        return projectsService.getList().then(function(response) {
           var promises = [];
           for (var i = 0; response.length > i; i++) {
-            promises.push(joinServiceProjectLinkService.add(response[i], vm.instance));
+            promises.push(joinServiceProjectLinkService.add(response[i], service.url));
           }
-          $q.all(promises).then(function() {
+          return $q.all(promises).then(function() {
             $rootScope.$broadcast('refreshProjectList');
           });
         });
-      },
-
-      dummyCheckboxChange: function() {
-        this.instance.auth_url = this.instance.dummy ? 'http://keystone.example.com:5000/v2.0' : '';
       }
     });
 

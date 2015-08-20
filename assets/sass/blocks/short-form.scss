@@ -60,6 +60,14 @@
                     width: 100%;
                 } // input[type=text]
             } // &.input
+            select {
+                border-radius: 4px;
+                width: 100%;
+                box-sizing: border-box;
+                height: 32px;
+                margin-bottom: 7px;
+                background-color: white;
+            }
             &.description {
                 width: 160px;
             } // &.description

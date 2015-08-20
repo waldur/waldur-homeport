@@ -60,12 +60,20 @@
             // display: flex;
             width: 45px;
             text-align: center;
+            &.azure, &.gitlab, &.oracle {
+                width: 150px;
+                margin: 0px auto;
+            }
         } // icon
         .description {
             // display: flex;
             width: calc(100% - 80px);
             box-sizing: border-box;
-            padding-left: 10px;
+            text-align: center;
+            margin-left: 10px;
+            &.azure, &.gitlab, &.oracle {
+                display: none;
+            }
             &.full {
                 width: 100%;
             } // &.full
