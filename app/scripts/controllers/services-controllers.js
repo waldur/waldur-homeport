@@ -129,6 +129,7 @@
       setService: function(service) {
         this.service = service;
         this.service.serviceName = service.name;
+        this.errors = {};
       },
       setCategory: function(category) {
         this.category = category;
@@ -159,6 +160,10 @@
         }, function(response) {
           vm.errors = response.data;
         });
+      },
+
+      cancel: function() {
+        $state.go('services.list');
       },
 
       createService: function(service) {
