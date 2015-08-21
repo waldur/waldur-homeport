@@ -32,8 +32,8 @@
       init: function() {
         this.controllerScope = controllerScope;
         this.setSignalHandler('currentCustomerUpdated', this.currentCustomerUpdatedHandler.bind(controllerScope));
+        this.setSignalHandler('currentProjectUpdated', this.setProject.bind(controllerScope));
         this.activate();
-        this.categories = ENV.appStoreCategories;
         this._super();
       },
 
@@ -42,12 +42,38 @@
         servicesService.getServicesList().then(function(response) {
           vm.servicesList = response;
         });
-        currentStateService.getProject().then(function(response) {
-          vm.selectedProject = response;
-        });
+        vm.setProject();
         vm.secondStep = false;
         vm.selectedCategory = null;
         vm.importableResources = [];
+      },
+      setProject: function() {
+        var vm = this;
+        vm.categories = [];
+        var categories = ENV.appStoreCategories;
+        currentStateService.getProject().then(function(response) {
+          vm.currentProject = response;
+          for (var j = 0; j < categories.length; j++) {
+            var category = categories[j];
+            vm.services[category.name] = [];
+            for (var i = 0; i < vm.currentProject.services.length; i++) {
+              var service = vm.currentProject.services[i];
+              if (service.state != 'Erred'
+                && category.services
+                && (category.services.indexOf(service.type) + 1)
+              ) {
+                vm.services[category.name].push(service);
+              }
+            }
+            if (vm.services[category.name].length > 0 || category.name == 'SUPPORT') {
+              vm.categories.push(category);
+            }
+          }
+          if (vm.categories.length == 0) {
+            alert("No providers!");
+            $state.go('resources.list', {tab: 'Providers'});
+          }
+        });
       },
       setCategory: function(category) {
         this.selectedCategory = category;
@@ -57,19 +83,6 @@
         this.importableResources = [];
         this.selectedResources = [];
         this.importedResources = [];
-
-        var vm = this;
-        vm.services = [];
-        if (vm.selectedCategory.services) {
-          for (var i = 0; i < vm.selectedCategory.services.length; i++) {
-            var url = vm.servicesList[vm.selectedCategory.services[i]].url;
-            servicesService.getList(null, url).then(function(response) {
-              for (var j = 0; j < response.length; j++) {
-                vm.services.push(response[j]);
-              }
-            });
-          }
-        }
       },
 
       currentCustomerUpdatedHandler: function() {
@@ -99,18 +112,12 @@
       getImportedResourcesForService: function(service) {
         var self = this;
         controllerScope.importedResources = [];
-        var query = {'resource_type': this.getProviderEndpoint(service), 'service_uuid': service.uuid};
-        resourcesService.getList(query).then(function(response){
+        var query = {'resource_type': service.type.toLowerCase(), 'service_uuid': service.uuid};
+        resourcesService.getList(query).then(function(response) {
           controllerScope.importedResources = response;
         }, function(){
           self.flashMessage('warning', 'Unable to get list of imported resources');
         });
-      },
-
-      // TODO: remove this function when resource_type will 
-      getProviderEndpoint: function(service) {
-        var splitUrl = service.url.split('/');
-        return splitUrl[4];
       },
 
       getResourcesForService: function(service) {
@@ -132,13 +139,13 @@
       },
 
       canImport: function() {
-        return controllerScope.selectedProject && controllerScope.selectedResources.length;
+        return controllerScope.currentProject && controllerScope.selectedResources.length;
       },
 
       save: function() {
         var self = this;
         var service_uuid = controllerScope.selectedService.uuid;
-        var project_url = controllerScope.selectedProject.url;
+        var project_url = controllerScope.currentProject.url;
 
         controllerScope.selectedResources.map(function(resource){
           resource.status = 'progress';

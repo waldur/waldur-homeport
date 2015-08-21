@@ -31,7 +31,8 @@
                     <section class="step-2">
                         <div class="step-title"><span>Step 2: Select Provider</span></div>
                         <!-- Select service -->
-                        <div class="white-box no-styles" ng-show="ImportResource.services.length == 0">
+                        <div class="white-box no-styles"
+                             ng-show="ImportResource.services[ImportResource.selectedCategory.name].length == 0">
                             <h2 class="app-title">
                                 You don't have any provider yet.
                             </h2>
@@ -44,12 +45,12 @@
                         <div class="appstore-templates">
 
                             <!-- service -->
-                            <div ng-repeat="service in ImportResource.services"
+                            <div ng-repeat="service in ImportResource.services[ImportResource.selectedCategory.name]"
                                  ng-class="{'state': ImportResource.selectedService == service}"
                                  ng-click="ImportResource.setService(service)"
                                  class="appstore-template">
                                 <div class="icon">
-                                    <img ng-src="/static/images/appstore/icon-{{ ImportResource.getProviderEndpoint(service) }}.png" alt="">
+                                    <img ng-src="/static/images/appstore/icon-{{ service.type.toLowerCase() }}.png" alt="">
                                 </div>
                                 <div class="description">
                                     <h3>{{ service.name }}</h3>
