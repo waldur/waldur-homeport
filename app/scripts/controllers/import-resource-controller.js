@@ -55,6 +55,8 @@
         this.selectedService = {};
         this.selectedServiceName = null;
         this.importableResources = [];
+        this.selectedResources = [];
+        this.importedResources = [];
 
         var vm = this;
         vm.services = [];
@@ -86,6 +88,9 @@
         }
       },
       setService: function(service) {
+        this.importableResources = [];
+        this.selectedResources = [];
+        this.importedResources = [];
         controllerScope.selectedService = service;
         this.getResourcesForService(service);
         this.getImportedResourcesForService(service);

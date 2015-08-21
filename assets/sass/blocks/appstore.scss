@@ -539,6 +539,14 @@
                     background-color: white;
                 }
             }
+            &.step-2 {
+                .appstore-template {
+                    .icon {
+                        height: 45px;
+                        width: inherit;
+                    }
+                }
+            }
         }
     }
     .appstore-templates {
