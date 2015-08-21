@@ -94,12 +94,18 @@
       getImportedResourcesForService: function(service) {
         var self = this;
         controllerScope.importedResources = [];
-        var query = {'resource_type': service.resource_type, 'service_uuid': service.uuid};
+        var query = {'resource_type': this.getProviderEndpoint(service), 'service_uuid': service.uuid};
         resourcesService.getList(query).then(function(response){
           controllerScope.importedResources = response;
         }, function(){
           self.flashMessage('warning', 'Unable to get list of imported resources');
         });
+      },
+
+      // TODO: remove this function when resource_type will 
+      getProviderEndpoint: function(service) {
+        var splitUrl = service.url.split('/');
+        return splitUrl[4];
       },
 
       getResourcesForService: function(service) {

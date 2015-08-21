@@ -3,19 +3,8 @@
     @include property(margin, 20 0);
     .col {
         &.select-project {
-            width: 320px;
-            @include bp(xs) {
-                width: 100%;
-            } // xs
-            @include bp(sm) {
-                width: 100%;
-            } // sm
-            .custom-select {
-                width: 100%;
-                select {
-                    width: 100%;
-                }
-            } // custom-select
+            width: 100%;
+            text-align: center;
         } // &.select-project
     } // col
 } // decision

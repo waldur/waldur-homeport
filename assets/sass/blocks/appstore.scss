@@ -529,6 +529,28 @@
     }
 }
 
+.import-wrapper {
+    @extend .appstore-wrapper;
+    padding-right: 0;
+    .appstore-content {
+        section {
+            .step-title {
+                span {
+                    background-color: white;
+                }
+            }
+        }
+    }
+    .appstore-templates {
+        .appstore-template {
+            .description {
+                width: 100%;
+                padding-left: 0;
+            }
+        }
+    }
+}
+
 .project-alert-message {
     $shadow: 0px 2px 2px 0px #ededed;
     position: fixed;

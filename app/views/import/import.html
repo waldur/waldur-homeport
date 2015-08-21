@@ -4,19 +4,8 @@
         <h1>Import resources from provider</h1>
     </div>
 
-    <div class="white-box no-styles" ng-show="ImportResource.services.length == 0">
-        <h2 class="app-title">
-            You don't have any provider yet.
-        </h2>
-        <div class="decision">
-            <div class="col">
-                <a ui-sref="services.create" class="button">Create new provider</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="white-box" ng-show="ImportResource.services.length>0">
-        <div class="short-form full">
+    <div class="white-box">
+        <div class="short-form full import-wrapper">
             <div class="appstore-content">
                 <section class="step-1">
                     <div class="step-title">
@@ -38,36 +27,37 @@
                 </section>
             </div>
             <div class="form-row" ng-show="ImportResource.secondStep">
-                <div class="col full">
-                    <div class="step-title"><span>Step 2: Select Provider</span></div>
-                    <!-- Select service -->
-
-                    <div class="white-box no-styles" ng-show="ImportResource.services.length == 0">
-                        <h2 class="app-title">
-                            You don't have any services yet.
-                        </h2>
-                        <div class="decision">
-                            <div class="col">
-                                <a ui-sref="services.create" class="button">Create new service</a>
+                <div class="col full appstore-content">
+                    <section class="step-1">
+                        <div class="step-title"><span>Step 2: Select Provider</span></div>
+                        <!-- Select service -->
+                        <div class="white-box no-styles" ng-show="ImportResource.services.length == 0">
+                            <h2 class="app-title">
+                                You don't have any provider yet.
+                            </h2>
+                            <div class="decision">
+                                <div class="col">
+                                    <a ui-sref="services.create" class="button">Create new provider</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="appstore-templates">
+                        <div class="appstore-templates">
 
-                        <!-- service -->
-                        <div ng-repeat="service in ImportResource.services"
-                             ng-class="{'state': ImportResource.selectedService == service}"
-                             ng-click="ImportResource.setService(service)"
-                             class="appstore-template">
-                            <div class="icon">
-                                <img ng-src="{{ service.icon }}" alt="" class="icon">
-                            </div>
-                            <div class="description">
-                                <h3>{{ service.name }}</h3>
+                            <!-- service -->
+                            <div ng-repeat="service in ImportResource.services"
+                                 ng-class="{'state': ImportResource.selectedService == service}"
+                                 ng-click="ImportResource.setService(service)"
+                                 class="appstore-template">
+                                <div class="icon">
+                                    <img ng-src="/static/images/appstore/icon-{{ ImportResource.getProviderEndpoint(service) }}.png" alt="">
+                                </div>
+                                <div class="description">
+                                    <h3>{{ service.name }}</h3>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- /Select service -->
+                        <!-- /Select service -->
+                    </section>
                 </div>
                 <a class="toggle-link pull-right"
                    ng-show="ImportResource.importedResources.length"
@@ -108,7 +98,7 @@
                             ng-repeat="resource in ImportResource.importableResources">
                             <div class="list-item pointer">
                                 <div class="checkbox" ng-switch="resource.status">
-                                    <input type="checkbox" ng-checked="resource.checked" ng-click="ImportResource.toggleResource(resource)" ng-switch-when="ready">
+                                    <input type="checkbox" ng-checked="resource.checked" ng-switch-when="ready">
                                     <input type="checkbox" disabled ng-switch-when="success">
                                     <input type="checkbox" disabled ng-switch-when="progress">
                                 </div>
@@ -136,6 +126,15 @@
                         </li>
                     </ul>
                 </div>
+            </div>
+        </div>
+
+        <div class="decision" ng-show="ImportResource.importableResources.length">
+            <div class="col select-project">
+                <article class="descriptoin-light">
+                    Selected resources will be imported into project
+                    {{ ImportResource.selectedProject.name }}
+                </article>
             </div>
         </div>
 
