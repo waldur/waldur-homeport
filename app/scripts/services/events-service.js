@@ -20,6 +20,7 @@
 
 (function() {
     var templates = {
+        'auth_logged_in_with_username': 'User {user_username} with full name {user_full_name} authenticated successfully with username and password.',
         'customer_account_credited': 'Balance has been increased by {amount} for customer {customer_name}.',
         'customer_account_debited': 'Balance has been decreased by {amount} for customer {customer_name}.',
         'customer_creation_succeeded': 'Customer {customer_name} has been created.',
