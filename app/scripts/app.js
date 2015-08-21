@@ -1007,7 +1007,8 @@
           // can't use $state because its will throw recursion error
           $location.path('/login/');
         } else {
-          if (!ENV.featuresVisible && ENV.toBeFeatures.indexOf(vm.url.prefix.replace(/\//g, '')) !== -1) {
+          if (!ENV.featuresVisible && (ENV.toBeFeatures.indexOf(vm.url.prefix.replace(/\//g, '')) !== -1
+            || ENV.toBeFeatures.indexOf(vm.url.source.replace(/\//g, '')) !== -1)) {
             $location.path('/error/404/');
           } else {
             if (vm.self.name !== initialDataState) {
