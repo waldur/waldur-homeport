@@ -155,9 +155,131 @@
   }
 
   angular.module('ncsaas')
-    .controller('DashboardIndexController', [
+    .controller('DashboardIndexController', ['$scope', '$stateParams', DashboardIndexController]);
+
+    function DashboardIndexController($scope, $stateParams) {
+      $scope.activeTab = $stateParams.tab || 'activity';
+    }
+
+  angular.module('ncsaas')
+    .controller('DashboardCostController', [
       '$scope',
-      'baseEventListController',
+      'baseControllerClass',
+      'priceEstimationService',
+      'currentStateService',
+      DashboardCostController]);
+
+  function DashboardCostController(
+    $scope,
+    baseControllerClass,
+    priceEstimationService,
+    currentStateService) {
+    var controllerScope = this;
+    var EventController = baseControllerClass.extend({
+      init: function() {
+        this.controllerScope = controllerScope;
+
+        $scope.$on('currentCustomerUpdated', this.onCustomerUpdate.bind(this));
+        this.onCustomerUpdate();
+      },
+
+      onCustomerUpdate: function() {
+        var vm = this;
+        priceEstimationService.pageSize = 1000;
+        priceEstimationService.getList().then(function(rows) {
+          vm.processChartData(rows);
+          vm.processTableData(rows);
+        });
+      },
+
+      processChartData: function(rows) {
+        var labels = [];
+        var totals = [];
+        rows.forEach(function(row) {
+          if (row.scope_type == 'customer') {
+            labels.unshift(moment(row.month, 'MM').format('MMMM'));
+            totals.unshift(row.total);
+          }
+        });
+
+      this.chartOptions = {
+          bezierCurve: false,
+          responsive: true,
+          animationEasing: "linear"
+        };
+
+        this.costData = {
+          labels: labels,
+          datasets: [
+            {
+              fillColor: "rgba(123, 166, 196,0.5)",
+              strokeColor: "rgba(123, 166, 196,1)",
+              pointColor: "rgba(123, 166, 196,1)",
+              pointStrokeColor: "#fff",
+              pointHighlightFill: "#fff",
+              pointHighlightStroke: "rgba(123, 166, 196,1)",
+              data: totals
+            }
+          ]
+        };
+      },
+
+      processTableData: function(rows) {
+        var results = {};
+        for (var i = 0; i < rows.length; i++) {
+          var row = rows[i];
+          var date = moment(row.month, 'MM').format('MMMM') + ' ' + row.year;
+          if (!results.hasOwnProperty(date)) {
+            results[date] = {
+              total: 0,
+              projects: [],
+              services: [],
+              resources: []
+            }
+          }
+          if (row.scope_type == 'customer') {
+            results[date].total = row.total;
+          }
+          if (row.scope_type == 'project') {
+            results[date].projects.push(row);
+          }
+          if (row.scope_type == 'resource') {
+            results[date].resources.push(row);
+          }
+          if (row.scope_type == 'service') {
+            results[date].services.push(row);
+          }
+          if (row.scope_type == 'serviceprojectlink') {
+            results[date].services.push(row);
+          }
+        }
+        var table = [];
+        for (var date in results) {
+          var row = results[date];
+          table.push({
+            date: date,
+            total: row.total,
+            projects: row.projects,
+            services: row.services,
+            resources: row.resources
+          });
+        }
+        if (table.length > 0) {
+          table[0].selected = true;
+          table[0].activeTab = 'services';
+        }
+        this.table = table;
+      }
+    });
+
+    controllerScope.__proto__ = new EventController();
+  }
+
+
+  angular.module('ncsaas')
+    .controller('DashboardActivityController', [
+      '$scope',
+      'baseControllerClass',
       'projectsService',
       'alertsService',
       'eventsService',
@@ -165,51 +287,28 @@
       'resourcesCountService',
       'currentStateService',
       'ENV',
-      DashboardIndexController]);
+      '$window',
+      DashboardActivityController]);
 
-  function DashboardIndexController(
+  function DashboardActivityController(
     $scope,
-    baseEventListController,
+    baseControllerClass,
     projectsService,
     alertsService,
     eventsService,
     eventStatisticsService,
     resourcesCountService,
     currentStateService,
-    ENV) {
+    ENV,
+    $window) {
     var controllerScope = this;
-    var EventController = baseEventListController.extend({
+    var EventController = baseControllerClass.extend({
+      showGraph: true,
       init:function() {
         this.controllerScope = controllerScope;
         this.cacheTime = ENV.dashboardEventsCacheTime;
         this._super();
         this.activeTab = 'activity';
-        this.costData = {
-          labels: ["January", "February", "March", "April", "May", "June", "July"],
-          datasets: [
-            {
-              label: "Events",
-              fillColor: "rgba(123, 166, 196,0.5)",
-              strokeColor: "rgba(123, 166, 196,1)",
-              pointColor: "rgba(123, 166, 196,1)",
-              pointStrokeColor: "#fff",
-              pointHighlightFill: "#fff",
-              pointHighlightStroke: "rgba(123, 166, 196,1)",
-              data: [0, 59, 80, 81, 56, 55, 40]
-            },
-            {
-              label: "Alerts",
-              fillColor: "rgba(206, 230, 174,0.5)",
-              strokeColor: "rgba(206, 230, 174,1)",
-              pointColor: "rgba(206, 230, 174,1)",
-              pointStrokeColor: "#fff",
-              pointHighlightFill: "#fff",
-              pointHighlightStroke: "rgba(206, 230, 174,1)",
-              data: [0, 48, 40, 19, 86, 27, 90]
-            }
-          ]
-        };
-
         this.chartOptions = {
           responsive: true,
           scaleShowVerticalLines: false,
@@ -219,6 +318,20 @@
 
         $scope.$on('currentCustomerUpdated', this.onCustomerUpdate.bind(this));
         this.onCustomerUpdate();
+        this.resizeControl();
+      },
+      resizeControl: function() {
+        var vm = this;
+
+        var window = angular.element($window);
+        window.bind('resize', function () {
+          vm.showGraph = false;
+          setTimeout(function() {
+            vm.showGraph = true;
+            $scope.$apply();
+          }, 0);
+          $scope.$apply();
+        });
       },
       selectProject: function (project) {
         project.selected=!project.selected;

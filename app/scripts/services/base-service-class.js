@@ -51,10 +51,16 @@
           filter.page_size = vm.pageSize;
           var cacheKey = vm.endpoint + JSON.stringify(filter);
           var cache = listCache.get(cacheKey);
+          var resetState = listCache.get(vm.endpoint);
+          vm.cacheReset = vm.cacheReset ? vm.cacheReset : (resetState ? resetState.doReset : false);
           if (!vm.cacheReset && vm.cacheTime > 0 && cache && cache.time > new Date().getTime()) {
             deferred.resolve(cache.data);
           } else {
             vm.cacheReset = false;
+            if (resetState) {
+              listCache.put(vm.endpoint, {doReset: false});
+            }
+            listCache.put(cacheKey, {data: null, time: 0});
             vm.getFactory(true, null, endpointUrl).query(filter, function(response, responseHeaders) {
               var header = responseHeaders();
               vm.resultCount = !header['x-result-count'] ? null : header['x-result-count'];
@@ -92,7 +98,13 @@
 
         return deferred.promise;
       },
-
+      /**
+       * Call this function if you want to clear cache of the current endpoint
+       * during next request to the current endpoint
+       */
+      clearCacheOfNextRequest: function() {
+        listCache.put(this.endpoint, {doReset: true});
+      },
       $create:function(endpointUrl) {
         var Instance = this.getFactory(false, null, endpointUrl);
         return new Instance();

@@ -5,12 +5,12 @@
   angular.module('ncsaas')
     .controller('HeaderController', [
       '$rootScope', '$scope', '$state', 'currentStateService', 'customersService',
-      'usersService', 'ENV', 'baseControllerClass', '$translate', 'LANGUAGE', '$window', 'projectsService', '$q',
+      'usersService', 'ENV', 'baseControllerClass', '$translate', 'LANGUAGE', '$window', 'projectsService', '$q', 'blockUI',
       HeaderController]);
 
   function HeaderController(
     $rootScope, $scope, $state, currentStateService, customersService, usersService,
-    ENV, baseControllerClass, $translate, LANGUAGE, $window, projectsService, $q) {
+    ENV, baseControllerClass, $translate, LANGUAGE, $window, projectsService, $q, blockUI) {
     var controllerScope = this;
     var HeaderControllerClass = baseControllerClass.extend({
       customers: [],
@@ -30,6 +30,8 @@
         this.activate();
         this.menuItemActive = currentStateService.getActiveItem($state.current.name);
         this.setSignalHandler('currentCustomerUpdated', this.currentCustomerUpdatedHandler.bind(controllerScope));
+        this.setSignalHandler('refreshProjectList', this.refreshProjectListHandler.bind(controllerScope));
+        this.setSignalHandler('refreshCustomerList', this.refreshCustomerListHandler.bind(controllerScope));
         this._super();
       },
       activate: function() {
@@ -122,25 +124,120 @@
               return project.uuid;
             });
             if (!uuids.indexOf($window.localStorage[ENV.currentProjectUuidStorageKey]) + 1) {
-              setFirstProject();
+              vm.setFirstProject();
             }
           } else {
-            setFirstProject();
-          }
-
-          function setFirstProject() {
-            projectsService.getFirst().then(function(firstProject) {
-              vm.setCurrentProject(firstProject);
-            });
+            vm.setFirstProject();
           }
         });
       },
-      getProjectList: function() {
+      setFirstProject: function() {
+        var vm = this;
+        projectsService.getFirst().then(function(firstProject) {
+          vm.setCurrentProject(firstProject);
+        });
+      },
+      refreshProjectListHandler: function(event, params) {
+        var vm = this,
+          projectUuids,
+          currentProjectKey,
+          model;
+        if (params) {
+          model = params.model;
+          projectUuids = vm.projects.map(function(obj) {
+            return obj.uuid;
+          });
+          currentProjectKey = projectUuids.indexOf(model.uuid);
+          if (params.update) {
+            if (currentProjectKey + 1) {
+              vm.projects[currentProjectKey] = model;
+            }
+            if (model.uuid == vm.currentProject.uuid) {
+              vm.currentProject = model;
+              vm.setCurrentProject(model);
+            }
+          }
+          if (params.new) {
+            vm.projects.push(model);
+          }
+          if (params.remove) {
+            if (currentProjectKey + 1) {
+              vm.projects.splice(currentProjectKey, 1);
+            }
+            if (model.uuid == vm.currentProject.uuid) {
+              vm.setFirstProject();
+            }
+          }
+          projectsService.cacheReset = true;
+        } else {
+          vm.setFirstProject();
+          vm.getProjectList(true);
+        }
+      },
+      refreshCustomerListHandler: function(event, params) {
+        var vm = this,
+          customerUuids,
+          key,
+          model = params.model;
+        customerUuids = vm.customers.map(function(obj) {
+          return obj.uuid;
+        });
+        key = customerUuids.indexOf(model.uuid);
+        if (key + 1) {
+          vm.customers[key].name = model.name;
+          if (vm.currentCustomer) {
+            if (model.uuid == vm.currentCustomer.uuid) {
+              if (params.update) {
+                vm.currentCustomer = model;
+                vm.setCurrentCustomer(model);
+                vm.customers[key] = model;
+                customersService.cacheReset = true;
+              } else {
+                vm.setFirstCustomer();
+                vm.getCustomerList(true);
+              }
+            }
+          } else {
+            vm.getCustomerList(true);
+            currentStateService.getCustomer().then(function(currentCustomer) {
+              if (model.uuid == currentCustomer.uuid) {
+                vm.setFirstCustomer();
+              }
+            });
+          }
+        }
+      },
+      setFirstCustomer: function() {
+        var vm = this;
+        customersService.getFirst().then(function(firstCustomer) {
+          vm.setCurrentCustomer(firstCustomer);
+        });
+      },
+      getProjectList: function(cacheReset) {
         var vm = this,
           deferred = $q.defer();
         projectsService.cacheTime = ENV.topMenuProjectsCacheTime;
+        projectsService.cacheReset = cacheReset;
+        var projectMenu = blockUI.instances.get('project-menu');
+        projectMenu.start();
         projectsService.getList().then(function(response) {
           vm.projects = response;
+          projectMenu.stop();
+          deferred.resolve(response);
+        });
+
+        return deferred.promise;
+      },
+      getCustomerList: function(cacheReset) {
+        var vm = this,
+          deferred = $q.defer();
+        customersService.cacheTime = ENV.topMenuCustomerCacheTime;
+        customersService.cacheReset = cacheReset;
+        var customerMenu = blockUI.instances.get('customer-menu');
+        customerMenu.start();
+        customersService.getList().then(function(response) {
+          vm.customers = response;
+          customerMenu.stop();
           deferred.resolve(response);
         });
 
@@ -175,6 +272,7 @@
       },
       stateChangeSuccessHandler: function(event, toState) {
         this.deregisterEvent('currentCustomerUpdated'); // clear currentCustomerUpdated event handlers
+        this.deregisterEvent('refreshProjectList'); // clear refreshProjectList event handlers
         $rootScope.bodyClass = currentStateService.getBodyClass(toState.name);
         // if user is authenticated - he should have selected customer
         if (authService.isAuthenticated() && !currentStateService.isCustomerDefined) {

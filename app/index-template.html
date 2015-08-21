@@ -55,6 +55,9 @@
         </div>
         <ul class="footer-nav">
             <li>
+                <a ui-sref="help.list">Help</a>
+            </li>
+            <li>
                 <a href="mailto:info@opennodecloud.com">Support</a>
             </li>
             <li>
@@ -113,6 +116,7 @@
 <script src="scripts/controllers/backup-schedules-controllers.js"></script>
 <script src="scripts/controllers/customer-controllers.js"></script>
 <script src="scripts/controllers/events-controller.js"></script>
+<script src="scripts/controllers/help-controller.js"></script>
 <script src="scripts/controllers/import-resource-controller.js"></script>
 <script src="scripts/controllers/initial-data-controller.js"></script>
 <script src="scripts/controllers/keys-controller.js"></script>
@@ -135,6 +139,7 @@
 <script src="scripts/services/current-state-service.js"></script>
 <script src="scripts/services/customer-permissions-service.js"></script>
 <script src="scripts/services/customers-service.js"></script>
+<script src="scripts/services/default-price-list-items-service.js"></script>
 <script src="scripts/services/digitalocean-link-service.js"></script>
 <script src="scripts/services/digitalocean-service.js"></script>
 <script src="scripts/services/digitalocean-service-project-link-service.js"></script>
@@ -144,10 +149,11 @@
 <script src="scripts/services/customer-image-service.js"></script>
 <script src="scripts/services/events-service.js"></script>
 <script src="scripts/services/flavors-service.js"></script>
+<script src="scripts/services/hooks-service.js"></script>
 <script src="scripts/services/keys-service.js"></script>
-<script src="scripts/services/orders-service.js"></script>
-<script src="scripts/services/plan-customers-service.js"></script>
+<script src="scripts/services/agreements-service.js"></script>
 <script src="scripts/services/plans-service.js"></script>
+<script src="scripts/services/price-estimation-service.js"></script>
 <script src="scripts/services/project-cloud-memberships-service.js"></script>
 <script src="scripts/services/project-permissions-service.js"></script>
 <script src="scripts/services/projects-service.js"></script>
@@ -176,6 +182,7 @@
 <script src="scripts/directives/pagination.js"></script>
 <script src="scripts/directives/sort-line.js"></script>
 <script src="scripts/directives/stoppropagation.js"></script>
+<script src="scripts/directives/visible.js"></script>
 <!-- @endif -->
 
 <!-- @if NODE_ENV == 'PRODUCTION' -->

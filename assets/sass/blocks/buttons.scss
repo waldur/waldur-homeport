@@ -8,16 +8,16 @@
 } // inlist-action
 
 .button {
+    background-color: $button-green;
     @include inline-middle;
-    @include property(border-radius, 2);
-    @include property(padding, 4 6);
-    @include property(padding-top, 6);
-    background-color: #f5f5f5;
-    background-image: linear-gradient(top,#f5f5f5,#f1f1f1);
-    border: 1px solid rgba(0,0,0,0.1);
-    color: #444;
-    line-height: 1;
+    @include property(border-radius, 5);
+    @include property(padding, 0 20);
+    color: #ffffff;
     text-decoration: none;
+    font-weight: 700;
+    height: 32px;
+    font-size: 16px;
+    line-height: 32px;
     &.dropdown-active {
         background: white;
     } // &.dropdown-active
@@ -35,13 +35,15 @@
     color: #444;
 } // button-cancel
 .button-apply {
+    @extend .button;
     @include inline-middle;
     @include property(border-radius, 2);
     @include property(padding, 10 10);
     @include property(padding-top, 12);
     line-height: 1;
-    background-color: #29B958;
-    color: #fff;
+    padding-top: 12px;
+    height: 39px;
+    font-weight: normal;
 } // button-apply
 .button-select {
     @include inline-middle;
@@ -142,3 +144,36 @@
     color: rgb(0, 0, 0);
     font-weight: 700;
 } // list-sort
+
+.icon-button {
+    @extend .button;
+    @include boxshadow(0 2 2 0, #ededed);
+    font-weight: normal;
+    height: 30px;
+    line-height: 0;
+    padding: 5px;
+    font-size: 0;
+    &:before {
+        @include icon-fa;
+        font-size: 20px;
+        height: 20px;
+        width: 20px;
+        display: inline-block;
+        text-align: center;
+    }
+    &.plus-icon {
+        &:before {
+            content: "\f067";
+        }
+    }
+    &.remove-icon {
+        &:before {
+            content: "\f00d";
+        }
+    }
+    &.ok-icon {
+        &:before {
+            content: "\f00c";
+        }
+    }
+}

@@ -67,6 +67,10 @@
             }
           ]
         };
+        if (!ENV.featuresVisible && ENV.toBeFeatures.indexOf('appstore') !== -1) {
+          delete this.entityOptions.entityData.createLink;
+          delete this.entityOptions.entityData.createLinkText;
+        }
       },
       stopResource:function(resource) {
         resource.$action('stop', this.reInitResource.bind(this, resource), this.handleActionException);
@@ -240,12 +244,32 @@
     var controllerScope = this;
     var Controller = baseControllerDetailUpdateClass.extend({
       activeTab: 'backups',
+      canEdit: true,
 
       init:function() {
         this.service = resourcesService;
         this.controllerScope = controllerScope;
         this._super();
         this.activeTab = $stateParams.tab ? $stateParams.tab : this.activeTab;
+        this.detailsViewOptions = {
+          title: 'Resource',
+          activeTab: $stateParams.tab ? $stateParams.tab : this.activeTab,
+          listState: 'resources.list',
+          aboutFields: [
+            {
+              fieldKey: 'name',
+              isEditable: true,
+              className: 'name'
+            }
+          ],
+          tabs: [
+            {
+              title: 'Backups',
+              key: 'backups',
+              viewName: 'tabBackups'
+            }
+          ]
+        };
       },
 
       activate:function() {
@@ -277,27 +301,33 @@
 (function() {
   angular.module('ncsaas')
     .controller('ResourceBackupListTabController', [
-        '$scope',
-        'BaseBackupListController',
-        ResourceBackupListTabController
+      'currentStateService',
+      'BaseBackupListController',
+      '$stateParams',
+      ResourceBackupListTabController
       ]);
 
-    function ResourceBackupListTabController($scope, BaseBackupListController) {
-        var controllerScope = this;
-        var Controller = BaseBackupListController.extend({
-          init:function() {
-            this.controllerScope = controllerScope;
-            this._super();
-          },
-          getList: function(filter) {
-            var vm = this;
-            var fn = this._super;
-            $scope.$on('resourceLoaded', function(event, resource){
-              vm.service.defaultFilter.backup_source = resource.url;
-              fn.apply(vm, filter);
-            })
+    function ResourceBackupListTabController(currentStateService, BaseBackupListController, $stateParams) {
+      var controllerScope = this;
+      var Controller = BaseBackupListController.extend({
+        init:function() {
+          this.controllerScope = controllerScope;
+          this._super();
+        },
+        getList: function(filter) {
+          var vm = this;
+          if ($stateParams.uuid) {
+            this.service.defaultFilter.project_uuid = $stateParams.uuid;
+            this._super(filter);
+          } else {
+            var fn = this._super.bind(controllerScope);
+            currentStateService.getProject().then(function(response) {
+              vm.service.defaultFilter.project_uuid = response.uuid;
+              fn(filter);
+            });
           }
-        });
+        }
+      });
 
       controllerScope.__proto__ = new Controller();
   }

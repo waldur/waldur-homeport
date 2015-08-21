@@ -1,14 +1,21 @@
 <div ng-controller="ImportResourceController as ImportResource">
 
-    <div class="white-box">
-        <ul class="sort-list">
-            <li class="title">
-                <h2 class="app-title">Import resources from service</h2>
-            </li>
-        </ul>
+    <div class="container">
+        <h1>Import resources from provider</h1>
     </div>
 
-    <div class="white-box">
+    <div class="white-box no-styles" ng-show="ImportResource.services.length == 0">
+        <h2 class="app-title">
+            You don't have any provider yet.
+        </h2>
+        <div class="decision">
+            <div class="col">
+                <a ui-sref="services.create" class="button">Create new provider</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="white-box" ng-show="ImportResource.services.length>0">
         <div class="short-form full">
             <div class="appstore-content">
                 <section class="step-1">
@@ -32,7 +39,7 @@
             </div>
             <div class="form-row" ng-show="ImportResource.secondStep">
                 <div class="col full">
-                    <div class="step-title"><span>Step 2: Select Service</span></div>
+                    <div class="step-title"><span>Step 2: Select Provider</span></div>
                     <!-- Select service -->
 
                     <div class="white-box no-styles" ng-show="ImportResource.services.length == 0">
@@ -91,7 +98,7 @@
                 </div>
                 <div class="col full" ng-show="ImportResource.noResources">
                     <h2 class="app-title centered">
-                        There are no resources available for import in this service.
+                        There are no resources available for import in this provider.
                     </h2>
                 </div>
                 <div class="col full" ng-show="ImportResource.importableResources.length">

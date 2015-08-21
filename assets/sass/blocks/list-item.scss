@@ -57,7 +57,7 @@
     } // dash
     &.list {
         &:hover {
-            background-color: #FFFAE5;
+            background-color: $expandable-hover;
         } // &:hover
     }// &.list
     &.resources {
@@ -172,12 +172,6 @@
             .actions-button {
                 .button {
                     border: transparent;
-                    background-color: #EAEAEA;
-                    color: #949494;
-                    &.active,
-                    &:hover {
-                        color: #000;
-                    } // &.active, &:hover
                     &.view {
                         &:before {
                             @include icon-fa;
@@ -218,6 +212,9 @@
                     display: none;
                 } // sm
             }
+            &.statusCircle {
+                width: 40px;
+            }
         } // &.additional-cell
         .more-details {
             @include property(margin-left, 10);
@@ -237,7 +234,7 @@
     .sort-list {
         li {
             &.right-sort {
-                right: 30px;
+                right: 35px;
             }
         }
     }

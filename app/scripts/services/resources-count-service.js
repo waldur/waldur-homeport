@@ -9,12 +9,12 @@
       return function(params) {
         var deferred = $q.defer();
 
-        var url = ENV.apiEndpoint + 'api/' + endpoint + '/'
+        var url = ENV.apiEndpoint + 'api/' + endpoint + '/';
         $http.head(url, {'params': params}).success(function(data, status, header) {
           deferred.resolve(parseInt(header()['x-result-count']));
         }).error(function() {
           deferred.reject();
-        })
+        });
         return deferred.promise;
       }
     }
@@ -23,6 +23,11 @@
       'backups': factory('backups'),
       'users': factory('project-permissions'),
       'alerts': factory('alerts'),
+      'events': factory('events'),
+      'projectCloud': factory('project-cloud-memberships'),
+      'projects': factory('projects'),
+      'digitalocean': factory('digitalocean'),
+      'clouds': factory('clouds')
     }
   }
 })();

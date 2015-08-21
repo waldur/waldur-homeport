@@ -82,24 +82,10 @@
           url: '',
           views: {
             'appHeader@initialdata' : {
-              templateUrl: 'views/partials/site-header-disabled.html',
-            },
-            'appContent@initialdata' : {
-              templateUrl: 'views/initial-data/initial-data.html',
-            }
-          },
-          resolve: {
-            authenticated: authCheck
-          }
-        })
-        .state('initialdata.demo', {
-          url: 'demo/',
-          views: {
-            'appHeader@initialdata' : {
               templateUrl: 'views/partials/site-header-initial.html',
             },
             'appContent@initialdata' : {
-              templateUrl: 'views/initial-data/initial-data-demo.html',
+              templateUrl: 'views/initial-data/initial-data.html',
             }
           },
           resolve: {
@@ -192,15 +178,21 @@
         })
 
         .state('dashboard.index', {
-          url: '',
+          url: ':tab',
           views: {
-            'appHeader@dashboard' : {
+            'appHeader@dashboard': {
               templateUrl: 'views/partials/app-header.html',
             },
-            'appContent@dashboard' : {
+            'appContent@dashboard': {
               templateUrl: 'views/dashboard/index.html',
             },
-            'eventTypes@dashboard.index' : {
+            'activityTab@dashboard.index': {
+              templateUrl: 'views/dashboard/activity-tab.html',
+            },
+            'costTab@dashboard.index': {
+              templateUrl: 'views/dashboard/cost-tab.html',
+            },
+            'eventTypes@dashboard.index': {
               templateUrl: 'views/events/event-types.html',
             }
           },
@@ -486,6 +478,38 @@
           auth: true
         })
 
+        .state('profile.hook-create', {
+          url: 'hooks/create/',
+          views: {
+            'appContent': {
+              templateUrl: 'views/profile/hook-create.html',
+            },
+            'appHeader': {
+              templateUrl: 'views/partials/app-header.html',
+            }
+          },
+          resolve: {
+            authenticated: authCheck
+          },
+          auth: true
+        })
+
+        .state('profile.hook-details', {
+          url: 'hooks/:type/:uuid/',
+          views: {
+            'appContent': {
+              templateUrl: 'views/profile/hook-update.html',
+            },
+            'appHeader': {
+              templateUrl: 'views/partials/app-header.html',
+            }
+          },
+          resolve: {
+            authenticated: authCheck
+          },
+          auth: true
+        })
+
         .state('organizations', {
           url: '/organizations/',
           abstract: true,
@@ -507,7 +531,6 @@
           },
           auth: true
         })
-
 
         .state('organizations.create', {
           url: 'add/',
@@ -632,10 +655,31 @@
         })
 
         .state('resources.list', {
-          url: '',
+          url: ':tab',
           views: {
             'appContent': {
-              templateUrl: 'views/resource/list.html',
+              templateUrl: 'views/project/details.html',
+            },
+            'tabEventlog@resources.list' : {
+              templateUrl: 'views/project/tab-eventlog.html',
+            },
+            'tabResources@resources.list' : {
+              templateUrl: 'views/project/tab-resources.html',
+            },
+            'tabUsers@resources.list' : {
+              templateUrl: 'views/project/tab-users.html',
+            },
+            'eventTypes@resources.list' : {
+              templateUrl: 'views/events/event-types.html',
+            },
+            'tabApplications@resources.list' : {
+              templateUrl: 'views/resource/tab-applications.html',
+            },
+            'tabBackups@resources.list' : {
+              templateUrl: 'views/resource/tab-backups.html',
+            },
+            'tabProviders@resources.list' : {
+              templateUrl: 'views/resource/tab-providers.html',
             },
             'appHeader': {
               templateUrl: 'views/partials/app-header.html',
@@ -664,19 +708,31 @@
         })
 
         .state('resources.details', {
-          url: ':resource_type/:uuid/:tab',
+          url: ':uuid/:tab',
           views: {
             'appContent': {
-              templateUrl: 'views/resource/details.html',
+              templateUrl: 'views/project/details.html',
             },
-            'tabBackups@resources.details': {
+            'tabEventlog@resources.details' : {
+              templateUrl: 'views/project/tab-eventlog.html',
+            },
+            'tabResources@resources.details' : {
+              templateUrl: 'views/project/tab-resources.html',
+            },
+            'tabUsers@resources.details' : {
+              templateUrl: 'views/project/tab-users.html',
+            },
+            'eventTypes@resources.details' : {
+              templateUrl: 'views/events/event-types.html',
+            },
+            'tabProviders@resources.details' : {
+              templateUrl: 'views/resource/tab-providers.html',
+            },
+            'tabApplications@resources.details' : {
+              templateUrl: 'views/resource/tab-applications.html',
+            },
+            'tabBackups@resources.details' : {
               templateUrl: 'views/resource/tab-backups.html',
-            },
-            'backupListContent@resources.details' : {
-              templateUrl: 'views/backup/backup-list-content.html',
-            },
-            'tabs@resources.details': {
-              templateUrl: 'views/resource/tabs.html',
             },
             'appHeader': {
               templateUrl: 'views/partials/app-header.html',
@@ -907,25 +963,64 @@
             authenticated: authCheck
           },
           auth: true
+        })
+        .state('help', {
+          url: '/help/',
+          abstract: true,
+          templateUrl: 'views/partials/base.html',
+        })
+        .state('help.list', {
+          url: '',
+          views: {
+            'appContent': {
+              templateUrl: 'views/help/list.html',
+            },
+            'appHeader': {
+              templateUrl: 'views/partials/app-header.html',
+            }
+          },
+          resolve: {
+            authenticated: authCheck
+          },
+          auth: true
+        })
+        .state('help.details', {
+          url: ':name/',
+          views: {
+            'appContent': {
+              templateUrl: 'views/help/details.html',
+            },
+            'appHeader': {
+              templateUrl: 'views/partials/app-header.html',
+            }
+          },
+          resolve: {
+            authenticated: authCheck
+          },
+          auth: true
         });
 
-      function authCheck($q, $location, $auth, usersService) {
+      function authCheck($q, $location, $auth, usersService, ENV) {
         var deferred = $q.defer();
         var vm = this;
         if (!$auth.isAuthenticated()) {
           // can't use $state because its will throw recursion error
           $location.path('/login/');
         } else {
-          if (vm.self.name !== initialDataState) {
-            usersService.getCurrentUser().then(function(response) {
-              if (!response.full_name || !response.email) {
-                $location.path(initialDataStatePath);
-              } else {
-                deferred.resolve();
-              }
-            });
+          if (!ENV.featuresVisible && ENV.toBeFeatures.indexOf(vm.url.prefix.replace(/\//g, '')) !== -1) {
+            $location.path('/error/404/');
           } else {
-            deferred.resolve();
+            if (vm.self.name !== initialDataState) {
+              usersService.getCurrentUser().then(function(response) {
+                if (!response.full_name || !response.email) {
+                  $location.path(initialDataStatePath);
+                } else {
+                  deferred.resolve();
+                }
+              });
+            } else {
+              deferred.resolve();
+            }
           }
         }
 

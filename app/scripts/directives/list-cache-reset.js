@@ -18,10 +18,13 @@
         scope.processing = false;
         function resetCache() {
           scope.service.cacheReset = true;
-          scope.processing = true;
-          scope.controller.getList().then(function() {
-            scope.processing = false;
-          });
+          var getListPromise = scope.controller.getList();
+          if (getListPromise && getListPromise.then) {
+            scope.processing = true;
+            getListPromise.then(function() {
+              scope.processing = false;
+            });
+          }
         }
       }
 

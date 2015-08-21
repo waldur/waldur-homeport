@@ -1,0 +1,75 @@
+ <div ng-controller="DashboardCostController as DashboardController">
+     <div class="white-box empty-data-block" ng-show="DashboardController.table.length == 0">
+         <h1>Not enough data for cost analysis</h1>
+         <h2>Please import resources or add more providers</h2>
+         <a ui-sref="import.import" class="button">Import resources</a>
+         <a ui-sref="services.create" class="button">Add providers</a>
+
+     </div>
+     <div class="white-box big-chart" ng-if="DashboardController.table.length > 0">
+        <canvas tc-chartjs chart-type="line" chart-options="DashboardController.chartOptions" chart-data="DashboardController.costData" width="1120" height="180"></canvas>
+        <div class="clear"></div>
+    </div>
+    <div class="white-box table-list" ng-if="DashboardController.table.length > 0">
+        <div class="table-block" ng-repeat="row in DashboardController.table">
+            <div class="title" ng-click="row.selected = !row.selected; row.activeTab='services'"
+                 ng-class="{'active': row.selected}">
+                <ul class="sort-list">
+                    <li>
+                        <span class="month" ng-bind="::row.date"></span>
+                    </li>
+                    <li>
+                        <div class="icon"></div>
+                        <a stoppropagation ng-click="row.selected=true; row.activeTab='services'" ng-class="{'active': row.selected && row.activeTab=='services'}">Services (<span ng-bind="::row.services.length"></span>)</a>
+                    </li>
+                    <li>
+                        <div class="icon"></div>
+                        <a stoppropagation ng-click="row.selected=true; row.activeTab='projects'" ng-class="{'active': row.selected && row.activeTab=='projects'}">Projects (<span ng-bind="::row.projects.length"></span>)</a>
+                    </li>
+                    <li>
+                        <div class="icon"></div>
+                        <a stoppropagation ng-click="row.selected=true; row.activeTab='resources'" ng-class="{'active': row.selected && row.activeTab=='resources'}">Resources (<span ng-bind="::row.resources.length"></span>)</a>
+                    </li>
+                </ul>
+                <div class="total-cost">
+                    <span class="table-alert"></span>
+                    <span class="cost">Total cost {{ row.total }}</span>
+                    <div class="icon" ng-class="{'opened-icon': row.selected}"></div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div ng-if="row.selected">
+                <div class="table services" ng-show="row.activeTab=='projects'">
+                    <div class="tr th">
+                        <div class="td service-name display-for-mobile"><span>Project name</span></div>
+                        <div class="td service-name"><span>Cost</span></div>
+                    </div>
+                    <div class="tr" ng-repeat="service in row.projects">
+                        <div class="td service-name display-for-mobile"><span ng-bind="::service.scope_name"></span></div>
+                        <div class="td service-name"><span ng-bind="::service.total"></span></div>
+                    </div>
+                </div>
+                <div class="table services" ng-show="row.activeTab=='services'">
+                    <div class="tr th">
+                        <div class="td service-name display-for-mobile"><span>Service name</span></div>
+                        <div class="td service-name"><span>Cost</span></div>
+                    </div>
+                    <div class="tr" ng-repeat="service in row.services">
+                        <div class="td service-name display-for-mobile"><span ng-bind="::service.scope_name"></span></div>
+                        <div class="td service-name"><span ng-bind="::service.total"></span></div>
+                    </div>
+                </div>
+                <div class="table services" ng-show="row.activeTab=='resources'">
+                    <div class="tr th">
+                        <div class="td service-name display-for-mobile"><span>Resource name</span></div>
+                        <div class="td service-name"><span>Cost</span></div>
+                    </div>
+                    <div class="tr" ng-repeat="service in row.resources">
+                        <div class="td service-name display-for-mobile"><span ng-bind="::service.scope_name"></span></div>
+                        <div class="td service-name"><span ng-bind="::service.total"></span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

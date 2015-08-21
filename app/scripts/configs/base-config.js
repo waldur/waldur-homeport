@@ -46,18 +46,50 @@ angular.module('ncsaas')
     appStoreCategories: [
       {
         name: 'VMs',
+        type: 'provider',
         services: ['DigitalOcean', 'OpenStack']
       },
       {
         name: 'APPLICATIONS',
+        type: 'provider',
         services: ['Oracle', 'GitLab']
       },
       {
         name: 'SUPPORT',
-        services: []
+        type: 'package',
+        packages: [
+          {name: 'Support package A', type: 'low SLA level'},
+          {name: 'Support package B', type: 'medium SLA level'},
+          {name: 'Support package C', type: 'high SLA level'}
+        ]
       }
     ],
     IntercomAppId: 'xfbbcxck',
-    defaultListCacheTime: 60 * 10
+    defaultListCacheTime: 60 * 10,
+    helpList: [
+      {
+        name: 'Azure',
+        link: 'https://msdn.microsoft.com/en-us/library/azure/gg551722.aspx'
+      },
+      {
+        name: 'Amazon',
+        link: 'http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSGettingStartedGuide/AWSCredentials.html'
+      },
+      {
+        name: 'DigitalOcean',
+        link: 'https://www.digitalocean.com/community/tutorials/how-to-use-the-digitalocean-api-v2'
+      }
+    ],
+    toBeFeatures: [
+      'openStackPrivateCloud',
+      'appstore',
+      'pricelistsCompare',
+      'prePaid',
+      'support',
+      'monitoring',
+      'users',
+      'backups'
+    ],
+    featuresVisible: false
 
   });

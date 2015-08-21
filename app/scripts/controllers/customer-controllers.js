@@ -24,7 +24,7 @@
             title: 'Remove'
           },
           {
-            title: 'Add service',
+            title: 'Add provider',
             state: 'services.create'
           }
         ];
@@ -77,6 +77,9 @@
       'Flash',
       'ENV',
       '$stateParams',
+      '$rootScope',
+      '$q',
+      'resourcesCountService',
       CustomerDetailUpdateController
     ]);
 
@@ -87,7 +90,10 @@
     usersService,
     Flash,
     ENV,
-    $stateParams
+    $stateParams,
+    $rootScope,
+    $q,
+    resourcesCountService
     ) {
     var controllerScope = this;
     var CustomerController = baseControllerDetailUpdateClass.extend({
@@ -102,6 +108,25 @@
         this._super();
         this.detailsState = 'organizations.details';
         this.currentUser = usersService.currentUser;
+        this.chartData = {
+          labels: ["Monday", "Tuesday", "Wednsday", "Thursday", "Friday", "Saturday", "Sunday"],
+          datasets: [
+            {
+              label: "Events",
+              fillColor: "rgba(220,220,220,0.2)",
+              strokeColor: "rgba(220,220,220,1)",
+              pointColor: "rgba(220,220,220,1)",
+              pointStrokeColor: "#fff",
+              pointHighlightFill: "#fff",
+              pointHighlightStroke: "rgba(220,220,220,1)",
+              data: [65, 59, 80, 81, 56, 55, 40]
+            }
+          ]
+        };
+        this.chartOptions = {
+          responsive: true,
+          scaleShowGridLines : false
+        };
         this.detailsViewOptions = {
           title: 'Organization',
           activeTab: $stateParams.tab ? $stateParams.tab : this.activeTab,
@@ -111,11 +136,14 @@
             {
               fieldKey: 'name',
               isEditable: true,
-              className: 'name'
+              className: 'name',
+              emptyText: 'Add name'
             },
             {
               fieldKey: 'contact_details',
-              isEditable: true
+              isEditable: true,
+              className: 'details',
+              emptyText: 'Add contact details'
             }
           ],
           tabs: [
@@ -130,7 +158,7 @@
               viewName: 'tabProjects'
             },
             {
-              title: 'Services',
+              title: 'Providers',
               key: 'services',
               viewName: 'tabServices'
             }
@@ -148,8 +176,19 @@
       },
 
       afterActivate: function() {
+        var vm = this;
         controllerScope.canEdit = controllerScope.isOwnerOrStaff(controllerScope.model);
         controllerScope.updateImageUrl();
+        $q.all([
+          resourcesCountService.resources({'customer': vm.model.uuid}),
+          resourcesCountService.projects({'customer': vm.model.uuid}),
+          resourcesCountService.digitalocean({'customer': vm.model.uuid}),
+          resourcesCountService.clouds({'customer': vm.model.uuid})
+        ]).then(function(responses) {
+          vm.detailsViewOptions.tabs[0].count = responses[0];
+          vm.detailsViewOptions.tabs[1].count = responses[1];
+          vm.detailsViewOptions.tabs[2].count = responses[2] + responses[3];
+        });
       },
 
       updateImageUrl: function() {
@@ -164,7 +203,7 @@
           controllerScope.files = [];
           controllerScope.model.image = response.data.image;
           controllerScope.updateImageUrl();
-          Flash.create('success', 'Customer image is uploaded');
+          Flash.create('success', 'Organization image is uploaded');
         }, function (response) {
           Flash.create('warning', 'Unable to upload image');
         });
@@ -175,16 +214,25 @@
         customerImageService.delete({
           uuid: controllerScope.model.uuid
         }).then(function (response) {
-          Flash.create('success', 'Customer image is deleted');
+          Flash.create('success', 'Organization image is deleted');
           controllerScope.model.image = null;
           controllerScope.updateImageUrl();
         }, function (response) {
           Flash.create('warning', 'Unable to delete image');
         });
       },
-
+      update: function(data, fieldName) {
+        debugger;
+        var d = $q.defer();
+        if (data || fieldName != 'name') {
+          return this._super();
+        }
+        d.resolve('This field is required.');
+        return d.promise;
+      },
       afterUpdate: function() {
-        this.successFlash('Customer {} is updated'.replace('{}', controllerScope.model.name));
+        this.successFlash('Organization {} is updated'.replace('{}', controllerScope.model.name));
+        $rootScope.$broadcast('refreshCustomerList', {model: this.model, update: true});
       }
     });
 
@@ -246,14 +294,14 @@
 
         this.entityOptions = {
           entityData: {
-            noDataText: 'You have no services yet.'
+            noDataText: 'You have no providers yet.'
           },
           list: [
             {
               name: 'Name',
               propertyName: 'name',
               type: ENTITYLISTFIELDTYPES.name,
-              link: 'services.details({uuid: entity.uuid})',
+              link: 'services.details({uuid: entity.uuid, provider: entity.provider})',
               showForMobile: ENTITYLISTFIELDTYPES.showForMobile
             },
             {

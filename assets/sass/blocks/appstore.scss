@@ -149,12 +149,15 @@
                     }
                 }
                 span {
-                    display: block;
+                    display: none;
                     width: 93%;
-                    color: $dashboard-green;
+                    color: #ccc;
                     font-size: 14px;
                     position: absolute;
                     bottom: 10px;
+                    &.compare-active {
+                        color: $dashboard-green;
+                    }
                 }
 
                 .icon{
@@ -199,8 +202,14 @@
             &.step-2 {
                 .appstore-template {
                     padding-top: 30px;
+                    span {
+                        width: 100%;
+                        color: #333;
+                        font-weight: normal;
+                        position: static;
+                        margin-top: -7px;
+                    }
                 }
-
             }
             &.step-3 {
                 .step-title {
@@ -209,6 +218,48 @@
                     }
                     &:after {
                         width: 25%;
+                    }
+                }
+                &.agreement {
+                    .step-content {
+                        font-weight: bold;
+                        ul {
+                            list-style:none;
+                            padding: 0;
+                            li {
+                                .item-title {
+                                    margin-bottom: 10px;
+                                }
+                                .bold {
+                                    margin-top: 20px;
+                                    margin-bottom: 20px;
+                                    margin-left: 15px;
+                                    display: block;
+                                }
+                                ul {
+                                    margin-left: 15px;
+                                    margin-bottom: 20px;
+                                    li {
+                                        .item-name {
+                                            float: left;
+                                            width: 175px;
+                                        }
+                                        .item-value {
+                                            font-weight: normal;
+                                            float: left;
+                                        }
+                                    }
+                                }
+                                .conditions {
+                                    height: 175px;
+                                    background: #fff;
+                                    overflow: scroll;
+                                    margin: 20px 0;
+                                    padding: 15px;
+                                    font-weight: normal;
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -371,7 +422,7 @@
                 display: block;
                 width: 100%;
                 border-radius: 5px;
-                background: #50b848;
+                background: $button-green;
                 text-align: center;
                 height: 50px;
                 line-height: 50px;
@@ -450,6 +501,10 @@
                     text-align: left;
                     span {
                         display: block;
+                        width: 180px;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
                     }
                 }
                 .price {
@@ -464,7 +519,7 @@
                     background: #ececec;
                     margin-top: -1px;
                     .price {
-                        font-size: 41px;
+                        font-size: 34px;
                         color: $dashboard-green;
                     }
 

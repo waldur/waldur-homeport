@@ -34,4 +34,10 @@
             @include property(margin-top, 0);
         } // &.first
     } // simple-line
+    &.empty-data-block {
+        text-align: center;
+        h2 {
+            float: none;
+        }
+    }
 } // app-title-line

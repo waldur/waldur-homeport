@@ -1,5 +1,40 @@
 <div ng-controller="CustomerDetailUpdateController as CustomerDetailUpdate">
+    <div class="balance-block container">
+        <div class="right-block">
+            <div class="balance">
+                    <span class="bold">
+                        Balance:
+                    </span>
+                    <span>
+                        $100
+                    </span>
+            </div>
+            <div class="buttons">
+                <a class="button" ng-click="amountTooltip = !amountTooltip; graphTooltip = false;">Top-up</a>
+                <a class="button" ng-click="graphTooltip = !graphTooltip; amountTooltip = false;">History</a>
+            </div>
+            <div class="tooltip graph-tooltip" ng-show="graphTooltip">
+                <canvas chart-options="CustomerDetailUpdate.chartOptions"
+                        chart-data="CustomerDetailUpdate.chartData"
+                        tc-chartjs chart-type="line"
+                        width="400" height="75"></canvas>
+            </div>
+            <div class="tooltip amount-tooltip" ng-show="amountTooltip">
+                <div class="tooltip-title">
+                    <h3>Add amount</h3>
 
+                    <div class="close" ng-click="amountTooltip = false;"></div>
+                    <div class="clear"></div>
+                </div>
+                <select name="amount" id="amount">
+                    <option value="1">1</option>
+                </select>
+                <a class="button">
+                    Add credit
+                </a>
+            </div>
+        </div>
+    </div>
     <details-view details-options="CustomerDetailUpdate.detailsViewOptions"
                   details-controller="CustomerDetailUpdate"></details-view>
 

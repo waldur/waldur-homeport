@@ -36,6 +36,7 @@
           list: [
             {
               type: ENTITYLISTFIELDTYPES.statusCircle,
+              className: 'statusCircle',
               propertyName: 'resolution'
             },
             {
