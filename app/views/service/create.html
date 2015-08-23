@@ -22,14 +22,14 @@
                             <div class="appstore-templates">
                                 <!-- template -->
                                 <div class="appstore-template"
-                                    ng-repeat="service in ServiceAdd.categoryServices"
-                                    ng-class="{'state': ServiceAdd.service == service}"
-                                    ng-click="ServiceAdd.setService(service)">
-                                    <div class="icon {{ ::service.name.toLowerCase() }}">
-                                        <img ng-src="/static/images/appstore/icon-{{ ::service.name.toLowerCase() }}.png"/>
+                                    ng-repeat="model in ServiceAdd.categoryServices"
+                                    ng-class="{'state': ServiceAdd.model == model}"
+                                    ng-click="ServiceAdd.setModel(model)">
+                                    <div class="icon {{ ::model.name.toLowerCase() }}">
+                                        <img ng-src="/static/images/appstore/icon-{{ ::model.name.toLowerCase() }}.png"/>
                                     </div>
-                                    <div class="description {{ ::service.name.toLowerCase() }}">
-                                        <h3>{{ service.name }}</h3>
+                                    <div class="description {{ ::model.name.toLowerCase() }}">
+                                        <h3>{{ model.name }}</h3>
                                     </div>
                                 </div>
                                 <!-- /template -->
@@ -46,7 +46,7 @@
                 <label for="serviceName">Provider name</label>
             </div>
             <div class="col input input-full">
-                <input type="text" placeholder="Service Testbed" ng-model="ServiceAdd.service.serviceName" id="serviceName">
+                <input type="text" ng-model="ServiceAdd.model.serviceName" id="serviceName">
                 <div class="error arrow-up" ng-show="ServiceAdd.errors.name">
                     <ul class="error-list">
                         <li ng-repeat="error in ServiceAdd.errors.name">{{ error }}</li>
@@ -54,16 +54,16 @@
                 </div>
             </div>
         </div>
-        <div class="form-row" ng-repeat="option in ServiceAdd.service.options">
+        <div class="form-row" ng-repeat="option in ServiceAdd.model.options">
             <div class="col label">
-                <label for="{{ ServiceAdd.service.name }}_{{ option.key }}"><helpicon help-text="{{ option.help_text }}" ng-if="option.help_text"></helpicon> {{ option.label }}</label>
+                <label for="{{ ServiceAdd.model.name }}_{{ option.key }}"><helpicon help-text="{{ option.help_text }}" ng-if="option.help_text"></helpicon> {{ option.label }}</label>
             </div>
             <div class="col input input-full">
-                <input id="{{ ServiceAdd.service.name }}_{{ option.key }}"
+                <input id="{{ ServiceAdd.model.name }}_{{ option.key }}"
                        type="text"
                        ng-if="!option.choices"
                        ng-model="option.value">
-                <select id="{{ ServiceAdd.service.name }}_{{ option.key }}"
+                <select id="{{ ServiceAdd.model.name }}_{{ option.key }}"
                         ng-if="option.choices"
                         ng-model="option.value"
                         ng-init="option.value=option.choices[0].value"
@@ -90,7 +90,7 @@
     </div>
     <!-- /non field errors -->
 
-    <div class="decision" ng-show="ServiceAdd.service">
+    <div class="decision" ng-show="ServiceAdd.model">
         <div class="col">
             <a class="button-apply" ng-click="ServiceAdd.save()">Add provider</a>
         </div>

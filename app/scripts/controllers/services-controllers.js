@@ -92,7 +92,7 @@
       'joinService',
       'currentStateService',
       'projectsService',
-      'baseControllerClass',
+      'baseControllerAddClass',
       '$q',
       '$state',
       '$rootScope',
@@ -104,17 +104,19 @@
     joinService,
     currentStateService,
     projectsService,
-    baseControllerClass,
+    baseControllerAddClass,
     $q,
     $state,
     $rootScope) {
     var controllerScope = this;
-    var ServiceController = baseControllerClass.extend({
+    var ServiceController = baseControllerAddClass.extend({
       init: function() {
+        this.service = joinService;
         this.controllerScope = controllerScope;
+        this.listState = 'services.list';
+        this.successMessage = 'Provider has been created';
         this.setSignalHandler('currentCustomerUpdated', this.activate.bind(this));
         this._super();
-        this.activate();
       },
       categories: [
         {
@@ -126,9 +128,9 @@
           services: ['Oracle', 'GitLab']
         }
       ],
-      setService: function(service) {
-        this.service = service;
-        this.service.serviceName = service.name;
+      setModel: function(model) {
+        this.model = model;
+        this.model.serviceName = model.name;
         this.errors = {};
       },
       setCategory: function(category) {
@@ -139,7 +141,7 @@
           var service = this.services[name];
           this.categoryServices.push(service);
         }
-        this.setService(this.categoryServices[0]);
+        this.setModel(this.categoryServices[0]);
       },
       activate: function() {
         var vm = this;
@@ -152,50 +154,25 @@
         });
       },
 
-      save: function() {
-        var vm = this;
-        this.createService(vm.service).then(function() {
-          vm.flashMessage('info', 'Provider has been created');
-          $state.go('services.list');
-        }, function(response) {
-          vm.errors = response.data;
-        });
-      },
-
-      cancel: function() {
-        $state.go('services.list');
-      },
-
-      createService: function(service) {
-        var options = this.prepareServiceOptions(service);
-        var vm = this;
-        return joinService.createService(service.url, options).success(function() {
-          vm.errors = {};
-        }).error(function(errors) {
-          vm.errors = errors;
-        });
-      },
-
-      prepareServiceOptions: function(service){
-        var result = {};
-        for (var i = 0; i < service.options.length; i++) {
-          var option = service.options[i];
+      beforeSave: function() {
+        this.instance = this.service.$create(this.model.url);
+        for (var i = 0; i < this.model.options.length; i++) {
+          var option = this.model.options[i];
           if (option.value) {
-            result[option.key] = option.value;
+            this.instance[option.key] = option.value;
           }
-          result['customer'] = this.customer.url;
-          result['name'] = service.serviceName;
         }
-        return result;
+        this.instance.customer = this.customer.url;
+        this.instance.name = this.model.serviceName;
       },
 
-      connectServiceWithProjects: function(service) {
+      afterSave: function() {
         var vm = this;
-        return projectsService.getList().then(function(response) {
-          var promises = [];
-          for (var i = 0; response.length > i; i++) {
-            promises.push(joinServiceProjectLinkService.add(response[i], service.url));
-          }
+        return projectsService.getList().then(function(projects) {
+          var promises = projects.map(function(project) {
+            return joinServiceProjectLinkService.add(
+              vm.model.serviceProjectLinkUrl, vm.instance.url, project.url);
+          });
           return $q.all(promises).then(function() {
             $rootScope.$broadcast('refreshProjectList');
           });

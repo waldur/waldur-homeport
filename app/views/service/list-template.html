@@ -1,10 +1,10 @@
 <div class="white-box no-styles" ng-show="ServiceList.list.length <= 0 && !ServiceList.searchInput">
     <h2 class="app-title">
-        You have no services yet.
+        You have no providers yet.
     </h2>
     <div class="decision">
         <div class="col">
-            <a ui-sref="services.create" class="button">Add service</a>
+            <a ui-sref="services.create" class="button">Add provider</a>
         </div>
     </div>
 </div>
@@ -12,7 +12,7 @@
 <div class="white-box" ng-show="ServiceList.list.length > 0 || ServiceList.searchInput">
     <ul class="sort-list">
         <li class="title">
-            <h2 class="app-title">Services</h2>
+            <h2 class="app-title">Providers</h2>
         </li>
         <li class="search divid">
             <div class="search-box">
@@ -23,7 +23,7 @@
         <li class="right-sort">
             <a ui-sref="services.create" class="button">
                 <span class="icon plus"></span>
-                <span>Add service</span>
+                <span>Add provider</span>
             </a>
         </li>
     </ul>

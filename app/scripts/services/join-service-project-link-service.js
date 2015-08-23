@@ -7,7 +7,6 @@
       '$q',
       'baseServiceClass',
       'projectCloudMembershipsService',
-      'digitalOceanServiceProjectLinkService',
       'projectsService',
       'currentStateService',
       joinServiceProjectLinkService
@@ -17,7 +16,6 @@
     $q,
     baseServiceClass,
     projectCloudMembershipsService,
-    digitalOceanServiceProjectLinkService,
     projectsService,
     currentStateService
   ) {
@@ -48,15 +46,11 @@
         }
       },
 
-      add: function(project, service) {
-        if (service.url.indexOf('digitalocean') > -1) {
-          var instance = digitalOceanServiceProjectLinkService.$create();
-          instance.project = project.url;
-          instance.service = service.url;
-          return instance.$save();
-        } else {
-          return projectCloudMembershipsService.addRow(project.url, service.url);
-        }
+      add: function(endpointUrl, service_url, project_url) {
+        var instance = this.$create(endpointUrl);
+        instance.project = project_url;
+        instance.service = service_url;
+        return instance.$save();
       }
     });
     return new ServiceClass();
