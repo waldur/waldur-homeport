@@ -537,6 +537,36 @@
     }
 }
 
+.import-wrapper {
+    @extend .appstore-wrapper;
+    padding-right: 0;
+    .appstore-content {
+        section {
+            .step-title {
+                span {
+                    background-color: white;
+                }
+            }
+            &.step-2 {
+                .appstore-template {
+                    .icon {
+                        height: 45px;
+                        width: inherit;
+                    }
+                }
+            }
+        }
+    }
+    .appstore-templates {
+        .appstore-template {
+            .description {
+                width: 100%;
+                padding-left: 0;
+            }
+        }
+    }
+}
+
 .project-alert-message {
     $shadow: 0px 2px 2px 0px #ededed;
     position: fixed;
