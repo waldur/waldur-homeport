@@ -4,20 +4,20 @@
   angular.module('ncsaas')
     .controller('ImportResourceController',
       ['baseControllerClass',
-      'digitalOceanLinkService',
       'resourcesService',
       'ENV',
       'servicesService',
       'currentStateService',
+      '$state',
       ImportResourceController]);
 
   function ImportResourceController(
     baseControllerClass,
-    digitalOceanLinkService,
     resourcesService,
     ENV,
     servicesService,
-    currentStateService
+    currentStateService,
+    $state
     ) {
     var controllerScope = this;
     var Controller = baseControllerClass.extend({
@@ -70,7 +70,7 @@
             }
           }
           if (vm.categories.length == 0) {
-            alert("No providers!");
+            vm.flashMessage("No providers!");
             $state.go('resources.list', {tab: 'Providers'});
           }
         });
@@ -79,7 +79,6 @@
         this.selectedCategory = category;
         this.secondStep = true;
         this.selectedService = {};
-        this.selectedServiceName = null;
         this.importableResources = [];
         this.selectedResources = [];
         this.importedResources = [];
@@ -144,16 +143,16 @@
 
       save: function() {
         var self = this;
-        var service_uuid = controllerScope.selectedService.uuid;
-        var project_url = controllerScope.currentProject.url;
+        var service_url = self.selectedService.url;
+        var project_url = self.currentProject.url;
 
-        controllerScope.selectedResources.map(function(resource){
+        self.selectedResources.forEach(function(resource){
           resource.status = 'progress';
-          digitalOceanLinkService.add({
-            service_uuid: service_uuid,
-            project_url: project_url,
-            droplet_id: resource.id
-          }).then(function(){
+
+          var instance = servicesService.$create(service_url + 'link/');
+          instance.project = project_url;
+          instance.backend_id = resource.id;
+          instance.$save().then(function(){
             resource.status = 'success';
             self.toggleResource(resource);
           }, function(){
