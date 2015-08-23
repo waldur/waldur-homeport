@@ -4,18 +4,20 @@
   angular.module('ncsaas')
     .controller('ImportResourceController',
       ['baseControllerClass',
-      'digitalOceanLinkService',
       'resourcesService',
-      'joinService',
-      'joinServiceProjectLinkService',
+      'ENV',
+      'servicesService',
+      'currentStateService',
+      '$state',
       ImportResourceController]);
 
   function ImportResourceController(
     baseControllerClass,
-    digitalOceanLinkService,
     resourcesService,
-    joinService,
-    joinServiceProjectLinkService
+    ENV,
+    servicesService,
+    currentStateService,
+    $state
     ) {
     var controllerScope = this;
     var Controller = baseControllerClass.extend({
@@ -23,16 +25,67 @@
       importableResources: [],
       importedResources: [],
       noResources: false,
+      servicesList: null,
+      selectedCategory: null,
+      services: [],
 
       init: function() {
         this.controllerScope = controllerScope;
-        this.getServices();
         this.setSignalHandler('currentCustomerUpdated', this.currentCustomerUpdatedHandler.bind(controllerScope));
+        this.setSignalHandler('currentProjectUpdated', this.setProject.bind(controllerScope));
+        this.activate();
         this._super();
       },
 
+      activate: function() {
+        var vm = this;
+        servicesService.getServicesList().then(function(response) {
+          vm.servicesList = response;
+        });
+        vm.setProject();
+        vm.secondStep = false;
+        vm.selectedCategory = null;
+        vm.importableResources = [];
+      },
+      setProject: function() {
+        var vm = this;
+        vm.categories = [];
+        var categories = ENV.appStoreCategories;
+        currentStateService.getProject().then(function(response) {
+          vm.currentProject = response;
+          for (var j = 0; j < categories.length; j++) {
+            var category = categories[j];
+            vm.services[category.name] = [];
+            for (var i = 0; i < vm.currentProject.services.length; i++) {
+              var service = vm.currentProject.services[i];
+              if (service.state != 'Erred'
+                && category.services
+                && (category.services.indexOf(service.type) + 1)
+              ) {
+                vm.services[category.name].push(service);
+              }
+            }
+            if (vm.services[category.name].length > 0 || category.name == 'SUPPORT') {
+              vm.categories.push(category);
+            }
+          }
+          if (vm.categories.length == 0) {
+            vm.flashMessage("No providers!");
+            $state.go('resources.list', {tab: 'Providers'});
+          }
+        });
+      },
+      setCategory: function(category) {
+        this.selectedCategory = category;
+        this.secondStep = true;
+        this.selectedService = {};
+        this.importableResources = [];
+        this.selectedResources = [];
+        this.importedResources = [];
+      },
+
       currentCustomerUpdatedHandler: function() {
-        this.getServices();
+        this.activate();
       },
 
       toggleResource: function(resource){
@@ -46,28 +99,20 @@
           }
         }
       },
-
-      getServices: function() {
-        var self = this;
-        joinService.getList().then(function(response){
-          controllerScope.services = response;
-        }, function(){
-          self.flashMessage('warning', 'Unable to get list of available services');
-        });
-      },
-
       setService: function(service) {
+        this.importableResources = [];
+        this.selectedResources = [];
+        this.importedResources = [];
         controllerScope.selectedService = service;
         this.getResourcesForService(service);
         this.getImportedResourcesForService(service);
-        this.getProjectsForService(service)
       },
 
       getImportedResourcesForService: function(service) {
         var self = this;
         controllerScope.importedResources = [];
-        var query = {'resource_type': service.resource_type, 'service_uuid': service.uuid};
-        resourcesService.getList(query).then(function(response){
+        var query = {'resource_type': service.type.toLowerCase(), 'service_uuid': service.uuid};
+        resourcesService.getList(query).then(function(response) {
           controllerScope.importedResources = response;
         }, function(){
           self.flashMessage('warning', 'Unable to get list of imported resources');
@@ -78,10 +123,10 @@
         var self = this;
         controllerScope.importableResources = [];
         controllerScope.noResources = false;
-        digitalOceanLinkService.getList({uuid: service.uuid}).then(function(response){
+        servicesService.getList({operation: 'link'}, service.url).then(function(response) {
           for (var i = 0; i < response.length; i++) {
             response[i].status = 'ready';
-          };
+          }
           controllerScope.importableResources = response;
           if (response.length == 0){
             controllerScope.noResources = true;
@@ -92,43 +137,29 @@
         });
       },
 
-      getProjectsForService: function(service) {
-        var self = this;
-        controllerScope.projectList = [];
-        joinServiceProjectLinkService.getList({'service':service}).then(function(projects){
-          controllerScope.projectList = projects;
-          if (projects.length == 1) {
-            controllerScope.selectedProject = projects[0];
-          }
-        }, function(){
-          self.flashMessage('warning', 'Unable to get list of projects for service');
-        });
-      },
-
       canImport: function() {
-        return controllerScope.selectedProject && controllerScope.selectedResources.length;
+        return controllerScope.currentProject && controllerScope.selectedResources.length;
       },
 
       save: function() {
         var self = this;
-        var service_uuid = controllerScope.selectedService.uuid;
-        var project_url = controllerScope.selectedProject.url;
-        var project_uuid = controllerScope.selectedProject.uuid;
+        var service_url = self.selectedService.url;
+        var project_url = self.currentProject.url;
 
-        controllerScope.selectedResources.map(function(resource){
+        self.selectedResources.forEach(function(resource){
           resource.status = 'progress';
-          digitalOceanLinkService.add({
-            service_uuid: service_uuid,
-            project_url: project_url,
-            droplet_id: resource.id
-          }).then(function(){
+
+          var instance = servicesService.$create(service_url + 'link/');
+          instance.project = project_url;
+          instance.backend_id = resource.id;
+          instance.$save().then(function(){
             resource.status = 'success';
             self.toggleResource(resource);
           }, function(){
             self.flashMessage('warning', 'Unable to import resource ' + resource.name);
             resource.status = 'failed';
           })
-        })
+        });
 
         self.flashMessage('success', 'Wait while importing resources');
       }

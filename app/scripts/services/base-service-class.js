@@ -38,7 +38,7 @@
         this.cacheTime = 0;
       },
 
-      getList:function(filter) {
+      getList:function(filter, endpointUrl) {
         var vm = this;
         var deferred = $q.defer();
         filter = filter || {};
@@ -61,7 +61,7 @@
               listCache.put(vm.endpoint, {doReset: false});
             }
             listCache.put(cacheKey, {data: null, time: 0});
-            vm.getFactory(true).query(filter, function(response, responseHeaders) {
+            vm.getFactory(true, null, endpointUrl).query(filter, function(response, responseHeaders) {
               var header = responseHeaders();
               vm.resultCount = !header['x-result-count'] ? null : header['x-result-count'];
               if (vm.resultCount) {
@@ -141,8 +141,8 @@
         endpoint = endpoint || this.getEndpoint(isList);
         endpointUrl = endpointUrl || ENV.apiEndpoint + 'api' + endpoint;
         /*jshint camelcase: false */
-        return $resource(endpointUrl + ':UUID/', {UUID:'@uuid',
-            page_size:'@page_size', page:'@page', 'DONTBLOCK': '@DONTBLOCK'},
+        return $resource(endpointUrl + ':UUID/:operation/', {UUID:'@uuid',
+            page_size:'@page_size', page:'@page', 'DONTBLOCK': '@DONTBLOCK', operation:'@operation'},
           {
             operation: {
               method:'POST',
