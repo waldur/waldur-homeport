@@ -32,9 +32,9 @@
         ];
         this.entityOptions = {
           entityData: {
-            noDataText: 'No services yet.',
+            noDataText: 'No providers yet.',
             createLink: 'services.create',
-            createLinkText: 'Create service',
+            createLinkText: 'Create provider',
           },
           list: [
             {

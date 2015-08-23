@@ -2,9 +2,9 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('servicesService', ['baseServiceClass', '$q', '$http', 'ENV', servicesService]);
+    .service('servicesService', ['baseServiceClass', '$q', '$http', servicesService]);
 
-  function servicesService(baseServiceClass, $q, $http, ENV) {
+  function servicesService(baseServiceClass, $q, $http) {
     /*jshint validthis: true */
     var ServiceClass = baseServiceClass.extend({
       services: null,
@@ -48,11 +48,13 @@
             for(var name in services) {
               promises.push($http({url: services[name].url, method: 'options'}));
               names.push(name);
+              var url = services[name].url;
+              var spl = url.substring(0, url.length-1) + '-service-project-link/';
               vm.service_options[name] = {
                 name: name,
-                url: services[name].url,
+                url: url,
                 options: [],
-                serviceProjectLinkUrl: ENV.apiEndpoint + 'api/' + name.toLowerCase() + '-service-project-link/'
+                serviceProjectLinkUrl: spl
               };
             }
 
