@@ -6,7 +6,7 @@
         <li ng-repeat="button in buttonList" ng-if="!buttonType">
             <a ng-if="button.clickFunction" ng-click="button.clickFunction(buttonModel)"
                class="button-simple {{ button.className }}"
-               ng-class="{'disabled': button.isDisabled && !button.isDisabled(buttonModel)}">{{ button.title }}</a>
+               ng-class="{'disabled': button.isDisabled(buttonModel)}">{{ button.title }}</a>
             <a ng-if="button.state" ui-sref="{{ button.state }}" class="button-simple">{{ button.title }}</a>
         </li>
     </ul>

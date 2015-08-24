@@ -21,18 +21,18 @@
         this.currentUser = usersService.currentUser;
         this.actionButtonsListItems = [
           {
-            title: 'Remove'
+            title: 'Remove',
+            clickFunction: this.remove.bind(controllerScope),
+
+            isDisabled: function(customer) {
+              return !this.isOwnerOrStaff(customer) || customer.projects.length != 0;
+            }.bind(controllerScope)
           },
           {
             title: 'Add provider',
             state: 'services.create'
           }
         ];
-        if (this.currentUserIsStaff()) {
-          this.actionButtonsListItems[0].clickFunction = this.remove.bind(controllerScope);
-        } else {
-          this.actionButtonsListItems[0].state = 'support.create';
-        }
         this.entityOptions = {
           entityData: {
             noDataText: 'You have no organizations yet.',
