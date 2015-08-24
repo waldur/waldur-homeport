@@ -26,7 +26,16 @@
 
             isDisabled: function(customer) {
               return !this.isOwnerOrStaff(customer) || customer.projects.length != 0;
-            }.bind(controllerScope)
+            }.bind(controllerScope),
+
+            tooltip: function(customer) {
+              if (!this.isOwnerOrStaff(customer)) {
+                return 'Only owner or staff can remove organization';
+              }
+              if (customer.projects.length != 0) {
+               return 'Organization has projects. Please remove them first';
+              }
+            }.bind(controllerScope),
           },
           {
             title: 'Add provider',
