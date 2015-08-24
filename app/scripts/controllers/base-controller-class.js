@@ -96,7 +96,6 @@
       },
       remove: function(model) {
         var vm = this;
-        var index = vm.list.indexOf(model);
         var confirmDelete = confirm('Confirm deletion?');
         if (confirmDelete) {
           model.$delete(function() {
