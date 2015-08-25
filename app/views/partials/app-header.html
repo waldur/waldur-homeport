@@ -88,14 +88,8 @@
                         <li visible="projects">
                             <a ui-sref="projects.create" class="project">Add project</a>
                         </li>
-                        <li visible="keys">
-                            <a ui-sref="keys.create" class="key">Add SSH key</a>
-                        </li>
-                        <li visible="users">
-                            <a href="" class="user">Invite user</a>
-                        </li>
                         <li visible="import" ng-if="::Header.showImport">
-                            <a ui-sref="import.import" class="import">Import resources from provider</a>
+                            <a ui-sref="import.import" class="import">Import resources</a>
                         </li>
                     </ul>
                 </li>
@@ -114,14 +108,8 @@
                         <li visible="projects" class="on-tablet">
                             <a ui-sref="projects.create" class="project">Add project</a>
                         </li>
-                        <li visible="keys" class="on-tablet">
-                            <a ui-sref="keys.create" class="ssh-key">Add SSH key</a>
-                        </li>
-                        <li visible="users" class="on-tablet">
-                            <a href="" class="user">Invite user</a>
-                        </li>
                         <li visible="import" ng-if="::Header.showImport" class="on-tablet">
-                            <a ui-sref="import.import" class="import">Import resources from provider</a>
+                            <a ui-sref="import.import" class="import">Import resources</a>
                         </li>
                         <li visible="support" class="on-tablet">
                             <a ui-sref="support.list">Support</a>
@@ -193,11 +181,8 @@
                         <li visible="appstore">
                             <a ui-sref="appstore.store" class="resource">Add resource</a>
                         </li>
-                        <li visible="users">
-                            <a visible="users" href="" class="user">Invite user</a>
-                        </li>
                         <li visible="import" ng-if="::Header.showImport">
-                            <a ui-sref="import.import" class="import">Import resources from provider</a>
+                            <a ui-sref="import.import" class="import">Import resources</a>
                         </li>
                     </ul>
                 </li>
