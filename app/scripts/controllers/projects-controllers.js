@@ -54,8 +54,12 @@
             }.bind(controllerScope),
           },
           {
-            title: 'Add resource',
+            title: 'Import resource',
             state: 'import.import'
+          },
+          {
+            title: 'Create resource',
+            state: 'appstore.store'
           }
         ];
         this.entityOptions = {
