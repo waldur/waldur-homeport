@@ -139,6 +139,7 @@
         vm.userCanManageProjects = false;
         if (usersService.currentUser.is_staff) {
           vm.userCanManageProjects = true;
+          return;
         }
         currentStateService.getCustomer().then(function(customer) {
           for (var i = 0; i < customer.owners.length; i++) {
