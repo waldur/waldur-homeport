@@ -18,19 +18,21 @@
     var ServiceClass = baseServiceClass.extend({
       getList: function(filter) {
         var vm = this;
-        var fn = this._super.bind(vm);
+        filter = filter || {};
+        for (var key in this.defaultFilter) {
+          filter[key] = this.defaultFilter[key];
+        }
         return servicesService.getServicesList().then(function(services) {
           var promises = [];
-          for(var name in services) {
-            var endpointUrl = services[name].url;
-            var promise = fn(filter, endpointUrl).then(function(services) {
+          angular.forEach(services, function(service, name) {
+            var promise = vm.getFactory(true, null, service.url).query(filter, function(services) {
               services.forEach(function(service) {
                 service.provider = name;
-              })
+              });
               return services;
             });
-            promises.push(promise);
-          }
+            promises.push(promise.$promise);
+          });
           return $q.all(promises).then(function(responses) {
             return vm.flattenList(responses);
           });

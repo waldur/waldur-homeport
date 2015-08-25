@@ -94,7 +94,6 @@
       'projectsService',
       'baseControllerAddClass',
       '$q',
-      '$state',
       '$rootScope',
       ServiceAddController]);
 
@@ -106,7 +105,6 @@
     projectsService,
     baseControllerAddClass,
     $q,
-    $state,
     $rootScope) {
     var controllerScope = this;
     var ServiceController = baseControllerAddClass.extend({
