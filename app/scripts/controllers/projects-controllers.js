@@ -22,10 +22,6 @@
         this.searchFieldName = 'name';
         this.actionButtonsListItems = [
           {
-            title: 'Archive',
-            clickFunction: function(project) {}
-          },
-          {
             title: 'Delete',
             clickFunction: this.remove.bind(controllerScope)
           }
@@ -1062,6 +1058,12 @@ angular.module('ncsaas')
         this.controllerScope = controllerScope;
         this.setSignalHandler('currentProjectUpdated', this.setCurrentProject.bind(controllerScope));
         this._super();
+        this.actionButtonsListItems = [
+          {
+            title: 'Remove',
+            clickFunction: this.remove.bind(controllerScope)
+          }
+        ];
         this.entityOptions = {
           entityData: {
             noDataText: 'No providers yet',
@@ -1112,7 +1114,19 @@ angular.module('ncsaas')
           });
         }
       },
-
+      remove: function(model) {
+        var vm = this;
+        var index = vm.list.indexOf(model);
+        var confirmDelete = confirm('Confirm deletion?');
+        if (confirmDelete) {
+          joinServiceProjectLinkService.$deleteByUrl(model.url, function() {
+            vm.afterInstanceRemove(model);
+            vm.list.splice(index, 1);
+          }, vm.handleActionException);
+        } else {
+          alert('Was not deleted.');
+        }
+      },
       onSearchInputChanged: function(event, searchInput) {
         this.searchInput = searchInput;
         this.search();

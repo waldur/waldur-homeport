@@ -294,7 +294,9 @@
 
         this.entityOptions = {
           entityData: {
-            noDataText: 'You have no providers yet.'
+            noDataText: 'You have no providers yet.',
+            createLink: 'services.create',
+            createLinkText: 'Create provider'
           },
           list: [
             {
@@ -342,10 +344,6 @@
         this._super();
         this.deregisterEvent('currentCustomerUpdated');
         this.actionButtonsListItems = [
-          {
-            title: 'Archive',
-            clickFunction: function(project) {}
-          },
           {
             title: 'Delete',
             clickFunction: this.remove.bind(controllerScope)
