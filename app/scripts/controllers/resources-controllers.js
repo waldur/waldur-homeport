@@ -30,6 +30,11 @@
             title: 'Remove',
             clickFunction: this.remove.bind(this.controllerScope),
             className: 'remove'
+          },
+          {
+            title: 'Unlink',
+            clickFunction: this.unlink.bind(this.controllerScope),
+            className: 'remove'
           }
         ];
         this.entityOptions = {
@@ -92,6 +97,12 @@
           var index = vm.list.indexOf(resource);
           vm.list[index] = response;
         });
+      },
+      unlink: function(resource) {
+        var vm = this;
+        resource.$action('unlink', function() {
+          vm.afterInstanceRemove(resource);
+        }, vm.handleActionException);
       }
     });
 

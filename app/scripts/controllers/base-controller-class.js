@@ -96,21 +96,17 @@
       },
       remove: function(model) {
         var vm = this;
-        var index = vm.list.indexOf(model);
         var confirmDelete = confirm('Confirm deletion?');
         if (confirmDelete) {
           model.$delete(function() {
             vm.afterInstanceRemove(model);
-            vm.list.splice(index, 1);
           }, vm.handleActionException);
-        } else {
-          alert('Was not deleted.');
         }
       },
       handleActionException: function(response) {
         if (response.status === 409) {
-          var message = response.data.status || response.data.detail;
-          alert(message);
+          var message = response.data.detail || response.data.status;
+          this.errorFlash(message);
         }
       },
       changeAllSelectedInstances: function() {
@@ -139,6 +135,11 @@
         vm.getList();
       },
       afterInstanceRemove: function(instance) {
+        var index = this.list.indexOf(instance);
+        if (index !== -1) {
+          this.list.splice(index, 1);
+        }
+
         var index = this.selectedInstances.indexOf(instance[this.uniqueModelKeyName]);
         if (index !== -1) {
           this.selectedInstances.splice(index, 1);
