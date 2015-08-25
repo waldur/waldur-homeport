@@ -95,6 +95,10 @@
           service.errors = {};
           return !service.saved;
         });
+        // return successfully if no services require creation
+        if (unsavedServices.length < 1) {
+            return true;
+        }
         var promises = unsavedServices.map(function(service) {
           var options = vm.prepareServiceOptions(service);
 

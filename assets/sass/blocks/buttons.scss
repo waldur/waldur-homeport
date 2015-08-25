@@ -34,6 +34,10 @@
     @include property(padding-top, 12);
     line-height: 1;
     color: #444;
+    &.active, &:active, &:hover {
+        text-decoration: underline;
+    } // &.active, &:active, &:hover
+
 } // button-cancel
 .button-apply {
     @extend .button;
