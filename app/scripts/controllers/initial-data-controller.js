@@ -96,8 +96,6 @@
           return !service.saved;
         });
         var promises = unsavedServices.map(function(service) {
-          var options = vm.prepareServiceOptions(service);
-
           var instance = joinService.$create(service.url);
           for (var i = 0; i < service.options.length; i++) {
             var option = service.options[i];
