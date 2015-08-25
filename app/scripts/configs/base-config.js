@@ -91,7 +91,7 @@ angular.module('ncsaas')
       'backups',
       'services:provider:uuid'
     ],
-    featuresVisible: true,
+    featuresVisible: false,
 
     projectServiceLinkEndpoints: {
       Oracle: 'oracle-service-project-link',

@@ -1013,7 +1013,7 @@
           } else {
             if (vm.self.name !== initialDataState) {
               usersService.getCurrentUser().then(function(response) {
-                if (!response.full_name || !response.email) {
+                if (!response.email) {
                   $location.path(initialDataStatePath);
                 } else {
                   deferred.resolve();
