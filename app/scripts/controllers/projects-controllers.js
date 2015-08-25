@@ -10,6 +10,7 @@
        'currentStateService',
        'resourcesService',
        '$rootScope',
+       'ENV',
        'ENTITYLISTFIELDTYPES',
        ProjectListController]);
 
@@ -21,6 +22,7 @@
     currentStateService,
     resourcesService,
     $rootScope,
+    ENV,
     ENTITYLISTFIELDTYPES) {
     var controllerScope = this;
     var CustomerController = baseControllerListClass.extend({
@@ -57,11 +59,13 @@
             title: 'Import resource',
             state: 'import.import'
           },
-          {
+        ];
+        if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('appstore') == -1) {
+          this.actionButtonsListItems.push({
             title: 'Create resource',
             state: 'appstore.store'
-          }
-        ];
+          });
+        }
         this.entityOptions = {
           entityData: {
             noDataText: 'You have no projects yet.',
