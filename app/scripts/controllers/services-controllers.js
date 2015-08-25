@@ -272,6 +272,7 @@
       'joinServiceProjectLinkService',
       'ENTITYLISTFIELDTYPES',
       'ENV',
+      'servicesService',
       ServiceProjectTabController
     ]);
 
@@ -280,14 +281,16 @@
     joinService,
     baseControllerListClass,
     joinServiceProjectLinkService,
-    ENTITYLISTFIELDTYPES) {
+    ENTITYLISTFIELDTYPES,
+    ENV,
+    servicesService) {
     var controllerScope = this;
     var Controller = baseControllerListClass.extend({
       service: null,
       serviceProjects: [],
 
       init: function() {
-        this.service = joinServiceProjectLinkService;
+        this.service = servicesService;
         this._super();
         this.activate();
         this.actionButtonsListItems = [
@@ -324,17 +327,10 @@
         });
       },
       getList: function(filter) {
-        var vm = this;
-        if (vm.serviceEntity) {
-          joinServiceProjectLinkService.getList({'service': vm.serviceEntity}).then(function(response) {
-            vm.list = response;
-          });
-          filter = filter || {};
-          vm.service.cacheTime = vm.cacheTime;
-          return vm.service.getList(filter).then(function(response) {
-            vm.list = response;
-            vm.afterGetList();
-          });
+        if (this.serviceEntity) {
+          this.service.defaultFilter = {'service': this.serviceEntity.uuid};
+          this.service.endpoint = '/' + ENV.projectServiceLinkEndpoints[$stateParams.provider] + '/';
+          this._super(filter);
         }
       }
     });
