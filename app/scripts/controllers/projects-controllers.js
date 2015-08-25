@@ -3,11 +3,25 @@
 (function() {
   angular.module('ncsaas')
     .controller('ProjectListController',
-      ['baseControllerListClass', 'projectsService', 'projectPermissionsService', 'resourcesService',
-        '$rootScope', 'ENTITYLISTFIELDTYPES', ProjectListController]);
+      ['baseControllerListClass',
+       'projectsService',
+       'projectPermissionsService',
+       'usersService',
+       'currentStateService',
+       'resourcesService',
+       '$rootScope',
+       'ENTITYLISTFIELDTYPES',
+       ProjectListController]);
 
   function ProjectListController(
-    baseControllerListClass, projectsService, projectPermissionsService, resourcesService, $rootScope, ENTITYLISTFIELDTYPES) {
+    baseControllerListClass,
+    projectsService,
+    projectPermissionsService,
+    usersService,
+    currentStateService,
+    resourcesService,
+    $rootScope,
+    ENTITYLISTFIELDTYPES) {
     var controllerScope = this;
     var CustomerController = baseControllerListClass.extend({
       projectUsers: {},
@@ -18,16 +32,30 @@
       init:function() {
         this.service = projectsService;
         this.controllerScope = controllerScope;
+        this.checkPermissions();
         this._super();
         this.searchFieldName = 'name';
         this.actionButtonsListItems = [
           {
-            title: 'Archive',
-            clickFunction: function(project) {}
+            title: 'Remove',
+            clickFunction: this.remove.bind(controllerScope),
+
+            isDisabled: function(project) {
+              return !this.userCanManageProjects || this.projectHasResources(project);
+            }.bind(controllerScope),
+
+            tooltip: function(project) {
+              if (!this.userCanManageProjects) {
+                return 'Only customer owner or staff can remove project';
+              }
+              if (this.projectHasResources(project)) {
+               return 'Project has resources. Please remove them first';
+              }
+            }.bind(controllerScope),
           },
           {
-            title: 'Delete',
-            clickFunction: this.remove.bind(controllerScope)
+            title: 'Add resource',
+            state: 'import.import'
           }
         ];
         this.entityOptions = {
@@ -105,6 +133,28 @@
             ]
           }
         ];
+      },
+      checkPermissions: function() {
+        var vm = this;
+        vm.userCanManageProjects = false;
+        if (usersService.currentUser.is_staff) {
+          vm.userCanManageProjects = true;
+        }
+        currentStateService.getCustomer().then(function(customer) {
+          for (var i = 0; i < customer.owners.length; i++) {
+            if (usersService.currentUser.uuid === customer.owners[i].uuid) {
+              vm.userCanManageProjects = true;
+              break;
+            }
+          }
+        });
+      },
+      projectHasResources: function(project) {
+        for (var i = 0; i < project.quotas.length; i++) {
+          if (project.quotas[i].name == 'nc_resource_count') {
+            return project.quotas[i].usage > 0;
+          }
+        }
       },
       showMore: function(project) {
         if (!this.projectUsers[project.uuid]) {
