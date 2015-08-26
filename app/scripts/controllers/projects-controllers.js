@@ -3,11 +3,27 @@
 (function() {
   angular.module('ncsaas')
     .controller('ProjectListController',
-      ['baseControllerListClass', 'projectsService', 'projectPermissionsService', 'resourcesService',
-        '$rootScope', 'ENTITYLISTFIELDTYPES', ProjectListController]);
+      ['baseControllerListClass',
+       'projectsService',
+       'projectPermissionsService',
+       'usersService',
+       'currentStateService',
+       'resourcesService',
+       '$rootScope',
+       'ENV',
+       'ENTITYLISTFIELDTYPES',
+       ProjectListController]);
 
   function ProjectListController(
-    baseControllerListClass, projectsService, projectPermissionsService, resourcesService, $rootScope, ENTITYLISTFIELDTYPES) {
+    baseControllerListClass,
+    projectsService,
+    projectPermissionsService,
+    usersService,
+    currentStateService,
+    resourcesService,
+    $rootScope,
+    ENV,
+    ENTITYLISTFIELDTYPES) {
     var controllerScope = this;
     var CustomerController = baseControllerListClass.extend({
       projectUsers: {},
@@ -18,18 +34,38 @@
       init:function() {
         this.service = projectsService;
         this.controllerScope = controllerScope;
+        this.checkPermissions();
         this._super();
         this.searchFieldName = 'name';
         this.actionButtonsListItems = [
           {
-            title: 'Archive',
-            clickFunction: function(project) {}
+            title: 'Remove',
+            clickFunction: this.remove.bind(controllerScope),
+
+            isDisabled: function(project) {
+              return !this.userCanManageProjects || this.projectHasResources(project);
+            }.bind(controllerScope),
+
+            tooltip: function(project) {
+              if (!this.userCanManageProjects) {
+                return 'Only customer owner or staff can remove project';
+              }
+              if (this.projectHasResources(project)) {
+               return 'Project has resources. Please remove them first';
+              }
+            }.bind(controllerScope),
           },
           {
-            title: 'Delete',
-            clickFunction: this.remove.bind(controllerScope)
-          }
+            title: 'Import resource',
+            state: 'import.import'
+          },
         ];
+        if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('appstore') == -1) {
+          this.actionButtonsListItems.push({
+            title: 'Create resource',
+            state: 'appstore.store'
+          });
+        }
         this.entityOptions = {
           entityData: {
             noDataText: 'You have no projects yet.',
@@ -105,6 +141,29 @@
             ]
           }
         ];
+      },
+      checkPermissions: function() {
+        var vm = this;
+        vm.userCanManageProjects = false;
+        if (usersService.currentUser.is_staff) {
+          vm.userCanManageProjects = true;
+          return;
+        }
+        currentStateService.getCustomer().then(function(customer) {
+          for (var i = 0; i < customer.owners.length; i++) {
+            if (usersService.currentUser.uuid === customer.owners[i].uuid) {
+              vm.userCanManageProjects = true;
+              break;
+            }
+          }
+        });
+      },
+      projectHasResources: function(project) {
+        for (var i = 0; i < project.quotas.length; i++) {
+          if (project.quotas[i].name == 'nc_resource_count') {
+            return project.quotas[i].usage > 0;
+          }
+        }
       },
       showMore: function(project) {
         if (!this.projectUsers[project.uuid]) {
@@ -1044,6 +1103,7 @@ angular.module('ncsaas')
       '$scope',
       '$stateParams',
       'projectsService',
+      'blockUI',
       ProjectServicesTabController]);
 
   function ProjectServicesTabController(
@@ -1054,7 +1114,8 @@ angular.module('ncsaas')
     ENV,
     $scope,
     $stateParams,
-    projectsService) {
+    projectsService,
+    blockUI) {
     var controllerScope = this;
     var ServiceController = baseControllerListClass.extend({
       init: function() {
@@ -1062,18 +1123,25 @@ angular.module('ncsaas')
         this.controllerScope = controllerScope;
         this.setSignalHandler('currentProjectUpdated', this.setCurrentProject.bind(controllerScope));
         this._super();
+        this.actionButtonsListItems = [
+          {
+            title: 'Remove',
+            clickFunction: this.remove.bind(controllerScope)
+          }
+        ];
         this.entityOptions = {
           entityData: {
             noDataText: 'No providers yet',
             createLink: 'services.create',
             createLinkText: 'Create provider',
+            expandable: true
           },
           list: [
             {
               type: ENTITYLISTFIELDTYPES.statusCircle,
               className: 'statusCircle',
               propertyName: 'state',
-              onlineStatus: ENV.resourceOnlineStatus
+              onlineStatus: 'In Sync'
             },
             {
               name: 'Name',
@@ -1089,6 +1157,14 @@ angular.module('ncsaas')
             }
           ]
         };
+        this.expandableOptions = [
+          {
+            isList: false,
+            addItemBlock: false,
+            viewType: 'details',
+            list:['name']
+          }
+        ];
 
         $scope.$on('searchInputChanged', this.onSearchInputChanged.bind(this));
       },
@@ -1100,22 +1176,43 @@ angular.module('ncsaas')
       getList: function(filter) {
         var vm = this;
         var fn = this._super.bind(controllerScope);
+        var projectMenu = blockUI.instances.get('tab-content');
+        projectMenu.start();
         if ($stateParams.uuid) {
           return projectsService.$get($stateParams.uuid).then(function(project) {
             vm.service.defaultFilter.project_uuid = project.uuid;
-            fn(filter);
+            fn(filter).then(function() {
+              projectMenu.stop();
+            });
           });
         } else {
           return currentStateService.getProject().then(function(project) {
             vm.service.defaultFilter.project_uuid = project.uuid;
-            fn(filter);
+            fn(filter).then(function() {
+              projectMenu.stop();
+            });
           });
         }
       },
-
+      remove: function(model) {
+        var vm = this;
+        var index = vm.list.indexOf(model);
+        var confirmDelete = confirm('Confirm deletion?');
+        if (confirmDelete) {
+          joinServiceProjectLinkService.$deleteByUrl(model.url, function() {
+            vm.afterInstanceRemove(model);
+            vm.list.splice(index, 1);
+          }, vm.handleActionException);
+        } else {
+          alert('Was not deleted.');
+        }
+      },
       onSearchInputChanged: function(event, searchInput) {
         this.searchInput = searchInput;
         this.search();
+      },
+      update: function(model) {
+        return joinServiceProjectLinkService.$update(null, model.url, model);
       }
 
     });

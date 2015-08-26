@@ -78,9 +78,9 @@
 
         this.entityOptions = {
           entityData: {
-            noDataText: 'No notifications yet',
+            noDataText: 'No notifications registered',
             createLink: 'profile.hook-create',
-            createLinkText: 'Create notification method',
+            createLinkText: 'Add notification',
           },
           list: [
             {

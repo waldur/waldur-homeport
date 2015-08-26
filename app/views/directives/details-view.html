@@ -49,7 +49,10 @@
                           title="Click to edit">
                         {{ controller.model[field.fieldKey] || field.emptyText }}
                     </span>
-                    <div class="icon" ng-click="rowform.$show()" ng-hide="rowform.$visible"></div>
+                    <div class="icon"
+                         ng-if="field.isEditable && controller.canEdit"
+                         ng-click="rowform.$show()"
+                         ng-hide="rowform.$visible"></div>
                     <div class="clear"></div>
                 </span>
             </div>
@@ -71,7 +74,7 @@
                         </li>
                     </ul>
                 </aside>
-                <div class="tab-content">
+                <div class="tab-content" block-ui="tab-content">
                     <div visible="{{ tabContent.key }}" class="tab" id="{{ tabContent.key }}"
                          ng-class="{'tab-active': options.activeTab === tabContent.key}"
                          ng-if="tabContent.key == options.activeTab"

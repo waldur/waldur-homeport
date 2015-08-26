@@ -21,18 +21,27 @@
         this.currentUser = usersService.currentUser;
         this.actionButtonsListItems = [
           {
-            title: 'Remove'
+            title: 'Remove',
+            clickFunction: this.remove.bind(controllerScope),
+
+            isDisabled: function(customer) {
+              return !this.isOwnerOrStaff(customer) || customer.projects.length != 0;
+            }.bind(controllerScope),
+
+            tooltip: function(customer) {
+              if (!this.isOwnerOrStaff(customer)) {
+                return 'Only owner or staff can remove organization';
+              }
+              if (customer.projects.length != 0) {
+               return 'Organization has projects. Please remove them first';
+              }
+            }.bind(controllerScope),
           },
           {
             title: 'Add provider',
             state: 'services.create'
           }
         ];
-        if (this.currentUserIsStaff()) {
-          this.actionButtonsListItems[0].clickFunction = this.remove.bind(controllerScope);
-        } else {
-          this.actionButtonsListItems[0].state = 'support.create';
-        }
         this.entityOptions = {
           entityData: {
             noDataText: 'You have no organizations yet.',
@@ -180,7 +189,7 @@
         controllerScope.canEdit = controllerScope.isOwnerOrStaff(controllerScope.model);
         controllerScope.updateImageUrl();
         $q.all([
-          resourcesCountService.resources({'customer': vm.model.uuid}),
+          resourcesCountService.resources({'customer_uuid': vm.model.uuid}),
           resourcesCountService.projects({'customer': vm.model.uuid}),
           resourcesCountService.digitalocean({'customer': vm.model.uuid}),
           resourcesCountService.clouds({'customer': vm.model.uuid})
@@ -222,7 +231,6 @@
         });
       },
       update: function(data, fieldName) {
-        debugger;
         var d = $q.defer();
         if (data || fieldName != 'name') {
           return this._super();
@@ -294,7 +302,9 @@
 
         this.entityOptions = {
           entityData: {
-            noDataText: 'You have no providers yet.'
+            noDataText: 'You have no providers yet.',
+            createLink: 'services.create',
+            createLinkText: 'Create provider'
           },
           list: [
             {
@@ -308,7 +318,7 @@
               name: 'Type',
               propertyName: 'provider',
               type: ENTITYLISTFIELDTYPES.noType
-            }
+            },
           ]
         };
       }
@@ -342,10 +352,6 @@
         this._super();
         this.deregisterEvent('currentCustomerUpdated');
         this.actionButtonsListItems = [
-          {
-            title: 'Archive',
-            clickFunction: function(project) {}
-          },
           {
             title: 'Delete',
             clickFunction: this.remove.bind(controllerScope)
@@ -397,7 +403,7 @@
       init:function() {
         this.service = resourcesService;
         this.controllerScope = controllerScope;
-        this.service.defaultFilter.customer = $stateParams.uuid;
+        this.service.defaultFilter.customer_uuid = $stateParams.uuid;
         this._super();
       }
     });

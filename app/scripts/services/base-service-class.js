@@ -120,6 +120,17 @@
         return deferred.promise;
       },
 
+      /**
+       * Use this function if you need to remove some entity by full endPoint url
+       *
+       * @param url     string   endPoint url
+       * @param success function success callback
+       * @param error   function error callback
+       */
+      $deleteByUrl: function(url, success, error) {
+        this.getFactory(false, null, url).delete(success, error);
+      },
+
       operation:function(operation, uuid, inputs) {
         var deferred = $q.defer(),
           parameters = {
@@ -157,6 +168,16 @@
             }
           }
         );
+      },
+
+      $update: function(uuid, url, fields) {
+        var modelObject = JSON.parse(JSON.stringify(fields));
+        if (url) {
+          delete modelObject.uuid;
+        } else {
+          modelObject.uuid = uuid;
+        }
+        return this.getFactory(false, null, url).update({}, modelObject).$promise;
       },
 
       $get:function(uuid) {
