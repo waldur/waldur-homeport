@@ -1,6 +1,8 @@
 <section class="title-wrapper">
     <div class="container">
-        <h1>Profile</h1>
+        <div class="left-side">
+            <h1>Profile</h1>
+        </div>
         <div class="user-about">
             <div class="img-wrapper">
                 <img gravatar-src="UserDetailUpdate.model.email" class="avatar-img" gravatar-size="100">
@@ -50,20 +52,20 @@
                 </div>
                 <a class="open-tabs button" ng-click="openTabs = !openTabs">Tabs</a>
                 <ul class="tabs-links" ng-class="{'tabs-opened': openTabs}">
-                    <li ng-class="{'active': UserDetailUpdate.activeTab === 'keys'}"
+                    <li visible="keys" ng-class="{'active': UserDetailUpdate.activeTab === 'keys'}"
                         ng-click="UserDetailUpdate.activeTab = 'keys'">
                         SSH Keys
                     </li>
-                    <li ng-class="{'active': UserDetailUpdate.activeTab === 'notifications'}"
+                    <li visible="notifications" ng-class="{'active': UserDetailUpdate.activeTab === 'notifications'}"
                         ng-click="UserDetailUpdate.activeTab = 'notifications'"
                         ng-if="UserDetailUpdate.currentUser.uuid === UserDetailUpdate.model.uuid">
                         Notifications
                     </li>
-                    <li ng-class="{'active': UserDetailUpdate.activeTab === 'eventlog'}"
+                    <li visible="eventlog" ng-class="{'active': UserDetailUpdate.activeTab === 'eventlog'}"
                         ng-click="UserDetailUpdate.activeTab = 'eventlog'">
                         Event log
                     </li>
-                    <li ng-class="{'active': UserDetailUpdate.activeTab === 'password'}"
+                    <li visible="password" ng-class="{'active': UserDetailUpdate.activeTab === 'password'}"
                         ng-click="UserDetailUpdate.activeTab = 'password'"
                         ng-if="UserDetailUpdate.currentUser.uuid === UserDetailUpdate.model.uuid">
                         Password
@@ -71,12 +73,12 @@
                 </ul>
             </aside>
             <div class="tab-content" ng-switch="UserDetailUpdate.activeTab">
-                <div class="tab" id="keys"
+                <div visible="keys" class="tab" id="keys"
                      ng-class="{'tab-active': UserDetailUpdate.activeTab === 'keys'}"
                      ng-switch-when="keys">
                     <div ui-view="tabKeys"></div>
                 </div>
-                <div class="tab" id="notifications"
+                <div visible="notifications" class="tab" id="notifications"
                      ng-class="{'tab-active': UserDetailUpdate.activeTab === 'notifications'}"
                      ng-switch-when="notifications">
                      <div ng-controller="HookListController as HookListController">
@@ -87,12 +89,12 @@
                              entity-options="HookListController.entityOptions"></entitylist>
                      </div>
                 </div>
-                <div class="tab" id="eventlog"
+                <div visible="eventlog" class="tab" id="eventlog"
                      ng-class="{'tab-active': UserDetailUpdate.activeTab === 'eventlog'}"
                      ng-switch-when="eventlog">
                     <div ui-view="tabEventlog"></div>
                 </div>
-                <div class="tab" id="password"
+                <div visible="password" class="tab" id="password"
                      ng-class="{'tab-active': UserDetailUpdate.activeTab === 'password'}"
                      ng-switch-when="password">
                     <ul class="password">
