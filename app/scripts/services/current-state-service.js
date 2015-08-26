@@ -56,7 +56,7 @@
       appstore: ['appstore.store'],
       dashboard: ['dashboard.index', 'dashboard.eventlog'],
       resources: ['resources.list', 'resources.create'],
-      projects: ['projects.list', 'projects.details', 'projects.update', 'projects.create', 'projects.add-users'],
+      projects: ['projects.list', 'projects.details', 'projects.create', 'projects.add-users'],
       services: ['services.list', 'services.create', 'services.details'],
       users: ['users.list', 'users.details'],
       support: ['support.list', 'support.create']
@@ -79,7 +79,6 @@
       'profile',
       'profile-edit',
       'projects.details',
-      'projects.update',
       'organizations.details',
       'customer-plans',
       'users.details',
