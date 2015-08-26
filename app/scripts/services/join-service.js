@@ -5,62 +5,47 @@
   angular.module('ncsaas')
     .service('joinService', [
       '$q',
-      '$http',
       'baseServiceClass',
-      'cloudsService',
-      'digitalOceanService',
+      'servicesService',
       joinService
     ]);
 
   function joinService(
     $q,
-    $http,
     baseServiceClass,
-    cloudsService,
-    digitalOceanService
+    servicesService
   ) {
     var ServiceClass = baseServiceClass.extend({
-      providers: [cloudsService, digitalOceanService],
-
       getList: function(filter) {
-        var self = this;
-        var promises = [];
-        for (var i = 0; i < this.providers.length; i++) {
-          var promise = this.providers[i].getList(filter);
-          promises.push(promise);
-        };
-        var deferred = $q.defer();
-        $q.all(promises).then(function(responses) {
-          var services = self.flattenList(responses);
-          for (var i = 0; i < services.length; i++) {
-            self.setDescription(services[i]);
-          }
-          deferred.resolve(services);
+        filter = filter || {};
+        for (var key in this.defaultFilter) {
+          filter[key] = this.defaultFilter[key];
+        }
+        var getList = this._super.bind(this);
+        var vm = this;
+        vm.cacheReset = true;
+        return servicesService.getServicesList().then(function(services) {
+          var promises = [];
+          angular.forEach(services, function(service, name) {
+            var promise = getList(filter, service.url).then(function(services) {
+              services.forEach(function(service) {
+                service.provider = name;
+              });
+              return services;
+            });
+            promises.push(promise);
+          });
+          return $q.all(promises).then(function(responses) {
+            return vm.flattenList(responses);
+          });
         });
-        return deferred.promise;
       },
 
       $get: function(provider, uuid) {
-        var self = this;
-        var deferred = $q.defer();
-        if (provider == 'DigitalOcean') {
-          digitalOceanService.$get(uuid).then(function(response){
-            self.setDescription(response);
-            deferred.resolve(response);
-          })
-        } else if (provider == 'IaaS') {
-          cloudsService.$get(uuid).then(function(response){
-            self.setDescription(response);
-            deferred.resolve(response);
-          })
-        } else {
-          deferred.reject();
-        }
-        return deferred.promise;
-      },
-
-      createService: function(url, options) {
-        return $http.post(url, options);
+        var get = this._super.bind(this);
+        return servicesService.getServicesList().then(function(services) {
+          return get(uuid, services[provider].url);
+        });
       },
 
       flattenList: function(items) {
@@ -71,18 +56,6 @@
           }
         }
         return result;
-      },
-
-      setDescription: function(service) {
-        if (service.url.indexOf('digitalocean') > -1) {
-          service.provider = 'DigitalOcean';
-          service.icon = '/static/images/icons/icon_digitalocean_small.png';
-          service.resource_type = 'DigitalOcean.Droplet';
-        } else if (service.url.indexOf('cloud') > -1) {
-          service.provider = 'IaaS';
-          service.icon = '/static/images/icons/icon_openstack_small.png';
-          service.resource_type = 'IaaS.Instance';
-        }
       }
     });
     return new ServiceClass();

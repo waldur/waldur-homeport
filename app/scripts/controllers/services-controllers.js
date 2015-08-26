@@ -8,6 +8,8 @@
       'customerPermissionsService',
       'usersService',
       'joinService',
+      'ENV',
+      'blockUI',
       baseServiceListController]);
 
   // need for service tab
@@ -16,48 +18,97 @@
     ENTITYLISTFIELDTYPES,
     customerPermissionsService,
     usersService,
-    joinService
+    joinService,
+    ENV,
+    blockUI
     ) {
     var ControllerListClass = baseControllerListClass.extend({
       init: function() {
         this.service = joinService;
         this._super();
         this.searchFieldName = 'name';
-        this.canUserAddService();
+        this.checkPermissions();
         this.actionButtonsListItems = [
           {
             title: 'Remove',
-            clickFunction: this.remove.bind(this.controllerScope)
+            clickFunction: this.remove.bind(this.controllerScope),
+
+            isDisabled: function(service) {
+              return !this.canUserManageService || service.resources_count > 0;
+            }.bind(this.controllerScope),
+
+            tooltip: function(service) {
+              if (!this.canUserManageService) {
+                return 'Only customer owner or staff can remove provider';
+              }
+              if (service.resources_count > 0) {
+               return 'Provider has resources. Please remove them first';
+              }
+            }.bind(this.controllerScope),
+          },
+          {
+            title: 'Import resource',
+            state: 'import.import'
           }
         ];
+        if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('appstore') == -1) {
+          this.actionButtonsListItems.push({
+            title: 'Create resource',
+            state: 'appstore.store'
+          });
+        }
         this.entityOptions = {
           entityData: {
-            noDataText: 'No services yet.',
+            noDataText: 'No providers yet.',
             createLink: 'services.create',
-            createLinkText: 'Create service',
+            createLinkText: 'Create provider',
           },
           list: [
+            {
+              type: ENTITYLISTFIELDTYPES.statusCircle,
+              className: 'statusCircle',
+              propertyName: 'state',
+              onlineStatus: ENV.resourceOnlineStatus
+            },
             {
               name: 'Name',
               propertyName: 'name',
               type: ENTITYLISTFIELDTYPES.name,
               link: 'services.details({uuid: entity.uuid, provider: entity.provider})',
               className: 'name'
+            },
+            {
+              name: 'Type',
+              propertyName: 'provider',
+              type: ENTITYLISTFIELDTYPES.noType
+            },
+            {
+              name: 'Resources',
+              propertyName: 'resources_count',
+              emptyText: '0'
             }
           ]
         };
       },
 
-      canUserAddService: function() {
+      checkPermissions: function() {
         var vm = this;
         usersService.getCurrentUser().then(function(user) {
           /*jshint camelcase: false */
           if (user.is_staff) {
-            vm.canUserAddService = true;
+            vm.canUserManageService = true;
+            return;
           }
           customerPermissionsService.userHasCustomerRole(user.username, 'owner').then(function(hasRole) {
-            vm.canUserAddService = hasRole;
+            vm.canUserManageService = hasRole;
           });
+        });
+      },
+      getList: function(filters) {
+        var providerTab = blockUI.instances.get('tab-content');
+        providerTab.start();
+        return this._super(filters).then(function() {
+          providerTab.stop();
         });
       }
     });
