@@ -308,7 +308,7 @@
               name: 'Type',
               propertyName: 'provider',
               type: ENTITYLISTFIELDTYPES.noType
-            }
+            },
           ]
         };
       }

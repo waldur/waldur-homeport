@@ -4,209 +4,212 @@
         <div class="appstore-wrapper">
             <div class="appstore-content" block-ui="store-content">
                 <h1>Appstore</h1>
-                <section class="step-1">
-                    <div class="step-title">
-                        <span>Step 1: Choose category</span>
-                    </div>
-                    <div class="appstore-templates">
-                        <!-- category -->
-                        <div class="appstore-template"
-                             ng-repeat="category in AppStore.categories"
-                             ng-click="AppStore.setCategory(category)"
-                             ng-class="{'state': AppStore.selectedCategory == category}">
-                            <div class="icon">
-                                <img ng-src="static/images/appstore/icon-{{ category.name.toLowerCase() }}.png" alt="">
-                            </div>
-                            <h3>{{ category.name }}</h3>
-                            <span class="compare" stoppropagation
-                                  ng-click="AppStore.setCompare(category.name)"
-                                  ng-class="{'compare-active': (AppStore.compare.indexOf(category.name) + 1)}">
-                                Compare
-                            </span>
+                <div ng-if="AppStore.renderStore">
+                    <section class="step-1">
+                        <div class="step-title">
+                            <span>Step 1: Choose category</span>
                         </div>
-                        <!-- /category -->
-                    </div>
-                </section>
-                <section class="step-2" ng-show="AppStore.secondStep">
-                    <div class="step-title">
-                        <span>
-                            Step 2: Choose {{ AppStore.selectedCategory.type }}
-                        </span>
-                    </div>
-                    <div class="appstore-templates" ng-if="AppStore.selectedCategory.type == 'provider'">
-                        <!-- service -->
-                        <div class="appstore-template {{ service.type.toLowerCase() }}"
-                             ng-repeat="service in AppStore.providers"
-                             ng-click="AppStore.setService(service)"
-                             ng-class="{'state': AppStore.selectedServiceName == service}">
-                            <div class="icon">
-                                <img ng-src="/static/images/appstore/icon-{{ service.toLowerCase() }}.png" alt="">
+                        <div class="appstore-templates">
+                            <!-- category -->
+                            <div class="appstore-template"
+                                 ng-repeat="category in AppStore.categories"
+                                 ng-click="AppStore.setCategory(category)"
+                                 ng-class="{'state': AppStore.selectedCategory == category}">
+                                <div class="icon">
+                                    <img ng-src="static/images/appstore/icon-{{ category.name.toLowerCase() }}.png" alt="">
+                                </div>
+                                <h3>{{ category.name }}</h3>
+                                <span class="compare" stoppropagation
+                                      ng-click="AppStore.setCompare(category.name)"
+                                      ng-class="{'compare-active': (AppStore.compare.indexOf(category.name) + 1)}">
+                                    Compare
+                                </span>
                             </div>
-                            <h3>{{ service }}</h3>
+                            <!-- /category -->
                         </div>
-                        <!-- /service -->
-                    </div>
-                    <div class="appstore-templates" ng-if="AppStore.selectedCategory.type == 'package'">
-                        <!-- category -->
-                        <div class="appstore-template"
-                             ng-repeat="package in AppStore.selectedCategory.packages"
-                             ng-click="AppStore.agreementShow = true; AppStore.selectedPackageName = package.name"
-                             ng-class="{'state': AppStore.selectedPackageName == package.name}">
-                            <h3 class="ng-binding">{{ package.name }}</h3>
+                    </section>
+                    <section class="step-2" ng-show="AppStore.secondStep">
+                        <div class="step-title">
                             <span>
-                                {{ package.type }}
+                                Step 2: Choose {{ AppStore.selectedCategory.type }}
                             </span>
                         </div>
-                        <!-- /category -->
-                    </div>
-                </section>
-
-                <section class="step-2" ng-show="AppStore.resourceTypesBlock">
-                    <div class="step-title"><span>Step 3: Choose resource type</span></div>
-                    <div class="appstore-templates">
-                        <!-- service -->
-                        <div class="appstore-template"
-                             ng-repeat="(name, resource) in AppStore.selectedService.resources"
-                             ng-click="AppStore.setResourceType(name)"
-                             ng-class="{'state': AppStore.selectedResourceType == name}">
-                            <h3>{{ name }}</h3>
-                        </div>
-                        <!-- /service -->
-                    </div>
-                </section>
-
-                <section class="step-3" ng-show="AppStore.thirdStep">
-                    <div class="step-title">
-                        <span>
-                            Step {{ AppStore.configureStepNumber }}: Configure {{ AppStore.selectedServiceName }} Resource
-                            {{ AppStore.selectedResourceType }}
-                        </span>
-                    </div>
-                    <form action="">
-                        <div class="string-field"
-                             ng-repeat="(name, stringField) in AppStore.formOptions[AppStore.FIELD_TYPES.string]">
-                            <label for="{{ name }}">{{ stringField.label }}</label>
-                            <input type="text" id="{{ name }}"  ng-model="AppStore.instance[name]"/>
-                            <div class="error arrow-up" ng-show="AppStore.errors[name]">
-                                <ul class="error-list">
-                                    <li ng-repeat="error in AppStore.errors[name]">{{ error }}</li>
-                                </ul>
+                        <div class="appstore-templates" ng-if="AppStore.selectedCategory.type == 'provider'">
+                            <!-- service -->
+                            <div class="appstore-template {{ service.type.toLowerCase() }}"
+                                 ng-repeat="service in AppStore.providers"
+                                 ng-click="AppStore.setService(service)"
+                                 ng-class="{'state': AppStore.selectedServiceName == service}">
+                                <div class="icon">
+                                    <img ng-src="/static/images/appstore/icon-{{ service.toLowerCase() }}.png" alt="">
+                                </div>
+                                <h3>{{ service }}</h3>
                             </div>
+                            <!-- /service -->
                         </div>
-                        <div class="string-field"
-                             ng-repeat="(name, stringField) in AppStore.formOptions[AppStore.FIELD_TYPES.integer]">
-                            <label for="{{ name }}">{{ stringField.label }}</label>
-                            <input type="text" id="{{ name }}"  ng-model="AppStore.instance[name]"/>
-                            <div class="error arrow-up" ng-show="AppStore.errors[name]">
-                                <ul class="error-list">
-                                    <li ng-repeat="error in AppStore.errors[name]">{{ error }}</li>
-                                </ul>
+                        <div class="appstore-templates" ng-if="AppStore.selectedCategory.type == 'package'">
+                            <!-- category -->
+                            <div class="appstore-template"
+                                 ng-repeat="package in AppStore.selectedCategory.packages"
+                                 ng-click="AppStore.agreementShow = true; AppStore.selectedPackageName = package.name"
+                                 ng-class="{'state': AppStore.selectedPackageName == package.name}">
+                                <h3 class="ng-binding">{{ package.name }}</h3>
+                                <span>
+                                    {{ package.type }}
+                                </span>
                             </div>
+                            <!-- /category -->
                         </div>
-                    </form>
-                    <div class="operating-system">
+                    </section>
 
-                        <div class="tabs-wrapper">
-                            <ul class="tabs-links">
-                                <li ng-class="{'active': AppStore.activeTab == name}"
-                                    ng-repeat="(name, field) in AppStore.formOptions[AppStore.FIELD_TYPES.field]"
-                                    ng-click="AppStore.activeTab = name">
-                                    {{ field.label }}
-                                </li>
-                            </ul>
-                            <div class="tabs-content"
-                                 ng-repeat="(name, field) in AppStore.formOptions[AppStore.FIELD_TYPES.field]"
-                                 ng-show="AppStore.activeTab == name">
-                                <ul>
-                                    <li ng-repeat="choice in field.choices"
-                                        ng-click="AppStore.doChoice(name, choice)"
-                                        ng-class="{'active': AppStore.instance[name] == choice.value}">
-                                        <div class="icon">
-                                            <img src="/static/images/appstore/icon-cloud.png" alt=""/>
-                                        </div>
-                                        <span>{{ choice.display_name }}</span>
-                                    </li>
-                                    <div class="clear"></div>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="configuration" ng-if="AppStore.formOptions[AppStore.UNIQUE_FIELDS.configuration]">
-                        <h2>configuration</h2>
-                        <ul>
-                            <li>
-                                <h3>1 Cores</h3>
-                                <h4>1GB RAM</h4>
-                                <span>50 disk</span>
-                            </li>
-                            <div class="clear"></div>
-                        </ul>
-                    </div>
-                    <div class="keys" ng-if="AppStore.formOptions[AppStore.UNIQUE_FIELDS.ssh_public_key]">
-                        <h2>keys</h2>
+                    <section class="step-2" ng-show="AppStore.resourceTypesBlock">
+                        <div class="step-title"><span>Step 3: Choose resource type</span></div>
                         <div class="appstore-templates">
                             <!-- service -->
                             <div class="appstore-template"
-                                 ng-repeat="choice in AppStore.formOptions[AppStore.UNIQUE_FIELDS.ssh_public_key].choices"
-                                 ng-click="AppStore.doChoice(AppStore.UNIQUE_FIELDS.ssh_public_key, choice)"
-                                 ng-class="{'state': AppStore.instance[AppStore.UNIQUE_FIELDS.ssh_public_key] == choice.value}">
-                                <div class="icon">
-                                    <img src="/static/images/appstore/icon-lock.png" alt="">
-                                </div>
-                                <h3>{{ choice.display_name }}</h3>
+                                 ng-repeat="(name, resource) in AppStore.selectedService.resources"
+                                 ng-click="AppStore.setResourceType(name)"
+                                 ng-class="{'state': AppStore.selectedResourceType == name}">
+                                <h3>{{ name }}</h3>
                             </div>
+                            <!-- /service -->
                         </div>
-                        <div class="clear"></div>
-                    </div>
-                    <button ng-class="{'disabled': !AppStore.canSave()}" ng-click="AppStore.save()">
-                        <img src="/static/images/appstore/icon-curt.png" alt=""/>
-                        <span>Purchase</span>
-                    </button>
-                </section>
-                <section class="step-3 agreement" ng-if="AppStore.agreementShow && AppStore.selectedCategory.type == 'package'">
-                    <div class="step-title"><span>Step 3: Sign a support agreement</span></div>
-                    <div class="step-content">
-                        <ul>
-                            <li>
-                                <div class="item-title">1. Check terms</div>
-                                <span class="bold">Support is covering WEB Production enviroment of Organization X</span>
-                                <ul>
-                                    <li>
-                                        <div class="item-name">Reaction time:</div>
-                                        <div class="item-value">Within 2H, 24/7</div>
-                                        <div class="clear"></div>
-                                    </li>
-                                    <li>
-                                        <div class="item-name">Monthly base price:</div>
-                                        <div class="item-value">500 EUR</div>
-                                        <div class="clear"></div>
-                                    </li>
-                                    <li>
-                                        <div class="item-name">Hour price:</div>
-                                        <div class="item-value">65 EUR</div>
-                                        <div class="clear"></div>
+                    </section>
+
+                    <section class="step-3" ng-show="AppStore.thirdStep">
+                        <div class="step-title">
+                            <span>
+                                Step {{ AppStore.configureStepNumber }}: Configure {{ AppStore.selectedServiceName }} Resource
+                                {{ AppStore.selectedResourceType }}
+                            </span>
+                        </div>
+                        <form action="">
+                            <div class="string-field"
+                                 ng-repeat="(name, stringField) in AppStore.formOptions[AppStore.FIELD_TYPES.string]">
+                                <label for="{{ name }}">{{ stringField.label }}</label>
+                                <input type="text" id="{{ name }}"  ng-model="AppStore.instance[name]"/>
+                                <div class="error arrow-up" ng-show="AppStore.errors[name]">
+                                    <ul class="error-list">
+                                        <li ng-repeat="error in AppStore.errors[name]">{{ error }}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="string-field"
+                                 ng-repeat="(name, stringField) in AppStore.formOptions[AppStore.FIELD_TYPES.integer]">
+                                <label for="{{ name }}">{{ stringField.label }}</label>
+                                <input type="text" id="{{ name }}"  ng-model="AppStore.instance[name]"/>
+                                <div class="error arrow-up" ng-show="AppStore.errors[name]">
+                                    <ul class="error-list">
+                                        <li ng-repeat="error in AppStore.errors[name]">{{ error }}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="operating-system">
+
+                            <div class="tabs-wrapper">
+                                <ul class="tabs-links">
+                                    <li ng-class="{'active': AppStore.activeTab == name}"
+                                        ng-repeat="(name, field) in AppStore.formOptions[AppStore.FIELD_TYPES.field]"
+                                        ng-click="AppStore.activeTab = name">
+                                        {{ field.label }}
                                     </li>
                                 </ul>
-                            </li>
-                            <li>
-                                <div class="item-title">2. Read through terms and conditions</div>
-                                <div class="conditions">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et magna
-                                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.
-                                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                                    occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis
-                                    unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-                                    ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+                                <div class="tabs-content"
+                                     ng-repeat="(name, field) in AppStore.formOptions[AppStore.FIELD_TYPES.field]"
+                                     ng-show="AppStore.activeTab == name">
+                                    <ul>
+                                        <li ng-repeat="choice in field.choices"
+                                            ng-click="AppStore.doChoice(name, choice)"
+                                            ng-class="{'active': AppStore.instance[name] == choice.value}">
+                                            <div class="icon">
+                                                <img src="/static/images/appstore/icon-cloud.png" alt=""/>
+                                            </div>
+                                            <span>{{ choice.display_name }}</span>
+                                        </li>
+                                        <div class="clear"></div>
+                                    </ul>
                                 </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <button>
-                        <span>Sign a contract</span>
-                    </button>
-                </section>
+                            </div>
+                        </div>
+                        <div class="configuration" ng-if="AppStore.formOptions[AppStore.UNIQUE_FIELDS.configuration]">
+                            <h2>configuration</h2>
+                            <ul>
+                                <li>
+                                    <h3>1 Cores</h3>
+                                    <h4>1GB RAM</h4>
+                                    <span>50 disk</span>
+                                </li>
+                                <div class="clear"></div>
+                            </ul>
+                        </div>
+                        <div class="keys" ng-if="AppStore.formOptions[AppStore.UNIQUE_FIELDS.ssh_public_key]">
+                            <h2>keys</h2>
+                            <div class="appstore-templates">
+                                <!-- service -->
+                                <div class="appstore-template"
+                                     ng-repeat="choice in AppStore.formOptions[AppStore.UNIQUE_FIELDS.ssh_public_key].choices"
+                                     ng-click="AppStore.doChoice(AppStore.UNIQUE_FIELDS.ssh_public_key, choice)"
+                                     ng-class="{'state': AppStore.instance[AppStore.UNIQUE_FIELDS.ssh_public_key] == choice.value}">
+                                    <div class="icon">
+                                        <img src="/static/images/appstore/icon-lock.png" alt="">
+                                    </div>
+                                    <h3>{{ choice.display_name }}</h3>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <button ng-class="{'disabled': !AppStore.canSave()}" ng-click="AppStore.save()">
+                            <img src="/static/images/appstore/icon-curt.png" alt=""/>
+                            <span>Purchase</span>
+                        </button>
+                    </section>
+                    <section class="step-3 agreement" ng-if="AppStore.agreementShow && AppStore.selectedCategory.type == 'package'">
+                        <div class="step-title"><span>Step 3: Sign a support agreement</span></div>
+                        <div class="step-content">
+                            <ul>
+                                <li>
+                                    <div class="item-title">1. Check terms</div>
+                                    <span class="bold">Support is covering WEB Production enviroment of Organization X</span>
+                                    <ul>
+                                        <li>
+                                            <div class="item-name">Reaction time:</div>
+                                            <div class="item-value">Within 2H, 24/7</div>
+                                            <div class="clear"></div>
+                                        </li>
+                                        <li>
+                                            <div class="item-name">Monthly base price:</div>
+                                            <div class="item-value">500 EUR</div>
+                                            <div class="clear"></div>
+                                        </li>
+                                        <li>
+                                            <div class="item-name">Hour price:</div>
+                                            <div class="item-value">65 EUR</div>
+                                            <div class="clear"></div>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <div class="item-title">2. Read through terms and conditions</div>
+                                    <div class="conditions">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et magna
+                                        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+                                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                                        occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis
+                                        unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
+                                        ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <button>
+                            <span>Sign a contract</span>
+                        </button>
+                    </section>
+                </div>
             </div>
-            <aside class="appstore-aside">
+
+            <aside ng-if="AppStore.renderStore" class="appstore-aside">
                 <h2>
                     checkout summary
                 </h2>
@@ -241,12 +244,11 @@
         </div>
 
     </div>
-    <div class="project-alert-message" ng-show="AppStore.showProjectAlertMessage">
+    <div class="project-alert-message" ng-show="AppStore.showProjectAlertMessage || !AppStore.renderStore">
         <p>
-            There are no {{ AppStore.selectedServiceName }} accounts available to the current project.<br />
-            You can add a new one or allow access to an existing one in
+            There are no accounts available to the current project.<br />
+            You can change that in
             <a ui-sref="organizations.details({uuid: AppStore.currentCustomer.uuid, tab: 'services'})">provider management</a>.
-            <span ng-click="AppStore.showProjectAlertMessage = false">&#x2716;</span>
         </p>
     </div>
 </div>
