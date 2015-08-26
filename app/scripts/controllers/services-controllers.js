@@ -9,6 +9,7 @@
       'usersService',
       'joinService',
       'ENV',
+      'blockUI',
       baseServiceListController]);
 
   // need for service tab
@@ -18,7 +19,8 @@
     customerPermissionsService,
     usersService,
     joinService,
-    ENV
+    ENV,
+    blockUI
     ) {
     var ControllerListClass = baseControllerListClass.extend({
       init: function() {
@@ -100,6 +102,13 @@
           customerPermissionsService.userHasCustomerRole(user.username, 'owner').then(function(hasRole) {
             vm.canUserManageService = hasRole;
           });
+        });
+      },
+      getList: function(filters) {
+        var providerTab = blockUI.instances.get('tab-content');
+        providerTab.start();
+        return this._super(filters).then(function() {
+          providerTab.stop();
         });
       }
     });

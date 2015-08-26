@@ -74,7 +74,7 @@
                         </li>
                     </ul>
                 </aside>
-                <div class="tab-content">
+                <div class="tab-content" block-ui="tab-content"">
                     <div visible="{{ tabContent.key }}" class="tab" id="{{ tabContent.key }}"
                          ng-class="{'tab-active': options.activeTab === tabContent.key}"
                          ng-if="tabContent.key == options.activeTab"
