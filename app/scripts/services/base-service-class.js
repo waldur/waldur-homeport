@@ -180,8 +180,8 @@
         return this.getFactory(false, null, url).update({}, modelObject).$promise;
       },
 
-      $get:function(uuid) {
-        return this.getFactory(false).get({}, {uuid: uuid}).$promise;
+      $get:function(uuid, url) {
+        return this.getFactory(false, null, url).get({}, {uuid: uuid}).$promise;
       },
 
       getEndpoint:function(isList) {

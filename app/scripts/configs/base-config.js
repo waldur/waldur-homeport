@@ -99,7 +99,8 @@ angular.module('ncsaas')
       'monitoring',
       'users',
       'backups',
-      'services:provider:uuid'
+      'services:provider:uuid',
+      'password'
     ],
     featuresVisible: false,
 

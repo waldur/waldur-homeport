@@ -17,21 +17,23 @@
   ) {
     var ServiceClass = baseServiceClass.extend({
       getList: function(filter) {
-        var vm = this;
         filter = filter || {};
         for (var key in this.defaultFilter) {
           filter[key] = this.defaultFilter[key];
         }
+        var getList = this._super.bind(this);
+        var vm = this;
+        vm.cacheReset = true;
         return servicesService.getServicesList().then(function(services) {
           var promises = [];
           angular.forEach(services, function(service, name) {
-            var promise = vm.getFactory(true, null, service.url).query(filter, function(services) {
+            var promise = getList(filter, service.url).then(function(services) {
               services.forEach(function(service) {
                 service.provider = name;
               });
               return services;
             });
-            promises.push(promise.$promise);
+            promises.push(promise);
           });
           return $q.all(promises).then(function(responses) {
             return vm.flattenList(responses);
@@ -40,10 +42,9 @@
       },
 
       $get: function(provider, uuid) {
-        var vm = this;
+        var get = this._super.bind(this);
         return servicesService.getServicesList().then(function(services) {
-          var endpointUrl = services[provider].url + uuid + '/';
-          return vm.getFactory(false, null, endpointUrl).get().$promise
+          return get(uuid, services[provider].url);
         });
       },
 

@@ -1154,6 +1154,11 @@ angular.module('ncsaas')
               name: 'Type',
               propertyName: 'type',
               type: ENTITYLISTFIELDTYPES.noType
+            },
+            {
+              name: 'Resources',
+              propertyName: 'resources_count',
+              emptyText: '0'
             }
           ]
         };
