@@ -216,7 +216,34 @@
                         bottom: 19px;
                     }
                 }
+                &:hover {
+                    &:after {
+                        border-top-color: rgba(255,255,255,0);
+                        border-bottom-color: rgba(255,255,255,.7);
+                    }
+                }
             } // &.active
+            &:hover {
+                $color: rgba(255,255,255,.8);
+                color: $color;
+                &:not(.drop-active) {
+                    span {
+                        border-bottom: 1px solid $color;
+                    }
+                }
+                > span {
+                    color: $color;
+                }
+                .customer-name {
+                    color: $color;
+                }
+                .active-context {
+                    color: $color;
+                }
+                &:after {
+                    border-top-color: $color;
+                }
+            }
             &.support {
                 @include inline-middle;
                 width: 20px;
