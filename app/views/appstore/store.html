@@ -246,9 +246,9 @@
     </div>
     <div class="project-alert-message" ng-show="AppStore.showProjectAlertMessage || !AppStore.renderStore">
         <p>
-            There are no accounts available to the current project.<br />
+            There are no working accounts available for the current project.<br />
             You can change that in
-            <a ui-sref="organizations.details({uuid: AppStore.currentCustomer.uuid, tab: 'services'})">provider management</a>.
+            <a ui-sref="resources.details({uuid: AppStore.currentProject.uuid, tab: 'providers'})">provider management</a>.
         </p>
     </div>
 </div>
