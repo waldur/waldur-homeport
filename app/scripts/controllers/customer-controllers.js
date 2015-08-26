@@ -352,10 +352,6 @@
         this.deregisterEvent('currentCustomerUpdated');
         this.actionButtonsListItems = [
           {
-            title: 'Archive',
-            clickFunction: function(project) {}
-          },
-          {
             title: 'Delete',
             clickFunction: this.remove.bind(controllerScope)
           }
