@@ -1141,7 +1141,7 @@ angular.module('ncsaas')
               type: ENTITYLISTFIELDTYPES.statusCircle,
               className: 'statusCircle',
               propertyName: 'state',
-              onlineStatus: ENV.resourceOnlineStatus
+              onlineStatus: 'In Sync'
             },
             {
               name: 'Name',
