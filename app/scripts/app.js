@@ -318,6 +318,9 @@
             'tabServices@projects.details' : {
               templateUrl: 'views/project/tab-services.html',
             },
+            'tabProviders@projects.details' : {
+              templateUrl: 'views/resource/tab-providers.html',
+            },
             'appHeader': {
               templateUrl: 'views/partials/app-header.html',
             }

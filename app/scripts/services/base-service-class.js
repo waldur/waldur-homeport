@@ -170,6 +170,16 @@
         );
       },
 
+      $update: function(uuid, url, fields) {
+        var modelObject = JSON.parse(JSON.stringify(fields));
+        if (url) {
+          delete modelObject.uuid;
+        } else {
+          modelObject.uuid = uuid;
+        }
+        return this.getFactory(false, null, url).update({}, modelObject).$promise;
+      },
+
       $get:function(uuid) {
         return this.getFactory(false).get({}, {uuid: uuid}).$promise;
       },

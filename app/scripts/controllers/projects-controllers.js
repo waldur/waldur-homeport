@@ -1103,6 +1103,7 @@ angular.module('ncsaas')
       '$scope',
       '$stateParams',
       'projectsService',
+      'blockUI',
       ProjectServicesTabController]);
 
   function ProjectServicesTabController(
@@ -1113,7 +1114,8 @@ angular.module('ncsaas')
     ENV,
     $scope,
     $stateParams,
-    projectsService) {
+    projectsService,
+    blockUI) {
     var controllerScope = this;
     var ServiceController = baseControllerListClass.extend({
       init: function() {
@@ -1132,6 +1134,7 @@ angular.module('ncsaas')
             noDataText: 'No providers yet',
             createLink: 'services.create',
             createLinkText: 'Create provider',
+            expandable: true
           },
           list: [
             {
@@ -1154,6 +1157,14 @@ angular.module('ncsaas')
             }
           ]
         };
+        this.expandableOptions = [
+          {
+            isList: false,
+            addItemBlock: false,
+            viewType: 'details',
+            list:['name']
+          }
+        ];
 
         $scope.$on('searchInputChanged', this.onSearchInputChanged.bind(this));
       },
@@ -1165,15 +1176,21 @@ angular.module('ncsaas')
       getList: function(filter) {
         var vm = this;
         var fn = this._super.bind(controllerScope);
+        var projectMenu = blockUI.instances.get('tab-content');
+        projectMenu.start();
         if ($stateParams.uuid) {
           return projectsService.$get($stateParams.uuid).then(function(project) {
             vm.service.defaultFilter.project_uuid = project.uuid;
-            fn(filter);
+            fn(filter).then(function() {
+              projectMenu.stop();
+            });
           });
         } else {
           return currentStateService.getProject().then(function(project) {
             vm.service.defaultFilter.project_uuid = project.uuid;
-            fn(filter);
+            fn(filter).then(function() {
+              projectMenu.stop();
+            });
           });
         }
       },
@@ -1193,6 +1210,9 @@ angular.module('ncsaas')
       onSearchInputChanged: function(event, searchInput) {
         this.searchInput = searchInput;
         this.search();
+      },
+      update: function(model) {
+        return joinServiceProjectLinkService.$update(null, model.url, model);
       }
 
     });
