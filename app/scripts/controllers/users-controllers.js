@@ -333,7 +333,7 @@
 
         this.entityOptions = {
           entityData: {
-            noDataText: 'No keys yet.',
+            noDataText: 'No keys yet',
             createLink: 'keys.create',
             createLinkText: 'Add SSH Key'
           },

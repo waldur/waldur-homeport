@@ -195,6 +195,7 @@
         vm.priceItems = [];
         vm.selectedResourceType = null;
         vm.instance = null;
+        vm.renderStore = false;
         vm.countTotal();
         var myBlockUI = blockUI.instances.get('store-content');
         myBlockUI.start();
@@ -212,15 +213,13 @@
               ) {
                 vm.categoryProviders[category.name].push(service.type);
                 vm.services[service.type] = service;
+
               }
             }
             if (vm.categoryProviders[category.name].length > 0 || category.name == 'SUPPORT') {
               vm.categories.push(category);
+              vm.renderStore = true;
             }
-          }
-          if (vm.categories.length == 0) {
-            alert("No services!");
-            $state.go('resources.list', {tab: 'Providers'});
           }
           myBlockUI.stop();
         });

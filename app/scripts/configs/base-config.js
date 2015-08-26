@@ -88,8 +88,17 @@ angular.module('ncsaas')
       'support',
       'monitoring',
       'users',
-      'backups'
+      'backups',
+      'services:provider:uuid'
     ],
-    featuresVisible: false
+    featuresVisible: false,
+
+    projectServiceLinkEndpoints: {
+      Oracle: 'oracle-service-project-link',
+      OpenStack: 'openstack-service-project-link',
+      IaaS: 'project-cloud-memberships',
+      GitLab: 'gitlab-service-project-link/',
+      DigitalOcean: 'digitalocean-service-project-link'
+    }
 
   });

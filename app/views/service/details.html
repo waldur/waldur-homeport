@@ -1,42 +1,4 @@
 <div ng-controller="ServiceDetailUpdateController as ServiceDetailUpdate">
-
-    <div class="profile-view">
-        <section class="avatar">
-            <span class="avatar big">
-                <img src="/static/images/user-avatar.jpg" alt="" class="avatar-img">
-            </span>
-        </section>
-        <section class="content">
-            <h2 class="app-title">{{ServiceDetailUpdate.service.name}}</h2>
-            <div>
-                <span>{{ServiceDetailUpdate.service.auth_url}}</span>
-            </div>
-        </section>
-        <section class="actions">
-            <div class="actions-button">
-                <a class="button" ng-click="ServiceDetailUpdate.openActions=!ServiceDetailUpdate.openActions">actions</a>
-                <ul class="actions-dropdown" ng-show="ServiceDetailUpdate.openActions">
-                    <li>
-                        <a class="button-simple" ng-click="ServiceDetailUpdate.remove()">Remove</a>
-                    </li>
-                </ul>
-            </div>
-        </section>
-    </div>
-
-    <ul class="tabs-nav">
-        <li ng-class="{'active': ServiceDetailUpdate.activeTab === 'projects'}"
-            ng-click="ServiceDetailUpdate.activeTab = 'projects'">
-            Projects
-        </li>
-    </ul>
-
-    <section class="tabs-content" ng-switch="ServiceDetailUpdate.activeTab">
-        <div class="tab" id="projects"
-            ng-class="{'tab-active': ServiceDetailUpdate.activeTab === 'projects'}"
-            ng-switch-when="projects">
-            <div ui-view="tabProjects"></div>
-        </div>
-    </section>
-
+    <details-view details-options="ServiceDetailUpdate.detailsViewOptions"
+                  details-controller="ServiceDetailUpdate"></details-view>
 </div>
