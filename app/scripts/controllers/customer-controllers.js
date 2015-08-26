@@ -285,41 +285,20 @@
     .controller('CustomerServiceTabController', [
       '$stateParams',
       'baseServiceListController',
-      'cloudsService',
-      'ENTITYLISTFIELDTYPES',
+      'joinService',
       CustomerServiceTabController
     ]);
 
-  function CustomerServiceTabController($stateParams, baseServiceListController, cloudsService, ENTITYLISTFIELDTYPES) {
+  function CustomerServiceTabController($stateParams, baseServiceListController, joinService) {
     var controllerScope = this;
     var Controller = baseServiceListController.extend({
       init: function() {
-        this.service = cloudsService;
         this.controllerScope = controllerScope;
+        this.service = joinService;
         this.service.defaultFilter.customer = $stateParams.uuid;
         this.service.filterByCustomer = false;
         this._super();
         this.deregisterEvent('currentCustomerUpdated');
-
-        this.entityOptions = {
-          entityData: {
-            noDataText: 'You have no providers yet.'
-          },
-          list: [
-            {
-              name: 'Name',
-              propertyName: 'name',
-              type: ENTITYLISTFIELDTYPES.name,
-              link: 'services.details({uuid: entity.uuid, provider: entity.provider})',
-              showForMobile: ENTITYLISTFIELDTYPES.showForMobile
-            },
-            {
-              name: 'Type',
-              propertyName: 'provider',
-              type: ENTITYLISTFIELDTYPES.noType
-            }
-          ]
-        };
       }
     });
 

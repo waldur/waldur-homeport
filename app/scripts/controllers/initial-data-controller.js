@@ -96,9 +96,16 @@
           return !service.saved;
         });
         var promises = unsavedServices.map(function(service) {
-          var options = vm.prepareServiceOptions(service);
-
-          return joinService.createService(service.url, options).success(function() {
+          var instance = joinService.$create(service.url);
+          for (var i = 0; i < service.options.length; i++) {
+            var option = service.options[i];
+            if (option.value) {
+              instance[option.key] = option.value;
+            }
+          }
+          instance.customer = this.customer.url;
+          instance.name = service.name;
+          instance.$save().success(function() {
             service.saved = true;
             service.errors = {};
           }).error(function(errors) {
@@ -106,18 +113,6 @@
           });
         });
         return $q.all(promises);
-      },
-      prepareServiceOptions: function(service){
-        var result = {};
-        for (var i = 0; i < service.options.length; i++) {
-          var option = service.options[i];
-          if (option.value) {
-            result[option.key] = option.value;
-          }
-          result['customer'] = this.customer.url;
-          result['name'] = service.name;
-        }
-        return result;
       },
       saveUser: function() {
         var vm = this;
