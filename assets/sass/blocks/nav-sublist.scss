@@ -175,6 +175,9 @@
                 color: #4fb547;
                 border-width: 0;
             }
+            &:hover {
+                background-color: #fff;
+            }
         }
     } // > li
 } // nav-sublist
