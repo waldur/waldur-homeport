@@ -42,17 +42,21 @@
 
       $get: function(provider, uuid) {
         var self = this;
+        var deferred = $q.defer();
         if (provider == 'DigitalOcean') {
-          return digitalOceanService.$get(uuid).then(function(response){
+          digitalOceanService.$get(uuid).then(function(response){
             self.setDescription(response);
-            return response;
+            deferred.resolve(response);
           })
         } else if (provider == 'IaaS') {
-          return cloudsService.$get(uuid).then(function(response){
+          cloudsService.$get(uuid).then(function(response){
             self.setDescription(response);
-            return response;
+            deferred.resolve(response);
           })
+        } else {
+          deferred.reject();
         }
+        return deferred.promise;
       },
 
       createService: function(url, options) {

@@ -95,6 +95,7 @@
       'baseControllerAddClass',
       '$q',
       '$rootScope',
+      '$state',
       ServiceAddController]);
 
   function ServiceAddController(
@@ -105,7 +106,8 @@
     projectsService,
     baseControllerAddClass,
     $q,
-    $rootScope) {
+    $rootScope,
+    $state) {
     var controllerScope = this;
     var ServiceController = baseControllerAddClass.extend({
       init: function() {
@@ -113,7 +115,7 @@
         this.controllerScope = controllerScope;
         this.setSignalHandler('currentCustomerUpdated', this.activate.bind(this));
         this._super();
-        this.listState = 'services.list';
+        this.listState = 'resources.list';
         this.selectedService = this.serviceList[0];
       },
       serviceList: [
@@ -172,6 +174,10 @@
         });
       },
 
+      successRedirect: function() {
+        $state.go(this.listState, {tab: 'providers'});
+      },
+
       dummyCheckboxChange: function() {
         this.instance.auth_url = this.instance.dummy ? 'http://keystone.example.com:5000/v2.0' : '';
       }
@@ -185,22 +191,58 @@
 (function() {
   angular.module('ncsaas')
     .controller('ServiceDetailUpdateController',
-      ['baseControllerClass', 'joinService', '$stateParams', '$state', ServiceDetailUpdateController]);
+      ['baseControllerDetailUpdateClass', 'joinService', '$stateParams', '$state', '$q', 'resourcesCountService', 'ENV',
+        ServiceDetailUpdateController]);
 
-  function ServiceDetailUpdateController(baseControllerClass, joinService, $stateParams, $state) {
+  function ServiceDetailUpdateController(
+    baseControllerDetailUpdateClass, joinService, $stateParams, $state, $q, resourcesCountService, ENV) {
     var controllerScope = this;
-    var Controller = baseControllerClass.extend({
+    var Controller = baseControllerDetailUpdateClass.extend({
       service: null,
       activeTab: 'projects',
+      canEdit: true,
 
       init:function() {
         this._super();
         this.activate();
+        this.detailsViewOptions = {
+          title: 'Providers',
+          activeTab: $stateParams.tab ? $stateParams.tab : this.activeTab,
+          listState: 'services.list',
+          aboutFields: [
+            {
+              fieldKey: 'name',
+              isEditable: true,
+              className: 'name'
+            }
+          ],
+          tabs: [
+            {
+              title: 'Projects',
+              key: 'projects',
+              viewName: 'tabProjects',
+              count: 0
+            }
+          ]
+        };
       },
       activate:function() {
         var vm = this;
         joinService.$get($stateParams.provider, $stateParams.uuid).then(function(response) {
-          vm.service = response;
+          vm.model = response;
+          vm.afterActivate();
+        }, function() {
+          $state.go('errorPage.notFound');
+        });
+      },
+      afterActivate: function() {
+        var vm = controllerScope;
+        vm.canEdit = vm.model;
+        var countType = ENV.projectServiceLinkEndpoints[$stateParams.provider];
+        $q.all([
+          resourcesCountService[countType]({'scope': vm.model.url}),
+        ]).then(function(responses) {
+          vm.detailsViewOptions.tabs[0].count = responses[0];
         });
       },
       remove:function() {
@@ -226,37 +268,70 @@
     .controller('ServiceProjectTabController', [
       '$stateParams',
       'joinService',
-      'baseControllerClass',
+      'baseControllerListClass',
       'joinServiceProjectLinkService',
+      'ENTITYLISTFIELDTYPES',
+      'ENV',
+      'servicesService',
       ServiceProjectTabController
     ]);
 
   function ServiceProjectTabController(
     $stateParams,
     joinService,
-    baseControllerClass,
-    joinServiceProjectLinkService) {
+    baseControllerListClass,
+    joinServiceProjectLinkService,
+    ENTITYLISTFIELDTYPES,
+    ENV,
+    servicesService) {
     var controllerScope = this;
-    var Controller = baseControllerClass.extend({
+    var Controller = baseControllerListClass.extend({
       service: null,
       serviceProjects: [],
 
       init: function() {
+        this.service = servicesService;
         this._super();
         this.activate();
+        this.actionButtonsListItems = [
+          {
+            title: 'Delete',
+            clickFunction: this.remove.bind(controllerScope)
+          }
+        ];
+        this.entityOptions = {
+          entityData: {
+            noDataText: 'You have no projects yet.'
+          },
+          list: [
+            {
+              name: 'Name',
+              propertyName: 'project_name',
+              type: ENTITYLISTFIELDTYPES.name,
+              link: 'projects.details({uuid: entity.project_uuid})',
+              showForMobile: ENTITYLISTFIELDTYPES.showForMobile
+            },
+            {
+              name: 'State',
+              propertyName: 'state',
+              type: ENTITYLISTFIELDTYPES.noType
+            }
+          ]
+        };
       },
       activate: function() {
         var vm = this;
         joinService.$get($stateParams.provider, $stateParams.uuid).then(function(response) {
-          vm.service = response;
-          vm.getServiceProjects();
+          vm.serviceEntity = response;
+          vm.getList();
         });
       },
-      getServiceProjects: function() {
-        var vm = this;
-        joinServiceProjectLinkService.getList({'service': vm.service}).then(function(response) {
-          vm.serviceProjects = response;
-        });
+      getList: function(filter) {
+        if (this.serviceEntity) {
+          this.service.defaultFilter = {'service': this.serviceEntity.uuid};
+          this.service.endpoint = '/' + ENV.projectServiceLinkEndpoints[$stateParams.provider] + '/';
+          this._super(filter);
+        }
       }
     });
 

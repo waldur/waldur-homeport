@@ -1,0 +1,14 @@
+<section detailscontent="checkbox avatar">
+    <header>
+        <span ng-repeat="item in expandableOptions.list" class="details-expandable">
+            <span editable-text="expandableElement[item]"
+                  e-form="rowform"
+                  buttons="no"
+                  onaftersave="expandableList.update(expandableElement)"
+                  title="Click to edit">
+                {{ expandableElement[item] }}
+            </span>
+        <div class="icon" ng-click="rowform.$show()" ng-hide="rowform.$visible"></div>
+        </span>
+    </header>
+</section>

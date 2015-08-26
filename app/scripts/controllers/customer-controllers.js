@@ -302,7 +302,9 @@
 
         this.entityOptions = {
           entityData: {
-            noDataText: 'You have no providers yet.'
+            noDataText: 'You have no providers yet.',
+            createLink: 'services.create',
+            createLinkText: 'Create provider'
           },
           list: [
             {
