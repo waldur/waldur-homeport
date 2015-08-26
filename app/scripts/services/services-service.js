@@ -37,8 +37,8 @@
           deferred.resolve(vm.service_options);
         } else {
           vm.service_options = {};
-          var blacklist = ['customer', 'customer_name', 'customer_native_name', 'dummy',
-                           'name', 'projects', 'settings', 'url', 'uuid', 'cpu_overcommit_ratio'];
+          var blacklist = ['name', 'cpu_overcommit_ratio', 'dummy'];
+          var types = ['string', 'choice'];
 
           vm.getServicesList().then(function(services) {
             var promises = [];
@@ -47,13 +47,11 @@
             for(var name in services) {
               promises.push($http({url: services[name].url, method: 'options'}));
               names.push(name);
-              var url = services[name].url;
-              var spl = url.substring(0, url.length-1) + '-service-project-link/';
               vm.service_options[name] = {
                 name: name,
-                url: url,
+                url: services[name].url,
                 options: [],
-                serviceProjectLinkUrl: spl
+                serviceProjectLinkUrl: services[name].service_project_link_url
               };
             }
 
@@ -64,9 +62,10 @@
 
                 for(var key in options) {
                   var option = options[key];
-                  if (!option.read_only && blacklist.indexOf(key) == -1) {
+                  if (!option.read_only && types.indexOf(option.type) != -1 && blacklist.indexOf(key) == -1) {
                     var item = {
                       key: key,
+                      type: option.type,
                       label: option.label,
                       help_text: option.help_text
                     };

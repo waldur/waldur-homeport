@@ -171,7 +171,7 @@
         this._super();
       },
       setModel: function(model) {
-        this.model = model;
+        this.model = angular.copy(model);
         this.model.serviceName = model.name;
         this.errors = {};
       },
@@ -206,6 +206,7 @@
         }
         this.instance.customer = this.customer.url;
         this.instance.name = this.model.serviceName;
+        this.instance.dummy = this.model.dummy;
       },
 
       afterSave: function() {

@@ -23,7 +23,7 @@
                                 <!-- template -->
                                 <div class="appstore-template"
                                     ng-repeat="model in ServiceAdd.categoryServices"
-                                    ng-class="{'state': ServiceAdd.model == model}"
+                                    ng-class="{'state': ServiceAdd.model.name == model.name}"
                                     ng-click="ServiceAdd.setModel(model)">
                                     <div class="icon {{ ::model.name.toLowerCase() }}">
                                         <img ng-src="/static/images/appstore/icon-{{ ::model.name.toLowerCase() }}.png"/>
@@ -56,24 +56,36 @@
         </div>
         <div class="form-row" ng-repeat="option in ServiceAdd.model.options">
             <div class="col label">
-                <label for="{{ ServiceAdd.model.name }}_{{ option.key }}"><helpicon help-text="{{ option.help_text }}" ng-if="option.help_text"></helpicon> {{ option.label }}</label>
+                <label for="{{ ServiceAdd.model.name }}_{{ option.key }}">
+                    <helpicon help-text="{{ option.help_text }}" ng-if="option.help_text"></helpicon>
+                    {{ option.label }}
+                </label>
             </div>
             <div class="col input input-full">
                 <input id="{{ ServiceAdd.model.name }}_{{ option.key }}"
                        type="text"
-                       ng-if="!option.choices"
+                       ng-if="option.type == 'string'"
                        ng-model="option.value">
+
                 <select id="{{ ServiceAdd.model.name }}_{{ option.key }}"
-                        ng-if="option.choices"
+                        ng-if="option.type == 'choice'"
                         ng-model="option.value"
                         ng-init="option.value=option.choices[0].value"
                         ng-options="item.value as item.display_name for item in option.choices">
                 </select>
+
                 <div class="error arrow-up" ng-show="ServiceAdd.errors[option.key]">
                     <ul class="error-list">
                         <li ng-repeat="error in ServiceAdd.errors[option.key]">{{ error }}</li>
                     </ul>
                 </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col label"></div>
+            <div class="col input input-full">
+                <input id="{{ ServiceAdd.model.name }}_dummy" type="checkbox" ng-model="ServiceAdd.model.dummy"/>
+                <label for="{{ ServiceAdd.model.name }}_dummy">Dummy</label>
             </div>
         </div>
     </section>
