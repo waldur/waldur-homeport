@@ -189,7 +189,7 @@
         controllerScope.canEdit = controllerScope.isOwnerOrStaff(controllerScope.model);
         controllerScope.updateImageUrl();
         $q.all([
-          resourcesCountService.resources({'customer': vm.model.uuid}),
+          resourcesCountService.resources({'customer_uuid': vm.model.uuid}),
           resourcesCountService.projects({'customer': vm.model.uuid}),
           resourcesCountService.digitalocean({'customer': vm.model.uuid}),
           resourcesCountService.clouds({'customer': vm.model.uuid})
@@ -231,7 +231,6 @@
         });
       },
       update: function(data, fieldName) {
-        debugger;
         var d = $q.defer();
         if (data || fieldName != 'name') {
           return this._super();
@@ -295,7 +294,7 @@
       init: function() {
         this.controllerScope = controllerScope;
         this.service = joinService;
-        this.service.defaultFilter.customer = $stateParams.uuid;
+        this.service.defaultFilter.customer_uuid = $stateParams.uuid;
         this.service.filterByCustomer = false;
         this._super();
         this.deregisterEvent('currentCustomerUpdated');
@@ -330,10 +329,6 @@
         this._super();
         this.deregisterEvent('currentCustomerUpdated');
         this.actionButtonsListItems = [
-          {
-            title: 'Archive',
-            clickFunction: function(project) {}
-          },
           {
             title: 'Delete',
             clickFunction: this.remove.bind(controllerScope)
@@ -385,7 +380,7 @@
       init:function() {
         this.service = resourcesService;
         this.controllerScope = controllerScope;
-        this.service.defaultFilter.customer = $stateParams.uuid;
+        this.service.defaultFilter.customer_uuid = $stateParams.uuid;
         this._super();
       }
     });

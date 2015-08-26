@@ -318,33 +318,8 @@
             'tabServices@projects.details' : {
               templateUrl: 'views/project/tab-services.html',
             },
-            'appHeader': {
-              templateUrl: 'views/partials/app-header.html',
-            }
-          },
-          resolve: {
-            authenticated: authCheck
-          },
-          auth: true
-        })
-
-        .state('projects.update', {
-          url: ':uuid/edit/',
-          views: {
-            'appContent': {
-              templateUrl: 'views/project/update.html',
-            },
-            'tabEventlog@projects.update' : {
-              templateUrl: 'views/project/tab-eventlog.html',
-            },
-            'tabResources@projects.update' : {
-              templateUrl: 'views/project/tab-resources.html',
-            },
-            'tabUsers@projects.update' : {
-              templateUrl: 'views/project/tab-users.html',
-            },
-            'eventTypes@projects.update' : {
-              templateUrl: 'views/events/event-types.html',
+            'tabProviders@projects.details' : {
+              templateUrl: 'views/resource/tab-providers.html',
             },
             'appHeader': {
               templateUrl: 'views/partials/app-header.html',
@@ -1007,12 +982,13 @@
           // can't use $state because its will throw recursion error
           $location.path('/login/');
         } else {
-          if (!ENV.featuresVisible && ENV.toBeFeatures.indexOf(vm.url.prefix.replace(/\//g, '')) !== -1) {
+          if (!ENV.featuresVisible && (ENV.toBeFeatures.indexOf(vm.url.prefix.replace(/\//g, '')) !== -1
+            || ENV.toBeFeatures.indexOf(vm.url.source.replace(/\//g, '')) !== -1)) {
             $location.path('/error/404/');
           } else {
             if (vm.self.name !== initialDataState) {
               usersService.getCurrentUser().then(function(response) {
-                if (!response.full_name || !response.email) {
+                if (!response.email) {
                   $location.path(initialDataStatePath);
                 } else {
                   deferred.resolve();

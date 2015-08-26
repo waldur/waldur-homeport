@@ -1,14 +1,7 @@
 <div ng-controller="ServiceProjectTabController as ServiceProjectTab">
-    <div class="white-box">
-        <div class="row">
-            <div class="col full">
-                <div class="add-or-remove">
-                    <span class="added" ng-repeat="project in ServiceProjectTab.serviceProjects">
-                        {{ project.project_name }}
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
+    <entitylist entity-list="ServiceProjectTab"
+                entity-service="ServiceProjectTab.service"
+                entity-buttons="ServiceProjectTab.actionButtonsListItems"
+                entity-options="ServiceProjectTab.entityOptions"
+                entity-view-type="new"></entitylist>
 </div>
-

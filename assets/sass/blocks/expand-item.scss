@@ -1,1 +1,12 @@
-.expand-item {}
+.expand-item {
+  .details-expandable {
+    .icon {
+      width: 17px;
+      height: 15px;
+      background: url("/static/images/edit-icon.png") no-repeat;
+      margin-left: 10px;
+      margin-top: 4px;
+      cursor: pointer;
+    }
+  }
+}

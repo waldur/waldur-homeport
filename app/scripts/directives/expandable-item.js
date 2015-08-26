@@ -10,7 +10,7 @@
       defaultView = directiveViewPath + 'expandable-item.html';
     return {
       restrict: 'E',
-      template: '<div ng-include="contentUrl"></div>',
+      template: '<div class="expand-item" ng-include="contentUrl"></div>',
       scope: {
         expandableElement: '=',
         expandableList: '=',

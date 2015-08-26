@@ -95,6 +95,10 @@
           service.errors = {};
           return !service.saved;
         });
+        // return successfully if no services require creation
+        if (unsavedServices.length < 1) {
+            return true;
+        }
         var promises = unsavedServices.map(function(service) {
           var instance = joinService.$create(service.url);
           for (var i = 0; i < service.options.length; i++) {
