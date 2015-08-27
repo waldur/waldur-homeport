@@ -94,6 +94,8 @@
         currentStateService.setCustomer(customer);
         vm.currentCustomer = customer;
         $rootScope.$broadcast('currentCustomerUpdated');
+        $state.go('organizations.details', {uuid: customer.uuid});
+
       },
       setCurrentProject: function(project) {
         var vm = this;
