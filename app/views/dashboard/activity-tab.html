@@ -40,6 +40,14 @@
             </div>
         </div>
         <a ng-if="DashboardController.projects.length" ui-sref="projects.list" class="center-link">Show all projects</a>
+        <div class="placeholder white-box" ng-if="DashboardController.projects.length==0">
+            There are no projects
+            <div ui-sref="projects.create" class="button-apply">
+                Add new project
+            </div>
+
+        </div>
+
     </div>
     <div class="half-block">
         <div class="alerts-list">
