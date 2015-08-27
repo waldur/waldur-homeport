@@ -335,7 +335,7 @@
       },
       selectProject: function (project) {
         if (project) {
-          project.selected=!project.selected;
+          project.selected =! project.selected;
           this.getProjectResources(project);
           this.getProjectEvents(project);
         }

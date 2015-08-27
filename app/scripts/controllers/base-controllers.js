@@ -133,7 +133,6 @@
       },
       setFirstProject: function() {
         var vm = this;
-        $window.localStorage.removeItem(ENV.currentProjectUuidStorageKey);
         projectsService.getFirst().then(function(firstProject) {
           vm.setCurrentProject(firstProject);
         });
@@ -228,9 +227,8 @@
           if (response.length < 1
             && $state.current.name != 'projects.create') {
             if ($state.current.name != 'errorPage.notFound') {
-              alert('You have no project yet! Please add the project.');
+              vm.errorFlash('You have no project yet! Please add the project.');
             }
-            $state.go('projects.create');
           }
           vm.projects = response;
           projectMenu.stop();
