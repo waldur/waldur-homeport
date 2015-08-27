@@ -97,6 +97,7 @@
       },
       setCurrentProject: function(project) {
         var vm = this;
+        this.handleSelectedProjects(project);
         currentStateService.setProject(project);
         vm.currentProject = project;
         $rootScope.$broadcast('currentProjectUpdated');
@@ -113,6 +114,25 @@
         event.stopPropagation();
         vm.menuState[active] = !vm.menuState[active];
       },
+      handleSelectedProjects: function(projectUuid) {
+        var vm = this,
+          selectedProjects = $window.localStorage['selectedProjects'] == undefined
+            ? "{}"
+            : $window.localStorage['selectedProjects'];
+        selectedProjects = JSON.parse(selectedProjects);
+        if (projectUuid) {
+          selectedProjects[vm.currentCustomer.uuid] = projectUuid.uuid;
+          $window.localStorage.setItem('selectedProjects', JSON.stringify(selectedProjects));
+        } else {
+          for (var key in selectedProjects) {
+            if (key == vm.currentCustomer.uuid) {
+              return selectedProjects[key];
+            }
+          }
+        }
+        return null;
+      },
+
       mobileMenu: function() {
         this.showMobileMenu = !this.showMobileMenu;
       },
@@ -124,18 +144,27 @@
               return project.uuid;
             });
             if (!uuids.indexOf($window.localStorage[ENV.currentProjectUuidStorageKey]) + 1) {
-              vm.setFirstProject();
+              vm.setFirstOrLastSelectedProject();
             }
           } else {
-            vm.setFirstProject();
+            vm.setFirstOrLastSelectedProject();
           }
         });
       },
-      setFirstProject: function() {
+      setFirstOrLastSelectedProject: function() {
         var vm = this;
-        projectsService.getFirst().then(function(firstProject) {
-          vm.setCurrentProject(firstProject);
-        });
+
+        var projectUuid = vm.handleSelectedProjects();
+        if (projectUuid) {
+          projectsService.$get(projectUuid).then(function(project){
+            currentStateService.setProject(project);
+            vm.currentProject = project;
+          });
+        } else {
+          projectsService.getFirst().then(function(firstProject) {
+            vm.setCurrentProject(firstProject);
+          });
+        }
       },
       refreshProjectListHandler: function(event, params) {
         var vm = this,
@@ -165,12 +194,12 @@
               vm.projects.splice(currentProjectKey, 1);
             }
             if (model.uuid == vm.currentProject.uuid) {
-              vm.setFirstProject();
+              vm.setFirstOrLastSelectedProject();
             }
           }
           projectsService.cacheReset = true;
         } else {
-          vm.setFirstProject();
+          vm.setFirstOrLastSelectedProject();
           vm.getProjectList(true);
         }
       },
