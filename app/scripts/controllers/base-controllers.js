@@ -159,12 +159,15 @@
           }
           if (params.new) {
             vm.projects.push(model);
+            if (!vm.currentProject) {
+              vm.setCurrentProject(model);
+            }
           }
           if (params.remove) {
             if (currentProjectKey + 1) {
               vm.projects.splice(currentProjectKey, 1);
             }
-            if (model.uuid == vm.currentProject.uuid) {
+            if (model && model.uuid == vm.currentProject.uuid) {
               vm.setFirstProject();
             }
           }
@@ -221,6 +224,12 @@
         var projectMenu = blockUI.instances.get('project-menu');
         projectMenu.start();
         projectsService.getList().then(function(response) {
+          if (response.length < 1
+            && $state.current.name != 'projects.create') {
+            if ($state.current.name != 'errorPage.notFound') {
+              vm.errorFlash('You have no project yet! Please add the project.');
+            }
+          }
           vm.projects = response;
           projectMenu.stop();
           deferred.resolve(response);

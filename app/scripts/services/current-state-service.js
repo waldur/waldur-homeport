@@ -30,7 +30,13 @@
     }
 
     function getProject() {
-      return project;
+      var deferred = $q.defer();
+      if (project) {
+        deferred.resolve(project)
+      } else {
+        deferred.reject();
+      }
+      return deferred.promise;
     }
 
     function setCustomer(newCustomer) {
@@ -42,10 +48,17 @@
     }
 
     function setProject(newProject) {
-      project = $q.when(newProject);
-      project.then(function(response) {
-        $window.localStorage[ENV.currentProjectUuidStorageKey] = response.uuid;
-      });
+      $window.localStorage.removeItem(ENV.currentProjectUuidStorageKey);
+      if (newProject) {
+        project = $q.when(newProject);
+        project.then(function(response) {
+          if (response) {
+            $window.localStorage[ENV.currentProjectUuidStorageKey] = response.uuid;
+          }
+        });
+      } else {
+        project = undefined;
+      }
     }
 
     // XXX: getActiveItem and getBodyClass methods have to be moved to apps.js for code consistency.

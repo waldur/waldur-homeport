@@ -174,6 +174,7 @@
         }
       },
       afterInstanceRemove: function(instance) {
+        projectsService.clearCacheOfNextRequest();
         $rootScope.$broadcast('refreshProjectList', {model: instance, remove: true});
         this._super(instance);
       },
@@ -257,6 +258,7 @@
           }
         });
         vm.addUser();
+        projectsService.clearCacheOfNextRequest();
         $rootScope.$broadcast('refreshProjectList', {model: vm.instance, new: true});
       },
       currentCustomerUpdatedHandler: function() {
