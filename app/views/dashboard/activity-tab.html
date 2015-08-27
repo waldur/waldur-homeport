@@ -71,7 +71,7 @@
                         class="recent-alert" ng-class="{'error-event': event.levelname == 'ERROR'}">
                         <div class="icon"></div>
                         <div class="left-p">
-                            <event-format event="event"/>
+                            <span><event-format event="event"/></span>
                         </div>
                         <div class="right-p">
                             <span class="date" am-time-ago="event['@timestamp']"></span>

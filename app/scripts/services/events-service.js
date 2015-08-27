@@ -83,8 +83,8 @@
         'resource_created': 'Resource {resource_name} has been created.',
         'resource_deleted': 'Resource {resource_name} has been deleted.',
         'resource_imported': 'Resource {resource_name} has been imported.',
-        'role_granted': 'User {affected_user_username} has gained role of {role_name} in {project_name} {customer_name}.',
-        'role_revoked': 'User {affected_user_username} has revoked role of {role_name} in {project_name} {customer_name}.',
+        'role_granted': 'User {affected_user_full_name} has gained role of {role_name} in {project_name} {customer_name}.',
+        'role_revoked': 'User {affected_user_full_name} has revoked role of {role_name} in {project_name} {customer_name}.',
         'ssh_key_creation_succeeded': 'SSH key {ssh_key_name} has been created.',
         'ssh_key_deletion_succeeded': 'SSH key {ssh_key_name} has been deleted.',
         'template_creation_succeeded': 'Template {template_name} has been created.',
@@ -93,16 +93,16 @@
         'template_service_deletion_succeeded': 'Template {template_service_name} has been deleted.',
         'template_service_update_succeeded': 'Template {template_service_name} has been updated.',
         'template_update_succeeded': 'Template {template_name} has been updated.',
-        'user_activated': 'User {affected_user_username} has been activated.',
-        'user_creation_succeeded': 'User {affected_user_username} has been created.',
-        'user_deactivated': 'User {affected_user_username} has been deactivated.',
-        'user_deletion_succeeded': 'User {affected_user_username} has been deleted.',
-        'user_organization_approved': 'User {affected_user_username} has been approved for organization {affected_organization}.',
-        'user_organization_claimed': 'User {affected_user_username} has claimed organization {affected_organization}.',
-        'user_organization_rejected': 'User {affected_user_username} claim for organization {affected_organization} has been rejected.',
-        'user_organization_removed': 'User {affected_user_username} has been removed from organization {affected_organization}.',
-        'user_password_updated': 'Password has been changed for user {affected_user_username}.',
-        'user_update_succeeded': 'User {affected_user_username} has been updated.',
+        'user_activated': 'User {affected_user_full_name} has been activated.',
+        'user_creation_succeeded': 'User {affected_user_full_name} has been created.',
+        'user_deactivated': 'User {affected_user_full_name} has been deactivated.',
+        'user_deletion_succeeded': 'User {affected_user_full_name} has been deleted.',
+        'user_organization_approved': 'User {affected_user_full_name} has been approved for organization {affected_organization}.',
+        'user_organization_claimed': 'User {affected_user_full_name} has claimed organization {affected_organization}.',
+        'user_organization_rejected': 'User {affected_user_full_name} claim for organization {affected_organization} has been rejected.',
+        'user_organization_removed': 'User {affected_user_full_name} has been removed from organization {affected_organization}.',
+        'user_password_updated': 'Password has been changed for user {affected_user_full_name}.',
+        'user_update_succeeded': 'User {affected_user_full_name} has been updated.',
         'zabbix_host_creation_failed': 'Unable to add instance {instance_name} to Zabbix',
         'zabbix_host_creation_succeeded': 'Added instance {instance_name} to Zabbix',
         'zabbix_host_deletion_failed': 'Unable to delete instance {instance_name} from Zabbix',
@@ -196,29 +196,32 @@ angular.module('ncsaas').constant('EVENT_ROUTES', {
 
                 var fields = findFields(template);
                 var entities = fieldsToEntities(event, fields);
-                var params = {};
+                var context = {};
                 // Fill hyperlinks for entities
                 for (var field in entities) {
                     var entity = entities[field];
                     var route = EVENT_ROUTES[entity];
                     var uuid = event[entity + "_uuid"];
-                    var url = $state.href(route, {uuid: uuid});
-                    params[field] = '<a href="' + url + '" class="name">' + event[field] + '</a>';
+                    var args = {uuid: uuid};
+                    if (entity == 'cloud_account' || entity == 'cloud') {
+                        args['provider'] = 'IaaS';
+                    }
+                    var url = $state.href(route, args);
+                    context[field] = '<a href="' + url + '" class="name">' + event[field] + '</a>';
                 }
 
                 // Fill other fields
                 for (var i = 0; i < fields.length; i++) {
                     var field = fields[i];
-                    if (!params[field]) {
+                    if (!context[field]) {
                         if (event[field]) {
-                            params[field] = event[field];
+                            context[field] = event[field];
                         } else {
-                            params[field] = '';
+                            context[field] = '';
                         }
                     }
                 }
-
-                return renderTemplate(template, params);
+                return renderTemplate(template, context);
             }
         }
     }
@@ -261,12 +264,11 @@ angular.module('ncsaas').constant('EVENT_ROUTES', {
         }
 
         var table = {};
-        for (var i = 0; i < fields.length; i++) {
-            var field = fields[i];
-            for (var name in entities) {
-                if (field.startsWith(name)) {
+        for (var name in entities) {
+            for (var i = 0; i < fields.length; i++) {
+                var field = fields[i];
+                if (field.startsWith(name) && !table[field]) {
                     table[field] = name;
-                    break;
                 }
             }
         }
