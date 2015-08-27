@@ -168,7 +168,7 @@
             },
             {
               title: 'Providers',
-              key: 'services',
+              key: 'providers',
               viewName: 'tabServices'
             }
           ]
