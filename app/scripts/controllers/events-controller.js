@@ -315,9 +315,11 @@
         });
       },
       selectProject: function (project) {
-        project.selected=!project.selected;
-        this.getProjectResources(project);
-        this.getProjectEvents(project);
+        if (project) {
+          project.selected =! project.selected;
+          this.getProjectResources(project);
+          this.getProjectEvents(project);
+        }
       },
       onCustomerUpdate: function() {
         this.getCustomerProjects();

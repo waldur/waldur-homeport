@@ -16,9 +16,7 @@
         this.pageSize = 1;
         /*jshint camelcase: false */
         this.getList().then(function(projects) {
-          if (projects.length > 0) {
-            deferred.resolve(projects[0]);
-          }
+          deferred.resolve(projects[0]);
         });
         this.pageSize = null;
 
