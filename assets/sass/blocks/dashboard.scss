@@ -41,6 +41,9 @@
   .white-box {
     min-height: 73px;
     padding: 20px 40px;
+    &.placeholder {
+      line-height: 35px;
+    }
     &.table-list {
       padding: 0;
     }
