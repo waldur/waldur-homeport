@@ -64,6 +64,16 @@ angular.module('ncsaas')
         ]
       }
     ],
+    serviceCategories: [
+      {
+        name: 'Virtual machines',
+        services: ['Amazon', 'Azure', 'DigitalOcean', 'OpenStack'],
+      },
+      {
+        name: 'Applications',
+        services: ['Oracle', 'GitLab']
+      }
+    ],
     IntercomAppId: 'xfbbcxck',
     defaultListCacheTime: 60 * 10,
     helpList: [
