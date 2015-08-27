@@ -233,7 +233,7 @@
       },
       getList: function(filter) {
         if (this.user) {
-          this.service.defaultFilter.search = this.user.full_name;
+          this.service.defaultFilter.scope = this.user.url;
           this._super(filter);
         }
       },
@@ -342,7 +342,6 @@
               type: ENTITYLISTFIELDTYPES.noType,
               propertyName: 'name',
               name: 'Title',
-              className: 'title',
               showForMobile: true
             },
             {

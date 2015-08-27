@@ -54,7 +54,7 @@
       list: {},
       service: null, // required in init
       searchInput: '',
-      searchFieldName: '', // required in init
+      searchFieldName: 'name', // required in init
       controllerScope: null, // required in init
       showgroup: false, // for showing group buttons and checkboxes in list view
       // checkboxes
@@ -68,6 +68,8 @@
 
       init: function() {
         this.setSignalHandler('currentCustomerUpdated', this.currentCustomerUpdatedHandler.bind(this));
+        this.deregisterEvent('generalSearchChanged');
+        this.setSignalHandler('generalSearchChanged', this.generalSearchChanged.bind(this));
         this.service.page = 1;
         this.service.cacheTime = this.cacheTime;
         this._super();
@@ -87,6 +89,10 @@
         });
       },
       afterGetList: function() {},
+      generalSearchChanged: function(event, text) {
+        this.searchInput = text;
+        this.search();
+      },
       search: function() {
         var vm = this;
         var filter = {};

@@ -63,7 +63,7 @@
             <div class="tabs-wrapper">
                 <aside>
                     <div class="input-group">
-                        <input type="search" placeholder="Search"/>
+                        <input type="search" placeholder="Search" ng-model="generalSearch" ng-change="search()"/>
                     </div>
                     <a class="open-tabs button" ng-click="openTabs = !openTabs">Tabs</a>
                     <ul class="tabs-links" ng-class="{'tabs-opened': openTabs}">

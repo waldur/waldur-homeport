@@ -1120,6 +1120,7 @@ angular.module('ncsaas')
     blockUI) {
     var controllerScope = this;
     var ServiceController = baseControllerListClass.extend({
+      // TODO implement generalSearch when endpoint for mixed providers will be available NC-765
       init: function() {
         this.service = joinServiceProjectLinkService;
         this.controllerScope = controllerScope;
