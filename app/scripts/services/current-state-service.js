@@ -20,6 +20,7 @@
 
     vm.getProject = getProject;
     vm.setProject = setProject;
+    vm.handleSelectedProjects = handleSelectedProjects;
 
     // private variables:
     var customer = null,
@@ -59,6 +60,24 @@
       } else {
         project = undefined;
       }
+    }
+
+    function handleSelectedProjects(currentCustomer, projectUuid) {
+      var selectedProjects = $window.localStorage['selectedProjects'] == undefined
+          ? "{}"
+          : $window.localStorage['selectedProjects'];
+      selectedProjects = JSON.parse(selectedProjects);
+      if (projectUuid) {
+        selectedProjects[currentCustomer] = projectUuid.uuid;
+        $window.localStorage.setItem('selectedProjects', JSON.stringify(selectedProjects));
+      } else {
+        for (var key in selectedProjects) {
+          if (key == currentCustomer) {
+            return selectedProjects[key];
+          }
+        }
+      }
+      return null;
     }
 
     // XXX: getActiveItem and getBodyClass methods have to be moved to apps.js for code consistency.

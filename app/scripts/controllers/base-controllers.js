@@ -94,13 +94,11 @@
         currentStateService.setCustomer(customer);
         vm.currentCustomer = customer;
         $rootScope.$broadcast('currentCustomerUpdated');
-        $state.go('organizations.details', {uuid: customer.uuid});
-
       },
       setCurrentProject: function(project) {
         var vm = this;
-        this.handleSelectedProjects(project);
         currentStateService.setProject(project);
+        currentStateService.handleSelectedProjects(vm.currentCustomer.uuid, project);
         vm.currentProject = project;
         $rootScope.$broadcast('currentProjectUpdated');
       },
@@ -116,25 +114,6 @@
         event.stopPropagation();
         vm.menuState[active] = !vm.menuState[active];
       },
-      handleSelectedProjects: function(projectUuid) {
-        var vm = this,
-          selectedProjects = $window.localStorage['selectedProjects'] == undefined
-            ? "{}"
-            : $window.localStorage['selectedProjects'];
-        selectedProjects = JSON.parse(selectedProjects);
-        if (projectUuid) {
-          selectedProjects[vm.currentCustomer.uuid] = projectUuid.uuid;
-          $window.localStorage.setItem('selectedProjects', JSON.stringify(selectedProjects));
-        } else {
-          for (var key in selectedProjects) {
-            if (key == vm.currentCustomer.uuid) {
-              return selectedProjects[key];
-            }
-          }
-        }
-        return null;
-      },
-
       mobileMenu: function() {
         this.showMobileMenu = !this.showMobileMenu;
       },
@@ -146,27 +125,33 @@
               return project.uuid;
             });
             if (!uuids.indexOf($window.localStorage[ENV.currentProjectUuidStorageKey]) + 1) {
-              vm.setFirstOrLastSelectedProject();
+              return vm.setFirstOrLastSelectedProject();
             }
           } else {
-            vm.setFirstOrLastSelectedProject();
+            return vm.setFirstOrLastSelectedProject();
           }
+        }).then(function() {
+          $state.go('organizations.details', {uuid: vm.currentCustomer.uuid});
         });
       },
       setFirstOrLastSelectedProject: function() {
-        var vm = this;
+        var vm = this,
+          deferred = $q.defer();
 
-        var projectUuid = vm.handleSelectedProjects();
+        var projectUuid = currentStateService.handleSelectedProjects(vm.currentCustomer.uuid);
         if (projectUuid) {
           projectsService.$get(projectUuid).then(function(project){
             currentStateService.setProject(project);
             vm.currentProject = project;
+            deferred.resolve();
           });
         } else {
           projectsService.getFirst().then(function(firstProject) {
             vm.setCurrentProject(firstProject);
+            deferred.resolve();
           });
         }
+        return deferred.promise;
       },
       refreshProjectListHandler: function(event, params) {
         var vm = this,
@@ -361,9 +346,16 @@
             getFirstProject();
           }
           function getFirstProject() {
-            projectsService.getFirst().then(function(response) {
-              projectDeferred.resolve(response);
-            });
+            var projectUuid = currentStateService.handleSelectedProjects($window.localStorage[ENV.currentCustomerUuidStorageKey]);
+            if (projectUuid) {
+              projectsService.$get(projectUuid).then(function(project){
+                projectDeferred.resolve(project);
+              });
+            } else {
+              projectsService.getFirst().then(function(response) {
+                projectDeferred.resolve(response);
+              });
+            }
           }
         }
       }
