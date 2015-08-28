@@ -14,17 +14,23 @@
           {
             title: 'Start',
             clickFunction: this.startResource.bind(this.controllerScope),
-            isDisabled: this.isOperationAvailable.bind(this.controllerScope, 'start')
+            isDisabled: function(model) {
+              return !this.isOperationAvailable('start', model);
+            }.bind(this.controllerScope)
           },
           {
             title: 'Stop',
             clickFunction: this.stopResource.bind(this.controllerScope),
-            isDisabled: this.isOperationAvailable.bind(this.controllerScope, 'stop')
+            isDisabled: function(model) {
+              return !this.isOperationAvailable('stop', model);
+            }.bind(this.controllerScope)
           },
           {
             title: 'Restart',
             clickFunction: this.restartResource.bind(this.controllerScope),
-            isDisabled: this.isOperationAvailable.bind(this.controllerScope, 'restart')
+            isDisabled: function(model) {
+              return !this.isOperationAvailable('restart', model);
+            }.bind(this.controllerScope)
           },
           {
             title: 'Remove',
@@ -62,6 +68,11 @@
             {
               name: 'Type',
               propertyName: 'resource_type',
+              type: ENTITYLISTFIELDTYPES.noType
+            },
+            {
+              name: 'State',
+              propertyName: 'state',
               type: ENTITYLISTFIELDTYPES.noType
             },
             {
