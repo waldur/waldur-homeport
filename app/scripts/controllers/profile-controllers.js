@@ -7,6 +7,7 @@
       'usersService',
       'ENV',
       '$stateParams',
+      '$rootScope',
       DetailUpdateProfileController
     ]);
 
@@ -14,7 +15,8 @@
     baseUserDetailUpdateController,
     usersService,
     ENV,
-    $stateParams) {
+    $stateParams,
+    $rootScope) {
     var controllerScope = this;
     var Controller = baseUserDetailUpdateController.extend({
       init:function() {
@@ -29,6 +31,9 @@
         usersService.getCurrentUser().then(function(response) {
           vm.model = response;
         });
+      },
+      search: function() {
+        $rootScope.$broadcast('generalSearchChanged', this.searchInput);
       }
     });
 
