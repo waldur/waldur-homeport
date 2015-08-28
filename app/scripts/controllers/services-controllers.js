@@ -65,12 +65,6 @@
           },
           list: [
             {
-              type: ENTITYLISTFIELDTYPES.statusCircle,
-              className: 'statusCircle',
-              propertyName: 'state',
-              onlineStatus: ENV.resourceOnlineStatus
-            },
-            {
               name: 'Name',
               propertyName: 'name',
               type: ENTITYLISTFIELDTYPES.name,
