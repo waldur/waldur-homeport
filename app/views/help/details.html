@@ -1,6 +1,6 @@
 <div ng-controller="HelpDetailsController as HelpDetails">
     <div class="container">
-        <h1>Instruction</h1>
+        <h1>Obtaining credentials for {{ HelpDetails.model.name }}</h1>
     </div>
     <div class="white-box">
         <div class="instruction-page">
@@ -8,7 +8,6 @@
                 <img ng-src="static/images/help/{{ HelpDetails.model.name.toLowerCase() }}_tokens.png">
             </div>
             <div class="instruction-content" ng-if="HelpDetails.model">
-                <h2>{{ HelpDetails.model.name }}</h2>
                 <p ng-if="HelpDetails.model.name == 'Azure'">
                     To be able to connect to the Azure, you need to generate a X.509 certificate which is used to authenticate yourself and upload it to the Azure Management Portal.
                     <br/>
@@ -25,12 +24,13 @@
                 </p>
                 <p ng-if="HelpDetails.model.name == 'DigitalOcean'">In order to be able to access your DigitalOcean via API you need to have a token. DigitalOcean tokens can be created with read or read-write scope, latter is required if you want to modify your account in any way.
                 </p>
-                <p><a href="{{ HelpDetails.model.link }}" target="_blank">instruction on the official site</a></p>
+                <p><a href="{{ HelpDetails.model.link }}" target="_blank">Instruction on the official site</a></p>
             </div>
             <div ng-if="!HelpDetails.model">
-                <h2>No instruction</h2>
+                <h2>No instructions</h2>
             </div>
             <div class="clear"></div>
+            <p><a ui-sref="help.list">Back to list</a></p>
         </div>
     </div>
 </div>
