@@ -181,7 +181,7 @@
           }
           if (params.new) {
             vm.projects.push(model);
-            if (!vm.currentProject || !vm.currentProject.uuid) {
+            if (!vm.currentProject || !vm.currentProject.uuid || params.current) {
               vm.setCurrentProject(model);
             }
           }

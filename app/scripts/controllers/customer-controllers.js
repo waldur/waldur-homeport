@@ -297,7 +297,6 @@
         this.service.defaultFilter.customer_uuid = $stateParams.uuid;
         this.service.filterByCustomer = false;
         this._super();
-        this.deregisterEvent('currentCustomerUpdated');
       }
     });
 
@@ -327,7 +326,7 @@
         this.service.defaultFilter.customer = $stateParams.uuid;
         this.service.filterByCustomer = false;
         this._super();
-        this.deregisterEvent('currentCustomerUpdated');
+        this.service.filterByCustomer = true;
         this.actionButtonsListItems = [
           {
             title: 'Delete',

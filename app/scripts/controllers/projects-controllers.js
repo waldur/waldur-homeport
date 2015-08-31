@@ -30,11 +30,14 @@
       projectResources: {},
       expandableResourcesKey: 'resources',
       expandableUsersKey: 'users',
+      currentProject: null,
 
       init:function() {
         this.service = projectsService;
         this.controllerScope = controllerScope;
+        this.setSignalHandler('currentProjectUpdated', this.setCurrentProject.bind(controllerScope));
         this.checkPermissions();
+        this.setCurrentProject();
         this._super();
         this.searchFieldName = 'name';
         this.actionButtonsListItems = [
@@ -212,6 +215,17 @@
           $rootScope.$broadcast('mini-pagination:getNumberList', vm.projectResources[uuid].pages,
             page, vm.getResourcesForProject.bind(vm), vm.expandableResourcesKey, uuid);
         });
+      },
+      setCurrentProject: function() {
+        var vm = this;
+        currentStateService.getProject().then(function(response) {
+          vm.currentProject = response;
+          vm.entityOptions.list[0]['description'] =  {
+            condition: vm.currentProject.uuid,
+            text: '[Active]',
+            field: 'uuid'
+          };
+        });
       }
     });
 
@@ -257,7 +271,7 @@
           }
         });
         vm.addUser();
-        $rootScope.$broadcast('refreshProjectList', {model: vm.instance, new: true});
+        $rootScope.$broadcast('refreshProjectList', {model: vm.instance, new: true, current: true});
       },
       currentCustomerUpdatedHandler: function() {
         var vm = this;
