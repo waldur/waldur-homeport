@@ -11,6 +11,10 @@
         > li {
             > a {
                 color: #1F3305;
+                &:hover {
+                    color: rgba(31, 51, 5, 0.8);
+                    text-decoration: underline;
+                }
                 &.active {
                     color: #1F3305;
                     background-color: #f7f7f7;
