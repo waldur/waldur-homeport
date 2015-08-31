@@ -198,7 +198,7 @@
       getResourcesForProject: function(uuid, page) {
         var vm = this;
         var filter = {
-          project:uuid
+          project_uuid:uuid
         };
         vm.projectResources[uuid] = {data:null};
         page = page || 1;
