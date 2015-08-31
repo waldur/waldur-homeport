@@ -100,7 +100,8 @@ angular.module('ncsaas')
       'users',
       'backups',
       'services:provider:uuid',
-      'password'
+      'password',
+      'serviceLink'
     ],
     featuresVisible: false,
 
