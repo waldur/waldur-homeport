@@ -314,10 +314,12 @@
       'baseControllerListClass',
       'projectsService',
       'ENTITYLISTFIELDTYPES',
+      '$rootScope',
       CustomerProjectTabController
     ]);
 
-  function CustomerProjectTabController($stateParams, baseControllerListClass, projectsService, ENTITYLISTFIELDTYPES) {
+  function CustomerProjectTabController(
+    $stateParams, baseControllerListClass, projectsService, ENTITYLISTFIELDTYPES, $rootScope) {
     var controllerScope = this;
     var Controller = baseControllerListClass.extend({
       init: function() {
@@ -352,6 +354,10 @@
             }
           ]
         };
+      },
+      afterInstanceRemove: function(instance) {
+        $rootScope.$broadcast('refreshProjectList', {model: instance, remove: true});
+        this._super(instance);
       }
     });
 
