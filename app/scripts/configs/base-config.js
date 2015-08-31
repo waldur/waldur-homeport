@@ -110,6 +110,7 @@ angular.module('ncsaas')
       IaaS: 'project-cloud-memberships',
       GitLab: 'gitlab-service-project-link/',
       DigitalOcean: 'digitalocean-service-project-link'
-    }
+    },
+    requestTimeout: 1000 * 10
 
   });

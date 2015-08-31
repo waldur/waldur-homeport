@@ -1053,12 +1053,41 @@
 
 (function() {
   angular.module('ncsaas')
-    .factory('myHttpInterceptor', function($q, Flash) {
+    .factory('myHttpInterceptor', function($q, Flash, ENV, blockUI) {
+      var timeouts = {};
+      function getKey(config) {
+        return config.url + config.method + JSON.stringify(config.params);
+      }
       return {
+        'request': function(config) {
+          var deferred = $q.defer();
+          deferred.resolve(config);
+          if (config.url) {
+            if (timeouts[getKey(config)]) {
+              clearTimeout(timeouts[getKey(config)]);
+            }
+            timeouts[getKey(config)] = setTimeout(function() {
+              Flash.create('danger', 'Problem getting response from the server.');
+              blockUI.stop();
+            }, ENV.requestTimeout);
+          }
+          return config;
+        },
+        'response': function(response) {
+          var deferred = $q.defer();
+          deferred.resolve(response);
+          if (response.config) {
+            clearTimeout(timeouts[getKey(response.config)]);
+          }
+          return response;
+        },
         'responseError': function(rejection) {
           var message = rejection.status ? (rejection.status + ': ' + rejection.statusText) : 'Connection error';
           if (rejection.data && rejection.data.non_field_errors) {
             message += ' ' + rejection.data.non_field_errors;
+          }
+          if (rejection.config) {
+            clearTimeout(timeouts[getKey(rejection.config)]);
           }
           Flash.create('danger', message);
           return $q.reject(rejection);

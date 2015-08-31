@@ -16,6 +16,7 @@
   function baseServiceClass($q, currentStateService, $resource, ENV, $rootScope, listCache) {
     // pageSize, page, pages - default variables, you can change this in your init method or call this._super() in init
     var BaseServiceClass = Class.extend({
+      ALL_CACHE_KEYS: 'ALL_CACHE_KEYS',
       pageSize:null,
       page:null,
       pages:null,
@@ -51,15 +52,17 @@
           filter.page_size = vm.pageSize;
           var cacheKey = vm.endpoint + JSON.stringify(filter);
           var cache = listCache.get(cacheKey);
-          var resetState = listCache.get(vm.endpoint);
-          vm.cacheReset = vm.cacheReset ? vm.cacheReset : (resetState ? resetState.doReset : false);
+          var allCacheKeys = listCache.get(vm.ALL_CACHE_KEYS) ? listCache.get(vm.ALL_CACHE_KEYS) : {};
+          var keysForCurrentEndpoint = allCacheKeys[vm.endpoint] ? allCacheKeys[vm.endpoint] : [];
+          if (keysForCurrentEndpoint.indexOf(cacheKey) == -1) {
+            keysForCurrentEndpoint.push(cacheKey);
+            allCacheKeys[vm.endpoint] = keysForCurrentEndpoint;
+            listCache.put(vm.ALL_CACHE_KEYS, allCacheKeys);
+          }
           if (!vm.cacheReset && vm.cacheTime > 0 && cache && cache.time > new Date().getTime()) {
             deferred.resolve(cache.data);
           } else {
             vm.cacheReset = false;
-            if (resetState) {
-              listCache.put(vm.endpoint, {doReset: false});
-            }
             listCache.put(cacheKey, {data: null, time: 0});
             vm.getFactory(true, null, endpointUrl).query(filter, function(response, responseHeaders) {
               var header = responseHeaders();
@@ -98,12 +101,14 @@
 
         return deferred.promise;
       },
-      /**
-       * Call this function if you want to clear cache of the current endpoint
-       * during next request to the current endpoint
-       */
-      clearCacheOfNextRequest: function() {
-        listCache.put(this.endpoint, {doReset: true});
+      clearAllCacheForCurrentEndpoint: function() {
+        var allKeys = listCache.get(this.ALL_CACHE_KEYS);
+        var currentKeys = allKeys[this.endpoint];
+        if (currentKeys) {
+          for (var i = 0; i < currentKeys.length; i++) {
+            listCache.remove(currentKeys[i]);
+          }
+        }
       },
       $create:function(endpointUrl) {
         var Instance = this.getFactory(false, null, endpointUrl);
@@ -214,6 +219,9 @@
       },
       getOption: function(endpointUrl) {
         return this.getFactory(false, null, endpointUrl).options().$promise;
+      },
+      cleanAllCache: function() {
+        listCache.removeAll();
       }
     });
 

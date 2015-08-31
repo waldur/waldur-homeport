@@ -346,6 +346,9 @@
         var vm = this;
         projectsService.getList().then(function(response) {
           vm.projects = response;
+          for (var i = 0; i < vm.projects.length; i++) {
+            vm.projects[i].selected = false;
+          }
           vm.selectProject(vm.projects[0]);
         });
       },
