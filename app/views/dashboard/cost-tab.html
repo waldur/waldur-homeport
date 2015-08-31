@@ -20,7 +20,7 @@
                     </li>
                     <li>
                         <div class="icon"></div>
-                        <a stoppropagation ng-click="row.selected=true; row.activeTab='services'" ng-class="{'active': row.selected && row.activeTab=='services'}">Services (<span ng-bind="::row.services.length"></span>)</a>
+                        <a stoppropagation ng-click="row.selected=true; row.activeTab='services'" ng-class="{'active': row.selected && row.activeTab=='services'}">Providers (<span ng-bind="::row.services.length"></span>)</a>
                     </li>
                     <li>
                         <div class="icon"></div>
@@ -51,7 +51,7 @@
                 </div>
                 <div class="table services" ng-show="row.activeTab=='services'">
                     <div class="tr th">
-                        <div class="td service-name display-for-mobile"><span>Service name</span></div>
+                        <div class="td service-name display-for-mobile"><span>Provider name</span></div>
                         <div class="td service-name"><span>Cost</span></div>
                     </div>
                     <div class="tr" ng-repeat="service in row.services">
