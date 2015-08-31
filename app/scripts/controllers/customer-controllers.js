@@ -380,6 +380,8 @@
       init:function() {
         this.service = resourcesService;
         this.controllerScope = controllerScope;
+        // resource endpoint is using a different customer filter name
+        this.service.filterByCustomer = false;
         this.service.defaultFilter.customer_uuid = $stateParams.uuid;
         this._super();
       }
