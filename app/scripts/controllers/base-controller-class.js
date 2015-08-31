@@ -105,6 +105,7 @@
         var confirmDelete = confirm('Confirm deletion?');
         if (confirmDelete) {
           model.$delete(function() {
+            vm.service.clearAllCacheForCurrentEndpoint();
             vm.afterInstanceRemove(model);
           }, vm.handleActionException);
         }
@@ -191,6 +192,7 @@
         function success() {
           vm.afterSave();
           vm.successFlash(vm.getSuccessMessage());
+          vm.service.clearAllCacheForCurrentEndpoint();
           vm.successRedirect();
         }
         function error(response) {
@@ -250,6 +252,7 @@
         vm.beforeUpdate();
         vm.model.$update(success, error);
         function success() {
+          vm.service.clearAllCacheForCurrentEndpoint();
           vm.afterUpdate();
           vm.successRedirect();
         }
@@ -274,6 +277,7 @@
         if (confirm('Confirm deletion?')) {
           vm.model.$delete(
             function() {
+              vm.service.clearAllCacheForCurrentEndpoint();
               $state.go(vm.listState);
             },
             function(errors) {

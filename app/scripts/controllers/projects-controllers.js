@@ -174,7 +174,6 @@
         }
       },
       afterInstanceRemove: function(instance) {
-        projectsService.clearCacheOfNextRequest();
         $rootScope.$broadcast('refreshProjectList', {model: instance, remove: true});
         this._super(instance);
       },
@@ -258,7 +257,6 @@
           }
         });
         vm.addUser();
-        projectsService.clearCacheOfNextRequest();
         $rootScope.$broadcast('refreshProjectList', {model: vm.instance, new: true});
       },
       currentCustomerUpdatedHandler: function() {
@@ -1060,7 +1058,7 @@ angular.module('ncsaas')
         instance.$save(
           function() {
             vm.getUsersForProject(role);
-            projectsService.clearCacheOfNextRequest();
+            projectsService.clearAllCacheForCurrentEndpoint();
           },
           function(response) {
             alert(response.data.non_field_errors);
@@ -1076,7 +1074,7 @@ angular.module('ncsaas')
           projectPermissionsService.$delete(userProject.pk).then(
             function() {
               vm.users[role].splice(index, 1);
-              projectsService.clearCacheOfNextRequest();
+              projectsService.clearAllCacheForCurrentEndpoint();
             },
             function(response) {
               alert(response.data.detail);
