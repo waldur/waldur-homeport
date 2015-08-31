@@ -133,6 +133,8 @@
       .list-cache-reset {
         right: 2px;
         top: 34px;
+        float: right;
+        display: inline-block;
       }
     } // xs
     .tab-title {
@@ -239,9 +241,11 @@
     }
 
   }
-  .button {
-    float: right;
-    margin-right: 5px;
+  .tab-title {
+    .button {
+      float: right;
+      margin-right: 5px;
+    }
   }
   .table {
     margin: 27px 0;
