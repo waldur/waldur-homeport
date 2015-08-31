@@ -1,8 +1,8 @@
 .list-cache-reset {
-  position: absolute;
   right: 10px;
   top: 21px;
   z-index: 1;
+  display: inline;
   .icon-button {
     &:before {
       content: "\f021";

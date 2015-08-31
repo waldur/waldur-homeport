@@ -22,14 +22,13 @@
                    ui-sref="{{ entityOptions.entityData.importLink }}" class="button">
                     <span>{{ entityOptions.entityData.importLinkText }}</span>
                 </a>
+                <list-cache-reset list-controller="entityList"
+                                  list-service="entityService"></list-cache-reset>
             </li>
         </ul>
     </div>
 
     <div class="white-box no-styles" ng-show="entityList.list.length == 0 && !entityList.searchInput && !entityList.chosenFilters.length">
-
-        <list-cache-reset list-controller="entityList"
-                          list-service="entityService"></list-cache-reset>
         <h2 class="app-title">
             {{ entityOptions.entityData.noDataText }}
         </h2>
@@ -43,6 +42,9 @@
                    ui-sref="{{ entityOptions.entityData.importLink }}" class="button">
                     {{ entityOptions.entityData.importLinkText }}
                 </a>
+
+                <list-cache-reset list-controller="entityList"
+                                  list-service="entityService"></list-cache-reset>
             </div>
         </div>
     </div>
@@ -70,10 +72,7 @@
     </section>
     <!-- /view-control -->
 
-
     <div class="white-box list-box" ng-show="entityList.list.length > 0 || entityList.searchInput">
-        <list-cache-reset list-controller="entityList"
-                          list-service="entityService"></list-cache-reset>
         <ul class="object-list">
             <li class="list-item list-header">
                 <div class="checkbox" ng-show="entityList.controlPanelShow"></div>
@@ -167,6 +166,7 @@
         </ul>
     </div>
 
-    <pagination pages-list="entityList" pages-service="entityList.service"></pagination>
+    <pagination pages-list="entityList" pages-service="entityList.service"
+                ng-if="entityList.list.length > 0"></pagination>
 
 </div>
