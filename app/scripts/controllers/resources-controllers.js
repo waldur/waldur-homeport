@@ -288,7 +288,8 @@
             {
               title: 'Backups',
               key: 'backups',
-              viewName: 'tabBackups'
+              viewName: 'tabBackups',
+              count: 0
             }
           ]
         };

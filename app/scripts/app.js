@@ -315,11 +315,14 @@
             'eventTypes@projects.details' : {
               templateUrl: 'views/events/event-types.html',
             },
-            'tabServices@projects.details' : {
-              templateUrl: 'views/project/tab-services.html',
-            },
             'tabProviders@projects.details' : {
               templateUrl: 'views/resource/tab-providers.html',
+            },
+            'tabApplications@projects.details' : {
+              templateUrl: 'views/resource/tab-applications.html',
+            },
+            'tabBackups@projects.details' : {
+              templateUrl: 'views/resource/tab-backups.html',
             },
             'appHeader': {
               templateUrl: 'views/partials/app-header.html',
@@ -682,32 +685,21 @@
           auth: true
         })
 
+
         .state('resources.details', {
-          url: ':uuid/:tab',
+          url: ':resource_type/:uuid/:tab',
           views: {
             'appContent': {
-              templateUrl: 'views/project/details.html',
+              templateUrl: 'views/resource/details.html',
             },
-            'tabEventlog@resources.details' : {
-              templateUrl: 'views/project/tab-eventlog.html',
-            },
-            'tabResources@resources.details' : {
-              templateUrl: 'views/project/tab-resources.html',
-            },
-            'tabUsers@resources.details' : {
-              templateUrl: 'views/project/tab-users.html',
-            },
-            'eventTypes@resources.details' : {
-              templateUrl: 'views/events/event-types.html',
-            },
-            'tabProviders@resources.details' : {
-              templateUrl: 'views/resource/tab-providers.html',
-            },
-            'tabApplications@resources.details' : {
-              templateUrl: 'views/resource/tab-applications.html',
-            },
-            'tabBackups@resources.details' : {
+            'tabBackups@resources.details': {
               templateUrl: 'views/resource/tab-backups.html',
+            },
+            'backupListContent@resources.details' : {
+              templateUrl: 'views/backup/backup-list-content.html',
+            },
+            'tabs@resources.details': {
+              templateUrl: 'views/resource/tabs.html',
             },
             'appHeader': {
               templateUrl: 'views/partials/app-header.html',
