@@ -289,6 +289,7 @@
         this._super();
         $rootScope.buildId = ENV.buildId;
         $rootScope.logout = this.logout;
+        this.isAuthenticated = authService.isAuthenticated;
       },
       logout: function() {
         authService.signout();
