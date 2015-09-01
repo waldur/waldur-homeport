@@ -152,7 +152,8 @@
           var instance = servicesService.$create(service_url + 'link/');
           instance.project = project_url;
           instance.backend_id = resource.id;
-          instance.$save().then(function(){
+          instance.$save().then(function() {
+            resourcesService.clearAllCacheForCurrentEndpoint();
             resource.status = 'success';
             self.toggleResource(resource);
           }, function(){
