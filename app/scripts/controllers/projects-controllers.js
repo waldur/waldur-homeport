@@ -623,6 +623,9 @@
             fn();
           });
         }
+        this.entityOptions.entityData.noDataText = 'You have no VMs yet';
+        this.entityOptions.entityData.createLinkText = 'Create VM';
+        this.entityOptions.entityData.importLinkText = 'Import VM';
       },
       currentProjectUpdate: function() {
         var vm = this;
