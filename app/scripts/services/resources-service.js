@@ -15,7 +15,8 @@
         'digitalocean': '/digitalocean-droplets/',
         'aws': '/aws-instances/',
         'azure': '/azure-virtualmachines/',
-        'gitlab': '/gitlab-projects/'
+        'gitlab': '/gitlab-projects/',
+        'amazon': '/aws-instances/'
       },
 
       init:function() {

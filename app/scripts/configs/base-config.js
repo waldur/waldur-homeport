@@ -47,7 +47,7 @@ angular.module('ncsaas')
       {
         name: 'VMs',
         type: 'provider',
-        services: ['DigitalOcean', 'OpenStack']
+        services: ['DigitalOcean', 'OpenStack', 'Azure', 'Amazon']
       },
       {
         name: 'APPLICATIONS',
@@ -117,6 +117,8 @@ angular.module('ncsaas')
     resourceFilters: {
       VMs: ['DigitalOcean.Droplet', 'IaaS.Instance'],
       applications: ['Oracle.Database', 'GitLab.Project']
-    }
+    },
+
+    countsCacheTime: 60 // seconds
 
   });
