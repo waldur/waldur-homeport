@@ -117,6 +117,8 @@ angular.module('ncsaas')
     resourceFilters: {
       VMs: ['DigitalOcean.Droplet', 'IaaS.Instance'],
       applications: ['Oracle.Database', 'GitLab.Project']
-    }
+    },
+
+    countsCacheTime: 60 // seconds
 
   });

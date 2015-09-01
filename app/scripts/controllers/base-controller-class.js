@@ -35,6 +35,9 @@
       },
       updateIntercom: function() {
         window.Intercom('update');
+      },
+      emitEvent: function(eventName) {
+        $rootScope.$broadcast(eventName)
       }
     });
 
@@ -109,6 +112,7 @@
         if (confirmDelete) {
           model.$delete(function() {
             vm.service.clearAllCacheForCurrentEndpoint();
+            vm.emitEvent('refreshCounts');
             vm.afterInstanceRemove(model);
           }, vm.handleActionException);
         }
@@ -196,6 +200,7 @@
           vm.afterSave();
           vm.successFlash(vm.getSuccessMessage());
           vm.service.clearAllCacheForCurrentEndpoint();
+          vm.emitEvent('refreshCounts');
           vm.successRedirect();
         }
         function error(response) {
@@ -256,6 +261,7 @@
         vm.model.$update(success, error);
         function success() {
           vm.service.clearAllCacheForCurrentEndpoint();
+          vm.emitEvent('refreshCounts');
           vm.afterUpdate();
           vm.successRedirect();
         }
@@ -281,6 +287,7 @@
           vm.model.$delete(
             function() {
               vm.service.clearAllCacheForCurrentEndpoint();
+              vm.emitEvent('refreshCounts');
               $state.go(vm.listState);
             },
             function(errors) {

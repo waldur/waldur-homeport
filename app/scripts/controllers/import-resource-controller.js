@@ -156,6 +156,7 @@
           instance.backend_id = resource.id;
           instance.$save().then(function() {
             resourcesService.clearAllCacheForCurrentEndpoint();
+            vm.emitEvent('refreshCounts');
             resource.status = 'success';
             self.toggleResource(resource);
           }, function(){

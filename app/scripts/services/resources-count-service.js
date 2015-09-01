@@ -2,19 +2,27 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('resourcesCountService', ['$http', '$q', 'ENV', resourcesCountService]);
+    .service('resourcesCountService', ['$http', '$q', 'ENV', 'resourcesService', resourcesCountService]);
 
-  function resourcesCountService($http, $q, ENV) {
+  function resourcesCountService($http, $q, ENV, resourcesService) {
     function factory(endpoint) {
       return function(params) {
         var deferred = $q.defer();
 
         var url = ENV.apiEndpoint + 'api/' + endpoint + '/';
-        $http.head(url, {'params': params}).success(function(data, status, header) {
-          deferred.resolve(parseInt(header()['x-result-count']));
-        }).error(function() {
-          deferred.reject();
-        });
+        var cacheKey = url + JSON.stringify(params) + 'x-result-count';
+        var cache = resourcesService.getCache(cacheKey);
+        if (cache && cache.time > new Date().getTime()) {
+          deferred.resolve(cache.data);
+        } else {
+          $http.head(url, {'params': params}).success(function(data, status, header) {
+            var count = parseInt(header()['x-result-count']);
+            resourcesService.setCache(ENV.countsCacheTime, count, cacheKey, '/' + endpoint + '/');
+            deferred.resolve(count);
+          }).error(function() {
+            deferred.reject();
+          });
+        }
         return deferred.promise;
       }
     }
