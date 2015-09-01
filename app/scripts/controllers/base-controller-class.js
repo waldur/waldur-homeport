@@ -111,8 +111,6 @@
         var confirmDelete = confirm('Confirm deletion?');
         if (confirmDelete) {
           model.$delete(function() {
-            vm.service.clearAllCacheForCurrentEndpoint();
-            vm.emitEvent('refreshCounts');
             vm.afterInstanceRemove(model);
           }, vm.handleActionException);
         }
@@ -149,6 +147,8 @@
         vm.getList();
       },
       afterInstanceRemove: function(instance) {
+        this.service.clearAllCacheForCurrentEndpoint();
+        this.emitEvent('refreshCounts');
         var index = this.list.indexOf(instance);
         if (index !== -1) {
           this.list.splice(index, 1);
