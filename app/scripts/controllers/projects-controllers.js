@@ -630,11 +630,6 @@
           vm.service.defaultFilter.project_uuid = response.uuid;
           vm.getList();
         });
-      },
-
-      afterInstanceRemove: function(instance) {
-        $rootScope.$broadcast('refreshVmCounter');
-        this._super(instance);
       }
     });
 
