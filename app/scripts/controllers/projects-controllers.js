@@ -1218,18 +1218,8 @@ angular.module('ncsaas')
           });
         }
       },
-      remove: function(model) {
-        var vm = this;
-        var index = vm.list.indexOf(model);
-        var confirmDelete = confirm('Confirm deletion?');
-        if (confirmDelete) {
-          joinServiceProjectLinkService.$deleteByUrl(model.url, function() {
-            vm.afterInstanceRemove(model);
-            vm.list.splice(index, 1);
-          }, vm.handleActionException);
-        } else {
-          alert('Was not deleted.');
-        }
+      removeInstance: function(model) {
+        return joinServiceProjectLinkService.$deleteByUrl(model.url);
       },
       onSearchInputChanged: function(event, searchInput) {
         this.searchInput = searchInput;

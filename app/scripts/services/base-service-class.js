@@ -129,11 +129,10 @@
        * Use this function if you need to remove some entity by full endPoint url
        *
        * @param url     string   endPoint url
-       * @param success function success callback
-       * @param error   function error callback
+       * @return promise
        */
-      $deleteByUrl: function(url, success, error) {
-        this.getFactory(false, null, url).delete(success, error);
+      $deleteByUrl: function(url) {
+        return this.getFactory(false, null, url).delete().$promise;
       },
 
       operation:function(operation, uuid, inputs) {
