@@ -112,6 +112,11 @@ angular.module('ncsaas')
       GitLab: 'gitlab-service-project-link/',
       DigitalOcean: 'digitalocean-service-project-link'
     },
-    requestTimeout: 1000 * 10
+    requestTimeout: 1000 * 10,
+
+    resourceFilters: {
+      VMs: ['DigitalOcean.Droplet', 'IaaS.Instance'],
+      applications: ['Oracle.Database', 'GitLab.Project']
+    }
 
   });
