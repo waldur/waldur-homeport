@@ -130,8 +130,10 @@
         var projectUuid = currentStateService.handleSelectedProjects(vm.currentCustomer.uuid);
         if (projectUuid) {
           projectsService.$get(projectUuid).then(function(project){
-            currentStateService.setProject(project);
-            vm.currentProject = project;
+            if (project.customer_uuid == vm.currentCustomer.uuid) {
+              currentStateService.setProject(project);
+              controllerScope.currentProject = project;
+            }
             deferred.resolve();
           }, function() {
             currentStateService.removeLastSelectedProject(projectUuid);
@@ -245,9 +247,9 @@
         projectsService.getList().then(function(response) {
           if (response.length < 1
             && $state.current.name != 'projects.create') {
+            vm.currentProject = null;
+            vm.setCurrentProject(null);
             if ($state.current.name != 'errorPage.notFound') {
-              vm.currentProject = null;
-              vm.setCurrentProject(null);
               vm.errorFlash('You have no project yet! Please add the project.');
             }
           }

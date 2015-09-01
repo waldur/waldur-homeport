@@ -67,7 +67,7 @@
           ? "{}"
           : $window.localStorage['selectedProjects'];
       selectedProjects = JSON.parse(selectedProjects);
-      if (projectUuid) {
+      if (projectUuid && projectUuid.customer_uuid == currentCustomer) {
         selectedProjects[currentCustomer] = projectUuid.uuid;
         $window.localStorage.setItem('selectedProjects', JSON.stringify(selectedProjects));
       } else {
