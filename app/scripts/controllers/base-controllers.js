@@ -250,7 +250,7 @@
           if (response.length < 1
             && $state.current.name != 'projects.create') {
             if ($state.current.name != 'errorPage.notFound') {
-              vm.errorFlash('You have no project yet! Please add the project.');
+              vm.infoFlash('You have no projects! Please add one.');
             }
           }
           vm.projects = response;
