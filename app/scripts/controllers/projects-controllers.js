@@ -575,7 +575,6 @@
   angular.module('ncsaas')
     .controller('ProjectResourcesTabController', [
       '$stateParams',
-      '$rootScope',
       'BaseProjectResourcesTabController',
       'resourcesService',
       'currentStateService',
@@ -584,7 +583,6 @@
 
   function ProjectResourcesTabController(
     $stateParams,
-    $rootScope,
     BaseProjectResourcesTabController,
     resourcesService,
     currentStateService
