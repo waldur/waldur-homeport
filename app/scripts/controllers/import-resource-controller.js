@@ -8,6 +8,7 @@
       'ENV',
       'servicesService',
       'currentStateService',
+      'usersService',
       '$state',
       ImportResourceController]);
 
@@ -17,6 +18,7 @@
     ENV,
     servicesService,
     currentStateService,
+    usersService,
     $state
     ) {
     var controllerScope = this;
@@ -59,8 +61,8 @@
             for (var i = 0; i < vm.currentProject.services.length; i++) {
               var service = vm.currentProject.services[i];
               if (service.state != 'Erred'
-                && category.services
-                && (category.services.indexOf(service.type) + 1)
+                && category.services && (category.services.indexOf(service.type) + 1)
+                && (!service.shared || usersService.currentUser.is_staff)
               ) {
                 vm.services[category.name].push(service);
               }
