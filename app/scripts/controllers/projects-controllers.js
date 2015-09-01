@@ -286,17 +286,27 @@
   angular.module('ncsaas')
     .controller('ProjectDetailUpdateController', [
       '$stateParams',
+      '$rootScope',
+      '$q',
+      'ENV',
       'projectsService',
+      'servicesService',
       'baseControllerDetailUpdateClass',
       'resourcesCountService',
-      '$q',
-      "$rootScope",
       'currentStateService',
       ProjectDetailUpdateController
     ]);
 
-  function ProjectDetailUpdateController($stateParams, projectsService, baseControllerDetailUpdateClass,
-                                         resourcesCountService, $q, $rootScope, currentStateService) {
+  function ProjectDetailUpdateController(
+    $stateParams,
+    $rootScope,
+    $q,
+    ENV,
+    projectsService,
+    servicesService,
+    baseControllerDetailUpdateClass,
+    resourcesCountService,
+    currentStateService) {
     var controllerScope = this;
     var Controller = baseControllerDetailUpdateClass.extend({
       activeTab: 'eventlog',
@@ -309,6 +319,7 @@
         if (!$stateParams.uuid) {
           this.setSignalHandler('currentProjectUpdated', this.activate.bind(controllerScope));
         }
+        this.setSignalHandler('refreshVmCounter', this.setVmCounter.bind(controllerScope));
         this._super();
         this.detailsViewOptions = {
           title: 'Project',
@@ -361,24 +372,6 @@
           ]
         };
       },
-      afterActivate: function() {
-        var vm = controllerScope;
-        vm.canEdit = vm.model;
-        $q.all([
-          resourcesCountService.events({'scope': vm.model.url}),
-          resourcesCountService.resources({'project_uuid': vm.model.uuid, 'resource_type': ['DigitalOcean.Droplet', 'IaaS.Instance']}),
-          resourcesCountService.resources({'project_uuid': vm.model.uuid, 'resource_type': ['Oracle.Database', 'GitLab.Project']}),
-          resourcesCountService.backups({'project_uuid': vm.model.uuid}),
-          resourcesCountService.users({'project': vm.model.uuid})
-        ]).then(function(responses) {
-          vm.detailsViewOptions.tabs[0].count = responses[0];
-          vm.detailsViewOptions.tabs[1].count = responses[1];
-          vm.detailsViewOptions.tabs[2].count = responses[2];
-          vm.detailsViewOptions.tabs[3].count = responses[3];
-          vm.detailsViewOptions.tabs[4].count = responses[4];
-          vm.detailsViewOptions.tabs[5].count = vm.model.services.length;
-        });
-      },
       afterUpdate: function() {
         $rootScope.$broadcast('refreshProjectList', {model: this.model, update: true});
       },
@@ -388,7 +381,74 @@
         } else {
           return currentStateService.getProject();
         }
-      }
+      },
+      afterActivate: function() {
+        this.canEdit = this.model;
+        this.setEventsCounter()
+        this.setVmCounter();
+        this.setAppCounter();
+        this.setBackupsCounter();
+        this.setProvidersCounter();
+        this.setUsersCounter();
+      },
+      setEventsCounter: function() {
+        var vm = this;
+        resourcesCountService.events({'scope': vm.model.url}).then(function(resource) {
+          vm.detailsViewOptions.tabs[0].count = response;
+        });
+      },
+      getResourceTypes: function(index) {
+        return servicesService.getServicesList().then(function(services) {
+          var resource_types = [];
+          for (var service_type in services) {
+            if (ENV.serviceCategories[index].services.indexOf(service_type) == -1) {
+              continue;
+            }
+            var resources = services[service_type].resources;
+            for(var resource_type in resources) {
+              resource_types.push(service_type + "." + resource_type);
+            }
+          }
+          return resource_types;
+        });
+      },
+      setVmCounter: function() {
+        var vm = this;
+        vm.getResourceTypes(0).then(function(resource_types) {
+          resourcesCountService.resources({
+            'project_uuid': vm.model.uuid,
+            'resource_type': resource_types
+          }).then(function(response) {
+            vm.detailsViewOptions.tabs[1].count = response;
+          });
+        });
+      },
+      setAppCounter: function() {
+        var vm = this;
+        vm.getResourceTypes(1).then(function(resource_types) {
+          resourcesCountService.resources({
+            'project_uuid': vm.model.uuid,
+            'resource_type': resource_types
+          }).then(function(response) {
+            vm.detailsViewOptions.tabs[2].count = response;
+          });
+        });
+      },
+      setBackupsCounter: function() {
+        var vm = this;
+        resourcesCountService.backups({'project_uuid': vm.model.uuid}).then(function(response) {
+          vm.detailsViewOptions.tabs[3].count = response;
+        });
+      },
+      setUsersCounter: function() {
+        var vm = this;
+        resourcesCountService.users({'project': vm.model.uuid}).then(function(response) {
+          vm.detailsViewOptions.tabs[4].count = response;
+        });
+      },
+      setProvidersCounter: function() {
+        this.detailsViewOptions.tabs[5].count = this.model.services.length;
+      },
     });
 
     controllerScope.__proto__ = new Controller();
@@ -522,6 +582,7 @@
   angular.module('ncsaas')
     .controller('ProjectResourcesTabController', [
       '$stateParams',
+      '$rootScope',
       'BaseProjectResourcesTabController',
       'resourcesService',
       'currentStateService',
@@ -530,6 +591,7 @@
 
   function ProjectResourcesTabController(
     $stateParams,
+    $rootScope,
     BaseProjectResourcesTabController,
     resourcesService,
     currentStateService
@@ -575,6 +637,11 @@
           vm.service.defaultFilter.project_uuid = response.uuid;
           vm.getList();
         });
+      },
+
+      afterInstanceRemove: function(instance) {
+        $rootScope.$broadcast('refreshVmCounter');
+        this._super(instance);
       }
     });
 
