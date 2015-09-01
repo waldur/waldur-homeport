@@ -67,7 +67,7 @@
                 vm.services[category.name].push(service);
               }
             }
-            if (vm.services[category.name].length > 0 || category.name == 'SUPPORT') {
+            if (vm.services[category.name].length > 0) {
               vm.categories.push(category);
             }
           }
