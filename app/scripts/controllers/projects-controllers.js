@@ -1104,6 +1104,7 @@ angular.module('ncsaas')
       '$stateParams',
       'projectsService',
       'blockUI',
+      '$rootScope',
       ProjectServicesTabController]);
 
   function ProjectServicesTabController(
@@ -1115,7 +1116,8 @@ angular.module('ncsaas')
     $scope,
     $stateParams,
     projectsService,
-    blockUI) {
+    blockUI,
+    $rootScope) {
     var controllerScope = this;
     var ServiceController = baseControllerListClass.extend({
       // TODO implement generalSearch when endpoint for mixed providers will be available NC-765
@@ -1210,6 +1212,7 @@ angular.module('ncsaas')
           joinServiceProjectLinkService.$deleteByUrl(model.url, function() {
             vm.afterInstanceRemove(model);
             vm.list.splice(index, 1);
+            $rootScope.$broadcast('refreshProjectList');
           }, vm.handleActionException);
         } else {
           alert('Was not deleted.');
