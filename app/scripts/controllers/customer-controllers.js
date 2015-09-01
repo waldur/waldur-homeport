@@ -295,7 +295,6 @@
         this.controllerScope = controllerScope;
         this.service = joinService;
         this.service.defaultFilter.customer_uuid = $stateParams.uuid;
-        this.service.filterByCustomer = false;
         this._super();
         this.deregisterEvent('currentCustomerUpdated');
       }
