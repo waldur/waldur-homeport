@@ -197,8 +197,8 @@
         $q.all([
           resourcesCountService.resources({'customer_uuid': vm.model.uuid}),
           resourcesCountService.projects({'customer': vm.model.uuid}),
-          resourcesCountService.digitalocean({'customer': vm.model.uuid}),
-          resourcesCountService.clouds({'customer': vm.model.uuid})
+          resourcesCountService.digitalocean({'customer_uuid': vm.model.uuid}),
+          resourcesCountService.clouds({'customer_uuid': vm.model.uuid})
         ]).then(function(responses) {
           vm.detailsViewOptions.tabs[0].count = responses[0];
           vm.detailsViewOptions.tabs[1].count = responses[1];
@@ -297,7 +297,6 @@
         this.service = joinService;
         this.service.defaultFilter.customer_uuid = $stateParams.uuid;
         this._super();
-        this.deregisterEvent('currentCustomerUpdated');
       }
     });
 
@@ -315,10 +314,12 @@
       'baseControllerListClass',
       'projectsService',
       'ENTITYLISTFIELDTYPES',
+      '$rootScope',
       CustomerProjectTabController
     ]);
 
-  function CustomerProjectTabController($stateParams, baseControllerListClass, projectsService, ENTITYLISTFIELDTYPES) {
+  function CustomerProjectTabController(
+    $stateParams, baseControllerListClass, projectsService, ENTITYLISTFIELDTYPES, $rootScope) {
     var controllerScope = this;
     var Controller = baseControllerListClass.extend({
       init: function() {
@@ -327,7 +328,7 @@
         this.service.defaultFilter.customer = $stateParams.uuid;
         this.service.filterByCustomer = false;
         this._super();
-        this.deregisterEvent('currentCustomerUpdated');
+        this.service.filterByCustomer = true;
         this.actionButtonsListItems = [
           {
             title: 'Delete',
@@ -336,7 +337,9 @@
         ];
         this.entityOptions = {
           entityData: {
-            noDataText: 'You have no projects yet.'
+            noDataText: 'You have no projects yet.',
+            createLink: 'projects.create',
+            createLinkText: 'Add project'
           },
           list: [
             {
@@ -353,6 +356,10 @@
             }
           ]
         };
+      },
+      afterInstanceRemove: function(instance) {
+        $rootScope.$broadcast('refreshProjectList', {model: instance, remove: true});
+        this._super(instance);
       }
     });
 

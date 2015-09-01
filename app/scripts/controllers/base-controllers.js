@@ -173,7 +173,7 @@
           }
           if (params.new) {
             vm.projects.push(model);
-            if (!vm.currentProject) {
+            if (!vm.currentProject || !vm.currentProject.uuid || params.current) {
               vm.setCurrentProject(model);
             }
           }
@@ -182,6 +182,7 @@
               vm.projects.splice(currentProjectKey, 1);
             }
             if (model && model.uuid == vm.currentProject.uuid) {
+              currentStateService.removeLastSelectedProject(model.uuid);
               vm.setFirstOrLastSelectedProject();
             }
           }
@@ -250,7 +251,7 @@
             vm.currentProject = null;
             vm.setCurrentProject(null);
             if ($state.current.name != 'errorPage.notFound') {
-              vm.errorFlash('You have no project yet! Please add the project.');
+              vm.infoFlash('You have no projects! Please add one.');
             }
           }
           vm.projects = response;
@@ -306,6 +307,7 @@
       stateChangeSuccessHandler: function(event, toState) {
         this.deregisterEvent('currentCustomerUpdated'); // clear currentCustomerUpdated event handlers
         this.deregisterEvent('refreshProjectList'); // clear refreshProjectList event handlers
+        this.deregisterEvent('currentProjectUpdated'); // clear currentProjectUpdated event handlers
         $rootScope.bodyClass = currentStateService.getBodyClass(toState.name);
         // if user is authenticated - he should have selected customer
         if (authService.isAuthenticated() && !currentStateService.isCustomerDefined) {
@@ -356,8 +358,10 @@
           function getFirstProject() {
             var projectUuid = currentStateService.handleSelectedProjects($window.localStorage[ENV.currentCustomerUuidStorageKey]);
             if (projectUuid) {
-              projectsService.$get(projectUuid).then(function(project){
+              projectsService.$get(projectUuid).then(function(project) {
                 projectDeferred.resolve(project);
+              }, function() {
+                currentStateService.removeLastSelectedProject(projectUuid);
               });
             } else {
               projectsService.getFirst().then(function(response) {
