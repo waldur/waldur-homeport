@@ -143,6 +143,7 @@
       'ENV',
       '$q',
       '$rootScope',
+      '$state',
       ServiceAddController]);
 
   function ServiceAddController(
@@ -154,7 +155,8 @@
     baseControllerAddClass,
     ENV,
     $q,
-    $rootScope) {
+    $rootScope,
+    $state) {
     var controllerScope = this;
     var ServiceController = baseControllerAddClass.extend({
       init: function() {
@@ -216,6 +218,10 @@
             $rootScope.$broadcast('refreshProjectList');
           });
         });
+      },
+
+      successRedirect: function() {
+        $state.go('resources.list', {tab: 'providers'});
       }
     });
 
