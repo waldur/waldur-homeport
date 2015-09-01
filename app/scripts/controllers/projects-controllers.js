@@ -306,11 +306,12 @@
       '$q',
       "$rootScope",
       'currentStateService',
+      'ENV',
       ProjectDetailUpdateController
     ]);
 
   function ProjectDetailUpdateController($stateParams, projectsService, baseControllerDetailUpdateClass,
-                                         resourcesCountService, $q, $rootScope, currentStateService) {
+                                         resourcesCountService, $q, $rootScope, currentStateService, ENV) {
     var controllerScope = this;
     var Controller = baseControllerDetailUpdateClass.extend({
       activeTab: 'eventlog',
@@ -380,8 +381,8 @@
         vm.canEdit = vm.model;
         $q.all([
           resourcesCountService.events({'scope': vm.model.url}),
-          resourcesCountService.resources({'project_uuid': vm.model.uuid, 'resource_type': ['DigitalOcean.Droplet', 'IaaS.Instance']}),
-          resourcesCountService.resources({'project_uuid': vm.model.uuid, 'resource_type': ['Oracle.Database', 'GitLab.Project']}),
+          resourcesCountService.resources({'project_uuid': vm.model.uuid, 'resource_type': ENV.resourceFilters.VMs}),
+          resourcesCountService.resources({'project_uuid': vm.model.uuid, 'resource_type': ENV.resourceFilters.applications}),
           resourcesCountService.backups({'project_uuid': vm.model.uuid}),
           resourcesCountService.users({'project': vm.model.uuid})
         ]).then(function(responses) {
@@ -751,9 +752,10 @@
       'currentStateService',
       'resourcesCountService',
       '$stateParams',
+      'ENV',
       ProjectStatsController]);
 
-    function ProjectStatsController($scope, $rootScope, $q, currentStateService, resourcesCountService, $stateParams) {
+    function ProjectStatsController($scope, $rootScope, $q, currentStateService, resourcesCountService, $stateParams, ENV) {
       $scope.search = function() {
         $rootScope.$broadcast('searchInputChanged', $scope.searchText);
       };
@@ -766,8 +768,8 @@
       function setCurrentProject() {
         currentStateService.getProject().then(function(project) {
           $q.all([
-            resourcesCountService.resources({'project_uuid': project.uuid, 'resource_type': ['DigitalOcean.Droplet', 'IaaS.Instance']}),
-            resourcesCountService.resources({'project_uuid': project.uuid, 'resource_type': ['Oracle.Database', 'GitLab.Project']}),
+            resourcesCountService.resources({'project_uuid': project.uuid, 'resource_type': ENV.resourceFilters.VMs}),
+            resourcesCountService.resources({'project_uuid': project.uuid, 'resource_type': ENV.resourceFilters.applications}),
             resourcesCountService.backups({'project_uuid': project.uuid}),
             resourcesCountService.users({'project': project.uuid}),
           ]).then(function(responses) {
