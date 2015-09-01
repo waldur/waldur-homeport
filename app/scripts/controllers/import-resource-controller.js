@@ -10,6 +10,7 @@
       'currentStateService',
       'usersService',
       '$state',
+      '$q',
       ImportResourceController]);
 
   function ImportResourceController(
@@ -19,7 +20,8 @@
     servicesService,
     currentStateService,
     usersService,
-    $state
+    $state,
+    $q
     ) {
     var controllerScope = this;
     var Controller = baseControllerClass.extend({
@@ -72,8 +74,8 @@
             }
           }
           if (vm.categories.length == 0) {
-            vm.flashMessage("No providers!");
-            $state.go('resources.list', {tab: 'Providers'});
+            vm.errorFlash("No providers!");
+            $state.go('resources.list', {tab: 'providers'});
           }
         });
       },
@@ -111,18 +113,18 @@
       },
 
       getImportedResourcesForService: function(service) {
-        var self = this;
+        var vm = this;
         controllerScope.importedResources = [];
         var query = {'resource_type': service.type.toLowerCase(), 'service_uuid': service.uuid};
         resourcesService.getList(query).then(function(response) {
           controllerScope.importedResources = response;
-        }, function(){
-          self.flashMessage('warning', 'Unable to get list of imported resources');
+        }, function() {
+          vm.flashMessage('warning', 'Unable to get list of imported resources');
         });
       },
 
       getResourcesForService: function(service) {
-        var self = this;
+        var vm = this;
         controllerScope.importableResources = [];
         controllerScope.noResources = false;
         servicesService.getList({operation: 'link'}, service.url).then(function(response) {
@@ -135,7 +137,7 @@
           }
         }, function(){
           controllerScope.noResources = true;
-          self.flashMessage('warning', 'Unable to get list of resources for service');
+          vm.flashMessage('warning', 'Unable to get list of resources for service');
         });
       },
 
@@ -144,28 +146,30 @@
       },
 
       save: function() {
-        var self = this;
-        var service_url = self.selectedService.url;
-        var project_url = self.currentProject.url;
+        var vm = this;
+        var service_url = vm.selectedService.url;
+        var project_url = vm.currentProject.url;
 
-        self.selectedResources.forEach(function(resource){
+        $q.all(vm.selectedResources.map(function(resource) {
           resource.status = 'progress';
 
           var instance = servicesService.$create(service_url + 'link/');
           instance.project = project_url;
           instance.backend_id = resource.id;
-          instance.$save().then(function() {
+          return instance.$save().then(function() {
             resourcesService.clearAllCacheForCurrentEndpoint();
             vm.emitEvent('refreshCounts');
             resource.status = 'success';
-            self.toggleResource(resource);
+            vm.toggleResource(resource);
           }, function(){
-            self.flashMessage('warning', 'Unable to import resource ' + resource.name);
+            vm.flashMessage('warning', 'Unable to import resource ' + resource.name);
             resource.status = 'failed';
           })
+        })).then(function() {
+          $state.go('projects.details', {uuid: vm.currentProject.uuid, tab: 'VMs'});
         });
 
-        self.flashMessage('success', 'Wait while importing resources');
+        vm.flashMessage('success', 'Wait while importing resources');
       }
     });
     controllerScope.__proto__ = new Controller();
