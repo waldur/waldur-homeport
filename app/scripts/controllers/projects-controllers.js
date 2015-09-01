@@ -308,6 +308,7 @@
       'baseControllerDetailUpdateClass',
       'resourcesCountService',
       'currentStateService',
+      'ENV',
       ProjectDetailUpdateController
     ]);
 
@@ -411,41 +412,22 @@
           vm.detailsViewOptions.tabs[0].count = response;
         });
       },
-      getResourceTypes: function(index) {
-        return servicesService.getServicesList().then(function(services) {
-          var resource_types = [];
-          for (var service_type in services) {
-            if (ENV.serviceCategories[index].services.indexOf(service_type) == -1) {
-              continue;
-            }
-            var resources = services[service_type].resources;
-            for(var resource_type in resources) {
-              resource_types.push(service_type + "." + resource_type);
-            }
-          }
-          return resource_types;
-        });
-      },
       setVmCounter: function() {
         var vm = this;
-        vm.getResourceTypes(0).then(function(resource_types) {
-          resourcesCountService.resources({
-            'project_uuid': vm.model.uuid,
-            'resource_type': resource_types
-          }).then(function(response) {
-            vm.detailsViewOptions.tabs[1].count = response;
-          });
+        resourcesCountService.resources({
+          'project_uuid': vm.model.uuid,
+          'resource_type': ENV.resourceFilters.VMs
+        }).then(function(response) {
+          vm.detailsViewOptions.tabs[1].count = response;
         });
       },
       setAppCounter: function() {
         var vm = this;
-        vm.getResourceTypes(1).then(function(resource_types) {
-          resourcesCountService.resources({
-            'project_uuid': vm.model.uuid,
-            'resource_type': resource_types
-          }).then(function(response) {
-            vm.detailsViewOptions.tabs[2].count = response;
-          });
+        resourcesCountService.resources({
+          'project_uuid': vm.model.uuid,
+          'resource_type': ENV.resourceFilters.applications
+        }).then(function(response) {
+          vm.detailsViewOptions.tabs[2].count = response;
         });
       },
       setBackupsCounter: function() {
@@ -592,7 +574,6 @@
 })();
 
 (function() {
-
   angular.module('ncsaas')
     .controller('ProjectResourcesTabController', [
       '$stateParams',
@@ -715,7 +696,6 @@
   }
 
 })();
-
 
 (function() {
   angular.module('ncsaas')
