@@ -119,18 +119,7 @@
       },
       currentCustomerUpdatedHandler: function() {
         var vm = this;
-        this.getProjectList().then(function(response) {
-          if($window.localStorage[ENV.currentProjectUuidStorageKey]) {
-            var uuids = response.map(function(project) {
-              return project.uuid;
-            });
-            if (!uuids.indexOf($window.localStorage[ENV.currentProjectUuidStorageKey]) + 1) {
-              return vm.setFirstOrLastSelectedProject();
-            }
-          } else {
-            return vm.setFirstOrLastSelectedProject();
-          }
-        }).then(function() {
+        vm.setFirstOrLastSelectedProject().then(function() {
           $state.go('organizations.details', {uuid: vm.currentCustomer.uuid});
         });
       },
@@ -149,11 +138,12 @@
             getFirst();
           });
         } else {
-          getFirst()
+          getFirst();
         }
         function getFirst() {
           projectsService.getFirst().then(function(firstProject) {
-            vm.setCurrentProject(firstProject);
+            currentStateService.setProject(firstProject);
+            vm.currentProject = firstProject;
             deferred.resolve();
           });
         }
@@ -197,45 +187,52 @@
           projectsService.cacheReset = true;
         } else {
           vm.setFirstOrLastSelectedProject();
-          vm.getProjectList(true);
+          return vm.getProjectList(true);
         }
       },
       refreshCustomerListHandler: function(event, params) {
         var vm = this,
           customerUuids,
-          key,
+          currentCustomerKey,
+          model;
+        if (params) {
           model = params.model;
-        customerUuids = vm.customers.map(function(obj) {
-          return obj.uuid;
-        });
-        key = customerUuids.indexOf(model.uuid);
-        if (key + 1) {
-          vm.customers[key].name = model.name;
-          if (vm.currentCustomer) {
-            if (model.uuid == vm.currentCustomer.uuid) {
-              if (params.update) {
-                vm.currentCustomer = model;
-                vm.setCurrentCustomer(model);
-                vm.customers[key] = model;
-                customersService.cacheReset = true;
-              } else {
-                vm.setFirstCustomer();
-                vm.getCustomerList(true);
-              }
+          customerUuids = vm.customers.map(function(obj) {
+            return obj.uuid;
+          });
+          currentCustomerKey = customerUuids.indexOf(model.uuid);
+          if (params.update) {
+            if (currentCustomerKey + 1) {
+              vm.customers[currentCustomerKey] = model;
             }
-          } else {
-            vm.getCustomerList(true);
-            currentStateService.getCustomer().then(function(currentCustomer) {
-              if (model.uuid == currentCustomer.uuid) {
-                vm.setFirstCustomer();
-              }
-            });
+            if (model.uuid == vm.currentCustomer.uuid) {
+              vm.currentCustomer = model;
+              vm.setCurrentCustomer(model);
+            }
           }
+          if (params.new) {
+            vm.customers.push(model);
+            if (!vm.currentCustomer || params.current) {
+              vm.setCurrentCustomer(model);
+            }
+          }
+          if (params.remove) {
+            if (currentCustomerKey + 1) {
+              vm.customers.splice(currentCustomerKey, 1);
+            }
+            if (model && model.uuid == vm.currentCustomer.uuid) {
+              vm.setFirstCustomer();
+            }
+          }
+        } else {
+          vm.setFirstCustomer();
+          vm.getCustomerList(true);
         }
+
       },
       setFirstCustomer: function() {
         var vm = this;
-        customersService.getFirst().then(function(firstCustomer) {
+        customersService.getPersonalOrFirstCustomer().then(function(firstCustomer) {
           vm.setCurrentCustomer(firstCustomer);
         });
       },
@@ -250,6 +247,8 @@
           if (response.length < 1
             && $state.current.name != 'projects.create') {
             if ($state.current.name != 'errorPage.notFound') {
+              vm.currentProject = null;
+              vm.setCurrentProject(null);
               vm.infoFlash('You have no projects! Please add one.');
             }
           }
@@ -296,6 +295,7 @@
         this._super();
         $rootScope.buildId = ENV.buildId;
         $rootScope.logout = this.logout;
+        this.isAuthenticated = authService.isAuthenticated;
       },
       logout: function() {
         authService.signout();

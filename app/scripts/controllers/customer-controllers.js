@@ -7,10 +7,12 @@
       'baseControllerListClass',
       'usersService',
       'ENTITYLISTFIELDTYPES',
+      '$rootScope',
       CustomerListController
     ]);
 
-  function CustomerListController(customersService, baseControllerListClass, usersService, ENTITYLISTFIELDTYPES) {
+  function CustomerListController(
+    customersService, baseControllerListClass, usersService, ENTITYLISTFIELDTYPES, $rootScope) {
     var controllerScope = this;
     var CustomerController = baseControllerListClass.extend({
       init:function() {
@@ -70,6 +72,10 @@
       },
       currentUserIsStaff: function() {
         return this.currentUser.is_staff;
+      },
+      afterInstanceRemove: function(intance) {
+        $rootScope.$broadcast('refreshCustomerList', {model: intance, remove: true});
+        this._super(intance);
       }
     });
 
@@ -251,27 +257,22 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('CustomerAddController', ['customersService', 'baseControllerAddClass', CustomerAddController]);
+    .controller('CustomerAddController',
+    ['customersService', 'baseControllerAddClass', '$rootScope', CustomerAddController]);
 
-  function CustomerAddController(customersService, baseControllerAddClass) {
+  function CustomerAddController(customersService, baseControllerAddClass, $rootScope) {
     var controllerScope = this;
     var Controller = baseControllerAddClass.extend({
       init: function() {
         this.service = customersService;
         this.controllerScope = controllerScope;
-        this.setSignalHandler('currentCustomerUpdated', this.currentCustomerUpdatedHandler.bind(this));
         this._super();
         this.listState = 'organizations.list';
         this.detailsState = 'organizations.details';
         this.redirectToDetailsPage = true;
       },
-      currentCustomerUpdatedHandler: function() {
-        if (this.instance.name || this.instance.contact_details) {
-          if (confirm('Clean all fields?')) {
-            this.instance.name = '';
-            this.instance.contact_details = '';
-          }
-        }
+      afterSave: function() {
+        $rootScope.$broadcast('refreshCustomerList', {model: this.instance, new: true, current: true});
       }
     });
 
@@ -295,7 +296,6 @@
         this.controllerScope = controllerScope;
         this.service = joinService;
         this.service.defaultFilter.customer_uuid = $stateParams.uuid;
-        this.service.filterByCustomer = false;
         this._super();
       }
     });

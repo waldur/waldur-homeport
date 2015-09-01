@@ -201,7 +201,7 @@
       getResourcesForProject: function(uuid, page) {
         var vm = this;
         var filter = {
-          project:uuid
+          project_uuid:uuid
         };
         vm.projectResources[uuid] = {data:null};
         page = page || 1;
@@ -1161,7 +1161,9 @@ angular.module('ncsaas')
             {
               name: 'Name',
               propertyName: 'name',
-              type: ENTITYLISTFIELDTYPES.name,
+              type: (ENV.featuresVisible || !(ENV.toBeFeatures.indexOf('serviceLink') + 1))
+                ? ENTITYLISTFIELDTYPES.name
+                : ENTITYLISTFIELDTYPES.noType,
               link: 'services.details({uuid: entity.uuid, provider: entity.type})',
               className: 'name'
             },
