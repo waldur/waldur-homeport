@@ -87,7 +87,7 @@
     var urlList = {
       appstore: ['appstore.store'],
       dashboard: ['dashboard.index', 'dashboard.eventlog'],
-      resources: ['resources.list', 'resources.create'],
+      resources: ['resources.list'],
       projects: ['projects.list', 'projects.details', 'projects.create', 'projects.add-users'],
       services: ['services.list', 'services.create', 'services.details'],
       users: ['users.list', 'users.details'],
