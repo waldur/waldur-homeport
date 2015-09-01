@@ -191,8 +191,8 @@
         $q.all([
           resourcesCountService.resources({'customer_uuid': vm.model.uuid}),
           resourcesCountService.projects({'customer': vm.model.uuid}),
-          resourcesCountService.digitalocean({'customer': vm.model.uuid}),
-          resourcesCountService.clouds({'customer': vm.model.uuid})
+          resourcesCountService.digitalocean({'customer_uuid': vm.model.uuid}),
+          resourcesCountService.clouds({'customer_uuid': vm.model.uuid})
         ]).then(function(responses) {
           vm.detailsViewOptions.tabs[0].count = responses[0];
           vm.detailsViewOptions.tabs[1].count = responses[1];
@@ -337,7 +337,9 @@
         ];
         this.entityOptions = {
           entityData: {
-            noDataText: 'You have no projects yet.'
+            noDataText: 'You have no projects yet.',
+            createLink: 'projects.create',
+            createLinkText: 'Add project'
           },
           list: [
             {
