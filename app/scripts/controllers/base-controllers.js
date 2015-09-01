@@ -130,8 +130,10 @@
         var projectUuid = currentStateService.handleSelectedProjects(vm.currentCustomer.uuid);
         if (projectUuid) {
           projectsService.$get(projectUuid).then(function(project){
-            currentStateService.setProject(project);
-            vm.currentProject = project;
+            if (project.customer_uuid == vm.currentCustomer.uuid) {
+              currentStateService.setProject(project);
+              controllerScope.currentProject = project;
+            }
             deferred.resolve();
           }, function() {
             currentStateService.removeLastSelectedProject(projectUuid);
@@ -246,9 +248,9 @@
         projectsService.getList().then(function(response) {
           if (response.length < 1
             && $state.current.name != 'projects.create') {
+            vm.currentProject = null;
+            vm.setCurrentProject(null);
             if ($state.current.name != 'errorPage.notFound') {
-              vm.currentProject = null;
-              vm.setCurrentProject(null);
               vm.infoFlash('You have no projects! Please add one.');
             }
           }
@@ -306,6 +308,7 @@
         this.deregisterEvent('currentCustomerUpdated'); // clear currentCustomerUpdated event handlers
         this.deregisterEvent('refreshProjectList'); // clear refreshProjectList event handlers
         this.deregisterEvent('currentProjectUpdated'); // clear currentProjectUpdated event handlers
+        this.deregisterEvent('refreshCounts'); // clear refreshCounts event handlers
         $rootScope.bodyClass = currentStateService.getBodyClass(toState.name);
         // if user is authenticated - he should have selected customer
         if (authService.isAuthenticated() && !currentStateService.isCustomerDefined) {

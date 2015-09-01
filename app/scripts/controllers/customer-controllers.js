@@ -120,6 +120,7 @@
       init: function() {
         this.service = customersService;
         this.controllerScope = controllerScope;
+        this.setSignalHandler('refreshCounts', this.afterActivate.bind(controllerScope));
         this._super();
         this.detailsState = 'organizations.details';
         this.currentUser = usersService.currentUser;
@@ -197,12 +198,11 @@
         $q.all([
           resourcesCountService.resources({'customer_uuid': vm.model.uuid}),
           resourcesCountService.projects({'customer': vm.model.uuid}),
-          resourcesCountService.digitalocean({'customer_uuid': vm.model.uuid}),
-          resourcesCountService.clouds({'customer_uuid': vm.model.uuid})
+          resourcesCountService.services({'customer_uuid': vm.model.uuid})
         ]).then(function(responses) {
           vm.detailsViewOptions.tabs[0].count = responses[0];
           vm.detailsViewOptions.tabs[1].count = responses[1];
-          vm.detailsViewOptions.tabs[2].count = responses[2] + responses[3];
+          vm.detailsViewOptions.tabs[2].count = responses[2];
         });
       },
 

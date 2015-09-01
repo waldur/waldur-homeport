@@ -324,6 +324,7 @@
         if (!$stateParams.uuid) {
           this.setSignalHandler('currentProjectUpdated', this.activate.bind(controllerScope));
         }
+        this.setSignalHandler('refreshCounts', this.afterActivate.bind(controllerScope));
         this._super();
         this.detailsViewOptions = {
           title: 'Project',
@@ -1075,6 +1076,7 @@ angular.module('ncsaas')
           function() {
             vm.getUsersForProject(role);
             projectsService.clearAllCacheForCurrentEndpoint();
+            vm.emitEvent('refreshCounts');
           },
           function(response) {
             alert(response.data.non_field_errors);
@@ -1091,6 +1093,7 @@ angular.module('ncsaas')
             function() {
               vm.users[role].splice(index, 1);
               projectsService.clearAllCacheForCurrentEndpoint();
+              vm.emitEvent('refreshCounts');
             },
             function(response) {
               alert(response.data.detail);
@@ -1120,6 +1123,7 @@ angular.module('ncsaas')
       '$stateParams',
       'projectsService',
       'blockUI',
+      '$rootScope',
       ProjectServicesTabController]);
 
   function ProjectServicesTabController(
@@ -1131,7 +1135,8 @@ angular.module('ncsaas')
     $scope,
     $stateParams,
     projectsService,
-    blockUI) {
+    blockUI,
+    $rootScope) {
     var controllerScope = this;
     var ServiceController = baseControllerListClass.extend({
       // TODO implement generalSearch when endpoint for mixed providers will be available NC-765
