@@ -24,6 +24,9 @@
       errorFlash: function(message) {
         this.flashMessage('danger', message);
       },
+      infoFlash: function(message) {
+        this.flashMessage('info', message);
+      },
       flashMessage: function(type, message) {
         Flash.create(type, message);
       },

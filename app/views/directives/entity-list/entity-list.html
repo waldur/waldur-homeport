@@ -114,6 +114,10 @@
                             <span ng-if="field.subtitle" class="subtitle">
                                 #{{ entity.key }} - Created on {{ entity.created | date:'medium' }}
                             </span>
+                            <span class="field-description"
+                                  ng-if="field.description && field.description.condition == entity[field.description.field]">
+                                {{ field.description.text }}
+                            </span>
                         </h3>
 
                         <a ng-switch-when="link" ng-if="field.link" ui-sref="{{ field.link }}" stoppropagation>
