@@ -8,6 +8,7 @@
       'ENV',
       'servicesService',
       'currentStateService',
+      'usersService',
       '$state',
       ImportResourceController]);
 
@@ -17,6 +18,7 @@
     ENV,
     servicesService,
     currentStateService,
+    usersService,
     $state
     ) {
     var controllerScope = this;
@@ -59,13 +61,13 @@
             for (var i = 0; i < vm.currentProject.services.length; i++) {
               var service = vm.currentProject.services[i];
               if (service.state != 'Erred'
-                && category.services
-                && (category.services.indexOf(service.type) + 1)
+                && category.services && (category.services.indexOf(service.type) + 1)
+                && (!service.shared || usersService.currentUser.is_staff)
               ) {
                 vm.services[category.name].push(service);
               }
             }
-            if (vm.services[category.name].length > 0 || category.name == 'SUPPORT') {
+            if (vm.services[category.name].length > 0) {
               vm.categories.push(category);
             }
           }
@@ -152,7 +154,8 @@
           var instance = servicesService.$create(service_url + 'link/');
           instance.project = project_url;
           instance.backend_id = resource.id;
-          instance.$save().then(function(){
+          instance.$save().then(function() {
+            resourcesService.clearAllCacheForCurrentEndpoint();
             resource.status = 'success';
             self.toggleResource(resource);
           }, function(){

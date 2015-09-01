@@ -44,7 +44,7 @@
     </script>
 
 </head>
-<body ng-controller="MainController" ng-click="closeMenu()">
+<body ng-controller="MainController as Main" ng-click="closeMenu()">
 <div class="flash-message-fixed" flash-message="5000" ></div>
 <div ui-view="" class="app-wrap"></div>
 
@@ -54,7 +54,7 @@
             &copy; NodeConductor 2014&mdash;2015
         </div>
         <ul class="footer-nav">
-            <li>
+            <li ng-if="Main.isAuthenticated()">
                 <a ui-sref="help.list">Help</a>
             </li>
             <li>

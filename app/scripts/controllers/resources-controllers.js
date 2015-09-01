@@ -2,10 +2,11 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('baseResourceListController', ['baseControllerListClass', 'ENV', 'ENTITYLISTFIELDTYPES', baseResourceListController]);
+    .service('baseResourceListController',
+    ['baseControllerListClass', 'ENV', 'ENTITYLISTFIELDTYPES', 'currentStateService', baseResourceListController]);
 
   // need for resource tab
-  function baseResourceListController(baseControllerListClass, ENV, ENTITYLISTFIELDTYPES) {
+  function baseResourceListController(baseControllerListClass, ENV, ENTITYLISTFIELDTYPES, currentStateService) {
     var ControllerListClass = baseControllerListClass.extend({
       init: function() {
         this._super();
@@ -46,10 +47,6 @@
         this.entityOptions = {
           entityData: {
             noDataText: 'You have no resources yet.',
-            createLink: 'appstore.store',
-            createLinkText: 'Create',
-            importLink: 'import.import',
-            importLinkText: 'Import'
           },
           list: [
             {
@@ -83,10 +80,17 @@
             }
           ]
         };
-        if (!ENV.featuresVisible && ENV.toBeFeatures.indexOf('appstore') !== -1) {
-          delete this.entityOptions.entityData.createLink;
-          delete this.entityOptions.entityData.createLinkText;
-        }
+        var vm = this;
+        currentStateService.getProject().then(function(response) {
+          if (response) {
+            if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('appstore') == -1) {
+              vm.entityOptions.entityData.createLink = 'appstore.store';
+              vm.entityOptions.entityData.createLinkText = 'resource';
+            }
+            vm.entityOptions.entityData.importLink = 'import.import';
+            vm.entityOptions.entityData.importLinkText = 'Import';
+          }
+        });
       },
       stopResource:function(resource) {
         resource.$action('stop', this.reInitResource.bind(this, resource), this.handleActionException);
@@ -180,7 +184,8 @@
             {
               title: 'Backups',
               key: 'backups',
-              viewName: 'tabBackups'
+              viewName: 'tabBackups',
+              count: 0
             }
           ]
         };

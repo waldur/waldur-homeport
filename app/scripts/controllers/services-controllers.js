@@ -70,12 +70,12 @@
               type: (ENV.featuresVisible || !(ENV.toBeFeatures.indexOf('serviceLink') + 1))
                 ? ENTITYLISTFIELDTYPES.name
                 : ENTITYLISTFIELDTYPES.noType,
-              link: 'services.details({uuid: entity.uuid, provider: entity.provider})',
+              link: 'services.details({uuid: entity.uuid, provider: entity.service_type})',
               className: 'name'
             },
             {
               name: 'Type',
-              propertyName: 'provider',
+              propertyName: 'service_type',
               type: ENTITYLISTFIELDTYPES.noType
             },
             {
