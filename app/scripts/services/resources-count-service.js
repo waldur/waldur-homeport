@@ -29,7 +29,8 @@
       'digitalocean': factory('digitalocean'),
       'clouds': factory('clouds'),
       'project-cloud-memberships': factory('project-cloud-memberships'),
-      'digitalocean-service-project-link': factory('digitalocean-service-project-link')
+      'digitalocean-service-project-link': factory('digitalocean-service-project-link'),
+      'services': factory('service-items')
     }
   }
 })();
