@@ -308,6 +308,7 @@
         this.deregisterEvent('currentCustomerUpdated'); // clear currentCustomerUpdated event handlers
         this.deregisterEvent('refreshProjectList'); // clear refreshProjectList event handlers
         this.deregisterEvent('currentProjectUpdated'); // clear currentProjectUpdated event handlers
+        this.deregisterEvent('refreshCounts'); // clear refreshCounts event handlers
         $rootScope.bodyClass = currentStateService.getBodyClass(toState.name);
         // if user is authenticated - he should have selected customer
         if (authService.isAuthenticated() && !currentStateService.isCustomerDefined) {

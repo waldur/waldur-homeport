@@ -120,6 +120,7 @@
       init: function() {
         this.service = customersService;
         this.controllerScope = controllerScope;
+        this.setSignalHandler('refreshCounts', this.afterActivate.bind(controllerScope));
         this._super();
         this.detailsState = 'organizations.details';
         this.currentUser = usersService.currentUser;

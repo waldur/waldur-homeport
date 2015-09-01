@@ -51,14 +51,8 @@
           /*jshint camelcase: false */
           filter.page_size = vm.pageSize;
           var cacheKey = vm.endpoint + JSON.stringify(filter);
-          var cache = listCache.get(cacheKey);
-          var allCacheKeys = listCache.get(vm.ALL_CACHE_KEYS) ? listCache.get(vm.ALL_CACHE_KEYS) : {};
-          var keysForCurrentEndpoint = allCacheKeys[vm.endpoint] ? allCacheKeys[vm.endpoint] : [];
-          if (keysForCurrentEndpoint.indexOf(cacheKey) == -1) {
-            keysForCurrentEndpoint.push(cacheKey);
-            allCacheKeys[vm.endpoint] = keysForCurrentEndpoint;
-            listCache.put(vm.ALL_CACHE_KEYS, allCacheKeys);
-          }
+          var cache = vm.getCache(cacheKey);
+
           if (!vm.cacheReset && vm.cacheTime > 0 && cache && cache.time > new Date().getTime()) {
             deferred.resolve(cache.data);
           } else {
@@ -73,8 +67,7 @@
                 vm.sliceEnd = Math.min(vm.resultCount, vm.page * vm.pageSize)
               }
               if (vm.cacheTime > 0) {
-                var cacheTime = new Date().getTime() + (vm.cacheTime * 1000);
-                listCache.put(cacheKey, {data: response, time: cacheTime});
+                vm.setCache(vm.cacheTime, response, cacheKey, vm.endpoint);
               }
               deferred.resolve(response);
             }, function(err) {
@@ -100,6 +93,20 @@
         }
 
         return deferred.promise;
+      },
+      setCache: function(time, response, cacheKey, endpoint) {
+        var allCacheKeys = listCache.get(this.ALL_CACHE_KEYS) ? listCache.get(this.ALL_CACHE_KEYS) : {};
+        var keysForCurrentEndpoint = allCacheKeys[endpoint] ? allCacheKeys[endpoint] : [];
+        if (keysForCurrentEndpoint.indexOf(cacheKey) == -1) {
+          keysForCurrentEndpoint.push(cacheKey);
+          allCacheKeys[endpoint] = keysForCurrentEndpoint;
+          listCache.put(this.ALL_CACHE_KEYS, allCacheKeys);
+        }
+        var cacheTime = new Date().getTime() + (time * 1000);
+        listCache.put(cacheKey, {data: response, time: cacheTime});
+      },
+      getCache: function(cacheKey) {
+        return listCache.get(cacheKey);
       },
       clearAllCacheForCurrentEndpoint: function() {
         var allKeys = listCache.get(this.ALL_CACHE_KEYS);
