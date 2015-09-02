@@ -36,6 +36,9 @@
           {
             title: 'Remove',
             clickFunction: this.remove.bind(this.controllerScope),
+            isDisabled: function(model) {
+              return !this.isOperationAvailable('delete', model);
+            }.bind(this.controllerScope),
             className: 'remove'
           },
           {
