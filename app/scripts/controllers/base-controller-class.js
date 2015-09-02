@@ -110,10 +110,14 @@
         var vm = this;
         var confirmDelete = confirm('Confirm deletion?');
         if (confirmDelete) {
-          model.$delete(function() {
+          vm.removeInstance(model).then(function() {
             vm.afterInstanceRemove(model);
-          }, vm.handleActionException);
+          }, vm.handleActionException.bind(vm));
         }
+      },
+      removeInstance: function(model) {
+        // Shall return promise
+        return model.$delete();
       },
       handleActionException: function(response) {
         if (response.status === 409) {
