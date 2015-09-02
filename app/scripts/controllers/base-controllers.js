@@ -213,7 +213,9 @@
             }
           }
           if (params.new) {
-            vm.customers.push(model);
+            if (vm.customers.indexOf(model) == -1) {
+              vm.customers.push(model);
+            }
             if (!vm.currentCustomer || params.current) {
               vm.setCurrentCustomer(model);
             }
