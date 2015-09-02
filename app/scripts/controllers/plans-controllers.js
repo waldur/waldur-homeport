@@ -78,7 +78,6 @@
       },
 
       selectPlan: function(plan) {
-        console.log('selected: ' + plan.name);
         if (!this.currentPlan || plan.uuid !== this.currentPlan.uuid) {
           this.selectedPlan = plan;
         } else {

@@ -85,7 +85,7 @@
           if (response) {
             if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('appstore') == -1) {
               vm.entityOptions.entityData.createLink = 'appstore.store';
-              vm.entityOptions.entityData.createLinkText = 'resource';
+              vm.entityOptions.entityData.createLinkText = 'Create';
             }
             vm.entityOptions.entityData.importLink = 'import.import';
             vm.entityOptions.entityData.importLinkText = 'Import';
