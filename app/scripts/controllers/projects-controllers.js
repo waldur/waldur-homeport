@@ -1226,6 +1226,10 @@ angular.module('ncsaas')
       removeInstance: function(model) {
         return joinServiceProjectLinkService.$deleteByUrl(model.url);
       },
+      afterInstanceRemove: function(instance) {
+        $rootScope.$broadcast('refreshProjectList');
+        this._super(instance);
+      },
       onSearchInputChanged: function(event, searchInput) {
         this.searchInput = searchInput;
         this.search();
