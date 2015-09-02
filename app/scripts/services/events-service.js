@@ -189,7 +189,7 @@
             'invoice_deletion_succeeded',
             'invoice_update_succeeded',
         ],
-        'resources': [
+        'vms': [
             'resource_created',
             'resource_deleted',
             'resource_imported',
