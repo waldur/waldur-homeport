@@ -147,14 +147,14 @@
       '$scope',
       'baseControllerClass',
       'priceEstimationService',
-      'currentStateService',
+      'blockUI',
       DashboardCostController]);
 
   function DashboardCostController(
     $scope,
     baseControllerClass,
     priceEstimationService,
-    currentStateService) {
+    blockUI) {
     var controllerScope = this;
     var EventController = baseControllerClass.extend({
       init: function() {
@@ -162,6 +162,7 @@
 
         $scope.$on('currentCustomerUpdated', this.onCustomerUpdate.bind(this));
         this.onCustomerUpdate();
+        blockUI.start();
       },
 
       onCustomerUpdate: function() {
@@ -182,8 +183,9 @@
             totals.unshift(row.total);
           }
         });
+        blockUI.stop();
 
-      this.chartOptions = {
+        this.chartOptions = {
           bezierCurve: false,
           responsive: true,
           animationEasing: "linear"
@@ -359,7 +361,7 @@
         }
         project.count = {};
         project.count.services = project.services.length;
-        resourcesCountService.users({'project': project.uuid}).then(function(count) {
+        priceEstimationServiceountService.users({'project': project.uuid}).then(function(count) {
           project.count.users = count;
         });
         resourcesCountService.resources({
