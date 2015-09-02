@@ -669,23 +669,6 @@
           auth: true
         })
 
-        .state('resources.create', {
-          url: 'add/',
-          views: {
-            'appContent': {
-              templateUrl: 'views/resource/create.html',
-            },
-            'appHeader': {
-              templateUrl: 'views/partials/app-header.html',
-            }
-          },
-          resolve: {
-            authenticated: authCheck
-          },
-          auth: true
-        })
-
-
         .state('resources.details', {
           url: ':resource_type/:uuid/:tab',
           views: {
