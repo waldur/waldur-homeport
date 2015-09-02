@@ -19,9 +19,9 @@
           this._super();
         } else {
           if (this.instance.public_key) {
-            var key = this.instance.public_key.split('==');
-            if (key[1]) {
-              this.instance.name = key[1];
+            var key = this.instance.public_key.split(' ');
+            if (key[2]) {
+              this.instance.name = key[2].trim();
               this._super();
             } else {
               this.errors = {name: ['This field may not be blank.']};
