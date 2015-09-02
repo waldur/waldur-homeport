@@ -301,7 +301,6 @@
     .controller('ProjectDetailUpdateController', [
       '$stateParams',
       '$rootScope',
-      '$q',
       'ENV',
       'projectsService',
       'baseControllerDetailUpdateClass',
@@ -314,7 +313,6 @@
   function ProjectDetailUpdateController(
     $stateParams,
     $rootScope,
-    $q,
     ENV,
     projectsService,
     baseControllerDetailUpdateClass,
@@ -430,9 +428,11 @@
       },
       setBackupsCounter: function() {
         var vm = this;
-        resourcesCountService.backups({'project_uuid': vm.model.uuid}).then(function(response) {
-          vm.detailsViewOptions.tabs[3].count = response;
-        });
+        if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('backups') == -1) {
+          resourcesCountService.backups({'project_uuid': vm.model.uuid}).then(function(response) {
+            vm.detailsViewOptions.tabs[3].count = response;
+          });
+        }
       },
       setUsersCounter: function() {
         var vm = this;
@@ -621,9 +621,6 @@
             fn();
           });
         }
-        this.entityOptions.entityData.noDataText = 'You have no VMs yet';
-        this.entityOptions.entityData.createLinkText = 'Create VM';
-        this.entityOptions.entityData.importLinkText = 'Import VM';
       },
       currentProjectUpdate: function() {
         var vm = this;
