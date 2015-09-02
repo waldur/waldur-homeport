@@ -290,7 +290,6 @@
       init:function() {
         this.controllerScope = controllerScope;
         this.cacheTime = ENV.dashboardEventsCacheTime;
-        this.setSignalHandler('refreshCounts', this.afterActivate.bind(controllerScope));
         this._super();
         this.activeTab = 'activity';
         this.chartOptions = {
@@ -361,7 +360,7 @@
         }
         project.count = {};
         project.count.services = project.services.length;
-        priceEstimationServiceountService.users({'project': project.uuid}).then(function(count) {
+        resourcesCountService.users({'project': project.uuid}).then(function(count) {
           project.count.users = count;
         });
         resourcesCountService.resources({
