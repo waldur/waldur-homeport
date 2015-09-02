@@ -404,7 +404,7 @@
       },
       setEventsCounter: function() {
         var vm = this;
-        resourcesCountService.events({'scope': vm.model.url}).then(function(resource) {
+        resourcesCountService.events({'scope': vm.model.url}).then(function(response) {
           vm.detailsViewOptions.tabs[0].count = response;
         });
       },

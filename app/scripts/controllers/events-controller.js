@@ -66,9 +66,7 @@
       getList: function(filter) {
         var vm = this;
         var fn = this._super.bind(vm);
-        filter = filter || {};
         return currentStateService.getCustomer().then(function(customer) {
-          filter['scope'] = customer.url;
           vm.service.defaultFilter.scope = customer.url;
           fn(filter);
         });
@@ -288,7 +286,6 @@
       init:function() {
         this.controllerScope = controllerScope;
         this.cacheTime = ENV.dashboardEventsCacheTime;
-        this.setSignalHandler('refreshCounts', this.afterActivate.bind(controllerScope));
         this._super();
         this.activeTab = 'activity';
         this.chartOptions = {
