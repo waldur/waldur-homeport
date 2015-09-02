@@ -220,11 +220,13 @@
         var vm = this;
         currentStateService.getProject().then(function(response) {
           vm.currentProject = response;
-          vm.entityOptions.list[0]['description'] =  {
-            condition: vm.currentProject.uuid,
-            text: '[Active]',
-            field: 'uuid'
-          };
+          if (response) {
+            vm.entityOptions.list[0]['description'] =  {
+              condition: vm.currentProject.uuid,
+              text: '[Active]',
+              field: 'uuid'
+            };
+          }
         });
       }
     });
@@ -395,7 +397,7 @@
       },
       afterActivate: function() {
         this.canEdit = this.model;
-        this.setEventsCounter()
+        this.setEventsCounter();
         this.setVmCounter();
         this.setAppCounter();
         this.setBackupsCounter();
@@ -404,7 +406,7 @@
       },
       setEventsCounter: function() {
         var vm = this;
-        resourcesCountService.events({'scope': vm.model.url}).then(function(resource) {
+        resourcesCountService.events({'scope': vm.model.url}).then(function(response) {
           vm.detailsViewOptions.tabs[0].count = response;
         });
       },
