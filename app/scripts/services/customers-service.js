@@ -33,19 +33,11 @@
         return deferred.promise;
       },
       getCurrentPlan: function(customer) {
-        var deferred = $q.defer(),
-          error = true;
-        agreementsService.getList({customer: customer.uuid}).then(function(response) {
-          if (response) {
-            for (var i = 0; i < response.length; i++) {
-              if (response[i].customer == customer.url && response[i].state == 'active') {
-                deferred.resolve(response[i]);
-                error = false;
-                break;
-              }
-            }
-          }
-          if (error) {
+        var deferred = $q.defer();
+        agreementsService.getList({customer: customer.uuid, state: 'active'}).then(function(response) {
+          if (response.length > 0) {
+            deferred.resolve(response[0]);
+          } else {
             deferred.reject();
           }
         });
