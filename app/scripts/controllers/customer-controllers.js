@@ -58,6 +58,11 @@
               type: ENTITYLISTFIELDTYPES.name,
               link: 'organizations.details({uuid: entity.uuid})',
               showForMobile: ENTITYLISTFIELDTYPES.showForMobile
+            },
+            {
+              name: 'Plan',
+              propertyName: 'plan',
+              type: ENTITYLISTFIELDTYPES.noType,
             }
           ]
         };
@@ -76,6 +81,19 @@
       afterInstanceRemove: function(intance) {
         $rootScope.$broadcast('refreshCustomerList', {model: intance, remove: true});
         this._super(intance);
+      },
+      afterGetList: function() {
+        var vm = this;
+        for (var i = 0; i < vm.list.length; i++) {
+          if (!vm.list[i].plan) {
+            customersService.getCurrentPlan(vm.list[i]).then(function(index, response) {
+              vm.list[index].plan = response.plan_name ? response.plan_name : 'No plan';
+            }.bind(null, i),
+            function(index) {
+              vm.list[index].plan = 'No plan'
+            }.bind(null, i));
+          }
+        }
       }
     });
 
@@ -116,6 +134,7 @@
       customer: null,
       files: [],
       canEdit: false,
+      currentPlan: null,
 
       init: function() {
         this.service = customersService;
@@ -193,6 +212,9 @@
 
       afterActivate: function() {
         var vm = this;
+        customersService.getCurrentPlan(vm.model).then(function(response) {
+          vm.currentPlan = response.plan_name;
+        });
         controllerScope.canEdit = controllerScope.isOwnerOrStaff(controllerScope.model);
         controllerScope.updateImageUrl();
         $q.all([
