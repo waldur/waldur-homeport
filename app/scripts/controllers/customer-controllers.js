@@ -374,13 +374,15 @@
       '$stateParams',
       'baseResourceListController',
       'resourcesService',
+      'ENTITYLISTFIELDTYPES',
       CustomersResourceTabController
     ]);
 
   function CustomersResourceTabController(
     $stateParams,
     baseResourceListController,
-    resourcesService
+    resourcesService,
+    ENTITYLISTFIELDTYPES
   ) {
     var controllerScope = this;
     var ResourceController = baseResourceListController.extend({
@@ -391,6 +393,14 @@
         this.service.filterByCustomer = false;
         this.service.defaultFilter.customer_uuid = $stateParams.uuid;
         this._super();
+                this.entityOptions.list.push(
+            {
+              name: 'Project',
+              propertyName: 'project_name',
+              link: 'projects.details({uuid: entity.project_uuid})',
+              type: ENTITYLISTFIELDTYPES.name
+            });
+
       }
     });
 
