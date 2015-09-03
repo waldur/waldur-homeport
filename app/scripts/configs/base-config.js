@@ -99,6 +99,9 @@ angular.module('ncsaas')
       'monitoring',
       'users',
       'backups',
+      'templates',
+      'invoices',
+      'payments',
       'services:provider:uuid',
       'password',
       'serviceLink'
