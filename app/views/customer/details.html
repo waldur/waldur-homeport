@@ -3,6 +3,12 @@
         <div class="right-block">
             <div class="balance">
                     <span class="bold">
+                        Plan:
+                    </span>
+                    <span>
+                        {{ CustomerDetailUpdate.currentPlan }}
+                    </span>
+                    <span class="bold">
                         Balance:
                     </span>
                     <span>
@@ -10,6 +16,7 @@
                     </span>
             </div>
             <div class="buttons">
+                <a class="button" ui-sref="organizations.plans({uuid: CustomerDetailUpdate.model.uuid})">Plans</a>
                 <a class="button" ng-click="amountTooltip = !amountTooltip; graphTooltip = false;">Top-up</a>
                 <a class="button" ng-click="graphTooltip = !graphTooltip; amountTooltip = false;">History</a>
             </div>

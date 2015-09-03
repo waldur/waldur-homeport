@@ -1,11 +1,8 @@
 <div ng-controller="PlansListController as PlanList">
-
-<div class="profile-view">
-        <section class="avatar">
-            <span class="avatar big">
-                <img src="/static/images/user-avatar.jpg" alt="" class="avatar-img">
-            </span>
-        </section>
+    <div class="container">
+        <h1>Plans</h1>
+    </div>
+    <div class="white-box">
         <section class="content">
             <h2 class="app-title"><a ui-sref="organizations.details({uuid: PlanList.customer.uuid})">{{ PlanList.customer.name }}</a></h2>
             <div>
@@ -13,7 +10,9 @@
             </div>
             <div class="plans">
                 <div class="plan" ng-repeat="plan in PlanList.list">
-                    <div class="plan-item" ng-class="{'current-plan': PlanList.currentPlan.uuid === plan.uuid, 'selected': PlanList.selectedPlan.uuid === plan.uuid}" ng-click="PlanList.selectPlan(plan)">
+                    <div class="plan-item"
+                         ng-class="{'current-plan': PlanList.currentPlan === plan.url, 'selected': PlanList.selectedPlan.uuid === plan.uuid}"
+                         ng-click="PlanList.selectPlan(plan)">
                         <table>
                             <th>
                                 <span class="plan-name">{{ plan.name }}</span>
@@ -33,22 +32,6 @@
                 <div class="col">
                     <a class="button-apply" ng-class="{'disabled': !PlanList.selectedPlan}" ng-click="PlanList.createOrder()">Confirm changing your plan</a>
                 </div>
-            </div>
-        </section>
-        <section class="actions">
-            <div class="actions-button">
-                <a class="button" ng-click="openActions=!openActions">actions</a>
-                <ul class="actions-dropdown" ng-show="openActions">
-                    <li>
-                        <a ui-sref="organizations.details({uuid: PlanList.customer.uuid})" class="button-simple">Edit profile</a>
-                    </li>
-                    <li>
-                        <span class="button-simple active">Plans</span>
-                    </li>
-                    <li>
-                        <a class="button-simple">Billing</a>
-                    </li>
-                </ul>
             </div>
         </section>
     </div>
