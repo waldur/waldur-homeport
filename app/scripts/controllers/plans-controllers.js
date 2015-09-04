@@ -4,11 +4,11 @@
   angular.module('ncsaas')
     .controller('PlansListController',
       ['baseControllerListClass', 'plansService', 'customersService', 'usersService', 'customerPermissionsService',
-       'agreementsService', '$stateParams', '$state', PlansListController]);
+       'agreementsService', '$stateParams', '$state', '$window', PlansListController]);
 
   function PlansListController(
       baseControllerListClass, plansService, customersService, usersService, customerPermissionsService,
-      agreementsService, $stateParams, $state) {
+      agreementsService, $stateParams, $state, $window) {
     var controllerScope = this;
     var Controller = baseControllerListClass.extend({
       init:function() {
@@ -20,10 +20,8 @@
 
       initCurrentPlan: function(customer) {
         var vm = this;
-        agreementsService.getList({customer: customer.uuid}).then(function(planCustomers) {
-          if (planCustomers.length !== 0) {
-            vm.currentPlan = planCustomers[0].plan;
-          }
+        customersService.getCurrentPlan(customer).then(function(response) {
+          vm.currentPlan = response.plan;
         });
       },
 
@@ -78,8 +76,7 @@
       },
 
       selectPlan: function(plan) {
-        console.log('selected: ' + plan.name);
-        if (!this.currentPlan || plan.uuid !== this.currentPlan.uuid) {
+        if (!this.currentPlan || plan.url !== this.currentPlan) {
           this.selectedPlan = plan;
         } else {
           this.selectedPlan = null;
@@ -93,8 +90,8 @@
           order.plan = vm.selectedPlan.url;
           order.customer = vm.customer.url;
           order.$save(function(order) {
-            // XXX: we are going to mock page, this should be rewritten after payment system implementation\
-            $state.go('payment.mock', {uuid:order.uuid});
+            customersService.clearAllCacheForCurrentEndpoint();
+            $window.location = order.approval_url;
           });
         }
       }

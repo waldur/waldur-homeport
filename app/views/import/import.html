@@ -117,8 +117,8 @@
                                     <span class="status online" ng-switch-when="ready">Available for import</span>
                                     <span class="status" ng-switch-when="progress">In progress</span>
                                     <span class="status online" ng-switch-when="success">
-                                        Imported to <a ui-sref="projects.details({uuid: ImportResource.selectedProject.uuid})">
-                                            {{ ImportResource.selectedProject.name }}
+                                        Imported to <a ui-sref="projects.details({uuid: ImportResource.currentProject.uuid})">
+                                            {{ ImportResource.currentProject.name }}
                                         </a>
                                     </span>
                                     <span class="status offline" ng-switch-when="failed">Failed</span>
@@ -134,7 +134,7 @@
             <div class="col select-project">
                 <article class="descriptoin-light">
                     Selected resources will be imported into project
-                    {{ ImportResource.selectedProject.name }}
+                    {{ ImportResource.currentProject.name }}
                 </article>
             </div>
         </div>
