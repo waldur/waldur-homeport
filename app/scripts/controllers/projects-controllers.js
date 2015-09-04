@@ -334,6 +334,7 @@
         }
         this.setSignalHandler('refreshCounts', this.afterActivate.bind(controllerScope));
         this._super();
+        this.activeTab = (ENV.toBeFeatures.indexOf(this.activeTab) + 1) ? 'VMs' : this.activeTab;
         this.detailsViewOptions = {
           title: 'Project',
           activeTab: $stateParams.tab ? $stateParams.tab : this.activeTab,

@@ -9,6 +9,6 @@ angular.module('ncsaas')
       'eventlog'
     ],
     featuresVisible: false,
-    homeTemplate: false,
-    initialDataTemplate: false
+    homeTemplate: 'views/home/home.html',
+    initialDataTemplate: 'views/initial-data/initial-data.html'
   });

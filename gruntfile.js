@@ -558,10 +558,13 @@ module.exports = function(grunt) {
 
     require('load-grunt-tasks')(grunt);
 
+    var mode = grunt.option('mode') || 'modePrivateIaas';
+
     grunt.registerTask(
         'build', ['copy', 'imagemin', 'sass', 'autoprefixer', 'cssmin']);
     grunt.registerTask(
-        'run', ['copy', 'env:dev', 'preprocess:index', 'connect:server', 'imagemin', 'sass', 'autoprefixer', 'focus:dev']);
+        'run', ['copy', 'env:dev', 'preprocess:index', 'connect:server', 'imagemin', 'sass', 'autoprefixer',
+        'copy:' + mode, 'focus:dev']);
     grunt.registerTask('serve', ['connect',]);
     grunt.registerTask('default', ['run']);
     grunt.registerTask('test',
@@ -576,7 +579,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask(
       'prodbatch', ['copy', 'env:prod', 'preprocess:index', 'imagemin', 'sass', 'autoprefixer', 'concat',
-        'uglify', 'cssmin']);
+        'uglify', 'cssmin', 'copy:' + mode]);
 
     grunt.registerTask('modePrivateIaas', ['copy:modePrivateIaas']);
     grunt.registerTask('modeSquStudentCloud', ['copy:modeSquStudentCloud']);

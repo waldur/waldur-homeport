@@ -24,6 +24,6 @@ angular.module('ncsaas')
       }
     ],
     serviceCategories: [],
-    homeTemplate: false,
-    initialDataTemplate: false
+    homeTemplate: 'views/home/home.html',
+    initialDataTemplate: 'views/initial-data/initial-data.html'
   });
