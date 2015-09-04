@@ -122,6 +122,8 @@ angular.module('ncsaas')
       applications: ['Oracle.Database', 'GitLab.Project']
     },
 
-    countsCacheTime: 60 // seconds
+    countsCacheTime: 60, // seconds,
+
+    mode: 'squ'
 
   });

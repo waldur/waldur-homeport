@@ -25,7 +25,7 @@
       'blockUI'
     ])
     // urls
-    .config(function($stateProvider, $urlRouterProvider) {
+    .config(function($stateProvider, $urlRouterProvider, MODE) {
       var initialDataState = 'initialdata.view',
         initialDataStatePath = '/initial-data/';
 
@@ -48,7 +48,7 @@
               templateUrl: 'views/partials/site-header.html',
             },
             'appContent@home' : {
-              templateUrl: 'views/home/home.html',
+              templateUrl: MODE.homeTemplate ? MODE.homeTemplate : 'views/home/home.html',
             }
           },
           resolve: {
@@ -85,7 +85,7 @@
               templateUrl: 'views/partials/site-header-initial.html',
             },
             'appContent@initialdata' : {
-              templateUrl: 'views/initial-data/initial-data.html',
+              templateUrl: MODE.initialDataTemplate ? MODE.initialDataTemplate : 'views/initial-data/initial-data.html',
             }
           },
           resolve: {
@@ -994,12 +994,17 @@
 
   (function() {
     angular.module('ncsaas')
-      .config(['ENV', 'CUSTOMENV', overrideBaseSettings]);
+      .config(['ENV', 'CUSTOMENV', 'MODE', overrideBaseSettings]);
 
-    function overrideBaseSettings(ENV, CUSTOMENV) {
+    function overrideBaseSettings(ENV, CUSTOMENV, MODE) {
       for (var property in CUSTOMENV) {
         if (CUSTOMENV.hasOwnProperty(property)) {
           ENV[property] = CUSTOMENV[property];
+        }
+      }
+      for (var prop in MODE) {
+        if (MODE.hasOwnProperty(prop)) {
+          ENV[prop] = MODE[prop];
         }
       }
     }
