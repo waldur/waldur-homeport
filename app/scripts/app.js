@@ -244,7 +244,7 @@
         })
 
         .state('appstore.store', {
-          url: '',
+          url: ':category',
           views: {
             'appContent': {
               templateUrl: 'views/appstore/store.html',

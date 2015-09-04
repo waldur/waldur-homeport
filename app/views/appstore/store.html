@@ -1,8 +1,7 @@
-<div ng-controller="AppStoreController as AppStore">
-
+<div ng-controller="AppStoreController as AppStore" block-ui="store-content">
     <div class="container">
         <div class="appstore-wrapper">
-            <div class="appstore-content" block-ui="store-content">
+            <div class="appstore-content">
                 <h1>Appstore</h1>
                 <div ng-if="AppStore.renderStore">
                     <section class="step-1">
@@ -51,7 +50,7 @@
                             <!-- category -->
                             <div class="appstore-template"
                                  ng-repeat="package in AppStore.selectedCategory.packages"
-                                 ng-click="AppStore.agreementShow = true; AppStore.selectedPackageName = package.name"
+                                 ng-click="AppStore.agreementShow = true; AppStore.selectedPackageName = package.name; AppStore.selectedPackage = package"
                                  ng-class="{'state': AppStore.selectedPackageName == package.name}">
                                 <h3 class="ng-binding">{{ package.name }}</h3>
                                 <span>
@@ -170,39 +169,27 @@
                             <ul>
                                 <li>
                                     <div class="item-title">1. Check terms</div>
-                                    <span class="bold">Support is covering WEB Production enviroment of Organization X</span>
                                     <ul>
                                         <li>
-                                            <div class="item-name">Reaction time:</div>
-                                            <div class="item-value">Within 2H, 24/7</div>
-                                            <div class="clear"></div>
-                                        </li>
-                                        <li>
                                             <div class="item-name">Monthly base price:</div>
-                                            <div class="item-value">500 EUR</div>
+                                            <div class="item-value">{{ AppStore.selectedPackage.base_rate | currency:AppStore.currency }}</div>
                                             <div class="clear"></div>
                                         </li>
                                         <li>
                                             <div class="item-name">Hour price:</div>
-                                            <div class="item-value">65 EUR</div>
+                                            <div class="item-value">{{ AppStore.selectedPackage.hour_rate | currency:AppStore.currency }}</div>
                                             <div class="clear"></div>
                                         </li>
                                     </ul>
                                 </li>
                                 <li>
                                     <div class="item-title">2. Read through terms and conditions</div>
-                                    <div class="conditions">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et magna
-                                        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.
-                                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                                        occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis
-                                        unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-                                        ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-                                    </div>
+                                    <div class="conditions" ng-bind="AppStore.selectedPackage.description"></div>
                                 </li>
                             </ul>
                         </div>
-                        <button>
+                        <button ng-class="{'disabled': !AppStore.selectedPackage}" ng-click="AppStore.signContract()">
+                            <img src="/static/images/appstore/icon-curt.png" alt=""/>
                             <span>Sign a contract</span>
                         </button>
                     </section>
@@ -225,7 +212,7 @@
                             <span>{{ item.name }}</span>
                         </div>
 
-                        <div class="price">{{ item.price | currency:'$' }}</div>
+                        <div class="price">{{ item.price | currency:AppStore.currency }}</div>
                         <div class="clear"></div>
                     </li>
                     <li class="total">
@@ -234,7 +221,7 @@
                             <span ng-show="!AppStore.selectedServiceName">No chosen provider</span>
                             <span>{{ AppStore.instance.name }} {{ AppStore.selectedResourceType }}</span>
                         </div>
-                        <div class="price">{{ AppStore.total | currency:'$' }}</div>
+                        <div class="price">{{ AppStore.total | currency:AppStore.currency }}</div>
                         <div class="clear"></div>
                     </li>
                 </ul>
@@ -244,7 +231,7 @@
         </div>
 
     </div>
-    <div class="project-alert-message" ng-show="AppStore.showProjectAlertMessage || !AppStore.renderStore">
+    <div class="project-alert-message" ng-show="!AppStore.loadingProviders && !AppStore.renderStore">
         <p>
             There are no working accounts available for the current project.<br />
             You can change that in

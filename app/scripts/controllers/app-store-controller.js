@@ -1,11 +1,29 @@
 (function() {
   angular.module('ncsaas')
     .controller('AppStoreController', [
-      'baseControllerAddClass', 'servicesService', 'currentStateService', 'ENV', 'defaultPriceListItemsService', 'blockUI',
-      '$state', AppStoreController]);
+      'baseControllerAddClass',
+      'servicesService',
+      'currentStateService',
+      'ENV',
+      'defaultPriceListItemsService',
+      'blockUI',
+      '$state',
+      '$stateParams',
+      'premiumSupportPlansService',
+      'premiumSupportContractsService',
+      AppStoreController]);
 
-  function AppStoreController(baseControllerAddClass, servicesService, currentStateService, ENV,
-                              defaultPriceListItemsService, blockUI, $state) {
+  function AppStoreController(
+    baseControllerAddClass,
+    servicesService,
+    currentStateService,
+    ENV,
+    defaultPriceListItemsService,
+    blockUI,
+    $state,
+    $stateParams,
+    premiumSupportPlansService,
+    premiumSupportContractsService) {
     var controllerScope = this;
     var Controller = baseControllerAddClass.extend({
       UNIQUE_FIELDS: {
@@ -18,6 +36,8 @@
         field: 'field',
         integer: 'integer'
       },
+
+      currency: ENV.currency,
 
       secondStep: false,
       thirdStep: false,
@@ -36,6 +56,7 @@
       compare: [],
       providers: [],
       services: {},
+      loadingProviders: true,
       categoryProviders: {},
 
       configureStepNumber: 4,
@@ -52,7 +73,6 @@
         this.controllerScope = controllerScope;
         this.setSignalHandler('currentProjectUpdated', this.setCurrentProject.bind(controllerScope));
         this._super();
-        this.listState = 'resources.list';
       },
       activate:function() {
         var vm = this;
@@ -197,6 +217,7 @@
         vm.instance = null;
         vm.renderStore = false;
         vm.countTotal();
+        vm.loadingProviders = true;
         var myBlockUI = blockUI.instances.get('store-content');
         myBlockUI.start();
         currentStateService.getProject().then(function(response) {
@@ -213,15 +234,40 @@
               ) {
                 vm.categoryProviders[category.name].push(service.type);
                 vm.services[service.type] = service;
-
               }
             }
-            if (vm.categoryProviders[category.name].length > 0 || category.name == 'SUPPORT') {
+            if (vm.categoryProviders[category.name].length > 0) {
               vm.categories.push(category);
               vm.renderStore = true;
             }
           }
+          vm.addSupportCategory();
+          vm.loadingProviders = false;
           myBlockUI.stop();
+        });
+      },
+      addSupportCategory: function() {
+        var vm = this;
+        premiumSupportPlansService.getList().then(function(response) {
+          var category = {
+            type: 'package',
+            name: 'SUPPORT',
+            packages: response
+          };
+          vm.categories.push(category);
+          if ($stateParams.category == 'SUPPORT') {
+            vm.setCategory(category);
+          }
+        });
+      },
+      signContract: function() {
+        var contract = premiumSupportContractsService.$create();
+        contract.project = this.currentProject.url;
+        contract.plan = this.selectedPackage.url;
+        var vm = this;
+        contract.$save().then(this.successRedirect, function(response) {
+          vm.errors = response.data;
+          vm.onError();
         });
       },
       canSave: function() {
@@ -245,6 +291,9 @@
           }
         }
         this.errorFlash(message);
+      },
+      successRedirect: function() {
+        $state.go('resources.list', {tab: 'VMs'});
       },
       setCompare: function(categoryName) {
         var index = this.compare.indexOf(categoryName);
