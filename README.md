@@ -33,6 +33,26 @@ __Installation steps__:
 
 5. Run application:
 
+    choose mode:
+    
+     `grunt modePrivateIaas`
+     
+     `grunt modeSquStudentCloud`
+     
+     `grunt modePublicBrokerage`
+     
+     `grunt modeCostTracking`
+     
+     or run with param
+     
+     `--mode=modePrivateIaas`
+     
+     `--mode=modeSquStudentCloud`
+     
+     `--mode=modePublicBrokerage`
+     
+     `--mode=modeCostTracking`
+
     `grunt` - in development mode
 
     `grunt prod` - in production mode

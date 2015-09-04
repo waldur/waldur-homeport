@@ -33,6 +33,7 @@ app/static
 # config
 app/scripts/configs/config.js
 app/scripts/configs/custom-config.js
+app/scripts/configs/mode-config.js
 
 # i18n
 *.mo

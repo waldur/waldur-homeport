@@ -317,6 +317,62 @@ module.exports = function(grunt) {
                         filter: 'isFile'
                     }
                 ]
+            },
+            modePrivateIaas: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'app/scripts/configs/modes/',
+                        src: ['private-iaas.js'],
+                        dest: 'app/scripts/configs/',
+                        filter: 'isFile',
+                        rename: function(dest) {
+                           return dest + 'mode-config.js';
+                        }
+                    }
+                ]
+            },
+            modeSquStudentCloud: {
+              files: [
+                {
+                  expand: true,
+                  cwd: 'app/scripts/configs/modes/',
+                  src: ['spu-student-cloud.js'],
+                  dest: 'app/scripts/configs/',
+                  filter: 'isFile',
+                  rename: function(dest) {
+                    return dest + 'mode-config.js';
+                  }
+                }
+              ]
+            },
+            modePublicBrokerage: {
+              files: [
+                {
+                  expand: true,
+                  cwd: 'app/scripts/configs/modes/',
+                  src: ['public-brokerage.js'],
+                  dest: 'app/scripts/configs/',
+                  filter: 'isFile',
+                  rename: function(dest) {
+                    return dest + 'mode-config.js';
+                  }
+                }
+              ]
+            },
+            modeCostTracking: {
+              files: [
+                {
+                  expand: true,
+                  cwd: 'app/scripts/configs/modes/',
+                  src: ['cost-tracking.js'],
+                  dest: 'app/scripts/configs/',
+                  filter: 'isFile',
+                  rename: function(dest) {
+                    return dest + 'mode-config.js';
+                  }
+                }
+              ]
             }
         },
 
@@ -502,10 +558,13 @@ module.exports = function(grunt) {
 
     require('load-grunt-tasks')(grunt);
 
+    var mode = grunt.option('mode') || 'modePrivateIaas';
+
     grunt.registerTask(
         'build', ['copy', 'imagemin', 'sass', 'autoprefixer', 'cssmin']);
     grunt.registerTask(
-        'run', ['copy', 'env:dev', 'preprocess:index', 'connect:server', 'imagemin', 'sass', 'autoprefixer', 'focus:dev']);
+        'run', ['copy', 'env:dev', 'preprocess:index', 'connect:server', 'imagemin', 'sass', 'autoprefixer',
+        'copy:' + mode, 'focus:dev']);
     grunt.registerTask('serve', ['connect',]);
     grunt.registerTask('default', ['run']);
     grunt.registerTask('test',
@@ -520,6 +579,11 @@ module.exports = function(grunt) {
 
     grunt.registerTask(
       'prodbatch', ['copy', 'env:prod', 'preprocess:index', 'imagemin', 'sass', 'autoprefixer', 'concat',
-        'uglify', 'cssmin']);
+        'uglify', 'cssmin', 'copy:' + mode]);
+
+    grunt.registerTask('modePrivateIaas', ['copy:modePrivateIaas']);
+    grunt.registerTask('modeSquStudentCloud', ['copy:modeSquStudentCloud']);
+    grunt.registerTask('modePublicBrokerage', ['copy:modePublicBrokerage']);
+    grunt.registerTask('modeCostTracking', ['copy:modeCostTracking']);
 
 };
