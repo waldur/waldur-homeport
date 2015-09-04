@@ -29,7 +29,8 @@
       init: function() {
         this.activate();
         this.menuItemActive = currentStateService.getActiveItem($state.current.name);
-        this.setSignalHandler('currentCustomerUpdated', this.currentCustomerUpdatedHandler.bind(controllerScope));
+        this.setSignalHandler('adjustCurrentCustomer', this.adjustCurrentCustomer.bind(controllerScope));
+        this.setSignalHandler('adjustCurrentProject', this.adjustCurrentProject.bind(controllerScope));
         this.setSignalHandler('refreshProjectList', this.refreshProjectListHandler.bind(controllerScope));
         this.setSignalHandler('refreshCustomerList', this.refreshCustomerListHandler.bind(controllerScope));
         this._super();
@@ -89,11 +90,24 @@
         }
         $rootScope.$broadcast('clicked-out');
       },
-      setCurrentCustomer: function(customer) {
+      adjustCurrentCustomer: function(event, customer) {
+        this.setCurrentCustomer(customer, true);
+      },
+      adjustCurrentProject: function(event, project) {
+        this.setCurrentProject(project);
+      },
+      setCurrentCustomer: function(customer, skipRedirect) {
         var vm = this;
         currentStateService.setCustomer(customer);
         vm.currentCustomer = customer;
         $rootScope.$broadcast('currentCustomerUpdated');
+        var vm = this;
+        vm.setFirstOrLastSelectedProject().then(function() {
+          if (skipRedirect) {
+            return;
+          }
+          $state.go('organizations.details', {uuid: vm.currentCustomer.uuid});
+        });
       },
       setCurrentProject: function(project) {
         var vm = this;
@@ -116,12 +130,6 @@
       },
       mobileMenu: function() {
         this.showMobileMenu = !this.showMobileMenu;
-      },
-      currentCustomerUpdatedHandler: function() {
-        var vm = this;
-        vm.setFirstOrLastSelectedProject().then(function() {
-          $state.go('organizations.details', {uuid: vm.currentCustomer.uuid});
-        });
       },
       setFirstOrLastSelectedProject: function() {
         var vm = this,
@@ -307,6 +315,8 @@
         $state.go('home.login');
       },
       stateChangeSuccessHandler: function(event, toState) {
+        this.deregisterEvent('adjustCurrentCustomer');
+        this.deregisterEvent('adjustCurrentProject');
         this.deregisterEvent('currentCustomerUpdated'); // clear currentCustomerUpdated event handlers
         this.deregisterEvent('refreshProjectList'); // clear refreshProjectList event handlers
         this.deregisterEvent('currentProjectUpdated'); // clear currentProjectUpdated event handlers
