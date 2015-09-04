@@ -248,24 +248,31 @@
       },
       addSupportCategory: function() {
         var vm = this;
-        premiumSupportPlansService.getList().then(function(response) {
-          var category = {
-            type: 'package',
-            name: 'SUPPORT',
-            packages: response
-          };
-          vm.categories.push(category);
-          if ($stateParams.category == 'SUPPORT') {
-            vm.setCategory(category);
-          }
-        });
+        if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('premiumSupport') == -1) {
+          premiumSupportPlansService.getList().then(function(response) {
+            if (response.length != 0) {
+              vm.renderStore = true;
+              var category = {
+                type: 'package',
+                name: 'SUPPORT',
+                packages: response
+              };
+              vm.categories.push(category);
+              if ($stateParams.category == 'SUPPORT') {
+                vm.setCategory(category);
+              }
+            }
+          });
+        }
       },
       signContract: function() {
         var contract = premiumSupportContractsService.$create();
         contract.project = this.currentProject.url;
         contract.plan = this.selectedPackage.url;
         var vm = this;
-        contract.$save().then(this.successRedirect, function(response) {
+        contract.$save().then(function(response) {
+          $state.go('resources.list', {tab: 'premiumSupport'});
+        }, function(response) {
           vm.errors = response.data;
           vm.onError();
         });

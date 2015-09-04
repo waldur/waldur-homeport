@@ -259,8 +259,10 @@
 
   angular.module('ncsaas')
     .controller('DashboardActivityController', [
-      '$scope',
       'baseControllerClass',
+      '$scope',
+      '$rootScope',
+      '$state',
       'projectsService',
       'alertsService',
       'eventsService',
@@ -272,8 +274,10 @@
       DashboardActivityController]);
 
   function DashboardActivityController(
-    $scope,
     baseControllerClass,
+    $scope,
+    $rootScope,
+    $state,
     projectsService,
     alertsService,
     eventsService,
@@ -417,6 +421,10 @@
             ]
           };
         })
+      },
+      addSupportContract: function(project) {
+        $rootScope.$broadcast('adjustCurrentProject', project);
+        $state.go('appstore.store({category: "SUPPORT"})');
       }
     });
 

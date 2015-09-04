@@ -381,6 +381,12 @@
               key: 'providers',
               viewName: 'tabProviders',
               count: 0
+            },
+            {
+              title: 'Support',
+              key: 'premiumSupport',
+              viewName: 'tabPremiumSupport',
+              count: 0
             }
           ]
         };
@@ -403,6 +409,7 @@
         this.setBackupsCounter();
         this.setProvidersCounter();
         this.setUsersCounter();
+        this.setSupportCounter();
       },
       setEventsCounter: function() {
         var vm = this;
@@ -445,6 +452,16 @@
       setProvidersCounter: function() {
         this.detailsViewOptions.tabs[5].count = this.model.services.length;
       },
+      setSupportCounter: function() {
+        var vm = this;
+        if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('premiumSupport') == -1) {
+          resourcesCountService.premiumSupportContracts({
+            project_uuid: vm.model.uuid
+          }).then(function(response) {
+            vm.detailsViewOptions.tabs[6].count = response;
+          });
+        }
+      }
     });
 
     controllerScope.__proto__ = new Controller();
@@ -955,4 +972,76 @@ angular.module('ncsaas')
 
     controllerScope.__proto__ = new ServiceController();
   }
+})();
+
+(function() {
+  angular.module('ncsaas')
+    .controller('ProjectSupportTabController', [
+      'baseControllerListClass',
+      'premiumSupportContractsService',
+      'currentStateService',
+      'ENTITYLISTFIELDTYPES',
+      '$stateParams',
+      ProjectSupportTabController
+    ]);
+
+  function ProjectSupportTabController(
+    baseControllerListClass,
+    premiumSupportContractsService,
+    currentStateService,
+    ENTITYLISTFIELDTYPES,
+    $stateParams
+    ) {
+    var controllerScope = this;
+    var ResourceController = baseControllerListClass.extend({
+      init: function() {
+        this.controllerScope = controllerScope;
+        this.service = premiumSupportContractsService;
+        if (!$stateParams.uuid) {
+          this.setSignalHandler('currentProjectUpdated', this.setCurrentProject.bind(controllerScope));
+        }
+        this._super();
+
+        this.entityOptions = {
+          entityData: {
+            noDataText: 'You have no SLAs yet.',
+            createLink: 'appstore.store({category: "SUPPORT"})',
+            createLinkText: 'Create SLA',
+          },
+          list: [
+            {
+              name: 'Name',
+              propertyName: 'plan_name',
+              type: ENTITYLISTFIELDTYPES.none,
+              showForMobile: ENTITYLISTFIELDTYPES.showForMobile
+            },
+            {
+              name: 'State',
+              propertyName: 'state',
+              type: ENTITYLISTFIELDTYPES.none,
+              showForMobile: ENTITYLISTFIELDTYPES.showForMobile
+            }
+          ]
+        };
+      },
+      setCurrentProject: function() {
+        this.getList();
+      },
+      getList: function(filter) {
+        var vm = this;
+        var fn = this._super.bind(vm);
+        if ($stateParams.uuid) {
+          this.service.defaultFilter.project_uuid = $stateParams.uuid;
+          return fn(filter);
+        }
+        return currentStateService.getProject().then(function(project) {
+          vm.service.defaultFilter.project_uuid = project.uuid;
+          return fn(filter);
+        })
+      }
+    });
+
+    controllerScope.__proto__ = new ResourceController();
+  }
+
 })();

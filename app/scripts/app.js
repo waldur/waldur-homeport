@@ -324,9 +324,12 @@
             'tabBackups@projects.details' : {
               templateUrl: 'views/resource/tab-backups.html',
             },
+            'tabPremiumSupport@projects.details': {
+              templateUrl: 'views/project/tab-support.html',
+            },
             'appHeader': {
               templateUrl: 'views/partials/app-header.html',
-            }
+            },
           },
           resolve: {
             authenticated: authCheck
@@ -658,6 +661,9 @@
             },
             'tabProviders@resources.list' : {
               templateUrl: 'views/resource/tab-providers.html',
+            },
+            'tabPremiumSupport@resources.list': {
+              templateUrl: 'views/project/tab-support.html',
             },
             'appHeader': {
               templateUrl: 'views/partials/app-header.html',
