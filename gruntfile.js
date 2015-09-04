@@ -561,9 +561,9 @@ module.exports = function(grunt) {
     var mode = grunt.option('mode') || 'modePrivateIaas';
 
     grunt.registerTask(
-        'build', ['copy', 'imagemin', 'sass', 'autoprefixer', 'cssmin']);
+        'build', ['copy:main', 'imagemin', 'sass', 'autoprefixer', 'cssmin']);
     grunt.registerTask(
-        'run', ['copy', 'env:dev', 'preprocess:index', 'connect:server', 'imagemin', 'sass', 'autoprefixer',
+        'run', ['copy:main', 'env:dev', 'preprocess:index', 'connect:server', 'imagemin', 'sass', 'autoprefixer',
         'copy:' + mode, 'focus:dev']);
     grunt.registerTask('serve', ['connect',]);
     grunt.registerTask('default', ['run']);
@@ -574,11 +574,11 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-po2json-angular-translate');
 
     grunt.registerTask(
-      'prod', ['copy', 'env:prod', 'preprocess:index', 'imagemin', 'sass', 'autoprefixer', 'concat',
+      'prod', ['copy:main', 'env:prod', 'preprocess:index', 'imagemin', 'sass', 'autoprefixer', 'concat',
         'uglify', 'cssmin', 'focus:prod']);
 
     grunt.registerTask(
-      'prodbatch', ['copy', 'env:prod', 'preprocess:index', 'imagemin', 'sass', 'autoprefixer', 'concat',
+      'prodbatch', ['copy:main', 'env:prod', 'preprocess:index', 'imagemin', 'sass', 'autoprefixer', 'concat',
         'uglify', 'cssmin', 'copy:' + mode]);
 
     grunt.registerTask('modePrivateIaas', ['copy:modePrivateIaas']);

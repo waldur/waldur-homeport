@@ -24,6 +24,6 @@ angular.module('ncsaas')
       }
     ],
     serviceCategories: [],
-    homeTemplate: 'views/home/home.html',
-    initialDataTemplate: 'views/initial-data/initial-data.html'
+    homeTemplate: 'views/home/squ-student-cloud/home.html',
+    initialDataTemplate: 'views/initial-data/omancloud/initial-data.html'
   });
