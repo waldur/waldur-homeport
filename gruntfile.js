@@ -337,7 +337,7 @@ module.exports = function(grunt) {
                 {
                   expand: true,
                   cwd: 'app/scripts/configs/modes/',
-                  src: ['spu-student-cloud.js'],
+                  src: ['squ-student-cloud.js'],
                   dest: 'app/scripts/configs/',
                   filter: 'isFile',
                   rename: function(dest) {
