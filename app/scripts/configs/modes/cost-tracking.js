@@ -9,6 +9,6 @@ angular.module('ncsaas')
       'eventlog'
     ],
     featuresVisible: false,
-    homeTemplate: 'views/home/omancloud/home.html',
-    initialDataTemplate: 'views/initial-data/omancloud/initial-data.html'
+    homeTemplate: 'views/home/home.html',
+    initialDataTemplate: 'views/initial-data/initial-data.html'
   });
