@@ -1,0 +1,33 @@
+<div ng-controller="InitialDataController as InitialData">
+    <div class="initial-data-page">
+        <div class="first-step">
+            <h2>Welcome to Oman Cloud self-service, {{ InitialData.user.full_name }}!</h2>
+            <p>Your friendly and reliable cloud infrastructure provider.</p>
+            <div class="logo">
+                <div class="img-wrapper">
+                    <img gravatar-src="InitialData.user.email" alt=""/>
+                </div>
+                <span class="manage-gravatar">
+                    Manage at
+                    <a href="//gravatar.com" target="_blank">gravatar.com</a>
+                </span>
+                <div class="clear"></div>
+            </div>
+            <div class="fields">
+                <label for="email">Email</label>
+                <input id="email" type="text" ng-model="InitialData.user.email"/>
+                <div ng-repeat="error in InitialData.user.errors" ng-bind="error"></div>
+                <label for="customer_name">Organization name</label>
+                <input id="customer_name" ng-model="InitialData.customer.name" type="text"/>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="second-step">
+            <div class="button-block">
+                <a class="button" ng-click="InitialData.save()">Let’s get started</a>
+                <span>By continuing you agree to the <a>Terms of Provider</a>.</span>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
