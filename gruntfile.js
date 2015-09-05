@@ -578,8 +578,8 @@ module.exports = function(grunt) {
         'uglify', 'cssmin', 'focus:prod']);
 
     grunt.registerTask(
-      'prodbatch', ['copy:main', 'env:prod', 'preprocess:index', 'imagemin', 'sass', 'autoprefixer', 'concat',
-        'uglify', 'cssmin', 'copy:' + mode]);
+      'prodbatch', ['copy:main', 'copy:' + mode, 'env:prod', 'preprocess:index', 'imagemin', 'sass', 'autoprefixer', 'concat',
+        'uglify', 'cssmin']);
 
     grunt.registerTask('modePrivateIaas', ['copy:modePrivateIaas']);
     grunt.registerTask('modeSquStudentCloud', ['copy:modeSquStudentCloud']);
