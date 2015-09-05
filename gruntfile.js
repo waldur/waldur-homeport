@@ -393,7 +393,7 @@ module.exports = function(grunt) {
             options: {
                 configFile: 'test/protractor.conf.js', // Default config file
                 keepAlive: false, // If false, the grunt process stops when the test fails.
-                noColor: false, // If true, protractor will not use colors in its output.
+                noColor: false // If true, protractor will not use colors in its output.
             },
             test: {
                 options: {
@@ -485,7 +485,7 @@ module.exports = function(grunt) {
                     pretty: true
                 },
                 files: {
-                  'app/static/js/i18n/': ['i18n/*.po'],
+                  'app/static/js/i18n/': ['i18n/*.po']
                 }
             }
         },
