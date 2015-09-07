@@ -10,6 +10,7 @@
        'currentStateService',
        'resourcesService',
        '$rootScope',
+       '$state',
        'ENV',
        'ENTITYLISTFIELDTYPES',
        ProjectListController]);
@@ -22,10 +23,11 @@
     currentStateService,
     resourcesService,
     $rootScope,
+    $state,
     ENV,
     ENTITYLISTFIELDTYPES) {
     var controllerScope = this;
-    var CustomerController = baseControllerListClass.extend({
+    var Controller = baseControllerListClass.extend({
       projectUsers: {},
       projectResources: {},
       expandableResourcesKey: 'resources',
@@ -60,13 +62,19 @@
           },
           {
             title: 'Import resource',
-            state: 'import.import'
+            clickFunction: function(project) {
+              $rootScope.$broadcast('adjustCurrentProject', project);
+              $state.go('import.import')
+            }
           },
         ];
         if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('appstore') == -1) {
           this.actionButtonsListItems.push({
             title: 'Create resource',
-            state: 'appstore.store'
+            clickFunction: function(project) {
+              $rootScope.$broadcast('adjustCurrentProject', project);
+              $state.go('appstore.store')
+            }
           });
         }
         this.entityOptions = {
@@ -231,7 +239,7 @@
       }
     });
 
-    controllerScope.__proto__ = new CustomerController();
+    controllerScope.__proto__ = new Controller();
   }
 
   angular.module('ncsaas')
@@ -332,7 +340,7 @@
         if (!$stateParams.uuid) {
           this.setSignalHandler('currentProjectUpdated', this.activate.bind(controllerScope));
         }
-        this.setSignalHandler('refreshCounts', this.afterActivate.bind(controllerScope));
+        this.setSignalHandler('refreshCounts', this.setCounters.bind(controllerScope));
         this._super();
         this.activeTab = (ENV.toBeFeatures.indexOf(this.activeTab) + 1) ? 'VMs' : this.activeTab;
         this.detailsViewOptions = {
@@ -398,6 +406,12 @@
       },
       afterActivate: function() {
         this.canEdit = this.model;
+        if ($stateParams.uuid) {
+          $rootScope.$broadcast('adjustCurrentProject', this.model);
+        }
+        this.setCounters();
+      },
+      setCounters: function() {
         this.setEventsCounter();
         this.setVmCounter();
         this.setAppCounter();
