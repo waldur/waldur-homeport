@@ -50,8 +50,8 @@
                             <!-- category -->
                             <div class="appstore-template"
                                  ng-repeat="package in AppStore.selectedCategory.packages"
-                                 ng-click="AppStore.agreementShow = true; AppStore.selectedPackageName = package.name; AppStore.selectedPackage = package"
-                                 ng-class="{'state': AppStore.selectedPackageName == package.name}">
+                                 ng-click="AppStore.selectSupportPackage(package)"
+                                 ng-class="{'state': AppStore.selectedPackage == package}">
                                 <h3 class="ng-binding">{{ package.name }}</h3>
                                 <span>
                                     {{ package.type }}
@@ -231,7 +231,7 @@
         </div>
 
     </div>
-    <div class="project-alert-message" ng-show="!AppStore.loadingProviders && !AppStore.renderStore">
+    <div class="project-alert-message" ng-if="!AppStore.loadingProviders && !AppStore.renderStore">
         <p>
             There are no working accounts available for the current project.<br />
             You can change that in
