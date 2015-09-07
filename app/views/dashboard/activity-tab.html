@@ -6,7 +6,8 @@
                  ng-class="{'active': project.selected}">
                 <h4 ng-class="{'current': project.selected}">
                     <a stoppropagation ui-sref="projects.details({uuid: project.uuid})">{{ project.name }}</a>
-                    <a visible="premiumSupport" stoppropagation ui-sref="appstore.store({category: 'SUPPORT'})" class="support">Add SLA</a>
+                    <a visible="premiumSupport" stoppropagation class="support"
+                       ng-click="DashboardController.addSupportContract(project)">Add SLA</a>
                 </h4>
             </div>
             <div ng-if="project.selected" class="body">
