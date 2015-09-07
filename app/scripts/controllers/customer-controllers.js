@@ -9,11 +9,12 @@
       'ENTITYLISTFIELDTYPES',
       '$rootScope',
       '$state',
+      'ENV',
       CustomerListController
     ]);
 
   function CustomerListController(
-    customersService, baseControllerListClass, usersService, ENTITYLISTFIELDTYPES, $rootScope, $state) {
+    customersService, baseControllerListClass, usersService, ENTITYLISTFIELDTYPES, $rootScope, $state, ENV) {
     var controllerScope = this;
     var CustomerController = baseControllerListClass.extend({
       init:function() {
@@ -62,14 +63,16 @@
               type: ENTITYLISTFIELDTYPES.name,
               link: 'organizations.details({uuid: entity.uuid})',
               showForMobile: ENTITYLISTFIELDTYPES.showForMobile
-            },
-            {
-              name: 'Plan',
-              propertyName: 'plan',
-              type: ENTITYLISTFIELDTYPES.noType,
             }
           ]
         };
+        if (ENV.toBeFeatures.indexOf('plans') == -1 || ENV.featuresVisible) {
+          this.entityOptions.list.push({
+            name: 'Plan',
+            propertyName: 'plan',
+            type: ENTITYLISTFIELDTYPES.noType
+          });
+        }
       },
       isOwnerOrStaff: function(customer) {
         if (this.currentUserIsStaff()) return true;
@@ -89,7 +92,7 @@
       afterGetList: function() {
         var vm = this;
         for (var i = 0; i < vm.list.length; i++) {
-          if (!vm.list[i].plan) {
+          if (!vm.list[i].plan && (ENV.toBeFeatures.indexOf('plans') == -1 || ENV.featuresVisible)) {
             customersService.getCurrentPlan(vm.list[i]).then(function(index, response) {
               vm.list[index].plan = response.plan_name ? response.plan_name : 'No plan';
             }.bind(null, i),
