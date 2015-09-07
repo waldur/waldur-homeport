@@ -112,8 +112,9 @@ angular.module('ncsaas')
       Oracle: 'oracle-service-project-link',
       OpenStack: 'openstack-service-project-link',
       IaaS: 'project-cloud-memberships',
-      GitLab: 'gitlab-service-project-link/',
-      DigitalOcean: 'digitalocean-service-project-link'
+      GitLab: 'gitlab-service-project-link',
+      DigitalOcean: 'digitalocean-service-project-link',
+      Amazon: 'aws-service-project-link'
     },
     requestTimeout: 1000 * 10,
 
