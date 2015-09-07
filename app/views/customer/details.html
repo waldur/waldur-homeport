@@ -16,7 +16,7 @@
                     </span>
             </div>
             <div class="buttons">
-                <a class="button" ui-sref="organizations.plans({uuid: CustomerDetailUpdate.model.uuid})">Plans</a>
+                <a class="button" visible="plans" ui-sref="organizations.plans({uuid: CustomerDetailUpdate.model.uuid})">Plans</a>
                 <a class="button" ng-click="amountTooltip = !amountTooltip; graphTooltip = false;">Top-up</a>
                 <a class="button" ng-click="graphTooltip = !graphTooltip; amountTooltip = false;">History</a>
             </div>
