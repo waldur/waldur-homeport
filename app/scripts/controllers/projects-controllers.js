@@ -152,7 +152,7 @@
     resourcesService,
     $rootScope) {
     var controllerScope = this;
-    var controllerClass = BaseProjectListController.extend({
+    var Controller = BaseProjectListController.extend({
       projectUsers: {},
       projectResources: {},
       expandableResourcesKey: 'resources',
