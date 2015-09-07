@@ -8,11 +8,12 @@
       'usersService',
       'ENTITYLISTFIELDTYPES',
       '$rootScope',
+      '$state',
       CustomerListController
     ]);
 
   function CustomerListController(
-    customersService, baseControllerListClass, usersService, ENTITYLISTFIELDTYPES, $rootScope) {
+    customersService, baseControllerListClass, usersService, ENTITYLISTFIELDTYPES, $rootScope, $state) {
     var controllerScope = this;
     var CustomerController = baseControllerListClass.extend({
       init:function() {
@@ -41,7 +42,10 @@
           },
           {
             title: 'Add provider',
-            state: 'services.create'
+            clickFunction: function(customer) {
+              $rootScope.$broadcast('adjustCurrentCustomer', customer);
+              $state.go('services.create')
+            }
           }
         ];
         this.entityOptions = {
@@ -127,7 +131,6 @@
     var controllerScope = this;
     var CustomerController = baseControllerDetailUpdateClass.extend({
       activeTab: 'resources',
-      customer: null,
       files: [],
       canEdit: false,
       currentPlan: null,
@@ -135,7 +138,7 @@
       init: function() {
         this.service = customersService;
         this.controllerScope = controllerScope;
-        this.setSignalHandler('refreshCounts', this.afterActivate.bind(controllerScope));
+        this.setSignalHandler('refreshCounts', this.setCounters.bind(controllerScope));
         this._super();
         this.detailsState = 'organizations.details';
         this.currentUser = usersService.currentUser;
@@ -207,12 +210,21 @@
       },
 
       afterActivate: function() {
+        $rootScope.$broadcast('adjustCurrentCustomer', this.model);
+
         var vm = this;
         customersService.getCurrentPlan(vm.model).then(function(response) {
           vm.currentPlan = response.plan_name;
         });
+
         controllerScope.canEdit = controllerScope.isOwnerOrStaff(controllerScope.model);
         controllerScope.updateImageUrl();
+
+        this.setCounters();
+      },
+
+      setCounters: function() {
+        var vm = this;
         $q.all([
           resourcesCountService.resources({'customer_uuid': vm.model.uuid}),
           resourcesCountService.projects({'customer': vm.model.uuid}),
