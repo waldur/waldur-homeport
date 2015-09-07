@@ -1033,8 +1033,11 @@ angular.module('ncsaas')
     .controller('ProjectSupportTabController', [
       'baseControllerListClass',
       'premiumSupportContractsService',
+      'premiumSupportPlansService',
       'currentStateService',
       'ENTITYLISTFIELDTYPES',
+      'ENV',
+      '$filter',
       '$stateParams',
       ProjectSupportTabController
     ]);
@@ -1042,8 +1045,11 @@ angular.module('ncsaas')
   function ProjectSupportTabController(
     baseControllerListClass,
     premiumSupportContractsService,
+    premiumSupportPlansService,
     currentStateService,
     ENTITYLISTFIELDTYPES,
+    ENV,
+    $filter,
     $stateParams
     ) {
     var controllerScope = this;
@@ -1061,6 +1067,7 @@ angular.module('ncsaas')
             noDataText: 'You have no SLAs yet.',
             createLink: 'appstore.store({category: "SUPPORT"})',
             createLinkText: 'Create SLA',
+            expandable: true
           },
           list: [
             {
@@ -1077,6 +1084,31 @@ angular.module('ncsaas')
             }
           ]
         };
+        this.expandableOptions = [
+          {
+            isList: false,
+            addItemBlock: false,
+            viewType: 'description',
+            items: [
+              {
+                key: 'plan_description',
+                label: 'Description'
+              },
+              {
+                key: 'plan_base_rate',
+                label: 'Base rate'
+              },
+              {
+                key: 'plan_hour_rate',
+                label: 'Hour rate'
+              },
+              {
+                key: 'plan_terms',
+                label: 'Terms'
+              }
+            ]
+          }
+        ];
       },
       setCurrentProject: function() {
         this.getList();
@@ -1091,6 +1123,14 @@ angular.module('ncsaas')
         return currentStateService.getProject().then(function(project) {
           vm.service.defaultFilter.project_uuid = project.uuid;
           return fn(filter);
+        })
+      },
+      showMore: function(contract) {
+        premiumSupportPlansService.$get(null, contract.plan).then(function(response) {
+          contract.plan_description = response.description;
+          contract.plan_terms = response.terms;
+          contract.plan_base_rate = $filter('currency')(response.base_rate, ENV.currency);
+          contract.plan_hour_rate = $filter('currency')(response.hour_rate, ENV.currency);
         })
       }
     });

@@ -2,11 +2,11 @@
     <div class="balance-block container">
         <div class="right-block">
             <div class="balance">
-                    <span class="bold">
+                    <span visible="plans" class="bold">
                         Plan:
                     </span>
-                    <span>
-                        {{ CustomerDetailUpdate.currentPlan }}
+                    <span visible="plans">
+                        {{ CustomerDetailUpdate.model.plan.name || 'Default' }}
                     </span>
                     <span class="bold">
                         Balance:

@@ -133,7 +133,6 @@
       activeTab: 'resources',
       files: [],
       canEdit: false,
-      currentPlan: null,
 
       init: function() {
         this.service = customersService;
@@ -211,11 +210,6 @@
 
       afterActivate: function() {
         $rootScope.$broadcast('adjustCurrentCustomer', this.model);
-
-        var vm = this;
-        customersService.getCurrentPlan(vm.model).then(function(response) {
-          vm.currentPlan = response.plan_name;
-        });
 
         controllerScope.canEdit = controllerScope.isOwnerOrStaff(controllerScope.model);
         controllerScope.updateImageUrl();
