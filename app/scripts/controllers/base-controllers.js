@@ -101,7 +101,6 @@
         currentStateService.setCustomer(customer);
         vm.currentCustomer = customer;
         $rootScope.$broadcast('currentCustomerUpdated');
-        var vm = this;
         vm.setFirstOrLastSelectedProject().then(function() {
           if (skipRedirect) {
             return;
