@@ -9,11 +9,12 @@
       'ENTITYLISTFIELDTYPES',
       '$rootScope',
       '$state',
+      'ENV',
       CustomerListController
     ]);
 
   function CustomerListController(
-    customersService, baseControllerListClass, usersService, ENTITYLISTFIELDTYPES, $rootScope, $state) {
+    customersService, baseControllerListClass, usersService, ENTITYLISTFIELDTYPES, $rootScope, $state, ENV) {
     var controllerScope = this;
     var CustomerController = baseControllerListClass.extend({
       init:function() {
@@ -62,15 +63,17 @@
               type: ENTITYLISTFIELDTYPES.name,
               link: 'organizations.details({uuid: entity.uuid})',
               showForMobile: ENTITYLISTFIELDTYPES.showForMobile
-            },
-            {
-              name: 'Plan',
-              propertyName: 'plan_name',
-              type: ENTITYLISTFIELDTYPES.noType,
-              emptyText: 'No plan'
             }
           ]
         };
+        if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('plans') == -1) {
+          this.entityOptions.list.push({
+            name: 'Plan',
+            propertyName: 'plan_name',
+            type: ENTITYLISTFIELDTYPES.noType,
+            emptyText: 'No plan'
+          });
+        }
       },
       isOwnerOrStaff: function(customer) {
         if (this.currentUserIsStaff()) return true;
@@ -88,10 +91,12 @@
         this._super(intance);
       },
       afterGetList: function() {
-        for (var i = 0; i < this.list.length; i++) {
-          var item = this.list[i];
-          if (item.plan) {
-            item.plan_name = item.plan.name;
+        if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('plans') == -1) {
+          for (var i = 0; i < this.list.length; i++) {
+            var item = this.list[i];
+            if (item.plan) {
+              item.plan_name = item.plan.name;
+            }
           }
         }
       },
