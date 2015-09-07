@@ -56,6 +56,7 @@
                                 <span>
                                     {{ package.type }}
                                 </span>
+                                <p>{{ package.description }}</p>
                             </div>
                             <!-- /category -->
                         </div>
@@ -184,7 +185,7 @@
                                 </li>
                                 <li>
                                     <div class="item-title">2. Read through terms and conditions</div>
-                                    <div class="conditions" ng-bind="AppStore.selectedPackage.description"></div>
+                                    <div class="conditions" ng-bind="AppStore.selectedPackage.terms"></div>
                                 </li>
                             </ul>
                         </div>

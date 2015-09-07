@@ -2,30 +2,151 @@
 
 (function() {
   angular.module('ncsaas')
+    .service('BaseProjectListController', [
+      'baseControllerListClass',
+      'projectsService',
+      'usersService',
+      'currentStateService',
+      '$rootScope',
+      'ENV',
+      'ENTITYLISTFIELDTYPES',
+      BaseProjectListController]);
+
+    function BaseProjectListController(
+      baseControllerListClass,
+      projectsService,
+      usersService,
+      currentStateService,
+      $rootScope,
+      ENV,
+      ENTITYLISTFIELDTYPES) {
+
+      var controllerClass = baseControllerListClass.extend({
+        init: function() {
+          this.service = projectsService;
+          this.checkPermissions();
+          this._super();
+          this.searchFieldName = 'name';
+          this.actionButtonsListItems = [
+            {
+              title: 'Remove',
+              clickFunction: this.remove.bind(this),
+
+              isDisabled: function(project) {
+                return !this.userCanManageProjects || this.projectHasResources(project);
+              }.bind(this),
+
+              tooltip: function(project) {
+                if (!this.userCanManageProjects) {
+                  return 'Only customer owner or staff can remove project';
+                }
+                if (this.projectHasResources(project)) {
+                 return 'Project has resources. Please remove them first';
+                }
+              }.bind(this),
+            },
+            {
+              title: 'Import resource',
+              state: 'import.import'
+            },
+          ];
+          if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('appstore') == -1) {
+            this.actionButtonsListItems.push({
+              title: 'Create resource',
+              state: 'appstore.store'
+            });
+          }
+          this.entityOptions = {
+            entityData: {
+              noDataText: 'You have no projects yet.',
+              title: 'Projects',
+              createLink: 'projects.create',
+              createLinkText: 'Add project',
+            },
+            list: [
+              {
+                name: 'Name',
+                propertyName: 'name',
+                type: ENTITYLISTFIELDTYPES.name,
+                link: 'projects.details({uuid: entity.uuid})',
+                showForMobile: ENTITYLISTFIELDTYPES.showForMobile
+              },
+              {
+                name: 'Creation date',
+                propertyName: 'created',
+                type: ENTITYLISTFIELDTYPES.dateCreated
+              }
+            ]
+          };
+          if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('premiumSupport') == -1) {
+            this.entityOptions.list.push({
+              name: 'SLA',
+              propertyName: 'plan_name',
+              type: ENTITYLISTFIELDTYPES.none,
+              emptyText: 'No plan'
+            });
+          }
+        },
+        afterGetList: function() {
+          if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('premiumSupport') == -1) {
+            for (var i = 0; i < this.list.length; i++) {
+              var item = this.list[i];
+              if (item.plan) {
+                item.plan_name = item.plan.name;
+              }
+            }
+          }
+        },
+        checkPermissions: function() {
+          var vm = this;
+          vm.userCanManageProjects = false;
+          if (usersService.currentUser.is_staff) {
+            vm.userCanManageProjects = true;
+            return;
+          }
+          currentStateService.getCustomer().then(function(customer) {
+            for (var i = 0; i < customer.owners.length; i++) {
+              if (usersService.currentUser.uuid === customer.owners[i].uuid) {
+                vm.userCanManageProjects = true;
+                break;
+              }
+            }
+          });
+        },
+        projectHasResources: function(project) {
+          for (var i = 0; i < project.quotas.length; i++) {
+            if (project.quotas[i].name == 'nc_resource_count') {
+              return project.quotas[i].usage > 0;
+            }
+          }
+        },
+        afterInstanceRemove: function(instance) {
+          $rootScope.$broadcast('refreshProjectList', {model: instance, remove: true});
+          this._super(instance);
+        },
+      });
+      return controllerClass;
+    }
+})();
+
+(function() {
+  angular.module('ncsaas')
     .controller('ProjectListController',
-      ['baseControllerListClass',
-       'projectsService',
+      ['BaseProjectListController',
        'projectPermissionsService',
-       'usersService',
        'currentStateService',
        'resourcesService',
        '$rootScope',
-       'ENV',
-       'ENTITYLISTFIELDTYPES',
        ProjectListController]);
 
   function ProjectListController(
-    baseControllerListClass,
-    projectsService,
+    BaseProjectListController,
     projectPermissionsService,
-    usersService,
     currentStateService,
     resourcesService,
-    $rootScope,
-    ENV,
-    ENTITYLISTFIELDTYPES) {
+    $rootScope) {
     var controllerScope = this;
-    var CustomerController = baseControllerListClass.extend({
+    var controllerClass = BaseProjectListController.extend({
       projectUsers: {},
       projectResources: {},
       expandableResourcesKey: 'resources',
@@ -33,65 +154,12 @@
       currentProject: null,
 
       init:function() {
-        this.service = projectsService;
         this.controllerScope = controllerScope;
         this.setSignalHandler('currentProjectUpdated', this.setCurrentProject.bind(controllerScope));
-        this.checkPermissions();
         this.setCurrentProject();
         this._super();
-        this.searchFieldName = 'name';
-        this.actionButtonsListItems = [
-          {
-            title: 'Remove',
-            clickFunction: this.remove.bind(controllerScope),
+        this.entityOptions.expandable = true;
 
-            isDisabled: function(project) {
-              return !this.userCanManageProjects || this.projectHasResources(project);
-            }.bind(controllerScope),
-
-            tooltip: function(project) {
-              if (!this.userCanManageProjects) {
-                return 'Only customer owner or staff can remove project';
-              }
-              if (this.projectHasResources(project)) {
-               return 'Project has resources. Please remove them first';
-              }
-            }.bind(controllerScope),
-          },
-          {
-            title: 'Import resource',
-            state: 'import.import'
-          },
-        ];
-        if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('appstore') == -1) {
-          this.actionButtonsListItems.push({
-            title: 'Create resource',
-            state: 'appstore.store'
-          });
-        }
-        this.entityOptions = {
-          entityData: {
-            noDataText: 'You have no projects yet.',
-            title: 'Projects',
-            createLink: 'projects.create',
-            createLinkText: 'Add project',
-            expandable: true
-          },
-          list: [
-            {
-              name: 'Name',
-              propertyName: 'name',
-              type: ENTITYLISTFIELDTYPES.name,
-              link: 'projects.details({uuid: entity.uuid})',
-              showForMobile: ENTITYLISTFIELDTYPES.showForMobile
-            },
-            {
-              name: 'Creation date',
-              propertyName: 'created',
-              type: ENTITYLISTFIELDTYPES.dateCreated
-            }
-          ]
-        };
         this.expandableOptions = [
           {
             isList: true,
@@ -145,29 +213,6 @@
           }
         ];
       },
-      checkPermissions: function() {
-        var vm = this;
-        vm.userCanManageProjects = false;
-        if (usersService.currentUser.is_staff) {
-          vm.userCanManageProjects = true;
-          return;
-        }
-        currentStateService.getCustomer().then(function(customer) {
-          for (var i = 0; i < customer.owners.length; i++) {
-            if (usersService.currentUser.uuid === customer.owners[i].uuid) {
-              vm.userCanManageProjects = true;
-              break;
-            }
-          }
-        });
-      },
-      projectHasResources: function(project) {
-        for (var i = 0; i < project.quotas.length; i++) {
-          if (project.quotas[i].name == 'nc_resource_count') {
-            return project.quotas[i].usage > 0;
-          }
-        }
-      },
       showMore: function(project) {
         if (!this.projectUsers[project.uuid]) {
           this.getUsersForProject(project.uuid);
@@ -175,10 +220,6 @@
         if (!this.projectResources[project.uuid]) {
           this.getResourcesForProject(project.uuid);
         }
-      },
-      afterInstanceRemove: function(instance) {
-        $rootScope.$broadcast('refreshProjectList', {model: instance, remove: true});
-        this._super(instance);
       },
       getUsersForProject: function(uuid, page) {
         var vm = this;
@@ -231,7 +272,7 @@
       }
     });
 
-    controllerScope.__proto__ = new CustomerController();
+    controllerScope.__proto__ = new controllerClass();
   }
 
   angular.module('ncsaas')

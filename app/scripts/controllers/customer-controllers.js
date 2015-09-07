@@ -61,8 +61,9 @@
             },
             {
               name: 'Plan',
-              propertyName: 'plan',
+              propertyName: 'plan_name',
               type: ENTITYLISTFIELDTYPES.noType,
+              emptyText: 'No plan'
             }
           ]
         };
@@ -83,18 +84,13 @@
         this._super(intance);
       },
       afterGetList: function() {
-        var vm = this;
-        for (var i = 0; i < vm.list.length; i++) {
-          if (!vm.list[i].plan) {
-            customersService.getCurrentPlan(vm.list[i]).then(function(index, response) {
-              vm.list[index].plan = response.plan_name ? response.plan_name : 'No plan';
-            }.bind(null, i),
-            function(index) {
-              vm.list[index].plan = 'No plan'
-            }.bind(null, i));
+        for (var i = 0; i < this.list.length; i++) {
+          var item = this.list[i];
+          if (item.plan) {
+            item.plan_name = item.plan.name;
           }
         }
-      }
+      },
     });
 
     controllerScope.__proto__ = new CustomerController();
@@ -332,56 +328,18 @@
 
   angular.module('ncsaas')
     .controller('CustomerProjectTabController', [
-      '$stateParams',
-      'baseControllerListClass',
-      'projectsService',
-      'ENTITYLISTFIELDTYPES',
-      '$rootScope',
-      CustomerProjectTabController
-    ]);
+      'BaseProjectListController', '$stateParams', 'projectsService', CustomerProjectTabController]);
 
-  function CustomerProjectTabController(
-    $stateParams, baseControllerListClass, projectsService, ENTITYLISTFIELDTYPES, $rootScope) {
+  function CustomerProjectTabController(BaseProjectListController, $stateParams, projectsService) {
     var controllerScope = this;
-    var Controller = baseControllerListClass.extend({
+    var Controller = BaseProjectListController.extend({
       init: function() {
-        this.service = projectsService;
         this.controllerScope = controllerScope;
+        this.service = projectsService;
         this.service.defaultFilter.customer = $stateParams.uuid;
         this.service.filterByCustomer = false;
         this._super();
-        this.service.filterByCustomer = true;
-        this.actionButtonsListItems = [
-          {
-            title: 'Delete',
-            clickFunction: this.remove.bind(controllerScope)
-          }
-        ];
-        this.entityOptions = {
-          entityData: {
-            noDataText: 'You have no projects yet.',
-            createLink: 'projects.create',
-            createLinkText: 'Add project'
-          },
-          list: [
-            {
-              name: 'Name',
-              propertyName: 'name',
-              type: ENTITYLISTFIELDTYPES.name,
-              link: 'projects.details({uuid: entity.uuid})',
-              showForMobile: ENTITYLISTFIELDTYPES.showForMobile
-            },
-            {
-              name: 'Creation date',
-              propertyName: 'created',
-              type: ENTITYLISTFIELDTYPES.dateCreated
-            }
-          ]
-        };
-      },
-      afterInstanceRemove: function(instance) {
-        $rootScope.$broadcast('refreshProjectList', {model: instance, remove: true});
-        this._super(instance);
+        this.entityOptions.entityData.title = '';
       }
     });
 
