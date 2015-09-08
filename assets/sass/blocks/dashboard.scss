@@ -266,6 +266,25 @@
               font-weight:bold;
             }
           }
+          .support {
+            border: 1px solid;
+            background-color: white;
+            border-color: #28ae60;
+            border-radius: 6px;
+            color: #28ae60;
+            padding: 4px;
+            font-size: 9pt;
+            display: inline-block;
+            margin-right: 24px;
+            position: absolute;
+            right: 0px;
+            top: -3px;
+            text-decoration: none;
+            &:hover {
+              background-color: #28ae60;
+              color: white;
+            }
+          }
           .status {
             display: inline-block;
             padding: 5px;
