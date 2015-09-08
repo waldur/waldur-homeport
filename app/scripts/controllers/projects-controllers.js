@@ -1065,7 +1065,7 @@ angular.module('ncsaas')
         this.entityOptions = {
           entityData: {
             noDataText: 'You have no SLAs yet.',
-            createLink: 'appstore.store({category: "SUPPORT"})',
+            createLink: 'appstore.store({category: "support"})',
             createLinkText: 'Create SLA',
             expandable: true
           },

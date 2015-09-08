@@ -269,7 +269,7 @@
                 packages: response
               };
               vm.categories.push(category);
-              if ($stateParams.category == 'SUPPORT') {
+              if ($stateParams.category == 'support') {
                 vm.setCategory(category);
               }
             }
