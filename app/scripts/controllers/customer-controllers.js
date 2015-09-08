@@ -69,7 +69,7 @@
         if (ENV.toBeFeatures.indexOf('plans') == -1 || ENV.featuresVisible) {
           this.entityOptions.list.push({
             name: 'Plan',
-            propertyName: 'plan',
+            propertyName: 'planName',
             type: ENTITYLISTFIELDTYPES.noType
           });
         }
@@ -92,13 +92,8 @@
       afterGetList: function() {
         var vm = this;
         for (var i = 0; i < vm.list.length; i++) {
-          if (!vm.list[i].plan && (ENV.toBeFeatures.indexOf('plans') == -1 || ENV.featuresVisible)) {
-            customersService.getCurrentPlan(vm.list[i]).then(function(index, response) {
-              vm.list[index].plan = response.plan_name ? response.plan_name : 'No plan';
-            }.bind(null, i),
-            function(index) {
-              vm.list[index].plan = 'No plan'
-            }.bind(null, i));
+          if (!vm.list[i].planName && (ENV.toBeFeatures.indexOf('plans') == -1 || ENV.featuresVisible)) {
+            vm.list[i].planName = vm.list[i].plan ? vm.list[i].plan.name : 'No plan';
           }
         }
       }
@@ -333,7 +328,16 @@
         this.controllerScope = controllerScope;
         this.service = joinService;
         this.service.defaultFilter.customer_uuid = $stateParams.uuid;
+        this.expandableOptions = [
+          {
+            isList: false,
+            addItemBlock: false,
+            viewType: 'details',
+            list:['name']
+          }
+        ];
         this._super();
+        this.entityOptions.entityData.expandable = true;
       }
     });
 

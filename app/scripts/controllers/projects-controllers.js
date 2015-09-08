@@ -883,8 +883,7 @@ angular.module('ncsaas')
           entityData: {
             noDataText: 'No providers yet',
             createLink: 'services.create',
-            createLinkText: 'Create provider',
-            expandable: true
+            createLinkText: 'Create provider'
           },
           list: [
             {
@@ -914,14 +913,7 @@ angular.module('ncsaas')
             }
           ]
         };
-        this.expandableOptions = [
-          {
-            isList: false,
-            addItemBlock: false,
-            viewType: 'details',
-            list:['name']
-          }
-        ];
+
 
         $scope.$on('searchInputChanged', this.onSearchInputChanged.bind(this));
       },

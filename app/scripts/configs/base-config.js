@@ -103,8 +103,7 @@ angular.module('ncsaas')
       'invoices',
       'payments',
       'services:provider:uuid',
-      'password',
-      'serviceLink'
+      'password'
     ],
     featuresVisible: false,
 
