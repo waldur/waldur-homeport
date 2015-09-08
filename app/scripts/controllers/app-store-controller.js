@@ -9,6 +9,7 @@
       'blockUI',
       '$state',
       '$stateParams',
+      '$rootScope',
       'premiumSupportPlansService',
       'premiumSupportContractsService',
       AppStoreController]);
@@ -22,6 +23,7 @@
     blockUI,
     $state,
     $stateParams,
+    $rootScope,
     premiumSupportPlansService,
     premiumSupportContractsService) {
     var controllerScope = this;
@@ -295,6 +297,7 @@
         contract.plan = this.selectedPackage.url;
         var vm = this;
         contract.$save().then(function(response) {
+          $rootScope.$broadcast('refreshProjectList');
           $state.go('resources.list', {tab: 'premiumSupport'});
         }, function(response) {
           vm.errors = response.data;

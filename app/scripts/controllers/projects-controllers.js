@@ -99,6 +99,8 @@
               var item = this.list[i];
               if (item.plan) {
                 item.plan_name = item.plan.name;
+              } else if (item.has_pending_contracts) {
+                item.plan_name = 'Pending';
               }
             }
           }
