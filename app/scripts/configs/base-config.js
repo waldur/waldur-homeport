@@ -84,6 +84,7 @@ angular.module('ncsaas')
       'password',
       'serviceLink',
       'premiumSupport',
+      'localSignup',
     ],
     featuresVisible: false,
 
