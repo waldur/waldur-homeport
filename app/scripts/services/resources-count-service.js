@@ -39,6 +39,7 @@
       'project-cloud-memberships': factory('project-cloud-memberships'),
       'digitalocean-service-project-link': factory('digitalocean-service-project-link'),
       'services': factory('service-items'),
+      'premiumSupportContracts': factory('premium-support-contracts'),
       'aws-service-project-link': factory('aws-service-project-link'),
       'openstack-service-project-link': factory('openstack-service-project-link')
     }

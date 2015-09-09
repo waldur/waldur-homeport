@@ -6,6 +6,11 @@
                  ng-class="{'active': project.selected}">
                 <h4 ng-class="{'current': project.selected}">
                     <a stoppropagation ui-sref="projects.details({uuid: project.uuid})">{{ project.name }}</a>
+                    <a visible="premiumSupport" stoppropagation class="support" ng-if="!project.plan"
+                       ng-click="DashboardController.addSupportContract(project)">Add SLA</a>
+                    <a visible="premiumSupport" stoppropagation class="support"
+                       ng-if="project.plan || project.has_pending_contracts"
+                       ui-sref="projects.details({uuid: project.uuid, tab: 'premiumSupport'})">Show SLAs</a>
                 </h4>
             </div>
             <div ng-if="project.selected" class="body">

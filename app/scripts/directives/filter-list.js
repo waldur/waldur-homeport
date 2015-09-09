@@ -45,7 +45,9 @@
 
           controller.currentPage = 1;
           controller.service.page = 1;
-          controller.getList();
+          var searchFilter = {};
+          searchFilter[controller.searchFieldName] = controller.searchInput;
+          controller.getList(searchFilter);
         }
 
         function selectAll() {

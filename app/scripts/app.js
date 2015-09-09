@@ -72,6 +72,21 @@
           }
         })
 
+        .state('home.activate', {
+          url: 'activate/:user_uuid/:token/',
+          views: {
+            'appHeader@home' : {
+              templateUrl: 'views/partials/site-header.html',
+            },
+            'appContent@home' : {
+              templateUrl: 'views/home/activate.html',
+            }
+          },
+          resolve: {
+            authenticated: notLoggedCheck
+          }
+        })
+
         .state('initialdata', {
           url: initialDataStatePath,
           templateUrl: 'views/partials/base.html',
@@ -244,7 +259,7 @@
         })
 
         .state('appstore.store', {
-          url: '',
+          url: ':category',
           views: {
             'appContent': {
               templateUrl: 'views/appstore/store.html',
@@ -324,9 +339,12 @@
             'tabBackups@projects.details' : {
               templateUrl: 'views/resource/tab-backups.html',
             },
+            'tabPremiumSupport@projects.details': {
+              templateUrl: 'views/project/tab-support.html',
+            },
             'appHeader': {
               templateUrl: 'views/partials/app-header.html',
-            }
+            },
           },
           resolve: {
             authenticated: authCheck
@@ -639,6 +657,9 @@
             },
             'tabProviders@resources.list' : {
               templateUrl: 'views/resource/tab-providers.html',
+            },
+            'tabPremiumSupport@resources.list': {
+              templateUrl: 'views/project/tab-support.html',
             },
             'appHeader': {
               templateUrl: 'views/partials/app-header.html',

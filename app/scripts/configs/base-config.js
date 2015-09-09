@@ -29,20 +29,7 @@ angular.module('ncsaas')
     // build version
     buildId: 'develop',
 
-    addonsList : [
-      {
-        name: 'Bronze support',
-        description: 'Phone assistance during working hours'
-      },
-      {
-        name: 'Golden support',
-        description: 'Phone assistance 24/7'
-      },
-      {
-        name: 'Backup',
-        options: ['Daily', 'Weekly']
-      }
-    ],
+    currency: '$',
     appStoreCategories: [
       {
         name: 'VMs',
@@ -53,15 +40,6 @@ angular.module('ncsaas')
         name: 'APPLICATIONS',
         type: 'provider',
         services: ['Oracle', 'GitLab']
-      },
-      {
-        name: 'SUPPORT',
-        type: 'package',
-        packages: [
-          {name: 'Support package A', type: 'low SLA level'},
-          {name: 'Support package B', type: 'medium SLA level'},
-          {name: 'Support package C', type: 'high SLA level'}
-        ]
       }
     ],
     serviceCategories: [
@@ -103,7 +81,10 @@ angular.module('ncsaas')
       'invoices',
       'payments',
       'services:provider:uuid',
-      'password'
+      'password',
+      'serviceLink',
+      'premiumSupport',
+      'localSignup'
     ],
     featuresVisible: false,
 

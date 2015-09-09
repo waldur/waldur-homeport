@@ -6,7 +6,7 @@
                         Plan:
                     </span>
                     <span visible="plans">
-                        {{ CustomerDetailUpdate.currentPlan }}
+                        {{ CustomerDetailUpdate.model.plan.name || 'Default' }}
                     </span>
                     <span class="bold">
                         Balance:

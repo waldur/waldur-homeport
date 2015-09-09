@@ -43,7 +43,6 @@
       $authProvider.httpInterceptor = false;
 
       $authProvider.loginUrl = ENV.apiEndpoint + 'api-auth/password/';
-      $authProvider.signupUrl = ENV.apiEndpoint + 'api-auth/register/';
 
       $authProvider.facebook({
         clientId: ENV.facebookClientId,
