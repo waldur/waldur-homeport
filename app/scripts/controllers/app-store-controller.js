@@ -1,11 +1,31 @@
 (function() {
   angular.module('ncsaas')
     .controller('AppStoreController', [
-      'baseControllerAddClass', 'servicesService', 'currentStateService', 'ENV', 'defaultPriceListItemsService', 'blockUI',
-      '$state', AppStoreController]);
+      'baseControllerAddClass',
+      'servicesService',
+      'currentStateService',
+      'ENV',
+      'defaultPriceListItemsService',
+      'blockUI',
+      '$state',
+      '$stateParams',
+      '$rootScope',
+      'premiumSupportPlansService',
+      'premiumSupportContractsService',
+      AppStoreController]);
 
-  function AppStoreController(baseControllerAddClass, servicesService, currentStateService, ENV,
-                              defaultPriceListItemsService, blockUI, $state) {
+  function AppStoreController(
+    baseControllerAddClass,
+    servicesService,
+    currentStateService,
+    ENV,
+    defaultPriceListItemsService,
+    blockUI,
+    $state,
+    $stateParams,
+    $rootScope,
+    premiumSupportPlansService,
+    premiumSupportContractsService) {
     var controllerScope = this;
     var Controller = baseControllerAddClass.extend({
       UNIQUE_FIELDS: {
@@ -18,6 +38,8 @@
         field: 'field',
         integer: 'integer'
       },
+
+      currency: ENV.currency,
 
       secondStep: false,
       thirdStep: false,
@@ -36,6 +58,8 @@
       compare: [],
       providers: [],
       services: {},
+      renderStore: false,
+      loadingProviders: true,
       categoryProviders: {},
 
       configureStepNumber: 4,
@@ -52,7 +76,6 @@
         this.controllerScope = controllerScope;
         this.setSignalHandler('currentProjectUpdated', this.setCurrentProject.bind(controllerScope));
         this._super();
-        this.listState = 'resources.list';
       },
       activate:function() {
         var vm = this;
@@ -70,8 +93,10 @@
         this.selectedService = {};
         this.selectedServiceName = null;
         this.resourceTypesBlock = false;
+        this.selectedResourceType = null;
         this.thirdStep = false;
         this.providers = this.categoryProviders[this.selectedCategory.name];
+        this.resetPriceItems();
       },
       setService:function(service) {
         this.selectedService = this.servicesList[service];
@@ -145,35 +170,43 @@
         }
       },
       setPriceItem: function(name, choice) {
-        var itemTypes,
-          index,
-          price = 0,
-          item;
-
-        itemTypes = this.priceItems.map(function(item) {
-          return item.type;
-        });
-        index = itemTypes.indexOf(name);
-        if (index + 1) {
-          this.priceItems.splice(index, 1);
-        }
+        this.deletePriceItem(name);
+        var display_name = choice.display_name;
+        var price = this.findPrice(name, display_name);
+        this.pushPriceItem(name, display_name, price);
+      },
+      findPrice: function(name, display_name) {
         for (var i = 0; i < this.defaultPriceListItems.length; i++) {
           var priceItem = this.defaultPriceListItems[i];
           if (priceItem.item_type == name
-            && ((choice.display_name.indexOf(priceItem.key) > -1)
+            && ((display_name.indexOf(priceItem.key) > -1)
             || (priceItem.resource_content_type.indexOf(this.selectedResourceType.toLowerCase()) > -1))
           ) {
-            price = priceItem.value;
-            break;
+            return priceItem.value;
           }
         }
-        item = {
-          type: name,
-          name: choice.display_name,
+      },
+      pushPriceItem: function(type, name, price) {
+        this.priceItems.push({
+          type: type,
+          name: name,
           price: price
-        };
-        this.priceItems.push(item);
+        });
         this.countTotal();
+      },
+      deletePriceItem: function(name) {
+        var itemTypes = this.priceItems.map(function(item) {
+          return item.type;
+        });
+
+        var index = itemTypes.indexOf(name);
+        if (index + 1) {
+          this.priceItems.splice(index, 1);
+        }
+      },
+      resetPriceItems: function() {
+        this.priceItems = [];
+        this.total = 0;
       },
       countTotal: function() {
         this.total = 0;
@@ -197,6 +230,7 @@
         vm.instance = null;
         vm.renderStore = false;
         vm.countTotal();
+        vm.loadingProviders = true;
         var myBlockUI = blockUI.instances.get('store-content');
         myBlockUI.start();
         currentStateService.getProject().then(function(response) {
@@ -213,15 +247,61 @@
               ) {
                 vm.categoryProviders[category.name].push(service.type);
                 vm.services[service.type] = service;
-
               }
             }
-            if (vm.categoryProviders[category.name].length > 0 || category.name == 'SUPPORT') {
+            if (vm.categoryProviders[category.name].length > 0) {
               vm.categories.push(category);
               vm.renderStore = true;
             }
           }
+          vm.addSupportCategory();
           myBlockUI.stop();
+        });
+      },
+      addSupportCategory: function() {
+        var vm = this;
+        if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('premiumSupport') == -1) {
+          premiumSupportPlansService.getList().then(function(response) {
+            vm.loadingProviders = false;
+            if (response.length != 0) {
+              vm.renderStore = true;
+              var category = {
+                type: 'package',
+                name: 'SUPPORT',
+                packages: response
+              };
+              vm.categories.push(category);
+              if ($stateParams.category == 'support') {
+                vm.setCategory(category);
+              }
+            }
+          });
+        } else {
+          vm.loadingProviders = false;
+        }
+      },
+      selectSupportPackage: function(supportPackage) {
+        this.agreementShow = true;
+        this.selectedPackage = supportPackage;
+        this.selectedServiceName = 'Total';
+
+        var type = 'Support plan';
+        var display_name = supportPackage.name;
+
+        this.deletePriceItem(type);
+        this.pushPriceItem(type, display_name, supportPackage.base_rate);
+      },
+      signContract: function() {
+        var contract = premiumSupportContractsService.$create();
+        contract.project = this.currentProject.url;
+        contract.plan = this.selectedPackage.url;
+        var vm = this;
+        contract.$save().then(function(response) {
+          $rootScope.$broadcast('refreshProjectList');
+          $state.go('resources.list', {tab: 'premiumSupport'});
+        }, function(response) {
+          vm.errors = response.data;
+          vm.onError();
         });
       },
       canSave: function() {
@@ -245,6 +325,9 @@
           }
         }
         this.errorFlash(message);
+      },
+      successRedirect: function() {
+        $state.go('resources.list', {tab: 'VMs'});
       },
       setCompare: function(categoryName) {
         var index = this.compare.indexOf(categoryName);

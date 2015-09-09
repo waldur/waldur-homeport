@@ -17,8 +17,11 @@
         scope.resetCache = resetCache;
         scope.processing = false;
         function resetCache() {
+          var filter = {};
           scope.service.cacheReset = true;
-          var getListPromise = scope.controller.getList();
+          scope.service.clearAllCacheForCurrentEndpoint();
+          filter[scope.controller.searchFieldName] = scope.controller.searchInput;
+          var getListPromise = scope.controller.getList(filter);
           if (getListPromise && getListPromise.then) {
             scope.processing = true;
             getListPromise.then(function() {

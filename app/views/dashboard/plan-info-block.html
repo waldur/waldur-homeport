@@ -5,7 +5,7 @@
                         Plan:
                     </span>
                     <span class="plan-spacing" visible="plans" ng-click="quotasTooltip = !quotasTooltip;">
-                        {{ DashboardController.currentPlan }}
+                        {{ DashboardController.currentPlan || 'Default'  }}
                     </span>
                     <span class="bold">
                         Balance:

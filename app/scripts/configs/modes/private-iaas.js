@@ -7,7 +7,9 @@ angular.module('ncsaas')
       'plans',
       'providers',
       'services',
-      'eventlog'
+      'eventlog',
+      'backups',
+      'localSignup'
     ],
     featuresVisible: false,
     appStoreCategories: [
