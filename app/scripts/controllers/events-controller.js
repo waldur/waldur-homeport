@@ -153,11 +153,11 @@
       activate: function() {
         var vm = this;
         currentStateService.getCustomer().then(function(response) {
-          vm.currentPlan = response.plan.name;
+          vm.currentPlan = response.plan ? response.plan.name : 'Default';
           // XXX replace when backend will send proper quotas names
-          vm.currentPlanQuotas = response.plan.quotas.map(function(elem){
+          vm.currentPlanQuotas = response.plan ? response.plan.quotas.map(function(elem){
             return { name: elem.name.replace(/nc_|_count/gi,'') + (elem.value > 1 ? 's' : ''), value: elem.value };
-          });
+          }) : [];
         });
       }
     });
