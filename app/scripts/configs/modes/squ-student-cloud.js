@@ -9,7 +9,8 @@ angular.module('ncsaas')
       'password',
       'services',
       'providers',
-      'premiumSupport'
+      'premiumSupport',
+      'import'
     ],
     featuresVisible: false,
     appStoreCategories: [
