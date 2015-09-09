@@ -369,6 +369,10 @@
       .bold {
         font-weight: bold;
       }
+      .plan-spacing {
+        margin-right: 7px;
+        cursor: pointer;
+      }
     }
     .tooltip {
       position: absolute;
@@ -423,6 +427,15 @@
       &.amount-tooltip {
         width: 284px;
         height: 165px;
+      }
+      &.quota-tooltip {
+        right: 28px;
+        top: 50px;
+        .close {
+          position: absolute;
+          right: 10px;
+          top: 10px;
+        }
       }
       .tooltip-title {
 

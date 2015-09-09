@@ -134,11 +134,37 @@
   }
 
   angular.module('ncsaas')
-    .controller('DashboardIndexController', ['$scope', '$stateParams', DashboardIndexController]);
+    .controller('DashboardIndexController', [
+      '$scope',
+      '$stateParams',
+      'baseControllerClass',
+      'currentStateService',
+      DashboardIndexController]);
 
-    function DashboardIndexController($scope, $stateParams) {
-      $scope.activeTab = $stateParams.tab || 'activity';
-    }
+  function DashboardIndexController($scope, $stateParams, baseControllerClass, currentStateService) {
+    var controllerScope = this;
+    var EventController = baseControllerClass.extend({
+      currentPlan: null,
+      currentPlanQuotas: [],
+      init: function() {
+        $scope.activeTab = $stateParams.tab || 'activity';
+        this.activate();
+      },
+      activate: function() {
+        var vm = this;
+        currentStateService.getCustomer().then(function(response) {
+          vm.currentPlan = response.plan.name;
+          // XXX replace when backend will send proper quotas names
+          vm.currentPlanQuotas = response.plan.quotas.map(function(elem){
+            return { name: elem.name.replace(/nc_|_count/gi,'') + (elem.value > 1 ? 's' : ''), value: elem.value };
+          });
+        });
+      }
+    });
+
+    controllerScope.__proto__ = new EventController();
+  }
+
 
   angular.module('ncsaas')
     .controller('DashboardCostController', [

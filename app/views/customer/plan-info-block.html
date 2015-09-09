@@ -1,0 +1,52 @@
+<div class="balance-block container">
+    <div class="right-block">
+        <div class="balance">
+            <span visible="plans" class="bold">
+                Plan:
+            </span>
+            <span class="plan-spacing" visible="plans" ng-click="quotasTooltip = !quotasTooltip; graphTooltip = false; amountTooltip = false;">
+                {{ CustomerDetailUpdate.currentPlan }}
+            </span>
+            <span class="bold">
+                Balance:
+            </span>
+            <span>
+                $100
+            </span>
+        </div>
+        <div class="tooltip quota-tooltip" ng-show="quotasTooltip">
+            <div class="tooltip-title">
+                <h3>Current quotas: </h3>
+                <div class="close" ng-click="quotasTooltip = false;"></div>
+                <div class="clear"></div>
+            </div>
+            <div ng-repeat="quota in CustomerDetailUpdate.currentPlanQuotas">
+                <div>{{quota.name}}: {{quota.value}}</div>
+            </div>
+        </div>
+        <div class="buttons">
+            <a class="button" visible="plans" ui-sref="organizations.plans({uuid: CustomerDetailUpdate.model.uuid})">Plans</a>
+            <a class="button" ng-click="amountTooltip = !amountTooltip; graphTooltip = false; quotasTooltip = false">Top-up</a>
+            <a class="button" ng-click="graphTooltip = !graphTooltip; amountTooltip = false; quotasTooltip = false">History</a>
+        </div>
+        <div class="tooltip graph-tooltip" ng-show="graphTooltip">
+            <canvas chart-options="CustomerDetailUpdate.chartOptions"
+                    chart-data="CustomerDetailUpdate.chartData"
+                    tc-chartjs chart-type="line"
+                    width="400" height="75"></canvas>
+        </div>
+        <div class="tooltip amount-tooltip" ng-show="amountTooltip">
+            <div class="tooltip-title">
+                <h3>Add amount</h3>
+                <div class="close" ng-click="amountTooltip = false;"></div>
+                <div class="clear"></div>
+            </div>
+            <select name="amount" id="amount">
+                <option value="1">1</option>
+            </select>
+            <a class="button">
+                Add credit
+            </a>
+        </div>
+    </div>
+</div>

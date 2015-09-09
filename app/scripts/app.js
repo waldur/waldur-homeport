@@ -194,6 +194,9 @@
             },
             'eventTypes@dashboard.index': {
               templateUrl: 'views/events/event-types.html',
+            },
+            'planInfoBlock@dashboard.index': {
+              templateUrl: 'views/dashboard/plan-info-block.html',
             }
           },
           resolve: {
@@ -546,6 +549,9 @@
             },
             'appHeader': {
               templateUrl: 'views/partials/app-header.html',
+            },
+            'planInfoBlock@organizations.details': {
+              templateUrl: 'views/customer/plan-info-block.html',
             }
           },
           resolve: {

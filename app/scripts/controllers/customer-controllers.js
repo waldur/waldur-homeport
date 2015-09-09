@@ -141,6 +141,7 @@
       files: [],
       canEdit: false,
       currentPlan: null,
+      currentPlanQuotas: [],
 
       init: function() {
         this.service = customersService;
@@ -220,8 +221,10 @@
         $rootScope.$broadcast('adjustCurrentCustomer', this.model);
 
         var vm = this;
-        customersService.getCurrentPlan(vm.model).then(function(response) {
-          vm.currentPlan = response.plan_name;
+        vm.currentPlan = vm.model.plan.name;
+        // XXX replace when backend will send proper quotas names
+        vm.currentPlanQuotas = vm.model.plan.quotas.map(function(elem){
+          return { name: elem.name.replace(/nc_|_count/gi,'') + (elem.value > 1 ? 's' : ''), value: elem.value };
         });
 
         controllerScope.canEdit = controllerScope.isOwnerOrStaff(controllerScope.model);
