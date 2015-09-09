@@ -24,12 +24,10 @@
           : defaultView;
         if (scope.expandableOptions.getContent) {
           scope.expandableOptions.getContent(scope.expandableElement.url).then(function(response) {
-            if (!response.shared) {
-              scope.model = response;
-              scope.expandableOptions.getFieldList(response.url).then(function(fields) {
-                scope.expandableOptions.list = fields;
-              });
-            }
+            scope.model = response;
+            scope.expandableOptions.getFieldList(response.url).then(function(fields) {
+              scope.list = fields;
+            });
           });
         }
       }

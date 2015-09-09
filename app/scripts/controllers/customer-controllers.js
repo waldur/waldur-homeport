@@ -328,6 +328,7 @@
     var controllerScope = this;
     var Controller = baseServiceListController.extend({
       options: {},
+      lastModel: {},
       init: function() {
         this.controllerScope = controllerScope;
         this.service = joinService;
@@ -341,12 +342,14 @@
             title: 'Settings',
             getFieldList: function(url) {
               return servicesService.getOption(url).then(function(response) {
-                var put = response.actions.PUT;
-                vm.options = put;
                 var fields = [];
-                for (var fieldName in put) {
-                  if (!put[fieldName].read_only && fieldName != 'name' && fieldName != 'dummy') {
-                    fields.push({label: put[fieldName].label, name: fieldName});
+                if (response.actions) {var put = response.actions.PUT;
+                  vm.options = put;
+                  for (var fieldName in put) {
+                    if (!put[fieldName].read_only && fieldName != 'name') {
+                      put[fieldName].name = fieldName;
+                      fields.push(put[fieldName]);
+                    }
                   }
                 }
                 return fields;
@@ -391,6 +394,25 @@
               vm.errorFlash(message);
             }
           });
+      },
+      showSave: function(model) {
+        if (model) {
+          if (!this.lastModel[model.uuid]) {
+            this.lastModel[model.uuid] = model;
+            return false;
+          }
+          if (this.lastModel[model.uuid] != model) {
+            var fields = model.toJSON();
+            for (var fieldName in fields) {
+              var lastValue = this.lastModel[model.uuid][fieldName] ? this.lastModel[model.uuid][fieldName] : '';
+              var nextValue = model[fieldName] ? model[fieldName] : '';
+              if (lastValue != nextValue) {
+                return true;
+              }
+            }
+          }
+        }
+        return false;
       }
     });
 
