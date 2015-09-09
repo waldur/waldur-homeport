@@ -4,7 +4,8 @@ angular.module('ncsaas')
   .constant('MODE', {
     modeName: 'modePublicBrokerage',
     toBeFeatures: [
-      'eventlog'
+      'eventlog',
+      'localSignup'
     ],
     featuresVisible: false
   });
