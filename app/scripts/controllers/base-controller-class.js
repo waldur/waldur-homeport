@@ -96,8 +96,8 @@
       },
       afterGetList: function() {},
       generalSearchChanged: function(event, text) {
-        this.searchInput = text;
-        this.search();
+        this.controllerScope.searchInput = text;
+        this.controllerScope.search();
       },
       search: function() {
         var vm = this;
