@@ -318,26 +318,79 @@
       '$stateParams',
       'baseServiceListController',
       'joinService',
+      'joinServiceProjectLinkService',
+      'servicesService',
       CustomerServiceTabController
     ]);
 
-  function CustomerServiceTabController($stateParams, baseServiceListController, joinService) {
+  function CustomerServiceTabController(
+    $stateParams, baseServiceListController, joinService, joinServiceProjectLinkService, servicesService) {
     var controllerScope = this;
     var Controller = baseServiceListController.extend({
+      options: {},
       init: function() {
         this.controllerScope = controllerScope;
         this.service = joinService;
         this.service.defaultFilter.customer_uuid = $stateParams.uuid;
+        var vm = this;
         this.expandableOptions = [
           {
             isList: false,
             addItemBlock: false,
             viewType: 'details',
-            list:['name']
+            title: 'Settings',
+            getFieldList: function(url) {
+              return servicesService.getOption(url).then(function(response) {
+                var put = response.actions.PUT;
+                vm.options = put;
+                var fields = [];
+                for (var fieldName in put) {
+                  if (!put[fieldName].read_only && fieldName != 'name' && fieldName != 'dummy') {
+                    fields.push({label: put[fieldName].label, name: fieldName});
+                  }
+                }
+                return fields;
+              });
+            },
+            getContent: function(url) {
+              return servicesService.$get(null, url).then(function(provider) {
+                return servicesService.$get(null, provider.settings);
+              });
+            }
           }
         ];
         this._super();
+        this.entityOptions.list[0].type = 'editable';
         this.entityOptions.entityData.expandable = true;
+      },
+      afterGetList: function() {
+        var vm = this;
+        if ($stateParams.providerUuid && $stateParams.providerType) {
+          servicesService.getServicesList().then(function(services) {
+            var endpoint = services[$stateParams.providerType].url;
+            servicesService.$get($stateParams.providerUuid, endpoint).then(function(provider) {
+              if (provider.customer.indexOf($stateParams.uuid) + 1) {
+                provider.expandItemOpen = true;
+                vm.list = [provider].concat(vm.list);
+                vm.currentProvider = provider;
+              }
+            });
+          });
+        }
+      },
+      update: function(model) {
+        var vm = this;
+        return joinServiceProjectLinkService.$update(null, model.url, model).then(
+          function() {},
+          function(errors) {
+            var message = '';
+            for (var name in errors.data) {
+              message += (vm.options[name] ? vm.options[name].label : name) + ': ' + errors.data[name];
+            }
+            if (message) {
+              vm.errorFlash(message);
+            }
+          });
       }
     });
 

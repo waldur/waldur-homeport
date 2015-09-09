@@ -508,7 +508,7 @@
         })
 
         .state('organizations.details', {
-          url: ':uuid/:tab',
+          url: ':uuid/:tab-:providerUuid-:providerType',
           views: {
             'appContent': {
               templateUrl: 'views/customer/details.html',

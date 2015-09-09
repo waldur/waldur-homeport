@@ -1,14 +1,15 @@
-<section detailscontent="checkbox avatar">
+<section>
     <header>
+        <h3 ng-show="expandableOptions.title" class="title-expandable">{{ expandableOptions.title }}</h3>
         <span ng-repeat="item in expandableOptions.list" class="details-expandable">
-            <span editable-text="expandableElement[item]"
-                  e-form="rowform"
+            <span editable-text="model[item.name]"
+                  e-form="rowformexpand"
                   buttons="no"
-                  onaftersave="expandableList.update(expandableElement)"
+                  onaftersave="expandableList.update(model)"
                   title="Click to edit">
-                {{ expandableElement[item] }}
+                {{ item.label }}: {{ model[item.name] || 'empty' }}
             </span>
-        <div class="icon" ng-click="rowform.$show()" ng-hide="rowform.$visible"></div>
+        <div class="icon" ng-click="rowformexpand.$show()" ng-hide="rowformexpand.$visible"></div>
         </span>
     </header>
 </section>
