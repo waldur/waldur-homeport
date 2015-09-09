@@ -112,6 +112,15 @@
             } // &:before
         } // span
     } // &.google
+    &.email {
+        color: white;
+        background-color: #62b651;
+        span {
+            &:before {
+                content: '\f0e0';
+            } // &:before
+        } // span
+    } // &.email
 } // button-social
 
 .button-simple {

@@ -1,5 +1,5 @@
-<div class="site-welcome login " ng-controller="AuthController as auth">
-    <div class="login-box" loginboxcontext>
+<div class="site-welcome login" ng-controller="AuthController as auth">
+    <div class="login-box" loginboxcontext ng-if="!auth.isSignupFormVisible">
         <div class="white-box">
             <h3 class="app-title centered">Login</h3>
             <ul class="error-list" ng-if="auth.errors">
@@ -9,10 +9,10 @@
             </ul>
             <form ng-submit="auth.signin()" form-autofill-fix>
                 <div class="row-login">
-                    <input type="text" ng-model="auth.user.username">
+                    <input type="text" ng-model="auth.user.username" placeholder="Username">
                 </div>
                 <div class="row-login">
-                    <input type="password" ng-model="auth.user.password">
+                    <input type="password" ng-model="auth.user.password" placeholder="Password">
                 </div>
                 <div class="decision">
                     <div class="col">
@@ -31,6 +31,40 @@
                     <span>Facebook</span>
                 </a>
             </div>
+            <div class="row-login" visible="localSignup">
+                <a class="button-social email" ng-click="auth.isSignupFormVisible = true">
+                    <span>Email</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="login-box" loginboxcontext ng-if="auth.isSignupFormVisible" visible="localSignup">
+        <div class="white-box">
+            <h3 class="app-title centered">Signup</h3>
+            <ul class="error-list" ng-if="auth.errors">
+                <li ng-repeat="error in auth.getErrors()">
+                    <span class="error error-standard label">{{ error }}</span>
+                </li>
+            </ul>
+            <form ng-submit="auth.signup()" form-autofill-fix>
+                <div class="row-login">
+                    <input type="text" ng-model="auth.user.username" placeholder="Username">
+                </div>
+                <div class="row-login">
+                    <input type="text" ng-model="auth.user.full_name" placeholder="Full name">
+                </div>
+                <div class="row-login">
+                    <input type="text" ng-model="auth.user.email" placeholder="Email">
+                </div>
+                <div class="row-login">
+                    <input type="password" ng-model="auth.user.password" placeholder="Password">
+                </div>
+                <div class="decision">
+                    <div class="col">
+                        <button class="button-login" type="submit">Submit</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
