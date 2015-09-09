@@ -8,7 +8,8 @@ angular.module('ncsaas')
       'backups',
       'password',
       'services',
-      'providers'
+      'providers',
+      'premiumSupport'
     ],
     featuresVisible: false,
     appStoreCategories: [
