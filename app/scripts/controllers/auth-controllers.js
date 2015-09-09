@@ -32,9 +32,6 @@
           this.errors = response.data;
         }
       },
-      hasErrors: function() {
-        return this.errors;
-      },
       getErrors: function() {
         var vm = this;
         if (vm.errors !== undefined) {
@@ -52,10 +49,47 @@
         } else {
           return '';
         }
+      },
+      signup: function() {
+        var vm = this;
+        vm.errors = {};
+        authService.signup(vm.user).then(function() {
+          vm.infoFlash('Confirmation mail has been sent. Please check your inbox!');
+          vm.isSignupFormVisible = false;
+          vm.user = {};
+        }, function(response) {
+          vm.errors = response.data;
+        });
       }
     });
 
     controllerScope.__proto__ = new Controller();
   }
 
+})();
+
+(function() {
+  angular.module('ncsaas')
+    .controller('ActivationController', ['$state', '$stateParams', 'authService', 'baseControllerClass', ActivationController]);
+
+  function ActivationController($state, $stateParams, authService, baseControllerClass) {
+    var controllerScope = this;
+    var Controller = baseControllerClass.extend({
+      init: function() {
+        this._super();
+        var vm = this;
+        authService.activate({
+          user_uuid: $stateParams.user_uuid,
+          token: $stateParams.token
+        }).then(function() {
+          vm.infoFlash('Account has been activated');
+          $state.go('dashboard.index');
+        }, function(response) {
+          vm.errorFlash('Unable to activate account');
+        });
+      },
+    });
+
+    controllerScope.__proto__ = new Controller();
+  }
 })();

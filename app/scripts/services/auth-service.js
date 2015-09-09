@@ -10,41 +10,32 @@
 
     vm.signin = signin;
     vm.signup = signup;
+    vm.activate = activate;
     vm.signout = signout;
     vm.isAuthenticated = isAuthenticated;
     vm.authenticate = authenticate;
 
     function signin(username, password) {
-      var request = $auth.login({username: username, password: password})
-        .then(loginSuccess);
-
-      return request;
+      return $auth.login({username: username, password: password}).then(loginSuccess);
     }
 
     function authenticate(provider) {
-      var request = $auth.authenticate(provider)
-        .then(loginSuccess);
-
-      return request;
+      return $auth.authenticate(provider).then(loginSuccess);
     }
 
-    function loginSuccess(data) {
-      vm.user = data.data;
+    function loginSuccess(response) {
+      vm.user = response.data;
       setAuthHeader(vm.user.token);
+      $auth.setToken(vm.user.token);
       vm.user.isAuthenticated = true;
     }
 
-    function signup(username, password) {
-      var request = $auth.signup({username: username, password: password})
-        .then(success);
+    function signup(user) {
+      return $http.post(ENV.apiEndpoint + 'api-auth/registration/', user);
+    }
 
-      function success(data) {
-        vm.user = data;
-        setAuthHeader(vm.user.token);
-        vm.user.isAuthenticated = true;
-      }
-
-      return request;
+    function activate(user) {
+      return $http.post(ENV.apiEndpoint + 'api-auth/activation/', user).then(loginSuccess);
     }
 
     $rootScope.$on('authService:signout', function () {

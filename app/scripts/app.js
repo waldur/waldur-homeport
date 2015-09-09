@@ -72,6 +72,21 @@
           }
         })
 
+        .state('home.activate', {
+          url: 'activate/:user_uuid/:token/',
+          views: {
+            'appHeader@home' : {
+              templateUrl: 'views/partials/site-header.html',
+            },
+            'appContent@home' : {
+              templateUrl: 'views/home/activate.html',
+            }
+          },
+          resolve: {
+            authenticated: notLoggedCheck
+          }
+        })
+
         .state('initialdata', {
           url: initialDataStatePath,
           templateUrl: 'views/partials/base.html',
