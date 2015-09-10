@@ -12,6 +12,7 @@ angular.module('ncsaas')
       'localSignup',
       'users',
       'people',
+      'import',
       'servicesadd'
     ],
     featuresVisible: false,

@@ -12,7 +12,8 @@ angular.module('ncsaas')
       'premiumSupport',
       'users',
       'people',
-      'servicesadd'
+      'servicesadd',
+      'import'
     ],
     featuresVisible: false,
     appStoreCategories: [
