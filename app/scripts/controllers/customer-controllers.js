@@ -138,8 +138,6 @@
       activeTab: 'resources',
       files: [],
       canEdit: false,
-      currentPlan: null,
-      currentPlanQuotas: [],
 
       init: function() {
         this.service = customersService;
@@ -148,25 +146,7 @@
         this._super();
         this.detailsState = 'organizations.details';
         this.currentUser = usersService.currentUser;
-        this.chartData = {
-          labels: ["Monday", "Tuesday", "Wednsday", "Thursday", "Friday", "Saturday", "Sunday"],
-          datasets: [
-            {
-              label: "Events",
-              fillColor: "rgba(220,220,220,0.2)",
-              strokeColor: "rgba(220,220,220,1)",
-              pointColor: "rgba(220,220,220,1)",
-              pointStrokeColor: "#fff",
-              pointHighlightFill: "#fff",
-              pointHighlightStroke: "rgba(220,220,220,1)",
-              data: [65, 59, 80, 81, 56, 55, 40]
-            }
-          ]
-        };
-        this.chartOptions = {
-          responsive: true,
-          scaleShowGridLines : false
-        };
+
         this.detailsViewOptions = {
           title: 'Organization',
           activeTab: $stateParams.tab ? $stateParams.tab : this.activeTab,
@@ -217,13 +197,6 @@
 
       afterActivate: function() {
         $rootScope.$broadcast('adjustCurrentCustomer', this.model);
-
-        var vm = this;
-        vm.currentPlan = vm.model.plan.name;
-        // XXX replace when backend will send proper quotas names
-        vm.currentPlanQuotas = vm.model.plan.quotas.map(function(elem){
-          return { name: elem.name.replace(/nc_|_count/gi,'') + (elem.value > 1 ? 's' : ''), value: elem.value };
-        });
 
         controllerScope.canEdit = controllerScope.isOwnerOrStaff(controllerScope.model);
         controllerScope.updateImageUrl();
