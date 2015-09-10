@@ -10,6 +10,8 @@ angular.module('ncsaas')
       'eventlog',
       'backups',
       'localSignup',
+      'users',
+      'people',
       'servicesadd'
     ],
     featuresVisible: false,
