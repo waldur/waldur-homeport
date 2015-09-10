@@ -82,9 +82,8 @@ angular.module('ncsaas')
       'payments',
       'services:provider:uuid',
       'password',
-      'serviceLink',
       'premiumSupport',
-      'localSignup',
+      'localSignup'
     ],
     featuresVisible: false,
 

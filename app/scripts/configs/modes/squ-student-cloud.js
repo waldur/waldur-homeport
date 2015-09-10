@@ -10,6 +10,8 @@ angular.module('ncsaas')
       'services',
       'providers',
       'premiumSupport',
+      'users',
+      'people',
       'import'
     ],
     featuresVisible: false,

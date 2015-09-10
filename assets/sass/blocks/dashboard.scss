@@ -418,6 +418,7 @@
               }
               .left-p {
                 float: left;
+                width: 65%;
                 .icon {
                   background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACsAAAApCAAAAACJ/o8XAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMDE0IDc5LjE1Njc5NywgMjAxNC8wOC8yMC0wOTo1MzowMiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTQgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkRFMzZGNkI0MUZCNjExRTVBMjMyODgyNDZBRTdENzdFIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkRFMzZGNkI1MUZCNjExRTVBMjMyODgyNDZBRTdENzdFIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6REUzNkY2QjIxRkI2MTFFNUEyMzI4ODI0NkFFN0Q3N0UiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6REUzNkY2QjMxRkI2MTFFNUEyMzI4ODI0NkFFN0Q3N0UiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz619MsaAAAA6klEQVQ4y+3Uuw6CMBgFYB/ykMhCQhzYWF18BTcXdpe+ggsPQBxcnCAhxoVIGgZBPMTLIIlobb2tnE7t/+WkXTq4fJ5Bbx/tudHm/GwbQ3r72rLRL6W3M6ykrLp7be8h9gHATyptL9tB7tqIcgHY7k7be0s6TMJZ5gIIk2HaHr62uZXRSQMAcJhZucn6MTm2AQATMvZNVsxrrgEAWLOeC5Pdj4K6FgAgjodgVJospTcruYmWG5aBJ41vI6uFFW2l3EbWouQbSxarqeNMV8X9RG/V/GOP1C+l14CVXkO+6FXucKK29tT/1T/bKxRsodUaNqzAAAAAAElFTkSuQmCC") no-repeat;
                   width: 43px;
@@ -431,7 +432,7 @@
                   overflow: hidden;
                   text-overflow: ellipsis;
                   white-space: nowrap;
-                  width: 339px;
+                  width: 100%;
                   @include bp(xs) {
                     text-overflow: ellipsis;
                     max-width: 260px;
@@ -730,4 +731,8 @@
 
 a.name {
   text-decoration: none;
+}
+
+.dashboard-header {
+  float: left;
 }
