@@ -134,11 +134,23 @@
   }
 
   angular.module('ncsaas')
-    .controller('DashboardIndexController', ['$scope', '$stateParams', DashboardIndexController]);
+    .controller('DashboardIndexController', [
+      '$scope',
+      '$stateParams',
+      'baseControllerClass',
+      DashboardIndexController]);
 
-    function DashboardIndexController($scope, $stateParams) {
-      $scope.activeTab = $stateParams.tab || 'activity';
-    }
+  function DashboardIndexController($scope, $stateParams, baseControllerClass) {
+    var controllerScope = this;
+    var EventController = baseControllerClass.extend({
+      init: function() {
+        $scope.activeTab = $stateParams.tab || 'activity';
+      }
+    });
+
+    controllerScope.__proto__ = new EventController();
+  }
+
 
   angular.module('ncsaas')
     .controller('DashboardCostController', [

@@ -7,7 +7,9 @@ angular.module('ncsaas')
       'appstore',
       'payment',
       'eventlog',
-      'localSignup'
+      'localSignup',
+      'users',
+      'people'
     ],
     featuresVisible: false,
     homeTemplate: 'views/home/costtracking/home.html',
