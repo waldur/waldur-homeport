@@ -45,16 +45,18 @@
                return 'Provider has resources. Please remove them first';
               }
             }.bind(this.controllerScope),
-          },
-          {
-            title: 'Import resource',
-            state: 'import.import'
           }
         ];
         if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('appstore') == -1) {
           this.actionButtonsListItems.push({
             title: 'Create resource',
             state: 'appstore.store'
+          });
+        }
+        if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('import') == -1) {
+          this.actionButtonsListItems.push({
+            title: 'Import resource',
+            state: 'import.import'
           });
         }
         this.entityOptions = {

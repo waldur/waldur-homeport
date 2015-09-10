@@ -90,8 +90,10 @@
               vm.entityOptions.entityData.createLink = 'appstore.store';
               vm.entityOptions.entityData.createLinkText = 'Create';
             }
-            vm.entityOptions.entityData.importLink = 'import.import';
-            vm.entityOptions.entityData.importLinkText = 'Import';
+            if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('import') == -1) {
+              vm.entityOptions.entityData.importLink = 'import.import';
+              vm.entityOptions.entityData.importLinkText = 'Import';
+            }
           }
         });
       },

@@ -19,6 +19,7 @@
                     <span>{{ entityOptions.entityData.createLinkText }}</span>
                 </a>
                 <a ng-if="entityOptions.entityData.importLink"
+                   visible="import"
                    ui-sref="{{ entityOptions.entityData.importLink }}" class="button">
                     <span>{{ entityOptions.entityData.importLinkText }}</span>
                 </a>
@@ -39,6 +40,7 @@
                     {{ entityOptions.entityData.createLinkText }}
                 </a>
                 <a ng-if="entityOptions.entityData.importLink"
+                   visible="import"
                    ui-sref="{{ entityOptions.entityData.importLink }}" class="button">
                     {{ entityOptions.entityData.importLinkText }}
                 </a>

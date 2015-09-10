@@ -44,14 +44,7 @@
                  return 'Project has resources. Please remove them first';
                 }
               }.bind(this),
-            },
-            {
-              title: 'Import resource',
-              clickFunction: function(project) {
-                $rootScope.$broadcast('adjustCurrentProject', project);
-                $state.go('import.import')
-              }
-            },
+            }
           ];
           if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('appstore') == -1) {
             this.actionButtonsListItems.push({
@@ -59,6 +52,15 @@
               clickFunction: function(project) {
                 $rootScope.$broadcast('adjustCurrentProject', project);
                 $state.go('appstore.store')
+              }
+            });
+          }
+          if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('import') == -1) {
+            this.actionButtonsListItems.push({
+              title: 'Import resource',
+              clickFunction: function(project) {
+                $rootScope.$broadcast('adjustCurrentProject', project);
+                $state.go('import.import')
               }
             });
           }
