@@ -933,6 +933,7 @@ angular.module('ncsaas')
         this.controllerScope = controllerScope;
         this.setSignalHandler('currentProjectUpdated', this.setCurrentProject.bind(controllerScope));
         this._super();
+        var currentCustomerUuid = currentStateService.getCustomerUuid();
         this.actionButtonsListItems = [
           {
             title: 'Remove',
@@ -943,8 +944,7 @@ angular.module('ncsaas')
           entityData: {
             noDataText: 'No providers yet',
             createLink: 'services.create',
-            createLinkText: 'Create provider',
-            expandable: true
+            createLinkText: 'Create provider'
           },
           list: [
             {
@@ -956,10 +956,9 @@ angular.module('ncsaas')
             {
               name: 'Name',
               propertyName: 'name',
-              type: (ENV.featuresVisible || !(ENV.toBeFeatures.indexOf('serviceLink') + 1))
-                ? ENTITYLISTFIELDTYPES.name
-                : ENTITYLISTFIELDTYPES.noType,
-              link: 'services.details({uuid: entity.uuid, provider: entity.type})',
+              type: ENTITYLISTFIELDTYPES.name,
+              link: 'organizations.details({uuid: "' + currentCustomerUuid
+              + '", providerType: entity.type, providerUuid: entity.uuid, tab: "providers"})',
               className: 'name'
             },
             {
@@ -974,14 +973,7 @@ angular.module('ncsaas')
             }
           ]
         };
-        this.expandableOptions = [
-          {
-            isList: false,
-            addItemBlock: false,
-            viewType: 'details',
-            list:['name']
-          }
-        ];
+
 
         $scope.$on('searchInputChanged', this.onSearchInputChanged.bind(this));
       },
@@ -1021,9 +1013,6 @@ angular.module('ncsaas')
       onSearchInputChanged: function(event, searchInput) {
         this.searchInput = searchInput;
         this.search();
-      },
-      update: function(model) {
-        return joinServiceProjectLinkService.$update(null, model.url, model);
       }
 
     });

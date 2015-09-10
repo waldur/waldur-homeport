@@ -12,7 +12,8 @@ angular.module('ncsaas')
       'localSignup',
       'users',
       'people',
-      'import'
+      'import',
+      'servicesadd'
     ],
     featuresVisible: false,
     appStoreCategories: [

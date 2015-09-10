@@ -12,6 +12,7 @@ angular.module('ncsaas')
       'premiumSupport',
       'users',
       'people',
+      'servicesadd',
       'import'
     ],
     featuresVisible: false,

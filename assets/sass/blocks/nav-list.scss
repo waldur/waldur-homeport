@@ -248,6 +248,11 @@
                     border-top-color: $color;
                 }
             }
+            .active-context {
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
             &.support {
                 @include inline-middle;
                 width: 20px;
