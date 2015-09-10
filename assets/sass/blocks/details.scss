@@ -382,7 +382,7 @@
       border: 1px solid $border-color;
       background: $main-background-color;
       z-index: 10;
-      padding: 25px;
+      padding: 20px;
       box-sizing: border-box;
       &:before {
         content: "";
@@ -465,7 +465,8 @@
       }
       .button {
         width: 100%;
-        margin-bottom: 15px;
+        margin-bottom: 10px;
+        margin-top: 10px;
         text-align: center;
       }
     }
