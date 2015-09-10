@@ -54,18 +54,15 @@
           var cache = vm.getCache(cacheKey);
 
           if (!vm.cacheReset && vm.cacheTime > 0 && cache && cache.time > new Date().getTime()) {
+            vm.setPagesCount(cache.count);
             deferred.resolve(cache.data);
           } else {
             vm.cacheReset = false;
             listCache.put(cacheKey, {data: null, time: 0});
             vm.getFactory(true, null, endpointUrl).query(filter, function(response, responseHeaders) {
               var header = responseHeaders();
-              vm.resultCount = !header['x-result-count'] ? null : header['x-result-count'];
-              if (vm.resultCount) {
-                vm.pages = Math.ceil(vm.resultCount/vm.pageSize);
-                vm.sliceStart = (vm.page - 1) * vm.pageSize + 1;
-                vm.sliceEnd = Math.min(vm.resultCount, vm.page * vm.pageSize)
-              }
+              var resultCount = !header['x-result-count'] ? null : header['x-result-count'];
+              vm.setPagesCount(resultCount);
               if (vm.cacheTime > 0) {
                 vm.setCache(vm.cacheTime, response, cacheKey, vm.endpoint);
               }
@@ -103,10 +100,18 @@
           listCache.put(this.ALL_CACHE_KEYS, allCacheKeys);
         }
         var cacheTime = new Date().getTime() + (time * 1000);
-        listCache.put(cacheKey, {data: response, time: cacheTime});
+        listCache.put(cacheKey, {data: response, time: cacheTime, count: this.resultCount});
       },
       getCache: function(cacheKey) {
         return listCache.get(cacheKey);
+      },
+      setPagesCount: function(count) {
+        if (count) {
+          this.resultCount = count;
+          this.pages = Math.ceil(this.resultCount/this.pageSize);
+          this.sliceStart = (this.page - 1) * this.pageSize + 1;
+          this.sliceEnd = Math.min(this.resultCount, this.page * this.pageSize)
+        }
       },
       clearAllCacheForCurrentEndpoint: function() {
         var allKeys = listCache.get(this.ALL_CACHE_KEYS);
