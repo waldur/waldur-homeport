@@ -954,9 +954,7 @@ angular.module('ncsaas')
             {
               name: 'Name',
               propertyName: 'name',
-              type: (ENV.featuresVisible || !(ENV.toBeFeatures.indexOf('serviceLink') + 1))
-                ? ENTITYLISTFIELDTYPES.name
-                : ENTITYLISTFIELDTYPES.noType,
+              type: ENTITYLISTFIELDTYPES.name,
               link: 'organizations.details({uuid: "' + currentCustomerUuid
               + '", providerType: entity.type, providerUuid: entity.uuid, tab: "providers"})',
               className: 'name'
