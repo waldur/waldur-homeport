@@ -8,7 +8,7 @@
     var ServiceClass = baseServiceClass.extend({
       init:function() {
         this._super();
-        this.endpoint = '/service-items/';
+        this.endpoint = '/services/';
         this.filterByCustomer = false;
       },
 
