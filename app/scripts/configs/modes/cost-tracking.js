@@ -10,7 +10,10 @@ angular.module('ncsaas')
       'localSignup',
       'users',
       'people',
-      'backups'
+      'backups',
+      'templates',
+      'monitoring',
+      'projectGroups'
     ],
     featuresVisible: false,
     homeTemplate: 'views/home/costtracking/home.html',

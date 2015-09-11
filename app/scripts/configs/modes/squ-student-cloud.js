@@ -13,7 +13,10 @@ angular.module('ncsaas')
       'users',
       'people',
       'servicesadd',
-      'import'
+      'import',
+      'templates',
+      'monitoring',
+      'projectGroups'
     ],
     featuresVisible: false,
     appStoreCategories: [
