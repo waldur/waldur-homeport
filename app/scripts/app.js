@@ -358,25 +358,6 @@
           templateUrl: 'views/partials/base.html',
         })
 
-        .state('services.list', {
-          url: '',
-          views: {
-            'appContent': {
-              templateUrl: 'views/service/list.html'
-            },
-            'listTemplate@services.list' : {
-              templateUrl: 'views/service/list-template.html'
-            },
-            'appHeader': {
-              templateUrl: 'views/partials/app-header.html'
-            }
-          },
-          resolve: {
-            authenticated: authCheck
-          },
-          auth: true
-        })
-
         .state('services.create', {
           url: 'add/',
           views: {
@@ -545,7 +526,7 @@
         })
 
         .state('organizations.details', {
-          url: ':uuid/:tab',
+          url: ':uuid/:tab-:providerUuid-:providerType',
           views: {
             'appContent': {
               templateUrl: 'views/customer/details.html',

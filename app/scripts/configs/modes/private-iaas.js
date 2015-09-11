@@ -11,7 +11,10 @@ angular.module('ncsaas')
       'backups',
       'localSignup',
       'users',
-      'people'
+      'people',
+      'import',
+      'servicesadd',
+      'projectGroups'
     ],
     featuresVisible: false,
     appStoreCategories: [

@@ -11,7 +11,12 @@ angular.module('ncsaas')
       'providers',
       'premiumSupport',
       'users',
-      'people'
+      'people',
+      'servicesadd',
+      'import',
+      'templates',
+      'monitoring',
+      'projectGroups'
     ],
     featuresVisible: false,
     appStoreCategories: [

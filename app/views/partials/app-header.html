@@ -23,7 +23,9 @@
                 <li visible="customers" class="dropdown customers">
                     <a class="customer-context drop-active" ng-click="Header.menuToggle('customerMenu', $event)"
                        ng-class="{'active': Header.menuState.customerMenu}">
-                        <span class="active-context">Active organization</span>
+                        <span ng-click="Header.goToCurrentOrganization()"
+                              stoppropagation
+                           class="active-context">Active organization</span>
                         <span class="customer-name">{{ Header.currentCustomer.name }}</span>
                     </a>
                     <ul class="nav-sublist" ng-show="Header.menuState.customerMenu">
@@ -39,7 +41,9 @@
                 <li visible="projects" class="dropdown project-dropdown">
                     <a class="project-context drop-active" ng-click="Header.menuToggle('projectMenu', $event)"
                        ng-class="{'active': Header.menuState.projectMenu}">
-                        <span class="active-context">Project</span>
+                        <span ng-click="Header.goToCurrentProject()"
+                              stoppropagation
+                              class="active-context">Project</span>
                         <span class="customer-name">{{ Header.currentProject.name ? Header.currentProject.name : 'No project' }}</span>
                     </a>
                     <ul block-ui="project-menu" class="nav-sublist" ng-show="Header.menuState.projectMenu">
