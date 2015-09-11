@@ -8,7 +8,7 @@ angular.module('ncsaas')
       'localSignup',
       'users',
       'people',
-      'backups
+      'backups'
     ],
     featuresVisible: false
   });
