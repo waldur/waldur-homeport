@@ -7,7 +7,8 @@ angular.module('ncsaas')
       'eventlog',
       'localSignup',
       'users',
-      'people'
+      'people',
+      'backups
     ],
     featuresVisible: false
   });

@@ -9,7 +9,8 @@ angular.module('ncsaas')
       'eventlog',
       'localSignup',
       'users',
-      'people'
+      'people',
+      'backups'
     ],
     featuresVisible: false,
     homeTemplate: 'views/home/costtracking/home.html',
