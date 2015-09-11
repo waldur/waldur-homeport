@@ -45,7 +45,7 @@
           url: '',
           views: {
             'appHeader@home' : {
-              templateUrl: 'views/partials/site-header.html',
+              templateUrl: MODE.homeHeaderTemplate ? MODE.homeHeaderTemplate : 'views/partials/site-header.html',
             },
             'appContent@home' : {
               templateUrl: MODE.homeTemplate ? MODE.homeTemplate : 'views/home/home.html',
@@ -61,10 +61,10 @@
           controller: 'AuthController',
           views: {
             'appHeader@home' : {
-              templateUrl: 'views/partials/site-header.html',
+              templateUrl: MODE.homeHeaderTemplate ? MODE.homeHeaderTemplate : 'views/partials/site-header.html',
             },
             'appContent@home' : {
-              templateUrl: 'views/home/login.html',
+              templateUrl: MODE.homeLoginTemplate ? MODE.homeLoginTemplate : 'views/home/login.html',
             }
           },
           resolve: {
