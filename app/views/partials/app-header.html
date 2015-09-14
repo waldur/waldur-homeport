@@ -69,7 +69,7 @@
                         <span translate>Details</span>
                     </a>
                 </li>
-                <li visible="appstore" class="appstore">
+                <li visible="resources" class="appstore">
                     <a ui-sref="appstore.store"
                        ng-class="{'active': Header.menuItemActive === 'appstore', 'disabled' : !Header.currentProject.name }"
                        class="appstore">
@@ -160,7 +160,7 @@
                         <span>Details</span>
                     </a>
                 </li>
-                <li visible="appstore" class="appstore">
+                <li visible="resources" class="appstore">
                     <a ui-sref="appstore.store"
                         ng-class="{'active': Header.menuItemActive === 'appstore'}" class="appstore">
                         <span>AppStore</span>
@@ -182,7 +182,7 @@
                         <li visible="projects">
                             <a ui-sref="projects.create" class="project">Add project</a>
                         </li>
-                        <li visible="appstore">
+                        <li visible="resources">
                             <a ui-sref="appstore.store" class="resource">Add resource</a>
                         </li>
                         <li visible="import" ng-if="::Header.showImport">
@@ -209,7 +209,7 @@
                         <li visible="projects" class="on-tablet">
                             <a ui-sref="projects.create" class="project">Add project</a>
                         </li>
-                        <li visible="appstore" class="on-tablet">
+                        <li visible="resources" class="on-tablet">
                             <a ui-sref="appstore.store" class="resource">Add resource</a>
                         </li>
                         <li class="divider on-tablet"></li>
