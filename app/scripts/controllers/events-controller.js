@@ -242,9 +242,6 @@
           if (row.scope_type == 'service') {
             results[date].services.push(row);
           }
-          if (row.scope_type == 'serviceprojectlink') {
-            results[date].services.push(row);
-          }
         }
         var table = [];
         for (var date in results) {
