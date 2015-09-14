@@ -22,14 +22,6 @@
         scope.contentUrl = scope.expandableOptions.viewType
           ? directiveViewPath + 'expandable-item-' + scope.expandableOptions.viewType + '.html'
           : defaultView;
-        if (scope.expandableOptions.getContent) {
-          scope.expandableOptions.getContent(scope.expandableElement.url).then(function(response) {
-            scope.model = response;
-            scope.expandableOptions.getFieldList(response.url).then(function(fields) {
-              scope.list = fields;
-            });
-          });
-        }
       }
     };
   }

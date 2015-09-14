@@ -2,32 +2,32 @@
     <header>
         <h3 ng-show="expandableOptions.title" class="title-expandable">{{ expandableOptions.title }}</h3>
         <div class="short-form">
-            <div class="form-row" ng-repeat="item in list">
+            <div class="form-row" ng-repeat="field in expandableElement.fields">
                 <div class="col label">
-                    <label for="{{ item.name }}">
-                        <helpicon help-text="{{ item.help_text }}" ng-if="item.help_text"></helpicon>
-                        {{ item.label }}
+                    <label for="{{ field.name }}">
+                        <helpicon help-text="{{ field.help_text }}" ng-if="field.help_text"></helpicon>
+                        {{ field.label }}
                     </label>
                 </div>
                 <div class="col input input-full" ng-if="!expandableElement.shared">
-                    <input id="{{ item.name }}"
+                    <input id="{{ field.name }}"
                            type="text"
-                           ng-if="item.type == 'string' || item.type == 'url'"
-                           ng-model="model[item.name]">
-                    <input ng-if="item.type == 'boolean'" id="{{ item.name }}" type="checkbox" ng-model="model[item.name]"/>
-                    <span ng-show="item.required">(required)</span>
+                           ng-if="field.type == 'string' || field.type == 'url'"
+                           ng-model="expandableElement.values[field.name]">
+                    <input ng-if="field.type == 'boolean'" id="{{ field.name }}" type="checkbox" ng-model="expandableElement.values[field.name]"/>
+                    <span ng-show="field.required">(required)</span>
                 </div>
                 <div class="col input input-full" ng-if="expandableElement.shared">
-                    {{ model[item.name] }}
+                    {{ expandableElement.values[field.name] }}
                 </div>
             </div>
-            <div class="decision" ng-show="expandableList.showSave(model)">
+            <div class="decision">
                 <div class="col">
-                    <a class="button-apply" ng-click="expandableList.update(model)">Save</a>
+                    <a class="button-apply" ng-click="expandableList.updateSettings(expandableElement)">Save</a>
                 </div>
             </div>
         </div>
-        <div class="details-expandable" ng-if="list.length == 0">
+        <div class="details-expandable" ng-if="expandableElement.fields.length == 0">
             {{ expandableElement.name }} settings is not editable.
         </div>
     </header>

@@ -306,8 +306,6 @@
     $stateParams, baseServiceListController, joinService, joinServiceProjectLinkService, servicesService) {
     var controllerScope = this;
     var Controller = baseServiceListController.extend({
-      options: {},
-      lastModel: {},
       init: function() {
         this.controllerScope = controllerScope;
         this.service = joinService;
@@ -318,32 +316,44 @@
             isList: false,
             addItemBlock: false,
             viewType: 'details',
-            title: 'Settings',
-            getFieldList: function(url) {
-              return servicesService.getOption(url).then(function(response) {
-                var fields = [];
-                if (response.actions) {var put = response.actions.PUT;
-                  vm.options = put;
-                  for (var fieldName in put) {
-                    if (!put[fieldName].read_only && fieldName != 'name') {
-                      put[fieldName].name = fieldName;
-                      fields.push(put[fieldName]);
-                    }
-                  }
-                }
-                return fields;
-              });
-            },
-            getContent: function(url) {
-              return servicesService.$get(null, url).then(function(provider) {
-                return servicesService.$get(null, provider.settings);
-              });
-            }
+            title: 'Settings'
           }
         ];
         this._super();
         this.entityOptions.list[0].type = 'editable';
         this.entityOptions.entityData.expandable = true;
+      },
+      showMore: function(service) {
+        var vm = this;
+        servicesService.$get(null, service.settings).then(function(settings) {
+          service.values = settings;
+          if (!service.fields) {
+            vm.getOptions(service.service_type).then(function(options) {
+              service.options = options;
+              service.fields = vm.getFields(options)
+            });
+          }
+        })
+      },
+      getOptions: function(serviceType) {
+        return servicesService.getServicesList().then(function(services) {
+          var url = services[serviceType].url;
+          return servicesService.getOption(url).then(function(response) {
+            return response.actions.POST;
+          })
+        })
+      },
+      getFields: function(options) {
+        var fields = [];
+        var blacklist = ['name', 'customer', 'settings'];
+        for (var name in options) {
+          var option = options[name];
+          if (!option.read_only && blacklist.indexOf(name) == -1) {
+            option.name = name;
+            fields.push(option);
+          }
+        }
+        return fields;
       },
       afterGetList: function() {
         var vm = this;
@@ -360,38 +370,25 @@
           });
         }
       },
-      update: function(model) {
-        var vm = this;
-        return joinServiceProjectLinkService.$update(null, model.url, model).then(
-          function() {},
-          function(errors) {
-            var message = '';
-            for (var name in errors.data) {
-              message += (vm.options[name] ? vm.options[name].label : name) + ': ' + errors.data[name];
-            }
-            if (message) {
-              vm.errorFlash(message);
-            }
-          });
+      updateSettings: function(service) {
+        var saveService = joinServiceProjectLinkService.$update(null, service.settings, service.values);
+        return saveService.then(this.onSaveSuccess.bind(this), this.onSaveError.bind(this, service));
       },
-      showSave: function(model) {
-        if (model) {
-          if (!this.lastModel[model.uuid]) {
-            this.lastModel[model.uuid] = model;
-            return false;
-          }
-          if (this.lastModel[model.uuid] != model) {
-            var fields = model.toJSON();
-            for (var fieldName in fields) {
-              var lastValue = this.lastModel[model.uuid][fieldName] ? this.lastModel[model.uuid][fieldName] : '';
-              var nextValue = model[fieldName] ? model[fieldName] : '';
-              if (lastValue != nextValue) {
-                return true;
-              }
-            }
-          }
+      update: function(service) {
+        var saveService = joinServiceProjectLinkService.$update(null, service.url, service);
+        return saveService.then(this.onSaveSuccess.bind(this), this.onSaveError.bind(this, service));
+      },
+      onSaveSuccess: function() {
+        this.successFlash('Provider has been updated');
+      },
+      onSaveError: function(response) {
+        var message = '';
+        for (var name in response.data) {
+          message += (service.options[name] ? service.options[name].label : name) + ': ' + response.data[name];
         }
-        return false;
+        if (message) {
+          this.errorFlash('Unable to save provider. ' + message);
+        }
       }
     });
 
