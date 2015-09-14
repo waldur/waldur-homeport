@@ -9,7 +9,14 @@ angular.module('ncsaas')
       'password',
       'services',
       'providers',
-      'premiumSupport'
+      'premiumSupport',
+      'users',
+      'people',
+      'servicesadd',
+      'import',
+      'templates',
+      'monitoring',
+      'projectGroups'
     ],
     featuresVisible: false,
     appStoreCategories: [
@@ -24,7 +31,9 @@ angular.module('ncsaas')
         services: ['GitLab']
       }
     ],
+    emailMask: 'squ.edu.om',
     serviceCategories: [],
     homeTemplate: 'views/home/squ-student-cloud/home.html',
-    initialDataTemplate: 'views/initial-data/omancloud/initial-data.html'
+    homeHeaderTemplate: 'views/partials/squ-student-cloud/site-header.html',
+    homeLoginTemplate: 'views/home/squ-student-cloud/login.html'
   });

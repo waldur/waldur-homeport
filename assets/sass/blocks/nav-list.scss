@@ -248,6 +248,11 @@
                     border-top-color: $color;
                 }
             }
+            .active-context {
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
             &.support {
                 @include inline-middle;
                 width: 20px;
@@ -489,3 +494,22 @@
         }
     }
 } // nav-list
+header.s-student.app-header.site {
+    background: none;
+    height: 90px;
+    >nav {
+        >ul {
+            >li {
+                >a.logo {
+                    height: 90px;
+                    width: 70px;
+                    background-size: contain;
+                    background-position: 50% 50%;
+                    background-repeat: no-repeat;
+                    background-image: url('/static/images/logo-s.png');
+                }
+            }
+        }
+    }
+
+}

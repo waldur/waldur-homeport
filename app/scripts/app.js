@@ -45,7 +45,7 @@
           url: '',
           views: {
             'appHeader@home' : {
-              templateUrl: 'views/partials/site-header.html',
+              templateUrl: MODE.homeHeaderTemplate ? MODE.homeHeaderTemplate : 'views/partials/site-header.html',
             },
             'appContent@home' : {
               templateUrl: MODE.homeTemplate ? MODE.homeTemplate : 'views/home/home.html',
@@ -61,10 +61,25 @@
           controller: 'AuthController',
           views: {
             'appHeader@home' : {
+              templateUrl: MODE.homeHeaderTemplate ? MODE.homeHeaderTemplate : 'views/partials/site-header.html',
+            },
+            'appContent@home' : {
+              templateUrl: MODE.homeLoginTemplate ? MODE.homeLoginTemplate : 'views/home/login.html',
+            }
+          },
+          resolve: {
+            authenticated: notLoggedCheck
+          }
+        })
+
+        .state('home.activate', {
+          url: 'activate/:user_uuid/:token/',
+          views: {
+            'appHeader@home' : {
               templateUrl: 'views/partials/site-header.html',
             },
             'appContent@home' : {
-              templateUrl: 'views/home/login.html',
+              templateUrl: 'views/home/activate.html',
             }
           },
           resolve: {
@@ -343,25 +358,6 @@
           templateUrl: 'views/partials/base.html',
         })
 
-        .state('services.list', {
-          url: '',
-          views: {
-            'appContent': {
-              templateUrl: 'views/service/list.html'
-            },
-            'listTemplate@services.list' : {
-              templateUrl: 'views/service/list-template.html'
-            },
-            'appHeader': {
-              templateUrl: 'views/partials/app-header.html'
-            }
-          },
-          resolve: {
-            authenticated: authCheck
-          },
-          auth: true
-        })
-
         .state('services.create', {
           url: 'add/',
           views: {
@@ -530,7 +526,7 @@
         })
 
         .state('organizations.details', {
-          url: ':uuid/:tab',
+          url: ':uuid/:tab-:providerUuid-:providerType',
           views: {
             'appContent': {
               templateUrl: 'views/customer/details.html',

@@ -45,16 +45,18 @@
                return 'Provider has resources. Please remove them first';
               }
             }.bind(this.controllerScope),
-          },
-          {
-            title: 'Import resource',
-            state: 'import.import'
           }
         ];
         if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('appstore') == -1) {
           this.actionButtonsListItems.push({
             title: 'Create resource',
             state: 'appstore.store'
+          });
+        }
+        if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('import') == -1) {
+          this.actionButtonsListItems.push({
+            title: 'Import resource',
+            state: 'import.import'
           });
         }
         this.entityOptions = {
@@ -67,9 +69,7 @@
             {
               name: 'Name',
               propertyName: 'name',
-              type: (ENV.featuresVisible || !(ENV.toBeFeatures.indexOf('serviceLink') + 1))
-                ? ENTITYLISTFIELDTYPES.name
-                : ENTITYLISTFIELDTYPES.noType,
+              type: ENTITYLISTFIELDTYPES.name,
               link: 'services.details({uuid: entity.uuid, provider: entity.service_type})',
               className: 'name'
             },
@@ -111,24 +111,6 @@
 
     return ControllerListClass;
   }
-
-  angular.module('ncsaas')
-    .controller('ServiceListController',
-      ['baseServiceListController', ServiceListController]);
-
-  function ServiceListController(baseServiceListController) {
-    var controllerScope = this;
-    var ServiceController = baseServiceListController.extend({
-      init:function() {
-        this.controllerScope = controllerScope;
-        this._super();
-
-      }
-    });
-
-    controllerScope.__proto__ = new ServiceController();
-  }
-
 })();
 
 (function() {
@@ -144,6 +126,7 @@
       '$q',
       '$rootScope',
       '$state',
+      '$window',
       ServiceAddController]);
 
   function ServiceAddController(
@@ -156,13 +139,16 @@
     ENV,
     $q,
     $rootScope,
-    $state) {
+    $state,
+    $window) {
     var controllerScope = this;
     var ServiceController = baseControllerAddClass.extend({
       init: function() {
         this.service = joinService;
         this.controllerScope = controllerScope;
-        this.listState = 'services.list';
+        this.listState = 'organizations.details({uuid: "'
+          + $window.localStorage[ENV.currentCustomerUuidStorageKey]
+          +'", tab: "providers"})';
         this.successMessage = 'Provider has been created';
         this.setSignalHandler('currentCustomerUpdated', this.activate.bind(this));
         this.categories = ENV.serviceCategories;
@@ -234,10 +220,11 @@
   angular.module('ncsaas')
     .controller('ServiceDetailUpdateController',
       ['baseControllerDetailUpdateClass', 'joinService', '$stateParams', '$state', '$q', 'resourcesCountService', 'ENV',
+        '$window',
         ServiceDetailUpdateController]);
 
   function ServiceDetailUpdateController(
-    baseControllerDetailUpdateClass, joinService, $stateParams, $state, $q, resourcesCountService, ENV) {
+    baseControllerDetailUpdateClass, joinService, $stateParams, $state, $q, resourcesCountService, ENV, $window) {
     var controllerScope = this;
     var Controller = baseControllerDetailUpdateClass.extend({
       service: null,
@@ -250,7 +237,7 @@
         this.detailsViewOptions = {
           title: 'Providers',
           activeTab: $stateParams.tab ? $stateParams.tab : this.activeTab,
-          listState: 'services.list',
+          listState: 'organizations.details({uuid: "'+ $window.localStorage[ENV.currentCustomerUuidStorageKey] +'", tab: "providers"})',
           aboutFields: [
             {
               fieldKey: 'name',
@@ -291,7 +278,7 @@
         if (confirm('Are you sure you want to delete service?')) {
           this.service.$delete(
             function() {
-              $state.go('services.list');
+              $state.go('organizations.details', {uuid: $window.localStorage[ENV.currentCustomerUuidStorageKey], tab: "providers"});
             },
             function(errors) {
               alert(errors.data.detail);
@@ -315,6 +302,7 @@
       'ENTITYLISTFIELDTYPES',
       'ENV',
       'servicesService',
+      'currentStateService',
       ServiceProjectTabController
     ]);
 
@@ -325,7 +313,8 @@
     joinServiceProjectLinkService,
     ENTITYLISTFIELDTYPES,
     ENV,
-    servicesService) {
+    servicesService,
+    currentStateService) {
     var controllerScope = this;
     var Controller = baseControllerListClass.extend({
       service: null,
@@ -374,6 +363,22 @@
           this.service.endpoint = '/' + ENV.projectServiceLinkEndpoints[$stateParams.provider] + '/';
           this._super(filter);
         }
+      },
+      afterGetList: function() {
+        this.setCurrentProject();
+      },
+      setCurrentProject: function() {
+        var vm = this;
+        currentStateService.getProject().then(function(response) {
+          vm.currentProject = response;
+          if (response) {
+            vm.entityOptions.list[0]['description'] = {
+              condition: vm.currentProject.uuid,
+              text: '[Active]',
+              field: 'project_uuid'
+            };
+          }
+        });
       }
     });
 

@@ -1,14 +1,34 @@
-<section detailscontent="checkbox avatar">
+<section>
     <header>
-        <span ng-repeat="item in expandableOptions.list" class="details-expandable">
-            <span editable-text="expandableElement[item]"
-                  e-form="rowform"
-                  buttons="no"
-                  onaftersave="expandableList.update(expandableElement)"
-                  title="Click to edit">
-                {{ expandableElement[item] }}
-            </span>
-        <div class="icon" ng-click="rowform.$show()" ng-hide="rowform.$visible"></div>
-        </span>
+        <h3 ng-show="expandableOptions.title" class="title-expandable">{{ expandableOptions.title }}</h3>
+        <div class="short-form">
+            <div class="form-row" ng-repeat="item in list">
+                <div class="col label">
+                    <label for="{{ item.name }}">
+                        <helpicon help-text="{{ item.help_text }}" ng-if="item.help_text"></helpicon>
+                        {{ item.label }}
+                    </label>
+                </div>
+                <div class="col input input-full" ng-if="!expandableElement.shared">
+                    <input id="{{ item.name }}"
+                           type="text"
+                           ng-if="item.type == 'string' || item.type == 'url'"
+                           ng-model="model[item.name]">
+                    <input ng-if="item.type == 'boolean'" id="{{ item.name }}" type="checkbox" ng-model="model[item.name]"/>
+                    <span ng-show="item.required">(required)</span>
+                </div>
+                <div class="col input input-full" ng-if="expandableElement.shared">
+                    {{ model[item.name] }}
+                </div>
+            </div>
+            <div class="decision" ng-show="expandableList.showSave(model)">
+                <div class="col">
+                    <a class="button-apply" ng-click="expandableList.update(model)">Save</a>
+                </div>
+            </div>
+        </div>
+        <div class="details-expandable" ng-if="list.length == 0">
+            {{ expandableElement.name }} settings is not editable.
+        </div>
     </header>
 </section>

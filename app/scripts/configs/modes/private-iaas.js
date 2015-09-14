@@ -8,7 +8,13 @@ angular.module('ncsaas')
       'providers',
       'services',
       'eventlog',
-      'backups'
+      'backups',
+      'localSignup',
+      'users',
+      'people',
+      'import',
+      'servicesadd',
+      'projectGroups'
     ],
     featuresVisible: false,
     appStoreCategories: [

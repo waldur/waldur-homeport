@@ -284,6 +284,14 @@
         });
 
         return deferred.promise;
+      },
+      goToCurrentOrganization: function() {
+        $state.go('organizations.details', {uuid: this.currentCustomer.uuid});
+      },
+      goToCurrentProject: function() {
+        if (this.currentProject) {
+          $state.go('projects.details', {uuid: this.currentProject.uuid});
+        }
       }
     });
 

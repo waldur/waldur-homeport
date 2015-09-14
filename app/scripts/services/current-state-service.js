@@ -22,6 +22,7 @@
     vm.setProject = setProject;
     vm.handleSelectedProjects = handleSelectedProjects;
     vm.removeLastSelectedProject = removeLastSelectedProject;
+    vm.getCustomerUuid = getCustomerUuid;
 
     // private variables:
     var customer = null,
@@ -29,6 +30,10 @@
 
     function getCustomer() {
       return customer;
+    }
+
+    function getCustomerUuid() {
+      return $window.localStorage[ENV.currentCustomerUuidStorageKey];
     }
 
     function getProject() {

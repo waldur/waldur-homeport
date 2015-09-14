@@ -19,6 +19,7 @@
                     <span>{{ entityOptions.entityData.createLinkText }}</span>
                 </a>
                 <a ng-if="entityOptions.entityData.importLink"
+                   visible="import"
                    ui-sref="{{ entityOptions.entityData.importLink }}" class="button">
                     <span>{{ entityOptions.entityData.importLinkText }}</span>
                 </a>
@@ -39,6 +40,7 @@
                     {{ entityOptions.entityData.createLinkText }}
                 </a>
                 <a ng-if="entityOptions.entityData.importLink"
+                   visible="import"
                    ui-sref="{{ entityOptions.entityData.importLink }}" class="button">
                     {{ entityOptions.entityData.importLinkText }}
                 </a>
@@ -82,9 +84,11 @@
                 </div>
                 <div class="actions"></div>
             </li>
-            <li ng-repeat="entity in entityList.list">
+            <li ng-repeat="entity in entityList.list"
+                ng-show="entity.uuid != entityOptions.excludeItem || entity.expandItemOpen">
                 <div class="list-item list" ng-class="{'opened': expandItem, 'pointer' : entityOptions.entityData.expandable}"
-                     ng-click="expandItem=!expandItem; entityList.showMore(entity)">
+                     ng-click="expandItem=!expandItem; entityList.showMore(entity)"
+                     ng-init="expandItem = entity.expandItemOpen; entityOptions.excludeItem = entity.expandItemOpen ? entity.uuid : 0;">
                     <div class="checkbox" ng-show="entityList.controlPanelShow">
                         <div class="checkbox" stoppropagation>
                             <input type="checkbox" ng-show="entityList.showgroup"
@@ -140,6 +144,17 @@
                               ng-class="{'online': entity[field.propertyName] == field.onlineStatus,
                                'offline' : entity[field.propertyName] == field.offlineStatus}">
                             {{ entity[field.propertyName] }}</span>
+
+                        <span ng-switch-when="editable" class="details-expandable">
+                            <span editable-text="entity[field.propertyName]"
+                                  e-form="rowform"
+                                  buttons="no"
+                                  onaftersave="entityList.update(entity)"
+                                  title="Click to edit">
+                                    {{ entity[field.propertyName] }}
+                            </span>
+                            <div stoppropagation class="icon" ng-click="rowform.$show()" ng-hide="rowform.$visible"></div>
+                        </span>
 
                         <span ng-switch-default>
                             {{ entity[field.propertyName] ? entity[field.propertyName] : field.emptyText }}

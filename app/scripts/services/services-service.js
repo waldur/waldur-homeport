@@ -15,7 +15,7 @@
       getServicesList: function() {
         var vm = this,
           deferred = $q.defer();
-        vm.endpoint = '/services/';
+        vm.endpoint = '/service-metadata/';
         if (vm.services) {
           deferred.resolve(vm.services.toJSON());
         } else {
