@@ -1059,7 +1059,7 @@ angular.module('ncsaas')
           entityData: {
             noDataText: 'You have no SLAs yet.',
             createLink: 'appstore.store({category: "support"})',
-            createLinkText: 'Create SLA',
+            createLinkText: 'Add SLA',
             expandable: true
           },
           list: [
