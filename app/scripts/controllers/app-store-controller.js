@@ -120,25 +120,15 @@
         vm.selectedResourceType = type;
         vm.thirdStep = true;
         vm.fields = [];
-        if (vm.selectedService.resources[vm.selectedResourceType]) {
-          vm.instance = servicesService.$create(vm.selectedService.resources[vm.selectedResourceType]);
-          servicesService.getOption(vm.selectedService.resources[vm.selectedResourceType]).then(function(response) {
+        var resource = vm.selectedService.resources[vm.selectedResourceType];
+        var service = vm.services[vm.selectedServiceName];
+        if (resource) {
+          vm.instance = servicesService.$create(resource);
+          vm.instance.service_project_link = service.service_project_link_url;
+          servicesService.getOption(resource).then(function(response) {
             vm.setFields(response.actions.POST);
-            vm.setServiceProjectLink(response.actions.POST);
           });
         }
-      },
-      setServiceProjectLink: function(formOptions) {
-        var links = formOptions[this.UNIQUE_FIELDS.service_project_link].choices;
-        var linkName = this.services[this.selectedServiceName].name + ' | ' + this.currentProject.name;
-        var link = '';
-        for (var i = 0; i < links.length; i++) {
-          if (links[i].display_name == linkName) {
-            link = links[i].value;
-            break;
-          }
-        }
-        this.instance[this.UNIQUE_FIELDS.service_project_link] = link;
       },
       setFields: function(formOptions) {
         this.allFormOptions = formOptions;
@@ -164,7 +154,6 @@
             choices: choices
           });
         }
-
       },
       toggleChoicesLimit: function(field) {
         if (field.limit == this.limitChoices) {
