@@ -15,19 +15,19 @@
             </div>
             <div ng-if="project.selected" class="body">
                 <ul class="counters">
-                    <li class="active-alert">
+                    <li class="active-alert" ng-class="{'empty': !project.count.alerts}">
                         <div class="counter-name">Active alerts</div>
                         <div class="counter" ng-bind="project.count.alerts"></div>
                     </li>
-                    <li class="resources empty">
+                    <li class="resources" ng-class="{'empty': !project.count.resources}">
                         <div class="counter-name">Resources</div>
                         <div class="counter" ng-bind="project.count.resources"></div>
                     </li>
-                    <li class="services empty">
+                    <li visible="providers" class="services" ng-class="{'empty': !project.count.services}">
                         <div class="counter-name">Providers</div>
                         <div class="counter" ng-bind="project.count.services"></div>
                     </li>
-                    <li class="people">
+                    <li class="people" ng-class="{'empty': !project.count.users}">
                         <div class="counter-name">People</div>
                         <div class="counter" ng-bind="project.count.users"></div>
                     </li>
