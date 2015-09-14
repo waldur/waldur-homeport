@@ -18,7 +18,7 @@
                     <li>
                         <span class="month" ng-bind="::row.date"></span>
                     </li>
-                    <li>
+                    <li visible="providers">
                         <div class="icon"></div>
                         <a stoppropagation ng-click="row.selected=true; row.activeTab='services'" ng-class="{'active': row.selected && row.activeTab=='services'}">Providers (<span ng-bind="::row.services.length"></span>)</a>
                     </li>
