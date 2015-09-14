@@ -673,7 +673,7 @@
           {
             name: 'resource_type',
             title: 'OpenStack',
-            value: 'IaaS.Instance'
+            value: 'OpenStack.Instance'
           },
           {
             name: 'resource_type',

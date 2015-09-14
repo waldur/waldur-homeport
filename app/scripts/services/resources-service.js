@@ -8,6 +8,7 @@
     var ServiceClass = baseServiceClass.extend({
       endpoints: {
         'IaaS.Instance': '/instances/',
+        'OpenStack.Instance': '/openstack-instances/',
         'DigitalOcean.Droplet': '/digitalocean-droplets/',
         'openstack': '/openstack-instances/',
         'clouds': '/iaas-resources/',

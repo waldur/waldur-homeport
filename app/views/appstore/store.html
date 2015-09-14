@@ -207,7 +207,7 @@
                             <span>{{ item.name }}</span>
                         </div>
 
-                        <div class="price">{{ item.price | currency:AppStore.currency }}</div>
+                        <div class="price">{{ item.price || 0 | currency:AppStore.currency }}</div>
                         <div class="clear"></div>
                     </li>
                     <li class="total">
