@@ -302,6 +302,7 @@
         contract.plan = this.selectedPackage.url;
         var vm = this;
         contract.$save().then(function(response) {
+          premiumSupportContractsService.clearAllCacheForCurrentEndpoint();
           $rootScope.$broadcast('refreshProjectList');
           $state.go('resources.list', {tab: 'premiumSupport'});
         }, function(response) {
