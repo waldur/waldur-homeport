@@ -70,7 +70,7 @@ angular.module('ncsaas')
     ],
     toBeFeatures: [
       'openStackPrivateCloud',
-      'appstore',
+      'resources',
       'pricelistsCompare',
       'prePaid',
       'support',

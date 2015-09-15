@@ -86,7 +86,7 @@
         var vm = this;
         currentStateService.getProject().then(function(response) {
           if (response) {
-            if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('appstore') == -1) {
+            if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('resources') == -1) {
               vm.entityOptions.entityData.createLink = 'appstore.store';
               vm.entityOptions.entityData.createLinkText = 'Create';
             }

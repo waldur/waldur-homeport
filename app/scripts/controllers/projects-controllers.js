@@ -46,7 +46,7 @@
               }.bind(this),
             }
           ];
-          if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('appstore') == -1) {
+          if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('resources') == -1) {
             this.actionButtonsListItems.push({
               title: 'Create resource',
               clickFunction: function(project) {

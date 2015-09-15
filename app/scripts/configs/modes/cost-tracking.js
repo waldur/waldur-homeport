@@ -4,7 +4,7 @@ angular.module('ncsaas')
   .constant('MODE', {
     modeName: 'modeCostTracking',
     toBeFeatures: [
-      'appstore',
+      'resources',
       'payment',
       'eventlog',
       'localSignup',
