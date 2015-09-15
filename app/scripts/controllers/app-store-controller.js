@@ -88,10 +88,15 @@
         });
       },
       setCategory: function(category) {
+        if (category === this.selectedCategory) {
+          return;
+        }
         this.selectedCategory = category;
         this.secondStep = true;
         this.selectedService = {};
         this.selectedServiceName = null;
+        this.selectedPackage = {};
+        this.agreementShow = false;
         this.resourceTypesBlock = false;
         this.selectedResourceType = null;
         this.thirdStep = false;
