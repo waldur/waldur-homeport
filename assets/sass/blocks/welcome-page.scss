@@ -11,6 +11,12 @@
         background: url(../images/decor-image-s.png) no-repeat;
         background-size: cover;
     }
+    &.p-iaas {
+        margin-top: -50px;
+        padding-top: 100px;
+        background: url(../images/decor-image-pi.png) no-repeat;
+        background-size: cover;
+    }
     &.login {
         height: calc(100vh - 100px);
         padding-bottom: 0;
