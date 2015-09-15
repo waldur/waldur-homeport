@@ -310,7 +310,6 @@
         this.controllerScope = controllerScope;
         this.service = joinService;
         this.service.defaultFilter.customer_uuid = $stateParams.uuid;
-        var vm = this;
         this.expandableOptions = [
           {
             isList: false,
@@ -325,14 +324,18 @@
       },
       showMore: function(service) {
         var vm = this;
+        if (service.values) {
+          return;
+        }
         servicesService.$get(null, service.settings).then(function(settings) {
           service.values = settings;
-          if (!service.fields) {
-            vm.getOptions(service.service_type).then(function(options) {
-              service.options = options;
-              service.fields = vm.getFields(options)
-            });
+          if (service.fields) {
+            return;
           }
+          vm.getOptions(service.service_type).then(function(options) {
+            service.options = options;
+            service.fields = vm.getFields(options)
+          });
         })
       },
       getOptions: function(serviceType) {
@@ -389,6 +392,23 @@
         if (message) {
           this.errorFlash('Unable to save provider. ' + message);
         }
+      },
+      hasChanged: function(model) {
+        if (model.values) {
+          if (!model.revision) {
+            model.revision = model.values.toJSON();
+            return false;
+          }
+          var fields = model.values.toJSON();
+          for (var fieldName in fields) {
+            var lastValue = model.revision[fieldName] ? model.revision[fieldName] : '';
+            var nextValue = fields[fieldName] ? fields[fieldName] : '';
+            if (lastValue != nextValue) {
+              return true;
+            }
+          }
+        }
+        return false;
       }
     });
 

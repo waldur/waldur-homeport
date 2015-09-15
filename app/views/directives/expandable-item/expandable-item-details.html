@@ -9,19 +9,35 @@
                         {{ field.label }}
                     </label>
                 </div>
-                <div class="col input input-full" ng-if="!expandableElement.shared">
+                <div class="col input input-full" ng-if="!expandableElement.shared" ng-switch="field.type">
                     <input id="{{ field.name }}"
                            type="text"
-                           ng-if="field.type == 'string' || field.type == 'url'"
+                           ng-switch-when="string"
                            ng-model="expandableElement.values[field.name]">
-                    <input ng-if="field.type == 'boolean'" id="{{ field.name }}" type="checkbox" ng-model="expandableElement.values[field.name]"/>
+
+                    <input id="{{ field.name }}"
+                           type="text"
+                           ng-switch-when="url"
+                           ng-model="expandableElement.values[field.name]">
+
+                    <input id="{{ field.name }}"
+                           type="checkbox"
+                           ng-switch-when="boolean"
+                           ng-model="expandableElement.values[field.name]"/>
+
+                    <select id="{{ field.name }}"
+                            ng-switch-when="choice"
+                            ng-model="expandableElement.values[field.name]"
+                            ng-options="item.value as item.display_name for item in field.choices">
+                    </select>
+
                     <span ng-show="field.required">(required)</span>
                 </div>
                 <div class="col input input-full" ng-if="expandableElement.shared">
                     {{ expandableElement.values[field.name] }}
                 </div>
             </div>
-            <div class="decision">
+            <div class="decision" ng-show="expandableList.hasChanged(expandableElement)">
                 <div class="col">
                     <a class="button-apply" ng-click="expandableList.updateSettings(expandableElement)">Save</a>
                 </div>
