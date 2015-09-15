@@ -70,6 +70,7 @@
               title: 'Projects',
               createLink: 'projects.create',
               createLinkText: 'Add project',
+              expandable: true
             },
             list: [
               {

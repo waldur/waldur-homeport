@@ -12,6 +12,7 @@
       '$rootScope',
       'premiumSupportPlansService',
       'premiumSupportContractsService',
+      'resourcesService',
       AppStoreController]);
 
   function AppStoreController(
@@ -25,7 +26,8 @@
     $stateParams,
     $rootScope,
     premiumSupportPlansService,
-    premiumSupportContractsService) {
+    premiumSupportContractsService,
+    resourcesService) {
     var controllerScope = this;
     var Controller = baseControllerAddClass.extend({
       UNIQUE_FIELDS: {
@@ -72,7 +74,7 @@
       limitChoices: 9,
 
       init:function() {
-        this.service = servicesService;
+        this.service = resourcesService;
         this.controllerScope = controllerScope;
         this.setSignalHandler('currentProjectUpdated', this.setCurrentProject.bind(controllerScope));
         this._super();
