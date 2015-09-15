@@ -12,7 +12,7 @@
             > a {
                 color: #1F3305;
                 &:hover {
-                    color: rgba(31, 51, 5, 0.8);
+                    color: $hover-color;
                     text-decoration: underline;
                 }
                 &.active {
@@ -206,29 +206,29 @@
                 @include property(padding-top, 13);
             } // md
             &.active {
-                color: white;
+                color: $hover-color;
                 position: relative;
                 &:not(.drop-active) {
                     span {
-                        border-bottom: 1px solid #ffffff;
+                        border-bottom: 1px solid $hover-color;
                     }
                 }
                 &.drop-active {
                     &:after {
                         border-top-color: transparent;
-                        border-bottom-color: #fff;
+                        border-bottom-color: $hover-color;
                         bottom: 19px;
                     }
                 }
                 &:hover {
                     &:after {
-                        border-top-color: rgba(255,255,255,0);
-                        border-bottom-color: rgba(255,255,255,.7);
+                        border-top-color: transparent;
+                        border-bottom-color: $hover-color;
                     }
                 }
             } // &.active
             &:hover {
-                $color: rgba(255,255,255,.8);
+                $color: $hover-color;
                 color: $color;
                 &:not(.drop-active) {
                     span {
@@ -263,10 +263,9 @@
                 position: relative;
                 top: 10px;
                 margin: 0 5px;
-                color: #9ECF5D;
+                color: white;
                 &:hover, &.active {
-                    background-color: #FDD11D;
-                    color: black;
+                    color: $hover-color;
                 } // &:hover, &.active
                 &:before {
                     @include icon-fa;
@@ -308,26 +307,25 @@
             }
             &.support {
                 @include inline-middle;
-                width: 15px;
-                height: 15px;
+                width: 22px;
+                height: 22px;
                 background-color: #409a3c;
                 border-radius: 100%;
                 padding: 0;
                 position: relative;
                 top: 13px;
                 margin: 0 5px;
-                color: #9ECF5D;
+                color: white;
                 &:hover, &.active {
-                    background-color: #FDD11D;
-                    color: black;
+                    color: $hover-color;
                 } // &:hover, &.active
                 &:before {
                     @include icon-fa;
                     content: '\f128';
-                    font-size: 14px;
+                    font-size: 18px;
                     position: absolute;
-                    top: 1px;
-                    left: 4px;
+                    top: 2px;
+                    left: 6px;
                 } // &:before
             } // &.support
             &.user-area {
@@ -365,8 +363,7 @@
             } // &.service
             &.lang {
                 display: inline-block;
-                background-color: #82B046;
-                color: rgb(158, 207, 93);
+                background-color: #409a3c;
                 padding: 4px;
                 margin: 0px 5px;
                 top: 13px;
@@ -380,14 +377,11 @@
                 }
             } // &.lang
             &.appstore {
-                color: #fff200;
                 position: relative;
                 text-transform: uppercase;
-                &.active {
-                    span {
-                        border-color: #fff200;
-                    }
-                } // &.active
+                &:not(.active) {
+                    color: #fff200;
+                }
             } // &.appstore
             &.user {
                 &:before {
@@ -444,11 +438,6 @@
                 left: 100%;
                 top: 0;
                 z-index: 1;
-            }
-            > a {
-                span {
-                    color: #ffffff;
-                }
             }
         }
     } // > li
