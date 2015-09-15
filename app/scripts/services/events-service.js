@@ -102,14 +102,14 @@
         'resource_created': 'Resource {resource_name} has been created.',
         'resource_deleted': 'Resource {resource_name} has been deleted.',
         'resource_imported': 'Resource {resource_name} has been imported.',
-        'role_granted': 'User {affected_user_full_name} has gained role of {role_name} in {project_name} {customer_name}.',
-        'role_revoked': 'User {affected_user_full_name} has revoked role of {role_name} in {project_name} {customer_name}.',
+        'role_granted': 'User {affected_user_full_name} has gained role of {role_name} in {project_name} of {customer_name}.',
+        'role_revoked': 'User {affected_user_full_name} has revoked role of {role_name} in {project_name} of {customer_name}.',
         'ssh_key_creation_succeeded': 'SSH key {ssh_key_name} has been created.',
         'ssh_key_deletion_succeeded': 'SSH key {ssh_key_name} has been deleted.',
-        'ssh_key_push_succeeded': 'SSH key {ssh_key_name} has been pushed to {service_name}.',
-        'ssh_key_push_failed': 'Failed to push SSH key {ssh_key_name} to {service_name}.',
-        'ssh_key_remove_succeeded': 'SSH key {ssh_key_name} has been removed from {service_name}.',
-        'ssh_key_remove_failed': 'Failed to delete SSH key {ssh_key_name} from {service_name}.',
+        'ssh_key_push_succeeded': 'SSH key {ssh_key_name} has been pushed to {service_name} in {project_name}.',
+        'ssh_key_push_failed': 'Failed to push SSH key {ssh_key_name} to {service_name} in {project_name}.',
+        'ssh_key_remove_succeeded': 'SSH key {ssh_key_name} has been removed from {service_name} in {project_name}.',
+        'ssh_key_remove_failed': 'Failed to delete SSH key {ssh_key_name} from {service_name} in {project_name}.',
         'template_creation_succeeded': 'Template {template_name} has been created.',
         'template_deletion_succeeded': 'Template {template_name} has been deleted.',
         'template_service_creation_succeeded': 'Template {template_service_name} has been created.',
@@ -348,8 +348,11 @@ angular.module('ncsaas').constant('EVENT_ROUTES', {
                     var route = EVENT_ROUTES[entity];
                     var uuid = event[entity + "_uuid"];
                     var args = {uuid: uuid};
-                    if (entity == 'cloud_account' || entity == 'cloud' || entity=='service') {
+                    if (entity == 'cloud_account' || entity == 'cloud') {
                         args['provider'] = 'IaaS';
+                    }
+                    if (entity == 'service') {
+                        args['provider'] = entities['service_type'];
                     }
                     if (entity == 'resource') {
                         args['resource_type'] = event['resource_type'];

@@ -30,8 +30,6 @@
     var Controller = baseControllerAddClass.extend({
       UNIQUE_FIELDS: {
         service_project_link: 'service_project_link',
-        ssh_public_key: 'ssh_public_key',
-        configuration: 'configuration'
       },
       FIELD_TYPES: {
         string: 'string',
@@ -45,7 +43,6 @@
       thirdStep: false,
       resourceTypesBlock: false,
 
-      activeTab: null,
       successMessage: 'Purchase of {vm_name} was successful.',
       formOptions: {},
       allFormOptions: {},
@@ -71,6 +68,9 @@
       defaultPriceListItems: [],
       priceItems: [],
 
+      fields: [],
+      limitChoices: 9,
+
       init:function() {
         this.service = servicesService;
         this.controllerScope = controllerScope;
@@ -88,10 +88,15 @@
         });
       },
       setCategory: function(category) {
+        if (category === this.selectedCategory) {
+          return;
+        }
         this.selectedCategory = category;
         this.secondStep = true;
         this.selectedService = {};
         this.selectedServiceName = null;
+        this.selectedPackage = {};
+        this.agreementShow = false;
         this.resourceTypesBlock = false;
         this.selectedResourceType = null;
         this.thirdStep = false;
@@ -103,7 +108,7 @@
         this.selectedServiceName = service;
         this.resourceTypesBlock = true;
         this.thirdStep = false;
-        this.formOptions = {};
+        this.fields = [];
         if (this.selectedService) {
           var types = Object.keys(this.selectedService.resources);
           if (types.length === 1) {
@@ -119,43 +124,54 @@
         var vm = this;
         vm.selectedResourceType = type;
         vm.thirdStep = true;
-        vm.formOptions = {};
-        if (vm.selectedService.resources[vm.selectedResourceType]) {
-          vm.instance = servicesService.$create(vm.selectedService.resources[vm.selectedResourceType]);
-          servicesService.getOption(vm.selectedService.resources[vm.selectedResourceType]).then(function(response) {
-            vm.setFormOptions(response.actions.POST);
-            vm.setServiceProjectLink(response.actions.POST);
+        vm.fields = [];
+        var resource = vm.selectedService.resources[vm.selectedResourceType];
+        var service = vm.services[vm.selectedServiceName];
+        if (resource) {
+          vm.instance = servicesService.$create(resource);
+          vm.instance.service_project_link = service.service_project_link_url;
+          servicesService.getOption(resource).then(function(response) {
+            vm.setFields(response.actions.POST);
           });
         }
       },
-      setServiceProjectLink: function(formOptions) {
-        var links = formOptions[this.UNIQUE_FIELDS.service_project_link].choices;
-        var linkName = this.services[this.selectedServiceName].name + ' | ' + this.currentProject.name;
-        var link = '';
-        for (var i = 0; i < links.length; i++) {
-          if (links[i].display_name == linkName) {
-            link = links[i].value;
-            break;
-          }
-        }
-        this.instance[this.UNIQUE_FIELDS.service_project_link] = link;
-      },
-      setFormOptions: function(formOptions) {
+      setFields: function(formOptions) {
         this.allFormOptions = formOptions;
-        this.activeTab = null;
         for (var name in formOptions) {
-          if (!formOptions[name].read_only && name != this.UNIQUE_FIELDS.service_project_link) {
-            this.formOptions[formOptions[name].type] = this.formOptions[formOptions[name].type] || {};
-            if (name == this.UNIQUE_FIELDS[name]) {
-              this.formOptions[name] = formOptions[name];
-            } else {
-              if (!this.activeTab && formOptions[name].type == this.FIELD_TYPES.field) {
-                this.activeTab = name;
-              }
-              this.formOptions[formOptions[name].type][name] = formOptions[name];
-            }
+          if (formOptions[name].read_only || name == this.UNIQUE_FIELDS.service_project_link) {
+            continue;
           }
+
+          var type = formOptions[name].type;
+          if (type == 'field') {
+            type = 'choice';
+          }
+
+          var required = formOptions[name].required;
+          var choices = formOptions[name].choices;
+
+          this.fields.push({
+            name: name,
+            label: formOptions[name].label,
+            type: type,
+            help_text: formOptions[name].help_text,
+            required: required,
+            choices: choices
+          });
         }
+      },
+      toggleChoicesLimit: function(field) {
+        if (field.limit == this.limitChoices) {
+          field.limit = field.choices.length;
+        } else {
+          field.limit = this.limitChoices;
+        }
+      },
+      isListLong: function(field) {
+        return field.choices.length > this.limitChoices;
+      },
+      isListExpanded: function(field) {
+        return field.limit == field.choices.length;
       },
       doChoice: function(name, choice) {
         var vm = this;
@@ -224,7 +240,7 @@
         vm.selectedService = {};
         vm.selectedServiceName = null;
         vm.resourceTypesBlock = false;
-        vm.formOptions = null;
+        vm.fields = [];
         vm.priceItems = [];
         vm.selectedResourceType = null;
         vm.instance = null;
@@ -297,6 +313,7 @@
         contract.plan = this.selectedPackage.url;
         var vm = this;
         contract.$save().then(function(response) {
+          premiumSupportContractsService.clearAllCacheForCurrentEndpoint();
           $rootScope.$broadcast('refreshProjectList');
           $state.go('resources.list', {tab: 'premiumSupport'});
         }, function(response) {

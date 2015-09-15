@@ -1,5 +1,6 @@
 .avatar {
-    @include inline-middle;
+    display: block;
+    float: left;
     @include property(width, 40);
     &.big {
         width: 100%;
