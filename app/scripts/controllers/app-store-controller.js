@@ -88,6 +88,9 @@
         });
       },
       setCategory: function(category) {
+        if (category === this.selectedCategory) {
+          return;
+        }
         this.selectedCategory = category;
         this.secondStep = true;
         this.selectedService = {};

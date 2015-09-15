@@ -219,7 +219,7 @@
                     <li class="total">
                         <div class="descr">
                             <span ng-show="AppStore.selectedServiceName">{{ AppStore.selectedServiceName }}</span>
-                            <span ng-show="!AppStore.selectedServiceName">No chosen provider</span>
+                            <span ng-show="!AppStore.selectedServiceName">No chosen {{ AppStore.selectedCategory.type }}</span>
                             <span>{{ AppStore.instance.name }} {{ AppStore.selectedResourceType }}</span>
                         </div>
                         <div class="price">{{ AppStore.total | currency:AppStore.currency }}</div>
