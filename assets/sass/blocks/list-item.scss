@@ -225,6 +225,9 @@
         color: #50b848;
         font-size: 14px;
     }
+    &.opened {
+        background: $expandable-hover;
+    }
 } // list-item
 
 .list-page {

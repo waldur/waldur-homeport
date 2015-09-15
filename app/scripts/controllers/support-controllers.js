@@ -31,7 +31,8 @@
             createLinkText: 'Create ticket',
             noDataText: 'No tickets yet.',
             hideActionButtons: false,
-            actionButtonsType: 'refresh'
+            actionButtonsType: 'refresh',
+            expandable: true
           },
           list: [
             {

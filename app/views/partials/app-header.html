@@ -80,23 +80,6 @@
             <!-- /views nav -->
             <!-- context nav -->
             <ul class="nav-list context">
-                <li class="dropdown add-something">
-                    <a class="drop-active" ng-click="Header.menuToggle('addSomethingMenu', $event)"
-                        ng-class="{'active': Header.menuState.addSomethingMenu}">
-                        <span class="icon plus"></span>
-                    </a>
-                    <ul class="nav-sublist" ng-show="Header.menuState.addSomethingMenu">
-                        <li visible="services">
-                            <a ui-sref="services.create" class="service">Add provider</a>
-                        </li>
-                        <li visible="projects">
-                            <a ui-sref="projects.create" class="project">Add project</a>
-                        </li>
-                        <li visible="import" ng-if="::Header.showImport">
-                            <a ui-sref="import.import" class="import">Import resources</a>
-                        </li>
-                    </ul>
-                </li>
                 <li class="dropdown  user-dropdown">
                     <a class="user-area drop-active" ng-click="Header.menuToggle('profileMenu', $event)"
                         ng-class="{'active': Header.menuState.profileMenu}">
@@ -170,26 +153,6 @@
             <!-- /views nav -->
             <!-- context nav -->
             <ul class="nav-list-side">
-                <li class="dropdown add-something">
-                    <a class="drop-active" ng-click="Header.menuToggle('addSomethingMenu', $event)"
-                        ng-class="{'active': Header.menuState.addSomethingMenu}">
-                        <span class="icon plus"></span> Add something
-                    </a>
-                    <ul class="nav-sublist-side" ng-show="Header.menuState.addSomethingMenu">
-                        <li visible="services">
-                            <a ui-sref="services.create" class="service">Add provider</a>
-                        </li>
-                        <li visible="projects">
-                            <a ui-sref="projects.create" class="project">Add project</a>
-                        </li>
-                        <li visible="resources">
-                            <a ui-sref="appstore.store" class="resource">Add resource</a>
-                        </li>
-                        <li visible="import" ng-if="::Header.showImport">
-                            <a ui-sref="import.import" class="import">Import resources</a>
-                        </li>
-                    </ul>
-                </li>
                 <li visible="support">
                     <a ui-sref="users.list"
                         ng-class="{'active': Header.menuItemActive === 'support'}" class="support">Support</a>

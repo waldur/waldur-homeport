@@ -46,7 +46,7 @@
               }.bind(this),
             }
           ];
-          if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('appstore') == -1) {
+          if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('resources') == -1) {
             this.actionButtonsListItems.push({
               title: 'Create resource',
               clickFunction: function(project) {
@@ -70,6 +70,7 @@
               title: 'Projects',
               createLink: 'projects.create',
               createLinkText: 'Add project',
+              expandable: true
             },
             list: [
               {
@@ -673,7 +674,7 @@
           {
             name: 'resource_type',
             title: 'OpenStack',
-            value: 'IaaS.Instance'
+            value: 'OpenStack.Instance'
           },
           {
             name: 'resource_type',
@@ -1059,7 +1060,7 @@ angular.module('ncsaas')
           entityData: {
             noDataText: 'You have no SLAs yet.',
             createLink: 'appstore.store({category: "support"})',
-            createLinkText: 'Create SLA',
+            createLinkText: 'Add SLA',
             expandable: true
           },
           list: [

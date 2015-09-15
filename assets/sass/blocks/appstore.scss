@@ -273,7 +273,7 @@
             }
             form {
                 .string-field {
-                    width: 262px;
+                    width: 100%;
                     label {
                         display: block;
                         font-size: 16px;
@@ -284,6 +284,22 @@
                         width: 100%;
                         height: 32px;
                         border-radius: 3px;
+                    }
+                }
+                .integer-field {
+                    width: 200px;
+                    label {
+                        display: block;
+                        font-size: 16px;
+                        font-weight: bold;
+                        color: #000;
+                    }
+                    input[type="number"] {
+                        width: 100%;
+                        height: 32px;
+                        border: 1px solid #D8D8D8;
+                        box-shadow: none;
+                        padding: 5px 10px;
                     }
                 }
             }
@@ -419,7 +435,6 @@
                 }
             }
             .keys {
-                margin-top: 30px;
                 .appstore-template {
                     height: 80px;
                     margin-top: 20px;
@@ -477,9 +492,6 @@
             margin: 0;
             font-size: 10px;
             color: #9d9f9c;
-            a {
-                color: $dashboard-green;
-            }
         }
         .ap-aside-block {
             margin-top: 15px;
@@ -487,7 +499,6 @@
             margin: 0;
             padding: 0;
             list-style: none;
-            padding-top: 10px;
             li {
                 padding: 15px 25px;
                 height: 75px;
