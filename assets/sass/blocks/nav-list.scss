@@ -513,3 +513,20 @@ header.s-student.app-header.site {
     }
 
 }
+
+header.p-iaas.app-header.site {
+    background: none;
+    height: 90px;
+    >nav {
+        >ul {
+            >li {
+                >a.logo {
+                    height: 90px;
+                    width: 70px;
+                    background-size: contain;
+                    background-position: 50% 50%;
+                }
+            }
+        }
+    }
+}
