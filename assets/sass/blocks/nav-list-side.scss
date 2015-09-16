@@ -22,17 +22,7 @@
                 display: none;
             } // md
         } // &.add-something
-        &.customers {
-            @include bp(sm) {
-                display: none;
-            } // sm
-            @include bp(md) {
-                display: none;
-            } // md
-        } // &.customers
-        .projects {
-            @extend .customers;
-        }
+
         > a {
             @include property(margin, 0 20);
             @include property(padding-top, 10);
@@ -155,4 +145,19 @@
             } // &.mobile-trigger-link
         } // > a
     } // > li
+    .on-tablet {
+        &.customers {
+            background-color: #409a3c;
+            a {
+                &.current {
+                    &:before {
+                        font-family: FontAwesome;
+                        content: "\f05d";
+                        position: absolute;
+                        left: 3px;
+                    }
+                }
+            }
+        }
+    }
 } // nav-list

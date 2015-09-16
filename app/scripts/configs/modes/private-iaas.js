@@ -14,7 +14,8 @@ angular.module('ncsaas')
       'people',
       'import',
       'servicesadd',
-      'projectGroups'
+      'projectGroups',
+      'help'
     ],
     featuresVisible: false,
     appStoreCategories: [

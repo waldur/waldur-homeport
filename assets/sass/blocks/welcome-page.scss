@@ -16,6 +16,9 @@
         padding-top: 100px;
         background: url(../images/decor-image-pi.png) no-repeat;
         background-size: cover;
+        @include bp(xs) {
+            background-position: center;
+        }
     }
     &.login {
         height: calc(100vh - 100px);
@@ -156,6 +159,9 @@
         right: 50px;
         z-index: 9;
     } // img
+    @include bp(xs) {
+        padding-bottom: 100px;
+    }
 } // site-welcome
 
 .site-block {
