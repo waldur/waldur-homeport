@@ -12,6 +12,7 @@
      'joinService',
      '$q',
      '$state',
+     'ENV',
      InitialDataController]);
 
   function InitialDataController(
@@ -22,7 +23,8 @@
     agreementsService,
     joinService,
     $q,
-    $state) {
+    $state,
+    ENV) {
     var controllerScope = this;
     var Controller = baseControllerClass.extend({
       user: {},
@@ -46,12 +48,14 @@
         });
       },
       getServices: function() {
-        var vm = this;
-        servicesService.getServicesOptions().then(function(service_options) {
-          vm.service_options = service_options;
-          vm.addChosenService('Amazon');
-          vm.addChosenService('DigitalOcean');
-        });
+        if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('providers') == -1) {
+          var vm = this;
+          servicesService.getServicesOptions().then(function(service_options) {
+            vm.service_options = service_options;
+            vm.addChosenService('Amazon');
+            vm.addChosenService('DigitalOcean');
+          });
+        }
       },
       getCustomer: function() {
         var vm = this;
