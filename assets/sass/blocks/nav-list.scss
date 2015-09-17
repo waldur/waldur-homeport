@@ -9,6 +9,11 @@
     }
     &.in-home {
         > li {
+            &.logo-box {
+                @include bp(xs) {
+                    display: block;
+                } // xs
+            }
             > a {
                 color: #1F3305;
                 &:hover {
