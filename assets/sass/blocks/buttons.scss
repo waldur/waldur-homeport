@@ -33,6 +33,12 @@
     line-height: 19px;
     height: 25px;
     font-size: 14px;
+
+    &.pending {
+      border: 1px solid #50b848;
+      background-color: white;
+      color: #50b848;
+    }
 }
 .button-cancel {
     @include inline-middle;
