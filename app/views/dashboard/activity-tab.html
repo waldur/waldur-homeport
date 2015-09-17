@@ -9,7 +9,7 @@
                     <div class="support-buttons" visible="premiumSupport">
                         <a stoppropagation class="button-support"
                            ng-if="::project.plan"
-                           ui-sref="projects.details({uuid: project.uuid, tab: 'premiumSupport'})">SLA covered</a>
+                           ui-sref="projects.details({uuid: project.uuid, tab: 'premiumSupport'})">SLA details</a>
                         <a stoppropagation class="button-support"
                            ng-if="::!project.plan && project.has_pending_contracts"
                            ui-sref="projects.details({uuid: project.uuid, tab: 'premiumSupport'})">SLA pending</a>
