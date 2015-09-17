@@ -7,9 +7,12 @@
       'ENV',
       'defaultPriceListItemsService',
       'blockUI',
+      '$q',
       '$state',
       '$stateParams',
       '$rootScope',
+      'keysService',
+      'usersService',
       'premiumSupportPlansService',
       'premiumSupportContractsService',
       'resourcesService',
@@ -22,9 +25,12 @@
     ENV,
     defaultPriceListItemsService,
     blockUI,
+    $q,
     $state,
     $stateParams,
     $rootScope,
+    keysService,
+    usersService,
     premiumSupportPlansService,
     premiumSupportContractsService,
     resourcesService) {
@@ -42,14 +48,13 @@
       currency: ENV.currency,
 
       secondStep: false,
-      thirdStep: false,
       resourceTypesBlock: false,
 
       successMessage: 'Purchase of {vm_name} was successful.',
       formOptions: {},
       allFormOptions: {},
       selectedService: {},
-      selectedServiceName: null,
+      serviceType: null,
       selectedCategory: {},
       selectedResourceType: null,
       currentCustomer: {},
@@ -59,9 +64,9 @@
       services: {},
       renderStore: false,
       loadingProviders: true,
-      categoryProviders: {},
+      categoryServiceTypes: {},
 
-      configureStepNumber: 4,
+      configureStepNumber: 5,
       selectedPackageName: null,
       agreementShow: false,
 
@@ -82,7 +87,7 @@
       activate:function() {
         var vm = this;
         servicesService.getServicesList().then(function(response) {
-          vm.servicesList = response;
+          vm.servicesMetadata = response;
           vm.setCurrentProject();
         });
         currentStateService.getCustomer().then(function(response) {
@@ -95,50 +100,118 @@
         }
         this.selectedCategory = category;
         this.secondStep = true;
-        this.selectedService = {};
-        this.selectedServiceName = null;
+        this.serviceMetadata = {};
+        this.serviceType = null;
         this.selectedPackage = {};
         this.agreementShow = false;
         this.resourceTypesBlock = false;
         this.selectedResourceType = null;
-        this.thirdStep = false;
-        this.providers = this.categoryProviders[this.selectedCategory.name];
+        this.serviceTypes = this.categoryServiceTypes[this.selectedCategory.name];
         this.resetPriceItems();
       },
-      setService:function(service) {
-        this.selectedService = this.servicesList[service];
-        this.selectedServiceName = service;
-        this.resourceTypesBlock = true;
-        this.thirdStep = false;
+      setServiceType:function(serviceType) {
+        this.serviceMetadata = this.servicesMetadata[serviceType];
+        this.serviceType = serviceType;
+        this.resourceTypesBlock = false;
         this.fields = [];
-        if (this.selectedService) {
-          var types = Object.keys(this.selectedService.resources);
+        if (this.services[serviceType].length == 1) {
+          this.setService(this.services[serviceType][0]);
+        }
+      },
+      setService: function(service) {
+        this.selectedService = service;
+        if (this.serviceMetadata) {
+          var types = Object.keys(this.serviceMetadata.resources);
           if (types.length === 1) {
             this.setResourceType(types[0]);
             this.resourceTypesBlock = false;
-            this.configureStepNumber = 3;
-          } else {
             this.configureStepNumber = 4;
+          } else {
+            this.resourceTypesBlock = true;
+            this.configureStepNumber = 5;
           }
         }
       },
       setResourceType: function(type) {
         var vm = this;
         vm.selectedResourceType = type;
-        vm.thirdStep = true;
         vm.fields = [];
-        var resource = vm.selectedService.resources[vm.selectedResourceType];
-        var service = vm.services[vm.selectedServiceName];
-        if (resource) {
-          vm.instance = servicesService.$create(resource);
-          vm.instance.service_project_link = service.service_project_link_url;
-          servicesService.getOption(resource).then(function(response) {
-            vm.setFields(response.actions.POST);
+        var resourceUrl = vm.serviceMetadata.resources[vm.selectedResourceType];
+        if (resourceUrl) {
+          vm.instance = servicesService.$create(resourceUrl);
+          vm.instance.service_project_link = this.selectedService.service_project_link_url;
+          servicesService.getOption(resourceUrl).then(function(response) {
+            var formOptions = response.actions.POST
+            vm.allFormOptions = formOptions;
+            if (vm.serviceType == 'OpenStack') {
+              vm.setOpenStackFields()
+            } else {
+              vm.setFields(formOptions);
+            }
           });
         }
       },
+      setOpenStackFields: function() {
+        var vm = this;
+
+        function formatChoices(items) {
+          return items.map(function(item) {
+            return {
+              value: item.url,
+              display_name: item.name
+            }
+          });
+        }
+        var query = {settings_uuid: vm.selectedService.settings_uuid};
+        var imagesUrl = vm.serviceMetadata.properties.Image;
+        var flavorsUrl = vm.serviceMetadata.properties.Flavor;
+
+        var promises = [
+          servicesService.getList(query, imagesUrl).then(formatChoices),
+          servicesService.getList(query, flavorsUrl).then(formatChoices),
+          usersService.getCurrentUser().then(function(user) {
+            return keysService.getList({user_uuid: user.uuid}).then(formatChoices)
+          })
+        ];
+        $q.all(promises).then(function(properties) {
+          vm.fields.push({
+            name: 'name',
+            label: 'Name',
+            type: 'string',
+            required: true
+          })
+          vm.fields.push({
+            name: 'description',
+            label: 'Description',
+            type: 'string',
+            required: false
+          })
+          vm.fields.push({
+            name: 'flavor',
+            label: 'Size',
+            type: 'choice',
+            required: true,
+            choices: properties[1]
+          })
+          vm.fields.push({
+            name: 'image',
+            label: 'Image',
+            type: 'choice',
+            required: true,
+            choices: properties[0]
+          })
+          vm.fields.push({
+            name: 'ssh_public_key',
+            label: 'Key',
+            type: 'choice',
+            required: false,
+            choices: properties[2]
+          })
+        })
+      },
       setFields: function(formOptions) {
-        this.allFormOptions = formOptions;
+        var vm = this;
+
         for (var name in formOptions) {
           if (formOptions[name].read_only || name == this.UNIQUE_FIELDS.service_project_link) {
             continue;
@@ -238,9 +311,8 @@
         vm.categories = [];
         vm.selectedCategory = null;
         vm.secondStep = false;
-        vm.thirdStep = false;
-        vm.selectedService = {};
-        vm.selectedServiceName = null;
+        vm.serviceMetadata = {};
+        vm.serviceType = null;
         vm.resourceTypesBlock = false;
         vm.fields = [];
         vm.priceItems = [];
@@ -253,21 +325,26 @@
         myBlockUI.start();
         currentStateService.getProject().then(function(response) {
           vm.currentProject = response;
+          vm.services = {};
           for (var j = 0; j < categories.length; j++) {
             var category = categories[j];
-            vm.categoryProviders[category.name] = [];
+            vm.categoryServiceTypes[category.name] = [];
             for (var i = 0; i < vm.currentProject.services.length; i++) {
               var service = vm.currentProject.services[i];
               if (service.state != 'Erred'
                 && category.services
                 && (category.services.indexOf(service.type) + 1)
-                && !(vm.categoryProviders[category.name].indexOf(service.type) + 1)
               ) {
-                vm.categoryProviders[category.name].push(service.type);
-                vm.services[service.type] = service;
+                if (!(vm.categoryServiceTypes[category.name].indexOf(service.type) + 1)) {
+                  vm.categoryServiceTypes[category.name].push(service.type);
+                }
+                if (!vm.services[service.type]) {
+                  vm.services[service.type] = [];
+                }
+                vm.services[service.type].push(service);
               }
             }
-            if (vm.categoryProviders[category.name].length > 0) {
+            if (vm.categoryServiceTypes[category.name].length > 0) {
               vm.categories.push(category);
               vm.renderStore = true;
             }
@@ -301,7 +378,7 @@
       selectSupportPackage: function(supportPackage) {
         this.agreementShow = true;
         this.selectedPackage = supportPackage;
-        this.selectedServiceName = 'Total';
+        this.serviceType = 'Total';
 
         var type = 'Support plan';
         var display_name = supportPackage.name;
