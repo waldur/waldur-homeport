@@ -29,6 +29,11 @@
             position: absolute;
             right: 5px;
             top: 0px;
+            @include bp(xs) {
+                position: static;
+                padding-top: 5px;
+                margin-left: -20px;
+            } // xs
         } // &.right-sort
         .app-title {
             @include inline-middle;

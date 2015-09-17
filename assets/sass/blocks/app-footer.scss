@@ -20,11 +20,9 @@
         float: left;
         @include bp(xs) {
             display: block;
-            float: none;
         } // xs
         @include bp(sm) {
             display: block;
-            float: none;
         } // sm
     } // copy
     .footer-nav {
@@ -35,18 +33,16 @@
                 @include inline-middle;
                 content: '|';
                 opacity: 0.4;
-                @include property(margin, 0 10);
             }
         }
         @include bp(xs) {
-            @include property(margin, 10 0 20 0);
             display: block;
-            float: none;
+            margin-bottom: 11px;
+            font-size: 12px;
         } // xs
         @include bp(sm) {
-            @include property(margin, 10 0 20 0);
+            margin-bottom: 11px;
             display: block;
-            float: none;
         } // sm
     } // footer-nav
 } // app-footer
