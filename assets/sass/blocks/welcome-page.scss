@@ -16,10 +16,14 @@
         padding-top: 100px;
         background: url(../images/decor-image-pi.png) no-repeat;
         background-size: cover;
+        @include bp(xs) {
+            background-position: center;
+        }
     }
     &.login {
-        height: calc(100vh - 100px);
+        height: calc(100vh - 40px);
         padding-bottom: 0;
+        min-height: 300px;
     }
     .login-box {
         position: absolute;
@@ -27,11 +31,13 @@
         left: 50%;
         width: 40%;
         margin-left: calc(-40% / 2);
+        z-index: 99;
         @include bp(xs) {
-            position: static !important;
             margin: auto;
-            margin-top: 20px !important;
+            margin-top: 20px;
             margin-bottom: 20px !important;
+            left: 50%;
+            margin-left: -170px;
             width: 95%;
             .white-box {
                 @include property(margin, 10 20);
@@ -51,7 +57,7 @@
         @include bp(sm) {
             position: static !important;
             margin: auto;
-            margin-top: 20px !important;
+            margin-top: 20px;
             margin-bottom: 20px !important;
             width: 85%;
             .white-box {
@@ -75,7 +81,7 @@
         } // md
         .white-box {
             @include boxshadow(0 2 2 2, rgba(47, 47, 47, 0.23));
-            max-height: calc(90vh - 100px) !important;
+            max-height: 90vh;
             overflow-y: auto;
         }
         .row-login {
@@ -156,6 +162,9 @@
         right: 50px;
         z-index: 9;
     } // img
+    @include bp(xs) {
+        padding-bottom: 100px;
+    }
 } // site-welcome
 
 .site-block {

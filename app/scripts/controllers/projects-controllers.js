@@ -148,6 +148,7 @@
        'currentStateService',
        'resourcesService',
        '$rootScope',
+       'ENV',
        ProjectListController]);
 
   function ProjectListController(
@@ -155,7 +156,8 @@
     projectPermissionsService,
     currentStateService,
     resourcesService,
-    $rootScope) {
+    $rootScope,
+    ENV) {
     var controllerScope = this;
     var Controller = BaseProjectListController.extend({
       projectUsers: {},
@@ -171,8 +173,10 @@
         this._super();
         this.entityOptions.expandable = true;
 
-        this.expandableOptions = [
-          {
+        this.expandableOptions = [];
+
+        if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('resources') == -1) {
+          this.expandableOptions.push({
             isList: true,
             sectionTitle: 'Resources',
             articleBlockText: 'New resources could be added through',
@@ -194,8 +198,11 @@
                 type: 'link'
               }
             ]
-          },
-          {
+          });
+        }
+
+        if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('users') == -1) {
+          this.expandableOptions.push({
             isList: true,
             sectionTitle: 'Users',
             articleBlockText: 'Manage users through',
@@ -221,8 +228,8 @@
                 type: 'link'
               }
             ]
-          }
-        ];
+          });
+        }
       },
       showMore: function(project) {
         if (!this.projectUsers[project.uuid]) {

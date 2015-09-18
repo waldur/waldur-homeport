@@ -10,7 +10,15 @@
       restrict: 'A',
       scope: {},
       link: function(scope, element, attrs) {
-        if (!ENV.featuresVisible && ENV.toBeFeatures.indexOf(attrs.visible) !== -1) {
+        var doRemove = false,
+          features = attrs.visible.split(',');
+        for (var i = 0; i < features.length; i++) {
+          if (ENV.toBeFeatures.indexOf(features[i].trim()) !== -1) {
+            doRemove = true;
+            break;
+          }
+        }
+        if (!ENV.featuresVisible && doRemove) {
           element.remove();
         }
       }

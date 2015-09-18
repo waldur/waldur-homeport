@@ -9,6 +9,11 @@
     }
     &.in-home {
         > li {
+            &.logo-box {
+                @include bp(xs) {
+                    display: block;
+                } // xs
+            }
             > a {
                 color: #1F3305;
                 &:hover {
@@ -51,12 +56,12 @@
                 display: none;
             } // md
         } // logo-box
-        &:not(.logo-box):not(.mobile-trigger):not(.customers):not(.project-dropdown):not(.user-dropdown) {
+        &:not(.logo-box):not(.mobile-trigger):not(.resources):not(.appstore):not(.user-dropdown) {
             @include bp(sm) {
                 display: none;
             } // xs
         }
-        &:not(.logo-box):not(.mobile-trigger):not(.customers):not(.project-dropdown) {
+        &:not(.logo-box):not(.mobile-trigger):not(.resources):not(.appstore) {
             @include bp(xs) {
                 display: none;
             } // xs
