@@ -184,8 +184,7 @@
             type = 'choice';
             if (name in validChoices) {
               choices = validChoices[name];
-            }
-            else {
+            } else {
               choices = formOptions[name].choices;
             }
           }
@@ -384,7 +383,7 @@
           if (this.allFormOptions[name]) {
             message += this.allFormOptions[name].label + ': ' + this.errors[name] + '<br/>';
           } else {
-            message += name+ ': ' + this.errors[name] + '<br/>';
+            message += name + ': ' + this.errors[name] + '<br/>';
           }
         }
         this.errorFlash(message);
