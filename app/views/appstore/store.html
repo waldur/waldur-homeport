@@ -103,7 +103,7 @@
 
                         <div ng-repeat="field in AppStore.fields"
                              ng-switch="field.type"
-                             ng-if="AppStore.showOptionalFields || field.required">
+                             ng-if="AppStore.showOptionalFields || field.required || AppStore.errors[field.name]">
 
                             <form ng-switch-when="string">
                                 <div class="string-field">
