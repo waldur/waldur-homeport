@@ -141,10 +141,10 @@
           vm.instance = servicesService.$create(resourceUrl);
           vm.instance.service_project_link = this.selectedService.service_project_link_url;
           servicesService.getOption(resourceUrl).then(function(response) {
-            var formOptions = response.actions.POST
+            var formOptions = response.actions.POST;
             vm.allFormOptions = formOptions;
             if (vm.serviceType == 'OpenStack') {
-              vm.setOpenStackFields()
+              vm.setOpenStackFields();
             } else {
               vm.setFields(formOptions);
             }
@@ -179,39 +179,37 @@
             label: 'Name',
             type: 'string',
             required: true
-          })
+          });
           vm.fields.push({
             name: 'description',
             label: 'Description',
             type: 'string',
             required: false
-          })
+          });
           vm.fields.push({
             name: 'flavor',
             label: 'Size',
             type: 'choice',
             required: true,
             choices: properties[1]
-          })
+          });
           vm.fields.push({
             name: 'image',
             label: 'Image',
             type: 'choice',
             required: true,
             choices: properties[0]
-          })
+          });
           vm.fields.push({
             name: 'ssh_public_key',
             label: 'Key',
             type: 'choice',
             required: false,
             choices: properties[2]
-          })
+          });
         })
       },
       setFields: function(formOptions) {
-        var vm = this;
-
         for (var name in formOptions) {
           if (formOptions[name].read_only || name == this.UNIQUE_FIELDS.service_project_link) {
             continue;
