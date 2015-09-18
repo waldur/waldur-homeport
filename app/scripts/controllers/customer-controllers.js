@@ -368,7 +368,7 @@
           } else {
             this.service.$get(service_type, uuid).then(function(provider) {
               vm.list.unshift(provider);
-              vm.showMore(item);
+              vm.showMore(provider);
               provider.expandItemOpen = true;
             });
           }
