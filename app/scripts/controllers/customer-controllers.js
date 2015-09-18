@@ -297,14 +297,13 @@
       '$stateParams',
       'baseServiceListController',
       'joinService',
-      'joinServiceProjectLinkService',
       'servicesService',
       'blockUI',
       CustomerServiceTabController
     ]);
 
   function CustomerServiceTabController(
-    $stateParams, baseServiceListController, joinService, joinServiceProjectLinkService, servicesService, blockUI) {
+    $stateParams, baseServiceListController, joinService, servicesService, blockUI) {
     var controllerScope = this;
     var Controller = baseServiceListController.extend({
       init: function() {
@@ -330,26 +329,16 @@
         }
         var myBlockUI = blockUI.instances.get(service.uuid);
         myBlockUI.start();
-        servicesService.$get(null, service.settings).then(function(settings) {
-          service.values = settings;
-          if (service.fields) {
-            myBlockUI.stop();
-            return;
-          }
-          vm.getOptions(service.service_type).then(function(options) {
-            service.options = options;
-            service.fields = vm.getFields(options)
+
+        this.service.getOptions(service.service_type).then(function(options) {
+          service.options = options;
+          service.fields = vm.getFields(options);
+
+          servicesService.$get(null, service.settings).then(function(settings) {
+            service.values = settings;
             myBlockUI.stop();
           });
-        })
-      },
-      getOptions: function(serviceType) {
-        return servicesService.getServicesList().then(function(services) {
-          var url = services[serviceType].url;
-          return servicesService.getOption(url).then(function(response) {
-            return response.actions.POST;
-          })
-        })
+        });
       },
       getFields: function(options) {
         var fields = [];
@@ -365,33 +354,48 @@
       },
       afterGetList: function() {
         var vm = this;
-        if ($stateParams.providerUuid && $stateParams.providerType) {
-          servicesService.getServicesList().then(function(services) {
-            var endpoint = services[$stateParams.providerType].url;
-            servicesService.$get($stateParams.providerUuid, endpoint).then(function(provider) {
-              if (provider.customer.indexOf($stateParams.uuid) + 1) {
-                provider.expandItemOpen = true;
-                vm.list = [provider].concat(vm.list);
-                vm.currentProvider = provider;
-              }
+        var service_type = $stateParams.providerType;
+        var uuid = $stateParams.providerUuid;
+
+        if (service_type && uuid) {
+          var item = vm.findItem(service_type, uuid);
+          if (item) {
+            // Move found element to the start of the list for user's convenience
+            vm.list.splice(vm.list.indexOf(item), 1);
+            vm.list.unshift(item);
+            vm.showMore(item);
+            item.expandItemOpen = true;
+          } else {
+            this.service.$get(service_type, uuid).then(function(provider) {
+              vm.list.unshift(provider);
+              vm.showMore(item);
+              provider.expandItemOpen = true;
             });
-          });
+          }
+        }
+      },
+      findItem: function(service_type, uuid) {
+        for (var i = 0; i < this.list.length; i++) {
+          var item = this.list[i];
+          if (item.uuid == uuid && item.service_type == service_type) {
+            return item;
+          }
         }
       },
       updateSettings: function(service) {
-        var saveService = joinServiceProjectLinkService.$update(null, service.settings, service.values);
+        var saveService = joinService.$update(null, service.settings, service.values);
         return saveService.then(this.onSaveSuccess.bind(this, service), this.onSaveError.bind(this, service));
       },
       update: function(service) {
-        var saveService = joinServiceProjectLinkService.$update(null, service.url, service);
+        var saveService = joinService.$update(null, service.url, service);
         return saveService.then(this.onSaveSuccess.bind(this), this.onSaveError.bind(this, service));
       },
       onSaveSuccess: function(service) {
-        if (service && service.values) {
-          service.revision = service.values.toJSON();
+        if (service) {
+          this.saveRevision(service);
         }
       },
-      onSaveError: function(response) {
+      onSaveError: function(service, response) {
         var message = '';
         for (var name in response.data) {
           message += (service.options[name] ? service.options[name].label : name) + ': ' + response.data[name];
@@ -401,21 +405,30 @@
         }
       },
       hasChanged: function(model) {
+        if (!model.values) {
+          return false;
+        }
+
+        if (!model.revision) {
+          this.saveRevision(model);
+          return false;
+        }
+
+        return this.revisionsDiffer(model.revision, model.values.toJSON());
+      },
+      saveRevision: function(model) {
         if (model.values) {
-          if (!model.revision) {
-            model.revision = model.values.toJSON();
-            return false;
-          }
-          var fields = model.values.toJSON();
-          for (var fieldName in fields) {
-            var lastValue = model.revision[fieldName] ? model.revision[fieldName] : '';
-            var nextValue = fields[fieldName] ? fields[fieldName] : '';
-            if (lastValue != nextValue) {
-              return true;
-            }
+          model.revision = model.values.toJSON();
+        }
+      },
+      revisionsDiffer: function(revision1, revision2) {
+        for (var name in revision1) {
+          var val1 = revision1[name] ? revision1[name] : '';
+          var val2 = revision2[name] ? revision2[name] : '';
+          if (val1 != val2) {
+            return true;
           }
         }
-        return false;
       }
     });
 
