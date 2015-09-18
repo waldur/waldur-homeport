@@ -86,7 +86,9 @@
           ]
         };
       },
-
+      removeInstance: function(model) {
+        return this.service.$deleteByUrl(model.url);
+      },
       checkPermissions: function() {
         var vm = this;
         usersService.getCurrentUser().then(function(user) {
