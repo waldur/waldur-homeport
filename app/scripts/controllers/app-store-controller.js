@@ -143,85 +143,54 @@
           servicesService.getOption(resourceUrl).then(function(response) {
             var formOptions = response.actions.POST;
             vm.allFormOptions = formOptions;
-            if (vm.serviceType == 'OpenStack') {
-              vm.setOpenStackFields();
-            } else {
-              vm.setFields(formOptions);
-            }
+            vm.getValidChoices().then(function(validChoices) {
+              vm.setFields(formOptions, validChoices);
+            });
           });
         }
       },
-      setOpenStackFields: function() {
+      getValidChoices: function() {
         var vm = this;
-
-        function formatChoices(items) {
-          return items.map(function(item) {
-            return {
-              value: item.url,
-              display_name: item.name
-            }
+        var promises = [];
+        var validChoices = {};
+        angular.forEach(vm.serviceMetadata.properties, function(url, property) {
+          var query = {settings_uuid: vm.selectedService.settings_uuid};
+          var promise = servicesService.getList(query, url).then(function(response) {
+            validChoices[property.toLowerCase()] = vm.formatChoices(response);
           });
-        }
-        var query = {settings_uuid: vm.selectedService.settings_uuid};
-        var imagesUrl = vm.serviceMetadata.properties.Image;
-        var flavorsUrl = vm.serviceMetadata.properties.Flavor;
-
-        var promises = [
-          servicesService.getList(query, imagesUrl).then(formatChoices),
-          servicesService.getList(query, flavorsUrl).then(formatChoices),
-          usersService.getCurrentUser().then(function(user) {
-            return keysService.getList({user_uuid: user.uuid}).then(formatChoices)
-          })
-        ];
-        $q.all(promises).then(function(properties) {
-          vm.fields.push({
-            name: 'name',
-            label: 'Name',
-            type: 'string',
-            required: true
-          });
-          vm.fields.push({
-            name: 'description',
-            label: 'Description',
-            type: 'string',
-            required: false
-          });
-          vm.fields.push({
-            name: 'flavor',
-            label: 'Size',
-            type: 'choice',
-            required: true,
-            choices: properties[1]
-          });
-          vm.fields.push({
-            name: 'image',
-            label: 'Image',
-            type: 'choice',
-            required: true,
-            choices: properties[0]
-          });
-          vm.fields.push({
-            name: 'ssh_public_key',
-            label: 'Key',
-            type: 'choice',
-            required: false,
-            choices: properties[2]
-          });
-        })
+          promises.push(promise);
+        });
+        return $q.all(promises).then(function() {
+          return validChoices;
+        });
       },
-      setFields: function(formOptions) {
+      formatChoices: function(items) {
+        return items.map(function(item) {
+          return {
+            value: item.url,
+            display_name: item.name
+          }
+        });
+      },
+      setFields: function(formOptions, validChoices) {
         for (var name in formOptions) {
           if (formOptions[name].read_only || name == this.UNIQUE_FIELDS.service_project_link) {
             continue;
           }
 
+          var choices;
           var type = formOptions[name].type;
           if (type == 'field') {
             type = 'choice';
+            if (name in validChoices) {
+              choices = validChoices[name];
+            }
+            else {
+              choices = formOptions[name].choices;
+            }
           }
 
           var required = formOptions[name].required;
-          var choices = formOptions[name].choices;
 
           this.fields.push({
             name: name,
