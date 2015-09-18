@@ -299,11 +299,12 @@
       'joinService',
       'joinServiceProjectLinkService',
       'servicesService',
+      'blockUI',
       CustomerServiceTabController
     ]);
 
   function CustomerServiceTabController(
-    $stateParams, baseServiceListController, joinService, joinServiceProjectLinkService, servicesService) {
+    $stateParams, baseServiceListController, joinService, joinServiceProjectLinkService, servicesService, blockUI) {
     var controllerScope = this;
     var Controller = baseServiceListController.extend({
       init: function() {
@@ -327,14 +328,18 @@
         if (service.values) {
           return;
         }
+        var myBlockUI = blockUI.instances.get(service.uuid);
+        myBlockUI.start();
         servicesService.$get(null, service.settings).then(function(settings) {
           service.values = settings;
           if (service.fields) {
+            myBlockUI.stop();
             return;
           }
           vm.getOptions(service.service_type).then(function(options) {
             service.options = options;
             service.fields = vm.getFields(options)
+            myBlockUI.stop();
           });
         })
       },
@@ -375,14 +380,16 @@
       },
       updateSettings: function(service) {
         var saveService = joinServiceProjectLinkService.$update(null, service.settings, service.values);
-        return saveService.then(this.onSaveSuccess.bind(this), this.onSaveError.bind(this, service));
+        return saveService.then(this.onSaveSuccess.bind(this, service), this.onSaveError.bind(this, service));
       },
       update: function(service) {
         var saveService = joinServiceProjectLinkService.$update(null, service.url, service);
         return saveService.then(this.onSaveSuccess.bind(this), this.onSaveError.bind(this, service));
       },
-      onSaveSuccess: function() {
-        this.successFlash('Provider has been updated');
+      onSaveSuccess: function(service) {
+        if (service && service.values) {
+          service.revision = service.values.toJSON();
+        }
       },
       onSaveError: function(response) {
         var message = '';

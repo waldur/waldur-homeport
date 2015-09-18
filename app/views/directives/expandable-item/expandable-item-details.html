@@ -1,31 +1,31 @@
-<section>
+<section block-ui="{{ ::expandableElement.uuid }}">
     <header>
-        <h3 ng-show="expandableOptions.title" class="title-expandable">{{ expandableOptions.title }}</h3>
+        <h3 ng-show="expandableOptions.title" class="title-expandable">{{ ::expandableOptions.title }}</h3>
         <div class="short-form">
             <div class="form-row" ng-repeat="field in expandableElement.fields">
                 <div class="col label">
-                    <label for="{{ field.name }}">
-                        <helpicon help-text="{{ field.help_text }}" ng-if="field.help_text"></helpicon>
-                        {{ field.label }}
+                    <label for="{{ ::expandableElement.uuid }}_{{ ::field.name }}">
+                        <helpicon help-text="{{ ::field.help_text }}" ng-if="::field.help_text"></helpicon>
+                        {{ ::field.label }}
                     </label>
                 </div>
-                <div class="col input input-full" ng-if="!expandableElement.shared" ng-switch="field.type">
-                    <input id="{{ field.name }}"
+                <div class="col input input-full" ng-if="!expandableElement.shared" ng-switch="::field.type">
+                    <input id="{{ ::expandableElement.uuid }}_{{ ::field.name }}"
                            type="text"
                            ng-switch-when="string"
                            ng-model="expandableElement.values[field.name]">
 
-                    <input id="{{ field.name }}"
+                    <input id="{{ ::expandableElement.uuid }}_{{ ::field.name }}"
                            type="text"
                            ng-switch-when="url"
                            ng-model="expandableElement.values[field.name]">
 
-                    <input id="{{ field.name }}"
+                    <input id="{{ ::expandableElement.uuid }}_{{ ::field.name }}"
                            type="checkbox"
                            ng-switch-when="boolean"
                            ng-model="expandableElement.values[field.name]"/>
 
-                    <select id="{{ field.name }}"
+                    <select id="{{ ::expandableElement.uuid }}_{{ ::field.name }}"
                             ng-switch-when="choice"
                             ng-model="expandableElement.values[field.name]"
                             ng-options="item.value as item.display_name for item in field.choices">
