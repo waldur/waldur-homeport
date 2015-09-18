@@ -12,7 +12,7 @@
 
     .editable-click:hover, a.editable-click:hover {
         border: 1px solid rgb(216, 216, 216);
-        color: black;
+        color: $hover-color;
         padding: 3px;
         margin: 0px;
     }

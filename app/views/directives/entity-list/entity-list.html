@@ -111,9 +111,8 @@
                         </span>
 
                         <h3 ng-switch-when="name" class="item-title">
-                            <a ng-if="field.link" ui-sref="{{ field.link }}" stoppropagation>
-                                {{ entity[field.propertyName] }}
-                            </a>
+                            <a ng-if="field.link"
+                               ui-sref="{{ field.link }}" stoppropagation>{{ entity[field.propertyName] }}</a>
                             <a ng-if="!field.link" stoppropagation>{{ entity[field.propertyName] }}</a>
                             <span ng-if="field.subtitle" class="subtitle">
                                 #{{ entity.key }} - Created on {{ entity.created | date:'medium' }}
@@ -187,5 +186,5 @@
 
     <pagination pages-list="entityList" pages-service="entityList.service"
                 ng-if="entityList.list.length > 0"></pagination>
-
+    <div class="clear"></div>
 </div>

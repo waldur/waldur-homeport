@@ -6,28 +6,34 @@
                  ng-class="{'active': project.selected}">
                 <h4 ng-class="{'current': project.selected}">
                     <a stoppropagation ui-sref="projects.details({uuid: project.uuid})">{{ project.name }}</a>
-                    <a visible="premiumSupport" stoppropagation class="support" ng-if="!project.plan"
-                       ng-click="DashboardController.addSupportContract(project)">Add SLA</a>
-                    <a visible="premiumSupport" stoppropagation class="support"
-                       ng-if="project.plan || project.has_pending_contracts"
-                       ui-sref="projects.details({uuid: project.uuid, tab: 'premiumSupport'})">Show SLAs</a>
+                    <div class="support-buttons" visible="premiumSupport">
+                        <a stoppropagation class="button-support"
+                           ng-if="::project.plan"
+                           ui-sref="projects.details({uuid: project.uuid, tab: 'premiumSupport'})">SLA details</a>
+                        <a stoppropagation class="button-support pending"
+                           ng-if="::!project.plan && project.has_pending_contracts"
+                           ui-sref="projects.details({uuid: project.uuid, tab: 'premiumSupport'})">SLA pending</a>
+                        <a stoppropagation class="button-support pending"
+                           ng-if="::!project.plan && !project.has_pending_contracts"
+                           ng-click="DashboardController.addSupportContract(project)">Add SLA</a>
+                    </div>
                 </h4>
             </div>
             <div ng-if="project.selected" class="body">
                 <ul class="counters">
-                    <li class="active-alert">
+                    <li class="active-alert" ng-class="{'empty': !project.count.alerts}" visible="alerts">
                         <div class="counter-name">Active alerts</div>
                         <div class="counter" ng-bind="project.count.alerts"></div>
                     </li>
-                    <li class="resources empty">
+                    <li class="resources" ng-class="{'empty': !project.count.resources}" visible="resources">
                         <div class="counter-name">Resources</div>
                         <div class="counter" ng-bind="project.count.resources"></div>
                     </li>
-                    <li class="services empty">
+                    <li visible="providers" class="services" ng-class="{'empty': !project.count.services}" visible="providers">
                         <div class="counter-name">Providers</div>
                         <div class="counter" ng-bind="project.count.services"></div>
                     </li>
-                    <li class="people">
+                    <li class="people" ng-class="{'empty': !project.count.users}" visible="users">
                         <div class="counter-name">People</div>
                         <div class="counter" ng-bind="project.count.users"></div>
                     </li>

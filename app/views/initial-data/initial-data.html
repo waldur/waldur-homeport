@@ -39,42 +39,44 @@
             </div>
         </aside>
         <div class="second-step">
-            <h2>Enter access codes</h2>
-            <div class="fields-block state" ng-repeat="service in InitialData.chosenServices">
-                <div class="icon-block">
-                    <img ng-src="/static/images/appstore/icon-{{ service.name.toLowerCase() }}.png"/>
-                    <span>{{ service.name }}</span>
-                    <a ui-sref="help.details({ name: service.name })" target="_blank" class="info">?</a>
+            <div visible="providers">
+                <h2>Enter access codes</h2>
+                <div class="fields-block state" ng-repeat="service in InitialData.chosenServices">
+                    <div class="icon-block">
+                        <img ng-src="/static/images/appstore/icon-{{ service.name.toLowerCase() }}.png"/>
+                        <span>{{ service.name }}</span>
+                        <a ui-sref="help.details({ name: service.name })" target="_blank" class="info">?</a>
+                    </div>
+                    <div ng-repeat="option in service.options" class="fields">
+                        <label>{{ ::option.help_text||option.label }}</label>
+                        <input ng-model="option.value" type="text" ng-if="!option.choices && !service.saved"/>
+                        <input ng-model="option.value" type="text" disabled ng-if="!option.choices && service.saved"/>
+                        <select ng-if="option.choices"
+                                ng-model="option.value"
+                                ng-init="option.value=option.choices[0].value"
+                                ng-options="item.value as item.display_name for item in option.choices">
+                        </select>
+                        <div ng-repeat="error in service.errors[option.key]" ng-bind="error"></div>
+                    </div>
+                    <div ng-if="service.saved" class="fields">
+                        Provider is saved.
+                    </div>
+                    <div ng-repeat="error in service.errors.non_field_errors" class="fields">
+                        {{ error }}
+                    </div>
+                    <div class="clear"></div>
+                    <span class="remove-service" ng-click="InitialData.removeService(service)">✖</span>
                 </div>
-                <div ng-repeat="option in service.options" class="fields">
-                    <label>{{ ::option.help_text||option.label }}</label>
-                    <input ng-model="option.value" type="text" ng-if="!option.choices && !service.saved"/>
-                    <input ng-model="option.value" type="text" disabled ng-if="!option.choices && service.saved"/>
-                    <select ng-if="option.choices"
-                            ng-model="option.value"
-                            ng-init="option.value=option.choices[0].value"
-                            ng-options="item.value as item.display_name for item in option.choices">
-                    </select>
-                    <div ng-repeat="error in service.errors[option.key]" ng-bind="error"></div>
+                <div class="fields-block green">
+                    <div class="select-block">
+                        <label>Add another provider</label>
+                        <select ng-model="InitialData.chosenService"
+                                ng-options="key as key for (key, value) in InitialData.service_options">
+                        </select>
+                    </div>
+                    <a class="button" ng-click="InitialData.addChosenService()">Add provider</a>
+                    <div class="clear"></div>
                 </div>
-                <div ng-if="service.saved" class="fields">
-                    Provider is saved.
-                </div>
-                <div ng-repeat="error in service.errors.non_field_errors" class="fields">
-                    {{ error }}
-                </div>
-                <div class="clear"></div>
-                <span class="remove-service" ng-click="InitialData.removeService(service)">✖</span>
-            </div>
-            <div class="fields-block green">
-                <div class="select-block">
-                    <label>Add another provider</label>
-                    <select ng-model="InitialData.chosenService"
-                            ng-options="key as key for (key, value) in InitialData.service_options">
-                    </select>
-                </div>
-                <a class="button" ng-click="InitialData.addChosenService()">Add provider</a>
-                <div class="clear"></div>
             </div>
             <div class="button-block">
                 <a class="button" ng-click="InitialData.save()">Let’s get started</a>

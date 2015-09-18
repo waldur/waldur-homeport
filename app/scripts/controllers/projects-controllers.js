@@ -46,7 +46,7 @@
               }.bind(this),
             }
           ];
-          if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('appstore') == -1) {
+          if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('resources') == -1) {
             this.actionButtonsListItems.push({
               title: 'Create resource',
               clickFunction: function(project) {
@@ -70,6 +70,7 @@
               title: 'Projects',
               createLink: 'projects.create',
               createLinkText: 'Add project',
+              expandable: true
             },
             list: [
               {
@@ -147,6 +148,7 @@
        'currentStateService',
        'resourcesService',
        '$rootScope',
+       'ENV',
        ProjectListController]);
 
   function ProjectListController(
@@ -154,7 +156,8 @@
     projectPermissionsService,
     currentStateService,
     resourcesService,
-    $rootScope) {
+    $rootScope,
+    ENV) {
     var controllerScope = this;
     var Controller = BaseProjectListController.extend({
       projectUsers: {},
@@ -170,8 +173,10 @@
         this._super();
         this.entityOptions.expandable = true;
 
-        this.expandableOptions = [
-          {
+        this.expandableOptions = [];
+
+        if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('resources') == -1) {
+          this.expandableOptions.push({
             isList: true,
             sectionTitle: 'Resources',
             articleBlockText: 'New resources could be added through',
@@ -193,8 +198,11 @@
                 type: 'link'
               }
             ]
-          },
-          {
+          });
+        }
+
+        if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('users') == -1) {
+          this.expandableOptions.push({
             isList: true,
             sectionTitle: 'Users',
             articleBlockText: 'Manage users through',
@@ -220,8 +228,8 @@
                 type: 'link'
               }
             ]
-          }
-        ];
+          });
+        }
       },
       showMore: function(project) {
         if (!this.projectUsers[project.uuid]) {
@@ -673,7 +681,7 @@
           {
             name: 'resource_type',
             title: 'OpenStack',
-            value: 'IaaS.Instance'
+            value: 'OpenStack.Instance'
           },
           {
             name: 'resource_type',
@@ -1059,7 +1067,7 @@ angular.module('ncsaas')
           entityData: {
             noDataText: 'You have no SLAs yet.',
             createLink: 'appstore.store({category: "support"})',
-            createLinkText: 'Create SLA',
+            createLinkText: 'Add SLA',
             expandable: true
           },
           list: [

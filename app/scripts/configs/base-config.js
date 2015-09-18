@@ -70,7 +70,7 @@ angular.module('ncsaas')
     ],
     toBeFeatures: [
       'openStackPrivateCloud',
-      'appstore',
+      'resources',
       'pricelistsCompare',
       'prePaid',
       'support',
@@ -98,7 +98,7 @@ angular.module('ncsaas')
     requestTimeout: 1000 * 10,
 
     resourceFilters: {
-      VMs: ['DigitalOcean.Droplet', 'IaaS.Instance'],
+      VMs: ['DigitalOcean.Droplet', 'OpenStack.Instance'],
       applications: ['Oracle.Database', 'GitLab.Project']
     },
 

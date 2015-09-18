@@ -18,6 +18,9 @@ body {
     } // &.no-scroll
     @include bp(xs) {
         @include property(font-size, 16);
+        .rem-mob.rem-mob.rem-mob { //remove on mobile
+            display: none;
+        }//rem-mob
     } // xs
     @include bp(sm) {
         @include property(font-size, 16);
@@ -43,8 +46,10 @@ img {
 a {
     cursor: pointer;
     color: $link-color;
+    text-decoration: underline;
     &:hover {
         text-decoration: none;
+        color: $hover-color;
     } // &:hover
 } // a
 

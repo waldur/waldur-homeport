@@ -25,6 +25,7 @@ angular.module('ncsaas')
       }
     ],
     serviceCategories: [],
-    homeTemplate: 'views/home/omancloud/home.html',
-    initialDataTemplate: 'views/initial-data/omancloud/initial-data.html'
+    homeTemplate: 'views/home/private-iaas/home.html',
+    homeHeaderTemplate: 'views/partials/private-iaas/site-header.html',
+    homeLoginTemplate: 'views/home/private-iaas/login.html'
   });

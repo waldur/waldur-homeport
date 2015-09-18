@@ -23,10 +23,23 @@
     } // &.dropdown-active
     &:hover {
         box-shadow: 0 1px 1px rgba(0,0,0,0.1);
-        color: #000000;
+        color: $hover-color;
     } // &:hover
 } // button
+.button-support {
+    @extend .button;
+    padding: 4px;
+    font-weight: normal;
+    line-height: 19px;
+    height: 25px;
+    font-size: 14px;
 
+    &.pending {
+      border: 1px solid #50b848;
+      background-color: white;
+      color: #50b848;
+    }
+}
 .button-cancel {
     @include inline-middle;
     @include property(border-radius, 2);

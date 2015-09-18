@@ -62,11 +62,10 @@
         <div class="container">
             <div class="tabs-wrapper">
                 <aside>
-                    <div class="input-group">
+                    <div class="input-group rem-mob">
                         <input type="search" placeholder="Search" ng-model="generalSearch" ng-change="search()"/>
                     </div>
-                    <a class="open-tabs button" ng-click="openTabs = !openTabs">Tabs</a>
-                    <ul class="tabs-links" ng-class="{'tabs-opened': openTabs}">
+                    <ul class="tabs-links tabs-opened" ng-class="{'tabs-opened': openTabs}">
                         <li visible="{{ tab.key }}" ng-class="{'active': options.activeTab === tab.key}"
                             ng-click="options.activeTab = tab.key"
                             ng-repeat="tab in options.tabs">

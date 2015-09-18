@@ -158,13 +158,15 @@
       'baseControllerClass',
       'priceEstimationService',
       'blockUI',
+      'ENV',
       DashboardCostController]);
 
   function DashboardCostController(
     $scope,
     baseControllerClass,
     priceEstimationService,
-    blockUI) {
+    blockUI,
+    ENV) {
     var controllerScope = this;
     var EventController = baseControllerClass.extend({
       init: function() {
@@ -242,9 +244,6 @@
           if (row.scope_type == 'service') {
             results[date].services.push(row);
           }
-          if (row.scope_type == 'serviceprojectlink') {
-            results[date].services.push(row);
-          }
         }
         var table = [];
         for (var date in results) {
@@ -259,7 +258,9 @@
         }
         if (table.length > 0) {
           table[0].selected = true;
-          table[0].activeTab = 'services';
+          table[0].activeTab = (ENV.featuresVisible || ENV.toBeFeatures.indexOf('providers') == -1)
+            ? 'services'
+            : 'projects';
         }
         this.table = table;
       }
