@@ -297,101 +297,138 @@
       '$stateParams',
       'baseServiceListController',
       'joinService',
-      'joinServiceProjectLinkService',
       'servicesService',
+      'blockUI',
       CustomerServiceTabController
     ]);
 
   function CustomerServiceTabController(
-    $stateParams, baseServiceListController, joinService, joinServiceProjectLinkService, servicesService) {
+    $stateParams, baseServiceListController, joinService, servicesService, blockUI) {
     var controllerScope = this;
     var Controller = baseServiceListController.extend({
-      options: {},
-      lastModel: {},
       init: function() {
         this.controllerScope = controllerScope;
         this.service = joinService;
         this.service.defaultFilter.customer_uuid = $stateParams.uuid;
-        var vm = this;
         this.expandableOptions = [
           {
             isList: false,
             addItemBlock: false,
             viewType: 'details',
-            title: 'Settings',
-            getFieldList: function(url) {
-              return servicesService.getOption(url).then(function(response) {
-                var fields = [];
-                if (response.actions) {var put = response.actions.PUT;
-                  vm.options = put;
-                  for (var fieldName in put) {
-                    if (!put[fieldName].read_only && fieldName != 'name') {
-                      put[fieldName].name = fieldName;
-                      fields.push(put[fieldName]);
-                    }
-                  }
-                }
-                return fields;
-              });
-            },
-            getContent: function(url) {
-              return servicesService.$get(null, url).then(function(provider) {
-                return servicesService.$get(null, provider.settings);
-              });
-            }
+            title: 'Settings'
           }
         ];
         this._super();
         this.entityOptions.list[0].type = 'editable';
         this.entityOptions.entityData.expandable = true;
       },
+      showMore: function(service) {
+        var vm = this;
+        if (service.values) {
+          return;
+        }
+        var myBlockUI = blockUI.instances.get(service.uuid);
+        myBlockUI.start();
+
+        this.service.getOptions(service.service_type).then(function(options) {
+          service.options = options;
+          service.fields = vm.getFields(options);
+
+          servicesService.$get(null, service.settings).then(function(settings) {
+            service.values = settings;
+            myBlockUI.stop();
+          });
+        });
+      },
+      getFields: function(options) {
+        var fields = [];
+        var blacklist = ['name', 'customer', 'settings'];
+        for (var name in options) {
+          var option = options[name];
+          if (!option.read_only && blacklist.indexOf(name) == -1) {
+            option.name = name;
+            fields.push(option);
+          }
+        }
+        return fields;
+      },
       afterGetList: function() {
         var vm = this;
-        if ($stateParams.providerUuid && $stateParams.providerType) {
-          servicesService.getServicesList().then(function(services) {
-            var endpoint = services[$stateParams.providerType].url;
-            servicesService.$get($stateParams.providerUuid, endpoint).then(function(provider) {
-              if (provider.customer.indexOf($stateParams.uuid) + 1) {
-                provider.expandItemOpen = true;
-                vm.list = [provider].concat(vm.list);
-                vm.currentProvider = provider;
-              }
+        var service_type = $stateParams.providerType;
+        var uuid = $stateParams.providerUuid;
+
+        if (service_type && uuid) {
+          var item = vm.findItem(service_type, uuid);
+          if (item) {
+            // Move found element to the start of the list for user's convenience
+            vm.list.splice(vm.list.indexOf(item), 1);
+            vm.list.unshift(item);
+            vm.showMore(item);
+            item.expandItemOpen = true;
+          } else {
+            this.service.$get(service_type, uuid).then(function(provider) {
+              vm.list.unshift(provider);
+              vm.showMore(provider);
+              provider.expandItemOpen = true;
             });
-          });
-        }
-      },
-      update: function(model) {
-        var vm = this;
-        return joinServiceProjectLinkService.$update(null, model.url, model).then(
-          function() {},
-          function(errors) {
-            var message = '';
-            for (var name in errors.data) {
-              message += (vm.options[name] ? vm.options[name].label : name) + ': ' + errors.data[name];
-            }
-            if (message) {
-              vm.errorFlash(message);
-            }
-          });
-      },
-      showSave: function(model) {
-        if (model) {
-          if (!this.lastModel[model.uuid]) {
-            this.lastModel[model.uuid] = model;
-            return false;
-          }
-          if (this.lastModel[model.uuid] != model) {
-            var fields = model.toJSON();
-            for (var fieldName in fields) {
-              var lastValue = this.lastModel[model.uuid][fieldName] ? this.lastModel[model.uuid][fieldName] : '';
-              var nextValue = model[fieldName] ? model[fieldName] : '';
-              if (lastValue != nextValue) {
-                return true;
-              }
-            }
           }
         }
-        return false;
+      },
+      findItem: function(service_type, uuid) {
+        for (var i = 0; i < this.list.length; i++) {
+          var item = this.list[i];
+          if (item.uuid == uuid && item.service_type == service_type) {
+            return item;
+          }
+        }
+      },
+      updateSettings: function(service) {
+        var saveService = joinService.$update(null, service.settings, service.values);
+        return saveService.then(this.onSaveSuccess.bind(this, service), this.onSaveError.bind(this, service));
+      },
+      update: function(service) {
+        var saveService = joinService.$update(null, service.url, service);
+        return saveService.then(this.onSaveSuccess.bind(this), this.onSaveError.bind(this, service));
+      },
+      onSaveSuccess: function(service) {
+        if (service) {
+          this.saveRevision(service);
+        }
+      },
+      onSaveError: function(service, response) {
+        var message = '';
+        for (var name in response.data) {
+          message += (service.options[name] ? service.options[name].label : name) + ': ' + response.data[name];
+        }
+        if (message) {
+          this.errorFlash('Unable to save provider. ' + message);
+        }
+      },
+      hasChanged: function(model) {
+        if (!model.values) {
+          return false;
+        }
+
+        if (!model.revision) {
+          this.saveRevision(model);
+          return false;
+        }
+
+        return this.revisionsDiffer(model.revision, model.values.toJSON());
+      },
+      saveRevision: function(model) {
+        if (model.values) {
+          model.revision = model.values.toJSON();
+        }
+      },
+      revisionsDiffer: function(revision1, revision2) {
+        for (var name in revision1) {
+          var val1 = revision1[name] ? revision1[name] : '';
+          var val2 = revision2[name] ? revision2[name] : '';
+          if (val1 != val2) {
+            return true;
+          }
+        }
       }
     });
 

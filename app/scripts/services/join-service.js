@@ -14,8 +14,22 @@
 
       $get: function(service_type, uuid) {
         var get = this._super.bind(this);
+        this.getUrlByType(service_type).then(function(url) {
+          return get(uuid, url);
+        });
+      },
+
+      getOptions: function(service_type) {
+        return this.getUrlByType(service_type).then(function(url) {
+          return servicesService.getOption(url).then(function(response) {
+            return response.actions.POST;
+          });
+        });
+      },
+
+      getUrlByType: function(service_type) {
         return servicesService.getServicesList().then(function(services) {
-          return get(uuid, services[service_type].url);
+          return services[service_type].url;
         });
       }
     });
