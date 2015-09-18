@@ -11,8 +11,6 @@
       '$state',
       '$stateParams',
       '$rootScope',
-      'keysService',
-      'usersService',
       'premiumSupportPlansService',
       'premiumSupportContractsService',
       'resourcesService',
@@ -29,8 +27,6 @@
     $state,
     $stateParams,
     $rootScope,
-    keysService,
-    usersService,
     premiumSupportPlansService,
     premiumSupportContractsService,
     resourcesService) {
