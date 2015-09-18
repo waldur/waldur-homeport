@@ -229,8 +229,10 @@
     <div class="project-alert-message" ng-if="!AppStore.loadingProviders && !AppStore.renderStore">
         <p>
             There are no working accounts available for the current project.<br />
-            You can change that in
-            <a visible="providers" ui-sref="projects.details({uuid: AppStore.currentProject.uuid, tab: 'providers'})">provider management</a>.
+            <span visible="providers">
+                You can change that in
+                <a  ui-sref="projects.details({uuid: AppStore.currentProject.uuid, tab: 'providers'})">provider management</a>.
+            </span>
         </p>
     </div>
 </div>
