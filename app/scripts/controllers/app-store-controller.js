@@ -7,6 +7,7 @@
       'ENV',
       'defaultPriceListItemsService',
       'blockUI',
+      '$q',
       '$state',
       '$stateParams',
       '$rootScope',
@@ -22,6 +23,7 @@
     ENV,
     defaultPriceListItemsService,
     blockUI,
+    $q,
     $state,
     $stateParams,
     $rootScope,
@@ -42,14 +44,13 @@
       currency: ENV.currency,
 
       secondStep: false,
-      thirdStep: false,
       resourceTypesBlock: false,
 
       successMessage: 'Purchase of {vm_name} was successful.',
       formOptions: {},
       allFormOptions: {},
       selectedService: {},
-      selectedServiceName: null,
+      serviceType: null,
       selectedCategory: {},
       selectedResourceType: null,
       currentCustomer: {},
@@ -59,7 +60,7 @@
       services: {},
       renderStore: false,
       loadingProviders: true,
-      categoryProviders: {},
+      categoryServices: {},
 
       configureStepNumber: 4,
       selectedPackageName: null,
@@ -82,7 +83,7 @@
       activate:function() {
         var vm = this;
         servicesService.getServicesList().then(function(response) {
-          vm.servicesList = response;
+          vm.servicesMetadata = response;
           vm.setCurrentProject();
         });
         currentStateService.getCustomer().then(function(response) {
@@ -95,29 +96,35 @@
         }
         this.selectedCategory = category;
         this.secondStep = true;
-        this.selectedService = {};
-        this.selectedServiceName = null;
+        this.serviceMetadata = {};
+        this.serviceType = null;
         this.selectedPackage = {};
         this.agreementShow = false;
         this.resourceTypesBlock = false;
         this.selectedResourceType = null;
-        this.thirdStep = false;
-        this.providers = this.categoryProviders[this.selectedCategory.name];
-        this.resetPriceItems();
-      },
-      setService:function(service) {
-        this.selectedService = this.servicesList[service];
-        this.selectedServiceName = service;
-        this.resourceTypesBlock = true;
-        this.thirdStep = false;
+        this.selectedService = null;
         this.fields = [];
-        if (this.selectedService) {
-          var types = Object.keys(this.selectedService.resources);
+        this.resetPriceItems();
+
+        var services = this.categoryServices[this.selectedCategory.name]
+        if (services && services.length == 1) {
+          this.setService(services[0]);
+        }
+      },
+      setService: function(service) {
+        this.selectedService = service;
+        this.serviceType = this.selectedService.type;
+        this.serviceMetadata = this.servicesMetadata[this.serviceType];
+        this.fields = [];
+
+        if (this.serviceMetadata) {
+          var types = Object.keys(this.serviceMetadata.resources);
           if (types.length === 1) {
             this.setResourceType(types[0]);
             this.resourceTypesBlock = false;
             this.configureStepNumber = 3;
           } else {
+            this.resourceTypesBlock = true;
             this.configureStepNumber = 4;
           }
         }
@@ -125,32 +132,65 @@
       setResourceType: function(type) {
         var vm = this;
         vm.selectedResourceType = type;
-        vm.thirdStep = true;
         vm.fields = [];
-        var resource = vm.selectedService.resources[vm.selectedResourceType];
-        var service = vm.services[vm.selectedServiceName];
-        if (resource) {
-          vm.instance = servicesService.$create(resource);
-          vm.instance.service_project_link = service.service_project_link_url;
-          servicesService.getOption(resource).then(function(response) {
-            vm.setFields(response.actions.POST);
+        var resourceUrl = vm.serviceMetadata.resources[vm.selectedResourceType];
+        if (resourceUrl) {
+          vm.instance = servicesService.$create(resourceUrl);
+          vm.instance.service_project_link = this.selectedService.service_project_link_url;
+          var myBlockUI = blockUI.instances.get('resource-properties');
+          myBlockUI.start();
+          servicesService.getOption(resourceUrl).then(function(response) {
+            var formOptions = response.actions.POST;
+            vm.allFormOptions = formOptions;
+            vm.getValidChoices().then(function(validChoices) {
+              vm.setFields(formOptions, validChoices);
+              myBlockUI.stop();
+            });
           });
         }
       },
-      setFields: function(formOptions) {
-        this.allFormOptions = formOptions;
+      getValidChoices: function() {
+        var vm = this;
+        var promises = [];
+        var validChoices = {};
+        angular.forEach(vm.serviceMetadata.properties, function(url, property) {
+          var query = {settings_uuid: vm.selectedService.settings_uuid};
+          var promise = servicesService.getList(query, url).then(function(response) {
+            validChoices[property.toLowerCase()] = vm.formatChoices(response);
+          });
+          promises.push(promise);
+        });
+        return $q.all(promises).then(function() {
+          return validChoices;
+        });
+      },
+      formatChoices: function(items) {
+        return items.map(function(item) {
+          return {
+            value: item.url,
+            display_name: item.name
+          }
+        });
+      },
+      setFields: function(formOptions, validChoices) {
+        this.fields = [];
         for (var name in formOptions) {
           if (formOptions[name].read_only || name == this.UNIQUE_FIELDS.service_project_link) {
             continue;
           }
 
+          var choices;
           var type = formOptions[name].type;
           if (type == 'field') {
             type = 'choice';
+            if (name in validChoices) {
+              choices = validChoices[name];
+            } else {
+              choices = formOptions[name].choices;
+            }
           }
 
           var required = formOptions[name].required;
-          var choices = formOptions[name].choices;
 
           this.fields.push({
             name: name,
@@ -238,9 +278,8 @@
         vm.categories = [];
         vm.selectedCategory = null;
         vm.secondStep = false;
-        vm.thirdStep = false;
-        vm.selectedService = {};
-        vm.selectedServiceName = null;
+        vm.serviceMetadata = {};
+        vm.serviceType = null;
         vm.resourceTypesBlock = false;
         vm.fields = [];
         vm.priceItems = [];
@@ -255,19 +294,17 @@
           vm.currentProject = response;
           for (var j = 0; j < categories.length; j++) {
             var category = categories[j];
-            vm.categoryProviders[category.name] = [];
+            vm.categoryServices[category.name] = [];
             for (var i = 0; i < vm.currentProject.services.length; i++) {
               var service = vm.currentProject.services[i];
               if (service.state != 'Erred'
                 && category.services
                 && (category.services.indexOf(service.type) + 1)
-                && !(vm.categoryProviders[category.name].indexOf(service.type) + 1)
               ) {
-                vm.categoryProviders[category.name].push(service.type);
-                vm.services[service.type] = service;
+                vm.categoryServices[category.name].push(service);
               }
             }
-            if (vm.categoryProviders[category.name].length > 0) {
+            if (vm.categoryServices[category.name].length > 0) {
               vm.categories.push(category);
               vm.renderStore = true;
             }
@@ -301,7 +338,7 @@
       selectSupportPackage: function(supportPackage) {
         this.agreementShow = true;
         this.selectedPackage = supportPackage;
-        this.selectedServiceName = 'Total';
+        this.serviceType = 'Total';
 
         var type = 'Support plan';
         var display_name = supportPackage.name;
@@ -340,7 +377,7 @@
           if (this.allFormOptions[name]) {
             message += this.allFormOptions[name].label + ': ' + this.errors[name] + '<br/>';
           } else {
-            message += name+ ': ' + this.errors[name] + '<br/>';
+            message += name + ': ' + this.errors[name] + '<br/>';
           }
         }
         this.errorFlash(message);
