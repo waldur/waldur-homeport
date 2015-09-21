@@ -16,4 +16,21 @@
             content: '\f0c9';
         } // &.before
     }
+    &.gear {
+        &:before {
+            @include outline;
+            content: '\f013';
+        }
+    }
+    &.cloud {
+        &:before {
+            @include outline;
+            content: '\f0c2';
+        }
+    }
+    &.lock {
+        &:before {
+            content: '\f023';
+        }
+    }
 } // icons

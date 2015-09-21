@@ -190,6 +190,17 @@
             }
           }
 
+          if (name == 'user_data') {
+            type = 'text';
+          }
+
+          var visible = required || name == 'ssh_public_key';
+          var icons = {
+            size: 'gear',
+            flavor: 'gear',
+            ssh_public_key: 'lock'
+          };
+          var icon = icons[name] || 'cloud';
           var required = formOptions[name].required;
 
           this.fields.push({
@@ -198,7 +209,9 @@
             type: type,
             help_text: formOptions[name].help_text,
             required: required,
-            choices: choices
+            choices: choices,
+            visible: visible,
+            icon: icon
           });
         }
       },
@@ -218,6 +231,9 @@
       doChoice: function(name, choice) {
         var vm = this;
         this.instance[name] = choice.value;
+        if (name == 'ssh_public_key') {
+          return;
+        }
         if (vm.defaultPriceListItems.length) {
           vm.setPriceItem(name, choice);
         } else {

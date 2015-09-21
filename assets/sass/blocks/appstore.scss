@@ -58,7 +58,9 @@
         } // &.state
         .icon {
             // display: flex;
-            width: 45px;
+            width: 55px;
+            height: 55px;
+            font-size: 50px;
             text-align: center;
             &.azure, &.gitlab, &.oracle {
                 width: 150px;
@@ -270,6 +272,12 @@
                         }
                     }
                 }
+                .warning {
+                    text-align: center;
+                    border: 1px solid #cacaca;
+                    padding: 20px;
+                    background-color: white;
+                }
             }
             form {
                 .string-field {
@@ -436,8 +444,7 @@
             }
             .keys {
                 .appstore-template {
-                    height: 80px;
-                    margin-top: 20px;
+                    height: 100px;
                 }
             }
             button {

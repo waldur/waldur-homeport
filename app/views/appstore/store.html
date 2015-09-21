@@ -89,7 +89,7 @@
 
                         <div ng-repeat="field in AppStore.fields"
                              ng-switch="field.type"
-                             ng-if="AppStore.showOptionalFields || field.required || AppStore.errors[field.name]">
+                             ng-if="AppStore.showOptionalFields || field.visible || AppStore.errors[field.name]">
 
                             <form ng-switch-when="string">
                                 <div class="string-field">
@@ -98,6 +98,21 @@
                                         {{ field.label }}
                                     </label>
                                     <input type="text" id="{{ field.name }}" ng-model="AppStore.instance[field.name]"/>
+                                    <div class="error arrow-up" ng-show="AppStore.errors[field.name]">
+                                        <ul class="error-list">
+                                            <li ng-repeat="error in AppStore.errors[field.name]" ng-bind="error"></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <form ng-switch-when="text">
+                                <div class="string-field">
+                                    <label for="{{ field.name }}">
+                                        <helpicon help-text="{{ field.help_text }}" ng-if="field.help_text"></helpicon>
+                                        {{ field.label }}
+                                    </label>
+                                    <textarea id="{{ field.name }}" ng-model="AppStore.instance[field.name]"></textarea>
                                     <div class="error arrow-up" ng-show="AppStore.errors[field.name]">
                                         <ul class="error-list">
                                             <li ng-repeat="error in AppStore.errors[field.name]" ng-bind="error"></li>
@@ -121,36 +136,41 @@
                                 </div>
                             </form>
 
-                            <div ng-switch-when="choice" ng-if="field.choices.length">
-                                <h2 ng-bind="field.label"></h2>
-
-                                <form ng-show="AppStore.isListLong(field)">
-                                    <div class="string-field">
-                                    <input type="text" placeholder="Search by name"
-                                           ng-model="field.searchQuery" ng-init="field.searchQuery=''"/>
-                                    </div>
-                                </form>
-
-                                <div class="keys">
-                                    <div class="appstore-templates">
-                                        <div class="appstore-template"
-                                             ng-repeat="choice in field.choices | filter: {'display_name': field.searchQuery} | limitTo: field.limit"
-                                             ng-click="AppStore.doChoice(field.name, choice)"
-                                             ng-class="{'state': AppStore.instance[field.name] == choice.value}">
-                                            <div class="icon">
-                                                <img src="/static/images/appstore/icon-cloud.png" alt="">
-                                            </div>
-                                            <h3>{{ choice.display_name }}</h3>
-                                        </div>
-                                    </div>
-                                    <div class="clear"></div>
+                            <div ng-switch-when="choice">
+                                <div ng-if="!field.choices.length && field.name =='ssh_public_key'">
+                                    <h2 ng-bind="field.label"></h2>
+                                    <p class="warning">SSH public key is required for accessing a provisioned VM.<br/>
+                                    You can add a key in your <a ui-sref="profile.details">profile</a>.</p>
                                 </div>
+                                <div ng-if="field.choices.length">
+                                    <h2 ng-bind="field.label"></h2>
 
-                                <a ng-init="field.limit = AppStore.limitChoices"
-                                   ng-show="AppStore.isListLong(field)"
-                                   ng-click="AppStore.toggleChoicesLimit(field)"
-                                   ng-class="{'active': AppStore.isListExpanded(field)}"
-                                   class="toggle-link pull-right">Show {{ AppStore.isListExpanded(field) && 'less' || 'more' }} choices</a>
+                                    <form ng-show="AppStore.isListLong(field)">
+                                        <div class="string-field">
+                                        <input type="text" placeholder="Search by name"
+                                               ng-model="field.searchQuery" ng-init="field.searchQuery=''"/>
+                                        </div>
+                                    </form>
+
+                                    <div class="keys">
+                                        <div class="appstore-templates">
+                                            <div class="appstore-template"
+                                                 ng-repeat="choice in field.choices | filter: {'display_name': field.searchQuery} | limitTo: field.limit"
+                                                 ng-click="AppStore.doChoice(field.name, choice)"
+                                                 ng-class="{'state': AppStore.instance[field.name] == choice.value}">
+                                                <div class="icon {{ ::field.icon }}"></div>
+                                                <h3>{{ choice.display_name }}</h3>
+                                            </div>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+
+                                    <a ng-init="field.limit = AppStore.limitChoices"
+                                       ng-show="AppStore.isListLong(field)"
+                                       ng-click="AppStore.toggleChoicesLimit(field)"
+                                       ng-class="{'active': AppStore.isListExpanded(field)}"
+                                       class="toggle-link pull-right">Show {{ AppStore.isListExpanded(field) && 'less' || 'more' }} choices</a>                                    
+                                </div>
                             </div>
                         </div>
                         <button ng-class="{'disabled': !AppStore.canSave()}" ng-click="AppStore.save()">
