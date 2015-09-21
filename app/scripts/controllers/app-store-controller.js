@@ -62,7 +62,7 @@
       loadingProviders: true,
       categoryServices: {},
 
-      configureStepNumber: 5,
+      configureStepNumber: 4,
       selectedPackageName: null,
       agreementShow: false,
 
@@ -122,10 +122,10 @@
           if (types.length === 1) {
             this.setResourceType(types[0]);
             this.resourceTypesBlock = false;
-            this.configureStepNumber = 4;
+            this.configureStepNumber = 3;
           } else {
             this.resourceTypesBlock = true;
-            this.configureStepNumber = 5;
+            this.configureStepNumber = 4;
           }
         }
       },
