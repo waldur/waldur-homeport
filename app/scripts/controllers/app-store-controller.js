@@ -60,7 +60,7 @@
       services: {},
       renderStore: false,
       loadingProviders: true,
-      categoryServiceTypes: {},
+      categoryServices: {},
 
       configureStepNumber: 5,
       selectedPackageName: null,
@@ -102,20 +102,21 @@
         this.agreementShow = false;
         this.resourceTypesBlock = false;
         this.selectedResourceType = null;
-        this.serviceTypes = this.categoryServiceTypes[this.selectedCategory.name];
-        this.resetPriceItems();
-      },
-      setServiceType:function(serviceType) {
-        this.serviceMetadata = this.servicesMetadata[serviceType];
-        this.serviceType = serviceType;
-        this.resourceTypesBlock = false;
+        this.selectedService = null;
         this.fields = [];
-        if (this.services[serviceType].length == 1) {
-          this.setService(this.services[serviceType][0]);
+        this.resetPriceItems();
+
+        var services = this.categoryServices[this.selectedCategory.name]
+        if (services && services.length == 1) {
+          this.setService(services[0]);
         }
       },
       setService: function(service) {
         this.selectedService = service;
+        this.serviceType = this.selectedService.type;
+        this.serviceMetadata = this.servicesMetadata[this.serviceType];
+        this.fields = [];
+
         if (this.serviceMetadata) {
           var types = Object.keys(this.serviceMetadata.resources);
           if (types.length === 1) {
@@ -136,11 +137,14 @@
         if (resourceUrl) {
           vm.instance = servicesService.$create(resourceUrl);
           vm.instance.service_project_link = this.selectedService.service_project_link_url;
+          var myBlockUI = blockUI.instances.get('resource-properties');
+          myBlockUI.start();
           servicesService.getOption(resourceUrl).then(function(response) {
             var formOptions = response.actions.POST;
             vm.allFormOptions = formOptions;
             vm.getValidChoices().then(function(validChoices) {
               vm.setFields(formOptions, validChoices);
+              myBlockUI.stop();
             });
           });
         }
@@ -169,6 +173,7 @@
         });
       },
       setFields: function(formOptions, validChoices) {
+        this.fields = [];
         for (var name in formOptions) {
           if (formOptions[name].read_only || name == this.UNIQUE_FIELDS.service_project_link) {
             continue;
@@ -287,26 +292,19 @@
         myBlockUI.start();
         currentStateService.getProject().then(function(response) {
           vm.currentProject = response;
-          vm.services = {};
           for (var j = 0; j < categories.length; j++) {
             var category = categories[j];
-            vm.categoryServiceTypes[category.name] = [];
+            vm.categoryServices[category.name] = [];
             for (var i = 0; i < vm.currentProject.services.length; i++) {
               var service = vm.currentProject.services[i];
               if (service.state != 'Erred'
                 && category.services
                 && (category.services.indexOf(service.type) + 1)
               ) {
-                if (!(vm.categoryServiceTypes[category.name].indexOf(service.type) + 1)) {
-                  vm.categoryServiceTypes[category.name].push(service.type);
-                }
-                if (!vm.services[service.type]) {
-                  vm.services[service.type] = [];
-                }
-                vm.services[service.type].push(service);
+                vm.categoryServices[category.name].push(service);
               }
             }
-            if (vm.categoryServiceTypes[category.name].length > 0) {
+            if (vm.categoryServices[category.name].length > 0) {
               vm.categories.push(category);
               vm.renderStore = true;
             }

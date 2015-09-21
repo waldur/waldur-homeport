@@ -36,13 +36,13 @@
                         <div class="appstore-templates" ng-if="AppStore.selectedCategory.type == 'provider'">
                             <!-- service -->
                             <div class="appstore-template {{ service.type.toLowerCase() }}"
-                                 ng-repeat="service in AppStore.serviceTypes"
-                                 ng-click="AppStore.setServiceType(service)"
-                                 ng-class="{'state': AppStore.serviceType == service}">
+                                 ng-repeat="service in AppStore.categoryServices[AppStore.selectedCategory.name]"
+                                 ng-click="AppStore.setService(service)"
+                                 ng-class="{'state': AppStore.selectedService == service}">
                                 <div class="icon">
-                                    <img ng-src="/static/images/appstore/icon-{{ service.toLowerCase() }}.png" alt="">
+                                    <img ng-src="/static/images/appstore/icon-{{ service.type.toLowerCase() }}.png" alt="">
                                 </div>
-                                <h3>{{ service }}</h3>
+                                <h3>{{ service.name }}</h3>
                             </div>
                             <!-- /service -->
                         </div>
@@ -62,20 +62,6 @@
                         </div>
                     </section>
 
-                    <section class="step-2" ng-show="AppStore.services[AppStore.serviceType]">
-                        <div class="step-title"><span>Step 3: Choose provider</span></div>
-                        <div class="appstore-templates">
-                            <!-- service -->
-                            <div class="appstore-template"
-                                 ng-repeat="service in AppStore.services[AppStore.serviceType]"
-                                 ng-click="AppStore.setService(service)"
-                                 ng-class="{'state': AppStore.selectedService == service}">
-                                <h3>{{ service.name }}</h3>
-                            </div>
-                            <!-- /service -->
-                        </div>
-                    </section>
-
                     <section class="step-2" ng-show="AppStore.resourceTypesBlock">
                         <div class="step-title"><span>Step 4: Choose resource type</span></div>
                         <div class="appstore-templates">
@@ -90,7 +76,7 @@
                         </div>
                     </section>
 
-                    <section class="step-3" ng-show="AppStore.selectedResourceType">
+                    <section class="step-3" ng-show="AppStore.selectedResourceType" block-ui="resource-properties">
                         <div class="step-title">
                             <span>
                                 Step {{ AppStore.configureStepNumber }}: Configure {{ AppStore.serviceType }} Resource
