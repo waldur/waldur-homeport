@@ -224,6 +224,7 @@
         this.fields.sort(function(a, b) {
           return order.indexOf(a.name) - order.indexOf(b.name);
         });
+        this.sortFlavors();
       },
       toggleChoicesLimit: function(field) {
         if (field.limit == this.limitChoices) {
@@ -273,15 +274,36 @@
           var choice = field.choices[i];
           choice.disabled = image.min_ram > choice.item.ram || image.min_disk > choice.item.disk;
         }
-        field.choices.sort(function(a, b) {
-          return a.disabled - b.disabled;
-        });
+
         var flavor = this.instance.flavor;
         var choice = this.getChoiceByValue(field.choices, flavor);
         if (choice && choice.disabled) {
           this.instance.flavor = null;
           this.deletePriceItem('flavor');
         }
+
+        this.sortFlavors();
+      },
+      sortFlavors: function() {
+        var field = this.findFieldByName('flavor');
+        if (!field) {
+          return;
+        }
+
+        field.choices.sort(function(a, b) {
+          if (a.disabled < b.disabled) return -1;
+          if (a.disabled > b.disabled) return 1;
+
+          if (a.item.cores > b.item.cores) return 1;
+          if (a.item.cores < b.item.cores) return -1;
+
+          if (a.item.ram > b.item.ram) return 1;
+          if (a.item.ram < b.item.ram) return -1;
+
+          if (a.item.disk > b.item.disk) return 1;
+          if (a.item.disk < b.item.disk) return -1;
+          return 0;
+        });
       },
       setSystemVolumeSize: function() {
         var field = this.findFieldByName('system_volume_size');
