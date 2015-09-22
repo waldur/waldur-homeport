@@ -18,13 +18,11 @@
     }
     &.gear {
         &:before {
-            @include outline;
             content: '\f013';
         }
     }
     &.cloud {
         &:before {
-            @include outline;
             content: '\f0c2';
         }
     }

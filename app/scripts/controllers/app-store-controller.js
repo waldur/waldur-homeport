@@ -155,6 +155,7 @@
         var validChoices = {};
         angular.forEach(vm.serviceMetadata.properties, function(url, property) {
           var query = {settings_uuid: vm.selectedService.settings_uuid};
+          servicesService.pageSize = 1000;
           var promise = servicesService.getList(query, url).then(function(response) {
             validChoices[property.toLowerCase()] = vm.formatChoices(response);
           });
@@ -168,7 +169,8 @@
         return items.map(function(item) {
           return {
             value: item.url,
-            display_name: item.name
+            display_name: item.name,
+            item: item
           }
         });
       },
@@ -194,14 +196,15 @@
             type = 'text';
           }
 
-          var visible = required || name == 'ssh_public_key';
           var icons = {
             size: 'gear',
             flavor: 'gear',
             ssh_public_key: 'lock'
           };
           var icon = icons[name] || 'cloud';
+
           var required = formOptions[name].required;
+          var visible = required || name == 'ssh_public_key';
 
           this.fields.push({
             name: name,
@@ -214,6 +217,13 @@
             icon: icon
           });
         }
+        var order = [
+          'name', 'image', 'flavor', 'system_volume_size', 'data_volume_size',
+          'ssh_public_key', 'description', 'user_data'
+        ];
+        this.fields.sort(function(a, b) {
+          return order.indexOf(a.name) - order.indexOf(b.name);
+        });
       },
       toggleChoicesLimit: function(field) {
         if (field.limit == this.limitChoices) {
@@ -231,8 +241,15 @@
       doChoice: function(name, choice) {
         var vm = this;
         this.instance[name] = choice.value;
+        this.instance[name + '_item'] = choice.item;
         if (name == 'ssh_public_key') {
           return;
+        }
+        if (name == 'image') {
+          this.updateFlavors();
+        }
+        if (name == 'flavor') {
+          this.setSystemVolumeSize();
         }
         if (vm.defaultPriceListItems.length) {
           vm.setPriceItem(name, choice);
@@ -241,6 +258,53 @@
             vm.defaultPriceListItems = response;
             vm.setPriceItem(name, choice);
           });
+        }
+      },
+      updateFlavors: function() {
+        var field = this.findFieldByName('flavor');
+        if (!field) {
+          return;
+        }
+        var image = this.instance.image_item;
+        if (!image) {
+          return false;
+        }
+        for (var i = 0; i < field.choices.length; i++) {
+          var choice = field.choices[i];
+          choice.disabled = image.min_ram > choice.item.ram || image.min_disk > choice.item.disk;
+        }
+        field.choices.sort(function(a, b) {
+          return a.disabled - b.disabled;
+        });
+        var flavor = this.instance.flavor;
+        var choice = this.getChoiceByValue(field.choices, flavor);
+        if (choice && choice.disabled) {
+          this.instance.flavor = null;
+          this.deletePriceItem('flavor');
+        }
+      },
+      setSystemVolumeSize: function() {
+        var field = this.findFieldByName('system_volume_size');
+        if (!field) {
+          return;
+        }
+        field.min_value = this.instance.flavor_item.disk;
+        this.instance.system_volume_size = Math.max(this.instance.system_volume_size || 0, field.min_value);
+      },
+      findFieldByName: function(name) {
+        for (var i = 0; i < this.fields.length; i++) {
+          var field = this.fields[i];
+          if (field.name == name) {
+            return field;
+          }
+        }
+      },
+      getChoiceByValue: function(choices, value) {
+        for (var i = 0; i < choices.length; i++) {
+          var choice = choices[i];
+          if (choice.value == value) {
+            return choice;
+          }
         }
       },
       setPriceItem: function(name, choice) {
@@ -414,4 +478,12 @@
 
     controllerScope.__proto__ = new Controller();
   }
+})();
+
+(function() {
+  angular.module('ncsaas').filter('mb2gb', function() {
+    return function(input) {
+      return Math.round(input / 1024.0);
+    }
+  })
 })();

@@ -81,9 +81,6 @@
                                 {{ AppStore.selectedResourceType }}
                             </span>
                         </div>
-                        <a class="toggle-link pull-right"
-                           ng-click="AppStore.showOptionalFields=!AppStore.showOptionalFields"
-                           ng-class="{'active': AppStore.showOptionalFields}">Show additional options</a>
 
                         <div ng-repeat="field in AppStore.fields"
                              ng-switch="field.type"
@@ -125,7 +122,7 @@
                                         <helpicon help-text="{{ field.help_text }}" ng-if="field.help_text"></helpicon>
                                         {{ field.label }}
                                     </label>
-                                    <input type="number" min="0" id="{{ field.name }}" ng-model="AppStore.instance[field.name]"/>
+                                    <input type="number" min="{{ field.min_value }}" id="{{ field.name }}" ng-model="AppStore.instance[field.name]"/>
                                     <div class="error arrow-up" ng-show="AppStore.errors[field.name]">
                                         <ul class="error-list">
                                             <li ng-repeat="error in AppStore.errors[field.name]" ng-bind="error"></li>
@@ -155,9 +152,21 @@
                                             <div class="appstore-template"
                                                  ng-repeat="choice in field.choices | filter: {'display_name': field.searchQuery} | limitTo: field.limit"
                                                  ng-click="AppStore.doChoice(field.name, choice)"
-                                                 ng-class="{'state': AppStore.instance[field.name] == choice.value}">
+                                                 ng-class="{'state': AppStore.instance[field.name] == choice.value, 'disabled': choice.disabled}">
                                                 <div class="icon {{ ::field.icon }}"></div>
-                                                <h3>{{ choice.display_name }}</h3>
+                                                <h3 ng-switch="::field.name">
+                                                    <b ng-switch-when="flavor">
+                                                        <p>{{ ::choice.display_name }}</p>
+                                                        <p>CPU: <ng-pluralize count="::choice.item.cores"
+                                                        when="{'1': '1 core', 'other': '{} cores'}"></ng-pluralize></p>
+                                                        <p>RAM: {{ ::choice.item.ram }} MB</p>
+                                                        <p>HDD: {{ ::choice.item.disk | mb2gb}} GB</p>
+                                                    </b>
+                                                    <b ng-switch-when="image">
+                                                        <p>{{ ::choice.display_name }}</p>
+                                                    </b>
+                                                    <b ng-switch-default>{{ choice.display_name }}</b>
+                                                </h3>
                                             </div>
                                         </div>
                                         <div class="clear"></div>
@@ -171,6 +180,10 @@
                                 </div>
                             </div>
                         </div>
+                        <a class="toggle-link pull-right"
+                           ng-click="AppStore.showOptionalFields=!AppStore.showOptionalFields"
+                           ng-class="{'active': AppStore.showOptionalFields}">{{ AppStore.showOptionalFields && 'Hide' || 'Show' }} additional options</a>
+
                         <button ng-class="{'disabled': !AppStore.canSave()}" ng-click="AppStore.save()">
                             <img src="/static/images/appstore/icon-curt.png" alt=""/>
                             <span>Purchase</span>
