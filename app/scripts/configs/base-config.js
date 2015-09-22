@@ -34,10 +34,12 @@ angular.module('ncsaas')
       {
         name: 'VMs',
         type: 'provider',
+        icon: 'desktop',
         services: ['DigitalOcean', 'OpenStack', 'Azure', 'Amazon']
       },
       {
         name: 'APPLICATIONS',
+        icon: 'database',
         type: 'provider',
         services: ['Oracle', 'GitLab']
       }

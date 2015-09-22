@@ -23,11 +23,13 @@ angular.module('ncsaas')
       {
         name: 'VMs',
         type: 'provider',
+        icon: 'desktop',
         services: ['OpenStack']
       },
       {
         name: 'APPLICATIONS',
         type: 'provider',
+        icon: 'database',
         services: ['GitLab']
       }
     ],

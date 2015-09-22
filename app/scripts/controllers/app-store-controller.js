@@ -339,6 +339,7 @@
               var category = {
                 type: 'package',
                 name: 'SUPPORT',
+                icon: 'wrench',
                 packages: response
               };
               vm.categories.push(category);

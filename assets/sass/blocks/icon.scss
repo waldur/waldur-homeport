@@ -33,4 +33,19 @@
             content: '\f023';
         }
     }
+    &.wrench {
+        &:before {
+            content: '\f0ad';
+        }
+    }
+    &.desktop {
+        &:before {
+            content: '\f108';
+        }
+    }
+    &.database {
+        &:before {
+            content: '\f1c0';
+        }
+    }
 } // icons
