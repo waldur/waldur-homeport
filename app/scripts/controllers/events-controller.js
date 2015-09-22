@@ -77,24 +77,15 @@
   }
 
   angular.module('ncsaas')
-    .controller('CustomerAlertsListController', [
-      '$scope',
+    .service('BaseAlertsListController', [
       'baseControllerListClass',
-      'currentStateService',
       'alertsService',
       'ENTITYLISTFIELDTYPES',
-      CustomerAlertsListController]);
+      BaseAlertsListController]);
 
-  function CustomerAlertsListController(
-    $scope,
-    baseControllerListClass,
-    currentStateService,
-    alertsService,
-    ENTITYLISTFIELDTYPES) {
-    var controllerScope = this;
-    var controllerClass = baseControllerListClass.extend({
+  function BaseAlertsListController(baseControllerListClass, alertsService, ENTITYLISTFIELDTYPES) {
+    return baseControllerListClass.extend({
       init: function() {
-        this.controllerScope = controllerScope;
         this.service = alertsService;
         this._super();
 
@@ -107,10 +98,31 @@
               name: 'Message',
               propertyName: 'message',
               type: ENTITYLISTFIELDTYPES.noType
+            },
+            {
+              name: 'Date',
+              propertyName: 'created',
+              type: ENTITYLISTFIELDTYPES.date
             }
           ]
         };
+      }
+    });
+  }
 
+  angular.module('ncsaas')
+    .controller('CustomerAlertsListController', [
+      'BaseAlertsListController',
+      'currentStateService',
+      '$scope',
+      CustomerAlertsListController]);
+
+  function CustomerAlertsListController(BaseAlertsListController, currentStateService, $scope) {
+    var controllerScope = this;
+    var controllerClass = BaseAlertsListController.extend({
+      init: function() {
+        this.controllerScope = controllerScope;
+        this._super();
         $scope.$on('currentCustomerUpdated', this.onCustomerUpdate.bind(this));
       },
 
@@ -125,6 +137,7 @@
         return currentStateService.getCustomer().then(function(customer) {
           vm.service.defaultFilter.aggregate = 'customer';
           vm.service.defaultFilter.uuid = customer.uuid;
+          vm.service.defaultFilter.opened = true;
           fn(filter);
         })
       }
@@ -346,7 +359,11 @@
       getCustomerAlerts: function () {
         var vm = this;
         currentStateService.getCustomer().then(function(customer) {
-          alertsService.getList({'aggregate': 'customer', 'uuid': customer.uuid}).then(function(response) {
+          alertsService.getList({
+            aggregate: 'customer',
+            uuid: customer.uuid,
+            opened: true
+          }).then(function(response) {
             vm.alerts = response;
           })
         })
