@@ -20,6 +20,7 @@ angular.module('ncsaas')
     appStoreCategories: [
       {
         name: 'VMs',
+        icon: 'desktop',
         type: 'provider',
         services: ['OpenStack']
       }

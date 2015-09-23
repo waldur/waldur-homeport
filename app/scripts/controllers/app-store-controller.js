@@ -136,7 +136,7 @@
         var resourceUrl = vm.serviceMetadata.resources[vm.selectedResourceType];
         if (resourceUrl) {
           vm.instance = servicesService.$create(resourceUrl);
-          vm.instance.service_project_link = this.selectedService.service_project_link_url;
+          vm.instance.service_project_link = vm.selectedService.service_project_link_url;
           var myBlockUI = blockUI.instances.get('resource-properties');
           myBlockUI.start();
           servicesService.getOption(resourceUrl).then(function(response) {
@@ -155,6 +155,7 @@
         var validChoices = {};
         angular.forEach(vm.serviceMetadata.properties, function(url, property) {
           var query = {settings_uuid: vm.selectedService.settings_uuid};
+          servicesService.pageSize = 1000;
           var promise = servicesService.getList(query, url).then(function(response) {
             validChoices[property.toLowerCase()] = vm.formatChoices(response);
           });
@@ -168,7 +169,8 @@
         return items.map(function(item) {
           return {
             value: item.url,
-            display_name: item.name
+            display_name: item.name,
+            item: item
           }
         });
       },
@@ -190,17 +192,60 @@
             }
           }
 
+          if (name == 'user_data') {
+            type = 'text';
+          }
+
+          var icons = {
+            size: 'gear',
+            flavor: 'gear',
+            ssh_public_key: 'lock'
+          };
+          var icon = icons[name] || 'cloud';
+          var label = formOptions[name].label;
           var required = formOptions[name].required;
+          var visible = required || name == 'ssh_public_key';
+          var help_text = formOptions[name].help_text;
+          var min, max, units;
+
+          if (name == 'system_volume_size') {
+            min = 0;
+            max = 320;
+            units = 'GB';
+            help_text = null;
+          }
+
+          if (name == 'data_volume_size') {
+            min = 1;
+            max = 320;
+            units = 'GB';
+            visible = true;
+            required = true;
+            help_text = null;
+          }
 
           this.fields.push({
             name: name,
-            label: formOptions[name].label,
+            label: label,
             type: type,
-            help_text: formOptions[name].help_text,
+            help_text: help_text,
             required: required,
-            choices: choices
+            choices: choices,
+            visible: visible,
+            icon: icon,
+            min: min,
+            max: max,
+            units: units
           });
         }
+        var order = [
+          'name', 'image', 'region', 'size', 'flavor', 'system_volume_size', 'data_volume_size',
+          'ssh_public_key', 'description', 'user_data'
+        ];
+        this.fields.sort(function(a, b) {
+          return order.indexOf(a.name) - order.indexOf(b.name);
+        });
+        this.sortFlavors();
       },
       toggleChoicesLimit: function(field) {
         if (field.limit == this.limitChoices) {
@@ -218,6 +263,16 @@
       doChoice: function(name, choice) {
         var vm = this;
         this.instance[name] = choice.value;
+        this.instance[name + '_item'] = choice.item;
+        if (name == 'ssh_public_key') {
+          return;
+        }
+        if (name == 'image') {
+          this.updateFlavors();
+        }
+        if (name == 'flavor') {
+          this.setSize();
+        }
         if (vm.defaultPriceListItems.length) {
           vm.setPriceItem(name, choice);
         } else {
@@ -225,6 +280,76 @@
             vm.defaultPriceListItems = response;
             vm.setPriceItem(name, choice);
           });
+        }
+      },
+      setSize: function() {
+        var field = this.findFieldByName('system_volume_size');
+        if (!field) {
+          return;
+        }
+        var disk_gb = Math.round(this.instance.flavor_item.disk / 1024);
+        field.min = disk_gb;
+        this.instance.system_volume_size = disk_gb;
+        this.instance.system_volume_size_raw = disk_gb;
+      },
+      updateFlavors: function() {
+        var field = this.findFieldByName('flavor');
+        if (!field) {
+          return;
+        }
+        var image = this.instance.image_item;
+        if (!image) {
+          return false;
+        }
+        for (var i = 0; i < field.choices.length; i++) {
+          var choice = field.choices[i];
+          choice.disabled = image.min_ram > choice.item.ram || image.min_disk > choice.item.disk;
+        }
+
+        var flavor = this.instance.flavor;
+        var choice = this.getChoiceByValue(field.choices, flavor);
+        if (choice && choice.disabled) {
+          this.instance.flavor = null;
+          this.deletePriceItem('flavor');
+        }
+
+        this.sortFlavors();
+      },
+      sortFlavors: function() {
+        var field = this.findFieldByName('flavor');
+        if (!field) {
+          return;
+        }
+
+        field.choices.sort(function(a, b) {
+          if (a.disabled < b.disabled) return -1;
+          if (a.disabled > b.disabled) return 1;
+
+          if (a.item.cores > b.item.cores) return 1;
+          if (a.item.cores < b.item.cores) return -1;
+
+          if (a.item.ram > b.item.ram) return 1;
+          if (a.item.ram < b.item.ram) return -1;
+
+          if (a.item.disk > b.item.disk) return 1;
+          if (a.item.disk < b.item.disk) return -1;
+          return 0;
+        });
+      },
+      findFieldByName: function(name) {
+        for (var i = 0; i < this.fields.length; i++) {
+          var field = this.fields[i];
+          if (field.name == name) {
+            return field;
+          }
+        }
+      },
+      getChoiceByValue: function(choices, value) {
+        for (var i = 0; i < choices.length; i++) {
+          var choice = choices[i];
+          if (choice.value == value) {
+            return choice;
+          }
         }
       },
       setPriceItem: function(name, choice) {
@@ -323,6 +448,7 @@
               var category = {
                 type: 'package',
                 name: 'SUPPORT',
+                icon: 'wrench',
                 packages: response
               };
               vm.categories.push(category);
@@ -371,6 +497,23 @@
         }
         return true;
       },
+      saveInstance: function() {
+        var resourceUrl = this.serviceMetadata.resources[this.selectedResourceType];
+        var instance = servicesService.$create(resourceUrl);
+        instance.service_project_link = this.selectedService.service_project_link_url;
+
+        for (var name in this.allFormOptions) {
+          instance[name] = this.instance[name];
+        }
+
+        if (this.instance.system_volume_size) {
+          instance.system_volume_size = this.instance.system_volume_size * 1024;
+        }
+        if (this.instance.data_volume_size) {
+          instance.data_volume_size = this.instance.data_volume_size * 1024;
+        }
+        return instance.$save();
+      },
       onError: function() {
         var message = '';
         for (var name in this.errors) {
@@ -397,4 +540,12 @@
 
     controllerScope.__proto__ = new Controller();
   }
+})();
+
+(function() {
+  angular.module('ncsaas').filter('mb2gb', function() {
+    return function(input) {
+      return Math.round(input / 1024.0);
+    }
+  })
 })();
