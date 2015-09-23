@@ -30,4 +30,8 @@
         width: 100%;
         text-align: right;
     }
+    @include bp(xs) {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
 } // toggle-link

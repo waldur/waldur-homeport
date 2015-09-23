@@ -458,37 +458,39 @@
                     height: 100px;
                 }
             }
-            button {
+        }
+    }
+
+    .appstore-purchase {
+        button {
+            margin-top: 15px;
+            display: block;
+            width: 100%;
+            border-radius: 5px;
+            background: $button-green;
+            text-align: center;
+            height: 50px;
+            line-height: 50px;
+            &.disabled {
+                background: #d7d9d6;
+            }
+            @include bp(xs) {
+                margin-bottom: 40px;
+            } // xs
+            img {
+                display: inline;
                 margin-top: 15px;
-                display: block;
-                width: 100%;
-                border-radius: 5px;
-                background: $button-green;
-                text-align: center;
-                height: 50px;
-                line-height: 50px;
-                &.disabled {
-                    background: #d7d9d6;
-                }
-                @include bp(xs) {
-                    margin-top: 300px;
-                    margin-bottom: -290px;
-                } // xs
-                img {
-                    display: inline;
-                    margin-top: 15px;
-                    margin-right: 10px;
+                margin-right: 10px;
 
-                }
-                span {
-                    color: #FFF;
-                    font-size: 16px;
-                    font-weight: bold;
-                }
-
+            }
+            span {
+                color: #FFF;
+                font-size: 16px;
+                font-weight: bold;
             }
         }
     }
+
     .appstore-aside {
         position: absolute;
         right: 0;
@@ -496,7 +498,7 @@
         width: 300px;
         @include bp(xs) {
             position: relative;
-            margin-bottom: 100px;
+            margin-bottom: 60px;
             width: 100%;
         } // xs
         h2 {

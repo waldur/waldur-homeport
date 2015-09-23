@@ -190,10 +190,6 @@
                            ng-click="AppStore.showOptionalFields=!AppStore.showOptionalFields"
                            ng-class="{'active': AppStore.showOptionalFields}">{{ AppStore.showOptionalFields && 'Hide' || 'Show' }} additional options</a>
 
-                        <button ng-class="{'disabled': !AppStore.canSave()}" ng-click="AppStore.save()">
-                            <img src="/static/images/appstore/icon-curt.png" alt=""/>
-                            <span>Purchase</span>
-                        </button>
                     </section>
                     <section class="step-3 agreement" ng-if="AppStore.agreementShow && AppStore.selectedCategory.type == 'package'">
                         <div class="step-title"><span>Step 3: Sign a support agreement</span></div>
@@ -226,6 +222,7 @@
                         </button>
                     </section>
                 </div>
+                <div class="clear"></div>
             </div>
 
             <aside ng-if="AppStore.renderStore" class="appstore-aside">
@@ -259,6 +256,13 @@
                 </ul>
 
             </aside>
+
+            <section ng-show="AppStore.secondStep" class="appstore-purchase">
+                <button ng-class="{'disabled': !AppStore.canSave()}" ng-click="AppStore.save()">
+                <img src="/static/images/appstore/icon-curt.png" alt=""/>
+                <span>Purchase</span>
+                </button>
+            </section>
 
         </div>
 

@@ -1068,7 +1068,8 @@ angular.module('ncsaas')
             noDataText: 'You have no SLAs yet.',
             createLink: 'appstore.store({category: "support"})',
             createLinkText: 'Add SLA',
-            expandable: true
+            expandable: true,
+            hideActionButtons: true
           },
           list: [
             {
