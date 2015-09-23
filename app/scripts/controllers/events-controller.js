@@ -97,53 +97,19 @@
             {
               name: 'Message',
               propertyName: 'message',
+              className: 'message',
               type: ENTITYLISTFIELDTYPES.noType
             },
             {
               name: 'Date',
               propertyName: 'created',
+              className: 'date',
               type: ENTITYLISTFIELDTYPES.date
             }
           ]
         };
       }
     });
-  }
-
-  angular.module('ncsaas')
-    .controller('CustomerAlertsListController', [
-      'BaseAlertsListController',
-      'currentStateService',
-      '$scope',
-      CustomerAlertsListController]);
-
-  function CustomerAlertsListController(BaseAlertsListController, currentStateService, $scope) {
-    var controllerScope = this;
-    var controllerClass = BaseAlertsListController.extend({
-      init: function() {
-        this.controllerScope = controllerScope;
-        this._super();
-        $scope.$on('currentCustomerUpdated', this.onCustomerUpdate.bind(this));
-      },
-
-      onCustomerUpdate: function() {
-        this.getList();
-      },
-
-      getList: function(filter) {
-        var vm = this;
-        var fn = this._super.bind(vm);
-        filter = filter || {};
-        return currentStateService.getCustomer().then(function(customer) {
-          vm.service.defaultFilter.aggregate = 'customer';
-          vm.service.defaultFilter.uuid = customer.uuid;
-          vm.service.defaultFilter.opened = true;
-          fn(filter);
-        })
-      }
-    });
-
-    controllerScope.__proto__ = new controllerClass();
   }
 
   angular.module('ncsaas')
@@ -163,7 +129,6 @@
 
     controllerScope.__proto__ = new EventController();
   }
-
 
   angular.module('ncsaas')
     .controller('DashboardCostController', [
@@ -352,6 +317,7 @@
         }
       },
       onCustomerUpdate: function() {
+        this.customer_uuid = currentStateService.getCustomerUuid();
         this.getCustomerProjects();
         this.getCustomerEvents();
         this.getCustomerAlerts();

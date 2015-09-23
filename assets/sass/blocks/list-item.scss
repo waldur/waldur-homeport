@@ -215,6 +215,12 @@
             &.statusCircle {
                 width: 40px;
             }
+            &.message {
+                width: 70%;
+            }
+            &.date {
+                color: #929391;
+            }
         } // &.additional-cell
         .more-details {
             @include property(margin-left, 10);

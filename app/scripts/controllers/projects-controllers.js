@@ -494,8 +494,8 @@
         var vm = this;
         resourcesCountService.alerts({
           aggregate: 'project',
-          opened: true,
-          uuid: this.model.uuid
+          uuid: this.model.uuid,
+          opened: true
         }).then(function(response) {
           vm.detailsViewOptions.tabs[1].count = response;
         });

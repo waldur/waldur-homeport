@@ -543,6 +543,9 @@
             'tabServices@organizations.details': {
               templateUrl: 'views/customer/tab-services.html',
             },
+            'tabAlerts@organizations.details': {
+              templateUrl: 'views/customer/tab-alerts.html',
+            },
             'listTemplate@organizations.details' : {
               templateUrl: 'views/service/list-template.html'
             },
@@ -685,6 +688,9 @@
             },
             'backupListContent@resources.details' : {
               templateUrl: 'views/backup/backup-list-content.html',
+            },
+            'tabAlerts@resources.details': {
+              templateUrl: 'views/resource/tab-alerts.html',
             },
             'tabs@resources.details': {
               templateUrl: 'views/resource/tabs.html',

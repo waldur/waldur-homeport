@@ -168,6 +168,11 @@
           ],
           tabs: [
             {
+              title: 'Alerts',
+              key: 'alerts',
+              viewName: 'tabAlerts'
+            },
+            {
               title: 'Resources',
               key: 'resources',
               viewName: 'tabResources'
@@ -207,6 +212,7 @@
       setCounters: function() {
         var vm = this;
         $q.all([
+          resourcesCountService.alerts({aggregate: 'customer', uuid: vm.model.uuid, opened: true}),
           resourcesCountService.resources({'customer_uuid': vm.model.uuid}),
           resourcesCountService.projects({'customer': vm.model.uuid}),
           resourcesCountService.services({'customer_uuid': vm.model.uuid})
@@ -214,6 +220,7 @@
           vm.detailsViewOptions.tabs[0].count = responses[0];
           vm.detailsViewOptions.tabs[1].count = responses[1];
           vm.detailsViewOptions.tabs[2].count = responses[2];
+          vm.detailsViewOptions.tabs[3].count = responses[3];
         });
       },
 
@@ -501,3 +508,40 @@
 
 })();
 
+(function() {
+  angular.module('ncsaas')
+    .controller('CustomerAlertsListController', [
+      'BaseAlertsListController',
+      'currentStateService',
+      '$scope',
+      CustomerAlertsListController]);
+
+  function CustomerAlertsListController(BaseAlertsListController, currentStateService, $scope) {
+    var controllerScope = this;
+    var controllerClass = BaseAlertsListController.extend({
+      init: function() {
+        this.controllerScope = controllerScope;
+        this._super();
+        $scope.$on('currentCustomerUpdated', this.onCustomerUpdate.bind(this));
+      },
+
+      onCustomerUpdate: function() {
+        this.getList();
+      },
+
+      getList: function(filter) {
+        var vm = this;
+        var fn = this._super.bind(vm);
+        filter = filter || {};
+        return currentStateService.getCustomer().then(function(customer) {
+          vm.service.defaultFilter.aggregate = 'customer';
+          vm.service.defaultFilter.uuid = customer.uuid;
+          vm.service.defaultFilter.opened = true;
+          fn(filter);
+        })
+      }
+    });
+
+    controllerScope.__proto__ = new controllerClass();
+  }
+})();

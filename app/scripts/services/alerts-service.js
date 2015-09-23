@@ -9,6 +9,7 @@
       init: function() {
         this._super();
         this.endpoint = '/alerts/';
+        this.filterByCustomer = false;
       }
     });
     return new ServiceClass();
