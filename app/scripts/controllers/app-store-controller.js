@@ -210,14 +210,14 @@
 
           if (name == 'system_volume_size') {
             min = 0;
-            max = 100;
+            max = 320;
             units = 'GB';
             help_text = null;
           }
 
           if (name == 'data_volume_size') {
             min = 1;
-            max = 100;
+            max = 320;
             units = 'GB';
             visible = true;
             required = true;
