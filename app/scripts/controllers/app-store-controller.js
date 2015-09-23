@@ -136,7 +136,7 @@
         var resourceUrl = vm.serviceMetadata.resources[vm.selectedResourceType];
         if (resourceUrl) {
           vm.instance = servicesService.$create(resourceUrl);
-          vm.instance.service_project_link = this.selectedService.service_project_link_url;
+          vm.instance.service_project_link = vm.selectedService.service_project_link_url;
           var myBlockUI = blockUI.instances.get('resource-properties');
           myBlockUI.start();
           servicesService.getOption(resourceUrl).then(function(response) {
@@ -202,23 +202,44 @@
             ssh_public_key: 'lock'
           };
           var icon = icons[name] || 'cloud';
-
+          var label = formOptions[name].label;
           var required = formOptions[name].required;
           var visible = required || name == 'ssh_public_key';
+          var help_text = formOptions[name].help_text;
+          var min, max, units;
+
+          if (name == 'system_volume_size') {
+            min = 0;
+            max = 100;
+            units = 'GB';
+            help_text = null;
+          }
+
+          if (name == 'data_volume_size') {
+            min = 1;
+            max = 100;
+            units = 'GB';
+            visible = true;
+            required = true;
+            help_text = null;
+          }
 
           this.fields.push({
             name: name,
-            label: formOptions[name].label,
+            label: label,
             type: type,
-            help_text: formOptions[name].help_text,
+            help_text: help_text,
             required: required,
             choices: choices,
             visible: visible,
-            icon: icon
+            icon: icon,
+            min: min,
+            max: max,
+            units: units
           });
         }
         var order = [
-          'name', 'image', 'flavor', 'system_volume_size', 'data_volume_size',
+          'name', 'image', 'region', 'size', 'flavor', 'system_volume_size', 'data_volume_size',
           'ssh_public_key', 'description', 'user_data'
         ];
         this.fields.sort(function(a, b) {
@@ -250,7 +271,7 @@
           this.updateFlavors();
         }
         if (name == 'flavor') {
-          this.setSystemVolumeSize();
+          this.setSize();
         }
         if (vm.defaultPriceListItems.length) {
           vm.setPriceItem(name, choice);
@@ -260,6 +281,16 @@
             vm.setPriceItem(name, choice);
           });
         }
+      },
+      setSize: function() {
+        var field = this.findFieldByName('system_volume_size');
+        if (!field) {
+          return;
+        }
+        var disk_gb = Math.round(this.instance.flavor_item.disk / 1024);
+        field.min = disk_gb;
+        this.instance.system_volume_size = disk_gb;
+        this.instance.system_volume_size_raw = disk_gb;
       },
       updateFlavors: function() {
         var field = this.findFieldByName('flavor');
@@ -304,14 +335,6 @@
           if (a.item.disk < b.item.disk) return -1;
           return 0;
         });
-      },
-      setSystemVolumeSize: function() {
-        var field = this.findFieldByName('system_volume_size');
-        if (!field) {
-          return;
-        }
-        field.min_value = this.instance.flavor_item.disk;
-        this.instance.system_volume_size = Math.max(this.instance.system_volume_size || 0, field.min_value);
       },
       findFieldByName: function(name) {
         for (var i = 0; i < this.fields.length; i++) {
@@ -473,6 +496,23 @@
           }
         }
         return true;
+      },
+      saveInstance: function() {
+        var resourceUrl = this.serviceMetadata.resources[this.selectedResourceType];
+        var instance = servicesService.$create(resourceUrl);
+        instance.service_project_link = this.selectedService.service_project_link_url;
+
+        for (var name in this.allFormOptions) {
+          instance[name] = this.instance[name];
+        }
+
+        if (this.instance.system_volume_size) {
+          instance.system_volume_size = this.instance.system_volume_size * 1024;
+        }
+        if (this.instance.data_volume_size) {
+          instance.data_volume_size = this.instance.data_volume_size * 1024;
+        }
+        return instance.$save();
       },
       onError: function() {
         var message = '';

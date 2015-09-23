@@ -199,24 +199,25 @@
       save: function() {
         var vm = this;
         vm.beforeSave();
-        vm.instance.$save(success, error);
-        function success() {
+        vm.saveInstance().then(function() {
           vm.afterSave();
           vm.successFlash(vm.getSuccessMessage());
           vm.service.clearAllCacheForCurrentEndpoint();
           vm.emitEvent('refreshCounts');
           vm.successRedirect();
-        }
-        function error(response) {
+        }, function(response) {
           vm.errors = response.data;
           vm.onError();
-        }
+        });
       },
       cancel: function() {
         var vm = this;
         $state.go(vm.listState);
       },
       beforeSave: function() {},
+      saveInstance: function() {
+        return this.instance.$save();
+      },
       afterSave: function() {},
       activate: function() {},
       successRedirect: function() {

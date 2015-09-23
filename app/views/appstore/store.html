@@ -122,7 +122,13 @@
                                         <helpicon help-text="{{ field.help_text }}" ng-if="field.help_text"></helpicon>
                                         {{ field.label }}
                                     </label>
-                                    <input type="number" min="{{ field.min_value }}" id="{{ field.name }}" ng-model="AppStore.instance[field.name]"/>
+                                    <input type="number"
+                                           min="{{ field.min }}"
+                                           max="{{ field.max }}"
+                                           id="{{ field.name }}"
+                                           ng-model="AppStore.instance[field.name]"
+                                           ng-init="AppStore.instance[field.name]=field.min"/>
+                                    <span>{{ field.units }}</span>
                                     <div class="error arrow-up" ng-show="AppStore.errors[field.name]">
                                         <ul class="error-list">
                                             <li ng-repeat="error in AppStore.errors[field.name]" ng-bind="error"></li>

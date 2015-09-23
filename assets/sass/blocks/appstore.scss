@@ -295,15 +295,26 @@
                     }
                 }
                 .integer-field {
-                    width: 200px;
+                    width: 100%;
                     label {
-                        display: block;
+                        display: inline-block;
+                        width: 250px;
+                        margin-top: 20px;
                         font-size: 16px;
                         font-weight: bold;
                         color: #000;
                     }
+                    span {
+                        margin-left: 10px;
+                    }
+                    input[type="range"] {
+                        vertical-align: middle;
+                        display: inline-block;
+                        width: 350px;
+                    }
                     input[type="number"] {
-                        width: 100%;
+                        width: 100px;
+                        margin-left: 10px;
                         height: 32px;
                         border: 1px solid #D8D8D8;
                         box-shadow: none;
