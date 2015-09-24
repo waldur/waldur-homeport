@@ -2,39 +2,22 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('eventsService', ['baseServiceClass', 'ENV', 'EVENT_FEATURES', eventsService]);
+    .service('eventsService', ['baseServiceClass', 'ENV', eventsService]);
 
-  function eventsService(baseServiceClass, ENV, EVENT_FEATURES) {
+  function eventsService(baseServiceClass, ENV) {
     /*jshint validthis: true */
     var ServiceClass = baseServiceClass.extend({
       init:function() {
         this._super();
         this.endpoint = '/events/';
         this.filterByCustomer = false;
-
         if (!ENV.featuresVisible) {
-            var event_types = [];
-            for(var feature in EVENT_FEATURES) {
-                if (ENV.toBeFeatures.indexOf(feature) == -1) {
-                    var events = EVENT_FEATURES[feature];
-                    for (var i = 0; i < events.length; i++) {
-                        event_types.push(events[i]);
-                    }
-                }
-            }
-            this.enabled_event_types = event_types;
+          this.defaultFilter.exclude_features = ENV.toBeFeatures;
         }
-      },
-      getList: function(filter, endpointUrl) {
-        if (!this.defaultFilter.event_type) {
-            this.defaultFilter.event_type = this.enabled_event_types;
-        }
-        return this._super(filter, endpointUrl);
       }
     });
     return new ServiceClass();
   }
-
 })();
 
 (function() {
@@ -133,147 +116,12 @@
     };
     angular.module('ncsaas').constant('EVENT_TEMPLATES', templates);
 
-    angular.module('ncsaas').constant('EVENT_FEATURES', {
-        'users': [
-            'auth_logged_in_with_username',
-            'user_activated',
-            'user_deactivated',
-            'user_creation_succeeded',
-            'user_deletion_succeeded',
-            'user_update_succeeded',
-            'role_granted',
-            'role_revoked',
-        ],
-        'password': [
-            'user_password_updated',
-        ],
-        'ssh': [
-            'ssh_key_creation_succeeded',
-            'ssh_key_deletion_succeeded',
-            'ssh_key_push_succeeded',
-            'ssh_key_push_failed',
-            'ssh_key_remove_succeeded',
-            'ssh_key_remove_failed',
-        ],
-        'projects': [
-            'project_creation_succeeded',
-            'project_deletion_succeeded',
-            'project_update_succeeded',
-            'quota_threshold_reached'
-        ],
-        'project_groups': [
-            'project_added_to_project_group',
-            'project_group_creation_succeeded',
-            'project_group_deletion_succeeded',
-            'project_group_update_succeeded',
-            'project_removed_from_project_group',
-        ],
-        'customers': [
-            'customer_creation_succeeded',
-            'customer_deletion_succeeded',
-            'customer_update_succeeded',
-            'customer_account_credited',
-            'customer_account_debited',
-            'user_organization_approved',
-            'user_organization_claimed',
-            'user_organization_rejected',
-            'user_organization_removed',
-        ],
-        'payments': [
-            'payment_approval_succeeded',
-            'payment_cancel_succeeded',
-            'payment_creation_succeeded',
-        ],
-        'invoices': [
-            'invoice_creation_succeeded',
-            'invoice_deletion_succeeded',
-            'invoice_update_succeeded',
-        ],
-        'vms': [
-            'resource_created',
-            'resource_deleted',
-            'resource_imported',
-        ],
-        'openStackPrivateCloud': [
-            'iaas_instance_application_became_available',
-            'iaas_instance_application_deployment_succeeded',
-            'iaas_instance_application_failed',
-            'iaas_instance_creation_failed',
-            'iaas_instance_creation_scheduled',
-            'iaas_instance_creation_succeeded',
-            'iaas_instance_deletion_failed',
-            'iaas_instance_deletion_succeeded',
-            'iaas_instance_flavor_change_failed',
-            'iaas_instance_flavor_change_scheduled',
-            'iaas_instance_flavor_change_succeeded',
-            'iaas_instance_import_failed',
-            'iaas_instance_import_scheduled',
-            'iaas_instance_import_succeeded',
-            'iaas_instance_licenses_added',
-            'iaas_instance_restart_failed',
-            'iaas_instance_restart_succeeded',
-            'iaas_instance_start_failed',
-            'iaas_instance_start_succeeded',
-            'iaas_instance_stop_failed',
-            'iaas_instance_stop_succeeded',
-            'iaas_instance_update_succeeded',
-            'iaas_instance_volume_extension_scheduled',
-            'iaas_membership_sync_failed',
-            'iaas_service_sync_failed',
-        ],
-        'backups': [
-            'iaas_backup_creation_failed',
-            'iaas_backup_creation_scheduled',
-            'iaas_backup_creation_succeeded',
-            'iaas_backup_deletion_failed',
-            'iaas_backup_deletion_scheduled',
-            'iaas_backup_deletion_succeeded',
-            'iaas_backup_restoration_failed',
-            'iaas_backup_restoration_scheduled',
-            'iaas_backup_restoration_succeeded',
-            'iaas_backup_schedule_activated',
-            'iaas_backup_schedule_creation_succeeded',
-            'iaas_backup_schedule_deactivated',
-            'iaas_backup_schedule_deletion_succeeded',
-            'iaas_backup_schedule_update_succeeded',
-        ],
-        'templates': [
-            'template_creation_succeeded',
-            'template_deletion_succeeded',
-            'template_service_creation_succeeded',
-            'template_service_deletion_succeeded',
-            'template_service_update_succeeded',
-            'template_update_succeeded',
-        ],
-        'monitoring': [
-            'zabbix_host_creation_failed',
-            'zabbix_host_creation_succeeded',
-            'zabbix_host_deletion_failed',
-            'zabbix_host_deletion_succeeded',
-        ],
-    });
-
     var types = {};
     for(var key in templates) {
         types[key] = key;
     }
     angular.module('ncsaas').constant('EVENTTYPE', types);
 })();
-
-
-angular.module('ncsaas').constant('EVENT_ROUTES', {
-    'affected_user': 'users.details',
-    'user': 'users.details',
-    'project': 'projects.details',
-    'customer': 'organizations.details',
-    'affected_organization': 'organizations.details',
-    'cloud_account': 'services.details',
-    'service': 'services.details',
-    'cloud': 'services.details',
-    'instance': 'resources.details',
-    'iaas_instance': 'resources.details',
-    'resource': 'resources.details',
-});
 
 (function() {
     angular.module('ncsaas').service('eventRegistry', ['EVENTTYPE', eventRegistry]);
@@ -328,110 +176,149 @@ angular.module('ncsaas').constant('EVENT_ROUTES', {
     }
 })();
 
-(function() {
-    angular.module('ncsaas').service('eventFormatter', ['EVENT_TEMPLATES', 'EVENT_ROUTES', '$state', eventFormatter]);
+angular.module('ncsaas').constant('EVENT_ROUTES', {
+    'affected_user': 'users.details',
+    'user': 'users.details',
+    'project': 'projects.details',
+    'customer': 'organizations.details',
+    'affected_organization': 'organizations.details',
+    'cloud_account': 'services.details',
+    'service': 'services.details',
+    'cloud': 'services.details',
+    'instance': 'resources.details',
+    'iaas_instance': 'resources.details',
+    'resource': 'resources.details',
+});
 
-    function eventFormatter(EVENT_TEMPLATES, EVENT_ROUTES, $state) {
-        return {
+(function() {
+    angular.module('ncsaas').service('BaseEventFormatter', ['EVENT_ROUTES', '$state', BaseEventFormatter]);
+
+    function BaseEventFormatter(EVENT_ROUTES, $state) {
+        return Class.extend({
             format: function(event) {
-                var template = EVENT_TEMPLATES[event.event_type];
+                var template = this.getTemplate(event);
                 if (!template) {
                     return event.message;
                 }
-
-                var fields = findFields(template);
-                var entities = fieldsToEntities(event, fields);
-                var context = {};
+                var eventContext = this.getEventContext(event);
+                var fields = this.findFields(template);
+                var templateContext = this.getTemplateContext(eventContext, fields);
+                return this.renderTemplate(template, templateContext);
+            },
+            getTemplateContext: function(eventContext, fields) {
+                var entities = this.fieldsToEntities(eventContext, fields);
+                var templateContext = {};
                 // Fill hyperlinks for entities
                 for (var field in entities) {
                     var entity = entities[field];
-                    var route = EVENT_ROUTES[entity];
-                    var uuid = event[entity + "_uuid"];
-                    var args = {uuid: uuid};
-                    if (entity == 'cloud_account' || entity == 'cloud') {
-                        args['provider'] = 'IaaS';
-                    }
-                    if (entity == 'service') {
-                        args['provider'] = entities['service_type'];
-                    }
-                    if (entity == 'resource') {
-                        args['resource_type'] = event['resource_type'];
-                    }
-                    var url = $state.href(route, args);
+                    var url = this.formatUrl(entity, eventContext);
                     if (url) {
-                        context[field] = '<a href="' + url + '" class="name">' + event[field] + '</a>';
+                        templateContext[field] = '<a href="' + url + '" class="name">' + eventContext[field] + '</a>';
                     }
                 }
 
                 // Fill other fields
                 for (var i = 0; i < fields.length; i++) {
                     var field = fields[i];
-                    if (!context[field]) {
-                        if (event[field] != undefined) {
-                            context[field] = event[field];
+                    if (!templateContext[field]) {
+                        if (eventContext[field] != undefined) {
+                            templateContext[field] = eventContext[field];
                         } else {
-                            context[field] = '';
+                            templateContext[field] = '';
                         }
                     }
                 }
-                return renderTemplate(template, context);
-            }
-        }
-    }
-
-    function findAll(re, s) {
-        // Find all matches of regular expression pattern in the string
-        var match;
-        var matches = [];
-        do {
-            match = re.exec(s);
-            if (match) {
-                matches.push(match[1]);
-            }
-        } while (match);
-        return matches;
-    }
-
-    var templateFields = {};
-    function findFields(template) {
-        // Input: 
-        // "User {affected_user_username} has gained role of {role_name} in {project_name}."
-        // Output:
-        // ["affected_user_username", "role_name", "project_name"]
-        if (!templateFields[template]) {
-            templateFields[template] = findAll(/\{([^{]+)\}/g, template);
-        }
-        return templateFields[template];
-    }
-
-    function fieldsToEntities(event, fields) {
-        // Example output:
-        // {"affected_user_username": "affected_user", "project_name": "project"}
-
-        var entities = {};
-        for(var key in event) {
-            if (/_uuid$/.test(key)) {
-                var name = key.replace(/_uuid$/, '');
-                entities[name] = true;
-            }
-        }
-
-        var table = {};
-        for (var name in entities) {
-            for (var i = 0; i < fields.length; i++) {
-                var field = fields[i];
-                if (field.startsWith(name) && !table[field]) {
-                    table[field] = name;
+                return templateContext;
+            },
+            getTemplate: function(event) {
+                return null;
+            },
+            getEventContext: function(event) {
+                return {};
+            },
+            formatUrl: function(entity, context) {
+                var route = EVENT_ROUTES[entity];
+                var uuid = context[entity + "_uuid"];
+                var args = {uuid: uuid};
+                if (entity == 'cloud_account' || entity == 'cloud') {
+                    args['provider'] = 'IaaS';
                 }
-            }
-        }
-        return table;
-    }
+                if (entity == 'service') {
+                    args['provider'] = context['service_type'];
+                }
+                if (entity == 'resource') {
+                    args['resource_type'] = context['resource_type'];
+                }
+                return $state.href(route, args);
+            },
+            findAll: function(re, s) {
+                // Find all matches of regular expression pattern in the string
+                var match;
+                var matches = [];
+                do {
+                    match = re.exec(s);
+                    if (match) {
+                        matches.push(match[1]);
+                    }
+                } while (match);
+                return matches;
+            },
+            templateFields: {},
+            findFields: function(template) {
+                // Input: 
+                // "User {affected_user_username} has gained role of {role_name} in {project_name}."
+                // Output:
+                // ["affected_user_username", "role_name", "project_name"]
+                if (!this.templateFields[template]) {
+                    this.templateFields[template] = this.findAll(/\{([^{]+)\}/g, template);
+                }
+                return this.templateFields[template];
+            },
+            fieldsToEntities: function(event, fields) {
+                // Example output:
+                // {"affected_user_username": "affected_user", "project_name": "project"}
 
-    function renderTemplate(template, params) {
-        for (var key in params) {
-            template = template.replace("{" + key + "}", params[key]);
-        }
-        return template;
+                var entities = {};
+                for(var key in event) {
+                    if (/_uuid$/.test(key)) {
+                        var name = key.replace(/_uuid$/, '');
+                        entities[name] = true;
+                    }
+                }
+
+                var table = {};
+                for (var name in entities) {
+                    for (var i = 0; i < fields.length; i++) {
+                        var field = fields[i];
+                        if (field.startsWith(name) && !table[field]) {
+                            table[field] = name;
+                        }
+                    }
+                }
+                return table;
+            },
+            renderTemplate: function(template, params) {
+                for (var key in params) {
+                    template = template.replace("{" + key + "}", params[key]);
+                }
+                return template;
+            }
+        });
+    }
+})();
+
+(function() {
+    angular.module('ncsaas').service('eventFormatter', ['EVENT_TEMPLATES', 'BaseEventFormatter', eventFormatter]);
+
+    function eventFormatter(EVENT_TEMPLATES, BaseEventFormatter) {
+        var cls = BaseEventFormatter.extend({
+            getTemplate: function(event) {
+                return EVENT_TEMPLATES[event.event_type];
+            },
+            getEventContext: function(event) {
+                return event;
+            }
+        });
+        return new cls();
     }
 })();

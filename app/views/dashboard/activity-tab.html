@@ -67,7 +67,7 @@
                 <ul>
                     <li ng-repeat="alert in DashboardController.alerts" ng-class="{'fail': alert.severity=='error'}">
                         <div class="left-p">
-                            <span ng-bind="::alert.message"></span>
+                            <span ng-bind-html="::alert.html_message"></span>
                         </div>
                         <div class="right-p">
                             <span class="date" am-time-ago="alert.created"></span>
@@ -80,7 +80,7 @@
                     No active alerts
                 </div>
             </div>
-            <a class="show-all" ui-sref="dashboard.alerts" ng-if="DashboardController.alerts.length">Show all alerts</a>
+            <a class="show-all" ui-sref="organizations.details({uuid: DashboardController.customer_uuid, tab:'alerts'})" ng-if="DashboardController.alerts.length">Show all alerts</a>
         </div>
         <div class="alerts-list" ng-if="DashboardController.events.length">
             <h3>Recent events</h3>

@@ -315,7 +315,14 @@ module.exports = function(grunt) {
                         src: ['angular-block-ui.css'],
                         dest: 'app/static/css/',
                         filter: 'isFile'
-                    }
+                    },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/angular-sanitize/',
+                        src: ['angular-sanitize.js'],
+                        dest: 'app/static/js/angular/',
+                        filter: 'isFile'
+                    },
                 ]
             },
             modePrivateIaas: {
@@ -517,6 +524,7 @@ module.exports = function(grunt) {
                     'app/static/js/Chart.js',
                     'app/static/js/angular/tc-angular-chartjs.js',
                     'app/static/js/angular/xeditable.js',
+                    'app/static/js/angular/angular-sanitize.js',
                     'app/scripts/*.js',
                     'app/scripts/configs/*.js',
                     'app/scripts/controllers/*.js',

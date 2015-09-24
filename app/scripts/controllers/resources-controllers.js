@@ -151,22 +151,24 @@
   angular.module('ncsaas')
       .controller('ResourceDetailUpdateController', [
         '$stateParams',
-        '$scope',
         '$state',
         'resourcesService',
+        'resourcesCountService',
+        'alertsService',
         'baseControllerDetailUpdateClass',
         ResourceDetailUpdateController
       ]);
 
   function ResourceDetailUpdateController(
     $stateParams,
-    $scope,
     $state,
     resourcesService,
+    resourcesCountService,
+    alertsService,
     baseControllerDetailUpdateClass) {
     var controllerScope = this;
     var Controller = baseControllerDetailUpdateClass.extend({
-      activeTab: 'backups',
+      activeTab: 'alerts',
       canEdit: true,
 
       init:function() {
@@ -191,6 +193,12 @@
               key: 'backups',
               viewName: 'tabBackups',
               count: 0
+            },
+            {
+              title: 'Alerts',
+              key: 'alerts',
+              viewName: 'tabAlerts',
+              count: 0
             }
           ]
         };
@@ -200,9 +208,17 @@
         var vm = this;
         vm.service.$get($stateParams.resource_type, $stateParams.uuid).then(function(response) {
           vm.model = response;
-          $scope.$broadcast('resourceLoaded', vm.model);
+          vm.setCounters();
         }, function() {
           $state.go('errorPage.notFound');
+        });
+      },
+
+      setCounters: function() {
+        var vm = this;
+        var query = angular.extend(alertsService.defaultFilter, {scope: vm.model.url});
+        resourcesCountService.alerts(query).then(function(response) {
+          vm.detailsViewOptions.tabs[1].count = response;
         });
       },
 
@@ -254,5 +270,40 @@
       });
 
       controllerScope.__proto__ = new Controller();
+  }
+})();
+
+(function() {
+  angular.module('ncsaas')
+    .controller('ResourceAlertsListController', [
+      'BaseAlertsListController',
+      'resourcesService',
+      '$stateParams',
+      ResourceAlertsListController]);
+
+  function ResourceAlertsListController(
+    BaseAlertsListController,
+    resourcesService,
+    $stateParams) {
+    var controllerScope = this;
+    var controllerClass = BaseAlertsListController.extend({
+      init: function() {
+        this.controllerScope = controllerScope;
+        this._super();
+      },
+
+      getList: function(filter) {
+        var vm = this;
+        var fn = this._super.bind(vm);
+        filter = filter || {};
+        return resourcesService.$get($stateParams.resource_type, $stateParams.uuid).then(function(resource) {
+          vm.service.defaultFilter.scope = resource.url;
+          vm.service.defaultFilter.opened = true;
+          fn(filter);
+        })
+      }
+    });
+
+    controllerScope.__proto__ = new controllerClass();
   }
 })();

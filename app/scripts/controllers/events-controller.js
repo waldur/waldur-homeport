@@ -77,24 +77,20 @@
   }
 
   angular.module('ncsaas')
-    .controller('CustomerAlertsListController', [
-      '$scope',
+    .service('BaseAlertsListController', [
       'baseControllerListClass',
-      'currentStateService',
       'alertsService',
+      'alertFormatter',
       'ENTITYLISTFIELDTYPES',
-      CustomerAlertsListController]);
+      BaseAlertsListController]);
 
-  function CustomerAlertsListController(
-    $scope,
+  function BaseAlertsListController(
     baseControllerListClass,
-    currentStateService,
     alertsService,
+    alertFormatter,
     ENTITYLISTFIELDTYPES) {
-    var controllerScope = this;
-    var controllerClass = baseControllerListClass.extend({
+    return baseControllerListClass.extend({
       init: function() {
-        this.controllerScope = controllerScope;
         this.service = alertsService;
         this._super();
 
@@ -105,32 +101,25 @@
           list: [
             {
               name: 'Message',
-              propertyName: 'message',
-              type: ENTITYLISTFIELDTYPES.noType
+              propertyName: 'html_message',
+              className: 'message',
+              type: ENTITYLISTFIELDTYPES.html
+            },
+            {
+              name: 'Date',
+              propertyName: 'created',
+              className: 'date',
+              type: ENTITYLISTFIELDTYPES.date
             }
           ]
         };
-
-        $scope.$on('currentCustomerUpdated', this.onCustomerUpdate.bind(this));
       },
-
-      onCustomerUpdate: function() {
-        this.getList();
-      },
-
-      getList: function(filter) {
-        var vm = this;
-        var fn = this._super.bind(vm);
-        filter = filter || {};
-        return currentStateService.getCustomer().then(function(customer) {
-          vm.service.defaultFilter.aggregate = 'customer';
-          vm.service.defaultFilter.uuid = customer.uuid;
-          fn(filter);
-        })
+      afterGetList: function() {
+        angular.forEach(this.list, function(alert) {
+          alert.html_message = alertFormatter.format(alert);
+        });
       }
     });
-
-    controllerScope.__proto__ = new controllerClass();
   }
 
   angular.module('ncsaas')
@@ -150,7 +139,6 @@
 
     controllerScope.__proto__ = new EventController();
   }
-
 
   angular.module('ncsaas')
     .controller('DashboardCostController', [
@@ -282,6 +270,7 @@
       'eventStatisticsService',
       'resourcesCountService',
       'currentStateService',
+      'alertFormatter',
       'ENV',
       '$window',
       DashboardActivityController]);
@@ -297,6 +286,7 @@
     eventStatisticsService,
     resourcesCountService,
     currentStateService,
+    alertFormatter,
     ENV,
     $window) {
     var controllerScope = this;
@@ -334,11 +324,12 @@
       selectProject: function (project) {
         if (project) {
           project.selected =! project.selected;
-          this.getProjectResources(project);
+          this.getProjectCounters(project);
           this.getProjectEvents(project);
         }
       },
       onCustomerUpdate: function() {
+        this.customer_uuid = currentStateService.getCustomerUuid();
         this.getCustomerProjects();
         this.getCustomerEvents();
         this.getCustomerAlerts();
@@ -346,8 +337,14 @@
       getCustomerAlerts: function () {
         var vm = this;
         currentStateService.getCustomer().then(function(customer) {
-          alertsService.getList({'aggregate': 'customer', 'uuid': customer.uuid}).then(function(response) {
-            vm.alerts = response;
+          alertsService.getList({
+            aggregate: 'customer',
+            uuid: customer.uuid
+          }).then(function(response) {
+            vm.alerts = response.map(function(alert) {
+              alert.html_message = alertFormatter.format(alert);
+              return alert;
+            });
           })
         })
       },
@@ -369,7 +366,7 @@
           vm.selectProject(vm.projects[0]);
         });
       },
-      getProjectResources: function (project) {
+      getProjectCounters: function (project) {
         if (project.count) {
           return;
         }
@@ -384,7 +381,8 @@
         }).then(function(count) {
           project.count.resources = count;
         });
-        resourcesCountService.alerts({'scope': project.url}).then(function(count) {
+        var query = angular.extend(alertsService.defaultFilter, {aggregate: 'project', uuid: project.uuid});
+        resourcesCountService.alerts(query).then(function(count) {
           project.count.alerts = count;
         });
       },

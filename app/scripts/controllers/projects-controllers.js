@@ -366,8 +366,8 @@
       'projectsService',
       'baseControllerDetailUpdateClass',
       'resourcesCountService',
+      'alertsService',
       'currentStateService',
-      'ENV',
       ProjectDetailUpdateController
     ]);
 
@@ -378,6 +378,7 @@
     projectsService,
     baseControllerDetailUpdateClass,
     resourcesCountService,
+    alertsService,
     currentStateService) {
     var controllerScope = this;
     var Controller = baseControllerDetailUpdateClass.extend({
@@ -410,6 +411,12 @@
               title: 'Events',
               key: 'eventlog',
               viewName: 'tabEventlog',
+              count: 0
+            },
+            {
+              title: 'Alerts',
+              key: 'alerts',
+              viewName: 'tabAlerts',
               count: 0
             },
             {
@@ -470,6 +477,7 @@
       },
       setCounters: function() {
         this.setEventsCounter();
+        this.setAlertsCounter();
         this.setVmCounter();
         this.setAppCounter();
         this.setBackupsCounter();
@@ -479,8 +487,19 @@
       },
       setEventsCounter: function() {
         var vm = this;
-        resourcesCountService.events({'scope': vm.model.url}).then(function(response) {
+        var query = angular.extend(eventsService.defaultFilter, {scope: vm.model.url});
+        resourcesCountService.events(query).then(function(response) {
           vm.detailsViewOptions.tabs[0].count = response;
+        });
+      },
+      setAlertsCounter: function() {
+        var vm = this;
+        var query = angular.extend(alertsService.defaultFilter, {
+          aggregate: 'project',
+          uuid: this.model.uuid
+        });
+        resourcesCountService.alerts(query).then(function(response) {
+          vm.detailsViewOptions.tabs[1].count = response;
         });
       },
       setVmCounter: function() {
@@ -489,7 +508,7 @@
           'project_uuid': vm.model.uuid,
           'resource_type': ENV.resourceFilters.VMs
         }).then(function(response) {
-          vm.detailsViewOptions.tabs[1].count = response;
+          vm.detailsViewOptions.tabs[2].count = response;
         });
       },
       setAppCounter: function() {
@@ -498,25 +517,25 @@
           'project_uuid': vm.model.uuid,
           'resource_type': ENV.resourceFilters.applications
         }).then(function(response) {
-          vm.detailsViewOptions.tabs[2].count = response;
+          vm.detailsViewOptions.tabs[3].count = response;
         });
       },
       setBackupsCounter: function() {
         var vm = this;
         if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('backups') == -1) {
           resourcesCountService.backups({'project_uuid': vm.model.uuid}).then(function(response) {
-            vm.detailsViewOptions.tabs[3].count = response;
+            vm.detailsViewOptions.tabs[4].count = response;
           });
         }
       },
       setUsersCounter: function() {
         var vm = this;
         resourcesCountService.users({'project': vm.model.uuid}).then(function(response) {
-          vm.detailsViewOptions.tabs[4].count = response;
+          vm.detailsViewOptions.tabs[5].count = response;
         });
       },
       setProvidersCounter: function() {
-        this.detailsViewOptions.tabs[5].count = this.model.services.length;
+        this.detailsViewOptions.tabs[6].count = this.model.services.length;
       },
       setSupportCounter: function() {
         var vm = this;
@@ -524,7 +543,7 @@
           resourcesCountService.premiumSupportContracts({
             project_uuid: vm.model.uuid
           }).then(function(response) {
-            vm.detailsViewOptions.tabs[6].count = response;
+            vm.detailsViewOptions.tabs[7].count = response;
           });
         }
       }
@@ -772,6 +791,67 @@
   }
 
 })();
+
+
+(function() {
+  angular.module('ncsaas')
+    .controller('ProjectAlertTabController', [
+      'BaseAlertsListController',
+      'projectsService',
+      'currentStateService',
+      '$stateParams',
+      ProjectAlertTabController
+    ]);
+
+  function ProjectAlertTabController(
+    BaseAlertsListController,
+    projectsService,
+    currentStateService,
+    $stateParams
+  ) {
+    var controllerScope = this;
+    var AlertController = BaseAlertsListController.extend({
+      project: null,
+
+      init: function() {
+        this.controllerScope = controllerScope;
+        if (!$stateParams.uuid) {
+          this.setSignalHandler('currentProjectUpdated', this.getProject.bind(controllerScope));
+        }
+        this._super();
+        this.getProject();
+      },
+      getList: function(filter) {
+        if (this.project) {
+          this.service.defaultFilter.aggregate = 'project';
+          this.service.defaultFilter.uuid = this.project.uuid;
+          this.service.defaultFilter.opened = true;
+          return this._super(filter);
+        } else {
+          return this.getProject();
+        }
+      },
+      getProject: function() {
+        var vm = this;
+        if ($stateParams.uuid) {
+          projectsService.$get($stateParams.uuid).then(function(response) {
+            vm.project = response;
+            vm.getList();
+          });
+        } else {
+          currentStateService.getProject().then(function(response) {
+            vm.project = response;
+            vm.getList();
+          });
+        }
+      }
+    });
+
+    controllerScope.__proto__ = new AlertController();
+  }
+
+})();
+
 
 (function() {
   angular.module('ncsaas')

@@ -22,7 +22,8 @@
       'angulartics.google.analytics',
       'ngFileUpload',
       'xeditable',
-      'blockUI'
+      'blockUI',
+      'ngSanitize'
     ])
     // urls
     .config(function($stateProvider, $urlRouterProvider, MODE) {
@@ -321,6 +322,9 @@
             'tabEventlog@projects.details' : {
               templateUrl: 'views/project/tab-eventlog.html',
             },
+            'tabAlerts@projects.details' : {
+              templateUrl: 'views/project/tab-alerts.html',
+            },
             'tabResources@projects.details' : {
               templateUrl: 'views/project/tab-resources.html',
             },
@@ -540,6 +544,9 @@
             'tabServices@organizations.details': {
               templateUrl: 'views/customer/tab-services.html',
             },
+            'tabAlerts@organizations.details': {
+              templateUrl: 'views/customer/tab-alerts.html',
+            },
             'listTemplate@organizations.details' : {
               templateUrl: 'views/service/list-template.html'
             },
@@ -682,6 +689,9 @@
             },
             'backupListContent@resources.details' : {
               templateUrl: 'views/backup/backup-list-content.html',
+            },
+            'tabAlerts@resources.details': {
+              templateUrl: 'views/resource/tab-alerts.html',
             },
             'tabs@resources.details': {
               templateUrl: 'views/resource/tabs.html',

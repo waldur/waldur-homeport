@@ -14,7 +14,7 @@
 
       $get: function(service_type, uuid) {
         var get = this._super.bind(this);
-        this.getUrlByType(service_type).then(function(url) {
+        return this.getUrlByType(service_type).then(function(url) {
           return get(uuid, url);
         });
       },
