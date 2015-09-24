@@ -80,10 +80,15 @@
     .service('BaseAlertsListController', [
       'baseControllerListClass',
       'alertsService',
+      'alertFormatter',
       'ENTITYLISTFIELDTYPES',
       BaseAlertsListController]);
 
-  function BaseAlertsListController(baseControllerListClass, alertsService, ENTITYLISTFIELDTYPES) {
+  function BaseAlertsListController(
+    baseControllerListClass,
+    alertsService,
+    alertFormatter,
+    ENTITYLISTFIELDTYPES) {
     return baseControllerListClass.extend({
       init: function() {
         this.service = alertsService;
@@ -96,9 +101,9 @@
           list: [
             {
               name: 'Message',
-              propertyName: 'message',
+              propertyName: 'html_message',
               className: 'message',
-              type: ENTITYLISTFIELDTYPES.noType
+              type: ENTITYLISTFIELDTYPES.html
             },
             {
               name: 'Date',
@@ -108,6 +113,11 @@
             }
           ]
         };
+      },
+      afterGetList: function() {
+        angular.forEach(this.list, function(alert) {
+          alert.html_message = alertFormatter.format(alert);
+        });
       }
     });
   }
@@ -260,6 +270,7 @@
       'eventStatisticsService',
       'resourcesCountService',
       'currentStateService',
+      'alertFormatter',
       'ENV',
       '$window',
       DashboardActivityController]);
@@ -275,6 +286,7 @@
     eventStatisticsService,
     resourcesCountService,
     currentStateService,
+    alertFormatter,
     ENV,
     $window) {
     var controllerScope = this;
@@ -330,7 +342,10 @@
             uuid: customer.uuid,
             opened: true
           }).then(function(response) {
-            vm.alerts = response;
+            vm.alerts = response.map(function(alert) {
+              alert.html_message = alertFormatter.format(alert);
+              return alert;
+            });
           })
         })
       },

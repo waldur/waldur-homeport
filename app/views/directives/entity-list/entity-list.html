@@ -97,7 +97,7 @@
                         </div>
                     </div>
                     <div ng-repeat="field in entityOptions.list"
-                         ng-switch="field.type"
+                         ng-switch="::field.type"
                          ng-class="{ 'display-for-mobile' : field.showForMobile, 'status': field.type == 'statusCircle' }"
                          class="additional-cell {{ field.className }}">
                         <div ng-switch-when="statusCircle"
@@ -154,6 +154,8 @@
                             </span>
                             <div stoppropagation class="icon" ng-click="rowform.$show()" ng-hide="rowform.$visible"></div>
                         </span>
+
+                        <span ng-switch-when="html" ng-bind-html="::entity[field.propertyName]"></span>
 
                         <span ng-switch-default>
                             {{ entity[field.propertyName] ? entity[field.propertyName] : field.emptyText }}

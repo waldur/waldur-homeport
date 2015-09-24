@@ -43,6 +43,7 @@
       noType: false,
       showForMobile: true,
       statusCircle: 'statusCircle',
-      subtitle: true
+      subtitle: true,
+      html: 'html'
     })
 })();

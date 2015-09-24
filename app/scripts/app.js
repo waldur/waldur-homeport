@@ -22,7 +22,8 @@
       'angulartics.google.analytics',
       'ngFileUpload',
       'xeditable',
-      'blockUI'
+      'blockUI',
+      'ngSanitize'
     ])
     // urls
     .config(function($stateProvider, $urlRouterProvider, MODE) {
