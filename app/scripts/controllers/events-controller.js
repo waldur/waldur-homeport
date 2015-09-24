@@ -381,7 +381,7 @@
         }).then(function(count) {
           project.count.resources = count;
         });
-        var query = angular.extend(alertsService.defaultFilter, {scope: project.url});
+        var query = angular.extend(alertsService.defaultFilter, {aggregate: 'project', uuid: project.uuid});
         resourcesCountService.alerts(query).then(function(count) {
           project.count.alerts = count;
         });
