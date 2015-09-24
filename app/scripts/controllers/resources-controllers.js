@@ -154,6 +154,7 @@
         '$state',
         'resourcesService',
         'resourcesCountService',
+        'alertsService',
         'baseControllerDetailUpdateClass',
         ResourceDetailUpdateController
       ]);
@@ -163,6 +164,7 @@
     $state,
     resourcesService,
     resourcesCountService,
+    alertsService,
     baseControllerDetailUpdateClass) {
     var controllerScope = this;
     var Controller = baseControllerDetailUpdateClass.extend({
@@ -214,7 +216,8 @@
 
       setCounters: function() {
         var vm = this;
-        resourcesCountService.alerts({scope: vm.model.url, opened: true}).then(function(response) {
+        var query = angular.extend(alertsService.defaultFilter, {scope: vm.model.url});
+        resourcesCountService.alerts(query).then(function(response) {
           vm.detailsViewOptions.tabs[1].count = response;
         });
       },

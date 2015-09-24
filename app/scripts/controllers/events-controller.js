@@ -324,7 +324,7 @@
       selectProject: function (project) {
         if (project) {
           project.selected =! project.selected;
-          this.getProjectResources(project);
+          this.getProjectCounters(project);
           this.getProjectEvents(project);
         }
       },
@@ -339,8 +339,7 @@
         currentStateService.getCustomer().then(function(customer) {
           alertsService.getList({
             aggregate: 'customer',
-            uuid: customer.uuid,
-            opened: true
+            uuid: customer.uuid
           }).then(function(response) {
             vm.alerts = response.map(function(alert) {
               alert.html_message = alertFormatter.format(alert);
@@ -367,7 +366,7 @@
           vm.selectProject(vm.projects[0]);
         });
       },
-      getProjectResources: function (project) {
+      getProjectCounters: function (project) {
         if (project.count) {
           return;
         }
@@ -382,7 +381,8 @@
         }).then(function(count) {
           project.count.resources = count;
         });
-        resourcesCountService.alerts({'scope': project.url}).then(function(count) {
+        var query = angular.extend(alertsService.defaultFilter, {scope: project.url});
+        resourcesCountService.alerts(query).then(function(count) {
           project.count.alerts = count;
         });
       },

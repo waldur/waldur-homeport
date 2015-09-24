@@ -366,8 +366,8 @@
       'projectsService',
       'baseControllerDetailUpdateClass',
       'resourcesCountService',
+      'alertsService',
       'currentStateService',
-      'ENV',
       ProjectDetailUpdateController
     ]);
 
@@ -378,6 +378,7 @@
     projectsService,
     baseControllerDetailUpdateClass,
     resourcesCountService,
+    alertsService,
     currentStateService) {
     var controllerScope = this;
     var Controller = baseControllerDetailUpdateClass.extend({
@@ -486,17 +487,18 @@
       },
       setEventsCounter: function() {
         var vm = this;
-        resourcesCountService.events({'scope': vm.model.url}).then(function(response) {
+        var query = angular.extend(eventsService.defaultFilter, {scope: vm.model.url});
+        resourcesCountService.events(query).then(function(response) {
           vm.detailsViewOptions.tabs[0].count = response;
         });
       },
       setAlertsCounter: function() {
         var vm = this;
-        resourcesCountService.alerts({
+        var query = angular.extend(alertsService.defaultFilter, {
           aggregate: 'project',
-          uuid: this.model.uuid,
-          opened: true
-        }).then(function(response) {
+          uuid: this.model.uuid
+        });
+        resourcesCountService.alerts(query).then(function(response) {
           vm.detailsViewOptions.tabs[1].count = response;
         });
       },

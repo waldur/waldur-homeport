@@ -118,6 +118,7 @@
       '$rootScope',
       '$q',
       'resourcesCountService',
+      'alertsService',
       CustomerDetailUpdateController
     ]);
 
@@ -131,7 +132,8 @@
     $stateParams,
     $rootScope,
     $q,
-    resourcesCountService
+    resourcesCountService,
+    alertsService
     ) {
     var controllerScope = this;
     var CustomerController = baseControllerDetailUpdateClass.extend({
@@ -211,8 +213,10 @@
 
       setCounters: function() {
         var vm = this;
+        var query = angular.extend(alertsService.defaultFilter, {aggregate: 'customer', uuid: vm.model.uuid});
+
         $q.all([
-          resourcesCountService.alerts({aggregate: 'customer', uuid: vm.model.uuid, opened: true}),
+          resourcesCountService.alerts(query),
           resourcesCountService.resources({'customer_uuid': vm.model.uuid}),
           resourcesCountService.projects({'customer': vm.model.uuid}),
           resourcesCountService.services({'customer_uuid': vm.model.uuid})

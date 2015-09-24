@@ -2,16 +2,20 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('alertsService', ['baseServiceClass', alertsService]);
+    .service('alertsService', ['baseServiceClass', 'ENV', alertsService]);
 
-  function alertsService(baseServiceClass) {
+  function alertsService(baseServiceClass, ENV) {
     var ServiceClass = baseServiceClass.extend({
       init: function() {
         this._super();
         this.endpoint = '/alerts/';
         this.filterByCustomer = false;
         // New alerts first
+        this.defaultFilter.opened = true;;
         this.defaultFilter.o = '-created';
+        if (!ENV.featuresVisible) {
+          this.defaultFilter.exclude_features = ENV.toBeFeatures;
+        }
       }
     });
     return new ServiceClass();
@@ -28,24 +32,7 @@
     'customer_project_count_exceeded': 'Organization {customer_name} has exceeded quota {quota_name}.',
     'customer_resource_count_exceeded': 'Organization {customer_name} has exceeded quota {quota_name}.',
     'customer_service_count_exceeded': 'Organization {customer_name} has exceeded quota {quota_name}.',
-  });
-
-  angular.module('ncsaas').constant('ALERT_FEATURES', {
-    'services': [
-      'customer_has_zero_services',
-      'service_unavailable',
-      'customer_service_count_exceeded'
-    ],
-    'resources': [
-      'customer_has_zero_resources',
-      'service_has_unmanaged_resources',
-      'resource_disappeared_from_backend',
-      'customer_resource_count_exceeded'
-    ],
-    'projects': [
-      'customer_has_zero_projects',
-      'customer_project_count_exceeded'
-    ]
+    'quota_usage_is_over_threshold': 'Quota {quota_name} is over threshold. Limit: {quota_limit}, usage: {quota_usage}',
   });
 
   angular.module('ncsaas').service('alertFormatter', ['ALERT_TEMPLATES', 'BaseEventFormatter', alertFormatter]);
