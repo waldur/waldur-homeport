@@ -82,7 +82,7 @@
                      ng-class="{ 'display-for-mobile' : fieldHead.showForMobile, 'status': fieldHead.type == 'statusCircle' }">
                     <a class="list-sort">{{ fieldHead.name }}</a>
                 </div>
-                <div class="actions"></div>
+                <div class="actions" ng-if="!entityOptions.entityData.hideActionButtons"></div>
             </li>
             <li ng-repeat="entity in entityList.list"
                 ng-show="entity.uuid != entityOptions.excludeItem || entity.expandItemOpen">
@@ -160,9 +160,8 @@
                         </span>
 
                     </div>
-                    <div class="actions">
+                    <div class="actions" ng-if="!entityOptions.entityData.hideActionButtons">
                         <action-button
-                                ng-if="!entityOptions.entityData.hideActionButtons"
                                 button-list="entityButtons"
                                 button-controller="entityList"
                                 button-type="{{ entityOptions.entityData.actionButtonsType }}"
