@@ -2,15 +2,23 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('eventsService', ['baseServiceClass', 'ENV', eventsService]);
+    .service('eventsService', ['baseServiceClass', 'ENV', '$rootScope', eventsService]);
 
-  function eventsService(baseServiceClass, ENV) {
+  function eventsService(baseServiceClass, ENV, $rootScope) {
     /*jshint validthis: true */
     var ServiceClass = baseServiceClass.extend({
       init:function() {
         this._super();
         this.endpoint = '/events/';
         this.filterByCustomer = false;
+
+        var vm = this;
+        $rootScope.$on('$stateChangeSuccess', function() {
+          vm.setDefaultFilter();
+        });
+        vm.setDefaultFilter();
+      },
+      setDefaultFilter: function() {
         if (!ENV.featuresVisible) {
           this.defaultFilter.exclude_features = ENV.toBeFeatures;
         }
@@ -117,21 +125,8 @@
     angular.module('ncsaas').constant('EVENT_TEMPLATES', templates);
 
     var types = {};
-    // hide update events as non-important
-    var eventFeaturesToHide = [
-        'customer_update_succeeded',
-        'iaas_backup_schedule_update_succeeded',
-        'iaas_instance_update_succeeded',
-        'project_group_update_succeeded',
-        'project_update_succeeded',
-        'template_service_update_succeeded',
-        'template_update_succeeded',
-        'user_update_succeeded'
-    ];
     for(var key in templates) {
-        if (eventFeaturesToHide.indexOf(key) == -1) {
-            types[key] = key;
-        }
+        types[key] = key;
     }
     angular.module('ncsaas').constant('EVENTTYPE', types);
 })();
@@ -222,11 +217,13 @@ angular.module('ncsaas').constant('EVENT_ROUTES', {
                 var entities = this.fieldsToEntities(eventContext, fields);
                 var templateContext = {};
                 // Fill hyperlinks for entities
-                for (var field in entities) {
-                    var entity = entities[field];
-                    var url = this.formatUrl(entity, eventContext);
-                    if (url && this.hideDeletedLink(eventContext.event_type)) {
-                        templateContext[field] = '<a href="' + url + '" class="name">' + eventContext[field] + '</a>';
+                if (this.showLinks(eventContext)) {
+                    for (var field in entities) {
+                        var entity = entities[field];
+                        var url = this.formatUrl(entity, eventContext);
+                        if (url) {
+                            templateContext[field] = '<a href="' + url + '" class="name">' + eventContext[field] + '</a>';
+                        }
                     }
                 }
 
@@ -243,8 +240,8 @@ angular.module('ncsaas').constant('EVENT_ROUTES', {
                 }
                 return templateContext;
             },
-            hideDeletedLink: function(eventType) {
-                return eventType === undefined ? true : eventType.indexOf('deleted') == -1;
+            showLinks: function(context) {
+                return true;
             },
             getTemplate: function(event) {
                 return null;
@@ -333,6 +330,25 @@ angular.module('ncsaas').constant('EVENT_ROUTES', {
             },
             getEventContext: function(event) {
                 return event;
+            },
+            deletionEvents: [
+                'customer_deletion_succeeded',
+                'iaas_backup_deletion_scheduled',
+                'iaas_backup_schedule_deletion_succeeded',
+                'iaas_instance_deletion_succeeded',
+                'invoice_deletion_succeeded',
+                'project_deletion_succeeded',
+                'project_group_deletion_succeeded',
+                'resource_deleted',
+                'ssh_key_deletion_succeeded',
+                'template_deletion_succeeded',
+                'template_service_deletion_succeeded',
+                'user_deletion_succeeded',
+                'zabbix_host_deletion_succeeded'
+            ],
+            showLinks: function(context) {
+                // Don't show links for deletion events
+                return (this.deletionEvents.indexOf(context.event_type) == -1);
             }
         });
         return new cls();

@@ -2,14 +2,22 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('alertsService', ['baseServiceClass', 'ENV', alertsService]);
+    .service('alertsService', ['baseServiceClass', 'ENV', '$rootScope', alertsService]);
 
-  function alertsService(baseServiceClass, ENV) {
+  function alertsService(baseServiceClass, ENV, $rootScope) {
     var ServiceClass = baseServiceClass.extend({
       init: function() {
         this._super();
         this.endpoint = '/alerts/';
         this.filterByCustomer = false;
+
+        var vm = this;
+        $rootScope.$on('$stateChangeSuccess', function() {
+          vm.setDefaultFilter();
+        });
+        vm.setDefaultFilter();
+      },
+      setDefaultFilter: function() {
         // New alerts first
         this.defaultFilter.opened = true;;
         this.defaultFilter.o = '-created';
