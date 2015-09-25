@@ -454,6 +454,11 @@
               key: 'premiumSupport',
               viewName: 'tabPremiumSupport',
               count: 0
+            },
+            {
+              title: 'Delete',
+              key: 'delete',
+              viewName: 'tabDelete'
             }
           ]
         };
@@ -1218,6 +1223,52 @@ angular.module('ncsaas')
     });
 
     controllerScope.__proto__ = new ResourceController();
+  }
+
+})();
+
+
+(function() {
+  angular.module('ncsaas')
+      .controller('ProjectDeleteTabController', [
+        'baseControllerListClass',
+        'projectsService',
+        'currentStateService',
+        '$rootScope',
+        '$state',
+        ProjectDeleteTabController
+      ]);
+
+  function ProjectDeleteTabController(
+      baseControllerListClass,
+      projectsService,
+      currentStateService,
+      $rootScope,
+      $state
+  ) {
+    var controllerScope = this;
+    var DeleteController = baseControllerListClass.extend({
+      init: function() {
+        this.controllerScope = controllerScope;
+        this.service = projectsService;
+        this._super();
+      },
+      removeProject: function () {
+        var vm = this;
+        currentStateService.getProject().then(function(project){
+          vm.remove(project);
+        });
+      },
+      afterInstanceRemove: function(instance) {
+        $rootScope.$broadcast('refreshProjectList', {model: instance, remove: true});
+        this._super(instance);
+        projectsService.getList().then(function(){
+          $state.go('projects.list');
+        });
+      }
+    });
+
+    controllerScope.__proto__ = new DeleteController();
   }
 
 })();
