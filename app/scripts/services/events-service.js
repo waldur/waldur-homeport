@@ -19,6 +19,7 @@
         vm.setDefaultFilter();
       },
       setDefaultFilter: function() {
+        this.defaultFilter.exclude_extra = true;
         if (!ENV.featuresVisible) {
           this.defaultFilter.exclude_features = ENV.toBeFeatures;
         }
