@@ -334,6 +334,9 @@
         vm.addUser();
         $rootScope.$broadcast('refreshProjectList', {model: vm.instance, new: true, current: true});
       },
+      onError: function(errorObject) {
+        this.errorFlash(errorObject.data.detail);
+      },
       currentCustomerUpdatedHandler: function() {
         var vm = this;
         vm.activate();
