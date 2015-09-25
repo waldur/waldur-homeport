@@ -117,8 +117,21 @@
     angular.module('ncsaas').constant('EVENT_TEMPLATES', templates);
 
     var types = {};
+    // hide update events as non-important
+    var eventFeaturesToHide = [
+        'customer_update_succeeded',
+        'iaas_backup_schedule_update_succeeded',
+        'iaas_instance_update_succeeded',
+        'project_group_update_succeeded',
+        'project_update_succeeded',
+        'template_service_update_succeeded',
+        'template_update_succeeded',
+        'user_update_succeeded'
+    ];
     for(var key in templates) {
-        types[key] = key;
+        if (eventFeaturesToHide.indexOf(key) == -1) {
+            types[key] = key;
+        }
     }
     angular.module('ncsaas').constant('EVENTTYPE', types);
 })();
@@ -212,7 +225,7 @@ angular.module('ncsaas').constant('EVENT_ROUTES', {
                 for (var field in entities) {
                     var entity = entities[field];
                     var url = this.formatUrl(entity, eventContext);
-                    if (url) {
+                    if (url && this.hideDeletedLink(eventContext.event_type)) {
                         templateContext[field] = '<a href="' + url + '" class="name">' + eventContext[field] + '</a>';
                     }
                 }
@@ -229,6 +242,9 @@ angular.module('ncsaas').constant('EVENT_ROUTES', {
                     }
                 }
                 return templateContext;
+            },
+            hideDeletedLink: function(eventType) {
+                return eventType === undefined ? true : eventType.indexOf('deleted') == -1;
             },
             getTemplate: function(event) {
                 return null;
