@@ -338,10 +338,7 @@
         var vm = this;
         usersService.getCurrentUser().then(function(user) {
           service.editable = user.is_staff || !service.shared;
-          if (!service.editable) {
-            return;
-          }
-          if (service.values) {
+          if (!service.editable || service.values) {
             return;
           }
           var myBlockUI = blockUI.instances.get(service.uuid);
