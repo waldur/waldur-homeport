@@ -606,6 +606,12 @@
     white-space: nowrap;
   }
 
+  span.cell-default-span {
+    display: inline-block;
+    height: 27px;
+    line-height: 27px;
+  }
+
   a.list-sort {
     text-align: left;
     color: rgb(48, 48, 48);

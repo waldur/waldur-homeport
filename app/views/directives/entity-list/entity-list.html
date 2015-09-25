@@ -157,7 +157,7 @@
 
                         <span ng-switch-when="html" ng-bind-html="::entity[field.propertyName]"></span>
 
-                        <span ng-switch-default>
+                        <span class="cell-default-span" ng-switch-default>
                             {{ entity[field.propertyName] ? entity[field.propertyName] : field.emptyText }}
                         </span>
 
