@@ -367,6 +367,7 @@
       'baseControllerDetailUpdateClass',
       'resourcesCountService',
       'alertsService',
+      'eventsService',
       'currentStateService',
       ProjectDetailUpdateController
     ]);
@@ -379,6 +380,7 @@
     baseControllerDetailUpdateClass,
     resourcesCountService,
     alertsService,
+    eventsService,
     currentStateService) {
     var controllerScope = this;
     var Controller = baseControllerDetailUpdateClass.extend({
