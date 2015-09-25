@@ -207,7 +207,7 @@
           vm.successRedirect();
         }, function(response) {
           vm.errors = response.data;
-          vm.onError();
+          vm.onError(response);
         });
       },
       cancel: function() {
@@ -230,7 +230,7 @@
       getSuccessMessage: function() {
         return this.successMessage.replace('{vm_name}', this.instance.name);
       },
-      onError: function() {}
+      onError: function(errorObject) {}
     });
 
     return ControllerAddClass;
