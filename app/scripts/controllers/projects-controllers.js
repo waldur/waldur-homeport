@@ -8,6 +8,7 @@
       'usersService',
       'currentStateService',
       '$rootScope',
+      '$state',
       'ENV',
       'ENTITYLISTFIELDTYPES',
       BaseProjectListController]);
@@ -18,6 +19,7 @@
       usersService,
       currentStateService,
       $rootScope,
+      $state,
       ENV,
       ENTITYLISTFIELDTYPES) {
 
