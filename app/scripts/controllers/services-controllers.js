@@ -209,7 +209,9 @@
       },
 
       successRedirect: function() {
-        $state.go('resources.list', {tab: 'providers'});
+        currentStateService.getCustomer().then(function(customer) {
+          $state.go('organizations.details', {uuid: customer.uuid, tab: 'providers'});
+        });
       }
     });
 
