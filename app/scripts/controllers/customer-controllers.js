@@ -309,12 +309,13 @@
       'baseServiceListController',
       'joinService',
       'servicesService',
+      'usersService',
       'blockUI',
       CustomerServiceTabController
     ]);
 
   function CustomerServiceTabController(
-    $stateParams, baseServiceListController, joinService, servicesService, blockUI) {
+    $stateParams, baseServiceListController, joinService, servicesService, usersService, blockUI) {
     var controllerScope = this;
     var Controller = baseServiceListController.extend({
       init: function() {
@@ -335,19 +336,22 @@
       },
       showMore: function(service) {
         var vm = this;
-        if (service.values) {
-          return;
-        }
-        var myBlockUI = blockUI.instances.get(service.uuid);
-        myBlockUI.start();
+        usersService.getCurrentUser().then(function(user) {
+          service.editable = user.is_staff || !service.shared;
+          if (!service.editable || service.values) {
+            return;
+          }
+          var myBlockUI = blockUI.instances.get(service.uuid);
+          myBlockUI.start();
 
-        this.service.getOptions(service.service_type).then(function(options) {
-          service.options = options;
-          service.fields = vm.getFields(options);
+          vm.service.getOptions(service.service_type).then(function(options) {
+            service.options = options;
+            service.fields = vm.getFields(options);
 
-          servicesService.$get(null, service.settings).then(function(settings) {
-            service.values = settings;
-            myBlockUI.stop();
+            servicesService.$get(null, service.settings).then(function(settings) {
+              service.values = settings;
+              myBlockUI.stop();
+            });
           });
         });
       },
