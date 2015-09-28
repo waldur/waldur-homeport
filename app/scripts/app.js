@@ -237,22 +237,6 @@
           auth: true
         })
 
-        .state('dashboard.alerts', {
-          url: 'alerts/',
-          views: {
-            'appHeader@dashboard' : {
-              templateUrl: 'views/partials/app-header.html',
-            },
-            'appContent@dashboard' : {
-              templateUrl: 'views/dashboard/alerts-list.html',
-            }
-          },
-          resolve: {
-            authenticated: authCheck
-          },
-          auth: true
-        })
-
         .state('appstore', {
           url: '/appstore/',
           abstract: true,
