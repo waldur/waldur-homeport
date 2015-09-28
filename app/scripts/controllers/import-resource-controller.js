@@ -46,7 +46,14 @@
         servicesService.getServicesList().then(function(response) {
           vm.servicesList = response;
         });
-        vm.setProject();
+        currentStateService.getCustomer().then(function(customer) {
+          if (customer.projects.length == 0) {
+            vm.errorFlash("No projects!");
+            $state.go('organizations.details', {uuid: customer.uuid, tab: 'projects'});
+          } else {
+            vm.setProject();
+          }
+        });
         vm.secondStep = false;
         vm.selectedCategory = null;
         vm.importableResources = [];
