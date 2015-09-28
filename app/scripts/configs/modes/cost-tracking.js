@@ -13,7 +13,8 @@ angular.module('ncsaas')
       'backups',
       'templates',
       'monitoring',
-      'projectGroups'
+      'projectGroups',
+      'premiumSupport'
     ],
     featuresVisible: false,
     homeTemplate: 'views/home/costtracking/home.html',
