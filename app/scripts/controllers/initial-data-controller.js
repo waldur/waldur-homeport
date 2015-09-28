@@ -111,12 +111,12 @@
               instance[option.key] = option.value;
             }
           }
-          instance.customer = this.customer.url;
+          instance.customer = vm.customer.url;
           instance.name = service.name;
-          instance.$save().success(function() {
+          instance.$save().then(function() {
             service.saved = true;
             service.errors = {};
-          }).error(function(errors) {
+          }, function(errors) {
             service.errors = errors;
           });
         });
