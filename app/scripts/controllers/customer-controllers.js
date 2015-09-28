@@ -137,7 +137,6 @@
     ) {
     var controllerScope = this;
     var CustomerController = baseControllerDetailUpdateClass.extend({
-      activeTab: 'resources',
       files: [],
       canEdit: false,
 
@@ -151,7 +150,7 @@
 
         this.detailsViewOptions = {
           title: 'Organization',
-          activeTab: $stateParams.tab ? $stateParams.tab : this.activeTab,
+          activeTab: this.getActiveTab(),
           hasLogo: true,
           listState: 'organizations.list',
           aboutFields: [
@@ -191,6 +190,16 @@
             }
           ]
         };
+      },
+
+      getActiveTab: function() {
+        var tabs = [$stateParams.tab, 'resources', 'projects'];
+        for (var i = 0; i < tabs.length; i++) {
+          var tab = tabs[i];
+          if (tab && (ENV.featuresVisible || ENV.toBeFeatures.indexOf(tab) == -1)) {
+            return tab;
+          }
+        }
       },
 
       isOwnerOrStaff: function(customer) {

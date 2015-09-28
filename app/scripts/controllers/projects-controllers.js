@@ -389,7 +389,6 @@
     currentStateService) {
     var controllerScope = this;
     var Controller = baseControllerDetailUpdateClass.extend({
-      activeTab: 'eventlog',
       customer: null,
       canEdit: false,
 
@@ -401,10 +400,9 @@
         }
         this.setSignalHandler('refreshCounts', this.setCounters.bind(controllerScope));
         this._super();
-        this.activeTab = (ENV.toBeFeatures.indexOf(this.activeTab) + 1) ? 'VMs' : this.activeTab;
         this.detailsViewOptions = {
           title: 'Project',
-          activeTab: $stateParams.tab ? $stateParams.tab : this.activeTab,
+          activeTab: this.getActiveTab(),
           listState: $stateParams.uuid ? 'projects.list' : null,
           aboutFields: [
             {
@@ -464,6 +462,15 @@
             }
           ]
         };
+      },
+      getActiveTab: function() {
+        var tabs = [$stateParams.tab, 'eventlog', 'VMs'];
+        for (var i = 0; i < tabs.length; i++) {
+          var tab = tabs[i];
+          if (tab && (ENV.featuresVisible || ENV.toBeFeatures.indexOf(tab) == -1)) {
+            return tab;
+          }
+        }
       },
       afterUpdate: function() {
         $rootScope.$broadcast('refreshProjectList', {model: this.model, update: true});

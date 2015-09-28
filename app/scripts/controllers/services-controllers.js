@@ -6,6 +6,7 @@
       'baseControllerListClass',
       'ENTITYLISTFIELDTYPES',
       'customerPermissionsService',
+      'currentStateService',
       'usersService',
       'joinService',
       'ENV',
@@ -17,17 +18,20 @@
     baseControllerListClass,
     ENTITYLISTFIELDTYPES,
     customerPermissionsService,
+    currentStateService,
     usersService,
     joinService,
     ENV,
     blockUI
     ) {
     var ControllerListClass = baseControllerListClass.extend({
+      customerHasProjects: true,
       init: function() {
         this.service = joinService;
         this._super();
         this.searchFieldName = 'name';
         this.checkPermissions();
+        this.checkProjects();
         this.actionButtonsListItems = [
           {
             title: 'Remove',
@@ -56,7 +60,17 @@
         if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('import') == -1) {
           this.actionButtonsListItems.push({
             title: 'Import resource',
-            state: 'import.import'
+            state: 'import.import',
+
+            isDisabled: function() {
+              return !this.customerHasProjects;
+            }.bind(this.controllerScope),
+
+            tooltip: function() {
+              if (!this.customerHasProjects) {
+                return 'Can not import resources until project is created';
+              }
+            }.bind(this.controllerScope),
           });
         }
         this.entityOptions = {
@@ -85,6 +99,12 @@
             }
           ]
         };
+      },
+      checkProjects: function() {
+        var vm = this;
+        currentStateService.getCustomer().then(function(customer) {
+          vm.customerHasProjects = (customer.projects.length > 0);
+        });
       },
       removeInstance: function(model) {
         return this.service.$deleteByUrl(model.url);
