@@ -94,7 +94,7 @@
         this.setCurrentCustomer(customer, true);
       },
       adjustCurrentProject: function(event, project) {
-        this.setCurrentProject(project);
+        this.setCurrentProject(project, true);
       },
       setCurrentCustomer: function(customer, skipRedirect) {
         var vm = this;
@@ -102,18 +102,20 @@
         vm.currentCustomer = customer;
         $rootScope.$broadcast('currentCustomerUpdated');
         vm.setFirstOrLastSelectedProject().then(function() {
-          if (skipRedirect) {
-            return;
+          if (!skipRedirect) {
+            $state.go('organizations.details', {uuid: vm.currentCustomer.uuid});
           }
-          $state.go('organizations.details', {uuid: vm.currentCustomer.uuid});
         });
       },
-      setCurrentProject: function(project) {
+      setCurrentProject: function(project, skipRedirect) {
         var vm = this;
         currentStateService.setProject(project);
         currentStateService.handleSelectedProjects(vm.currentCustomer.uuid, project);
         vm.currentProject = project;
         $rootScope.$broadcast('currentProjectUpdated');
+        if (!skipRedirect) {
+          $state.go('projects.details', {uuid: project.uuid});
+        }
       },
       menuToggle: function(active, event) {
         var vm = this;
