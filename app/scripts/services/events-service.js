@@ -244,6 +244,9 @@ angular.module('ncsaas').constant('EVENT_ROUTES', {
             showLinks: function(context) {
                 return true;
             },
+            routeEnabled: function(route) {
+                return true;
+            },
             getTemplate: function(event) {
                 return null;
             },
@@ -252,6 +255,9 @@ angular.module('ncsaas').constant('EVENT_ROUTES', {
             },
             formatUrl: function(entity, context) {
                 var route = EVENT_ROUTES[entity];
+                if (!this.routeEnabled(route)) {
+                    return;
+                }
                 var uuid = context[entity + "_uuid"];
                 var args = {uuid: uuid};
                 if (entity == 'cloud_account' || entity == 'cloud') {
@@ -322,9 +328,10 @@ angular.module('ncsaas').constant('EVENT_ROUTES', {
 })();
 
 (function() {
-    angular.module('ncsaas').service('eventFormatter', ['EVENT_TEMPLATES', 'BaseEventFormatter', eventFormatter]);
+    angular.module('ncsaas').service('eventFormatter', [
+        'EVENT_TEMPLATES', 'ENV', 'BaseEventFormatter', eventFormatter]);
 
-    function eventFormatter(EVENT_TEMPLATES, BaseEventFormatter) {
+    function eventFormatter(EVENT_TEMPLATES, ENV, BaseEventFormatter) {
         var cls = BaseEventFormatter.extend({
             getTemplate: function(event) {
                 return EVENT_TEMPLATES[event.event_type];
@@ -350,6 +357,22 @@ angular.module('ncsaas').constant('EVENT_ROUTES', {
             showLinks: function(context) {
                 // Don't show links for deletion events
                 return (this.deletionEvents.indexOf(context.event_type) == -1);
+            },
+            routeEnabled: function(route) {
+                if (!route) {
+                    return false;
+                }
+                if (ENV.featuresVisible) {
+                    return true;
+                }
+                var parts = route.split(".");
+                for (var i = 0; i < parts.length; i++) {
+                    var part = parts[i];
+                    if (ENV.toBeFeatures.indexOf(part) != -1) {
+                        return false;
+                    }
+                }
+                return true;
             }
         });
         return new cls();
