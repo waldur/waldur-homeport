@@ -112,11 +112,13 @@
       'customersService',
       'customerImageService',
       'usersService',
+      'paymentsService',
       'Flash',
       'ENV',
       '$stateParams',
       '$rootScope',
       '$q',
+      '$window',
       'resourcesCountService',
       'alertsService',
       CustomerDetailUpdateController
@@ -127,11 +129,13 @@
     customersService,
     customerImageService,
     usersService,
+    paymentsService,
     Flash,
     ENV,
     $stateParams,
     $rootScope,
     $q,
+    $window,
     resourcesCountService,
     alertsService
     ) {
@@ -190,6 +194,16 @@
             }
           ]
         };
+      },
+
+      addCredit: function(amount) {
+        var vm = this;
+        var payment = paymentsService.$create();
+        payment.customer = vm.model.url;
+        payment.amount = amount;
+        payment.$save(function(payment) {
+          $window.location = payment.approval_url;
+        });
       },
 
       getActiveTab: function() {

@@ -46,4 +46,9 @@
             content: '\f1c0';
         }
     }
+    &.close {
+        &:before {
+            content: '\f00d';
+        }
+    }
 } // icons

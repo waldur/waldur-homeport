@@ -41,15 +41,15 @@
             <div class="tooltip amount-tooltip" ng-show="amountTooltip">
                 <div class="tooltip-title">
                     <h3>Add amount</h3>
-                    <div class="close" ng-click="amountTooltip = false;"></div>
+                    <div class="icon close" ng-click="amountTooltip = false;"></div>
                     <div class="clear"></div>
                 </div>
-                <select name="amount" id="amount">
-                    <option value="1">1</option>
-                </select>
-                <a class="button">
-                    Add credit
-                </a>
+                <form>
+                    <input type="number" ng-model="amount" ng-init="amount=10">
+                    <a class="button" ng-click="addCredit(amount)">
+                        Add credit
+                    </a>
+                </form>
             </div>
         </div>
     </div>

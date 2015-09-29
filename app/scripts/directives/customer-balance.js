@@ -10,7 +10,8 @@
       templateUrl: "views/directives/customer-balance.html",
       replace: true,
       scope: {
-        type: '@customerBalanceType'
+        type: '@customerBalanceType',
+        addCredit: '=customerAddCredit'
       },
       link: function(scope) {
         scope.chartData = {

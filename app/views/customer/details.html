@@ -1,7 +1,8 @@
-<div ng-controller="CustomerDetailUpdateController as CustomerDetailUpdate">
-    <customer-balance customer-balance-type="details"></customer-balance>
+<div ng-controller="CustomerDetailUpdateController as ctrl">
+    <customer-balance customer-balance-type="details"
+                      customer-add-credit="ctrl.addCredit"></customer-balance>
 
-    <details-view details-options="CustomerDetailUpdate.detailsViewOptions"
-                  details-controller="CustomerDetailUpdate"></details-view>
+    <details-view details-options="ctrl.detailsViewOptions"
+                  details-controller="ctrl"></details-view>
 
 </div>
