@@ -196,16 +196,6 @@
         };
       },
 
-      addCredit: function(amount) {
-        var vm = this;
-        var payment = paymentsService.$create();
-        payment.customer = vm.model.url;
-        payment.amount = amount;
-        payment.$save(function(payment) {
-          $window.location = payment.approval_url;
-        });
-      },
-
       getActiveTab: function() {
         var tabs = [$stateParams.tab, 'resources', 'projects'];
         for (var i = 0; i < tabs.length; i++) {
@@ -232,6 +222,7 @@
         controllerScope.updateImageUrl();
 
         this.setCounters();
+        this.getBalanceHistory();
       },
 
       setCounters: function() {
@@ -292,6 +283,46 @@
       afterUpdate: function() {
         this.successFlash('Organization {} is updated'.replace('{}', controllerScope.model.name));
         $rootScope.$broadcast('refreshCustomerList', {model: this.model, update: true});
+      },
+
+      addCredit: function(amount) {
+        var vm = this;
+        var payment = paymentsService.$create();
+        payment.customer = vm.model.url;
+        payment.amount = amount;
+        payment.$save(function(payment) {
+          $window.location = payment.approval_url;
+        });
+      },
+
+      getBalanceHistory: function() {
+        var query = {UUID: this.model.uuid, operation: 'balance_history'};
+        this.service.getList(query).then(this.processChartData.bind(this));
+      },
+
+      processChartData: function(rows) {
+        var labels = rows.map(function(row) {
+          return moment(row.created).format('D MMMM');
+        });
+        var totals = rows.map(function(row) {
+          return row.amount;
+        });
+
+        this.chartData = {
+          labels: labels,
+          datasets: [
+            {
+              label: "Balance",
+              fillColor: "rgba(220,220,220,0.2)",
+              strokeColor: "rgba(220,220,220,1)",
+              pointColor: "rgba(220,220,220,1)",
+              pointStrokeColor: "#fff",
+              pointHighlightFill: "#fff",
+              pointHighlightStroke: "rgba(220,220,220,1)",
+              data: totals
+            }
+          ]
+        };
       }
     });
 

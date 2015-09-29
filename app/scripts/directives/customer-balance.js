@@ -11,24 +11,10 @@
       replace: true,
       scope: {
         type: '@customerBalanceType',
-        addCredit: '=customerAddCredit'
+        addCredit: '=customerAddCredit',
+        chartData: '=customerChartData',
       },
       link: function(scope) {
-        scope.chartData = {
-          labels: ["Monday", "Tuesday", "Wednsday", "Thursday", "Friday", "Saturday", "Sunday"],
-          datasets: [
-            {
-              label: "Events",
-              fillColor: "rgba(220,220,220,0.2)",
-              strokeColor: "rgba(220,220,220,1)",
-              pointColor: "rgba(220,220,220,1)",
-              pointStrokeColor: "#fff",
-              pointHighlightFill: "#fff",
-              pointHighlightStroke: "rgba(220,220,220,1)",
-              data: [65, 59, 80, 81, 56, 55, 40]
-            }
-          ]
-        };
         scope.chartOptions = {
           responsive: true,
           scaleShowGridLines : false

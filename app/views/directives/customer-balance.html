@@ -17,7 +17,7 @@
         <div class="tooltip quota-tooltip" ng-show="quotasTooltip">
             <div class="tooltip-title">
                 <h3>Current quotas: </h3>
-                <div class="close" ng-click="quotasTooltip = false;"></div>
+                <div class="icon close" ng-click="quotasTooltip = false;"></div>
                 <div class="clear"></div>
             </div>
             <div ng-repeat="quota in currentPlanQuotas" visible="{{ quota.name }}">
@@ -32,7 +32,7 @@
                 <a class="button" ng-click="amountTooltip = !amountTooltip; graphTooltip = false; quotasTooltip = false">Top-up</a>
                 <a class="button" ng-click="graphTooltip = !graphTooltip; amountTooltip = false; quotasTooltip = false">History</a>
             </div>
-            <div class="tooltip graph-tooltip" ng-show="graphTooltip">
+            <div class="tooltip graph-tooltip" ng-show="graphTooltip" ng-if="chartData">
                 <canvas chart-options="chartOptions"
                         chart-data="chartData"
                         tc-chartjs chart-type="line"
@@ -45,7 +45,7 @@
                     <div class="clear"></div>
                 </div>
                 <form>
-                    <input type="number" ng-model="amount" ng-init="amount=10">
+                    <input type="number" min="1" max="10000" ng-model="amount" ng-init="amount=10">
                     <a class="button" ng-click="addCredit(amount)">
                         Add credit
                     </a>
