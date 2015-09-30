@@ -300,7 +300,7 @@
         this.showChart = rows.length > 0;
 
         var labels = rows.map(function(row) {
-          return moment(row.created).format('D MMMM');
+          return moment(row.created).format('D.MM');
         });
         var totals = rows.map(function(row) {
           return row.amount;

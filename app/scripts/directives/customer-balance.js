@@ -18,10 +18,24 @@
       link: function(scope) {
         scope.chartOptions = {
           responsive: true,
-          scaleShowGridLines : false
+          scaleShowGridLines: false
         };
 
         scope.currency = ENV.currency;
+
+        scope.graphTooltip = false;
+
+        scope.toggleChart = function() {
+          scope.graphTooltip = !scope.graphTooltip;
+          scope.amountTooltip = false;
+          scope.quotasTooltip = false;
+        }
+
+        scope.toggleBalance = function() {
+          scope.amountTooltip = !scope.amountTooltip;
+          scope.graphTooltip = false;
+          scope.quotasTooltip = false;
+        }
 
         currentStateService.getCustomer().then(function(response) {
           scope.model = response;
