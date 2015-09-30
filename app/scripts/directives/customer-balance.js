@@ -2,9 +2,9 @@
 
 (function() {
   angular.module('ncsaas')
-    .directive('customerBalance', ['currentStateService', detailsView]);
+    .directive('customerBalance', ['currentStateService', 'ENV', detailsView]);
 
-  function detailsView(currentStateService) {
+  function detailsView(currentStateService, ENV) {
     return {
       restrict: 'E',
       templateUrl: "views/directives/customer-balance.html",
@@ -13,12 +13,15 @@
         type: '@customerBalanceType',
         addCredit: '=customerAddCredit',
         chartData: '=customerChartData',
+        showChart: '=customerShowChart',
       },
       link: function(scope) {
         scope.chartOptions = {
           responsive: true,
           scaleShowGridLines : false
         };
+
+        scope.currency = ENV.currency;
 
         currentStateService.getCustomer().then(function(response) {
           scope.model = response;

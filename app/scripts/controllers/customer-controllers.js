@@ -143,6 +143,7 @@
     var CustomerController = baseControllerDetailUpdateClass.extend({
       files: [],
       canEdit: false,
+      showChart: false,
 
       init: function() {
         this.service = customersService;
@@ -222,7 +223,7 @@
         controllerScope.updateImageUrl();
 
         this.setCounters();
-        this.getBalanceHistory();
+        this.service.getBalanceHistory(this.model.uuid).then(this.processChartData.bind(this));
       },
 
       setCounters: function() {
@@ -295,12 +296,9 @@
         });
       },
 
-      getBalanceHistory: function() {
-        var query = {UUID: this.model.uuid, operation: 'balance_history'};
-        this.service.getList(query).then(this.processChartData.bind(this));
-      },
-
       processChartData: function(rows) {
+        this.showChart = rows.length > 0;
+
         var labels = rows.map(function(row) {
           return moment(row.created).format('D MMMM');
         });

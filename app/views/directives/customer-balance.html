@@ -30,9 +30,9 @@
             <div class="buttons">
                 <a class="button" visible="plans" ui-sref="organizations.plans({uuid: model.uuid})">Plans</a>
                 <a class="button" ng-click="amountTooltip = !amountTooltip; graphTooltip = false; quotasTooltip = false">Top-up</a>
-                <a class="button" ng-click="graphTooltip = !graphTooltip; amountTooltip = false; quotasTooltip = false">History</a>
+                <a class="button" ng-click="graphTooltip = !graphTooltip; amountTooltip = false; quotasTooltip = false" ng-if="showChart">History</a>
             </div>
-            <div class="tooltip graph-tooltip" ng-show="graphTooltip" ng-if="chartData">
+            <div class="tooltip graph-tooltip" ng-show="graphTooltip" ng-if="showChart && chartData">
                 <canvas chart-options="chartOptions"
                         chart-data="chartData"
                         tc-chartjs chart-type="line"
@@ -46,6 +46,7 @@
                 </div>
                 <form>
                     <input type="number" min="1" max="10000" ng-model="amount" ng-init="amount=10">
+                    <span>{{ ::currency }}</span>
                     <a class="button" ng-click="addCredit(amount)">
                         Add credit
                     </a>
