@@ -410,12 +410,12 @@
       }
       &.graph-tooltip {
         width: 450px;
-        height: 105px;
+        height: 135px;
         color: #000;
         padding: 15px;
         canvas {
           width: 400px!important;
-          height: 75px!important;
+          height: 100px!important;
         }
         &:before {
           right: 31px;
