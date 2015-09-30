@@ -135,6 +135,7 @@
         }
         section {
             padding-bottom: 20px;
+            min-height: 100px;
             .appstore-template {
                 height: 110px;
                 text-align: center;
@@ -491,14 +492,16 @@
     }
 
     .appstore-aside {
-        position: absolute;
-        right: 0;
-        top: 0;
+        position: fixed;
+        right: 22px;
+        top: 100px;
         width: 300px;
         @include bp(xs) {
             position: relative;
             margin-bottom: 60px;
             width: 100%;
+            top: 0;
+            left: 0px;
         } // xs
         h2 {
             font-weight: bold;
