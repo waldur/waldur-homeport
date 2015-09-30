@@ -788,14 +788,14 @@
       getProject: function() {
         var vm = this;
         if ($stateParams.uuid) {
-          projectsService.$get($stateParams.uuid).then(function(response) {
+          return projectsService.$get($stateParams.uuid).then(function(response) {
             vm.project = response;
-            vm.getList();
+            return vm.getList();
           });
         } else {
-          currentStateService.getProject().then(function(response) {
+          return currentStateService.getProject().then(function(response) {
             vm.project = response;
-            vm.getList();
+            return vm.getList();
           });
         }
       }
@@ -943,7 +943,7 @@
         return currentStateService.getProject().then(function(project){
           filter['project_uuid'] = project.uuid;
           vm.service.defaultFilter.project_uuid = project.uuid;
-          fn(filter);
+          return fn(filter);
         })
       },
 
@@ -987,7 +987,7 @@ angular.module('ncsaas')
           return currentStateService.getProject().then(function(project){
             filter['project_uuid'] = project.uuid;
             vm.service.defaultFilter.project_uuid = project.uuid;
-            fn(filter);
+            return fn(filter);
           })
         },
 
@@ -1092,14 +1092,14 @@ angular.module('ncsaas')
         if ($stateParams.uuid) {
           return projectsService.$get($stateParams.uuid).then(function(project) {
             vm.service.defaultFilter.project_uuid = project.uuid;
-            fn(filter).then(function() {
+            return fn(filter).then(function() {
               projectMenu.stop();
             });
           });
         } else {
           return currentStateService.getProject().then(function(project) {
             vm.service.defaultFilter.project_uuid = project.uuid;
-            fn(filter).then(function() {
+            return fn(filter).then(function() {
               projectMenu.stop();
             });
           });

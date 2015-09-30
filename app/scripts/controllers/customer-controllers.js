@@ -554,7 +554,7 @@
           vm.service.defaultFilter.aggregate = 'customer';
           vm.service.defaultFilter.uuid = customer.uuid;
           vm.service.defaultFilter.opened = true;
-          fn(filter);
+          return fn(filter);
         })
       }
     });

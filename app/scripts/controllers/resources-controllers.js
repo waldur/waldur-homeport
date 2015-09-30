@@ -258,12 +258,12 @@
           var vm = this;
           if ($stateParams.uuid) {
             this.service.defaultFilter.project_uuid = $stateParams.uuid;
-            this._super(filter);
+            return this._super(filter);
           } else {
             var fn = this._super.bind(controllerScope);
-            currentStateService.getProject().then(function(response) {
+            return currentStateService.getProject().then(function(response) {
               vm.service.defaultFilter.project_uuid = response.uuid;
-              fn(filter);
+              return fn(filter);
             });
           }
         }
@@ -299,7 +299,7 @@
         return resourcesService.$get($stateParams.resource_type, $stateParams.uuid).then(function(resource) {
           vm.service.defaultFilter.scope = resource.url;
           vm.service.defaultFilter.opened = true;
-          fn(filter);
+          return fn(filter);
         })
       }
     });
