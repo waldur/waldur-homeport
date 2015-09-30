@@ -18,6 +18,7 @@
       link: function(scope) {
         scope.chartOptions = {
           responsive: true,
+          bezierCurve: false,
           scaleShowGridLines: false
         };
 

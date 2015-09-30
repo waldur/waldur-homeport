@@ -7,11 +7,11 @@
             <span class="plan-spacing" visible="plans" ng-click="quotasTooltip = !quotasTooltip;">
                 {{ currentPlan || 'Default'  }}
             </span>
-            <span class="bold">
+            <span class="bold" ng-if="model.balance">
                 Balance:
             </span>
-            <span>
-                $100
+            <span ng-if="model.balance">
+                {{ model.balance|currency:currency }}
             </span>
         </div>
         <div class="tooltip quota-tooltip" ng-show="quotasTooltip">
