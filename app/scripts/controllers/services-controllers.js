@@ -125,7 +125,7 @@
       getList: function(filters) {
         var providerTab = blockUI.instances.get('tab-content');
         providerTab.start();
-        return this._super(filters).then(function() {
+        return this._super(filters).then(function(response) {
           providerTab.stop();
         });
       }
@@ -385,7 +385,7 @@
         if (this.serviceEntity) {
           this.service.defaultFilter = {'service': this.serviceEntity.uuid};
           this.service.endpoint = '/' + ENV.projectServiceLinkEndpoints[$stateParams.provider] + '/';
-          this._super(filter);
+          return this._super(filter);
         }
       },
       afterGetList: function() {

@@ -788,14 +788,14 @@
       getProject: function() {
         var vm = this;
         if ($stateParams.uuid) {
-          projectsService.$get($stateParams.uuid).then(function(response) {
+          return projectsService.$get($stateParams.uuid).then(function(response) {
             vm.project = response;
-            vm.getList();
+            return vm.getList();
           });
         } else {
-          currentStateService.getProject().then(function(response) {
+          return currentStateService.getProject().then(function(response) {
             vm.project = response;
-            vm.getList();
+            return vm.getList();
           });
         }
       }

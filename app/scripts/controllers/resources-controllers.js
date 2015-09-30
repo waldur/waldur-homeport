@@ -258,10 +258,10 @@
           var vm = this;
           if ($stateParams.uuid) {
             this.service.defaultFilter.project_uuid = $stateParams.uuid;
-            this._super(filter);
+            return this._super(filter);
           } else {
             var fn = this._super.bind(controllerScope);
-            currentStateService.getProject().then(function(response) {
+            return currentStateService.getProject().then(function(response) {
               vm.service.defaultFilter.project_uuid = response.uuid;
               return fn(filter);
             });
