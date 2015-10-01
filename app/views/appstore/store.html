@@ -165,11 +165,17 @@
                                                         <p>{{ ::choice.display_name }}</p>
                                                         <p>CPU: <ng-pluralize count="::choice.item.cores"
                                                         when="{'1': '1 core', 'other': '{} cores'}"></ng-pluralize></p>
-                                                        <p>RAM: {{ ::choice.item.ram }} MB</p>
-                                                        <p>HDD: {{ ::choice.item.disk | mb2gb}} GB</p>
+                                                        <p>RAM: {{ ::choice.item.ram | mb2gb }}</p>
+                                                        <p>HDD: {{ ::choice.item.disk | mb2gb}}</p>
+                                                    </b>
+                                                    <b ng-switch-when="size">
+                                                        <p>CPU: <ng-pluralize count="::choice.item.cores"
+                                                        when="{'1': '1 core', 'other': '{} cores'}"></ng-pluralize></p>
+                                                        <p>RAM: {{ ::choice.item.ram | mb2gb }}</p>
+                                                        <p>HDD: {{ ::choice.item.disk | mb2gb}}</p>
                                                     </b>
                                                     <b ng-switch-when="image">
-                                                        <p>{{ ::choice.display_name }}</p>
+                                                        <p>{{ ::choice.item.distribution }} {{ ::choice.display_name }}</p>
                                                     </b>
                                                     <b ng-switch-default>{{ choice.display_name }}</b>
                                                 </h3>
