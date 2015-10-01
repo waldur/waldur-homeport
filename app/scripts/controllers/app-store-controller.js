@@ -267,6 +267,9 @@
         if (name == 'ssh_public_key') {
           return;
         }
+        if (name == 'region') {
+          return;
+        }
         if (name == 'image') {
           this.updateFlavors();
         }
@@ -545,7 +548,10 @@
 (function() {
   angular.module('ncsaas').filter('mb2gb', function() {
     return function(input) {
-      return Math.round(input / 1024.0);
+      if (input < 1024) {
+        return input + ' MB';
+      }
+      return Math.round(input / 1024.0) + ' GB';
     }
   })
 })();
