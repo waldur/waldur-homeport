@@ -68,7 +68,7 @@
         var fn = this._super.bind(vm);
         return currentStateService.getCustomer().then(function(customer) {
           vm.service.defaultFilter.scope = customer.url;
-          fn(filter);
+          return fn(filter);
         });
       }
     });

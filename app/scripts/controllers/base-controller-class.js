@@ -86,6 +86,7 @@
         this.updateIntercom();
       },
       getList: function(filter) {
+        // It should return promise
         var vm = this;
         filter = filter || {};
         vm.service.cacheTime = vm.cacheTime;
