@@ -58,7 +58,8 @@
                             <a ui-sref="projects.list" class="manage">Manage projects</a>
                         </li>
                         <li class="manage-item">
-                            <a ui-sref="projects.create" class="manege">Add project</a>
+                            <a check-quotas="{{Header.checkQuotas.projects}}" show-message="Header.checkQuotas.showMessage"
+                               ui-sref="projects.create" class="manege">Add project</a>
                         </li>
                     </ul>
                 </li>
@@ -71,6 +72,7 @@
                 </li>
                 <li visible="resources" class="appstore">
                     <a ui-sref="appstore.store"
+                       check-quotas="{{Header.checkQuotas.resources}}" show-message="Header.checkQuotas.showMessage"
                        ng-class="{'active': Header.menuItemActive === 'appstore', 'disabled' : !Header.currentProject.name }"
                        class="appstore">
                         <span translate>Appstore</span>
@@ -162,7 +164,7 @@
             <!-- context nav -->
             <ul class="nav-list-side">
                 <li visible="support">
-                    <a ui-sref="users.list"
+                    <a ui-sref="support.list"
                         ng-class="{'active': Header.menuItemActive === 'support'}" class="support">Support</a>
                 </li>
                 <li class="dropdown">

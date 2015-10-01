@@ -590,6 +590,8 @@
       usersListForAutoComplete: [],
       user: null,
       project: null,
+      checkQuotas: 'user',
+      showQuotasMessage: true,
 
       init: function() {
         this.setSignalHandler('currentProjectUpdated', this.activate.bind(controllerScope));
@@ -1046,7 +1048,9 @@ angular.module('ncsaas')
           entityData: {
             noDataText: 'No providers yet',
             createLink: 'services.create',
-            createLinkText: 'Create provider'
+            createLinkText: 'Create provider',
+            checkQuotas: 'service',
+            showMessage: true
           },
           list: [
             {

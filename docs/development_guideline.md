@@ -345,3 +345,33 @@ Config file settings:
         title      - string - title of tab
         key        - string - key of tab
         viewName   - string - key for tab view
+
+## checkQuotas directive
+
+Used on links to check whether it should be disabled based on current quotas or not. <br/>
+Also optional tooltip can be shown to notify user about lack of quotas. <br/>
+Two options in controller should be defined e.g:
+
+     this.entityOptions = {
+       entityData: {
+         ...
+         checkQuotas: 'service',
+         showMessage: true
+       },
+     ...
+     }
+
+checkQuotas possible values: user, project, service, resource <br/>
+showMessage values: boolean <br/>
+If showMessage is set to true ng-click attribute should handle its switch <br/>
+tooltipType is optional parameter and yet is used only in ProjectUsersTab
+
+    <a check-quotas="{{entityOptions.entityData.checkQuotas}}"
+       ng-click="entityOptions.entityData.showMessage = !entityOptions.entityData.showMessage;"
+       show-message="entityOptions.entityData.showMessage" tooltip-type="listItems"
+       <span>{{ entityOptions.entityData.createLinkText }}</span>
+    </a>
+
+
+
+

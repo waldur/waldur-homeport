@@ -25,6 +25,11 @@
         profileMenu: false,
         LangMenu: false
       },
+      checkQuotas: {
+        showMessage: false,
+        projects: 'project',
+        resources: 'resource'
+      },
 
       init: function() {
         this.activate();

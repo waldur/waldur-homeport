@@ -134,6 +134,8 @@
     var EventController = baseControllerClass.extend({
       init: function() {
         $scope.activeTab = $stateParams.tab || 'activity';
+        this.checkQuotas = 'project';
+        this.showMessage = true;
       }
     });
 
@@ -163,6 +165,12 @@
         $scope.$on('currentCustomerUpdated', this.onCustomerUpdate.bind(this));
         this.onCustomerUpdate();
         blockUI.start();
+
+        this.checkQuotasResource = 'resource';
+        this.showQuotasMessageResource = true;
+        this.checkQuotasProvider = 'service';
+        this.showQuotasMessageProvider = true;
+
       },
 
       onCustomerUpdate: function() {
@@ -303,6 +311,9 @@
           scaleShowGridLines: false,
           bezierCurve: false
         };
+
+        this.checkQuotas = 'project';
+        this.showMessage = true;
 
         $scope.$on('currentCustomerUpdated', this.onCustomerUpdate.bind(this));
         this.onCustomerUpdate();

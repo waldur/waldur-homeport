@@ -12,8 +12,13 @@
                 <a ui-sref="dashboard.index({tab:'costs'})" ng-click="activeTab = 'costs'">Costs</a>
             </li>
         </ul>
-        <div ui-sref="projects.create" class="button-apply" ng-show="activeTab == 'activity'">
-            Add new project
+        <div class="event-action-buttons" ng-show="activeTab == 'activity'">
+            <a ui-sref="projects.create" class="button-apply"
+               check-quotas="{{DashboardController.checkQuotas}}"
+               ng-click="DashboardController.showMessage = !DashboardController.showMessage;"
+               show-message="DashboardController.showMessage">
+                Add new project
+            </a>
         </div>
 
         <div class="clear"></div>
