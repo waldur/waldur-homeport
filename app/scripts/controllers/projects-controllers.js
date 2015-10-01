@@ -816,53 +816,32 @@
   angular.module('ncsaas')
     .controller('ProjectAlertTabController', [
       'BaseAlertsListController',
-      'projectsService',
       'currentStateService',
-      '$stateParams',
+      'blockUI',
       ProjectAlertTabController
     ]);
 
   function ProjectAlertTabController(
     BaseAlertsListController,
-    projectsService,
     currentStateService,
-    $stateParams
+    blockUI
   ) {
     var controllerScope = this;
     var AlertController = BaseAlertsListController.extend({
-      project: null,
-
       init: function() {
         this.controllerScope = controllerScope;
-        if (!$stateParams.uuid) {
-          this.setSignalHandler('currentProjectUpdated', this.getProject.bind(controllerScope));
-        }
         this._super();
-        this.getProject();
       },
       getList: function(filter) {
-        if (this.project) {
-          this.service.defaultFilter.aggregate = 'project';
-          this.service.defaultFilter.uuid = this.project.uuid;
-          this.service.defaultFilter.opened = true;
-          return this._super(filter);
-        } else {
-          return this.getProject();
-        }
-      },
-      getProject: function() {
-        var vm = this;
-        if ($stateParams.uuid) {
-          projectsService.$get($stateParams.uuid).then(function(response) {
-            vm.project = response;
-            vm.getList();
-          });
-        } else {
-          currentStateService.getProject().then(function(response) {
-            vm.project = response;
-            vm.getList();
-          });
-        }
+        this.service.defaultFilter.aggregate = 'project';
+        this.service.defaultFilter.uuid = currentStateService.getProjectUuid();
+        this.service.defaultFilter.opened = true;
+
+        var block = blockUI.instances.get('tab-content');
+        block.start();
+        return this._super(filter).then(function() {
+          block.stop();
+        });
       }
     });
 
