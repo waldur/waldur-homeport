@@ -69,7 +69,7 @@
                         <li visible="{{ tab.key }}" ng-class="{'active': options.activeTab === tab.key}"
                             ng-click="options.activeTab = tab.key"
                             ng-repeat="tab in options.tabs">
-                            {{ tab.title }} (<span ng-bind="tab.count"></span>)
+                            {{ tab.title }} <span ng-if="tab.key != 'delete'">(<span ng-bind="tab.count"></span>)</span>
                         </li>
                     </ul>
                 </aside>

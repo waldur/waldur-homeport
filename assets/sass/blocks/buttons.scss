@@ -26,6 +26,11 @@
         color: $hover-color;
     } // &:hover
 } // button
+
+.button-red {
+    background-color: red;
+}
+
 .button-support {
     @extend .button;
     padding: 4px;
@@ -38,6 +43,9 @@
       border: 1px solid #50b848;
       background-color: white;
       color: #50b848;
+      @include bp(xs) {
+          margin-right: 5px;
+      }
     }
 }
 .button-cancel {
@@ -164,6 +172,10 @@
 .button-delete {
     color: #c0392b;
 } // button-delete
+
+.button-margin-bottom {
+    margin-bottom: 10px;
+}
 
 .list-sort {
     text-decoration: none;

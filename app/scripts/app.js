@@ -330,6 +330,9 @@
             'tabPremiumSupport@projects.details': {
               templateUrl: 'views/project/tab-support.html',
             },
+            'tabDelete@projects.details': {
+              templateUrl: 'views/project/tab-delete.html',
+            },
             'appHeader': {
               templateUrl: 'views/partials/app-header.html',
             },
@@ -651,6 +654,9 @@
             },
             'tabPremiumSupport@resources.list': {
               templateUrl: 'views/project/tab-support.html',
+            },
+            'tabDelete@resources.list': {
+              templateUrl: 'views/project/tab-delete.html',
             },
             'appHeader': {
               templateUrl: 'views/partials/app-header.html',
