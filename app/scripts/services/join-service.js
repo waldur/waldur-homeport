@@ -27,6 +27,12 @@
         });
       },
 
+      getServiceProjectLinkUrlByType: function(service_type) {
+        return servicesService.getServicesList().then(function(services) {
+          return services[service_type].service_project_link_url;
+        });
+      },
+
       getUrlByType: function(service_type) {
         return servicesService.getServicesList().then(function(services) {
           return services[service_type].url;

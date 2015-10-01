@@ -142,13 +142,10 @@
       'joinServiceProjectLinkService',
       'joinService',
       'currentStateService',
-      'projectsService',
       'baseControllerAddClass',
       'ENV',
-      '$q',
       '$rootScope',
       '$state',
-      '$window',
       ServiceAddController]);
 
   function ServiceAddController(
@@ -156,21 +153,15 @@
     joinServiceProjectLinkService,
     joinService,
     currentStateService,
-    projectsService,
     baseControllerAddClass,
     ENV,
-    $q,
     $rootScope,
-    $state,
-    $window) {
+    $state) {
     var controllerScope = this;
     var ServiceController = baseControllerAddClass.extend({
       init: function() {
         this.service = joinService;
         this.controllerScope = controllerScope;
-        this.listState = 'organizations.details({uuid: "'
-          + $window.localStorage[ENV.currentCustomerUuidStorageKey]
-          +'", tab: "providers"})';
         this.successMessage = 'Provider has been created';
         this.setSignalHandler('currentCustomerUpdated', this.activate.bind(this));
         this.categories = ENV.serviceCategories;
@@ -216,19 +207,20 @@
       },
 
       afterSave: function() {
-        var vm = this;
-        return projectsService.getList().then(function(projects) {
-          var promises = projects.map(function(project) {
-            return joinServiceProjectLinkService.add(
-              vm.model.serviceProjectLinkUrl, vm.instance.url, project.url);
-          });
-          return $q.all(promises).then(function() {
-            $rootScope.$broadcast('refreshProjectList');
-          });
+        joinServiceProjectLinkService.addService(this.instance).then(function() {
+          $rootScope.$broadcast('refreshProjectList');
         });
       },
 
       successRedirect: function() {
+        this.gotoOrganizationProviders();
+      },
+
+      cancel: function() {
+        this.gotoOrganizationProviders();
+      },
+
+      gotoOrganizationProviders: function() {
         currentStateService.getCustomer().then(function(customer) {
           $state.go('organizations.details', {uuid: customer.uuid, tab: 'providers'});
         });
@@ -322,7 +314,6 @@
       '$stateParams',
       'joinService',
       'baseControllerListClass',
-      'joinServiceProjectLinkService',
       'ENTITYLISTFIELDTYPES',
       'ENV',
       'servicesService',
@@ -334,7 +325,6 @@
     $stateParams,
     joinService,
     baseControllerListClass,
-    joinServiceProjectLinkService,
     ENTITYLISTFIELDTYPES,
     ENV,
     servicesService,

@@ -296,13 +296,24 @@
   }
 
   angular.module('ncsaas')
-    .controller('ProjectAddController', ['projectsService', 'currentStateService',
-      'cloudsService', 'projectCloudMembershipsService', 'baseControllerAddClass',
-      '$rootScope', 'projectPermissionsService', 'usersService', ProjectAddController]);
+    .controller('ProjectAddController', [
+      'projectsService',
+      'currentStateService',
+      'joinServiceProjectLinkService',
+      'baseControllerAddClass',
+      '$rootScope',
+      'projectPermissionsService',
+      'usersService',
+      ProjectAddController]);
 
   function ProjectAddController(
-    projectsService, currentStateService, cloudsService, projectCloudMembershipsService, baseControllerAddClass,
-    $rootScope, projectPermissionsService, usersService) {
+    projectsService,
+    currentStateService,
+    joinServiceProjectLinkService,
+    baseControllerAddClass,
+    $rootScope,
+    projectPermissionsService,
+    usersService) {
     var controllerScope = this;
     var ProjectController = baseControllerAddClass.extend({
       userRole: 'admin',
@@ -328,13 +339,10 @@
       },
       afterSave: function() {
         var vm = this;
-        cloudsService.getList().then(function(response) {
-          for (var i = 0; response.length > i; i++) {
-            projectCloudMembershipsService.addRow(vm.project.url, response[i].url);
-          }
-        });
         vm.addUser();
-        $rootScope.$broadcast('refreshProjectList', {model: vm.instance, new: true, current: true});
+        joinServiceProjectLinkService.addProject(vm.project).then(function() {
+          $rootScope.$broadcast('refreshProjectList', {model: vm.project, new: true, current: true});
+        });
       },
       onError: function(errorObject) {
         this.errorFlash(errorObject.data.detail);
@@ -1086,24 +1094,12 @@ angular.module('ncsaas')
 
       getList: function(filter) {
         var vm = this;
-        var fn = this._super.bind(controllerScope);
         var projectMenu = blockUI.instances.get('tab-content');
         projectMenu.start();
-        if ($stateParams.uuid) {
-          return projectsService.$get($stateParams.uuid).then(function(project) {
-            vm.service.defaultFilter.project_uuid = project.uuid;
-            return fn(filter).then(function() {
-              projectMenu.stop();
-            });
-          });
-        } else {
-          return currentStateService.getProject().then(function(project) {
-            vm.service.defaultFilter.project_uuid = project.uuid;
-            return fn(filter).then(function() {
-              projectMenu.stop();
-            });
-          });
-        }
+        return currentStateService.getProject().then(function(project) {
+          vm.list = project.services;
+          projectMenu.stop();
+        });
       },
       removeInstance: function(model) {
         return joinServiceProjectLinkService.$deleteByUrl(model.url);
