@@ -2,8 +2,8 @@
      <div class="white-box empty-data-block" ng-show="DashboardController.table.length == 0">
          <h1>Not enough data for cost analysis</h1>
          <h2 visible="import" visible="providers">Please import resources or add more providers</h2>
-         <a visible="import" ui-sref="import.import" class="button">Import resources</a>
-         <a visible="providers" ui-sref="services.create" class="button">Add providers</a>
+         <a visible="import" ui-sref="import.import" class="button button-margin-bottom">Import resources</a>
+         <a visible="providers" ui-sref="services.create" class="button button-margin-bottom">Add providers</a>
 
      </div>
      <div class="white-box big-chart" ng-if="DashboardController.table.length > 0">

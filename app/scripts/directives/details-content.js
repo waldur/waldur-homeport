@@ -12,13 +12,14 @@
             'checkbox': 40,
             'avatar': 40,
             'expand': 40
-          }
+          };
+          var screenWidth = window.screen.width;
           var paddingToSet = 20;
           var a = attrs.detailscontent.split(" ");
 
           for (var i=0; i<a.length; i++) {
             for (var prop in paddings) {
-              if (paddings.hasOwnProperty(prop)) {
+              if (paddings.hasOwnProperty(prop) && screenWidth > 600) {
                 if (a[i] == prop) {
                   paddingToSet = paddingToSet + paddings[prop];
                 }
