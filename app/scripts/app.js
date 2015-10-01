@@ -634,6 +634,9 @@
             'tabEventlog@resources.list' : {
               templateUrl: 'views/project/tab-eventlog.html',
             },
+            'tabAlerts@resources.list': {
+              templateUrl: 'views/project/tab-alerts.html',
+            },
             'tabResources@resources.list' : {
               templateUrl: 'views/project/tab-resources.html',
             },
