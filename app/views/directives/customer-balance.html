@@ -11,13 +11,13 @@
                 Balance:
             </span>
             <span>
-                $100
+                {{ model.balance || 0 | currency:currency }}
             </span>
         </div>
         <div class="tooltip quota-tooltip" ng-show="quotasTooltip">
             <div class="tooltip-title">
                 <h3>Current quotas: </h3>
-                <div class="close" ng-click="quotasTooltip = false;"></div>
+                <div class="icon close" ng-click="quotasTooltip = false;"></div>
                 <div class="clear"></div>
             </div>
             <div ng-repeat="quota in currentPlanQuotas" visible="{{ quota.name }}">
@@ -29,27 +29,28 @@
         <div ng-if="type == 'details'">
             <div class="buttons">
                 <a class="button" visible="plans" ui-sref="organizations.plans({uuid: model.uuid})">Plans</a>
-                <a class="button" ng-click="amountTooltip = !amountTooltip; graphTooltip = false; quotasTooltip = false">Top-up</a>
-                <a class="button" ng-click="graphTooltip = !graphTooltip; amountTooltip = false; quotasTooltip = false">History</a>
+                <a class="button" ng-click="toggleBalance()">Top-up</a>
+                <a class="button" ng-click="toggleChart()" ng-if="showChart">History</a>
             </div>
-            <div class="tooltip graph-tooltip" ng-show="graphTooltip">
+            <div class="tooltip graph-tooltip" ng-if="showChart && graphTooltip">
                 <canvas chart-options="chartOptions"
                         chart-data="chartData"
                         tc-chartjs chart-type="line"
-                        width="400" height="75"></canvas>
+                        width="400" height="100"></canvas>
             </div>
             <div class="tooltip amount-tooltip" ng-show="amountTooltip">
                 <div class="tooltip-title">
                     <h3>Add amount</h3>
-                    <div class="close" ng-click="amountTooltip = false;"></div>
+                    <div class="icon close" ng-click="amountTooltip = false;"></div>
                     <div class="clear"></div>
                 </div>
-                <select name="amount" id="amount">
-                    <option value="1">1</option>
-                </select>
-                <a class="button">
-                    Add credit
-                </a>
+                <form>
+                    <input type="number" min="1" max="10000" ng-model="amount" ng-init="amount=10">
+                    <span>{{ ::currency }}</span>
+                    <a class="button" ng-click="addCredit(amount)">
+                        Add credit
+                    </a>
+                </form>
             </div>
         </div>
     </div>

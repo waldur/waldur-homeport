@@ -43,6 +43,10 @@
         });
 
         return deferred.promise;
+      },
+      getBalanceHistory: function(uuid) {
+        var query = {UUID: uuid, operation: 'balance_history'};
+        return this.getList(query);
       }
     });
     return new ServiceClass();
