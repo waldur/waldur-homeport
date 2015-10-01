@@ -1,7 +1,5 @@
 .toggle-link {
-    + .toggle-link {
-        margin-left: 10px;
-    } // + toggle-link
+    margin-right: 10px;
     @include inline-middle;
     cursor: pointer;
     padding: 0px 6px;

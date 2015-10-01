@@ -1066,7 +1066,8 @@ angular.module('ncsaas')
               type: ENTITYLISTFIELDTYPES.name,
               link: 'organizations.details({uuid: "' + currentCustomerUuid
               + '", providerType: entity.type, providerUuid: entity.uuid, tab: "providers"})',
-              className: 'name'
+              className: 'name',
+              showForMobile: true
             },
             {
               name: 'Type',

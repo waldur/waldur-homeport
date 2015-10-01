@@ -1,6 +1,12 @@
 .avatar {
     display: block;
     float: left;
+    @include bp(xs) {
+        float: none;
+    }
+    @include bp(sm) {
+        float: none;
+    }
     @include property(width, 40);
     &.big {
         width: 100%;
@@ -19,3 +25,14 @@
         @include boxshadow(0 0 0 1.5, rgba(255, 255, 255, 1));
     } // avatar-img
 } // avatar
+
+.dropdown {
+    .avatar {
+        @include bp(xs) {
+            float: left;
+        }
+        @include bp(sm) {
+            float: left;
+        }
+    }
+}

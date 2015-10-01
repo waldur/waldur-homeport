@@ -244,6 +244,12 @@
   }
   .table {
     margin: 27px 0;
+    @include bp(xs) {
+      margin: 0
+    }
+    @include bp(sm) {
+      margin: 0;
+    }
     .td {
       text-align: left;
       &.fingerprint {
@@ -475,14 +481,26 @@
       float: none;
       right: 0;
       top: 0;
-      text-align: right;
+      text-align: left;
       .balance {
         text-align: left;
       }
     }
   }
+  .right-block.customer-balance {
+    position: relative;
+    margin-bottom: 20px;
+    @include bp(xs) {
+      min-width: 300px;
+      float: left;
+    }
+  }
+  .buttons {
+    @include bp(xs) {
+      text-align: left;
+    }
+  }
 }
-
 
 .password {
   list-style: none;
