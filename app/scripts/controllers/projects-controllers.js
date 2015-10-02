@@ -1016,10 +1016,7 @@ angular.module('ncsaas')
       'joinServiceProjectLinkService',
       'currentStateService',
       'ENTITYLISTFIELDTYPES',
-      'ENV',
       '$scope',
-      '$stateParams',
-      'projectsService',
       'blockUI',
       '$rootScope',
       ProjectServicesTabController]);
@@ -1029,10 +1026,7 @@ angular.module('ncsaas')
     joinServiceProjectLinkService,
     currentStateService,
     ENTITYLISTFIELDTYPES,
-    ENV,
     $scope,
-    $stateParams,
-    projectsService,
     blockUI,
     $rootScope) {
     var controllerScope = this;
@@ -1083,7 +1077,6 @@ angular.module('ncsaas')
             }
           ]
         };
-
 
         $scope.$on('searchInputChanged', this.onSearchInputChanged.bind(this));
       },
