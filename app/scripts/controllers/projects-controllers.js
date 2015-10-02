@@ -1046,13 +1046,13 @@ angular.module('ncsaas')
               propertyName: 'name',
               type: ENTITYLISTFIELDTYPES.name,
               link: 'organizations.details({uuid: "' + currentStateService.getCustomerUuid()
-              + '", providerType: entity.type, providerUuid: entity.uuid, tab: "providers"})',
+              + '", providerType: entity.service_type, providerUuid: entity.uuid, tab: "providers"})',
               className: 'name',
               showForMobile: true
             },
             {
               name: 'Type',
-              propertyName: 'type',
+              propertyName: 'service_type',
               type: ENTITYLISTFIELDTYPES.noType
             },
             {
