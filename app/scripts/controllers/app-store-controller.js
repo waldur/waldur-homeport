@@ -42,9 +42,9 @@
       },
 
       currency: ENV.currency,
-      purchaseIsOff: ENV.purchaseIsOff,
-      openStackProvider: ENV.openStackProvider,
-      gitLabProvider: ENV.gitLabProvider,
+      enablePurchaseCostDisplay: ENV.enablePurchaseCostDisplay,
+      VmProviderSettingsUuid: ENV.VmProviderSettingsUuid,
+      gitLabProviderSettingsUuid: ENV.gitLabProviderSettingsUuid,
 
       secondStep: false,
       resourceTypesBlock: false,
@@ -68,6 +68,7 @@
       configureStepNumber: 4,
       selectedPackageName: null,
       agreementShow: false,
+      chooseResourceTypeStepNumber: 3,
 
       // cart
       total: 0,
@@ -110,19 +111,20 @@
         this.resetPriceItems();
 
         var services = this.categoryServices[this.selectedCategory.name];
-        if (ENV.openStackProvider && this.selectedCategory.name == ENV.appStoreCategories[0].name) {
+        if (ENV.VmProviderSettingsUuid && this.selectedCategory.name == ENV.appStoreCategories[0].name) {
           for (var i = 0; i < services.length; i++) {
-            if (services[i].settings_uuid == ENV.openStackProvider) {
+            if (services[i].settings_uuid == ENV.VmProviderSettingsUuid) {
               this.setService(services[i]);
               this.configureStepNumber = 2;
               this.secondStep = false;
               break;
             }
           }
-        } else if (ENV.gitLabProvider && this.selectedCategory.name == ENV.appStoreCategories[1].name) {
+        } else if (ENV.gitLabProviderSettingsUuid && this.selectedCategory.name == ENV.appStoreCategories[1].name) {
           for (var i = 0; i < services.length; i++) {
-            if (services[i].settings_uuid == ENV.gitLabProvider) {
+            if (services[i].settings_uuid == ENV.gitLabProviderSettingsUuid) {
               this.setService(services[i]);
+              this.chooseResourceTypeStepNumber = 2;
               this.configureStepNumber = 3;
               this.secondStep = false;
               break;

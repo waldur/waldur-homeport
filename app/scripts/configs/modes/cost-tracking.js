@@ -18,5 +18,6 @@ angular.module('ncsaas')
     ],
     featuresVisible: false,
     homeTemplate: 'views/home/costtracking/home.html',
-    initialDataTemplate: 'views/initial-data/initial-data.html'
+    initialDataTemplate: 'views/initial-data/initial-data.html',
+    enablePurchaseCostDisplay: true
   });

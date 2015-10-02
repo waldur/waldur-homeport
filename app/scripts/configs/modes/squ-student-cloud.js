@@ -39,7 +39,7 @@ angular.module('ncsaas')
     homeTemplate: 'views/home/squ-student-cloud/home.html',
     homeHeaderTemplate: 'views/partials/squ-student-cloud/site-header.html',
     homeLoginTemplate: 'views/home/squ-student-cloud/login.html',
-    purchaseIsOff: true,
-    openStackProvider: "1cbefddebe97488788d92e7c511f1808",
-    gitLabProvider: "6b32f48bc48c4ce98b4025381ba94548"
+    enablePurchaseCostDisplay: false,
+    VmProviderSettingsUuid: "1cbefddebe97488788d92e7c511f1808",
+    gitLabProviderSettingsUuid: "6b32f48bc48c4ce98b4025381ba94548"
   });

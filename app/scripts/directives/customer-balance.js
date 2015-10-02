@@ -22,7 +22,7 @@
           scaleShowGridLines: false
         };
 
-        scope.purchaseIsOff = ENV.purchaseIsOff;
+        scope.enablePurchaseCostDisplay = ENV.enablePurchaseCostDisplay;
 
         scope.currency = ENV.currency;
 

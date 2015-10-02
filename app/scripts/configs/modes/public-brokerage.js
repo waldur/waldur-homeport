@@ -13,5 +13,6 @@ angular.module('ncsaas')
       'monitoring',
       'projectGroups'
     ],
-    featuresVisible: false
+    featuresVisible: false,
+    enablePurchaseCostDisplay: true
   });
