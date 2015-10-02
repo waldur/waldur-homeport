@@ -113,7 +113,7 @@
         currentStateService.handleSelectedProjects(vm.currentCustomer.uuid, project);
         vm.currentProject = project;
         $rootScope.$broadcast('currentProjectUpdated');
-        if (!skipRedirect) {
+        if (!skipRedirect && project) {
           $state.go('projects.details', {uuid: project.uuid});
         }
       },

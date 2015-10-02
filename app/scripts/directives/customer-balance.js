@@ -2,36 +2,41 @@
 
 (function() {
   angular.module('ncsaas')
-    .directive('customerBalance', ['currentStateService', detailsView]);
+    .directive('customerBalance', ['currentStateService', 'ENV', detailsView]);
 
-  function detailsView(currentStateService) {
+  function detailsView(currentStateService, ENV) {
     return {
       restrict: 'E',
       templateUrl: "views/directives/customer-balance.html",
       replace: true,
       scope: {
-        type: '@customerBalanceType'
+        type: '@customerBalanceType',
+        addCredit: '=customerAddCredit',
+        chartData: '=customerChartData',
+        showChart: '=customerShowChart',
       },
       link: function(scope) {
-        scope.chartData = {
-          labels: ["Monday", "Tuesday", "Wednsday", "Thursday", "Friday", "Saturday", "Sunday"],
-          datasets: [
-            {
-              label: "Events",
-              fillColor: "rgba(220,220,220,0.2)",
-              strokeColor: "rgba(220,220,220,1)",
-              pointColor: "rgba(220,220,220,1)",
-              pointStrokeColor: "#fff",
-              pointHighlightFill: "#fff",
-              pointHighlightStroke: "rgba(220,220,220,1)",
-              data: [65, 59, 80, 81, 56, 55, 40]
-            }
-          ]
-        };
         scope.chartOptions = {
           responsive: true,
-          scaleShowGridLines : false
+          bezierCurve: false,
+          scaleShowGridLines: false
         };
+
+        scope.currency = ENV.currency;
+
+        scope.graphTooltip = false;
+
+        scope.toggleChart = function() {
+          scope.graphTooltip = !scope.graphTooltip;
+          scope.amountTooltip = false;
+          scope.quotasTooltip = false;
+        }
+
+        scope.toggleBalance = function() {
+          scope.amountTooltip = !scope.amountTooltip;
+          scope.graphTooltip = false;
+          scope.quotasTooltip = false;
+        }
 
         currentStateService.getCustomer().then(function(response) {
           scope.model = response;

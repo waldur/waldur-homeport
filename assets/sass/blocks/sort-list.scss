@@ -6,6 +6,10 @@
     min-height: 30px;
     li {
         @include property(padding, 0 10);
+        @include bp(xs) {
+            @include property(padding, 0);
+            @include property(margin-top, 5);
+        }
         @include property(padding-right, 0);
         &:nth-child(1) {
             @include property(padding-left, 0);
@@ -32,7 +36,7 @@
             @include bp(xs) {
                 position: static;
                 padding-top: 5px;
-                margin-left: -20px;
+                margin-top: 10px;
             } // xs
         } // &.right-sort
         .app-title {

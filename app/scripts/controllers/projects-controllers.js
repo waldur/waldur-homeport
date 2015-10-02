@@ -467,6 +467,11 @@
               key: 'premiumSupport',
               viewName: 'tabPremiumSupport',
               count: 0
+            },
+            {
+              title: 'Delete',
+              key: 'delete',
+              viewName: 'tabDelete'
             }
           ]
         };
@@ -819,53 +824,32 @@
   angular.module('ncsaas')
     .controller('ProjectAlertTabController', [
       'BaseAlertsListController',
-      'projectsService',
       'currentStateService',
-      '$stateParams',
+      'blockUI',
       ProjectAlertTabController
     ]);
 
   function ProjectAlertTabController(
     BaseAlertsListController,
-    projectsService,
     currentStateService,
-    $stateParams
+    blockUI
   ) {
     var controllerScope = this;
     var AlertController = BaseAlertsListController.extend({
-      project: null,
-
       init: function() {
         this.controllerScope = controllerScope;
-        if (!$stateParams.uuid) {
-          this.setSignalHandler('currentProjectUpdated', this.getProject.bind(controllerScope));
-        }
         this._super();
-        this.getProject();
       },
       getList: function(filter) {
-        if (this.project) {
-          this.service.defaultFilter.aggregate = 'project';
-          this.service.defaultFilter.uuid = this.project.uuid;
-          this.service.defaultFilter.opened = true;
-          return this._super(filter);
-        } else {
-          return this.getProject();
-        }
-      },
-      getProject: function() {
-        var vm = this;
-        if ($stateParams.uuid) {
-          projectsService.$get($stateParams.uuid).then(function(response) {
-            vm.project = response;
-            vm.getList();
-          });
-        } else {
-          currentStateService.getProject().then(function(response) {
-            vm.project = response;
-            vm.getList();
-          });
-        }
+        this.service.defaultFilter.aggregate = 'project';
+        this.service.defaultFilter.uuid = currentStateService.getProjectUuid();
+        this.service.defaultFilter.opened = true;
+
+        var block = blockUI.instances.get('tab-content');
+        block.start();
+        return this._super(filter).then(function() {
+          block.stop();
+        });
       }
     });
 
@@ -1063,7 +1047,8 @@ angular.module('ncsaas')
               type: ENTITYLISTFIELDTYPES.name,
               link: 'organizations.details({uuid: "' + currentStateService.getCustomerUuid()
               + '", providerType: entity.type, providerUuid: entity.uuid, tab: "providers"})',
-              className: 'name'
+              className: 'name',
+              showForMobile: true
             },
             {
               name: 'Type',
@@ -1212,6 +1197,52 @@ angular.module('ncsaas')
     });
 
     controllerScope.__proto__ = new ResourceController();
+  }
+
+})();
+
+
+(function() {
+  angular.module('ncsaas')
+      .controller('ProjectDeleteTabController', [
+        'baseControllerListClass',
+        'projectsService',
+        'currentStateService',
+        '$rootScope',
+        '$state',
+        ProjectDeleteTabController
+      ]);
+
+  function ProjectDeleteTabController(
+      baseControllerListClass,
+      projectsService,
+      currentStateService,
+      $rootScope,
+      $state
+  ) {
+    var controllerScope = this;
+    var DeleteController = baseControllerListClass.extend({
+      init: function() {
+        this.controllerScope = controllerScope;
+        this.service = projectsService;
+        this._super();
+      },
+      removeProject: function () {
+        var vm = this;
+        currentStateService.getProject().then(function(project){
+          vm.remove(project);
+        });
+      },
+      afterInstanceRemove: function(instance) {
+        $rootScope.$broadcast('refreshProjectList', {model: instance, remove: true});
+        this._super(instance);
+        projectsService.getList().then(function(){
+          $state.go('projects.list');
+        });
+      }
+    });
+
+    controllerScope.__proto__ = new DeleteController();
   }
 
 })();

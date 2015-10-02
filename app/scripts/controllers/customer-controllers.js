@@ -112,11 +112,13 @@
       'customersService',
       'customerImageService',
       'usersService',
+      'paymentsService',
       'Flash',
       'ENV',
       '$stateParams',
       '$rootScope',
       '$q',
+      '$window',
       'resourcesCountService',
       'alertsService',
       CustomerDetailUpdateController
@@ -127,11 +129,13 @@
     customersService,
     customerImageService,
     usersService,
+    paymentsService,
     Flash,
     ENV,
     $stateParams,
     $rootScope,
     $q,
+    $window,
     resourcesCountService,
     alertsService
     ) {
@@ -139,6 +143,7 @@
     var CustomerController = baseControllerDetailUpdateClass.extend({
       files: [],
       canEdit: false,
+      showChart: false,
 
       init: function() {
         this.service = customersService;
@@ -218,6 +223,7 @@
         controllerScope.updateImageUrl();
 
         this.setCounters();
+        this.service.getBalanceHistory(this.model.uuid).then(this.processChartData.bind(this));
       },
 
       setCounters: function() {
@@ -278,6 +284,43 @@
       afterUpdate: function() {
         this.successFlash('Organization {} is updated'.replace('{}', controllerScope.model.name));
         $rootScope.$broadcast('refreshCustomerList', {model: this.model, update: true});
+      },
+
+      addCredit: function(amount) {
+        var vm = this;
+        var payment = paymentsService.$create();
+        payment.customer = vm.model.url;
+        payment.amount = amount;
+        payment.$save(function(payment) {
+          $window.location = payment.approval_url;
+        });
+      },
+
+      processChartData: function(rows) {
+        this.showChart = rows.length > 0;
+
+        var labels = rows.map(function(row) {
+          return moment(row.created).format('D.MM');
+        });
+        var totals = rows.map(function(row) {
+          return row.amount;
+        });
+
+        this.chartData = {
+          labels: labels,
+          datasets: [
+            {
+              label: "Balance",
+              fillColor: "rgba(220,220,220,0.2)",
+              strokeColor: "rgba(220,220,220,1)",
+              pointColor: "rgba(220,220,220,1)",
+              pointStrokeColor: "#fff",
+              pointHighlightFill: "#fff",
+              pointHighlightStroke: "rgba(220,220,220,1)",
+              data: totals
+            }
+          ]
+        };
       }
     });
 

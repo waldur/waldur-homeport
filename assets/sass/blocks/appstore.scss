@@ -464,6 +464,7 @@
     .appstore-purchase {
         button {
             margin-top: 15px;
+            margin-bottom: 15px;
             display: block;
             width: 100%;
             border-radius: 5px;
@@ -511,7 +512,7 @@
             margin: 0;
         }
         p {
-            margin: 0;
+            margin: 0 0 10px 0;
             font-size: 10px;
             color: #9d9f9c;
         }

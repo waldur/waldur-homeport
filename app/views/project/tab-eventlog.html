@@ -7,10 +7,9 @@
                     <div>
                         <div ui-view="eventTypes"></div>
                     </div>
-                    <div class="actions">
+                    <div class="actions" ng-show="EventList.showgroup">
                         <action-button button-list="EventList.actionButtonsListItems"
                                        button-controller="EventList"
-                                       ng-show="!EventList.showgroup"
                                        button-model="event"></action-button>
                     </div>
                 </div>
