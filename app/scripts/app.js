@@ -330,6 +330,9 @@
             'tabPremiumSupport@projects.details': {
               templateUrl: 'views/project/tab-support.html',
             },
+            'tabDelete@projects.details': {
+              templateUrl: 'views/project/tab-delete.html',
+            },
             'appHeader': {
               templateUrl: 'views/partials/app-header.html',
             },
@@ -631,6 +634,9 @@
             'tabEventlog@resources.list' : {
               templateUrl: 'views/project/tab-eventlog.html',
             },
+            'tabAlerts@resources.list': {
+              templateUrl: 'views/project/tab-alerts.html',
+            },
             'tabResources@resources.list' : {
               templateUrl: 'views/project/tab-resources.html',
             },
@@ -651,6 +657,9 @@
             },
             'tabPremiumSupport@resources.list': {
               templateUrl: 'views/project/tab-support.html',
+            },
+            'tabDelete@resources.list': {
+              templateUrl: 'views/project/tab-delete.html',
             },
             'appHeader': {
               templateUrl: 'views/partials/app-header.html',

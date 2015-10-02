@@ -38,10 +38,13 @@
             clickFunction: this.remove.bind(this.controllerScope),
 
             isDisabled: function(service) {
-              return !this.canUserManageService || service.resources_count > 0;
+              return service.shared || !this.canUserManageService || service.resources_count > 0;
             }.bind(this.controllerScope),
 
             tooltip: function(service) {
+              if (service.shared) {
+                return 'You cannot remove shared provider';
+              }
               if (!this.canUserManageService) {
                 return 'Only customer owner or staff can remove provider';
               }
@@ -62,11 +65,14 @@
             title: 'Import resource',
             state: 'import.import',
 
-            isDisabled: function() {
-              return !this.customerHasProjects;
+            isDisabled: function(service) {
+              return service.shared || !this.customerHasProjects;
             }.bind(this.controllerScope),
 
-            tooltip: function() {
+            tooltip: function(service) {
+              if (service.shared) {
+                return 'You cannot import resources from shared provider';
+              }
               if (!this.customerHasProjects) {
                 return 'Can not import resources until project is created';
               }
@@ -85,7 +91,8 @@
               propertyName: 'name',
               type: ENTITYLISTFIELDTYPES.name,
               link: 'services.details({uuid: entity.uuid, provider: entity.service_type})',
-              className: 'name'
+              className: 'name',
+              showForMobile: true
             },
             {
               name: 'Type',

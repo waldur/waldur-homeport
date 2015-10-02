@@ -135,6 +135,7 @@
         }
         section {
             padding-bottom: 20px;
+            min-height: 100px;
             .appstore-template {
                 height: 110px;
                 text-align: center;
@@ -463,6 +464,7 @@
     .appstore-purchase {
         button {
             margin-top: 15px;
+            margin-bottom: 15px;
             display: block;
             width: 100%;
             border-radius: 5px;
@@ -491,14 +493,16 @@
     }
 
     .appstore-aside {
-        position: absolute;
-        right: 0;
-        top: 0;
+        position: fixed;
+        right: 22px;
+        top: 100px;
         width: 300px;
         @include bp(xs) {
             position: relative;
             margin-bottom: 60px;
             width: 100%;
+            top: 0;
+            left: 0px;
         } // xs
         h2 {
             font-weight: bold;
@@ -508,7 +512,7 @@
             margin: 0;
         }
         p {
-            margin: 0;
+            margin: 0 0 10px 0;
             font-size: 10px;
             color: #9d9f9c;
         }

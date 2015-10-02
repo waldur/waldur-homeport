@@ -51,8 +51,7 @@
                     <input type="search" placeholder="Search" ng-model="UserDetailUpdate.searchInput"
                            ng-change="UserDetailUpdate.search()"/>
                 </div>
-                <a class="open-tabs button" ng-click="openTabs = !openTabs">Tabs</a>
-                <ul class="tabs-links" ng-class="{'tabs-opened': openTabs}">
+                <ul class="tabs-links tabs-opened">
                     <li visible="keys" ng-class="{'active': UserDetailUpdate.activeTab === 'keys'}"
                         ng-click="UserDetailUpdate.activeTab = 'keys'">
                         SSH Keys

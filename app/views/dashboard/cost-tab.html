@@ -3,13 +3,13 @@
          <h1>Not enough data for cost analysis</h1>
          <h2 visible="import" visible="providers">Please import resources or add more providers</h2>
          <span visible="import" class="cost-tab-actions">
-             <a ui-sref="import.import" class="button"
+             <a ui-sref="import.import" class="button button-margin-bottom"
                 check-quotas="{{DashboardController.checkQuotasResource}}"
                 ng-click="DashboardController.showQuotasMessageResource = !DashboardController.showQuotasMessageResource;"
                 show-message="DashboardController.showQuotasMessageResource">Import resources</a>
          </span>
          <span visible="providers" class="cost-tab-actions">
-             <a ui-sref="services.create" class="button"
+             <a ui-sref="services.create" class="button button-margin-bottom"
                 check-quotas="{{DashboardController.checkQuotasProvider}}"
                 ng-click="DashboardController.showQuotasMessageProvider = !DashboardController.showQuotasMessageProvider;"
                 show-message="DashboardController.showQuotasMessageProvider">Add providers</a>
