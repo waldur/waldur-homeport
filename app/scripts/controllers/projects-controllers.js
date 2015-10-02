@@ -1014,6 +1014,7 @@ angular.module('ncsaas')
     .controller('ProjectServicesTabController',
       ['baseControllerListClass',
       'joinServiceProjectLinkService',
+      'joinService',
       'currentStateService',
       'ENTITYLISTFIELDTYPES',
       '$scope',
@@ -1024,6 +1025,7 @@ angular.module('ncsaas')
   function ProjectServicesTabController(
     baseControllerListClass,
     joinServiceProjectLinkService,
+    joinService,
     currentStateService,
     ENTITYLISTFIELDTYPES,
     $scope,
@@ -1031,13 +1033,11 @@ angular.module('ncsaas')
     $rootScope) {
     var controllerScope = this;
     var ServiceController = baseControllerListClass.extend({
-      // TODO implement generalSearch when endpoint for mixed providers will be available NC-765
       init: function() {
-        this.service = joinServiceProjectLinkService;
+        this.service = joinService;
+        this.service.defaultFilter.project_uuid = currentStateService.getProjectUuid();
         this.controllerScope = controllerScope;
-        this.setSignalHandler('currentProjectUpdated', this.setCurrentProject.bind(controllerScope));
         this._super();
-        var currentCustomerUuid = currentStateService.getCustomerUuid();
         this.actionButtonsListItems = [
           {
             title: 'Remove',
@@ -1061,7 +1061,7 @@ angular.module('ncsaas')
               name: 'Name',
               propertyName: 'name',
               type: ENTITYLISTFIELDTYPES.name,
-              link: 'organizations.details({uuid: "' + currentCustomerUuid
+              link: 'organizations.details({uuid: "' + currentStateService.getCustomerUuid()
               + '", providerType: entity.type, providerUuid: entity.uuid, tab: "providers"})',
               className: 'name'
             },
@@ -1077,21 +1077,13 @@ angular.module('ncsaas')
             }
           ]
         };
-
         $scope.$on('searchInputChanged', this.onSearchInputChanged.bind(this));
       },
-
-      setCurrentProject: function() {
-        this.getList();
-      },
-
       getList: function(filter) {
-        var vm = this;
-        var projectMenu = blockUI.instances.get('tab-content');
-        projectMenu.start();
-        return currentStateService.getProject().then(function(project) {
-          vm.list = project.services;
-          projectMenu.stop();
+        var block = blockUI.instances.get('tab-content');
+        block.start();
+        return this._super(filter).then(function() {
+          block.stop();
         });
       },
       removeInstance: function(model) {
@@ -1105,7 +1097,6 @@ angular.module('ncsaas')
         this.searchInput = searchInput;
         this.search();
       }
-
     });
 
     controllerScope.__proto__ = new ServiceController();
