@@ -40,6 +40,6 @@ angular.module('ncsaas')
     homeHeaderTemplate: 'views/partials/squ-student-cloud/site-header.html',
     homeLoginTemplate: 'views/home/squ-student-cloud/login.html',
     enablePurchaseCostDisplay: false,
-    VmProviderSettingsUuid: "1cbefddebe97488788d92e7c511f1808",
-    gitLabProviderSettingsUuid: "6b32f48bc48c4ce98b4025381ba94548"
+    VmProviderSettingsUuid: "Set UUID of a shared service setting for VMs",
+    gitLabProviderSettingsUuid: "Set UUID of a shared service setting for GitLab"
   });
