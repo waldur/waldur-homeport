@@ -84,8 +84,8 @@
           ]
         };
         var vm = this;
-        currentStateService.getProject().then(function(response) {
-          if (response) {
+        currentStateService.getProject().then(function(project) {
+          if (project) {
             if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('resources') == -1) {
               vm.entityOptions.entityData.createLink = 'appstore.store';
               vm.entityOptions.entityData.createLinkText = 'Create';
@@ -93,9 +93,19 @@
             if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('import') == -1) {
               vm.entityOptions.entityData.importLink = 'import.import';
               vm.entityOptions.entityData.importLinkText = 'Import';
+              vm.entityOptions.entityData.importDisabled = !vm.projectHasNonSharedService(project);
             }
           }
         });
+      },
+      projectHasNonSharedService: function(project) {
+        for (var i = 0; i < project.services.length; i++) {
+          var service = project.services[i];
+          if (!service.shared) {
+            return true;
+          }
+        }
+        return false;
       },
       stopResource:function(resource) {
         resource.$action('stop', this.reInitResource.bind(this, resource), this.handleActionException);

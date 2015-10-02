@@ -41,6 +41,7 @@
                 </a>
                 <a ng-if="entityOptions.entityData.importLink"
                    visible="import"
+                   ng-class="{'disabled': entityOptions.entityData.importDisabled}"
                    ui-sref="{{ entityOptions.entityData.importLink }}" class="button">
                     {{ entityOptions.entityData.importLinkText }}
                 </a>
