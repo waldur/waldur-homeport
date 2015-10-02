@@ -22,6 +22,8 @@
           scaleShowGridLines: false
         };
 
+        scope.purchaseIsOff = ENV.purchaseIsOff;
+
         scope.currency = ENV.currency;
 
         scope.graphTooltip = false;

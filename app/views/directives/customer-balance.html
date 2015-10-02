@@ -7,14 +7,14 @@
             <span class="plan-spacing" visible="plans" ng-click="quotasTooltip = !quotasTooltip;">
                 {{ currentPlan || 'Default'  }}
             </span>
-            <span class="bold">
+            <span class="bold" ng-show="!purchaseIsOff">
                 Balance:
             </span>
-            <span>
+            <span ng-show="!purchaseIsOff">
                 {{ model.balance || 0 | currency:currency }}
             </span>
         </div>
-        <div class="tooltip quota-tooltip" ng-show="quotasTooltip">
+        <div class="tooltip quota-tooltip" ng-show="quotasTooltip && !purchaseIsOff">
             <div class="tooltip-title">
                 <h3>Current quotas: </h3>
                 <div class="icon close" ng-click="quotasTooltip = false;"></div>
@@ -29,8 +29,8 @@
         <div ng-if="type == 'details'">
             <div class="buttons">
                 <a class="button" visible="plans" ui-sref="organizations.plans({uuid: model.uuid})">Plans</a>
-                <a class="button" ng-click="toggleBalance()">Top-up</a>
-                <a class="button" ng-click="toggleChart()" ng-if="showChart">History</a>
+                <a class="button" ng-click="toggleBalance()" ng-show="!purchaseIsOff">Top-up</a>
+                <a class="button" ng-click="toggleChart()" ng-if="showChart" ng-show="!purchaseIsOff">History</a>
             </div>
             <div class="tooltip graph-tooltip" ng-if="showChart && graphTooltip">
                 <canvas chart-options="chartOptions"
@@ -38,7 +38,7 @@
                         tc-chartjs chart-type="line"
                         width="400" height="100"></canvas>
             </div>
-            <div class="tooltip amount-tooltip" ng-show="amountTooltip">
+            <div class="tooltip amount-tooltip" ng-show="amountTooltip && !purchaseIsOff">
                 <div class="tooltip-title">
                     <h3>Add amount</h3>
                     <div class="icon close" ng-click="amountTooltip = false;"></div>

@@ -42,6 +42,9 @@
       },
 
       currency: ENV.currency,
+      purchaseIsOff: ENV.purchaseIsOff,
+      openStackProvider: ENV.openStackProvider,
+      gitLabProvider: ENV.gitLabProvider,
 
       secondStep: false,
       resourceTypesBlock: false,
@@ -106,8 +109,26 @@
         this.fields = [];
         this.resetPriceItems();
 
-        var services = this.categoryServices[this.selectedCategory.name]
-        if (services && services.length == 1) {
+        var services = this.categoryServices[this.selectedCategory.name];
+        if (ENV.openStackProvider && this.selectedCategory.name == ENV.appStoreCategories[0].name) {
+          for (var i = 0; i < services.length; i++) {
+            if (services[i].settings_uuid == ENV.openStackProvider) {
+              this.setService(services[i]);
+              this.configureStepNumber = 2;
+              this.secondStep = false;
+              break;
+            }
+          }
+        } else if (ENV.gitLabProvider && this.selectedCategory.name == ENV.appStoreCategories[1].name) {
+          for (var i = 0; i < services.length; i++) {
+            if (services[i].settings_uuid == ENV.gitLabProvider) {
+              this.setService(services[i]);
+              this.configureStepNumber = 3;
+              this.secondStep = false;
+              break;
+            }
+          }
+        } else if (services && services.length == 1) {
           this.setService(services[0]);
         }
       },
