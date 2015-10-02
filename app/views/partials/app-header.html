@@ -58,8 +58,9 @@
                             <a ui-sref="projects.list" class="manage">Manage projects</a>
                         </li>
                         <li class="manage-item">
-                            <a check-quotas="{{Header.checkQuotas.projects}}" show-message="Header.checkQuotas.showMessage"
-                               ui-sref="projects.create" class="manege">Add project</a>
+                            <a check-quotas="{{Header.checkQuotas.projects}}" show-message="Header.checkQuotas.showMessageProject"
+                               ng-click="Header.checkQuotas.showMessageProject = !Header.checkQuotas.showMessageProject;" tooltip-type="listItems"
+                               ui-sref="projects.create" class="manage">Add project</a>
                         </li>
                     </ul>
                 </li>
@@ -72,8 +73,8 @@
                 </li>
                 <li visible="resources" class="appstore">
                     <a ui-sref="appstore.store"
-                       check-quotas="{{Header.checkQuotas.resources}}" show-message="Header.checkQuotas.showMessage"
-                       ng-class="{'active': Header.menuItemActive === 'appstore', 'disabled' : !Header.currentProject.name }"
+                       check-quotas="{{Header.checkQuotas.resources}}" show-message="Header.checkQuotas.showMessageResource"
+                       ng-click="Header.checkQuotas.showMessageResource = !Header.checkQuotas.showMessageResource;" tooltip-type="listItems"
                        class="appstore">
                         <span translate>Appstore</span>
                     </a>
@@ -92,13 +93,22 @@
                     </a>
                     <ul class="nav-sublist user-area" ng-show="Header.menuState.profileMenu">
                         <li visible="services" class="on-tablet">
-                            <a ui-sref="services.create" class="service">Add provider</a>
+                            <a ui-sref="services.create" class="service"
+                               check-quotas="{{Header.checkQuotas.resources}}"
+                               ng-click="Header.checkQuotas.showMessageProvider = !Header.checkQuotas.showMessageProvider;"
+                               show-message="Header.checkQuotas.showMessageProvider" tooltip-type="listItems">Add provider</a>
                         </li>
                         <li visible="projects" class="on-tablet">
-                            <a ui-sref="projects.create" class="project">Add project</a>
+                            <a ui-sref="projects.create" class="project"
+                               check-quotas="{{Header.checkQuotas.projects}}"
+                               ng-click="Header.checkQuotas.showMessageProject = !Header.checkQuotas.showMessageProject;"
+                               show-message="Header.checkQuotas.showMessageProject" tooltip-type="listItems">Add project</a>
                         </li>
                         <li visible="import" ng-if="::Header.showImport" class="on-tablet">
-                            <a ui-sref="import.import" class="import">Import resources</a>
+                            <a ui-sref="import.import" class="import"
+                               check-quotas="{{Header.checkQuotas.resources}}"
+                               ng-click="Header.checkQuotas.showMessageImport = !Header.checkQuotas.showMessageImport;"
+                               show-message="Header.checkQuotas.showMessageImport" tooltip-type="listItems">Import resources</a>
                         </li>
                         <li visible="support" class="on-tablet">
                             <a ui-sref="support.list">Support</a>

@@ -176,6 +176,8 @@
         this.entityOptions.expandable = true;
 
         this.expandableOptions = [];
+        this.entityOptions.entityData.checkQuotas = "project";
+        this.entityOptions.entityData.showMessage = true;
 
         if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('resources') == -1) {
           this.expandableOptions.push({
