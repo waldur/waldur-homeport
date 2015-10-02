@@ -28,6 +28,9 @@
 
 .dropdown {
     .avatar {
+        img {
+            @include property(border-radius, 3);
+        }
         @include bp(xs) {
             float: left;
         }
