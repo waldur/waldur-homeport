@@ -61,7 +61,7 @@
                     </section>
 
                     <section class="step-2" ng-show="AppStore.resourceTypesBlock">
-                        <div class="step-title"><span>Step 3: Choose resource type</span></div>
+                        <div class="step-title"><span>Step {{ AppStore.chooseResourceTypeStepNumber }}: Choose resource type</span></div>
                         <div class="appstore-templates">
                             <!-- service -->
                             <div class="appstore-template"
@@ -232,10 +232,10 @@
             </div>
 
             <aside ng-if="AppStore.renderStore" class="appstore-aside">
-                <h2>
+                <h2 ng-show="AppStore.enablePurchaseCostDisplay">
                     checkout summary
                 </h2>
-                <p>
+                <p ng-show="AppStore.enablePurchaseCostDisplay">
                     Charged to
                     <a ui-sref="organizations.details({uuid: AppStore.currentCustomer.uuid})">{{ AppStore.currentCustomer.name }}</a>
                 </p>
@@ -247,7 +247,7 @@
                             <span>{{ item.name }}</span>
                         </div>
 
-                        <div class="price">{{ item.price || 0 | currency:AppStore.currency }}</div>
+                        <div ng-show="AppStore.enablePurchaseCostDisplay" class="price">{{ item.price || 0 | currency:AppStore.currency }}</div>
                         <div class="clear"></div>
                     </li>
                     <li class="total">
@@ -256,17 +256,17 @@
                             <span ng-show="!AppStore.serviceType">No chosen {{ AppStore.selectedCategory.type }}</span>
                             <span>{{ AppStore.instance.name }} {{ AppStore.selectedResourceType }}</span>
                         </div>
-                        <div class="price">{{ AppStore.total | currency:AppStore.currency }}</div>
+                        <div ng-show="AppStore.enablePurchaseCostDisplay" class="price">{{ AppStore.total | currency:AppStore.currency }}</div>
                         <div class="clear"></div>
                     </li>
                 </ul>
 
             </aside>
 
-            <section ng-show="AppStore.secondStep" class="appstore-purchase">
+            <section ng-show="AppStore.selectedResourceType" class="appstore-purchase">
                 <button ng-class="{'disabled': !AppStore.canSave()}" ng-click="AppStore.save()">
-                <img src="/static/images/appstore/icon-curt.png" alt=""/>
-                <span>Purchase</span>
+                <img ng-show="AppStore.enablePurchaseCostDisplay" src="/static/images/appstore/icon-curt.png" alt=""/>
+                <span>{{ AppStore.enablePurchaseCostDisplay ? 'Create' : 'Purchase' }}</span>
                 </button>
             </section>
 

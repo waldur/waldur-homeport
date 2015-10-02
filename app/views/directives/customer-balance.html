@@ -1,5 +1,5 @@
-<div class="balance-block customer-balance {{ type == 'dashboard' ? 'dashboard-balance' : '' }}">
-    <div class="right-block">
+<div class="balance-block customer-balance container {{ type == 'dashboard' ? 'dashboard-balance' : '' }}">
+    <div class="right-block" ng-show="enablePurchaseCostDisplay">
         <div class="balance">
             <span visible="plans" class="bold">
                 Plan:
