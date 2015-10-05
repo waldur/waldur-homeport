@@ -109,7 +109,7 @@
           }
           else if (item.rdp) {
             item.access_info_url = item.rdp;
-            item.access_info_text = 'Open RDP';
+            item.access_info_text = 'Access';
           }
         }
       },
