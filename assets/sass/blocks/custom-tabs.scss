@@ -10,6 +10,7 @@
                 border: 1px solid rgb(211, 211, 211);
                 border-bottom: none;
                 border-top: 2px solid rgb(158, 207, 93);
+                height: 47px;
                 &:before {
                     content: '';
                     display: block;
@@ -24,15 +25,19 @@
             @include bp(xs) {
                 &.active {
                     border: none;
-                    border-left: 2px solid rgb(158, 207, 93);
+                    border-bottom: 3px solid rgb(158, 207, 93);
                     @include property(border-radius, 0);
+                    font-weight: bold;
+                    height: 44px;
                 } // &.active
             } // xs
             @include bp(sm) {
                 &.active {
                     border: none;
-                    border-left: 2px solid rgb(158, 207, 93);
+                    border-bottom: 3px solid rgb(158, 207, 93);
                     @include property(border-radius, 0);
+                    font-weight: bold;
+                    height: 44px;
                 } // &.active
             } // sm
         } // li
@@ -41,5 +46,11 @@
         border-top: 1px solid rgb(211, 211, 211);
         @include property(padding-top, 15);
         .tab {} // tab
+        @include bp(sm) {
+            border-top: none;
+        } // sm
+        @include bp(xs) {
+            border-top: none;
+        } // xs
     } // > section.custom-tabs-tabs-content
 } // custom-tabs

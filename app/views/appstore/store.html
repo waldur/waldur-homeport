@@ -155,30 +155,30 @@
 
                                     <div class="keys">
                                         <div class="appstore-templates">
-                                            <div class="appstore-template"
+                                            <div class="appstore-template appstore-template-{{::field.name}}"
                                                  ng-repeat="choice in field.choices | filter: {'display_name': field.searchQuery} | limitTo: field.limit"
                                                  ng-click="AppStore.doChoice(field.name, choice)"
                                                  ng-class="{'state': AppStore.instance[field.name] == choice.value, 'disabled': choice.disabled}">
                                                 <div class="icon {{ ::field.icon }}"></div>
-                                                <h3 ng-switch="::field.name">
-                                                    <b ng-switch-when="flavor">
+                                                <div ng-switch="::field.name" class="description-{{::field.name}}">
+                                                    <div ng-switch-when="flavor">
                                                         <p>{{ ::choice.display_name }}</p>
                                                         <p>CPU: <ng-pluralize count="::choice.item.cores"
-                                                        when="{'1': '1 core', 'other': '{} cores'}"></ng-pluralize></p>
+                                                                              when="{'1': '1 core', 'other': '{} cores'}"></ng-pluralize></p>
                                                         <p>RAM: {{ ::choice.item.ram | mb2gb }}</p>
                                                         <p>HDD: {{ ::choice.item.disk | mb2gb}}</p>
-                                                    </b>
-                                                    <b ng-switch-when="size">
+                                                    </div>
+                                                    <div ng-switch-when="size">
                                                         <p>CPU: <ng-pluralize count="::choice.item.cores"
-                                                        when="{'1': '1 core', 'other': '{} cores'}"></ng-pluralize></p>
+                                                                              when="{'1': '1 core', 'other': '{} cores'}"></ng-pluralize></p>
                                                         <p>RAM: {{ ::choice.item.ram | mb2gb }}</p>
                                                         <p>HDD: {{ ::choice.item.disk | mb2gb}}</p>
-                                                    </b>
-                                                    <b ng-switch-when="image">
+                                                    </div>
+                                                    <div ng-switch-when="image">
                                                         <p>{{ ::choice.item.distribution }} {{ ::choice.display_name }}</p>
-                                                    </b>
+                                                    </div>
                                                     <b ng-switch-default>{{ choice.display_name }}</b>
-                                                </h3>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="clear"></div>

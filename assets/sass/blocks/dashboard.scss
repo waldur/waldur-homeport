@@ -86,6 +86,7 @@
             float: left;
             margin-top: 7px;
             margin-right: 6px;
+            margin-left: 6px;
           }
           a {
             display: block;
@@ -608,6 +609,7 @@
       text-decoration: none;
       color: $dashboard-black;
       border-bottom: 1px dashed $dashboard-green;
+      margin-right: 10px;
       &:before {
         content: "";
         display: block;

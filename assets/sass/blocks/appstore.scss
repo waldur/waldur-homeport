@@ -117,6 +117,46 @@
             } // article
         } // description
     } // appstore-template
+    .appstore-template-flavor {
+        .icon {
+            @include bp(sm) {
+                float: left;
+                width: 40%;
+                margin: 25px 0 0 0;
+                padding: 0 10px 0 0;
+                text-align: right;
+            }//sm
+            @include bp(xs) {
+                float: left;
+                width: 40%;
+                margin: 25px 0 0 0;
+                padding: 0 10px 0 0;
+                text-align: right;
+            }//xs
+        }
+        .description-flavor {
+            @include bp(sm) {
+                float: left;
+                width: 50%;
+                padding-left: 10px;
+                text-align: left;
+                p {
+                    padding: 0;
+                    margin: 0 5px;
+                }
+            }//sm
+            @include bp(xs) {
+                float: left;
+                width: 50%;
+                padding-left: 10px;
+                text-align: left;
+                p {
+                    padding: 0;
+                    margin: 0 5px;
+                }
+            }//xs
+        }
+    }//appstore-template-flavor
 } // appstore-templates
 .appstore-wrapper {
     padding-right: 320px;

@@ -194,7 +194,9 @@
         for (var i = 0; i < category.services.length; i++) {
           var name = category.services[i];
           var service = this.services[name];
-          this.categoryServices.push(service);
+          if (service) {
+            this.categoryServices.push(service);
+          }
         }
         this.setModel(this.categoryServices[0]);
       },
