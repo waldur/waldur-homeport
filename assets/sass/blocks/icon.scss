@@ -51,4 +51,9 @@
             content: '\f00d';
         }
     }
+    &.external-link {
+        &:before {
+            content: '\f08e';
+        }
+    }
 } // icons

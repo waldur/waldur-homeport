@@ -77,9 +77,9 @@
             },
             {
               name: 'Access',
-              propertyName: 'external_ips',
-              emptyText: 'No access info',
-              type: ENTITYLISTFIELDTYPES.listInField
+              propertyName: 'access_info_text',
+              urlProperyName: 'access_info_url',
+              type: ENTITYLISTFIELDTYPES.linkOrText
             }
           ]
         };
@@ -96,6 +96,22 @@
             }
           }
         });
+      },
+      afterGetList: function() {
+        for (var i = 0; i < this.list.length; i++) {
+          var item = this.list[i];
+          if (item.external_ips) {
+            if (item.external_ips.length != 0) {
+              item.access_info_text = item.external_ips.join(', ');
+            } else {
+              item.access_info_text = 'No access info';
+            }
+          }
+          else if (item.rdp) {
+            item.access_info_url = item.rdp;
+            item.access_info_text = 'Open RDP';
+          }
+        }
       },
       stopResource:function(resource) {
         resource.$action('stop', this.reInitResource.bind(this, resource), this.handleActionException);

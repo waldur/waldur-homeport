@@ -139,6 +139,18 @@
                             <i>{{ field.emptyText }}</i>
                         </span>
 
+                        <span ng-switch-when="linkOrText">
+                            <a ng-if="::entity[field.urlProperyName]"
+                               href="{{ ::entity[field.urlProperyName] }}"
+                               target="_blank">
+                                <b class="icon external-link"></b>
+                                {{ ::entity[field.propertyName] }}
+                            </a>
+                            <span ng-if="::!entity[field.urlProperyName]">
+                                {{ ::entity[field.propertyName] }}
+                            </span>
+                        </span>
+
                         <span ng-switch-when="entityStatus" class="status"
                               ng-class="{'online': entity[field.propertyName] == field.onlineStatus,
                                'offline' : entity[field.propertyName] == field.offlineStatus}">
