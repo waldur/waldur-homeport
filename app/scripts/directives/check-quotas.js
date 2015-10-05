@@ -32,7 +32,12 @@
           triangleAfter = triangleBefore + 1;
           triangleBefore = 'style="right: '+ triangleBefore.toString() +'px;"';
           triangleAfter = 'style="right: '+ triangleAfter.toString() +'px;"';
-
+          if (tooltipType == 'userDropDown') {
+            tooltipStyle = 'style="top:75px;"';
+          }
+          if (tooltipType == 'projectDropDown') {
+            tooltipStyle = 'style="top:110px;"';
+          }
           if (tooltipType == 'addUser') {
             triangleBefore = 'style="left: 20px;"';
             triangleAfter = 'style="left: 21px;"';

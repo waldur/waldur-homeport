@@ -59,7 +59,7 @@
                         </li>
                         <li class="manage-item">
                             <a check-quotas="{{Header.checkQuotas.projects}}" show-message="Header.checkQuotas.showMessageProject"
-                               ng-click="Header.checkQuotas.showMessageProject = !Header.checkQuotas.showMessageProject;" tooltip-type="listItems"
+                               ng-click="Header.checkQuotas.showMessageProject = !Header.checkQuotas.showMessageProject;" tooltip-type="projectDropDown"
                                ui-sref="projects.create" class="manage">Add project</a>
                         </li>
                     </ul>
@@ -102,7 +102,7 @@
                             <a ui-sref="projects.create" class="project"
                                check-quotas="{{Header.checkQuotas.projects}}"
                                ng-click="Header.checkQuotas.showMessageProject = !Header.checkQuotas.showMessageProject;"
-                               show-message="Header.checkQuotas.showMessageProject" tooltip-type="listItems">Add project</a>
+                               show-message="Header.checkQuotas.showMessageProject" tooltip-type="userDropDown">Add project</a>
                         </li>
                         <li visible="import" ng-if="::Header.showImport" class="on-tablet">
                             <a ui-sref="import.import" class="import"

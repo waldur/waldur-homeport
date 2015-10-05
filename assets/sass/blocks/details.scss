@@ -707,6 +707,10 @@
       width: 14px;
       height: 14px;
       opacity: 1;
+      &:before {
+        display: none;
+      }
+
     }
   }
   .tooltip-text {

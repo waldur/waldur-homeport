@@ -84,6 +84,8 @@
             noDataText: 'No providers yet.',
             createLink: 'services.create',
             createLinkText: 'Create provider',
+            checkQuotas: 'service',
+            showMessage: true
           },
           list: [
             {
