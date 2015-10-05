@@ -191,7 +191,7 @@
       formatChoices: function(items) {
         return items.map(function(item) {
           return {
-            value: item.url,
+            value: item.url || item.uuid,
             display_name: item.name,
             item: item
           }
@@ -206,7 +206,7 @@
 
           var choices;
           var type = formOptions[name].type;
-          if (type == 'field') {
+          if (type == 'field' || type == 'choice') {
             type = 'choice';
             if (name in validChoices) {
               choices = validChoices[name];
@@ -571,6 +571,9 @@
 (function() {
   angular.module('ncsaas').filter('mb2gb', function() {
     return function(input) {
+      if (!angular.isNumber(input)) {
+        return input;
+      }
       if (input < 1024) {
         return input + ' MB';
       }
