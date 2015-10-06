@@ -77,9 +77,9 @@
             },
             {
               name: 'Access',
-              propertyName: 'external_ips',
-              emptyText: 'No access info',
-              type: ENTITYLISTFIELDTYPES.listInField
+              propertyName: 'access_info_text',
+              urlProperyName: 'access_info_url',
+              type: ENTITYLISTFIELDTYPES.linkOrText
             }
           ]
         };
@@ -93,7 +93,13 @@
             if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('import') == -1) {
               vm.entityOptions.entityData.importLink = 'import.import';
               vm.entityOptions.entityData.importLinkText = 'Import';
-              vm.entityOptions.entityData.importDisabled = !vm.projectHasNonSharedService(project);
+              if (!vm.projectHasNonSharedService(project)) {
+                vm.entityOptions.entityData.importDisabled = true;
+                vm.entityOptions.entityData.importLinkTooltip = 'Unable to import because all providers are shared';
+              } else {
+                vm.entityOptions.entityData.importDisabled = false;
+                vm.entityOptions.entityData.importLinkTooltip = null;
+              }
             }
           }
         });
@@ -106,6 +112,22 @@
           }
         }
         return false;
+      },
+      afterGetList: function() {
+        for (var i = 0; i < this.list.length; i++) {
+          var item = this.list[i];
+          if (item.external_ips) {
+            if (item.external_ips.length != 0) {
+              item.access_info_text = item.external_ips.join(', ');
+            } else {
+              item.access_info_text = 'No access info';
+            }
+          }
+          else if (item.rdp) {
+            item.access_info_url = item.rdp;
+            item.access_info_text = 'Access';
+          }
+        }
       },
       stopResource:function(resource) {
         resource.$action('stop', this.reInitResource.bind(this, resource), this.handleActionException);
