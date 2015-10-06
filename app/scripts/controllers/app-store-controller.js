@@ -42,6 +42,9 @@
       },
 
       currency: ENV.currency,
+      enablePurchaseCostDisplay: ENV.enablePurchaseCostDisplay,
+      VmProviderSettingsUuid: ENV.VmProviderSettingsUuid,
+      gitLabProviderSettingsUuid: ENV.gitLabProviderSettingsUuid,
 
       secondStep: false,
       resourceTypesBlock: false,
@@ -65,6 +68,7 @@
       configureStepNumber: 4,
       selectedPackageName: null,
       agreementShow: false,
+      chooseResourceTypeStepNumber: 3,
 
       // cart
       total: 0,
@@ -106,8 +110,27 @@
         this.fields = [];
         this.resetPriceItems();
 
-        var services = this.categoryServices[this.selectedCategory.name]
-        if (services && services.length == 1) {
+        var services = this.categoryServices[this.selectedCategory.name];
+        if (ENV.VmProviderSettingsUuid && this.selectedCategory.name == ENV.appStoreCategories[0].name) {
+          for (var i = 0; i < services.length; i++) {
+            if (services[i].settings_uuid == ENV.VmProviderSettingsUuid) {
+              this.setService(services[i]);
+              this.configureStepNumber = 2;
+              this.secondStep = false;
+              break;
+            }
+          }
+        } else if (ENV.gitLabProviderSettingsUuid && this.selectedCategory.name == ENV.appStoreCategories[1].name) {
+          for (var i = 0; i < services.length; i++) {
+            if (services[i].settings_uuid == ENV.gitLabProviderSettingsUuid) {
+              this.setService(services[i]);
+              this.chooseResourceTypeStepNumber = 2;
+              this.configureStepNumber = 3;
+              this.secondStep = false;
+              break;
+            }
+          }
+        } else if (services && services.length == 1) {
           this.setService(services[0]);
         }
       },

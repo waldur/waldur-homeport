@@ -1023,7 +1023,17 @@ angular.module('ncsaas')
         this.actionButtonsListItems = [
           {
             title: 'Remove',
-            clickFunction: this.remove.bind(controllerScope)
+            clickFunction: this.remove.bind(controllerScope),
+
+            isDisabled: function(service) {
+              return service.shared;
+            }.bind(this.controllerScope),
+
+            tooltip: function(service) {
+              if (service.shared) {
+                return 'You cannot remove shared provider';
+              }
+            }.bind(this.controllerScope)
           }
         ];
         this.entityOptions = {

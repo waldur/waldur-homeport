@@ -105,5 +105,6 @@ angular.module('ncsaas')
     },
 
     countsCacheTime: 60, // seconds
+    enablePurchaseCostDisplay: true
 
   });
