@@ -519,20 +519,21 @@
 }
 
 .balance-block.customer-balance {
-  width: auto;
+  width: 50%;
+  float: right;
   padding-right: 60px;
   @include bp(xs) {
     float: left;
     padding-right: 0;
     padding-left: 20px;
-
+    width: auto;
   }
   @include bp(sm) {
     float: left;
     padding-right: 0;
     padding-left: 20px;
+    width: auto;
   }
-
 }
 
 .password {
