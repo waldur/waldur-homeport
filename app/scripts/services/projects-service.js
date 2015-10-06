@@ -3,9 +3,9 @@
 
 (function () {
   angular.module('ncsaas')
-    .service('projectsService', ['$q', 'baseServiceClass', projectsService]);
+    .service('projectsService', ['$q', 'baseServiceClass', 'ENV', projectsService]);
 
-  function projectsService($q, baseServiceClass) {
+  function projectsService($q, baseServiceClass, ENV) {
     var ServiceClass = baseServiceClass.extend({
       init: function() {
         this._super();
@@ -13,12 +13,13 @@
       },
       getFirst: function() {
         var deferred = $q.defer();
+        var savePageSize = this.pageSize;
         this.pageSize = 1;
         /*jshint camelcase: false */
         this.getList().then(function(projects) {
           deferred.resolve(projects[0]);
         });
-        this.pageSize = null;
+        this.pageSize = savePageSize;
 
         return deferred.promise;
       }
