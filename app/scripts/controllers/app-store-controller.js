@@ -191,7 +191,7 @@
       formatChoices: function(items) {
         return items.map(function(item) {
           return {
-            value: item.url || item.uuid,
+            value: item.url,
             display_name: item.name,
             item: item
           }
