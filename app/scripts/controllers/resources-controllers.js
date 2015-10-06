@@ -95,10 +95,10 @@
               vm.entityOptions.entityData.importLinkText = 'Import';
               if (!vm.projectHasNonSharedService(project)) {
                 vm.entityOptions.entityData.importDisabled = true;
-                vm.entityOptions.entityData.importLinkTooltip = 'Import is not possible as there are no personal provider accounts registered';
+                vm.entityOptions.entityData.importLinkTooltip = 'Import is not possible as there are no personal provider accounts registered.';
               } else {
                 vm.entityOptions.entityData.importDisabled = false;
-                vm.entityOptions.entityData.importLinkTooltip = null;
+                vm.entityOptions.entityData.importLinkTooltip = 'Import resources from the registered provider accounts.';
               }
             }
           }
