@@ -269,6 +269,19 @@
           return order.indexOf(a.name) - order.indexOf(b.name);
         });
         this.sortFlavors();
+        this.attachIconsToImages();
+      },
+      attachIconsToImages: function() {
+        var field = this.findFieldByName('image');
+        if (!field) {
+          return;
+        }
+        for (var i = 0; i < field.choices.length; i++) {
+          var choice = field.choices[i];
+          if (choice.display_name.indexOf('Visual Studio') != -1) {
+            choice.icon = 'visual-studio';
+          }
+        }
       },
       toggleChoicesLimit: function(field) {
         if (field.limit == this.limitChoices) {
