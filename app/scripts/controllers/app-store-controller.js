@@ -200,20 +200,17 @@
       setFields: function(formOptions, validChoices) {
         this.fields = [];
         for (var name in formOptions) {
-          if (formOptions[name].read_only || name == this.UNIQUE_FIELDS.service_project_link) {
+          var options = formOptions[name];
+          if (options.read_only || name == this.UNIQUE_FIELDS.service_project_link) {
             continue;
           }
 
-          var choices;
-          var type = formOptions[name].type;
-          if (type == 'field' || type == 'choice') {
+          var type = options.type;
+          if (type == 'field') {
             type = 'choice';
-            if (name in validChoices) {
-              choices = validChoices[name];
-            } else {
-              choices = formOptions[name].choices;
-            }
           }
+
+          var choices = validChoices[name] || options.choices;
 
           if (name == 'user_data') {
             type = 'text';
@@ -225,10 +222,10 @@
             ssh_public_key: 'lock'
           };
           var icon = icons[name] || 'cloud';
-          var label = formOptions[name].label;
-          var required = formOptions[name].required;
+          var label = options.label;
+          var required = options.required;
           var visible = required || name == 'ssh_public_key';
-          var help_text = formOptions[name].help_text;
+          var help_text = options.help_text;
           var min, max, units;
 
           if (name == 'system_volume_size') {
@@ -571,9 +568,6 @@
 (function() {
   angular.module('ncsaas').filter('mb2gb', function() {
     return function(input) {
-      if (!angular.isNumber(input)) {
-        return input;
-      }
       if (input < 1024) {
         return input + ' MB';
       }
