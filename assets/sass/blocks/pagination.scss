@@ -3,15 +3,9 @@
     color: #C0C0C0;
 
     .column {
-        width: 50%;
+        width: 100%;
         float: left;
         padding-top: 6px;
-
-        &.right {
-            text-align: right;
-            float: right;
-        }
-
         a.page-size {
             @include property(margin-left, 10);
             @include inline-middle;

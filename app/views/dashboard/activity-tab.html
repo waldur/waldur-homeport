@@ -66,6 +66,7 @@
             <div class="white-box">
                 <ul>
                     <li ng-repeat="alert in DashboardController.alerts" ng-class="{'fail': alert.severity=='error'}">
+                        <div class="icon"></div>
                         <div class="left-p">
                             <span ng-bind-html="::alert.html_message"></span>
                         </div>
@@ -88,7 +89,6 @@
                 <ul>
                     <li ng-repeat="event in DashboardController.events"
                         class="recent-alert" ng-class="{'error-event': event.levelname == 'ERROR'}">
-                        <div class="icon"></div>
                         <div class="left-p">
                             <span><event-format event="event"/></span>
                         </div>
