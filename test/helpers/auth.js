@@ -17,6 +17,10 @@ module.exports.login = function(user) {
 module.exports.logout = function(user) {
   browser.get('/#/dashboard/');
 
-  element(by.css('ul.nav-list.context > li:nth-child(4) > a')).click();
-  element(by.cssContainingText('ul.nav-list.context > li:nth-child(4) > ul > li > a', 'Logout')).click();
+  browser.wait(function (){
+    return element(by.css('.user-dropdown .user-name')).isPresent();
+  }, 10000);
+
+  element(by.css('.user-dropdown .user-name')).click();
+  element(by.cssContainingText('ul.nav-sublist.user-area li a', 'Logout')).click();
 };

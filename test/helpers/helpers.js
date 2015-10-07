@@ -6,8 +6,16 @@ module.exports.getUUID = function() {
 };
 
 module.exports.chooseCustomer = function(customerName) {
-  element(by.css('.dropdown.customers .active-context')).click();
+  element(by.css('.dropdown.customers .customer-name')).click();
   element(by.cssContainingText('.dropdown.customers .nav-sublist li a', customerName)).click();
+  browser.wait(function() {
+    return element(by.cssContainingText('.details-container h1', 'Organization')).isPresent();
+  }, 10000);
+};
+
+module.exports.chooseProject = function(projectName) {
+  element(by.css('.dropdown.project-dropdown .project-context')).click();
+  element(by.cssContainingText('.dropdown.project-dropdown .nav-sublist li a', projectName)).click();
 };
 
 /**
