@@ -24,7 +24,7 @@
                 </p>
                 <p ng-if="HelpDetails.model.name == 'DigitalOcean'">In order to be able to access your DigitalOcean via API you need to have a token. DigitalOcean tokens can be created with read or read-write scope, latter is required if you want to modify your account in any way.
                 </p>
-                <p><a href="{{ HelpDetails.model.link }}" target="_blank">Instruction on the official site</a></p>
+                <p ng-if="HelpDetails.model.link"><a href="{{ HelpDetails.model.link }}" target="_blank">Instruction on the official site</a></p>
             </div>
             <div ng-if="!HelpDetails.model">
                 <h2>No instructions</h2>

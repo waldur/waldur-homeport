@@ -116,19 +116,32 @@
         };
       },
 
+      search: function() {
+        var vm = this,
+            searchInput = vm.searchInput.toLowerCase();
+
+        vm.list = vm.service.list.filter(function(item) {
+          if (
+            item.label.toLowerCase().indexOf(searchInput) >= 0
+            || item.destination.toLowerCase().indexOf(searchInput) >= 0
+          ) {
+            return item;
+          }
+        });
+      },
+
       afterGetList: function() {
         this.list.forEach(function(item) {
           item.label = $filter('titleCase')(item.$type);
           item.destination = item.destination_url || item.email;
           item.entities = eventRegistry.types_to_entities(item.event_types);
-        })
+        });
+        this.service.list = this.list;
       }
     });
-
-    controllerScope.__proto__ = new Controller();
+    Object.setPrototypeOf(controllerScope, new Controller());
   }
 })();
-
 
 (function() {
   angular.module('ncsaas')
@@ -187,7 +200,7 @@
         this.gotoList();
       },
       gotoList: function() {
-        $state.go('profile.details', {'tab': 'notifications'});
+        $state.go('profile.details', {tab: 'notifications'});
       }
     });
 

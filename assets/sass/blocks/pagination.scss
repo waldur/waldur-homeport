@@ -3,9 +3,18 @@
     color: #C0C0C0;
 
     .column {
-        width: 100%;
+        width: 50%;
         float: left;
         padding-top: 6px;
+
+        &.right {
+            text-align: right;
+            float: right;
+            @include bp(xs) {
+                width: 130px;
+            }
+        }
+
         a.page-size {
             @include property(margin-left, 10);
             @include inline-middle;

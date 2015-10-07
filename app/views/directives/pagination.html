@@ -14,5 +14,11 @@
     </div>
 
     <div class="column">Showing {{ pagesList.service.sliceStart }}-{{ pagesList.service.sliceEnd }} of {{ pagesList.service.resultCount }}</div>
+    <div class="column right">
+        <a href="{{pagesHref}}" class="page-size"
+           ng-repeat="pageSize in pagesList.pageSizes"
+           ng-click="pagesList.changePageSize(pageSize)"
+           ng-class="{active: pageSize === pagesList.currentPageSize}">{{pageSize}}</a>
+    </div>
     <div class="clear"></div>
 </div>

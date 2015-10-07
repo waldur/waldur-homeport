@@ -61,7 +61,7 @@
             width: 55px;
             font-size: 50px;
             text-align: center;
-            &.azure, &.gitlab, &.oracle {
+            &.gitlab, &.oracle {
                 width: 150px;
                 margin: 0px auto;
             }
@@ -72,7 +72,7 @@
             box-sizing: border-box;
             text-align: center;
             margin-left: 10px;
-            &.azure, &.gitlab, &.oracle {
+            &.gitlab, &.oracle {
                 display: none;
             }
             &.full {

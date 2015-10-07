@@ -77,15 +77,15 @@
             },
             {
               name: 'Access',
-              propertyName: 'external_ips',
-              emptyText: 'No access info',
-              type: ENTITYLISTFIELDTYPES.listInField
+              propertyName: 'access_info_text',
+              urlProperyName: 'access_info_url',
+              type: ENTITYLISTFIELDTYPES.linkOrText
             }
           ]
         };
         var vm = this;
-        currentStateService.getProject().then(function(response) {
-          if (response) {
+        currentStateService.getProject().then(function(project) {
+          if (project) {
             if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('resources') == -1) {
               vm.entityOptions.entityData.createLink = 'appstore.store';
               vm.entityOptions.entityData.createLinkText = 'Create';
@@ -93,9 +93,41 @@
             if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('import') == -1) {
               vm.entityOptions.entityData.importLink = 'import.import';
               vm.entityOptions.entityData.importLinkText = 'Import';
+              if (!vm.projectHasNonSharedService(project)) {
+                vm.entityOptions.entityData.importDisabled = true;
+                vm.entityOptions.entityData.importLinkTooltip = 'Import is not possible as there are no personal provider accounts registered.';
+              } else {
+                vm.entityOptions.entityData.importDisabled = false;
+                vm.entityOptions.entityData.importLinkTooltip = 'Import resources from the registered provider accounts.';
+              }
             }
           }
         });
+      },
+      projectHasNonSharedService: function(project) {
+        for (var i = 0; i < project.services.length; i++) {
+          var service = project.services[i];
+          if (!service.shared) {
+            return true;
+          }
+        }
+        return false;
+      },
+      afterGetList: function() {
+        for (var i = 0; i < this.list.length; i++) {
+          var item = this.list[i];
+          if (item.external_ips) {
+            if (item.external_ips.length != 0) {
+              item.access_info_text = item.external_ips.join(', ');
+            } else {
+              item.access_info_text = 'No access info';
+            }
+          }
+          else if (item.rdp) {
+            item.access_info_url = item.rdp;
+            item.access_info_text = 'Access';
+          }
+        }
       },
       stopResource:function(resource) {
         resource.$action('stop', this.reInitResource.bind(this, resource), this.handleActionException);

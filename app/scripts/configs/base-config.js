@@ -59,7 +59,7 @@ angular.module('ncsaas')
     helpList: [
       {
         name: 'Azure',
-        link: 'https://msdn.microsoft.com/en-us/library/azure/gg551722.aspx'
+        link: null
       },
       {
         name: 'Amazon',
@@ -105,5 +105,6 @@ angular.module('ncsaas')
     },
 
     countsCacheTime: 60, // seconds
+    enablePurchaseCostDisplay: true
 
   });

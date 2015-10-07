@@ -16,7 +16,8 @@ angular.module('ncsaas')
       'import',
       'templates',
       'monitoring',
-      'projectGroups'
+      'projectGroups',
+      'plans'
     ],
     featuresVisible: false,
     appStoreCategories: [
@@ -24,7 +25,7 @@ angular.module('ncsaas')
         name: 'VMs',
         type: 'provider',
         icon: 'desktop',
-        services: ['OpenStack']
+        services: ['Azure']
       },
       {
         name: 'APPLICATIONS',
@@ -37,5 +38,8 @@ angular.module('ncsaas')
     serviceCategories: [],
     homeTemplate: 'views/home/squ-student-cloud/home.html',
     homeHeaderTemplate: 'views/partials/squ-student-cloud/site-header.html',
-    homeLoginTemplate: 'views/home/squ-student-cloud/login.html'
+    homeLoginTemplate: 'views/home/squ-student-cloud/login.html',
+    enablePurchaseCostDisplay: false,
+    VmProviderSettingsUuid: "Set UUID of a shared service setting for VMs",
+    gitLabProviderSettingsUuid: "Set UUID of a shared service setting for GitLab"
   });

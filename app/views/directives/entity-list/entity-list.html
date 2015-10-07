@@ -18,11 +18,16 @@
                    ui-sref="{{ entityOptions.entityData.createLink }}" class="button">
                     <span>{{ entityOptions.entityData.createLinkText }}</span>
                 </a>
-                <a ng-if="entityOptions.entityData.importLink"
-                   visible="import"
-                   ui-sref="{{ entityOptions.entityData.importLink }}" class="button">
-                    <span>{{ entityOptions.entityData.importLinkText }}</span>
-                </a>
+                <span class="button-tooltip"
+                      ng-if="entityOptions.entityData.importLink"
+                      title="{{ entityOptions.entityData.importLinkTooltip }}"
+                      visible="import">
+                    <a class="button"
+                       ng-class="{'disabled': entityOptions.entityData.importDisabled}"
+                       ui-sref="{{ entityOptions.entityData.importLink }}">
+                        {{ entityOptions.entityData.importLinkText }}
+                    </a>
+                </span>
                 <list-cache-reset list-controller="entityList"
                                   list-service="entityService"></list-cache-reset>
             </li>
@@ -39,12 +44,16 @@
                    ui-sref="{{ entityOptions.entityData.createLink }}" class="button">
                     {{ entityOptions.entityData.createLinkText }}
                 </a>
-                <a ng-if="entityOptions.entityData.importLink"
-                   visible="import"
-                   ui-sref="{{ entityOptions.entityData.importLink }}" class="button">
-                    {{ entityOptions.entityData.importLinkText }}
-                </a>
-
+                <span class="button-tooltip"
+                      ng-if="entityOptions.entityData.importLink"
+                      title="{{ entityOptions.entityData.importLinkTooltip }}"
+                      visible="import">
+                    <a class="button"
+                       ng-class="{'disabled': entityOptions.entityData.importDisabled}"
+                       ui-sref="{{ entityOptions.entityData.importLink }}">
+                        {{ entityOptions.entityData.importLinkText }}
+                    </a>
+                </span>
                 <list-cache-reset list-controller="entityList"
                                   list-service="entityService"></list-cache-reset>
             </div>
@@ -137,6 +146,18 @@
                         </span>
                         <span ng-switch-when="listInField" ng-if="entity[field.propertyName].length == 0">
                             <i>{{ field.emptyText }}</i>
+                        </span>
+
+                        <span ng-switch-when="linkOrText">
+                            <a ng-if="::entity[field.urlProperyName]"
+                               href="{{ ::entity[field.urlProperyName] }}"
+                               target="_blank">
+                                <b class="icon external-link"></b>
+                                {{ ::entity[field.propertyName] }}
+                            </a>
+                            <span ng-if="::!entity[field.urlProperyName]">
+                                {{ ::entity[field.propertyName] }}
+                            </span>
                         </span>
 
                         <span ng-switch-when="entityStatus" class="status"

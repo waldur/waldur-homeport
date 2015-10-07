@@ -75,6 +75,7 @@
     }
 
     return {
+      list: [],
       types: function() {
         var types = [];
         for (var type in endpoints) {
