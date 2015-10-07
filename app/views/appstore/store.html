@@ -265,7 +265,7 @@
 
             </aside>
 
-            <section ng-show="AppStore.selectedResourceType" class="appstore-purchase">
+            <section ng-show="AppStore.selectedResourceType" class="appstore-purchase" title="{{ AppStore.getTooltip() }}">
                 <button ng-class="{'disabled': !AppStore.canSave()}" ng-click="AppStore.save()">
                 <img ng-show="AppStore.enablePurchaseCostDisplay" src="/static/images/appstore/icon-curt.png" alt=""/>
                 <span>{{ AppStore.enablePurchaseCostDisplay ? 'Create' : 'Purchase' }}</span>
