@@ -48,9 +48,11 @@
 (function(){
 
   angular.module('ncsaas')
-    .service('baseControllerListClass', ['baseControllerClass', 'ENV', baseControllerListClass]);
+    .service('baseControllerListClass', [
+      'baseControllerClass', 'ENV', '$rootScope', 'currentStateService', baseControllerListClass
+    ]);
 
-  function baseControllerListClass(baseControllerClass, ENV) {
+  function baseControllerListClass(baseControllerClass, ENV, $rootScope, currentStateService) {
     /**
      * Use controllerScope.__proto__ = new Controller() in needed controller
      * use this.controllerScope for changes in event handler
@@ -163,6 +165,17 @@
         if (index !== -1) {
           this.selectedInstances.splice(index, 1);
         }
+
+        currentStateService.reloadCurrentCustomer(function() {
+          $rootScope.$broadcast('checkQuotas:refresh');
+          $rootScope.$broadcast('customerBalance:refresh');
+        });
+        /*var uuid = currentStateService.getCustomerUuid();
+        customersService.$get(uuid).then(function(customer) {
+          currentStateService.setCustomer(customer);
+          $rootScope.$broadcast('checkQuotas:refresh');
+        });*/
+
       }
     });
 
@@ -174,9 +187,9 @@
 (function(){
 
   angular.module('ncsaas')
-    .service('baseControllerAddClass', ['$state', 'baseControllerClass', baseControllerAddClass]);
+    .service('baseControllerAddClass', ['$rootScope', '$state', 'baseControllerClass', 'currentStateService', baseControllerAddClass]);
 
-  function baseControllerAddClass($state, baseControllerClass) {
+  function baseControllerAddClass($rootScope, $state, baseControllerClass, currentStateService) {
     /**
      * Use controllerScope.__proto__ = new Controller() in needed controller
      * use this.controllerScope for changes in event handler
@@ -219,7 +232,12 @@
       saveInstance: function() {
         return this.instance.$save();
       },
-      afterSave: function() {},
+      afterSave: function() {
+        currentStateService.reloadCurrentCustomer(function() {
+          $rootScope.$broadcast('checkQuotas:refresh');
+          $rootScope.$broadcast('customerBalance:refresh');
+        });
+      },
       activate: function() {},
       successRedirect: function() {
         if (this.redirectToDetailsPage) {

@@ -62,7 +62,7 @@
               title: 'Import resource',
               clickFunction: function(project) {
                 $rootScope.$broadcast('adjustCurrentProject', project);
-                $state.go('import.import')
+                $state.go('import.import');
               }
             });
           }
@@ -337,6 +337,7 @@
         });
         vm.addUser();
         $rootScope.$broadcast('refreshProjectList', {model: vm.instance, new: true, current: true});
+        vm._super();
       },
       onError: function(errorObject) {
         this.errorFlash(errorObject.data.detail);

@@ -13,6 +13,7 @@
     var vm = this;
     vm.getCustomer = getCustomer;
     vm.setCustomer = setCustomer;
+    vm.reloadCurrentCustomer = reloadCurrentCustomer;
     vm.isCustomerDefined = false;
 
     vm.getActiveItem = getActiveItem;
@@ -56,7 +57,18 @@
       customer = $q.when(newCustomer);
       customer.then(function(response) {
         $window.localStorage[ENV.currentCustomerUuidStorageKey] = response.uuid;
-      })
+      });
+    }
+
+    function reloadCurrentCustomer(callback) {
+      vm = this;
+      var uuid = vm.getCustomerUuid();
+      vm.getCustomer().then(function(customer) {
+        customer.$get(uuid).then(function(customer) {
+          vm.setCustomer(customer);
+          callback(customer);
+        });
+      });
     }
 
     function setProject(newProject) {

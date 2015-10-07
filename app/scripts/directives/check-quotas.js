@@ -2,78 +2,108 @@
 
 (function() {
   angular.module('ncsaas')
-    .directive('checkQuotas', ['currentStateService', '$compile', detailsView]);
+    .directive('checkQuotas', ['currentStateService', '$state', checkQuotas]);
 
-  function detailsView(currentStateService, $compile) {
-    return {
+  function checkQuotas(currentStateService, $state) {
+    var directive = {
       restrict: 'A',
       replace: true,
+      transclude: true,
+      templateUrl: "views/directives/check-quotas.html",
       scope: {
         checkQuotas: '@',
         showMessage: '=',
-        tooltipType: '@'
+        tooltipType: '@',
+        sref: '@',
+        classLink: '@'
       },
-      link: function(scope, element) {
+      controller: checkQuotasController,
+      link: checkQuotasLink
+    };
+
+    function checkQuotasLink(scope, element) {
+
+      var refresh = function() {
         // checkQuotas - quota type: resource, project, service, user
         // tooltipType: listItems, emptyListItems, addUser
         // showMessage: boolean
         var item = scope.checkQuotas,
           tooltipType = scope.tooltipType,
           triangleBefore,
-          triangleAfter,
-          tooltipStyle = '',
-          plansLink;
+          triangleAfter;
 
         currentStateService.getCustomer().then(function(response) {
 
-          plansLink = 'organizations.plans({uuid:\''+ response.uuid +'\'})';
+          triangleAfter = triangleBefore = Math.floor(element[0].offsetWidth / 2) + 1;
 
-          triangleBefore = Math.floor(element[0].parentElement.offsetWidth / 2)+1;
-          triangleAfter = triangleBefore + 1;
-          triangleBefore = 'style="right: '+ triangleBefore.toString() +'px;"';
-          triangleAfter = 'style="right: '+ triangleAfter.toString() +'px;"';
-          if (tooltipType == 'userDropDown') {
-            tooltipStyle = 'style="top:75px;"';
+          scope.triangleBefore = {right: triangleBefore};
+          scope.triangleAfter = {right: triangleAfter};
+
+          if (tooltipType === 'userDropDown') {
+            scope.tooltipStyle = {top: '75px'};
           }
-          if (tooltipType == 'projectDropDown') {
-            tooltipStyle = 'style="top:110px;"';
+          if (tooltipType === 'projectDropDown') {
+            scope.tooltipStyle = {top: '110px'};
           }
-          if (tooltipType == 'addUser') {
-            triangleBefore = 'style="left: 20px;"';
-            triangleAfter = 'style="left: 21px;"';
-            tooltipStyle = 'style="top:115%; left:0; width:350px"';
+          if (tooltipType === 'addUser') {
+            scope.triangleBefore = {left: '20px'};
+            scope.triangleAfter = {left: '21px'};
+            scope.tooltipStyle = {top: '115%', left:0, width: '350px'};
           }
 
-          var template = '<div '+ tooltipStyle +' stoppropagation class="tooltip quota-tooltip" ng-show="showMessage">' +
-            '<div '+ triangleBefore +' class="triangle-before"></div>' +
-            '<div '+ triangleAfter +' class="triangle-after"></div>' +
-            '<div class="tooltip-title">' +
-            '<div class="close" ng-click="showMessage = false;"></div>' +
-            '<div class="clear"></div>' +
-            '</div>' +
-            '<div class="tooltip-text">You have exceeded maximum number of quotas. To update current plan visit ' +
-            '<a ui-sref="'+ plansLink +'">plans page</a></div>' +
-            '</div>';
-          var linkFn = $compile(template);
-          var content = linkFn(scope);
+          scope.tooltipType = tooltipType;
+          scope.plansLink = 'organizations.plans({uuid:\'' + response.uuid + '\'})';
+          scope.enable = false;
 
-          for (var i=0;i<response.quotas.length; i++) {
+          for (var i = 0; i<response.quotas.length; i++) {
             var value = response.quotas[i];
             value.name = value.name.replace(/nc_|_count/gi,'');
-            if (item && value.name == item && value.limit > -1
-              && (value.limit == value.usage || value.limit == 0) /*&& showMessage*/) {
-              element.bind('click', function(e) {
-                e.stopPropagation();
-              });
+            if (item && value.name === item && value.limit > -1 && (value.limit === value.usage || value.limit === 0)) {
+              scope.enable = true;
               scope.showMessage = false;
-              element.removeAttr('href');
-              element.addClass('disabled-view');
-              element.after(content);
               break;
             }
           }
+
+          scope.classes['disabled-view'] = scope.enable;
+
+        });
+      };
+
+      refresh();
+      scope.$on('checkQuotas:refresh', function() {
+        refresh();
+      });
+    }
+
+    checkQuotasController.$inject = ['$scope'];
+    function checkQuotasController($scope) {
+
+      $scope.classes = {};
+
+      var classes;
+      if ($scope.classLink && (classes = $scope.classLink.split(' '))) {
+        classes.forEach(function(i) {
+          $scope.classes[i] = true;
         });
       }
-    };
+
+      $scope.closeTooltip = function() {
+        $scope.showMessage = false;
+      };
+
+      $scope.handleAction = function(e) {
+        if ($scope.enable) {
+          $scope.showMessage = true;
+          e.preventDefault();
+          e.stopPropagation();
+        } else {
+          $state.go($scope.sref);
+        }
+      };
+
+    }
+
+    return directive;
   }
 })();

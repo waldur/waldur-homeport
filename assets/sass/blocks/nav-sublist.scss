@@ -80,7 +80,8 @@
             } // lightmd
 
         } // customers
-        > a {
+        > a,
+        > div > a {
             display: block;
             @include property(font-size, $small-font);
             @include property(margin, 0 10);
