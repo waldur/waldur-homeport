@@ -542,6 +542,21 @@
         }
         return true;
       },
+      getTooltip: function() {
+        if (!this.instance) {
+          return "Instance is not configured";
+        }
+        var fields = [];
+        for (var name in this.allFormOptions) {
+          var options = this.allFormOptions[name];
+          if (options.required && !this.instance[name]) {
+            fields.push(options.label);
+          }
+        }
+        if (fields.length > 0) {
+          return "Please specify " + fields.join(", ").toLowerCase();
+        }
+      },
       saveInstance: function() {
         var resourceUrl = this.serviceMetadata.resources[this.selectedResourceType];
         var instance = servicesService.$create(resourceUrl);
