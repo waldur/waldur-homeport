@@ -116,16 +116,14 @@
       afterGetList: function() {
         for (var i = 0; i < this.list.length; i++) {
           var item = this.list[i];
-          if (item.external_ips) {
-            if (item.external_ips.length != 0) {
-              item.access_info_text = item.external_ips.join(', ');
-            } else {
-              item.access_info_text = 'No access info';
-            }
+          if (item.external_ips && item.external_ips.length > 0) {
+            item.access_info_text = item.external_ips.join(', ');
           }
-          else if (item.rdp) {
+          else if (item.rdp && item.state == 'Online') {
             item.access_info_url = item.rdp;
             item.access_info_text = 'Access';
+          } else {
+            item.access_info_text = 'No access info';
           }
         }
       },
