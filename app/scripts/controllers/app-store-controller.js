@@ -561,12 +561,16 @@
       },
       onError: function() {
         var message = '';
-        for (var name in this.errors) {
-          if (this.allFormOptions[name]) {
-            message += this.allFormOptions[name].label + ': ' + this.errors[name] + '<br/>';
-          } else {
-            message += name + ': ' + this.errors[name] + '<br/>';
+        if (angular.isObject(this.errors)) {
+          for (var name in this.errors) {
+            if (this.allFormOptions[name]) {
+              message += this.allFormOptions[name].label + ': ' + this.errors[name] + '<br/>';
+            } else {
+              message += name + ': ' + this.errors[name] + '<br/>';
+            }
           }
+        } else {
+          message = 'Server error occurred';
         }
         this.errorFlash(message);
       },
