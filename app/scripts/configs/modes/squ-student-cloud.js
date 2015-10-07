@@ -25,7 +25,7 @@ angular.module('ncsaas')
         name: 'VMs',
         type: 'provider',
         icon: 'desktop',
-        services: ['OpenStack']
+        services: ['Azure']
       },
       {
         name: 'APPLICATIONS',

@@ -278,6 +278,15 @@
           if (choice.display_name.indexOf('Visual Studio') != -1) {
             choice.icon = 'visual-studio';
           }
+          else if (choice.display_name.indexOf('CentOS') != -1) {
+            choice.icon = 'centos';
+          }
+          else if (choice.display_name.indexOf('Windows') != -1) {
+            choice.icon = 'windows';
+          }
+          else if (choice.display_name.indexOf('Ubuntu') != -1) {
+            choice.icon = 'ubuntu';
+          }
         }
       },
       toggleChoicesLimit: function(field) {
