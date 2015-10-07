@@ -656,6 +656,13 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+
+    @include bp(xs) {
+        display: inline-block;
+    } // xs
+    @include bp(sm) {
+        display: inline-block;
+    } // sm
   }
 
   span.cell-default-span {

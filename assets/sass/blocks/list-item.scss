@@ -216,10 +216,13 @@
                 width: 40px;
             }
             &.message {
-                width: 70%;
+                width: auto;
+                line-height: 1.5;
+                white-space: normal;
             }
             &.date {
                 color: #929391;
+                width: 150px;
             }
         } // &.additional-cell
         .more-details {

@@ -96,20 +96,24 @@
 
         this.entityOptions = {
           entityData: {
-            noDataText: 'No alerts yet'
+            noDataText: 'No alerts yet',
+            hideActionButtons: true,
+            hideTableHead: true
           },
           list: [
             {
               name: 'Message',
               propertyName: 'html_message',
               className: 'message',
-              type: ENTITYLISTFIELDTYPES.html
+              type: ENTITYLISTFIELDTYPES.html,
+              showForMobile: ENTITYLISTFIELDTYPES.showForMobile
             },
             {
               name: 'Date',
               propertyName: 'created',
               className: 'date',
-              type: ENTITYLISTFIELDTYPES.date
+              type: ENTITYLISTFIELDTYPES.date,
+              showForMobile: ENTITYLISTFIELDTYPES.showForMobile
             }
           ]
         };
