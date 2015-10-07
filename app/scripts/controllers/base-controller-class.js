@@ -170,11 +170,6 @@
           $rootScope.$broadcast('checkQuotas:refresh');
           $rootScope.$broadcast('customerBalance:refresh');
         });
-        /*var uuid = currentStateService.getCustomerUuid();
-        customersService.$get(uuid).then(function(customer) {
-          currentStateService.setCustomer(customer);
-          $rootScope.$broadcast('checkQuotas:refresh');
-        });*/
 
       }
     });
