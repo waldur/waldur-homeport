@@ -1,6 +1,6 @@
 <div>
     <section class="title-wrapper">
-        <div class="container">
+        <div class="container details-container">
             <div class="left-side">
                 <h1 ng-if="options.title ">{{ options.title }}</h1>
                 <a ng-if="options.listState" ui-sref="{{ options.listState }}"
@@ -57,6 +57,12 @@
                 </span>
             </div>
         </div>
+        <customer-balance ng-if="controller.detailsViewOptions.title == 'Organization'"
+                          customer-balance-type="details"
+                          customer-add-credit="controller.addCredit"
+                          customer-chart-data="controller.chartData"
+                          customer-show-chart="controller.showChart"></customer-balance>
+        <div class="clear"></div>
     </section>
     <div class="profile-content">
         <div class="container">

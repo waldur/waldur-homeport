@@ -69,7 +69,9 @@
             <h3>Alerts</h3>
             <div class="white-box">
                 <ul>
-                    <li ng-repeat="alert in DashboardController.alerts" ng-class="{'fail': alert.severity=='error'}">
+                    <li ng-repeat="alert in DashboardController.alerts"
+                        ng-class="{'fail': alert.severity=='error', 'hovered': isHovered}"
+                        ng-click="isHovered = !isHovered">
                         <div class="left-p">
                             <span ng-bind-html="::alert.html_message"></span>
                         </div>
@@ -91,7 +93,9 @@
             <div class="white-box">
                 <ul>
                     <li ng-repeat="event in DashboardController.events"
-                        class="recent-alert" ng-class="{'error-event': event.levelname == 'ERROR'}">
+                        class="recent-alert"
+                        ng-class="{'error-event': event.levelname == 'ERROR', 'hovered': isHovered}"
+                        ng-click="isHovered = !isHovered">
                         <div class="icon"></div>
                         <div class="left-p">
                             <span><event-format event="event"/></span>

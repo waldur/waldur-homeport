@@ -42,6 +42,9 @@
       },
 
       currency: ENV.currency,
+      enablePurchaseCostDisplay: ENV.enablePurchaseCostDisplay,
+      VmProviderSettingsUuid: ENV.VmProviderSettingsUuid,
+      gitLabProviderSettingsUuid: ENV.gitLabProviderSettingsUuid,
 
       secondStep: false,
       resourceTypesBlock: false,
@@ -65,6 +68,7 @@
       configureStepNumber: 4,
       selectedPackageName: null,
       agreementShow: false,
+      chooseResourceTypeStepNumber: 3,
 
       // cart
       total: 0,
@@ -106,8 +110,27 @@
         this.fields = [];
         this.resetPriceItems();
 
-        var services = this.categoryServices[this.selectedCategory.name]
-        if (services && services.length == 1) {
+        var services = this.categoryServices[this.selectedCategory.name];
+        if (ENV.VmProviderSettingsUuid && this.selectedCategory.name == ENV.appStoreCategories[0].name) {
+          for (var i = 0; i < services.length; i++) {
+            if (services[i].settings_uuid == ENV.VmProviderSettingsUuid) {
+              this.setService(services[i]);
+              this.configureStepNumber = 2;
+              this.secondStep = false;
+              break;
+            }
+          }
+        } else if (ENV.gitLabProviderSettingsUuid && this.selectedCategory.name == ENV.appStoreCategories[1].name) {
+          for (var i = 0; i < services.length; i++) {
+            if (services[i].settings_uuid == ENV.gitLabProviderSettingsUuid) {
+              this.setService(services[i]);
+              this.chooseResourceTypeStepNumber = 2;
+              this.configureStepNumber = 3;
+              this.secondStep = false;
+              break;
+            }
+          }
+        } else if (services && services.length == 1) {
           this.setService(services[0]);
         }
       },
@@ -177,20 +200,17 @@
       setFields: function(formOptions, validChoices) {
         this.fields = [];
         for (var name in formOptions) {
-          if (formOptions[name].read_only || name == this.UNIQUE_FIELDS.service_project_link) {
+          var options = formOptions[name];
+          if (options.read_only || name == this.UNIQUE_FIELDS.service_project_link) {
             continue;
           }
 
-          var choices;
-          var type = formOptions[name].type;
+          var type = options.type;
           if (type == 'field') {
             type = 'choice';
-            if (name in validChoices) {
-              choices = validChoices[name];
-            } else {
-              choices = formOptions[name].choices;
-            }
           }
+
+          var choices = validChoices[name] || options.choices;
 
           if (name == 'user_data') {
             type = 'text';
@@ -202,10 +222,10 @@
             ssh_public_key: 'lock'
           };
           var icon = icons[name] || 'cloud';
-          var label = formOptions[name].label;
-          var required = formOptions[name].required;
+          var label = options.label;
+          var required = options.required;
           var visible = required || name == 'ssh_public_key';
-          var help_text = formOptions[name].help_text;
+          var help_text = options.help_text;
           var min, max, units;
 
           if (name == 'system_volume_size') {
@@ -246,6 +266,19 @@
           return order.indexOf(a.name) - order.indexOf(b.name);
         });
         this.sortFlavors();
+        this.attachIconsToImages();
+      },
+      attachIconsToImages: function() {
+        var field = this.findFieldByName('image');
+        if (!field) {
+          return;
+        }
+        for (var i = 0; i < field.choices.length; i++) {
+          var choice = field.choices[i];
+          if (choice.display_name.indexOf('Visual Studio') != -1) {
+            choice.icon = 'visual-studio';
+          }
+        }
       },
       toggleChoicesLimit: function(field) {
         if (field.limit == this.limitChoices) {

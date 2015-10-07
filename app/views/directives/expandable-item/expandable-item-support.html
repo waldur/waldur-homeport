@@ -43,7 +43,7 @@
             <div class="decision">
                 <div class="col">
                     <a class="button-apply" ng-click="expandableList.addComment(expandableElement)"
-                       ng-class="{'disabled': expandableElement.newCommentSaving}">Submit message</a>
+                       ng-class="{'disabled': expandableElement.newCommentSaving || !expandableElement.newCommentBody}">Submit message</a>
                 </div>
             </div>
         </div>

@@ -61,7 +61,7 @@
                     </section>
 
                     <section class="step-2" ng-show="AppStore.resourceTypesBlock">
-                        <div class="step-title"><span>Step 3: Choose resource type</span></div>
+                        <div class="step-title"><span>Step {{ AppStore.chooseResourceTypeStepNumber }}: Choose resource type</span></div>
                         <div class="appstore-templates">
                             <!-- service -->
                             <div class="appstore-template"
@@ -77,7 +77,7 @@
                     <section class="step-3" ng-show="AppStore.selectedResourceType" block-ui="resource-properties">
                         <div class="step-title">
                             <span>
-                                Step {{ AppStore.configureStepNumber }}: Configure {{ AppStore.serviceType }} Resource
+                                Step {{ AppStore.configureStepNumber }}: Configure {{ AppStore.secondStep && AppStore.serviceType || ''}} Resource
                                 {{ AppStore.selectedResourceType }}
                             </span>
                         </div>
@@ -159,18 +159,20 @@
                                                  ng-repeat="choice in field.choices | filter: {'display_name': field.searchQuery} | limitTo: field.limit"
                                                  ng-click="AppStore.doChoice(field.name, choice)"
                                                  ng-class="{'state': AppStore.instance[field.name] == choice.value, 'disabled': choice.disabled}">
-                                                <div class="icon {{ ::field.icon }}"></div>
-                                                <h3 ng-switch="::field.name">
+
+                                                <div ng-if="::!choice.icon" class="icon {{ ::field.icon }}"></div>
+                                                <div ng-if="::choice.icon" class="icon"><img ng-src="/static/images/appstore/icon-{{ ::choice.icon }}.png"></div>
+
+                                                <div ng-switch="::field.name">
                                                     <b ng-switch-when="flavor">
                                                         <p>{{ ::choice.display_name }}</p>
-                                                        <p>CPU: <ng-pluralize count="::choice.item.cores"
-                                                        when="{'1': '1 core', 'other': '{} cores'}"></ng-pluralize></p>
+                                                        <p>CPU: {{ ::choice.item.cores == 1 && '1 core' || choice.item.cores + ' cores'}}</p>
                                                         <p>RAM: {{ ::choice.item.ram | mb2gb }}</p>
                                                         <p>HDD: {{ ::choice.item.disk | mb2gb}}</p>
                                                     </b>
                                                     <b ng-switch-when="size">
-                                                        <p>CPU: <ng-pluralize count="::choice.item.cores"
-                                                        when="{'1': '1 core', 'other': '{} cores'}"></ng-pluralize></p>
+                                                        <p>{{ ::choice.display_name }}</p>
+                                                        <p>CPU: {{ ::choice.item.cores == 1 && '1 core' || choice.item.cores + ' cores'}}</p>
                                                         <p>RAM: {{ ::choice.item.ram | mb2gb }}</p>
                                                         <p>HDD: {{ ::choice.item.disk | mb2gb}}</p>
                                                     </b>
@@ -178,7 +180,7 @@
                                                         <p>{{ ::choice.item.distribution }} {{ ::choice.display_name }}</p>
                                                     </b>
                                                     <b ng-switch-default>{{ choice.display_name }}</b>
-                                                </h3>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="clear"></div>
@@ -232,10 +234,10 @@
             </div>
 
             <aside ng-if="AppStore.renderStore" class="appstore-aside">
-                <h2>
+                <h2 ng-show="AppStore.enablePurchaseCostDisplay">
                     checkout summary
                 </h2>
-                <p>
+                <p ng-show="AppStore.enablePurchaseCostDisplay">
                     Charged to
                     <a ui-sref="organizations.details({uuid: AppStore.currentCustomer.uuid})">{{ AppStore.currentCustomer.name }}</a>
                 </p>
@@ -247,26 +249,26 @@
                             <span>{{ item.name }}</span>
                         </div>
 
-                        <div class="price">{{ item.price || 0 | currency:AppStore.currency }}</div>
+                        <div ng-show="AppStore.enablePurchaseCostDisplay" class="price">{{ item.price || 0 | currency:AppStore.currency }}</div>
                         <div class="clear"></div>
                     </li>
                     <li class="total">
                         <div class="descr">
-                            <span ng-show="AppStore.serviceType">{{ AppStore.serviceType }}</span>
+                            <span ng-show="AppStore.secondStep && AppStore.serviceType">{{ AppStore.serviceType }}</span>
                             <span ng-show="!AppStore.serviceType">No chosen {{ AppStore.selectedCategory.type }}</span>
                             <span>{{ AppStore.instance.name }} {{ AppStore.selectedResourceType }}</span>
                         </div>
-                        <div class="price">{{ AppStore.total | currency:AppStore.currency }}</div>
+                        <div ng-show="AppStore.enablePurchaseCostDisplay" class="price">{{ AppStore.total | currency:AppStore.currency }}</div>
                         <div class="clear"></div>
                     </li>
                 </ul>
 
             </aside>
 
-            <section ng-show="AppStore.secondStep" class="appstore-purchase">
+            <section ng-show="AppStore.selectedResourceType" class="appstore-purchase">
                 <button ng-class="{'disabled': !AppStore.canSave()}" ng-click="AppStore.save()">
-                <img src="/static/images/appstore/icon-curt.png" alt=""/>
-                <span>Purchase</span>
+                <img ng-show="AppStore.enablePurchaseCostDisplay" src="/static/images/appstore/icon-curt.png" alt=""/>
+                <span>{{ AppStore.enablePurchaseCostDisplay ? 'Create' : 'Purchase' }}</span>
                 </button>
             </section>
 

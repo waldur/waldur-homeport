@@ -298,13 +298,24 @@
   }
 
   angular.module('ncsaas')
-    .controller('ProjectAddController', ['projectsService', 'currentStateService',
-      'cloudsService', 'projectCloudMembershipsService', 'baseControllerAddClass',
-      '$rootScope', 'projectPermissionsService', 'usersService', ProjectAddController]);
+    .controller('ProjectAddController', [
+      'projectsService',
+      'currentStateService',
+      'joinServiceProjectLinkService',
+      'baseControllerAddClass',
+      '$rootScope',
+      'projectPermissionsService',
+      'usersService',
+      ProjectAddController]);
 
   function ProjectAddController(
-    projectsService, currentStateService, cloudsService, projectCloudMembershipsService, baseControllerAddClass,
-    $rootScope, projectPermissionsService, usersService) {
+    projectsService,
+    currentStateService,
+    joinServiceProjectLinkService,
+    baseControllerAddClass,
+    $rootScope,
+    projectPermissionsService,
+    usersService) {
     var controllerScope = this;
     var ProjectController = baseControllerAddClass.extend({
       userRole: 'admin',
@@ -330,13 +341,10 @@
       },
       afterSave: function() {
         var vm = this;
-        cloudsService.getList().then(function(response) {
-          for (var i = 0; response.length > i; i++) {
-            projectCloudMembershipsService.addRow(vm.project.url, response[i].url);
-          }
-        });
         vm.addUser();
-        $rootScope.$broadcast('refreshProjectList', {model: vm.instance, new: true, current: true});
+        joinServiceProjectLinkService.addProject(vm.project).then(function() {
+          $rootScope.$broadcast('refreshProjectList', {model: vm.project, new: true, current: true});
+        });
         vm._super();
       },
       onError: function(errorObject) {
@@ -995,12 +1003,10 @@ angular.module('ncsaas')
     .controller('ProjectServicesTabController',
       ['baseControllerListClass',
       'joinServiceProjectLinkService',
+      'joinService',
       'currentStateService',
       'ENTITYLISTFIELDTYPES',
-      'ENV',
       '$scope',
-      '$stateParams',
-      'projectsService',
       'blockUI',
       '$rootScope',
       ProjectServicesTabController]);
@@ -1008,23 +1014,19 @@ angular.module('ncsaas')
   function ProjectServicesTabController(
     baseControllerListClass,
     joinServiceProjectLinkService,
+    joinService,
     currentStateService,
     ENTITYLISTFIELDTYPES,
-    ENV,
     $scope,
-    $stateParams,
-    projectsService,
     blockUI,
     $rootScope) {
     var controllerScope = this;
     var ServiceController = baseControllerListClass.extend({
-      // TODO implement generalSearch when endpoint for mixed providers will be available NC-765
       init: function() {
-        this.service = joinServiceProjectLinkService;
+        this.service = joinService;
+        this.service.defaultFilter.project_uuid = currentStateService.getProjectUuid();
         this.controllerScope = controllerScope;
-        this.setSignalHandler('currentProjectUpdated', this.setCurrentProject.bind(controllerScope));
         this._super();
-        var currentCustomerUuid = currentStateService.getCustomerUuid();
         this.actionButtonsListItems = [
           {
             title: 'Remove',
@@ -1060,14 +1062,14 @@ angular.module('ncsaas')
               name: 'Name',
               propertyName: 'name',
               type: ENTITYLISTFIELDTYPES.name,
-              link: 'organizations.details({uuid: "' + currentCustomerUuid
-              + '", providerType: entity.type, providerUuid: entity.uuid, tab: "providers"})',
+              link: 'organizations.details({uuid: "' + currentStateService.getCustomerUuid()
+              + '", providerType: entity.service_type, providerUuid: entity.uuid, tab: "providers"})',
               className: 'name',
               showForMobile: true
             },
             {
               name: 'Type',
-              propertyName: 'type',
+              propertyName: 'service_type',
               type: ENTITYLISTFIELDTYPES.noType
             },
             {
@@ -1077,35 +1079,14 @@ angular.module('ncsaas')
             }
           ]
         };
-
-
         $scope.$on('searchInputChanged', this.onSearchInputChanged.bind(this));
       },
-
-      setCurrentProject: function() {
-        this.getList();
-      },
-
       getList: function(filter) {
-        var vm = this;
-        var fn = this._super.bind(controllerScope);
-        var projectMenu = blockUI.instances.get('tab-content');
-        projectMenu.start();
-        if ($stateParams.uuid) {
-          return projectsService.$get($stateParams.uuid).then(function(project) {
-            vm.service.defaultFilter.project_uuid = project.uuid;
-            return fn(filter).then(function() {
-              projectMenu.stop();
-            });
-          });
-        } else {
-          return currentStateService.getProject().then(function(project) {
-            vm.service.defaultFilter.project_uuid = project.uuid;
-            return fn(filter).then(function() {
-              projectMenu.stop();
-            });
-          });
-        }
+        var block = blockUI.instances.get('tab-content');
+        block.start();
+        return this._super(filter).then(function() {
+          block.stop();
+        });
       },
       removeInstance: function(model) {
         return joinServiceProjectLinkService.$deleteByUrl(model.url);
@@ -1118,7 +1099,6 @@ angular.module('ncsaas')
         this.searchInput = searchInput;
         this.search();
       }
-
     });
 
     controllerScope.__proto__ = new ServiceController();

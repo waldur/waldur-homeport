@@ -15,20 +15,20 @@
             </li>
             <li class="right-sort">
                 <div ng-if="entityOptions.entityData.createLink"
-                   check-quotas="{{entityOptions.entityData.checkQuotas}}"
-                   class-link="button"
-                   ng-click="entityOptions.entityData.showMessage = !entityOptions.entityData.showMessage;"
-                   show-message="entityOptions.entityData.showMessage" tooltip-type="listItems"
-                   sref="{{ entityOptions.entityData.createLink }}"
-                   class="inline">
+                     check-quotas="{{entityOptions.entityData.checkQuotas}}"
+                     class-link="button"
+                     ng-click="entityOptions.entityData.showMessage = !entityOptions.entityData.showMessage;"
+                     show-message="entityOptions.entityData.showMessage" tooltip-type="listItems"
+                     sref="{{ entityOptions.entityData.createLink }}"
+                     class="inline">
                     <span>{{ entityOptions.entityData.createLinkText }}</span>
                 </div>
                 <div ng-if="entityOptions.entityData.importLink"
-                   check-quotas="{{entityOptions.entityData.checkQuotas}}"
-                   class-link="button"
-                   ng-click="entityOptions.entityData.showMessage = !entityOptions.entityData.showMessage;"
-                   show-message="false" tooltip-type="listItems"
-                   sref="{{ entityOptions.entityData.importLink }}" class="inline">
+                     check-quotas="{{entityOptions.entityData.checkQuotas}}"
+                     class-link="button"
+                     ng-click="entityOptions.entityData.showMessage = !entityOptions.entityData.showMessage;"
+                     show-message="false" tooltip-type="listItems"
+                     sref="{{ entityOptions.entityData.importLink }}" class="inline">
                     <span>{{ entityOptions.entityData.importLinkText }}</span>
                 </div>
                 <list-cache-reset list-controller="entityList"
@@ -153,6 +153,18 @@
                         </span>
                         <span ng-switch-when="listInField" ng-if="entity[field.propertyName].length == 0">
                             <i>{{ field.emptyText }}</i>
+                        </span>
+
+                        <span ng-switch-when="linkOrText">
+                            <a ng-if="::entity[field.urlProperyName]"
+                               href="{{ ::entity[field.urlProperyName] }}"
+                               target="_blank">
+                                <b class="icon external-link"></b>
+                                {{ ::entity[field.propertyName] }}
+                            </a>
+                            <span ng-if="::!entity[field.urlProperyName]">
+                                {{ ::entity[field.propertyName] }}
+                            </span>
                         </span>
 
                         <span ng-switch-when="entityStatus" class="status"

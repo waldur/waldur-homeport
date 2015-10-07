@@ -18,6 +18,9 @@
       link: function(scope) {
         var refresh = function() {
 
+          scope.enablePurchaseCostDisplay = ENV.enablePurchaseCostDisplay;
+
+          scope.currency = ENV.currency;
           scope.chartOptions = {
             responsive: true,
             bezierCurve: false,

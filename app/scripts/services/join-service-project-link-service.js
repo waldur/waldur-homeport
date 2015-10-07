@@ -1,51 +1,53 @@
 'use strict';
 
-
 (function () {
   angular.module('ncsaas')
     .service('joinServiceProjectLinkService', [
       '$q',
       'baseServiceClass',
-      'projectCloudMembershipsService',
-      'projectsService',
       'currentStateService',
+      'joinService',
+      'projectsService',
       joinServiceProjectLinkService
     ]);
 
   function joinServiceProjectLinkService(
     $q,
     baseServiceClass,
-    projectCloudMembershipsService,
-    projectsService,
-    currentStateService
-  ) {
+    currentStateService,
+    joinService,
+    projectsService
+    ) {
     var ServiceClass = baseServiceClass.extend({
-      getList: function(params) {
+      addProject: function(project) {
+        // Connect project with all services of current customer
         var vm = this;
-        if (params.service) {
-          if (params.service.url.indexOf('digitalocean') > -1) {
-            var deferred = $q.defer();
-            for (var i = 0; i < params.service.projects.length; i++) {
-              params.service.projects[i].project_name = params.service.projects[i].name;
-            }
-            deferred.resolve(params.service.projects);
-            return deferred.promise;
-          } else {
-            return projectCloudMembershipsService.getList({cloud: params.service.uuid});
-          }
-        } else if (this.defaultFilter.project_uuid) {
-          return projectsService.$get(this.defaultFilter.project_uuid).then(function(project) {
-            vm.list = project.services;
-            return vm.list;
+        var query = {customer_uuid: currentStateService.getCustomerUuid()};
+        return joinService.getList(query).then(function(services) {
+          var private_services = services.filter(function(service) {
+            return !service.shared;
           });
-        } else {
-          return currentStateService.getProject().then(function(project) {
-            vm.list = project.services;
-            return vm.list;
+          var promises = private_services.map(function(service) {
+            return joinService.getServiceProjectLinkUrlByType(service.service_type).then(function(spl) {
+              return vm.add(spl, service.url, project.url);
+            });
           });
-        }
+          return $q.all(promises);
+        });
       },
-
+      addService: function(service) {
+        // Connect service with all projects of current customer
+        var vm = this;
+        return joinService.getServiceProjectLinkUrlByType(service.service_type).then(function(spl) {
+          var query = {customer: currentStateService.getCustomerUuid()};
+          return projectsService.getList(query).then(function(projects) {
+            var promises = projects.map(function(project) {
+              return vm.add(spl, service.url, project.url);
+            });
+            return $q.all(promises);
+          });
+        });
+      },
       add: function(endpointUrl, service_url, project_url) {
         var instance = this.$create(endpointUrl);
         instance.project = project_url;
