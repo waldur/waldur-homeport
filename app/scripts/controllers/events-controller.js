@@ -378,10 +378,7 @@
         resourcesCountService.users({'project': project.uuid}).then(function(count) {
           project.count.users = count;
         });
-        resourcesCountService.resources({
-          project_uuid: project.uuid,
-          resource_type: ENV.resourceFilters.VMs
-        }).then(function(count) {
+        resourcesCountService.resources({project_uuid: project.uuid}).then(function(count) {
           project.count.resources = count;
         });
         var query = angular.extend(alertsService.defaultFilter, {aggregate: 'project', uuid: project.uuid});

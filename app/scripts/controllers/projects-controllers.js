@@ -379,6 +379,7 @@
       'projectsService',
       'baseControllerDetailUpdateClass',
       'resourcesCountService',
+      'servicesService',
       'alertsService',
       'eventsService',
       'currentStateService',
@@ -392,6 +393,7 @@
     projectsService,
     baseControllerDetailUpdateClass,
     resourcesCountService,
+    servicesService,
     alertsService,
     eventsService,
     currentStateService) {
@@ -531,20 +533,39 @@
       },
       setVmCounter: function() {
         var vm = this;
-        resourcesCountService.resources({
-          'project_uuid': vm.model.uuid,
-          'resource_type': ENV.resourceFilters.VMs
-        }).then(function(response) {
-          vm.detailsViewOptions.tabs[2].count = response;
+        vm.getResourceCount(ENV.VirtualMachines, vm.model.uuid).then(function(count) {
+          vm.detailsViewOptions.tabs[2].count = count;
         });
       },
       setAppCounter: function() {
         var vm = this;
-        resourcesCountService.resources({
-          'project_uuid': vm.model.uuid,
-          'resource_type': ENV.resourceFilters.applications
-        }).then(function(response) {
-          vm.detailsViewOptions.tabs[3].count = response;
+        vm.getResourceCount(ENV.Applications, vm.model.uuid).then(function(count) {
+          vm.detailsViewOptions.tabs[3].count = count;
+        });
+      },
+      getResourceCount: function(category, project_uuid) {
+        return this.getResourceTypes(category).then(function(types) {
+          return resourcesCountService.resources({
+            project_uuid: project_uuid,
+            resource_type: types
+          });
+        });
+      },
+      getResourceTypes: function(category) {
+        return servicesService.getServicesList().then(function(metadata) {
+          var services = ENV.appStoreCategories[category].services;
+          var types = [];
+          for (var i = 0; i < services.length; i++) {
+            var service = services[i];
+            if (!metadata[service]) {
+              continue;
+            }
+            var resources = metadata[service].resources;
+            for (var resource in resources) {
+              types.push(service + "." + resource);
+            }
+          }
+          return types;
         });
       },
       setBackupsCounter: function() {
@@ -704,71 +725,6 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('ProjectResourcesTabController', [
-      '$stateParams',
-      'BaseProjectResourcesTabController',
-      'resourcesService',
-      'currentStateService',
-      ProjectResourcesTabController
-    ]);
-
-  function ProjectResourcesTabController(
-    $stateParams,
-    BaseProjectResourcesTabController,
-    resourcesService,
-    currentStateService
-    ) {
-    var controllerScope = this;
-    var ResourceController = BaseProjectResourcesTabController.extend({
-      init:function() {
-        this.service = resourcesService;
-        this.controllerScope = controllerScope;
-        this.searchFilters = [
-          {
-            name: 'resource_type',
-            title: 'OpenStack',
-            value: 'OpenStack.Instance'
-          },
-          {
-            name: 'resource_type',
-            title: 'DigitalOcean',
-            value: 'DigitalOcean.Droplet'
-          },
-          {
-            name: 'resource_type',
-            title: 'AWS EC2',
-            value: 'Amazon.EC2'
-          }
-        ];
-        if ($stateParams.uuid) {
-          this.service.defaultFilter.project_uuid = $stateParams.uuid;
-          this._super();
-        } else {
-          var fn = this._super.bind(this);
-          var vm = this;
-          this.setSignalHandler('currentProjectUpdated', this.currentProjectUpdate.bind(controllerScope));
-          currentStateService.getProject().then(function(response) {
-            vm.service.defaultFilter.project_uuid = response.uuid;
-            fn();
-          });
-        }
-      },
-      currentProjectUpdate: function() {
-        var vm = this;
-        currentStateService.getProject().then(function(response) {
-          vm.service.defaultFilter.project_uuid = response.uuid;
-          vm.getList();
-        });
-      }
-    });
-
-    controllerScope.__proto__ = new ResourceController();
-  }
-
-})();
-
-(function() {
-  angular.module('ncsaas')
     .controller('ProjectEventTabController', [
       '$stateParams',
       'projectsService',
@@ -864,24 +820,70 @@
     .service('BaseProjectResourcesTabController', [
       'baseResourceListController',
       'resourcesService',
+      'currentStateService',
+      'servicesService',
+      'blockUI',
+      'ENV',
       BaseProjectResourcesTabController]);
 
     function BaseProjectResourcesTabController(
       baseResourceListController,
-      resourcesService) {
+      resourcesService,
+      currentStateService,
+      servicesService,
+      blockUI,
+      ENV) {
 
       var controllerClass = baseResourceListController.extend({
         init: function() {
           this.service = resourcesService;
-
-          this.service.defaultFilter['resource_type'] = [];
-          for (var i = 0; i < this.searchFilters.length; i++) {
-            var filter = this.searchFilters[i];
-            this.service.defaultFilter[filter.name].push(filter.value);
-          }
-
-          this.selectAll = true;
           this._super();
+          this.service.defaultFilter.project_uuid = currentStateService.getProjectUuid();
+          this.selectAll = true;
+        },
+        getList: function(filter) {
+          var vm = this;
+          var block = blockUI.instances.get('tab-content');
+          block.start();
+
+          var fn = vm._super.bind(vm);
+          if (vm.searchFilters.length == 0) {
+            return vm.getFilters(vm.category).then(function(filters) {
+              vm.searchFilters = filters;
+              vm.service.defaultFilter.resource_type = [];
+              for (var i = 0; i < filters.length; i++) {
+                vm.service.defaultFilter[filters[i].name].push(filters[i].value);
+              }
+              return fn(filter).then(function(list) {
+                block.stop();
+              });
+            });
+          } else {
+            return fn(filter).then(function() {
+              block.stop();
+            });
+          }
+        },
+        getFilters: function(category) {
+          return servicesService.getServicesList().then(function(metadata) {
+            var services = ENV.appStoreCategories[category].services;
+            var filters = [];
+            for (var i = 0; i < services.length; i++) {
+              var service = services[i];
+              if (!metadata[service]) {
+                continue;
+              }
+              var resources = metadata[service].resources;
+              for (var resource in resources) {
+                filters.push({
+                  name: 'resource_type',
+                  title: service,
+                  value: service + '.' + resource
+                });
+              }
+            }
+            return filters;
+          });
         }
       });
       return controllerClass;
@@ -889,59 +891,45 @@
 })();
 
 (function() {
+  angular.module('ncsaas')
+    .controller('ProjectResourcesTabController', [
+      'BaseProjectResourcesTabController',
+      'ENV',
+      ProjectResourcesTabController
+    ]);
+
+  function ProjectResourcesTabController(BaseProjectResourcesTabController, ENV) {
+    var controllerScope = this;
+    var ResourceController = BaseProjectResourcesTabController.extend({
+      init: function() {
+        this.controllerScope = controllerScope;
+        this.category = ENV.VirtualMachines;
+        this._super();
+      },
+    });
+    controllerScope.__proto__ = new ResourceController();
+  }
+})();
+
+(function() {
 
   angular.module('ncsaas')
     .controller('ProjectApplicationsTabController', [
-      'BaseProjectResourcesTabController', '$scope', 'currentStateService',
+      'BaseProjectResourcesTabController',
+      'ENV',
       ProjectApplicationsTabController]);
 
-  function ProjectApplicationsTabController(BaseProjectResourcesTabController, $scope, currentStateService) {
+  function ProjectApplicationsTabController(BaseProjectResourcesTabController, ENV) {
     var controllerScope = this;
     var ResourceController = BaseProjectResourcesTabController.extend({
       init:function() {
         this.controllerScope = controllerScope;
-        this.searchFilters = [
-          {
-            name: 'resource_type',
-            title: 'Oracle',
-            value: 'Oracle.Database'
-          },
-          {
-            name: 'resource_type',
-            title: 'GitLab',
-            value: 'GitLab.Project'
-          }
-        ];
+        this.category = ENV.Applications;
         this._super();
 
         this.entityOptions.entityData.noDataText = 'You have no applications yet';
         this.entityOptions.entityData.createLinkText = 'Create application';
         this.entityOptions.entityData.importLinkText = 'Import application';
-
-        $scope.$on('currentProjectUpdated', this.setCurrentProject.bind(this));
-        $scope.$on('searchInputChanged', this.onSearchInputChanged.bind(this));
-      },
-
-      registerEventHandlers: function() {},
-
-      setCurrentProject: function() {
-        this.getList();
-      },
-
-      getList: function(filter) {
-        var vm = this;
-        var fn = this._super.bind(vm);
-        filter = filter || {};
-        return currentStateService.getProject().then(function(project){
-          filter['project_uuid'] = project.uuid;
-          vm.service.defaultFilter.project_uuid = project.uuid;
-          return fn(filter);
-        })
-      },
-
-      onSearchInputChanged: function(event, searchInput) {
-        this.searchInput = searchInput;
-        this.search();
       }
     });
     controllerScope.__proto__ = new ResourceController();

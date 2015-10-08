@@ -35,6 +35,7 @@
           pagesService.getList().then(function(response) {
             pagesController.pages = pagesService.pages;
             pagesController.list = response;
+            pagesController.afterGetList();
           });
         }
 
@@ -43,6 +44,7 @@
           pagesService.page = page;
           pagesService.getList().then(function(response) {
             pagesController.list = response;
+            pagesController.afterGetList();
           });
         }
 
