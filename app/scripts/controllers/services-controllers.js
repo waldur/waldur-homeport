@@ -84,8 +84,7 @@
             noDataText: 'No providers yet.',
             createLink: 'services.create',
             createLinkText: 'Create provider',
-            checkQuotas: 'service',
-            showMessage: true
+            checkQuotas: 'service'
           },
           list: [
             {
@@ -220,6 +219,7 @@
       afterSave: function() {
         joinServiceProjectLinkService.addService(this.instance).then(function() {
           $rootScope.$broadcast('refreshProjectList');
+          $rootScope.$broadcast('customerBalance:refresh');
         });
       },
 

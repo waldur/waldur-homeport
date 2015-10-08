@@ -181,6 +181,9 @@
             &:hover {
                 background-color: #e0e0e0;
             }
+            &:nth-last-child(2) {
+                border-radius: 0 0 4px 4px;
+            }
         }
     } // > li
 } // nav-sublist

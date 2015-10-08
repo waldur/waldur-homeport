@@ -522,7 +522,6 @@
         this._super();
         this.entityOptions.entityData.title = '';
         this.entityOptions.entityData.checkQuotas = 'project';
-        this.entityOptions.entityData.showMessage = true;
       }
     });
 

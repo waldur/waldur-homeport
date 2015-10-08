@@ -26,10 +26,6 @@
         LangMenu: false
       },
       checkQuotas: {
-        showMessageProject: false,
-        showMessageResource: false,
-        showMessageProvider: false,
-        showMessageImport: false,
         projects: 'project',
         resources: 'resource'
       },

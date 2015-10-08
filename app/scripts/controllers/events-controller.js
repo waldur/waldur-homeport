@@ -138,7 +138,6 @@
       init: function() {
         $scope.activeTab = $stateParams.tab || 'activity';
         this.checkQuotas = 'project';
-        this.showMessage = true;
       }
     });
 
@@ -316,7 +315,6 @@
         };
 
         this.checkQuotas = 'project';
-        this.showMessage = true;
 
         $scope.$on('currentCustomerUpdated', this.onCustomerUpdate.bind(this));
         this.onCustomerUpdate();

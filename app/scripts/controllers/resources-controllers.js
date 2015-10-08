@@ -50,8 +50,7 @@
         this.entityOptions = {
           entityData: {
             noDataText: 'You have no resources yet.',
-            checkQuotas: 'resource',
-            showMessage: true
+            checkQuotas: 'resource'
           },
           list: [
             {

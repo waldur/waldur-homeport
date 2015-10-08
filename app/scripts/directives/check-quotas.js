@@ -51,9 +51,9 @@
         scope.plansLink = 'organizations.plans({uuid:\'' + response.uuid + '\'})';
         scope.enable = false;
 
-        for (var i = 0; i<response.quotas.length; i++) {
+        for (var i = 0; i < response.quotas.length; i++) {
           var value = response.quotas[i];
-          value.name = value.name.replace(/nc_|_count/gi,'');
+          value.name = value.name.replace(/nc_|_count/gi, '');
           if (item && value.name === item && value.limit > -1 && (value.limit === value.usage || value.limit === 0)) {
             scope.enable = true;
             scope.showMessage = false;
