@@ -136,6 +136,10 @@
           vm.user.errors = {email: 'This field is required'};
           return;
         }
+        if (!vm.customer.name) {
+          vm.customer.errors = {name: 'this field is required'};
+          return;
+        }
         $q.all([vm.saveUser(), vm.customer.$update(), vm.saveServices()]).then(function() {
           usersService.currentUser = null;
           $state.go('dashboard.index');
