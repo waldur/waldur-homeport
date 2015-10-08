@@ -10,6 +10,7 @@
         'IaaS.Instance': '/instances/',
         'OpenStack.Instance': '/openstack-instances/',
         'DigitalOcean.Droplet': '/digitalocean-droplets/',
+        'Azure.VirtualMachine': '/azure-virtualmachines/',
         'openstack': '/openstack-instances/',
         'clouds': '/iaas-resources/',
         'oracle': '/oracle-databases/',
