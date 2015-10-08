@@ -1,6 +1,6 @@
 <div ng-click="handleAction($event)">
     <a ng-class="classes" ng-transclude></a>
-    <div ng-if="enable" stoppropagation class="tooltip quota-tooltip {{tooltipType}}" ng-show="showMessage" ng-style="tooltipStyle">
+    <div ng-if="enable" stoppropagation class="tooltip quota-tooltip" ng-class="tooltipType" ng-show="showMessage">
         <div class="triangle-before" ng-style="triangleBefore"></div>
         <div class="triangle-after" ng-style="triangleAfter"></div>
         <div class="tooltip-title">

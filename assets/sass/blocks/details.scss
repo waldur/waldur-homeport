@@ -735,6 +735,30 @@
       right: 10px;
       top: 10px;
     }
+    &.head-nav-appstore {
+      top: 50px;
+    }
+    &.list-items {
+      top: 35px;
+    }
+    &.user-drop-down {
+      top: 44px;
+    }
+    &.project-drop-down {
+      top: 10px;
+      right: -220px;
+    }
+    &.add-user {
+      top: 110%;
+      left: 0;
+      width: 350px;
+      .triangle-before {
+        left: 20px;
+      }
+      .triangle-after {
+        left: 21px;
+      }
+    }
   }
   .tooltip-title {
     .close {

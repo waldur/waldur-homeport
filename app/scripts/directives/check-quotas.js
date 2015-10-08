@@ -44,9 +44,8 @@
 
       currentStateService.getCustomer().then(function(response) {
 
-        var style = calculatePosition(element, scope.tooltipType);
+        var style = calculatePosition(element);
 
-        scope.tooltipStyle = style.tooltipStyle;
         scope.triangleBefore = style.triangleBefore;
         scope.triangleAfter = style.triangleAfter;
         scope.plansLink = 'organizations.plans({uuid:\'' + response.uuid + '\'})';
@@ -70,48 +69,20 @@
     /**
      * Calculate position style for tooltip
      * @param element
-     * @param tooltipType
-     * @returns {{triangleBefore: ({right: string}|*), triangleAfter: ({right: string}|*), tooltipStyle: *}}
+     * @returns {{triangleBefore: ({right: string}|*), triangleAfter: ({right: string}|*)}}
      */
-    function calculatePosition(element, tooltipType) {
+    function calculatePosition(element) {
       var triangleBefore,
-          triangleAfter,
-          tooltipStyle;
+          triangleAfter;
 
       triangleAfter = triangleBefore = Math.floor(element[0].offsetWidth / 2) || 100;
 
       triangleBefore = {right: triangleBefore + 'px'};
       triangleAfter = {right: triangleAfter + 1 + 'px'};
 
-      switch (tooltipType) {
-        case 'listItems': {
-          tooltipStyle = {top: '35px'};
-          break;
-        }
-        case 'headNavAppstore': {
-          tooltipStyle = {top: '50px'};
-          break;
-        }
-        case 'userDropDown': {
-          tooltipStyle = {top: '44px'};
-          break;
-        }
-        case 'projectDropDown': {
-          tooltipStyle = {top: '10px', right: '-220px'};
-          break;
-        }
-        case 'addUser': {
-          tooltipStyle = {top: '110%', left: 0, width: '350px'};
-          triangleBefore = {left: '20px'};
-          triangleAfter = {left: '21px'};
-          break;
-        }
-      }
-
       return {
           triangleBefore: triangleBefore,
-          triangleAfter: triangleAfter,
-          tooltipStyle : tooltipStyle
+          triangleAfter: triangleAfter
       };
     }
 
