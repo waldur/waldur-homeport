@@ -107,14 +107,14 @@
               propertyName: 'html_message',
               className: 'message',
               type: ENTITYLISTFIELDTYPES.html,
-              showForMobile: ENTITYLISTFIELDTYPES.showForMobile
+              showForMobile: true
             },
             {
               name: 'Date',
               propertyName: 'created',
               className: 'date',
               type: ENTITYLISTFIELDTYPES.date,
-              showForMobile: ENTITYLISTFIELDTYPES.showForMobile
+              showForMobile: true
             }
           ]
         };
@@ -193,19 +193,19 @@
         this.chartOptions = {
           bezierCurve: false,
           responsive: true,
-          animationEasing: "linear"
+          animationEasing: 'linear'
         };
 
         this.costData = {
           labels: labels,
           datasets: [
             {
-              fillColor: "rgba(123, 166, 196,0.5)",
-              strokeColor: "rgba(123, 166, 196,1)",
-              pointColor: "rgba(123, 166, 196,1)",
-              pointStrokeColor: "#fff",
-              pointHighlightFill: "#fff",
-              pointHighlightStroke: "rgba(123, 166, 196,1)",
+              fillColor: 'rgba(123, 166, 196,0.5)',
+              strokeColor: 'rgba(123, 166, 196,1)',
+              pointColor: 'rgba(123, 166, 196,1)',
+              pointStrokeColor: '#fff',
+              pointHighlightFill: '#fff',
+              pointHighlightStroke: 'rgba(123, 166, 196,1)',
               data: totals
             }
           ]
@@ -225,16 +225,16 @@
               resources: []
             }
           }
-          if (row.scope_type == 'customer') {
+          if (row.scope_type === 'customer') {
             results[date].total = row.total;
           }
-          if (row.scope_type == 'project') {
+          if (row.scope_type === 'project') {
             results[date].projects.push(row);
           }
-          if (row.scope_type == 'resource') {
+          if (row.scope_type === 'resource') {
             results[date].resources.push(row);
           }
-          if (row.scope_type == 'service') {
+          if (row.scope_type === 'service') {
             results[date].services.push(row);
           }
         }
@@ -317,7 +317,7 @@
         var vm = this;
 
         var window = angular.element($window);
-        window.bind('resize', function () {
+        window.bind('resize', function() {
           vm.showGraph = false;
           setTimeout(function() {
             vm.showGraph = true;
@@ -326,7 +326,7 @@
           $scope.$apply();
         });
       },
-      selectProject: function (project) {
+      selectProject: function(project) {
         if (project) {
           project.selected =! project.selected;
           this.getProjectCounters(project);
@@ -339,7 +339,7 @@
         this.getCustomerEvents();
         this.getCustomerAlerts();
       },
-      getCustomerAlerts: function () {
+      getCustomerAlerts: function() {
         var vm = this;
         currentStateService.getCustomer().then(function(customer) {
           alertsService.getList({
@@ -350,16 +350,16 @@
               alert.html_message = alertFormatter.format(alert);
               return alert;
             });
-          })
-        })
+          });
+        });
       },
-      getCustomerEvents: function () {
+      getCustomerEvents: function() {
         var vm = this;
         currentStateService.getCustomer().then(function(customer) {
-          eventsService.getList({'scope': customer.url}).then(function(response) {
+          eventsService.getList({scope: customer.url}).then(function(response) {
             vm.events = response;
-          })
-        })
+          });
+        });
       },
       getCustomerProjects: function() {
         var vm = this;
@@ -381,8 +381,8 @@
           project.count.users = count;
         });
         resourcesCountService.resources({
-          'project_uuid': project.uuid,
-          'resource_type': ENV.resourceFilters.VMs
+          project_uuid: project.uuid,
+          resource_type: ENV.resourceFilters.VMs
         }).then(function(count) {
           project.count.resources = count;
         });
@@ -399,10 +399,10 @@
         var count = 7;
         var start = moment.utc().subtract(count + 1, 'days').unix();
         eventStatisticsService.getList({
-          'scope': project.url,
-          'start': start,
-          'end': end,
-          'points_count': count + 1
+          scope: project.url,
+          start: start,
+          end: end,
+          points_count: count + 1
         }).then(function(response) {
           var labels = [];
           var total = [];
@@ -425,18 +425,18 @@
             labels: labels,
             datasets: [
               {
-                label: "Events",
-                fillColor: "rgba(220,220,220,0.2)",
-                strokeColor: "rgba(220,220,220,1)",
-                pointColor: "rgba(220,220,220,1)",
-                pointStrokeColor: "#fff",
-                pointHighlightFill: "#fff",
-                pointHighlightStroke: "rgba(220,220,220,1)",
+                label: 'Events',
+                fillColor: 'rgba(220,220,220,0.2)',
+                strokeColor: 'rgba(220,220,220,1)',
+                pointColor: 'rgba(220,220,220,1)',
+                pointStrokeColor: '#fff',
+                pointHighlightFill: '#fff',
+                pointHighlightStroke: 'rgba(220,220,220,1)',
                 data: points
               }
             ]
           };
-        })
+        });
       },
       addSupportContract: function(project) {
         $rootScope.$broadcast('adjustCurrentProject', project);

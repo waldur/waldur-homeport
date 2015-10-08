@@ -31,9 +31,13 @@
     @include bp(xs) {
       margin-bottom: 120px;
       .column {
-        width: 100%;
+        width: 50%;
         float: left;
         text-align: left;
+        &.right {
+          float: right;
+          text-align: right;
+        }
       }
       .body {
         width: 100%;
@@ -356,7 +360,7 @@
     }
   }
   input[type="text"] {
-    width: 150px;
+    width: 250px;
   }
 }
 .balance-block {
@@ -519,20 +523,21 @@
 }
 
 .balance-block.customer-balance {
-  width: auto;
+  width: 50%;
+  float: right;
   padding-right: 60px;
   @include bp(xs) {
     float: left;
     padding-right: 0;
     padding-left: 20px;
-
+    width: auto;
   }
   @include bp(sm) {
     float: left;
     padding-right: 0;
     padding-left: 20px;
+    width: auto;
   }
-
 }
 
 .password {

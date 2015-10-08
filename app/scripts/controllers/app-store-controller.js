@@ -200,20 +200,17 @@
       setFields: function(formOptions, validChoices) {
         this.fields = [];
         for (var name in formOptions) {
-          if (formOptions[name].read_only || name == this.UNIQUE_FIELDS.service_project_link) {
+          var options = formOptions[name];
+          if (options.read_only || name == this.UNIQUE_FIELDS.service_project_link) {
             continue;
           }
 
-          var choices;
-          var type = formOptions[name].type;
+          var type = options.type;
           if (type == 'field') {
             type = 'choice';
-            if (name in validChoices) {
-              choices = validChoices[name];
-            } else {
-              choices = formOptions[name].choices;
-            }
           }
+
+          var choices = validChoices[name] || options.choices;
 
           if (name == 'user_data') {
             type = 'text';
@@ -225,10 +222,10 @@
             ssh_public_key: 'lock'
           };
           var icon = icons[name] || 'cloud';
-          var label = formOptions[name].label;
-          var required = formOptions[name].required;
+          var label = options.label;
+          var required = options.required;
           var visible = required || name == 'ssh_public_key';
-          var help_text = formOptions[name].help_text;
+          var help_text = options.help_text;
           var min, max, units;
 
           if (name == 'system_volume_size') {
@@ -269,6 +266,28 @@
           return order.indexOf(a.name) - order.indexOf(b.name);
         });
         this.sortFlavors();
+        this.attachIconsToImages();
+      },
+      attachIconsToImages: function() {
+        var field = this.findFieldByName('image');
+        if (!field) {
+          return;
+        }
+        for (var i = 0; i < field.choices.length; i++) {
+          var choice = field.choices[i];
+          if (choice.display_name.indexOf('Visual Studio') != -1) {
+            choice.icon = 'visual-studio';
+          }
+          else if (choice.display_name.indexOf('CentOS') != -1) {
+            choice.icon = 'centos';
+          }
+          else if (choice.display_name.indexOf('Windows') != -1) {
+            choice.icon = 'windows';
+          }
+          else if (choice.display_name.indexOf('Ubuntu') != -1) {
+            choice.icon = 'ubuntu';
+          }
+        }
       },
       toggleChoicesLimit: function(field) {
         if (field.limit == this.limitChoices) {
@@ -523,6 +542,21 @@
         }
         return true;
       },
+      getTooltip: function() {
+        if (!this.instance) {
+          return "Instance is not configured";
+        }
+        var fields = [];
+        for (var name in this.allFormOptions) {
+          var options = this.allFormOptions[name];
+          if (options.required && !this.instance[name]) {
+            fields.push(options.label);
+          }
+        }
+        if (fields.length > 0) {
+          return "Please specify " + fields.join(", ").toLowerCase();
+        }
+      },
       saveInstance: function() {
         var resourceUrl = this.serviceMetadata.resources[this.selectedResourceType];
         var instance = servicesService.$create(resourceUrl);
@@ -542,12 +576,16 @@
       },
       onError: function() {
         var message = '';
-        for (var name in this.errors) {
-          if (this.allFormOptions[name]) {
-            message += this.allFormOptions[name].label + ': ' + this.errors[name] + '<br/>';
-          } else {
-            message += name + ': ' + this.errors[name] + '<br/>';
+        if (angular.isObject(this.errors)) {
+          for (var name in this.errors) {
+            if (this.allFormOptions[name]) {
+              message += this.allFormOptions[name].label + ': ' + this.errors[name] + '<br/>';
+            } else {
+              message += name + ': ' + this.errors[name] + '<br/>';
+            }
           }
+        } else {
+          message = 'Server error occurred';
         }
         this.errorFlash(message);
       },
