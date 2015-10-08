@@ -10,6 +10,9 @@
   }
   .event-action-buttons {
     float: right;
+    > div {
+      height: 33px;
+    }
   }
   .active-content {
     animation: content-show .5s 1 ease-out;
@@ -20,14 +23,14 @@
   }
   .tooltip {
     &.quota-tooltip {
-      top: 68px;
+      top: 62px;
     }
   }
   .cost-tab-actions {
     position: relative;
     .tooltip {
       &.quota-tooltip {
-        top: 40px;
+        top: 30px;
       }
     }
   }

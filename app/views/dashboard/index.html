@@ -13,12 +13,11 @@
             </li>
         </ul>
         <div class="event-action-buttons" ng-show="activeTab == 'activity'">
-            <a ui-sref="projects.create" class="button-apply"
-               check-quotas="{{DashboardController.checkQuotas}}"
-               ng-click="DashboardController.showMessage = !DashboardController.showMessage;"
-               show-message="DashboardController.showMessage">
-                Add new project
-            </a>
+            <div sref="projects.create"
+                 class-link="button-apply"
+                 check-quotas="{{DashboardController.checkQuotas}}">
+                <span>Add new project</span>
+            </div>
         </div>
 
         <div class="clear"></div>

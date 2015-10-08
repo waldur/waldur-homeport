@@ -2,18 +2,22 @@
      <div class="white-box empty-data-block" ng-show="DashboardController.table.length == 0">
          <h1>Not enough data for cost analysis</h1>
          <h2 visible="import" visible="providers">Please import resources or add more providers</h2>
-         <span visible="import" class="cost-tab-actions">
-             <a ui-sref="import.import" class="button button-margin-bottom"
-                check-quotas="{{DashboardController.checkQuotasResource}}"
-                ng-click="DashboardController.showQuotasMessageResource = !DashboardController.showQuotasMessageResource;"
-                show-message="DashboardController.showQuotasMessageResource">Import resources</a>
-         </span>
-         <span visible="providers" class="cost-tab-actions">
-             <a ui-sref="services.create" class="button button-margin-bottom"
-                check-quotas="{{DashboardController.checkQuotasProvider}}"
-                ng-click="DashboardController.showQuotasMessageProvider = !DashboardController.showQuotasMessageProvider;"
-                show-message="DashboardController.showQuotasMessageProvider">Add providers</a>
-         </span>
+         <div visible="import" class="cost-tab-actions inline">
+             <div class="inline"
+                  check-quotas="{{DashboardController.checkQuotasResource}}"
+                  sref="import.import"
+                  class-link="button button-margin-bottom">
+                 <div>Import resources</div>
+             </div>
+         </div>
+         <div visible="providers" class="cost-tab-actions inline">
+             <div class="inline"
+                  check-quotas="{{DashboardController.checkQuotasProvider}}"
+                  sref="services.create"
+                  class-link="button button-margin-bottom">
+                 <div>Add providers</div>
+             </div>
+         </div>
 
      </div>
      <div class="white-box big-chart" ng-if="DashboardController.table.length > 0">

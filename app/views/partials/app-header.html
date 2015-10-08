@@ -58,9 +58,13 @@
                             <a ui-sref="projects.list" class="manage">Manage projects</a>
                         </li>
                         <li class="manage-item">
-                            <a check-quotas="{{Header.checkQuotas.projects}}" show-message="Header.checkQuotas.showMessageProject"
-                               ng-click="Header.checkQuotas.showMessageProject = !Header.checkQuotas.showMessageProject;" tooltip-type="projectDropDown"
-                               ui-sref="projects.create" class="manage">Add project</a>
+                            <div class="tooltip-relative inline"
+                                 check-quotas="{{Header.checkQuotas.projects}}"
+                                 sref="projects.create"
+                                 class-link="manage"
+                                 tooltip-type="projectDropDown">
+                                <div>Add project</div>
+                            </div>
                         </li>
                     </ul>
                 </li>
@@ -72,12 +76,12 @@
                     </a>
                 </li>
                 <li visible="resources" class="appstore">
-                    <a ui-sref="appstore.store"
-                       check-quotas="{{Header.checkQuotas.resources}}" show-message="Header.checkQuotas.showMessageResource"
-                       ng-click="Header.checkQuotas.showMessageResource = !Header.checkQuotas.showMessageResource;" tooltip-type="listItems"
-                       class="appstore">
+                    <div check-quotas="{{Header.checkQuotas.resources}}"
+                         sref="appstore.store"
+                         class-link="appstore"
+                         tooltip-type="headNavAppstore">
                         <span translate>Appstore</span>
-                    </a>
+                    </div>
                 </li>
             </ul>
             <!-- /views nav -->
@@ -93,26 +97,29 @@
                     </a>
                     <ul class="nav-sublist user-area" ng-show="Header.menuState.profileMenu">
                         <li visible="services" class="on-tablet">
-                            <div sref="services.create" class-link="service"
-                                check-quotas="{{Header.checkQuotas.resources}}"
-                                ng-click="Header.checkQuotas.showMessageProvider = !Header.checkQuotas.showMessageProvider;"
-                                show-message="Header.checkQuotas.showMessageProvider" tooltip-type="listItems">
+                            <div class="tooltip-relative"
+                                 check-quotas="{{Header.checkQuotas.resources}}"
+                                 sref="services.create"
+                                 class-link="service"
+                                 tooltip-type="userDropDown">
                                 <div>Add provider</div>
                             </div>
                         </li>
                         <li visible="projects" class="on-tablet">
-                            <div sref="projects.create" class-link="project"
-                                check-quotas="{{Header.checkQuotas.projects}}"
-                                ng-click="Header.checkQuotas.showMessageProject = !Header.checkQuotas.showMessageProject;"
-                                show-message="Header.checkQuotas.showMessageProject" tooltip-type="userDropDown">
+                            <div class="tooltip-relative"
+                                 check-quotas="{{Header.checkQuotas.projects}}"
+                                 sref="projects.create"
+                                 class-link="project"
+                                 tooltip-type="userDropDown">
                                 <div>Add project</div>
                             </div>
                         </li>
                         <li visible="import" ng-if="::Header.showImport" class="on-tablet">
-                            <div sref="import.import" class-link="import"
-                                check-quotas="{{Header.checkQuotas.resources}}"
-                                ng-click="Header.checkQuotas.showMessageImport = !Header.checkQuotas.showMessageImport;"
-                                show-message="Header.checkQuotas.showMessageImport" tooltip-type="listItems">
+                            <div class="tooltip-relative"
+                                 check-quotas="{{Header.checkQuotas.resources}}"
+                                 sref="import.import"
+                                 class-link="import"
+                                 tooltip-type="userDropDown">
                                 <div>Import resources</div>
                             </div>
                         </li>
