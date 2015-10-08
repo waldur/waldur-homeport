@@ -3,18 +3,22 @@
     color: #C0C0C0;
 
     .column {
-        width: 28%;
+        width: 50%;
         float: left;
         padding-top: 6px;
 
         &.right {
             text-align: right;
+            float: right;
+            @include bp(xs) {
+                width: 130px;
+            }
         }
 
         a.page-size {
             @include property(margin-left, 10);
             @include inline-middle;
-            padding: 0px;
+            padding: 0;
             color: #C0C0C0;
             line-height: 1;
             text-decoration: none;
@@ -28,8 +32,7 @@
     }
 
     .body {
-        width: 44%;
-        float: left;
+        margin-bottom: 10px;
         text-align: center;
 
         a {

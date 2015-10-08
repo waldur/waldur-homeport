@@ -278,6 +278,15 @@
           if (choice.display_name.indexOf('Visual Studio') != -1) {
             choice.icon = 'visual-studio';
           }
+          else if (choice.display_name.indexOf('CentOS') != -1) {
+            choice.icon = 'centos';
+          }
+          else if (choice.display_name.indexOf('Windows') != -1) {
+            choice.icon = 'windows';
+          }
+          else if (choice.display_name.indexOf('Ubuntu') != -1) {
+            choice.icon = 'ubuntu';
+          }
         }
       },
       toggleChoicesLimit: function(field) {
@@ -533,6 +542,21 @@
         }
         return true;
       },
+      getTooltip: function() {
+        if (!this.instance) {
+          return "Instance is not configured";
+        }
+        var fields = [];
+        for (var name in this.allFormOptions) {
+          var options = this.allFormOptions[name];
+          if (options.required && !this.instance[name]) {
+            fields.push(options.label);
+          }
+        }
+        if (fields.length > 0) {
+          return "Please specify " + fields.join(", ").toLowerCase();
+        }
+      },
       saveInstance: function() {
         var resourceUrl = this.serviceMetadata.resources[this.selectedResourceType];
         var instance = servicesService.$create(resourceUrl);
@@ -552,12 +576,16 @@
       },
       onError: function() {
         var message = '';
-        for (var name in this.errors) {
-          if (this.allFormOptions[name]) {
-            message += this.allFormOptions[name].label + ': ' + this.errors[name] + '<br/>';
-          } else {
-            message += name + ': ' + this.errors[name] + '<br/>';
+        if (angular.isObject(this.errors)) {
+          for (var name in this.errors) {
+            if (this.allFormOptions[name]) {
+              message += this.allFormOptions[name].label + ': ' + this.errors[name] + '<br/>';
+            } else {
+              message += name + ': ' + this.errors[name] + '<br/>';
+            }
           }
+        } else {
+          message = 'Server error occurred';
         }
         this.errorFlash(message);
       },

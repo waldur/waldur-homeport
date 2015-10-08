@@ -38,22 +38,24 @@
                 </div>
 
                 <span ng-repeat="field in options.aboutFields">
-                    <span class="{{ field.className }}"
-                          ng-if="!field.isEditable || !controller.canEdit">{{ controller.model[field.fieldKey] }}</span>
-                    <span editable-text="controller.model[field.fieldKey]"
-                          e-form="rowform"
-                          buttons="no"
-                          onbeforesave="controller.update($data, field.fieldKey)"
-                          ng-show="field.isEditable && controller.canEdit"
-                          class="{{ field.className }}"
-                          title="Click to edit">
-                        {{ controller.model[field.fieldKey] || field.emptyText }}
-                    </span>
-                    <div class="icon"
-                         ng-if="field.isEditable && controller.canEdit"
-                         ng-click="rowform.$show()"
-                         ng-hide="rowform.$visible"></div>
-                    <div class="clear"></div>
+                    <div>
+                        <span class="{{ field.className }}"
+                              ng-if="!field.isEditable || !controller.canEdit">{{ controller.model[field.fieldKey] }}</span>
+                        <span editable-text="controller.model[field.fieldKey]"
+                              e-form="rowform"
+                              buttons="no"
+                              onbeforesave="controller.update($data, field.fieldKey)"
+                              ng-show="field.isEditable && controller.canEdit"
+                              class="{{ field.className }}"
+                              title="Click to edit">
+                            {{ controller.model[field.fieldKey] || field.emptyText }}
+                        </span>
+                        <div class="icon"
+                             ng-if="field.isEditable && controller.canEdit"
+                             ng-click="rowform.$show()"
+                             ng-hide="rowform.$visible"></div>
+                        <div class="clear"></div>
+                    </div>
                 </span>
             </div>
         </div>

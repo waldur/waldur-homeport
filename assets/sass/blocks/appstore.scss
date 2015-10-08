@@ -61,7 +61,7 @@
             width: 55px;
             font-size: 50px;
             text-align: center;
-            &.azure, &.gitlab, &.oracle {
+            &.gitlab, &.oracle {
                 width: 150px;
                 margin: 0px auto;
             }
@@ -72,7 +72,7 @@
             box-sizing: border-box;
             text-align: center;
             margin-left: 10px;
-            &.azure, &.gitlab, &.oracle {
+            &.gitlab, &.oracle {
                 display: none;
             }
             &.full {
@@ -117,6 +117,46 @@
             } // article
         } // description
     } // appstore-template
+    .appstore-template-flavor {
+        .icon {
+            @include bp(sm) {
+                float: left;
+                width: 40%;
+                margin: 25px 0 0 0;
+                padding: 0 10px 0 0;
+                text-align: right;
+            }//sm
+            @include bp(xs) {
+                float: left;
+                width: 40%;
+                margin: 25px 0 0 0;
+                padding: 0 10px 0 0;
+                text-align: right;
+            }//xs
+        }
+        .description-flavor {
+            @include bp(sm) {
+                float: left;
+                width: 50%;
+                padding-left: 10px;
+                text-align: left;
+                p {
+                    padding: 0;
+                    margin: 0 5px;
+                }
+            }//sm
+            @include bp(xs) {
+                float: left;
+                width: 50%;
+                padding-left: 10px;
+                text-align: left;
+                p {
+                    padding: 0;
+                    margin: 0 5px;
+                }
+            }//xs
+        }
+    }//appstore-template-flavor
 } // appstore-templates
 .appstore-wrapper {
     padding-right: 320px;
@@ -298,14 +338,14 @@
                     width: 100%;
                     label {
                         display: inline-block;
-                        width: 250px;
+                        width: 155px;
                         margin-top: 20px;
                         font-size: 16px;
                         font-weight: bold;
                         color: #000;
                     }
                     span {
-                        margin-left: 10px;
+                        margin-left: 5px;
                     }
                     input[type="range"] {
                         vertical-align: middle;
@@ -313,8 +353,8 @@
                         width: 350px;
                     }
                     input[type="number"] {
-                        width: 100px;
-                        margin-left: 10px;
+                        width: 82px;
+                        margin-left: 5px;
                         height: 32px;
                         border: 1px solid #D8D8D8;
                         box-shadow: none;
