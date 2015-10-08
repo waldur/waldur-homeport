@@ -1,6 +1,4 @@
 <div class="white-box pagination" ng-show="pagesList.service.resultCount > 5">
-    <div class="column">Showing {{ pagesList.service.sliceStart }}-{{ pagesList.service.sliceEnd }} of {{ pagesList.service.resultCount }}</div>
-
     <div class="body">
       <div ng-show="pagesList.service.pages">
           <a href="{{pagesHref}}"
@@ -15,7 +13,8 @@
       </div>
     </div>
 
-    <div class="column right">Entries per page:
+    <div class="column">Showing {{ pagesList.service.sliceStart }}-{{ pagesList.service.sliceEnd }} of {{ pagesList.service.resultCount }}</div>
+    <div class="column right">
         <a href="{{pagesHref}}" class="page-size"
            ng-repeat="pageSize in pagesList.pageSizes"
            ng-click="pagesList.changePageSize(pageSize)"

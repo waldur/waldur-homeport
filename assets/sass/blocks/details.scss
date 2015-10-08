@@ -31,9 +31,13 @@
     @include bp(xs) {
       margin-bottom: 120px;
       .column {
-        width: 100%;
+        width: 50%;
         float: left;
         text-align: left;
+        &.right {
+          float: right;
+          text-align: right;
+        }
       }
       .body {
         width: 100%;

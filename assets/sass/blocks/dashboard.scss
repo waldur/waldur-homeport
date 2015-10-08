@@ -86,6 +86,7 @@
             float: left;
             margin-top: 7px;
             margin-right: 6px;
+            margin-left: 6px;
           }
           a {
             display: block;
@@ -172,6 +173,9 @@
         .td {
           float: left;
           width: 30%;
+          @include bp(xs) {
+            width: 50%;
+          }
           &:nth-child(1) {
             text-align: left;
           }
@@ -411,7 +415,7 @@
           ul {
             li {
               list-style: none;
-              height: 43px;
+              //height: 43px;
               line-height: 42px;
               border-bottom: 1px solid #ebebeb;
               position: relative;
@@ -462,11 +466,13 @@
                   width: 100%;
                   @include bp(xs) {
                     text-overflow: ellipsis;
-                    max-width: 300px;
+                    padding-top: 11px;
                   }
                   @include bp(sm) {
                     text-overflow: ellipsis;
                     max-width: 300px;
+                    line-height: 20px;
+                    padding-top: 11px;
                   }
                 }
               }
@@ -489,15 +495,44 @@
               }
               @include bp(xs) {
                 font-size: 15px;
+                padding-left: 50px;
+                height: auto;
+                line-height: 20px;
+                .icon {
+                  font: normal normal normal 14px/1 FontAwesome;
+                  text-rendering: auto;
+                  -webkit-font-smoothing: antialiased;
+                  -moz-osx-font-smoothing: grayscale;
+                  position: absolute;
+                  width: 50px;
+                  height: 50px;
+                  display: block;
+                  left: -7px;
+                  top: 0;
+                  border: 5px solid #FFFFFF;
+                  background: #fafafa;
+                  -webkit-background-size: 30px;
+                  background-size: 30px;
+                  font-size: 23px;
+                  line-height: 39px;
+                  &:before {
+                    content: "\f06e";
+                    margin-left: 7px;
+                  }
+                }
                 &.error-event {
                   &:before {
                     display: block;
                   }
                 }
                 &.recent-alert {
-                  padding-left: 50px;
+                  padding-left: 0px;
                   height: auto;
                   .icon {
+                    font: normal normal normal 14px/1 FontAwesome;
+                    text-rendering: auto;
+                    -webkit-font-smoothing: antialiased;
+                    -moz-osx-font-smoothing: grayscale;
                     position: absolute;
                     width: 50px;
                     height: 50px;
@@ -505,14 +540,22 @@
                     left: -7px;
                     top: 0;
                     border: 5px solid #FFFFFF;
-                    background: #fafafa url("../../static/images/icons/svg/eye_nc.svg") no-repeat center;
+                    background: #fafafa;
                     -webkit-background-size: 30px;
                     background-size: 30px;
+                    font-size: 23px;
+                    line-height: 39px;
+                    &:before {
+                      content: "\f06e";
+                      margin-left: 7px;
+                    }
                   }
 
                 }
                 .right-p {
                   float: left;
+                  margin: 0px 0 10px 0;
+                  line-height: 20px;
                 }
               }
             }
@@ -627,6 +670,7 @@
       text-decoration: none;
       color: $dashboard-black;
       border-bottom: 1px dashed $dashboard-green;
+      margin-right: 10px;
       &:before {
         content: "";
         display: block;
