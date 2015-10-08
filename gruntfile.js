@@ -607,6 +607,6 @@ module.exports = function(grunt) {
     grunt.registerTask('modeSquStudentCloud', ['copy:modeSquStudentCloud']);
     grunt.registerTask('modePublicBrokerage', ['copy:modePublicBrokerage']);
     grunt.registerTask('modeCostTracking', ['copy:modeCostTracking']);
-  grunt.registerTask('modeDevelop', ['copy:modeDevelop']);
+    grunt.registerTask('modeDevelop', ['copy:modeDevelop']);
 
 };
