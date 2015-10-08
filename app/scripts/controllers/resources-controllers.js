@@ -118,12 +118,11 @@
           var item = this.list[i];
           if (item.external_ips && item.external_ips.length > 0) {
             item.access_info_text = item.external_ips.join(', ');
-          }
-          else if (item.rdp && item.state == 'Online') {
-            item.access_info_url = item.rdp;
-            item.access_info_text = 'Access';
           } else {
             item.access_info_text = 'No access info';
+          }
+          if (item.rdp && item.state == 'Online') {
+            item.access_info_url = item.rdp;
           }
         }
       },
