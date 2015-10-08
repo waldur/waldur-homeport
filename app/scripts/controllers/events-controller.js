@@ -92,6 +92,7 @@
     return baseControllerListClass.extend({
       init: function() {
         this.service = alertsService;
+        this.searchFieldName = 'message';
         this._super();
 
         this.entityOptions = {
