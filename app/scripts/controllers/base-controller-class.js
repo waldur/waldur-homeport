@@ -108,7 +108,7 @@
         this.getList(filter);
       },
       remove: function(model) {
-        var vm = this;
+        var vm = this.controllerScope;
         var confirmDelete = confirm('Confirm deletion?');
         if (confirmDelete) {
           vm.removeInstance(model).then(function() {
@@ -159,9 +159,14 @@
           this.list.splice(index, 1);
         }
 
-        var index = this.selectedInstances.indexOf(instance[this.uniqueModelKeyName]);
+        index = this.selectedInstances.indexOf(instance[this.uniqueModelKeyName]);
         if (index !== -1) {
           this.selectedInstances.splice(index, 1);
+        }
+
+        if (this.list.length === 0 && this.currentPage > 1) {
+          this.controllerScope.service.page = this.controllerScope.currentPage = this.currentPage - 1;
+          this.controllerScope.getList();
         }
       }
     });
