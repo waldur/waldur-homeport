@@ -216,10 +216,25 @@
                 width: 40px;
             }
             &.message {
-                width: 70%;
+                width: auto;
+                line-height: 1.5;
+                white-space: normal;
+                @include bp(xs) {
+                    display: inline-block;
+                } // xs
+                @include bp(sm) {
+                    display: inline-block;
+                } // sm
             }
             &.date {
                 color: #929391;
+                width: 150px;
+                @include bp(xs) {
+                    display: inline-block;
+                } // xs
+                @include bp(sm) {
+                    display: inline-block;
+                } // sm
             }
         } // &.additional-cell
         .more-details {
