@@ -164,8 +164,9 @@
           this.selectedInstances.splice(index, 1);
         }
 
-        if (this.list.length === 0 && this.currentPage>1) {
-          this.changePage(this.currentPage - 1);
+        if (this.list.length === 0 && this.currentPage > 1) {
+          this.controllerScope.service.page = this.controllerScope.currentPage = this.currentPage - 1;
+          this.controllerScope.getList();
         }
       }
     });
