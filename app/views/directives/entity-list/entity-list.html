@@ -89,7 +89,7 @@
 
     <div class="white-box list-box" ng-show="entityList.list.length > 0 || entityList.searchInput">
         <ul class="object-list">
-            <li class="list-item list-header">
+            <li class="list-item list-header" ng-if="::!entityOptions.entityData.hideTableHead">
                 <div class="checkbox" ng-show="entityList.controlPanelShow"></div>
                 <div ng-repeat="fieldHead in entityOptions.list" class="additional-cell {{ fieldHead.className }}"
                      ng-class="{ 'display-for-mobile' : fieldHead.showForMobile, 'status': fieldHead.type == 'statusCircle' }">

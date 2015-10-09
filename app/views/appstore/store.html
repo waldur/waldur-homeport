@@ -159,18 +159,20 @@
                                                  ng-repeat="choice in field.choices | filter: {'display_name': field.searchQuery} | limitTo: field.limit"
                                                  ng-click="AppStore.doChoice(field.name, choice)"
                                                  ng-class="{'state': AppStore.instance[field.name] == choice.value, 'disabled': choice.disabled}">
-                                                <div class="icon {{ ::field.icon }}"></div>
+
+                                                <div ng-if="::!choice.icon" class="icon {{ ::field.icon }}"></div>
+                                                <div ng-if="::choice.icon" class="icon"><img ng-src="/static/images/appstore/icon-{{ ::choice.icon }}.png"></div>
+
                                                 <div ng-switch="::field.name" class="description-{{::field.name}}">
                                                     <div ng-switch-when="flavor">
                                                         <p>{{ ::choice.display_name }}</p>
-                                                        <p>CPU: <ng-pluralize count="::choice.item.cores"
-                                                                              when="{'1': '1 core', 'other': '{} cores'}"></ng-pluralize></p>
+                                                        <p>CPU: {{ ::choice.item.cores == 1 && '1 core' || choice.item.cores + ' cores'}}</p>
                                                         <p>RAM: {{ ::choice.item.ram | mb2gb }}</p>
                                                         <p>HDD: {{ ::choice.item.disk | mb2gb}}</p>
                                                     </div>
                                                     <div ng-switch-when="size">
-                                                        <p>CPU: <ng-pluralize count="::choice.item.cores"
-                                                                              when="{'1': '1 core', 'other': '{} cores'}"></ng-pluralize></p>
+                                                        <p>{{ ::choice.display_name }}</p>
+                                                        <p>CPU: {{ ::choice.item.cores == 1 && '1 core' || choice.item.cores + ' cores'}}</p>
                                                         <p>RAM: {{ ::choice.item.ram | mb2gb }}</p>
                                                         <p>HDD: {{ ::choice.item.disk | mb2gb}}</p>
                                                     </div>
@@ -197,7 +199,7 @@
                            ng-class="{'active': AppStore.showOptionalFields}">{{ AppStore.showOptionalFields && 'Hide' || 'Show' }} additional options</a>
 
                     </section>
-                    <section class="step-3 agreement" ng-if="AppStore.agreementShow && AppStore.selectedCategory.type == 'package'">
+                    <section class="step-3 agreement appstore-purchase" ng-if="AppStore.agreementShow && AppStore.selectedCategory.type == 'package'">
                         <div class="step-title"><span>Step 3: Sign a support agreement</span></div>
                         <div class="step-content">
                             <ul>

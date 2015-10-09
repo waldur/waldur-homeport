@@ -30,6 +30,11 @@ angular.module('ncsaas')
     buildId: 'develop',
 
     currency: '$',
+
+    // Index of category inside of appStoreCategories
+    VirtualMachines: 0,
+    Applications: 1,
+
     appStoreCategories: [
       {
         name: 'VMs',
@@ -97,13 +102,8 @@ angular.module('ncsaas')
       DigitalOcean: 'digitalocean-service-project-link',
       Amazon: 'aws-service-project-link'
     },
+
     requestTimeout: 1000 * 10,
-
-    resourceFilters: {
-      VMs: ['DigitalOcean.Droplet', 'OpenStack.Instance'],
-      applications: ['Oracle.Database', 'GitLab.Project']
-    },
-
     countsCacheTime: 60, // seconds
     enablePurchaseCostDisplay: true,
     entityCreateLink: {

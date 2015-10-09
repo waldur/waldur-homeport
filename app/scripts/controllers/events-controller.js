@@ -92,12 +92,14 @@
     return baseControllerListClass.extend({
       init: function() {
         this.service = alertsService;
+        this.searchFieldName = 'message';
         this._super();
 
         this.entityOptions = {
           entityData: {
             noDataText: 'No alerts yet',
-            hideActionButtons: true
+            hideActionButtons: true,
+            hideTableHead: true
           },
           list: [
             {
@@ -387,10 +389,7 @@
         resourcesCountService.users({'project': project.uuid}).then(function(count) {
           project.count.users = count;
         });
-        resourcesCountService.resources({
-          project_uuid: project.uuid,
-          resource_type: ENV.resourceFilters.VMs
-        }).then(function(count) {
+        resourcesCountService.resources({project_uuid: project.uuid}).then(function(count) {
           project.count.resources = count;
         });
         var query = angular.extend(alertsService.defaultFilter, {aggregate: 'project', uuid: project.uuid});
