@@ -54,29 +54,39 @@
             }.bind(this.controllerScope),
           }
         ];
+        var vm = this;
         if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('resources') == -1) {
-          this.actionButtonsListItems.push({
-            title: 'Create resource',
-            state: 'appstore.store'
+          currentStateService.getQuota('resource').then(function(response) {
+            if (!response) {
+              vm.actionButtonsListItems.push({
+                title: 'Create resource',
+                state: 'appstore.store'
+              });
+            }
           });
         }
         if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('import') == -1) {
-          this.actionButtonsListItems.push({
-            title: 'Import resource',
-            state: 'import.import',
 
-            isDisabled: function(service) {
-              return service.shared || !this.customerHasProjects;
-            }.bind(this.controllerScope),
+          currentStateService.getQuota('resource').then(function(response) {
+            if (!response) {
+              vm.actionButtonsListItems.push({
+                title: 'Import resource',
+                state: 'import.import',
 
-            tooltip: function(service) {
-              if (service.shared) {
-                return 'You cannot import resources from shared provider';
-              }
-              if (!this.customerHasProjects) {
-                return 'Can not import resources until project is created';
-              }
-            }.bind(this.controllerScope),
+                isDisabled: function(service) {
+                  return service.shared || !vm.customerHasProjects;
+                }.bind(vm.controllerScope),
+
+                tooltip: function(service) {
+                  if (service.shared) {
+                    return 'You cannot import resources from shared provider';
+                  }
+                  if (!this.customerHasProjects) {
+                    return 'Can not import resources until project is created';
+                  }
+                }.bind(vm.controllerScope),
+              });
+            }
           });
         }
         this.entityOptions = {

@@ -48,21 +48,30 @@
               }.bind(this),
             }
           ];
+          var vm = this;
           if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('resources') == -1) {
-            this.actionButtonsListItems.push({
-              title: 'Create resource',
-              clickFunction: function(project) {
-                $rootScope.$broadcast('adjustCurrentProject', project);
-                $state.go('appstore.store')
+            currentStateService.getQuota('resource').then(function(response) {
+              if (!response) {
+                vm.actionButtonsListItems.push({
+                  title: 'Create resource',
+                  clickFunction: function(project) {
+                    $rootScope.$broadcast('adjustCurrentProject', project);
+                    $state.go('appstore.store')
+                  }
+                });
               }
             });
           }
           if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('import') == -1) {
-            this.actionButtonsListItems.push({
-              title: 'Import resource',
-              clickFunction: function(project) {
-                $rootScope.$broadcast('adjustCurrentProject', project);
-                $state.go('import.import');
+            currentStateService.getQuota('resource').then(function(response) {
+              if (!response) {
+                vm.actionButtonsListItems.push({
+                  title: 'Import resource',
+                  clickFunction: function(project) {
+                    $rootScope.$broadcast('adjustCurrentProject', project);
+                    $state.go('import.import');
+                  }
+                });
               }
             });
           }

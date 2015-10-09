@@ -40,27 +40,17 @@
     function refresh(scope, element) {
       // checkQuotas - quota type: resource, project, service, user
       // tooltipType: listItems, emptyListItems, addUser
-      var item = scope.checkQuotas;
+      var item = scope.checkQuotas,
+        currentCustomerUuid = currentStateService.getCustomerUuid();
 
-      currentStateService.getCustomer().then(function(response) {
+      currentStateService.getQuota(item).then(function(response) {
 
         var style = calculatePosition(element);
 
         scope.triangleBefore = style.triangleBefore;
         scope.triangleAfter = style.triangleAfter;
-        scope.plansLink = 'organizations.plans({uuid:\'' + response.uuid + '\'})';
-        scope.enable = false;
-
-        for (var i = 0; i < response.quotas.length; i++) {
-          var value = response.quotas[i];
-          value.name = value.name.replace(/nc_|_count/gi, '');
-          if (item && value.name === item && value.limit > -1 && (value.limit === value.usage || value.limit === 0)) {
-            scope.enable = true;
-            scope.showMessage = false;
-            break;
-          }
-        }
-
+        scope.plansLink = 'organizations.plans({uuid:\'' + currentCustomerUuid+ '\'})';
+        scope.enable = response;
         scope.classes.disabled = scope.enable;
 
       });
