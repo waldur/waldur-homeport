@@ -355,23 +355,19 @@ Two options in controller should be defined e.g:
      this.entityOptions = {
        entityData: {
          ...
-         checkQuotas: 'service',
-         showMessage: true
+         checkQuotas: 'service'
        },
      ...
      }
 
 checkQuotas possible values: user, project, service, resource <br/>
-showMessage values: boolean <br/>
-If showMessage is set to true ng-click attribute should handle its switch <br/>
-tooltipType is optional parameter and yet is used only in ProjectUsersTab
 
-    <a check-quotas="{{entityOptions.entityData.checkQuotas}}"
-       ng-click="entityOptions.entityData.showMessage = !entityOptions.entityData.showMessage;"
-       show-message="entityOptions.entityData.showMessage" tooltip-type="listItems"
-       <span>{{ entityOptions.entityData.createLinkText }}</span>
-    </a>
-
-
+    <div class="tooltip-relative inline"
+         check-quotas="{{entityOptions.entityData.checkQuotas}}"
+         sref="{{ entityOptions.entityData.createLink }}"
+         class-link="button"
+         tooltip-type="list-items">
+        <span>{{ entityOptions.entityData.createLinkText }}</span>
+    </div>
 
 

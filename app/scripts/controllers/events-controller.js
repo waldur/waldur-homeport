@@ -171,9 +171,7 @@
         blockUI.start();
 
         this.checkQuotasResource = 'resource';
-        this.showQuotasMessageResource = true;
         this.checkQuotasProvider = 'service';
-        this.showQuotasMessageProvider = true;
 
       },
 

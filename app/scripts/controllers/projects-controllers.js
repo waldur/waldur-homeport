@@ -636,7 +636,6 @@
       user: null,
       project: null,
       checkQuotas: 'user',
-      showQuotasMessage: true,
 
       init: function() {
         this.setSignalHandler('currentProjectUpdated', this.activate.bind(controllerScope));
