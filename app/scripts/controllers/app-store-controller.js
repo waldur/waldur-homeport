@@ -76,7 +76,7 @@
       priceItems: [],
 
       fields: [],
-      limitChoices: 9,
+      limitChoices: 10,
 
       init:function() {
         this.service = resourcesService;
@@ -214,6 +214,10 @@
 
           if (name == 'user_data') {
             type = 'text';
+          }
+
+          if (name == 'size' || name == 'flavor') {
+            type = 'size';
           }
 
           var icons = {
