@@ -197,7 +197,7 @@
                            ng-class="{'active': AppStore.showOptionalFields}">{{ AppStore.showOptionalFields && 'Hide' || 'Show' }} additional options</a>
 
                     </section>
-                    <section class="step-3 agreement" ng-if="AppStore.agreementShow && AppStore.selectedCategory.type == 'package'">
+                    <section class="step-3 agreement appstore-purchase" ng-if="AppStore.agreementShow && AppStore.selectedCategory.type == 'package'">
                         <div class="step-title"><span>Step 3: Sign a support agreement</span></div>
                         <div class="step-content">
                             <ul>
