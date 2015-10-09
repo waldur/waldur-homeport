@@ -612,12 +612,14 @@
       'usersService',
       'baseControllerClass',
       'currentStateService',
+      '$q',
+      'blockUI',
       ProjectUsersTabController
     ]);
 
   function ProjectUsersTabController(
     $stateParams, projectsService, projectPermissionsService, USERPROJECTROLE, usersService, baseControllerClass,
-    currentStateService) {
+    currentStateService, $q, blockUI) {
     var controllerScope = this;
     var Controller = baseControllerClass.extend({
       users: {}, // users with role in project
@@ -652,8 +654,13 @@
         this.getUserListForAutoComplete();
       },
       getUsers: function() {
-        this.getUsersForProject(this.adminRole);
-        this.getUsersForProject(this.managerRole);
+        var block = blockUI.instances.get('tab-content');
+        block.start();
+        var admins = this.getUsersForProject(this.adminRole);
+        var managers = this.getUsersForProject(this.managerRole);
+        $q.all([admins, managers]).then(function() {
+          block.stop();
+        })
       },
       getUserListForAutoComplete: function(filter) {
         var vm = this;
@@ -730,10 +737,11 @@
       'projectsService',
       'baseEventListController',
       'currentStateService',
+      'blockUI',
       ProjectEventTabController
     ]);
 
-  function ProjectEventTabController($stateParams, projectsService, baseEventListController, currentStateService) {
+  function ProjectEventTabController($stateParams, projectsService, baseEventListController, currentStateService, blockUI) {
     var controllerScope = this;
     var EventController = baseEventListController.extend({
       project: null,
@@ -747,11 +755,17 @@
         this.getProject();
       },
       getList: function(filter) {
+        var block = blockUI.instances.get('tab-content');
+        block.start();
         if (this.project) {
           this.service.defaultFilter.scope = this.project.url;
-          return this._super(filter);
+          return this._super(filter).then(function() {
+            block.stop();
+          });
         } else {
-          return this.getProject();
+          return this.getProject().then(function() {
+            block.stop();
+          });
         }
       },
       getProject: function() {
@@ -915,11 +929,10 @@
 
   angular.module('ncsaas')
     .controller('ProjectApplicationsTabController', [
-      'BaseProjectResourcesTabController',
-      'ENV',
+      'BaseProjectResourcesTabController', 'currentStateService', 'blockUI', 'ENV',
       ProjectApplicationsTabController]);
 
-  function ProjectApplicationsTabController(BaseProjectResourcesTabController, ENV) {
+  function ProjectApplicationsTabController(BaseProjectResourcesTabController, currentStateService, blockUI, ENV) {
     var controllerScope = this;
     var ResourceController = BaseProjectResourcesTabController.extend({
       init:function() {
@@ -930,6 +943,21 @@
         this.entityOptions.entityData.noDataText = 'You have no applications yet';
         this.entityOptions.entityData.createLinkText = 'Create application';
         this.entityOptions.entityData.importLinkText = 'Import application';
+      },
+
+      getList: function(filter) {
+        var vm = this;
+        var fn = this._super.bind(vm);
+        var block = blockUI.instances.get('tab-content');
+        block.start();
+        filter = filter || {};
+        return currentStateService.getProject().then(function(project){
+          filter['project_uuid'] = project.uuid;
+          vm.service.defaultFilter.project_uuid = project.uuid;
+          return fn(filter).then(function() {
+            block.stop();
+          });
+        })
       }
     });
     controllerScope.__proto__ = new ResourceController();
@@ -1097,6 +1125,7 @@ angular.module('ncsaas')
       'ENV',
       '$filter',
       '$stateParams',
+      'blockUI',
       ProjectSupportTabController
     ]);
 
@@ -1108,7 +1137,8 @@ angular.module('ncsaas')
     ENTITYLISTFIELDTYPES,
     ENV,
     $filter,
-    $stateParams
+    $stateParams,
+    blockUI
     ) {
     var controllerScope = this;
     var ResourceController = baseControllerListClass.extend({
@@ -1175,13 +1205,19 @@ angular.module('ncsaas')
       getList: function(filter) {
         var vm = this;
         var fn = this._super.bind(vm);
+        var block = blockUI.instances.get('tab-content');
+        block.start();
         if ($stateParams.uuid) {
           this.service.defaultFilter.project_uuid = $stateParams.uuid;
-          return fn(filter);
+          return fn(filter).then(function() {
+            block.stop();
+          });
         }
         return currentStateService.getProject().then(function(project) {
           vm.service.defaultFilter.project_uuid = project.uuid;
-          return fn(filter);
+          return fn(filter).then(function() {
+            block.stop();
+          });
         })
       },
       showMore: function(contract) {

@@ -26,9 +26,11 @@
       'ngSanitize'
     ])
     // urls
-    .config(function($stateProvider, $urlRouterProvider, MODE) {
+    .config(function($stateProvider, $urlRouterProvider, blockUIConfig, MODE) {
       var initialDataState = 'initialdata.view',
         initialDataStatePath = '/initial-data/';
+
+      blockUIConfig.autoBlock = false;
 
       $urlRouterProvider.otherwise('/');
 

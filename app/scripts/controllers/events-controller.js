@@ -276,6 +276,7 @@
       'alertFormatter',
       'ENV',
       '$window',
+      'blockUI',
       DashboardActivityController]);
 
   function DashboardActivityController(
@@ -291,7 +292,8 @@
     currentStateService,
     alertFormatter,
     ENV,
-    $window) {
+    $window,
+    blockUI) {
     var controllerScope = this;
     var EventController = baseControllerClass.extend({
       showGraph: true,
@@ -327,8 +329,18 @@
       selectProject: function(project) {
         if (project) {
           project.selected =! project.selected;
-          this.getProjectCounters(project);
-          this.getProjectEvents(project);
+          var activityBlockUI = blockUI.instances.get('activity-content-' + project.uuid);
+          activityBlockUI.start();
+          if (!project.count) {
+            this.getProjectCounters(project);
+          }
+          if (!project.chartData) {
+            this.getProjectEvents(project).then(function(){
+              activityBlockUI.stop();
+            }, function() {
+              activityBlockUI.stop();
+            });
+          }
         }
       },
       onCustomerUpdate: function() {
@@ -339,6 +351,8 @@
       },
       getCustomerAlerts: function() {
         var vm = this;
+        var alertsBlockUI = blockUI.instances.get('dashboard-alerts-list');
+        alertsBlockUI.start();
         currentStateService.getCustomer().then(function(customer) {
           alertsService.getList({
             aggregate: 'customer',
@@ -348,14 +362,18 @@
               alert.html_message = alertFormatter.format(alert);
               return alert;
             });
+            alertsBlockUI.stop();
           });
         });
       },
       getCustomerEvents: function() {
         var vm = this;
+        var eventsBlockUI = blockUI.instances.get('dashboard-events-list');
+        eventsBlockUI.start();
         currentStateService.getCustomer().then(function(customer) {
           eventsService.getList({scope: customer.url}).then(function(response) {
             vm.events = response;
+            eventsBlockUI.stop();
           });
         });
       },
@@ -393,7 +411,8 @@
         var end = moment.utc().unix();
         var count = 7;
         var start = moment.utc().subtract(count + 1, 'days').unix();
-        eventStatisticsService.getList({
+
+        return eventStatisticsService.getList({
           scope: project.url,
           start: start,
           end: end,

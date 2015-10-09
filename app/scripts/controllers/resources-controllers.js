@@ -273,10 +273,11 @@
       'currentStateService',
       'BaseBackupListController',
       '$stateParams',
+      'blockUI',
       ResourceBackupListTabController
       ]);
 
-    function ResourceBackupListTabController(currentStateService, BaseBackupListController, $stateParams) {
+    function ResourceBackupListTabController(currentStateService, BaseBackupListController, $stateParams, blockUI) {
       var controllerScope = this;
       var Controller = BaseBackupListController.extend({
         init:function() {
@@ -285,14 +286,20 @@
         },
         getList: function(filter) {
           var vm = this;
+          var block = blockUI.instances.get('tab-content');
+          block.start();
           if ($stateParams.uuid) {
             this.service.defaultFilter.project_uuid = $stateParams.uuid;
-            return this._super(filter);
+            return this._super(filter).then(function() {
+              block.stop();
+            });
           } else {
             var fn = this._super.bind(controllerScope);
             return currentStateService.getProject().then(function(response) {
               vm.service.defaultFilter.project_uuid = response.uuid;
-              return fn(filter);
+              return fn(filter).then(function() {
+                block.stop();
+              });
             });
           }
         }
