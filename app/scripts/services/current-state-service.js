@@ -25,7 +25,7 @@
     vm.removeLastSelectedProject = removeLastSelectedProject;
     vm.getCustomerUuid = getCustomerUuid;
     vm.getProjectUuid = getProjectUuid;
-    vm.getQuota = getQuota;
+    vm.isQuotaExceeded = isQuotaExceeded;
 
     // private variables:
     var customer = null,
@@ -61,7 +61,7 @@
       });
     }
 
-    function getQuota(entity) {
+    function isQuotaExceeded(entity) {
       return vm.getCustomer().then(function(response) {
         for (var i = 0; i < response.quotas.length; i++) {
           var value = response.quotas[i];

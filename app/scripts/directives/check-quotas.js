@@ -43,16 +43,16 @@
       var item = scope.checkQuotas,
         currentCustomerUuid = currentStateService.getCustomerUuid();
 
-      currentStateService.getQuota(item).then(function(response) {
+      scope.plansLink = 'organizations.plans({uuid:\'' + currentCustomerUuid+ '\'})';
+
+      currentStateService.isQuotaExceeded(item).then(function(response) {
 
         var style = calculatePosition(element);
 
         scope.triangleBefore = style.triangleBefore;
         scope.triangleAfter = style.triangleAfter;
-        scope.plansLink = 'organizations.plans({uuid:\'' + currentCustomerUuid+ '\'})';
         scope.enable = response;
         scope.classes.disabled = scope.enable;
-
       });
     }
 

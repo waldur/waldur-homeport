@@ -50,7 +50,7 @@
           ];
           var vm = this;
           if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('resources') == -1) {
-            currentStateService.getQuota('resource').then(function(response) {
+            currentStateService.isQuotaExceeded('resource').then(function(response) {
               if (!response) {
                 vm.actionButtonsListItems.push({
                   title: 'Create resource',
@@ -63,7 +63,7 @@
             });
           }
           if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('import') == -1) {
-            currentStateService.getQuota('resource').then(function(response) {
+            currentStateService.isQuotaExceeded('resource').then(function(response) {
               if (!response) {
                 vm.actionButtonsListItems.push({
                   title: 'Import resource',

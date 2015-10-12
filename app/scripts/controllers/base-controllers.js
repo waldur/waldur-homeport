@@ -368,7 +368,7 @@
         }
 
         if (ENV.entityCreateLink[toState.name]) {
-          currentStateService.getQuota(ENV.entityCreateLink[toState.name]).then(function(response) {
+          currentStateService.isQuotaExceeded(ENV.entityCreateLink[toState.name]).then(function(response) {
             if (response) {
               $state.go('errorPage.limitQuota');
             }
