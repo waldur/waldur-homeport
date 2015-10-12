@@ -173,7 +173,7 @@
             resource.status = 'failed';
           })
         })).then(function() {
-          $state.go('projects.details', {uuid: vm.currentProject.uuid, tab: 'vms'});
+          $state.go('projects.details', {uuid: vm.currentProject.uuid, tab: ENV.resourcesTypes.vms});
         });
 
         vm.flashMessage('success', 'Wait while importing resources');
