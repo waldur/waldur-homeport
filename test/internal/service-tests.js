@@ -1,4 +1,5 @@
 var auth = require('../helpers/auth.js'),
+  constants = require('../helpers/constants.js'),
   helpers = require('../helpers/helpers.js');
 
 
@@ -29,7 +30,7 @@ for(var i = 0; i < testData.length; i++) {
         element(by.cssContainingText('.tabs-links li', 'Providers')).click();
         browser.wait(function() {
           return element(by.cssContainingText('.right-sort .button', 'Create provider')).isPresent();
-        }, 10000);
+        }, constants.WATING_TIME);
         element(by.cssContainingText('.right-sort .button', 'Create provider')).click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/services/add/');
       });
@@ -53,7 +54,7 @@ for(var i = 0; i < testData.length; i++) {
         expect(element(by.cssContainingText('.tabs-links li', 'Providers')).isPresent()).toBe(true);
         browser.wait(function() {
           return element(by.cssContainingText('.right-sort .button', 'Create provider')).isPresent();
-        }, 10000);
+        }, constants.WATING_TIME);
       });
 
       it('I should be able to find added service "' + data.name + '" in service list', function() {

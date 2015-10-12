@@ -1,5 +1,6 @@
 var auth = require('../helpers/auth.js'),
   helpers = require('../helpers/helpers.js'),
+  constants = require('../helpers/constants.js'),
   testData = [
     {
       user: auth.getUser('Walter'),
@@ -38,7 +39,7 @@ for(var i = 0; i < testData.length; i++) {
         element(by.cssContainingText('h3', data.service)).click();
         browser.wait(function() {
           return element(by.cssContainingText('h2', 'Image')).isPresent();
-        }, 10000);
+        }, constants.WATING_TIME);
         // set name
         element(by.model('AppStore.instance[field.name]')).sendKeys(resourceName);
         // choose image

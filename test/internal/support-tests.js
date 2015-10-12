@@ -36,6 +36,7 @@ describe('List and create issue', function() {
   });
 
   // TODO: server response is too long for issues filtering
+  // remove skip test when pending request for filtering by issues will not throw timeout error
   xit('I should be able to find added issue', function() {
     var listPage = new pages.ListIssuesPage();
     element(by.model('entityList.searchInput')).sendKeys(uuid);

@@ -1,3 +1,5 @@
+var constants = require('./constants.js');
+
 module.exports.getUser = function(name) {
   return {
     username: name,
@@ -19,7 +21,7 @@ module.exports.logout = function(user) {
 
   browser.wait(function (){
     return element(by.css('.user-dropdown .user-name')).isPresent();
-  }, 10000);
+  }, constants.WATING_TIME);
 
   element(by.css('.user-dropdown .user-name')).click();
   element(by.cssContainingText('ul.nav-sublist.user-area li a', 'Logout')).click();
