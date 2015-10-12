@@ -590,7 +590,7 @@
         this.errorFlash(message);
       },
       successRedirect: function() {
-        $state.go('resources.list', {tab: 'VMs'});
+        $state.go('resources.list', {tab: 'vms'});
       },
       setCompare: function(categoryName) {
         var index = this.compare.indexOf(categoryName);
