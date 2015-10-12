@@ -60,6 +60,10 @@
         </div>
     </div>
 
+    <div class="white-box no-styles" ng-show="entityList.list.length == 0 && (entityList.searchInput || entityList.chosenFilters.length)">
+        <h2 class="app-title" ng-bind="entityOptions.entityData.noMatchesText"></h2>
+    </div>
+
     <!-- view-control -->
     <!-- TODO: this functionality is not relevant and should be disabled until corresponding backend is ready. -->
     <section class="view-control" ng-if="(entityList.list.length > 0 || entityList.searchInput) && entityList.controlPanelShow">

@@ -375,6 +375,7 @@
     .controller('ProjectDetailUpdateController', [
       '$stateParams',
       '$rootScope',
+      '$q',
       'ENV',
       'projectsService',
       'baseControllerDetailUpdateClass',
@@ -389,6 +390,7 @@
   function ProjectDetailUpdateController(
     $stateParams,
     $rootScope,
+    $q,
     ENV,
     projectsService,
     baseControllerDetailUpdateClass,
@@ -533,15 +535,19 @@
       },
       setVmCounter: function() {
         var vm = this;
-        vm.getResourceCount(ENV.VirtualMachines, vm.model.uuid).then(function(count) {
-          vm.detailsViewOptions.tabs[2].count = count;
-        });
+        if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('resources') == -1) {
+          vm.getResourceCount(ENV.VirtualMachines, vm.model.uuid).then(function(count) {
+            vm.detailsViewOptions.tabs[2].count = count;
+          });
+        }
       },
       setAppCounter: function() {
         var vm = this;
-        vm.getResourceCount(ENV.Applications, vm.model.uuid).then(function(count) {
-          vm.detailsViewOptions.tabs[3].count = count;
-        });
+        if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('resources') == -1) {
+          vm.getResourceCount(ENV.Applications, vm.model.uuid).then(function(count) {
+            vm.detailsViewOptions.tabs[3].count = count;
+          });
+        }
       },
       getResourceCount: function(category, project_uuid) {
         return this.getResourceTypes(category).then(function(types) {
@@ -552,8 +558,12 @@
         });
       },
       getResourceTypes: function(category) {
+        var data = ENV.appStoreCategories[category];
+        if (!data) {
+          return $q.when([]);
+        }
+        var services = data.services;
         return servicesService.getServicesList().then(function(metadata) {
-          var services = ENV.appStoreCategories[category].services;
           var types = [];
           for (var i = 0; i < services.length; i++) {
             var service = services[i];
@@ -819,71 +829,17 @@
   angular.module('ncsaas')
     .service('BaseProjectResourcesTabController', [
       'baseResourceListController',
-      'resourcesService',
       'currentStateService',
-      'servicesService',
-      'blockUI',
-      'ENV',
       BaseProjectResourcesTabController]);
 
     function BaseProjectResourcesTabController(
       baseResourceListController,
-      resourcesService,
-      currentStateService,
-      servicesService,
-      blockUI,
-      ENV) {
+      currentStateService) {
 
       var controllerClass = baseResourceListController.extend({
         init: function() {
-          this.service = resourcesService;
           this._super();
           this.service.defaultFilter.project_uuid = currentStateService.getProjectUuid();
-          this.selectAll = true;
-        },
-        getList: function(filter) {
-          var vm = this;
-          var block = blockUI.instances.get('tab-content');
-          block.start();
-
-          var fn = vm._super.bind(vm);
-          if (vm.searchFilters.length == 0) {
-            return vm.getFilters(vm.category).then(function(filters) {
-              vm.searchFilters = filters;
-              vm.service.defaultFilter.resource_type = [];
-              for (var i = 0; i < filters.length; i++) {
-                vm.service.defaultFilter[filters[i].name].push(filters[i].value);
-              }
-              return fn(filter).then(function(list) {
-                block.stop();
-              });
-            });
-          } else {
-            return fn(filter).then(function() {
-              block.stop();
-            });
-          }
-        },
-        getFilters: function(category) {
-          return servicesService.getServicesList().then(function(metadata) {
-            var services = ENV.appStoreCategories[category].services;
-            var filters = [];
-            for (var i = 0; i < services.length; i++) {
-              var service = services[i];
-              if (!metadata[service]) {
-                continue;
-              }
-              var resources = metadata[service].resources;
-              for (var resource in resources) {
-                filters.push({
-                  name: 'resource_type',
-                  title: service,
-                  value: service + '.' + resource
-                });
-              }
-            }
-            return filters;
-          });
         }
       });
       return controllerClass;

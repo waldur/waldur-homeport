@@ -3,14 +3,34 @@
 (function() {
   angular.module('ncsaas')
     .service('baseResourceListController',
-    ['baseControllerListClass', 'ENV', 'ENTITYLISTFIELDTYPES', 'currentStateService', baseResourceListController]);
+    ['baseControllerListClass',
+    '$q',
+    'ENV',
+    'ENTITYLISTFIELDTYPES',
+    'blockUI',
+    'resourcesService',
+    'servicesService',
+    'currentStateService',
+    baseResourceListController
+    ]);
 
   // need for resource tab
-  function baseResourceListController(baseControllerListClass, ENV, ENTITYLISTFIELDTYPES, currentStateService) {
+  function baseResourceListController(
+    baseControllerListClass,
+    $q,
+    ENV,
+    ENTITYLISTFIELDTYPES,
+    blockUI,
+    resourcesService,
+    servicesService,
+    currentStateService) {
     var ControllerListClass = baseControllerListClass.extend({
       init: function() {
+        this.service = resourcesService;
         this._super();
         this.searchFieldName = 'name';
+        this.selectAll = true;
+        this.category = ENV.AllResources;
         this.actionButtonsListItems = [
           {
             title: 'Start',
@@ -50,6 +70,7 @@
         this.entityOptions = {
           entityData: {
             noDataText: 'You have no resources yet.',
+            noMatchesText: 'No resources found matching filter.'
           },
           list: [
             {
@@ -112,6 +133,71 @@
           }
         }
         return false;
+      },
+      getList: function(filter) {
+        var block = blockUI.instances.get('tab-content');
+        block.start();
+
+        var fn = this._super.bind(this);
+        this.adjustSearchFilters().then(function() {
+          return fn(filter).finally(function() {
+            block.stop();
+          });
+        });
+      },
+      adjustSearchFilters: function() {
+        var vm = this;
+        if (vm.searchFilters.length == 0) {
+          return vm.getFilters(vm.category).then(function(filters) {
+            vm.searchFilters = filters;
+            vm.service.defaultFilter.resource_type = [];
+            for (var i = 0; i < filters.length; i++) {
+              vm.service.defaultFilter[filters[i].name].push(filters[i].value);
+            }
+          });
+        } else {
+          return $q.when(true);
+        }
+      },
+      getFilters: function(category) {
+        var services = this.getServices(category);
+        if (services == []) {
+          return $q.when([]);
+        }
+        return servicesService.getServicesList().then(function(metadata) {
+          var filters = [];
+          for (var i = 0; i < services.length; i++) {
+            var service = services[i];
+            if (!metadata[service]) {
+              continue;
+            }
+            var resources = metadata[service].resources;
+            for (var resource in resources) {
+              filters.push({
+                name: 'resource_type',
+                title: service,
+                value: service + '.' + resource
+              });
+            }
+          }
+          return filters;
+        });
+      },
+      getServices: function(category) {
+        if (category == ENV.AllResources) {
+          var services = [];
+          for (var i = 0; i < ENV.appStoreCategories.length; i++) {
+            var item = ENV.appStoreCategories[i].services;
+            for (var i = 0; i < item.length; i++) {
+              services.push(item[i]);
+            }
+          }
+          return services;
+        } else if (!(ENV.appStoreCategories[category])) {
+          return [];
+        } else {
+          return ENV.appStoreCategories[category].services;
+        }
       },
       afterGetList: function() {
         for (var i = 0; i < this.list.length; i++) {
