@@ -4,13 +4,13 @@
 (function() {
   angular.module('ncsaas')
     .controller('HeaderController', [
-      '$rootScope', '$scope', '$state', 'currentStateService', 'customersService',
-      'usersService', 'ENV', 'baseControllerClass', '$translate', 'LANGUAGE', '$window', 'projectsService', '$q', 'blockUI',
+      '$rootScope', '$state', 'currentStateService', 'customersService',
+      'usersService', 'ENV', 'baseControllerClass', '$translate', 'LANGUAGE', 'projectsService', '$q', 'blockUI',
       HeaderController]);
 
   function HeaderController(
-    $rootScope, $scope, $state, currentStateService, customersService, usersService,
-    ENV, baseControllerClass, $translate, LANGUAGE, $window, projectsService, $q, blockUI) {
+    $rootScope, $state, currentStateService, customersService, usersService,
+    ENV, baseControllerClass, $translate, LANGUAGE, projectsService, $q, blockUI) {
     var controllerScope = this;
     var HeaderControllerClass = baseControllerClass.extend({
       customers: [],
@@ -181,7 +181,6 @@
             }
           }
           if (params.new) {
-            vm.projects.push(model);
             if (!vm.currentProject || !vm.currentProject.uuid || params.current) {
               vm.setCurrentProject(model);
             }
