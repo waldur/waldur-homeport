@@ -479,7 +479,7 @@
         };
       },
       getActiveTab: function() {
-        var tabs = [$stateParams.tab, 'eventlog', 'alerts', 'VMs'];
+        var tabs = [$stateParams.tab, 'eventlog', 'alerts', ENV.resourcesTypes.vms];
         for (var i = 0; i < tabs.length; i++) {
           var tab = tabs[i];
           if (tab && (ENV.featuresVisible || ENV.toBeFeatures.indexOf(tab) == -1)) {

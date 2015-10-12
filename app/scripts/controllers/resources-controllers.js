@@ -185,6 +185,7 @@
         'resourcesCountService',
         'alertsService',
         'baseControllerDetailUpdateClass',
+        'currentStateService',
         ResourceDetailUpdateController
       ]);
 
@@ -194,7 +195,8 @@
     resourcesService,
     resourcesCountService,
     alertsService,
-    baseControllerDetailUpdateClass) {
+    baseControllerDetailUpdateClass,
+    currentStateService) {
     var controllerScope = this;
     var Controller = baseControllerDetailUpdateClass.extend({
       activeTab: 'alerts',
@@ -239,7 +241,15 @@
           vm.model = response;
           vm.setCounters();
         }, function() {
-          $state.go('errorPage.notFound');
+          currentStateService.getProject().then(function() {
+            $state.go('resources.list');
+          }, function() {
+            currentStateService.getCustomer().then(function(response) {
+              $state.go('organizations.details', {uuid: response.uuid});
+            }, function() {
+              $state.go('dashboard.index');
+            });
+          });
         });
       },
 
