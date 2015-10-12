@@ -92,6 +92,10 @@ angular.module('ncsaas')
       'premiumSupport',
       'localSignup'
     ],
+    resourcesTypes: {
+      vms: 'vms',
+      applications: 'applications'
+    },
     featuresVisible: false,
 
     projectServiceLinkEndpoints: {

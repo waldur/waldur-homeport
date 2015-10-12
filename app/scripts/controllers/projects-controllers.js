@@ -436,13 +436,13 @@
             },
             {
               title: 'VMs',
-              key: 'VMs',
+              key: ENV.resourcesTypes.vms,
               viewName: 'tabResources',
               count: 0
             },
             {
               title: 'Applications',
-              key: 'applications',
+              key: ENV.resourcesTypes.applications,
               viewName: 'tabApplications',
               count: 0
             },
@@ -479,7 +479,7 @@
         };
       },
       getActiveTab: function() {
-        var tabs = [$stateParams.tab, 'eventlog', 'VMs'];
+        var tabs = [$stateParams.tab, 'eventlog', 'alerts', 'VMs'];
         for (var i = 0; i < tabs.length; i++) {
           var tab = tabs[i];
           if (tab && (ENV.featuresVisible || ENV.toBeFeatures.indexOf(tab) == -1)) {
