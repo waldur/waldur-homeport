@@ -1,5 +1,6 @@
 .appstore-templates {
     display: flex;
+    width: 100%;
     flex-wrap: wrap;
     margin-left: -10px;
     margin-right: -10px;
@@ -157,6 +158,41 @@
             }//xs
         }
     }//appstore-template-flavor
+
+    .appstore-template.appstore-template-image{
+        margin: 5px !important;
+        margin-left: 10px !important;
+    }
+    .appstore-template-image {
+        width: calc(50% - 15px);
+        padding: 10px !important;
+
+        @include bp(sm) {
+            width: 100%;
+        }
+
+        @include bp(xs) {
+            width: 100%;
+        }
+
+        .icon {
+            float: left;
+            width: 40px;
+            margin: 0px;
+            padding: 0px;
+        }
+        .description-image {
+            float: left;
+            font-weight: normal;
+            width: calc(100% - 40px);
+            padding-left: 10px;
+            text-align: left;
+
+            p {
+                margin: 0px;
+            }
+        }
+    } // appstore-template-image
 } // appstore-templates
 .appstore-wrapper {
     padding-right: 320px;
@@ -362,135 +398,40 @@
                     }
                 }
             }
-            .operating-system {
-                margin-top: 30px;
-                .tabs-wrapper {
-                    margin-top: 30px;
-                    position: relative;
-                    padding-left: 170px;
-                    .tabs-links {
-                        position: absolute;
-                        left: 0;
-                        top: 0;
-                        list-style: none;
-                        margin: 0;
-                        padding: 0;
-                        display: block;
-                        width: 170px;
-                        z-index: 1;
-                        li {
-                            height: 47px;
-                            line-height: 49px;
-                            cursor: pointer;
-                            display: block;
-                            width: 170px;
-                            padding-left: 14px;
-                            &.active {
-                                background: #fff;
-                                font-weight: 600;
-                                -webkit-box-shadow: -1px 1px 2px 0px #ededed;
-                                -moz-box-shadow:    -1px 1px 2px 0px #ededed;
-                                box-shadow:         -1px 1px  2px 0px #ededed;
-                            }
-                        }
-                    }
-                    .tabs-content {
-                        padding: 24px 15px;
-                        background: #fff;
-                        position: relative;
-                        overflow: auto;
-                        height: 141px;
-                        box-sizing: border-box;
-                        -webkit-box-shadow: -1px 1px 2px 0px #ededed;
-                        -moz-box-shadow:    -1px 1px 2px 0px #ededed;
-                        box-shadow:         -1px 1px  2px 0px #ededed;
-                        ul {
-                            list-style: none;
-                            padding: 0;
-                            margin: 0;
-                            li {
-                                width: 120px;
-                                text-align: center;
-                                float: left;
-                                cursor: pointer;
-                                border:1px solid #fff;
-                                &.active {
-                                    border-color: $dashboard-green;
-                                }
-                                .icon {
-                                    width: 70px;
-                                    height: 57px;
-                                    position: relative;
-                                    margin: 0 auto;
-                                    img {
-                                        display: inline;
-                                    }
-                                }
-                                span {
-                                    margin-top: 10px;
-                                    display: block;
-                                    text-align: center;
-                                }
-                            }
-                        }
+            .list-box {
+                margin: 0px;
+                padding: 0px;
+                background: none;
+                border: none;
+                box-shadow: none;
+
+                .list {
+                    min-height: 40px;
+                    -webkit-box-shadow: 0px 2px 2px 0px #ededed;
+                    box-shadow: 0px 2px 2px 0px #ededed;
+                    -webkit-border-radius: 0px;
+                    border-radius: 0px;
+                    padding: 8px;
+                    margin: 8px;
+                    border: 1px solid #cacaca;
+                    cursor: pointer;
+                    background: #fff;
+                    &.state {
+                        border: 1px solid rgb(62, 171, 84);
                     }
                 }
-            }
-            .configuration {
-                margin-top: 30px;
-                ul {
-
-                    list-style: none;
-                    margin: 0;
-                    padding: 0;
-                    padding-top: 20px;
-                    li {
-                        text-align: center;
-                        padding: 25px;
-                        float: left;
-                        width: 165px;
-                        margin-right: 8px;
-                        background: #fff;
-                        border:1px solid #fff;
-                        cursor: pointer;
-                        height: 125px;
-                        box-sizing: border-box;
-                        font-weight: bold;
-                        &.state {
-                            border: 1px solid $dashboard-green;
-                            &:after {
-                                // content: '\f058';
-                                content: '\f00c';
-                                font-family: FontAwesome;
-                                -webkit-font-smoothing: antialiased;
-                                -moz-osx-font-smoothing: grayscale;
-                                @include property(font-size, $big-font);
-                                text-align: center;
-                                background-color: $dashboard-green;
-                                color: #fff;
-                                width: 26px;
-                                height: 26px;
-                                border-radius: 100%;
-                                position: absolute;
-                                left: 50%;
-                                margin-left: -13px;
-                                bottom: -13px;
-                            } // &:after
-                        } // &.state
-                        h3 {
-                            color: $dashboard-green;
-                            font-size: 28px;
-                            font-weight: bold;
-                            margin: 0;
-                        }
-                        h4 {
-                            font-size: 16px;
-                            margin: 0;
-                        }
-                        span {
-                            font-size: 16px;
-                        }
-                    }
+                .list-item > span {
+                    width: 70px;
+                }
+                .title {
+                    width: 40% !important;
+                    font-weight: bold;
+                }
+                .list-header .title {
+                    padding-left: 25px;
+                }
+                .list-header {
+                    font-weight: bold;
                 }
             }
             .keys {

@@ -117,13 +117,13 @@
       afterGetList: function() {
         for (var i = 0; i < this.list.length; i++) {
           var item = this.list[i];
+          item.access_info_text = 'No access info';
           if (item.external_ips && item.external_ips.length > 0) {
             item.access_info_text = item.external_ips.join(', ');
-          } else {
-            item.access_info_text = 'No access info';
           }
-          if (item.rdp && item.state == 'Online') {
+          else if (item.rdp && item.state == 'Online') {
             item.access_info_url = item.rdp;
+            item.access_info_text = 'Connect';
           }
         }
       },
@@ -186,6 +186,7 @@
         'resourcesCountService',
         'alertsService',
         'baseControllerDetailUpdateClass',
+        'currentStateService',
         ResourceDetailUpdateController
       ]);
 
@@ -195,7 +196,8 @@
     resourcesService,
     resourcesCountService,
     alertsService,
-    baseControllerDetailUpdateClass) {
+    baseControllerDetailUpdateClass,
+    currentStateService) {
     var controllerScope = this;
     var Controller = baseControllerDetailUpdateClass.extend({
       activeTab: 'alerts',
@@ -240,7 +242,15 @@
           vm.model = response;
           vm.setCounters();
         }, function() {
-          $state.go('errorPage.notFound');
+          currentStateService.getProject().then(function() {
+            $state.go('resources.list');
+          }, function() {
+            currentStateService.getCustomer().then(function(response) {
+              $state.go('organizations.details', {uuid: response.uuid});
+            }, function() {
+              $state.go('dashboard.index');
+            });
+          });
         });
       },
 
