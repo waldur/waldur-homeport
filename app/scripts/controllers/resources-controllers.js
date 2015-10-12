@@ -56,14 +56,16 @@
               type: ENTITYLISTFIELDTYPES.statusCircle,
               propertyName: 'state',
               onlineStatus: ENV.resourceOnlineStatus,
-              className: 'visual-status'
+              className: 'visual-status',
+              showForMobile: true,
             },
             {
               name: 'Name',
               propertyName: 'name',
               type: ENTITYLISTFIELDTYPES.name,
               link: 'resources.details({uuid: entity.uuid, resource_type: entity.resource_type})',
-              showForMobile: ENTITYLISTFIELDTYPES.showForMobile
+              showForMobile: ENTITYLISTFIELDTYPES.showForMobile,
+              className: 'resource-name'
             },
             {
               name: 'Type',
@@ -79,7 +81,9 @@
               name: 'Access',
               propertyName: 'access_info_text',
               urlProperyName: 'access_info_url',
-              type: ENTITYLISTFIELDTYPES.linkOrText
+              type: ENTITYLISTFIELDTYPES.linkOrText,
+              showForMobile: true,
+              className: 'resource-access'
             }
           ]
         };
