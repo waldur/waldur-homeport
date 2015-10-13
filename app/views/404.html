@@ -1,4 +1,5 @@
-<div class="white-box error-card">
+<div ng-controller="Error404Controller as Error404" class="white-box error-card">
     <div class="list-item error-number">404</div>
     <div class="list-item error-text">Page not found :/</div>
+    <a ui-sref="{{ Error404.sref }}">< Back</a>
 </div>

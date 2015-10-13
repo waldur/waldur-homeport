@@ -322,7 +322,11 @@
         currentStateService.isCustomerDefined = false;
         $state.go('home.login');
       },
-      stateChangeSuccessHandler: function(event, toState) {
+      stateChangeSuccessHandler: function(event, toState, toParams, fromState, fromParams) {
+        $rootScope.prevPreviousState = $rootScope.previousState;
+        $rootScope.prevPreviousParams = $rootScope.previousParams;
+        $rootScope.previousState = fromState;
+        $rootScope.previousParams= fromParams;
         this.deregisterEvent('adjustCurrentCustomer');
         this.deregisterEvent('adjustCurrentProject');
         this.deregisterEvent('currentCustomerUpdated'); // clear currentCustomerUpdated event handlers
@@ -397,5 +401,34 @@
     controllerScope.__proto__ = new Controller();
   }
 
-})();
+  angular.module('ncsaas')
+    .controller('Error404Controller', ['$rootScope', 'baseControllerClass', Error404Controller]);
 
+  function Error404Controller($rootScope, baseControllerClass) {
+    var controllerScope = this;
+    var Controller = baseControllerClass.extend({
+      init: function() {
+        var state = $rootScope.prevPreviousState;
+        this.sref = (state && state.name !== 'errorPage.notFound')
+          ? state.name + this.getStateParams()
+          : 'dashboard.index';
+      },
+      getStateParams: function() {
+        if ($rootScope.prevPreviousParams) {
+          var params = $rootScope.prevPreviousState.url.replace(/-|\//gi,'').split(':'),
+            paramsArray = [];
+          for (var i = 0; i < params.length; i++) {
+            if ($rootScope.prevPreviousParams[params[i]]) {
+              paramsArray.push(params[i] + ": '" + $rootScope.prevPreviousParams[params[i]] + "'");
+            }
+          }
+          var joined = paramsArray.join(',');
+          return joined ? '({' + joined + '})' : '';
+        }
+        return '';
+      }
+    });
+    controllerScope.__proto__ = new Controller();
+  }
+
+})();
