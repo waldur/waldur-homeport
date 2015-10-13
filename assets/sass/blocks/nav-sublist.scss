@@ -7,7 +7,6 @@
     left: 50%;
     position: absolute;
     background-color: #4fb547;
-    overflow: hidden;
     &.block-ui {
         position: absolute;
         .block-ui-message {
@@ -46,6 +45,9 @@
             @include property(margin, 5 0);
             background-color: #ADADAD;
         } // & divider
+        &:last-child {
+            border-radius: 0 0 4px 4px;
+        }
         &:hover, &:active {
             background-color: #409a3c;
         } // &:hover, &:active
@@ -78,7 +80,8 @@
             } // lightmd
 
         } // customers
-        > a {
+        > a,
+        > div > a {
             display: block;
             @include property(font-size, $small-font);
             @include property(margin, 0 10);
@@ -177,6 +180,9 @@
             }
             &:hover {
                 background-color: #e0e0e0;
+            }
+            &:nth-last-child(2) {
+                border-radius: 0 0 4px 4px;
             }
         }
     } // > li

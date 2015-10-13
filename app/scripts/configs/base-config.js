@@ -109,5 +109,12 @@ angular.module('ncsaas')
 
     requestTimeout: 1000 * 10,
     countsCacheTime: 60, // seconds
-    enablePurchaseCostDisplay: true
+    enablePurchaseCostDisplay: true,
+    entityCreateLink: {
+      'services.create': 'service',
+      'projects.create': 'project',
+      'appstore.store':  'resource',
+      'import.import':   'resource'
+    }
+
   });

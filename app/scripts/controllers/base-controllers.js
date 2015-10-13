@@ -25,6 +25,10 @@
         profileMenu: false,
         LangMenu: false
       },
+      checkQuotas: {
+        projects: 'project',
+        resources: 'resource'
+      },
 
       init: function() {
         this.activate();
@@ -366,6 +370,14 @@
           currentStateService.setProject(projectDeferred.promise);
         }
 
+        if (ENV.entityCreateLink[toState.name]) {
+          currentStateService.isQuotaExceeded(ENV.entityCreateLink[toState.name]).then(function(response) {
+            if (response) {
+              $state.go('errorPage.limitQuota');
+            }
+          });
+        }
+
         function getProject() {
           if ($window.localStorage[ENV.currentProjectUuidStorageKey]) {
             projectsService.$get($window.localStorage[ENV.currentProjectUuidStorageKey]).then(function(response) {
@@ -402,8 +414,25 @@
   }
 
   angular.module('ncsaas')
-    .controller('Error404Controller', ['$rootScope', '$state', 'baseControllerClass', Error404Controller]);
+    .controller('Error403Controller', ['baseControllerClass', 'currentStateService', Error403Controller]);
 
+  function Error403Controller(baseControllerClass, currentStateService) {
+    var controllerScope = this;
+    var Controller = baseControllerClass.extend({
+      init: function() {
+        var vm = this;
+        currentStateService.getCustomer().then(function(response) {
+          vm.customer = response;
+        });
+      }
+    });
+
+    controllerScope.__proto__ = new Controller();
+  }
+
+  angular.module('ncsaas')
+    .controller('Error404Controller', ['$rootScope', '$state', 'baseControllerClass', Error404Controller]);
+  
   function Error404Controller($rootScope, $state, baseControllerClass) {
     var controllerScope = this;
     var Controller = baseControllerClass.extend({

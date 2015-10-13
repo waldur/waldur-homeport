@@ -1,5 +1,5 @@
 .app-wrap {
-    @include property(margin-bottom, -50);
+    @include property(margin-bottom, -29);
     min-height: calc(100% - 20px);
     &:after {
         content: "";
