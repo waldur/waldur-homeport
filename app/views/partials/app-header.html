@@ -78,7 +78,8 @@
                 <li visible="resources" class="appstore">
                     <div check-quotas="{{Header.checkQuotas.resources}}"
                          sref="appstore.store"
-                         class-link="appstore"
+                         ng-class="{'disabled' : !Header.currentProject.name}"
+                         class-link="appstore {{ Header.menuItemActive === 'appstore' ? 'active' : '' }}"
                          tooltip-type="head-nav-appstore">
                         <span translate>Appstore</span>
                     </div>
