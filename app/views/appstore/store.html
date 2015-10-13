@@ -137,6 +137,46 @@
                                 </div>
                             </form>
 
+                            <div ng-switch-when="size" ng-if="field.choices.length > 0">
+                                <h2 ng-bind="field.label"></h2>
+
+                                <form ng-show="AppStore.isListLong(field)">
+                                    <div class="string-field">
+                                    <input type="text" placeholder="Search by name"
+                                           ng-model="field.searchQuery" ng-init="field.searchQuery=''"/>
+                                    </div>
+                                </form>
+
+                                <div class="appstore-templates">
+                                    <div class="white-box list-box">
+                                        <ul class="object-list">
+                                            <li class="list-item list-header">
+                                                <span class="title">Title</span>
+                                                <span>CPU</span>
+                                                <span>RAM</span>
+                                                <span>HDD</span>
+                                            </li>
+
+                                            <li ng-repeat="choice in field.choices | filter: {'display_name': field.searchQuery} | limitTo: field.limit"
+                                                ng-click="AppStore.doChoice(field.name, choice)"
+                                                ng-class="{'state': AppStore.instance[field.name] == choice.value, 'disabled': choice.disabled}"
+                                                class="list-item list">
+                                                <span class="title">{{ ::choice.display_name }}</span>
+                                                <span>{{ ::choice.item.cores == 1 && '1 core' || choice.item.cores + ' cores'}}</span>
+                                                <span>{{ ::choice.item.ram | mb2gb }}</span>
+                                                <span>{{ ::choice.item.disk | mb2gb}}</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <a ng-init="field.limit = AppStore.limitChoices"
+                                   ng-show="AppStore.isListLong(field)"
+                                   ng-click="AppStore.toggleChoicesLimit(field)"
+                                   ng-class="{'active': AppStore.isListExpanded(field)}"
+                                   class="toggle-link pull-right">Show {{ AppStore.isListExpanded(field) && 'less' || 'more' }} choices</a>
+                            </div>
+
                             <div ng-switch-when="choice">
                                 <div ng-if="!field.choices.length && field.name =='ssh_public_key'">
                                     <h2 ng-bind="field.label"></h2>
@@ -159,21 +199,11 @@
                                                  ng-repeat="choice in field.choices | filter: {'display_name': field.searchQuery} | limitTo: field.limit"
                                                  ng-click="AppStore.doChoice(field.name, choice)"
                                                  ng-class="{'state': AppStore.instance[field.name] == choice.value, 'disabled': choice.disabled}">
-                                                <div class="icon {{ ::field.icon }}"></div>
+
+                                                <div ng-if="::!choice.icon" class="icon {{ ::field.icon }}"></div>
+                                                <div ng-if="::choice.icon" class="icon"><img ng-src="/static/images/appstore/icon-{{ ::choice.icon }}.png"></div>
+
                                                 <div ng-switch="::field.name" class="description-{{::field.name}}">
-                                                    <div ng-switch-when="flavor">
-                                                        <p>{{ ::choice.display_name }}</p>
-                                                        <p>CPU: <ng-pluralize count="::choice.item.cores"
-                                                                              when="{'1': '1 core', 'other': '{} cores'}"></ng-pluralize></p>
-                                                        <p>RAM: {{ ::choice.item.ram | mb2gb }}</p>
-                                                        <p>HDD: {{ ::choice.item.disk | mb2gb}}</p>
-                                                    </div>
-                                                    <div ng-switch-when="size">
-                                                        <p>CPU: <ng-pluralize count="::choice.item.cores"
-                                                                              when="{'1': '1 core', 'other': '{} cores'}"></ng-pluralize></p>
-                                                        <p>RAM: {{ ::choice.item.ram | mb2gb }}</p>
-                                                        <p>HDD: {{ ::choice.item.disk | mb2gb}}</p>
-                                                    </div>
                                                     <div ng-switch-when="image">
                                                         <p>{{ ::choice.item.distribution }} {{ ::choice.display_name }}</p>
                                                     </div>
@@ -197,7 +227,7 @@
                            ng-class="{'active': AppStore.showOptionalFields}">{{ AppStore.showOptionalFields && 'Hide' || 'Show' }} additional options</a>
 
                     </section>
-                    <section class="step-3 agreement" ng-if="AppStore.agreementShow && AppStore.selectedCategory.type == 'package'">
+                    <section class="step-3 agreement appstore-purchase" ng-if="AppStore.agreementShow && AppStore.selectedCategory.type == 'package'">
                         <div class="step-title"><span>Step 3: Sign a support agreement</span></div>
                         <div class="step-content">
                             <ul>

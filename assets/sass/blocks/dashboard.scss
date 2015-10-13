@@ -8,12 +8,31 @@
       display: none;
     }
   }
+  .event-action-buttons {
+    float: right;
+    > div {
+      height: 33px;
+    }
+  }
   .active-content {
     animation: content-show .5s 1 ease-out;
     padding-top: 0px;
   }
   .inactive-content {
     animation: content-hide .2s 1 ease-out;
+  }
+  .tooltip {
+    &.quota-tooltip {
+      top: 62px;
+    }
+  }
+  .cost-tab-actions {
+    position: relative;
+    .tooltip {
+      &.quota-tooltip {
+        top: 30px;
+      }
+    }
   }
   h2 {
     float: left;
@@ -41,6 +60,7 @@
   .white-box {
     min-height: 73px;
     padding: 20px 40px;
+    position: relative;
     &.placeholder {
       line-height: 35px;
     }

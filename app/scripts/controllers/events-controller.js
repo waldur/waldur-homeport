@@ -92,12 +92,14 @@
     return baseControllerListClass.extend({
       init: function() {
         this.service = alertsService;
+        this.searchFieldName = 'message';
         this._super();
 
         this.entityOptions = {
           entityData: {
             noDataText: 'No alerts yet',
-            hideActionButtons: true
+            hideActionButtons: true,
+            hideTableHead: true
           },
           list: [
             {
@@ -137,6 +139,7 @@
     var EventController = baseControllerClass.extend({
       init: function() {
         $scope.activeTab = $stateParams.tab || 'activity';
+        this.checkQuotas = 'project';
       }
     });
 
@@ -166,6 +169,10 @@
         $scope.$on('currentCustomerUpdated', this.onCustomerUpdate.bind(this));
         this.onCustomerUpdate();
         blockUI.start();
+
+        this.checkQuotasResource = 'resource';
+        this.checkQuotasProvider = 'service';
+
       },
 
       onCustomerUpdate: function() {
@@ -310,6 +317,8 @@
           scaleShowGridLines: false,
           bezierCurve: false
         };
+
+        this.checkQuotas = 'project';
 
         $scope.$on('currentCustomerUpdated', this.onCustomerUpdate.bind(this));
         this.onCustomerUpdate();

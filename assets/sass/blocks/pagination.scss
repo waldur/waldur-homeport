@@ -3,16 +3,16 @@
     color: #C0C0C0;
 
     .column {
-        width: 50%;
+        width: 28%;
         float: left;
         padding-top: 6px;
 
+        @include bp(xs) {
+            display: none;
+        }
+
         &.right {
             text-align: right;
-            float: right;
-            @include bp(xs) {
-                width: 130px;
-            }
         }
 
         a.page-size {
@@ -32,7 +32,8 @@
     }
 
     .body {
-        margin-bottom: 10px;
+        width: 44%;
+        float: left;
         text-align: center;
 
         a {

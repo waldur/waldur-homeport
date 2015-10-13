@@ -23,6 +23,24 @@
     &.list-header {
         min-height: 40px;
         padding: 5px 0;
+
+        .resource-name {
+            @include bp(xs) {
+                display: none !important;
+            } // xs
+            @include bp(sm) {
+                display: none !important;
+            } // sm
+        }
+
+        .resource-access {
+            @include bp(xs) {
+                display: none !important;
+            } // xs
+            @include bp(sm) {
+                display: none !important;
+            } // sm
+        }
     } // &.list-header
     &.dash {
         &:before {
@@ -216,10 +234,45 @@
                 width: 40px;
             }
             &.message {
-                width: 70%;
+                width: auto;
+                line-height: 1.5;
+                white-space: normal;
+                @include bp(xs) {
+                    display: inline-block;
+                } // xs
+                @include bp(sm) {
+                    display: inline-block;
+                } // sm
             }
             &.date {
                 color: #929391;
+                width: 150px;
+                @include bp(xs) {
+                    display: inline-block;
+                } // xs
+                @include bp(sm) {
+                    display: inline-block;
+                } // sm
+            }
+            &.resource-name {
+                @include bp(xs) {
+                    display: block;
+                } // xs
+                @include bp(sm) {
+                    display: block;
+                } // sm
+            }
+            &.resource-access {
+                @include bp(xs) {
+                    display: block;
+                    margin-top: 5px;
+                    font-size: 10pt;
+                } // xs
+                @include bp(sm) {
+                    display: block;
+                    margin-top: 5px;
+                    font-size: 10pt;
+                } // sm
             }
         } // &.additional-cell
         .more-details {

@@ -821,6 +821,22 @@
           auth: true
         })
 
+        .state('errorPage.limitQuota', {
+          url: '403/',
+          views: {
+            'appContent': {
+              templateUrl: 'views/403.html',
+            },
+            'appHeader': {
+              templateUrl: 'views/partials/app-header.html',
+            }
+          },
+          resolve: {
+            authenticated: authCheck
+          },
+          auth: true
+        })
+
         .state('backups', {
           url: '/backups/',
           abstract: true,

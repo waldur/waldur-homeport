@@ -345,3 +345,29 @@ Config file settings:
         title      - string - title of tab
         key        - string - key of tab
         viewName   - string - key for tab view
+
+## checkQuotas directive
+
+Used on links to check whether it should be disabled based on current quotas or not. <br/>
+Also optional tooltip can be shown to notify user about lack of quotas. <br/>
+Two options in controller should be defined e.g:
+
+     this.entityOptions = {
+       entityData: {
+         ...
+         checkQuotas: 'service'
+       },
+     ...
+     }
+
+checkQuotas possible values: user, project, service, resource <br/>
+
+    <div class="tooltip-relative inline"
+         check-quotas="{{entityOptions.entityData.checkQuotas}}"
+         sref="{{ entityOptions.entityData.createLink }}"
+         class-link="button"
+         tooltip-type="list-items">
+        <span>{{ entityOptions.entityData.createLinkText }}</span>
+    </div>
+
+
