@@ -277,6 +277,7 @@
       'ENV',
       '$window',
       'blockUI',
+      '$q',
       DashboardActivityController]);
 
   function DashboardActivityController(
@@ -293,7 +294,8 @@
     alertFormatter,
     ENV,
     $window,
-    blockUI) {
+    blockUI,
+    $q) {
     var controllerScope = this;
     var EventController = baseControllerClass.extend({
       showGraph: true,
@@ -327,20 +329,22 @@
         });
       },
       selectProject: function(project) {
+        var projectCounters, projectEvents;
         if (project) {
           project.selected =! project.selected;
           var activityBlockUI = blockUI.instances.get('activity-content-' + project.uuid);
           activityBlockUI.start();
           if (!project.count) {
-            this.getProjectCounters(project);
+            projectCounters = this.getProjectCounters(project);
           }
           if (!project.chartData) {
-            this.getProjectEvents(project).then(function(){
-              activityBlockUI.stop();
-            }, function() {
-              activityBlockUI.stop();
-            });
+            projectEvents = this.getProjectEvents(project);
           }
+          $q.all([projectCounters, projectEvents]).then(function() {
+            activityBlockUI.stop();
+          }, function() {
+            activityBlockUI.stop()
+          });
         }
       },
       onCustomerUpdate: function() {
@@ -363,6 +367,8 @@
               return alert;
             });
             alertsBlockUI.stop();
+          }, function() {
+            alertsBlockUI.stop();
           });
         });
       },
@@ -373,6 +379,8 @@
         currentStateService.getCustomer().then(function(customer) {
           eventsService.getList({scope: customer.url}).then(function(response) {
             vm.events = response;
+            eventsBlockUI.stop();
+          }, function() {
             eventsBlockUI.stop();
           });
         });
@@ -393,16 +401,17 @@
         }
         project.count = {};
         project.count.services = project.services.length;
-        resourcesCountService.users({'project': project.uuid}).then(function(count) {
+        var users =  resourcesCountService.users({'project': project.uuid}).then(function(count) {
           project.count.users = count;
         });
-        resourcesCountService.resources({project_uuid: project.uuid}).then(function(count) {
+        var resources = resourcesCountService.resources({project_uuid: project.uuid}).then(function(count) {
           project.count.resources = count;
         });
         var query = angular.extend(alertsService.defaultFilter, {aggregate: 'project', uuid: project.uuid});
-        resourcesCountService.alerts(query).then(function(count) {
+        var alerts = resourcesCountService.alerts(query).then(function(count) {
           project.count.alerts = count;
         });
+        return $q.all([users, resources, alerts]);
       },
       getProjectEvents: function (project) {
         if (project.chartData) {

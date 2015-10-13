@@ -209,8 +209,8 @@
 
       init: function() {
         this.controllerScope = controllerScope;
+        this.blockUIElement = 'tab-content';
         this._super();
-        this.getUser();
         this.entityOptions = {
           entityData: {
             noDataText: 'No events yet.',
@@ -232,22 +232,19 @@
         };
       },
       getList: function(filter) {
-        if (this.user) {
-          this.service.defaultFilter.scope = this.user.url;
-          this._super(filter);
-        }
-      },
-      getUser: function() {
-        var vm = this;
+        var vm = this,
+          fn = this._super.bind(this);
         if ($stateParams.uuid) {
           return usersService.$get($stateParams.uuid).then(function (response) {
             vm.user = response;
-            vm.getList();
+            vm.service.defaultFilter.scope = vm.user.url;
+            fn(filter);
           });
         } else {
           return usersService.getCurrentUser().then(function(response) {
             vm.user = response;
-            vm.getList();
+            vm.service.defaultFilter.scope = vm.user.url;
+            fn(filter);
           });
         }
       }
@@ -323,11 +320,10 @@
 
       init: function() {
         this.controllerScope = controllerScope;
+        this.blockUIElement = 'tab-content';
         this.service = keysService;
         if ($stateParams.uuid) {
           this.user.uuid = $stateParams.uuid;
-        } else {
-          this.getCurrentUser();
         }
         this._super();
 
@@ -366,17 +362,18 @@
         ];
       },
       getList: function(filter) {
+        var vm = this,
+          fn = this._super.bind(this);
         if (this.user.uuid) {
-          this.service.defaultFilter.user_uuid = this.user.uuid;
-          return this._super(filter);
+          vm.service.defaultFilter.user_uuid = vm.user.uuid;
+          return fn(filter);
+        } else {
+          return usersService.getCurrentUser().then(function(response) {
+            vm.user = response;
+            vm.service.defaultFilter.user_uuid = vm.user.uuid;
+            return fn(filter);
+          });
         }
-      },
-      getCurrentUser: function() {
-        var vm = this;
-        usersService.getCurrentUser().then(function(response) {
-          vm.user = response;
-          vm.getList();
-        });
       }
     });
 

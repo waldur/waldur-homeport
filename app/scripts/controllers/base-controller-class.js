@@ -48,9 +48,9 @@
 (function(){
 
   angular.module('ncsaas')
-    .service('baseControllerListClass', ['baseControllerClass', 'ENV', baseControllerListClass]);
+    .service('baseControllerListClass', ['baseControllerClass', 'ENV', 'blockUI', baseControllerListClass]);
 
-  function baseControllerListClass(baseControllerClass, ENV) {
+  function baseControllerListClass(baseControllerClass, ENV, blockUI) {
     /**
      * Use controllerScope.__proto__ = new Controller() in needed controller
      * use this.controllerScope for changes in event handler
@@ -71,6 +71,7 @@
       chosenFilters: [],
       cacheTime: ENV.defaultListCacheTime,
       controlPanelShow: true,
+      blockUIElement: null,
 
       init: function() {
         this.setSignalHandler('currentCustomerUpdated', this.currentCustomerUpdatedHandler.bind(this));
@@ -79,7 +80,8 @@
         this.service.page = 1;
         this.service.cacheTime = this.cacheTime;
         this._super();
-        this.getList();
+        this.listPromise = this.getList();
+        this.blockListElement();
         // reset after state change
         this.selectedInstances = [];
         this.controlPanelShow = ENV.listControlPanelShow;
@@ -94,6 +96,17 @@
           vm.list = response;
           vm.afterGetList();
         });
+      },
+      blockListElement: function() {
+        if (this.blockUIElement) {
+          var block = blockUI.instances.get(this.blockUIElement);
+          block.start();
+          this.listPromise.then(function() {
+            block.stop();
+          }, function() {
+            block.stop();
+          });
+        }
       },
       afterGetList: function() {},
       generalSearchChanged: function(event, text) {
