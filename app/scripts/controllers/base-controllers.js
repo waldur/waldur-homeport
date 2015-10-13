@@ -25,6 +25,10 @@
         profileMenu: false,
         LangMenu: false
       },
+      checkQuotas: {
+        projects: 'project',
+        resources: 'resource'
+      },
 
       init: function() {
         this.activate();
@@ -362,6 +366,14 @@
           currentStateService.setProject(projectDeferred.promise);
         }
 
+        if (ENV.entityCreateLink[toState.name]) {
+          currentStateService.isQuotaExceeded(ENV.entityCreateLink[toState.name]).then(function(response) {
+            if (response) {
+              $state.go('errorPage.limitQuota');
+            }
+          });
+        }
+
         function getProject() {
           if ($window.localStorage[ENV.currentProjectUuidStorageKey]) {
             projectsService.$get($window.localStorage[ENV.currentProjectUuidStorageKey]).then(function(response) {
@@ -397,5 +409,21 @@
     controllerScope.__proto__ = new Controller();
   }
 
-})();
+  angular.module('ncsaas')
+    .controller('ErrorController', ['baseControllerClass', 'currentStateService', ErrorController]);
 
+  function ErrorController(baseControllerClass, currentStateService) {
+    var controllerScope = this;
+    var Controller = baseControllerClass.extend({
+      init: function() {
+        var vm = this;
+        currentStateService.getCustomer().then(function(response) {
+          vm.customer = response;
+        });
+      }
+    });
+
+    controllerScope.__proto__ = new Controller();
+  }
+
+})();

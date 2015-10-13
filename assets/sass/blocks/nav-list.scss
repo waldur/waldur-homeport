@@ -195,7 +195,8 @@
             }
         } // &.customers
 
-        > a {
+        > a,
+        > div > a {
             @include property(padding, 0 15);
             @include property(padding-top, 13);
             @include property(height, 50);
