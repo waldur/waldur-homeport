@@ -12,7 +12,7 @@ ListIssuesPage.prototype = {
   },
 
   expandIssue: function(summary) {
-    element(by.cssContainingText('div.list-item', summary)).click();
+    element(by.cssContainingText('.object-list li:not(.list-item)', summary)).click();
   }
 };
 

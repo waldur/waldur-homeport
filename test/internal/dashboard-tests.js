@@ -15,7 +15,6 @@ var auth = require('../helpers/auth.js'),
 for(var i = 0; i < testData.length; i++) {
   var data = testData[i];
 
-  // This test will work only with working events on backend. It will not work with mocked events.
   (function(data) {
     describe('Test ' + data.full_name + ' can see events log:', function() {
       it('I should be able to login', function() {
@@ -24,9 +23,10 @@ for(var i = 0; i < testData.length; i++) {
       });
 
       it('I should be able to see my authorisation log', function() {
-        var eventMessage = 'has signed in with a username/password';
-        expect(element(by.cssContainingText('.list-item .event', eventMessage)).isPresent()).toBe(true);
-        expect(element(by.cssContainingText('.list-item .event .name', data.full_name)).isPresent()).toBe(true);
+        expect(element(by.cssContainingText('.container h1', 'Dashboard')).isPresent()).toBe(true);
+        expect(element(by.cssContainingText('.half-block h3', 'Projects')).isPresent()).toBe(true);
+        expect(element(by.cssContainingText('.alerts-list h3', 'Alerts')).isPresent()).toBe(true);
+        expect(element(by.cssContainingText('.alerts-list h3', 'Recent events')).isPresent()).toBe(true);
       });
 
       it('I should be able to logout', function() {

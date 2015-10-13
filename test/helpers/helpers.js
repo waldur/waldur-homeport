@@ -1,3 +1,5 @@
+var constants = require('./constants.js');
+
 module.exports.getUUID = function() {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
     var r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
@@ -6,8 +8,16 @@ module.exports.getUUID = function() {
 };
 
 module.exports.chooseCustomer = function(customerName) {
-  element(by.css('.dropdown.customers .active-context')).click();
+  element(by.css('.dropdown.customers .customer-name')).click();
   element(by.cssContainingText('.dropdown.customers .nav-sublist li a', customerName)).click();
+  browser.wait(function() {
+    return element(by.cssContainingText('.details-container h1', 'Organization')).isPresent();
+  }, constants.WATING_TIME);
+};
+
+module.exports.chooseProject = function(projectName) {
+  element(by.css('.dropdown.project-dropdown .project-context')).click();
+  element(by.cssContainingText('.dropdown.project-dropdown .nav-sublist li a', projectName)).click();
 };
 
 /**

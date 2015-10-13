@@ -380,6 +380,20 @@ module.exports = function(grunt) {
                   }
                 }
               ]
+            },
+            modeDevelop: {
+              files: [
+                {
+                  expand: true,
+                  cwd: 'app/scripts/configs/modes/',
+                  src: ['develop.js'],
+                  dest: 'app/scripts/configs/',
+                  filter: 'isFile',
+                  rename: function(dest) {
+                    return dest + 'mode-config.js';
+                  }
+                }
+              ]
             }
         },
 
@@ -566,7 +580,7 @@ module.exports = function(grunt) {
 
     require('load-grunt-tasks')(grunt);
 
-    var mode = grunt.option('mode') || 'modePrivateIaas';
+    var mode = grunt.option('mode') || 'modeDevelop';
 
     grunt.registerTask(
         'build', ['copy:main', 'imagemin', 'sass', 'autoprefixer', 'cssmin']);
@@ -593,5 +607,6 @@ module.exports = function(grunt) {
     grunt.registerTask('modeSquStudentCloud', ['copy:modeSquStudentCloud']);
     grunt.registerTask('modePublicBrokerage', ['copy:modePublicBrokerage']);
     grunt.registerTask('modeCostTracking', ['copy:modeCostTracking']);
+    grunt.registerTask('modeDevelop', ['copy:modeDevelop']);
 
 };
