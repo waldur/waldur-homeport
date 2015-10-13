@@ -25,13 +25,12 @@
                 <span class="button-tooltip"
                       ng-if="entityOptions.entityData.importLink"
                       title="{{ entityOptions.entityData.importLinkTooltip }}"
-                      ng-class="{'disabled': entityOptions.entityData.importDisabled}"
                       visible="import">
                     <div class="tooltip-relative inline"
+                         ng-class="{'disabled': entityOptions.entityData.importDisabled}"
                          check-quotas="{{entityOptions.entityData.checkQuotas}}"
                          class-link="button"
                          tooltip-type="list-items"
-                         title="{{ entityOptions.entityData.importLinkTooltip }}"
                          sref="{{ entityOptions.entityData.importLink }}">
                         <span>{{ entityOptions.entityData.importLinkText }}</span>
                     </div>
@@ -60,13 +59,12 @@
                     <span class="button-tooltip"
                           ng-if="entityOptions.entityData.importLink"
                           title="{{ entityOptions.entityData.importLinkTooltip }}"
-                          ng-class="{'disabled': entityOptions.entityData.importDisabled}"
                           visible="import">
                         <div class="tooltip-relative inline"
+                             ng-class="{'disabled': entityOptions.entityData.importDisabled}"
                              check-quotas="{{entityOptions.entityData.checkQuotas}}"
                              class-link="button"
                              tooltip-type="list-items"
-                             title="{{ entityOptions.entityData.importLinkTooltip }}"
                              sref="{{ entityOptions.entityData.importLink }}">
                             <span>{{ entityOptions.entityData.importLinkText }}</span>
                         </div>
