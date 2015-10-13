@@ -57,14 +57,20 @@
                          sref="{{ entityOptions.entityData.createLink }}">
                         {{ entityOptions.entityData.createLinkText }}
                     </div>
-                    <div ng-if="entityOptions.entityData.importLink"
-                         class="tooltip-relative inline"
-                         check-quotas="{{entityOptions.entityData.checkQuotas}}"
-                         class-link="button"
-                         tooltip-type="empty-list-items"
-                         sref="{{ entityOptions.entityData.importLink }}">
-                        {{ entityOptions.entityData.importLinkText }}
-                    </div>
+                    <span class="button-tooltip"
+                          ng-if="entityOptions.entityData.importLink"
+                          title="{{ entityOptions.entityData.importLinkTooltip }}"
+                          ng-class="{'disabled': entityOptions.entityData.importDisabled}"
+                          visible="import">
+                        <div class="tooltip-relative inline"
+                             check-quotas="{{entityOptions.entityData.checkQuotas}}"
+                             class-link="button"
+                             tooltip-type="list-items"
+                             title="{{ entityOptions.entityData.importLinkTooltip }}"
+                             sref="{{ entityOptions.entityData.importLink }}">
+                            <span>{{ entityOptions.entityData.importLinkText }}</span>
+                        </div>
+                    </span>
                     <list-cache-reset list-controller="entityList"
                                       list-service="entityService"></list-cache-reset>
             </div>
