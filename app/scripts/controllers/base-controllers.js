@@ -402,30 +402,16 @@
   }
 
   angular.module('ncsaas')
-    .controller('Error404Controller', ['$rootScope', 'baseControllerClass', Error404Controller]);
+    .controller('Error404Controller', ['$rootScope', '$state', 'baseControllerClass', Error404Controller]);
 
-  function Error404Controller($rootScope, baseControllerClass) {
+  function Error404Controller($rootScope, $state, baseControllerClass) {
     var controllerScope = this;
     var Controller = baseControllerClass.extend({
       init: function() {
         var state = $rootScope.prevPreviousState;
-        this.sref = (state && state.name !== 'errorPage.notFound')
-          ? state.name + this.getStateParams()
-          : 'dashboard.index';
-      },
-      getStateParams: function() {
-        if ($rootScope.prevPreviousParams) {
-          var params = $rootScope.prevPreviousState.url.replace(/-|\//gi,'').split(':'),
-            paramsArray = [];
-          for (var i = 0; i < params.length; i++) {
-            if ($rootScope.prevPreviousParams[params[i]]) {
-              paramsArray.push(params[i] + ": '" + $rootScope.prevPreviousParams[params[i]] + "'");
-            }
-          }
-          var joined = paramsArray.join(',');
-          return joined ? '({' + joined + '})' : '';
-        }
-        return '';
+        this.href = (state && state.name !== 'errorPage.notFound')
+          ? $state.href(state.name, $rootScope.prevPreviousParams)
+          : $state.href('dashboard.index');
       }
     });
     controllerScope.__proto__ = new Controller();
