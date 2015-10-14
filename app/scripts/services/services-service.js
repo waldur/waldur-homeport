@@ -2,9 +2,9 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('servicesService', ['baseServiceClass', '$q', '$http', servicesService]);
+    .service('servicesService', ['baseServiceClass', '$q', '$http', 'ENV', servicesService]);
 
-  function servicesService(baseServiceClass, $q, $http) {
+  function servicesService(baseServiceClass, $q, $http, ENV) {
     /*jshint validthis: true */
     var ServiceClass = baseServiceClass.extend({
       services: null,
@@ -81,6 +81,27 @@
           })
         }
         return deferred.promise;
+      },
+      getResourceTypes: function(category) {
+        var data = ENV.appStoreCategories[category];
+        if (!data) {
+          return $q.when([]);
+        }
+        var services = data.services;
+        return this.getServicesList().then(function(metadata) {
+          var types = [];
+          for (var i = 0; i < services.length; i++) {
+            var service = services[i];
+            if (!metadata[service]) {
+              continue;
+            }
+            var resources = metadata[service].resources;
+            for (var resource in resources) {
+              types.push(service + "." + resource);
+            }
+          }
+          return types;
+        });
       }
     });
     return new ServiceClass();

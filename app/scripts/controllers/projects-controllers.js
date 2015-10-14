@@ -561,32 +561,11 @@
         }
       },
       getResourceCount: function(category, project_uuid) {
-        return this.getResourceTypes(category).then(function(types) {
+        return servicesService.getResourceTypes(category).then(function(types) {
           return resourcesCountService.resources({
             project_uuid: project_uuid,
             resource_type: types
           });
-        });
-      },
-      getResourceTypes: function(category) {
-        var data = ENV.appStoreCategories[category];
-        if (!data) {
-          return $q.when([]);
-        }
-        var services = data.services;
-        return servicesService.getServicesList().then(function(metadata) {
-          var types = [];
-          for (var i = 0; i < services.length; i++) {
-            var service = services[i];
-            if (!metadata[service]) {
-              continue;
-            }
-            var resources = metadata[service].resources;
-            for (var resource in resources) {
-              types.push(service + "." + resource);
-            }
-          }
-          return types;
         });
       },
       setBackupsCounter: function() {
