@@ -916,10 +916,10 @@
 
   angular.module('ncsaas')
     .controller('ProjectApplicationsTabController', [
-      'BaseProjectResourcesTabController', 'currentStateService', 'ENV',
+      'BaseProjectResourcesTabController', 'ENV',
       ProjectApplicationsTabController]);
 
-  function ProjectApplicationsTabController(BaseProjectResourcesTabController, currentStateService, ENV) {
+  function ProjectApplicationsTabController(BaseProjectResourcesTabController, ENV) {
     var controllerScope = this;
     var ResourceController = BaseProjectResourcesTabController.extend({
       init:function() {
@@ -930,17 +930,6 @@
         this.entityOptions.entityData.noDataText = 'You have no applications yet';
         this.entityOptions.entityData.createLinkText = 'Create application';
         this.entityOptions.entityData.importLinkText = 'Import application';
-      },
-
-      getList: function(filter) {
-        var vm = this;
-        var fn = this._super.bind(vm);
-        filter = filter || {};
-        return currentStateService.getProject().then(function(project){
-          filter['project_uuid'] = project.uuid;
-          vm.service.defaultFilter.project_uuid = project.uuid;
-          return fn(filter);
-        })
       }
     });
     controllerScope.__proto__ = new ResourceController();

@@ -283,7 +283,6 @@
       'alertFormatter',
       'ENV',
       '$window',
-      'blockUI',
       '$q',
       DashboardActivityController]);
 
@@ -301,7 +300,6 @@
     alertFormatter,
     ENV,
     $window,
-    blockUI,
     $q) {
     var controllerScope = this;
     var EventController = baseControllerClass.extend({
@@ -341,19 +339,14 @@
         var projectCounters, projectEvents;
         if (project) {
           project.selected =! project.selected;
-          var activityBlockUI = blockUI.instances.get('activity-content-' + project.uuid);
-          activityBlockUI.start();
           if (!project.count) {
             projectCounters = this.getProjectCounters(project);
           }
           if (!project.chartData) {
             projectEvents = this.getProjectEvents(project);
           }
-          $q.all([projectCounters, projectEvents]).then(function() {
-            activityBlockUI.stop();
-          }, function() {
-            activityBlockUI.stop()
-          });
+
+          this.blockElement('activity-content-' + project.uuid, $q.all([projectCounters, projectEvents]));
         }
       },
       onCustomerUpdate: function() {
@@ -364,10 +357,8 @@
       },
       getCustomerAlerts: function() {
         var vm = this;
-        var alertsBlockUI = blockUI.instances.get('dashboard-alerts-list');
-        alertsBlockUI.start();
-        currentStateService.getCustomer().then(function(customer) {
-          alertsService.getList({
+        var promise = currentStateService.getCustomer().then(function(customer) {
+          return alertsService.getList({
             aggregate: 'customer',
             uuid: customer.uuid
           }).then(function(response) {
@@ -375,24 +366,18 @@
               alert.html_message = alertFormatter.format(alert);
               return alert;
             });
-            alertsBlockUI.stop();
-          }, function() {
-            alertsBlockUI.stop();
           });
         });
+        this.blockElement('dashboard-alerts-list', promise);
       },
       getCustomerEvents: function() {
         var vm = this;
-        var eventsBlockUI = blockUI.instances.get('dashboard-events-list');
-        eventsBlockUI.start();
-        currentStateService.getCustomer().then(function(customer) {
-          eventsService.getList({scope: customer.url}).then(function(response) {
+        var promise = currentStateService.getCustomer().then(function(customer) {
+          return eventsService.getList({scope: customer.url}).then(function(response) {
             vm.events = response;
-            eventsBlockUI.stop();
-          }, function() {
-            eventsBlockUI.stop();
           });
         });
+        this.blockElement('dashboard-events-list', promise);
       },
       getCustomerProjects: function() {
         var vm = this;

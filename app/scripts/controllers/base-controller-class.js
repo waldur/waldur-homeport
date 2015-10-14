@@ -1,8 +1,8 @@
 (function(){
   angular.module('ncsaas')
-    .service('baseControllerClass', ['$rootScope', 'Flash', baseControllerClass]);
+    .service('baseControllerClass', ['$rootScope', 'Flash', 'blockUI', baseControllerClass]);
 
-  function baseControllerClass($rootScope, Flash) {
+  function baseControllerClass($rootScope, Flash, blockUI) {
     var ControllerClass = Class.extend({
       _signals: {},
 
@@ -38,6 +38,13 @@
       },
       emitEvent: function(eventName) {
         $rootScope.$broadcast(eventName)
+      },
+      blockElement: function(element, promise) {
+        var block = blockUI.instances.get(element);
+        block.start();
+        promise.finally(function() {
+          block.stop();
+        });
       }
     });
 
@@ -49,10 +56,10 @@
 
   angular.module('ncsaas')
     .service('baseControllerListClass', [
-      'baseControllerClass', 'ENV', '$rootScope', 'currentStateService', 'blockUI', baseControllerListClass
+      'baseControllerClass', 'ENV', '$rootScope', 'currentStateService', baseControllerListClass
     ]);
 
-  function baseControllerListClass(baseControllerClass, ENV, $rootScope, currentStateService, blockUI) {
+  function baseControllerListClass(baseControllerClass, ENV, $rootScope, currentStateService) {
     /**
      * Use controllerScope.__proto__ = new Controller() in needed controller
      * use this.controllerScope for changes in event handler
@@ -101,11 +108,7 @@
       },
       blockListElement: function() {
         if (this.blockUIElement) {
-          var block = blockUI.instances.get(this.blockUIElement);
-          block.start();
-          this.listPromise.finally(function() {
-            block.stop();
-          });
+          this.blockElement(this.blockUIElement, this.listPromise);
         }
       },
       afterGetList: function() {},
