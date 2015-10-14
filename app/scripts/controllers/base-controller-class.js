@@ -103,9 +103,7 @@
         if (this.blockUIElement) {
           var block = blockUI.instances.get(this.blockUIElement);
           block.start();
-          this.listPromise.then(function() {
-            block.stop();
-          }, function() {
+          this.listPromise.finally(function() {
             block.stop();
           });
         }

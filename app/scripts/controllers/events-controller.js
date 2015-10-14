@@ -405,12 +405,9 @@
         });
       },
       getProjectCounters: function (project) {
-        if (project.count) {
-          return;
-        }
         project.count = {};
         project.count.services = project.services.length;
-        var users =  resourcesCountService.users({'project': project.uuid}).then(function(count) {
+        var users = resourcesCountService.users({'project': project.uuid}).then(function(count) {
           project.count.users = count;
         });
         var resources = resourcesCountService.resources({project_uuid: project.uuid}).then(function(count) {
@@ -423,9 +420,6 @@
         return $q.all([users, resources, alerts]);
       },
       getProjectEvents: function (project) {
-        if (project.chartData) {
-          return;
-        }
         var end = moment.utc().unix();
         var count = 7;
         var start = moment.utc().subtract(count + 1, 'days').unix();

@@ -297,24 +297,19 @@
       var Controller = BaseBackupListController.extend({
         init:function() {
           this.controllerScope = controllerScope;
+          this.blockUIElement = 'tab-content';
           this._super();
         },
         getList: function(filter) {
           var vm = this;
-          var block = blockUI.instances.get('tab-content');
-          block.start();
           if ($stateParams.uuid) {
             this.service.defaultFilter.project_uuid = $stateParams.uuid;
-            return this._super(filter).then(function() {
-              block.stop();
-            });
+            return this._super(filter);
           } else {
             var fn = this._super.bind(controllerScope);
             return currentStateService.getProject().then(function(response) {
               vm.service.defaultFilter.project_uuid = response.uuid;
-              return fn(filter).then(function() {
-                block.stop();
-              });
+              return fn(filter);
             });
           }
         }
