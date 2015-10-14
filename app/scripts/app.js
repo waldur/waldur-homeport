@@ -218,25 +218,6 @@
           auth: true
         })
 
-        .state('dashboard.eventlog', {
-          url: 'events/',
-          views: {
-            'appHeader@dashboard' : {
-              templateUrl: 'views/partials/app-header.html',
-            },
-            'appContent@dashboard' : {
-              templateUrl: 'views/dashboard/event-log.html',
-            },
-            'eventTypes@dashboard.eventlog' : {
-              templateUrl: 'views/events/event-types.html',
-            }
-          },
-          resolve: {
-            authenticated: authCheck
-          },
-          auth: true
-        })
-
         .state('appstore', {
           url: '/appstore/',
           abstract: true,

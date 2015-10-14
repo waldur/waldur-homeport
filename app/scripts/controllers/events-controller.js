@@ -3,14 +3,12 @@
 (function() {
   angular.module('ncsaas')
     .service('baseEventListController', [
-      'baseControllerListClass', 'eventsService', 'EVENTTYPE', 'ENTITYLISTFIELDTYPES', 'eventFormatter',
+      'baseControllerListClass', 'eventsService', 'ENTITYLISTFIELDTYPES', 'eventFormatter',
       baseEventListController]);
 
   function baseEventListController(
-    baseControllerListClass, eventsService, EVENTTYPE, ENTITYLISTFIELDTYPES, eventFormatter) {
+    baseControllerListClass, eventsService, ENTITYLISTFIELDTYPES, eventFormatter) {
     var ControllerListClass = baseControllerListClass.extend({
-      EVENTTYPE: EVENTTYPE,
-
       init:function() {
         this.service = eventsService;
         this.searchFieldName = 'search';
@@ -22,14 +20,12 @@
           },
           list: [
             {
-              name: 'Message',
               propertyName: 'html_message',
               className: 'message',
               type: ENTITYLISTFIELDTYPES.html,
               showForMobile: true
             },
             {
-              name: 'Date',
               propertyName: '@timestamp',
               className: 'date',
               type: ENTITYLISTFIELDTYPES.date,

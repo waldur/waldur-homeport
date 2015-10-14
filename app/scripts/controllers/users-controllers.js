@@ -211,25 +211,6 @@
         this.controllerScope = controllerScope;
         this._super();
         this.getUser();
-        this.entityOptions = {
-          entityData: {
-            noDataText: 'No events yet.',
-            hideActionButtons: true,
-            hideTableHead: true
-          },
-          list: [
-            {
-              type: ENTITYLISTFIELDTYPES.noType,
-              propertyName: 'message',
-              showForMobile: true,
-              className: 'event-message'
-            },
-            {
-              type: ENTITYLISTFIELDTYPES.date,
-              propertyName: '@timestamp'
-            }
-          ]
-        };
       },
       getList: function(filter) {
         if (this.user) {

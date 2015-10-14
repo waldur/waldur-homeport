@@ -139,7 +139,7 @@
     // Active menuItem
     var urlList = {
       appstore: ['appstore.store'],
-      dashboard: ['dashboard.index', 'dashboard.eventlog'],
+      dashboard: ['dashboard.index'],
       resources: ['resources.list'],
       projects: ['projects.list', 'projects.details', 'projects.create', 'projects.add-users'],
       services: ['services.list', 'services.create', 'services.details'],
