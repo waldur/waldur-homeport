@@ -70,21 +70,24 @@
         this.entityOptions = {
           entityData: {
             noDataText: 'You have no resources yet.',
-            noMatchesText: 'No resources found matching filter.'
+            noMatchesText: 'No resources found matching filter.',
+            checkQuotas: 'resource'
           },
           list: [
             {
               type: ENTITYLISTFIELDTYPES.statusCircle,
               propertyName: 'state',
               onlineStatus: ENV.resourceOnlineStatus,
-              className: 'visual-status'
+              className: 'visual-status',
+              showForMobile: true,
             },
             {
               name: 'Name',
               propertyName: 'name',
               type: ENTITYLISTFIELDTYPES.name,
               link: 'resources.details({uuid: entity.uuid, resource_type: entity.resource_type})',
-              showForMobile: ENTITYLISTFIELDTYPES.showForMobile
+              showForMobile: ENTITYLISTFIELDTYPES.showForMobile,
+              className: 'resource-name'
             },
             {
               name: 'Type',
@@ -100,7 +103,9 @@
               name: 'Access',
               propertyName: 'access_info_text',
               urlProperyName: 'access_info_url',
-              type: ENTITYLISTFIELDTYPES.linkOrText
+              type: ENTITYLISTFIELDTYPES.linkOrText,
+              showForMobile: true,
+              className: 'resource-access'
             }
           ]
         };
@@ -202,13 +207,13 @@
       afterGetList: function() {
         for (var i = 0; i < this.list.length; i++) {
           var item = this.list[i];
+          item.access_info_text = 'No access info';
           if (item.external_ips && item.external_ips.length > 0) {
             item.access_info_text = item.external_ips.join(', ');
-          } else {
-            item.access_info_text = 'No access info';
           }
-          if (item.rdp && item.state == 'Online') {
+          else if (item.rdp && item.state == 'Online') {
             item.access_info_url = item.rdp;
+            item.access_info_text = 'Connect';
           }
         }
       },

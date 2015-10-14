@@ -155,6 +155,7 @@
       setResourceType: function(type) {
         var vm = this;
         vm.selectedResourceType = type;
+        vm.selectedResourceTypeName = type.split(/(?=[A-Z])/).join(" ");
         vm.fields = [];
         var resourceUrl = vm.serviceMetadata.resources[vm.selectedResourceType];
         if (resourceUrl) {

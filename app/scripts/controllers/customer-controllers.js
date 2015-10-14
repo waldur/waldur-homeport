@@ -174,6 +174,11 @@
           ],
           tabs: [
             {
+              title: 'Events',
+              key: 'eventlog',
+              viewName: 'tabEventlog'
+            },
+            {
               title: 'Alerts',
               key: 'alerts',
               viewName: 'tabAlerts'
@@ -198,7 +203,7 @@
       },
 
       getActiveTab: function() {
-        var tabs = [$stateParams.tab, 'resources', 'projects'];
+        var tabs = [$stateParams.tab, 'eventlog', 'resources', 'projects'];
         for (var i = 0; i < tabs.length; i++) {
           var tab = tabs[i];
           if (tab && (ENV.featuresVisible || ENV.toBeFeatures.indexOf(tab) == -1)) {
@@ -231,6 +236,7 @@
         var query = angular.extend(alertsService.defaultFilter, {aggregate: 'customer', uuid: vm.model.uuid});
 
         $q.all([
+          resourcesCountService.events({'scope': vm.model.url}),
           resourcesCountService.alerts(query),
           resourcesCountService.resources({'customer_uuid': vm.model.uuid}),
           resourcesCountService.projects({'customer': vm.model.uuid}),
@@ -240,6 +246,7 @@
           vm.detailsViewOptions.tabs[1].count = responses[1];
           vm.detailsViewOptions.tabs[2].count = responses[2];
           vm.detailsViewOptions.tabs[3].count = responses[3];
+          vm.detailsViewOptions.tabs[4].count = responses[4];
         });
       },
 
@@ -521,6 +528,7 @@
         this.service.filterByCustomer = false;
         this._super();
         this.entityOptions.entityData.title = '';
+        this.entityOptions.entityData.checkQuotas = 'project';
       }
     });
 
@@ -604,4 +612,36 @@
 
     controllerScope.__proto__ = new controllerClass();
   }
+})();
+
+(function() {
+  angular.module('ncsaas')
+      .controller('CustomerEventTabController', [
+        'baseEventListController',
+        'currentStateService',
+        CustomerEventTabController
+      ]);
+
+  function CustomerEventTabController(baseEventListController, currentStateService) {
+    var controllerScope = this;
+    var EventController = baseEventListController.extend({
+
+      init: function() {
+        this.controllerScope = controllerScope;
+        this._super();
+      },
+
+      getList: function(filter) {
+        var vm = this,
+        fn = this._super.bind(vm);
+        return currentStateService.getCustomer().then(function(customer) {
+          vm.service.defaultFilter.scope = customer.url;
+          return fn(filter);
+        });
+      }
+    });
+
+    controllerScope.__proto__ = new EventController();
+  }
+
 })();

@@ -13,6 +13,7 @@
     var vm = this;
     vm.getCustomer = getCustomer;
     vm.setCustomer = setCustomer;
+    vm.reloadCurrentCustomer = reloadCurrentCustomer;
     vm.isCustomerDefined = false;
 
     vm.getActiveItem = getActiveItem;
@@ -24,6 +25,7 @@
     vm.removeLastSelectedProject = removeLastSelectedProject;
     vm.getCustomerUuid = getCustomerUuid;
     vm.getProjectUuid = getProjectUuid;
+    vm.isQuotaExceeded = isQuotaExceeded;
 
     // private variables:
     var customer = null,
@@ -56,7 +58,31 @@
       customer = $q.when(newCustomer);
       customer.then(function(response) {
         $window.localStorage[ENV.currentCustomerUuidStorageKey] = response.uuid;
-      })
+      });
+    }
+
+    function isQuotaExceeded(entity) {
+      return vm.getCustomer().then(function(response) {
+        for (var i = 0; i < response.quotas.length; i++) {
+          var value = response.quotas[i];
+          value.name = value.name.replace(/nc_|_count/gi, '');
+          if (entity && value.name === entity && value.limit > -1 && (value.limit === value.usage || value.limit === 0)) {
+            return true;
+          }
+        }
+        return false;
+      });
+    }
+
+    function reloadCurrentCustomer(callback) {
+      vm = this;
+      var uuid = vm.getCustomerUuid();
+      vm.getCustomer().then(function(customer) {
+        customer.$get(uuid).then(function(customer) {
+          vm.setCustomer(customer);
+          callback(customer);
+        });
+      });
     }
 
     function setProject(newProject) {
@@ -113,7 +139,7 @@
     // Active menuItem
     var urlList = {
       appstore: ['appstore.store'],
-      dashboard: ['dashboard.index', 'dashboard.eventlog'],
+      dashboard: ['dashboard.index'],
       resources: ['resources.list'],
       projects: ['projects.list', 'projects.details', 'projects.create', 'projects.add-users'],
       services: ['services.list', 'services.create', 'services.details'],

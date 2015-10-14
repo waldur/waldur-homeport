@@ -138,18 +138,9 @@
         this.issue.summary = "";
         this.issue.description = "";
       },
-      save: function() {
-        var vm = this;
-        vm.instance.$save(success, error);
-        function success() {
-          vm.afterSave();
-          vm.successFlash(vm.successMessage.replace('{vm_name}', vm.instance.summary));
-          vm.successRedirect();
-        }
-        function error(response) {
-          vm.errors = response.data;
-        }
-      },
+      getSuccessMessage: function() {
+        return this.successMessage.replace('{vm_name}', this.instance.summary);
+      }
     });
 
     controllerScope.__proto__ = new controllerClass();

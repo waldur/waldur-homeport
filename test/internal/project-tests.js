@@ -2,12 +2,7 @@ var auth = require('../helpers/auth.js'),
   helpers = require('../helpers/helpers.js'),
   testData = [
     {
-      user: auth.getUser('Charlie'),
-      projects: ['bells.org'],
-      customer: 'Ministry of Bells'
-    },
-    {
-      user: auth.getUser('Bob'),
+      user: auth.getUser('Walter'),
       projects: ['bells.org'],
       customer: 'Ministry of Bells'
     }
@@ -25,17 +20,15 @@ for(var i = 0; i < testData.length; i++) {
       });
 
       it('I should be able to go to projects list', function() {
-        element(by.css('.dropdown.project-dropdown .project-context')).click();
-        element(by.cssContainingText('.dropdown.project-dropdown .nav-sublist li a', 'Manage projects')).click();
-        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/projects/');
         helpers.chooseCustomer(customer);
+        goToProjectList();
       });
 
 
       for(var j = 0; j < data.projects.length; j++) {
         (function(project) {
           it('I should be able to see ' + project + ' at projects list page', function() {
-            element(by.model('ProjectList.searchInput')).sendKeys(project);
+            element(by.model('entityList.searchInput')).sendKeys(project);
             expect(element(by.cssContainingText('h3.item-title a', project)).isPresent()).toBe(true);
           });
         })(data.projects[j]);
@@ -54,7 +47,7 @@ for(var i = 0; i < testData.length; i++) {
 var addProjectTestData = [
   {
     user: auth.getUser('Walter'),
-    customer: 'Ministry of Whistles'
+    customer: 'Ministry of Bells'
   },
   {
     user: auth.getUser('Alice'),
@@ -72,16 +65,13 @@ for(var i = 0; i < addProjectTestData.length; i++) {
       it('I should be able to login', function() {
         auth.login(user);
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/dashboard/');
-        helpers.chooseCustomer(data.customer);
       });
 
       it('I should be able to go to "project add" page', function() {
-        element(by.css('.dropdown.project-dropdown .project-context')).click();
-        element(by.cssContainingText('.dropdown.project-dropdown .nav-sublist li a', 'Manage projects')).click();
-        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/projects/');
+        helpers.chooseCustomer(data.customer);
+        goToProjectList();
 
-        element(by.css('li.add-something > a')).click();
-        element(by.cssContainingText('li.add-something li a.project', 'Add project')).click();
+        element(by.cssContainingText('.button span', 'Add project')).click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/projects/add/');
       });
 
@@ -91,13 +81,13 @@ for(var i = 0; i < addProjectTestData.length; i++) {
 
         element(by.cssContainingText('a.button-apply', 'Create project')).click();
 
-        expect(element(by.cssContainingText('h2.app-title', projectName)).isPresent()).toBe(true);
+        expect(element(by.cssContainingText('.details-about .name', projectName)).isPresent()).toBe(true);
       });
 
       it('I should be able to see ' + projectName + ' at projects list page', function() {
-        element(by.css('.dropdown.project-dropdown .project-context')).click();
-        element(by.cssContainingText('.dropdown.project-dropdown .nav-sublist li a', 'Manage projects')).click();
-        element(by.model('ProjectList.searchInput')).sendKeys(projectName);
+        goToProjectList();
+        element(by.model('entityList.searchInput')).sendKeys(projectName);
+        expect(element(by.cssContainingText('h3.item-title a', projectName)).isPresent()).toBe(true);
       });
 
       it('I should be able to logout', function() {
@@ -112,15 +102,14 @@ var addUserToProjectTestData = [
   {
     user: auth.getUser('Walter'),
     customer: 'Ministry of Bells',
-    adminUser: 'Alice Lebowski',
+    adminUser: 'Dave Lebowski',
     managerUser: 'Charlie Lebowski'
   }
 ];
 
 for(var i = 0; i < addUserToProjectTestData.length; i++) {
   var data = addUserToProjectTestData[i],
-    user = data.user,
-    projectUrl;
+    user = data.user;
 
   (function(data, user) {
     describe('Customer owner(' + user.username + ') should be able to add user to project:', function() {
@@ -131,14 +120,11 @@ for(var i = 0; i < addUserToProjectTestData.length; i++) {
 
       it('I should be able to go to "users tab" at project "' + projectName + '"', function() {
         helpers.chooseCustomer(data.customer);
-        element(by.css('.dropdown.project-dropdown .project-context')).click();
-        element(by.cssContainingText('.dropdown.project-dropdown .nav-sublist li a', 'Manage projects')).click();
-        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/projects/');
-        element(by.model('ProjectList.searchInput')).sendKeys(projectName);
+        goToProjectList();
+        element(by.model('entityList.searchInput')).sendKeys(projectName);
         element(by.cssContainingText('h3.item-title', projectName)).click();
-        projectUrl = browser.getCurrentUrl();
 
-        element(by.cssContainingText('.tabs-nav li', 'Users')).click();
+        element(by.cssContainingText('.tabs-links li', 'People')).click();
         expect(element(by.cssContainingText('.add-or-remove .app-title', 'Administrator')).isPresent()).toBe(true);
       });
 
@@ -164,4 +150,10 @@ for(var i = 0; i < addUserToProjectTestData.length; i++) {
       });
     });
   })(data, user);
+}
+
+function goToProjectList() {
+  element(by.css('.dropdown.project-dropdown .project-context')).click();
+  element(by.cssContainingText('.dropdown.project-dropdown .nav-sublist li a', 'Manage projects')).click();
+  expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/projects/');
 }

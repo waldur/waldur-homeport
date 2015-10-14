@@ -77,8 +77,8 @@
                     <section class="step-3" ng-show="AppStore.selectedResourceType" block-ui="resource-properties">
                         <div class="step-title">
                             <span>
-                                Step {{ AppStore.configureStepNumber }}: Configure {{ AppStore.secondStep && AppStore.serviceType || ''}} Resource
-                                {{ AppStore.selectedResourceType }}
+                                Step {{ AppStore.configureStepNumber }}: Configure {{ AppStore.secondStep && AppStore.serviceType || ''}}
+                                {{ AppStore.selectedResourceTypeName }}
                             </span>
                         </div>
 
@@ -284,7 +284,7 @@
                         <div class="descr">
                             <span ng-show="AppStore.secondStep && AppStore.serviceType">{{ AppStore.serviceType }}</span>
                             <span ng-show="!AppStore.serviceType">No chosen {{ AppStore.selectedCategory.type }}</span>
-                            <span>{{ AppStore.instance.name }} {{ AppStore.selectedResourceType }}</span>
+                            <span>{{ AppStore.instance.name }} {{ AppStore.selectedResourceTypeName }}</span>
                         </div>
                         <div ng-show="AppStore.enablePurchaseCostDisplay" class="price">{{ AppStore.total | currency:AppStore.currency }}</div>
                         <div class="clear"></div>
@@ -296,7 +296,7 @@
             <section ng-show="AppStore.selectedResourceType" class="appstore-purchase" title="{{ AppStore.getTooltip() }}">
                 <button ng-class="{'disabled': !AppStore.canSave()}" ng-click="AppStore.save()">
                 <img ng-show="AppStore.enablePurchaseCostDisplay" src="/static/images/appstore/icon-curt.png" alt=""/>
-                <span>{{ AppStore.enablePurchaseCostDisplay ? 'Create' : 'Purchase' }}</span>
+                <span>{{ AppStore.enablePurchaseCostDisplay ? 'Purchase' : 'Create' }}</span>
                 </button>
             </section>
 

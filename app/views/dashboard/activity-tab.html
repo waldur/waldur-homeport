@@ -53,8 +53,11 @@
         <a ng-if="DashboardController.projects.length" ui-sref="projects.list" class="center-link">Show all projects</a>
         <div class="placeholder white-box" ng-if="DashboardController.projects.length==0">
             There are no projects
-            <div ui-sref="projects.create" class="button-apply">
-                Add new project
+            <div class="inline"
+                 check-quotas="{{DashboardController.checkQuotas}}"
+                 sref="projects.create"
+                 class-link="button-apply">
+                <div>Add new project</div>
             </div>
 
         </div>
@@ -106,7 +109,7 @@
                     No events yet
                 </div>
             </div>
-            <a class="show-all" ui-sref="dashboard.eventlog">Show all recent events</a>
+            <a class="show-all" ui-sref="organizations.details({uuid: DashboardController.currentCustomer.uuid, tab: 'eventlog'})">Show all recent events</a>
         </div>
     </div>
 </div>

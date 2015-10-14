@@ -8,20 +8,23 @@
                       ng-click="ProjectUsersTab.userProjectRemove(adminUser)">
                     {{ adminUser.user_full_name }}
                 </span>
-                    <angucomplete-alt id="{{ ProjectUsersTab.adminRole }}"
-                                      ng-click="inputMode=!inputMode"
-                                      placeholder="Add"
-                                      pause="100"
-                                      type="text"
-                                      selected-object="ProjectUsersTab.selectedUsersCallback"
-                                      local-data="ProjectUsersTab.usersListForAutoComplete"
-                                      search-fields="full_name"
-                                      title-field="full_name"
-                                      description-field="email"
-                                      minlength="1"
-                                      clear-selected="true"
-                                      input-changed="ProjectUsersTab.userSearchInputChanged"
-                                      input-class="add-label {{ inputMode ? 'input': '' }}"></angucomplete-alt>
+                    <div check-quotas="{{ProjectUsersTab.checkQuotas}}"
+                         tooltip-type="add-user">
+                        <angucomplete-alt id="{{ ProjectUsersTab.adminRole }}"
+                                          ng-click="inputMode=!inputMode"
+                                          placeholder="Add"
+                                          pause="100"
+                                          type="text"
+                                          selected-object="ProjectUsersTab.selectedUsersCallback"
+                                          local-data="ProjectUsersTab.usersListForAutoComplete"
+                                          search-fields="full_name"
+                                          title-field="full_name"
+                                          description-field="email"
+                                          minlength="1"
+                                          clear-selected="true"
+                                          input-changed="ProjectUsersTab.userSearchInputChanged"
+                                          input-class="add-label {{ inputMode ? 'input': '' }}"></angucomplete-alt>
+                    </div>
                 </div>
             </div>
             <div class="col full">
@@ -31,20 +34,23 @@
                       ng-click="ProjectUsersTab.userProjectRemove(managerUser)">
                     {{ managerUser.user_full_name }}
                 </span>
-                    <angucomplete-alt id="{{ ProjectUsersTab.managerRole }}"
-                                      ng-click="inputMode2=!inputMode2"
-                                      placeholder="Add"
-                                      pause="100"
-                                      type="text"
-                                      selected-object="ProjectUsersTab.selectedUsersCallback"
-                                      local-data="ProjectUsersTab.usersListForAutoComplete"
-                                      search-fields="full_name"
-                                      title-field="full_name"
-                                      description-field="email"
-                                      minlength="1"
-                                      clear-selected="true"
-                                      input-changed="ProjectUsersTab.userSearchInputChanged"
-                                      input-class="add-label {{ inputMode2 ? 'input': '' }}"></angucomplete-alt>
+                    <div check-quotas="{{ProjectUsersTab.checkQuotas}}"
+                         tooltip-type="add-user">
+                        <angucomplete-alt id="{{ ProjectUsersTab.managerRole }}"
+                                          ng-click="inputMode2=!inputMode2"
+                                          placeholder="Add"
+                                          pause="100"
+                                          type="text"
+                                          selected-object="ProjectUsersTab.selectedUsersCallback"
+                                          local-data="ProjectUsersTab.usersListForAutoComplete"
+                                          search-fields="full_name"
+                                          title-field="full_name"
+                                          description-field="email"
+                                          minlength="1"
+                                          clear-selected="true"
+                                          input-changed="ProjectUsersTab.userSearchInputChanged"
+                                          input-class="add-label {{ inputMode2 ? 'input': '' }}"></angucomplete-alt>
+                    </div>
                 </div>
             </div>
         </div>

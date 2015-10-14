@@ -3,33 +3,42 @@
 (function() {
   angular.module('ncsaas')
     .service('baseEventListController', [
-      'baseControllerListClass', 'eventsService', 'EVENTTYPE', baseEventListController]);
+      'baseControllerListClass', 'eventsService', 'ENTITYLISTFIELDTYPES', 'eventFormatter',
+      baseEventListController]);
 
-  function baseEventListController(baseControllerListClass, eventsService, EVENTTYPE) {
+  function baseEventListController(
+    baseControllerListClass, eventsService, ENTITYLISTFIELDTYPES, eventFormatter) {
     var ControllerListClass = baseControllerListClass.extend({
-      EVENTTYPE: EVENTTYPE,
-
       init:function() {
         this.service = eventsService;
         this.searchFieldName = 'search';
-        this.searchFilters = [
-          {
-            name: 'event_type',
-            title: 'Logged in',
-            value: EVENTTYPE.auth_logged_in_with_username
+        this.entityOptions = {
+          entityData: {
+            noDataText: 'No events yet',
+            hideActionButtons: true,
+            hideTableHead: true
           },
-          {
-            name: 'event_type',
-            title: 'Project creation',
-            value: EVENTTYPE.project_creation_succeeded
-          },
-          {
-            name: 'event_type',
-            title: 'Organization creation',
-            value: EVENTTYPE.customer_creation_succeeded
-          }
-        ];
+          list: [
+            {
+              propertyName: 'html_message',
+              className: 'message',
+              type: ENTITYLISTFIELDTYPES.html,
+              showForMobile: true
+            },
+            {
+              propertyName: '@timestamp',
+              className: 'date',
+              type: ENTITYLISTFIELDTYPES.date,
+              showForMobile: true
+            }
+          ]
+        };
         this._super();
+      },
+      afterGetList: function() {
+        angular.forEach(this.list, function(event) {
+          event.html_message = eventFormatter.format(event);
+        });
       }
     });
 
@@ -139,6 +148,7 @@
     var EventController = baseControllerClass.extend({
       init: function() {
         $scope.activeTab = $stateParams.tab || 'activity';
+        this.checkQuotas = 'project';
       }
     });
 
@@ -168,6 +178,10 @@
         $scope.$on('currentCustomerUpdated', this.onCustomerUpdate.bind(this));
         this.onCustomerUpdate();
         blockUI.start();
+
+        this.checkQuotasResource = 'resource';
+        this.checkQuotasProvider = 'service';
+
       },
 
       onCustomerUpdate: function() {
@@ -297,6 +311,7 @@
     var controllerScope = this;
     var EventController = baseControllerClass.extend({
       showGraph: true,
+      currentCustomer: null,
       init:function() {
         this.controllerScope = controllerScope;
         this.cacheTime = ENV.dashboardEventsCacheTime;
@@ -308,6 +323,8 @@
           scaleShowGridLines: false,
           bezierCurve: false
         };
+
+        this.checkQuotas = 'project';
 
         $scope.$on('currentCustomerUpdated', this.onCustomerUpdate.bind(this));
         this.onCustomerUpdate();
@@ -356,6 +373,7 @@
       getCustomerEvents: function() {
         var vm = this;
         currentStateService.getCustomer().then(function(customer) {
+          vm.currentCustomer = customer;
           eventsService.getList({scope: customer.url}).then(function(response) {
             vm.events = response;
           });

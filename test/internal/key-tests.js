@@ -4,13 +4,13 @@ var auth = require('../helpers/auth.js'),
 /*jshint camelcase: false */
 var testData = [
   {
-    user: auth.getUser('Bob'),
-    public_key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDgT5PABOUDgqI3XgfZubMP5m8rSfFjrxO05l+fRcUzY4fahHCcsPinnYCWR9w6u5Q0S0FcNr1pSOeh+turenndwvTQECUrqRnXTRVFNegQiLVxzHxi4ymTVvTmfq9uAGgkH5YgbADqNv64NRwZRbC6b1PB1Wm5mkoF31Uzy76pq3pf++rfh/s+Wg+vAyLy+WaSqeqvFxmeP7np/ByCv8zDAJClX9Cbhj3+IRm2TvESUOXz8kj1g7/dcFBSDjb098EeFmzpywreSjgjRFwbkfu7bU0Jo0+CT/zWgEDZstl9Hk0ln8fepYAdGYty565XosxwbWruVIfIJm/4kNo9enp5 erin@example.com",
+    user: auth.getUser('Alice'),
+    public_key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDgT5PABOUDgqI3XgfZubMP5m8rSfFjrxO05l+fRcUzY4fahHCcsPinnYCWR9w6u5Q0S0FcNr1pSOeh+turenndwvTQECUrqRnXTRVFNegQiLVxzHxi4ymTVvTmfq9uAGgkH5YgbADqNv64NRwZRbC6b1PB1Wm5mkoF31Uzy76pq3pf++rfh/s+Wg+vAyLy+WaSqeqvFxmeP7np/ByCv8zDAJClX9Cbhj3+IRm2TvESUOXz8kj1g7/dcFBSDjb098EeFmzpywreSjgjRFwbkfu7bU0Jo0+CT/zWgEDZstl9Hk0ln8fepYAdGYty565XosxwbWruVIfIJm/4kNo9enp1 erin@example.com",
     name: 'key ' + helpers.getUUID()
   },
   {
     user: auth.getUser('Walter'),
-    public_key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDgT5PABOUDgqI3XgfZubMP5m8rSfFjrxO05l+fRcUzY4fahHCcsPinnYCWR9w6u5Q0S0FcNr1pSOeh+turenndwvTQECUrqRnXTRVFNegQiLVxzHxi4ymTVvTmfq9uAGgkH5YgbADqNv64NRwZRbC6b1PB1Wm5mkoF31Uzy76pq3pf++rfh/s+Wg+vAyLy+WaSqeqvFxmeP7np/ByCv8zDAJClX9Cbhj3+IRm2TvESUOXz8kj1g7/dcFBSDjb098EeFmzpywreSjgjRFwbkfu7bU0Jo0+CT/zWgEDZstl9Hk0ln8fepYAdGYty565XosxwbWruVIfIJm/4kNo9enp5 erin@example.com",
+    public_key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDgT5PABOUDgqI3XgfZubMP5m8rSfFjrxO05l+fRcUzY4fahHCcsPinnYCWR9w6u5Q0S0FcNr1pSOeh+turenndwvTQECUrqRnXTRVFNegQiLVxzHxi4ymTVvTmfq9uAGgkH5YgbADqNv64NRwZRbC6b1PB1Wm5mkoF31Uzy76pq3pf++rfh/s+Wg+vAyLy+WaSqeqvFxmeP7np/ByCv8zDAJClX9Cbhj3+IRm2TvESUOXz8kj1g7/dcFBSDjb098EeFmzpywreSjgjRFwbkfu7bU0Jo0+CT/zWgEDZstl9Hk0ln8fepYAdGYty565XosxwbWruVIfIJm/4kNo9enp2 erin@example.com",
     name: 'key ' + helpers.getUUID()
   }
 ];
@@ -28,8 +28,9 @@ for(var i = 0; i < testData.length; i++) {
       });
 
       it('I should be able to go to "key add" page', function() {
-        element(by.css('li.add-something > a')).click();
-        element(by.cssContainingText('li.add-something li a', 'Add SSH key')).click();
+        element(by.css('.user-dropdown .user-name')).click();
+        element(by.cssContainingText('ul.nav-sublist.user-area li a', 'Profile')).click();
+        element(by.cssContainingText('.button', 'Add SSH Key')).click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/keys/add/');
       });
 
@@ -41,6 +42,16 @@ for(var i = 0; i < testData.length; i++) {
         element(by.cssContainingText('a.button-apply', 'Add key')).click();
 
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/profile/keys');
+      });
+
+      it('I should be able to find added key', function() {
+        element(by.model('UserDetailUpdate.searchInput')).sendKeys(data.name);
+        expect(element(by.cssContainingText('span', data.name)).isPresent()).toBe(true);
+      });
+
+      it('I should be able to remove added key', function() {
+        element(by.cssContainingText('.one-action-button li a', 'Remove')).click();
+        browser.switchTo().alert().accept();
       });
 
       it('I should be able to logout', function() {

@@ -48,21 +48,30 @@
               }.bind(this),
             }
           ];
+          var vm = this;
           if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('resources') == -1) {
-            this.actionButtonsListItems.push({
-              title: 'Create resource',
-              clickFunction: function(project) {
-                $rootScope.$broadcast('adjustCurrentProject', project);
-                $state.go('appstore.store')
+            currentStateService.isQuotaExceeded('resource').then(function(response) {
+              if (!response) {
+                vm.actionButtonsListItems.push({
+                  title: 'Create resource',
+                  clickFunction: function(project) {
+                    $rootScope.$broadcast('adjustCurrentProject', project);
+                    $state.go('appstore.store')
+                  }
+                });
               }
             });
           }
           if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('import') == -1) {
-            this.actionButtonsListItems.push({
-              title: 'Import resource',
-              clickFunction: function(project) {
-                $rootScope.$broadcast('adjustCurrentProject', project);
-                $state.go('import.import')
+            currentStateService.isQuotaExceeded('resource').then(function(response) {
+              if (!response) {
+                vm.actionButtonsListItems.push({
+                  title: 'Import resource',
+                  clickFunction: function(project) {
+                    $rootScope.$broadcast('adjustCurrentProject', project);
+                    $state.go('import.import');
+                  }
+                });
               }
             });
           }
@@ -176,6 +185,7 @@
         this.entityOptions.expandable = true;
 
         this.expandableOptions = [];
+        this.entityOptions.entityData.checkQuotas = "project";
 
         if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('resources') == -1) {
           this.expandableOptions.push({
@@ -343,6 +353,7 @@
         joinServiceProjectLinkService.addProject(vm.project).then(function() {
           $rootScope.$broadcast('refreshProjectList', {model: vm.project, new: true, current: true});
         });
+        vm._super();
       },
       onError: function(errorObject) {
         this.errorFlash(errorObject.data.detail);
@@ -634,6 +645,7 @@
       usersListForAutoComplete: [],
       user: null,
       project: null,
+      checkQuotas: 'user',
 
       init: function() {
         this.setSignalHandler('currentProjectUpdated', this.activate.bind(controllerScope));
@@ -986,7 +998,8 @@ angular.module('ncsaas')
           entityData: {
             noDataText: 'No providers yet',
             createLink: 'services.create',
-            createLinkText: 'Create provider'
+            createLinkText: 'Create provider',
+            checkQuotas: 'service'
           },
           list: [
             {

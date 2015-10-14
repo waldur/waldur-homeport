@@ -14,20 +14,28 @@
                 <filter-list filter-controller="entityList"></filter-list>
             </li>
             <li class="right-sort">
-                <a ng-if="entityOptions.entityData.createLink"
-                   ui-sref="{{ entityOptions.entityData.createLink }}" class="button">
+                <div ng-if="entityOptions.entityData.createLink"
+                     class="tooltip-relative inline"
+                     check-quotas="{{entityOptions.entityData.checkQuotas}}"
+                     sref="{{ entityOptions.entityData.createLink }}"
+                     class-link="button"
+                     tooltip-type="list-items">
                     <span>{{ entityOptions.entityData.createLinkText }}</span>
-                </a>
+                </div>
                 <span class="button-tooltip"
                       ng-if="entityOptions.entityData.importLink"
                       title="{{ entityOptions.entityData.importLinkTooltip }}"
                       visible="import">
-                    <a class="button"
-                       ng-class="{'disabled': entityOptions.entityData.importDisabled}"
-                       ui-sref="{{ entityOptions.entityData.importLink }}">
-                        {{ entityOptions.entityData.importLinkText }}
-                    </a>
+                    <div class="tooltip-relative inline"
+                         ng-class="{'disabled': entityOptions.entityData.importDisabled}"
+                         check-quotas="{{entityOptions.entityData.checkQuotas}}"
+                         class-link="button"
+                         tooltip-type="list-items"
+                         sref="{{ entityOptions.entityData.importLink }}">
+                        <span>{{ entityOptions.entityData.importLinkText }}</span>
+                    </div>
                 </span>
+
                 <list-cache-reset list-controller="entityList"
                                   list-service="entityService"></list-cache-reset>
             </li>
@@ -40,22 +48,29 @@
         </h2>
         <div class="decision">
             <div class="col">
-                <a ng-if="entityOptions.entityData.createLink"
-                   ui-sref="{{ entityOptions.entityData.createLink }}" class="button">
-                    {{ entityOptions.entityData.createLinkText }}
-                </a>
-                <span class="button-tooltip"
-                      ng-if="entityOptions.entityData.importLink"
-                      title="{{ entityOptions.entityData.importLinkTooltip }}"
-                      visible="import">
-                    <a class="button"
-                       ng-class="{'disabled': entityOptions.entityData.importDisabled}"
-                       ui-sref="{{ entityOptions.entityData.importLink }}">
-                        {{ entityOptions.entityData.importLinkText }}
-                    </a>
-                </span>
-                <list-cache-reset list-controller="entityList"
-                                  list-service="entityService"></list-cache-reset>
+                    <div ng-if="entityOptions.entityData.createLink"
+                         check-quotas="{{entityOptions.entityData.checkQuotas}}"
+                         class="tooltip-relative inline"
+                         class-link="button"
+                         tooltip-type="empty-list-items"
+                         sref="{{ entityOptions.entityData.createLink }}">
+                        {{ entityOptions.entityData.createLinkText }}
+                    </div>
+                    <span class="button-tooltip"
+                          ng-if="entityOptions.entityData.importLink"
+                          title="{{ entityOptions.entityData.importLinkTooltip }}"
+                          visible="import">
+                        <div class="tooltip-relative inline"
+                             ng-class="{'disabled': entityOptions.entityData.importDisabled}"
+                             check-quotas="{{entityOptions.entityData.checkQuotas}}"
+                             class-link="button"
+                             tooltip-type="list-items"
+                             sref="{{ entityOptions.entityData.importLink }}">
+                            <span>{{ entityOptions.entityData.importLinkText }}</span>
+                        </div>
+                    </span>
+                    <list-cache-reset list-controller="entityList"
+                                      list-service="entityService"></list-cache-reset>
             </div>
         </div>
     </div>
