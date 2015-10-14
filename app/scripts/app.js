@@ -522,6 +522,9 @@
             'appContent': {
               templateUrl: 'views/customer/details.html',
             },
+            'tabEventlog@organizations.details': {
+              templateUrl: 'views/customer/tab-eventlog.html',
+            },
             'tabResources@organizations.details': {
               templateUrl: 'views/customer/tab-resources.html',
             },
