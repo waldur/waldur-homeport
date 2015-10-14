@@ -382,6 +382,7 @@
             title: 'Settings'
           }
         ];
+        this.blockUIElement = 'tab-content';
         this._super();
         this.entityOptions.list[0].type = 'editable';
         this.entityOptions.entityData.expandable = true;
@@ -519,6 +520,7 @@
         this.service = projectsService;
         this.service.defaultFilter.customer = $stateParams.uuid;
         this.service.filterByCustomer = false;
+        this.blockUIElement = 'tab-content';
         this._super();
         this.entityOptions.entityData.title = '';
         this.entityOptions.entityData.checkQuotas = 'project';

@@ -238,13 +238,13 @@
           return usersService.$get($stateParams.uuid).then(function (response) {
             vm.user = response;
             vm.service.defaultFilter.scope = vm.user.url;
-            fn(filter);
+            return fn(filter);
           });
         } else {
           return usersService.getCurrentUser().then(function(response) {
             vm.user = response;
             vm.service.defaultFilter.scope = vm.user.url;
-            fn(filter);
+            return fn(filter);
           });
         }
       }
@@ -274,25 +274,26 @@
         this.controllerScope = controllerScope;
         this.service = projectPermissionsService;
         this._super();
-        this.getUser();
       },
       getList: function(filter) {
         if (this.user) {
           this.service.defaultFilter.username = this.user.username;
           return this._super(filter);
+        } else {
+          return this.getUser();
         }
       },
       getUser: function() {
         var vm = this;
         if ($stateParams.uuid) {
-          usersService.$get($stateParams.uuid).then(function (response) {
+          return usersService.$get($stateParams.uuid).then(function(response) {
             vm.user = response;
-            vm.getList();
+            return vm.user ? vm.getList() : false;
           });
         } else {
-          usersService.getCurrentUser().then(function(response) {
+          return usersService.getCurrentUser().then(function(response) {
             vm.user = response;
-            vm.getList();
+            return vm.user ? vm.getList() : false;
           });
         }
       }

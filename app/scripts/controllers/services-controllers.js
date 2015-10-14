@@ -10,7 +10,6 @@
       'usersService',
       'joinService',
       'ENV',
-      'blockUI',
       baseServiceListController]);
 
   // need for service tab
@@ -21,8 +20,7 @@
     currentStateService,
     usersService,
     joinService,
-    ENV,
-    blockUI
+    ENV
     ) {
     var ControllerListClass = baseControllerListClass.extend({
       customerHasProjects: true,
@@ -138,13 +136,6 @@
           customerPermissionsService.userHasCustomerRole(user.username, 'owner').then(function(hasRole) {
             vm.canUserManageService = hasRole;
           });
-        });
-      },
-      getList: function(filters) {
-        var providerTab = blockUI.instances.get('tab-content');
-        providerTab.start();
-        return this._super(filters).then(function(response) {
-          providerTab.stop();
         });
       }
     });
@@ -358,7 +349,6 @@
       init: function() {
         this.service = servicesService;
         this._super();
-        this.activate();
         this.actionButtonsListItems = [
           {
             title: 'Delete',
@@ -385,11 +375,11 @@
           ]
         };
       },
-      activate: function() {
+      getServiceEntity: function() {
         var vm = this;
-        joinService.$get($stateParams.provider, $stateParams.uuid).then(function(response) {
+        return joinService.$get($stateParams.provider, $stateParams.uuid).then(function(response) {
           vm.serviceEntity = response;
-          vm.getList();
+          return vm.serviceEntity ? vm.getList() : false;
         });
       },
       getList: function(filter) {
@@ -397,6 +387,8 @@
           this.service.defaultFilter = {'service': this.serviceEntity.uuid};
           this.service.endpoint = '/' + ENV.projectServiceLinkEndpoints[$stateParams.provider] + '/';
           return this._super(filter);
+        } else {
+          return this.getServiceEntity();
         }
       },
       afterGetList: function() {
