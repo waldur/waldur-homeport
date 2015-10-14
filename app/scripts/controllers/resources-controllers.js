@@ -193,8 +193,8 @@
           var services = [];
           for (var i = 0; i < ENV.appStoreCategories.length; i++) {
             var item = ENV.appStoreCategories[i].services;
-            for (var i = 0; i < item.length; i++) {
-              services.push(item[i]);
+            for (var j = 0; j < item.length; j++) {
+              services.push(item[j]);
             }
           }
           return services;
