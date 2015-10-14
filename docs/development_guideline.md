@@ -147,6 +147,7 @@ Config file settings:
         expandable: false, // for entity element to be expandable or not
         hideActionButtons: true // hide or show buttons with actions 
         actionButtonsType: 'refresh' // 'refresh' to show only icon, do not set this field to use usual buttons
+        timer: 7 // Set a timer if you want to refresh the list by setInterval
       },
       list: [
         {

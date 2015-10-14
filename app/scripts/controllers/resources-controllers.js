@@ -50,7 +50,8 @@
         this.entityOptions = {
           entityData: {
             noDataText: 'You have no resources yet.',
-            checkQuotas: 'resource'
+            checkQuotas: 'resource',
+            timer: ENV.resourcesTimerInterval
           },
           list: [
             {
