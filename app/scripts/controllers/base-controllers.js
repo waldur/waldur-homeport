@@ -414,16 +414,33 @@
   }
 
   angular.module('ncsaas')
-    .controller('Error403Controller', ['baseControllerClass', 'currentStateService', Error403Controller]);
+    .service('BaseErrorController', ['$rootScope', '$state', 'baseControllerClass', BaseErrorController]);
 
-  function Error403Controller(baseControllerClass, currentStateService) {
-    var controllerScope = this;
+  function BaseErrorController($rootScope, $state, baseControllerClass) {
     var Controller = baseControllerClass.extend({
+      init: function() {
+        var state = $rootScope.prevPreviousState;
+        this.href = (state && state.name !== 'errorPage.notFound' && state.name !== 'errorPage.limitQuota')
+          ? $state.href(state.name, $rootScope.prevPreviousParams)
+          : $state.href('dashboard.index');
+      }
+    });
+    return Controller;
+  }
+
+  angular.module('ncsaas')
+    .controller('Error403Controller', [
+      'BaseErrorController', 'currentStateService', Error403Controller]);
+
+  function Error403Controller(BaseErrorController, currentStateService) {
+    var controllerScope = this;
+    var Controller = BaseErrorController.extend({
       init: function() {
         var vm = this;
         currentStateService.getCustomer().then(function(response) {
           vm.customer = response;
         });
+        this._super();
       }
     });
 
@@ -431,16 +448,13 @@
   }
 
   angular.module('ncsaas')
-    .controller('Error404Controller', ['$rootScope', '$state', 'baseControllerClass', Error404Controller]);
+    .controller('Error404Controller', ['BaseErrorController', Error404Controller]);
   
-  function Error404Controller($rootScope, $state, baseControllerClass) {
+  function Error404Controller(BaseErrorController) {
     var controllerScope = this;
-    var Controller = baseControllerClass.extend({
+    var Controller = BaseErrorController.extend({
       init: function() {
-        var state = $rootScope.prevPreviousState;
-        this.href = (state && state.name !== 'errorPage.notFound')
-          ? $state.href(state.name, $rootScope.prevPreviousParams)
-          : $state.href('dashboard.index');
+        this._super();
       }
     });
     controllerScope.__proto__ = new Controller();
