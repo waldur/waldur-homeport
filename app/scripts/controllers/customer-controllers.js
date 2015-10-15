@@ -437,6 +437,7 @@
             title: 'Settings'
           }
         ];
+        this.blockUIElement = 'tab-content';
         this._super();
         this.entityOptions.list[0].type = 'editable';
         this.entityOptions.entityData.expandable = true;
@@ -574,6 +575,7 @@
         this.service = projectsService;
         this.service.defaultFilter.customer = $stateParams.uuid;
         this.service.filterByCustomer = false;
+        this.blockUIElement = 'tab-content';
         this._super();
         this.entityOptions.entityData.title = '';
         this.entityOptions.entityData.checkQuotas = 'project';
@@ -606,6 +608,7 @@
           // resource endpoint is using a different customer filter name
           this.service.filterByCustomer = false;
           this.service.defaultFilter.customer_uuid = $stateParams.uuid;
+          this.blockUIElement = 'tab-content';
           this._super();
           this.entityOptions.list.push({
             name: 'Project',
@@ -676,6 +679,7 @@
     var controllerClass = BaseAlertsListController.extend({
       init: function() {
         this.controllerScope = controllerScope;
+        this.blockUIElement = 'tab-content';
         this._super();
         $scope.$on('currentCustomerUpdated', this.onCustomerUpdate.bind(this));
       },

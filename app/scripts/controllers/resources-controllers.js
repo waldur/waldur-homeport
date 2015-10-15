@@ -7,7 +7,6 @@
     '$q',
     'ENV',
     'ENTITYLISTFIELDTYPES',
-    'blockUI',
     'resourcesService',
     'servicesService',
     'currentStateService',
@@ -20,7 +19,6 @@
     $q,
     ENV,
     ENTITYLISTFIELDTYPES,
-    blockUI,
     resourcesService,
     servicesService,
     currentStateService) {
@@ -29,6 +27,7 @@
         this.service = resourcesService;
         this._super();
         this.searchFieldName = 'name';
+        this.blockUIElement = 'tab-content';
         this.selectAll = true;
         this.category = ENV.AllResources;
         this.actionButtonsListItems = [
@@ -140,14 +139,9 @@
         return false;
       },
       getList: function(filter) {
-        var block = blockUI.instances.get('tab-content');
-        block.start();
-
         var fn = this._super.bind(this);
-        this.adjustSearchFilters().then(function() {
-          return fn(filter).finally(function() {
-            block.stop();
-          });
+        return this.adjustSearchFilters().then(function() {
+          return fn(filter);
         });
       },
       adjustSearchFilters: function() {
@@ -248,23 +242,6 @@
 
     return ControllerListClass;
   }
-
-  angular.module('ncsaas')
-    .controller('ResourceListController', ['baseResourceListController', 'resourcesService', ResourceListController]);
-
-  function ResourceListController(baseResourceListController, resourcesService) {
-    var controllerScope = this;
-    var ResourceController = baseResourceListController.extend({
-      init:function() {
-        this.service = resourcesService;
-        this.controllerScope = controllerScope;
-        this._super();
-      }
-    });
-
-    controllerScope.__proto__ = new ResourceController();
-  }
-
 })();
 
 (function() {
@@ -382,6 +359,7 @@
       var Controller = BaseBackupListController.extend({
         init:function() {
           this.controllerScope = controllerScope;
+          this.blockUIElement = 'tab-content';
           this._super();
         },
         getList: function(filter) {

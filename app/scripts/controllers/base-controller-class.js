@@ -1,8 +1,8 @@
 (function(){
   angular.module('ncsaas')
-    .service('baseControllerClass', ['$rootScope', 'Flash', baseControllerClass]);
+    .service('baseControllerClass', ['$rootScope', 'Flash', 'blockUI', baseControllerClass]);
 
-  function baseControllerClass($rootScope, Flash) {
+  function baseControllerClass($rootScope, Flash, blockUI) {
     var ControllerClass = Class.extend({
       _signals: {},
 
@@ -38,6 +38,13 @@
       },
       emitEvent: function(eventName) {
         $rootScope.$broadcast(eventName)
+      },
+      blockElement: function(element, promise) {
+        var block = blockUI.instances.get(element);
+        block.start();
+        promise.finally(function() {
+          block.stop();
+        });
       }
     });
 
@@ -73,6 +80,7 @@
       chosenFilters: [],
       cacheTime: ENV.defaultListCacheTime,
       controlPanelShow: true,
+      blockUIElement: null,
 
       init: function() {
         this.setSignalHandler('currentCustomerUpdated', this.currentCustomerUpdatedHandler.bind(this));
@@ -81,7 +89,8 @@
         this.service.page = 1;
         this.service.cacheTime = this.cacheTime;
         this._super();
-        this.getList();
+        this.listPromise = this.getList();
+        this.blockListElement();
         // reset after state change
         this.selectedInstances = [];
         this.controlPanelShow = ENV.listControlPanelShow;
@@ -96,6 +105,11 @@
           vm.list = response;
           vm.afterGetList();
         });
+      },
+      blockListElement: function() {
+        if (this.blockUIElement) {
+          this.blockElement(this.blockUIElement, this.listPromise);
+        }
       },
       afterGetList: function() {},
       generalSearchChanged: function(event, text) {
