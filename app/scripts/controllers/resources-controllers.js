@@ -147,57 +147,35 @@
       },
       adjustSearchFilters: function() {
         var vm = this;
-        if (vm.searchFilters.length == 0) {
-          return vm.getFilters(vm.category).then(function(filters) {
-            vm.searchFilters = filters;
-            vm.service.defaultFilter.resource_type = [];
-            for (var i = 0; i < filters.length; i++) {
-              vm.service.defaultFilter[filters[i].name].push(filters[i].value);
-            }
-          });
-        } else {
+        if (vm.searchFilters.length > 0) {
           return $q.when(true);
         }
-      },
-      getFilters: function(category) {
-        var services = this.getServices(category);
-        if (services == []) {
-          return $q.when([]);
-        }
-        return servicesService.getServicesList().then(function(metadata) {
-          var filters = [];
-          for (var i = 0; i < services.length; i++) {
-            var service = services[i];
-            if (!metadata[service]) {
-              continue;
-            }
-            var resources = metadata[service].resources;
-            for (var resource in resources) {
-              filters.push({
-                name: 'resource_type',
-                title: service,
-                value: service + '.' + resource
-              });
-            }
-          }
-          return filters;
+
+        return servicesService.getResourceTypes(vm.category).then(function(types) {
+          vm.service.defaultFilter.resource_type = types;
+          return resourcesService.countByType(vm.service.defaultFilter).then(function(counts) {
+            return servicesService.getServicesList().then(function(metadata) {
+              var filters = [];
+              for(var type in metadata) {
+                var service = metadata[type];
+                var resources = service.resources;
+                for (var resource in resources) {
+                  var id = servicesService.formatResourceType(type, resource);
+                  if (counts[id] > 0) {
+                    filters.push({
+                      name: 'resource_type',
+                      title: type + ' ' + resource + ' (' + counts[id] + ')',
+                      value: id
+                    });
+                  }
+                }
+              }
+              if (filters.length > 1) {
+                vm.searchFilters = filters;
+              }
+            });
+          });
         });
-      },
-      getServices: function(category) {
-        if (category == ENV.AllResources) {
-          var services = [];
-          for (var i = 0; i < ENV.appStoreCategories.length; i++) {
-            var item = ENV.appStoreCategories[i].services;
-            for (var j = 0; j < item.length; j++) {
-              services.push(item[j]);
-            }
-          }
-          return services;
-        } else if (ENV.appStoreCategories[category]) {
-          return ENV.appStoreCategories[category].services;
-        } else {
-          return [];
-        }
       },
       afterGetList: function() {
         for (var i = 0; i < this.list.length; i++) {

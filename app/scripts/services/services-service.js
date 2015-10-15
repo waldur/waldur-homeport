@@ -83,11 +83,8 @@
         return deferred.promise;
       },
       getResourceTypes: function(category) {
-        var data = ENV.appStoreCategories[category];
-        if (!data) {
-          return $q.when([]);
-        }
-        var services = data.services;
+        var vm = this;
+        var services = this.getServiceTypes(category);
         return this.getServicesList().then(function(metadata) {
           var types = [];
           for (var i = 0; i < services.length; i++) {
@@ -97,11 +94,34 @@
             }
             var resources = metadata[service].resources;
             for (var resource in resources) {
-              types.push(service + "." + resource);
+              types.push(vm.formatResourceType(service, resource));
             }
           }
           return types;
         });
+      },
+      formatResourceType: function(service, resource) {
+        return service + '.' + resource;
+      },
+      getServiceTypes: function(category) {
+        // All -> ['OpenStack', 'Azure', 'GitLab', 'Oracle']
+        // VMs -> ['OpenStack', 'Azure']
+        // Applications -> ['GitLab', 'Oracle']
+        // Invalid -> []
+        if (category == ENV.AllResources) {
+          var services = [];
+          for (var i = 0; i < ENV.appStoreCategories.length; i++) {
+            var item = ENV.appStoreCategories[i].services;
+            for (var j = 0; j < item.length; j++) {
+              services.push(item[j]);
+            }
+          }
+          return services;
+        } else if (ENV.appStoreCategories[category]) {
+          return ENV.appStoreCategories[category].services;
+        } else {
+          return [];
+        }
       }
     });
     return new ServiceClass();
