@@ -6,11 +6,12 @@
     .controller('HeaderController', [
       '$rootScope', '$state', 'currentStateService', 'customersService',
       'usersService', 'ENV', 'baseControllerClass', '$translate', 'LANGUAGE', 'projectsService', '$q', 'blockUI',
+      'ncUtilsFlash',
       HeaderController]);
 
   function HeaderController(
     $rootScope, $state, currentStateService, customersService, usersService,
-    ENV, baseControllerClass, $translate, LANGUAGE, projectsService, $q, blockUI) {
+    ENV, baseControllerClass, $translate, LANGUAGE, projectsService, $q, blockUI, ncUtilsFlash) {
     var controllerScope = this;
     var HeaderControllerClass = baseControllerClass.extend({
       customers: [],
@@ -265,7 +266,7 @@
             vm.currentProject = null;
             vm.setCurrentProject(null);
             if ($state.current.name != 'errorPage.notFound') {
-              vm.infoFlash('You have no projects! Please add one.');
+              ncUtilsFlash.infoFlash('You have no projects! Please add one.');
             }
           }
           vm.projects = response;
@@ -306,11 +307,11 @@
   angular.module('ncsaas')
     .controller('MainController', [
       '$q', '$rootScope', '$state', 'authService', 'currentStateService', 'customersService', 'usersService',
-      'baseControllerClass', '$window', 'ENV', 'projectsService', MainController]);
+      'baseControllerClass', '$window', 'ENV', 'projectsService', 'ncUtils', MainController]);
 
   function MainController(
     $q, $rootScope, $state, authService, currentStateService, customersService, usersService, baseControllerClass,
-    $window, ENV, projectsService) {
+    $window, ENV, projectsService, ncUtils) {
     var controllerScope = this;
     var Controller = baseControllerClass.extend({
 
@@ -331,12 +332,12 @@
         $rootScope.prevPreviousParams = $rootScope.previousParams;
         $rootScope.previousState = fromState;
         $rootScope.previousParams= fromParams;
-        this.deregisterEvent('adjustCurrentCustomer');
-        this.deregisterEvent('adjustCurrentProject');
-        this.deregisterEvent('currentCustomerUpdated'); // clear currentCustomerUpdated event handlers
-        this.deregisterEvent('refreshProjectList'); // clear refreshProjectList event handlers
-        this.deregisterEvent('currentProjectUpdated'); // clear currentProjectUpdated event handlers
-        this.deregisterEvent('refreshCounts'); // clear refreshCounts event handlers
+        ncUtils.deregisterEvent('adjustCurrentCustomer');
+        ncUtils.deregisterEvent('adjustCurrentProject');
+        ncUtils.deregisterEvent('currentCustomerUpdated'); // clear currentCustomerUpdated event handlers
+        ncUtils.deregisterEvent('refreshProjectList'); // clear refreshProjectList event handlers
+        ncUtils.deregisterEvent('currentProjectUpdated'); // clear currentProjectUpdated event handlers
+        ncUtils.deregisterEvent('refreshCounts'); // clear refreshCounts event handlers
         $rootScope.bodyClass = currentStateService.getBodyClass(toState.name);
         // if user is authenticated - he should have selected customer
         if (authService.isAuthenticated() && !currentStateService.isCustomerDefined) {

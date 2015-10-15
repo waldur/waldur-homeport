@@ -151,10 +151,11 @@ angular.module('ncsaas')
       'baseControllerAddClass',
       'flavorsService',
       '$stateParams',
+      'ncUtilsFlash',
       RestoreBackupController
     ]);
 
-  function RestoreBackupController(backupsService, baseControllerAddClass, flavorsService, $stateParams) {
+  function RestoreBackupController(backupsService, baseControllerAddClass, flavorsService, $stateParams, ncUtilsFlash) {
     var controllerScope = this;
     var Controller = baseControllerAddClass.extend({
       flavorsList: [],
@@ -202,7 +203,7 @@ angular.module('ncsaas')
         vm.service.restoreBackup($stateParams.uuid, inputs).then(success, error);
         function success() {
           vm.afterSave();
-          vm.successFlash(vm.getSuccessMessage());
+          ncUtilsFlash.successFlash(vm.getSuccessMessage());
           vm.successRedirect();
         }
         function error(response) {

@@ -121,6 +121,7 @@
       '$window',
       'resourcesCountService',
       'alertsService',
+      'ncUtilsFlash',
       CustomerDetailUpdateController
     ]);
 
@@ -137,7 +138,8 @@
     $q,
     $window,
     resourcesCountService,
-    alertsService
+    alertsService,
+    ncUtilsFlash
     ) {
     var controllerScope = this;
     var CustomerController = baseControllerDetailUpdateClass.extend({
@@ -289,7 +291,7 @@
         return d.promise;
       },
       afterUpdate: function() {
-        this.successFlash('Organization {} is updated'.replace('{}', controllerScope.model.name));
+        ncUtilsFlash.successFlash('Organization {} is updated'.replace('{}', controllerScope.model.name));
         $rootScope.$broadcast('refreshCustomerList', {model: this.model, update: true});
       },
 
@@ -370,11 +372,12 @@
       'servicesService',
       'usersService',
       'blockUI',
+      'ncUtilsFlash',
       CustomerServiceTabController
     ]);
 
   function CustomerServiceTabController(
-    $stateParams, baseServiceListController, joinService, servicesService, usersService, blockUI) {
+    $stateParams, baseServiceListController, joinService, servicesService, usersService, blockUI, ncUtilsFlash) {
     var controllerScope = this;
     var Controller = baseServiceListController.extend({
       init: function() {
@@ -476,7 +479,7 @@
           message += (service.options[name] ? service.options[name].label : name) + ': ' + response.data[name];
         }
         if (message) {
-          this.errorFlash('Unable to save provider. ' + message);
+          ncUtilsFlash.errorFlash('Unable to save provider. ' + message);
         }
       },
       hasChanged: function(model) {

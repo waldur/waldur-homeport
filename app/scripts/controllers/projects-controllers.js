@@ -314,6 +314,7 @@
       '$rootScope',
       'projectPermissionsService',
       'usersService',
+      'ncUtilsFlash',
       ProjectAddController]);
 
   function ProjectAddController(
@@ -323,7 +324,8 @@
     baseControllerAddClass,
     $rootScope,
     projectPermissionsService,
-    usersService) {
+    usersService,
+    ncUtilsFlash) {
     var controllerScope = this;
     var ProjectController = baseControllerAddClass.extend({
       userRole: 'admin',
@@ -356,7 +358,7 @@
         vm._super();
       },
       onError: function(errorObject) {
-        this.errorFlash(errorObject.data.detail);
+        ncUtilsFlash.errorFlash(errorObject.data.detail);
       },
       currentCustomerUpdatedHandler: function() {
         var vm = this;
