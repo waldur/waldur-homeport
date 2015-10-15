@@ -56,4 +56,9 @@
             content: '\f08e';
         }
     }
+    &.group {
+        &:before {
+            content: '\f0c0';
+        }
+    }
 } // icons

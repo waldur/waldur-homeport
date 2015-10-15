@@ -67,6 +67,11 @@
                        ng-if="option.type == 'string'"
                        ng-model="option.value">
 
+                <input id="{{ ServiceAdd.model.name }}_{{ option.key }}"
+                       type="text"
+                       ng-if="option.type == 'url'"
+                       ng-model="option.value">
+
                 <select id="{{ ServiceAdd.model.name }}_{{ option.key }}"
                         ng-if="option.type == 'choice'"
                         ng-model="option.value"
