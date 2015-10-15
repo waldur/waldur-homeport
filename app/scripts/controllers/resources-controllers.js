@@ -25,9 +25,9 @@
     var ControllerListClass = baseControllerListClass.extend({
       init: function() {
         this.service = resourcesService;
+        this.blockUIElement = 'tab-content';
         this._super();
         this.searchFieldName = 'name';
-        this.blockUIElement = 'tab-content';
         this.selectAll = true;
         this.category = ENV.AllResources;
         this.actionButtonsListItems = [
@@ -192,10 +192,10 @@
             }
           }
           return services;
-        } else if (!(ENV.appStoreCategories[category])) {
-          return [];
-        } else {
+        } else if (ENV.appStoreCategories[category]) {
           return ENV.appStoreCategories[category].services;
+        } else {
+          return [];
         }
       },
       afterGetList: function() {

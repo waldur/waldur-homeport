@@ -608,7 +608,6 @@
           // resource endpoint is using a different customer filter name
           this.service.filterByCustomer = false;
           this.service.defaultFilter.customer_uuid = $stateParams.uuid;
-          this.blockUIElement = 'tab-content';
           this._super();
           this.entityOptions.list.push({
             name: 'Project',
