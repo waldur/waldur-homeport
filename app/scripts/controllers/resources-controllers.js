@@ -70,7 +70,8 @@
           entityData: {
             noDataText: 'You have no resources yet.',
             noMatchesText: 'No resources found matching filter.',
-            checkQuotas: 'resource'
+            checkQuotas: 'resource',
+            timer: ENV.resourcesTimerInterval
           },
           list: [
             {
