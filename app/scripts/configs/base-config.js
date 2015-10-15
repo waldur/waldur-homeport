@@ -115,6 +115,8 @@ angular.module('ncsaas')
       'projects.create': 'project',
       'appstore.store':  'resource',
       'import.import':   'resource'
-    }
+    },
+
+    resourcesTimerInterval: 7, // seconds
 
   });
