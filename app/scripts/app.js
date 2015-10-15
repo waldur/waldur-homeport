@@ -26,9 +26,11 @@
       'ngSanitize'
     ])
     // urls
-    .config(function($stateProvider, $urlRouterProvider, MODE) {
+    .config(function($stateProvider, $urlRouterProvider, blockUIConfig, MODE) {
       var initialDataState = 'initialdata.view',
         initialDataStatePath = '/initial-data/';
+
+      blockUIConfig.autoBlock = false;
 
       $urlRouterProvider.otherwise('/');
 
@@ -1053,7 +1055,7 @@
             }
             timeouts[getKey(config)] = setTimeout(function() {
               Flash.create('danger', 'Problem getting response from the server.');
-              blockUI.stop();
+              blockUI.reset();
             }, ENV.requestTimeout);
           }
           return config;
@@ -1074,6 +1076,7 @@
           if (rejection.config) {
             clearTimeout(timeouts[getKey(rejection.config)]);
           }
+          blockUI.reset();
           Flash.create('danger', message);
           return $q.reject(rejection);
         }

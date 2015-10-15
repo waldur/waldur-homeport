@@ -1,7 +1,7 @@
 <div ng-controller="DashboardActivityController as DashboardController" class="row">
     <div class="half-block">
         <h3>Projects</h3>
-        <div ng-repeat="project in DashboardController.projects" class="white-box graph">
+        <div ng-repeat="project in DashboardController.projects" class="white-box graph"   block-ui="activity-content-{{ project.uuid }}">
             <div ng-click="DashboardController.selectProject(project)" class="graph-head"
                  ng-class="{'active': project.selected}">
                 <h4 ng-class="{'current': project.selected}">
@@ -66,7 +66,7 @@
     <div class="half-block">
         <div class="alerts-list">
             <h3>Alerts</h3>
-            <div class="white-box">
+            <div class="white-box" block-ui="dashboard-alerts-list">
                 <ul>
                     <li ng-repeat="alert in DashboardController.alerts"
                         ng-class="{'fail': alert.severity=='error', 'hovered': isHovered}"
@@ -90,7 +90,7 @@
         </div>
         <div class="alerts-list" ng-if="DashboardController.events.length">
             <h3>Recent events</h3>
-            <div class="white-box">
+            <div class="white-box" block-ui="dashboard-events-list">
                 <ul>
                     <li ng-repeat="event in DashboardController.events"
                         class="recent-alert"

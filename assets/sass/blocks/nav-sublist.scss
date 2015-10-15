@@ -1,4 +1,5 @@
 .nav-sublist {
+    z-index: 2000;
     @include clear-list;
     @include property(top, 50);
     @include property(width, 220);

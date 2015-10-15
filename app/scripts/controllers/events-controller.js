@@ -292,6 +292,7 @@
       'alertFormatter',
       'ENV',
       '$window',
+      '$q',
       DashboardActivityController]);
 
   function DashboardActivityController(
@@ -307,7 +308,8 @@
     currentStateService,
     alertFormatter,
     ENV,
-    $window) {
+    $window,
+    $q) {
     var controllerScope = this;
     var EventController = baseControllerClass.extend({
       showGraph: true,
@@ -344,10 +346,17 @@
         });
       },
       selectProject: function(project) {
+        var projectCounters, projectEvents;
         if (project) {
           project.selected =! project.selected;
-          this.getProjectCounters(project);
-          this.getProjectEvents(project);
+          if (!project.count) {
+            projectCounters = this.getProjectCounters(project);
+          }
+          if (!project.chartData) {
+            projectEvents = this.getProjectEvents(project);
+          }
+
+          this.blockElement('activity-content-' + project.uuid, $q.all([projectCounters, projectEvents]));
         }
       },
       onCustomerUpdate: function() {
@@ -358,8 +367,8 @@
       },
       getCustomerAlerts: function() {
         var vm = this;
-        currentStateService.getCustomer().then(function(customer) {
-          alertsService.getList({
+        var promise = currentStateService.getCustomer().then(function(customer) {
+          return alertsService.getList({
             aggregate: 'customer',
             uuid: customer.uuid
           }).then(function(response) {
@@ -369,15 +378,17 @@
             });
           });
         });
+        this.blockElement('dashboard-alerts-list', promise);
       },
       getCustomerEvents: function() {
         var vm = this;
-        currentStateService.getCustomer().then(function(customer) {
+        var promise = currentStateService.getCustomer().then(function(customer) {
           vm.currentCustomer = customer;
-          eventsService.getList({scope: customer.url}).then(function(response) {
+          return eventsService.getList({scope: customer.url}).then(function(response) {
             vm.events = response;
           });
         });
+        this.blockElement('dashboard-events-list', promise);
       },
       getCustomerProjects: function() {
         var vm = this;
@@ -390,30 +401,26 @@
         });
       },
       getProjectCounters: function (project) {
-        if (project.count) {
-          return;
-        }
         project.count = {};
         project.count.services = project.services.length;
-        resourcesCountService.users({'project': project.uuid}).then(function(count) {
+        var users = resourcesCountService.users({'project': project.uuid}).then(function(count) {
           project.count.users = count;
         });
-        resourcesCountService.resources({project_uuid: project.uuid}).then(function(count) {
+        var resources = resourcesCountService.resources({project_uuid: project.uuid}).then(function(count) {
           project.count.resources = count;
         });
         var query = angular.extend(alertsService.defaultFilter, {aggregate: 'project', uuid: project.uuid});
-        resourcesCountService.alerts(query).then(function(count) {
+        var alerts = resourcesCountService.alerts(query).then(function(count) {
           project.count.alerts = count;
         });
+        return $q.all([users, resources, alerts]);
       },
       getProjectEvents: function (project) {
-        if (project.chartData) {
-          return;
-        }
         var end = moment.utc().unix();
         var count = 7;
         var start = moment.utc().subtract(count + 1, 'days').unix();
-        eventStatisticsService.getList({
+
+        return eventStatisticsService.getList({
           scope: project.url,
           start: start,
           end: end,

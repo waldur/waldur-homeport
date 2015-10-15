@@ -145,7 +145,7 @@
         afterInstanceRemove: function(instance) {
           $rootScope.$broadcast('refreshProjectList', {model: instance, remove: true});
           this._super(instance);
-        },
+        }
       });
       return controllerClass;
     }
@@ -639,6 +639,7 @@
 
       init: function() {
         this.setSignalHandler('currentProjectUpdated', this.activate.bind(controllerScope));
+        this.blockUIElement = 'tab-content';
         this._super();
         this.adminRole = USERPROJECTROLE.admin;
         this.managerRole = USERPROJECTROLE.manager;
@@ -755,6 +756,7 @@
         if (!$stateParams.uuid) {
           this.setSignalHandler('currentProjectUpdated', this.getProject.bind(controllerScope));
         }
+        this.blockUIElement = 'tab-content';
         this._super();
         this.getProject();
       },
@@ -793,31 +795,25 @@
     .controller('ProjectAlertTabController', [
       'BaseAlertsListController',
       'currentStateService',
-      'blockUI',
       ProjectAlertTabController
     ]);
 
   function ProjectAlertTabController(
     BaseAlertsListController,
-    currentStateService,
-    blockUI
+    currentStateService
   ) {
     var controllerScope = this;
     var AlertController = BaseAlertsListController.extend({
       init: function() {
         this.controllerScope = controllerScope;
+        this.blockUIElement = 'tab-content';
         this._super();
       },
       getList: function(filter) {
         this.service.defaultFilter.aggregate = 'project';
         this.service.defaultFilter.uuid = currentStateService.getProjectUuid();
         this.service.defaultFilter.opened = true;
-
-        var block = blockUI.instances.get('tab-content');
-        block.start();
-        return this._super(filter).then(function() {
-          block.stop();
-        });
+        return this._super(filter);
       }
     });
 
@@ -834,7 +830,6 @@
       'resourcesService',
       'currentStateService',
       'servicesService',
-      'blockUI',
       'ENV',
       BaseProjectResourcesTabController]);
 
@@ -843,20 +838,18 @@
       resourcesService,
       currentStateService,
       servicesService,
-      blockUI,
       ENV) {
 
       var controllerClass = baseResourceListController.extend({
         init: function() {
           this.service = resourcesService;
+          this.blockUIElement = 'tab-content';
           this._super();
           this.service.defaultFilter.project_uuid = currentStateService.getProjectUuid();
           this.selectAll = true;
         },
         getList: function(filter) {
           var vm = this;
-          var block = blockUI.instances.get('tab-content');
-          block.start();
 
           var fn = vm._super.bind(vm);
           if (vm.searchFilters.length == 0) {
@@ -866,14 +859,10 @@
               for (var i = 0; i < filters.length; i++) {
                 vm.service.defaultFilter[filters[i].name].push(filters[i].value);
               }
-              return fn(filter).then(function(list) {
-                block.stop();
-              });
+              return fn(filter);
             });
           } else {
-            return fn(filter).then(function() {
-              block.stop();
-            });
+            return fn(filter);
           }
         },
         getFilters: function(category) {
@@ -927,8 +916,7 @@
 
   angular.module('ncsaas')
     .controller('ProjectApplicationsTabController', [
-      'BaseProjectResourcesTabController',
-      'ENV',
+      'BaseProjectResourcesTabController', 'ENV',
       ProjectApplicationsTabController]);
 
   function ProjectApplicationsTabController(BaseProjectResourcesTabController, ENV) {
@@ -1002,7 +990,6 @@ angular.module('ncsaas')
       'currentStateService',
       'ENTITYLISTFIELDTYPES',
       '$scope',
-      'blockUI',
       '$rootScope',
       ProjectServicesTabController]);
 
@@ -1013,7 +1000,6 @@ angular.module('ncsaas')
     currentStateService,
     ENTITYLISTFIELDTYPES,
     $scope,
-    blockUI,
     $rootScope) {
     var controllerScope = this;
     var ServiceController = baseControllerListClass.extend({
@@ -1021,6 +1007,7 @@ angular.module('ncsaas')
         this.service = joinService;
         this.service.defaultFilter.project_uuid = currentStateService.getProjectUuid();
         this.controllerScope = controllerScope;
+        this.blockUIElement = 'tab-content';
         this._super();
         this.actionButtonsListItems = [
           {
@@ -1076,11 +1063,7 @@ angular.module('ncsaas')
         $scope.$on('searchInputChanged', this.onSearchInputChanged.bind(this));
       },
       getList: function(filter) {
-        var block = blockUI.instances.get('tab-content');
-        block.start();
-        return this._super(filter).then(function() {
-          block.stop();
-        });
+        return this._super(filter);
       },
       removeInstance: function(model) {
         return joinServiceProjectLinkService.$deleteByUrl(model.url);
@@ -1131,6 +1114,7 @@ angular.module('ncsaas')
         if (!$stateParams.uuid) {
           this.setSignalHandler('currentProjectUpdated', this.setCurrentProject.bind(controllerScope));
         }
+        this.blockUIElement = 'tab-content';
         this._super();
 
         this.entityOptions = {

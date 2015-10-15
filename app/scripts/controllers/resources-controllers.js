@@ -296,6 +296,7 @@
       var Controller = BaseBackupListController.extend({
         init:function() {
           this.controllerScope = controllerScope;
+          this.blockUIElement = 'tab-content';
           this._super();
         },
         getList: function(filter) {

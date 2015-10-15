@@ -209,27 +209,24 @@
 
       init: function() {
         this.controllerScope = controllerScope;
+        this.blockUIElement = 'tab-content';
         this._super();
-        this.getUser();
       },
       getList: function(filter) {
-        if (this.user) {
-          this.service.defaultFilter.scope = this.user.url;
-          this._super(filter);
-        }
+        var vm = this,
+          fn = this._super.bind(this);
+        
+        return this.getUser().then(function(user) {
+          vm.user = user;
+          vm.service.defaultFilter.scope = user.url;
+          return fn(filter);
+        });
       },
       getUser: function() {
-        var vm = this;
         if ($stateParams.uuid) {
-          return usersService.$get($stateParams.uuid).then(function (response) {
-            vm.user = response;
-            vm.getList();
-          });
+          return usersService.$get($stateParams.uuid);
         } else {
-          return usersService.getCurrentUser().then(function(response) {
-            vm.user = response;
-            vm.getList();
-          });
+          return usersService.getCurrentUser();
         }
       }
     });
@@ -258,26 +255,22 @@
         this.controllerScope = controllerScope;
         this.service = projectPermissionsService;
         this._super();
-        this.getUser();
       },
       getList: function(filter) {
-        if (this.user) {
-          this.service.defaultFilter.username = this.user.username;
-          return this._super(filter);
-        }
+        var vm = this,
+          fn = this._super.bind(this);
+        
+        return this.getUser().then(function(user) {
+          vm.user = user;
+          vm.service.defaultFilter.username = user.username;
+          return fn(filter);
+        });
       },
       getUser: function() {
-        var vm = this;
         if ($stateParams.uuid) {
-          usersService.$get($stateParams.uuid).then(function (response) {
-            vm.user = response;
-            vm.getList();
-          });
+          return usersService.$get($stateParams.uuid);
         } else {
-          usersService.getCurrentUser().then(function(response) {
-            vm.user = response;
-            vm.getList();
-          });
+          return usersService.getCurrentUser();
         }
       }
     });
@@ -304,12 +297,8 @@
 
       init: function() {
         this.controllerScope = controllerScope;
+        this.blockUIElement = 'tab-content';
         this.service = keysService;
-        if ($stateParams.uuid) {
-          this.user.uuid = $stateParams.uuid;
-        } else {
-          this.getCurrentUser();
-        }
         this._super();
 
         this.entityOptions = {
@@ -347,21 +336,23 @@
         ];
       },
       getList: function(filter) {
-        if (this.user.uuid) {
-          this.service.defaultFilter.user_uuid = this.user.uuid;
-          return this._super(filter);
-        }
-      },
-      getCurrentUser: function() {
-        var vm = this;
-        usersService.getCurrentUser().then(function(response) {
-          vm.user = response;
-          vm.getList();
+        var vm = this,
+          fn = this._super.bind(this);
+        
+        return this.getUser().then(function(user) {
+          vm.user = user;
+          vm.service.defaultFilter.user_uuid = user.uuid;
+          return fn(filter);
         });
+      },
+      getUser: function() {
+        if ($stateParams.uuid) {
+          return usersService.$get($stateParams.uuid);
+        } else {
+          return usersService.getCurrentUser();
+        }
       }
     });
-
     controllerScope.__proto__ = new Controller();
   }
-
 })();
