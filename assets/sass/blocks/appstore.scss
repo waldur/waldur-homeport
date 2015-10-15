@@ -505,7 +505,7 @@
             list-style: none;
             li {
                 padding: 15px 25px;
-                height: 75px;
+                min-height: 75px;
                 position: relative;
                 &:after {
                     content: "";
@@ -528,6 +528,11 @@
                         white-space: nowrap;
                         overflow: hidden;
                         text-overflow: ellipsis;
+                        &:last-child {
+                            white-space: normal;
+                            overflow: auto;
+                            text-overflow: clip;
+                        }
                     }
                 }
                 .price {
@@ -541,11 +546,11 @@
                     font-weight: bold;
                     background: #ececec;
                     margin-top: -1px;
+                    height: auto;
                     .price {
                         font-size: 24px;
                         color: $dashboard-green;
                     }
-
                 }
             }
         }

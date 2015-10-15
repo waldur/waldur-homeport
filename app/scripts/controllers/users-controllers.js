@@ -211,41 +211,22 @@
         this.controllerScope = controllerScope;
         this.blockUIElement = 'tab-content';
         this._super();
-        this.entityOptions = {
-          entityData: {
-            noDataText: 'No events yet.',
-            hideActionButtons: true,
-            hideTableHead: true
-          },
-          list: [
-            {
-              type: ENTITYLISTFIELDTYPES.noType,
-              propertyName: 'message',
-              showForMobile: true,
-              className: 'event-message'
-            },
-            {
-              type: ENTITYLISTFIELDTYPES.date,
-              propertyName: '@timestamp'
-            }
-          ]
-        };
       },
       getList: function(filter) {
         var vm = this,
           fn = this._super.bind(this);
+        
+        return this.getUser().then(function(user) {
+          vm.user = user;
+          vm.service.defaultFilter.scope = user.url;
+          return fn(filter);
+        });
+      },
+      getUser: function() {
         if ($stateParams.uuid) {
-          return usersService.$get($stateParams.uuid).then(function (response) {
-            vm.user = response;
-            vm.service.defaultFilter.scope = vm.user.url;
-            return fn(filter);
-          });
+          return usersService.$get($stateParams.uuid);
         } else {
-          return usersService.getCurrentUser().then(function(response) {
-            vm.user = response;
-            vm.service.defaultFilter.scope = vm.user.url;
-            return fn(filter);
-          });
+          return usersService.getCurrentUser();
         }
       }
     });
@@ -276,25 +257,20 @@
         this._super();
       },
       getList: function(filter) {
-        if (this.user) {
-          this.service.defaultFilter.username = this.user.username;
-          return this._super(filter);
-        } else {
-          return this.getUser();
-        }
+        var vm = this,
+          fn = this._super.bind(this);
+        
+        return this.getUser().then(function(user) {
+          vm.user = user;
+          vm.service.defaultFilter.username = user.username;
+          return fn(filter);
+        });
       },
       getUser: function() {
-        var vm = this;
         if ($stateParams.uuid) {
-          return usersService.$get($stateParams.uuid).then(function(response) {
-            vm.user = response;
-            return vm.user ? vm.getList() : false;
-          });
+          return usersService.$get($stateParams.uuid);
         } else {
-          return usersService.getCurrentUser().then(function(response) {
-            vm.user = response;
-            return vm.user ? vm.getList() : false;
-          });
+          return usersService.getCurrentUser();
         }
       }
     });
@@ -323,9 +299,6 @@
         this.controllerScope = controllerScope;
         this.blockUIElement = 'tab-content';
         this.service = keysService;
-        if ($stateParams.uuid) {
-          this.user.uuid = $stateParams.uuid;
-        }
         this._super();
 
         this.entityOptions = {
@@ -365,20 +338,21 @@
       getList: function(filter) {
         var vm = this,
           fn = this._super.bind(this);
-        if (this.user.uuid) {
-          vm.service.defaultFilter.user_uuid = vm.user.uuid;
+        
+        return this.getUser().then(function(user) {
+          vm.user = user;
+          vm.service.defaultFilter.user_uuid = user.uuid;
           return fn(filter);
+        });
+      },
+      getUser: function() {
+        if ($stateParams.uuid) {
+          return usersService.$get($stateParams.uuid);
         } else {
-          return usersService.getCurrentUser().then(function(response) {
-            vm.user = response;
-            vm.service.defaultFilter.user_uuid = vm.user.uuid;
-            return fn(filter);
-          });
+          return usersService.getCurrentUser();
         }
       }
     });
-
     controllerScope.__proto__ = new Controller();
   }
-
 })();
