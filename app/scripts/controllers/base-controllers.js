@@ -326,7 +326,11 @@
         currentStateService.isCustomerDefined = false;
         $state.go('home.login');
       },
-      stateChangeSuccessHandler: function(event, toState) {
+      stateChangeSuccessHandler: function(event, toState, toParams, fromState, fromParams) {
+        $rootScope.prevPreviousState = $rootScope.previousState;
+        $rootScope.prevPreviousParams = $rootScope.previousParams;
+        $rootScope.previousState = fromState;
+        $rootScope.previousParams= fromParams;
         this.deregisterEvent('adjustCurrentCustomer');
         this.deregisterEvent('adjustCurrentProject');
         this.deregisterEvent('currentCustomerUpdated'); // clear currentCustomerUpdated event handlers
@@ -410,19 +414,49 @@
   }
 
   angular.module('ncsaas')
-    .controller('ErrorController', ['baseControllerClass', 'currentStateService', ErrorController]);
+    .service('BaseErrorController', ['$rootScope', '$state', 'baseControllerClass', BaseErrorController]);
 
-  function ErrorController(baseControllerClass, currentStateService) {
-    var controllerScope = this;
+  function BaseErrorController($rootScope, $state, baseControllerClass) {
     var Controller = baseControllerClass.extend({
+      init: function() {
+        var state = $rootScope.prevPreviousState;
+        this.href = (state && state.name !== 'errorPage.notFound' && state.name !== 'errorPage.limitQuota')
+          ? $state.href(state.name, $rootScope.prevPreviousParams)
+          : $state.href('dashboard.index');
+      }
+    });
+    return Controller;
+  }
+
+  angular.module('ncsaas')
+    .controller('Error403Controller', [
+      'BaseErrorController', 'currentStateService', Error403Controller]);
+
+  function Error403Controller(BaseErrorController, currentStateService) {
+    var controllerScope = this;
+    var Controller = BaseErrorController.extend({
       init: function() {
         var vm = this;
         currentStateService.getCustomer().then(function(response) {
           vm.customer = response;
         });
+        this._super();
       }
     });
 
+    controllerScope.__proto__ = new Controller();
+  }
+
+  angular.module('ncsaas')
+    .controller('Error404Controller', ['BaseErrorController', Error404Controller]);
+  
+  function Error404Controller(BaseErrorController) {
+    var controllerScope = this;
+    var Controller = BaseErrorController.extend({
+      init: function() {
+        this._super();
+      }
+    });
     controllerScope.__proto__ = new Controller();
   }
 
