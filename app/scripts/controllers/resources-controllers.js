@@ -288,11 +288,10 @@
       'currentStateService',
       'BaseBackupListController',
       '$stateParams',
-      'blockUI',
       ResourceBackupListTabController
       ]);
 
-    function ResourceBackupListTabController(currentStateService, BaseBackupListController, $stateParams, blockUI) {
+    function ResourceBackupListTabController(currentStateService, BaseBackupListController, $stateParams) {
       var controllerScope = this;
       var Controller = BaseBackupListController.extend({
         init:function() {
