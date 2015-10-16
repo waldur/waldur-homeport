@@ -38,7 +38,7 @@
         } else {
           vm.service_options = {};
           var blacklist = ['name', 'cpu_overcommit_ratio', 'dummy'];
-          var types = ['string', 'choice'];
+          var types = ['string', 'choice', 'url'];
 
           vm.getServicesList().then(function(services) {
             var promises = [];

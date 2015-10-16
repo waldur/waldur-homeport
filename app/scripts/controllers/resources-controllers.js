@@ -130,6 +130,10 @@
             item.access_info_url = item.rdp;
             item.access_info_text = 'Connect';
           }
+          else if (item.web_url && item.state == 'Online') {
+            item.access_info_url = item.web_url;
+            item.access_info_text = 'Open';
+          }
         }
       },
       stopResource:function(resource) {

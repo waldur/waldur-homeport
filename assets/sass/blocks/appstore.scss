@@ -62,10 +62,6 @@
             width: 55px;
             font-size: 50px;
             text-align: center;
-            &.gitlab, &.oracle {
-                width: 150px;
-                margin: 0px auto;
-            }
         } // icon
         .description {
             // display: flex;
@@ -73,9 +69,6 @@
             box-sizing: border-box;
             text-align: center;
             margin-left: 10px;
-            &.gitlab, &.oracle {
-                display: none;
-            }
             &.full {
                 width: 100%;
             } // &.full
@@ -220,20 +213,6 @@
                 position: relative;
                 font-size: 16px;
                 font-weight: bold;
-                &.gitlab {
-                    h3 {
-                        display: none;
-                    }
-                    .icon {
-                        width: 150px;
-                    }
-                }
-                &.oracle {
-                    @extend .gitlab;
-                    .icon {
-                        padding-top: 15px;
-                    }
-                }
                 span {
                     display: none;
                     width: 93%;

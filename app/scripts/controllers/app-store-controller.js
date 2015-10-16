@@ -111,7 +111,7 @@
         this.resetPriceItems();
 
         var services = this.categoryServices[this.selectedCategory.name];
-        if (ENV.VmProviderSettingsUuid && this.selectedCategory.name == ENV.appStoreCategories[0].name) {
+        if (ENV.VmProviderSettingsUuid && this.isVirtualMachinesSelected()) {
           for (var i = 0; i < services.length; i++) {
             if (services[i].settings_uuid == ENV.VmProviderSettingsUuid) {
               this.setService(services[i]);
@@ -120,7 +120,7 @@
               break;
             }
           }
-        } else if (ENV.gitLabProviderSettingsUuid && this.selectedCategory.name == ENV.appStoreCategories[1].name) {
+        } else if (ENV.gitLabProviderSettingsUuid && this.isApplicationSelected()) {
           for (var i = 0; i < services.length; i++) {
             if (services[i].settings_uuid == ENV.gitLabProviderSettingsUuid) {
               this.setService(services[i]);
@@ -133,6 +133,15 @@
         } else if (services && services.length == 1) {
           this.setService(services[0]);
         }
+      },
+      isVirtualMachinesSelected: function() {
+        return this.selectedCategory.name == ENV.appStoreCategories[ENV.VirtualMachines].name;
+      },
+      isApplicationSelected: function() {
+        return this.selectedCategory.name == ENV.appStoreCategories[ENV.Applications].name;
+      },
+      isSupportSelected: function() {
+        return this.selectedCategory.name == 'SUPPORT';
       },
       setService: function(service) {
         this.selectedService = service;
@@ -328,6 +337,12 @@
           return;
         }
         if (name == 'region') {
+          return;
+        }
+        if (name == 'visibility_level') {
+          return;
+        }
+        if (name == 'group') {
           return;
         }
         if (name == 'image') {
@@ -608,7 +623,17 @@
         this.errorFlash(message);
       },
       successRedirect: function() {
-        $state.go('resources.list', {tab: ENV.resourcesTypes.vms});
+        var tab = this.getDestinationTab();
+        $state.go('resources.list', {tab: tab});
+      },
+      getDestinationTab: function() {
+        if (this.isVirtualMachinesSelected()) {
+          return ENV.resourcesTypes.vms;
+        } else if (this.isApplicationSelected()) {
+          return ENV.resourcesTypes.applications;
+        } else if (this.isSupportSelected()) {
+          return 'premiumSupport';
+        }
       },
       setCompare: function(categoryName) {
         var index = this.compare.indexOf(categoryName);
