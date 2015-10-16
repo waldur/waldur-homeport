@@ -142,7 +142,7 @@
       dashboard: ['dashboard.index'],
       resources: ['resources.list'],
       projects: ['projects.list', 'projects.details', 'projects.create', 'projects.add-users'],
-      services: ['services.list', 'services.create', 'services.details'],
+      services: ['services.list', 'services.create'],
       users: ['users.list', 'users.details'],
       support: ['support.list', 'support.create']
     };

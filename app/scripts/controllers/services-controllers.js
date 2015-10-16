@@ -99,7 +99,6 @@
               name: 'Name',
               propertyName: 'name',
               type: ENTITYLISTFIELDTYPES.name,
-              link: 'services.details({uuid: entity.uuid, provider: entity.service_type})',
               className: 'name',
               showForMobile: true
             },
