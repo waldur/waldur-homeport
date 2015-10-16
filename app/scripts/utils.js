@@ -20,7 +20,9 @@
         this.flashMessage('warning', message);
       },
       flashMessage: function(type, message) {
-        Flash.create(type, message);
+        if (message) {
+          Flash.create(type, message);
+        }
       }
     };
   }
