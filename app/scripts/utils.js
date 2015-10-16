@@ -7,16 +7,16 @@
 
   function ncUtilsFlash(Flash) {
     return {
-      successFlash: function(message) {
+      success: function(message) {
         this.flashMessage('success', message);
       },
-      errorFlash: function(message) {
+      error: function(message) {
         this.flashMessage('danger', message);
       },
-      infoFlash: function(message) {
+      info: function(message) {
         this.flashMessage('info', message);
       },
-      warningFlash: function(message) {
+      warning: function(message) {
         this.flashMessage('warning', message);
       },
       flashMessage: function(type, message) {
@@ -35,9 +35,6 @@
       },
       updateIntercom: function() {
         window.Intercom('update');
-      },
-      emitEvent: function(eventName) {
-        $rootScope.$broadcast(eventName)
       },
       blockElement: function(element, promise) {
         var block = blockUI.instances.get(element);

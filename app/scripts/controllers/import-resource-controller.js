@@ -12,7 +12,7 @@
       '$state',
       '$q',
       'ncUtilsFlash',
-      'ncUtils',
+      '$rootScope',
       ImportResourceController]);
 
   function ImportResourceController(
@@ -25,7 +25,7 @@
     $state,
     $q,
     ncUtilsFlash,
-    ncUtils
+    $rootScope
     ) {
     var controllerScope = this;
     var Controller = baseControllerClass.extend({
@@ -52,7 +52,7 @@
         });
         currentStateService.getCustomer().then(function(customer) {
           if (customer.projects.length == 0) {
-            ncUtilsFlash.errorFlash("No projects!");
+            ncUtilsFlash.error("No projects!");
             $state.go('organizations.details', {uuid: customer.uuid, tab: 'projects'});
           } else {
             vm.setProject();
@@ -85,7 +85,7 @@
             }
           }
           if (vm.categories.length == 0) {
-            ncUtilsFlash.errorFlash("No providers!");
+            ncUtilsFlash.error("No providers!");
             $state.go('resources.list', {tab: 'providers'});
           }
         });
@@ -129,7 +129,7 @@
         resourcesService.getList(query).then(function(response) {
           controllerScope.importedResources = response;
         }, function() {
-          ncUtilsFlash.warningFlash('warning', 'Unable to get list of imported resources');
+          ncUtilsFlash.warning('Unable to get list of imported resources');
         });
       },
 
@@ -146,7 +146,7 @@
           }
         }, function(){
           controllerScope.noResources = true;
-          ncUtilsFlash.warningFlash('warning', 'Unable to get list of resources for service');
+          ncUtilsFlash.warning('Unable to get list of resources for service');
         });
       },
 
@@ -167,18 +167,18 @@
           instance.backend_id = resource.id;
           return instance.$save().then(function() {
             resourcesService.clearAllCacheForCurrentEndpoint();
-            ncUtils.emitEvent('refreshCounts');
+            $rootScope.$broadcast('refreshCounts');
             resource.status = 'success';
             vm.toggleResource(resource);
           }, function(){
-            ncUtilsFlash.warningFlash('warning', 'Unable to import resource ' + resource.name);
+            ncUtilsFlash.warning('Unable to import resource ' + resource.name);
             resource.status = 'failed';
           })
         })).then(function() {
           $state.go('projects.details', {uuid: vm.currentProject.uuid, tab: ENV.resourcesTypes.vms});
         });
 
-        ncUtilsFlash.successFlash('success', 'Wait while importing resources');
+        ncUtilsFlash.success('Wait while importing resources');
       }
     });
     controllerScope.__proto__ = new Controller();

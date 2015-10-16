@@ -266,7 +266,7 @@
             vm.currentProject = null;
             vm.setCurrentProject(null);
             if ($state.current.name != 'errorPage.notFound') {
-              ncUtilsFlash.infoFlash('You have no projects! Please add one.');
+              ncUtilsFlash.info('You have no projects! Please add one.');
             }
           }
           vm.projects = response;

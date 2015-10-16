@@ -262,9 +262,9 @@
           controllerScope.files = [];
           controllerScope.model.image = response.data.image;
           controllerScope.updateImageUrl();
-          ncUtilsFlash.successFlash('Organization image is uploaded');
+          ncUtilsFlash.success('Organization image is uploaded');
         }, function(response) {
-          ncUtilsFlash.warningFlash('warning', 'Unable to upload image');
+          ncUtilsFlash.warning('Unable to upload image');
         });
       },
 
@@ -273,11 +273,11 @@
         customerImageService.delete({
           uuid: controllerScope.model.uuid
         }).then(function(response) {
-          ncUtilsFlash.successFlash('Organization image is deleted');
+          ncUtilsFlash.success('Organization image is deleted');
           controllerScope.model.image = null;
           controllerScope.updateImageUrl();
         }, function(response) {
-          ncUtilsFlash.warningFlash('Unable to delete image');
+          ncUtilsFlash.warning('Unable to delete image');
         });
       },
       update: function(data, fieldName) {
@@ -289,7 +289,7 @@
         return d.promise;
       },
       afterUpdate: function() {
-        ncUtilsFlash.successFlash('Organization {} is updated'.replace('{}', controllerScope.model.name));
+        ncUtilsFlash.success('Organization {} is updated'.replace('{}', controllerScope.model.name));
         $rootScope.$broadcast('refreshCustomerList', {model: this.model, update: true});
       },
 
@@ -477,7 +477,7 @@
           message += (service.options[name] ? service.options[name].label : name) + ': ' + response.data[name];
         }
         if (message) {
-          ncUtilsFlash.errorFlash('Unable to save provider. ' + message);
+          ncUtilsFlash.error('Unable to save provider. ' + message);
         }
       },
       hasChanged: function(model) {

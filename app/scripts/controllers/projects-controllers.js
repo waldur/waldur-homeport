@@ -358,7 +358,7 @@
         vm._super();
       },
       onError: function(errorObject) {
-        ncUtilsFlash.errorFlash(errorObject.data.detail);
+        ncUtilsFlash.error(errorObject.data.detail);
       },
       currentCustomerUpdatedHandler: function() {
         var vm = this;

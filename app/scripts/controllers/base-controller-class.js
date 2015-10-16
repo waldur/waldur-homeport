@@ -111,7 +111,7 @@
       handleActionException: function(response) {
         if (response.status === 409) {
           var message = response.data.detail || response.data.status;
-          ncUtilsFlash.errorFlash(message);
+          ncUtilsFlash.error(message);
         }
       },
       changeAllSelectedInstances: function() {
@@ -141,7 +141,7 @@
       },
       afterInstanceRemove: function(instance) {
         this.service.clearAllCacheForCurrentEndpoint();
-        ncUtils.emitEvent('refreshCounts');
+        $rootScope.$broadcast('refreshCounts');
         var index = this.list.indexOf(instance);
         if (index !== -1) {
           this.list.splice(index, 1);
@@ -174,9 +174,9 @@
 
   angular.module('ncsaas')
     .service('baseControllerAddClass', [
-      '$rootScope', '$state', 'baseControllerClass', 'currentStateService', 'ncUtilsFlash', 'ncUtils', baseControllerAddClass]);
+      '$rootScope', '$state', 'baseControllerClass', 'currentStateService', 'ncUtilsFlash', baseControllerAddClass]);
 
-  function baseControllerAddClass($rootScope, $state, baseControllerClass, currentStateService, ncUtilsFlash, ncUtils) {
+  function baseControllerAddClass($rootScope, $state, baseControllerClass, currentStateService, ncUtilsFlash) {
     /**
      * Use controllerScope.__proto__ = new Controller() in needed controller
      * use this.controllerScope for changes in event handler
@@ -202,9 +202,9 @@
         vm.beforeSave();
         vm.saveInstance().then(function() {
           vm.afterSave();
-          ncUtilsFlash.successFlash(vm.getSuccessMessage());
+          ncUtilsFlash.success(vm.getSuccessMessage());
           vm.service.clearAllCacheForCurrentEndpoint();
-          ncUtils.emitEvent('refreshCounts');
+          $rootScope.$broadcast('refreshCounts');
           vm.successRedirect();
         }, function(response) {
           vm.errors = response.data;
@@ -246,9 +246,9 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('baseControllerDetailUpdateClass', ['$state', 'baseControllerClass', '$stateParams', 'ncUtils', baseControllerDetailUpdateClass]);
+    .service('baseControllerDetailUpdateClass', ['$state', 'baseControllerClass', '$stateParams', '$rootScope', baseControllerDetailUpdateClass]);
 
-  function baseControllerDetailUpdateClass($state, baseControllerClass, $stateParams, ncUtils) {
+  function baseControllerDetailUpdateClass($state, baseControllerClass, $stateParams, $rootScope) {
     /**
      * Use controllerScope.__proto__ = new Controller() in needed controller
      * use this.controllerScope for changes in event handler
@@ -272,7 +272,7 @@
         vm.model.$update(success, error);
         function success() {
           vm.service.clearAllCacheForCurrentEndpoint();
-          ncUtils.emitEvent('refreshCounts');
+          $rootScope.$broadcast('refreshCounts');
           vm.afterUpdate();
           vm.successRedirect();
         }
@@ -298,7 +298,7 @@
           vm.model.$delete(
             function() {
               vm.service.clearAllCacheForCurrentEndpoint();
-              ncUtils.emitEvent('refreshCounts');
+              $rootScope.$broadcast('refreshCounts');
               $state.go(vm.listState);
             },
             function(errors) {

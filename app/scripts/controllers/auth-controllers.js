@@ -54,7 +54,7 @@
         var vm = this;
         vm.errors = {};
         authService.signup(vm.user).then(function() {
-          ncUtilsFlash.infoFlash('Confirmation mail has been sent. Please check your inbox!');
+          ncUtilsFlash.info('Confirmation mail has been sent. Please check your inbox!');
           vm.isSignupFormVisible = false;
           vm.user = {};
         }, function(response) {
@@ -82,10 +82,10 @@
           user_uuid: $stateParams.user_uuid,
           token: $stateParams.token
         }).then(function() {
-          ncUtilsFlash.infoFlash('Account has been activated');
+          ncUtilsFlash.info('Account has been activated');
           $state.go('dashboard.index');
         }, function(response) {
-          ncUtilsFlash.errorFlash('Unable to activate account');
+          ncUtilsFlash.error('Unable to activate account');
         });
       }
     });

@@ -594,7 +594,7 @@
         } else {
           message = 'Server error occurred';
         }
-        ncUtilsFlash.errorFlash(message);
+        ncUtilsFlash.error(message);
       },
       successRedirect: function() {
         $state.go('resources.list', {tab: ENV.resourcesTypes.vms});

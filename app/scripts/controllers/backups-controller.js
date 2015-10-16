@@ -203,7 +203,7 @@ angular.module('ncsaas')
         vm.service.restoreBackup($stateParams.uuid, inputs).then(success, error);
         function success() {
           vm.afterSave();
-          ncUtilsFlash.successFlash(vm.getSuccessMessage());
+          ncUtilsFlash.success(vm.getSuccessMessage());
           vm.successRedirect();
         }
         function error(response) {
