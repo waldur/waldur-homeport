@@ -167,23 +167,6 @@
 
     return ControllerListClass;
   }
-
-  angular.module('ncsaas')
-    .controller('ResourceListController', ['baseResourceListController', 'resourcesService', ResourceListController]);
-
-  function ResourceListController(baseResourceListController, resourcesService) {
-    var controllerScope = this;
-    var ResourceController = baseResourceListController.extend({
-      init:function() {
-        this.service = resourcesService;
-        this.controllerScope = controllerScope;
-        this._super();
-      }
-    });
-
-    controllerScope.__proto__ = new ResourceController();
-  }
-
 })();
 
 (function() {

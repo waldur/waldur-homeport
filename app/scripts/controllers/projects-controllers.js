@@ -937,51 +937,6 @@
 })();
 
 (function() {
-angular.module('ncsaas')
-  .controller('ProjectBackupsTabController', [
-      'BaseBackupListController', '$scope', 'currentStateService',
-      ProjectBackupsTabController
-  ]);
-
-  function ProjectBackupsTabController(BaseBackupListController, $scope, currentStateService) {
-    var controllerScope = this;
-      var Controller = BaseBackupListController.extend({
-        init:function() {
-          this.controllerScope = controllerScope;
-          this._super();
-          this.entityOptions.entityData.title = null;
-          $scope.$on('currentProjectUpdated', this.setCurrentProject.bind(this));
-          $scope.$on('searchInputChanged', this.onSearchInputChanged.bind(this));
-        },
-
-        registerEventHandlers: function() {},
-
-        setCurrentProject: function() {
-          this.getList();
-        },
-
-        getList: function(filter) {
-          var vm = this;
-          var fn = this._super.bind(vm);
-          filter = filter || {};
-          return currentStateService.getProject().then(function(project){
-            filter['project_uuid'] = project.uuid;
-            vm.service.defaultFilter.project_uuid = project.uuid;
-            return fn(filter);
-          })
-        },
-
-        onSearchInputChanged: function(event, searchInput) {
-          this.searchInput = searchInput;
-          this.search();
-        }
-      });
-
-    controllerScope.__proto__ = new Controller();
-  }
-})();
-
-(function() {
   angular.module('ncsaas')
     .controller('ProjectServicesTabController',
       ['baseControllerListClass',

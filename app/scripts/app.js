@@ -348,31 +348,6 @@
           auth: true
         })
 
-        .state('services.details', {
-          url: ':provider/:uuid/',
-          views: {
-            'appContent': {
-              templateUrl: 'views/service/details.html'
-            },
-            'tabEventlog@services.details' : {
-              templateUrl: 'views/service/tab-eventlog.html',
-            },
-            'tabResources@services.details' : {
-              templateUrl: 'views/service/tab-resources.html',
-            },
-            'tabProjects@services.details' : {
-              templateUrl: 'views/service/tab-projects.html',
-            },
-            'appHeader': {
-              templateUrl: 'views/partials/app-header.html'
-            }
-          },
-          resolve: {
-            authenticated: authCheck
-          },
-          auth: true
-        })
-
         .state('profile', {
           url: '/profile/',
           abstract: true,
