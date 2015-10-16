@@ -14,6 +14,7 @@
       'premiumSupportPlansService',
       'premiumSupportContractsService',
       'resourcesService',
+      'ncUtilsFlash',
       AppStoreController]);
 
   function AppStoreController(
@@ -29,7 +30,8 @@
     $rootScope,
     premiumSupportPlansService,
     premiumSupportContractsService,
-    resourcesService) {
+    resourcesService,
+    ncUtilsFlash) {
     var controllerScope = this;
     var Controller = baseControllerAddClass.extend({
       UNIQUE_FIELDS: {
@@ -623,7 +625,7 @@
         } else {
           message = 'Server error occurred';
         }
-        this.errorFlash(message);
+        ncUtilsFlash.error(message);
       },
       successRedirect: function() {
         var tab = this.getDestinationTab();

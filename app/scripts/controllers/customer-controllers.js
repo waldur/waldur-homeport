@@ -113,7 +113,6 @@
       'customerImageService',
       'usersService',
       'paymentsService',
-      'Flash',
       'ENV',
       '$stateParams',
       '$rootScope',
@@ -121,6 +120,7 @@
       '$window',
       'resourcesCountService',
       'alertsService',
+      'ncUtilsFlash',
       CustomerDetailUpdateController
     ]);
 
@@ -130,14 +130,14 @@
     customerImageService,
     usersService,
     paymentsService,
-    Flash,
     ENV,
     $stateParams,
     $rootScope,
     $q,
     $window,
     resourcesCountService,
-    alertsService
+    alertsService,
+    ncUtilsFlash
     ) {
     var controllerScope = this;
     var CustomerController = baseControllerDetailUpdateClass.extend({
@@ -258,13 +258,13 @@
         customerImageService.create({
           uuid: controllerScope.model.uuid,
           file: controllerScope.files[0]
-        }).then(function (response) {
+        }).then(function(response) {
           controllerScope.files = [];
           controllerScope.model.image = response.data.image;
           controllerScope.updateImageUrl();
-          Flash.create('success', 'Organization image is uploaded');
-        }, function (response) {
-          Flash.create('warning', 'Unable to upload image');
+          ncUtilsFlash.success('Organization image is uploaded');
+        }, function(response) {
+          ncUtilsFlash.warning('Unable to upload image');
         });
       },
 
@@ -272,12 +272,12 @@
         controllerScope.model.image = null;
         customerImageService.delete({
           uuid: controllerScope.model.uuid
-        }).then(function (response) {
-          Flash.create('success', 'Organization image is deleted');
+        }).then(function(response) {
+          ncUtilsFlash.success('Organization image is deleted');
           controllerScope.model.image = null;
           controllerScope.updateImageUrl();
-        }, function (response) {
-          Flash.create('warning', 'Unable to delete image');
+        }, function(response) {
+          ncUtilsFlash.warning('Unable to delete image');
         });
       },
       update: function(data, fieldName) {
@@ -289,7 +289,7 @@
         return d.promise;
       },
       afterUpdate: function() {
-        this.successFlash('Organization {} is updated'.replace('{}', controllerScope.model.name));
+        ncUtilsFlash.success('Organization {} is updated'.replace('{}', controllerScope.model.name));
         $rootScope.$broadcast('refreshCustomerList', {model: this.model, update: true});
       },
 
@@ -370,11 +370,12 @@
       'servicesService',
       'usersService',
       'blockUI',
+      'ncUtilsFlash',
       CustomerServiceTabController
     ]);
 
   function CustomerServiceTabController(
-    $stateParams, baseServiceListController, joinService, servicesService, usersService, blockUI) {
+    $stateParams, baseServiceListController, joinService, servicesService, usersService, blockUI, ncUtilsFlash) {
     var controllerScope = this;
     var Controller = baseServiceListController.extend({
       init: function() {
@@ -476,7 +477,7 @@
           message += (service.options[name] ? service.options[name].label : name) + ': ' + response.data[name];
         }
         if (message) {
-          this.errorFlash('Unable to save provider. ' + message);
+          ncUtilsFlash.error('Unable to save provider. ' + message);
         }
       },
       hasChanged: function(model) {
