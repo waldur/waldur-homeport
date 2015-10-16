@@ -348,31 +348,6 @@
           auth: true
         })
 
-        .state('services.details', {
-          url: ':provider/:uuid/',
-          views: {
-            'appContent': {
-              templateUrl: 'views/service/details.html'
-            },
-            'tabEventlog@services.details' : {
-              templateUrl: 'views/service/tab-eventlog.html',
-            },
-            'tabResources@services.details' : {
-              templateUrl: 'views/service/tab-resources.html',
-            },
-            'tabProjects@services.details' : {
-              templateUrl: 'views/service/tab-projects.html',
-            },
-            'appHeader': {
-              templateUrl: 'views/partials/app-header.html'
-            }
-          },
-          resolve: {
-            authenticated: authCheck
-          },
-          auth: true
-        })
-
         .state('profile', {
           url: '/profile/',
           abstract: true,
@@ -405,22 +380,6 @@
             },
             'tabManageUser@profile.details': {
               templateUrl: 'views/profile/tab-manage.html',
-            }
-          },
-          resolve: {
-            authenticated: authCheck
-          },
-          auth: true
-        })
-
-        .state('profile.update', {
-          url: 'edit/',
-          views: {
-            'appContent': {
-              templateUrl: 'views/profile/update.html',
-            },
-            'appHeader': {
-              templateUrl: 'views/partials/app-header.html',
             }
           },
           resolve: {
@@ -519,9 +478,6 @@
             },
             'tabAlerts@organizations.details': {
               templateUrl: 'views/customer/tab-alerts.html',
-            },
-            'listTemplate@organizations.details' : {
-              templateUrl: 'views/service/list-template.html'
             },
             'appHeader': {
               templateUrl: 'views/partials/app-header.html',
@@ -666,36 +622,8 @@
             'tabBackups@resources.details': {
               templateUrl: 'views/resource/tab-backups.html',
             },
-            'backupListContent@resources.details' : {
-              templateUrl: 'views/backup/backup-list-content.html',
-            },
             'tabAlerts@resources.details': {
               templateUrl: 'views/resource/tab-alerts.html',
-            },
-            'tabs@resources.details': {
-              templateUrl: 'views/resource/tabs.html',
-            },
-            'appHeader': {
-              templateUrl: 'views/partials/app-header.html',
-            }
-          },
-          resolve: {
-            authenticated: authCheck
-          },
-          auth: true
-        })
-
-        .state('resources.update', {
-          url: ':resource_type/:uuid/edit/:tab',
-          views: {
-            'appContent': {
-              templateUrl: 'views/resource/update.html',
-            },
-            'tabBackups@resources.update': {
-              templateUrl: 'views/resource/tab-backups.html',
-            },
-            'tabs@resources.update': {
-              templateUrl: 'views/resource/tabs.html',
             },
             'appHeader': {
               templateUrl: 'views/partials/app-header.html',
@@ -832,9 +760,6 @@
           views: {
             'appContent': {
               templateUrl: 'views/backup/list.html',
-            },
-            'backupListContent@backups.list' : {
-              templateUrl: 'views/backup/backup-list-content.html',
             },
             'appHeader': {
               templateUrl: 'views/partials/app-header.html',
