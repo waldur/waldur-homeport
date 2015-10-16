@@ -178,7 +178,10 @@
         var promises = [];
         var validChoices = {};
         angular.forEach(vm.serviceMetadata.properties, function(url, property) {
-          var query = {settings_uuid: vm.selectedService.settings_uuid};
+          var query = {
+            settings_uuid: vm.selectedService.settings_uuid,
+            project: vm.currentProject.uuid // for security groups
+          };
           servicesService.pageSize = 1000;
           var promise = servicesService.getList(query, url).then(function(response) {
             validChoices[property.toLowerCase()] = vm.formatChoices(response);
@@ -212,6 +215,9 @@
           }
 
           var choices = validChoices[name] || options.choices;
+          if (name == 'security_groups') {
+            choices = validChoices.securitygroup;
+          }
 
           if (name == 'user_data') {
             type = 'text';
@@ -224,12 +230,19 @@
           var icons = {
             size: 'gear',
             flavor: 'gear',
-            ssh_public_key: 'lock'
+            ssh_public_key: 'lock',
+            security_groups: 'lock',
+            group: 'group'
           };
           var icon = icons[name] || 'cloud';
           var label = options.label;
           var required = options.required;
-          var visible = required || name == 'ssh_public_key';
+          var visibleFields = [
+            'ssh_public_key',
+            'group',
+            'security_groups'
+          ];
+          var visible = required || visibleFields.indexOf(name) != -1;
           var help_text = options.help_text;
           var min, max, units;
 
@@ -265,7 +278,7 @@
         }
         var order = [
           'name', 'image', 'region', 'size', 'flavor', 'system_volume_size', 'data_volume_size',
-          'ssh_public_key', 'description', 'user_data'
+          'ssh_public_key', 'security_groups', 'description', 'user_data'
         ];
         this.fields.sort(function(a, b) {
           return order.indexOf(a.name) - order.indexOf(b.name);
