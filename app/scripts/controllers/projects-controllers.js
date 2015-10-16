@@ -386,7 +386,6 @@
     .controller('ProjectDetailUpdateController', [
       '$stateParams',
       '$rootScope',
-      '$q',
       'ENV',
       'projectsService',
       'baseControllerDetailUpdateClass',
@@ -401,7 +400,6 @@
   function ProjectDetailUpdateController(
     $stateParams,
     $rootScope,
-    $q,
     ENV,
     projectsService,
     baseControllerDetailUpdateClass,
