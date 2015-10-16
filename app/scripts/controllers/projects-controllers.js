@@ -1015,12 +1015,15 @@ angular.module('ncsaas')
             clickFunction: this.remove.bind(controllerScope),
 
             isDisabled: function(service) {
-              return service.shared;
+              return service.shared || service.resources_count > 0;
             }.bind(this.controllerScope),
 
             tooltip: function(service) {
               if (service.shared) {
                 return 'You cannot remove shared provider';
+              }
+              if (service.resources_count) {
+                return 'Provider has resources. Remove them first';
               }
             }.bind(this.controllerScope)
           }
