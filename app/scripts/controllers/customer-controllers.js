@@ -113,7 +113,6 @@
       'customerImageService',
       'usersService',
       'paymentsService',
-      'Flash',
       'ENV',
       '$stateParams',
       '$rootScope',
@@ -131,7 +130,6 @@
     customerImageService,
     usersService,
     paymentsService,
-    Flash,
     ENV,
     $stateParams,
     $rootScope,
@@ -260,13 +258,13 @@
         customerImageService.create({
           uuid: controllerScope.model.uuid,
           file: controllerScope.files[0]
-        }).then(function (response) {
+        }).then(function(response) {
           controllerScope.files = [];
           controllerScope.model.image = response.data.image;
           controllerScope.updateImageUrl();
-          Flash.create('success', 'Organization image is uploaded');
-        }, function (response) {
-          Flash.create('warning', 'Unable to upload image');
+          ncUtilsFlash.successFlash('Organization image is uploaded');
+        }, function(response) {
+          ncUtilsFlash.warningFlash('warning', 'Unable to upload image');
         });
       },
 
@@ -274,12 +272,12 @@
         controllerScope.model.image = null;
         customerImageService.delete({
           uuid: controllerScope.model.uuid
-        }).then(function (response) {
-          Flash.create('success', 'Organization image is deleted');
+        }).then(function(response) {
+          ncUtilsFlash.successFlash('Organization image is deleted');
           controllerScope.model.image = null;
           controllerScope.updateImageUrl();
-        }, function (response) {
-          Flash.create('warning', 'Unable to delete image');
+        }, function(response) {
+          ncUtilsFlash.warningFlash('Unable to delete image');
         });
       },
       update: function(data, fieldName) {
