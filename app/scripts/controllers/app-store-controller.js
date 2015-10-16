@@ -239,7 +239,7 @@
           var icons = {
             size: 'gear',
             flavor: 'gear',
-            ssh_public_key: 'lock',
+            ssh_public_key: 'key',
             security_groups: 'lock',
             group: 'group'
           };
@@ -287,7 +287,7 @@
         }
         var order = [
           'name', 'image', 'region', 'size', 'flavor', 'system_volume_size', 'data_volume_size',
-          'ssh_public_key', 'security_groups', 'description', 'user_data'
+          'security_groups', 'ssh_public_key', 'description', 'user_data'
         ];
         this.fields.sort(function(a, b) {
           return order.indexOf(a.name) - order.indexOf(b.name);
@@ -604,6 +604,9 @@
         }
         if (this.instance.data_volume_size) {
           instance.data_volume_size = this.instance.data_volume_size * 1024;
+        }
+        if (this.instance.security_groups) {
+          instance.security_groups = [{url: this.instance.security_groups}];
         }
         return instance.$save();
       },
