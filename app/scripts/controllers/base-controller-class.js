@@ -83,7 +83,6 @@
       blockUIElement: null,
 
       init: function() {
-        this.setSignalHandler('currentCustomerUpdated', this.currentCustomerUpdatedHandler.bind(this));
         this.deregisterEvent('generalSearchChanged');
         this.setSignalHandler('generalSearchChanged', this.generalSearchChanged.bind(this));
         this.service.page = 1;
@@ -161,11 +160,6 @@
       },
       isInstanceSelected: function(instance) {
         return this.selectedInstances.indexOf(instance[this.uniqueModelKeyName]) !== -1;
-      },
-      currentCustomerUpdatedHandler: function() {
-        var vm = this.controllerScope;
-        vm.service.page = 1;
-        vm.getList();
       },
       afterInstanceRemove: function(instance) {
         this.service.clearAllCacheForCurrentEndpoint();

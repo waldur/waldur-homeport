@@ -179,7 +179,6 @@
 
       init:function() {
         this.controllerScope = controllerScope;
-        this.setSignalHandler('currentProjectUpdated', this.setCurrentProject.bind(controllerScope));
         this.setCurrentProject();
         this._super();
         this.entityOptions.expandable = true;
@@ -331,7 +330,6 @@
       init: function() {
         this.service = projectsService;
         this.controllerScope = controllerScope;
-        this.setSignalHandler('currentCustomerUpdated', this.currentCustomerUpdatedHandler.bind(this));
         this._super();
         this.listState = 'projects.list';
         this.detailsState = 'projects.details';
@@ -357,17 +355,6 @@
       },
       onError: function(errorObject) {
         this.errorFlash(errorObject.data.detail);
-      },
-      currentCustomerUpdatedHandler: function() {
-        var vm = this;
-        vm.activate();
-        /*jshint camelcase: false */
-        if (vm.project.name || vm.project.description) {
-          if (confirm('Clean all fields?')) {
-            vm.project.name = '';
-            vm.project.description = '';
-          }
-        }
       },
       addUser: function() {
         var vm = this;
@@ -416,9 +403,6 @@
       init:function() {
         this.service = projectsService;
         this.controllerScope = controllerScope;
-        if (!$stateParams.uuid) {
-          this.setSignalHandler('currentProjectUpdated', this.activate.bind(controllerScope));
-        }
         this.setSignalHandler('refreshCounts', this.setCounters.bind(controllerScope));
         this._super();
         this.detailsViewOptions = {
@@ -638,7 +622,6 @@
       checkQuotas: 'user',
 
       init: function() {
-        this.setSignalHandler('currentProjectUpdated', this.activate.bind(controllerScope));
         this.blockUIElement = 'tab-content';
         this._super();
         this.adminRole = USERPROJECTROLE.admin;
@@ -753,9 +736,6 @@
 
       init: function() {
         this.controllerScope = controllerScope;
-        if (!$stateParams.uuid) {
-          this.setSignalHandler('currentProjectUpdated', this.getProject.bind(controllerScope));
-        }
         this.blockUIElement = 'tab-content';
         this._super();
         this.getProject();
@@ -950,15 +930,10 @@ angular.module('ncsaas')
           this.controllerScope = controllerScope;
           this._super();
           this.entityOptions.entityData.title = null;
-          $scope.$on('currentProjectUpdated', this.setCurrentProject.bind(this));
           $scope.$on('searchInputChanged', this.onSearchInputChanged.bind(this));
         },
 
         registerEventHandlers: function() {},
-
-        setCurrentProject: function() {
-          this.getList();
-        },
 
         getList: function(filter) {
           var vm = this;
@@ -1111,9 +1086,6 @@ angular.module('ncsaas')
       init: function() {
         this.controllerScope = controllerScope;
         this.service = premiumSupportContractsService;
-        if (!$stateParams.uuid) {
-          this.setSignalHandler('currentProjectUpdated', this.setCurrentProject.bind(controllerScope));
-        }
         this.blockUIElement = 'tab-content';
         this._super();
 
@@ -1165,9 +1137,6 @@ angular.module('ncsaas')
             ]
           }
         ];
-      },
-      setCurrentProject: function() {
-        this.getList();
       },
       getList: function(filter) {
         var vm = this;

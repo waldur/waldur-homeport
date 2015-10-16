@@ -172,7 +172,6 @@
         this.service = joinService;
         this.controllerScope = controllerScope;
         this.successMessage = 'Provider has been created';
-        this.setSignalHandler('currentCustomerUpdated', this.activate.bind(this));
         this.categories = ENV.serviceCategories;
         this._super();
       },

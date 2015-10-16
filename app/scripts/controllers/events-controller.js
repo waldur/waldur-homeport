@@ -47,14 +47,12 @@
 
   angular.module('ncsaas')
     .controller('EventListController', [
-      '$scope',
       'baseEventListController',
       'currentStateService',
       'ENV',
       EventListController]);
 
   function EventListController(
-    $scope,
     baseEventListController,
     currentStateService,
     ENV) {
@@ -64,14 +62,7 @@
         this.controllerScope = controllerScope;
         this.cacheTime = ENV.dashboardEventsCacheTime;
         this._super();
-
-        $scope.$on('currentCustomerUpdated', this.onCustomerUpdate.bind(this));
       },
-
-      onCustomerUpdate: function() {
-        this.getList();
-      },
-
       getList: function(filter) {
         var vm = this;
         var fn = this._super.bind(vm);
@@ -157,7 +148,6 @@
 
   angular.module('ncsaas')
     .controller('DashboardCostController', [
-      '$scope',
       'baseControllerClass',
       'priceEstimationService',
       'blockUI',
@@ -165,7 +155,6 @@
       DashboardCostController]);
 
   function DashboardCostController(
-    $scope,
     baseControllerClass,
     priceEstimationService,
     blockUI,
@@ -175,8 +164,7 @@
       init: function() {
         this.controllerScope = controllerScope;
 
-        $scope.$on('currentCustomerUpdated', this.onCustomerUpdate.bind(this));
-        this.onCustomerUpdate();
+        this.activate();
         blockUI.start();
 
         this.checkQuotasResource = 'resource';
@@ -184,7 +172,7 @@
 
       },
 
-      onCustomerUpdate: function() {
+      activate: function() {
         var vm = this;
         priceEstimationService.pageSize = 1000;
         priceEstimationService.getList().then(function(rows) {
@@ -328,8 +316,7 @@
 
         this.checkQuotas = 'project';
 
-        $scope.$on('currentCustomerUpdated', this.onCustomerUpdate.bind(this));
-        this.onCustomerUpdate();
+        this.activate();
         this.resizeControl();
       },
       resizeControl: function() {
@@ -359,7 +346,7 @@
           this.blockElement('activity-content-' + project.uuid, $q.all([projectCounters, projectEvents]));
         }
       },
-      onCustomerUpdate: function() {
+      activate: function() {
         this.customer_uuid = currentStateService.getCustomerUuid();
         this.getCustomerProjects();
         this.getCustomerEvents();
