@@ -41,7 +41,10 @@
       'services': factory('services'),
       'premiumSupportContracts': factory('premium-support-contracts'),
       'aws-service-project-link': factory('aws-service-project-link'),
-      'openstack-service-project-link': factory('openstack-service-project-link')
+      'openstack-service-project-link': factory('openstack-service-project-link'),
+      'keys': factory('keys'),
+      'hooks-email': factory('hooks-email'),
+      'hooks-web': factory('hooks-web')
     }
   }
 })();

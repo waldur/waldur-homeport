@@ -14,7 +14,11 @@
         service: '=listService',
         timer: '=listTimer'
       },
-      link: function(scope) {
+      link: function(scope, element) {
+        if (!scope.service.clearAllCacheForCurrentEndpoint) {
+          element.remove();
+          return;
+        }
         scope.resetCache = resetCache;
         scope.processing = false;
         if (scope.timer) {

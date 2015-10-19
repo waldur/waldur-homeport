@@ -130,27 +130,90 @@
       'authService',
       '$translate',
       'LANGUAGE',
+      '$stateParams',
+      'ENV',
+      'resourcesCountService',
+      'eventsService',
       baseUserDetailUpdateController
     ]);
 
   // need for profile page
   function baseUserDetailUpdateController(
-    baseControllerDetailUpdateClass, usersService, authService, $translate, LANGUAGE) {
+    baseControllerDetailUpdateClass, usersService, authService, $translate, LANGUAGE, $stateParams, ENV,
+    resourcesCountService, eventsService) {
     var ControllerClass = baseControllerDetailUpdateClass.extend({
       activeTab: 'keys',
       currentUser: null,
 
       init: function() {
         this.service = usersService;
-        this.getCurrentUser();
         this._super();
         this.LANGUAGE_CHOICES = LANGUAGE.CHOICES;
         this.selectedLanguage = $translate.use();
+        this.detailsViewOptions = {
+          title: 'Profile',
+          activeTab: this.getActiveTab(),
+          hasGravatar: true,
+          joinedDate: 'date_joined',
+          aboutFields: [
+            {
+              fieldKey: 'full_name',
+              className: 'name',
+              emptyText: 'Add name'
+            },
+            {
+              fieldKey: 'email',
+              isEditable: true,
+              className: 'details',
+              emptyText: 'Add email'
+            }
+          ],
+          tabs: [
+            {
+              title: 'Events',
+              key: 'eventlog',
+              viewName: 'tabEventlog',
+              count: 0
+            },
+            {
+              title: 'SSH Keys',
+              key: 'keys',
+              viewName: 'tabKeys',
+              count: 0
+            }
+          ]
+        };
+      },
+
+      getActiveTab: function() {
+        var tabs = [$stateParams.tab, 'eventlog'];
+        for (var i = 0; i < tabs.length; i++) {
+          var tab = tabs[i];
+          if (tab && (ENV.featuresVisible || ENV.toBeFeatures.indexOf(tab) == -1)) {
+            return tab;
+          }
+        }
       },
       getCurrentUser: function() {
         var vm = this;
         usersService.getCurrentUser().then(function(response) {
           vm.currentUser = response;
+          if (vm.currentUser.uuid === vm.model.uuid) {
+            vm.canEdit = true;
+            vm.detailsViewOptions.tabs.push({
+              title: 'Notifications',
+              key: 'notifications',
+              viewName: 'tabNotifications',
+              count: 0
+            });
+            vm.detailsViewOptions.tabs.push({
+              title: 'Password',
+              key: 'password',
+              viewName: 'tabPassword',
+              count: -1
+            });
+            vm.setNotificationsCount();
+          }
         });
       },
       deleteAccount: function() {
@@ -165,6 +228,32 @@
       },
       changeLanguage: function() {
         $translate.use(this.selectedLanguage);
+      },
+      afterActivate: function() {
+        this.getCurrentUser();
+        this.setEventsCounter();
+        this.setKeysCount();
+      },
+      setEventsCounter: function() {
+        var vm = this;
+        var query = angular.extend(eventsService.defaultFilter, {scope: vm.model.url});
+        resourcesCountService.events(query).then(function(response) {
+          vm.detailsViewOptions.tabs[0].count = response;
+        });
+      },
+      setKeysCount: function() {
+        var vm = this;
+        resourcesCountService.keys({user_uuid: vm.model.uuid}).then(function(response) {
+          vm.detailsViewOptions.tabs[1].count = response;
+        });
+      },
+      setNotificationsCount: function() {
+        var vm = this;
+        resourcesCountService['hooks-email']({}).then(function(hooksEmailCount) {
+          resourcesCountService['hooks-web']({}).then(function(hooksWebCount) {
+            vm.detailsViewOptions.tabs[2].count = hooksEmailCount + hooksWebCount;
+          });
+        });
       }
     });
 

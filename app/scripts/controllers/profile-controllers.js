@@ -30,6 +30,7 @@
         var vm = this;
         usersService.getCurrentUser().then(function(response) {
           vm.model = response;
+          vm.afterActivate();
         });
       },
       search: function() {

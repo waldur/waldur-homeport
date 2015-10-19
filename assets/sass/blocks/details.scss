@@ -786,3 +786,32 @@
   opacity: 0.3;
   cursor: default;
 }
+
+.user-profile-view {
+  .details-container {
+    width: 100%;
+    .img-wrapper {
+      -webkit-border-radius: 5px;
+      border-radius: 5px;
+      position: relative;
+      float: left;
+      width: 66px;
+      height: 66px;
+      margin-right: 18px;
+      overflow: hidden;
+      margin-bottom: 5px;
+    }
+  }
+  .details-about {
+    .details-field {
+    }
+    p {
+      font-size: 15px;
+      color: #b7b7b7;
+      margin: 0;
+      line-height: 10px;
+      float: left;
+      display: block;
+    }
+  }
+}

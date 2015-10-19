@@ -1,21 +1,8 @@
 <div ng-controller="ProjectEventTabController as EventList">
 
-    <div class="clear">
-        <ul class="object-list">
-            <li ng-repeat="event in EventList.list">
-                <div class="list-item">
-                    <div>
-                        <div ui-view="eventTypes"></div>
-                    </div>
-                    <div class="actions" ng-show="EventList.showgroup">
-                        <action-button button-list="EventList.actionButtonsListItems"
-                                       button-controller="EventList"
-                                       button-model="event"></action-button>
-                    </div>
-                </div>
-            </li>
-        </ul>
-    </div>
+    <entitylist entity-list="EventList"
+                entity-service="EventList.service"
+                entity-buttons="EventList.actionButtonsListItems"
+                entity-options="EventList.entityOptions"></entitylist>
 
-    <pagination pages-list="EventList" pages-service="EventList.service"></pagination>
 </div>
