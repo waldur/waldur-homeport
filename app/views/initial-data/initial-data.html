@@ -49,7 +49,10 @@
                         <a ui-sref="help.details({ name: service.name })" target="_blank" class="info">?</a>
                     </div>
                     <div ng-repeat="option in service.options" class="fields">
-                        <label>{{ ::option.help_text||option.label }}</label>
+                        <label>
+                            <helpicon help-text="{{ option.help_text }}" ng-if="option.help_text"></helpicon>
+                            {{ ::option.label }}
+                        </label>
                         <input ng-model="option.value" type="text" ng-if="!option.choices && !service.saved"/>
                         <input ng-model="option.value" type="text" disabled ng-if="!option.choices && service.saved"/>
                         <select ng-if="option.choices"
