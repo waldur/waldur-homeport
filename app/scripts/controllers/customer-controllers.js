@@ -113,14 +113,15 @@
       'customerImageService',
       'usersService',
       'paymentsService',
-      'Flash',
       'ENV',
       '$stateParams',
       '$rootScope',
       '$q',
       '$window',
+      'servicesService',
       'resourcesCountService',
       'alertsService',
+      'ncUtilsFlash',
       CustomerDetailUpdateController
     ]);
 
@@ -130,14 +131,15 @@
     customerImageService,
     usersService,
     paymentsService,
-    Flash,
     ENV,
     $stateParams,
     $rootScope,
     $q,
     $window,
+    servicesService,
     resourcesCountService,
-    alertsService
+    alertsService,
+    ncUtilsFlash
     ) {
     var controllerScope = this;
     var CustomerController = baseControllerDetailUpdateClass.extend({
@@ -184,9 +186,14 @@
               viewName: 'tabAlerts'
             },
             {
-              title: 'Resources',
-              key: 'resources',
+              title: 'VMs',
+              key: ENV.resourcesTypes.vms,
               viewName: 'tabResources'
+            },
+            {
+              title: 'Applications',
+              key: ENV.resourcesTypes.applications,
+              viewName: 'tabApplications'
             },
             {
               title: 'Projects',
@@ -232,24 +239,65 @@
       },
 
       setCounters: function() {
+        this.setEventsCounter();
+        this.setAlertsCounter();
+        this.setVmCounter();
+        this.setAppCounter();
+        this.setProjectsCounter();
+        this.setProvidersCounter();
+      },
+      setEventsCounter: function() {
         var vm = this;
-        var query = angular.extend(alertsService.defaultFilter, {aggregate: 'customer', uuid: vm.model.uuid});
-
-        $q.all([
-          resourcesCountService.events({'scope': vm.model.url}),
-          resourcesCountService.alerts(query),
-          resourcesCountService.resources({'customer_uuid': vm.model.uuid}),
-          resourcesCountService.projects({'customer': vm.model.uuid}),
-          resourcesCountService.services({'customer_uuid': vm.model.uuid})
-        ]).then(function(responses) {
-          vm.detailsViewOptions.tabs[0].count = responses[0];
-          vm.detailsViewOptions.tabs[1].count = responses[1];
-          vm.detailsViewOptions.tabs[2].count = responses[2];
-          vm.detailsViewOptions.tabs[3].count = responses[3];
-          vm.detailsViewOptions.tabs[4].count = responses[4];
+        resourcesCountService.events({scope: vm.model.url}).then(function(count) {
+          vm.detailsViewOptions.tabs[0].count = count;
         });
       },
-
+      setAlertsCounter: function() {
+        var vm = this;
+        var query = angular.extend(alertsService.defaultFilter, {
+          aggregate: 'customer',
+          uuid: vm.model.uuid
+        });
+        resourcesCountService.alerts(query).then(function(count) {
+          vm.detailsViewOptions.tabs[1].count = count;
+        });
+      },
+      setVmCounter: function() {
+        var vm = this;
+        if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('resources') == -1) {
+          vm.getResourceCount(ENV.VirtualMachines, vm.model.uuid).then(function(count) {
+            vm.detailsViewOptions.tabs[2].count = count;
+          });
+        }
+      },
+      setAppCounter: function() {
+        var vm = this;
+        if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('resources') == -1) {
+          vm.getResourceCount(ENV.Applications, vm.model.uuid).then(function(count) {
+            vm.detailsViewOptions.tabs[3].count = count;
+          });
+        }
+      },
+      getResourceCount: function(category, customer_uuid) {
+        return servicesService.getResourceTypes(category).then(function(types) {
+          return resourcesCountService.resources({
+            customer_uuid: customer_uuid,
+            resource_type: types
+          });
+        });
+      },
+      setProjectsCounter: function() {
+        var vm = this;
+        resourcesCountService.projects({customer: vm.model.uuid}).then(function(count) {
+          vm.detailsViewOptions.tabs[4].count = count;
+        });
+      },
+      setProvidersCounter: function() {
+        var vm = this;
+        resourcesCountService.services({customer_uuid: vm.model.uuid}).then(function(count) {
+          vm.detailsViewOptions.tabs[5].count = count;
+        });
+      },
       updateImageUrl: function() {
         controllerScope.imageUrl = controllerScope.model.image || ENV.defaultCustomerIcon;
       },
@@ -258,13 +306,13 @@
         customerImageService.create({
           uuid: controllerScope.model.uuid,
           file: controllerScope.files[0]
-        }).then(function (response) {
+        }).then(function(response) {
           controllerScope.files = [];
           controllerScope.model.image = response.data.image;
           controllerScope.updateImageUrl();
-          Flash.create('success', 'Organization image is uploaded');
-        }, function (response) {
-          Flash.create('warning', 'Unable to upload image');
+          ncUtilsFlash.success('Organization image is uploaded');
+        }, function(response) {
+          ncUtilsFlash.warning('Unable to upload image');
         });
       },
 
@@ -272,12 +320,12 @@
         controllerScope.model.image = null;
         customerImageService.delete({
           uuid: controllerScope.model.uuid
-        }).then(function (response) {
-          Flash.create('success', 'Organization image is deleted');
+        }).then(function(response) {
+          ncUtilsFlash.success('Organization image is deleted');
           controllerScope.model.image = null;
           controllerScope.updateImageUrl();
-        }, function (response) {
-          Flash.create('warning', 'Unable to delete image');
+        }, function(response) {
+          ncUtilsFlash.warning('Unable to delete image');
         });
       },
       update: function(data, fieldName) {
@@ -289,7 +337,7 @@
         return d.promise;
       },
       afterUpdate: function() {
-        this.successFlash('Organization {} is updated'.replace('{}', controllerScope.model.name));
+        ncUtilsFlash.success('Organization {} is updated'.replace('{}', controllerScope.model.name));
         $rootScope.$broadcast('refreshCustomerList', {model: this.model, update: true});
       },
 
@@ -370,11 +418,12 @@
       'servicesService',
       'usersService',
       'blockUI',
+      'ncUtilsFlash',
       CustomerServiceTabController
     ]);
 
   function CustomerServiceTabController(
-    $stateParams, baseServiceListController, joinService, servicesService, usersService, blockUI) {
+    $stateParams, baseServiceListController, joinService, servicesService, usersService, blockUI, ncUtilsFlash) {
     var controllerScope = this;
     var Controller = baseServiceListController.extend({
       init: function() {
@@ -476,7 +525,7 @@
           message += (service.options[name] ? service.options[name].label : name) + ': ' + response.data[name];
         }
         if (message) {
-          this.errorFlash('Unable to save provider. ' + message);
+          ncUtilsFlash.error('Unable to save provider. ' + message);
         }
       },
       hasChanged: function(model) {
@@ -539,44 +588,81 @@
 })();
 
 (function() {
-
   angular.module('ncsaas')
-    .controller('CustomersResourceTabController', [
+    .service('BaseCustomerResourcesTabController', [
       '$stateParams',
       'baseResourceListController',
       'resourcesService',
       'ENTITYLISTFIELDTYPES',
-      CustomersResourceTabController
+      BaseCustomerResourcesTabController]);
+
+    function BaseCustomerResourcesTabController(
+      $stateParams,
+      baseResourceListController,
+      resourcesService,
+      ENTITYLISTFIELDTYPES
+      ) {
+
+      var controllerClass = baseResourceListController.extend({
+        init:function() {
+          this._super();
+          // resource endpoint is using a different customer filter name
+          this.service.filterByCustomer = false;
+          this.service.defaultFilter.customer_uuid = $stateParams.uuid;
+          this.entityOptions.list.push({
+            name: 'Project',
+            propertyName: 'project_name',
+            link: 'projects.details({uuid: entity.project_uuid})',
+            type: ENTITYLISTFIELDTYPES.name
+          });
+        }
+      });
+      return controllerClass;
+    }
+})();
+
+(function() {
+  angular.module('ncsaas')
+    .controller('CustomerResourcesTabController', [
+      'BaseCustomerResourcesTabController', 'ENV',
+      CustomerResourcesTabController
     ]);
 
-  function CustomersResourceTabController(
-    $stateParams,
-    baseResourceListController,
-    resourcesService,
-    ENTITYLISTFIELDTYPES
-  ) {
+  function CustomerResourcesTabController(BaseCustomerResourcesTabController, ENV) {
     var controllerScope = this;
-    var ResourceController = baseResourceListController.extend({
-      init:function() {
-        this.service = resourcesService;
+    var ResourceController = BaseCustomerResourcesTabController.extend({
+      init: function() {
         this.controllerScope = controllerScope;
-        // resource endpoint is using a different customer filter name
-        this.service.filterByCustomer = false;
-        this.service.defaultFilter.customer_uuid = $stateParams.uuid;
-        this.blockUIElement = 'tab-content';
+        this.category = ENV.VirtualMachines;
         this._super();
-        this.entityOptions.list.push({
-          name: 'Project',
-          propertyName: 'project_name',
-          link: 'projects.details({uuid: entity.project_uuid})',
-          type: ENTITYLISTFIELDTYPES.name
-        });
       }
     });
-
     controllerScope.__proto__ = new ResourceController();
   }
+})();
 
+(function() {
+
+  angular.module('ncsaas')
+    .controller('CustomerApplicationsTabController', [
+      'BaseCustomerResourcesTabController', 'ENV',
+      CustomerApplicationsTabController]);
+
+  function CustomerApplicationsTabController(BaseCustomerResourcesTabController, ENV) {
+    var controllerScope = this;
+    var ResourceController = BaseCustomerResourcesTabController.extend({
+      init:function() {
+        this.controllerScope = controllerScope;
+        this.category = ENV.Applications;
+        this._super();
+
+        this.entityOptions.entityData.noDataText = 'You have no applications yet';
+        this.entityOptions.entityData.createLinkText = 'Create application';
+        this.entityOptions.entityData.importLinkText = 'Import application';
+      }
+    });
+    controllerScope.__proto__ = new ResourceController();
+  }
 })();
 
 (function() {

@@ -32,6 +32,7 @@ angular.module('ncsaas')
     currency: '$',
 
     // Index of category inside of appStoreCategories
+    AllResources: -1,
     VirtualMachines: 0,
     Applications: 1,
 

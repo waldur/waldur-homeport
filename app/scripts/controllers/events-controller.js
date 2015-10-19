@@ -281,6 +281,7 @@
       'ENV',
       '$window',
       '$q',
+      'ncUtils',
       DashboardActivityController]);
 
   function DashboardActivityController(
@@ -297,7 +298,8 @@
     alertFormatter,
     ENV,
     $window,
-    $q) {
+    $q,
+    ncUtils) {
     var controllerScope = this;
     var EventController = baseControllerClass.extend({
       showGraph: true,
@@ -343,7 +345,7 @@
             projectEvents = this.getProjectEvents(project);
           }
 
-          this.blockElement('activity-content-' + project.uuid, $q.all([projectCounters, projectEvents]));
+          ncUtils.blockElement('activity-content-' + project.uuid, $q.all([projectCounters, projectEvents]));
         }
       },
       activate: function() {
@@ -365,7 +367,7 @@
             });
           });
         });
-        this.blockElement('dashboard-alerts-list', promise);
+        ncUtils.blockElement('dashboard-alerts-list', promise);
       },
       getCustomerEvents: function() {
         var vm = this;
@@ -375,7 +377,7 @@
             vm.events = response;
           });
         });
-        this.blockElement('dashboard-events-list', promise);
+        ncUtils.blockElement('dashboard-events-list', promise);
       },
       getCustomerProjects: function() {
         var vm = this;

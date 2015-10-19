@@ -1,8 +1,8 @@
 (function(){
   angular.module('ncsaas')
-    .service('baseControllerClass', ['$rootScope', 'Flash', 'blockUI', baseControllerClass]);
+    .service('baseControllerClass', ['$rootScope', baseControllerClass]);
 
-  function baseControllerClass($rootScope, Flash, blockUI) {
+  function baseControllerClass($rootScope) {
     var ControllerClass = Class.extend({
       _signals: {},
 
@@ -17,34 +17,6 @@
           $rootScope.$on(eventName, this._signals[eventName]);
           delete this._signals[eventName];
         }
-      },
-      successFlash: function(message) {
-        this.flashMessage('success', message);
-      },
-      errorFlash: function(message) {
-        this.flashMessage('danger', message);
-      },
-      infoFlash: function(message) {
-        this.flashMessage('info', message);
-      },
-      flashMessage: function(type, message) {
-        Flash.create(type, message);
-      },
-      deregisterEvent: function(eventName) {
-        $rootScope.$$listeners[eventName] = [];
-      },
-      updateIntercom: function() {
-        window.Intercom('update');
-      },
-      emitEvent: function(eventName) {
-        $rootScope.$broadcast(eventName)
-      },
-      blockElement: function(element, promise) {
-        var block = blockUI.instances.get(element);
-        block.start();
-        promise.finally(function() {
-          block.stop();
-        });
       }
     });
 
@@ -56,10 +28,10 @@
 
   angular.module('ncsaas')
     .service('baseControllerListClass', [
-      'baseControllerClass', 'ENV', '$rootScope', 'currentStateService', baseControllerListClass
+      'baseControllerClass', 'ENV', '$rootScope', 'currentStateService', 'ncUtilsFlash', 'ncUtils', baseControllerListClass
     ]);
 
-  function baseControllerListClass(baseControllerClass, ENV, $rootScope, currentStateService) {
+  function baseControllerListClass(baseControllerClass, ENV, $rootScope, currentStateService, ncUtilsFlash, ncUtils) {
     /**
      * Use controllerScope.__proto__ = new Controller() in needed controller
      * use this.controllerScope for changes in event handler
@@ -83,7 +55,7 @@
       blockUIElement: null,
 
       init: function() {
-        this.deregisterEvent('generalSearchChanged');
+        ncUtils.deregisterEvent('generalSearchChanged');
         this.setSignalHandler('generalSearchChanged', this.generalSearchChanged.bind(this));
         this.service.page = 1;
         this.service.cacheTime = this.cacheTime;
@@ -93,7 +65,7 @@
         // reset after state change
         this.selectedInstances = [];
         this.controlPanelShow = ENV.listControlPanelShow;
-        this.updateIntercom();
+        ncUtils.updateIntercom();
       },
       getList: function(filter) {
         // It should return promise
@@ -107,7 +79,7 @@
       },
       blockListElement: function() {
         if (this.blockUIElement) {
-          this.blockElement(this.blockUIElement, this.listPromise);
+          ncUtils.blockElement(this.blockUIElement, this.listPromise);
         }
       },
       afterGetList: function() {},
@@ -138,7 +110,7 @@
       handleActionException: function(response) {
         if (response.status === 409) {
           var message = response.data.detail || response.data.status;
-          this.errorFlash(message);
+          ncUtilsFlash.error(message);
         }
       },
       changeAllSelectedInstances: function() {
@@ -161,9 +133,14 @@
       isInstanceSelected: function(instance) {
         return this.selectedInstances.indexOf(instance[this.uniqueModelKeyName]) !== -1;
       },
+      currentCustomerUpdatedHandler: function() {
+        var vm = this.controllerScope;
+        vm.service.page = 1;
+        vm.getList();
+      },
       afterInstanceRemove: function(instance) {
         this.service.clearAllCacheForCurrentEndpoint();
-        this.emitEvent('refreshCounts');
+        $rootScope.$broadcast('refreshCounts');
         var index = this.list.indexOf(instance);
         if (index !== -1) {
           this.list.splice(index, 1);
@@ -195,9 +172,10 @@
 (function(){
 
   angular.module('ncsaas')
-    .service('baseControllerAddClass', ['$rootScope', '$state', 'baseControllerClass', 'currentStateService', baseControllerAddClass]);
+    .service('baseControllerAddClass', [
+      '$rootScope', '$state', 'baseControllerClass', 'currentStateService', 'ncUtilsFlash', baseControllerAddClass]);
 
-  function baseControllerAddClass($rootScope, $state, baseControllerClass, currentStateService) {
+  function baseControllerAddClass($rootScope, $state, baseControllerClass, currentStateService, ncUtilsFlash) {
     /**
      * Use controllerScope.__proto__ = new Controller() in needed controller
      * use this.controllerScope for changes in event handler
@@ -223,9 +201,9 @@
         vm.beforeSave();
         vm.saveInstance().then(function() {
           vm.afterSave();
-          vm.successFlash(vm.getSuccessMessage());
+          ncUtilsFlash.success(vm.getSuccessMessage());
           vm.service.clearAllCacheForCurrentEndpoint();
-          vm.emitEvent('refreshCounts');
+          $rootScope.$broadcast('refreshCounts');
           vm.successRedirect();
         }, function(response) {
           vm.errors = response.data;
@@ -267,9 +245,9 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('baseControllerDetailUpdateClass', ['$state', 'baseControllerClass', '$stateParams', baseControllerDetailUpdateClass]);
+    .service('baseControllerDetailUpdateClass', ['$state', 'baseControllerClass', '$stateParams', '$rootScope', baseControllerDetailUpdateClass]);
 
-  function baseControllerDetailUpdateClass($state, baseControllerClass, $stateParams) {
+  function baseControllerDetailUpdateClass($state, baseControllerClass, $stateParams, $rootScope) {
     /**
      * Use controllerScope.__proto__ = new Controller() in needed controller
      * use this.controllerScope for changes in event handler
@@ -293,7 +271,7 @@
         vm.model.$update(success, error);
         function success() {
           vm.service.clearAllCacheForCurrentEndpoint();
-          vm.emitEvent('refreshCounts');
+          $rootScope.$broadcast('refreshCounts');
           vm.afterUpdate();
           vm.successRedirect();
         }
@@ -319,7 +297,7 @@
           vm.model.$delete(
             function() {
               vm.service.clearAllCacheForCurrentEndpoint();
-              vm.emitEvent('refreshCounts');
+              $rootScope.$broadcast('refreshCounts');
               $state.go(vm.listState);
             },
             function(errors) {

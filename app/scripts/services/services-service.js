@@ -2,9 +2,9 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('servicesService', ['baseServiceClass', '$q', '$http', servicesService]);
+    .service('servicesService', ['baseServiceClass', '$q', '$http', 'ENV', servicesService]);
 
-  function servicesService(baseServiceClass, $q, $http) {
+  function servicesService(baseServiceClass, $q, $http, ENV) {
     /*jshint validthis: true */
     var ServiceClass = baseServiceClass.extend({
       services: null,
@@ -38,7 +38,7 @@
         } else {
           vm.service_options = {};
           var blacklist = ['name', 'cpu_overcommit_ratio', 'dummy'];
-          var types = ['string', 'choice'];
+          var types = ['string', 'choice', 'url'];
 
           vm.getServicesList().then(function(services) {
             var promises = [];
@@ -81,6 +81,47 @@
           })
         }
         return deferred.promise;
+      },
+      getResourceTypes: function(category) {
+        var vm = this;
+        var services = this.getServiceTypes(category);
+        return this.getServicesList().then(function(metadata) {
+          var types = [];
+          for (var i = 0; i < services.length; i++) {
+            var service = services[i];
+            if (!metadata[service]) {
+              continue;
+            }
+            var resources = metadata[service].resources;
+            for (var resource in resources) {
+              types.push(vm.formatResourceType(service, resource));
+            }
+          }
+          return types;
+        });
+      },
+      formatResourceType: function(service, resource) {
+        return service + '.' + resource;
+      },
+      getServiceTypes: function(category) {
+        // All -> ['OpenStack', 'Azure', 'GitLab', 'Oracle']
+        // VMs -> ['OpenStack', 'Azure']
+        // Applications -> ['GitLab', 'Oracle']
+        // Invalid -> []
+        if (category == ENV.AllResources) {
+          var services = [];
+          for (var i = 0; i < ENV.appStoreCategories.length; i++) {
+            var item = ENV.appStoreCategories[i].services;
+            for (var j = 0; j < item.length; j++) {
+              services.push(item[j]);
+            }
+          }
+          return services;
+        } else if (ENV.appStoreCategories[category]) {
+          return ENV.appStoreCategories[category].services;
+        } else {
+          return [];
+        }
       }
     });
     return new ServiceClass();
