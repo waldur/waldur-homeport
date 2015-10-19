@@ -245,17 +245,21 @@
       },
       setKeysCount: function() {
         var vm = this;
-        resourcesCountService.keys({user_uuid: vm.model.uuid}).then(function(response) {
-          vm.detailsViewOptions.tabs[1].count = response;
-        });
+        if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('keys') == -1) {
+          resourcesCountService.keys({user_uuid: vm.model.uuid}).then(function(response) {
+            vm.detailsViewOptions.tabs[1].count = response;
+          });
+        }
       },
       setNotificationsCount: function() {
         var vm = this;
-        resourcesCountService['hooks-email']({}).then(function(hooksEmailCount) {
-          resourcesCountService['hooks-web']({}).then(function(hooksWebCount) {
-            vm.detailsViewOptions.tabs[2].count = hooksEmailCount + hooksWebCount;
+        if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('notifications') == -1) {
+          resourcesCountService['hooks-email']({}).then(function(hooksEmailCount) {
+            resourcesCountService['hooks-web']({}).then(function(hooksWebCount) {
+              vm.detailsViewOptions.tabs[2].count = hooksEmailCount + hooksWebCount;
+            });
           });
-        });
+        }
       }
     });
 
