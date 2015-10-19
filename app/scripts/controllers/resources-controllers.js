@@ -3,14 +3,33 @@
 (function() {
   angular.module('ncsaas')
     .service('baseResourceListController',
-    ['baseControllerListClass', 'ENV', 'ENTITYLISTFIELDTYPES', 'currentStateService', baseResourceListController]);
+    ['baseControllerListClass',
+    '$q',
+    'ENV',
+    'ENTITYLISTFIELDTYPES',
+    'resourcesService',
+    'servicesService',
+    'currentStateService',
+    baseResourceListController
+    ]);
 
   // need for resource tab
-  function baseResourceListController(baseControllerListClass, ENV, ENTITYLISTFIELDTYPES, currentStateService) {
+  function baseResourceListController(
+    baseControllerListClass,
+    $q,
+    ENV,
+    ENTITYLISTFIELDTYPES,
+    resourcesService,
+    servicesService,
+    currentStateService) {
     var ControllerListClass = baseControllerListClass.extend({
       init: function() {
+        this.service = resourcesService;
+        this.blockUIElement = 'tab-content';
         this._super();
         this.searchFieldName = 'name';
+        this.selectAll = true;
+        this.hasFilters = false;
         this.actionButtonsListItems = [
           {
             title: 'Start',
@@ -50,16 +69,17 @@
         this.entityOptions = {
           entityData: {
             noDataText: 'You have no resources yet.',
+            noMatchesText: 'No resources found matching filter.',
             checkQuotas: 'resource',
             timer: ENV.resourcesTimerInterval
           },
           list: [
             {
-              type: ENTITYLISTFIELDTYPES.statusCircle,
-              propertyName: 'state',
-              onlineStatus: ENV.resourceOnlineStatus,
-              className: 'visual-status',
+              propertyName: 'icon',
+              titlePropertyName: 'icon_title',
+              type: ENTITYLISTFIELDTYPES.icon,
               showForMobile: true,
+              className: 'icon'
             },
             {
               name: 'Name',
@@ -70,14 +90,17 @@
               className: 'resource-name'
             },
             {
-              name: 'Type',
-              propertyName: 'resource_type',
-              type: ENTITYLISTFIELDTYPES.noType
+              type: ENTITYLISTFIELDTYPES.statusCircle,
+              propertyName: 'state',
+              onlineStatus: ENV.resourceOnlineStatus,
+              className: 'visual-status',
+              showForMobile: true,
             },
             {
               name: 'State',
               propertyName: 'state',
-              type: ENTITYLISTFIELDTYPES.noType
+              type: ENTITYLISTFIELDTYPES.noType,
+              className: 'status-name'
             },
             {
               name: 'Access',
@@ -119,7 +142,49 @@
         }
         return false;
       },
+      getList: function(filter) {
+        var fn = this._super.bind(this);
+        return this.adjustSearchFilters().then(function() {
+          return fn(filter);
+        });
+      },
+      adjustSearchFilters: function() {
+        var vm = this;
+        if (vm.hasFilters) {
+          return $q.when(true);
+        }
+
+        vm.service.defaultFilter.resource_type = [];
+        return servicesService.getResourceTypes(vm.category).then(function(types) {
+          vm.service.defaultFilter.resource_type = types;
+          return resourcesService.countByType(vm.service.defaultFilter).then(function(counts) {
+            return servicesService.getServicesList().then(function(metadata) {
+              var filters = [];
+              for(var type in metadata) {
+                var service = metadata[type];
+                var resources = service.resources;
+                for (var resource in resources) {
+                  var id = servicesService.formatResourceType(type, resource);
+                  if (counts[id] > 0) {
+                    filters.push({
+                      name: 'resource_type',
+                      title: type + ' ' + resource + ' (' + counts[id] + ')',
+                      value: id
+                    });
+                  }
+                }
+              }
+              vm.searchFilters = filters;
+              vm.hasFilters = true;
+            });
+          });
+        });
+      },
       afterGetList: function() {
+        this.setAccessInfo();
+        this.setIcon();
+      },
+      setAccessInfo: function() {
         for (var i = 0; i < this.list.length; i++) {
           var item = this.list[i];
           item.access_info_text = 'No access info';
@@ -134,6 +199,14 @@
             item.access_info_url = item.web_url;
             item.access_info_text = 'Open';
           }
+        }
+      },
+      setIcon: function() {
+        for (var i = 0; i < this.list.length; i++) {
+          var item = this.list[i];
+          var service_type = item.resource_type.split(".")[0];
+          item.icon = "/static/images/appstore/icon-" + service_type.toLowerCase() + ".png";
+          item.icon_title = item.resource_type;
         }
       },
       stopResource:function(resource) {

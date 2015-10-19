@@ -25,6 +25,7 @@
         padding: 5px 0;
 
         .resource-name {
+            width: 270px;
             @include bp(xs) {
                 display: none !important;
             } // xs
@@ -124,7 +125,7 @@
         } // &:nth-child(1)
         // custom-cells
         &.status {
-            width: 40px;
+            width: 20px;
             text-align: left;
         } // &.status
         &.checkbox {
@@ -230,8 +231,24 @@
                     display: none;
                 } // sm
             }
+            &.icon {
+                width: 50px;
+            }
+            &.status-name {
+                width: 100px;
+            }
             &.statusCircle {
-                width: 40px;
+                width: 20px;
+            }
+            &.visual-status {
+                @include bp(xs) {
+                    display: inline-block;
+                    padding-right: 0px;
+                } // xs
+                @include bp(sm) {
+                    display: inline-block;
+                    padding-right: 0px;
+                } // sm
             }
             &.message {
                 width: auto;
@@ -255,21 +272,24 @@
                 } // sm
             }
             &.resource-name {
+                width: 275px;
                 @include bp(xs) {
+                    width: 100%;
                     display: block;
                 } // xs
                 @include bp(sm) {
+                    width: 100%;
                     display: block;
                 } // sm
             }
             &.resource-access {
                 @include bp(xs) {
-                    display: block;
+                    display: inline-block;
                     margin-top: 5px;
                     font-size: 10pt;
                 } // xs
                 @include bp(sm) {
-                    display: block;
+                    display: inline-block;
                     margin-top: 5px;
                     font-size: 10pt;
                 } // sm

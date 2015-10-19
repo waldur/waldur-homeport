@@ -171,7 +171,6 @@
         this.service = joinService;
         this.controllerScope = controllerScope;
         this.successMessage = 'Provider has been created';
-        this.setSignalHandler('currentCustomerUpdated', this.activate.bind(this));
         this.categories = ENV.serviceCategories;
         this._super();
       },
@@ -243,95 +242,3 @@
 
 })();
 
-(function() {
-  angular.module('ncsaas')
-    .controller('ServiceProjectTabController', [
-      '$stateParams',
-      'joinService',
-      'baseControllerListClass',
-      'ENTITYLISTFIELDTYPES',
-      'ENV',
-      'servicesService',
-      'currentStateService',
-      ServiceProjectTabController
-    ]);
-
-  function ServiceProjectTabController(
-    $stateParams,
-    joinService,
-    baseControllerListClass,
-    ENTITYLISTFIELDTYPES,
-    ENV,
-    servicesService,
-    currentStateService) {
-    var controllerScope = this;
-    var Controller = baseControllerListClass.extend({
-      service: null,
-      serviceProjects: [],
-
-      init: function() {
-        this.service = servicesService;
-        this._super();
-        this.actionButtonsListItems = [
-          {
-            title: 'Delete',
-            clickFunction: this.remove.bind(controllerScope)
-          }
-        ];
-        this.entityOptions = {
-          entityData: {
-            noDataText: 'You have no projects yet.'
-          },
-          list: [
-            {
-              name: 'Name',
-              propertyName: 'project_name',
-              type: ENTITYLISTFIELDTYPES.name,
-              link: 'projects.details({uuid: entity.project_uuid})',
-              showForMobile: ENTITYLISTFIELDTYPES.showForMobile
-            },
-            {
-              name: 'State',
-              propertyName: 'state',
-              type: ENTITYLISTFIELDTYPES.noType
-            }
-          ]
-        };
-      },
-      getServiceEntity: function() {
-        var vm = this;
-        return joinService.$get($stateParams.provider, $stateParams.uuid).then(function(response) {
-          vm.serviceEntity = response;
-          return vm.serviceEntity ? vm.getList() : false;
-        });
-      },
-      getList: function(filter) {
-        if (this.serviceEntity) {
-          this.service.defaultFilter = {'service': this.serviceEntity.uuid};
-          this.service.endpoint = '/' + ENV.projectServiceLinkEndpoints[$stateParams.provider] + '/';
-          return this._super(filter);
-        } else {
-          return this.getServiceEntity();
-        }
-      },
-      afterGetList: function() {
-        this.setCurrentProject();
-      },
-      setCurrentProject: function() {
-        var vm = this;
-        currentStateService.getProject().then(function(response) {
-          vm.currentProject = response;
-          if (response) {
-            vm.entityOptions.list[0]['description'] = {
-              condition: vm.currentProject.uuid,
-              text: '[Active]',
-              field: 'project_uuid'
-            };
-          }
-        });
-      }
-    });
-
-    controllerScope.__proto__ = new Controller();
-  }
-})();

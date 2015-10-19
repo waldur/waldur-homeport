@@ -61,4 +61,9 @@
             content: '\f0c0';
         }
     }
+    &.key {
+        &:before {
+            content: '\f084';
+        }
+    }
 } // icons

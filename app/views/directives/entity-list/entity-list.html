@@ -77,6 +77,10 @@
         </div>
     </div>
 
+    <div class="white-box no-styles" ng-show="entityList.list.length == 0 && (entityList.searchInput || entityList.chosenFilters.length)">
+        <h2 class="app-title" ng-bind="entityOptions.entityData.noMatchesText"></h2>
+    </div>
+
     <!-- view-control -->
     <!-- TODO: this functionality is not relevant and should be disabled until corresponding backend is ready. -->
     <section class="view-control" ng-if="(entityList.list.length > 0 || entityList.searchInput) && entityList.controlPanelShow">
@@ -134,6 +138,11 @@
                         <span ng-switch-when="avatar" class="avatar">
                             <img gravatar-src="field.avatarArraySrc ? entity[field.avatarArraySrc[0]][field.avatarArraySrc[1]] : entity[field.avatarSrc]"
                                  gravatar-size="100" alt="" class="avatar-img">
+                        </span>
+
+                        <span ng-switch-when="icon">
+                            <img title="{{ entity[field.titlePropertyName] }}"
+                                 ng-src="{{ entity[field.propertyName] }}"/>
                         </span>
 
                         <h3 ng-switch-when="name" class="item-title">
