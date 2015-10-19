@@ -133,11 +133,6 @@
       isInstanceSelected: function(instance) {
         return this.selectedInstances.indexOf(instance[this.uniqueModelKeyName]) !== -1;
       },
-      currentCustomerUpdatedHandler: function() {
-        var vm = this.controllerScope;
-        vm.service.page = 1;
-        vm.getList();
-      },
       afterInstanceRemove: function(instance) {
         this.service.clearAllCacheForCurrentEndpoint();
         $rootScope.$broadcast('refreshCounts');

@@ -905,7 +905,6 @@ angular.module('ncsaas')
       'joinService',
       'currentStateService',
       'ENTITYLISTFIELDTYPES',
-      '$scope',
       '$rootScope',
       ProjectServicesTabController]);
 
@@ -915,7 +914,6 @@ angular.module('ncsaas')
     joinService,
     currentStateService,
     ENTITYLISTFIELDTYPES,
-    $scope,
     $rootScope) {
     var controllerScope = this;
     var ServiceController = baseControllerListClass.extend({
@@ -979,7 +977,6 @@ angular.module('ncsaas')
             }
           ]
         };
-        $scope.$on('searchInputChanged', this.onSearchInputChanged.bind(this));
       },
       getList: function(filter) {
         return this._super(filter);
@@ -990,10 +987,6 @@ angular.module('ncsaas')
       afterInstanceRemove: function(instance) {
         $rootScope.$broadcast('refreshProjectList');
         this._super(instance);
-      },
-      onSearchInputChanged: function(event, searchInput) {
-        this.searchInput = searchInput;
-        this.search();
       }
     });
 
