@@ -378,6 +378,12 @@
             'detailsTemplate@profile.details' : {
               templateUrl: 'views/user/details-template.html',
             },
+            'tabNotifications@profile.details' : {
+              templateUrl: 'views/user/tab-notifications.html'
+            },
+            'tabPassword@profile.details' : {
+              templateUrl: 'views/user/tab-password.html'
+            },
             'tabManageUser@profile.details': {
               templateUrl: 'views/profile/tab-manage.html',
             }
@@ -569,6 +575,12 @@
             },
             'detailsTemplate@users.details' : {
               templateUrl: 'views/user/details-template.html',
+            },
+            'tabNotifications@users.details' : {
+              templateUrl: 'views/user/tab-notifications.html'
+            },
+            'tabPassword@users.details' : {
+              templateUrl: 'views/user/tab-password.html'
             },
             'appHeader': {
               templateUrl: 'views/partials/app-header.html',
