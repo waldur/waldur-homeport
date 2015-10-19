@@ -546,39 +546,26 @@
       },
       setVmCounter: function() {
         var vm = this;
-        vm.getResourceCount(ENV.VirtualMachines, vm.model.uuid).then(function(count) {
-          vm.detailsViewOptions.tabs[2].count = count;
-        });
+        if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('resources') == -1) {
+          vm.getResourceCount(ENV.VirtualMachines, vm.model.uuid).then(function(count) {
+            vm.detailsViewOptions.tabs[2].count = count;
+          });
+        }
       },
       setAppCounter: function() {
         var vm = this;
-        vm.getResourceCount(ENV.Applications, vm.model.uuid).then(function(count) {
-          vm.detailsViewOptions.tabs[3].count = count;
-        });
+        if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('resources') == -1) {
+          vm.getResourceCount(ENV.Applications, vm.model.uuid).then(function(count) {
+            vm.detailsViewOptions.tabs[3].count = count;
+          });
+        }
       },
       getResourceCount: function(category, project_uuid) {
-        return this.getResourceTypes(category).then(function(types) {
+        return servicesService.getResourceTypes(category).then(function(types) {
           return resourcesCountService.resources({
             project_uuid: project_uuid,
             resource_type: types
           });
-        });
-      },
-      getResourceTypes: function(category) {
-        return servicesService.getServicesList().then(function(metadata) {
-          var services = ENV.appStoreCategories[category].services;
-          var types = [];
-          for (var i = 0; i < services.length; i++) {
-            var service = services[i];
-            if (!metadata[service]) {
-              continue;
-            }
-            var resources = metadata[service].resources;
-            for (var resource in resources) {
-              types.push(service + "." + resource);
-            }
-          }
-          return types;
         });
       },
       setBackupsCounter: function() {
@@ -828,65 +815,17 @@
 (function() {
   angular.module('ncsaas')
     .service('BaseProjectResourcesTabController', [
-      'baseResourceListController',
-      'resourcesService',
-      'currentStateService',
-      'servicesService',
-      'ENV',
-      BaseProjectResourcesTabController]);
+      'baseResourceListController', 'currentStateService', BaseProjectResourcesTabController]);
 
-    function BaseProjectResourcesTabController(
-      baseResourceListController,
-      resourcesService,
-      currentStateService,
-      servicesService,
-      ENV) {
-
+    function BaseProjectResourcesTabController(baseResourceListController, currentStateService) {
       var controllerClass = baseResourceListController.extend({
-        init: function() {
-          this.service = resourcesService;
-          this.blockUIElement = 'tab-content';
-          this._super();
-          this.service.defaultFilter.project_uuid = currentStateService.getProjectUuid();
-          this.selectAll = true;
-        },
         getList: function(filter) {
           var vm = this;
-
-          var fn = vm._super.bind(vm);
-          if (vm.searchFilters.length == 0) {
-            return vm.getFilters(vm.category).then(function(filters) {
-              vm.searchFilters = filters;
-              vm.service.defaultFilter.resource_type = [];
-              for (var i = 0; i < filters.length; i++) {
-                vm.service.defaultFilter[filters[i].name].push(filters[i].value);
-              }
-              return fn(filter);
-            });
-          } else {
+          var fn = this._super.bind(vm);
+          return currentStateService.getProject().then(function(project){
+            vm.service.defaultFilter.project_uuid = project.uuid;
             return fn(filter);
-          }
-        },
-        getFilters: function(category) {
-          return servicesService.getServicesList().then(function(metadata) {
-            var services = ENV.appStoreCategories[category].services;
-            var filters = [];
-            for (var i = 0; i < services.length; i++) {
-              var service = services[i];
-              if (!metadata[service]) {
-                continue;
-              }
-              var resources = metadata[service].resources;
-              for (var resource in resources) {
-                filters.push({
-                  name: 'resource_type',
-                  title: service,
-                  value: service + '.' + resource
-                });
-              }
-            }
-            return filters;
-          });
+          })
         }
       });
       return controllerClass;
@@ -908,7 +847,7 @@
         this.controllerScope = controllerScope;
         this.category = ENV.VirtualMachines;
         this._super();
-      },
+      }
     });
     controllerScope.__proto__ = new ResourceController();
   }

@@ -511,6 +511,9 @@
             'tabResources@organizations.details': {
               templateUrl: 'views/customer/tab-resources.html',
             },
+            'tabApplications@organizations.details' : {
+              templateUrl: 'views/customer/tab-applications.html',
+            },
             'tabProjects@organizations.details': {
               templateUrl: 'views/customer/tab-projects.html',
             },
