@@ -41,7 +41,7 @@
                     </section>
                 </div>
 
-                <div class="details-field" ng-repeat="field in options.aboutFields">
+                <div ng-repeat="field in options.aboutFields">
                     <div>
                         <span class="{{ field.className }}"
                               ng-if="!field.isEditable || !controller.canEdit">{{ controller.model[field.fieldKey] }}</span>
