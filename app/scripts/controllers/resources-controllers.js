@@ -29,7 +29,7 @@
         this._super();
         this.searchFieldName = 'name';
         this.selectAll = true;
-        this.category = ENV.AllResources;
+        this.hasFilters = false;
         this.actionButtonsListItems = [
           {
             title: 'Start',
@@ -147,10 +147,11 @@
       },
       adjustSearchFilters: function() {
         var vm = this;
-        if (vm.searchFilters.length > 0) {
+        if (vm.hasFilters) {
           return $q.when(true);
         }
 
+        vm.service.defaultFilter.resource_type = [];
         return servicesService.getResourceTypes(vm.category).then(function(types) {
           vm.service.defaultFilter.resource_type = types;
           return resourcesService.countByType(vm.service.defaultFilter).then(function(counts) {
@@ -170,9 +171,8 @@
                   }
                 }
               }
-              if (filters.length > 1) {
-                vm.searchFilters = filters;
-              }
+              vm.searchFilters = filters;
+              vm.hasFilters = true;
             });
           });
         });

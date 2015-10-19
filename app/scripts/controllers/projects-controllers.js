@@ -818,11 +818,14 @@
       'baseResourceListController', 'currentStateService', BaseProjectResourcesTabController]);
 
     function BaseProjectResourcesTabController(baseResourceListController, currentStateService) {
-
       var controllerClass = baseResourceListController.extend({
-        init: function() {
-          this._super();
-          this.service.defaultFilter.project_uuid = currentStateService.getProjectUuid();
+        getList: function(filter) {
+          var vm = this;
+          var fn = this._super.bind(vm);
+          return currentStateService.getProject().then(function(project){
+            vm.service.defaultFilter.project_uuid = project.uuid;
+            return fn(filter);
+          })
         }
       });
       return controllerClass;
@@ -844,7 +847,7 @@
         this.controllerScope = controllerScope;
         this.category = ENV.VirtualMachines;
         this._super();
-      },
+      }
     });
     controllerScope.__proto__ = new ResourceController();
   }

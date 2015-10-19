@@ -605,11 +605,10 @@
 
       var controllerClass = baseResourceListController.extend({
         init:function() {
-          this.service = resourcesService;
+          this._super();
           // resource endpoint is using a different customer filter name
           this.service.filterByCustomer = false;
           this.service.defaultFilter.customer_uuid = $stateParams.uuid;
-          this._super();
           this.entityOptions.list.push({
             name: 'Project',
             propertyName: 'project_name',
@@ -636,7 +635,7 @@
         this.controllerScope = controllerScope;
         this.category = ENV.VirtualMachines;
         this._super();
-      },
+      }
     });
     controllerScope.__proto__ = new ResourceController();
   }
