@@ -314,6 +314,7 @@
       '$rootScope',
       'projectPermissionsService',
       'usersService',
+      'ncUtilsFlash',
       ProjectAddController]);
 
   function ProjectAddController(
@@ -323,7 +324,8 @@
     baseControllerAddClass,
     $rootScope,
     projectPermissionsService,
-    usersService) {
+    usersService,
+    ncUtilsFlash) {
     var controllerScope = this;
     var ProjectController = baseControllerAddClass.extend({
       userRole: 'admin',
@@ -356,7 +358,7 @@
         vm._super();
       },
       onError: function(errorObject) {
-        this.errorFlash(errorObject.data.detail);
+        ncUtilsFlash.error(errorObject.data.detail);
       },
       currentCustomerUpdatedHandler: function() {
         var vm = this;
@@ -951,12 +953,15 @@ angular.module('ncsaas')
             clickFunction: this.remove.bind(controllerScope),
 
             isDisabled: function(service) {
-              return service.shared;
+              return service.shared || service.resources_count > 0;
             }.bind(this.controllerScope),
 
             tooltip: function(service) {
               if (service.shared) {
                 return 'You cannot remove shared provider';
+              }
+              if (service.resources_count) {
+                return 'Provider has resources. Remove them first';
               }
             }.bind(this.controllerScope)
           }

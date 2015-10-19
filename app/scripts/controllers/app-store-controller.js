@@ -14,6 +14,7 @@
       'premiumSupportPlansService',
       'premiumSupportContractsService',
       'resourcesService',
+      'ncUtilsFlash',
       AppStoreController]);
 
   function AppStoreController(
@@ -29,7 +30,8 @@
     $rootScope,
     premiumSupportPlansService,
     premiumSupportContractsService,
-    resourcesService) {
+    resourcesService,
+    ncUtilsFlash) {
     var controllerScope = this;
     var Controller = baseControllerAddClass.extend({
       UNIQUE_FIELDS: {
@@ -111,7 +113,7 @@
         this.resetPriceItems();
 
         var services = this.categoryServices[this.selectedCategory.name];
-        if (ENV.VmProviderSettingsUuid && this.selectedCategory.name == ENV.appStoreCategories[0].name) {
+        if (ENV.VmProviderSettingsUuid && this.isVirtualMachinesSelected()) {
           for (var i = 0; i < services.length; i++) {
             if (services[i].settings_uuid == ENV.VmProviderSettingsUuid) {
               this.setService(services[i]);
@@ -120,7 +122,7 @@
               break;
             }
           }
-        } else if (ENV.gitLabProviderSettingsUuid && this.selectedCategory.name == ENV.appStoreCategories[1].name) {
+        } else if (ENV.gitLabProviderSettingsUuid && this.isApplicationSelected()) {
           for (var i = 0; i < services.length; i++) {
             if (services[i].settings_uuid == ENV.gitLabProviderSettingsUuid) {
               this.setService(services[i]);
@@ -133,6 +135,15 @@
         } else if (services && services.length == 1) {
           this.setService(services[0]);
         }
+      },
+      isVirtualMachinesSelected: function() {
+        return this.selectedCategory.name == ENV.appStoreCategories[ENV.VirtualMachines].name;
+      },
+      isApplicationSelected: function() {
+        return this.selectedCategory.name == ENV.appStoreCategories[ENV.Applications].name;
+      },
+      isSupportSelected: function() {
+        return this.selectedCategory.name == 'SUPPORT';
       },
       setService: function(service) {
         this.selectedService = service;
@@ -178,7 +189,10 @@
         var promises = [];
         var validChoices = {};
         angular.forEach(vm.serviceMetadata.properties, function(url, property) {
-          var query = {settings_uuid: vm.selectedService.settings_uuid};
+          var query = {
+            settings_uuid: vm.selectedService.settings_uuid,
+            project: vm.currentProject.uuid // for security groups
+          };
           servicesService.pageSize = 1000;
           var promise = servicesService.getList(query, url).then(function(response) {
             validChoices[property.toLowerCase()] = vm.formatChoices(response);
@@ -212,6 +226,9 @@
           }
 
           var choices = validChoices[name] || options.choices;
+          if (name == 'security_groups') {
+            choices = validChoices.securitygroup;
+          }
 
           if (name == 'user_data') {
             type = 'text';
@@ -224,12 +241,19 @@
           var icons = {
             size: 'gear',
             flavor: 'gear',
-            ssh_public_key: 'lock'
+            ssh_public_key: 'key',
+            security_groups: 'lock',
+            group: 'group'
           };
           var icon = icons[name] || 'cloud';
           var label = options.label;
           var required = options.required;
-          var visible = required || name == 'ssh_public_key';
+          var visibleFields = [
+            'ssh_public_key',
+            'group',
+            'security_groups'
+          ];
+          var visible = required || visibleFields.indexOf(name) != -1;
           var help_text = options.help_text;
           var min, max, units;
 
@@ -265,7 +289,7 @@
         }
         var order = [
           'name', 'image', 'region', 'size', 'flavor', 'system_volume_size', 'data_volume_size',
-          'ssh_public_key', 'description', 'user_data'
+          'security_groups', 'ssh_public_key', 'description', 'user_data'
         ];
         this.fields.sort(function(a, b) {
           return order.indexOf(a.name) - order.indexOf(b.name);
@@ -315,6 +339,12 @@
           return;
         }
         if (name == 'region') {
+          return;
+        }
+        if (name == 'visibility_level') {
+          return;
+        }
+        if (name == 'group') {
           return;
         }
         if (name == 'image') {
@@ -577,6 +607,9 @@
         if (this.instance.data_volume_size) {
           instance.data_volume_size = this.instance.data_volume_size * 1024;
         }
+        if (this.instance.security_groups) {
+          instance.security_groups = [{url: this.instance.security_groups}];
+        }
         return instance.$save();
       },
       onError: function() {
@@ -592,10 +625,20 @@
         } else {
           message = 'Server error occurred';
         }
-        this.errorFlash(message);
+        ncUtilsFlash.error(message);
       },
       successRedirect: function() {
-        $state.go('resources.list', {tab: ENV.resourcesTypes.vms});
+        var tab = this.getDestinationTab();
+        $state.go('resources.list', {tab: tab});
+      },
+      getDestinationTab: function() {
+        if (this.isVirtualMachinesSelected()) {
+          return ENV.resourcesTypes.vms;
+        } else if (this.isApplicationSelected()) {
+          return ENV.resourcesTypes.applications;
+        } else if (this.isSupportSelected()) {
+          return 'premiumSupport';
+        }
       },
       setCompare: function(categoryName) {
         var index = this.compare.indexOf(categoryName);
