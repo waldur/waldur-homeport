@@ -75,11 +75,11 @@
           },
           list: [
             {
-              type: ENTITYLISTFIELDTYPES.statusCircle,
-              propertyName: 'state',
-              onlineStatus: ENV.resourceOnlineStatus,
-              className: 'visual-status',
+              propertyName: 'icon',
+              titlePropertyName: 'icon_title',
+              type: ENTITYLISTFIELDTYPES.icon,
               showForMobile: true,
+              className: 'icon'
             },
             {
               name: 'Name',
@@ -90,14 +90,17 @@
               className: 'resource-name'
             },
             {
-              name: 'Type',
-              propertyName: 'resource_type',
-              type: ENTITYLISTFIELDTYPES.noType
+              type: ENTITYLISTFIELDTYPES.statusCircle,
+              propertyName: 'state',
+              onlineStatus: ENV.resourceOnlineStatus,
+              className: 'visual-status',
+              showForMobile: true,
             },
             {
               name: 'State',
               propertyName: 'state',
-              type: ENTITYLISTFIELDTYPES.noType
+              type: ENTITYLISTFIELDTYPES.noType,
+              className: 'status-name'
             },
             {
               name: 'Access',
@@ -178,6 +181,10 @@
         });
       },
       afterGetList: function() {
+        this.setAccessInfo();
+        this.setIcon();
+      },
+      setAccessInfo: function() {
         for (var i = 0; i < this.list.length; i++) {
           var item = this.list[i];
           item.access_info_text = 'No access info';
@@ -192,6 +199,14 @@
             item.access_info_url = item.web_url;
             item.access_info_text = 'Open';
           }
+        }
+      },
+      setIcon: function() {
+        for (var i = 0; i < this.list.length; i++) {
+          var item = this.list[i];
+          var service_type = item.resource_type.split(".")[0];
+          item.icon = "/static/images/appstore/icon-" + service_type.toLowerCase() + ".png";
+          item.icon_title = item.resource_type;
         }
       },
       stopResource:function(resource) {

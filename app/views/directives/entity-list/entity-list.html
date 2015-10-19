@@ -140,6 +140,11 @@
                                  gravatar-size="100" alt="" class="avatar-img">
                         </span>
 
+                        <span ng-switch-when="icon">
+                            <img title="{{ entity[field.titlePropertyName] }}"
+                                 ng-src="{{ entity[field.propertyName] }}"/>
+                        </span>
+
                         <h3 ng-switch-when="name" class="item-title">
                             <a ng-if="field.link"
                                ui-sref="{{ field.link }}" stoppropagation>{{ entity[field.propertyName] }}</a>
