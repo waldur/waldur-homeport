@@ -670,23 +670,16 @@
     .controller('CustomerAlertsListController', [
       'BaseAlertsListController',
       'currentStateService',
-      '$scope',
       CustomerAlertsListController]);
 
-  function CustomerAlertsListController(BaseAlertsListController, currentStateService, $scope) {
+  function CustomerAlertsListController(BaseAlertsListController, currentStateService) {
     var controllerScope = this;
     var controllerClass = BaseAlertsListController.extend({
       init: function() {
         this.controllerScope = controllerScope;
         this.blockUIElement = 'tab-content';
         this._super();
-        $scope.$on('currentCustomerUpdated', this.onCustomerUpdate.bind(this));
       },
-
-      onCustomerUpdate: function() {
-        this.getList();
-      },
-
       getList: function(filter) {
         var vm = this;
         var fn = this._super.bind(vm);

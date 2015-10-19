@@ -39,8 +39,6 @@
 
       init: function() {
         this.controllerScope = controllerScope;
-        this.setSignalHandler('currentCustomerUpdated', this.currentCustomerUpdatedHandler.bind(controllerScope));
-        this.setSignalHandler('currentProjectUpdated', this.setProject.bind(controllerScope));
         this.activate();
         this._super();
       },
@@ -98,11 +96,6 @@
         this.selectedResources = [];
         this.importedResources = [];
       },
-
-      currentCustomerUpdatedHandler: function() {
-        this.activate();
-      },
-
       toggleResource: function(resource){
         if (resource.status == 'ready' || resource.status == 'success'){
           controllerScope.selectedResources = [];

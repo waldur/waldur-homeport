@@ -83,7 +83,6 @@
       init:function() {
         this.service = resourcesService;
         this.controllerScope = controllerScope;
-        this.setSignalHandler('currentProjectUpdated', this.setCurrentProject.bind(controllerScope));
         this._super();
       },
       activate:function() {
