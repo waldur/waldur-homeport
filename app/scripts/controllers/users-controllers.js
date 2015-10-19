@@ -186,7 +186,7 @@
       },
 
       getActiveTab: function() {
-        var tabs = [$stateParams.tab, 'eventlog'];
+        var tabs = [$stateParams.tab, 'eventlog', 'keys'];
         for (var i = 0; i < tabs.length; i++) {
           var tab = tabs[i];
           if (tab && (ENV.featuresVisible || ENV.toBeFeatures.indexOf(tab) == -1)) {
@@ -236,10 +236,12 @@
       },
       setEventsCounter: function() {
         var vm = this;
-        var query = angular.extend(eventsService.defaultFilter, {scope: vm.model.url});
-        resourcesCountService.events(query).then(function(response) {
-          vm.detailsViewOptions.tabs[0].count = response;
-        });
+        if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('eventlog') == -1) {
+          var query = angular.extend(eventsService.defaultFilter, {scope: vm.model.url});
+          resourcesCountService.events(query).then(function(response) {
+            vm.detailsViewOptions.tabs[0].count = response;
+          });
+        }
       },
       setKeysCount: function() {
         var vm = this;
