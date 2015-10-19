@@ -470,6 +470,9 @@
             'tabResources@organizations.details': {
               templateUrl: 'views/customer/tab-resources.html',
             },
+            'tabApplications@organizations.details' : {
+              templateUrl: 'views/customer/tab-applications.html',
+            },
             'tabProjects@organizations.details': {
               templateUrl: 'views/customer/tab-projects.html',
             },
@@ -965,7 +968,7 @@
 
 (function() {
   angular.module('ncsaas')
-    .factory('myHttpInterceptor', function($q, Flash, ENV, blockUI) {
+    .factory('myHttpInterceptor', function($q, ncUtilsFlash, ENV, blockUI) {
       var timeouts = {};
       function getKey(config) {
         return config.url + config.method + JSON.stringify(config.params);
@@ -979,7 +982,7 @@
               clearTimeout(timeouts[getKey(config)]);
             }
             timeouts[getKey(config)] = setTimeout(function() {
-              Flash.create('danger', 'Problem getting response from the server.');
+              ncUtilsFlash.error('Problem getting response from the server.');
               blockUI.reset();
             }, ENV.requestTimeout);
           }
@@ -1002,7 +1005,7 @@
             clearTimeout(timeouts[getKey(rejection.config)]);
           }
           blockUI.reset();
-          Flash.create('danger', message);
+          ncUtilsFlash.error(message);
           return $q.reject(rejection);
         }
       };

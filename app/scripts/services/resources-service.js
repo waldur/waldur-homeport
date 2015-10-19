@@ -80,6 +80,13 @@
         });
       },
 
+      countByType: function(params) {
+        var url = ENV.apiEndpoint + 'api' + '/resources/count/';
+        return $http.get(url, {params: params}).then(function(response) {
+          return response.data;
+        });
+      },
+
       getAvailableOperations: function(resource) {
         var state = resource.state.toLowerCase();
         if (state === 'online') {return ['stop', 'restart'];}

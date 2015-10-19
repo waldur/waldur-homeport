@@ -41,6 +41,7 @@
       listInField: 'listInField',
       linkOrText: 'linkOrText',
       avatarPictureField: 'avatar',
+      icon: 'icon',
       noType: false,
       showForMobile: true,
       statusCircle: 'statusCircle',
