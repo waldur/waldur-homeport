@@ -38,18 +38,26 @@
         .col {
             padding: 0;
             &.label {
-                width: 160px;
-                text-align: right;
-                @include bp(xs) {
-                    text-align: left;
-                } // xs
-                @include bp(sm) {
-                    text-align: left;
-                } // sm
                 label {
                     @include inline-middle;
                     padding: 3px 10px;
                 }
+                width: 160px;
+                text-align: right;
+                @include bp(xs) {
+                    text-align: left;
+                    margin: 0;
+                    label {
+                        padding: 0;
+                    }
+                } // xs
+                @include bp(sm) {
+                    text-align: left;
+                    margin: 0;
+                    label {
+                        padding: 0;
+                    }
+                } // sm
             } // &.label
             &.input {
                 width: calc(100% - 320px);
@@ -59,6 +67,12 @@
                 input[type=text] {
                     width: 100%;
                 } // input[type=text]
+                @include bp(xs) {
+                    margin: 0;
+                } // xs
+                @include bp(sm) {
+                    margin: 0;
+                } // sm
             } // &.input
             select {
                 border-radius: 4px;
