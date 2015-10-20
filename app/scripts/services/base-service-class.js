@@ -147,21 +147,9 @@
         return this.getFactory(false, null, url).delete().$promise;
       },
 
-      operation:function(operation, uuid, inputs) {
-        var deferred = $q.defer(),
-          parameters = {
-            uuid: uuid,
-            operation: operation
-          };
-        for (var inputName in inputs) {
-          parameters[inputName] = inputs[inputName];
-        }
-        this.getFactory(false).operation(parameters).$promise.then(function(response){
-          deferred.resolve(response);
-        }, function(err) {
-          deferred.reject(err);
-        });
-        return deferred.promise;
+      operation: function(operation, url) {
+        var factory = this.getFactory(false, null, url);
+        return factory.operation({'operation': operation}).$promise;
       },
 
       getFactory:function(isList, endpoint, endpointUrl) {
@@ -173,7 +161,7 @@
           {
             operation: {
               method:'POST',
-              url:ENV.apiEndpoint + 'api' + endpoint + ':UUID/:operation/',
+              url:endpointUrl + ':UUID/:operation/',
               params: {UUID:'@uuid', operation:'@operation'}
             },
             update: {
@@ -196,7 +184,7 @@
         return this.getFactory(false, null, url).update({}, modelObject).$promise;
       },
 
-      $get:function(uuid, url) {
+      $get: function(uuid, url) {
         return this.getFactory(false, null, url).get({}, {uuid: uuid}).$promise;
       },
 

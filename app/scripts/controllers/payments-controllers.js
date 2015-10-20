@@ -17,7 +17,7 @@
       executeOrder: function() {
         agreementsService.$get($stateParams.uuid).then(
           function(order) {
-            agreementsService.executeOrder($stateParams.uuid).then(function() {
+            agreementsService.operation('execute', order.url).then(function() {
               // TODO refactor this function to use named customer_uuid field
               var array = order.customer.split('/').filter(function(el) {
                   return el.length !== 0;

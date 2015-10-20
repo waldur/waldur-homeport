@@ -210,18 +210,39 @@
         }
       },
       stopResource:function(resource) {
-        resource.$action('stop', this.reInitResource.bind(this, resource), this.handleActionException);
+        var vm = this;
+        vm.service.operation('stop', resource.url).then(
+          vm.reInitResource.bind(vm, resource),
+          vm.handleActionException.bind(vm)
+        );
       },
       startResource:function(resource) {
-        resource.$action('start', this.reInitResource.bind(this, resource), this.handleActionException);
+        var vm = this;
+        vm.service.operation('start', resource.url).then(
+          vm.reInitResource.bind(vm, resource),
+          vm.handleActionException.bind(vm)
+        );
       },
       restartResource:function(resource) {
-        resource.$action('restart', this.reInitResource.bind(this, resource), this.handleActionException);
+        var vm = this;
+        vm.service.operation('restart', resource.url).then(
+          vm.reInitResource.bind(vm, resource),
+          vm.handleActionException.bind(vm)
+        );
+      },
+      removeInstance: function(resource) {
+        return this.service.$deleteByUrl(resource.url);
+      },
+      unlink: function(resource) {
+        var vm = this;
+        vm.service.operation('unlink', resource.url).then(
+          vm.afterInstanceRemove.bind(vm, resource),
+          vm.handleActionException.bind(vm)
+        );
       },
       isOperationAvailable:function(operation, resource) {
         var availableOperations = this.service.getAvailableOperations(resource);
-        operation = operation.toLowerCase();
-        return availableOperations.indexOf(operation) !== -1;
+        return availableOperations.indexOf(operation.toLowerCase()) !== -1;
       },
       reInitResource:function(resource) {
         var vm = this;
@@ -229,12 +250,6 @@
           var index = vm.list.indexOf(resource);
           vm.list[index] = response;
         });
-      },
-      unlink: function(resource) {
-        var vm = this;
-        resource.$action('unlink', function() {
-          vm.afterInstanceRemove(resource);
-        }, vm.handleActionException);
       }
     });
 
