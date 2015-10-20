@@ -125,12 +125,6 @@
               propertyName: 'fingerprint',
               name: 'Fingerprint',
               className: 'fingerprint'
-            },
-            {
-              type: ENTITYLISTFIELDTYPES.date,
-              propertyName: '',
-              name: 'Added',
-              className: 'added'
             }
           ]
         };
