@@ -47,7 +47,7 @@
                 </ul>
                 <div class="total-cost">
                     <span class="table-alert"></span>
-                    <span class="cost">Total cost {{ row.total }}</span>
+                    <span class="cost">Total cost {{ row.total | defaultCurrency }}</span>
                     <div class="icon" ng-class="{'opened-icon': row.selected}"></div>
                 </div>
                 <div class="clear"></div>
@@ -60,7 +60,7 @@
                     </div>
                     <div class="tr" ng-repeat="service in row.projects">
                         <div class="td service-name display-for-mobile"><span ng-bind="::service.scope_name"></span></div>
-                        <div class="td service-name"><span ng-bind="::service.total"></span></div>
+                        <div class="td service-name"><span>{{ ::service.total | defaultCurrency }}</span></div>
                     </div>
                 </div>
                 <div class="table services" ng-show="row.activeTab=='services'">
@@ -70,7 +70,7 @@
                     </div>
                     <div class="tr" ng-repeat="service in row.services">
                         <div class="td service-name display-for-mobile"><span ng-bind="::service.scope_name"></span></div>
-                        <div class="td service-name"><span ng-bind="::service.total"></span></div>
+                        <div class="td service-name"><span>{{ ::service.total | defaultCurrency }}</span></div>
                     </div>
                 </div>
                 <div class="table services" ng-show="row.activeTab=='resources'">
@@ -80,7 +80,7 @@
                     </div>
                     <div class="tr" ng-repeat="service in row.resources">
                         <div class="td service-name display-for-mobile"><span ng-bind="::service.scope_name"></span></div>
-                        <div class="td service-name"><span ng-bind="::service.total"></span></div>
+                        <div class="td service-name"><span>{{ ::service.total | defaultCurrency }}</span></div>
                     </div>
                 </div>
             </div>
