@@ -11,7 +11,6 @@
       agreementsService, $stateParams, $state, $window, $q) {
     var controllerScope = this;
     var Controller = baseControllerListClass.extend({
-
       init:function() {
         this.service = plansService;
         this.controllerScope = controllerScope;
