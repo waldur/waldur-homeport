@@ -152,7 +152,7 @@
         var service_url = vm.selectedService.url;
         var project_url = vm.currentProject.url;
 
-        $q.all(vm.selectedResources.map(function(resource) {
+        return $q.all(vm.selectedResources.map(function(resource) {
           resource.status = 'progress';
 
           var instance = servicesService.$create(service_url + 'link/');

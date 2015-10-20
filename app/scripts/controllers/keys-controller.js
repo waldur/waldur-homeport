@@ -1,8 +1,8 @@
 (function() {
   angular.module('ncsaas')
-    .controller('KeyAddController', ['baseControllerAddClass', 'keysService', '$state', KeyAddController]);
+    .controller('KeyAddController', ['baseControllerAddClass', 'keysService', '$state', '$q', KeyAddController]);
 
-  function KeyAddController(baseControllerAddClass, keysService, $state) {
+  function KeyAddController(baseControllerAddClass, keysService, $state, $q) {
     var controllerScope = this;
     var Controller = baseControllerAddClass.extend({
       init: function() {
@@ -16,13 +16,13 @@
       },
       save: function() {
         if (this.instance.name) {
-          this._super();
+          return this._super();
         } else {
           if (this.instance.public_key) {
             var key = this.instance.public_key.split(' ');
             if (key[2]) {
               this.instance.name = key[2].trim();
-              this._super();
+              return this._super();
             } else {
               this.errors = {name: ['This field may not be blank.']};
             }
@@ -30,6 +30,7 @@
             this.errors = {public_key: ['This field may not be blank.']};
           }
         }
+        return $q.reject();
       }
     });
 

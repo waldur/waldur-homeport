@@ -194,12 +194,13 @@
       save: function() {
         var vm = this;
         vm.beforeSave();
-        vm.saveInstance().then(function() {
+        return vm.saveInstance().then(function() {
           vm.afterSave();
           ncUtilsFlash.success(vm.getSuccessMessage());
           vm.service.clearAllCacheForCurrentEndpoint();
           $rootScope.$broadcast('refreshCounts');
           vm.successRedirect();
+          return true;
         }, function(response) {
           vm.errors = response.data;
           vm.onError(response);
@@ -263,9 +264,11 @@
       update: function() {
         var vm = this;
         vm.beforeUpdate();
-        vm.model.$update(success, error);
+        return vm.model.$update(success, error);
         function success() {
-          vm.service.clearAllCacheForCurrentEndpoint();
+          if (vm.service.clearAllCacheForCurrentEndpoint) {
+            vm.service.clearAllCacheForCurrentEndpoint();
+          }
           $rootScope.$broadcast('refreshCounts');
           vm.afterUpdate();
           vm.successRedirect();

@@ -4,13 +4,14 @@
   angular.module('ncsaas')
     .controller('PlansListController',
       ['baseControllerListClass', 'plansService', 'customersService', 'usersService', 'customerPermissionsService',
-       'agreementsService', '$stateParams', '$state', '$window', PlansListController]);
+       'agreementsService', '$stateParams', '$state', '$window', '$q', PlansListController]);
 
   function PlansListController(
       baseControllerListClass, plansService, customersService, usersService, customerPermissionsService,
-      agreementsService, $stateParams, $state, $window) {
+      agreementsService, $stateParams, $state, $window, $q) {
     var controllerScope = this;
     var Controller = baseControllerListClass.extend({
+
       init:function() {
         this.service = plansService;
         this.controllerScope = controllerScope;
@@ -89,11 +90,13 @@
         if (vm.selectedPlan !== null) {
           order.plan = vm.selectedPlan.url;
           order.customer = vm.customer.url;
-          order.$save(function(order) {
+          return order.$save(function(order) {
             customersService.clearAllCacheForCurrentEndpoint();
             $window.location = order.approval_url;
+            return true;
           });
         }
+        return $q.reject();
       }
 
     });

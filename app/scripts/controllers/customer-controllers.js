@@ -346,8 +346,9 @@
         var payment = paymentsService.$create();
         payment.customer = vm.model.url;
         payment.amount = amount;
-        payment.$save(function(payment) {
+        return payment.$save(function(payment) {
           $window.location = payment.approval_url;
+          return true;
         });
       },
 
@@ -401,6 +402,7 @@
         this.redirectToDetailsPage = true;
       },
       afterSave: function() {
+        this._super();
         $rootScope.$broadcast('refreshCustomerList', {model: this.instance, new: true, current: true});
       }
     });

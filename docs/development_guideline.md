@@ -371,4 +371,15 @@ checkQuotas possible values: user, project, service, resource <br/>
         <span>{{ entityOptions.entityData.createLinkText }}</span>
     </div>
 
+## submitButton directive
+
+Used for disabling button after click to prevent double click
+
+action function should return promise for correct directive work
+
+if promise will return true - button will stay disabled
+
+example:
+
+    <a class="button-apply" submit-button="ProjectAdd.save()">Create project</a>
 

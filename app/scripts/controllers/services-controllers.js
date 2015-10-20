@@ -203,6 +203,7 @@
       },
 
       beforeSave: function() {
+        this._super();
         this.instance = this.service.$create(this.model.url);
         for (var i = 0; i < this.model.options.length; i++) {
           var option = this.model.options[i];
@@ -216,6 +217,7 @@
       },
 
       afterSave: function() {
+        this._super();
         joinServiceProjectLinkService.addService(this.instance).then(function() {
           $rootScope.$broadcast('refreshProjectList');
           $rootScope.$broadcast('customerBalance:refresh');
