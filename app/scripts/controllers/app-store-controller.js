@@ -152,8 +152,8 @@
 
         if (this.serviceMetadata) {
           var types = Object.keys(this.serviceMetadata.resources);
+          this.setResourceType(types[0]);
           if (types.length === 1) {
-            this.setResourceType(types[0]);
             this.resourceTypesBlock = false;
             this.configureStepNumber = 3;
           } else {
