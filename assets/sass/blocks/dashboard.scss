@@ -193,9 +193,7 @@
         .td {
           float: left;
           width: 30%;
-          @include bp(xs) {
-            width: 50%;
-          }
+
           &:nth-child(1) {
             text-align: left;
           }
@@ -206,6 +204,12 @@
             float: right;
             text-align: right;
             margin-right: 20px;
+          }
+          @include bp(xs) {
+            width: 50%;
+            &:last-child {
+              margin-right: 0;
+            }
           }
         }
         &.th {

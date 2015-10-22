@@ -994,7 +994,9 @@
               clearTimeout(timeouts[getKey(config)]);
             }
             timeouts[getKey(config)] = setTimeout(function() {
-              ncUtilsFlash.error('Problem getting response from the server.');
+              var errorMessage = 'Problem getting response from the server.';
+              ncUtilsFlash.error(errorMessage);
+              console.error(errorMessage, config);
               blockUI.reset();
             }, ENV.requestTimeout);
           }
@@ -1015,6 +1017,7 @@
           }
           if (rejection.config) {
             clearTimeout(timeouts[getKey(rejection.config)]);
+            console.error(message, rejection.config);
           }
           blockUI.reset();
           ncUtilsFlash.error(message);

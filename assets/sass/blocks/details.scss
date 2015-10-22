@@ -370,6 +370,18 @@
     position: absolute;
     right: 60px;
     top: -5px;
+
+    @include bp(xs) {
+      float: none;
+      margin-bottom: 13px;
+      position: initial;
+    }
+    @include bp(sm) {
+      float: none;
+      margin-bottom: 13px;
+      position: initial;
+    }
+
     .balance {
       text-align: right;
       font-size: 20px;
@@ -381,6 +393,7 @@
       .plan-spacing {
         margin-right: 7px;
         cursor: pointer;
+        border-bottom: 1px dashed $dashboard-green;
       }
     }
     .tooltip {
@@ -457,6 +470,7 @@
       &.quota-tooltip {
         right: 28px;
         top: 50px;
+        width: 240px;
         .close {
           position: absolute;
           right: 10px;
@@ -523,7 +537,7 @@
 }
 
 .balance-block.customer-balance {
-  width: 50%;
+  width: 30%;
   float: right;
   padding-right: 60px;
   @include bp(xs) {
@@ -789,7 +803,7 @@
 
 .user-profile-view {
   .details-container {
-    width: 100%;
+    width: 70%;
     .img-wrapper {
       -webkit-border-radius: 5px;
       border-radius: 5px;

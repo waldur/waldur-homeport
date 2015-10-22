@@ -68,7 +68,6 @@
             width: calc(100% - 80px);
             box-sizing: border-box;
             text-align: center;
-            margin-left: 10px;
             &.full {
                 width: 100%;
             } // &.full
@@ -234,7 +233,7 @@
                     }
                     img{
                         display: inline;
-
+                        max-height: 100%;
                     }
 
                 }
@@ -561,6 +560,9 @@
             .description {
                 width: 100%;
                 padding-left: 0;
+                h3 {
+                    padding-left: 0;
+                }
             }
         }
     }

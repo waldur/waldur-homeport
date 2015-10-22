@@ -56,7 +56,7 @@
                 <div class="table services" ng-show="row.activeTab=='projects'">
                     <div class="tr th">
                         <div class="td service-name display-for-mobile"><span>Project name</span></div>
-                        <div class="td service-name"><span>Cost</span></div>
+                        <div class="td service-name display-for-mobile"><span>Cost</span></div>
                     </div>
                     <div class="tr" ng-repeat="service in row.projects">
                         <div class="td service-name display-for-mobile"><span ng-bind="::service.scope_name"></span></div>
@@ -66,21 +66,21 @@
                 <div class="table services" ng-show="row.activeTab=='services'">
                     <div class="tr th">
                         <div class="td service-name display-for-mobile"><span>Provider name</span></div>
-                        <div class="td service-name"><span>Cost</span></div>
+                        <div class="td service-name display-for-mobile"><span>Cost</span></div>
                     </div>
                     <div class="tr" ng-repeat="service in row.services">
                         <div class="td service-name display-for-mobile"><span ng-bind="::service.scope_name"></span></div>
-                        <div class="td service-name"><span ng-bind="::service.total"></span></div>
+                        <div class="td service-name display-for-mobile"><span ng-bind="::service.total"></span></div>
                     </div>
                 </div>
                 <div class="table services" ng-show="row.activeTab=='resources'">
                     <div class="tr th">
                         <div class="td service-name display-for-mobile"><span>Resource name</span></div>
-                        <div class="td service-name"><span>Cost</span></div>
+                        <div class="td service-name display-for-mobile"><span>Cost</span></div>
                     </div>
                     <div class="tr" ng-repeat="service in row.resources">
                         <div class="td service-name display-for-mobile"><span ng-bind="::service.scope_name"></span></div>
-                        <div class="td service-name"><span ng-bind="::service.total"></span></div>
+                        <div class="td service-name display-for-mobile"><span ng-bind="::service.total"></span></div>
                     </div>
                 </div>
             </div>
