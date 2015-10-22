@@ -252,7 +252,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <button ng-class="{'disabled': !AppStore.selectedPackage}" ng-click="AppStore.signContract()">
+                        <button ng-class="{'disabled': !AppStore.selectedPackage}" submit-button="AppStore.signContract()">
                             <img src="/static/images/appstore/icon-curt.png" alt=""/>
                             <span>Submit SLA request</span>
                         </button>
@@ -294,7 +294,7 @@
             </aside>
 
             <section ng-show="AppStore.selectedResourceType" class="appstore-purchase" title="{{ AppStore.getTooltip() }}">
-                <button ng-class="{'disabled': !AppStore.canSave()}" ng-click="AppStore.save()">
+                <button ng-class="{'disabled': !AppStore.canSave()}" submit-button="AppStore.save()">
                 <img ng-show="AppStore.enablePurchaseCostDisplay" src="/static/images/appstore/icon-curt.png" alt=""/>
                 <span>{{ AppStore.enablePurchaseCostDisplay ? 'Purchase' : 'Create' }}</span>
                 </button>

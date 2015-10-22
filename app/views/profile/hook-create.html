@@ -82,7 +82,8 @@
 
     <div class="decision">
         <div class="col">
-            <a class="button-apply" ng-click="HookController.save()" ng-class="{'disabled': HookController.instance.$type == null}">Create</a>
+            <a class="button-apply" submit-button="HookController.save()"
+               ng-class="{'disabled': (HookController.instance.$type == null)}">Create</a>
         </div>
         <div class="col">
             <a class="button-cancel" ng-click="HookController.cancel()">Cancel</a>
