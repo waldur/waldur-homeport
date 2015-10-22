@@ -149,6 +149,7 @@
         this.serviceType = this.selectedService.type;
         this.serviceMetadata = this.servicesMetadata[this.serviceType];
         this.fields = [];
+        this.selectedResourceType = null;
 
         if (this.serviceMetadata) {
           var types = Object.keys(this.serviceMetadata.resources);
