@@ -16,13 +16,13 @@
           click();
         });
         function click() {
-          element.addClass('disabled');
+          element.addClass('disabled').addClass('button-spinner');
           scope.submit().then(function(response) {
-            if (!response) {
-              element.removeClass('disabled');
+            if (response !== true) {
+              element.removeClass('disabled').removeClass('button-spinner');
             }
           }, function() {
-            element.removeClass('disabled');
+            element.removeClass('disabled').removeClass('button-spinner');
           });
         }
       }
