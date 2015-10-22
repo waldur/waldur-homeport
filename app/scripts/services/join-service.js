@@ -2,14 +2,40 @@
 
 (function () {
   angular.module('ncsaas')
-    .service('joinService', ['baseServiceClass', 'servicesService', joinService]);
+    .service('joinService', ['baseServiceClass', 'servicesService', '$http', '$q', joinService]);
 
-  function joinService(baseServiceClass, servicesService) {
+  function joinService(baseServiceClass, servicesService, $http, $q) {
     var ServiceClass = baseServiceClass.extend({
       init:function() {
         this._super();
         this.endpoint = '/services/';
         this.filterByCustomer = false;
+      },
+
+      create: function(url, options) {
+        return this.createOrUpdate('POST', url, options);
+      },
+
+      update: function(url, options) {
+        return this.createOrUpdate('PATCH', url, options);
+      },
+
+      createOrUpdate: function(method, url, options) {
+        var fd = new FormData();
+        for(var name in options) {
+          fd.append(name, options[name]);
+        }
+        return $http({
+          method: method,
+          url: url,
+          data: fd,
+          transformRequest: angular.identity,
+          headers: {'Content-Type': undefined}
+        }).then(function(response) {
+          return response.data;
+        }, function(response) {
+          return $q.reject(response);
+        });
       },
 
       $get: function(service_type, uuid) {

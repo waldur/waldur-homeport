@@ -96,8 +96,47 @@
         }
       },
       updateSettings: function(service) {
-        var saveService = joinService.$update(null, service.settings, service.values);
-        return saveService.then(this.onSaveSuccess.bind(this, service), this.onSaveError.bind(this, service));
+        var url = service.settings;
+        var data = this.getData(service);
+        return joinService.update(url, data).then(
+          this.onSaveSuccess.bind(this, service),
+          this.onSaveError.bind(this, service)
+        );
+      },
+      getData: function(service) {
+        var values = {};
+        for (var name in service.values) {
+          var option = service.options[name];
+          if (!option || option.read_only) {
+            continue;
+          }
+          var value = service.values[name];
+          if (this.isFileOption(option)) {
+            if (value.length != 1 || !this.isFileValue(value[0])) {
+              continue;
+            }
+            value = value[0];
+          }
+          values[name] = value;
+        }
+        return values;
+      },
+      isFileOption: function(option) {
+        return option.type == 'file upload';
+      },
+      isFileValue: function(value) {
+        return value.toString() == '[object File]';
+      },
+      getFilename: function(value) {
+        if (!value) {
+          return '';
+        }
+        else if (value.length == 1) {
+          return value[0].name;
+        } else if (angular.isString(value)) {
+          var parts = value.split('/');
+          return parts[parts.length - 1];
+        }
       },
       update: function(service) {
         var saveService = joinService.$update(null, service.url, service);
