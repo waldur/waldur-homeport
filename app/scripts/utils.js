@@ -3,9 +3,15 @@
 (function() {
 
   angular.module('ncsaas')
-    .factory('ncUtilsFlash', ['Flash', ncUtilsFlash]);
+    .factory('ncUtilsFlash', ['Flash', '$rootScope', ncUtilsFlash]);
 
-  function ncUtilsFlash(Flash) {
+  function ncUtilsFlash(Flash, $rootScope) {
+    var dismiss = Flash.dismiss;
+    Flash.dismiss = function() {
+      // for hasFlash variable change emit for ng-show directive in flash block
+      $rootScope.hasFlash = !$rootScope.hasFlash;
+      dismiss();
+    };
     return {
       success: function(message) {
         this.flashMessage('success', message);
