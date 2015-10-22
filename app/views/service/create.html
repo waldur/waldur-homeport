@@ -76,7 +76,7 @@
                    ngf-select
                    ngf-accept="'application/x-x509-ca-cert'"
                    ng-if="option.type == 'file upload'"
-                   ng-model="option.value">Upload {{ option.value }}</a>
+                   ng-model="option.value">Upload {{ ServiceAdd.getFilename(option.value) }}</a>
 
                 <select id="{{ ServiceAdd.model.name }}_{{ option.key }}"
                         ng-if="option.type == 'choice'"

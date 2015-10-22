@@ -7,12 +7,20 @@
       'servicesService',
       'usersService',
       'blockUI',
+      'ncUtils',
       'ncUtilsFlash',
       CustomerServiceTabController
     ]);
 
   function CustomerServiceTabController(
-    $stateParams, baseServiceListController, joinService, servicesService, usersService, blockUI, ncUtilsFlash) {
+    $stateParams,
+    baseServiceListController,
+    joinService,
+    servicesService,
+    usersService,
+    blockUI,
+    ncUtils,
+    ncUtilsFlash) {
     var controllerScope = this;
     var Controller = baseServiceListController.extend({
       init: function() {
@@ -103,6 +111,7 @@
           this.onSaveError.bind(this, service)
         );
       },
+      getFilename: ncUtils.getFilename,
       getData: function(service) {
         var values = {};
         for (var name in service.values) {
@@ -111,8 +120,8 @@
             continue;
           }
           var value = service.values[name];
-          if (this.isFileOption(option)) {
-            if (value.length != 1 || !this.isFileValue(value[0])) {
+          if (ncUtils.isFileOption(option)) {
+            if (value.length != 1 || !ncUtils.isFileValue(value[0])) {
               continue;
             }
             value = value[0];
@@ -120,23 +129,6 @@
           values[name] = value;
         }
         return values;
-      },
-      isFileOption: function(option) {
-        return option.type == 'file upload';
-      },
-      isFileValue: function(value) {
-        return value.toString() == '[object File]';
-      },
-      getFilename: function(value) {
-        if (!value) {
-          return '';
-        }
-        else if (value.length == 1) {
-          return value[0].name;
-        } else if (angular.isString(value)) {
-          var parts = value.split('/');
-          return parts[parts.length - 1];
-        }
       },
       update: function(service) {
         var saveService = joinService.$update(null, service.url, service);

@@ -44,6 +44,23 @@
         promise.finally(function() {
           block.stop();
         });
+      },
+      isFileOption: function(option) {
+        return option.type == 'file upload';
+      },
+      isFileValue: function(value) {
+        return value.toString() == '[object File]';
+      },
+      getFilename: function(value) {
+        if (!value) {
+          return '';
+        }
+        else if (value.length == 1) {
+          return value[0].name;
+        } else if (angular.isString(value)) {
+          var parts = value.split('/');
+          return parts[parts.length - 1];
+        }
       }
     }
   }

@@ -226,16 +226,19 @@
           });
         });
       },
-
+      getFilename: ncUtils.getFilename,
       getData: function() {
         var data = {};
         for (var i = 0; i < this.model.options.length; i++) {
           var option = this.model.options[i];
-          if (angular.isUndefined(option.value)) {
+          var value = option.value;
+          if (angular.isUndefined(value)) {
             continue;
           }
-          var value = option.value;
-          if (option.type == 'file upload') {
+          if (ncUtils.isFileOption(option)) {
+            if (value.length != 1 || !ncUtils.isFileValue(value[0])) {
+              continue;
+            }
             value = value[0];
           }
           data[option.key] = value;
