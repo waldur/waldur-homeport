@@ -652,14 +652,3 @@
     controllerScope.__proto__ = new Controller();
   }
 })();
-
-(function() {
-  angular.module('ncsaas').filter('mb2gb', function() {
-    return function(input) {
-      if (input < 1024) {
-        return input + ' MB';
-      }
-      return Math.round(input / 1024.0) + ' GB';
-    }
-  })
-})();
