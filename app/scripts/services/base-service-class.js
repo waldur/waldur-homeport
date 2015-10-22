@@ -152,16 +152,16 @@
         return factory.operation({'operation': operation}).$promise;
       },
 
-      getFactory:function(isList, endpoint, endpointUrl) {
+      getFactory: function(isList, endpoint, endpointUrl) {
         endpoint = endpoint || this.getEndpoint(isList);
         endpointUrl = endpointUrl || ENV.apiEndpoint + 'api' + endpoint;
         /*jshint camelcase: false */
         return $resource(endpointUrl + ':UUID/:operation/', {UUID:'@uuid',
-            page_size:'@page_size', page:'@page', 'DONTBLOCK': '@DONTBLOCK', operation:'@operation'},
+            page_size: '@page_size', page: '@page', 'DONTBLOCK': '@DONTBLOCK', operation: '@operation'},
           {
             operation: {
-              method:'POST',
-              url:endpointUrl + ':UUID/:operation/',
+              method: 'POST',
+              url: endpointUrl + ':UUID/:operation/',
               params: {UUID:'@uuid', operation:'@operation'}
             },
             update: {
