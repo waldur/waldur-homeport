@@ -129,16 +129,6 @@
                     transform: translate(1.1, 1.1);
                 } // &:before
             } // invite-user
-            &.appstore {
-                $textColor: #fff200;
-                color: $textColor;
-                text-transform: uppercase;
-                &.active {
-                    span {
-                        border-color: $textColor;
-                    }
-                }
-            }
             &.mobile-trigger-link {
                 @include property(padding-top, 12);
                 @include property(font-size, 24);

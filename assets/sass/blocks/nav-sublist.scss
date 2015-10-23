@@ -5,7 +5,7 @@
     @include property(width, 220);
     @include property(margin-left, -90);
     @include property(border-radius, 0 0 4 4);
-    left: 50%;
+    left: 90px;
     position: absolute;
     background-color: #4fb547;
     &.block-ui {

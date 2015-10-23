@@ -41,7 +41,7 @@
         } // xs
     } // &.mobile
     > li {
-        float: left;;
+        float: left;
         &.logo-box {
             position: absolute;
             left: -15px;
@@ -74,23 +74,10 @@
                 margin-right: 20px;
                 padding-left: 45px;
             } // md
-            background-color: $navListBackgroundColor;
             position: relative;
             $padding: 85px;
             padding-left: $padding;
             margin-left: 25-$padding;
-            &:after {
-                content: "";
-                width: 0;
-                height: 0;
-                border: 25px solid transparent;
-                border-left-color: $navListBackgroundColor;
-                border-right: 0;
-                position: absolute;
-                left: 100%;
-                top: 0;
-                z-index: 1;
-            }
         }
         &.mobile-trigger {
             display: none;
@@ -153,9 +140,10 @@
             } // md
         } // &.customer-support
         &.customers {
-            $backgroundColor: #4fb547;
-            background-color: $backgroundColor;
-            padding-left: 20px;
+            padding-right: 10px;
+            a:after {
+                right: 10px;
+            }
             @include bp(md) {
                 padding-left: 0;
             } // md
@@ -181,18 +169,6 @@
                     }
                 }
             }
-            &:after {
-                content: "";
-                width: 0;
-                height: 0;
-                border: 25px solid transparent;
-                border-left-color: $backgroundColor;
-                border-right: 0;
-                position: absolute;
-                left: 100%;
-                top: 0;
-                z-index: 1;
-            }
         } // &.customers
 
         > a,
@@ -214,7 +190,7 @@
             &.active {
                 color: $hover-color;
                 position: relative;
-                &:not(.drop-active) {
+                &:not(.drop-active):not(.appstore) {
                     span {
                         border-bottom: 1px solid $hover-color;
                     }
@@ -223,7 +199,8 @@
                     &:after {
                         border-top-color: transparent;
                         border-bottom-color: $hover-color;
-                        bottom: 19px;
+                        bottom: 22px;
+                        right: 0px;
                     }
                 }
                 &:hover {
@@ -254,6 +231,7 @@
                     border-top-color: $color;
                 }
             }
+
             .active-context {
                 &:hover {
                     text-decoration: underline;
@@ -382,13 +360,11 @@
                     border-width: 0;
                 }
             } // &.lang
-            &.appstore {
-                position: relative;
-                text-transform: uppercase;
-                &:not(.active) {
-                    color: #fff200;
-                }
-            } // &.appstore
+            &.appstore span {
+                border: 1px solid white;
+                padding: 6px;
+                border-radius: 7px;
+            }
             &.user {
                 &:before {
                     position: relative;
@@ -406,10 +382,11 @@
             } // &.mobile-trigger-link
         } // > a
         &.project-dropdown {
-            $backgroundColor: #8dc63f;
-            background: $backgroundColor;
-            padding-left: 20px;
-            margin-right: 20px;
+            padding-right: 10px;
+            margin-right: 10px;
+            a:after {
+                right: 10px;
+            }
             @include bp(xs) {
                 margin-right: 0;
                 a {
@@ -431,19 +408,6 @@
                         right: -10px;
                     }
                 }
-            }
-
-            &:after {
-                content: "";
-                width: 0;
-                height: 0;
-                border: 25px solid transparent;
-                border-left-color: $backgroundColor;
-                border-right: 0;
-                position: absolute;
-                left: 100%;
-                top: 0;
-                z-index: 1;
             }
         }
     } // > li
