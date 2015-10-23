@@ -1,4 +1,4 @@
-<div ng-controller="ServiceAddController as ServiceAdd">
+<div ng-controller="ServiceAddController as ServiceAdd" block-ui="create-service">
 
     <div class="container">
         <h1>Add provider</h1>
@@ -72,6 +72,12 @@
                        ng-if="option.type == 'url'"
                        ng-model="option.value">
 
+                <a class="button"
+                   ngf-select
+                   ngf-accept="'application/x-x509-ca-cert'"
+                   ng-if="option.type == 'file upload'"
+                   ng-model="option.value">Upload {{ ServiceAdd.getFilename(option.value) }}</a>
+
                 <select id="{{ ServiceAdd.model.name }}_{{ option.key }}"
                         ng-if="option.type == 'choice'"
                         ng-model="option.value"
@@ -109,7 +115,7 @@
 
     <div class="decision" ng-show="ServiceAdd.model">
         <div class="col">
-            <a class="button-apply" submit-button="ServiceAdd.save()">Add provider</a>
+            <a class="button-apply" ng-class="{'disabled': ServiceAdd.isDisabled()}" submit-button="ServiceAdd.save()">Add provider</a>
         </div>
         <div class="col">
             <a class="button-cancel" ng-click="ServiceAdd.cancel()">Cancel</a>

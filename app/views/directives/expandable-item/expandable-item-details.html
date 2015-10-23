@@ -31,6 +31,12 @@
                             ng-options="item.value as item.display_name for item in field.choices">
                     </select>
 
+                    <a class="button"
+                       ng-switch-when="file upload"
+                       ngf-select
+                       ngf-accept="'application/x-x509-ca-cert'"
+                       ng-model="expandableElement.values[field.name]">Upload {{ expandableList.getFilename(expandableElement.values[field.name]) }}</a>
+
                     <span ng-show="field.required">(required)</span>
                 </div>
             </div>

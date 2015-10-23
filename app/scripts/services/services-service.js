@@ -38,7 +38,7 @@
         } else {
           vm.service_options = {};
           var blacklist = ['name', 'cpu_overcommit_ratio', 'dummy'];
-          var types = ['string', 'choice', 'url'];
+          var types = ['string', 'choice', 'url', 'file upload'];
 
           vm.getServicesList().then(function(services) {
             var promises = [];
@@ -67,7 +67,8 @@
                       key: key,
                       type: option.type,
                       label: option.label,
-                      help_text: option.help_text
+                      help_text: option.help_text,
+                      required: option.required
                     };
                     if (option.choices) {
                       item.choices = option.choices;

@@ -7,12 +7,20 @@
       'servicesService',
       'usersService',
       'blockUI',
+      'ncUtils',
       'ncUtilsFlash',
       CustomerServiceTabController
     ]);
 
   function CustomerServiceTabController(
-    $stateParams, baseServiceListController, joinService, servicesService, usersService, blockUI, ncUtilsFlash) {
+    $stateParams,
+    baseServiceListController,
+    joinService,
+    servicesService,
+    usersService,
+    blockUI,
+    ncUtils,
+    ncUtilsFlash) {
     var controllerScope = this;
     var Controller = baseServiceListController.extend({
       init: function() {
@@ -96,8 +104,31 @@
         }
       },
       updateSettings: function(service) {
-        var saveService = joinService.$update(null, service.settings, service.values);
-        return saveService.then(this.onSaveSuccess.bind(this, service), this.onSaveError.bind(this, service));
+        var url = service.settings;
+        var data = this.getData(service);
+        return joinService.update(url, data).then(
+          this.onSaveSuccess.bind(this, service),
+          this.onSaveError.bind(this, service)
+        );
+      },
+      getFilename: ncUtils.getFilename,
+      getData: function(service) {
+        var values = {};
+        for (var name in service.values) {
+          var option = service.options[name];
+          if (!option || option.read_only) {
+            continue;
+          }
+          var value = service.values[name];
+          if (ncUtils.isFileOption(option)) {
+            if (value.length != 1 || !ncUtils.isFileValue(value[0])) {
+              continue;
+            }
+            value = value[0];
+          }
+          values[name] = value;
+        }
+        return values;
       },
       update: function(service) {
         var saveService = joinService.$update(null, service.url, service);

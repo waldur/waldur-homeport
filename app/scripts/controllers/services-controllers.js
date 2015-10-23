@@ -154,6 +154,8 @@
       'ENV',
       '$rootScope',
       '$state',
+      '$q',
+      'ncUtils',
       ServiceAddController]);
 
   function ServiceAddController(
@@ -164,7 +166,9 @@
     baseControllerAddClass,
     ENV,
     $rootScope,
-    $state) {
+    $state,
+    $q,
+    ncUtils) {
     var controllerScope = this;
     var ServiceController = baseControllerAddClass.extend({
       init: function() {
@@ -192,48 +196,86 @@
         this.setModel(this.categoryServices[0]);
       },
       activate: function() {
+        var promise = $q.all([this.getCustomer(), this.getServices()]);
+        ncUtils.blockElement('create-service', promise);
+      },
+
+      getCustomer: function() {
         var vm = this;
-        currentStateService.getCustomer().then(function(customer) {
+        return currentStateService.getCustomer().then(function(customer) {
           vm.customer = customer;
         });
-        servicesService.getServicesOptions().then(function(services) {
+      },
+
+      getServices: function() {
+        var vm = this;
+        return servicesService.getServicesOptions().then(function(services) {
           vm.services = services;
           vm.setCategory(vm.categories[0]);
         });
       },
 
-      beforeSave: function() {
-        this.instance = this.service.$create(this.model.url);
+      saveInstance: function() {
+        var data = this.getData();
+        var vm = this;
+        return this.service.create(this.model.url, data).then(function(response) {
+          vm.instance = response;
+          joinServiceProjectLinkService.addService(vm.instance).then(function() {
+            $rootScope.$broadcast('refreshProjectList');
+            $rootScope.$broadcast('customerBalance:refresh');
+          });
+        });
+      },
+      getFilename: ncUtils.getFilename,
+      getData: function() {
+        var data = {};
         for (var i = 0; i < this.model.options.length; i++) {
           var option = this.model.options[i];
-          if (option.value) {
-            this.instance[option.key] = option.value;
+          var value = option.value;
+          if (angular.isUndefined(value)) {
+            continue;
           }
+          if (ncUtils.isFileOption(option)) {
+            if (value.length != 1 || !ncUtils.isFileValue(value[0])) {
+              continue;
+            }
+            value = value[0];
+          }
+          data[option.key] = value;
         }
-        this.instance.customer = this.customer.url;
-        this.instance.name = this.model.serviceName;
-        this.instance.dummy = this.model.dummy;
-      },
-
-      afterSave: function() {
-        joinServiceProjectLinkService.addService(this.instance).then(function() {
-          $rootScope.$broadcast('refreshProjectList');
-          $rootScope.$broadcast('customerBalance:refresh');
-        });
+        data.customer = this.customer.url;
+        data.name = this.model.serviceName;
+        data.dummy = !!this.model.dummy;
+        return data;
       },
 
       successRedirect: function() {
-        this.gotoOrganizationProviders();
+        $state.go('organizations.details', {
+          uuid: this.customer.uuid,
+          tab: 'providers',
+          providerType: this.instance.service_type,
+          providerUuid: this.instance.uuid
+        });
       },
 
       cancel: function() {
-        this.gotoOrganizationProviders();
+        $state.go('organizations.details', {
+          uuid: this.customer.uuid,
+          tab: 'providers'
+        });
       },
 
-      gotoOrganizationProviders: function() {
-        currentStateService.getCustomer().then(function(customer) {
-          $state.go('organizations.details', {uuid: customer.uuid, tab: 'providers'});
-        });
+      isDisabled: function() {
+        if (!this.model || !this.model.options) {
+          return true;
+        }
+        for (var i = 0; i < this.model.options.length; i++) {
+          var option = this.model.options[i];
+          if (angular.isUndefined(option.value) && option.required) {
+            return true;
+          }
+        }
+        return false;
       }
     });
 
