@@ -149,6 +149,7 @@
         this.serviceType = this.selectedService.type;
         this.serviceMetadata = this.servicesMetadata[this.serviceType];
         this.fields = [];
+        this.selectedResourceType = null;
 
         if (this.serviceMetadata) {
           var types = Object.keys(this.serviceMetadata.resources);
@@ -556,10 +557,11 @@
         contract.project = this.currentProject.url;
         contract.plan = this.selectedPackage.url;
         var vm = this;
-        contract.$save().then(function(response) {
+        return contract.$save().then(function(response) {
           premiumSupportContractsService.clearAllCacheForCurrentEndpoint();
           $rootScope.$broadcast('refreshProjectList');
           $state.go('resources.list', {tab: 'premiumSupport'});
+          return true;
         }, function(response) {
           vm.errors = response.data;
           vm.onError();
@@ -651,15 +653,4 @@
 
     controllerScope.__proto__ = new Controller();
   }
-})();
-
-(function() {
-  angular.module('ncsaas').filter('mb2gb', function() {
-    return function(input) {
-      if (input < 1024) {
-        return input + ' MB';
-      }
-      return Math.round(input / 1024.0) + ' GB';
-    }
-  })
 })();

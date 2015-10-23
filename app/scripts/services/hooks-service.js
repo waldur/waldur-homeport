@@ -55,10 +55,10 @@
       resource.$save = function(success, error) {
         var data = cleanData(resource);
         var url = getListUrl(resource.$type);
-        $http.post(url, data).success(success).error(function(response){
-          error({data: response});
+        return $http.post(url, data).success(success).error(function(response){
+          return {data: response};
         });
-      }
+      };
 
       resource.$delete = function(success, error) {
         var url = getDetailUrl(resource.$type, resource.uuid);
@@ -68,7 +68,7 @@
       resource.$update = function(success, error) {
         var data = cleanData(resource);
         var url = getDetailUrl(resource.$type, resource.uuid);
-        $http.put(url, data).success(success).error(function(response){
+        return $http.put(url, data).success(success).error(function(response){
           error({data: response});
         });
       }

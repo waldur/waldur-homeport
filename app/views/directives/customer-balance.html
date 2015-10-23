@@ -47,7 +47,7 @@
                 <form>
                     <input type="number" min="1" max="10000" ng-model="amount" ng-init="amount=10">
                     <span>{{ ::currency }}</span>
-                    <a class="button" ng-click="addCredit(amount)">
+                    <a class="button" submit-button="addCredit(amount)">
                         Add credit
                     </a>
                 </form>

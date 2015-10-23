@@ -220,3 +220,35 @@
 .button-tooltip {
     display: inline-block;
 }
+
+.button-spinner {
+    position: relative;
+    &:before {
+        @include icon-fa;
+        content: "\f110";
+        font-size: 20px;
+        display: inline-block;
+        text-align: center;
+        animation-name: preload;
+        animation-duration: 600ms;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+        z-index: 100;
+        position: absolute;
+        left: 50%;
+        margin-left: -10px;
+        color: #111;
+        top: 50%;
+        margin-top: -10px;
+    }
+
+    @keyframes preload {
+        from {
+            transform:rotate(0deg);
+        }
+        to {
+            transform:rotate(360deg);
+        }
+    }
+
+}

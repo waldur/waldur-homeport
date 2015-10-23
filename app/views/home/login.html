@@ -7,7 +7,7 @@
                     <span class="error error-standard label">{{ error }}</span>
                 </li>
             </ul>
-            <form ng-submit="auth.signin()" form-autofill-fix>
+            <form form-autofill-fix>
                 <div class="row-login">
                     <input type="text" ng-model="auth.user.username" placeholder="Username">
                 </div>
@@ -16,7 +16,7 @@
                 </div>
                 <div class="decision">
                     <div class="col">
-                        <button class="button-login" type="Submit">Login</button>
+                        <button class="button-login" submit-button="auth.signin()" type="Submit">Login</button>
                     </div>
                 </div>
             </form>
@@ -46,7 +46,7 @@
                     <span class="error error-standard label">{{ error }}</span>
                 </li>
             </ul>
-            <form ng-submit="auth.signup()" form-autofill-fix>
+            <form form-autofill-fix>
                 <div class="row-login">
                     <input type="text" ng-model="auth.user.username" placeholder="Username">
                 </div>
@@ -61,7 +61,7 @@
                 </div>
                 <div class="decision">
                     <div class="col">
-                        <button class="button-login" type="submit">Submit</button>
+                        <button class="button-login" submit-button="auth.signup()" type="submit">Submit</button>
                     </div>
                 </div>
             </form>

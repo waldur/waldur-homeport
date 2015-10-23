@@ -16,7 +16,7 @@
       },
       signin: function() {
         var vm = this;
-        authService.signin(vm.user.username, vm.user.password).then(vm.loginSuccess.bind(vm), vm.loginError.bind(vm));
+        return authService.signin(vm.user.username, vm.user.password).then(vm.loginSuccess.bind(vm), vm.loginError.bind(vm));
       },
       authenticate: function(provider) {
         var vm = this;
@@ -24,6 +24,7 @@
       },
       loginSuccess: function() {
         $state.go('dashboard.index');
+        return true;
       },
       loginError: function(response) {
         if (response.status != 400) {
@@ -53,10 +54,11 @@
       signup: function() {
         var vm = this;
         vm.errors = {};
-        authService.signup(vm.user).then(function() {
+        return authService.signup(vm.user).then(function() {
           ncUtilsFlash.info('Confirmation mail has been sent. Please check your inbox!');
           vm.isSignupFormVisible = false;
           vm.user = {};
+          return true;
         }, function(response) {
           vm.errors = response.data;
         });
