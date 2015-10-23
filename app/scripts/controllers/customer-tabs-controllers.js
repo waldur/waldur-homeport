@@ -18,7 +18,7 @@
       init: function() {
         this.controllerScope = controllerScope;
         this.service = joinService;
-        this.service.defaultFilter.customer_uuid = $stateParams.uuid;
+        this.service.defaultFilter.customer = $stateParams.uuid;
         this.expandableOptions = [
           {
             isList: false,
@@ -192,9 +192,7 @@
     var controllerClass = baseResourceListController.extend({
       init:function() {
         this._super();
-        // resource endpoint is using a different customer filter name
-        this.service.filterByCustomer = false;
-        this.service.defaultFilter.customer_uuid = $stateParams.uuid;
+        this.service.defaultFilter.customer = $stateParams.uuid;
         this.entityOptions.list.push({
           name: 'Project',
           propertyName: 'project_name',

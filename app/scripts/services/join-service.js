@@ -9,7 +9,6 @@
       init:function() {
         this._super();
         this.endpoint = '/services/';
-        this.filterByCustomer = false;
       },
 
       $get: function(service_type, uuid) {
