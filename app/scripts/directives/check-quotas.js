@@ -2,9 +2,9 @@
 
 (function() {
   angular.module('ncsaas')
-    .directive('checkQuotas', ['currentStateService', '$state', '$rootScope', checkQuotas]);
+    .directive('checkQuotas', ['currentStateService', '$rootScope', checkQuotas]);
 
-  function checkQuotas(currentStateService, $state, $rootScope) {
+  function checkQuotas(currentStateService, $rootScope) {
     var directive = {
       restrict: 'A',
       replace: true,
@@ -85,6 +85,7 @@
     function checkQuotasController($scope) {
       $scope.showMessage = false;
       $scope.classes = {};
+      $scope.state = $scope.sref ? $scope.sref : '.';
 
       var classes;
       if ($scope.classLink && (classes = $scope.classLink.split(' '))) {
@@ -111,8 +112,6 @@
           $scope.openTooltip();
           e.preventDefault();
           e.stopPropagation();
-        } else if ($scope.sref) {
-          $state.go($scope.sref);
         }
       };
 
