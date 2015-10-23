@@ -154,16 +154,13 @@
 
   angular.module('ncsaas')
     .controller('CustomerProjectTabController', [
-      'BaseProjectListController', '$stateParams', 'projectsService', CustomerProjectTabController]);
+      'BaseProjectListController', CustomerProjectTabController]);
 
-  function CustomerProjectTabController(BaseProjectListController, $stateParams, projectsService) {
+  function CustomerProjectTabController(BaseProjectListController) {
     var controllerScope = this;
     var Controller = BaseProjectListController.extend({
       init: function() {
         this.controllerScope = controllerScope;
-        this.service = projectsService;
-        this.service.defaultFilter.customer = $stateParams.uuid;
-        this.service.filterByCustomer = false;
         this.blockUIElement = 'tab-content';
         this._super();
         this.entityOptions.entityData.title = '';
