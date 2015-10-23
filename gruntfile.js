@@ -40,7 +40,6 @@ module.exports = function(grunt) {
                         'app/static/css/style.css',
                         'app/static/css/angular-flash.css',
                         'app/static/css/angucomplete-alt.css',
-                        'app/static/css/angular-chart.css',
                         'app/static/css/xeditable.css',
                         'app/static/css/angular-block-ui.css'
                     ]
@@ -265,13 +264,6 @@ module.exports = function(grunt) {
                       cwd: 'bower_components/Chart.js',
                       src: ['Chart.js'],
                       dest: 'app/static/js/',
-                      filter: 'isFile'
-                    },
-                    {
-                      expand: true,
-                      cwd: 'bower_components/angular-chart.js/dist',
-                      src: ['angular-chart.css'],
-                      dest: 'app/static/css/',
                       filter: 'isFile'
                     },
                     {
