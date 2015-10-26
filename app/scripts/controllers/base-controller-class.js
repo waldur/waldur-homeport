@@ -241,9 +241,9 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('baseControllerDetailUpdateClass', ['$state', 'baseControllerClass', '$stateParams', '$rootScope', baseControllerDetailUpdateClass]);
+    .service('baseControllerDetailUpdateClass', ['$state', 'baseControllerClass', '$stateParams', '$rootScope', 'ENV', baseControllerDetailUpdateClass]);
 
-  function baseControllerDetailUpdateClass($state, baseControllerClass, $stateParams, $rootScope) {
+  function baseControllerDetailUpdateClass($state, baseControllerClass, $stateParams, $rootScope, ENV) {
     /**
      * Use controllerScope.__proto__ = new Controller() in needed controller
      * use this.controllerScope for changes in event handler
@@ -259,7 +259,19 @@
       init: function() {
         this._super();
         this.activate();
-        this.activeTab = $stateParams.tab ? $stateParams.tab : this.activeTab;
+      },
+      getActiveTab: function(tabs, stateParamTab) {
+        var defaultTab;
+        for (var i = 0; i < tabs.length; i++) {
+          var tab = tabs[i].key;
+          if (tab && (ENV.featuresVisible || ENV.toBeFeatures.indexOf(tab) === -1)) {
+            defaultTab = !defaultTab ? tab : defaultTab;
+            if (tab === stateParamTab) {
+              return tab;
+            }
+          }
+        }
+        return defaultTab;
       },
       update: function() {
         var vm = this;

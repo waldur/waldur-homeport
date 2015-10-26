@@ -408,7 +408,6 @@
         this._super();
         this.detailsViewOptions = {
           title: 'Project',
-          activeTab: this.getActiveTab(),
           listState: $stateParams.uuid ? 'projects.list' : null,
           aboutFields: [
             {
@@ -473,15 +472,7 @@
             }
           ]
         };
-      },
-      getActiveTab: function() {
-        var tabs = [$stateParams.tab, 'eventlog', 'alerts', ENV.resourcesTypes.vms];
-        for (var i = 0; i < tabs.length; i++) {
-          var tab = tabs[i];
-          if (tab && (ENV.featuresVisible || ENV.toBeFeatures.indexOf(tab) == -1)) {
-            return tab;
-          }
-        }
+        this.detailsViewOptions.activeTab = this.getActiveTab(this.detailsViewOptions.tabs, $stateParams.tab);
       },
       afterUpdate: function() {
         $rootScope.$broadcast('refreshProjectList', {model: this.model, update: true});

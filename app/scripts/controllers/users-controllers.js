@@ -152,7 +152,6 @@
         this.selectedLanguage = $translate.use();
         this.detailsViewOptions = {
           title: 'Profile',
-          activeTab: this.getActiveTab(),
           hasGravatar: true,
           joinedDate: 'date_joined',
           aboutFields: [
@@ -183,16 +182,7 @@
             }
           ]
         };
-      },
-
-      getActiveTab: function() {
-        var tabs = [$stateParams.tab, 'eventlog', 'keys'];
-        for (var i = 0; i < tabs.length; i++) {
-          var tab = tabs[i];
-          if (tab && (ENV.featuresVisible || ENV.toBeFeatures.indexOf(tab) == -1)) {
-            return tab;
-          }
-        }
+        this.detailsViewOptions.activeTab = this.getActiveTab(this.detailsViewOptions.tabs, $stateParams.tab);
       },
       getCurrentUser: function() {
         var vm = this;
