@@ -324,8 +324,23 @@
                 }
             } // &.lang
             &.appstore {
-                &:hover, &.active {
-                   background-color: $hoverColor;
+                padding: 0px 8px;
+                padding-top: 13px;
+                span {
+                    border: 2px solid $hoverColor;
+                    border-radius: 7px;
+                    color: white;
+                    padding: 8px;
+                    font-size: 14px;
+                    &:hover {
+                        background-color: $hoverColor;
+                    }
+                    .icon {
+                        padding-right: 5px;
+                    }
+                }
+                &.active > span {
+                    background-color: $hoverColor;
                 }
             }
             &.user {

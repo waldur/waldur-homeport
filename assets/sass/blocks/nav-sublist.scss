@@ -119,6 +119,18 @@
                     left: 5px;
                 } // &:before
             } // &.current
+            &.details {
+                position: relative;
+                color: #fff;
+                &:before {
+                    position: absolute;
+                    @include icon-fa;
+                    content: '\f002';
+                    transform: translate(1.1, 1.1);
+                    color: #fff;
+                    left: 5px;
+                } // &:before
+            } // &.current
         } // > a
         &.manage-item {
             background-color: #eeeded;
