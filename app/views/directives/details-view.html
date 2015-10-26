@@ -82,7 +82,7 @@
                     </div>
                     <ul class="tabs-links tabs-opened" ng-class="{'tabs-opened': openTabs}">
                         <li visible="{{ tab.key }}" ng-class="{'active': options.activeTab === tab.key}"
-                            ng-click="options.activeTab = tab.key"
+                            ng-click="tabChange(tab.key)"
                             ng-repeat="tab in options.tabs">
                             {{ tab.title }} <span ng-if="tab.key != 'delete'"><span ng-show="tab.count !== -1">({{ tab.count }})</span></span>
                         </li>
