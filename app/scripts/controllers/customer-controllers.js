@@ -154,10 +154,8 @@
         this._super();
         this.detailsState = 'organizations.details';
         this.currentUser = usersService.currentUser;
-
         this.detailsViewOptions = {
           title: 'Organization',
-          activeTab: this.getActiveTab(),
           hasLogo: true,
           listState: 'organizations.list',
           aboutFields: [
@@ -207,18 +205,8 @@
             }
           ]
         };
+        this.detailsViewOptions.activeTab = this.getActiveTab(this.detailsViewOptions.tabs, $stateParams.tab);
       },
-
-      getActiveTab: function() {
-        var tabs = [$stateParams.tab, 'eventlog', 'resources', 'projects'];
-        for (var i = 0; i < tabs.length; i++) {
-          var tab = tabs[i];
-          if (tab && (ENV.featuresVisible || ENV.toBeFeatures.indexOf(tab) == -1)) {
-            return tab;
-          }
-        }
-      },
-
       isOwnerOrStaff: function(customer) {
         if (this.currentUser.is_staff) return true;
         for (var i = 0; i < customer.owners.length; i++) {
