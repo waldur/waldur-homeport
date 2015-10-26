@@ -22,7 +22,7 @@
       addProject: function(project) {
         // Connect project with all services of current customer
         var vm = this;
-        var query = {customer_uuid: currentStateService.getCustomerUuid()};
+        var query = {customer: currentStateService.getCustomerUuid()};
         return joinService.getList(query).then(function(services) {
           var private_services = services.filter(function(service) {
             return !service.shared;

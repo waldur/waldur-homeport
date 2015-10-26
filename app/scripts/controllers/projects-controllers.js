@@ -278,7 +278,6 @@
         resourcesService.page = page;
         resourcesService.pageSize = 5;
         vm.projectResources[uuid].page = page;
-        resourcesService.filterByCustomer = false;
         resourcesService.getList(filter).then(function(response) {
           vm.projectResources[uuid].data = response;
           vm.projectResources[uuid].pages = resourcesService.pages;

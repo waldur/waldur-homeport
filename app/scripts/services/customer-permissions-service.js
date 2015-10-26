@@ -14,7 +14,7 @@
           filter = {username: username};
         if (customerUUID) {
           /*jshint camelcase: false */
-          filter.customer_uuid = customerUUID;
+          filter.customer = customerUUID;
           this.filterByCustomer = false;
         } else {
           this.filterByCustomer = true;

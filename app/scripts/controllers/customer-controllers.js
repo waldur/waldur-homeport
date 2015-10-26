@@ -281,7 +281,7 @@
       getResourceCount: function(category, customer_uuid) {
         return servicesService.getResourceTypes(category).then(function(types) {
           return resourcesCountService.resources({
-            customer_uuid: customer_uuid,
+            customer: customer_uuid,
             resource_type: types
           });
         });
@@ -294,7 +294,7 @@
       },
       setProvidersCounter: function() {
         var vm = this;
-        resourcesCountService.services({customer_uuid: vm.model.uuid}).then(function(count) {
+        resourcesCountService.services({customer: vm.model.uuid}).then(function(count) {
           vm.detailsViewOptions.tabs[5].count = count;
         });
       },
