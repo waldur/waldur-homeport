@@ -2,6 +2,7 @@
 
 .nav-list {
     $navListBackgroundColor: #409a3c;
+    $hoverColor: rgba(255, 255, 255, 0.2);
     @include clear-list-inline;
     @include clearfix;
     &.views {
@@ -16,10 +17,6 @@
             }
             > a {
                 color: #1F3305;
-                &:hover {
-                    color: $hover-color;
-                    text-decoration: underline;
-                }
                 &.active {
                     color: #1F3305;
                     background-color: #f7f7f7;
@@ -46,6 +43,9 @@
             position: absolute;
             left: -15px;
             z-index: 1;
+            &:hover, &.active {
+                background-color: $hoverColor;
+            }
             @include bp(xs) {
                 display: none;
             } // xs
@@ -110,11 +110,18 @@
                     position: absolute;
                     border: 5px solid transparent;
                     border-top-color: #fff;
-                    right: 3px;
+                    right: 11px;
                     bottom: 16px;
                 } // &:after
             }
         } // &.dropdown
+        &.user-dropdown {
+            padding-right: 10px;
+            &:hover, &.active {
+                background-color: $hoverColor;
+            }
+
+        }
         &.add-something {
             @include bp(sm) {
                 display: none;
@@ -141,8 +148,12 @@
         } // &.customer-support
         &.customers {
             padding-right: 10px;
+            margin-left: 35px;
             a:after {
                 right: 10px;
+            }
+            &:hover, &.active {
+                background-color: $hoverColor;
             }
             @include bp(md) {
                 padding-left: 0;
@@ -188,55 +199,21 @@
                 @include property(padding-top, 13);
             } // md
             &.active {
-                color: $hover-color;
                 position: relative;
                 &:not(.drop-active):not(.appstore) {
                     span {
-                        border-bottom: 1px solid $hover-color;
+                        border-bottom: 1px solid #fff;
                     }
                 }
                 &.drop-active {
                     &:after {
                         border-top-color: transparent;
-                        border-bottom-color: $hover-color;
+                        border-bottom-color: #fff;
                         bottom: 22px;
                         right: 0px;
                     }
                 }
-                &:hover {
-                    &:after {
-                        border-top-color: transparent;
-                        border-bottom-color: $hover-color;
-                    }
-                }
             } // &.active
-            &:hover {
-                $color: $hover-color;
-                color: $color;
-                &:not(.drop-active) {
-                    span {
-                        border-bottom: 1px solid $color;
-                    }
-                }
-                > span {
-                    color: $color;
-                }
-                .customer-name {
-                    color: $color;
-                }
-                .active-context {
-                    color: $color;
-                }
-                &:after {
-                    border-top-color: $color;
-                }
-            }
-
-            .active-context {
-                &:hover {
-                    text-decoration: underline;
-                }
-            }
             &.support {
                 @include inline-middle;
                 width: 20px;
@@ -248,9 +225,6 @@
                 top: 10px;
                 margin: 0 5px;
                 color: white;
-                &:hover, &.active {
-                    color: $hover-color;
-                } // &:hover, &.active
                 &:before {
                     @include icon-fa;
                     content: '\f128';
@@ -259,6 +233,9 @@
                     top: 6px;
                     left: 8px;
                 } // &:before
+                &:hover, &.active {
+                    background-color: $hoverColor;
+                }
             } // &.support
             &.logo {
                 @include property(width, 50);
@@ -269,7 +246,7 @@
                 background-image: url('/static/images/logo.png');
             } // &.logo
             &.customer-context {
-                @include property(padding-top, 7);
+                @include property(padding-top, 17);
                 span {
                     display: block;
                     line-height: 1;
@@ -300,9 +277,6 @@
                 top: 13px;
                 margin: 0 5px;
                 color: white;
-                &:hover, &.active {
-                    color: $hover-color;
-                } // &:hover, &.active
                 &:before {
                     @include icon-fa;
                     content: '\f128';
@@ -334,17 +308,6 @@
                     } // md
                 } // user-name
             } // &.user-area
-            &.service {
-                &:before {
-                    position: relative;
-                    @include property(top, -1);
-                    @include property(margin-right, 5);
-                    @include inline-middle;
-                    @include icon-fa;
-                    content: '\f0c2';
-                    transform: translate(1.1, 1.1);
-                } // &:before
-            } // &.service
             &.lang {
                 display: inline-block;
                 background-color: #409a3c;
@@ -359,11 +322,26 @@
                 &:after {
                     border-width: 0;
                 }
+                &:hover, &.active {
+                   background-color: $hoverColor;
+                }
             } // &.lang
             &.appstore span {
-                border: 1px solid white;
-                padding: 6px;
+                border: 2px solid $hoverColor;
                 border-radius: 7px;
+                color: white;
+                padding: 8px;
+                &:hover {
+                    background-color: $hoverColor;
+                }
+                .icon {
+                    vertical-align: top;
+                    padding-top: 3px;
+                    padding-right: 5px;
+                }
+            }
+            &.appstore.active > span {
+                background-color: $hoverColor;
             }
             &.user {
                 &:before {
@@ -383,9 +361,11 @@
         } // > a
         &.project-dropdown {
             padding-right: 10px;
-            margin-right: 10px;
             a:after {
                 right: 10px;
+            }
+            &:hover, &.active {
+                background-color: $hoverColor;
             }
             @include bp(xs) {
                 margin-right: 0;

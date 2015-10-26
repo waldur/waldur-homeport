@@ -4,31 +4,21 @@
         <nav class="container">
             <!-- views nav -->
             <ul class="nav-list views">
-                <li class="logo-box" applogo>
-                    <a href="" class="logo"></a>
+                <li class="logo-box" ng-class="{'active': Header.menuItemActive === 'dashboard'}">
+                    <a class="logo" ui-sref="dashboard.index"></a>
                 </li>
                 <li class="mobile-trigger">
                     <a class="mobile-trigger-link icon bars"
                         ng-click="Header.mobileMenu()"></a>
                 </li>
-                <li class="node-conductor">
-                    <h2>NodeConductor</h2>
-                </li>
-                <li visible="dashboard" class="dashboard-menu-item">
-                    <a ui-sref="dashboard.index"
-                       ng-class="{'active': Header.menuItemActive === 'dashboard'}" class="dashboard">
-                        <span translate>Dashboard</span>
-                    </a>
-                </li>
-                <li visible="customers" class="dropdown customers">
-                    <a class="customer-context drop-active" ng-click="Header.menuToggle('customerMenu', $event)"
-                       ng-class="{'active': Header.menuState.customerMenu}">
-                        <span ng-click="Header.goToCurrentOrganization()"
-                              stoppropagation
-                           class="active-context">Active organization</span>
-                        <span class="customer-name">{{ Header.currentCustomer.name }}</span>
+                <li visible="customers" class="dropdown customers" ng-class="{'active': Header.menuState.customerMenu}">
+                    <a class="customer-context drop-active" ng-click="Header.menuToggle('customerMenu', $event)">
+                        <span class="customer-name">Organization</span>
                     </a>
                     <ul class="nav-sublist" ng-show="Header.menuState.customerMenu">
+                        <li>
+                            <a class="current" ng-click="Header.goToCurrentOrganization()">{{ Header.currentCustomer.name }}</a>
+                        </li>
                         <li ng-repeat="customer in Header.customers" ng-if="customer.uuid != Header.currentCustomer.uuid">
                             <a ng-click="Header.setCurrentCustomer(customer)"
                                ng-class="{'current': customer.uuid == Header.currentCustomer.uuid}">{{ customer.name }}</a>
@@ -38,15 +28,14 @@
                         </li>
                     </ul>
                 </li>
-                <li visible="projects" class="dropdown project-dropdown">
-                    <a class="project-context drop-active" ng-click="Header.menuToggle('projectMenu', $event)"
-                       ng-class="{'active': Header.menuState.projectMenu}">
-                        <span ng-click="Header.goToCurrentProject()"
-                              stoppropagation
-                              class="active-context">Project</span>
-                        <span class="customer-name">{{ Header.currentProject.name ? Header.currentProject.name : 'No project' }}</span>
+                <li visible="projects" class="dropdown project-dropdown" ng-class="{'active': Header.menuState.projectMenu}">
+                    <a class="project-context drop-active" ng-click="Header.menuToggle('projectMenu', $event)">
+                        <span class="customer-name">Projects</span>
                     </a>
                     <ul block-ui="project-menu" class="nav-sublist" ng-show="Header.menuState.projectMenu">
+                        <li>
+                            <a class="current" ng-click="Header.goToCurrentProject()">{{ Header.currentProject.name ? Header.currentProject.name : 'No project' }}</a>
+                        </li>
                         <li ng-repeat="project in Header.projects" ng-if="project.uuid != Header.currentProject.uuid">
                             <a ng-click="Header.setCurrentProject(project)"
                                ng-class="{'current': project.uuid == Header.currentProject.uuid}">
@@ -68,29 +57,21 @@
                         </li>
                     </ul>
                 </li>
-                <li visible="resources" class="resources">
-                    <a ui-sref="resources.list"
-                       ng-class="{'active': Header.menuItemActive === 'resources', 'disabled' : !Header.currentProject.name }"
-                       class="resource" >
-                        <span translate>Details</span>
-                    </a>
-                </li>
                 <li visible="resources" class="appstore">
                     <div check-quotas="{{Header.checkQuotas.resources}}"
                          sref="appstore.store"
                          ng-class="{'disabled' : !Header.currentProject.name}"
                          class-link="appstore {{ Header.menuItemActive === 'appstore' ? 'active' : '' }}"
                          tooltip-type="head-nav-appstore">
-                        <span translate>Appstore</span>
+                        <span><b class="icon gear"></b>Appstore</span>
                     </div>
                 </li>
             </ul>
             <!-- /views nav -->
             <!-- context nav -->
             <ul class="nav-list context">
-                <li class="dropdown  user-dropdown">
-                    <a class="user-area drop-active" ng-click="Header.menuToggle('profileMenu', $event)"
-                        ng-class="{'active': Header.menuState.profileMenu}">
+                <li class="dropdown user-dropdown" ng-class="{'active': Header.menuState.profileMenu}">
+                    <a class="user-area drop-active" ng-click="Header.menuToggle('profileMenu', $event)">
                         <span class="avatar">
                             <img gravatar-src="Header.currentUser.email" gravatar-size="100">
                         </span>
@@ -136,7 +117,7 @@
                     </ul>
                 </li>
                 <li visible="support" class="customer-support">
-                    <a ui-sref="support.list" class="support"
+                    <a ui-sref="support.list" class="support" title="Support"
                        ng-class="{'active': Header.menuItemActive === 'support'}"></a>
                 </li>
                 <li class="dropdown" ng-show="Header.LANGUAGE_CHOICES.length>1" ng-click="Header.menuToggle('langMenu', $event)">
@@ -157,7 +138,7 @@
         <nav>
             <!-- views nav -->
             <ul class="nav-list-side">
-                <li visible="dashboard">
+                <li>
                     <a ui-sref="dashboard.index"
                         ng-class="{'active': Header.menuItemActive === 'dashboard'}" class="dashboard">
                         <span>Dashboard</span>
