@@ -895,6 +895,25 @@
             authenticated: authCheck
           },
           auth: true
+        })
+        .state('tos', {
+          url: '/tos/',
+          abstract: true,
+          templateUrl: 'views/partials/base-universal.html',
+        })
+        .state('tos.index', {
+          url: '',
+          views: {
+            'appContent': {
+              templateUrl: 'views/tos/index.html',
+            },
+            'appHeaderOut': {
+              templateUrl: 'views/partials/site-header.html',
+            },
+            'appHeaderIn': {
+              templateUrl: 'views/partials/app-header.html',
+            }
+          }
         });
 
       function authCheck($q, $location, $auth, usersService, ENV) {

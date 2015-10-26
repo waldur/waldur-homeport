@@ -40,4 +40,7 @@
             float: none;
         }
     }
-} // app-title-line
+    &.tos-page {
+        text-align: justify;
+    } // tos-page
+} // white-box
