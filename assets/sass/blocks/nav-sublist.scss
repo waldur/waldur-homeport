@@ -1,11 +1,12 @@
 .nav-sublist {
+    $hoverColor: rgba(255, 255, 255, 0.2);
     z-index: 2000;
     @include clear-list;
     @include property(top, 50);
     @include property(width, 220);
     @include property(margin-left, -90);
     @include property(border-radius, 0 0 4 4);
-    left: 50%;
+    left: 90px;
     position: absolute;
     background-color: #4fb547;
     &.block-ui {
@@ -37,10 +38,7 @@
         } // lg
     } // &.user-area
     > li {
-        padding-top: 1px;
-        margin-top: -1px;
-        padding-bottom: 1px;
-        margin-bottom: -1px;
+        border-bottom: 1px solid #47a340;
         &.divider {
             @include property(height, 1);
             @include property(margin, 5 0);
@@ -50,7 +48,7 @@
             border-radius: 0 0 4px 4px;
         }
         &:hover, &:active {
-            background-color: #409a3c;
+            background-color: $hoverColor;
         } // &:hover, &:active
         &.on-tablet {
             display: none;
@@ -79,21 +77,18 @@
             @include bp(lightmd) {
                 display: block;
             } // lightmd
-
         } // customers
         > a,
         > div > a {
             display: block;
             @include property(font-size, $small-font);
-            @include property(margin, 0 10);
             @include property(padding, 10 5);
-            padding-left: 18px;
+            padding-left: 20px;
             line-height: 1;
             color: #ffffff;
             font-weight: normal;
             text-decoration: none;
             text-overflow: ellipsis;
-            border-bottom: 1px solid #47a340;
             span {
                 &:first-child {
                     text-overflow: ellipsis;
@@ -121,57 +116,21 @@
                     content: '\f05d';
                     transform: translate(1.1, 1.1);
                     color: #fff;
-                    left: 0px;
+                    left: 5px;
                 } // &:before
             } // &.current
-            &.service {
-                padding-left: 20px;
+            &.details {
+                position: relative;
+                color: #fff;
                 &:before {
                     position: absolute;
                     @include icon-fa;
-                    @include property(left, 10);
-                    content: '\f0c2';
+                    content: '\f002';
                     transform: translate(1.1, 1.1);
+                    color: #fff;
+                    left: 5px;
                 } // &:before
-            } // &.service
-            &.project {
-                padding-left: 20px;
-                &:before {
-                    position: absolute;
-                    @include icon-fa;
-                    @include property(left, 10);
-                    content: '\f07c';
-                    transform: translate(1.1, 1.1);
-                } // &:before
-            } // &.project
-            &.resource {
-                &:before {
-                    position: absolute;
-                    @include icon-fa;
-                    @include property(left, 10);
-                    content: '\f233';
-                    transform: translate(1.1, 1.1);
-                } // &:before
-            } // &.resource
-            &.user {
-                padding-left: 20px;
-                &:before {
-                    position: absolute;
-                    @include icon-fa;
-                    @include property(left, 10);
-                    content: '\f007';
-                    transform: translate(1.1, 1.1);
-                } // &:before
-            } // invite-user
-            &.import {
-                &:before {
-                    position: absolute;
-                    @include icon-fa;
-                    @include property(left, 10);
-                    content: '\f0ed';
-                    transform: translate(1.1, 1.1);
-                } // &:before
-            } // import
+            } // &.current
         } // > a
         &.manage-item {
             background-color: #eeeded;

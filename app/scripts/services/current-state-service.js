@@ -142,8 +142,9 @@
       dashboard: ['dashboard.index'],
       resources: ['resources.list'],
       projects: ['projects.list', 'projects.details', 'projects.create', 'projects.add-users'],
+      organizations: ['organizations.list', 'organizations.create', 'organizations.details'],
       services: ['services.list', 'services.create'],
-      users: ['users.list', 'users.details'],
+      users: ['users.list', 'users.details', 'profile.details'],
       support: ['support.list', 'support.create']
     };
 
