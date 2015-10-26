@@ -20,6 +20,8 @@
         float: left;
         @include bp(xs) {
             display: block;
+            float: none;
+            text-align: center;
         } // xs
         @include bp(sm) {
             display: block;
@@ -39,6 +41,8 @@
             display: block;
             margin-bottom: 11px;
             font-size: 12px;
+            float: none;
+            text-align: center;
         } // xs
         @include bp(sm) {
             margin-bottom: 11px;

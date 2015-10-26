@@ -899,7 +899,7 @@
         .state('tos', {
           url: '/tos/',
           abstract: true,
-          templateUrl: 'views/partials/base.html',
+          templateUrl: 'views/partials/base-universal.html',
         })
         .state('tos.index', {
           url: '',
@@ -907,14 +907,13 @@
             'appContent': {
               templateUrl: 'views/tos/index.html',
             },
-            'appHeader': {
+            'appHeaderOut': {
+              templateUrl: 'views/partials/site-header.html',
+            },
+            'appHeaderIn': {
               templateUrl: 'views/partials/app-header.html',
             }
-          },
-          resolve: {
-            authenticated: authCheck
-          },
-          auth: true
+          }
         });
 
       function authCheck($q, $location, $auth, usersService, ENV) {
