@@ -277,6 +277,10 @@
           vm.errors = response.data;
         }
       },
+      editInPlace: function(data, fieldName) {
+        this.model[fieldName] = data;
+        return this.update();
+      },
       activate: function() {
         var vm = this;
         vm.getModel().then(function(response) {

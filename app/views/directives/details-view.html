@@ -48,7 +48,7 @@
                         <span editable-text="controller.model[field.fieldKey]"
                               e-form="rowform"
                               buttons="no"
-                              onbeforesave="controller.update($data, field.fieldKey)"
+                              onbeforesave="controller.editInPlace($data, field.fieldKey)"
                               ng-show="field.isEditable && controller.canEdit"
                               class="{{ field.className }}"
                               title="Click to edit">

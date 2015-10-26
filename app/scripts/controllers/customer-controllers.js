@@ -328,10 +328,10 @@
           ncUtilsFlash.warning('Unable to delete image');
         });
       },
-      update: function(data, fieldName) {
+      editInPlace: function(data, fieldName) {
         var d = $q.defer();
         if (data || fieldName != 'name') {
-          return this._super();
+          return this._super(data, fieldName);
         }
         d.resolve('This field is required.');
         return d.promise;
