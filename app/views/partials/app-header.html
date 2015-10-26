@@ -5,19 +5,20 @@
             <!-- views nav -->
             <ul class="nav-list views">
                 <li class="logo-box" ng-class="{'active': Header.menuItemActive === 'dashboard'}">
-                    <a class="logo" ui-sref="dashboard.index"></a>
+                    <a class="logo" ui-sref="dashboard.index" title="Dashboard"></a>
                 </li>
                 <li class="mobile-trigger">
                     <a class="mobile-trigger-link icon bars"
                         ng-click="Header.mobileMenu()"></a>
                 </li>
-                <li visible="customers" class="dropdown customers" ng-class="{'active': Header.menuState.customerMenu}">
+                <li visible="customers" class="dropdown customers" ng-class="{'active': Header.menuState.customerMenu || Header.menuItemActive === 'organizations'}">
                     <a class="customer-context drop-active" ng-click="Header.menuToggle('customerMenu', $event)">
-                        <span class="customer-name">Organization</span>
+                        <span class="active-context">Organization</span>
+                        <span class="customer-name">{{ Header.currentCustomer.name }}</span>
                     </a>
                     <ul class="nav-sublist" ng-show="Header.menuState.customerMenu">
                         <li>
-                            <a class="current" ng-click="Header.goToCurrentOrganization()">{{ Header.currentCustomer.name }}</a>
+                            <a class="current" ng-click="Header.goToCurrentOrganization()">Details</a>
                         </li>
                         <li ng-repeat="customer in Header.customers" ng-if="customer.uuid != Header.currentCustomer.uuid">
                             <a ng-click="Header.setCurrentCustomer(customer)"
@@ -28,13 +29,14 @@
                         </li>
                     </ul>
                 </li>
-                <li visible="projects" class="dropdown project-dropdown" ng-class="{'active': Header.menuState.projectMenu}">
+                <li visible="projects" class="dropdown project-dropdown" ng-class="{'active': Header.menuState.projectMenu || Header.menuItemActive === 'projects'}">
                     <a class="project-context drop-active" ng-click="Header.menuToggle('projectMenu', $event)">
-                        <span class="customer-name">Projects</span>
+                        <span class="active-context">Project</span>
+                        <span class="customer-name">{{ Header.currentProject.name ? Header.currentProject.name : 'No project' }}</span>
                     </a>
                     <ul block-ui="project-menu" class="nav-sublist" ng-show="Header.menuState.projectMenu">
-                        <li>
-                            <a class="current" ng-click="Header.goToCurrentProject()">{{ Header.currentProject.name ? Header.currentProject.name : 'No project' }}</a>
+                        <li ng-if="Header.currentProject">
+                            <a class="current" ng-click="Header.goToCurrentProject()">Details</a>
                         </li>
                         <li ng-repeat="project in Header.projects" ng-if="project.uuid != Header.currentProject.uuid">
                             <a ng-click="Header.setCurrentProject(project)"
@@ -63,14 +65,14 @@
                          ng-class="{'disabled' : !Header.currentProject.name}"
                          class-link="appstore {{ Header.menuItemActive === 'appstore' ? 'active' : '' }}"
                          tooltip-type="head-nav-appstore">
-                        <span><b class="icon gear"></b>Appstore</span>
+                        Appstore
                     </div>
                 </li>
             </ul>
             <!-- /views nav -->
             <!-- context nav -->
             <ul class="nav-list context">
-                <li class="dropdown user-dropdown" ng-class="{'active': Header.menuState.profileMenu}">
+                <li class="dropdown user-dropdown" ng-class="{'active': Header.menuState.profileMenu || Header.menuItemActive == 'users'}">
                     <a class="user-area drop-active" ng-click="Header.menuToggle('profileMenu', $event)">
                         <span class="avatar">
                             <img gravatar-src="Header.currentUser.email" gravatar-size="100">

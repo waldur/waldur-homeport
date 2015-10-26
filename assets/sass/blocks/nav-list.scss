@@ -200,11 +200,6 @@
             } // md
             &.active {
                 position: relative;
-                &:not(.drop-active):not(.appstore) {
-                    span {
-                        border-bottom: 1px solid #fff;
-                    }
-                }
                 &.drop-active {
                     &:after {
                         border-top-color: transparent;
@@ -246,14 +241,16 @@
                 background-image: url('/static/images/logo.png');
             } // &.logo
             &.customer-context {
-                @include property(padding-top, 17);
+                @include property(padding-top, 11);
                 span {
                     display: block;
                     line-height: 1;
                 } // span
                 .customer-name {
-                    max-width: 140px;
+                    max-width: 200px;
                     height: 18px;
+                    font-size: 14px;
+                    font-weight: bold;
                     @include bp(md) {
                         max-width: 130px;
                     } // md
@@ -326,22 +323,10 @@
                    background-color: $hoverColor;
                 }
             } // &.lang
-            &.appstore span {
-                border: 2px solid $hoverColor;
-                border-radius: 7px;
-                color: white;
-                padding: 8px;
-                &:hover {
-                    background-color: $hoverColor;
+            &.appstore {
+                &:hover, &.active {
+                   background-color: $hoverColor;
                 }
-                .icon {
-                    vertical-align: top;
-                    padding-top: 3px;
-                    padding-right: 5px;
-                }
-            }
-            &.appstore.active > span {
-                background-color: $hoverColor;
             }
             &.user {
                 &:before {
