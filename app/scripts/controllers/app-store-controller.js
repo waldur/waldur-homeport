@@ -502,7 +502,7 @@
             vm.categoryServices[category.name] = [];
             for (var i = 0; i < vm.currentProject.services.length; i++) {
               var service = vm.currentProject.services[i];
-              if (service.state != 'Erred'
+              if (service.state == 'In Sync'
                 && category.services
                 && (category.services.indexOf(service.type) + 1)
               ) {
