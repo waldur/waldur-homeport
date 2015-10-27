@@ -1,6 +1,5 @@
 .app-header {
-    background-color: #50b848;
-    position: relative;
+    background-color: $head-menu-color;
     z-index: 2000;
     width: 100%;
     @include property(height, 50);

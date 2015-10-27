@@ -54,10 +54,10 @@
                         </li>
                     </ul>
                 </li>
-                <li>
+                <li class="resources">
                     <a class="appstore"
                        ng-click="Header.goToCurrentProject()"
-                       ng-class="{'active': Header.menuItemActive === 'projects'}">
+                       ng-class="{'active': Header.menuItemActive === 'projects', 'disabled' : !Header.currentProject.name}">
                         <span><b class="icon zoom"></b>Details</span>
                     </a>
                 </li>
@@ -148,22 +148,36 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
-                <li class="on-tablet customers" stoppropagation ng-click="showOrganizations = !showOrganizations">
+                <li class="on-tablet customers current">
+                    <span>Organization</span>
+                    <a ui-sref="organizations.details({uuid: Header.currentCustomer.uuid})">{{ Header.currentCustomer.name }}</a>
+                </li>
+                <li class="on-tablet customers choose-list" stoppropagation
+                    ng-click="showOrganizations = !showOrganizations"
+                    ng-class="{'choose-list-active': showOrganizations}">
                     <a>Choose organization</a>
                 </li>
-                <li class="on-tablet customers" ng-show="showOrganizations" ng-repeat="customer in Header.customers">
-                    <a ng-click="Header.setCurrentCustomer(customer)"
-                       ng-class="{'current': customer.uuid == Header.currentCustomer.uuid}">{{ customer.name }}</a>
+                <li class="on-tablet customers choose-list-item"
+                    ng-show="showOrganizations && customer.uuid !== Header.currentCustomer.uuid"
+                    ng-repeat="customer in Header.customers">
+                    <a ng-click="Header.setCurrentCustomer(customer)">{{ customer.name }}</a>
                 </li>
                 <li class="on-tablet">
                     <a ui-sref="organizations.list" class="manage">Manage organizations</a>
                 </li>
-                <li class="on-tablet customers" stoppropagation ng-click="showProjects = !showProjects">
+                <li class="on-tablet customers current">
+                    <span>Project</span>
+                    <a ui-sref="projects.details({uuid: Header.currentProject.uuid})">{{ Header.currentProject.name }}</a>
+                </li>
+                <li class="on-tablet customers choose-list" stoppropagation
+                    ng-click="showProjects = !showProjects"
+                    ng-class="{'choose-list-active': showProjects}">
                     <a>Choose project</a>
                 </li>
-                <li class="on-tablet customers" ng-show="showProjects" ng-repeat="project in Header.projects">
-                    <a ng-click="Header.setCurrentProject(project)"
-                       ng-class="{'current': project.uuid == Header.currentProject.uuid}">{{ project.name }}</a>
+                <li class="on-tablet customers choose-list-item"
+                    ng-show="showProjects && project.uuid !== Header.currentProject.uuid"
+                    ng-repeat="project in Header.projects">
+                    <a ng-click="Header.setCurrentProject(project)">{{ project.name }}</a>
                 </li>
                 <li class="on-tablet">
                     <a ui-sref="projects.list" class="manage">Manage projects</a>

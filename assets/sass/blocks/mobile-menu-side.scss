@@ -5,14 +5,61 @@
     overflow-y: scroll;
     position: fixed;
     @include property(top, 50);
-    background-color: #4fb547;
+    background-color: $head-menu-color;
     z-index: 14;
     box-shadow: 3px 0px 4px 0px rgba(0,0,0,0.32);
     .nav-list-side {
         > li {
             > a {
                 color: #ffffff;
+                line-height: 30px;
             }
+        }
+    }
+    .on-tablet {
+        &.customers {
+            position: relative;
+            &.choose-list {
+                &:after {
+                    z-index: 12;
+                    content: '';
+                    display: block;
+                    position: absolute;
+                    border: 5px solid transparent;
+                    border-top-color: #fff;
+                    right: 11px;
+                    bottom: 16px;
+                }
+                &-active {
+                    &:after {
+                        border-top-color: transparent;
+                        border-bottom-color: #fff;
+                        bottom: 23px;
+                    }
+                }
+            }
+            &.choose-list-item {
+                background-color: rgba(255, 255, 255, 0.2);
+            }
+            &.current {
+                a {
+                    font-weight: bold;
+                }
+            }
+            span {
+                position: absolute;
+                font-size: 11px;
+                color: #fff;
+                left: 20px;
+            }
+        }
+    }
+    .user-area {
+        .user-name {
+            border-bottom: 1px dashed #fff;
+        }
+        .avatar {
+            border-bottom-width: 0;
         }
     }
     @include bp(xs) {

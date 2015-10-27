@@ -6,6 +6,8 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     transform: translate(0, 0);
+    position: relative;
+    top: -2px;
     &.plus:before {
         content: '\f067';
     }

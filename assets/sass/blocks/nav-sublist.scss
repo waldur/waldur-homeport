@@ -122,18 +122,21 @@
             &.details {
                 position: relative;
                 color: #fff;
+                padding-left: 34px;
                 &:before {
                     position: absolute;
                     @include icon-fa;
                     content: '\f002';
                     transform: translate(1.1, 1.1);
                     color: #fff;
-                    left: 5px;
+                    left: 20px;
+                    font-size: 12px;
                 } // &:before
             } // &.current
         } // > a
         &.manage-item {
             background-color: #eeeded;
+            border-bottom-color: #ccc;
             a {
                 color: #4fb547;
                 border-width: 0;

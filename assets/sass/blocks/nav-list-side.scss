@@ -42,7 +42,7 @@
                         content: '';
                         display: block;
                         position: absolute;
-                        background-color: #76ae2c;
+                        background-color: $head-menu-color;
                         width: 12px;
                         height: 12px;
                         bottom: -6px;
@@ -135,19 +135,4 @@
             } // &.mobile-trigger-link
         } // > a
     } // > li
-    .on-tablet {
-        &.customers {
-            background-color: #409a3c;
-            a {
-                &.current {
-                    &:before {
-                        font-family: FontAwesome;
-                        content: "\f05d";
-                        position: absolute;
-                        left: 3px;
-                    }
-                }
-            }
-        }
-    }
 } // nav-list
