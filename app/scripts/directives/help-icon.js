@@ -18,20 +18,24 @@
 
         trigger.css('position', 'relative');
 
-        trigger.bind('mouseenter', function() {
-          text.addClass('active');
-          text.css({
-            'position': 'absolute',
-            'top': -(text[0].offsetHeight + 4) + 'px',
-            'left': '50%',
-            'margin-left': -text[0].offsetWidth/2 + 'px'
+        var eventName = 'touchend';
+        if (!('ontouchstart' in document.documentElement) && !window.navigator.msPointerEnabled) {
+          eventName = 'click';
+          trigger.bind('mouseenter', function() {
+            text.addClass('active');
+            text.css({
+              'position': 'absolute',
+              'top': -(text[0].offsetHeight + 4) + 'px',
+              'left': '50%',
+              'margin-left': -text[0].offsetWidth/2 + 'px'
+            });
           });
-        });
-        trigger.bind('mouseleave', function() {
-          text.removeClass('active');
-        });
+          trigger.bind('mouseleave', function() {
+            text.removeClass('active');
+          });
+        }
 
-        trigger.bind('click', function(event){
+        trigger.bind(eventName, function(event){
           if (!text.hasClass('active')) {
             text.addClass('active');
             text.css({
@@ -45,7 +49,8 @@
           }
           event.stopPropagation();
         });
-        $document.bind('click', function() {
+
+        $document.bind(eventName, function() {
           text.removeClass('active');
         })
 
