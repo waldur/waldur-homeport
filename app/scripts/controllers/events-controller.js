@@ -219,9 +219,11 @@
         for (var i = 0; i < rows.length; i++) {
           var row = rows[i];
           var date = moment(row.month, 'MM').format('MMMM') + ' ' + row.year;
+          var currentDate = new Date();
           if (!results.hasOwnProperty(date)) {
             results[date] = {
               total: 0,
+              isCurrent: (currentDate.getFullYear() === row.year && row.month == currentDate.getMonth() + 1),
               projects: [],
               services: [],
               resources: []
@@ -248,7 +250,8 @@
             total: row.total,
             projects: row.projects,
             services: row.services,
-            resources: row.resources
+            resources: row.resources,
+            isCurrent: row.isCurrent
           });
         }
         if (table.length > 0) {
