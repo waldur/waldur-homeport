@@ -108,7 +108,8 @@
           },
           resolve: {
             authenticated: authCheck
-          }
+          },
+          noInitialData: true
         })
 
         .state('support', {
@@ -879,7 +880,8 @@
           resolve: {
             authenticated: authCheck
           },
-          auth: true
+          auth: true,
+          noInitialData: true
         })
         .state('help.details', {
           url: ':name/',
@@ -894,7 +896,8 @@
           resolve: {
             authenticated: authCheck
           },
-          auth: true
+          auth: true,
+          noInitialData: true
         })
         .state('tos', {
           url: '/tos/',
@@ -927,7 +930,7 @@
             || ENV.toBeFeatures.indexOf(vm.url.source.replace(/\//g, '')) !== -1)) {
             $location.path('/error/404/');
           } else {
-            if (vm.self.name !== initialDataState) {
+            if (!vm.self.noInitialData) {
               usersService.getCurrentUser().then(function(response) {
                 if (!response.email) {
                   $location.path(initialDataStatePath);
