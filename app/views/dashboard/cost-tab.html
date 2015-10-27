@@ -47,7 +47,7 @@
                 </ul>
                 <div class="total-cost">
                     <span class="table-alert"></span>
-                    <span class="cost">Total cost {{ row.total | defaultCurrency }}</span>
+                    <span class="cost">{{ row.isCurrent ? 'Projected' : 'Total' }} cost {{ row.total | defaultCurrency }}</span>
                     <div class="icon" ng-class="{'opened-icon': row.selected}"></div>
                 </div>
                 <div class="clear"></div>
