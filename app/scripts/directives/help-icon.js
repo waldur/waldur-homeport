@@ -18,42 +18,26 @@
 
         trigger.css('position', 'relative');
 
-        var eventName = 'touchend';
-        if (!('ontouchstart' in document.documentElement) && !window.navigator.msPointerEnabled) {
-          eventName = 'click';
-          trigger.bind('mouseenter', function() {
-            text.addClass('active');
-            text.css({
-              'position': 'absolute',
-              'top': -(text[0].offsetHeight + 4) + 'px',
-              'left': '50%',
-              'margin-left': -text[0].offsetWidth/2 + 'px'
-            });
+        function show(event) {
+          text.addClass('active');
+          text.css({
+            'position': 'absolute',
+            'top': -(text[0].offsetHeight + 4) + 'px',
+            'left': '50%',
+            'margin-left': -text[0].offsetWidth/2 + 'px'
           });
-          trigger.bind('mouseleave', function() {
-            text.removeClass('active');
-          });
+          event.stopPropagation();
         }
 
-        trigger.bind(eventName, function(event){
-          if (!text.hasClass('active')) {
-            text.addClass('active');
-            text.css({
-              'position': 'absolute',
-              'top': -(text[0].offsetHeight + 4) + 'px',
-              'left': '50%',
-              'margin-left': -text[0].offsetWidth/2 + 'px'
-            });
-          } else {
-            text.removeClass('active');
-          }
-          event.stopPropagation();
-        });
-
-        $document.bind(eventName, function() {
+        function hide() {
           text.removeClass('active');
-        })
+        }
 
+        trigger.bind('mouseenter', show);
+        trigger.bind('mouseleave', hide);
+
+        trigger.bind('focus', show);
+        trigger.bind('blur', hide);
       }
     };
   }
