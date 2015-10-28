@@ -792,6 +792,14 @@
   .tooltip-text {
     padding-right: 20px;
   }
+  &.color-state-tooltip {
+    width: 150px;
+    top: inherit;
+    right: inherit;
+    margin-left: -34px;
+    margin-top: 12px;
+    text-align: left;
+  }
 }
 .tooltip-relative {
   position: relative;

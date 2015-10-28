@@ -111,6 +111,7 @@
                 <div ng-repeat="fieldHead in entityOptions.list" class="additional-cell {{ fieldHead.className }}"
                      ng-class="{ 'display-for-mobile' : fieldHead.showForMobile, 'status': fieldHead.type == 'statusCircle' }">
                     <a class="list-sort">{{ fieldHead.name }}</a>
+                    <div class="state-help-tooltip" ng-if="fieldHead.type == 'colorState'" ng-include='colorSateHelpView'></div>
                 </div>
                 <div class="actions" ng-if="!entityOptions.entityData.hideActionButtons"></div>
             </li>
@@ -133,6 +134,11 @@
                         <div ng-switch-when="statusCircle"
                              class="status-circle"
                              ng-class="{'green': entity[field.propertyName]==field.onlineStatus}"
+                             title="{{ entity[field.propertyName] }}"></div>
+
+                        <div ng-switch-when="colorState"
+                             class="status-circle"
+                             ng-class="field.getClass(entity[field.propertyName])"
                              title="{{ entity[field.propertyName] }}"></div>
 
                         <span ng-switch-when="avatar" class="avatar">

@@ -118,6 +118,18 @@ angular.module('ncsaas')
       'import.import':   'resource'
     },
 
-    resourcesTimerInterval: 7, // seconds
+    resourcesTimerInterval: 700, // seconds
+
+    resourceStateColorClasses: {
+      'Online': 'online',
+      'Offline': 'offline',
+      'Erred': 'erred',
+      'Starting Scheduled': 'starting',
+      'Stopping Scheduled': 'stopping',
+      'Restarting Scheduled': 'restarting',
+      'Starting': 'starting',
+      'Stopping': 'stopping',
+      'Restarting': 'restarting'
+    },
 
   });

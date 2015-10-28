@@ -1,0 +1,17 @@
+<div>
+    <div class="help-icon color-state-help" ng-click="helpTooltip = !helpTooltip"></div>
+    <div class="tooltip color-state-tooltip" ng-show="helpTooltip">
+        <div class="triangle-before"></div>
+        <div class="triangle-after"></div>
+        <div class="tooltip-title">
+            State colors
+            <div class="close" ng-click="helpTooltip = false"></div>
+            <div class="clear"></div>
+        </div>
+        <div class="tooltip-text">
+            <div ng-repeat="(name, class) in resourceStateColorClasses">
+                <div class="status-circle" ng-class="class"></div> {{ name }}
+            </div>
+        </div>
+    </div>
+</div>

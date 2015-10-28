@@ -20,8 +20,20 @@
     } // online
     &.offline,
     &.gray {
-        background-color: #e74c3c;
+        background-color: #cccaca;
     } // offline
+    &.erred {
+        background-color: #990000;
+    }
+    &.starting {
+        background-color: #aae2aa;
+    }
+    &.stopping {
+        background-color: #e2e2e2;
+    }
+    &.restarting {
+        background-color: #72a1ff;
+    }
     &.resource {
         display: none;
         position: relative;

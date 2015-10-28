@@ -25,7 +25,7 @@
         padding: 5px 0;
 
         .resource-name {
-            width: 270px;
+            width: 250px;
             @include bp(xs) {
                 display: none !important;
             } // xs
@@ -41,6 +41,9 @@
             @include bp(sm) {
                 display: none !important;
             } // sm
+        }
+        .state-help-tooltip {
+            display: inline-block;
         }
     } // &.list-header
     &.dash {
@@ -242,13 +245,17 @@
                 width: 20px;
             }
             &.visual-status {
+                width: 65px;
+                text-align: center;
                 @include bp(xs) {
                     display: inline-block;
-                    padding-right: 0px;
+                    padding-right: 0;
+                    text-align: left;
                 } // xs
                 @include bp(sm) {
                     display: inline-block;
-                    padding-right: 0px;
+                    padding-right: 0;
+                    text-align: left;
                 } // sm
             }
             &.message {
@@ -273,7 +280,7 @@
                 } // sm
             }
             &.resource-name {
-                width: 275px;
+                width: 250px;
                 @include bp(xs) {
                     width: 100%;
                     display: block;
