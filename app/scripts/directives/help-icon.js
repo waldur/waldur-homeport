@@ -18,7 +18,7 @@
 
         trigger.css('position', 'relative');
 
-        trigger.bind('mouseenter', function() {
+        function show(event) {
           text.addClass('active');
           text.css({
             'position': 'absolute',
@@ -26,29 +26,18 @@
             'left': '50%',
             'margin-left': -text[0].offsetWidth/2 + 'px'
           });
-        });
-        trigger.bind('mouseleave', function() {
-          text.removeClass('active');
-        });
-
-        trigger.bind('click', function(event){
-          if (!text.hasClass('active')) {
-            text.addClass('active');
-            text.css({
-              'position': 'absolute',
-              'top': -(text[0].offsetHeight + 4) + 'px',
-              'left': '50%',
-              'margin-left': -text[0].offsetWidth/2 + 'px'
-            });
-          } else {
-            text.removeClass('active');
-          }
           event.stopPropagation();
-        });
-        $document.bind('click', function() {
-          text.removeClass('active');
-        })
+        }
 
+        function hide() {
+          text.removeClass('active');
+        }
+
+        trigger.bind('mouseenter', show);
+        trigger.bind('mouseleave', hide);
+
+        trigger.bind('focus', show);
+        trigger.bind('blur', hide);
       }
     };
   }
