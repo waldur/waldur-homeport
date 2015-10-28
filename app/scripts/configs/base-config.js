@@ -99,6 +99,10 @@ angular.module('ncsaas')
     },
     featuresVisible: false,
 
+    nonChargeableAppStoreOptions: [
+      'security_groups'
+    ],
+
     projectServiceLinkEndpoints: {
       Oracle: 'oracle-service-project-link',
       OpenStack: 'openstack-service-project-link',

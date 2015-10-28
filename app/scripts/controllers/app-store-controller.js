@@ -353,6 +353,9 @@
         if (name == 'flavor') {
           this.setSize();
         }
+        if (ENV.nonChargeableAppStoreOptions.indexOf(name) !== -1) {
+          return;
+        }
         if (vm.defaultPriceListItems.length) {
           vm.setPriceItem(name, choice);
         } else {
