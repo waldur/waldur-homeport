@@ -76,8 +76,7 @@
                             <span ng-bind-html="::alert.html_message"></span>
                         </div>
                         <div class="right-p">
-                            <span class="date" am-time-ago="alert.created"></span>
-                            <span class="time"></span>
+                            <span class="date" title="{{ ::alert.created | date:'medium' }}" am-time-ago="alert.created"></span>
                         </div>
                         <div class="clear"></div>
                     </li>
@@ -100,7 +99,7 @@
                             <span><event-format event="event"/></span>
                         </div>
                         <div class="right-p">
-                            <span class="date" am-time-ago="event['@timestamp']"></span>
+                            <span class="date" title="{{ ::event['@timestamp'] | date:'medium' }}" am-time-ago="event['@timestamp']"></span>
                         </div>
                         <div class="clear"></div>
                     </li>

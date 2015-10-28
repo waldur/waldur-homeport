@@ -210,9 +210,6 @@
             },
             'costTab@dashboard.index': {
               templateUrl: 'views/dashboard/cost-tab.html',
-            },
-            'eventTypes@dashboard.index': {
-              templateUrl: 'views/events/event-types.html',
             }
           },
           resolve: {
@@ -299,9 +296,6 @@
             'tabUsers@projects.details' : {
               templateUrl: 'views/project/tab-users.html',
             },
-            'eventTypes@projects.details' : {
-              templateUrl: 'views/events/event-types.html',
-            },
             'tabProviders@projects.details' : {
               templateUrl: 'views/resource/tab-providers.html',
             },
@@ -372,9 +366,6 @@
             },
             'tabKeys@profile.details': {
               templateUrl: 'views/user/tab-keys.html',
-            },
-            'eventTypes@profile.details' : {
-              templateUrl: 'views/events/event-types.html',
             },
             'detailsTemplate@profile.details' : {
               templateUrl: 'views/user/details-template.html',
@@ -552,9 +543,6 @@
             'tabKeys@users.details': {
               templateUrl: 'views/user/tab-keys.html',
             },
-            'eventTypes@users.details' : {
-              templateUrl: 'views/events/event-types.html',
-            },
             'detailsTemplate@users.details' : {
               templateUrl: 'views/user/details-template.html',
             },
@@ -600,9 +588,6 @@
             },
             'tabUsers@resources.list' : {
               templateUrl: 'views/project/tab-users.html',
-            },
-            'eventTypes@resources.list' : {
-              templateUrl: 'views/events/event-types.html',
             },
             'tabApplications@resources.list' : {
               templateUrl: 'views/resource/tab-applications.html',

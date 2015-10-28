@@ -164,7 +164,7 @@
                         <a ng-switch-when="link" ng-if="!field.link" stoppropagation>
                             {{ entity[field.propertyName] }}
                         </a>
-                        <span ng-switch-when="date" am-time-ago="entity[field.propertyName]"></span>
+                        <span title="{{ ::entity[field.propertyName] | date:'medium' }}" ng-switch-when="date" am-time-ago="entity[field.propertyName]"></span>
                         <span ng-switch-when="dateCreated">{{ entity[field.propertyName] | date:'medium' }}</span>
 
                         <span ng-switch-when="listInField" ng-repeat="fieldListItem in entity[field.propertyName]">
