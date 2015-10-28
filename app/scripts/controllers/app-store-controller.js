@@ -335,18 +335,6 @@
         var vm = this;
         this.instance[name] = choice.value;
         this.instance[name + '_item'] = choice.item;
-        if (name == 'ssh_public_key') {
-          return;
-        }
-        if (name == 'region') {
-          return;
-        }
-        if (name == 'visibility_level') {
-          return;
-        }
-        if (name == 'group') {
-          return;
-        }
         if (name == 'image') {
           this.updateFlavors();
         }
