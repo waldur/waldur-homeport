@@ -99,16 +99,15 @@ angular.module('ncsaas')
     },
     featuresVisible: false,
 
-    projectServiceLinkEndpoints: {
-      Oracle: 'oracle-service-project-link',
-      OpenStack: 'openstack-service-project-link',
-      IaaS: 'project-cloud-memberships',
-      GitLab: 'gitlab-service-project-link',
-      DigitalOcean: 'digitalocean-service-project-link',
-      Amazon: 'aws-service-project-link'
-    },
+    nonChargeableAppStoreOptions: [
+      'ssh_public_key',
+      'region',
+      'visibility_level',
+      'group',
+      'security_groups'
+    ],
 
-    requestTimeout: 1000 * 10,
+    requestTimeout: 1000 * 20,
     countsCacheTime: 60, // seconds
     enablePurchaseCostDisplay: true,
     entityCreateLink: {
