@@ -15,6 +15,7 @@
       'premiumSupportContractsService',
       'resourcesService',
       'ncUtilsFlash',
+      'projectsService',
       AppStoreController]);
 
   function AppStoreController(
@@ -31,7 +32,8 @@
     premiumSupportPlansService,
     premiumSupportContractsService,
     resourcesService,
-    ncUtilsFlash) {
+    ncUtilsFlash,
+    projectsService) {
     var controllerScope = this;
     var Controller = baseControllerAddClass.extend({
       UNIQUE_FIELDS: {
@@ -603,6 +605,10 @@
           instance.security_groups = [{url: this.instance.security_groups}];
         }
         return instance.$save();
+      },
+      afterSave: function() {
+        this._super();
+        projectsService.clearAllCacheForCurrentEndpoint();
       },
       onError: function() {
         var message = '';
