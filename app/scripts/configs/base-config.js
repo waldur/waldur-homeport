@@ -112,7 +112,7 @@ angular.module('ncsaas')
       Amazon: 'aws-service-project-link'
     },
 
-    requestTimeout: 1000 * 10,
+    requestTimeout: 1000 * 20,
     countsCacheTime: 60, // seconds
     enablePurchaseCostDisplay: true,
     entityCreateLink: {
