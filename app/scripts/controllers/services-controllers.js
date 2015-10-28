@@ -9,7 +9,6 @@
       'currentStateService',
       'usersService',
       'joinService',
-      'ENV',
       baseServiceListController]);
 
   // need for service tab
@@ -19,8 +18,7 @@
     customerPermissionsService,
     currentStateService,
     usersService,
-    joinService,
-    ENV
+    joinService
     ) {
     var ControllerListClass = baseControllerListClass.extend({
       customerHasProjects: true,
@@ -32,7 +30,7 @@
         this.checkProjects();
         this.actionButtonsListItems = [
           {
-            title: 'Remove',
+            title: 'Delete',
             clickFunction: this.remove.bind(this.controllerScope),
 
             isDisabled: function(service) {
@@ -41,52 +39,17 @@
 
             tooltip: function(service) {
               if (service.shared) {
-                return 'You cannot remove shared provider';
+                return 'You cannot delete shared provider';
               }
               if (!this.canUserManageService) {
-                return 'Only customer owner or staff can remove provider';
+                return 'Only customer owner or staff can delete provider';
               }
               if (service.resources_count > 0) {
-               return 'Provider has resources. Please remove them first';
+               return 'Provider has resources. Please delete them first';
               }
             }.bind(this.controllerScope),
           }
         ];
-        var vm = this;
-        if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('resources') == -1) {
-          currentStateService.isQuotaExceeded('resource').then(function(response) {
-            if (!response) {
-              vm.actionButtonsListItems.push({
-                title: 'Create resource',
-                state: 'appstore.store'
-              });
-            }
-          });
-        }
-        if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('import') == -1) {
-
-          currentStateService.isQuotaExceeded('resource').then(function(response) {
-            if (!response) {
-              vm.actionButtonsListItems.push({
-                title: 'Import resource',
-                state: 'import.import',
-
-                isDisabled: function(service) {
-                  return service.shared || !vm.customerHasProjects;
-                }.bind(vm.controllerScope),
-
-                tooltip: function(service) {
-                  if (service.shared) {
-                    return 'You cannot import resources from shared provider';
-                  }
-                  if (!this.customerHasProjects) {
-                    return 'Can not import resources until project is created';
-                  }
-                }.bind(vm.controllerScope),
-              });
-            }
-          });
-        }
         this.entityOptions = {
           entityData: {
             noDataText: 'No providers yet.',
