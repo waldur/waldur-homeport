@@ -488,6 +488,7 @@
         vm.loadingProviders = true;
         var myBlockUI = blockUI.instances.get('store-content');
         myBlockUI.start();
+        var safeStates = ['Sync Scheduled', 'Syncing', 'In Sync'];
         currentStateService.getProject().then(function(response) {
           vm.currentProject = response;
           for (var j = 0; j < categories.length; j++) {
@@ -495,7 +496,7 @@
             vm.categoryServices[category.name] = [];
             for (var i = 0; i < vm.currentProject.services.length; i++) {
               var service = vm.currentProject.services[i];
-              if (service.state != 'Erred'
+              if (safeStates.indexOf(service.state) != -1
                 && category.services
                 && (category.services.indexOf(service.type) + 1)
               ) {

@@ -103,6 +103,13 @@
               showForMobile: true
             },
             {
+              type: ENTITYLISTFIELDTYPES.statusCircle,
+              propertyName: 'state',
+              onlineStatus: 'In Sync',
+              className: 'visual-status',
+              showForMobile: true,
+            },
+            {
               name: 'Type',
               propertyName: 'service_type',
               type: ENTITYLISTFIELDTYPES.noType
