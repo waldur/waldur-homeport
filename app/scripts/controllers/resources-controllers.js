@@ -10,6 +10,7 @@
     'resourcesService',
     'servicesService',
     'currentStateService',
+    'projectsService',
     baseResourceListController
     ]);
 
@@ -21,7 +22,8 @@
     ENTITYLISTFIELDTYPES,
     resourcesService,
     servicesService,
-    currentStateService) {
+    currentStateService,
+    projectsService) {
     var ControllerListClass = baseControllerListClass.extend({
       init: function() {
         this.service = resourcesService;
@@ -239,6 +241,10 @@
           vm.afterInstanceRemove.bind(vm, resource),
           vm.handleActionException.bind(vm)
         );
+      },
+      afterInstanceRemove: function(resource) {
+        this._super(resource);
+        projectsService.clearAllCacheForCurrentEndpoint();
       },
       isOperationAvailable:function(operation, resource) {
         var availableOperations = this.service.getAvailableOperations(resource);
