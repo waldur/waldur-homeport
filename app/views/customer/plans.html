@@ -18,7 +18,7 @@
                                 <span class="plan-name">{{ plan.name }}</span>
                                 <span class="plan-price">${{ plan.price }} / mo.</span>
                             </th>
-                            <tr ng-repeat="quota in plan.quotas">
+                            <tr ng-repeat="quota in plan.quotas" visible="{{ PlanList.getPrettyQuotaName(quota.name) }}">
                                 <td>{{ quota.value }} {{ PlanList.getPrettyQuotaName(quota.name) }}</td>
                             </tr>
                         </table>

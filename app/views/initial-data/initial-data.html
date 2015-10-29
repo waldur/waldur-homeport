@@ -32,7 +32,7 @@
                 <span class="plan-name">Free plan</span>
                 <div class="plan-item">
                     <table>
-                        <tr ng-repeat="quota in InitialData.agreement.quotas">
+                        <tr ng-repeat="quota in InitialData.agreement.quotas" visible="{{ InitialData.getPrettyQuotaName(quota.name, quota.value) }}">
                             <td>{{ quota.value }} {{ InitialData.getPrettyQuotaName(quota.name, quota.value) }}</td>
                         </tr>
                     </table>
