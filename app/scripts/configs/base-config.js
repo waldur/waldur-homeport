@@ -118,7 +118,7 @@ angular.module('ncsaas')
       'import.import':   'resource'
     },
 
-    resourcesTimerInterval: 700, // seconds
+    resourcesTimerInterval: 7, // seconds
 
     resourceStateColorClasses: {
       'Online': 'online',
