@@ -92,17 +92,20 @@
               className: 'resource-name'
             },
             {
-              type: ENTITYLISTFIELDTYPES.statusCircle,
+              name: 'Provider',
+              propertyName: 'service_name',
+              type: ENTITYLISTFIELDTYPES.noType
+            },
+            {
+              name: 'State',
+              type: ENTITYLISTFIELDTYPES.colorState,
               propertyName: 'state',
               onlineStatus: ENV.resourceOnlineStatus,
               className: 'visual-status',
               showForMobile: true,
-            },
-            {
-              name: 'State',
-              propertyName: 'state',
-              type: ENTITYLISTFIELDTYPES.noType,
-              className: 'status-name'
+              getClass: function(state) {
+                return ENV.resourceStateColorClasses[state];
+              }
             },
             {
               name: 'Access',

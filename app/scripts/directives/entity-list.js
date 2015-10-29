@@ -3,9 +3,9 @@
 (function() {
 
   angular.module('ncsaas')
-    .directive('entitylist', [entityList]);
+    .directive('entitylist', ['ENV', entityList]);
 
-  function entityList() {
+  function entityList(ENV) {
     var directiveViewPath = 'views/directives/entity-list/',
       defaultView = directiveViewPath + 'entity-list.html';
     return {
@@ -23,6 +23,8 @@
         scope.contentUrl = scope.entityViewType
           ? directiveViewPath + 'entity-list-' + scope.entityViewType + '.html'
           : defaultView;
+        scope.colorSateHelpView = directiveViewPath + 'status-color-help.html';
+        scope.resourceStateColorClasses = ENV.resourceStateColorClasses;
       }
     };
   }
@@ -46,6 +48,7 @@
       showForMobile: true,
       statusCircle: 'statusCircle',
       subtitle: true,
-      html: 'html'
+      html: 'html',
+      colorState: 'colorState'
     })
 })();
