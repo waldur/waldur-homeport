@@ -36,7 +36,7 @@
                             <div class="appstore-template {{ service.type.toLowerCase() }}"
                                  ng-repeat="service in AppStore.categoryServices[AppStore.selectedCategory.name]"
                                  ng-click="AppStore.setService(service)"
-                                 ng-class="{'state': AppStore.selectedService == service}">
+                                 ng-class="{'state': AppStore.selectedService == service, 'disabled': !service.enabled}">
                                 <div class="icon">
                                     <img ng-src="/static/images/appstore/icon-{{ service.type.toLowerCase() }}.png" alt="">
                                 </div>
