@@ -114,6 +114,8 @@
                     <div class="state-help-tooltip" ng-if="fieldHead.type == 'colorState'" ng-include='colorSateHelpView'></div>
                 </div>
                 <div class="actions" ng-if="!entityOptions.entityData.hideActionButtons"></div>
+
+                <div ng-if="::entityList.expandableOptions" class="expandable-indicator"></div>
             </li>
             <li ng-repeat="entity in entityList.list"
                 ng-show="entity.uuid != entityOptions.excludeItem || entity.expandItemOpen">
@@ -223,6 +225,8 @@
                                 ng-show="!entityList.showgroup"
                                 button-model="entity"></action-button>
                     </div>
+
+                    <div ng-if="::entityList.expandableOptions" class="expandable-indicator"></div>
                 </div>
 
                 <expandableitem ng-if="entityList.expandableOptions"

@@ -22,3 +22,19 @@
     cursor: pointer;
   }
 }
+
+.expandable-indicator {
+  width: 10px;
+}
+
+.list-item.list > .expandable-indicator {
+    position: relative;
+    &:after {
+        content: "";
+        display: block;
+        position: absolute;
+        border: 5px solid transparent;
+        border-top-color: #50b848;
+        right: 11px;
+    }
+}
