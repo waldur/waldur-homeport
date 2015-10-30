@@ -454,12 +454,6 @@
               count: 0
             },
             {
-              title: 'Providers',
-              key: 'providers',
-              viewName: 'tabProviders',
-              count: 0
-            },
-            {
               title: 'Support',
               key: 'premiumSupport',
               viewName: 'tabPremiumSupport',
