@@ -10,7 +10,7 @@
                         </div>
                         <div class="appstore-templates">
                             <!-- category -->
-                            <div class="appstore-template"
+                            <div class="appstore-template appstore-category"
                                  ng-repeat="category in AppStore.categories"
                                  ng-click="AppStore.setCategory(category)"
                                  ng-class="{'state': AppStore.selectedCategory == category}">
@@ -36,7 +36,8 @@
                             <div class="appstore-template {{ service.type.toLowerCase() }}"
                                  ng-repeat="service in AppStore.categoryServices[AppStore.selectedCategory.name]"
                                  ng-click="AppStore.setService(service)"
-                                 ng-class="{'state': AppStore.selectedService == service}">
+                                 ng-class="{'state': AppStore.selectedService == service,
+                                  'provider': AppStore.selectedCategory.type === 'provider'}">
                                 <div class="icon">
                                     <img ng-src="/static/images/appstore/icon-{{ service.type.toLowerCase() }}.png" alt="">
                                 </div>
@@ -46,15 +47,16 @@
                         </div>
                         <div class="appstore-templates" ng-if="AppStore.selectedCategory.type == 'package'">
                             <!-- category -->
-                            <div class="appstore-template"
+                            <div class="appstore-template appstore-package"
                                  ng-repeat="package in AppStore.selectedCategory.packages"
                                  ng-click="AppStore.selectSupportPackage(package)"
                                  ng-class="{'state': AppStore.selectedPackage == package}">
-                                <h3 class="ng-binding">{{ package.name }}</h3>
-                                <span>
-                                    {{ package.type }}
-                                </span>
-                                <p>{{ package.description }}</p>
+                                <div class="appstore-package-row">
+                                    <div class="appstore-package-cell">{{ package.name }}</div>
+                                </div>
+                                <div class="appstore-package-row">
+                                    <div class="appstore-package-cell">{{ package.description }}</div>
+                                </div>
                             </div>
                             <!-- /category -->
                         </div>
