@@ -228,6 +228,13 @@
           }
 
           var choices = validChoices[name] || options.choices;
+          if (name === 'image') {
+            for (var i = 0; i < choices.length; i++) {
+             choices[i].display_name = choices[i].item.distribution
+               ? choices[i].item.distribution + " " + choices[i].display_name
+               : choices[i].display_name;
+            }
+          }
           if (name == 'security_groups') {
             choices = validChoices.securitygroup;
           }
