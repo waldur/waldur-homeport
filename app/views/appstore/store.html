@@ -205,11 +205,10 @@
                                                 <div ng-if="::!choice.icon" class="icon {{ ::field.icon }}"></div>
                                                 <div ng-if="::choice.icon" class="icon"><img ng-src="/static/images/appstore/icon-{{ ::choice.icon }}.png"></div>
 
-                                                <div ng-switch="::field.name" class="description-{{::field.name}}">
-                                                    <div ng-switch-when="image">
-                                                        <p>{{ ::choice.item.distribution }} {{ ::choice.display_name }}</p>
+                                                <div class="description-{{::field.name}}">
+                                                    <div>
+                                                        <p>{{ choice.display_name }}</p>
                                                     </div>
-                                                    <b ng-switch-default>{{ choice.display_name }}</b>
                                                 </div>
                                             </div>
                                         </div>
