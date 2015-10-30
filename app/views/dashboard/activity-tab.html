@@ -5,6 +5,7 @@
             <div ng-click="DashboardController.selectProject(project)" class="graph-head"
                  ng-class="{'active': project.selected}">
                 <h4 ng-class="{'current': project.selected}">
+                    <expandable-indicator open="project.selected"></expandable-indicator>
                     <a stoppropagation ui-sref="projects.details({uuid: project.uuid})">{{ project.name }}</a>
                     <div class="support-buttons" visible="premiumSupport">
                         <a stoppropagation class="button-support"

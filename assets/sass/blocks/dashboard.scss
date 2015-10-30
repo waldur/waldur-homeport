@@ -83,13 +83,16 @@
   .table-block {
     margin-bottom: 0;
     .title {
-      padding: 17px 16px 10px;
+      padding: 17px 24px 10px 10px;
       border-bottom: 1px solid #ebebeb;
-      &:hover {
+      &:hover, &.active {
         background-color: $expandable-hover;
       }
-      &.active {
-        background-color: $expandable-hover;
+      position: relative;
+      .expandable-indicator {
+        position: absolute;
+        right: 9px;
+        top: 20px;
       }
       .sort-list {
         float: left;
@@ -104,7 +107,7 @@
             width: 7px;
             height: 9px;
             float: left;
-            margin-top: 7px;
+            margin-top: 9px;
             margin-right: 6px;
             margin-left: 6px;
           }
@@ -156,26 +159,6 @@
           }
           &.cost {
             font-weight: bold;
-          }
-        }
-        .icon {
-          &:before {
-            position: absolute;
-            @include icon-fa;
-            content: '\f138';
-            transform: translate(1.1, 1.1);
-            color: $dashboard-green;
-            right: 0px;
-          }
-          width: 14px;
-          height: 14px;
-          float: right;
-          margin-top: 4px;
-          margin-left: 25px;
-          &.opened-icon {
-            &:before {
-              content: '\f13a';
-            }
           }
         }
       }
@@ -320,48 +303,10 @@
             margin-right: 18px;
             margin-top: -5px;
           }
-          .status {
-            display: inline-block;
-            padding: 5px;
-            margin-left: 15px;
-            font-weight: normal;
-
-            &.active {
-              background: #ebf3e0;
-              color: #4cb877;
-            }
-            &.passive {
-              background: #e7e8e5;
-              color: #babbb9;
-            }
-            &.dead {
-              background: #f3e4e0;
-              color: #dda49c;
-            }
-          }
-          &.current:before {
-              position: absolute;
-              @include icon-fa;
-              content: '\f13a';
-              transform: translate(1.1, 1.1);
-              color: $dashboard-green;
-              right: 0px;
-          } // &:before
-          &:before {
-              position: absolute;
-              @include icon-fa;
-              content: '\f138';
-              transform: translate(1.1, 1.1);
-              color: $dashboard-green;
-              right: 0px;
-          } // &:before
-          @include bp(xs) {
-            &:before {
-              right: 1px;
-            }
-            &.current:before {
-              right: 1px;
-            }
+          .expandable-indicator {
+            position: absolute;
+            right: 0px;
+            top: 0px;
           }
         }
         .body {

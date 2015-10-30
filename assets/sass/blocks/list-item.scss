@@ -215,6 +215,11 @@
                 } // button
             } // actions-button
         } // actions-box
+        &.expandable-indicator {
+            position: relative;
+            right: 0px;
+            top: 0px;
+        }
         &.ministatus {
             display: none;
             width: 40px;
@@ -278,6 +283,9 @@
                 @include bp(sm) {
                     display: inline-block;
                 } // sm
+            }
+            &.resources-count {
+                width: 100px;
             }
             &.resource-name {
                 width: 250px;

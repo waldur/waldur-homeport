@@ -226,7 +226,7 @@
                                 button-model="entity"></action-button>
                     </div>
 
-                    <div ng-if="::entityList.expandableOptions" class="expandable-indicator"></div>
+                    <expandable-indicator ng-if="::entityList.expandableOptions" open="expandItem"></expandable-indicator>
                 </div>
 
                 <expandableitem ng-if="entityList.expandableOptions"

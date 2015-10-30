@@ -117,7 +117,8 @@
             {
               name: 'Resources',
               propertyName: 'resources_count',
-              emptyText: '0'
+              emptyText: '0',
+              className: 'resources-count'
             }
           ]
         };
