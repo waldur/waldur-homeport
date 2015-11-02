@@ -147,6 +147,9 @@
         return this.selectedCategory.name == 'SUPPORT';
       },
       setService: function(service) {
+        if (!service.enabled) {
+          return;
+        }
         this.selectedService = service;
         this.serviceType = this.selectedService.type;
         this.serviceMetadata = this.servicesMetadata[this.serviceType];
@@ -329,7 +332,7 @@
       },
       serviceClass: function(service) {
         return {
-          state: this.selectedService == service,
+          state: this.selectedService === service,
           disabled: !service.enabled,
           provider: this.selectedCategory.type === 'provider'
         };
