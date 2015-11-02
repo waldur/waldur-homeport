@@ -507,7 +507,9 @@
         $rootScope.$broadcast('refreshProjectList', {model: instance, remove: true});
         this._super(instance);
         projectsService.getList().then(function(){
-          $state.go('projects.list');
+          currentStateService.getCustomer().then(function(customer) {
+            $state.go('organizations.details', {uuid: customer.uuid, tab: 'projects'});
+          });
         });
       }
     });
