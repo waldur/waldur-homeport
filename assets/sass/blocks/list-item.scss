@@ -159,6 +159,9 @@
             } // &.on-mobile
         } // expand
         &.name {
+            @include bp(xs) {
+                width: 160px;
+            }
             a {
                 &:hover {
                     text-decoration: underline;
@@ -183,7 +186,7 @@
             } // .avatar
         } // avatar-box
         &.actions {
-            @include property(width, 120);
+            @include property(width, 85);
             text-align: right;
             &.switch {
                 @include property(width, 280);
@@ -215,6 +218,11 @@
                 } // button
             } // actions-button
         } // actions-box
+        &.expandable-indicator {
+            position: relative;
+            right: 10px;
+            top: 0px;
+        }
         &.ministatus {
             display: none;
             width: 40px;
@@ -251,11 +259,15 @@
                     display: inline-block;
                     padding-right: 0;
                     text-align: left;
+                    width: 20px;
+                    float: right;
                 } // xs
                 @include bp(sm) {
                     display: inline-block;
                     padding-right: 0;
                     text-align: left;
+                    width: 20px;
+                    float: right;
                 } // sm
             }
             &.message {
@@ -278,6 +290,12 @@
                 @include bp(sm) {
                     display: inline-block;
                 } // sm
+            }
+            &.service-type {
+                width: 120px;
+            }
+            &.resources-count {
+                width: 100px;
             }
             &.resource-name {
                 width: 250px;
