@@ -177,7 +177,7 @@
             float: left;
             font-weight: normal;
             width: calc(100% - 40px);
-            padding-left: 10px;
+            padding-left: 15px;
             text-align: left;
 
             p {
@@ -207,7 +207,31 @@
             .appstore-template {
                 height: 110px;
                 text-align: center;
-                display: table;
+                &.appstore-category {
+                    display: table;
+                }
+                &.appstore-template-image {
+                    .icon {
+                        width: 25%;
+                    }
+                    .description-image {
+                        width: 70%;
+                        overflow-y: auto;
+                        max-height: 100%;
+                    }
+                }
+                &.appstore-package {
+                    padding-top: 10px;
+                    display: table;
+                    .appstore-package-row {
+                        display: table-row;
+                    }
+                    .appstore-package-cell {
+                        display: table-cell;
+                        text-align: center;
+                        vertical-align: middle;
+                    }
+                }
                 padding-top: 25px;
                 position: relative;
                 font-size: 16px;
@@ -238,10 +262,11 @@
 
                 }
                 h3 {
-                    display: inline;
+                    display: inline-block;
                     font-weight: bold;
                     font-size: 16px;
                     padding-left: 10px;
+                    max-width: 38%;
                 }
 
             }
@@ -265,13 +290,32 @@
             }
             &.step-2 {
                 .appstore-template {
-                    padding-top: 30px;
                     span {
                         width: 100%;
                         color: #333;
                         font-weight: normal;
                         position: static;
                         margin-top: -7px;
+                    }
+                    &.provider {
+                        display: table;
+                        padding: 10px;
+                    }
+                    .icon {
+                        display: table-cell;
+                        vertical-align: middle;
+                        text-align: right;
+                        width: 30%;
+                        max-height: 45px;
+                        img {
+                            vertical-align: middle;
+                        }
+                    }
+                    h3 {
+                        display: table-cell;
+                        vertical-align: middle;
+                        width: 69%;
+                        text-align: left;
                     }
                 }
             }
