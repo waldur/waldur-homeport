@@ -112,7 +112,8 @@
             {
               name: 'Type',
               propertyName: 'service_type',
-              type: ENTITYLISTFIELDTYPES.noType
+              type: ENTITYLISTFIELDTYPES.noType,
+              className: 'service-type',
             },
             {
               name: 'Resources',
