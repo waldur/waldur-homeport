@@ -46,37 +46,6 @@
   }
 
   angular.module('ncsaas')
-    .controller('EventListController', [
-      'baseEventListController',
-      'currentStateService',
-      'ENV',
-      EventListController]);
-
-  function EventListController(
-    baseEventListController,
-    currentStateService,
-    ENV) {
-    var controllerScope = this;
-    var EventController = baseEventListController.extend({
-      init:function() {
-        this.controllerScope = controllerScope;
-        this.cacheTime = ENV.dashboardEventsCacheTime;
-        this._super();
-      },
-      getList: function(filter) {
-        var vm = this;
-        var fn = this._super.bind(vm);
-        return currentStateService.getCustomer().then(function(customer) {
-          vm.service.defaultFilter.scope = customer.url;
-          return fn(filter);
-        });
-      }
-    });
-
-    controllerScope.__proto__ = new EventController();
-  }
-
-  angular.module('ncsaas')
     .service('BaseAlertsListController', [
       'baseControllerListClass',
       'alertsService',
@@ -344,7 +313,7 @@
           if (!project.count) {
             projectCounters = this.getProjectCounters(project);
           }
-          if (!project.chartData) {
+          if ((ENV.featuresVisible || ENV.toBeFeatures.indexOf('eventlog') == -1) && !project.chartData) {
             projectEvents = this.getProjectEvents(project);
           }
 
@@ -354,8 +323,10 @@
       activate: function() {
         this.customer_uuid = currentStateService.getCustomerUuid();
         this.getCustomerProjects();
-        this.getCustomerEvents();
         this.getCustomerAlerts();
+        if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('eventlog') == -1) {
+          this.getCustomerEvents();
+        }
       },
       getCustomerAlerts: function() {
         var vm = this;
