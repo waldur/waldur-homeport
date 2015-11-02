@@ -150,6 +150,7 @@
         if (!service.enabled) {
           return;
         }
+        this.resetPriceItems();
         this.selectedService = service;
         this.serviceType = this.selectedService.type;
         this.serviceMetadata = this.servicesMetadata[this.serviceType];
