@@ -147,6 +147,9 @@
         return this.selectedCategory.name == 'SUPPORT';
       },
       setService: function(service) {
+        if (!service.enabled) {
+          return;
+        }
         this.selectedService = service;
         this.serviceType = this.selectedService.type;
         this.serviceMetadata = this.servicesMetadata[this.serviceType];
@@ -327,6 +330,13 @@
           }
         }
       },
+      serviceClass: function(service) {
+        return {
+          state: this.selectedService === service,
+          disabled: !service.enabled,
+          provider: this.selectedCategory.type === 'provider'
+        };
+      },
       toggleChoicesLimit: function(field) {
         if (field.limit == this.limitChoices) {
           field.limit = field.choices.length;
@@ -495,7 +505,7 @@
         vm.loadingProviders = true;
         var myBlockUI = blockUI.instances.get('store-content');
         myBlockUI.start();
-        var safeStates = ['Sync Scheduled', 'Syncing', 'In Sync'];
+
         currentStateService.getProject().then(function(response) {
           vm.currentProject = response;
           for (var j = 0; j < categories.length; j++) {
@@ -503,10 +513,8 @@
             vm.categoryServices[category.name] = [];
             for (var i = 0; i < vm.currentProject.services.length; i++) {
               var service = vm.currentProject.services[i];
-              if (safeStates.indexOf(service.state) != -1
-                && category.services
-                && (category.services.indexOf(service.type) + 1)
-              ) {
+              service.enabled = vm.isSafeState(service.state);
+              if (category.services && (category.services.indexOf(service.type) + 1)) {
                 vm.categoryServices[category.name].push(service);
               }
             }
@@ -514,10 +522,17 @@
               vm.categories.push(category);
               vm.renderStore = true;
             }
+            vm.categoryServices[category.name].sort(function(a, b) {
+              return a.enabled < b.enabled;
+            });
           }
           vm.addSupportCategory();
           myBlockUI.stop();
         });
+      },
+      isSafeState: function(state) {
+        var safeStates = ['Sync Scheduled', 'Syncing', 'In Sync'];
+        return safeStates.indexOf(state) != -1;
       },
       addSupportCategory: function() {
         var vm = this;
