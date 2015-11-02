@@ -39,7 +39,6 @@
           {
             isList: true,
             sectionTitle: 'Connected projects',
-            addItemBlock: true,
             headBlock: 'heading',
             listKey: 'userProjects',
             modelId: 'username',
