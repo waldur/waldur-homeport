@@ -542,8 +542,7 @@
         });
       },
       isSafeState: function(state) {
-        var safeStates = ['Sync Scheduled', 'Syncing', 'In Sync'];
-        return safeStates.indexOf(state) != -1;
+        return state !== 'Erred';
       },
       addSupportCategory: function() {
         var vm = this;
