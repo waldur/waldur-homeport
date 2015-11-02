@@ -40,7 +40,7 @@
 
                 </ul>
                 <div class="clear"></div>
-                <div class="chart">
+                <div class="chart" visible="eventlog">
                     <div class="label">No of events per day</div>
                     <canvas ng-if="project.chartData && DashboardController.showGraph"
                             chart-options="DashboardController.chartOptions"
@@ -87,7 +87,7 @@
             </div>
             <a class="show-all" ui-sref="organizations.details({uuid: DashboardController.customer_uuid, tab:'alerts'})" ng-if="DashboardController.alerts.length">Show all alerts</a>
         </div>
-        <div class="alerts-list" ng-if="DashboardController.events.length">
+        <div class="alerts-list" ng-if="DashboardController.events.length" visible="eventlog">
             <h3>Recent events</h3>
             <div class="white-box" block-ui="dashboard-events-list">
                 <ul>
