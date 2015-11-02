@@ -83,7 +83,7 @@
   .table-block {
     margin-bottom: 0;
     .title {
-      padding: 17px 24px 10px 10px;
+      padding: 17px 27px 10px 10px;
       border-bottom: 1px solid #ebebeb;
       &:hover, &.active {
         background-color: $expandable-hover;
@@ -91,7 +91,7 @@
       position: relative;
       .expandable-indicator {
         position: absolute;
-        right: 9px;
+        right: 15px;
         top: 20px;
       }
       .sort-list {
@@ -150,6 +150,7 @@
       }
       .total-cost {
         float: right;
+        padding-right: 5px;
         span {
           float: left;
           margin-left: 3px;

@@ -159,6 +159,7 @@
             } // &.on-mobile
         } // expand
         &.name {
+            width: 256px;
             a {
                 &:hover {
                     text-decoration: underline;
@@ -217,7 +218,7 @@
         } // actions-box
         &.expandable-indicator {
             position: relative;
-            right: 0px;
+            right: 10px;
             top: 0px;
         }
         &.ministatus {
