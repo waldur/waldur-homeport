@@ -342,8 +342,19 @@
       },
       doChoice: function(name, choice) {
         var vm = this;
-        this.instance[name] = choice.value;
-        this.instance[name + '_item'] = choice.item;
+        if (name == 'security_groups') {
+          if (this.instance[name] === undefined) {
+            this.instance[name] = [];
+          }
+          if (this.instance[name].indexOf(choice.value) === -1) {
+            this.instance[name].push(choice.value);
+          } else {
+            this.instance[name].splice(this.instance[name].indexOf(choice.value), 1);
+          }
+        } else {
+          this.instance[name] = choice.value;
+          this.instance[name + '_item'] = choice.item;
+        }
         if (name == 'image') {
           this.updateFlavors();
         }
@@ -610,7 +621,10 @@
           instance.data_volume_size = this.instance.data_volume_size * 1024;
         }
         if (this.instance.security_groups) {
-          instance.security_groups = [{url: this.instance.security_groups}];
+          instance.security_groups = [];
+          for (var i = 0; i < this.instance.security_groups.length; i++) {
+            instance.security_groups.push({url: this.instance.security_groups[i]});
+          }
         }
         return instance.$save();
       },
