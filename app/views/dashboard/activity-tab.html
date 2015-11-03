@@ -51,7 +51,7 @@
                 </div>
             </div>
         </div>
-        <a ng-if="DashboardController.projects.length" ui-sref="projects.list" class="center-link">Show all projects</a>
+        <a ng-if="DashboardController.projects.length" ui-sref="organizations.details({uuid: DashboardController.currentCustomer.uuid, tab: 'projects'})" class="center-link">Show all projects</a>
         <div class="placeholder white-box" ng-if="DashboardController.projects.length==0">
             There are no projects
             <div class="inline"

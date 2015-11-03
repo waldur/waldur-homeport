@@ -152,156 +152,6 @@
 })();
 
 (function() {
-  angular.module('ncsaas')
-    .controller('ProjectListController',
-      ['BaseProjectListController',
-       'projectPermissionsService',
-       'currentStateService',
-       'resourcesService',
-       '$rootScope',
-       'ENV',
-       ProjectListController]);
-
-  function ProjectListController(
-    BaseProjectListController,
-    projectPermissionsService,
-    currentStateService,
-    resourcesService,
-    $rootScope,
-    ENV) {
-    var controllerScope = this;
-    var Controller = BaseProjectListController.extend({
-      projectUsers: {},
-      projectResources: {},
-      expandableResourcesKey: 'resources',
-      expandableUsersKey: 'users',
-      currentProject: null,
-
-      init:function() {
-        this.controllerScope = controllerScope;
-        this.setCurrentProject();
-        this._super();
-        this.entityOptions.expandable = true;
-
-        this.expandableOptions = [];
-        this.entityOptions.entityData.checkQuotas = "project";
-
-        if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('resources') == -1) {
-          this.expandableOptions.push({
-            isList: true,
-            sectionTitle: 'Resources',
-            articleBlockText: 'New resources could be added through',
-            entitiesLinkRef: 'appstore.store',
-            entitiesLinkText: 'AppStore',
-            addItemBlock: true,
-            headBlock: 'heading',
-            listKey: 'projectResources',
-            modelId: 'uuid',
-            minipaginationData:
-            {
-              pageChange: 'getResourcesForProject',
-              pageEntityName: this.expandableResourcesKey
-            },
-            list: [
-              {
-                entityDetailsLink: 'resources.details({uuid: element.uuid})',
-                entityDetailsLinkText: 'name',
-                type: 'link'
-              }
-            ]
-          });
-        }
-
-        if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('users') == -1) {
-          this.expandableOptions.push({
-            isList: true,
-            sectionTitle: 'Users',
-            articleBlockText: 'Manage users through',
-            entitiesLinkRef: 'projects.details({uuid: expandableElement.uuid})',
-            entitiesLinkText: 'project details',
-            addItemBlock: true,
-            headBlock: 'heading',
-            listKey: 'projectUsers',
-            modelId: 'uuid',
-            minipaginationData:
-            {
-              pageChange: 'getUsersForProject',
-              pageEntityName: this.expandableUsersKey
-            },
-            list: [
-              {
-                avatarSrc: 'user_email',
-                type: 'avatar'
-              },
-              {
-                entityDetailsLink: 'users.details({uuid: element.user_uuid})',
-                entityDetailsLinkText: 'user_full_name',
-                type: 'link'
-              }
-            ]
-          });
-        }
-      },
-      showMore: function(project) {
-        if (!this.projectUsers[project.uuid]) {
-          this.getUsersForProject(project.uuid);
-        }
-        if (!this.projectResources[project.uuid]) {
-          this.getResourcesForProject(project.uuid);
-        }
-      },
-      getUsersForProject: function(uuid, page) {
-        var vm = this;
-        var filter = {
-          project:uuid
-        };
-        vm.projectUsers[uuid] = {data:null};
-        page = page || 1;
-        projectPermissionsService.page = page;
-        projectPermissionsService.pageSize = 5;
-        vm.projectUsers[uuid].page = page;
-        projectPermissionsService.filterByCustomer = false;
-        projectPermissionsService.getList(filter).then(function(response) {
-          vm.projectUsers[uuid].data = response;
-          vm.projectUsers[uuid].pages = projectPermissionsService.pages;
-          $rootScope.$broadcast('mini-pagination:getNumberList', vm.projectUsers[uuid].pages,
-            page, vm.getUsersForProject.bind(vm), vm.expandableUsersKey, uuid);
-        });
-      },
-      getResourcesForProject: function(uuid, page) {
-        var vm = this;
-        var filter = {
-          project_uuid:uuid
-        };
-        vm.projectResources[uuid] = {data:null};
-        page = page || 1;
-        resourcesService.page = page;
-        resourcesService.pageSize = 5;
-        vm.projectResources[uuid].page = page;
-        resourcesService.getList(filter).then(function(response) {
-          vm.projectResources[uuid].data = response;
-          vm.projectResources[uuid].pages = resourcesService.pages;
-          $rootScope.$broadcast('mini-pagination:getNumberList', vm.projectResources[uuid].pages,
-            page, vm.getResourcesForProject.bind(vm), vm.expandableResourcesKey, uuid);
-        });
-      },
-      setCurrentProject: function() {
-        var vm = this;
-        currentStateService.getProject().then(function(response) {
-          vm.currentProject = response;
-          if (response) {
-            vm.entityOptions.list[0]['description'] =  {
-              condition: vm.currentProject.uuid,
-              text: '[Active]',
-              field: 'uuid'
-            };
-          }
-        });
-      }
-    });
-
-    controllerScope.__proto__ = new Controller();
-  }
 
   angular.module('ncsaas')
     .controller('ProjectAddController', [
@@ -310,6 +160,7 @@
       'joinServiceProjectLinkService',
       'baseControllerAddClass',
       '$rootScope',
+      '$state',
       'projectPermissionsService',
       'usersService',
       'ncUtilsFlash',
@@ -321,6 +172,7 @@
     joinServiceProjectLinkService,
     baseControllerAddClass,
     $rootScope,
+    $state,
     projectPermissionsService,
     usersService,
     ncUtilsFlash) {
@@ -332,7 +184,6 @@
         this.service = projectsService;
         this.controllerScope = controllerScope;
         this._super();
-        this.listState = 'projects.list';
         this.detailsState = 'projects.details';
         this.redirectToDetailsPage = true;
         this.project = this.instance;
@@ -356,6 +207,11 @@
       },
       onError: function(errorObject) {
         ncUtilsFlash.error(errorObject.data.detail);
+      },
+      cancel: function() {
+        currentStateService.getCustomer().then(function(customer) {
+          $state.go('organizations.details', {uuid: customer.uuid, tab: 'projects'});
+        });
       },
       addUser: function() {
         var vm = this;
@@ -408,7 +264,7 @@
         this._super();
         this.detailsViewOptions = {
           title: 'Project',
-          listState: $stateParams.uuid ? 'projects.list' : null,
+          listState: "organizations.details({uuid: controller.model.customer_uuid, tab: 'projects'})",
           aboutFields: [
             {
               fieldKey: 'name',

@@ -141,7 +141,7 @@
       appstore: ['appstore.store'],
       dashboard: ['dashboard.index'],
       resources: ['resources.list'],
-      projects: ['projects.list', 'projects.details', 'projects.create', 'projects.add-users'],
+      projects: ['projects.details', 'projects.create'],
       organizations: ['organizations.list', 'organizations.create', 'organizations.details'],
       services: ['services.list', 'services.create'],
       users: ['users.list', 'users.details', 'profile.details'],

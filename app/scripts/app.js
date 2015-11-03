@@ -246,22 +246,6 @@
           templateUrl: 'views/partials/base.html',
         })
 
-        .state('projects.list', {
-          url: '',
-          views: {
-            'appContent': {
-              templateUrl: 'views/project/list.html',
-            },
-            'appHeader': {
-              templateUrl: 'views/partials/app-header.html',
-            }
-          },
-          resolve: {
-            authenticated: authCheck
-          },
-          auth: true
-        })
-
         .state('projects.create', {
           url: 'add/',
           views: {

@@ -41,7 +41,7 @@
                             </a>
                         </li>
                         <li class="manage-item">
-                            <a ui-sref="projects.list" class="manage">Manage projects</a>
+                            <a ui-sref="organizations.details({uuid: Header.currentCustomer.uuid, tab: 'projects'})" class="manage">Manage projects</a>
                         </li>
                         <li class="manage-item">
                             <div class="tooltip-relative inline"
@@ -180,7 +180,7 @@
                     <a ng-click="Header.setCurrentProject(project)">{{ project.name }}</a>
                 </li>
                 <li class="on-tablet">
-                    <a ui-sref="projects.list" class="manage">Manage projects</a>
+                    <a ui-sref="organizations.details({uuid: Header.currentCustomer.uuid, tab: 'projects'})" class="manage">Manage projects</a>
                 </li>
             </ul>
             <!-- /views nav -->

@@ -39,10 +39,6 @@
           {
             isList: true,
             sectionTitle: 'Connected projects',
-            articleBlockText: 'Manage users through',
-            entitiesLinkRef: 'projects.list',
-            entitiesLinkText: 'project details',
-            addItemBlock: true,
             headBlock: 'heading',
             listKey: 'userProjects',
             modelId: 'username',
