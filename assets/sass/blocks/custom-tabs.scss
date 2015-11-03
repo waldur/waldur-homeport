@@ -52,5 +52,13 @@
         @include bp(xs) {
             border-top: none;
         } // xs
+        .appstore-template {
+            display: table;
+            height: 100px;
+            > div {
+                display: table-cell;
+                vertical-align: middle;
+            }
+        }
     } // > section.custom-tabs-tabs-content
 } // custom-tabs
