@@ -80,6 +80,12 @@
               colorsList: ENV.servicesStateColorClasses
             },
             {
+              name: 'Shared',
+              propertyName: 'shared',
+              type: ENTITYLISTFIELDTYPES.bool,
+              className: 'shared-filed'
+            },
+            {
               name: 'Type',
               propertyName: 'service_type',
               type: ENTITYLISTFIELDTYPES.noType,

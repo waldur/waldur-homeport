@@ -48,6 +48,7 @@
       statusCircle: 'statusCircle',
       subtitle: true,
       html: 'html',
-      colorState: 'colorState'
+      colorState: 'colorState',
+      bool: 'bool'
     })
 })();

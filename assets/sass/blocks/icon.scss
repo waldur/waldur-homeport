@@ -56,4 +56,10 @@
     &.chevron-circle-up:before {
         content: '\f139';
     }
+    &.check:before {
+        content: "\f00c";
+    }
+    &.minus:before {
+        content: "\f068";
+    }
 } // icons
