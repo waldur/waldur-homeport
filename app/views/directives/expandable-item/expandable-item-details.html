@@ -2,7 +2,8 @@
     <header>
         <h3 ng-show="expandableOptions.title" class="title-expandable">{{ ::expandableOptions.title }}</h3>
         <div class="short-form" ng-if="expandableElement.editable">
-            <div class="form-row" ng-repeat="field in expandableElement.fields">
+            <div class="form-row" ng-repeat="field in expandableElement.fields"
+                 ng-if="!expandableOptions.fieldsToHide || expandableOptions.fieldsToHide.indexOf(field.name) === -1">
                 <div class="col label">
                     <label for="{{ ::expandableElement.uuid }}_{{ ::field.name }}">
                         <helpicon help-text="{{ ::field.help_text }}" ng-if="::field.help_text"></helpicon>
