@@ -590,10 +590,10 @@
                 }
             }
             &.step-2 {
-                .appstore-template {
+                .appstore-template.appstore-template {
+                    padding-top: 0;
                     .icon {
                         height: 45px;
-                        width: inherit;
                     }
                 }
             }
@@ -601,9 +601,13 @@
     }
     .appstore-templates {
         .appstore-template {
+            display: table;
+            div {
+                display: table-cell;
+                vertical-align: middle;
+            }
             .description {
-                width: 100%;
-                padding-left: 0;
+                padding-left: 15px;
                 h3 {
                     padding-left: 0;
                 }
