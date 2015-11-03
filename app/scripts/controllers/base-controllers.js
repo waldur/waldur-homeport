@@ -5,13 +5,13 @@
   angular.module('ncsaas')
     .controller('HeaderController', [
       '$rootScope', '$state', 'currentStateService', 'customersService',
-      'usersService', 'ENV', 'baseControllerClass', '$translate', 'LANGUAGE', 'projectsService', '$q', 'blockUI',
+      'usersService', 'ENV', 'baseControllerClass', '$translate', 'LANGUAGE', 'projectsService', '$q', 'ncUtils',
       'ncUtilsFlash',
       HeaderController]);
 
   function HeaderController(
     $rootScope, $state, currentStateService, customersService, usersService,
-    ENV, baseControllerClass, $translate, LANGUAGE, projectsService, $q, blockUI, ncUtilsFlash) {
+    ENV, baseControllerClass, $translate, LANGUAGE, projectsService, $q, ncUtils, ncUtilsFlash) {
     var controllerScope = this;
     var HeaderControllerClass = baseControllerClass.extend({
       customers: [],
@@ -254,13 +254,11 @@
         });
       },
       getProjectList: function(cacheReset) {
-        var vm = this,
-          deferred = $q.defer();
+        var vm = this;
         projectsService.cacheTime = ENV.topMenuProjectsCacheTime;
         projectsService.cacheReset = cacheReset;
-        var projectMenu = blockUI.instances.get('project-menu');
-        projectMenu.start();
-        projectsService.getList().then(function(response) {
+
+        var promise = projectsService.getList().then(function(response) {
           if (response.length < 1
             && $state.current.name != 'projects.create') {
             vm.currentProject = null;
@@ -270,26 +268,24 @@
             }
           }
           vm.projects = response;
-          projectMenu.stop();
-          deferred.resolve(response);
+          return response;
         });
 
-        return deferred.promise;
+        ncUtils.blockElement('project-menu', promise);
+        return promise;
       },
       getCustomerList: function(cacheReset) {
-        var vm = this,
-          deferred = $q.defer();
+        var vm = this;
         customersService.cacheTime = ENV.topMenuCustomerCacheTime;
         customersService.cacheReset = cacheReset;
-        var customerMenu = blockUI.instances.get('customer-menu');
-        customerMenu.start();
-        customersService.getList().then(function(response) {
+
+        var promise = customersService.getList().then(function(response) {
           vm.customers = response;
-          customerMenu.stop();
-          deferred.resolve(response);
+          return response;
         });
 
-        return deferred.promise;
+        ncUtils.blockElement('customer-menu', promise);
+        return promise;
       },
       goToCurrentOrganization: function() {
         $state.go('organizations.details', {uuid: this.currentCustomer.uuid});
