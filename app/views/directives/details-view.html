@@ -78,7 +78,10 @@
             <div class="tabs-wrapper">
                 <aside>
                     <div class="input-group rem-mob">
-                        <input type="search" placeholder="Search" ng-model="generalSearch" ng-change="search()"/>
+                        <input type="search" placeholder="Search"
+                               ng-model="generalSearch"
+                               ng-model-options="{ debounce: 500 }"
+                               ng-change="search()"/>
                     </div>
                     <ul class="tabs-links tabs-opened" ng-class="{'tabs-opened': openTabs}">
                         <li visible="{{ tab.key }}" ng-class="{'active': options.activeTab === tab.key}"

@@ -6,7 +6,9 @@
         <ul class="sort-list">
             <li class="search divid">
                 <div class="search-box">
-                    <input type="text" ng-model='entityList.searchInput' ng-change="entityList.search()">
+                    <input type="text" ng-model='entityList.searchInput'
+                           ng-model-options="{ debounce: 500 }"
+                           ng-change="entityList.search()">
                     <button class="search-button" ng-click="entityList.search()"></button>
                 </div>
             </li>
