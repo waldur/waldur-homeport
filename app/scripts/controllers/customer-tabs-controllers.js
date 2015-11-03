@@ -32,7 +32,10 @@
             isList: false,
             addItemBlock: false,
             viewType: 'details',
-            title: 'Settings'
+            title: 'Settings',
+            fieldsToHide: [
+              'dummy'
+            ]
           }
         ];
         this.blockUIElement = 'tab-content';
