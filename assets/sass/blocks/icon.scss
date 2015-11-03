@@ -50,4 +50,10 @@
     &.zoom:before {
         content: '\f002';
     }
+    &.chevron-circle-down:before {
+        content: '\f13a';
+    }
+    &.chevron-circle-up:before {
+        content: '\f139';
+    }
 } // icons

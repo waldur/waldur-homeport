@@ -22,3 +22,11 @@
     cursor: pointer;
   }
 }
+
+.expandable-indicator {
+  width: 10px;
+  position: absolute;
+  color: $dashboard-green;
+  right: 15px;
+  top: 15px;
+}

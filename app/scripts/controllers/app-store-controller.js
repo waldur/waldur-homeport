@@ -147,6 +147,10 @@
         return this.selectedCategory.name == 'SUPPORT';
       },
       setService: function(service) {
+        if (!service.enabled) {
+          return;
+        }
+        this.resetPriceItems();
         this.selectedService = service;
         this.serviceType = this.selectedService.type;
         this.serviceMetadata = this.servicesMetadata[this.serviceType];
@@ -327,6 +331,13 @@
           }
         }
       },
+      serviceClass: function(service) {
+        return {
+          state: this.selectedService === service,
+          disabled: !service.enabled,
+          provider: this.selectedCategory.type === 'provider'
+        };
+      },
       toggleChoicesLimit: function(field) {
         if (field.limit == this.limitChoices) {
           field.limit = field.choices.length;
@@ -342,8 +353,19 @@
       },
       doChoice: function(name, choice) {
         var vm = this;
-        this.instance[name] = choice.value;
-        this.instance[name + '_item'] = choice.item;
+        if (name == 'security_groups') {
+          if (this.instance[name] === undefined) {
+            this.instance[name] = [];
+          }
+          if (this.instance[name].indexOf(choice.value) === -1) {
+            this.instance[name].push(choice.value);
+          } else {
+            this.instance[name].splice(this.instance[name].indexOf(choice.value), 1);
+          }
+        } else {
+          this.instance[name] = choice.value;
+          this.instance[name + '_item'] = choice.item;
+        }
         if (name == 'image') {
           this.updateFlavors();
         }
@@ -495,7 +517,7 @@
         vm.loadingProviders = true;
         var myBlockUI = blockUI.instances.get('store-content');
         myBlockUI.start();
-        var safeStates = ['Sync Scheduled', 'Syncing', 'In Sync'];
+
         currentStateService.getProject().then(function(response) {
           vm.currentProject = response;
           for (var j = 0; j < categories.length; j++) {
@@ -503,10 +525,8 @@
             vm.categoryServices[category.name] = [];
             for (var i = 0; i < vm.currentProject.services.length; i++) {
               var service = vm.currentProject.services[i];
-              if (safeStates.indexOf(service.state) != -1
-                && category.services
-                && (category.services.indexOf(service.type) + 1)
-              ) {
+              service.enabled = vm.isSafeState(service.state);
+              if (category.services && (category.services.indexOf(service.type) + 1)) {
                 vm.categoryServices[category.name].push(service);
               }
             }
@@ -514,10 +534,16 @@
               vm.categories.push(category);
               vm.renderStore = true;
             }
+            vm.categoryServices[category.name].sort(function(a, b) {
+              return a.enabled < b.enabled;
+            });
           }
           vm.addSupportCategory();
           myBlockUI.stop();
         });
+      },
+      isSafeState: function(state) {
+        return state !== 'Erred';
       },
       addSupportCategory: function() {
         var vm = this;
@@ -610,7 +636,10 @@
           instance.data_volume_size = this.instance.data_volume_size * 1024;
         }
         if (this.instance.security_groups) {
-          instance.security_groups = [{url: this.instance.security_groups}];
+          instance.security_groups = [];
+          for (var i = 0; i < this.instance.security_groups.length; i++) {
+            instance.security_groups.push({url: this.instance.security_groups[i]});
+          }
         }
         return instance.$save();
       },

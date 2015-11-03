@@ -36,8 +36,7 @@
                             <div class="appstore-template {{ service.type.toLowerCase() }}"
                                  ng-repeat="service in AppStore.categoryServices[AppStore.selectedCategory.name]"
                                  ng-click="AppStore.setService(service)"
-                                 ng-class="{'state': AppStore.selectedService == service,
-                                  'provider': AppStore.selectedCategory.type === 'provider'}">
+                                 ng-class="AppStore.serviceClass(service)">
                                 <div class="icon">
                                     <img ng-src="/static/images/appstore/icon-{{ service.type.toLowerCase() }}.png" alt="">
                                 </div>
@@ -200,7 +199,10 @@
                                             <div class="appstore-template appstore-template-{{::field.name}}"
                                                  ng-repeat="choice in field.choices | filter: {'display_name': field.searchQuery} | limitTo: field.limit"
                                                  ng-click="AppStore.doChoice(field.name, choice)"
-                                                 ng-class="{'state': AppStore.instance[field.name] == choice.value, 'disabled': choice.disabled}">
+                                                 ng-class="{'state': field.name == 'security_groups'
+                                                            ? AppStore.instance[field.name].indexOf(choice.value) > -1
+                                                            : AppStore.instance[field.name] == choice.value,
+                                                            'disabled': choice.disabled}">
 
                                                 <div ng-if="::!choice.icon" class="icon {{ ::field.icon }}"></div>
                                                 <div ng-if="::choice.icon" class="icon"><img ng-src="/static/images/appstore/icon-{{ ::choice.icon }}.png"></div>
