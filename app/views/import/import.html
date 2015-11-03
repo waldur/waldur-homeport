@@ -112,7 +112,7 @@
                                     HDD: {{ resource.disk / 1024 }} GB
                                 </div>
                                 <div class="additional-cell" ng-switch="resource.status">
-                                    <span class="status online" ng-switch-when="ready">Available for import</span>
+                                    <span class="status online" ng-switch-when="ready">Select to import</span>
                                     <span class="status" ng-switch-when="progress">In progress</span>
                                     <span class="status online" ng-switch-when="success">
                                         Imported to <a ui-sref="projects.details({uuid: ImportResource.currentProject.uuid})">
