@@ -158,7 +158,7 @@
                                ui-sref="{{ field.link }}" stoppropagation>{{ entity[field.propertyName] }}</a>
                             <a ng-if="!field.link" stoppropagation>{{ entity[field.propertyName] }}</a>
                             <span ng-if="field.subtitle" class="subtitle">
-                                #{{ entity.key }} - Created on {{ entity.created | date:'medium' }}
+                                #{{ entity.key }} - <span title="{{ ::entity.created | date:'medium' }}" am-time-ago="entity.created"></span>
                             </span>
                             <span class="field-description"
                                   ng-if="field.description && field.description.condition == entity[field.description.field]">

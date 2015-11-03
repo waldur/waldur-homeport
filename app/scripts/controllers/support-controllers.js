@@ -3,11 +3,21 @@
 (function() {
   angular.module('ncsaas')
     .controller('IssueListController',
-      ['baseControllerListClass', 'issuesService', 'issueCommentsService',
-        '$rootScope', 'ENTITYLISTFIELDTYPES', IssueListController]);
+      ['baseControllerListClass',
+       'issuesService',
+       'issueCommentsService',
+       '$rootScope',
+       'ENTITYLISTFIELDTYPES',
+       'ncUtils',
+        IssueListController]);
 
   function IssueListController(
-    baseControllerListClass, issuesService, issueCommentsService, $rootScope, ENTITYLISTFIELDTYPES) {
+    baseControllerListClass,
+    issuesService,
+    issueCommentsService,
+    $rootScope,
+    ENTITYLISTFIELDTYPES,
+    ncUtils) {
     var controllerScope = this;
     var controllerClass = baseControllerListClass.extend({
       issueComments: {},
@@ -16,14 +26,9 @@
       init:function() {
         this.service = issuesService;
         this.controllerScope = controllerScope;
+        this.blockUIElement = 'issue-list';
         this._super();
         this.searchFieldName = 'search';
-        this.actionButtonsListItems = [
-          {
-            title: 'Some action for this type',
-            clickFunction: function() {}
-          }
-        ];
         this.entityOptions = {
           entityData: {
             title: 'Support',
@@ -31,13 +36,14 @@
             createLinkText: 'Create ticket',
             noDataText: 'No tickets yet.',
             hideActionButtons: false,
+            hideTableHead: true,
             actionButtonsType: 'refresh',
             expandable: true
           },
           list: [
             {
               type: ENTITYLISTFIELDTYPES.statusCircle,
-              className: 'statusCircle',
+              className: 'statusCircle support',
               propertyName: 'resolution'
             },
             {
@@ -82,6 +88,9 @@
         }
       },
       getCommentsForIssue: function(key, page) {
+        ncUtils.blockElement('comments_' + key, this._getCommentsForIssue(key, page));
+      },
+      _getCommentsForIssue: function(key, page) {
         var vm = this;
         var filter = {
           key: key
@@ -92,9 +101,10 @@
         issueCommentsService.pageSize = 5;
         vm.issueComments[key].page = page;
         issueCommentsService.filterByCustomer = false;
-        issueCommentsService.getList(filter).then(function(response) {
+        return issueCommentsService.getList(filter).then(function(response) {
           vm.issueComments[key].data = response;
           vm.issueComments[key].pages = issueCommentsService.pages;
+        }).finally(function() {
           $rootScope.$broadcast('mini-pagination:getNumberList', vm.issueComments[key].pages,
             page, vm.getCommentsForIssue.bind(vm), vm.expandableCommentsKey, key);
         });
