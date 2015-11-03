@@ -134,6 +134,7 @@
         return this.selectedInstances.indexOf(instance[this.uniqueModelKeyName]) !== -1;
       },
       afterInstanceRemove: function(instance) {
+        this.service.setPagesCount(this.service.resultCount - 1);
         this.service.clearAllCacheForCurrentEndpoint();
         $rootScope.$broadcast('refreshCounts');
         var index = this.list.indexOf(instance);
