@@ -45,11 +45,14 @@
         window.Intercom('update');
       },
       blockElement: function(element, promise) {
-        var block = blockUI.instances.get(element);
-        block.start();
-        promise.finally(function() {
-          block.stop();
-        });
+        if (promise.finally) {
+          // Prevent blocking if promise is invalid
+          var block = blockUI.instances.get(element);
+          block.start();
+          return promise.finally(function() {
+            block.stop();
+          });
+        }
       },
       isFileOption: function(option) {
         return option.type == 'file upload';

@@ -6,7 +6,7 @@
       'currentStateService',
       'ENV',
       'defaultPriceListItemsService',
-      'blockUI',
+      'ncUtils',
       '$q',
       '$state',
       '$stateParams',
@@ -24,7 +24,7 @@
     currentStateService,
     ENV,
     defaultPriceListItemsService,
-    blockUI,
+    ncUtils,
     $q,
     $state,
     $stateParams,
@@ -178,18 +178,15 @@
         if (resourceUrl) {
           vm.instance = servicesService.$create(resourceUrl);
           vm.instance.service_project_link = vm.selectedService.service_project_link_url;
-          var myBlockUI = blockUI.instances.get('resource-properties');
-          myBlockUI.start();
-          servicesService.getOption(resourceUrl).then(function(response) {
+
+          var promise = servicesService.getOption(resourceUrl).then(function(response) {
             var formOptions = response.actions.POST;
             vm.allFormOptions = formOptions;
-            vm.getValidChoices().then(function(validChoices) {
+            return vm.getValidChoices().then(function(validChoices) {
               vm.setFields(formOptions, validChoices);
-              myBlockUI.stop();
-            }, function () {
-              myBlockUI.stop();
             });
           });
+          ncUtils.blockElement('resource-properties', promise);
         }
       },
       getValidChoices: function() {
@@ -517,10 +514,8 @@
         vm.renderStore = false;
         vm.countTotal();
         vm.loadingProviders = true;
-        var myBlockUI = blockUI.instances.get('store-content');
-        myBlockUI.start();
 
-        currentStateService.getProject().then(function(response) {
+        var promise = currentStateService.getProject().then(function(response) {
           vm.currentProject = response;
           for (var j = 0; j < categories.length; j++) {
             var category = categories[j];
@@ -540,11 +535,9 @@
               return a.enabled < b.enabled;
             });
           }
-          vm.addSupportCategory();
-          myBlockUI.stop();
-        }, function() {
-          myBlockUI.stop();
+          return vm.addSupportCategory();
         });
+        ncUtils.blockElement('store-content', promise);
       },
       isSafeState: function(state) {
         return state !== 'Erred';

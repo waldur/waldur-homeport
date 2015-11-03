@@ -6,7 +6,6 @@
       'joinService',
       'servicesService',
       'usersService',
-      'blockUI',
       'ncUtils',
       'ncUtilsFlash',
       CustomerServiceTabController
@@ -18,7 +17,6 @@
     joinService,
     servicesService,
     usersService,
-    blockUI,
     ncUtils,
     ncUtilsFlash) {
     var controllerScope = this;
@@ -47,18 +45,17 @@
           if (!service.editable || service.values) {
             return;
           }
-          var myBlockUI = blockUI.instances.get(service.uuid);
-          myBlockUI.start();
 
-          vm.service.getOptions(service.service_type).then(function(options) {
+          var promise = vm.service.getOptions(service.service_type).then(function(options) {
             service.options = options;
             service.fields = vm.getFields(options);
 
-            servicesService.$get(null, service.settings).then(function(settings) {
+            return servicesService.$get(null, service.settings).then(function(settings) {
               service.values = settings;
-              myBlockUI.stop();
             });
           });
+
+          ncUtils.blockElement(service.uuid, promise);
         });
       },
       getFields: function(options) {
