@@ -186,6 +186,8 @@
             vm.getValidChoices().then(function(validChoices) {
               vm.setFields(formOptions, validChoices);
               myBlockUI.stop();
+            }, function () {
+              myBlockUI.stop();
             });
           });
         }
@@ -419,7 +421,7 @@
       },
       sortFlavors: function() {
         var field = this.findFieldByName('flavor');
-        if (!field) {
+        if (!field || !field.choices) {
           return;
         }
 
@@ -539,6 +541,8 @@
             });
           }
           vm.addSupportCategory();
+          myBlockUI.stop();
+        }, function() {
           myBlockUI.stop();
         });
       },
