@@ -65,10 +65,13 @@
                         <div class="step-title"><span>Step {{ AppStore.chooseResourceTypeStepNumber }}: Choose resource type</span></div>
                         <div class="appstore-templates">
                             <!-- service -->
-                            <div class="appstore-template"
+                            <div class="appstore-template {{name.toLowerCase()}}"
                                  ng-repeat="(name, resource) in AppStore.serviceMetadata.resources"
                                  ng-click="AppStore.setResourceType(name)"
                                  ng-class="{'state': AppStore.selectedResourceType == name}">
+                                <div class="icon">
+                                    <i class="fa"></i>
+                                </div>
                                 <h3>{{ name }}</h3>
                             </div>
                             <!-- /service -->
