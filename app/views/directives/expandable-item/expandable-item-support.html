@@ -18,13 +18,11 @@
                     <div class="support name">
                         <span class="subtitle">
                             <strong>{{ element.author.displayName }}</strong>
-                            <div title="{{ ::element.created | date:'medium' }}" am-time-ago="element.created"></div>
+                            <span title="{{ ::element.created | date:'medium' }}" am-time-ago="element.created"></span>
                         </span>
                     </div>
-                </div>
-                <section class="support-answer">
                     <article class="normal-description">{{ element.body }}</article>
-                </section>
+                </div>
             </section>
         </li>
     </ul>

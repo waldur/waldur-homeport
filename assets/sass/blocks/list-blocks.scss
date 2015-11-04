@@ -22,9 +22,6 @@ section.support-description {
     .list-item {
         padding: 0px;
         min-height: 0;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
         margin-bottom: 3px;
     }
     section {
@@ -34,7 +31,6 @@ section.support-description {
 }
 .support {
     &.name {
-        float: left;
         display: block;
         padding-left: 0;
     }
