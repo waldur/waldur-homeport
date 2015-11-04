@@ -16,6 +16,7 @@
       'resourcesService',
       'ncUtilsFlash',
       'projectsService',
+      'keysService',
       AppStoreController]);
 
   function AppStoreController(
@@ -33,7 +34,8 @@
     premiumSupportContractsService,
     resourcesService,
     ncUtilsFlash,
-    projectsService) {
+    projectsService,
+    keysService) {
     var controllerScope = this;
     var Controller = baseControllerAddClass.extend({
       UNIQUE_FIELDS: {
@@ -183,7 +185,13 @@
             var formOptions = response.actions.POST;
             vm.allFormOptions = formOptions;
             return vm.getValidChoices().then(function(validChoices) {
-              vm.setFields(formOptions, validChoices);
+              keysService.getCurrentUserKeyList().then(function(result) {
+                validChoices.sshPublicKeys = [];
+                result.forEach(function(item) {
+                  validChoices.sshPublicKeys.push(item);
+                });
+                vm.setFields(formOptions, validChoices);
+              });
             });
           });
           ncUtils.blockElement('resource-properties', promise);
@@ -248,6 +256,9 @@
 
           if (name == 'size' || name == 'flavor') {
             type = 'size';
+          }
+          if (name === 'ssh_public_key') {
+            choices = validChoices.sshPublicKeys;
           }
 
           var icons = {
@@ -361,6 +372,9 @@
           } else {
             this.instance[name].splice(this.instance[name].indexOf(choice.value), 1);
           }
+        } else if (name === 'ssh_public_key') {
+          this.instance[name] = choice.url;
+          this.instance[name + '_item'] = choice
         } else {
           this.instance[name] = choice.value;
           this.instance[name + '_item'] = choice.item;
