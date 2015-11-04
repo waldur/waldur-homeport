@@ -27,24 +27,16 @@
       }
     }
     return {
-      'resources': factory('resources'),
-      'backups': factory('backups'),
-      'users': factory('project-permissions'),
-      'alerts': factory('alerts'),
-      'events': factory('events'),
-      'projectCloud': factory('project-cloud-memberships'),
-      'projects': factory('projects'),
-      'digitalocean': factory('digitalocean'),
-      'clouds': factory('clouds'),
-      'project-cloud-memberships': factory('project-cloud-memberships'),
-      'digitalocean-service-project-link': factory('digitalocean-service-project-link'),
-      'services': factory('services'),
-      'premiumSupportContracts': factory('premium-support-contracts'),
-      'aws-service-project-link': factory('aws-service-project-link'),
-      'openstack-service-project-link': factory('openstack-service-project-link'),
-      'keys': factory('keys'),
-      'hooks-email': factory('hooks-email'),
-      'hooks-web': factory('hooks-web')
+      resources: factory('resources'),
+      backups: factory('backups'),
+      users: factory('project-permissions'),
+      alerts: factory('alerts'),
+      events: factory('events'),
+      projects: factory('projects'),
+      services: factory('services'),
+      premiumSupportContracts: factory('premium-support-contracts'),
+      keys: factory('keys'),
+      hooks: factory('hooks'),
     }
   }
 })();

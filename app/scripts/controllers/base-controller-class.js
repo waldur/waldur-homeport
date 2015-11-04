@@ -276,18 +276,20 @@
       update: function() {
         var vm = this;
         vm.beforeUpdate();
-        return vm.model.$update(success, error);
-        function success() {
+        return vm.updateInstance().then(function() {
           if (vm.service.clearAllCacheForCurrentEndpoint) {
             vm.service.clearAllCacheForCurrentEndpoint();
           }
           $rootScope.$broadcast('refreshCounts');
           vm.afterUpdate();
           vm.successRedirect();
-        }
-        function error(response) {
+        },
+        function(response) {
           vm.errors = response.data;
-        }
+        });
+      },
+      updateInstance: function() {
+        return this.model.$update();
       },
       editInPlace: function(data, fieldName) {
         this.model[fieldName] = data;

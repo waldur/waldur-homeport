@@ -10,7 +10,7 @@
 
 <div class="white-box">
     <section class="short-form">
-        <div class="form-row" ng-if="HookController.model.$type == 'email'">
+        <div class="form-row" ng-if="HookController.model.hook_type == 'email'">
             <div class="col label">
                 <label class="text" for="email">Email</label>
             </div>
@@ -23,7 +23,7 @@
                 </div>
             </div>
         </div>
-        <div class="form-row" ng-if="HookController.model.$type == 'webhook'">
+        <div class="form-row" ng-if="HookController.model.hook_type == 'webhook'">
             <div class="col label">
                 <label class="text" for="destination_url">URL</label>
             </div>
