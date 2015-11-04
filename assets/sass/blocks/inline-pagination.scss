@@ -1,6 +1,9 @@
 .inline-pagination {
     @include inline-middle;
     @include clear-list;
+    padding-bottom: 15px;
+    width: 50%;
+    float: right;
     @include bp(xs) {
         display: block;
     } // xs

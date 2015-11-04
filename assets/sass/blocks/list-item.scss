@@ -159,6 +159,7 @@
             } // &.on-mobile
         } // expand
         &.name {
+            float: left;
             @include bp(xs) {
                 width: 160px;
             }
@@ -172,9 +173,11 @@
             } // item-title
             .subtitle {
                 display: block;
-                margin-top: 6px;
                 @include property(font-size, $small-font);
                 color: #8F8F8F;
+                strong {
+                    color: black;
+                }
             } // subtitle
         } // &.name
         &.avatar {
@@ -251,6 +254,11 @@
             }
             &.statusCircle {
                 width: 20px;
+                &.support {
+                    width: 28px;
+                    vertical-align: top;
+                    padding-top: 7px;
+                }
             }
             &.visual-status {
                 width: 65px;

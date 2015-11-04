@@ -7,9 +7,25 @@
         border: none !important;
     } // li
 } // list-blocks
+section.support-description {
+    min-height: 0px;
+    padding-bottom: 15px;
+    padding-left: 10px;
+}
 .list-blocks-support {
     @include clear-list-inline;
     .support-answer {
-        padding-left: 100px;
+        padding-left: 50px;
+    }
+    .list-item {
+        padding: 0px;
+        min-height: 0;
+    }
+    section {
+        min-height: 0px;
+        padding-bottom: 11px;
+    }
+    .avatar {
+        padding-left: 10px;
     }
 }
