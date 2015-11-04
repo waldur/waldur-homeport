@@ -421,7 +421,9 @@
         border-color: transparent transparent $border-color transparent;
         top: -10px;
         right: 137px;
-
+        @include bp(xs) {
+          display: none;
+        }
       }
       &:after {
         content: "";
@@ -434,6 +436,9 @@
         border-color: transparent transparent $main-background-color transparent;
         top: -9px;
         right: 138px;
+        @include bp(xs) {
+          display: none;
+        }
       }
       &.graph-tooltip {
         width: 450px;
@@ -471,6 +476,16 @@
         right: 28px;
         top: 50px;
         width: 240px;
+        @include bp(xs) {
+          position: fixed;
+          width: 100%;
+          left: 0;
+          height: 50%;
+          bottom: 0;
+          top: auto;
+          font-size: 1em;
+          z-index: 9999;
+        }
         .close {
           position: absolute;
           right: 10px;
@@ -492,6 +507,13 @@
           top: 15px;
           opacity: 1;
           font-weight: normal;
+          @include bp(xs) {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+          }
         }
       }
       input[type='number'] {
@@ -709,7 +731,12 @@
   position: absolute;
   width: 400px;
   @include bp(xs) {
-    width: 250px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 50%;
+    top: inherit;
+    z-index: 9999;
   }
   font-size: 0.75em;
   right: 0;
@@ -730,6 +757,9 @@
     border-color: transparent transparent $border-color transparent;
     top: -10px;
     right: 100px;
+    @include bp(xs) {
+      display: none;
+    }
   }
   .triangle-after {
     content: "";
@@ -742,9 +772,15 @@
     border-color: transparent transparent $main-background-color transparent;
     top: -9px;
     right: 101px;
+    @include bp(xs) {
+      display: none;
+    }
   }
   &.quota-tooltip {
     top: 35px;
+    @include bp(xs) {
+      top: inherit;
+    }
     .close {
       position: absolute;
       right: 10px;
@@ -752,9 +788,15 @@
     }
     &.head-nav-appstore {
       top: 50px;
+      @include bp(xs) {
+        top: inherit;
+      }
     }
     &.list-items {
       top: 35px;
+      @include bp(xs) {
+        top: inherit;
+      }
     }
     &.user-drop-down {
       top: 44px;
@@ -784,6 +826,14 @@
       width: 14px;
       height: 14px;
       opacity: 1;
+      @include bp(xs) {
+        position: fixed;
+        width: 100%;
+        height: 50%;
+        background: rgba(0,0,0,0.5);
+        left: 0;
+        top: 0;
+      }
       &:before {
         display: none;
       }
@@ -792,6 +842,10 @@
   }
   .tooltip-text {
     padding-right: 20px;
+    @include bp(xs) {
+      font-size: 20px;
+      padding-top: 20px;
+    }
   }
   &.color-state-tooltip {
     width: 150px;
