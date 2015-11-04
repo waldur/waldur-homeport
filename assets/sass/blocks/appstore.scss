@@ -234,6 +234,9 @@
                     }
                 }
                 padding-top: 25px;
+                &.appstore-template-region, &.appstore-template-ssh_public_key {
+                    padding-top: 15px;
+                }
                 position: relative;
                 font-size: 16px;
                 font-weight: bold;
@@ -480,6 +483,9 @@
             .keys {
                 .appstore-template {
                     height: 100px;
+                    &.appstore-template-region, &.appstore-template-ssh_public_key {
+                        height: 110px;
+                    }
                 }
             }
         }
