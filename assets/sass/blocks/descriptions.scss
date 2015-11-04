@@ -12,6 +12,11 @@ article.normal-description {
     margin-left: 0px;
     padding-left: 0px;
     overflow: hidden;
+    @include bp(xs) {
+        padding-left: 10px;
+        border-left: 3px solid #eee;
+        @include property(font-size, $small-font);
+    }
 }
 
 article[class$="description"] {
