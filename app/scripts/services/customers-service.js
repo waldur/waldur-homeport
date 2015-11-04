@@ -2,9 +2,9 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('customersService', ['baseServiceClass', '$q', 'agreementsService', customersService]);
+    .service('customersService', ['baseServiceClass', '$q', customersService]);
 
-  function customersService(baseServiceClass, $q, agreementsService) {
+  function customersService(baseServiceClass, $q) {
     var ServiceClass = baseServiceClass.extend({
       filterByCustomer: false,
 
@@ -29,18 +29,6 @@
             }
           }
         );
-
-        return deferred.promise;
-      },
-      getCurrentPlan: function(customer) {
-        var deferred = $q.defer();
-        agreementsService.getList({customer: customer.uuid, state: 'active'}).then(function(response) {
-          if (response.length > 0) {
-            deferred.resolve(response[0]);
-          } else {
-            deferred.reject();
-          }
-        });
 
         return deferred.promise;
       },

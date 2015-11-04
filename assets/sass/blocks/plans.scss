@@ -155,6 +155,10 @@
                     @include property(font-size, $small-font);
                     @include property(margin-top, 10);
                 }
+                .usage {
+                    color: rgb(176, 176, 176);
+                    @include property(font-size, $small-font);
+                }
                 .btn-choice {
                     background-color: rgb(125, 178, 67);
                     margin-top: 6px;

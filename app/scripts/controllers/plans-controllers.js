@@ -18,13 +18,6 @@
         this.selectedPlan = null;
       },
 
-      initCurrentPlan: function(customer) {
-        var vm = this;
-        customersService.getCurrentPlan(customer).then(function(response) {
-          vm.currentPlan = response.plan;
-        });
-      },
-
       checkPermissions: function() {
         // check is current user - customer owner and load page if he is
         var vm = this;
@@ -35,15 +28,25 @@
               vm.canSeePlans = hasRole;
 
               if (vm.canSeePlans || user.is_staff) {
-                customersService.$get($stateParams.uuid).then(function(customer) {
-                  vm.customer = customer;
-                  vm.initCurrentPlan(customer);
-                });
+                vm.getLimitsAndUsages();
                 vm.getList();
               } else {
                 $state.go('errorPage.notFound');
               }
             });
+        });
+      },
+
+      getLimitsAndUsages: function() {
+        var vm = this;
+        return customersService.$get($stateParams.uuid).then(function(customer) {
+          vm.customer = customer;
+          vm.currentPlan = customer.plan;
+          vm.usage = {};
+          for (var i = 0; i < customer.quotas.length; i++) {
+            var item = customer.quotas[i];
+            vm.usage[item.name] = item.usage;
+          }
         });
       },
 
@@ -60,19 +63,6 @@
 
       cancel: function() {
         $state.go('organizations.details', {uuid:$stateParams.uuid});
-      },
-
-      initCustomerOwnership: function() {
-        var vm = this;
-        usersService.getCurrentUser().then(function(user) {
-          /*jshint camelcase: false */
-          if (user.is_staff) {
-            vm.canSeePlans = true;
-          }
-          customerPermissionsService.userHasCustomerRole(user.username, 'owner').then(function(hasRole) {
-            vm.canSeePlans = hasRole;
-          });
-        });
       },
 
       selectPlan: function(plan) {
