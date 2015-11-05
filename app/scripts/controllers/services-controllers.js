@@ -9,6 +9,7 @@
       'currentStateService',
       'usersService',
       'joinService',
+      '$rootScope',
       'ENV',
       baseServiceListController]);
 
@@ -20,6 +21,7 @@
     currentStateService,
     usersService,
     joinService,
+    $rootScope,
     ENV
     ) {
     var ControllerListClass = baseControllerListClass.extend({
@@ -108,7 +110,9 @@
         });
       },
       removeInstance: function(model) {
-        return this.service.$deleteByUrl(model.url);
+        return this.service.$deleteByUrl(model.url).then(function() {
+          $rootScope.$broadcast('refreshProjectList');
+        });
       },
       checkPermissions: function() {
         var vm = this;
