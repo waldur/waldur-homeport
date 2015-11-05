@@ -66,7 +66,7 @@
       },
 
       selectPlan: function(plan) {
-        if (!this.currentPlan || plan.url !== this.currentPlan) {
+        if (!this.currentPlan || plan.url !== this.currentPlan.url) {
           this.selectedPlan = plan;
         } else {
           this.selectedPlan = null;
