@@ -125,7 +125,6 @@
         this.instance.hook_type = 'webhook';
       },
       fillRows: function() {
-        var vm = this;
         this.rows = eventRegistry.entities.map(function(entity) {
           return {
             id: entity,

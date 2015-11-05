@@ -35,7 +35,7 @@
         var fields = ['is_active', 'event_types', 'email', 'destination_url'];
         for(var i in fields) {
           var field = fields[i];
-          if (input[field] != undefined) {
+          if (input[field] !== undefined) {
             output[field] = input[field];
           }
         }
