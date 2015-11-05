@@ -38,7 +38,9 @@ section.support-description {
         width: 40px;
     }
     .expandable-indicator {
-        display: none;
+        @include bp(xs) {
+            display: none;
+        }
     }
     .sort-list {
         padding-left: 10px;
