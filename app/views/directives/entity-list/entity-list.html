@@ -148,7 +148,9 @@
                         <div ng-switch-when="bool"
                              class="bool-field"
                              title="{{ entity[field.propertyName] }}">
-                            <span class="icon"
+                            <span ng-show="field.logic === 'NOT'" class="icon"
+                                  ng-class="{'check': !entity[field.propertyName], 'minus': entity[field.propertyName] }"></span>
+                            <span ng-show="field.logic !== 'NOT'" class="icon"
                                   ng-class="{'check': entity[field.propertyName], 'minus': !entity[field.propertyName] }"></span>
                         </div>
 
