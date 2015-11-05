@@ -43,16 +43,24 @@
             scope.quotasTooltip = false;
           };
 
-          currentStateService.getCustomer().then(function(response) {
-            scope.model = response;
-            scope.currentPlan = response.plan ? response.plan.name : 'Default';
+          currentStateService.getCustomer().then(function(customer) {
+            scope.model = customer;
+            scope.currentPlan = customer.plan ? customer.plan.name : 'Default';
             // XXX replace when backend will send proper quotas names
-            var quotas = response.quotas;
+            var quotas = customer.plan.quotas;
+
+            var usage = {};
+            for (var i = 0; i < customer.quotas.length; i++) {
+              var item = customer.quotas[i];
+              usage[item.name] = item.usage;
+            }
+
             scope.currentPlanQuotas = quotas ? quotas.map(function(elem) {
+              var name = elem.name.replace(/nc_|_count/gi,'');
               return {
-                name: elem.name.replace(/nc_|_count/gi,'') + (elem.limit > 1 || elem.limit == -1 ? 's' : ''),
-                limit: elem.limit < 0 ? '∞' : elem.limit,
-                usage: elem.usage < 0 ? '∞' : elem.usage
+                name: name + (elem.value > 1 || elem.value == -1 ? 's' : ''),
+                limit: elem.value < 0 ? '∞' : elem.value,
+                usage: usage[name] < 0 ? 0 : usage[name]
               };
             }) : [];
           });
