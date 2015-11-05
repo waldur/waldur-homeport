@@ -105,7 +105,6 @@
         return issueCommentsService.getList(filter).then(function(response) {
           vm.issueComments[key].data = response;
           vm.issueComments[key].pages = issueCommentsService.pages;
-        }).finally(function() {
           $rootScope.$broadcast('mini-pagination:getNumberList', vm.issueComments[key].pages,
             page, vm.getCommentsForIssue.bind(vm), vm.expandableCommentsKey, key);
         });
