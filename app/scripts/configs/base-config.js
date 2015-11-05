@@ -131,4 +131,11 @@ angular.module('ncsaas')
       'Restarting': 'restarting'
     },
 
+    servicesStateColorClasses: {
+      'Erred': 'erred',
+      'In Sync': 'online',
+      'Sync Scheduled': 'starting',
+      'Syncing': 'starting'
+    }
+
   });

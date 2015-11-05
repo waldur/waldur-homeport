@@ -145,6 +145,15 @@
                              ng-class="field.getClass(entity[field.propertyName])"
                              title="{{ entity[field.propertyName] }}"></div>
 
+                        <div ng-switch-when="bool"
+                             class="bool-field"
+                             title="{{ entity[field.propertyName] }}">
+                            <span ng-show="field.logic === 'NOT'" class="icon"
+                                  ng-class="{'check': !entity[field.propertyName], 'minus': entity[field.propertyName] }"></span>
+                            <span ng-show="field.logic !== 'NOT'" class="icon"
+                                  ng-class="{'check': entity[field.propertyName], 'minus': !entity[field.propertyName] }"></span>
+                        </div>
+
                         <span ng-switch-when="avatar" class="avatar">
                             <img gravatar-src="field.avatarArraySrc ? entity[field.avatarArraySrc[0]][field.avatarArraySrc[1]] : entity[field.avatarSrc]"
                                  gravatar-size="100" alt="" class="avatar-img">

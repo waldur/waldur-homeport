@@ -297,6 +297,13 @@
             &.resources-count {
                 width: 100px;
             }
+            &.shared-filed {
+                width: 100px;
+                text-align: center;
+            }
+            .bool-field {
+                color: $link-color;
+            }
             &.resource-name {
                 width: 250px;
                 @include bp(xs) {

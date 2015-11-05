@@ -9,6 +9,7 @@
       'currentStateService',
       'usersService',
       'joinService',
+      'ENV',
       baseServiceListController]);
 
   // need for service tab
@@ -18,7 +19,8 @@
     customerPermissionsService,
     currentStateService,
     usersService,
-    joinService
+    joinService,
+    ENV
     ) {
     var ControllerListClass = baseControllerListClass.extend({
       customerHasProjects: true,
@@ -66,11 +68,23 @@
               showForMobile: true
             },
             {
-              type: ENTITYLISTFIELDTYPES.statusCircle,
+              name: 'State',
+              type: ENTITYLISTFIELDTYPES.colorState,
               propertyName: 'state',
-              onlineStatus: 'In Sync',
+              onlineStatus: ENV.resourceOnlineStatus,
               className: 'visual-status',
               showForMobile: true,
+              getClass: function(state) {
+                return ENV.servicesStateColorClasses[state];
+              },
+              colorsList: ENV.servicesStateColorClasses
+            },
+            {
+              name: 'My provider',
+              propertyName: 'shared',
+              type: ENTITYLISTFIELDTYPES.bool,
+              className: 'shared-filed',
+              logic: 'NOT'
             },
             {
               name: 'Type',
