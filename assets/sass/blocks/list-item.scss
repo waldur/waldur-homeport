@@ -12,10 +12,10 @@
     padding: 15px 0;
     padding-left: 10px;
     line-height: 1;
-    min-height: 70px;
     box-sizing: border-box;
     @include bp(xs) {
         padding-left: 0;
+        padding-right: 5px;
     } // xs
     @include bp(sm) {
         padding-left: 0;
@@ -159,9 +159,6 @@
             } // &.on-mobile
         } // expand
         &.name {
-            @include bp(xs) {
-                width: 160px;
-            }
             a {
                 &:hover {
                     text-decoration: underline;
@@ -169,17 +166,26 @@
             } // a
             .item-title {
                 font-weight: 400;
+                .subtitle {
+                    padding-top: 5px;
+                }
             } // item-title
             .subtitle {
                 display: block;
-                margin-top: 6px;
                 @include property(font-size, $small-font);
                 color: #8F8F8F;
+                strong {
+                    color: black;
+                }
+                span {
+                    padding-left: 10px;
+                }
             } // subtitle
         } // &.name
         &.avatar {
             width: 40px;
             text-align: center;
+            vertical-align: top;
             @include property(padding, 0);
             .avatar {
                 @include property(width, 30);
@@ -251,23 +257,23 @@
             }
             &.statusCircle {
                 width: 20px;
+                &.support {
+                    width: 28px;
+                    vertical-align: top;
+                }
             }
             &.visual-status {
                 width: 65px;
                 text-align: center;
                 @include bp(xs) {
-                    display: inline-block;
                     padding-right: 0;
                     text-align: left;
                     width: 20px;
-                    float: right;
                 } // xs
                 @include bp(sm) {
-                    display: inline-block;
                     padding-right: 0;
                     text-align: left;
                     width: 20px;
-                    float: right;
                 } // sm
             }
             &.message {

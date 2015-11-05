@@ -1,5 +1,5 @@
 .pagination {
-    padding-bottom: 45px;
+    padding: 15px 0px;
     color: #C0C0C0;
 
     .column {
@@ -35,6 +35,10 @@
         width: 44%;
         float: left;
         text-align: center;
+
+        @include bp(xs) {
+            width: 100%;
+        }
 
         a {
             @include inline-middle;

@@ -1,40 +1,38 @@
-<section detailscontent="checkbox avatar">
+<section block-ui="comments_{{ ::expandableElement.key }}">
 
     <header>
-        <section ng-if="expandableOptions.headBlock == 'description'" detailscontent="status avatar">
+        <section class="support-description" ng-if="expandableOptions.headBlock == 'description'">
             <article class="normal-description">{{ expandableElement.description }}</article>
         </section>
-
-        <minipagination
-                page-models="expandableList[expandableOptions.listKey]"
-                page-model-id="expandableElement[expandableOptions.modelId]"
-                page-change="expandableList[expandableOptions.minipaginationData.pageChange]"
-                page-entity-name="{{ expandableOptions.minipaginationData.pageEntityName }}">
-        </minipagination>
     </header>
 
     <ul class="list-blocks-support">
         <li class="item-list" ng-repeat="element in pageModels[modelId].data">
             <section ng-if="expandableOptions.answersBlock">
                 <div class="list-item">
-                    <div class="status"></div>
                     <div class="avatar">
-                <span class="avatar">
-                    <img gravatar-src="element.author.emailAddress" gravatar-size="100" alt="" class="avatar-img">
-                </span>
+                        <span class="avatar">
+                            <img gravatar-src="element.author.emailAddress" gravatar-size="100" alt="" class="avatar-img">
+                        </span>
                     </div>
-                    <div class="name">
-                <span class="subtitle">
-                    <strong>{{ element.author.displayName }}</strong> answer {{ element.created | date:'medium' }}
-                </span>
+                    <div class="support name">
+                        <span class="subtitle">
+                            <strong>{{ element.author.displayName }}</strong>
+                            <span title="{{ ::element.created | date:'medium' }}" am-time-ago="element.created"></span>
+                        </span>
                     </div>
-                </div>
-                <section class="support-answer">
                     <article class="normal-description">{{ element.body }}</article>
-                </section>
+                </div>
             </section>
         </li>
     </ul>
+
+    <minipagination
+            page-models="expandableList[expandableOptions.listKey]"
+            page-model-id="expandableElement[expandableOptions.modelId]"
+            page-change="expandableList[expandableOptions.minipaginationData.pageChange]"
+            page-entity-name="{{ expandableOptions.minipaginationData.pageEntityName }}">
+    </minipagination>
 
     <section ng-if="expandableOptions.hasAnswerForm" class="section-feedback">
         <div class="comment-form">
