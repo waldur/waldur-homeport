@@ -44,7 +44,8 @@
             {
               type: ENTITYLISTFIELDTYPES.statusCircle,
               className: 'statusCircle support',
-              propertyName: 'resolution'
+              propertyName: 'resolution',
+              showForMobile: true
             },
             {
               className: 'avatar',
@@ -52,12 +53,12 @@
                 'assignee',
                 'emailAddress'
               ],
-              showForMobile: ENTITYLISTFIELDTYPES.showForMobile,
+              showForMobile: false,
               type: ENTITYLISTFIELDTYPES.avatarPictureField
             },
             {
               propertyName: 'summary',
-              className: 'name',
+              className: 'name support',
               subtitle: ENTITYLISTFIELDTYPES.subtitle,
               showForMobile: ENTITYLISTFIELDTYPES.showForMobile,
               type: ENTITYLISTFIELDTYPES.name

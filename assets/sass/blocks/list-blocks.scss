@@ -10,22 +10,42 @@
 section.support-description {
     min-height: 0px;
     padding-bottom: 15px;
-    padding-left: 10px;
 }
 .list-blocks-support {
     @include clear-list-inline;
-    .support-answer {
-        padding-left: 50px;
+    li {
+        display: block;
+    }
+    @include bp(xs) {
+        display: block;
     }
     .list-item {
         padding: 0px;
         min-height: 0;
+        margin-bottom: 3px;
     }
     section {
         min-height: 0px;
-        padding-bottom: 11px;
+        padding-bottom: 15px;
     }
-    .avatar {
+}
+.support {
+    &.name {
+        display: block;
+        padding-left: 0;
+    }
+    .actions {
+        width: 40px;
+    }
+    .expandable-indicator {
+        display: none;
+    }
+    .sort-list {
         padding-left: 10px;
+    }
+    @include bp(xs) {
+        .avatar {
+            display: none;
+        }
     }
 }

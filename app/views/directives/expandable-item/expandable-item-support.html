@@ -15,15 +15,14 @@
                             <img gravatar-src="element.author.emailAddress" gravatar-size="100" alt="" class="avatar-img">
                         </span>
                     </div>
-                    <div class="name">
+                    <div class="support name">
                         <span class="subtitle">
-                            <strong>{{ element.author.displayName }}</strong> - <span title="{{ ::element.created | date:'medium' }}" am-time-ago="element.created"></span>
+                            <strong>{{ element.author.displayName }}</strong>
+                            <span title="{{ ::element.created | date:'medium' }}" am-time-ago="element.created"></span>
                         </span>
                     </div>
-                </div>
-                <section class="support-answer">
                     <article class="normal-description">{{ element.body }}</article>
-                </section>
+                </div>
             </section>
         </li>
     </ul>
