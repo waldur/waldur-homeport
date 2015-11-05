@@ -486,6 +486,9 @@
                     &.appstore-template-region, &.appstore-template-ssh_public_key {
                         height: 110px;
                     }
+                    &.appstore-template-visibility_level {
+                        height: 165px;
+                    }
                 }
             }
         }
