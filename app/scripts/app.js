@@ -860,6 +860,9 @@
             },
             'appHeader': {
               templateUrl: 'views/partials/app-header.html',
+            },
+            'sshKeys@help.details': {
+              templateUrl: 'views/help/ssh-keys.html',
             }
           },
           resolve: {
