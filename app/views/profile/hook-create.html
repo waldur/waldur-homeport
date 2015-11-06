@@ -17,7 +17,7 @@
             <div class="col input input-full">
                 <div class="custom-select">
                 <select id="type"
-                        ng-model="HookController.instance.$type"
+                        ng-model="HookController.instance.hook_type"
                         ng-options="type as (type|titleCase) for type in HookController.types">
                     <option value="">Select notification method</option>
                 </select>
@@ -25,7 +25,7 @@
             </div>
         </div>
 
-        <div class="form-row" ng-if="HookController.instance.$type == 'email'">
+        <div class="form-row" ng-if="HookController.instance.hook_type == 'email'">
             <div class="col label">
                 <label class="text" for="email">Email</label>
             </div>
@@ -39,7 +39,7 @@
             </div>
         </div>
 
-        <div class="form-row" ng-if="HookController.instance.$type == 'webhook'">
+        <div class="form-row" ng-if="HookController.instance.hook_type == 'webhook'">
             <div class="col label">
                 <label class="text" for="destination_url">URL</label>
             </div>
@@ -83,7 +83,7 @@
     <div class="decision">
         <div class="col">
             <a class="button-apply" submit-button="HookController.save()"
-               ng-class="{'disabled': (HookController.instance.$type == null)}">Create</a>
+               ng-class="{'disabled': (HookController.instance.hook_type == null)}">Create</a>
         </div>
         <div class="col">
             <a class="button-cancel" ng-click="HookController.cancel()">Cancel</a>
