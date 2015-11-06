@@ -11,15 +11,15 @@
             <div class="plans">
                 <div class="plan" ng-repeat="plan in PlanList.list">
                     <div class="plan-item"
-                         ng-class="{'current-plan': PlanList.currentPlan === plan.url, 'selected': PlanList.selectedPlan.uuid === plan.uuid}"
+                         ng-class="{'current-plan': PlanList.currentPlan.url === plan.url, 'selected': PlanList.selectedPlan.uuid === plan.uuid}"
                          ng-click="PlanList.selectPlan(plan)">
                         <table>
                             <th>
                                 <span class="plan-name">{{ plan.name }}</span>
-                                <span class="plan-price">${{ plan.price }} / mo.</span>
+                                <span class="plan-price">{{ plan.price | defaultCurrency }} / mo.</span>
                             </th>
                             <tr ng-repeat="quota in plan.quotas" visible="{{ PlanList.getPrettyQuotaName(quota.name) }}">
-                                <td>{{ quota.value }} {{ PlanList.getPrettyQuotaName(quota.name) }}</td>
+                                <td>{{ quota.value }} {{ PlanList.getPrettyQuotaName(quota.name) }} <div class="usage">Usage: {{ PlanList.usage[quota.name] }}</div></td>
                             </tr>
                         </table>
                     </div>
