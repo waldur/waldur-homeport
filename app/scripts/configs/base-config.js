@@ -128,7 +128,14 @@ angular.module('ncsaas')
       'Restarting Scheduled': 'restarting',
       'Starting': 'starting',
       'Stopping': 'stopping',
-      'Restarting': 'restarting'
+      'Restarting': 'restarting',
+      'Provisioning Scheduled': 'provisioning',
+      'Provisioning': 'provisioning',
+      'Deletion Scheduled': 'deleting',
+      'Deleting': 'deleting',
+      'Resizing Scheduled': 'resizing',
+      'Resizing': 'resizing'
+
     },
 
     servicesStateColorClasses: {
