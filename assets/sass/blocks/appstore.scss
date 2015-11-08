@@ -16,6 +16,32 @@
         position: relative;
         cursor: pointer;
         background: #fff;
+        .help-icon {
+            display: none;
+        }
+        &.disabled {
+            opacity: 1;
+            pointer-events: auto;
+            background: rgba(255,255,255,.3);
+            h3 {
+                color: rgba(0,0,0,.3);
+            }
+            img {
+                opacity: .3;
+            }
+            .help-icon {
+                position: absolute !important;
+                width: 100%;
+                height: 100%;
+                display: inline-block;
+                &:before {
+                    display: none;
+                }
+                span.help-text {
+                    color: #fff !important;
+                }
+            }
+        }
         &.no-active {
             opacity: 1;
         } // &.no-active
@@ -241,17 +267,18 @@
                 font-size: 16px;
                 font-weight: bold;
                 span {
-                    display: none;
-                    width: 93%;
-                    color: #ccc;
-                    font-size: 14px;
-                    position: absolute;
-                    bottom: 10px;
-                    &.compare-active {
-                        color: $dashboard-green;
+                    &:not(.help-text) {
+                        display: none;
+                        width: 93%;
+                        color: #ccc;
+                        font-size: 14px;
+                        position: absolute;
+                        bottom: 10px;
+                        &.compare-active {
+                            color: $dashboard-green;
+                        }
                     }
                 }
-
                 .icon{
                     display: inline-block;
                     position: relative;
