@@ -480,9 +480,9 @@
                 background: none;
                 border: none;
                 box-shadow: none;
-
+                width: 100%;
                 .list {
-                    min-height: 40px;
+                    min-height: 34px;
                     -webkit-box-shadow: 0px 2px 2px 0px #ededed;
                     box-shadow: 0px 2px 2px 0px #ededed;
                     -webkit-border-radius: 0px;
@@ -492,12 +492,44 @@
                     border: 1px solid #cacaca;
                     cursor: pointer;
                     background: #fff;
+                    display: block;
+                    margin-bottom: 10px;
+                    span {
+                        display: block;
+                        float: right;
+                        min-width: 70px;
+                        width: auto;
+                        &.title {
+                            float: left;
+                        }
+                    }
                     &.state {
+                        position: relative;
                         border: 1px solid rgb(62, 171, 84);
+                        &:before {
+                            content: '\f00c';
+                            font-family: FontAwesome;
+                            -webkit-font-smoothing: antialiased;
+                            -moz-osx-font-smoothing: grayscale;
+                            font-size: 18px;
+                            text-align: center;
+                            background-color: #3eab54;
+                            color: #fff;
+                            width: 18px;
+                            height: 18px;
+                            -webkit-border-radius: 100%;
+                            border-radius: 100%;
+                            position: absolute;
+                            left: 50%;
+                            margin-left: -9px;
+                            bottom: -9px;
+                            line-height: 19px;
+                            font-size: 12px;
+                        }
                     }
                 }
                 .list-item > span {
-                    width: 70px;
+                    min-width: 70px;
                 }
                 .title {
                     width: 40% !important;
@@ -505,9 +537,15 @@
                 }
                 .list-header .title {
                     padding-left: 25px;
+                    float: left;
                 }
                 .list-header {
                     font-weight: bold;
+                    display: block;
+                    span {
+                        float: right;
+                        display: block;
+                    }
                 }
             }
             .keys {
