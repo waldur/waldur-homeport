@@ -110,9 +110,11 @@
         });
       },
       removeInstance: function(model) {
-        return this.service.$deleteByUrl(model.url).then(function() {
-          $rootScope.$broadcast('refreshProjectList');
-        });
+        return this.service.$deleteByUrl(model.url);
+      },
+      afterInstanceRemove: function(instance) {
+        $rootScope.$broadcast('refreshProjectList');
+        this._super(instance);
       },
       checkPermissions: function() {
         var vm = this;
