@@ -4,11 +4,11 @@
   angular.module('ncsaas')
     .controller('PlansListController',
       ['baseControllerListClass', 'plansService', 'customersService', 'usersService', 'customerPermissionsService',
-       'agreementsService', '$stateParams', '$state', '$window', '$q', PlansListController]);
+       'agreementsService', 'ncUtils', '$stateParams', '$state', '$window', '$q', PlansListController]);
 
   function PlansListController(
       baseControllerListClass, plansService, customersService, usersService, customerPermissionsService,
-      agreementsService, $stateParams, $state, $window, $q) {
+      agreementsService, ncUtils, $stateParams, $state, $window, $q) {
     var controllerScope = this;
     var Controller = baseControllerListClass.extend({
       init:function() {
@@ -50,16 +50,7 @@
         });
       },
 
-      // XXX: This is quick fix, we need to get display names from backend, but currently quotas on backend do not
-      // have display names
-      getPrettyQuotaName: function(name) {
-        var prettyNames = {
-          'nc_user_count': 'users',
-          'nc_resource_count': 'resources',
-          'nc_project_count': 'projects'
-        };
-        return prettyNames[name];
-      },
+      getPrettyQuotaName: ncUtils.getPrettyQuotaName,
 
       cancel: function() {
         $state.go('organizations.details', {uuid:$stateParams.uuid});

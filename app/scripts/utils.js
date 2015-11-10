@@ -70,6 +70,9 @@
           var parts = value.split('/');
           return parts[parts.length - 1];
         }
+      },
+      getPrettyQuotaName: function(name) {
+        return name.replace(/nc_|_count/gi, '');
       }
     }
   }

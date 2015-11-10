@@ -2,13 +2,13 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('currentStateService', ['$q', '$window', 'ENV', currentStateService]);
+    .service('currentStateService', ['$q', '$window', 'ENV', 'ncUtils', currentStateService]);
 
   /**
    * This service contains values of objects, that affect current displayed data.
    * Notice: CurrentStateService can not make any backend calls. It stores only selected on user-side objects.
    */
-  function currentStateService($q, $window, ENV) {
+  function currentStateService($q, $window, ENV, ncUtils) {
     /*jshint validthis: true */
     var vm = this;
     vm.getCustomer = getCustomer;
@@ -65,8 +65,8 @@
       return vm.getCustomer().then(function(response) {
         for (var i = 0; i < response.quotas.length; i++) {
           var value = response.quotas[i];
-          value.name = value.name.replace(/nc_|_count/gi, '');
-          if (entity && value.name === entity && value.limit > -1 && (value.limit === value.usage || value.limit === 0)) {
+          var name = ncUtils.getPrettyQuotaName(value.name);
+          if (entity && name === entity && value.limit > -1 && (value.limit === value.usage || value.limit === 0)) {
             return true;
           }
         }

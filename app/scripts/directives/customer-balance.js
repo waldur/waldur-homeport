@@ -2,9 +2,9 @@
 
 (function() {
   angular.module('ncsaas')
-    .directive('customerBalance', ['currentStateService', 'ENV', detailsView]);
+    .directive('customerBalance', ['currentStateService', 'ncUtils', 'ENV', detailsView]);
 
-  function detailsView(currentStateService, ENV) {
+  function detailsView(currentStateService, ncUtils, ENV) {
     return {
       restrict: 'E',
       templateUrl: "views/directives/customer-balance.html",
@@ -45,24 +45,35 @@
 
           currentStateService.getCustomer().then(function(customer) {
             scope.model = customer;
-            scope.currentPlan = customer.plan ? customer.plan.name : 'Default';
-            // XXX replace when backend will send proper quotas names
-            var quotas = customer.plan.quotas;
 
-            var usage = {};
-            for (var i = 0; i < customer.quotas.length; i++) {
-              var item = customer.quotas[i];
-              usage[item.name] = item.usage;
+            if (customer.plan) {
+              scope.currentPlan = customer.plan.name;
+
+              var usage = {};
+              for (var i = 0; i < customer.quotas.length; i++) {
+                var quota = customer.quotas[i];
+                usage[quota.name] = quota.usage;
+              }
+
+              scope.currentPlanQuotas = customer.plan.quotas.map(function(quota) {
+                var name = ncUtils.getPrettyQuotaName(quota.name);
+                return {
+                  name: name + (quota.value > 1 || quota.value == -1 ? 's' : ''),
+                  limit: quota.value < 0 ? '∞' : quota.value,
+                  usage: usage[quota.name]
+                };
+              });
+            } else {
+              scope.currentPlan = 'Default';
+              scope.currentPlanQuotas = customer.quotas.map(function(quota) {
+                var name = ncUtils.getPrettyQuotaName(quota.name);
+                return {
+                  name: name + (quota.value > 1 || quota.value == -1 ? 's' : ''),
+                  limit: quota.limit < 0 ? '∞' : quota.limit,
+                  usage: quota.usage
+                };
+              });
             }
-
-            scope.currentPlanQuotas = quotas ? quotas.map(function(elem) {
-              var name = elem.name.replace(/nc_|_count/gi,'');
-              return {
-                name: name + (elem.value > 1 || elem.value == -1 ? 's' : ''),
-                limit: elem.value < 0 ? '∞' : elem.value,
-                usage: usage[name] < 0 ? 0 : usage[name]
-              };
-            }) : [];
           });
 
         };
