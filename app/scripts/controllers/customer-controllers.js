@@ -156,7 +156,7 @@
         this.currentUser = usersService.currentUser;
         this.detailsViewOptions = {
           title: 'Organization',
-          hasLogo: true,
+          hasLogo: false,
           listState: 'organizations.list',
           aboutFields: [
             {
