@@ -34,6 +34,15 @@
     &.restarting {
         background-color: #72a1ff;
     }
+    &.provisioning {
+        background-color: #7200aa;
+    }
+    &.deleting {
+        background-color: #550000;
+    }
+    &.resizing {
+        background-color: #e78f08;
+    }
     &.resource {
         display: none;
         position: relative;

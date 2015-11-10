@@ -19,6 +19,24 @@
                 <span>Add new project</span>
             </div>
         </div>
+        <div class="event-action-buttons" ng-show="activeTab == 'costs'">
+            <div visible="import" class="cost-tab-actions inline" >
+                <div class="inline"
+                     check-quotas="{{DashboardController.checkQuotasResource}}"
+                     sref="import.import"
+                     class-link="button button-margin-bottom">
+                    <div>Import resources</div>
+                </div>
+            </div>
+            <div visible="providers" class="cost-tab-actions inline">
+                <div class="inline"
+                     check-quotas="{{DashboardController.checkQuotasProvider}}"
+                     sref="services.create"
+                     class-link="button button-margin-bottom">
+                    <div>Add providers</div>
+                </div>
+            </div>
+        </div>
 
         <div class="clear"></div>
     </div>

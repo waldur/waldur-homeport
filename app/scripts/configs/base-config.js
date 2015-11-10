@@ -62,16 +62,26 @@ angular.module('ncsaas')
     ],
     IntercomAppId: 'xfbbcxck',
     defaultListCacheTime: 60 * 10,
+    profileHelp: {
+      sshKeys: {
+        type: 'sshKeys',
+        name: 'keys',
+        title: 'How to generate SSH key'
+      }
+    },
     helpList: [
       {
+        type: 'providers',
         name: 'Azure',
         link: null
       },
       {
+        type: 'providers',
         name: 'Amazon',
         link: 'http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSGettingStartedGuide/AWSCredentials.html'
       },
       {
+        type: 'providers',
         name: 'DigitalOcean',
         link: 'https://www.digitalocean.com/community/tutorials/how-to-use-the-digitalocean-api-v2'
       }
@@ -128,7 +138,21 @@ angular.module('ncsaas')
       'Restarting Scheduled': 'restarting',
       'Starting': 'starting',
       'Stopping': 'stopping',
-      'Restarting': 'restarting'
+      'Restarting': 'restarting',
+      'Provisioning Scheduled': 'provisioning',
+      'Provisioning': 'provisioning',
+      'Deletion Scheduled': 'deleting',
+      'Deleting': 'deleting',
+      'Resizing Scheduled': 'resizing',
+      'Resizing': 'resizing'
+
     },
+
+    servicesStateColorClasses: {
+      'Erred': 'erred',
+      'In Sync': 'online',
+      'Sync Scheduled': 'starting',
+      'Syncing': 'starting'
+    }
 
   });

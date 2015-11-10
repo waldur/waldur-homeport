@@ -8,6 +8,7 @@
     var Controller = baseControllerClass.extend({
       init: function() {
         this.list = ENV.helpList;
+        this.profileList = ENV.profileHelp;
         this._super();
       }
     });
@@ -30,6 +31,10 @@
         this._super();
       },
       getItem: function() {
+        if ($stateParams.name == ENV.profileHelp.sshKeys.name) {
+          this.model = ENV.profileHelp.sshKeys;
+          return;
+        }
         var list = ENV.helpList;
         for (var i = 0; i < list.length; i++) {
           if (list[i].name == $stateParams.name) {

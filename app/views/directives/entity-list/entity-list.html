@@ -145,6 +145,15 @@
                              ng-class="field.getClass(entity[field.propertyName])"
                              title="{{ entity[field.propertyName] }}"></div>
 
+                        <div ng-switch-when="bool"
+                             class="bool-field"
+                             title="{{ entity[field.propertyName] }}">
+                            <span ng-show="field.logic === 'NOT'" class="icon"
+                                  ng-class="{'check': !entity[field.propertyName], 'minus': entity[field.propertyName] }"></span>
+                            <span ng-show="field.logic !== 'NOT'" class="icon"
+                                  ng-class="{'check': entity[field.propertyName], 'minus': !entity[field.propertyName] }"></span>
+                        </div>
+
                         <span ng-switch-when="avatar" class="avatar">
                             <img gravatar-src="field.avatarArraySrc ? entity[field.avatarArraySrc[0]][field.avatarArraySrc[1]] : entity[field.avatarSrc]"
                                  gravatar-size="100" alt="" class="avatar-img">
@@ -157,10 +166,10 @@
 
                         <h3 ng-switch-when="name" class="item-title">
                             <a ng-if="field.link"
-                               ui-sref="{{ field.link }}" stoppropagation>{{ entity[field.propertyName] }}</a>
-                            <a ng-if="!field.link" stoppropagation>{{ entity[field.propertyName] }}</a>
+                               ui-sref="{{ field.link }}">{{ entity[field.propertyName] }}</a>
+                            <a ng-if="!field.link">{{ entity[field.propertyName] }}</a>
                             <span ng-if="field.subtitle" class="subtitle">
-                                #{{ entity.key }} - Created on {{ entity.created | date:'medium' }}
+                                #{{ entity.key }} <span title="{{ ::entity.created | date:'medium' }}" am-time-ago="entity.created"></span>
                             </span>
                             <span class="field-description"
                                   ng-if="field.description && field.description.condition == entity[field.description.field]">
@@ -168,10 +177,10 @@
                             </span>
                         </h3>
 
-                        <a ng-switch-when="link" ng-if="field.link" ui-sref="{{ field.link }}" stoppropagation>
+                        <a ng-switch-when="link" ng-if="field.link" ui-sref="{{ field.link }}">
                             {{ entity[field.propertyName] }}
                         </a>
-                        <a ng-switch-when="link" ng-if="!field.link" stoppropagation>
+                        <a ng-switch-when="link" ng-if="!field.link">
                             {{ entity[field.propertyName] }}
                         </a>
                         <span title="{{ ::entity[field.propertyName] | date:'medium' }}" ng-switch-when="date" am-time-ago="entity[field.propertyName]"></span>

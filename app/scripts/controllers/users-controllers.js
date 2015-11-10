@@ -178,7 +178,6 @@
             }
           ]
         };
-        this.detailsViewOptions.activeTab = this.getActiveTab(this.detailsViewOptions.tabs, $stateParams.tab);
       },
       getCurrentUser: function() {
         var vm = this;
@@ -199,6 +198,7 @@
               count: -1
             });
             vm.setNotificationsCount();
+            vm.detailsViewOptions.activeTab = vm.getActiveTab(vm.detailsViewOptions.tabs, $stateParams.tab);
           }
         });
       },
@@ -240,10 +240,8 @@
       setNotificationsCount: function() {
         var vm = this;
         if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('notifications') == -1) {
-          resourcesCountService['hooks-email']({}).then(function(hooksEmailCount) {
-            resourcesCountService['hooks-web']({}).then(function(hooksWebCount) {
-              vm.detailsViewOptions.tabs[2].count = hooksEmailCount + hooksWebCount;
-            });
+          resourcesCountService.hooks().then(function(count) {
+            vm.detailsViewOptions.tabs[2].count = count;
           });
         }
       }
@@ -273,5 +271,43 @@
 
 })();
 
+(function() {
+  angular.module('ncsaas')
+    .controller('DetailUpdateProfileController', [
+      'baseUserDetailUpdateController',
+      'usersService',
+      'ENV',
+      '$stateParams',
+      '$rootScope',
+      DetailUpdateProfileController
+    ]);
 
+  function DetailUpdateProfileController(
+    baseUserDetailUpdateController,
+    usersService,
+    ENV,
+    $stateParams,
+    $rootScope) {
+    var controllerScope = this;
+    var Controller = baseUserDetailUpdateController.extend({
+      init:function() {
+        this.controllerScope = controllerScope;
+        this._super();
+        this.detailsState = 'profile.details';
+        this.showImport = ENV.showImport;
+      },
+      activate: function() {
+        var vm = this;
+        usersService.getCurrentUser().then(function(response) {
+          vm.model = response;
+          vm.afterActivate();
+        });
+      },
+      search: function() {
+        $rootScope.$broadcast('generalSearchChanged', this.searchInput);
+      }
+    });
 
+    controllerScope.__proto__ = new Controller();
+  }
+})();

@@ -9,6 +9,8 @@
       'currentStateService',
       'usersService',
       'joinService',
+      '$rootScope',
+      'ENV',
       baseServiceListController]);
 
   // need for service tab
@@ -18,7 +20,9 @@
     customerPermissionsService,
     currentStateService,
     usersService,
-    joinService
+    joinService,
+    $rootScope,
+    ENV
     ) {
     var ControllerListClass = baseControllerListClass.extend({
       customerHasProjects: true,
@@ -66,11 +70,23 @@
               showForMobile: true
             },
             {
-              type: ENTITYLISTFIELDTYPES.statusCircle,
+              name: 'State',
+              type: ENTITYLISTFIELDTYPES.colorState,
               propertyName: 'state',
-              onlineStatus: 'In Sync',
+              onlineStatus: ENV.resourceOnlineStatus,
               className: 'visual-status',
               showForMobile: true,
+              getClass: function(state) {
+                return ENV.servicesStateColorClasses[state];
+              },
+              colorsList: ENV.servicesStateColorClasses
+            },
+            {
+              name: 'My provider',
+              propertyName: 'shared',
+              type: ENTITYLISTFIELDTYPES.bool,
+              className: 'shared-filed',
+              logic: 'NOT'
             },
             {
               name: 'Type',
@@ -95,6 +111,10 @@
       },
       removeInstance: function(model) {
         return this.service.$deleteByUrl(model.url);
+      },
+      afterInstanceRemove: function(instance) {
+        $rootScope.$broadcast('refreshProjectList');
+        this._super(instance);
       },
       checkPermissions: function() {
         var vm = this;

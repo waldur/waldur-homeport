@@ -105,7 +105,8 @@
               showForMobile: true,
               getClass: function(state) {
                 return ENV.resourceStateColorClasses[state];
-              }
+              },
+              colorsList: ENV.resourceStateColorClasses
             },
             {
               name: 'Access',

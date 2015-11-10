@@ -19,7 +19,8 @@
         box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16);
     } // &.top-level
     @include bp(xs) {
-        @include property(margin, 20 10);
+        @include property(margin, 0);
+        @include property(padding, 0);
     } // xs
     @include bp(sm) {
         @include property(margin, 20 10);

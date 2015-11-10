@@ -20,5 +20,21 @@
                 </div>
             </li>
         </ul>
+        <ul class="object-list" ng-if="HelpList.profileList">
+            <li class="list-item list-header">
+                <div class="additional-cell display-for-mobile">
+                    <a class="list-sort">Profile</a>
+                </div>
+            </li>
+            <li class="list-item" ng-if="HelpList.profileList.sshKeys.name">
+                <div class="additional-cell display-for-mobile">
+                    <h3 class="item-title">
+                        <a ui-sref="help.details({name: HelpList.profileList.sshKeys.name})" stoppropagation>
+                            {{ HelpList.profileList.sshKeys.title }}
+                        </a>
+                    </h3>
+                </div>
+            </li>
+        </ul>
     </div>
 </div>

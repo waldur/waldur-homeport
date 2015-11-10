@@ -37,6 +37,7 @@
                                  ng-repeat="service in AppStore.categoryServices[AppStore.selectedCategory.name]"
                                  ng-click="AppStore.setService(service)"
                                  ng-class="AppStore.serviceClass(service)">
+                                <helpicon help-text="State {{ service.state }}"></helpicon>
                                 <div class="icon">
                                     <img ng-src="/static/images/appstore/icon-{{ service.type.toLowerCase() }}.png" alt="">
                                 </div>
@@ -202,7 +203,8 @@
                                                  ng-click="AppStore.doChoice(field.name, choice)"
                                                  ng-class="{'state': field.name == 'security_groups'
                                                             ? AppStore.instance[field.name].indexOf(choice.value) > -1
-                                                            : AppStore.instance[field.name] == choice.value,
+                                                            : (AppStore.instance[field.name] === choice.value && choice.value)
+                                                                || (field.name === 'ssh_public_key' && AppStore.instance[field.name] === choice.url),
                                                             'disabled': choice.disabled}">
 
                                                 <div ng-if="::!choice.icon" class="icon {{ ::field.icon }}"></div>
@@ -210,7 +212,7 @@
 
                                                 <div class="description-{{::field.name}}">
                                                     <div>
-                                                        <p>{{ choice.display_name }}</p>
+                                                        <p>{{ choice.display_name || choice.name }}</p>
                                                     </div>
                                                 </div>
                                             </div>

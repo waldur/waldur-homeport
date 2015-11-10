@@ -345,9 +345,6 @@
             'tabEventlog@profile.details': {
               templateUrl: 'views/user/tab-eventlog.html',
             },
-            'tabProjects@profile.details': {
-              templateUrl: 'views/user/tab-projects.html',
-            },
             'tabKeys@profile.details': {
               templateUrl: 'views/user/tab-keys.html',
             },
@@ -359,9 +356,6 @@
             },
             'tabPassword@profile.details' : {
               templateUrl: 'views/user/tab-password.html'
-            },
-            'tabManageUser@profile.details': {
-              templateUrl: 'views/profile/tab-manage.html',
             }
           },
           resolve: {
@@ -520,9 +514,6 @@
             },
             'tabEventlog@users.details': {
               templateUrl: 'views/user/tab-eventlog.html',
-            },
-            'tabProjects@users.details': {
-              templateUrl: 'views/user/tab-projects.html',
             },
             'tabKeys@users.details': {
               templateUrl: 'views/user/tab-keys.html',
@@ -860,6 +851,9 @@
             },
             'appHeader': {
               templateUrl: 'views/partials/app-header.html',
+            },
+            'sshKeys@help.details': {
+              templateUrl: 'views/help/ssh-keys.html',
             }
           },
           resolve: {
