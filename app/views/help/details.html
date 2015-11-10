@@ -3,6 +3,9 @@
         <h1>Obtaining credentials for {{ HelpDetails.model.name }}</h1>
     </div>
     <div class="white-box">
+        <div class="instruction-page" ng-if="HelpDetails.model.type !== 'sshKeys' && HelpDetails.model.type !== 'providers'">
+            Help page is not available
+        </div>
         <div class="instruction-page" ng-if="HelpDetails.model.type == 'sshKeys'" ui-view="sshKeys"></div>
         <div class="instruction-page" ng-if="HelpDetails.model.type == 'providers'">
             <div class="">

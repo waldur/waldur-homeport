@@ -89,3 +89,17 @@
         } // foo
     } // form-row
 } // short-form
+.help-info {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: rgb(40, 174, 96);
+    border-radius: 50%;
+    content: "?";
+    color: rgb(255, 255, 255);
+    line-height: 22px;
+    text-align: center;
+    margin-top: 5px;
+    margin-left: 5px;
+    text-decoration: none;
+} // help-info

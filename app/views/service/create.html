@@ -107,6 +107,7 @@
     <!-- /non field errors -->
 
     <div class="decision" ng-show="ServiceAdd.model">
+        <a ui-sref="help.details({name: ServiceAdd.model.serviceName})" target="_blank" class="help-info">?</a>
         <div class="col">
             <a class="button-apply" ng-class="{'disabled': ServiceAdd.isDisabled()}" submit-button="ServiceAdd.save()">Add provider</a>
         </div>
