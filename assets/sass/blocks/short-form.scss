@@ -42,7 +42,7 @@
                     @include inline-middle;
                     padding: 3px 10px;
                 }
-                width: 160px;
+                width: 190px;
                 text-align: right;
                 @include bp(xs) {
                     text-align: left;
@@ -62,7 +62,7 @@
             &.input {
                 width: calc(100% - 320px);
                 &.input-full {
-                    width: calc(100% - 160px);
+                    width: calc(100% - 190px);
                 } // &.input-full
                 input[type=text] {
                     width: 100%;
