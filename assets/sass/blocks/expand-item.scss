@@ -11,16 +11,21 @@
   section {
     min-height: 100px;
   }
+
+  .error-message {
+    margin-bottom: 7px;
+    border-radius: 6px;
+    margin-left: 17px;
+
+    .icon.exclamation-triangle {
+      margin-right: 8px;
+      color: #990000;
+    }
+  }
 }
 
-.details-expandable {
-  .icon {
-    width: 17px;
-    height: 15px;
-    background: url("/static/images/edit-icon.png") no-repeat;
+.details-expandable .icon {
     margin-left: 10px;
-    cursor: pointer;
-  }
 }
 
 .expandable-indicator {
