@@ -68,7 +68,7 @@
               scope.currentPlanQuotas = customer.quotas.map(function(quota) {
                 var name = ncUtils.getPrettyQuotaName(quota.name);
                 return {
-                  name: name + (quota.value > 1 || quota.value == -1 ? 's' : ''),
+                  name: name + (quota.limit > 1 || quota.limit == -1 ? 's' : ''),
                   limit: quota.limit < 0 ? '∞' : quota.limit,
                   usage: quota.usage
                 };
