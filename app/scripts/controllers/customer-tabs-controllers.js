@@ -340,3 +340,50 @@
   }
 
 })();
+(function() {
+  angular.module('ncsaas')
+      .controller('CustomerDeleteTabController', [
+        'baseControllerClass',
+        'customersService',
+        'currentStateService',
+        '$state',
+        '$window',
+        CustomerDeleteTabController
+      ]);
+
+  function CustomerDeleteTabController(
+      baseControllerClass,
+      customersService,
+      currentStateService,
+      $state,
+      $window
+  ) {
+    var controllerScope = this;
+    var DeleteController = baseControllerClass.extend({
+      init: function() {
+        this.controllerScope = controllerScope;
+        this._super();
+        var vm = this;
+        currentStateService.getCustomer().then(function(customer) {
+          vm.customer = customer;
+        });
+      },
+      removeCustomer: function() {
+        var confirmDelete = confirm('Confirm deletion?');
+        if (confirmDelete) {
+          this.customer.$delete().then(function(instance) {
+            customersService.clearAllCacheForCurrentEndpoint();
+            customersService.getPersonalOrFirstCustomer(instance.name).then(function(customer) {
+              currentStateService.setCustomer(customer);
+              $state.transitionTo('organizations.details', {uuid: customer.uuid}, {notify: false});
+              $window.location.reload();
+            });
+          });
+        }
+      }
+    });
+
+    controllerScope.__proto__ = new DeleteController();
+  }
+
+})();

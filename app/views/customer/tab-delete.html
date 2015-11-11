@@ -1,0 +1,16 @@
+<div class="white-box no-styles" ng-controller="CustomerDeleteTabController as DeleteController">
+    <h2 class="app-title">
+        {{ DeleteController.customer.projects.length < 1
+        ? 'You can delete this organisation by pressing the button'
+        : 'Please remove all organization\'s projects before deletion of organization' }}
+    </h2>
+    <div class="decision">
+        <div class="col">
+            <a ng-click="DeleteController.removeCustomer()"
+               ng-class="{'disabled': !(DeleteController.customer.projects.length < 1)}"
+               class="disabled button button-red">
+                Delete organisation
+            </a>
+        </div>
+    </div>
+</div>
