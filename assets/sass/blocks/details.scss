@@ -890,3 +890,16 @@
     }
   }
 }
+
+dl.two-column {
+  dt {
+    float: left;
+    clear: both;
+    width: 100px;
+    font-weight: bold;
+    margin-bottom: 13px;
+  }
+  dd {
+    float: left;
+  }
+}
