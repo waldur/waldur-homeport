@@ -672,7 +672,7 @@
       },
       save: function() {
         if (this.instance.password !== this.instance.repeat_password) {
-          this.errors.password = ['Your passwords don\'t match'];
+          this.errors.password = ['The passwords you have entered do not match.'];
           this.onError();
           return $q.reject();
         } else {
