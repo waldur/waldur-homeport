@@ -2,23 +2,29 @@
   angular.module('ncsaas')
     .controller('CustomerServiceTabController', [
       '$stateParams',
+      '$interval',
+      '$scope',
       'baseServiceListController',
       'joinService',
       'servicesService',
       'usersService',
       'ncUtils',
       'ncUtilsFlash',
+      'ENV',
       CustomerServiceTabController
     ]);
 
   function CustomerServiceTabController(
     $stateParams,
+    $interval,
+    $scope,
     baseServiceListController,
     joinService,
     servicesService,
     usersService,
     ncUtils,
-    ncUtilsFlash) {
+    ncUtilsFlash,
+    ENV) {
     var controllerScope = this;
     var Controller = baseServiceListController.extend({
       init: function() {
@@ -40,6 +46,8 @@
         this._super();
         this.entityOptions.list[0].type = 'editable';
         this.entityOptions.entityData.expandable = true;
+        this.entityOptions.entityData.timer = ENV.resourcesTimerInterval;
+        this.cancelRefresh();
       },
       showMore: function(service) {
         var vm = this;
@@ -74,6 +82,46 @@
         return fields;
       },
       afterGetList: function() {
+        this.expandSelectedItem();
+        this.scheduleRefresh();
+      },
+      scheduleRefresh: function() {
+        var vm = this;
+        vm.refreshPromise = $interval(function() {
+          vm.service.cacheReset = true;
+          vm.service.clearAllCacheForCurrentEndpoint();
+          vm.service.getList().then(function(list) {
+            vm.mergeLists(vm.list, list);
+          });
+        }, ENV.resourcesTimerInterval * 1000);
+      },
+      cancelRefresh: function() {
+        var vm = this;
+        vm.refreshPromise = null;
+        $scope.$on('$destroy', function() {
+          if (vm.refreshPromise) {
+            $interval.cancel(vm.refreshPromise);
+          }
+        });
+      },
+      mergeLists: function(list1, list2) {
+        var itemByUuid = {};
+        for (var i = 0; i < list1.length; i++) {
+          var item = list1[i];
+          itemByUuid[item.uuid] = item;
+        }
+        for (var i = 0; i < list2.length; i++) {
+          var item2 = list2[i];
+          var item1 = itemByUuid[item2.uuid];
+          if (!item1) {
+            continue;
+          }
+          for(var key in item2) {
+            item1[key] = item2[key];
+          }
+        }
+      },
+      expandSelectedItem: function() {
         var vm = this;
         var service_type = $stateParams.providerType;
         var uuid = $stateParams.providerUuid;
