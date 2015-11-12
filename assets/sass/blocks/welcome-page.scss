@@ -20,6 +20,12 @@
             background-position: center;
         }
     }
+    &.cost-tracking {
+        margin-top: -50px;
+        padding-top: 100px;
+        background: url(../images/decor-image-squ.png) no-repeat;
+        background-size: cover;
+    }
     &.login {
         height: calc(100vh - 40px);
         padding-bottom: 0;
@@ -290,3 +296,26 @@
         } // feature
     } // .col
 } // features
+.providers {
+    margin: 30px 0;
+    .providers-list {
+        display: table;
+        max-width: 1000px;
+        margin: 0 auto;
+        .provider {
+            display: table-cell;
+            vertical-align: middle;
+            text-align: center;
+            .img-wrapper {
+                position: relative;
+                width: 50px;
+                height: 50px;
+                img {
+                    position: absolute;
+                    max-width: 100%;
+                    max-height: 100%;
+                }
+            }
+        }  // provider
+    } // providers-list
+} // providers
