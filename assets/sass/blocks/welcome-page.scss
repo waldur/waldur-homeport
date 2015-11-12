@@ -153,17 +153,24 @@
     .img {
         position: absolute;
         bottom: -50px;
+        max-width: 500px;
     } // img
     .img-left {
         left: 50px;
         z-index: 9;
     } // img
     .img-center {
-        left: 50%;
+        left: 40%;
         margin-left: -268px;
         z-index: 10;
         bottom: -30px;
     } // img
+    .img-center-appstore {
+        left: 63%;
+        margin-left: -268px;
+        z-index: 10;
+        bottom: -30px;
+    }
     .img-right {
         right: 50px;
         z-index: 9;
