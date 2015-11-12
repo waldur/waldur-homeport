@@ -184,7 +184,8 @@
       },
 
       processTableData: function(rows) {
-        var results = {};
+        var results = {},
+            scopeArray;
         for (var i = 0; i < rows.length; i++) {
           var row = rows[i];
           var date = moment(row.month, 'MM').format('MMMM') + ' ' + row.year;
@@ -202,6 +203,9 @@
             results[date].total = row.total;
           }
           if (row.scope_type === 'project') {
+            scopeArray = row.scope_name.split(' | ');
+            row.project_name = scopeArray[0];
+            row.organization_name = scopeArray[1];
             results[date].projects.push(row);
           }
           if (row.scope_type === 'resource') {
