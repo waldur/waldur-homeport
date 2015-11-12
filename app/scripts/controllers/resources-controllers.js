@@ -324,7 +324,7 @@
               title: 'Backups',
               key: 'backups',
               viewName: 'tabBackups',
-              count: -1
+              count: 0
             },
             {
               title: 'Alerts',
@@ -368,7 +368,7 @@
           'Provisioning',
           'Starting Scheduled',
           'Starting'
-        ]
+        ];
         this.inProgress = startStates.indexOf(this.model.state) != -1;
       },
       cancelRefresh: function() {
