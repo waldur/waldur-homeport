@@ -95,7 +95,12 @@
                                         <helpicon help-text="{{ field.help_text }}" ng-if="field.help_text"></helpicon>
                                         {{ field.label }}
                                     </label>
-                                    <input type="text" id="{{ field.name }}" ng-model="AppStore.instance[field.name]"/>
+                                    <input ng-if="field.name === 'password'" class="appstore-password" type="password" id="{{ field.name }}" ng-model="AppStore.instance[field.name]"/>
+                                    <label ng-if="field.name === 'password'" for="repeat_password">
+                                        Repeat password
+                                    </label>
+                                    <input ng-if="field.name === 'password'" class="appstore-password" type="password" id="repeat_password" ng-model="AppStore.instance['repeat_password']"/>
+                                    <input ng-if="field.name !== 'password'" type="text" id="{{ field.name }}" ng-model="AppStore.instance[field.name]"/>
                                     <div class="error arrow-up" ng-show="AppStore.errors[field.name]">
                                         <ul class="error-list">
                                             <li ng-repeat="error in AppStore.errors[field.name]" ng-bind="error"></li>
@@ -145,7 +150,7 @@
 
                                 <form ng-show="AppStore.isListLong(field)">
                                     <div class="string-field">
-                                    <input type="text" placeholder="Search by name"
+                                    <input type="text" placeholder="Type to filter by name"
                                            ng-model="field.searchQuery" ng-init="field.searchQuery=''"/>
                                     </div>
                                 </form>
@@ -191,7 +196,7 @@
 
                                     <form ng-show="AppStore.isListLong(field)">
                                         <div class="string-field">
-                                        <input type="text" placeholder="Search by name"
+                                        <input type="text" placeholder="Type to filter by name"
                                                ng-model="field.searchQuery" ng-init="field.searchQuery=''"/>
                                         </div>
                                     </form>

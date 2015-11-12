@@ -458,6 +458,9 @@
             'tabAlerts@organizations.details': {
               templateUrl: 'views/customer/tab-alerts.html',
             },
+            'tabDelete@organizations.details': {
+              templateUrl: 'views/customer/tab-delete.html',
+            },
             'appHeader': {
               templateUrl: 'views/partials/app-header.html',
             }

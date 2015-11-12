@@ -202,6 +202,11 @@
               title: 'Providers',
               key: 'providers',
               viewName: 'tabServices'
+            },
+            {
+              title: 'Manage',
+              key: 'delete',
+              viewName: 'tabDelete'
             }
           ]
         };

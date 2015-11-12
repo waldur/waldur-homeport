@@ -341,7 +341,7 @@
               }
             },
             {
-              title: 'Delete',
+              title: 'Manage',
               key: 'delete',
               viewName: 'tabDelete'
             }
