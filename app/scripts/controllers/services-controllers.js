@@ -224,7 +224,7 @@
         for (var i = 0; i < this.model.options.length; i++) {
           var option = this.model.options[i];
           var value = option.value;
-          if (angular.isUndefined(value)) {
+          if (!value) {
             continue;
           }
           if (ncUtils.isFileOption(option)) {

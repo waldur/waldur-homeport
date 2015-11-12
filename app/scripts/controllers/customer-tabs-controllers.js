@@ -112,6 +112,16 @@
         );
       },
       getFilename: ncUtils.getFilename,
+      isDisabled: function(service) {
+        for (var name in service.values) {
+          var option = service.options[name];
+          var value = service.values[name];
+          if (option && option.required && !value) {
+            return true;
+          }
+        }
+        return false;
+      },
       getData: function(service) {
         var values = {};
         for (var name in service.values) {
@@ -120,6 +130,9 @@
             continue;
           }
           var value = service.values[name];
+          if (!value) {
+            continue;
+          }
           if (ncUtils.isFileOption(option)) {
             if (value.length != 1 || !ncUtils.isFileValue(value[0])) {
               continue;
