@@ -1,4 +1,5 @@
 <section block-ui="{{ ::expandableElement.uuid }}">
+    <div class="success-message" ng-if="expandableList.getClass(expandableElement.state) == 'processing'">Please wait few minutes until service provisioning is completed.</div>
     <header>
         <h3 ng-show="expandableOptions.title" class="title-expandable">{{ ::expandableOptions.title }}</h3>
         <div class="short-form" ng-if="expandableElement.editable">

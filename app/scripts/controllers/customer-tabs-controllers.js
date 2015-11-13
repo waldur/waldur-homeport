@@ -46,7 +46,6 @@
         this._super();
         this.entityOptions.list[0].type = 'editable';
         this.entityOptions.entityData.expandable = true;
-        this.entityOptions.entityData.timer = ENV.resourcesTimerInterval;
         this.cancelRefresh();
       },
       showMore: function(service) {
@@ -68,6 +67,9 @@
 
           ncUtils.blockElement(service.uuid, promise);
         });
+      },
+      getClass: function(state) {
+        return ENV.servicesStateColorClasses[state];
       },
       getFields: function(options) {
         var fields = [];

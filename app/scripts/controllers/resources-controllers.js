@@ -100,13 +100,16 @@
               name: 'State',
               type: ENTITYLISTFIELDTYPES.colorState,
               propertyName: 'state',
-              onlineStatus: ENV.resourceOnlineStatus,
               className: 'visual-status',
               showForMobile: true,
               getClass: function(state) {
-                return ENV.resourceStateColorClasses[state];
-              },
-              colorsList: ENV.resourceStateColorClasses
+                var cls = ENV.resourceStateColorClasses[state];
+                if (cls == 'processing') {
+                  return 'icon refresh spin';
+                } else {
+                  return 'status-circle ' + cls;
+                }
+              }
             },
             {
               name: 'Access',

@@ -11,6 +11,14 @@
   section {
     min-height: 100px;
   }
+
+  .success-message {
+    margin-bottom: 7px;
+    border-radius: 6px;
+    padding: 10px;
+    color: #3c763d;
+    background-color: #dff0d8;
+  }
 }
 
 .details-expandable {
