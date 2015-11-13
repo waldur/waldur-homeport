@@ -28,11 +28,11 @@
                 <span>You are on a forever free plan!</span><br/>
                 If you need more analytical power please upgrade your plan later.
             </p>
-            <div class="col initial-package" visible="plans">
+            <div class="col initial-package" visible="plans" ng-if="InitialData.customer.plan">
                 <span class="plan-name">Free plan</span>
                 <div class="plan-item">
                     <table>
-                        <tr ng-repeat="quota in InitialData.agreement.quotas" visible="{{ InitialData.getPrettyQuotaName(quota.name, quota.value) }}">
+                        <tr ng-repeat="quota in InitialData.customer.plan.quotas" visible="{{ InitialData.getPrettyQuotaName(quota.name, quota.value) }}">
                             <td>{{ quota.value }} {{ InitialData.getPrettyQuotaName(quota.name, quota.value) }}</td>
                         </tr>
                     </table>

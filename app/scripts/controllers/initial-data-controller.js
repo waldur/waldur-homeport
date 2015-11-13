@@ -63,11 +63,6 @@
         var vm = this;
         currentStateService.getCustomer().then(function(customer) {
           vm.customer = customer;
-          agreementsService.getList({customer: customer.uuid}).then(function(agreements) {
-            if (agreements.length !== 0) {
-              vm.agreement = agreements[0];
-            }
-          });
         });
       },
       getPrettyQuotaName: function(name, count) {
