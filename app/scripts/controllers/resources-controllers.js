@@ -32,6 +32,7 @@
         this.searchFieldName = 'name';
         this.selectAll = true;
         this.hasFilters = false;
+        var currentCustomerUuid = currentStateService.getCustomerUuid();
         this.actionButtonsListItems = [
           {
             title: 'Start',
@@ -94,7 +95,9 @@
             {
               name: 'Provider',
               propertyName: 'service_name',
-              type: ENTITYLISTFIELDTYPES.noType
+              type: ENTITYLISTFIELDTYPES.link,
+              link: 'organizations.details({uuid: "' + currentCustomerUuid +
+              '",tab: "providers", providerUuid: entity.service_uuid, providerType: entity.resource_type.split(".")[0]})'
             },
             {
               name: 'State',
