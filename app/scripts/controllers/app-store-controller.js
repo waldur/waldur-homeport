@@ -699,17 +699,11 @@
         }
         ncUtilsFlash.error(message);
       },
-      successRedirect: function() {
-        var tab = this.getDestinationTab();
-        $state.go('resources.list', {tab: tab});
-      },
-      getDestinationTab: function() {
-        if (this.isVirtualMachinesSelected()) {
-          return ENV.resourcesTypes.vms;
-        } else if (this.isApplicationSelected()) {
-          return ENV.resourcesTypes.applications;
+      successRedirect: function(model) {
+        if (this.isVirtualMachinesSelected() || this.isApplicationSelected()) {
+          $state.go('resources.details', {uuid: model.uuid, resource_type: model.resource_type});
         } else if (this.isSupportSelected()) {
-          return 'premiumSupport';
+          return $state.go('resources.list', {tab: 'premiumSupport'});
         }
       },
       setCompare: function(categoryName) {

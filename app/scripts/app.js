@@ -598,6 +598,9 @@
             'appContent': {
               templateUrl: 'views/resource/details.html',
             },
+            'tabDetails@resources.details': {
+              templateUrl: 'views/resource/tab-details.html',
+            },
             'tabBackups@resources.details': {
               templateUrl: 'views/resource/tab-backups.html',
             },

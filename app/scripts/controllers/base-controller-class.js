@@ -195,12 +195,12 @@
       save: function() {
         var vm = this;
         vm.beforeSave();
-        return vm.saveInstance().then(function() {
-          vm.afterSave();
+        return vm.saveInstance().then(function(model) {
+          vm.afterSave(model);
           ncUtilsFlash.success(vm.getSuccessMessage());
           vm.service.clearAllCacheForCurrentEndpoint();
           $rootScope.$broadcast('refreshCounts');
-          vm.successRedirect();
+          vm.successRedirect(model);
           return true;
         }, function(response) {
           vm.errors = response.data;
@@ -242,9 +242,9 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('baseControllerDetailUpdateClass', ['$state', 'baseControllerClass', '$stateParams', '$rootScope', 'ENV', baseControllerDetailUpdateClass]);
+    .service('baseControllerDetailUpdateClass', ['$state', 'baseControllerClass', '$stateParams', '$rootScope', '$q', 'ENV', baseControllerDetailUpdateClass]);
 
-  function baseControllerDetailUpdateClass($state, baseControllerClass, $stateParams, $rootScope, ENV) {
+  function baseControllerDetailUpdateClass($state, baseControllerClass, $stateParams, $rootScope, $q, ENV) {
     /**
      * Use controllerScope.__proto__ = new Controller() in needed controller
      * use this.controllerScope for changes in event handler
@@ -274,6 +274,19 @@
         }
         return defaultTab;
       },
+      setCounters: function() {
+        var vm = this;
+        var tabs = this.detailsViewOptions.tabs;
+        angular.forEach(tabs, function(tab) {
+          if (tab.getCount && (ENV.featuresVisible || ENV.toBeFeatures.indexOf(tab.key) == -1)) {
+            tab.count = 0;
+            var promise = tab.getCount.call(vm);
+            $q.when(promise).then(function(count) {
+              tab.count = count;
+            })
+          }
+        });
+      },
       update: function() {
         var vm = this;
         vm.beforeUpdate();
@@ -301,12 +314,13 @@
         vm.getModel().then(function(response) {
           vm.model = response;
           vm.afterActivate();
-        }, function() {
-          $state.go('errorPage.notFound');
-        });
+        }, vm.modelNotFound.bind(vm));
       },
       getModel: function() {
         return this.service.$get($stateParams.uuid);
+      },
+      modelNotFound: function() {
+        $state.go('errorPage.notFound');
       },
       remove: function() {
         var vm = this;

@@ -1,0 +1,21 @@
+<div ng-if="controller.inProgress">
+    <div class="list-cache-reset">
+        <a class="icon-button processing"></a>
+    </div>
+    Please wait a few minutes until resource provisioning is completed.
+</div>
+
+<dl class="two-column">
+    <dt>State</dt>
+    <dd>{{ controller.model.state }}</dd>
+
+    <dt>Type</dt>
+    <dd>{{ controller.model.resource_type }}</dd>
+
+    <dt>Provider</dt>
+    <dd>{{ controller.model.service_name }}</dd>
+
+    <dt>Created</dt>
+    <dd><span am-time-ago="controller.model.created" title="{{ controller.model.created }}"></span></dd>
+
+</dl>
