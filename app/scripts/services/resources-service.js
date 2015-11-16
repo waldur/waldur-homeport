@@ -3,9 +3,9 @@
 (function() {
   angular.module('ncsaas')
     .service('resourcesService', [
-      'baseServiceClass', 'ENV', '$http', 'servicesService', resourcesService]);
+      'baseServiceClass', 'ENV', '$http', 'servicesService', '$q', resourcesService]);
 
-  function resourcesService(baseServiceClass, ENV, $http, servicesService) {
+  function resourcesService(baseServiceClass, ENV, $http, servicesService, $q) {
     var ServiceClass = baseServiceClass.extend({
       init:function() {
         this._super();
@@ -29,10 +29,18 @@
       },
 
       countByType: function(params) {
+        var vm = this;
         var url = ENV.apiEndpoint + 'api' + '/resources/count/';
-        return $http.get(url, {params: params}).then(function(response) {
-          return response.data;
-        });
+        var cacheKey = url + JSON.stringify(params) + 'x-result-count';
+        var cache = this.getCache(cacheKey);
+        if (cache && cache.time > new Date().getTime()) {
+          return $q.when(cache.data);
+        } else {
+          return $http.get(url, {params: params}).then(function(response) {
+            vm.setCache(ENV.countsCacheTime, response.data, cacheKey, '/resources/');
+            return response.data;
+          });
+        }
       },
 
       getAvailableOperations: function(resource) {

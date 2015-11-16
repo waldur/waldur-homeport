@@ -230,7 +230,7 @@
     .controller('ProjectDetailUpdateController', [
       '$stateParams',
       '$rootScope',
-      '$q',
+      '$interval',
       'ENV',
       'projectsService',
       'baseControllerDetailUpdateClass',
@@ -245,7 +245,7 @@
   function ProjectDetailUpdateController(
     $stateParams,
     $rootScope,
-    $q,
+    $interval,
     ENV,
     projectsService,
     baseControllerDetailUpdateClass,
@@ -365,6 +365,7 @@
           $rootScope.$broadcast('adjustCurrentProject', this.model);
         }
         this.setCounters();
+        $interval(this.setCounters.bind(controllerScope), ENV.countersTimerInterval * 1000);
       },
       getResourceCount: function(category, project_uuid) {
         return servicesService.getResourceTypes(category).then(function(types) {

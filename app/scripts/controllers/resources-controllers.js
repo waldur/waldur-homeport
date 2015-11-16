@@ -4,7 +4,6 @@
   angular.module('ncsaas')
     .service('baseResourceListController',
     ['baseControllerListClass',
-    '$q',
     'ENV',
     'ENTITYLISTFIELDTYPES',
     'resourcesService',
@@ -17,7 +16,6 @@
   // need for resource tab
   function baseResourceListController(
     baseControllerListClass,
-    $q,
     ENV,
     ENTITYLISTFIELDTYPES,
     resourcesService,
@@ -158,35 +156,35 @@
         });
       },
       adjustSearchFilters: function() {
-        var vm = this;
-        if (vm.hasFilters) {
-          return $q.when(true);
-        }
+        var vm = this,
+          resourcesCounts = null;
 
         vm.service.defaultFilter.resource_type = [];
+
         return servicesService.getResourceTypes(vm.category).then(function(types) {
           vm.service.defaultFilter.resource_type = types;
-          return resourcesService.countByType(vm.service.defaultFilter).then(function(counts) {
-            return servicesService.getServicesList().then(function(metadata) {
-              var filters = [];
-              for(var type in metadata) {
-                var service = metadata[type];
-                var resources = service.resources;
-                for (var resource in resources) {
-                  var id = servicesService.formatResourceType(type, resource);
-                  if (counts[id] > 0) {
-                    filters.push({
-                      name: 'resource_type',
-                      title: type + ' ' + resource + ' (' + counts[id] + ')',
-                      value: id
-                    });
-                  }
-                }
+        }).then(function() {
+          return resourcesService.countByType(vm.service.defaultFilter);
+        }).then(function(counts) {
+          resourcesCounts = counts;
+          return servicesService.getServicesList();
+        }).then(function(metadata) {
+          var filters = [];
+          for(var type in metadata) {
+            var service = metadata[type];
+            var resources = service.resources;
+            for (var resource in resources) {
+              var id = servicesService.formatResourceType(type, resource);
+              if (resourcesCounts[id] > 0) {
+                filters.push({
+                  name: 'resource_type',
+                  title: type + ' ' + resource + ' (' + resourcesCounts[id] + ')',
+                  value: id
+                });
               }
-              vm.searchFilters = filters;
-              vm.hasFilters = true;
-            });
-          });
+            }
+          }
+          vm.searchFilters = filters;
         });
       },
       afterGetList: function() {

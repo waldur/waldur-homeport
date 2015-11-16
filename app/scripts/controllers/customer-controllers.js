@@ -118,6 +118,7 @@
       '$rootScope',
       '$q',
       '$window',
+      '$interval',
       'servicesService',
       'resourcesCountService',
       'alertsService',
@@ -136,6 +137,7 @@
     $rootScope,
     $q,
     $window,
+    $interval,
     servicesService,
     resourcesCountService,
     alertsService,
@@ -228,6 +230,7 @@
         controllerScope.updateImageUrl();
 
         this.setCounters();
+        $interval(this.setCounters.bind(controllerScope), ENV.countersTimerInterval * 1000);
         this.service.getBalanceHistory(this.model.uuid).then(this.processChartData.bind(this));
       },
 
