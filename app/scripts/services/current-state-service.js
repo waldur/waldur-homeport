@@ -67,7 +67,7 @@
           var value = response.quotas[i];
           value.name = value.name.replace(/nc_|_count/gi, '');
           if (entity && value.name === entity && value.limit > -1 && (value.limit === value.usage || value.limit === 0)) {
-            return true;
+            return {name: value.name, usage: [value.limit, value.usage]};
           }
         }
         return false;
