@@ -37,29 +37,38 @@
           {
             title: 'Start',
             clickFunction: this.startResource.bind(this.controllerScope),
-            isDisabled: function(model) {
+            isHidden: function(model) {
               return !this.isOperationAvailable('start', model);
+            }.bind(this.controllerScope),
+            isDisabled: function(model) {
+              return !this.isOperationEnabled('start', model);
             }.bind(this.controllerScope)
           },
           {
             title: 'Stop',
             clickFunction: this.stopResource.bind(this.controllerScope),
-            isDisabled: function(model) {
+            isHidden: function(model) {
               return !this.isOperationAvailable('stop', model);
-            }.bind(this.controllerScope)
+            }.bind(this.controllerScope),
+            isDisabled: function(model) {
+              return !this.isOperationEnabled('stop', model);
+            }.bind(this.controllerScope),
           },
           {
             title: 'Restart',
             clickFunction: this.restartResource.bind(this.controllerScope),
-            isDisabled: function(model) {
+            isHidden: function(model) {
               return !this.isOperationAvailable('restart', model);
+            }.bind(this.controllerScope),
+            isDisabled: function(model) {
+              return !this.isOperationEnabled('restart', model);
             }.bind(this.controllerScope)
           },
           {
             title: 'Remove',
             clickFunction: this.remove.bind(this.controllerScope),
             isDisabled: function(model) {
-              return !this.isOperationAvailable('delete', model);
+              return !this.isOperationEnabled('delete', model);
             }.bind(this.controllerScope),
             className: 'remove'
           },
@@ -253,8 +262,12 @@
         this._super(resource);
         projectsService.clearAllCacheForCurrentEndpoint();
       },
-      isOperationAvailable:function(operation, resource) {
+      isOperationAvailable: function(operation, resource) {
         var availableOperations = this.service.getAvailableOperations(resource);
+        return availableOperations.indexOf(operation.toLowerCase()) !== -1;
+      },
+      isOperationEnabled: function(operation, resource) {
+        var availableOperations = this.service.getEnabledOperations(resource);
         return availableOperations.indexOf(operation.toLowerCase()) !== -1;
       },
       reInitResource:function(resource) {

@@ -3,7 +3,7 @@
     <a ng-if="!buttonType" class="button" ng-show="buttonList.length > 1" ng-click="openActionsListTrigger()">actions</a>
     <ul ng-show="buttonController.actionButtonsList[$id] || buttonList.length == 1"
         ng-class="{'actions-dropdown': buttonList.length > 1, 'one-action-button': buttonList.length == 1}">
-        <li ng-repeat="button in buttonList" ng-if="!buttonType" title="{{ button.tooltip(buttonModel) }}">
+        <li ng-repeat="button in buttonList" ng-if="!buttonType && !button.isHidden(buttonModel)" title="{{ button.tooltip(buttonModel) }}">
             <a ng-if="::button.clickFunction" ng-click="button.clickFunction(buttonModel)"
                class="button-simple {{ button.className }}"
                ng-class="{'disabled': button.isDisabled(buttonModel)}">{{ button.title }}</a>
