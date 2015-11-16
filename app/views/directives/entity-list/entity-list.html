@@ -211,11 +211,10 @@
                             <span editable-text="entity[field.propertyName]"
                                   e-form="rowform"
                                   buttons="no"
-                                  onaftersave="entityList.update(entity)"
-                                  title="Click to edit">
+                                  onaftersave="entityList.update(entity)">
                                     {{ entity[field.propertyName] }}
                             </span>
-                            <div stoppropagation class="icon" ng-click="rowform.$show()" ng-hide="rowform.$visible"></div>
+                            <div stoppropagation class="icon pencil-square-o" ng-click="rowform.$show()" ng-hide="rowform.$visible"></div>
                         </span>
 
                         <span ng-switch-when="html" ng-bind-html="::entity[field.propertyName]"></span>

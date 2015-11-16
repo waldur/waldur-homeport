@@ -19,16 +19,23 @@
     color: #3c763d;
     background-color: #dff0d8;
   }
+  
+  .error-message {
+    margin-bottom: 7px;
+    border-radius: 6px;
+    background-color: #f2dede;
+    color: #a94442;
+    padding: 10px;
+
+    .icon.exclamation-triangle {
+      margin-right: 8px;
+      color: #990000;
+    }
+  }
 }
 
-.details-expandable {
-  .icon {
-    width: 17px;
-    height: 15px;
-    background: url("/static/images/edit-icon.png") no-repeat;
+.details-expandable .icon {
     margin-left: 10px;
-    cursor: pointer;
-  }
 }
 
 .expandable-indicator {
