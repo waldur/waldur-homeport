@@ -58,9 +58,9 @@
   });
 
   angular.module('ncsaas').service('alertFormatter', [
-    'ALERT_TEMPLATES', 'ALERT_ICONS', 'BaseEventFormatter', alertFormatter]);
+    'ALERT_TEMPLATES', 'ALERT_ICONS', 'BaseEventFormatter', '$state', alertFormatter]);
 
-  function alertFormatter(ALERT_TEMPLATES, ALERT_ICONS, BaseEventFormatter) {
+  function alertFormatter(ALERT_TEMPLATES, ALERT_ICONS, BaseEventFormatter, $state) {
       var cls = BaseEventFormatter.extend({
           getTemplate: function(event) {
               return ALERT_TEMPLATES[event.alert_type];
@@ -70,6 +70,40 @@
           },
           getIcon: function(event) {
             return ALERT_ICONS[event.alert_type];
+          },
+          formatUrl: function(entity, context) {
+              if (!this.routeEnabled(route)) {
+                  return;
+              }
+              var route, args, uuid = context[entity + "_uuid"];
+              switch(entity) {
+                case 'service':
+                route = 'organizations.details';
+                args = {
+                  uuid: context.customer_uuid,
+                  providerUuid: uuid,
+                  providerType: context.service_type
+                };
+                break;
+
+                case 'resource':
+                route = 'resources.details';
+                args = {
+                  resource_type: context.resource_type,
+                  uuid: uuid
+                };
+                break;
+
+                case 'customer':
+                route = 'organizations.details';
+                args = {
+                  uuid: context.customer_uuid
+                };
+                break;
+              }
+              if (route) {
+                return $state.href(route, args);
+              }
           }
       });
       return new cls();
