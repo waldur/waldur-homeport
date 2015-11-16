@@ -26,10 +26,10 @@
     &.wrench:before {
         content: '\f0ad';
     }
-    &.desktop:before {
+    &.desktop:before, &.resource:before {
         content: '\f108';
     }
-    &.database:before {
+    &.database:before, &.service:before {
         content: '\f1c0';
     }
     &.close:before {
@@ -38,8 +38,14 @@
     &.external-link:before {
         content: '\f08e';
     }
-    &.group:before {
+    &.group:before, &.customer:before {
         content: '\f0c0';
+    }
+    &.project:before {
+        content: '\f07c';
+    }
+    &.user:before {
+        content: '\f007';
     }
     &.key:before {
         content: '\f084';

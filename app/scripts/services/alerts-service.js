@@ -43,15 +43,33 @@
     'quota_usage_is_over_threshold': 'Quota {quota_name} is over threshold. Limit: {quota_limit}, usage: {quota_usage}',
   });
 
-  angular.module('ncsaas').service('alertFormatter', ['ALERT_TEMPLATES', 'BaseEventFormatter', alertFormatter]);
+  angular.module('ncsaas').constant('ALERT_ICONS', {
+    'customer_has_zero_services': 'customer',
+    'customer_has_zero_resources': 'customer',
+    'customer_has_zero_projects': 'customer',
+    'service_has_unmanaged_resources': 'service',
+    'service_unavailable': 'service',
+    'resource_disappeared_from_backend': 'resource',
+    'customer_projected_costs_exceeded': 'customer',
+    'customer_project_count_exceeded': 'customer',
+    'customer_resource_count_exceeded': 'customer',
+    'customer_service_count_exceeded': 'customer',
+    'quota_usage_is_over_threshold': 'customer',
+  });
 
-  function alertFormatter(ALERT_TEMPLATES, BaseEventFormatter) {
+  angular.module('ncsaas').service('alertFormatter', [
+    'ALERT_TEMPLATES', 'ALERT_ICONS', 'BaseEventFormatter', alertFormatter]);
+
+  function alertFormatter(ALERT_TEMPLATES, ALERT_ICONS, BaseEventFormatter) {
       var cls = BaseEventFormatter.extend({
           getTemplate: function(event) {
               return ALERT_TEMPLATES[event.alert_type];
           },
           getEventContext: function(event) {
               return event.context;
+          },
+          getIcon: function(event) {
+            return ALERT_ICONS[event.alert_type];
           }
       });
       return new cls();

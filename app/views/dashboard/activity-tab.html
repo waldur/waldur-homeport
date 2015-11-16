@@ -72,7 +72,7 @@
                     <li ng-repeat="alert in DashboardController.alerts"
                         ng-class="{'fail': alert.severity=='error', 'hovered': isHovered}"
                         ng-click="isHovered = !isHovered">
-                        <div class="icon"></div>
+                        <div class="icon" ng-class="::alert.icon"></div>
                         <div class="left-p">
                             <span ng-bind-html="::alert.html_message"></span>
                         </div>
@@ -93,11 +93,10 @@
             <div class="white-box" block-ui="dashboard-events-list">
                 <ul>
                     <li ng-repeat="event in DashboardController.events"
-                        class="recent-alert"
-                        ng-class="{'error-event': event.levelname == 'ERROR', 'hovered': isHovered}"
-                        ng-click="isHovered = !isHovered">
+                        class="recent-alert">
+                        <div class="icon" ng-class="::event.icon"></div>
                         <div class="left-p">
-                            <span><event-format event="event"/></span>
+                            <span ng-bind-html="::event.html_message"></span>
                         </div>
                         <div class="right-p">
                             <span class="date" title="{{ ::event['@timestamp'] | date:'medium' }}" am-time-ago="event['@timestamp']"></span>
