@@ -161,6 +161,10 @@
                                  ng-src="{{ entity[field.propertyName] }}"/>
                         </span>
 
+                        <span ng-switch-when="fontIcon"
+                              class="icon" ng-class="entity[field.propertyName]">
+                        </span>
+
                         <h3 ng-switch-when="name" class="item-title">
                             <a ng-if="field.link"
                                ui-sref="{{ field.link }}">{{ entity[field.propertyName] }}</a>

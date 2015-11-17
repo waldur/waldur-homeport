@@ -20,6 +20,12 @@
           },
           list: [
             {
+              propertyName: 'icon',
+              className: 'icon',
+              type: ENTITYLISTFIELDTYPES.fontIcon,
+              showForMobile: true
+            },
+            {
               propertyName: 'html_message',
               className: 'message',
               type: ENTITYLISTFIELDTYPES.html,
@@ -38,6 +44,7 @@
       afterGetList: function() {
         angular.forEach(this.list, function(event) {
           event.html_message = eventFormatter.format(event);
+          event.icon = eventFormatter.getIcon(event);
         });
       }
     });
@@ -72,6 +79,12 @@
           },
           list: [
             {
+              propertyName: 'icon',
+              className: 'icon',
+              type: ENTITYLISTFIELDTYPES.fontIcon,
+              showForMobile: true
+            },
+            {
               name: 'Message',
               propertyName: 'html_message',
               className: 'message',
@@ -91,6 +104,7 @@
       afterGetList: function() {
         angular.forEach(this.list, function(alert) {
           alert.html_message = alertFormatter.format(alert);
+          alert.icon = alertFormatter.getIcon(alert);
         });
       }
     });
@@ -271,6 +285,7 @@
       'eventStatisticsService',
       'resourcesCountService',
       'currentStateService',
+      'eventFormatter',
       'alertFormatter',
       'ENV',
       '$window',
@@ -289,6 +304,7 @@
     eventStatisticsService,
     resourcesCountService,
     currentStateService,
+    eventFormatter,
     alertFormatter,
     ENV,
     $window,
@@ -359,6 +375,7 @@
           }).then(function(response) {
             vm.alerts = response.map(function(alert) {
               alert.html_message = alertFormatter.format(alert);
+              alert.icon = alertFormatter.getIcon(alert);
               return alert;
             });
           });
@@ -370,7 +387,11 @@
         var promise = currentStateService.getCustomer().then(function(customer) {
           vm.currentCustomer = customer;
           return eventsService.getList({scope: customer.url}).then(function(response) {
-            vm.events = response;
+            vm.events = response.map(function(event) {
+              event.html_message = eventFormatter.format(event);
+              event.icon = eventFormatter.getIcon(event);
+              return event;
+            });
           });
         });
         ncUtils.blockElement('dashboard-events-list', promise);

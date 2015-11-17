@@ -96,6 +96,11 @@
         'resource_imported': 'Resource {resource_name} has been imported.',
         'role_granted': 'User {affected_user_full_name} has gained role of {role_name} in {project_name} of {customer_name}.',
         'role_revoked': 'User {affected_user_full_name} has revoked role of {role_name} in {project_name} of {customer_name}.',
+        'service_settings_sync_failed': 'Provider {service_settings_name} has failed to sync.',
+        'service_settings_recovered': 'Provider {service_settings_name} has been recovered.',
+        'service_project_link_creation_failed': 'Creation of service project link {service_name} has failed',
+        'service_project_link_sync_failed': 'Synchronization of service project link {service_name} has failed.',
+        'service_project_link_recovered': 'Service project link {service_name} has been recovered.',
         'ssh_key_creation_succeeded': 'SSH key {ssh_key_name} has been created.',
         'ssh_key_deletion_succeeded': 'SSH key {ssh_key_name} has been deleted.',
         'ssh_key_push_succeeded': 'SSH key {ssh_key_name} has been pushed to {service_name} in {project_name}.',
@@ -194,7 +199,108 @@ angular.module('ncsaas').constant('EVENT_ROUTES', {
     'instance': 'resources.details',
     'iaas_instance': 'resources.details',
     'resource': 'resources.details',
+    'service': 'organizations.details',
 });
+
+angular.module('ncsaas').constant('EVENT_ICONS', {
+    'auth_logged_in_with_username': 'user',
+    'customer_account_credited': 'customer',
+    'customer_account_debited': 'customer',
+    'customer_creation_succeeded': 'customer',
+    'customer_deletion_succeeded': 'customer',
+    'customer_update_succeeded': 'customer',
+    'iaas_backup_creation_failed': 'resource',
+    'iaas_backup_creation_scheduled': 'resource',
+    'iaas_backup_creation_succeeded': 'resource',
+    'iaas_backup_deletion_failed': 'resource',
+    'iaas_backup_deletion_scheduled': 'resource',
+    'iaas_backup_deletion_succeeded': 'resource',
+    'iaas_backup_restoration_failed': 'resource',
+    'iaas_backup_restoration_scheduled': 'resource',
+    'iaas_backup_restoration_succeeded': 'resource',
+    'iaas_backup_schedule_activated': 'resource',
+    'iaas_backup_schedule_creation_succeeded': 'resource',
+    'iaas_backup_schedule_deactivated': 'resource',
+    'iaas_backup_schedule_deletion_succeeded': 'resource',
+    'iaas_backup_schedule_update_succeeded': 'resource',
+    'iaas_instance_application_became_available': 'resource',
+    'iaas_instance_application_deployment_succeeded': 'resource',
+    'iaas_instance_application_failed': 'resource',
+    'iaas_instance_creation_failed': 'resource',
+    'iaas_instance_creation_scheduled': 'resource',
+    'iaas_instance_creation_succeeded': 'resource',
+    'iaas_instance_deletion_failed': 'resource',
+    'iaas_instance_deletion_succeeded': 'resource',
+    'iaas_instance_flavor_change_failed': 'resource',
+    'iaas_instance_flavor_change_scheduled': 'resource',
+    'iaas_instance_flavor_change_succeeded': 'resource',
+    'iaas_instance_import_failed': 'resource',
+    'iaas_instance_import_scheduled': 'resource',
+    'iaas_instance_import_succeeded': 'resource',
+    'iaas_instance_licenses_added': 'resource',
+    'iaas_instance_restart_failed': 'resource',
+    'iaas_instance_restart_succeeded': 'resource',
+    'iaas_instance_start_failed': 'resource',
+    'iaas_instance_start_succeeded': 'resource',
+    'iaas_instance_stop_failed': 'resource',
+    'iaas_instance_stop_succeeded': 'resource',
+    'iaas_instance_update_succeeded': 'resource',
+    'iaas_instance_volume_extension_scheduled': 'resource',
+    'iaas_membership_sync_failed': 'service',
+    'iaas_service_sync_failed': 'service',
+    'invoice_creation_succeeded': 'customer',
+    'invoice_deletion_succeeded': 'customer',
+    'invoice_update_succeeded': 'customer',
+    'payment_approval_succeeded': 'customer',
+    'payment_cancel_succeeded': 'customer',
+    'payment_creation_succeeded': 'customer',
+    'project_added_to_project_group': 'project',
+    'project_creation_succeeded': 'project',
+    'project_deletion_succeeded': 'project',
+    'project_group_creation_succeeded': 'project',
+    'project_group_deletion_succeeded': 'project',
+    'project_group_update_succeeded': 'project',
+    'project_removed_from_project_group': 'project',
+    'project_update_succeeded': 'project',
+    'quota_threshold_reached': 'customer',
+    'resource_created': 'resource',
+    'resource_deleted': 'resource',
+    'resource_imported': 'resource',
+    'role_granted': 'user',
+    'role_revoked': 'user',
+    'service_settings_sync_failed': 'service',
+    'service_settings_recovered': 'service',
+    'service_project_link_creation_failed': 'service',
+    'service_project_link_sync_failed': 'service',
+    'service_project_link_recovered': 'service',
+    'ssh_key_creation_succeeded': 'key',
+    'ssh_key_deletion_succeeded': 'key',
+    'ssh_key_push_succeeded': 'key',
+    'ssh_key_push_failed': 'key',
+    'ssh_key_remove_succeeded': 'key',
+    'ssh_key_remove_failed': 'key',
+    'template_creation_succeeded': 'resource',
+    'template_deletion_succeeded': 'resource',
+    'template_service_creation_succeeded': 'resource',
+    'template_service_deletion_succeeded': 'resource',
+    'template_service_update_succeeded': 'resource',
+    'template_update_succeeded': 'resource',
+    'user_activated': 'user',
+    'user_creation_succeeded': 'user',
+    'user_deactivated': 'user',
+    'user_deletion_succeeded': 'user',
+    'user_organization_approved': 'user',
+    'user_organization_claimed': 'user',
+    'user_organization_rejected': 'user',
+    'user_organization_removed': 'user',
+    'user_password_updated': 'user',
+    'user_update_succeeded': 'user',
+    'zabbix_host_creation_failed': 'resource',
+    'zabbix_host_creation_succeeded': 'resource',
+    'zabbix_host_deletion_failed': 'resource',
+    'zabbix_host_deletion_succeeded': 'resource'
+});
+
 
 (function() {
     angular.module('ncsaas').service('BaseEventFormatter', ['EVENT_ROUTES', '$state', BaseEventFormatter]);
@@ -258,13 +364,18 @@ angular.module('ncsaas').constant('EVENT_ROUTES', {
                 var uuid = context[entity + "_uuid"];
                 var args = {uuid: uuid};
                 if (entity == 'cloud_account' || entity == 'cloud') {
-                    args['provider'] = 'IaaS';
+                    args.provider = 'IaaS';
                 }
                 if (entity == 'service') {
-                    args['provider'] = context['service_type'];
+                    args = {
+                        uuid: context.customer_uuid,
+                        providerUuid: uuid,
+                        providerType: context.service_type,
+                        tab: 'providers'
+                    }
                 }
                 if (entity == 'resource') {
-                    args['resource_type'] = context['resource_type'];
+                    args.resource_type = context.resource_type;
                 }
                 return $state.href(route, args);
             },
@@ -326,9 +437,9 @@ angular.module('ncsaas').constant('EVENT_ROUTES', {
 
 (function() {
     angular.module('ncsaas').service('eventFormatter', [
-        'EVENT_TEMPLATES', 'ENV', 'BaseEventFormatter', eventFormatter]);
+        'EVENT_TEMPLATES', 'EVENT_ICONS', 'ENV', 'BaseEventFormatter', eventFormatter]);
 
-    function eventFormatter(EVENT_TEMPLATES, ENV, BaseEventFormatter) {
+    function eventFormatter(EVENT_TEMPLATES, EVENT_ICONS, ENV, BaseEventFormatter) {
         var cls = BaseEventFormatter.extend({
             getTemplate: function(event) {
                 return EVENT_TEMPLATES[event.event_type];
@@ -370,6 +481,9 @@ angular.module('ncsaas').constant('EVENT_ROUTES', {
                     }
                 }
                 return true;
+            },
+            getIcon: function(event) {
+              return EVENT_ICONS[event.event_type];
             }
         });
         return new cls();

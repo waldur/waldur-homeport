@@ -43,6 +43,7 @@
       linkOrText: 'linkOrText',
       avatarPictureField: 'avatar',
       icon: 'icon',
+      fontIcon: 'fontIcon',
       noType: false,
       showForMobile: true,
       statusCircle: 'statusCircle',
