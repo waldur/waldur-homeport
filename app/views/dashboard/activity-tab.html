@@ -24,11 +24,13 @@
                 <ul class="counters">
                     <li class="active-alert" ng-class="{'empty': !project.count.alerts}" visible="alerts">
                         <div class="counter-name">Active alerts</div>
-                        <div class="counter" ng-bind="project.count.alerts"></div>
+                        <div ui-sref="projects.details({uuid: project.uuid, tab: 'alerts'})"
+                             class="counter link-to-project" ng-bind="project.count.alerts"></div>
                     </li>
                     <li class="resources" ng-class="{'empty': !project.count.resources}" visible="resources">
                         <div class="counter-name">Resources</div>
-                        <div class="counter" ng-bind="project.count.resources"></div>
+                        <div ui-sref="projects.details({uuid: project.uuid, tab: 'vms'})"
+                             class="counter link-to-project" ng-bind="project.count.resources"></div>
                     </li>
                     <li visible="providers" class="services" ng-class="{'empty': !project.count.services}" visible="providers">
                         <div class="counter-name">Providers</div>
