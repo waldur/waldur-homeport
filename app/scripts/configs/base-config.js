@@ -135,26 +135,26 @@ angular.module('ncsaas')
       'Online': 'online',
       'Offline': 'offline',
       'Erred': 'erred',
-      'Starting Scheduled': 'starting',
-      'Stopping Scheduled': 'stopping',
-      'Restarting Scheduled': 'restarting',
-      'Starting': 'starting',
-      'Stopping': 'stopping',
-      'Restarting': 'restarting',
-      'Provisioning Scheduled': 'provisioning',
-      'Provisioning': 'provisioning',
-      'Deletion Scheduled': 'deleting',
-      'Deleting': 'deleting',
-      'Resizing Scheduled': 'resizing',
-      'Resizing': 'resizing'
-
+      'Starting Scheduled': 'processing',
+      'Stopping Scheduled': 'processing',
+      'Restarting Scheduled': 'processing',
+      'Starting': 'processing',
+      'Stopping': 'processing',
+      'Restarting': 'processing',
+      'Provisioning Scheduled': 'processing',
+      'Provisioning': 'processing',
+      'Deletion Scheduled': 'processing',
+      'Deleting': 'processing',
+      'Resizing Scheduled': 'processing',
+      'Resizing': 'processing'
     },
 
     servicesStateColorClasses: {
       'Erred': 'erred',
       'In Sync': 'online',
-      'Sync Scheduled': 'starting',
-      'Syncing': 'starting'
+      'Creation Scheduled': 'processing',
+      'Creating': 'processing',
+      'Sync Scheduled': 'processing',
+      'Syncing': 'processing'
     }
-
   });
