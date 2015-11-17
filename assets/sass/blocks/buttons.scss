@@ -40,9 +40,9 @@
     font-size: 14px;
 
     &.pending {
-      border: 1px solid #50b848;
+      border: 1px solid $button-green;
       background-color: white;
-      color: #50b848;
+      color: $button-green;
       @include bp(xs) {
           margin-right: 5px;
       }

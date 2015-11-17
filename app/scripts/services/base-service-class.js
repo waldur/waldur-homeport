@@ -47,7 +47,7 @@
           filter[key] = this.defaultFilter[key];
         }
         var queryList = function() {
-          filter.page = vm.page;
+          filter.page = filter.page || vm.page;
           /*jshint camelcase: false */
           filter.page_size = vm.pageSize;
           var cacheKey = vm.endpoint + JSON.stringify(filter);
@@ -90,6 +90,36 @@
         }
 
         return deferred.promise;
+      },
+      getAll: function(filter, endpointUrl) {
+        var vm = this;
+        return vm.getList(filter, endpointUrl).then(function(response) {
+          if (vm.pages > 1) {
+            var pages = {0: response};
+            var promises = [];
+            for (var i = 0; i < vm.pages; i++) {
+              (function(i) {
+                var page = i + 1;
+                var query = angular.extend({}, filter, {page: page});
+                var promise = vm.getList(query, endpointUrl).then(function(response) {
+                  pages[page] = response;
+                });
+                promises.push(promise);
+              })(i);
+            }
+            return $q.all(promises).then(function() {
+              var result = [];
+              for (var i = 0; i < vm.pages; i++) {
+                var page = pages[i];
+                for (var j = 0; j < page.length; j++) {
+                  result.push(page[j]);
+                }
+              }
+              return result;
+            });
+          }
+          return response;
+        })
       },
       setCache: function(time, response, cacheKey, endpoint) {
         var allCacheKeys = listCache.get(this.ALL_CACHE_KEYS) ? listCache.get(this.ALL_CACHE_KEYS) : {};

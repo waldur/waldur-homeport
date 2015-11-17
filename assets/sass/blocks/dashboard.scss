@@ -340,6 +340,9 @@
                 margin-top: 20px;
               }
               font-weight: bold;
+              &.link-to-project {
+                cursor: pointer;
+              }
             }
             &.active-alert {
               .counter {

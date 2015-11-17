@@ -44,10 +44,24 @@
       },
 
       getAvailableOperations: function(resource) {
+        if (this.isGitlab(resource.resource_type)) {
+          return [];
+        }
+        return ['start', 'stop', 'restart'];
+      },
+
+      getEnabledOperations: function(resource) {
+        if (this.isGitlab(resource.resource_type)) {
+          return ['delete'];
+        }
         var state = resource.state.toLowerCase();
         if (state === 'online') {return ['stop', 'restart'];}
         if (state === 'offline') {return ['start', 'delete'];}
         return [];
+      },
+
+      isGitlab: function(resource_type) {
+        return (resource_type == 'GitLab.Project' || resource_type == 'GitLab.Group');
       }
     });
     return new ServiceClass();
