@@ -96,6 +96,11 @@
         'resource_imported': 'Resource {resource_name} has been imported.',
         'role_granted': 'User {affected_user_full_name} has gained role of {role_name} in {project_name} of {customer_name}.',
         'role_revoked': 'User {affected_user_full_name} has revoked role of {role_name} in {project_name} of {customer_name}.',
+        'service_settings_sync_failed': 'Provider {service_settings_name} has failed to sync.',
+        'service_settings_recovered': 'Provider {service_settings_name} has been recovered.',
+        'service_project_link_creation_failed': 'Creation of service project link {service_name} has failed',
+        'service_project_link_sync_failed': 'Synchronization of service project link {service_name} has failed.',
+        'service_project_link_recovered': 'Service project link {service_name} has been recovered.',
         'ssh_key_creation_succeeded': 'SSH key {ssh_key_name} has been created.',
         'ssh_key_deletion_succeeded': 'SSH key {ssh_key_name} has been deleted.',
         'ssh_key_push_succeeded': 'SSH key {ssh_key_name} has been pushed to {service_name} in {project_name}.',
@@ -194,6 +199,7 @@ angular.module('ncsaas').constant('EVENT_ROUTES', {
     'instance': 'resources.details',
     'iaas_instance': 'resources.details',
     'resource': 'resources.details',
+    'service': 'organizations.details',
 });
 
 angular.module('ncsaas').constant('EVENT_ICONS', {
@@ -262,6 +268,11 @@ angular.module('ncsaas').constant('EVENT_ICONS', {
     'resource_imported': 'resource',
     'role_granted': 'user',
     'role_revoked': 'user',
+    'service_settings_sync_failed': 'service',
+    'service_settings_recovered': 'service',
+    'service_project_link_creation_failed': 'service',
+    'service_project_link_sync_failed': 'service',
+    'service_project_link_recovered': 'service',
     'ssh_key_creation_succeeded': 'key',
     'ssh_key_deletion_succeeded': 'key',
     'ssh_key_push_succeeded': 'key',
@@ -353,13 +364,18 @@ angular.module('ncsaas').constant('EVENT_ICONS', {
                 var uuid = context[entity + "_uuid"];
                 var args = {uuid: uuid};
                 if (entity == 'cloud_account' || entity == 'cloud') {
-                    args['provider'] = 'IaaS';
+                    args.provider = 'IaaS';
                 }
                 if (entity == 'service') {
-                    args['provider'] = context['service_type'];
+                    args = {
+                        uuid: context.customer_uuid,
+                        providerUuid: uuid,
+                        providerType: context.service_type,
+                        tab: 'providers'
+                    }
                 }
                 if (entity == 'resource') {
-                    args['resource_type'] = context['resource_type'];
+                    args.resource_type = context.resource_type;
                 }
                 return $state.href(route, args);
             },

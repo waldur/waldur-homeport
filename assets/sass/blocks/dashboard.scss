@@ -392,8 +392,8 @@
           ul {
             li {
               list-style: none;
-              //height: 43px;
-              line-height: 42px;
+              line-height: 20px;
+              padding: 10px 0px;
               border-bottom: 1px solid #ebebeb;
               position: relative;
               &.fail {
@@ -446,10 +446,10 @@
                   white-space: nowrap;
                   width: 100%;
                   @include bp(xs) {
-                    text-overflow: ellipsis;
+                    white-space: normal;
                   }
                   @include bp(sm) {
-                    text-overflow: ellipsis;
+                    white-space: normal;
                     max-width: 300px;
                     line-height: 20px;
                   }
@@ -476,6 +476,7 @@
                 font-size: 15px;
                 padding-left: 25px;
                 padding-top: 5px;
+                padding-bottom: 5px;
                 height: auto;
                 line-height: 20px;
                 .icon {
@@ -498,7 +499,7 @@
                 }
                 .right-p {
                   float: left;
-                  margin: 0px 0 10px 0;
+                  margin: 0;
                   line-height: 20px;
                 }
               }

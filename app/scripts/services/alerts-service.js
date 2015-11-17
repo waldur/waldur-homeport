@@ -33,14 +33,14 @@
     'customer_has_zero_services': 'Organization {customer_name} has zero services configured.',
     'customer_has_zero_resources': 'Organization {customer_name} does not have any resources.',
     'customer_has_zero_projects': 'Organization {customer_name} does not have any projects.',
-    'service_has_unmanaged_resources': 'Service {service_name} has unmanaged resources',
-    'service_unavailable': 'Service account {service_name} is not responding',
-    'resource_disappeared_from_backend': 'Resource {resource_name} has disappeared from the {service_name}',
-    'customer_projected_costs_exceeded': 'This month estimated costs for organization {customer_name} exceeded',
+    'service_has_unmanaged_resources': 'Provider {service_name} has unmanaged resources.',
+    'service_unavailable': 'Provider {service_name} is not responding.',
+    'resource_disappeared_from_backend': 'Resource {resource_name} has disappeared from the {service_name}.',
+    'customer_projected_costs_exceeded': 'This month estimated costs for organization {customer_name} exceeded.',
     'customer_project_count_exceeded': 'Organization {customer_name} has exceeded quota {quota_name}.',
     'customer_resource_count_exceeded': 'Organization {customer_name} has exceeded quota {quota_name}.',
     'customer_service_count_exceeded': 'Organization {customer_name} has exceeded quota {quota_name}.',
-    'quota_usage_is_over_threshold': 'Quota {quota_name} is over threshold. Limit: {quota_limit}, usage: {quota_usage}',
+    'quota_usage_is_over_threshold': 'Quota {quota_name} is over threshold. Limit: {quota_limit}, usage: {quota_usage}.',
   });
 
   angular.module('ncsaas').constant('ALERT_ICONS', {
@@ -82,7 +82,8 @@
                 args = {
                   uuid: context.customer_uuid,
                   providerUuid: uuid,
-                  providerType: context.service_type
+                  providerType: context.service_type,
+                  tab: 'providers'
                 };
                 break;
 
