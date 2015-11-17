@@ -95,7 +95,7 @@
           vm.service.getList().then(function(list) {
             vm.mergeLists(vm.list, list);
           });
-        }, ENV.resourcesTimerInterval * 1000);
+        }, ENV.providersTimerInterval * 1000);
       },
       cancelRefresh: function() {
         var vm = this;
