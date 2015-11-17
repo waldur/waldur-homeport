@@ -355,7 +355,6 @@
           ]
         };
         this.detailsViewOptions.activeTab = this.getActiveTab(this.detailsViewOptions.tabs, $stateParams.tab);
-        this.cancelRefresh();
       },
 
       getModel: function() {
@@ -369,33 +368,20 @@
       scheduleRefresh: function() {
         var vm = this;
         vm.updateStatus();
-        if (!vm.inProgress) {
-          return;
-        }
-        vm.refreshPromise = $interval(function() {
+
+        var refreshPromise = $interval(function() {
           vm.getModel().then(function(model) {
             vm.model.state = model.state;
             vm.updateStatus();
           });
         }, ENV.resourcesTimerInterval * 1000);
+
+        $scope.$on('$destroy', function() {
+          $interval.cancel(refreshPromise);
+        });
       },
       updateStatus: function() {
-        var startStates = [
-          'Provisioning Scheduled',
-          'Provisioning',
-          'Starting Scheduled',
-          'Starting'
-        ];
-        this.inProgress = startStates.indexOf(this.model.state) != -1;
-      },
-      cancelRefresh: function() {
-        var vm = this;
-        vm.refreshPromise = null;
-        $scope.$on('$destroy', function() {
-          if (vm.refreshPromise) {
-            $interval.cancel(vm.refreshPromise);
-          }
-        });
+        this.inProgress = (ENV.resourceStateColorClasses[this.model.state] === 'processing');
       },
       modelNotFound: function() {
         currentStateService.getProject().then(function() {
