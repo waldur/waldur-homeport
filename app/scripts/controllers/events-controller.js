@@ -121,13 +121,15 @@
       'priceEstimationService',
       'blockUI',
       'ENV',
+      'servicesService',
       DashboardCostController]);
 
   function DashboardCostController(
     baseControllerClass,
     priceEstimationService,
     blockUI,
-    ENV) {
+    ENV,
+    servicesService) {
     var controllerScope = this;
     var EventController = baseControllerClass.extend({
       init: function() {
@@ -148,6 +150,25 @@
           vm.processChartData(rows);
           vm.processTableData(rows);
         });
+      },
+
+      selectRow: function(row) {
+        row.selected = !row.selected;
+        row.activeTab = (ENV.featuresVisible || ENV.toBeFeatures.indexOf('providers') == -1)
+          ? 'services'
+          : 'projects';
+        this.getServiceResourcesCount(row);
+      },
+
+      getServiceResourcesCount: function(row) {
+        for (var i = 0; row.services.length > i; i++) {
+          var service = row.services[i];
+          if (!service.resources_count) {
+            servicesService.$get(null, service.scope).then(function(service, response) {
+              service.resources_count = response.resources_count;
+            }.bind(null, service));
+          }
+        }
       },
 
       processChartData: function(rows) {
@@ -228,10 +249,7 @@
           });
         }
         if (table.length > 0) {
-          table[0].selected = true;
-          table[0].activeTab = (ENV.featuresVisible || ENV.toBeFeatures.indexOf('providers') == -1)
-            ? 'services'
-            : 'projects';
+          this.selectRow(table[0]);
         }
         this.table = table;
       }
