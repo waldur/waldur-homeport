@@ -3,7 +3,8 @@
         <div class="row">
             <div class="col full">
                 <div class="add-or-remove">
-                    <h3 class="app-title">Administrator</h3>
+                    <!-- TODO: temporary demo name override -->
+                    <h3 class="app-title">Collaborators</h3>
                 <span class="added" ng-repeat="adminUser in ProjectUsersTab.users[ProjectUsersTab.adminRole]"
                       ng-click="ProjectUsersTab.userProjectRemove(adminUser)">
                     {{ adminUser.user_full_name }}
@@ -27,6 +28,7 @@
                     </div>
                 </div>
             </div>
+            <!--
             <div class="col full">
                 <div class="add-or-remove">
                     <h3 class="app-title">Managers</h3>
@@ -53,6 +55,7 @@
                     </div>
                 </div>
             </div>
+            -->
         </div>
     </div>
 </div>

@@ -72,11 +72,13 @@
                        ng-if="option.type == 'url'"
                        ng-model="option.value">
 
-                <a class="button"
-                   ngf-select
-                   ngf-accept="'application/x-x509-ca-cert'"
-                   ng-if="option.type == 'file upload'"
-                   ng-model="option.value">Upload {{ ServiceAdd.getFilename(option.value) }}</a>
+                <div ng-if="option.type == 'file upload'">
+                    {{ ServiceAdd.getFilename(option.value) || 'None' }}
+                    <a class="button"
+                       ngf-select
+                       ngf-accept="'application/x-x509-ca-cert'"
+                       ng-model="option.value">Browse</a>
+                </div>
 
                 <select id="{{ ServiceAdd.model.name }}_{{ option.key }}"
                         ng-if="option.type == 'choice'"
@@ -107,6 +109,7 @@
     <!-- /non field errors -->
 
     <div class="decision" ng-show="ServiceAdd.model">
+        <a ui-sref="help.details({name: ServiceAdd.model.serviceName})" target="_blank" class="help-info">?</a>
         <div class="col">
             <a class="button-apply" ng-class="{'disabled': ServiceAdd.isDisabled()}" submit-button="ServiceAdd.save()">Add provider</a>
         </div>

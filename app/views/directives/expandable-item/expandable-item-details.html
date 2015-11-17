@@ -1,4 +1,8 @@
 <section block-ui="{{ ::expandableElement.uuid }}">
+    <div ng-if="expandableElement.error_message" class="error-message">
+        <b class="icon exclamation-triangle"></b>{{ ::expandableElement.error_message }}
+    </div>
+
     <header>
         <h3 ng-show="expandableOptions.title" class="title-expandable">{{ ::expandableOptions.title }}</h3>
         <div class="short-form" ng-if="expandableElement.editable">
@@ -32,18 +36,20 @@
                             ng-options="item.value as item.display_name for item in field.choices">
                     </select>
 
-                    <a class="button"
-                       ng-switch-when="file upload"
-                       ngf-select
-                       ngf-accept="'application/x-x509-ca-cert'"
-                       ng-model="expandableElement.values[field.name]">Upload {{ expandableList.getFilename(expandableElement.values[field.name]) }}</a>
+                    <div ng-switch-when="file upload">
+                      {{ expandableList.getFilename(expandableElement.values[field.name]) || 'None'}}
+                      <a class="button"
+                         ngf-select
+                         ngf-accept="'application/x-x509-ca-cert'"
+                         ng-model="expandableElement.values[field.name]">Browse</a>
+                    </div>
 
                     <span ng-show="field.required">(required)</span>
                 </div>
             </div>
             <div class="decision" ng-show="expandableList.hasChanged(expandableElement)">
                 <div class="col">
-                    <a class="button-apply" ng-click="expandableList.updateSettings(expandableElement)">Save</a>
+                    <a class="button-apply" ng-click="expandableList.updateSettings(expandableElement)" ng-class="{'disabled': expandableList.isDisabled(expandableElement)}">Save</a>
                 </div>
             </div>
         </div>

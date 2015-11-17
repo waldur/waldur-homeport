@@ -287,12 +287,9 @@
     overflow: hidden;
   }
   .icon {
-    width: 17px;
-    height: 15px;
-    background: url("/static/images/edit-icon.png") no-repeat;
-    float: left;
     margin-left: 10px;
-    margin-top: 4px;
+    margin-top: 5px;
+    float: left;
     cursor: pointer;
   }
   .about {
@@ -888,5 +885,18 @@
       float: left;
       display: block;
     }
+  }
+}
+
+dl.two-column {
+  dt {
+    float: left;
+    clear: both;
+    width: 100px;
+    font-weight: bold;
+    margin-bottom: 13px;
+  }
+  dd {
+    float: left;
   }
 }

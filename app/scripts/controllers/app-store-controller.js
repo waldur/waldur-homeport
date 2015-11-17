@@ -295,10 +295,25 @@
             required = true;
             help_text = null;
           }
+          var display_label;
+          if (name === 'username') {
+            display_label = this.selectedService.type + ' OS username';
+          }
+          if (name === 'password') {
+            display_label = this.selectedService.type + ' OS password';
+          }
+          if (name === 'name') {
+            if (this.selectedCategory.name === 'VMs') {
+              display_label = 'Your VM name';
+            }
+            if (this.selectedCategory.name === 'APPLICATIONS') {
+              display_label = 'Your application name'
+            }
+          }
 
           this.fields.push({
             name: name,
-            label: label,
+            label: display_label ? display_label : label,
             type: type,
             help_text: help_text,
             required: required,
@@ -309,6 +324,7 @@
             max: max,
             units: units
           });
+          display_label = null;
         }
         var order = [
           'name', 'image', 'region', 'size', 'flavor', 'system_volume_size', 'data_volume_size',
@@ -654,6 +670,16 @@
         }
         return instance.$save();
       },
+      save: function() {
+        if (this.instance.password !== this.instance.repeat_password) {
+          this.errors.password = ['The passwords you have entered do not match.'];
+          this.onError();
+          return $q.reject();
+        } else {
+          delete this.instance.repeat_password;
+        }
+        return this._super();
+      },
       afterSave: function() {
         this._super();
         projectsService.clearAllCacheForCurrentEndpoint();
@@ -673,17 +699,11 @@
         }
         ncUtilsFlash.error(message);
       },
-      successRedirect: function() {
-        var tab = this.getDestinationTab();
-        $state.go('resources.list', {tab: tab});
-      },
-      getDestinationTab: function() {
-        if (this.isVirtualMachinesSelected()) {
-          return ENV.resourcesTypes.vms;
-        } else if (this.isApplicationSelected()) {
-          return ENV.resourcesTypes.applications;
+      successRedirect: function(model) {
+        if (this.isVirtualMachinesSelected() || this.isApplicationSelected()) {
+          $state.go('resources.details', {uuid: model.uuid, resource_type: model.resource_type});
         } else if (this.isSupportSelected()) {
-          return 'premiumSupport';
+          return $state.go('resources.list', {tab: 'premiumSupport'});
         }
       },
       setCompare: function(categoryName) {

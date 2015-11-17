@@ -3,23 +3,47 @@
         <h1>Obtaining credentials for {{ HelpDetails.model.name }}</h1>
     </div>
     <div class="white-box">
+        <div class="instruction-page" ng-if="HelpDetails.model.type !== 'sshKeys' && HelpDetails.model.type !== 'providers'">
+            Help page is not available
+        </div>
         <div class="instruction-page" ng-if="HelpDetails.model.type == 'sshKeys'" ui-view="sshKeys"></div>
         <div class="instruction-page" ng-if="HelpDetails.model.type == 'providers'">
-            <div class="instruction-image">
-                <img ng-src="static/images/help/{{ HelpDetails.model.name.toLowerCase() }}_tokens.png">
+            <div class="">
+                <image-box image="static/images/help/{{ HelpDetails.model.name.toLowerCase() }}_tokens.png"></image-box>
             </div>
             <div class="instruction-content" ng-if="HelpDetails.model">
-                <p ng-if="HelpDetails.model.name == 'Azure'">
-                    To be able to connect to the Azure, you need to generate a X.509 certificate which is used to authenticate yourself and upload it to the Azure Management Portal.
-                    <br/>
-                    On Linux, you can generate the certificate file using the commands shown below:
-                    <br/>
-                    <i>openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout azure_cert.pem -out azure_cert.pem</i>
-                    <br/>
-                    <i>openssl x509 -inform pem -in azure_cert.pem -outform der -out azure_cert.cer</i>
-                    <br/>
-                    For information on how to generate certificate on Windows, see Create and Upload a Management Certificate for Azure page.
-                </p>
+                <div ng-if="HelpDetails.model.name == 'Azure'">
+                    <div>
+                        Azure requires generation of X.509 certificates which will be used for securing the NodeConductor Azure API connections.
+                        You need to generate two separate files: <br/>
+                        azure_cert.pem - which needs to be uploaded within NodeConductor "Create provider" form <br/>
+                        azure_cert.cer - which needs to be uploaded within Azure Management Console (please see screenshot on the left) <br/>
+                    </div>
+                    <div>
+                        <b>On Linux</b>, you can generate the certificate files using the commands shown below:<br/>
+                        generating azure_cert.pem<br/>
+                        <pre class="code">openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout azure_cert.pem -out azure_cert.pem</pre>
+                        generating azure_cert.cer<br/>
+                        <pre class="code">openssl x509 -inform pem -in azure_cert.pem -outform der -out azure_cert.cer</pre>
+                    </div>
+                    <div>
+                        <p>
+                            <b>Generating certificate on Windows</b>
+                        </p>
+                        <p>
+                            The Windows Software Development Kit for Windows 8 (possibly you will need to install it) includes the Certificate Creation Tool, MakeCert.exe.<br/>
+                            If you are using Windows 8.1, enter following command in the command prompt to generate a self-signed certificate.<br/>
+                            The certificate name should be changed in both places:
+                            <pre class="code">"C:\Program Files (x86)\Windows Kits\8.1\bin\x86\makecert.exe" -sky exchange -r -n "CN=certificate_name" -pe -a sha256 -len 2048 -ss My "certificate_name.cer"</pre>
+                        </p>
+                        <p>
+                            You can create validity periods for the certificate, using the -b (beginning) and -e (end) options.<br/>
+                            You will see “Succeeded” message after completing this procedure.<br/>
+                            Now when certificate is created, a .cer file for the certificate will be written to your current directory, and the certificate will be saved to the machine’s certificate store.
+                        </p>
+
+                    </div>
+                </div>
                 <p ng-if="HelpDetails.model.name == 'Amazon'">
                     Access keys consist of an access key ID and secret access key, which are used to sign programmatic requests that you make to AWS.
                 </p>

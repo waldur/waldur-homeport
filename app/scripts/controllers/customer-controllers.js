@@ -156,7 +156,7 @@
         this.currentUser = usersService.currentUser;
         this.detailsViewOptions = {
           title: 'Organization',
-          hasLogo: true,
+          hasLogo: false,
           listState: 'organizations.list',
           aboutFields: [
             {
@@ -202,6 +202,11 @@
               title: 'Providers',
               key: 'providers',
               viewName: 'tabServices'
+            },
+            {
+              title: 'Manage',
+              key: 'delete',
+              viewName: 'tabDelete'
             }
           ]
         };
@@ -286,6 +291,8 @@
           vm.detailsViewOptions.tabs[5].count = count;
         });
       },
+      // XXX: Avatar is temporarily disabled via detailsViewOptions.hasLogo = false
+      // That's why following functions are not used: updateImageUrl, uploadImage, deleteImage
       updateImageUrl: function() {
         controllerScope.imageUrl = controllerScope.model.image || ENV.defaultCustomerIcon;
       },

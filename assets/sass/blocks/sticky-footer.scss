@@ -4,7 +4,7 @@
     &:after {
         content: "";
         display: block;
-        @include property(height, 50);
+        @include property(height, 30);
     } // &:after
 } // app-wrap
 

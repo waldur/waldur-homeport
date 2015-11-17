@@ -334,6 +334,7 @@
         ncUtils.deregisterEvent('refreshProjectList'); // clear refreshProjectList event handlers
         ncUtils.deregisterEvent('currentProjectUpdated'); // clear currentProjectUpdated event handlers
         ncUtils.deregisterEvent('refreshCounts'); // clear refreshCounts event handlers
+        ncUtils.deregisterEvent('refreshCustomerList'); // clear refreshCustomerList event handlers
         $rootScope.bodyClass = currentStateService.getBodyClass(toState.name);
         // if user is authenticated - he should have selected customer
         if (authService.isAuthenticated() && !currentStateService.isCustomerDefined) {

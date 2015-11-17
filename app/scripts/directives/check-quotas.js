@@ -51,7 +51,11 @@
 
         scope.triangleBefore = style.triangleBefore;
         scope.triangleAfter = style.triangleAfter;
-        scope.enable = response;
+        scope.enable = !!response;
+        if (response) {
+          scope.quotaName = response.name;
+          scope.quotaUsage = response.usage.join("/");
+        }
         scope.classes.disabled = scope.enable;
       });
     }

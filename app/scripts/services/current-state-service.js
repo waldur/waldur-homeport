@@ -67,7 +67,7 @@
           var value = response.quotas[i];
           var name = ncUtils.getPrettyQuotaName(value.name);
           if (entity && name === entity && value.limit > -1 && (value.limit === value.usage || value.limit === 0)) {
-            return true;
+            return {name: name, usage: [value.limit, value.usage]};
           }
         }
         return false;

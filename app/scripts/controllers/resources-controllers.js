@@ -32,6 +32,7 @@
         this.searchFieldName = 'name';
         this.selectAll = true;
         this.hasFilters = false;
+        var currentCustomerUuid = currentStateService.getCustomerUuid();
         this.actionButtonsListItems = [
           {
             title: 'Start',
@@ -94,7 +95,9 @@
             {
               name: 'Provider',
               propertyName: 'service_name',
-              type: ENTITYLISTFIELDTYPES.noType
+              type: ENTITYLISTFIELDTYPES.link,
+              link: 'organizations.details({uuid: "' + currentCustomerUuid +
+              '",tab: "providers", providerUuid: entity.service_uuid, providerType: entity.resource_type.split(".")[0]})'
             },
             {
               name: 'State',
@@ -273,6 +276,9 @@
       .controller('ResourceDetailUpdateController', [
         '$stateParams',
         '$state',
+        '$scope',
+        '$interval',
+        'ENV',
         'resourcesService',
         'resourcesCountService',
         'alertsService',
@@ -284,6 +290,9 @@
   function ResourceDetailUpdateController(
     $stateParams,
     $state,
+    $scope,
+    $interval,
+    ENV,
     resourcesService,
     resourcesCountService,
     alertsService,
@@ -291,17 +300,14 @@
     currentStateService) {
     var controllerScope = this;
     var Controller = baseControllerDetailUpdateClass.extend({
-      activeTab: 'alerts',
       canEdit: true,
 
       init:function() {
         this.service = resourcesService;
         this.controllerScope = controllerScope;
         this._super();
-        this.activeTab = $stateParams.tab ? $stateParams.tab : this.activeTab;
         this.detailsViewOptions = {
           title: 'Resource',
-          activeTab: $stateParams.tab ? $stateParams.tab : this.activeTab,
           listState: 'resources.list',
           aboutFields: [
             {
@@ -312,6 +318,12 @@
           ],
           tabs: [
             {
+              title: 'Details',
+              key: 'details',
+              viewName: 'tabDetails',
+              count: -1
+            },
+            {
               title: 'Backups',
               key: 'backups',
               viewName: 'tabBackups',
@@ -321,35 +333,65 @@
               title: 'Alerts',
               key: 'alerts',
               viewName: 'tabAlerts',
-              count: 0
+              getCount: function() {
+                var query = angular.extend(alertsService.defaultFilter, {scope: this.model.url});
+                return resourcesCountService.alerts(query);
+              }
             }
           ]
         };
+        this.detailsViewOptions.activeTab = this.getActiveTab(this.detailsViewOptions.tabs, $stateParams.tab);
+        this.cancelRefresh();
       },
 
-      activate:function() {
+      getModel: function() {
+        return this.service.$get($stateParams.resource_type, $stateParams.uuid);
+      },
+
+      afterActivate: function() {
+        this.setCounters();
+        this.scheduleRefresh();
+      },
+      scheduleRefresh: function() {
         var vm = this;
-        vm.service.$get($stateParams.resource_type, $stateParams.uuid).then(function(response) {
-          vm.model = response;
-          vm.setCounters();
-        }, function() {
-          currentStateService.getProject().then(function() {
-            $state.go('resources.list');
-          }, function() {
-            currentStateService.getCustomer().then(function(response) {
-              $state.go('organizations.details', {uuid: response.uuid});
-            }, function() {
-              $state.go('dashboard.index');
-            });
+        vm.updateStatus();
+        if (!vm.inProgress) {
+          return;
+        }
+        vm.refreshPromise = $interval(function() {
+          vm.getModel().then(function(model) {
+            vm.model.state = model.state;
+            vm.updateStatus();
           });
+        }, ENV.resourcesTimerInterval * 1000);
+      },
+      updateStatus: function() {
+        var startStates = [
+          'Provisioning Scheduled',
+          'Provisioning',
+          'Starting Scheduled',
+          'Starting'
+        ];
+        this.inProgress = startStates.indexOf(this.model.state) != -1;
+      },
+      cancelRefresh: function() {
+        var vm = this;
+        vm.refreshPromise = null;
+        $scope.$on('$destroy', function() {
+          if (vm.refreshPromise) {
+            $interval.cancel(vm.refreshPromise);
+          }
         });
       },
-
-      setCounters: function() {
-        var vm = this;
-        var query = angular.extend(alertsService.defaultFilter, {scope: vm.model.url});
-        resourcesCountService.alerts(query).then(function(response) {
-          vm.detailsViewOptions.tabs[1].count = response;
+      modelNotFound: function() {
+        currentStateService.getProject().then(function() {
+          $state.go('resources.list');
+        }, function() {
+          currentStateService.getCustomer().then(function(response) {
+            $state.go('organizations.details', {uuid: response.uuid});
+          }, function() {
+            $state.go('dashboard.index');
+          });
         });
       },
 
