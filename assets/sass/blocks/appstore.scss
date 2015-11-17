@@ -494,6 +494,9 @@
                     background: #fff;
                     display: block;
                     margin-bottom: 10px;
+                    @include bp(xs) {
+                        padding: 8px 0;
+                    } // xs
                     span {
                         display: block;
                         float: right;
@@ -502,6 +505,10 @@
                         &.title {
                             float: left;
                         }
+                        @include bp(xs) {
+                            min-width: 50px;
+                            padding: 0px 3px;
+                        } // xs
                     }
                     &.state {
                         position: relative;
@@ -530,10 +537,16 @@
                 }
                 .list-item > span {
                     min-width: 70px;
+                    @include bp(xs) {
+                        min-width: 50px;
+                    } // xs
                 }
                 .title {
-                    width: 40% !important;
+                    width: 40%;
                     font-weight: bold;
+                    @include bp(xs) {
+                        width: 36%;
+                    } // xs
                 }
                 .list-header .title {
                     padding-left: 25px;
@@ -542,6 +555,9 @@
                 .list-header {
                     font-weight: bold;
                     display: block;
+                    @include bp(xs) {
+                        text-align: center;
+                    } // xs
                     span {
                         float: right;
                         display: block;
