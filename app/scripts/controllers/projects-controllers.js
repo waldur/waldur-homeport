@@ -230,7 +230,7 @@
     .controller('ProjectDetailUpdateController', [
       '$stateParams',
       '$rootScope',
-      '$q',
+      '$interval',
       'ENV',
       'projectsService',
       'baseControllerDetailUpdateClass',
@@ -239,13 +239,14 @@
       'alertsService',
       'eventsService',
       'currentStateService',
+      '$scope',
       ProjectDetailUpdateController
     ]);
 
   function ProjectDetailUpdateController(
     $stateParams,
     $rootScope,
-    $q,
+    $interval,
     ENV,
     projectsService,
     baseControllerDetailUpdateClass,
@@ -253,7 +254,8 @@
     servicesService,
     alertsService,
     eventsService,
-    currentStateService) {
+    currentStateService,
+    $scope) {
     var controllerScope = this;
     var Controller = baseControllerDetailUpdateClass.extend({
       customer: null,
@@ -365,6 +367,10 @@
           $rootScope.$broadcast('adjustCurrentProject', this.model);
         }
         this.setCounters();
+        var timer = $interval(this.setCounters.bind(controllerScope), ENV.countersTimerInterval * 1000);
+        $scope.$on('$destroy', function() {
+          $interval.cancel(timer);
+        });
       },
       getResourceCount: function(category, project_uuid) {
         return servicesService.getResourceTypes(category).then(function(types) {

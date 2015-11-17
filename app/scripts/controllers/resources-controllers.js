@@ -4,7 +4,6 @@
   angular.module('ncsaas')
     .service('baseResourceListController',
     ['baseControllerListClass',
-    '$q',
     'ENV',
     'ENTITYLISTFIELDTYPES',
     'resourcesService',
@@ -17,7 +16,6 @@
   // need for resource tab
   function baseResourceListController(
     baseControllerListClass,
-    $q,
     ENV,
     ENTITYLISTFIELDTYPES,
     resourcesService,
@@ -170,35 +168,35 @@
         });
       },
       adjustSearchFilters: function() {
-        var vm = this;
-        if (vm.hasFilters) {
-          return $q.when(true);
-        }
+        var vm = this,
+          resourcesCounts = null;
 
         vm.service.defaultFilter.resource_type = [];
+
         return servicesService.getResourceTypes(vm.category).then(function(types) {
           vm.service.defaultFilter.resource_type = types;
-          return resourcesService.countByType(vm.service.defaultFilter).then(function(counts) {
-            return servicesService.getServicesList().then(function(metadata) {
-              var filters = [];
-              for(var type in metadata) {
-                var service = metadata[type];
-                var resources = service.resources;
-                for (var resource in resources) {
-                  var id = servicesService.formatResourceType(type, resource);
-                  if (counts[id] > 0) {
-                    filters.push({
-                      name: 'resource_type',
-                      title: type + ' ' + resource + ' (' + counts[id] + ')',
-                      value: id
-                    });
-                  }
-                }
+        }).then(function() {
+          return resourcesService.countByType(vm.service.defaultFilter);
+        }).then(function(counts) {
+          resourcesCounts = counts;
+          return servicesService.getServicesList();
+        }).then(function(metadata) {
+          var filters = [];
+          for(var type in metadata) {
+            var service = metadata[type];
+            var resources = service.resources;
+            for (var resource in resources) {
+              var id = servicesService.formatResourceType(type, resource);
+              if (resourcesCounts[id] > 0) {
+                filters.push({
+                  name: 'resource_type',
+                  title: type + ' ' + resource + ' (' + resourcesCounts[id] + ')',
+                  value: id
+                });
               }
-              vm.searchFilters = filters;
-              vm.hasFilters = true;
-            });
-          });
+            }
+          }
+          vm.searchFilters = filters;
         });
       },
       afterGetList: function() {
@@ -357,7 +355,6 @@
           ]
         };
         this.detailsViewOptions.activeTab = this.getActiveTab(this.detailsViewOptions.tabs, $stateParams.tab);
-        this.cancelRefresh();
       },
 
       getModel: function() {
@@ -371,33 +368,20 @@
       scheduleRefresh: function() {
         var vm = this;
         vm.updateStatus();
-        if (!vm.inProgress) {
-          return;
-        }
-        vm.refreshPromise = $interval(function() {
+
+        var refreshPromise = $interval(function() {
           vm.getModel().then(function(model) {
             vm.model.state = model.state;
             vm.updateStatus();
           });
         }, ENV.resourcesTimerInterval * 1000);
+
+        $scope.$on('$destroy', function() {
+          $interval.cancel(refreshPromise);
+        });
       },
       updateStatus: function() {
-        var startStates = [
-          'Provisioning Scheduled',
-          'Provisioning',
-          'Starting Scheduled',
-          'Starting'
-        ];
-        this.inProgress = startStates.indexOf(this.model.state) != -1;
-      },
-      cancelRefresh: function() {
-        var vm = this;
-        vm.refreshPromise = null;
-        $scope.$on('$destroy', function() {
-          if (vm.refreshPromise) {
-            $interval.cancel(vm.refreshPromise);
-          }
-        });
+        this.inProgress = (ENV.resourceStateColorClasses[this.model.state] === 'processing');
       },
       modelNotFound: function() {
         currentStateService.getProject().then(function() {

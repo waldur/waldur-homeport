@@ -279,7 +279,7 @@
         var tabs = this.detailsViewOptions.tabs;
         angular.forEach(tabs, function(tab) {
           if (tab.getCount && (ENV.featuresVisible || ENV.toBeFeatures.indexOf(tab.key) == -1)) {
-            tab.count = 0;
+            tab.count = tab.count ? tab.count : 0;
             var promise = tab.getCount.call(vm);
             $q.when(promise).then(function(count) {
               tab.count = count;
