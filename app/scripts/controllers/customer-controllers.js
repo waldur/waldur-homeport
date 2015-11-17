@@ -123,6 +123,7 @@
       'resourcesCountService',
       'alertsService',
       'ncUtilsFlash',
+      '$scope',
       CustomerDetailUpdateController
     ]);
 
@@ -141,7 +142,8 @@
     servicesService,
     resourcesCountService,
     alertsService,
-    ncUtilsFlash
+    ncUtilsFlash,
+    $scope
     ) {
     var controllerScope = this;
     var CustomerController = baseControllerDetailUpdateClass.extend({
@@ -230,7 +232,10 @@
         controllerScope.updateImageUrl();
 
         this.setCounters();
-        $interval(this.setCounters.bind(controllerScope), ENV.countersTimerInterval * 1000);
+        var timer = $interval(this.setCounters.bind(controllerScope), ENV.countersTimerInterval * 1000);
+        $scope.$on('$destroy', function() {
+          $interval.cancel(timer);
+        });
         this.service.getBalanceHistory(this.model.uuid).then(this.processChartData.bind(this));
       },
 
