@@ -65,4 +65,10 @@
     &.refresh:before {
         content: '\f021';
     }
+    &.exclamation-triangle:before {
+        content: "\f071";
+    }
+    &.pencil-square-o:before {
+        content: "\f044";
+    }
 } // icons
