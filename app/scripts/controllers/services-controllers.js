@@ -77,9 +77,13 @@
               className: 'visual-status',
               showForMobile: true,
               getClass: function(state) {
-                return ENV.servicesStateColorClasses[state];
-              },
-              colorsList: ENV.servicesStateColorClasses
+                var cls = ENV.servicesStateColorClasses[state];
+                if (cls == 'processing') {
+                  return 'icon refresh spin';
+                } else {
+                  return 'status-circle ' + cls;
+                }
+              }
             },
             {
               name: 'My provider',

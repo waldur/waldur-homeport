@@ -62,6 +62,9 @@
     &.minus:before {
         content: "\f068";
     }
+    &.refresh:before {
+        content: '\f021';
+    }
     &.exclamation-triangle:before {
         content: "\f071";
     }
