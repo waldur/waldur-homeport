@@ -206,7 +206,7 @@
             settings_uuid: vm.selectedService.settings_uuid,
             project: vm.currentProject.uuid // for security groups
           };
-          servicesService.pageSize = 30;
+          servicesService.pageSize = 100;
           var promise = servicesService.getAll(query, url).then(function(response) {
             validChoices[property.toLowerCase()] = vm.formatChoices(response);
           });
