@@ -118,9 +118,8 @@
 
       getImportedResourcesForService: function(service) {
         controllerScope.importedResources = [];
-        var query = {'resource_type': service.type.toLowerCase(), 'service_uuid': service.uuid};
-        resourcesService.getList(query).then(function(response) {
-          controllerScope.importedResources = response;
+        resourcesService.getAll({service_uuid: service.uuid}).then(function(resources) {
+          controllerScope.importedResources = resources;
         }, function() {
           ncUtilsFlash.warning('Unable to get list of imported resources');
         });
@@ -148,30 +147,64 @@
       },
 
       save: function() {
+        return this.importSelectedResources().then(this.onSuccess.bind(this));
+      },
+
+      importSelectedResources: function() {
+        var promises = this.selectedResources.map(this.importResource.bind(this));
+        return $q.all(promises);
+      },
+
+      importResource: function(resource) {
         var vm = this;
-        var service_url = vm.selectedService.url;
-        var project_url = vm.currentProject.url;
-
-        return $q.all(vm.selectedResources.map(function(resource) {
-          resource.status = 'progress';
-
-          var instance = servicesService.$create(service_url + 'link/');
-          instance.project = project_url;
-          instance.backend_id = resource.id;
-          return instance.$save().then(function() {
-            resourcesService.clearAllCacheForCurrentEndpoint();
-            $rootScope.$broadcast('refreshCounts');
-            resource.status = 'success';
-            vm.toggleResource(resource);
-          }, function(){
-            ncUtilsFlash.warning('Unable to import resource ' + resource.name);
-            resource.status = 'failed';
-          })
-        })).then(function() {
-          $state.go('projects.details', {uuid: vm.currentProject.uuid, tab: ENV.resourcesTypes.vms});
+        resource.status = 'progress';
+        return this.createInstance(resource).$save().then(function() {
+          resource.status = 'success';
+          vm.toggleResource(resource);
+        }, function() {
+          ncUtilsFlash.warning('Unable to import resource ' + resource.name);
+          resource.status = 'failed';
         });
+      },
 
-        ncUtilsFlash.success('Wait while importing resources');
+      createInstance: function(resource) {
+        var service_url = this.selectedService.url;
+        var project_url = this.currentProject.url;
+        var instance = servicesService.$create(service_url + 'link/');
+
+        instance.project = project_url;
+        instance.backend_id = resource.id;
+
+        if (angular.isDefined(resource.type)) {
+          instance.type = resource.type;
+        }
+        return instance;
+      },
+
+      onSuccess: function() {
+        resourcesService.clearAllCacheForCurrentEndpoint();
+        $rootScope.$broadcast('refreshCounts');
+        $state.go('projects.details', {
+          uuid: this.currentProject.uuid,
+          tab: this.getTab()
+        });
+      },
+
+      getTab: function() {
+        if (this.isVirtualMachinesSelected()) {
+          return ENV.resourcesTypes.vms;
+        }
+        if (this.isApplicationSelected()) {
+          return ENV.resourcesTypes.applications;
+        }
+      },
+
+      isVirtualMachinesSelected: function() {
+        return this.selectedCategory.name == ENV.appStoreCategories[ENV.VirtualMachines].name;
+      },
+
+      isApplicationSelected: function() {
+        return this.selectedCategory.name == ENV.appStoreCategories[ENV.Applications].name;
       }
     });
     controllerScope.__proto__ = new Controller();
