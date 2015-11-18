@@ -42,11 +42,7 @@
         return customersService.$get($stateParams.uuid).then(function(customer) {
           vm.customer = customer;
           vm.currentPlan = customer.plan;
-          vm.usage = {};
-          for (var i = 0; i < customer.quotas.length; i++) {
-            var item = customer.quotas[i];
-            vm.usage[item.name] = item.usage;
-          }
+          vm.usage = ncUtils.getQuotaUsage(customer.quotas);
         });
       },
 

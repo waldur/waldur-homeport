@@ -45,16 +45,10 @@
 
           currentStateService.getCustomer().then(function(customer) {
             scope.model = customer;
+            var usage = ncUtils.getQuotaUsage(customer.quotas);
 
             if (customer.plan) {
               scope.currentPlan = customer.plan.name;
-
-              var usage = {};
-              for (var i = 0; i < customer.quotas.length; i++) {
-                var quota = customer.quotas[i];
-                usage[quota.name] = quota.usage;
-              }
-
               scope.currentPlanQuotas = customer.plan.quotas.map(function(quota) {
                 var name = ncUtils.getPrettyQuotaName(quota.name);
                 return {
@@ -70,7 +64,7 @@
                 return {
                   name: name + (quota.limit > 1 || quota.limit == -1 ? 's' : ''),
                   limit: quota.limit < 0 ? '∞' : quota.limit,
-                  usage: quota.usage
+                  usage: usage[quota.name]
                 };
               });
             }

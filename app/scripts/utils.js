@@ -73,6 +73,14 @@
       },
       getPrettyQuotaName: function(name) {
         return name.replace(/nc_|_count/gi, '');
+      },
+      getQuotaUsage: function(quotas) {
+        var usage = {};
+        for (var i = 0; i < quotas.length; i++) {
+          var quota = quotas[i];
+          usage[quota.name] = Math.max(0, quota.usage);
+        }
+        return usage;
       }
     }
   }
