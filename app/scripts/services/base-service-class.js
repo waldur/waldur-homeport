@@ -95,21 +95,20 @@
         var vm = this;
         return vm.getList(filter, endpointUrl).then(function(response) {
           if (vm.pages > 1) {
-            var pages = {0: response};
+            var pages = {1: response};
             var promises = [];
-            for (var i = 0; i < vm.pages; i++) {
-              (function(i) {
-                var page = i + 1;
+            for (var page = 2; page < vm.pages + 1; page++) {
+              (function(page) {
                 var query = angular.extend({}, filter, {page: page});
                 var promise = vm.getList(query, endpointUrl).then(function(response) {
                   pages[page] = response;
                 });
                 promises.push(promise);
-              })(i);
+              })(page);
             }
             return $q.all(promises).then(function() {
               var result = [];
-              for (var i = 0; i < vm.pages; i++) {
+              for (var i = 1; i < vm.pages + 1; i++) {
                 var page = pages[i];
                 for (var j = 0; j < page.length; j++) {
                   result.push(page[j]);
