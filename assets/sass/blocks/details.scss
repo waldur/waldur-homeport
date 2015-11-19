@@ -335,9 +335,13 @@
   @extend .user-about;
   padding-top: 6px;
   float: left;
+  >div {
+    margin-bottom: 5px;
+  }
   .name {
     font-size: 2em;
-    margin-top: -2px;
+    line-height: 1em;
+    margin-top: -5px;
     float: left;
   }
   .details {
