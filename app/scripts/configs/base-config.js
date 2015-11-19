@@ -5,6 +5,7 @@ angular.module('ncsaas')
     // general config
     name: '',
     apiEndpoint: 'http://localhost:8080/',
+    modePageTitle: 'NodeConductor - Cloud Service Management',
 
     // auth config
     googleClientId: 'google client id',

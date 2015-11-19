@@ -947,8 +947,12 @@
       }
     }
 
-    angular.module('ncsaas').run(['$translate', 'LANGUAGE',
-      function($translate, LANGUAGE) {
+    angular.module('ncsaas').run(['$translate', 'LANGUAGE', '$rootScope', 'ENV',
+      function($translate, LANGUAGE, $rootScope, ENV) {
+
+        if (ENV.modePageTitle) {
+          $rootScope.pageTitle = ENV.modePageTitle;
+        }
 
         // Check if current language is listed in choices
         function isValid(current) {
