@@ -62,6 +62,14 @@
 
       isGitlab: function(resource_type) {
         return (resource_type == 'GitLab.Project' || resource_type == 'GitLab.Group');
+      },
+
+      getImportedResources: function(service) {
+        var vm = this;
+        return servicesService.getServicesList().then(function(services) {
+          var url = services[service.type].url + service.uuid + '/imported_resources';
+          return vm.getAll({}, url);
+        });
       }
     });
     return new ServiceClass();

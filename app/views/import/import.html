@@ -78,8 +78,11 @@
                                     RAM: {{ resource.ram | mb2gb }} /
                                     HDD: {{ resource.disk | mb2gb }}
                                 </div>
+                                <div class="additional-cell" ng-if="resource.type">
+                                    {{ resource.type }}
+                                </div>
                                 <div class="additional-cell">
-                                    <span class="status">Imported to <a ui-sref="projects.details({uuid: resource.project_uuid})">{{ resource.project_name }}</a></span>
+                                    <span class="status">Imported to <a ui-sref="organizations.details({uuid: resource.customer_uuid})">{{ resource.customer_name }}</a>: <a ui-sref="projects.details({uuid: resource.project_uuid})">{{ resource.project_name }}</a></span>
                                 </div>
                             </div>
                         </li>
