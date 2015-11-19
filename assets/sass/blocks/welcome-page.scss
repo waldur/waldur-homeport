@@ -25,6 +25,16 @@
         padding-top: 100px;
         background: url(../images/decor-image-squ.png) no-repeat;
         background-size: cover;
+        .img-center {
+            left: 50%;
+        }
+        .nav-list {
+            margin-top: -80px;
+            margin-left: 30px;
+            width: 50px;
+            height: 50px;
+            float: none;
+        }
     }
     &.login {
         height: calc(100vh - 40px);
