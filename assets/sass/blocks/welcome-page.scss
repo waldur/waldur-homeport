@@ -25,6 +25,9 @@
         padding-top: 100px;
         background: url(../images/decor-image-squ.png) no-repeat;
         background-size: cover;
+        .img-center {
+            left: 50%;
+        }
     }
     &.login {
         height: calc(100vh - 40px);
