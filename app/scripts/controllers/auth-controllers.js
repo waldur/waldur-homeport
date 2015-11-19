@@ -27,7 +27,8 @@
         return true;
       },
       loginError: function(response) {
-        if (response.status != 400) {
+        this.errors = [];
+        if (response.status != 400 && +response.status > 0) {
           this.errors[response.status] = response.statusText + ' Authentication failed';
         } else {
           this.errors = response.data;
@@ -37,6 +38,10 @@
         var vm = this;
         if (vm.errors !== undefined) {
           var prettyErrors = [];
+          if (Object.prototype.toString.call(vm.errors) === '[object String]') {
+            prettyErrors.push(vm.errors);
+            return prettyErrors;
+          }
           for (var key in vm.errors) {
             if (vm.errors.hasOwnProperty(key)) {
               if (Object.prototype.toString.call(vm.errors[key]) === '[object Array]') {
