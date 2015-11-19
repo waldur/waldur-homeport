@@ -12,10 +12,13 @@
         this.endpoint = '/resources/';
       },
 
-      $get: function(resource_type, uuid) {
-        var get = this._super.bind(this);
+      $get: function(resource_type, uuid, url) {
+        var $get = this._super.bind(this);
+        if (url) {
+          return $get(null, url);
+        }
         return this.getUrlByType(resource_type).then(function(url) {
-          return get(uuid, url);
+          return $get(uuid, url);
         });
       },
 

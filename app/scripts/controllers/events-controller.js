@@ -136,6 +136,7 @@
       'blockUI',
       'ENV',
       'servicesService',
+      'resourcesService',
       DashboardCostController]);
 
   function DashboardCostController(
@@ -143,7 +144,8 @@
     priceEstimationService,
     blockUI,
     ENV,
-    servicesService) {
+    servicesService,
+    resourcesService) {
     var controllerScope = this;
     var EventController = baseControllerClass.extend({
       init: function() {
@@ -171,7 +173,26 @@
         row.activeTab = (ENV.featuresVisible || ENV.toBeFeatures.indexOf('providers') == -1)
           ? 'services'
           : 'projects';
-        this.getServiceResourcesCount(row);
+        if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('providers') == -1) {
+          this.getServiceResourcesCount(row);
+        }
+        if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('resources') == -1) {
+          this.getResourceDetails(row);
+        }
+      },
+
+      getResourceDetails: function(row) {
+        for (var i = 0; i < row.resources.length; i++) {
+          var resource = row.resources[i];
+          if (!resource.resource_type || !resource.project_uuid) {
+            resourcesService.$get(null, null, resource.scope).then(function(response) {
+              resource.resource_uuid = response.uuid;
+              resource.resource_type = response.resource_type;
+              resource.project_uuid = response.project_uuid;
+              resource.project_name = response.project_name;
+            });
+          }
+        }
       },
 
       getServiceResourcesCount: function(row) {

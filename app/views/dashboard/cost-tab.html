@@ -64,11 +64,17 @@
                 <div class="table services" ng-show="row.activeTab=='resources'">
                     <div class="tr th">
                         <div class="td service-name display-for-mobile"><span>Resource name</span></div>
+                        <div class="td service-name display-for-mobile"><span>Resource type</span></div>
+                        <div class="td service-name display-for-mobile"><span>Project</span></div>
                         <div class="td service-name display-for-mobile"><span>Cost</span></div>
                     </div>
-                    <div class="tr" ng-repeat="service in row.resources">
-                        <div class="td service-name display-for-mobile"><span ng-bind="::service.scope_name"></span></div>
-                        <div class="td service-name display-for-mobile"><span>{{ ::service.total | defaultCurrency }}</span></div>
+                    <div class="tr" ng-repeat="resource in row.resources">
+                        <div class="td service-name display-for-mobile">
+                            <a ui-sref="resources.details({uuid: resource.resource_uuid, resource_type: resource.resource_type})">{{::resource.scope_name}}</a>
+                        </div>
+                        <div class="td service-name display-for-mobile"><span ng-bind="::resource.resource_type"></span></div>
+                        <div class="td service-name display-for-mobile"><a ui-sref="projects.details({uuid: resource.project_uuid})">{{::resource.project_name}}</a></div>
+                        <div class="td service-name display-for-mobile"><span>{{ ::resource.total | defaultCurrency }}</span></div>
                     </div>
                 </div>
             </div>
