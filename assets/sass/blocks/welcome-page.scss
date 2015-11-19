@@ -337,3 +337,10 @@
         }  // provider
     } // providers-list
 } // providers
+header.cost-tracking {
+    display: none;
+}
+.base-universal-header header {
+    display: block;
+    padding-left: 55px;
+}
