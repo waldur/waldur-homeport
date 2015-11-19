@@ -314,6 +314,7 @@
       init: function() {
         this.setSignalHandler('$stateChangeSuccess', this.stateChangeSuccessHandler.bind(controllerScope));
         this._super();
+        this.modeName = ENV.modeName;
         $rootScope.buildId = ENV.buildId;
         $rootScope.logout = this.logout;
         this.isAuthenticated = authService.isAuthenticated;
