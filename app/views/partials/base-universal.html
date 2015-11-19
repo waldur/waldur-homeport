@@ -1,5 +1,5 @@
 <div ng-controller="BaseController as Base">
-    <div ui-view="{{ Base.isAuthenticated ? 'appHeaderIn' : 'appHeaderOut' }}"></div>
+    <div ui-view="{{ Base.isAuthenticated ? 'appHeaderIn' : 'appHeaderOut' }}" class="base-universal-header"></div>
 
     <div ui-view="appContent"></div>
 </div>

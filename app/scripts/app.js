@@ -880,7 +880,7 @@
               templateUrl: 'views/tos/index.html',
             },
             'appHeaderOut': {
-              templateUrl: 'views/partials/site-header.html',
+              templateUrl: MODE.homeHeaderTemplate ? MODE.homeHeaderTemplate : 'views/partials/site-header.html',
             },
             'appHeaderIn': {
               templateUrl: 'views/partials/app-header.html',
