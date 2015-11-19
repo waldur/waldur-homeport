@@ -2,9 +2,9 @@
 
 (function() {
   angular.module('ncsaas')
-    .directive('customerBalance', ['currentStateService', 'ENV', detailsView]);
+    .directive('customerBalance', ['currentStateService', 'ncUtils', 'ENV', detailsView]);
 
-  function detailsView(currentStateService, ENV) {
+  function detailsView(currentStateService, ncUtils, ENV) {
     return {
       restrict: 'E',
       templateUrl: "views/directives/customer-balance.html",
@@ -43,18 +43,31 @@
             scope.quotasTooltip = false;
           };
 
-          currentStateService.getCustomer().then(function(response) {
-            scope.model = response;
-            scope.currentPlan = response.plan ? response.plan.name : 'Default';
-            // XXX replace when backend will send proper quotas names
-            var quotas = response.quotas;
-            scope.currentPlanQuotas = quotas ? quotas.map(function(elem) {
-              return {
-                name: elem.name.replace(/nc_|_count/gi,'') + (elem.limit > 1 || elem.limit == -1 ? 's' : ''),
-                limit: elem.limit < 0 ? '∞' : elem.limit,
-                usage: elem.usage < 0 ? '∞' : elem.usage
-              };
-            }) : [];
+          currentStateService.getCustomer().then(function(customer) {
+            scope.model = customer;
+            var usage = ncUtils.getQuotaUsage(customer.quotas);
+
+            if (customer.plan) {
+              scope.currentPlan = customer.plan.name;
+              scope.currentPlanQuotas = customer.plan.quotas.map(function(quota) {
+                var name = ncUtils.getPrettyQuotaName(quota.name);
+                return {
+                  name: name + (quota.value > 1 || quota.value == -1 ? 's' : ''),
+                  limit: quota.value < 0 ? '∞' : quota.value,
+                  usage: usage[quota.name]
+                };
+              });
+            } else {
+              scope.currentPlan = 'Default';
+              scope.currentPlanQuotas = customer.quotas.map(function(quota) {
+                var name = ncUtils.getPrettyQuotaName(quota.name);
+                return {
+                  name: name + (quota.limit > 1 || quota.limit == -1 ? 's' : ''),
+                  limit: quota.limit < 0 ? '∞' : quota.limit,
+                  usage: usage[quota.name]
+                };
+              });
+            }
           });
 
         };

@@ -13,6 +13,7 @@
      '$q',
      '$state',
      'ENV',
+     'ncUtils',
      InitialDataController]);
 
   function InitialDataController(
@@ -24,7 +25,8 @@
     joinService,
     $q,
     $state,
-    ENV) {
+    ENV,
+    ncUtils) {
     var controllerScope = this;
     var Controller = baseControllerClass.extend({
       user: {},
@@ -61,17 +63,10 @@
         var vm = this;
         currentStateService.getCustomer().then(function(customer) {
           vm.customer = customer;
-          agreementsService.getList({customer: customer.uuid}).then(function(agreements) {
-            if (agreements.length !== 0) {
-              vm.agreement = agreements[0];
-            }
-          });
         });
       },
-      // XXX: This is quick fix, we need to get display names from backend, but currently quotas on backend do not
-      // have display names
       getPrettyQuotaName: function(name, count) {
-        return name.replace(/nc_|_count/gi,'') + (count > 1 ? 's' : '');
+        return ncUtils.getPrettyQuotaName(name) + (count > 1 ? 's' : '');
       },
       addChosenService: function(name) {
         if (!name) {
