@@ -3,6 +3,7 @@
 angular.module('ncsaas')
   .constant('MODE', {
     modeName: 'modeCostTracking',
+    modePageTitle: 'TrackMyCosts.com',
     toBeFeatures: [
       'resources',
       'payment',
