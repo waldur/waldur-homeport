@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="opennodecloud.com" />
     <base href="/"></base>
-    <title>NodeConductor - Cloud Service Management</title>
+    <title ng-bind-html="pageTitle">NodeConductor - Cloud Service Management</title>
     <!-- favicon -->
     <link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon" />
     <!-- css -->
@@ -53,6 +53,15 @@
             &copy; <a href="http://opennodecloud.com">OpenNode</a> 2015
         </div>
         <ul class="footer-nav">
+            <li ng-if="Main.modeName === 'modeCostTracking'">
+                <div id="fb-root"></div>
+                <div class="fb-like"
+                     data-share="true"
+                     data-width="450"
+                     data-show-faces="true"
+                     data-layout="button">
+                </div>
+            </li>
             <li>
                 <a ui-sref="tos.index">Terms of Service</a>
             </li>
@@ -68,7 +77,13 @@
         </ul>
     </div>
 </footer>
-
+<script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 
 <!-- @if NODE_ENV == 'DEVELOPMENT' -->
 <!-- angular -->
