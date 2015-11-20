@@ -975,16 +975,29 @@
 
 (function() {
   angular.module('ncsaas')
-    .factory('myHttpInterceptor', function($q, ncUtilsFlash, ENV, blockUI) {
-      var timeouts = {};
+    .factory('myHttpInterceptor', function($q, ncUtilsFlash, ENV, blockUI, $rootScope) {
+      var timeouts = {},
+          abortRequests;
       function getKey(config) {
         return config.url + config.method + JSON.stringify(config.params);
       }
+      $rootScope.$on('abortRequests', function() {
+        abortRequests = true;
+      });
+      $rootScope.$on('enableRequests', function() {
+        abortRequests = false;
+      });
+
       return {
         'request': function(config) {
+          var canceler = $q.defer();
+          config.timeout = canceler.promise;
+          if (abortRequests && config.url.indexOf('http') > -1) {
+            canceler.resolve();
+          }
           var deferred = $q.defer();
           deferred.resolve(config);
-          if (config.url) {
+          if (config.url && !abortRequests) {
             if (timeouts[getKey(config)]) {
               clearTimeout(timeouts[getKey(config)]);
             }
@@ -1010,12 +1023,14 @@
           if (rejection.data && rejection.data.non_field_errors) {
             message += ' ' + rejection.data.non_field_errors;
           }
-          if (rejection.config) {
-            clearTimeout(timeouts[getKey(rejection.config)]);
-            console.error(message, rejection.config);
+          if (!abortRequests) {
+            if (rejection.config) {
+              clearTimeout(timeouts[getKey(rejection.config)]);
+              console.error(message, rejection.config);
+            }
+            blockUI.reset();
+            ncUtilsFlash.error(message);
           }
-          blockUI.reset();
-          ncUtilsFlash.error(message);
           return $q.reject(rejection);
         }
       };

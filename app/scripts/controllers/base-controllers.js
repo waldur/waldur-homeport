@@ -322,6 +322,7 @@
       logout: function() {
         authService.signout();
         currentStateService.isCustomerDefined = false;
+        $rootScope.$broadcast('abortRequests');
         $state.go('home.login');
       },
       stateChangeSuccessHandler: function(event, toState, toParams, fromState, fromParams) {

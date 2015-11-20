@@ -2,9 +2,9 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('AuthController', ['$state', 'authService', 'baseControllerClass', 'ncUtilsFlash', AuthController]);
+    .controller('AuthController', ['$state', 'authService', 'baseControllerClass', 'ncUtilsFlash', '$rootScope', AuthController]);
 
-  function AuthController($state, authService, baseControllerClass, ncUtilsFlash) {
+  function AuthController($state, authService, baseControllerClass, ncUtilsFlash, $rootScope) {
     var controllerScope = this;
     var Controller = baseControllerClass.extend({
       isSignupFormVisible: false,
@@ -16,10 +16,12 @@
       },
       signin: function() {
         var vm = this;
+        $rootScope.$broadcast('enableRequests');
         return authService.signin(vm.user.username, vm.user.password).then(vm.loginSuccess.bind(vm), vm.loginError.bind(vm));
       },
       authenticate: function(provider) {
         var vm = this;
+        $rootScope.$broadcast('enableRequests');
         authService.authenticate(provider).then(vm.loginSuccess.bind(vm), vm.loginError.bind(vm));
       },
       loginSuccess: function() {
@@ -54,6 +56,7 @@
       signup: function() {
         var vm = this;
         vm.errors = {};
+        $rootScope.$broadcast('enableRequests');
         return authService.signup(vm.user).then(function() {
           ncUtilsFlash.info('Confirmation mail has been sent. Please check your inbox!');
           vm.isSignupFormVisible = false;
