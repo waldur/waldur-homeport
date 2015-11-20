@@ -67,7 +67,7 @@
       getImportedResources: function(service) {
         var vm = this;
         return servicesService.getServicesList().then(function(services) {
-          var url = services[service.type].url + service.uuid + '/imported_resources';
+          var url = services[service.type].url + service.uuid + '/managed_resources';
           return vm.getAll({}, url);
         });
       }
