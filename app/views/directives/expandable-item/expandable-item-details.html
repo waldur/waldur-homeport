@@ -2,7 +2,7 @@
     <div class="success-message" ng-if="expandableList.getClass(expandableElement.state) == 'processing'">Please wait few minutes until service provisioning is completed.</div>
 
     <div ng-if="expandableElement.error_message" class="error-message">
-        <b class="icon exclamation-triangle"></b>{{ ::expandableElement.error_message }}
+        {{ ::expandableElement.error_message }}
     </div>
 
     <header>

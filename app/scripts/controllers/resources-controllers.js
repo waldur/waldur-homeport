@@ -371,7 +371,7 @@
 
         var refreshPromise = $interval(function() {
           vm.getModel().then(function(model) {
-            vm.model.state = model.state;
+            vm.model = model;
             vm.updateStatus();
           });
         }, ENV.resourcesTimerInterval * 1000);

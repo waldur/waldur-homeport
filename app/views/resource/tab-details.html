@@ -1,3 +1,7 @@
+<div ng-if="controller.model.state == 'Erred' && controller.model.error_message" class="error-message">
+    {{ controller.model.error_message }}
+</div>
+
 <div ng-if="controller.inProgress">
     <a class="icon refresh spin"></a>
     Please wait a few minutes until resource provisioning is completed.
