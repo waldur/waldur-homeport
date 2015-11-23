@@ -128,7 +128,8 @@
       getResourcesForService: function(service) {
         controllerScope.importableResources = [];
         controllerScope.noResources = false;
-        servicesService.getList({operation: 'link'}, service.url).then(function(response) {
+        var query = {operation: 'link', project_uuid: controllerScope.currentProject.uuid};
+        servicesService.getList(query, service.url).then(function(response) {
           for (var i = 0; i < response.length; i++) {
             response[i].status = 'ready';
           }
