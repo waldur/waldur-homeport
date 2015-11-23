@@ -70,16 +70,19 @@
                             <div class="list-item">
                                 <div class="name">
                                     <h3 class="item-title">
-                                        <a>{{ resource.name }}</a>
+                                        <a ui-sref="resources.details({uuid: resource.uuid, resource_type: resource.resource_type})">{{ resource.name }}</a>
                                     </h3>
                                 </div>
-                                <div class="additional-cell">
+                                <div class="additional-cell" ng-if="resource.ram">
                                     CPU: {{ resource.cores }}  /
-                                    RAM: {{ resource.ram }} MB /
-                                    HDD: {{ resource.disk / 1024 }} GB
+                                    RAM: {{ resource.ram | mb2gb }} /
+                                    HDD: {{ resource.disk | mb2gb }}
+                                </div>
+                                <div class="additional-cell" ng-if="resource.type">
+                                    {{ resource.type }}
                                 </div>
                                 <div class="additional-cell">
-                                    <span class="status">Imported to <a ui-sref="projects.details({uuid: resource.project_uuid})">{{ resource.project_name }}</a></span>
+                                    <span class="status">Resource is already managed under <a ui-sref="organizations.details({uuid: resource.customer_uuid})">{{ resource.customer_name }}</a>: <a ui-sref="projects.details({uuid: resource.project_uuid})">{{ resource.project_name }}</a></span>
                                 </div>
                             </div>
                         </li>
@@ -106,10 +109,13 @@
                                         <a>{{ resource.name }}</a>
                                     </h3>
                                 </div>
-                                <div class="additional-cell">
+                                <div class="additional-cell" ng-if="resource.ram">
                                     CPU: {{ resource.cores }}  /
-                                    RAM: {{ resource.ram }} MB /
-                                    HDD: {{ resource.disk / 1024 }} GB
+                                    RAM: {{ resource.ram | mb2gb }} /
+                                    HDD: {{ resource.disk | mb2gb }}
+                                </div>
+                                <div class="additional-cell" ng-if="resource.type">
+                                    {{ resource.type }}
                                 </div>
                                 <div class="additional-cell" ng-switch="resource.status">
                                     <span class="status online" ng-switch-when="ready">Select to import</span>
