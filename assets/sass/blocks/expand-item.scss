@@ -19,19 +19,14 @@
     color: #3c763d;
     background-color: #dff0d8;
   }
+}
 
-  .error-message {
-    margin-bottom: 7px;
-    border-radius: 6px;
-    background-color: #f2dede;
-    color: #a94442;
-    padding: 10px;
-
-    .icon.exclamation-triangle {
-      margin-right: 8px;
-      color: #990000;
-    }
-  }
+.error-message {
+  margin-bottom: 7px;
+  border-radius: 6px;
+  background-color: #f2dede;
+  color: #a94442;
+  padding: 10px;
 }
 
 .details-expandable .icon {
