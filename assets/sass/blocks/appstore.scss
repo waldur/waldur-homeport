@@ -535,11 +535,17 @@
                         }
                     }
                 }
-                .list-item > span {
-                    min-width: 70px;
-                    @include bp(xs) {
-                        min-width: 50px;
-                    } // xs
+                .list-item {
+                    > span {
+                        min-width: 70px;
+                        @include bp(xs) {
+                            min-width: 50px;
+                            max-width: 70px;
+                        } // xs
+                    }
+                    .clear {
+                        display: block;
+                    }
                 }
                 .title {
                     width: 40%;
