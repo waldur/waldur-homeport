@@ -211,6 +211,15 @@
           background: $table-gray;
         }
       }
+      &.resources-cost-list {
+        .tr .td {
+          @include bp(xs) {
+            width: 27%;
+            font-size: 14px;
+            line-height: 20px;
+          }
+        }
+      }
     }
   }
   .row {
