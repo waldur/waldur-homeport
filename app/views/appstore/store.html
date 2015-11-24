@@ -159,21 +159,35 @@
                                     <div class="white-box list-box">
                                         <ul class="object-list">
                                             <li class="list-item list-header">
-                                                <span class="title">Title</span>
-                                                <span>CPU</span>
-                                                <span>RAM</span>
-                                                <span>HDD</span>
+                                                <div class="title">Title</div>
+                                                <div class="pull-right">
+                                                    <span>CPU</span>
+                                                    <span>RAM</span>
+                                                    <span>HDD</span>
+                                                </div>
                                             </li>
 
                                             <li ng-repeat="choice in field.choices | filter: {'display_name': field.searchQuery} | limitTo: field.limit"
                                                 ng-click="AppStore.doChoice(field.name, choice)"
                                                 ng-class="{'state': AppStore.instance[field.name] == choice.value, 'disabled': choice.disabled}"
                                                 class="list-item list">
-                                                <span class="title">{{ ::choice.display_name }}</span>
-                                                <span>{{ ::choice.item.cores == 1 && '1 core' || choice.item.cores + ' cores'}}</span>
-                                                <span>{{ ::choice.item.ram | mb2gb }}</span>
-                                                <span>{{ ::choice.item.disk | mb2gb}}</span>
-                                                <div class="clear"></div>
+                                                <div class="desktop">
+                                                    <span class="title">{{ ::choice.display_name }}</span>
+                                                    <div class="pull-right">
+                                                        <span>{{ ::choice.item.cores == 1 && '1 core' || choice.item.cores + ' cores'}}</span>
+                                                        <span>{{ ::choice.item.ram | mb2gb }}</span>
+                                                        <span>{{ ::choice.item.disk | mb2gb}}</span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="mobile">
+                                                    <h4>{{ ::choice.display_name }}</h4>
+                                                    <div>
+                                                        CPU: {{ ::choice.item.cores == 1 && '1 core' || choice.item.cores + ' cores'}};
+                                                        RAM: {{ ::choice.item.ram | mb2gb }};
+                                                        HDD: {{ ::choice.item.disk | mb2gb}}
+                                                    </div>
+                                                </div>
                                             </li>
                                         </ul>
                                     </div>
@@ -207,11 +221,7 @@
                                             <div class="appstore-template appstore-template-{{::field.name}}"
                                                  ng-repeat="choice in field.choices | filter: {'display_name': field.searchQuery} | limitTo: field.limit"
                                                  ng-click="AppStore.doChoice(field.name, choice)"
-                                                 ng-class="{'state': field.name == 'security_groups'
-                                                            ? AppStore.instance[field.name].indexOf(choice.value) > -1
-                                                            : (AppStore.instance[field.name] === choice.value && choice.value)
-                                                                || (field.name === 'ssh_public_key' && AppStore.instance[field.name] === choice.url),
-                                                            'disabled': choice.disabled}">
+                                                 ng-class="{'state': AppStore.isChosen(field.name, choice), 'disabled': choice.disabled}">
 
                                                 <div ng-if="::!choice.icon" class="icon {{ ::field.icon }}"></div>
                                                 <div ng-if="::choice.icon" class="icon"><img ng-src="/static/images/appstore/icon-{{ ::choice.icon }}.png"></div>

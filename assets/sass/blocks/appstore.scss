@@ -495,11 +495,10 @@
                     display: block;
                     margin-bottom: 10px;
                     @include bp(xs) {
-                        padding: 8px 0;
+                        padding: 8px;
                     } // xs
                     span {
-                        display: block;
-                        float: right;
+                        display: inline-block;
                         min-width: 70px;
                         width: auto;
                         &.title {
@@ -538,13 +537,23 @@
                 .list-item {
                     > span {
                         min-width: 70px;
-                        @include bp(xs) {
-                            min-width: 50px;
-                            max-width: 70px;
-                        } // xs
+                        display: inline-block;
                     }
-                    .clear {
+                    .mobile {
+                        display: none;
+                        @include bp(xs) {
+                            display: block;
+                        }
+                        h4 {
+                            margin: 0px 0px 10px;
+                            font-weight: bold;
+                        }
+                    }
+                    .desktop {
                         display: block;
+                        @include bp(xs) {
+                            display: none;
+                        }
                     }
                 }
                 .title {
@@ -554,19 +563,22 @@
                         width: 36%;
                     } // xs
                 }
-                .list-header .title {
-                    padding-left: 25px;
-                    float: left;
-                }
                 .list-header {
                     font-weight: bold;
                     display: block;
                     @include bp(xs) {
-                        text-align: center;
-                    } // xs
-                    span {
+                        display: none;
+                    }
+                    .title {
+                        padding-left: 25px;
+                        float: left;
+                    }
+                    .pull-right {
                         float: right;
-                        display: block;
+                        > span {
+                            display: inline-block;
+                            min-width: 70px;
+                        }
                     }
                 }
             }
@@ -674,6 +686,9 @@
                             white-space: normal;
                             overflow: auto;
                             text-overflow: clip;
+                        }
+                        @include bp(xs) {
+                            width: auto;
                         }
                     }
                 }
