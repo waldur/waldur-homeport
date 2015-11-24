@@ -375,6 +375,7 @@
       'ENV',
       '$filter',
       '$stateParams',
+      'ncUtils',
       ProjectSupportTabController
     ]);
 
@@ -386,7 +387,8 @@
     ENTITYLISTFIELDTYPES,
     ENV,
     $filter,
-    $stateParams
+    $stateParams,
+    ncUtils
   ) {
     var controllerScope = this;
     var ResourceController = baseControllerListClass.extend({
@@ -458,12 +460,13 @@
         })
       },
       showMore: function(contract) {
-        premiumSupportPlansService.$get(null, contract.plan).then(function(response) {
+        var promise = premiumSupportPlansService.$get(null, contract.plan).then(function(response) {
           contract.plan_description = response.description;
           contract.plan_terms = response.terms;
           contract.plan_base_rate = $filter('currency')(response.base_rate, ENV.currency);
           contract.plan_hour_rate = $filter('currency')(response.hour_rate, ENV.currency);
-        })
+        });
+        ncUtils.blockElement('block_'+contract.uuid, promise);
       }
     });
 
