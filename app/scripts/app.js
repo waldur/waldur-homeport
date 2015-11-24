@@ -975,7 +975,10 @@
 
 (function() {
   angular.module('ncsaas')
-    .factory('myHttpInterceptor', function($q, ncUtilsFlash, ENV, blockUI, $rootScope) {
+    .factory('myHttpInterceptor', [
+      '$q', 'ncUtilsFlash', 'ENV', 'blockUI', '$rootScope', httpInterceptor]);
+
+    function httpInterceptor($q, ncUtilsFlash, ENV, blockUI, $rootScope) {
       var timeouts = {},
           abortRequests;
       function getKey(config) {
@@ -990,14 +993,11 @@
 
       return {
         'request': function(config) {
-          var canceler = $q.defer();
-          config.timeout = canceler.promise;
-          if (abortRequests && config.url.indexOf('http') > -1) {
+          if (abortRequests) {
+            var canceler = $q.defer();
+            config.timeout = canceler.promise;
             canceler.resolve();
-          }
-          var deferred = $q.defer();
-          deferred.resolve(config);
-          if (config.url && !abortRequests) {
+          } else {
             if (timeouts[getKey(config)]) {
               clearTimeout(timeouts[getKey(config)]);
             }
@@ -1011,19 +1011,17 @@
           return config;
         },
         'response': function(response) {
-          var deferred = $q.defer();
-          deferred.resolve(response);
           if (response.config) {
             clearTimeout(timeouts[getKey(response.config)]);
           }
           return response;
         },
         'responseError': function(rejection) {
-          var message = rejection.status ? (rejection.status + ': ' + rejection.statusText) : 'Connection error';
-          if (rejection.data && rejection.data.non_field_errors) {
-            message += ' ' + rejection.data.non_field_errors;
-          }
           if (!abortRequests) {
+            var message = rejection.status ? (rejection.status + ': ' + rejection.statusText) : 'Connection error';
+            if (rejection.data && rejection.data.non_field_errors) {
+              message += ' ' + rejection.data.non_field_errors;
+            }
             if (rejection.config) {
               clearTimeout(timeouts[getKey(rejection.config)]);
               console.error(message, rejection.config);
@@ -1034,7 +1032,7 @@
           return $q.reject(rejection);
         }
       };
-    });
+    };
 
   angular.module('ncsaas')
     .config(['$httpProvider', 'blockUIConfig', errorsHandler]);
