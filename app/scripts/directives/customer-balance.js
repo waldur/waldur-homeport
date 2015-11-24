@@ -72,6 +72,11 @@
 
         };
 
+        if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('payment') > -1) {
+          scope.hideAll = true;
+          return;
+        }
+
         refresh();
         scope.$on('customerBalance:refresh', function() {
           refresh();

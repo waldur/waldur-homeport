@@ -171,7 +171,7 @@
     } // img
     .img-center {
         left: 40%;
-        margin-left: -268px;
+        margin-left: -250px;
         z-index: 10;
         bottom: -30px;
     } // img
@@ -344,3 +344,10 @@ header.cost-tracking {
     display: block;
     padding-left: 55px;
 }
+
+.fb-like {
+    iframe {
+        bottom: 0;
+    }
+}
+
