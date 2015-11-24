@@ -413,6 +413,21 @@
           });
         }
       },
+      isChosen: function(name, choice) {
+        var value = (name == 'ssh_public_key') ? choice.url : choice.value;
+        if (value == undefined) {
+          return false;
+        }
+        if (name == 'security_groups') {
+          var vals = this.instance[name];
+          if (!vals) {
+            return false;
+          }
+          return vals.indexOf(value) > -1;
+        } else {
+          return this.instance[name] == value;
+        }
+      },
       setSize: function() {
         var field = this.findFieldByName('system_volume_size');
         if (!field) {
