@@ -5,7 +5,6 @@ angular.module('ncsaas')
     modeName: 'modeCostTracking',
     modePageTitle: 'TrackMyCosts.com',
     toBeFeatures: [
-      'resources',
       'payment',
       'eventlog',
       'localSignup',
