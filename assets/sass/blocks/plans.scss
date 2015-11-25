@@ -175,3 +175,11 @@
         } // tr
     } // table
 } // plan-item
+
+.in-homepage {
+    .current-plan {
+        &:before {
+            content: 'Your initial plan';
+        }
+    }
+}
