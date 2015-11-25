@@ -6,6 +6,9 @@
     &.in-homepage {
         .plan {
             width: 25%;
+            .plan-item {
+                cursor: default;
+            }
             @include bp(xs) {
                 width: 100%;
             } // xs
@@ -172,3 +175,11 @@
         } // tr
     } // table
 } // plan-item
+
+.in-homepage {
+    .current-plan {
+        &:before {
+            content: 'Your initial plan';
+        }
+    }
+}
