@@ -886,6 +886,25 @@
               templateUrl: 'views/partials/app-header.html',
             }
           }
+        })
+        .state('policy', {
+          url: '/policy/',
+          abstract: true,
+          templateUrl: 'views/partials/base-universal.html',
+        })
+        .state('policy.privacy', {
+          url: 'privacy/',
+          views: {
+            'appContent': {
+              templateUrl: 'views/policy/privacy.html',
+            },
+            'appHeaderOut': {
+              templateUrl: MODE.homeHeaderTemplate ? MODE.homeHeaderTemplate : 'views/partials/site-header.html',
+            },
+            'appHeaderIn': {
+              templateUrl: 'views/partials/app-header.html',
+            }
+          }
         });
 
       function authCheck($q, $location, $auth, usersService, ENV) {
