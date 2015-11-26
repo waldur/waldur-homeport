@@ -887,6 +887,25 @@
             }
           }
         })
+        .state('about', {
+          url: '/about/',
+          abstract: true,
+          templateUrl: 'views/partials/base-universal.html',
+        })
+        .state('about.index', {
+          url: '',
+          views: {
+            'appContent': {
+              templateUrl: 'views/about/index.html',
+            },
+            'appHeaderOut': {
+              templateUrl: MODE.homeHeaderTemplate ? MODE.homeHeaderTemplate : 'views/partials/site-header.html',
+            },
+            'appHeaderIn': {
+              templateUrl: 'views/partials/app-header.html',
+            }
+          }
+        })
         .state('policy', {
           url: '/policy/',
           abstract: true,
@@ -994,7 +1013,7 @@
 
 (function() {
   angular.module('ncsaas')
-    .factory('myHttpInterceptor', [
+    .factory('httpInterceptor', [
       '$q', 'ncUtilsFlash', 'ENV', 'blockUI', '$rootScope', httpInterceptor]);
 
     function httpInterceptor($q, ncUtilsFlash, ENV, blockUI, $rootScope) {
@@ -1012,7 +1031,7 @@
 
       return {
         'request': function(config) {
-          if (abortRequests) {
+          if (abortRequests && !(/^views.*\/(.*?).html$/.test(config.url))) {
             var canceler = $q.defer();
             config.timeout = canceler.promise;
             canceler.resolve();
@@ -1058,7 +1077,7 @@
 
   function errorsHandler($httpProvider, blockUIConfig) {
     blockUIConfig.delay = 500;
-    $httpProvider.interceptors.push('myHttpInterceptor');
+    $httpProvider.interceptors.push('httpInterceptor');
 
     blockUIConfig.requestFilter = function(config) {
       if(config.hasOwnProperty('params') && config.params.hasOwnProperty('DONTBLOCK')) {
