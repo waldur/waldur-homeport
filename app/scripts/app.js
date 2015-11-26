@@ -896,7 +896,7 @@
           url: '',
           views: {
             'appContent': {
-              templateUrl: 'views/about/index.html',
+              templateUrl: MODE.aboutPageTemplate ? MODE.aboutPageTemplate : 'views/about/index.html',
             },
             'appHeaderOut': {
               templateUrl: MODE.homeHeaderTemplate ? MODE.homeHeaderTemplate : 'views/partials/site-header.html',
