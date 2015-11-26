@@ -76,6 +76,7 @@
             className: 'remove'
           }
         ];
+        var vm = this;
         this.entityOptions = {
           entityData: {
             noDataText: 'You have no resources yet.',
@@ -85,11 +86,16 @@
           },
           list: [
             {
-              propertyName: 'icon',
-              titlePropertyName: 'icon_title',
               type: ENTITYLISTFIELDTYPES.icon,
               showForMobile: true,
-              className: 'icon'
+              className: 'icon',
+              getTitle: function(item) {
+                return item.resource_type;
+              },
+              getIcon: function(item) {
+                var service_type = item.resource_type.split(".")[0];
+                return "/static/images/appstore/icon-" + service_type.toLowerCase() + ".png";
+              }
             },
             {
               name: 'Name',
@@ -124,14 +130,14 @@
             {
               name: 'Access',
               propertyName: 'access_info_text',
-              urlProperyName: 'access_info_url',
+              urlPropertyName: 'access_info_url',
               type: ENTITYLISTFIELDTYPES.linkOrText,
               showForMobile: true,
-              className: 'resource-access'
+              className: 'resource-access',
+              initField: vm.setAccessInfo
             }
           ]
         };
-        var vm = this;
         currentStateService.getProject().then(function(project) {
           if (project) {
             if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('resources') == -1) {
@@ -199,33 +205,16 @@
           vm.searchFilters = filters;
         });
       },
-      afterGetList: function() {
-        this.setAccessInfo();
-        this.setIcon();
-      },
-      setAccessInfo: function() {
-        for (var i = 0; i < this.list.length; i++) {
-          var item = this.list[i];
-          item.access_info_text = 'No access info';
-          if (item.external_ips && item.external_ips.length > 0) {
-            item.access_info_text = item.external_ips.join(', ');
-          }
-          else if (item.rdp && item.state == 'Online') {
-            item.access_info_url = item.rdp;
-            item.access_info_text = 'Connect';
-          }
-          else if (item.web_url && item.state == 'Online') {
-            item.access_info_url = item.web_url;
-            item.access_info_text = 'Open';
-          }
-        }
-      },
-      setIcon: function() {
-        for (var i = 0; i < this.list.length; i++) {
-          var item = this.list[i];
-          var service_type = item.resource_type.split(".")[0];
-          item.icon = "/static/images/appstore/icon-" + service_type.toLowerCase() + ".png";
-          item.icon_title = item.resource_type;
+      setAccessInfo: function(item) {
+        item.access_info_text = 'No access info';
+        if (item.external_ips && item.external_ips.length > 0) {
+          item.access_info_text = item.external_ips.join(', ');
+        } else if (item.rdp && item.state == 'Online') {
+          item.access_info_url = item.rdp;
+          item.access_info_text = 'Connect';
+        } else if (item.web_url && item.state == 'Online') {
+          item.access_info_url = item.web_url;
+          item.access_info_text = 'Open';
         }
       },
       stopResource:function(resource) {

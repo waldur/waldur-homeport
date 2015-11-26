@@ -157,8 +157,8 @@
                         </span>
 
                         <span ng-switch-when="icon">
-                            <img title="{{ entity[field.titlePropertyName] }}"
-                                 ng-src="{{ entity[field.propertyName] }}"/>
+                            <img title="{{ field.getTitle(entity) }}"
+                                 ng-src="{{ field.getIcon(entity) }}"/>
                         </span>
 
                         <span ng-switch-when="fontIcon"
@@ -194,14 +194,14 @@
                             <i>{{ field.emptyText }}</i>
                         </span>
 
-                        <span ng-switch-when="linkOrText">
-                            <a ng-if="::entity[field.urlProperyName]"
-                               href="{{ ::entity[field.urlProperyName] }}"
+                        <span ng-switch-when="linkOrText" ng-init="field.initField && field.initField(entity)">
+                            <a ng-if="entity[field.urlPropertyName]"
+                               href="{{ entity[field.urlPropertyName] }}"
                                target="_blank">
                                 <b class="icon external-link"></b>
-                                {{ ::entity[field.propertyName] }}
+                                {{ ::entity[field.urlPropertyName] }}
                             </a>
-                            <span ng-if="::!entity[field.urlProperyName]">
+                            <span ng-if="::!entity[field.urlPropertyName]">
                                 {{ ::entity[field.propertyName] }}
                             </span>
                         </span>

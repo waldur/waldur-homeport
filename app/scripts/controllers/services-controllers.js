@@ -59,7 +59,8 @@
             noDataText: 'No providers yet.',
             createLink: 'services.create',
             createLinkText: 'Create provider',
-            checkQuotas: 'service'
+            checkQuotas: 'service',
+            timer: ENV.providersTimerInterval
           },
           list: [
             {
