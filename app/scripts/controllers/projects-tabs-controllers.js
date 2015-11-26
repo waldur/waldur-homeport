@@ -190,10 +190,14 @@
         this._super();
       },
       getList: function(filter) {
+        var getList = this._super.bind(controllerScope),
+          vm = this;
         this.service.defaultFilter.aggregate = 'project';
-        this.service.defaultFilter.uuid = currentStateService.getProjectUuid();
         this.service.defaultFilter.opened = true;
-        return this._super(filter);
+        return currentStateService.getProject().then(function(response) {
+          vm.service.defaultFilter.uuid = response.uuid;
+          return getList(filter);
+        });
       }
     });
 
