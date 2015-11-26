@@ -41,12 +41,44 @@
           scope.service.cacheReset = true;
           scope.service.clearAllCacheForCurrentEndpoint();
           filter[scope.controller.searchFieldName] = scope.controller.searchInput;
-          var getListPromise = scope.controller.getList(filter);
+          var getListPromise = scope.service.getList(filter);
           if (getListPromise && getListPromise.then) {
             scope.processing = true;
-            getListPromise.then(function() {
+            getListPromise.then(function(response) {
+              mergeLists(scope.controller.list, response);
               scope.processing = false;
             });
+          }
+        }
+
+        function mergeLists(list1, list2) {
+          list1 = list1 || [];
+          var itemByUuid = {},
+            deletedItemIndexes = [],
+            newListUiids = list2.map(function(item) {
+              return item.uuid;
+            });
+          for (var i = 0; i < list1.length; i++) {
+            var item = list1[i];
+            if (newListUiids.indexOf(item.uuid) === -1) {
+              deletedItemIndexes.push(i);
+              continue;
+            }
+            itemByUuid[item.uuid] = item;
+          }
+          for (var j = 0; j < deletedItemIndexes.length; j++) {
+            list1.splice(deletedItemIndexes[j], 1);
+          }
+          for (var i = 0; i < list2.length; i++) {
+            var item2 = list2[i];
+            var item1 = itemByUuid[item2.uuid];
+            if (!item1) {
+              list1.push(item2);
+              continue;
+            }
+            for(var key in item2) {
+              item1[key] = item2[key];
+            }
           }
         }
       }
