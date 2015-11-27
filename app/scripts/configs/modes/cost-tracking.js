@@ -13,7 +13,8 @@ angular.module('ncsaas')
       'monitoring',
       'projectGroups',
       'premiumSupport',
-      'appstore'
+      'appstore',
+      'balance'
     ],
     featuresVisible: false,
     homeTemplate: 'views/home/costtracking/home.html',

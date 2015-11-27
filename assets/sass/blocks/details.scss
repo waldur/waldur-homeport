@@ -388,6 +388,7 @@
       font-size: 20px;
       margin-bottom: 10px;
       margin-top: 15px;
+      position: relative;
       .bold {
         font-weight: bold;
       }
@@ -475,8 +476,17 @@
       }
       &.quota-tooltip {
         right: 28px;
-        top: 50px;
+        top: 35px;
         width: 240px;
+        margin-right: -50%;
+        left: -86px;
+        text-align: left;
+        &:before {
+          right: 70px;
+        }
+        &:after {
+          right: 71px;
+        }
         @include bp(xs) {
           position: fixed;
           width: 100%;

@@ -7,29 +7,30 @@
             <span class="plan-spacing" visible="plans" ng-click="quotasTooltip = !quotasTooltip;">
                 {{ currentPlan || 'Default'  }}
             </span>
-            <span class="bold">
+            <span class="bold" visible="balance">
                 Balance:
             </span>
-            <span>
+            <span visible="balance">
                 {{ model.balance || 0 | currency:currency }}
             </span>
-        </div>
-        <div class="tooltip quota-tooltip" ng-show="quotasTooltip">
-            <div class="tooltip-title">
-                <h3>Current quotas: </h3>
-                <div class="icon close" ng-click="quotasTooltip = false;"></div>
-                <div class="clear"></div>
+            <div class="tooltip quota-tooltip" ng-show="quotasTooltip">
+                <div class="tooltip-title">
+                    <h3>Current quotas: </h3>
+                    <div class="icon close" ng-click="quotasTooltip = false;"></div>
+                    <div class="clear"></div>
+                </div>
+                <div ng-repeat="quota in currentPlanQuotas" visible="{{ quota.name }}">
+                    <div>{{ quota.usage }} out of {{ quota.limit }} {{ quota.name }}</div>
+                </div>
+                <a visible="plans" ui-sref="organizations.plans({uuid: model.uuid})"
+                   ng-show="type == 'dashboard'" class="button">Upgrade</a>
             </div>
-            <div ng-repeat="quota in currentPlanQuotas" visible="{{ quota.name }}">
-                <div>{{ quota.usage }} out of {{ quota.limit }} {{ quota.name }}</div>
-            </div>
-            <a visible="plans" ui-sref="organizations.plans({uuid: model.uuid})"
-               ng-show="type == 'dashboard'" class="button">Upgrade</a>
         </div>
+
         <div ng-if="type == 'details'">
             <div class="buttons">
                 <a class="button" visible="plans" ui-sref="organizations.plans({uuid: model.uuid})">Plans</a>
-                <a class="button" ng-click="toggleBalance()">Top-up</a>
+                <a class="button" ng-click="toggleBalance()" visible="balance">Top-up</a>
                 <a class="button" ng-click="toggleChart()" ng-if="showChart">History</a>
             </div>
             <div class="tooltip graph-tooltip" ng-if="showChart && graphTooltip">
