@@ -20,5 +20,6 @@ angular.module('ncsaas')
     homeTemplate: 'views/home/costtracking/home.html',
     homeHeaderTemplate: 'views/partials/costtracking/site-header.html',
     homeLoginTemplate: 'views/home/costtracking/login.html',
-    initialDataTemplate: 'views/initial-data/initial-data.html'
+    initialDataTemplate: 'views/initial-data/initial-data.html',
+    aboutPageTemplate: 'views/about/costtracking/index.html'
   });
