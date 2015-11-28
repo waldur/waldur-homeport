@@ -5,8 +5,6 @@ angular.module('ncsaas')
     modeName: 'modeCostTracking',
     modePageTitle: 'TrackMyCosts.com',
     toBeFeatures: [
-      'payment',
-      'eventlog',
       'localSignup',
       'users',
       'people',
@@ -14,7 +12,9 @@ angular.module('ncsaas')
       'templates',
       'monitoring',
       'projectGroups',
-      'premiumSupport'
+      'premiumSupport',
+      'appstore',
+      'balance'
     ],
     featuresVisible: false,
     homeTemplate: 'views/home/costtracking/home.html',
