@@ -37,44 +37,79 @@
                 <div class="clear"></div>
             </div>
             <div ng-if="row.selected">
-                <div class="table services" ng-show="row.activeTab=='projects'">
+                <div class="table desktop" ng-show="row.activeTab=='projects'">
                     <div class="tr th">
-                        <div class="td service-name display-for-mobile"><span>Project name</span></div>
-                        <div class="td service-name display-for-mobile"><span>Organization name</span></div>
-                        <div class="td service-name display-for-mobile"><span>Cost</span></div>
+                        <div class="td"><span>Project name</span></div>
+                        <div class="td"><span>Organization name</span></div>
+                        <div class="td"><span>Cost</span></div>
                     </div>
-                    <div class="tr" ng-repeat="service in row.projects">
-                        <div class="td service-name display-for-mobile"><span ng-bind="::service.project_name"></span></div>
-                        <div class="td service-name display-for-mobile"><span ng-bind="::service.organization_name"></span></div>
-                        <div class="td service-name display-for-mobile"><span>{{ ::service.total | defaultCurrency }}</span></div>
+                    <div class="tr" ng-repeat="project in row.projects">
+                        <div class="td"><span ng-bind="::project.project_name"></span></div>
+                        <div class="td"><span ng-bind="::project.organization_name"></span></div>
+                        <div class="td"><span>{{ ::project.total | defaultCurrency }}</span></div>
                     </div>
                 </div>
-                <div class="table services" ng-show="row.activeTab=='services'">
+                <div class="mobile-cost-container" ng-show="row.activeTab=='projects'">
+                    <div class="cost-row" ng-repeat="project in row.projects">
+                        <div class="cost-row-name">
+                            <b>{{ ::project.project_name }}</b>
+                            <div>In {{ ::project.organization_name }}</div>
+                        </div>
+                        <div class="cost-row-price">
+                            <span>{{ ::project.total | defaultCurrency }}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="table desktop" ng-show="row.activeTab=='services'">
                     <div class="tr th">
-                        <div class="td service-name display-for-mobile"><span>Provider name</span></div>
-                        <div class="td service-name display-for-mobile"><span>Resources</span></div>
-                        <div class="td service-name display-for-mobile"><span>Cost</span></div>
+                        <div class="td"><span>Provider name</span></div>
+                        <div class="td"><span>Resources</span></div>
+                        <div class="td"><span>Cost</span></div>
                     </div>
                     <div class="tr" ng-repeat="service in row.services">
-                        <div class="td service-name display-for-mobile"><span ng-bind="::service.scope_name"></span></div>
-                        <div class="td service-name display-for-mobile"><span ng-bind="::service.resources_count"></span></div>
-                        <div class="td service-name display-for-mobile"><span>{{ ::service.total | defaultCurrency }}</span></div>
+                        <div class="td"><span ng-bind="::service.scope_name"></span></div>
+                        <div class="td"><span ng-bind="::service.resources_count"></span></div>
+                        <div class="td"><span>{{ ::service.total | defaultCurrency }}</span></div>
                     </div>
                 </div>
-                <div class="table services resources-cost-list" ng-show="row.activeTab=='resources'">
+                <div class="mobile-cost-container" ng-show="row.activeTab=='services'">
+                    <div class="cost-row" ng-repeat="service in row.services">
+                        <div class="cost-row-name">
+                            <b>{{::service.scope_name}}</b>
+                            (<span ng-bind="::service.resources_count"></span> resources)
+                        </div>
+                        <div class="cost-row-price">
+                            <span>{{ ::service.total | defaultCurrency }}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="table resources-cost-list desktop" ng-show="row.activeTab=='resources'">
                     <div class="tr th">
-                        <div class="td service-name display-for-mobile"><span>Resource name</span></div>
-                        <div class="td service-name display-for-mobile"><span>Resource type</span></div>
-                        <div class="td service-name"><span>Project</span></div>
-                        <div class="td service-name display-for-mobile"><span>Cost</span></div>
+                        <div class="td"><span>Resource name</span></div>
+                        <div class="td"><span>Resource type</span></div>
+                        <div class="td"><span>Project</span></div>
+                        <div class="td"><span>Cost</span></div>
                     </div>
                     <div class="tr" ng-repeat="resource in row.resources">
-                        <div class="td service-name display-for-mobile">
+                        <div class="td">
                             <a ui-sref="resources.details({uuid: resource.resource_uuid, resource_type: resource.resource_type})">{{::resource.scope_name}}</a>
                         </div>
-                        <div class="td service-name display-for-mobile"><span ng-bind="::resource.resource_type"></span></div>
-                        <div class="td service-name"><a ui-sref="projects.details({uuid: resource.project_uuid})">{{::resource.project_name}}</a></div>
-                        <div class="td service-name display-for-mobile"><span>{{ ::resource.total | defaultCurrency }}</span></div>
+                        <div class="td"><span ng-bind="::resource.resource_type"></span></div>
+                        <div class="td"><a ui-sref="projects.details({uuid: resource.project_uuid})">{{::resource.project_name}}</a></div>
+                        <div class="td"><span>{{ ::resource.total | defaultCurrency }}</span></div>
+                    </div>
+                </div>
+                <div class="mobile-cost-container" ng-show="row.activeTab=='resources'">
+                    <div class="cost-row" ng-repeat="resource in row.resources">
+                        <div class="cost-row-name">
+                            <a ui-sref="resources.details({uuid: resource.resource_uuid, resource_type: resource.resource_type})">{{::resource.scope_name}}</a>
+                            <div>
+                                {{ ::resource.resource_type }} in {{::resource.project_name}} project
+                            </div>
+                        </div>
+                        <div class="cost-row-price">
+                            <span>{{ ::resource.total | defaultCurrency }}</span>
+                        </div>
                     </div>
                 </div>
             </div>
