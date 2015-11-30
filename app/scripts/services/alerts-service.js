@@ -35,7 +35,7 @@
     'customer_has_zero_projects': 'Organization {customer_name} does not have any projects.',
     'service_has_unmanaged_resources': 'Provider {service_name} has unmanaged resources.',
     'service_unavailable': 'Provider {service_name} is not responding.',
-    'resource_disappeared_from_backend': 'Resource {resource_name} has disappeared from the {service_name}.',
+    'resource_disappeared_from_backend': 'Resource {resource_name} has disappeared from the {service_name} provider in {project_name} project.',
     'customer_projected_costs_exceeded': 'This month estimated costs for organization {customer_name} exceeded.',
     'customer_project_count_exceeded': 'Organization {customer_name} has exceeded quota {quota_name}.',
     'customer_resource_count_exceeded': 'Organization {customer_name} has exceeded quota {quota_name}.',
