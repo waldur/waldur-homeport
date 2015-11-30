@@ -407,7 +407,7 @@
         if (vm.defaultPriceListItems.length) {
           vm.setPriceItem(name, choice);
         } else {
-          defaultPriceListItemsService.getList().then(function(response) {
+          defaultPriceListItemsService.getAll({resource_type: vm.serviceType + '.' + vm.selectedResourceType}).then(function(response) {
             vm.defaultPriceListItems = response;
             vm.setPriceItem(name, choice);
           });
@@ -502,6 +502,7 @@
         this.deletePriceItem(name);
         var display_name = choice.display_name;
         var price = this.findPrice(name, display_name);
+        price = price ? price : 0;
         this.pushPriceItem(name, display_name, price);
       },
       findPrice: function(name, display_name) {
