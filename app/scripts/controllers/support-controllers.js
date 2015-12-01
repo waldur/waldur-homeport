@@ -35,6 +35,7 @@
             createLink: 'support.create',
             createLinkText: 'Create ticket',
             noDataText: 'No tickets yet.',
+            noMatchesText: 'No tickets found matching filter.',
             hideActionButtons: false,
             hideTableHead: true,
             actionButtonsType: 'refresh',

@@ -15,6 +15,7 @@
         this.entityOptions = {
           entityData: {
             noDataText: 'No events yet',
+            noMatchesText: 'No events found matching filter.',
             hideActionButtons: true,
             hideTableHead: true
           },
@@ -74,6 +75,7 @@
         this.entityOptions = {
           entityData: {
             noDataText: 'No alerts yet',
+            noMatchesText: 'No alerts found matching filter.',
             hideActionButtons: true,
             hideTableHead: true
           },
