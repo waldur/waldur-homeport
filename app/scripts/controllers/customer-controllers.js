@@ -120,6 +120,7 @@
       '$window',
       '$interval',
       'servicesService',
+      'joinService',
       'resourcesCountService',
       'alertsService',
       'ncUtilsFlash',
@@ -141,6 +142,7 @@
     $window,
     $interval,
     servicesService,
+    joinService,
     resourcesCountService,
     alertsService,
     ncUtilsFlash,
@@ -300,7 +302,8 @@
       },
       setProvidersCounter: function() {
         var vm = this;
-        resourcesCountService.services({customer: vm.model.uuid}).then(function(count) {
+        var query = angular.extend(joinService.defaultFilter, {customer: vm.model.uuid});
+        resourcesCountService.services(query).then(function(count) {
           vm.detailsViewOptions.tabs[5].count = count;
         });
       },
