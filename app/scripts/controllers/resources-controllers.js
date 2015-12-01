@@ -244,7 +244,10 @@
       unlink: function(resource) {
         var vm = this;
         vm.service.operation('unlink', resource.url).then(
-          vm.afterInstanceRemove.bind(vm, resource),
+          function() {
+            servicesService.clearAllCacheForCurrentEndpoint();
+            vm.afterInstanceRemove(resource);
+          },
           vm.handleActionException.bind(vm)
         );
       },
