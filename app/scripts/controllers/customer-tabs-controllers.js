@@ -272,6 +272,7 @@
         this.controllerScope = controllerScope;
         this.category = ENV.VirtualMachines;
         this._super();
+        this.entityOptions.entityData.noMatchesText = 'No VMs found matching filter.';
       }
     });
     controllerScope.__proto__ = new ResourceController();
@@ -296,6 +297,7 @@
         this.entityOptions.entityData.noDataText = 'You have no applications yet';
         this.entityOptions.entityData.createLinkText = 'Create application';
         this.entityOptions.entityData.importLinkText = 'Import application';
+        this.entityOptions.entityData.noMatchesText = 'No Applications found matching filter.';
       }
     });
     controllerScope.__proto__ = new ResourceController();
