@@ -57,9 +57,11 @@
         this.entityOptions = {
           entityData: {
             noDataText: 'No providers yet.',
+            noMatchesText: 'No providers found matching filter.',
             createLink: 'services.create',
             createLinkText: 'Create provider',
-            checkQuotas: 'service'
+            checkQuotas: 'service',
+            timer: ENV.providersTimerInterval
           },
           list: [
             {

@@ -52,6 +52,7 @@
         this.entityOptions = {
           entityData: {
             noDataText: 'You have no organizations yet.',
+            noMatchesText: 'No organizations found matching filter.',
             title: 'Organizations',
             createLink: 'organizations.create',
             createLinkText: 'Add organization'
@@ -124,6 +125,7 @@
       'alertsService',
       'ncUtilsFlash',
       '$scope',
+      'eventsService',
       CustomerDetailUpdateController
     ]);
 
@@ -143,7 +145,8 @@
     resourcesCountService,
     alertsService,
     ncUtilsFlash,
-    $scope
+    $scope,
+    eventsService
     ) {
     var controllerScope = this;
     var CustomerController = baseControllerDetailUpdateClass.extend({
@@ -249,7 +252,10 @@
       },
       setEventsCounter: function() {
         var vm = this;
-        resourcesCountService.events({scope: vm.model.url}).then(function(count) {
+        var query = angular.extend(eventsService.defaultFilter, {
+          scope: vm.model.url
+        });
+        resourcesCountService.events(query).then(function(count) {
           vm.detailsViewOptions.tabs[0].count = count;
         });
       },

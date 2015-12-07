@@ -12,6 +12,7 @@
     float: right;
     > div {
       height: 33px;
+      display: inline-block;
     }
   }
   .active-content {
@@ -181,9 +182,6 @@
         text-align: center;
         padding: 0 20px;
         .td {
-          float: left;
-          width: 18%;
-
           &:nth-child(1) {
             text-align: left;
           }
@@ -191,7 +189,6 @@
             font-weight: bold;
           }
           &:last-child {
-            float: right;
             text-align: right;
             margin-right: 20px;
           }
@@ -209,6 +206,15 @@
           height: 50px;
           line-height: 50px;
           background: $table-gray;
+        }
+      }
+      &.resources-cost-list {
+        .tr .td {
+          @include bp(xs) {
+            width: 27%;
+            font-size: 14px;
+            line-height: 20px;
+          }
         }
       }
     }
@@ -550,6 +556,12 @@
 .table {
   border:1px solid #cccaca;
   padding-bottom: 10px;
+  &.desktop {
+      display: block;
+      @include bp(xs) {
+          display: none;
+      }
+  }
   .tr {
     position: relative;
     height: 30px;
@@ -587,15 +599,9 @@
       }
       @include bp(xs) {
         width: 30%;
-        &:not(.display-for-mobile) {
-          display: none;
-        }
       } // xs
       @include bp(sm) {
         width: 30%;
-        &:not(.display-for-mobile) {
-          display: none;
-        }
       } // sm
     }
     &.th {
@@ -751,4 +757,23 @@
 
 .dashboard-header {
   float: left;
+}
+
+.mobile-cost-container {
+  display: none;
+  @include bp(xs) {
+      display: block;
+  }
+  border: 1px solid #cccaca;
+  padding: 10px;
+  .cost-row {
+    display: table;
+    .cost-row-name {
+      display: table-cell;
+      width: 100%;
+    }
+    .cost-row-price {
+      display: table-cell;
+    }
+  }
 }

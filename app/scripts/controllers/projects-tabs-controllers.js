@@ -190,10 +190,14 @@
         this._super();
       },
       getList: function(filter) {
+        var getList = this._super.bind(controllerScope),
+          vm = this;
         this.service.defaultFilter.aggregate = 'project';
-        this.service.defaultFilter.uuid = currentStateService.getProjectUuid();
         this.service.defaultFilter.opened = true;
-        return this._super(filter);
+        return currentStateService.getProject().then(function(response) {
+          vm.service.defaultFilter.uuid = response.uuid;
+          return getList(filter);
+        });
       }
     });
 
@@ -237,6 +241,7 @@
         this.controllerScope = controllerScope;
         this.category = ENV.VirtualMachines;
         this._super();
+        this.entityOptions.entityData.noMatchesText = 'No VMs found matching filter.';
       }
     });
     controllerScope.__proto__ = new ResourceController();
@@ -261,6 +266,7 @@
         this.entityOptions.entityData.noDataText = 'You have no applications yet';
         this.entityOptions.entityData.createLinkText = 'Create application';
         this.entityOptions.entityData.importLinkText = 'Import application';
+        this.entityOptions.entityData.noMatchesText = 'No applications found matching filter.';
       }
     });
     controllerScope.__proto__ = new ResourceController();

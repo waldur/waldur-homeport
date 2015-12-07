@@ -177,49 +177,56 @@ Config file settings:
  Every type has list of fields for proper display. 
  
     date:                    date in days ago
-        name          - string - name of column, required
-        propertyName  - string - name of field, required
-        className     - string - css class name for field, optional
-        emptyText     - string -  text to display for field with no value, required
-    dateCreated:             date field 
-        name          - string - name of field, required
-        propertyName  - string - name of field, required
-        className     - string - css class name for field, optional
-        emptyText     - string -  text to display for field with no value, required        
-    name:                    name of entity  
-        name          - string - name of column, required
-        propertyName  - string - name of field, required
-        emptyText     - string -  text to display for field with no value, required
-        link          - string - link for ui-sref attribute, required
-        className     - string - css class name for field, optional
-        showForMobile - string, constant - constant to show field on mobile devices, required
-    link:                    field with link  
-        name          - string - name of column, required
-        propertyName  - string - name of field, required
-        className     - string - css class name for field, optional
-        emptyText     - string -  text to display for field with no value, required
-        link          - string - link for ui-sref attribute, required
-        showForMobile - string, constant - constant to show field on mobile devices, required  
+        name           - string - name of column, required
+        propertyName   - string - name of field, required
+        className      - string - css class name for field, optional
+        emptyText      - string -  text to display for field with no value, required
+    dateCreated:              date field 
+        name           - string - name of field, required
+        propertyName   - string - name of field, required
+        className      - string - css class name for field, optional
+        emptyText      - string -  text to display for field with no value, required        
+    name:                     name of entity  
+        name           - string - name of column, required
+        propertyName   - string - name of field, required
+        emptyText      - string -  text to display for field with no value, required
+        link           - string - link for ui-sref attribute, required
+        className      - string - css class name for field, optional
+        showForMobile  - string, constant - constant to show field on mobile devices, required
+    link:                     field with link  
+        name           - string - name of column, required
+        propertyName   - string - name of field, required
+        className      - string - css class name for field, optional
+        emptyText      - string -  text to display for field with no value, required
+        link           - string - link for ui-sref attribute, required
+        showForMobile  - string, constant - constant to show field on mobile devices, required  
     listInField:   constant for entity AccessInfo field  
-        name          - string - name of column, required
-        propertyName  - string - name of field, required
-        className     - string - css class name for field, optional
-        emptyText     - string -  text to display for field with no value, required
-    entityStatusField:       constant for entity Status field  
-        name          - string - name of column, required
-        propertyName  - string - name of field, required
-        className     - string - css class name for field, optional
-        emptyText     - string -  text to display for field with no value, required
-        onlineStatus  - string, constant - constant in ENV.onlineStatus
-        offlineStatus - string, constant - constant in  ENV.offlineStatus
+        name           - string - name of column, required
+        propertyName   - string - name of field, required
+        className      - string - css class name for field, optional
+        emptyText      - string -  text to display for field with no value, required
+    entityStatusField:        constant for entity Status field  
+        name           - string - name of column, required
+        propertyName   - string - name of field, required
+        className      - string - css class name for field, optional
+        emptyText      - string -  text to display for field with no value, required
+        onlineStatus   - string, constant - constant in ENV.onlineStatus
+        offlineStatus  - string, constant - constant in  ENV.offlineStatus
     avatarPictureField:      field with avatar      
-        className     - string - css class name for field, optional
-        showForMobile - string, constant - constant to show field on mobile devices, required
-    noType:                  default field type
-        name          - string - name of column, required
-        propertyName  - string - name of field, required
-        className     - string - css class name for field, optional
-        emptyText     - string -  text to display for field with no value, required
+        className      - string - css class name for field, optional
+        showForMobile  - string, constant - constant to show field on mobile devices, required
+    noType:                   default field type
+        name           - string - name of column, required
+        propertyName   - string - name of field, required
+        className      - string - css class name for field, optional
+        emptyText      - string -  text to display for field with no value, required
+    icon: 
+        getTitle(item) - function that returning title for field
+        getIcon(item)  - function that returning icon url
+    linkOrText:
+        initField(item)- function that sets necessary field to item
+        propertyName   - string - contains field name
+        urlPropertyName - string - contains field url
     
     showForMobile:           add class to show field on mobile devices
 

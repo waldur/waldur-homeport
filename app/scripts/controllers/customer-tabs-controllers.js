@@ -46,7 +46,6 @@
         this._super();
         this.entityOptions.list[0].type = 'editable';
         this.entityOptions.entityData.expandable = true;
-        this.cancelRefresh();
       },
       showMore: function(service) {
         var vm = this;
@@ -85,43 +84,6 @@
       },
       afterGetList: function() {
         this.expandSelectedItem();
-        this.scheduleRefresh();
-      },
-      scheduleRefresh: function() {
-        var vm = this;
-        vm.refreshPromise = $interval(function() {
-          vm.service.cacheReset = true;
-          vm.service.clearAllCacheForCurrentEndpoint();
-          vm.service.getList().then(function(list) {
-            vm.mergeLists(vm.list, list);
-          });
-        }, ENV.providersTimerInterval * 1000);
-      },
-      cancelRefresh: function() {
-        var vm = this;
-        vm.refreshPromise = null;
-        $scope.$on('$destroy', function() {
-          if (vm.refreshPromise) {
-            $interval.cancel(vm.refreshPromise);
-          }
-        });
-      },
-      mergeLists: function(list1, list2) {
-        var itemByUuid = {};
-        for (var i = 0; i < list1.length; i++) {
-          var item = list1[i];
-          itemByUuid[item.uuid] = item;
-        }
-        for (var i = 0; i < list2.length; i++) {
-          var item2 = list2[i];
-          var item1 = itemByUuid[item2.uuid];
-          if (!item1) {
-            continue;
-          }
-          for(var key in item2) {
-            item1[key] = item2[key];
-          }
-        }
       },
       expandSelectedItem: function() {
         var vm = this;
@@ -310,6 +272,7 @@
         this.controllerScope = controllerScope;
         this.category = ENV.VirtualMachines;
         this._super();
+        this.entityOptions.entityData.noMatchesText = 'No VMs found matching filter.';
       }
     });
     controllerScope.__proto__ = new ResourceController();
@@ -334,6 +297,7 @@
         this.entityOptions.entityData.noDataText = 'You have no applications yet';
         this.entityOptions.entityData.createLinkText = 'Create application';
         this.entityOptions.entityData.importLinkText = 'Import application';
+        this.entityOptions.entityData.noMatchesText = 'No Applications found matching filter.';
       }
     });
     controllerScope.__proto__ = new ResourceController();

@@ -78,6 +78,7 @@
           this.entityOptions = {
             entityData: {
               noDataText: 'You have no projects yet.',
+              noMatchesText: 'No projects found matching filter.',
               title: 'Projects',
               createLink: 'projects.create',
               createLinkText: 'Add project',
@@ -94,16 +95,31 @@
               {
                 name: 'Creation date',
                 propertyName: 'created',
-                type: ENTITYLISTFIELDTYPES.dateCreated
+                type: ENTITYLISTFIELDTYPES.date
               }
             ]
           };
+          if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('resources') == -1) {
+            this.entityOptions.list.push({
+              name: 'VMs',
+              propertyName: 'vm_count',
+              className: 'resources-count',
+              emptyText: '0'
+            });
+            this.entityOptions.list.push({
+              name: 'Apps',
+              propertyName: 'app_count',
+              className: 'resources-count',
+              emptyText: '0'
+            });
+          }
           if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('premiumSupport') == -1) {
             this.entityOptions.list.push({
               name: 'SLA',
               propertyName: 'plan_name',
               type: ENTITYLISTFIELDTYPES.none,
-              emptyText: 'No plan'
+              emptyText: 'No plan',
+              className: 'sla-info'
             });
           }
         },
