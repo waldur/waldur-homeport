@@ -1,7 +1,7 @@
 <div ng-controller="DashboardActivityController as DashboardController" class="row">
     <div class="half-block">
         <h3>Projects</h3>
-        <div ng-repeat="project in DashboardController.projects" class="white-box graph"   block-ui="activity-content-{{ project.uuid }}">
+        <div ng-repeat="project in DashboardController.projects" class="white-box graph"  >
             <div ng-click="DashboardController.selectProject(project)" class="graph-head"
                  ng-class="{'active': project.selected}">
                 <h4 ng-class="{'current': project.selected}">
@@ -20,7 +20,7 @@
                     </div>
                 </h4>
             </div>
-            <div ng-if="project.selected" class="body">
+            <div ng-if="project.selected" class="body" block-ui="activity-content-{{ project.uuid }}">
                 <ul class="counters">
                     <li class="active-alert" ng-class="{'empty': !project.count.alerts}" visible="alerts">
                         <div class="counter-name">Active alerts</div>
