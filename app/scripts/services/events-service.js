@@ -2,24 +2,18 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('eventsService', ['baseServiceClass', 'ENV', '$rootScope', eventsService]);
+    .service('eventsService', ['baseServiceClass', 'ENV', eventsService]);
 
-  function eventsService(baseServiceClass, ENV, $rootScope) {
+  function eventsService(baseServiceClass, ENV) {
     /*jshint validthis: true */
     var ServiceClass = baseServiceClass.extend({
       init:function() {
         this._super();
         this.endpoint = '/events/';
         this.filterByCustomer = false;
-
-        var vm = this;
-        $rootScope.$on('$stateChangeSuccess', function() {
-          vm.setDefaultFilter();
-        });
-        vm.setDefaultFilter();
       },
       setDefaultFilter: function() {
-        this.defaultFilter.exclude_extra = true;
+        this.defaultFilter = {exclude_extra: true};
         if (!ENV.featuresVisible) {
           this.defaultFilter.exclude_features = ENV.toBeFeatures;
         }

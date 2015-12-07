@@ -3,23 +3,17 @@
 (function () {
   angular.module('ncsaas')
     .service('joinService', [
-      'baseServiceClass', 'servicesService', '$http', '$q', '$rootScope', joinService]);
+      'baseServiceClass', 'servicesService', '$http', '$q', joinService]);
 
-  function joinService(baseServiceClass, servicesService, $http, $q, $rootScope) {
+  function joinService(baseServiceClass, servicesService, $http, $q) {
     var ServiceClass = baseServiceClass.extend({
       init:function() {
         this._super();
         this.endpoint = '/services/';
-
-        var vm = this;
-        $rootScope.$on('$stateChangeSuccess', function() {
-          vm.setDefaultFilter();
-        });
-        vm.setDefaultFilter();
       },
 
       setDefaultFilter: function() {
-        this.defaultFilter.o = 'name';
+        this.defaultFilter = {o: 'name'};
       },
 
       create: function(url, options) {

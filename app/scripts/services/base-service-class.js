@@ -33,7 +33,7 @@
         this.pageSize = ENV.pageSize;
         this.page = 1;
         this.pages = null;
-        this.defaultFilter = {};
+        this.setDefaultFilter();
         this.currentStateService = currentStateService;
         this.pageChangingReset();
         this.cacheTime = 0;
@@ -241,9 +241,12 @@
       pageChangingReset: function() {
         var vm = this;
         $rootScope.$on('$stateChangeSuccess', function() {
-          vm.defaultFilter = {};
+          vm.setDefaultFilter();
           vm.page = 1;
         });
+      },
+      setDefaultFilter: function() {
+        this.defaultFilter = {};
       },
       getOption: function(endpointUrl) {
         return this.getFactory(false, null, endpointUrl).options().$promise;
