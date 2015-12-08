@@ -3,25 +3,22 @@
 (function () {
   angular.module('ncsaas')
     .service('joinService', [
-      'baseServiceClass', 'servicesService', '$http', '$q', '$rootScope', 'ENV', joinService]);
+      'baseServiceClass', 'servicesService', '$http', '$q', 'ENV', joinService]);
 
-  function joinService(baseServiceClass, servicesService, $http, $q, $rootScope, ENV) {
+  function joinService(baseServiceClass, servicesService, $http, $q, ENV) {
     var ServiceClass = baseServiceClass.extend({
       init:function() {
         this._super();
         this.endpoint = '/services/';
-
-        var vm = this;
-        $rootScope.$on('$stateChangeSuccess', function() {
-          vm.setDefaultFilter();
-        });
-        vm.setDefaultFilter();
       },
+
       setDefaultFilter: function() {
+        this.defaultFilter = {o: 'name'};
         if (ENV.modeName == 'modeCostTracking') {
           this.defaultFilter.shared = 'False';
         }
       },
+
       create: function(url, options) {
         return this.createOrUpdate('POST', url, options);
       },

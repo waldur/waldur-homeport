@@ -78,6 +78,7 @@
           this.entityOptions = {
             entityData: {
               noDataText: 'You have no projects yet.',
+              noMatchesText: 'No projects found matching filter.',
               title: 'Projects',
               createLink: 'projects.create',
               createLinkText: 'Add project',
