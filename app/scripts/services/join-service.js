@@ -3,9 +3,9 @@
 (function () {
   angular.module('ncsaas')
     .service('joinService', [
-      'baseServiceClass', 'servicesService', '$http', '$q', joinService]);
+      'baseServiceClass', 'servicesService', '$http', '$q', 'ENV', joinService]);
 
-  function joinService(baseServiceClass, servicesService, $http, $q) {
+  function joinService(baseServiceClass, servicesService, $http, $q, ENV) {
     var ServiceClass = baseServiceClass.extend({
       init:function() {
         this._super();
@@ -14,6 +14,9 @@
 
       setDefaultFilter: function() {
         this.defaultFilter = {o: 'name'};
+        if (ENV.modeName == 'modeCostTracking') {
+          this.defaultFilter.shared = 'False';
+        }
       },
 
       create: function(url, options) {
