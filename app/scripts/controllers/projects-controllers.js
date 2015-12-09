@@ -132,6 +132,7 @@
               } else if (item.has_pending_contracts) {
                 item.plan_name = 'Pending';
               }
+              this.setProjectCounters(item);
             }
           }
         },
@@ -155,6 +156,16 @@
           for (var i = 0; i < project.quotas.length; i++) {
             if (project.quotas[i].name == 'nc_resource_count') {
               return project.quotas[i].usage > 0;
+            }
+          }
+        },
+        setProjectCounters: function(project) {
+          for (var i = 0; i < project.quotas.length; i++) {
+            var quota = project.quotas[i];
+            if (quota.name == 'nc_app_count') {
+              project.app_count = quota.usage;
+            } else if (quota.name == 'nv_vm_count') {
+              project.vm_count = quota.usage;
             }
           }
         },
