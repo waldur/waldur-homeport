@@ -296,67 +296,37 @@
             {
               title: 'Events',
               key: 'eventlog',
-              viewName: 'tabEventlog',
-              getCount: function() {
-                var query = angular.extend(eventsService.defaultFilter, {
-                  scope: this.model.url
-                });
-                return resourcesCountService.events(query);
-              }
+              viewName: 'tabEventlog'
             },
             {
               title: 'Alerts',
               key: 'alerts',
-              viewName: 'tabAlerts',
-              getCount: function() {
-                var query = angular.extend(alertsService.defaultFilter, {
-                  aggregate: 'project',
-                  uuid: this.model.uuid
-                });
-                return resourcesCountService.alerts(query);
-              }
+              viewName: 'tabAlerts'
             },
             {
               title: 'VMs',
               key: ENV.resourcesTypes.vms,
-              viewName: 'tabResources',
-              getCount: function() {
-                return this.getResourceCount(ENV.VirtualMachines, this.model.uuid);
-              }
+              viewName: 'tabResources'
             },
             {
               title: 'Applications',
               key: ENV.resourcesTypes.applications,
-              viewName: 'tabApplications',
-              getCount: function() {
-                return this.getResourceCount(ENV.Applications, this.model.uuid);
-              }
+              viewName: 'tabApplications'
             },
             {
               title: 'Backups',
               key: 'backups',
-              viewName: 'tabBackups',
-              getCount: function() {
-                return resourcesCountService.backups({project_uuid: this.model.uuid});
-              }
+              viewName: 'tabBackups'
             },
             {
               title: 'People',
               key: 'people',
-              viewName: 'tabUsers',
-              getCount: function() {
-                return resourcesCountService.users({project: this.model.uuid});
-              }
+              viewName: 'tabUsers'
             },
             {
               title: 'Support',
               key: 'premiumSupport',
-              viewName: 'tabPremiumSupport',
-              getCount: function() {
-                return resourcesCountService.premiumSupportContracts({
-                  project_uuid: this.model.uuid
-                });
-              }
+              viewName: 'tabPremiumSupport'
             },
             {
               title: 'Manage',
@@ -388,12 +358,19 @@
           $interval.cancel(timer);
         });
       },
-      getResourceCount: function(category, project_uuid) {
-        return servicesService.getResourceTypes(category).then(function(types) {
-          return resourcesCountService.resources({
-            project_uuid: project_uuid,
-            resource_type: types
-          });
+      setCounters:function() {
+        var vm = this;
+        var query = angular.extend(
+          {UUID: vm.model.uuid},
+          eventsService.defaultFilter
+        );
+        projectsService.getCounters(query).then(function(response) {
+          vm.detailsViewOptions.tabs[0].count = response.events;
+          vm.detailsViewOptions.tabs[1].count = response.alerts;
+          vm.detailsViewOptions.tabs[2].count = response.vms;
+          vm.detailsViewOptions.tabs[3].count = response.apps;
+          vm.detailsViewOptions.tabs[5].count = response.users;
+          vm.detailsViewOptions.tabs[6].count = response.premium_support_contracts;
         });
       }
     });
