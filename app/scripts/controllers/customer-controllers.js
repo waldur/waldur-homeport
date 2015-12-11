@@ -185,32 +185,38 @@
             {
               title: 'Events',
               key: 'eventlog',
-              viewName: 'tabEventlog'
+              viewName: 'tabEventlog',
+              countFieldKey: 'events'
             },
             {
               title: 'Alerts',
               key: 'alerts',
-              viewName: 'tabAlerts'
+              viewName: 'tabAlerts',
+              countFieldKey: 'alerts'
             },
             {
               title: 'VMs',
               key: ENV.resourcesTypes.vms,
-              viewName: 'tabResources'
+              viewName: 'tabResources',
+              countFieldKey: 'vms'
             },
             {
               title: 'Applications',
               key: ENV.resourcesTypes.applications,
-              viewName: 'tabApplications'
+              viewName: 'tabApplications',
+              countFieldKey: 'apps'
             },
             {
               title: 'Projects',
               key: 'projects',
-              viewName: 'tabProjects'
+              viewName: 'tabProjects',
+              countFieldKey: 'projects'
             },
             {
               title: 'Providers',
               key: 'providers',
-              viewName: 'tabServices'
+              viewName: 'tabServices',
+              countFieldKey: 'services'
             },
             {
               title: 'Manage',
@@ -252,12 +258,13 @@
           eventsService.defaultFilter
         );
         customersService.getCounters(query).then(function(response) {
-          vm.detailsViewOptions.tabs[0].count = response.events;
-          vm.detailsViewOptions.tabs[1].count = response.alerts;
-          vm.detailsViewOptions.tabs[2].count = response.vms;
-          vm.detailsViewOptions.tabs[3].count = response.apps;
-          vm.detailsViewOptions.tabs[4].count = response.projects;
-          vm.detailsViewOptions.tabs[5].count = response.services;
+          for (var i = 0; i < vm.detailsViewOptions.tabs.length; i++) {
+            var tab = vm.detailsViewOptions.tabs[i];
+            var key = tab.countFieldKey;
+            if (key) {
+              tab.count = response[key];
+            }
+          }
         });
       },
 
