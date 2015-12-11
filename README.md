@@ -94,6 +94,11 @@ Command `grunt test` will start local server on separate host and run all tests.
 Notice: `Error: ECONNREFUSED connect ECONNREFUSED` Can be raised in the end of tests flow.
 It occurs because selenium server shuts down before protractor ends tests. ([Link to issue][7]).
 
+### Run modes tests
+
+Execute `grunt testAllModes` to run tests for each configuration mode. Uncomment `/*'protractor_webdriver:test',*/`
+to start standalone selenium webserver
+
 ### Run selected file on current develop server
 
 1. Run `grunt protractor_webdriver:daemonize` to start Selenium Server for tests.

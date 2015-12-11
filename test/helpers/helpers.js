@@ -8,6 +8,9 @@ module.exports.getUUID = function() {
 };
 
 module.exports.chooseCustomer = function(customerName) {
+  if (element(by.cssContainingText('.dropdown.customers .customer-name', customerName)).isPresent()) {
+    return true;
+  }
   element(by.css('.dropdown.customers .customer-name')).click();
   element(by.cssContainingText('.dropdown.customers .nav-sublist li a', customerName)).click();
   browser.wait(function() {

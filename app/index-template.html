@@ -11,7 +11,7 @@
     <link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon" />
     <!-- css -->
 
-    <!-- @if NODE_ENV == 'DEVELOPMENT' -->
+    <!-- @if NODE_ENV == 'DEVELOPMENT' || NODE_ENV == 'TEST' -->
     <link rel="stylesheet" type="text/css" href="/static/css/normalize.css">
     <link rel="stylesheet" type="text/css" href="/static/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="/static/css/style.css">
@@ -91,7 +91,7 @@
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 
-<!-- @if NODE_ENV == 'DEVELOPMENT' -->
+<!-- @if NODE_ENV == 'DEVELOPMENT' || NODE_ENV == 'TEST' -->
 <!-- angular -->
 <script src="static/js/angular/angular.js"></script>
 <script src="static/js/angular/angular-animate.js"></script>
@@ -129,6 +129,7 @@
 <!-- Utils -->
 <script src="scripts/utils.js"></script>
 <!-- configs -->
+<!-- @if NODE_ENV == 'DEVELOPMENT' -->
 <script src="scripts/configs/auth-config.js"></script>
 <script src="scripts/configs/avatar-config.js"></script>
 <script src="scripts/configs/base-config.js"></script>
@@ -136,6 +137,16 @@
 <script src="scripts/configs/custom-config.js"></script>
 <script src="scripts/configs/mode-config.js"></script>
 <script src="scripts/configs/resource-config.js"></script>
+<!-- @endif -->
+<!-- @if NODE_ENV == 'TEST' -->
+<script src="scripts/configs/auth-config.js"></script>
+<script src="scripts/configs/avatar-config.js"></script>
+<script src="scripts/configs/base-config.js"></script>
+<script src="scripts/configs/i18n-config.js"></script>
+<script src="scripts/configs/test/custom-config.js"></script>
+<script src="scripts/configs/test/mode-config.js"></script>
+<script src="scripts/configs/resource-config.js"></script>
+<!-- @endif -->
 <!-- controllers -->
 <script src="scripts/controllers/app-store-controller.js"></script>
 <script src="scripts/controllers/auth-controllers.js"></script>
