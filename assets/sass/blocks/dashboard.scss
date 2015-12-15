@@ -65,7 +65,7 @@
   }
   color:$dashboard-black;
   .white-box {
-    min-height: 73px;
+    min-height: 38px;
     padding: 20px 40px;
     position: relative;
     &.placeholder {
@@ -405,6 +405,9 @@
               padding: 10px 0px;
               border-bottom: 1px solid #ebebeb;
               position: relative;
+              &:last-child {
+                border-bottom: 0;
+              }
               &.fail {
                 &:before {
                   content: "";
