@@ -100,7 +100,7 @@
             }
           }
         }
-      },
+      }
     });
 
     controllerScope.__proto__ = new CustomerController();
@@ -117,15 +117,12 @@
       'ENV',
       '$stateParams',
       '$rootScope',
+      '$scope',
+      '$interval',
       '$q',
       '$window',
-      '$interval',
-      'servicesService',
       'joinService',
-      'resourcesCountService',
-      'alertsService',
       'ncUtilsFlash',
-      '$scope',
       'eventsService',
       CustomerDetailUpdateController
     ]);
@@ -139,15 +136,12 @@
     ENV,
     $stateParams,
     $rootScope,
+    $scope,
+    $interval,
     $q,
     $window,
-    $interval,
-    servicesService,
     joinService,
-    resourcesCountService,
-    alertsService,
     ncUtilsFlash,
-    $scope,
     eventsService
     ) {
     var controllerScope = this;
@@ -185,32 +179,38 @@
             {
               title: 'Events',
               key: 'eventlog',
-              viewName: 'tabEventlog'
+              viewName: 'tabEventlog',
+              countFieldKey: 'events'
             },
             {
               title: 'Alerts',
               key: 'alerts',
-              viewName: 'tabAlerts'
+              viewName: 'tabAlerts',
+              countFieldKey: 'alerts'
             },
             {
               title: 'VMs',
               key: ENV.resourcesTypes.vms,
-              viewName: 'tabResources'
+              viewName: 'tabResources',
+              countFieldKey: 'vms'
             },
             {
               title: 'Applications',
               key: ENV.resourcesTypes.applications,
-              viewName: 'tabApplications'
+              viewName: 'tabApplications',
+              countFieldKey: 'apps'
             },
             {
               title: 'Projects',
               key: 'projects',
-              viewName: 'tabProjects'
+              viewName: 'tabProjects',
+              countFieldKey: 'projects'
             },
             {
               title: 'Providers',
               key: 'providers',
-              viewName: 'tabServices'
+              viewName: 'tabServices',
+              countFieldKey: 'services'
             },
             {
               title: 'Manage',
@@ -237,77 +237,22 @@
         controllerScope.updateImageUrl();
 
         this.setCounters();
-        var timer = $interval(this.setCounters.bind(controllerScope), ENV.countersTimerInterval * 1000);
+        var timer = $interval(this.setCounters.bind(this), ENV.countersTimerInterval * 1000);
         $scope.$on('$destroy', function() {
           $interval.cancel(timer);
         });
         this.service.getBalanceHistory(this.model.uuid).then(this.processChartData.bind(this));
       },
 
-      setCounters: function() {
-        this.setEventsCounter();
-        this.setAlertsCounter();
-        this.setVmCounter();
-        this.setAppCounter();
-        this.setProjectsCounter();
-        this.setProvidersCounter();
+      getCounters: function() {
+        var query = angular.extend(
+            {UUID: this.model.uuid},
+            joinService.defaultFilter,
+            eventsService.defaultFilter
+        );
+        return customersService.getCounters(query);
       },
-      setEventsCounter: function() {
-        var vm = this;
-        var query = angular.extend(eventsService.defaultFilter, {
-          scope: vm.model.url
-        });
-        resourcesCountService.events(query).then(function(count) {
-          vm.detailsViewOptions.tabs[0].count = count;
-        });
-      },
-      setAlertsCounter: function() {
-        var vm = this;
-        var query = angular.extend(alertsService.defaultFilter, {
-          aggregate: 'customer',
-          uuid: vm.model.uuid
-        });
-        resourcesCountService.alerts(query).then(function(count) {
-          vm.detailsViewOptions.tabs[1].count = count;
-        });
-      },
-      setVmCounter: function() {
-        var vm = this;
-        if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('resources') == -1) {
-          vm.getResourceCount(ENV.VirtualMachines, vm.model.uuid).then(function(count) {
-            vm.detailsViewOptions.tabs[2].count = count;
-          });
-        }
-      },
-      setAppCounter: function() {
-        var vm = this;
-        if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('resources') == -1) {
-          vm.getResourceCount(ENV.Applications, vm.model.uuid).then(function(count) {
-            vm.detailsViewOptions.tabs[3].count = count;
-          });
-        }
-      },
-      getResourceCount: function(category, customer_uuid) {
-        return servicesService.getResourceTypes(category).then(function(types) {
-          return resourcesCountService.resources({
-            customer: customer_uuid,
-            resource_type: types
-          });
-        });
-      },
-      setProjectsCounter: function() {
-        var vm = this;
-        resourcesCountService.projects({customer: vm.model.uuid}).then(function(count) {
-          vm.detailsViewOptions.tabs[4].count = count;
-        });
-      },
-      setProvidersCounter: function() {
-        var vm = this;
-        var query = angular.extend(joinService.defaultFilter, {customer: vm.model.uuid});
-        resourcesCountService.services(query).then(function(count) {
-          vm.detailsViewOptions.tabs[5].count = count;
-        });
-      },
+
       // XXX: Avatar is temporarily disabled via detailsViewOptions.hasLogo = false
       // That's why following functions are not used: updateImageUrl, uploadImage, deleteImage
       updateImageUrl: function() {

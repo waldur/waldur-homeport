@@ -132,6 +132,7 @@
               } else if (item.has_pending_contracts) {
                 item.plan_name = 'Pending';
               }
+              this.setProjectCounters(item);
             }
           }
         },
@@ -155,6 +156,16 @@
           for (var i = 0; i < project.quotas.length; i++) {
             if (project.quotas[i].name == 'nc_resource_count') {
               return project.quotas[i].usage > 0;
+            }
+          }
+        },
+        setProjectCounters: function(project) {
+          for (var i = 0; i < project.quotas.length; i++) {
+            var quota = project.quotas[i];
+            if (quota.name == 'nc_app_count') {
+              project.app_count = quota.usage;
+            } else if (quota.name == 'nv_vm_count') {
+              project.vm_count = quota.usage;
             }
           }
         },
@@ -246,32 +257,26 @@
     .controller('ProjectDetailUpdateController', [
       '$stateParams',
       '$rootScope',
+      '$scope',
       '$interval',
       'ENV',
       'projectsService',
       'baseControllerDetailUpdateClass',
-      'resourcesCountService',
-      'servicesService',
-      'alertsService',
       'eventsService',
       'currentStateService',
-      '$scope',
       ProjectDetailUpdateController
     ]);
 
   function ProjectDetailUpdateController(
     $stateParams,
     $rootScope,
+    $scope,
     $interval,
     ENV,
     projectsService,
     baseControllerDetailUpdateClass,
-    resourcesCountService,
-    servicesService,
-    alertsService,
     eventsService,
-    currentStateService,
-    $scope) {
+    currentStateService) {
     var controllerScope = this;
     var Controller = baseControllerDetailUpdateClass.extend({
       customer: null,
@@ -297,66 +302,42 @@
               title: 'Events',
               key: 'eventlog',
               viewName: 'tabEventlog',
-              getCount: function() {
-                var query = angular.extend(eventsService.defaultFilter, {
-                  scope: this.model.url
-                });
-                return resourcesCountService.events(query);
-              }
+              countFieldKey: 'events'
             },
             {
               title: 'Alerts',
               key: 'alerts',
               viewName: 'tabAlerts',
-              getCount: function() {
-                var query = angular.extend(alertsService.defaultFilter, {
-                  aggregate: 'project',
-                  uuid: this.model.uuid
-                });
-                return resourcesCountService.alerts(query);
-              }
+              countFieldKey: 'alerts'
             },
             {
               title: 'VMs',
               key: ENV.resourcesTypes.vms,
               viewName: 'tabResources',
-              getCount: function() {
-                return this.getResourceCount(ENV.VirtualMachines, this.model.uuid);
-              }
+              countFieldKey: 'vms'
             },
             {
               title: 'Applications',
               key: ENV.resourcesTypes.applications,
               viewName: 'tabApplications',
-              getCount: function() {
-                return this.getResourceCount(ENV.Applications, this.model.uuid);
-              }
+              countFieldKey: 'apps'
             },
             {
               title: 'Backups',
               key: 'backups',
-              viewName: 'tabBackups',
-              getCount: function() {
-                return resourcesCountService.backups({project_uuid: this.model.uuid});
-              }
+              viewName: 'tabBackups'
             },
             {
               title: 'People',
               key: 'people',
               viewName: 'tabUsers',
-              getCount: function() {
-                return resourcesCountService.users({project: this.model.uuid});
-              }
+              countFieldKey: 'users'
             },
             {
               title: 'Support',
               key: 'premiumSupport',
               viewName: 'tabPremiumSupport',
-              getCount: function() {
-                return resourcesCountService.premiumSupportContracts({
-                  project_uuid: this.model.uuid
-                });
-              }
+              countFieldKey: 'premium_support_contracts'
             },
             {
               title: 'Manage',
@@ -383,18 +364,17 @@
           $rootScope.$broadcast('adjustCurrentProject', this.model);
         }
         this.setCounters();
-        var timer = $interval(this.setCounters.bind(controllerScope), ENV.countersTimerInterval * 1000);
+        var timer = $interval(this.setCounters.bind(this), ENV.countersTimerInterval * 1000);
         $scope.$on('$destroy', function() {
           $interval.cancel(timer);
         });
       },
-      getResourceCount: function(category, project_uuid) {
-        return servicesService.getResourceTypes(category).then(function(types) {
-          return resourcesCountService.resources({
-            project_uuid: project_uuid,
-            resource_type: types
-          });
-        });
+      getCounters: function() {
+        var query = angular.extend(
+            {UUID: this.model.uuid},
+            eventsService.defaultFilter
+        );
+        return projectsService.getCounters(query);
       }
     });
 
