@@ -35,6 +35,10 @@
       getBalanceHistory: function(uuid) {
         var query = {UUID: uuid, operation: 'balance_history'};
         return this.getList(query);
+      },
+      getCounters: function(query) {
+        var query = angular.extend({operation: 'counters'}, query);
+        return this.getFactory(false).get(query).$promise;
       }
     });
     return new ServiceClass();

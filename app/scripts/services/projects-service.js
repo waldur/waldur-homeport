@@ -22,6 +22,10 @@
         this.pageSize = savePageSize;
 
         return deferred.promise;
+      },
+      getCounters: function(query) {
+        var query = angular.extend({operation: 'counters'}, query);
+        return this.getFactory(false).get(query).$promise;
       }
     });
     return new ServiceClass();

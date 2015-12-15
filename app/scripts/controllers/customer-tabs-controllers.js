@@ -405,6 +405,12 @@
               showForMobile: true
             },
             {
+              name: 'Start date',
+              propertyName: 'start_date',
+              type: ENTITYLISTFIELDTYPES.dateCreated,
+              showForMobile: true
+            },
+            {
               name: 'End date',
               propertyName: 'end_date',
               type: ENTITYLISTFIELDTYPES.dateCreated,

@@ -7,11 +7,11 @@
   function usersService(baseServiceClass, $q) {
     var ServiceClass = baseServiceClass.extend({
       currentUser: null,
-      init:function() {
+      init: function() {
         this._super();
         this.endpoint = '/users/';
       },
-      getCurrentUser:function() {
+      getCurrentUser: function() {
         var vm = this;
         var deferred = $q.defer();
         if (!vm.currentUser) {
@@ -28,6 +28,10 @@
           deferred.resolve(vm.currentUser);
         }
         return deferred.promise;
+      },
+
+      getCounters: function(query) {
+        return this.getFactory(false, '/user-counters/').get(query).$promise;
       }
     });
     return new ServiceClass();
