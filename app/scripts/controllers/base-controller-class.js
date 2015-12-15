@@ -242,9 +242,20 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('baseControllerDetailUpdateClass', ['$state', 'baseControllerClass', '$stateParams', '$rootScope', '$q', 'ENV', baseControllerDetailUpdateClass]);
+    .service('baseControllerDetailUpdateClass', [
+      '$state',
+      'baseControllerClass',
+      '$stateParams',
+      '$rootScope',
+      'ENV',
+      baseControllerDetailUpdateClass]);
 
-  function baseControllerDetailUpdateClass($state, baseControllerClass, $stateParams, $rootScope, $q, ENV) {
+  function baseControllerDetailUpdateClass(
+      $state,
+      baseControllerClass,
+      $stateParams,
+      $rootScope,
+      ENV) {
     /**
      * Use controllerScope.__proto__ = new Controller() in needed controller
      * use this.controllerScope for changes in event handler
@@ -276,16 +287,19 @@
       },
       setCounters: function() {
         var vm = this;
-        var tabs = this.detailsViewOptions.tabs;
-        angular.forEach(tabs, function(tab) {
-          if (tab.getCount && (ENV.featuresVisible || ENV.toBeFeatures.indexOf(tab.key) == -1)) {
-            tab.count = tab.count ? tab.count : 0;
-            var promise = tab.getCount.call(vm);
-            $q.when(promise).then(function(count) {
-              tab.count = count;
-            })
+        vm.getCounters().then(function(response) {
+          for (var i = 0; i < vm.detailsViewOptions.tabs.length; i++) {
+            var tab = vm.detailsViewOptions.tabs[i];
+            var key = tab.countFieldKey;
+            if (key) {
+              tab.count = response[key];
+            }
           }
         });
+      },
+      getCounters: function() {
+        // It should return promise
+        return {};
       },
       update: function() {
         var vm = this;

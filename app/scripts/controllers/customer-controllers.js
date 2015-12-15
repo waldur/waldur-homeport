@@ -100,7 +100,7 @@
             }
           }
         }
-      },
+      }
     });
 
     controllerScope.__proto__ = new CustomerController();
@@ -117,15 +117,12 @@
       'ENV',
       '$stateParams',
       '$rootScope',
+      '$scope',
+      '$interval',
       '$q',
       '$window',
-      '$interval',
-      'servicesService',
       'joinService',
-      'resourcesCountService',
-      'alertsService',
       'ncUtilsFlash',
-      '$scope',
       'eventsService',
       CustomerDetailUpdateController
     ]);
@@ -139,15 +136,12 @@
     ENV,
     $stateParams,
     $rootScope,
+    $scope,
+    $interval,
     $q,
     $window,
-    $interval,
-    servicesService,
     joinService,
-    resourcesCountService,
-    alertsService,
     ncUtilsFlash,
-    $scope,
     eventsService
     ) {
     var controllerScope = this;
@@ -243,29 +237,20 @@
         controllerScope.updateImageUrl();
 
         this.setCounters();
-        var timer = $interval(this.setCounters.bind(controllerScope), ENV.countersTimerInterval * 1000);
+        var timer = $interval(this.setCounters.bind(this), ENV.countersTimerInterval * 1000);
         $scope.$on('$destroy', function() {
           $interval.cancel(timer);
         });
         this.service.getBalanceHistory(this.model.uuid).then(this.processChartData.bind(this));
       },
 
-      setCounters: function() {
-        var vm = this;
+      getCounters: function() {
         var query = angular.extend(
-          {UUID: vm.model.uuid},
-          joinService.defaultFilter,
-          eventsService.defaultFilter
+            {UUID: this.model.uuid},
+            joinService.defaultFilter,
+            eventsService.defaultFilter
         );
-        customersService.getCounters(query).then(function(response) {
-          for (var i = 0; i < vm.detailsViewOptions.tabs.length; i++) {
-            var tab = vm.detailsViewOptions.tabs[i];
-            var key = tab.countFieldKey;
-            if (key) {
-              tab.count = response[key];
-            }
-          }
-        });
+        return customersService.getCounters(query);
       },
 
       // XXX: Avatar is temporarily disabled via detailsViewOptions.hasLogo = false

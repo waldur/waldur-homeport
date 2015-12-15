@@ -127,16 +127,13 @@
       '$translate',
       'LANGUAGE',
       '$stateParams',
-      'ENV',
-      'resourcesCountService',
       'eventsService',
       baseUserDetailUpdateController
     ]);
 
   // need for profile page
   function baseUserDetailUpdateController(
-    baseControllerDetailUpdateClass, usersService, authService, $translate, LANGUAGE, $stateParams, ENV,
-    resourcesCountService, eventsService) {
+    baseControllerDetailUpdateClass, usersService, authService, $translate, LANGUAGE, $stateParams, eventsService) {
     var ControllerClass = baseControllerDetailUpdateClass.extend({
       activeTab: 'keys',
       currentUser: null,
@@ -168,13 +165,15 @@
               title: 'Events',
               key: 'eventlog',
               viewName: 'tabEventlog',
-              count: 0
+              count: 0,
+              countFieldKey: 'events'
             },
             {
               title: 'SSH Keys',
               key: 'keys',
               viewName: 'tabKeys',
-              count: 0
+              count: 0,
+              countFieldKey: 'keys'
             }
           ]
         };
@@ -189,7 +188,8 @@
               title: 'Notifications',
               key: 'notifications',
               viewName: 'tabNotifications',
-              count: 0
+              count: 0,
+              countFieldKey: 'hooks'
             });
             vm.detailsViewOptions.tabs.push({
               title: 'Password',
@@ -197,7 +197,6 @@
               viewName: 'tabPassword',
               count: -1
             });
-            vm.setNotificationsCount();
             vm.detailsViewOptions.activeTab = vm.getActiveTab(vm.detailsViewOptions.tabs, $stateParams.tab);
           }
         });
@@ -217,33 +216,10 @@
       },
       afterActivate: function() {
         this.getCurrentUser();
-        this.setEventsCounter();
-        this.setKeysCount();
+        this.setCounters();
       },
-      setEventsCounter: function() {
-        var vm = this;
-        if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('eventlog') == -1) {
-          var query = angular.extend(eventsService.defaultFilter, {scope: vm.model.url});
-          resourcesCountService.events(query).then(function(response) {
-            vm.detailsViewOptions.tabs[0].count = response;
-          });
-        }
-      },
-      setKeysCount: function() {
-        var vm = this;
-        if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('keys') == -1) {
-          resourcesCountService.keys({user_uuid: vm.model.uuid}).then(function(response) {
-            vm.detailsViewOptions.tabs[1].count = response;
-          });
-        }
-      },
-      setNotificationsCount: function() {
-        var vm = this;
-        if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('notifications') == -1) {
-          resourcesCountService.hooks().then(function(count) {
-            vm.detailsViewOptions.tabs[2].count = count;
-          });
-        }
+      getCounters: function() {
+        return usersService.getCounters(eventsService.defaultFilter);
       }
     });
 

@@ -257,32 +257,26 @@
     .controller('ProjectDetailUpdateController', [
       '$stateParams',
       '$rootScope',
+      '$scope',
       '$interval',
       'ENV',
       'projectsService',
       'baseControllerDetailUpdateClass',
-      'resourcesCountService',
-      'servicesService',
-      'alertsService',
       'eventsService',
       'currentStateService',
-      '$scope',
       ProjectDetailUpdateController
     ]);
 
   function ProjectDetailUpdateController(
     $stateParams,
     $rootScope,
+    $scope,
     $interval,
     ENV,
     projectsService,
     baseControllerDetailUpdateClass,
-    resourcesCountService,
-    servicesService,
-    alertsService,
     eventsService,
-    currentStateService,
-    $scope) {
+    currentStateService) {
     var controllerScope = this;
     var Controller = baseControllerDetailUpdateClass.extend({
       customer: null,
@@ -370,26 +364,17 @@
           $rootScope.$broadcast('adjustCurrentProject', this.model);
         }
         this.setCounters();
-        var timer = $interval(this.setCounters.bind(controllerScope), ENV.countersTimerInterval * 1000);
+        var timer = $interval(this.setCounters.bind(this), ENV.countersTimerInterval * 1000);
         $scope.$on('$destroy', function() {
           $interval.cancel(timer);
         });
       },
-      setCounters:function() {
-        var vm = this;
+      getCounters: function() {
         var query = angular.extend(
-          {UUID: vm.model.uuid},
-          eventsService.defaultFilter
+            {UUID: this.model.uuid},
+            eventsService.defaultFilter
         );
-        projectsService.getCounters(query).then(function(response) {
-          for (var i = 0; i < vm.detailsViewOptions.tabs.length; i++) {
-            var tab = vm.detailsViewOptions.tabs[i];
-            var key = tab.countFieldKey;
-            if (key) {
-              tab.count = response[key];
-            }
-          }
-        });
+        return projectsService.getCounters(query);
       }
     });
 

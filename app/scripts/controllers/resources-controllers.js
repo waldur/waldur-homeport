@@ -339,10 +339,7 @@
               title: 'Alerts',
               key: 'alerts',
               viewName: 'tabAlerts',
-              getCount: function() {
-                var query = angular.extend(alertsService.defaultFilter, {scope: this.model.url});
-                return resourcesCountService.alerts(query);
-              }
+              countFieldKey: 'alerts'
             }
           ]
         };
@@ -357,6 +354,14 @@
         this.setCounters();
         this.scheduleRefresh();
       },
+
+      getCounters: function() {
+        var query = angular.extend(alertsService.defaultFilter, {scope: this.model.url});
+        return resourcesCountService.alerts(query).then(function(response) {
+          return {alerts: response};
+        });
+      },
+
       scheduleRefresh: function() {
         var vm = this;
         vm.updateStatus();
