@@ -455,6 +455,9 @@
             'tabServices@organizations.details': {
               templateUrl: 'views/customer/tab-services.html',
             },
+            'tabInvoices@organizations.details': {
+              templateUrl: 'views/customer/tab-invoices.html',
+            },
             'tabAlerts@organizations.details': {
               templateUrl: 'views/customer/tab-alerts.html',
             },

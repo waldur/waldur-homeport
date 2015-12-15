@@ -213,6 +213,11 @@
               viewName: 'tabServices'
             },
             {
+              title: 'Invoices',
+              key: 'invoices',
+              viewName: 'tabInvoices'
+            },
+            {
               title: 'Manage',
               key: 'delete',
               viewName: 'tabDelete'
@@ -251,6 +256,7 @@
         this.setAppCounter();
         this.setProjectsCounter();
         this.setProvidersCounter();
+        this.setInvoicesCounter();
       },
       setEventsCounter: function() {
         var vm = this;
@@ -306,6 +312,12 @@
         var query = angular.extend(joinService.defaultFilter, {customer: vm.model.uuid});
         resourcesCountService.services(query).then(function(count) {
           vm.detailsViewOptions.tabs[5].count = count;
+        });
+      },
+      setInvoicesCounter: function() {
+        var vm = this;
+        resourcesCountService.invoices({customer_uuid: vm.model.uuid}).then(function(count) {
+          vm.detailsViewOptions.tabs[6].count = count;
         });
       },
       // XXX: Avatar is temporarily disabled via detailsViewOptions.hasLogo = false
