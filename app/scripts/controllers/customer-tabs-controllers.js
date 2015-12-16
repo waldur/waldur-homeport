@@ -382,7 +382,6 @@
     var InvoicesController = baseControllerListClass.extend({
       init: function() {
         this.service = invoicesService;
-        this.searchFieldName = 'name';
         this._super();
 
         this.entityOptions = {

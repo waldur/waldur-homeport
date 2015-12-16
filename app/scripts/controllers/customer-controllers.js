@@ -254,6 +254,7 @@
       },
 
       getCounters: function() {
+        // TODO: implement getting invoices count from api/customers/{uuid}/counters/ endpoint
         this.setInvoicesCounter();
         var query = angular.extend(
             {UUID: this.model.uuid},
