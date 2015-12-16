@@ -1,7 +1,7 @@
 /*jshint camelcase: false */
 
 var basePort = 8001,
-    testPort = 8002;
+  testPort = 8002;
 
 module.exports = function(grunt) {
 
@@ -651,48 +651,53 @@ module.exports = function(grunt) {
                     }
                 }
             },
-            modeCostTracking: {
+            testModeDevelop: {
                 options: {
-                    configFile: "test/internal/modeCostTracking/protractor.conf.js",
+                    configFile: "test/protractor.conf.js",
                     keepAlive: false,
                     args: {
-                        baseUrl: 'http://localhost:' + testPort
+                        baseUrl: 'http://localhost:' + testPort,
+                        suite: 'develop'
                     }
                 }
             },
-            modeDevelop: {
+            testModeCostTracking: {
                 options: {
-                    configFile: "test/internal/modeDevelop/protractor.conf.js",
+                    configFile: "test/protractor.conf.js",
                     keepAlive: false,
                     args: {
-                        baseUrl: 'http://localhost:' + testPort
+                        baseUrl: 'http://localhost:' + testPort,
+                        suite: 'costTracking'
                     }
                 }
             },
-            modePrivateIaas: {
+            testModePrivateIaas: {
                 options: {
-                    configFile: "test/internal/modePrivateIaas/protractor.conf.js",
+                    configFile: "test/protractor.conf.js",
                     keepAlive: false,
                     args: {
-                        baseUrl: 'http://localhost:' + testPort
+                        baseUrl: 'http://localhost:' + testPort,
+                        suite: 'privateIaas'
                     }
                 }
             },
-            modePublicBrokerage: {
+            testModePublicBrokerage: {
                 options: {
-                    configFile: "test/internal/modePublicBrokerage/protractor.conf.js",
+                    configFile: "test/protractor.conf.js",
                     keepAlive: false,
                     args: {
-                        baseUrl: 'http://localhost:' + testPort
+                        baseUrl: 'http://localhost:' + testPort,
+                        suite: 'publicBrokerage'
                     }
                 }
             },
-            modeSquStudentCloud: {
+            testModeSquStudentCloud: {
                 options: {
-                    configFile: "test/internal/modeSquStudentCloud/protractor.conf.js",
+                    configFile: "test/protractor.conf.js",
                     keepAlive: false,
                     args: {
-                        baseUrl: 'http://localhost:' + testPort
+                        baseUrl: 'http://localhost:' + testPort,
+                        suite: 'squStudentCloud'
                     }
                 }
             }
@@ -722,20 +727,20 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-protractor-runner');
 
     grunt.registerTask(
-        'build', ['copy:main', 'imagemin', 'sass', 'autoprefixer', 'cssmin']);
+      'build', ['copy:main', 'imagemin', 'sass', 'autoprefixer', 'cssmin']);
     grunt.registerTask(
-        'run', ['copy:main', 'env:dev', 'preprocess:index', 'connect:server', 'imagemin', 'sass', 'autoprefixer',
-        'copy:' + mode, 'focus:dev']);
+      'run', ['copy:main', 'env:dev', 'preprocess:index', 'connect:server', 'imagemin', 'sass', 'autoprefixer',
+          'copy:' + mode, 'focus:dev']);
     grunt.registerTask('serve', ['connect',]);
     grunt.registerTask('default', ['run']);
 
     grunt.registerTask(
       'prod', ['copy:main', 'env:prod', 'preprocess:index', 'imagemin', 'sass', 'autoprefixer', 'concat',
-        'uglify', 'cssmin', 'focus:prod']);
+          'uglify', 'cssmin', 'focus:prod']);
 
     grunt.registerTask(
       'prodbatch', ['copy:main', 'copy:' + mode, 'env:prod', 'preprocess:index', 'imagemin', 'sass', 'autoprefixer', 'concat',
-        'uglify', 'cssmin']);
+          'uglify', 'cssmin']);
 
     grunt.registerTask('modePrivateIaas', ['copy:modePrivateIaas']);
     grunt.registerTask('modeSquStudentCloud', ['copy:modeSquStudentCloud']);
@@ -745,22 +750,53 @@ module.exports = function(grunt) {
 
     // tasks for testing
     grunt.registerTask(
-        'testAllModes', ['copy:main', 'env:test', 'preprocess:test', 'connect:test', 'sass', 'autoprefixer',
-            'express:test', /*'protractor_webdriver:test',*/
-            'copy:testModeDevelop', 'protractor:modeDevelop',
-            'copy:testModeSquStudentCloud', 'protractor:modeSquStudentCloud',
-            'copy:testModePublicBrokerage', 'protractor:modePublicBrokerage',
-            'copy:testModeCostTracking', 'protractor:modeCostTracking',
-            'copy:testModePrivateIaas', 'protractor:modePrivateIaas'
-          ]);
+      'testModes', ['copy:main', 'env:test', 'preprocess:test', 'connect:test', /*'imagemin',*/ 'sass', 'autoprefixer',
+          'express:test', /*'protractor_webdriver:test',*/
+          'copy:testModeDevelop', 'protractor:testModeDevelop',
+          'copy:testModeCostTracking', 'protractor:testModeCostTracking',
+          'copy:testPrivateIaas', 'protractor:testModePrivateIaas',
+          'copy:testPublicBrokerage', 'protractor:testModePublicBrokerage',
+          'copy:testSquStudentCloud', 'protractor:testModeSquStudentCloud'
+      ]);
 
+    grunt.registerTask(
+      'testModeDevelop', ['copy:main', 'env:test', 'preprocess:test', 'connect:test', /*'imagemin',*/ 'sass', 'autoprefixer',
+          'express:test', /*'protractor_webdriver:test',*/
+          'copy:testModeDevelop', 'protractor:testModeDevelop'
+      ]);
+
+    grunt.registerTask(
+      'testModeCostTracking', ['copy:main', 'env:test', 'preprocess:test', 'connect:test', /*'imagemin',*/ 'sass', 'autoprefixer',
+          'express:test', /*'protractor_webdriver:test',*/
+          'copy:testModeCostTracking', 'protractor:testModeCostTracking'
+      ]);
+
+    grunt.registerTask(
+      'testModePrivateIaas', ['copy:main', 'env:test', 'preprocess:test', 'connect:test', /*'imagemin',*/ 'sass', 'autoprefixer',
+          'express:test', /*'protractor_webdriver:test',*/
+          'copy:testModePrivateIaas', 'protractor:testModePrivateIaas'
+      ]);
+
+    grunt.registerTask(
+      'testModePublicBrokerage', ['copy:main', 'env:test', 'preprocess:test', 'connect:test', /*'imagemin',*/ 'sass', 'autoprefixer',
+          'express:test', /*'protractor_webdriver:test',*/
+          'copy:testModePublicBrokerage', 'protractor:testModePublicBrokerage'
+      ]);
+
+    grunt.registerTask(
+      'testModeSquStudentCloud', ['copy:main', 'env:test', 'preprocess:test', 'connect:test', /*'imagemin',*/ 'sass', 'autoprefixer',
+          'express:test', /*'protractor_webdriver:test',*/
+          'copy:testModeSquStudentCloud', 'protractor:testModeSquStudentCloud'
+      ]);
+
+    // to run testing environment manually if needed. node server should be launched separately
     grunt.registerTask(
       'runTest', ['copy:main', 'env:test', 'preprocess:test', 'connect:test', 'imagemin', 'sass', 'autoprefixer',
           'copy:' + mode, 'focus:dev']);
 
     // old test task
     grunt.registerTask('test',
-        ['connect:test', 'imagemin', 'sass', 'autoprefixer', 'protractor_webdriver:test', 'protractor:test']);
+      ['connect:test', 'imagemin', 'sass', 'autoprefixer', 'protractor_webdriver:test', 'protractor:test']);
 
 
 };
