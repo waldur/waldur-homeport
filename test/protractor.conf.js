@@ -4,7 +4,7 @@ exports.config = {
     'internal/modeCostTracking/*.js',
     'internal/modeDevelop/*.js',
     'internal/modePrivateIaas/*.js',
-    'internal/modePublicBrokerage/*.ks',
+    'internal/modePublicBrokerage/*.js',
     'internal/modeSquStudentCloud/*.js'
   ],
   suites: {
