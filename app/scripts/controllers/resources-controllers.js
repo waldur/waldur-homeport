@@ -327,7 +327,8 @@
               title: 'Details',
               key: 'details',
               viewName: 'tabDetails',
-              count: -1
+              count: -1,
+              hideSearch: true
             },
             {
               title: 'Backups',

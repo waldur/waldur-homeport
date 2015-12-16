@@ -124,6 +124,7 @@
       'joinService',
       'ncUtilsFlash',
       'eventsService',
+      'resourcesCountService',
       CustomerDetailUpdateController
     ]);
 
@@ -142,7 +143,8 @@
     $window,
     joinService,
     ncUtilsFlash,
-    eventsService
+    eventsService,
+    resourcesCountService
     ) {
     var controllerScope = this;
     var CustomerController = baseControllerDetailUpdateClass.extend({
@@ -213,9 +215,16 @@
               countFieldKey: 'services'
             },
             {
+              title: 'Invoices',
+              key: 'invoices',
+              viewName: 'tabInvoices',
+              hideSearch: true
+            },
+            {
               title: 'Manage',
               key: 'delete',
-              viewName: 'tabDelete'
+              viewName: 'tabDelete',
+              hideSearch: true
             }
           ]
         };
@@ -245,12 +254,21 @@
       },
 
       getCounters: function() {
+        // TODO: implement getting invoices count from api/customers/{uuid}/counters/ endpoint
+        this.setInvoicesCounter();
         var query = angular.extend(
             {UUID: this.model.uuid},
             joinService.defaultFilter,
             eventsService.defaultFilter
         );
         return customersService.getCounters(query);
+      },
+
+      setInvoicesCounter: function() {
+        var vm = this;
+        resourcesCountService.invoices({customer_uuid: vm.model.uuid}).then(function(count) {
+          vm.detailsViewOptions.tabs[6].count = count;
+        });
       },
 
       // XXX: Avatar is temporarily disabled via detailsViewOptions.hasLogo = false

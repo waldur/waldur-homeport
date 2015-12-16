@@ -195,7 +195,8 @@
               title: 'Password',
               key: 'password',
               viewName: 'tabPassword',
-              count: -1
+              count: -1,
+              hideSearch: true
             });
             vm.detailsViewOptions.activeTab = vm.getActiveTab(vm.detailsViewOptions.tabs, $stateParams.tab);
           }

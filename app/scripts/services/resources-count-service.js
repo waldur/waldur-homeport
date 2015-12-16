@@ -37,6 +37,7 @@
       premiumSupportContracts: factory('premium-support-contracts'),
       keys: factory('keys'),
       hooks: factory('hooks'),
+      invoices: factory('paypal-invoices')
     }
   }
 })();
