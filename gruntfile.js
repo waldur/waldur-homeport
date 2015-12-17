@@ -750,8 +750,8 @@ module.exports = function(grunt) {
 
     // tasks for testing
     grunt.registerTask(
-      'testModes', ['copy:main', 'env:test', 'preprocess:test', 'connect:test', /*'imagemin',*/ 'sass', 'autoprefixer',
-          'express:test', /*'protractor_webdriver:test',*/
+      'testModes', ['copy:main', 'env:test', 'preprocess:test', 'connect:test', 'imagemin', 'sass', 'autoprefixer',
+          'express:test', 'protractor_webdriver:test',
           'copy:testModeDevelop', 'protractor:testModeDevelop',
           'copy:testModeCostTracking', 'protractor:testModeCostTracking',
           'copy:testPrivateIaas', 'protractor:testModePrivateIaas',
@@ -760,32 +760,32 @@ module.exports = function(grunt) {
       ]);
 
     grunt.registerTask(
-      'testModeDevelop', ['copy:main', 'env:test', 'preprocess:test', 'connect:test', /*'imagemin',*/ 'sass', 'autoprefixer',
-          'express:test', /*'protractor_webdriver:test',*/
+      'testModeDevelop', ['copy:main', 'env:test', 'preprocess:test', 'connect:test', 'imagemin', 'sass', 'autoprefixer',
+          'express:test', 'protractor_webdriver:test',
           'copy:testModeDevelop', 'protractor:testModeDevelop'
       ]);
 
     grunt.registerTask(
-      'testModeCostTracking', ['copy:main', 'env:test', 'preprocess:test', 'connect:test', /*'imagemin',*/ 'sass', 'autoprefixer',
-          'express:test', /*'protractor_webdriver:test',*/
+      'testModeCostTracking', ['copy:main', 'env:test', 'preprocess:test', 'connect:test', 'imagemin', 'sass', 'autoprefixer',
+          'express:test', 'protractor_webdriver:test',
           'copy:testModeCostTracking', 'protractor:testModeCostTracking'
       ]);
 
     grunt.registerTask(
-      'testModePrivateIaas', ['copy:main', 'env:test', 'preprocess:test', 'connect:test', /*'imagemin',*/ 'sass', 'autoprefixer',
-          'express:test', /*'protractor_webdriver:test',*/
+      'testModePrivateIaas', ['copy:main', 'env:test', 'preprocess:test', 'connect:test', 'imagemin', 'sass', 'autoprefixer',
+          'express:test', 'protractor_webdriver:test',
           'copy:testModePrivateIaas', 'protractor:testModePrivateIaas'
       ]);
 
     grunt.registerTask(
-      'testModePublicBrokerage', ['copy:main', 'env:test', 'preprocess:test', 'connect:test', /*'imagemin',*/ 'sass', 'autoprefixer',
-          'express:test', /*'protractor_webdriver:test',*/
+      'testModePublicBrokerage', ['copy:main', 'env:test', 'preprocess:test', 'connect:test', 'imagemin', 'sass', 'autoprefixer',
+          'express:test', 'protractor_webdriver:test',
           'copy:testModePublicBrokerage', 'protractor:testModePublicBrokerage'
       ]);
 
     grunt.registerTask(
-      'testModeSquStudentCloud', ['copy:main', 'env:test', 'preprocess:test', 'connect:test', /*'imagemin',*/ 'sass', 'autoprefixer',
-          'express:test', /*'protractor_webdriver:test',*/
+      'testModeSquStudentCloud', ['copy:main', 'env:test', 'preprocess:test', 'connect:test', 'imagemin', 'sass', 'autoprefixer',
+          'express:test', 'protractor_webdriver:test',
           'copy:testModeSquStudentCloud', 'protractor:testModeSquStudentCloud'
       ]);
 
