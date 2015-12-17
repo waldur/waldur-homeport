@@ -25,3 +25,8 @@ to mocks.json in following format: `"/add" + {endpoint}`.
 
 For test server we use configs from `app/scripts/configs/test`. For testing purposes index-template.html compiles
 to test.html. Test server runs at 8002 port. Test backend runs at 3011 port.
+
+For configuring tests environment you should create `custom-config.js` from `custom-config.js.example`
+from `app/scripts/configs/test/`
+
+Before tests run `./node_modules/protractor/bin/webdriver-manager update`

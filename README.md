@@ -96,8 +96,7 @@ It occurs because selenium server shuts down before protractor ends tests. ([Lin
 
 ### Run modes tests
 
-Execute `grunt testAllModes` to run tests for each configuration mode. Uncomment `/*'protractor_webdriver:test',*/`
-to start standalone selenium webserver
+Execute `grunt testModes` to run tests for each configuration mode.
 
 ### Run selected file on current develop server
 
