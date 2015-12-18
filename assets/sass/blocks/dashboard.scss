@@ -237,6 +237,7 @@
       width: 50%;
       float: left;
       padding: 1%;
+      position: relative;
       @include bp(xs) {
         padding: 10px;
         width: 100%;
@@ -523,6 +524,83 @@
           margin-top: 15px;
           color: $dashboard-green;
         }
+        .tooltip {
+          $border-color: #DCD9D9;
+          width: 250px;
+          .left-padding {
+            padding-left: 10px;
+          }
+          &.quota-tooltip {
+            top: 66px;
+            left: 50px;
+            @include bp(xs) {
+              top: auto;
+            }
+            @include bp(xs) {
+              position: fixed;
+              width: 100%;
+              left: 0;
+              height: 50%;
+              bottom: 0;
+              top: auto;
+              font-size: 1em;
+              z-index: 9999;
+            }
+          }
+          &:before {
+            content: "";
+            position: absolute;
+            display: block;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 11.5px 10px 11.5px;
+            border-color: transparent transparent $border-color transparent;
+            top: -10px;
+            right: 205px;
+            @include bp(xs) {
+              display: none;
+            }
+          }
+          &:after {
+            content: "";
+            position: absolute;
+            display: block;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 10.5px 9px 10.5px;
+            border-color: transparent transparent $main-background-color transparent;
+            top: -9px;
+            right: 206px;
+            @include bp(xs) {
+              display: none;
+            }
+          }
+        }
+        a.support {
+          @include inline-middle;
+          &:hover {
+            opacity: 0.8;
+          }
+          width: 22px;
+          height: 22px;
+          background-color: #409a3c;
+          border-radius: 100%;
+          padding: 0;
+          position: relative;
+          top: -2px;
+          margin: 0;
+          color: white;
+          &:before {
+            @include icon-fa;
+            content: '\f128';
+            font-size: 18px;
+            position: absolute;
+            top: 2px;
+            left: 6px;
+          } // &:before
+        } // &.support
       }
     }
     .quard-block {

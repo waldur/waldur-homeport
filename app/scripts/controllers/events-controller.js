@@ -350,6 +350,7 @@
         };
 
         this.checkQuotas = 'project';
+        this.alertIconsHelper = alertsService.getAvailableIconTypes();
 
         this.activate();
         this.resizeControl();

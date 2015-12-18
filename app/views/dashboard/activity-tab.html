@@ -68,7 +68,16 @@
     </div>
     <div class="half-block">
         <div class="alerts-list">
-            <h3>Alerts</h3>
+            <h3 ng-click="alertsTooltip = !alertsTooltip">Alerts <a class="support" title="Support"></a></h3>
+            <div ng-show="alertsTooltip" class="tooltip quota-tooltip">
+                <div class="tooltip-title">
+                    <div class="close" ng-click="alertsTooltip = false"></div>
+                    <div class="clear"></div>
+                </div>
+                <div ng-repeat="alert in DashboardController.alertIconsHelper">
+                    <div class="icon" ng-class="::alert[0]"><span class="left-padding" ng-bind-html="::alert[1]"></span></div>
+                </div>
+            </div>
             <div class="white-box" block-ui="dashboard-alerts-list">
                 <ul>
                     <li ng-repeat="alert in DashboardController.alerts"

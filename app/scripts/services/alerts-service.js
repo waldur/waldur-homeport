@@ -2,9 +2,9 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('alertsService', ['baseServiceClass', 'ENV', alertsService]);
+    .service('alertsService', ['baseServiceClass', 'ENV', 'ALERT_ICONS_TYPES', alertsService]);
 
-  function alertsService(baseServiceClass, ENV) {
+  function alertsService(baseServiceClass, ENV, ALERT_ICONS_TYPES) {
     var ServiceClass = baseServiceClass.extend({
       init: function() {
         this._super();
@@ -20,6 +20,18 @@
         if (!ENV.featuresVisible) {
           this.defaultFilter.exclude_features = ENV.toBeFeatures;
         }
+      },
+      getAvailableIconTypes: function() {
+        var icons = [],
+            icon;
+        for (var i in ALERT_ICONS_TYPES) {
+          if (ENV.toBeFeatures.indexOf(i) == -1 && ALERT_ICONS_TYPES.hasOwnProperty(i)) {
+            icon = i.slice(0, -1);
+            icon = (icon == 'provider') ? 'service' : icon;
+            icons.push([icon, ALERT_ICONS_TYPES[i]]);
+          }
+        }
+        return icons;
       }
     });
     return new ServiceClass();
@@ -36,6 +48,12 @@
     'customer_project_count_exceeded': 'Organization {customer_name} has exceeded quota {quota_name}.',
     'customer_resource_count_exceeded': 'Organization {customer_name} has exceeded quota {quota_name}.',
     'customer_service_count_exceeded': 'Organization {customer_name} has exceeded quota {quota_name}.',
+  });
+
+  angular.module('ncsaas').constant('ALERT_ICONS_TYPES', {
+    customers: 'Customers notifications',
+    resources: 'Resources notifications',
+    providers: 'Services notifications'
   });
 
   angular.module('ncsaas').constant('ALERT_ICONS', {
