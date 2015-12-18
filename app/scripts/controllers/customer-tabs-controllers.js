@@ -297,7 +297,7 @@
         this.entityOptions.entityData.noDataText = 'You have no applications yet';
         this.entityOptions.entityData.createLinkText = 'Create application';
         this.entityOptions.entityData.importLinkText = 'Import application';
-        this.entityOptions.entityData.noMatchesText = 'No Applications found matching filter.';
+        this.entityOptions.entityData.noMatchesText = 'No applications found matching filter.';
       }
     });
     controllerScope.__proto__ = new ResourceController();
