@@ -13,5 +13,8 @@ exports.config = {
     privateIaas: 'internal/modePrivateIaas/*.js',
     publicBrokerage: 'internal/modePublicBrokerage/*.js',
     squStudentCloud: 'internal/modeSquStudentCloud/*.js'
+  },
+  capabilities: {
+      browserName: 'firefox'
   }
 };
