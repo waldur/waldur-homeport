@@ -1,5 +1,5 @@
 exports.config = {
-  seleniumAddress: 'http://localhost:4444/wd/hub',
+  directConnect: true,
   specs: [
     'internal/modeCostTracking/*.js',
     'internal/modeDevelop/*.js',
@@ -16,5 +16,14 @@ exports.config = {
   },
   capabilities: {
       browserName: 'firefox'
+  },
+
+  // tunings for tests to run in docker environment
+  framework: 'jasmine2',
+  maxSessions: 1,
+  jasmineNodeOpts: {
+  // Default time to wait in ms before a test fails.
+    defaultTimeoutInterval: 60000
   }
+
 };
