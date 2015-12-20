@@ -751,15 +751,11 @@ module.exports = function(grunt) {
     // tasks for testing
     grunt.registerTask(
       'testModes', ['copy:main', 'env:test', 'preprocess:test', 'connect:test', 'imagemin', 'sass', 'autoprefixer',
-          'express:test', 'protractor_webdriver:test',
+          'express:test',
           'copy:testModeDevelop', 'protractor:testModeDevelop',
-          'protractor_webdriver:test',
           'copy:testModeCostTracking', 'protractor:testModeCostTracking',
-          'protractor_webdriver:test',
           'copy:testModePrivateIaas', 'protractor:testModePrivateIaas',
-          'protractor_webdriver:test',
           'copy:testModePublicBrokerage', 'protractor:testModePublicBrokerage',
-          'protractor_webdriver:test',
           'copy:testModeSquStudentCloud', 'protractor:testModeSquStudentCloud'
       ]);
 
