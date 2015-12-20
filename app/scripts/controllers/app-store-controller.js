@@ -642,7 +642,7 @@
           return false;
         }
         for (var name in this.allFormOptions) {
-          if (this.allFormOptions[name].required && !this.instance[name]) {
+          if (this.allFormOptions[name].required && (!this.instance[name] && this.instance[name] !== 0)) {
             return false;
           }
         }
