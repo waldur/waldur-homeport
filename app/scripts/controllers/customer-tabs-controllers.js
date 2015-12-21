@@ -297,7 +297,7 @@
         this.entityOptions.entityData.noDataText = 'You have no applications yet';
         this.entityOptions.entityData.createLinkText = 'Create application';
         this.entityOptions.entityData.importLinkText = 'Import application';
-        this.entityOptions.entityData.noMatchesText = 'No Applications found matching filter.';
+        this.entityOptions.entityData.noMatchesText = 'No applications found matching filter.';
       }
     });
     controllerScope.__proto__ = new ResourceController();
@@ -364,6 +364,64 @@
     });
 
     controllerScope.__proto__ = new EventController();
+  }
+
+})();
+
+(function() {
+  angular.module('ncsaas')
+      .controller('CustomerInvoicesTabController', [
+        'baseControllerListClass',
+        'invoicesService',
+        'ENTITYLISTFIELDTYPES',
+        CustomerInvoicesTabController
+      ]);
+
+  function CustomerInvoicesTabController(baseControllerListClass, invoicesService, ENTITYLISTFIELDTYPES) {
+    var controllerScope = this;
+    var InvoicesController = baseControllerListClass.extend({
+      init: function() {
+        this.service = invoicesService;
+        this._super();
+
+        this.entityOptions = {
+          entityData: {
+            noDataText: 'No invoices yet',
+            hideActionButtons: true,
+            hideTableHead: false
+          },
+          list: [
+            {
+              name: 'Invoice ID',
+              propertyName: 'uuid',
+              type: ENTITYLISTFIELDTYPES.name,
+              showForMobile: true
+            },
+            {
+              name: 'Amount',
+              propertyName: 'total_amount',
+              type: ENTITYLISTFIELDTYPES.linkOrText,
+              showForMobile: true
+            },
+            {
+              name: 'Start date',
+              propertyName: 'start_date',
+              type: ENTITYLISTFIELDTYPES.dateCreated,
+              showForMobile: true
+            },
+            {
+              name: 'End date',
+              propertyName: 'end_date',
+              type: ENTITYLISTFIELDTYPES.dateCreated,
+              showForMobile: true
+            }
+          ]
+        };
+      },
+      afterGetList: function() {}
+    });
+
+    controllerScope.__proto__ = new InvoicesController();
   }
 
 })();
