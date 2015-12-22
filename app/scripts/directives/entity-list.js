@@ -50,6 +50,8 @@
       subtitle: true,
       html: 'html',
       colorState: 'colorState',
-      bool: 'bool'
-    })
+      bool: 'bool',
+      trimmed: 'trimmed',
+      dateShort: 'dateShort'
+    });
 })();
