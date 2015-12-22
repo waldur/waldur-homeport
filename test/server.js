@@ -20,10 +20,10 @@ app.all('*', handleGet);
 
 // one polymorphic method to avoid multiple handling with OPTIONS etc
 function handleGet(req, res) {
-  var url_parts = url.parse(req.url, true);
-  var endpoint = url_parts.path.split('?')[0];
-  var vms = ["/api/azure-virtualmachines/"];
-  var applications = [];
+  var url_parts = url.parse(req.url, true),
+    endpoint = url_parts.path.split('?')[0],
+    vms = ["/api/azure-virtualmachines/"],
+    applications = [];
   if (endpoint in endpointMocks) {
     if (['POST', 'PUT'].indexOf(req.method) > -1) {
       req.on('data', function(chunk) {
@@ -32,20 +32,27 @@ function handleGet(req, res) {
         if (entityName) {
           endpointMocks[endpointName].name = entityName;
         }
-        if (vms.indexOf(endpoint) > -1 || applications.indexOf(endpoint) > -1) {
-          endpoint = "/api/resources/";
-        }
         if (endpointMocks[endpoint].push) {
           endpointMocks[endpoint].push(endpointMocks[endpointName]);
+        } else {
+          if (endpoint !== '/api-auth/password/') {
+            endpointMocks[endpoint] = endpointMocks[endpointName];
+            var addedEntityEndpoint = endpoint + endpointMocks[endpointName].uuid + '/';
+            endpointMocks[addedEntityEndpoint].name = entityName;
+          }
         }
       });
+      req.on('end', function() {
+        res.send(endpointMocks[endpoint]);
+      });
+    } else {
+      res.send(endpointMocks[endpoint]);
     }
-    res.send(endpointMocks[endpoint]);
   } else {
     res.send(null);
   }
 }
-
 module.exports = app.listen(app.get('port'), function() {
   console.log('Starting tests..');
 });
+

@@ -20,7 +20,7 @@ for(var i = 0; i < testData.length; i++) {
     resourceName = helpers.getUUID(),
     osName = helpers.getUUID(),
     osPassword = helpers.getUUID(),
-    addedResource = endpointMocks["/add/api/resources/"];
+    addedResource = endpointMocks["/add/api/azure-virtualmachines/"];
 
   (function(user, data, resourceName, addedResource) {
     describe('App store creation test for administrator(' + user.username + '):', function() {
@@ -60,17 +60,12 @@ for(var i = 0; i < testData.length; i++) {
 
         element(by.css('.appstore-purchase button')).click();
 
-        //TODO: handle with mock on resource detail page when redirecting
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/resources/'+ addedResource.resource_type +'/'+ addedResource.uuid + '/');
 
-        element(by.cssContainingText('span', "Details")).click();
-        element(by.cssContainingText('li', "VMs")).click();
-
-        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/projects/'+ addedResource.project_uuid +'/vms');
       });
 
-      it('I should be able to find added resource in resource list', function() {
-        element(by.model('generalSearch')).sendKeys(resourceName);
-        expect(element(by.cssContainingText('h3.item-title a', resourceName)).isPresent()).toBe(true);
+      it('I should be able to check added resource on its details page', function() {
+        expect(element(by.cssContainingText('span.name', resourceName)).isPresent()).toBe(true);
       });
 
       it('I should be able to logout', function() {
