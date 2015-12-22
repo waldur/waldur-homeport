@@ -188,8 +188,6 @@
       'baseControllerAddClass',
       '$rootScope',
       '$state',
-      'projectPermissionsService',
-      'usersService',
       'ncUtilsFlash',
       ProjectAddController]);
 
@@ -200,13 +198,10 @@
     baseControllerAddClass,
     $rootScope,
     $state,
-    projectPermissionsService,
-    usersService,
     ncUtilsFlash) {
     var controllerScope = this;
     var ProjectController = baseControllerAddClass.extend({
       userRole: 'admin',
-      user: {},
       init: function() {
         this.service = projectsService;
         this.controllerScope = controllerScope;
@@ -220,13 +215,9 @@
         currentStateService.getCustomer().then(function(customer) {
           vm.project.customer = customer.url;
         });
-        usersService.getCurrentUser().then(function(user) {
-          vm.user = user;
-        });
       },
       afterSave: function() {
         var vm = this;
-        vm.addUser();
         joinServiceProjectLinkService.addProject(vm.project).then(function() {
           $rootScope.$broadcast('refreshProjectList', {model: vm.project, new: true, current: true});
         });
@@ -239,14 +230,6 @@
         currentStateService.getCustomer().then(function(customer) {
           $state.go('organizations.details', {uuid: customer.uuid, tab: 'projects'});
         });
-      },
-      addUser: function() {
-        var vm = this;
-        var instance = projectPermissionsService.$create();
-        instance.user = vm.user.url;
-        instance.project = vm.project.url;
-        instance.role = vm.userRole;
-        instance.$save();
       }
     });
 
