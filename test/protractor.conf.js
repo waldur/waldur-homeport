@@ -15,7 +15,13 @@ exports.config = {
     squStudentCloud: 'internal/modeSquStudentCloud/*.js'
   },
   capabilities: {
-      browserName: 'chrome'
+    browserName: 'chrome',
+    capabilities: {
+      browserName: 'chrome',
+      chromeOptions: {
+        args: ['--no-sandbox', '--test-type=browser']
+      }
+    }
   },
 
   // tunings for tests to run in docker environment
