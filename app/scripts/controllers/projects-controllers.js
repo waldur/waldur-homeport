@@ -124,16 +124,14 @@
           }
         },
         afterGetList: function() {
-          if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('premiumSupport') == -1) {
-            for (var i = 0; i < this.list.length; i++) {
-              var item = this.list[i];
-              if (item.plan) {
-                item.plan_name = item.plan.name;
-              } else if (item.has_pending_contracts) {
-                item.plan_name = 'Pending';
-              }
-              this.setProjectCounters(item);
+          for (var i = 0; i < this.list.length; i++) {
+            var item = this.list[i];
+            if (item.plan) {
+              item.plan_name = item.plan.name;
+            } else if (item.has_pending_contracts) {
+              item.plan_name = 'Pending';
             }
+            this.setProjectCounters(item);
           }
         },
         checkPermissions: function() {
@@ -164,7 +162,7 @@
             var quota = project.quotas[i];
             if (quota.name == 'nc_app_count') {
               project.app_count = quota.usage;
-            } else if (quota.name == 'nv_vm_count') {
+            } else if (quota.name == 'nc_vm_count') {
               project.vm_count = quota.usage;
             }
           }
