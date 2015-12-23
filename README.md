@@ -57,7 +57,7 @@ __Installation steps__:
 
     `grunt prod` - in production mode
 
-6. Listen on `//localhost:8000`
+6. Server will listen on `//localhost:8000`
 
 ## Backend
 
@@ -69,12 +69,11 @@ CORS_EXPOSE_HEADERS = (
         'x-result-count',
         'Link'
 )
-It is needed for enable reading header's response from frontend app.
+It is needed for enabling reading header's response from frontend app.
 
 ## Tests
 
-[Protractor][6] is used for tests. Tests are base on ["Alice" dataset][8], so backend server has to contain data from
-this dataset. It can contain other data too, this does not have to break tests.
+[Protractor][6] is used for tests.
 
 ### Setup
 
@@ -84,15 +83,16 @@ this dataset. It can contain other data too, this does not have to break tests.
 
         node_modules/protractor/bin/webdriver-manager update
 
-Notice: Currently "Alice" dataset contain only non-active templates, all of them have to be active.
-This will be fixed in SAAS-170.
-
 ### Run all tests at once
 
 Command `grunt test` will start local server on separate host and run all tests.
 
 Notice: `Error: ECONNREFUSED connect ECONNREFUSED` Can be raised in the end of tests flow.
 It occurs because selenium server shuts down before protractor ends tests. ([Link to issue][7]).
+
+### Run modes tests
+
+Execute `grunt testModes` to run tests for each configuration mode.
 
 ### Run selected file on current develop server
 
@@ -126,4 +126,3 @@ See `docs/development_guideline.md` for development policies.
 [5]: https://code.opennodecloud.com/nc-saas/ncplus/blob/develop/README.rst
 [6]: http://angular.github.io/protractor/#/tutorial
 [7]: https://github.com/teerapap/grunt-protractor-runner/issues/111
-[8]: http://nodeconductor.readthedocs.org/en/stable/developer/sample-data.html

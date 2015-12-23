@@ -357,7 +357,7 @@ Config file settings:
 ## checkQuotas directive
 
 Used on links to check whether it should be disabled based on current quotas or not. <br/>
-Also optional tooltip can be shown to notify user about lack of quotas. <br/>
+In addition optional tooltip can be shown to notify user about lack of quotas. <br/>
 Two options in controller should be defined e.g:
 
      this.entityOptions = {

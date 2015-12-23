@@ -14,3 +14,19 @@ Ideally no additional data does not have to be added to backend.
 3. One file with tests does not have to depend on other tests file(but it can use helpers).
 
 [1]: http://nodeconductor.readthedocs.org/en/stable/developer/sample-data.html
+
+## Modes tests
+
+All modes tests files are located in test/internal/{MODE_NAME}
+
+For tests we use mocked endpoints in `test/mocks.json`. These mocks are handled on node.js server `test/server.js`.
+To add new test you should add needed endpoints to `test/mocks.json`. POST request require adding additional endpoint
+to mocks.json in following format: `"/add" + {endpoint}`.
+
+For test server we use configs from `app/scripts/configs/test`. For testing purposes index-template.html compiles
+to test.html. Test server runs at 8002 port. Test backend runs at 3011 port.
+
+For configuring tests environment you should create `custom-config.js` from `custom-config.js.example`
+from `app/scripts/configs/test/`
+
+Before tests run `./node_modules/protractor/bin/webdriver-manager update`

@@ -1,7 +1,7 @@
 /*jshint camelcase: false */
 
 var basePort = 8001,
-    testPort = 8002;
+  testPort = 8002;
 
 module.exports = function(grunt) {
 
@@ -155,144 +155,144 @@ module.exports = function(grunt) {
                         filter: 'isFile'
                     },
                     {
-                      expand: true,
-                      cwd: 'bower_components/angucomplete-alt',
-                      src: ['angucomplete-alt.js'],
-                      dest: 'app/static/js/angular/',
-                      filter: 'isFile'
+                        expand: true,
+                        cwd: 'bower_components/angucomplete-alt',
+                        src: ['angucomplete-alt.js'],
+                        dest: 'app/static/js/angular/',
+                        filter: 'isFile'
                     },
                     {
-                      expand: true,
-                      cwd: 'bower_components/angucomplete-alt',
-                      src: ['angucomplete-alt.css'],
-                      dest: 'app/static/css/',
-                      filter: 'isFile'
+                        expand: true,
+                        cwd: 'bower_components/angucomplete-alt',
+                        src: ['angucomplete-alt.css'],
+                        dest: 'app/static/css/',
+                        filter: 'isFile'
                     },
                     {
-                      expand: true,
-                      cwd: 'bower_components/momentjs',
-                      src: ['moment.js'],
-                      dest: 'app/static/js/angular/',
-                      filter: 'isFile'
+                        expand: true,
+                        cwd: 'bower_components/momentjs',
+                        src: ['moment.js'],
+                        dest: 'app/static/js/angular/',
+                        filter: 'isFile'
                     },
                     {
-                      expand: true,
-                      cwd: 'bower_components/angular-moment',
-                      src: ['angular-moment.js'],
-                      dest: 'app/static/js/angular/',
-                      filter: 'isFile'
+                        expand: true,
+                        cwd: 'bower_components/angular-moment',
+                        src: ['angular-moment.js'],
+                        dest: 'app/static/js/angular/',
+                        filter: 'isFile'
                     },
                     {
-                      expand: true,
-                      cwd: 'bower_components/angular-flash-alert/src',
-                      src: ['angular-flash.js'],
-                      dest: 'app/static/js/angular/',
-                      filter: 'isFile'
+                        expand: true,
+                        cwd: 'bower_components/angular-flash-alert/src',
+                        src: ['angular-flash.js'],
+                        dest: 'app/static/js/angular/',
+                        filter: 'isFile'
                     },
                     {
-                      expand: true,
-                      cwd: 'bower_components/angular-flash-alert/src',
-                      src: ['angular-flash.css'],
-                      dest: 'app/static/css/',
-                      filter: 'isFile'
+                        expand: true,
+                        cwd: 'bower_components/angular-flash-alert/src',
+                        src: ['angular-flash.css'],
+                        dest: 'app/static/css/',
+                        filter: 'isFile'
                     },
                     {
-                      expand: true,
-                      cwd: 'bower_components/angular-animate',
-                      src: ['angular-animate.js'],
-                      dest: 'app/static/js/angular/',
-                      filter: 'isFile'
+                        expand: true,
+                        cwd: 'bower_components/angular-animate',
+                        src: ['angular-animate.js'],
+                        dest: 'app/static/js/angular/',
+                        filter: 'isFile'
                     },
                     {
-                      expand: true,
-                      cwd: 'bower_components/angular-translate',
-                      src: ['angular-translate.js'],
-                      dest: 'app/static/js/angular/',
-                      filter: 'isFile'
+                        expand: true,
+                        cwd: 'bower_components/angular-translate',
+                        src: ['angular-translate.js'],
+                        dest: 'app/static/js/angular/',
+                        filter: 'isFile'
                     },
                     {
-                      expand: true,
-                      cwd: 'bower_components/angular-translate-storage-cookie',
-                      src: ['angular-translate-storage-cookie.js'],
-                      dest: 'app/static/js/angular/',
-                      filter: 'isFile'
+                        expand: true,
+                        cwd: 'bower_components/angular-translate-storage-cookie',
+                        src: ['angular-translate-storage-cookie.js'],
+                        dest: 'app/static/js/angular/',
+                        filter: 'isFile'
                     },
                     {
-                      expand: true,
-                      cwd: 'bower_components/angular-translate-storage-local',
-                      src: ['angular-translate-storage-local.js'],
-                      dest: 'app/static/js/angular/',
-                      filter: 'isFile'
+                        expand: true,
+                        cwd: 'bower_components/angular-translate-storage-local',
+                        src: ['angular-translate-storage-local.js'],
+                        dest: 'app/static/js/angular/',
+                        filter: 'isFile'
                     },
                     {
-                      expand: true,
-                      cwd: 'bower_components/angular-translate-loader-static-files',
-                      src: ['angular-translate-loader-static-files.js'],
-                      dest: 'app/static/js/angular/',
-                      filter: 'isFile'
+                        expand: true,
+                        cwd: 'bower_components/angular-translate-loader-static-files',
+                        src: ['angular-translate-loader-static-files.js'],
+                        dest: 'app/static/js/angular/',
+                        filter: 'isFile'
                     },
                     {
-                      expand: true,
-                      cwd: 'bower_components/angular-cron-jobs/dist',
-                      src: ['angular-cron-jobs.js'],
-                      dest: 'app/static/js/angular/',
-                      filter: 'isFile'
+                        expand: true,
+                        cwd: 'bower_components/angular-cron-jobs/dist',
+                        src: ['angular-cron-jobs.js'],
+                        dest: 'app/static/js/angular/',
+                        filter: 'isFile'
                     },
                     {
-                      expand: true,
-                      cwd: 'bower_components/angular-cron-jobs/dist',
-                      src: ['angular-cron-jobs.css'],
-                      dest: 'app/static/css/',
-                      filter: 'isFile'
+                        expand: true,
+                        cwd: 'bower_components/angular-cron-jobs/dist',
+                        src: ['angular-cron-jobs.css'],
+                        dest: 'app/static/css/',
+                        filter: 'isFile'
                     },
                     {
-                      expand: true,
-                      cwd: 'bower_components/ng-file-upload/',
-                      src: ['ng-file-upload.js'],
-                      dest: 'app/static/js/angular',
-                      filter: 'isFile'
+                        expand: true,
+                        cwd: 'bower_components/ng-file-upload/',
+                        src: ['ng-file-upload.js'],
+                        dest: 'app/static/js/angular',
+                        filter: 'isFile'
                     },
                     {
-                      expand: true,
-                      cwd: 'bower_components/tc-angular-chartjs/dist',
-                      src: ['tc-angular-chartjs.js'],
-                      dest: 'app/static/js/angular/',
-                      filter: 'isFile'
+                        expand: true,
+                        cwd: 'bower_components/tc-angular-chartjs/dist',
+                        src: ['tc-angular-chartjs.js'],
+                        dest: 'app/static/js/angular/',
+                        filter: 'isFile'
                     },
                     {
-                      expand: true,
-                      cwd: 'bower_components/Chart.js',
-                      src: ['Chart.js'],
-                      dest: 'app/static/js/',
-                      filter: 'isFile'
+                        expand: true,
+                        cwd: 'bower_components/Chart.js',
+                        src: ['Chart.js'],
+                        dest: 'app/static/js/',
+                        filter: 'isFile'
                     },
                     {
-                      expand: true,
-                      cwd: 'bower_components/angulartics/src',
-                      src: ['angulartics.js'],
-                      dest: 'app/static/js/angular',
-                      filter: 'isFile'
+                        expand: true,
+                        cwd: 'bower_components/angulartics/src',
+                        src: ['angulartics.js'],
+                        dest: 'app/static/js/angular',
+                        filter: 'isFile'
                     },
                     {
-                      expand: true,
-                      cwd: 'bower_components/angulartics/src',
-                      src: ['angulartics-ga.js'],
-                      dest: 'app/static/js/angular',
-                      filter: 'isFile'
+                        expand: true,
+                        cwd: 'bower_components/angulartics/src',
+                        src: ['angulartics-ga.js'],
+                        dest: 'app/static/js/angular',
+                        filter: 'isFile'
                     },
                     {
-                      expand: true,
-                      cwd: 'bower_components/angular-xeditable/dist/js/',
-                      src: ['xeditable.js'],
-                      dest: 'app/static/js/angular',
-                      filter: 'isFile'
+                        expand: true,
+                        cwd: 'bower_components/angular-xeditable/dist/js/',
+                        src: ['xeditable.js'],
+                        dest: 'app/static/js/angular',
+                        filter: 'isFile'
                     },
                     {
-                      expand: true,
-                      cwd: 'bower_components/angular-xeditable/dist/css/',
-                      src: ['xeditable.css'],
-                      dest: 'app/static/css/',
-                      filter: 'isFile'
+                        expand: true,
+                        cwd: 'bower_components/angular-xeditable/dist/css/',
+                        src: ['xeditable.css'],
+                        dest: 'app/static/css/',
+                        filter: 'isFile'
                     },
                     {
                         expand: true,
@@ -332,60 +332,130 @@ module.exports = function(grunt) {
                 ]
             },
             modeSquStudentCloud: {
-              files: [
-                {
-                  expand: true,
-                  cwd: 'app/scripts/configs/modes/',
-                  src: ['squ-student-cloud.js'],
-                  dest: 'app/scripts/configs/',
-                  filter: 'isFile',
-                  rename: function(dest) {
-                    return dest + 'mode-config.js';
-                  }
-                }
-              ]
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'app/scripts/configs/modes/',
+                        src: ['squ-student-cloud.js'],
+                        dest: 'app/scripts/configs/',
+                        filter: 'isFile',
+                        rename: function(dest) {
+                            return dest + 'mode-config.js';
+                        }
+                    }
+                ]
             },
             modePublicBrokerage: {
-              files: [
-                {
-                  expand: true,
-                  cwd: 'app/scripts/configs/modes/',
-                  src: ['public-brokerage.js'],
-                  dest: 'app/scripts/configs/',
-                  filter: 'isFile',
-                  rename: function(dest) {
-                    return dest + 'mode-config.js';
-                  }
-                }
-              ]
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'app/scripts/configs/modes/',
+                        src: ['public-brokerage.js'],
+                        dest: 'app/scripts/configs/',
+                        filter: 'isFile',
+                        rename: function(dest) {
+                            return dest + 'mode-config.js';
+                        }
+                    }
+                ]
             },
             modeCostTracking: {
-              files: [
-                {
-                  expand: true,
-                  cwd: 'app/scripts/configs/modes/',
-                  src: ['cost-tracking.js'],
-                  dest: 'app/scripts/configs/',
-                  filter: 'isFile',
-                  rename: function(dest) {
-                    return dest + 'mode-config.js';
-                  }
-                }
-              ]
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'app/scripts/configs/modes/',
+                        src: ['cost-tracking.js'],
+                        dest: 'app/scripts/configs/',
+                        filter: 'isFile',
+                        rename: function(dest) {
+                            return dest + 'mode-config.js';
+                        }
+                    }
+                ]
             },
             modeDevelop: {
-              files: [
-                {
-                  expand: true,
-                  cwd: 'app/scripts/configs/modes/',
-                  src: ['develop.js'],
-                  dest: 'app/scripts/configs/',
-                  filter: 'isFile',
-                  rename: function(dest) {
-                    return dest + 'mode-config.js';
-                  }
-                }
-              ]
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'app/scripts/configs/modes/',
+                        src: ['develop.js'],
+                        dest: 'app/scripts/configs/',
+                        filter: 'isFile',
+                        rename: function(dest) {
+                            return dest + 'mode-config.js';
+                        }
+                    }
+                ]
+            },
+            testModePrivateIaas: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'app/scripts/configs/modes/',
+                        src: ['private-iaas.js'],
+                        dest: 'app/scripts/configs/test/',
+                        filter: 'isFile',
+                        rename: function(dest) {
+                            return dest + 'mode-config.js';
+                        }
+                    }
+                ]
+            },
+            testModeSquStudentCloud: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'app/scripts/configs/modes/',
+                        src: ['squ-student-cloud.js'],
+                        dest: 'app/scripts/configs/test/',
+                        filter: 'isFile',
+                        rename: function(dest) {
+                            return dest + 'mode-config.js';
+                        }
+                    }
+                ]
+            },
+            testModePublicBrokerage: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'app/scripts/configs/modes/',
+                        src: ['public-brokerage.js'],
+                        dest: 'app/scripts/configs/test/',
+                        filter: 'isFile',
+                        rename: function(dest) {
+                            return dest + 'mode-config.js';
+                        }
+                    }
+                ]
+            },
+            testModeCostTracking: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'app/scripts/configs/modes/',
+                        src: ['cost-tracking.js'],
+                        dest: 'app/scripts/configs/test/',
+                        filter: 'isFile',
+                        rename: function(dest) {
+                            return dest + 'mode-config.js';
+                        }
+                    }
+                ]
+            },
+            testModeDevelop: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'app/scripts/configs/modes/',
+                        src: ['develop.js'],
+                        dest: 'app/scripts/configs/test/',
+                        filter: 'isFile',
+                        rename: function(dest) {
+                            return dest + 'mode-config.js';
+                        }
+                    }
+                ]
             }
         },
 
@@ -398,28 +468,6 @@ module.exports = function(grunt) {
             daemonize: {
                 options: {
                     keepAlive: true
-                }
-            }
-        },
-
-        protractor: {
-            options: {
-                configFile: 'test/protractor.conf.js', // Default config file
-                keepAlive: false, // If false, the grunt process stops when the test fails.
-                noColor: false // If true, protractor will not use colors in its output.
-            },
-            test: {
-                options: {
-                    args: {
-                        baseUrl: 'http://localhost:' + testPort
-                    }
-                }
-            },
-            fasttest: {
-                options: {
-                    args: {
-                        baseUrl: 'http://localhost:' + basePort
-                    }
                 }
             }
         },
@@ -437,8 +485,8 @@ module.exports = function(grunt) {
                 }
             },
             css: {
-              files: ['app/static/css/*.css', '!app/static/css/style.min.css'],
-              tasks: ['cssmin'],
+                files: ['app/static/css/*.css', '!app/static/css/style.min.css'],
+                tasks: ['cssmin'],
             },
             autoprefixer: {
                 files: 'assets/css/**',
@@ -456,8 +504,8 @@ module.exports = function(grunt) {
                 }
             },
             index: {
-              files: 'app/index-template.html',
-              tasks: ['preprocess:index']
+                files: 'app/index-template.html',
+                tasks: ['preprocess:index']
             }
         },
 
@@ -479,7 +527,14 @@ module.exports = function(grunt) {
             server: {},
             test: {
                 options: {
-                    port: testPort,
+                    base: {
+                        path: 'app',
+                        options: {
+                            index: 'test.html',
+                            maxAge: 300000
+                        }
+                    },
+                    port: testPort
                 }
             }
         },
@@ -498,7 +553,7 @@ module.exports = function(grunt) {
                     pretty: true
                 },
                 files: {
-                  'app/static/js/i18n/': ['i18n/*.po']
+                    'app/static/js/i18n/': ['i18n/*.po']
                 }
             }
         },
@@ -559,12 +614,105 @@ module.exports = function(grunt) {
             },
             prod : {
                 NODE_ENV: 'PRODUCTION'
+            },
+            test: {
+                NODE_ENV: 'TEST'
             }
         },
         preprocess: {
             index: {
                 src: 'app/index-template.html',
                 dest: 'app/index.html'
+            },
+            test: {
+                src: 'app/index-template.html',
+                dest: 'app/test.html'
+            }
+        },
+
+        protractor: {
+            options: {
+                configFile: "test/protractor.conf.js", // Default config file
+                keepAlive: false, // If false, the grunt process stops when the test fails.
+                noColor: false, // If true, protractor will not use colors in its output.
+                args: {}
+            },
+            test: {
+                options: {
+                    args: {
+                        baseUrl: 'http://localhost:' + testPort
+                    }
+                }
+            },
+            fasttest: {
+                options: {
+                    args: {
+                        baseUrl: 'http://localhost:' + testPort
+                    }
+                }
+            },
+            testModeDevelop: {
+                options: {
+                    configFile: "test/protractor.conf.js",
+                    keepAlive: false,
+                    args: {
+                        baseUrl: 'http://localhost:' + testPort,
+                        suite: 'develop'
+                    }
+                }
+            },
+            testModeCostTracking: {
+                options: {
+                    configFile: "test/protractor.conf.js",
+                    keepAlive: false,
+                    args: {
+                        baseUrl: 'http://localhost:' + testPort,
+                        suite: 'costTracking'
+                    }
+                }
+            },
+            testModePrivateIaas: {
+                options: {
+                    configFile: "test/protractor.conf.js",
+                    keepAlive: false,
+                    args: {
+                        baseUrl: 'http://localhost:' + testPort,
+                        suite: 'privateIaas'
+                    }
+                }
+            },
+            testModePublicBrokerage: {
+                options: {
+                    configFile: "test/protractor.conf.js",
+                    keepAlive: false,
+                    args: {
+                        baseUrl: 'http://localhost:' + testPort,
+                        suite: 'publicBrokerage'
+                    }
+                }
+            },
+            testModeSquStudentCloud: {
+                options: {
+                    configFile: "test/protractor.conf.js",
+                    keepAlive: false,
+                    args: {
+                        baseUrl: 'http://localhost:' + testPort,
+                        suite: 'squStudentCloud'
+                    }
+                }
+            }
+        },
+        // server for testing purposes
+        express: {
+            options: {
+                // Override defaults here
+                background: true
+            },
+            test: {
+                options: {
+                    background: true,
+                    script: 'test/server.js'
+                }
             }
         }
 
@@ -574,31 +722,80 @@ module.exports = function(grunt) {
 
     var mode = grunt.option('mode') || 'modeDevelop';
 
-    grunt.registerTask(
-        'build', ['copy:main', 'imagemin', 'sass', 'autoprefixer', 'cssmin']);
-    grunt.registerTask(
-        'run', ['copy:main', 'env:dev', 'preprocess:index', 'connect:server', 'imagemin', 'sass', 'autoprefixer',
-        'copy:' + mode, 'focus:dev']);
-    grunt.registerTask('serve', ['connect',]);
-    grunt.registerTask('default', ['run']);
-    grunt.registerTask('test',
-        ['connect:test', 'imagemin', 'sass', 'autoprefixer', 'protractor_webdriver:test', 'protractor:test']);
-
     grunt.loadNpmTasks('grunt-angular-gettext');
     grunt.loadNpmTasks('grunt-po2json-angular-translate');
+    grunt.loadNpmTasks('grunt-protractor-runner');
+
+    grunt.registerTask(
+      'build', ['copy:main', 'imagemin', 'sass', 'autoprefixer', 'cssmin']);
+    grunt.registerTask(
+      'run', ['copy:main', 'env:dev', 'preprocess:index', 'connect:server', 'imagemin', 'sass', 'autoprefixer',
+          'copy:' + mode, 'focus:dev']);
+    grunt.registerTask('serve', ['connect',]);
+    grunt.registerTask('default', ['run']);
 
     grunt.registerTask(
       'prod', ['copy:main', 'env:prod', 'preprocess:index', 'imagemin', 'sass', 'autoprefixer', 'concat',
-        'uglify', 'cssmin', 'focus:prod']);
+          'uglify', 'cssmin', 'focus:prod']);
 
     grunt.registerTask(
       'prodbatch', ['copy:main', 'copy:' + mode, 'env:prod', 'preprocess:index', 'imagemin', 'sass', 'autoprefixer', 'concat',
-        'uglify', 'cssmin']);
+          'uglify', 'cssmin']);
 
     grunt.registerTask('modePrivateIaas', ['copy:modePrivateIaas']);
     grunt.registerTask('modeSquStudentCloud', ['copy:modeSquStudentCloud']);
     grunt.registerTask('modePublicBrokerage', ['copy:modePublicBrokerage']);
     grunt.registerTask('modeCostTracking', ['copy:modeCostTracking']);
     grunt.registerTask('modeDevelop', ['copy:modeDevelop']);
+
+    // tasks for testing
+    grunt.registerTask(
+      'testModes', ['copy:main', 'env:test', 'preprocess:test', 'connect:test', 'imagemin', 'sass', 'autoprefixer',
+          'express:test',
+          'copy:testModeDevelop', 'protractor:testModeDevelop',
+          'copy:testModeCostTracking', 'protractor:testModeCostTracking',
+          'copy:testModePrivateIaas', 'protractor:testModePrivateIaas',
+          'copy:testModePublicBrokerage', 'protractor:testModePublicBrokerage',
+          'copy:testModeSquStudentCloud', 'protractor:testModeSquStudentCloud'
+      ]);
+
+    grunt.registerTask(
+      'testModeDevelop', ['copy:main', 'env:test', 'preprocess:test', 'connect:test', 'imagemin', 'sass', 'autoprefixer',
+          'express:test',
+          'copy:testModeDevelop', 'protractor:testModeDevelop'
+      ]);
+
+    grunt.registerTask(
+      'testModeCostTracking', ['copy:main', 'env:test', 'preprocess:test', 'connect:test', 'imagemin', 'sass', 'autoprefixer',
+          'express:test',
+          'copy:testModeCostTracking', 'protractor:testModeCostTracking'
+      ]);
+
+    grunt.registerTask(
+      'testModePrivateIaas', ['copy:main', 'env:test', 'preprocess:test', 'connect:test', 'imagemin', 'sass', 'autoprefixer',
+          'express:test',
+          'copy:testModePrivateIaas', 'protractor:testModePrivateIaas'
+      ]);
+
+    grunt.registerTask(
+      'testModePublicBrokerage', ['copy:main', 'env:test', 'preprocess:test', 'connect:test', 'imagemin', 'sass', 'autoprefixer',
+          'express:test',
+          'copy:testModePublicBrokerage', 'protractor:testModePublicBrokerage'
+      ]);
+
+    grunt.registerTask(
+      'testModeSquStudentCloud', ['copy:main', 'env:test', 'preprocess:test', 'connect:test', 'imagemin', 'sass', 'autoprefixer',
+          'express:test',
+          'copy:testModeSquStudentCloud', 'protractor:testModeSquStudentCloud'
+      ]);
+
+    // to run testing environment manually if needed. node server should be launched separately
+    grunt.registerTask(
+      'runTest', ['copy:main', 'env:test', 'preprocess:test', 'connect:test', 'imagemin', 'sass', 'autoprefixer',
+          'copy:' + mode, 'focus:dev']);
+
+    // old test task
+    grunt.registerTask('test',
+      ['connect:test', 'imagemin', 'sass', 'autoprefixer', 'protractor:test']);
 
 };
