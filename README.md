@@ -126,4 +126,3 @@ See `docs/development_guideline.md` for development policies.
 [5]: https://code.opennodecloud.com/nc-saas/ncplus/blob/develop/README.rst
 [6]: http://angular.github.io/protractor/#/tutorial
 [7]: https://github.com/teerapap/grunt-protractor-runner/issues/111
-[8]: http://nodeconductor.readthedocs.org/en/stable/developer/sample-data.html
