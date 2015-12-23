@@ -342,6 +342,7 @@
         this.cacheTime = ENV.dashboardEventsCacheTime;
         this._super();
         this.activeTab = 'activity';
+        this.alertsHelpKey = ENV.dashboardHelp.alertsList.name;
         this.chartOptions = {
           responsive: true,
           scaleShowVerticalLines: false,
@@ -350,7 +351,6 @@
         };
 
         this.checkQuotas = 'project';
-        this.alertIconsHelper = alertsService.getAvailableIconTypes();
 
         this.activate();
         this.resizeControl();

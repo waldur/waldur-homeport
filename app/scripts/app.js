@@ -860,6 +860,9 @@
             },
             'sshKeys@help.details': {
               templateUrl: 'views/help/ssh-keys.html',
+            },
+            'alertsList@help.details': {
+              templateUrl: 'views/help/alerts-list.html',
             }
           },
           resolve: {

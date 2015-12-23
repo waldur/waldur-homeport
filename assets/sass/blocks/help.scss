@@ -9,6 +9,11 @@
     @extend .instruction-image;
     padding-left: 10px;
   }
+  .instruction-content-alerts {
+    .left-padding {
+      padding-left: 10px;
+    }
+  }
 }
 pre.code {
   background-color: #FFFAE5;

@@ -3,10 +3,13 @@
         <h1>Obtaining credentials for {{ HelpDetails.model.name }}</h1>
     </div>
     <div class="white-box">
-        <div class="instruction-page" ng-if="HelpDetails.model.type !== 'sshKeys' && HelpDetails.model.type !== 'providers'">
+        <div class="instruction-page" ng-if="HelpDetails.model.type !== 'sshKeys'
+        && HelpDetails.model.type !== 'providers'
+        && HelpDetails.model.type !== 'alertsList'">
             Help page is not available
         </div>
         <div class="instruction-page" ng-if="HelpDetails.model.type == 'sshKeys'" ui-view="sshKeys"></div>
+        <div class="instruction-page" ng-if="HelpDetails.model.type == 'alertsList'" ui-view="alertsList"></div>
         <div class="instruction-page" ng-if="HelpDetails.model.type == 'providers'">
             <div class="">
                 <image-box image="static/images/help/{{ HelpDetails.model.name.toLowerCase() }}_tokens.png"></image-box>

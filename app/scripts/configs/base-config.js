@@ -63,6 +63,13 @@ angular.module('ncsaas')
     ],
     IntercomAppId: 'xfbbcxck',
     defaultListCacheTime: 60 * 10,
+    dashboardHelp: {
+      alertsList: {
+        type: 'alertsList',
+        name: 'alerts',
+        title: 'Alerts messages on dashboard, resource and customer details pages'
+      }
+    },
     profileHelp: {
       sshKeys: {
         type: 'sshKeys',

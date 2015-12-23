@@ -68,15 +68,13 @@
     </div>
     <div class="half-block">
         <div class="alerts-list">
-            <h3 ng-click="alertsTooltip = !alertsTooltip">Alerts <a class="support" title="Support"></a></h3>
-            <div ng-show="alertsTooltip" class="tooltip quota-tooltip">
-                <div class="tooltip-title">
-                    <div class="close" ng-click="alertsTooltip = false"></div>
-                    <div class="clear"></div>
+            <div>
+                <h3 class="alerts-header">Alerts</h3>
+                <div  class="alerts-helper-link" visible="premiumSupport">
+                    <a stoppropagation class="button-support pending" target="_blank"
+                       ui-sref="help.details({name: DashboardController.alertsHelpKey})">Get help</a>
                 </div>
-                <div ng-repeat="alert in DashboardController.alertIconsHelper">
-                    <div class="icon" ng-class="::alert[0]"><span class="left-padding" ng-bind-html="::alert[1]"></span></div>
-                </div>
+                <div class="clear"></div>
             </div>
             <div class="white-box" block-ui="dashboard-alerts-list">
                 <ul>

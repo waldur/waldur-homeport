@@ -36,5 +36,21 @@
                 </div>
             </li>
         </ul>
+        <ul class="object-list" ng-if="HelpList.dashboardList">
+            <li class="list-item list-header">
+                <div class="additional-cell display-for-mobile">
+                    <a class="list-sort">Dashboard</a>
+                </div>
+            </li>
+            <li class="list-item" ng-if="HelpList.dashboardList.alertsList.name">
+                <div class="additional-cell display-for-mobile">
+                    <h3 class="item-title">
+                        <a ui-sref="help.details({name: HelpList.dashboardList.alertsList.name})" stoppropagation>
+                            {{ HelpList.dashboardList.alertsList.title }}
+                        </a>
+                    </h3>
+                </div>
+            </li>
+        </ul>
     </div>
 </div>

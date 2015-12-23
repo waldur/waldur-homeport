@@ -2,9 +2,9 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('alertsService', ['baseServiceClass', 'ENV', 'ALERT_ICONS_TYPES', alertsService]);
+    .service('alertsService', ['baseServiceClass', 'ENV', 'ALERT_ICONS_TYPES', 'ALERT_TEMPLATES', alertsService]);
 
-  function alertsService(baseServiceClass, ENV, ALERT_ICONS_TYPES) {
+  function alertsService(baseServiceClass, ENV, ALERT_ICONS_TYPES, ALERT_TEMPLATES) {
     var ServiceClass = baseServiceClass.extend({
       init: function() {
         this._super();
@@ -23,12 +23,26 @@
       },
       getAvailableIconTypes: function() {
         var icons = [],
-            icon;
+            icon,
+            descriptions = [],
+            description;
         for (var i in ALERT_ICONS_TYPES) {
-          if (ENV.toBeFeatures.indexOf(i) == -1 && ALERT_ICONS_TYPES.hasOwnProperty(i)) {
+          if (ENV.toBeFeatures.indexOf(i) === -1 && ALERT_ICONS_TYPES.hasOwnProperty(i)) {
             icon = i.slice(0, -1);
-            icon = (icon == 'provider') ? 'service' : icon;
-            icons.push([icon, ALERT_ICONS_TYPES[i]]);
+            icon = (icon === 'provider') ? 'service' : icon;
+            for (var j in ALERT_TEMPLATES) {
+              description = ALERT_TEMPLATES[j]
+                .replace(/ {\w+}|\./gi, '');
+              description.replace('{'+ icon +'_name} ', '');
+              if (j.slice(0, icon.length) === icon
+                && ALERT_TEMPLATES.hasOwnProperty(j)
+                && descriptions.indexOf(description) === -1
+              ) {
+                descriptions.push(description);
+              }
+            }
+            icons.push([icon, ALERT_ICONS_TYPES[i], descriptions]);
+            descriptions = [];
           }
         }
         return icons;
@@ -53,7 +67,7 @@
   angular.module('ncsaas').constant('ALERT_ICONS_TYPES', {
     customers: 'Customers notifications',
     resources: 'Resources notifications',
-    providers: 'Services notifications'
+    providers: 'Providers notifications'
   });
 
   angular.module('ncsaas').constant('ALERT_ICONS', {
