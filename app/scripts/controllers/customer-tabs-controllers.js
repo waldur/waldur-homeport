@@ -392,11 +392,18 @@
           },
           list: [
             {
-              name: 'Invoice ID',
+              name: 'Invoice code',
               propertyName: 'uuid',
               type: ENTITYLISTFIELDTYPES.trimmed,
               showForMobile: true,
               limit: 6
+            },
+            {
+              name: 'PDF file',
+              propertyName: 'pdf',
+              link: 'Download PDF',
+              type: ENTITYLISTFIELDTYPES.staticLink,
+              showForMobile: true
             },
             {
               name: 'Amount',

@@ -37,6 +37,7 @@
       dateCreated: 'dateCreated',
       name: 'name',
       link: 'link',
+      staticLink: 'staticLink',
       entityAccessInfoField: 'entityAccessInfo',
       entityStatusField: 'entityStatus',
       listInField: 'listInField',
