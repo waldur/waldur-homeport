@@ -16,11 +16,8 @@ exports.config = {
   },
   capabilities: {
     browserName: 'chrome',
-    capabilities: {
-      browserName: 'chrome',
-      chromeOptions: {
-        args: ['--no-sandbox', '--test-type=browser']
-      }
+    chromeOptions: {
+      args: ['--no-sandbox', '--test-type=browser']
     }
   },
 
