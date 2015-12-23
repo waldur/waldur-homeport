@@ -270,7 +270,18 @@
           vm.list[index] = response;
           vm.afterGetList();
         });
-      }
+      },
+      remove: function(model) {
+        var vm = this.controllerScope;
+        var confirmText = 'Are you sure you want to delete a {resource_type} in an erred state?' +
+          ' A cleanup attempt will be performed if you choose so.';
+        var confirmDelete = confirm(confirmText.replace('{resource_type}', model.resource_type));
+        if (confirmDelete) {
+          vm.removeInstance(model).then(function() {
+            vm.afterInstanceRemove(model);
+          }, vm.handleActionException.bind(vm));
+        }
+      },
     });
 
     return ControllerListClass;

@@ -60,6 +60,7 @@
         var state = resource.state.toLowerCase();
         if (state === 'online') {return ['stop', 'restart'];}
         if (state === 'offline') {return ['start', 'delete'];}
+        if (state === 'erred') {return ['delete'];}
         return [];
       },
 
