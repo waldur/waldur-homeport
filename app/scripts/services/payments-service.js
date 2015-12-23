@@ -9,7 +9,7 @@
     var ServiceClass = baseServiceClass.extend({
       init:function() {
         this._super();
-        this.endpoint = '/payments/';
+        this.endpoint = '/paypal-payments/';
         this.filterByCustomer = false;
       }
     });
