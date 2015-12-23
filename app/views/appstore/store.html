@@ -95,6 +95,9 @@
                                         <helpicon help-text="{{ field.help_text }}" ng-if="field.help_text"></helpicon>
                                         {{ field.label }}
                                     </label>
+
+                                    <!--XXX: fix for SAAS-1022 task-->
+                                    <input ng-if="field.name === 'password'" ng-hide="true" type="password" id="dummyPassword" />
                                     <input ng-if="field.name === 'password'" class="appstore-password" type="password" id="{{ field.name }}" ng-model="AppStore.instance[field.name]"/>
                                     <label ng-if="field.name === 'password'" for="repeat_password">
                                         Repeat password
