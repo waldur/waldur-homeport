@@ -1,8 +1,8 @@
 <section block-ui="{{ ::expandableElement.uuid }}">
     <div class="success-message" ng-if="expandableList.getClass(expandableElement.state) == 'processing'">Please wait few minutes until service provisioning is completed.</div>
 
-    <div ng-if="expandableElement.error_message && expandableElement.state == 'Erred'" class="error-message">
-        {{ ::expandableElement.error_message }}
+    <div ng-if="expandableElement.state == 'Erred'" class="error-message">
+        {{ ::expandableElement.error_message || expandableList.defaultErrorMessage }}
     </div>
 
     <header>

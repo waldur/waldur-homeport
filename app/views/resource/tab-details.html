@@ -1,5 +1,5 @@
-<div ng-if="controller.model.state == 'Erred' && controller.model.error_message" class="error-message">
-    {{ controller.model.error_message }}
+<div ng-if="controller.model.state == 'Erred'" class="error-message">
+    {{ controller.model.error_message || controller.defaultErrorMessage }}
 </div>
 
 <div ng-if="controller.inProgress">
