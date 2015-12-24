@@ -2,8 +2,6 @@
   angular.module('ncsaas')
     .controller('CustomerServiceTabController', [
       '$stateParams',
-      '$interval',
-      '$scope',
       'baseServiceListController',
       'joinService',
       'servicesService',
@@ -16,8 +14,6 @@
 
   function CustomerServiceTabController(
     $stateParams,
-    $interval,
-    $scope,
     baseServiceListController,
     joinService,
     servicesService,
@@ -27,6 +23,8 @@
     ENV) {
     var controllerScope = this;
     var Controller = baseServiceListController.extend({
+      defaultErrorMessage: "Reason unknown, please contact support",
+
       init: function() {
         this.controllerScope = controllerScope;
         this.service = joinService;
