@@ -51,6 +51,15 @@
                     </h3>
                 </div>
             </li>
+            <li class="list-item" ng-if="HelpList.dashboardList.eventsList.name">
+                <div class="additional-cell display-for-mobile">
+                    <h3 class="item-title">
+                        <a ui-sref="help.details({name: HelpList.dashboardList.eventsList.name})" stoppropagation>
+                            {{ HelpList.dashboardList.eventsList.title }}
+                        </a>
+                    </h3>
+                </div>
+            </li>
         </ul>
     </div>
 </div>

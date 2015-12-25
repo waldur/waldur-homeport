@@ -40,12 +40,16 @@
     font-size: 14px;
 
     &.pending {
-      border: 1px solid $button-green;
-      background-color: white;
-      color: $button-green;
-      @include bp(xs) {
-          margin-right: 5px;
-      }
+        border: 1px solid $button-green;
+        background-color: white;
+        color: $button-green;
+        &:hover {
+            background-color: $button-green;
+            color: white;
+        }
+        @include bp(xs) {
+            margin-right: 5px;
+        }
     }
 }
 .button-cancel {

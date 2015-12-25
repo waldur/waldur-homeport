@@ -67,7 +67,12 @@ angular.module('ncsaas')
       alertsList: {
         type: 'alertsList',
         name: 'alerts',
-        title: 'Alerts messages on dashboard, resource and customer details pages'
+        title: 'Alerts'
+      },
+      eventsList: {
+        type: 'eventsList',
+        name: 'events',
+        title: 'Events'
       }
     },
     profileHelp: {

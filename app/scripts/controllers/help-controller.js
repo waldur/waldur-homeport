@@ -22,9 +22,20 @@
 (function() {
 
   angular.module('ncsaas')
-    .controller('HelpDetailsController', ['baseControllerClass', 'ENV', '$stateParams', 'alertsService', HelpDetailsController]);
+    .controller('HelpDetailsController', [
+      'baseControllerClass',
+      'ENV',
+      '$stateParams',
+      'alertsService',
+      'eventsService',
+      HelpDetailsController]);
 
-  function HelpDetailsController(baseControllerClass, ENV, $stateParams, alertsService) {
+  function HelpDetailsController(
+    baseControllerClass,
+    ENV,
+    $stateParams,
+    alertsService,
+    eventsService) {
     var controllerScope = this;
     var Controller = baseControllerClass.extend({
       init: function() {
@@ -39,6 +50,11 @@
         if ($stateParams.name === ENV.dashboardHelp.alertsList.name) {
           this.model = ENV.dashboardHelp.alertsList;
           this.model.types = alertsService.getAvailableIconTypes();
+          return;
+        }
+        if ($stateParams.name === ENV.dashboardHelp.eventsList.name) {
+          this.model = ENV.dashboardHelp.eventsList;
+          this.model.types = eventsService.getAvailableIconTypes();
           return;
         }
         var list = ENV.helpList;

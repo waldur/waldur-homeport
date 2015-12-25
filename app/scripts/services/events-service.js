@@ -2,12 +2,12 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('eventsService', ['baseServiceClass', 'ENV', eventsService]);
+    .service('eventsService', ['baseServiceClass', 'ENV', 'EVENT_ICONS_TYPES', 'EVENT_TEMPLATES', eventsService]);
 
-  function eventsService(baseServiceClass, ENV) {
+  function eventsService(baseServiceClass, ENV, EVENT_ICONS_TYPES, EVENT_TEMPLATES) {
     /*jshint validthis: true */
     var ServiceClass = baseServiceClass.extend({
-      init:function() {
+      init: function() {
         this._super();
         this.endpoint = '/events/';
         this.filterByCustomer = false;
@@ -17,6 +17,30 @@
         if (!ENV.featuresVisible) {
           this.defaultFilter.exclude_features = ENV.toBeFeatures;
         }
+      },
+      getAvailableIconTypes: function() {
+        var icons = [],
+          icon,
+          descriptions = [],
+          description;
+        for (var i in EVENT_ICONS_TYPES) {
+          if (ENV.toBeFeatures.indexOf(i) === -1 && EVENT_ICONS_TYPES.hasOwnProperty(i)) {
+            icon = EVENT_ICONS_TYPES[i][1];
+            icon = (icon === 'provider') ? 'service' : icon;
+            for (var j in EVENT_TEMPLATES) {
+              description = EVENT_TEMPLATES[j].replace(/\s*{\w+}|\./gi, '');
+              description.replace('{' + icon + '_name} ', '');
+              if (j.split('_')[0] === i && EVENT_TEMPLATES.hasOwnProperty(j)
+                  && descriptions.indexOf(description) === -1
+              ) {
+                descriptions.push(description);
+              }
+            }
+            icons.push([icon, EVENT_ICONS_TYPES[i][0], descriptions]);
+            descriptions = [];
+          }
+        }
+        return icons;
       }
     });
     return new ServiceClass();
@@ -120,11 +144,28 @@
     };
     angular.module('ncsaas').constant('EVENT_TEMPLATES', templates);
 
-    var types = {};
-    for(var key in templates) {
-        types[key] = key;
-    }
-    angular.module('ncsaas').constant('EVENTTYPE', types);
+  angular.module('ncsaas').constant('EVENT_ICONS_TYPES', {
+    auth: ['Auth events', 'user'],
+    customer: ['Customers events', 'customer'],
+    iaas: ['Iaas events', 'resource'],
+    invoice: ['Invoices events', 'customer'],
+    payment: ['Payments events', 'customer'],
+    project: ['Projects events', 'project'],
+    quota: ['Quotas events', 'customer'],
+    resource: ['Resources events', 'resource'],
+    role: ['Roles events', 'user'],
+    service: ['Providers events', 'service'],
+    ssh: ['Ssh keys events', 'key'],
+    template: ['Templates keys events', 'resource'],
+    user: ['Users keys events', 'user'],
+    zabbix: ['Zabbix host keys events', 'resource']
+  });
+
+  var types = {};
+  for (var key in templates) {
+    types[key] = key;
+  }
+  angular.module('ncsaas').constant('EVENTTYPE', types);
 })();
 
 (function() {
@@ -379,7 +420,7 @@ angular.module('ncsaas').constant('EVENT_ICONS', {
             },
             templateFields: {},
             findFields: function(template) {
-                // Input: 
+                // Input:
                 // "User {affected_user_username} has gained role of {role_name} in {project_name}."
                 // Output:
                 // ["affected_user_username", "role_name", "project_name"]
