@@ -224,6 +224,10 @@
                             </span>
                             <div stoppropagation class="icon pencil-square-o" ng-click="rowform.$show()" ng-hide="rowform.$visible"></div>
                         </span>
+                        
+                        <a ng-switch-when="staticIconLink" href="{{ entity[field.propertyName] }}">
+                            <div class="icon {{ ::field.iconClass }}"></div>
+                        </a>
 
                         <span ng-switch-when="html" ng-bind-html="::entity[field.propertyName]"></span>
 

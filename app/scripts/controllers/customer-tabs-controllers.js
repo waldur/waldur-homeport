@@ -399,13 +399,6 @@
               limit: 6
             },
             {
-              name: 'PDF file',
-              propertyName: 'pdf',
-              link: 'Download PDF',
-              type: ENTITYLISTFIELDTYPES.staticLink,
-              showForMobile: true
-            },
-            {
               name: 'Amount',
               propertyName: 'total_amount',
               type: ENTITYLISTFIELDTYPES.linkOrText,
@@ -422,6 +415,14 @@
               propertyName: 'end_date',
               type: ENTITYLISTFIELDTYPES.dateShort,
               showForMobile: true
+            },
+            {
+              name: '',
+              propertyName: 'pdf',
+              iconClass: 'fa-file-pdf-o',
+              type: ENTITYLISTFIELDTYPES.staticIconLink,
+              showForMobile: true,
+              className: 'pdf-icon'
             }
           ]
         };
