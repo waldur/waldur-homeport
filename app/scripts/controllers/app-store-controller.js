@@ -17,6 +17,7 @@
       'ncUtilsFlash',
       'projectsService',
       'keysService',
+      'gitlabGroupsService',
       AppStoreController]);
 
   function AppStoreController(
@@ -35,7 +36,8 @@
     resourcesService,
     ncUtilsFlash,
     projectsService,
-    keysService) {
+    keysService,
+    gitlabGroupsService) {
     var controllerScope = this;
     var Controller = baseControllerAddClass.extend({
       UNIQUE_FIELDS: {
@@ -185,16 +187,23 @@
             var formOptions = response.actions.POST;
             vm.allFormOptions = formOptions;
             return vm.getValidChoices().then(function(validChoices) {
-              keysService.getCurrentUserKeyList().then(function(result) {
+              var gitlabGroupsPromise = gitlabGroupsService.getList();
+              var sshKeysPromise = keysService.getCurrentUserKeyList();
+
+              $q.all([gitlabGroupsPromise, sshKeysPromise]).then(function(result) {
                 validChoices.sshPublicKeys = [];
-                result.forEach(function(item) {
+                validChoices.group = [];
+                result[0].forEach(function(item) {
+                  validChoices.group.push(item);
+                });
+                result[1].forEach(function(item) {
                   validChoices.sshPublicKeys.push(item);
                 });
                 vm.setFields(formOptions, validChoices);
               });
             });
+            ncUtils.blockElement('resource-properties', promise);
           });
-          ncUtils.blockElement('resource-properties', promise);
         }
       },
       getValidChoices: function() {
@@ -391,6 +400,8 @@
         } else if (name === 'ssh_public_key') {
           this.instance[name] = choice.url;
           this.instance[name + '_item'] = choice
+        } else if (name === 'group') {
+          this.instance[name] = choice.url;
         } else {
           this.instance[name] = choice.value;
           this.instance[name + '_item'] = choice.item;
@@ -415,8 +426,12 @@
       },
       isChosen: function(name, choice) {
         var value = (name == 'ssh_public_key') ? choice.url : choice.value;
+        value = (name == 'group') ? this.instance[name] : value;
         if (value == undefined) {
           return false;
+        }
+        if (name == 'group' && this.instance[name]) {
+          return choice.url === this.instance[name];
         }
         if (name == 'security_groups') {
           var vals = this.instance[name];
