@@ -337,6 +337,9 @@
                     font-size: 10pt;
                 } // sm
             }
+            &.pdf-icon {
+                width: 30px;
+            }
         } // &.additional-cell
         .more-details {
             @include property(margin-left, 10);

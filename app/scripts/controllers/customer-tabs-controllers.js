@@ -390,10 +390,11 @@
           },
           list: [
             {
-              name: 'Invoice ID',
+              name: 'Invoice code',
               propertyName: 'uuid',
-              type: ENTITYLISTFIELDTYPES.name,
-              showForMobile: true
+              type: ENTITYLISTFIELDTYPES.trimmed,
+              showForMobile: true,
+              limit: 6
             },
             {
               name: 'Amount',
@@ -404,14 +405,22 @@
             {
               name: 'Start date',
               propertyName: 'start_date',
-              type: ENTITYLISTFIELDTYPES.dateCreated,
+              type: ENTITYLISTFIELDTYPES.dateShort,
               showForMobile: true
             },
             {
               name: 'End date',
               propertyName: 'end_date',
-              type: ENTITYLISTFIELDTYPES.dateCreated,
+              type: ENTITYLISTFIELDTYPES.dateShort,
               showForMobile: true
+            },
+            {
+              name: '',
+              propertyName: 'pdf',
+              iconClass: 'fa-file-pdf-o',
+              type: ENTITYLISTFIELDTYPES.staticIconLink,
+              showForMobile: true,
+              className: 'pdf-icon'
             }
           ]
         };
