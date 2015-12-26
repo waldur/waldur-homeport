@@ -184,8 +184,12 @@
                         <a ng-switch-when="link" ng-if="!field.link">
                             {{ entity[field.propertyName] }}
                         </a>
+                        <a ng-switch-when="staticLink" href="{{ entity[field.propertyName] }}">
+                            {{ field.link }}
+                        </a>
                         <span title="{{ ::entity[field.propertyName] | date:'medium' }}" ng-switch-when="date" am-time-ago="entity[field.propertyName]"></span>
                         <span ng-switch-when="dateCreated">{{ entity[field.propertyName] | date:'medium' }}</span>
+                        <span ng-switch-when="dateShort">{{ entity[field.propertyName] | date:'dd/MM/yyyy' }}</span>
 
                         <span ng-switch-when="listInField" ng-repeat="fieldListItem in entity[field.propertyName]">
                             {{ fieldListItem }}
@@ -220,8 +224,16 @@
                             </span>
                             <div stoppropagation class="icon pencil-square-o" ng-click="rowform.$show()" ng-hide="rowform.$visible"></div>
                         </span>
+                        
+                        <a ng-switch-when="staticIconLink" href="{{ entity[field.propertyName] }}">
+                            <div class="icon {{ ::field.iconClass }}"></div>
+                        </a>
 
                         <span ng-switch-when="html" ng-bind-html="::entity[field.propertyName]"></span>
+
+                        <span ng-switch-when="trimmed">
+                            {{ entity[field.propertyName] | limitTo : field.limit }}
+                        </span>
 
                         <span class="cell-default-span" ng-switch-default>
                             {{ entity[field.propertyName] ? entity[field.propertyName] : field.emptyText }}

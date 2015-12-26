@@ -37,6 +37,7 @@
       dateCreated: 'dateCreated',
       name: 'name',
       link: 'link',
+      staticIconLink: 'staticIconLink',
       entityAccessInfoField: 'entityAccessInfo',
       entityStatusField: 'entityStatus',
       listInField: 'listInField',
@@ -50,6 +51,8 @@
       subtitle: true,
       html: 'html',
       colorState: 'colorState',
-      bool: 'bool'
-    })
+      bool: 'bool',
+      trimmed: 'trimmed',
+      dateShort: 'dateShort'
+    });
 })();
