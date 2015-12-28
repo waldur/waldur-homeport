@@ -73,11 +73,7 @@
                                         <a ui-sref="resources.details({uuid: resource.uuid, resource_type: resource.resource_type})">{{ resource.name }}</a>
                                     </h3>
                                 </div>
-                                <div class="additional-cell" ng-if="resource.ram">
-                                    CPU: {{ resource.cores }}  /
-                                    RAM: {{ resource.ram | mb2gb }} /
-                                    HDD: {{ resource.disk | mb2gb }}
-                                </div>
+                                <div class="additional-cell" ng-if="resource.ram" ng-bind="ImportResource.getResourceDetails(resource)"></div>
                                 <div class="additional-cell" ng-if="resource.type">
                                     {{ resource.type }}
                                 </div>
@@ -109,11 +105,7 @@
                                         <a>{{ resource.name }}</a>
                                     </h3>
                                 </div>
-                                <div class="additional-cell" ng-if="resource.ram">
-                                    CPU: {{ resource.cores }}  /
-                                    RAM: {{ resource.ram | mb2gb }} /
-                                    HDD: {{ resource.disk | mb2gb }}
-                                </div>
+                                <div class="additional-cell" ng-if="resource.ram" ng-bind="ImportResource.getResourceDetails(resource)"></div>
                                 <div class="additional-cell" ng-if="resource.type">
                                     {{ resource.type }}
                                 </div>
