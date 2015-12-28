@@ -10,6 +10,7 @@
     'servicesService',
     'currentStateService',
     'projectsService',
+    'ncUtils',
     baseResourceListController
     ]);
 
@@ -21,7 +22,8 @@
     resourcesService,
     servicesService,
     currentStateService,
-    projectsService) {
+    projectsService,
+    ncUtils) {
     var ControllerListClass = baseControllerListClass.extend({
       init: function() {
         this.service = resourcesService;
@@ -29,7 +31,7 @@
         this._super();
         this.searchFieldName = 'name';
         this.selectAll = true;
-        this.hasFilters = false;
+        this.hasCustomFilters = false;
         var currentCustomerUuid = currentStateService.getCustomerUuid();
         this.actionButtonsListItems = [
           {
@@ -177,12 +179,18 @@
         var vm = this,
           resourcesCounts = null;
 
-        vm.service.defaultFilter.resource_type = [];
+        if (!this.hasCustomFilters) {
+          vm.service.defaultFilter.resource_type = [];
+        }
 
         return servicesService.getResourceTypes(vm.category).then(function(types) {
-          vm.service.defaultFilter.resource_type = types;
+          if (!vm.hasCustomFilters) {
+            vm.service.defaultFilter.resource_type = types;
+          }
+          vm.types = ncUtils.cloneObject(vm.service.defaultFilter);
+          vm.types.resource_type = types;
         }).then(function() {
-          return resourcesService.countByType(vm.service.defaultFilter);
+          return resourcesService.countByType(vm.types);
         }).then(function(counts) {
           resourcesCounts = counts;
           return servicesService.getServicesList();
@@ -278,10 +286,11 @@
         var confirmDelete = confirm(confirmText.replace('{resource_type}', model.resource_type));
         if (confirmDelete) {
           vm.removeInstance(model).then(function() {
+            servicesService.clearAllCacheForCurrentEndpoint();
             vm.afterInstanceRemove(model);
           }, vm.handleActionException.bind(vm));
         }
-      },
+      }
     });
 
     return ControllerListClass;
