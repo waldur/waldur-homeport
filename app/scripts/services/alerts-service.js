@@ -65,9 +65,9 @@
   });
 
   angular.module('ncsaas').constant('ALERT_ICONS_TYPES', {
-    customers: 'Customers notifications',
-    resources: 'Resources notifications',
-    providers: 'Providers notifications'
+    customers: 'Alerts about organization',
+    resources: 'Alerts about resources (VMs and applications)',
+    providers: 'Alerts about providers'
   });
 
   angular.module('ncsaas').constant('ALERT_ICONS', {

@@ -83,7 +83,6 @@
         'iaas_instance_import_failed': 'Import of a virtual machine with backend id {instance_id} has failed.',
         'iaas_instance_import_scheduled': 'Virtual machine with backend id {instance_id} has been scheduled for import.',
         'iaas_instance_import_succeeded': 'Virtual machine {instance_id} has been imported.',
-        'iaas_instance_licenses_added': 'Licenses added to VM with name {instance_name}.',
         'iaas_instance_restart_failed': 'Virtual machine {instance_name} restart has failed.',
         'iaas_instance_restart_succeeded': 'Virtual machine {instance_name} has been restarted.',
         'iaas_instance_start_failed': 'Virtual machine {instance_name} start has failed.',
@@ -92,14 +91,12 @@
         'iaas_instance_stop_succeeded': 'Virtual machine {instance_name} has been stopped.',
         'iaas_instance_update_succeeded': 'Virtual machine {instance_name} has been updated.',
         'iaas_instance_volume_extension_scheduled': 'Virtual machine {instance_name} has been scheduled to extend disk.',
-        'iaas_membership_sync_failed': 'Failed to sync cloud membership {cloud_name}.',
-        'iaas_service_sync_failed': 'OpenStack cloud {cloud_name} has failed to sync.',
         'invoice_creation_succeeded': 'Invoice for organization {customer_name} for the period of {invoice_date} has been created.',
         'invoice_deletion_succeeded': 'Invoice for organization {customer_name} for the period of {invoice_date} has been deleted.',
         'invoice_update_succeeded': 'Invoice for organization {customer_name} for the period of {invoice_date} has been updated.',
         'payment_approval_succeeded': 'Payment for {customer_name} has been approved',
         'payment_cancel_succeeded': 'Payment for {customer_name} has been cancelled',
-        'payment_creation_succeeded': 'Created new payment for {customer_name}',
+        'payment_creation_succeeded': 'Created a new payment for {customer_name}',
         'project_added_to_project_group': 'Project {project_name} has been added to project group {project_group_name}.',
         'project_creation_succeeded': 'Project {project_name} has been created.',
         'project_deletion_succeeded': 'Project {project_name} has been deleted.',
@@ -117,8 +114,6 @@
         'service_settings_sync_failed': 'Provider {service_settings_name} has failed to sync.',
         'service_settings_recovered': 'Provider {service_settings_name} has been recovered.',
         'service_project_link_creation_failed': 'Creation of service project link {service_name} has failed',
-        'service_project_link_sync_failed': 'Synchronization of service project link {service_name} has failed.',
-        'service_project_link_recovered': 'Service project link {service_name} has been recovered.',
         'ssh_key_creation_succeeded': 'SSH key {ssh_key_name} has been created.',
         'ssh_key_deletion_succeeded': 'SSH key {ssh_key_name} has been deleted.',
         'template_creation_succeeded': 'Template {template_name} has been created.',
@@ -136,29 +131,24 @@
         'user_organization_rejected': 'User {affected_user_full_name} claim for organization {affected_organization} has been rejected.',
         'user_organization_removed': 'User {affected_user_full_name} has been removed from organization {affected_organization}.',
         'user_password_updated': 'Password has been changed for user {affected_user_full_name}.',
-        'user_update_succeeded': 'User {affected_user_full_name} has been updated.',
-        'zabbix_host_creation_failed': 'Unable to add instance {instance_name} to Zabbix',
-        'zabbix_host_creation_succeeded': 'Added instance {instance_name} to Zabbix',
-        'zabbix_host_deletion_failed': 'Unable to delete instance {instance_name} from Zabbix',
-        'zabbix_host_deletion_succeeded': 'Deleted instance {instance_name} from Zabbix'
+        'user_update_succeeded': 'User {affected_user_full_name} has been updated.'
     };
     angular.module('ncsaas').constant('EVENT_TEMPLATES', templates);
 
   angular.module('ncsaas').constant('EVENT_ICONS_TYPES', {
-    auth: ['Auth events', 'user'],
-    customer: ['Customers events', 'customer'],
-    iaas: ['Iaas events', 'resource'],
-    invoice: ['Invoices events', 'customer'],
-    payment: ['Payments events', 'customer'],
-    project: ['Projects events', 'project'],
-    quota: ['Quotas events', 'customer'],
-    resource: ['Resources events', 'resource'],
-    role: ['Roles events', 'user'],
+    auth: ['Authentication events', 'user'],
+    invoice: ['Invoice events', 'customer'],
+    user: ['Key management events', 'user'],
+    iaas: ['OpenStack events', 'resource'],
+    customer: ['Organization events', 'customer'],
+    payment: ['Payment events', 'customer'],
+    project: ['Project events', 'project'],
     service: ['Providers events', 'service'],
-    ssh: ['Ssh keys events', 'key'],
-    template: ['Templates keys events', 'resource'],
-    user: ['Users keys events', 'user'],
-    zabbix: ['Zabbix host keys events', 'resource']
+    resource: ['Resource events', 'resource'],
+    role: ['Role management events', 'user'],
+    quota: ['Quota events', 'customer'],
+    ssh: ['SSH keys events', 'key'],
+    template: ['Templates keys events', 'resource']
   });
 
   var types = {};
@@ -321,11 +311,7 @@ angular.module('ncsaas').constant('EVENT_ICONS', {
     'user_organization_rejected': 'user',
     'user_organization_removed': 'user',
     'user_password_updated': 'user',
-    'user_update_succeeded': 'user',
-    'zabbix_host_creation_failed': 'resource',
-    'zabbix_host_creation_succeeded': 'resource',
-    'zabbix_host_deletion_failed': 'resource',
-    'zabbix_host_deletion_succeeded': 'resource'
+    'user_update_succeeded': 'user'
 });
 
 
@@ -486,8 +472,7 @@ angular.module('ncsaas').constant('EVENT_ICONS', {
                 'ssh_key_deletion_succeeded',
                 'template_deletion_succeeded',
                 'template_service_deletion_succeeded',
-                'user_deletion_succeeded',
-                'zabbix_host_deletion_succeeded'
+                'user_deletion_succeeded'
             ],
             showLinks: function(context) {
                 // Don't show links for deletion events
