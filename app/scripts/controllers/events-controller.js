@@ -3,15 +3,16 @@
 (function() {
   angular.module('ncsaas')
     .service('baseEventListController', [
-      'baseControllerListClass', 'eventsService', 'ENTITYLISTFIELDTYPES', 'eventFormatter',
+      'baseControllerListClass', 'eventsService', 'ENTITYLISTFIELDTYPES', 'eventFormatter', 'ENV',
       baseEventListController]);
 
   function baseEventListController(
-    baseControllerListClass, eventsService, ENTITYLISTFIELDTYPES, eventFormatter) {
+    baseControllerListClass, eventsService, ENTITYLISTFIELDTYPES, eventFormatter, ENV) {
     var ControllerListClass = baseControllerListClass.extend({
       init:function() {
         this.service = eventsService;
         this.searchFieldName = 'search';
+        this.helpKey = ENV.dashboardHelp.eventsList.name;
         this.entityOptions = {
           entityData: {
             noDataText: 'No events yet',
@@ -59,17 +60,20 @@
       'alertsService',
       'alertFormatter',
       'ENTITYLISTFIELDTYPES',
+      'ENV',
       BaseAlertsListController]);
 
   function BaseAlertsListController(
     baseControllerListClass,
     alertsService,
     alertFormatter,
-    ENTITYLISTFIELDTYPES) {
+    ENTITYLISTFIELDTYPES,
+    ENV) {
     return baseControllerListClass.extend({
       init: function() {
         this.service = alertsService;
         this.searchFieldName = 'message';
+        this.helpKey = ENV.dashboardHelp.alertsList.name;
         this._super();
 
         this.entityOptions = {
@@ -342,6 +346,8 @@
         this.cacheTime = ENV.dashboardEventsCacheTime;
         this._super();
         this.activeTab = 'activity';
+        this.alertsHelpKey = ENV.dashboardHelp.alertsList.name;
+        this.eventsHelpKey = ENV.dashboardHelp.eventsList.name;
         this.chartOptions = {
           responsive: true,
           scaleShowVerticalLines: false,

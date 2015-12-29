@@ -863,6 +863,12 @@
             },
             'sshKeys@help.details': {
               templateUrl: 'views/help/ssh-keys.html',
+            },
+            'alertsList@help.details': {
+              templateUrl: 'views/help/alerts-events-list.html',
+            },
+            'eventsList@help.details': {
+              templateUrl: 'views/help/alerts-events-list.html',
             }
           },
           resolve: {

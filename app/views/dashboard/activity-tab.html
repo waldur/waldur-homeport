@@ -68,7 +68,14 @@
     </div>
     <div class="half-block">
         <div class="alerts-list">
-            <h3>Alerts</h3>
+            <div>
+                <h3 class="alerts-header">Alerts</h3>
+                <div  class="alerts-helper-link" visible="premiumSupport">
+                    <a stoppropagation class="button-support pending" target="_blank"
+                       ui-sref="help.details({name: DashboardController.alertsHelpKey})">Supported alerts</a>
+                </div>
+                <div class="clear"></div>
+            </div>
             <div class="white-box" block-ui="dashboard-alerts-list">
                 <ul>
                     <li ng-repeat="alert in DashboardController.alerts"
@@ -91,7 +98,14 @@
             <a class="show-all" ui-sref="organizations.details({uuid: DashboardController.customer_uuid, tab:'alerts'})" ng-if="DashboardController.alerts.length">Show all alerts</a>
         </div>
         <div class="alerts-list" ng-if="DashboardController.events.length" visible="eventlog">
-            <h3>Recent events</h3>
+            <div>
+                <h3 class="alerts-header">Recent events</h3>
+                <div  class="alerts-helper-link" visible="premiumSupport">
+                    <a stoppropagation class="button-support pending" target="_blank"
+                       ui-sref="help.details({name: DashboardController.eventsHelpKey})">Supported events</a>
+                </div>
+                <div class="clear"></div>
+            </div>
             <div class="white-box" block-ui="dashboard-events-list">
                 <ul>
                     <li ng-repeat="event in DashboardController.events"

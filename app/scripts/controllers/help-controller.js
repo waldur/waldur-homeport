@@ -9,6 +9,7 @@
       init: function() {
         this.list = ENV.helpList;
         this.profileList = ENV.profileHelp;
+        this.dashboardList = ENV.dashboardHelp;
         this._super();
       }
     });
@@ -21,9 +22,20 @@
 (function() {
 
   angular.module('ncsaas')
-    .controller('HelpDetailsController', ['baseControllerClass', 'ENV', '$stateParams', HelpDetailsController]);
+    .controller('HelpDetailsController', [
+      'baseControllerClass',
+      'ENV',
+      '$stateParams',
+      'alertsService',
+      'eventsService',
+      HelpDetailsController]);
 
-  function HelpDetailsController(baseControllerClass, ENV, $stateParams) {
+  function HelpDetailsController(
+    baseControllerClass,
+    ENV,
+    $stateParams,
+    alertsService,
+    eventsService) {
     var controllerScope = this;
     var Controller = baseControllerClass.extend({
       init: function() {
@@ -33,6 +45,16 @@
       getItem: function() {
         if ($stateParams.name == ENV.profileHelp.sshKeys.name) {
           this.model = ENV.profileHelp.sshKeys;
+          return;
+        }
+        if ($stateParams.name === ENV.dashboardHelp.alertsList.name) {
+          this.model = ENV.dashboardHelp.alertsList;
+          this.model.types = alertsService.getAvailableIconTypes();
+          return;
+        }
+        if ($stateParams.name === ENV.dashboardHelp.eventsList.name) {
+          this.model = ENV.dashboardHelp.eventsList;
+          this.model.types = eventsService.getAvailableIconTypes();
           return;
         }
         var list = ENV.helpList;

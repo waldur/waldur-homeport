@@ -107,6 +107,13 @@
     <!-- /view-control -->
 
     <div class="white-box list-box" ng-show="entityList.list.length > 0">
+        <div ng-if="entityList.helpKey">
+            <div  class="list-help-button" visible="premiumSupport">
+                <a stoppropagation class="button-support pending" target="_blank"
+                   ui-sref="help.details({name: entityList.helpKey})">Supported notifications</a>
+            </div>
+            <div class="clear"></div>
+        </div>
         <ul class="object-list">
             <li class="list-item list-header" ng-if="::!entityOptions.entityData.hideTableHead">
                 <div class="checkbox" ng-show="entityList.controlPanelShow"></div>

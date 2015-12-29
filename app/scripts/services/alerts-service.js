@@ -2,9 +2,9 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('alertsService', ['baseServiceClass', 'ENV', alertsService]);
+    .service('alertsService', ['baseServiceClass', 'ENV', 'ALERT_ICONS_TYPES', 'ALERT_TEMPLATES', alertsService]);
 
-  function alertsService(baseServiceClass, ENV) {
+  function alertsService(baseServiceClass, ENV, ALERT_ICONS_TYPES, ALERT_TEMPLATES) {
     var ServiceClass = baseServiceClass.extend({
       init: function() {
         this._super();
@@ -20,6 +20,32 @@
         if (!ENV.featuresVisible) {
           this.defaultFilter.exclude_features = ENV.toBeFeatures;
         }
+      },
+      getAvailableIconTypes: function() {
+        var icons = [],
+            icon,
+            descriptions = [],
+            description;
+        for (var i in ALERT_ICONS_TYPES) {
+          if (ENV.toBeFeatures.indexOf(i) === -1 && ALERT_ICONS_TYPES.hasOwnProperty(i)) {
+            icon = i.slice(0, -1);
+            icon = (icon === 'provider') ? 'service' : icon;
+            for (var j in ALERT_TEMPLATES) {
+              description = ALERT_TEMPLATES[j]
+                .replace(/ {\w+}|\./gi, '');
+              description.replace('{'+ icon +'_name} ', '');
+              if (j.slice(0, icon.length) === icon
+                && ALERT_TEMPLATES.hasOwnProperty(j)
+                && descriptions.indexOf(description) === -1
+              ) {
+                descriptions.push(description);
+              }
+            }
+            icons.push([icon, ALERT_ICONS_TYPES[i], descriptions]);
+            descriptions = [];
+          }
+        }
+        return icons;
       }
     });
     return new ServiceClass();
@@ -36,6 +62,12 @@
     'customer_project_count_exceeded': 'Organization {customer_name} has exceeded quota {quota_name}.',
     'customer_resource_count_exceeded': 'Organization {customer_name} has exceeded quota {quota_name}.',
     'customer_service_count_exceeded': 'Organization {customer_name} has exceeded quota {quota_name}.',
+  });
+
+  angular.module('ncsaas').constant('ALERT_ICONS_TYPES', {
+    customers: 'Alerts about organization',
+    resources: 'Alerts about resources (VMs and applications)',
+    providers: 'Alerts about providers'
   });
 
   angular.module('ncsaas').constant('ALERT_ICONS', {
