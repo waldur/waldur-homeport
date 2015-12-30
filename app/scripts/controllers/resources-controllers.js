@@ -10,7 +10,6 @@
     'servicesService',
     'currentStateService',
     'projectsService',
-    'ncUtils',
     baseResourceListController
     ]);
 
@@ -22,8 +21,7 @@
     resourcesService,
     servicesService,
     currentStateService,
-    projectsService,
-    ncUtils) {
+    projectsService) {
     var ControllerListClass = baseControllerListClass.extend({
       init: function() {
         this.service = resourcesService;
@@ -187,7 +185,7 @@
           if (!vm.hasCustomFilters) {
             vm.service.defaultFilter.resource_type = types;
           }
-          vm.types = ncUtils.cloneObject(vm.service.defaultFilter);
+          vm.types = angular.copy(vm.service.defaultFilter);
           vm.types.resource_type = types;
         }).then(function() {
           return resourcesService.countByType(vm.types);
