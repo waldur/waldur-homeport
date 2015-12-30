@@ -304,10 +304,10 @@
           }
           if (name === 'name') {
             if (this.selectedCategory.name === 'VMs') {
-              display_label = 'Your VM name';
+              display_label = 'VM name';
             }
             if (this.selectedCategory.name === 'APPLICATIONS') {
-              display_label = 'Your application name'
+              display_label = 'Application Name'
             }
           }
 
