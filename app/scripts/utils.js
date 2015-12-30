@@ -81,6 +81,9 @@
           usage[quota.name] = Math.max(0, quota.usage);
         }
         return usage;
+      },
+      cloneObject: function(obj) {
+        return JSON.parse(JSON.stringify(obj));
       }
     }
   }

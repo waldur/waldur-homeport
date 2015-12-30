@@ -18,25 +18,29 @@
         $scope.toggleFilter = toggleFilter;
         $scope.isFilterChosen = isFilterChosen;
 
-        if (controller.selectAll){
+        if (controller.selectAll) {
           selectAll();
         }
 
         controller.chosenFilters = [];
 
         function toggleFilter(filter) {
+          controller.hasCustomFilters = true;
           if (!isFilterChosen(filter)) {
-            controller.chosenFilters.push(filter);
+            controller.chosenFilters.push(filter.value);
           } else {
-            var index = controller.chosenFilters.indexOf(filter);
+            var index = controller.chosenFilters.indexOf(filter.value);
             controller.chosenFilters.splice(index, 1);
+            if (!controller.chosenFilters.length) {
+              controller.hasCustomFilters = true;
+            }
           }
 
-          var values = getFilterValues(filter);
+          var values = controller.chosenFilters;
           if (values.length > 0) {
             controller.service.defaultFilter[filter.name] = values;
           } else {
-            if (controller.selectAll){
+            if (controller.selectAll) {
               selectAll();
             } else {
               delete controller.service.defaultFilter[filter.name];
@@ -54,25 +58,15 @@
           for (var i = 0; i < controller.searchFilters.length; i++) {
             var filter = controller.searchFilters[i];
             controller.service.defaultFilter[filter.name] = [];
-          };
+          }
           for (var i = 0; i < controller.searchFilters.length; i++) {
             var filter = controller.searchFilters[i];
             controller.service.defaultFilter[filter.name].push(filter.value);
-          };
+          }
         }
 
         function isFilterChosen(filter) {
-          return controller.chosenFilters.indexOf(filter) !== -1;
-        }
-
-        function getFilterValues(filter) {
-          var values = [];
-          for (var i = 0; i < controller.chosenFilters.length; i++) {
-            if (filter.name === controller.chosenFilters[i].name) {
-              values.push(controller.chosenFilters[i].value);
-            }
-          }
-          return values;
+          return controller.chosenFilters.indexOf(filter.value) !== -1;
         }
       }
     };
