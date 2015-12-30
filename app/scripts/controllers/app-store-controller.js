@@ -307,7 +307,7 @@
               display_label = 'VM name';
             }
             if (this.selectedCategory.name === 'APPLICATIONS') {
-              display_label = 'Application Name'
+              display_label = 'Name'
             }
           }
 
