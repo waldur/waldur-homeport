@@ -308,7 +308,7 @@
                     <li class="total">
                         <div class="descr">
                             <span ng-show="AppStore.secondStep && AppStore.serviceType">{{ AppStore.serviceType }}</span>
-                            <span ng-show="!AppStore.serviceType">No chosen {{ AppStore.selectedCategory.type }}</span>
+                            <span ng-show="!AppStore.serviceType">No items</span>
                             <span>{{ AppStore.instance.name }} {{ AppStore.selectedResourceTypeName }}</span>
                         </div>
                         <div ng-show="AppStore.enablePurchaseCostDisplay" class="price">{{ AppStore.total | currency:AppStore.currency }}</div>

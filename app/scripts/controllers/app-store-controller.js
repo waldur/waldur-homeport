@@ -113,6 +113,7 @@
         this.agreementShow = false;
         this.resourceTypesBlock = false;
         this.selectedResourceType = null;
+        this.selectedResourceTypeName = null;
         this.selectedService = null;
         this.fields = [];
         this.resetPriceItems();
