@@ -46,37 +46,6 @@
             display: inline-block;
         }
     } // &.list-header
-    &.dash {
-        &:before {
-            @include icon-fa;
-            content: '\f05a';
-            width: 40px;
-            display: table-cell;
-            color: rgb(202, 202, 202);
-            vertical-align: middle;
-            text-align: center;
-        } // &:before
-        &.auth_logged_in_with_username {
-            &:before {
-                content: '\f090';
-            } // &:before
-        } // &.auth_logged_in_with_username
-        &.iaas_instance_creation_scheduled {
-            &:before {
-                content: '\f090';
-            } // &:before
-        } // &.iaas_instance_creation_scheduled
-        &.project_creation_succeeded {
-            &:before {
-                content: '\f07c';
-            } // &:before
-        } // &.project_creation_succeeded
-        &.role_granted {
-            &:before {
-                content: '\f007';
-            } // &:before
-        } // &.role_granted
-    } // dash
     &.list {
         &:hover {
             background-color: $expandable-hover;
