@@ -526,7 +526,7 @@
           var priceItem = this.defaultPriceListItems[i];
           if (priceItem.item_type == name
             && ((display_name.indexOf(priceItem.key) > -1)
-            || (priceItem.resource_content_type.indexOf(this.selectedResourceType.toLowerCase()) > -1))
+            || (priceItem.resource_type.indexOf(this.selectedResourceType.toLowerCase()) > -1))
           ) {
             return priceItem.value;
           }
