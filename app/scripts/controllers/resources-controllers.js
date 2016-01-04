@@ -279,8 +279,10 @@
       },
       remove: function(model) {
         var vm = this.controllerScope;
-        var confirmText = 'Are you sure you want to delete a {resource_type} in an erred state?' +
-          ' A cleanup attempt will be performed if you choose so.';
+        var confirmText = (model.state === 'Erred')
+          ? 'Are you sure you want to delete a {resource_type} in an Erred state?' +
+            ' A cleanup attempt will be performed if you choose so.'
+          : 'Are you sure you want to delete a {resource_type}?';
         var confirmDelete = confirm(confirmText.replace('{resource_type}', model.resource_type));
         if (confirmDelete) {
           vm.removeInstance(model).then(function() {
