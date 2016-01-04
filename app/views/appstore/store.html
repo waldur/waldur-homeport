@@ -175,7 +175,7 @@
                                                 ng-class="{'state': AppStore.instance[field.name] == choice.value, 'disabled': choice.disabled}"
                                                 class="list-item list">
                                                 <div class="desktop">
-                                                    <span class="title">{{ ::choice.display_name }}</span>
+                                                    <span class="title">{{ choice.item.description || choice.display_name }}</span>
                                                     <div class="pull-right">
                                                         <span>{{ ::choice.item.cores == 1 && '1 core' || choice.item.cores + ' cores'}}</span>
                                                         <span>{{ ::choice.item.ram | mb2gb }}</span>

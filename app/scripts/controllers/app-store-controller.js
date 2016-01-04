@@ -416,14 +416,10 @@
         if (ENV.nonChargeableAppStoreOptions.indexOf(name) !== -1) {
           return;
         }
-        if (vm.defaultPriceListItems.length) {
+        defaultPriceListItemsService.getAll({resource_type: vm.serviceType + '.' + vm.selectedResourceType}).then(function(response) {
+          vm.defaultPriceListItems = response;
           vm.setPriceItem(name, choice);
-        } else {
-          defaultPriceListItemsService.getAll({resource_type: vm.serviceType + '.' + vm.selectedResourceType}).then(function(response) {
-            vm.defaultPriceListItems = response;
-            vm.setPriceItem(name, choice);
-          });
-        }
+        });
       },
       isChosen: function(name, choice) {
         var value = (name == 'ssh_public_key') ? choice.url : choice.value;
@@ -519,14 +515,17 @@
         var display_name = choice.display_name;
         var price = this.findPrice(name, display_name);
         price = price ? price : 0;
+        display_name = choice.item.description || choice.display_name;
         this.pushPriceItem(name, display_name, price);
       },
       findPrice: function(name, display_name) {
         for (var i = 0; i < this.defaultPriceListItems.length; i++) {
           var priceItem = this.defaultPriceListItems[i];
-          if (priceItem.item_type == name
-            && ((display_name.indexOf(priceItem.key) > -1)
-            || (priceItem.resource_type.indexOf(this.selectedResourceType.toLowerCase()) > -1))
+          var resourceType = priceItem.resource_type.split(".");
+          var keyExists = display_name.toLowerCase().indexOf(priceItem.key) > -1;
+          resourceType = resourceType[resourceType.length -1];
+          if (priceItem.item_type === name && (keyExists
+            || this.selectedResourceType === resourceType) || (name === 'size' && keyExists)
           ) {
             return priceItem.value;
           }
