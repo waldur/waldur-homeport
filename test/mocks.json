@@ -1835,7 +1835,6 @@
       "item_type": "instance",
       "value": "0.25",
       "units": "",
-      "resource_content_type": "azure.virtualmachine",
       "resource_type": "Azure.VirtualMachine"
     },
     {
@@ -1845,7 +1844,6 @@
       "item_type": "instance",
       "value": "0.90",
       "units": "",
-      "resource_content_type": "azure.virtualmachine",
       "resource_type": "Azure.VirtualMachine"
     },
     {
@@ -1855,7 +1853,6 @@
       "item_type": "instance",
       "value": "0.13",
       "units": "",
-      "resource_content_type": "azure.virtualmachine",
       "resource_type": "Azure.VirtualMachine"
     },
     {
@@ -1865,7 +1862,6 @@
       "item_type": "instance",
       "value": "2.19",
       "units": "",
-      "resource_content_type": "azure.virtualmachine",
       "resource_type": "Azure.VirtualMachine"
     },
     {
@@ -1875,7 +1871,6 @@
       "item_type": "instance",
       "value": "1.05",
       "units": "",
-      "resource_content_type": "azure.virtualmachine",
       "resource_type": "Azure.VirtualMachine"
     },
     {
@@ -1885,7 +1880,6 @@
       "item_type": "instance",
       "value": "0.79",
       "units": "",
-      "resource_content_type": "azure.virtualmachine",
       "resource_type": "Azure.VirtualMachine"
     },
     {
@@ -1895,7 +1889,6 @@
       "item_type": "instance",
       "value": "4.71",
       "units": "",
-      "resource_content_type": "azure.virtualmachine",
       "resource_type": "Azure.VirtualMachine"
     },
     {
@@ -1905,7 +1898,6 @@
       "item_type": "instance",
       "value": "0.53",
       "units": "",
-      "resource_content_type": "azure.virtualmachine",
       "resource_type": "Azure.VirtualMachine"
     },
     {
@@ -1915,7 +1907,6 @@
       "item_type": "instance",
       "value": "1.63",
       "units": "",
-      "resource_content_type": "azure.virtualmachine",
       "resource_type": "Azure.VirtualMachine"
     },
     {
@@ -1925,7 +1916,6 @@
       "item_type": "instance",
       "value": "0.25",
       "units": "",
-      "resource_content_type": "azure.virtualmachine",
       "resource_type": "Azure.VirtualMachine"
     }
   ],
