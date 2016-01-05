@@ -175,7 +175,12 @@
                                                 ng-class="{'state': AppStore.instance[field.name] == choice.value, 'disabled': choice.disabled}"
                                                 class="list-item list">
                                                 <div class="desktop">
-                                                    <span class="title">{{ choice.item.description || choice.display_name }}</span>
+                                                    <span class="title" ng-if="choice.item.description">
+                                                        {{ ::choice.item.description }} ({{ ::choice.display_name }})
+                                                    </span>
+                                                    <span class="title" ng-if="!choice.item.description">
+                                                        {{ ::choice.display_name }}
+                                                    </span>
                                                     <div class="pull-right">
                                                         <span>{{ ::choice.item.cores == 1 && '1 core' || choice.item.cores + ' cores'}}</span>
                                                         <span>{{ ::choice.item.ram | mb2gb }}</span>
@@ -311,7 +316,7 @@
                             <span ng-show="!AppStore.serviceType">No items</span>
                             <span>{{ AppStore.instance.name }} {{ AppStore.selectedResourceTypeName }}</span>
                         </div>
-                        <div ng-show="AppStore.enablePurchaseCostDisplay" class="price">{{ AppStore.total | currency:AppStore.currency }}</div>
+                        <div ng-show="AppStore.enablePurchaseCostDisplay" class="price">{{ AppStore.total | currency:AppStore.currency }}/h</div>
                         <div class="clear"></div>
                     </li>
                 </ul>
