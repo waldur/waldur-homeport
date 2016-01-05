@@ -210,7 +210,7 @@
                                href="{{ entity[field.urlPropertyName] }}"
                                target="_blank">
                                 <b class="icon external-link"></b>
-                                {{ ::entity[field.urlPropertyName] }}
+                                {{ field.linkDisplayName || entity[field.urlPropertyName] }}
                             </a>
                             <span ng-if="::!entity[field.urlPropertyName]">
                                 {{ ::entity[field.propertyName] }}

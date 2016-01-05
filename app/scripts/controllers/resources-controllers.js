@@ -129,6 +129,7 @@
             },
             {
               name: 'Access',
+              linkDisplayName: 'Access',
               propertyName: 'access_info_text',
               urlPropertyName: 'access_info_url',
               type: ENTITYLISTFIELDTYPES.linkOrText,

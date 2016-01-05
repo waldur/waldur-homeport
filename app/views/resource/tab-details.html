@@ -17,6 +17,14 @@
     <dt>Provider</dt>
     <dd>{{ controller.model.service_name }}</dd>
 
+    <dt>Access link</dt>
+    <dd>
+        <a ng-show="controller.model.web_url" href="{{ controller.model.web_url }}" target="_blank">
+            {{ controller.model.web_url }}
+        </a>
+        <span ng-show="!controller.model.web_url">No access info</span>
+    </dd>
+
     <dt>Created</dt>
     <dd><span am-time-ago="controller.model.created" title="{{ controller.model.created }}"></span></dd>
 
