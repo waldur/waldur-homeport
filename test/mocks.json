@@ -1853,7 +1853,6 @@
       "item_type": "instance",
       "value": "0.13",
       "units": "",
-      "resource_type": "azure.virtualmachine",
       "resource_type": "Azure.VirtualMachine"
     },
     {
