@@ -82,7 +82,9 @@
         } else {
           vm.currentStateService.getCustomer().then(function (response) {
             /*jshint camelcase: false */
-            filter.customer = (this.customerUuid) ? this.customerUuid() : response.uuid;
+            if (response) {
+              filter.customer = (this.customerUuid) ? this.customerUuid() : response.uuid;
+            }
             queryList();
           }, function (err) {
             deferred.reject(err);

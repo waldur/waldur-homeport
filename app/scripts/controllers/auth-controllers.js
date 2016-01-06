@@ -81,9 +81,9 @@
 (function() {
   angular.module('ncsaas')
     .controller('ActivationController', [
-      '$state', '$stateParams', 'authService', 'baseControllerClass', 'ncUtilsFlash', ActivationController]);
+      '$location', '$stateParams', 'authService', 'baseControllerClass', 'ncUtilsFlash', ActivationController]);
 
-  function ActivationController($state, $stateParams, authService, baseControllerClass, ncUtilsFlash) {
+  function ActivationController($location, $stateParams, authService, baseControllerClass, ncUtilsFlash) {
     var controllerScope = this;
     var Controller = baseControllerClass.extend({
       init: function() {
@@ -93,7 +93,8 @@
           token: $stateParams.token
         }).then(function() {
           ncUtilsFlash.info('Account has been activated');
-          $state.go('dashboard.index');
+          // TODO: find the way to avoid hardcode for the path
+          $location.path('/initial-data/');
         }, function(response) {
           ncUtilsFlash.error('Unable to activate account');
         });
