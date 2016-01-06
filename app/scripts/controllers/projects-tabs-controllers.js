@@ -484,42 +484,51 @@
 (function() {
   angular.module('ncsaas')
     .controller('ProjectDeleteTabController', [
-      'baseControllerListClass',
+      'baseControllerClass',
       'projectsService',
       'currentStateService',
       '$rootScope',
       '$state',
+      '$window',
       ProjectDeleteTabController
     ]);
 
   function ProjectDeleteTabController(
-    baseControllerListClass,
+    baseControllerClass,
     projectsService,
     currentStateService,
     $rootScope,
-    $state
+    $state,
+    $window
   ) {
     var controllerScope = this;
-    var DeleteController = baseControllerListClass.extend({
+    var DeleteController = baseControllerClass.extend({
       init: function() {
         this.controllerScope = controllerScope;
         this.service = projectsService;
         this._super();
+
+        var vm = this;
+        currentStateService.getProject().then(function(project) {
+          vm.project = project;
+        });
       },
       removeProject: function () {
-        var vm = this;
-        currentStateService.getProject().then(function(project){
-          vm.remove(project);
-        });
-      },
-      afterInstanceRemove: function(instance) {
-        $rootScope.$broadcast('refreshProjectList', {model: instance, remove: true});
-        this._super(instance);
-        projectsService.getList().then(function(){
-          currentStateService.getCustomer().then(function(customer) {
-            $state.go('organizations.details', {uuid: customer.uuid, tab: 'projects'});
+        var confirmDelete = confirm('Confirm deletion?');
+        if (confirmDelete) {
+          this.project.$delete().then(function() {
+            projectsService.clearAllCacheForCurrentEndpoint();
+            return projectsService.getFirst().then(function(project) {
+              currentStateService.setProject(project);
+              $rootScope.$broadcast('refreshProjectList', {model: controllerScope.project, remove: true});
+            });
+          }).then(function() {
+            currentStateService.getCustomer().then(function(customer) {
+              $state.go('organizations.details', {uuid: customer.uuid, tab: 'projects'}, {notify: false});
+              $window.location.reload();
+            });
           });
-        });
+        }
       }
     });
 
