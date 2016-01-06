@@ -57,7 +57,9 @@
       vm.isCustomerDefined = true;
       customer = $q.when(newCustomer);
       customer.then(function(response) {
-        $window.localStorage[ENV.currentCustomerUuidStorageKey] = response.uuid;
+        if (response) {
+          $window.localStorage[ENV.currentCustomerUuidStorageKey] = response.uuid;
+        }
       });
     }
 
