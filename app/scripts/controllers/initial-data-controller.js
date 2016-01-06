@@ -7,10 +7,14 @@
     ['usersService',
      'servicesService',
      'baseControllerClass',
+     'customersService',
+     'projectsService',
+     'joinServiceProjectLinkService',
+     'plansService',
      'currentStateService',
-     'agreementsService',
      'joinService',
      '$q',
+     '$rootScope',
      '$state',
      'ENV',
      'ncUtils',
@@ -20,17 +24,23 @@
     usersService,
     servicesService,
     baseControllerClass,
+    customersService,
+    projectsService,
+    joinServiceProjectLinkService,
+    plansService,
     currentStateService,
-    agreementsService,
     joinService,
     $q,
+    $rootScope,
     $state,
     ENV,
     ncUtils) {
     var controllerScope = this;
     var Controller = baseControllerClass.extend({
       user: {},
+      customer: {},
       services: {},
+      project: {},
       chosenService: null,
       chosenServices: [],
 
@@ -41,13 +51,22 @@
       activate: function() {
         this.getUser();
         this.getServices();
-        this.getCustomer();
+        this.getFreePlan();
       },
       getUser: function() {
         var vm = this;
         usersService.getCurrentUser().then(function(response) {
           vm.user = response;
+          // By default customer name is equal to user name
+          vm.customer.name = vm.user.full_name;
         });
+      },
+      getFreePlan: function() {
+        var vm = this;
+        plansService.getList().then(function(plans) {
+          // First plan is free
+          vm.customer.plan = plans[0];
+        })
       },
       getServices: function() {
         if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('providers') == -1) {
@@ -58,12 +77,6 @@
             vm.addChosenService('DigitalOcean');
           });
         }
-      },
-      getCustomer: function() {
-        var vm = this;
-        currentStateService.getCustomer().then(function(customer) {
-          vm.customer = customer;
-        });
       },
       getPrettyQuotaName: function(name, count) {
         return ncUtils.getPrettyQuotaName(name) + (count > 1 ? 's' : '');
@@ -121,9 +134,42 @@
         var vm = this;
         return vm.user.$update(function() {
           console.log('User has been saved');
+          usersService.currentUser = null;
         }, function(response) {
           vm.user.errors = response.data;
         });
+      },
+      saveCustomer: function() {
+        var vm = this;
+        if (vm.customer.uuid) {
+          return true;
+        }
+        var customer = customersService.$create();
+        customer.name = vm.customer.name;
+        return customer.$save().then(function(model) {
+          vm.customer = model;
+          currentStateService.setCustomer(model);
+          $rootScope.$broadcast('refreshCustomerList', {model: model, new: true, current: true});
+        });
+      },
+      saveProject: function() {
+        var vm = this;
+        if (vm.project.uuid) {
+          return true;
+        }
+        var project = projectsService.$create();
+        project.customer = vm.customer.url;
+        project.name = 'Default';
+        return project.$save().then(function(model) {
+          vm.project = model;
+          currentStateService.setProject(vm.project);
+          return joinServiceProjectLinkService.addProject(vm.project).then(function() {
+            $rootScope.$broadcast('refreshProjectList', {model: vm.project, new: true, current: true});
+          });
+        });
+      },
+      gotoDashboard: function() {
+        $state.go('dashboard.index');
       },
       save: function() {
         var vm = this;
@@ -135,10 +181,11 @@
           vm.customer.errors = {name: 'This field is required'};
           return;
         }
-        $q.all([vm.saveUser(), vm.customer.$update(), vm.saveServices()]).then(function() {
-          usersService.currentUser = null;
-          $state.go('dashboard.index');
-        });
+        return vm.saveUser()
+                 .then(vm.saveCustomer.bind(vm))
+                 .then(vm.saveServices.bind(vm))
+                 .then(vm.saveProject.bind(vm))
+                 .then(vm.gotoDashboard);
       }
     });
 
