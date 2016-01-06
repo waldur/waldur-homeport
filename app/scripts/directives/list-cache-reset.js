@@ -45,7 +45,7 @@
           if (getListPromise && getListPromise.then) {
             scope.processing = true;
             getListPromise.then(function(response) {
-              scope.controller.adjustSearchFilters();
+              scope.controller.adjustSearchFilters && scope.controller.adjustSearchFilters();
               mergeLists(scope.controller.list, response);
               scope.processing = false;
             });

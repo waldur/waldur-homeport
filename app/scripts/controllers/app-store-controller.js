@@ -85,6 +85,7 @@
 
       fields: [],
       limitChoices: 10,
+      fieldsOrder: null,
 
       init:function() {
         this.service = resourcesService;
@@ -336,15 +337,19 @@
           });
           display_label = null;
         }
-        var order = [
+        this.fieldsOrder = [
           'name', 'image', 'region', 'size', 'flavor', 'system_volume_size', 'data_volume_size',
           'security_groups', 'ssh_public_key', 'description', 'user_data'
         ];
-        this.fields.sort(function(a, b) {
-          return order.indexOf(a.name) - order.indexOf(b.name);
-        });
+        this.fields.sort(this.fieldsComparator.bind(this));
         this.sortFlavors();
         this.attachIconsToImages();
+      },
+      fieldsComparator: function(a, b) {
+        return this.fieldsOrder.indexOf(a.name) - this.fieldsOrder.indexOf(b.name);
+      },
+      cartComparator: function(a, b) {
+        return this.fieldsOrder.indexOf(a.type) - this.fieldsOrder.indexOf(b.type);
       },
       attachIconsToImages: function() {
         var field = this.findFieldByName('image');
@@ -416,14 +421,10 @@
         if (ENV.nonChargeableAppStoreOptions.indexOf(name) !== -1) {
           return;
         }
-        if (vm.defaultPriceListItems.length) {
+        defaultPriceListItemsService.getAll({resource_type: vm.serviceType + '.' + vm.selectedResourceType}).then(function(response) {
+          vm.defaultPriceListItems = response;
           vm.setPriceItem(name, choice);
-        } else {
-          defaultPriceListItemsService.getAll({resource_type: vm.serviceType + '.' + vm.selectedResourceType}).then(function(response) {
-            vm.defaultPriceListItems = response;
-            vm.setPriceItem(name, choice);
-          });
-        }
+        });
       },
       isChosen: function(name, choice) {
         var value = (name == 'ssh_public_key') ? choice.url : choice.value;
@@ -519,14 +520,17 @@
         var display_name = choice.display_name;
         var price = this.findPrice(name, display_name);
         price = price ? price : 0;
+        display_name = choice.display_name;
         this.pushPriceItem(name, display_name, price);
       },
       findPrice: function(name, display_name) {
         for (var i = 0; i < this.defaultPriceListItems.length; i++) {
           var priceItem = this.defaultPriceListItems[i];
-          if (priceItem.item_type == name
-            && ((display_name.indexOf(priceItem.key) > -1)
-            || (priceItem.resource_type.indexOf(this.selectedResourceType.toLowerCase()) > -1))
+          var resourceType = priceItem.resource_type.split(".");
+          var keyExists = display_name.toLowerCase().indexOf(priceItem.key) > -1;
+          resourceType = resourceType[resourceType.length -1];
+          if (priceItem.item_type === name && (keyExists
+            || this.selectedResourceType === resourceType) || (name === 'size' && keyExists)
           ) {
             return priceItem.value;
           }
@@ -538,6 +542,7 @@
           name: name,
           price: price
         });
+        this.priceItems.sort(this.cartComparator.bind(this));
         this.countTotal();
       },
       deletePriceItem: function(name) {
