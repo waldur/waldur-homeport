@@ -93,6 +93,7 @@
           token: $stateParams.token
         }).then(function() {
           ncUtilsFlash.info('Account has been activated');
+          // TODO: find the way to avoid hardcode for the path
           $location.path('/initial-data/');
         }, function(response) {
           ncUtilsFlash.error('Unable to activate account');
