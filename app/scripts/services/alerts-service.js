@@ -52,7 +52,7 @@
   }
 
   angular.module('ncsaas').constant('ALERT_TEMPLATES', {
-    'customer_has_zero_services': 'Organization {customer_name} has zero services configured.',
+    'customer_has_zero_services': 'Organization {customer_name} has no providers.',
     'customer_has_zero_resources': 'Organization {customer_name} does not have any resources.',
     'customer_has_zero_projects': 'Organization {customer_name} does not have any projects.',
     'service_has_unmanaged_resources': 'Provider {service_name} has unmanaged resources.',
