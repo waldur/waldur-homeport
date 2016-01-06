@@ -58,14 +58,13 @@
         usersService.getCurrentUser().then(function(response) {
           vm.user = response;
           // By default customer name is equal to user name
-          vm.customer.name = vm.user.full_name;
+          vm.customer.name = 'My Organization';
         });
       },
       getFreePlan: function() {
         var vm = this;
-        plansService.getList().then(function(plans) {
-          // First plan is free
-          vm.customer.plan = plans[0];
+        plansService.getFreePlan().then(function(plan) {
+          vm.customer.plan = plan;
         })
       },
       getServices: function() {
