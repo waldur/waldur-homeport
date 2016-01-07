@@ -77,4 +77,22 @@
     &.pencil-square-o:before {
         content: "\f044";
     }
+    &.alerts:before {
+        content: '\f06d';
+    }
+    &.event:before {
+        content: '\f0a2';
+    }
+    &.application:before {
+        content: '\f1b2';
+    }
+    &.invoice:before {
+        content: '\f0f6';
+    }
+    &.delete:before {
+        content: '\f014';
+    }
+    &.help:before {
+        content: '\f059';
+    }
 } // icons

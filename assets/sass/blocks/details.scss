@@ -55,7 +55,7 @@
       display: none;
     }
     position: absolute;
-    width: 170px;
+    width: 180px;
     z-index: 1;
     top: 0;
     left: 0;
@@ -119,11 +119,14 @@
           box-shadow: -2px 2px 2px 0px rgba(237,237,237,1);
           font-weight: bold;
         }
+        span {
+          padding-right: 10px;
+        }
       }
     }
   }
   .tab-content {
-    margin-left: 170px;
+    margin-left: 180px;
     background: #fff;
     padding: 40px;
     padding-top: 20px;

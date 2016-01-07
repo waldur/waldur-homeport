@@ -182,49 +182,57 @@
               title: 'Events',
               key: 'eventlog',
               viewName: 'tabEventlog',
-              countFieldKey: 'events'
+              countFieldKey: 'events',
+              icon: 'event'
             },
             {
               title: 'Alerts',
               key: 'alerts',
               viewName: 'tabAlerts',
-              countFieldKey: 'alerts'
+              countFieldKey: 'alerts',
+              icon: 'alerts'
             },
             {
               title: 'VMs',
               key: ENV.resourcesTypes.vms,
               viewName: 'tabResources',
-              countFieldKey: 'vms'
+              countFieldKey: 'vms',
+              icon: 'resource'
             },
             {
               title: 'Applications',
               key: ENV.resourcesTypes.applications,
               viewName: 'tabApplications',
-              countFieldKey: 'apps'
+              countFieldKey: 'apps',
+              icon: 'application'
             },
             {
               title: 'Projects',
               key: 'projects',
               viewName: 'tabProjects',
-              countFieldKey: 'projects'
+              countFieldKey: 'projects',
+              icon: 'project'
             },
             {
               title: 'Providers',
               key: 'providers',
               viewName: 'tabServices',
-              countFieldKey: 'services'
+              countFieldKey: 'services',
+              icon: 'service'
             },
             {
               title: 'Invoices',
               key: 'invoices',
               viewName: 'tabInvoices',
-              hideSearch: true
+              hideSearch: true,
+              icon: 'invoice'
             },
             {
               title: 'Manage',
               key: 'delete',
               viewName: 'tabDelete',
-              hideSearch: true
+              hideSearch: true,
+              icon: 'delete'
             }
           ]
         };
