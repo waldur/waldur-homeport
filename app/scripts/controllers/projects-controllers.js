@@ -283,25 +283,29 @@
               title: 'Events',
               key: 'eventlog',
               viewName: 'tabEventlog',
-              countFieldKey: 'events'
+              countFieldKey: 'events',
+              icon: 'event'
             },
             {
               title: 'Alerts',
               key: 'alerts',
               viewName: 'tabAlerts',
-              countFieldKey: 'alerts'
+              countFieldKey: 'alerts',
+              icon: 'alerts'
             },
             {
               title: 'VMs',
               key: ENV.resourcesTypes.vms,
               viewName: 'tabResources',
-              countFieldKey: 'vms'
+              countFieldKey: 'vms',
+              icon: 'resource'
             },
             {
               title: 'Applications',
               key: ENV.resourcesTypes.applications,
               viewName: 'tabApplications',
-              countFieldKey: 'apps'
+              countFieldKey: 'apps',
+              icon: 'application'
             },
             {
               title: 'Backups',
@@ -312,19 +316,22 @@
               title: 'People',
               key: 'people',
               viewName: 'tabUsers',
-              countFieldKey: 'users'
+              countFieldKey: 'users',
+              icon: 'group'
             },
             {
               title: 'Support',
               key: 'premiumSupport',
               viewName: 'tabPremiumSupport',
-              countFieldKey: 'premium_support_contracts'
+              countFieldKey: 'premium_support_contracts',
+              icon: 'help'
             },
             {
               title: 'Manage',
               key: 'delete',
               viewName: 'tabDelete',
-              hideSearch: true
+              hideSearch: true,
+              icon: 'wrench'
             }
           ]
         };

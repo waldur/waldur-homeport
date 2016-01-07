@@ -24,7 +24,10 @@
                             <a ng-click="Header.setCurrentCustomer(customer)">{{ customer.name }}</a>
                         </li>
                         <li class="manage-item">
-                            <a ui-sref="organizations.list" class="manage">Manage organizations</a>
+                            <a ui-sref="organizations.list" class="manage">
+                                <i class="icon wrench"></i>
+                                Manage organizations
+                            </a>
                         </li>
                     </ul>
                 </li>
@@ -41,7 +44,10 @@
                             </a>
                         </li>
                         <li class="manage-item">
-                            <a ui-sref="organizations.details({uuid: Header.currentCustomer.uuid, tab: 'projects'})" class="manage">Manage projects</a>
+                            <a ui-sref="organizations.details({uuid: Header.currentCustomer.uuid, tab: 'projects'})" class="manage">
+                                <i class="icon wrench"></i>
+                                Manage projects
+                            </a>
                         </li>
                         <li class="manage-item">
                             <div class="tooltip-relative inline"
@@ -49,7 +55,7 @@
                                  sref="projects.create"
                                  class-link="manage"
                                  tooltip-type="project-drop-down">
-                                <div>Add project</div>
+                                <div><i class="icon plus"></i> Add project</div>
                             </div>
                         </li>
                     </ul>
@@ -97,7 +103,7 @@
                                  sref="projects.create"
                                  class-link="project"
                                  tooltip-type="user-drop-down">
-                                <div>Add project</div>
+                                <div><i class="icon plus"></i> Add project</div>
                             </div>
                         </li>
                         <li visible="import" ng-if="::Header.showImport" class="on-tablet">
@@ -163,7 +169,10 @@
                     <a ng-click="Header.setCurrentCustomer(customer)">{{ customer.name }}</a>
                 </li>
                 <li class="on-tablet">
-                    <a ui-sref="organizations.list" class="manage">Manage organizations</a>
+                    <a ui-sref="organizations.list" class="manage">
+                        <i class="icon wrench"></i>
+                        Manage organizations
+                    </a>
                 </li>
                 <li class="on-tablet customers current">
                     <span>Project</span>
@@ -180,7 +189,10 @@
                     <a ng-click="Header.setCurrentProject(project)">{{ project.name }}</a>
                 </li>
                 <li class="on-tablet">
-                    <a ui-sref="organizations.details({uuid: Header.currentCustomer.uuid, tab: 'projects'})" class="manage">Manage projects</a>
+                    <a ui-sref="organizations.details({uuid: Header.currentCustomer.uuid, tab: 'projects'})" class="manage">
+                        <i class="icon wrench"></i>
+                        Manage projects
+                    </a>
                 </li>
             </ul>
             <!-- /views nav -->
@@ -203,7 +215,9 @@
                             <a ui-sref="services.create" class="service">Add provider</a>
                         </li>
                         <li visible="projects" class="on-tablet">
-                            <a ui-sref="projects.create" class="project">Add project</a>
+                            <a ui-sref="projects.create" class="project">
+                                <i class="icon plus"></i> Add project
+                            </a>
                         </li>
                         <li visible="resources" class="on-tablet">
                             <a ui-sref="appstore.store" class="resource">Add resource</a>
@@ -215,7 +229,10 @@
                         </li>
                         <li class="divider on-tablet"></li>
                         <li visible="customers" class="on-tablet">
-                            <a ui-sref="organizations.list" class="manage">Manage organizations</a>
+                            <a ui-sref="organizations.list" class="manage">
+                                <i class="icon wrench"></i>
+                                Manage organizations
+                            </a>
                         </li>
                         <li class="divider on-tablet"></li>
                         <li>

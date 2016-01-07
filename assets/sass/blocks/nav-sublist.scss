@@ -147,6 +147,9 @@
             &:nth-last-child(2) {
                 border-radius: 0 0 4px 4px;
             }
+            .icon {
+                left: -10px;
+            }
         }
     } // > li
 } // nav-sublist
