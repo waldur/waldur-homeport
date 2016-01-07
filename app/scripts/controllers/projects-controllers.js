@@ -331,7 +331,7 @@
               key: 'delete',
               viewName: 'tabDelete',
               hideSearch: true,
-              icon: 'delete'
+              icon: 'wrench'
             }
           ]
         };
