@@ -484,7 +484,16 @@
         var region = this.instance.region;
         for (var i = 0; i < field.choices.length; i++) {
           var choice = field.choices[i];
-          choice.disabled = choice.item.region.url != region;
+          var found = false;
+          var regions = choice.item.regions || [choice.item.region];
+          for (var j = 0; j < regions.length; j++) {
+            var choice_region = regions[j];
+            if (choice_region.url == region) {
+              found = true;
+              break;
+            }
+          }
+          choice.disabled = !found;
         }
         var choice = this.getChoiceByValue(field.choices, this.instance.image);
         if (choice && choice.disabled) {
