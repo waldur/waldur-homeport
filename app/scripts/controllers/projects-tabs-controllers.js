@@ -525,6 +525,7 @@
           }).then(function() {
             currentStateService.getCustomer().then(function(customer) {
               $state.go('organizations.details', {uuid: customer.uuid, tab: 'projects'}, {notify: false});
+              // TODO: consider not using a full reload here
               $window.location.reload();
             });
           });
