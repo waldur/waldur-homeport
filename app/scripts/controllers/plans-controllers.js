@@ -16,6 +16,7 @@
         this.controllerScope = controllerScope;
         this.checkPermissions();
         this.selectedPlan = null;
+        this.helpIconMessage = "Both VMs and applications are counted as resources";
       },
 
       checkPermissions: function() {

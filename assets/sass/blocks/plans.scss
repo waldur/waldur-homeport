@@ -153,6 +153,9 @@
                 }
                 span {
                     display: block;
+                    &.inline {
+                        display: inline;
+                    }
                 }
                 .plan-price {
                     @include property(font-size, $small-font);
