@@ -15,6 +15,7 @@
       link: function (scope, element) {
         var trigger = element;
         var text = trigger.find('span');
+        text.addClass('help-icon-span');
 
         trigger.css('position', 'relative');
 

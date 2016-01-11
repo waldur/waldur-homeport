@@ -7,7 +7,7 @@
         @include icon-fa;
         content: '\f059';
     } // &:before
-    span {
+    span.help-icon-span {
         display: none;
         position: absolute;
         min-width: 100px;
