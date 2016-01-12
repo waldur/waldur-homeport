@@ -197,7 +197,8 @@
         })
 
         .state('dashboard.index', {
-          url: ':tab',
+          reloadOnSearch: false,
+          url: '?tab',
           views: {
             'appHeader@dashboard': {
               templateUrl: 'views/partials/app-header.html',
@@ -263,7 +264,8 @@
         })
 
         .state('projects.details', {
-          url: ':uuid/:tab',
+          reloadOnSearch: false,
+          url: ':uuid/?tab',
           views: {
             'appContent': {
               templateUrl: 'views/project/details.html',
@@ -334,7 +336,8 @@
         })
 
         .state('profile.details', {
-          url: ':tab',
+          reloadOnSearch: false,
+          url: '?tab',
           views: {
             'appHeader': {
               templateUrl: 'views/partials/app-header.html',
@@ -435,7 +438,8 @@
         })
 
         .state('organizations.details', {
-          url: ':uuid/:tab-:providerUuid-:providerType',
+          reloadOnSearch: false,
+          url: ':uuid/?tab&providerUuid&providerType',
           views: {
             'appContent': {
               templateUrl: 'views/customer/details.html',
@@ -513,7 +517,8 @@
         })
 
         .state('users.details', {
-          url: ':uuid/',
+          reloadOnSearch: false,
+          url: ':uuid/?tab',
           views: {
             'appContent': {
               templateUrl: 'views/user/details.html',

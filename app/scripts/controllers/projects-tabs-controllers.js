@@ -489,7 +489,6 @@
       'currentStateService',
       '$rootScope',
       '$state',
-      '$window',
       ProjectDeleteTabController
     ]);
 
@@ -498,8 +497,7 @@
     projectsService,
     currentStateService,
     $rootScope,
-    $state,
-    $window
+    $state
   ) {
     var controllerScope = this;
     var DeleteController = baseControllerClass.extend({
@@ -523,10 +521,10 @@
               $rootScope.$broadcast('refreshProjectList', {model: controllerScope.project, remove: true});
             });
           }).then(function() {
-            currentStateService.getCustomer().then(function(customer) {
-              $state.go('organizations.details', {uuid: customer.uuid, tab: 'projects'}, {notify: false});
-              // TODO: consider not using a full reload here
-              $window.location.reload();
+            currentStateService.reloadCurrentCustomer(function(customer) {
+              $rootScope.$broadcast('checkQuotas:refresh');
+              $rootScope.$broadcast('customerBalance:refresh');
+              $state.go('organizations.details', {uuid: customer.uuid, tab: 'projects'});
             });
           });
         }

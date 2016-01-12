@@ -6,10 +6,10 @@
     <div class="white-box">
         <ul class="sort-list event-nav">
             <li ng-class="{'active':activeTab == 'activity','inactive':activeTab == 'costs'}">
-                <a ui-sref="dashboard.index({tab:'activity'})" ng-click="activeTab = 'activity'">Activity</a>
+                <a ui-sref="{tab:'activity'}" ng-click="activeTab = 'activity'">Activity</a>
             </li>
             <li ng-class="{'active':activeTab == 'costs','inactive':activeTab == 'activity'}">
-                <a ui-sref="dashboard.index({tab:'costs'})" ng-click="activeTab = 'costs'">Costs</a>
+                <a ui-sref="{tab:'costs'}" ng-click="activeTab = 'costs'">Costs</a>
             </li>
         </ul>
         <div class="event-action-buttons" ng-show="activeTab == 'activity'">

@@ -439,7 +439,6 @@
         'customersService',
         'currentStateService',
         '$state',
-        '$window',
         CustomerDeleteTabController
       ]);
 
@@ -447,8 +446,7 @@
       baseControllerClass,
       customersService,
       currentStateService,
-      $state,
-      $window
+      $state
   ) {
     var controllerScope = this;
     var DeleteController = baseControllerClass.extend({
@@ -467,8 +465,7 @@
             customersService.clearAllCacheForCurrentEndpoint();
             customersService.getPersonalOrFirstCustomer(instance.name).then(function(customer) {
               currentStateService.setCustomer(customer);
-              $state.transitionTo('organizations.details', {uuid: customer.uuid}, {notify: false});
-              $window.location.reload();
+              $state.go('organizations.details', {uuid: customer.uuid, tab: 'eventlog'});
             });
           });
         }
