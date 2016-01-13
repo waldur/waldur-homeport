@@ -359,11 +359,13 @@
         });
       },
       getCounters: function() {
-        var query = angular.extend(
-            {UUID: this.model.uuid},
+        return currentStateService.getProject().then(function(project) {
+          var query = angular.extend(
+            {UUID: project.uuid},
             eventsService.defaultFilter
-        );
-        return projectsService.getCounters(query);
+          );
+          return projectsService.getCounters(query);
+        });
       }
     });
 

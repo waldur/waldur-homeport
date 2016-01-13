@@ -25,7 +25,7 @@
           scope.options.activeTab = tab;
           var params = $stateParams || {};
           params.tab = tab;
-          $state.transitionTo($state.current.name, params);
+          $state.go($state.current.name, params);
           getSearchStatus(tab);
         }
 

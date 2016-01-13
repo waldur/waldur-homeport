@@ -677,8 +677,12 @@
         vm.countTotal();
         vm.loadingProviders = true;
 
-        var promise = currentStateService.getProject().then(function(response) {
-          vm.currentProject = response;
+        var projectsPromise = currentStateService.getProject(),
+            supportPromise = premiumSupportPlansService.getList(),
+          listPromises = $q.all([projectsPromise, supportPromise]);
+        listPromises.then(function(entities) {
+          vm.currentProject = entities[0];
+          var supportList = entities[1];
           for (var j = 0; j < categories.length; j++) {
             var category = categories[j];
             vm.categoryServices[category.name] = [];
@@ -697,32 +701,30 @@
               return a.enabled < b.enabled;
             });
           }
-          return vm.addSupportCategory();
+          vm.addSupportCategory(supportList);
         });
-        ncUtils.blockElement('store-content', promise);
+        ncUtils.blockElement('store-content', listPromises);
       },
       isSafeState: function(state) {
         return state !== 'Erred';
       },
-      addSupportCategory: function() {
+      addSupportCategory: function(list) {
         var vm = this;
         if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('premiumSupport') == -1) {
-          premiumSupportPlansService.getList().then(function(response) {
             vm.loadingProviders = false;
-            if (response.length != 0) {
+            if (list.length != 0) {
               vm.renderStore = true;
               var category = {
                 type: 'package',
                 name: 'SUPPORT',
                 icon: 'wrench',
-                packages: response
+                packages: list
               };
               vm.categories.push(category);
               if ($stateParams.category == 'support') {
                 vm.setCategory(category);
               }
             }
-          });
         } else {
           vm.loadingProviders = false;
         }
