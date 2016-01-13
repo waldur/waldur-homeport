@@ -32,6 +32,8 @@ angular.module('ncsaas')
 
     currency: '$',
 
+    appStoreLimitChoices: 10,
+
     // Index of category inside of appStoreCategories
     AllResources: -1,
     VirtualMachines: 0,
