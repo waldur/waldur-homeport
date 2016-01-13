@@ -1,3 +1,5 @@
+$searchInputHeight: 32px;
+
 .title-wrapper {
   min-height: 70px;
   padding-top: 15px;
@@ -71,7 +73,7 @@
           background-position: 97% 50%;
         } // xs
         width: 152px;
-        height: 32px;
+        height: $searchInputHeight;
         margin-bottom: 3px;
         border:1px solid #d3d2d2;
         border-radius: 3px;
@@ -240,6 +242,7 @@
   aside {
     .input-group {
       margin-top: 0;
+      height: $searchInputHeight;
     }
 
   }
