@@ -159,12 +159,13 @@
                     <a ui-sref="organizations.details({uuid: Header.currentCustomer.uuid})">{{ Header.currentCustomer.name }}</a>
                 </li>
                 <li class="on-tablet customers choose-list" stoppropagation
-                    ng-click="showOrganizations = !showOrganizations"
-                    ng-class="{'choose-list-active': showOrganizations}">
+                    ng-click="Header.showOrganizations = !Header.showOrganizations"
+                    ng-if="Header.customers.length > 1"
+                    ng-class="{'choose-list-active': Header.showOrganizations}">
                     <a>Choose organization</a>
                 </li>
                 <li class="on-tablet customers choose-list-item"
-                    ng-show="showOrganizations && customer.uuid !== Header.currentCustomer.uuid"
+                    ng-show="Header.showOrganizations && customer.uuid !== Header.currentCustomer.uuid"
                     ng-repeat="customer in Header.customers">
                     <a ng-click="Header.setCurrentCustomer(customer)">{{ customer.name }}</a>
                 </li>
@@ -174,11 +175,12 @@
                         Manage organizations
                     </a>
                 </li>
-                <li class="on-tablet customers current">
+                <li class="on-tablet customers current" ng-if="Header.currentProject.name">
                     <span>Project</span>
                     <a ui-sref="projects.details({uuid: Header.currentProject.uuid})">{{ Header.currentProject.name }}</a>
                 </li>
                 <li class="on-tablet customers choose-list" stoppropagation
+                    ng-if="Header.projects.length > 1"
                     ng-click="showProjects = !showProjects"
                     ng-class="{'choose-list-active': showProjects}">
                     <a>Choose project</a>
