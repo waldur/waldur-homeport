@@ -20,10 +20,12 @@
         trigger.css('position', 'relative');
 
         function show(event) {
+          var topPos = 4;
+          trigger.hasClass('button-help-icon') && (topPos = 8);
           text.addClass('active');
           text.css({
             'position': 'absolute',
-            'top': -(text[0].offsetHeight + 4) + 'px',
+            'top': -(text[0].offsetHeight + topPos) + 'px',
             'left': '50%',
             'margin-left': -text[0].offsetWidth/2 + 'px'
           });
