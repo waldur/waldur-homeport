@@ -299,7 +299,6 @@
     controllerScope.__proto__ = new EventController();
   }
 
-
   angular.module('ncsaas')
     .controller('DashboardActivityController', [
       'baseControllerClass',

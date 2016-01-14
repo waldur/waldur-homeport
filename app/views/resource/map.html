@@ -1,0 +1,9 @@
+<div id="map_canvas" ng-controller="MapController">
+    <ui-gmap-google-map center="map.center" zoom="map.zoom">
+        <ui-gmap-markers models="markers" coords="'coords'">
+            <ui-gmap-windows show="show">
+                <div ng-non-bindable>{{ title }}</div>
+            </ui-gmap-windows>
+        </ui-gmap-markers>
+    </ui-gmap-google-map>
+</div>

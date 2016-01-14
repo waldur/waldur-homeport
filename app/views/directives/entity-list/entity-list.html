@@ -16,6 +16,9 @@
                 <filter-list filter-controller="entityList"></filter-list>
             </li>
             <li class="right-sort">
+                <div ng-if="entityOptions.entityData.openMap && entityList.list.length != 0" class="inline">
+                  <a class="button" ng-click="entityOptions.entityData.openMap()">Open map</span></a>
+                </div>
                 <div ng-if="entityOptions.entityData.createLink"
                      class="tooltip-relative inline"
                      check-quotas="{{entityOptions.entityData.checkQuotas}}"

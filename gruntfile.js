@@ -41,7 +41,9 @@ module.exports = function(grunt) {
                         'app/static/css/angular-flash.css',
                         'app/static/css/angucomplete-alt.css',
                         'app/static/css/xeditable.css',
-                        'app/static/css/angular-block-ui.css'
+                        'app/static/css/angular-block-ui.css',
+                        'app/static/css/ngDialog.css',
+                        'app/static/css/ngDialog-theme-default.css',
                     ]
                 }
             }
@@ -312,6 +314,48 @@ module.exports = function(grunt) {
                         expand: true,
                         cwd: 'bower_components/angular-sanitize/',
                         src: ['angular-sanitize.js'],
+                        dest: 'app/static/js/angular/',
+                        filter: 'isFile'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/ng-dialog/js/',
+                        src: ['ngDialog.js'],
+                        dest: 'app/static/js/angular/',
+                        filter: 'isFile'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/ng-dialog/css/',
+                        src: ['ngDialog.css'],
+                        dest: 'app/static/css/',
+                        filter: 'isFile'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/ng-dialog/css/',
+                        src: ['ngDialog-theme-default.css'],
+                        dest: 'app/static/css/',
+                        filter: 'isFile'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/lodash/',
+                        src: ['lodash.js'],
+                        dest: 'app/static/js/',
+                        filter: 'isFile'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/angular-simple-logger/dist/',
+                        src: ['angular-simple-logger.js'],
+                        dest: 'app/static/js/angular/',
+                        filter: 'isFile'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/angular-google-maps/dist/',
+                        src: ['angular-google-maps.js'],
                         dest: 'app/static/js/angular/',
                         filter: 'isFile'
                     },
@@ -592,7 +636,10 @@ module.exports = function(grunt) {
                     'app/scripts/configs/*.js',
                     'app/scripts/directives/*.js',
                     'app/scripts/services/*.js',
-                    'app/static/js/angular/angular-block-ui.js'
+                    'app/static/js/angular/angular-block-ui.js',
+                    'app/static/js/angular/ngDialog.js',
+                    'app/static/js/angular/angular-simple-logger.js',
+                    'app/static/js/angular/angular-google-maps.js',
                 ],
                 dest: 'app/static/js/main/main.js'
             }

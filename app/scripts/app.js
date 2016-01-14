@@ -23,7 +23,9 @@
       'ngFileUpload',
       'xeditable',
       'blockUI',
-      'ngSanitize'
+      'ngSanitize',
+      'ngDialog',
+      'uiGmapgoogle-maps'
     ])
     // urls
     .config(function($stateProvider, $urlRouterProvider, blockUIConfig, MODE) {

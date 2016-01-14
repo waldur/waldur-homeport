@@ -2,6 +2,37 @@
 
 (function() {
   angular.module('ncsaas')
+    .controller('MapController', function($scope, $state) {
+      $scope.computeCenter = function(markers) {
+        function getCenter(xs) {
+          return (Math.min(xs) + Math.max(xs)) / 2;
+        }
+
+        var latitudes = markers.map(function(item) {
+          return item.coords.latitude;
+        });
+
+        var longitudes = markers.map(function(item) {
+          return item.coords.longitude;
+        });
+
+        var center = {
+          latitude: getCenter(latitudes),
+          longitude: getCenter(longitudes)
+        };
+
+        return center;
+      }
+
+      $scope.markers = $scope.ngDialogData.markers;
+
+      $scope.map = {
+        center: $scope.computeCenter($scope.markers),
+        zoom: 15
+      };
+    });
+
+  angular.module('ncsaas')
     .service('baseResourceListController',
     ['baseControllerListClass',
     'ENV',
@@ -10,6 +41,7 @@
     'servicesService',
     'currentStateService',
     'projectsService',
+    'ngDialog',
     baseResourceListController
     ]);
 
@@ -21,7 +53,8 @@
     resourcesService,
     servicesService,
     currentStateService,
-    projectsService) {
+    projectsService,
+    ngDialog) {
     var ControllerListClass = baseControllerListClass.extend({
       init: function() {
         this.service = resourcesService;
@@ -139,6 +172,7 @@
             }
           ]
         };
+
         currentStateService.getProject().then(function(project) {
           if (project) {
             if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('resources') == -1) {
@@ -158,6 +192,36 @@
             }
           }
         });
+      },
+      openMap: function() {
+        function hasCoordinates(item) {
+          return item.latitude != null && item.longitude != null;
+        }
+
+        function makeMarker(item, index) {
+          return {
+            id: index,
+            coords: {
+              latitude: item.latitude,
+              longitude: item.longitude
+            },
+            title: item.name,
+            show: false
+          };
+        }
+
+        var markers = this.list.filter(hasCoordinates).map(makeMarker);
+
+        if(!markers) {
+          alert('No virtual machines with coordinates');
+        } else {
+          ngDialog.open({
+            template: 'views/resource/map.html',
+            data: {
+              markers: markers
+            }
+          });
+        }
       },
       projectHasNonSharedService: function(project) {
         for (var i = 0; i < project.services.length; i++) {
