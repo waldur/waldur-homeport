@@ -1,35 +1,25 @@
 .nav-list-side {
     @include clear-list;
     @include clearfix;
-    &:not(:last-child) {
-        > li {
-            &:not(:last-child) {
-                > a {
-                    border-bottom: 1px solid #47a340;
-                }
-            }
-        }
-    }
     > li {
+        border-bottom: 1px solid #47a340;
+        display: table;
+        width: 100%;
+        height: 50px;
+
         &.dropdown {
             position: relative;
+            display: block;
         } // &.dropdown
-        &.add-something {
-            @include bp(sm) {
-                display: none;
-            } // sm
-            @include bp(md) {
-                display: none;
-            } // md
-        } // &.add-something
 
         > a {
             @include property(margin, 0 20);
-            @include property(padding-top, 10);
-            @include property(height, 50);
-            display: block;
-            color: #1F3305;
+            @include property(padding, 10 0);
             text-decoration: none;
+            display: table-cell;
+            padding-left: 15px;
+            vertical-align: middle;
+
             &.active {
                 color: white;
                 position: relative;
@@ -66,7 +56,6 @@
                     display: block;
                     line-height: 1;
                 } // span
-                .customer-name {} // customer-name
                 .active-context {
                     @include property(font-size, $extra-small-font);
                 } // active-context
@@ -75,15 +64,17 @@
                 @extend .customer-context
             }
             &.user-area {
-                @include property(padding-top, 5);
+                @include property(padding-top, 20);
+                @include property(padding-bottom, 20);
                 .user-name {
-                    position: relative;
-                    @include property(top, 2);
-                    @include property(margin-left, 5);
-                    @include bp(sm) {
-                        display: none;
-                    } // sm
+                    @include property(margin-left, 50);
                 } // user-name
+                li {
+                    display: block;
+                }
+                a {
+                    display: block;
+                }
             } // &.user-area
             &.support {
                 &:before {

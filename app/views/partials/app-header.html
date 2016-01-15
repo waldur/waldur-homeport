@@ -17,8 +17,11 @@
                         <span class="customer-name">{{ Header.currentCustomer.name }}</span>
                     </a>
                     <ul class="nav-sublist" ng-show="Header.menuState.customerMenu">
-                        <li>
-                            <a class="details" ng-click="Header.goToCurrentOrganization()">Details</a>
+                        <li class="manage-item">
+                            <a ng-click="Header.goToCurrentOrganization()">
+                                <i class="icon zoom"></i>
+                                Details
+                            </a>
                         </li>
                         <li ng-repeat="customer in Header.customers" ng-if="customer.uuid != Header.currentCustomer.uuid">
                             <a ng-click="Header.setCurrentCustomer(customer)">{{ customer.name }}</a>
@@ -155,8 +158,10 @@
                     </a>
                 </li>
                 <li class="on-tablet customers current">
-                    <span>Organization</span>
-                    <a ui-sref="organizations.details({uuid: Header.currentCustomer.uuid})">{{ Header.currentCustomer.name }}</a>
+                    <a ui-sref="organizations.details({uuid: Header.currentCustomer.uuid})">
+                        <span>Organization</span>
+                        <div class="customer-name">{{ Header.currentCustomer.name }}</div>
+                    </a>
                 </li>
                 <li class="on-tablet customers choose-list" stoppropagation
                     ng-click="Header.showOrganizations = !Header.showOrganizations"
@@ -176,8 +181,10 @@
                     </a>
                 </li>
                 <li class="on-tablet customers current" ng-if="Header.currentProject.name">
-                    <span>Project</span>
-                    <a ui-sref="projects.details({uuid: Header.currentProject.uuid})">{{ Header.currentProject.name }}</a>
+                    <a ui-sref="projects.details({uuid: Header.currentProject.uuid})">
+                        <span>Project</span>
+                        <div class="customer-name">{{ Header.currentProject.name }}</div>
+                    </a>
                 </li>
                 <li class="on-tablet customers choose-list" stoppropagation
                     ng-if="Header.projects.length > 1"
@@ -205,38 +212,14 @@
                         ng-class="{'active': Header.menuItemActive === 'support'}" class="support">Support</a>
                 </li>
                 <li class="dropdown">
-                    <a href="" class="user-area drop-active" ng-click="Header.menuToggle('profileMenu', $event)"
-                        ng-class="{'active': Header.menuState.profileMenu}" scroll-to-me container-class="mobile-menu-side">
+                    <a href="" class="user-area drop-active" ng-click="Header.menuToggle('sideProfileMenu', $event)"
+                        ng-class="{'active': Header.menuState.sideProfileMenu}" scroll-to-me container-class="mobile-menu-side">
                         <span class="avatar">
                             <img gravatar-src="Header.currentUser.email" gravatar-size="100">
                         </span>
                         <span class="user-name">{{ Header.currentUser.full_name }}</span>
                     </a>
-                    <ul class="nav-sublist-side user-area" ng-show="Header.menuState.profileMenu">
-                        <li visible="services" class="on-tablet">
-                            <a ui-sref="services.create" class="service">Add provider</a>
-                        </li>
-                        <li visible="projects" class="on-tablet">
-                            <a ui-sref="projects.create" class="project">
-                                <i class="icon plus"></i> Add project
-                            </a>
-                        </li>
-                        <li visible="resources" class="on-tablet">
-                            <a ui-sref="appstore.store" class="resource">Add resource</a>
-                        </li>
-                        <li class="divider on-tablet"></li>
-                        <li visible="customers" class="on-tablet" ng-repeat="customer in Header.customers">
-                            <a ng-click="Header.setCurrentCustomer(customer)"
-                                ng-class="{'current': customer.uuid == Header.currentCustomer.uuid}">{{ customer.name }}</a>
-                        </li>
-                        <li class="divider on-tablet"></li>
-                        <li visible="customers" class="on-tablet">
-                            <a ui-sref="organizations.list" class="manage">
-                                <i class="icon wrench"></i>
-                                Manage organizations
-                            </a>
-                        </li>
-                        <li class="divider on-tablet"></li>
+                    <ul class="nav-sublist-side user-area" ng-show="Header.menuState.sideProfileMenu">
                         <li>
                             <a ui-sref="profile.details">Profile</a>
                         </li>
