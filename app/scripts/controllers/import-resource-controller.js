@@ -12,6 +12,7 @@
       '$state',
       '$filter',
       '$q',
+      'ncUtils',
       'ncUtilsFlash',
       '$rootScope',
       ImportResourceController]);
@@ -26,6 +27,7 @@
     $state,
     $filter,
     $q,
+    ncUtils,
     ncUtilsFlash,
     $rootScope
     ) {
@@ -114,13 +116,15 @@
         this.selectedResources = [];
         this.importedResources = [];
         controllerScope.selectedService = service;
-        this.getResourcesForService(service);
-        this.getImportedResourcesForService(service);
+        var resourcesForServicePromise = this.getResourcesForService(service),
+          importedResourcesPromise= this.getImportedResourcesForService(service),
+          resourcesPromises = $q.all([resourcesForServicePromise, importedResourcesPromise]);
+        ncUtils.blockElement('import-second-step', resourcesPromises);
       },
 
       getImportedResourcesForService: function(service) {
         controllerScope.importedResources = [];
-        resourcesService.getImportedResources(service).then(function(resources) {
+        return resourcesService.getImportedResources(service).then(function(resources) {
           controllerScope.importedResources = resources;
         }, function() {
           ncUtilsFlash.warning('Unable to get list of imported resources');
@@ -131,7 +135,7 @@
         controllerScope.importableResources = [];
         controllerScope.noResources = false;
         var query = {operation: 'link', project_uuid: controllerScope.currentProject.uuid};
-        servicesService.getList(query, service.url).then(function(response) {
+        return servicesService.getList(query, service.url).then(function(response) {
           for (var i = 0; i < response.length; i++) {
             response[i].status = 'ready';
           }
@@ -164,7 +168,9 @@
       },
 
       save: function() {
-        return this.importSelectedResources().then(this.onSuccess.bind(this));
+        var savePromise = this.importSelectedResources();
+        ncUtils.blockElement('import-second-step', savePromise);
+        return savePromise.then(this.onSuccess.bind(this));
       },
 
       importSelectedResources: function() {

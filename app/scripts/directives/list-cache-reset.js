@@ -55,20 +55,25 @@
         function mergeLists(list1, list2) {
           list1 = list1 || [];
           var itemByUuid = {},
-            deletedItemIndexes = [],
+            deletedItemUuids = [],
             newListUiids = list2.map(function(item) {
               return item.uuid;
             });
           for (var i = 0; i < list1.length; i++) {
             var item = list1[i];
             if (newListUiids.indexOf(item.uuid) === -1) {
-              deletedItemIndexes.push(i);
+              deletedItemUuids.push(item.uuid);
               continue;
             }
             itemByUuid[item.uuid] = item;
           }
-          for (var j = 0; j < deletedItemIndexes.length; j++) {
-            list1.splice(deletedItemIndexes[j], 1);
+          for (var j = 0; j < deletedItemUuids.length; j++) {
+            for (var index = 0; index < list.length; index++) {
+              if (list[index].id === deletedItemUuids[j]) {
+                list.splice(index, 1);
+                break;
+              }
+            }
           }
           for (var i = 0; i < list2.length; i++) {
             var item2 = list2[i];
@@ -77,8 +82,8 @@
               list1.push(item2);
               continue;
             }
-            for(var key in item2) {
-              item1[key] = item2[key];
+            for (var key in item2) {
+              item2.hasOwnProperty(key) && (item1[key] = item2[key]);
             }
           }
         }
