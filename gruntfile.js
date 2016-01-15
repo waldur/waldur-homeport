@@ -44,6 +44,7 @@ module.exports = function(grunt) {
                         'app/static/css/angular-block-ui.css',
                         'app/static/css/ngDialog.css',
                         'app/static/css/ngDialog-theme-default.css',
+                        'app/static/css/leaflet.css',
                     ]
                 }
             }
@@ -340,22 +341,22 @@ module.exports = function(grunt) {
                     },
                     {
                         expand: true,
-                        cwd: 'bower_components/lodash/',
-                        src: ['lodash.js'],
+                        cwd: 'bower_components/leaflet/dist/',
+                        src: ['leaflet.js'],
                         dest: 'app/static/js/',
                         filter: 'isFile'
                     },
                     {
                         expand: true,
-                        cwd: 'bower_components/angular-simple-logger/dist/',
-                        src: ['angular-simple-logger.js'],
-                        dest: 'app/static/js/angular/',
+                        cwd: 'bower_components/leaflet/dist/',
+                        src: ['leaflet.css'],
+                        dest: 'app/static/css/',
                         filter: 'isFile'
                     },
                     {
                         expand: true,
-                        cwd: 'bower_components/angular-google-maps/dist/',
-                        src: ['angular-google-maps.js'],
+                        cwd: 'bower_components/angular-leaflet-directive/dist/',
+                        src: ['angular-leaflet-directive.js'],
                         dest: 'app/static/js/angular/',
                         filter: 'isFile'
                     },
@@ -638,8 +639,8 @@ module.exports = function(grunt) {
                     'app/scripts/services/*.js',
                     'app/static/js/angular/angular-block-ui.js',
                     'app/static/js/angular/ngDialog.js',
-                    'app/static/js/angular/angular-simple-logger.js',
-                    'app/static/js/angular/angular-google-maps.js',
+                    'app/static/js/leaflet.js',
+                    'app/static/js/angular/angular-leaflet-directive.js',
                 ],
                 dest: 'app/static/js/main/main.js'
             }

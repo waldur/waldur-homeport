@@ -2,37 +2,6 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('MapController', function($scope, $state) {
-      $scope.computeCenter = function(markers) {
-        function getCenter(xs) {
-          return (Math.min(xs) + Math.max(xs)) / 2;
-        }
-
-        var latitudes = markers.map(function(item) {
-          return item.coords.latitude;
-        });
-
-        var longitudes = markers.map(function(item) {
-          return item.coords.longitude;
-        });
-
-        var center = {
-          latitude: getCenter(latitudes),
-          longitude: getCenter(longitudes)
-        };
-
-        return center;
-      }
-
-      $scope.markers = $scope.ngDialogData.markers;
-
-      $scope.map = {
-        center: $scope.computeCenter($scope.markers),
-        zoom: 15
-      };
-    });
-
-  angular.module('ncsaas')
     .service('baseResourceListController',
     ['baseControllerListClass',
     'ENV',
@@ -42,6 +11,7 @@
     'currentStateService',
     'projectsService',
     'ngDialog',
+    '$rootScope',
     baseResourceListController
     ]);
 
@@ -54,7 +24,8 @@
     servicesService,
     currentStateService,
     projectsService,
-    ngDialog) {
+    ngDialog,
+    $rootScope) {
     var ControllerListClass = baseControllerListClass.extend({
       init: function() {
         this.service = resourcesService;
@@ -198,28 +169,28 @@
           return item.latitude != null && item.longitude != null;
         }
 
-        function makeMarker(item, index) {
+        function makeMarker(item) {
           return {
-            id: index,
-            coords: {
-              latitude: item.latitude,
-              longitude: item.longitude
-            },
-            title: item.name,
-            show: false
+            lat: item.latitude,
+            lng: item.longitude,
+            message: item.name
           };
         }
 
-        var markers = this.list.filter(hasCoordinates).map(makeMarker);
+        var items = this.list.filter(hasCoordinates);
+        var markers = items.map(makeMarker);
 
-        if(!markers) {
+        if(!items) {
           alert('No virtual machines with coordinates');
         } else {
+          var scope = $rootScope.$new();
+          scope.markers = markers;
+          scope.maxbounds = new L.LatLngBounds(markers);
           ngDialog.open({
-            template: 'views/resource/map.html',
-            data: {
-              markers: markers
-            }
+            template: '<leaflet width="100%" markers="markers" maxbounds="maxbounds"></leaflet>',
+            plain: true,
+            className: 'ngdialog-theme-default map-dialog',
+            scope: scope
           });
         }
       },

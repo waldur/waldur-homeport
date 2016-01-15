@@ -25,7 +25,7 @@
       'blockUI',
       'ngSanitize',
       'ngDialog',
-      'uiGmapgoogle-maps'
+      'leaflet-directive'
     ])
     // urls
     .config(function($stateProvider, $urlRouterProvider, blockUIConfig, MODE) {
