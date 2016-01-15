@@ -250,6 +250,10 @@
                                        ng-class="{'active': AppStore.isListExpanded(field)}"
                                        class="toggle-link pull-right">Show {{ AppStore.isListExpanded(field) && 'less' || 'more' }} choices</a>
 
+                                    <div ng-show="AppStore.remoteLoadMore(field.name) && AppStore.isListLong(field)"
+                                         class="appstore-count-block pull-right">
+                                        Loaded {{field.choices.length}} of {{AppStore.selectedResourceImagesCount}} images
+                                    </div>
                                     <a ng-show="AppStore.remoteLoadMore(field.name) && AppStore.isListLong(field)"
                                        ng-click="AppStore.loadMoreImages(field)"
                                        class="toggle-link remote-load pull-right">Load more choices</a>
