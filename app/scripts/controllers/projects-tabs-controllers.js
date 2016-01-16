@@ -242,6 +242,7 @@
         this.category = ENV.VirtualMachines;
         this._super();
         this.entityOptions.entityData.noMatchesText = 'No VMs found matching filter.';
+        this.entityOptions.entityData.openMap = this.openMap.bind(this);
       }
     });
     controllerScope.__proto__ = new ResourceController();

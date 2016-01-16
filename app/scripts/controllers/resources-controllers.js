@@ -10,6 +10,8 @@
     'servicesService',
     'currentStateService',
     'projectsService',
+    'ngDialog',
+    '$rootScope',
     baseResourceListController
     ]);
 
@@ -21,7 +23,9 @@
     resourcesService,
     servicesService,
     currentStateService,
-    projectsService) {
+    projectsService,
+    ngDialog,
+    $rootScope) {
     var ControllerListClass = baseControllerListClass.extend({
       init: function() {
         this.service = resourcesService;
@@ -139,6 +143,7 @@
             }
           ]
         };
+
         currentStateService.getProject().then(function(project) {
           if (project) {
             if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('resources') == -1) {
@@ -158,6 +163,36 @@
             }
           }
         });
+      },
+      openMap: function() {
+        function hasCoordinates(item) {
+          return item.latitude != null && item.longitude != null;
+        }
+
+        function makeMarker(item) {
+          return {
+            lat: item.latitude,
+            lng: item.longitude,
+            message: item.name
+          };
+        }
+
+        var items = this.list.filter(hasCoordinates);
+        var markers = items.map(makeMarker);
+
+        if(!items) {
+          alert('No virtual machines with coordinates');
+        } else {
+          var scope = $rootScope.$new();
+          scope.markers = markers;
+          scope.maxbounds = new L.LatLngBounds(markers);
+          ngDialog.open({
+            template: '<leaflet width="100%" markers="markers" maxbounds="maxbounds"></leaflet>',
+            plain: true,
+            className: 'ngdialog-theme-default map-dialog',
+            scope: scope
+          });
+        }
       },
       projectHasNonSharedService: function(project) {
         for (var i = 0; i < project.services.length; i++) {

@@ -23,7 +23,9 @@
       'ngFileUpload',
       'xeditable',
       'blockUI',
-      'ngSanitize'
+      'ngSanitize',
+      'ngDialog',
+      'leaflet-directive'
     ])
     // urls
     .config(function($stateProvider, $urlRouterProvider, blockUIConfig, MODE) {
