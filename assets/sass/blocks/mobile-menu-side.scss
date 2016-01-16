@@ -6,15 +6,19 @@
     position: fixed;
     @include property(top, 50);
     background-color: $head-menu-color;
+    $hoverColor: rgba(255, 255, 255, 0.2);
     z-index: 14;
     box-shadow: 3px 0px 4px 0px rgba(0,0,0,0.32);
     .nav-list-side {
         > li {
             > a {
                 color: #ffffff;
-                line-height: 30px;
+                line-height: 1;
             }
         }
+    }
+    li:hover {
+        background-color: $hoverColor;
     }
     .on-tablet {
         &.customers {
@@ -38,19 +42,19 @@
                     }
                 }
             }
-            &.choose-list-item {
-                background-color: rgba(255, 255, 255, 0.2);
-            }
             &.current {
                 a {
                     font-weight: bold;
                 }
             }
             span {
-                position: absolute;
                 font-size: 11px;
-                color: #fff;
-                left: 20px;
+            }
+            .customer-name {
+                width: 220px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
         }
     }
@@ -60,6 +64,8 @@
         }
         .avatar {
             border-bottom-width: 0;
+            position: absolute;
+            top: 10px;
         }
     }
     @include bp(xs) {

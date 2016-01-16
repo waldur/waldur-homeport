@@ -22,7 +22,10 @@
                      sref="{{ entityOptions.entityData.createLink }}"
                      class-link="button"
                      tooltip-type="list-items">
-                    <span>{{ entityOptions.entityData.createLinkText }}</span>
+                    <span>
+                      <i class="icon plus"></i>
+                      {{ entityOptions.entityData.createLinkText }}
+                    </span>
                 </div>
                 <span class="button-tooltip"
                       ng-if="entityOptions.entityData.importLink"

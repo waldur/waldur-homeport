@@ -14,6 +14,11 @@
       height: 33px;
       display: inline-block;
     }
+    @include bp(xs) {
+      clear: both;
+      float: none;
+      padding-top: 10px;
+    }
   }
   .active-content {
     animation: content-show .5s 1 ease-out;

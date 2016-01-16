@@ -55,60 +55,6 @@
                     transform: translate(1.1, 1.1);
                 } // &:before
             } // &.current
-            &.manage {
-                &:before {
-                    position: absolute;
-                    @include icon-fa;
-                    @include property(left, 20);
-                    content: '\f1ad';
-                    transform: translate(1.1, 1.1);
-                } // &:before
-            } // &.manage
-            &.service {
-                &:before {
-                    position: absolute;
-                    @include icon-fa;
-                    @include property(left, 20);
-                    content: '\f0c2';
-                    transform: translate(1.1, 1.1);
-                } // &:before
-            } // &.service
-            &.project {
-                &:before {
-                    position: absolute;
-                    @include icon-fa;
-                    @include property(left, 20);
-                    content: '\f07c';
-                    transform: translate(1.1, 1.1);
-                } // &:before
-            } // &.project
-            &.resource {
-                &:before {
-                    position: absolute;
-                    @include icon-fa;
-                    @include property(left, 20);
-                    content: '\f233';
-                    transform: translate(1.1, 1.1);
-                } // &:before
-            } // &.resource
-            &.user {
-                &:before {
-                    position: absolute;
-                    @include icon-fa;
-                    @include property(left, 20);
-                    content: '\f007';
-                    transform: translate(1.1, 1.1);
-                } // &:before
-            } // invite-user
-            &.import {
-                &:before {
-                    position: absolute;
-                    @include icon-fa;
-                    @include property(left, 20);
-                    content: '\f0ed';
-                    transform: translate(1.1, 1.1);
-                } // &:before
-            } // import
         } // > a
     } // > li
 } // nav-sublist
