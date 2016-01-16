@@ -18,6 +18,14 @@
                            ng-if="::!project.plan && !project.has_pending_contracts"
                            ng-click="DashboardController.addSupportContract(project)">Add SLA</a>
                     </div>
+                    <div class="information-blocks">
+                        <a stoppropagation class="button-support"ng-click="">
+                            {{project.cost | currency}}
+                            <span class="inline">
+                                <helpicon class="button-help-icon" help-text="Projected cost of resources used during this month within a project."></helpicon>
+                            </span>
+                        </a>
+                    </div>
                 </h4>
             </div>
             <div ng-if="project.selected" class="body" block-ui="activity-content-{{ project.uuid }}">

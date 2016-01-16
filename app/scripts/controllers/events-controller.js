@@ -312,6 +312,7 @@
       'eventStatisticsService',
       'resourcesCountService',
       'currentStateService',
+      'priceEstimationService',
       'eventFormatter',
       'alertFormatter',
       'ENV',
@@ -331,6 +332,7 @@
     eventStatisticsService,
     resourcesCountService,
     currentStateService,
+    priceEstimationService,
     eventFormatter,
     alertFormatter,
     ENV,
@@ -395,6 +397,10 @@
           this.getCustomerEvents();
         }
       },
+      setProjectPrices: function() {
+        priceEstimationService.pageSize = 1000;
+        return priceEstimationService.getList();
+      },
       getCustomerAlerts: function() {
         var vm = this;
         var promise = currentStateService.getCustomer().then(function(customer) {
@@ -426,11 +432,21 @@
         ncUtils.blockElement('dashboard-events-list', promise);
       },
       getCustomerProjects: function() {
-        var vm = this;
-        projectsService.getList().then(function(response) {
-          vm.projects = response;
+        var vm = this,
+          pricesPromise = this.setProjectPrices(),
+          projectsPromise = projectsService.getList();
+        $q.all([pricesPromise, projectsPromise]).then(function(result) {
+          var projectsPrices = result[0];
+          vm.projects = result[1];
           for (var i = 0; i < vm.projects.length; i++) {
             vm.projects[i].selected = false;
+            vm.projects[i].cost = 0;
+            for (var j=0; j < projectsPrices.length; j++) {
+              if (vm.projects[i].url == projectsPrices[j].scope) {
+                vm.projects[i].cost += projectsPrices[j].total;
+                break;
+              }
+            }
           }
           vm.selectProject(vm.projects[0]);
         });
