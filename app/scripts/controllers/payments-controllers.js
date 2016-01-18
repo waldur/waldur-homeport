@@ -71,11 +71,11 @@
       },
       cancelPayment: function() {
         var qs = ncUtils.parseQueryString(ncUtils.getQueryString());
-        if (!qs.paymentId || !qs.PayerID) {
+        if (!qs.token) {
           ncUtilsFlash.error('Invalid URL. Unable to parse payment details.');
           return;
         }
-        paymentsService.cancel({payment_id: qs.paymentId}).then(function(response) {
+        paymentsService.cancel({token: qs.token}).then(function(response) {
           ncUtilsFlash.success('Payment has been processed successfully.');
           $state.go('home.home', {});
         });
