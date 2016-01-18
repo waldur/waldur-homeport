@@ -66,6 +66,8 @@
             &.user-area {
                 @include property(padding-top, 20);
                 @include property(padding-bottom, 20);
+                display: block;
+                margin: 0;
                 .user-name {
                     @include property(margin-left, 50);
                 } // user-name

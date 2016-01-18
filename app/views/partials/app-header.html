@@ -188,12 +188,12 @@
                 </li>
                 <li class="on-tablet customers choose-list" stoppropagation
                     ng-if="Header.projects.length > 1"
-                    ng-click="showProjects = !showProjects"
-                    ng-class="{'choose-list-active': showProjects}">
+                    ng-click="Header.showProjects = !Header.showProjects"
+                    ng-class="{'choose-list-active': Header.showProjects}">
                     <a>Choose project</a>
                 </li>
                 <li class="on-tablet customers choose-list-item"
-                    ng-show="showProjects && project.uuid !== Header.currentProject.uuid"
+                    ng-show="Header.showProjects && project.uuid !== Header.currentProject.uuid"
                     ng-repeat="project in Header.projects">
                     <a ng-click="Header.setCurrentProject(project)">{{ project.name }}</a>
                 </li>
