@@ -1,40 +1,88 @@
 'use strict';
 
 (function() {
-    angular.module('ncsaas')
-    .controller('PaymentMockController',
-      ['agreementsService', '$stateParams', '$state', 'baseControllerClass', PaymentMockController]);
+  angular.module('ncsaas')
+  .controller('PaymentApproveController',
+    ['ncUtils',
+     'ncUtilsFlash',
+     'paymentsService',
+     '$state',
+     '$rootScope',
+     'currentStateService',
+     'baseControllerClass',
+     PaymentApproveController]);
 
-  function PaymentMockController(
-    agreementsService, $stateParams, $state, baseControllerClass) {
+  function PaymentApproveController(
+    ncUtils,
+    ncUtilsFlash,
+    paymentsService,
+    $state,
+    $rootScope,
+    currentStateService,
+    baseControllerClass) {
     var controllerScope = this;
     var Controller = baseControllerClass.extend({
-
       init: function() {
         this._super();
-        this.executeOrder();
+        this.approvePayment();
       },
-      executeOrder: function() {
-        agreementsService.$get($stateParams.uuid).then(
-          function(order) {
-            agreementsService.operation('execute', order.url).then(function() {
-              // TODO refactor this function to use named customer_uuid field
-              var array = order.customer.split('/').filter(function(el) {
-                  return el.length !== 0;
-                }),
-                customerUUID = array[4];
-              $state.go('organizations.plans', {uuid:customerUUID});
-            }, function(error) {
-              alert(error.data.detail);
-            });
-          },
-          function(error) {
-            alert(error.data.detail);
-          }
-        );
-      }
+      approvePayment: function() {
+        var qs = ncUtils.parseQueryString(ncUtils.getQueryString());
+        if (!qs.paymentId || !qs.PayerID) {
+          ncUtilsFlash.error('Invalid URL. Unable to parse payment details.');
+          return;
+        }
+        paymentsService.approve({
+          payment_id: qs.paymentId,
+          payer_id: qs.PayerID
+        }).then(function(response) {
+          ncUtilsFlash.success('Payment has been processed successfully.');
+          currentStateService.reloadCurrentCustomer(function() {
+            $rootScope.$broadcast('customerBalance:refresh');
+          });
+          $state.go('home.home', {});
+        });
+      },
     });
 
     controllerScope.__proto__ = new Controller();
   }
+
+  angular.module('ncsaas')
+  .controller('PaymentCancelController',
+    ['ncUtils',
+     'ncUtilsFlash',
+     'paymentsService',
+     '$state',
+     'baseControllerClass',
+     PaymentCancelController]);
+
+  function PaymentCancelController(
+    ncUtils,
+    ncUtilsFlash,
+    paymentsService,
+    $state,
+    baseControllerClass) {
+    var controllerScope = this;
+    var Controller = baseControllerClass.extend({
+      init: function() {
+        this._super();
+        this.cancelPayment();
+      },
+      cancelPayment: function() {
+        var qs = ncUtils.parseQueryString(ncUtils.getQueryString());
+        if (!qs.paymentId || !qs.PayerID) {
+          ncUtilsFlash.error('Invalid URL. Unable to parse payment details.');
+          return;
+        }
+        paymentsService.cancel({payment_id: qs.paymentId}).then(function(response) {
+          ncUtilsFlash.success('Payment has been processed successfully.');
+          $state.go('home.home', {});
+        });
+      },
+    });
+
+    controllerScope.__proto__ = new Controller();
+  }
+
 })();
