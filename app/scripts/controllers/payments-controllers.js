@@ -28,13 +28,14 @@
       },
       approvePayment: function() {
         var qs = ncUtils.parseQueryString(ncUtils.getQueryString());
-        if (!qs.paymentId || !qs.PayerID) {
+        if (!qs.paymentId || !qs.PayerID || !qs.token) {
           ncUtilsFlash.error('Invalid URL. Unable to parse payment details.');
           return;
         }
         paymentsService.approve({
           payment_id: qs.paymentId,
-          payer_id: qs.PayerID
+          payer_id: qs.PayerID,
+          token: qs.token
         }).then(function(response) {
           ncUtilsFlash.success('Payment has been processed successfully.');
           currentStateService.reloadCurrentCustomer(function() {
