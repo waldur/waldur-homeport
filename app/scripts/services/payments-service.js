@@ -14,6 +14,9 @@
       },
       approve: function(payment) {
         return $http.post(ENV.apiEndpoint + 'api/paypal-payments/approve/', payment);
+      },
+      cancel: function(payment) {
+        return $http.post(ENV.apiEndpoint + 'api/paypal-payments/cancel/', payment);
       }
     });
     return new ServiceClass();
