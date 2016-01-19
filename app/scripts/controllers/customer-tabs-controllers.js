@@ -373,10 +373,17 @@
         'baseControllerListClass',
         'invoicesService',
         'ENTITYLISTFIELDTYPES',
+        '$filter',
+        'ENV',
         CustomerInvoicesTabController
       ]);
 
-  function CustomerInvoicesTabController(baseControllerListClass, invoicesService, ENTITYLISTFIELDTYPES) {
+  function CustomerInvoicesTabController(
+    baseControllerListClass,
+    invoicesService,
+    ENTITYLISTFIELDTYPES,
+    $filter,
+    ENV) {
     var controllerScope = this;
     var InvoicesController = baseControllerListClass.extend({
       init: function() {
@@ -394,36 +401,51 @@
               name: 'Invoice code',
               propertyName: 'uuid',
               type: ENTITYLISTFIELDTYPES.trimmed,
-              showForMobile: true,
               limit: 6
             },
             {
               name: 'Amount',
               propertyName: 'total_amount',
               type: ENTITYLISTFIELDTYPES.linkOrText,
-              showForMobile: true
             },
             {
               name: 'Start date',
               propertyName: 'start_date',
               type: ENTITYLISTFIELDTYPES.dateShort,
-              showForMobile: true
             },
             {
               name: 'End date',
               propertyName: 'end_date',
               type: ENTITYLISTFIELDTYPES.dateShort,
-              showForMobile: true
             },
             {
               name: '',
               propertyName: 'pdf',
               iconClass: 'fa-file-pdf-o',
               type: ENTITYLISTFIELDTYPES.staticIconLink,
-              showForMobile: true,
               className: 'pdf-icon'
             }
-          ]
+          ],
+          mobile: {
+            getIconClass: function(entity) {
+              return 'fa-file-pdf-o';
+            },
+            getTitle: function(entity) {
+              return 'Invoice #' + entity.uuid.substring(0, 5);
+            },
+            getUrl: function(entity) {
+              return entity.pdf;
+            },
+            getSubtitleText: function(entity) {
+              function format(date) {
+                return $filter("date")(date, "dd/MM/yyyy");
+              }
+              return 'From ' + format(entity.start_date) + ' to ' + format(entity.end_date);
+            },
+            getSideText: function(entity) {
+              return $filter('currency')(parseFloat(entity.total_amount), ENV.currency);
+            }
+          }
         };
       },
       afterGetList: function() {}

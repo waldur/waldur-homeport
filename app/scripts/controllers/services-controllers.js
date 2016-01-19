@@ -68,8 +68,7 @@
               name: 'Name',
               propertyName: 'name',
               type: ENTITYLISTFIELDTYPES.name,
-              className: 'name',
-              showForMobile: true
+              className: 'name'
             },
             {
               name: 'State',
@@ -77,7 +76,6 @@
               propertyName: 'state',
               onlineStatus: ENV.resourceOnlineStatus,
               className: 'visual-status',
-              showForMobile: true,
               getClass: function(state) {
                 var cls = ENV.servicesStateColorClasses[state];
                 if (cls == 'processing') {
@@ -106,7 +104,28 @@
               emptyText: '0',
               className: 'resources-count'
             }
-          ]
+          ],
+          mobile: {
+            getIconClass: function(entity) {
+              return 'fa-database';
+            },
+            getTitle: function(entity) {
+              return entity.name;
+            },
+            getSubtitleText: function(entity) {
+              var accessibility = entity.shared ? 'Shared ' : 'Owned ';
+              var count = ' provider without resources';
+              if (entity.resources_count == 1) {
+                count = ' provider with 1 resource';
+              } else if (entity.resources_count > 1) {
+                count = ' provider with ' + entity.resources_count + ' resources';
+              }
+              return accessibility + entity.service_type + count;
+            },
+            getSideText: function(entity) {
+              return entity.state;
+            }
+          }
         };
       },
       checkProjects: function() {

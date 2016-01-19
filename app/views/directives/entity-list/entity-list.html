@@ -122,7 +122,35 @@
             </div>
             <div class="clear"></div>
         </div>
-        <ul class="object-list">
+        <ul class="mobile-show compact-list"
+            ng-if="::entityOptions.mobile"
+            ng-class="entityOptions.mobile.class">
+          <li class="compact-list__item" 
+              ng-repeat="entity in entityList.list">
+            <div class="compact-list__left">
+              <i class="icon"
+                 ng-class="entityOptions.mobile.getIconClass(entity)">
+              </i>
+            </div>
+            <div class="compact-list__title"
+                 ng-if="::entityOptions.mobile.getTitle">
+              <a href="{{ entityOptions.mobile.getUrl(entity) }}"
+                 ng-bind="entityOptions.mobile.getTitle(entity)"></a>
+            </div>
+            <div class="compact-list__right"
+                 ng-bind="entityOptions.mobile.getSideText(entity)">
+            </div>
+            <div class="compact-list__subtitle"
+                 ng-bind="entityOptions.mobile.getSubtitleText(entity)"
+                 ng-if="::entityOptions.mobile.getSubtitleText">
+            </div>
+            <div class="compact-list__subtitle"
+                 ng-bind-html="entityOptions.mobile.getSubtitleHtml(entity)"
+                 ng-if="::entityOptions.mobile.getSubtitleHtml">
+            </div>
+          </li>
+        </ul>
+        <ul class="object-list mobile-hide">
             <li class="list-item list-header" ng-if="::!entityOptions.entityData.hideTableHead">
                 <div class="checkbox" ng-show="entityList.controlPanelShow"></div>
                 <div ng-repeat="fieldHead in entityOptions.list" class="additional-cell {{ fieldHead.className }}"

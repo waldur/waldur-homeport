@@ -12,6 +12,7 @@
     'projectsService',
     'ngDialog',
     '$rootScope',
+    '$state',
     baseResourceListController
     ]);
 
@@ -25,7 +26,8 @@
     currentStateService,
     projectsService,
     ngDialog,
-    $rootScope) {
+    $rootScope,
+    $state) {
     var ControllerListClass = baseControllerListClass.extend({
       init: function() {
         this.service = resourcesService;
@@ -91,7 +93,6 @@
           list: [
             {
               type: ENTITYLISTFIELDTYPES.icon,
-              showForMobile: true,
               className: 'icon',
               getTitle: function(item) {
                 return item.resource_type;
@@ -121,7 +122,6 @@
               type: ENTITYLISTFIELDTYPES.colorState,
               propertyName: 'state',
               className: 'visual-status',
-              showForMobile: true,
               getClass: function(state) {
                 var cls = ENV.resourceStateColorClasses[state];
                 if (cls == 'processing') {
@@ -137,11 +137,30 @@
               propertyName: 'access_info_text',
               urlPropertyName: 'access_info_url',
               type: ENTITYLISTFIELDTYPES.linkOrText,
-              showForMobile: true,
               className: 'resource-access',
               initField: vm.setAccessInfo
             }
-          ]
+          ],
+          mobile: {
+            getIconClass: function(entity) {
+              return 'fa-desktop';
+            },
+            getTitle: function(entity) {
+              return entity.name;
+            },
+            getUrl: function(entity) {
+              return $state.href('resources.details', {
+                uuid: entity.uuid,
+                resource_type: entity.resource_type
+              });
+            },
+            getSubtitleText: function(entity) {
+              return entity.resource_type.split(".").join(" ");
+            },
+            getSideText: function(entity) {
+              return entity.state;
+            }
+          }
         };
 
         currentStateService.getProject().then(function(project) {

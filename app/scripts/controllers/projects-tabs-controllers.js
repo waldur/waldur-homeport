@@ -339,8 +339,7 @@
               type: ENTITYLISTFIELDTYPES.name,
               link: 'organizations.details({uuid: "' + currentStateService.getCustomerUuid()
               + '", providerType: entity.service_type, providerUuid: entity.uuid, tab: "providers"})',
-              className: 'name',
-              showForMobile: true
+              className: 'name'
             },
             {
               name: 'Type',

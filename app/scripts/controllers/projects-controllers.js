@@ -11,6 +11,7 @@
       '$state',
       'ENV',
       'ENTITYLISTFIELDTYPES',
+      'ncUtils',
       BaseProjectListController]);
 
     function BaseProjectListController(
@@ -21,7 +22,8 @@
       $rootScope,
       $state,
       ENV,
-      ENTITYLISTFIELDTYPES) {
+      ENTITYLISTFIELDTYPES,
+      ncUtils) {
 
       var controllerClass = baseControllerListClass.extend({
         init: function() {
@@ -97,7 +99,42 @@
                 propertyName: 'created',
                 type: ENTITYLISTFIELDTYPES.date
               }
-            ]
+            ],
+            mobile: {
+              getIconClass: function(entity) {
+                return 'fa-folder-open-o';
+              },
+              getUrl: function(entity) {
+                return $state.href('projects.details', {uuid: entity.uuid});
+              },
+              getTitle: function(entity) {
+                return entity.name;
+              },
+              getSubtitleText: function(entity) {
+                if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('resources') == -1) {
+                  if (entity.vm_count == 0 && entity.app_count == 0) {
+                    return 'Empty project';
+                  }
+                  else if (entity.vm_count > 0 || entity.app_count > 0) {
+                    var vm_text = ncUtils.pluralize(entity.vm_count, 'VM', 'VMs');
+                    var app_text = ncUtils.pluralize(entity.app_count, 'app', 'apps');
+                    var and = (vm_text & app_text) ? ' and ' : '';
+                    return 'Project with ' + vm_text + and + app_text;
+                  }
+                  else {
+                    return '';
+                  }
+                }
+              },
+              getSideText: function(entity) {
+                if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('premiumSupport') == -1) {
+                  if (entity.plan_name) {
+                    return entity.plan_name + ' plan';
+                  }
+                  return 'No plan';
+                }
+              }
+            }
           };
           if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('resources') == -1) {
             this.entityOptions.list.push({

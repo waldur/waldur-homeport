@@ -3,11 +3,21 @@
 (function() {
   angular.module('ncsaas')
     .service('baseEventListController', [
-      'baseControllerListClass', 'eventsService', 'ENTITYLISTFIELDTYPES', 'eventFormatter', 'ENV',
+      'baseControllerListClass',
+      'eventsService',
+      'ENTITYLISTFIELDTYPES',
+      'eventFormatter',
+      'ENV',
+      '$filter',
       baseEventListController]);
 
   function baseEventListController(
-    baseControllerListClass, eventsService, ENTITYLISTFIELDTYPES, eventFormatter, ENV) {
+    baseControllerListClass,
+    eventsService,
+    ENTITYLISTFIELDTYPES,
+    eventFormatter,
+    ENV,
+    $filter) {
     var ControllerListClass = baseControllerListClass.extend({
       init:function() {
         this.service = eventsService;
@@ -24,29 +34,38 @@
             {
               propertyName: 'icon',
               className: 'icon',
-              type: ENTITYLISTFIELDTYPES.fontIcon,
-              showForMobile: true
+              type: ENTITYLISTFIELDTYPES.fontIcon
             },
             {
               propertyName: 'html_message',
               className: 'message',
-              type: ENTITYLISTFIELDTYPES.html,
-              showForMobile: true
+              type: ENTITYLISTFIELDTYPES.html
             },
             {
               propertyName: '@timestamp',
               className: 'date',
-              type: ENTITYLISTFIELDTYPES.date,
-              showForMobile: true
+              type: ENTITYLISTFIELDTYPES.date
             }
-          ]
+          ],
+          mobile: {
+            class: 'events-list',
+            getIconClass: function(entity) {
+              return entity.icon;
+            },
+            getSubtitleHtml: function(entity) {
+              return entity.html_message;
+            },
+            getSideText: function(entity) {
+              return $filter('date')(entity['@timestamp'], 'dd/MM/yyyy');
+            }
+          }
         };
         this._super();
       },
       afterGetList: function() {
         angular.forEach(this.list, function(event) {
           event.html_message = eventFormatter.format(event);
-          event.icon = eventFormatter.getIcon(event);
+          event.icon = eventFormatter.getIcon(event) || 'fa-bell-o';
         });
       }
     });
@@ -61,6 +80,7 @@
       'alertFormatter',
       'ENTITYLISTFIELDTYPES',
       'ENV',
+      '$filter',
       BaseAlertsListController]);
 
   function BaseAlertsListController(
@@ -68,7 +88,8 @@
     alertsService,
     alertFormatter,
     ENTITYLISTFIELDTYPES,
-    ENV) {
+    ENV,
+    $filter) {
     return baseControllerListClass.extend({
       init: function() {
         this.service = alertsService;
@@ -87,30 +108,39 @@
             {
               propertyName: 'icon',
               className: 'icon',
-              type: ENTITYLISTFIELDTYPES.fontIcon,
-              showForMobile: true
+              type: ENTITYLISTFIELDTYPES.fontIcon
             },
             {
               name: 'Message',
               propertyName: 'html_message',
               className: 'message',
-              type: ENTITYLISTFIELDTYPES.html,
-              showForMobile: true
+              type: ENTITYLISTFIELDTYPES.html
             },
             {
               name: 'Date',
               propertyName: 'created',
               className: 'date',
-              type: ENTITYLISTFIELDTYPES.date,
-              showForMobile: true
+              type: ENTITYLISTFIELDTYPES.date
             }
-          ]
+          ],
+          mobile: {
+            class: 'events-list',
+            getIconClass: function(entity) {
+              return entity.icon;
+            },
+            getSubtitleHtml: function(entity) {
+              return entity.html_message;
+            },
+            getSideText: function(entity) {
+              return $filter('date')(entity.created, 'dd/MM/yyyy');
+            }
+          }
         };
       },
       afterGetList: function() {
         angular.forEach(this.list, function(alert) {
           alert.html_message = alertFormatter.format(alert);
-          alert.icon = alertFormatter.getIcon(alert);
+          alert.icon = alertFormatter.getIcon(alert) || 'fa-bolt';
         });
       }
     });

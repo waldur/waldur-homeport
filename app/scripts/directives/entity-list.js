@@ -6,8 +6,6 @@
     .directive('entitylist', [entityList]);
 
   function entityList() {
-    var directiveViewPath = 'views/directives/entity-list/',
-      defaultView = directiveViewPath + 'entity-list.html';
     return {
       restrict: 'E',
       template: '<div ng-include="contentUrl"></div>',
@@ -20,10 +18,7 @@
         entityViewType: '@'
       },
       link: function(scope) {
-        scope.contentUrl = scope.entityViewType
-          ? directiveViewPath + 'entity-list-' + scope.entityViewType + '.html'
-          : defaultView;
-        scope.colorSateHelpView = directiveViewPath + 'status-color-help.html';
+        scope.contentUrl = 'views/directives/entity-list/entity-list.html';
       }
     };
   }

@@ -81,6 +81,17 @@
           usage[quota.name] = Math.max(0, quota.usage);
         }
         return usage;
+      },
+      pluralize: function(value, one, many) {
+        if (value == 1) {
+          return '1 ' + one;
+        }
+        else if (value > 1) {
+          return value + ' ' + many;
+        }
+        else {
+          return '';
+        }
       }
     }
   }
