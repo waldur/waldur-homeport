@@ -149,12 +149,13 @@
                  ng-if="::entityOptions.mobile.getDescriptionHtml">
             </div>
             <div class="compact-list__date"
-                 am-time-ago="entityOptions.mobile.getDate(entity)"
                  ng-if="::entityOptions.mobile.getDate">
+                 <span title="{{ ::entityOptions.mobile.getDate(entity) | date:'medium' }}"
+                       am-time-ago="entityOptions.mobile.getDate(entity)"></span>
             </div>
           </li>
         </ul>
-        <ul class="object-list mobile-hide">
+        <ul class="object-list" ng-class="{'mobile-hide': entityOptions.mobile}">
             <li class="list-item list-header" ng-if="::!entityOptions.entityData.hideTableHead">
                 <div class="checkbox" ng-show="entityList.controlPanelShow"></div>
                 <div ng-repeat="fieldHead in entityOptions.list" class="additional-cell {{ fieldHead.className }}"

@@ -27,7 +27,7 @@
 .compact-list__item {
   padding: 6px 60px 6px 35px;
   position: relative;
-  border: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
   margin: 10px 0px;
 }
 
@@ -61,7 +61,7 @@
   right: 10px;
   color: #888;
   margin-top: 7px;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .compact-list__date {
