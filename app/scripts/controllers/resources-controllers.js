@@ -154,7 +154,7 @@
                 resource_type: entity.resource_type
               });
             },
-            getSubtitleText: function(entity) {
+            getDescriptionText: function(entity) {
               return entity.resource_type.split(".").join(" ");
             },
             getSideText: function(entity) {

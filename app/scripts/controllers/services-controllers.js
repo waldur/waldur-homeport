@@ -112,7 +112,7 @@
             getTitle: function(entity) {
               return entity.name;
             },
-            getSubtitleText: function(entity) {
+            getDescriptionText: function(entity) {
               var accessibility = entity.shared ? 'Shared ' : 'Owned ';
               var count = ' provider without resources';
               if (entity.resources_count == 1) {

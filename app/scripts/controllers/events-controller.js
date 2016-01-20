@@ -8,7 +8,6 @@
       'ENTITYLISTFIELDTYPES',
       'eventFormatter',
       'ENV',
-      '$filter',
       baseEventListController]);
 
   function baseEventListController(
@@ -16,8 +15,7 @@
     eventsService,
     ENTITYLISTFIELDTYPES,
     eventFormatter,
-    ENV,
-    $filter) {
+    ENV) {
     var ControllerListClass = baseControllerListClass.extend({
       init:function() {
         this.service = eventsService;
@@ -52,11 +50,11 @@
             getIconClass: function(entity) {
               return entity.icon;
             },
-            getSubtitleHtml: function(entity) {
+            getDescriptionHtml: function(entity) {
               return entity.html_message;
             },
-            getSideText: function(entity) {
-              return $filter('date')(entity['@timestamp'], 'dd/MM/yyyy');
+            getDate: function(entity) {
+              return entity['@timestamp'];
             }
           }
         };
@@ -80,7 +78,6 @@
       'alertFormatter',
       'ENTITYLISTFIELDTYPES',
       'ENV',
-      '$filter',
       BaseAlertsListController]);
 
   function BaseAlertsListController(
@@ -88,8 +85,7 @@
     alertsService,
     alertFormatter,
     ENTITYLISTFIELDTYPES,
-    ENV,
-    $filter) {
+    ENV) {
     return baseControllerListClass.extend({
       init: function() {
         this.service = alertsService;
@@ -128,11 +124,11 @@
             getIconClass: function(entity) {
               return entity.icon;
             },
-            getSubtitleHtml: function(entity) {
+            getDescriptionHtml: function(entity) {
               return entity.html_message;
             },
-            getSideText: function(entity) {
-              return $filter('date')(entity.created, 'dd/MM/yyyy');
+            getDate: function(entity) {
+              return entity.created;
             }
           }
         };

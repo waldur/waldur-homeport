@@ -110,7 +110,7 @@
               getTitle: function(entity) {
                 return entity.name;
               },
-              getSubtitleText: function(entity) {
+              getDescriptionText: function(entity) {
                 if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('resources') == -1) {
                   if (entity.vm_count == 0 && entity.app_count == 0) {
                     return 'Empty project';

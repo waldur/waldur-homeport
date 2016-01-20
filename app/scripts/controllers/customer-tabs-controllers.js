@@ -436,7 +436,7 @@
             getUrl: function(entity) {
               return entity.pdf;
             },
-            getSubtitleText: function(entity) {
+            getDescriptionText: function(entity) {
               function format(date) {
                 return $filter("date")(date, "dd/MM/yyyy");
               }

@@ -127,7 +127,7 @@
             ng-class="entityOptions.mobile.class">
           <li class="compact-list__item" 
               ng-repeat="entity in entityList.list">
-            <div class="compact-list__left">
+            <div class="compact-list__icon">
               <i class="icon"
                  ng-class="entityOptions.mobile.getIconClass(entity)">
               </i>
@@ -140,13 +140,17 @@
             <div class="compact-list__right"
                  ng-bind="entityOptions.mobile.getSideText(entity)">
             </div>
-            <div class="compact-list__subtitle"
-                 ng-bind="entityOptions.mobile.getSubtitleText(entity)"
-                 ng-if="::entityOptions.mobile.getSubtitleText">
+            <div class="compact-list__description"
+                 ng-bind="entityOptions.mobile.getDescriptionText(entity)"
+                 ng-if="::entityOptions.mobile.getDescriptionText">
             </div>
-            <div class="compact-list__subtitle"
-                 ng-bind-html="entityOptions.mobile.getSubtitleHtml(entity)"
-                 ng-if="::entityOptions.mobile.getSubtitleHtml">
+            <div class="compact-list__description"
+                 ng-bind-html="entityOptions.mobile.getDescriptionHtml(entity)"
+                 ng-if="::entityOptions.mobile.getDescriptionHtml">
+            </div>
+            <div class="compact-list__date"
+                 am-time-ago="entityOptions.mobile.getDate(entity)"
+                 ng-if="::entityOptions.mobile.getDate">
             </div>
           </li>
         </ul>
