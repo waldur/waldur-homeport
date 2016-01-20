@@ -41,6 +41,12 @@
             </div>
         </div>
         <div class="divider"></div>
+        <div class="form-row reverse">
+            <div>
+                <a ui-sref="help.details({name: ServiceAdd.model.serviceName})" target="_blank" class="pull-right">Obtaining
+                    credentials</a>
+            </div>
+        </div>
         <div class="form-row">
             <div class="col label">
                 <label for="serviceName">Provider name</label>
@@ -57,8 +63,8 @@
         <div class="form-row" ng-repeat="option in ServiceAdd.model.options">
             <div class="col label">
                 <label for="{{ ServiceAdd.model.name }}_{{ option.key }}">
-                    <helpicon help-text="{{ option.help_text }}" ng-if="option.help_text"></helpicon>
                     {{ option.label }}
+                    <helpicon help-text="{{ option.help_text }}" ng-if="option.help_text"></helpicon>
                 </label>
             </div>
             <div class="col input input-full">
@@ -109,7 +115,6 @@
     <!-- /non field errors -->
 
     <div class="decision" ng-show="ServiceAdd.model">
-        <a ui-sref="help.details({name: ServiceAdd.model.serviceName})" target="_blank" class="help-info">?</a>
         <div class="col">
             <a class="button-apply" ng-class="{'disabled': ServiceAdd.isDisabled()}" submit-button="ServiceAdd.save()">Add provider</a>
         </div>
