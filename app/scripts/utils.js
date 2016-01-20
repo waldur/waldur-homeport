@@ -81,6 +81,31 @@
           usage[quota.name] = Math.max(0, quota.usage);
         }
         return usage;
+      },
+      getQueryString: function() {
+        // Example input: http://example.com/#/approve/?foo=123&bar=456
+        // Example output: foo=123&bar=456
+
+        var hash = document.location.hash;
+        var parts = hash.split("?");
+        if (parts.length > 1) {
+          return parts[1];
+        }
+        return "";
+      },
+      parseQueryString: function(qs) {
+        // Example input: foo=123&bar=456
+        // Example output: {foo: "123", bar: "456"}
+
+        return qs.split("&").reduce(function(result, part){
+          var tokens = part.split("=");
+          if (tokens.length > 1) {
+            var key = tokens[0];
+            var value = tokens[1];
+            result[key] = value;
+          }
+          return result;
+        }, {});
       }
     }
   }

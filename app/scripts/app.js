@@ -633,14 +633,14 @@
           templateUrl: 'views/partials/base.html',
         })
 
-        .state('payment.checkout', {
-          url: '',
+        .state('payment.approve', {
+          url: 'approve/',
           views: {
-            'appContent': {
-              templateUrl: 'views/payment/checkout.html',
+            'appHeader' : {
+              templateUrl: 'views/partials/site-header.html',
             },
-            'appHeader': {
-              templateUrl: 'views/partials/app-header.html',
+            'appContent' : {
+              templateUrl: 'views/payment/approve.html',
             }
           },
           resolve: {
@@ -649,30 +649,14 @@
           auth: true
         })
 
-        .state('payment.success', {
-          url: 'success/',
+        .state('payment.cancel', {
+          url: 'cancel/',
           views: {
-            'appContent': {
-              templateUrl: 'views/payment/success.html',
+            'appHeader' : {
+              templateUrl: 'views/partials/site-header.html',
             },
-            'appHeader': {
-              templateUrl: 'views/partials/app-header.html',
-            }
-          },
-          resolve: {
-            authenticated: authCheck
-          },
-          auth: true
-        })
-
-        .state('payment.mock', {
-          url: ':uuid/execute/',
-          views: {
-            'appContent': {
-              templateUrl: 'views/payment/mock.html',
-            },
-            'appHeader': {
-              templateUrl: 'views/partials/app-header.html',
+            'appContent' : {
+              templateUrl: 'views/payment/cancel.html',
             }
           },
           resolve: {
