@@ -115,6 +115,7 @@
       'usersService',
       'paymentsService',
       'ENV',
+      '$state',
       '$stateParams',
       '$rootScope',
       '$scope',
@@ -135,6 +136,7 @@
     usersService,
     paymentsService,
     ENV,
+    $state,
     $stateParams,
     $rootScope,
     $scope,
@@ -329,6 +331,9 @@
         var payment = paymentsService.$create();
         payment.customer = vm.model.url;
         payment.amount = amount;
+        payment.return_url = $state.href('payment.approve', {}, {absolute: true});
+        payment.cancel_url = $state.href('payment.cancel', {}, {absolute: true});
+
         return payment.$save(function(payment) {
           $window.location = payment.approval_url;
           return true;
