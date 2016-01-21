@@ -50,6 +50,7 @@
   padding-left: 15px;
   border-top: 1px solid #e5e5e5;
   padding-top: 10px;
+  @include property(font-size, $small-font);
 }
 
 .compact-list__action-list {
@@ -59,6 +60,7 @@
   color: #888;
   padding-left: 10px;
   background-image: linear-gradient(#fcfcfc, #eee);
+  @include property(font-size, $small-font);
 }
 
 .compact-list__action-item {
