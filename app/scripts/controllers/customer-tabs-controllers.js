@@ -394,7 +394,8 @@
           entityData: {
             noDataText: 'No invoices yet',
             hideActionButtons: true,
-            hideTableHead: false
+            hideTableHead: false,
+            rowTemplateUrl: 'views/payment/invoice.html'
           },
           list: [
             {
@@ -425,27 +426,7 @@
               type: ENTITYLISTFIELDTYPES.staticIconLink,
               className: 'pdf-icon'
             }
-          ],
-          mobile: {
-            getIconClass: function(entity) {
-              return 'fa-file-pdf-o';
-            },
-            getTitle: function(entity) {
-              return 'Invoice #' + entity.uuid.substring(0, 5);
-            },
-            getUrl: function(entity) {
-              return entity.pdf;
-            },
-            getDescriptionText: function(entity) {
-              function format(date) {
-                return $filter("date")(date, "dd/MM/yyyy");
-              }
-              return 'From ' + format(entity.start_date) + ' to ' + format(entity.end_date);
-            },
-            getSideText: function(entity) {
-              return $filter('currency')(parseFloat(entity.total_amount), ENV.currency);
-            }
-          }
+          ]
         };
       },
       afterGetList: function() {}

@@ -44,19 +44,7 @@
               className: 'date',
               type: ENTITYLISTFIELDTYPES.date
             }
-          ],
-          mobile: {
-            class: 'events-list',
-            getIconClass: function(entity) {
-              return entity.icon;
-            },
-            getDescriptionHtml: function(entity) {
-              return entity.html_message;
-            },
-            getDate: function(entity) {
-              return entity['@timestamp'];
-            }
-          }
+          ]
         };
         this._super();
       },
@@ -118,19 +106,7 @@
               className: 'date',
               type: ENTITYLISTFIELDTYPES.date
             }
-          ],
-          mobile: {
-            class: 'events-list',
-            getIconClass: function(entity) {
-              return entity.icon;
-            },
-            getDescriptionHtml: function(entity) {
-              return entity.html_message;
-            },
-            getDate: function(entity) {
-              return entity.created;
-            }
-          }
+          ]
         };
       },
       afterGetList: function() {

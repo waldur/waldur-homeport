@@ -123,39 +123,13 @@
             <div class="clear"></div>
         </div>
         <ul class="mobile-show compact-list"
-            ng-if="::entityOptions.mobile"
-            ng-class="entityOptions.mobile.class">
-          <li class="compact-list__item" 
-              ng-repeat="entity in entityList.list">
-            <div class="compact-list__icon">
-              <i class="icon"
-                 ng-class="entityOptions.mobile.getIconClass(entity)">
-              </i>
-            </div>
-            <div class="compact-list__title"
-                 ng-if="::entityOptions.mobile.getTitle">
-              <a href="{{ entityOptions.mobile.getUrl(entity) }}"
-                 ng-bind="entityOptions.mobile.getTitle(entity)"></a>
-            </div>
-            <div class="compact-list__right"
-                 ng-bind="entityOptions.mobile.getSideText(entity)">
-            </div>
-            <div class="compact-list__description"
-                 ng-bind="entityOptions.mobile.getDescriptionText(entity)"
-                 ng-if="::entityOptions.mobile.getDescriptionText">
-            </div>
-            <div class="compact-list__description"
-                 ng-bind-html="entityOptions.mobile.getDescriptionHtml(entity)"
-                 ng-if="::entityOptions.mobile.getDescriptionHtml">
-            </div>
-            <div class="compact-list__date"
-                 ng-if="::entityOptions.mobile.getDate">
-                 <span title="{{ ::entityOptions.mobile.getDate(entity) | date:'medium' }}"
-                       am-time-ago="entityOptions.mobile.getDate(entity)"></span>
-            </div>
-          </li>
+            ng-if="entityOptions.entityData.rowTemplateUrl">
+            <li class="compact-list__item"
+                ng-repeat="entity in entityList.list"
+                ng-include="entityOptions.entityData.rowTemplateUrl">
+            </li>
         </ul>
-        <ul class="object-list" ng-class="{'mobile-hide': entityOptions.mobile}">
+        <ul class="object-list" ng-class="{'mobile-hide': entityOptions.entityData.rowTemplateUrl}">
             <li class="list-item list-header" ng-if="::!entityOptions.entityData.hideTableHead">
                 <div class="checkbox" ng-show="entityList.controlPanelShow"></div>
                 <div ng-repeat="fieldHead in entityOptions.list" class="additional-cell {{ fieldHead.className }}"

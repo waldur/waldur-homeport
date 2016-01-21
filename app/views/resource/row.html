@@ -1,0 +1,83 @@
+<div class="compact-list__header"
+     ng-click="expanded = !expanded; entityList.showMore(entity)">
+  <div class="compact-list__title">
+    <a ui-sref="resources.details({uuid: entity.uuid, resource_type: entity.resource_type})"
+       ng-bind="entity.name"></a>
+  </div>
+  <div class="compact-list__right">
+       <expandable-indicator open="expanded">
+       </expandable-indicator>
+  </div>
+</div>
+
+<div ng-show="expanded" class="compact-list__details">
+  <div class="details-table__row">
+    <div class="details-table__key">
+      State
+    </div>
+    <div class="details-table__value">
+      {{ entity.state }}
+    </div>
+  </div>
+
+  <div class="details-table__row" ng-if="entity.state == 'Erred'">
+    <div class="details-table__key">
+      Error
+    </div>
+    <div class="details-table__value">
+      {{ entity.error_message || 'Reason unknown, please contact support' }}
+    </div>
+  </div>
+
+  <div class="details-table__row">
+    <div class="details-table__key">
+      Type
+    </div>
+    <div class="details-table__value">
+      {{ entity.resource_type }}
+    </div>
+  </div>
+
+  <div class="details-table__row">
+    <div class="details-table__key">
+      Provider
+    </div>
+    <div class="details-table__value">
+      {{ entity.service_name }}
+    </div>
+  </div>
+
+  <div class="details-table__row">
+    <div class="details-table__key">
+      Access link
+    </div>
+    <div class="details-table__value">
+      <a ng-if="entity.access_url" href="{{ entity.access_url }}" target="_blank">
+          {{ entity.access_url }}
+      </a>
+      <span ng-if="!entity.access_url">No access info</span>
+    </div>
+  </div>
+
+  <div class="details-table__row">
+    <div class="details-table__key">
+      Created
+    </div>
+    <div class="details-table__value">
+      <span am-time-ago="entity.created" title="{{ entity.created }}"></span>
+    </div>
+  </div>
+</div>
+
+<div class="compact-list__action-list" ng-show="expanded">
+  <span class="compact-list__action-item"
+        ng-repeat="button in entityButtons"
+        ng-if="!buttonType && !button.isHidden(entity)"
+        title="{{ button.tooltip(entity) }}">
+  <a ng-click="button.clickFunction(entity)"
+     ng-class="{'disabled': button.isDisabled(entity)}">
+     <i class="icon" ng-class="button.icon" ng-if="::button.icon"></i>
+      {{ button.title }}
+  </a>
+  </span>
+</div>

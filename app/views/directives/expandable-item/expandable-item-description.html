@@ -1,8 +1,6 @@
 <section block-ui="block_{{ expandableElement.uuid }}">
-    <header>
-        <div ng-repeat="item in expandableOptions.items" class="details-expandable">
-            <b><span ng-bind="item.label"></span>:</b>
-            <span ng-bind="expandableElement[item.key]"></span>
-        </div>
-    </header>
+    <div ng-repeat="item in expandableOptions.items" class="details-expandable">
+        <b><span ng-bind="item.label"></span>:</b>
+        <span ng-bind="expandableElement[item.key]"></span>
+    </div>
 </section>

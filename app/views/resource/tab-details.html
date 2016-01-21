@@ -7,25 +7,52 @@
     Please wait a few minutes until resource provisioning is completed.
 </div>
 
-<dl class="two-column">
-    <dt>State</dt>
-    <dd>{{ controller.model.state }}</dd>
+<div class="compact-list__details">
+    <div class="details-table__row">
+      <div class="details-table__key">
+        State
+      </div>
+      <div class="details-table__value">
+        {{ controller.model.state }}
+      </div>
+    </div>
 
-    <dt>Type</dt>
-    <dd>{{ controller.model.resource_type }}</dd>
+    <div class="details-table__row">
+      <div class="details-table__key">
+        Type
+      </div>
+      <div class="details-table__value">
+        {{ controller.model.resource_type }}
+      </div>
+    </div>
 
-    <dt>Provider</dt>
-    <dd>{{ controller.model.service_name }}</dd>
+    <div class="details-table__row">
+      <div class="details-table__key">
+        Provider
+      </div>
+      <div class="details-table__value">
+        {{ controller.model.service_name }}
+      </div>
+    </div>
 
-    <dt>Access link</dt>
-    <dd>
+    <div class="details-table__row">
+      <div class="details-table__key">
+        Access link
+      </div>
+      <div class="details-table__value">
         <a ng-show="controller.model.web_url" href="{{ controller.model.web_url }}" target="_blank">
             {{ controller.model.web_url }}
         </a>
         <span ng-show="!controller.model.web_url">No access info</span>
-    </dd>
+      </div>
+    </div>
 
-    <dt>Created</dt>
-    <dd><span am-time-ago="controller.model.created" title="{{ controller.model.created }}"></span></dd>
-
-</dl>
+    <div class="details-table__row">
+      <div class="details-table__key">
+        Created
+      </div>
+      <div class="details-table__value">
+        <span am-time-ago="controller.model.created" title="{{ controller.model.created }}"></span>
+      </div>
+    </div>
+</div>

@@ -74,12 +74,14 @@
             isDisabled: function(model) {
               return !this.isOperationEnabled('delete', model);
             }.bind(this.controllerScope),
-            className: 'remove'
+            className: 'remove',
+            icon: 'fa-trash'
           },
           {
             title: 'Unlink',
             clickFunction: this.unlink.bind(this.controllerScope),
-            className: 'remove'
+            className: 'remove',
+            icon: 'fa-unlink'
           }
         ];
         var vm = this;
@@ -88,7 +90,8 @@
             noDataText: 'You have no resources yet.',
             noMatchesText: 'No resources found matching filter.',
             checkQuotas: 'resource',
-            timer: ENV.resourcesTimerInterval
+            timer: ENV.resourcesTimerInterval,
+            rowTemplateUrl: 'views/resource/row.html'
           },
           list: [
             {
@@ -107,7 +110,6 @@
               propertyName: 'name',
               type: ENTITYLISTFIELDTYPES.name,
               link: 'resources.details({uuid: entity.uuid, resource_type: entity.resource_type})',
-              showForMobile: ENTITYLISTFIELDTYPES.showForMobile,
               className: 'resource-name'
             },
             {
@@ -141,26 +143,6 @@
               initField: vm.setAccessInfo
             }
           ],
-          mobile: {
-            getIconClass: function(entity) {
-              return 'fa-desktop';
-            },
-            getTitle: function(entity) {
-              return entity.name;
-            },
-            getUrl: function(entity) {
-              return $state.href('resources.details', {
-                uuid: entity.uuid,
-                resource_type: entity.resource_type
-              });
-            },
-            getDescriptionText: function(entity) {
-              return entity.resource_type.split(".").join(" ");
-            },
-            getSideText: function(entity) {
-              return entity.state;
-            }
-          }
         };
 
         currentStateService.getProject().then(function(project) {

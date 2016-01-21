@@ -26,6 +26,7 @@
         this.actionButtonsListItems = [
           {
             title: 'Remove',
+            icon: 'fa-trash',
             clickFunction: this.remove.bind(controllerScope),
 
             isDisabled: function(customer) {
@@ -43,6 +44,7 @@
           },
           {
             title: 'Add provider',
+            icon: 'fa-plus',
             clickFunction: function(customer) {
               $rootScope.$broadcast('adjustCurrentCustomer', customer);
               $state.go('services.create')
@@ -55,7 +57,8 @@
             noMatchesText: 'No organizations found matching filter.',
             title: 'Organizations',
             createLink: 'organizations.create',
-            createLinkText: 'Add organization'
+            createLinkText: 'Add organization',
+            rowTemplateUrl: 'views/customer/row.html'
           },
           list: [
             {
@@ -98,6 +101,17 @@
             if (item.plan) {
               item.plan_name = item.plan.name;
             }
+          }
+        }
+        this.getQuotas();
+      },
+      getQuotas: function() {
+        for (var i = 0; i < this.list.length; i++) {
+          var item = this.list[i];
+          item.quotas_dict = {};
+          for(var j = 0; j < item.quotas.length; j++) {
+            var quota = item.quotas[j];
+            item.quotas_dict[quota.name] = quota.usage;
           }
         }
       }

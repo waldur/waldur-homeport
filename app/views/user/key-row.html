@@ -1,0 +1,34 @@
+<div class="compact-list__header"
+     ng-click="expanded = !expanded; entityList.showMore(entity)">
+  <div class="compact-list__title">
+    <a ng-bind="entity.name"></a>
+  </div>
+  <div class="compact-list__right">
+     <expandable-indicator open="expanded">
+     </expandable-indicator>
+  </div>
+</div>
+
+<div ng-show="expanded" class="compact-list__details">
+  <div class="details-table__row">
+    <div class="details-table__key">
+      Fingerprint
+    </div>
+    <div class="details-table__value">
+      {{ entity.fingerprint }}
+    </div>
+  </div>
+</div>
+
+<div class="compact-list__action-list" ng-show="expanded">
+  <span class="compact-list__action-item"
+        ng-repeat="button in entityButtons"
+        ng-if="!buttonType && !button.isHidden(entity)"
+        title="{{ button.tooltip(entity) }}">
+  <a ng-click="button.clickFunction(entity)"
+     ng-class="{'disabled': button.isDisabled(entity)}">
+     <i class="icon" ng-class="button.icon" ng-if="::button.icon"></i>
+      {{ button.title }}
+  </a>
+  </span>
+</div>

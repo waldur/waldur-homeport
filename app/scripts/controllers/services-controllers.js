@@ -35,6 +35,7 @@
         this.actionButtonsListItems = [
           {
             title: 'Delete',
+            icon: 'fa-trash',
             clickFunction: this.remove.bind(this.controllerScope),
 
             isDisabled: function(service) {
@@ -61,7 +62,8 @@
             createLink: 'services.create',
             createLinkText: 'Create provider',
             checkQuotas: 'service',
-            timer: ENV.providersTimerInterval
+            timer: ENV.providersTimerInterval,
+            rowTemplateUrl: 'views/service/row.html'
           },
           list: [
             {
@@ -104,28 +106,7 @@
               emptyText: '0',
               className: 'resources-count'
             }
-          ],
-          mobile: {
-            getIconClass: function(entity) {
-              return 'fa-database';
-            },
-            getTitle: function(entity) {
-              return entity.name;
-            },
-            getDescriptionText: function(entity) {
-              var accessibility = entity.shared ? 'Shared ' : 'Owned ';
-              var count = ' provider without resources';
-              if (entity.resources_count == 1) {
-                count = ' provider with 1 resource';
-              } else if (entity.resources_count > 1) {
-                count = ' provider with ' + entity.resources_count + ' resources';
-              }
-              return accessibility + entity.service_type + count;
-            },
-            getSideText: function(entity) {
-              return entity.state;
-            }
-          }
+          ]
         };
       },
       checkProjects: function() {
