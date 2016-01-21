@@ -82,6 +82,11 @@
   &:first-of-type {
     padding-left: 0px;
   }
+
+  .disabled {
+    opacity: 1;
+    color: #777;
+  }
 }
 
 .compact-list__date {

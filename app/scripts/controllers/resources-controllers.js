@@ -40,6 +40,7 @@
         this.actionButtonsListItems = [
           {
             title: 'Start',
+            icon: 'fa-play',
             clickFunction: this.startResource.bind(this.controllerScope),
             isHidden: function(model) {
               return !this.isOperationAvailable('start', model);
@@ -50,6 +51,7 @@
           },
           {
             title: 'Stop',
+            icon: 'fa-stop',
             clickFunction: this.stopResource.bind(this.controllerScope),
             isHidden: function(model) {
               return !this.isOperationAvailable('stop', model);
@@ -60,6 +62,7 @@
           },
           {
             title: 'Restart',
+            icon: 'fa-repeat',
             clickFunction: this.restartResource.bind(this.controllerScope),
             isHidden: function(model) {
               return !this.isOperationAvailable('restart', model);
