@@ -56,15 +56,4 @@
                 expandable-options="item">
 </expandableitem>
 
-<div class="compact-list__action-list" ng-show="expanded">
-  <span class="compact-list__action-item"
-        ng-repeat="button in entityButtons"
-        ng-if="!buttonType && !button.isHidden(entity)"
-        title="{{ button.tooltip(entity) }}">
-  <a ng-click="button.clickFunction(entity)"
-     ng-class="{'disabled': button.isDisabled(entity)}">
-     <i class="icon" ng-class="button.icon" ng-if="::button.icon"></i>
-      {{ button.title }}
-  </a>
-  </span>
-</div>
+<action-list actions="entityButtons" entity="entity" ng-show="expanded"></action-list>
