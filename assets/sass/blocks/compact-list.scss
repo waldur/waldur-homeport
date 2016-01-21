@@ -46,6 +46,13 @@
   color: #4078c0;
 }
 
+.compact-list__right {
+  position: absolute;
+  top: 0;
+  right: 0px;
+  margin-top: -6px;
+}
+
 .compact-list__details {
   padding-left: 15px;
   border-top: 1px solid #e5e5e5;
