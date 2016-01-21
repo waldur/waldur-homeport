@@ -1,11 +1,12 @@
 <div class="compact-list__action-list">
-  <a class="compact-list__action-item"
-     ng-repeat="action in actions"
-     ng-if="!action.isHidden(entity)"
-     title="{{ action.tooltip(entity) }}"
-     ng-click="action.clickFunction(entity)"
-     ng-class="{'disabled': action.isDisabled(entity)}">
-     <i class="icon" ng-class="action.icon" ng-if="::action.icon"></i>
-      {{ action.title }}
-  </a>
+  <span class="compact-list__action-item"
+        ng-repeat="action in actions"
+        ng-if="!action.isHidden(entity)"
+        title="{{ action.tooltip(entity) }}">
+        <a ng-click="action.clickFunction(entity)"
+           ng-class="{'disabled': action.isDisabled(entity)}">
+           <i class="icon" ng-class="action.icon" ng-if="::action.icon"></i>
+            {{ action.title }}
+        </a>
+  </span>
 </div>

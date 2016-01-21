@@ -20,7 +20,7 @@
     </div>
   </div>
 
-  <div class="details-table__row">
+  <div class="details-table__row" visible="plans">
     <div class="details-table__key">
       Plan
     </div>
@@ -35,8 +35,8 @@
     </div>
     <div class="details-table__value">
       <div><i class="icon project"></i> {{ entity.projects.length }} projects</div>
-      <div><i class="icon service"></i> {{ entity.quotas_dict.nc_service_count }} services</div>
-      <div><i class="icon application"></i>  {{ entity.quotas_dict.nc_resource_count }} resources</div>
+      <div><i class="icon service"></i> {{ entity.quotas_usage.nc_service_count }} providers</div>
+      <div><i class="icon application"></i>  {{ entity.quotas_usage.nc_resource_count }} resources</div>
     </div>
   </div>
 

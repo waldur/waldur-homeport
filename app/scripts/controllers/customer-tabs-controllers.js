@@ -373,17 +373,13 @@
         'baseControllerListClass',
         'invoicesService',
         'ENTITYLISTFIELDTYPES',
-        '$filter',
-        'ENV',
         CustomerInvoicesTabController
       ]);
 
   function CustomerInvoicesTabController(
     baseControllerListClass,
     invoicesService,
-    ENTITYLISTFIELDTYPES,
-    $filter,
-    ENV) {
+    ENTITYLISTFIELDTYPES) {
     var controllerScope = this;
     var InvoicesController = baseControllerListClass.extend({
       init: function() {

@@ -46,13 +46,6 @@
   color: #4078c0;
 }
 
-.compact-list__right {
-  position: absolute;
-  top: 0;
-  right: 0px;
-  margin-top: -8px;
-}
-
 .compact-list__details {
   padding-left: 15px;
   border-top: 1px solid #e5e5e5;
@@ -64,7 +57,6 @@
   padding-top: 3px;
   padding-bottom: 3px;
   color: #888;
-  font-size: 14px;
   padding-left: 10px;
   background-image: linear-gradient(#fcfcfc, #eee);
 }
@@ -87,11 +79,6 @@
     opacity: 1;
     color: #777;
   }
-}
-
-.compact-list__date {
-  color: #888;
-  font-size: 12px;
 }
 
 .events-list{

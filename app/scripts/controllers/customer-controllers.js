@@ -10,11 +10,19 @@
       '$rootScope',
       '$state',
       'ENV',
+      'ncUtils',
       CustomerListController
     ]);
 
   function CustomerListController(
-    customersService, baseControllerListClass, usersService, ENTITYLISTFIELDTYPES, $rootScope, $state, ENV) {
+    customersService,
+    baseControllerListClass,
+    usersService,
+    ENTITYLISTFIELDTYPES,
+    $rootScope,
+    $state,
+    ENV,
+    ncUtils) {
     var controllerScope = this;
     var CustomerController = baseControllerListClass.extend({
       init:function() {
@@ -108,11 +116,7 @@
       getQuotas: function() {
         for (var i = 0; i < this.list.length; i++) {
           var item = this.list[i];
-          item.quotas_dict = {};
-          for(var j = 0; j < item.quotas.length; j++) {
-            var quota = item.quotas[j];
-            item.quotas_dict[quota.name] = quota.usage;
-          }
+          item.quotas_usage = ncUtils.getQuotaUsage(item.quotas);
         }
       }
     });

@@ -145,7 +145,7 @@
               className: 'resource-access',
               initField: vm.setAccessInfo
             }
-          ],
+          ]
         };
 
         currentStateService.getProject().then(function(project) {
