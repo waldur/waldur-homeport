@@ -1,7 +1,10 @@
 <div class="compact-list__header"
      ng-click="expanded = !expanded; entityList.showMore(entity)">
   <div class="compact-list__title">
-    <a>{{ entity.name }}</a>
+    <a>
+      <i class="icon service"></i>
+      {{ entity.name }}
+    </a>
   </div>
   <div class="compact-list__right">
      <expandable-indicator open="expanded">
