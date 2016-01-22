@@ -3,7 +3,8 @@
         ng-repeat="action in actions"
         ng-if="!action.isHidden(entity)"
         title="{{ action.tooltip(entity) }}">
-        <a ng-click="action.clickFunction(entity)"
+        <a class="{{ action.className }}" 
+           ng-click="action.clickFunction(entity)"
            ng-class="{'disabled': action.isDisabled(entity)}">
            <i class="icon" ng-class="action.icon" ng-if="::action.icon"></i>
             {{ action.title }}

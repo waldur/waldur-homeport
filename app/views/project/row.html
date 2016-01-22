@@ -16,7 +16,16 @@
       Resources
     </div>
     <div class="details-table__value">
-      {{ entity.vm_count }} virtual machines, {{ entity.app_count }} applications
+      <ng-pluralize count="entity.vm_count"
+                    when="{'0': 'No virtual machines',
+                           'one': '1 virtual machine',
+                           'other': '{} virtual machines'}">
+      </ng-pluralize>,
+      <ng-pluralize count="entity.app_count"
+                    when="{'0': 'no applications',
+                           'one': '1 application',
+                           'other': '{} applications'}">
+      </ng-pluralize>
     </div>
   </div>
 

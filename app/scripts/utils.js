@@ -82,17 +82,6 @@
         }
         return usage;
       },
-      pluralize: function(value, one, many) {
-        if (value == 1) {
-          return '1 ' + one;
-        }
-        else if (value > 1) {
-          return value + ' ' + many;
-        }
-        else {
-          return '';
-        }
-      },
       getQueryString: function() {
         // Example input: http://example.com/#/approve/?foo=123&bar=456
         // Example output: foo=123&bar=456

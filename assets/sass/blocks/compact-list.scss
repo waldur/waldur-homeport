@@ -1,3 +1,5 @@
+$compact-list-border-color: #e5e5e5;
+
 .mobile-show {
     display: none;
     @include bp(xs) {
@@ -26,7 +28,7 @@
 
 .compact-list__item {
   position: relative;
-  border: 1px solid #e5e5e5;
+  border: 1px solid $compact-list-border-color;
   margin: 10px 0px;
   border-radius: 4px;
 }
@@ -55,47 +57,33 @@
 
 .compact-list__details {
   padding-left: 15px;
-  border-top: 1px solid #e5e5e5;
+  border-top: 1px solid $compact-list-border-color;
   padding-top: 10px;
   @include property(font-size, $small-font);
 }
 
 .compact-list__action-list {
-  border-top: 1px solid #e5e5e5;
-  padding-top: 3px;
-  padding-bottom: 3px;
+  border-top: 1px solid $compact-list-border-color;
   color: #888;
-  padding-left: 10px;
   background-image: linear-gradient(#fcfcfc, #eee);
   @include property(font-size, $small-font);
 }
 
 .compact-list__action-item {
   display: inline-block;
-  padding-right: 10px;
-  border-right: 1px solid #e5e5e5;
-  padding-left: 10px;
+  padding: 3px 10px;
+  border-right: 1px solid $compact-list-border-color;
 
   &:last-of-type {
     border-right: 0px;
-  }
-
-  &:first-of-type {
-    padding-left: 0px;
   }
 
   .disabled {
     opacity: 1;
     color: #777;
   }
-}
 
-.events-list{
-  .compact-list__item {
-    padding: 6px 0px 6px 30px;
-  }
-
-  .compact-list__icon {
-    margin-left: -23px;
+  .remove {
+    color: #bd2c00;
   }
 }

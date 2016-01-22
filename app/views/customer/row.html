@@ -34,9 +34,21 @@
       Stats
     </div>
     <div class="details-table__value">
-      <div><i class="icon project"></i> {{ entity.projects.length }} projects</div>
-      <div><i class="icon service"></i> {{ entity.quotas_usage.nc_service_count }} providers</div>
-      <div><i class="icon application"></i>  {{ entity.quotas_usage.nc_resource_count }} resources</div>
+      <ng-pluralize count="entity.projects.length"
+                    when="{'0': 'No projects',
+                           'one': '1 project',
+                           'other': '{} projects'}">
+      </ng-pluralize>,
+      <ng-pluralize count="entity.quotas_usage.nc_service_count"
+                    when="{'0': 'no providers',
+                           'one': '1 provider',
+                           'other': '{} providers'}">
+      </ng-pluralize>,
+      <ng-pluralize count="entity.quotas_usage.nc_resource_count"
+                    when="{'0': 'no resources',
+                           'one': '1 resource',
+                           'other': '{} resource'}">
+      </ng-pluralize>
     </div>
   </div>
 
