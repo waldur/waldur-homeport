@@ -1,0 +1,25 @@
+.table-action {
+    display: inline-block;
+
+    .button {
+        margin-left: -6px;
+        border-radius: 0;
+        font-weight: normal;
+        color: #50b848;
+        background: linear-gradient(#fcfcfc, #eee);
+        border: 1px solid #e5e5e5;
+
+        &:hover {
+            box-shadow: initial;
+            background-image: linear-gradient(#ddd, #eee);
+        }
+    }
+
+    &:first-of-type .button {
+        border-radius: 8px 0px 0px 8px;
+    }
+
+    &:last-of-type .button {
+        border-radius: 0px 8px 8px 0px;
+    }
+}

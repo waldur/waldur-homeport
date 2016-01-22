@@ -12,7 +12,6 @@
     'projectsService',
     'ngDialog',
     '$rootScope',
-    '$state',
     baseResourceListController
     ]);
 
@@ -26,8 +25,7 @@
     currentStateService,
     projectsService,
     ngDialog,
-    $rootScope,
-    $state) {
+    $rootScope) {
     var ControllerListClass = baseControllerListClass.extend({
       init: function() {
         this.service = resourcesService;

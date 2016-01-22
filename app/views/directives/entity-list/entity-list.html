@@ -16,39 +16,7 @@
                 <filter-list filter-controller="entityList"></filter-list>
             </li>
             <li class="right-sort">
-                <div ng-if="entityOptions.entityData.openMap && entityList.list.length != 0" class="inline">
-                  <a class="button" ng-click="entityOptions.entityData.openMap()">
-                    <i class="icon map-marker"></i> Open map
-                  </a>
-                </div>
-                <div ng-if="entityOptions.entityData.createLink"
-                     class="tooltip-relative inline"
-                     check-quotas="{{entityOptions.entityData.checkQuotas}}"
-                     sref="{{ entityOptions.entityData.createLink }}"
-                     class-link="button"
-                     tooltip-type="list-items">
-                    <span>
-                      <i class="icon plus"></i>
-                      {{ entityOptions.entityData.createLinkText }}
-                    </span>
-                </div>
-                <span class="button-tooltip"
-                      ng-if="entityOptions.entityData.importLink"
-                      title="{{ entityOptions.entityData.importLinkTooltip }}"
-                      visible="import">
-                    <div class="tooltip-relative inline"
-                         ng-class="{'disabled': entityOptions.entityData.importDisabled}"
-                         check-quotas="{{entityOptions.entityData.checkQuotas}}"
-                         class-link="button"
-                         tooltip-type="list-items"
-                         sref="{{ entityOptions.entityData.importLink }}">
-                        <span>{{ entityOptions.entityData.importLinkText }}</span>
-                    </div>
-                </span>
-
-                <list-cache-reset list-controller="entityList"
-                                  list-service="entityService"
-                                  list-timer="entityOptions.entityData.timer"></list-cache-reset>
+                <div ng-include="'views/directives/entity-list/table-actions.html'"></div>
             </li>
         </ul>
     </div>
@@ -59,30 +27,7 @@
         </h2>
         <div class="decision">
             <div class="col">
-                    <div ng-if="entityOptions.entityData.createLink"
-                         check-quotas="{{entityOptions.entityData.checkQuotas}}"
-                         class="tooltip-relative inline"
-                         class-link="button"
-                         tooltip-type="empty-list-items"
-                         sref="{{ entityOptions.entityData.createLink }}">
-                        {{ entityOptions.entityData.createLinkText }}
-                    </div>
-                    <span class="button-tooltip"
-                          ng-if="entityOptions.entityData.importLink"
-                          title="{{ entityOptions.entityData.importLinkTooltip }}"
-                          visible="import">
-                        <div class="tooltip-relative inline"
-                             ng-class="{'disabled': entityOptions.entityData.importDisabled}"
-                             check-quotas="{{entityOptions.entityData.checkQuotas}}"
-                             class-link="button"
-                             tooltip-type="list-items"
-                             sref="{{ entityOptions.entityData.importLink }}">
-                            <span>{{ entityOptions.entityData.importLinkText }}</span>
-                        </div>
-                    </span>
-                    <list-cache-reset list-controller="entityList"
-                                      list-service="entityService"
-                                      list-timer="entityOptions.entityData.timer"></list-cache-reset>
+                <div ng-include="'views/directives/entity-list/table-actions.html'"></div>
             </div>
         </div>
     </div>
@@ -91,28 +36,9 @@
         <h2 class="app-title" ng-bind="entityOptions.entityData.noMatchesText"></h2>
     </div>
 
-    <!-- view-control -->
-    <!-- TODO: this functionality is not relevant and should be disabled until corresponding backend is ready. -->
-    <section class="view-control" ng-if="(entityList.list.length > 0 || entityList.searchInput) && entityList.controlPanelShow">
-        <div class="list-item no-cursor">
-            <div>
-                <div class="checkbox" ng-show="entityList.showgroup">
-                    <input type="checkbox"
-                           ng-checked="entityList.selectedInstances.length"
-                           ng-click="entityList.changeAllSelectedInstances()">
-                </div>
-            </div>
-            <div class="actions switch">
-                <span class="label-text" ng-class="{'low-grade': !entityList.showgroup}">batch</span>
-                <div class="checkbox-toggle">
-                    <input type="checkbox" id="control-types" ng-click="entityList.showgroup=!entityList.showgroup">
-                    <label for="control-types"></label>
-                </div>
-                <span class="label-text special-left" ng-class="{'low-grade': entityList.showgroup}">single</span>
-            </div>
-        </div>
-    </section>
-    <!-- /view-control -->
+    <div ng-if="entityList.controlPanelShow"
+         ng-include="'views/directives/entity-list/batch-header.html'">
+    </div>
 
     <div class="white-box list-box" ng-show="entityList.list.length > 0">
         <div ng-if="entityList.helpKey">
@@ -131,7 +57,7 @@
         </ul>
         <ul class="object-list" ng-class="{'mobile-hide': entityOptions.entityData.rowTemplateUrl}">
             <li class="list-item list-header" ng-if="::!entityOptions.entityData.hideTableHead">
-                <div class="checkbox" ng-show="entityList.controlPanelShow"></div>
+                <div class="checkbox" ng-if="entityList.controlPanelShow"></div>
                 <div ng-repeat="fieldHead in entityOptions.list" class="additional-cell {{ fieldHead.className }}"
                      ng-class="{ 'display-for-mobile' : fieldHead.showForMobile, 'status': fieldHead.type == 'statusCircle' }">
                     <a class="list-sort">{{ fieldHead.name }}</a>
@@ -145,9 +71,9 @@
                 <div class="list-item list" ng-class="{'opened': expandItem, 'pointer' : entityOptions.entityData.expandable}"
                      ng-click="expandItem=!expandItem; entityList.showMore(entity)"
                      ng-init="expandItem = entity.expandItemOpen; entityOptions.excludeItem = entity.expandItemOpen ? entity.uuid : 0;">
-                    <div class="checkbox" ng-show="entityList.controlPanelShow">
+                    <div class="checkbox" ng-if="entityList.controlPanelShow">
                         <div class="checkbox" stoppropagation>
-                            <input type="checkbox" ng-show="entityList.showgroup"
+                            <input type="checkbox" ng-if="entityList.showgroup"
                                    ng-checked="entityList.isInstanceSelected(entity)"
                                    ng-click="entityList.changeInstanceSelection(entity)">
                         </div>
