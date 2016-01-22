@@ -22,4 +22,8 @@
     &:last-of-type .button {
         border-radius: 0px 8px 8px 0px;
     }
+
+    &:only-of-type .button {
+        border-radius: 8px;
+    }
 }
