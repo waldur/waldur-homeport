@@ -37,7 +37,11 @@
       premiumSupportContracts: factory('premium-support-contracts'),
       keys: factory('keys'),
       hooks: factory('hooks'),
-      invoices: factory('paypal-invoices')
+      invoices: factory('paypal-invoices'),
+      'aws-images': factory('aws-images'),
+      'azure-images': factory('azure-images'),
+      'digitalocean-images': factory('digitalocean-images'),
+      'openstack-images': factory('openstack-images')
     }
   }
 })();

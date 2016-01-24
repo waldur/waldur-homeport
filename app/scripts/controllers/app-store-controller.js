@@ -14,6 +14,7 @@
       'premiumSupportPlansService',
       'premiumSupportContractsService',
       'resourcesService',
+      'resourcesCountService',
       'ncUtilsFlash',
       'projectsService',
       'keysService',
@@ -34,6 +35,7 @@
     premiumSupportPlansService,
     premiumSupportContractsService,
     resourcesService,
+    resourcesCountService,
     ncUtilsFlash,
     projectsService,
     keysService,
@@ -64,6 +66,11 @@
       serviceType: null,
       selectedCategory: {},
       selectedResourceType: null,
+      selectedResourceImageApiEndpoint: null,
+      resourceImagesUrl: null,
+      selectedResourceImagesCount: null,
+      selectedResourceImagesPage: 1,
+      selectedResourceImagesPageSize: 10,
       currentCustomer: {},
       currentProject: {},
       compare: [],
@@ -84,7 +91,7 @@
       priceItems: [],
 
       fields: [],
-      limitChoices: 10,
+      limitChoices: ENV.appStoreLimitChoices,
       fieldsOrder: null,
 
       init:function() {
@@ -204,8 +211,8 @@
                 vm.setFields(formOptions, validChoices);
               });
             });
-            ncUtils.blockElement('resource-properties', promise);
           });
+          ncUtils.blockElement('resource-properties', promise);
         }
       },
       getValidChoices: function() {
@@ -213,18 +220,38 @@
         var promises = [];
         var validChoices = {};
         angular.forEach(vm.serviceMetadata.properties, function(url, property) {
-          var query = {
+          var promise,
+          query = {
             settings_uuid: vm.selectedService.settings_uuid,
             project: vm.currentProject.uuid // for security groups
           };
-          servicesService.pageSize = 100;
-          var promise = servicesService.getAll(query, url).then(function(response) {
-            validChoices[property.toLowerCase()] = vm.formatChoices(response);
-          });
+          if (property === 'Image') {
+            servicesService.pageSize = this.selectedResourceImagesPageSize;
+            promise = servicesService.getList(query, url).then(function(response) {
+              validChoices[property.toLowerCase()] = vm.formatChoices(response);
+            });
+            vm.resourceImagesUrl = url;
+            vm.setResourceImagesApiEndpoint(url);
+          } else {
+            promise = servicesService.getAll(query, url).then(function(response) {
+              validChoices[property.toLowerCase()] = vm.formatChoices(response);
+            });
+          }
           promises.push(promise);
         });
         return $q.all(promises).then(function() {
           return validChoices;
+        });
+      },
+      setResourceImagesApiEndpoint: function(resourceUrl) {
+        var resourceUrlParts = resourceUrl.split('/');
+        this.selectedResourceImageApiEndpoint = resourceUrlParts[resourceUrlParts.length - 2];
+        this.countResourceImages();
+      },
+      countResourceImages: function() {
+        var vm = this;
+        resourcesCountService[this.selectedResourceImageApiEndpoint]({customer_uuid: this.currentCustomer.uuid}).then(function(count) {
+          vm.selectedResourceImagesCount = count;
         });
       },
       formatChoices: function(items) {
@@ -387,7 +414,28 @@
         }
       },
       isListLong: function(field) {
-        return field.choices.length > this.limitChoices;
+        return field.name === 'image'
+          ? this.selectedResourceImagesCount > this.limitChoices
+            && (this.selectedResourceImagesPageSize * this.selectedResourceImagesPage < this.selectedResourceImagesCount)
+          : field.choices.length > this.limitChoices;
+      },
+      remoteLoadMore: function(fieldName) {
+        return fieldName === 'image';
+      },
+      loadMoreImages: function(field) {
+        field.limit += this.selectedResourceImagesPageSize;
+        var vm = this,
+        query = {
+          settings_uuid: this.selectedService.settings_uuid,
+          project: this.currentProject.uuid, // for security groups
+          page: ++this.selectedResourceImagesPage
+        };
+        servicesService.pageSize = this.selectedResourceImagesPageSize;
+        servicesService.getList(query, this.resourceImagesUrl).then(function(response) {
+          var choices = vm.formatChoices(response);
+          field.choices = field.choices.concat(choices);
+          vm.attachIconsToImages();
+        });
       },
       isListExpanded: function(field) {
         return field.limit == field.choices.length;
