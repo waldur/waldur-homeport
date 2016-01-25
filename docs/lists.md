@@ -228,7 +228,10 @@ in corresponding controllers init function:
 ### Pagination directives
 
 Pagination directive calling looks like:
-<pagination pages-href="#/resources/" pages-list="ResourceList" pages-service="ResourceList.service"/>
+
+    <pagination pages-href="#/resources/"
+                pages-list="ResourceList"
+                pages-service="ResourceList.service"/>
 
 It has the following parameters:
 
@@ -239,7 +242,10 @@ It has the following parameters:
  3. pages-href is not required, current url by default
 
 page-size directive calling looks like:
-<pagesize pages-href="#/resources/" pages-list="ResourceList" pages-service="ResourceList.service"/>
+
+    <pagesize pages-href="#/resources/"
+              pages-list="ResourceList"
+              pages-service="ResourceList.service"/>
 
 It has the following parameters:
 
