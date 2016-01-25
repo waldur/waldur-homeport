@@ -3,7 +3,7 @@
     margin: auto;
     @include property(padding, 0 60);
     @include bp(xs) {
-        @include property(padding, 0 10);
+        @include property(padding, 0);
     } // xs
     @include bp(sm) {
         @include property(padding, 0 10);

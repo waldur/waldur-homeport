@@ -35,6 +35,7 @@
         this.actionButtonsListItems = [
           {
             title: 'Delete',
+            icon: 'fa-trash',
             clickFunction: this.remove.bind(this.controllerScope),
 
             isDisabled: function(service) {
@@ -61,15 +62,15 @@
             createLink: 'services.create',
             createLinkText: 'Create provider',
             checkQuotas: 'service',
-            timer: ENV.providersTimerInterval
+            timer: ENV.providersTimerInterval,
+            rowTemplateUrl: 'views/service/row.html'
           },
           list: [
             {
               name: 'Name',
               propertyName: 'name',
               type: ENTITYLISTFIELDTYPES.name,
-              className: 'name',
-              showForMobile: true
+              className: 'name'
             },
             {
               name: 'State',
@@ -77,7 +78,6 @@
               propertyName: 'state',
               onlineStatus: ENV.resourceOnlineStatus,
               className: 'visual-status',
-              showForMobile: true,
               getClass: function(state) {
                 var cls = ENV.servicesStateColorClasses[state];
                 if (cls == 'processing') {

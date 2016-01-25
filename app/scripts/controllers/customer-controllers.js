@@ -10,11 +10,19 @@
       '$rootScope',
       '$state',
       'ENV',
+      'ncUtils',
       CustomerListController
     ]);
 
   function CustomerListController(
-    customersService, baseControllerListClass, usersService, ENTITYLISTFIELDTYPES, $rootScope, $state, ENV) {
+    customersService,
+    baseControllerListClass,
+    usersService,
+    ENTITYLISTFIELDTYPES,
+    $rootScope,
+    $state,
+    ENV,
+    ncUtils) {
     var controllerScope = this;
     var CustomerController = baseControllerListClass.extend({
       init:function() {
@@ -26,6 +34,7 @@
         this.actionButtonsListItems = [
           {
             title: 'Remove',
+            icon: 'fa-trash',
             clickFunction: this.remove.bind(controllerScope),
 
             isDisabled: function(customer) {
@@ -43,6 +52,7 @@
           },
           {
             title: 'Add provider',
+            icon: 'fa-plus',
             clickFunction: function(customer) {
               $rootScope.$broadcast('adjustCurrentCustomer', customer);
               $state.go('services.create')
@@ -55,7 +65,8 @@
             noMatchesText: 'No organizations found matching filter.',
             title: 'Organizations',
             createLink: 'organizations.create',
-            createLinkText: 'Add organization'
+            createLinkText: 'Add organization',
+            rowTemplateUrl: 'views/customer/row.html'
           },
           list: [
             {
@@ -99,6 +110,13 @@
               item.plan_name = item.plan.name;
             }
           }
+        }
+        this.getQuotas();
+      },
+      getQuotas: function() {
+        for (var i = 0; i < this.list.length; i++) {
+          var item = this.list[i];
+          item.quotas_usage = ncUtils.getQuotaUsage(item.quotas);
         }
       }
     });

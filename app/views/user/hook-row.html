@@ -1,0 +1,42 @@
+<div class="compact-list__header"
+     ng-click="expanded = !expanded; entityList.showMore(entity)">
+  <div class="compact-list__title">
+    <a ui-sref="profile.hook-details({type: entity.hook_type, uuid: entity.uuid})"
+       ng-bind="entity.label"></a>
+  </div>
+  <div class="compact-list__right">
+     <expandable-indicator open="expanded">
+     </expandable-indicator>
+  </div>
+</div>
+
+<div ng-show="expanded" class="compact-list__details">
+  <div class="details-table__row">
+    <div class="details-table__key">
+      Status
+    </div>
+    <div class="details-table__value">
+      {{ entity.is_active && 'Enabled' || 'Disabled' }}
+    </div>
+  </div>
+
+  <div class="details-table__row">
+    <div class="details-table__key">
+      Destination
+    </div>
+    <div class="details-table__value">
+      {{ entity.destination }}
+    </div>
+  </div>
+
+  <div class="details-table__row">
+    <div class="details-table__key">
+      Events
+    </div>
+    <div class="details-table__value">
+      {{ entity.entities.join(',') }}
+    </div>
+  </div>
+</div>
+
+<action-list actions="entityButtons" entity="entity" ng-show="expanded"></action-list>

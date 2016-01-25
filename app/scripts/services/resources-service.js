@@ -47,6 +47,9 @@
       },
 
       getAvailableOperations: function(resource) {
+        if (!resource) {
+          return [];
+        }
         if (this.isGitlab(resource.resource_type)) {
           return [];
         }
@@ -54,6 +57,9 @@
       },
 
       getEnabledOperations: function(resource) {
+        if (!resource) {
+          return [];
+        }
         if (this.isGitlab(resource.resource_type)) {
           return ['delete'];
         }

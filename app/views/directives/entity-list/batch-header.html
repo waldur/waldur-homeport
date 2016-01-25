@@ -1,0 +1,20 @@
+<!-- TODO: this functionality is not relevant and should be disabled until corresponding backend is ready. -->
+<section class="view-control" ng-if="(entityList.list.length > 0 || entityList.searchInput)">
+    <div class="list-item no-cursor">
+        <div>
+            <div class="checkbox" ng-show="entityList.showgroup">
+                <input type="checkbox"
+                       ng-checked="entityList.selectedInstances.length"
+                       ng-click="entityList.changeAllSelectedInstances()">
+            </div>
+        </div>
+        <div class="actions switch">
+            <span class="label-text" ng-class="{'low-grade': !entityList.showgroup}">batch</span>
+            <div class="checkbox-toggle">
+                <input type="checkbox" id="control-types" ng-click="entityList.showgroup=!entityList.showgroup">
+                <label for="control-types"></label>
+            </div>
+            <span class="label-text special-left" ng-class="{'low-grade': entityList.showgroup}">single</span>
+        </div>
+    </div>
+</section>

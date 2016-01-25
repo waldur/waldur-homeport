@@ -376,7 +376,10 @@
         CustomerInvoicesTabController
       ]);
 
-  function CustomerInvoicesTabController(baseControllerListClass, invoicesService, ENTITYLISTFIELDTYPES) {
+  function CustomerInvoicesTabController(
+    baseControllerListClass,
+    invoicesService,
+    ENTITYLISTFIELDTYPES) {
     var controllerScope = this;
     var InvoicesController = baseControllerListClass.extend({
       init: function() {
@@ -387,40 +390,36 @@
           entityData: {
             noDataText: 'No invoices yet',
             hideActionButtons: true,
-            hideTableHead: false
+            hideTableHead: false,
+            rowTemplateUrl: 'views/payment/invoice.html'
           },
           list: [
             {
               name: 'Invoice code',
               propertyName: 'uuid',
               type: ENTITYLISTFIELDTYPES.trimmed,
-              showForMobile: true,
               limit: 6
             },
             {
               name: 'Amount',
               propertyName: 'total_amount',
               type: ENTITYLISTFIELDTYPES.linkOrText,
-              showForMobile: true
             },
             {
               name: 'Start date',
               propertyName: 'start_date',
               type: ENTITYLISTFIELDTYPES.dateShort,
-              showForMobile: true
             },
             {
               name: 'End date',
               propertyName: 'end_date',
               type: ENTITYLISTFIELDTYPES.dateShort,
-              showForMobile: true
             },
             {
               name: '',
               propertyName: 'pdf',
               iconClass: 'fa-file-pdf-o',
               type: ENTITYLISTFIELDTYPES.staticIconLink,
-              showForMobile: true,
               className: 'pdf-icon'
             }
           ]

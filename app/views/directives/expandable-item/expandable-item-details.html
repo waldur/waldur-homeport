@@ -5,58 +5,55 @@
         {{ ::expandableElement.error_message || expandableList.defaultErrorMessage }}
     </div>
 
-    <header>
-        <h3 ng-show="expandableOptions.title" class="title-expandable">{{ ::expandableOptions.title }}</h3>
-        <div class="short-form" ng-if="expandableElement.editable">
-            <div class="form-row" ng-repeat="field in expandableElement.fields"
-                 ng-if="!expandableOptions.fieldsToHide || expandableOptions.fieldsToHide.indexOf(field.name) === -1">
-                <div class="col label">
-                    <label for="{{ ::expandableElement.uuid }}_{{ ::field.name }}">
-                        <helpicon help-text="{{ ::field.help_text }}" ng-if="::field.help_text"></helpicon>
-                        {{ ::field.label }}
-                    </label>
-                </div>
-                <div class="col input input-full" ng-switch="::field.type">
-                    <input id="{{ ::expandableElement.uuid }}_{{ ::field.name }}"
-                           type="text"
-                           ng-switch-when="string"
-                           ng-model="expandableElement.values[field.name]">
-
-                    <input id="{{ ::expandableElement.uuid }}_{{ ::field.name }}"
-                           type="text"
-                           ng-switch-when="url"
-                           ng-model="expandableElement.values[field.name]">
-
-                    <input id="{{ ::expandableElement.uuid }}_{{ ::field.name }}"
-                           type="checkbox"
-                           ng-switch-when="boolean"
-                           ng-model="expandableElement.values[field.name]"/>
-
-                    <select id="{{ ::expandableElement.uuid }}_{{ ::field.name }}"
-                            ng-switch-when="choice"
-                            ng-model="expandableElement.values[field.name]"
-                            ng-options="item.value as item.display_name for item in field.choices">
-                    </select>
-
-                    <div ng-switch-when="file upload">
-                      {{ expandableList.getFilename(expandableElement.values[field.name]) || 'None'}}
-                      <a class="button"
-                         ngf-select
-                         ngf-accept="'application/x-x509-ca-cert'"
-                         ng-model="expandableElement.values[field.name]">Browse</a>
-                    </div>
-
-                    <span ng-show="field.required">(required)</span>
-                </div>
+    <div class="short-form" ng-if="expandableElement.editable">
+        <div class="form-row" ng-repeat="field in expandableElement.fields"
+             ng-if="!expandableOptions.fieldsToHide || expandableOptions.fieldsToHide.indexOf(field.name) === -1">
+            <div class="col label">
+                <label for="{{ ::expandableElement.uuid }}_{{ ::field.name }}">
+                    <helpicon help-text="{{ ::field.help_text }}" ng-if="::field.help_text"></helpicon>
+                    {{ ::field.label }}
+                </label>
             </div>
-            <div class="decision" ng-show="expandableList.hasChanged(expandableElement)">
-                <div class="col">
-                    <a class="button-apply" ng-click="expandableList.updateSettings(expandableElement)" ng-class="{'disabled': expandableList.isDisabled(expandableElement)}">Save</a>
+            <div class="col input input-full" ng-switch="::field.type">
+                <input id="{{ ::expandableElement.uuid }}_{{ ::field.name }}"
+                       type="text"
+                       ng-switch-when="string"
+                       ng-model="expandableElement.values[field.name]">
+
+                <input id="{{ ::expandableElement.uuid }}_{{ ::field.name }}"
+                       type="text"
+                       ng-switch-when="url"
+                       ng-model="expandableElement.values[field.name]">
+
+                <input id="{{ ::expandableElement.uuid }}_{{ ::field.name }}"
+                       type="checkbox"
+                       ng-switch-when="boolean"
+                       ng-model="expandableElement.values[field.name]"/>
+
+                <select id="{{ ::expandableElement.uuid }}_{{ ::field.name }}"
+                        ng-switch-when="choice"
+                        ng-model="expandableElement.values[field.name]"
+                        ng-options="item.value as item.display_name for item in field.choices">
+                </select>
+
+                <div ng-switch-when="file upload">
+                  {{ expandableList.getFilename(expandableElement.values[field.name]) || 'None'}}
+                  <a class="button"
+                     ngf-select
+                     ngf-accept="'application/x-x509-ca-cert'"
+                     ng-model="expandableElement.values[field.name]">Browse</a>
                 </div>
+
+                <span ng-show="field.required">(required)</span>
             </div>
         </div>
-        <div class="details-expandable" ng-if="!expandableElement.editable">
-            {{ expandableElement.name }} settings are not editable.
+        <div class="decision" ng-show="expandableList.hasChanged(expandableElement)">
+            <div class="col">
+                <a class="button-apply" ng-click="expandableList.updateSettings(expandableElement)" ng-class="{'disabled': expandableList.isDisabled(expandableElement)}">Save</a>
+            </div>
         </div>
-    </header>
+    </div>
+    <div class="details-expandable" ng-if="!expandableElement.editable">
+        {{ expandableElement.name }} settings are not editable.
+    </div>
 </section>

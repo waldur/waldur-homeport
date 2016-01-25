@@ -38,6 +38,7 @@
         this.actionButtonsListItems = [
           {
             title: 'Start',
+            icon: 'fa-play',
             clickFunction: this.startResource.bind(this.controllerScope),
             isHidden: function(model) {
               return !this.isOperationAvailable('start', model);
@@ -48,6 +49,7 @@
           },
           {
             title: 'Stop',
+            icon: 'fa-stop',
             clickFunction: this.stopResource.bind(this.controllerScope),
             isHidden: function(model) {
               return !this.isOperationAvailable('stop', model);
@@ -58,6 +60,7 @@
           },
           {
             title: 'Restart',
+            icon: 'fa-repeat',
             clickFunction: this.restartResource.bind(this.controllerScope),
             isHidden: function(model) {
               return !this.isOperationAvailable('restart', model);
@@ -72,12 +75,14 @@
             isDisabled: function(model) {
               return !this.isOperationEnabled('delete', model);
             }.bind(this.controllerScope),
-            className: 'remove'
+            className: 'remove',
+            icon: 'fa-trash'
           },
           {
             title: 'Unlink',
             clickFunction: this.unlink.bind(this.controllerScope),
-            className: 'remove'
+            className: 'remove',
+            icon: 'fa-unlink'
           }
         ];
         var vm = this;
@@ -86,12 +91,12 @@
             noDataText: 'You have no resources yet.',
             noMatchesText: 'No resources found matching filter.',
             checkQuotas: 'resource',
-            timer: ENV.resourcesTimerInterval
+            timer: ENV.resourcesTimerInterval,
+            rowTemplateUrl: 'views/resource/row.html'
           },
           list: [
             {
               type: ENTITYLISTFIELDTYPES.icon,
-              showForMobile: true,
               className: 'icon',
               getTitle: function(item) {
                 return item.resource_type;
@@ -106,7 +111,6 @@
               propertyName: 'name',
               type: ENTITYLISTFIELDTYPES.name,
               link: 'resources.details({uuid: entity.uuid, resource_type: entity.resource_type})',
-              showForMobile: ENTITYLISTFIELDTYPES.showForMobile,
               className: 'resource-name'
             },
             {
@@ -121,7 +125,6 @@
               type: ENTITYLISTFIELDTYPES.colorState,
               propertyName: 'state',
               className: 'visual-status',
-              showForMobile: true,
               getClass: function(state) {
                 var cls = ENV.resourceStateColorClasses[state];
                 if (cls == 'processing') {
@@ -137,7 +140,6 @@
               propertyName: 'access_info_text',
               urlPropertyName: 'access_info_url',
               type: ENTITYLISTFIELDTYPES.linkOrText,
-              showForMobile: true,
               className: 'resource-access',
               initField: vm.setAccessInfo
             }

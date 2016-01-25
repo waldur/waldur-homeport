@@ -908,15 +908,19 @@ $searchInputHeight: 32px;
   }
 }
 
-dl.two-column {
-  dt {
-    float: left;
-    clear: both;
-    width: 100px;
+.details-table__row {
+    display: flex;
+    padding-bottom: 10px;
+    justify-content: space-between;
+}
+
+.details-table__key {
     font-weight: bold;
-    margin-bottom: 13px;
-  }
-  dd {
-    float: left;
-  }
+    width: 100px;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+.details-table__value {
+    flex-grow: 1;
 }

@@ -11,6 +11,7 @@
       '$state',
       'ENV',
       'ENTITYLISTFIELDTYPES',
+      'ncUtils',
       BaseProjectListController]);
 
     function BaseProjectListController(
@@ -21,7 +22,8 @@
       $rootScope,
       $state,
       ENV,
-      ENTITYLISTFIELDTYPES) {
+      ENTITYLISTFIELDTYPES,
+      ncUtils) {
 
       var controllerClass = baseControllerListClass.extend({
         init: function() {
@@ -32,6 +34,7 @@
           this.actionButtonsListItems = [
             {
               title: 'Remove',
+              icon: 'fa-trash',
               clickFunction: this.remove.bind(this),
 
               isDisabled: function(project) {
@@ -54,6 +57,7 @@
               if (!response) {
                 vm.actionButtonsListItems.push({
                   title: 'Create resource',
+                  icon: 'fa-plus',
                   clickFunction: function(project) {
                     $rootScope.$broadcast('adjustCurrentProject', project);
                     $state.go('appstore.store')
@@ -67,6 +71,7 @@
               if (!response) {
                 vm.actionButtonsListItems.push({
                   title: 'Import resource',
+                  icon: 'fa-cloud-download',
                   clickFunction: function(project) {
                     $rootScope.$broadcast('adjustCurrentProject', project);
                     $state.go('import.import');
@@ -82,15 +87,15 @@
               title: 'Projects',
               createLink: 'projects.create',
               createLinkText: 'Add project',
-              expandable: true
+              expandable: true,
+              rowTemplateUrl: 'views/project/row.html'
             },
             list: [
               {
                 name: 'Name',
                 propertyName: 'name',
                 type: ENTITYLISTFIELDTYPES.name,
-                link: 'projects.details({uuid: entity.uuid})',
-                showForMobile: ENTITYLISTFIELDTYPES.showForMobile
+                link: 'projects.details({uuid: entity.uuid})'
               },
               {
                 name: 'Creation date',
