@@ -214,10 +214,9 @@
                         </span>
 
                         <span class="dummy" ng-switch-when="linkOrText" ng-init="field.initField && field.initField(entity)">
-                            <helpicon ng-if="field.linkDisplayName && entity[field.propertyName] !== 'No access info'"
-                                help-text="{{ entity[field.urlPropertyName] }}"></helpicon>
                             <a ng-if="entity[field.urlPropertyName]"
                                href="{{ entity[field.urlPropertyName] }}"
+                               title="{{ entity[field.urlPropertyName] }}"
                                target="_blank">
                                 <b class="icon external-link"></b>
                                 {{ field.linkDisplayName || entity[field.urlPropertyName] }}
