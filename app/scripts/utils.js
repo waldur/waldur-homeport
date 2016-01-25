@@ -106,6 +106,9 @@
           }
           return result;
         }, {});
+      },
+      endsWith: function(string, target) {
+        return string.indexOf(target) === (string.length - target.length);
       }
     }
   }
