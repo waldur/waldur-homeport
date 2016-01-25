@@ -2,32 +2,39 @@ Web applications usually allow user to manage lists of things,
 for example list of customers, projects or resources.
 
 We have implemented several AngularJS directives in order to:
-1) render multi-column lists for both desktop and mobile clients
-2) apply action to selected item
-3) paginate through large list
-4) expand item in order to receive more information without switching to another view
+
+    1) render multi-column lists for both desktop and mobile clients
+
+    2) apply action to selected item
+
+    3) paginate through large list
+
+    4) expand item in order to receive more information without switching to another view
 
 ## Entity list directive
 
 Directive is used for displaying different lists throughout project.
 Sample directive usage:
 
-`
+
 <entitylist entity-list="UserList"
               entity-service="UserList.service"
               entity-buttons="UserList.actionButtonsListItems"
               entity-options="UserList.entityOptions"></entitylist>
-`
+
 
 Directive parameters:
 
-1) entity-list - current controller
-2) entity-service - service for controller
-3) entity-buttons - action buttons for list rows (action-button directive)
-4) entity-options - object with list of field properties. Partly described in ENTITYLISTFIELDTYPES constant. entityOptions object is defined in controller
+    1) entity-list - current controller
+
+    2) entity-service - service for controller
+
+    3) entity-buttons - action buttons for list rows (action-button directive)
+
+    4) entity-options - object with list of field properties. Partly described in ENTITYLISTFIELDTYPES constant. entityOptions object is defined in controller
 
 entityOptions sample:
-`
+
     this.entityOptions = {
       entityData: {
         title: 'Users',
@@ -55,7 +62,7 @@ entityOptions sample:
         }
       ]
     }
-`
+
 
   Where entityOptions.list is list of fields to display,
   entityOptions.entityData - variables to display at list header
@@ -127,12 +134,17 @@ Every type has list of fields for proper display.
 In order to allow user to apply action on selected item you should define `actionButtonsListItems` variable
 in the list controller. It should contain list of actions, each of which has following fields
 
-1) title, for example `Add` or `Delete`
-2) icon, for example 'fa-plus', which is used as class name of icon, FontAwesome icons are preferred
-3) clickFunction - function executed when user clicks on action
-4) isDisabled - function which returns boolean value indicating whether this action enabled or not
-5) tooltip - function which returns string value
-6) isHidden - function which returns boolean value indicating whether this action hidden or not
+    1) title, for example `Add` or `Delete`
+
+    2) icon, for example 'fa-plus', which is used as class name of icon, FontAwesome icons are preferred
+
+    3) clickFunction - function executed when user clicks on action
+
+    4) isDisabled - function which returns boolean value indicating whether this action enabled or not
+
+    5) tooltip - function which returns string value
+
+    6) isHidden - function which returns boolean value indicating whether this action hidden or not
 
 Action specification is used in `action-button` and `action-list` directive.
 Former is used in desktop client, and latter is used in mobile client.
@@ -141,9 +153,9 @@ Former is used in desktop client, and latter is used in mobile client.
 
 Action button directive calling looks like:
 
-`<action-button button-list="CustomerList.actionButtonsListItems"
+<action-button button-list="CustomerList.actionButtonsListItems"
     button-controller="CustomerList"
-    button-model="customer"></action-button>`
+    button-model="customer"></action-button>
 
 button-list - array of objects.
 
@@ -171,15 +183,16 @@ Action list directive is primarily used in mobile client and its calling looks l
 
 It has the following parameters:
 
-1) actions - it should correspond to list of actions defined in the list controller
-2) entity - this is reference to current list item
+    1) actions - it should correspond to list of actions defined in the list controller
+
+    2) entity - this is reference to current list item
 
 ## Expandableitem directive
 
 Directive is used to show additional information in list elements.
 Directive is placed in entity-list.html file:
 
-`
+
     <expandableitem ng-if="entityList.expandableOptions"
         ng-repeat="item in entityList.expandableOptions"
         ng-show="expandItem"
@@ -188,14 +201,14 @@ Directive is placed in entity-list.html file:
         expandable-element="entity" <!-- entity item -->
         expandable-list="entityList" <!-- entity controller -->
         expandable-options="item"></expandableitem> <!-- options array -->
-`
+
 
 Expandable item shows one section of information, so it is used within a loop to
 display multiple sections if necessary.
 As entity-list directive, expandableitem requires an object with settings
 in corresponding controllers init function:
 
-`
+
     this.expandableOptions = [
       {
         // options for current information section
@@ -232,7 +245,7 @@ in corresponding controllers init function:
         ]
       }
     ];
-`
+
 
 ### Pagination directives
 
