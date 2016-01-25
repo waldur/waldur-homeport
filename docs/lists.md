@@ -21,7 +21,6 @@ Sample directive usage:
               entity-buttons="UserList.actionButtonsListItems"
               entity-options="UserList.entityOptions"></entitylist>
 
-
 Directive parameters:
 
  1. entity-list - current controller
@@ -70,10 +69,9 @@ entityOptions sample:
   entityStatusField: onlineStatus, offlineStatus
   link: link
 
-## ENTITYLISTFIELDTYPES constant (entity-list directive)
+## Column specification
 
-Container for different types of fields in entities lists - backups list, resources list, users list etc
-Every type has list of fields for proper display.
+Column types are constants in ENTITYLISTFIELDTYPES object. Each column type has list of fields for proper display:
 
     date:                    date in days ago
         name           - string - name of column, required
@@ -127,9 +125,8 @@ Every type has list of fields for proper display.
         propertyName   - string - contains field name
         urlPropertyName - string - contains field url
 
-    showForMobile:           add class to show field on mobile devices
+## Actions specification
 
-## Actions
 In order to allow user to apply action on selected item you should define `actionButtonsListItems` variable
 in the list controller. It should contain list of actions, each of which has following fields
 
@@ -150,41 +147,31 @@ Former is used in desktop client, and latter is used in mobile client.
 
 ### Action button directive
 
-Action button directive calling looks like:
+Action button directive is primarily used in desktop client and its call looks like:
 
 <action-button button-list="CustomerList.actionButtonsListItems"
     button-controller="CustomerList"
     button-model="customer"></action-button>
 
-button-list - array of objects.
+The attributes of the directive are as following:
 
- - object params:
-  1. title - title of button
+ 1. button-controller - controller of list page
 
-  2. clickFunction - function for click. In button template: `ng-click="button.clickFunction(buttonModel)"`
+ 2. button-model - model of item
 
-  3. className - class for button. In button template: `class="button-simple {{ button.className }}"`
-
-  4. isDisabled - function for checking button status. In button template:
-   `ng-class="{'disabled': button.isDisabled && !button.isDisabled(buttonModel)}"`
-
-button-controller - controller of list page
-
-button-model - model of item
-
-button-type - type for action button directive. Either 'refresh' or usual button list.
+ 3. button-type - type for action button directive. Either 'refresh' or usual button list.
 
 ### Action list directive
 
-Action list directive is primarily used in mobile client and its calling looks like:
+Action list directive is primarily used in mobile client and its call looks like:
 
 `<action-list actions="entityButtons" entity="entity" ng-show="expanded"></action-list>`
 
 It has the following parameters:
 
-    1) actions - it should correspond to list of actions defined in the list controller
+ 1. actions - it should correspond to list of actions defined in the list controller
 
-    2) entity - this is reference to current list item
+ 2. entity - this is reference to current list item
 
 ## Expandableitem directive
 
