@@ -29,9 +29,9 @@ Directive parameters:
 
  3. entity-buttons - action buttons for list rows (action-button directive)
 
- 4. entity-options - object with list of field properties. Partly described in ENTITYLISTFIELDTYPES constant. entityOptions object is defined in controller
+ 4. entity-options - object with list of field properties.
 
-entityOptions sample:
+entityOptions object is defined in controller. entityOptions.list is list of fields to display, it is described in column specification section of documentation. entityOptions sample:
 
     this.entityOptions = {
       entityData: {
@@ -60,14 +60,6 @@ entityOptions sample:
         }
       ]
     }
-
-
-  Where entityOptions.list is list of fields to display,
-  entityOptions.entityData - variables to display at list header
-
-  Required fields for list types:
-  entityStatusField: onlineStatus, offlineStatus
-  link: link
 
 ## Column specification
 
@@ -237,12 +229,22 @@ in corresponding controllers init function:
 
 Pagination directive calling looks like:
 <pagination pages-href="#/resources/" pages-list="ResourceList" pages-service="ResourceList.service"/>
-pages-list - list controller
-pages-service - list model
-pages-href is not required, current url by default
+
+It has the following parameters:
+
+ 1. pages-list - list controller
+
+ 2. pages-service - list model
+
+ 3. pages-href is not required, current url by default
 
 page-size directive calling looks like:
 <pagesize pages-href="#/resources/" pages-list="ResourceList" pages-service="ResourceList.service"/>
-pages-list - list controller
-pages-service - list model
-pages-href is not required, current url by default
+
+It has the following parameters:
+
+ 1. pages-list - list controller
+
+ 2. pages-service - list model
+
+ 3. pages-href is not required, current url by default
