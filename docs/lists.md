@@ -3,19 +3,18 @@ for example list of customers, projects or resources.
 
 We have implemented several AngularJS directives in order to:
 
-    1) render multi-column lists for both desktop and mobile clients
+ 1. render multi-column lists for both desktop and mobile clients
 
-    2) apply action to selected item
+ 2. apply action to selected item
 
-    3) paginate through large list
+ 3. paginate through large list
 
-    4) expand item in order to receive more information without switching to another view
+ 4. expand item in order to receive more information without switching to another view
 
 ## Entity list directive
 
 Directive is used for displaying different lists throughout project.
 Sample directive usage:
-
 
 <entitylist entity-list="UserList"
               entity-service="UserList.service"
@@ -25,13 +24,13 @@ Sample directive usage:
 
 Directive parameters:
 
-    1) entity-list - current controller
+ 1. entity-list - current controller
 
-    2) entity-service - service for controller
+ 2. entity-service - service for controller
 
-    3) entity-buttons - action buttons for list rows (action-button directive)
+ 3. entity-buttons - action buttons for list rows (action-button directive)
 
-    4) entity-options - object with list of field properties. Partly described in ENTITYLISTFIELDTYPES constant. entityOptions object is defined in controller
+ 4. entity-options - object with list of field properties. Partly described in ENTITYLISTFIELDTYPES constant. entityOptions object is defined in controller
 
 entityOptions sample:
 
@@ -134,17 +133,17 @@ Every type has list of fields for proper display.
 In order to allow user to apply action on selected item you should define `actionButtonsListItems` variable
 in the list controller. It should contain list of actions, each of which has following fields
 
-    1) title, for example `Add` or `Delete`
+ 1. title, for example `Add` or `Delete`
 
-    2) icon, for example 'fa-plus', which is used as class name of icon, FontAwesome icons are preferred
+ 2. icon, for example 'fa-plus', which is used as class name of icon, FontAwesome icons are preferred
 
-    3) clickFunction - function executed when user clicks on action
+ 3. clickFunction - function executed when user clicks on action
 
-    4) isDisabled - function which returns boolean value indicating whether this action enabled or not
+ 4. isDisabled - function which returns boolean value indicating whether this action enabled or not
 
-    5) tooltip - function which returns string value
+ 5. tooltip - function which returns string value
 
-    6) isHidden - function which returns boolean value indicating whether this action hidden or not
+ 6. isHidden - function which returns boolean value indicating whether this action hidden or not
 
 Action specification is used in `action-button` and `action-list` directive.
 Former is used in desktop client, and latter is used in mobile client.
