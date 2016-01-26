@@ -2,9 +2,9 @@
 
 (function() {
   angular.module('ncsaas')
-    .directive('customerBalance', ['currentStateService', 'ncUtils', 'ENV', detailsView]);
+    .directive('customerBalance', ['currentStateService', 'ncUtils', 'ENV', '$timeout', detailsView]);
 
-  function detailsView(currentStateService, ncUtils, ENV) {
+  function detailsView(currentStateService, ncUtils, ENV, $timeout) {
     return {
       restrict: 'E',
       templateUrl: "views/directives/customer-balance.html",
@@ -82,6 +82,11 @@
           refresh();
         });
 
+        scope.$on('currentCustomerUpdated', function() {
+          $timeout(function() {
+            refresh();
+          });
+        });
       }
     };
   }
