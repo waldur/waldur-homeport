@@ -12,6 +12,7 @@
     'projectsService',
     'ngDialog',
     '$rootScope',
+    'ncUtils',
     baseResourceListController
     ]);
 
@@ -25,7 +26,8 @@
     currentStateService,
     projectsService,
     ngDialog,
-    $rootScope) {
+    $rootScope,
+    ncUtils) {
     var ControllerListClass = baseControllerListClass.extend({
       init: function() {
         this.service = resourcesService;
@@ -251,14 +253,22 @@
       },
       setAccessInfo: function(item) {
         item.access_info_text = 'No access info';
-        if (item.external_ips && item.external_ips.length > 0) {
-          item.access_info_text = item.external_ips.join(', ');
-        } else if (item.rdp && item.state == 'Online') {
-          item.access_info_url = item.rdp;
-          item.access_info_text = 'Connect';
-        } else if (item.web_url && item.state == 'Online') {
-          item.access_info_url = item.web_url;
-          item.access_info_text = 'Open';
+        if (!item.access_url) {
+          return;
+        }
+
+        if (ncUtils.startsWith(item.access_url, "http")) {
+          if (item.state == 'Online') {
+            item.access_info_url = item.access_url;
+            item.access_info_text = 'Open';
+
+            if (ncUtils.endsWith(item.access_url, "/rdp/")) {
+              item.access_info_text = 'Connect';
+            }
+          }
+        } else {
+          // IP address
+          item.access_info_text = item.access_url;
         }
       },
       stopResource:function(resource) {
