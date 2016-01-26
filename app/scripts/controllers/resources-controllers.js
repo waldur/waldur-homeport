@@ -253,14 +253,22 @@
       },
       setAccessInfo: function(item) {
         item.access_info_text = 'No access info';
+        if (!item.access_url) {
+          return;
+        }
 
-        if (item.access_url && item.state == 'Online') {
-          item.access_info_url = item.access_url;
-          item.access_info_text = 'Open';
+        if (ncUtils.startsWith(item.access_url, "http")) {
+          if (item.state == 'Online') {
+            item.access_info_url = item.access_url;
+            item.access_info_text = 'Open';
 
-          if (ncUtils.endsWith(item.access_url, "/rdp/")) {
-            item.access_info_text = 'Connect';
+            if (ncUtils.endsWith(item.access_url, "/rdp/")) {
+              item.access_info_text = 'Connect';
+            }
           }
+        } else {
+          // IP address
+          item.access_info_text = item.access_url;
         }
       },
       stopResource:function(resource) {
