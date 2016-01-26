@@ -109,7 +109,7 @@
       },
       startsWith: function(string, target) {
         return string.indexOf(target) === 0;
-      }
+      },
       endsWith: function(string, target) {
         return string.indexOf(target) === (string.length - target.length);
       }
