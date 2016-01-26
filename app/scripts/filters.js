@@ -1,3 +1,4 @@
+
 (function() {
   angular.module('ncsaas').filter('mb2gb', function() {
     return function(input) {
@@ -21,6 +22,9 @@
   angular.module('ncsaas').filter('defaultCurrency', ['ENV', '$filter', defaultCurrency]);
   function defaultCurrency(ENV, $filter) {
     return function(value) {
+      if (value.indexOf && value.indexOf(ENV.currency) !== -1) {
+        return value;
+      }
       return $filter('currency')(value, ENV.currency);
     }
   }

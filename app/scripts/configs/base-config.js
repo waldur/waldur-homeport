@@ -63,6 +63,9 @@ angular.module('ncsaas')
         services: ['Oracle', 'GitLab']
       }
     ],
+    showCompare: [
+      'VMs'
+    ],
     IntercomAppId: 'xfbbcxck',
     defaultListCacheTime: 60 * 10,
     dashboardHelp: {
