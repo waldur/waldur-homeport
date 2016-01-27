@@ -212,7 +212,7 @@
         }
       },
 
-      processChartData: function(rows) {
+      /*processChartData: function(rows) {
         var labels = [];
         var totals = [];
         rows.forEach(function(row) {
@@ -243,6 +243,26 @@
             }
           ]
         };
+      },*/
+
+      processChartData: function(rows) {
+        var result = {
+          customer: [],
+          service: [],
+          project: [],
+          serviceprojectlink: []
+        };
+        rows.forEach(function(row) {
+          if (['customer', 'service', 'project', 'serviceprojectlink'].indexOf(row.scope_type) >= 0) {
+            result[row.scope_type].push({
+              date: moment(row.month + " " + row.year, 'MM YYYY').toDate(),
+              value: row.total
+            });
+          }
+        });
+        blockUI.stop();
+
+        this.costData = result;
       },
 
       processTableData: function(rows) {
