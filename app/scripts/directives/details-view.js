@@ -29,7 +29,6 @@
           getSearchStatus(tab);
         }
 
-
         function getSearchStatus(tab) {
           scope.hideSearch = false;
           for (var i = 0; i < scope.options.tabs.length; i++) {
