@@ -16,14 +16,14 @@
     }
 
     &:first-of-type .button {
-        border-radius: 8px 0px 0px 8px;
+        border-radius: 5px 0px 0px 5px;
     }
 
     &:last-of-type .button {
-        border-radius: 0px 8px 8px 0px;
+        border-radius: 0px 5px 5px 0px;
     }
 
     &:only-of-type .button {
-        border-radius: 8px;
+        border-radius: 5px;
     }
 }

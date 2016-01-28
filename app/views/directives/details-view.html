@@ -1,17 +1,25 @@
-<div>
+<div class="container">
     <section class="title-wrapper">
-        <div class="container details-container">
-            <div class="left-side">
-                <h1 ng-if="options.title ">{{ options.title }}</h1>
-                <a ng-if="options.listState" ui-sref="{{ options.listState }}"
-                   class="back-to-list button">Show all</a>
-            </div>
+        <div class="left-side">
+            <h1 ng-if="options.title">{{ options.title }}</h1>
+            <a ng-if="options.listState"
+               ui-sref="{{ options.listState }}"
+               class="back-to-list button">Show all</a>
+        </div>
 
+        <div class="left-side-compact">
+          <a ng-if="options.listState"
+             ui-sref="{{ options.listState }}">
+            <i class="icon fa-angle-left"></i>
+            All {{ options.title_plural }}
+          </a>
+        </div>
+
+        <div class="details-container">
             <div ng-if="options.hasGravatar" class="img-wrapper">
                 <img gravatar-src="controller.model.email" class="avatar-img" gravatar-size="100">
             </div>
             <div class="details-about">
-
                 <div ng-if="options.hasLogo" class="profile-logo">
                     <section class="avatar">
                         <span class="avatar big">
@@ -65,39 +73,40 @@
                 </p>
             </div>
         </div>
-        <customer-balance ng-if="controller.detailsViewOptions.title == 'Organization'"
-                          customer-balance-type="details"
-                          customer-add-credit="controller.addCredit"
-                          customer-chart-data="controller.chartData"
-                          customer-show-chart="controller.showChart"></customer-balance>
-        <div class="clear"></div>
+        <div ng-if="controller.detailsViewOptions.title == 'Organization'">
+          <customer-balance></customer-balance>
+        </div>
     </section>
+
     <div class="profile-content">
-        <div class="container">
-            <div class="tabs-wrapper">
-                <aside>
-                    <div class="input-group rem-mob">
-                        <input type="search" placeholder="Search" ng-hide="hideSearch"
-                               ng-model="generalSearch"
-                               ng-model-options="{ debounce: 500 }"
-                               ng-change="search()"/>
-                    </div>
-                    <ul class="tabs-links tabs-opened" ng-class="{'tabs-opened': openTabs}">
-                        <li visible="{{ tab.key }}" ng-class="{'active': options.activeTab === tab.key}"
-                            ng-click="tabChange(tab.key)"
-                            ng-repeat="tab in options.tabs">
-                            <span ng-if="::tab.icon" class="icon" ng-class="::tab.icon"></span>
-                            {{ tab.title }} <span ng-if="tab.key != 'delete'"><span ng-show="tab.count !== -1">({{ tab.count }})</span></span>
-                        </li>
-                    </ul>
-                </aside>
-                <div class="tab-content" block-ui="tab-content">
-                    <div visible="{{ tabContent.key }}" class="tab" id="{{ tabContent.key }}"
-                         ng-class="{'tab-active': options.activeTab === tabContent.key}"
-                         ng-if="tabContent.key == options.activeTab"
-                         ng-repeat="tabContent in options.tabs">
-                        <div ui-view="{{ tabContent.viewName }}"></div>
-                    </div>
+        <div class="tabs-wrapper">
+            <aside>
+                <div class="input-group rem-mob">
+                    <input type="search" placeholder="Search" ng-hide="hideSearch"
+                           ng-model="generalSearch"
+                           ng-model-options="{ debounce: 500 }"
+                           ng-change="search()"/>
+                </div>
+                <div class="tab-link__item"
+                     visible="{{ tab.key }}"
+                     ng-click="tabChange(tab.key)"
+                     ng-repeat="tab in options.tabs"
+                     ng-class="{'active': options.activeTab === tab.key}">
+                  <div class="tab-link__key">
+                    <span ng-if="::tab.icon" class="icon" ng-class="::tab.icon"></span>
+                    {{ tab.title }} 
+                  </div>
+                  <span ng-if="tab.key != 'delete'">
+                    <span ng-show="tab.count !== -1">{{ tab.count }}</span>
+                  </span>
+                </div>
+            </aside>
+            <div class="tab-content" block-ui="tab-content">
+                <div visible="{{ tabContent.key }}" class="tab" id="{{ tabContent.key }}"
+                     ng-class="{'tab-active': options.activeTab === tabContent.key}"
+                     ng-if="tabContent.key == options.activeTab"
+                     ng-repeat="tabContent in options.tabs">
+                    <div ui-view="{{ tabContent.viewName }}"></div>
                 </div>
             </div>
         </div>

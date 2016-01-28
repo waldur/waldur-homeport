@@ -72,7 +72,7 @@
         }
       },
       getPrettyQuotaName: function(name) {
-        return name.replace(/nc_|_count/gi, '');
+        return name.replace(/nc_|_count/g, '').replace(/_/g, ' ');
       },
       getQuotaUsage: function(quotas) {
         var usage = {};

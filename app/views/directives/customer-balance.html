@@ -1,58 +1,140 @@
-<div class="balance-block customer-balance container {{ type == 'dashboard' ? 'dashboard-balance' : '' }}" ng-hide="hideAll">
-    <div class="right-block" ng-show="enablePurchaseCostDisplay">
-        <div class="balance">
-            <span visible="plans" class="bold">
-                Plan:
-            </span>
-            <span class="plan-spacing" visible="plans" ng-click="quotasTooltip = !quotasTooltip;">
-                {{ currentPlan || 'Default'  }}
-            </span>
-            <span class="bold" visible="balance">
-                Balance:
-            </span>
-            <span visible="balance">
-                {{ model.balance || 0 | currency:currency }}
-            </span>
-            <div class="tooltip quota-tooltip" ng-show="quotasTooltip">
-                <div class="tooltip-title">
-                    <h3>Current quotas: </h3>
-                    <div class="icon close" ng-click="quotasTooltip = false;"></div>
-                    <div class="clear"></div>
+<div ng-hide="hideAll">
+    <span class="mobile-hide" visible="plans">
+        <div class="dropdown__container">
+            <div ng-click="showPlan = !showPlan" class="indicator-button__container">
+                <div class="indicator-button__name">
+                    <i class="icon fa-sliders"></i>
+                    Plan
+                    <i class="icon fa-angle-down"></i>
                 </div>
-                <div ng-repeat="quota in currentPlanQuotas" visible="{{ quota.name }}">
-                    <div>{{ quota.usage }} out of {{ quota.limit }} {{ quota.name }}</div>
+                <div class="indicator-button__value">
+                    {{ plan.name || 'Default' }}
                 </div>
-                <a visible="plans" ui-sref="organizations.plans({uuid: model.uuid})"
-                   ng-show="type == 'dashboard'" class="button">Upgrade</a>
+            </div>
+            <div ng-show="showPlan" class="dropdown__menu">
+                <div class="dropdown__header">
+                    <div class="icon close" ng-click="showPlan = false"></div>
+                    Quota usage
+                </div>
+                <div class="dropdown__content">
+                    <div ng-repeat="quota in plan.quotas">
+                        <div class="usage-row"
+                             visible="{{ quota.name }}">
+                            <div class="usage-row__key">{{ quota.name | titleCase }}</div>
+                            <div class="usage-row__value">{{ quota.usage }} out of {{ quota.limit }}</div>
+                        </div>
+                        <div class="usage-bar">
+                            <div class="usage-bar__value" ng-style="{width: {{ quota.percent }} + '%'}"></div>
+                        </div>
+                    </div>
+                </div>
+                <a class="dropdown__action"
+                   ui-sref="organizations.plans({uuid: model.uuid})">
+                   <i class="icon fa-cart-plus"></i> Upgrade
+                </a>
             </div>
         </div>
+    </span>
 
-        <div ng-if="type == 'details'">
-            <div class="buttons">
-                <a class="button" visible="plans" ui-sref="organizations.plans({uuid: model.uuid})">Plans</a>
-                <a class="button" ng-click="toggleBalance()" visible="balance">Top-up</a>
-                <a class="button" ng-click="toggleChart()" ng-if="showChart">History</a>
+    <div class="mobile-show" visible="plans">
+        <div class="tab-link__item" ng-click="showPlan = !showPlan">
+            <div class="tab-link__key">
+                <i class="icon fa-sliders"></i>
+                Plan
             </div>
-            <div class="tooltip graph-tooltip" ng-if="showChart && graphTooltip">
-                <canvas chart-options="chartOptions"
-                        chart-data="chartData"
-                        tc-chartjs chart-type="line"
-                        width="400" height="100"></canvas>
+            <div class="tab-link__value">
+                {{ plan.name || 'Default' }}
+                <i class="icon fa-angle-down"></i>
             </div>
-            <div class="tooltip amount-tooltip" ng-show="amountTooltip">
-                <div class="tooltip-title">
-                    <h3>Add amount</h3>
-                    <div class="icon close" ng-click="toggleBalance()"></div>
-                    <div class="clear"></div>
+        </div>
+        <div ng-show="showPlan" class="tab-link__content">
+            <div ng-repeat="quota in plan.quotas">
+                <div class="usage-row"
+                     visible="{{ quota.name }}">
+                    <div class="usage-row__key">{{ quota.name | titleCase }}</div>
+                    <div class="usage-row__value">{{ quota.usage }} out of {{ quota.limit }}</div>
                 </div>
-                <form>
-                    <input type="number" min="1" max="10000" ng-model="amount" ng-init="amount=10">
-                    <span>{{ ::currency }}</span>
-                    <a class="button" submit-button="addCredit(amount)">
-                        Add credit
-                    </a>
-                </form>
+                <div class="usage-bar">
+                    <div class="usage-bar__value" ng-style="{width: {{ quota.percent }} + '%'}"></div>
+                </div>
             </div>
+            <a class="button"
+               ui-sref="organizations.plans({uuid: model.uuid})">
+               <i class="icon fa-cart-plus"></i> Upgrade
+            </a>
+        </div>
+    </div>
+
+    <span class="mobile-hide" visible="balance">
+        <div class="dropdown__container" visible="balance">
+            <div ng-click="showBalance = !showBalance" class="indicator-button__container">
+                <div class="indicator-button__name">
+                    <i class="icon fa-credit-card"></i>
+                    Balance
+                    <i class="icon fa-angle-down"></i>
+                </div>
+                <div class="indicator-button__value">
+                    {{ model.balance || 0 | defaultCurrency }}
+                </div>
+            </div>
+            <div ng-if="showBalance" class="dropdown__menu">
+                <div class="dropdown__content">
+                    <canvas ng-if="showChart"
+                            tc-chartjs-line
+                            chart-data="chartData"
+                            width="280"
+                            height="120">
+                    </canvas>
+
+                    <div class="usage-row add-amount">
+                        <div class="usage-row__key">Amount</div>
+                        <div class="usage-row__value">
+                            <form>
+                                <input type="number" min="1" max="10000" ng-model="amount">
+                                <span>{{ ::currency }}</span>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <a class="dropdown__action"
+                   submit-button="addCredit(amount)">
+                   <i class="icon fa-cart-plus"></i> Add credit
+                </a>
+            </div>
+        </div>
+    </span>
+
+    <div class="mobile-show" visible="balance">
+        <div class="tab-link__item" ng-click="showBalance = !showBalance">
+            <div class="tab-link__key">
+                <i class="icon fa-credit-card"></i>
+                Balance
+            </div>
+            <div class="tab-link__value">
+                {{ model.balance || 0 | defaultCurrency }}
+                <i class="icon fa-angle-down"></i>
+            </div>
+        </div>
+        <div ng-if="showBalance" class="tab-link__content">
+            <canvas ng-if="showChart"
+                    tc-chartjs-line
+                    chart-data="chartData"
+                    width="380"
+                    height="150">
+            </canvas>
+            <div class="usage-row add-amount">
+                <div class="usage-row__key">Amount</div>
+                <div class="usage-row__value">
+                    <form>
+                        <input type="number" min="1" max="10000" ng-model="amount">
+                        <span>{{ ::currency }}</span>
+                    </form>
+                </div>
+            </div>
+            <a class="button"
+               submit-button="addCredit(amount)">
+               <i class="icon fa-cart-plus"></i> Add credit
+            </a>
         </div>
     </div>
 </div>
