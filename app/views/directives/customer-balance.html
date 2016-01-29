@@ -82,6 +82,10 @@
             </div>
             <div class="dropdown__menu"
                  ng-if="isShown('balance')">
+                <div class="dropdown__header">
+                    <div class="icon close" ng-click="toggle('balance')"></div>
+                    Balance
+                </div>
                 <div class="dropdown__content">
                     <canvas ng-if="showChart"
                             tc-chartjs-line
