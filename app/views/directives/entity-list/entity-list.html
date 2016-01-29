@@ -3,22 +3,35 @@
         <h1>{{ entityOptions.entityData.title }}</h1>
     </div>
     <div class="white-box" ng-show="entityList.list.length > 0 || entityList.searchInput || entityList.chosenFilters.length">
-        <ul class="sort-list">
-            <li class="search divid">
-                <div class="search-box">
-                    <input type="text" ng-model='entityList.searchInput'
-                           ng-model-options="{ debounce: 500 }"
-                           ng-change="entityList.search()">
-                    <button class="search-button" ng-click="entityList.search()"></button>
-                </div>
-            </li>
-            <li>
-                <filter-list filter-controller="entityList"></filter-list>
-            </li>
-            <li class="right-sort">
-                <div ng-include="'views/directives/entity-list/table-actions.html'"></div>
-            </li>
-        </ul>
+        <div ng-if="entityOptions.entityData.loadMoreButton">
+            <ul class="sort-list">
+                <li><a ui-sref="appstore.store">back to store</a></li>
+                <li>
+                    <a class="toggle-link"
+                       ng-repeat="(key, filter) in entityList.servicesTypes"
+                       ng-click="entityList.toggleFilter(filter)"
+                       ng-class="{'active': entityList.isFilterChosen(filter)}">{{ filter }}</a>
+                </li>
+            </ul>
+        </div>
+        <div ng-if="!entityOptions.entityData.hideControlButtons">
+            <ul class="sort-list">
+                <li class="search divid">
+                    <div class="search-box">
+                        <input type="text" ng-model='entityList.searchInput'
+                               ng-model-options="{ debounce: 500 }"
+                               ng-change="entityList.search()">
+                        <button class="search-button" ng-click="entityList.search()"></button>
+                    </div>
+                </li>
+                <li>
+                    <filter-list filter-controller="entityList"></filter-list>
+                </li>
+                <li class="right-sort">
+                    <div ng-include="'views/directives/entity-list/table-actions.html'"></div>
+                </li>
+            </ul>
+        </div>
     </div>
 
     <div class="white-box no-styles" ng-show="entityList.list.length == 0 && !entityList.searchInput && !entityList.chosenFilters.length">
@@ -60,13 +73,20 @@
                 <div class="checkbox" ng-if="entityList.controlPanelShow"></div>
                 <div ng-repeat="fieldHead in entityOptions.list" class="additional-cell {{ fieldHead.className }}"
                      ng-class="{ 'display-for-mobile' : fieldHead.showForMobile, 'status': fieldHead.type == 'statusCircle' }">
-                    <a class="list-sort">{{ fieldHead.name }}</a>
+                    <a ng-click="entityList.orderField=fieldHead.propertyName; entityList.reverseOrder = !entityList.reverseOrder" class="list-sort">
+                        {{ fieldHead.name }}
+                        <i class="fa" ng-show="entityList.orderField == fieldHead.propertyName"
+                           ng-class="{'fa-angle-down' : !entityList.reverseOrder,
+                                       'fa-angle-up': entityList.reverseOrder}"></i>
+                    </a>
                 </div>
                 <div class="actions" ng-if="!entityOptions.entityData.hideActionButtons"></div>
 
                 <div ng-if="::entityList.expandableOptions" class="expandable-indicator"></div>
             </li>
-            <li ng-repeat="entity in entityList.list"
+            <li ng-repeat="entity in entityList.list
+                            | orderBy:entityList.orderField:entityList.reverseOrder
+                            | filter:entityList.filterResults"
                 ng-show="entity.uuid != entityOptions.excludeItem || entity.expandItemOpen">
                 <div class="list-item list" ng-class="{'opened': expandItem, 'pointer' : entityOptions.entityData.expandable}"
                      ng-click="expandItem=!expandItem; entityList.showMore(entity)"
@@ -81,7 +101,8 @@
                     <div ng-repeat="field in entityOptions.list"
                          ng-switch="::field.type"
                          ng-class="{ 'display-for-mobile' : field.showForMobile, 'status': field.type == 'statusCircle' }"
-                         class="additional-cell {{ field.className }}">
+                         class="additional-cell {{ field.className }}"
+                         ng-init="field.initField && field.initField(entity)">
                         <div ng-switch-when="statusCircle"
                              class="status-circle"
                              ng-class="{'green': entity[field.propertyName]==field.onlineStatus}"
@@ -146,7 +167,7 @@
                             <i>{{ field.emptyText }}</i>
                         </span>
 
-                        <span class="dummy" ng-switch-when="linkOrText" ng-init="field.initField && field.initField(entity)">
+                        <span class="dummy" ng-switch-when="linkOrText">
                             <a ng-if="entity[field.urlPropertyName]"
                                href="{{ entity[field.urlPropertyName] }}"
                                title="{{ entity[field.urlPropertyName] }}"
@@ -154,8 +175,11 @@
                                 <b class="icon external-link"></b>
                                 {{ field.linkDisplayName || entity[field.urlPropertyName] }}
                             </a>
-                            <span ng-if="::!entity[field.urlPropertyName]">
+                            <span ng-if="!entity[field.urlPropertyName] && !field.filtered">
                                 {{ ::entity[field.propertyName] }}
+                            </span>
+                            <span ng-if="!entity[field.urlPropertyName] && field.filtered">
+                                {{ ::entity[field.filtered] }}
                             </span>
                         </span>
 
@@ -215,6 +239,17 @@
     </div>
 
     <pagination pages-list="entityList" pages-service="entityList.service"
-                ng-if="entityList.list.length > 0"></pagination>
+                ng-if="entityList.list.length > 0 && !entityOptions.entityData.hidePagination"></pagination>
     <div class="clear"></div>
+
+    <div block-ui="load-more" class="button-wrap-center" ng-show="entityOptions.entityData.loadMoreButton">
+        <div class="pull-right">
+            Loaded {{ entityList.list.length }} of {{entityList.initialListLength}} items
+        </div>
+        <div ng-show="entityList.itemsToShow.length">
+            <button class="button-green" ng-click="entityList.loadMore()">
+                <span>Load More</span>
+            </button>
+        </div>
+    </div>
 </div>

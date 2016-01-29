@@ -235,6 +235,10 @@
                 text-align: center;
                 &.appstore-category {
                     display: table;
+                    .compare-active {
+                        color: $dashboard-green;
+                        font-size: 0.8em;
+                    }
                 }
                 &.appstore-template-image {
                     .icon {
@@ -277,9 +281,6 @@
                         font-size: 14px;
                         position: absolute;
                         bottom: 10px;
-                        &.compare-active {
-                            color: $dashboard-green;
-                        }
                     }
                 }
                 .icon{

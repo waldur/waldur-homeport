@@ -356,6 +356,7 @@
         'resourcesService',
         'resourcesCountService',
         'alertsService',
+        'servicesService',
         'baseControllerDetailUpdateClass',
         'currentStateService',
         ResourceDetailUpdateController
@@ -370,6 +371,7 @@
     resourcesService,
     resourcesCountService,
     alertsService,
+    servicesService,
     baseControllerDetailUpdateClass,
     currentStateService) {
     var controllerScope = this;
@@ -383,7 +385,7 @@
         this._super();
         this.detailsViewOptions = {
           title_plural: 'resources',
-          listState: 'resources.list',
+          listState: 'projects.details({uuid: controller.model.project_uuid, tab:controller.resourceTab})',
           aboutFields: [
             {
               fieldKey: 'name',
@@ -422,7 +424,19 @@
 
       afterActivate: function() {
         this.setCounters();
+        this.updateResourceTab();
         this.scheduleRefresh();
+      },
+
+      updateResourceTab: function() {
+        var service_type = this.model.resource_type.split(".")[0];
+        var vm_services = servicesService.getServiceTypes(ENV.VirtualMachines);
+        var app_services = servicesService.getServiceTypes(ENV.Applications);
+        if (vm_services.indexOf(service_type) > -1) {
+          this.resourceTab = ENV.resourcesTypes.vms;
+        } else if (app_services.indexOf(service_type) > -1) {
+          this.resourceTab = ENV.resourcesTypes.applications;
+        }
       },
 
       getCounters: function() {
