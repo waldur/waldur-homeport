@@ -3,7 +3,17 @@
 (function() {
 
   angular.module('ncsaas')
-    .controller('CustomerBalanceController', CustomerBalanceController);
+    .controller('CustomerBalanceController', [
+      'currentStateService',
+      'customersService',
+      'paymentsService',
+      'ncUtils',
+      'ENV',
+      '$timeout',
+      '$scope',
+      '$state',
+      '$window',
+      CustomerBalanceController]);
 
   function CustomerBalanceController(
     currentStateService,
@@ -124,6 +134,26 @@
           ]
         };
       });
+    }
+
+    $scope.shown = {};
+
+    $scope.toggle = function(id) {
+      if (!$scope.shown[id]) {
+        $scope.shown[id] = true;
+      } else {
+        $scope.shown[id] = false;
+      }
+
+      for (var i in $scope.shown) {
+        if (id != i) {
+          $scope.shown[i] = false;
+        }
+      }
+    }
+
+    $scope.isShown = function(id) {
+      return $scope.shown[id];
     }
 
     function refresh() {

@@ -1,7 +1,8 @@
 <div ng-hide="hideAll">
     <span class="xs-hide" visible="plans">
         <div class="dropdown__container">
-            <div ng-click="showPlan = !showPlan" class="indicator-button__container">
+            <div class="indicator-button__container"
+                 ng-click="toggle('plan')">
                 <div class="indicator-button__name">
                     <i class="icon fa-sliders"></i>
                     Plan
@@ -11,7 +12,8 @@
                     {{ plan.name || 'Default' }}
                 </div>
             </div>
-            <div ng-show="showPlan" class="dropdown__menu">
+            <div class="dropdown__menu"
+                 ng-show="isShown('plan')">
                 <div class="dropdown__header">
                     <div class="icon close" ng-click="showPlan = false"></div>
                     Quota usage
@@ -67,7 +69,8 @@
 
     <span class="xs-hide" visible="balance">
         <div class="dropdown__container" visible="balance">
-            <div ng-click="showBalance = !showBalance" class="indicator-button__container">
+            <div class="indicator-button__container"
+                 ng-click="toggle('balance')">
                 <div class="indicator-button__name">
                     <i class="icon fa-credit-card"></i>
                     Balance
@@ -77,7 +80,8 @@
                     {{ model.balance || 0 | defaultCurrency }}
                 </div>
             </div>
-            <div ng-if="showBalance" class="dropdown__menu">
+            <div class="dropdown__menu"
+                 ng-if="isShown('balance')">
                 <div class="dropdown__content">
                     <canvas ng-if="showChart"
                             tc-chartjs-line
