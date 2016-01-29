@@ -58,7 +58,7 @@
               }
             },
             {
-              name: 'VM key',
+              name: 'Code',
               propertyName: 'key',
               type: ENTITYLISTFIELDTYPES.linkOrText,
               showForMobile: ENTITYLISTFIELDTYPES.showForMobile
@@ -82,7 +82,7 @@
               }
             },
             {
-              name: 'RAM (GB)',
+              name: 'RAM',
               propertyName: 'metadataRam',
               filtered: 'filteredRam',
               type: ENTITYLISTFIELDTYPES.linkOrText,
@@ -93,7 +93,7 @@
               }
             },
             {
-              name: 'Storage (GB)',
+              name: 'Storage',
               propertyName: 'metadataDisk',
               filtered: 'filteredDisk',
               type: ENTITYLISTFIELDTYPES.linkOrText,
