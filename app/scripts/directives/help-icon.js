@@ -20,13 +20,15 @@
         trigger.css('position', 'relative');
 
         function show(event) {
-          var topPos = 4;
+          var topPos = 4,
+            leftPos = '50%';
           trigger.hasClass('button-help-icon') && (topPos = 8);
+          trigger.hasClass('help-icon-l') && (leftPos = '35%');
           text.addClass('active');
           text.css({
             'position': 'absolute',
             'top': -(text[0].offsetHeight + topPos) + 'px',
-            'left': '50%',
+            'left': leftPos,
             'margin-left': -text[0].offsetWidth/2 + 'px'
           });
           event.stopPropagation();
