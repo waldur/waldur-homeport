@@ -218,8 +218,13 @@
                 } // sm
             }
             &.icon {
-                width: 25px;
-                padding: 0px;
+                width: 100px;
+                padding: 0;
+                span {
+                    img {
+                        width: 25px;
+                    }
+                }
             }
             &.status-name {
                 width: 153px;
@@ -345,6 +350,28 @@
         .list-cache-reset {
             top: -69px;
             right: 20px;
+        }
+    }
+}
+
+.button-wrap-center {
+    text-align: center;
+    padding: 0em 10em 4em 10em;
+    .button-green {
+        margin-top: 15px;
+        margin-bottom: 15px;
+        display: block;
+        width: 100%;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+        background: #50b848;
+        text-align: center;
+        height: 50px;
+        line-height: 50px;
+        span {
+            color: #FFF;
+            font-size: 16px;
+            font-weight: bold;
         }
     }
 }

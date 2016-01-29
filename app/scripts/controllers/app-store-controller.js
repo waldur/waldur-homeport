@@ -73,7 +73,7 @@
       selectedResourceImagesPageSize: 10,
       currentCustomer: {},
       currentProject: {},
-      compare: [],
+      showCompare: ENV.showCompare,
       providers: [],
       services: {},
       renderStore: false,
@@ -886,14 +886,6 @@
           $state.go('resources.details', {uuid: model.uuid, resource_type: model.resource_type});
         } else if (this.isSupportSelected()) {
           return $state.go('resources.list', {tab: 'premiumSupport'});
-        }
-      },
-      setCompare: function(categoryName) {
-        var index = this.compare.indexOf(categoryName);
-        if (index + 1) {
-          this.compare.splice(index, 1);
-        } else {
-          this.compare.push(categoryName);
         }
       }
     });
