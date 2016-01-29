@@ -13,6 +13,10 @@
             box-shadow: initial;
             background-image: linear-gradient(#ddd, #eee);
         }
+        &.disabled {
+            opacity: initial;
+            color: #888;
+        }
     }
 
     &:first-of-type .button {
