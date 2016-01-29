@@ -246,18 +246,24 @@
       },*/
 
       processChartData: function(rows) {
-        var result = {
-          customer: [],
-          service: [],
-          project: [],
-          serviceprojectlink: []
-        };
+        var result = {};
         rows.forEach(function(row) {
-          if (['customer', 'service', 'project', 'serviceprojectlink'].indexOf(row.scope_type) >= 0) {
-            result[row.scope_type].push({
-              date: moment(row.month + " " + row.year, 'MM YYYY').toDate(),
-              value: row.total
-            });
+          if (['customer', 'service', 'project', 'resource'].indexOf(row.scope_type) >= 0) {
+            var date = moment(row.month + ' ' + row.year, 'MM YYYY');
+            var key = date.format("MM-YYYY");
+
+            if (!result[key]) {
+
+              result[key] = {
+                customer: 0,
+                service: 0,
+                project: 0,
+                resource: 0
+              };
+            }
+
+            result[key][row.scope_type] = row.total;
+
           }
         });
         blockUI.stop();

@@ -17,11 +17,26 @@
             stroke-width: 1px;
             stroke: steelblue;
         }
+        .hover_point {
+            &__customer {
+                fill: #5a31d6;
+            }
+            &__service {
+                fill: #5d9bd6;
+            }
+            &__project {
+                fill: #ed8035;
+            }
+            &__resource {
+                fill: #78ed5f;
+            }
+        }
         path.area {
             fill: #e7e7e7;
         }
-        .line1 {
-            stroke: #5d9bd6;
+        .area0 {
+            stroke: #5a31d6;
+            fill: rgba(90, 49, 214, .5);
         }
         .area1 {
             stroke: #5d9bd6;
@@ -31,8 +46,9 @@
             stroke: #ed8035;
             fill: rgba(237, 128, 53, .5);
         }
-        .line2 {
-            stroke: #ed8035;
+        .area3 {
+            stroke: #78ed5f;
+            fill: rgba(120, 237, 95, .5);
         }
         .grid .tick {
             stroke: lightgrey;
@@ -62,5 +78,42 @@
     .legend {
         display: inline-block;
         vertical-align: top;
+
+        .entities {
+            li {
+                position: relative;
+                list-style: none;
+                &:before {
+                    content: "";
+                    width: 10px;
+                    height: 10px;
+                    position: absolute;
+                    background-color: #dddddd;
+                    left: -15px;
+                    top: 8px;
+                    border-radius: 10px;
+                }
+            }
+            .customer {
+                &:before {
+                    background-color: #5a31d6;
+                }
+            }
+            .service {
+                &:before {
+                    background-color: #5d9bd6;
+                }
+            }
+            .project {
+                &:before {
+                    background-color: #ed8035;
+                }
+            }
+            .resource {
+                &:before {
+                    background-color: #78ed5f;
+                }
+            }
+        }
     }
 }
