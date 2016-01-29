@@ -384,7 +384,7 @@
         this.controllerScope = controllerScope;
         this._super();
         this.detailsViewOptions = {
-          title: 'Resource',
+          title_plural: 'resources',
           listState: 'projects.details({uuid: controller.model.project_uuid, tab:controller.resourceTab})',
           aboutFields: [
             {

@@ -180,7 +180,7 @@
         this.detailsState = 'organizations.details';
         this.currentUser = usersService.currentUser;
         this.detailsViewOptions = {
-          title: 'Organization',
+          title_plural: 'organizations',
           hasLogo: false,
           listState: 'organizations.list',
           aboutFields: [
@@ -278,7 +278,6 @@
         $scope.$on('$destroy', function() {
           $interval.cancel(timer);
         });
-        this.service.getBalanceHistory(this.model.uuid).then(this.processChartData.bind(this));
       },
 
       getCounters: function() {
@@ -342,47 +341,6 @@
       afterUpdate: function() {
         ncUtilsFlash.success('Organization {} is updated'.replace('{}', controllerScope.model.name));
         $rootScope.$broadcast('refreshCustomerList', {model: this.model, update: true});
-      },
-
-      addCredit: function(amount) {
-        var vm = this;
-        var payment = paymentsService.$create();
-        payment.customer = vm.model.url;
-        payment.amount = amount;
-        payment.return_url = $state.href('payment.approve', {}, {absolute: true});
-        payment.cancel_url = $state.href('payment.cancel', {}, {absolute: true});
-
-        return payment.$save(function(payment) {
-          $window.location = payment.approval_url;
-          return true;
-        });
-      },
-
-      processChartData: function(rows) {
-        this.showChart = rows.length > 0;
-
-        var labels = rows.map(function(row) {
-          return moment(row.created).format('D.MM');
-        });
-        var totals = rows.map(function(row) {
-          return row.amount;
-        });
-
-        this.chartData = {
-          labels: labels,
-          datasets: [
-            {
-              label: "Balance",
-              fillColor: "rgba(220,220,220,0.2)",
-              strokeColor: "rgba(220,220,220,1)",
-              pointColor: "rgba(220,220,220,1)",
-              pointStrokeColor: "#fff",
-              pointHighlightFill: "#fff",
-              pointHighlightStroke: "rgba(220,220,220,1)",
-              data: totals
-            }
-          ]
-        };
       }
     });
 
