@@ -1,10 +1,11 @@
 <div class="container">
     <section class="title-wrapper">
         <div class="left-side">
-            <h1 ng-if="options.title">{{ options.title }}</h1>
             <a ng-if="options.listState"
                ui-sref="{{ options.listState }}"
-               class="back-to-list button">Show all</a>
+               class="back-to-list">
+                <h1>{{ options.title_plural | titleCase }} / </h1>
+            </a>
         </div>
 
         <div class="left-side-compact">
@@ -73,7 +74,7 @@
                 </p>
             </div>
         </div>
-        <div ng-if="controller.detailsViewOptions.title == 'Organization'">
+        <div ng-if="controller.detailsViewOptions.title_plural == 'organizations'">
           <customer-balance></customer-balance>
         </div>
     </section>
@@ -87,18 +88,22 @@
                            ng-model-options="{ debounce: 500 }"
                            ng-change="search()"/>
                 </div>
-                <div class="tab-link__item"
-                     visible="{{ tab.key }}"
-                     ng-click="tabChange(tab.key)"
-                     ng-repeat="tab in options.tabs"
-                     ng-class="{'active': options.activeTab === tab.key}">
-                  <div class="tab-link__key">
-                    <span ng-if="::tab.icon" class="icon" ng-class="::tab.icon"></span>
-                    {{ tab.title }} 
+                <div class="tabs-links">
+                  <div class="tab-link__item"
+                       visible="{{ tab.key }}"
+                       ng-click="tabChange(tab.key)"
+                       ng-repeat="tab in options.tabs"
+                       ng-class="{'active': options.activeTab === tab.key}">
+                    <div class="tab-link__key">
+                      <div ng-if="::tab.icon"
+                           class="icon"
+                           ng-class="::tab.icon"></div>
+                      {{ tab.title }} 
+                      <span ng-if="tab.key != 'delete'">
+                        <span ng-show="tab.count !== -1">({{ tab.count }})</span>
+                      </span>
+                    </div>
                   </div>
-                  <span ng-if="tab.key != 'delete'">
-                    <span ng-show="tab.count !== -1">{{ tab.count }}</span>
-                  </span>
                 </div>
             </aside>
             <div class="tab-content" block-ui="tab-content">

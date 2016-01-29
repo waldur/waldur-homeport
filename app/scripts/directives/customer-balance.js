@@ -28,12 +28,6 @@
       $scope.currency = ENV.currency;
       $scope.amount = 10;
 
-      $scope.chartOptions = {
-        responsive: true,
-        bezierCurve: false,
-        scaleShowGridLines: false
-      };
-
       refresh();
       $scope.$on('customerBalance:refresh', function() {
         refresh();
@@ -107,6 +101,12 @@
         var totals = rows.map(function(row) {
           return row.amount;
         });
+
+        $scope.chartOptions = {
+          responsive: true,
+          bezierCurve: false,
+          scaleShowGridLines: false
+        };
 
         $scope.chartData = {
           labels: labels,

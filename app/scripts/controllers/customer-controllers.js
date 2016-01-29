@@ -180,7 +180,6 @@
         this.detailsState = 'organizations.details';
         this.currentUser = usersService.currentUser;
         this.detailsViewOptions = {
-          title: 'Organization',
           title_plural: 'organizations',
           hasLogo: false,
           listState: 'organizations.list',

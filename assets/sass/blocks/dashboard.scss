@@ -10,12 +10,15 @@
     margin-top: 15px;
 
     @include bp(xs) {
-      flex-direction: column;
+      display: block;
     }
 
-    h2 {
+    h1 {
       flex-grow: 1;
       margin: 0px;
+      @include bp(xs) {
+        text-align: center;
+      }
     }
 
     .balance-block {

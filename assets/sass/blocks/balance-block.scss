@@ -65,7 +65,6 @@
 }
 
 .indicator-button__container {
-  display: inline-table;
   border: 1px solid #e5e5e5;
   border-radius: 5px;
   margin: 0;
@@ -148,6 +147,11 @@
 
 .tab-link__key {
   flex: 1;
+
+  .icon {
+    display: inline-block;
+    width: 25px;
+  }
 }
 
 .tab-link__content {

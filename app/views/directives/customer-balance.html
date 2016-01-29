@@ -1,5 +1,5 @@
 <div ng-hide="hideAll">
-    <span class="mobile-hide" visible="plans">
+    <span class="xs-hide" visible="plans">
         <div class="dropdown__container">
             <div ng-click="showPlan = !showPlan" class="indicator-button__container">
                 <div class="indicator-button__name">
@@ -36,7 +36,7 @@
         </div>
     </span>
 
-    <div class="mobile-show" visible="plans">
+    <div class="xs-show" visible="plans">
         <div class="tab-link__item" ng-click="showPlan = !showPlan">
             <div class="tab-link__key">
                 <i class="icon fa-sliders"></i>
@@ -65,7 +65,7 @@
         </div>
     </div>
 
-    <span class="mobile-hide" visible="balance">
+    <span class="xs-hide" visible="balance">
         <div class="dropdown__container" visible="balance">
             <div ng-click="showBalance = !showBalance" class="indicator-button__container">
                 <div class="indicator-button__name">
@@ -104,7 +104,7 @@
         </div>
     </span>
 
-    <div class="mobile-show" visible="balance">
+    <div class="xs-show" visible="balance">
         <div class="tab-link__item" ng-click="showBalance = !showBalance">
             <div class="tab-link__key">
                 <i class="icon fa-credit-card"></i>
@@ -119,8 +119,7 @@
             <canvas ng-if="showChart"
                     tc-chartjs-line
                     chart-data="chartData"
-                    width="380"
-                    height="150">
+                    style="width: 100%;">
             </canvas>
             <div class="usage-row add-amount">
                 <div class="usage-row__key">Amount</div>

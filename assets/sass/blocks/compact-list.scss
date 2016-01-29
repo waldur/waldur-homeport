@@ -20,6 +20,20 @@ $compact-list-border-color: #e5e5e5;
     }
 }
 
+.xs-show {
+    display: none;
+    @include bp(xs) {
+        display: initial;
+    }
+}
+
+.xs-hide {
+    display: initial;
+    @include bp(xs) {
+        display: none;
+    }
+}
+
 .compact-list {
   list-style-type: none;
   padding: 0px;
