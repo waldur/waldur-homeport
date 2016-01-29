@@ -382,7 +382,7 @@
         this.controllerScope = controllerScope;
         this._super();
         this.detailsViewOptions = {
-          title: 'Resource',
+          title_plural: 'resources',
           listState: 'resources.list',
           aboutFields: [
             {

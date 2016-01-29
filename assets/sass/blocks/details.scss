@@ -4,9 +4,9 @@ $searchInputHeight: 32px;
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin: 15px 0;
+  margin-bottom: 15px;
 
-  @include bp(sm) {
+  @include bp(bp-xs-helpdesk) {
     flex-direction: column;
   }
 
@@ -15,21 +15,19 @@ $searchInputHeight: 32px;
     margin: 0;
   }
 
-  .left-side {
-    flex-grow: 0;
-    flex-shrink: 0;
-
-    a {
-      text-decoration: none;
-    }
-
-    h1 {
-      display: block;
-      margin: 0;
-    }
+  .back-to-list {
+    text-decoration: none;
+    display: block;
+    margin-bottom: 5px;
+    margin-top: 10px;
 
     @include bp(xs) {
       display: none;
+    }
+
+    .icon {
+      margin-right: 5px;
+      font-size: 20px;
     }
   }
 
@@ -38,9 +36,9 @@ $searchInputHeight: 32px;
     @include bp(xs) {
       display: block;
       padding: 10px;
+      padding-bottom: 0;
     }
 
-    background: white;
     a {
       display: block; 
       text-decoration: none;
@@ -54,6 +52,7 @@ $searchInputHeight: 32px;
   .details-container {
     flex-grow: 1;
     margin: 10px;
+    margin-top: 0;
   }
   ul {
     margin-left: 30px;
@@ -354,11 +353,11 @@ $searchInputHeight: 32px;
 .details-about {
   @extend .user-about;
   padding-top: 6px;
-  >div {
-    display: inline-block;
-  }
   .name {
     font-size: 2em;
+    @include bp(xs) {
+      font-size: 25px;
+    }
   }
   .profile-logo {
     margin: 0 10px 10px 0;
