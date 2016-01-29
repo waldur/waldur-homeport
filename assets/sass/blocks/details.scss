@@ -5,6 +5,7 @@ $searchInputHeight: 32px;
   flex-direction: row;
   align-items: center;
   margin-bottom: 15px;
+  margin-top: 10px;
 
   @include bp(bp-xs-helpdesk) {
     flex-direction: column;
@@ -686,7 +687,6 @@ $searchInputHeight: 32px;
       color: #b7b7b7;
       margin: 0;
       line-height: 10px;
-      float: left;
       display: block;
     }
   }
