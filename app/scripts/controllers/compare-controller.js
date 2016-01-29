@@ -84,19 +84,23 @@
             {
               name: 'RAM (GB)',
               propertyName: 'metadataRam',
+              filtered: 'filteredRam',
               type: ENTITYLISTFIELDTYPES.linkOrText,
               showForMobile: ENTITYLISTFIELDTYPES.showForMobile,
               initField: function(item) {
-                item.metadataRam = $filter('mb2gb')(item.metadata.ram);
+                item.metadataRam = item.metadata.ram;
+                item.metadataRam && (item.filteredRam = $filter('mb2gb')(item.metadata.ram));
               }
             },
             {
               name: 'Storage (GB)',
               propertyName: 'metadataDisk',
+              filtered: 'filteredDisk',
               type: ENTITYLISTFIELDTYPES.linkOrText,
               showForMobile: ENTITYLISTFIELDTYPES.showForMobile,
               initField: function(item) {
-                item.metadataDisk = $filter('mb2gb')(item.metadata.disk);
+                item.metadataDisk = item.metadata.disk;
+                item.metadataDisk && (item.filteredDisk = $filter('mb2gb')(item.metadata.disk));
               }
             },
             {

@@ -16,7 +16,7 @@
                                  ng-class="{'state': AppStore.selectedCategory == category}">
                                 <div class="icon {{ ::category.icon }}"></div>
                                 <h3>{{ category.name }}</h3>
-                                <div class="compare compare-active"
+                                <div visible="compare" class="compare compare-active"
                                      ng-show="AppStore.showCompare.indexOf(category.name) !== -1">
                                     <a stoppropagation ui-sref="compare.vms">Compare</a>
                                 </div>
