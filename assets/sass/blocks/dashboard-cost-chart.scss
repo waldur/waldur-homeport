@@ -17,38 +17,12 @@
             stroke-width: 1px;
             stroke: steelblue;
         }
-        .hover_point {
-            &__customer {
-                fill: #5a31d6;
-            }
-            &__service {
-                fill: #5d9bd6;
-            }
-            &__project {
-                fill: #ed8035;
-            }
-            &__resource {
-                fill: #78ed5f;
-            }
-        }
         path.area {
             fill: #e7e7e7;
         }
-        .area0 {
-            stroke: #5a31d6;
-            fill: rgba(90, 49, 214, .5);
-        }
-        .area1 {
-            stroke: #5d9bd6;
-            fill: rgba(93, 155, 214, .5);
-        }
-        .area2 {
-            stroke: #ed8035;
-            fill: rgba(237, 128, 53, .5);
-        }
-        .area3 {
-            stroke: #78ed5f;
-            fill: rgba(120, 237, 95, .5);
+        .line_total {
+            stroke-width: 1px;
+            stroke-dasharray: 6, 2;
         }
         .grid .tick {
             stroke: lightgrey;
@@ -78,12 +52,15 @@
     .legend {
         display: inline-block;
         vertical-align: top;
+        box-shadow: 1px 1px 7px -2px #666666;
+        padding: 10px 10px 10px 25px;
+        min-width: 180px;
 
         .entities {
             li {
                 position: relative;
                 list-style: none;
-                &:before {
+                .point-chart {
                     content: "";
                     width: 10px;
                     height: 10px;
@@ -92,26 +69,6 @@
                     left: -15px;
                     top: 8px;
                     border-radius: 10px;
-                }
-            }
-            .customer {
-                &:before {
-                    background-color: #5a31d6;
-                }
-            }
-            .service {
-                &:before {
-                    background-color: #5d9bd6;
-                }
-            }
-            .project {
-                &:before {
-                    background-color: #ed8035;
-                }
-            }
-            .resource {
-                &:before {
-                    background-color: #78ed5f;
                 }
             }
         }

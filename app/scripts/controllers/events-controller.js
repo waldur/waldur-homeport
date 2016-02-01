@@ -255,14 +255,17 @@
             if (!result[key]) {
 
               result[key] = {
-                customer: 0,
-                service: 0,
-                project: 0,
-                resource: 0
+                customer: [],
+                service: [],
+                project: [],
+                resource: []
               };
             }
 
-            result[key][row.scope_type] = row.total;
+            result[key][row.scope_type].push({
+              name: row.scope_name,
+              value: row.total
+            });
 
           }
         });
