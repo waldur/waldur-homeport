@@ -38,15 +38,8 @@
       $scope.currency = ENV.currency;
       $scope.amount = 10;
 
-      refresh();
-      $scope.$on('customerBalance:refresh', function() {
-        refresh();
-      });
-
       $scope.$on('currentCustomerUpdated', function() {
-        $timeout(function() {
-          refresh();
-        });
+        refresh();
       });
     }
 
