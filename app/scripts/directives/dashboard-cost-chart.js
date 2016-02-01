@@ -3,11 +3,11 @@
 (function() {
 
   angular.module('ncsaas')
-    .directive('dashboardCostChart', function($window) {
+    .directive('dashboardCostChart', function() {
       return {
         restrict: 'E',
         replace: true,
-        templateUrl: "views/directives/dashboard-cost-chart.html",
+        templateUrl: 'views/directives/dashboard-cost-chart.html',
         scope: {
           data: '@'
         },
@@ -18,62 +18,62 @@
   function dashboardCostChartLink(scope, element, attrs) {
 
     var  createCanvas = function (el, width, height, margin, callFunc) {
-      var result = d3.select(el).html('').append("svg:svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-        .append("svg:g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+      var result = d3.select(el).html('').append('svg:svg')
+        .attr('width', width + margin.left + margin.right)
+        .attr('height', height + margin.top + margin.bottom)
+        .append('svg:g')
+        .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
       //result = result.call(callFunc) if callFunc
       return result;
     }
 
     var drawHorizontalAxis = function (canvas, component, width, height, title, id) {
-      canvas.append("g").attr("id", (id) ? id : "")
-        .attr("class", "_x _axis")
-        .attr("transform", "translate(0," + height + ")")
+      canvas.append('g').attr('id', (id) ? id : '')
+        .attr('class', '_x _axis')
+        .attr('transform', 'translate(0,' + height + ')')
         .call(component)
-        .append("text")
-        .attr("x", width)
-        .attr("y", 15)
-        .attr("dy", "-0.29em")
-        .style("text-anchor", "end")
+        .append('text')
+        .attr('x', width)
+        .attr('y', 15)
+        .attr('dy', '-0.29em')
+        .style('text-anchor', 'end')
         .text(title)
     };
 
     var drawVerticalAxis = function (canvas, component, title, id) {
-      return canvas.append("g")
-        .attr("id", id)
-        .attr("class", "_y _axis axisLeft")
+      return canvas.append('g')
+        .attr('id', id)
+        .attr('class', '_y _axis axisLeft')
         .call(component)
-        .append("text")
-        .attr("transform", "rotate(-90)")
-        .attr("y", 6)
-        .attr("dy", ".71em")
-        .style("text-anchor", "end")
+        .append('text')
+        .attr('transform', 'rotate(-90)')
+        .attr('y', 6)
+        .attr('dy', '.71em')
+        .style('text-anchor', 'end')
         .text(title)
     };
 
     var drawPathLine = function(canvas, lineGenerator, data, color, id, attrClass) {
       return canvas
-        .append("svg:path")
-        .attr("stroke-width", 2)
-        .style("fill", "none")
-        .style("stroke", color != null ? color : "black")
-        .attr("d", lineGenerator(data))
-        .attr("id", id != null ? id : "")
-        .attr("class", attrClass != null ? attrClass : "");
+        .append('svg:path')
+        .attr('stroke-width', 2)
+        .style('fill', 'none')
+        .style('stroke', color != null ? color : 'black')
+        .attr('d', lineGenerator(data))
+        .attr('id', id != null ? id : '')
+        .attr('class', attrClass != null ? attrClass : '');
     };
 
     var drawPathArea = function(canvas, lineGenerator, data, color, id, attrClass) {
       var rgb = d3.rgb(color);
       return canvas
-        .append("svg:path")
-        .attr("stroke-width", 0)
-        .style("stroke", color != null ? color : "black")
-        .style("fill", 'rgba('+ rgb.r +', ' + rgb.g + ', '+rgb.b+', .5)')
-        .attr("d", lineGenerator(data))
-        .attr("id", id != null ? id : "")
-        .attr("class", attrClass != null ? attrClass : "");
+        .append('svg:path')
+        .attr('stroke-width', 0)
+        .style('stroke', color != null ? color : 'black')
+        .style('fill', 'rgba('+ rgb.r +', ' + rgb.g + ', '+rgb.b+', .5)')
+        .attr('d', lineGenerator(data))
+        .attr('id', id != null ? id : '')
+        .attr('class', attrClass != null ? attrClass : '');
     };
 
     var margin = {
@@ -94,13 +94,13 @@
     var height = 450 - margin.top - margin.bottom;
     var height2 = 450 - margin2.top - margin2.bottom;
 
-    var bindId = "#chart";
+    var bindId = '#chart';
 
     var color = d3.scale.category20();
 
     var initData = JSON.parse(attrs.data);
 
-    var formatDate = d3.time.format("%m-%Y");
+    var formatDate = d3.time.format('%m-%Y');
     var parseDate = formatDate.parse;
 
     var rd, rData = [], projectList = {};
@@ -127,7 +127,7 @@
         rd.total = initData[k].customer[0].value + 3 + Math.random();
 
         initData[k].project.forEach(function(project, i) {
-          var projectTitle = project.name.split("|")[0].trim();
+          var projectTitle = project.name.split('|')[0].trim();
           var projectName = projectTitle.split(' ').join('_');
 
           rd[projectName] = +project.value;
@@ -143,12 +143,12 @@
 
     scope.$watch('entities', function(newEntities) {
 
-      var entities = newEntities.filter(function(e) { return e.on });
+      var entities = angular.copy(newEntities.filter(function(e) { return e.on; }));
 
       var data = getDataByEntities(entities, rData);
 
       var xScale = d3.time.scale().range([0,width]).domain(d3.extent(data, function (d) { return d.date }));
-      var xAxis = d3.svg.axis().scale(xScale).orient("bottom").ticks(5);
+      var xAxis = d3.svg.axis().scale(xScale).orient('bottom').ticks(5);
 
       var min = [], max = [];
       entities.forEach(function(entity) {
@@ -161,17 +161,17 @@
 
 
       var yLeftScale = d3.scale.linear().domain([yLeftMin, yLeftMax]).range([height, 0]);
-      var yLeftAxis = d3.svg.axis().scale(yLeftScale).orient("left");
+      var yLeftAxis = d3.svg.axis().scale(yLeftScale).orient('left');
 
-      var make_y_axis = function() {
-        return d3.svg.axis().scale(yLeftScale).orient("left").ticks(10);
+      var makeYAxis = function() {
+        return d3.svg.axis().scale(yLeftScale).orient('left').ticks(10);
       };
 
 
       var area =[];
       var lineTotal;
       entities.forEach(function(entity, i) {
-        if (entity.name == 'total') {
+        if (entity.name === 'total') {
           lineTotal = d3.svg.line()
             .x(function(d) {
               return xScale(d.date);
@@ -187,70 +187,46 @@
             .x(function(d) {
               return xScale(d.date);
             })
-            .y0(i==0 ? height : function(d) {
+            .y0(i===0 ? height : function(d) {
               return yLeftScale(d[entities[i-1].name]);
             } )
             .y1(function(d) {
               return yLeftScale(d[entities[i].name]);
             }),
           entity: entity.name
-        })
+        });
       });
 
-      var zoomed = function () {
-        canvas.select("._x._axis").call(xAxis);
-        canvas.select(".axisLeft").call(yLeftAxis);
-        canvas.select(".y.grid").call(make_y_axis().tickSize(-width, 0, 0).tickFormat(""));
+      var canvas = createCanvas(bindId, width, height, margin);
 
-        /* area.forEach(function(v, i) {
-         canvas.select(".area" + i).attr("d", v(data));
-         });
+      var focus = canvas.append('g').attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
-         canvas.select(".line_total").attr("d", lineTotal(data));
-         */
-        brush.extent(xScale.domain());
-        return canvas.select(".brush").call(brush);
-      };
-
-      // make zoom
-      var zoom = d3.behavior.zoom()
-        //.x(xScale)
-        //.y(yLeftScale)
-        .scaleExtent([1,20]) // 20x times zoom
-        .on("zoom", zoomed);
+      focus.append('svg:rect').attr('width', width).attr('height', height).attr('class', 'plot');
+      var clip = focus.append('svg:clipPath')
+        .attr('id', 'clip')
+        .append('svg:rect')
+        .attr('x', 0)
+        .attr('y', 0)
+        .attr('width', width)
+        .attr('height', height);
 
 
-      var canvas = createCanvas(bindId, width, height, margin, zoom);
-
-      var focus = canvas.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")").call(zoom);
-
-      focus.append("svg:rect").attr("width", width).attr("height", height).attr("class", "plot");
-      var clip = focus.append("svg:clipPath")
-        .attr("id", "clip")
-        .append("svg:rect")
-        .attr("x", 0)
-        .attr("y", 0)
-        .attr("width", width)
-        .attr("height", height);
-
-
-      drawHorizontalAxis(focus, xAxis, width, height, "", "");
-      drawVerticalAxis(focus, yLeftAxis, "price", "");
+      drawHorizontalAxis(focus, xAxis, width, height, '', '');
+      drawVerticalAxis(focus, yLeftAxis, 'price', '');
 
       // make grid
-      focus.append("g")
-        .attr("class", "y grid")
-        .call(make_y_axis().tickSize(-width, 0, 0).tickFormat(""));
+      focus.append('g')
+        .attr('class', 'y grid')
+        .call(makeYAxis().tickSize(-width, 0, 0).tickFormat(''));
 
-      var chartBody = focus.append("g")
-        .attr("clip-path", "url(#clip)");
+      var chartBody = focus.append('g')
+        .attr('clip-path', 'url(#clip)');
 
-
-      area.forEach(function(v, i) {
-        drawPathArea(chartBody, v.scale, data, color(v.entity), "", v.entity);
+      area.forEach(function(v) {
+        drawPathArea(chartBody, v.scale, data, color(v.entity), '', v.entity);
       });
 
-      drawPathLine(chartBody, lineTotal, data, color('total'), "", "line_total");
+      drawPathLine(chartBody, lineTotal, data, color('total'), '', 'line_total');
 
 
       // --- Below chart ---
@@ -259,7 +235,7 @@
         return d.date;
       }));
 
-      var xAxis2 = d3.svg.axis().scale(xScale).orient("bottom").ticks(5);
+      var xAxis2 = d3.svg.axis().scale(xScale).orient('bottom').ticks(5);
 
       var yScale2 = d3.scale.linear().domain([yLeftMin, yLeftMax]).range([height2, 0]);
 
@@ -272,47 +248,68 @@
 
       var brushed = function() {
         xScale.domain((brush.empty() ? xScale2.domain() : brush.extent()));
-        focus.select("._x._axis").call(xAxis);
+        focus.select('._x._axis').call(xAxis);
 
         area.forEach(function(v, i) {
-          canvas.select("." + v.entity).attr("d", v.scale(data));
+          canvas.select('.' + v.entity).attr('d', v.scale(data));
         });
-        canvas.select(".line_total").attr("d", lineTotal(data))
+        canvas.select('.line_total').attr('d', lineTotal(data));
 
       };
 
       var brush = d3.svg.brush()
         .x(xScale2)
-        .on("brush", brushed);
+        .on('brush', brushed);
 
-      var context = canvas.append("g").attr("transform", "translate(" + margin2.left + "," + margin2.top + ")");
-      context.append("path")
+      var context = canvas.append('g').attr('transform', 'translate(' + margin2.left + ',' + margin2.top + ')');
+      context.append('path')
         .datum(data)
-        .attr("class", "area")
-        .attr("d", areaBrush);
+        .attr('class', 'area')
+        .attr('d', areaBrush);
 
-      context.append("g").attr("class", "_x _axis").attr("transform", "translate(0," + height2 + ")").call(xAxis2);
-      context.append("g")
-        .attr("class", "_x brush")
+      context.append('g').attr('class', '_x _axis').attr('transform', 'translate(0,' + height2 + ')').call(xAxis2);
+      context.append('g')
+        .attr('class', '_x brush')
         .call(brush)
-        .selectAll("rect")
-        .attr("y", -6)
-        .attr("height", height2 + 7);
+        .selectAll('rect')
+        .attr('y', -6)
+        .attr('height', height2 + 7);
+
       // --- Below chart ---
-
-
 
       hover(color, data, rData, entities, focus, width, height, xScale, yLeftScale, hoverCallback);
 
-
     }, true);
+  }
+
+  function debounce(func, wait, immediate) {
+    if (!wait) return func;
+
+    var timeout;
+
+    return function() {
+      var context = this, args = arguments;
+
+      var later = function() {
+        timeout = null;
+
+        if (!immediate) func.apply(context, args);
+      };
+
+      var callNow = immediate && !timeout;
+
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+
+      if (callNow) func.apply(context, args);
+    };
   }
 
   function hoverCallback(entities) {
     entities.forEach(function(e) {
       d3.select('.legend .current_value__' + e.name).text(e.currentValue.toFixed(2));
     });
-    d3.select('.legend .date').text(d3.time.format("%Y %b")(entities[entities.length - 1].currentDate));
+    d3.select('.legend .date').text(d3.time.format('%Y %b')(entities[entities.length - 1].currentDate));
   }
 
   function getInitEntities(projectList, color) {
@@ -336,7 +333,9 @@
     var onCharts = [], d, data = [];
 
     entities.forEach(function(e) {
-      if (e.name !== 'total') onCharts.push(e.name);
+      if (e.name !== 'total') {
+        onCharts.push(e.name);
+      }
     });
 
     rData.forEach(function(rd) {
@@ -362,59 +361,77 @@
   }
 
   function hover(color, data, rData, entities, focus, width, height, xScale, yLeftScale, onMove) {
-    var bisectX = d3.bisector(function(d) { return d.date; }).left;
+    var bisectX = d3.bisector(function(d) { return d.date; }).right;
+    var bisect = d3.bisector(function(d) { return d; }).right;
+
 
     // Hover line group. Hide hover group by default.
-    var hoverLineGroup = focus.append("g")
-      .attr("transform", "translate(0,0)")
-      .attr("class", "hover-line")
-      .style("opacity", 1e-6);
+    var hoverLineGroup = focus.append('g')
+      .attr('transform', 'translate(0,0)')
+      .attr('class', 'hover-line')
+      .style('opacity', 1e-6);
 
     var hoverLine = hoverLineGroup
-      .append("line")
-      .attr("x1", 0).attr("x2", 0)
-      .attr("y1", 0).attr("y2", height);
+      .append('line')
+      .attr('x1', 0).attr('x2', 0)
+      .attr('y1', 0).attr('y2', height);
 
 
     var hoverPoints = entities.map(function(entity) {
       return hoverLineGroup
-        .append("circle")
-        .attr("class", "hover_point__" + entity.name)
-        .attr("cx", 0)
-        .attr("cy", 25)
-        .attr("r", 5)
-        .attr("fill", color(entity.name))
+        .append('circle')
+        .attr('class', 'hover_point__' + entity.name)
+        .attr('cx', 0)
+        .attr('cy', 25)
+        .attr('r', 5)
+        .attr('fill', color(entity.name));
     });
 
-    focus.append("svg:rect")
-      .attr("width", width)
-      .attr("height", height)
-      .attr("fill", "transparent")
-      .attr("class", "hover-rect");
+    focus.append('svg:rect')
+      .attr('width', width)
+      .attr('height', height)
+      .attr('fill', 'transparent')
+      .attr('class', 'hover-rect');
 
     // Add mouseover events.
-    d3.select(".hover-rect").on("mouseover", function() {
-      console.log('mouseover')
-    }).on("mousemove", function() {
-      //console.log('mousemove', d3.mouse(this));
-      var x = d3.mouse(this)[0];
-      hoverLineGroup.style("opacity", 1).attr("transform", "translate(" + x + "," + 0 + ")");
+    d3.select('.hover-rect').on('mouseover', function() {
 
-      var focusDataIndex = bisectX(data, xScale.invert(x));
+    }).on('mousemove', function() {
+      var x = d3.mouse(this)[0];
+      hoverLineGroup.style('opacity', 1).attr('transform', 'translate(' + x + ',' + 0 + ')');
+
+      var timestamp = xScale.invert(x);
+      var focusDataIndex = bisectX(data, timestamp);
 
       if ((focusDataIndex > 0) && (focusDataIndex < data.length)) {
         entities.forEach(function(entity, i) {
-          hoverPoints[i].attr("cy", yLeftScale(data[focusDataIndex][entity.name]));
+          //hoverPoints[i].attr("cy", yLeftScale(data[focusDataIndex][entity.name]));
           entities[i].currentValue = rData[focusDataIndex][entity.name];
           entities[i].currentDate = rData[focusDataIndex].date;
+
+          var
+            startDatum = data[focusDataIndex - 1],
+            endDatum = data[focusDataIndex],
+            interpolate = d3.interpolateNumber(startDatum[entity.name], endDatum[entity.name]),
+            range = endDatum.date - startDatum.date,
+            valueY = interpolate((timestamp % range) / range);
+
+          var lineDataX = d3.range(0, 1, 1/10).map(d3.interpolateNumber(+startDatum.date, +endDatum.date));
+          lineDataX.push(+endDatum.date);
+          var lineDataY = d3.range(0, 1, 1/10).map(d3.interpolateNumber(startDatum[entity.name], endDatum[entity.name]));
+          lineDataY.push(endDatum[entity.name]);
+
+          var idx = bisect(lineDataX, +timestamp);
+          valueY = lineDataY[idx];
+
+          hoverPoints[i].attr('cy', yLeftScale(valueY));
         });
       }
 
       onMove(entities);
 
-    })  .on("mouseout", function() {
-      console.log('mouseout');
-      hoverLineGroup.style("opacity", 1e-6);
+    })  .on('mouseout', function() {
+      hoverLineGroup.style('opacity', 1e-6);
     });
   }
 
