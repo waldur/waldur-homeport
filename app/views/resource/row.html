@@ -52,10 +52,12 @@
       Access link
     </div>
     <div class="details-table__value">
-      <a ng-if="entity.access_url" href="{{ entity.access_url }}" target="_blank">
-          {{ entity.access_url }}
+      <a ng-if="entity.access_info_url" href="{{ entity.access_info_url }}" target="_blank">
+          {{ entity.access_info_text }}
       </a>
-      <span ng-if="!entity.access_url">No access info</span>
+      <span ng-if="!entity.access_info_url">
+        {{ entity.access_info_text }}
+      </span>
     </div>
   </div>
 

@@ -426,6 +426,20 @@
         this.setCounters();
         this.updateResourceTab();
         this.scheduleRefresh();
+        this.setAccessInfo(this.model);
+      },
+
+      setAccessInfo: function(item) {
+        item.access_info_text = 'No access info';
+        if (item.external_ips && item.external_ips.length > 0) {
+          item.access_info_text = item.external_ips.join(', ');
+        } else if (item.rdp && item.state == 'Online') {
+          item.access_info_url = item.rdp;
+          item.access_info_text = 'Connect';
+        } else if (item.web_url && item.state == 'Online') {
+          item.access_info_url = item.web_url;
+          item.access_info_text = 'Open';
+        }
       },
 
       updateResourceTab: function() {
