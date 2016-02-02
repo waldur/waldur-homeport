@@ -268,8 +268,6 @@
       },
 
       afterActivate: function() {
-        $rootScope.$broadcast('adjustCurrentCustomer', this.model);
-
         controllerScope.canEdit = controllerScope.isOwnerOrStaff(controllerScope.model);
         controllerScope.updateImageUrl();
 
