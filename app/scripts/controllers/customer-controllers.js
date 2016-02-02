@@ -138,6 +138,7 @@
       '$rootScope',
       '$scope',
       '$interval',
+      '$timeout',
       '$q',
       '$window',
       'joinService',
@@ -159,6 +160,7 @@
     $rootScope,
     $scope,
     $interval,
+    $timeout,
     $q,
     $window,
     joinService,
@@ -265,6 +267,17 @@
             return true;
           }
         }
+      },
+
+      loadAll: function() {
+        var deferred = $q.defer();
+        this.getModel().then(function(customer) {
+          $rootScope.$broadcast('adjustCurrentCustomer', customer);
+          $timeout(function() {
+            deferred.resolve();
+          });
+        });
+        return deferred.promise;
       },
 
       afterActivate: function() {

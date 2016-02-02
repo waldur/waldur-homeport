@@ -477,18 +477,7 @@
           resolve: {
             authenticated: authCheck
           },
-          auth: true,
-          resolve: {
-            customer: function($rootScope, $stateParams, customersService) {
-              return customersService.$get($stateParams.uuid).then(function(customer) {
-                $rootScope.$broadcast('adjustCurrentCustomer', customer);
-                return customer;
-              });
-            },
-            user: function(usersService) {
-              return usersService.getCurrentUser();
-            }
-          }
+          auth: true
         })
 
         .state('organizations.plans', {
