@@ -2,6 +2,34 @@
 
 (function() {
   angular.module('ncsaas')
+    .service('resourceUtils', ['ncUtils', resourceUtils]);
+
+  function resourceUtils(ncUtils) {
+    return {
+      setAccessInfo: function(item) {
+        item.access_info_text = 'No access info';
+        if (!item.access_url) {
+          return;
+        }
+
+        if (ncUtils.startsWith(item.access_url, "http")) {
+          item.access_info_url = item.access_url;
+          item.access_info_text = 'Open';
+
+          if (ncUtils.endsWith(item.access_url, "/rdp/")) {
+            item.access_info_text = 'Connect';
+          }
+        } else if (angular.isArray(item.access_url)) {
+          // IP addresses
+          item.access_info_text = item.access_url.join(', ');
+        } else {
+          item.access_info_text = item.access_url;
+        }
+      }
+    }
+  }
+
+  angular.module('ncsaas')
     .service('baseResourceListController',
     ['baseControllerListClass',
     'ENV',
@@ -13,6 +41,7 @@
     'ngDialog',
     '$rootScope',
     'ncUtils',
+    'resourceUtils',
     baseResourceListController
     ]);
 
@@ -27,7 +56,8 @@
     projectsService,
     ngDialog,
     $rootScope,
-    ncUtils) {
+    ncUtils,
+    resourceUtils) {
     var ControllerListClass = baseControllerListClass.extend({
       init: function() {
         this.service = resourcesService;
@@ -143,7 +173,7 @@
               urlPropertyName: 'access_info_url',
               type: ENTITYLISTFIELDTYPES.linkOrText,
               className: 'resource-access',
-              initField: vm.setAccessInfo
+              initField: resourceUtils.setAccessInfo
             }
           ]
         };
@@ -213,6 +243,17 @@
           return fn(filter);
         });
       },
+      afterGetList: function() {
+        for (var i = 0; i < this.list.length; i++) {
+          var entity = this.list[i];
+          for (var j = 0; j < this.entityOptions.list.length; j++) {
+            var field = this.entityOptions.list[j];
+            if (field.initField) {
+              field.initField(entity);
+            }
+          }
+        }
+      },
       adjustSearchFilters: function() {
         var vm = this,
           resourcesCounts = null;
@@ -250,26 +291,6 @@
           }
           vm.searchFilters = filters;
         });
-      },
-      setAccessInfo: function(item) {
-        item.access_info_text = 'No access info';
-        if (!item.access_url) {
-          return;
-        }
-
-        if (ncUtils.startsWith(item.access_url, "http")) {
-          if (item.state == 'Online') {
-            item.access_info_url = item.access_url;
-            item.access_info_text = 'Open';
-
-            if (ncUtils.endsWith(item.access_url, "/rdp/")) {
-              item.access_info_text = 'Connect';
-            }
-          }
-        } else {
-          // IP address
-          item.access_info_text = item.access_url;
-        }
       },
       stopResource:function(resource) {
         var vm = this;
@@ -355,6 +376,7 @@
         'ENV',
         'resourcesService',
         'resourcesCountService',
+        'resourceUtils',
         'alertsService',
         'servicesService',
         'baseControllerDetailUpdateClass',
@@ -370,6 +392,7 @@
     ENV,
     resourcesService,
     resourcesCountService,
+    resourceUtils,
     alertsService,
     servicesService,
     baseControllerDetailUpdateClass,
@@ -426,20 +449,6 @@
         this.setCounters();
         this.updateResourceTab();
         this.scheduleRefresh();
-        this.setAccessInfo(this.model);
-      },
-
-      setAccessInfo: function(item) {
-        item.access_info_text = 'No access info';
-        if (item.external_ips && item.external_ips.length > 0) {
-          item.access_info_text = item.external_ips.join(', ');
-        } else if (item.rdp && item.state == 'Online') {
-          item.access_info_url = item.rdp;
-          item.access_info_text = 'Connect';
-        } else if (item.web_url && item.state == 'Online') {
-          item.access_info_url = item.web_url;
-          item.access_info_text = 'Open';
-        }
       },
 
       updateResourceTab: function() {
@@ -463,11 +472,13 @@
       scheduleRefresh: function() {
         var vm = this;
         vm.updateStatus();
+        resourceUtils.setAccessInfo(vm.model);
 
         var refreshPromise = $interval(function() {
           vm.getModel().then(function(model) {
             vm.model = model;
             vm.updateStatus();
+            resourceUtils.setAccessInfo(vm.model);
           });
         }, ENV.resourcesTimerInterval * 1000);
 

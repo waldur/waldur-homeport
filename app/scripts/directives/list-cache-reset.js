@@ -41,7 +41,7 @@
           scope.service.cacheReset = true;
           scope.service.clearAllCacheForCurrentEndpoint();
           filter[scope.controller.searchFieldName] = scope.controller.searchInput;
-          var getListPromise = scope.service.getList(filter);
+          var getListPromise = scope.controller.getList(filter);
           if (getListPromise && getListPromise.then) {
             scope.processing = true;
             getListPromise.then(function(response) {
@@ -54,6 +54,7 @@
 
         function mergeLists(list1, list2) {
           list1 = list1 || [];
+          list2 = list2 || [];
           var itemByUuid = {},
             deletedItemUuids = [],
             newListUiids = list2.map(function(item) {
@@ -68,9 +69,9 @@
             itemByUuid[item.uuid] = item;
           }
           for (var j = 0; j < deletedItemUuids.length; j++) {
-            for (var index = 0; index < list.length; index++) {
-              if (list[index].id === deletedItemUuids[j]) {
-                list.splice(index, 1);
+            for (var index = 0; index < list1.length; index++) {
+              if (list1[index].id === deletedItemUuids[j]) {
+                list1.splice(index, 1);
                 break;
               }
             }
