@@ -114,6 +114,11 @@
         return string.indexOf(target) === (string.length - target.length);
       },
       mergeLists: function(list1, list2) {
+        if (!list1) {
+          list1 = [];
+        } else {
+          list1 = angular.copy(list1);
+        }
         list1 = list1 || [];
         list2 = list2 || [];
         var itemByUuid = {},
@@ -148,6 +153,7 @@
             item2.hasOwnProperty(key) && (item1[key] = item2[key]);
           }
         }
+        return list1;
       }
     }
   }
