@@ -17,14 +17,12 @@
 
   function dashboardCostChartLink(scope, element, attrs) {
 
-    var  createCanvas = function (el, width, height, margin, callFunc) {
-      var result = d3.select(el).html('').append('svg:svg')
+    var  createCanvas = function (el, width, height, margin) {
+      return d3.select(el).html('').append('svg:svg')
         .attr('width', width + margin.left + margin.right)
         .attr('height', height + margin.top + margin.bottom)
         .append('svg:g')
         .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
-      //result = result.call(callFunc) if callFunc
-      return result;
     };
 
     var drawHorizontalAxis = function (canvas, component, width, height, title, id) {
@@ -159,14 +157,12 @@
       var yLeftMin = d3.min(min);
       var yLeftMax = d3.max(max);
 
-
       var yLeftScale = d3.scale.linear().domain([yLeftMin, yLeftMax]).range([height, 0]);
       var yLeftAxis = d3.svg.axis().scale(yLeftScale).orient('left');
 
       var makeYAxis = function() {
         return d3.svg.axis().scale(yLeftScale).orient('left').ticks(10);
       };
-
 
       var area =[];
       var lineTotal;
@@ -370,40 +366,15 @@
     var bisectX = d3.bisector(function(d) { return d.date; }).right;
     var bisect = d3.bisector(function(d) { return d; }).right;
 
-
-    // Hover line group. Hide hover group by default.
-    var hoverLineGroup = focus.append('g')
-      .attr('transform', 'translate(0,0)')
-      .attr('class', 'hover-line')
-      .style('opacity', 1e-6);
-
-    var hoverLine = hoverLineGroup
-      .append('line')
-      .attr('x1', 0).attr('x2', 0)
-      .attr('y1', 0).attr('y2', height);
-
-
-    var hoverPoints = entities.map(function(entity) {
-      return hoverLineGroup
-        .append('circle')
-        .attr('class', 'hover_point__' + entity.name)
-        .attr('cx', 0)
-        .attr('cy', 25)
-        .attr('r', 5)
-        .attr('fill', color(entity.name));
-    });
-
-    focus.append('svg:rect')
-      .attr('width', width)
-      .attr('height', height)
-      .attr('fill', 'transparent')
-      .attr('class', 'hover-rect');
-
-    // Add mouseover events.
-    d3.select('.hover-rect').on('mouseover', function() {
-
-    }).on('mousemove', function() {
+    var hoverTool = function () {
       var x = d3.mouse(this)[0];
+      var rectSize = this.getBoundingClientRect();
+
+      if (x < 0 || x >= rectSize.width) {
+        hoverLineGroup.style('opacity', 0);
+        return;
+      }
+
       hoverLineGroup.style('opacity', 1).attr('transform', 'translate(' + x + ',' + 0 + ')');
 
       var timestamp = xScale.invert(x);
@@ -432,9 +403,46 @@
       }
 
       onMove(entities);
+    };
 
-    })  .on('mouseout', function() {
-      hoverLineGroup.style('opacity', 1e-6);
+    // Hover line group. Hide hover group by default.
+    var hoverLineGroup = focus.append('g')
+      .attr('transform', 'translate(0,0)')
+      .attr('class', 'hover-line')
+      .style('opacity', 0);
+
+    var hoverLine = hoverLineGroup
+      .append('line')
+      .attr('x1', 0).attr('x2', 0)
+      .attr('y1', 0).attr('y2', height);
+
+
+    var hoverPoints = entities.map(function(entity) {
+      return hoverLineGroup
+        .append('circle')
+        .attr('class', 'hover_point__' + entity.name)
+        .attr('cx', 0)
+        .attr('cy', 25)
+        .attr('r', 5)
+        .attr('fill', color(entity.name));
+    });
+
+    focus.append('svg:rect')
+      .attr('width', width)
+      .attr('height', height)
+      .attr('fill', 'transparent')
+      .attr('class', 'hover-rect');
+
+    // Add mouseover events.
+    d3.select('.hover-rect').on('mouseover', function() {
+    }).on('mousemove', function() {
+      hoverTool.call(this);
+    }).on('touchmove', function() {
+      hoverTool.call(this);
+    }).on('mouseout', function() {
+      hoverLineGroup.style('opacity', 0);
+    }).on('touchend', function() {
+      hoverLineGroup.style('opacity', 0);
     });
   }
 
