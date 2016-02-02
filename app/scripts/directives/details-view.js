@@ -45,7 +45,7 @@
 
         if (scope.controller.loadAll) {
           scope.controller.loading = true;
-          ncUtils.blockElement('detailsBlock', scope.controller.loadAll().then(function() {
+          ncUtils.blockElement('detailsBlock', scope.controller.loadAll().finally(function() {
             scope.controller.loading = false;
           }));
         } else {
