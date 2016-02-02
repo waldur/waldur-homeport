@@ -112,6 +112,42 @@
       },
       endsWith: function(string, target) {
         return string.indexOf(target) === (string.length - target.length);
+      },
+      mergeLists: function(list1, list2) {
+        list1 = list1 || [];
+        list2 = list2 || [];
+        var itemByUuid = {},
+          deletedItemUuids = [],
+          newListUiids = list2.map(function(item) {
+            return item.uuid;
+          });
+        for (var i = 0; i < list1.length; i++) {
+          var item = list1[i];
+          if (newListUiids.indexOf(item.uuid) === -1) {
+            deletedItemUuids.push(item.uuid);
+            continue;
+          }
+          itemByUuid[item.uuid] = item;
+        }
+        for (var j = 0; j < deletedItemUuids.length; j++) {
+          for (var index = 0; index < list1.length; index++) {
+            if (list1[index].id === deletedItemUuids[j]) {
+              list1.splice(index, 1);
+              break;
+            }
+          }
+        }
+        for (var i = 0; i < list2.length; i++) {
+          var item2 = list2[i];
+          var item1 = itemByUuid[item2.uuid];
+          if (!item1) {
+            list1.push(item2);
+            continue;
+          }
+          for (var key in item2) {
+            item2.hasOwnProperty(key) && (item1[key] = item2[key]);
+          }
+        }
       }
     }
   }
