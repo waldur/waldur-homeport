@@ -57,7 +57,6 @@
     "globals": {
         "alert": false,
         "confirm": false,
-        "angular": false,
         "$": false,
         "after": false,
         "afterEach": false,
@@ -73,6 +72,7 @@
         "spyOn": false,
         "by": false,
         "element": false,
-        "Class": false
+        "Class": false,
+        "d3": true
     }
 }

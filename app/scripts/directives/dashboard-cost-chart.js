@@ -25,7 +25,7 @@
         .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
       //result = result.call(callFunc) if callFunc
       return result;
-    }
+    };
 
     var drawHorizontalAxis = function (canvas, component, width, height, title, id) {
       canvas.append('g').attr('id', (id) ? id : '')
@@ -37,7 +37,7 @@
         .attr('y', 15)
         .attr('dy', '-0.29em')
         .style('text-anchor', 'end')
-        .text(title)
+        .text(title);
     };
 
     var drawVerticalAxis = function (canvas, component, title, id) {
@@ -50,7 +50,7 @@
         .attr('y', 6)
         .attr('dy', '.71em')
         .style('text-anchor', 'end')
-        .text(title)
+        .text(title);
     };
 
     var drawPathLine = function(canvas, lineGenerator, data, color, id, attrClass) {
@@ -126,7 +126,7 @@
         rd.date = parseDate(k);
         rd.total = initData[k].customer[0].value + 3 + Math.random();
 
-        initData[k].project.forEach(function(project, i) {
+        initData[k].project.forEach(function(project) {
           var projectTitle = project.name.split('|')[0].trim();
           var projectName = projectTitle.split(' ').join('_');
 
@@ -147,13 +147,13 @@
 
       var data = getDataByEntities(entities, rData);
 
-      var xScale = d3.time.scale().range([0,width]).domain(d3.extent(data, function (d) { return d.date }));
+      var xScale = d3.time.scale().range([0,width]).domain(d3.extent(data, function (d) { return d.date; }));
       var xAxis = d3.svg.axis().scale(xScale).orient('bottom').ticks(5);
 
       var min = [], max = [];
       entities.forEach(function(entity) {
-        min.push(d3.min(data, function (d) { return parseFloat(d[entity.name]) }));
-        max.push(d3.max(data, function (d) { return parseFloat(d[entity.name]) }));
+        min.push(d3.min(data, function (d) { return parseFloat(d[entity.name]); }));
+        max.push(d3.max(data, function (d) { return parseFloat(d[entity.name]); }));
       });
 
       var yLeftMin = d3.min(min);
@@ -250,7 +250,7 @@
         xScale.domain((brush.empty() ? xScale2.domain() : brush.extent()));
         focus.select('._x._axis').call(xAxis);
 
-        area.forEach(function(v, i) {
+        area.forEach(function(v) {
           canvas.select('.' + v.entity).attr('d', v.scale(data));
         });
         canvas.select('.line_total').attr('d', lineTotal(data));
@@ -283,7 +283,9 @@
   }
 
   function debounce(func, wait, immediate) {
-    if (!wait) return func;
+    if (!wait) {
+      return func;
+    }
 
     var timeout;
 
@@ -293,7 +295,9 @@
       var later = function() {
         timeout = null;
 
-        if (!immediate) func.apply(context, args);
+        if (!immediate) {
+          func.apply(context, args);
+        }
       };
 
       var callNow = immediate && !timeout;
@@ -301,7 +305,9 @@
       clearTimeout(timeout);
       timeout = setTimeout(later, wait);
 
-      if (callNow) func.apply(context, args);
+      if (callNow) {
+        func.apply(context, args);
+      }
     };
   }
 
@@ -405,24 +411,21 @@
 
       if ((focusDataIndex > 0) && (focusDataIndex < data.length)) {
         entities.forEach(function(entity, i) {
-          //hoverPoints[i].attr("cy", yLeftScale(data[focusDataIndex][entity.name]));
           entities[i].currentValue = rData[focusDataIndex][entity.name];
           entities[i].currentDate = rData[focusDataIndex].date;
 
           var
             startDatum = data[focusDataIndex - 1],
             endDatum = data[focusDataIndex],
-            interpolate = d3.interpolateNumber(startDatum[entity.name], endDatum[entity.name]),
-            range = endDatum.date - startDatum.date,
-            valueY = interpolate((timestamp % range) / range);
+            range = d3.range(0, 1, 1/15);
 
-          var lineDataX = d3.range(0, 1, 1/10).map(d3.interpolateNumber(+startDatum.date, +endDatum.date));
-          lineDataX.push(+endDatum.date);
-          var lineDataY = d3.range(0, 1, 1/10).map(d3.interpolateNumber(startDatum[entity.name], endDatum[entity.name]));
-          lineDataY.push(endDatum[entity.name]);
+          range.push(1);
+
+          var lineDataX = range.map(d3.interpolateNumber(+startDatum.date, +endDatum.date));
+          var lineDataY = range.map(d3.interpolateNumber(startDatum[entity.name], endDatum[entity.name]));
 
           var idx = bisect(lineDataX, +timestamp);
-          valueY = lineDataY[idx];
+          var valueY = lineDataY[idx];
 
           hoverPoints[i].attr('cy', yLeftScale(valueY));
         });
