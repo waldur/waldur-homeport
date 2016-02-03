@@ -1,5 +1,7 @@
 <div class="container">
-    <section class="title-wrapper">
+  <div block-ui="detailsBlock">
+  <div class="full-height">
+    <section class="title-wrapper" ng-if="!controller.loading">
         <div class="left-side-compact">
           <a ng-if="options.listState"
              ui-sref="{{ options.listState }}">
@@ -77,7 +79,7 @@
         </div>
     </section>
 
-    <div class="profile-content">
+    <div class="profile-content" ng-if="!controller.loading">
         <div class="tabs-wrapper">
             <aside>
                 <div class="input-group rem-mob">
@@ -113,5 +115,7 @@
                 </div>
             </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>

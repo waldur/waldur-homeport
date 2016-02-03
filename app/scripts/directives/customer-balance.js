@@ -9,7 +9,6 @@
       'paymentsService',
       'ncUtils',
       'ENV',
-      '$timeout',
       '$scope',
       '$state',
       '$window',
@@ -21,7 +20,6 @@
     paymentsService,
     ncUtils,
     ENV,
-    $timeout,
     $scope,
     $state,
     $window) {
@@ -39,15 +37,6 @@
       $scope.amount = 10;
 
       refresh();
-      $scope.$on('customerBalance:refresh', function() {
-        refresh();
-      });
-
-      $scope.$on('currentCustomerUpdated', function() {
-        $timeout(function() {
-          refresh();
-        });
-      });
     }
 
     $scope.addCredit = function(amount) {
@@ -98,7 +87,7 @@
       return {
         name: currentPlan,
         quotas: currentPlanQuotas
-      }
+      };
     }
 
     function getChart(customer) {
@@ -154,7 +143,7 @@
 
     $scope.isShown = function(id) {
       return $scope.shown[id];
-    }
+    };
 
     function refresh() {
       currentStateService.getCustomer().then(function(customer) {
