@@ -669,12 +669,8 @@
       findPrice: function(name, display_name) {
         for (var i = 0; i < this.defaultPriceListItems.length; i++) {
           var priceItem = this.defaultPriceListItems[i];
-          var resourceType = priceItem.resource_type.split(".");
-          var keyExists = display_name.toLowerCase().indexOf(priceItem.key) > -1;
-          resourceType = resourceType[resourceType.length -1];
-          if (priceItem.item_type === name && (keyExists
-            || (name !== 'flavor' && this.selectedResourceType === resourceType)) || (name === 'size' && keyExists)
-          ) {
+          var keyExists = display_name.indexOf(priceItem.key) > -1;
+          if (priceItem.item_type === name && keyExists) {
             return priceItem.value;
           }
         }
