@@ -673,7 +673,7 @@
           var keyExists = display_name.toLowerCase().indexOf(priceItem.key) > -1;
           resourceType = resourceType[resourceType.length -1];
           if (priceItem.item_type === name && (keyExists
-            || this.selectedResourceType === resourceType) || (name === 'size' && keyExists)
+            || (name !== 'flavor' && this.selectedResourceType === resourceType)) || (name === 'size' && keyExists)
           ) {
             return priceItem.value;
           }
