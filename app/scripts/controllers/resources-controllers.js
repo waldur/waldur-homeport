@@ -21,7 +21,11 @@
           }
         } else if (angular.isArray(item.access_url)) {
           // IP addresses
-          item.access_info_text = item.access_url.join(', ');
+          var ip = item.access_url.join(', ');
+          if (item.key_name) {
+            item.access_info_text = 'IP addresses: ' + ip + ', SSH key: ' + item.key_name;
+          }
+          item.access_info_text = ip;
         } else {
           item.access_info_text = item.access_url;
         }
@@ -165,18 +169,16 @@
                   return 'status-circle ' + cls;
                 }
               }
-            },
-            {
-              name: 'Access',
-              linkDisplayName: 'Access',
-              propertyName: 'access_info_text',
-              urlPropertyName: 'access_info_url',
-              type: ENTITYLISTFIELDTYPES.linkOrText,
-              className: 'resource-access',
-              initField: resourceUtils.setAccessInfo
             }
           ]
         };
+        this.expandableOptions = [
+          {
+            isList: false,
+            addItemBlock: false,
+            viewType: 'resource'
+          }
+        ];
 
         currentStateService.getProject().then(function(project) {
           if (project) {
@@ -244,15 +246,7 @@
         });
       },
       afterGetList: function() {
-        for (var i = 0; i < this.list.length; i++) {
-          var entity = this.list[i];
-          for (var j = 0; j < this.entityOptions.list.length; j++) {
-            var field = this.entityOptions.list[j];
-            if (field.initField) {
-              field.initField(entity);
-            }
-          }
-        }
+        angular.forEach(this.list, resourceUtils.setAccessInfo);
       },
       adjustSearchFilters: function() {
         var vm = this,
