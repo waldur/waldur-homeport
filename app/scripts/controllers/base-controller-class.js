@@ -38,7 +38,7 @@
      * sеt events in this.setSignalHandler('eventName', this.eventFunction);
      */
     var ControllerListClass = baseControllerClass.extend({
-      list: {},
+      list: [],
       service: null, // required in init
       searchInput: '',
       searchFieldName: 'name', // required in init
@@ -73,7 +73,7 @@
         filter = filter || {};
         vm.service.cacheTime = vm.cacheTime;
         return vm.service.getList(filter).then(function(response) {
-          vm.list = response;
+          vm.list = ncUtils.mergeLists(vm.list, response);
           vm.afterGetList();
         });
       },

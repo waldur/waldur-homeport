@@ -39,10 +39,12 @@
     Access link
   </div>
   <div class="details-table__value">
-    <a ng-show="controller.model.web_url" href="{{ controller.model.web_url }}" target="_blank">
-        {{ controller.model.web_url }}
+    <a ng-if="controller.model.access_info_url" href="{{ controller.model.access_info_url }}" target="_blank">
+        {{ controller.model.access_info_text }}
     </a>
-    <span ng-show="!controller.model.web_url">No access info</span>
+    <span ng-if="!controller.model.access_info_url">
+      {{ controller.model.access_info_text }}
+    </span>
   </div>
 </div>
 

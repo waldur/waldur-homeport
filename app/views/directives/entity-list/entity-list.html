@@ -176,10 +176,10 @@
                                 {{ field.linkDisplayName || entity[field.urlPropertyName] }}
                             </a>
                             <span ng-if="!entity[field.urlPropertyName] && !field.filtered">
-                                {{ ::entity[field.propertyName] }}
+                                {{ entity[field.propertyName] }}
                             </span>
                             <span ng-if="!entity[field.urlPropertyName] && field.filtered">
-                                {{ ::entity[field.filtered] }}
+                                {{ entity[field.filtered] }}
                             </span>
                         </span>
 
