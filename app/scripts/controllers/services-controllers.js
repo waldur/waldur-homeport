@@ -70,6 +70,7 @@
               name: 'Name',
               propertyName: 'name',
               type: ENTITYLISTFIELDTYPES.name,
+              link: 'services.list({service_type: entity.service_type, uuid: entity.uuid})',
               className: 'name'
             },
             {
@@ -282,3 +283,82 @@
 
 })();
 
+
+(function() {
+  angular.module('ncsaas')
+    .controller('ServiceProjectLinkListController', [
+      '$stateParams',
+      'joinServiceProjectLinkService',
+      'baseControllerListClass',
+      'currentStateService',
+      'ENV',
+      'ENTITYLISTFIELDTYPES',
+      ServiceProjectLinkListController
+    ]);
+
+  function ServiceProjectLinkListController(
+    $stateParams,
+    joinServiceProjectLinkService,
+    baseControllerListClass,
+    currentStateService,
+    ENV,
+    ENTITYLISTFIELDTYPES) {
+    var controllerScope = this;
+    var Controller = baseControllerListClass.extend({
+      init: function() {
+        this.service = joinServiceProjectLinkService;
+        this.controllerScope = controllerScope;
+        this._super();
+        this.actionButtonsListItems = [
+          {
+            title: 'Delete',
+            icon: 'fa-trash',
+            clickFunction: this.remove.bind(this.controllerScope)
+          }
+        ];
+        this.entityOptions = {
+          entityData: {
+            noDataText: 'No providers yet.',
+            noMatchesText: 'No providers found matching filter.'
+          },
+          list: [
+            {
+              name: 'Project',
+              propertyName: 'project_name',
+              type: ENTITYLISTFIELDTYPES.name,
+              className: 'name',
+              showForMobile: true
+            },
+            {
+              name: 'State',
+              type: ENTITYLISTFIELDTYPES.colorState,
+              propertyName: 'state',
+              className: 'visual-status',
+              getClass: function(state) {
+                var cls = ENV.servicesStateColorClasses[state];
+                if (cls == 'processing') {
+                  return 'icon refresh spin';
+                } else {
+                  return 'status-circle ' + cls;
+                }
+              },
+              showForMobile: true
+            }
+          ]
+        };
+      },
+      getListData: function() {
+        return currentStateService.getCustomer().then(function(customer) {
+          return joinServiceProjectLinkService.getServiceProjectLinks(
+            customer.uuid, $stateParams.service_type, $stateParams.uuid
+          );
+        });
+      },
+      remove: function() {
+        confirm('Confirm deletion?');
+      }
+    });
+
+    controllerScope.__proto__ = new Controller();
+  }
+})();

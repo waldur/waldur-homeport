@@ -72,10 +72,13 @@
         var vm = this;
         filter = filter || {};
         vm.service.cacheTime = vm.cacheTime;
-        return vm.service.getList(filter).then(function(response) {
+        return vm.getListData().then(function(response) {
           vm.list = ncUtils.mergeLists(vm.list, response);
           vm.afterGetList();
         });
+      },
+      getListData: function(filter) {
+        return this.service.getList(filter);
       },
       blockListElement: function() {
         if (this.blockUIElement) {

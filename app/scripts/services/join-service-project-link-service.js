@@ -53,6 +53,14 @@
         instance.project = project_url;
         instance.service = service_url;
         return instance.$save();
+      },
+      getServiceProjectLinks: function(customer_uuid, service_type, service_uuid) {
+        return joinService.getServiceProjectLinkUrlByType(service_type).then(function(url) {
+          return joinService.getList({
+            customer_uuid: customer_uuid,
+            service_uuid: service_uuid
+          }, url);
+        });
       }
     });
     return new ServiceClass();

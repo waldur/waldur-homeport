@@ -42,7 +42,6 @@
         ];
         this.blockUIElement = 'tab-content';
         this._super();
-        this.entityOptions.list[0].type = 'editable';
         this.entityOptions.entityData.expandable = true;
       },
       showMore: function(service) {

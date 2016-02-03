@@ -331,6 +331,22 @@
           auth: true
         })
 
+        .state('services.list', {
+          url: ':service_type/:uuid/',
+          views: {
+            'appContent': {
+              templateUrl: 'views/service/list.html',
+            },
+            'appHeader': {
+              templateUrl: 'views/partials/app-header.html',
+            }
+          },
+          resolve: {
+            authenticated: authCheck
+          },
+          auth: true
+        })
+
         .state('profile', {
           url: '/profile/',
           abstract: true,
