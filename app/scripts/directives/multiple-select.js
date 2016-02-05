@@ -9,7 +9,7 @@
     return {
       restrict: 'A',
       scope: {
-        options: '='
+        choices: '='
       },
       templateUrl: 'views/directives/multiple-select.html'
     };

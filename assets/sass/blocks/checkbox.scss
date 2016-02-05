@@ -75,3 +75,8 @@
         }
     }
 }
+
+.checkbox-list__subtitle {
+    color: #888;
+    @include property(font-size, $small-font);
+}

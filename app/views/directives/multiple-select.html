@@ -1,12 +1,13 @@
-<div ng-if="options.choices">
+<div ng-if="choices">
     <ul class="checkbox-list__container">
-        <li ng-repeat="choice in options.choices"
+        <li ng-repeat="choice in choices"
             class="checkbox-list__item"
             ng-class="{'disabled': choice.disabled}">
             <label class="checkbox">
                 <input type="checkbox" ng-model="choice.selected">
             </label>
-            {{ choice[options.titleName] }}
+            <div ng-bind="choice.title"></div>
+            <div class="checkbox-list__subtitle" ng-bind="choice.subtitle"></div>
         </li>
     </ul>
 </div>
