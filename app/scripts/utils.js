@@ -45,7 +45,7 @@
         window.Intercom('update');
       },
       blockElement: function(element, promise) {
-        if (promise.finally) {
+        if (promise && promise.finally) {
           // Prevent blocking if promise is invalid
           var block = blockUI.instances.get(element);
           block.start();
@@ -114,11 +114,6 @@
         return string.indexOf(target) === (string.length - target.length);
       },
       mergeLists: function(list1, list2) {
-        if (!list1) {
-          list1 = [];
-        } else {
-          list1 = angular.copy(list1);
-        }
         list1 = list1 || [];
         list2 = list2 || [];
         var itemByUuid = {},
@@ -128,20 +123,15 @@
           });
         for (var i = 0; i < list1.length; i++) {
           var item = list1[i];
-          if (newListUiids.indexOf(item.uuid) === -1) {
-            deletedItemUuids.push(item.uuid);
-            continue;
-          }
           itemByUuid[item.uuid] = item;
         }
-        for (var j = 0; j < deletedItemUuids.length; j++) {
-          for (var index = 0; index < list1.length; index++) {
-            if (list1[index].id === deletedItemUuids[j]) {
-              list1.splice(index, 1);
-              break;
-            }
-          }
-        }
+
+        // Remove stale items
+        list1 = list1.filter(function(item) {
+          return newListUiids.indexOf(item.uuid) !== -1;
+        });
+
+        // Add or update remaining items
         for (var i = 0; i < list2.length; i++) {
           var item2 = list2[i];
           var item1 = itemByUuid[item2.uuid];
