@@ -54,7 +54,12 @@
             service.fields = vm.getFields(options);
 
             return servicesService.$get(null, service.settings).then(function(settings) {
-              service.values = settings;
+              service.values = settings.toJSON();
+              angular.forEach(service.fields, function(field) {
+                if (angular.isUndefined(service.values[field.name])) {
+                  service.values[field.name] = '';
+                }
+              })
             });
           });
         });
@@ -139,20 +144,11 @@
           return false;
         }
 
-        return this.revisionsDiffer(model.revision, model.values.toJSON());
+        return !angular.equals(model.revision, model.values);
       },
       saveRevision: function(model) {
         if (model.values) {
-          model.revision = model.values.toJSON();
-        }
-      },
-      revisionsDiffer: function(revision1, revision2) {
-        for (var name in revision1) {
-          var val1 = revision1[name] ? revision1[name] : '';
-          var val2 = revision2[name] ? revision2[name] : '';
-          if (val1 != val2) {
-            return true;
-          }
+          model.revision = angular.copy(model.values);
         }
       }
     });
