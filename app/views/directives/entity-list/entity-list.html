@@ -88,9 +88,9 @@
                             | orderBy:entityList.orderField:entityList.reverseOrder
                             | filter:entityList.filterResults"
                 ng-show="entity.uuid != entityOptions.excludeItem || entity.expandItemOpen">
-                <div class="list-item list" ng-class="{'opened': expandItem, 'pointer' : entityOptions.entityData.expandable}"
-                     ng-click="expandItem=!expandItem; entityList.showMore(entity)"
-                     ng-init="expandItem = entity.expandItemOpen; entityOptions.excludeItem = entity.expandItemOpen ? entity.uuid : 0;">
+                <div class="list-item list" ng-class="{'opened': entity.expandItemOpen, 'pointer' : entityOptions.entityData.expandable}"
+                     ng-click="entity.expandItemOpen=!entity.expandItemOpen; entityList.showMore(entity)"
+                     ng-init="entityOptions.excludeItem = entity.expandItemOpen ? entity.uuid : 0;">
                     <div class="checkbox" ng-if="entityList.controlPanelShow">
                         <div class="checkbox" stoppropagation>
                             <input type="checkbox" ng-if="entityList.showgroup"
@@ -222,13 +222,12 @@
                                 button-model="entity"></action-button>
                     </div>
 
-                    <expandable-indicator ng-if="::entityList.expandableOptions" open="expandItem"></expandable-indicator>
+                    <expandable-indicator ng-if="::entityList.expandableOptions" open="entity.expandItemOpen"></expandable-indicator>
                 </div>
 
-                <expandableitem ng-if="entityList.expandableOptions && expandItem"
+                <expandableitem ng-if="entityList.expandableOptions && entity.expandItemOpen"
                                 ng-repeat="item in entityList.expandableOptions"
-                                ng-class="{'opened': expandItem}"
-                                class="list-item-details"
+                                class="list-item-details opened"
                                 expandable-element="entity"
                                 expandable-list="entityList"
                                 expandable-options="item">
