@@ -21,11 +21,7 @@
           }
         } else if (angular.isArray(item.access_url)) {
           // IP addresses
-          var ip = item.access_url.join(', ');
-          if (item.key_name) {
-            item.access_info_text = 'IP addresses: ' + ip + ', SSH key: ' + item.key_name;
-          }
-          item.access_info_text = ip;
+          item.access_info_text = item.access_url.join(', ');
         } else {
           item.access_info_text = item.access_url;
         }
