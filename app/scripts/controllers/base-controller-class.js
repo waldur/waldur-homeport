@@ -267,6 +267,7 @@
       listState: null, // required in init for details page
       activeTab: null,
       model: null,
+      generalSearch: null,
 
       init: function() {
         this._super();
