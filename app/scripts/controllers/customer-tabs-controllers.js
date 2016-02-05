@@ -4,10 +4,6 @@
       '$stateParams',
       'baseServiceListController',
       'joinService',
-      'servicesService',
-      'usersService',
-      'ncUtils',
-      'ncUtilsFlash',
       'ENV',
       CustomerServiceTabController
     ]);
@@ -16,10 +12,6 @@
     $stateParams,
     baseServiceListController,
     joinService,
-    servicesService,
-    usersService,
-    ncUtils,
-    ncUtilsFlash,
     ENV) {
     var controllerScope = this;
     var Controller = baseServiceListController.extend({

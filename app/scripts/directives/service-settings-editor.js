@@ -25,6 +25,7 @@
       'usersService',
       'servicesService',
       'ncUtils',
+      'ncUtilsFlash',
       'joinService',
       ServiceSettingsEditorController
     ]);
@@ -34,6 +35,7 @@
     usersService,
     servicesService,
     ncUtils,
+    ncUtilsFlash,
     joinService) {
     angular.extend($scope, {
       init: function() {
