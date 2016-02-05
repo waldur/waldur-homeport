@@ -225,9 +225,9 @@
                     <expandable-indicator ng-if="::entityList.expandableOptions" open="expandItem"></expandable-indicator>
                 </div>
 
-                <expandableitem ng-if="entityList.expandableOptions"
+                <expandableitem ng-if="entityList.expandableOptions && expandItem"
                                 ng-repeat="item in entityList.expandableOptions"
-                                ng-show="expandItem" ng-class="{'opened': expandItem}"
+                                ng-class="{'opened': expandItem}"
                                 class="list-item-details"
                                 expandable-element="entity"
                                 expandable-list="entityList"

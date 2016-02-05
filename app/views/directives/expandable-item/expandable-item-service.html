@@ -5,7 +5,9 @@
         {{ ::expandableElement.error_message || expandableList.defaultErrorMessage }}
     </div>
 
-    <div class="short-form" ng-if="expandableElement.editable">
+    <h1>Settings</h1>
+
+    <div class="short-form full" ng-if="expandableElement.editable">
         <div class="form-row" ng-repeat="field in expandableElement.fields"
              ng-if="!expandableOptions.fieldsToHide || expandableOptions.fieldsToHide.indexOf(field.name) === -1">
             <div class="col label">
@@ -54,6 +56,10 @@
         </div>
     </div>
     <div class="details-expandable" ng-if="!expandableElement.editable">
-        {{ expandableElement.name }} settings are not editable.
+        Settings are not editable.
     </div>
 </section>
+
+<h1>Connected projects</h1>
+
+<div service-project-link-editor service="expandableElement"></div>
