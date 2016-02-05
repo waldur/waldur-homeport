@@ -63,7 +63,6 @@
           } else {
             this.service.$get(service_type, uuid).then(function(provider) {
               vm.list.unshift(provider);
-              vm.showMore(provider);
               provider.expandItemOpen = true;
             });
           }
