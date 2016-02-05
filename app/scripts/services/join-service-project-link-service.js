@@ -54,9 +54,17 @@
         instance.service = service_url;
         return instance.$save();
       },
+      addLink: function(service_type, service_uuid, project_url) {
+        var vm = this;
+        return joinService.$get(service_type, service_uuid).then(function(service) {
+          return joinService.getServiceProjectLinkUrlByType(service_type).then(function(url) {
+            return vm.add(url, service.url, project_url);
+          });
+        });
+      },
       getServiceProjectLinks: function(customer_uuid, service_type, service_uuid) {
         return joinService.getServiceProjectLinkUrlByType(service_type).then(function(url) {
-          return joinService.getList({
+          return joinService.getAll({
             customer_uuid: customer_uuid,
             service_uuid: service_uuid
           }, url);

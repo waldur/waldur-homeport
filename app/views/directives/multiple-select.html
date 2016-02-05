@@ -1,0 +1,12 @@
+<div ng-if="options.choices">
+    <ul class="checkbox-list__container">
+        <li ng-repeat="choice in options.choices"
+            class="checkbox-list__item"
+            ng-class="{'disabled': choice.disabled}">
+            <label class="checkbox">
+                <input type="checkbox" ng-model="choice.selected">
+            </label>
+            {{ choice[options.titleName] }}
+        </li>
+    </ul>
+</div>

@@ -1,8 +1,11 @@
-<div ng-controller="ServiceProjectLinkListController as SPL">
-    <div class="list-page">
-        <entitylist entity-list="SPL"
-                    entity-service="SPL.service"
-                    entity-buttons="SPL.actionButtonsListItems"
-                    entity-options="SPL.entityOptions"></entitylist>
+<div ng-controller="ServiceProjectLinkListController as SPL" class="white-box">
+  <div class="profile-content">
+    <h1>Provider's projects</h2>
+    <div multiple-select options="SPL.options"></div>
+    <div class="decision">
+        <div class="col">
+            <a class="button-apply" submit-button="SPL.save()">Save</a>
+        </div>
     </div>
+  </div>
 </div>

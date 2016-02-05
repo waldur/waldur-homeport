@@ -253,9 +253,10 @@ $searchInputHeight: 32px;
   h1 {
     font-weight: bold;
     font-size: 16px;
-    color: $dashboard-green;
+    color: #888;
     text-transform: uppercase;
-    margin: 27px 0;
+    margin-left: 20px;
+    margin-bottom: 15px;
   }
   aside {
     .input-group {

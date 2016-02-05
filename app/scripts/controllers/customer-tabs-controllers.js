@@ -33,7 +33,7 @@
           {
             isList: false,
             addItemBlock: false,
-            viewType: 'details',
+            viewType: 'service',
             title: 'Settings',
             fieldsToHide: [
               'dummy'
