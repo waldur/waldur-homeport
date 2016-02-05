@@ -14,7 +14,6 @@
         controller: '=detailsController'
       },
       link: function(scope) {
-        scope.generalSearch = '';
         scope.search = search;
         scope.tabChange = tabChange;
         scope.hideSearch = false;
@@ -40,7 +39,7 @@
         }
 
         function search() {
-          $rootScope.$broadcast('generalSearchChanged', scope.generalSearch);
+          $rootScope.$broadcast('generalSearchChanged', scope.controller.generalSearch);
         }
 
         if (scope.controller.loadAll) {

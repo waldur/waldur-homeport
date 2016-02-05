@@ -79,12 +79,12 @@
         </div>
     </section>
 
-    <div class="profile-content" ng-if="!controller.loading">
+    <div class="profile-content" ng-show="!controller.loading">
         <div class="tabs-wrapper">
             <aside>
                 <div class="input-group rem-mob">
                     <input type="search" placeholder="Search" ng-hide="hideSearch"
-                           ng-model="generalSearch"
+                           ng-model="controller.generalSearch"
                            ng-model-options="{ debounce: 500 }"
                            ng-change="search()"/>
                 </div>
