@@ -21,7 +21,7 @@
             fill: #e7e7e7;
         }
         .line_total {
-            stroke-width: 1px;
+            stroke-width: 2px;
             stroke-dasharray: 6, 2;
         }
         .grid .tick {
@@ -55,6 +55,13 @@
         box-shadow: 1px 1px 7px -2px #666666;
         padding: 10px 10px 10px 25px;
         min-width: 180px;
+        width: 200px;
+        margin-top: 20px;
+        font-size: 13px;
+
+        .title {
+            font-size: 16px;
+        }
 
         .entities {
             li {
