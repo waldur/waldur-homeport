@@ -49,15 +49,16 @@
             ).then(function(links) {
               var link_for_project = {};
               angular.forEach(links, function(link) {
-                link_for_project[link.project_uuid] = link.url;
+                link_for_project[link.project_uuid] = link;
               });
               return projects.map(function(project) {
-                var link_url = link_for_project[project.uuid];
+                var link = link_for_project[project.uuid];
                 return {
                   title: project.name,
-                  selected: !!link_url,
-                  link_url: link_url,
-                  project_url: project.url
+                  selected: !!link.url,
+                  link_url: link.url,
+                  project_url: project.url,
+                  subtitle: link.state
                 };
               });
             });

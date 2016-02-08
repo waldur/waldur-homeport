@@ -253,10 +253,16 @@ $searchInputHeight: 32px;
   h1 {
     font-weight: bold;
     font-size: 16px;
-    color: #888;
+    color: $dashboard-green;
     text-transform: uppercase;
-    margin: 20px 0px;
+    margin: 27px 0;
   }
+
+  h3 {
+    @include property(font-size, $big-font);
+    margin: 15px 0;
+  }
+
   aside {
     .input-group {
       margin-top: 0;

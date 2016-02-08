@@ -9,7 +9,7 @@
     padding-left: 60px;
     padding-bottom: 16px;
     padding-top: 16px;
-    font-size: 16px;
+    @include property(font-size, $normal-font);
     border-bottom: 1px solid #ddd;
     &:last-of-type {
         border-bottom: none;
@@ -45,11 +45,9 @@
                 border-radius: 28px;
                 background: #fff;
                 content: ' ';
-                transition: background-color 20ms ease-in-out;
                 border-color: #ddd;
             }
             &:after {
-                transition: opacity 0.05s ease-in-out;
                 transform: rotate(-45deg);
                 position: absolute;
                 top: 28%;
