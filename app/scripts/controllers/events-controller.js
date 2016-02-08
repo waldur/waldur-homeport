@@ -250,7 +250,7 @@
         rows.forEach(function(row) {
           if (['customer', 'service', 'project', 'resource'].indexOf(row.scope_type) >= 0) {
             var date = moment(row.month + ' ' + row.year, 'MM YYYY');
-            var key = date.format("MM-YYYY");
+            var key = date.format("YYYYMM");
 
             if (!result[key]) {
 

@@ -98,44 +98,33 @@
 
     var initData = JSON.parse(attrs.data);
 
-    var formatDate = d3.time.format('%m-%Y');
+    var formatDate = d3.time.format('%Y%m');
     var parseDate = formatDate.parse;
 
-    var rd, rData = [], projectList = {};
+    var projectList = getProjectList(initData);
+
+    var rd, rData = [];
+
     for (var k in initData){
       if (initData.hasOwnProperty(k)) {
 
-        /* -------- TEST PROJECT ----------- */
-        initData[k].project.push({
-          name: 'project test',
-          value: +(Math.random().toFixed(2))
-        });
-        initData[k].project.push({
-          name: 'project test2',
-          value: +(Math.random().toFixed(2))
-        });
-        initData[k].project.push({
-          name: 'project test3',
-          value: +(Math.random().toFixed(2))
-        });
-        /* -------- TEST PROJECT ----------- */
-
         rd = {};
         rd.date = parseDate(k);
-        rd.total = initData[k].customer[0].value + 3 + Math.random();
+        rd.total = initData[k].customer[0].value;
 
-        initData[k].project.forEach(function(project) {
-          var projectTitle = project.name.split('|')[0].trim();
-          var projectName = projectTitle.split(' ').join('_');
+        var currentProjects = initData[k].project;
 
-          rd[projectName] = +project.value;
-          projectList[projectName] = { title: projectTitle, name: projectName };
+        projectList.forEach(function(pl) {
+          rd[pl.name] = currentProjects.reduce(function(sum, cp) {
+            return sum + (cp.name === pl.full ? +cp.value : 0);
+          }, 0);
         });
-        projectList.total = { title: 'Total', name: 'total' };
 
-        rData.unshift(rd);
+        rData.push(rd);
       }
     }
+
+    projectList.push({ full: "total", title: 'Total', name: 'total' });
 
     scope.entities = getInitEntities(projectList, color);
 
@@ -156,6 +145,7 @@
 
       var yLeftMin = d3.min(min);
       var yLeftMax = d3.max(max);
+      if (yLeftMin === yLeftMax) { yLeftMin -= .1; yLeftMax += .1; }
 
       var yLeftScale = d3.scale.linear().domain([yLeftMin, yLeftMax]).range([height, 0]);
       var yLeftAxis = d3.svg.axis().scale(yLeftScale).orient('left');
@@ -278,6 +268,49 @@
     }, true);
   }
 
+  function getProjectList(data) {
+    var list = [];
+    var exist = {};
+    for(var k in data) {
+      if (data.hasOwnProperty(k)) {
+        data[k].project.forEach(function(p) {
+          if (!exist[p.name]) {
+            exist[p.name] = true;
+            var projectTitle = getShortProjectName(p.name);
+            list.push({
+              full: p.name,
+              title: projectTitle,
+              name: projectTitle.split(' ').join('_')
+            });
+          }
+        });
+      }
+    }
+    return list;
+  }
+
+  function getShortProjectName(name) {
+    return name.split('|')[0].trim();
+  }
+
+  function sortObject(o) {
+    var sorted = {},
+      key, a = [];
+
+    for (key in o) {
+      if (o.hasOwnProperty(key)) {
+        a.push(key);
+      }
+    }
+
+    a.sort();
+
+    for (key = 0; key < a.length; key++) {
+      sorted[a[key]] = o[a[key]];
+    }
+    return sorted;
+  }
+
   function debounce(func, wait, immediate) {
     if (!wait) {
       return func;
@@ -315,20 +348,15 @@
   }
 
   function getInitEntities(projectList, color) {
-    var entities = [];
-    for (var k in projectList) {
-      if (projectList.hasOwnProperty(k)) {
-        entities.push({
-          title: projectList[k].title,
-          name: projectList[k].name,
-          currentValue: 0,
-          on: true,
-          color: color(projectList[k].name)
-        });
-      }
-    }
-
-    return entities;
+    return projectList.map(function(project) {
+      return {
+        title: project.title,
+        name: project.name,
+        currentValue: 0,
+        on: true,
+        color: color(project.name)
+      };
+    });
   }
 
   function getDataByEntities(entities, rData) {
@@ -388,7 +416,8 @@
           var
             startDatum = data[focusDataIndex - 1],
             endDatum = data[focusDataIndex],
-            range = d3.range(0, 1, 1/15);
+            distance = xScale(endDatum.date)-xScale(startDatum.date),
+            range = d3.range(0, 1, distance < 100 ? 1/15 : 1/30);
 
           range.push(1);
 
