@@ -3,287 +3,287 @@
 (function() {
 
   angular.module('ncsaas')
-    .directive('dashboardCostChart', function($window) {
-      return {
-        restrict: 'E',
-        replace: true,
-        templateUrl: 'views/directives/dashboard-cost-chart.html',
-        scope: {
-          data: '@'
-        },
-        link: dashboardCostChartLink
+    .directive('dashboardCostChart', dashboardCostChart);
+
+  dashboardCostChart.$inject = ['$window'];
+  function dashboardCostChart ($window) {
+    return {
+      restrict: 'E',
+      replace: true,
+      templateUrl: 'views/directives/dashboard-cost-chart.html',
+      scope: {
+        data: '@'
+      },
+      link: dashboardCostChartLink
+    };
+
+    function dashboardCostChartLink(scope, element, attrs) {
+      var bindId = '#chart';
+
+      angular.element($window).bind('resize', function () {
+        scope.$apply();
+      });
+
+      scope.getContainerWidth = function() {
+        return element[0].getBoundingClientRect().width;
       };
 
-      dashboardCostChart.$inject = ['$window'];
-      function dashboardCostChartLink(scope, element, attrs) {
-        var bindId = '#chart';
+      scope.$watch(scope.getContainerWidth, function(newWidth) {
+        scope.width = newWidth;
+      });
 
-        angular.element($window).bind('resize', function () {
-          scope.$apply();
-        });
+      var  createCanvas = function (el, width, height, margin) {
+        return d3.select(el).html('').append('svg:svg')
+          .attr('width', width + margin.left + margin.right)
+          .attr('height', height + margin.top + margin.bottom)
+          .append('svg:g')
+          .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+      };
 
-        scope.getContainerWidth = function() {
-          return element[0].getBoundingClientRect().width;
-        };
+      var drawHorizontalAxis = function (canvas, component, width, height, title, id) {
+        canvas.append('g').attr('id', (id) ? id : '')
+          .attr('class', '_x _axis')
+          .attr('transform', 'translate(0,' + height + ')')
+          .call(component)
+          .append('text')
+          .attr('x', width)
+          .attr('y', 15)
+          .attr('dy', '-0.29em')
+          .style('text-anchor', 'end')
+          .text(title);
+      };
 
-        scope.$watch(scope.getContainerWidth, function(newWidth) {
-          scope.width = newWidth;
-        });
+      var drawVerticalAxis = function (canvas, component, title, id) {
+        return canvas.append('g')
+          .attr('id', id)
+          .attr('class', '_y _axis axisLeft')
+          .call(component)
+          .append('text')
+          .attr('transform', 'rotate(-90)')
+          .attr('y', 6)
+          .attr('dy', '.71em')
+          .style('text-anchor', 'end')
+          .text(title);
+      };
 
-        var  createCanvas = function (el, width, height, margin) {
-          return d3.select(el).html('').append('svg:svg')
-            .attr('width', width + margin.left + margin.right)
-            .attr('height', height + margin.top + margin.bottom)
-            .append('svg:g')
-            .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
-        };
+      var drawPathLine = function(canvas, lineGenerator, data, color, id, attrClass) {
+        return canvas
+          .append('svg:path')
+          .attr('stroke-width', 2)
+          .style('fill', 'none')
+          .style('stroke', color != null ? color : 'black')
+          .attr('d', lineGenerator(data))
+          .attr('id', id != null ? id : '')
+          .attr('class', attrClass != null ? attrClass : '');
+      };
 
-        var drawHorizontalAxis = function (canvas, component, width, height, title, id) {
-          canvas.append('g').attr('id', (id) ? id : '')
-            .attr('class', '_x _axis')
-            .attr('transform', 'translate(0,' + height + ')')
-            .call(component)
-            .append('text')
-            .attr('x', width)
-            .attr('y', 15)
-            .attr('dy', '-0.29em')
-            .style('text-anchor', 'end')
-            .text(title);
-        };
+      var drawPathArea = function(canvas, lineGenerator, data, color, id, attrClass) {
+        var rgb = d3.rgb(color);
+        return canvas
+          .append('svg:path')
+          .attr('stroke-width', 0)
+          .style('stroke', color != null ? color : 'black')
+          .style('fill', 'rgba('+ rgb.r +', ' + rgb.g + ', '+rgb.b+', .5)')
+          .attr('d', lineGenerator(data))
+          .attr('id', id != null ? id : '')
+          .attr('class', attrClass != null ? attrClass : '');
+      };
 
-        var drawVerticalAxis = function (canvas, component, title, id) {
-          return canvas.append('g')
-            .attr('id', id)
-            .attr('class', '_y _axis axisLeft')
-            .call(component)
-            .append('text')
-            .attr('transform', 'rotate(-90)')
-            .attr('y', 6)
-            .attr('dy', '.71em')
-            .style('text-anchor', 'end')
-            .text(title);
-        };
+      var color = d3.scale.category20();
 
-        var drawPathLine = function(canvas, lineGenerator, data, color, id, attrClass) {
-          return canvas
-            .append('svg:path')
-            .attr('stroke-width', 2)
-            .style('fill', 'none')
-            .style('stroke', color != null ? color : 'black')
-            .attr('d', lineGenerator(data))
-            .attr('id', id != null ? id : '')
-            .attr('class', attrClass != null ? attrClass : '');
-        };
+      var initData = JSON.parse(attrs.data);
 
-        var drawPathArea = function(canvas, lineGenerator, data, color, id, attrClass) {
-          var rgb = d3.rgb(color);
-          return canvas
-            .append('svg:path')
-            .attr('stroke-width', 0)
-            .style('stroke', color != null ? color : 'black')
-            .style('fill', 'rgba('+ rgb.r +', ' + rgb.g + ', '+rgb.b+', .5)')
-            .attr('d', lineGenerator(data))
-            .attr('id', id != null ? id : '')
-            .attr('class', attrClass != null ? attrClass : '');
-        };
+      var formatDate = d3.time.format('%Y%m');
+      var parseDate = formatDate.parse;
 
-        var color = d3.scale.category20();
+      var projectList = getProjectList(initData);
 
-        var initData = JSON.parse(attrs.data);
+      var rd, rData = [];
 
-        var formatDate = d3.time.format('%Y%m');
-        var parseDate = formatDate.parse;
+      for (var k in initData){
+        if (initData.hasOwnProperty(k)) {
 
-        var projectList = getProjectList(initData);
+          rd = {};
+          rd.date = parseDate(k);
+          rd.total = initData[k].customer[0] ? initData[k].customer[0].value : 0;
 
-        var rd, rData = [];
+          var currentProjects = initData[k].project;
 
-        for (var k in initData){
-          if (initData.hasOwnProperty(k)) {
+          projectList.forEach(function(pl) {
+            rd[pl.name] = currentProjects.reduce(function(sum, cp) {
+              return sum + (cp.name === pl.full ? +cp.value : 0);
+            }, 0);
+          });
 
-            rd = {};
-            rd.date = parseDate(k);
-            rd.total = initData[k].customer[0].value;
-
-            var currentProjects = initData[k].project;
-
-            projectList.forEach(function(pl) {
-              rd[pl.name] = currentProjects.reduce(function(sum, cp) {
-                return sum + (cp.name === pl.full ? +cp.value : 0);
-              }, 0);
-            });
-
-            rData.push(rd);
-          }
+          rData.push(rd);
         }
+      }
 
-        projectList.push({ full: "total", title: 'Total', name: 'total' });
+      projectList.push({ full: "total", title: 'Total', name: 'total' });
 
-        scope.entities = getInitEntities(projectList, color);
+      scope.entities = getInitEntities(projectList, color);
 
-        scope.$watch('[entities, width]', function(newValue) {
-          var
-            newEntities = newValue[0],
-            newWidth = newValue[1];
+      scope.$watch('[entities, width]', function(newValue) {
+        var
+          newEntities = newValue[0],
+          newWidth = newValue[1];
 
-          var margin = {
-            top: 10,
-            right: 60,
-            bottom: 120,
-            left: 20
-          };
-          var margin2 = {
-            top: 360,
-            right: 60,
-            bottom: 30,
-            left: 20
-          };
-          var marginLegend = 210;
+        var margin = {
+          top: 10,
+          right: 60,
+          bottom: 120,
+          left: 20
+        };
+        var margin2 = {
+          top: 360,
+          right: 60,
+          bottom: 30,
+          left: 20
+        };
+        var marginLegend = 210;
 
-          var width = newWidth - marginLegend - margin.left - margin.right;
-          var height = 450 - margin.top - margin.bottom;
-          var height2 = 450 - margin2.top - margin2.bottom;
+        var width = newWidth - marginLegend - margin.left - margin.right;
+        var height = 450 - margin.top - margin.bottom;
+        var height2 = 450 - margin2.top - margin2.bottom;
 
-          var entities = angular.copy(newEntities.filter(function(e) { return e.on; }));
+        var entities = angular.copy(newEntities.filter(function(e) { return e.on; }));
 
-          var data = getDataByEntities(entities, rData);
+        var data = getDataByEntities(entities, rData);
 
-          var xScale = d3.time.scale().range([0,width]).domain(d3.extent(data, function (d) { return d.date; }));
-          var xAxis = d3.svg.axis().scale(xScale).orient('bottom').ticks(5);
+        var xScale = d3.time.scale().range([0,width]).domain(d3.extent(data, function (d) { return d.date; }));
+        var xAxis = d3.svg.axis().scale(xScale).orient('bottom').ticks(5);
 
-          var min = [], max = [];
-          entities.forEach(function(entity) {
-            min.push(d3.min(data, function (d) { return parseFloat(d[entity.name]); }));
-            max.push(d3.max(data, function (d) { return parseFloat(d[entity.name]); }));
+        var min = [], max = [];
+        entities.forEach(function(entity) {
+          min.push(d3.min(data, function (d) { return parseFloat(d[entity.name]); }));
+          max.push(d3.max(data, function (d) { return parseFloat(d[entity.name]); }));
+        });
+
+        var yLeftMin = d3.min(min);
+        var yLeftMax = d3.max(max);
+        if (yLeftMin === yLeftMax) { yLeftMin -= .1; yLeftMax += .1; }
+
+        var yLeftScale = d3.scale.linear().domain([yLeftMin, yLeftMax]).range([height, 0]);
+        var yLeftAxis = d3.svg.axis().scale(yLeftScale).orient('left');
+
+        var makeYAxis = function() {
+          return d3.svg.axis().scale(yLeftScale).orient('left').ticks(10);
+        };
+
+        var area =[];
+        var lineTotal;
+        entities.forEach(function(entity, i) {
+          if (entity.name === 'total') {
+            lineTotal = d3.svg.line()
+              .x(function(d) {
+                return xScale(d.date);
+              })
+              .y(function(d) {
+                return yLeftScale(d[entities[i].name]);
+              });
+            return;
+          }
+
+          area.push({
+            scale: d3.svg.area()
+              .x(function(d) {
+                return xScale(d.date);
+              })
+              .y0(i===0 ? height : function(d) {
+                return yLeftScale(d[entities[i-1].name]);
+              } )
+              .y1(function(d) {
+                return yLeftScale(d[entities[i].name]);
+              }),
+            entity: entity.name
+          });
+        });
+
+        var canvas = createCanvas(bindId, width, height, margin);
+
+        var focus = canvas.append('g').attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+
+        focus.append('svg:rect').attr('width', width).attr('height', height).attr('class', 'plot');
+        var clip = focus.append('svg:clipPath')
+          .attr('id', 'clip')
+          .append('svg:rect')
+          .attr('x', 0)
+          .attr('y', 0)
+          .attr('width', width)
+          .attr('height', height);
+
+
+        drawHorizontalAxis(focus, xAxis, width, height, '', '');
+        drawVerticalAxis(focus, yLeftAxis, 'price', '');
+
+        // make grid
+        focus.append('g')
+          .attr('class', 'y grid')
+          .call(makeYAxis().tickSize(-width, 0, 0).tickFormat(''));
+
+        var chartBody = focus.append('g')
+          .attr('clip-path', 'url(#clip)');
+
+        area.forEach(function(v) {
+          drawPathArea(chartBody, v.scale, data, color(v.entity), '', v.entity);
+        });
+
+        drawPathLine(chartBody, lineTotal, data, color('total'), '', 'line_total');
+
+
+        // --- Below chart ---
+
+        var xScale2 = d3.time.scale().range([0, width]).domain(d3.extent(data, function(d) {
+          return d.date;
+        }));
+
+        var xAxis2 = d3.svg.axis().scale(xScale).orient('bottom').ticks(5);
+
+        var yScale2 = d3.scale.linear().domain([yLeftMin, yLeftMax]).range([height2, 0]);
+
+        var areaBrush = d3.svg.area()
+          .x(function(d) { return xScale2(d.date); })
+          .y0(height2)
+          .y1(function(d) {
+            return yScale2(d[entities[entities.length-1].name]);
           });
 
-          var yLeftMin = d3.min(min);
-          var yLeftMax = d3.max(max);
-          if (yLeftMin === yLeftMax) { yLeftMin -= .1; yLeftMax += .1; }
-
-          var yLeftScale = d3.scale.linear().domain([yLeftMin, yLeftMax]).range([height, 0]);
-          var yLeftAxis = d3.svg.axis().scale(yLeftScale).orient('left');
-
-          var makeYAxis = function() {
-            return d3.svg.axis().scale(yLeftScale).orient('left').ticks(10);
-          };
-
-          var area =[];
-          var lineTotal;
-          entities.forEach(function(entity, i) {
-            if (entity.name === 'total') {
-              lineTotal = d3.svg.line()
-                .x(function(d) {
-                  return xScale(d.date);
-                })
-                .y(function(d) {
-                  return yLeftScale(d[entities[i].name]);
-                });
-              return;
-            }
-
-            area.push({
-              scale: d3.svg.area()
-                .x(function(d) {
-                  return xScale(d.date);
-                })
-                .y0(i===0 ? height : function(d) {
-                  return yLeftScale(d[entities[i-1].name]);
-                } )
-                .y1(function(d) {
-                  return yLeftScale(d[entities[i].name]);
-                }),
-              entity: entity.name
-            });
-          });
-
-          var canvas = createCanvas(bindId, width, height, margin);
-
-          var focus = canvas.append('g').attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
-
-          focus.append('svg:rect').attr('width', width).attr('height', height).attr('class', 'plot');
-          var clip = focus.append('svg:clipPath')
-            .attr('id', 'clip')
-            .append('svg:rect')
-            .attr('x', 0)
-            .attr('y', 0)
-            .attr('width', width)
-            .attr('height', height);
-
-
-          drawHorizontalAxis(focus, xAxis, width, height, '', '');
-          drawVerticalAxis(focus, yLeftAxis, 'price', '');
-
-          // make grid
-          focus.append('g')
-            .attr('class', 'y grid')
-            .call(makeYAxis().tickSize(-width, 0, 0).tickFormat(''));
-
-          var chartBody = focus.append('g')
-            .attr('clip-path', 'url(#clip)');
+        var brushed = function() {
+          xScale.domain((brush.empty() ? xScale2.domain() : brush.extent()));
+          focus.select('._x._axis').call(xAxis);
 
           area.forEach(function(v) {
-            drawPathArea(chartBody, v.scale, data, color(v.entity), '', v.entity);
+            canvas.select('.' + v.entity).attr('d', v.scale(data));
           });
+          canvas.select('.line_total').attr('d', lineTotal(data));
 
-          drawPathLine(chartBody, lineTotal, data, color('total'), '', 'line_total');
+        };
 
+        var brush = d3.svg.brush()
+          .x(xScale2)
+          .on('brush', brushed);
 
-          // --- Below chart ---
+        var context = canvas.append('g').attr('transform', 'translate(' + margin2.left + ',' + margin2.top + ')');
+        context.append('path')
+          .datum(data)
+          .attr('class', 'area')
+          .attr('d', areaBrush);
 
-          var xScale2 = d3.time.scale().range([0, width]).domain(d3.extent(data, function(d) {
-            return d.date;
-          }));
+        context.append('g').attr('class', '_x _axis').attr('transform', 'translate(0,' + height2 + ')').call(xAxis2);
+        context.append('g')
+          .attr('class', '_x brush')
+          .call(brush)
+          .selectAll('rect')
+          .attr('y', -6)
+          .attr('height', height2 + 7);
 
-          var xAxis2 = d3.svg.axis().scale(xScale).orient('bottom').ticks(5);
+        // --- Below chart ---
 
-          var yScale2 = d3.scale.linear().domain([yLeftMin, yLeftMax]).range([height2, 0]);
+        hover(color, data, rData, entities, focus, width, height, xScale, yLeftScale, hoverCallback);
 
-          var areaBrush = d3.svg.area()
-            .x(function(d) { return xScale2(d.date); })
-            .y0(height2)
-            .y1(function(d) {
-              return yScale2(d[entities[entities.length-1].name]);
-            });
-
-          var brushed = function() {
-            xScale.domain((brush.empty() ? xScale2.domain() : brush.extent()));
-            focus.select('._x._axis').call(xAxis);
-
-            area.forEach(function(v) {
-              canvas.select('.' + v.entity).attr('d', v.scale(data));
-            });
-            canvas.select('.line_total').attr('d', lineTotal(data));
-
-          };
-
-          var brush = d3.svg.brush()
-            .x(xScale2)
-            .on('brush', brushed);
-
-          var context = canvas.append('g').attr('transform', 'translate(' + margin2.left + ',' + margin2.top + ')');
-          context.append('path')
-            .datum(data)
-            .attr('class', 'area')
-            .attr('d', areaBrush);
-
-          context.append('g').attr('class', '_x _axis').attr('transform', 'translate(0,' + height2 + ')').call(xAxis2);
-          context.append('g')
-            .attr('class', '_x brush')
-            .call(brush)
-            .selectAll('rect')
-            .attr('y', -6)
-            .attr('height', height2 + 7);
-
-          // --- Below chart ---
-
-          hover(color, data, rData, entities, focus, width, height, xScale, yLeftScale, hoverCallback);
-
-        }, true);
-      }
-    });
-
-
+      }, true);
+    }
+  }
 
   function getProjectList(data) {
     var list = [];
