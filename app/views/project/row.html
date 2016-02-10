@@ -1,16 +1,16 @@
 <div class="compact-list__header"
-     ng-click="expanded = !expanded; entityList.showMore(entity)">
+     ng-click="entity.expandItemOpen = !entity.expandItemOpen">
   <div class="compact-list__title">
     <a ui-sref="projects.details({uuid: entity.uuid})"
        ng-bind="entity.name"></a>
   </div>
   <div class="compact-list__right">
-     <expandable-indicator open="expanded">
+     <expandable-indicator open="entity.expandItemOpen">
      </expandable-indicator>
   </div>
 </div>
 
-<div ng-show="expanded" class="compact-list__details" visible="resources">
+<div ng-show="entity.expandItemOpen" class="compact-list__details" visible="resources">
   <div class="details-table__row">
     <div class="details-table__key">
       Resources
@@ -48,4 +48,4 @@
   </div>
 </div>
 
-<action-list actions="entityButtons" entity="entity" ng-show="expanded"></action-list>
+<action-list actions="entityButtons" entity="entity" ng-show="entity.expandItemOpen"></action-list>

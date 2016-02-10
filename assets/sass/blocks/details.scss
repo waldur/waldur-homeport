@@ -257,6 +257,12 @@ $searchInputHeight: 32px;
     text-transform: uppercase;
     margin: 27px 0;
   }
+
+  h3 {
+    @include property(font-size, $big-font);
+    margin: 15px 0;
+  }
+
   aside {
     .input-group {
       margin-top: 0;
