@@ -1,0 +1,23 @@
+.multiple-select {
+    list-style: none;
+    padding: 0;
+    .icon {
+        color: #50b848;
+        padding-right: 10px;
+        padding-top: 5px;
+        @include property(font-size, $normal-font);
+    }
+    li {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        padding: 5px;
+    }
+}
+.multiple-select__label {
+    flex-grow: 1;
+}
+.multiple-select__subtitle {
+    color: #888;
+    @include property(font-size, $small-font);
+}
