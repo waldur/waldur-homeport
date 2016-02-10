@@ -37,32 +37,52 @@
     currentStateService) {
     angular.extend($scope, {
       init: function() {
-        $scope.getData().then(function(choices) {
+        $scope.getChoices().then(function(choices) {
           $scope.choices = choices;
         });
       },
-      getData: function() {
-        return projectsService.getList().then(function(projects) {
-          return currentStateService.getCustomer().then(function(customer) {
-            return joinServiceProjectLinkService.getServiceProjectLinks(
-              customer.uuid, $scope.service.service_type, $scope.service.uuid
-            ).then(function(links) {
-              var link_for_project = {};
-              angular.forEach(links, function(link) {
-                link_for_project[link.project_uuid] = link;
-              });
-              return projects.map(function(project) {
-                var link = link_for_project[project.uuid];
-                return {
-                  title: project.name,
-                  selected: !!link.url,
-                  link_url: link.url,
-                  project_url: project.url,
-                  subtitle: link.state
-                };
-              });
-            });
+      getChoices: function() {
+        var vm = this;
+        return this.getContext().then(function(context) {
+          var link_for_project = {};
+          angular.forEach(context.links, function(link) {
+            link_for_project[link.project_uuid] = link;
           });
+          return context.projects.map(function(project) {
+            var link = link_for_project[project.uuid];
+            return vm.newChoice(project, link);
+          });
+        });
+      },
+      newChoice: function(project, link) {
+        return {
+          title: project.name,
+          selected: !!link.url,
+          link_url: link.url,
+          project_url: project.url,
+          subtitle: link.state
+        };
+      },
+      getContext: function() {
+        // Context consists of list of projects and list of links
+        var context = {};
+        return $q.all([
+          projectsService.getList().then(function(projects) {
+            context.projects = projects;
+          }),
+          this.getLinks().then(function(links) {
+            context.links = links;
+          })
+        ]).then(function() {
+          return context;
+        });
+      },
+      getLinks: function() {
+        // Get service project links filtered by customer and service
+        return currentStateService.getCustomer().then(function(customer) {
+          return joinServiceProjectLinkService.getServiceProjectLinks(
+            customer.uuid, $scope.service.service_type, $scope.service.uuid
+          );
         });
       },
       save: function() {
