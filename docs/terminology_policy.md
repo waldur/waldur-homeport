@@ -1,11 +1,12 @@
 # Terminology policy
 
-
 Should be applied for naming buttons, separate pages of the process and in list of actions.
 
 **Add** / **Remove**
 
-Should be used in front-end relatively meaning of creating or adding / deleting or removing:
+Should be used when an action of creating/adding or deleting/removing is
+applied to:
+
 * Organizations
 * Projects
 * Providers
@@ -17,6 +18,7 @@ Should be used in front-end relatively meaning of creating or adding / deleting 
 
 **Import** / **Unlink**
 
-Should be used in front-end relatively meaning of importing / unlinking:
-* VMs
+Should be used when an action of importing or unlinking / deleting a record without
+undeploying is applied to:
 
+* VMs
