@@ -54,7 +54,7 @@
     }
 
     function getPercent(usage, limit) {
-      return Math.max(0, Math.min(100, usage / limit * 100));
+      return Math.round(Math.max(0, Math.min(100, usage / limit * 100)));
     }
 
     function getPlan(customer) {
