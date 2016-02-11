@@ -19,9 +19,9 @@
                     Quota usage
                 </div>
                 <div class="dropdown__content">
-                    <div ng-repeat="quota in plan.quotas">
-                        <div class="usage-row"
-                             visible="{{ quota.name }}">
+                    <div ng-repeat="quota in plan.quotas"
+                         visible="{{ quota.name }}">
+                        <div class="usage-row">
                             <div class="usage-row__key">{{ quota.name | titleCase }}</div>
                             <div class="usage-row__value">{{ quota.usage }} out of {{ quota.limit }}</div>
                         </div>
@@ -50,9 +50,9 @@
             </div>
         </div>
         <div ng-show="showPlan" class="tab-link__content">
-            <div ng-repeat="quota in plan.quotas">
-                <div class="usage-row"
-                     visible="{{ quota.name }}">
+            <div ng-repeat="quota in plan.quotas"
+                 visible="{{ quota.name }}">
+                <div class="usage-row">
                     <div class="usage-row__key">{{ quota.name | titleCase }}</div>
                     <div class="usage-row__value">{{ quota.usage }} out of {{ quota.limit }}</div>
                 </div>
