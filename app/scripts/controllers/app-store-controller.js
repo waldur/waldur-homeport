@@ -250,7 +250,9 @@
       },
       countResourceImages: function() {
         var vm = this;
-        resourcesCountService[this.selectedResourceImageApiEndpoint]({customer_uuid: this.currentCustomer.uuid}).then(function(count) {
+        var fn = resourcesCountService[this.selectedResourceImageApiEndpoint];
+        var query = {settings_uuid: vm.selectedService.settings_uuid};
+        fn(query).then(function(count) {
           vm.selectedResourceImagesCount = count;
         });
       },
