@@ -2,17 +2,21 @@
     <div class="d3-line-chart" id="chart"></div>
     <div class="legend">
 
-        <div class="title">
-            <input ng-model="sourceType" type="radio" value="project">
-            <input ng-model="sourceType" type="radio" value="resource">
-            {{sourceType}}
+        <div class="title"></div>
+
+        <div class="switch">
+            <input ng-model="projectSelect" id="switch1" type="checkbox" ng-true-value="'resource'" ng-false-value="'project'">
+            <label for="switch1">
+                <span class="on">Projects</span>
+                <span class="off">Resources</span>
+            </label>
         </div>
         <div><span class="date_label">Date:</span> <span class="date"></span></div>
         <ul class="entities">
            <li ng-repeat="entity in entities" class="{{entity.name}}">
                <input ng-hide="entity.name==='total'" type="checkbox" ng-model="entity.on" />
                <div ng-style="{backgroundColor: entity.color}" class="point-chart"></div>
-               <span>{{entity.title}}:</span> <span class="{{'current_value__' + entity.name}}"></span>
+               <span ng-class="{'entity-name': true, 'entity-name-total': entity.name === 'total'}">{{entity.title}}:</span> <span class="{{'current_value__' + entity.name}}"></span>
            </li>
         </ul>
     </div>

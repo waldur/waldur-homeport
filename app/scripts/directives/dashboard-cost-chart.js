@@ -59,8 +59,8 @@
           .attr('class', '_y _axis axisLeft')
           .call(component)
           .append('text')
-          .attr('transform', 'rotate(-90)')
-          .attr('y', 6)
+          //.attr('transform', 'rotate(-90)')
+          .attr('y', -15)
           .attr('dy', '.71em')
           .style('text-anchor', 'end')
           .text(title);
@@ -93,20 +93,24 @@
 
       var initData = JSON.parse(attrs.data);
 
-      scope.sourceType = 'project';
+      scope.projectSelect = 'project';
 
-      scope.$watch('[entities, width, sourceType]', function(newValue, oldValue) {
+      var tmp = init(initData, scope.projectSelect),
+        rData = tmp.rData,
+        legendList = tmp.legendList;
+
+      scope.entities = getInitEntities(legendList, color);
+
+      scope.$watch('[entities, width, projectSelect]', function(newValue, oldValue) {
         var
           newEntities = newValue[0],
           newWidth = newValue[1],
           sourceType = newValue[2];
 
-
-        if (oldValue.sourceType !== sourceType) {
-          var
-            tmp = init(initData, scope.sourceType),
-            rData = tmp.rData,
-            legendList = tmp.legendList;
+        if (oldValue[2] !== sourceType) {
+          tmp = init(initData, sourceType);
+          rData = tmp.rData;
+          legendList = tmp.legendList;
 
           scope.entities = newEntities = getInitEntities(legendList, color);
         }

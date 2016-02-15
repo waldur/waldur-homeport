@@ -62,11 +62,81 @@
         .title {
             font-size: 16px;
         }
-
+        .switch {
+            input[type="checkbox"] {
+                display: none;
+            }
+            input[type="checkbox"]+label {
+                display: block;
+                width: 100%;
+                position: relative;
+                background: #fafafa;
+                border: 1px solid #ccc;
+                height: 25px;
+                border-radius: 2px;
+                span {
+                    display: block;
+                    width: 50%;
+                    position: absolute;
+                    height: 100%;
+                    z-index: 1;
+                    color: #333;
+                    text-align: center;
+                    line-height: 25px;
+                    transition: color .2s;
+                    transition-delay: .3s;
+                    &.on {
+                        left: 0;
+                        color: #fff;
+                    }
+                    &.off {
+                        right: 0;
+                        cursor: pointer;
+                    }
+                }
+                &:after {
+                    content: '';
+                    display: block;
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    width: 50%;
+                    background: #50b848;
+                    height: 100%;
+                    transition: left .5s ease-in-out;
+                    border-radius: 2px;
+                }
+            }
+            input[type="checkbox"]:checked+label {
+                span {
+                    &.on {
+                        color: #333;
+                        cursor: pointer;
+                    }
+                    &.off {
+                        color: #fff;
+                        cursor: default;
+                    }
+                }
+                &:after {
+                    left: 50%;
+                }
+            }
+        }
         .entities {
             li {
                 position: relative;
                 list-style: none;
+                .entity-name {
+                    width: 100px;
+                    display: inline-flex;
+                    line-height: 14px;
+                    margin-right: 5px;
+                    word-break: break-all;
+                }
+                .entity-name-total {
+                    width: 115px;
+                }
                 .point-chart {
                     content: "";
                     width: 10px;
