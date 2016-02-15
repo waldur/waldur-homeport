@@ -93,40 +93,23 @@
 
       var initData = JSON.parse(attrs.data);
 
-      var formatDate = d3.time.format('%Y%m');
-      var parseDate = formatDate.parse;
+      scope.sourceType = 'project';
 
-      var projectList = getProjectList(initData);
-
-      var rd, rData = [];
-
-      for (var k in initData){
-        if (initData.hasOwnProperty(k)) {
-
-          rd = {};
-          rd.date = parseDate(k);
-          rd.total = initData[k].customer[0] ? initData[k].customer[0].value : 0;
-
-          var currentProjects = initData[k].project;
-
-          projectList.forEach(function(pl) {
-            rd[pl.name] = currentProjects.reduce(function(sum, cp) {
-              return sum + (cp.name === pl.full ? +cp.value : 0);
-            }, 0);
-          });
-
-          rData.push(rd);
-        }
-      }
-
-      projectList.push({ full: "total", title: 'Total', name: 'total' });
-
-      scope.entities = getInitEntities(projectList, color);
-
-      scope.$watch('[entities, width]', function(newValue) {
+      scope.$watch('[entities, width, sourceType]', function(newValue, oldValue) {
         var
           newEntities = newValue[0],
-          newWidth = newValue[1];
+          newWidth = newValue[1],
+          sourceType = newValue[2];
+
+
+        if (oldValue.sourceType !== sourceType) {
+          var
+            tmp = init(initData, scope.sourceType),
+            rData = tmp.rData,
+            legendList = tmp.legendList;
+
+          scope.entities = newEntities = getInitEntities(legendList, color);
+        }
 
         var margin = {
           top: 10,
@@ -285,19 +268,54 @@
     }
   }
 
-  function getProjectList(data) {
+  function init(initData, type) {
+    var formatDate = d3.time.format('%Y%m');
+    var parseDate = formatDate.parse;
+    var legendList = getLegendList(initData, type);
+    var rd, rData = [];
+
+    for (var k in initData){
+      if (initData.hasOwnProperty(k)) {
+
+        rd = {};
+        rd.date = parseDate(k);
+        rd.total = initData[k].customer[0] ? initData[k].customer[0].value : 0;
+
+        var currentProjects = initData[k][type];
+
+        legendList.forEach(function(pl) {
+          rd[pl.name] = currentProjects.reduce(function(sum, cp) {
+            return sum + (cp.name === pl.full ? +cp.value : 0);
+          }, 0);
+        });
+
+        rData.push(rd);
+      }
+    }
+
+    legendList.push({ full: "total", title: 'Total', name: 'total' });
+
+    return {
+      rData: rData,
+      legendList: legendList
+    };
+  }
+
+  function getLegendList(data, type) {
     var list = [];
     var exist = {};
+    type = type ? type : 'project';
+
     for(var k in data) {
       if (data.hasOwnProperty(k)) {
-        data[k].project.forEach(function(p) {
+        data[k][type].forEach(function(p) {
           if (!exist[p.name]) {
             exist[p.name] = true;
             var projectTitle = getShortProjectName(p.name);
             list.push({
               full: p.name,
               title: projectTitle,
-              name: projectTitle.split(' ').join('_')
+              name: projectTitle.replace(/[^a-zA-Z0-9]+/g, '')
             });
           }
         });
