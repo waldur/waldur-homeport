@@ -2,9 +2,9 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('customersService', ['baseServiceClass', '$q', customersService]);
+    .service('customersService', ['baseServiceClass', '$state', '$q', customersService]);
 
-  function customersService(baseServiceClass, $q) {
+  function customersService(baseServiceClass, $state, $q) {
     var ServiceClass = baseServiceClass.extend({
       filterByCustomer: false,
 
@@ -25,7 +25,8 @@
             if (customers.length !== 0) {
               deferred.resolve(customers[0]);
             } else {
-              deferred.resolve(undefined);
+              $state.go('initialdata.view');
+              deferred.reject();
             }
           }
         );

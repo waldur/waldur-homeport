@@ -351,10 +351,19 @@
               created_at: date
             });
             if($window.localStorage[ENV.currentCustomerUuidStorageKey]) {
-              customersService.$get($window.localStorage[ENV.currentCustomerUuidStorageKey]).then(function(customer) {
-                deferred.resolve(customer);
-                getProject()
-              }, setPersonalOrFirstCustomer);
+              customersService.getList().then(function(customers) {
+                if (customers.length > 0) {
+                  customersService
+                    .$get($window.localStorage[ENV.currentCustomerUuidStorageKey])
+                    .then(function(customer) {
+                      deferred.resolve(customer);
+                      getProject()
+                    }, setPersonalOrFirstCustomer);
+                } else {
+                  delete $window.localStorage[ENV.currentCustomerUuidStorageKey];
+                  $state.go('initialdata.view');
+                }
+              });
             } else {
               setPersonalOrFirstCustomer();
             }
