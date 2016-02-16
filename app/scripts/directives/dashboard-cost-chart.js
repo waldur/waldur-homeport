@@ -12,23 +12,28 @@
       replace: true,
       templateUrl: 'views/directives/dashboard-cost-chart.html',
       scope: {
-        data: '@'
+        data: '='
       },
       link: dashboardCostChartLink
     };
 
-    function dashboardCostChartLink(scope, element, attrs) {
+    function dashboardCostChartLink(scope, element) {
       var bindId = '#chart';
 
-      angular.element($window).bind('resize', function () {
+      var onResize = function () {
         scope.$apply();
+      };
+
+      angular.element($window).bind('resize', onResize);
+      scope.$on('$destroy', function() {
+        angular.element($window).unbind('resize', onResize);
       });
 
-      scope.getContainerWidth = function() {
+      var getContainerWidth = function() {
         return element[0].getBoundingClientRect().width;
       };
 
-      scope.$watch(scope.getContainerWidth, function(newWidth) {
+      scope.$watch(getContainerWidth, function(newWidth) {
         scope.width = newWidth;
       });
 
@@ -90,7 +95,7 @@
 
       var color = d3.scale.category20();
 
-      var initData = JSON.parse(attrs.data);
+      var initData = angular.copy(scope.data);
 
       scope.projectSelect = 'project';
 
@@ -100,7 +105,9 @@
 
       scope.entities = getInitEntities(legendList, color);
 
-      scope.$watch('[entities, width, projectSelect]', function(newValue, oldValue) {
+      scope.$watch('[entities, width, projectSelect]', draw, true);
+
+      function draw(newValue, oldValue) {
         var
           newEntities = newValue[0],
           newWidth = newValue[1],
@@ -147,7 +154,10 @@
 
         var yLeftMin = d3.min(min);
         var yLeftMax = d3.max(max);
-        if (yLeftMin === yLeftMax) { yLeftMin -= .1; yLeftMax += .1; }
+        if (yLeftMin === yLeftMax) {
+          yLeftMin -= .1;
+          yLeftMax += .1;
+        }
 
         var yLeftScale = d3.scale.linear().domain([yLeftMin, yLeftMax]).range([height, 0]);
         var yLeftAxis = d3.svg.axis().scale(yLeftScale).orient('left');
@@ -156,7 +166,7 @@
           return d3.svg.axis().scale(yLeftScale).orient('left').ticks(10);
         };
 
-        var area =[];
+        var area = [];
         var lineTotal;
         entities.forEach(function(entity, i) {
           if (entity.name === 'total') {
@@ -267,7 +277,7 @@
 
         hover(color, data, rData, entities, focus, width, height, xScale, yLeftScale, hoverCallback);
 
-      }, true);
+      }
     }
   }
 
@@ -305,21 +315,24 @@
   }
 
   function getLegendList(data, type) {
-    var list = [];
-    var exist = {};
+    var list = [],
+        exist = {},
+        count = 0;
+
     type = type ? type : 'project';
 
     for(var k in data) {
       if (data.hasOwnProperty(k)) {
-        data[k][type].forEach(function(p) {
+        data[k][type].forEach(function(p, i) {
           if (!exist[p.name]) {
             exist[p.name] = true;
             var projectTitle = getShortProjectName(p.name);
             list.push({
               full: p.name,
               title: projectTitle,
-              name: projectTitle.replace(/[^a-zA-Z0-9]+/g, '')
+              name: type + '_' + count
             });
+            count++;
           }
         });
       }

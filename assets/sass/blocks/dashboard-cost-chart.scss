@@ -101,7 +101,7 @@
                     left: 0;
                     top: 0;
                     width: 50%;
-                    background: #50b848;
+                    background: $button-green;
                     height: 100%;
                     transition: left .5s ease-in-out;
                     border-radius: 2px;
@@ -142,7 +142,7 @@
                     width: 10px;
                     height: 10px;
                     position: absolute;
-                    background-color: #dddddd;
+                    background-color: $select-bg-gray;
                     left: -15px;
                     top: 8px;
                     border-radius: 10px;

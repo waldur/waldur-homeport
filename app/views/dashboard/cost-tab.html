@@ -4,7 +4,7 @@
          <h2 visible="import" visible="providers">Please import resources or add more providers</h2>
      </div>
      <div class="white-box big-chart" ng-if="DashboardController.table.length > 0">
-         <dashboard-cost-chart data="{{DashboardController.costData}}"></dashboard-cost-chart>
+         <dashboard-cost-chart data="DashboardController.costData"></dashboard-cost-chart>
          <div class="clear"></div>
      </div>
     <div class="white-box table-list" ng-if="DashboardController.table.length > 0">
