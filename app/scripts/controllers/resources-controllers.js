@@ -304,7 +304,11 @@
         );
       },
       removeInstance: function(resource) {
-        return this.service.$deleteByUrl(resource.url);
+        return this.service.$deleteByUrl(resource.url).then(function(response) {
+          if (response.status === "destroy was scheduled") {
+            resource.state = 'Deletion Scheduled';
+          }
+        });
       },
       unlink: function(resource) {
         var vm = this;
@@ -317,6 +321,9 @@
         );
       },
       afterInstanceRemove: function(resource) {
+        if (resource.state === 'Deletion Scheduled') {
+          return;
+        }
         this._super(resource);
         projectsService.clearAllCacheForCurrentEndpoint();
       },
