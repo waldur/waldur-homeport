@@ -212,39 +212,6 @@
         }
       },
 
-      /*processChartData: function(rows) {
-        var labels = [];
-        var totals = [];
-        rows.forEach(function(row) {
-          if (row.scope_type == 'customer') {
-            labels.unshift(moment(row.month, 'MM').format('MMMM'));
-            totals.unshift(row.total);
-          }
-        });
-        blockUI.stop();
-
-        this.chartOptions = {
-          bezierCurve: false,
-          responsive: true,
-          animationEasing: 'linear'
-        };
-
-        this.costData = {
-          labels: labels,
-          datasets: [
-            {
-              fillColor: 'rgba(123, 166, 196,0.5)',
-              strokeColor: 'rgba(123, 166, 196,1)',
-              pointColor: 'rgba(123, 166, 196,1)',
-              pointStrokeColor: '#fff',
-              pointHighlightFill: '#fff',
-              pointHighlightStroke: 'rgba(123, 166, 196,1)',
-              data: totals
-            }
-          ]
-        };
-      },*/
-
       processChartData: function(rows) {
         var result = {};
         rows.forEach(function(row) {

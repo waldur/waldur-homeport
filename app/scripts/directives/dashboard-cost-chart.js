@@ -59,7 +59,6 @@
           .attr('class', '_y _axis axisLeft')
           .call(component)
           .append('text')
-          //.attr('transform', 'rotate(-90)')
           .attr('y', -15)
           .attr('dy', '.71em')
           .style('text-anchor', 'end')

@@ -4,7 +4,6 @@
          <h2 visible="import" visible="providers">Please import resources or add more providers</h2>
      </div>
      <div class="white-box big-chart" ng-if="DashboardController.table.length > 0">
-         <!--<canvas tc-chartjs chart-type="line" chart-options="DashboardController.chartOptions" chart-data="DashboardController.costData" width="1120" height="180"></canvas>-->
          <dashboard-cost-chart data="{{DashboardController.costData}}"></dashboard-cost-chart>
          <div class="clear"></div>
      </div>
