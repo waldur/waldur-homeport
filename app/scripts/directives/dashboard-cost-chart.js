@@ -6,7 +6,7 @@
     .directive('dashboardCostChart', dashboardCostChart);
 
   dashboardCostChart.$inject = ['$window'];
-  function dashboardCostChart ($window) {
+  function dashboardCostChart($window) {
     return {
       restrict: 'E',
       replace: true,
@@ -20,7 +20,7 @@
     function dashboardCostChartLink(scope, element) {
       var bindId = '#chart';
 
-      var onResize = function () {
+      var onResize = function() {
         scope.$apply();
       };
 
@@ -37,7 +37,7 @@
         scope.width = newWidth;
       });
 
-      var  createCanvas = function (el, width, height, margin) {
+      var createCanvas = function(el, width, height, margin) {
         return d3.select(el).html('').append('svg:svg')
           .attr('width', width + margin.left + margin.right)
           .attr('height', height + margin.top + margin.bottom)
@@ -45,7 +45,7 @@
           .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
       };
 
-      var drawHorizontalAxis = function (canvas, component, width, height, title, id) {
+      var drawHorizontalAxis = function(canvas, component, width, height, title, id) {
         canvas.append('g').attr('id', (id) ? id : '')
           .attr('class', '_x _axis')
           .attr('transform', 'translate(0,' + height + ')')
@@ -58,7 +58,7 @@
           .text(title);
       };
 
-      var drawVerticalAxis = function (canvas, component, title, id) {
+      var drawVerticalAxis = function(canvas, component, title, id) {
         return canvas.append('g')
           .attr('id', id)
           .attr('class', '_y _axis axisLeft')
@@ -85,9 +85,9 @@
         var rgb = d3.rgb(color);
         return canvas
           .append('svg:path')
-          .attr('stroke-width', 0)
+          .attr('stroke-width', 1)
           .style('stroke', color != null ? color : 'black')
-          .style('fill', 'rgba('+ rgb.r +', ' + rgb.g + ', '+rgb.b+', .5)')
+          .style('fill', 'rgba(' + rgb.r + ', ' + rgb.g + ', ' + rgb.b + ', .4)')
           .attr('d', lineGenerator(data))
           .attr('id', id != null ? id : '')
           .attr('class', attrClass != null ? attrClass : '');
@@ -137,7 +137,7 @@
         var inlineMode = newWidth > 500;
 
         var xTicksCount = (newWidth - marginLegend) > 400 ? 5 : 3;
-        var width = (inlineMode  ? newWidth - marginLegend : newWidth) - margin.left - margin.right;
+        var width = (inlineMode ? newWidth - marginLegend : newWidth) - margin.left - margin.right;
         var height = 450 - margin.top - margin.bottom;
         var height2 = 450 - margin2.top - margin2.bottom;
 
@@ -145,13 +145,13 @@
 
         var data = getDataByEntities(entities, rData);
 
-        var xScale = d3.time.scale().range([0,width]).domain(d3.extent(data, function (d) { return d.date; }));
+        var xScale = d3.time.scale().range([0, width]).domain(d3.extent(data, function(d) { return d.date; }));
         var xAxis = d3.svg.axis().scale(xScale).orient('bottom').ticks(xTicksCount);
 
         var min = [], max = [];
         entities.forEach(function(entity) {
-          min.push(d3.min(data, function (d) { return parseFloat(d[entity.name]); }));
-          max.push(d3.max(data, function (d) { return parseFloat(d[entity.name]); }));
+          min.push(d3.min(data, function(d) { return parseFloat(d[entity.name]); }));
+          max.push(d3.max(data, function(d) { return parseFloat(d[entity.name]); }));
         });
 
         var yLeftMin = d3.min(min);
@@ -187,9 +187,9 @@
               .x(function(d) {
                 return xScale(d.date);
               })
-              .y0(i===0 ? height : function(d) {
-                return yLeftScale(d[entities[i-1].name]);
-              } )
+              .y0(i === 0 ? height : function(d) {
+                return yLeftScale(d[entities[i - 1].name]);
+              })
               .y1(function(d) {
                 return yLeftScale(d[entities[i].name]);
               }),
@@ -243,7 +243,7 @@
           .x(function(d) { return xScale2(d.date); })
           .y0(height2)
           .y1(function(d) {
-            return yScale2(d[entities[entities.length-1].name]);
+            return yScale2(d[entities[entities.length - 1].name]);
           });
 
         var brushed = function() {
@@ -289,7 +289,7 @@
     var legendList = getLegendList(initData, type);
     var rd, rData = [];
 
-    for (var k in initData){
+    for (var k in initData) {
       if (initData.hasOwnProperty(k)) {
 
         rd = {};
@@ -308,7 +308,7 @@
       }
     }
 
-    legendList.push({ full: "total", title: 'Total', name: 'total' });
+    legendList.push({full: "total", title: 'Total', name: 'total'});
 
     return {
       rData: rData,
@@ -323,7 +323,7 @@
 
     type = type ? type : 'project';
 
-    for(var k in data) {
+    for (var k in data) {
       if (data.hasOwnProperty(k)) {
         data[k][type].forEach(function(p, i) {
           if (!exist[p.name]) {
@@ -381,7 +381,7 @@
       d.total = rd.total;
 
       var previousValue = 0;
-      for (var k in rd){
+      for (var k in rd) {
         if (rd.hasOwnProperty(k) && onCharts.indexOf(k) >= 0) {
 
           var val = rd[k] + previousValue;
@@ -400,7 +400,7 @@
     var bisectX = d3.bisector(function(d) { return d.date; }).right;
     var bisect = d3.bisector(function(d) { return d; }).right;
 
-    var hoverTool = function () {
+    var hoverTool = function() {
       var x = d3.mouse(this)[0];
       var rectSize = this.getBoundingClientRect();
 
@@ -422,8 +422,8 @@
           var
             startDatum = data[focusDataIndex - 1],
             endDatum = data[focusDataIndex],
-            distance = xScale(endDatum.date)-xScale(startDatum.date),
-            range = d3.range(0, 1, distance < 100 ? 1/15 : 1/30);
+            distance = xScale(endDatum.date) - xScale(startDatum.date),
+            range = d3.range(0, 1, distance < 100 ? 1 / 15 : 1 / 30);
 
           range.push(1);
 
