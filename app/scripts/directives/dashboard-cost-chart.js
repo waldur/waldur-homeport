@@ -123,7 +123,7 @@
 
         var margin = {
           top: 10,
-          right: 60,
+          right: 40,
           bottom: 120,
           left: 20
         };
@@ -133,9 +133,11 @@
           bottom: 30,
           left: 20
         };
-        var marginLegend = 210;
+        var marginLegend = 225;
+        var inlineMode = newWidth > 500;
 
-        var width = newWidth - marginLegend - margin.left - margin.right;
+        var xTicksCount = (newWidth - marginLegend) > 400 ? 5 : 3;
+        var width = (inlineMode  ? newWidth - marginLegend : newWidth) - margin.left - margin.right;
         var height = 450 - margin.top - margin.bottom;
         var height2 = 450 - margin2.top - margin2.bottom;
 
@@ -144,7 +146,7 @@
         var data = getDataByEntities(entities, rData);
 
         var xScale = d3.time.scale().range([0,width]).domain(d3.extent(data, function (d) { return d.date; }));
-        var xAxis = d3.svg.axis().scale(xScale).orient('bottom').ticks(5);
+        var xAxis = d3.svg.axis().scale(xScale).orient('bottom').ticks(xTicksCount);
 
         var min = [], max = [];
         entities.forEach(function(entity) {
@@ -233,7 +235,7 @@
           return d.date;
         }));
 
-        var xAxis2 = d3.svg.axis().scale(xScale).orient('bottom').ticks(5);
+        var xAxis2 = d3.svg.axis().scale(xScale).orient('bottom').ticks(xTicksCount);
 
         var yScale2 = d3.scale.linear().domain([yLeftMin, yLeftMax]).range([height2, 0]);
 
