@@ -28,6 +28,7 @@
       init:function() {
         this.service = customersService;
         this.controllerScope = controllerScope;
+        this.hideNoDataText = true;
         this._super();
         this.searchFieldName = 'name';
         this.currentUser = usersService.currentUser;
@@ -103,6 +104,7 @@
         this._super(intance);
       },
       afterGetList: function() {
+        this.hideNoDataText = false;
         if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('plans') == -1) {
           for (var i = 0; i < this.list.length; i++) {
             var item = this.list[i];
