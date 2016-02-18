@@ -95,7 +95,7 @@
 
       var color = d3.scale.category20();
 
-      var initData = angular.copy(scope.data);
+      var initData = sortObj(scope.data);
 
       scope.projectSelect = 'project';
 
@@ -119,6 +119,7 @@
           legendList = tmp.legendList;
 
           scope.entities = newEntities = getInitEntities(legendList, color);
+          d3.select('.legend .date').text('');
         }
 
         var margin = {
@@ -133,10 +134,10 @@
           bottom: 30,
           left: 20
         };
-        var marginLegend = 225;
-        var inlineMode = newWidth > 500;
+        var marginLegend = 325;
+        var inlineMode = newWidth > 600;
 
-        var xTicksCount = (newWidth - marginLegend) > 400 ? 5 : 3;
+        var xTicksCount = (newWidth - marginLegend) > 640 ? 8 : 3;
         var width = (inlineMode  ? newWidth - marginLegend : newWidth) - margin.left - margin.right;
         var height = 450 - margin.top - margin.bottom;
         var height2 = 450 - margin2.top - margin2.bottom;
@@ -157,8 +158,8 @@
         var yLeftMin = d3.min(min);
         var yLeftMax = d3.max(max);
         if (yLeftMin === yLeftMax) {
-          yLeftMin -= .1;
-          yLeftMax += .1;
+          yLeftMin -= 0.1;
+          yLeftMax += 0.1;
         }
 
         var yLeftScale = d3.scale.linear().domain([yLeftMin, yLeftMax]).range([height, 0]);
@@ -212,7 +213,7 @@
 
 
         drawHorizontalAxis(focus, xAxis, width, height, '', '');
-        drawVerticalAxis(focus, yLeftAxis, 'price', '');
+        drawVerticalAxis(focus, yLeftAxis, 'cost $', '');
 
         // make grid
         focus.append('g')
@@ -259,7 +260,10 @@
 
         var brush = d3.svg.brush()
           .x(xScale2)
+          .extent(getBrushExtent(data))
           .on('brush', brushed);
+
+        brushed();
 
         var context = canvas.append('g').attr('transform', 'translate(' + margin2.left + ',' + margin2.top + ')');
         context.append('path')
@@ -308,12 +312,36 @@
       }
     }
 
-    legendList.push({ full: "total", title: 'Total', name: 'total' });
+    legendList.push({ full: 'total', title: 'Total', name: 'total' });
 
     return {
       rData: rData,
       legendList: legendList
     };
+  }
+
+  function sortObj( obj, order ) {
+    var i,
+      tempArry = Object.keys(obj),
+      tempObj = {};
+
+    tempArry.sort(
+      function(a, b) {
+        return a.toLowerCase().localeCompare( b.toLowerCase() );
+      }
+    );
+
+    if (order === 'desc') {
+      for ( i = tempArry.length - 1; i >= 0; i-- ) {
+        tempObj[ tempArry[i] ] = obj[ tempArry[i] ];
+      }
+    } else {
+      for ( i = 0; i < tempArry.length; i++ ) {
+        tempObj[ tempArry[i] ] = obj[ tempArry[i] ];
+      }
+    }
+
+    return tempObj;
   }
 
   function getLegendList(data, type) {
@@ -342,13 +370,21 @@
     return list;
   }
 
+  function getBrushExtent(data) {
+    var firstDate = moment(data[0].date);
+    var lastDate = moment(data[data.length - 1].date);
+    var lastYear = moment(data[data.length - 1].date).subtract('years', 1);
+
+    return [(firstDate < lastYear ? lastYear : firstDate).toDate(), lastDate.toDate()];
+  }
+
   function getShortProjectName(name) {
     return name.split('|')[0].trim();
   }
 
   function hoverCallback(entities) {
     entities.forEach(function(e) {
-      d3.select('.legend .current_value__' + e.name).text(e.currentValue.toFixed(2));
+      d3.select('.legend .current_value__' + e.name).text(e.currentValue.toFixed(2) + '$');
     });
     d3.select('.legend .date').text(d3.time.format('%Y %b')(entities[entities.length - 1].currentDate));
   }
