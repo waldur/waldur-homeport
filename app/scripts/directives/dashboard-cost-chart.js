@@ -281,7 +281,7 @@
 
         // --- Below chart ---
 
-        hover(color, data, rData, entities, focus, width, height, xScale, yLeftScale, hoverCallback);
+        hover(bindId, color, data, rData, entities, focus, width, height, xScale, yLeftScale, hoverCallback);
 
       }
     }
@@ -432,9 +432,14 @@
     return data;
   }
 
-  function hover(color, data, rData, entities, focus, width, height, xScale, yLeftScale, onMove) {
+  function hover(bindId, color, data, rData, entities, focus, width, height, xScale, yLeftScale, onMove) {
     var bisectX = d3.bisector(function(d) { return d.date; }).right;
     var bisect = d3.bisector(function(d) { return d; }).right;
+
+    // Define the div for the tooltip
+    var tooltip = d3.select(bindId).append('div')
+      .attr('class', 'tooltip-cost')
+      .style('opacity', 0);
 
     var hoverTool = function() {
       var x = d3.mouse(this)[0];
@@ -469,12 +474,35 @@
           var idx = bisect(lineDataX, +timestamp);
           var valueY = lineDataY[idx];
 
-          hoverPoints[i].attr('cy', yLeftScale(valueY));
+          (entity.name !== 'total') && hoverPoints[i].attr('cy', yLeftScale(valueY));
         });
       }
 
       onMove(entities);
     };
+
+    var hoverRect = focus.append('svg:rect')
+      .attr('width', width)
+      .attr('height', height)
+      .attr('fill', 'transparent')
+      .attr('class', 'hover-rect');
+
+    // Add mouseover events.
+    d3.select('.hover-rect').on('mouseover', function() {
+    }).on('mousemove', function() {
+      hoverTool.call(this);
+    }).on('touchmove', function() {
+      hoverTool.call(this);
+    }).on('mouseout', function(e) {
+      console.log(e);
+      var x = d3.mouse(this)[0];
+      var rectSize = this.getBoundingClientRect();
+      if (x < 0 || x >= rectSize.width) {
+        hoverLineGroup.style('opacity', 0);
+      }
+    }).on('touchend', function() {
+      hoverLineGroup.style('opacity', 0);
+    });
 
     // Hover line group. Hide hover group by default.
     var hoverLineGroup = focus.append('g')
@@ -487,33 +515,29 @@
       .attr('x1', 0).attr('x2', 0)
       .attr('y1', 0).attr('y2', height);
 
-
-    var hoverPoints = entities.map(function(entity) {
-      return hoverLineGroup
-        .append('circle')
-        .attr('class', 'hover_point__' + entity.name)
-        .attr('cx', 0)
-        .attr('cy', 25)
-        .attr('r', 5)
-        .attr('fill', color(entity.name));
-    });
-
-    focus.append('svg:rect')
-      .attr('width', width)
-      .attr('height', height)
-      .attr('fill', 'transparent')
-      .attr('class', 'hover-rect');
-
-    // Add mouseover events.
-    d3.select('.hover-rect').on('mouseover', function() {
-    }).on('mousemove', function() {
-      hoverTool.call(this);
-    }).on('touchmove', function() {
-      hoverTool.call(this);
-    }).on('mouseout', function() {
-      hoverLineGroup.style('opacity', 0);
-    }).on('touchend', function() {
-      hoverLineGroup.style('opacity', 0);
+    var hoverPoints = entities
+      .filter(function(entity) { return entity.name !== 'total'; })
+      .map(function(entity) {
+        return hoverLineGroup
+          .append('circle')
+          .attr('class', 'hover_point__' + entity.name)
+          .attr('cx', 0)
+          .attr('cy', 25)
+          .attr('r', 5)
+          .attr('fill', color(entity.name))
+          .on('mouseover', function() {
+            tooltip.transition()
+              .duration(200)
+              .style('opacity', .9);
+            tooltip.html(entity.title)
+              .style('left', (d3.event.layerX + 10) + 'px')
+              .style('top', (d3.event.layerY - 28) + 'px');
+          })
+          .on('mouseout', function() {
+            tooltip.transition()
+              .duration(500)
+              .style('opacity', 0);
+          });
     });
   }
 
