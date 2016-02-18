@@ -114,6 +114,7 @@
           sourceType = newValue[2];
 
         if (oldValue[2] !== sourceType) {
+          color = d3.scale.category20();
           tmp = init(initData, sourceType);
           rData = tmp.rData;
           legendList = tmp.legendList;

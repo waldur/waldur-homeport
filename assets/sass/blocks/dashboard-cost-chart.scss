@@ -55,63 +55,26 @@
             font-size: 16px;
         }
         .switch {
-            input[type="checkbox"] {
+            .source-switch {
                 display: none;
             }
-            input[type="checkbox"]+label {
-                display: block;
-                width: 100%;
+            label {
+                display: inline-block;
                 position: relative;
-                background: #fafafa;
+                background: $main-background-color;
                 border: 1px solid #ccc;
                 height: 25px;
                 border-radius: 2px;
-                span {
-                    display: block;
-                    width: 50%;
-                    position: absolute;
-                    height: 100%;
-                    z-index: 1;
-                    color: #333;
-                    text-align: center;
-                    line-height: 25px;
-                    transition: color .2s;
-                    transition-delay: .3s;
-                    &.on {
-                        left: 0;
-                        color: #fff;
-                    }
-                    &.off {
-                        right: 0;
-                        cursor: pointer;
-                    }
-                }
-                &:after {
-                    content: '';
-                    display: block;
-                    position: absolute;
+                width: 92px;
+                z-index: 1;
+                color: #333;
+                text-align: center;
+                line-height: 25px;
+
+                &.on {
                     left: 0;
-                    top: 0;
-                    width: 50%;
+                    color: #fff;
                     background: $button-green;
-                    height: 100%;
-                    transition: left .5s ease-in-out;
-                    border-radius: 2px;
-                }
-            }
-            input[type="checkbox"]:checked+label {
-                span {
-                    &.on {
-                        color: #333;
-                        cursor: pointer;
-                    }
-                    &.off {
-                        color: #fff;
-                        cursor: default;
-                    }
-                }
-                &:after {
-                    left: 50%;
                 }
             }
         }
