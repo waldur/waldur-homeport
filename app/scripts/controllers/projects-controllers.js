@@ -221,8 +221,8 @@
       },
       afterSave: function() {
         var vm = this;
-        joinServiceProjectLinkService.addProject(vm.project).then(function() {
-          $rootScope.$broadcast('refreshProjectList', {model: vm.project, new: true, current: true});
+        joinServiceProjectLinkService.addProject(vm.project).then(function(project) {
+          $rootScope.$broadcast('refreshProjectList', {model: project, new: true, current: true});
         });
         vm._super();
       },

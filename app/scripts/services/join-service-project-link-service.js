@@ -32,7 +32,9 @@
               return vm.add(spl, service.url, project.url);
             });
           });
-          return $q.all(promises);
+          return $q.all(promises).then(function() {
+            return projectsService.$get(project.uuid);
+          });
         });
       },
       addService: function(service) {
