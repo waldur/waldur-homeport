@@ -514,7 +514,7 @@
       removeProject: function () {
         var confirmDelete = confirm('Confirm deletion?');
         if (confirmDelete) {
-          this.project.$delete().then(function() {
+          return this.project.$delete().then(function() {
             projectsService.clearAllCacheForCurrentEndpoint();
             return projectsService.getFirst().then(function(project) {
               currentStateService.setProject(project);
