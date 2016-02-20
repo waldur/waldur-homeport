@@ -56,7 +56,7 @@
             currentStateService.isQuotaExceeded('resource').then(function(response) {
               if (!response) {
                 vm.actionButtonsListItems.push({
-                  title: 'Create resource',
+                  title: 'Add resource',
                   icon: 'fa-plus',
                   clickFunction: function(project) {
                     $rootScope.$broadcast('adjustCurrentProject', project);

@@ -34,7 +34,7 @@
         this.checkProjects();
         this.actionButtonsListItems = [
           {
-            title: 'Delete',
+            title: 'Remove',
             icon: 'fa-trash',
             clickFunction: this.remove.bind(this.controllerScope),
 
@@ -44,13 +44,13 @@
 
             tooltip: function(service) {
               if (service.shared) {
-                return 'You cannot delete shared provider';
+                return 'You cannot remove shared provider';
               }
               if (!this.canUserManageService) {
-                return 'Only customer owner or staff can delete provider';
+                return 'Only customer owner or staff can remove provider';
               }
               if (service.resources_count > 0) {
-               return 'Provider has resources. Please delete them first';
+               return 'Provider has resources. Please remove them first';
               }
             }.bind(this.controllerScope),
           }
@@ -60,7 +60,7 @@
             noDataText: 'No providers yet.',
             noMatchesText: 'No providers found matching filter.',
             createLink: 'services.create',
-            createLinkText: 'Create provider',
+            createLinkText: 'Add provider',
             checkQuotas: 'service',
             timer: ENV.providersTimerInterval,
             rowTemplateUrl: 'views/service/row.html'
