@@ -196,23 +196,38 @@
           }
         });
       },
-      openMap: function() {
-        function hasCoordinates(item) {
+      getMarkers: function() {
+        var items = this.controllerScope.list.filter(function hasCoordinates(item) {
           return item.latitude != null && item.longitude != null;
-        }
+        });
 
-        function makeMarker(item) {
-          return {
+        var points = {};
+        items.forEach(function groupMarkersByCoordinates(item) {
+          var key = [item.latitude, item.longitude];
+          if (!points[key]) {
+            points[key] = [];
+          }
+          points[key].push(item);
+        });
+
+        var markers = [];
+        angular.forEach(points, function createMarker(items) {
+          var item = items[0];
+          var message = items.map(function(item) {
+            return item.name;
+          }).join('<br/>');
+          markers.push({
             lat: item.latitude,
             lng: item.longitude,
-            message: item.name
-          };
-        }
+            message: message
+          });
+        });
+        return markers;
+      },
+      openMap: function() {
+        var markers = this.getMarkers();
 
-        var items = this.list.filter(hasCoordinates);
-        var markers = items.map(makeMarker);
-
-        if(!items) {
+        if(!markers) {
           alert('No virtual machines with coordinates');
         } else {
           var scope = $rootScope.$new();
