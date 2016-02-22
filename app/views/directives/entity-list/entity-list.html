@@ -40,7 +40,7 @@
         </h2>
         <div class="decision">
             <div class="col">
-                <div ng-include="'views/directives/entity-list/table-actions.html'"></div>
+                <div ng-hide="entityList.hideNoDataText" ng-include="'views/directives/entity-list/table-actions.html'"></div>
             </div>
         </div>
     </div>

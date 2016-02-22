@@ -138,6 +138,7 @@
             }
             this.setProjectCounters(item);
           }
+          this._super();
         },
         checkPermissions: function() {
           var vm = this;
