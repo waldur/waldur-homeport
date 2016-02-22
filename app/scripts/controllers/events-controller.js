@@ -53,6 +53,7 @@
           event.html_message = eventFormatter.format(event);
           event.icon = eventFormatter.getIcon(event) || 'fa-bell-o';
         });
+        this._super();
       }
     });
 
@@ -114,6 +115,7 @@
           alert.html_message = alertFormatter.format(alert);
           alert.icon = alertFormatter.getIcon(alert) || 'fa-bolt';
         });
+        this._super();
       }
     });
   }

@@ -258,6 +258,7 @@
       },
       afterGetList: function() {
         angular.forEach(this.list, resourceUtils.setAccessInfo);
+        this._super();
       },
       adjustSearchFilters: function() {
         var vm = this,

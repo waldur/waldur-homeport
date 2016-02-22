@@ -293,8 +293,7 @@
             }
           ]
         };
-      },
-      afterGetList: function() {}
+      }
     });
 
     controllerScope.__proto__ = new InvoicesController();
