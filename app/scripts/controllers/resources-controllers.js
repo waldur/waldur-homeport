@@ -63,6 +63,7 @@
         this.service = resourcesService;
         this.blockUIElement = 'tab-content';
         this._super();
+        this.hideNoDataText = true;
         this.searchFieldName = 'name';
         this.selectAll = true;
         this.hasCustomFilters = false;
@@ -258,6 +259,7 @@
       },
       afterGetList: function() {
         angular.forEach(this.list, resourceUtils.setAccessInfo);
+        this.hideNoDataText = false;
       },
       adjustSearchFilters: function() {
         var vm = this,
