@@ -57,10 +57,10 @@
       newChoice: function(project, link) {
         return {
           title: project.name,
-          selected: !!link.url,
-          link_url: link.url,
+          selected: link && !!link.url,
+          link_url: link && link.url,
           project_url: project.url,
-          subtitle: link.state
+          subtitle: link && link.state
         };
       },
       getContext: function() {
