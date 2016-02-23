@@ -145,7 +145,6 @@
   angular.module('ncsaas')
     .controller('ServiceAddController', [
       'servicesService',
-      'joinServiceProjectLinkService',
       'joinService',
       'currentStateService',
       'baseControllerAddClass',
@@ -158,7 +157,6 @@
 
   function ServiceAddController(
     servicesService,
-    joinServiceProjectLinkService,
     joinService,
     currentStateService,
     baseControllerAddClass,
@@ -218,10 +216,8 @@
         var vm = this;
         return this.service.create(this.model.url, data).then(function(response) {
           vm.instance = response;
-          joinServiceProjectLinkService.addService(vm.instance).then(function() {
-            $rootScope.$broadcast('refreshProjectList');
-            $rootScope.$broadcast('customerBalance:refresh');
-          });
+          $rootScope.$broadcast('refreshProjectList');
+          $rootScope.$broadcast('customerBalance:refresh');
         });
       },
       getFilename: ncUtils.getFilename,

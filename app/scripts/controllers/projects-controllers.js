@@ -188,7 +188,6 @@
     .controller('ProjectAddController', [
       'projectsService',
       'currentStateService',
-      'joinServiceProjectLinkService',
       'baseControllerAddClass',
       '$rootScope',
       '$state',
@@ -198,7 +197,6 @@
   function ProjectAddController(
     projectsService,
     currentStateService,
-    joinServiceProjectLinkService,
     baseControllerAddClass,
     $rootScope,
     $state,
@@ -220,12 +218,11 @@
           vm.project.customer = customer.url;
         });
       },
-      afterSave: function() {
-        var vm = this;
-        joinServiceProjectLinkService.addProject(vm.project).then(function() {
-          $rootScope.$broadcast('refreshProjectList', {model: vm.project, new: true, current: true});
+      afterSave: function(project) {
+        $rootScope.$broadcast('refreshProjectList', {
+          model: project, new: true, current: true
         });
-        vm._super();
+        this._super();
       },
       onError: function(errorObject) {
         ncUtilsFlash.error(errorObject.data.detail);
