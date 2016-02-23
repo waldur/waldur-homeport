@@ -60,6 +60,7 @@
         this.service.page = 1;
         this.service.cacheTime = this.cacheTime;
         this._super();
+        this.hideNoDataText = true;
         this.listPromise = this.getList();
         this.blockListElement();
         // reset after state change
@@ -82,7 +83,9 @@
           ncUtils.blockElement(this.blockUIElement, this.listPromise);
         }
       },
-      afterGetList: function() {},
+      afterGetList: function() {
+        this.hideNoDataText = false;
+      },
       generalSearchChanged: function(event, text) {
         this.controllerScope.searchInput = text;
         this.controllerScope.search();

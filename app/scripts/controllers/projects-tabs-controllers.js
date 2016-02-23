@@ -265,108 +265,12 @@
         this._super();
 
         this.entityOptions.entityData.noDataText = 'You have no applications yet';
-        this.entityOptions.entityData.createLinkText = 'Create application';
+        this.entityOptions.entityData.createLinkText = 'Add application';
         this.entityOptions.entityData.importLinkText = 'Import application';
         this.entityOptions.entityData.noMatchesText = 'No applications found matching filter.';
       }
     });
     controllerScope.__proto__ = new ResourceController();
-  }
-})();
-
-(function() {
-  angular.module('ncsaas')
-    .controller('ProjectServicesTabController',
-    ['baseControllerListClass',
-      'joinServiceProjectLinkService',
-      'joinService',
-      'currentStateService',
-      'ENTITYLISTFIELDTYPES',
-      '$rootScope',
-      ProjectServicesTabController]);
-
-  function ProjectServicesTabController(
-    baseControllerListClass,
-    joinServiceProjectLinkService,
-    joinService,
-    currentStateService,
-    ENTITYLISTFIELDTYPES,
-    $rootScope) {
-    var controllerScope = this;
-    var ServiceController = baseControllerListClass.extend({
-      init: function() {
-        this.service = joinService;
-        this.service.defaultFilter.project_uuid = currentStateService.getProjectUuid();
-        this.controllerScope = controllerScope;
-        this.blockUIElement = 'tab-content';
-        this._super();
-        this.actionButtonsListItems = [
-          {
-            title: 'Remove',
-            clickFunction: this.remove.bind(controllerScope),
-
-            isDisabled: function(service) {
-              return service.shared || service.resources_count > 0;
-            }.bind(this.controllerScope),
-
-            tooltip: function(service) {
-              if (service.shared) {
-                return 'You cannot remove shared provider';
-              }
-              if (service.resources_count) {
-                return 'Provider has resources. Remove them first';
-              }
-            }.bind(this.controllerScope)
-          }
-        ];
-        this.entityOptions = {
-          entityData: {
-            noDataText: 'No providers yet',
-            createLink: 'services.create',
-            createLinkText: 'Create provider',
-            checkQuotas: 'service'
-          },
-          list: [
-            {
-              type: ENTITYLISTFIELDTYPES.statusCircle,
-              className: 'statusCircle',
-              propertyName: 'state',
-              onlineStatus: 'In Sync'
-            },
-            {
-              name: 'Name',
-              propertyName: 'name',
-              type: ENTITYLISTFIELDTYPES.name,
-              link: 'organizations.details({uuid: "' + currentStateService.getCustomerUuid()
-              + '", providerType: entity.service_type, providerUuid: entity.uuid, tab: "providers"})',
-              className: 'name'
-            },
-            {
-              name: 'Type',
-              propertyName: 'service_type',
-              type: ENTITYLISTFIELDTYPES.noType
-            },
-            {
-              name: 'Resources',
-              propertyName: 'resources_count',
-              emptyText: '0'
-            }
-          ]
-        };
-      },
-      getList: function(filter) {
-        return this._super(filter);
-      },
-      removeInstance: function(model) {
-        return joinServiceProjectLinkService.$deleteByUrl(model.url);
-      },
-      afterInstanceRemove: function(instance) {
-        $rootScope.$broadcast('refreshProjectList');
-        this._super(instance);
-      }
-    });
-
-    controllerScope.__proto__ = new ServiceController();
   }
 })();
 

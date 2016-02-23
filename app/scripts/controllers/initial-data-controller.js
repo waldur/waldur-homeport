@@ -9,7 +9,6 @@
      'baseControllerClass',
      'customersService',
      'projectsService',
-     'joinServiceProjectLinkService',
      'plansService',
      'currentStateService',
      'joinService',
@@ -26,7 +25,6 @@
     baseControllerClass,
     customersService,
     projectsService,
-    joinServiceProjectLinkService,
     plansService,
     currentStateService,
     joinService,
@@ -162,8 +160,8 @@
         return project.$save().then(function(model) {
           vm.project = model;
           currentStateService.setProject(vm.project);
-          return joinServiceProjectLinkService.addProject(vm.project).then(function() {
-            $rootScope.$broadcast('refreshProjectList', {model: vm.project, new: true, current: true});
+          $rootScope.$broadcast('refreshProjectList', {
+            model: vm.project, new: true, current: true
           });
         });
       },

@@ -163,7 +163,7 @@
         this._super();
 
         this.entityOptions.entityData.noDataText = 'You have no applications yet';
-        this.entityOptions.entityData.createLinkText = 'Create application';
+        this.entityOptions.entityData.createLinkText = 'Add application';
         this.entityOptions.entityData.importLinkText = 'Import application';
         this.entityOptions.entityData.noMatchesText = 'No applications found matching filter.';
       }
@@ -293,8 +293,7 @@
             }
           ]
         };
-      },
-      afterGetList: function() {}
+      }
     });
 
     controllerScope.__proto__ = new InvoicesController();

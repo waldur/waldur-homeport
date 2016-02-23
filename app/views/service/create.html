@@ -43,8 +43,8 @@
         <div class="divider"></div>
         <div class="form-row reverse">
             <div>
-                <a ui-sref="help.details({name: ServiceAdd.model.serviceName})" target="_blank" class="pull-right">Obtaining
-                    credentials</a>
+                <a ui-sref="help.details({name: ServiceAdd.model.name})"
+                   target="_blank" class="pull-right">Obtaining credentials</a>
             </div>
         </div>
         <div class="form-row">
@@ -92,6 +92,11 @@
                         ng-init="option.value=option.choices[0].value"
                         ng-options="item.value as item.display_name for item in option.choices">
                 </select>
+
+                <input id="{{ ServiceAdd.model.name }}_{{ option.key }}"
+                       type="checkbox"
+                       ng-if="option.type == 'boolean'"
+                       ng-model="option.value"/>
 
                 <div class="error arrow-up" ng-show="ServiceAdd.errors[option.key]">
                     <ul class="error-list">

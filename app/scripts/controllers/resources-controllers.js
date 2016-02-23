@@ -40,7 +40,6 @@
     'projectsService',
     'ngDialog',
     '$rootScope',
-    'ncUtils',
     'resourceUtils',
     baseResourceListController
     ]);
@@ -56,14 +55,12 @@
     projectsService,
     ngDialog,
     $rootScope,
-    ncUtils,
     resourceUtils) {
     var ControllerListClass = baseControllerListClass.extend({
       init: function() {
         this.service = resourcesService;
         this.blockUIElement = 'tab-content';
         this._super();
-        this.hideNoDataText = true;
         this.searchFieldName = 'name';
         this.selectAll = true;
         this.hasCustomFilters = false;
@@ -181,7 +178,7 @@
           if (project) {
             if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('resources') == -1) {
               vm.entityOptions.entityData.createLink = 'appstore.store';
-              vm.entityOptions.entityData.createLinkText = 'Create';
+              vm.entityOptions.entityData.createLinkText = 'Add';
             }
             if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('import') == -1) {
               vm.entityOptions.entityData.importLink = 'import.import';
@@ -259,7 +256,7 @@
       },
       afterGetList: function() {
         angular.forEach(this.list, resourceUtils.setAccessInfo);
-        this.hideNoDataText = false;
+        this._super();
       },
       adjustSearchFilters: function() {
         var vm = this,
