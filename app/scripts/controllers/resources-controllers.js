@@ -35,6 +35,7 @@
     'ENV',
     'ENTITYLISTFIELDTYPES',
     'resourcesService',
+    'priceEstimationService',
     'servicesService',
     'currentStateService',
     'projectsService',
@@ -51,6 +52,7 @@
     ENV,
     ENTITYLISTFIELDTYPES,
     resourcesService,
+    priceEstimationService,
     servicesService,
     currentStateService,
     projectsService,
@@ -342,6 +344,7 @@
         }
         this._super(resource);
         projectsService.clearAllCacheForCurrentEndpoint();
+        priceEstimationService.clearAllCacheForCurrentEndpoint();
       },
       isOperationAvailable: function(operation, resource) {
         var availableOperations = this.service.getAvailableOperations(resource);

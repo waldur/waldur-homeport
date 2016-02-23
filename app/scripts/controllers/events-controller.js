@@ -171,6 +171,7 @@
 
       activate: function() {
         var vm = this;
+        priceEstimationService.cacheTime = 1000 * 60 * 10;
         priceEstimationService.pageSize = 1000;
         priceEstimationService.getList().then(function(rows) {
           vm.processChartData(rows);
@@ -217,36 +218,32 @@
       },
 
       processChartData: function(rows) {
-        var labels = [];
-        var totals = [];
+        var result = {};
         rows.forEach(function(row) {
-          if (row.scope_type == 'customer') {
-            labels.unshift(moment(row.month, 'MM').format('MMMM'));
-            totals.unshift(row.total);
+          if (['customer', 'service', 'project', 'resource'].indexOf(row.scope_type) >= 0) {
+            var date = moment(row.month + ' ' + row.year, 'MM YYYY');
+            var key = date.format("YYYYMM");
+
+            if (!result[key]) {
+
+              result[key] = {
+                customer: [],
+                service: [],
+                project: [],
+                resource: []
+              };
+            }
+
+            result[key][row.scope_type].push({
+              name: row.scope_name,
+              value: row.total
+            });
+
           }
         });
         blockUI.stop();
 
-        this.chartOptions = {
-          bezierCurve: false,
-          responsive: true,
-          animationEasing: 'linear'
-        };
-
-        this.costData = {
-          labels: labels,
-          datasets: [
-            {
-              fillColor: 'rgba(123, 166, 196,0.5)',
-              strokeColor: 'rgba(123, 166, 196,1)',
-              pointColor: 'rgba(123, 166, 196,1)',
-              pointStrokeColor: '#fff',
-              pointHighlightFill: '#fff',
-              pointHighlightStroke: 'rgba(123, 166, 196,1)',
-              data: totals
-            }
-          ]
-        };
+        this.costData = result;
       },
 
       processTableData: function(rows) {

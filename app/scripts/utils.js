@@ -144,7 +144,30 @@
           }
         }
         return list1;
+      },
+      sortObj: function(obj, order) {
+        var i,
+          tempArry = Object.keys(obj),
+          tempObj = {};
+
+        tempArry.sort(
+          function(a, b) {
+            return a.toLowerCase().localeCompare(b.toLowerCase());
+          }
+        );
+
+        if (order === 'desc') {
+          for (i = tempArry.length - 1; i >= 0; i--) {
+            tempObj[tempArry[i]] = obj[tempArry[i]];
+          }
+        } else {
+          for (i = 0; i < tempArry.length; i++) {
+            tempObj[tempArry[i]] = obj[tempArry[i]];
+          }
+        }
+
+        return tempObj;
       }
-    }
+    };
   }
 })();
