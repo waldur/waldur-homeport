@@ -79,7 +79,7 @@ for(var i = 0; i < addProjectTestData.length; i++) {
         // fill name
         element(by.model('ProjectAdd.project.name')).sendKeys(projectName);
 
-        element(by.cssContainingText('a.button-apply', 'Create project')).click();
+        element(by.cssContainingText('a.button-apply', 'Add project')).click();
 
         expect(element(by.cssContainingText('.details-about .name', projectName)).isPresent()).toBe(true);
       });
