@@ -1,0 +1,34 @@
+<div class="table-action" ng-if="entityOptions.entityData.openMap && entityList.list.length > 0">
+    <a class="button" ng-click="entityOptions.entityData.openMap()">
+      <i class="icon map-marker"></i> Open map
+    </a>
+</div>
+
+<div class="table-action" ng-if="entityOptions.entityData.createLink">
+  <div class="tooltip-relative"
+       check-quotas="{{entityOptions.entityData.checkQuotas}}"
+       sref="{{ entityOptions.entityData.createLink }}"
+       class-link="button"
+       tooltip-type="list-items">
+        <i class="icon plus"></i>
+        {{ entityOptions.entityData.createLinkText }}
+  </div>
+</div>
+
+<div class="table-action" ng-if="entityOptions.entityData.importLink" visible="import">
+  <div class="tooltip-relative"
+       check-quotas="{{entityOptions.entityData.checkQuotas}}"
+       sref="{{ entityOptions.entityData.importLink }}"
+       class-link="button"
+       tooltip-type="list-items"
+       title="{{ entityOptions.entityData.importLinkTooltip }}">
+        <i class="icon fa-cloud-download"></i>
+        {{ entityOptions.entityData.importLinkText }}
+  </div>
+</div>
+
+<div class="table-action">
+  <list-cache-reset list-controller="entityList"
+                    list-service="entityService"
+                    list-timer="entityOptions.entityData.timer"></list-cache-reset>
+</div>

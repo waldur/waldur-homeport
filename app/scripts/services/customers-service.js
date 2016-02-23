@@ -2,9 +2,9 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('customersService', ['baseServiceClass', '$q', customersService]);
+    .service('customersService', ['baseServiceClass', '$state', '$q', 'ENV', customersService]);
 
-  function customersService(baseServiceClass, $q) {
+  function customersService(baseServiceClass, $state, $q, ENV) {
     var ServiceClass = baseServiceClass.extend({
       filterByCustomer: false,
 
@@ -25,7 +25,8 @@
             if (customers.length !== 0) {
               deferred.resolve(customers[0]);
             } else {
-              deferred.resolve(undefined);
+              $state.go('initialdata.view');
+              deferred.reject();
             }
           }
         );
@@ -39,6 +40,19 @@
       getCounters: function(query) {
         var query = angular.extend({operation: 'counters'}, query);
         return this.getFactory(false).get(query).$promise;
+      },
+      getTopMenuList: function () {
+        var deferred = $q.defer();
+
+        this.pageSize = ENV.topMenuCustomersCount;
+        this.cacheTime = ENV.topMenuCustomersCacheTime;
+        this.getList().then(function(response) {
+          deferred.resolve(response);
+        });
+        // reset pageSize
+        this.pageSize = ENV.pageSize;
+
+        return deferred.promise;
       }
     });
     return new ServiceClass();

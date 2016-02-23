@@ -15,7 +15,8 @@ angular.module('ncsaas')
       'templates',
       'monitoring',
       'projectGroups',
-      'plans'
+      'plans',
+      'compare'
     ],
     featuresVisible: false,
     appStoreCategories: [

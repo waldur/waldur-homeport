@@ -3,11 +3,19 @@
 (function() {
   angular.module('ncsaas')
     .service('baseEventListController', [
-      'baseControllerListClass', 'eventsService', 'ENTITYLISTFIELDTYPES', 'eventFormatter', 'ENV',
+      'baseControllerListClass',
+      'eventsService',
+      'ENTITYLISTFIELDTYPES',
+      'eventFormatter',
+      'ENV',
       baseEventListController]);
 
   function baseEventListController(
-    baseControllerListClass, eventsService, ENTITYLISTFIELDTYPES, eventFormatter, ENV) {
+    baseControllerListClass,
+    eventsService,
+    ENTITYLISTFIELDTYPES,
+    eventFormatter,
+    ENV) {
     var ControllerListClass = baseControllerListClass.extend({
       init:function() {
         this.service = eventsService;
@@ -24,20 +32,17 @@
             {
               propertyName: 'icon',
               className: 'icon',
-              type: ENTITYLISTFIELDTYPES.fontIcon,
-              showForMobile: true
+              type: ENTITYLISTFIELDTYPES.fontIcon
             },
             {
               propertyName: 'html_message',
               className: 'message',
-              type: ENTITYLISTFIELDTYPES.html,
-              showForMobile: true
+              type: ENTITYLISTFIELDTYPES.html
             },
             {
               propertyName: '@timestamp',
               className: 'date',
-              type: ENTITYLISTFIELDTYPES.date,
-              showForMobile: true
+              type: ENTITYLISTFIELDTYPES.date
             }
           ]
         };
@@ -46,8 +51,9 @@
       afterGetList: function() {
         angular.forEach(this.list, function(event) {
           event.html_message = eventFormatter.format(event);
-          event.icon = eventFormatter.getIcon(event);
+          event.icon = eventFormatter.getIcon(event) || 'fa-bell-o';
         });
+        this._super();
       }
     });
 
@@ -87,22 +93,19 @@
             {
               propertyName: 'icon',
               className: 'icon',
-              type: ENTITYLISTFIELDTYPES.fontIcon,
-              showForMobile: true
+              type: ENTITYLISTFIELDTYPES.fontIcon
             },
             {
               name: 'Message',
               propertyName: 'html_message',
               className: 'message',
-              type: ENTITYLISTFIELDTYPES.html,
-              showForMobile: true
+              type: ENTITYLISTFIELDTYPES.html
             },
             {
               name: 'Date',
               propertyName: 'created',
               className: 'date',
-              type: ENTITYLISTFIELDTYPES.date,
-              showForMobile: true
+              type: ENTITYLISTFIELDTYPES.date
             }
           ]
         };
@@ -110,8 +113,9 @@
       afterGetList: function() {
         angular.forEach(this.list, function(alert) {
           alert.html_message = alertFormatter.format(alert);
-          alert.icon = alertFormatter.getIcon(alert);
+          alert.icon = alertFormatter.getIcon(alert) || 'fa-bolt';
         });
+        this._super();
       }
     });
   }

@@ -10,11 +10,19 @@
       '$rootScope',
       '$state',
       'ENV',
+      'ncUtils',
       CustomerListController
     ]);
 
   function CustomerListController(
-    customersService, baseControllerListClass, usersService, ENTITYLISTFIELDTYPES, $rootScope, $state, ENV) {
+    customersService,
+    baseControllerListClass,
+    usersService,
+    ENTITYLISTFIELDTYPES,
+    $rootScope,
+    $state,
+    ENV,
+    ncUtils) {
     var controllerScope = this;
     var CustomerController = baseControllerListClass.extend({
       init:function() {
@@ -26,6 +34,7 @@
         this.actionButtonsListItems = [
           {
             title: 'Remove',
+            icon: 'fa-trash',
             clickFunction: this.remove.bind(controllerScope),
 
             isDisabled: function(customer) {
@@ -43,6 +52,7 @@
           },
           {
             title: 'Add provider',
+            icon: 'fa-plus',
             clickFunction: function(customer) {
               $rootScope.$broadcast('adjustCurrentCustomer', customer);
               $state.go('services.create')
@@ -55,7 +65,8 @@
             noMatchesText: 'No organizations found matching filter.',
             title: 'Organizations',
             createLink: 'organizations.create',
-            createLinkText: 'Add organization'
+            createLinkText: 'Add organization',
+            rowTemplateUrl: 'views/customer/row.html'
           },
           list: [
             {
@@ -100,6 +111,14 @@
             }
           }
         }
+        this.getQuotas();
+        this._super();
+      },
+      getQuotas: function() {
+        for (var i = 0; i < this.list.length; i++) {
+          var item = this.list[i];
+          item.quotas_usage = ncUtils.getQuotaUsage(item.quotas);
+        }
       }
     });
 
@@ -120,6 +139,7 @@
       '$rootScope',
       '$scope',
       '$interval',
+      '$timeout',
       '$q',
       '$window',
       'joinService',
@@ -141,6 +161,7 @@
     $rootScope,
     $scope,
     $interval,
+    $timeout,
     $q,
     $window,
     joinService,
@@ -162,7 +183,7 @@
         this.detailsState = 'organizations.details';
         this.currentUser = usersService.currentUser;
         this.detailsViewOptions = {
-          title: 'Organization',
+          title_plural: 'organizations',
           hasLogo: false,
           listState: 'organizations.list',
           aboutFields: [
@@ -249,9 +270,18 @@
         }
       },
 
-      afterActivate: function() {
-        $rootScope.$broadcast('adjustCurrentCustomer', this.model);
+      loadAll: function() {
+        var deferred = $q.defer();
+        this.getModel().then(function(customer) {
+          $rootScope.$broadcast('adjustCurrentCustomer', customer);
+          $timeout(function() {
+            deferred.resolve();
+          });
+        });
+        return deferred.promise;
+      },
 
+      afterActivate: function() {
         controllerScope.canEdit = controllerScope.isOwnerOrStaff(controllerScope.model);
         controllerScope.updateImageUrl();
 
@@ -260,7 +290,6 @@
         $scope.$on('$destroy', function() {
           $interval.cancel(timer);
         });
-        this.service.getBalanceHistory(this.model.uuid).then(this.processChartData.bind(this));
       },
 
       getCounters: function() {
@@ -324,47 +353,6 @@
       afterUpdate: function() {
         ncUtilsFlash.success('Organization {} is updated'.replace('{}', controllerScope.model.name));
         $rootScope.$broadcast('refreshCustomerList', {model: this.model, update: true});
-      },
-
-      addCredit: function(amount) {
-        var vm = this;
-        var payment = paymentsService.$create();
-        payment.customer = vm.model.url;
-        payment.amount = amount;
-        payment.return_url = $state.href('payment.approve', {}, {absolute: true});
-        payment.cancel_url = $state.href('payment.cancel', {}, {absolute: true});
-
-        return payment.$save(function(payment) {
-          $window.location = payment.approval_url;
-          return true;
-        });
-      },
-
-      processChartData: function(rows) {
-        this.showChart = rows.length > 0;
-
-        var labels = rows.map(function(row) {
-          return moment(row.created).format('D.MM');
-        });
-        var totals = rows.map(function(row) {
-          return row.amount;
-        });
-
-        this.chartData = {
-          labels: labels,
-          datasets: [
-            {
-              label: "Balance",
-              fillColor: "rgba(220,220,220,0.2)",
-              strokeColor: "rgba(220,220,220,1)",
-              pointColor: "rgba(220,220,220,1)",
-              pointStrokeColor: "#fff",
-              pointHighlightFill: "#fff",
-              pointHighlightStroke: "rgba(220,220,220,1)",
-              data: totals
-            }
-          ]
-        };
       }
     });
 

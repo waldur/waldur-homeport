@@ -75,7 +75,7 @@
       selectedResourceImagesPageSize: 10,
       currentCustomer: {},
       currentProject: {},
-      compare: [],
+      showCompare: ENV.showCompare,
       providers: [],
       services: {},
       renderStore: false,
@@ -252,7 +252,9 @@
       },
       countResourceImages: function() {
         var vm = this;
-        resourcesCountService[this.selectedResourceImageApiEndpoint]({customer_uuid: this.currentCustomer.uuid}).then(function(count) {
+        var fn = resourcesCountService[this.selectedResourceImageApiEndpoint];
+        var query = {settings_uuid: vm.selectedService.settings_uuid};
+        fn(query).then(function(count) {
           vm.selectedResourceImagesCount = count;
         });
       },
@@ -671,12 +673,8 @@
       findPrice: function(name, display_name) {
         for (var i = 0; i < this.defaultPriceListItems.length; i++) {
           var priceItem = this.defaultPriceListItems[i];
-          var resourceType = priceItem.resource_type.split(".");
-          var keyExists = display_name.toLowerCase().indexOf(priceItem.key) > -1;
-          resourceType = resourceType[resourceType.length -1];
-          if (priceItem.item_type === name && (keyExists
-            || this.selectedResourceType === resourceType) || (name === 'size' && keyExists)
-          ) {
+          var keyExists = display_name.indexOf(priceItem.key) > -1;
+          if (priceItem.item_type === name && keyExists) {
             return priceItem.value;
           }
         }
@@ -889,14 +887,6 @@
           $state.go('resources.details', {uuid: model.uuid, resource_type: model.resource_type});
         } else if (this.isSupportSelected()) {
           return $state.go('resources.list', {tab: 'premiumSupport'});
-        }
-      },
-      setCompare: function(categoryName) {
-        var index = this.compare.indexOf(categoryName);
-        if (index + 1) {
-          this.compare.splice(index, 1);
-        } else {
-          this.compare.push(categoryName);
         }
       }
     });

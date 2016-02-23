@@ -52,9 +52,7 @@
             @include bp(sm) {
                 display: none;
             } // sm
-            @include bp(md) {
-                display: none;
-            } // md
+
         } // logo-box
         &:not(.logo-box):not(.mobile-trigger):not(.resources):not(.appstore):not(.user-dropdown) {
             @include bp(sm) {

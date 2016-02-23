@@ -2,6 +2,34 @@
 
 (function() {
   angular.module('ncsaas')
+    .service('resourceUtils', ['ncUtils', resourceUtils]);
+
+  function resourceUtils(ncUtils) {
+    return {
+      setAccessInfo: function(item) {
+        item.access_info_text = 'No access info';
+        if (!item.access_url) {
+          return;
+        }
+
+        if (ncUtils.startsWith(item.access_url, "http")) {
+          item.access_info_url = item.access_url;
+          item.access_info_text = 'Open';
+
+          if (ncUtils.endsWith(item.access_url, "/rdp/")) {
+            item.access_info_text = 'Connect';
+          }
+        } else if (angular.isArray(item.access_url)) {
+          // IP addresses
+          item.access_info_text = item.access_url.join(', ');
+        } else {
+          item.access_info_text = item.access_url;
+        }
+      }
+    }
+  }
+
+  angular.module('ncsaas')
     .service('baseResourceListController',
     ['baseControllerListClass',
     'ENV',
@@ -13,6 +41,8 @@
     'projectsService',
     'ngDialog',
     '$rootScope',
+    'ncUtils',
+    'resourceUtils',
     baseResourceListController
     ]);
 
@@ -27,7 +57,9 @@
     currentStateService,
     projectsService,
     ngDialog,
-    $rootScope) {
+    $rootScope,
+    ncUtils,
+    resourceUtils) {
     var ControllerListClass = baseControllerListClass.extend({
       init: function() {
         this.service = resourcesService;
@@ -40,6 +72,7 @@
         this.actionButtonsListItems = [
           {
             title: 'Start',
+            icon: 'fa-play',
             clickFunction: this.startResource.bind(this.controllerScope),
             isHidden: function(model) {
               return !this.isOperationAvailable('start', model);
@@ -50,6 +83,7 @@
           },
           {
             title: 'Stop',
+            icon: 'fa-stop',
             clickFunction: this.stopResource.bind(this.controllerScope),
             isHidden: function(model) {
               return !this.isOperationAvailable('stop', model);
@@ -60,6 +94,7 @@
           },
           {
             title: 'Restart',
+            icon: 'fa-repeat',
             clickFunction: this.restartResource.bind(this.controllerScope),
             isHidden: function(model) {
               return !this.isOperationAvailable('restart', model);
@@ -74,12 +109,14 @@
             isDisabled: function(model) {
               return !this.isOperationEnabled('delete', model);
             }.bind(this.controllerScope),
-            className: 'remove'
+            className: 'remove',
+            icon: 'fa-trash'
           },
           {
             title: 'Unlink',
             clickFunction: this.unlink.bind(this.controllerScope),
-            className: 'remove'
+            className: 'remove',
+            icon: 'fa-unlink'
           }
         ];
         var vm = this;
@@ -88,12 +125,12 @@
             noDataText: 'You have no resources yet.',
             noMatchesText: 'No resources found matching filter.',
             checkQuotas: 'resource',
-            timer: ENV.resourcesTimerInterval
+            timer: ENV.resourcesTimerInterval,
+            rowTemplateUrl: 'views/resource/row.html'
           },
           list: [
             {
               type: ENTITYLISTFIELDTYPES.icon,
-              showForMobile: true,
               className: 'icon',
               getTitle: function(item) {
                 return item.resource_type;
@@ -108,7 +145,6 @@
               propertyName: 'name',
               type: ENTITYLISTFIELDTYPES.name,
               link: 'resources.details({uuid: entity.uuid, resource_type: entity.resource_type})',
-              showForMobile: ENTITYLISTFIELDTYPES.showForMobile,
               className: 'resource-name'
             },
             {
@@ -123,7 +159,6 @@
               type: ENTITYLISTFIELDTYPES.colorState,
               propertyName: 'state',
               className: 'visual-status',
-              showForMobile: true,
               getClass: function(state) {
                 var cls = ENV.resourceStateColorClasses[state];
                 if (cls == 'processing') {
@@ -132,25 +167,22 @@
                   return 'status-circle ' + cls;
                 }
               }
-            },
-            {
-              name: 'Access',
-              linkDisplayName: 'Access',
-              propertyName: 'access_info_text',
-              urlPropertyName: 'access_info_url',
-              type: ENTITYLISTFIELDTYPES.linkOrText,
-              showForMobile: true,
-              className: 'resource-access',
-              initField: vm.setAccessInfo
             }
           ]
         };
+        this.expandableOptions = [
+          {
+            isList: false,
+            addItemBlock: false,
+            viewType: 'resource'
+          }
+        ];
 
         currentStateService.getProject().then(function(project) {
           if (project) {
             if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('resources') == -1) {
               vm.entityOptions.entityData.createLink = 'appstore.store';
-              vm.entityOptions.entityData.createLinkText = 'Create';
+              vm.entityOptions.entityData.createLinkText = 'Add';
             }
             if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('import') == -1) {
               vm.entityOptions.entityData.importLink = 'import.import';
@@ -166,23 +198,38 @@
           }
         });
       },
-      openMap: function() {
-        function hasCoordinates(item) {
+      getMarkers: function() {
+        var items = this.controllerScope.list.filter(function hasCoordinates(item) {
           return item.latitude != null && item.longitude != null;
-        }
+        });
 
-        function makeMarker(item) {
-          return {
+        var points = {};
+        items.forEach(function groupMarkersByCoordinates(item) {
+          var key = [item.latitude, item.longitude];
+          if (!points[key]) {
+            points[key] = [];
+          }
+          points[key].push(item);
+        });
+
+        var markers = [];
+        angular.forEach(points, function createMarker(items) {
+          var item = items[0];
+          var message = items.map(function(item) {
+            return item.name;
+          }).join('<br/>');
+          markers.push({
             lat: item.latitude,
             lng: item.longitude,
-            message: item.name
-          };
-        }
+            message: message
+          });
+        });
+        return markers;
+      },
+      openMap: function() {
+        var markers = this.getMarkers();
 
-        var items = this.list.filter(hasCoordinates);
-        var markers = items.map(makeMarker);
-
-        if(!items) {
+        if(!markers) {
           alert('No virtual machines with coordinates');
         } else {
           var scope = $rootScope.$new();
@@ -210,6 +257,10 @@
         return this.adjustSearchFilters().then(function() {
           return fn(filter);
         });
+      },
+      afterGetList: function() {
+        angular.forEach(this.list, resourceUtils.setAccessInfo);
+        this._super();
       },
       adjustSearchFilters: function() {
         var vm = this,
@@ -249,18 +300,6 @@
           vm.searchFilters = filters;
         });
       },
-      setAccessInfo: function(item) {
-        item.access_info_text = 'No access info';
-        if (item.external_ips && item.external_ips.length > 0) {
-          item.access_info_text = item.external_ips.join(', ');
-        } else if (item.rdp && item.state == 'Online') {
-          item.access_info_url = item.rdp;
-          item.access_info_text = 'Connect';
-        } else if (item.web_url && item.state == 'Online') {
-          item.access_info_url = item.web_url;
-          item.access_info_text = 'Open';
-        }
-      },
       stopResource:function(resource) {
         var vm = this;
         vm.service.operation('stop', resource.url).then(
@@ -283,7 +322,11 @@
         );
       },
       removeInstance: function(resource) {
-        return this.service.$deleteByUrl(resource.url);
+        return this.service.$deleteByUrl(resource.url).then(function(response) {
+          if (response.status === "destroy was scheduled") {
+            resource.state = 'Deletion Scheduled';
+          }
+        });
       },
       unlink: function(resource) {
         var vm = this;
@@ -296,6 +339,9 @@
         );
       },
       afterInstanceRemove: function(resource) {
+        if (resource.state === 'Deletion Scheduled') {
+          return;
+        }
         this._super(resource);
         projectsService.clearAllCacheForCurrentEndpoint();
         priceEstimationService.clearAllCacheForCurrentEndpoint();
@@ -346,7 +392,9 @@
         'ENV',
         'resourcesService',
         'resourcesCountService',
+        'resourceUtils',
         'alertsService',
+        'servicesService',
         'baseControllerDetailUpdateClass',
         'currentStateService',
         ResourceDetailUpdateController
@@ -360,7 +408,9 @@
     ENV,
     resourcesService,
     resourcesCountService,
+    resourceUtils,
     alertsService,
+    servicesService,
     baseControllerDetailUpdateClass,
     currentStateService) {
     var controllerScope = this;
@@ -373,8 +423,8 @@
         this.controllerScope = controllerScope;
         this._super();
         this.detailsViewOptions = {
-          title: 'Resource',
-          listState: 'resources.list',
+          title_plural: 'resources',
+          listState: 'projects.details({uuid: controller.model.project_uuid, tab:controller.resourceTab})',
           aboutFields: [
             {
               fieldKey: 'name',
@@ -413,7 +463,19 @@
 
       afterActivate: function() {
         this.setCounters();
+        this.updateResourceTab();
         this.scheduleRefresh();
+      },
+
+      updateResourceTab: function() {
+        var service_type = this.model.resource_type.split(".")[0];
+        var vm_services = servicesService.getServiceTypes(ENV.VirtualMachines);
+        var app_services = servicesService.getServiceTypes(ENV.Applications);
+        if (vm_services.indexOf(service_type) > -1) {
+          this.resourceTab = ENV.resourcesTypes.vms;
+        } else if (app_services.indexOf(service_type) > -1) {
+          this.resourceTab = ENV.resourcesTypes.applications;
+        }
       },
 
       getCounters: function() {
@@ -426,11 +488,13 @@
       scheduleRefresh: function() {
         var vm = this;
         vm.updateStatus();
+        resourceUtils.setAccessInfo(vm.model);
 
         var refreshPromise = $interval(function() {
           vm.getModel().then(function(model) {
             vm.model = model;
             vm.updateStatus();
+            resourceUtils.setAccessInfo(vm.model);
           });
         }, ENV.resourcesTimerInterval * 1000);
 

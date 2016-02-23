@@ -1,20 +1,59 @@
 $searchInputHeight: 32px;
 
 .title-wrapper {
-  min-height: 70px;
-  padding-top: 15px;
-  .left-side {
-    float: left;
-    margin-bottom: 10px;
-    margin-right: 20px;
-    .button {
-      width: 100%;
-      text-align: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 15px;
+  margin-top: 10px;
+
+  @include bp(bp-xs-helpdesk) {
+    flex-direction: column;
+  }
+
+  @include bp(xs) {
+    display: block;
+    margin: 0;
+  }
+
+  .back-to-list {
+    text-decoration: none;
+    display: block;
+    margin-bottom: 5px;
+    margin-top: 10px;
+
+    @include bp(xs) {
+      display: none;
     }
-    h1 {
+
+    .icon {
+      margin-right: 5px;
+      font-size: 20px;
+    }
+  }
+
+  .left-side-compact {
+    display: none;
+    @include bp(xs) {
       display: block;
-      margin-top: 0;
+      padding: 10px;
+      padding-bottom: 0;
     }
+
+    a {
+      display: block; 
+      text-decoration: none;
+    }
+    .icon {
+      margin-right: 5px;
+      font-size: 24px;
+    }
+  }
+
+  .details-container {
+    flex-grow: 1;
+    margin: 10px;
+    margin-top: 0;
   }
   ul {
     margin-left: 30px;
@@ -99,31 +138,10 @@ $searchInputHeight: 32px;
       }
     }
     .tabs-links {
+      margin-top: 15px;
+
       @include bp(xs) {
-        display: none;
-        &.tabs-opened {
-          display: block;
-        }
-      } // xs
-      list-style: none;
-      padding: 0;
-      margin-right: -2px;
-      li {
-        height: 40px;
-        line-height: 40px;
-        padding-left: 10px;
-        cursor: pointer;
-        &:hover {
-          background-color: rgba(255,255,255,.5);
-        }
-        &.active {
-          background: #FFF;
-          box-shadow: -2px 2px 2px 0px rgba(237,237,237,1);
-          font-weight: bold;
-        }
-        span {
-          padding-right: 10px;
-        }
+        margin-top: 0;
       }
     }
   }
@@ -239,6 +257,12 @@ $searchInputHeight: 32px;
     text-transform: uppercase;
     margin: 27px 0;
   }
+
+  h3 {
+    @include property(font-size, $big-font);
+    margin: 15px 0;
+  }
+
   aside {
     .input-group {
       margin-top: 0;
@@ -282,7 +306,7 @@ $searchInputHeight: 32px;
   }
 }
 .user-about {
-  margin-bottom: 20px;
+  padding-top: 15px;
   .img-wrapper {
     border-radius: 5px;
     position: relative;
@@ -293,9 +317,6 @@ $searchInputHeight: 32px;
     overflow: hidden;
   }
   .icon {
-    margin-left: 10px;
-    margin-top: 5px;
-    float: left;
     cursor: pointer;
   }
   .about {
@@ -312,7 +333,6 @@ $searchInputHeight: 32px;
     .editable-wrap {
       float: left;
     }
-    float: left;
     .user-name {
       font-size: 24px;
       font-weight: bold;
@@ -340,18 +360,11 @@ $searchInputHeight: 32px;
 .details-about {
   @extend .user-about;
   padding-top: 6px;
-  float: left;
-  >div {
-    margin-bottom: 5px;
-  }
   .name {
     font-size: 2em;
-    line-height: 1em;
-    margin-top: -5px;
-    float: left;
-  }
-  .details {
-    float: left;
+    @include bp(xs) {
+      font-size: 25px;
+    }
   }
   .profile-logo {
     margin: 0 10px 10px 0;
@@ -368,228 +381,6 @@ $searchInputHeight: 32px;
   }
   input[type="text"] {
     width: 250px;
-  }
-}
-.balance-block {
-  position: relative;
-  .right-block {
-    float: right;
-    position: absolute;
-    right: 60px;
-    top: -5px;
-
-    @include bp(xs) {
-      float: none;
-      margin-bottom: 13px;
-      position: initial;
-    }
-    @include bp(sm) {
-      float: none;
-      margin-bottom: 13px;
-      position: initial;
-    }
-
-    .balance {
-      text-align: right;
-      font-size: 20px;
-      margin-bottom: 10px;
-      margin-top: 15px;
-      position: relative;
-      .bold {
-        font-weight: bold;
-      }
-      .plan-spacing {
-        margin-right: 7px;
-        cursor: pointer;
-        border-bottom: 1px dashed $dashboard-green;
-      }
-    }
-    .tooltip {
-      $border-color: #DCD9D9;
-      position: absolute;
-      right: 0;
-      top: 125%;
-      border: 1px solid $border-color;
-      background: $main-background-color;
-      z-index: 10;
-      padding: 20px;
-      box-sizing: border-box;
-      @include bp(xs) {
-        right: none;
-        left: 1px;
-      }
-      &:before {
-        content: "";
-        position: absolute;
-        display: block;
-        width: 0;
-        height: 0;
-        border-style: solid;
-        border-width: 0 11.5px 10px 11.5px;
-        border-color: transparent transparent $border-color transparent;
-        top: -10px;
-        right: 137px;
-        @include bp(xs) {
-          display: none;
-        }
-      }
-      &:after {
-        content: "";
-        position: absolute;
-        display: block;
-        width: 0;
-        height: 0;
-        border-style: solid;
-        border-width: 0 10.5px 9px 10.5px;
-        border-color: transparent transparent $main-background-color transparent;
-        top: -9px;
-        right: 138px;
-        @include bp(xs) {
-          display: none;
-        }
-      }
-      &.graph-tooltip {
-        width: 450px;
-        height: 135px;
-        color: #000;
-        padding: 15px;
-        canvas {
-          width: 400px!important;
-          height: 100px!important;
-        }
-        @include bp(xs) {
-          width: 310px;
-          canvas {
-            width: 270px!important;
-          }
-        }
-        &:before {
-          right: 21px;
-          @include bp(xs) {
-            right: 91px;
-          }
-        }
-        &:after {
-          right: 22px;
-          @include bp(xs) {
-            right: 92px;
-          }
-        }
-      }
-      &.amount-tooltip {
-        width: 284px;
-        height: 138px;
-      }
-      &.quota-tooltip {
-        right: 28px;
-        top: 35px;
-        width: 240px;
-        margin-right: -50%;
-        left: -86px;
-        text-align: left;
-        &:before {
-          right: 70px;
-        }
-        &:after {
-          right: 71px;
-        }
-        @include bp(xs) {
-          position: fixed;
-          width: 100%;
-          left: 0;
-          height: 50%;
-          bottom: 0;
-          top: auto;
-          font-size: 1em;
-          z-index: 9999;
-        }
-        .close {
-          position: absolute;
-          right: 10px;
-          top: 10px;
-        }
-      }
-      .tooltip-title {
-
-        h3 {
-          float: left;
-          font-size: 16px;
-          margin: 0;
-          margin-bottom: 20px;
-          font-weight: bold;
-        }
-        .close {
-          position: absolute;
-          right: 15px;
-          top: 15px;
-          opacity: 1;
-          font-weight: normal;
-          @include bp(xs) {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 50%;
-          }
-        }
-      }
-      input[type='number'] {
-        padding: 6px;
-        width: 100px;
-        height: 31px;
-        vertical-align: middle;
-        border-radius: 3px;
-        border: 1px solid #D8D8D8;
-      }
-      .button {
-        display: inline-block;
-        width: 135px;
-        margin-bottom: 10px;
-        margin-top: 10px;
-        text-align: center;
-      }
-    }
-    @include bp(xs) {
-      position: relative;
-      float: none;
-      right: 0;
-      top: 0;
-      text-align: left;
-      .balance {
-        text-align: left;
-      }
-    }
-  }
-  .right-block.customer-balance {
-    position: relative;
-    margin-bottom: 20px;
-    @include bp(xs) {
-      min-width: 300px;
-      float: left;
-    }
-  }
-  .buttons {
-    @include bp(xs) {
-      text-align: left;
-    }
-  }
-}
-
-.balance-block.customer-balance {
-  width: 30%;
-  float: right;
-  padding-right: 60px;
-  @include bp(xs) {
-    float: left;
-    padding-right: 0;
-    padding-left: 20px;
-    width: auto;
-  }
-  @include bp(sm) {
-    float: left;
-    padding-right: 0;
-    padding-left: 20px;
-    width: auto;
   }
 }
 
@@ -902,21 +693,24 @@ $searchInputHeight: 32px;
       color: #b7b7b7;
       margin: 0;
       line-height: 10px;
-      float: left;
       display: block;
     }
   }
 }
 
-dl.two-column {
-  dt {
-    float: left;
-    clear: both;
-    width: 100px;
+.details-table__row {
+    display: flex;
+    padding-bottom: 10px;
+    justify-content: space-between;
+}
+
+.details-table__key {
     font-weight: bold;
-    margin-bottom: 13px;
-  }
-  dd {
-    float: left;
-  }
+    width: 100px;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+.details-table__value {
+    flex-grow: 1;
 }

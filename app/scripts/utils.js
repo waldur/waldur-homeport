@@ -45,7 +45,7 @@
         window.Intercom('update');
       },
       blockElement: function(element, promise) {
-        if (promise.finally) {
+        if (promise && promise.finally) {
           // Prevent blocking if promise is invalid
           var block = blockUI.instances.get(element);
           block.start();
@@ -72,7 +72,7 @@
         }
       },
       getPrettyQuotaName: function(name) {
-        return name.replace(/nc_|_count/gi, '');
+        return name.replace(/nc_|_count/g, '').replace(/_/g, ' ');
       },
       getQuotaUsage: function(quotas) {
         var usage = {};
@@ -106,6 +106,44 @@
           }
           return result;
         }, {});
+      },
+      startsWith: function(string, target) {
+        return string.indexOf(target) === 0;
+      },
+      endsWith: function(string, target) {
+        return string.indexOf(target) === (string.length - target.length);
+      },
+      mergeLists: function(list1, list2) {
+        list1 = list1 || [];
+        list2 = list2 || [];
+        var itemByUuid = {},
+          deletedItemUuids = [],
+          newListUiids = list2.map(function(item) {
+            return item.uuid;
+          });
+        for (var i = 0; i < list1.length; i++) {
+          var item = list1[i];
+          itemByUuid[item.uuid] = item;
+        }
+
+        // Remove stale items
+        list1 = list1.filter(function(item) {
+          return newListUiids.indexOf(item.uuid) !== -1;
+        });
+
+        // Add or update remaining items
+        for (var i = 0; i < list2.length; i++) {
+          var item2 = list2[i];
+          var item1 = itemByUuid[item2.uuid];
+          if (!item1) {
+            list1.push(item2);
+            continue;
+          }
+          for (var key in item2) {
+            item2.hasOwnProperty(key) && (item1[key] = item2[key]);
+          }
+        }
+        return list1;
       },
       sortObj: function(obj, order) {
         var i,

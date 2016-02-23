@@ -11,6 +11,7 @@
       '$state',
       'ENV',
       'ENTITYLISTFIELDTYPES',
+      'ncUtils',
       BaseProjectListController]);
 
     function BaseProjectListController(
@@ -21,7 +22,8 @@
       $rootScope,
       $state,
       ENV,
-      ENTITYLISTFIELDTYPES) {
+      ENTITYLISTFIELDTYPES,
+      ncUtils) {
 
       var controllerClass = baseControllerListClass.extend({
         init: function() {
@@ -32,6 +34,7 @@
           this.actionButtonsListItems = [
             {
               title: 'Remove',
+              icon: 'fa-trash',
               clickFunction: this.remove.bind(this),
 
               isDisabled: function(project) {
@@ -53,7 +56,8 @@
             currentStateService.isQuotaExceeded('resource').then(function(response) {
               if (!response) {
                 vm.actionButtonsListItems.push({
-                  title: 'Create resource',
+                  title: 'Add resource',
+                  icon: 'fa-plus',
                   clickFunction: function(project) {
                     $rootScope.$broadcast('adjustCurrentProject', project);
                     $state.go('appstore.store')
@@ -67,6 +71,7 @@
               if (!response) {
                 vm.actionButtonsListItems.push({
                   title: 'Import resource',
+                  icon: 'fa-cloud-download',
                   clickFunction: function(project) {
                     $rootScope.$broadcast('adjustCurrentProject', project);
                     $state.go('import.import');
@@ -82,15 +87,15 @@
               title: 'Projects',
               createLink: 'projects.create',
               createLinkText: 'Add project',
-              expandable: true
+              expandable: true,
+              rowTemplateUrl: 'views/project/row.html'
             },
             list: [
               {
                 name: 'Name',
                 propertyName: 'name',
                 type: ENTITYLISTFIELDTYPES.name,
-                link: 'projects.details({uuid: entity.uuid})',
-                showForMobile: ENTITYLISTFIELDTYPES.showForMobile
+                link: 'projects.details({uuid: entity.uuid})'
               },
               {
                 name: 'Creation date',
@@ -133,6 +138,7 @@
             }
             this.setProjectCounters(item);
           }
+          this._super();
         },
         checkPermissions: function() {
           var vm = this;
@@ -182,7 +188,6 @@
     .controller('ProjectAddController', [
       'projectsService',
       'currentStateService',
-      'joinServiceProjectLinkService',
       'baseControllerAddClass',
       '$rootScope',
       '$state',
@@ -192,7 +197,6 @@
   function ProjectAddController(
     projectsService,
     currentStateService,
-    joinServiceProjectLinkService,
     baseControllerAddClass,
     $rootScope,
     $state,
@@ -214,12 +218,11 @@
           vm.project.customer = customer.url;
         });
       },
-      afterSave: function() {
-        var vm = this;
-        joinServiceProjectLinkService.addProject(vm.project).then(function() {
-          $rootScope.$broadcast('refreshProjectList', {model: vm.project, new: true, current: true});
+      afterSave: function(project) {
+        $rootScope.$broadcast('refreshProjectList', {
+          model: project, new: true, current: true
         });
-        vm._super();
+        this._super();
       },
       onError: function(errorObject) {
         ncUtilsFlash.error(errorObject.data.detail);
@@ -269,7 +272,7 @@
         this.setSignalHandler('refreshCounts', this.setCounters.bind(controllerScope));
         this._super();
         this.detailsViewOptions = {
-          title: 'Project',
+          title_plural: 'projects',
           listState: "organizations.details({uuid: controller.model.customer_uuid, tab: 'projects'})",
           aboutFields: [
             {

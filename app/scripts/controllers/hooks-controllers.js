@@ -28,6 +28,7 @@
         this.actionButtonsListItems = [
           {
             title: 'Remove',
+            icon: 'fa-trash',
             clickFunction: this.remove.bind(this.controllerScope),
             className: 'remove'
           }
@@ -38,21 +39,20 @@
             noDataText: 'No notifications registered',
             createLink: 'profile.hook-create',
             createLinkText: 'Add notification',
+            rowTemplateUrl: 'views/user/hook-row.html'
           },
           list: [
             {
               type: ENTITYLISTFIELDTYPES.statusCircle,
               propertyName: 'is_active',
               onlineStatus: true,
-              className: 'statusCircle',
-              showForMobile: ENTITYLISTFIELDTYPES.showForMobile
+              className: 'statusCircle'
             },
             {
               type: ENTITYLISTFIELDTYPES.name,
               propertyName: 'label',
               name: 'Method',
-              link: 'profile.hook-details({type: entity.hook_type, uuid: entity.uuid})',
-              showForMobile: ENTITYLISTFIELDTYPES.showForMobile
+              link: 'profile.hook-details({type: entity.hook_type, uuid: entity.uuid})'
             },
             {
               type: ENTITYLISTFIELDTYPES.noType,

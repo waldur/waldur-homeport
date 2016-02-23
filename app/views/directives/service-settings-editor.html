@@ -1,0 +1,53 @@
+<div>
+    <div class="short-form full" ng-if="service.editable">
+        <div class="form-row" ng-repeat="field in service.fields"
+             ng-if="field.name != 'dummy'">
+            <div class="col label">
+                <label for="{{ ::service.uuid }}_{{ ::field.name }}">
+                    <helpicon help-text="{{ ::field.help_text }}" ng-if="::field.help_text"></helpicon>
+                    {{ ::field.label }}
+                </label>
+            </div>
+            <div class="col input input-full" ng-switch="::field.type">
+                <input id="{{ ::service.uuid }}_{{ ::field.name }}"
+                       type="text"
+                       ng-switch-when="string"
+                       ng-model="service.values[field.name]">
+
+                <input id="{{ ::service.uuid }}_{{ ::field.name }}"
+                       type="text"
+                       ng-switch-when="url"
+                       ng-model="service.values[field.name]">
+
+                <input id="{{ ::service.uuid }}_{{ ::field.name }}"
+                       type="checkbox"
+                       ng-switch-when="boolean"
+                       ng-model="service.values[field.name]"/>
+
+                <select id="{{ ::service.uuid }}_{{ ::field.name }}"
+                        ng-switch-when="choice"
+                        ng-model="service.values[field.name]"
+                        ng-options="item.value as item.display_name for item in field.choices">
+                </select>
+
+                <div ng-switch-when="file upload">
+                  {{ getFilename(service.values[field.name]) || 'None'}}
+                  <a class="button"
+                     ngf-select
+                     ngf-accept="'application/x-x509-ca-cert'"
+                     ng-model="service.values[field.name]">Browse</a>
+                </div>
+
+                <span ng-show="field.required">(required)</span>
+            </div>
+        </div>
+        <div class="decision" ng-show="hasChanged(service)">
+            <div class="col">
+                <a class="button-apply" ng-click="updateSettings(service)" ng-class="{'disabled': isDisabled(service)}">Save</a>
+            </div>
+        </div>
+    </div>
+    <div class="details-expandable" ng-if="!service.editable">
+        Settings are not editable.
+    </div>
+</div>

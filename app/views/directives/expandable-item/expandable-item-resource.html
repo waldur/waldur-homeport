@@ -1,0 +1,41 @@
+<div class="details-table__row">
+  <div class="details-table__key">
+    Type
+  </div>
+  <div class="details-table__value">
+    <span ng-bind="::expandableElement.resource_type"></span>
+  </div>
+</div>
+<div class="details-table__row">
+  <div class="details-table__key">
+    Created
+  </div>
+  <div class="details-table__value">
+    <span am-time-ago="expandableElement.created"
+          title="{{ expandableElement.created }}">
+    </span>
+  </div>
+</div>
+<div class="details-table__row">
+  <div class="details-table__key">
+    Access URL
+  </div>
+  <div class="details-table__value">
+    <a ng-if="expandableElement.access_info_url"
+       href="{{ expandableElement.access_info_url }}"
+       target="_blank">
+        {{ expandableElement.access_info_text }}
+    </a>
+    <span ng-if="!expandableElement.access_info_url">
+      {{ expandableElement.access_info_text }}
+    </span>
+  </div>
+</div>
+<div class="details-table__row" ng-if="expandableElement.key_name">
+  <div class="details-table__key">
+    SSH key
+  </div>
+  <div class="details-table__value">
+    <span ng-bind="expandableElement.key_name"></span>
+  </div>
+</div>

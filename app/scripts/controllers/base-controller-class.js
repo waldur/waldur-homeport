@@ -38,7 +38,7 @@
      * sеt events in this.setSignalHandler('eventName', this.eventFunction);
      */
     var ControllerListClass = baseControllerClass.extend({
-      list: {},
+      list: [],
       service: null, // required in init
       searchInput: '',
       searchFieldName: 'name', // required in init
@@ -60,6 +60,7 @@
         this.service.page = 1;
         this.service.cacheTime = this.cacheTime;
         this._super();
+        this.hideNoDataText = true;
         this.listPromise = this.getList();
         this.blockListElement();
         // reset after state change
@@ -73,7 +74,7 @@
         filter = filter || {};
         vm.service.cacheTime = vm.cacheTime;
         return vm.service.getList(filter).then(function(response) {
-          vm.list = response;
+          vm.list = ncUtils.mergeLists(vm.list, response);
           vm.afterGetList();
         });
       },
@@ -82,7 +83,9 @@
           ncUtils.blockElement(this.blockUIElement, this.listPromise);
         }
       },
-      afterGetList: function() {},
+      afterGetList: function() {
+        this.hideNoDataText = false;
+      },
       generalSearchChanged: function(event, text) {
         this.controllerScope.searchInput = text;
         this.controllerScope.search();
@@ -267,6 +270,7 @@
       listState: null, // required in init for details page
       activeTab: null,
       model: null,
+      generalSearch: null,
 
       init: function() {
         this._super();

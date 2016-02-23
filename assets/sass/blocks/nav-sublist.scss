@@ -9,6 +9,12 @@
     left: 90px;
     position: absolute;
     background-color: #4fb547;
+
+    @include bp(sm) {
+      right: 0;
+      left: auto;
+    }
+
     &.block-ui {
         position: absolute;
         .block-ui-message {
@@ -146,6 +152,9 @@
                 position: absolute;
                 left: 6px;
                 top: 9px;
+            }
+            .tooltip-relative {
+                display: block;
             }
         }
     } // > li

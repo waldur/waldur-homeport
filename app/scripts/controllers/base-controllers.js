@@ -42,14 +42,10 @@
       },
       activate: function() {
         var vm = this;
-        // XXX: for top menu customers viewing
-        customersService.pageSize = ENV.topMenuCustomersCount;
-        customersService.cacheTime = ENV.topMenuCustomersCacheTime;
-        customersService.getList().then(function(response) {
+
+        customersService.getTopMenuList().then(function(response) {
           vm.customers = response;
         });
-        // reset pageSize
-        customersService.pageSize = ENV.pageSize;
 
         vm.getProjectList();
 
@@ -351,10 +347,18 @@
               created_at: date
             });
             if($window.localStorage[ENV.currentCustomerUuidStorageKey]) {
-              customersService.$get($window.localStorage[ENV.currentCustomerUuidStorageKey]).then(function(customer) {
-                deferred.resolve(customer);
-                getProject()
-              }, setPersonalOrFirstCustomer);
+              customersService.getTopMenuList().then(function(customers) {
+                var currentCustomer = customers.filter(function(customer) {
+                  return customer.uuid === $window.localStorage[ENV.currentCustomerUuidStorageKey];
+                });
+                if (currentCustomer.length > 0) {
+                    deferred.resolve(currentCustomer[0]);
+                    getProject();
+                } else {
+                  delete $window.localStorage[ENV.currentCustomerUuidStorageKey];
+                  (customers.length === 0) ? $state.go('initialdata.view') : setPersonalOrFirstCustomer();
+                }
+              });
             } else {
               setPersonalOrFirstCustomer();
             }

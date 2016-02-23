@@ -284,9 +284,6 @@
             'tabUsers@projects.details' : {
               templateUrl: 'views/project/tab-users.html',
             },
-            'tabProviders@projects.details' : {
-              templateUrl: 'views/resource/tab-providers.html',
-            },
             'tabApplications@projects.details' : {
               templateUrl: 'views/resource/tab-applications.html',
             },
@@ -582,9 +579,6 @@
             },
             'tabBackups@resources.list' : {
               templateUrl: 'views/resource/tab-backups.html',
-            },
-            'tabProviders@resources.list' : {
-              templateUrl: 'views/resource/tab-providers.html',
             },
             'tabPremiumSupport@resources.list': {
               templateUrl: 'views/project/tab-support.html',

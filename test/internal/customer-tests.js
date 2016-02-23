@@ -36,7 +36,7 @@ for(var i = 0; i < addCustomerTestData.length; i++) {
         // fill name
         element(by.model('CustomerAdd.instance.name')).sendKeys(customerName);
 
-        element(by.cssContainingText('a.button-apply', 'Create organization')).click();
+        element(by.cssContainingText('a.button-apply', 'Add organization')).click();
 
         expect(element(by.cssContainingText('.details-about .name', customerName)).isPresent()).toBe(true);
       });

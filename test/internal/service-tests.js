@@ -29,9 +29,9 @@ for(var i = 0; i < testData.length; i++) {
         element(by.css('.dropdown.customers .active-context')).click();
         element(by.cssContainingText('.tabs-links li', 'Providers')).click();
         browser.wait(function() {
-          return element(by.cssContainingText('.right-sort .button', 'Create provider')).isPresent();
+          return element(by.cssContainingText('.right-sort .button', 'Add provider')).isPresent();
         }, constants.WATING_TIME);
-        element(by.cssContainingText('.right-sort .button', 'Create provider')).click();
+        element(by.cssContainingText('.right-sort .button', 'Add provider')).click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/services/add/');
       });
 
@@ -53,7 +53,7 @@ for(var i = 0; i < testData.length; i++) {
 
         expect(element(by.cssContainingText('.tabs-links li', 'Providers')).isPresent()).toBe(true);
         browser.wait(function() {
-          return element(by.cssContainingText('.right-sort .button', 'Create provider')).isPresent();
+          return element(by.cssContainingText('.right-sort .button', 'Add provider')).isPresent();
         }, constants.WATING_TIME);
       });
 

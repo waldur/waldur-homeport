@@ -1,0 +1,14 @@
+<section block-ui="{{ ::expandableElement.uuid }}" ng-if="expandableElement.expandItemOpen">
+    <div class="success-message" ng-if="expandableList.getClass(expandableElement.state) == 'processing'">Please wait while provider is being configured.</div>
+
+    <div ng-if="expandableElement.state == 'Erred'" class="error-message">
+        {{ ::expandableElement.error_message || expandableList.defaultErrorMessage }}
+    </div>
+
+    <h3>Settings</h3>
+    <div service-settings-editor service="expandableElement"></div>
+
+    <h3>Allowed for projects</h3>
+    <div service-project-link-editor service="expandableElement"></div>
+
+</section>

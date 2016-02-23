@@ -4,9 +4,27 @@
 
 .event-log {
   .app-title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 15px;
+
     @include bp(xs) {
-      display: none;
+      display: block;
     }
+
+    h1 {
+      flex-grow: 1;
+      margin: 0px;
+      @include bp(xs) {
+        text-align: center;
+      }
+    }
+
+    .balance-block {
+      padding-top: 10px;
+    }
+
   }
   .event-action-buttons {
     float: right;
@@ -45,12 +63,6 @@
         }
       }
     }
-  }
-  h2 {
-    float: left;
-    display: block;
-    margin-top: 5px;
-    margin-right: 15px;
   }
   canvas {
     margin:0 auto;

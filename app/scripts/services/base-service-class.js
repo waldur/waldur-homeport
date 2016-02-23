@@ -159,13 +159,7 @@
       },
 
       $delete:function(uuid) {
-        var deferred = $q.defer();
-        this.getFactory(false).remove({}, {uuid: uuid}).$promise.then(function(response) {
-          deferred.resolve(response);
-        }, function(err) {
-          deferred.reject(err);
-        });
-        return deferred.promise;
+        return this.getFactory(false).remove({}, {uuid: uuid}).$promise;
       },
 
       /**
@@ -175,7 +169,7 @@
        * @return promise
        */
       $deleteByUrl: function(url) {
-        return this.getFactory(false, null, url).delete().$promise;
+        return this.getFactory(false, null, url).remove().$promise;
       },
 
       operation: function(operation, url) {

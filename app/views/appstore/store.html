@@ -16,11 +16,10 @@
                                  ng-class="{'state': AppStore.selectedCategory == category}">
                                 <div class="icon {{ ::category.icon }}"></div>
                                 <h3>{{ category.name }}</h3>
-                                <span class="compare" stoppropagation
-                                      ng-click="AppStore.setCompare(category.name)"
-                                      ng-class="{'compare-active': (AppStore.compare.indexOf(category.name) + 1)}">
-                                    Compare
-                                </span>
+                                <div visible="compare" class="compare compare-active"
+                                     ng-show="AppStore.showCompare.indexOf(category.name) !== -1">
+                                    <a stoppropagation ui-sref="compare.vms">Compare</a>
+                                </div>
                             </div>
                             <!-- /category -->
                         </div>
@@ -315,7 +314,7 @@
                             <span>{{ item.name }}</span>
                         </div>
 
-                        <div ng-show="AppStore.enablePurchaseCostDisplay" class="price">{{ item.price || 0 | currency:AppStore.currency }}</div>
+                        <div ng-show="AppStore.enablePurchaseCostDisplay" class="price">{{AppStore.currency}}{{item.price}}</div>
                         <div class="clear"></div>
                     </li>
                     <li class="total">
@@ -324,7 +323,7 @@
                             <span ng-show="!AppStore.serviceType">No items</span>
                             <span>{{ AppStore.instance.name }} {{ AppStore.selectedResourceTypeName }}</span>
                         </div>
-                        <div ng-show="AppStore.enablePurchaseCostDisplay" class="price">{{ AppStore.total | currency:AppStore.currency }}/h</div>
+                        <div ng-show="AppStore.enablePurchaseCostDisplay" class="price">{{AppStore.currency}}{{AppStore.total}}/h</div>
                         <div class="clear"></div>
                     </li>
                 </ul>
