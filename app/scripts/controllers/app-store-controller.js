@@ -17,6 +17,7 @@
       'resourcesCountService',
       'ncUtilsFlash',
       'projectsService',
+      'priceEstimationService',
       'keysService',
       'gitlabGroupsService',
       AppStoreController]);
@@ -38,6 +39,7 @@
     resourcesCountService,
     ncUtilsFlash,
     projectsService,
+    priceEstimationService,
     keysService,
     gitlabGroupsService) {
     var controllerScope = this;
@@ -865,6 +867,7 @@
       afterSave: function() {
         this._super();
         projectsService.clearAllCacheForCurrentEndpoint();
+        priceEstimationService.clearAllCacheForCurrentEndpoint();
       },
       onError: function() {
         var message = '';

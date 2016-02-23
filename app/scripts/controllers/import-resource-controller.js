@@ -5,6 +5,7 @@
     .controller('ImportResourceController',
       ['baseControllerClass',
       'resourcesService',
+      'priceEstimationService',
       'ENV',
       'servicesService',
       'currentStateService',
@@ -20,6 +21,7 @@
   function ImportResourceController(
     baseControllerClass,
     resourcesService,
+    priceEstimationService,
     ENV,
     servicesService,
     currentStateService,
@@ -206,6 +208,7 @@
 
       onSuccess: function() {
         resourcesService.clearAllCacheForCurrentEndpoint();
+        priceEstimationService.clearAllCacheForCurrentEndpoint();
         $rootScope.$broadcast('refreshCounts');
         $state.go('projects.details', {
           uuid: this.currentProject.uuid,

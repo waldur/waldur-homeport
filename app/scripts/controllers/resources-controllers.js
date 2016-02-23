@@ -7,6 +7,7 @@
     'ENV',
     'ENTITYLISTFIELDTYPES',
     'resourcesService',
+    'priceEstimationService',
     'servicesService',
     'currentStateService',
     'projectsService',
@@ -21,6 +22,7 @@
     ENV,
     ENTITYLISTFIELDTYPES,
     resourcesService,
+    priceEstimationService,
     servicesService,
     currentStateService,
     projectsService,
@@ -296,6 +298,7 @@
       afterInstanceRemove: function(resource) {
         this._super(resource);
         projectsService.clearAllCacheForCurrentEndpoint();
+        priceEstimationService.clearAllCacheForCurrentEndpoint();
       },
       isOperationAvailable: function(operation, resource) {
         var availableOperations = this.service.getAvailableOperations(resource);

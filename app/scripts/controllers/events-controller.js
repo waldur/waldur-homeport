@@ -167,6 +167,7 @@
 
       activate: function() {
         var vm = this;
+        priceEstimationService.cacheTime = 1000 * 60 * 10;
         priceEstimationService.pageSize = 1000;
         priceEstimationService.getList().then(function(rows) {
           vm.processChartData(rows);

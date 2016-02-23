@@ -13,13 +13,13 @@
             <label ng-class="{on: projectSelect === 'resource'}" for="source-resource">Resources</label>
             <label ng-class="{on: projectSelect === 'service'}" for="source-service">Providers</label>
         </div>
-        <div><span class="date_label">Date: </span> <span class="date"></span></div>
+        <div><span class="date_label">Date: </span> <span class="date" ng-bind="currentValues.date"></span></div>
         <ul class="entities">
            <li ng-repeat="entity in entities" class="{{entity.name}}">
                <input ng-hide="entity.name==='total'" type="checkbox" ng-model="entity.on" />
                <div ng-style="{backgroundColor: entity.color}" class="point-chart"></div>
                <span class="entity-name" ng-class="{'entity-name-total': entity.name === 'total'}">{{entity.title}}</span>
-               <span class="entity-value {{'current_value__' + entity.name}}"></span>
+               <span class="entity-value" ng-bind="currentValues[entity.name]"></span>
            </li>
         </ul>
     </div>

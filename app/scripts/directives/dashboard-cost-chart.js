@@ -5,8 +5,8 @@
   angular.module('ncsaas')
     .directive('dashboardCostChart', dashboardCostChart);
 
-  dashboardCostChart.$inject = ['$window'];
-  function dashboardCostChart($window) {
+  dashboardCostChart.$inject = ['$window', '$filter', 'ENV', 'ncUtils'];
+  function dashboardCostChart($window, $filter, ENV, ncUtils) {
     return {
       restrict: 'E',
       replace: true,
@@ -95,7 +95,7 @@
 
       var color = d3.scale.category20();
 
-      var initData = sortObj(scope.data);
+      var initData = ncUtils.sortObj(scope.data);
 
       scope.projectSelect = 'project';
 
@@ -212,9 +212,8 @@
           .attr('width', width)
           .attr('height', height);
 
-
         drawHorizontalAxis(focus, xAxis, width, height, '', '');
-        drawVerticalAxis(focus, yLeftAxis, 'cost $', '');
+        drawVerticalAxis(focus, yLeftAxis, 'cost ' +  ENV.currency, '');
 
         // make grid
         focus.append('g')
@@ -282,66 +281,53 @@
         // --- Below chart ---
 
         hover(bindId, color, data, rData, entities, focus, width, height, xScale, yLeftScale, hoverCallback);
-
       }
-    }
-  }
 
-  function init(initData, type) {
-    var formatDate = d3.time.format('%Y%m');
-    var parseDate = formatDate.parse;
-    var legendList = getLegendList(initData, type);
-    var rd, rData = [];
-
-    for (var k in initData) {
-      if (initData.hasOwnProperty(k)) {
-
-        rd = {};
-        rd.date = parseDate(k);
-        rd.total = initData[k].customer[0] ? initData[k].customer[0].value : 0;
-
-        var currentProjects = initData[k][type];
-
-        legendList.forEach(function(pl) {
-          rd[pl.name] = currentProjects.reduce(function(sum, cp) {
-            return sum + (cp.name === pl.full ? +cp.value : 0);
-          }, 0);
+      function hoverCallback(entities) {
+        scope.currentValues = {};
+        entities.forEach(function(e) {
+          scope.currentValues[e.name] = e.currentValue.toFixed(2) +  ENV.currency;
         });
-
-        rData.push(rd);
+        scope.currentValues['date'] = d3.time.format('%Y %b')(entities[entities.length - 1].currentDate);
+        scope.$apply();
       }
     }
 
-    legendList.push({full: 'total', title: 'Total', name: 'total'});
+    function init(initData, type) {
+      var formatDate = d3.time.format('%Y%m');
+      var parseDate = formatDate.parse;
+      var legendList = getLegendList(initData, type);
+      var rd, rData = [];
 
-    return {
-      rData: rData,
-      legendList: legendList
-    };
-  }
+      for (var k in initData) {
+        if (initData.hasOwnProperty(k)) {
 
-  function sortObj(obj, order) {
-    var i,
-      tempArry = Object.keys(obj),
-      tempObj = {};
+          rd = {};
+          rd.date = parseDate(k);
+          rd.total = initData[k].customer[0] ? initData[k].customer[0].value : 0;
 
-    tempArry.sort(
-      function(a, b) {
-        return a.toLowerCase().localeCompare(b.toLowerCase());
+          var currentProjects = initData[k][type];
+
+          legendList.forEach(function(pl) {
+            rd[pl.name] = currentProjects.reduce(function(sum, cp) {
+              return sum + (cp.name === pl.full ? +cp.value : 0);
+            }, 0);
+          });
+
+          rData.push(rd);
+        }
       }
-    );
 
-    if (order === 'desc') {
-      for (i = tempArry.length - 1; i >= 0; i--) {
-        tempObj[tempArry[i]] = obj[tempArry[i]];
-      }
-    } else {
-      for (i = 0; i < tempArry.length; i++) {
-        tempObj[tempArry[i]] = obj[tempArry[i]];
-      }
+      legendList = $filter('orderBy')(legendList, 'title');
+
+      legendList.push({full: 'total', title: 'Total', name: 'total'});
+
+      return {
+        rData: rData,
+        legendList: legendList
+      };
     }
 
-    return tempObj;
   }
 
   function getLegendList(data, type) {
@@ -380,13 +366,6 @@
 
   function getShortProjectName(name) {
     return name.split('|')[0].trim();
-  }
-
-  function hoverCallback(entities) {
-    entities.forEach(function(e) {
-      d3.select('.legend .current_value__' + e.name).text(e.currentValue.toFixed(2) + '$');
-    });
-    d3.select('.legend .date').text(d3.time.format('%Y %b')(entities[entities.length - 1].currentDate));
   }
 
   function getInitEntities(projectList, color) {
@@ -436,14 +415,19 @@
     var bisectX = d3.bisector(function(d) { return d.date; }).right;
     var bisect = d3.bisector(function(d) { return d; }).right;
 
+    var rectSize, x, y;
+
     // Define the div for the tooltip
     var tooltip = d3.select(bindId).append('div')
       .attr('class', 'tooltip-cost')
       .style('opacity', 0);
 
     var hoverTool = function() {
-      var x = d3.mouse(this)[0];
-      var rectSize = this.getBoundingClientRect();
+      var mouse = d3.mouse(this);
+      x = mouse[0];
+      y = mouse[1];
+
+      rectSize = this.getBoundingClientRect();
 
       if (x < 0 || x >= rectSize.width) {
         hoverLineGroup.style('opacity', 0);
@@ -494,10 +478,11 @@
     }).on('touchmove', function() {
       hoverTool.call(this);
     }).on('mouseout', function(e) {
-      console.log(e);
-      var x = d3.mouse(this)[0];
-      var rectSize = this.getBoundingClientRect();
-      if (x < 0 || x >= rectSize.width) {
+        var mouse = d3.mouse(this);
+        x = mouse[0];
+        y = mouse[1];
+
+      if (x <= 0 || x >= rectSize.width || y <= 0 || y >= rectSize.height) {
         hoverLineGroup.style('opacity', 0);
       }
     }).on('touchend', function() {
@@ -513,7 +498,13 @@
     var hoverLine = hoverLineGroup
       .append('line')
       .attr('x1', 0).attr('x2', 0)
-      .attr('y1', 0).attr('y2', height);
+      .attr('y1', 0).attr('y2', height)
+      .on('mouseout', function(e) {
+        y = d3.mouse(this)[1];
+        if (x <= 0 || x >= rectSize.width || y <= 0 || y >= rectSize.height) {
+          hoverLineGroup.style('opacity', 0);
+        }
+      });
 
     var hoverPoints = entities
       .filter(function(entity) { return entity.name !== 'total'; })
