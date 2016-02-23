@@ -198,7 +198,10 @@
             var formOptions = response.actions.POST;
             vm.allFormOptions = formOptions;
             return vm.getValidChoices().then(function(validChoices) {
-              var gitlabGroupsPromise = gitlabGroupsService.getList();
+              var gitlabGroupsPromise = gitlabGroupsService.getList({
+                project_uuid: vm.currentProject.uuid,
+                service_uuid: vm.selectedService.uuid
+              });
               var sshKeysPromise = keysService.getCurrentUserKeyList();
 
               $q.all([gitlabGroupsPromise, sshKeysPromise]).then(function(result) {
