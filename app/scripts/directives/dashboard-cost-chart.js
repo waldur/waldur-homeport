@@ -318,8 +318,6 @@
         }
       }
 
-      legendList = $filter('orderBy')(legendList, 'title');
-
       legendList.push({full: 'total', title: 'Total', name: 'total'});
 
       return {
@@ -328,32 +326,32 @@
       };
     }
 
-  }
-
-  function getLegendList(data, type) {
-    var list = [],
+    function getLegendList(data, type) {
+      var list = [],
         exist = {},
         count = 0;
 
-    type = type ? type : 'project';
+      type = type ? type : 'project';
 
-    for (var k in data) {
-      if (data.hasOwnProperty(k)) {
-        data[k][type].forEach(function(p, i) {
-          if (!exist[p.name]) {
-            exist[p.name] = true;
-            var projectTitle = getShortProjectName(p.name);
-            list.push({
-              full: p.name,
-              title: projectTitle,
-              name: type + '_' + count
-            });
-            count++;
-          }
-        });
+      for (var k in data) {
+        if (data.hasOwnProperty(k)) {
+          data[k][type].forEach(function(p, i) {
+            if (!exist[p.name]) {
+              exist[p.name] = true;
+              var projectTitle = getShortProjectName(p.name);
+              list.push({
+                full: p.name,
+                title: projectTitle,
+                name: type + '_' + count
+              });
+              count++;
+            }
+          });
+        }
       }
+      return $filter('orderBy')(list, 'title');
     }
-    return list;
+
   }
 
   function getBrushExtent(data) {
