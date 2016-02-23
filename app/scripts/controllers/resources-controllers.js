@@ -41,7 +41,6 @@
     'projectsService',
     'ngDialog',
     '$rootScope',
-    'ncUtils',
     'resourceUtils',
     baseResourceListController
     ]);
@@ -58,7 +57,6 @@
     projectsService,
     ngDialog,
     $rootScope,
-    ncUtils,
     resourceUtils) {
     var ControllerListClass = baseControllerListClass.extend({
       init: function() {
