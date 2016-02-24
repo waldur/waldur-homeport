@@ -638,6 +638,7 @@ module.exports = function(grunt) {
                     'app/static/js/angular/tc-angular-chartjs.js',
                     'app/static/js/angular/xeditable.js',
                     'app/static/js/angular/angular-sanitize.js',
+                    'app/static/js/d3.js',
                     'app/scripts/*.js',
                     'app/scripts/configs/*.js',
                     'app/scripts/controllers/*.js',
