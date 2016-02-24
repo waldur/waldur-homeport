@@ -55,6 +55,7 @@
           vm.servicesList = response;
         });
         currentStateService.getCustomer().then(function(customer) {
+          vm.customer = customer;
           if (customer.projects.length == 0) {
             ncUtilsFlash.error("No projects!");
             $state.go('organizations.details', {uuid: customer.uuid, tab: 'projects'});
@@ -90,7 +91,7 @@
           }
           if (vm.categories.length == 0) {
             ncUtilsFlash.error("No providers!");
-            $state.go('resources.list', {tab: 'providers'});
+            $state.go('organizations.details', {uuid: vm.customer.uuid, tab: 'providers'});
           }
         });
       },
