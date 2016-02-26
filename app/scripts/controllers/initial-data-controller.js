@@ -41,15 +41,23 @@
       project: {},
       chosenService: null,
       chosenServices: [],
+      currentProcess: null,
 
       init: function() {
         this._super();
         this.activate();
       },
       activate: function() {
+        var vm = this;
         this.getUser();
         this.getServices();
         this.getFreePlan();
+        currentStateService.getCustomer().then(function(customer) {
+          vm.customer = customer;
+          currentStateService.getProject().then(function(project) {
+            vm.project = project;
+          })
+        });
       },
       getUser: function() {
         var vm = this;
@@ -90,6 +98,7 @@
           return;
         }
         service.saved = false;
+        service.status = 'Offline';
         this.chosenServices.push(angular.copy(service));
       },
       removeService: function(service) {
@@ -104,6 +113,7 @@
           service.errors = {};
           return !service.saved;
         });
+        vm.currentProcess = 'saving services..';
         // return successfully if no services require creation
         if (unsavedServices.length < 1) {
             return true;
@@ -118,19 +128,26 @@
           }
           instance.customer = vm.customer.url;
           instance.name = service.name;
+          var deferred = $q.defer();
+          service.status = 'Processing';
           instance.$save().then(function() {
             service.saved = true;
             service.errors = {};
+            service.status = 'Online';
+            deferred.resolve();
           }, function(errors) {
             service.errors = errors;
+            service.status = 'Erred';
+            deferred.reject(errors);
           });
+          return deferred.promise;
         });
         return $q.all(promises);
       },
       saveUser: function() {
         var vm = this;
+        vm.currentProcess = 'saving user..';
         return vm.user.$update(function() {
-          console.log('User has been saved');
           usersService.currentUser = null;
         }, function(response) {
           vm.user.errors = response.data;
@@ -139,8 +156,9 @@
       saveCustomer: function() {
         var vm = this;
         if (vm.customer.uuid) {
-          return true;
+          return $q.defer().resolve();
         }
+        vm.currentProcess = 'saving customer..';
         var customer = customersService.$create();
         customer.name = vm.customer.name;
         return customer.$save().then(function(model) {
@@ -152,8 +170,9 @@
       saveProject: function() {
         var vm = this;
         if (vm.project.uuid) {
-          return true;
+          return $q.defer().resolve();
         }
+        vm.currentProcess = 'saving project..';
         var project = projectsService.$create();
         project.customer = vm.customer.url;
         project.name = 'Default';
@@ -172,17 +191,26 @@
         var vm = this;
         if (!vm.user.email) {
           vm.user.errors = {email: 'This field is required'};
-          return;
+          return $q.reject();
         }
         if (!vm.customer.name) {
           vm.customer.errors = {name: 'This field is required'};
-          return;
+          return $q.reject();
         }
         return vm.saveUser()
                  .then(vm.saveCustomer.bind(vm))
                  .then(vm.saveServices.bind(vm))
                  .then(vm.saveProject.bind(vm))
                  .then(vm.gotoDashboard);
+      },
+
+      getClass: function(state) {
+        var cls = ENV.servicesStateColorClasses[state];
+        if (cls == 'processing') {
+          return 'icon refresh spin';
+        } else {
+          return 'status-circle ' + cls;
+        }
       }
     });
 

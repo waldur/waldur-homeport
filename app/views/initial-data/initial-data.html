@@ -60,12 +60,12 @@
                                 ng-init="option.value=option.choices[0].value"
                                 ng-options="item.value as item.display_name for item in option.choices">
                         </select>
-                        <div ng-repeat="error in service.errors[option.key]" ng-bind="error"></div>
+                        <div class="error" ng-repeat="error in service.errors.data[option.key]" ng-bind="error"></div>
                     </div>
                     <div ng-if="service.saved" class="fields">
                         Provider is saved.
                     </div>
-                    <div ng-repeat="error in service.errors.non_field_errors" class="fields">
+                    <div class="error fields" ng-repeat="error in service.errors.data.non_field_errors">
                         {{ error }}
                     </div>
                     <div class="clear"></div>
@@ -80,6 +80,18 @@
                     </div>
                     <a class="button" ng-click="InitialData.addChosenService()">Add provider</a>
                     <div class="clear"></div>
+                </div>
+                <div ng-show="InitialData.currentProcess" class="fields-block green light">
+                    Current process: {{InitialData.currentProcess}}
+                </div>
+            </div>
+            <div class="services-info-wrapper">
+                <div class="services-info" ng-repeat="service in InitialData.chosenServices">
+                    <div class="services-info-name">{{service.name}}</div>
+                    <div class="services-info-status">
+                        <a ng-class="InitialData.getClass(service.status)"
+                           title="{{service.status}}"></a>
+                    </div>
                 </div>
             </div>
             <div class="button-block">
