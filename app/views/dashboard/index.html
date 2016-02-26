@@ -15,14 +15,14 @@
             </li>
         </ul>
         <div class="event-action-buttons" ng-show="activeTab == 'activity'">
-            <div visible="projects" class="cost-tab-actions inline table-action">
+            <div visible="projects" class="cost-tab-actions inline">
                 <div sref="projects.create"
                      class-link="button-apply"
                      check-quotas="{{DashboardController.checkQuotas}}">
                     <span>Add new project</span>
                 </div>
             </div>
-            <div visible="providers" class="cost-tab-actions inline table-action">
+            <div visible="providers" class="cost-tab-actions inline">
                 <div sref="services.create"
                      class-link="button-apply"
                      check-quotas="{{DashboardController.checkQuotasProvider}}">
@@ -31,7 +31,7 @@
             </div>
         </div>
         <div class="event-action-buttons" ng-show="activeTab == 'costs'">
-            <div visible="import" class="cost-tab-actions inline table-action" >
+            <div visible="import" class="cost-tab-actions inline">
                 <div class="inline"
                      check-quotas="{{DashboardController.checkQuotasResource}}"
                      sref="import.import"
@@ -39,7 +39,7 @@
                     <div>Import resources</div>
                 </div>
             </div>
-            <div visible="providers" class="cost-tab-actions inline table-action">
+            <div visible="providers" class="cost-tab-actions inline">
                 <div class="inline"
                      check-quotas="{{DashboardController.checkQuotasProvider}}"
                      sref="services.create"
