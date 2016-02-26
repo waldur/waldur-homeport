@@ -113,7 +113,7 @@
           service.errors = {};
           return !service.saved;
         });
-        vm.currentProcess = 'saving services..';
+        vm.currentProcess = 'saving providers..';
         // return successfully if no services require creation
         if (unsavedServices.length < 1) {
             return true;
