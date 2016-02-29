@@ -241,6 +241,7 @@
       .controller('CustomerInvoicesTabController', [
         'baseControllerListClass',
         'invoicesService',
+        'authService',
         'ENTITYLISTFIELDTYPES',
         CustomerInvoicesTabController
       ]);
@@ -248,6 +249,7 @@
   function CustomerInvoicesTabController(
     baseControllerListClass,
     invoicesService,
+    authService,
     ENTITYLISTFIELDTYPES) {
     var controllerScope = this;
     var InvoicesController = baseControllerListClass.extend({
@@ -286,13 +288,19 @@
             },
             {
               name: '',
-              propertyName: 'pdf',
+              propertyName: 'downloadLink',
               iconClass: 'fa-file-pdf-o',
               type: ENTITYLISTFIELDTYPES.staticIconLink,
               className: 'pdf-icon'
             }
           ]
         };
+      },
+      afterGetList: function() {
+        this._super();
+        angular.forEach(this.list, function(invoice) {
+          invoice.downloadLink = authService.getDownloadLink(invoice.pdf);
+        });
       }
     });
 
