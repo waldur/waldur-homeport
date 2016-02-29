@@ -61,6 +61,8 @@
     box-sizing: border-box;
     height: 32px;
     margin-bottom: 7px;
+    background: white;
+    padding-left: 3px;
   }
   label {
     font-weight: bold;
@@ -131,6 +133,25 @@
       }
     }
 
+    .services-info-wrapper {
+      padding-bottom: 30px;
+    }
+
+    .services-info {
+      display: table;
+      width: 100%;
+      .services-info-name,
+      .services-info-status {
+        display: table-cell;
+      }
+
+      .services-info-name {
+        width: 80%;
+      }
+      .services-info-status {
+        vertical-align: middle;
+      }
+    }
   }
   .fields {
     float: right;
@@ -167,6 +188,9 @@
       }
     }
 
+    &.light {
+      padding: 10px;
+    }
 
     &.green {
       background: #e8f4e1;
@@ -186,6 +210,11 @@
         width: 50px;
         margin: 10px auto;
       }
+    }
+
+    .error {
+      float: right;
+      width: 226px;
     }
   }
   .button-block {

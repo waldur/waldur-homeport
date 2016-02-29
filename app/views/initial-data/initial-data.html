@@ -40,7 +40,13 @@
             </div>
         </aside>
         <div class="second-step">
-            <div visible="providers">
+            <div visible="providers" ng-if="InitialData.loadingServices">
+                <h2>
+                    <i class="icon refresh spin"></i>
+                    Loading providers
+                </h2>
+            </div>
+            <div visible="providers" ng-if="!InitialData.loadingServices">
                 <h2>Enter access codes</h2>
                 <div class="fields-block state" ng-repeat="service in InitialData.chosenServices">
                     <div class="icon-block">
@@ -49,23 +55,43 @@
                         <a ui-sref="help.details({ name: service.name })" target="_blank" class="info">?</a>
                     </div>
                     <div ng-repeat="option in service.options" class="fields">
-                        <label>
+                        <label for="{{ ::option.$$hashKey }}">
                             <helpicon help-text="{{ option.help_text }}" ng-if="option.help_text"></helpicon>
                             {{ ::option.label }}
+                            <input ng-if="::option.type == 'boolean'"
+                                   type="checkbox"
+                                   id="{{ ::option.$$hashKey }}"
+                                   ng-model="option.value"/>
                         </label>
-                        <input ng-model="option.value" type="text" ng-if="!option.choices && !service.saved"/>
-                        <input ng-model="option.value" type="text" disabled ng-if="!option.choices && service.saved"/>
+                        <span ng-if="option.type == 'string' || option.type == 'url'">
+                            <input ng-if="!service.saved"
+                                   ng-model="option.value"
+                                   type="text"
+                                   id="{{ ::option.$$hashKey }}"/>
+                            <input ng-if="service.saved" disabled
+                                   ng-model="option.value"
+                                   type="text"
+                                   id="{{ ::option.$$hashKey }}"/>
+                        </span>
                         <select ng-if="option.choices"
                                 ng-model="option.value"
                                 ng-init="option.value=option.choices[0].value"
-                                ng-options="item.value as item.display_name for item in option.choices">
+                                ng-options="item.value as item.display_name for item in option.choices"
+                                id="{{ ::option.$$hashKey }}">
                         </select>
-                        <div ng-repeat="error in service.errors[option.key]" ng-bind="error"></div>
+                        <div ng-if="::option.type == 'file upload'">
+                          {{ InitialData.getFilename(option.value) || 'None'}}
+                          <a class="button"
+                             ngf-select
+                             ngf-accept="'application/x-x509-ca-cert'"
+                             ng-model="option.value">Browse</a>
+                        </div>
+                        <div class="error" ng-repeat="error in service.errors.data[option.key]" ng-bind="error"></div>
                     </div>
                     <div ng-if="service.saved" class="fields">
                         Provider is saved.
                     </div>
-                    <div ng-repeat="error in service.errors.non_field_errors" class="fields">
+                    <div class="error fields" ng-repeat="error in service.errors.data.non_field_errors">
                         {{ error }}
                     </div>
                     <div class="clear"></div>
@@ -78,11 +104,25 @@
                                 ng-options="key as key for (key, value) in InitialData.service_options">
                         </select>
                     </div>
-                    <a class="button" ng-click="InitialData.addChosenService()">Add provider</a>
+                    <a class="button"
+                       ng-class="{'disabled': !InitialData.chosenService}"
+                       ng-click="InitialData.addChosenService()">Add provider</a>
                     <div class="clear"></div>
                 </div>
+                <div ng-show="InitialData.currentProcess" class="fields-block green light">
+                    Current process: {{InitialData.currentProcess}}
+                </div>
             </div>
-            <div class="button-block">
+            <div class="services-info-wrapper">
+                <div class="services-info" ng-repeat="service in InitialData.chosenServices">
+                    <div class="services-info-name">{{service.name}}</div>
+                    <div class="services-info-status">
+                        <a ng-class="InitialData.getClass(service.status)"
+                           title="{{service.status}}"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="button-block" ng-if="!InitialData.loadingServices">
                 <a class="button" submit-button="InitialData.save()">Let’s get started</a>
                 <span>By continuing you agree to the <a>Terms of Provider</a>.</span>
             </div>

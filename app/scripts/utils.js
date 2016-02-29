@@ -34,6 +34,23 @@
   }
 
   angular.module('ncsaas')
+    .service('ncServiceUtils', ['ENV', ncServiceUtils]);
+
+  function ncServiceUtils(ENV) {
+    return {
+      getStateClass: function(state) {
+        var cls = ENV.servicesStateColorClasses[state];
+        if (cls == 'processing') {
+          return 'icon refresh spin';
+        } else {
+          return 'status-circle ' + cls;
+        }
+      }
+    };
+  }
+
+
+  angular.module('ncsaas')
     .factory('ncUtils', ['$rootScope', 'blockUI', ncUtils]);
 
   function ncUtils($rootScope, blockUI) {
