@@ -2,9 +2,9 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('resourceUtils', ['ncUtils', resourceUtils]);
+    .service('resourceUtils', ['ncUtils', 'authService', resourceUtils]);
 
-  function resourceUtils(ncUtils) {
+  function resourceUtils(ncUtils, authService) {
     return {
       setAccessInfo: function(item) {
         item.access_info_text = 'No access info';
@@ -18,6 +18,7 @@
 
           if (ncUtils.endsWith(item.access_url, "/rdp/")) {
             item.access_info_text = 'Connect';
+            item.access_info_url = authService.getDownloadLink(item.access_url);
           }
         } else if (angular.isArray(item.access_url)) {
           // IP addresses
