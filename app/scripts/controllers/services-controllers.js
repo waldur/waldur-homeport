@@ -11,6 +11,7 @@
       'joinService',
       '$rootScope',
       'ENV',
+      'ncServiceUtils',
       baseServiceListController]);
 
   // need for service tab
@@ -22,7 +23,8 @@
     usersService,
     joinService,
     $rootScope,
-    ENV
+    ENV,
+    ncServiceUtils
     ) {
     var ControllerListClass = baseControllerListClass.extend({
       customerHasProjects: true,
@@ -78,14 +80,7 @@
               propertyName: 'state',
               onlineStatus: ENV.resourceOnlineStatus,
               className: 'visual-status',
-              getClass: function(state) {
-                var cls = ENV.servicesStateColorClasses[state];
-                if (cls == 'processing') {
-                  return 'icon refresh spin';
-                } else {
-                  return 'status-circle ' + cls;
-                }
-              }
+              getClass: ncServiceUtils.getStateClass
             },
             {
               name: 'My provider',

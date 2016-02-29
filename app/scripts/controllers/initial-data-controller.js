@@ -17,6 +17,7 @@
      '$state',
      'ENV',
      'ncUtils',
+     'ncServiceUtils',
      InitialDataController]);
 
   function InitialDataController(
@@ -32,7 +33,8 @@
     $rootScope,
     $state,
     ENV,
-    ncUtils) {
+    ncUtils,
+    ncServiceUtils) {
     var controllerScope = this;
     var Controller = baseControllerClass.extend({
       user: {},
@@ -42,6 +44,9 @@
       chosenService: null,
       chosenServices: [],
       currentProcess: null,
+      loadingServices: false,
+      getClass: ncServiceUtils.getStateClass,
+      getFilename: ncUtils.getFilename,
 
       init: function() {
         this._super();
@@ -76,10 +81,13 @@
       getServices: function() {
         if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('providers') == -1) {
           var vm = this;
+          vm.loadingServices = true;
           servicesService.getServicesOptions().then(function(service_options) {
             vm.service_options = service_options;
             vm.addChosenService('Amazon');
             vm.addChosenService('DigitalOcean');
+          }).finally(function() {
+            vm.loadingServices = false;
           });
         }
       },
@@ -113,40 +121,50 @@
           service.errors = {};
           return !service.saved;
         });
-        vm.currentProcess = 'saving providers..';
+        vm.currentProcess = 'Saving providers...';
         // return successfully if no services require creation
         if (unsavedServices.length < 1) {
-            return true;
+          return $q.when(true);
         }
-        var promises = unsavedServices.map(function(service) {
-          var instance = joinService.$create(service.url);
-          for (var i = 0; i < service.options.length; i++) {
-            var option = service.options[i];
-            if (option.value) {
-              instance[option.key] = option.value;
-            }
+        return $q.all(unsavedServices.map(vm.saveService.bind(vm)));
+      },
+      saveService: function(service) {
+        var vm = this;
+        var instance = {};
+        for (var i = 0; i < service.options.length; i++) {
+          var option = service.options[i];
+          var value = option.value;
+          if (!value) {
+            continue;
           }
-          instance.customer = vm.customer.url;
-          instance.name = service.name;
-          var deferred = $q.defer();
-          service.status = 'Processing';
-          instance.$save().then(function() {
-            service.saved = true;
-            service.errors = {};
-            service.status = 'Online';
-            deferred.resolve();
-          }, function(errors) {
-            service.errors = errors;
-            service.status = 'Erred';
-            deferred.reject(errors);
-          });
-          return deferred.promise;
+          if (ncUtils.isFileOption(option)) {
+            if (value.length == 1 && ncUtils.isFileValue(value[0])) {
+              instance[option.key] = value[0];
+            }
+          } else {
+            instance[option.key] = value;
+          }
+        }
+        instance.customer = vm.customer.url;
+        instance.name = service.name;
+        service.status = 'Processing';
+        var deferred = $q.defer();
+        joinService.create(service.url, instance).then(function() {
+          service.saved = true;
+          service.errors = {};
+          service.status = 'Online';
+          deferred.resolve();
+        }, function(errors) {
+          service.errors = errors;
+          service.status = 'Erred';
+          vm.currentProcess = null;
+          deferred.reject(errors);
         });
-        return $q.all(promises);
+        return deferred.promise;
       },
       saveUser: function() {
         var vm = this;
-        vm.currentProcess = 'saving user..';
+        vm.currentProcess = 'Saving user...';
         return vm.user.$update(function() {
           usersService.currentUser = null;
         }, function(response) {
@@ -158,7 +176,7 @@
         if (vm.customer.uuid) {
           return $q.defer().resolve();
         }
-        vm.currentProcess = 'saving customer..';
+        vm.currentProcess = 'Saving organization...';
         var customer = customersService.$create();
         customer.name = vm.customer.name;
         return customer.$save().then(function(model) {
@@ -172,7 +190,7 @@
         if (vm.project.uuid) {
           return $q.defer().resolve();
         }
-        vm.currentProcess = 'saving project..';
+        vm.currentProcess = 'Saving project...';
         var project = projectsService.$create();
         project.customer = vm.customer.url;
         project.name = 'Default';
@@ -202,15 +220,6 @@
                  .then(vm.saveServices.bind(vm))
                  .then(vm.saveProject.bind(vm))
                  .then(vm.gotoDashboard);
-      },
-
-      getClass: function(state) {
-        var cls = ENV.servicesStateColorClasses[state];
-        if (cls == 'processing') {
-          return 'icon refresh spin';
-        } else {
-          return 'status-circle ' + cls;
-        }
       }
     });
 
