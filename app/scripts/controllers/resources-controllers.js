@@ -328,13 +328,16 @@
       },
       unlink: function(resource) {
         var vm = this;
-        vm.service.operation('unlink', resource.url).then(
-          function() {
-            servicesService.clearAllCacheForCurrentEndpoint();
-            vm.afterInstanceRemove(resource);
-          },
-          vm.handleActionException.bind(vm)
-        );
+        var confirmUnlink = confirm('Are you sure you want to unlink ' + resource.name + '?');
+        if (confirmUnlink) {
+          vm.service.operation('unlink', resource.url).then(
+              function() {
+                servicesService.clearAllCacheForCurrentEndpoint();
+                vm.afterInstanceRemove(resource);
+              },
+              vm.handleActionException.bind(vm)
+          );
+        }
       },
       afterInstanceRemove: function(resource) {
         if (resource.state === 'Deletion Scheduled') {
