@@ -328,7 +328,7 @@
       },
       unlink: function(resource) {
         var vm = this;
-        var confirmUnlink = confirm('Are you sure you want to unlink a ' + resource.resource_type + '?');
+        var confirmUnlink = confirm('Are you sure you want to unlink ' + resource.name + '?');
         if (confirmUnlink) {
           vm.service.operation('unlink', resource.url).then(
               function() {
