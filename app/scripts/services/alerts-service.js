@@ -103,7 +103,7 @@
                quota_limit: alert.context.quota_limit,
                quota_threshold: 80,
                quota_use: alert.context.quota_usage,
-               quota_usage: alert.context.quota_usage * 100.0 / alert.context.quota_limit,
+               quota_usage: Math.round(alert.context.quota_usage * 100.0 / alert.context.quota_limit),
                plan_url: $state.href('organizations.plans', {uuid: alert.context.scope_uuid})
             }
             if (alert.context.quota_limit == alert.context.quota_usage) {
