@@ -59,9 +59,9 @@
     'service_unavailable': 'Provider {service_name} is not responding.',
     'resource_disappeared_from_backend': 'Resource {resource_name} has disappeared from the {service_name} provider in {project_name} project.',
     'customer_projected_costs_exceeded': 'This month estimated costs for organization {customer_name} exceeded.',
-    'customer_project_count_exceeded': 'Organization {customer_name} has exceeded quota {quota_name}.',
-    'customer_resource_count_exceeded': 'Organization {customer_name} has exceeded quota {quota_name}.',
-    'customer_service_count_exceeded': 'Organization {customer_name} has exceeded quota {quota_name}.',
+    'customer_project_count_exceeded': 'Organization {customer_name} has exhausted quota {quota_name}.',
+    'customer_resource_count_exceeded': 'Organization {customer_name} has exhausted quota {quota_name}.',
+    'customer_service_count_exceeded': 'Organization {customer_name} has exhausted quota {quota_name}.',
   });
 
   angular.module('ncsaas').constant('ALERT_ICONS_TYPES', {
@@ -109,7 +109,7 @@
             if (alert.context.quota_limit == alert.context.quota_usage) {
               var template = 'Customer {customer_name} has reached {quota_name} quota limit ({quota_limit}). <a href="{plan_url}">Upgrade your plan</a>';
             } else {
-              var template = 'Customer {customer_name} has exceeded the {quota_threshold}% {quota_name} quota threshold. The quota limit is {quota_limit}, and current usage is {quota_use} ({quota_usage}% of limit). <a href="{plan_url}">Upgrade your plan</a>';
+              var template = 'Customer {customer_name} has exhausted the {quota_threshold}% {quota_name} quota threshold. The quota limit is {quota_limit}, and current usage is {quota_use} ({quota_usage}% of limit). <a href="{plan_url}">Upgrade your plan</a>';
             }
             return this.renderTemplate(template, context);
           },
