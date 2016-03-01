@@ -20,8 +20,18 @@
             unlink: { // action for empty request
               title: "Unlink",
               type: "button",
+              confirm: true,
+              confirmation_text: 'Are you sure?',
               request_type: 'POST',
               url: "http://example.com/{endpoint}/{uuid}/unlink"
+            },
+            destroy: {
+              title: "Destroy",
+              type: "button",
+              confirm: true,
+              confirmation_text: 'Are you sure?',
+              request_type: 'POST',
+              url: "http://example.com/{endpoint}/{uuid}/destroy"
             },
             add_member: { // action for request with field
               title: "Add member",
@@ -45,7 +55,7 @@
                 select_list: { // params for getting list for select box
                   type: 'select',
                   required: true,
-                  url: '{url}',
+                  url: 'http://rest-test.nodeconductor.com/api/projects/',
                   filters: ['customer_uuid'],
                   label: 'Project'
                 }
@@ -57,7 +67,28 @@
         var item = { // fixture
           uuid: " 90bcfe38b0124c9bbdadd617b5d739f5",
           name: "name",
-          $actions: ['unlink', 'add_member'],  // actions objects
+          $actions: [ // actions objects
+            {
+              enabled: true,
+              reason: '',
+              name: 'unlink'
+            },
+            {
+              enabled: true,
+              reason: '',
+              name: 'add_member'
+            },
+            {
+              enabled: true,
+              reason: '',
+              name: 'add_project'
+            },
+            {
+              enabled: false,
+              reason: 'Invalid state',
+              name: 'destroy'
+            }
+          ],
           endpoint: 'digitalocean' // need to add this variable to all resources
         };
 
@@ -65,6 +96,7 @@
         scope.actions = OPTIONS['$actions'];
         scope.buttonClick = buttonClick;
         scope.submitForm = submitForm;
+        scope.getSelectList = getSelectList;
 
         var controller = scope.buttonController;
         controller.actionButtonsList = controller.actionButtonsList || [];
@@ -76,9 +108,25 @@
               url = option.url.replace('{endpoint}', model.endpoint).replace('{uuid}', model.uuid);
           scope.form = resourcesService.$create(url);
           if (option.type === 'button') {
-            scope.form.$save();
+            if (option.confirm) {
+              if (confirm(option.confirmation_text)) {
+                scope.form.$save();
+              }
+            } else {
+              scope.form.$save();
+            }
           } else if (option.type === 'form') {
+            getSelectList(action);
             scope.buttonModel['show_form' + action] = !scope.buttonModel['show_form' + action];
+          }
+        }
+
+        function getSelectList(action) {
+          var option = scope.actions[action];
+          for (var field in option.fields) {
+            option.fields[field].url && resourcesService.getList({}, option.fields[field].url).then(function(response) {
+              option.fields[field].list = response;
+            });
           }
         }
 
