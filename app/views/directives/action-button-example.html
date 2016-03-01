@@ -1,0 +1,22 @@
+<div class="actions-button" stoppropagation>
+    <a ng-if="buttonType == 'refresh'" class="button reopen" ng-click="buttonController.getCommentsForIssue(buttonModel.key)"></a>
+    <a ng-if="!buttonType" class="button" ng-show="buttonList.length > 1" ng-click="openActionsListTrigger()">actions</a>
+    <ul ng-show="buttonController.actionButtonsList[$id] || buttonList.length == 1"
+        ng-class="{'actions-dropdown': buttonList.length > 1, 'one-action-button': buttonList.length == 1}">
+        <li ng-repeat="button in buttonList">
+            <a ng-click="buttonClick(buttonModel, button)"
+               class="button-simple">{{ actions[button].title }}</a>
+
+            <!--TODO: move to popup, implement styles-->
+            <form ng-if="actions[button].type === 'form'" ng-show="buttonModel['show_form' + button]">
+                <div ng-repeat="(name, field) in actions[button].fields"
+                     ng-switch="field.type">
+                    <div ng-switch-when="text">
+                        <input ng-model="form[name]"/>
+                    </div>
+                    <button ng-click="submitForm()">Submit</button>
+                </div>
+            </form>
+        </li>
+    </ul>
+</div>
