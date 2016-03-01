@@ -158,7 +158,7 @@
                         </a>
                         <span title="{{ ::entity[field.propertyName] | date:'medium' }}" ng-switch-when="date" am-time-ago="entity[field.propertyName]"></span>
                         <span ng-switch-when="dateCreated">{{ entity[field.propertyName] | date:'medium' }}</span>
-                        <span ng-switch-when="dateShort">{{ entity[field.propertyName] | date:'dd/MM/yyyy' }}</span>
+                        <span ng-switch-when="dateShort">{{ entity[field.propertyName] | date:'yyyy-MM-dd' }}</span>
 
                         <span ng-switch-when="listInField" ng-repeat="fieldListItem in entity[field.propertyName]">
                             {{ fieldListItem }}
