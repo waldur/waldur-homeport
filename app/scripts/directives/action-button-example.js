@@ -2,9 +2,9 @@
 
 (function() {
   angular.module('ncsaas')
-    .directive('actionButtonExample', ['$rootScope', 'resourcesService', actionButtonExample]);
+    .directive('actionButtonExample', ['$rootScope', 'resourcesService', 'ENV', actionButtonExample]);
 
-  function actionButtonExample($rootScope, resourcesService) {
+  function actionButtonExample($rootScope, resourcesService, ENV) {
     return {
       restrict: 'E',
       templateUrl: "views/directives/action-button-example.html",
@@ -92,7 +92,15 @@
           endpoint: 'digitalocean' // need to add this variable to all resources
         };
 
-        scope.buttonList = item['$actions'];
+        scope.errors = {};
+
+        resourcesService.getOption([ENV.apiEndpoint, 'api/', item.endpoint].join('')).then(function(response) {
+          if (response['$actions']) {
+            scope.actions = response['$actions'];
+          }
+        });
+
+        scope.buttonList = scope.buttonModel['$actions'] || item['$actions'];
         scope.actions = OPTIONS['$actions'];
         scope.buttonClick = buttonClick;
         scope.submitForm = submitForm;
@@ -117,7 +125,7 @@
             }
           } else if (option.type === 'form') {
             getSelectList(action);
-            scope.buttonModel['show_form' + action] = !scope.buttonModel['show_form' + action];
+            scope.buttonModel.show_form = scope.buttonModel.show_form === action ? false : action;
           }
         }
 
@@ -131,7 +139,18 @@
         }
 
         function submitForm() {
-          scope.form && scope.form.$save();
+          var option = scope.actions[scope.buttonModel.show_form];
+          for (var field in option.fields) {
+            if (option.fields[field].required && !scope.form[field]) {
+              scope.errors[field] = ['This field is required'];
+              return;
+            }
+          }
+          scope.form.$save(function() {
+            scope.errors = {};
+          }, function(errors) {
+            scope.errors = errors;
+          });
         }
 
         function openActionsListTrigger() {

@@ -10,18 +10,27 @@
                class="button-simple">{{ actions[button.name].title }}</a>
 
             <!--TODO: move to popup, implement styles-->
-            <form ng-if="actions[button.name].type === 'form'" ng-show="buttonModel['show_form' + button.name]">
-                <div ng-repeat="(name, field) in actions[button.name].fields"
-                     ng-switch="field.type">
-                    <div ng-switch-when="text">
-                        <input ng-model="form[name]"/>
+            <div class="popup-form" ng-click="buttonModel.show_form = false" ng-if="actions[button.name].type === 'form'" ng-show="buttonModel.show_form === button.name">
+                <form stoppropagation>
+                    <h2>{{ actions[button.name].title }}</h2>
+                    <div ng-repeat="(name, field) in actions[button.name].fields"
+                         ng-switch="field.type">
+                        <label>{{ field.label }}</label>
+                        <div ng-switch-when="text">
+                            <input ng-model="form[name]"/>
+                        </div>
+                        <div ng-switch-when="select">
+                            <select ng-options="item.uuid as item.name for item in field.list" ng-model="form[name]"></select>
+                        </div>
+                        <div class="error arrow-up" ng-show="errors[name]">
+                            <ul class="error-list">
+                                <li ng-repeat="error in errors[name]" ng-bind="error"></li>
+                            </ul>
+                        </div>
                     </div>
-                    <div ng-switch-when="select">
-                        <select ng-options="item.uuid as item.name for item in field.list" ng-model="form[name]"></select>
-                    </div>
-                </div>
-                <button ng-click="submitForm()">Submit</button>
-            </form>
+                    <button class="button-apply" ng-click="submitForm()">Submit</button>
+                </form>
+            </div>
         </li>
     </ul>
 </div>
