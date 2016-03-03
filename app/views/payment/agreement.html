@@ -24,7 +24,7 @@
 
   <div class="details-table__row">
     <div class="details-table__key">
-      Date
+      Start date
     </div>
     <div class="details-table__value">
       {{ entity.created | date:'yyyy-MM-dd' }}
@@ -33,10 +33,12 @@
 
   <div class="details-table__row">
     <div class="details-table__key">
-      State
+      End date
     </div>
     <div class="details-table__value">
-      {{ entity.state }}
+      <span ng-if="entity.state == 'cancelled'">
+        {{ entity.modified | date:'yyyy-MM-dd' }}
+      </span>
     </div>
   </div>
 </div>

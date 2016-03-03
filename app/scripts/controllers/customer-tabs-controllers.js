@@ -331,7 +331,7 @@
 
         this.entityOptions = {
           entityData: {
-            noDataText: 'No agreements yet',
+            noDataText: 'No plans yet',
             hideTableHead: false,
             rowTemplateUrl: 'views/payment/agreement.html'
           },
@@ -349,10 +349,6 @@
               name: 'Monthly price',
               propertyName: 'plan_price',
               type: ENTITYLISTFIELDTYPES.currency
-            },
-            {
-              name: 'State',
-              propertyName: 'state',
             }
           ]
         };
