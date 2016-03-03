@@ -284,6 +284,9 @@
       }
 
       function hoverCallback(entities) {
+        if (!entities[entities.length - 1].currentDate) {
+          return;
+        }
         scope.currentValues = {};
         entities.forEach(function(e) {
           scope.currentValues[e.name] = e.currentValue.toFixed(2) +  ENV.currency;
