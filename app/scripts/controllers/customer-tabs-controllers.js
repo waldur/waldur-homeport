@@ -274,7 +274,7 @@
             {
               name: 'Amount',
               propertyName: 'total_amount',
-              type: ENTITYLISTFIELDTYPES.linkOrText,
+              type: ENTITYLISTFIELDTYPES.currency,
             },
             {
               name: 'Start date',
@@ -308,6 +308,120 @@
   }
 
 })();
+
+
+(function() {
+  angular.module('ncsaas')
+      .controller('CustomerAgreementsTabController', [
+        'baseControllerListClass',
+        'agreementsService',
+        'ENTITYLISTFIELDTYPES',
+        CustomerAgreementsTabController
+      ]);
+
+  function CustomerAgreementsTabController(
+    baseControllerListClass,
+    agreementsService,
+    ENTITYLISTFIELDTYPES) {
+    var controllerScope = this;
+    var AgreementsController = baseControllerListClass.extend({
+      init: function() {
+        this.service = agreementsService;
+        this._super();
+
+        this.entityOptions = {
+          entityData: {
+            noDataText: 'No agreements yet',
+            hideTableHead: false,
+            rowTemplateUrl: 'views/payment/agreement.html'
+          },
+          list: [
+            {
+              name: 'Plan name',
+              propertyName: 'plan_name',
+            },
+            {
+              name: 'Date',
+              propertyName: 'created',
+              type: ENTITYLISTFIELDTYPES.dateShort,
+            },
+            {
+              name: 'Monthly price',
+              propertyName: 'plan_price',
+              type: ENTITYLISTFIELDTYPES.currency
+            },
+            {
+              name: 'State',
+              propertyName: 'state',
+            }
+          ]
+        };
+      }
+    });
+
+    controllerScope.__proto__ = new AgreementsController();
+  }
+
+})();
+
+
+(function() {
+  angular.module('ncsaas')
+      .controller('CustomerPaymentsTabController', [
+        'baseControllerListClass',
+        'paymentsService',
+        'ENTITYLISTFIELDTYPES',
+        CustomerPaymentsTabController
+      ]);
+
+  function CustomerPaymentsTabController(
+    baseControllerListClass,
+    paymentsService,
+    ENTITYLISTFIELDTYPES) {
+    var controllerScope = this;
+    var PaymentsController = baseControllerListClass.extend({
+      init: function() {
+        this.service = paymentsService;
+        this._super();
+
+        this.entityOptions = {
+          entityData: {
+            noDataText: 'No payments yet',
+            hideTableHead: false,
+            rowTemplateUrl: 'views/payment/row.html'
+          },
+          list: [
+            {
+              name: 'Payment code',
+              propertyName: 'uuid',
+              type: ENTITYLISTFIELDTYPES.trimmed,
+              limit: 6
+            },
+            {
+              name: 'Date',
+              propertyName: 'created',
+              type: ENTITYLISTFIELDTYPES.dateShort,
+            },
+            {
+              name: 'Amount',
+              propertyName: 'amount',
+              type: ENTITYLISTFIELDTYPES.currency
+            },
+            {
+              name: 'State',
+              propertyName: 'state',
+            }
+          ]
+        };
+      }
+    });
+
+    controllerScope.__proto__ = new PaymentsController();
+  }
+
+})();
+
+
 (function() {
   angular.module('ncsaas')
       .controller('CustomerDeleteTabController', [

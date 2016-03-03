@@ -1,43 +1,42 @@
 <div class="compact-list__header"
      ng-click="entity.expandItemOpen = !entity.expandItemOpen">
   <div class="compact-list__title">
-    <a href="{{ entity.pdf }}">
-      Invoice #{{ entity.uuid | limitTo:6 }}
+    <a>
+      Agreement for {{ entity.plan_name }} plan
     </a>
   </div>
   <div class="compact-list__right">
-       <expandable-indicator open="entity.expandItemOpen">
-       </expandable-indicator>
+     <expandable-indicator open="entity.expandItemOpen">
+     </expandable-indicator>
   </div>
 </div>
 
-<div ng-show="entity.expandItemOpen" class="compact-list__details">
+<div class="compact-list__details"
+     ng-show="entity.expandItemOpen">
   <div class="details-table__row">
     <div class="details-table__key">
-      Amount
+      Price
     </div>
     <div class="details-table__value">
-      {{ entity.total_amount|defaultCurrency }}
+      {{ entity.plan_price|defaultCurrency }}
     </div>
   </div>
 
   <div class="details-table__row">
     <div class="details-table__key">
-      Start date
+      Date
     </div>
     <div class="details-table__value">
-      {{ entity.start_date | date:'yyyy-MM-dd' }}
+      {{ entity.created | date:'yyyy-MM-dd' }}
     </div>
   </div>
 
   <div class="details-table__row">
     <div class="details-table__key">
-      End date
+      State
     </div>
     <div class="details-table__value">
-      {{ entity.end_date | date:'yyyy-MM-dd' }}
+      {{ entity.state }}
     </div>
   </div>
 </div>
-
-<action-list actions="entityButtons" entity="entity" ng-show="entity.expandItemOpen"></action-list>
