@@ -1,9 +1,7 @@
 <div class="compact-list__header"
      ng-click="entity.expandItemOpen = !entity.expandItemOpen">
   <div class="compact-list__title">
-    <a href="{{ entity.pdf }}">
-      Invoice #{{ entity.uuid | limitTo:6 }}
-    </a>
+    <a>Invoice #{{ entity.uuid | limitTo:6 }}</a>
   </div>
   <div class="compact-list__right">
        <expandable-indicator open="entity.expandItemOpen">
@@ -37,6 +35,14 @@
     <div class="details-table__value">
       {{ entity.end_date | date:'yyyy-MM-dd' }}
     </div>
+  </div>
+
+  <div class="details-table__row"
+       ng-if="entity.downloadLink">
+      <a href="{{ entity.downloadLink }}">
+      <i class="icon fa-file-pdf-o"></i>
+      Download PDF file
+    </a>
   </div>
 </div>
 
