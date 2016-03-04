@@ -247,6 +247,13 @@
               icon: 'invoice'
             },
             {
+              title: 'Team',
+              key: 'team',
+              viewName: 'tabTeam',
+              hideSearch: false,
+              icon: 'team'
+            },
+            {
               title: 'Manage',
               key: 'delete',
               viewName: 'tabDelete',

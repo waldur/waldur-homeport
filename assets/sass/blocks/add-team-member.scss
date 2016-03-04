@@ -1,0 +1,60 @@
+.add-team-member-wrapper {
+  text-align: right;
+
+  .add-team-member {
+    padding-top: 30px;
+
+    .line-wrapper {
+      margin: 5px;
+
+      .label, .input {
+        display: inline-block;
+      }
+
+      .label {
+        margin-right: 5px;
+      }
+
+      .input {
+        input, .name {
+          display: block;
+          width: 150px;
+        }
+
+        select {
+          width: 150px;
+          border: 1px solid #D8D8D8;
+        }
+      }
+
+      .added {
+        background-color: #f5f5f5;
+        border-radius: 3px;
+        color: black;
+        cursor: pointer;
+        display: inline-block;
+        margin-left: 5px;
+        padding: 0 6px;
+        vertical-align: middle;
+        -webkit-border-radius: 3px;
+
+        &:after {
+          position: relative;
+          line-height: 1;
+          text-rendering: auto;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+          -webkit-transform: translate(0, 0);
+          -ms-transform: translate(0, 0);
+          transform: translate(0, 0);
+          font-family: FontAwesome;
+          content: '\f00d';
+          top: -1px;
+          font-size: 11px;
+          margin-left: 5px;
+          color: #b6b6b6;
+        }
+      }
+    }
+  }
+}

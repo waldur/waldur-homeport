@@ -14,7 +14,7 @@
                 </li>
             </ul>
         </div>
-        <div ng-if="!entityOptions.entityData.hideControlButtons">
+        <div ng-if="!entityOptions.entityData.hideControlButtons" class="control-buttons">
             <ul class="sort-list">
                 <li class="search divid">
                     <div class="search-box">
@@ -88,7 +88,8 @@
                             | orderBy:entityList.orderField:entityList.reverseOrder
                             | filter:entityList.filterResults"
                 ng-show="entity.uuid != entityOptions.excludeItem || entity.expandItemOpen">
-                <div class="list-item list" ng-class="{'opened': entity.expandItemOpen, 'pointer' : entityOptions.entityData.expandable}"
+                <div class="list-item list"
+                     ng-class="{'opened': entity.expandItemOpen, 'pointer' : entityOptions.entityData.expandable}"
                      ng-click="entity.expandItemOpen=!entity.expandItemOpen; entityList.showMore(entity)"
                      ng-init="entityOptions.excludeItem = entity.expandItemOpen ? entity.uuid : 0;">
                     <div class="checkbox" ng-if="entityList.controlPanelShow">
@@ -160,8 +161,15 @@
                         <span ng-switch-when="dateCreated">{{ entity[field.propertyName] | date:'medium' }}</span>
                         <span ng-switch-when="dateShort">{{ entity[field.propertyName] | date:'yyyy-MM-dd' }}</span>
 
-                        <span ng-switch-when="listInField" ng-repeat="fieldListItem in entity[field.propertyName]">
+                        <span ng-switch-when="listInField"
+                              ng-if="!field.propertyNameKey"
+                              ng-repeat="fieldListItem in entity[field.propertyName]">
                             {{ fieldListItem }}
+                        </span>
+                        <span ng-switch-when="listInField"
+                              ng-if="field.propertyNameKey"
+                              ng-repeat="fieldListItem in entity[field.propertyName]">
+                            {{ fieldListItem[field.propertyNameKey] }}
                         </span>
                         <span ng-switch-when="listInField" ng-if="entity[field.propertyName].length == 0">
                             <i>{{ field.emptyText }}</i>

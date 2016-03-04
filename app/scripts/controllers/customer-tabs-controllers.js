@@ -308,6 +308,126 @@
   }
 
 })();
+
+(function() {
+  angular.module('ncsaas')
+      .controller('CustomerTeamTabController', [
+        'baseControllerListClass',
+        'customerPermissionsService',
+        'projectPermissionsService',
+        '$q',
+        'ENTITYLISTFIELDTYPES',
+        CustomerTeamTabController
+      ]);
+
+  function CustomerTeamTabController(
+      baseControllerListClass,
+      customerPermissionsService,
+      projectPermissionsService,
+      $q,
+      ENTITYLISTFIELDTYPES) {
+    var controllerScope = this;
+    var TeamController = baseControllerListClass.extend({
+      init: function() {
+        this.service = customerPermissionsService;
+        this._super();
+        var vm = this;
+
+        this.actionButtonsListItems = [
+          {
+            title: 'Edit',
+            clickFunction: vm.edit.bind(vm)
+          },
+          {
+            title: 'Suspend',
+            clickFunction: vm.suspend.bind(vm)
+          },
+          {
+            title: 'Remove',
+            clickFunction: vm.remove.bind(vm)
+          }
+        ];
+
+        this.entityOptions = {
+          entityData: {
+            name: 'team',
+            showPopup: false,
+            noDataText: 'No users yet',
+            hideActionButtons: false,
+            hideTableHead: false
+          },
+          list: [
+            {
+              name: 'Member',
+              propertyName: 'user_full_name',
+              type: ENTITYLISTFIELDTYPES.linkOrText
+            },
+            {
+              name: 'Projects',
+              propertyName: 'projectsAccessible',
+              propertyNameKey: 'project_name',
+              type: ENTITYLISTFIELDTYPES.listInField
+            },
+            {
+              name: 'Owner',
+              propertyName: 'role',
+              type: ENTITYLISTFIELDTYPES.linkOrText
+            }
+          ]
+        };
+      },
+      afterGetList: function() {
+        console.log('in after get list ');
+        var vm = this;
+        vm._super();
+        projectPermissionsService.getList().then(function(projectsPermissionsList) {
+          vm.list.forEach(function(listItem) {
+            listItem.projectsAccessible = [];
+            projectsPermissionsList.forEach(function(projectsListItem) {
+              projectsListItem.user_uuid === listItem.user_uuid && listItem.projectsAccessible.push(projectsListItem);
+            });
+          });
+        });
+      },
+
+      edit: function(user) {
+        this.editUser = user;
+        this.entityOptions.entityData.showPopup = true;
+      },
+      suspend: function() {
+        console.log('in suspend');
+      },
+      remove: function(user) {
+        var vm = this;
+        var index = vm.list.indexOf(user);
+        var confirmDelete = confirm('Confirm user deletion?');
+        if (confirmDelete) {
+          var promises = [];
+          user.projectsAccessible.forEach(function(project) {
+            var promise = projectPermissionsService.$delete(project.pk);
+            promises.push(promise);
+          });
+          $q.all(promises).then(function() {
+            customerPermissionsService.$delete(user.pk).then(
+                function() {
+                  vm.list.splice(index, 1);
+                },
+                function(response) {
+                  alert(response.data.detail);
+                }
+            );
+          });
+        } else {
+          alert('User was not deleted.');
+        }
+      }
+    });
+
+    controllerScope.__proto__ = new TeamController();
+  }
+
+})();
+
 (function() {
   angular.module('ncsaas')
       .controller('CustomerDeleteTabController', [

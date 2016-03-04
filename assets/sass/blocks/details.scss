@@ -714,3 +714,34 @@ $searchInputHeight: 32px;
 .details-table__value {
     flex-grow: 1;
 }
+
+.team-members {
+  .white-box {
+    .control-buttons {
+      position: absolute;
+      right: 40px;
+      top: 10px;
+    }
+  }
+
+  .add-team-popup {
+    background: rgba(0,0,0,.4);
+    bottom: 0;
+    display: flex;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 101;
+
+    .add-team-member-wrapper {
+      background: white;
+      margin: auto;
+      padding: 10px;
+
+      .add-team-member {
+        width: 270px;
+      }
+    }
+  }
+}

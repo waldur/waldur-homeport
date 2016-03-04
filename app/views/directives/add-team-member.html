@@ -1,0 +1,53 @@
+<div>
+    <div class="line-wrapper">
+        <div class="label">Member</div>
+        <div class="input">
+            <select ng-hide="editUser" ng-model="userModel.user_url">
+                <option ng-repeat="user in users" value="{{user.url}}">{{user.full_name}}</option>
+            </select>
+            <span class="name" ng-if="editUser">
+                {{editUser.user_full_name}}
+            </span>
+        </div>
+    </div>
+    <div class="line-wrapper">
+        <div class="label">Role</div>
+        <div class="input">
+            <select ng-hide="editUser" ng-model="userModel.role">
+                <option value="owner">Owner</option>
+                <option value="admin">Admin</option>
+            </select>
+            <span class="name" ng-if="editUser">
+                {{editUser.role}}
+            </span>
+        </div>
+    </div>
+    <div class="line-wrapper">
+        <span class="added" ng-repeat="project in userModel.projects"
+              ng-click="projectRemove(project)">
+                    {{ project.name }}
+        </span>
+    </div>
+    <div class="line-wrapper">
+        <div class="label">Project</div>
+        <div class="input">
+            <angucomplete-alt
+                              ng-click="inputMode=!inputMode"
+                              placeholder="Add"
+                              pause="100"
+                              type="text"
+                              selected-object="selectedUsersCallback"
+                              local-data="projectsListForAutoComplete"
+                              search-fields="name"
+                              title-field="name"
+                              description-field="email"
+                              minlength="1"
+                              clear-selected="true"
+                              input-changed="userSearchInputChanged"
+                              input-class="add-label {{ inputMode ? 'input': '' }}"></angucomplete-alt>
+        </div>
+    </div>
+    <div class="line-wrapper">
+        <a class="button" ng-click="add()">Add</a>
+    </div>
+</div>
