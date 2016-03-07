@@ -2,7 +2,7 @@
      ng-click="entity.expandItemOpen = !entity.expandItemOpen">
   <div class="compact-list__title">
     <a>
-      Agreement for {{ entity.plan_name }} plan
+      {{ entity.state | titleCase }} agreement for {{ entity.plan_name | lowercase }} plan
     </a>
   </div>
   <div class="compact-list__right">

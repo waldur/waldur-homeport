@@ -337,6 +337,18 @@
           },
           list: [
             {
+              type: ENTITYLISTFIELDTYPES.colorState,
+              propertyName: 'state',
+              className: 'visual-status',
+              getClass: function(state) {
+                if (state == 'active') {
+                  return 'status-circle online';
+                } else {
+                  return 'status-circle offline';
+                }
+              }
+            },
+            {
               name: 'Plan name',
               propertyName: 'plan_name',
             },
@@ -376,6 +388,7 @@
     ENTITYLISTFIELDTYPES) {
     var controllerScope = this;
     var PaymentsController = baseControllerListClass.extend({
+      defaultErrorMessage: "Reason unknown, please contact support",
       init: function() {
         this.service = paymentsService;
         this._super();
@@ -388,10 +401,27 @@
           },
           list: [
             {
-              name: 'Payment code',
-              propertyName: 'uuid',
-              type: ENTITYLISTFIELDTYPES.trimmed,
-              limit: 6
+              type: ENTITYLISTFIELDTYPES.colorState,
+              propertyName: 'state',
+              className: 'visual-status',
+              getClass: function(state) {
+                var classes = {
+                  Erred: 'erred',
+                  Approved: 'online',
+                  Created: 'processing',
+                  Cancelled: 'offline'
+                };
+                var cls = classes[state];
+                if (cls == 'processing') {
+                  return 'icon refresh spin';
+                } else {
+                  return 'status-circle ' + cls;
+                }
+              }
+            },
+            {
+              name: 'Type',
+              propertyName: 'type'
             },
             {
               name: 'Date',
@@ -402,13 +432,22 @@
               name: 'Amount',
               propertyName: 'amount',
               type: ENTITYLISTFIELDTYPES.currency
-            },
-            {
-              name: 'State',
-              propertyName: 'state',
             }
           ]
         };
+        this.expandableOptions = [
+          {
+            isList: false,
+            addItemBlock: false,
+            viewType: 'payment'
+          }
+        ];
+      },
+      afterGetList: function() {
+        this._super();
+        angular.forEach(this.list, function(payment) {
+          payment.type = 'PayPal';
+        });
       }
     });
 

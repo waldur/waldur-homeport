@@ -2,7 +2,7 @@
      ng-click="entity.expandItemOpen = !entity.expandItemOpen">
   <div class="compact-list__title">
     <a>
-      Payment #{{ entity.uuid | limitTo:6 }}
+      PayPal payment #{{ entity.uuid | limitTo:6 }}
     </a>
   </div>
   <div class="compact-list__right">
@@ -37,6 +37,15 @@
     </div>
     <div class="details-table__value">
       {{ entity.state }}
+    </div>
+  </div>
+
+  <div class="details-table__row" ng-if="entity.state == 'Erred'">
+    <div class="details-table__key">
+      Error
+    </div>
+    <div class="details-table__value">
+      {{ entity.error_message || 'Reason unknown, please contact support' }}
     </div>
   </div>
 </div>
