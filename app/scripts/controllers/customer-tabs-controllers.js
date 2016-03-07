@@ -274,7 +274,7 @@
             {
               name: 'Amount',
               propertyName: 'total_amount',
-              type: ENTITYLISTFIELDTYPES.linkOrText,
+              type: ENTITYLISTFIELDTYPES.currency,
             },
             {
               name: 'Start date',
@@ -308,6 +308,155 @@
   }
 
 })();
+
+
+(function() {
+  angular.module('ncsaas')
+      .controller('CustomerAgreementsTabController', [
+        'baseControllerListClass',
+        'agreementsService',
+        'ENTITYLISTFIELDTYPES',
+        CustomerAgreementsTabController
+      ]);
+
+  function CustomerAgreementsTabController(
+    baseControllerListClass,
+    agreementsService,
+    ENTITYLISTFIELDTYPES) {
+    var controllerScope = this;
+    var AgreementsController = baseControllerListClass.extend({
+      init: function() {
+        this.service = agreementsService;
+        this._super();
+
+        this.entityOptions = {
+          entityData: {
+            noDataText: 'No plans yet',
+            hideTableHead: false,
+            rowTemplateUrl: 'views/payment/agreement.html'
+          },
+          list: [
+            {
+              type: ENTITYLISTFIELDTYPES.colorState,
+              propertyName: 'state',
+              className: 'visual-status',
+              getClass: function(state) {
+                if (state == 'active') {
+                  return 'status-circle online';
+                } else {
+                  return 'status-circle offline';
+                }
+              }
+            },
+            {
+              name: 'Plan name',
+              propertyName: 'plan_name',
+            },
+            {
+              name: 'Date',
+              propertyName: 'created',
+              type: ENTITYLISTFIELDTYPES.dateShort,
+            },
+            {
+              name: 'Monthly price',
+              propertyName: 'plan_price',
+              type: ENTITYLISTFIELDTYPES.currency
+            }
+          ]
+        };
+      }
+    });
+
+    controllerScope.__proto__ = new AgreementsController();
+  }
+
+})();
+
+
+(function() {
+  angular.module('ncsaas')
+      .controller('CustomerPaymentsTabController', [
+        'baseControllerListClass',
+        'paymentsService',
+        'ENTITYLISTFIELDTYPES',
+        CustomerPaymentsTabController
+      ]);
+
+  function CustomerPaymentsTabController(
+    baseControllerListClass,
+    paymentsService,
+    ENTITYLISTFIELDTYPES) {
+    var controllerScope = this;
+    var PaymentsController = baseControllerListClass.extend({
+      defaultErrorMessage: "Reason unknown, please contact support",
+      init: function() {
+        this.service = paymentsService;
+        this._super();
+
+        this.entityOptions = {
+          entityData: {
+            noDataText: 'No payments yet',
+            hideTableHead: false,
+            rowTemplateUrl: 'views/payment/row.html'
+          },
+          list: [
+            {
+              type: ENTITYLISTFIELDTYPES.colorState,
+              propertyName: 'state',
+              className: 'visual-status',
+              getClass: function(state) {
+                var classes = {
+                  Erred: 'erred',
+                  Approved: 'online',
+                  Created: 'processing',
+                  Cancelled: 'offline'
+                };
+                var cls = classes[state];
+                if (cls == 'processing') {
+                  return 'icon refresh spin';
+                } else {
+                  return 'status-circle ' + cls;
+                }
+              }
+            },
+            {
+              name: 'Type',
+              propertyName: 'type'
+            },
+            {
+              name: 'Date',
+              propertyName: 'created',
+              type: ENTITYLISTFIELDTYPES.dateShort,
+            },
+            {
+              name: 'Amount',
+              propertyName: 'amount',
+              type: ENTITYLISTFIELDTYPES.currency
+            }
+          ]
+        };
+        this.expandableOptions = [
+          {
+            isList: false,
+            addItemBlock: false,
+            viewType: 'payment'
+          }
+        ];
+      },
+      afterGetList: function() {
+        this._super();
+        angular.forEach(this.list, function(payment) {
+          payment.type = 'PayPal';
+        });
+      }
+    });
+
+    controllerScope.__proto__ = new PaymentsController();
+  }
+
+})();
+
+
 (function() {
   angular.module('ncsaas')
       .controller('CustomerDeleteTabController', [

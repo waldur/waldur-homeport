@@ -10,7 +10,6 @@
       init:function() {
         this._super();
         this.endpoint = '/agreements/';
-        this.filterByCustomer = false;
       }
     });
     return new ServiceClass();

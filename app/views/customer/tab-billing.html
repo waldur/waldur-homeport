@@ -1,0 +1,38 @@
+<div ng-init="activeTab = 'invoices'">
+    <div class="white-box">
+        <ul class="sort-list event-nav">
+            <li ng-class="{'active': activeTab == 'invoices', 'inactive': activeTab != 'invoices'}">
+                <a ng-click="activeTab = 'invoices'">Invoices</a>
+            </li>
+            <li ng-class="{'active': activeTab == 'plans', 'inactive': activeTab != 'plans'}">
+                <a ng-click="activeTab = 'plans'">Plan history</a>
+            </li>
+            <li ng-class="{'active': activeTab == 'payments', 'inactive': activeTab != 'payments'}">
+                <a ng-click="activeTab = 'payments'">Payments</a>
+            </li>
+        </ul>
+    </div>
+    <div ng-if="activeTab == 'invoices'"
+         ng-controller="CustomerInvoicesTabController as InvoicesList">
+        <entitylist entity-list="InvoicesList"
+                    entity-service="InvoicesList.service"
+                    entity-buttons="InvoicesList.actionButtonsListItems"
+                    entity-options="InvoicesList.entityOptions"></entitylist>
+    </div>
+
+    <div ng-if="activeTab == 'plans'"
+         ng-controller="CustomerAgreementsTabController as AgreementsList">
+        <entitylist entity-list="AgreementsList"
+                    entity-service="AgreementsList.service"
+                    entity-buttons="AgreementsList.actionButtonsListItems"
+                    entity-options="AgreementsList.entityOptions"></entitylist>
+    </div>
+
+    <div ng-if="activeTab == 'payments'"
+         ng-controller="CustomerPaymentsTabController as PaymentsList">
+        <entitylist entity-list="PaymentsList"
+                    entity-service="PaymentsList.service"
+                    entity-buttons="PaymentsList.actionButtonsListItems"
+                    entity-options="PaymentsList.entityOptions"></entitylist>
+    </div>
+</div>
