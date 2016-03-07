@@ -74,7 +74,7 @@
         filter = filter || {};
         vm.service.cacheTime = vm.cacheTime;
         return vm.service.getList(filter).then(function(response) {
-          vm.list = ncUtils.mergeLists(vm.list, response);
+          vm.list = ncUtils.mergeLists(vm.list, response, vm.mergeListFieldIdentifier);
           vm.afterGetList();
         });
       },

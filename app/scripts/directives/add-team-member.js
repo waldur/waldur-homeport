@@ -42,7 +42,6 @@
                 });
 
                 scope.$watch('editUser', function(user) {
-                    console.log(user);
                     if (user) {
                         scope.userModel.user_url = user.user;
                     }
@@ -67,6 +66,7 @@
                     userPermission.$save().then(function(permission) {
                         saveProjectPermissions();
                         customerPermissionsService.clearAllCacheForCurrentEndpoint();
+
                     }, function(error) {
                         console.log('error ', error);
                     });
@@ -84,7 +84,7 @@
                             promises.push(promise);
                         });
                         $q.all(promises).then(function() {
-                            console.log('here');
+                            scope.userModel = {};
                             scope.controller.getList();
                         });
                     }
@@ -119,6 +119,9 @@
                     var index = scope.userModel.projects.indexOf(project);
                     scope.userModel.projects.splice(index, 1);
                 }
+                scope.$on('clearPopupModel', function() {
+                   scope.userModel = {};
+                });
             }
         };
     }

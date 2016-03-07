@@ -316,6 +316,7 @@
         'customerPermissionsService',
         'projectPermissionsService',
         '$q',
+        '$rootScope',
         'ENTITYLISTFIELDTYPES',
         CustomerTeamTabController
       ]);
@@ -325,11 +326,14 @@
       customerPermissionsService,
       projectPermissionsService,
       $q,
+      $rootScope,
       ENTITYLISTFIELDTYPES) {
     var controllerScope = this;
     var TeamController = baseControllerListClass.extend({
       init: function() {
+        this.controllerScope = controllerScope;
         this.service = customerPermissionsService;
+        this.mergeListFieldIdentifier = 'pk';
         this._super();
         var vm = this;
 
@@ -350,7 +354,6 @@
 
         this.entityOptions = {
           entityData: {
-            name: 'team',
             showPopup: false,
             noDataText: 'No users yet',
             hideActionButtons: false,
@@ -377,7 +380,6 @@
         };
       },
       afterGetList: function() {
-        console.log('in after get list ');
         var vm = this;
         vm._super();
         projectPermissionsService.getList().then(function(projectsPermissionsList) {
@@ -420,6 +422,10 @@
         } else {
           alert('User was not deleted.');
         }
+      },
+      closePopup: function () {
+        this.entityOptions.entityData.showPopup = false;
+        $rootScope.$broadcast('clearPopupModel');
       }
     });
 

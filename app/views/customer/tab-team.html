@@ -2,7 +2,6 @@
 
     <add-team-member
             class="add-team-member-wrapper"
-            ng-if="TeamList.entityOptions.entityData.name === 'team'"
             controller="TeamList">
     </add-team-member>
 
@@ -12,11 +11,10 @@
                 entity-options="TeamList.entityOptions"></entitylist>
 
     <div class="add-team-popup"
-         ng-click="TeamList.entityOptions.entityData.showPopup = false"
+         ng-click="TeamList.closePopup()"
          ng-show="TeamList.entityOptions.entityData.showPopup">
         <add-team-member stoppropagation
                 class="add-team-member-wrapper"
-                ng-if="TeamList.entityOptions.entityData.name === 'team'"
                 edit-user="TeamList.editUser"
                 controller="TeamList">
         </add-team-member>
