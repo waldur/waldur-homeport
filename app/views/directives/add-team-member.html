@@ -13,19 +13,16 @@
     <div class="line-wrapper">
         <div class="label">Role</div>
         <div class="input">
-            <select ng-hide="editUser" ng-model="userModel.role">
-                <option value="owner">Owner</option>
-                <option value="admin">Admin</option>
+            <select ng-model="userModel.role">
+                <option ng-selected="editUser.role === 'owner'" value="owner">Owner</option>
+                <option ng-selected="editUser.role === 'admin'" value="admin">Admin</option>
             </select>
-            <span class="name" ng-if="editUser">
-                {{editUser.role}}
-            </span>
         </div>
     </div>
     <div class="line-wrapper">
         <span class="added" ng-repeat="project in userModel.projects"
               ng-click="projectRemove(project)">
-                    {{ project.name }}
+                    {{ project.project_name }}
         </span>
     </div>
     <div class="line-wrapper">
@@ -48,6 +45,6 @@
         </div>
     </div>
     <div class="line-wrapper">
-        <a class="button" ng-click="add()">Add</a>
+        <a class="button" ng-click="add()">{{addText}}</a>
     </div>
 </div>

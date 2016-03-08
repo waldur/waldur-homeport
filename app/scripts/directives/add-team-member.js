@@ -34,6 +34,7 @@
                 scope.userSearchInputChanged = userSearchInputChanged;
                 scope.selectedUsersCallback = selectedUsersCallback;
                 scope.projectRemove = projectRemove;
+                scope.addText = 'Add';
                 scope.userModel = {};
                 var currentCustomer;
 
@@ -43,7 +44,10 @@
 
                 scope.$watch('editUser', function(user) {
                     if (user) {
+                        scope.addText = 'Save';
                         scope.userModel.user_url = user.user;
+                        scope.userModel.role = user.role;
+                        scope.userModel.projects = user.projectsAccessible;
                     }
                 });
 
@@ -54,16 +58,23 @@
                 getProjectsListForAutoComplete();
 
                 function add() {
+                    var userPermission = customerPermissionsService.$create();
                     if (scope.editUser) {
-                        saveProjectPermissions();
+                        userPermission = scope.editUser;
+                        userPermission.role = scope.userModel.role;
+                        userPermission.$update().then(function() {
+                            scope.userModel.projects = scope.userModel.projects.filter(function(item) {
+                                return !item.pk;
+                            });
+                            saveProjectPermissions();
+                        });
                         return;
                     }
-                    var userPermission = customerPermissionsService.$create();
                     userPermission.customer = currentCustomer.url;
                     userPermission.user = scope.userModel.user_url;
                     userPermission.role = scope.userModel.role;
 
-                    userPermission.$save().then(function(permission) {
+                    userPermission.$save().then(function() {
                         saveProjectPermissions();
                         customerPermissionsService.clearAllCacheForCurrentEndpoint();
 
@@ -85,6 +96,7 @@
                         });
                         $q.all(promises).then(function() {
                             scope.userModel = {};
+                            scope.controller.entityOptions.entityData.showPopup = true;
                             scope.controller.getList();
                         });
                     }
@@ -94,7 +106,10 @@
                     filter = filter || {};
                     filter['DONTBLOCK'] = 1;
                     projectsService.getList(filter).then(function(projects) {
-                        scope.projectsListForAutoComplete = projects;
+                        scope.projectsListForAutoComplete = projects.map(function(item) {
+                            item.project_name = item.name;
+                            return item;
+                        });
                     });
                 }
 
