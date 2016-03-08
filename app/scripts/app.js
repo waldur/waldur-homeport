@@ -458,8 +458,8 @@
             'tabServices@organizations.details': {
               templateUrl: 'views/customer/tab-services.html',
             },
-            'tabInvoices@organizations.details': {
-              templateUrl: 'views/customer/tab-invoices.html',
+            'tabBilling@organizations.details': {
+              templateUrl: 'views/customer/tab-billing.html',
             },
             'tabAlerts@organizations.details': {
               templateUrl: 'views/customer/tab-alerts.html',
