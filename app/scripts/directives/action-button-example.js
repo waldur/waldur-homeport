@@ -15,93 +15,17 @@
         buttonType: '@'
       },
       link: function (scope) {
-        var OPTIONS = { // fixture
-          $actions: { // actions objects
-            unlink: { // action for empty request
-              title: "Unlink",
-              type: "button",
-              confirm: true,
-              confirmation_text: 'Are you sure?',
-              request_type: 'POST',
-              url: "http://example.com/{endpoint}/{uuid}/unlink"
-            },
-            destroy: {
-              title: "Destroy",
-              type: "button",
-              confirm: true,
-              confirmation_text: 'Are you sure?',
-              request_type: 'POST',
-              url: "http://example.com/{endpoint}/{uuid}/destroy"
-            },
-            add_member: { // action for request with field
-              title: "Add member",
-              type: "form",
-              request_type: 'POST',
-              url: "http://example.com/{endpoint}/{uuid}/add_member",
-              fields: {
-                user_name: {
-                  type: 'text',
-                  required: true,
-                  label: 'User name'
-                }
-              }
-            },
-            add_project: {
-              title: 'Add project',
-              type: "form",
-              request_type: 'POST',
-              url: "http://example.com/{endpoint}/{uuid}/add_project",
-              fields: {
-                select_list: { // params for getting list for select box
-                  type: 'select',
-                  required: true,
-                  url: 'http://rest-test.nodeconductor.com/api/projects/',
-                  filters: ['customer_uuid'],
-                  label: 'Project'
-                }
-              }
-            }
-          }
-        };
-
-        var item = { // fixture
-          uuid: " 90bcfe38b0124c9bbdadd617b5d739f5",
-          name: "name",
-          $actions: [ // actions objects
-            {
-              enabled: true,
-              reason: '',
-              name: 'unlink'
-            },
-            {
-              enabled: true,
-              reason: '',
-              name: 'add_member'
-            },
-            {
-              enabled: true,
-              reason: '',
-              name: 'add_project'
-            },
-            {
-              enabled: false,
-              reason: 'Invalid state',
-              name: 'destroy'
-            }
-          ],
-          endpoint: 'digitalocean' // need to add this variable to all resources
-        };
+        var item = scope.buttonModel;
 
         scope.errors = {};
 
-        resourcesService.getOption([ENV.apiEndpoint, 'api/', item.endpoint].join('')).then(function(response) {
-          if (response['$actions']) {
-            scope.actions = response['$actions'];
+        resourcesService.getOption([item.url].join('')).then(function(response) {
+          if (response.actions) {
+            scope.actions = response.actions;
           }
         });
 
-        scope.buttonList = scope.buttonModel['$actions'] || item['$actions'];
-        scope.actions = OPTIONS['$actions'];
+        scope.buttonList = item.actions;
         scope.buttonClick = buttonClick;
         scope.submitForm = submitForm;
         scope.getSelectList = getSelectList;
@@ -113,11 +37,11 @@
 
         function buttonClick(model, action) {
           var option = scope.actions[action],
-              url = option.url.replace('{endpoint}', model.endpoint).replace('{uuid}', model.uuid);
+              url = option.method == 'DELETE' ? model.url : model.url + action;
           scope.form = resourcesService.$create(url);
           if (option.type === 'button') {
-            if (option.confirm) {
-              if (confirm(option.confirmation_text)) {
+            if (option.destructive) {
+              if (confirm('Are you sure? This action cannot be undone.')) {
                 scope.form.$save();
               }
             } else {

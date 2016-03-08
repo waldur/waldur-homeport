@@ -6,7 +6,7 @@
         <li ng-repeat="button in buttonList"
             title="{{ button.reason }}">
             <a ng-click="buttonClick(buttonModel, button.name)"
-               ng-class="{'disabled': !button.enabled, 'remove': actions[button.name].confirm}"
+               ng-class="{'disabled': !button.enabled, 'remove': actions[button.name].destructive}"
                class="button-simple">{{ actions[button.name].title }}</a>
 
             <!--TODO: move to popup, implement styles-->
@@ -16,10 +16,16 @@
                     <div ng-repeat="(name, field) in actions[button.name].fields"
                          ng-switch="field.type">
                         <label>{{ field.label }}</label>
-                        <div ng-switch-when="text">
+                        <div ng-switch-when="string">
                             <input ng-model="form[name]"/>
                         </div>
-                        <div ng-switch-when="select">
+                        <div ng-switch-when="integer">
+                            <input ng-model="form[name]"
+                                   type="number"
+                                   min="{{ ::field.min }}"
+                                   max="{{ ::field.max }}"/>
+                        </div>
+                        <div ng-switch-when="select_url" ng-if="field.list">
                             <select ng-options="item.uuid as item.name for item in field.list" ng-model="form[name]"></select>
                         </div>
                         <div class="error arrow-up" ng-show="errors[name]">
