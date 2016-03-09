@@ -483,6 +483,7 @@
         this.controllerScope = controllerScope;
         this.service = customerPermissionsService;
         this.mergeListFieldIdentifier = 'pk';
+        this.searchFieldName = 'user_full_name';
         this._super();
         var vm = this;
 

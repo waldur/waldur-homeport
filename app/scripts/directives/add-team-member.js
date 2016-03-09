@@ -96,7 +96,7 @@
                         });
                         $q.all(promises).then(function() {
                             scope.userModel = {};
-                            scope.controller.entityOptions.entityData.showPopup = true;
+                            scope.controller.entityOptions.entityData.showPopup = false;
                             scope.controller.getList();
                         });
                     }
