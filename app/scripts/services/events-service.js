@@ -28,8 +28,7 @@
             icon = EVENT_ICONS_TYPES[i][1];
             icon = (icon === 'provider') ? 'service' : icon;
             for (var j in EVENT_TEMPLATES) {
-              description = EVENT_TEMPLATES[j].replace(/\s*{\w+}|\./gi, '');
-              description.replace('{' + icon + '_name} ', '');
+              description = EVENT_TEMPLATES[j].replace(/_/gi, ' ');
               if (j.split('_')[0] === i && EVENT_TEMPLATES.hasOwnProperty(j)
                   && descriptions.indexOf(description) === -1
               ) {
@@ -125,8 +124,8 @@
     resource: ['Resource events', 'resource'],
     role: ['Role management events', 'user'],
     quota: ['Quota events', 'customer'],
-    ssh: ['SSH keys events', 'key'],
-    template: ['Templates keys events', 'resource']
+    ssh: ['SSH key events', 'key'],
+    template: ['Template key events', 'resource']
   });
 
   var types = {};

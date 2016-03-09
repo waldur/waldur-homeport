@@ -1,0 +1,21 @@
+<div class="details-table__row">
+  <div class="details-table__key">
+    Code
+  </div>
+  <div class="details-table__value">
+    <span>{{ expandableElement.uuid | limitTo:6 }}</span>
+  </div>
+</div>
+
+<div class="details-table__row">
+  <div class="details-table__key">
+    State
+  </div>
+  <div class="details-table__value">
+    <span>{{ expandableElement.state }}</span>
+  </div>
+</div>
+
+<div ng-if="expandableElement.state == 'Erred'" class="error-message">
+    {{ ::expandableElement.error_message || expandableList.defaultErrorMessage }}
+</div>

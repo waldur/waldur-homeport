@@ -240,11 +240,12 @@
               icon: 'service'
             },
             {
-              title: 'Invoices',
-              key: 'invoices',
-              viewName: 'tabInvoices',
+              title: 'Billing',
+              key: 'billing',
+              viewName: 'tabBilling',
               hideSearch: true,
-              icon: 'invoice'
+              icon: 'invoice',
+              count: -1
             },
             {
               title: 'Team',
@@ -297,7 +298,6 @@
 
       getCounters: function() {
         // TODO: implement getting invoices count from api/customers/{uuid}/counters/ endpoint
-        this.setInvoicesCounter();
 
         return currentStateService.getCustomer().then(function(customer) {
           var query = angular.extend(
@@ -306,16 +306,6 @@
               eventsService.defaultFilter
           );
           return customersService.getCounters(query);
-        });
-
-      },
-
-      setInvoicesCounter: function() {
-        var vm = this;
-        currentStateService.getCustomer().then(function(customer) {
-          resourcesCountService.invoices({customer_uuid: customer.uuid}).then(function(count) {
-            vm.detailsViewOptions.tabs[6].count = count;
-          });
         });
       },
 

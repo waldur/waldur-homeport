@@ -10,7 +10,6 @@
       init:function() {
         this._super();
         this.endpoint = '/paypal-payments/';
-        this.filterByCustomer = false;
       },
       approve: function(payment) {
         return $http.post(ENV.apiEndpoint + 'api/paypal-payments/approve/', payment);

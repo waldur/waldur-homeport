@@ -48,6 +48,7 @@
       colorState: 'colorState',
       bool: 'bool',
       trimmed: 'trimmed',
-      dateShort: 'dateShort'
+      dateShort: 'dateShort',
+      currency: 'currency'
     });
 })();

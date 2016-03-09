@@ -218,6 +218,10 @@
                             {{ entity[field.propertyName] | limitTo : field.limit }}
                         </span>
 
+                        <span ng-switch-when="currency">
+                            {{ entity[field.propertyName] | defaultCurrency }}
+                        </span>
+
                         <span class="cell-default-span" ng-switch-default>
                             {{ entity[field.propertyName] ? entity[field.propertyName] : field.emptyText }}
                         </span>
