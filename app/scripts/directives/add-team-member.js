@@ -62,18 +62,18 @@
                     if (scope.editUser) {
                         userPermission = scope.editUser;
                         userPermission.role = scope.userModel.role;
-                        userPermission.$update().then(function() {
-                            scope.userModel.projects = scope.userModel.projects.filter(function(item) {
-                                return !item.pk;
-                            });
-                            saveProjectPermissions();
+                        customerPermissionsService.$delete(scope.editUser.pk).then(function() {
+                            saveCustomerPermissions(userPermission);
                         });
                         return;
                     }
                     userPermission.customer = currentCustomer.url;
                     userPermission.user = scope.userModel.user_url;
                     userPermission.role = scope.userModel.role;
+                    saveCustomerPermissions(userPermission);
+                }
 
+                function saveCustomerPermissions(userPermission) {
                     userPermission.$save().then(function() {
                         saveProjectPermissions();
                         customerPermissionsService.clearAllCacheForCurrentEndpoint();
@@ -84,6 +84,16 @@
                 }
 
                 function saveProjectPermissions() {
+                    if (scope.projectsToDelete) {
+                        var promisesDelete = [];
+                        scope.projectsToDelete.forEach(function(project) {
+                            var promise = projectPermissionsService.$delete(project.pk);
+                            promisesDelete.push(promise);
+                        });
+                        $q.all(promisesDelete).then(function() {
+                            clearAndRefreshList();
+                        });
+                    }
                     if (scope.userModel.projects) {
                         var promises = [];
                         scope.userModel.projects.forEach(function(item) {
@@ -95,11 +105,17 @@
                             promises.push(promise);
                         });
                         $q.all(promises).then(function() {
-                            scope.userModel = {};
-                            scope.controller.entityOptions.entityData.showPopup = false;
-                            scope.controller.getList();
+                            clearAndRefreshList()
                         });
+                    } else {
+                        clearAndRefreshList();
                     }
+                }
+
+                function clearAndRefreshList() {
+                    scope.userModel = {};
+                    scope.controller.entityOptions.entityData.showPopup = false;
+                    scope.controller.getList();
                 }
 
                 function getProjectsListForAutoComplete(filter) {
@@ -131,7 +147,9 @@
                 }
 
                 function projectRemove(project) {
+                    scope.projectsToDelete = scope.projectsToDelete || [];
                     var index = scope.userModel.projects.indexOf(project);
+                    scope.projectsToDelete.push(scope.userModel.projects[index]);
                     scope.userModel.projects.splice(index, 1);
                 }
                 scope.$on('clearPopupModel', function() {

@@ -483,7 +483,7 @@
         this.controllerScope = controllerScope;
         this.service = customerPermissionsService;
         this.mergeListFieldIdentifier = 'pk';
-        this.searchFieldName = 'user_full_name';
+        this.searchFieldName = 'full_name';
         this._super();
         var vm = this;
 
@@ -551,7 +551,6 @@
       },
       remove: function(user) {
         var vm = this;
-        var index = vm.list.indexOf(user);
         var confirmDelete = confirm('Confirm user deletion?');
         if (confirmDelete) {
           var promises = [];
@@ -562,7 +561,9 @@
           $q.all(promises).then(function() {
             customerPermissionsService.$delete(user.pk).then(
                 function() {
-                  vm.list.splice(index, 1);
+                  vm.controllerScope.list = vm.controllerScope.list.filter(function(item) {
+                    return item.pk !== user.pk;
+                  });
                 },
                 function(response) {
                   alert(response.data.detail);
