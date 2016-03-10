@@ -227,10 +227,11 @@
                                 <!--ng-show="!entityList.showgroup"-->
                                 <!--button-model="entity"></action-button>-->
 
-                        <action-button-example button-controller="entityList"
-                                               button-type="{{ entityOptions.entityData.actionButtonsType }}"
-                                               ng-show="!entityList.showgroup"
-                                               button-model="entity"></action-button-example>
+                        <action-button-resource
+                            button-controller="entityList"
+                            button-type="{{ entityOptions.entityData.actionButtonsType }}"
+                            ng-show="!entityList.showgroup"
+                            button-model="entity"></action-button-resource>
                     </div>
 
                     <expandable-indicator ng-if="::entityList.expandableOptions" open="entity.expandItemOpen"></expandable-indicator>
