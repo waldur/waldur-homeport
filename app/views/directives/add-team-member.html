@@ -13,10 +13,10 @@
     <div class="line-wrapper">
         <div class="label">Role</div>
         <div class="input">
-            <select ng-model="userModel.role">
-                <option ng-selected="editUser.role === 'owner'" value="owner">Owner</option>
-                <option ng-selected="editUser.role === 'admin'" value="admin">Admin</option>
-            </select>
+            <label for="userRoleCheckbox">owner
+            </label>
+            <input id="userRoleCheckbox" type="checkbox" ng-model="userModel.role"
+                   ng-true-value="'owner'" ng-false-value="''">
         </div>
     </div>
     <div class="line-wrapper">
@@ -25,7 +25,7 @@
                     {{ project.project_name }}
         </span>
     </div>
-    <div class="line-wrapper">
+    <div class="line-wrapper" ng-show="userModel.role">
         <div class="label">Project</div>
         <div class="input">
             <angucomplete-alt

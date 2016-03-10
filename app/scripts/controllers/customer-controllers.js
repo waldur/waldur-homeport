@@ -252,7 +252,7 @@
               key: 'team',
               viewName: 'tabTeam',
               hideSearch: false,
-              icon: 'team'
+              icon: 'users'
             },
             {
               title: 'Manage',

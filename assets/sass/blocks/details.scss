@@ -717,6 +717,14 @@ $searchInputHeight: 32px;
 }
 
 .team-members {
+  margin-top: 25px;
+
+  .add-team-member-button {
+    position: absolute;
+    right: 95px;
+    text-align: right;
+    top: 10px;
+  }
   .white-box {
     .control-buttons {
       position: absolute;

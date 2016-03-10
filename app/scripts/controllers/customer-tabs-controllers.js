@@ -493,10 +493,6 @@
             clickFunction: vm.edit.bind(vm)
           },
           {
-            title: 'Suspend',
-            clickFunction: vm.suspend.bind(vm)
-          },
-          {
             title: 'Remove',
             clickFunction: vm.remove.bind(vm)
           }
@@ -546,9 +542,6 @@
         this.editUser = user;
         this.entityOptions.entityData.showPopup = true;
       },
-      suspend: function() {
-        console.log('in suspend');
-      },
       remove: function(user) {
         var vm = this;
         var confirmDelete = confirm('Confirm user deletion?');
@@ -573,6 +566,9 @@
         } else {
           alert('User was not deleted.');
         }
+      },
+      openPopup: function() {
+        this.entityOptions.entityData.showPopup = true;
       },
       closePopup: function () {
         this.entityOptions.entityData.showPopup = false;

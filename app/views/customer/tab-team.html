@@ -1,9 +1,8 @@
 <div class="team-members" ng-controller="CustomerTeamTabController as TeamList">
 
-    <add-team-member
-            class="add-team-member-wrapper"
-            controller="TeamList">
-    </add-team-member>
+    <div class="add-team-member-button">
+        <a class="button" ng-click="TeamList.openPopup()">Add</a>
+    </div>
 
     <entitylist entity-list="TeamList"
                 entity-service="TeamList.service"

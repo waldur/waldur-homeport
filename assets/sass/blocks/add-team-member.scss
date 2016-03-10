@@ -16,10 +16,17 @@
       }
 
       .input {
+        width: 150px;
+
         input, .name {
           display: block;
           text-align: left;
           width: 150px;
+        }
+
+        input[type=checkbox] {
+          display: inline-block;
+          width: 100px;
         }
 
         select {
