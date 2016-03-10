@@ -57,31 +57,4 @@
             }
         }
     }
-
-    .popup-form {
-        position: fixed;
-        top: 0;
-        left: 0;
-        background: rgba(0,0,0,.7);
-        bottom: 0;
-        right: 0;
-        display: flex;
-
-        form {
-            margin: auto;
-            padding: 10px;
-            background: #fff;
-            text-align: center;
-
-            h2 {
-                margin: 0 0 7px;
-                padding-bottom: 7px;
-                border-bottom: 1px solid #ccc;
-            }
-            
-            button {
-                margin-top: 10px;
-            }
-        }
-    }
 } // actions-button
