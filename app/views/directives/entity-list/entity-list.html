@@ -219,19 +219,27 @@
                         </span>
 
                     </div>
-                    <div class="actions" ng-if="!entityOptions.entityData.hideActionButtons">
-                        <!--<action-button-->
-                                <!--button-list="entityButtons"-->
-                                <!--button-controller="entityList"-->
-                                <!--button-type="{{ entityOptions.entityData.actionButtonsType }}"-->
-                                <!--ng-show="!entityList.showgroup"-->
-                                <!--button-model="entity"></action-button>-->
+                    <div class="actions"
+                         ng-if="!entityOptions.entityData.hideActionButtons"
+                         ng-switch="entityOptions.entityData.actionButtonsType">
+                         <div ng-switch-when="refresh" 
+                              class="actions-button">
+                             <a class="button reopen"
+                               ng-click="entityList.getCommentsForIssue(entity.key)"></a>
+                         </div>
 
-                        <action-button-resource
+                         <action-button-resource
+                            ng-switch-when="resource"
                             button-controller="entityList"
-                            button-type="{{ entityOptions.entityData.actionButtonsType }}"
-                            ng-show="!entityList.showgroup"
                             button-model="entity"></action-button-resource>
+
+                         <action-button
+                            ng-switch-default
+                            button-list="entityButtons"
+                            button-controller="entityList"
+                            ng-show="!entityList.showgroup"
+                            button-model="entity">
+                         </action-button>
                     </div>
 
                     <expandable-indicator ng-if="::entityList.expandableOptions" open="entity.expandItemOpen"></expandable-indicator>

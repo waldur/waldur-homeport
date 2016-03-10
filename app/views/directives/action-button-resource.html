@@ -1,9 +1,5 @@
 <div class="actions-button" stoppropagation>
-    <a ng-if="buttonType == 'refresh'"
-       class="button reopen"
-       ng-click="buttonController.getCommentsForIssue(buttonModel.key)"></a>
-    <a ng-if="!buttonType"
-       class="button"
+    <a class="button"
        ng-click="openActionsListTrigger()">actions</a>
     <ul ng-show="loading" class="actions-dropdown">
         Loading actions

@@ -125,7 +125,8 @@
             noMatchesText: 'No resources found matching filter.',
             checkQuotas: 'resource',
             timer: ENV.resourcesTimerInterval,
-            rowTemplateUrl: 'views/resource/row.html'
+            rowTemplateUrl: 'views/resource/row.html',
+            actionButtonsType: 'resource'
           },
           list: [
             {

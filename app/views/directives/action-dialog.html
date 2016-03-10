@@ -17,7 +17,7 @@
                            max="{{ ::field.max }}"/>
                 </div>
                 <div ng-switch-when="select_url">
-                    <select ng-options="item.uuid as item.name for item in field.list"
+                    <select ng-options="item.url as item.name for item in field.list"
                             ng-model="form[name]"
                             ng-if="field.list"></select>
                      <div ng-if="!field.list">N/A</div>

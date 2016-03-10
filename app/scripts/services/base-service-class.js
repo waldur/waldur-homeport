@@ -50,7 +50,7 @@
           filter.page = filter.page || vm.page;
           /*jshint camelcase: false */
           filter.page_size = vm.pageSize;
-          var cacheKey = vm.endpoint + JSON.stringify(filter);
+          var cacheKey = (endpointUrl || vm.endpoint) + JSON.stringify(filter);
           var cache = vm.getCache(cacheKey);
 
           if (!vm.cacheReset && vm.cacheTime > 0 && cache && cache.time > new Date().getTime()) {

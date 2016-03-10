@@ -1,19 +1,31 @@
 'use strict';
 
 (function() {
+
   angular.module('ncsaas')
-    .directive('actionButtonResource', ['$rootScope', 'resourcesService', 'ngDialog', 'ENV',
+    .service('actionUtilsService', ['ncUtilsFlash', actionUtilsService]);
+
+  function actionUtilsService(ncUtilsFlash) {
+    this.actionApplied = function(action) {
+      var template = "Request to {action} has been accepted";
+      var message = template.replace("{action}", action.title);
+      ncUtilsFlash.success(message);
+    };
+  }
+
+  angular.module('ncsaas')
+    .directive('actionButtonResource', [
+      '$rootScope', 'resourcesService', 'ngDialog', 'actionUtilsService',
       actionButtonResource]);
 
-  function actionButtonResource($rootScope, resourcesService, ngDialog, ENV) {
+  function actionButtonResource($rootScope, resourcesService, ngDialog, actionUtilsService) {
     return {
       restrict: 'E',
       templateUrl: 'views/directives/action-button-resource.html',
       replace: true,
       scope: {
         buttonController: '=',
-        buttonModel: '=',
-        buttonType: '@'
+        buttonModel: '='
       },
       link: function (scope) {
         scope.errors = {};
@@ -48,7 +60,15 @@
         }
 
         function applyAction(action) {
-          return resourcesService.$create(action.url).$save();
+          if (action.method == 'DELETE') {
+            return resourcesService.$deleteByUrl(action.url).then(function(response) {
+              actionUtilsService.actionApplied(action);
+            });
+          } else {
+            return resourcesService.$create(action.url).$save().then(function(response) {
+              actionUtilsService.actionApplied(action);
+            });
+          }
         }
 
         function openActionsListTrigger() {
@@ -86,9 +106,9 @@
   }
 
   angular.module('ncsaas').controller('ActionDialogController', 
-    ['$scope', 'resourcesService', ActionDialogController]);
+    ['$scope', 'resourcesService', 'actionUtilsService', ActionDialogController]);
 
-  function ActionDialogController($scope, resourcesService) {
+  function ActionDialogController($scope, resourcesService, actionUtilsService) {
     angular.extend($scope, {
       init: function () {
         $scope.errors = {};
@@ -113,8 +133,10 @@
             return;
           }
         }
-        return $scope.form.$save(function() {
+        return $scope.form.$save(function(response) {
           $scope.errors = {};
+          actionUtilsService.actionApplied($scope.action);
+          $scope.closeThisDialog();
         }, function(response) {
           $scope.errors = response.data;
         });
