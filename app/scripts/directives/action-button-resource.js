@@ -20,15 +20,14 @@
             controller.reInitResource(resource);
           }
         },
-        controller.handleActionException.bind(controller);
+        controller.handleActionException.bind(controller)
       );
-
-      this.handleActionSuccess = function(action) {
-        var template = "Request to {action} has been accepted";
-        var message = template.replace("{action}", action.title);
-        ncUtilsFlash.success(message);
-      };
     }
+    this.handleActionSuccess = function(action) {
+      var template = "Request to {action} has been accepted";
+      var message = template.replace("{action}", action.title);
+      ncUtilsFlash.success(message);
+    };
   }
 
   angular.module('ncsaas')
@@ -77,6 +76,8 @@
         function openActionDialog(action) {
           var dialogScope = $rootScope.$new();
           dialogScope.action = action;
+          dialogScope.controller = scope.buttonController;
+          dialogScope.resource = scope.buttonModel;
           ngDialog.open({
             templateUrl: 'views/directives/action-dialog.html',
             className: 'ngdialog-theme-default',
@@ -146,6 +147,7 @@
         return $scope.form.$save(function(response) {
           $scope.errors = {};
           actionUtilsService.handleActionSuccess($scope.action);
+          $scope.controller.reInitResource($scope.resource);
           $scope.closeThisDialog();
         }, function(response) {
           $scope.errors = response.data;
