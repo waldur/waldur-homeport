@@ -3,14 +3,32 @@
 (function() {
 
   angular.module('ncsaas')
-    .service('actionUtilsService', ['ncUtilsFlash', actionUtilsService]);
+    .service('actionUtilsService', ['ncUtilsFlash', 'resourcesService', actionUtilsService]);
 
-  function actionUtilsService(ncUtilsFlash) {
-    this.actionApplied = function(action) {
-      var template = "Request to {action} has been accepted";
-      var message = template.replace("{action}", action.title);
-      ncUtilsFlash.success(message);
-    };
+  function actionUtilsService(ncUtilsFlash, resourcesService) {
+      this.applyAction = function(controller, resource, name, action) {
+        var vm = this;
+        var promise = (action.method == 'DELETE') ?
+          resourcesService.$deleteByUrl(action.url) :
+          resourcesService.$create(action.url).$save();
+
+        promise.then(function(response) {
+          vm.handleActionSuccess(action);
+          if (name == "unlink" || name == "destroy") {
+            controller.afterInstanceRemove(resource);
+          } else {
+            controller.reInitResource(resource);
+          }
+        },
+        controller.handleActionException.bind(controller);
+      );
+
+      this.handleActionSuccess = function(action) {
+        var template = "Request to {action} has been accepted";
+        var message = template.replace("{action}", action.title);
+        ncUtilsFlash.success(message);
+      };
+    }
   }
 
   angular.module('ncsaas')
@@ -39,36 +57,31 @@
         controller.actionButtonsList = controller.actionButtonsList || [];
         controller.actionButtonsList[scope.$id] = false;
 
-        function buttonClick(action) {
+        function buttonClick(name, action) {
+          function applyAction() {
+            actionUtilsService.applyAction(scope.buttonController, scope.buttonModel, name, action);
+          }
           if (action.type === 'button') {
             if (action.destructive) {
               if (confirm('Are you sure? This action cannot be undone.')) {
-                applyAction(action);
+                applyAction();
               }
             } else {
-              applyAction(action);
+              applyAction();
             }
           } else if (action.type === 'form') {
-            var scope = $rootScope.$new();
-            scope.action = action;
-            ngDialog.open({
-              templateUrl: 'views/directives/action-dialog.html',
-              className: 'ngdialog-theme-default',
-              scope: scope
-            });
+            openActionDialog(action);
           }
         }
 
-        function applyAction(action) {
-          if (action.method == 'DELETE') {
-            return resourcesService.$deleteByUrl(action.url).then(function(response) {
-              actionUtilsService.actionApplied(action);
-            });
-          } else {
-            return resourcesService.$create(action.url).$save().then(function(response) {
-              actionUtilsService.actionApplied(action);
-            });
-          }
+        function openActionDialog(action) {
+          var dialogScope = $rootScope.$new();
+          dialogScope.action = action;
+          ngDialog.open({
+            templateUrl: 'views/directives/action-dialog.html',
+            className: 'ngdialog-theme-default',
+            scope: dialogScope
+          });
         }
 
         function openActionsListTrigger() {
@@ -80,9 +93,6 @@
         }
 
         function loadActions() {
-          if (scope.actions != null) {
-            return;
-          }
           scope.loading = true;
           resourcesService.getOption(scope.buttonModel.url).then(function(response) {
             if (response.actions) {
@@ -135,7 +145,7 @@
         }
         return $scope.form.$save(function(response) {
           $scope.errors = {};
-          actionUtilsService.actionApplied($scope.action);
+          actionUtilsService.handleActionSuccess($scope.action);
           $scope.closeThisDialog();
         }, function(response) {
           $scope.errors = response.data;

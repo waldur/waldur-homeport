@@ -261,6 +261,10 @@
 
         return deferred.promise;
       },
+      cleanOptionsCache: function(endpointUrl) {
+        var cacheKey = [endpointUrl, 'OPTIONS'].join('');
+        listCache.remove(cacheKey);
+      },
       cleanAllCache: function() {
         listCache.removeAll();
       }

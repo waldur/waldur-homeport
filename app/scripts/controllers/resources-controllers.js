@@ -260,6 +260,9 @@
       },
       afterGetList: function() {
         angular.forEach(this.list, resourceUtils.setAccessInfo);
+        angular.forEach(this.list, function(resource) {
+          resourcesService.cleanOptionsCache(resource.url);
+        });
         this._super();
       },
       adjustSearchFilters: function() {
@@ -346,6 +349,7 @@
           return;
         }
         this._super(resource);
+        servicesService.clearAllCacheForCurrentEndpoint();
         projectsService.clearAllCacheForCurrentEndpoint();
         priceEstimationService.clearAllCacheForCurrentEndpoint();
       },
