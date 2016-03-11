@@ -153,6 +153,11 @@ $searchInputHeight: 32px;
     min-height: 420px;
     box-shadow: -2px 2px 2px 0px rgba(237,237,237,1);
     margin-bottom: 20px;
+
+    .block-ui-container {
+      z-index: 1000;
+    }
+
     @include bp(xs) {
       margin-left: 0;
       padding: 10px;
