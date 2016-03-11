@@ -7,7 +7,7 @@
     <ul ng-show="buttonController.actionButtonsList[$id] && actions"
         class="actions-dropdown">
         <li ng-repeat="(name, action) in actions"
-            title="{{ action.reason }}">
+            title="{{ ::action.reason }}">
             <a ng-click="buttonClick(name, action)"
                ng-class="{'disabled': !action.enabled, 'remove': action.destructive}"
                class="button-simple">

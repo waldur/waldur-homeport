@@ -1,41 +1,12 @@
 'use strict';
 
 (function() {
-
-  angular.module('ncsaas')
-    .service('actionUtilsService', ['ncUtilsFlash', 'resourcesService', actionUtilsService]);
-
-  function actionUtilsService(ncUtilsFlash, resourcesService) {
-      this.applyAction = function(controller, resource, name, action) {
-        var vm = this;
-        var promise = (action.method == 'DELETE') ?
-          resourcesService.$deleteByUrl(action.url) :
-          resourcesService.$create(action.url).$save();
-
-        promise.then(function(response) {
-          vm.handleActionSuccess(action);
-          if (name == "unlink" || name == "destroy") {
-            controller.afterInstanceRemove(resource);
-          } else {
-            controller.reInitResource(resource);
-          }
-        },
-        controller.handleActionException.bind(controller)
-      );
-    }
-    this.handleActionSuccess = function(action) {
-      var template = "Request to {action} has been accepted";
-      var message = template.replace("{action}", action.title);
-      ncUtilsFlash.success(message);
-    };
-  }
-
   angular.module('ncsaas')
     .directive('actionButtonResource', [
-      '$rootScope', 'resourcesService', 'ngDialog', 'actionUtilsService',
+      '$rootScope', 'resourcesService', 'actionUtilsService',
       actionButtonResource]);
 
-  function actionButtonResource($rootScope, resourcesService, ngDialog, actionUtilsService) {
+  function actionButtonResource($rootScope, resourcesService, actionUtilsService) {
     return {
       restrict: 'E',
       templateUrl: 'views/directives/action-button-resource.html',
@@ -49,41 +20,14 @@
         scope.actions = null;
         scope.loading = false;
 
-        scope.buttonClick = buttonClick;
+        scope.buttonClick = function(name, action) {
+          actionUtilsService.buttonClick(scope.buttonController, scope.buttonModel, name, action);
+        }
         scope.openActionsListTrigger = openActionsListTrigger;
 
         var controller = scope.buttonController;
         controller.actionButtonsList = controller.actionButtonsList || [];
         controller.actionButtonsList[scope.$id] = false;
-
-        function buttonClick(name, action) {
-          function applyAction() {
-            actionUtilsService.applyAction(scope.buttonController, scope.buttonModel, name, action);
-          }
-          if (action.type === 'button') {
-            if (action.destructive) {
-              if (confirm('Are you sure? This action cannot be undone.')) {
-                applyAction();
-              }
-            } else {
-              applyAction();
-            }
-          } else if (action.type === 'form') {
-            openActionDialog(action);
-          }
-        }
-
-        function openActionDialog(action) {
-          var dialogScope = $rootScope.$new();
-          dialogScope.action = action;
-          dialogScope.controller = scope.buttonController;
-          dialogScope.resource = scope.buttonModel;
-          ngDialog.open({
-            templateUrl: 'views/directives/action-dialog.html',
-            className: 'ngdialog-theme-default',
-            scope: dialogScope
-          });
-        }
 
         function openActionsListTrigger() {
           loadActions();
@@ -95,7 +39,7 @@
 
         function loadActions() {
           scope.loading = true;
-          resourcesService.getOption(scope.buttonModel.url).then(function(response) {
+          actionUtilsService.loadActions(scope.buttonModel).then(function(response) {
             if (response.actions) {
               scope.actions = response.actions;
             }
