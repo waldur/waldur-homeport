@@ -490,7 +490,7 @@
         this.actionButtonsListItems = [
           {
             title: 'Edit',
-            clickFunction: vm.edit.bind(vm)
+            clickFunction: vm.openPopup.bind(vm)
           },
           {
             title: 'Remove',
@@ -540,10 +540,6 @@
         });
       },
 
-      edit: function(user) {
-        this.editUser = user;
-        this.entityOptions.entityData.showPopup = true;
-      },
       remove: function(user) {
         var vm = this;
         var confirmDelete = confirm('Confirm user deletion?');
@@ -569,8 +565,10 @@
           alert('User was not deleted.');
         }
       },
-      openPopup: function() {
+      openPopup: function(user) {
+        this.editUser = user || null;
         this.entityOptions.entityData.showPopup = true;
+        $rootScope.$broadcast('populatePopupModel');
       },
       closePopup: function () {
         this.entityOptions.entityData.showPopup = false;

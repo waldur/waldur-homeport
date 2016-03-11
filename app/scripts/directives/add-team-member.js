@@ -46,12 +46,7 @@
 
                 scope.$watch('editUser', function(user) {
                     if (user) {
-                        scope.addText = 'Save';
-                        scope.addTitle = 'Edit';
-                        scope.userModel.name = user.user_full_name;
-                        scope.userModel.user_url = user.user;
-                        scope.userModel.role = user.role;
-                        scope.userModel.projects = user.projectsAccessible;
+                        populatePopupModel(user);
                     }
                 });
 
@@ -60,6 +55,15 @@
                 });
 
                 getProjectsListForAutoComplete();
+
+                function populatePopupModel(user) {
+                    scope.addText = 'Save';
+                    scope.addTitle = 'Edit';
+                    scope.userModel.name = user.user_full_name;
+                    scope.userModel.user_url = user.user;
+                    scope.userModel.role = user.role;
+                    scope.userModel.projects = user.projectsAccessible;
+                }
 
                 function add() {
                     var userPermission = customerPermissionsService.$create();
@@ -71,6 +75,9 @@
                         });
                         return;
                     }
+                    console.log(currentCustomer.url);
+                    console.log(scope.userModel.user_url);
+                    console.log(scope.userModel.role);
                     userPermission.customer = currentCustomer.url;
                     userPermission.user = scope.userModel.user_url;
                     userPermission.role = scope.userModel.role;
@@ -164,6 +171,9 @@
                 scope.$on('clearPopupModel', function() {
                    scope.userModel = {};
                 });
+                scope.$on('populatePopupModel', function() {
+                    scope.editUser && populatePopupModel(scope.editUser);
+                })
             }
         };
     }

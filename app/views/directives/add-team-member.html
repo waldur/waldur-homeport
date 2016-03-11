@@ -3,16 +3,15 @@
     <div class="line-wrapper">
         <div class="label">Member</div>
         <div class="input">
-            <select ng-show="!userModel.name" ng-model="userModel.user_url">
-                <option ng-repeat="user in users" value="{{user.url}}">{{user.full_name}}</option>
+            <select ng-model="userModel.user_url" ng-disabled="userModel.name">
+                <option ng-selected="userModel.name == user.full_name"
+                        ng-repeat="user in users"
+                        value="{{user.url}}">{{user.full_name}}</option>
             </select>
-            <span class="name" ng-if="userModel.name">
-                {{userModel.name}}
-            </span>
         </div>
     </div>
     <div class="line-wrapper">
-        <div class="label">Role owner</div>
+        <div class="label">Organization owner</div>
         <div class="input">
             <input id="userRoleCheckbox" type="checkbox" ng-model="userModel.role"
                    ng-true-value="'owner'" ng-false-value="''">
