@@ -68,56 +68,6 @@
         this.selectAll = true;
         this.hasCustomFilters = false;
         var currentCustomerUuid = currentStateService.getCustomerUuid();
-        this.actionButtonsListItems = [
-          {
-            title: 'Start',
-            icon: 'fa-play',
-            clickFunction: this.startResource.bind(this.controllerScope),
-            isHidden: function(model) {
-              return !this.isOperationAvailable('start', model);
-            }.bind(this.controllerScope),
-            isDisabled: function(model) {
-              return !this.isOperationEnabled('start', model);
-            }.bind(this.controllerScope)
-          },
-          {
-            title: 'Stop',
-            icon: 'fa-stop',
-            clickFunction: this.stopResource.bind(this.controllerScope),
-            isHidden: function(model) {
-              return !this.isOperationAvailable('stop', model);
-            }.bind(this.controllerScope),
-            isDisabled: function(model) {
-              return !this.isOperationEnabled('stop', model);
-            }.bind(this.controllerScope),
-          },
-          {
-            title: 'Restart',
-            icon: 'fa-repeat',
-            clickFunction: this.restartResource.bind(this.controllerScope),
-            isHidden: function(model) {
-              return !this.isOperationAvailable('restart', model);
-            }.bind(this.controllerScope),
-            isDisabled: function(model) {
-              return !this.isOperationEnabled('restart', model);
-            }.bind(this.controllerScope)
-          },
-          {
-            title: 'Remove',
-            clickFunction: this.remove.bind(this.controllerScope),
-            isDisabled: function(model) {
-              return !this.isOperationEnabled('delete', model);
-            }.bind(this.controllerScope),
-            className: 'remove',
-            icon: 'fa-trash'
-          },
-          {
-            title: 'Unlink',
-            clickFunction: this.unlink.bind(this.controllerScope),
-            className: 'remove',
-            icon: 'fa-unlink'
-          }
-        ];
         var vm = this;
         this.entityOptions = {
           entityData: {
@@ -303,47 +253,6 @@
           vm.searchFilters = filters;
         });
       },
-      stopResource:function(resource) {
-        var vm = this;
-        vm.service.operation('stop', resource.url).then(
-          vm.reInitResource.bind(vm, resource),
-          vm.handleActionException.bind(vm)
-        );
-      },
-      startResource:function(resource) {
-        var vm = this;
-        vm.service.operation('start', resource.url).then(
-          vm.reInitResource.bind(vm, resource),
-          vm.handleActionException.bind(vm)
-        );
-      },
-      restartResource:function(resource) {
-        var vm = this;
-        vm.service.operation('restart', resource.url).then(
-          vm.reInitResource.bind(vm, resource),
-          vm.handleActionException.bind(vm)
-        );
-      },
-      removeInstance: function(resource) {
-        return this.service.$deleteByUrl(resource.url).then(function(response) {
-          if (response.status === "destroy was scheduled") {
-            resource.state = 'Deletion Scheduled';
-          }
-        });
-      },
-      unlink: function(resource) {
-        var vm = this;
-        var confirmUnlink = confirm('Are you sure you want to unlink ' + resource.name + '?');
-        if (confirmUnlink) {
-          vm.service.operation('unlink', resource.url).then(
-              function() {
-                servicesService.clearAllCacheForCurrentEndpoint();
-                vm.afterInstanceRemove(resource);
-              },
-              vm.handleActionException.bind(vm)
-          );
-        }
-      },
       afterInstanceRemove: function(resource) {
         if (resource.state === 'Deletion Scheduled') {
           return;
@@ -353,14 +262,6 @@
         projectsService.clearAllCacheForCurrentEndpoint();
         priceEstimationService.clearAllCacheForCurrentEndpoint();
       },
-      isOperationAvailable: function(operation, resource) {
-        var availableOperations = this.service.getAvailableOperations(resource);
-        return availableOperations.indexOf(operation.toLowerCase()) !== -1;
-      },
-      isOperationEnabled: function(operation, resource) {
-        var availableOperations = this.service.getEnabledOperations(resource);
-        return availableOperations.indexOf(operation.toLowerCase()) !== -1;
-      },
       reInitResource:function(resource) {
         var vm = this;
         vm.service.$get(resource.resource_type, resource.uuid).then(function(response) {
@@ -368,20 +269,6 @@
           vm.list[index] = response;
           vm.afterGetList();
         });
-      },
-      remove: function(model) {
-        var vm = this.controllerScope;
-        var confirmText = (model.state === 'Erred')
-          ? 'Are you sure you want to delete a {resource_type} in an Erred state?' +
-            ' A cleanup attempt will be performed if you choose so.'
-          : 'Are you sure you want to delete a {resource_type}?';
-        var confirmDelete = confirm(confirmText.replace('{resource_type}', model.resource_type));
-        if (confirmDelete) {
-          vm.removeInstance(model).then(function() {
-            servicesService.clearAllCacheForCurrentEndpoint();
-            vm.afterInstanceRemove(model);
-          }, vm.handleActionException.bind(vm));
-        }
       }
     });
 

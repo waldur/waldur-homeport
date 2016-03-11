@@ -13,7 +13,7 @@
     this.buttonClick = function(controller, model, name, action) {
       if (action.type === 'button') {
         if (action.destructive) {
-          if (confirm('Are you sure? This action cannot be undone.')) {
+          if (this.confirmAction(model, name)) {
             this.applyAction(controller, model, name, action);
           }
         } else {
@@ -21,6 +21,18 @@
         }
       } else if (action.type === 'form') {
         this.openActionDialog(controller, model, action);
+      }
+    };
+
+    this.confirmAction = function(model, name) {
+      if (name === 'destroy') {
+        var confirmText = (model.state === 'Erred')
+          ? 'Are you sure you want to delete a {resource_type} in an Erred state?' +
+            ' A cleanup attempt will be performed if you choose so.'
+          : 'Are you sure you want to delete a {resource_type}?';
+        return confirm(confirmText.replace('{resource_type}', model.resource_type));
+      } else {
+        return confirm('Are you sure? This action cannot be undone.');
       }
     };
 

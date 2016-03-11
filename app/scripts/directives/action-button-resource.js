@@ -16,7 +16,6 @@
         buttonModel: '='
       },
       link: function (scope) {
-        scope.errors = {};
         scope.actions = null;
         scope.loading = false;
 
