@@ -141,6 +141,7 @@
       '$q',
       'joinService',
       'ncUtilsFlash',
+      'ncUtils',
       'eventsService',
       'resourcesCountService',
       'currentStateService',
@@ -161,6 +162,7 @@
     $q,
     joinService,
     ncUtilsFlash,
+    ncUtils,
     eventsService,
     resourcesCountService,
     currentStateService
@@ -252,7 +254,8 @@
               key: 'team',
               viewName: 'tabTeam',
               hideSearch: false,
-              icon: 'users'
+              countFieldKey: 'team',
+              icon: 'customer'
             },
             {
               title: 'Manage',
@@ -288,11 +291,20 @@
       afterActivate: function() {
         controllerScope.canEdit = controllerScope.isOwnerOrStaff(controllerScope.model);
         controllerScope.updateImageUrl();
+        var vm = this;
+        $q.when(this.getLimitsAndUsages()).then(function(result) {
+          var customCountFields = {team: result.nc_user_count};
+          vm.setCounters(customCountFields);
+          var timer = $interval(vm.setCounters.bind(vm, customCountFields), ENV.countersTimerInterval * 1000);
+          $scope.$on('$destroy', function() {
+            $interval.cancel(timer);
+          });
+        });
+      },
 
-        this.setCounters();
-        var timer = $interval(this.setCounters.bind(this), ENV.countersTimerInterval * 1000);
-        $scope.$on('$destroy', function() {
-          $interval.cancel(timer);
+      getLimitsAndUsages: function() {
+        return customersService.$get($stateParams.uuid).then(function(customer) {
+          return ncUtils.getQuotaUsage(customer.quotas);
         });
       },
 

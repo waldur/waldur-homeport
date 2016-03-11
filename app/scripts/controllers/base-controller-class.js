@@ -289,7 +289,7 @@
         }
         return defaultTab;
       },
-      setCounters: function() {
+      setCounters: function(customCountFields) {
         var vm = this;
         vm.getCounters().then(function(response) {
           for (var i = 0; i < vm.detailsViewOptions.tabs.length; i++) {
@@ -297,6 +297,9 @@
             var key = tab.countFieldKey;
             if (key) {
               tab.count = response[key];
+            }
+            if (key in customCountFields) {
+              tab.count = customCountFields[key];
             }
           }
         });

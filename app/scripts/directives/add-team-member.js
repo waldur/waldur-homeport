@@ -30,6 +30,7 @@
             link: function(scope) {
                 scope.contentUrl = 'views/directives/add-team-member.html';
                 scope.add = add;
+                scope.cancel = cancel;
                 scope.getProjectsListForAutoComplete = getProjectsListForAutoComplete;
                 scope.userSearchInputChanged = userSearchInputChanged;
                 scope.selectedUsersCallback = selectedUsersCallback;
@@ -116,6 +117,11 @@
                     scope.userModel = {};
                     scope.controller.entityOptions.entityData.showPopup = false;
                     scope.controller.getList();
+                }
+
+                function cancel() {
+                    scope.userModel = {};
+                    scope.controller.entityOptions.entityData.showPopup = false;
                 }
 
                 function getProjectsListForAutoComplete(filter) {

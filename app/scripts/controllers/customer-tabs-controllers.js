@@ -500,6 +500,8 @@
 
         this.entityOptions = {
           entityData: {
+            createPopupText: 'Add member',
+            createPopup: vm.openPopup.bind(vm),
             showPopup: false,
             noDataText: 'No users yet',
             hideActionButtons: false,
