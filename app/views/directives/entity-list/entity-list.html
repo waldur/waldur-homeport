@@ -135,7 +135,8 @@
                         </span>
 
                         <h3 ng-switch-when="name" class="item-title">
-                            <a ng-if="field.link"
+                            <a ng-if="field.link" stoppropagation
+                               ng-click="entity.expandItemOpen = false"
                                ui-sref="{{ field.link }}">{{ entity[field.propertyName] }}</a>
                             <a ng-if="!field.link">{{ entity[field.propertyName] }}</a>
                             <span ng-if="field.subtitle" class="subtitle">
