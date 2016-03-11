@@ -36,6 +36,7 @@
                 scope.selectedUsersCallback = selectedUsersCallback;
                 scope.projectRemove = projectRemove;
                 scope.addText = 'Add';
+                scope.addTitle = 'Add';
                 scope.userModel = {};
                 var currentCustomer;
 
@@ -46,6 +47,8 @@
                 scope.$watch('editUser', function(user) {
                     if (user) {
                         scope.addText = 'Save';
+                        scope.addTitle = 'Edit';
+                        scope.userModel.name = user.user_full_name;
                         scope.userModel.user_url = user.user;
                         scope.userModel.role = user.role;
                         scope.userModel.projects = user.projectsAccessible;
