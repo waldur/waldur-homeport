@@ -59,7 +59,8 @@
         $rootScope.$$listeners[eventName] = [];
       },
       updateIntercom: function() {
-        window.Intercom('update');
+        // XXX: Temporarily disabled Intercom
+        //window.Intercom('update');
       },
       blockElement: function(element, promise) {
         if (promise && promise.finally) {

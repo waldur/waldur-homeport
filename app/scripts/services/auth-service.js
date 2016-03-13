@@ -51,7 +51,8 @@
       usersService.currentUser = null;
       usersService.cleanAllCache();
       $auth.logout();
-      window.Intercom('shutdown');
+      // XXX: Temporarily disabled Intercom
+      // window.Intercom('shutdown');
     }
 
     function setAuthHeader(token) {
