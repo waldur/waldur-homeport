@@ -13,11 +13,12 @@
                 <div ng-switch-when="integer">
                     <input ng-model="form[name]"
                            type="number"
-                           min="{{ ::field.min }}"
-                           max="{{ ::field.max }}"/>
+                           min="{{ ::field.min_value }}"
+                           max="{{ ::field.max_value }}"
+                           placeholder="{{ ::field.min_value }}"/>
                 </div>
                 <div ng-switch-when="select">
-                    <select ng-options="item.value as item.title for item in field.list"
+                    <select ng-options="item.value as item.display_name for item in field.list"
                             ng-model="form[name]"
                             ng-if="field.list"></select>
                      <div ng-if="!field.list">N/A</div>
