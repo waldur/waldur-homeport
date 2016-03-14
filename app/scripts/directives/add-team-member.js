@@ -75,9 +75,6 @@
                         });
                         return;
                     }
-                    console.log(currentCustomer.url);
-                    console.log(scope.userModel.user_url);
-                    console.log(scope.userModel.role);
                     userPermission.customer = currentCustomer.url;
                     userPermission.user = scope.userModel.user_url;
                     userPermission.role = scope.userModel.role;
@@ -126,12 +123,14 @@
                 function clearAndRefreshList() {
                     scope.userModel = {};
                     scope.controller.entityOptions.entityData.showPopup = false;
+                    scope.editUser = null;
                     scope.controller.getList();
                 }
 
                 function cancel() {
                     scope.userModel = {};
                     scope.controller.entityOptions.entityData.showPopup = false;
+                    scope.editUser = null;
                 }
 
                 function getProjectsListForAutoComplete(filter) {
@@ -171,8 +170,8 @@
                 scope.$on('clearPopupModel', function() {
                    scope.userModel = {};
                 });
-                scope.$on('populatePopupModel', function() {
-                    scope.editUser && populatePopupModel(scope.editUser);
+                scope.$on('populatePopupModel', function(user) {
+                    user && populatePopupModel(user);
                 })
             }
         };
