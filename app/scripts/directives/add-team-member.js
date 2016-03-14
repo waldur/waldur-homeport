@@ -63,6 +63,7 @@
                     scope.userModel.user_url = user.user;
                     scope.userModel.role = user.role;
                     scope.userModel.projects = user.projectsAccessible;
+
                 }
 
                 function add() {
@@ -124,13 +125,20 @@
                     scope.userModel = {};
                     scope.controller.entityOptions.entityData.showPopup = false;
                     scope.editUser = null;
+                    scope.projectsToDelete = null;
                     scope.controller.getList();
                 }
 
                 function cancel() {
+                    if (scope.projectsToDelete) {
+                        scope.projectsToDelete.forEach(function(item) {
+                            scope.userModel.projects.push(item);
+                        });
+                    }
                     scope.userModel = {};
                     scope.controller.entityOptions.entityData.showPopup = false;
                     scope.editUser = null;
+                    scope.projectsToDelete = null;
                 }
 
                 function getProjectsListForAutoComplete(filter) {
@@ -167,10 +175,8 @@
                     scope.projectsToDelete.push(scope.userModel.projects[index]);
                     scope.userModel.projects.splice(index, 1);
                 }
-                scope.$on('clearPopupModel', function() {
-                   scope.userModel = {};
-                });
-                scope.$on('populatePopupModel', function(user) {
+
+                scope.$on('populatePopupModel', function(event, user) {
                     user && populatePopupModel(user);
                 })
             }

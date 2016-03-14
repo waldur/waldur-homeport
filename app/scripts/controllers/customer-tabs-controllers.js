@@ -569,10 +569,6 @@
         this.editUser = user || null;
         this.entityOptions.entityData.showPopup = true;
         $rootScope.$broadcast('populatePopupModel', user);
-      },
-      closePopup: function () {
-        this.entityOptions.entityData.showPopup = false;
-        $rootScope.$broadcast('clearPopupModel');
       }
     });
 
