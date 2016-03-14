@@ -6,7 +6,7 @@
             <div class="col label">
                 <label>{{ ::field.label }}</label>
             </div>
-            <div class="col input" ng-switch="field.type">
+            <div class="col input-full" ng-switch="field.type">
                 <div ng-switch-when="string">
                     <input ng-model="form[name]"/>
                 </div>
@@ -16,8 +16,8 @@
                            min="{{ ::field.min }}"
                            max="{{ ::field.max }}"/>
                 </div>
-                <div ng-switch-when="select_url">
-                    <select ng-options="item.url as item.name for item in field.list"
+                <div ng-switch-when="select">
+                    <select ng-options="item.value as item.title for item in field.list"
                             ng-model="form[name]"
                             ng-if="field.list"></select>
                      <div ng-if="!field.list">N/A</div>
@@ -36,10 +36,10 @@
         </div>
         <div class="decision">
             <div class="col">
-                <a class="button-cancel" ng-click="cancel()">Cancel</a>
+                <a class="button-apply" submit-button="submitForm()">Submit</a>
             </div>
             <div class="col">
-                <a class="button-apply" submit-button="submitForm()">Submit</a>
+                <a class="button-cancel" ng-click="cancel()">Cancel</a>
             </div>
         </div>
     </section>
