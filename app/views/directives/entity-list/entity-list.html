@@ -36,7 +36,7 @@
 
     <div class="white-box no-styles" ng-show="entityList.list.length == 0 && !entityList.searchInput && !entityList.chosenFilters.length">
         <h2 class="app-title">
-            {{ entityList.hideNoDataText ? 'Loading...' : entityOptions.entityData.noDataText }}
+            {{ entityList.hideNoDataText ? '' : entityOptions.entityData.noDataText }}
         </h2>
         <div class="decision">
             <div class="col">
@@ -135,7 +135,8 @@
                         </span>
 
                         <h3 ng-switch-when="name" class="item-title">
-                            <a ng-if="field.link"
+                            <a ng-if="field.link" stoppropagation
+                               ng-click="entity.expandItemOpen = false"
                                ui-sref="{{ field.link }}">{{ entity[field.propertyName] }}</a>
                             <a ng-if="!field.link">{{ entity[field.propertyName] }}</a>
                             <span ng-if="field.subtitle" class="subtitle">
