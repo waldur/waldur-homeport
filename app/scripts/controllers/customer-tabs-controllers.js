@@ -566,7 +566,6 @@
         }
       },
       openPopup: function(user) {
-        this.editUser = user || null;
         this.entityOptions.entityData.showPopup = true;
         $rootScope.$broadcast('populatePopupModel', user);
       }

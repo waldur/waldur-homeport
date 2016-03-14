@@ -3,11 +3,13 @@
     <div class="line-wrapper">
         <div class="label">Member</div>
         <div class="input">
-            <select ng-model="userModel.user_url" ng-disabled="userModel.name">
+            <select ng-model="userModel.user_url" ng-if="!userModel.name">
                 <option ng-selected="userModel.name == user.full_name"
                         ng-repeat="user in users"
+                        ng-class="{'current-user': user.uuid === currentUser.uuid}"
                         value="{{user.url}}">{{user.full_name}}</option>
             </select>
+            <span ng-if="userModel.name">{{userModel.name}}</span>
         </div>
     </div>
     <div class="line-wrapper">
@@ -16,8 +18,9 @@
             <input id="userRoleCheckbox" type="checkbox" ng-model="userModel.role"
                    ng-true-value="'owner'" ng-false-value="''">
             <label for="userRoleCheckbox">
-                <span>no</span>
-                <span>yes</span>
+                <i class="icon fa-check-circle"
+                   ng-class="{'fa-check-circle': userModel.role, 'fa-circle-o': !userModel.role}">
+                </i>
             </label>
 
         </div>

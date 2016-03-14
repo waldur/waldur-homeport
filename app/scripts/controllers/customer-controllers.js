@@ -292,19 +292,10 @@
         controllerScope.canEdit = controllerScope.isOwnerOrStaff(controllerScope.model);
         controllerScope.updateImageUrl();
         var vm = this;
-        $q.when(this.getLimitsAndUsages()).then(function(result) {
-          var customCountFields = {team: result.nc_user_count};
-          vm.setCounters(customCountFields);
-          var timer = $interval(vm.setCounters.bind(vm, customCountFields), ENV.countersTimerInterval * 1000);
-          $scope.$on('$destroy', function() {
-            $interval.cancel(timer);
-          });
-        });
-      },
-
-      getLimitsAndUsages: function() {
-        return customersService.$get($stateParams.uuid).then(function(customer) {
-          return ncUtils.getQuotaUsage(customer.quotas);
+        vm.setCounters();
+        var timer = $interval(vm.setCounters.bind(vm), ENV.countersTimerInterval * 1000);
+        $scope.$on('$destroy', function() {
+          $interval.cancel(timer);
         });
       },
 

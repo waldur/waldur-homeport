@@ -29,6 +29,7 @@
             },
             link: function(scope) {
                 scope.contentUrl = 'views/directives/add-team-member.html';
+                scope.editUser = null;
                 scope.add = add;
                 scope.cancel = cancel;
                 scope.getProjectsListForAutoComplete = getProjectsListForAutoComplete;
@@ -38,10 +39,15 @@
                 scope.addText = 'Add';
                 scope.addTitle = 'Add';
                 scope.userModel = {};
+                scope.currentUser = null;
                 var currentCustomer;
 
                 currentStateService.getCustomer().then(function(response) {
                     currentCustomer = response;
+                });
+
+                usersService.getCurrentUser().then(function(response) {
+                    scope.currentUser = response;
                 });
 
                 scope.$watch('editUser', function(user) {
@@ -71,9 +77,14 @@
                     if (scope.editUser) {
                         userPermission = scope.editUser;
                         userPermission.role = scope.userModel.role;
-                        customerPermissionsService.$delete(scope.editUser.pk).then(function() {
-                            saveCustomerPermissions(userPermission);
-                        });
+                        if (scope.userModel.role !== 'owner' &&
+                            scope.editUser.user_uuid !== scope.currentUser.uuid) {
+                            customerPermissionsService.$delete(scope.editUser.pk).then(function() {
+                                saveCustomerPermissions(userPermission);
+                            });
+                        } else {
+                            saveProjectPermissions();
+                        }
                         return;
                     }
                     userPermission.customer = currentCustomer.url;
@@ -177,6 +188,7 @@
                 }
 
                 scope.$on('populatePopupModel', function(event, user) {
+                    scope.editUser = user;
                     user && populatePopupModel(user);
                 })
             }
