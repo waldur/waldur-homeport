@@ -3,9 +3,9 @@
 (function() {
   angular.module('ncsaas')
     .service('actionUtilsService', [
-      'ncUtilsFlash', '$rootScope', 'ngDialog', 'resourcesService', actionUtilsService]);
+      'ncUtilsFlash', '$rootScope', '$http', 'ngDialog', 'resourcesService', actionUtilsService]);
 
-  function actionUtilsService(ncUtilsFlash, $rootScope, ngDialog, resourcesService) {
+  function actionUtilsService(ncUtilsFlash, $rootScope, $http, ngDialog, resourcesService) {
     this.loadActions = function(model) {
       return resourcesService.getOption(model.url);
     };
@@ -38,15 +38,14 @@
 
     this.applyAction = function(controller, resource, name, action) {
       var vm = this;
-      var promise = (action.method == 'DELETE') ?
-        resourcesService.$deleteByUrl(action.url) :
-        resourcesService.$create(action.url).$save();
+      var promise = (action.method == 'DELETE') ? $http.delete(action.url) : $http.post(action.url);
 
         promise.then(function(response) {
-          vm.handleActionSuccess(action);
-          if (name == "unlink" || name == "destroy") {
+          if (response.status == 204) {
+            ncUtilsFlash.success('Resource has been deleted');
             controller.afterInstanceRemove(resource);
           } else {
+            vm.handleActionSuccess(action);
             controller.reInitResource(resource);
           }
         },
