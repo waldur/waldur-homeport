@@ -464,6 +464,8 @@
         'baseControllerListClass',
         'customerPermissionsService',
         'projectPermissionsService',
+        'usersService',
+        'currentStateService',
         '$q',
         '$rootScope',
         'ENTITYLISTFIELDTYPES',
@@ -474,6 +476,8 @@
       baseControllerListClass,
       customerPermissionsService,
       projectPermissionsService,
+      usersService,
+      currentStateService,
       $q,
       $rootScope,
       ENTITYLISTFIELDTYPES) {
@@ -486,22 +490,30 @@
         this.searchFieldName = 'full_name';
         this._super();
         var vm = this;
-
-        this.actionButtonsListItems = [
-          {
-            title: 'Edit',
-            clickFunction: vm.openPopup.bind(vm)
-          },
-          {
-            title: 'Remove',
-            clickFunction: vm.remove.bind(vm)
-          }
-        ];
-
+        var currentUserPromise = usersService.getCurrentUser();
+        var currentCustomerPromise = currentStateService.getCustomer();
+        $q.all([currentUserPromise, currentCustomerPromise]).then(function(result) {
+          vm.currentUser = result[0];
+          vm.currentCustomer = result[1];
+          vm.currentCustomer.owners.forEach(function(item) {
+            if (vm.currentUser.uuid === item.uuid) {
+              vm.entityOptions.entityData.createPopup = vm.openPopup.bind(vm);
+              vm.actionButtonsListItems = [
+                {
+                  title: 'Edit',
+                  clickFunction: vm.openPopup.bind(vm)
+                },
+                {
+                  title: 'Remove',
+                  clickFunction: vm.remove.bind(vm)
+                }
+              ];
+            }
+          });
+        });
         this.entityOptions = {
           entityData: {
             createPopupText: 'Add member',
-            createPopup: vm.openPopup.bind(vm),
             showPopup: false,
             noDataText: 'No users yet',
             hideActionButtons: false,

@@ -41,10 +41,10 @@
                 scope.userModel = {};
                 scope.errors = {};
                 scope.currentUser = null;
-                var currentCustomer;
+                scope.currentCustomer = null;
 
                 currentStateService.getCustomer().then(function(response) {
-                    currentCustomer = response;
+                    scope.currentCustomer = response;
                 });
 
                 usersService.getCurrentUser().then(function(response) {
@@ -70,7 +70,13 @@
                     scope.userModel.user_url = user.user;
                     scope.userModel.role = user.role;
                     scope.userModel.projects = user.projectsAccessible;
-
+                    scope.userModel.projects.forEach(function(item) {
+                        scope.projectsListForAutoComplete.forEach(function(item2, i, arr) {
+                            if (item.project_uuid === item2.uuid) {
+                                arr.splice(i, 1);
+                            }
+                        });
+                    });
                 }
 
                 function add() {
@@ -89,17 +95,16 @@
                     }
                     if (!scope.userModel.user_url) {
                         scope.errors.user = 'this field is required';
-                    }
-                    if (!scope.userModel.role) {
-                        scope.errors.role = 'this field is required';
-                    }
-                    if (scope.errors.role || scope.errors.user) {
                         return;
                     }
-                    userPermission.customer = currentCustomer.url;
+                    userPermission.customer = scope.currentCustomer.url;
                     userPermission.user = scope.userModel.user_url;
                     userPermission.role = scope.userModel.role;
-                    saveCustomerPermissions(userPermission);
+                    if (scope.userModel.role === 'owner') {
+                        saveCustomerPermissions(userPermission);
+                    } else {
+                        saveProjectPermissions();
+                    }
                 }
 
                 function saveCustomerPermissions(userPermission) {
@@ -203,7 +208,7 @@
                     user && populatePopupModel(user);
                 });
 
-                scope.test1 = function(user) {
+                scope.ignoreAddedUsers = function(user) {
                     if (user && scope.controller.list.length) {
                         for (var i = 0; i < scope.controller.list.length; i++) {
                             if (user.uuid === scope.controller.list[i].user_uuid) {
@@ -212,6 +217,7 @@
                         }
                         return true;
                     }
+                    return true;
                 }
             }
         };

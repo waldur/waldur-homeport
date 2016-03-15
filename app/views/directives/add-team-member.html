@@ -5,9 +5,9 @@
         <div class="input">
             <select ng-model="userModel.user_url" ng-if="!userModel.name">
                 <option ng-selected="userModel.name == user.full_name"
-                        ng-repeat="user in users | filter:test1"
+                        ng-repeat="user in users | filter:ignoreAddedUsers"
                         ng-class="{'current-user': user.uuid === currentUser.uuid}"
-                        value="{{user.url}}">{{user.full_name}}</option>
+                        value="{{user.url}}">{{user.full_name || user.username}}</option>
             </select>
             <span ng-if="userModel.name">{{userModel.name}}</span>
         </div>
@@ -19,7 +19,8 @@
             <input id="userRoleCheckbox" type="checkbox" ng-model="userModel.role"
                    ng-true-value="'owner'" ng-false-value="''">
             <label for="userRoleCheckbox">
-                <span class="icon" ng-class="{'check': userModel.role, 'minus': !userModel.role }"></span>
+                <span>no</span>
+                <span>yes</span>
             </label>
         </div>
         <div class="error" ng-show="errors.role" ng-bind="errors.role"></div>
