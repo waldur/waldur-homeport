@@ -564,6 +564,7 @@
         } else {
           alert('User was not deleted.');
         }
+        this.entityOptions.entityData.showPopup = false;
       },
       openPopup: function(user) {
         this.entityOptions.entityData.showPopup = true;

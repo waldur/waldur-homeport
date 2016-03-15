@@ -39,6 +39,7 @@
                 scope.addText = 'Add';
                 scope.addTitle = 'Add';
                 scope.userModel = {};
+                scope.errors = {};
                 scope.currentUser = null;
                 var currentCustomer;
 
@@ -73,18 +74,26 @@
                 }
 
                 function add() {
+                    scope.errors = {};
                     var userPermission = customerPermissionsService.$create();
                     if (scope.editUser) {
                         userPermission = scope.editUser;
                         userPermission.role = scope.userModel.role;
-                        if (scope.userModel.role !== 'owner' &&
-                            scope.editUser.user_uuid !== scope.currentUser.uuid) {
-                            customerPermissionsService.$delete(scope.editUser.pk).then(function() {
-                                saveCustomerPermissions(userPermission);
-                            });
+                        if (scope.userModel.role !== 'owner') {
+                            scope.controller.remove(scope.editUser);
+                            clearAndRefreshList();
                         } else {
                             saveProjectPermissions();
                         }
+                        return;
+                    }
+                    if (!scope.userModel.user_url) {
+                        scope.errors.user = 'this field is required';
+                    }
+                    if (!scope.userModel.role) {
+                        scope.errors.role = 'this field is required';
+                    }
+                    if (scope.errors.role || scope.errors.user) {
                         return;
                     }
                     userPermission.customer = currentCustomer.url;
@@ -134,6 +143,7 @@
 
                 function clearAndRefreshList() {
                     scope.userModel = {};
+                    scope.errors = {};
                     scope.controller.entityOptions.entityData.showPopup = false;
                     scope.editUser = null;
                     scope.projectsToDelete = null;
@@ -147,6 +157,7 @@
                         });
                     }
                     scope.userModel = {};
+                    scope.errors = {};
                     scope.controller.entityOptions.entityData.showPopup = false;
                     scope.editUser = null;
                     scope.projectsToDelete = null;
@@ -190,7 +201,18 @@
                 scope.$on('populatePopupModel', function(event, user) {
                     scope.editUser = user;
                     user && populatePopupModel(user);
-                })
+                });
+
+                scope.test1 = function(user) {
+                    if (user && scope.controller.list.length) {
+                        for (var i = 0; i < scope.controller.list.length; i++) {
+                            if (user.uuid === scope.controller.list[i].user_uuid) {
+                                return false;
+                            }
+                        }
+                        return true;
+                    }
+                }
             }
         };
     }

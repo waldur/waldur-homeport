@@ -34,7 +34,7 @@
           width: 150px;
         }
 
-        input[type=select] {
+        select {
           option.current-user {
             background: #50b848;
           }
@@ -49,16 +49,11 @@
           position: relative;
           width: 100%;
           text-align: center;
-          border-radius: 4px;
-          overflow: hidden;
           cursor: pointer;
           span {
-            color: #fff;
-            display: block;
-            float: left;
-            width: 50%;
-            position: relative;
-            z-index: 1;
+            color: #50b848;
+            padding-top: 5px;
+            width: 100%;
           }
         }
 
