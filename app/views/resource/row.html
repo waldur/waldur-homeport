@@ -71,4 +71,8 @@
   </div>
 </div>
 
-<action-list actions="entityButtons" entity="entity" ng-show="entity.expandItemOpen"></action-list>
+<action-list-resource
+  entity="entity"
+  controller="entityList"
+  ng-if="entity.expandItemOpen">
+</action-list-resource>

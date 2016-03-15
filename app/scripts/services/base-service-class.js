@@ -50,7 +50,7 @@
           filter.page = filter.page || vm.page;
           /*jshint camelcase: false */
           filter.page_size = vm.pageSize;
-          var cacheKey = vm.endpoint + JSON.stringify(filter);
+          var cacheKey = (endpointUrl || vm.endpoint) + JSON.stringify(filter);
           var cache = vm.getCache(cacheKey);
 
           if (!vm.cacheReset && vm.cacheTime > 0 && cache && cache.time > new Date().getTime()) {
@@ -245,7 +245,25 @@
         this.defaultFilter = {};
       },
       getOption: function(endpointUrl) {
-        return this.getFactory(false, null, endpointUrl).options().$promise;
+        var deferred = $q.defer(),
+            cacheKey = [endpointUrl, 'OPTIONS'].join(''),
+            vm = this,
+            cache = vm.getCache(cacheKey);
+
+        if (cache && cache.time > new Date().getTime()) {
+          deferred.resolve(cache.data);
+        } else {
+          vm.getFactory(false, null, endpointUrl).options().$promise.then(function(response) {
+            vm.setCache(ENV.optionsCacheTime, response, cacheKey, endpointUrl);
+            deferred.resolve(response);
+          });
+        }
+
+        return deferred.promise;
+      },
+      cleanOptionsCache: function(endpointUrl) {
+        var cacheKey = [endpointUrl, 'OPTIONS'].join('');
+        listCache.remove(cacheKey);
       },
       cleanAllCache: function() {
         listCache.removeAll();

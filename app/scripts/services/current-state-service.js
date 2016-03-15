@@ -78,9 +78,8 @@
 
     function reloadCurrentCustomer(callback) {
       vm = this;
-      var uuid = vm.getCustomerUuid();
       vm.getCustomer().then(function(customer) {
-        customer.$get(uuid).then(function(customer) {
+        customer.$get().then(function(customer) {
           vm.setCustomer(customer);
           callback(customer);
         });

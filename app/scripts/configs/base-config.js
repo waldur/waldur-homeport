@@ -68,6 +68,7 @@ angular.module('ncsaas')
     ],
     IntercomAppId: 'xfbbcxck',
     defaultListCacheTime: 60 * 10,
+    optionsCacheTime: 10 * 1000,
     dashboardHelp: {
       alertsList: {
         type: 'alertsList',
