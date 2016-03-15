@@ -77,6 +77,7 @@
         return vm.service.getList(filter).then(function(response) {
           vm.list = ncUtils.mergeLists(vm.list, response);
           vm.afterGetList();
+          vm.hideNoDataText = false;
         });
       },
       blockListElement: function() {
@@ -84,9 +85,7 @@
           ncUtils.blockElement(this.blockUIElement, this.listPromise);
         }
       },
-      afterGetList: function() {
-        this.hideNoDataText = false;
-      },
+      afterGetList: function() {},
       generalSearchChanged: function(event, text) {
         this.controllerScope.searchInput = text;
         this.controllerScope.search();
