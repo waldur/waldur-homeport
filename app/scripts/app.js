@@ -1057,6 +1057,9 @@
             if (rejection.data && rejection.data.non_field_errors) {
               message += ' ' + rejection.data.non_field_errors;
             }
+            if (rejection.data && rejection.data.detail) {
+              message += ' ' + rejection.data.detail;
+            }
             if (rejection.config) {
               clearTimeout(timeouts[getKey(rejection.config)]);
               console.error(message, rejection.config);

@@ -1,0 +1,18 @@
+<div class="actions-button" stoppropagation>
+    <a class="button"
+       ng-click="openActionsListTrigger()">actions</a>
+    <ul ng-show="loading" class="actions-dropdown">
+        Loading actions
+    </ul>
+    <ul ng-show="buttonController.actionButtonsList[$id] && actions"
+        class="actions-dropdown">
+        <li ng-repeat="(name, action) in actions"
+            title="{{ ::action.reason }}">
+            <a ng-click="buttonClick(name, action)"
+               ng-class="{'disabled': !action.enabled || action.pending, 'remove': action.destructive}"
+               class="button-simple">
+               {{ action.title }}
+            </a>
+        </li>
+    </ul>
+</div>

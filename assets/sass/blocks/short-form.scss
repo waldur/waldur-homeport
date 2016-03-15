@@ -74,6 +74,12 @@
                     margin: 0;
                 } // sm
             } // &.input
+            &.input-full {
+                flex: 1 1;
+                input {
+                    width: 100%;
+                }
+            } // &.input-full
             select {
                 border-radius: 4px;
                 width: 100%;

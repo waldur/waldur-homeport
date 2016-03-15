@@ -46,34 +46,6 @@
         }
       },
 
-      getAvailableOperations: function(resource) {
-        if (!resource) {
-          return [];
-        }
-        if (this.isGitlab(resource.resource_type)) {
-          return [];
-        }
-        return ['start', 'stop', 'restart'];
-      },
-
-      getEnabledOperations: function(resource) {
-        if (!resource) {
-          return [];
-        }
-        if (this.isGitlab(resource.resource_type)) {
-          return ['delete'];
-        }
-        var state = resource.state.toLowerCase();
-        if (state === 'online') {return ['stop', 'restart'];}
-        if (state === 'offline') {return ['start', 'delete'];}
-        if (state === 'erred') {return ['delete'];}
-        return [];
-      },
-
-      isGitlab: function(resource_type) {
-        return (resource_type == 'GitLab.Project' || resource_type == 'GitLab.Group');
-      },
-
       getImportedResources: function(service) {
         var vm = this;
         return servicesService.getServicesList().then(function(services) {

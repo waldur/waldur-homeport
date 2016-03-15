@@ -1,0 +1,51 @@
+<form ng-controller="ActionDialogController">
+    <h2>{{ action.title }}</h2>
+    <h3 ng-if="loading">Loading form</h3>
+    <section class="short-form full" ng-if="!loading">
+        <div class="form-row"
+             ng-repeat="(name, field) in action.fields">
+            <div class="col label">
+                <label>{{ ::field.label }}</label>
+            </div>
+            <div class="col input-full" ng-switch="field.type">
+                <div ng-switch-when="string">
+                    <input ng-model="form[name]"/>
+                </div>
+                <div ng-switch-when="integer">
+                    <input ng-model="form[name]"
+                           type="number"
+                           min="{{ ::field.min_value }}"
+                           max="{{ ::field.max_value }}"
+                           placeholder="{{ ::field.min_value }}"/>
+                </div>
+                <div ng-switch-when="select">
+                    <select
+                        ng-options="item.value as item.display_name for item in field.list"
+                        ng-model="form[name]"
+                        ng-if="field.list">
+                        <option value="">Select an option</option>
+                     </select>
+                     <div ng-if="!field.list">N/A</div>
+                </div>
+                <div class="error arrow-up" ng-show="errors[name]">
+                    <ul class="error-list">
+                        <li ng-repeat="error in errors[name]" ng-bind="error"></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="error arrow-up" ng-show="errors.non_field_errors">
+            <ul class="error-list">
+                <li ng-repeat="error in errors.non_field_errors" ng-bind="error"></li>
+            </ul>
+        </div>
+        <div class="decision">
+            <div class="col">
+                <a class="button-apply" submit-button="submitForm()">Submit</a>
+            </div>
+            <div class="col">
+                <a class="button-cancel" ng-click="cancel()">Cancel</a>
+            </div>
+        </div>
+    </section>
+</form>

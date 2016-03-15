@@ -340,12 +340,14 @@
             projectDeferred = $q.defer();
           usersService.getCurrentUser().then(function(user) {
             var date  = new Date(user.date_joined).getTime();
-            window.Intercom('boot', {
+            // XXX: Temporarily disable Intercom
+/*            window.Intercom('boot', {
               app_id: ENV.IntercomAppId,
               name: user.full_name,
               email: user.email,
               created_at: date
             });
+*/
             if($window.localStorage[ENV.currentCustomerUuidStorageKey]) {
               customersService.getTopMenuList().then(function(customers) {
                 var currentCustomer = customers.filter(function(customer) {

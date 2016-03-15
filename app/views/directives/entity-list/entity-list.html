@@ -36,7 +36,7 @@
 
     <div class="white-box no-styles" ng-show="entityList.list.length == 0 && !entityList.searchInput && !entityList.chosenFilters.length">
         <h2 class="app-title">
-            {{ entityList.hideNoDataText ? 'Loading...' : entityOptions.entityData.noDataText }}
+            {{ entityList.hideNoDataText ? '' : entityOptions.entityData.noDataText }}
         </h2>
         <div class="decision">
             <div class="col">
@@ -136,7 +136,8 @@
                         </span>
 
                         <h3 ng-switch-when="name" class="item-title">
-                            <a ng-if="field.link"
+                            <a ng-if="field.link" stoppropagation
+                               ng-click="entity.expandItemOpen = false"
                                ui-sref="{{ field.link }}">{{ entity[field.propertyName] }}</a>
                             <a ng-if="!field.link">{{ entity[field.propertyName] }}</a>
                             <span ng-if="field.subtitle" class="subtitle">
@@ -227,13 +228,27 @@
                         </span>
 
                     </div>
-                    <div class="actions" ng-if="!entityOptions.entityData.hideActionButtons">
-                        <action-button
-                                button-list="entityButtons"
-                                button-controller="entityList"
-                                button-type="{{ entityOptions.entityData.actionButtonsType }}"
-                                ng-show="!entityList.showgroup"
-                                button-model="entity"></action-button>
+                    <div class="actions"
+                         ng-if="!entityOptions.entityData.hideActionButtons"
+                         ng-switch="entityOptions.entityData.actionButtonsType">
+                         <div ng-switch-when="refresh" 
+                              class="actions-button">
+                             <a class="button reopen"
+                               ng-click="entityList.getCommentsForIssue(entity.key)"></a>
+                         </div>
+
+                         <action-button-resource
+                            ng-switch-when="resource"
+                            button-controller="entityList"
+                            button-model="entity"></action-button-resource>
+
+                         <action-button
+                            ng-switch-default
+                            button-list="entityButtons"
+                            button-controller="entityList"
+                            ng-show="!entityList.showgroup"
+                            button-model="entity">
+                         </action-button>
                     </div>
 
                     <expandable-indicator ng-if="::entityList.expandableOptions" open="entity.expandItemOpen"></expandable-indicator>

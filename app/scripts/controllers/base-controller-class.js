@@ -66,7 +66,8 @@
         // reset after state change
         this.selectedInstances = [];
         this.controlPanelShow = ENV.listControlPanelShow;
-        ncUtils.updateIntercom();
+        // XXX: Temporarily disable Intercom
+        //ncUtils.updateIntercom();
       },
       getList: function(filter) {
         // It should return promise

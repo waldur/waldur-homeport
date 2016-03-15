@@ -41,9 +41,10 @@
         ga('create', 'UA-34543419-4', 'auto');
     </script>
 
-    <script>
+    <!-- disable intercom for the time being -->
+    <!-- script>
         (function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/xfbbcxck';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()
-    </script>
+    </script-->
 
 </head>
 <body ng-controller="MainController as Main" ng-click="closeMenu()">
@@ -156,6 +157,7 @@
 <script src="scripts/configs/resource-config.js"></script>
 <!-- @endif -->
 <!-- controllers -->
+<script src="scripts/controllers/action-dialog-controller.js"></script>
 <script src="scripts/controllers/app-store-controller.js"></script>
 <script src="scripts/controllers/auth-controllers.js"></script>
 <script src="scripts/controllers/backups-controller.js"></script>
@@ -183,6 +185,7 @@
 <script src="scripts/controllers/users-tabs-controllers.js"></script>
 <script src="scripts/controllers/hooks-controllers.js"></script>
 <!-- services -->
+<script src="scripts/services/action-utils-service.js"></script>
 <script src="scripts/services/alerts-service.js"></script>
 <script src="scripts/services/auth-service.js"></script>
 <script src="scripts/services/backups-service.js"></script>
@@ -219,8 +222,10 @@
 <!-- directives -->
 <script src="scripts/directives/abs-center.js"></script>
 <script src="scripts/directives/action-button.js"></script>
+<script src="scripts/directives/action-button-resource.js"></script>
 <script src="scripts/directives/action-list.js"></script>
 <script src="scripts/directives/add-team-member.js"></script>
+<script src="scripts/directives/action-list-resource.js"></script>
 <script src="scripts/directives/check-quotas.js"></script>
 <script src="scripts/directives/customer-balance.js"></script>
 <script src="scripts/directives/details-content.js"></script>
