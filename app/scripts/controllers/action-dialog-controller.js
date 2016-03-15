@@ -9,28 +9,36 @@
       init: function () {
         $scope.errors = {};
         $scope.form = {};
-        $scope.getSelectList();
+        $scope.loading = true;
+        $scope.getSelectList().finally(function() {
+          $scope.loading = false;
+        });
       },
       getSelectList: function () {
-        var fields = $scope.action.fields;
-        angular.forEach(fields, function(field) {
+        var vm = this;
+        var promises = [];
+        angular.forEach($scope.action.fields, function(field) {
           if (field.url) {
-            var url = field.url, query_params = {};
-            var parts = field.url.split("?");
-            if (parts.length == 2) {
-              url = parts[0];
-              query_params = ncUtils.parseQueryString(parts[1]);
-            }
-
-            resourcesService.getList(query_params, url).then(function(response) {
-              field.list = response.map(function(item) {
-                return {
-                  value: item[field.value_field],
-                  display_name: item[field.display_name_field]
-                }
-              });
-            });
+            promises.push(vm.loadChoices(field));
           }
+        });
+        return $q.all(promises);
+      },
+      loadChoices: function(field) {
+        var url = field.url, query_params = {};
+        var parts = field.url.split("?");
+        if (parts.length == 2) {
+          url = parts[0];
+          query_params = ncUtils.parseQueryString(parts[1]);
+        }
+
+        return resourcesService.getList(query_params, url).then(function(response) {
+          field.list = response.map(function(item) {
+            return {
+              value: item[field.value_field],
+              display_name: item[field.display_name_field]
+            }
+          });
         });
       },
       submitForm: function () {

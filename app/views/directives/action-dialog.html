@@ -1,6 +1,7 @@
 <form ng-controller="ActionDialogController">
     <h2>{{ action.title }}</h2>
-    <section class="short-form full">
+    <h3 ng-if="loading">Loading form</h3>
+    <section class="short-form full" ng-if="!loading">
         <div class="form-row"
              ng-repeat="(name, field) in action.fields">
             <div class="col label">
