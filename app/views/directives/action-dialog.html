@@ -18,9 +18,12 @@
                            placeholder="{{ ::field.min_value }}"/>
                 </div>
                 <div ng-switch-when="select">
-                    <select ng-options="item.value as item.display_name for item in field.list"
-                            ng-model="form[name]"
-                            ng-if="field.list"></select>
+                    <select
+                        ng-options="item.value as item.display_name for item in field.list"
+                        ng-model="form[name]"
+                        ng-if="field.list">
+                        <option value="">Select an option</option>
+                     </select>
                      <div ng-if="!field.list">N/A</div>
                 </div>
                 <div class="error arrow-up" ng-show="errors[name]">

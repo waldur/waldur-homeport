@@ -25,8 +25,12 @@
           });
         }
         scope.buttonClick = function(name, action) {
-          actionUtilsService.buttonClick(scope.controller, scope.entity, name, action);
-        };
+          action.pending = true;
+          var promise = actionUtilsService.buttonClick(scope.controller, scope.entity, name, action);
+          promise.finally(function() {
+            action.pending = false;
+          });
+        }
         scope.loading = false;
         loadActions();
       }

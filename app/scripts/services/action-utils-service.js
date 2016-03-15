@@ -3,25 +3,23 @@
 (function() {
   angular.module('ncsaas')
     .service('actionUtilsService', [
-      'ncUtilsFlash', '$rootScope', '$http', 'ngDialog', 'resourcesService', actionUtilsService]);
+      'ncUtilsFlash', '$rootScope', '$http', '$q', 'ngDialog', 'resourcesService', actionUtilsService]);
 
-  function actionUtilsService(ncUtilsFlash, $rootScope, $http, ngDialog, resourcesService) {
+  function actionUtilsService(ncUtilsFlash, $rootScope, $http, $q, ngDialog, resourcesService) {
     this.loadActions = function(model) {
       return resourcesService.getOption(model.url);
     };
 
     this.buttonClick = function(controller, model, name, action) {
       if (action.type === 'button') {
-        if (action.destructive) {
-          if (this.confirmAction(model, name)) {
-            this.applyAction(controller, model, name, action);
-          }
-        } else {
-          this.applyAction(controller, model, name, action);
+        if (!action.destructive || this.confirmAction(model, name)) {
+          return this.applyAction(controller, model, name, action);
         }
       } else if (action.type === 'form') {
         this.openActionDialog(controller, model, action);
+        return $q.when(true);
       }
+      return $q.reject();
     };
 
     this.confirmAction = function(model, name) {
@@ -40,17 +38,17 @@
       var vm = this;
       var promise = (action.method == 'DELETE') ? $http.delete(action.url) : $http.post(action.url);
 
-        promise.then(function(response) {
-          if (response.status == 204) {
-            ncUtilsFlash.success('Resource has been deleted');
-            controller.afterInstanceRemove(resource);
-          } else {
-            vm.handleActionSuccess(action);
-            controller.reInitResource(resource);
-          }
-        },
-        controller.handleActionException.bind(controller)
-      );
+      function onSuccess(response) {
+        if (response.status == 204) {
+          ncUtilsFlash.success('Resource has been deleted');
+          controller.afterInstanceRemove(resource);
+        } else {
+          vm.handleActionSuccess(action);
+          return controller.reInitResource(resource);
+        }
+      }
+
+      return promise.then(onSuccess, controller.handleActionException.bind(controller));
     };
 
     this.handleActionSuccess = function(action) {

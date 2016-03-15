@@ -2,9 +2,9 @@
 
 (function() {
   angular.module('ncsaas').controller('ActionDialogController',
-    ['$scope', 'resourcesService', 'actionUtilsService', 'ncUtils', ActionDialogController]);
+    ['$scope', '$q', 'resourcesService', 'actionUtilsService', 'ncUtils', ActionDialogController]);
 
-  function ActionDialogController($scope, resourcesService, actionUtilsService, ncUtils) {
+  function ActionDialogController($scope, $q, resourcesService, actionUtilsService, ncUtils) {
     angular.extend($scope, {
       init: function () {
         $scope.errors = {};
@@ -39,7 +39,7 @@
         for (var field in fields) {
           if (fields[field].required && !$scope.form[field]) {
             $scope.errors[field] = ['This field is required'];
-            return;
+            return $q.reject();
           } else if ($scope.form[field] != null) {
             form[field] = $scope.form[field];
           }

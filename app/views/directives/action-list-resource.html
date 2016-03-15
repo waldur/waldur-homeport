@@ -6,7 +6,7 @@
   <span class="compact-list__action-item"
         ng-repeat="action in actions"
         title="{{ ::action.reason }}">
-        <a ng-class="{'disabled': !action.enabled, 'remove': action.destructive}"
+        <a ng-class="{'disabled': !action.enabled || action.pending, 'remove': action.destructive}"
            ng-click="buttonClick(name, action)">
            <i class="icon" ng-class="action.icon" ng-if="::action.icon"></i>
             {{ ::action.title }}

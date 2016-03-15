@@ -9,7 +9,7 @@
         <li ng-repeat="(name, action) in actions"
             title="{{ ::action.reason }}">
             <a ng-click="buttonClick(name, action)"
-               ng-class="{'disabled': !action.enabled, 'remove': action.destructive}"
+               ng-class="{'disabled': !action.enabled || action.pending, 'remove': action.destructive}"
                class="button-simple">
                {{ action.title }}
             </a>

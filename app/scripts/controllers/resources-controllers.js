@@ -254,9 +254,6 @@
         });
       },
       afterInstanceRemove: function(resource) {
-        if (resource.state === 'Deletion Scheduled') {
-          return;
-        }
         this._super(resource);
         servicesService.clearAllCacheForCurrentEndpoint();
         projectsService.clearAllCacheForCurrentEndpoint();
@@ -264,7 +261,7 @@
       },
       reInitResource:function(resource) {
         var vm = this;
-        vm.service.$get(resource.resource_type, resource.uuid).then(function(response) {
+        return vm.service.$get(resource.resource_type, resource.uuid).then(function(response) {
           var index = vm.list.indexOf(resource);
           vm.list[index] = response;
           vm.afterGetList();

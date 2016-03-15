@@ -20,7 +20,11 @@
         scope.loading = false;
 
         scope.buttonClick = function(name, action) {
-          actionUtilsService.buttonClick(scope.buttonController, scope.buttonModel, name, action);
+          action.pending = true;
+          var promise = actionUtilsService.buttonClick(scope.buttonController, scope.buttonModel, name, action);
+          promise.finally(function() {
+            action.pending = false;
+          });
         }
         scope.openActionsListTrigger = openActionsListTrigger;
 
