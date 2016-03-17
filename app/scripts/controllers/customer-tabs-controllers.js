@@ -463,6 +463,7 @@
       .controller('CustomerTeamTabController', [
         'baseControllerListClass',
         'customerPermissionsService',
+        'customersService',
         'projectPermissionsService',
         'usersService',
         'currentStateService',
@@ -475,6 +476,7 @@
   function CustomerTeamTabController(
       baseControllerListClass,
       customerPermissionsService,
+      customersService,
       projectPermissionsService,
       usersService,
       currentStateService,
@@ -485,16 +487,16 @@
     var TeamController = baseControllerListClass.extend({
       init: function() {
         this.controllerScope = controllerScope;
-        this.service = customerPermissionsService;
-        this.mergeListFieldIdentifier = 'pk';
+        this.service = customersService;
         this.searchFieldName = 'full_name';
-        this._super();
         var vm = this;
+        var fn = this._super.bind(this);
         var currentUserPromise = usersService.getCurrentUser();
         var currentCustomerPromise = currentStateService.getCustomer();
         $q.all([currentUserPromise, currentCustomerPromise]).then(function(result) {
           vm.currentUser = result[0];
           vm.currentCustomer = result[1];
+          fn();
           vm.currentCustomer.owners.forEach(function(item) {
             if (vm.currentUser.uuid === item.uuid) {
               vm.entityOptions.entityData.createPopup = vm.openPopup.bind(vm);
@@ -522,61 +524,62 @@
           list: [
             {
               name: 'Member',
-              propertyName: 'user_full_name',
+              propertyName: 'full_name',
               type: ENTITYLISTFIELDTYPES.linkOrText
             },
             {
               name: 'Projects',
-              propertyName: 'projectsAccessible',
-              propertyNameKey: 'project_name',
+              propertyName: 'projects',
+              propertyNameKey: 'name',
               type: ENTITYLISTFIELDTYPES.listInField
             },
             {
               name: 'Owner',
               propertyName: 'role',
-              type: ENTITYLISTFIELDTYPES.linkOrText
+              type: ENTITYLISTFIELDTYPES.bool,
+              className: 'shared-filed'
             }
           ]
         };
+        $rootScope.$on('reloadList', function() {
+          vm.service.clearAllCacheForCurrentEndpoint();
+          vm.getList();
+        })
       },
-      afterGetList: function() {
+      getList: function(filter) {
         var vm = this;
-        vm._super();
-        projectPermissionsService.getList().then(function(projectsPermissionsList) {
-          vm.list.forEach(function(listItem) {
-            listItem.projectsAccessible = [];
-            projectsPermissionsList.forEach(function(projectsListItem) {
-              projectsListItem.user_uuid === listItem.user_uuid && listItem.projectsAccessible.push(projectsListItem);
-            });
-          });
+        filter = filter || {};
+        filter = angular.extend({operation: 'users', UUID: vm.currentCustomer.uuid}, filter);
+        return this._super(filter);
+      },
+      removeInstance: function(user) {
+        var vm = this;
+        var deferred = $q.defer();
+        var promises = [];
+        user.projects.forEach(function(project) {
+          var promise = projectPermissionsService.$delete(vm.getPermissionKey(project.permission));
+          promises.push(promise);
         });
-      },
-
-      remove: function(user) {
-        var vm = this;
-        var confirmDelete = confirm('Confirm user deletion?');
-        if (confirmDelete) {
-          var promises = [];
-          user.projectsAccessible.forEach(function(project) {
-            var promise = projectPermissionsService.$delete(project.pk);
-            promises.push(promise);
-          });
-          $q.all(promises).then(function() {
-            customerPermissionsService.$delete(user.pk).then(
+        $q.all(promises).then(function() {
+          if (user.permission) {
+            customerPermissionsService.$delete(vm.getPermissionKey(user.permission)).then(
                 function() {
-                  vm.controllerScope.list = vm.controllerScope.list.filter(function(item) {
-                    return item.pk !== user.pk;
-                  });
+                  deferred.resolve();
                 },
                 function(response) {
-                  alert(response.data.detail);
+                  deferred.reject(response.data.detail);
                 }
             );
-          });
-        } else {
-          alert('User was not deleted.');
-        }
+          } else {
+            deferred.resolve();
+          }
+        });
         this.entityOptions.entityData.showPopup = false;
+        return deferred.promise;
+      },
+      getPermissionKey: function(url) {
+        var arr = url.split('/');
+        return arr[arr.length-2];
       },
       openPopup: function(user) {
         this.entityOptions.entityData.showPopup = true;
