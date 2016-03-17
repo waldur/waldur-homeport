@@ -75,7 +75,7 @@
         filter = filter || {};
         vm.service.cacheTime = vm.cacheTime;
         return vm.service.getList(filter).then(function(response) {
-          vm.list = ncUtils.mergeLists(vm.list, response);
+          vm.list = ncUtils.mergeLists(vm.list, response, vm.mergeListFieldIdentifier);
           vm.afterGetList();
           vm.hideNoDataText = false;
         });
@@ -248,6 +248,8 @@
     .service('baseControllerDetailUpdateClass', [
       '$state',
       'baseControllerClass',
+      'customersService',
+      'ncUtils',
       '$stateParams',
       '$rootScope',
       'ENV',
@@ -256,6 +258,8 @@
   function baseControllerDetailUpdateClass(
       $state,
       baseControllerClass,
+      customersService,
+      ncUtils,
       $stateParams,
       $rootScope,
       ENV) {
@@ -289,16 +293,27 @@
         }
         return defaultTab;
       },
+      getLimitsAndUsages: function() {
+        return customersService.$get($stateParams.uuid).then(function(customer) {
+          return ncUtils.getQuotaUsage(customer.quotas);
+        });
+      },
       setCounters: function() {
         var vm = this;
-        vm.getCounters().then(function(response) {
-          for (var i = 0; i < vm.detailsViewOptions.tabs.length; i++) {
-            var tab = vm.detailsViewOptions.tabs[i];
-            var key = tab.countFieldKey;
-            if (key) {
-              tab.count = response[key];
+        vm.getLimitsAndUsages().then(function(result) {
+          var customCountFields = {team: result.nc_user_count};
+          vm.getCounters().then(function(response) {
+            for (var i = 0; i < vm.detailsViewOptions.tabs.length; i++) {
+              var tab = vm.detailsViewOptions.tabs[i];
+              var key = tab.countFieldKey;
+              if (key) {
+                tab.count = response[key];
+              }
+              if (customCountFields && (key in customCountFields)) {
+                tab.count = customCountFields[key];
+              }
             }
-          }
+          });
         });
       },
       getCounters: function() {

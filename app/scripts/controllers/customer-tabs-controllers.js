@@ -457,6 +457,136 @@
 })();
 
 
+
+(function() {
+  angular.module('ncsaas')
+      .controller('CustomerTeamTabController', [
+        'baseControllerListClass',
+        'customerPermissionsService',
+        'customersService',
+        'projectPermissionsService',
+        'usersService',
+        'currentStateService',
+        '$q',
+        '$rootScope',
+        'ENTITYLISTFIELDTYPES',
+        CustomerTeamTabController
+      ]);
+
+  function CustomerTeamTabController(
+      baseControllerListClass,
+      customerPermissionsService,
+      customersService,
+      projectPermissionsService,
+      usersService,
+      currentStateService,
+      $q,
+      $rootScope,
+      ENTITYLISTFIELDTYPES) {
+    var controllerScope = this;
+    var TeamController = baseControllerListClass.extend({
+      init: function() {
+        this.controllerScope = controllerScope;
+        this.service = customersService;
+        this.searchFieldName = 'full_name';
+        var vm = this;
+        var fn = this._super.bind(this);
+        var currentUserPromise = usersService.getCurrentUser();
+        var currentCustomerPromise = currentStateService.getCustomer();
+        $q.all([currentUserPromise, currentCustomerPromise]).then(function(result) {
+          vm.currentUser = result[0];
+          vm.currentCustomer = result[1];
+          fn();
+          vm.currentCustomer.owners.forEach(function(item) {
+            if (vm.currentUser.uuid === item.uuid) {
+              vm.entityOptions.entityData.createPopup = vm.openPopup.bind(vm);
+              vm.actionButtonsListItems = [
+                {
+                  title: 'Edit',
+                  clickFunction: vm.openPopup.bind(vm)
+                },
+                {
+                  title: 'Remove',
+                  clickFunction: vm.remove.bind(vm)
+                }
+              ];
+            }
+          });
+        });
+        this.entityOptions = {
+          entityData: {
+            createPopupText: 'Add member',
+            showPopup: false,
+            noDataText: 'No users yet',
+            hideActionButtons: false,
+            hideTableHead: false
+          },
+          list: [
+            {
+              name: 'Member',
+              propertyName: 'full_name',
+              type: ENTITYLISTFIELDTYPES.linkOrText
+            },
+            {
+              name: 'Projects',
+              propertyName: 'projects',
+              propertyNameKey: 'name',
+              type: ENTITYLISTFIELDTYPES.listInField
+            },
+            {
+              name: 'Owner',
+              propertyName: 'role',
+              type: ENTITYLISTFIELDTYPES.linkOrText
+            }
+          ]
+        };
+      },
+      getList: function(filter) {
+        var vm = this;
+        filter = filter || {};
+        filter = angular.extend({operation: 'users', UUID: vm.currentCustomer.uuid}, filter);
+        return this._super(filter);
+      },
+      removeInstance: function(user) {
+        var vm = this;
+        var deferred = $q.defer();
+        var promises = [];
+        user.projects.forEach(function(project) {
+          var promise = projectPermissionsService.$delete(vm.getPermissionKey(project.permission));
+          promises.push(promise);
+        });
+        $q.all(promises).then(function() {
+          if (user.permission) {
+            customerPermissionsService.$delete(vm.getPermissionKey(user.permission)).then(
+                function() {
+                  deferred.resolve();
+                },
+                function(response) {
+                  deferred.reject(response.data.detail);
+                }
+            );
+          } else {
+            deferred.resolve();
+          }
+        });
+        this.entityOptions.entityData.showPopup = false;
+        return deferred.promise;
+      },
+      getPermissionKey: function(url) {
+        var arr = url.split('/');
+        return arr[arr.length-2];
+      },
+      openPopup: function(user) {
+        this.entityOptions.entityData.showPopup = true;
+        $rootScope.$broadcast('populatePopupModel', user);
+      }
+    });
+
+    controllerScope.__proto__ = new TeamController();
+  }
+
+})();
+
 (function() {
   angular.module('ncsaas')
       .controller('CustomerDeleteTabController', [

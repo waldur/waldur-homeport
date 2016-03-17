@@ -141,6 +141,7 @@
       '$q',
       'joinService',
       'ncUtilsFlash',
+      'ncUtils',
       'eventsService',
       'resourcesCountService',
       'currentStateService',
@@ -161,6 +162,7 @@
     $q,
     joinService,
     ncUtilsFlash,
+    ncUtils,
     eventsService,
     resourcesCountService,
     currentStateService
@@ -248,6 +250,14 @@
               count: -1
             },
             {
+              title: 'Team',
+              key: 'team',
+              viewName: 'tabTeam',
+              hideSearch: false,
+              countFieldKey: 'team',
+              icon: 'customer'
+            },
+            {
               title: 'Manage',
               key: 'delete',
               viewName: 'tabDelete',
@@ -281,9 +291,9 @@
       afterActivate: function() {
         controllerScope.canEdit = controllerScope.isOwnerOrStaff(controllerScope.model);
         controllerScope.updateImageUrl();
-
-        this.setCounters();
-        var timer = $interval(this.setCounters.bind(this), ENV.countersTimerInterval * 1000);
+        var vm = this;
+        vm.setCounters();
+        var timer = $interval(vm.setCounters.bind(vm), ENV.countersTimerInterval * 1000);
         $scope.$on('$destroy', function() {
           $interval.cancel(timer);
         });
