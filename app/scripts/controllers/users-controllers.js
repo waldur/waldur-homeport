@@ -165,8 +165,7 @@
               title: 'Events',
               key: 'eventlog',
               viewName: 'tabEventlog',
-              count: 0,
-              countFieldKey: 'events'
+              count: -1,
             },
             {
               title: 'SSH Keys',
