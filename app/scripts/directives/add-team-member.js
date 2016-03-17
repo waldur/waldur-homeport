@@ -113,6 +113,8 @@
                 function saveCustomerPermissions(userPermission) {
                     userPermission.$save().then(function() {
                         saveProjectPermissions();
+                        customerPermissionsService.clearAllCacheForCurrentEndpoint();
+
                     }, function(error) {
                         console.log('error ', error);
                     });
