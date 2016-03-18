@@ -119,6 +119,8 @@
           link: 'projects.details({uuid: entity.project_uuid})',
           type: ENTITYLISTFIELDTYPES.name
         });
+        this.rowFields.push('project_name');
+        this.rowFields.push('project_uuid');
       }
     });
     return controllerClass;
