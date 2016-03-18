@@ -148,6 +148,11 @@
           }
         });
       },
+      rowFields: [
+        'uuid', 'name', 'state', 'created', 'error_message',
+        'resource_type', 'latitude', 'longitude', 'access_url',
+        'service_name', 'service_type', 'service_uuid'
+      ],
       getMarkers: function() {
         var items = this.controllerScope.list.filter(function hasCoordinates(item) {
           return item.latitude != null && item.longitude != null;
@@ -203,8 +208,11 @@
         return false;
       },
       getList: function(filter) {
+        var vm = this;
+        filter = filter || {};
         var fn = this._super.bind(this);
         return this.adjustSearchFilters().then(function() {
+          angular.extend(filter, {field: vm.rowFields});
           return fn(filter);
         });
       },
