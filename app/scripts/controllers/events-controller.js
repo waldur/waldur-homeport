@@ -494,20 +494,9 @@
           labels.shift();
           points.shift();
 
-          project.chartData = {
-            labels: labels,
-            datasets: [
-              {
-                label: 'Events',
-                fillColor: 'rgba(220,220,220,0.2)',
-                strokeColor: 'rgba(220,220,220,1)',
-                pointColor: 'rgba(220,220,220,1)',
-                pointStrokeColor: '#fff',
-                pointHighlightFill: '#fff',
-                pointHighlightStroke: 'rgba(220,220,220,1)',
-                data: points
-              }
-            ]
+          project.d3Data = {
+            x: labels,
+            y: points
           };
         });
       },
