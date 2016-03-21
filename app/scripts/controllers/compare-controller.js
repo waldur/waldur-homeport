@@ -13,10 +13,18 @@
     ]);
 
   function CompareController(
-    baseControllerClass, currentStateService, defaultPriceListItemsService, servicesService, ENTITYLISTFIELDTYPES, $q, ncUtils, $filter) {
+    baseControllerListClass,
+    currentStateService,
+    defaultPriceListItemsService,
+    servicesService,
+    ENTITYLISTFIELDTYPES,
+    $q,
+    ncUtils,
+    $filter) {
     var controllerScope = this;
-    var CompareController = baseControllerClass.extend({
+    var CompareController = baseControllerListClass.extend({
       init:function() {
+        this._super();
         this.service = defaultPriceListItemsService;
         this.controllerScope = controllerScope;
         this.servicesMetadata = null;
@@ -25,7 +33,7 @@
         this.list = [];
         this.servicesTypes = [];
         this.listFilters = [];
-        this._super();
+        this.blockUIElement = 'list';
         this.activate();
         this.orderField = 'value';
         this.reverseOrder = false;
@@ -41,7 +49,8 @@
             hideSearch: true,
             hideControlButtons: true,
             loadMoreButton: true,
-            rowTemplateUrl: 'views/initial-data/row.html'
+            rowTemplateUrl: 'views/compare/row.html',
+            filterTemplateUrl: 'views/compare/filter.html'
           },
           list: [
             {
@@ -110,15 +119,27 @@
           ]
         };
       },
+      filterByResourceType: function(value) {
+        if (value) {
+          this.filterResults = {resource_type: value};
+        } else {
+          this.filterResults = null;
+        }
+      },
       activate: function() {
-        this.setCurrentUserData();
+        var vm = this;
+        vm.hideNoDataText = true;
+        var listPromise = vm.setCurrentUserData();
+        ncUtils.blockElement(vm.blockUIElement, listPromise).finally(function() {
+          vm.hideNoDataText = true;
+        });
       },
       setCurrentUserData: function() {
         var currentCustomerPromise = currentStateService.getCustomer(),
           currentProjectPromise = currentStateService.getProject(),
           servicesPromise = servicesService.getServicesList();
-        vm = this;
-        $q.all([currentCustomerPromise, currentProjectPromise, servicesPromise]).then(function(result) {
+        var vm = this;
+        return $q.all([currentCustomerPromise, currentProjectPromise, servicesPromise]).then(function(result) {
           vm.currentCustomer = result[0];
           vm.currentProject = result[1];
           vm.servicesMetadata = result[2];

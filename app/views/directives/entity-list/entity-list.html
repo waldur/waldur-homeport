@@ -3,35 +3,24 @@
         <h1>{{ entityOptions.entityData.title }}</h1>
     </div>
     <div class="white-box" ng-show="entityList.list.length > 0 || entityList.searchInput || entityList.chosenFilters.length">
-        <div ng-if="entityOptions.entityData.loadMoreButton">
-            <ul class="sort-list">
-                <li><a ui-sref="appstore.store">back to store</a></li>
-                <li>
-                    <a class="toggle-link"
-                       ng-repeat="(key, filter) in entityList.servicesTypes"
-                       ng-click="entityList.toggleFilter(filter)"
-                       ng-class="{'active': entityList.isFilterChosen(filter)}">{{ filter }}</a>
-                </li>
-            </ul>
-        </div>
-        <div ng-if="!entityOptions.entityData.hideControlButtons">
-            <ul class="sort-list">
-                <li class="search divid">
-                    <div class="search-box">
-                        <input type="text" ng-model='entityList.searchInput'
-                               ng-model-options="{ debounce: 500 }"
-                               ng-change="entityList.search()">
-                        <button class="search-button" ng-click="entityList.search()"></button>
-                    </div>
-                </li>
-                <li>
-                    <filter-list filter-controller="entityList"></filter-list>
-                </li>
-                <li class="right-sort">
-                    <div ng-include="'views/directives/entity-list/table-actions.html'"></div>
-                </li>
-            </ul>
-        </div>
+        <div ng-include="entityOptions.entityData.filterTemplateUrl"></div>
+        <ul class="sort-list"
+            ng-if="!entityOptions.entityData.hideControlButtons">
+            <li class="search divid">
+                <div class="search-box">
+                    <input type="text" ng-model='entityList.searchInput'
+                           ng-model-options="{ debounce: 500 }"
+                           ng-change="entityList.search()">
+                    <button class="search-button" ng-click="entityList.search()"></button>
+                </div>
+            </li>
+            <li>
+                <filter-list filter-controller="entityList"></filter-list>
+            </li>
+            <li class="right-sort">
+                <div ng-include="'views/directives/entity-list/table-actions.html'"></div>
+            </li>
+        </ul>
     </div>
 
     <div class="white-box no-styles" ng-show="entityList.list.length == 0 && !entityList.searchInput && !entityList.chosenFilters.length && !entityList.hideNoDataText">
@@ -63,6 +52,7 @@
             ng-if="entityOptions.entityData.rowTemplateUrl">
             <li class="compact-list__item"
                 ng-repeat="entity in entityList.list
+                           | orderBy:entityList.orderField:entityList.reverseOrder
                            | filter:entityList.filterResults"
                 ng-include="entityOptions.entityData.rowTemplateUrl">
             </li>

@@ -23,12 +23,12 @@
       {{ entity.value | defaultCurrency }}
     </div>
   </div>
-  <div class="details-table__row">
+  <div class="details-table__row" ng-if="entity.metadata.cores">
     <div class="details-table__key">
       CPU
     </div>
     <div class="details-table__value">
-      {{ entity.metadata.cores }} 
+      {{ entity.metadata.cores }}
     </div>
   </div>
   <div class="details-table__row" ng-if="entity.metadata.ram">

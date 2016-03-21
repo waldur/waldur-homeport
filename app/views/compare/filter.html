@@ -1,0 +1,29 @@
+<a ui-sref="appstore.store">back to store</a>
+
+<div class="details-table__row">
+  <div class="details-table__key">
+    Filter by type
+  </div>
+  <div class="details-table__value">
+    <select
+        ng-options="key as key for key in entityList.servicesTypes"
+        ng-model="key"
+        ng-change="entityList.filterByResourceType(key)">
+        <option value="">All</option>
+    </select>
+  </div>
+</div>
+<div class="mobile-show">
+  <div class="details-table__row">
+    <div class="details-table__key">
+      Order by
+    </div>
+    <div class="details-table__value">
+      <select
+          ng-options="field.propertyName as field.name for field in entityOptions.list"
+          ng-model="entityList.orderField"
+          ng-change="entityList.reverseOrder = !entityList.orderField">
+      </select>
+    </div>
+  </div>
+</div>
