@@ -149,7 +149,7 @@
         });
       },
       rowFields: [
-        'uuid', 'name', 'state', 'created', 'error_message',
+        'uuid', 'url', 'name', 'state', 'created', 'error_message',
         'resource_type', 'latitude', 'longitude', 'access_url',
         'service_name', 'service_type', 'service_uuid'
       ],
