@@ -46,7 +46,7 @@
                 scope.errors = {};
                 scope.currentUser = null;
                 scope.currentCustomer = null;
-                scope.changeRoleHelpMessage = "You cannot change current users' role";
+                scope.changeRoleHelpMessage = "You cannot change your own role";
                 var editUserRole;
 
                 currentStateService.getCustomer().then(function(response) {
