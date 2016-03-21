@@ -2,29 +2,28 @@
 
 (function () {
   angular.module('ncsaas')
-    .directive('projectChart', projectChart);
+    .directive('lineChart', lineChart);
 
-  function projectChart() {
+  function lineChart() {
     return {
       restrict: 'E',
       replace: true,
-      templateUrl: 'views/directives/project-chart.html',
+      templateUrl: 'views/directives/line-chart.html',
       scope: {
         data: '=chartData',
-        id: '=chartId'
+        height: '=chartHeight',
+        bottom: '=chartBottom'
       },
       link: link
     };
 
     function link(scope, element) {
-      var bindId = '#chart' + scope.id;
-
       scope.$watch('data', init);
 
       function init() {
-        var m = [10, 40, 80, 60]; // margins
+        var m = [10, 40, (scope.bottom || 80), 60]; // margins
         var w = element[0].getBoundingClientRect().width - m[1] - m[3]; // width
-        var h = 270 - m[0] - m[2]; // height
+        var h = (scope.height || 270) - m[0] - m[2]; // height
 
         var data = scope.data.y;
         var max = d3.max(data, function(d) { return d; });
@@ -43,7 +42,7 @@
             return y(d);
           });
 
-        var graph = d3.select(bindId).append("svg:svg")
+        var graph = d3.select(element.children()[0]).append("svg:svg")
           .attr("width", w + m[1] + m[3])
           .attr("height", h + m[0] + m[2])
           .append("svg:g")

@@ -17,7 +17,6 @@
       'pascalprecht.translate',
       'angular-cron-jobs',
       'flash',
-      'tc.chartjs',
       'angulartics',
       'angulartics.google.analytics',
       'ngFileUpload',
@@ -771,26 +770,6 @@
           views: {
             'appContent': {
               templateUrl: 'views/backup-schedules/create.html',
-            },
-            'appHeader': {
-              templateUrl: 'views/partials/app-header.html',
-            }
-          },
-          resolve: {
-            authenticated: authCheck
-          },
-          auth: true
-        })
-        .state('statistics', {
-          url: '/statistics/',
-          abstract: true,
-          templateUrl: 'views/partials/base.html'
-        })
-        .state('statistics.projects-statistic', {
-          url: 'projects-statistic/',
-          views: {
-            'appContent': {
-              templateUrl: 'views/statistic/projects-statistic.html',
             },
             'appHeader': {
               templateUrl: 'views/partials/app-header.html',

@@ -1,0 +1,33 @@
+.line-chart-wrapper {
+  path {
+    stroke: steelblue;
+    stroke-width: 1;
+    fill: none;
+  }
+
+  .axis {
+    shape-rendering: crispEdges;
+
+    &.x {
+      line {
+        stroke: lightgrey;
+      }
+
+      .minor {
+        stroke-opacity: .5;
+      }
+
+      path {
+        display: none;
+      }
+    }
+
+    &.y {
+      line,
+      path {
+        fill: none;
+        stroke: #000;
+      }
+    }
+  }
+}

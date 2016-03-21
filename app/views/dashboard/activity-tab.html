@@ -53,8 +53,8 @@
                 <div class="clear"></div>
                 <div class="chart" visible="eventlog">
                     <div class="label">No of events per day</div>
-                    <project-chart ng-if="project.d3Data && DashboardController.showGraph"
-                                   chart-id="project.uuid" chart-data="project.d3Data"></project-chart>
+                    <line-chart ng-if="project.d3Data && DashboardController.showGraph"
+                                chart-data="project.d3Data"></line-chart>
                 </div>
             </div>
         </div>
