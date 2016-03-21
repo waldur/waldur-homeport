@@ -40,7 +40,8 @@
             hideActionButtons: true,
             hideSearch: true,
             hideControlButtons: true,
-            loadMoreButton: true
+            loadMoreButton: true,
+            rowTemplateUrl: 'views/initial-data/row.html'
           },
           list: [
             {
@@ -61,13 +62,11 @@
               name: 'Code',
               propertyName: 'key',
               type: ENTITYLISTFIELDTYPES.linkOrText,
-              showForMobile: ENTITYLISTFIELDTYPES.showForMobile
             },
             {
               name: 'Name',
               propertyName: 'metadataName',
               type: ENTITYLISTFIELDTYPES.linkOrText,
-              showForMobile: ENTITYLISTFIELDTYPES.showForMobile,
               initField: function(item) {
                 item.metadataName = item.metadata.name;
               }
@@ -76,7 +75,6 @@
               name: 'CPU',
               propertyName: 'metadataCores',
               type: ENTITYLISTFIELDTYPES.linkOrText,
-              showForMobile: ENTITYLISTFIELDTYPES.showForMobile,
               initField: function(item) {
                 item.metadataCores = item.metadata.cores;
               }
@@ -86,7 +84,6 @@
               propertyName: 'metadataRam',
               filtered: 'filteredRam',
               type: ENTITYLISTFIELDTYPES.linkOrText,
-              showForMobile: ENTITYLISTFIELDTYPES.showForMobile,
               initField: function(item) {
                 item.metadataRam = item.metadata.ram;
                 item.metadataRam && (item.filteredRam = $filter('mb2gb')(item.metadata.ram));
@@ -97,7 +94,6 @@
               propertyName: 'metadataDisk',
               filtered: 'filteredDisk',
               type: ENTITYLISTFIELDTYPES.linkOrText,
-              showForMobile: ENTITYLISTFIELDTYPES.showForMobile,
               initField: function(item) {
                 item.metadataDisk = item.metadata.disk;
                 item.metadataDisk && (item.filteredDisk = $filter('mb2gb')(item.metadata.disk));
@@ -107,7 +103,6 @@
               name: 'Price/hour',
               propertyName: 'value',
               type: ENTITYLISTFIELDTYPES.name,
-              showForMobile: ENTITYLISTFIELDTYPES.showForMobile,
               initField: function(item) {
                 item.value = $filter('defaultCurrency')(item.value);
               }

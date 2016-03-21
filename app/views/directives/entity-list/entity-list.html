@@ -62,7 +62,8 @@
         <ul class="mobile-show compact-list"
             ng-if="entityOptions.entityData.rowTemplateUrl">
             <li class="compact-list__item"
-                ng-repeat="entity in entityList.list"
+                ng-repeat="entity in entityList.list
+                           | filter:entityList.filterResults"
                 ng-include="entityOptions.entityData.rowTemplateUrl">
             </li>
         </ul>
@@ -261,7 +262,7 @@
     <div class="clear"></div>
 
     <div block-ui="load-more" class="button-wrap-center" ng-show="entityOptions.entityData.loadMoreButton">
-        <div class="pull-right">
+        <div>
             Loaded {{ entityList.list.length }} of {{entityList.initialListLength}} items
         </div>
         <div ng-show="entityList.itemsToShow.length">

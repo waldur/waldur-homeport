@@ -1,0 +1,50 @@
+<div class="compact-list__header">
+  <div class="compact-list__title">
+    <a>
+      {{ entity.metadata.name || entity.key }}
+    </a>
+  </div>
+</div>
+
+<div class="compact-list__details">
+  <div class="details-table__row">
+    <div class="details-table__key">
+      Type
+    </div>
+    <div class="details-table__value">
+      {{ entity.resource_type }}
+    </div>
+  </div>
+  <div class="details-table__row">
+    <div class="details-table__key">
+      Price/hour
+    </div>
+    <div class="details-table__value">
+      {{ entity.value | defaultCurrency }}
+    </div>
+  </div>
+  <div class="details-table__row">
+    <div class="details-table__key">
+      CPU
+    </div>
+    <div class="details-table__value">
+      {{ entity.metadata.cores }} 
+    </div>
+  </div>
+  <div class="details-table__row" ng-if="entity.metadata.ram">
+    <div class="details-table__key">
+      RAM
+    </div>
+    <div class="details-table__value">
+      {{ entity.metadata.ram | mb2gb}}
+    </div>
+  </div>
+  <div class="details-table__row" ng-if="entity.metadata.disk">
+    <div class="details-table__key">
+      Storage
+    </div>
+    <div class="details-table__value">
+      {{ entity.metadata.disk | mb2gb }}
+    </div>
+  </div>
+</div>
