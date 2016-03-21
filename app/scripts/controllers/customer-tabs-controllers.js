@@ -196,7 +196,6 @@
         return currentStateService.getCustomer().then(function(customer) {
           vm.service.defaultFilter.aggregate = 'customer';
           vm.service.defaultFilter.uuid = customer.uuid;
-          vm.service.defaultFilter.opened = true;
           return fn(filter);
         })
       }
