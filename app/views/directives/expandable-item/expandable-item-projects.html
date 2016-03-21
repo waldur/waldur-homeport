@@ -1,0 +1,10 @@
+<section block-ui="{{ ::expandableElement.uuid }}" ng-if="expandableElement.expandItemOpen">
+    <header ng-if="expandableOptions.title">
+        <h3>{{expandableOptions.title}}</h3>
+    </header>
+    <div>
+        <span ng-repeat="project in expandableElement[expandableOptions.listKey]">
+            <span><a ui-sref="projects.details({uuid: project.uuid})">{{project.name}}</a></span>
+        </span>
+    </div>
+</section>

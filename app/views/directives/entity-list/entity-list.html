@@ -185,7 +185,7 @@
                                 {{ field.linkDisplayName || entity[field.urlPropertyName] }}
                             </a>
                             <span ng-if="!entity[field.urlPropertyName] && !field.filtered">
-                                {{ entity[field.propertyName] }}
+                                {{ entity[field.propertyName] || entity[field.propertyNameBackup] }}
                             </span>
                             <span ng-if="!entity[field.urlPropertyName] && field.filtered">
                                 {{ entity[field.filtered] }}

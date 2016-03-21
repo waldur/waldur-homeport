@@ -397,7 +397,8 @@
           entityData: {
             noDataText: 'No payments yet',
             hideTableHead: false,
-            rowTemplateUrl: 'views/payment/row.html'
+            rowTemplateUrl: 'views/payment/row.html',
+            expandable: true
           },
           list: [
             {
@@ -513,6 +514,15 @@
             }
           });
         });
+        this.expandableOptions = [
+          {
+            isList: true,
+            listKey: 'projects',
+            addItemBlock: true,
+            viewType: 'projects',
+            title: 'Projects with admin privileges'
+          }
+        ];
         this.entityOptions = {
           entityData: {
             createPopupText: 'Add member',
@@ -523,21 +533,25 @@
           },
           list: [
             {
-              name: 'Member',
-              propertyName: 'full_name',
-              type: ENTITYLISTFIELDTYPES.linkOrText
+              className: 'avatar',
+              avatarSrc: 'email',
+              showForMobile: false,
+              type: ENTITYLISTFIELDTYPES.avatarPictureField
             },
             {
-              name: 'Projects',
-              propertyName: 'projects',
-              propertyNameKey: 'name',
-              type: ENTITYLISTFIELDTYPES.listInField
+              name: 'Member',
+              showForMobile: true,
+              propertyName: 'full_name',
+              propertyNameBackup: 'username',
+              type: ENTITYLISTFIELDTYPES.linkOrText,
+              className: 'reduce-cell-width'
             },
             {
               name: 'Owner',
+              showForMobile: true,
               propertyName: 'role',
               type: ENTITYLISTFIELDTYPES.bool,
-              className: 'shared-filed'
+              className: 'shared-filed reduce-cell-width'
             }
           ]
         };
@@ -545,6 +559,19 @@
           vm.service.clearAllCacheForCurrentEndpoint();
           vm.getList();
         })
+      },
+      afterGetList: function() {
+        var vm = this;
+        usersService.getList().then(function(result) {
+          vm.list.forEach(function(item, i) {
+            result.forEach(function(item2) {
+              if (item.uuid == item2.uuid) {
+                vm.list[i].email = item2.email;
+                vm.list[i].username = item2.username;
+              }
+            });
+          });
+        });
       },
       getList: function(filter) {
         var vm = this;

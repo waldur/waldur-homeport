@@ -46,6 +46,7 @@
                 scope.errors = {};
                 scope.currentUser = null;
                 scope.currentCustomer = null;
+                scope.changeRoleHelpMessage = "You cannot change current users' role";
                 var editUserRole;
 
                 currentStateService.getCustomer().then(function(response) {
@@ -76,6 +77,7 @@
                     scope.userModel.role = user.role;
                     editUserRole = user.role;
                     scope.userModel.projects = angular.copy(user.projects);
+                    scope.changeRole = scope.editUser.uuid === scope.currentUser.uuid;
                 }
 
                 function add() {
@@ -162,6 +164,7 @@
                     scope.projectsToDelete = null;
                     editUserRole = null;
                     $rootScope.$broadcast('reloadList');
+                    $rootScope.$broadcast('actionButton:close');
                 }
 
                 function cancel() {
@@ -178,6 +181,7 @@
                     scope.editUser = null;
                     scope.projectsToDelete = null;
                     editUserRole = null;
+                    $rootScope.$broadcast('actionButton:close');
                 }
 
                 function getProjectsListForAutoComplete(filter) {

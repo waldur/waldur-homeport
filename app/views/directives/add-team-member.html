@@ -19,7 +19,9 @@
         <div class="input">
             <input id="userRoleCheckbox" type="checkbox" ng-model="userModel.role"
                    ng-true-value="'Owner'" ng-false-value="''">
-            <label for="userRoleCheckbox">
+            <helpicon ng-if="changeRole"
+                      help-text="{{changeRoleHelpMessage}}"></helpicon>
+            <label ng-if="!changeRole" for="userRoleCheckbox">
                 <span>no</span>
                 <span>yes</span>
             </label>
@@ -54,7 +56,7 @@
         </div>
 
     </div>
-    <div class="line-wrapper">
+    <div class="line-wrapper control-buttons">
         <a class="button" ng-click="add()">{{addText}}</a>
         <a class="button-cancel" ng-click="cancel()">Cancel</a>
     </div>
