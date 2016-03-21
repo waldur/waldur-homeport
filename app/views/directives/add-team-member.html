@@ -19,8 +19,11 @@
         <div class="input">
             <input id="userRoleCheckbox" type="checkbox" ng-model="userModel.role"
                    ng-true-value="'Owner'" ng-false-value="''">
-            <helpicon ng-if="changeRole"
-                      help-text="{{changeRoleHelpMessage}}"></helpicon>
+            <div ng-if="changeRole">
+                <span class="icon check"></span>
+                <helpicon help-text="{{changeRoleHelpMessage}}"></helpicon>
+            </div>
+
             <label ng-if="!changeRole" for="userRoleCheckbox">
                 <span>no</span>
                 <span>yes</span>

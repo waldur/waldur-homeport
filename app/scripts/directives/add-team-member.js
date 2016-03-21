@@ -162,6 +162,7 @@
                     scope.controller.entityOptions.entityData.showPopup = false;
                     scope.editUser = null;
                     scope.projectsToDelete = null;
+                    scope.changeRole = false;
                     editUserRole = null;
                     $rootScope.$broadcast('reloadList');
                     $rootScope.$broadcast('actionButton:close');
@@ -180,6 +181,7 @@
                     scope.controller.entityOptions.entityData.showPopup = false;
                     scope.editUser = null;
                     scope.projectsToDelete = null;
+                    scope.changeRole = false;
                     editUserRole = null;
                     $rootScope.$broadcast('actionButton:close');
                 }

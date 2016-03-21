@@ -254,7 +254,7 @@
               key: 'team',
               viewName: 'tabTeam',
               hideSearch: false,
-              countFieldKey: 'team',
+              countFieldKey: 'users',
               icon: 'customer'
             },
             {
