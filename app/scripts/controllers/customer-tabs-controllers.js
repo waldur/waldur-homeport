@@ -485,14 +485,18 @@
         });
       },
       removeCustomer: function() {
-        var confirmDelete = confirm('Confirm deletion?');
+        var confirmDelete = confirm('Confirm deletion?'),
+          vm = this;
         if (confirmDelete) {
+          currentStateService.setCustomer(null);
           this.customer.$delete().then(function(instance) {
             customersService.clearAllCacheForCurrentEndpoint();
             customersService.getPersonalOrFirstCustomer(instance.name).then(function(customer) {
               currentStateService.setCustomer(customer);
               $state.go('organizations.details', {uuid: customer.uuid, tab: 'eventlog'});
             });
+          }, function() {
+            currentStateService.setCustomer(vm.customer);
           });
         }
       }
