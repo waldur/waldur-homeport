@@ -32,7 +32,7 @@
         var x = d3.time.scale().range([0, w]);
         x.domain(d3.extent(data, function(d) { return d; }));
 
-        x = d3.scale.linear().domain([0, data.length]).range([0, w]);
+        x = d3.scale.linear().domain([0, data.length - 1]).range([0, w]);
 
         var y = d3.scale.linear().domain([0, max]).range([h, 0]);
         var line = d3.svg.line()
