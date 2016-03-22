@@ -21,6 +21,7 @@
       scope.$watch('data', init);
 
       function init() {
+        element.children().html('');
         var m = [10, 40, (scope.bottom || 80), 60]; // margins
         var w = element[0].getBoundingClientRect().width - m[1] - m[3]; // width
         var h = (scope.height || 270) - m[0] - m[2]; // height
