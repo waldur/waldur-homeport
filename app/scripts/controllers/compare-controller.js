@@ -37,7 +37,7 @@
         this.activate();
         this.orderField = 'value';
         this.reverseOrder = false;
-        var vm = this;
+        this.hideNoDataText = true;
 
         this.entityOptions = {
           entityData: {
@@ -127,12 +127,8 @@
         }
       },
       activate: function() {
-        var vm = this;
-        vm.hideNoDataText = true;
-        var listPromise = vm.setCurrentUserData();
-        ncUtils.blockElement(vm.blockUIElement, listPromise).finally(function() {
-          vm.hideNoDataText = true;
-        });
+        var listPromise = this.setCurrentUserData();
+        ncUtils.blockElement('compare-list', listPromise);
       },
       setCurrentUserData: function() {
         var currentCustomerPromise = currentStateService.getCustomer(),
@@ -155,6 +151,9 @@
           var getAllPromise = defaultPriceListItemsService.getAll({item_type: 'flavor'}).then(function(response) {
             vm.initialListLength = response.length;
             vm.list.length < response.length && (vm.itemsToShow = response.splice(10));
+            vm.hideNoDataText = false;
+          }, function(error) {
+            vm.hideNoDataText = false;
           });
           ncUtils.blockElement('load-more', getAllPromise);
         });
