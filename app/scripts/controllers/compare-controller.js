@@ -13,7 +13,7 @@
     ]);
 
   function CompareController(
-    baseControllerListClass,
+    baseControllerClass,
     currentStateService,
     defaultPriceListItemsService,
     servicesService,
@@ -22,7 +22,7 @@
     ncUtils,
     $filter) {
     var controllerScope = this;
-    var CompareController = baseControllerListClass.extend({
+    var CompareController = baseControllerClass.extend({
       init:function() {
         this._super();
         this.service = defaultPriceListItemsService;
@@ -33,7 +33,6 @@
         this.list = [];
         this.servicesTypes = [];
         this.listFilters = [];
-        this.blockUIElement = 'list';
         this.activate();
         this.orderField = 'value';
         this.reverseOrder = false;
