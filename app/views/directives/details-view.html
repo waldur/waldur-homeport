@@ -15,33 +15,9 @@
                 <img gravatar-src="controller.model.email" class="avatar-img" gravatar-size="100">
             </div>
             <div class="details-about">
-                <div ng-if="options.hasLogo" class="profile-logo">
-                    <section class="avatar">
-                        <span class="avatar big">
-                            <img ng-src="{{controller.imageUrl}}" alt="" class="avatar-img"
-                                 ng-hide="controller.files.length">
-
-                            <img ngf-src="controller.files[0]" alt="" class="avatar-img"
-                                 ng-show="controller.files.length">
-                        </span>
-                    </section>
-                    <section class="avatar-edit" ng-show="controller.canEdit">
-                        <a class="icon-button plus-icon" ngf-select ngf-accept="'image/*'"
-                           ng-hide="controller.files.length"
-                           ng-model="controller.files">New logo</a>
-
-                        <a class="icon-button remove-icon"
-                           ng-show="controller.model.image && controller.files.length==0"
-                           ng-click="controller.deleteImage()">Delete</a>
-
-                        <a class="icon-button ok-icon"
-                           ng-show="controller.files.length"
-                           ng-click="controller.uploadImage()">Save</a>
-
-                        <a class="icon-button remove-icon"
-                           ng-show="controller.files.length"
-                           ng-click="controller.files=[]">Cancel</a>
-                    </section>
+                <div ng-if="options.hasLogo"
+                     ng-include="'views/directives/avatar-editor.html"
+                     class="profile-logo">
                 </div>
 
                   <a ng-if="options.listState"
@@ -81,35 +57,11 @@
 
     <div class="profile-content" ng-show="!controller.loading">
         <div class="tabs-wrapper">
-            <aside>
-                <div class="input-group rem-mob">
-                    <input type="search" placeholder="Search" ng-hide="hideSearch"
-                           ng-model="controller.generalSearch"
-                           ng-model-options="{ debounce: 500 }"
-                           ng-change="search()"/>
-                </div>
-                <div class="tabs-links">
-                  <div class="tab-link__item"
-                       visible="{{ tab.key }}"
-                       ng-click="tabChange(tab.key)"
-                       ng-repeat="tab in options.tabs"
-                       ng-class="{'active': options.activeTab === tab.key}">
-                    <div class="tab-link__key">
-                      <div ng-if="::tab.icon"
-                           class="icon"
-                           ng-class="::tab.icon"></div>
-                      {{ tab.title }} 
-                      <span ng-if="tab.key != 'delete'">
-                        <span ng-show="tab.count !== -1">({{ tab.count }})</span>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-            </aside>
+            <div ng-include="'views/directives/tab-list.html'"></div>
             <div class="tab-content" block-ui="tab-content">
                 <div visible="{{ tabContent.key }}" class="tab" id="{{ tabContent.key }}"
-                     ng-class="{'tab-active': options.activeTab === tabContent.key}"
-                     ng-if="tabContent.key == options.activeTab"
+                     ng-class="{'tab-active': options.activeTab.key === tabContent.key}"
+                     ng-if="tabContent.key == options.activeTab.key"
                      ng-repeat="tabContent in options.tabs">
                     <div ui-view="{{ tabContent.viewName }}"></div>
                 </div>

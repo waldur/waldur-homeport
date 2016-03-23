@@ -1,0 +1,26 @@
+<section class="avatar">
+    <span class="avatar big">
+        <img ng-src="{{controller.imageUrl}}" alt="" class="avatar-img"
+             ng-hide="controller.files.length">
+
+        <img ngf-src="controller.files[0]" alt="" class="avatar-img"
+             ng-show="controller.files.length">
+    </span>
+</section>
+<section class="avatar-edit" ng-show="controller.canEdit">
+    <a class="icon-button plus-icon" ngf-select ngf-accept="'image/*'"
+       ng-hide="controller.files.length"
+       ng-model="controller.files">New logo</a>
+
+    <a class="icon-button remove-icon"
+       ng-show="controller.model.image && controller.files.length==0"
+       ng-click="controller.deleteImage()">Delete</a>
+
+    <a class="icon-button ok-icon"
+       ng-show="controller.files.length"
+       ng-click="controller.uploadImage()">Save</a>
+
+    <a class="icon-button remove-icon"
+       ng-show="controller.files.length"
+       ng-click="controller.files=[]">Cancel</a>
+</section>

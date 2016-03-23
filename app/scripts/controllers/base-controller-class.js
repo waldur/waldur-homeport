@@ -277,18 +277,32 @@
         this._super();
         this.activate();
       },
-      getActiveTab: function(tabs, stateParamTab) {
+      getActiveTab: function() {
+        var key = this.getActiveTabKey();
+        if (key) {
+          return this.getTabByKey(key);
+        }
+      },
+      getActiveTabKey: function() {
         var defaultTab;
-        for (var i = 0; i < tabs.length; i++) {
-          var tab = tabs[i].key;
+        for (var i = 0; i < this.detailsViewOptions.tabs.length; i++) {
+          var tab = this.detailsViewOptions.tabs[i].key;
           if (tab && (ENV.featuresVisible || ENV.toBeFeatures.indexOf(tab) === -1)) {
             defaultTab = !defaultTab ? tab : defaultTab;
-            if (tab === stateParamTab) {
+            if (tab === $stateParams.tab) {
               return tab;
             }
           }
         }
         return defaultTab;
+      },
+      getTabByKey: function(key) {
+        for (var i = 0; i < this.detailsViewOptions.tabs.length; i++) {
+          var tab = this.detailsViewOptions.tabs[i];
+          if (tab.key == key) {
+            return tab;
+          }
+        }
       },
       setCounters: function() {
         var vm = this;
