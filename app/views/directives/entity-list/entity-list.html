@@ -73,7 +73,9 @@
                 <div class="checkbox" ng-if="entityList.controlPanelShow"></div>
                 <div ng-repeat="fieldHead in entityOptions.list" class="additional-cell {{ fieldHead.className }}"
                      ng-class="{ 'display-for-mobile' : fieldHead.showForMobile, 'status': fieldHead.type == 'statusCircle' }">
-                    <a ng-click="entityList.orderField=fieldHead.propertyName; entityList.reverseOrder = !entityList.reverseOrder" class="list-sort">
+                    <a ng-click="entityList.orderField=fieldHead.propertyName; entityList.reverseOrder = !entityList.reverseOrder"
+                       ng-if="!fieldHead.notSortable"
+                       class="list-sort">
                         {{ fieldHead.name }}
                         <i class="fa" ng-show="entityList.orderField == fieldHead.propertyName"
                            ng-class="{'fa-angle-down' : !entityList.reverseOrder,

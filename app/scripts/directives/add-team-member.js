@@ -10,7 +10,6 @@
             'projectsService',
             'usersService',
             '$q',
-            'ENV',
             '$rootScope',
             addTeamMember]);
 
@@ -21,7 +20,6 @@
         projectsService,
         usersService,
         $q,
-        ENV,
         $rootScope
     ) {
         return {

@@ -53,6 +53,7 @@
       cacheTime: ENV.defaultListCacheTime,
       controlPanelShow: true,
       blockUIElement: null,
+      mergeListFieldIdentifier: null,
 
       init: function() {
         ncUtils.deregisterEvent('generalSearchChanged');
@@ -249,8 +250,6 @@
     .service('baseControllerDetailUpdateClass', [
       '$state',
       'baseControllerClass',
-      'customersService',
-      'ncUtils',
       '$stateParams',
       '$rootScope',
       'ENV',
@@ -259,8 +258,6 @@
   function baseControllerDetailUpdateClass(
       $state,
       baseControllerClass,
-      customersService,
-      ncUtils,
       $stateParams,
       $rootScope,
       ENV) {

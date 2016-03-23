@@ -490,6 +490,7 @@
         this.controllerScope = controllerScope;
         this.service = customersService;
         this.searchFieldName = 'full_name';
+        this.hideNoDataText = true;
         var vm = this;
         var fn = this._super.bind(this);
         var currentUserPromise = usersService.getCurrentUser();
@@ -499,7 +500,7 @@
           vm.currentCustomer = result[1];
           fn();
           vm.currentCustomer.owners.forEach(function(item) {
-            if (vm.currentUser.uuid === item.uuid) {
+            if (vm.currentUser.uuid === item.uuid || vm.currentUser.is_staff) {
               vm.entityOptions.entityData.createPopup = vm.openPopup.bind(vm);
               vm.actionButtonsListItems = [
                 {
@@ -536,6 +537,7 @@
               className: 'avatar',
               avatarSrc: 'email',
               showForMobile: false,
+              notSortable: true,
               type: ENTITYLISTFIELDTYPES.avatarPictureField
             },
             {
