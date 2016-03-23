@@ -174,7 +174,7 @@
       saveCustomer: function() {
         var vm = this;
         if (vm.customer.uuid) {
-          return $q.defer().resolve();
+          return $q.when(true);
         }
         vm.currentProcess = 'Saving organization...';
         var customer = customersService.$create();
@@ -188,7 +188,7 @@
       saveProject: function() {
         var vm = this;
         if (vm.project.uuid) {
-          return $q.defer().resolve();
+          return $q.when(true);
         }
         vm.currentProcess = 'Saving project...';
         var project = projectsService.$create();
@@ -215,10 +215,10 @@
           vm.customer.errors = {name: 'This field is required'};
           return $q.reject();
         }
-        return vm.saveUser()
-                 .then(vm.saveCustomer.bind(vm))
+        return vm.saveCustomer()
                  .then(vm.saveServices.bind(vm))
                  .then(vm.saveProject.bind(vm))
+                 .then(vm.saveUser.bind(vm))
                  .then(vm.gotoDashboard);
       }
     });

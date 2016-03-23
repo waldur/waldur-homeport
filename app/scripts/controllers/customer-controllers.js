@@ -201,8 +201,8 @@
               title: 'Events',
               key: 'eventlog',
               viewName: 'tabEventlog',
-              countFieldKey: 'events',
-              icon: 'event'
+              icon: 'event',
+              count: -1
             },
             {
               title: 'Alerts',
@@ -298,8 +298,6 @@
       },
 
       getCounters: function() {
-        // TODO: implement getting invoices count from api/customers/{uuid}/counters/ endpoint
-
         return currentStateService.getCustomer().then(function(customer) {
           var query = angular.extend(
               {UUID: customer.uuid},

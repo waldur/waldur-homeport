@@ -286,8 +286,8 @@
               title: 'Events',
               key: 'eventlog',
               viewName: 'tabEventlog',
-              countFieldKey: 'events',
-              icon: 'event'
+              icon: 'event',
+              count: -1
             },
             {
               title: 'Alerts',

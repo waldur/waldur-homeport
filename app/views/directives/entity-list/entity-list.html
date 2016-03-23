@@ -34,13 +34,11 @@
         </div>
     </div>
 
-    <div class="white-box no-styles" ng-show="entityList.list.length == 0 && !entityList.searchInput && !entityList.chosenFilters.length">
-        <h2 class="app-title">
-            {{ entityList.hideNoDataText ? '' : entityOptions.entityData.noDataText }}
-        </h2>
+    <div class="white-box no-styles" ng-show="entityList.list.length == 0 && !entityList.searchInput && !entityList.chosenFilters.length && !entityList.hideNoDataText">
+        <h2 class="app-title" ng-bind="::entityOptions.entityData.noDataText"></h2>
         <div class="decision">
             <div class="col">
-                <div ng-hide="entityList.hideNoDataText" ng-include="'views/directives/entity-list/table-actions.html'"></div>
+                <div ng-include="'views/directives/entity-list/table-actions.html'"></div>
             </div>
         </div>
     </div>
@@ -88,12 +86,10 @@
             </li>
             <li ng-repeat="entity in entityList.list
                             | orderBy:entityList.orderField:entityList.reverseOrder
-                            | filter:entityList.filterResults"
-                ng-show="entity.uuid != entityOptions.excludeItem || entity.expandItemOpen">
-                <div class="list-item list"
-                     ng-class="{'opened': entity.expandItemOpen, 'pointer' : entityOptions.entityData.expandable}"
-                     ng-click="entity.expandItemOpen=!entity.expandItemOpen; entityList.showMore(entity)"
-                     ng-init="entityOptions.excludeItem = entity.expandItemOpen ? entity.uuid : 0;">
+                            | filter:entityList.filterResults
+                            track by $index">
+                <div class="list-item list" ng-class="{'opened': entity.expandItemOpen, 'pointer' : entityOptions.entityData.expandable}"
+                     ng-click="entity.expandItemOpen=!entity.expandItemOpen; entityList.showMore(entity)">
                     <div class="checkbox" ng-if="entityList.controlPanelShow">
                         <div class="checkbox" stoppropagation>
                             <input type="checkbox" ng-if="entityList.showgroup"
