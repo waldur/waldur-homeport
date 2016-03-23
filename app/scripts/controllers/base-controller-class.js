@@ -160,7 +160,8 @@
           $rootScope.$broadcast('customerBalance:refresh');
         });
 
-      }
+      },
+      showMore: function() {}
     });
 
     return ControllerListClass;
