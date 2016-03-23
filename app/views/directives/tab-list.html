@@ -11,7 +11,7 @@
     <div class="tabs-links">
       <div class="tab-link__item"
            visible="{{ tab.key }}"
-           ng-click="tabChange(tab.key)"
+           ng-click="options.activeTab = tab"
            ng-repeat="tab in options.tabs"
            ng-class="{'active': options.activeTab.key === tab.key}">
         <div class="tab-link__key">
