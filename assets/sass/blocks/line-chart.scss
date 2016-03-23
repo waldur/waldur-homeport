@@ -30,4 +30,14 @@
       }
     }
   }
+
+  text {
+    &.flash-chart {
+      pointer-events: none;
+      text-anchor: middle;
+      font: 12px sans-serif;
+      fill: #4682b4;
+      text-shadow: 0 1px 0 #fff, 0 -1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff;
+    }
+  }
 }
