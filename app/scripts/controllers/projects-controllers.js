@@ -363,6 +363,9 @@
       },
       getCounters: function() {
         return currentStateService.getProject().then(function(project) {
+          if (!project) {
+            return;
+          }
           var query = angular.extend(
             {UUID: project.uuid},
             eventsService.defaultFilter
