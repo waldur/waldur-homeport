@@ -51,11 +51,15 @@
             // Move found element to the start of the list for user's convenience
             vm.list.splice(vm.list.indexOf(item), 1);
             vm.list.unshift(item);
-            item.expandItemOpen = true;
+            if (angular.isUndefined(item.expandItemOpen)) {
+              item.expandItemOpen = true;
+            }
           } else {
             this.service.$get(service_type, uuid).then(function(provider) {
               vm.list.unshift(provider);
-              provider.expandItemOpen = true;
+              if (angular.isUndefined(provider.expandItemOpen)) {
+                provider.expandItemOpen = true;
+              }
             });
           }
         }
