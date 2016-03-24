@@ -13,10 +13,18 @@
     ]);
 
   function CompareController(
-    baseControllerClass, currentStateService, defaultPriceListItemsService, servicesService, ENTITYLISTFIELDTYPES, $q, ncUtils, $filter) {
+    baseControllerClass,
+    currentStateService,
+    defaultPriceListItemsService,
+    servicesService,
+    ENTITYLISTFIELDTYPES,
+    $q,
+    ncUtils,
+    $filter) {
     var controllerScope = this;
     var CompareController = baseControllerClass.extend({
       init:function() {
+        this._super();
         this.service = defaultPriceListItemsService;
         this.controllerScope = controllerScope;
         this.servicesMetadata = null;
@@ -25,12 +33,10 @@
         this.list = [];
         this.servicesTypes = [];
         this.listFilters = [];
-        this._super();
         this.activate();
         this.orderField = 'value';
         this.reverseOrder = false;
         this.hideNoDataText = true;
-        var vm = this;
 
         this.entityOptions = {
           entityData: {
@@ -41,7 +47,9 @@
             hideActionButtons: true,
             hideSearch: true,
             hideControlButtons: true,
-            loadMoreButton: true
+            loadMoreButton: true,
+            rowTemplateUrl: 'views/compare/row.html',
+            filterTemplateUrl: 'views/compare/filter.html'
           },
           list: [
             {
@@ -56,28 +64,28 @@
               getIcon: function(item) {
                 var service_type = item.resource_type.split(".")[0];
                 return "/static/images/appstore/icon-" + service_type.toLowerCase() + ".png";
-              }
+              },
+              notSortable: true
             },
             {
               name: 'Code',
               propertyName: 'key',
               type: ENTITYLISTFIELDTYPES.linkOrText,
-              showForMobile: ENTITYLISTFIELDTYPES.showForMobile
+              notSortable: true
             },
             {
               name: 'Name',
               propertyName: 'metadataName',
               type: ENTITYLISTFIELDTYPES.linkOrText,
-              showForMobile: ENTITYLISTFIELDTYPES.showForMobile,
               initField: function(item) {
                 item.metadataName = item.metadata.name;
-              }
+              },
+              notSortable: true
             },
             {
               name: 'CPU',
               propertyName: 'metadataCores',
               type: ENTITYLISTFIELDTYPES.linkOrText,
-              showForMobile: ENTITYLISTFIELDTYPES.showForMobile,
               initField: function(item) {
                 item.metadataCores = item.metadata.cores;
               }
@@ -87,7 +95,6 @@
               propertyName: 'metadataRam',
               filtered: 'filteredRam',
               type: ENTITYLISTFIELDTYPES.linkOrText,
-              showForMobile: ENTITYLISTFIELDTYPES.showForMobile,
               initField: function(item) {
                 item.metadataRam = item.metadata.ram;
                 item.metadataRam && (item.filteredRam = $filter('mb2gb')(item.metadata.ram));
@@ -98,7 +105,6 @@
               propertyName: 'metadataDisk',
               filtered: 'filteredDisk',
               type: ENTITYLISTFIELDTYPES.linkOrText,
-              showForMobile: ENTITYLISTFIELDTYPES.showForMobile,
               initField: function(item) {
                 item.metadataDisk = item.metadata.disk;
                 item.metadataDisk && (item.filteredDisk = $filter('mb2gb')(item.metadata.disk));
@@ -108,13 +114,19 @@
               name: 'Price/hour',
               propertyName: 'value',
               type: ENTITYLISTFIELDTYPES.name,
-              showForMobile: ENTITYLISTFIELDTYPES.showForMobile,
               initField: function(item) {
                 item.value = $filter('defaultCurrency')(item.value);
               }
             }
           ]
         };
+      },
+      filterByResourceType: function(value) {
+        if (value) {
+          this.filterResults = {resource_type: value};
+        } else {
+          this.filterResults = null;
+        }
       },
       activate: function() {
         var listPromise = this.setCurrentUserData();
@@ -124,7 +136,7 @@
         var currentCustomerPromise = currentStateService.getCustomer(),
           currentProjectPromise = currentStateService.getProject(),
           servicesPromise = servicesService.getServicesList();
-        vm = this;
+        var vm = this;
         return $q.all([currentCustomerPromise, currentProjectPromise, servicesPromise]).then(function(result) {
           vm.currentCustomer = result[0];
           vm.currentProject = result[1];

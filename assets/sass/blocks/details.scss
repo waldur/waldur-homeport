@@ -719,6 +719,15 @@ $searchInputHeight: 32px;
 
 .details-table__value {
     flex-grow: 1;
+    margin-left: 6px;
+    select {
+      border-radius: 4px;
+      width: 100%;
+      box-sizing: border-box;
+      height: 32px;
+      background: white;
+      padding-left: 3px;
+    }
 }
 
 .team-members {
