@@ -729,3 +729,45 @@ $searchInputHeight: 32px;
       padding-left: 3px;
     }
 }
+
+.team-members {
+
+  .add-team-member-button {
+    position: absolute;
+    right: 95px;
+    text-align: right;
+    top: 10px;
+  }
+
+  .add-team-popup {
+    background: rgba(0,0,0,.4);
+    bottom: 0;
+    display: flex;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 101;
+
+    .add-team-member-wrapper {
+      background: white;
+      margin: auto;
+      padding: 10px;
+
+      .add-team-member {
+        width: 330px;
+        @include bp(xs) {
+          width: 280px;
+          .line-wrapper {
+            .label {
+              width: 40%;
+            }
+            &.control-buttons {
+              margin-top: 30px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
