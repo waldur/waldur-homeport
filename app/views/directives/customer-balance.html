@@ -87,12 +87,10 @@
                     Balance
                 </div>
                 <div class="dropdown__content">
-                    <canvas ng-if="showChart"
-                            tc-chartjs-line
-                            chart-data="chartData"
-                            width="280"
-                            height="120">
-                    </canvas>
+                    <line-chart ng-if="showChart"
+                                chart-height="150"
+                                chart-bottom="40"
+                                chart-data="d3Data"></line-chart>
 
                     <div ng-if="!showChart">
                         No changes for a month.
@@ -128,11 +126,10 @@
             </div>
         </div>
         <div ng-if="showBalance" class="tab-link__content">
-            <canvas ng-if="showChart"
-                    tc-chartjs-line
-                    chart-data="chartData"
-                    style="width: 100%;">
-            </canvas>
+            <line-chart ng-if="showChart"
+                        chart-height="150"
+                        chart-bottom="40"
+                        chart-data="d3Data"></line-chart>
             <div class="usage-row add-amount">
                 <div class="usage-row__key">Amount</div>
                 <div class="usage-row__value">
