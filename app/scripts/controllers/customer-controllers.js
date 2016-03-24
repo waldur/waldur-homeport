@@ -291,6 +291,9 @@
 
       getCounters: function() {
         return currentStateService.getCustomer().then(function(customer) {
+          if (!customer) {
+            return $q.reject();
+          }
           var query = angular.extend(
               {UUID: customer.uuid},
               joinService.defaultFilter,
