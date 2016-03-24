@@ -10,7 +10,6 @@
       </li>
   </ul>
 </div>
-
 <div class="xs-show">
   <div class="details-table__row">
     <div class="details-table__key">
@@ -25,16 +24,9 @@
       </select>
     </div>
   </div>
-  <div class="details-table__row">
-    <div class="details-table__key">
-      Order by
-    </div>
-    <div class="details-table__value">
-      <select
-          ng-options="field.propertyName as field.name for field in entityOptions.list"
-          ng-model="entityList.orderField"
-          ng-change="entityList.reverseOrder = !entityList.orderField">
-      </select>
-    </div>
-  </div>
 </div>
+<compact-table-sorter
+  fields="entityOptions.list"
+  order-field="entityList.orderField"
+  reverse-order="entityList.reverseOrder">
+</compact-table-sorter>

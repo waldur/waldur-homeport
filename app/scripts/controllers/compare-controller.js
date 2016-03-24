@@ -64,12 +64,14 @@
               getIcon: function(item) {
                 var service_type = item.resource_type.split(".")[0];
                 return "/static/images/appstore/icon-" + service_type.toLowerCase() + ".png";
-              }
+              },
+              notSortable: true
             },
             {
               name: 'Code',
               propertyName: 'key',
               type: ENTITYLISTFIELDTYPES.linkOrText,
+              notSortable: true
             },
             {
               name: 'Name',
@@ -77,7 +79,8 @@
               type: ENTITYLISTFIELDTYPES.linkOrText,
               initField: function(item) {
                 item.metadataName = item.metadata.name;
-              }
+              },
+              notSortable: true
             },
             {
               name: 'CPU',
