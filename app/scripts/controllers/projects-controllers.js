@@ -340,7 +340,7 @@
             }
           ]
         };
-        this.detailsViewOptions.activeTab = this.getActiveTab(this.detailsViewOptions.tabs, $stateParams.tab);
+        this.detailsViewOptions.activeTab = this.getActiveTab();
       },
       afterUpdate: function() {
         $rootScope.$broadcast('refreshProjectList', {model: this.model, update: true});

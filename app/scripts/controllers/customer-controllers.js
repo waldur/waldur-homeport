@@ -256,7 +256,7 @@
             }
           ]
         };
-        this.detailsViewOptions.activeTab = this.getActiveTab(this.detailsViewOptions.tabs, $stateParams.tab);
+        this.detailsViewOptions.activeTab = this.getActiveTab();
       },
       isOwnerOrStaff: function(customer) {
         if (this.currentUser.is_staff) return true;
