@@ -21,6 +21,9 @@
       scope.$watch('data', init);
 
       function init() {
+        if (!scope.data) {
+          return;
+        }
         element.children().html('');
         var m = [10, 40, (scope.bottom || 80), 60]; // margins
         var w = element[0].getBoundingClientRect().width - m[1] - m[3]; // width
@@ -29,6 +32,14 @@
         var data = scope.data.y;
         var max = d3.max(data, function(d) { return d; });
         var min = d3.min(data, function(d) { return d; });
+
+        var div = d3.select("body").append("div")
+          .attr("class", "chart-tooltip")
+          .style("opacity", 0);
+
+        scope.$on('$destroy', function() {
+          div.remove();
+        });
 
         var x = d3.time.scale().range([0, w]);
         x.domain(d3.extent(data, function(d) { return d; }));
@@ -67,7 +78,7 @@
           .attr("transform", "rotate(-65)" );
 
 
-        var yAxisLeft = d3.svg.axis().scale(y).ticks(4).orient("left").tickFormat(d3.format("d"));;
+        var yAxisLeft = d3.svg.axis().scale(y).ticks(4).orient("left").tickFormat(d3.format("d"));
         graph.append("svg:g")
           .attr("class", "y axis")
           .attr("transform", "translate(-25,0)")
@@ -88,27 +99,23 @@
             .append('circle')
             .attr('cx', function () { return x(xValue); })
             .attr('cy', function () { return y(yValue); })
-            .attr('r', 3)
+            .attr('r', 5)
             .attr('value', scope.data.x[xValue] + ': ' + yValue)
-            .on("mouseenter", flash);
+            .on("mouseenter", function() {
+              var name = d3.event.toElement.getAttribute('value');
+              div.transition()
+                .duration(200)
+                .style("opacity", .9)
+                .style("display", "block");
+              div.html(name)
+                .style("left", (d3.event.pageX) + "px")
+                .style("top", (d3.event.pageY - 28) + "px");
+            })
+            .on("mouseout", function() {
+              div.transition()
+                .style("display", "none");
+            });
         });
-
-        function flash() {
-          var name = d3.event.toElement.getAttribute('value');
-          var translate = d3.mouse(this);
-          translate[1] = translate[1] > 0 ? translate[1] : 0;
-          graph
-            .selectAll('text.flash-chart')
-            .remove();
-          graph.append("text")
-            .attr("class", 'flash-chart')
-            .attr("transform", "translate(" + translate + ")")
-            .text(name)
-            .transition()
-            .duration(1500)
-            .style("opacity", 0)
-            .remove();
-        }
       }
     }
   }
