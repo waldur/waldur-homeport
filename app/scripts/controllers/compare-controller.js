@@ -29,6 +29,7 @@
         this.activate();
         this.orderField = 'value';
         this.reverseOrder = false;
+        this.hideNoDataText = true;
         var vm = this;
 
         this.entityOptions = {
@@ -116,14 +117,15 @@
         };
       },
       activate: function() {
-        this.setCurrentUserData();
+        var listPromise = this.setCurrentUserData();
+        ncUtils.blockElement('compare-list', listPromise);
       },
       setCurrentUserData: function() {
         var currentCustomerPromise = currentStateService.getCustomer(),
           currentProjectPromise = currentStateService.getProject(),
           servicesPromise = servicesService.getServicesList();
         vm = this;
-        $q.all([currentCustomerPromise, currentProjectPromise, servicesPromise]).then(function(result) {
+        return $q.all([currentCustomerPromise, currentProjectPromise, servicesPromise]).then(function(result) {
           vm.currentCustomer = result[0];
           vm.currentProject = result[1];
           vm.servicesMetadata = result[2];
@@ -139,6 +141,9 @@
           var getAllPromise = defaultPriceListItemsService.getAll({item_type: 'flavor'}).then(function(response) {
             vm.initialListLength = response.length;
             vm.list.length < response.length && (vm.itemsToShow = response.splice(10));
+            vm.hideNoDataText = false;
+          }, function(error) {
+            vm.hideNoDataText = false;
           });
           ncUtils.blockElement('load-more', getAllPromise);
         });

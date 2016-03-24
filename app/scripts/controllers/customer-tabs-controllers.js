@@ -51,11 +51,15 @@
             // Move found element to the start of the list for user's convenience
             vm.list.splice(vm.list.indexOf(item), 1);
             vm.list.unshift(item);
-            item.expandItemOpen = true;
+            if (angular.isUndefined(item.expandItemOpen)) {
+              item.expandItemOpen = true;
+            }
           } else {
             this.service.$get(service_type, uuid).then(function(provider) {
               vm.list.unshift(provider);
-              provider.expandItemOpen = true;
+              if (angular.isUndefined(provider.expandItemOpen)) {
+                provider.expandItemOpen = true;
+              }
             });
           }
         }
@@ -119,6 +123,8 @@
           link: 'projects.details({uuid: entity.project_uuid})',
           type: ENTITYLISTFIELDTYPES.name
         });
+        this.rowFields.push('project_name');
+        this.rowFields.push('project_uuid');
       }
     });
     return controllerClass;
@@ -194,7 +200,6 @@
         return currentStateService.getCustomer().then(function(customer) {
           vm.service.defaultFilter.aggregate = 'customer';
           vm.service.defaultFilter.uuid = customer.uuid;
-          vm.service.defaultFilter.opened = true;
           return fn(filter);
         })
       }
@@ -397,7 +402,8 @@
           entityData: {
             noDataText: 'No payments yet',
             hideTableHead: false,
-            rowTemplateUrl: 'views/payment/row.html'
+            rowTemplateUrl: 'views/payment/row.html',
+            expandable: true
           },
           list: [
             {
@@ -489,6 +495,7 @@
         this.controllerScope = controllerScope;
         this.service = customersService;
         this.searchFieldName = 'full_name';
+        this.hideNoDataText = true;
         var vm = this;
         var fn = this._super.bind(this);
         var currentUserPromise = usersService.getCurrentUser();
@@ -498,7 +505,7 @@
           vm.currentCustomer = result[1];
           fn();
           vm.currentCustomer.owners.forEach(function(item) {
-            if (vm.currentUser.uuid === item.uuid) {
+            if (vm.currentUser.uuid === item.uuid || vm.currentUser.is_staff) {
               vm.entityOptions.entityData.createPopup = vm.openPopup.bind(vm);
               vm.actionButtonsListItems = [
                 {
@@ -513,6 +520,15 @@
             }
           });
         });
+        this.expandableOptions = [
+          {
+            isList: true,
+            listKey: 'projects',
+            addItemBlock: true,
+            viewType: 'projects',
+            title: 'Projects with admin privileges'
+          }
+        ];
         this.entityOptions = {
           entityData: {
             createPopupText: 'Add member',
@@ -523,23 +539,46 @@
           },
           list: [
             {
-              name: 'Member',
-              propertyName: 'full_name',
-              type: ENTITYLISTFIELDTYPES.linkOrText
+              className: 'avatar',
+              avatarSrc: 'email',
+              showForMobile: false,
+              notSortable: true,
+              type: ENTITYLISTFIELDTYPES.avatarPictureField
             },
             {
-              name: 'Projects',
-              propertyName: 'projects',
-              propertyNameKey: 'name',
-              type: ENTITYLISTFIELDTYPES.listInField
+              name: 'Member',
+              showForMobile: true,
+              propertyName: 'full_name',
+              propertyNameBackup: 'username',
+              type: ENTITYLISTFIELDTYPES.linkOrText,
+              className: 'reduce-cell-width'
             },
             {
               name: 'Owner',
+              showForMobile: true,
               propertyName: 'role',
-              type: ENTITYLISTFIELDTYPES.linkOrText
+              type: ENTITYLISTFIELDTYPES.bool,
+              className: 'shared-filed reduce-cell-width'
             }
           ]
         };
+        $rootScope.$on('reloadList', function() {
+          vm.service.clearAllCacheForCurrentEndpoint();
+          vm.getList();
+        })
+      },
+      afterGetList: function() {
+        var vm = this;
+        usersService.getList().then(function(result) {
+          vm.list.forEach(function(item, i) {
+            result.forEach(function(item2) {
+              if (item.uuid == item2.uuid) {
+                vm.list[i].email = item2.email;
+                vm.list[i].username = item2.username;
+              }
+            });
+          });
+        });
       },
       getList: function(filter) {
         var vm = this;

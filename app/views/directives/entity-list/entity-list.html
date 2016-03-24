@@ -71,7 +71,9 @@
                 <div class="checkbox" ng-if="entityList.controlPanelShow"></div>
                 <div ng-repeat="fieldHead in entityOptions.list" class="additional-cell {{ fieldHead.className }}"
                      ng-class="{ 'display-for-mobile' : fieldHead.showForMobile, 'status': fieldHead.type == 'statusCircle' }">
-                    <a ng-click="entityList.orderField=fieldHead.propertyName; entityList.reverseOrder = !entityList.reverseOrder" class="list-sort">
+                    <a ng-click="entityList.orderField=fieldHead.propertyName; entityList.reverseOrder = !entityList.reverseOrder"
+                       ng-if="!fieldHead.notSortable"
+                       class="list-sort">
                         {{ fieldHead.name }}
                         <i class="fa" ng-show="entityList.orderField == fieldHead.propertyName"
                            ng-class="{'fa-angle-down' : !entityList.reverseOrder,
@@ -84,12 +86,10 @@
             </li>
             <li ng-repeat="entity in entityList.list
                             | orderBy:entityList.orderField:entityList.reverseOrder
-                            | filter:entityList.filterResults"
-                ng-show="entity.uuid != entityOptions.excludeItem || entity.expandItemOpen">
-                <div class="list-item list"
-                     ng-class="{'opened': entity.expandItemOpen, 'pointer' : entityOptions.entityData.expandable}"
-                     ng-click="entity.expandItemOpen=!entity.expandItemOpen; entityList.showMore(entity)"
-                     ng-init="entityOptions.excludeItem = entity.expandItemOpen ? entity.uuid : 0;">
+                            | filter:entityList.filterResults
+                            track by $index">
+                <div class="list-item list" ng-class="{'opened': entity.expandItemOpen, 'pointer' : entityOptions.entityData.expandable}"
+                     ng-click="entity.expandItemOpen=!entity.expandItemOpen; entityList.showMore(entity)">
                     <div class="checkbox" ng-if="entityList.controlPanelShow">
                         <div class="checkbox" stoppropagation>
                             <input type="checkbox" ng-if="entityList.showgroup"
@@ -183,7 +183,7 @@
                                 {{ field.linkDisplayName || entity[field.urlPropertyName] }}
                             </a>
                             <span ng-if="!entity[field.urlPropertyName] && !field.filtered">
-                                {{ entity[field.propertyName] }}
+                                {{ entity[field.propertyName] || entity[field.propertyNameBackup] }}
                             </span>
                             <span ng-if="!entity[field.urlPropertyName] && field.filtered">
                                 {{ entity[field.filtered] }}

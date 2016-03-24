@@ -10,7 +10,7 @@
             'projectsService',
             'usersService',
             '$q',
-            'ENV',
+            '$rootScope',
             addTeamMember]);
 
     function addTeamMember(
@@ -20,7 +20,7 @@
         projectsService,
         usersService,
         $q,
-        ENV
+        $rootScope
     ) {
         return {
             restrict: 'E',
@@ -44,6 +44,7 @@
                 scope.errors = {};
                 scope.currentUser = null;
                 scope.currentCustomer = null;
+                scope.changeRoleHelpMessage = "You cannot change your own role";
                 var editUserRole;
 
                 currentStateService.getCustomer().then(function(response) {
@@ -73,7 +74,8 @@
                     scope.userModel.user_url = user.user;
                     scope.userModel.role = user.role;
                     editUserRole = user.role;
-                    scope.userModel.projects = user.projects;
+                    scope.userModel.projects = angular.copy(user.projects);
+                    scope.changeRole = scope.editUser.uuid === scope.currentUser.uuid;
                 }
 
                 function add() {
@@ -84,8 +86,7 @@
                     userPermission.role = scope.userModel.role === 'Owner' ? 'owner' : null;
 
                     if (scope.editUser) {
-                        userPermission = scope.editUser;
-                        userPermission.role = scope.userModel.role;
+                        userPermission.user = scope.editUser.url;
                         if (scope.userModel.role !== editUserRole) {
                             if (scope.userModel.role !== 'Owner') {
                                 customerPermissionsService.$delete(scope.controller.getPermissionKey(scope.editUser.permission));
@@ -112,6 +113,8 @@
                 function saveCustomerPermissions(userPermission) {
                     userPermission.$save().then(function() {
                         saveProjectPermissions();
+                        customerPermissionsService.clearAllCacheForCurrentEndpoint();
+
                     }, function(error) {
                         console.log('error ', error);
                     });
@@ -132,8 +135,9 @@
                         var promises = [];
                         scope.userModel.projects.forEach(function(item) {
                             var instance = projectPermissionsService.$create();
-                            instance.user = getUrl('users', scope.editUser.uuid);
-                            instance.project = getUrl('projects', item.uuid);
+                            var url = scope.userModel.user_url;
+                            instance.user = url ? url : scope.editUser.url;
+                            instance.project = item.url;
                             instance.role = 'admin';
                             if (!item.permission) {
                                 var promise = instance.$save();
@@ -149,17 +153,22 @@
                 }
 
                 function clearAndRefreshList() {
+                    scope.addText = 'Add';
+                    scope.addTitle = 'Add';
                     scope.userModel = {};
                     scope.errors = {};
                     scope.controller.entityOptions.entityData.showPopup = false;
                     scope.editUser = null;
                     scope.projectsToDelete = null;
+                    scope.changeRole = false;
                     editUserRole = null;
-                    scope.controller.service.clearAllCacheForCurrentEndpoint();
-                    scope.controller.getList();
+                    $rootScope.$broadcast('reloadList');
+                    $rootScope.$broadcast('actionButton:close');
                 }
 
                 function cancel() {
+                    scope.addText = 'Add';
+                    scope.addTitle = 'Add';
                     if (scope.projectsToDelete) {
                         scope.projectsToDelete.forEach(function(item) {
                             scope.userModel.projects.push(item);
@@ -170,7 +179,9 @@
                     scope.controller.entityOptions.entityData.showPopup = false;
                     scope.editUser = null;
                     scope.projectsToDelete = null;
+                    scope.changeRole = false;
                     editUserRole = null;
+                    $rootScope.$broadcast('actionButton:close');
                 }
 
                 function getProjectsListForAutoComplete(filter) {
@@ -224,7 +235,7 @@
                 scope.ignoreAddedUsers = function(user) {
                     if (user && scope.controller.list.length) {
                         for (var i = 0; i < scope.controller.list.length; i++) {
-                            if (user.uuid === scope.controller.list[i].user_uuid) {
+                            if (user.uuid === scope.controller.list[i].uuid) {
                                 return false;
                             }
                         }
@@ -232,10 +243,6 @@
                     }
                     return true;
                 };
-
-                function getUrl(entity, id) {
-                    return ENV.apiEndpoint + 'api/' + entity + '/' + id + '/';
-                }
             }
         };
     }

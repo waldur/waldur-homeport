@@ -141,7 +141,6 @@
       '$q',
       'joinService',
       'ncUtilsFlash',
-      'ncUtils',
       'eventsService',
       'resourcesCountService',
       'currentStateService',
@@ -162,7 +161,6 @@
     $q,
     joinService,
     ncUtilsFlash,
-    ncUtils,
     eventsService,
     resourcesCountService,
     currentStateService
@@ -254,7 +252,7 @@
               key: 'team',
               viewName: 'tabTeam',
               hideSearch: false,
-              countFieldKey: 'team',
+              countFieldKey: 'users',
               icon: 'customer'
             },
             {
