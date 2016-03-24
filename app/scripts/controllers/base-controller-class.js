@@ -247,6 +247,7 @@
   angular.module('ncsaas')
     .service('baseControllerDetailUpdateClass', [
       '$state',
+      '$q',
       'baseControllerClass',
       '$stateParams',
       '$rootScope',
@@ -255,6 +256,7 @@
 
   function baseControllerDetailUpdateClass(
       $state,
+      $q,
       baseControllerClass,
       $stateParams,
       $rootScope,
@@ -303,7 +305,7 @@
       },
       getCounters: function() {
         // It should return promise
-        return {};
+        return $q.reject();
       },
       update: function() {
         var vm = this;

@@ -243,6 +243,7 @@
       '$rootScope',
       '$scope',
       '$interval',
+      '$q',
       'ENV',
       'projectsService',
       'baseControllerDetailUpdateClass',
@@ -256,6 +257,7 @@
     $rootScope,
     $scope,
     $interval,
+    $q,
     ENV,
     projectsService,
     baseControllerDetailUpdateClass,
@@ -364,7 +366,7 @@
       getCounters: function() {
         return currentStateService.getProject().then(function(project) {
           if (!project) {
-            return;
+            return $q.reject();
           }
           var query = angular.extend(
             {UUID: project.uuid},
