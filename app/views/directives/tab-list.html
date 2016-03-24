@@ -27,12 +27,12 @@
     </div>
 </aside>
 <aside class="xs-show">
-    <div class="tab-link__item"
+    <div class="tab-link__item active"
          ng-click="options.showTabs = !options.showTabs">
         <div class="tab-link__key">
-            <i ng-if="::options.activeTab.icon"
+            <i ng-if="options.activeTab.icon"
                class="icon"
-               ng-class="::options.activeTab.icon"></i>
+               ng-class="options.activeTab.icon"></i>
             {{ options.activeTab.title }}
             <span ng-if="options.activeTab.count != undefined && options.activeTab.count !== -1">
                ({{ options.activeTab.count }})
