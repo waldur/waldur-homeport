@@ -535,7 +535,8 @@
             showPopup: false,
             noDataText: 'No users yet',
             hideActionButtons: false,
-            hideTableHead: false
+            hideTableHead: false,
+            hidePagination: true
           },
           list: [
             {
