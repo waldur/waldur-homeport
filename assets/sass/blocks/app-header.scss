@@ -1,6 +1,6 @@
 .app-header {
     background-color: $head-menu-color;
-    z-index: 2000;
+    z-index: 100;
     width: 100%;
     @include property(height, 50);
     position: fixed;

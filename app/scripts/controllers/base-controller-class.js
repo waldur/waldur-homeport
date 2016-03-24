@@ -53,6 +53,7 @@
       cacheTime: ENV.defaultListCacheTime,
       controlPanelShow: true,
       blockUIElement: null,
+      mergeListFieldIdentifier: null,
 
       init: function() {
         ncUtils.deregisterEvent('generalSearchChanged');
@@ -75,7 +76,7 @@
         filter = filter || {};
         vm.service.cacheTime = vm.cacheTime;
         return vm.service.getList(filter).then(function(response) {
-          vm.list = ncUtils.mergeLists(vm.list, response);
+          vm.list = ncUtils.mergeLists(vm.list, response, vm.mergeListFieldIdentifier);
           vm.afterGetList();
           vm.hideNoDataText = false;
         });

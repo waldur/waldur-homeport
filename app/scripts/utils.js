@@ -131,28 +131,28 @@
       endsWith: function(string, target) {
         return string.indexOf(target) === (string.length - target.length);
       },
-      mergeLists: function(list1, list2) {
+      mergeLists: function(list1, list2, fieldIdentifier) {
         list1 = list1 || [];
         list2 = list2 || [];
+        fieldIdentifier = fieldIdentifier || 'uuid';
         var itemByUuid = {},
-          deletedItemUuids = [],
           newListUiids = list2.map(function(item) {
-            return item.uuid;
+            return item[fieldIdentifier];
           });
         for (var i = 0; i < list1.length; i++) {
           var item = list1[i];
-          itemByUuid[item.uuid] = item;
+          itemByUuid[item[fieldIdentifier]] = item;
         }
 
         // Remove stale items
         list1 = list1.filter(function(item) {
-          return newListUiids.indexOf(item.uuid) !== -1;
+          return newListUiids.indexOf(item[fieldIdentifier]) !== -1;
         });
 
         // Add or update remaining items
         for (var i = 0; i < list2.length; i++) {
           var item2 = list2[i];
-          var item1 = itemByUuid[item2.uuid];
+          var item1 = itemByUuid[item2[fieldIdentifier]];
           if (!item1) {
             list1.push(item2);
             continue;

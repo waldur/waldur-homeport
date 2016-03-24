@@ -402,7 +402,8 @@
           entityData: {
             noDataText: 'No payments yet',
             hideTableHead: false,
-            rowTemplateUrl: 'views/payment/row.html'
+            rowTemplateUrl: 'views/payment/row.html',
+            expandable: true
           },
           list: [
             {
@@ -461,6 +462,170 @@
 
 })();
 
+
+
+(function() {
+  angular.module('ncsaas')
+      .controller('CustomerTeamTabController', [
+        'baseControllerListClass',
+        'customerPermissionsService',
+        'customersService',
+        'projectPermissionsService',
+        'usersService',
+        'currentStateService',
+        '$q',
+        '$rootScope',
+        'ENTITYLISTFIELDTYPES',
+        CustomerTeamTabController
+      ]);
+
+  function CustomerTeamTabController(
+      baseControllerListClass,
+      customerPermissionsService,
+      customersService,
+      projectPermissionsService,
+      usersService,
+      currentStateService,
+      $q,
+      $rootScope,
+      ENTITYLISTFIELDTYPES) {
+    var controllerScope = this;
+    var TeamController = baseControllerListClass.extend({
+      init: function() {
+        this.controllerScope = controllerScope;
+        this.service = customersService;
+        this.searchFieldName = 'full_name';
+        this.hideNoDataText = true;
+        var vm = this;
+        var fn = this._super.bind(this);
+        var currentUserPromise = usersService.getCurrentUser();
+        var currentCustomerPromise = currentStateService.getCustomer();
+        $q.all([currentUserPromise, currentCustomerPromise]).then(function(result) {
+          vm.currentUser = result[0];
+          vm.currentCustomer = result[1];
+          fn();
+          vm.currentCustomer.owners.forEach(function(item) {
+            if (vm.currentUser.uuid === item.uuid || vm.currentUser.is_staff) {
+              vm.entityOptions.entityData.createPopup = vm.openPopup.bind(vm);
+              vm.actionButtonsListItems = [
+                {
+                  title: 'Edit',
+                  clickFunction: vm.openPopup.bind(vm)
+                },
+                {
+                  title: 'Remove',
+                  clickFunction: vm.remove.bind(vm)
+                }
+              ];
+            }
+          });
+        });
+        this.expandableOptions = [
+          {
+            isList: true,
+            listKey: 'projects',
+            addItemBlock: true,
+            viewType: 'projects',
+            title: 'Projects with admin privileges'
+          }
+        ];
+        this.entityOptions = {
+          entityData: {
+            createPopupText: 'Add member',
+            showPopup: false,
+            noDataText: 'No users yet',
+            hideActionButtons: false,
+            hideTableHead: false,
+            hidePagination: true
+          },
+          list: [
+            {
+              className: 'avatar',
+              avatarSrc: 'email',
+              showForMobile: false,
+              notSortable: true,
+              type: ENTITYLISTFIELDTYPES.avatarPictureField
+            },
+            {
+              name: 'Member',
+              showForMobile: true,
+              propertyName: 'full_name',
+              propertyNameBackup: 'username',
+              type: ENTITYLISTFIELDTYPES.linkOrText,
+              className: 'reduce-cell-width'
+            },
+            {
+              name: 'Owner',
+              showForMobile: true,
+              propertyName: 'role',
+              type: ENTITYLISTFIELDTYPES.bool,
+              className: 'shared-filed reduce-cell-width'
+            }
+          ]
+        };
+        $rootScope.$on('reloadList', function() {
+          vm.service.clearAllCacheForCurrentEndpoint();
+          vm.getList();
+        })
+      },
+      afterGetList: function() {
+        var vm = this;
+        usersService.getList().then(function(result) {
+          vm.list.forEach(function(item, i) {
+            result.forEach(function(item2) {
+              if (item.uuid == item2.uuid) {
+                vm.list[i].email = item2.email;
+                vm.list[i].username = item2.username;
+              }
+            });
+          });
+        });
+      },
+      getList: function(filter) {
+        var vm = this;
+        filter = filter || {};
+        filter = angular.extend({operation: 'users', UUID: vm.currentCustomer.uuid}, filter);
+        return this._super(filter);
+      },
+      removeInstance: function(user) {
+        var vm = this;
+        var deferred = $q.defer();
+        var promises = [];
+        user.projects.forEach(function(project) {
+          var promise = projectPermissionsService.$delete(vm.getPermissionKey(project.permission));
+          promises.push(promise);
+        });
+        $q.all(promises).then(function() {
+          if (user.permission) {
+            customerPermissionsService.$delete(vm.getPermissionKey(user.permission)).then(
+                function() {
+                  deferred.resolve();
+                },
+                function(response) {
+                  deferred.reject(response.data.detail);
+                }
+            );
+          } else {
+            deferred.resolve();
+          }
+        });
+        this.entityOptions.entityData.showPopup = false;
+        return deferred.promise;
+      },
+      getPermissionKey: function(url) {
+        var arr = url.split('/');
+        return arr[arr.length-2];
+      },
+      openPopup: function(user) {
+        this.entityOptions.entityData.showPopup = true;
+        $rootScope.$broadcast('populatePopupModel', user);
+      }
+    });
+
+    controllerScope.__proto__ = new TeamController();
+  }
+
+})();
 
 (function() {
   angular.module('ncsaas')
