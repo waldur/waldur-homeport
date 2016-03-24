@@ -1,0 +1,18 @@
+<div class="team-members" ng-controller="CustomerTeamTabController as TeamList">
+
+    <entitylist entity-list="TeamList"
+                entity-service="TeamList.service"
+                entity-buttons="TeamList.actionButtonsListItems"
+                entity-options="TeamList.entityOptions"></entitylist>
+
+    <div class="add-team-popup"
+         ng-click="TeamList.closePopup()"
+         ng-show="TeamList.entityOptions.entityData.showPopup">
+        <add-team-member stoppropagation
+                class="add-team-member-wrapper"
+                edit-user="TeamList.editUser"
+                controller="TeamList">
+        </add-team-member>
+    </div>
+
+</div>

@@ -329,6 +329,9 @@
                     color: #fff !important;
                 }
             }
+            &.reduce-cell-width {
+                width: 40%;
+            }
         } // &.additional-cell
         .more-details {
             @include property(margin-left, 10);

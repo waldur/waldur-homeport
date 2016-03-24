@@ -243,6 +243,7 @@
       '$rootScope',
       '$scope',
       '$interval',
+      '$q',
       'ENV',
       'projectsService',
       'baseControllerDetailUpdateClass',
@@ -256,6 +257,7 @@
     $rootScope,
     $scope,
     $interval,
+    $q,
     ENV,
     projectsService,
     baseControllerDetailUpdateClass,
@@ -338,7 +340,7 @@
             }
           ]
         };
-        this.detailsViewOptions.activeTab = this.getActiveTab(this.detailsViewOptions.tabs, $stateParams.tab);
+        this.detailsViewOptions.activeTab = this.getActiveTab();
       },
       afterUpdate: function() {
         $rootScope.$broadcast('refreshProjectList', {model: this.model, update: true});
@@ -363,6 +365,9 @@
       },
       getCounters: function() {
         return currentStateService.getProject().then(function(project) {
+          if (!project) {
+            return $q.reject();
+          }
           var query = angular.extend(
             {UUID: project.uuid},
             eventsService.defaultFilter

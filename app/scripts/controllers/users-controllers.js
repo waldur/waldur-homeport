@@ -197,7 +197,7 @@
               count: -1,
               hideSearch: true
             });
-            vm.detailsViewOptions.activeTab = vm.getActiveTab(vm.detailsViewOptions.tabs, $stateParams.tab);
+            vm.detailsViewOptions.activeTab = vm.getActiveTab();
           }
         });
       },

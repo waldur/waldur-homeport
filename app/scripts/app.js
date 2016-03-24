@@ -463,6 +463,9 @@
             'tabAlerts@organizations.details': {
               templateUrl: 'views/customer/tab-alerts.html',
             },
+            'tabTeam@organizations.details': {
+              templateUrl: 'views/customer/tab-team.html',
+            },
             'tabDelete@organizations.details': {
               templateUrl: 'views/customer/tab-delete.html',
             },

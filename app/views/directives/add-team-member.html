@@ -1,0 +1,66 @@
+<div>
+    <h3>{{addTitle}} team member</h3>
+    <div class="line-wrapper">
+        <div class="label">Name</div>
+        <div class="input">
+            <select ng-model="userModel.user_url" ng-if="!userModel.name">
+                <option ng-selected="userModel.name == user.full_name"
+                        ng-repeat="user in users | filter:ignoreAddedUsers"
+                        value="{{user.url}}">
+                    {{user.full_name || user.username}} {{user.uuid === currentUser.uuid ? '(current)' : null }}
+                </option>
+            </select>
+            <span ng-if="userModel.name">{{userModel.name}}</span>
+        </div>
+        <div class="error" ng-show="errors.user" ng-bind="errors.user"></div>
+    </div>
+    <div class="line-wrapper">
+        <div class="label">Organization owner</div>
+        <div class="input">
+            <input id="userRoleCheckbox" type="checkbox" ng-model="userModel.role"
+                   ng-true-value="'Owner'" ng-false-value="''">
+            <div ng-if="changeRole">
+                <span class="icon check"></span>
+                <helpicon help-text="{{changeRoleHelpMessage}}"></helpicon>
+            </div>
+
+            <label ng-if="!changeRole" for="userRoleCheckbox">
+                <span>no</span>
+                <span>yes</span>
+            </label>
+        </div>
+        <div class="error" ng-show="errors.role" ng-bind="errors.role"></div>
+    </div>
+    <div class="line-wrapper">
+        <span class="added" ng-repeat="project in userModel.projects"
+              ng-click="projectRemove(project)">
+                    {{ project.name }}
+        </span>
+    </div>
+    <div class="fixed-h">
+        <div class="line-wrapper">
+            <div class="label">Project</div>
+            <div class="input">
+                <angucomplete-alt
+                        ng-click="inputMode=!inputMode"
+                        placeholder="Add"
+                        pause="100"
+                        type="text"
+                        selected-object="selectedUsersCallback"
+                        local-data="projectsListForAutoComplete"
+                        search-fields="name"
+                        title-field="name"
+                        description-field="email"
+                        minlength="1"
+                        clear-selected="true"
+                        input-changed="userSearchInputChanged"
+                        input-class="add-label {{ inputMode ? 'input': '' }}"></angucomplete-alt>
+            </div>
+        </div>
+
+    </div>
+    <div class="line-wrapper control-buttons">
+        <a class="button" ng-click="add()">{{addText}}</a>
+        <a class="button-cancel" ng-click="cancel()">Cancel</a>
+    </div>
+</div>
