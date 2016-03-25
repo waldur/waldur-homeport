@@ -53,6 +53,7 @@
       cacheTime: ENV.defaultListCacheTime,
       controlPanelShow: true,
       blockUIElement: null,
+      mergeListFieldIdentifier: null,
 
       init: function() {
         ncUtils.deregisterEvent('generalSearchChanged');
@@ -75,7 +76,7 @@
         filter = filter || {};
         vm.service.cacheTime = vm.cacheTime;
         return vm.service.getList(filter).then(function(response) {
-          vm.list = ncUtils.mergeLists(vm.list, response);
+          vm.list = ncUtils.mergeLists(vm.list, response, vm.mergeListFieldIdentifier);
           vm.afterGetList();
           vm.hideNoDataText = false;
         });
@@ -160,7 +161,8 @@
           $rootScope.$broadcast('customerBalance:refresh');
         });
 
-      }
+      },
+      showMore: function() {}
     });
 
     return ControllerListClass;
@@ -247,6 +249,7 @@
   angular.module('ncsaas')
     .service('baseControllerDetailUpdateClass', [
       '$state',
+      '$q',
       'baseControllerClass',
       '$stateParams',
       '$rootScope',
@@ -255,6 +258,7 @@
 
   function baseControllerDetailUpdateClass(
       $state,
+      $q,
       baseControllerClass,
       $stateParams,
       $rootScope,
@@ -276,18 +280,32 @@
         this._super();
         this.activate();
       },
-      getActiveTab: function(tabs, stateParamTab) {
+      getActiveTab: function() {
+        var key = this.getActiveTabKey();
+        if (key) {
+          return this.getTabByKey(key);
+        }
+      },
+      getActiveTabKey: function() {
         var defaultTab;
-        for (var i = 0; i < tabs.length; i++) {
-          var tab = tabs[i].key;
+        for (var i = 0; i < this.detailsViewOptions.tabs.length; i++) {
+          var tab = this.detailsViewOptions.tabs[i].key;
           if (tab && (ENV.featuresVisible || ENV.toBeFeatures.indexOf(tab) === -1)) {
             defaultTab = !defaultTab ? tab : defaultTab;
-            if (tab === stateParamTab) {
+            if (tab === $stateParams.tab) {
               return tab;
             }
           }
         }
         return defaultTab;
+      },
+      getTabByKey: function(key) {
+        for (var i = 0; i < this.detailsViewOptions.tabs.length; i++) {
+          var tab = this.detailsViewOptions.tabs[i];
+          if (tab.key == key) {
+            return tab;
+          }
+        }
       },
       setCounters: function() {
         var vm = this;
@@ -303,7 +321,7 @@
       },
       getCounters: function() {
         // It should return promise
-        return {};
+        return $q.reject();
       },
       update: function() {
         var vm = this;

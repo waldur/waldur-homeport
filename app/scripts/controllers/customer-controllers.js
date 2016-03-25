@@ -248,6 +248,14 @@
               count: -1
             },
             {
+              title: 'Team',
+              key: 'team',
+              viewName: 'tabTeam',
+              hideSearch: false,
+              countFieldKey: 'users',
+              icon: 'customer'
+            },
+            {
               title: 'Manage',
               key: 'delete',
               viewName: 'tabDelete',
@@ -256,7 +264,7 @@
             }
           ]
         };
-        this.detailsViewOptions.activeTab = this.getActiveTab(this.detailsViewOptions.tabs, $stateParams.tab);
+        this.detailsViewOptions.activeTab = this.getActiveTab();
       },
       isOwnerOrStaff: function(customer) {
         if (this.currentUser.is_staff) return true;
@@ -281,9 +289,9 @@
       afterActivate: function() {
         controllerScope.canEdit = controllerScope.isOwnerOrStaff(controllerScope.model);
         controllerScope.updateImageUrl();
-
-        this.setCounters();
-        var timer = $interval(this.setCounters.bind(this), ENV.countersTimerInterval * 1000);
+        var vm = this;
+        vm.setCounters();
+        var timer = $interval(vm.setCounters.bind(vm), ENV.countersTimerInterval * 1000);
         $scope.$on('$destroy', function() {
           $interval.cancel(timer);
         });
@@ -291,6 +299,9 @@
 
       getCounters: function() {
         return currentStateService.getCustomer().then(function(customer) {
+          if (!customer) {
+            return $q.reject();
+          }
           var query = angular.extend(
               {UUID: customer.uuid},
               joinService.defaultFilter,

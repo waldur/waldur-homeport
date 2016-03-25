@@ -416,14 +416,18 @@
         });
       },
       removeProject: function () {
-        var confirmDelete = confirm('Confirm deletion?');
+        var confirmDelete = confirm('Confirm deletion?'),
+          vm = this;
         if (confirmDelete) {
+          currentStateService.setProject(null);
           return this.project.$delete().then(function() {
             projectsService.clearAllCacheForCurrentEndpoint();
             return projectsService.getFirst().then(function(project) {
               currentStateService.setProject(project);
               $rootScope.$broadcast('refreshProjectList', {model: controllerScope.project, remove: true});
             });
+          }, function() {
+            currentStateService.setProject(vm.project);
           }).then(function() {
             currentStateService.reloadCurrentCustomer(function(customer) {
               $rootScope.$broadcast('checkQuotas:refresh');

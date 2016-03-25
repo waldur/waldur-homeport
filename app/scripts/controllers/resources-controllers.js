@@ -353,7 +353,7 @@
             }
           ]
         };
-        this.detailsViewOptions.activeTab = this.getActiveTab(this.detailsViewOptions.tabs, $stateParams.tab);
+        this.detailsViewOptions.activeTab = this.getActiveTab();
       },
 
       getModel: function() {

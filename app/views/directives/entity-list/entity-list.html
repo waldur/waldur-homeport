@@ -3,35 +3,25 @@
         <h1>{{ entityOptions.entityData.title }}</h1>
     </div>
     <div class="white-box" ng-show="entityList.list.length > 0 || entityList.searchInput || entityList.chosenFilters.length">
-        <div ng-if="entityOptions.entityData.loadMoreButton">
-            <ul class="sort-list">
-                <li><a ui-sref="appstore.store">back to store</a></li>
-                <li>
-                    <a class="toggle-link"
-                       ng-repeat="(key, filter) in entityList.servicesTypes"
-                       ng-click="entityList.toggleFilter(filter)"
-                       ng-class="{'active': entityList.isFilterChosen(filter)}">{{ filter }}</a>
-                </li>
-            </ul>
-        </div>
-        <div ng-if="!entityOptions.entityData.hideControlButtons">
-            <ul class="sort-list">
-                <li class="search divid">
-                    <div class="search-box">
-                        <input type="text" ng-model='entityList.searchInput'
-                               ng-model-options="{ debounce: 500 }"
-                               ng-change="entityList.search()">
-                        <button class="search-button" ng-click="entityList.search()"></button>
-                    </div>
-                </li>
-                <li>
-                    <filter-list filter-controller="entityList"></filter-list>
-                </li>
-                <li class="right-sort">
-                    <div ng-include="'views/directives/entity-list/table-actions.html'"></div>
-                </li>
-            </ul>
-        </div>
+        <div ng-if="entityOptions.entityData.filterTemplateUrl" 
+            ng-include="entityOptions.entityData.filterTemplateUrl"></div>
+        <ul class="sort-list"
+            ng-if="!entityOptions.entityData.hideControlButtons">
+            <li class="search divid">
+                <div class="search-box">
+                    <input type="text" ng-model='entityList.searchInput'
+                           ng-model-options="{ debounce: 500 }"
+                           ng-change="entityList.search()">
+                    <button class="search-button" ng-click="entityList.search()"></button>
+                </div>
+            </li>
+            <li>
+                <filter-list filter-controller="entityList"></filter-list>
+            </li>
+            <li class="right-sort">
+                <div ng-include="'views/directives/entity-list/table-actions.html'"></div>
+            </li>
+        </ul>
     </div>
 
     <div class="white-box no-styles" ng-show="entityList.list.length == 0 && !entityList.searchInput && !entityList.chosenFilters.length && !entityList.hideNoDataText">
@@ -62,7 +52,9 @@
         <ul class="mobile-show compact-list"
             ng-if="entityOptions.entityData.rowTemplateUrl">
             <li class="compact-list__item"
-                ng-repeat="entity in entityList.list"
+                ng-repeat="entity in entityList.list
+                           | orderBy:entityList.orderField:entityList.reverseOrder
+                           | filter:entityList.filterResults"
                 ng-include="entityOptions.entityData.rowTemplateUrl">
             </li>
         </ul>
@@ -71,7 +63,9 @@
                 <div class="checkbox" ng-if="entityList.controlPanelShow"></div>
                 <div ng-repeat="fieldHead in entityOptions.list" class="additional-cell {{ fieldHead.className }}"
                      ng-class="{ 'display-for-mobile' : fieldHead.showForMobile, 'status': fieldHead.type == 'statusCircle' }">
-                    <a ng-click="entityList.orderField=fieldHead.propertyName; entityList.reverseOrder = !entityList.reverseOrder" class="list-sort">
+                    <a ng-click="entityList.orderField=fieldHead.propertyName; entityList.reverseOrder = !entityList.reverseOrder"
+                       ng-if="!fieldHead.notSortable"
+                       class="list-sort">
                         {{ fieldHead.name }}
                         <i class="fa" ng-show="entityList.orderField == fieldHead.propertyName"
                            ng-class="{'fa-angle-down' : !entityList.reverseOrder,
@@ -84,11 +78,10 @@
             </li>
             <li ng-repeat="entity in entityList.list
                             | orderBy:entityList.orderField:entityList.reverseOrder
-                            | filter:entityList.filterResults"
-                ng-show="entity.uuid != entityOptions.excludeItem || entity.expandItemOpen">
+                            | filter:entityList.filterResults
+                            track by $index">
                 <div class="list-item list" ng-class="{'opened': entity.expandItemOpen, 'pointer' : entityOptions.entityData.expandable}"
-                     ng-click="entity.expandItemOpen=!entity.expandItemOpen; entityList.showMore(entity)"
-                     ng-init="entityOptions.excludeItem = entity.expandItemOpen ? entity.uuid : 0;">
+                     ng-click="entity.expandItemOpen=!entity.expandItemOpen; entityList.showMore(entity)">
                     <div class="checkbox" ng-if="entityList.controlPanelShow">
                         <div class="checkbox" stoppropagation>
                             <input type="checkbox" ng-if="entityList.showgroup"
@@ -159,8 +152,15 @@
                         <span ng-switch-when="dateCreated">{{ entity[field.propertyName] | date:'medium' }}</span>
                         <span ng-switch-when="dateShort">{{ entity[field.propertyName] | date:'yyyy-MM-dd' }}</span>
 
-                        <span ng-switch-when="listInField" ng-repeat="fieldListItem in entity[field.propertyName]">
+                        <span ng-switch-when="listInField"
+                              ng-if="!field.propertyNameKey"
+                              ng-repeat="fieldListItem in entity[field.propertyName]">
                             {{ fieldListItem }}
+                        </span>
+                        <span ng-switch-when="listInField"
+                              ng-if="field.propertyNameKey"
+                              ng-repeat="fieldListItem in entity[field.propertyName]">
+                            {{ fieldListItem[field.propertyNameKey] }}
                         </span>
                         <span ng-switch-when="listInField" ng-if="entity[field.propertyName].length == 0">
                             <i>{{ field.emptyText }}</i>
@@ -175,7 +175,7 @@
                                 {{ field.linkDisplayName || entity[field.urlPropertyName] }}
                             </a>
                             <span ng-if="!entity[field.urlPropertyName] && !field.filtered">
-                                {{ entity[field.propertyName] }}
+                                {{ entity[field.propertyName] || entity[field.propertyNameBackup] }}
                             </span>
                             <span ng-if="!entity[field.urlPropertyName] && field.filtered">
                                 {{ entity[field.filtered] }}
@@ -261,7 +261,7 @@
     <div class="clear"></div>
 
     <div block-ui="load-more" class="button-wrap-center" ng-show="entityOptions.entityData.loadMoreButton">
-        <div class="pull-right">
+        <div>
             Loaded {{ entityList.list.length }} of {{entityList.initialListLength}} items
         </div>
         <div ng-show="entityList.itemsToShow.length">

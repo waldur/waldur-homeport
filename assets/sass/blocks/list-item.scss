@@ -329,6 +329,9 @@
                     color: #fff !important;
                 }
             }
+            &.reduce-cell-width {
+                width: 40%;
+            }
         } // &.additional-cell
         .more-details {
             @include property(margin-left, 10);
@@ -356,7 +359,8 @@
 
 .button-wrap-center {
     text-align: center;
-    padding: 0em 10em 4em 10em;
+    padding-top: 1em;
+    padding-bottom: 2em;
     .button-green {
         margin-top: 15px;
         margin-bottom: 15px;

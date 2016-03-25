@@ -53,11 +53,8 @@
                 <div class="clear"></div>
                 <div class="chart" visible="eventlog">
                     <div class="label">No of events per day</div>
-                    <canvas ng-if="project.chartData && DashboardController.showGraph"
-                            chart-options="DashboardController.chartOptions"
-                            chart-data="project.chartData"
-                            tc-chartjs chart-type="line"
-                            width="400" height="120"></canvas>
+                    <line-chart ng-if="project.d3Data && DashboardController.showGraph"
+                                chart-data="project.d3Data"></line-chart>
                 </div>
             </div>
         </div>

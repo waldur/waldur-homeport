@@ -264,20 +264,6 @@ module.exports = function(grunt) {
                     },
                     {
                         expand: true,
-                        cwd: 'bower_components/tc-angular-chartjs/dist',
-                        src: ['tc-angular-chartjs.js'],
-                        dest: 'app/static/js/angular/',
-                        filter: 'isFile'
-                    },
-                    {
-                        expand: true,
-                        cwd: 'bower_components/Chart.js',
-                        src: ['Chart.js'],
-                        dest: 'app/static/js/',
-                        filter: 'isFile'
-                    },
-                    {
-                        expand: true,
                         cwd: 'bower_components/angulartics/src',
                         src: ['angulartics.js'],
                         dest: 'app/static/js/angular',
@@ -634,8 +620,6 @@ module.exports = function(grunt) {
                     'app/static/js/angular/angular-translate-storage-local.js',
                     'app/static/js/angular/angular-translate-loader-static-files.js',
                     'app/static/js/angular/ng-file-upload.js',
-                    'app/static/js/Chart.js',
-                    'app/static/js/angular/tc-angular-chartjs.js',
                     'app/static/js/angular/xeditable.js',
                     'app/static/js/angular/angular-sanitize.js',
                     'app/static/js/d3.js',
