@@ -25,6 +25,10 @@
           if (!controller.actionButtonsList[scope.$id]) {
             scope.$broadcast('actionButton:close');
           }
+          toggleMenu();
+        }
+
+        function toggleMenu() {
           controller.actionButtonsList[scope.$id] = !controller.actionButtonsList[scope.$id];
         }
 
