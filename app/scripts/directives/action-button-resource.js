@@ -18,8 +18,10 @@
       link: function (scope) {
         scope.actions = null;
         scope.loading = false;
+        scope.toggleMenu = toggleMenu;
 
         scope.buttonClick = function(name, action) {
+          toggleMenu();
           action.pending = true;
           var promise = actionUtilsService.buttonClick(scope.buttonController, scope.buttonModel, name, action);
           promise.finally(function() {
@@ -37,6 +39,10 @@
           if (!controller.actionButtonsList[scope.$id]) {
             scope.$broadcast('actionButton:close');
           }
+          toggleMenu();
+        }
+
+        function toggleMenu() {
           controller.actionButtonsList[scope.$id] = !controller.actionButtonsList[scope.$id];
         }
 
