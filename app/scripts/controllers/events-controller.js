@@ -520,3 +520,96 @@
     controllerScope.__proto__ = new EventController();
   }
 })();
+
+(function() {
+
+  angular.module('ncsaas')
+      .controller('DashboardResourcesController', [
+        'baseControllerClass',
+        'projectsService',
+        'currentStateService',
+        'priceEstimationService',
+        'ENV',
+        DashboardResourcesController]);
+
+  function DashboardResourcesController(
+      baseControllerClass,
+      projectsService,
+      currentStateService,
+      priceEstimationService,
+      ENV) {
+    var controllerScope = this;
+    var Controller = baseControllerClass.extend({
+      showGraph: true,
+      currentCustomer: null,
+      init:function() {
+        this.controllerScope = controllerScope;
+        this.cacheTime = ENV.dashboardEventsCacheTime;
+        this._super();
+        this.activeTab = 'resources';
+        this.activate();
+      },
+
+      activate: function() {
+        this.setCurrentUsageChartData();
+        this.setMonthCostChartData();
+        this.setProjectsChartData();
+
+      },
+      setCurrentUsageChartData: function() {
+        var vm = this;
+        currentStateService.getCustomer().then(function(response) {
+          vm.currentCustomer = response;
+          vm.currentUsageData = [];
+          response.quotas.forEach(function(item) {
+            if (item.name === 'nc_resource_count') {
+              var free = item.limit - item.usage;
+              vm.currentUsageData.push({ label: 'free', count: free });
+            }
+            if (item.name === 'nc_vm_count') {
+              var vms = item.usage;
+              vm.currentUsageData.push({ label: 'vms', count: vms });
+            }
+            if (item.name === 'nc_app_count') {
+              var apps = item.usage;
+              vm.currentUsageData.push({ label: 'apps', count: apps })
+            }
+          });
+        });
+      },
+
+      setMonthCostChartData: function() {
+        var vm = this;
+        priceEstimationService.getList().then(function(rows) {
+          vm.monthCostChartData = [];
+          rows.forEach(function(item) {
+            if (item.scope_type === 'service' && vm.monthCostChartData.length < 5) {
+              vm.monthCostChartData.push({ label: item.scope_name, count: item.total });
+            }
+          });
+        });
+
+      },
+
+      setProjectsChartData: function() {
+        var vm = this;
+        projectsService.getList().then(function(projectsList) {
+          vm.projectsChartData = [{data: [], name: 'VMs'}, {data: [], name: 'Apps'}];
+          projectsList.forEach(function(item) {
+            console.log(item);
+            item.quotas.forEach(function(itemQuota) {
+              if (itemQuota.name === 'nc_vm_count') {
+                vm.projectsChartData[0].data.push({project: item.name, count: itemQuota.usage});
+              }
+              if (itemQuota.name === 'nc_app_count') {
+                vm.projectsChartData[1].data.push({project: item.name, count: itemQuota.usage});
+              }
+            });
+          });
+        });
+      }
+    });
+
+    controllerScope.__proto__ = new Controller();
+  }
+})();

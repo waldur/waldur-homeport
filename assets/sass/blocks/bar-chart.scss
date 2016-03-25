@@ -1,0 +1,11 @@
+.bar-chart-wrapper {
+  .d3-bar-chart {
+    .axis {
+      fill: none;
+      stroke: black;
+      .domain {
+        stroke-width: 1;
+      }
+    }
+  }
+}
