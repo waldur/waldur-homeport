@@ -281,6 +281,12 @@
               fieldKey: 'name',
               isEditable: true,
               className: 'name'
+            },
+            {
+              fieldKey: 'description',
+              isEditable: true,
+              className: 'details',
+              emptyText: 'Add description'
             }
           ],
           tabs: [
