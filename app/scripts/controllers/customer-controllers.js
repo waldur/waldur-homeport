@@ -194,6 +194,12 @@
               isEditable: true,
               className: 'details',
               emptyText: 'Add contact details'
+            },
+            {
+              fieldKey: 'registration_code',
+              isEditable: true,
+              className: 'details',
+              emptyText: 'Add registration code'
             }
           ],
           tabs: [
