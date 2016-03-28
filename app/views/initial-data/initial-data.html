@@ -39,7 +39,7 @@
                 </div>
             </div>
         </aside>
-        <div class="second-step">
+        <div class="second-step" ng-if="InitialData.servicesEnabled">
             <div visible="providers" ng-if="InitialData.loadingServices">
                 <h2>
                     <i class="icon refresh spin"></i>
@@ -122,9 +122,11 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="second-step">
             <div class="button-block" ng-if="!InitialData.loadingServices">
                 <a class="button" submit-button="InitialData.save()">Let’s get started</a>
-                <span>By continuing you agree to the <a>Terms of Provider</a>.</span>
+                <span>By continuing you agree to the <a ui-sref="tos.index" target="_blank">Terms of Provider</a>.</span>
             </div>
             <div class="clear"></div>
         </div>

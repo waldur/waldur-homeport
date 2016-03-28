@@ -45,6 +45,7 @@
       chosenServices: [],
       currentProcess: null,
       loadingServices: false,
+      servicesEnabled: false,
       getClass: ncServiceUtils.getStateClass,
       getFilename: ncUtils.getFilename,
 
@@ -79,6 +80,9 @@
         })
       },
       getServices: function() {
+        if (!this.servicesEnabled) {
+          return;
+        }
         if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('providers') == -1) {
           var vm = this;
           vm.loadingServices = true;
@@ -116,6 +120,9 @@
         }
       },
       saveServices: function() {
+        if (!this.servicesEnabled) {
+          return $q.when(true);
+        }
         var vm = this;
         var unsavedServices = this.chosenServices.filter(function(service) {
           service.errors = {};
