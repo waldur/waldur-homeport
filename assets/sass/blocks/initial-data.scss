@@ -132,26 +132,6 @@
         text-decoration: none;
       }
     }
-
-    .services-info-wrapper {
-      padding-bottom: 30px;
-    }
-
-    .services-info {
-      display: table;
-      width: 100%;
-      .services-info-name,
-      .services-info-status {
-        display: table-cell;
-      }
-
-      .services-info-name {
-        width: 80%;
-      }
-      .services-info-status {
-        vertical-align: middle;
-      }
-    }
   }
   .fields {
     float: right;
@@ -159,62 +139,6 @@
 
     select {
       background-color: white;
-    }
-  }
-  .fields-block {
-    padding: 20px;
-    background: #fff;
-    position: relative;
-    margin-bottom: 20px;
-    border: 2px solid $dashboard-green;
-    margin-left: -25px;
-    @include property(border-radius, 3);
-    @include boxshadow(0 2 2 0, #ededed);
-    &.state {
-      .remove-service {
-        display: block;
-        position: absolute;
-        width: 20px;
-        height: 19px;
-        top: -10px;
-        right: -10px;
-        color: #fff;
-        text-align: center;
-        line-height: 20px;
-        border-radius: 50%;
-        cursor: pointer;
-        font-size: 16px;
-        background: $dashboard-green;
-      }
-    }
-
-    &.light {
-      padding: 10px;
-    }
-
-    &.green {
-      background: #e8f4e1;
-      .select-block {
-        float: left;
-      }
-      a {
-        float: left;
-        margin-top: 24px;
-        margin-left: 10px;
-        text-align: center;
-        width: 147px;
-      }
-    }
-    .icon-block {
-      img {
-        width: 50px;
-        margin: 10px auto;
-      }
-    }
-
-    .error {
-      float: right;
-      width: 226px;
     }
   }
   .button-block {
@@ -244,7 +168,6 @@
       padding-left: 0;
       .plan-item {
         margin-left: 0;
-
       }
     }
     h2 {
@@ -286,18 +209,6 @@
         float: none;
         margin: 0 auto;
       }
-      .fields-block.green {
-        .select-block {
-          width: 226px;
-          float: none;
-          margin: 0 auto;
-        }
-        a {
-          float: none;
-          margin: 0 auto;
-          width: 226px;
-        }
-      }
     }
     .button-block {
       a {
@@ -305,6 +216,5 @@
         margin-bottom: 30px;
       }
     }
-
   } // xs
 }

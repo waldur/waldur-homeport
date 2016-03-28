@@ -5,48 +5,34 @@
   angular.module('ncsaas')
     .controller('InitialDataController',
     ['usersService',
-     'servicesService',
      'baseControllerClass',
      'customersService',
      'projectsService',
      'plansService',
      'currentStateService',
-     'joinService',
      '$q',
      '$rootScope',
      '$state',
-     'ENV',
      'ncUtils',
-     'ncServiceUtils',
      InitialDataController]);
 
   function InitialDataController(
     usersService,
-    servicesService,
     baseControllerClass,
     customersService,
     projectsService,
     plansService,
     currentStateService,
-    joinService,
     $q,
     $rootScope,
     $state,
-    ENV,
-    ncUtils,
-    ncServiceUtils) {
+    ncUtils) {
     var controllerScope = this;
     var Controller = baseControllerClass.extend({
       user: {},
       customer: {},
-      services: {},
       project: {},
-      chosenService: null,
-      chosenServices: [],
       currentProcess: null,
-      loadingServices: false,
-      servicesEnabled: false,
-      getClass: ncServiceUtils.getStateClass,
       getFilename: ncUtils.getFilename,
 
       init: function() {
@@ -56,7 +42,6 @@
       activate: function() {
         var vm = this;
         this.getUser();
-        this.getServices();
         this.getFreePlan();
         currentStateService.getCustomer().then(function(customer) {
           vm.customer = customer;
@@ -79,95 +64,8 @@
           vm.customer.plan = plan;
         })
       },
-      getServices: function() {
-        if (!this.servicesEnabled) {
-          return;
-        }
-        if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('providers') == -1) {
-          var vm = this;
-          vm.loadingServices = true;
-          servicesService.getServicesOptions().then(function(service_options) {
-            vm.service_options = service_options;
-            vm.addChosenService('Amazon');
-            vm.addChosenService('DigitalOcean');
-          }).finally(function() {
-            vm.loadingServices = false;
-          });
-        }
-      },
       getPrettyQuotaName: function(name, count) {
         return ncUtils.getPrettyQuotaName(name) + (count > 1 ? 's' : '');
-      },
-      addChosenService: function(name) {
-        if (!name) {
-          name = this.chosenService;
-        }
-        if (!name) {
-          return;
-        }
-        var service = this.service_options[name];
-        if (!service) {
-          return;
-        }
-        service.saved = false;
-        service.status = 'Offline';
-        this.chosenServices.push(angular.copy(service));
-      },
-      removeService: function(service) {
-        var index = this.chosenServices.lastIndexOf(service);
-        if (index + 1) {
-          this.chosenServices.splice(index, 1);
-        }
-      },
-      saveServices: function() {
-        if (!this.servicesEnabled) {
-          return $q.when(true);
-        }
-        var vm = this;
-        var unsavedServices = this.chosenServices.filter(function(service) {
-          service.errors = {};
-          return !service.saved;
-        });
-        vm.currentProcess = 'Saving providers...';
-        // return successfully if no services require creation
-        if (unsavedServices.length < 1) {
-          return $q.when(true);
-        }
-        return $q.all(unsavedServices.map(vm.saveService.bind(vm)));
-      },
-      saveService: function(service) {
-        var vm = this;
-        var instance = {};
-        for (var i = 0; i < service.options.length; i++) {
-          var option = service.options[i];
-          var value = option.value;
-          if (!value) {
-            continue;
-          }
-          if (ncUtils.isFileOption(option)) {
-            if (value.length == 1 && ncUtils.isFileValue(value[0])) {
-              instance[option.key] = value[0];
-            }
-          } else {
-            instance[option.key] = value;
-          }
-        }
-        instance.customer = vm.customer.url;
-        instance.name = service.name;
-        service.status = 'Processing';
-        var deferred = $q.defer();
-        joinService.create(service.url, instance).then(function() {
-          service.saved = true;
-          service.errors = {};
-          service.status = 'Online';
-          deferred.resolve();
-        }, function(errors) {
-          service.errors = errors;
-          service.status = 'Erred';
-          vm.currentProcess = null;
-          deferred.reject(errors);
-        });
-        return deferred.promise;
       },
       saveUser: function() {
         var vm = this;
@@ -223,7 +121,6 @@
           return $q.reject();
         }
         return vm.saveCustomer()
-                 .then(vm.saveServices.bind(vm))
                  .then(vm.saveProject.bind(vm))
                  .then(vm.saveUser.bind(vm))
                  .then(vm.gotoDashboard);
