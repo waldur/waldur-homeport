@@ -10,7 +10,6 @@ angular.module('ncsaas')
       'eventlog',
       'backups',
       'localSignup',
-      'users',
       'people',
       'import',
       'servicesadd',

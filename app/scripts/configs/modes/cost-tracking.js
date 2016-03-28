@@ -6,7 +6,6 @@ angular.module('ncsaas')
     modePageTitle: 'TrackMyCosts.com',
     toBeFeatures: [
       'localSignup',
-      'users',
       'people',
       'backups',
       'templates',
