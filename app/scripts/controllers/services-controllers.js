@@ -162,6 +162,9 @@
     ncUtils) {
     var controllerScope = this;
     var ServiceController = baseControllerAddClass.extend({
+      predefinedOptions: {
+        available_for_all: true
+      },
       init: function() {
         this.service = joinService;
         this.controllerScope = controllerScope;
@@ -172,8 +175,22 @@
       setModel: function(model) {
         this.model = angular.copy(model);
         this.model.serviceName = model.name;
+        this.hidePredefinedOptions();
         this.errors = {};
       },
+
+      hidePredefinedOptions: function() {
+        this.model.options = this.model.options.filter(function(option) {
+          return !this.predefinedOptions[option.key];
+        }, this);
+      },
+
+      fillPredefinedOptions: function(data) {
+        angular.forEach(this.predefinedOptions, function(value, key) {
+          data[key] = value;
+        });
+      },
+
       setCategory: function(category) {
         this.category = category;
         this.categoryServices = [];
@@ -234,7 +251,7 @@
         }
         data.customer = this.customer.url;
         data.name = this.model.serviceName;
-        data.dummy = !!this.model.dummy;
+        this.fillPredefinedOptions(data);
         return data;
       },
 
