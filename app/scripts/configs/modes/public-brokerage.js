@@ -5,7 +5,6 @@ angular.module('ncsaas')
     modeName: 'modePublicBrokerage',
     toBeFeatures: [
       'localSignup',
-      'users',
       'people',
       'backups',
       'templates',
