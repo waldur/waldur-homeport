@@ -553,15 +553,15 @@
           response.quotas.forEach(function(item) {
             if (item.name === 'nc_resource_count') {
               var free = item.limit - item.usage;
-              vm.currentUsageData.push({ label: 'free', count: free });
+              vm.currentUsageData.push({ label: free + ' free', count: free });
             }
             if (item.name === 'nc_vm_count') {
               var vms = item.usage;
-              vm.currentUsageData.push({ label: 'vms', count: vms });
+              vm.currentUsageData.push({ label: vms + ' vms', count: vms });
             }
             if (item.name === 'nc_app_count') {
               var apps = item.usage;
-              vm.currentUsageData.push({ label: 'apps', count: apps })
+              vm.currentUsageData.push({ label: apps + ' apps', count: apps })
             }
           });
         });
@@ -573,7 +573,7 @@
           vm.monthCostChartData = [];
           rows.forEach(function(item) {
             if (item.scope_type === 'service' && vm.monthCostChartData.length < 5) {
-              vm.monthCostChartData.push({ label: item.scope_name, count: item.total });
+              vm.monthCostChartData.push({ label: item.scope_name + ' ('+ item.total +')', count: item.total });
             }
           });
         });
@@ -583,15 +583,14 @@
       setProjectsChartData: function() {
         var vm = this;
         projectsService.getList().then(function(projectsList) {
-          vm.projectsChartData = [{data: [], name: 'VMs'}, {data: [], name: 'Apps'}];
+          vm.projectsChartData = {data :[{data: [], name: 'VMs'}, {data: [], name: 'Apps'}], projects: projectsList};
           projectsList.forEach(function(item) {
-            console.log(item);
             item.quotas.forEach(function(itemQuota) {
               if (itemQuota.name === 'nc_vm_count') {
-                vm.projectsChartData[0].data.push({project: item.name, count: itemQuota.usage});
+                vm.projectsChartData.data[0].data.push({project: item.uuid, count: itemQuota.usage});
               }
               if (itemQuota.name === 'nc_app_count') {
-                vm.projectsChartData[1].data.push({project: item.name, count: itemQuota.usage});
+                vm.projectsChartData.data[1].data.push({project: item.uuid, count: itemQuota.usage});
               }
             });
           });

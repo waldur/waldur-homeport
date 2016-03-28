@@ -2,9 +2,9 @@
 
 (function () {
     angular.module('ncsaas')
-        .directive('pieChart', pieChart);
+        .directive('pieChart', ['$state', 'currentStateService', pieChart]);
 
-    function pieChart() {
+    function pieChart($state, currentStateService) {
         return {
             restrict: 'E',
             replace: true,
@@ -21,11 +21,15 @@
                 data && init();
             });
 
+            currentStateService.getCustomer().then(function(response) {
+                scope.currentCustomer = response;
+            });
+
             function init() {
                 element.children().html('');
                 var dataset = scope.data;
 
-                var width = 200;
+                var width = 400;
                 var height = 200;
                 var radius = Math.min(width, height) / 2;
 
@@ -36,7 +40,7 @@
                     .attr('width', width)
                     .attr('height', height)
                     .append('g')
-                    .attr('transform', 'translate(' + (width / 2) +
+                    .attr('transform', 'translate(' + (width / 3) +
                         ',' + (height / 2) + ')');
 
                 var arc = d3.svg.arc()
@@ -54,6 +58,39 @@
                     .attr('fill', function(d, i) {
                         return color(d.data.label);
                     });
+
+                var legendRectSize = 18;                                  
+                var legendSpacing = 4;
+
+                var legend = svg.selectAll('.legend')                     
+                    .data(color.domain())                                   
+                    .enter()                                                
+                    .append('g')                                            
+                    .attr('class', 'legend')                                
+                    .attr('transform', function(d, i) {
+                        var height = legendRectSize + legendSpacing;          
+                        var offset =  height * color.domain().length / 2;
+                        var horz = 2 * 60;
+                        var vert = i * height - offset;                       
+                        return 'translate(' + horz + ',' + vert + ')';        
+                    });
+
+                legend.append('rect')                                     
+                    .attr('width', legendRectSize)                          
+                    .attr('height', legendRectSize)                         
+                    .style('fill', color)                                   
+                    .style('stroke', color);
+
+                legend.append('text')
+                    .attr('x', legendRectSize + legendSpacing)
+                    .attr('y', legendRectSize - legendSpacing)
+                    .on("click", function(d) {
+                        $state.go('organizations.details', {uuid: scope.currentCustomer.uuid});
+                    })
+                    .on("mouseover", function(d) { element.css( 'cursor', 'pointer' ); })
+                    .on("mouseout", function(d) { element.css( 'cursor', 'default' ); })
+                    .text(function(d) { return d; });
+
             }
         }
     }

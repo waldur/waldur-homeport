@@ -27,16 +27,16 @@
 
                 var margins = {
                         top: 12,
-                        left: 48,
+                        left: 200,
                         right: 24,
                         bottom: 24
                     },
                     legendPanel = {
                         width: 180
                     },
-                    width = 1000 - margins.left - margins.right - legendPanel.width,
+                    width = 1200 - margins.left - margins.right - legendPanel.width,
                     height = 250 - margins.top - margins.bottom,
-                    dataset = scope.data,
+                    dataset = scope.data.data,
                     series = dataset.map(function (d) {
                         return d.name;
                     }),
@@ -76,16 +76,29 @@
                     xScale = d3.scale.linear()
                         .domain([0, xMax])
                         .range([0, width]),
-                    months = dataset[0].map(function (d) {
+                    projects = dataset[0].map(function (d) {
                         return d.y;
                     }),
                     yScale = d3.scale.ordinal()
-                        .domain(months)
+                        .domain(projects)
                         .rangeRoundBands([0, height], .1),
                     xAxis = d3.svg.axis()
                         .scale(xScale)
                         .orient('bottom'),
-                    yAxis = d3.svg.axis()
+                    yAxis = d3.svg.axis().tickFormat(function(d) {
+                        var project =  scope.data.projects.filter(function(item) {
+                           return item.uuid === d;
+                        })[0];
+                        var resources = 0;
+                        project.quotas.forEach(function(item) {
+                            if (item.name === 'nc_resource_count') {
+                                resources = item.usage;
+                            }
+                        });
+                        //console.log(project);
+                        return project.name + ' ('+ resources +' resources)';
+                            //return scope.data.x[d];
+                        })
                         .scale(yScale)
                         .orient('left'),
                     colours = d3.scale.category10(),
@@ -113,22 +126,7 @@
                         })
                         .attr('width', function (d) {
                             return xScale(d.x);
-                        })
-                        .on('mouseover', function (d) {
-                            var xPos = parseFloat(d3.select(this).attr('x')) / 2 + width / 2;
-                            var yPos = parseFloat(d3.select(this).attr('y')) + yScale.rangeBand() / 2;
-
-                            d3.select('#tooltip')
-                                .style('left', xPos + 'px')
-                                .style('top', yPos + 'px')
-                                .select('#value')
-                                .text(d.x);
-
-                            d3.select('#tooltip').classed('hidden', false);
-                        })
-                        .on('mouseout', function () {
-                            d3.select('#tooltip').classed('hidden', true);
-                        })
+                        });
 
                 svg.append('g')
                     .attr('class', 'axis')
@@ -143,20 +141,20 @@
                     .attr('fill', '#eee')
                     .attr('width', 160)
                     .attr('height', 30 * dataset.length)
-                    .attr('x', width + margins.left)
+                    .attr('x', width+ 20)
                     .attr('y', 0);
 
                 series.forEach(function (s, i) {
                     svg.append('text')
                         .attr('fill', 'black')
-                        .attr('x', width + margins.left + 8)
+                        .attr('x', width + 28)
                         .attr('y', i * 24 + 24)
                         .text(s);
                     svg.append('rect')
                         .attr('fill', colours(i))
                         .attr('width', 60)
                         .attr('height', 20)
-                        .attr('x', width + margins.left + 90)
+                        .attr('x', width + 110)
                         .attr('y', i * 24 + 6);
                 });
             }
