@@ -184,9 +184,6 @@
         row.activeTab = (ENV.featuresVisible || ENV.toBeFeatures.indexOf('providers') == -1)
           ? 'services'
           : 'projects';
-        if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('providers') == -1) {
-          this.getServiceResourcesCount(row);
-        }
         if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('resources') == -1) {
           this.getResourceDetails(row);
         }
@@ -202,17 +199,6 @@
               resource.project_uuid = response.project_uuid;
               resource.project_name = response.project_name;
             });
-          }
-        }
-      },
-
-      getServiceResourcesCount: function(row) {
-        for (var i = 0; row.services.length > i; i++) {
-          var service = row.services[i];
-          if (!service.resources_count) {
-            servicesService.$get(null, service.scope).then(function(service, response) {
-              service.resources_count = response.resources_count;
-            }.bind(null, service));
           }
         }
       },

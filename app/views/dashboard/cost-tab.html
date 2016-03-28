@@ -37,7 +37,7 @@
                 <div class="clear"></div>
             </div>
             <div ng-if="row.selected">
-                <div class="table desktop" ng-show="row.activeTab=='projects'">
+                <div class="table desktop" ng-if="row.projects.length && row.activeTab=='projects'">
                     <div class="tr th">
                         <div class="td"><span>Project name</span></div>
                         <div class="td"><span>Organization name</span></div>
@@ -49,7 +49,7 @@
                         <div class="td"><span>{{ ::project.total | defaultCurrency }}</span></div>
                     </div>
                 </div>
-                <div class="mobile-cost-container" ng-show="row.activeTab=='projects'">
+                <div class="mobile-cost-container" ng-if="row.projects.length && row.activeTab=='projects'">
                     <div class="cost-row" ng-repeat="project in row.projects">
                         <div class="cost-row-name">
                             <b>{{ ::project.project_name }}</b>
@@ -60,7 +60,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="table desktop" ng-show="row.activeTab=='services'">
+                <div class="table desktop" ng-if="row.services.length && row.activeTab=='services'">
                     <div class="tr th">
                         <div class="td"><span>Provider name</span></div>
                         <div class="td"><span>Resources</span></div>
@@ -68,22 +68,20 @@
                     </div>
                     <div class="tr" ng-repeat="service in row.services">
                         <div class="td"><span ng-bind="::service.scope_name"></span></div>
-                        <div class="td"><span ng-bind="::service.resources_count"></span></div>
                         <div class="td"><span>{{ ::service.total | defaultCurrency }}</span></div>
                     </div>
                 </div>
-                <div class="mobile-cost-container" ng-show="row.activeTab=='services'">
+                <div class="mobile-cost-container" ng-if="row.services.length && row.activeTab=='services'">
                     <div class="cost-row" ng-repeat="service in row.services">
                         <div class="cost-row-name">
                             <b>{{::service.scope_name}}</b>
-                            (<span ng-bind="::service.resources_count"></span> resources)
                         </div>
                         <div class="cost-row-price">
                             <span>{{ ::service.total | defaultCurrency }}</span>
                         </div>
                     </div>
                 </div>
-                <div class="table resources-cost-list desktop" ng-show="row.activeTab=='resources'">
+                <div class="table resources-cost-list desktop" ng-if="row.resources.length && row.activeTab=='resources'">
                     <div class="tr th">
                         <div class="td"><span>Resource name</span></div>
                         <div class="td"><span>Resource type</span></div>
@@ -99,7 +97,7 @@
                         <div class="td"><span>{{ ::resource.total | defaultCurrency }}</span></div>
                     </div>
                 </div>
-                <div class="mobile-cost-container" ng-show="row.activeTab=='resources'">
+                <div class="mobile-cost-container" ng-if="row.resources.length && row.activeTab=='resources'">
                     <div class="cost-row" ng-repeat="resource in row.resources">
                         <div class="cost-row-name">
                             <a ui-sref="resources.details({uuid: resource.resource_uuid, resource_type: resource.resource_type})">{{::resource.scope_name}}</a>
