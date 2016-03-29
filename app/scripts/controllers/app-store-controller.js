@@ -187,7 +187,6 @@
       setResourceType: function(type) {
         var vm = this;
         vm.selectedResourceType = type;
-        vm.choiceDisplay = {};
         vm.selectedResourceTypeName = type.split(/(?=[A-Z])/).join(" ");
         vm.fields = [];
         var resourceUrl = vm.serviceMetadata.resources[vm.selectedResourceType];
@@ -448,10 +447,8 @@
       isListExpanded: function(field) {
         return field.limit == field.choices.length;
       },
-      choiceDisplay: {},
       doChoice: function(name, choice) {
         var vm = this;
-        this.choiceDisplay[name] = choice.display_name || choice.name;
         if (name == 'security_groups') {
           if (this.instance[name] === undefined) {
             this.instance[name] = [];
@@ -461,24 +458,14 @@
           } else {
             this.instance[name].splice(this.instance[name].indexOf(choice.value), 1);
           }
-          var parts = [];
-          var field = this.findFieldByName(name);
-          for (var i = 0; i < field.choices.length; i++) {
-            var c = field.choices[i];
-            if (this.instance[name].indexOf(c.value) !== -1) {
-              parts.push(c.display_name || c.name);
-            }
-          }
-          this.choiceDisplay[name] = parts.join(', ');
         } else if (name === 'ssh_public_key') {
           this.instance[name] = choice.url;
           this.instance[name + '_item'] = choice
         } else if (name === 'group') {
           this.instance[name] = choice.url;
-          this.instance[name + '_item'] = choice;
         } else {
           this.instance[name] = choice.value;
-          this.instance[name + '_item'] = choice;
+          this.instance[name + '_item'] = choice.item;
         }
         if (name == 'region') {
           this.filterSizeByRegion();
