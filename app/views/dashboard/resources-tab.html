@@ -1,0 +1,18 @@
+<div ng-controller="DashboardResourcesController as DashboardController">
+    <div class="white-box dashboard-resources-tab">
+        <div class="pie-charts-block">
+            <div class="chart-element">
+                <span class="chart-name">Current usage</span>
+                <pie-chart chart-height="150" chart-data="DashboardController.currentUsageData"></pie-chart>
+            </div>
+            <div class="chart-element">
+                <span class="chart-name">By provider (30d top 5)</span>
+                <pie-chart chart-height="150" chart-data="DashboardController.monthCostChartData"></pie-chart>
+            </div>
+        </div>
+        <div>
+            <span class="chart-name">By project</span>
+            <bar-chart chart-height="150" chart-data="DashboardController.projectsChartData"></bar-chart>
+        </div>
+    </div>
+</div>
