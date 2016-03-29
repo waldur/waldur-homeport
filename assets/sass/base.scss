@@ -93,3 +93,7 @@ a, a:focus, span {
 .full-height {
     min-height: 100vh;
 }
+
+body.disable-scroll {
+    overflow: hidden;
+}

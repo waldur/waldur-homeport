@@ -1,0 +1,113 @@
+<section class="step-1">
+    <div class="step-title">
+        <span>Step 1: Choose category</span>
+    </div>
+    <div class="appstore-templates">
+        <!-- category -->
+        <div class="appstore-template appstore-category"
+             ng-repeat="category in AppStore.categories"
+             ng-click="AppStore.setCategory(category)"
+             ng-class="{'state': AppStore.selectedCategory == category}">
+            <div class="icon {{ ::category.icon }}"></div>
+            <h3>{{ category.name }}</h3>
+            <div visible="compare" class="compare compare-active"
+                 ng-show="AppStore.showCompare.indexOf(category.name) !== -1">
+                <a stoppropagation ui-sref="compare.vms">Compare</a>
+            </div>
+        </div>
+        <!-- /category -->
+    </div>
+</section>
+<section class="step-2" ng-show="AppStore.secondStep">
+    <div class="step-title">
+        <span>
+            Step 2: Choose {{ AppStore.selectedCategory.type }}
+        </span>
+    </div>
+    <div class="appstore-templates" ng-if="AppStore.selectedCategory.type == 'provider'">
+        <!-- service -->
+        <div class="appstore-template {{ service.type.toLowerCase() }}"
+             ng-repeat="service in AppStore.categoryServices[AppStore.selectedCategory.name]"
+             ng-click="AppStore.setService(service)"
+             ng-class="AppStore.serviceClass(service)">
+            <helpicon help-text="State {{ service.state }}"></helpicon>
+            <div class="icon">
+                <img ng-src="/static/images/appstore/icon-{{ service.type.toLowerCase() }}.png" alt="">
+            </div>
+            <h3>{{ service.name }}</h3>
+        </div>
+        <!-- /service -->
+    </div>
+    <div class="appstore-templates" ng-if="AppStore.selectedCategory.type == 'package'">
+        <!-- category -->
+        <div class="appstore-template appstore-package"
+             ng-repeat="package in AppStore.selectedCategory.packages"
+             ng-click="AppStore.selectSupportPackage(package)"
+             ng-class="{'state': AppStore.selectedPackage == package}">
+            <div class="appstore-package-row">
+                <div class="appstore-package-cell">{{ package.name }}</div>
+                <div class="appstore-package-cell">{{ package.description }}</div>
+            </div>
+        </div>
+        <!-- /category -->
+    </div>
+</section>
+
+<section class="step-2" ng-show="AppStore.resourceTypesBlock">
+    <div class="step-title"><span>Step {{ AppStore.chooseResourceTypeStepNumber }}: Choose resource type</span></div>
+    <div class="appstore-templates">
+        <!-- service -->
+        <div class="appstore-template {{name.toLowerCase()}}"
+             ng-repeat="(name, resource) in AppStore.serviceMetadata.resources"
+             ng-click="AppStore.setResourceType(name)"
+             ng-class="{'state': AppStore.selectedResourceType == name}">
+            <div class="icon">
+                <i class="fa"></i>
+            </div>
+            <h3>{{ name }}</h3>
+        </div>
+        <!-- /service -->
+    </div>
+</section>
+
+<section class="step-3" ng-show="AppStore.selectedResourceType" block-ui="resource-properties">
+    <div class="step-title">
+        <span>
+            Step {{ AppStore.configureStepNumber }}: Configure {{ AppStore.secondStep && AppStore.serviceType || ''}}
+            {{ AppStore.selectedResourceTypeName }}
+        </span>
+    </div>
+
+    <div ng-include="'views/appstore/fields.html'"></div>
+</section>
+
+<section class="step-3 agreement appstore-purchase" ng-if="AppStore.agreementShow && AppStore.selectedCategory.type == 'package'">
+    <div class="step-title"><span>Step 3: Sign a support agreement</span></div>
+    <div class="step-content">
+        <ul>
+            <li>
+                <div class="item-title">1. Check terms</div>
+                <ul>
+                    <li>
+                        <div class="item-name">Monthly base price:</div>
+                        <div class="item-value">{{ AppStore.selectedPackage.base_rate | currency:AppStore.currency }}</div>
+                        <div class="clear"></div>
+                    </li>
+                    <li>
+                        <div class="item-name">Hour price:</div>
+                        <div class="item-value">{{ AppStore.selectedPackage.hour_rate | currency:AppStore.currency }}</div>
+                        <div class="clear"></div>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <div class="item-title">2. Read through terms and conditions</div>
+                <div class="conditions" ng-bind="AppStore.selectedPackage.terms"></div>
+            </li>
+        </ul>
+    </div>
+    <button ng-class="{'disabled': !AppStore.selectedPackage}" submit-button="AppStore.signContract()">
+        <img src="/static/images/appstore/icon-curt.png" alt=""/>
+        <span>Submit SLA request</span>
+    </button>
+</section>
