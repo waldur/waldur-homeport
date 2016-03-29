@@ -187,6 +187,7 @@
       setResourceType: function(type) {
         var vm = this;
         vm.selectedResourceType = type;
+        vm.errors = {};
         vm.choiceDisplay = {};
         vm.selectedResourceTypeName = type.split(/(?=[A-Z])/).join(" ");
         vm.fields = [];
@@ -475,10 +476,9 @@
           this.instance[name + '_item'] = choice
         } else if (name === 'group') {
           this.instance[name] = choice.url;
-          this.instance[name + '_item'] = choice;
         } else {
           this.instance[name] = choice.value;
-          this.instance[name + '_item'] = choice;
+          this.instance[name + '_item'] = choice.item;
         }
         if (name == 'region') {
           this.filterSizeByRegion();

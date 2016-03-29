@@ -29,9 +29,6 @@
     .form-row {
         @include row;
         @include property(margin-top, 10);
-        &:nth-child(1) {
-            margin-top: 0;
-        } // &:nth-child(1)
         &.inputs-centered {
             align-items: center;
         } // &.inputs-centered
@@ -78,6 +75,10 @@
                 flex: 1 1;
                 input {
                     width: 100%;
+                }
+                label {
+                    display: block;
+                    padding-top: 3px;
                 }
             } // &.input-full
             select {

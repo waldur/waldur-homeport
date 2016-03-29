@@ -1,72 +1,112 @@
+<div class="short-form full">
 <div ng-repeat="field in AppStore.fields"
      ng-switch="field.type"
      ng-if="AppStore.showOptionalFields || field.visible || AppStore.errors[field.name]">
 
-    <form ng-switch-when="string">
-        <div class="string-field">
+    <div ng-switch-when="string">
+        <div ng-if="field.name === 'password'">
+            <div class="form-row">
+                <div class="col label">
+                    <label for="{{ field.name }}">
+                        <helpicon help-text="{{ field.help_text }}" ng-if="field.help_text"></helpicon>
+                        {{ field.label }}
+                    </label>
+                </div>
+                <div class="col input input-full">
+                    <input ng-hide="true" type="password" id="dummyPassword" />
+                    <input class="appstore-password" type="password" id="{{ field.name }}" ng-model="AppStore.instance[field.name]"/>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col label">
+                    <label for="repeat_password">
+                        Repeat password
+                    </label>
+                </div>
+                <div class="col input input-full">
+                    <input class="appstore-password" type="password" id="repeat_password" ng-model="AppStore.instance['repeat_password']"/>
+                </div>
+            </div>
+        </div>
+        <div ng-if="field.name !== 'password'">
+            <div class="form-row">
+                <div class="col label">
+                    <label for="{{ field.name }}">
+                        <helpicon help-text="{{ field.help_text }}" ng-if="field.help_text"></helpicon>
+                        {{ field.label }}
+                    </label>
+                </div>
+                <form class="col input input-full">
+                    <div class="string-field">
+                        <!--XXX: fix for SAAS-1022 task-->
+                        <input type="text" id="{{ field.name }}" ng-model="AppStore.instance[field.name]"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="error arrow-up" ng-show="AppStore.errors[field.name]">
+            <ul class="error-list">
+                <li ng-repeat="error in AppStore.errors[field.name]" ng-bind="error"></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="form-row" ng-switch-when="text">
+        <div class="col label">
             <label for="{{ field.name }}">
                 <helpicon help-text="{{ field.help_text }}" ng-if="field.help_text"></helpicon>
                 {{ field.label }}
             </label>
-
-            <!--XXX: fix for SAAS-1022 task-->
-            <input ng-if="field.name === 'password'" ng-hide="true" type="password" id="dummyPassword" />
-            <input ng-if="field.name === 'password'" class="appstore-password" type="password" id="{{ field.name }}" ng-model="AppStore.instance[field.name]"/>
-            <label ng-if="field.name === 'password'" for="repeat_password">
-                Repeat password
-            </label>
-            <input ng-if="field.name === 'password'" class="appstore-password" type="password" id="repeat_password" ng-model="AppStore.instance['repeat_password']"/>
-            <input ng-if="field.name !== 'password'" type="text" id="{{ field.name }}" ng-model="AppStore.instance[field.name]"/>
-            <div class="error arrow-up" ng-show="AppStore.errors[field.name]">
-                <ul class="error-list">
-                    <li ng-repeat="error in AppStore.errors[field.name]" ng-bind="error"></li>
-                </ul>
-            </div>
         </div>
-    </form>
+        <form class="col input input-full">
+            <div class="string-field">
+                <textarea id="{{ field.name }}" ng-model="AppStore.instance[field.name]"></textarea>
+                <div class="error arrow-up" ng-show="AppStore.errors[field.name]">
+                    <ul class="error-list">
+                        <li ng-repeat="error in AppStore.errors[field.name]" ng-bind="error"></li>
+                    </ul>
+                </div>
+            </div>
+        </form>
+    </div>
 
-    <form ng-switch-when="text">
-        <div class="string-field">
+    <div class="form-row" ng-switch-when="integer">
+        <div class="col label">
             <label for="{{ field.name }}">
                 <helpicon help-text="{{ field.help_text }}" ng-if="field.help_text"></helpicon>
                 {{ field.label }}
             </label>
-            <textarea id="{{ field.name }}" ng-model="AppStore.instance[field.name]"></textarea>
-            <div class="error arrow-up" ng-show="AppStore.errors[field.name]">
-                <ul class="error-list">
-                    <li ng-repeat="error in AppStore.errors[field.name]" ng-bind="error"></li>
-                </ul>
-            </div>
         </div>
-    </form>
+        <form class="col input input-full">
+            <div class="integer-field">
+                <input type="number"
+                       min="{{ field.min }}"
+                       max="{{ field.max }}"
+                       id="{{ field.name }}"
+                       ng-model="AppStore.instance[field.name]"
+                       ng-init="AppStore.instance[field.name]=field.min"/>
+                <span>{{ field.units }}</span>
+                <div class="error arrow-up" ng-show="AppStore.errors[field.name]">
+                    <ul class="error-list">
+                        <li ng-repeat="error in AppStore.errors[field.name]" ng-bind="error"></li>
+                    </ul>
+                </div>
+            </div>
+        </form>
+    </div>
 
-    <form ng-switch-when="integer">
-        <div class="integer-field">
-            <label for="{{ field.name }}">
-                <helpicon help-text="{{ field.help_text }}" ng-if="field.help_text"></helpicon>
-                {{ field.label }}
+    <div class="form-row" ng-switch-when="size" ng-if="field.choices.length > 0">
+        <div class="col label">
+            <label>{{ field.label }}</label>
+        </div>
+        <div class="col input input-full">
+            <label>
+                <a ng-click="field.showChoices=!field.showChoices">
+                    {{ AppStore.choiceDisplay[field.name] || 'Show choices' }}
+                    <i class="icon fa-caret-down"></i>
+                </a>
             </label>
-            <input type="number"
-                   min="{{ field.min }}"
-                   max="{{ field.max }}"
-                   id="{{ field.name }}"
-                   ng-model="AppStore.instance[field.name]"
-                   ng-init="AppStore.instance[field.name]=field.min"/>
-            <span>{{ field.units }}</span>
-            <div class="error arrow-up" ng-show="AppStore.errors[field.name]">
-                <ul class="error-list">
-                    <li ng-repeat="error in AppStore.errors[field.name]" ng-bind="error"></li>
-                </ul>
-            </div>
         </div>
-    </form>
-
-    <div ng-switch-when="size" ng-if="field.choices.length > 0">
-        <h2 ng-bind="field.label"></h2>
-        <a ng-click="field.showChoices=!field.showChoices">
-            {{ AppStore.choiceDisplay[field.name] || 'Show choices' }}
-            <i class="icon fa-caret-down"></i>
-        </a>
         <div class="select-image-wrapper"
              ng-if="field.showChoices"
              prevent-body-scroll>
@@ -116,13 +156,18 @@
             <p class="warning">SSH public key is required for accessing a provisioned VM.<br/>
             You can add a key in your <a ui-sref="profile.details">profile</a>.</p>
         </div>
-        <div ng-if="field.choices.length">
-            <h2 ng-bind="field.label"></h2>
-
-            <a ng-click="field.showChoices=!field.showChoices">
-                {{ AppStore.choiceDisplay[field.name] || 'Show choices' }}
-                <i class="icon fa-caret-down"></i>
-            </a>
+        <div ng-if="field.choices.length" class="form-row">
+            <div class="col label">
+                <label>{{ field.label }}</label>
+            </div>
+            <div class="col input input-full">
+                <label>
+                    <a ng-click="field.showChoices=!field.showChoices">
+                        {{ AppStore.choiceDisplay[field.name] || 'Show choices' }}
+                        <i class="icon fa-caret-down"></i>
+                    </a>
+                </label>
+            </div>
             <div class="select-image-wrapper"
                  ng-if="field.showChoices"
                  prevent-body-scroll>
@@ -178,6 +223,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 <a class="toggle-link pull-right"
    ng-click="AppStore.showOptionalFields=!AppStore.showOptionalFields"

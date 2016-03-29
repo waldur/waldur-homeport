@@ -430,6 +430,17 @@
                     background-color: white;
                 }
             }
+            .short-form {
+                @include bp(xs) {
+                    padding-left: 10px;
+                    padding-right: 10px;
+                    .form-row {
+                        .col.label {
+                            flex: 0 100px;
+                        }
+                    }
+                } // xs
+            }
             form {
                 .string-field {
                     width: 100%;
