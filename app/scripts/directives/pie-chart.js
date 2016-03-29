@@ -71,8 +71,8 @@
                         var height = legendRectSize + legendSpacing;          
                         var offset =  height * color.domain().length / 2;
                         var horz = 2 * 60;
-                        var vert = i * height - offset;                       
-                        return 'translate(' + horz + ',' + vert + ')';        
+                        var vert = i * height - offset;
+                        return 'translate(' + horz + ',' + (i ? vert + 6 * i : vert) + ')';
                     });
 
                 legend.append('rect')                                     

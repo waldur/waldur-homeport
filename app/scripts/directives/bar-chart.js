@@ -67,6 +67,7 @@
                         .attr('width', width + margins.left + margins.right + legendPanel.width)
                         .attr('height', height + margins.top + margins.bottom)
                         .append('g')
+                        .attr('class', 'bar-chart')
                         .attr('transform', 'translate(' + margins.left + ',' + margins.top + ')'),
                     xMax = d3.max(dataset, function (group) {
                         return d3.max(group, function (d) {
@@ -156,6 +157,18 @@
                         .attr('height', 20)
                         .attr('x', width + 110)
                         .attr('y', i * 24 + 6);
+                });
+
+                dataset.forEach(function(resourcesTypes) {
+                    resourcesTypes.forEach(function(resource) {
+                        if (resource.x) {
+                            svg.append('text')
+                              .text(resource.x)
+                              .attr('x', xScale(resource.x) - 100)
+                              .attr('y', yScale(resource.y) + 38)
+                              .attr('fill', "#fff");
+                        }
+                    });
                 });
             }
         }
