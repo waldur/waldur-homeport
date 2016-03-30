@@ -539,6 +539,7 @@
         var choice = this.getChoiceByValue(field.choices, this.instance.size);
         if (choice && choice.disabled) {
           this.instance.size = null;
+          this.choiceDisplay['size'] = null;
           this.deletePriceItem('size');
         }
         this.sortSizes();
@@ -566,6 +567,7 @@
         var choice = this.getChoiceByValue(field.choices, this.instance.image);
         if (choice && choice.disabled) {
           this.instance.image = null;
+          this.choiceDisplay['image'] = null;
           this.deletePriceItem('image');
         }
         this.sortImages();
@@ -598,6 +600,7 @@
         var choice = this.getChoiceByValue(field.choices, flavor);
         if (choice && choice.disabled) {
           this.instance.flavor = null;
+          this.choiceDisplay['flavor'] = null;
           this.deletePriceItem('flavor');
         }
 
