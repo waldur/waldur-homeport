@@ -38,6 +38,7 @@
                     width = 1200 - margins.left - margins.right - legendPanel.width,
                     height = 250 - margins.top - margins.bottom,
                     dataset = scope.data.data,
+                    chartType = scope.data.chartType,
                     series = dataset.map(function (d) {
                         return d.name;
                     }),
@@ -91,13 +92,17 @@
                         var project =  scope.data.projects.filter(function(item) {
                            return item.uuid === d;
                         })[0];
-                        var resources = 0;
+                        var resources = 0,
+                            barName;
                         project.quotas.forEach(function(item) {
                             if (item.name === 'nc_resource_count') {
                                 resources = item.usage;
                             }
                         });
-                        return project.name + ' ('+ resources +' resources)';
+                        barName = chartType === 'resources' ?
+                            project.name + ' ('+ resources +' resources)' :
+                            project.name;
+                        return barName;
                             //return scope.data.x[d];
                         })
                         .scale(yScale)

@@ -525,12 +525,15 @@
         this.barChartTab ='vmsByProject';
         this.activate();
       },
-
       activate: function() {
+        var vm = this;
         this.setCurrentUsageChartData();
-        this.setMonthCostChartData();
-        this.setProjectsChartData();
+        projectsService.getList().then(function(projectsList) {
+          vm.projectsList = projectsList;
+          vm.setResourcesByProjectChartData();
+          vm.setMonthCostChartData();
 
+        });
       },
       setCurrentUsageChartData: function() {
         var vm = this;
@@ -556,10 +559,10 @@
           });
         });
       },
-
       setMonthCostChartData: function() {
         var vm = this;
-        priceEstimationService.getList().then(function(rows) {
+        return priceEstimationService.getList().then(function(rows) {
+          vm.priceEstimationRows = rows;
           vm.monthCostChartData = {chartType: 'services', legendDescription: null, legendLink: 'providers', data: []};
           var cost = 0;
           rows.forEach(function(item) {
@@ -569,26 +572,43 @@
             }
             vm.monthCostChartData.legendDescription = "Projected cost: $" + cost;
           });
+          vm.setServicesByProjectChartData();
         });
 
       },
-
-      setProjectsChartData: function() {
+      setServicesByProjectChartData: function() {
         var vm = this;
-        projectsService.getList().then(function(projectsList) {
-          vm.projectsChartData = {
-            data :[{data: [], name: 'VMs'}, {data: [], name: 'Apps'}],
-            projects: projectsList
-          };
-          projectsList.forEach(function(item) {
-            item.quotas.forEach(function(itemQuota) {
-              if (itemQuota.name === 'nc_vm_count') {
-                vm.projectsChartData.data[0].data.push({project: item.uuid, count: itemQuota.usage});
-              }
-              if (itemQuota.name === 'nc_app_count') {
-                vm.projectsChartData.data[1].data.push({project: item.uuid, count: itemQuota.usage});
-              }
+        vm.servicesByProjectChartData = {
+          data :[],
+          projects: vm.projectsList,
+          chartType: 'services'
+        };
+        vm.priceEstimationRows.forEach(function(priceRow) {
+          if (priceRow.scope_type === 'service' && vm.servicesByProjectChartData.data.length < 5) {
+            vm.servicesByProjectChartData.data.push({data: [], name: priceRow.scope_name});
+            vm.projectsList.forEach(function(project) {
+              //Math.floor(Math.random() * (5 - 1 + 1)) + 1;
+              var lastElem = vm.servicesByProjectChartData.data.length -1;
+              vm.servicesByProjectChartData.data[lastElem].data.push({project: project.uuid, count: priceRow.total});
             });
+          }
+        });
+      },
+      setResourcesByProjectChartData: function() {
+        var vm = this;
+        vm.resourcesByProjectChartData = {
+          data :[{data: [], name: 'VMs'}, {data: [], name: 'Apps'}],
+          projects: vm.projectsList,
+          chartType: 'resources'
+        };
+        vm.projectsList.forEach(function(item) {
+          item.quotas.forEach(function(itemQuota) {
+            if (itemQuota.name === 'nc_vm_count') {
+              vm.resourcesByProjectChartData.data[0].data.push({project: item.uuid, count: itemQuota.usage});
+            }
+            if (itemQuota.name === 'nc_app_count') {
+              vm.resourcesByProjectChartData.data[1].data.push({project: item.uuid, count: itemQuota.usage});
+            }
           });
         });
       }
