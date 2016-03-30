@@ -2,9 +2,9 @@
 
 (function () {
     angular.module('ncsaas')
-        .directive('barChart', barChart);
+        .directive('barChart', ['$state', barChart]);
 
-    function barChart() {
+    function barChart($state) {
         return {
             restrict: 'E',
             replace: true,
@@ -12,7 +12,7 @@
             scope: {
                 data: '=chartData',
                 height: '=chartHeight',
-                bottom: '=chartBottom'
+                controller: '=chartController'
             },
             link: link
         };
@@ -24,6 +24,7 @@
 
             function init() {
                 element.children().html('');
+                scope.currentCustomer = scope.controller.currentCustomer;
 
                 var margins = {
                         top: 12,
@@ -96,7 +97,6 @@
                                 resources = item.usage;
                             }
                         });
-                        //console.log(project);
                         return project.name + ' ('+ resources +' resources)';
                             //return scope.data.x[d];
                         })
@@ -150,6 +150,20 @@
                         .attr('fill', 'black')
                         .attr('x', width + 28)
                         .attr('y', i * 24 + 24)
+                        .on('click', function() {
+                            var link;
+                            switch (s) {
+                                case 'VMs':
+                                    link = 'vms';
+                                    break;
+                                case 'Apps':
+                                    link = 'applications';
+                                    break;
+                                default:
+                                    break;
+                            }
+                            $state.go('organizations.details', {uuid: scope.currentCustomer.uuid, tab: link});
+                        })
                         .text(s);
                     svg.append('rect')
                         .attr('fill', colours(i))

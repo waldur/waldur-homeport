@@ -1,18 +1,32 @@
 <div ng-controller="DashboardResourcesController as DashboardController">
     <div class="white-box dashboard-resources-tab">
         <div class="pie-charts-block">
-            <div class="chart-element">
+            <div class="chart-element" ng-click="DashboardController.barChartTab = 'vmsByProject'">
                 <span class="chart-name">Current usage</span>
-                <pie-chart chart-height="150" chart-data="DashboardController.currentUsageData"></pie-chart>
+                <pie-chart chart-height="150"
+                           chart-data="DashboardController.currentUsageData"
+                           chart-controller="DashboardController"></pie-chart>
+                <div class="curre">Current plan:
+                    <a ui-sref="organizations.plans({uuid: DashboardController.currentCustomer.uuid})">
+                        {{DashboardController.currentPlan}}
+                    </a>
+                </div>
             </div>
-            <div class="chart-element">
+            <div class="chart-element" ng-click="DashboardController.barChartTab = 'providersByProject'">
                 <span class="chart-name">By provider (30d top 5)</span>
-                <pie-chart chart-height="150" chart-data="DashboardController.monthCostChartData"></pie-chart>
+                <pie-chart chart-height="150"
+                           chart-data="DashboardController.monthCostChartData"
+                           chart-controller="DashboardController"></pie-chart>
             </div>
         </div>
-        <div>
-            <span class="chart-name">By project</span>
-            <bar-chart chart-height="150" chart-data="DashboardController.projectsChartData"></bar-chart>
-        </div>
+    </div>
+    <div class="white-box" ng-if="DashboardController.barChartTab === 'vmsByProject'">
+        <span class="chart-name">By project</span>
+        <bar-chart chart-height="150"
+                   chart-data="DashboardController.projectsChartData"
+                   chart-controller="DashboardController"></bar-chart>
+    </div>
+    <div class="white-box" ng-if="DashboardController.barChartTab === 'providersByProject'">
+        <span class="chart-name">Top providers by project</span>
     </div>
 </div>

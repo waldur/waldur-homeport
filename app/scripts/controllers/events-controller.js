@@ -522,6 +522,7 @@
         this.cacheTime = ENV.dashboardEventsCacheTime;
         this._super();
         this.activeTab = 'resources';
+        this.barChartTab ='vmsByProject';
         this.activate();
       },
 
@@ -535,20 +536,23 @@
         var vm = this;
         currentStateService.getCustomer().then(function(response) {
           vm.currentCustomer = response;
-          vm.currentUsageData = [];
+          vm.currentPlan = response.plan.name;
+          vm.currentUsageData = {chartType: 'vms', legendDescription: null, legendLink: 'plans', data: []};
           response.quotas.forEach(function(item) {
             if (item.name === 'nc_resource_count') {
               var free = item.limit - item.usage;
-              vm.currentUsageData.push({ label: free + ' free', count: free });
+              vm.currentUsageData.data.push({ label: free + ' free', count: free, name: 'plans' });
+              vm.currentUsageData.legendDescription = item.usage + " used / " + item.limit + " total";
             }
             if (item.name === 'nc_vm_count') {
               var vms = item.usage;
-              vm.currentUsageData.push({ label: vms + ' vms', count: vms });
+              vm.currentUsageData.data.push({ label: vms + ' vms', count: vms, name: 'vms' });
             }
             if (item.name === 'nc_app_count') {
               var apps = item.usage;
-              vm.currentUsageData.push({ label: apps + ' apps', count: apps })
+              vm.currentUsageData.data.push({ label: apps + ' apps', count: apps, name: 'apps' })
             }
+
           });
         });
       },
@@ -556,11 +560,14 @@
       setMonthCostChartData: function() {
         var vm = this;
         priceEstimationService.getList().then(function(rows) {
-          vm.monthCostChartData = [];
+          vm.monthCostChartData = {chartType: 'services', legendDescription: null, legendLink: 'providers', data: []};
+          var cost = 0;
           rows.forEach(function(item) {
-            if (item.scope_type === 'service' && vm.monthCostChartData.length < 5) {
-              vm.monthCostChartData.push({ label: item.scope_name + ' ('+ item.total +')', count: item.total });
+            if (item.scope_type === 'service' && vm.monthCostChartData.data.length < 5) {
+              vm.monthCostChartData.data.push({ label: item.scope_name + ' ($'+ item.total +')', count: item.total, name: 'providers' });
+              cost += item.total;
             }
+            vm.monthCostChartData.legendDescription = "Projected cost: $" + cost;
           });
         });
 
@@ -569,7 +576,10 @@
       setProjectsChartData: function() {
         var vm = this;
         projectsService.getList().then(function(projectsList) {
-          vm.projectsChartData = {data :[{data: [], name: 'VMs'}, {data: [], name: 'Apps'}], projects: projectsList};
+          vm.projectsChartData = {
+            data :[{data: [], name: 'VMs'}, {data: [], name: 'Apps'}],
+            projects: projectsList
+          };
           projectsList.forEach(function(item) {
             item.quotas.forEach(function(itemQuota) {
               if (itemQuota.name === 'nc_vm_count') {
