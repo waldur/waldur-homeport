@@ -2,6 +2,7 @@
   angular.module('ncsaas')
     .controller('CustomerServiceTabController', [
       '$stateParams',
+      '$location',
       'baseServiceListController',
       'joinService',
       'ENV',
@@ -10,6 +11,7 @@
 
   function CustomerServiceTabController(
     $stateParams,
+    $location,
     baseServiceListController,
     joinService,
     ENV) {
@@ -39,6 +41,10 @@
       },
       afterGetList: function() {
         this.expandSelectedItem();
+      },
+      afterInstanceRemove: function(instance) {
+        this._super(instance);
+        $location.search({'tab': 'providers'});
       },
       expandSelectedItem: function() {
         var vm = this;
