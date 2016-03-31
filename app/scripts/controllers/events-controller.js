@@ -504,6 +504,7 @@
         'projectsService',
         'currentStateService',
         'priceEstimationService',
+        'ncUtils',
         'ENV',
         DashboardResourcesController]);
 
@@ -512,6 +513,7 @@
       projectsService,
       currentStateService,
       priceEstimationService,
+      ncUtils,
       ENV) {
     var controllerScope = this;
     var Controller = baseControllerClass.extend({
@@ -527,25 +529,37 @@
       },
       activate: function() {
         var vm = this;
-        this.setCurrentUsageChartData();
-        projectsService.getList().then(function(projectsList) {
+        var currentUsagePromise =  this.setCurrentUsageChartData();
+        var projectPromise = projectsService.getList().then(function(projectsList) {
           vm.projectsList = projectsList;
           vm.setResourcesByProjectChartData();
-          vm.setMonthCostChartData();
+          var monthCostChartPromise =  vm.setMonthCostChartData();
+          ncUtils.blockElement('month-cost-charts', monthCostChartPromise);
 
         });
+        ncUtils.blockElement('pie-charts', currentUsagePromise);
+        ncUtils.blockElement('bar-chart', projectPromise);
       },
       setCurrentUsageChartData: function() {
         var vm = this;
-        currentStateService.getCustomer().then(function(response) {
+        return currentStateService.getCustomer().then(function(response) {
           vm.currentCustomer = response;
           vm.currentPlan = response.plan.name;
-          vm.currentUsageData = {chartType: 'vms', legendDescription: null, legendLink: 'plans', data: []};
+          vm.resourcesLimit = null;
+          vm.resourcesUsage = null;
+
+          vm.currentUsageData = {
+            chartType: 'vms',
+            legendDescription: null,
+            legendLink: 'plans',
+            data: []};
           response.quotas.forEach(function(item) {
             if (item.name === 'nc_resource_count') {
               var free = item.limit - item.usage;
               vm.currentUsageData.data.push({ label: free + ' free', count: free, name: 'plans' });
               vm.currentUsageData.legendDescription = item.usage + " used / " + item.limit + " total";
+              vm.resourcesLimit = item.limit;
+              vm.resourcesUsage = item.usage;
             }
             if (item.name === 'nc_vm_count') {
               var vms = item.usage;
@@ -567,7 +581,14 @@
           var cost = 0;
           rows.forEach(function(item) {
             if (item.scope_type === 'service' && vm.monthCostChartData.data.length < 5) {
-              vm.monthCostChartData.data.push({ label: item.scope_name + ' ($'+ item.total +')', count: item.total, name: 'providers' });
+              var truncatedName = item.scope_name.length > 8 ?
+                  item.scope_name.slice(0, 8) + '..'  :
+                  item.scope_name;
+              vm.monthCostChartData.data.push({
+                label: truncatedName + ' ($'+ 1000 +')',
+                count: item.total,
+                itemName: item.scope_name,
+                name: 'providers' });
               cost += item.total;
             }
             vm.monthCostChartData.legendDescription = "Projected cost: $" + cost;

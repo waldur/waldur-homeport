@@ -34,7 +34,19 @@
                 var height = 200;
                 var radius = Math.min(width, height) / 2;
 
-                var color = d3.scale.category20c();
+                //var color = d3.scale.category20c();
+                var color;
+                switch (chartType) {
+                    case 'vms':
+                        color = d3.scale.category20c();
+                        break;
+                    case 'services':
+                        color = d3.scale.category10();
+                        break;
+                    default:
+                        color = d3.scale.category20c();
+                        break;
+                }
 
                 var svg = d3.select(element.children()[0])
                     .append('svg')

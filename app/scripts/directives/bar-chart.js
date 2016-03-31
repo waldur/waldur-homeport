@@ -64,6 +64,9 @@
                             };
                         });
                     });
+                var ticksCount = 5;
+                var axisOffset = scope.controller.resourcesUsage / ticksCount * 2;
+
                 var svg = d3.select(element.children()[0])
                         .append('svg')
                         .attr('width', width + margins.left + margins.right + legendPanel.width)
@@ -77,7 +80,7 @@
                         });
                     }),
                     xScale = d3.scale.linear()
-                        .domain([0, xMax])
+                        .domain([0, xMax + axisOffset])
                         .range([0, width]),
                     projects = dataset[0].map(function (d) {
                         return d.y;
@@ -87,7 +90,8 @@
                         .rangeRoundBands([0, height], .1),
                     xAxis = d3.svg.axis()
                         .scale(xScale)
-                        .orient('bottom'),
+                        .orient('bottom')
+                        .tickFormat(d3.format("d")).ticks(ticksCount),
                     yAxis = d3.svg.axis().tickFormat(function(d) {
                         var project =  scope.data.projects.filter(function(item) {
                            return item.uuid === d;
@@ -106,9 +110,20 @@
                             //return scope.data.x[d];
                         })
                         .scale(yScale)
-                        .orient('left'),
-                    colours = d3.scale.category10(),
-                    groups = svg.selectAll('g')
+                        .orient('left');
+                var colours;
+                switch (chartType) {
+                    case 'resources':
+                        colours = d3.scale.category20c();
+                        break;
+                    case 'services':
+                        colours = d3.scale.category10();
+                        break;
+                    default:
+                        colours = d3.scale.category20c();
+                        break;
+                }
+                var groups = svg.selectAll('g')
                         .data(dataset)
                         .enter()
                         .append('g')
@@ -141,7 +156,17 @@
 
                 svg.append('g')
                     .attr('class', 'axis')
+                    .attr('id', 'yAxis')
                     .call(yAxis);
+
+                d3.select('#yAxis')
+                    .selectAll('.tick')
+                    .on("mouseover", function(d) { element.css( 'cursor', 'pointer' ); })
+                    .on("mouseout", function(d) { element.css( 'cursor', 'default' ); })
+                    .on('click',function (d) {
+                        (chartType === 'resources' || chartType === 'services') &&
+                            $state.go('projects.details', {uuid: d});
+                    });
 
                 svg.append('rect')
                     .attr('fill', '#eee')
@@ -183,8 +208,8 @@
                         if (resource.x) {
                             svg.append('text')
                               .text(resource.x)
-                              .attr('x', xScale(resource.x) - 100)
-                              .attr('y', yScale(resource.y) + 38)
+                              .attr('x', xScale(resource.x0) + xScale(resource.x) / 2 - 3)
+                              .attr('y', yScale(resource.y) + yScale.rangeBand() / 2 + 5)
                               .attr('fill', "#fff");
                         }
                     });
