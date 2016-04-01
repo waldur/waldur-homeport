@@ -2,10 +2,13 @@
   .pie-charts-block {
     display: flex;
     justify-content: flex-start;
-
     align-content: flex-start;
-    .chart-element {
 
+     @include bp(xs) {
+      flex-direction: column;
+     }
+
+    .chart-element {
       border: 1px solid #ccc;
       border-radius: 5px;
       text-align: center;
