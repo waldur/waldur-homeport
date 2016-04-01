@@ -63,13 +63,32 @@
                     .value(function(d) { return d.count; })
                     .sort(null);
 
+                var div = d3.select("body").append("div")
+                    .attr("class", "chart-tooltip")
+                    .style("opacity", 0);
+
                 var path = svg.selectAll('path')
                     .data(pie(dataset))
                     .enter()
                     .append('path')
                     .attr('d', arc)
+                    .attr('value', function(d) { return d.value; })
                     .attr('fill', function(d, i) {
                         return color(d.data.label);
+                    }).on("mouseenter", function() {
+                        var name = d3.event.toElement.getAttribute('value');
+                        div.transition()
+                            .duration(200)
+                            .style("opacity", .9)
+                            .style("display", "block");
+                        div.html(name)
+                            .style("left", (d3.event.pageX) + "px")
+                            .style("top", (d3.event.pageY) + "px");
+                        console.log('jere')
+                    })
+                    .on("mouseout", function() {
+                        div.transition()
+                            .style("display", "none");
                     });
 
 

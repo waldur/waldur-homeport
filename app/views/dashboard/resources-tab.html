@@ -26,13 +26,13 @@
         </div>
         <div class="big-chart" block-ui="bar-chart"  ng-if="DashboardController.barChartTab === 'vmsByProject'">
             <span class="chart-name">By project</span>
-            <bar-chart chart-height="150"
+            <bar-chart ng-if="DashboardController.projectsList.showBarChart"
                        chart-data="DashboardController.resourcesByProjectChartData"
                        chart-controller="DashboardController"></bar-chart>
         </div>
         <div class="big-chart" block-ui="bar-chart" ng-if="DashboardController.barChartTab === 'providersByProject'">
             <span class="chart-name">Top providers by project</span>
-            <bar-chart chart-height="150"
+            <bar-chart ng-if="DashboardController.projectsList.showBarChart"
                        chart-data="DashboardController.servicesByProjectChartData"
                        chart-controller="DashboardController"></bar-chart>
         </div>

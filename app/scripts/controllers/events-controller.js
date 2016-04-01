@@ -506,6 +506,8 @@
         'priceEstimationService',
         'ncUtils',
         'ENV',
+        '$q',
+        '$filter',
         DashboardResourcesController]);
 
   function DashboardResourcesController(
@@ -514,7 +516,9 @@
       currentStateService,
       priceEstimationService,
       ncUtils,
-      ENV) {
+      ENV,
+      $q,
+      $filter) {
     var controllerScope = this;
     var Controller = baseControllerClass.extend({
       showGraph: true,
@@ -532,6 +536,41 @@
         var currentUsagePromise =  this.setCurrentUsageChartData();
         var projectPromise = projectsService.getList().then(function(projectsList) {
           vm.projectsList = projectsList;
+
+          // TODO: XXX replace with data from relevant endpoint when ready
+          vm.projectsList.forEach(function(project, i) {
+            var filter = {project_uuid: project.uuid};
+            var openStackPromise = projectsService
+                .getFactory(true, '/openstack-service-project-link', null)
+                .query(filter).$promise;
+            var awsPromise = projectsService
+                .getFactory(true, '/aws-service-project-link', null)
+                .query(filter).$promise;
+            var azurePromise = projectsService
+                .getFactory(true, '/azure-service-project-link', null)
+                .query(filter).$promise;
+            var digitaloceanPromise = projectsService
+                .getFactory(true, '/digitalocean-service-project-link', null)
+                .query(filter).$promise;
+            $q.all([openStackPromise, awsPromise, azurePromise, digitaloceanPromise]).then(function(response) {
+              var flatten = [].concat.apply([], response);
+              project.vcpu = null;
+              project.ram = null;
+              project.storage = null;
+              flatten.forEach(function(splItem) {
+                splItem.quotas && splItem.quotas.forEach(function(quota) {
+                  quota.name == 'vcpu' && (project.vcpu += quota.usage);
+                  quota.name == 'ram' && (project.ram += quota.usage);
+                  quota.name == 'storage' && (project.storage += quota.usage);
+                });
+              });
+              vm.projectsList[i].vcpu = project.vcpu;
+              vm.projectsList[i].ram = $filter('mb2gb')(project.ram);
+              vm.projectsList[i].storage = $filter('mb2gb')(project.storage);
+              i === vm.projectsList.length - 1 &&  (vm.projectsList.showBarChart = true);
+            });
+          });
+
           vm.setResourcesByProjectChartData();
           var monthCostChartPromise =  vm.setMonthCostChartData();
           ncUtils.blockElement('month-cost-charts', monthCostChartPromise);
@@ -585,13 +624,13 @@
                   item.scope_name.slice(0, 8) + '..'  :
                   item.scope_name;
               vm.monthCostChartData.data.push({
-                label: truncatedName + ' ($'+ 1000 +')',
+                label: truncatedName + ' ('+ ENV.currency + item.total +')',
                 count: item.total,
                 itemName: item.scope_name,
                 name: 'providers' });
               cost += item.total;
             }
-            vm.monthCostChartData.legendDescription = "Projected cost: $" + cost;
+            vm.monthCostChartData.legendDescription = "Projected cost: " + ENV.currency + cost;
           });
           vm.setServicesByProjectChartData();
         });

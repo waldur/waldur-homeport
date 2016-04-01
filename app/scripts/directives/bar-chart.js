@@ -11,7 +11,6 @@
             templateUrl: 'views/directives/bar-chart.html',
             scope: {
                 data: '=chartData',
-                height: '=chartHeight',
                 controller: '=chartController'
             },
             link: link
@@ -166,6 +165,17 @@
                     .on('click',function (d) {
                         (chartType === 'resources' || chartType === 'services') &&
                             $state.go('projects.details', {uuid: d});
+                    }).append("text")
+                    .attr("class", "subtitle")
+                    .attr("dy", "2em")
+                    .attr("transform", "translate(-10,0)")
+                    .style("text-anchor", "end")
+                    .style("font-size", "0.65em")
+                    .text(function(d) {
+                        var project =  scope.data.projects.filter(function(item) {
+                            return item.uuid === d;
+                        })[0];
+                        return project.vcpu + " vCPU / " + project.ram + " RAM / " + project.storage + " HDD";
                     });
 
                 svg.append('rect')
