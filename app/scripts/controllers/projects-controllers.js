@@ -173,6 +173,12 @@
             }
           }
         },
+        removeInstance: function(model) {
+          currentStateService.setProject(null);
+          return model.$delete().catch(function() {
+            currentStateService.setProject(model);
+          });
+        },
         afterInstanceRemove: function(instance) {
           $rootScope.$broadcast('refreshProjectList', {model: instance, remove: true});
           this._super(instance);

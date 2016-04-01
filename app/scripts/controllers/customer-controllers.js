@@ -11,6 +11,7 @@
       '$state',
       'ENV',
       'ncUtils',
+      'currentStateService',
       CustomerListController
     ]);
 
@@ -22,7 +23,8 @@
     $rootScope,
     $state,
     ENV,
-    ncUtils) {
+    ncUtils,
+    currentStateService) {
     var controllerScope = this;
     var CustomerController = baseControllerListClass.extend({
       init:function() {
@@ -97,6 +99,12 @@
       },
       currentUserIsStaff: function() {
         return this.currentUser.is_staff;
+      },
+      removeInstance: function(model) {
+        currentStateService.setCustomer(null);
+        return model.$delete().catch(function() {
+          currentStateService.setCustomer(model);
+        });
       },
       afterInstanceRemove: function(intance) {
         $rootScope.$broadcast('refreshCustomerList', {model: intance, remove: true});
