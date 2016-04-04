@@ -102,6 +102,13 @@
                             <a ng-class="field.getClass(entity[field.propertyName])" title="{{ entity[field.propertyName] }}"></a>
                         </div>
 
+                        <div ng-switch-when="awesomeIcon">
+                            <i ng-if="field.show(entity)"
+                               class="icon fa"
+                               ng-class="field.iconClass"
+                               title="{{ field.title }}"></i>
+                        </div>
+
                         <div ng-switch-when="bool"
                              class="bool-field"
                              title="{{ entity[field.propertyName] }}">
