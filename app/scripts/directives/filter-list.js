@@ -9,7 +9,6 @@
     return {
       restrict: 'E',
       templateUrl: 'views/directives/filter-list.html',
-      replace: true,
       scope: {
         filterController: '='
       },
