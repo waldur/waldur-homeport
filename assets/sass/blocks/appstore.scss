@@ -598,6 +598,10 @@
             text-align: center;
             height: 50px;
             line-height: 50px;
+            &.cancel-purchase {
+                background: #ff1744;
+                color: #fff;
+            }
             &.disabled {
                 background: #d7d9d6;
             }
