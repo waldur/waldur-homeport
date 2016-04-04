@@ -3,10 +3,9 @@
         <div class="pie-charts-block" block-ui="pie-charts">
             <div class="chart-element"
                  ng-class="{'active': DashboardController.barChartTab === 'vmsByProject'}"
-                 ng-click="DashboardController.barChartTab = 'vmsByProject'">
+                 ng-click="DashboardController.changeTab('vmsByProject')">
                 <span class="chart-name">Current usage</span>
-                <pie-chart chart-height="150"
-                           chart-data="DashboardController.currentUsageData"
+                <pie-chart chart-data="DashboardController.currentUsageData"
                            chart-controller="DashboardController"></pie-chart>
                 <div>Current plan:
                     <a ui-sref="organizations.plans({uuid: DashboardController.currentCustomer.uuid})">
@@ -17,9 +16,12 @@
             <div class="chart-element"
                  block-ui="month-cost-charts"
                  ng-class="{'active': DashboardController.barChartTab === 'providersByProject'}"
-                 ng-click="DashboardController.barChartTab = 'providersByProject'">
+                 ng-click="DashboardController.changeTab('providersByProject')">
                 <span class="chart-name">By provider (30d top 5)</span>
-                <pie-chart chart-height="150"
+                <div ng-if="!DashboardController.totalMonthCost" class="empty-chart-message">
+                    Not enough data for chart
+                </div>
+                <pie-chart ng-if="DashboardController.totalMonthCost"
                            chart-data="DashboardController.monthCostChartData"
                            chart-controller="DashboardController"></pie-chart>
             </div>

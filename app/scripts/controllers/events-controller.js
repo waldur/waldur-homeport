@@ -615,7 +615,7 @@
         return priceEstimationService.getList().then(function(rows) {
           vm.priceEstimationRows = rows;
           vm.monthCostChartData = {chartType: 'services', legendDescription: null, legendLink: 'providers', data: []};
-          var cost = 0;
+          vm.totalMonthCost = 0;
           rows.forEach(function(item) {
             if (item.scope_type === 'service' && vm.monthCostChartData.data.length < 5) {
               var truncatedName = item.scope_name.length > 8 ?
@@ -626,9 +626,9 @@
                 count: item.total,
                 itemName: item.scope_name,
                 name: 'providers' });
-              cost += item.total;
+              vm.totalMonthCost += item.total;
             }
-            vm.monthCostChartData.legendDescription = "Projected cost: " + ENV.currency + cost;
+            vm.monthCostChartData.legendDescription = "Projected cost: " + ENV.currency + vm.totalMonthCost;
           });
           vm.setServicesByProjectChartData();
         });
@@ -667,6 +667,10 @@
             }
           });
         });
+      },
+      changeTab: function(tabName) {
+        this.barChartTab = this.totalMonthCost ? tabName : this.barChartTab;
+        return false
       }
     });
 

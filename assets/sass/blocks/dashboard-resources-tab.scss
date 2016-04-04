@@ -11,12 +11,15 @@
     .chart-element {
       border: 1px solid #ccc;
       border-radius: 5px;
-      text-align: center;
-      padding: 15px 5px;
-      margin: 0;
-      position: relative;
       box-sizing: border-box;
+      min-height: 300px;
+      margin: 0;
       margin-right: 20px;
+      padding: 15px 5px;
+      position: relative;
+      text-align: center;
+      width: 400px;
+
       &.active {
         background: #fafafa;
         border: 0;
@@ -30,6 +33,11 @@
           left: 0;
           background: #fafafa;
         }
+      }
+
+      .empty-chart-message {
+        font-weight: bold;
+        margin-top: 50px;
       }
     }
   }

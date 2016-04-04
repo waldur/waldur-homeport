@@ -35,13 +35,19 @@
                         width: 180
                     },
                     width = 1200 - margins.left - margins.right - legendPanel.width,
-                    height = 250 - margins.top - margins.bottom,
+                    height,
                     dataset = scope.data.data,
                     chartType = scope.data.chartType,
                     series = dataset.map(function (d) {
                         return d.name;
                     }),
                     stack = d3.layout.stack();
+
+                var barsCount = dataset[0].data.length,
+                    barOffset = 20,
+                    barHeight = 80;
+
+                height = (barHeight + barOffset) * barsCount;
 
                 dataset = dataset.map(function (d) {
                     return d.data.map(function (o, i) {
@@ -102,6 +108,10 @@
                                 resources = item.usage;
                             }
                         });
+                        project.name = project.name.length > 10 ?
+                            project.name.slice(0, 10) + '..'  :
+                            project.name;
+
                         barName = chartType === 'resources' ?
                             project.name + ' ('+ resources +' resources)' :
                             project.name;
@@ -142,7 +152,8 @@
                             return yScale(d.y);
                         })
                         .attr('height', function (d) {
-                            return yScale.rangeBand();
+                            //return yScale.rangeBand();
+                            return barHeight;
                         })
                         .attr('width', function (d) {
                             return xScale(d.x);

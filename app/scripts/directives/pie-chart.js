@@ -11,7 +11,6 @@
             templateUrl: 'views/directives/pie-chart.html',
             scope: {
                 data: '=chartData',
-                height: '=chartHeight',
                 controller: '=chartController'
             },
             link: link
@@ -84,7 +83,6 @@
                         div.html(name)
                             .style("left", (d3.event.pageX) + "px")
                             .style("top", (d3.event.pageY) + "px");
-                        console.log('jere')
                     })
                     .on("mouseout", function() {
                         div.transition()
