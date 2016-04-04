@@ -3,10 +3,10 @@
     <div class="line-wrapper">
         <div class="label">Name</div>
         <div class="input">
-            <span ng-if="!userModel.name && loaingUsers">
+            <span ng-if="!userModel.name && loadingUsers">
                 <i class="fa fa-spinner fa-spin"></i>
             </span>
-            <select ng-model="userModel.user_url" ng-if="!userModel.name && !loaingUsers">
+            <select ng-model="userModel.user_url" ng-if="!userModel.name && !loadingUsers">
                 <option ng-selected="userModel.name == user.full_name"
                         ng-repeat="user in users | filter:ignoreAddedUsers"
                         value="{{user.url}}">
