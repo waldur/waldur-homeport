@@ -706,15 +706,15 @@ $searchInputHeight: 32px;
 
 .details-table__row {
     display: flex;
-    padding-bottom: 10px;
+    padding: 10px;
     justify-content: space-between;
 }
 
 .details-table__key {
-    font-weight: bold;
     width: 100px;
     flex-grow: 0;
     flex-shrink: 0;
+    color: #707070;
 }
 
 .details-table__value {

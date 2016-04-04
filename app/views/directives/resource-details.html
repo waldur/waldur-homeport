@@ -1,15 +1,24 @@
-<div class="details-table__row">
+<div class="details-table__row" ng-if="::resource.summary">
   <div class="details-table__key">
-    Type
+    Summary:
   </div>
   <div class="details-table__value">
-    {{ ::resource.resource_type }}
+    {{ ::resource.summary }}
   </div>
 </div>
 
 <div class="details-table__row">
   <div class="details-table__key">
-    State
+    Type:
+  </div>
+  <div class="details-table__value">
+    {{ ::resource.formatted_resource_type }}
+  </div>
+</div>
+
+<div class="details-table__row">
+  <div class="details-table__key">
+    State:
   </div>
   <div class="details-table__value">
     {{ resource.state }}
@@ -18,7 +27,7 @@
 
 <div class="details-table__row" ng-if="resource.state == 'Erred'">
   <div class="details-table__key">
-    Error
+    Error:
   </div>
   <div class="details-table__value">
     {{ resource.error_message || 'Reason unknown, please contact support' }}
@@ -27,7 +36,7 @@
 
 <div class="details-table__row">
   <div class="details-table__key">
-    Provider
+    Provider:
   </div>
   <div class="details-table__value">
     <a ui-sref="organizations.details({
@@ -42,7 +51,7 @@
 
 <div class="details-table__row">
   <div class="details-table__key">
-    Access link
+    Access:
   </div>
   <div class="details-table__value">
     <a ng-if="resource.access_info_url"
@@ -56,9 +65,18 @@
   </div>
 </div>
 
+<div class="details-table__row" ng-if="expandableElement.key_name">
+  <div class="details-table__key">
+    SSH key:
+  </div>
+  <div class="details-table__value">
+    <span ng-bind="expandableElement.key_name"></span>
+  </div>
+</div>
+
 <div class="details-table__row">
   <div class="details-table__key">
-    Created
+    Created:
   </div>
   <div class="details-table__value">
     <span am-time-ago="::resource.created"></span>,
@@ -66,18 +84,9 @@
   </div>
 </div>
 
-<div class="details-table__row" ng-if="expandableElement.key_name">
-  <div class="details-table__key">
-    SSH key
-  </div>
-  <div class="details-table__value">
-    <span ng-bind="expandableElement.key_name"></span>
-  </div>
-</div>
-
 <div class="details-table__row" ng-if="::resource.related_resources.length">
   <div class="details-table__key">
-    Links
+    Links:
   </div>
   <div class="details-table__value">
     <li ng-repeat="resource in resource.related_resources">
@@ -85,5 +94,14 @@
         {{ ::resource.resource_type }} {{ ::resource.name }}
       </a>
     </li>
+  </div>
+</div>
+
+<div class="details-table__row" ng-if="::resource.user_data">
+  <div class="details-table__key">
+    User data:
+  </div>
+  <div class="details-table__value">
+    {{ ::resource.user_data }}
   </div>
 </div>

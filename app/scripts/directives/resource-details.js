@@ -2,30 +2,51 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('resourceUtils', ['ncUtils', 'authService', resourceUtils]);
+    .service('resourceUtils', [
+      'ncUtils', 'authService', '$filter', resourceUtils]);
 
-  function resourceUtils(ncUtils, authService) {
+  function resourceUtils(ncUtils, authService, $filter) {
     return {
-      setAccessInfo: function(item) {
-        item.access_info_text = 'No access info';
-        if (!item.access_url) {
+      setAccessInfo: function(resource) {
+        resource.access_info_text = 'No access info';
+        if (!resource.access_url) {
           return;
         }
 
-        if (ncUtils.startsWith(item.access_url, "http")) {
-          item.access_info_url = item.access_url;
-          item.access_info_text = 'Open';
+        if (ncUtils.startsWith(resource.access_url, "http")) {
+          resource.access_info_url = resource.access_url;
+          resource.access_info_text = 'Open';
 
-          if (ncUtils.endsWith(item.access_url, "/rdp/")) {
-            item.access_info_text = 'Connect';
-            item.access_info_url = authService.getDownloadLink(item.access_url);
+          if (ncUtils.endsWith(resource.access_url, "/rdp/")) {
+            resource.access_info_text = 'Connect';
+            resource.access_info_url = authService.getDownloadLink(resource.access_url);
           }
-        } else if (angular.isArray(item.access_url)) {
+        } else if (angular.isArray(resource.access_url)) {
           // IP addresses
-          item.access_info_text = item.access_url.join(', ');
+          resource.access_info_text = resource.access_url.join(', ');
         } else {
-          item.access_info_text = item.access_url;
+          resource.access_info_text = resource.access_url;
         }
+      },
+      setSummary: function(resource) {
+        var parts = [];
+        if (resource.image_name) {
+          parts.push(resource.image_name);
+        }
+        if (resource.cores) {
+          parts.push(resource.cores + ' vCPU');
+        }
+        if (resource.ram) {
+          parts.push($filter('mb2gb')(resource.ram) + ' memory');
+        }
+        if (resource.disk) {
+          parts.push($filter('mb2gb')(resource.disk) + ' storage');
+        }
+        var summary = parts.join(' / ');
+        resource.summary = summary;
+      },
+      formatResourceType: function(resource) {
+        resource.formatted_resource_type = resource.resource_type.split(".").join(" ");
       }
     }
   }
@@ -43,10 +64,13 @@
       templateUrl: 'views/directives/resource-details.html',
       link: function(scope) {
         scope.$watch('resource', function() {
-          if (scope.resource) {
-            scope.resource.service_type = scope.resource.resource_type.split('.')[0];
-            scope.resource.customer_uuid = currentStateService.getCustomerUuid();
-            resourceUtils.setAccessInfo(scope.resource);
+          var resource = scope.resource;
+          if (resource) {
+            resource.service_type = resource.resource_type.split('.')[0];
+            resource.customer_uuid = currentStateService.getCustomerUuid();
+            resourceUtils.setAccessInfo(resource);
+            resourceUtils.setSummary(resource);
+            resourceUtils.formatResourceType(resource);
           }
         });
       }
