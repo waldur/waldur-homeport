@@ -79,7 +79,7 @@
     function reloadCurrentCustomer(callback) {
       vm = this;
       vm.getCustomer().then(function(customer) {
-        customer.$get().then(function(customer) {
+        customer && customer.$get().then(function(customer) {
           vm.setCustomer(customer);
           callback(customer);
         });

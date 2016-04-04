@@ -151,7 +151,7 @@
       rowFields: [
         'uuid', 'url', 'name', 'state', 'created', 'error_message',
         'resource_type', 'latitude', 'longitude', 'access_url',
-        'service_name', 'service_type', 'service_uuid'
+        'service_name', 'service_type', 'service_uuid', 'related_resources'
       ],
       getMarkers: function() {
         var items = this.controllerScope.list.filter(function hasCoordinates(item) {
