@@ -61,8 +61,10 @@
                     }
                 });
 
-                usersService.getList().then(function(users) {
+                scope.loaingUsers = true;
+                usersService.getAll().then(function(users) {
                     scope.users = users;
+                    scope.loaingUsers = false;
                 });
 
                 getProjectsListForAutoComplete();
