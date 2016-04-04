@@ -1,0 +1,89 @@
+<div class="details-table__row">
+  <div class="details-table__key">
+    Type
+  </div>
+  <div class="details-table__value">
+    {{ ::resource.resource_type }}
+  </div>
+</div>
+
+<div class="details-table__row">
+  <div class="details-table__key">
+    State
+  </div>
+  <div class="details-table__value">
+    {{ resource.state }}
+  </div>
+</div>
+
+<div class="details-table__row" ng-if="resource.state == 'Erred'">
+  <div class="details-table__key">
+    Error
+  </div>
+  <div class="details-table__value">
+    {{ resource.error_message || 'Reason unknown, please contact support' }}
+  </div>
+</div>
+
+<div class="details-table__row">
+  <div class="details-table__key">
+    Provider
+  </div>
+  <div class="details-table__value">
+    <a ui-sref="organizations.details({
+      uuid: resource.customer_uuid,
+      tab: 'providers',
+      providerUuid: resource.service_uuid,
+      providerType: resource.service_type})">
+      {{ ::resource.service_name }}
+    </a>
+  </div>
+</div>
+
+<div class="details-table__row">
+  <div class="details-table__key">
+    Access link
+  </div>
+  <div class="details-table__value">
+    <a ng-if="resource.access_info_url"
+       href="{{ resource.access_info_url }}"
+       target="_blank">
+        {{ resource.access_info_text }}
+    </a>
+    <span ng-if="!resource.access_info_url">
+      {{ resource.access_info_text }}
+    </span>
+  </div>
+</div>
+
+<div class="details-table__row">
+  <div class="details-table__key">
+    Created
+  </div>
+  <div class="details-table__value">
+    <span am-time-ago="::resource.created"></span>,
+    {{ ::resource.created | dateTime }}
+  </div>
+</div>
+
+<div class="details-table__row" ng-if="expandableElement.key_name">
+  <div class="details-table__key">
+    SSH key
+  </div>
+  <div class="details-table__value">
+    <span ng-bind="expandableElement.key_name"></span>
+  </div>
+</div>
+
+<div class="details-table__row" ng-if="::resource.related_resources.length">
+  <div class="details-table__key">
+    Links
+  </div>
+  <div class="details-table__value">
+    <li ng-repeat="resource in resource.related_resources">
+      <a ui-sref="resources.details({uuid: resource.uuid, resource_type: resource.resource_type})">
+        {{ ::resource.resource_type }} {{ ::resource.name }}
+      </a>
+    </li>
+  </div>
+</div>

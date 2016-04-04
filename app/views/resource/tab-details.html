@@ -1,60 +1,7 @@
-<div ng-if="controller.model.state == 'Erred'" class="error-message">
-    {{ controller.model.error_message || controller.defaultErrorMessage }}
-</div>
+<resource-details resource="controller.model"></resource-details>
 
-<div ng-if="controller.inProgress">
-    <a class="icon refresh spin"></a>
-    Please wait a few minutes until resource provisioning is completed.
-</div>
-
-<div class="details-table__row">
-  <div class="details-table__key">
-    State
-  </div>
-  <div class="details-table__value">
-    {{ controller.model.state }}
-  </div>
-</div>
-
-<div class="details-table__row">
-  <div class="details-table__key">
-    Type
-  </div>
-  <div class="details-table__value">
-    {{ controller.model.resource_type }}
-  </div>
-</div>
-
-<div class="details-table__row">
-  <div class="details-table__key">
-    Provider
-  </div>
-  <div class="details-table__value">
-    {{ controller.model.service_name }}
-  </div>
-</div>
-
-<div class="details-table__row">
-  <div class="details-table__key">
-    Access link
-  </div>
-  <div class="details-table__value">
-    <a ng-if="controller.model.access_info_url" href="{{ controller.model.access_info_url }}" target="_blank">
-        {{ controller.model.access_info_text }}
-    </a>
-    <span ng-if="!controller.model.access_info_url">
-      {{ controller.model.access_info_text }}
-    </span>
-  </div>
-</div>
-
-<div class="details-table__row">
-  <div class="details-table__key">
-    Created
-  </div>
-  <div class="details-table__value">
-    <span am-time-ago="controller.model.created" title="{{ controller.model.created }}"></span>
-  </div>
-</div>
-
-<related-resources ng-if="controller.model" resource="controller.model"></related-resources>
+<action-list-resource
+  entity="controller.model"
+  controller="controller"
+  ng-if="controller.model">
+</action-list-resource>
