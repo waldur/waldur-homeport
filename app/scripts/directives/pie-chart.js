@@ -33,7 +33,6 @@
                 var height = 200;
                 var radius = Math.min(width, height) / 2;
 
-                //var color = d3.scale.category20c();
                 var color;
                 switch (chartType) {
                     case 'vms':
@@ -100,7 +99,7 @@
                     .attr('class', 'legend')                                
                     .attr('transform', function(d, i) {
                         var height = legendRectSize + legendSpacing;
-                        var offset =  height * color.domain().length / 2;
+                        var offset = height * color.domain().length / 2;
                         var horz = 2 * 60;
                         var vert = i * height - offset;
                         return 'translate(' + horz + ',' + (i ? vert + 6 * i : vert) + ')';

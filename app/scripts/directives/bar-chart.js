@@ -98,7 +98,7 @@
                         .orient('bottom')
                         .tickFormat(d3.format("d")).ticks(ticksCount),
                     yAxis = d3.svg.axis().tickFormat(function(d) {
-                        var project =  scope.data.projects.filter(function(item) {
+                        var project = scope.data.projects.filter(function(item) {
                            return item.uuid === d;
                         })[0];
                         var resources = 0,
@@ -108,15 +108,14 @@
                                 resources = item.usage;
                             }
                         });
-                        project.name = project.name.length > 10 ?
-                            project.name.slice(0, 10) + '..'  :
+                        project.short_name = project.name.length > 10 ?
+                            project.name.slice(0, 10) + '..' :
                             project.name;
 
                         barName = chartType === 'resources' ?
-                            project.name + ' ('+ resources +' resources)' :
-                            project.name;
+                            project.short_name + ' ('+ resources +' resources)' :
+                            project.short_name;
                         return barName;
-                            //return scope.data.x[d];
                         })
                         .scale(yScale)
                         .orient('left');
@@ -152,7 +151,6 @@
                             return yScale(d.y);
                         })
                         .attr('height', function (d) {
-                            //return yScale.rangeBand();
                             return barHeight;
                         })
                         .attr('width', function (d) {
@@ -183,7 +181,7 @@
                     .style("text-anchor", "end")
                     .style("font-size", "0.65em")
                     .text(function(d) {
-                        var project =  scope.data.projects.filter(function(item) {
+                        var project = scope.data.projects.filter(function(item) {
                             return item.uuid === d;
                         })[0];
                         return project.vcpu + " vCPU / " + project.ram + " RAM / " + project.storage + " HDD";

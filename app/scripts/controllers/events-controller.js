@@ -554,7 +554,7 @@
         ncUtils.blockElement('pie-charts', this.setCurrentUsageChartData());
       },
       getProjectsQuotas: function(projects) {
-        // TODO: XXX replace with data from relevant endpoint when ready
+        // TODO: replace with data from relevant endpoint when ready
         var factory = projectsService.getFactory(false, '/stats/quota/');
         var promises = projects.map(function(project) {
           var query = {
@@ -593,10 +593,21 @@
           };
           response.quotas.forEach(function(item) {
             if (item.name === 'nc_resource_count') {
-              var free = item.limit - item.usage;
-              vm.currentUsageData.data.push({ label: free + ' free', count: free, name: 'plans' });
-              vm.currentUsageData.legendDescription = item.usage + " used / " + item.limit + " total";
-              vm.resourcesLimit = item.limit;
+              var limit;
+              if (item.limit != -1) {
+                var free = item.limit - item.usage;
+                limit = item.limit;
+                vm.currentUsageData.data.push({
+                  label: free + ' free',
+                  count: free,
+                  name: 'plans'
+                });
+                vm.currentUsageData.legendDescription = item.usage + " used / " + limit + " total";
+              } else {
+                vm.currentUsageData.legendDescription = item.usage + " used";
+                limit = 'unlimited';
+              }
+              vm.resourcesLimit = limit;
               vm.resourcesUsage = item.usage;
             }
             if (item.name === 'nc_vm_count') {
