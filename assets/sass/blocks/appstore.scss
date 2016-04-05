@@ -588,11 +588,11 @@
     }
 
     .appstore-purchase {
+        text-align: center;
         button {
-            margin-top: 15px;
-            margin-bottom: 15px;
-            display: block;
-            width: 100%;
+            margin: 15px;
+            display: inline-block;
+            width: 170px;
             border-radius: 5px;
             background: $button-green;
             text-align: center;
@@ -609,7 +609,9 @@
                 background: #d7d9d6;
             }
             @include bp(xs) {
-                margin-bottom: 40px;
+                margin: 15px 2px 40px;
+                width: 134px;
+
             } // xs
             img {
                 display: inline;
