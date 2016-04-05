@@ -20,6 +20,9 @@
     @include bp(sm) {
         padding-left: 0;
     } // sm
+    .customer-owner-icon {
+        width: 35px;
+    }
     &.list-header {
         min-height: 40px;
         padding: 5px 0;

@@ -24,7 +24,10 @@
                             </a>
                         </li>
                         <li ng-repeat="customer in Header.customers" ng-if="customer.uuid != Header.currentCustomer.uuid">
-                            <a ng-click="Header.setCurrentCustomer(customer)">{{ customer.name }}</a>
+                            <a ng-click="Header.setCurrentCustomer(customer)">
+                                <i ng-if="Header.isOwner(customer)" class="icon fa fa-star-o" title="Owner"></i>
+                                {{ customer.name }}
+                            </a>
                         </li>
                         <li class="manage-item">
                             <a ui-sref="organizations.list" class="manage">

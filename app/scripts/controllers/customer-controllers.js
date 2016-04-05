@@ -33,6 +33,7 @@
         this._super();
         this.searchFieldName = 'name';
         this.currentUser = usersService.currentUser;
+        var vm = this;
         this.actionButtonsListItems = [
           {
             title: 'Remove',
@@ -71,6 +72,13 @@
             rowTemplateUrl: 'views/customer/row.html'
           },
           list: [
+            {
+              type: ENTITYLISTFIELDTYPES.awesomeIcon,
+              iconClass: 'fa-star-o',
+              show: vm.isOwnerOrStaff.bind(controllerScope),
+              title: 'owner',
+              className: 'customer-owner-icon'
+            },
             {
               name: 'Name',
               propertyName: 'name',
