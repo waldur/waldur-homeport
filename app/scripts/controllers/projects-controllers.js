@@ -52,6 +52,14 @@
             }
           ];
           var vm = this;
+          this.expandableOptions = [
+            {
+              isList: false,
+              addItemBlock: false,
+              viewType: 'project-limits',
+              isOwner: false
+            }
+          ];
           if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('resources') == -1) {
             currentStateService.isQuotaExceeded('resource').then(function(response) {
               if (!response) {
@@ -145,12 +153,12 @@
           vm.userCanManageProjects = false;
           if (usersService.currentUser.is_staff) {
             vm.userCanManageProjects = true;
-            return;
           }
           currentStateService.getCustomer().then(function(customer) {
             for (var i = 0; i < customer.owners.length; i++) {
               if (usersService.currentUser.uuid === customer.owners[i].uuid) {
                 vm.userCanManageProjects = true;
+                vm.expandableOptions[0].isOwner = true;
                 break;
               }
             }

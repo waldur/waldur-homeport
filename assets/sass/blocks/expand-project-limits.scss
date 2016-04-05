@@ -1,0 +1,123 @@
+.expand-project-limits {
+  display: table;
+  width: 100%;
+  >div {
+    display: table-cell;
+    height: 64px;
+    vertical-align: middle;
+    &.name {
+      width: 23%;
+    }
+    &.price {
+      width: 25%;
+      text-align: center;
+      span {
+        color: $head-menu-color;
+      }
+      input {
+        display: inline-block;
+        text-align: center;
+        color: $head-menu-color;
+        width: 80px;
+      }
+      a {
+        height: 27px;
+        line-height: 27px;
+
+      }
+      &.danger {
+        span {
+          color: #AB5859;
+        }
+        input {
+          color: #AB5859;
+        }
+      }
+      &.disable {
+        span {
+          display: none;
+        }
+        input {
+          color: #ccc;
+          background: #fafafa;
+          text-align: left;
+        }
+      }
+    }
+    &.switcher-wrap {
+      width: 52%;
+      text-align: right;
+      input {
+        display: none;
+      }
+      input+label {
+        cursor: pointer;
+        width: 150px;
+        position: relative;
+        display: inline-block;
+        height: 27px;
+        color: #AB5859;
+        background: #F00;
+        transition: all .3s ease;
+        margin: 0 15px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        span {
+          display: inline-block;
+          width: 50%;
+          height: 27px;
+          line-height: 27px;
+          text-transform: uppercase;
+          text-align: center;
+          color: #fff;
+        }
+        &:after {
+          content: '';
+          display: block;
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 50%;
+          height: 100%;
+          transition: left .3s ease;
+          border-radius: 3px;
+          box-sizing: border-box;
+          border: 1px solid #ccc;
+          background: #fafafa;
+        }
+      }
+      input:checked+label {
+        background: $head-menu-color;
+        &:after {
+          left: 50%;
+        }
+      }
+
+    }
+  }
+
+  @mixin mobileStyle() {
+    display: block;
+    > div {
+      height: 35px;
+      display: block;
+      width: auto;
+      &.name,
+      &.price,
+      &.switcher-wrap {
+        width: auto;
+        text-align: left;
+      }
+      &.switcher-wrap {
+        height: 60px;
+      }
+    }
+  }
+
+  @include bp(xs) {
+    @include mobileStyle();
+  } // xs
+  @include bp(sm) {
+    @include mobileStyle();
+  } // sm
+}

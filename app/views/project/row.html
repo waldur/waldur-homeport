@@ -46,6 +46,8 @@
       <span am-time-ago="entity.created" title="{{ entity.created }}"></span>
     </div>
   </div>
+
+  <div ng-include="'/views/directives/expandable-item/expandable-item-project-limits.html'"></div>
 </div>
 
 <action-list actions="entityButtons" entity="entity" ng-show="entity.expandItemOpen"></action-list>

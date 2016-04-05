@@ -323,6 +323,10 @@
             }
             &.step-2 {
                 .appstore-template {
+                    &.marked {
+                        border: 3px solid #BA7970;
+                        opacity: .8;
+                    }
                     span {
                         width: 100%;
                         color: #333;
