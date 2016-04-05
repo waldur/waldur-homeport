@@ -28,7 +28,10 @@
         </div>
         <div class="big-chart" block-ui="bar-chart"  ng-if="DashboardController.barChartTab === 'vmsByProject'">
             <span class="chart-name">By project</span>
-            <bar-chart ng-if="DashboardController.projectsList.showBarChart"
+            <div ng-if="!DashboardController.resourcesCount" class="empty-chart-message">
+                Not enough data for chart
+            </div>
+            <bar-chart ng-if="DashboardController.projectsList.showBarChart && DashboardController.resourcesCount"
                        chart-data="DashboardController.resourcesByProjectChartData"
                        chart-controller="DashboardController"></bar-chart>
         </div>

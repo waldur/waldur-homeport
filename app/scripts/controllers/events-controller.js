@@ -657,13 +657,16 @@
           projects: vm.projectsList,
           chartType: 'resources'
         };
+        vm.resourcesCount = 0;
         vm.projectsList.forEach(function(item) {
           item.quotas.forEach(function(itemQuota) {
             if (itemQuota.name === 'nc_vm_count') {
               vm.resourcesByProjectChartData.data[0].data.push({project: item.uuid, count: itemQuota.usage});
+              vm.resourcesCount += itemQuota.usage;
             }
             if (itemQuota.name === 'nc_app_count') {
               vm.resourcesByProjectChartData.data[1].data.push({project: item.uuid, count: itemQuota.usage});
+              vm.resourcesCount += itemQuota.usage;
             }
           });
         });
