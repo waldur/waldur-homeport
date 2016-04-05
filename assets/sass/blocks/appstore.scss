@@ -592,37 +592,26 @@
         button {
             margin: 15px;
             display: inline-block;
-            width: 170px;
             border-radius: 5px;
             background: $button-green;
             text-align: center;
-            height: 50px;
-            line-height: 50px;
+            padding: 10px 15px;
             &.cancel-purchase {
                 background: none;
-                color: #444;
                 &:hover {
                     text-decoration: underline;
                 }
             }
-            &.disabled {
-                background: #d7d9d6;
-            }
             @include bp(xs) {
                 margin: 15px 2px 40px;
-                width: 134px;
-
-            } // xs
+            }
             img {
                 display: inline;
-                margin-top: 15px;
                 margin-right: 10px;
-
             }
             span {
                 color: #FFF;
                 font-size: 16px;
-                font-weight: bold;
             }
         }
     }
