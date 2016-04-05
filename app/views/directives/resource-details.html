@@ -21,7 +21,9 @@
     State:
   </div>
   <div class="details-table__value">
-    {{ resource.state }}
+    <span class="resource-state {{ state_class }}">
+      {{ resource.state }}
+    </span>
   </div>
 </div>
 
