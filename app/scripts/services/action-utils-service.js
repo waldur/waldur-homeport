@@ -7,7 +7,19 @@
 
   function actionUtilsService(ncUtilsFlash, $rootScope, $http, $q, ngDialog, resourcesService) {
     this.loadActions = function(model) {
-      return resourcesService.getOption(model.url);
+      return resourcesService.getOption(model.url).then(function(response) {
+        var actions = {};
+        var empty = true;
+        angular.forEach(response.actions, function(action, name) {
+          if (typeof action.title == 'string') {
+            actions[name] = action;
+            empty = false;
+          }
+        });
+        if (!empty) {
+          return actions;
+        }
+      });
     };
 
     this.buttonClick = function(controller, model, name, action) {
