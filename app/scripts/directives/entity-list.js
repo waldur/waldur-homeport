@@ -49,6 +49,7 @@
       bool: 'bool',
       trimmed: 'trimmed',
       dateShort: 'dateShort',
-      currency: 'currency'
+      currency: 'currency',
+      awesomeIcon: 'awesomeIcon'
     });
 })();

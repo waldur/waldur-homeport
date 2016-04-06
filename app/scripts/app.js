@@ -212,6 +212,9 @@
             },
             'costTab@dashboard.index': {
               templateUrl: 'views/dashboard/cost-tab.html',
+            },
+            'resourcesTab@dashboard.index': {
+              templateUrl: 'views/dashboard/resources-tab.html',
             }
           },
           resolve: {

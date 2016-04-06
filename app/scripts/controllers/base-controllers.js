@@ -290,6 +290,12 @@
         if (this.currentProject) {
           $state.go('projects.details', {uuid: this.currentProject.uuid});
         }
+      },
+      isOwner: function (customer) {
+        var vm = this;
+        return customer.owners.filter(function(user) {
+          return user.uuid === vm.currentUser.uuid;
+        })[0];
       }
     });
 

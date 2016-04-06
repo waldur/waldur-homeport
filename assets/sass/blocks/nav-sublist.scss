@@ -53,6 +53,7 @@
     } // &.user-area
     > li {
         border-bottom: 1px solid #47a340;
+        position: relative;
         &.divider {
             @include property(height, 1);
             @include property(margin, 5 0);
@@ -156,6 +157,12 @@
             .tooltip-relative {
                 display: block;
             }
+        }
+
+        .fa-star-o {
+            position: absolute;
+            left: 6px;
+            top: 9px;
         }
     } // > li
 } // nav-sublist
