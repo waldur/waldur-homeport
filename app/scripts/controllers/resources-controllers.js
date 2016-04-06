@@ -242,7 +242,7 @@
           if (count > 0) {
             filters.push({
               name: 'resource_type',
-              title: resourceType.replace(".", "") + ' (' + count + ')',
+              title: resourceType.replace(".", " ") + ' (' + count + ')',
               value: resourceType
             });
           }
