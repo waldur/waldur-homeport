@@ -173,7 +173,7 @@
         this.controllerScope = controllerScope;
         this.category = ENV.PrivateClouds;
         this._super();
-        this.entityOptions.entityData.noMatchesText = 'No Private Clouds found matching filter.';
+        this.entityOptions.entityData.noMatchesText = 'No private clouds found matching filter.';
         this.entityOptions.entityData.openMap = this.openMap.bind(this);
       }
     });
