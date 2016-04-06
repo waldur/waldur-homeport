@@ -37,14 +37,21 @@ angular.module('ncsaas')
     // Index of category inside of appStoreCategories
     AllResources: -1,
     VirtualMachines: 0,
-    Applications: 1,
+    PrivateClouds: 1,
+    Applications: 2,
 
     appStoreCategories: [
       {
         name: 'VMs',
         type: 'provider',
         icon: 'desktop',
-        services: ['DigitalOcean', 'OpenStack', 'Azure', 'Amazon']
+        services: ['DigitalOcean', 'Azure', 'Amazon']
+      },
+      {
+        name: 'Private clouds',
+        type: 'provider',
+        icon: 'cloud',
+        services: ['OpenStack']
       },
       {
         name: 'APPLICATIONS',
@@ -124,7 +131,8 @@ angular.module('ncsaas')
     ],
     resourcesTypes: {
       vms: 'vms',
-      applications: 'applications'
+      applications: 'applications',
+      privateClouds: 'privateClouds'
     },
     featuresVisible: false,
 

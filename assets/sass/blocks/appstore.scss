@@ -4,6 +4,7 @@
     flex-wrap: wrap;
     margin-left: -10px;
     margin-right: -10px;
+
     .appstore-template {
         box-shadow:         0px 2px 2px 0px #ededed;
         border-radius: 0px;
@@ -228,6 +229,52 @@
         section {
             padding-bottom: 20px;
             min-height: 100px;
+
+
+            .appstore-templates {
+                &.appstore-categories {
+
+                    @include bp(sm) {
+                        margin-left: 0;
+                    }
+
+                    @include bp(xs) {
+                        margin-left: 0;
+                    }
+                    .appstore-template {
+                        width: 24%;
+                        margin: 0 0 0 1%;
+
+                        @include bp(sm) {
+                            width: 100%;
+                            margin: 0 0 10px 0;
+                        }
+
+                        @include bp(xs) {
+                            width: 100%;
+                            margin: 0 0 10px 0;
+                        }
+
+                        h3 {
+                            max-width: 70%;
+                            @include bp(md) {
+                                font-size: 12px;
+                            }
+                        }
+
+                        .icon {
+                            @include bp(md) {
+                                width: 22%;
+                                font-size: 36px;
+                            }
+                            @include bp(sm) {
+                                font-size: 36px;
+                            }
+                        }
+                    }
+                }
+            }
+
             .appstore-template {
                 height: 110px;
                 text-align: center;
