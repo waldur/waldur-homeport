@@ -159,6 +159,7 @@ angular.module('ncsaas')
     providersTimerInterval: 7, // seconds
 
     resourceStateColorClasses: {
+      'OK': 'online',
       'Online': 'online',
       'Offline': 'offline',
       'Erred': 'erred',

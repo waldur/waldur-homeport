@@ -2,35 +2,6 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('resourceUtils', ['ncUtils', 'authService', resourceUtils]);
-
-  function resourceUtils(ncUtils, authService) {
-    return {
-      setAccessInfo: function(item) {
-        item.access_info_text = 'No access info';
-        if (!item.access_url) {
-          return;
-        }
-
-        if (ncUtils.startsWith(item.access_url, "http")) {
-          item.access_info_url = item.access_url;
-          item.access_info_text = 'Open';
-
-          if (ncUtils.endsWith(item.access_url, "/rdp/")) {
-            item.access_info_text = 'Connect';
-            item.access_info_url = authService.getDownloadLink(item.access_url);
-          }
-        } else if (angular.isArray(item.access_url)) {
-          // IP addresses
-          item.access_info_text = item.access_url.join(', ');
-        } else {
-          item.access_info_text = item.access_url;
-        }
-      }
-    }
-  }
-
-  angular.module('ncsaas')
     .service('baseResourceListController',
     ['baseControllerListClass',
     'ENV',
@@ -149,7 +120,7 @@
         });
       },
       rowFields: [
-        'uuid', 'url', 'name', 'state', 'created', 'error_message',
+        'uuid', 'url', 'name', 'state', 'created', 'start_time', 'error_message',
         'resource_type', 'latitude', 'longitude', 'access_url',
         'service_name', 'service_type', 'service_uuid', 'related_resources'
       ],
@@ -217,7 +188,6 @@
         });
       },
       afterGetList: function() {
-        angular.forEach(this.list, resourceUtils.setAccessInfo);
         angular.forEach(this.list, function(resource) {
           resourcesService.cleanOptionsCache(resource.url);
         });
@@ -387,13 +357,11 @@
       scheduleRefresh: function() {
         var vm = this;
         vm.updateStatus();
-        resourceUtils.setAccessInfo(vm.model);
 
         var refreshPromise = $interval(function() {
           vm.getModel().then(function(model) {
             vm.model = model;
             vm.updateStatus();
-            resourceUtils.setAccessInfo(vm.model);
           });
         }, ENV.resourcesTimerInterval * 1000);
 

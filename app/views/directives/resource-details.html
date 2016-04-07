@@ -1,0 +1,113 @@
+<div class="details-table__row" ng-if="::resource.summary">
+  <div class="details-table__key">
+    Summary:
+  </div>
+  <div class="details-table__value">
+    {{ ::resource.summary }}
+  </div>
+</div>
+
+<div class="details-table__row">
+  <div class="details-table__key">
+    Type:
+  </div>
+  <div class="details-table__value">
+    {{ ::resource.formatted_resource_type }}
+  </div>
+</div>
+
+<div class="details-table__row">
+  <div class="details-table__key">
+    State:
+  </div>
+  <div class="details-table__value">
+    <span class="resource-state {{ state_class }}">
+      <i ng-if="state_class == 'processing'" class="icon refresh spin"></i>
+      {{ resource.state }}
+    </span>
+    <div ng-if="state_class == 'processing'">
+      Please wait a few minutes until resource provisioning is completed.
+    </div>
+  </div>
+</div>
+
+<div class="details-table__row" ng-if="resource.state == 'Erred'">
+  <div class="details-table__key">
+    Error:
+  </div>
+  <div class="details-table__value">
+    {{ resource.error_message || 'Reason unknown, please contact support' }}
+  </div>
+</div>
+
+<div class="details-table__row">
+  <div class="details-table__key">
+    Provider:
+  </div>
+  <div class="details-table__value">
+    <a ui-sref="organizations.details({
+      uuid: resource.customer_uuid,
+      tab: 'providers',
+      providerUuid: resource.service_uuid,
+      providerType: resource.service_type})">
+      {{ ::resource.service_name }}
+    </a>
+  </div>
+</div>
+
+<div class="details-table__row">
+  <div class="details-table__key">
+    Access:
+  </div>
+  <div class="details-table__value">
+    <a ng-if="resource.access_info_url"
+       href="{{ resource.access_info_url }}"
+       target="_blank">
+        {{ resource.access_info_text }}
+    </a>
+    <span ng-if="!resource.access_info_url">
+      {{ resource.access_info_text }}
+    </span>
+  </div>
+</div>
+
+<div class="details-table__row" ng-if="resource.key_name">
+  <div class="details-table__key">
+    SSH key:
+  </div>
+  <div class="details-table__value">
+    <span ng-bind="resource.key_name"></span>
+  </div>
+</div>
+
+<div class="details-table__row">
+  <div class="details-table__key">
+    Created:
+  </div>
+  <div class="details-table__value">
+    <span am-time-ago="::resource.created"></span>,
+    {{ ::resource.created | dateTime }}
+  </div>
+</div>
+
+<div class="details-table__row" ng-if="::resource.related_resources.length">
+  <div class="details-table__key">
+    Links:
+  </div>
+  <div class="details-table__value">
+    <li ng-repeat="resource in resource.related_resources">
+      <a ui-sref="resources.details({uuid: resource.uuid, resource_type: resource.resource_type})">
+        {{ ::resource.resource_type }} {{ ::resource.name }}
+      </a>
+    </li>
+  </div>
+</div>
+
+<div class="details-table__row" ng-if="::resource.user_data">
+  <div class="details-table__key">
+    User data:
+  </div>
+  <div class="details-table__value">
+    {{ ::resource.user_data }}
+  </div>
+</div>

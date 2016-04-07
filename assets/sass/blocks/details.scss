@@ -305,7 +305,7 @@ $searchInputHeight: 32px;
       }
       .remove {
         font-size: 16px;
-        color: #f37121;
+        color: $destructive-color;
       }
     }
   }
@@ -512,6 +512,9 @@ $searchInputHeight: 32px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    a {
+      text-decoration: none;
+    }
   }
 
   span.cell-default-span {
@@ -706,15 +709,15 @@ $searchInputHeight: 32px;
 
 .details-table__row {
     display: flex;
-    padding-bottom: 10px;
+    padding: 10px;
     justify-content: space-between;
 }
 
 .details-table__key {
-    font-weight: bold;
     width: 100px;
     flex-grow: 0;
     flex-shrink: 0;
+    color: $gray-label;
 }
 
 .details-table__value {
@@ -727,6 +730,9 @@ $searchInputHeight: 32px;
       height: 32px;
       background: white;
       padding-left: 3px;
+    }
+    a {
+      text-decoration: none;
     }
 }
 
