@@ -125,7 +125,7 @@
     role: ['Role management events', 'user'],
     quota: ['Quota events', 'customer'],
     ssh: ['SSH key events', 'key'],
-    template: ['Template key events', 'resource']
+    template: ['Template events', 'resource']
   });
 
   var types = {};
