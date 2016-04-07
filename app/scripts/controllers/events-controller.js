@@ -46,6 +46,13 @@
             }
           ]
         };
+        this.expandableOptions = [
+          {
+            isList: false,
+            addItemBlock: false,
+            viewType: 'event'
+          }
+        ];
         this._super();
       },
       afterGetList: function() {
