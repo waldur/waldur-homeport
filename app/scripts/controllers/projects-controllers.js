@@ -318,6 +318,13 @@
               icon: 'resource'
             },
             {
+              title: 'Private clouds',
+              key: ENV.resourcesTypes.privateClouds,
+              viewName: 'tabPrivateClouds',
+              countFieldKey: 'private_clouds',
+              icon: 'cloud'
+            },
+            {
               title: 'Applications',
               key: ENV.resourcesTypes.applications,
               viewName: 'tabApplications',

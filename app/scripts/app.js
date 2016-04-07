@@ -289,6 +289,9 @@
             'tabApplications@projects.details' : {
               templateUrl: 'views/resource/tab-applications.html',
             },
+            'tabPrivateClouds@projects.details' : {
+              templateUrl: 'views/resource/tab-private-clouds.html',
+            },
             'tabBackups@projects.details' : {
               templateUrl: 'views/resource/tab-backups.html',
             },
@@ -453,6 +456,9 @@
             },
             'tabApplications@organizations.details' : {
               templateUrl: 'views/customer/tab-applications.html',
+            },
+            'tabPrivateClouds@organizations.details' : {
+              templateUrl: 'views/customer/tab-private-clouds.html',
             },
             'tabProjects@organizations.details': {
               templateUrl: 'views/customer/tab-projects.html',

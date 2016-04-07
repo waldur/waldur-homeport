@@ -160,6 +160,28 @@
 })();
 
 (function() {
+  angular.module('ncsaas')
+    .controller('CustomerPrivateCloudTabController', [
+      'BaseCustomerResourcesTabController', 'ENV',
+      CustomerPrivateCloudTabController
+    ]);
+
+  function CustomerPrivateCloudTabController(BaseCustomerResourcesTabController, ENV) {
+    var controllerScope = this;
+    var ResourceController = BaseCustomerResourcesTabController.extend({
+      init: function() {
+        this.controllerScope = controllerScope;
+        this.category = ENV.PrivateClouds;
+        this._super();
+        this.entityOptions.entityData.noMatchesText = 'No private clouds found matching filter.';
+        this.entityOptions.entityData.openMap = this.openMap.bind(this);
+      }
+    });
+    controllerScope.__proto__ = new ResourceController();
+  }
+})();
+
+(function() {
 
   angular.module('ncsaas')
     .controller('CustomerApplicationsTabController', [
