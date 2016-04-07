@@ -1,0 +1,70 @@
+<div class="details-table__row">
+  <div class="details-table__key">
+    Timestamp
+  </div>
+  <div class="details-table__value">
+    {{ ::expandableElement['@timestamp'] | dateTime }}
+  </div>
+</div>
+<div class="details-table__row">
+  <div class="details-table__key">
+    Importance
+  </div>
+  <div class="details-table__value">
+    {{ ::expandableElement.importance | titleCase }}
+  </div>
+</div>
+<div class="details-table__row">
+  <div class="details-table__key">
+    Event type
+  </div>
+  <div class="details-table__value">
+    {{ ::expandableElement.event_type }}
+  </div>
+</div>
+<div class="details-table__row" ng-if="::expandableElement.error_message">
+  <div class="details-table__key">
+    Error message
+  </div>
+  <div class="details-table__value">
+    {{ ::expandableElement.error_message }}
+  </div>
+</div>
+<div class="details-table__row" ng-if="::expandableElement.project_uuid">
+  <div class="details-table__key">
+    Project
+  </div>
+  <div class="details-table__value">
+    <a ui-sref="projects.details({uuid: expandableElement.project_uuid })">
+      {{ ::expandableElement.project_name }}
+    </a>
+  </div>
+</div>
+<div class="details-table__row" ng-if="::expandableElement.service_uuid">
+  <div class="details-table__key">
+    Service
+  </div>
+  <div class="details-table__value">
+    <a ui-sref="organizations.details({
+      uuid: expandableElement.customer_uuid,
+      tab: 'providers',
+      providerUuid: expandableElement.service_uuid,
+      providerType: expandableElement.service_type
+    })">
+      {{ ::expandableElement.service_name }}
+    </a>
+  </div>
+</div>
+<div class="details-table__row" ng-if="::expandableElement.resource_uuid">
+  <div class="details-table__key">
+    Resource
+  </div>
+  <div class="details-table__value">
+    <a ui-sref="resources.details({
+      uuid: expandableElement.resource_uuid,
+      resource_type: expandableElement.resource_type
+    })">
+      {{ ::expandableElement.resource_full_name }}
+    </a>
+  </div>
+</div>
