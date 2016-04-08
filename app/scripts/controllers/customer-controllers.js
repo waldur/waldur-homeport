@@ -220,6 +220,13 @@
           ],
           tabs: [
             {
+              title: 'Sizing',
+              key: 'sizing',
+              viewName: 'tabSizing',
+              icon: 'calculator',
+              count: -1
+            },
+            {
               title: 'Events',
               key: 'eventlog',
               viewName: 'tabEventlog',

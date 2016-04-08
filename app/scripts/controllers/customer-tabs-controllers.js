@@ -657,19 +657,19 @@
 
 (function() {
   angular.module('ncsaas')
-      .controller('CustomerDeleteTabController', [
-        'baseControllerClass',
-        'customersService',
-        'currentStateService',
-        '$state',
-        CustomerDeleteTabController
-      ]);
+    .controller('CustomerDeleteTabController', [
+      'baseControllerClass',
+      'customersService',
+      'currentStateService',
+      '$state',
+      CustomerDeleteTabController
+    ]);
 
   function CustomerDeleteTabController(
-      baseControllerClass,
-      customersService,
-      currentStateService,
-      $state
+    baseControllerClass,
+    customersService,
+    currentStateService,
+    $state
   ) {
     var controllerScope = this;
     var DeleteController = baseControllerClass.extend({
@@ -700,6 +700,29 @@
     });
 
     controllerScope.__proto__ = new DeleteController();
+  }
+
+})();
+
+(function() {
+  angular.module('ncsaas')
+    .controller('CustomerSizingTabController', [
+      'baseControllerClass',
+      CustomerSizingTabController
+    ]);
+
+  function CustomerSizingTabController(
+    baseControllerClass
+  ) {
+    var controllerScope = this;
+    var SizingController = baseControllerClass.extend({
+      init: function() {
+        this.controllerScope = controllerScope;
+        this._super();
+      }
+    });
+
+    controllerScope.__proto__ = new SizingController();
   }
 
 })();

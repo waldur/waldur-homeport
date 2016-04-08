@@ -1,0 +1,136 @@
+<section class="tab-sizing" ng-controller="CustomerSizingTabController as CustomerSizing">
+    <ul class="sizing-list">
+        <li class="open">
+            <header>
+                <div class="title">
+                    <h2>Monator offer</h2>
+                    <span>email to: john@monator.com</span>
+                </div>
+                <div class="btn-set">
+                    <a href="#" class="button">New</a>
+                    <a href="#" class="button">Clone</a>
+                </div>
+                <div class="btn-set">
+                    <a href="#" class="button">Send</a>
+                    <a href="#" class="button">Provision</a>
+                </div>
+            </header>
+            <main>
+                <section>
+                    <aside class="left">
+                        <h3>Add infrastructure</h3>
+                        <ul>
+                            <li><a href="#">WebServer</a></li>
+                            <li>
+                                <a href="#">Database</a>
+                                <ul>
+                                    <li><a href="#">MySQL</a></li>
+                                    <li><a href="#">MSSQL</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">WebServer</a></li>
+                            <li><a href="#">WebServer</a></li>
+                            <li><a href="#">WebServer</a></li>
+
+                        </ul>
+                    </aside>
+                    <section class="view">
+                        <h3>Stack planning view</h3>
+                        <ul>
+                            <li>
+                                <div class="name">
+                                    <h4>WebServer</h4>
+                                    <span>Apache</span>
+                                </div>
+                                <div class="switch-wrapper">
+                                    <input type="checkbox" ng-model="switch1" name="switch-1" id="switch-1">
+                                    <label for="switch-1">
+                                        <span>Optimal</span>
+                                        <span>Large</span>
+                                        <div class="slider">
+                                            {{ switch1 ? 'Optimal' : 'Large' }}
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="multiplier">
+                                    <span>x</span>
+                                    <input type="number">
+                                    <button class="button minus">-</button>
+                                    <button class="button plus">+</button>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="name">
+                                    <h4>WebServer</h4>
+                                    <span>Apache</span>
+                                </div>
+                                <div class="switch-wrapper">
+                                    <input type="checkbox" ng-model="switch2" name="switch-2" id="switch-2">
+                                    <label for="switch-2">
+                                        <span>Optimal</span>
+                                        <span>Large</span>
+                                        <div class="slider">
+                                            {{ switch2 ? 'Optimal' : 'Large' }}
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="multiplier">
+                                    <span>x</span>
+                                    <input type="number">
+                                    <button class="button minus">-</button>
+                                    <button class="button plus">+</button>
+                                </div>
+                            </li>
+                        </ul>
+                    </section>
+                    <aside class="right">
+                        <h3>Providers</h3>
+                        <div class="provider">
+                            <h4>AWS EC2</h4>
+                            <div class="price">
+                                <b>120</b>
+                                <span>USD/mo</span>
+                            </div>
+                        </div>
+                        <div class="provider">
+                            <h4>AWS EC2</h4>
+                            <div class="price">
+                                <b>120</b>
+                                <span>USD/mo</span>
+                            </div>
+                        </div>
+                    </aside>
+                </section>
+            </main>
+        </li>
+        <li>
+            <header>
+                <div class="title">
+                    <h2>Webapp for Monster Inc.</h2>
+                            <span>
+                                email to: john@monator.com
+                            </span>
+                </div>
+                <div class="price">
+                    <b>600</b>
+                    <span>USD/mo (DRAFT)</span>
+                </div>
+            </header>
+        </li>
+        <li>
+            <header>
+                <div class="title">
+                    <h2>Webapp for Monster Inc.</h2>
+                            <span>
+                                email to: john@monator.com
+                            </span>
+                </div>
+                <div class="price">
+                    <b>600</b>
+                    <span>USD/mo (DRAFT)</span>
+                </div>
+            </header>
+        </li>
+    </ul>
+
+</section>

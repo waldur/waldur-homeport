@@ -1,0 +1,206 @@
+.tab-sizing {
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .sizing-list {
+    >li {
+      @include clearfix;
+      margin-bottom: 10px;
+      padding: 5px;
+      border-radius: 4px;
+      header {
+        @include clearfix;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        border-bottom: 2px solid;
+        cursor: pointer;
+        .title {
+          float: left;
+          display: block;
+          padding-top: 9px;
+          h2 {
+            margin: 0;
+          }
+          span {
+
+          }
+        }
+        .btn-set {
+          display: none;
+          float: right;
+          padding-top: 20px;
+          margin-right:15px;
+          .button {
+
+          }
+        }
+        .price {
+          float: right;
+          height: 100%;
+          padding-top: 20px;
+          margin-right: 20px;
+        }
+
+      }
+      main {
+        @include clearfix;
+        display: none;
+        padding: 9px;
+        h3 {
+          text-align: center;
+        }
+        aside {
+          position: relative;
+          float: left;
+          &.left {
+            width: 19%;
+            border-right: 2px solid #fafafa;
+            padding-right: 5px;
+            ul {
+              li {
+                a {
+                  color: #333;
+                  text-decoration: none;
+                  padding: 5px;
+                  display: block;
+                  &:hover {
+                    background: #fafafa;
+                  }
+                }
+                ul {
+                  list-style: disc;
+                  padding-left: 20px;
+                  border-bottom: 1px solid;
+                }
+              }
+            }
+          }
+          &.right {
+            width: 24%;
+            border-left: 2px solid #fafafa;
+            padding-left: 5px;
+            .provider {
+              padding: 5px;
+              border: 1px solid;
+              margin-bottom: 5px;
+              h4 {
+                margin: 0;
+                font-weight:bold;
+              }
+              .price {
+                text-align: center;
+                padding: 10px 0;
+                b {
+                  font-size: 30px;
+                }
+                span {
+                  font-size: 24px;
+                }
+              }
+            }
+          }
+        }
+        .view {
+          float: left;
+          width: 55%;
+          margin: 0 1%;
+          ul {
+            li {
+              display: table;
+              width: 100%;
+              border-bottom: 1px solid #ccc;
+              height: 50px;
+              >div {
+                display: table-cell;
+                padding: 5px;
+                vertical-align: middle;
+                &.name {
+                  h4 {
+                    margin: 0;
+                    font-weight: bold;
+                  }
+                  span {
+
+                  }
+                }
+                &.switch-wrapper {
+                  input[type='checkbox'] {
+                    display: none;
+                    &+label {
+                      display: block;
+                      position: relative;
+                      border-radius: 4px;
+                      overflow: hidden;
+                      height: 30px;
+                      background: #fafafa;
+                      border: 1px solid #ccc;
+                      cursor: pointer;
+                      line-height: 30px;
+                      span {
+                        display: block;
+                        float: left;
+                        height: 100%;
+                        width: 50%;
+                        text-align: center;
+                      }
+                      .slider {
+                        position: absolute;
+                        width: 50%;
+                        height: 100%;
+                        right: 0;
+                        transition: all .3s ease;
+                        background: #ccc;
+                        text-align: center;
+                      }
+                    }
+                    &:checked+label {
+                      .slider {
+                        right: 50%;
+                      }
+                    }
+                  }
+                }
+                &.multiplier {
+                  text-align: center;
+                  span {
+
+                  }
+                  input {
+                    width: 70px;
+                    height: 30px;
+                    margin-right: 10px;
+                    text-align: center;
+                  }
+                  button {
+                    padding: 0;
+                    height: 30px;
+                    width: 30px;
+                    text-align: center;
+                    line-height: 20px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      &.open {
+        box-shadow: 1px 1px 11px rgba(0,0,0,.4);
+        header {
+          .btn-set {
+            display: block;
+          }
+          .price {
+            display: none;
+          }
+        }
+        main {
+          display: block;
+        }
+      }
+    }
+  }
+
+}
