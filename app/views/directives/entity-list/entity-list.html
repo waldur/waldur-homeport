@@ -210,7 +210,7 @@
                             <i class="icon {{ ::field.iconClass }}"></i>
                         </a>
 
-                        <span ng-switch-when="html" ng-bind-html="::entity[field.propertyName]"></span>
+                        <span ng-switch-when="html" ng-bind-html="entity[field.propertyName]"></span>
 
                         <span ng-switch-when="trimmed">
                             {{ entity[field.propertyName] | limitTo : field.limit }}
