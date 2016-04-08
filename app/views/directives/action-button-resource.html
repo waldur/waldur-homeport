@@ -4,6 +4,9 @@
     <ul ng-if="loading" class="actions-dropdown">
         Loading actions
     </ul>
+    <ul ng-if="buttonController.actionButtonsList[$id] && !loading" class="actions-dropdown">
+        There are no actions
+    </ul>
     <ul ng-if="buttonController.actionButtonsList[$id] && actions"
         class="actions-dropdown">
         <li ng-repeat="(name, action) in actions"

@@ -48,9 +48,9 @@
 
         function loadActions() {
           scope.loading = true;
-          actionUtilsService.loadActions(scope.buttonModel).then(function(response) {
-            if (response.actions) {
-              scope.actions = response.actions;
+          actionUtilsService.loadActions(scope.buttonModel).then(function(actions) {
+            if (actions) {
+              scope.actions = actions;
             }
           }).finally(function() {
             scope.loading = false;
