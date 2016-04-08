@@ -1,4 +1,4 @@
-<section class="tab-sizing" ng-controller="CustomerSizingTabController as CustomerSizing">
+<article class="tab-sizing" ng-controller="CustomerSizingTabController as CustomerSizing">
     <ul class="sizing-list">
         <li class="open">
             <header>
@@ -43,20 +43,22 @@
                                     <span>Apache</span>
                                 </div>
                                 <div class="switch-wrapper">
-                                    <input type="checkbox" ng-model="switch1" name="switch-1" id="switch-1">
-                                    <label for="switch-1">
-                                        <span>Optimal</span>
-                                        <span>Large</span>
+                                    <div  class="switch" ng-init="switch1 = 'first'" ng-class="switch1">
+                                        <span class="sub-label" ng-click="switch1 = 'first'">Optimal</span>
+                                        <span class="sub-label" ng-click="switch1 = 'second'">Average</span>
+                                        <span class="sub-label" ng-click="switch1 = 'third'">Large</span>
                                         <div class="slider">
-                                            {{ switch1 ? 'Optimal' : 'Large' }}
+                                            <span class="first">Optimal</span>
+                                            <span class="second">Average</span>
+                                            <span class="third">Large</span>
                                         </div>
-                                    </label>
+                                    </div>
                                 </div>
                                 <div class="multiplier">
                                     <span>x</span>
-                                    <input type="number">
-                                    <button class="button minus">-</button>
-                                    <button class="button plus">+</button>
+                                    <input type="number"  ng-model="value">
+                                    <button class="button minus" ng-click="value = value > 0 ? value - 1 : value">-</button>
+                                    <button class="button plus" ng-click="value = value + 1">+</button>
                                 </div>
                             </li>
                             <li>
@@ -65,34 +67,36 @@
                                     <span>Apache</span>
                                 </div>
                                 <div class="switch-wrapper">
-                                    <input type="checkbox" ng-model="switch2" name="switch-2" id="switch-2">
-                                    <label for="switch-2">
-                                        <span>Optimal</span>
-                                        <span>Large</span>
+                                    <div  class="switch" ng-init="switch2 = 'first'" ng-class="switch2">
+                                        <span class="sub-label" ng-click="switch2 = 'first'">Optimal</span>
+                                        <span class="sub-label" ng-click="switch2 = 'second'">Average</span>
+                                        <span class="sub-label" ng-click="switch2 = 'third'">Large</span>
                                         <div class="slider">
-                                            {{ switch2 ? 'Optimal' : 'Large' }}
+                                            <span class="first">Optimal</span>
+                                            <span class="second">Average</span>
+                                            <span class="third">Large</span>
                                         </div>
-                                    </label>
+                                    </div>
                                 </div>
                                 <div class="multiplier">
                                     <span>x</span>
-                                    <input type="number">
-                                    <button class="button minus">-</button>
-                                    <button class="button plus">+</button>
+                                    <input type="number"  ng-model="value1">
+                                    <button class="button minus" ng-click="value1 = value1 > 0 ? value1 - 1 : value1">-</button>
+                                    <button class="button plus" ng-click="value1 = value1 + 1">+</button>
                                 </div>
                             </li>
                         </ul>
                     </section>
                     <aside class="right">
                         <h3>Providers</h3>
-                        <div class="provider">
+                        <div class="provider" ng-class="{active: provider1}" ng-click="provider1 = true; provider2 = false">
                             <h4>AWS EC2</h4>
                             <div class="price">
                                 <b>120</b>
                                 <span>USD/mo</span>
                             </div>
                         </div>
-                        <div class="provider">
+                        <div class="provider" ng-class="{active: provider2}" ng-click="provider2 = true; provider1 = false">
                             <h4>AWS EC2</h4>
                             <div class="price">
                                 <b>120</b>
@@ -107,9 +111,9 @@
             <header>
                 <div class="title">
                     <h2>Webapp for Monster Inc.</h2>
-                            <span>
-                                email to: john@monator.com
-                            </span>
+                    <span>
+                        email to: john@monator.com
+                    </span>
                 </div>
                 <div class="price">
                     <b>600</b>
@@ -121,9 +125,9 @@
             <header>
                 <div class="title">
                     <h2>Webapp for Monster Inc.</h2>
-                            <span>
-                                email to: john@monator.com
-                            </span>
+                    <span>
+                        email to: john@monator.com
+                    </span>
                 </div>
                 <div class="price">
                     <b>600</b>
@@ -133,4 +137,4 @@
         </li>
     </ul>
 
-</section>
+</article>

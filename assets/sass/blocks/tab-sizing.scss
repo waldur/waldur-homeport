@@ -56,17 +56,17 @@
           float: left;
           &.left {
             width: 19%;
-            border-right: 2px solid #fafafa;
+            border-right: 2px solid $table-gray;
             padding-right: 5px;
             ul {
               li {
                 a {
-                  color: #333;
+                  color: $dashboard-black;
                   text-decoration: none;
                   padding: 5px;
                   display: block;
                   &:hover {
-                    background: #fafafa;
+                    background: $table-gray;
                   }
                 }
                 ul {
@@ -79,12 +79,36 @@
           }
           &.right {
             width: 24%;
-            border-left: 2px solid #fafafa;
+            border-left: 2px solid $table-gray;
             padding-left: 5px;
             .provider {
               padding: 5px;
               border: 1px solid;
-              margin-bottom: 5px;
+              margin-bottom: 10px;
+              cursor: pointer;
+              &.active {
+                position: relative;
+                border: 1px solid $dashboard-green;
+                &:before {
+                  content: '\f00c';
+                  font-family: FontAwesome;
+                  -webkit-font-smoothing: antialiased;
+                  -moz-osx-font-smoothing: grayscale;
+                  text-align: center;
+                  background-color: $dashboard-green;
+                  color: $white;
+                  width: 18px;
+                  height: 18px;
+                  -webkit-border-radius: 100%;
+                  border-radius: 100%;
+                  position: absolute;
+                  left: 50%;
+                  margin-left: -9px;
+                  bottom: -9px;
+                  line-height: 19px;
+                  font-size: 12px;
+                }
+              }
               h4 {
                 margin: 0;
                 font-weight:bold;
@@ -110,7 +134,7 @@
             li {
               display: table;
               width: 100%;
-              border-bottom: 1px solid #ccc;
+              border-bottom: 1px solid $gray-text;
               height: 50px;
               >div {
                 display: table-cell;
@@ -126,38 +150,70 @@
                   }
                 }
                 &.switch-wrapper {
-                  input[type='checkbox'] {
-                    display: none;
-                    &+label {
+                  .switch {
+                    display: block;
+                    position: relative;
+                    border-radius: 4px;
+                    overflow: hidden;
+                    height: 30px;
+                    background: $table-gray;
+                    border: 1px solid $gray-text;
+                    cursor: pointer;
+                    line-height: 30px;
+                    .sub-label {
                       display: block;
-                      position: relative;
-                      border-radius: 4px;
-                      overflow: hidden;
-                      height: 30px;
-                      background: #fafafa;
-                      border: 1px solid #ccc;
-                      cursor: pointer;
-                      line-height: 30px;
+                      float: left;
+                      height: 100%;
+                      width: 33%;
+                      text-align: center;
+                    }
+                    .slider {
+                      position: absolute;
+                      width: 33%;
+                      height: 100%;
+                      left: 0;
+                      transition: all .3s ease;
+                      background: $gray-text;
+                      text-align: center;
                       span {
-                        display: block;
-                        float: left;
-                        height: 100%;
-                        width: 50%;
-                        text-align: center;
-                      }
-                      .slider {
                         position: absolute;
-                        width: 50%;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
                         height: 100%;
-                        right: 0;
                         transition: all .3s ease;
-                        background: #ccc;
-                        text-align: center;
+                        opacity: 0;
                       }
                     }
-                    &:checked+label {
+                    &.first {
                       .slider {
-                        right: 50%;
+                        left: 0%;
+                        span {
+                          &.first {
+                            opacity: 1;
+                          }
+                        }
+                      }
+                    }
+                    &.second {
+                      .slider {
+                        left: 33.33%;
+                        span {
+                          &.second {
+                            opacity: 1;
+                          }
+                        }
+                      }
+                    }
+                    &.third {
+                      .slider {
+                        left: 67%;
+                        right: 0;
+                        span {
+                          &.third {
+                            opacity: 1;
+                          }
+                        }
                       }
                     }
                   }
@@ -172,6 +228,7 @@
                     height: 30px;
                     margin-right: 10px;
                     text-align: center;
+                    padding-left: 14px;
                   }
                   button {
                     padding: 0;
