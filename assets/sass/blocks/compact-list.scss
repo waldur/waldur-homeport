@@ -50,10 +50,13 @@ $compact-list-border-color: #e5e5e5;
 .compact-list__header {
   cursor: pointer;
   padding: 5px;
+
+  &.background {
+    background: $select-bg-gray;
+  }
 }
 
 .compact-list__title {
-  font-weight: bold;
   padding-left: 10px;
   padding-right: 25px;
 }
@@ -61,6 +64,12 @@ $compact-list-border-color: #e5e5e5;
 .compact-list__title a {
   text-decoration: none;
   color: #4078c0;
+}
+
+.compact-list__action {
+  position: absolute;
+  top: 0;
+  right: 0px;
 }
 
 .compact-list__right {

@@ -356,21 +356,16 @@
 
       scheduleRefresh: function() {
         var vm = this;
-        vm.updateStatus();
 
         var refreshPromise = $interval(function() {
           vm.getModel().then(function(model) {
             vm.model = model;
-            vm.updateStatus();
           });
         }, ENV.resourcesTimerInterval * 1000);
 
         $scope.$on('$destroy', function() {
           $interval.cancel(refreshPromise);
         });
-      },
-      updateStatus: function() {
-        this.inProgress = (ENV.resourceStateColorClasses[this.model.state] === 'processing');
       },
       modelNotFound: function() {
         currentStateService.getProject().then(function() {

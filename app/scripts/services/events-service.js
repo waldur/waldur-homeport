@@ -2,9 +2,10 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('eventsService', ['baseServiceClass', 'ENV', 'EVENT_ICONS_TYPES', 'EVENT_TEMPLATES', eventsService]);
+    .service('eventsService', [
+      'baseServiceClass', 'ENV', 'EVENT_ICONS_TYPES', 'EVENT_TEMPLATES', '$q', eventsService]);
 
-  function eventsService(baseServiceClass, ENV, EVENT_ICONS_TYPES, EVENT_TEMPLATES) {
+  function eventsService(baseServiceClass, ENV, EVENT_ICONS_TYPES, EVENT_TEMPLATES, $q) {
     /*jshint validthis: true */
     var ServiceClass = baseServiceClass.extend({
       init: function() {
@@ -17,6 +18,35 @@
         if (!ENV.featuresVisible) {
           this.defaultFilter.exclude_features = ENV.toBeFeatures;
         }
+      },
+      getResourceEvents: function (resource) {
+        // Dummy data
+        return $q.when([
+          {
+            name: 'Up',
+            timestamp: '2016-01-05T18:26:04Z'
+          },
+          {
+            name: 'Down',
+            timestamp: '2016-01-10T13:20:24Z'
+          },
+          {
+            name: 'Up',
+            timestamp: '2016-01-05T18:26:04Z'
+          },
+          {
+            name: 'Down',
+            timestamp: '2016-01-10T13:20:24Z'
+          },
+          {
+            name: 'Up',
+            timestamp: '2016-01-05T18:26:04Z'
+          },
+          {
+            name: 'Down',
+            timestamp: '2016-01-10T13:20:24Z'
+          }
+        ]);
       },
       getAvailableIconTypes: function() {
         var icons = [],

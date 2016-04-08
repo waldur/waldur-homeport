@@ -2,11 +2,46 @@
   <h3>Loading resource</h3>
 </div>
 <div ng-if="controller.model">
-  <resource-details resource="controller.model"></resource-details>
-
-  <action-list-resource
-    entity="controller.model"
-    controller="controller"
-    ng-if="controller.model">
-  </action-list-resource>
+  <div class="resource-details">
+    <div class="compact-list__item main">
+      <div class="compact-list__header background">
+        <div class="compact-list__title">
+          Resource details
+        </div>
+        <div class="compact-list__action">
+          <action-button-resource
+            button-controller="controller"
+            button-model="controller.model">
+          </action-button-resource>
+        </div>
+      </div>
+      <div class="compact-list__details">
+        <resource-details resource="controller.model"></resource-details>
+      </div>
+    </div>
+    <div class="compact-list__item sidebar">
+      <div class="compact-list__header background">
+        <div class="compact-list__title">
+          Latest status events
+        </div>
+      </div>
+      <div class="compact-list__details">
+        <resource-events resource="controller.model"></resource-events>
+      </div>
+    </div>
+  </div>
+  <div class="compact-list__item" ng-if="::controller.model.user_data">
+    <div class="compact-list__header"
+         ng-click="controller.expandUserData = !controller.expandUserData">
+      <div class="compact-list__title">
+        User data
+      </div>
+      <div class="compact-list__right">
+        <expandable-indicator open="controller.expandUserData"></expandable-indicator>
+      </div>
+    </div>
+    <div class="compact-list__details" ng-if="controller.expandUserData">
+      <pre>{{ ::controller.model.user_data }}</pre>
+    </div>
+  </div>
 </div>
