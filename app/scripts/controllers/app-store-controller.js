@@ -184,6 +184,14 @@
           }
         }
       },
+      filterResources: function(item) {
+        if (this.selectedCategory.name === 'VMs' && item === 'Tenant') {
+          return false
+        } else if (this.selectedCategory.name === 'Private clouds' && item === 'Instance') {
+          return false;
+        }
+        return true;
+      },
       setResourceType: function(type) {
         var vm = this;
         vm.selectedResourceType = type;

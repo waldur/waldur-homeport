@@ -117,6 +117,12 @@
               className: 'resources-count',
               emptyText: '0'
             });
+            this.entityOptions.list.push({
+              name: 'PCs',
+              propertyName: 'private_cloud_count',
+              className: 'resources-count',
+              emptyText: '0'
+            });
           }
           if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('premiumSupport') == -1) {
             this.entityOptions.list.push({
@@ -170,6 +176,8 @@
               project.app_count = quota.usage;
             } else if (quota.name == 'nc_vm_count') {
               project.vm_count = quota.usage;
+            } else if (quota.name == 'nc_private_cloud_count') {
+              project.private_cloud_count = quota.usage;
             }
           }
         },
