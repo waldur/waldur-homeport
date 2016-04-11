@@ -20,6 +20,8 @@
       'priceEstimationService',
       'keysService',
       'gitlabGroupsService',
+      '$document',
+      '$scope',
       AppStoreController]);
 
   function AppStoreController(
@@ -41,7 +43,9 @@
     projectsService,
     priceEstimationService,
     keysService,
-    gitlabGroupsService) {
+    gitlabGroupsService,
+    $document,
+    $scope) {
     var controllerScope = this;
     var Controller = baseControllerAddClass.extend({
       UNIQUE_FIELDS: {
@@ -100,6 +104,20 @@
         this.service = resourcesService;
         this.controllerScope = controllerScope;
         this._super();
+      },
+      modalInit: function(field) {
+        var vm = this;
+        field.showChoices = true;
+        $document.bind('keydown', function(e) {
+          if (e.which === 27) {
+            vm.closeModal(field);
+          }
+        });
+      },
+      closeModal: function(field) {
+        field.showChoices = false;
+        $document.unbind('keypress');
+        $scope.$apply();
       },
       activate:function() {
         var vm = this;
