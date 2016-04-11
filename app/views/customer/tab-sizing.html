@@ -20,18 +20,34 @@
                     <aside class="left">
                         <h3>Add infrastructure</h3>
                         <ul>
-                            <li><a href="#">WebServer</a></li>
-                            <li>
-                                <a href="#">Database</a>
+                            <li ng-model="item1" ng-class="item1">
+                                <a href="#" ng-click="item1 = item1 != 'open' ? 'open' : ''">WebServer</a>
+                                <ul>
+                                    <li><a href="#">server1</a></li>
+                                    <li><a href="#">server2</a></li>
+                                </ul>
+                            </li>
+                            <li ng-model="item2" ng-class="item2">
+                                <a href="#" ng-click="item2 = item2 != 'open' ? 'open' : ''">Database</a>
                                 <ul>
                                     <li><a href="#">MySQL</a></li>
                                     <li><a href="#">MSSQL</a></li>
                                 </ul>
                             </li>
-                            <li><a href="#">WebServer</a></li>
-                            <li><a href="#">WebServer</a></li>
-                            <li><a href="#">WebServer</a></li>
-
+                            <li ng-model="item3" ng-class="item3">
+                                <a href="#" ng-click="item3 = item3 != 'open' ? 'open' : ''">WebServer</a>
+                                <ul>
+                                    <li><a href="#">MySQL</a></li>
+                                    <li><a href="#">MSSQL</a></li>
+                                </ul>
+                            </li>
+                            <li ng-model="item4" ng-class="item4">
+                                <a href="#" ng-click="item4 = item4 != 'open' ? 'open' : ''">WebServer</a>
+                                <ul>
+                                    <li><a href="#">MySQL</a></li>
+                                    <li><a href="#">MSSQL</a></li>
+                                </ul>
+                            </li>
                         </ul>
                     </aside>
                     <section class="view">
@@ -89,14 +105,14 @@
                     </section>
                     <aside class="right">
                         <h3>Providers</h3>
-                        <div class="provider" ng-class="{active: provider1}" ng-click="provider1 = true; provider2 = false">
+                        <div class="provider">
                             <h4>AWS EC2</h4>
                             <div class="price">
                                 <b>120</b>
                                 <span>USD/mo</span>
                             </div>
                         </div>
-                        <div class="provider" ng-class="{active: provider2}" ng-click="provider2 = true; provider1 = false">
+                        <div class="provider">
                             <h4>AWS EC2</h4>
                             <div class="price">
                                 <b>120</b>
