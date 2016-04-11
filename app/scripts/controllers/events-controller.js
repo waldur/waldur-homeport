@@ -625,6 +625,10 @@
               var apps = item.usage;
               vm.currentUsageData.data.push({ label: apps + ' apps', count: apps, name: 'apps' })
             }
+            if (item.name === 'nc_private_cloud_count') {
+              var pcs = item.usage;
+              vm.currentUsageData.data.push({ label: pcs + ' pcs', count: pcs, name: 'pcs' })
+            }
           });
         });
       },
