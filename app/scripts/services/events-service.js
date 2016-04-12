@@ -20,33 +20,14 @@
         }
       },
       getResourceEvents: function (resource) {
-        // Dummy data
-        return $q.when([
-          {
-            name: 'Up',
-            timestamp: '2016-01-05T18:26:04Z'
-          },
-          {
-            name: 'Down',
-            timestamp: '2016-01-10T13:20:24Z'
-          },
-          {
-            name: 'Up',
-            timestamp: '2016-01-05T18:26:04Z'
-          },
-          {
-            name: 'Down',
-            timestamp: '2016-01-10T13:20:24Z'
-          },
-          {
-            name: 'Up',
-            timestamp: '2016-01-05T18:26:04Z'
-          },
-          {
-            name: 'Down',
-            timestamp: '2016-01-10T13:20:24Z'
-          }
-        ]);
+        return this.getList({scope: resource.url}).then(function(response) {
+          return response.map(function(event) {
+            return {
+              name: event.event_type.replace('resource_', '').replace('_', ' '),
+              timestamp: event['@timestamp']
+            }
+          });
+        });
       },
       getAvailableIconTypes: function() {
         var icons = [],

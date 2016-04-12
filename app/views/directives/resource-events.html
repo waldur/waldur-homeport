@@ -1,8 +1,13 @@
-<div class="details-table__row" ng-repeat="event in events">
-  <div class="details-table__key">
-    {{ ::event.name }}
-  </div>
-  <div class="details-table__value">
-    {{ ::event.timestamp | dateTime }}
-  </div>
+<div ng-if="events.length == 0">
+    Events are not available.
+</div>
+<div ng-if="events.length > 0">
+    <div class="details-table__row" ng-repeat="event in events">
+      <div class="details-table__key">
+        {{ ::event.name }}
+      </div>
+      <div class="details-table__value">
+        {{ ::event.timestamp | dateTime }}
+      </div>
+    </div>
 </div>

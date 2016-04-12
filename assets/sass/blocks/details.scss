@@ -664,9 +664,14 @@ $searchInputHeight: 32px;
 }
 
 .details-table__row {
-    display: flex;
-    padding: 10px;
-    justify-content: space-between;
+  display: flex;
+  padding: 10px;
+  justify-content: space-between;
+
+  @include bp(xs) {
+    flex-direction: column;
+    padding-left: 0px;
+  }
 }
 
 .details-table__key {
@@ -674,11 +679,22 @@ $searchInputHeight: 32px;
     flex-grow: 0;
     flex-shrink: 0;
     color: $gray-label;
+
+    @include bp(xs) {
+      width: auto;
+    }
 }
 
 .details-table__value {
     flex-grow: 1;
     margin-left: 6px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    @include bp(xs) {
+      margin-left: 0px;
+    }
+
     select {
       border-radius: 4px;
       width: 100%;
@@ -750,7 +766,7 @@ $searchInputHeight: 32px;
   }
 
   .sidebar {
-    flex-basis: 260px;
+    flex-basis: 300px;
     flex-shrink: 0;
   }
 }
