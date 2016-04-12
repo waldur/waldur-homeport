@@ -3,9 +3,9 @@
 (function() {
   angular.module('ncsaas')
     .service('eventsService', [
-      'baseServiceClass', 'ENV', 'EVENT_ICONS_TYPES', 'EVENT_TEMPLATES', '$q', eventsService]);
+      'baseServiceClass', 'ENV', 'EVENT_ICONS_TYPES', 'EVENT_TEMPLATES', eventsService]);
 
-  function eventsService(baseServiceClass, ENV, EVENT_ICONS_TYPES, EVENT_TEMPLATES, $q) {
+  function eventsService(baseServiceClass, ENV, EVENT_ICONS_TYPES, EVENT_TEMPLATES) {
     /*jshint validthis: true */
     var ServiceClass = baseServiceClass.extend({
       init: function() {
