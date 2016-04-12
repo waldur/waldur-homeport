@@ -20,32 +20,12 @@
                     <aside class="left">
                         <h3>Add infrastructure</h3>
                         <ul>
-                            <li ng-model="item1" ng-class="item1">
-                                <a href="#" ng-click="item1 = item1 != 'open' ? 'open' : ''">WebServer</a>
+                            <li ng-repeat="inf in CustomerSizing.infrastructures" ng-class="inf.open">
+                                <a ng-click="inf.open = inf.open != 'open' ? 'open' : ''">{{ inf.type }}</a>
                                 <ul>
-                                    <li><a href="#">server1</a></li>
-                                    <li><a href="#">server2</a></li>
-                                </ul>
-                            </li>
-                            <li ng-model="item2" ng-class="item2">
-                                <a href="#" ng-click="item2 = item2 != 'open' ? 'open' : ''">Database</a>
-                                <ul>
-                                    <li><a href="#">MySQL</a></li>
-                                    <li><a href="#">MSSQL</a></li>
-                                </ul>
-                            </li>
-                            <li ng-model="item3" ng-class="item3">
-                                <a href="#" ng-click="item3 = item3 != 'open' ? 'open' : ''">WebServer</a>
-                                <ul>
-                                    <li><a href="#">MySQL</a></li>
-                                    <li><a href="#">MSSQL</a></li>
-                                </ul>
-                            </li>
-                            <li ng-model="item4" ng-class="item4">
-                                <a href="#" ng-click="item4 = item4 != 'open' ? 'open' : ''">WebServer</a>
-                                <ul>
-                                    <li><a href="#">MySQL</a></li>
-                                    <li><a href="#">MSSQL</a></li>
+                                    <li ng-repeat="view in inf.views">
+                                        <a ng-click="CustomerSizing.addView(inf.type, view)">{{ view }}</a>
+                                    </li>
                                 </ul>
                             </li>
                         </ul>
@@ -53,16 +33,16 @@
                     <section class="view">
                         <h3>Stack planning view</h3>
                         <ul>
-                            <li>
+                            <li ng-repeat="view in CustomerSizing.views">
                                 <div class="name">
-                                    <h4>WebServer</h4>
-                                    <span>Apache</span>
+                                    <h4>{{ view.type }}</h4>
+                                    <span>{{ view.name }}</span>
                                 </div>
                                 <div class="switch-wrapper">
-                                    <div  class="switch" ng-init="switch1 = 'first'" ng-class="switch1">
-                                        <span class="sub-label" ng-click="switch1 = 'first'">Small</span>
-                                        <span class="sub-label" ng-click="switch1 = 'second'">Average</span>
-                                        <span class="sub-label" ng-click="switch1 = 'third'">Large</span>
+                                    <div  class="switch" ng-init="view.switch = 'first'" ng-class="view.switch">
+                                        <span class="sub-label" ng-click="view.switch = 'first'">Small</span>
+                                        <span class="sub-label" ng-click="view.switch = 'second'">Average</span>
+                                        <span class="sub-label" ng-click="view.switch = 'third'">Large</span>
                                         <div class="slider">
                                             <span class="first">Small</span>
                                             <span class="second">Average</span>
@@ -72,33 +52,9 @@
                                 </div>
                                 <div class="multiplier">
                                     <span>x</span>
-                                    <input type="number"  ng-model="value">
-                                    <button class="button minus" ng-click="value = value > 0 ? value - 1 : value">-</button>
-                                    <button class="button plus" ng-click="value = value + 1">+</button>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="name">
-                                    <h4>WebServer</h4>
-                                    <span>Apache</span>
-                                </div>
-                                <div class="switch-wrapper">
-                                    <div  class="switch" ng-init="switch2 = 'first'" ng-class="switch2">
-                                        <span class="sub-label" ng-click="switch2 = 'first'">Small</span>
-                                        <span class="sub-label" ng-click="switch2 = 'second'">Average</span>
-                                        <span class="sub-label" ng-click="switch2 = 'third'">Large</span>
-                                        <div class="slider">
-                                            <span class="first">Small</span>
-                                            <span class="second">Average</span>
-                                            <span class="third">Large</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="multiplier">
-                                    <span>x</span>
-                                    <input type="number"  ng-model="value1">
-                                    <button class="button minus" ng-click="value1 = value1 > 0 ? value1 - 1 : value1">-</button>
-                                    <button class="button plus" ng-click="value1 = value1 + 1">+</button>
+                                    <input type="number"  ng-model="view.count">
+                                    <button class="button minus" ng-click="view.count = view.count > 0 ? view.count - 1 : view.count">-</button>
+                                    <button class="button plus" ng-click="view.count = view.count + 1">+</button>
                                 </div>
                             </li>
                         </ul>

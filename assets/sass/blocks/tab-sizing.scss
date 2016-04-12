@@ -132,12 +132,11 @@
                 padding: 5px;
                 vertical-align: middle;
                 &.name {
+                  width: 20%;
+
                   h4 {
                     margin: 0;
                     font-weight: bold;
-                  }
-                  span {
-
                   }
                 }
                 &.switch-wrapper {

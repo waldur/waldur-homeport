@@ -719,6 +719,62 @@
       init: function() {
         this.controllerScope = controllerScope;
         this._super();
+        this.views = [
+          {
+            type: 'WebServer',
+            name: 'Apache',
+            count: 0
+          },
+          {
+            type: 'Database',
+            name: 'MySQL',
+            count: 0
+          }
+        ];
+
+        this.infrastructures = [
+          {
+            type: 'WebServer',
+            views: [
+              'server1',
+              'server2'
+            ]
+          },
+          {
+            type: 'Database',
+            views: [
+              'MySQL',
+              'MSSQL'
+            ]
+          },
+          {
+            type: 'WebServer2',
+            views: [
+              'server1',
+              'server2'
+            ]
+          },
+          {
+            type: 'WebServer3',
+            views: [
+              'server1',
+              'server2'
+            ]
+          }
+        ];
+      },
+      addView: function(type, name) {
+        for (var i = 0; this.views.length > i; i++) {
+          if (this.views[i].type === type && this.views[i].name === name) {
+            this.views[i].count++;
+            return;
+          }
+        }
+        this.views.push({
+          type: type,
+          name: name,
+          count: 0
+        });
       }
     });
 
