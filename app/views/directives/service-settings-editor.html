@@ -1,7 +1,6 @@
 <div>
     <div class="short-form full" ng-if="service.editable">
-        <div class="form-row" ng-repeat="field in service.fields"
-             ng-if="field.name != 'dummy'">
+        <div class="form-row" ng-repeat="field in service.fields">
             <div class="col label">
                 <label for="{{ ::service.uuid }}_{{ ::field.name }}">
                     <helpicon help-text="{{ ::field.help_text }}" ng-if="::field.help_text"></helpicon>

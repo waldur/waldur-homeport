@@ -37,7 +37,7 @@
           deferred.resolve(vm.service_options);
         } else {
           vm.service_options = {};
-          var blacklist = ['name', 'cpu_overcommit_ratio', 'dummy'];
+          var blacklist = ['name', 'cpu_overcommit_ratio'];
           var types = ['string', 'choice', 'boolean', 'url', 'file upload'];
 
           vm.getServicesList().then(function(services) {
