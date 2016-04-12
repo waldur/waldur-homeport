@@ -11,6 +11,7 @@
             'usersService',
             '$q',
             '$rootScope',
+            '$document',
             addTeamMember]);
 
     function addTeamMember(
@@ -20,7 +21,8 @@
         projectsService,
         usersService,
         $q,
-        $rootScope
+        $rootScope,
+        $document
     ) {
         return {
             restrict: 'E',
@@ -47,6 +49,10 @@
                 scope.changeRoleHelpMessage = "You cannot change your own role";
                 var editUserRole;
 
+                scope.$on('$destroy', function() {
+                    $document.unbind('keypress');
+                });
+
                 currentStateService.getCustomer().then(function(response) {
                     scope.currentCustomer = response;
                 });
@@ -58,6 +64,14 @@
                 scope.$watch('editUser', function(user) {
                     if (user) {
                         populatePopupModel(user);
+                    }
+                });
+
+                $document.bind('keydown', function(e) {
+                    if (e.which === 27) {
+                        cancel();
+                        $document.unbind('keypress');
+                        scope.$apply();
                     }
                 });
 

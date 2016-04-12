@@ -45,7 +45,7 @@ angular.module('ncsaas')
         name: 'VMs',
         type: 'provider',
         icon: 'desktop',
-        services: ['DigitalOcean', 'Azure', 'Amazon']
+        services: ['DigitalOcean', 'Azure', 'Amazon', 'OpenStack']
       },
       {
         name: 'Private clouds',

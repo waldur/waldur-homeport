@@ -122,10 +122,10 @@
                 var colours;
                 switch (chartType) {
                     case 'resources':
-                        colours = d3.scale.category20c();
+                        colours = d3.scale.category10();
                         break;
                     case 'services':
-                        colours = d3.scale.category10();
+                        colours = d3.scale.category20c();
                         break;
                     default:
                         colours = d3.scale.category20c();
@@ -189,7 +189,7 @@
 
                 svg.append('rect')
                     .attr('fill', '#eee')
-                    .attr('width', 160)
+                    .attr('width', 320)
                     .attr('height', 30 * dataset.length)
                     .attr('x', width+ 20)
                     .attr('y', 0);
@@ -205,8 +205,11 @@
                                 case 'VMs':
                                     link = 'vms';
                                     break;
-                                case 'Apps':
+                                case 'Applications':
                                     link = 'applications';
+                                    break;
+                                case 'Private clouds':
+                                    link = 'privateClouds';
                                     break;
                                 default:
                                     break;
@@ -218,7 +221,7 @@
                         .attr('fill', colours(i))
                         .attr('width', 60)
                         .attr('height', 20)
-                        .attr('x', width + 110)
+                        .attr('x', width + 135)
                         .attr('y', i * 24 + 6);
                 });
 

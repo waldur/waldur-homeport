@@ -83,27 +83,6 @@
         }
         return deferred.promise;
       },
-      getResourceTypes: function(category) {
-        var vm = this;
-        var services = this.getServiceTypes(category);
-        return this.getServicesList().then(function(metadata) {
-          var types = [];
-          for (var i = 0; i < services.length; i++) {
-            var service = services[i];
-            if (!metadata[service]) {
-              continue;
-            }
-            var resources = metadata[service].resources;
-            for (var resource in resources) {
-              types.push(vm.formatResourceType(service, resource));
-            }
-          }
-          return types;
-        });
-      },
-      formatResourceType: function(service, resource) {
-        return service + '.' + resource;
-      },
       getServiceTypes: function(category) {
         // All -> ['OpenStack', 'Azure', 'GitLab', 'Oracle']
         // VMs -> ['OpenStack', 'Azure']

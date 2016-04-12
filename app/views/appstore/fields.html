@@ -101,7 +101,7 @@
         </div>
         <div class="col input input-full">
             <label>
-                <a ng-click="field.showChoices=!field.showChoices">
+                <a ng-click="AppStore.modalInit(field)">
                     {{ AppStore.choiceDisplay[field.name] || 'Show choices' }}
                     <i class="icon fa-caret-down"></i>
                 </a>
@@ -144,7 +144,8 @@
 
                 <div class="clear"></div>
                 <div class="control-buttons">
-                    <a class="button-apply" ng-click="field.showChoices=false">OK</a>
+                    <a class="button-apply" ng-click="AppStore.closeModal(field)">OK</a>
+                    <a class="button-cancel" ng-click="AppStore.closeModal(field)">Close</a>
                 </div>
             </div>
         </div>
@@ -162,7 +163,7 @@
             </div>
             <div class="col input input-full">
                 <label>
-                    <a ng-click="field.showChoices=!field.showChoices">
+                    <a ng-click="AppStore.modalInit(field)">
                         {{ AppStore.choiceDisplay[field.name] || 'Show choices' }}
                         <i class="icon fa-caret-down"></i>
                     </a>
@@ -217,7 +218,8 @@
                     </div>
                     <div class="clear"></div>
                     <div class="control-buttons">
-                        <a class="button-apply" ng-click="field.showChoices=false">OK</a>
+                        <a class="button-apply" ng-click="AppStore.closeModal(field)">OK</a>
+                        <a class="button-cancel" ng-click="AppStore.closeModal(field)">Close</a>
                     </div>
                 </div>
             </div>
