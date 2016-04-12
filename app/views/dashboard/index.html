@@ -10,10 +10,10 @@
             <li ng-class="{'active':activeTab == 'activity','inactive':activeTab !== 'activity'}">
                 <a ui-sref="{tab:'activity'}" ng-click="activeTab = 'activity'">Activity</a>
             </li>
-            <li ng-class="{'active':activeTab == 'costs','inactive':activeTab !== 'costs'}">
+            <li ng-show="DashboardController.customerOwner" ng-class="{'active':activeTab == 'costs','inactive':activeTab !== 'costs'}">
                 <a ui-sref="{tab:'costs'}" ng-click="activeTab = 'costs'">Costs</a>
             </li>
-            <li ng-class="{'active':activeTab == 'resources','inactive':activeTab !== 'resources'}">
+            <li ng-show="DashboardController.customerOwner" ng-class="{'active':activeTab == 'resources','inactive':activeTab !== 'resources'}">
                 <a ui-sref="{tab:'resources'}" ng-click="activeTab = 'resources'">Resources</a>
             </li>
         </ul>
@@ -33,7 +33,7 @@
                 </div>
             </div>
         </div>
-        <div class="event-action-buttons" ng-show="activeTab == 'costs'">
+        <div class="event-action-buttons" ng-show="activeTab === 'costs' && DashboardController.customerOwner">
             <div visible="import" class="cost-tab-actions inline">
                 <div class="inline"
                      check-quotas="{{DashboardController.checkQuotasResource}}"
@@ -54,7 +54,7 @@
 
         <div class="clear"></div>
     </div>
-    <div ng-if="activeTab == 'costs'"
+    <div ng-if="activeTab == 'costs' && DashboardController.customerOwner"
          ng-class="{'active-content':activeTab === 'costs', 'inactive-content':activeTab !== 'costs'}">
          <div ui-view="costTab"></div>
     </div>
@@ -63,7 +63,7 @@
                     'inactive-content':activeTab !== 'activity'}">
         <div ui-view="activityTab"></div>
     </div>
-    <div ng-if="activeTab == 'resources'"
+    <div ng-if="activeTab == 'resources' && DashboardController.customerOwner"
          ng-class="{'active-content':activeTab === 'resources',
                     'inactive-content':activeTab !== 'resources'}">
         <div ui-view="resourcesTab"></div>
