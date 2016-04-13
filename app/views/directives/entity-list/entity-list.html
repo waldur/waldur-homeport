@@ -173,7 +173,7 @@
                             <i>{{ field.emptyText }}</i>
                         </span>
 
-                        <span class="dummy" ng-switch-when="linkOrText">
+                        <span ng-switch-when="linkOrText">
                             <a ng-if="entity[field.urlPropertyName]"
                                href="{{ entity[field.urlPropertyName] }}"
                                title="{{ entity[field.urlPropertyName] }}"
@@ -210,7 +210,7 @@
                             <i class="icon {{ ::field.iconClass }}"></i>
                         </a>
 
-                        <span ng-switch-when="html" ng-bind-html="::entity[field.propertyName]"></span>
+                        <span ng-switch-when="html" ng-bind-html="entity[field.propertyName]"></span>
 
                         <span ng-switch-when="trimmed">
                             {{ entity[field.propertyName] | limitTo : field.limit }}

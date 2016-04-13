@@ -26,6 +26,15 @@
       ncUtils) {
 
       var controllerClass = baseControllerListClass.extend({
+        expandableOptions: [
+          {
+            isList: false,
+            addItemBlock: false,
+            viewType: 'project-limits',
+            isOwner: false
+          }
+        ],
+
         init: function() {
           this.service = projectsService;
           this.checkPermissions();
@@ -52,14 +61,6 @@
             }
           ];
           var vm = this;
-          this.expandableOptions = [
-            {
-              isList: false,
-              addItemBlock: false,
-              viewType: 'project-limits',
-              isOwner: false
-            }
-          ];
           if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('resources') == -1) {
             currentStateService.isQuotaExceeded('resource').then(function(response) {
               if (!response) {
@@ -125,6 +126,12 @@
               className: 'resources-count',
               emptyText: '0'
             });
+            this.entityOptions.list.push({
+              name: 'PCs',
+              propertyName: 'private_cloud_count',
+              className: 'resources-count',
+              emptyText: '0'
+            });
           }
           if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('premiumSupport') == -1) {
             this.entityOptions.list.push({
@@ -153,6 +160,8 @@
           vm.userCanManageProjects = false;
           if (usersService.currentUser.is_staff) {
             vm.userCanManageProjects = true;
+            vm.expandableOptions[0].isOwner = true;
+            return;
           }
           currentStateService.getCustomer().then(function(customer) {
             for (var i = 0; i < customer.owners.length; i++) {
@@ -178,6 +187,8 @@
               project.app_count = quota.usage;
             } else if (quota.name == 'nc_vm_count') {
               project.vm_count = quota.usage;
+            } else if (quota.name == 'nc_private_cloud_count') {
+              project.private_cloud_count = quota.usage;
             }
           }
         },
@@ -324,6 +335,13 @@
               viewName: 'tabResources',
               countFieldKey: 'vms',
               icon: 'resource'
+            },
+            {
+              title: 'Private clouds',
+              key: ENV.resourcesTypes.privateClouds,
+              viewName: 'tabPrivateClouds',
+              countFieldKey: 'private_clouds',
+              icon: 'cloud'
             },
             {
               title: 'Applications',

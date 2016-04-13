@@ -66,6 +66,7 @@
         'project_group_creation_succeeded': 'Project group {project_group_name} has been created.',
         'project_group_deletion_succeeded': 'Project group {project_group_name} has been deleted.',
         'project_group_update_succeeded': 'Project group {project_group_name} has been updated.',
+        'project_name_update_succeeded': 'Project has been renamed from {project_previous_name} to {project_name}.',
         'project_removed_from_project_group': 'Project {project_name} has been removed from project group {project_group_name}.',
         'project_update_succeeded': 'Project {project_name} has been updated.',
         'quota_threshold_reached': '{quota_name} quota threshold has been reached for project {project_name}.',
@@ -125,7 +126,7 @@
     role: ['Role management events', 'user'],
     quota: ['Quota events', 'customer'],
     ssh: ['SSH key events', 'key'],
-    template: ['Template key events', 'resource']
+    template: ['Template events', 'resource']
   });
 
   var types = {};
@@ -218,6 +219,7 @@ angular.module('ncsaas').constant('EVENT_ICONS', {
     'project_group_creation_succeeded': 'project',
     'project_group_deletion_succeeded': 'project',
     'project_group_update_succeeded': 'project',
+    'project_name_update_succeeded': 'project',
     'project_removed_from_project_group': 'project',
     'project_update_succeeded': 'project',
     'quota_threshold_reached': 'customer',

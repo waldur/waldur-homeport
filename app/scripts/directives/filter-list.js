@@ -39,11 +39,7 @@
           if (values.length > 0) {
             controller.service.defaultFilter[filter.name] = values;
           } else {
-            if (controller.selectAll) {
-              selectAll();
-            } else {
-              delete controller.service.defaultFilter[filter.name];
-            }
+            delete controller.service.defaultFilter[filter.name];
           }
 
           controller.currentPage = 1;
@@ -51,17 +47,6 @@
           var searchFilter = {};
           searchFilter[controller.searchFieldName] = controller.searchInput;
           controller.getList(searchFilter);
-        }
-
-        function selectAll() {
-          for (var i = 0; i < controller.searchFilters.length; i++) {
-            var filter = controller.searchFilters[i];
-            controller.service.defaultFilter[filter.name] = [];
-          }
-          for (var i = 0; i < controller.searchFilters.length; i++) {
-            var filter = controller.searchFilters[i];
-            controller.service.defaultFilter[filter.name].push(filter.value);
-          }
         }
 
         function isFilterChosen(filter) {

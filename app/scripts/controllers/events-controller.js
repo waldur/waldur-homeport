@@ -46,6 +46,13 @@
             }
           ]
         };
+        this.expandableOptions = [
+          {
+            isList: false,
+            addItemBlock: false,
+            viewType: 'event'
+          }
+        ];
         this._super();
       },
       afterGetList: function() {
@@ -125,14 +132,28 @@
       '$scope',
       '$stateParams',
       'baseControllerClass',
+      'currentStateService',
+      'usersService',
       DashboardIndexController]);
 
-  function DashboardIndexController($scope, $stateParams, baseControllerClass) {
+  function DashboardIndexController($scope, $stateParams, baseControllerClass, currentStateService, usersService) {
     var controllerScope = this;
     var EventController = baseControllerClass.extend({
       init: function() {
         $scope.activeTab = $stateParams.tab || 'activity';
         this.checkQuotas = 'project';
+        var vm = this;
+
+        usersService.getCurrentUser().then(function(user) {
+          currentStateService.getCustomer().then(function(customer) {
+            for (var i = 0; customer.owners.length > i; i++) {
+              if (customer.owners[i].uuid === user.uuid) {
+                vm.customerOwner = true;
+                return;
+              }
+            }
+          });
+        });
       }
     });
 
@@ -493,5 +514,209 @@
     });
 
     controllerScope.__proto__ = new EventController();
+  }
+})();
+
+(function() {
+
+  angular.module('ncsaas')
+      .controller('DashboardResourcesController', [
+        'baseControllerClass',
+        'projectsService',
+        'currentStateService',
+        'priceEstimationService',
+        'ncUtils',
+        'ENV',
+        '$q',
+        '$filter',
+        DashboardResourcesController]);
+
+  function DashboardResourcesController(
+      baseControllerClass,
+      projectsService,
+      currentStateService,
+      priceEstimationService,
+      ncUtils,
+      ENV,
+      $q,
+      $filter) {
+    var controllerScope = this;
+    var Controller = baseControllerClass.extend({
+      showGraph: true,
+      currentCustomer: null,
+      init:function() {
+        this.controllerScope = controllerScope;
+        this.cacheTime = ENV.dashboardEventsCacheTime;
+        this._super();
+        this.activeTab = 'resources';
+        this.barChartTab ='vmsByProject';
+        this.activate();
+      },
+      activate: function() {
+        var vm = this;
+        var projectPromise = projectsService.getList().then(function(projects) {
+          vm.projectsList = projects;
+          return projects;
+        });
+        var quotasPromise = projectPromise.then(function(projects) {
+          return vm.getProjectsQuotas(projects).then(function(quotas) {
+            vm.formatProjectQuotas(quotas);
+          });
+        });
+        var barChartPromise = quotasPromise.then(function() {
+          vm.projectsList.showBarChart = true;
+          vm.setResourcesByProjectChartData();
+        });
+        var monthChartPromise = quotasPromise.then(function() {
+          vm.setMonthCostChartData();
+        });
+        ncUtils.blockElement('bar-chart', barChartPromise);
+        ncUtils.blockElement('month-cost-charts', monthChartPromise);
+        ncUtils.blockElement('pie-charts', this.setCurrentUsageChartData());
+      },
+      getProjectsQuotas: function(projects) {
+        // TODO: replace with data from relevant endpoint when ready
+        var factory = projectsService.getFactory(false, '/stats/quota/');
+        var promises = projects.map(function(project) {
+          var query = {
+            aggregate: 'project',
+            uuid: project.uuid,
+            quota_name: ['vcpu', 'ram', 'storage']
+          };
+          return factory.get(query).$promise.then(function(quotas) {
+            quotas.project = project;
+            return quotas;
+          });
+        });
+        return $q.all(promises);
+      },
+      formatProjectQuotas: function(quotas) {
+        quotas.forEach(function(quota) {
+          var project = quota.project;
+          project.vcpu = quota.vcpu_usage;
+          project.ram = $filter('mb2gb')(quota.ram_usage);
+          project.storage = $filter('mb2gb')(quota.storage_usage);
+        });
+      },
+      setCurrentUsageChartData: function() {
+        var vm = this;
+        return currentStateService.getCustomer().then(function(response) {
+          vm.currentCustomer = response;
+          vm.currentPlan = response.plan.name;
+          vm.resourcesLimit = null;
+          vm.resourcesUsage = null;
+
+          vm.currentUsageData = {
+            chartType: 'vms',
+            legendDescription: null,
+            legendLink: 'plans',
+            data: []
+          };
+          response.quotas.forEach(function(item) {
+            if (item.name === 'nc_resource_count') {
+              var limit;
+              if (item.limit != -1) {
+                var free = item.limit - item.usage;
+                limit = item.limit;
+                vm.currentUsageData.data.push({
+                  label: free + ' free',
+                  count: free,
+                  name: 'plans'
+                });
+                vm.currentUsageData.legendDescription = item.usage + " used / " + limit + " total";
+              } else {
+                vm.currentUsageData.legendDescription = item.usage + " used";
+                limit = 'unlimited';
+              }
+              vm.resourcesLimit = limit;
+              vm.resourcesUsage = item.usage;
+            }
+            if (item.name === 'nc_vm_count') {
+              var vms = item.usage;
+              vm.currentUsageData.data.push({ label: vms + ' VMs', count: vms, name: 'vms' });
+            }
+            if (item.name === 'nc_app_count') {
+              var apps = item.usage;
+              vm.currentUsageData.data.push({ label: apps + ' applications', count: apps, name: 'apps' })
+            }
+            if (item.name === 'nc_private_cloud_count') {
+              var pcs = item.usage;
+              vm.currentUsageData.data.push({ label: pcs + ' private clouds', count: pcs, name: 'private clouds' })
+            }
+          });
+        });
+      },
+      setMonthCostChartData: function() {
+        var vm = this;
+        return priceEstimationService.getList().then(function(rows) {
+          vm.priceEstimationRows = rows;
+          vm.monthCostChartData = {chartType: 'services', legendDescription: null, legendLink: 'providers', data: []};
+          vm.totalMonthCost = 0;
+          rows.forEach(function(item) {
+            if (item.scope_type === 'service' && vm.monthCostChartData.data.length < 5) {
+              var truncatedName = item.scope_name.length > 8 ?
+                  item.scope_name.slice(0, 8) + '..'  :
+                  item.scope_name;
+              vm.monthCostChartData.data.push({
+                label: truncatedName + ' ('+ ENV.currency + item.total +')',
+                count: item.total,
+                itemName: item.scope_name,
+                name: 'providers' });
+              vm.totalMonthCost += item.total;
+            }
+            vm.monthCostChartData.legendDescription = "Projected cost: " + ENV.currency + vm.totalMonthCost;
+          });
+          vm.setServicesByProjectChartData();
+        });
+      },
+      setServicesByProjectChartData: function() {
+        var vm = this;
+        vm.servicesByProjectChartData = {
+          data :[],
+          projects: vm.projectsList,
+          chartType: 'services'
+        };
+        vm.priceEstimationRows.forEach(function(priceRow) {
+          if (priceRow.scope_type === 'service' && vm.servicesByProjectChartData.data.length < 5) {
+            vm.servicesByProjectChartData.data.push({data: [], name: priceRow.scope_name});
+            vm.projectsList.forEach(function(project) {
+              var lastElem = vm.servicesByProjectChartData.data.length -1;
+              vm.servicesByProjectChartData.data[lastElem].data.push({project: project.uuid, count: priceRow.total});
+            });
+          }
+        });
+      },
+      setResourcesByProjectChartData: function() {
+        var vm = this;
+        vm.resourcesByProjectChartData = {
+          data :[{data: [], name: 'VMs'}, {data: [], name: 'Applications'}, {data: [], name: 'Private clouds'}],
+          projects: vm.projectsList,
+          chartType: 'resources'
+        };
+        vm.resourcesCount = 0;
+        vm.projectsList.forEach(function(item) {
+          item.quotas.forEach(function(itemQuota) {
+            if (itemQuota.name === 'nc_vm_count') {
+              vm.resourcesByProjectChartData.data[0].data.push({project: item.uuid, count: itemQuota.usage});
+              vm.resourcesCount += itemQuota.usage;
+            }
+            if (itemQuota.name === 'nc_app_count') {
+              vm.resourcesByProjectChartData.data[1].data.push({project: item.uuid, count: itemQuota.usage});
+              vm.resourcesCount += itemQuota.usage;
+            }
+            if (itemQuota.name === 'nc_private_cloud_count') {
+              vm.resourcesByProjectChartData.data[2].data.push({project: item.uuid, count: itemQuota.usage});
+              vm.resourcesCount += itemQuota.usage;            }
+
+          });
+        });
+      },
+      changeTab: function(tabName) {
+        this.barChartTab = this.totalMonthCost ? tabName : this.barChartTab;
+        return false
+      }
+    });
+
+    controllerScope.__proto__ = new Controller();
   }
 })();

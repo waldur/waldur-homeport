@@ -2,7 +2,7 @@
     <div class="step-title">
         <span>Step 1: Choose category</span>
     </div>
-    <div class="appstore-templates">
+    <div class="appstore-templates appstore-categories">
         <!-- category -->
         <div class="appstore-template appstore-category"
              ng-repeat="category in AppStore.categories"
@@ -60,7 +60,8 @@
         <div class="appstore-template {{name.toLowerCase()}}"
              ng-repeat="(name, resource) in AppStore.serviceMetadata.resources"
              ng-click="AppStore.setResourceType(name)"
-             ng-class="{'state': AppStore.selectedResourceType == name}">
+             ng-class="{'state': AppStore.selectedResourceType == name}"
+             ng-show="AppStore.filterResources(name)">
             <div class="icon">
                 <i class="fa"></i>
             </div>

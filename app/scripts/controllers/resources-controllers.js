@@ -2,35 +2,6 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('resourceUtils', ['ncUtils', 'authService', resourceUtils]);
-
-  function resourceUtils(ncUtils, authService) {
-    return {
-      setAccessInfo: function(item) {
-        item.access_info_text = 'No access info';
-        if (!item.access_url) {
-          return;
-        }
-
-        if (ncUtils.startsWith(item.access_url, "http")) {
-          item.access_info_url = item.access_url;
-          item.access_info_text = 'Open';
-
-          if (ncUtils.endsWith(item.access_url, "/rdp/")) {
-            item.access_info_text = 'Connect';
-            item.access_info_url = authService.getDownloadLink(item.access_url);
-          }
-        } else if (angular.isArray(item.access_url)) {
-          // IP addresses
-          item.access_info_text = item.access_url.join(', ');
-        } else {
-          item.access_info_text = item.access_url;
-        }
-      }
-    }
-  }
-
-  angular.module('ncsaas')
     .service('baseResourceListController',
     ['baseControllerListClass',
     'ENV',
@@ -63,12 +34,19 @@
       init: function() {
         this.service = resourcesService;
         this.blockUIElement = 'tab-content';
+
+        this.categories = {};
+        this.categories[ENV.VirtualMachines] = 'vms';
+        this.categories[ENV.Applications] = 'apps';
+        this.categories[ENV.PrivateClouds] = 'private_clouds';
+
         this._super();
         this.searchFieldName = 'name';
-        this.selectAll = true;
         this.hasCustomFilters = false;
+
         var currentCustomerUuid = currentStateService.getCustomerUuid();
         var vm = this;
+
         this.entityOptions = {
           entityData: {
             noDataText: 'You have no resources yet.',
@@ -149,7 +127,7 @@
         });
       },
       rowFields: [
-        'uuid', 'url', 'name', 'state', 'created', 'error_message',
+        'uuid', 'url', 'name', 'state', 'created', 'start_time', 'error_message',
         'resource_type', 'latitude', 'longitude', 'access_url',
         'service_name', 'service_type', 'service_uuid', 'related_resources'
       ],
@@ -208,58 +186,45 @@
         return false;
       },
       getList: function(filter) {
-        var vm = this;
-        filter = filter || {};
-        var fn = this._super.bind(this);
-        return this.adjustSearchFilters().then(function() {
-          angular.extend(filter, {field: vm.rowFields});
-          return fn(filter);
+        var query = angular.extend({}, filter, {
+          resource_category: this.categories[this.category],
+          field: this.rowFields
         });
+        this.updateFilters(filter);
+        return this._super(query);
+      },
+      updateFilters: function(filter) {
+        var query = angular.extend({
+          resource_category: this.categories[this.category],
+          customer: currentStateService.getCustomerUuid()
+        }, filter);
+        angular.forEach(this.service.defaultFilter, function(val, key) {
+          if (val != 'resource_type') {
+            query[val] = key;
+          }
+        });
+        return resourcesService.countByType(query).then(function(counts) {
+          this.searchFilters = this.getFilterByCounts(counts);
+        }.bind(this));
+      },
+      getFilterByCounts: function(counts) {
+        var filters = [];
+        angular.forEach(counts, function(count, resourceType) {
+          if (count > 0) {
+            filters.push({
+              name: 'resource_type',
+              title: resourceType.replace(".", " ") + ' (' + count + ')',
+              value: resourceType
+            });
+          }
+        });
+        return filters;
       },
       afterGetList: function() {
-        angular.forEach(this.list, resourceUtils.setAccessInfo);
         angular.forEach(this.list, function(resource) {
           resourcesService.cleanOptionsCache(resource.url);
         });
         this._super();
-      },
-      adjustSearchFilters: function() {
-        var vm = this,
-          resourcesCounts = null;
-
-        if (!this.hasCustomFilters) {
-          vm.service.defaultFilter.resource_type = [];
-        }
-
-        return servicesService.getResourceTypes(vm.category).then(function(types) {
-          if (!vm.hasCustomFilters) {
-            vm.service.defaultFilter.resource_type = types;
-          }
-          vm.types = angular.copy(vm.service.defaultFilter);
-          vm.types.resource_type = types;
-        }).then(function() {
-          return resourcesService.countByType(vm.types);
-        }).then(function(counts) {
-          resourcesCounts = counts;
-          return servicesService.getServicesList();
-        }).then(function(metadata) {
-          var filters = [];
-          for(var type in metadata) {
-            var service = metadata[type];
-            var resources = service.resources;
-            for (var resource in resources) {
-              var id = servicesService.formatResourceType(type, resource);
-              if (resourcesCounts[id] > 0) {
-                filters.push({
-                  name: 'resource_type',
-                  title: type + ' ' + resource + ' (' + resourcesCounts[id] + ')',
-                  value: id
-                });
-              }
-            }
-          }
-          vm.searchFilters = filters;
-        });
       },
       afterInstanceRemove: function(resource) {
         this._super(resource);
@@ -387,13 +352,11 @@
       scheduleRefresh: function() {
         var vm = this;
         vm.updateStatus();
-        resourceUtils.setAccessInfo(vm.model);
 
         var refreshPromise = $interval(function() {
           vm.getModel().then(function(model) {
             vm.model = model;
             vm.updateStatus();
-            resourceUtils.setAccessInfo(vm.model);
           });
         }, ENV.resourcesTimerInterval * 1000);
 

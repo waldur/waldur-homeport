@@ -1,9 +1,8 @@
 <div class="instruction-content-alerts" ng-if="HelpDetails.model">
     <div>
         <div ng-repeat="item in HelpDetails.model.types">
-            <div class="icon" ng-class="::item[0]">
-                <span class="left-padding" ng-bind-html="::item[1]"></span>
-            </div>
+            <b class="icon" ng-class="::item[0]"></b>
+            <span class="left-padding" ng-bind-html="::item[1]"></span>
             <ul>
                 <li ng-repeat="message in item[2]">{{message}}</li>
             </ul>
