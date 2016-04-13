@@ -4,7 +4,7 @@
 <div ng-if="events.length > 0">
     <div class="details-table__row" ng-repeat="event in events">
       <div class="details-table__key">
-        {{ ::event.name }}
+        {{ ::event.name | titleCase }}
       </div>
       <div class="details-table__value">
         {{ ::event.timestamp | dateTime }}

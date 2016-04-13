@@ -86,19 +86,30 @@ $compact-list-border-color: #e5e5e5;
 }
 
 .compact-list__action-list {
-  border-top: 1px solid $compact-list-border-color;
-  color: #888;
-  background-image: linear-gradient(#fcfcfc, #eee);
-  @include property(font-size, $small-font);
+  @include bp(xs) {
+    border: 1px solid $compact-list-border-color;
+    border-radius: 5px;
+  }
 }
 
 .compact-list__action-item {
-  display: inline-block;
-  padding: 3px 10px;
-  border-right: 1px solid $compact-list-border-color;
+  padding: 10px 0px;
 
-  &:last-of-type {
-    border-right: 0px;
+  a {
+    display: inline-block;
+    padding: 5px 15px;
+    border: 1px solid $compact-list-border-color;
+    border-radius: 5px;
+    margin: 5px;
+
+    @include bp(xs) {
+      display: block;
+      padding: 5px 10px;
+      border: none;
+      border-bottom: 1px solid $compact-list-border-color;
+      border-radius: 0px;
+      margin: 0px;
+    }
   }
 
   .disabled {

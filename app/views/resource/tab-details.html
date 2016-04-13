@@ -2,17 +2,15 @@
   <h3>Loading resource</h3>
 </div>
 <div ng-if="controller.model">
+  <action-list-resource
+    entity="controller.model"
+    controller="controller">
+  </action-list-resource>
   <div class="resource-details">
     <div class="compact-list__item main">
       <div class="compact-list__header background">
         <div class="compact-list__title">
           Resource details
-        </div>
-        <div class="compact-list__action">
-          <action-button-resource
-            button-controller="controller"
-            button-model="controller.model">
-          </action-button-resource>
         </div>
       </div>
       <div class="compact-list__details">
