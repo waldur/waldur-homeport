@@ -132,14 +132,28 @@
       '$scope',
       '$stateParams',
       'baseControllerClass',
+      'currentStateService',
+      'usersService',
       DashboardIndexController]);
 
-  function DashboardIndexController($scope, $stateParams, baseControllerClass) {
+  function DashboardIndexController($scope, $stateParams, baseControllerClass, currentStateService, usersService) {
     var controllerScope = this;
     var EventController = baseControllerClass.extend({
       init: function() {
         $scope.activeTab = $stateParams.tab || 'activity';
         this.checkQuotas = 'project';
+        var vm = this;
+
+        usersService.getCurrentUser().then(function(user) {
+          currentStateService.getCustomer().then(function(customer) {
+            for (var i = 0; customer.owners.length > i; i++) {
+              if (customer.owners[i].uuid === user.uuid) {
+                vm.customerOwner = true;
+                return;
+              }
+            }
+          });
+        });
       }
     });
 
