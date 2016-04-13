@@ -2,10 +2,6 @@
   <h3>Loading resource</h3>
 </div>
 <div ng-if="controller.model">
-  <action-list-resource
-    entity="controller.model"
-    controller="controller">
-  </action-list-resource>
   <div class="resource-details">
     <div class="compact-list__item main">
       <div class="compact-list__header background">
@@ -28,6 +24,10 @@
       </div>
     </div>
   </div>
+  <action-list-resource
+    entity="controller.model"
+    controller="controller">
+  </action-list-resource>
   <div class="compact-list__item" ng-if="::controller.model.user_data">
     <div class="compact-list__header"
          ng-click="controller.expandUserData = !controller.expandUserData">
