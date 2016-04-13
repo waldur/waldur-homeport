@@ -70,6 +70,22 @@ angular.module('ncsaas')
         services: ['Oracle', 'GitLab']
       }
     ],
+    resourceCategory: {
+        "Amazon.Instance": "vms",
+        "SaltStack.SharepointTenant": "apps",
+        "GitLab.Project": "apps",
+        "SugarCRM.CRM": "apps",
+        "Azure.VirtualMachine": "vms",
+        "IaaS.Instance": "vms",
+        "JIRA.Project": "apps",
+        "DigitalOcean.Droplet": "vms",
+        "OpenStack.Instance": "vms",
+        "SaltStack.ExchangeTenant": "apps",
+        "OpenStack.Tenant": "private_clouds",
+        "GitLab.Group": "apps",
+        "Zabbix.Host": "apps",
+        "Zabbix.ITService": "apps"
+    },
     showCompare: [
       'VMs'
     ],
@@ -131,8 +147,8 @@ angular.module('ncsaas')
     ],
     resourcesTypes: {
       vms: 'vms',
-      applications: 'applications',
-      privateClouds: 'privateClouds'
+      applications: 'apps',
+      privateClouds: 'private_clouds'
     },
     featuresVisible: false,
 

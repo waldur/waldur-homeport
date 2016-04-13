@@ -82,26 +82,6 @@
           })
         }
         return deferred.promise;
-      },
-      getServiceTypes: function(category) {
-        // All -> ['OpenStack', 'Azure', 'GitLab', 'Oracle']
-        // VMs -> ['OpenStack', 'Azure']
-        // Applications -> ['GitLab', 'Oracle']
-        // Invalid -> []
-        if (category == ENV.AllResources) {
-          var services = [];
-          for (var i = 0; i < ENV.appStoreCategories.length; i++) {
-            var item = ENV.appStoreCategories[i].services;
-            for (var j = 0; j < item.length; j++) {
-              services.push(item[j]);
-            }
-          }
-          return services;
-        } else if (ENV.appStoreCategories[category]) {
-          return ENV.appStoreCategories[category].services;
-        } else {
-          return [];
-        }
       }
     });
     return new ServiceClass();

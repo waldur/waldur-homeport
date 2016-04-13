@@ -332,13 +332,11 @@
       },
 
       updateResourceTab: function() {
-        var service_type = this.model.resource_type.split(".")[0];
-        var vm_services = servicesService.getServiceTypes(ENV.VirtualMachines);
-        var app_services = servicesService.getServiceTypes(ENV.Applications);
-        if (vm_services.indexOf(service_type) > -1) {
+        var resourceCategory = ENV.resourceCategory[this.model.resource_type];
+        if (resourceCategory) {
+          this.resourceTab = resourceCategory;
+        } else {
           this.resourceTab = ENV.resourcesTypes.vms;
-        } else if (app_services.indexOf(service_type) > -1) {
-          this.resourceTab = ENV.resourcesTypes.applications;
         }
       },
 
@@ -374,15 +372,13 @@
         });
       },
 
-      update:function() {
+      update: function() {
         var vm = this;
-        vm.model.$update(success, error);
-        function success() {
-          $state.go('resources.details', {'resource_type': $stateParams.resource_type, 'uuid': vm.model.uuid});
-        }
-        function error(response) {
+        vm.model.$update(function success() {
+          resourcesService.clearAllCacheForCurrentEndpoint();
+        }, function error(response) {
           vm.errors = response.data;
-        }
+        });
       }
     });
 
