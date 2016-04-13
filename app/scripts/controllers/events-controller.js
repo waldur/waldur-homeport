@@ -441,22 +441,23 @@
       getCustomerProjects: function() {
         var vm = this,
           pricesPromise = this.setProjectPrices(),
-          projectsPromise = projectsService.getList();
-        $q.all([pricesPromise, projectsPromise]).then(function(result) {
-          var projectsPrices = result[0];
-          vm.projects = result[1];
-          for (var i = 0; i < vm.projects.length; i++) {
-            vm.projects[i].selected = false;
-            vm.projects[i].cost = 0;
-            for (var j=0; j < projectsPrices.length; j++) {
-              if (vm.projects[i].url == projectsPrices[j].scope) {
-                vm.projects[i].cost += projectsPrices[j].total;
-                break;
+          projectsPromise = projectsService.getList(),
+          promise = $q.all([pricesPromise, projectsPromise]).then(function(result) {
+            var projectsPrices = result[0];
+            vm.projects = result[1];
+            for (var i = 0; i < vm.projects.length; i++) {
+              vm.projects[i].selected = false;
+              vm.projects[i].cost = 0;
+              for (var j=0; j < projectsPrices.length; j++) {
+                if (vm.projects[i].url == projectsPrices[j].scope) {
+                  vm.projects[i].cost += projectsPrices[j].total;
+                  break;
+                }
               }
             }
-          }
-          vm.selectProject(vm.projects[0]);
-        });
+            vm.selectProject(vm.projects[0]);
+          });
+        ncUtils.blockElement('dashboard-projects-list', promise)
       },
       getProjectCounters: function (project) {
         project.count = {};
