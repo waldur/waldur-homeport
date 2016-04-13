@@ -325,6 +325,13 @@
         return this.service.$get($stateParams.resource_type, $stateParams.uuid);
       },
 
+      reInitResource: function() {
+        var vm = this;
+        vm.getModel().then(function(model) {
+          vm.model = model;
+        });
+      },
+
       afterActivate: function() {
         this.setCounters();
         this.updateResourceTab();
@@ -348,18 +355,16 @@
       },
 
       scheduleRefresh: function() {
-        var vm = this;
-
-        var refreshPromise = $interval(function() {
-          vm.getModel().then(function(model) {
-            vm.model = model;
-          });
-        }, ENV.resourcesTimerInterval * 1000);
+        var refreshPromise = $interval(
+          this.reInitResource.bind(this),
+          ENV.resourcesTimerInterval * 1000
+        );
 
         $scope.$on('$destroy', function() {
           $interval.cancel(refreshPromise);
         });
       },
+
       modelNotFound: function() {
         currentStateService.getProject().then(function() {
           $state.go('resources.list');

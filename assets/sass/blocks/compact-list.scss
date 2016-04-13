@@ -115,10 +115,14 @@ $compact-list-border-color: #e5e5e5;
 
   .disabled {
     opacity: 1;
-    color: #777;
+    color: $gray-label;
   }
 
   .remove {
     color: $destructive-color;
+
+    &.disabled {
+      color: $gray-label;
+    }
   }
 }
