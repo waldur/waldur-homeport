@@ -101,10 +101,11 @@ $compact-list-border-color: #e5e5e5;
     border: 1px solid $compact-list-border-color;
     border-radius: 5px;
     margin: 5px;
+    margin-left: 0;
 
     @include bp(xs) {
       display: block;
-      padding: 5px 10px;
+      padding: 10px;
       border: none;
       border-bottom: 1px solid $compact-list-border-color;
       border-radius: 0px;
