@@ -9,10 +9,18 @@
     left: 90px;
     position: absolute;
     background-color: #4fb547;
+    border-radius: 0 0 4px 4px;
+    overflow: hidden;
 
     @include bp(sm) {
       right: 0;
       left: auto;
+    }
+
+    &.-customers {
+        ul {
+            margin-bottom: 35px;
+        }
     }
 
     &.block-ui {
@@ -51,7 +59,17 @@
             }
         }
     } // &.user-area
-    > li {
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        max-height: 62vh;
+        overflow-y: auto;
+        &.project {
+            margin-bottom: 70px;
+        }
+    }
+    > ul > li, > div {
         border-bottom: 1px solid #47a340;
         position: relative;
         &.divider {
@@ -146,8 +164,14 @@
             &:hover {
                 background-color: #e0e0e0;
             }
-            &:nth-last-child(2) {
-                border-radius: 0 0 4px 4px;
+
+            &.bottom {
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+                &-1 {
+                    bottom: 35px;
+                }
             }
             .icon {
                 position: absolute;
