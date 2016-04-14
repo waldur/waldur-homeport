@@ -196,11 +196,6 @@
                 } // button
             } // actions-button
         } // actions-box
-        &.expandable-indicator {
-            position: relative;
-            right: 10px;
-            top: 0px;
-        }
         &.ministatus {
             display: none;
             width: 40px;
@@ -344,9 +339,6 @@
     .field-description {
         color: #50b848;
         font-size: 14px;
-    }
-    &.opened {
-        background: $expandable-hover;
     }
 } // list-item
 
