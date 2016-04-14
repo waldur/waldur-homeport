@@ -17,7 +17,6 @@ $searchInputHeight: 32px;
   }
 
   .back-to-list {
-    text-decoration: none;
     display: block;
     margin-bottom: 5px;
     margin-top: 10px;
@@ -468,9 +467,6 @@ $searchInputHeight: 32px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    a {
-      text-decoration: none;
-    }
   }
 
   span.cell-default-span {
@@ -690,9 +686,6 @@ $searchInputHeight: 32px;
       height: 32px;
       background: white;
       padding-left: 3px;
-    }
-    a {
-      text-decoration: none;
     }
 }
 
