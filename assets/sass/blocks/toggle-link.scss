@@ -8,7 +8,9 @@
     vertical-align: middle;
     cursor: pointer;
     color: rgb(0, 0, 0);
-    text-decoration: none;
+    &:hover {
+        text-decoration: none;
+    }
     &:after {
         position: relative;
         @include icon-fa;

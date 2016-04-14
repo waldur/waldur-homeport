@@ -199,8 +199,8 @@
           customer: currentStateService.getCustomerUuid()
         }, filter);
         angular.forEach(this.service.defaultFilter, function(val, key) {
-          if (val != 'resource_type') {
-            query[val] = key;
+          if (key != 'resource_type') {
+            query[key] = val;
           }
         });
         return resourcesService.countByType(query).then(function(counts) {
@@ -252,6 +252,7 @@
         '$stateParams',
         '$state',
         '$scope',
+        '$rootScope',
         '$interval',
         'ENV',
         'resourcesService',
@@ -268,6 +269,7 @@
     $stateParams,
     $state,
     $scope,
+    $rootScope,
     $interval,
     ENV,
     resourcesService,
@@ -325,6 +327,13 @@
         return this.service.$get($stateParams.resource_type, $stateParams.uuid);
       },
 
+      reInitResource: function() {
+        var vm = this;
+        vm.getModel().then(function(model) {
+          vm.model = model;
+        });
+      },
+
       afterActivate: function() {
         this.setCounters();
         this.updateResourceTab();
@@ -332,13 +341,11 @@
       },
 
       updateResourceTab: function() {
-        var service_type = this.model.resource_type.split(".")[0];
-        var vm_services = servicesService.getServiceTypes(ENV.VirtualMachines);
-        var app_services = servicesService.getServiceTypes(ENV.Applications);
-        if (vm_services.indexOf(service_type) > -1) {
+        var resourceCategory = ENV.resourceCategory[this.model.resource_type];
+        if (resourceCategory) {
+          this.resourceTab = resourceCategory;
+        } else {
           this.resourceTab = ENV.resourcesTypes.vms;
-        } else if (app_services.indexOf(service_type) > -1) {
-          this.resourceTab = ENV.resourcesTypes.applications;
         }
       },
 
@@ -350,23 +357,25 @@
       },
 
       scheduleRefresh: function() {
-        var vm = this;
-        vm.updateStatus();
-
-        var refreshPromise = $interval(function() {
-          vm.getModel().then(function(model) {
-            vm.model = model;
-            vm.updateStatus();
-          });
-        }, ENV.resourcesTimerInterval * 1000);
+        var refreshPromise = $interval(
+          this.reInitResource.bind(this),
+          ENV.resourcesTimerInterval * 1000
+        );
 
         $scope.$on('$destroy', function() {
           $interval.cancel(refreshPromise);
         });
       },
-      updateStatus: function() {
-        this.inProgress = (ENV.resourceStateColorClasses[this.model.state] === 'processing');
+
+      afterInstanceRemove: function(resource) {
+        this.service.clearAllCacheForCurrentEndpoint();
+        $rootScope.$broadcast('refreshCounts');
+        $state.go('projects.details', {
+          uuid: this.model.project_uuid,
+          tab: this.resourceTab
+        });
       },
+
       modelNotFound: function() {
         currentStateService.getProject().then(function() {
           $state.go('resources.list');
@@ -379,15 +388,13 @@
         });
       },
 
-      update:function() {
+      update: function() {
         var vm = this;
-        vm.model.$update(success, error);
-        function success() {
-          $state.go('resources.details', {'resource_type': $stateParams.resource_type, 'uuid': vm.model.uuid});
-        }
-        function error(response) {
+        vm.model.$update(function success() {
+          resourcesService.clearAllCacheForCurrentEndpoint();
+        }, function error(response) {
           vm.errors = response.data;
-        }
+        });
       }
     });
 

@@ -2,7 +2,8 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('eventsService', ['baseServiceClass', 'ENV', 'EVENT_ICONS_TYPES', 'EVENT_TEMPLATES', eventsService]);
+    .service('eventsService', [
+      'baseServiceClass', 'ENV', 'EVENT_ICONS_TYPES', 'EVENT_TEMPLATES', eventsService]);
 
   function eventsService(baseServiceClass, ENV, EVENT_ICONS_TYPES, EVENT_TEMPLATES) {
     /*jshint validthis: true */
@@ -17,6 +18,16 @@
         if (!ENV.featuresVisible) {
           this.defaultFilter.exclude_features = ENV.toBeFeatures;
         }
+      },
+      getResourceEvents: function (resource) {
+        return this.getList({scope: resource.url}).then(function(response) {
+          return response.map(function(event) {
+            return {
+              name: event.event_type.replace('resource_', '').replace(/_/g, ' '),
+              timestamp: event['@timestamp']
+            }
+          });
+        });
       },
       getAvailableIconTypes: function() {
         var icons = [],
