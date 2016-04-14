@@ -199,8 +199,8 @@
           customer: currentStateService.getCustomerUuid()
         }, filter);
         angular.forEach(this.service.defaultFilter, function(val, key) {
-          if (val != 'resource_type') {
-            query[val] = key;
+          if (key != 'resource_type') {
+            query[key] = val;
           }
         });
         return resourcesService.countByType(query).then(function(counts) {
