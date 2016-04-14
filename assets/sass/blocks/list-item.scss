@@ -196,23 +196,6 @@
                 } // button
             } // actions-button
         } // actions-box
-        &.expandable-indicator {
-            position: relative;
-            right: 10px;
-            top: 0;
-            &:hover {
-                text-decoration: none;
-            }
-            &:before {
-                display: block;
-                width: 15px;
-                height: 15px;
-                text-align: center;
-                line-height: 15px;
-                transform: rotate(0deg);
-                transition: all .3s ease-in-out;
-            }
-        }
         &.ministatus {
             display: none;
             width: 40px;
@@ -356,14 +339,6 @@
     .field-description {
         color: #50b848;
         font-size: 14px;
-    }
-    &.opened {
-        background: $expandable-hover;
-        .expandable-indicator {
-            &:before {
-                transform: rotate(180deg);
-            }
-        }
     }
 } // list-item
 

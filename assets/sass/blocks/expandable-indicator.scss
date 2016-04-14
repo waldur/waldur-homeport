@@ -2,6 +2,8 @@
     position: relative;
     right: 10px;
     top: 0;
+    width: 10px;
+    color: $dashboard-green;
     &:hover {
         text-decoration: none;
     }
@@ -19,5 +21,4 @@
             transform: rotate(180deg);
         }
     }
-
 }
