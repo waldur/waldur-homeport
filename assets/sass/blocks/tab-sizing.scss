@@ -1,4 +1,8 @@
 .tab-sizing {
+  .sizing-actions {
+    text-align: right;
+    margin-bottom: 10px;
+  }
   ul {
     list-style: none;
     margin: 0;
@@ -99,7 +103,31 @@
             .provider {
               padding: 5px;
               border: 1px solid;
-              margin-bottom: 5px;
+              margin-bottom: 10px;
+              cursor: pointer;
+              &.active {
+                position: relative;
+                border: 1px solid $dashboard-green;
+                &:before {
+                  content: '\f00c';
+                  font-family: FontAwesome;
+                  -webkit-font-smoothing: antialiased;
+                  -moz-osx-font-smoothing: grayscale;
+                  text-align: center;
+                  background-color: $dashboard-green;
+                  color: $white;
+                  width: 18px;
+                  height: 18px;
+                  -webkit-border-radius: 100%;
+                  border-radius: 100%;
+                  position: absolute;
+                  left: 50%;
+                  margin-left: -9px;
+                  bottom: -9px;
+                  line-height: 19px;
+                  font-size: 12px;
+                }
+              }
               h4 {
                 margin: 0;
                 font-weight:bold;

@@ -1,112 +1,43 @@
 <article class="tab-sizing" ng-controller="CustomerSizingTabController as CustomerSizing">
+    <div class="sizing-actions">
+        <a href="#" class="button">New</a>
+    </div>
     <ul class="sizing-list">
-        <li class="open">
-            <header>
+        <li ng-repeat="item in CustomerSizing.list"
+            ng-class="{open: item.open === true}">
+            <header ng-click="item.open = !item.open">
                 <div class="title">
-                    <h2>Monator offer</h2>
-                    <span>email to: john@monator.com</span>
+                    <h2  stoppropagation>
+                        <span editable-text="item.name"
+                              e-form="rowform"
+                              buttons="no">
+                            {{ item.name }}
+                        </span>
+                        <div class="icon pencil-square-o"
+                             ng-click="rowform.$show()"
+                             ng-hide="rowform.$visible"></div>
+                    </h2>
+                    <span  stoppropagation>
+                        email to:
+                        <span editable-text="item.email"
+                              e-form="rowformEmail"
+                              buttons="no">{{ item.email }}</span>
+                        <div class="icon pencil-square-o"
+                             ng-click="rowformEmail.$show()"
+                             ng-hide="rowformEmail.$visible"></div>
+                    </span>
                 </div>
-                <div class="btn-set">
-                    <a href="#" class="button">New</a>
-                    <a href="#" class="button">Clone</a>
+                <div class="price">
+                    <b>600</b>
+                    <span>USD/mo (DRAFT)</span>
                 </div>
                 <div class="btn-set">
                     <a href="#" class="button">Send</a>
                     <a href="#" class="button">Provision</a>
+                    <a href="#" class="button">Clone</a>
                 </div>
             </header>
-            <main>
-                <section>
-                    <aside class="left">
-                        <h3>Add infrastructure</h3>
-                        <ul>
-                            <li ng-repeat="inf in CustomerSizing.infrastructures" ng-class="inf.open">
-                                <a ng-click="inf.open = inf.open != 'open' ? 'open' : ''">{{ inf.type }}</a>
-                                <ul>
-                                    <li ng-repeat="view in inf.views">
-                                        <a ng-click="CustomerSizing.addView(inf.type, view)">{{ view }}</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </aside>
-                    <section class="view">
-                        <h3>Stack planning view</h3>
-                        <ul>
-                            <li ng-repeat="view in CustomerSizing.views">
-                                <div class="name">
-                                    <h4>{{ view.type }}</h4>
-                                    <span>{{ view.name }}</span>
-                                </div>
-                                <div class="switch-wrapper">
-                                    <div  class="switch" ng-init="view.switch = 'first'" ng-class="view.switch">
-                                        <span class="sub-label" ng-click="view.switch = 'first'">Small</span>
-                                        <span class="sub-label" ng-click="view.switch = 'second'">Average</span>
-                                        <span class="sub-label" ng-click="view.switch = 'third'">Large</span>
-                                        <div class="slider">
-                                            <span class="first">Small</span>
-                                            <span class="second">Average</span>
-                                            <span class="third">Large</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="multiplier">
-                                    <span>x</span>
-                                    <input type="number"  ng-model="view.count">
-                                    <button class="button minus" ng-click="view.count = view.count > 0 ? view.count - 1 : view.count">-</button>
-                                    <button class="button plus" ng-click="view.count = view.count + 1">+</button>
-                                </div>
-                            </li>
-                        </ul>
-                    </section>
-                    <aside class="right">
-                        <h3>Providers</h3>
-                        <div class="provider">
-                            <h4>AWS EC2</h4>
-                            <div class="price">
-                                <b>120</b>
-                                <span>USD/mo</span>
-                            </div>
-                        </div>
-                        <div class="provider">
-                            <h4>AWS EC2</h4>
-                            <div class="price">
-                                <b>120</b>
-                                <span>USD/mo</span>
-                            </div>
-                        </div>
-                    </aside>
-                </section>
-            </main>
-        </li>
-        <li>
-            <header>
-                <div class="title">
-                    <h2>Webapp for Monster Inc.</h2>
-                    <span>
-                        email to: john@monator.com
-                    </span>
-                </div>
-                <div class="price">
-                    <b>600</b>
-                    <span>USD/mo (DRAFT)</span>
-                </div>
-            </header>
-        </li>
-        <li>
-            <header>
-                <div class="title">
-                    <h2>Webapp for Monster Inc.</h2>
-                    <span>
-                        email to: john@monator.com
-                    </span>
-                </div>
-                <div class="price">
-                    <b>600</b>
-                    <span>USD/mo (DRAFT)</span>
-                </div>
-            </header>
+            <sizing></sizing>
         </li>
     </ul>
-
 </article>
