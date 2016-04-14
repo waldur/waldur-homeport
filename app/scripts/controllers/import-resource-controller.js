@@ -127,7 +127,8 @@
 
       getImportedResourcesForService: function(service) {
         controllerScope.importedResources = [];
-        return resourcesService.getImportedResources(service).then(function(resources) {
+        return resourcesService.getImportedResources(
+          service, controllerScope.currentProject.uuid).then(function(resources) {
           controllerScope.importedResources = resources;
         }, function() {
           ncUtilsFlash.warning('Unable to get list of imported resources');
