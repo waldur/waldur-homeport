@@ -252,6 +252,7 @@
         '$stateParams',
         '$state',
         '$scope',
+        '$rootScope',
         '$interval',
         'ENV',
         'resourcesService',
@@ -268,6 +269,7 @@
     $stateParams,
     $state,
     $scope,
+    $rootScope,
     $interval,
     ENV,
     resourcesService,
@@ -362,6 +364,15 @@
 
         $scope.$on('$destroy', function() {
           $interval.cancel(refreshPromise);
+        });
+      },
+
+      afterInstanceRemove: function(resource) {
+        this.service.clearAllCacheForCurrentEndpoint();
+        $rootScope.$broadcast('refreshCounts');
+        $state.go('projects.details', {
+          uuid: this.model.project_uuid,
+          tab: this.resourceTab
         });
       },
 
