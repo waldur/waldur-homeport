@@ -2,7 +2,8 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('eventsService', ['baseServiceClass', 'ENV', 'EVENT_ICONS_TYPES', 'EVENT_TEMPLATES', eventsService]);
+    .service('eventsService', [
+      'baseServiceClass', 'ENV', 'EVENT_ICONS_TYPES', 'EVENT_TEMPLATES', eventsService]);
 
   function eventsService(baseServiceClass, ENV, EVENT_ICONS_TYPES, EVENT_TEMPLATES) {
     /*jshint validthis: true */
@@ -17,6 +18,16 @@
         if (!ENV.featuresVisible) {
           this.defaultFilter.exclude_features = ENV.toBeFeatures;
         }
+      },
+      getResourceEvents: function (resource) {
+        return this.getList({scope: resource.url}).then(function(response) {
+          return response.map(function(event) {
+            return {
+              name: event.event_type.replace('resource_', '').replace(/_/g, ' '),
+              timestamp: event['@timestamp']
+            }
+          });
+        });
       },
       getAvailableIconTypes: function() {
         var icons = [],
@@ -66,6 +77,7 @@
         'project_group_creation_succeeded': 'Project group {project_group_name} has been created.',
         'project_group_deletion_succeeded': 'Project group {project_group_name} has been deleted.',
         'project_group_update_succeeded': 'Project group {project_group_name} has been updated.',
+        'project_name_update_succeeded': 'Project has been renamed from {project_previous_name} to {project_name}.',
         'project_removed_from_project_group': 'Project {project_name} has been removed from project group {project_group_name}.',
         'project_update_succeeded': 'Project {project_name} has been updated.',
         'quota_threshold_reached': '{quota_name} quota threshold has been reached for project {project_name}.',
@@ -218,6 +230,7 @@ angular.module('ncsaas').constant('EVENT_ICONS', {
     'project_group_creation_succeeded': 'project',
     'project_group_deletion_succeeded': 'project',
     'project_group_update_succeeded': 'project',
+    'project_name_update_succeeded': 'project',
     'project_removed_from_project_group': 'project',
     'project_update_succeeded': 'project',
     'quota_threshold_reached': 'customer',

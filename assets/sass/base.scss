@@ -46,9 +46,9 @@ img {
 a {
     cursor: pointer;
     color: $link-color;
+    text-decoration: none;
     &:hover {
-        text-decoration: none;
-        color: $hover-color;
+        text-decoration: underline;
     } // &:hover
 } // a
 

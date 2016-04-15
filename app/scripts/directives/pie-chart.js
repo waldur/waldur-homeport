@@ -36,10 +36,10 @@
                 var color;
                 switch (chartType) {
                     case 'vms':
-                        color = d3.scale.category20c();
+                        color = d3.scale.category10();
                         break;
                     case 'services':
-                        color = d3.scale.category10();
+                        color = d3.scale.category20c();
                         break;
                     default:
                         color = d3.scale.category20c();

@@ -129,6 +129,7 @@
           link: 'projects.details({uuid: entity.project_uuid})',
           type: ENTITYLISTFIELDTYPES.name
         });
+        this.rowFields = angular.copy(this.rowFields);
         this.rowFields.push('project_name');
         this.rowFields.push('project_uuid');
       }

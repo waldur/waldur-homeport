@@ -16,46 +16,50 @@
                         <span class="active-context">Organization</span>
                         <span class="customer-name">{{ Header.currentCustomer.name }}</span>
                     </a>
-                    <ul class="nav-sublist" ng-show="Header.menuState.customerMenu">
-                        <li class="manage-item">
+                    <div class="nav-sublist nav-sublist-customers" ng-show="Header.menuState.customerMenu">
+                        <div class="manage-item">
                             <a ng-click="Header.goToCurrentOrganization()">
                                 <i class="icon zoom"></i>
                                 Details
                             </a>
-                        </li>
-                        <li ng-repeat="customer in Header.customers" ng-if="customer.uuid != Header.currentCustomer.uuid">
-                            <a ng-click="Header.setCurrentCustomer(customer)">
-                                <i ng-if="Header.isOwner(customer)" class="icon fa fa-star-o" title="Owner"></i>
-                                {{ customer.name }}
-                            </a>
-                        </li>
-                        <li class="manage-item">
+                        </div>
+                        <ul>
+                            <li ng-repeat="customer in Header.customers" ng-if="customer.uuid != Header.currentCustomer.uuid">
+                                <a ng-click="Header.setCurrentCustomer(customer)">
+                                    <i ng-if="Header.isOwner(customer)" class="icon fa fa-star-o" title="Owner"></i>
+                                    {{ customer.name }}
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="manage-item bottom">
                             <a ui-sref="organizations.list" class="manage">
                                 <i class="icon wrench"></i>
                                 Manage organizations
                             </a>
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
                 </li>
                 <li visible="projects" class="dropdown project-dropdown" ng-class="{'active': Header.menuState.projectMenu}">
                     <a class="project-context drop-active" ng-click="Header.menuToggle('projectMenu', $event)">
                         <span class="active-context">Project</span>
                         <span class="customer-name">{{ Header.currentProject.name ? Header.currentProject.name : 'No project' }}</span>
                     </a>
-                    <ul block-ui="project-menu" class="nav-sublist" ng-show="Header.menuState.projectMenu">
-                        <li ng-repeat="project in Header.projects" ng-if="project.uuid != Header.currentProject.uuid">
-                            <a ng-click="Header.setCurrentProject(project)">
-                                <span>{{ project.name }}</span>
-                                <span></span>
-                            </a>
-                        </li>
-                        <li class="manage-item">
+                    <div block-ui="project-menu" class="nav-sublist" ng-show="Header.menuState.projectMenu">
+                        <ul class="project">
+                            <li ng-repeat="project in Header.projects" ng-if="project.uuid != Header.currentProject.uuid">
+                                <a ng-click="Header.setCurrentProject(project)">
+                                    <span>{{ project.name }}</span>
+                                    <span></span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="manage-item bottom bottom-1">
                             <a ui-sref="organizations.details({uuid: Header.currentCustomer.uuid, tab: 'projects'})" class="manage">
                                 <i class="icon wrench"></i>
                                 Manage projects
                             </a>
-                        </li>
-                        <li class="manage-item">
+                        </div>
+                        <div class="manage-item bottom">
                             <div class="tooltip-relative inline"
                                  check-quotas="{{Header.checkQuotas.projects}}"
                                  sref="projects.create"
@@ -63,8 +67,8 @@
                                  tooltip-type="project-drop-down">
                                 <div><i class="icon plus"></i> Add project</div>
                             </div>
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
                 </li>
                 <li class="resources">
                     <a class="appstore"
@@ -93,44 +97,46 @@
                         </span>
                         <span class="user-name">{{ Header.currentUser.full_name }}</span>
                     </a>
-                    <ul class="nav-sublist user-area" ng-show="Header.menuState.profileMenu">
-                        <li visible="services" class="on-tablet">
-                            <div class="tooltip-relative"
-                                 check-quotas="{{Header.checkQuotas.resources}}"
-                                 sref="services.create"
-                                 class-link="service"
-                                 tooltip-type="user-drop-down">
-                                <div>Add provider</div>
-                            </div>
-                        </li>
-                        <li visible="projects" class="on-tablet">
-                            <div class="tooltip-relative"
-                                 check-quotas="{{Header.checkQuotas.projects}}"
-                                 sref="projects.create"
-                                 class-link="project"
-                                 tooltip-type="user-drop-down">
-                                <div><i class="icon plus"></i> Add project</div>
-                            </div>
-                        </li>
-                        <li visible="import" ng-if="::Header.showImport" class="on-tablet">
-                            <div class="tooltip-relative"
-                                 check-quotas="{{Header.checkQuotas.resources}}"
-                                 sref="import.import"
-                                 class-link="import"
-                                 tooltip-type="user-drop-down">
-                                <div>Import resources</div>
-                            </div>
-                        </li>
-                        <li visible="support" class="on-tablet">
-                            <a ui-sref="support.list">Support</a>
-                        </li>
-                        <li>
-                            <a ui-sref="profile.details">Profile</a>
-                        </li>
-                        <li>
-                            <a ng-click="logout()">Logout</a>
-                        </li>
-                    </ul>
+                    <div class="nav-sublist user-area" ng-show="Header.menuState.profileMenu">
+                        <ul>
+                            <li visible="services" class="on-tablet">
+                                <div class="tooltip-relative"
+                                     check-quotas="{{Header.checkQuotas.resources}}"
+                                     sref="services.create"
+                                     class-link="service"
+                                     tooltip-type="user-drop-down">
+                                    <div>Add provider</div>
+                                </div>
+                            </li>
+                            <li visible="projects" class="on-tablet">
+                                <div class="tooltip-relative"
+                                     check-quotas="{{Header.checkQuotas.projects}}"
+                                     sref="projects.create"
+                                     class-link="project"
+                                     tooltip-type="user-drop-down">
+                                    <div><i class="icon plus"></i> Add project</div>
+                                </div>
+                            </li>
+                            <li visible="import" ng-if="::Header.showImport" class="on-tablet">
+                                <div class="tooltip-relative"
+                                     check-quotas="{{Header.checkQuotas.resources}}"
+                                     sref="import.import"
+                                     class-link="import"
+                                     tooltip-type="user-drop-down">
+                                    <div>Import resources</div>
+                                </div>
+                            </li>
+                            <li visible="support" class="on-tablet">
+                                <a ui-sref="support.list">Support</a>
+                            </li>
+                            <li>
+                                <a ui-sref="profile.details">Profile</a>
+                            </li>
+                            <li>
+                                <a ng-click="logout()">Logout</a>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
                 <li visible="support" class="customer-support">
                     <a ui-sref="support.list" class="support" title="Support"

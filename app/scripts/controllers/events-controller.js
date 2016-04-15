@@ -132,14 +132,28 @@
       '$scope',
       '$stateParams',
       'baseControllerClass',
+      'currentStateService',
+      'usersService',
       DashboardIndexController]);
 
-  function DashboardIndexController($scope, $stateParams, baseControllerClass) {
+  function DashboardIndexController($scope, $stateParams, baseControllerClass, currentStateService, usersService) {
     var controllerScope = this;
     var EventController = baseControllerClass.extend({
       init: function() {
         $scope.activeTab = $stateParams.tab || 'activity';
         this.checkQuotas = 'project';
+        var vm = this;
+
+        usersService.getCurrentUser().then(function(user) {
+          currentStateService.getCustomer().then(function(customer) {
+            for (var i = 0; customer.owners.length > i; i++) {
+              if (customer.owners[i].uuid === user.uuid) {
+                vm.customerOwner = true;
+                return;
+              }
+            }
+          });
+        });
       }
     });
 
@@ -619,11 +633,15 @@
             }
             if (item.name === 'nc_vm_count') {
               var vms = item.usage;
-              vm.currentUsageData.data.push({ label: vms + ' vms', count: vms, name: 'vms' });
+              vm.currentUsageData.data.push({ label: vms + ' VMs', count: vms, name: 'vms' });
             }
             if (item.name === 'nc_app_count') {
               var apps = item.usage;
-              vm.currentUsageData.data.push({ label: apps + ' apps', count: apps, name: 'apps' })
+              vm.currentUsageData.data.push({ label: apps + ' applications', count: apps, name: 'apps' })
+            }
+            if (item.name === 'nc_private_cloud_count') {
+              var pcs = item.usage;
+              vm.currentUsageData.data.push({ label: pcs + ' private clouds', count: pcs, name: 'private clouds' })
             }
           });
         });
@@ -671,7 +689,7 @@
       setResourcesByProjectChartData: function() {
         var vm = this;
         vm.resourcesByProjectChartData = {
-          data :[{data: [], name: 'VMs'}, {data: [], name: 'Apps'}],
+          data :[{data: [], name: 'VMs'}, {data: [], name: 'Applications'}, {data: [], name: 'Private clouds'}],
           projects: vm.projectsList,
           chartType: 'resources'
         };
@@ -686,6 +704,10 @@
               vm.resourcesByProjectChartData.data[1].data.push({project: item.uuid, count: itemQuota.usage});
               vm.resourcesCount += itemQuota.usage;
             }
+            if (itemQuota.name === 'nc_private_cloud_count') {
+              vm.resourcesByProjectChartData.data[2].data.push({project: item.uuid, count: itemQuota.usage});
+              vm.resourcesCount += itemQuota.usage;            }
+
           });
         });
       },

@@ -173,7 +173,7 @@
                             <i>{{ field.emptyText }}</i>
                         </span>
 
-                        <span class="dummy" ng-switch-when="linkOrText">
+                        <span ng-switch-when="linkOrText">
                             <a ng-if="entity[field.urlPropertyName]"
                                href="{{ entity[field.urlPropertyName] }}"
                                title="{{ entity[field.urlPropertyName] }}"

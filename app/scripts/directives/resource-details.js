@@ -43,13 +43,18 @@
           parts.push($filter('mb2gb')(resource.disk) + ' storage');
         }
         var summary = parts.join(' / ');
-        resource.summary = summary;
+        return summary;
       },
       formatResourceType: function(resource) {
-        resource.formatted_resource_type = resource.resource_type.split(".").join(" ");
+        return resource.resource_type.split(".").join(" ");
       },
       getStateClass: function(resource) {
         return ENV.resourceStateColorClasses[resource.state];
+      },
+      getUptime: function(resource) {
+        if (resource.start_time) {
+          return moment(resource.start_time).fromNow().replace(' ago', '');
+        }
       }
     }
   }
@@ -69,12 +74,13 @@
         scope.$watch('resource', function() {
           var resource = scope.resource;
           if (resource) {
+            resourceUtils.setAccessInfo(resource);
             resource.service_type = resource.resource_type.split('.')[0];
             resource.customer_uuid = currentStateService.getCustomerUuid();
-            resourceUtils.setAccessInfo(resource);
-            resourceUtils.setSummary(resource);
-            resourceUtils.formatResourceType(resource);
+            resource.summary = resourceUtils.setSummary(resource);
+            scope.formatted_resource_type = resourceUtils.formatResourceType(resource);
             scope.state_class = resourceUtils.getStateClass(resource);
+            resource.uptime = resourceUtils.getUptime(resource);
           }
         });
       }
