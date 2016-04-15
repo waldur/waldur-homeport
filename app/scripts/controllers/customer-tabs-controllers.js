@@ -722,17 +722,32 @@
         this.list = [
           {
             name: 'Monator offer',
-            email: 'john@monator.com'
+            email: 'john@monator.com',
+            views: [],
+            provider: {}
           },
           {
             name: 'Webapp for Monster Inc.',
-            email: 'john@monator.com'
+            email: 'john@monator.com',
+            views: [],
+            provider: {}
           },
           {
             name: 'Webapp for Monster Inc.',
-            email: 'john@monator.com'
+            email: 'john@monator.com',
+            views: [],
+            provider: {}
           }
         ];
+      },
+      calculate: function(item) {
+        var price = 0;
+        if (item.provider.price) {
+          item.views.forEach(function(view) {
+            price += view.count * item.provider.price;
+          });
+        }
+        return price;
       }
     });
 

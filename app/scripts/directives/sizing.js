@@ -8,11 +8,13 @@
   function sizing() {
     return {
       restrict: 'E',
-      scope: {},
+      scope: {
+        item: '='
+      },
       templateUrl: 'views/directives/sizing.html',
       replace: true,
       link: function(scope) {
-        scope.views = [
+        scope.item.views = [
           {
             type: 'WebServer',
             name: 'Apache',
@@ -22,6 +24,17 @@
             type: 'Database',
             name: 'MySQL',
             count: 0
+          }
+        ];
+
+        scope.providers = [
+          {
+            name: 'AWS EC1',
+            price: 60
+          },
+          {
+            name: 'AWS EC2',
+            price: 120
           }
         ];
 
@@ -59,13 +72,13 @@
         scope.addView = addView;
 
         function addView(type, name) {
-          for (var i = 0; this.views.length > i; i++) {
-            if (this.views[i].type === type && this.views[i].name === name) {
-              this.views[i].count++;
+          for (var i = 0; scope.item.views.length > i; i++) {
+            if (scope.item.views[i].type === type && scope.item.views[i].name === name) {
+              scope.item.views[i].count++;
               return;
             }
           }
-          this.views.push({
+          scope.item.views.push({
             type: type,
             name: name,
             count: 0

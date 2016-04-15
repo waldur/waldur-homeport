@@ -11,15 +11,15 @@
   .sizing-list {
     >li {
       @include clearfix;
-      margin-bottom: 10px;
-      padding: 5px;
       border-radius: 4px;
       header {
         @include clearfix;
         padding-bottom: 10px;
         padding-left: 10px;
-        border-bottom: 2px solid;
+        border-bottom: 1px solid;
         cursor: pointer;
+        position: relative;
+        padding-right: 15px;
         .title {
           float: left;
           display: block;
@@ -43,10 +43,17 @@
         .price {
           float: right;
           height: 100%;
-          padding-top: 20px;
+          padding-top: 24px;
           margin-right: 20px;
         }
 
+        .expandable-indicator {
+          top: 28px;
+        }
+
+        &:hover {
+          background: $expandable-hover;
+        }
       }
       main {
         @include clearfix;
@@ -262,8 +269,8 @@
         }
       }
       &.open {
-        box-shadow: 1px 1px 11px rgba(0,0,0,.4);
         header {
+          background: $expandable-hover;
           .btn-set {
             display: block;
           }

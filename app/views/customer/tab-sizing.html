@@ -28,16 +28,17 @@
                     </span>
                 </div>
                 <div class="price">
-                    <b>600</b>
-                    <span>USD/mo (DRAFT)</span>
+                    <b>{{ CustomerSizing.calculate(item) }}</b>
+                    <span>USD/mo ({{ item.provider.name ? item.provider.name : 'Provider doesn\'t selected' }})</span>
                 </div>
                 <div class="btn-set">
                     <a href="#" class="button">Send</a>
                     <a href="#" class="button">Provision</a>
                     <a href="#" class="button">Clone</a>
                 </div>
+                <expandable-indicator open="item.open"></expandable-indicator>
             </header>
-            <sizing></sizing>
+            <sizing item="item"></sizing>
         </li>
     </ul>
 </article>

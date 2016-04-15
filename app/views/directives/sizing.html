@@ -16,7 +16,7 @@
         <section class="view">
             <h3>Stack planning view</h3>
             <ul>
-                <li ng-repeat="view in views">
+                <li ng-repeat="view in item.views">
                     <div class="name">
                         <h4>{{ view.type }}</h4>
                         <span>{{ view.name }}</span>
@@ -44,17 +44,13 @@
         </section>
         <aside class="right">
             <h3>Providers</h3>
-            <div class="provider" ng-class="{active: provider1}" ng-click="provider1 = true; provider2 = false">
-                <h4>AWS EC2</h4>
+            <div class="provider"
+                 ng-repeat="provider in providers"
+                 ng-class="{active: item.provider === provider }"
+                 ng-click="item.provider = provider">
+                <h4>{{ provider.name }}</h4>
                 <div class="price">
-                    <b>120</b>
-                    <span>USD/mo</span>
-                </div>
-            </div>
-            <div class="provider" ng-class="{active: provider2}" ng-click="provider2 = true; provider1 = false">
-                <h4>AWS EC2</h4>
-                <div class="price">
-                    <b>120</b>
+                    <b>{{ provider.price }}</b>
                     <span>USD/mo</span>
                 </div>
             </div>
