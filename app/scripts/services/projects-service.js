@@ -28,10 +28,10 @@
         return this.getFactory(false).get(query).$promise;
       },
       setThreshold: function(price_estimate_url, value) {
-        return $http.post(price_estimate_url, { threshold: value });
+        return $http.post(price_estimate_url + 'threshold/', { threshold: value });
       },
       setLimit: function(price_estimate_url, value) {
-        return $http.post(price_estimate_url, { limit: value });
+        return $http.post(price_estimate_url + 'limit/', { limit: value });
       }
     });
     return new ServiceClass();

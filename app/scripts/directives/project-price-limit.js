@@ -6,7 +6,8 @@
     angular.extend($scope, {
       init: function() {
         $scope.loading = true;
-        $scope.isHardLimit = $scope.limit !=0 && $scope.limit == $scope.threshold;
+        $scope.estimate = $scope.project.price_estimate;
+        $scope.isHardLimit = $scope.estimate.limit > 0 && $scope.estimate.limit == $scope.estimate.threshold;
         return customersService.isOwnerOrStaff().then(function(value) {
           $scope.userCanManageProjects = value;
           $scope.loading = false;
@@ -14,13 +15,13 @@
       },
 
       setThreshold: function(value) {
-        return projectsService.setThreshold($scope.project.price_estimate_url, value);
+        return projectsService.setThreshold($scope.estimate.url, value);
       },
 
       toggleLimit: function() {
         $scope.isHardLimit = !$scope.isHardLimit;
-        var limit = $scope.isHardLimit && $scope.project.price_threshold || 0;
-        return projectsService.setLimit($scope.project.price_estimate_url, limit);
+        var limit = $scope.isHardLimit && $scope.estimate.threshold || 0;
+        return projectsService.setLimit($scope.estimate.url, limit);
       }
     });
     $scope.init();
