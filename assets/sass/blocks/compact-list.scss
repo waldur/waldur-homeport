@@ -82,11 +82,13 @@ $compact-list-border-color: #e5e5e5;
 
 .compact-list__action-list {
   padding-left: 10px;
-  padding-bottom: 10px;
+  padding-bottom: 5px;
 
   @include bp(xs) {
-    border: 1px solid $compact-list-border-color;
-    border-radius: 5px;
+    padding-left: 0px;
+    padding-bottom: 0px;
+    border-top: 1px solid $compact-list-border-color;
+    border-radius: 0px;
   }
 }
 
@@ -108,6 +110,12 @@ $compact-list-border-color: #e5e5e5;
       border-bottom: 1px solid $compact-list-border-color;
       border-radius: 0px;
       margin: 0px;
+    }
+  }
+
+  &:last-of-type a {
+    @include bp(xs) {
+      border-bottom: none;
     }
   }
 
