@@ -138,7 +138,6 @@
           a {
             display: block;
             float: left;
-            text-decoration: none;
             color:$dashboard-black;
             span {
               color:$dashboard-green;
@@ -324,7 +323,6 @@
               font-weight: bold;
               font-size:17px;
               @include bp(xs) {
-                text-decoration: none;
                 font-weight:bold;
               }
             }

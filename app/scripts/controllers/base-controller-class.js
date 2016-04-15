@@ -1,8 +1,8 @@
 (function(){
   angular.module('ncsaas')
-    .service('baseControllerClass', ['$rootScope', baseControllerClass]);
+    .service('baseControllerClass', ['$rootScope', 'ncUtilsFlash', baseControllerClass]);
 
-  function baseControllerClass($rootScope) {
+  function baseControllerClass($rootScope, ncUtilsFlash) {
     var ControllerClass = Class.extend({
       _signals: {},
 
@@ -17,6 +17,12 @@
           $rootScope.$on(eventName, this._signals[eventName]);
           delete this._signals[eventName];
         }
+      },
+      handleActionException: function(response) {
+        if (response.status === 409) {
+          var message = response.data.detail || response.data.status;
+          ncUtilsFlash.error(message);
+        }
       }
     });
 
@@ -28,10 +34,10 @@
 
   angular.module('ncsaas')
     .service('baseControllerListClass', [
-      'baseControllerClass', 'ENV', '$rootScope', 'currentStateService', 'ncUtilsFlash', 'ncUtils', baseControllerListClass
+      'baseControllerClass', 'ENV', '$rootScope', 'currentStateService', 'ncUtils', baseControllerListClass
     ]);
 
-  function baseControllerListClass(baseControllerClass, ENV, $rootScope, currentStateService, ncUtilsFlash, ncUtils) {
+  function baseControllerListClass(baseControllerClass, ENV, $rootScope, currentStateService, ncUtils) {
     /**
      * Use controllerScope.__proto__ = new Controller() in needed controller
      * use this.controllerScope for changes in event handler
@@ -110,12 +116,6 @@
       removeInstance: function(model) {
         // Shall return promise
         return model.$delete();
-      },
-      handleActionException: function(response) {
-        if (response.status === 409) {
-          var message = response.data.detail || response.data.status;
-          ncUtilsFlash.error(message);
-        }
       },
       changeAllSelectedInstances: function() {
         if (this.selectedInstances.length) {

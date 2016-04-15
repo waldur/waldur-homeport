@@ -8,7 +8,7 @@
   function expandableIndicator() {
     return {
       restrict: 'E',
-      template: '<a class="expandable-indicator icon" ng-class="{\'chevron-circle-down\': !open, \'chevron-circle-up\': open}"></a>',
+      template: '<a class="expandable-indicator icon chevron-circle-down"  ng-class="{\'closed\': !open, \'opened\': open}"></a>',
       scope: {
         open: '='
       },

@@ -12,7 +12,7 @@
     Type:
   </div>
   <div class="details-table__value">
-    {{ ::resource.formatted_resource_type }}
+    {{ ::formatted_resource_type }}
   </div>
 </div>
 
@@ -90,6 +90,15 @@
   </div>
 </div>
 
+<div class="details-table__row" ng-if="resource.uptime">
+  <div class="details-table__key">
+    Uptime:
+  </div>
+  <div class="details-table__value">
+    {{ ::resource.uptime }}
+  </div>
+</div>
+
 <div class="details-table__row" ng-if="::resource.related_resources.length">
   <div class="details-table__key">
     Links:
@@ -103,11 +112,11 @@
   </div>
 </div>
 
-<div class="details-table__row" ng-if="::resource.user_data">
+<div class="details-table__row">
   <div class="details-table__key">
-    User data:
+    UUID:
   </div>
   <div class="details-table__value">
-    {{ ::resource.user_data }}
+    {{ ::resource.uuid }}
   </div>
 </div>
