@@ -64,17 +64,14 @@ $compact-list-border-color: #e5e5e5;
   color: #4078c0;
 }
 
-.compact-list__action {
-  position: absolute;
-  top: 0;
-  right: 0px;
-}
-
 .compact-list__right {
   position: absolute;
   top: 0;
   right: 0px;
   margin-top: -6px;
+  .expandable-indicator {
+    top: 10px;
+  }
 }
 
 .compact-list__details {

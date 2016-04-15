@@ -1,0 +1,15 @@
+.expand-project-limits {
+  .details-table__key {
+    width: 150px;
+  }
+  .icon {
+    cursor: pointer;
+  }
+  label {
+    cursor: pointer;
+    .icon {
+      color: $button-green;
+      @include property(font-size, $normal-font);
+    }
+  }
+}

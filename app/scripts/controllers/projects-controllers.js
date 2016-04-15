@@ -7,6 +7,7 @@
       'projectsService',
       'usersService',
       'currentStateService',
+      'customersService',
       '$rootScope',
       '$state',
       'ENV',
@@ -19,6 +20,7 @@
       projectsService,
       usersService,
       currentStateService,
+      customersService,
       $rootScope,
       $state,
       ENV,
@@ -30,7 +32,7 @@
           {
             isList: false,
             addItemBlock: false,
-            viewType: 'project-limits',
+            viewType: 'project-details',
             isOwner: false
           }
         ],
@@ -156,22 +158,9 @@
           this._super();
         },
         checkPermissions: function() {
-          var vm = this;
-          vm.userCanManageProjects = false;
-          if (usersService.currentUser.is_staff) {
-            vm.userCanManageProjects = true;
-            vm.expandableOptions[0].isOwner = true;
-            return;
-          }
-          currentStateService.getCustomer().then(function(customer) {
-            for (var i = 0; i < customer.owners.length; i++) {
-              if (usersService.currentUser.uuid === customer.owners[i].uuid) {
-                vm.userCanManageProjects = true;
-                vm.expandableOptions[0].isOwner = true;
-                break;
-              }
-            }
-          });
+          customersService.isOwnerOrStaff().then(function() {
+            this.userCanManageProjects = true;
+          }.bind(this));
         },
         projectHasResources: function(project) {
           for (var i = 0; i < project.quotas.length; i++) {

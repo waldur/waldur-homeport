@@ -47,7 +47,11 @@
     </div>
   </div>
 
-  <div ng-include="'/views/directives/expandable-item/expandable-item-project-limits.html'"></div>
-</div>
+  <project-price-limit project="entity"></project-price-limit>
 
-<action-list actions="entityButtons" entity="entity" ng-show="entity.expandItemOpen"></action-list>
+  <action-list
+    actions="entityButtons"
+    entity="entity"
+    ng-show="entity.expandItemOpen">
+  </action-list>
+</div>

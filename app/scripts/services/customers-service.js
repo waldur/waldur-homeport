@@ -2,9 +2,10 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('customersService', ['baseServiceClass', '$state', '$q', 'ENV', customersService]);
+    .service('customersService', [
+      'baseServiceClass', '$state', '$q', 'ENV', 'currentStateService', 'usersService', customersService]);
 
-  function customersService(baseServiceClass, $state, $q, ENV) {
+  function customersService(baseServiceClass, $state, $q, ENV, currentStateService, usersService) {
     var ServiceClass = baseServiceClass.extend({
       filterByCustomer: false,
 
@@ -53,6 +54,19 @@
         this.pageSize = ENV.pageSize;
 
         return deferred.promise;
+      },
+      isOwnerOrStaff: function() {
+        if (usersService.currentUser.is_staff) {
+          return $q.when(true);
+        }
+        currentStateService.getCustomer().then(function(customer) {
+          for (var i = 0; i < customer.owners.length; i++) {
+            if (usersService.currentUser.uuid === customer.owners[i].uuid) {
+              return $q.when(true);
+            }
+          }
+          return $q.when(false);
+        });
       }
     });
     return new ServiceClass();
