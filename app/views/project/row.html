@@ -10,10 +10,10 @@
   </div>
 </div>
 
-<div ng-show="entity.expandItemOpen" class="compact-list__details" visible="resources">
+<div ng-if="entity.expandItemOpen" class="compact-list__details" visible="resources">
   <div class="details-table__row">
     <div class="details-table__key">
-      Resources
+      Resources:
     </div>
     <div class="details-table__value">
       <ng-pluralize count="entity.vm_count"
@@ -31,7 +31,7 @@
 
   <div class="details-table__row" visible="premiumSupport">
     <div class="details-table__key">
-      SLA
+      SLA:
     </div>
     <div class="details-table__value">
       {{ entity.plan_name || 'No plan'}}
@@ -40,18 +40,14 @@
 
   <div class="details-table__row">
     <div class="details-table__key">
-      Created
+      Created:
     </div>
     <div class="details-table__value">
       <span am-time-ago="entity.created" title="{{ entity.created }}"></span>
     </div>
   </div>
-
   <project-price-limit project="entity"></project-price-limit>
-
-  <action-list
-    actions="entityButtons"
-    entity="entity"
-    ng-show="entity.expandItemOpen">
-  </action-list>
 </div>
+
+<action-list ng-if="entity.expandItemOpen" actions="entityButtons" entity="entity"></action-list>
+</action-list>
