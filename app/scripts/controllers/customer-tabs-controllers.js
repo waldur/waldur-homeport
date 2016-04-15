@@ -658,19 +658,19 @@
 
 (function() {
   angular.module('ncsaas')
-      .controller('CustomerDeleteTabController', [
-        'baseControllerClass',
-        'customersService',
-        'currentStateService',
-        '$state',
-        CustomerDeleteTabController
-      ]);
+    .controller('CustomerDeleteTabController', [
+      'baseControllerClass',
+      'customersService',
+      'currentStateService',
+      '$state',
+      CustomerDeleteTabController
+    ]);
 
   function CustomerDeleteTabController(
-      baseControllerClass,
-      customersService,
-      currentStateService,
-      $state
+    baseControllerClass,
+    customersService,
+    currentStateService,
+    $state
   ) {
     var controllerScope = this;
     var DeleteController = baseControllerClass.extend({
@@ -701,6 +701,58 @@
     });
 
     controllerScope.__proto__ = new DeleteController();
+  }
+
+})();
+
+(function() {
+  angular.module('ncsaas')
+    .controller('CustomerSizingTabController', [
+      'baseControllerClass',
+      CustomerSizingTabController
+    ]);
+
+  function CustomerSizingTabController(
+    baseControllerClass
+  ) {
+    var controllerScope = this;
+    var SizingController = baseControllerClass.extend({
+      init: function() {
+        this.controllerScope = controllerScope;
+        this._super();
+        this.list = [
+          {
+            name: 'Monator offer',
+            email: 'john@monator.com',
+            views: [],
+            provider: {}
+          },
+          {
+            name: 'Webapp for Monster Inc.',
+            email: 'john@monator.com',
+            views: [],
+            provider: {}
+          },
+          {
+            name: 'Webapp for Monster Inc.',
+            email: 'john@monator.com',
+            views: [],
+            provider: {}
+          }
+        ];
+      },
+      calculate: function(item) {
+        var price = 0;
+        if (item.provider.price) {
+          item.views.forEach(function(view) {
+            price += view.count * item.provider.price;
+          });
+        }
+        return price;
+      }
+    });
+
+    controllerScope.__proto__ = new SizingController();
   }
 
 })();

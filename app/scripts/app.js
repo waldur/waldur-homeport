@@ -448,6 +448,9 @@
             'appContent': {
               templateUrl: 'views/customer/details.html',
             },
+            'tabSizing@organizations.details': {
+              templateUrl: 'views/customer/tab-sizing.html',
+            },
             'tabEventlog@organizations.details': {
               templateUrl: 'views/customer/tab-eventlog.html',
             },
