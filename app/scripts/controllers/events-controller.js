@@ -319,7 +319,6 @@
       'eventStatisticsService',
       'resourcesCountService',
       'currentStateService',
-      'priceEstimationService',
       'eventFormatter',
       'alertFormatter',
       'ENV',
@@ -339,7 +338,6 @@
     eventStatisticsService,
     resourcesCountService,
     currentStateService,
-    priceEstimationService,
     eventFormatter,
     alertFormatter,
     ENV,
@@ -403,10 +401,6 @@
         if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('eventlog') == -1) {
           this.getCustomerEvents();
         }
-      },
-      setProjectPrices: function() {
-        priceEstimationService.pageSize = 1000;
-        return priceEstimationService.getList();
       },
       getCustomerAlerts: function() {
         var vm = this;
