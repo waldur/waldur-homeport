@@ -2,9 +2,9 @@
 
 (function () {
     angular.module('ncsaas')
-        .directive('barChart', ['$state', barChart]);
+        .directive('barChart', ['$state', 'ncUtils', barChart]);
 
-    function barChart($state) {
+    function barChart($state, ncUtils) {
         return {
             restrict: 'E',
             replace: true,
@@ -108,9 +108,8 @@
                                 resources = item.usage;
                             }
                         });
-                        project.short_name = project.name.length > 10 ?
-                            project.name.slice(0, 10) + '..' :
-                            project.name;
+
+                        project.short_name = ncUtils.truncateTo(project.name, 6);
 
                         barName = chartType === 'resources' ?
                             project.short_name + ' ('+ resources +' resources)' :
@@ -125,10 +124,10 @@
                         colours = d3.scale.category10();
                         break;
                     case 'services':
-                        colours = d3.scale.category20c();
+                        colours = d3.scale.category20();
                         break;
                     default:
-                        colours = d3.scale.category20c();
+                        colours = d3.scale.category20();
                         break;
                 }
                 var groups = svg.selectAll('g')

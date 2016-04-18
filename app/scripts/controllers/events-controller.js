@@ -612,17 +612,18 @@
             legendLink: 'plans',
             data: []
           };
+          var freeResources = null;
           response.quotas.forEach(function(item) {
             if (item.name === 'nc_resource_count') {
               var limit;
               if (item.limit != -1) {
                 var free = item.limit - item.usage;
                 limit = item.limit;
-                vm.currentUsageData.data.push({
+                freeResources = {
                   label: free + ' free',
                   count: free,
                   name: 'plans'
-                });
+                };
                 vm.currentUsageData.legendDescription = item.usage + " used / " + limit + " total";
               } else {
                 vm.currentUsageData.legendDescription = item.usage + " used";
@@ -644,6 +645,8 @@
               vm.currentUsageData.data.push({ label: pcs + ' private clouds', count: pcs, name: 'private clouds' })
             }
           });
+          vm.currentUsageData.data = ncUtils.sortArrayOfObjects(vm.currentUsageData.data, 'name', 0);
+          freeResources && vm.currentUsageData.data.push(freeResources);
         });
       },
       setMonthCostChartData: function() {
@@ -654,9 +657,7 @@
           vm.totalMonthCost = 0;
           rows.forEach(function(item) {
             if (item.scope_type === 'service' && vm.monthCostChartData.data.length < 5) {
-              var truncatedName = item.scope_name.length > 8 ?
-                  item.scope_name.slice(0, 8) + '..'  :
-                  item.scope_name;
+              var truncatedName = ncUtils.truncateTo(item.scope_name, 8);
               vm.monthCostChartData.data.push({
                 label: truncatedName + ' ('+ ENV.currency + item.total +')',
                 count: item.total,
@@ -666,6 +667,7 @@
             }
             vm.monthCostChartData.legendDescription = "Projected cost: " + ENV.currency + vm.totalMonthCost;
           });
+          vm.monthCostChartData.data = ncUtils.sortArrayOfObjects(vm.monthCostChartData.data, 'count', 0);
           vm.setServicesByProjectChartData();
         });
       },
@@ -678,18 +680,19 @@
         };
         vm.priceEstimationRows.forEach(function(priceRow) {
           if (priceRow.scope_type === 'service' && vm.servicesByProjectChartData.data.length < 5) {
-            vm.servicesByProjectChartData.data.push({data: [], name: priceRow.scope_name});
+            vm.servicesByProjectChartData.data.push({data: [], name: priceRow.scope_name, total: priceRow.total});
             vm.projectsList.forEach(function(project) {
               var lastElem = vm.servicesByProjectChartData.data.length -1;
               vm.servicesByProjectChartData.data[lastElem].data.push({project: project.uuid, count: priceRow.total});
             });
           }
         });
+        vm.servicesByProjectChartData.data = ncUtils.sortArrayOfObjects(vm.servicesByProjectChartData.data, 'total', 0);
       },
       setResourcesByProjectChartData: function() {
         var vm = this;
         vm.resourcesByProjectChartData = {
-          data :[{data: [], name: 'VMs'}, {data: [], name: 'Applications'}, {data: [], name: 'Private clouds'}],
+          data :[{data: [], name: 'Applications'}, {data: [], name: 'Private clouds'}, {data: [], name: 'VMs'}],
           projects: vm.projectsList,
           chartType: 'resources'
         };
@@ -697,15 +700,15 @@
         vm.projectsList.forEach(function(item) {
           item.quotas.forEach(function(itemQuota) {
             if (itemQuota.name === 'nc_vm_count') {
-              vm.resourcesByProjectChartData.data[0].data.push({project: item.uuid, count: itemQuota.usage});
+              vm.resourcesByProjectChartData.data[2].data.push({project: item.uuid, count: itemQuota.usage});
               vm.resourcesCount += itemQuota.usage;
             }
             if (itemQuota.name === 'nc_app_count') {
-              vm.resourcesByProjectChartData.data[1].data.push({project: item.uuid, count: itemQuota.usage});
+              vm.resourcesByProjectChartData.data[0].data.push({project: item.uuid, count: itemQuota.usage});
               vm.resourcesCount += itemQuota.usage;
             }
             if (itemQuota.name === 'nc_private_cloud_count') {
-              vm.resourcesByProjectChartData.data[2].data.push({project: item.uuid, count: itemQuota.usage});
+              vm.resourcesByProjectChartData.data[1].data.push({project: item.uuid, count: itemQuota.usage});
               vm.resourcesCount += itemQuota.usage;            }
 
           });

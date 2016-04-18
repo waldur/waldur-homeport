@@ -29,7 +29,7 @@
                     legendDescription = scope.data.legendDescription,
                     legendLink = scope.data.legendLink;
 
-                var width = 400;
+                var width = 500;
                 var height = 200;
                 var radius = Math.min(width, height) / 2;
 
@@ -39,10 +39,10 @@
                         color = d3.scale.category10();
                         break;
                     case 'services':
-                        color = d3.scale.category20c();
+                        color = d3.scale.category20();
                         break;
                     default:
-                        color = d3.scale.category20c();
+                        color = d3.scale.category20();
                         break;
                 }
 
@@ -70,7 +70,7 @@
                     .enter()
                     .append('path')
                     .attr('d', arc)
-                    .attr('value', function(d) { return d.value; })
+                    .attr('value', function(d) { return d.data.label; })
                     .attr('fill', function(d, i) {
                         return color(d.data.label);
                     }).on("mouseenter", function() {

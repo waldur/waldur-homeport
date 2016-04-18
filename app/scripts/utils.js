@@ -185,6 +185,24 @@
         }
 
         return tempObj;
+      },
+      truncateTo: function(str, limit) {
+        return str.length > limit ? str.slice(0, limit) + '..' : str;
+      },
+      // @param order - 0 for asc, 1 for desc
+      sortArrayOfObjects: function(arr, field, desc) {
+        var vm = this;
+        vm.field = field;
+        vm.desc = desc;
+        function compare(a,b) {
+          if (a[vm.field] < b[vm.field])
+            return desc ? 1 : -1;
+          else if (a[vm.field] > b[vm.field])
+            return !desc ? 1 : -1;
+          else
+            return 0;
+        }
+        return arr.sort(compare);
       }
     };
   }
