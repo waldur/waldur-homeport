@@ -46,11 +46,11 @@
         }
       },
 
-      getImportedResources: function(service) {
+      getImportedResources: function(service, project_uuid) {
         var vm = this;
         return servicesService.getServicesList().then(function(services) {
           var url = services[service.type].url + service.uuid + '/managed_resources';
-          return vm.getAll({}, url);
+          return vm.getAll({project_uuid: project_uuid}, url);
         });
       }
     });
