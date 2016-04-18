@@ -15,17 +15,17 @@
       },
 
       isOverThreshold: function() {
-        return $scope.estimate.total >= $scope.estimate.threshold;
+        return $scope.estimate.limit > 0 && $scope.estimate.total >= $scope.estimate.threshold;
       },
 
       setThreshold: function(value) {
-        return projectsService.setThreshold($scope.estimate.url, value);
+        return projectsService.setThreshold($scope.project.url, value);
       },
 
       toggleLimit: function() {
         $scope.isHardLimit = !$scope.isHardLimit;
         var limit = $scope.isHardLimit && $scope.estimate.threshold || 0;
-        return projectsService.setLimit($scope.estimate.url, limit);
+        return projectsService.setLimit($scope.project.url, limit);
       }
     });
     $scope.init();

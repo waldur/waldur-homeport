@@ -3,9 +3,9 @@
 
 (function () {
   angular.module('ncsaas')
-    .service('projectsService', ['$q', '$http', 'baseServiceClass', projectsService]);
+    .service('projectsService', ['$q', '$http', 'baseServiceClass', 'ENV', projectsService]);
 
-  function projectsService($q, $http, baseServiceClass) {
+  function projectsService($q, $http, baseServiceClass, ENV) {
     var ServiceClass = baseServiceClass.extend({
       init: function() {
         this._super();
@@ -27,11 +27,17 @@
         var query = angular.extend({operation: 'counters'}, query);
         return this.getFactory(false).get(query).$promise;
       },
-      setThreshold: function(price_estimate_url, value) {
-        return $http.post(price_estimate_url + 'threshold/', { threshold: value });
+      setThreshold: function(project_url, value) {
+        return $http.post(ENV.apiEndpoint + 'api/price-estimates/threshold/', {
+          threshold: value,
+          scope: project_url
+        });
       },
-      setLimit: function(price_estimate_url, value) {
-        return $http.post(price_estimate_url + 'limit/', { limit: value });
+      setLimit: function(project_url, value) {
+        return $http.post(ENV.apiEndpoint + 'api/price-estimates/limit/', {
+          limit: value,
+          scope: project_url
+        });
       }
     });
     return new ServiceClass();
