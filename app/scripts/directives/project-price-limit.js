@@ -15,7 +15,7 @@
       },
 
       isOverThreshold: function() {
-        return $scope.estimate.limit > 0 && $scope.estimate.total >= $scope.estimate.threshold;
+        return $scope.estimate.threshold > 0 && $scope.estimate.total >= $scope.estimate.threshold;
       },
 
       setThreshold: function(value) {
