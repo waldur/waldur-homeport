@@ -263,6 +263,7 @@
       'baseControllerDetailUpdateClass',
       'eventsService',
       'currentStateService',
+      '$state',
       ProjectDetailUpdateController
     ]);
 
@@ -276,9 +277,11 @@
     projectsService,
     baseControllerDetailUpdateClass,
     eventsService,
-    currentStateService) {
-    var controllerScope = this;
-    var Controller = baseControllerDetailUpdateClass.extend({
+    currentStateService,
+    $state) {
+    var controllerScope = this,
+      timer,
+      Controller = baseControllerDetailUpdateClass.extend({
       customer: null,
       canEdit: false,
 
@@ -385,7 +388,7 @@
           $rootScope.$broadcast('adjustCurrentProject', this.model);
         }
         this.setCounters();
-        var timer = $interval(this.setCounters.bind(this), ENV.countersTimerInterval * 1000);
+        timer = $interval(this.setCounters.bind(this), ENV.countersTimerInterval * 1000);
         $scope.$on('$destroy', function() {
           $interval.cancel(timer);
         });
@@ -400,6 +403,12 @@
             eventsService.defaultFilter
           );
           return projectsService.getCounters(query);
+        });
+      },
+      getCountersError: function() {
+        $interval.cancel(timer);
+        projectsService.getFirst().then(function(project) {
+          $state.go('projects.details', {uuid: project.uuid});
         });
       }
     });

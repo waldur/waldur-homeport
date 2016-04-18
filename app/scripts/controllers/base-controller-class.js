@@ -317,8 +317,9 @@
               tab.count = response[key];
             }
           }
-        });
+        }, vm.getCountersError);
       },
+      getCountersError: function() {},
       getCounters: function() {
         // It should return promise
         return $q.reject();

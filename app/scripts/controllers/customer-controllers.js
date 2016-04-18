@@ -160,6 +160,7 @@
       'eventsService',
       'resourcesCountService',
       'currentStateService',
+      '$state',
       CustomerDetailUpdateController
     ]);
 
@@ -179,10 +180,12 @@
     ncUtilsFlash,
     eventsService,
     resourcesCountService,
-    currentStateService
+    currentStateService,
+    $state
     ) {
-    var controllerScope = this;
-    var CustomerController = baseControllerDetailUpdateClass.extend({
+    var controllerScope = this,
+      timer,
+      CustomerController = baseControllerDetailUpdateClass.extend({
       files: [],
       canEdit: false,
       showChart: false,
@@ -320,7 +323,7 @@
         controllerScope.updateImageUrl();
         var vm = this;
         vm.setCounters();
-        var timer = $interval(vm.setCounters.bind(vm), ENV.countersTimerInterval * 1000);
+        timer = $interval(vm.setCounters.bind(vm), ENV.countersTimerInterval * 1000);
         $scope.$on('$destroy', function() {
           $interval.cancel(timer);
         });
@@ -337,6 +340,13 @@
               eventsService.defaultFilter
           );
           return customersService.getCounters(query);
+        });
+      },
+
+      getCountersError: function() {
+        $interval.cancel(timer);
+        customersService.getPersonalOrFirstCustomer().then(function(customer) {
+          $state.go('organizations.details', {uuid: customer.uuid});
         });
       },
 

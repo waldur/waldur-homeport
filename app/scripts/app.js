@@ -1053,7 +1053,10 @@
               console.error(message, rejection.config);
             }
             blockUI.reset();
-            ncUtilsFlash.error(message);
+            // handlers for excluding 404 errors are too slow
+            if (!rejection.status || rejection.status !== 404) {
+              ncUtilsFlash.error(message);
+            }
           }
           return $q.reject(rejection);
         }
