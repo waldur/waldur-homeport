@@ -7,6 +7,7 @@
       'projectsService',
       'usersService',
       'currentStateService',
+      'customersService',
       '$rootScope',
       '$state',
       'ENV',
@@ -19,6 +20,7 @@
       projectsService,
       usersService,
       currentStateService,
+      customersService,
       $rootScope,
       $state,
       ENV,
@@ -26,6 +28,15 @@
       ncUtils) {
 
       var controllerClass = baseControllerListClass.extend({
+        expandableOptions: [
+          {
+            isList: false,
+            addItemBlock: false,
+            viewType: 'project-details',
+            isOwner: false
+          }
+        ],
+
         init: function() {
           this.service = projectsService;
           this.checkPermissions();
@@ -147,20 +158,9 @@
           this._super();
         },
         checkPermissions: function() {
-          var vm = this;
-          vm.userCanManageProjects = false;
-          if (usersService.currentUser.is_staff) {
-            vm.userCanManageProjects = true;
-            return;
-          }
-          currentStateService.getCustomer().then(function(customer) {
-            for (var i = 0; i < customer.owners.length; i++) {
-              if (usersService.currentUser.uuid === customer.owners[i].uuid) {
-                vm.userCanManageProjects = true;
-                break;
-              }
-            }
-          });
+          customersService.isOwnerOrStaff().then(function() {
+            this.userCanManageProjects = true;
+          }.bind(this));
         },
         projectHasResources: function(project) {
           for (var i = 0; i < project.quotas.length; i++) {

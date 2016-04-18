@@ -21,7 +21,6 @@
         background: white;
     } // &.dropdown-active
     &:hover {
-        box-shadow: 0 1px 1px rgba(0,0,0,0.1);
         text-decoration: none;
     }
 } // button
@@ -74,6 +73,9 @@
     padding-top: 12px;
     height: 39px;
     font-weight: normal;
+    &:hover {
+        opacity: 0.8;
+    }
 } // button-apply
 .button-select {
     @include inline-middle;
