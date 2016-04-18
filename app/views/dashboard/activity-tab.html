@@ -1,75 +1,77 @@
 <div ng-controller="DashboardActivityController as DashboardController" class="row">
     <div class="half-block">
         <h3>Projects</h3>
-        <div ng-repeat="project in DashboardController.projects" class="white-box graph"  >
-            <div ng-click="DashboardController.selectProject(project)" class="graph-head"
-                 ng-class="{'active': project.selected}">
-                <h4 ng-class="{'current': project.selected}">
-                    <expandable-indicator open="project.selected"></expandable-indicator>
-                    <a stoppropagation ui-sref="projects.details({uuid: project.uuid})">{{ project.name }}</a>
-                    <div class="support-buttons" visible="premiumSupport">
-                        <a stoppropagation class="button-support"
-                           ng-if="::project.plan"
-                           ui-sref="projects.details({uuid: project.uuid, tab: 'premiumSupport'})">SLA details</a>
-                        <a stoppropagation class="button-support pending"
-                           ng-if="::!project.plan && project.has_pending_contracts"
-                           ui-sref="projects.details({uuid: project.uuid, tab: 'premiumSupport'})">SLA pending</a>
-                        <a stoppropagation class="button-support pending"
-                           ng-if="::!project.plan && !project.has_pending_contracts"
-                           ng-click="DashboardController.addSupportContract(project)">Add SLA</a>
-                    </div>
-                    <div class="information-blocks">
-                        <a stoppropagation class="button-support"ng-click="">
-                            {{project.cost | currency}}
+
+        <div class="white-box graph dashboard-projects" block-ui="dashboard-projects-list">
+            <div ng-repeat="project in DashboardController.projects">
+                <div ng-click="DashboardController.selectProject(project)" class="graph-head"
+                     ng-class="{'active': project.selected}">
+                    <h4 ng-class="{'current': project.selected}">
+                        <expandable-indicator open="project.selected"></expandable-indicator>
+                        <a stoppropagation ui-sref="projects.details({uuid: project.uuid})">{{ project.name }}</a>
+                        <div class="support-buttons" visible="premiumSupport">
+                            <a stoppropagation class="button-support"
+                               ng-if="::project.plan"
+                               ui-sref="projects.details({uuid: project.uuid, tab: 'premiumSupport'})">SLA details</a>
+                            <a stoppropagation class="button-support pending"
+                               ng-if="::!project.plan && project.has_pending_contracts"
+                               ui-sref="projects.details({uuid: project.uuid, tab: 'premiumSupport'})">SLA pending</a>
+                            <a stoppropagation class="button-support pending"
+                               ng-if="::!project.plan && !project.has_pending_contracts"
+                               ng-click="DashboardController.addSupportContract(project)">Add SLA</a>
+                        </div>
+                        <div class="information-blocks">
+                            <a stoppropagation class="button-support">
+                                {{project.price_estimate || 0 | defaultCurrency}}
                             <span class="inline">
                                 <helpicon class="button-help-icon" help-text="Projected cost of resources used during this month within a project."></helpicon>
                             </span>
-                        </a>
-                    </div>
-                </h4>
-            </div>
-            <div ng-if="project.selected" class="body" block-ui="activity-content-{{ project.uuid }}">
-                <ul class="counters">
-                    <li class="active-alert" ng-class="{'empty': !project.count.alerts}" visible="alerts">
-                        <div class="counter-name">Active alerts</div>
-                        <div ui-sref="projects.details({uuid: project.uuid, tab: 'alerts'})"
-                             class="counter link-to-project" ng-bind="project.count.alerts"></div>
-                    </li>
-                    <li class="resources" ng-class="{'empty': !project.count.resources}" visible="resources">
-                        <div class="counter-name">Resources</div>
-                        <div ui-sref="projects.details({uuid: project.uuid, tab: 'vms'})"
-                             class="counter link-to-project" ng-bind="project.count.resources"></div>
-                    </li>
-                    <li visible="providers" class="services" ng-class="{'empty': !project.count.services}" visible="providers">
-                        <div class="counter-name">Providers</div>
-                        <div class="counter" ng-bind="project.count.services"></div>
-                    </li>
-                    <li class="people" ng-class="{'empty': !project.count.users}">
-                        <div class="counter-name">People</div>
-                        <div class="counter" ng-bind="project.count.users"></div>
-                    </li>
-
-                </ul>
-                <div class="clear"></div>
-                <div class="chart" visible="eventlog">
-                    <div class="label">No of events per day</div>
-                    <line-chart ng-if="project.d3Data && DashboardController.showGraph"
-                                chart-data="project.d3Data"></line-chart>
+                            </a>
+                        </div>
+                    </h4>
                 </div>
+                <div ng-if="project.selected" class="body" block-ui="activity-content-{{ project.uuid }}">
+                    <ul class="counters">
+                        <li class="active-alert" ng-class="{'empty': !project.count.alerts}" visible="alerts">
+                            <div class="counter-name">Active alerts</div>
+                            <div ui-sref="projects.details({uuid: project.uuid, tab: 'alerts'})"
+                                 class="counter link-to-project" ng-bind="project.count.alerts"></div>
+                        </li>
+                        <li class="resources" ng-class="{'empty': !project.count.resources}" visible="resources">
+                            <div class="counter-name">Resources</div>
+                            <div ui-sref="projects.details({uuid: project.uuid, tab: 'vms'})"
+                                 class="counter link-to-project" ng-bind="project.count.resources"></div>
+                        </li>
+                        <li visible="providers" class="services" ng-class="{'empty': !project.count.services}" visible="providers">
+                            <div class="counter-name">Providers</div>
+                            <div class="counter" ng-bind="project.count.services"></div>
+                        </li>
+                        <li class="people" ng-class="{'empty': !project.count.users}">
+                            <div class="counter-name">People</div>
+                            <div class="counter" ng-bind="project.count.users"></div>
+                        </li>
+
+                    </ul>
+                    <div class="clear"></div>
+                    <div class="chart" visible="eventlog">
+                        <div class="label">No of events per day</div>
+                        <line-chart ng-if="project.d3Data && DashboardController.showGraph"
+                                    chart-data="project.d3Data"></line-chart>
+                    </div>
+                </div>
+            </div>
+            <div class="placeholder white-box" ng-if="DashboardController.projects.length==0">
+                There are no projects
+                <div class="inline"
+                     check-quotas="{{DashboardController.checkQuotas}}"
+                     sref="projects.create"
+                     class-link="button-apply">
+                    <div><i class="icon plus"></i>Add new project</div>
+                </div>
+
             </div>
         </div>
         <a ng-if="DashboardController.projects.length" ui-sref="organizations.details({uuid: DashboardController.currentCustomer.uuid, tab: 'projects'})" class="center-link">Show all projects</a>
-        <div class="placeholder white-box" ng-if="DashboardController.projects.length==0">
-            There are no projects
-            <div class="inline"
-                 check-quotas="{{DashboardController.checkQuotas}}"
-                 sref="projects.create"
-                 class-link="button-apply">
-                <div><i class="icon plus"></i>Add project</div>
-            </div>
-
-        </div>
-
     </div>
     <div class="half-block">
         <div class="alerts-list">
@@ -81,7 +83,7 @@
                 </div>
                 <div class="clear"></div>
             </div>
-            <div class="white-box" block-ui="dashboard-alerts-list">
+            <div class="white-box dashboard-alerts" block-ui="dashboard-alerts-list">
                 <ul>
                     <li ng-repeat="alert in DashboardController.alerts"
                         ng-class="{'fail': alert.severity=='error', 'hovered': isHovered}"
