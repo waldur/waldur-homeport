@@ -7,7 +7,7 @@
       Estimated cost:
     </div>
     <div class="details-table__value">
-      <span>{{ estimate.total || 0 | defaultCurrency }}</span>
+      <span ng-class="{'over-threshold': isOverThreshold() }">{{ estimate.total || 0 | defaultCurrency }}</span>
     </div>
   </div>
   <div class="details-table__row">
@@ -18,7 +18,8 @@
       {{ estimate.threshold || 0 | defaultCurrency }}
     </div>
     <div class="details-table__value" ng-if="userCanManageProjects">
-      <span editable-text="estimate.threshold"
+      <span editable-number="estimate.threshold"
+            e-min="0"
             e-form="rowform"
             buttons="no"
             onbeforesave="setThreshold($data)">

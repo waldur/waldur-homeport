@@ -14,6 +14,10 @@
         });
       },
 
+      isOverThreshold: function() {
+        return $scope.estimate.total >= $scope.estimate.threshold;
+      },
+
       setThreshold: function(value) {
         return projectsService.setThreshold($scope.estimate.url, value);
       },
