@@ -2,7 +2,7 @@
     list-style: none;
     padding: 0;
     .icon {
-        color: #50b848;
+        color: $button-green;
         padding-right: 10px;
         padding-top: 5px;
         @include property(font-size, $normal-font);

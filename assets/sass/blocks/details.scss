@@ -667,10 +667,13 @@ $searchInputHeight: 32px;
 }
 
 .details-table__key {
-  width: 100px;
+  width: 150px;
   flex-grow: 0;
   flex-shrink: 0;
   color: $gray-label;
+  @include bp(xs) {
+    width: 100px;
+  }
 }
 
 .details-table__value {

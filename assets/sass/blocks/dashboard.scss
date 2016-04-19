@@ -284,8 +284,9 @@
 
       .graph {
         min-height: 20px;
-        border-bottom: 1px solid #ebebeb;
+        border-bottom: 1px solid $table-gray;
         padding: 0;
+
 
         .graph-head {
           padding: 20px 20px 20px 40px;
@@ -399,6 +400,19 @@
             font-size: 12px;
             font-weight: bold;
           }
+        }
+      }
+      .dashboard-projects,
+      .dashboard-alerts {
+        &.block-ui-visible {
+          min-height: 90px;
+        }
+        .block-ui-message-container {
+          top: 16%;
+        }
+
+        > div {
+          border-bottom: 1px solid $table-gray;
         }
       }
       .alerts-list {
@@ -585,6 +599,9 @@
       padding-left: 10px;
     }
   }
+}
+.dashboard-projects {
+  min-height: 57px;
 }
 .table {
   border:1px solid #cccaca;
@@ -810,3 +827,4 @@
     }
   }
 }
+

@@ -354,19 +354,11 @@
               created_at: date
             });
 */
-            if($window.localStorage[ENV.currentCustomerUuidStorageKey]) {
-              customersService.getTopMenuList().then(function(customers) {
-                var currentCustomer = customers.filter(function(customer) {
-                  return customer.uuid === $window.localStorage[ENV.currentCustomerUuidStorageKey];
-                });
-                if (currentCustomer.length > 0) {
-                    deferred.resolve(currentCustomer[0]);
-                    getProject();
-                } else {
-                  delete $window.localStorage[ENV.currentCustomerUuidStorageKey];
-                  (customers.length === 0) ? $state.go('initialdata.view') : setPersonalOrFirstCustomer();
-                }
-              });
+            if ($window.localStorage[ENV.currentCustomerUuidStorageKey]) {
+              customersService.$get($window.localStorage[ENV.currentCustomerUuidStorageKey]).then(function(customer) {
+                deferred.resolve(customer);
+                getProject()
+              }, setPersonalOrFirstCustomer);
             } else {
               setPersonalOrFirstCustomer();
             }
