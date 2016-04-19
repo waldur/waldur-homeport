@@ -7,6 +7,11 @@ It uses [bower.io][1] as package manager and [grunt][2] for automation.
 
 __Requirements__:
 
+* `autoconf`
+* `bzip2`
+* `GConf2` on CentOS
+* `git`
+* `google-chrome` from https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm on CentOS
 * `libpng-devel` on CentOS or `libpng-dev` on Ubuntu
 * `npm`
 * `rubygems`
@@ -22,7 +27,7 @@ __Installation steps__:
 
         gem install sass
         npm install
-        npm install -g grunt-cli
+        npm install -g bower grunt-cli
         bower install
 
 3. Create `/app/scripts/configs/custom-config.js`:
@@ -77,7 +82,7 @@ It is needed for enabling reading header's response from frontend app.
 
 ### Setup
 
-1. Install developer dependencies from `package.json`
+1. Install developer dependencies from `package.json` (already done by `npm install`)
 
 2. Update WebdriverJS:
 
