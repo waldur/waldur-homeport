@@ -664,8 +664,16 @@
           if (priceRow.scope_type === 'service' && vm.servicesByProjectChartData.data.length < 5) {
             vm.servicesByProjectChartData.data.push({data: [], name: priceRow.scope_name, total: priceRow.total});
             vm.projectsList.forEach(function(project) {
+              var projectPrice = 0;
+              vm.priceEstimationRows.forEach(function(innerPriceRow) {
+                if (innerPriceRow.scope_type === 'serviceprojectlink'
+                    && innerPriceRow.scope_name.indexOf(priceRow.scope_name) !== -1
+                    && innerPriceRow.scope_name.indexOf(project.name) !== -1) {
+                  projectPrice += innerPriceRow.total;
+                }
+              });
               var lastElem = vm.servicesByProjectChartData.data.length -1;
-              vm.servicesByProjectChartData.data[lastElem].data.push({project: project.uuid, count: priceRow.total});
+              vm.servicesByProjectChartData.data[lastElem].data.push({project: project.uuid, count: projectPrice});
             });
           }
         });

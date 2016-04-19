@@ -229,7 +229,7 @@
                         if (resource.x) {
                             svg.append('text')
                               .text(resource.x)
-                              .attr('x', xScale(resource.x0) + xScale(resource.x) / 2 - 3)
+                              .attr('x', xScale(resource.x0) + xScale(resource.x) / 2 - resource.x0.toString().length -5)
                               .attr('y', yScale(resource.y) + yScale.rangeBand() / 2 + 5)
                               .attr('fill', "#fff");
                         }
