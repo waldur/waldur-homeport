@@ -194,11 +194,14 @@ angular.module('ncsaas')
     },
 
     servicesStateColorClasses: {
+      'OK': 'online',
       'Erred': 'erred',
       'In Sync': 'online',
       'Creation Scheduled': 'processing',
       'Creating': 'processing',
-      'Sync Scheduled': 'processing',
-      'Syncing': 'processing'
+      'Update Scheduled': 'processing',
+      'Updating': 'processing',
+      'Deletion Scheduled': 'processing',
+      'Deleting': 'processing'
     }
   });
