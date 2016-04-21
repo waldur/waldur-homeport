@@ -5,17 +5,6 @@ It uses [bower.io][1] as package manager and [grunt][2] for automation.
 
 ## Installation
 
-__Requirements__:
-
-* `autoconf`
-* `bzip2`
-* `GConf2` on CentOS
-* `git`
-* `google-chrome` from https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm on CentOS
-* `libpng-devel` on CentOS or `libpng-dev` on Ubuntu
-* `npm`
-* `rubygems`
-
 __Installation steps__:
 
 1. Clone project and go to its folder:
@@ -23,20 +12,41 @@ __Installation steps__:
         git clone git@code.opennodecloud.com:nc-saas/nodeconductor-web.git
         cd nodeconductor-web
 
-2. Install dependencies and build static assets:
+2. Install dependencies:
 
+Example for CentOS 7:
+
+        yum -y install autoconf bzip2 GConf2 git libpng-devel npm rubygems Xvfb
+        yum -y install https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
         gem install sass
-        npm install
         npm install -g bower grunt-cli
+
+Note for Ubuntu users: `libpng-devel` is called `libpng-dev` in Ubuntu repositories
+
+Update NVM if installed version is &lt;4.2.0:
+
+        npm install -g nvm
+        nvm download 4.2.0
+        nvm build 4.2.0
+        nvm install 4.2.0
+
+3. Build static assets:
+
+        npm install
         bower install
 
-3. Create `/app/scripts/configs/custom-config.js`:
+4. Create `/app/scripts/configs/custom-config.js`:
 
         cp app/scripts/configs/custom-config.js.example app/scripts/configs/custom-config.js
 
-4. Configure `custom-config.js`
+5. Configure `custom-config.js`
 
-5. Run application:
+6. (headless servers only) Start X:
+
+        Xvfb :0 -ac -screen 0 1920x1080x24 &
+        export DISPLAY=:0
+
+7. Run application:
 
     choose mode:
     
@@ -62,7 +72,7 @@ __Installation steps__:
 
     `grunt prod` - in production mode
 
-6. Server will listen on `//localhost:8000`
+Server will listen on `//localhost:8000`
 
 ## Backend
 
