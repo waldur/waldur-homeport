@@ -59,7 +59,7 @@
         if (usersService.currentUser.is_staff) {
           return $q.when(true);
         }
-        currentStateService.getCustomer().then(function(customer) {
+        return currentStateService.getCustomer().then(function(customer) {
           for (var i = 0; i < customer.owners.length; i++) {
             if (usersService.currentUser.uuid === customer.owners[i].uuid) {
               return $q.when(true);
