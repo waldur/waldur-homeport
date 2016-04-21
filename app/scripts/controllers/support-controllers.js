@@ -78,7 +78,7 @@
             viewType: 'support',
             minipaginationData:
             {
-              pageChange: 'getCommentsForIssue',
+              pageChange: this.getCommentsForIssue.bind(this),
               pageEntityName: this.expandableCommentsKey
             }
           }
@@ -95,7 +95,7 @@
       _getCommentsForIssue: function(key, page) {
         var vm = this;
         var filter = {
-          key: key
+          issue_key: key
         };
         vm.issueComments[key] = {data:null};
         page = page || 1;
@@ -114,8 +114,8 @@
         var vm = this;
         issue.newCommentSaving = true;
         var instance = issueCommentsService.$create();
-        instance.body = issue.newCommentBody;
-        instance.key = issue.key;
+        instance.message = issue.newCommentBody;
+        instance.issue = issue.url;
         instance.$save(
           function() {
             vm.getCommentsForIssue(issue.key);

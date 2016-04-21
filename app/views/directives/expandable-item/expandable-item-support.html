@@ -12,16 +12,16 @@
                 <div class="list-item">
                     <div class="avatar">
                         <span class="avatar">
-                            <img gravatar-src="element.author.emailAddress" gravatar-size="100" alt="" class="avatar-img">
+                            <img gravatar-src="element.user_email" gravatar-size="100" alt="" class="avatar-img">
                         </span>
                     </div>
                     <div class="support name">
                         <span class="subtitle">
-                            <strong>{{ element.author.displayName }}</strong>
+                            <strong>{{ element.user_name }}</strong>
                             <span title="{{ ::element.created | date:'medium' }}" am-time-ago="element.created"></span>
                         </span>
                     </div>
-                    <article class="normal-description">{{ element.body }}</article>
+                    <article class="normal-description">{{ element.message }}</article>
                 </div>
             </section>
         </li>
@@ -30,7 +30,7 @@
     <minipagination
             page-models="expandableList[expandableOptions.listKey]"
             page-model-id="expandableElement[expandableOptions.modelId]"
-            page-change="expandableList[expandableOptions.minipaginationData.pageChange]"
+            page-change="expandableOptions.minipaginationData.pageChange"
             page-entity-name="{{ expandableOptions.minipaginationData.pageEntityName }}">
     </minipagination>
 

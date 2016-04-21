@@ -9,7 +9,7 @@
     var ServiceClass = baseServiceClass.extend({
       init: function() {
         this._super();
-        this.endpoint = '/issues/';
+        this.endpoint = '/jira-issues/';
       }
     });
     return new ServiceClass();
