@@ -317,6 +317,13 @@
               key: 'alerts',
               viewName: 'tabAlerts',
               countFieldKey: 'alerts'
+            },
+            {
+              title: 'SLA',
+              key: 'sla',
+              viewName: 'tabSLA',
+              count: -1,
+              hideSearch: true
             }
           ]
         };
