@@ -1,0 +1,26 @@
+<div ng-controller="ResourceGraphsController as GraphsController">
+    <div class="white-box empty-data-block"
+         ng-if="GraphsController.noGraphsData">
+        <h1>Not enough data for CPU graph</h1>
+    </div>
+    <style>
+
+
+    </style>
+    <div class="white-box"
+         ng-if="!GraphsController.noGraphsData">
+        <div class="resource-graphs">
+            <div class="graph">
+                <span class="chart-name">CPU</span>
+                <multi-line-chart chart-data="GraphsController.cpuGraphData"
+                                  chart-controller="GraphsController"></multi-line-chart>
+            </div>
+
+            <div class="graph">
+                <span class="chart-name">HDD</span>
+                <multi-line-chart chart-data="GraphsController.hddGraphData"
+                                  chart-controller="GraphsController"></multi-line-chart>
+            </div>
+        </div>
+    </div>
+</div>
