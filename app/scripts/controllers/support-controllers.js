@@ -117,7 +117,7 @@
         instance.issue = issue.url;
         instance.$save(
           function() {
-            vm.getCommentsForIssue(issue.key);
+            vm.getCommentsForIssue(issue.uuid);
             issue.newCommentSaving = false;
             issue.newCommentBody = "";
           },
