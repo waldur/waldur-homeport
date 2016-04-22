@@ -74,7 +74,7 @@
             hasAnswerForm: true,
             answersBlock: true,
             listKey: 'issueComments',
-            modelId: 'key',
+            modelId: 'uuid',
             viewType: 'support',
             minipaginationData:
             {
@@ -85,29 +85,28 @@
         ];
       },
       showMore: function(issue) {
-        if (!this.issueComments[issue.key]) {
-          this.getCommentsForIssue(issue.key);
+        if (!this.issueComments[issue.uuid]) {
+          this.getCommentsForIssue(issue.uuid);
         }
       },
-      getCommentsForIssue: function(key, page) {
-        ncUtils.blockElement('comments_' + key, this._getCommentsForIssue(key, page));
+      getCommentsForIssue: function(uuid, page) {
+        ncUtils.blockElement('comments_' + uuid, this._getCommentsForIssue(uuid, page));
       },
-      _getCommentsForIssue: function(key, page) {
+      _getCommentsForIssue: function(uuid, page) {
         var vm = this;
-        var filter = {
-          issue_key: key
-        };
-        vm.issueComments[key] = {data:null};
+        vm.issueComments[uuid] = {data:null};
         page = page || 1;
         issueCommentsService.page = page;
         issueCommentsService.pageSize = 5;
-        vm.issueComments[key].page = page;
+        vm.issueComments[uuid].page = page;
         issueCommentsService.filterByCustomer = false;
-        return issueCommentsService.getList(filter).then(function(response) {
-          vm.issueComments[key].data = response;
-          vm.issueComments[key].pages = issueCommentsService.pages;
-          $rootScope.$broadcast('mini-pagination:getNumberList', vm.issueComments[key].pages,
-            page, vm.getCommentsForIssue.bind(vm), vm.expandableCommentsKey, key);
+        return issueCommentsService.getList({
+          issue_uuid: uuid
+        }).then(function(response) {
+          vm.issueComments[uuid].data = response;
+          vm.issueComments[uuid].pages = issueCommentsService.pages;
+          $rootScope.$broadcast('mini-pagination:getNumberList', vm.issueComments[uuid].pages,
+            page, vm.getCommentsForIssue.bind(vm), vm.expandableCommentsKey, uuid);
         });
       },
       addComment: function(issue) {
@@ -151,6 +150,9 @@
       },
       getSuccessMessage: function() {
         return this.successMessage.replace('{vm_name}', this.instance.summary);
+      },
+      saveInstance: function() {
+        return this.service.createIssue(this.instance);
       }
     });
 
