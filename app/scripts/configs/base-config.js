@@ -7,11 +7,15 @@ angular.module('ncsaas')
     apiEndpoint: 'http://localhost:8080/',
     modePageTitle: 'NodeConductor - Cloud Service Management',
 
-    // auth config
+    // Social login config
     googleClientId: 'google client id',
     googleEndpointUrl: 'api-auth/google/',
     facebookClientId: 'facebook client id',
     facebookEndpointUrl: 'api-auth/facebook/',
+
+    // JIRA config
+    supportProjectUUID: 'support project UUID',
+
     pageSizes: [5, 10, 20, 50],
     pageSize: 10,
     topMenuCustomersCount: 50,

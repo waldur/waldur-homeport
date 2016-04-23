@@ -128,6 +128,7 @@ Nodeconductor-web allows authentication through GooglePlus and Facebook.
 [This instructions][3] can be used for Google or Facebook application creation.
 Application public id has to be set as `googleClientId` or `facebookClientId` parameters in `CUSTOMENV`.
 
+In order to use JIRA support, please specify in what project to create a ticket, and set value of `supportProjectUUID` parameter in `CUSTOMENV`.
 
 ## Development process
 
