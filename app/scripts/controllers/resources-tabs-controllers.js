@@ -85,7 +85,7 @@
         this._super();
 
         this.data = [];
-        this.jumping = [
+        this.events = [
           {
             "timestamp": 1418043540,
             "state": "U"
@@ -106,11 +106,6 @@
             value: i * 10
           });
         }
-      },
-      dateFormat: function(timestamp) {
-        var date = new Date(timestamp);
-        return date.getYear() + '/' + (date.getMonth() + 1) + '/' + date.getDay()
-          + ' ' + date.getHours() + ':' + date.getMinutes();
       }
     });
 
