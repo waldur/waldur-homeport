@@ -70,7 +70,7 @@
                     .enter()
                     .append('path')
                     .attr('d', arc)
-                    .attr('value', function(d) { return d.data.label; })
+                    .attr('value', function(d) { return d.data.fullLabel; })
                     .attr('fill', function(d, i) {
                         return color(d.data.label);
                     }).on("mouseenter", function() {

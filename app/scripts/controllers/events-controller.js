@@ -642,6 +642,7 @@
               var truncatedName = ncUtils.truncateTo(item.scope_name, 8);
               vm.monthCostChartData.data.push({
                 label: truncatedName + ' ('+ ENV.currency + item.total +')',
+                fullLabel: item.scope_name + ' ('+ ENV.currency + item.total +')',
                 count: item.total,
                 itemName: item.scope_name,
                 name: 'providers' });
