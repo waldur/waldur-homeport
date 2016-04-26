@@ -75,10 +75,16 @@
       getFields: function(options) {
         var fields = [];
         var blacklist = ['name', 'customer', 'settings', 'available_for_all'];
+        var secretFields = ['password', 'token'];
         for (var name in options) {
           var option = options[name];
           if (!option.read_only && blacklist.indexOf(name) == -1) {
             option.name = name;
+            if (secretFields.indexOf(name) != -1) {
+              option.secret = true;
+            } else {
+              option.secret = false;
+            }
             fields.push(option);
           }
         }
