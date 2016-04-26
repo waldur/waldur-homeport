@@ -80,11 +80,7 @@
           var option = options[name];
           if (!option.read_only && blacklist.indexOf(name) == -1) {
             option.name = name;
-            if (secretFields.indexOf(name) != -1) {
-              option.secret = true;
-            } else {
-              option.secret = false;
-            }
+            option.secret = secretFields.indexOf(name) != -1;
             fields.push(option);
           }
         }

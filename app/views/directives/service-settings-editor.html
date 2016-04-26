@@ -12,8 +12,8 @@
                        type="{{showSecret ? 'text' : 'password'}}"
                        ng-model="service.values[field.name]">
                 <button class="button" ng-click="showSecret = !showSecret">
-                    <label ng-if="showSecret">Hide</label>
-                    <label ng-if="!showSecret">Show</label>
+                    <label class="label" ng-if="showSecret">Hide</label>
+                    <label class="label" ng-if="!showSecret">Show</label>
                 </button>
             </div>
             <div class="col input input-full" ng-if="!field.secret" ng-switch="::field.type">
