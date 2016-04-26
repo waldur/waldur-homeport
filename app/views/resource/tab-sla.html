@@ -1,0 +1,14 @@
+<section class="tab-sla" ng-controller="ResourceSLAController as ResourceSLA">
+    <div class="sla-chart">
+
+    </div>
+    <div class="sla-list">
+        <ul>
+            <li ng-repeat="item in ResourceSLA.events">
+                <span>{{ item.state === 'U' ? 'Up' : 'Down' }}</span>
+                <span>{{ item.timestamp | dateTime }}</span>
+            </li>
+        </ul>
+    </div>
+    <vertical-bar-chart chart-data="ResourceSLA.data"></vertical-bar-chart>
+</section>
