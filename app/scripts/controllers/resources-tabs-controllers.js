@@ -74,52 +74,22 @@
   angular.module('ncsaas')
       .controller('ResourceGraphsController', [
         'baseControllerClass',
-        'resourcesService',
-        '$stateParams',
+        'resourceMonitoringService',
         ResourceGraphsController]);
 
   function ResourceGraphsController(
       baseControllerClass,
-      resourcesService,
-      $stateParams) {
+      resourceMonitoringService) {
     var controllerScope = this;
     var controllerClass = baseControllerClass.extend({
       init: function() {
         this.controllerScope = controllerScope;
+        this.service = resourceMonitoringService;
         this._super();
         this.noGraphsData = false;
-        this.cpuGraphData = this.getCPUDummy();
-        this.hddGraphData = this.getHDDDummy();
-
-      },
-      getCPUDummy: function() {
-        var data = [],
-            counter = 0,
-            date = new Date();
-        for (var i=0; i<100; i++) {
-          data.push({
-            core1: Math.random() * 2,
-            core2: Math.random() * 2,
-            date: new Date(date.getTime() + counter * 60000)
-          });
-          counter++;
-        }
-        return data;
-      },
-      getHDDDummy: function() {
-        var data = [],
-            counter = 0,
-            date = new Date();
-        for (var i=0; i<100; i++) {
-          data.push({
-            hdd: Math.random() * 2,
-            date: new Date(date.getTime() + counter * 60000)
-          });
-          counter++;
-        }
-        return data;
+        this.cpuGraphData = this.service.getCPUData();
+        this.hddGraphData = this.service.getHDDData();
       }
-
     });
 
     controllerScope.__proto__ = new controllerClass();
