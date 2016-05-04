@@ -645,7 +645,7 @@
             }
             vm.monthCostChartData.legendDescription = "Projected cost: " + ENV.currency + vm.totalMonthCost;
           });
-          vm.monthCostChartData.data = ncUtils.sortArrayOfObjects(vm.monthCostChartData.data, 'count', 0);
+          vm.monthCostChartData.data = ncUtils.sortArrayOfObjects(vm.monthCostChartData.data, 'count', 1);
           vm.setServicesByProjectChartData();
         });
       },
