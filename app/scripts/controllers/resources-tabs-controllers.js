@@ -73,39 +73,22 @@
 (function() {
   angular.module('ncsaas')
     .controller('ResourceSLAController', [
+      'slaService',
       'baseControllerClass',
       ResourceSLAController]);
 
   function ResourceSLAController(
+    slaService,
     baseControllerClass) {
     var controllerScope = this;
     var controllerClass = baseControllerClass.extend({
       init: function() {
         this.controllerScope = controllerScope;
+        this.service = slaService;
         this._super();
 
-        this.data = [];
-        this.events = [
-          {
-            "timestamp": 1418043540,
-            "state": "U"
-          },
-          {
-            "timestamp": 1417928550,
-            "state": "D"
-          },
-          {
-            "timestamp": 1417928490,
-            "state": "U"
-          }
-        ];
-
-        for (var i = 0; i <= 10; i++) {
-          this.data.push({
-            date: new Date(2011, i, 1),
-            value: i * 10
-          });
-        }
+        this.data = this.service.getGraphList();
+        this.events = this.service.getEventsList();
       }
     });
 

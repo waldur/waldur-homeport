@@ -15,7 +15,7 @@
         @include property(border-radius, 4 4 0 0);
         &.active {
             background-color: white;
-            box-shadow: 0px -1px 2px 0px rgba(223, 223, 223, 0.5);
+            box-shadow: 0 -1px 2px 0 rgba(223, 223, 223, .5);
         } // &.active
     }
 } // tabs-nav

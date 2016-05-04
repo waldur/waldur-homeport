@@ -85,16 +85,27 @@
             return height ;
           });
 
-          svg.selectAll("bar")
-            .data(data)
-            .enter().append("rect")
-            .style("fill", "#28ae60")
-            .attr("x", function(d) { return x(d.date); })
-            .attr("width", x.rangeBand())
-            .attr("y", function(d) { return y(d.value); })
-            .attr("height", function(d) {
-              return height - y(d.value);
-            });
+        var barGroups = svg.selectAll("bar")
+          .data(data)
+          .enter().append("g")
+          .attr('transform', function(d) {
+            return 'translate(' + x(d.date) + ',' + y(d.value) + ')';
+          });
+        barGroups.append("rect")
+          .style("fill", "#28ae60")
+          .attr("width", x.rangeBand())
+          .attr("height", function(d) {
+            return height - y(d.value);
+          });
+        barGroups.append('text')
+          .attr("x", function(d) { return !d.value ? 15 : 10; })
+          .attr("y", function(d) {
+            return d.value ? d.value + 5 : d.value;
+          })
+          .attr('fill', "#fff")
+          .text(function(d) {
+            return d.value;
+          });
       }
     }
   }

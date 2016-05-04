@@ -3,6 +3,7 @@
 
     </div>
     <div class="sla-list">
+        <div class="title">Latest SLA events</div>
         <ul>
             <li ng-repeat="item in ResourceSLA.events">
                 <span>{{ item.state === 'U' ? 'Up' : 'Down' }}</span>
