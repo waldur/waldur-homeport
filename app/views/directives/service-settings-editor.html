@@ -1,4 +1,7 @@
 <div>
+    <div ng-if="loading">
+      <h3>Please wait while service settings are loading</h3>
+    </div>
     <div class="short-form full" ng-if="service.editable">
         <div class="form-row" ng-repeat="field in service.fields">
             <div class="col label">
