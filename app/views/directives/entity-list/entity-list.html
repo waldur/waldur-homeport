@@ -198,7 +198,7 @@
                             <span editable-text="entity[field.propertyName]"
                                   e-form="rowform"
                                   buttons="no"
-                                  onaftersave="entityList.update(entity)">
+                                  onbeforesave="entityList.editInPlace(entity, $data)">
                                     {{ entity[field.propertyName] }}
                             </span>
                             <div stoppropagation class="icon pencil-square-o" ng-click="rowform.$show()" ng-hide="rowform.$visible"></div>
