@@ -134,9 +134,9 @@
 
 
   angular.module('ncsaas')
-    .controller('IssueAddController', ['issuesService', 'baseControllerAddClass', IssueAddController]);
+    .controller('IssueAddController', ['issuesService', 'baseControllerAddClass', '$stateParams', IssueAddController]);
 
-  function IssueAddController(issuesService, baseControllerAddClass) {
+  function IssueAddController(issuesService, baseControllerAddClass, $stateParams) {
     var controllerScope = this;
     var controllerClass = baseControllerAddClass.extend({
       init: function() {
@@ -147,6 +147,14 @@
         this.issue = this.instance;
         this.issue.summary = "";
         this.issue.description = "";
+        this.title = 'Add ticket';
+        this.descriptionLabel = 'Ticket description';
+        this.type = $stateParams.type;
+        if (this.type === 'remove_user') {
+          this.issue.summary = "Account removal";
+          this.title = 'Account removal';
+          this.descriptionLabel = 'Removal description';
+        }
       },
       getSuccessMessage: function() {
         return this.successMessage.replace('{vm_name}', this.instance.summary);

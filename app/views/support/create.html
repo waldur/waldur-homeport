@@ -1,12 +1,12 @@
 <div ng-controller="IssueAddController as IssueAdd">
 
     <div class="container">
-        <h1>Add ticket</h1>
+        <h1>{{ IssueAdd.title }}</h1>
     </div>
 
     <div class="white-box">
         <section class="short-form">
-            <div class="form-row">
+            <div class="form-row" ng-hide="IssueAdd.type === 'remove_user'">
                 <div class="col label">
                     <label for="">Ticket name:</label>
                 </div>
@@ -21,7 +21,7 @@
             </div>
             <div class="form-row">
                 <div class="col label">
-                    <label for="">Ticket description:</label>
+                    <label for="">{{ IssueAdd.descriptionLabel }}:</label>
                 </div>
                 <div class="col input input-full">
                     <textarea class="full" placeholder="Problem description" ng-model="IssueAdd.issue.description"></textarea>
