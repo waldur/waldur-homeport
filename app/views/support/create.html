@@ -24,7 +24,7 @@
                     <label for="">{{ IssueAdd.descriptionLabel }}:</label>
                 </div>
                 <div class="col input input-full">
-                    <textarea class="full" placeholder="Problem description" ng-model="IssueAdd.issue.description"></textarea>
+                    <textarea class="full" placeholder="{{ IssueAdd.descriptionPlaceholder }}" ng-model="IssueAdd.issue.description"></textarea>
                     <div class="error arrow-up" ng-show="IssueAdd.errors.description">
                         <ul class="error-list">
                             <li ng-repeat="error in IssueAdd.errors.description">{{ error }}</li>
