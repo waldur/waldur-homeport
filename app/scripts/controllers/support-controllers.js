@@ -154,8 +154,8 @@
         if (this.type === 'remove_user') {
           this.issue.summary = "Account removal";
           this.title = 'Account removal';
-          this.descriptionLabel = 'Removal description';
           this.descriptionPlaceholder = 'Please share why you want your account deleted';
+          this.descriptionLabel = 'Reason';
         }
       },
       getSuccessMessage: function() {
