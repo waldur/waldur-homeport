@@ -1,0 +1,21 @@
+<div class="compact-list__header">
+  <div class="compact-list__title">
+    <a>{{ entity.resource_type }} / {{ entity.item_type }} / {{ entity.key }}</a>
+  </div>
+</div>
+
+<div class="compact-list__details">
+  <div class="details-table__row">
+    <div class="details-table__key">
+      Hourly rate:
+    </div>
+    <div class="details-table__value">
+      <span editable-text="entity.value"
+            e-form="rowform"
+            buttons="no"
+            onbeforesave="entityList.editInPlace(entity, $data)">
+              {{ entity.value }}
+      </span>
+      <div stoppropagation class="icon pencil-square-o" ng-click="rowform.$show()" ng-hide="rowform.$visible"></div>
+    </div>
+</div>

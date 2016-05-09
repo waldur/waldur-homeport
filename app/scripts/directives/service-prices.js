@@ -29,7 +29,8 @@
         this.entityOptions = {
           entityData: {
             noDataText: 'No price list items yet.',
-            noMatchesText: 'No price list items found matching filter.'
+            noMatchesText: 'No price list items found matching filter.',
+            rowTemplateUrl: 'views/directives/service-prices-mobile.html'
           },
           list: [
             {
