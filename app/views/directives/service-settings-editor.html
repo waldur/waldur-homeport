@@ -1,4 +1,10 @@
 <div>
+    <div ng-if="loading" class="empty-list-message">
+      Please wait while service settings are loading.
+    </div>
+    <div ng-if="!service.editable" class="empty-list-message">
+        Settings are not editable.
+    </div>
     <div class="short-form full" ng-if="service.editable">
         <div class="form-row" ng-repeat="field in service.fields">
             <div class="col label">
@@ -54,8 +60,5 @@
                 <a class="button-apply" ng-click="updateSettings(service)" ng-class="{'disabled': isDisabled(service)}">Save</a>
             </div>
         </div>
-    </div>
-    <div class="details-expandable" ng-if="!service.editable">
-        Settings are not editable.
     </div>
 </div>
