@@ -26,7 +26,7 @@
 
     <div class="white-box no-styles" ng-show="entityList.list.length == 0 && !entityList.searchInput && !entityList.chosenFilters.length && !entityList.hideNoDataText">
         <h2 class="app-title" ng-bind="::entityOptions.entityData.noDataText"></h2>
-        <div class="decision">
+        <div class="decision" ng-if="!entityOptions.entityData.hideActions">
             <div class="col">
                 <div ng-include="'views/directives/entity-list/table-actions.html'"></div>
             </div>

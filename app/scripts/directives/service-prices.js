@@ -32,7 +32,9 @@
           entityData: {
             noDataText: 'No price list items yet.',
             noMatchesText: 'No price list items found matching filter.',
-            rowTemplateUrl: 'views/directives/service-prices-mobile.html'
+            rowTemplateUrl: 'views/directives/service-prices-mobile.html',
+            hideActions: true,
+            hideControlButtons: true
           },
           list: [
             {
