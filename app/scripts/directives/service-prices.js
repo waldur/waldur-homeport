@@ -8,7 +8,8 @@
       'ENTITYLISTFIELDTYPES',
       'priceListItemsService',
       'servicesService',
-      '$q',
+      'usersService',
+      'customersService',
       '$scope',
       ServicePriceListController
     ]);
@@ -18,7 +19,8 @@
     ENTITYLISTFIELDTYPES,
     priceListItemsService,
     servicesService,
-    $q,
+    usersService,
+    customersService,
     $scope) {
     var controllerScope = this;
     var Controller = baseControllerListClass.extend({
@@ -51,19 +53,36 @@
             {
               name: 'Hourly rate',
               propertyName: 'value',
-              type: ENTITYLISTFIELDTYPES.editable,
+              type: ENTITYLISTFIELDTYPES.noType,
               emptyText: '0.00'
             }
           ]
         };
-        this.disablePriceListUpdateForPublicServices()
+        this.priceIsEditable = false;
+        this.checkEditingPermissions();
       },
-      disablePriceListUpdateForPublicServices: function() {
+      checkEditingPermissions: function() {
         var vm = this;
-        servicesService.getServicesList().then(function(services) {
-          if (services[vm.serviceItem.service_type].is_public_service) {
+        vm.isEditable().then(function(isEditable) {
+          vm.priceIsEditable = isEditable;
+          if (isEditable) {
             var hourlyRateColumn = vm.entityOptions.list[vm.entityOptions.list.length - 1];
-            hourlyRateColumn.type = ENTITYLISTFIELDTYPES.noType;
+            hourlyRateColumn.type = ENTITYLISTFIELDTYPES.editable;
+          }
+        })
+      },
+      isEditable: function() {
+        var vm = this;
+        return servicesService.getServicesList().then(function(services) {
+          // Prices for public providers can be edited via admin UI only
+          if (services[vm.serviceItem.service_type].is_public_service) {
+            return false;
+          } else if (vm.serviceItem.shared) {
+            // Prices for shared providers can be edited by staff only
+            return usersService.currentUser.is_staff;
+          } else {
+            // Prices for own providers can be edited by customer owner and staff only
+            return customersService.isOwnerOrStaff();
           }
         });
       },
