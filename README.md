@@ -23,12 +23,10 @@ Example for CentOS 7:
 
 Note for Ubuntu users: `libpng-devel` is called `libpng-dev` in Ubuntu repositories
 
-Update NVM if installed version is &lt;4.2.0:
+Install Node.js 4.x, for example on CentOS:
 
-        npm install -g nvm
-        nvm download 4.2.0
-        nvm build 4.2.0
-        nvm install 4.2.0
+        curl --silent --location https://rpm.nodesource.com/setup_4.x | bash -
+        yum install -y nodejs
 
 3. Build static assets:
 
@@ -41,12 +39,7 @@ Update NVM if installed version is &lt;4.2.0:
 
 5. Configure `custom-config.js`
 
-6. (headless servers only) Start X:
-
-        Xvfb :0 -ac -screen 0 1920x1080x24 &
-        export DISPLAY=:0
-
-7. Run application:
+6. Run application:
 
     choose mode:
     
@@ -92,9 +85,16 @@ It is needed for enabling reading header's response from frontend app.
 
 ### Setup
 
-1. Install developer dependencies from `package.json` (already done by `npm install`)
+1. Create `custom-config.js` for testing:
 
-2. Update WebdriverJS:
+        cp app/scripts/configs/test/custom-config.js.example app/scripts/configs/test/custom-config.js
+
+2. (headless servers only) Start X:
+
+        Xvfb :0 -ac -screen 0 1920x1080x24 &
+        export DISPLAY=:0
+
+3. Update WebdriverJS:
 
         node_modules/protractor/bin/webdriver-manager update
 
