@@ -94,7 +94,6 @@ It is needed for enabling reading header's response from frontend app.
 
         cp app/scripts/configs/test/custom-config.js.example app/scripts/configs/test/custom-config.js
 
-
 ### Run all tests at once
 
 Command `grunt test` will start local server on separate host and run all tests.
