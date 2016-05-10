@@ -226,7 +226,6 @@
                 });
 
                 dataset.forEach(function(resourcesTypes) {
-                    console.log(resourcesTypes);
                     resourcesTypes.forEach(function(resource) {
                         if (resource.x) {
                             svg.append('text')
