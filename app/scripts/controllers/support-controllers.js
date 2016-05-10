@@ -74,51 +74,50 @@
             hasAnswerForm: true,
             answersBlock: true,
             listKey: 'issueComments',
-            modelId: 'key',
+            modelId: 'uuid',
             viewType: 'support',
             minipaginationData:
             {
-              pageChange: 'getCommentsForIssue',
+              pageChange: this.getCommentsForIssue.bind(this),
               pageEntityName: this.expandableCommentsKey
             }
           }
         ];
       },
       showMore: function(issue) {
-        if (!this.issueComments[issue.key]) {
-          this.getCommentsForIssue(issue.key);
+        if (!this.issueComments[issue.uuid]) {
+          this.getCommentsForIssue(issue.uuid);
         }
       },
-      getCommentsForIssue: function(key, page) {
-        ncUtils.blockElement('comments_' + key, this._getCommentsForIssue(key, page));
+      getCommentsForIssue: function(uuid, page) {
+        ncUtils.blockElement('comments_' + uuid, this._getCommentsForIssue(uuid, page));
       },
-      _getCommentsForIssue: function(key, page) {
+      _getCommentsForIssue: function(uuid, page) {
         var vm = this;
-        var filter = {
-          key: key
-        };
-        vm.issueComments[key] = {data:null};
+        vm.issueComments[uuid] = {data:null};
         page = page || 1;
         issueCommentsService.page = page;
         issueCommentsService.pageSize = 5;
-        vm.issueComments[key].page = page;
+        vm.issueComments[uuid].page = page;
         issueCommentsService.filterByCustomer = false;
-        return issueCommentsService.getList(filter).then(function(response) {
-          vm.issueComments[key].data = response;
-          vm.issueComments[key].pages = issueCommentsService.pages;
-          $rootScope.$broadcast('mini-pagination:getNumberList', vm.issueComments[key].pages,
-            page, vm.getCommentsForIssue.bind(vm), vm.expandableCommentsKey, key);
+        return issueCommentsService.getList({
+          issue_uuid: uuid
+        }).then(function(response) {
+          vm.issueComments[uuid].data = response;
+          vm.issueComments[uuid].pages = issueCommentsService.pages;
+          $rootScope.$broadcast('mini-pagination:getNumberList', vm.issueComments[uuid].pages,
+            page, vm.getCommentsForIssue.bind(vm), vm.expandableCommentsKey, uuid);
         });
       },
       addComment: function(issue) {
         var vm = this;
         issue.newCommentSaving = true;
         var instance = issueCommentsService.$create();
-        instance.body = issue.newCommentBody;
-        instance.key = issue.key;
+        instance.message = issue.newCommentBody;
+        instance.issue = issue.url;
         instance.$save(
           function() {
-            vm.getCommentsForIssue(issue.key);
+            vm.getCommentsForIssue(issue.uuid);
             issue.newCommentSaving = false;
             issue.newCommentBody = "";
           },
@@ -135,9 +134,9 @@
 
 
   angular.module('ncsaas')
-    .controller('IssueAddController', ['issuesService', 'baseControllerAddClass', IssueAddController]);
+    .controller('IssueAddController', ['issuesService', 'baseControllerAddClass', '$stateParams', '$state', IssueAddController]);
 
-  function IssueAddController(issuesService, baseControllerAddClass) {
+  function IssueAddController(issuesService, baseControllerAddClass, $stateParams, $state) {
     var controllerScope = this;
     var controllerClass = baseControllerAddClass.extend({
       init: function() {
@@ -148,9 +147,28 @@
         this.issue = this.instance;
         this.issue.summary = "";
         this.issue.description = "";
+        this.title = 'Add ticket';
+        this.descriptionLabel = 'Ticket description';
+        this.descriptionPlaceholder = 'Problem description';
+        this.type = $stateParams.type;
+        if (this.type === 'remove_user') {
+          this.issue.summary = "Account removal";
+          this.title = 'Account removal';
+          this.descriptionPlaceholder = 'Please share why you want your account deleted';
+          this.descriptionLabel = 'Reason';
+        }
       },
       getSuccessMessage: function() {
         return this.successMessage.replace('{vm_name}', this.instance.summary);
+      },
+      saveInstance: function() {
+        return this.service.createIssue(this.instance);
+      },
+      cancel: function() {
+        if (this.type === 'remove_user') {
+          return $state.go('profile.details', {tab: 'manage'});
+        }
+        this._super();
       }
     });
 
