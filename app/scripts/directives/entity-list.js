@@ -50,6 +50,7 @@
       trimmed: 'trimmed',
       dateShort: 'dateShort',
       currency: 'currency',
-      awesomeIcon: 'awesomeIcon'
+      awesomeIcon: 'awesomeIcon',
+      editable: 'editable'
     });
 })();

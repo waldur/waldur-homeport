@@ -71,6 +71,26 @@
   </div>
 </div>
 
+<div class="details-table__row" ng-if="resource.user_username">
+  <div class="details-table__key">
+    Username:
+  </div>
+  <div class="details-table__value">
+    <span ng-bind="resource.user_username"></span>
+  </div>
+</div>
+
+<div class="details-table__row" ng-if="resource.user_password">
+  <div class="details-table__key">
+    Password:
+  </div>
+  <div class="details-table__value">
+    <span ng-if="!showPassword">***************</span>
+    <a class="icon fa-eye" title="Show password" ng-click="showPassword=!showPassword"></a>
+    <span ng-if="showPassword" ng-bind="resource.user_password"></span>
+  </div>
+</div>
+
 <div class="details-table__row" ng-if="resource.key_name">
   <div class="details-table__key">
     SSH key:

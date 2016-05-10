@@ -115,3 +115,31 @@
     controllerScope.__proto__ = new Controller();
   }
 })();
+
+(function() {
+  angular.module('ncsaas')
+    .controller('UserDeleteTabController', [
+      'baseControllerClass',
+      '$state',
+      UserDeleteTabController
+    ]);
+
+  function UserDeleteTabController(
+    baseControllerClass,
+    $state
+  ) {
+    var controllerScope = this;
+    var DeleteController = baseControllerClass.extend({
+      init: function() {
+        this.controllerScope = controllerScope;
+        this._super();
+      },
+      removeUser: function () {
+        $state.go('support.create', {type: 'remove_user'});
+      }
+    });
+
+    controllerScope.__proto__ = new DeleteController();
+  }
+
+})();

@@ -1,8 +1,16 @@
 <div>
-    <div multiple-select choices="choices"></div>
-    <div class="decision">
-        <div class="col">
-            <a class="button-apply" submit-button="save()">Save</a>
+    <div ng-if="loading" class="empty-list-message">
+      Please wait while service project link list is loading.
+    </div>
+    <div ng-if="!loading && !choices.length" class="empty-list-message">
+        There are no projects yet.
+    </div>
+    <div ng-if="choices.length">
+        <div multiple-select choices="choices"></div>
+        <div class="decision">
+            <div class="col">
+                <a class="button-apply" submit-button="save()">Save</a>
+            </div>
         </div>
     </div>
 </div>

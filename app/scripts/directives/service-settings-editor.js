@@ -39,11 +39,15 @@
     joinService) {
     angular.extend($scope, {
       init: function() {
-        this.loadService($scope.service);
+        var vm = this;
+        vm.loading = true;
+        vm.loadService($scope.service).finally(function() {
+          vm.loading = false;
+        });
       },
       loadService: function(service) {
         var vm = this;
-        usersService.getCurrentUser().then(function(user) {
+        return usersService.getCurrentUser().then(function(user) {
           service.editable = user.is_staff || !service.shared;
           if (!service.editable || service.values) {
             return;
