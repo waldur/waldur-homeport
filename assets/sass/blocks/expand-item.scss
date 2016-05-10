@@ -15,6 +15,18 @@
     color: #3c763d;
     background-color: #dff0d8;
   }
+
+  .empty-list-message {
+    margin: 10px auto;
+    text-align: left;
+  }
+
+  h2.app-title {
+    @include property(font-size, $normal-font);
+    display: block;
+    margin: 10px auto;
+    text-align: left;
+  }
 }
 
 .error-message {

@@ -1,14 +1,43 @@
-<section block-ui="{{ ::expandableElement.uuid }}" ng-if="expandableElement.expandItemOpen">
+<section
+    block-ui="{{ ::expandableElement.uuid }}"
+    ng-if="expandableElement.expandItemOpen"
+    ng-init="activeTab='settings'">
     <div class="success-message" ng-if="expandableList.getClass(expandableElement.state) == 'processing'">Please wait while provider is being configured.</div>
 
     <div ng-if="expandableElement.state == 'Erred'" class="error-message">
         {{ ::expandableElement.error_message || expandableList.defaultErrorMessage }}
     </div>
 
-    <h3>Settings</h3>
-    <div service-settings-editor service="expandableElement"></div>
+    <div class="white-box">
+        <ul class="sort-list event-nav">
+            <li ng-class="{
+                'active': activeTab == 'settings',
+                'inactive': activeTab !== 'settings'}">
+                <a ng-click="activeTab = 'settings'">Settings</a>
+            </li>
+            <li ng-class="{
+                'active': activeTab == 'projects',
+                'inactive': activeTab !== 'projects'}">
+                <a ng-click="activeTab = 'projects'">Projects</a>
+            </li>
+            <li ng-class="{
+                'active': activeTab == 'prices',
+                'inactive': activeTab !== 'prices'}">
+                <a ng-click="activeTab = 'prices'">Prices</a>
+            </li>
+        </ul>
+        <div class="clear"></div>
+    </div>
 
-    <h3>Allowed for projects</h3>
-    <div service-project-link-editor service="expandableElement"></div>
+    <div ng-if="activeTab == 'settings'">
+        <div service-settings-editor service="expandableElement"></div>
+    </div>
 
+    <div ng-if="activeTab == 'projects'">
+        <div service-project-link-editor service="expandableElement"></div>
+    </div>
+
+    <div ng-if="activeTab == 'prices'">
+        <div service-prices service="expandableElement"></div>
+    </div>
 </section>

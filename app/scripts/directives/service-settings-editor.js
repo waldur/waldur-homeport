@@ -39,11 +39,15 @@
     joinService) {
     angular.extend($scope, {
       init: function() {
-        this.loadService($scope.service);
+        var vm = this;
+        vm.loading = true;
+        vm.loadService($scope.service).finally(function() {
+          vm.loading = false;
+        });
       },
       loadService: function(service) {
         var vm = this;
-        usersService.getCurrentUser().then(function(user) {
+        return usersService.getCurrentUser().then(function(user) {
           service.editable = user.is_staff || !service.shared;
           if (!service.editable || service.values) {
             return;
@@ -75,10 +79,12 @@
       getFields: function(options) {
         var fields = [];
         var blacklist = ['name', 'customer', 'settings', 'available_for_all'];
+        var secretFields = ['password', 'token'];
         for (var name in options) {
           var option = options[name];
-          if (!option.read_only && blacklist.indexOf(name) == -1) {
+          if (!option.read_only && blacklist.indexOf(name) === -1) {
             option.name = name;
+            option.secret = secretFields.indexOf(name) !== -1;
             fields.push(option);
           }
         }

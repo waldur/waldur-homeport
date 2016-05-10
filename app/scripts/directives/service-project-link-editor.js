@@ -37,8 +37,11 @@
     currentStateService) {
     angular.extend($scope, {
       init: function() {
+        $scope.loading = true;
         $scope.getChoices().then(function(choices) {
           $scope.choices = choices;
+        }).finally(function() {
+          $scope.loading = false;
         });
       },
       getChoices: function() {
