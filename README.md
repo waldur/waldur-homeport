@@ -12,21 +12,13 @@ __Installation steps__:
         git clone git@code.opennodecloud.com:nc-saas/nodeconductor-web.git
         cd nodeconductor-web
 
-2. Install dependencies:
+2. Install dependencies. Example for CentOS 7:
 
-Example for CentOS 7:
+        yum -y install epel-release https://rpm.nodesource.com/pub_4.x/el/7/x86_64/nodesource-release-el7-1.noarch.rpm
+        yum -y install nodejs rubygems
 
-        yum -y install autoconf bzip2 GConf2 git libpng-devel npm rubygems Xvfb
-        yum -y install https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
         gem install sass
         npm install -g bower grunt-cli
-
-Note for Ubuntu users: `libpng-devel` is called `libpng-dev` in Ubuntu repositories
-
-Install Node.js 4.x, for example on CentOS:
-
-        curl --silent --location https://rpm.nodesource.com/setup_4.x | bash -
-        yum install -y nodejs
 
 3. Build static assets:
 
@@ -85,18 +77,23 @@ It is needed for enabling reading header's response from frontend app.
 
 ### Setup
 
-1. Create `custom-config.js` for testing:
+1. Install dependencies. Example for CentOS 7:
 
-        cp app/scripts/configs/test/custom-config.js.example app/scripts/configs/test/custom-config.js
+         yum -y install Xvfb https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
 
-2. (headless servers only) Start X:
+2. Update WebdriverJS:
+
+        node_modules/protractor/bin/webdriver-manager update
+
+3. (headless servers only) Start X:
 
         Xvfb :0 -ac -screen 0 1920x1080x24 &
         export DISPLAY=:0
 
-3. Update WebdriverJS:
+4. Create `custom-config.js` for testing:
 
-        node_modules/protractor/bin/webdriver-manager update
+        cp app/scripts/configs/test/custom-config.js.example app/scripts/configs/test/custom-config.js
+
 
 ### Run all tests at once
 
