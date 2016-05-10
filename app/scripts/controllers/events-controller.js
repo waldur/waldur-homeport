@@ -585,6 +585,7 @@
 
           vm.currentUsageData = {
             chartType: 'vms',
+            chartWidth: 500,
             legendDescription: null,
             legendLink: 'plans',
             data: []
@@ -630,7 +631,13 @@
         var vm = this;
         return priceEstimationService.getList().then(function(rows) {
           vm.priceEstimationRows = rows;
-          vm.monthCostChartData = {chartType: 'services', legendDescription: null, legendLink: 'providers', data: []};
+          vm.monthCostChartData = {
+            chartType: 'services',
+            chartWidth: 200,
+            legendDescription: null,
+            legendLink: 'providers',
+            data: []
+          };
           vm.totalMonthCost = 0;
           rows.forEach(function(item) {
             if (item.scope_type === 'service' && vm.monthCostChartData.data.length < 5) {
