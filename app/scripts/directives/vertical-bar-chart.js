@@ -2,9 +2,9 @@
 
 (function () {
   angular.module('ncsaas')
-    .directive('verticalBarChart', [verticalBarChart]);
+    .directive('verticalBarChart', ['$window', verticalBarChart]);
 
-  function verticalBarChart() {
+  function verticalBarChart($window) {
     return {
       restrict: 'E',
       replace: true,
@@ -20,13 +20,23 @@
         data && init();
       });
 
+      angular.element($window).bind('resize', onResize);
+
+      scope.$on('$destroy', function() {
+        angular.element($window).unbind('resize', onResize);
+      });
+
+      function onResize() {
+        scope.data && init();
+      }
+
       function init() {
         element.children().html('');
 
         var data = scope.data;
 
         var margin = {top: 20, right: 20, bottom: 90, left: 80},
-          width = 600 - margin.left - margin.right,
+          width = element[0].getBoundingClientRect().width - margin.left - margin.right,
           height = 300 - margin.top - margin.bottom;
 
         var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
@@ -82,19 +92,38 @@
           .attr("width", x.rangeBand())
           .attr("y", 0)
           .attr("height", function(d) {
-            return height ;
+            return height;
           });
 
-          svg.selectAll("bar")
-            .data(data)
-            .enter().append("rect")
-            .style("fill", "#28ae60")
-            .attr("x", function(d) { return x(d.date); })
-            .attr("width", x.rangeBand())
-            .attr("y", function(d) { return y(d.value); })
-            .attr("height", function(d) {
-              return height - y(d.value);
-            });
+        var barGroups = svg.selectAll("bar")
+          .data(data)
+          .enter().append("g")
+          .attr("width", x.rangeBand())
+          .attr('transform', function(d) {
+            return 'translate(' + x(d.date) + ',' + y(d.value) + ')';
+          });
+        barGroups.append("rect")
+          .style("fill", "#28ae60")
+          .attr("width", x.rangeBand())
+          .attr("height", function(d) {
+            return height - y(d.value);
+          });
+        barGroups.append('text')
+          .attr("x", function(d) {
+            return (d.value < 10 ? x.rangeBand() / 2 : x.rangeBand() / 3) - 3;
+          })
+          .attr("y", function(d) {
+            return d.value ? d.value + 5 : d.value;
+          })
+          .style("font-size", function() {
+            return x.rangeBand() / 3;
+          })
+          .attr("width", x.rangeBand())
+          .attr('class', 'bar-info')
+          .attr('fill', "#fff")
+          .text(function(d) {
+            return d.value;
+          });
       }
     }
   }

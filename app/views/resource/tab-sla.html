@@ -3,10 +3,11 @@
 
     </div>
     <div class="sla-list">
+        <div class="title">Latest SLA events</div>
         <ul>
-            <li ng-repeat="item in ResourceSLA.jumping">
+            <li ng-repeat="item in ResourceSLA.events">
                 <span>{{ item.state === 'U' ? 'Up' : 'Down' }}</span>
-                <span>{{ ResourceSLA.dateFormat(item.timestamp) }}</span>
+                <span>{{ item.timestamp | dateTime }}</span>
             </li>
         </ul>
     </div>
