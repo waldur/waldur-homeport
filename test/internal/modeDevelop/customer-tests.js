@@ -22,9 +22,9 @@ for(var i = 0; i < addCustomerTestData.length; i++) {
 
       it('I should be able to go to "customer add" page', function() {
         element(by.css('.dropdown.customers .customer-name')).click();
-        element(by.cssContainingText('.dropdown.customers .nav-sublist li a', 'Manage organizations')).click();
+        element(by.cssContainingText('.dropdown.customers .nav-sublist a', 'Manage organizations')).click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/organizations/');
-        element(by.css('.right-sort a')).click();
+        element(by.cssContainingText('.table-action a span', 'Add organization')).click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/organizations/add/');
       });
 
@@ -38,7 +38,7 @@ for(var i = 0; i < addCustomerTestData.length; i++) {
 
       it('I should be able to see ' + customerName + ' at customers list page', function() {
         element(by.css('.dropdown.customers .customer-name')).click();
-        element(by.cssContainingText('.dropdown.customers .nav-sublist li a', 'Manage organizations')).click();
+        element(by.cssContainingText('.dropdown.customers .nav-sublist a', 'Manage organizations')).click();
         element(by.model('entityList.searchInput')).sendKeys(customerName);
         expect(element(by.cssContainingText('h3.item-title a', customerName)).isPresent()).toBe(true);
       });

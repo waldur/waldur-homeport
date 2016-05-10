@@ -24,5 +24,5 @@ module.exports.logout = function(user) {
   }, constants.WATING_TIME);
 
   element(by.css('.user-dropdown .user-name')).click();
-  element(by.cssContainingText('ul.nav-sublist.user-area li a', 'Logout')).click();
+  element(by.cssContainingText('.nav-sublist.user-area li a', 'Logout')).click();
 };
