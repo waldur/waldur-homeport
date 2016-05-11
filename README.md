@@ -3,6 +3,13 @@
 NodeConductor-web is a thin web-based client for the NodeConductor REST client.
 It uses [bower.io][1] as package manager and [grunt][2] for automation.
 
+## System Requirements
+
+__Development/testing__:
+
+- Linux (CentOS 7 and Ubuntu 14.04 tested) or OS X
+- 2 GB of RAM
+
 ## Installation
 
 __Installation steps__:
