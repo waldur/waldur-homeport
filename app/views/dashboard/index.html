@@ -25,7 +25,7 @@
                     <span><i class="icon plus"></i>Add project</span>
                 </div>
             </div>
-            <div visible="providers" class="cost-tab-actions inline">
+            <div ng-show="DashboardController.showProviderButton" visible="providers" class="cost-tab-actions inline">
                 <div sref="services.create"
                      class-link="button-apply"
                      check-quotas="{{DashboardController.checkQuotasProvider}}">
