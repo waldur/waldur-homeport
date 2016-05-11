@@ -109,6 +109,8 @@
                         .style('padding-left', '5px')
                         .style('padding-right', '5px')
                         .text(function(d, i) { return dataset[i].fullLabel});
+                    elem.append('div')
+                        .style('clear', 'both');
                 } else {
                     var legend = svg.selectAll('.legend')
                         .data(color.domain())
@@ -126,8 +128,7 @@
                     legend.append('rect')
                         .attr('width', legendRectSize)
                         .attr('height', legendRectSize)
-                        .style('fill', color)
-                        //.style('stroke', color);
+                        .style('fill', color);
 
                     legend.append('text')
                         .attr('x', legendRectSize + legendSpacing)
@@ -165,7 +166,9 @@
                 legend && appendTotal(svg);
 
                 function appendTotal(elem) {
-                    elem.append('text')
+                    elem.append('div')
+                        .style('text-align', 'left')
+                        .append('text')
                         .on("click", function(d, i) {
                             switch (legendLink) {
                                 case 'plans':
