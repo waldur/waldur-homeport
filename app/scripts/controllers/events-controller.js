@@ -161,10 +161,8 @@
       'priceEstimationService',
       'blockUI',
       'ENV',
-      'currentStateService',
-      'usersService',
+      'customersService',
       'resourcesService',
-      '$q',
       DashboardCostController]);
 
   function DashboardCostController(
@@ -172,10 +170,8 @@
     priceEstimationService,
     blockUI,
     ENV,
-    currentStateService,
-    usersService,
-    resourcesService,
-    $q) {
+    customersService,
+    resourcesService) {
     var controllerScope = this;
     var EventController = baseControllerClass.extend({
       init: function() {
@@ -183,17 +179,12 @@
         this.activate();
         blockUI.start();
 
-        var vm = this;
         this.checkQuotasResource = 'resource';
         this.checkQuotasProvider = 'service';
-        var customerPromise = currentStateService.getCustomer();
-        var userPromise = usersService.getCurrentUser();
-        this.showProviderButton = false;
-        $q.all([userPromise, customerPromise]).then(function(result) {
-          result[0].is_staff && (vm.showProviderButton = true);
-          result[1].owners && result[1].owners.forEach(function(item) {
-            result[0].uuid === item.uuid && (vm.showProviderButton = true);
-          });
+
+        var vm = this;
+        customersService.isOwnerOrStaff().then(function(hasRole) {
+          vm.showProviderButton = hasRole;
         });
       },
 

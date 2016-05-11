@@ -5,13 +5,11 @@
     .service('baseServiceListController', [
       'baseControllerListClass',
       'ENTITYLISTFIELDTYPES',
-      'customerPermissionsService',
       'currentStateService',
-      'usersService',
+      'customersService',
       'joinService',
       '$rootScope',
       'ENV',
-      '$q',
       'ncServiceUtils',
       baseServiceListController]);
 
@@ -19,13 +17,11 @@
   function baseServiceListController(
     baseControllerListClass,
     ENTITYLISTFIELDTYPES,
-    customerPermissionsService,
     currentStateService,
-    usersService,
+    customersService,
     joinService,
     $rootScope,
     ENV,
-    $q,
     ncServiceUtils
     ) {
     var ControllerListClass = baseControllerListClass.extend({
@@ -105,15 +101,7 @@
             }
           ]
         };
-        var vm = this,
-            customerPromise = currentStateService.getCustomer(),
-            userPromise = usersService.getCurrentUser();
-        $q.all([userPromise, customerPromise]).then(function(result) {
-          result[0].is_staff && (vm.showProviderButton = true);
-          result[1].owners && result[1].owners.forEach(function(item) {
-            result[0].uuid === item.uuid && (vm.entityOptions.entityData.createLink = 'services.create');
-          });
-        });
+        this.checkPermissions();
       },
       checkProjects: function() {
         var vm = this;
@@ -130,15 +118,11 @@
       },
       checkPermissions: function() {
         var vm = this;
-        usersService.getCurrentUser().then(function(user) {
-          /*jshint camelcase: false */
-          if (user.is_staff) {
-            vm.canUserManageService = true;
-            return;
+        customersService.isOwnerOrStaff().then(function(isOwnerOrStaff) {
+          if (isOwnerOrStaff) {
+            vm.entityOptions.entityData.createLink = 'services.create';
           }
-          customerPermissionsService.userHasCustomerRole(user.username, 'owner').then(function(hasRole) {
-            vm.canUserManageService = hasRole;
-          });
+          vm.canUserManageService = isOwnerOrStaff;
         });
       }
     });
