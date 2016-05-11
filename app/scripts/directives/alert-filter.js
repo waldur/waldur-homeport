@@ -20,6 +20,11 @@
             } else {
               delete defaultFilter['opened'];
             }
+            if (scope.closedOnly) {
+              defaultFilter.closed = true;
+            } else {
+              delete defaultFilter['closed'];
+            }
             scope.filterController.getList();
           }
 
