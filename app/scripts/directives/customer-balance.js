@@ -12,6 +12,7 @@
       '$scope',
       '$state',
       '$window',
+      'usersService',
       CustomerBalanceController]);
 
   function CustomerBalanceController(
@@ -22,7 +23,8 @@
     ENV,
     $scope,
     $state,
-    $window) {
+    $window,
+    usersService) {
 
     function init() {
       if (!ENV.featuresVisible && (ENV.toBeFeatures.indexOf('payment') > -1)) {
@@ -136,9 +138,16 @@
 
     function refresh() {
       currentStateService.getCustomer().then(function(customer) {
+        var currentUser = usersService.currentUser;
         $scope.model = customer;
         $scope.plan = getPlan(customer);
         getChart(customer);
+        for (var i = 0; i < customer.owners.length; i++) {
+          if (currentUser.uuid === customer.owners[i].uuid) {
+            $scope.showUpgradeButton = true;
+            break;
+          }
+        }
       });
     };
 

@@ -26,7 +26,7 @@
 
     <div class="white-box no-styles" ng-show="entityList.list.length == 0 && !entityList.searchInput && !entityList.chosenFilters.length && !entityList.hideNoDataText">
         <h2 class="app-title" ng-bind="::entityOptions.entityData.noDataText"></h2>
-        <div class="decision">
+        <div class="decision" ng-if="!entityOptions.entityData.hideActions">
             <div class="col">
                 <div ng-include="'views/directives/entity-list/table-actions.html'"></div>
             </div>
@@ -198,7 +198,7 @@
                             <span editable-text="entity[field.propertyName]"
                                   e-form="rowform"
                                   buttons="no"
-                                  onaftersave="entityList.update(entity)">
+                                  onbeforesave="entityList.editInPlace(entity, $data)">
                                     {{ entity[field.propertyName] }}
                             </span>
                             <div stoppropagation class="icon pencil-square-o" ng-click="rowform.$show()" ng-hide="rowform.$visible"></div>

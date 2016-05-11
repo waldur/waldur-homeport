@@ -197,6 +197,13 @@
               count: -1,
               hideSearch: true
             });
+            vm.detailsViewOptions.tabs.push({
+              title: 'Manage',
+              key: 'manage',
+              viewName: 'tabManage',
+              count: -1,
+              hideSearch: true
+            });
             vm.detailsViewOptions.activeTab = vm.getActiveTab();
           }
         });

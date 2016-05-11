@@ -320,6 +320,16 @@ $searchInputHeight: 32px;
 .details-about {
   @extend .user-about;
   padding-top: 6px;
+  .editable-empty {
+    color: $text-color;
+
+    &a,
+    &:hover,
+    &:focus,
+    &:active {
+      color: $text-color;
+    }
+  }
   .name {
     font-size: 2em;
     @include bp(xs) {

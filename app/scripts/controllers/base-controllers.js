@@ -99,13 +99,24 @@
       },
       setCurrentCustomer: function(customer, skipRedirect) {
         var vm = this;
-        currentStateService.setCustomer(customer);
-        vm.currentCustomer = customer;
-        $rootScope.$broadcast('currentCustomerUpdated');
-        vm.setFirstOrLastSelectedProject().then(function() {
-          if (!skipRedirect) {
-            $state.go('organizations.details', {uuid: vm.currentCustomer.uuid});
-          }
+        customersService.$get(customer.uuid).then(function() {
+          currentStateService.setCustomer(customer);
+          vm.currentCustomer = customer;
+          $rootScope.$broadcast('currentCustomerUpdated');
+          vm.setFirstOrLastSelectedProject().then(function() {
+            if (!skipRedirect) {
+              $state.go('organizations.details', {uuid: vm.currentCustomer.uuid});
+            }
+          });
+        }, function() {
+          var index = vm.customers.indexOf(customer);
+          index > -1 && vm.customers.splice(index, 1);
+          customersService.getTopMenuList().then(function(response) {
+            vm.customers = response;
+          });
+          alert('Sorry "' + customer.name + '" organization was deleted in another session. ' +
+            'Please try to select another organization.');
+          vm.menuState.customerMenu = true;
         });
       },
       setCurrentProject: function(project, skipRedirect) {

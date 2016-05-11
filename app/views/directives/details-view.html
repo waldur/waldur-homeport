@@ -36,7 +36,8 @@
                               buttons="no"
                               onbeforesave="controller.editInPlace($data, field.fieldKey)"
                               ng-show="field.isEditable && controller.canEdit"
-                              class="{{ field.className }}">
+                              class="{{ field.className }}"
+                              ng-class="{'editable-empty': !controller.model[field.fieldKey]}">
                             {{ controller.model[field.fieldKey] || field.emptyText }}
                         </span>
                         <div class="icon pencil-square-o"
