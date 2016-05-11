@@ -135,7 +135,7 @@
         })
 
         .state('support.create', {
-          url: 'add/',
+          url: 'add/:type',
           views: {
             'appHeader' : {
               templateUrl: 'views/partials/app-header.html',
@@ -363,6 +363,9 @@
             },
             'tabPassword@profile.details' : {
               templateUrl: 'views/user/tab-password.html'
+            },
+            'tabManage@profile.details' : {
+              templateUrl: 'views/user/tab-manage.html'
             }
           },
           resolve: {

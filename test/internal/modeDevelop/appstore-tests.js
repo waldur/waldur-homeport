@@ -36,7 +36,7 @@ for(var i = 0; i < testData.length; i++) {
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/appstore/');
       });
 
-      it('I should be able to add new resource', function() {
+      xit('I should be able to add new resource', function() {
         // choose category
         element(by.cssContainingText('h3', data.category)).click();
         // choose service
@@ -64,7 +64,7 @@ for(var i = 0; i < testData.length; i++) {
 
       });
 
-      it('I should be able to check added resource on its details page', function() {
+      xit('I should be able to check added resource on its details page', function() {
         expect(element(by.cssContainingText('span.name', resourceName)).isPresent()).toBe(true);
       });
 
