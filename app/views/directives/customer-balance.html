@@ -31,6 +31,7 @@
                     </div>
                 </div>
                 <a class="dropdown__action"
+                   ng-show="showUpgradeButton"
                    ui-sref="organizations.plans({uuid: model.uuid})">
                    <i class="icon fa-cart-plus"></i> Upgrade
                 </a>
@@ -107,6 +108,7 @@
                     </div>
                 </div>
                 <a class="dropdown__action"
+                   ng-show="showUpgradeButton"
                    submit-button="addCredit(amount)">
                    <i class="icon fa-cart-plus"></i> Add credit
                 </a>
@@ -140,6 +142,7 @@
                 </div>
             </div>
             <a class="button"
+               ng-show="showUpgradeButton"
                submit-button="addCredit(amount)">
                <i class="icon fa-cart-plus"></i> Add credit
             </a>
