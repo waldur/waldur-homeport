@@ -6,15 +6,35 @@ angular.module('ncsaas')
     toBeFeatures: [
       'localSignup',
       'localSignin',
+      'password',
       'team',
       'monitoring',
       'backups',
       'templates',
       'sizing',
-      'projectGroups'
+      'projectGroups',
+      'apps',
+      'premiumSupport'
     ],
     featuresVisible: false,
-    comingFeatures: [
-      'applications',
+    appStoreCategories: [
+      {
+        name: 'VMs',
+        type: 'provider',
+        icon: 'desktop',
+        services: ['Amazon', 'DigitalOcean', 'OpenStack']
+      },
+      {
+        name: 'Private clouds',
+        type: 'provider',
+        icon: 'cloud',
+        services: ['OpenStack']
+      }
+    ],
+    serviceCategories: [
+      {
+        name: 'Virtual machines',
+        services: ['Amazon', 'DigitalOcean', 'OpenStack'],
+      }
     ]
   });
