@@ -1,6 +1,6 @@
 <a class="toggle-link"
-   ng-click="openedOnly = true"
-   ng-class="{'active': openedOnly}">Opened</a>
+   ng-click="openedOnly = true; closedOnly = false"
+   ng-class="{'active': openedOnly}">Open</a>
 <a class="toggle-link"
-   ng-click="openedOnly = false"
-   ng-class="{'active': !openedOnly}">All</a>
+   ng-click="closedOnly = true; openedOnly = false"
+   ng-class="{'active': closedOnly}">Closed</a>
