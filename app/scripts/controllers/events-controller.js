@@ -5,6 +5,7 @@
     .service('baseEventListController', [
       'baseControllerListClass',
       'eventsService',
+      'ngDialog',
       'ENTITYLISTFIELDTYPES',
       'eventFormatter',
       'ENV',
@@ -13,6 +14,7 @@
   function baseEventListController(
     baseControllerListClass,
     eventsService,
+    ngDialog,
     ENTITYLISTFIELDTYPES,
     eventFormatter,
     ENV) {
@@ -55,6 +57,13 @@
         ];
         this._super();
       },
+      showHelpTypes: function() {
+        ngDialog.open({
+          template: '<alerts-dialog type="events"></alerts-dialog>',
+          plain: true,
+          className: 'ngdialog-theme-default alerts-list-dialog',
+        });
+      },
       afterGetList: function() {
         angular.forEach(this.list, function(event) {
           event.html_message = eventFormatter.format(event);
@@ -72,6 +81,7 @@
       'baseControllerListClass',
       'alertsService',
       'alertFormatter',
+      'ngDialog',
       'ENTITYLISTFIELDTYPES',
       'ENV',
       BaseAlertsListController]);
@@ -80,6 +90,7 @@
     baseControllerListClass,
     alertsService,
     alertFormatter,
+    ngDialog,
     ENTITYLISTFIELDTYPES,
     ENV) {
     return baseControllerListClass.extend({
@@ -116,6 +127,13 @@
             }
           ]
         };
+      },
+      showHelpTypes: function() {
+        ngDialog.open({
+          template: '<alerts-dialog type="alerts"></alerts-dialog>',
+          plain: true,
+          className: 'ngdialog-theme-default alerts-list-dialog',
+        });
       },
       afterGetList: function() {
         angular.forEach(this.list, function(alert) {

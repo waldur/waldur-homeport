@@ -1,7 +1,7 @@
 .sort-list {
     @include clear-list;
     display: flex;
-    -webkit-flex-flow: row wrap;
+    -webkit-flex-flow: row-reverse wrap;
     position: relative;
     min-height: 30px;
     li {
@@ -30,15 +30,17 @@
             } // xs
         } // &.search
         &.right-sort {
-            position: absolute;
-            right: 5px;
-            top: 0px;
             @include bp(xs) {
                 position: static;
                 padding-top: 5px;
                 margin-top: 10px;
             } // xs
         } // &.right-sort
+
+        .button-support {
+            padding: 7px 10px;
+            height: auto;
+        } //.button-support
         .app-title {
             @include inline-middle;
             @include property(margin-bottom, -4);
