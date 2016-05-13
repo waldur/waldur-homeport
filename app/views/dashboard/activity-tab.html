@@ -78,8 +78,8 @@
             <div>
                 <h3 class="alerts-header">Alerts</h3>
                 <div class="alerts-helper-link">
-                    <a stoppropagation class="button-support pending" target="_blank"
-                       ui-sref="help.details({name: DashboardController.alertsHelpKey})">Supported alerts</a>
+                    <a stoppropagation class="button-support pending"
+                       ng-click="DashboardController.showHelpTypes('alerts')">Supported alerts</a>
                 </div>
                 <div class="clear"></div>
             </div>
@@ -108,8 +108,8 @@
             <div>
                 <h3 class="alerts-header">Recent events</h3>
                 <div class="alerts-helper-link">
-                    <a stoppropagation class="button-support pending" target="_blank"
-                       ui-sref="help.details({name: DashboardController.eventsHelpKey})">Supported events</a>
+                    <a stoppropagation class="button-support pending"
+                       ng-click="DashboardController.showHelpTypes('events')">Supported events</a>
                 </div>
                 <div class="clear"></div>
             </div>
