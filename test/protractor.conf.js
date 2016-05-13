@@ -30,3 +30,7 @@ exports.config = {
   }
 
 };
+
+if (process.env.BROWSER === 'firefox') {
+  exports.config.capabilities.browserName = 'firefox';
+}

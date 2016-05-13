@@ -3,6 +3,13 @@
 NodeConductor-web is a thin web-based client for the NodeConductor REST client.
 It uses [bower.io][1] as package manager and [grunt][2] for automation.
 
+## System Requirements
+
+__Development/testing__:
+
+- Linux (CentOS 7 and Ubuntu 14.04 tested) or OS X
+- 2 GB of RAM
+
 ## Installation
 
 __Installation steps__:
@@ -100,6 +107,9 @@ Command `grunt test` will start local server on separate host and run all tests.
 
 Notice: `Error: ECONNREFUSED connect ECONNREFUSED` Can be raised in the end of tests flow.
 It occurs because selenium server shuts down before protractor ends tests. ([Link to issue][7]).
+
+Google Chrome is used by default for running tests. If you want to use Mozilla Firefox instead,
+pass `--browser=firefox`, for example `grunt -v testModeDevelop --browser=firefox`
 
 ### Run modes tests
 

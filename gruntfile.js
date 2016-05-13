@@ -655,7 +655,8 @@ module.exports = function(grunt) {
                 NODE_ENV: 'PRODUCTION'
             },
             test: {
-                NODE_ENV: 'TEST'
+                NODE_ENV: 'TEST',
+                BROWSER: grunt.option('browser') || 'chrome'
             }
         },
         preprocess: {
