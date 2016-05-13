@@ -75,20 +75,45 @@
     .controller('ResourceSLAController', [
       'slaService',
       'baseControllerClass',
+      'resourcesService',
+      '$stateParams',
+      'zabbixItservicesService',
+      'zabbixHostsService',
       ResourceSLAController]);
 
   function ResourceSLAController(
     slaService,
-    baseControllerClass) {
+    baseControllerClass,
+    resourcesService,
+    $stateParams,
+    zabbixItservicesService,
+    zabbixHostsService) {
     var controllerScope = this;
     var controllerClass = baseControllerClass.extend({
       init: function() {
         this.controllerScope = controllerScope;
         this.service = slaService;
         this._super();
+        var vm = this;
 
-        this.data = this.service.getGraphList();
-        this.events = this.service.getEventsList();
+        resourcesService.$get($stateParams.resource_type, $stateParams.uuid).then(function(resource) {
+          vm.data = [angular.extend(resource.sla, {date: new Date(resource.sla.period)})];
+
+          var zabbix= resource.related_resources.filter(function(item) {
+            return item.resource_type === 'Zabbix.Host';
+          })[0];
+
+          zabbix && zabbixHostsService.$get(zabbix.uuid).then(function(host) {
+            var related = host.related_resources.filter(function(item) {
+              return item.resource_type === 'Zabbix.ITService';
+            })[0];
+
+            related && zabbixItservicesService.getList({UUID: related.uuid, operation: 'events'}).then(function(events) {
+              vm.events = events;
+            });
+          });
+
+        });
       }
     });
 

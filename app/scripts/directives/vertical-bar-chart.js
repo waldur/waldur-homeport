@@ -116,7 +116,8 @@
             return d.value ? d.value + 5 : d.value;
           })
           .style("font-size", function() {
-            return x.rangeBand() / 3;
+            var size = x.rangeBand() / 3;
+            return size > 120 ? 120 : size;
           })
           .attr("width", x.rangeBand())
           .attr('class', 'bar-info')
