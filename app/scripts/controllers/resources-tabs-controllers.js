@@ -74,21 +74,55 @@
   angular.module('ncsaas')
       .controller('ResourceGraphsController', [
         'baseControllerClass',
+        'resourcesService',
+        'zabbixHostsService',
         'resourceMonitoringService',
+        '$stateParams',
         ResourceGraphsController]);
 
   function ResourceGraphsController(
       baseControllerClass,
-      resourceMonitoringService) {
+      resourcesService,
+      zabbixHostsService,
+      resourceMonitoringService,
+      $stateParams) {
     var controllerScope = this;
     var controllerClass = baseControllerClass.extend({
       init: function() {
         this.controllerScope = controllerScope;
-        this.service = resourceMonitoringService;
+        this.service = resourcesService;
         this._super();
         this.noGraphsData = false;
-        this.cpuGraphData = this.service.getCPUData();
-        this.hddGraphData = this.service.getHDDData();
+        this.hddGraphData = resourceMonitoringService.getHDDData();
+        var vm = this;
+        this.getModel().then(function(model) {
+          vm.model = model;
+          for (var i = 0; i < model.related_resources.length; i++) {
+            if (model.related_resources[i].resource_type === "Zabbix.Host") {
+              vm.getZabbixItems(model.related_resources[i].uuid);
+            }
+          }
+        });
+      },
+      getModel: function() {
+        return this.service.$get($stateParams.resource_type, $stateParams.uuid);
+      },
+      getZabbixItems: function(uuid) {
+        var vm = this;
+        zabbixHostsService.getList({
+          UUID: uuid,
+          operation: 'items_history',
+          'item':'proc.num[,,run]',
+          'start':'1463056667',
+          'end':'1463143067',
+          'points_count':5}).then(function(items_history) {
+            vm.cpuGraphData = items_history.map(function(item) {
+              return {
+                core1: item.value,
+                date: new Date(item.point*1000)
+              };
+            });
+        });
       }
     });
 
