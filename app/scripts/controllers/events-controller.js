@@ -528,6 +528,8 @@
         this.activeTab = 'resources';
         this.barChartTab ='vmsByProject';
         this.activate();
+        this.currentMonth = new Date().getMonth() + 1;
+        this.currentYear = new Date().getFullYear();
       },
       activate: function() {
         var vm = this;
@@ -629,7 +631,8 @@
       },
       setMonthCostChartData: function() {
         var vm = this;
-        return priceEstimationService.getList().then(function(rows) {
+        priceEstimationService.pageSize = 100;
+        return priceEstimationService.getAll().then(function(rows) {
           vm.priceEstimationRows = rows;
           vm.monthCostChartData = {
             chartType: 'services',
@@ -640,17 +643,26 @@
           };
           vm.totalMonthCost = 0;
           rows.forEach(function(item) {
-            if (item.scope_type === 'service' && vm.monthCostChartData.data.length < 5) {
+            if (item.scope_type === 'service'
+                && (vm.currentYear === item.year && vm.currentMonth === item.month)
+                && vm.monthCostChartData.data.length < 5
+                && item.total > 0) {
               var truncatedName = ncUtils.truncateTo(item.scope_name, 8);
-              vm.monthCostChartData.data.push({
-                label: truncatedName + ' ('+ ENV.currency + item.total +')',
-                fullLabel: item.scope_name + ' ('+ ENV.currency + item.total +')',
+              var inData = false;
+              for (var i = 0; i < vm.monthCostChartData.data.length; i++) {
+                if (vm.monthCostChartData.data[i].itemName === item.scope_name) {
+                  inData = true;
+                }
+              }
+              !inData && vm.monthCostChartData.data.push({
+                label: truncatedName + ' ('+ ENV.currency + item.total.toFixed(2) +')',
+                fullLabel: item.scope_name + ' ('+ ENV.currency + item.total.toFixed(2) +')',
                 count: item.total,
                 itemName: item.scope_name,
                 name: 'providers' });
-              vm.totalMonthCost += item.total;
+              !inData && (vm.totalMonthCost += item.total);
             }
-            vm.monthCostChartData.legendDescription = "Projected cost: " + ENV.currency + vm.totalMonthCost;
+            vm.monthCostChartData.legendDescription = "Projected cost: " + ENV.currency + vm.totalMonthCost.toFixed(2);
           });
           vm.monthCostChartData.data = ncUtils.sortArrayOfObjects(vm.monthCostChartData.data, 'count', 1);
           vm.setServicesByProjectChartData();
@@ -664,19 +676,29 @@
           chartType: 'services'
         };
         vm.priceEstimationRows.forEach(function(priceRow) {
-          if (priceRow.scope_type === 'service' && vm.servicesByProjectChartData.data.length < 5) {
-            vm.servicesByProjectChartData.data.push({data: [], name: priceRow.scope_name, total: priceRow.total});
+          if (priceRow.scope_type === 'service'
+              && (vm.currentYear === priceRow.year && vm.currentMonth === priceRow.month)
+              && vm.servicesByProjectChartData.data.length < 5) {
+            var inData = false;
+            for (var i = 0; i < vm.servicesByProjectChartData.data.length; i++) {
+              if (vm.servicesByProjectChartData.data[i].name === priceRow.scope_name) {
+                inData = true;
+              }
+            }
+            !inData && priceRow.total > 0 && vm.servicesByProjectChartData.data.push({data: [], name: priceRow.scope_name, total: priceRow.total});
             vm.projectsList.forEach(function(project) {
               var projectPrice = 0;
               vm.priceEstimationRows.forEach(function(innerPriceRow) {
                 if (innerPriceRow.scope_type === 'serviceprojectlink'
+                    && (vm.currentYear === innerPriceRow.year && vm.currentMonth === innerPriceRow.month)
                     && innerPriceRow.scope_name.indexOf(priceRow.scope_name) !== -1
                     && innerPriceRow.scope_name.indexOf(project.name) !== -1) {
                   projectPrice += innerPriceRow.total;
                 }
               });
               var lastElem = vm.servicesByProjectChartData.data.length -1;
-              vm.servicesByProjectChartData.data[lastElem].data.push({project: project.uuid, count: projectPrice});
+              (lastElem > -1)
+                && vm.servicesByProjectChartData.data[lastElem].data.push({project: project.uuid, count: parseFloat(projectPrice.toFixed(2))});
             });
           }
         });

@@ -108,6 +108,7 @@
                         .style('float', 'left')
                         .style('padding-left', '5px')
                         .style('padding-right', '5px')
+                        .style('max-width', '180px')
                         .text(function(d, i) { return dataset[i].fullLabel});
                     elem.append('div')
                         .style('clear', 'both');
