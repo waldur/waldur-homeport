@@ -317,6 +317,11 @@
               key: 'alerts',
               viewName: 'tabAlerts',
               countFieldKey: 'alerts'
+            },
+            {
+              title: 'Graphs',
+              key: 'graphs',
+              viewName: 'tabGraphs'
             }
           ]
         };

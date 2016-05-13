@@ -628,6 +628,9 @@
             'tabAlerts@resources.details': {
               templateUrl: 'views/resource/tab-alerts.html',
             },
+            'tabGraphs@resources.details': {
+              templateUrl: 'views/resource/tab-graphs.html',
+            },
             'appHeader': {
               templateUrl: 'views/partials/app-header.html',
             }
