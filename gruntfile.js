@@ -626,7 +626,6 @@ module.exports = function(grunt) {
                     'app/scripts/*.js',
                     'app/scripts/configs/*.js',
                     'app/scripts/controllers/*.js',
-                    'app/scripts/configs/*.js',
                     'app/scripts/directives/*.js',
                     'app/scripts/services/*.js',
                     'app/static/js/angular/angular-block-ui.js',
@@ -656,7 +655,8 @@ module.exports = function(grunt) {
                 NODE_ENV: 'PRODUCTION'
             },
             test: {
-                NODE_ENV: 'TEST'
+                NODE_ENV: 'TEST',
+                BROWSER: grunt.option('browser') || 'chrome'
             }
         },
         preprocess: {
@@ -836,6 +836,8 @@ module.exports = function(grunt) {
 
     // old test task
     grunt.registerTask('test',
-      ['connect:test', 'image', 'sass', 'autoprefixer', 'protractor:test']);
-
+      ['copy:main', 'env:test', 'preprocess:test', 'connect:test', 'image', 'sass', 'autoprefixer',
+          'express:test',
+          'protractor:test'
+      ]);
 };

@@ -11,6 +11,7 @@
       'joinService',
       '$rootScope',
       'ENV',
+      '$q',
       'ncServiceUtils',
       baseServiceListController]);
 
@@ -24,6 +25,7 @@
     joinService,
     $rootScope,
     ENV,
+    $q,
     ncServiceUtils
     ) {
     var ControllerListClass = baseControllerListClass.extend({
@@ -61,7 +63,7 @@
           entityData: {
             noDataText: 'No providers yet.',
             noMatchesText: 'No providers found matching filter.',
-            createLink: 'services.create',
+            createLink: null,
             createLinkText: 'Add provider',
             checkQuotas: 'service',
             timer: ENV.providersTimerInterval,
@@ -103,6 +105,15 @@
             }
           ]
         };
+        var vm = this,
+            customerPromise = currentStateService.getCustomer(),
+            userPromise = usersService.getCurrentUser();
+        $q.all([userPromise, customerPromise]).then(function(result) {
+          result[0].is_staff && (vm.showProviderButton = true);
+          result[1].owners && result[1].owners.forEach(function(item) {
+            result[0].uuid === item.uuid && (vm.entityOptions.entityData.createLink = 'services.create');
+          });
+        });
       },
       checkProjects: function() {
         var vm = this;

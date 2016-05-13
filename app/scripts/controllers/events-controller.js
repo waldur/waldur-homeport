@@ -5,6 +5,7 @@
     .service('baseEventListController', [
       'baseControllerListClass',
       'eventsService',
+      'ngDialog',
       'ENTITYLISTFIELDTYPES',
       'eventFormatter',
       'ENV',
@@ -13,6 +14,7 @@
   function baseEventListController(
     baseControllerListClass,
     eventsService,
+    ngDialog,
     ENTITYLISTFIELDTYPES,
     eventFormatter,
     ENV) {
@@ -55,6 +57,13 @@
         ];
         this._super();
       },
+      showHelpTypes: function() {
+        ngDialog.open({
+          template: '<alerts-dialog type="events"></alerts-dialog>',
+          plain: true,
+          className: 'ngdialog-theme-default alerts-list-dialog',
+        });
+      },
       afterGetList: function() {
         angular.forEach(this.list, function(event) {
           event.html_message = eventFormatter.format(event);
@@ -72,6 +81,7 @@
       'baseControllerListClass',
       'alertsService',
       'alertFormatter',
+      'ngDialog',
       'ENTITYLISTFIELDTYPES',
       'ENV',
       BaseAlertsListController]);
@@ -80,6 +90,7 @@
     baseControllerListClass,
     alertsService,
     alertFormatter,
+    ngDialog,
     ENTITYLISTFIELDTYPES,
     ENV) {
     return baseControllerListClass.extend({
@@ -116,6 +127,13 @@
             }
           ]
         };
+      },
+      showHelpTypes: function() {
+        ngDialog.open({
+          template: '<alerts-dialog type="alerts"></alerts-dialog>',
+          plain: true,
+          className: 'ngdialog-theme-default alerts-list-dialog',
+        });
       },
       afterGetList: function() {
         angular.forEach(this.list, function(alert) {
@@ -161,8 +179,10 @@
       'priceEstimationService',
       'blockUI',
       'ENV',
-      'servicesService',
+      'currentStateService',
+      'usersService',
       'resourcesService',
+      '$q',
       DashboardCostController]);
 
   function DashboardCostController(
@@ -170,19 +190,29 @@
     priceEstimationService,
     blockUI,
     ENV,
-    servicesService,
-    resourcesService) {
+    currentStateService,
+    usersService,
+    resourcesService,
+    $q) {
     var controllerScope = this;
     var EventController = baseControllerClass.extend({
       init: function() {
         this.controllerScope = controllerScope;
-
         this.activate();
         blockUI.start();
 
+        var vm = this;
         this.checkQuotasResource = 'resource';
         this.checkQuotasProvider = 'service';
-
+        var customerPromise = currentStateService.getCustomer();
+        var userPromise = usersService.getCurrentUser();
+        this.showProviderButton = false;
+        $q.all([userPromise, customerPromise]).then(function(result) {
+          result[0].is_staff && (vm.showProviderButton = true);
+          result[1].owners && result[1].owners.forEach(function(item) {
+            result[0].uuid === item.uuid && (vm.showProviderButton = true);
+          });
+        });
       },
 
       activate: function() {
@@ -320,6 +350,7 @@
       '$window',
       '$q',
       'ncUtils',
+      'ngDialog',
       DashboardActivityController]);
 
   function DashboardActivityController(
@@ -338,7 +369,8 @@
     ENV,
     $window,
     $q,
-    ncUtils) {
+    ncUtils,
+    ngDialog) {
     var controllerScope = this;
     var EventController = baseControllerClass.extend({
       showGraph: true,
@@ -373,6 +405,13 @@
             $scope.$apply();
           }, 0);
           $scope.$apply();
+        });
+      },
+      showHelpTypes: function(type) {
+        ngDialog.open({
+          template: '<alerts-dialog type="' + type + '"></alerts-dialog>',
+          plain: true,
+          className: 'ngdialog-theme-default alerts-list-dialog',
         });
       },
       selectProject: function(project) {
