@@ -1,7 +1,7 @@
 .sort-list {
     @include clear-list;
     display: flex;
-    -webkit-flex-flow: row-reverse wrap;
+    -webkit-flex-flow: row wrap;
     position: relative;
     min-height: 30px;
     li {

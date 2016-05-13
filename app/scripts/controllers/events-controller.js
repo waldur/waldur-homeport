@@ -350,6 +350,7 @@
       '$window',
       '$q',
       'ncUtils',
+      'ngDialog',
       DashboardActivityController]);
 
   function DashboardActivityController(
@@ -368,7 +369,8 @@
     ENV,
     $window,
     $q,
-    ncUtils) {
+    ncUtils,
+    ngDialog) {
     var controllerScope = this;
     var EventController = baseControllerClass.extend({
       showGraph: true,
@@ -403,6 +405,13 @@
             $scope.$apply();
           }, 0);
           $scope.$apply();
+        });
+      },
+      showHelpTypes: function(type) {
+        ngDialog.open({
+          template: '<alerts-dialog type="' + type + '"></alerts-dialog>',
+          plain: true,
+          className: 'ngdialog-theme-default alerts-list-dialog',
         });
       },
       selectProject: function(project) {

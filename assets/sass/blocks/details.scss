@@ -86,6 +86,10 @@ $searchInputHeight: 32px;
   }
   .tabs-wrapper {
     position: relative;
+
+    .sort-list {
+      flex-direction: row-reverse;
+    }
   }
   aside {
     .open-tabs {

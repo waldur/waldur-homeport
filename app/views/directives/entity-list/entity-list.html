@@ -10,8 +10,8 @@
             <li>
                 <div ng-if="entityList.helpKey">
                     <div class="list-help-button">
-                        <a stoppropagation class="button-support pending" target="_blank"
-                           ng-click="entityList.showHelpTypes()">Supported {{entityList.helpKey}}</a>
+                        <a stoppropagation class="button-support pending"
+                           ng-click="entityList.showHelpTypes()">?</a>
                     </div>
                     <div class="clear"></div>
                 </div>
@@ -27,7 +27,7 @@
             <li>
                 <filter-list filter-controller="entityList"></filter-list>
             </li>
-            <li class="right-sort">
+            <li>
                 <div ng-include="'views/directives/entity-list/table-actions.html'"></div>
             </li>
         </ul>
