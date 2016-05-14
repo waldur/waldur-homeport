@@ -40,29 +40,21 @@ __Installation steps__:
 
 6. Run application:
 
-    choose mode:
-    
-     `grunt modePrivateIaas`
-     
-     `grunt modeSquStudentCloud`
-     
-     `grunt modePublicBrokerage`
-     
-     `grunt modeCostTracking`
-     
-     or run with param
-     
-     `--mode=modePrivateIaas`
-     
-     `--mode=modeSquStudentCloud`
-     
-     `--mode=modePublicBrokerage`
-     
-     `--mode=modeCostTracking`
-
     `grunt` - in development mode
 
     `grunt prod` - in production mode
+
+    Or choose specific mode by passing additional paramater:
+
+     `grunt --mode=modePrivateIaas`
+     
+     `grunt --mode=modeSquStudentCloud`
+     
+     `grunt --mode=modePublicBrokerage`
+     
+     `grunt --mode=modeCostTracking`
+
+     `grunt --mode=modePortal`
 
 Server will listen on `//localhost:8000`
 

@@ -7,7 +7,7 @@
                     <span class="error error-standard label">{{ error }}</span>
                 </li>
             </ul>
-            <form form-autofill-fix>
+            <form form-autofill-fix visible="localSignin">
                 <div class="row-login">
                     <input type="text" ng-model="auth.user.username" placeholder="Username">
                 </div>
@@ -20,7 +20,6 @@
                     </div>
                 </div>
             </form>
-            <h3 class="app-title centered">Sign up using</h3>
             <div class="row-login">
                 <a class="button-social google" ng-click="auth.authenticate('google')">
                     <span>Google</span>
