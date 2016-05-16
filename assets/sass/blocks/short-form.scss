@@ -93,6 +93,45 @@
             &.description {
                 width: 160px;
             } // &.description
+            .toggle {
+                input[type=checkbox] {
+                  display: none;
+                }
+
+                input[type=checkbox] + label {
+                  display: inline-block;
+                  background: #ccc;
+                  position: relative;
+                  width: 100px;
+                  text-align: center;
+                  border-radius: 4px;
+                  overflow: hidden;
+                  cursor: pointer;
+                  span {
+                    color: #fff;
+                    display: block;
+                    float: left;
+                    width: 50%;
+                    position: relative;
+                    z-index: 1;
+                  }
+                  &:after {
+                    position: absolute;
+                    content: "";
+                    width: 50%;
+                    height: 100%;
+                    background: #50b848;
+                    left: 0;
+                    top:0;
+                    transition: left .5s;
+                  }
+                }
+                input[type=checkbox]:checked + label {
+                  &:after {
+                    left: 50%;
+                  }
+                }
+            }
         } // foo
     } // form-row
 } // short-form
