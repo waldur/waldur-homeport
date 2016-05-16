@@ -12,12 +12,14 @@
         <div class="resource-graphs">
             <div class="graph">
                 <span class="chart-name">CPU</span>
+                <div ng-if="GraphsController.cpuGraphError">Chart is not available at this moment</div>
                 <multi-line-chart chart-data="GraphsController.cpuGraphData"
                                   chart-controller="GraphsController"></multi-line-chart>
             </div>
 
             <div class="graph">
                 <span class="chart-name">HDD</span>
+                <div ng-if="GraphsController.hddGraphError">Chart is not available at this moment</div>
                 <multi-line-chart chart-data="GraphsController.hddGraphData"
                                   chart-controller="GraphsController"></multi-line-chart>
             </div>

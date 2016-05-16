@@ -2,9 +2,9 @@
 
 (function () {
     angular.module('ncsaas')
-        .directive('multiLineChart', ['$state', 'currentStateService', multiLineChart]);
+        .directive('multiLineChart', ['$window', multiLineChart]);
 
-    function multiLineChart($state, currentStateService) {
+    function multiLineChart($window) {
         return {
             restrict: 'E',
             replace: true,
@@ -21,10 +21,20 @@
                 data && init();
             });
 
+            angular.element($window).bind('resize', onResize);
+
+            scope.$on('$destroy', function() {
+                angular.element($window).unbind('resize', onResize);
+            });
+
+            function onResize() {
+                scope.data && init();
+            }
+
             function init() {
                 var margin = {top: 20, right: 80, bottom: 30, left: 50},
-                    width = 960 - margin.left - margin.right,
-                    height = 500 - margin.top - margin.bottom;
+                    width = element[0].getBoundingClientRect().width - margin.left - margin.right,
+                    height = 400 - margin.top - margin.bottom;
 
                 var x = d3.time.scale()
                     .range([0, width]);

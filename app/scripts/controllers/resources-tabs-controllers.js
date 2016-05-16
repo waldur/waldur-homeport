@@ -93,13 +93,16 @@
         this.service = resourcesService;
         this._super();
         this.noGraphsData = false;
-        this.hddGraphData = resourceMonitoringService.getHDDData();
-        var vm = this;
+        //this.hddGraphData = resourceMonitoringService.getHDDData();
+        var vm = this,
+            startDate = Math.floor(new Date().getTime() / 1000 - (24 * 3600)),
+            endDate = Math.floor(new Date().getTime() / 1000);
+
         this.getModel().then(function(model) {
           vm.model = model;
           for (var i = 0; i < model.related_resources.length; i++) {
             if (model.related_resources[i].resource_type === "Zabbix.Host") {
-              vm.getZabbixItems(model.related_resources[i].uuid);
+              vm.getZabbixItems(model.related_resources[i].uuid, [startDate, endDate]);
             }
           }
         });
@@ -107,21 +110,39 @@
       getModel: function() {
         return this.service.$get($stateParams.resource_type, $stateParams.uuid);
       },
-      getZabbixItems: function(uuid) {
+      getZabbixItems: function(uuid, date) {
         var vm = this;
         zabbixHostsService.getList({
           UUID: uuid,
           operation: 'items_history',
-          'item':'proc.num[,,run]',
-          'start':'1463056667',
-          'end':'1463143067',
-          'points_count':5}).then(function(items_history) {
+          'item': 'proc.num[,,run]',
+          'start': date[0],
+          'end': date[1],
+          'points_count': 5}).then(function(items_history) {
             vm.cpuGraphData = items_history.map(function(item) {
               return {
                 core1: item.value,
                 date: new Date(item.point*1000)
               };
             });
+        }, function() {
+          vm.cpuGraphError = true;
+        });
+        zabbixHostsService.getList({
+          UUID: uuid,
+          operation: 'items_history',
+          'item': 'vfs.fs.size[/,used]',
+          'start': date[0],
+          'end': date[1],
+          'points_count': 5}).then(function(items_history) {
+          vm.hddGraphData = items_history.map(function(item) {
+            return {
+              hdd: item.value,
+              date: new Date(item.point*1000)
+            };
+          });
+        }, function() {
+          vm.hddGraphError = true;
         });
       }
     });
