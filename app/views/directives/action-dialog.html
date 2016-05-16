@@ -27,6 +27,15 @@
                      </select>
                      <div ng-if="!field.list">N/A</div>
                 </div>
+                <div ng-switch-when="boolean">
+                    <div class="toggle">
+                        <input id="toggle_{{$id}}" type="checkbox" ng-model="form[name]">
+                        <label for="toggle_{{$id}}">
+                            <span>no</span>
+                            <span>yes</span>
+                        </label>
+                    </div>
+                </div>
                 <div class="error arrow-up" ng-show="errors[name]">
                     <ul class="error-list">
                         <li ng-repeat="error in errors[name]" ng-bind="error"></li>
