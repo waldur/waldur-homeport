@@ -142,14 +142,12 @@
         $scope.model = customer;
         $scope.plan = getPlan(customer);
         getChart(customer);
-        for (var i = 0; i < customer.owners.length; i++) {
-          if (currentUser.uuid === customer.owners[i].uuid) {
-            $scope.showUpgradeButton = true;
-            break;
-          }
-        }
       });
-    };
+
+      customersService.isOwnerOrStaff().then(function(isOwnerOrStaff) {
+        $scope.showUpgradeButton = isOwnerOrStaff;
+      });
+    }
 
     init();
   }

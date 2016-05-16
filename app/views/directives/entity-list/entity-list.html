@@ -7,6 +7,15 @@
             ng-include="entityOptions.entityData.filterTemplateUrl"></div>
         <ul class="sort-list"
             ng-if="!entityOptions.entityData.hideControlButtons">
+            <li>
+                <div ng-if="entityList.helpKey">
+                    <div class="list-help-button">
+                        <a stoppropagation class="button-support pending"
+                           ng-click="entityList.showHelpTypes()">?</a>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </li>
             <li class="search divid">
                 <div class="search-box">
                     <input type="text" ng-model='entityList.searchInput'
@@ -18,7 +27,7 @@
             <li>
                 <filter-list filter-controller="entityList"></filter-list>
             </li>
-            <li class="right-sort">
+            <li>
                 <div ng-include="'views/directives/entity-list/table-actions.html'"></div>
             </li>
         </ul>
@@ -42,13 +51,6 @@
     </div>
 
     <div class="white-box list-box" ng-show="entityList.list.length > 0">
-        <div ng-if="entityList.helpKey">
-            <div class="list-help-button">
-                <a stoppropagation class="button-support pending" target="_blank"
-                   ui-sref="help.details({name: entityList.helpKey})">Supported {{entityList.helpKey}}</a>
-            </div>
-            <div class="clear"></div>
-        </div>
         <ul class="mobile-show compact-list"
             ng-if="entityOptions.entityData.rowTemplateUrl">
             <li class="compact-list__item"
