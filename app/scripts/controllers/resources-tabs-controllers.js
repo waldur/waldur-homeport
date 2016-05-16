@@ -73,7 +73,6 @@
 (function() {
   angular.module('ncsaas')
     .controller('ResourceSLAController', [
-      'slaService',
       'baseControllerClass',
       'resourcesService',
       '$stateParams',
@@ -82,7 +81,6 @@
       ResourceSLAController]);
 
   function ResourceSLAController(
-    slaService,
     baseControllerClass,
     resourcesService,
     $stateParams,
@@ -92,11 +90,14 @@
     var controllerClass = baseControllerClass.extend({
       init: function() {
         this.controllerScope = controllerScope;
-        this.service = slaService;
         this._super();
         var vm = this;
 
         resourcesService.$get($stateParams.resource_type, $stateParams.uuid).then(function(resource) {
+          vm.resource = resource;
+          if (resource.sla === null) {
+            return;
+          }
           vm.data = [angular.extend(resource.sla, {date: new Date(resource.sla.period)})];
 
           var zabbix= resource.related_resources.filter(function(item) {

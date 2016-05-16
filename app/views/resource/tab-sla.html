@@ -1,8 +1,6 @@
 <section class="tab-sla" ng-controller="ResourceSLAController as ResourceSLA">
-    <div class="sla-chart">
-
-    </div>
-    <div class="sla-list">
+    <p ng-show="ResourceSLA.resource.sla === null">Resource doesn't have SLA yet. Please connect it to monitoring system</p>
+    <div class="sla-list" ng-show="ResourceSLA.resource.sla">
         <div class="title">Latest SLA events</div>
         <ul>
             <li ng-repeat="item in ResourceSLA.events">
@@ -11,5 +9,5 @@
             </li>
         </ul>
     </div>
-    <vertical-bar-chart chart-data="ResourceSLA.data"></vertical-bar-chart>
+    <vertical-bar-chart ng-if="ResourceSLA.resource.sla" chart-data="ResourceSLA.data"></vertical-bar-chart>
 </section>
