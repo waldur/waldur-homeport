@@ -228,7 +228,11 @@
                     resourcesTypes.forEach(function(resource) {
                         if (resource.x) {
                             svg.append('text')
-                              .text($filter('defaultCurrency')(resource.x))
+                              .text(function() {
+                                  return chartType !== 'resources' ?
+                                      $filter('defaultCurrency')(resource.x) :
+                                      resource.x;
+                              })
                               .attr('x', xScale(resource.x0) + xScale(resource.x) / 2 - resource.x0.toString().length -5)
                               .attr('y', yScale(resource.y) + yScale.rangeBand() / 2 + 5)
                               .attr('fill', "#fff");
