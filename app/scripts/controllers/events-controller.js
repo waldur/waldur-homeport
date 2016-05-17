@@ -702,7 +702,7 @@
             });
           }
         });
-        vm.servicesByProjectChartData.data = ncUtils.sortArrayOfObjects(vm.servicesByProjectChartData.data, 'total', 0);
+        vm.servicesByProjectChartData.data = ncUtils.sortArrayOfObjects(vm.servicesByProjectChartData.data, 'total', 1);
       },
       setResourcesByProjectChartData: function() {
         var vm = this;

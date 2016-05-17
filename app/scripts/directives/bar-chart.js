@@ -2,9 +2,9 @@
 
 (function () {
     angular.module('ncsaas')
-        .directive('barChart', ['$state', 'ncUtils', barChart]);
+        .directive('barChart', ['$state', '$filter', 'ncUtils', barChart]);
 
-    function barChart($state, ncUtils) {
+    function barChart($state, $filter, ncUtils) {
         return {
             restrict: 'E',
             replace: true,
@@ -228,7 +228,7 @@
                     resourcesTypes.forEach(function(resource) {
                         if (resource.x) {
                             svg.append('text')
-                              .text(resource.x)
+                              .text($filter('defaultCurrency')(resource.x))
                               .attr('x', xScale(resource.x0) + xScale(resource.x) / 2 - resource.x0.toString().length -5)
                               .attr('y', yScale(resource.y) + yScale.rangeBand() / 2 + 5)
                               .attr('fill', "#fff");
