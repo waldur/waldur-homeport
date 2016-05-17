@@ -14,5 +14,4 @@
     });
     return new ServiceClass();
   }
-
 })();

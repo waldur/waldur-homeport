@@ -319,6 +319,11 @@
               countFieldKey: 'alerts'
             },
             {
+              title: 'Graphs',
+              key: 'graphs',
+              viewName: 'tabGraphs'
+            },
+            {
               title: 'SLA',
               key: 'sla',
               viewName: 'tabSLA',

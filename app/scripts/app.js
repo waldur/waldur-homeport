@@ -628,6 +628,9 @@
             'tabAlerts@resources.details': {
               templateUrl: 'views/resource/tab-alerts.html',
             },
+            'tabGraphs@resources.details': {
+              templateUrl: 'views/resource/tab-graphs.html',
+            },
             'tabSLA@resources.details': {
               templateUrl: 'views/resource/tab-sla.html',
             },
