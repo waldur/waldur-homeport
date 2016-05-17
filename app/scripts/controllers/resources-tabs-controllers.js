@@ -100,11 +100,20 @@
 
         this.getModel().then(function(model) {
           vm.model = model;
+          var zabbixExist = false;
           for (var i = 0; i < model.related_resources.length; i++) {
             if (model.related_resources[i].resource_type === "Zabbix.Host") {
+              zabbixExist = true;
               vm.getZabbixItems(model.related_resources[i].uuid, [startDate, endDate]);
             }
           }
+          if (!zabbixExist) {
+            vm.cpuGraphError = 'Not enough data for chart';
+            vm.hddGraphError = 'Not enough data for chart';
+          }
+        }, function(error) {
+          vm.cpuGraphError = 'Not enough data for chart';
+          vm.hddGraphError = 'Not enough data for chart';
         });
       },
       getModel: function() {
@@ -126,7 +135,7 @@
               };
             });
         }, function() {
-          vm.cpuGraphError = true;
+          vm.cpuGraphError = 'Chart is not available at this moment';
         });
         zabbixHostsService.getList({
           UUID: uuid,
@@ -142,7 +151,7 @@
             };
           });
         }, function() {
-          vm.hddGraphError = true;
+          vm.hddGraphError = 'Chart is not available at this moment';
         });
       }
     });

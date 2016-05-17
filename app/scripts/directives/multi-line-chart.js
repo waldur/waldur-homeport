@@ -32,6 +32,8 @@
             }
 
             function init() {
+                element.children().html('');
+
                 var margin = {top: 20, right: 80, bottom: 30, left: 50},
                     width = element[0].getBoundingClientRect().width - margin.left - margin.right,
                     height = 400 - margin.top - margin.bottom;
