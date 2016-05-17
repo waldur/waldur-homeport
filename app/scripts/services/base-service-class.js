@@ -211,7 +211,7 @@
 
       $get: function(uuid, url, filters) {
         filters = filters || {};
-        return this.getFactory(false, null, url).get({}, angular.extend(filters, {uuid: uuid})).$promise;
+        return this.getFactory(false, null, url).get(filters, angular.extend(filters, {uuid: uuid})).$promise;
       },
 
       getEndpoint:function(isList) {

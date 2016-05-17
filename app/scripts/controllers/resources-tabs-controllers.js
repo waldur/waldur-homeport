@@ -78,6 +78,7 @@
       '$stateParams',
       'zabbixItservicesService',
       'zabbixHostsService',
+      '$q',
       ResourceSLAController]);
 
   function ResourceSLAController(
@@ -85,7 +86,8 @@
     resourcesService,
     $stateParams,
     zabbixItservicesService,
-    zabbixHostsService) {
+    zabbixHostsService,
+    $q) {
     var controllerScope = this;
     var controllerClass = baseControllerClass.extend({
       init: function() {
@@ -98,9 +100,37 @@
           if (resource.sla === null) {
             return;
           }
-          vm.data = [angular.extend(resource.sla, {date: new Date(resource.sla.period)})];
+          var dataSla = [angular.extend(resource.sla, {date: new Date(resource.sla.period)})],
+            requests = [];
 
-          var zabbix= resource.related_resources.filter(function(item) {
+          var slaEndDate = new Date(resource.sla.period);
+
+          for (var i = 1; i < 10; i++) {
+            var month = slaEndDate.getMonth() + 1 - i,
+              year = slaEndDate.getFullYear();
+
+            if (month < 1) {
+              year -= 1;
+              month = 12 + month;
+            }
+
+            var request = zabbixHostsService.$get(null, resource.url, {
+              period: year + '-' + (month < 10 ? '0' + month : month ),
+              field: 'sla'
+            }).then(function(response) {
+              response.sla && dataSla.push(angular.extend(response.sla, {date: new Date(response.sla.period)}));
+            });
+
+            requests.push(request);
+          }
+
+          $q.all(requests).then(function() {
+            vm.data = dataSla.sort(function(a, b) {
+              return a.date.getTime() - b.date.getTime();
+            });
+          });
+
+          var zabbix = resource.related_resources.filter(function(item) {
             return item.resource_type === 'Zabbix.Host';
           })[0];
 
@@ -110,7 +140,10 @@
             })[0];
 
             related && zabbixItservicesService.getList({UUID: related.uuid, operation: 'events'}).then(function(events) {
-              vm.events = events;
+              vm.events = events.map(function(event) {
+                event.timestamp = event.timestamp * 1000;
+                return event;
+              });
             });
           });
 

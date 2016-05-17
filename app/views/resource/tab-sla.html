@@ -9,5 +9,5 @@
             </li>
         </ul>
     </div>
-    <vertical-bar-chart ng-if="ResourceSLA.resource.sla" chart-data="ResourceSLA.data"></vertical-bar-chart>
+    <vertical-bar-chart ng-if="ResourceSLA.data.length > 0" chart-data="ResourceSLA.data"></vertical-bar-chart>
 </section>
