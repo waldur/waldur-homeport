@@ -322,6 +322,13 @@
               title: 'Graphs',
               key: 'graphs',
               viewName: 'tabGraphs'
+            },
+            {
+              title: 'SLA',
+              key: 'sla',
+              viewName: 'tabSLA',
+              count: -1,
+              hideSearch: true
             }
           ]
         };

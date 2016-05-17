@@ -614,7 +614,7 @@
         })
 
         .state('resources.details', {
-          url: ':resource_type/:uuid/:tab',
+          url: ':resource_type/:uuid/?tab',
           views: {
             'appContent': {
               templateUrl: 'views/resource/details.html',
@@ -630,6 +630,9 @@
             },
             'tabGraphs@resources.details': {
               templateUrl: 'views/resource/tab-graphs.html',
+            },
+            'tabSLA@resources.details': {
+              templateUrl: 'views/resource/tab-sla.html',
             },
             'appHeader': {
               templateUrl: 'views/partials/app-header.html',

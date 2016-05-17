@@ -2,16 +2,17 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('zabbixHostsService', ['baseServiceClass', zabbixHostsService]);
+    .service('zabbixItservicesService', ['baseServiceClass', zabbixItservicesService]);
 
-  function zabbixHostsService(baseServiceClass) {
+  function zabbixItservicesService(baseServiceClass) {
     /*jshint validthis: true */
     var ServiceClass = baseServiceClass.extend({
       init:function() {
         this._super();
-        this.endpoint = '/zabbix-hosts/';
+        this.endpoint = '/zabbix-itservices/';
       }
     });
     return new ServiceClass();
   }
+
 })();

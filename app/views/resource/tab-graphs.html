@@ -18,9 +18,9 @@
             </div>
 
             <div class="graph">
-                <span class="chart-name">HDD</span>
-                <div ng-if="GraphsController.hddGraphError">{{GraphsController.hddGraphError}}</div>
-                <multi-line-chart chart-data="GraphsController.hddGraphData"
+                <span class="chart-name">RAM</span>
+                <div ng-if="GraphsController.ramGraphError">{{GraphsController.ramGraphError}}</div>
+                <multi-line-chart chart-data="GraphsController.ramGraphData"
                                   chart-controller="GraphsController"></multi-line-chart>
             </div>
         </div>
