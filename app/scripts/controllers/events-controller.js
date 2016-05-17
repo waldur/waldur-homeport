@@ -558,6 +558,8 @@
         this.activeTab = 'resources';
         this.barChartTab ='vmsByProject';
         this.activate();
+        this.currentMonth = new Date().getMonth() + 1;
+        this.currentYear = new Date().getFullYear();
       },
       activate: function() {
         var vm = this;
@@ -615,21 +617,23 @@
 
           vm.currentUsageData = {
             chartType: 'vms',
+            chartWidth: 500,
             legendDescription: null,
             legendLink: 'plans',
             data: []
           };
+          var freeResources = null;
           response.quotas.forEach(function(item) {
             if (item.name === 'nc_resource_count') {
               var limit;
               if (item.limit != -1) {
                 var free = item.limit - item.usage;
                 limit = item.limit;
-                vm.currentUsageData.data.push({
+                freeResources = {
                   label: free + ' free',
                   count: free,
                   name: 'plans'
-                });
+                };
                 vm.currentUsageData.legendDescription = item.usage + " used / " + limit + " total";
               } else {
                 vm.currentUsageData.legendDescription = item.usage + " used";
@@ -651,28 +655,46 @@
               vm.currentUsageData.data.push({ label: pcs + ' private clouds', count: pcs, name: 'private clouds' })
             }
           });
+          vm.currentUsageData.data = ncUtils.sortArrayOfObjects(vm.currentUsageData.data, 'name', 0);
+          freeResources && vm.currentUsageData.data.push(freeResources);
         });
       },
       setMonthCostChartData: function() {
         var vm = this;
-        return priceEstimationService.getList().then(function(rows) {
+        priceEstimationService.pageSize = 100;
+        return priceEstimationService.getAll().then(function(rows) {
           vm.priceEstimationRows = rows;
-          vm.monthCostChartData = {chartType: 'services', legendDescription: null, legendLink: 'providers', data: []};
+          vm.monthCostChartData = {
+            chartType: 'services',
+            chartWidth: 200,
+            legendDescription: null,
+            legendLink: 'providers',
+            data: []
+          };
           vm.totalMonthCost = 0;
           rows.forEach(function(item) {
-            if (item.scope_type === 'service' && vm.monthCostChartData.data.length < 5) {
-              var truncatedName = item.scope_name.length > 8 ?
-                  item.scope_name.slice(0, 8) + '..'  :
-                  item.scope_name;
-              vm.monthCostChartData.data.push({
-                label: truncatedName + ' ('+ ENV.currency + item.total +')',
+            if (item.scope_type === 'service'
+                && (vm.currentYear === item.year && vm.currentMonth === item.month)
+                && vm.monthCostChartData.data.length < 5
+                && item.total > 0) {
+              var truncatedName = ncUtils.truncateTo(item.scope_name, 8);
+              var inData = false;
+              for (var i = 0; i < vm.monthCostChartData.data.length; i++) {
+                if (vm.monthCostChartData.data[i].itemName === item.scope_name) {
+                  inData = true;
+                }
+              }
+              !inData && vm.monthCostChartData.data.push({
+                label: truncatedName + ' ('+ ENV.currency + item.total.toFixed(2) +')',
+                fullLabel: item.scope_name + ' ('+ ENV.currency + item.total.toFixed(2) +')',
                 count: item.total,
                 itemName: item.scope_name,
                 name: 'providers' });
-              vm.totalMonthCost += item.total;
+              !inData && (vm.totalMonthCost += item.total);
             }
-            vm.monthCostChartData.legendDescription = "Projected cost: " + ENV.currency + vm.totalMonthCost;
+            vm.monthCostChartData.legendDescription = "Projected cost: " + ENV.currency + vm.totalMonthCost.toFixed(2);
           });
+          vm.monthCostChartData.data = ncUtils.sortArrayOfObjects(vm.monthCostChartData.data, 'count', 1);
           vm.setServicesByProjectChartData();
         });
       },
@@ -684,19 +706,38 @@
           chartType: 'services'
         };
         vm.priceEstimationRows.forEach(function(priceRow) {
-          if (priceRow.scope_type === 'service' && vm.servicesByProjectChartData.data.length < 5) {
-            vm.servicesByProjectChartData.data.push({data: [], name: priceRow.scope_name});
+          if (priceRow.scope_type === 'service'
+              && (vm.currentYear === priceRow.year && vm.currentMonth === priceRow.month)
+              && vm.servicesByProjectChartData.data.length < 5) {
+            var inData = false;
+            for (var i = 0; i < vm.servicesByProjectChartData.data.length; i++) {
+              if (vm.servicesByProjectChartData.data[i].name === priceRow.scope_name) {
+                inData = true;
+              }
+            }
+            !inData && priceRow.total > 0 && vm.servicesByProjectChartData.data.push({data: [], name: priceRow.scope_name, total: priceRow.total});
             vm.projectsList.forEach(function(project) {
+              var projectPrice = 0;
+              vm.priceEstimationRows.forEach(function(innerPriceRow) {
+                if (innerPriceRow.scope_type === 'serviceprojectlink'
+                    && (vm.currentYear === innerPriceRow.year && vm.currentMonth === innerPriceRow.month)
+                    && innerPriceRow.scope_name.indexOf(priceRow.scope_name) !== -1
+                    && innerPriceRow.scope_name.indexOf(project.name) !== -1) {
+                  projectPrice += innerPriceRow.total;
+                }
+              });
               var lastElem = vm.servicesByProjectChartData.data.length -1;
-              vm.servicesByProjectChartData.data[lastElem].data.push({project: project.uuid, count: priceRow.total});
+              (lastElem > -1)
+                && vm.servicesByProjectChartData.data[lastElem].data.push({project: project.uuid, count: parseFloat(projectPrice.toFixed(2))});
             });
           }
         });
+        vm.servicesByProjectChartData.data = ncUtils.sortArrayOfObjects(vm.servicesByProjectChartData.data, 'total', 1);
       },
       setResourcesByProjectChartData: function() {
         var vm = this;
         vm.resourcesByProjectChartData = {
-          data :[{data: [], name: 'VMs'}, {data: [], name: 'Applications'}, {data: [], name: 'Private clouds'}],
+          data :[{data: [], name: 'Applications'}, {data: [], name: 'Private clouds'}, {data: [], name: 'VMs'}],
           projects: vm.projectsList,
           chartType: 'resources'
         };
@@ -704,15 +745,15 @@
         vm.projectsList.forEach(function(item) {
           item.quotas.forEach(function(itemQuota) {
             if (itemQuota.name === 'nc_vm_count') {
-              vm.resourcesByProjectChartData.data[0].data.push({project: item.uuid, count: itemQuota.usage});
+              vm.resourcesByProjectChartData.data[2].data.push({project: item.uuid, count: itemQuota.usage});
               vm.resourcesCount += itemQuota.usage;
             }
             if (itemQuota.name === 'nc_app_count') {
-              vm.resourcesByProjectChartData.data[1].data.push({project: item.uuid, count: itemQuota.usage});
+              vm.resourcesByProjectChartData.data[0].data.push({project: item.uuid, count: itemQuota.usage});
               vm.resourcesCount += itemQuota.usage;
             }
             if (itemQuota.name === 'nc_private_cloud_count') {
-              vm.resourcesByProjectChartData.data[2].data.push({project: item.uuid, count: itemQuota.usage});
+              vm.resourcesByProjectChartData.data[1].data.push({project: item.uuid, count: itemQuota.usage});
               vm.resourcesCount += itemQuota.usage;            }
 
           });

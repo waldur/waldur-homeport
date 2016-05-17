@@ -18,7 +18,19 @@
       padding: 15px 5px;
       position: relative;
       text-align: center;
-      width: 400px;
+      min-width: 500px;
+
+      &.month-cost {
+        padding-left: 30px;
+      }
+
+      .month-cost-chart {
+        float: left;
+        padding-left: 25px;
+        &.legend {
+          padding-top: 25px;
+        }
+      }
 
       &.active {
         background: #fafafa;
