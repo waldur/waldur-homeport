@@ -8,6 +8,7 @@ angular.module('ncsaas')
       'localSignin',
       'password',
       'team',
+      'people',
       'monitoring',
       'backups',
       'templates',
