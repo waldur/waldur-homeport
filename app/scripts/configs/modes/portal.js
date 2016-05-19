@@ -9,6 +9,7 @@ angular.module('ncsaas')
       'password',
       'team',
       'people',
+      'payment',
       'monitoring',
       'backups',
       'templates',
