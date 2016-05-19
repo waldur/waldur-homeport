@@ -28,11 +28,11 @@
 
     function init() {
       if (!ENV.featuresVisible && (ENV.toBeFeatures.indexOf('payment') > -1)) {
-        scope.hideAll = true;
+        $scope.hideAll = true;
         return;
       }
       if (!ENV.enablePurchaseCostDisplay) {
-        scope.hideAll = true;
+        $scope.hideAll = true;
       }
 
       $scope.currency = ENV.currency;
