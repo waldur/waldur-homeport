@@ -16,6 +16,7 @@ angular.module('ncsaas')
       'sizing',
       'projectGroups',
       'apps',
+      'private_clouds',
       'premiumSupport'
     ],
     featuresVisible: false,
