@@ -257,6 +257,7 @@
 
                         h3 {
                             max-width: 70%;
+                            margin-left: 10px;
                             @include bp(md) {
                                 font-size: 12px;
                             }

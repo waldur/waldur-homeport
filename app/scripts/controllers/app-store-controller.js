@@ -56,6 +56,7 @@
         field: 'field',
         integer: 'integer'
       },
+      futureCategories: ENV.futureCategories,
 
       currency: ENV.currency,
       enablePurchaseCostDisplay: ENV.enablePurchaseCostDisplay,
