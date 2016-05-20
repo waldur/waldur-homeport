@@ -45,5 +45,8 @@
             @include inline-middle;
             @include property(margin-bottom, -4);
         }
+        &.full-width {
+            flex-grow: 1;
+        }
     } // li
 } // sort-list
