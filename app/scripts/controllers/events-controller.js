@@ -472,6 +472,9 @@
           );
         return projectsService.getCounters(query).then(function(counters) {
           project.count = counters;
+          var usage = ncUtils.getQuotaUsage(project.quotas);
+          project.count.services = usage.nc_service_project_link_count;
+          project.count.resources = usage.nc_resource_count;
         });
       },
       getProjectEvents: function (project) {
