@@ -7,8 +7,8 @@
             ng-include="entityOptions.entityData.filterTemplateUrl"></div>
         <ul class="sort-list"
             ng-if="!entityOptions.entityData.hideControlButtons">
-            <li>
-                <div ng-if="entityList.helpKey">
+            <li ng-if="entityList.helpKey" class="full-width">
+                <div>
                     <div class="list-help-button">
                         <a stoppropagation class="button-support pending"
                            ng-click="entityList.showHelpTypes()">?</a>
@@ -24,7 +24,7 @@
                     <button class="search-button" ng-click="entityList.search()"></button>
                 </div>
             </li>
-            <li>
+            <li class="full-width">
                 <filter-list filter-controller="entityList"></filter-list>
             </li>
             <li>
