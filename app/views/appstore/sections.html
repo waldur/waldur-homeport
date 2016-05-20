@@ -15,6 +15,14 @@
                 <a stoppropagation ui-sref="compare.vms">Compare</a>
             </div>
         </div>
+        <div class="appstore-template appstore-category disabled"
+             ng-repeat="category in AppStore.futureCategories">
+            <div class="icon {{ ::category.icon }}"></div>
+            <h3>{{ ::category.name }}</h3>
+            <div class="compare compare-active">
+                Coming soon
+            </div>
+        </div>
         <!-- /category -->
     </div>
 </section>

@@ -10,6 +10,7 @@ angular.module('ncsaas')
       'team',
       'people',
       'payment',
+      'compare',
       'monitoring',
       'backups',
       'templates',
@@ -26,18 +27,26 @@ angular.module('ncsaas')
         type: 'provider',
         icon: 'desktop',
         services: ['Amazon', 'DigitalOcean', 'OpenStack']
-      },
-      {
-        name: 'Private clouds',
-        type: 'provider',
-        icon: 'cloud',
-        services: ['OpenStack']
       }
     ],
     serviceCategories: [
       {
         name: 'Virtual machines',
         services: ['Amazon', 'DigitalOcean', 'OpenStack'],
+      }
+    ],
+    futureCategories: [
+      {
+        name: 'Private clouds',
+        icon: 'cloud'
+      },
+      {
+        name: 'Applications',
+        icon: 'database'
+      },
+      {
+        name: 'Support',
+        icon: 'wrench'
       }
     ]
   });

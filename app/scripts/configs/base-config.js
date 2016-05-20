@@ -74,6 +74,7 @@ angular.module('ncsaas')
         services: ['Oracle', 'GitLab']
       }
     ],
+    futureCategories: [],
     resourceCategory: {
         "Amazon.Instance": "vms",
         "SaltStack.SharepointTenant": "apps",
