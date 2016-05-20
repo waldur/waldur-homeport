@@ -466,19 +466,16 @@
         ncUtils.blockElement('dashboard-projects-list', promise)
       },
       getProjectCounters: function (project) {
-        project.count = {};
-        project.count.services = project.services.length;
-        var users = resourcesCountService.users({'project': project.uuid}).then(function(count) {
-          project.count.users = count;
+        var query = angular.extend(
+            {UUID: project.uuid},
+            eventsService.defaultFilter
+          );
+        return projectsService.getCounters(query).then(function(counters) {
+          project.count = counters;
+          var usage = ncUtils.getQuotaUsage(project.quotas);
+          project.count.services = usage.nc_service_project_link_count;
+          project.count.resources = usage.nc_resource_count;
         });
-        var resources = resourcesCountService.resources({project_uuid: project.uuid}).then(function(count) {
-          project.count.resources = count;
-        });
-        var query = angular.extend(alertsService.defaultFilter, {aggregate: 'project', uuid: project.uuid});
-        var alerts = resourcesCountService.alerts(query).then(function(count) {
-          project.count.alerts = count;
-        });
-        return $q.all([users, resources, alerts]);
       },
       getProjectEvents: function (project) {
         var end = moment.utc().unix();
