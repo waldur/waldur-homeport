@@ -13,14 +13,14 @@
                     {{ ::field.label }}
                 </label>
             </div>
-            <div class="col input input-full" ng-if="field.secret" ng-init="showSecret=false">
-                <input id="{{ ::service.uuid }}_{{ ::field.name }}"
+            <div class="col input-full" ng-if="field.secret">
+                <input class="input" id="{{ ::service.uuid }}_{{ ::field.name }}"
                        type="{{showSecret ? 'text' : 'password'}}"
                        ng-model="service.values[field.name]">
-                <button class="button" ng-click="showSecret = !showSecret">
-                    <span ng-if="showSecret">Hide</span>
-                    <span ng-if="!showSecret">Show</span>
-                </button>
+                <a class="icon fa-eye"
+                   title="{{showSecret ? 'Hide' : 'Show'}}"
+                   ng-click="showSecret=!showSecret">
+                </a>
             </div>
             <div class="col input input-full" ng-if="!field.secret" ng-switch="::field.type">
                 <input id="{{ ::service.uuid }}_{{ ::field.name }}"

@@ -67,7 +67,16 @@
                     <helpicon help-text="{{ option.help_text }}" ng-if="option.help_text"></helpicon>
                 </label>
             </div>
-            <div class="col input input-full">
+            <div class="col input-full" ng-if="option.secret">
+                <input class="input" id="{{ ServiceAdd.model.name }}_{{ option.key }}"
+                       type="{{showSecret ? 'text' : 'password'}}"
+                       ng-model="option.value">
+                <a class="icon fa-eye"
+                   title="{{showSecret ? 'Hide' : 'Show'}}"
+                   ng-click="showSecret=!showSecret">
+                </a>
+            </div>
+            <div class="col input input-full" ng-if="!option.secret">
                 <input id="{{ ServiceAdd.model.name }}_{{ option.key }}"
                        type="text"
                        ng-if="option.type == 'string'"

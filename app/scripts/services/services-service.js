@@ -38,6 +38,7 @@
         } else {
           vm.service_options = {};
           var blacklist = ['name', 'cpu_overcommit_ratio'];
+          var secretFields = ['token', 'password'];
           var types = ['string', 'choice', 'boolean', 'url', 'file upload'];
 
           vm.getServicesList().then(function(services) {
@@ -68,7 +69,8 @@
                       type: option.type,
                       label: option.label,
                       help_text: option.help_text,
-                      required: option.required
+                      required: option.required,
+                      secret: secretFields.indexOf(key) !== -1
                     };
                     if (option.choices) {
                       item.choices = option.choices;
