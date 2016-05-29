@@ -17,10 +17,6 @@
                     <li>
                         <span class="month" ng-bind="::row.date"></span>
                     </li>
-                    <li visible="providers">
-                        <div class="icon"></div>
-                        <a stoppropagation ng-click="row.selected=true; row.activeTab='services'" ng-class="{'active': row.selected && row.activeTab=='services'}">Providers (<span ng-bind="::row.services.length"></span>)</a>
-                    </li>
                     <li>
                         <div class="icon"></div>
                         <a stoppropagation ng-click="row.selected=true; row.activeTab='projects'" ng-class="{'active': row.selected && row.activeTab=='projects'}">Projects (<span ng-bind="::row.projects.length"></span>)</a>
@@ -28,6 +24,10 @@
                     <li visible="resources" exclude-mode="modeCostTracking">
                         <div class="icon"></div>
                         <a stoppropagation ng-click="row.selected=true; row.activeTab='resources'" ng-class="{'active': row.selected && row.activeTab=='resources'}">Resources (<span ng-bind="::row.resources.length"></span>)</a>
+                    </li>
+                    <li visible="providers">
+                        <div class="icon"></div>
+                        <a stoppropagation ng-click="row.selected=true; row.activeTab='services'" ng-class="{'active': row.selected && row.activeTab=='services'}">Providers (<span ng-bind="::row.services.length"></span>)</a>
                     </li>
                 </ul>
                 <div class="total-cost">
