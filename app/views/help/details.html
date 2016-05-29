@@ -52,7 +52,9 @@
                     Amazon EC2 API access requires Access Key ID and Secret Access Key that must be generated if not already existing.
                     In addition, API access policy needs to be attached allowing modification access for the resources.
                 </p>
-                <p ng-if="HelpDetails.model.name == 'DigitalOcean'">In order to be able to access your DigitalOcean via API you need to have a token. DigitalOcean tokens can be created with read or read-write scope, latter is required if you want to modify your account in any way.
+                <p ng-if="HelpDetails.model.name == 'DigitalOcean'">
+                In order to add DigitalOcean IaaS you need to have a valid DigitalOcean account and API access token.
+                DigitalOcean tokens can be created with read or read-write scope, latter is required if you want to manage your resources through NodeConductor.
                 </p>
                 <p ng-if="HelpDetails.model.link"><a href="{{ HelpDetails.model.link }}" target="_blank">Instructions on the official site</a></p>
             </div>
