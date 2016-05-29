@@ -119,17 +119,17 @@ angular.module('ncsaas')
     helpList: [
       {
         type: 'providers',
-        name: 'Azure',
+        name: 'Azure provider',
         link: null
       },
       {
         type: 'providers',
-        name: 'Amazon',
+        name: 'Amazon EC2 provider',
         link: 'http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSGettingStartedGuide/AWSCredentials.html'
       },
       {
         type: 'providers',
-        name: 'DigitalOcean',
+        name: 'DigitalOcean provider',
         link: 'https://www.digitalocean.com/community/tutorials/how-to-use-the-digitalocean-api-v2'
       }
     ],
