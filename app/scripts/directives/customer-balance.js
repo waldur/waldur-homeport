@@ -29,7 +29,6 @@
     function init() {
       if (!ENV.featuresVisible && (ENV.toBeFeatures.indexOf('payment') > -1)) {
         $scope.hideAll = true;
-        return;
       }
       if (!ENV.enablePurchaseCostDisplay) {
         $scope.hideAll = true;
