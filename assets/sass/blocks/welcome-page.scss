@@ -40,61 +40,14 @@
         height: calc(100vh - 40px);
         padding-bottom: 0;
         min-height: 300px;
+        display: flex;
+        justify-content: center;
+        align-items: center
     }
     .login-box {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 40%;
-        margin-left: calc(-40% / 2);
-        z-index: 99;
-        @include bp(xs) {
-            margin: auto;
-            margin-top: 20px;
-            margin-bottom: 20px !important;
-            left: 50%;
-            margin-left: -170px;
-            width: 95%;
-            .white-box {
-                @include property(margin, 10 20);
-                max-height: auto !important;
-                overflow-y: auto;
-                .decision {
-                    @include property(margin, 10 0);
-                    .button-login {
-                        @include property(padding, 8 14);
-                    } // button-login
-                } // decision
-                .button-social {
-                    @include property(padding, 8 14);
-                } // button-social
-            } // white-box
-        } // xs
-        @include bp(sm) {
-            position: static !important;
-            margin: auto;
-            margin-top: 20px;
-            margin-bottom: 20px !important;
-            width: 85%;
-            .white-box {
-                @include property(margin, 10 20);
-                max-height: auto !important;
-                overflow-y: auto;
-                .decision {
-                    @include property(margin, 10 0);
-                    .button-login {
-                        @include property(padding, 8 14);
-                    } // button-login
-                } // decision
-                .button-social {
-                    @include property(padding, 8 14);
-                } // button-social
-            } // white-box
-        } // sm
-        @include bp(md) {
-            width: 50%;
-            margin-left: calc(-50% / 2);
-        } // md
+        flex: none;
+        width: 80%;
+        max-width: 500px;
         .white-box {
             @include boxshadow(0 2 2 2, rgba(47, 47, 47, 0.23));
             max-height: 90vh;

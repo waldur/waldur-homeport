@@ -4,7 +4,7 @@
             <a href="#maintop" class="logo"></a>
         </li>
     </ul>
-    <div class="login-box" loginboxcontext ng-if="!auth.isSignupFormVisible">
+    <div class="login-box" ng-if="!auth.isSignupFormVisible">
         <div class="white-box">
             <h3 class="app-title centered">Login</h3>
             <ul class="error-list" ng-if="auth.errors">
@@ -43,7 +43,7 @@
             </div>
         </div>
     </div>
-    <div class="login-box" loginboxcontext ng-if="auth.isSignupFormVisible" visible="localSignup">
+    <div class="login-box" ng-if="auth.isSignupFormVisible" visible="localSignup">
         <div class="white-box">
             <h3 class="app-title centered">Signup</h3>
             <ul class="error-list" ng-if="auth.errors">
