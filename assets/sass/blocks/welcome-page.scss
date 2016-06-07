@@ -42,12 +42,11 @@
         min-height: 300px;
         display: flex;
         justify-content: center;
-        align-items: center
+        align-items: center;
     }
     .login-box {
         flex: none;
-        width: 80%;
-        max-width: 500px;
+        min-width: 300px;
         .white-box {
             @include boxshadow(0 2 2 2, rgba(47, 47, 47, 0.23));
             max-height: 90vh;
