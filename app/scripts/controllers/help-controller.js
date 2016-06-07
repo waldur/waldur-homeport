@@ -59,7 +59,7 @@
         }
         var list = ENV.helpList;
         for (var i = 0; i < list.length; i++) {
-          if (list[i].name == $stateParams.name) {
+          if (list[i].key == $stateParams.name) {
             this.model = list[i];
             break;
           }

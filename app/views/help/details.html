@@ -1,6 +1,6 @@
 <div ng-controller="HelpDetailsController as HelpDetails">
     <div class="container">
-        <h1 ng-if="['alerts', 'events'].indexOf(HelpDetails.model.name) === -1">Obtaining credentials for {{ HelpDetails.model.name }}</h1>
+        <h1 ng-if="['alerts', 'events'].indexOf(HelpDetails.model.name) === -1">How to obtain credentials for {{ HelpDetails.model.name }}</h1>
         <h1 ng-if="['alerts', 'events'].indexOf(HelpDetails.model.name) !== -1">List of supported {{ HelpDetails.model.name }}</h1>
     </div>
     <div class="white-box">
@@ -13,10 +13,10 @@
         <div class="instruction-page" ng-if="['alertsList', 'eventsList'].indexOf(HelpDetails.model.type) !== -1" ui-view="alertsList"></div>
         <div class="instruction-page" ng-if="HelpDetails.model.type == 'providers'">
             <div class="">
-                <image-box image="static/images/help/{{ HelpDetails.model.name.toLowerCase() }}_tokens.png"></image-box>
+                <image-box image="static/images/help/{{ HelpDetails.model.key.toLowerCase() }}_tokens.png"></image-box>
             </div>
             <div class="instruction-content" ng-if="HelpDetails.model">
-                <div ng-if="HelpDetails.model.name == 'Azure'">
+                <div ng-if="HelpDetails.model.key == 'Azure'">
                     <div>
                         Azure requires generation of X.509 certificates which will be used for securing the NodeConductor Azure API connections.
                         You need to generate two separate files: <br/>
@@ -48,11 +48,11 @@
 
                     </div>
                 </div>
-                <p ng-if="HelpDetails.model.name == 'Amazon'">
+                <p ng-if="HelpDetails.model.key == 'Amazon'">
                     Amazon EC2 API access requires Access Key ID and Secret Access Key that must be generated if not already existing.
                     In addition, API access policy needs to be attached allowing modification access for the resources.
                 </p>
-                <p ng-if="HelpDetails.model.name == 'DigitalOcean'">
+                <p ng-if="HelpDetails.model.key == 'DigitalOcean'">
                 In order to add DigitalOcean IaaS you need to have a valid DigitalOcean account and API access token.
                 DigitalOcean tokens can be created with read or read-write scope, latter is required if you want to manage your resources through NodeConductor.
                 </p>
