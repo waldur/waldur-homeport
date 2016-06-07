@@ -29,6 +29,18 @@
                 <span>Facebook</span>
             </a>
         </div>
+        <div class="row-login" visible="estonianId">
+            <form action="{{ auth.openidUrl }}" method="post">
+                <input type="hidden" name="openid_identifier" value="https://openid.ee/server/xrds/eid" />
+                <input type="submit" value="Log in with Estonian ID card" class="button-social eid" />
+            </form>
+        </div>
+        <div class="row-login" visible="estonianId">
+            <form action="{{ auth.openidUrl }}" method="post">
+                <input type="hidden" name="openid_identifier" value="https://openid.ee/server/xrds/mid" />
+                <input type="submit" value="Log in with Mobile ID" class="button-social eid" />
+            </form>
+        </div>
         <div class="row-login" visible="localSignup">
             <a class="button-social email" ng-click="auth.isSignupFormVisible = true">
                 <span>Email</span>

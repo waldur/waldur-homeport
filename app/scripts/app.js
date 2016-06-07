@@ -91,6 +91,21 @@
           }
         })
 
+        .state('home.login_complete', {
+          url: 'login_complete/:token/',
+          views: {
+            'appHeader@home' : {
+              templateUrl: 'views/partials/site-header.html',
+            },
+            'appContent@home' : {
+              templateUrl: 'views/home/login_complete.html',
+            }
+          },
+          resolve: {
+            authenticated: notLoggedCheck
+          }
+        })
+
         .state('initialdata', {
           url: initialDataStatePath,
           templateUrl: 'views/partials/base.html',

@@ -2,14 +2,16 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('AuthController', ['$state', 'authService', 'baseControllerClass', 'ncUtilsFlash', '$rootScope', AuthController]);
+    .controller('AuthController', 
+      ['ENV', '$sce', '$state', 'authService', 'baseControllerClass', 'ncUtilsFlash', '$rootScope', AuthController]);
 
-  function AuthController($state, authService, baseControllerClass, ncUtilsFlash, $rootScope) {
+  function AuthController(ENV, $sce, $state, authService, baseControllerClass, ncUtilsFlash, $rootScope) {
     var controllerScope = this;
     var Controller = baseControllerClass.extend({
       isSignupFormVisible: false,
       user: {},
       errors: {},
+      openidUrl: $sce.trustAsResourceUrl(ENV.apiEndpoint + 'api-auth/openid/login/?next=/api-auth/login_complete'),
 
       init: function() {
         this._super();
@@ -98,6 +100,26 @@
         }, function(response) {
           ncUtilsFlash.error('Unable to activate account');
         });
+      }
+    });
+
+    controllerScope.__proto__ = new Controller();
+  }
+})();
+
+
+(function() {
+  angular.module('ncsaas')
+    .controller('LoginCompleteController', [
+      '$state', '$stateParams', 'authService', 'baseControllerClass', 'usersService', LoginCompleteController]);
+
+  function LoginCompleteController($state, $stateParams, authService, baseControllerClass, usersService) {
+    var controllerScope = this;
+    var Controller = baseControllerClass.extend({
+      init: function() {
+        this._super();
+        authService.loginSuccess({data: {token: $stateParams.token}});
+        $state.go('dashboard.index')
       }
     });
 

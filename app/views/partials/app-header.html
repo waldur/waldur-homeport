@@ -95,7 +95,7 @@
                         <span class="avatar">
                             <img gravatar-src="Header.currentUser.email" gravatar-size="100">
                         </span>
-                        <span class="user-name">{{ Header.currentUser.full_name }}</span>
+                        <span class="user-name">{{ Header.currentUser.full_name || Header.currentUser.username }}</span>
                     </a>
                     <div class="nav-sublist user-area" ng-show="Header.menuState.profileMenu">
                         <ul>
@@ -226,7 +226,7 @@
                         <span class="avatar">
                             <img gravatar-src="Header.currentUser.email" gravatar-size="100">
                         </span>
-                        <span class="user-name">{{ Header.currentUser.full_name }}</span>
+                        <span class="user-name">{{ Header.currentUser.full_name || Header.currentUser.username }}</span>
                     </a>
                     <ul class="nav-sublist-side user-area" ng-show="Header.menuState.sideProfileMenu">
                         <li>

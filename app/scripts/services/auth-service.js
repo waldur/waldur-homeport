@@ -15,6 +15,7 @@
     vm.isAuthenticated = isAuthenticated;
     vm.authenticate = authenticate;
     vm.getDownloadLink = getDownloadLink;
+    vm.loginSuccess = loginSuccess;
 
     function signin(username, password) {
       return $auth.login({username: username, password: password}).then(loginSuccess);

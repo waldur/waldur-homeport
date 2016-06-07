@@ -148,6 +148,16 @@
             } // &:before
         } // span
     } // &.email
+    &.eid {
+        color: white;
+        background-color: #2980b9;
+        padding: 10px 12px;
+        text-decoration: none;
+        display: block;
+        width: 100%;
+        border-radius: 2px;
+        text-align: left;
+    }
 } // button-social
 
 .button-simple {
