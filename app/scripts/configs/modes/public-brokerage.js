@@ -9,7 +9,8 @@ angular.module('ncsaas')
       'backups',
       'templates',
       'monitoring',
-      'projectGroups'
+      'projectGroups',
+      'estonianId'
     ],
     featuresVisible: false
   });
