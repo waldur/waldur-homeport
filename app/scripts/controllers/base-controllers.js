@@ -15,6 +15,7 @@
     var controllerScope = this;
     var HeaderControllerClass = baseControllerClass.extend({
       customers: [],
+      hasMore: false,
       currentUser: {},
       currentCustomer: {},
       projects: [],
@@ -45,6 +46,7 @@
 
         customersService.getTopMenuList().then(function(response) {
           vm.customers = response;
+          vm.hasMore = customersService.pages > 1;
         });
 
         vm.getProjectList();
@@ -113,6 +115,7 @@
           index > -1 && vm.customers.splice(index, 1);
           customersService.getTopMenuList().then(function(response) {
             vm.customers = response;
+            vm.hasMore = customersService.pages > 1;
           });
           alert('Sorry "' + customer.name + '" organization was deleted in another session. ' +
             'Please try to select another organization.');
@@ -288,6 +291,7 @@
 
         var promise = customersService.getList().then(function(response) {
           vm.customers = response;
+          vm.hasMore = customersService.pages > 1;
           return response;
         });
 
@@ -296,6 +300,13 @@
       },
       goToCurrentOrganization: function() {
         $state.go('organizations.details', {uuid: this.currentCustomer.uuid});
+      },
+      goToCustomer: function(customer) {
+        currentStateService.setCustomer(customer);
+        this.currentCustomer = customer;
+        $rootScope.$broadcast('currentCustomerUpdated');
+        this.setFirstOrLastSelectedProject();
+        $state.go('dashboard.index', {}, {reload: true});
       },
       goToCurrentProject: function() {
         if (this.currentProject) {
