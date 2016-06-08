@@ -52,14 +52,6 @@
                return 'Organization has projects. Please remove them first';
               }
             }.bind(controllerScope),
-          },
-          {
-            title: 'Add provider',
-            icon: 'fa-plus',
-            clickFunction: function(customer) {
-              $rootScope.$broadcast('adjustCurrentCustomer', customer);
-              $state.go('services.create')
-            }
           }
         ];
         this.entityOptions = {
@@ -76,8 +68,9 @@
               type: ENTITYLISTFIELDTYPES.awesomeIcon,
               iconClass: 'fa-star-o',
               show: vm.isOwnerOrStaff.bind(controllerScope),
-              title: 'owner',
-              className: 'customer-owner-icon'
+              name: 'Owner',
+              className: 'customer-owner-icon',
+              notSortable: true
             },
             {
               name: 'Name',
@@ -93,7 +86,8 @@
             name: 'Plan',
             propertyName: 'plan_name',
             type: ENTITYLISTFIELDTYPES.noType,
-            emptyText: 'No plan'
+            emptyText: 'No plan',
+            notSortable: true
           });
         }
       },

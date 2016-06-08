@@ -73,6 +73,9 @@
                            ng-class="{'fa-angle-down' : !entityList.reverseOrder,
                                        'fa-angle-up': entityList.reverseOrder}"></i>
                     </a>
+                    <a ng-if="fieldHead.notSortable" class="list-sort">
+                      {{ fieldHead.name }}
+                    </a>
                 </div>
                 <div class="actions" ng-if="!entityOptions.entityData.hideActionButtons"></div>
 
