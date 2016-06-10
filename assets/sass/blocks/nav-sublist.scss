@@ -154,17 +154,11 @@
             } // &.current
         } // > a
         &.manage-item {
-            background-color: #eeeded;
             border-bottom-color: #ccc;
             position: relative;
             a {
-                color: #4fb547;
                 border-width: 0;
             }
-            &:hover {
-                background-color: #e0e0e0;
-            }
-
             &.bottom {
                 position: absolute;
                 bottom: 0;
