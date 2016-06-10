@@ -45,8 +45,10 @@
         align-items: center;
     }
     .login-box {
-        flex: none;
-        min-width: 300px;
+        width: 600px;
+        @include bp(xs) {
+            width: 300px;
+        }
         .white-box {
             @include boxshadow(0 2 2 2, rgba(47, 47, 47, 0.23));
             max-height: 90vh;
