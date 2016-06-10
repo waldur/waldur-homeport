@@ -158,6 +158,16 @@
             } // &:before
         } // span
     }
+    &.mid {
+        color: white;
+        background-color: #6abb6a;
+        text-align: left;
+        span {
+            &:before {
+                content: '\f098';
+            } // &:before
+        } // span
+    }
 } // button-social
 
 .button-simple {
