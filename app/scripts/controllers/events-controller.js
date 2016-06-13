@@ -229,7 +229,7 @@
       getResourceDetails: function(row) {
         for (var i = 0; i < row.resources.length; i++) {
           var resource = row.resources[i];
-          if (!resource.resource_type || !resource.project_uuid) {
+          if (resource.scope && (!resource.resource_type || !resource.project_uuid)) {
             resourcesService.$get(null, null, resource.scope).then(function(response) {
               resource.resource_uuid = response.uuid;
               resource.resource_type = response.resource_type;

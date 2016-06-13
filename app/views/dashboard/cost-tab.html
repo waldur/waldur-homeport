@@ -90,7 +90,8 @@
                     </div>
                     <div class="tr" ng-repeat="resource in row.resources">
                         <div class="td">
-                            <a ui-sref="resources.details({uuid: resource.resource_uuid, resource_type: resource.resource_type})">{{::resource.scope_name}}</a>
+                            <a ng-if="resource.scope" ui-sref="resources.details({uuid: resource.resource_uuid, resource_type: resource.resource_type})">{{::resource.scope_name}}</a>
+                            <span ng-if="!resource.scope">{{::resource.scope_name}}</span>
                         </div>
                         <div class="td"><span ng-bind="::resource.resource_type"></span></div>
                         <div class="td"><a ui-sref="projects.details({uuid: resource.project_uuid})">{{::resource.project_name}}</a></div>
@@ -100,7 +101,8 @@
                 <div class="mobile-cost-container" ng-if="row.resources.length && row.activeTab=='resources'">
                     <div class="cost-row" ng-repeat="resource in row.resources">
                         <div class="cost-row-name">
-                            <a ui-sref="resources.details({uuid: resource.resource_uuid, resource_type: resource.resource_type})">{{::resource.scope_name}}</a>
+                            <a ng-if="resource.scope" ui-sref="resources.details({uuid: resource.resource_uuid, resource_type: resource.resource_type})">{{::resource.scope_name}}</a>
+                            <span ng-if="!resource.scope">{{::resource.scope_name}}</span>
                             <div>
                                 {{ ::resource.resource_type }} in {{::resource.project_name}} project
                             </div>
