@@ -1,7 +1,7 @@
 <div ng-controller="InitialDataController as InitialData">
     <div class="initial-data-page">
         <div class="first-step">
-            <h2>Welcome to student cloud self-service, {{ InitialData.user.full_name }}!</h2>
+            <h2>Welcome to student cloud self-service, {{ InitialData.user.full_name || InitialData.user.username }}!</h2>
             <p>Please update you contact details.</p>
             <div class="logo">
                 <div class="img-wrapper">

@@ -13,7 +13,8 @@ angular.module('ncsaas')
       'people',
       'import',
       'servicesadd',
-      'projectGroups'
+      'projectGroups',
+      'estonianId'
     ],
     featuresVisible: false,
     appStoreCategories: [

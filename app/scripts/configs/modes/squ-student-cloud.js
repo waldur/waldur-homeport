@@ -16,7 +16,9 @@ angular.module('ncsaas')
       'monitoring',
       'projectGroups',
       'plans',
-      'compare'
+      'compare',
+      'socialSignup',
+      'estonianId'
     ],
     featuresVisible: false,
     appStoreCategories: [
