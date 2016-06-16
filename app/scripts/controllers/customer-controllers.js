@@ -417,6 +417,18 @@
         this.listState = 'organizations.list';
         this.detailsState = 'organizations.details';
         this.redirectToDetailsPage = true;
+
+        var vm = this;
+        customersService.loadCountries().then(function(countryChoices) {
+          vm.countryChoices = countryChoices;
+        });
+      },
+      beforeSave: function() {
+        if (this.instance.vat_code) {
+          this.instance.is_company = true;
+        } else {
+          this.instance.is_company = false;
+        }
       },
       afterSave: function() {
         this._super();
