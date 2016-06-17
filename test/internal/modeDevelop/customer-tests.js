@@ -4,7 +4,9 @@ var auth = require('../../helpers/auth.js'),
   addCustomerTestData = [
     {
       user: auth.getUser('Alice'),
-      customer: 'Alice Lebowski'
+      customer: 'Alice Lebowski',
+      country: 'United Kingdom',
+      address: '10 Downing St, London SW1A 2AA'
     }
   ];
 
@@ -31,9 +33,9 @@ for(var i = 0; i < addCustomerTestData.length; i++) {
       it('I should be able to add new customer', function() {
         // fill name
         element(by.model('CustomerAdd.instance.name')).sendKeys(customerName);
+        element(by.model('CustomerAdd.instance.country')).sendKeys(data.country);
+        element(by.model('CustomerAdd.instance.contact_details')).sendKeys(data.address);
         element(by.cssContainingText('a.button-apply', 'Add organization')).click();
-
-        //expect(element(by.cssContainingText('.details-about .name', customerName)).isPresent()).toBe(true);
       });
 
       it('I should be able to see ' + customerName + ' at customers list page', function() {
