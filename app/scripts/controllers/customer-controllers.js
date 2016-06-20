@@ -424,11 +424,7 @@
         });
       },
       beforeSave: function() {
-        if (this.instance.vat_code) {
-          this.instance.is_company = true;
-        } else {
-          this.instance.is_company = false;
-        }
+        this.instance.is_company = this.instance.vat_code ? true : false;
       },
       afterSave: function() {
         this._super();
