@@ -7,15 +7,6 @@
             ng-include="entityOptions.entityData.filterTemplateUrl"></div>
         <ul class="sort-list"
             ng-if="!entityOptions.entityData.hideControlButtons">
-            <li ng-if="entityList.helpKey" class="full-width">
-                <div>
-                    <div class="list-help-button">
-                        <a stoppropagation class="button-support pending"
-                           ng-click="entityList.showHelpTypes()">?</a>
-                    </div>
-                    <div class="clear"></div>
-                </div>
-            </li>
             <li class="search divid">
                 <div class="search-box">
                     <input type="text" ng-model='entityList.searchInput'

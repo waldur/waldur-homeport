@@ -38,6 +38,11 @@
   </div>
 </div>
 
+<div ng-if="entityList.helpKey" class="table-action list-help-button">
+  <a class="button" ng-click="entityList.showHelpTypes()">?</a>
+</div>
+
+
 <div class="table-action">
   <list-cache-reset list-controller="entityList"
                     list-service="entityService"
