@@ -697,6 +697,44 @@
           auth: true
         })
 
+        .state('agreement', {
+          url: '/agreement/',
+          abstract: true,
+          templateUrl: 'views/partials/base.html',
+        })
+
+        .state('agreement.approve', {
+          url: 'agreement/',
+          views: {
+            'appHeader' : {
+              templateUrl: 'views/partials/site-header.html',
+            },
+            'appContent' : {
+              templateUrl: 'views/agreement/approve.html',
+            }
+          },
+          resolve: {
+            authenticated: authCheck
+          },
+          auth: true
+        })
+
+        .state('agreement.cancel', {
+          url: 'cancel/',
+          views: {
+            'appHeader' : {
+              templateUrl: 'views/partials/site-header.html',
+            },
+            'appContent' : {
+              templateUrl: 'views/agreement/cancel.html',
+            }
+          },
+          resolve: {
+            authenticated: authCheck
+          },
+          auth: true
+        })
+
         .state('keys', {
           url: '/keys/',
           abstract: true,
