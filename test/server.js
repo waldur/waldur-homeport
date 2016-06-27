@@ -45,6 +45,8 @@ function handleGet(req, res) {
       req.on('end', function() {
         res.send(endpointMocks[endpoint]);
       });
+    } else if (req.method == 'OPTIONS') {
+      res.send(endpointMocks[req.method + ' ' + endpoint]);
     } else {
       res.send(endpointMocks[endpoint]);
     }

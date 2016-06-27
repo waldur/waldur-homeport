@@ -3,14 +3,21 @@
         <h1>Add organization</h1>
     </div>
 
+    <form name="CustomerForm">
     <div class="white-box">
         <section class="short-form">
             <div class="form-row">
                 <div class="col label">
-                    <label for="name">Organization name</label>
+                    <label for="name">Name</label>
                 </div>
                 <div class="col input">
-                    <input type="text" id="name" placeholder="name" ng-model="CustomerAdd.instance.name">
+                    <input type="text" id="name" name="name" required
+                        ng-model="CustomerAdd.instance.name">
+                    <div class="error arrow-up" ng-if="CustomerForm.name.$dirty && CustomerForm.name.$invalid">
+                        <ul class="error-list">
+                            <li>This field is required.</li>
+                        </ul>
+                    </div>
                     <div class="error arrow-up" ng-show="CustomerAdd.errors.name">
                         <ul class="error-list">
                             <li ng-repeat="error in CustomerAdd.errors.name">{{ error }}</li>
@@ -20,10 +27,10 @@
             </div>
             <div class="form-row">
                 <div class="col label">
-                    <label for="registration_code">Registration code</label>
+                    <label for="registration_code">Organization registration code</label>
                 </div>
                 <div class="col input">
-                    <input type="text" id="registration_code" placeholder="code" ng-model="CustomerAdd.instance.registration_code">
+                    <input type="text" id="registration_code" ng-model="CustomerAdd.instance.registration_code">
                     <div class="error arrow-up" ng-show="CustomerAdd.errors.registration_code">
                         <ul class="error-list">
                             <li ng-repeat="error in CustomerAdd.errors.registration_code">{{ error }}</li>
@@ -33,12 +40,60 @@
             </div>
             <div class="form-row">
                 <div class="col label">
-                    <label for="contact_details">Contact details</label>
+                    <label for="country">Country</label>
                 </div>
                 <div class="col input">
-                <textarea id="contact_details"
-                          placeholder="Organization contact details"
-                          ng-model="CustomerAdd.instance.contact_details"></textarea>
+                    <select name="country" id="country" required
+                        ng-model="CustomerAdd.instance.country"
+                        ng-options="option.value as option.display_name for option in CustomerAdd.countryChoices">
+                    </select>
+                    <div class="error arrow-up" ng-if="CustomerForm.country.$dirty && CustomerForm.country.$invalid">
+                        <ul class="error-list">
+                            <li>This field is required.</li>
+                        </ul>
+                    </div>
+                    <div class="error arrow-up" ng-show="CustomerAdd.errors.country">
+                        <ul class="error-list">
+                            <li ng-repeat="error in CustomerAdd.errors.country">{{ error }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col label">
+                    <label for="contact_details">Address</label>
+                </div>
+                <div class="col input">
+                    <textarea id="contact_details"
+                              name="contact_details"
+                              required
+                              ng-model="CustomerAdd.instance.contact_details"></textarea>
+                    <div class="error arrow-up" ng-if="CustomerForm.contact_details.$dirty && CustomerForm.contact_details.$invalid">
+                        <ul class="error-list">
+                            <li>This field is required.</li>
+                        </ul>
+                    </div>
+                    <div class="error arrow-up" ng-show="CustomerAdd.errors.contact_details">
+                        <ul class="error-list">
+                            <li ng-repeat="error in CustomerAdd.errors.contact_details">{{ error }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col label">
+                    <label for="vat_code">
+                        <helpicon help-text="Please provide your EU VAT ID if you are registered in the European Union"></helpicon>
+                        EU VAT ID
+                    </label>
+                </div>
+                <div class="col input">
+                    <input type="text" id="vat_code" ng-model="CustomerAdd.instance.vat_code">
+                    <div class="error arrow-up" ng-show="CustomerAdd.errors.vat_code">
+                        <ul class="error-list">
+                            <li ng-repeat="error in CustomerAdd.errors.vat_code">{{ error }}</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </section>
@@ -66,12 +121,13 @@
 
         <div class="decision">
             <div class="col">
-                <a class="button-apply" submit-button="CustomerAdd.save()">Add organization</a>
+                <a class="button-apply" submit-button="CustomerAdd.save()" ng-class="{'disabled': CustomerForm.$invalid}">Add organization</a>
             </div>
             <div class="col">
                 <a class="button-cancel" ng-click="CustomerAdd.cancel()">Cancel</a>
             </div>
         </div>
     </div>
+    </form>
 
 </div>

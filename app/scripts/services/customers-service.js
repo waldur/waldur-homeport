@@ -3,11 +3,12 @@
 (function() {
   angular.module('ncsaas')
     .service('customersService', [
-      'baseServiceClass', '$state', '$q', 'ENV', 'currentStateService', 'usersService', customersService]);
+      'baseServiceClass', '$state', '$q', '$http', 'ENV', 'currentStateService', 'usersService', customersService]);
 
-  function customersService(baseServiceClass, $state, $q, ENV, currentStateService, usersService) {
+  function customersService(baseServiceClass, $state, $q, $http, ENV, currentStateService, usersService) {
     var ServiceClass = baseServiceClass.extend({
       filterByCustomer: false,
+      countryChoices: [],
 
       init:function() {
         this._super();
@@ -67,6 +68,20 @@
           }
           return $q.when(false);
         });
+      },
+      loadCountries: function() {
+        var vm = this;
+        if (vm.countryChoices.length != 0) {
+          return $q.when(vm.countryChoices);
+        } else {
+          return $http({
+            method: 'OPTIONS',
+            url: ENV.apiEndpoint + 'api/customers/'
+          }).then(function(response) {
+            vm.countryChoices = response.data.actions.POST.country.choices;
+            return vm.countryChoices;
+          });
+        }
       }
     });
     return new ServiceClass();
