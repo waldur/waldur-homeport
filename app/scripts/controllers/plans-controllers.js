@@ -124,7 +124,7 @@
             ncUtilsFlash.error('Unable to approve billing plan');
           }
         });
-      },
+      }
     });
 
     controllerScope.__proto__ = new Controller();
@@ -142,7 +142,7 @@
   function AgreementCancelController(
     ncUtils,
     ncUtilsFlash,
-    paymentsService,
+    agreementsService,
     $state,
     baseControllerClass) {
     var controllerScope = this;
@@ -167,7 +167,7 @@
             ncUtilsFlash.error('Unable to cancel billing plan');
           }
         });
-      },
+      }
     });
 
     controllerScope.__proto__ = new Controller();
