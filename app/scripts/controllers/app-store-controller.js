@@ -929,10 +929,10 @@
         ncUtilsFlash.error(message);
       },
       successRedirect: function(model) {
-        if (this.isVirtualMachinesSelected() || this.isApplicationSelected()) {
-          $state.go('resources.details', {uuid: model.uuid, resource_type: model.resource_type});
-        } else if (this.isSupportSelected()) {
+        if (this.isSupportSelected()) {
           return $state.go('resources.list', {tab: 'premiumSupport'});
+        } else {
+          $state.go('resources.details', {uuid: model.uuid, resource_type: model.resource_type});
         }
       }
     });
