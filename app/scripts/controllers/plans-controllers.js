@@ -67,6 +67,9 @@
         if (vm.selectedPlan !== null) {
           order.plan = vm.selectedPlan.url;
           order.customer = vm.customer.url;
+          order.return_url = $state.href('agreement.approve', {}, {absolute: true});
+          order.cancel_url = $state.href('agreement.cancel', {}, {absolute: true});
+
           return order.$save(function(order) {
             customersService.clearAllCacheForCurrentEndpoint();
             $window.location = order.approval_url;
@@ -76,6 +79,95 @@
         return $q.reject();
       }
 
+    });
+
+    controllerScope.__proto__ = new Controller();
+  }
+
+  angular.module('ncsaas')
+  .controller('AgreementApproveController',
+    ['ncUtils',
+     'ncUtilsFlash',
+     'agreementsService',
+     '$state',
+     'currentStateService',
+     'baseControllerClass',
+     AgreementApproveController]);
+
+  function AgreementApproveController(
+    ncUtils,
+    ncUtilsFlash,
+    agreementsService,
+    $state,
+    currentStateService,
+    baseControllerClass) {
+    var controllerScope = this;
+    var Controller = baseControllerClass.extend({
+      init: function() {
+        this._super();
+        this.approveAgreement();
+      },
+      approveAgreement: function() {
+        var qs = ncUtils.parseQueryString(ncUtils.getQueryString());
+        if (!qs.token) {
+          ncUtilsFlash.error('Invalid URL. Unable to parse billing plan agreement details.');
+          return;
+        }
+        agreementsService.approve({token: qs.token}).then(function(response) {
+          ncUtilsFlash.success('Billing plan agreement has been processed successfully.');
+          currentStateService.reloadCurrentCustomer();
+          $state.go('home.home', {});
+        }, function(error) {
+          if (error.data) {
+            ncUtilsFlash.error(error.data.detail);
+          } else {
+            ncUtilsFlash.error('Unable to approve billing plan');
+          }
+        });
+      }
+    });
+
+    controllerScope.__proto__ = new Controller();
+  }
+
+  angular.module('ncsaas')
+  .controller('AgreementCancelController',
+    ['ncUtils',
+     'ncUtilsFlash',
+     'agreementsService',
+     '$state',
+     'baseControllerClass',
+     AgreementCancelController]);
+
+  function AgreementCancelController(
+    ncUtils,
+    ncUtilsFlash,
+    agreementsService,
+    $state,
+    baseControllerClass) {
+    var controllerScope = this;
+    var Controller = baseControllerClass.extend({
+      init: function() {
+        this._super();
+        this.cancelAgreement();
+      },
+      cancelAgreement: function() {
+        var qs = ncUtils.parseQueryString(ncUtils.getQueryString());
+        if (!qs.token) {
+          ncUtilsFlash.error('Invalid URL. Unable to parse billing plan agreement details.');
+          return;
+        }
+        agreementsService.cancel({token: qs.token}).then(function(response) {
+          ncUtilsFlash.success('Billing plan agreement has been processed successfully.');
+          $state.go('home.home', {});
+        }, function(error) {
+          if (error.data) {
+            ncUtilsFlash.error(error.data.detail);
+          } else {
+            ncUtilsFlash.error('Unable to cancel billing plan');
+          }
+        });
+      }
     });
 
     controllerScope.__proto__ = new Controller();
