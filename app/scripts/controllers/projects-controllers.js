@@ -343,18 +343,6 @@
               icon: 'application'
             },
             {
-              title: 'Backups',
-              key: 'backups',
-              viewName: 'tabBackups'
-            },
-            {
-              title: 'People',
-              key: 'people',
-              viewName: 'tabUsers',
-              countFieldKey: 'users',
-              icon: 'group'
-            },
-            {
               title: 'Support',
               key: 'premiumSupport',
               viewName: 'tabPremiumSupport',

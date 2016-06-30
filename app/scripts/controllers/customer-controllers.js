@@ -217,13 +217,6 @@
           ],
           tabs: [
             {
-              title: 'Sizing',
-              key: 'sizing',
-              viewName: 'tabSizing',
-              icon: 'calculator',
-              count: -1
-            },
-            {
               title: 'Events',
               key: 'eventlog',
               viewName: 'tabEventlog',
@@ -236,6 +229,43 @@
               viewName: 'tabAlerts',
               countFieldKey: 'alerts',
               icon: 'alerts'
+            },
+            {
+              title: 'Projects',
+              key: 'projects',
+              viewName: 'tabProjects',
+              countFieldKey: 'projects',
+              icon: 'project'
+            },
+            {
+              title: 'Providers',
+              key: 'providers',
+              viewName: 'tabServices',
+              countFieldKey: 'services',
+              icon: 'service'
+            },
+            {
+              title: 'Team',
+              key: 'team',
+              viewName: 'tabTeam',
+              hideSearch: false,
+              countFieldKey: 'users',
+              icon: 'customer'
+            },
+            {
+              title: 'Billing',
+              key: 'billing',
+              viewName: 'tabBilling',
+              hideSearch: true,
+              icon: 'invoice',
+              count: -1
+            },
+            {
+              title: 'Sizing',
+              key: 'sizing',
+              viewName: 'tabSizing',
+              icon: 'calculator',
+              count: -1
             },
             {
               title: 'VMs',
@@ -257,36 +287,6 @@
               viewName: 'tabApplications',
               countFieldKey: 'apps',
               icon: 'application'
-            },
-            {
-              title: 'Projects',
-              key: 'projects',
-              viewName: 'tabProjects',
-              countFieldKey: 'projects',
-              icon: 'project'
-            },
-            {
-              title: 'Providers',
-              key: 'providers',
-              viewName: 'tabServices',
-              countFieldKey: 'services',
-              icon: 'service'
-            },
-            {
-              title: 'Billing',
-              key: 'billing',
-              viewName: 'tabBilling',
-              hideSearch: true,
-              icon: 'invoice',
-              count: -1
-            },
-            {
-              title: 'Team',
-              key: 'team',
-              viewName: 'tabTeam',
-              hideSearch: false,
-              countFieldKey: 'users',
-              icon: 'customer'
             },
             {
               title: 'Manage',
