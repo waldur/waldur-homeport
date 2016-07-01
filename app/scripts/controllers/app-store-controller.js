@@ -19,7 +19,6 @@
       'projectsService',
       'priceEstimationService',
       'keysService',
-      'gitlabGroupsService',
       '$document',
       '$scope',
       AppStoreController]);
@@ -43,7 +42,6 @@
     projectsService,
     priceEstimationService,
     keysService,
-    gitlabGroupsService,
     $document,
     $scope) {
     var controllerScope = this;
@@ -118,7 +116,6 @@
       closeModal: function(field) {
         field.showChoices = false;
         $document.unbind('keypress');
-        $scope.$apply();
       },
       activate:function() {
         var vm = this;
@@ -226,52 +223,34 @@
           var promise = servicesService.getOption(resourceUrl).then(function(response) {
             var formOptions = response.actions.POST;
             vm.allFormOptions = formOptions;
-            return vm.getValidChoices().then(function(validChoices) {
-              var gitlabGroupsPromise = gitlabGroupsService.getList({
-                project_uuid: vm.currentProject.uuid,
-                service_uuid: vm.selectedService.uuid
-              });
-              var sshKeysPromise = keysService.getCurrentUserKeyList();
-
-              $q.all([gitlabGroupsPromise, sshKeysPromise]).then(function(result) {
-                validChoices.sshPublicKeys = [];
-                validChoices.group = [];
-                result[0].forEach(function(item) {
-                  validChoices.group.push(item);
-                });
-                result[1].forEach(function(item) {
-                  validChoices.sshPublicKeys.push(item);
-                });
-                vm.setFields(formOptions, validChoices);
-              });
+            return vm.getValidChoices(formOptions).then(function(validChoices) {
+              vm.setFields(formOptions, validChoices);
             });
           });
           ncUtils.blockElement('resource-properties', promise);
         }
       },
-      getValidChoices: function() {
+      getValidChoices: function(formOptions) {
         var vm = this;
         var promises = [];
         var validChoices = {};
-        angular.forEach(vm.serviceMetadata.properties, function(url, property) {
-          var promise,
-          query = {
-            settings_uuid: vm.selectedService.settings_uuid,
-            project: vm.currentProject.uuid // for security groups
-          };
-          if (property === 'Image') {
-            servicesService.pageSize = this.selectedResourceImagesPageSize;
-            promise = servicesService.getList(query, url).then(function(response) {
-              validChoices[property.toLowerCase()] = vm.formatChoices(response);
+        var context = {
+          project_uuid: vm.currentProject.uuid,
+          service_uuid: vm.selectedService.uuid,
+          settings_uuid: vm.selectedService.settings_uuid,
+          service_settings_uuid: vm.selectedService.settings_uuid,
+        };
+
+        angular.forEach(formOptions, function(options, name) {
+          if (options.url && name != 'service_project_link') {
+            if (property === 'Image') {
+              vm.setResourceImagesApiEndpoint(options.url);
+            }
+            var promise = servicesService.getAll(context, options.url).then(function(response) {
+              validChoices[name] = vm.formatChoices(response);
             });
-            vm.resourceImagesUrl = url;
-            vm.setResourceImagesApiEndpoint(url);
-          } else {
-            promise = servicesService.getAll(query, url).then(function(response) {
-              validChoices[property.toLowerCase()] = vm.formatChoices(response);
-            });
+            promises.push(promise);
           }
-          promises.push(promise);
         });
         return $q.all(promises).then(function() {
           return validChoices;
@@ -279,6 +258,8 @@
       },
       setResourceImagesApiEndpoint: function(resourceUrl) {
         var resourceUrlParts = resourceUrl.split('/');
+        servicesService.pageSize = this.selectedResourceImagesPageSize;
+        this.resourceImagesUrl = options.url;
         this.selectedResourceImageApiEndpoint = resourceUrlParts[resourceUrlParts.length - 2];
         this.countResourceImages();
       },
@@ -308,7 +289,7 @@
           }
 
           var type = options.type;
-          if (type == 'field') {
+          if (type == 'field' || type == 'select') {
             type = 'choice';
           }
 
@@ -320,9 +301,6 @@
                : choices[i].display_name;
             }
           }
-          if (name == 'security_groups') {
-            choices = validChoices.securitygroup;
-          }
 
           if (name == 'user_data') {
             type = 'text';
@@ -330,9 +308,6 @@
 
           if (name == 'size' || name == 'flavor') {
             type = 'size';
-          }
-          if (name === 'ssh_public_key') {
-            choices = validChoices.sshPublicKeys;
           }
 
           var icons = {
@@ -499,7 +474,7 @@
           }
           this.choiceDisplay[name] = parts.join(', ');
         } else if (name === 'ssh_public_key') {
-          this.instance[name] = choice.url;
+          this.instance[name] = choice.value;
           this.instance[name + '_item'] = choice
         } else if (name === 'group') {
           this.instance[name] = choice.url;
@@ -526,7 +501,7 @@
         });
       },
       isChosen: function(name, choice) {
-        var value = (name == 'ssh_public_key') ? choice.url : choice.value;
+        var value = choice.value;
         value = (name == 'group') ? this.instance[name] : value;
         if (value == undefined) {
           return false;

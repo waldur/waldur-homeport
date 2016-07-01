@@ -152,10 +152,13 @@
     </div>
 
     <div ng-switch-when="choice">
-        <div ng-if="!field.choices.length && field.name =='ssh_public_key'">
+        <div ng-if="field.required && !field.choices.length">
             <h2 ng-bind="field.label"></h2>
-            <p class="warning">SSH public key is required for accessing a provisioned VM.<br/>
-            You can add a key in your <a ui-sref="profile.details">profile</a>.</p>
+            <p class="warning">{{ field.label }} is required for accessing a provisioned VM.
+                <span ng-if="field.name =='ssh_public_key'">
+                    You can add a key in your <a ui-sref="profile.details">profile</a>.
+                </span>
+            </p>
         </div>
         <div ng-if="field.choices.length" class="form-row">
             <div class="col label">
