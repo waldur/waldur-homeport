@@ -147,7 +147,7 @@
                             <ul class="object-list">
                                 <li class="list-item list"
                                     ng-repeat="choice in field.choices | filter: {'display_name': field.searchQuery} | limitTo: field.limit"
-                                    ng-click="AppStore.doChoice(field.name, choice)"
+                                    ng-click="AppStore.doChoice(field, choice)"
                                     ng-class="{'state': AppStore.isChosen(field.name, choice), 'disabled': choice.disabled}">
                                     <div ng-if="::!choice.icon" class="icon {{ ::field.icon }}"></div>
                                     <div ng-if="::choice.icon" class="icon">
@@ -181,6 +181,7 @@
                     <div class="control-buttons">
                         <a class="button-apply" ng-click="AppStore.closeModal(field)">OK</a>
                         <a class="button-cancel" ng-click="AppStore.closeModal(field)">Close</a>
+                        <a class="button-cancel" ng-click="AppStore.resetChoice(field)">Reset</a>
                     </div>
                 </div>
             </div>

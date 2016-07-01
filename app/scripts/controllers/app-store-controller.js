@@ -201,8 +201,10 @@
         }
       },
       filterResources: function(item) {
-        if (this.selectedCategory.name === 'VMs' && item === 'Tenant') {
-          return false;
+        if (this.selectedCategory.name === 'VMs') {
+          if (this.serviceType === 'OpenStack' && item != 'Instance') {
+            return false;
+          }
         } else if (this.selectedCategory.name === 'Private clouds') {
           return item === 'Tenant';
         }
@@ -371,7 +373,7 @@
         this.fieldsOrder = [
           'name', 'region', 'image', 'size', 'flavor', 'system_volume_size', 'data_volume_size',
           'security_groups', 'ssh_public_key', 'tenant', 'floating_ip', 'skip_external_ip_assignment',
-          'description', 'user_data'
+          'availability_zone', 'description', 'user_data', 'user_username'
         ];
         this.fields.sort(this.fieldsComparator.bind(this));
         this.sortFlavors();
@@ -446,8 +448,15 @@
         return field.limit == field.choices.length;
       },
       choiceDisplay: {},
-      doChoice: function(name, choice) {
-        var vm = this;
+      resetChoice: function(field) {
+        this.instance[field.name] = undefined;
+        this.instance[field.name + '_item'] = undefined;
+        this.choiceDisplay[field.name] = undefined;
+        this.updateDependentFields(field.name);
+        this.closeModal(field);
+      },
+      doChoice: function(field, choice) {
+        var vm = this, name = field.name;
         this.choiceDisplay[name] = choice.display_name;
         if (name == 'security_groups') {
           if (this.instance[name] === undefined) {
@@ -459,7 +468,6 @@
             this.instance[name].splice(this.instance[name].indexOf(choice.value), 1);
           }
           var parts = [];
-          var field = this.findFieldByName(name);
           for (var i = 0; i < field.choices.length; i++) {
             var c = field.choices[i];
             if (this.instance[name].indexOf(c.value) !== -1) {
@@ -469,13 +477,23 @@
           this.choiceDisplay[name] = parts.join(', ');
         } else if (name === 'ssh_public_key') {
           this.instance[name] = choice.value;
-          this.instance[name + '_item'] = choice
+          this.instance[name + '_item'] = choice;
         } else if (name === 'group') {
           this.instance[name] = choice.url;
         } else {
           this.instance[name] = choice.value;
           this.instance[name + '_item'] = choice.item;
         }
+        this.updateDependentFields(name);
+        if (ENV.nonChargeableAppStoreOptions.indexOf(name) !== -1) {
+          return;
+        }
+        defaultPriceListItemsService.getAll({resource_type: vm.serviceType + '.' + vm.selectedResourceType}).then(function(response) {
+          vm.defaultPriceListItems = response;
+          vm.setPriceItem(name, choice);
+        });
+      },
+      updateDependentFields: function(name) {
         if (name == 'region') {
           this.filterSizeByRegion();
           this.filterImageByRegion();
@@ -486,13 +504,6 @@
         if (name == 'flavor') {
           this.setSize();
         }
-        if (ENV.nonChargeableAppStoreOptions.indexOf(name) !== -1) {
-          return;
-        }
-        defaultPriceListItemsService.getAll({resource_type: vm.serviceType + '.' + vm.selectedResourceType}).then(function(response) {
-          vm.defaultPriceListItems = response;
-          vm.setPriceItem(name, choice);
-        });
       },
       isChosen: function(name, choice) {
         var value = choice.value;
@@ -573,7 +584,11 @@
         if (!field) {
           return;
         }
-        var disk_gb = Math.round(this.instance.flavor_item.disk / 1024);
+        if (this.instance.flavor_item) {
+          var disk_gb = Math.round(this.instance.flavor_item.disk / 1024);
+        } else {
+          var disk_gb = 0;
+        }
         field.min = disk_gb;
         this.instance.system_volume_size = disk_gb;
         this.instance.system_volume_size_raw = disk_gb;
@@ -585,7 +600,11 @@
         }
         var image = this.instance.image_item;
         if (!image) {
-          return false;
+          for (var i = 0; i < field.choices.length; i++) {
+            var choice = field.choices[i];
+            choice.disabled = false;
+          }
+          return;
         }
         for (var i = 0; i < field.choices.length; i++) {
           var choice = field.choices[i];
