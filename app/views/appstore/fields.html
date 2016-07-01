@@ -105,62 +105,6 @@
         </form>
     </div>
 
-    <div class="form-row" ng-switch-when="size" ng-if="field.choices.length > 0">
-        <div class="col label">
-            <label>{{ field.label }}</label>
-        </div>
-        <div class="col input input-full">
-            <label>
-                <a ng-click="AppStore.modalInit(field)">
-                    {{ AppStore.choiceDisplay[field.name] || 'Show choices' }}
-                    <i class="icon fa-caret-down"></i>
-                </a>
-            </label>
-        </div>
-        <div class="select-image-wrapper"
-             ng-if="field.showChoices"
-             prevent-body-scroll>
-            <div class="select-image-popup">
-                <h3>Select {{ field.label }}</h3>
-                <form ng-show="AppStore.isListLong(field)">
-                    <div class="string-field">
-                    <input type="text" placeholder="Type to filter by name"
-                           ng-model="field.searchQuery" ng-init="field.searchQuery=''"/>
-                    </div>
-                </form>
-
-                <div class="appstore-templates">
-                    <div class="white-box list-box">
-                        <ul class="object-list">
-                            <li ng-repeat="choice in field.choices | filter: {'display_name': field.searchQuery} | limitTo: field.limit"
-                                ng-click="AppStore.doChoice(field.name, choice)"
-                                ng-class="{'state': AppStore.instance[field.name] == choice.value, 'disabled': choice.disabled}"
-                                class="list-item list">
-                                <h4>{{ ::choice.display_name }}</h4>
-                                <div>
-                                    CPU: {{ ::choice.item.cores == 1 && '1 core' || choice.item.cores + ' cores'}};
-                                    RAM: {{ ::choice.item.ram | mb2gb }};
-                                    HDD: {{ ::choice.item.disk | mb2gb}}
-                                </div>
-                            </li>
-                            <a ng-init="field.limit = AppStore.limitChoices"
-                               ng-show="AppStore.isListLong(field)"
-                               ng-click="AppStore.toggleChoicesLimit(field)"
-                               ng-class="{'active': AppStore.isListExpanded(field)}"
-                               class="toggle-link pull-right">Show {{ AppStore.isListExpanded(field) && 'less' || 'more' }} choices</a>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="clear"></div>
-                <div class="control-buttons">
-                    <a class="button-apply" ng-click="AppStore.closeModal(field)">OK</a>
-                    <a class="button-cancel" ng-click="AppStore.closeModal(field)">Close</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div ng-switch-when="choice">
         <div ng-if="field.required && !field.choices.length">
             <h2 ng-bind="field.label"></h2>
@@ -212,7 +156,7 @@
 
                                     <div class="description-{{::field.name}}">
                                         <div>
-                                            <p>{{ choice.display_name || choice.name }}</p>
+                                            <p>{{ choice.display_name }}</p>
                                         </div>
                                     </div>
                                 </li>

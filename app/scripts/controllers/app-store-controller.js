@@ -235,6 +235,7 @@
         var promises = [];
         var validChoices = {};
         var context = {
+          project: vm.currentProject.uuid,
           project_uuid: vm.currentProject.uuid,
           service_uuid: vm.selectedService.uuid,
           settings_uuid: vm.selectedService.settings_uuid,
@@ -246,8 +247,18 @@
             if (name === 'Image') {
               vm.setResourceImagesApiEndpoint(options.url);
             }
-            var promise = servicesService.getAll(context, options.url).then(function(response) {
-              validChoices[name] = vm.formatChoices(response);
+            var parts = options.url.split("?");
+            if (parts.length > 1) {
+              var base_url = parts[0];
+              var query = ncUtils.parseQueryString(parts[1])
+            } else {
+              var base_url = options.url;
+              var query = {};
+            }
+            var query = angular.extend(query, context);
+
+            var promise = servicesService.getAll(query, options.url).then(function(response) {
+              validChoices[name] = vm.formatChoices(response, options);
             });
             promises.push(promise);
           }
@@ -271,11 +282,11 @@
           vm.selectedResourceImagesCount = count;
         });
       },
-      formatChoices: function(items) {
+      formatChoices: function(items, options) {
         return items.map(function(item) {
           return {
-            value: item.url,
-            display_name: item.name,
+            value: item[options.value_field] || item.url,
+            display_name: item[options.display_name_field] || item.name,
             item: item
           }
         });
@@ -294,20 +305,9 @@
           }
 
           var choices = validChoices[name] || options.choices;
-          if (name === 'image') {
-            for (var i = 0; i < choices.length; i++) {
-             choices[i].display_name = choices[i].item.distribution
-               ? choices[i].item.distribution + " " + choices[i].display_name
-               : choices[i].display_name;
-            }
-          }
 
           if (name == 'user_data') {
             type = 'text';
-          }
-
-          if (name == 'size' || name == 'flavor') {
-            type = 'size';
           }
 
           var icons = {
@@ -363,13 +363,15 @@
             icon: icon,
             min: min,
             max: max,
-            units: units
+            units: units,
+            options: options
           });
           display_label = null;
         }
         this.fieldsOrder = [
           'name', 'region', 'image', 'size', 'flavor', 'system_volume_size', 'data_volume_size',
-          'security_groups', 'ssh_public_key', 'description', 'user_data'
+          'security_groups', 'ssh_public_key', 'tenant', 'floating_ip', 'skip_external_ip_assignment',
+          'description', 'user_data'
         ];
         this.fields.sort(this.fieldsComparator.bind(this));
         this.sortFlavors();
@@ -435,7 +437,7 @@
         };
         servicesService.pageSize = this.selectedResourceImagesPageSize;
         servicesService.getList(query, this.resourceImagesUrl).then(function(response) {
-          var choices = vm.formatChoices(response);
+          var choices = vm.formatChoices(response, field.options);
           field.choices = field.choices.concat(choices);
           vm.attachIconsToImages();
         });
@@ -446,7 +448,7 @@
       choiceDisplay: {},
       doChoice: function(name, choice) {
         var vm = this;
-        this.choiceDisplay[name] = choice.display_name || choice.name;
+        this.choiceDisplay[name] = choice.display_name;
         if (name == 'security_groups') {
           if (this.instance[name] === undefined) {
             this.instance[name] = [];
@@ -461,7 +463,7 @@
           for (var i = 0; i < field.choices.length; i++) {
             var c = field.choices[i];
             if (this.instance[name].indexOf(c.value) !== -1) {
-              parts.push(c.display_name || c.name);
+              parts.push(c.display_name);
             }
           }
           this.choiceDisplay[name] = parts.join(', ');
