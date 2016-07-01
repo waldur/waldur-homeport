@@ -453,6 +453,7 @@
         this.instance[field.name + '_item'] = undefined;
         this.choiceDisplay[field.name] = undefined;
         this.updateDependentFields(field.name);
+        this.deletePriceItem(field.name);
         this.closeModal(field);
       },
       doChoice: function(field, choice) {
