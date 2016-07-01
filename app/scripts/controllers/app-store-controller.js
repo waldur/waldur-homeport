@@ -243,7 +243,7 @@
 
         angular.forEach(formOptions, function(options, name) {
           if (options.url && name != 'service_project_link') {
-            if (property === 'Image') {
+            if (name === 'Image') {
               vm.setResourceImagesApiEndpoint(options.url);
             }
             var promise = servicesService.getAll(context, options.url).then(function(response) {
@@ -320,12 +320,6 @@
           var icon = icons[name] || 'cloud';
           var label = options.label;
           var required = options.required;
-          var visibleFields = [
-            'ssh_public_key',
-            'group',
-            'security_groups'
-          ];
-          var visible = required || visibleFields.indexOf(name) != -1;
           var help_text = options.help_text;
           var min, max, units;
 
@@ -340,7 +334,6 @@
             min = 1;
             max = 320;
             units = 'GB';
-            visible = true;
             required = true;
             help_text = null;
           }
@@ -367,7 +360,6 @@
             help_text: help_text,
             required: required,
             choices: choices,
-            visible: visible,
             icon: icon,
             min: min,
             max: max,

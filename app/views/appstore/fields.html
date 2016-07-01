@@ -1,7 +1,17 @@
 <div class="short-form full">
 <div ng-repeat="field in AppStore.fields"
-     ng-switch="field.type"
-     ng-if="AppStore.showOptionalFields || field.visible || AppStore.errors[field.name]">
+     ng-switch="field.type">
+
+    <div class="form-row" ng-switch-when="boolean">
+        <div class="col label">
+        </div>
+        <div class="col input">
+            <label>
+                {{ field.label }}
+                <input type="checkbox" ng-model="AppStore.instance[field.name]">
+            </label>
+        </div>
+    </div>
 
     <div ng-switch-when="string">
         <div ng-if="field.name === 'password'">
@@ -154,8 +164,12 @@
     <div ng-switch-when="choice">
         <div ng-if="field.required && !field.choices.length">
             <h2 ng-bind="field.label"></h2>
-            <p class="warning">{{ field.label }} is required for accessing a provisioned VM.
+            <p class="warning">
+                <span ng-if="field.name!='ssh_public_key'">
+                    {{ field.label }} is required for provisioning resource.
+                </span>
                 <span ng-if="field.name =='ssh_public_key'">
+                    SSH public key is required for accessing a provisioned VM.
                     You can add a key in your <a ui-sref="profile.details">profile</a>.
                 </span>
             </p>
@@ -230,6 +244,3 @@
     </div>
 </div>
 </div>
-<a class="toggle-link pull-right"
-   ng-click="AppStore.showOptionalFields=!AppStore.showOptionalFields"
-   ng-class="{'active': AppStore.showOptionalFields}">{{ AppStore.showOptionalFields && 'Hide' || 'Show' }} additional options</a>
