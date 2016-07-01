@@ -3,11 +3,10 @@
      ng-switch="field.type">
 
     <div class="form-row" ng-switch-when="boolean">
-        <div class="col label">
-        </div>
+        <div class="col label"></div>
         <div class="col input">
             <label>
-                {{ field.label }}
+                {{ field.label }} {{ field.required && '*' }}
                 <input type="checkbox" ng-model="AppStore.instance[field.name]">
             </label>
         </div>
@@ -19,7 +18,7 @@
                 <div class="col label">
                     <label for="{{ field.name }}">
                         <helpicon help-text="{{ field.help_text }}" ng-if="field.help_text"></helpicon>
-                        {{ field.label }}
+                        {{ field.label }} {{ field.required && '*' }}
                     </label>
                 </div>
                 <div class="col input input-full">
@@ -43,7 +42,7 @@
                 <div class="col label">
                     <label for="{{ field.name }}">
                         <helpicon help-text="{{ field.help_text }}" ng-if="field.help_text"></helpicon>
-                        {{ field.label }}
+                        {{ field.label }} {{ field.required && '*' }}
                     </label>
                 </div>
                 <form class="col input input-full">
@@ -65,7 +64,7 @@
         <div class="col label">
             <label for="{{ field.name }}">
                 <helpicon help-text="{{ field.help_text }}" ng-if="field.help_text"></helpicon>
-                {{ field.label }}
+                {{ field.label }} {{ field.required && '*' }}
             </label>
         </div>
         <form class="col input input-full">
@@ -84,7 +83,7 @@
         <div class="col label">
             <label for="{{ field.name }}">
                 <helpicon help-text="{{ field.help_text }}" ng-if="field.help_text"></helpicon>
-                {{ field.label }}
+                {{ field.label }} {{ field.required && '*' }}
             </label>
         </div>
         <form class="col input input-full">
@@ -120,7 +119,7 @@
         </div>
         <div ng-if="field.choices.length" class="form-row">
             <div class="col label">
-                <label>{{ field.label }}</label>
+                <label>{{ field.label }} {{ field.required && '*' }}</label>
             </div>
             <div class="col input input-full">
                 <label>
