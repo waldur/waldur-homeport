@@ -1,11 +1,12 @@
 <div>
     <div ng-if="loading" class="empty-list-message">
-      Please wait while service project link list is loading.
+      Please wait while a list is loading.
     </div>
     <div ng-if="!loading && !choices.length" class="empty-list-message">
         There are no projects yet.
     </div>
     <div ng-if="choices.length">
+        <p>Please select projects where usage of the provider is permitted.</p>
         <div multiple-select choices="choices"></div>
         <div class="decision">
             <div class="col">
