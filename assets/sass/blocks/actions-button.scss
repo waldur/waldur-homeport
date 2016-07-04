@@ -24,6 +24,7 @@
         background-color: white;
         border: 1px solid #CBCBCB;
         box-shadow: 0px 0px 8px rgba(139, 139, 139, 0.39);
+        z-index: 1000;
         &.sort-by-value {
             left: 50%;
             right: auto;

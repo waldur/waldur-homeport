@@ -19,7 +19,6 @@
       'projectsService',
       'priceEstimationService',
       'keysService',
-      'gitlabGroupsService',
       '$document',
       '$scope',
       AppStoreController]);
@@ -43,7 +42,6 @@
     projectsService,
     priceEstimationService,
     keysService,
-    gitlabGroupsService,
     $document,
     $scope) {
     var controllerScope = this;
@@ -118,7 +116,6 @@
       closeModal: function(field) {
         field.showChoices = false;
         $document.unbind('keypress');
-        $scope.$apply();
       },
       activate:function() {
         var vm = this;
@@ -204,8 +201,10 @@
         }
       },
       filterResources: function(item) {
-        if (this.selectedCategory.name === 'VMs' && item === 'Tenant') {
-          return false;
+        if (this.selectedCategory.name === 'VMs') {
+          if (this.serviceType === 'OpenStack' && item != 'Instance') {
+            return false;
+          }
         } else if (this.selectedCategory.name === 'Private clouds') {
           return item === 'Tenant';
         }
@@ -226,52 +225,45 @@
           var promise = servicesService.getOption(resourceUrl).then(function(response) {
             var formOptions = response.actions.POST;
             vm.allFormOptions = formOptions;
-            return vm.getValidChoices().then(function(validChoices) {
-              var gitlabGroupsPromise = gitlabGroupsService.getList({
-                project_uuid: vm.currentProject.uuid,
-                service_uuid: vm.selectedService.uuid
-              });
-              var sshKeysPromise = keysService.getCurrentUserKeyList();
-
-              $q.all([gitlabGroupsPromise, sshKeysPromise]).then(function(result) {
-                validChoices.sshPublicKeys = [];
-                validChoices.group = [];
-                result[0].forEach(function(item) {
-                  validChoices.group.push(item);
-                });
-                result[1].forEach(function(item) {
-                  validChoices.sshPublicKeys.push(item);
-                });
-                vm.setFields(formOptions, validChoices);
-              });
+            return vm.getValidChoices(formOptions).then(function(validChoices) {
+              vm.setFields(formOptions, validChoices);
             });
           });
           ncUtils.blockElement('resource-properties', promise);
         }
       },
-      getValidChoices: function() {
+      getValidChoices: function(formOptions) {
         var vm = this;
         var promises = [];
         var validChoices = {};
-        angular.forEach(vm.serviceMetadata.properties, function(url, property) {
-          var promise,
-          query = {
-            settings_uuid: vm.selectedService.settings_uuid,
-            project: vm.currentProject.uuid // for security groups
-          };
-          if (property === 'Image') {
-            servicesService.pageSize = this.selectedResourceImagesPageSize;
-            promise = servicesService.getList(query, url).then(function(response) {
-              validChoices[property.toLowerCase()] = vm.formatChoices(response);
+        var context = {
+          project: vm.currentProject.uuid,
+          project_uuid: vm.currentProject.uuid,
+          service_uuid: vm.selectedService.uuid,
+          settings_uuid: vm.selectedService.settings_uuid,
+          service_settings_uuid: vm.selectedService.settings_uuid,
+        };
+
+        angular.forEach(formOptions, function(options, name) {
+          if (options.url && name != 'service_project_link') {
+            if (name === 'Image') {
+              vm.setResourceImagesApiEndpoint(options.url);
+            }
+            var parts = options.url.split("?");
+            if (parts.length > 1) {
+              var base_url = parts[0];
+              var query = ncUtils.parseQueryString(parts[1])
+            } else {
+              var base_url = options.url;
+              var query = {};
+            }
+            var query = angular.extend(query, context);
+
+            var promise = servicesService.getAll(query, options.url).then(function(response) {
+              validChoices[name] = vm.formatChoices(response, options);
             });
-            vm.resourceImagesUrl = url;
-            vm.setResourceImagesApiEndpoint(url);
-          } else {
-            promise = servicesService.getAll(query, url).then(function(response) {
-              validChoices[property.toLowerCase()] = vm.formatChoices(response);
-            });
+            promises.push(promise);
           }
-          promises.push(promise);
         });
         return $q.all(promises).then(function() {
           return validChoices;
@@ -279,6 +271,8 @@
       },
       setResourceImagesApiEndpoint: function(resourceUrl) {
         var resourceUrlParts = resourceUrl.split('/');
+        servicesService.pageSize = this.selectedResourceImagesPageSize;
+        this.resourceImagesUrl = options.url;
         this.selectedResourceImageApiEndpoint = resourceUrlParts[resourceUrlParts.length - 2];
         this.countResourceImages();
       },
@@ -290,11 +284,11 @@
           vm.selectedResourceImagesCount = count;
         });
       },
-      formatChoices: function(items) {
+      formatChoices: function(items, options) {
         return items.map(function(item) {
           return {
-            value: item.url,
-            display_name: item.name,
+            value: item[options.value_field] || item.url,
+            display_name: item[options.display_name_field] || item.name,
             item: item
           }
         });
@@ -308,31 +302,14 @@
           }
 
           var type = options.type;
-          if (type == 'field') {
+          if (type == 'field' || type == 'select') {
             type = 'choice';
           }
 
           var choices = validChoices[name] || options.choices;
-          if (name === 'image') {
-            for (var i = 0; i < choices.length; i++) {
-             choices[i].display_name = choices[i].item.distribution
-               ? choices[i].item.distribution + " " + choices[i].display_name
-               : choices[i].display_name;
-            }
-          }
-          if (name == 'security_groups') {
-            choices = validChoices.securitygroup;
-          }
 
           if (name == 'user_data') {
             type = 'text';
-          }
-
-          if (name == 'size' || name == 'flavor') {
-            type = 'size';
-          }
-          if (name === 'ssh_public_key') {
-            choices = validChoices.sshPublicKeys;
           }
 
           var icons = {
@@ -345,12 +322,6 @@
           var icon = icons[name] || 'cloud';
           var label = options.label;
           var required = options.required;
-          var visibleFields = [
-            'ssh_public_key',
-            'group',
-            'security_groups'
-          ];
-          var visible = required || visibleFields.indexOf(name) != -1;
           var help_text = options.help_text;
           var min, max, units;
 
@@ -365,7 +336,6 @@
             min = 1;
             max = 320;
             units = 'GB';
-            visible = true;
             required = true;
             help_text = null;
           }
@@ -392,17 +362,18 @@
             help_text: help_text,
             required: required,
             choices: choices,
-            visible: visible,
             icon: icon,
             min: min,
             max: max,
-            units: units
+            units: units,
+            options: options
           });
           display_label = null;
         }
         this.fieldsOrder = [
           'name', 'region', 'image', 'size', 'flavor', 'system_volume_size', 'data_volume_size',
-          'security_groups', 'ssh_public_key', 'description', 'user_data'
+          'security_groups', 'ssh_public_key', 'tenant', 'floating_ip', 'skip_external_ip_assignment',
+          'availability_zone', 'description', 'user_data', 'user_username'
         ];
         this.fields.sort(this.fieldsComparator.bind(this));
         this.sortFlavors();
@@ -468,7 +439,7 @@
         };
         servicesService.pageSize = this.selectedResourceImagesPageSize;
         servicesService.getList(query, this.resourceImagesUrl).then(function(response) {
-          var choices = vm.formatChoices(response);
+          var choices = vm.formatChoices(response, field.options);
           field.choices = field.choices.concat(choices);
           vm.attachIconsToImages();
         });
@@ -477,9 +448,17 @@
         return field.limit == field.choices.length;
       },
       choiceDisplay: {},
-      doChoice: function(name, choice) {
-        var vm = this;
-        this.choiceDisplay[name] = choice.display_name || choice.name;
+      resetChoice: function(field) {
+        this.instance[field.name] = undefined;
+        this.instance[field.name + '_item'] = undefined;
+        this.choiceDisplay[field.name] = undefined;
+        this.updateDependentFields(field.name);
+        this.deletePriceItem(field.name);
+        this.closeModal(field);
+      },
+      doChoice: function(field, choice) {
+        var vm = this, name = field.name;
+        this.choiceDisplay[name] = choice.display_name;
         if (name == 'security_groups') {
           if (this.instance[name] === undefined) {
             this.instance[name] = [];
@@ -490,23 +469,32 @@
             this.instance[name].splice(this.instance[name].indexOf(choice.value), 1);
           }
           var parts = [];
-          var field = this.findFieldByName(name);
           for (var i = 0; i < field.choices.length; i++) {
             var c = field.choices[i];
             if (this.instance[name].indexOf(c.value) !== -1) {
-              parts.push(c.display_name || c.name);
+              parts.push(c.display_name);
             }
           }
           this.choiceDisplay[name] = parts.join(', ');
         } else if (name === 'ssh_public_key') {
-          this.instance[name] = choice.url;
-          this.instance[name + '_item'] = choice
+          this.instance[name] = choice.value;
+          this.instance[name + '_item'] = choice;
         } else if (name === 'group') {
-          this.instance[name] = choice.url;
+          this.instance[name] = choice.value;
         } else {
           this.instance[name] = choice.value;
           this.instance[name + '_item'] = choice.item;
         }
+        this.updateDependentFields(name);
+        if (ENV.nonChargeableAppStoreOptions.indexOf(name) !== -1) {
+          return;
+        }
+        defaultPriceListItemsService.getAll({resource_type: vm.serviceType + '.' + vm.selectedResourceType}).then(function(response) {
+          vm.defaultPriceListItems = response;
+          vm.setPriceItem(name, choice);
+        });
+      },
+      updateDependentFields: function(name) {
         if (name == 'region') {
           this.filterSizeByRegion();
           this.filterImageByRegion();
@@ -517,22 +505,15 @@
         if (name == 'flavor') {
           this.setSize();
         }
-        if (ENV.nonChargeableAppStoreOptions.indexOf(name) !== -1) {
-          return;
-        }
-        defaultPriceListItemsService.getAll({resource_type: vm.serviceType + '.' + vm.selectedResourceType}).then(function(response) {
-          vm.defaultPriceListItems = response;
-          vm.setPriceItem(name, choice);
-        });
       },
       isChosen: function(name, choice) {
-        var value = (name == 'ssh_public_key') ? choice.url : choice.value;
+        var value = choice.value;
         value = (name == 'group') ? this.instance[name] : value;
         if (value == undefined) {
           return false;
         }
         if (name == 'group' && this.instance[name]) {
-          return choice.url === this.instance[name];
+          return choice.value === this.instance[name];
         }
         if (name == 'security_groups') {
           var vals = this.instance[name];
@@ -604,7 +585,11 @@
         if (!field) {
           return;
         }
-        var disk_gb = Math.round(this.instance.flavor_item.disk / 1024);
+        if (this.instance.flavor_item) {
+          var disk_gb = Math.round(this.instance.flavor_item.disk / 1024);
+        } else {
+          var disk_gb = 0;
+        }
         field.min = disk_gb;
         this.instance.system_volume_size = disk_gb;
         this.instance.system_volume_size_raw = disk_gb;
@@ -616,7 +601,11 @@
         }
         var image = this.instance.image_item;
         if (!image) {
-          return false;
+          for (var i = 0; i < field.choices.length; i++) {
+            var choice = field.choices[i];
+            choice.disabled = false;
+          }
+          return;
         }
         for (var i = 0; i < field.choices.length; i++) {
           var choice = field.choices[i];
