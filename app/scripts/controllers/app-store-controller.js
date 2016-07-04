@@ -480,7 +480,7 @@
           this.instance[name] = choice.value;
           this.instance[name + '_item'] = choice;
         } else if (name === 'group') {
-          this.instance[name] = choice.url;
+          this.instance[name] = choice.value;
         } else {
           this.instance[name] = choice.value;
           this.instance[name + '_item'] = choice.item;
@@ -513,7 +513,7 @@
           return false;
         }
         if (name == 'group' && this.instance[name]) {
-          return choice.url === this.instance[name];
+          return choice.value === this.instance[name];
         }
         if (name == 'security_groups') {
           var vals = this.instance[name];
