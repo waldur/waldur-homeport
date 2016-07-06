@@ -42,6 +42,12 @@
         if (resource.disk) {
           parts.push($filter('mb2gb')(resource.disk) + ' storage');
         }
+        if (resource.bootable) {
+          parts.push('bootable');
+        }
+        if (resource.size) {
+          parts.push($filter('mb2gb')(resource.size));
+        }
         var summary = parts.join(' / ');
         return summary;
       },

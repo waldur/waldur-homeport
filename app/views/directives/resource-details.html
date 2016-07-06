@@ -129,6 +129,19 @@
   </div>
 </div>
 
+<div class="details-table__row" ng-if="::resource.volumes.length">
+  <div class="details-table__key">
+    Volumes:
+  </div>
+  <div class="details-table__value">
+    <li ng-repeat="volume in resource.volumes">
+      <a ui-sref="resources.details({uuid: volume.uuid, resource_type: volume.resource_type})">
+      {{ ::volume.name }} ({{ ::volume.bootable && 'bootable' || '' }} {{ ::volume.size|mb2gb }})
+      </a>
+    </li>
+  </div>
+</div>
+
 <div class="details-table__row">
   <div class="details-table__key">
     UUID:
