@@ -139,6 +139,9 @@
         controllerScope.importableResources = [];
         controllerScope.noResources = false;
         var query = {operation: 'link', project_uuid: controllerScope.currentProject.uuid};
+        if (service.type == 'Amazon') {
+          query.resource_type = 'Amazon.Instance';
+        }
         return servicesService.getList(query, service.url).then(function(response) {
           for (var i = 0; i < response.length; i++) {
             response[i].status = 'ready';
