@@ -30,6 +30,16 @@
     {{ ::expandableElement.error_message }}
   </div>
 </div>
+<div class="details-table__row" ng-if="::expandableElement.customer_uuid">
+  <div class="details-table__key">
+    Customer
+  </div>
+  <div class="details-table__value">
+    <a ui-sref="organizations.details({uuid: expandableElement.customer_uuid })">
+      {{ ::expandableElement.customer_name }}
+    </a>
+  </div>
+</div>
 <div class="details-table__row" ng-if="::expandableElement.project_uuid">
   <div class="details-table__key">
     Project
