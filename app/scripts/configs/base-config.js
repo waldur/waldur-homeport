@@ -184,6 +184,10 @@ angular.module('ncsaas')
 
     resourceStateColorClasses: {
       'OK': 'online',
+      'Creation Scheduled': 'processing',
+      'Creating': 'processing',
+      'Update Scheduled': 'processing',
+      'Updating': 'processing',
       'Online': 'online',
       'Offline': 'offline',
       'Erred': 'erred',

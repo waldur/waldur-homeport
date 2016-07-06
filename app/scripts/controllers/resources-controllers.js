@@ -340,9 +340,8 @@
       },
 
       reInitResource: function() {
-        var vm = this;
-        vm.getModel().then(function(model) {
-          vm.model = model;
+        controllerScope.getModel().then(function(model) {
+          controllerScope.model = model;
         });
       },
 

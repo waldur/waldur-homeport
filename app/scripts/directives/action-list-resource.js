@@ -29,10 +29,16 @@
           var promise = actionUtilsService.buttonClick(scope.controller, scope.entity, name, action);
           promise.finally(function() {
             action.pending = false;
+            loadActions();
           });
         }
         scope.loading = false;
         loadActions();
+        scope.$watch('entity', function(newEntity, oldEntity) {
+          if (newEntity.state != oldEntity.state) {
+            loadActions();
+          }
+        });
       }
     };
   }
