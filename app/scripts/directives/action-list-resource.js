@@ -35,7 +35,7 @@
         scope.loading = false;
         loadActions();
         scope.$watch('entity', function(newEntity, oldEntity) {
-          if (newEntity.state != oldEntity.state) {
+          if (newEntity.state !== oldEntity.state) {
             loadActions();
           }
         });
