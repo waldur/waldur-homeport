@@ -7,6 +7,7 @@
 
   function actionUtilsService(ncUtilsFlash, $rootScope, $http, $q, ngDialog, resourcesService) {
     this.loadActions = function(model) {
+      resourcesService.cleanOptionsCache(model.url);
       return resourcesService.getOption(model.url).then(function(response) {
         var actions = {};
         var empty = true;
