@@ -2,9 +2,9 @@
 
 (function() {
   angular.module('ncsaas').controller('ActionDialogController',
-    ['$scope', '$q', 'resourcesService', 'actionUtilsService', 'ncUtils', ActionDialogController]);
+    ['$scope', '$q', '$http', 'resourcesService', 'actionUtilsService', 'ncUtils', ActionDialogController]);
 
-  function ActionDialogController($scope, $q, resourcesService, actionUtilsService, ncUtils) {
+  function ActionDialogController($scope, $q, $http, resourcesService, actionUtilsService, ncUtils) {
     angular.extend($scope, {
       init: function () {
         $scope.errors = {};
@@ -12,6 +12,11 @@
         $scope.loading = true;
         $scope.getSelectList().finally(function() {
           $scope.loading = false;
+        });
+        angular.forEach($scope.action.fields, function(field, name) {
+          if (field.default_value) {
+            $scope.form[name] = field.default_value;
+          }
         });
       },
       getSelectList: function () {
@@ -53,7 +58,14 @@
           }
         }
 
-        return form.$save(function(response) {
+        if ($scope.action.method == 'DELETE') {
+          var url = $scope.action.url + '?' + ncUtils.toKeyValue($scope.form);
+          var promise = $http.delete(url);
+        } else {
+          var promise = form.$save();
+        }
+
+        return promise.then(function(response) {
           $scope.errors = {};
           actionUtilsService.handleActionSuccess($scope.action);
           $scope.controller.reInitResource($scope.resource);

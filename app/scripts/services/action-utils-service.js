@@ -16,6 +16,9 @@
             actions[name] = action;
             empty = false;
           }
+          if (action.fields && action.fields.delete_volumes) {
+            action.fields.delete_volumes.default_value = true;
+          }
         });
         if (!empty) {
           return actions;
