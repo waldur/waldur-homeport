@@ -1,0 +1,11 @@
+<div class="button"
+     ng-switch="resource.status"
+     ng-class="{'disabled': resource.status == 'success' || resource.status == 'progress'}">
+    <span ng-switch-when="ready" ng-click="toggle(resource)">
+        <span ng-if="!resource.checked">Select</span>
+        <span ng-if="resource.checked">Selected</span>
+    </span>
+    <span ng-switch-when="progress">In progress</span>
+    <span ng-switch-when="success">Imported</span>
+    <span ng-switch-when="failed">Failed</span>
+</div>

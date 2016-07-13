@@ -156,20 +156,6 @@
         });
       },
 
-      getResourceDetails: function(resource) {
-        var str = 'CPU: ' + resource.cores;
-        if (resource.ram) {
-          str += ' / RAM: ' + $filter('mb2gb')(resource.ram);
-        }
-        if (resource.disk) {
-          str += ' / HDD: ' + $filter('mb2gb')(resource.disk);
-        }
-        if (resource.flavor_name) {
-          str += ' / Flavor: ' + resource.flavor_name;
-        }
-        return str;
-      },
-
       canImport: function() {
         return controllerScope.currentProject && controllerScope.selectedResources.length;
       },

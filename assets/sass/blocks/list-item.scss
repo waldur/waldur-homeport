@@ -50,7 +50,7 @@
         }
     } // &.list-header
     &.list {
-        &:hover {
+        &:hover,&.selected {
             background-color: $expandable-hover;
         } // &:hover
     }// &.list

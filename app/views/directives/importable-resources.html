@@ -1,0 +1,45 @@
+<div ng-show="noResources && selectedService.name">
+    <h4 class="app-title centered">
+        There are no resources available for import in this provider.
+    </h4>
+</div>
+<div ng-show="resources.length" class="profile-content">
+    <h3 class="app-title">Resources</h3>
+
+    <div class="white-box list-box">
+        <ul class="object-list">
+            <li class="list-item list-header">
+                <div class="additional-cell icon"></div>
+                <div class="additional-cell resource-name">
+                    <a class="list-sort">Name</a>
+                </div>
+                <div class="additional-cell">
+                    <a class="list-sort">Details</a>
+                </div>
+                <div class="actions"></div>
+            </li>
+            <li ng-repeat="resource in resources"
+                ng-click="toggleResource(resource)"
+                class="list-item pointer list"
+                ng-class="{'selected': resource.checked}">
+                <div class="additional-cell icon">
+                    <span>
+                        <img title="{{ resource.resource_type }}"
+                             ng-src="resource.icon">
+                    </span>
+                </div>
+                <div class="additional-cell resource-name">
+                    {{ resource.name }}
+                </div>
+                <div class="additional-cell">
+                    {{ resource.details }}
+                </div>
+                <import-resource-button
+                    resource="resource"
+                    toggle="toggleResource"
+                    project="currentProject"
+                ></import-resource-button>
+            </li>
+        </ul>
+    </div>
+</div>
