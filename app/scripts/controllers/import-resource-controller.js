@@ -119,10 +119,43 @@
         this.selectedResources = [];
         this.importedResources = [];
         controllerScope.selectedService = service;
+        if (service.type === 'OpenStack' && this.selectedCategory.name === 'VMs') {
+          this.selectTenant = true;
+          this.loadTenants();
+          return;
+        } else {
+          this.selectTenant = false;
+        }
         var resourcesForServicePromise = this.getResourcesForService(service),
-          importedResourcesPromise= this.getImportedResourcesForService(service),
+          importedResourcesPromise = this.getImportedResourcesForService(service),
           resourcesPromises = $q.all([resourcesForServicePromise, importedResourcesPromise]);
         ncUtils.blockElement('import-second-step', resourcesPromises);
+      },
+
+      loadTenants: function() {
+        this.selectedTenant = null;
+        this.tenants = null;
+        var query = {
+          service_uuid: this.selectedService.uuid,
+          project_uuid: this.currentProject.uuid
+        };
+        var url = ENV.apiEndpoint + 'api/openstack-tenants/';
+        servicesService.getList(query, url).then(function(tenants) {
+          this.tenants = tenants;
+        }.bind(this), function() {
+          ncUtilsFlash.warning('Unable to get list of tenants.');
+        });
+      },
+
+      setTenant: function(tenant) {
+        this.selectedTenant = tenant;
+        var promise = this.getResourcesForService(
+          this.selectedService, {
+            tenant_uuid: tenant.uuid,
+            resource_type: 'OpenStack.Instance'
+          }
+        );
+        ncUtils.blockElement('import-second-step', promise);
       },
 
       getImportedResourcesForService: function(service) {
@@ -135,10 +168,13 @@
         });
       },
 
-      getResourcesForService: function(service) {
+      getResourcesForService: function(service, extra) {
         controllerScope.importableResources = [];
         controllerScope.noResources = false;
-        var query = {operation: 'link', project_uuid: controllerScope.currentProject.uuid};
+        var query = angular.extend({
+          operation: 'link',
+          project_uuid: controllerScope.currentProject.uuid
+        }, extra);
         if (service.type == 'Amazon') {
           query.resource_type = 'Amazon.Instance';
         }
@@ -205,8 +241,12 @@
         instance.project = project_url;
         instance.backend_id = resource.id;
 
-        if (angular.isDefined(resource.type)) {
+        if (resource.type) {
           instance.type = resource.type;
+          instance.resource_type = resource.type;
+        }
+        if (this.selectedTenant) {
+          instance.tenant = this.selectedTenant.url;
         }
         return instance;
       },
@@ -222,12 +262,17 @@
       },
 
       getTab: function() {
-        if (this.isVirtualMachinesSelected()) {
-          return ENV.resourcesTypes.vms;
-        }
         if (this.isApplicationSelected()) {
           return ENV.resourcesTypes.applications;
+        } else if (this.isPrivateCloudSelected()) {
+          return ENV.resourcesTypes.privateClouds;
+        } else {
+          return ENV.resourcesTypes.vms;
         }
+      },
+
+      isPrivateCloudSelected: function() {
+        return this.selectedCategory.name == ENV.appStoreCategories[ENV.PrivateClouds].name;
       },
 
       isVirtualMachinesSelected: function() {

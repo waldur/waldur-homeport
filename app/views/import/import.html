@@ -58,6 +58,36 @@
                         <!-- /Select service -->
                     </section>
                 </div>
+                <div class="col full appstore-content" ng-if="ImportResource.selectTenant">
+                    <section class="step-2">
+                        <div class="step-title"><span>Step 3: Select Tenant</span></div>
+                        <!-- Select tenant -->
+                        <div class="white-box no-styles"
+                             ng-show="ImportResource.tenants.length == 0">
+                            <h2 class="app-title">
+                                You don't have any tenant yet.
+                            </h2>
+                            <div class="decision">
+                                <div class="col">
+                                    <a ui-sref="appstore.store" class="button">Create new tenant first.</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="appstore-templates">
+                            <!-- tenant -->
+                            <div ng-repeat="tenant in ImportResource.tenants"
+                                 ng-class="{'state': ImportResource.selectedTenant == tenant}"
+                                 ng-click="ImportResource.setTenant(tenant)"
+                                 class="appstore-template">
+                                <div class="icon cloud"></div>
+                                <div class="description">
+                                    <h3>{{ tenant.name }}</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Select tenant -->
+                    </section>
+                </div>
                 <a class="toggle-link pull-right"
                    ng-show="ImportResource.importedResources.length"
                    ng-click="showImportedResources=!showImportedResources"
