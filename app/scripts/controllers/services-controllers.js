@@ -165,37 +165,7 @@
       secretFields: ['token', 'password'],
       optionTypes: ['string', 'choice', 'boolean', 'url', 'file upload'],
 
-      extraOptions: {
-        OpenStack: {
-          backend_url: {
-            required: true,
-            label: 'API URL',
-            value: 'http://keystone.example.com:5000/v2.0',
-          },
-          username: {
-            value: 'admin',
-            required: true,
-          },
-          password: {
-            required: true,
-          },
-          tenant_name: {
-            label: 'Admin tenant name',
-            value: 'admin',
-            requred: true,
-          },
-          external_network_id: {
-            label: 'Public/gateway network UUID',
-            help_text: 'ID of OpenStack external network that will be connected to tenants',
-          },
-          availability_zone: {
-            placeholder: 'default',
-          },
-          coordinates: {
-            label: 'Datacenter coordinates'
-          }
-        }
-      },
+      extraOptions: {},
 
       optionsOrder: {
         OpenStack: [
@@ -205,7 +175,8 @@
           'tenant_name',
           'external_network_id',
           'availability_zone',
-          'coordinates'
+          'latitude',
+          'longitude',
         ]
       },
 
@@ -221,6 +192,11 @@
         this.model.serviceName = model.name;
         this.getOptions(model.name).then(function(options) {
           this.model.options = options;
+          angular.forEach(options, function(option) {
+            if (option.default_value) {
+              option.value = option.default_value;
+            }
+          })
         }.bind(this));
         this.errors = {};
       },
