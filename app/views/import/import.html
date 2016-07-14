@@ -30,7 +30,7 @@
                         <div class="step-title"><span>Step 2: Select Provider</span></div>
                         <!-- Select service -->
                         <div class="white-box no-styles"
-                             ng-show="ImportResource.services[ImportResource.selectedCategory.name].length == 0">
+                             ng-show="ImportResource.services[ImportResource.selectedCategory.name].length === 0">
                             <h2 class="app-title">
                                 You don't have any provider yet.
                             </h2>
@@ -76,7 +76,7 @@
                         <div class="appstore-templates">
                             <!-- tenant -->
                             <div ng-repeat="tenant in ImportResource.tenants"
-                                 ng-class="{'state': ImportResource.selectedTenant == tenant}"
+                                 ng-class="{'state': ImportResource.selectedTenant === tenant}"
                                  ng-click="ImportResource.setTenant(tenant)"
                                  class="appstore-template">
                                 <div class="icon cloud"></div>

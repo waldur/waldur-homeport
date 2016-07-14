@@ -272,15 +272,15 @@
       },
 
       isPrivateCloudSelected: function() {
-        return this.selectedCategory.name == ENV.appStoreCategories[ENV.PrivateClouds].name;
+        return this.selectedCategory.name === ENV.appStoreCategories[ENV.PrivateClouds].name;
       },
 
       isVirtualMachinesSelected: function() {
-        return this.selectedCategory.name == ENV.appStoreCategories[ENV.VirtualMachines].name;
+        return this.selectedCategory.name === ENV.appStoreCategories[ENV.VirtualMachines].name;
       },
 
       isApplicationSelected: function() {
-        return this.selectedCategory.name == ENV.appStoreCategories[ENV.Applications].name;
+        return this.selectedCategory.name === ENV.appStoreCategories[ENV.Applications].name;
       }
     });
     controllerScope.__proto__ = new Controller();
