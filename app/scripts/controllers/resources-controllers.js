@@ -63,10 +63,7 @@
               getTitle: function(item) {
                 return item.resource_type;
               },
-              getIcon: function(item) {
-                var service_type = item.resource_type.split(".")[0];
-                return "/static/images/appstore/icon-" + service_type.toLowerCase() + ".png";
-              }
+              getIcon: resourceUtils.getIcon
             },
             {
               name: 'Name',

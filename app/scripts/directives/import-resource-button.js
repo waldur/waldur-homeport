@@ -11,7 +11,6 @@
         scope: {
           resource: '=',
           toggle: '=',
-          project: '=',
         }
       };
     }

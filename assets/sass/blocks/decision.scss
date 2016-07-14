@@ -18,6 +18,11 @@
         &.select-project {
             width: 100%;
             text-align: center;
+            font-weight: bold;
         } // &.select-project
+        .button-apply {
+            padding-left: 100px;
+            padding-right: 100px;
+        }
     } // col
 } // decision

@@ -28,7 +28,7 @@
           resource.access_info_text = resource.access_url;
         }
       },
-      setSummary: function(resource) {
+      getSummary: function(resource) {
         var parts = [];
         if (resource.image_name) {
           parts.push(resource.image_name);
@@ -61,6 +61,11 @@
         if (resource.start_time) {
           return moment(resource.start_time).fromNow().replace(' ago', '');
         }
+      },
+      getIcon: function(item) {
+        var type = item.resource_type || item.type;
+        var service_type = type.split(".")[0];
+        return "/static/images/appstore/icon-" + service_type.toLowerCase() + ".png";
       }
     }
   }

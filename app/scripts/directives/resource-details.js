@@ -19,7 +19,7 @@
             resourceUtils.setAccessInfo(resource);
             resource.service_type = resource.resource_type.split('.')[0];
             resource.customer_uuid = currentStateService.getCustomerUuid();
-            resource.summary = resourceUtils.setSummary(resource);
+            resource.summary = resourceUtils.getSummary(resource);
             scope.formatted_resource_type = resourceUtils.formatResourceType(resource);
             scope.state_class = resourceUtils.getStateClass(resource);
             resource.uptime = resourceUtils.getUptime(resource);

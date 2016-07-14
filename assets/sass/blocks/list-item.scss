@@ -215,6 +215,10 @@
                     display: none;
                 } // sm
             }
+            &.icon-header {
+                font-weight: bold;
+                width: 100px;
+            }
             &.icon {
                 width: 100px;
                 padding: 0;

@@ -9,14 +9,24 @@
     <div class="white-box list-box">
         <ul class="object-list">
             <li class="list-item list-header">
-                <div class="additional-cell icon"></div>
+                <div class="additional-cell icon-header">Type</div>
                 <div class="additional-cell resource-name">
                     <a class="list-sort">Name</a>
                 </div>
                 <div class="additional-cell">
                     <a class="list-sort">Details</a>
                 </div>
-                <div class="actions"></div>
+                <div class="additional-cell"
+                     ng-click="toggleSelectAll()">
+                     <a ng-if="!selectAll">
+                         <i class="icon fa-square-o"></i>
+                         Select all
+                     </a>
+                     <a ng-if="selectAll">
+                         <i class="icon fa-check-square-o"></i>
+                         Unselect all
+                     </a>
+                </div>
             </li>
             <li ng-repeat="resource in resources"
                 ng-click="toggleResource(resource)"
@@ -24,8 +34,8 @@
                 ng-class="{'selected': resource.checked}">
                 <div class="additional-cell icon">
                     <span>
-                        <img title="{{ resource.resource_type }}"
-                             ng-src="resource.icon">
+                        <img title="{{ resource.type }}"
+                             ng-src="{{ resource.icon }}">
                     </span>
                 </div>
                 <div class="additional-cell resource-name">
@@ -37,7 +47,6 @@
                 <import-resource-button
                     resource="resource"
                     toggle="toggleResource"
-                    project="currentProject"
                 ></import-resource-button>
             </li>
         </ul>
