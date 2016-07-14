@@ -50,7 +50,7 @@
         }
     } // &.list-header
     &.list {
-        &:hover {
+        &:hover,&.selected {
             background-color: $expandable-hover;
         } // &:hover
     }// &.list
@@ -214,6 +214,10 @@
                 @include bp(sm) {
                     display: none;
                 } // sm
+            }
+            &.icon-header {
+                font-weight: bold;
+                width: 100px;
             }
             &.icon {
                 width: 100px;

@@ -1,0 +1,21 @@
+<div ng-switch="resource.status">
+    <span ng-switch-when="ready"
+          class="button-apply"
+          ng-class="{'pending': !resource.checked}">
+        <span ng-if="!resource.checked">
+            <i class="icon fa-square-o"></i> Select
+        </span>
+        <span ng-if="resource.checked">
+            <i class="icon fa-check-square-o"></i> Selected
+        </span>
+    </span>
+    <span ng-switch-when="progress">
+        <i class="icon fa-spinner fa-spin"></i> In progress
+    </span>
+    <span ng-switch-when="success">
+        <i class="fa fa-check"></i>Imported
+    </span>
+    <span ng-switch-when="failed">
+        <i class="icon fa fa-exclamation-triangle"></i>Failed
+    </span>
+</div>

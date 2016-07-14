@@ -84,51 +84,20 @@
                         </li>
                     </ul>
                 </div>
-                <div class="col full" ng-show="ImportResource.noResources && ImportResource.selectedService.name">
-                    <h4 class="app-title centered">
-                        There are no resources available for import in this provider.
-                    </h4>
-                </div>
-                <div class="col full" ng-show="ImportResource.importableResources.length">
-                    <h3 class="app-title">Resources</h3>
-                    <ul class="object-list">
-                        <li ng-click="ImportResource.toggleResource(resource)"
-                            ng-repeat="resource in ImportResource.importableResources">
-                            <div class="list-item pointer">
-                                <div class="checkbox" ng-switch="resource.status">
-                                    <input type="checkbox" ng-checked="resource.checked" ng-switch-when="ready">
-                                    <input type="checkbox" disabled ng-switch-when="success">
-                                    <input type="checkbox" disabled ng-switch-when="progress">
-                                </div>
-                                <div class="name">
-                                    <h3 class="item-title">
-                                        <a>{{ resource.name }}</a>
-                                    </h3>
-                                </div>
-                                <div class="additional-cell" ng-if="resource.ram" ng-bind="ImportResource.getResourceDetails(resource)"></div>
-                                <div class="additional-cell" ng-if="resource.type">
-                                    {{ resource.type }}
-                                </div>
-                                <div class="additional-cell" ng-switch="resource.status">
-                                    <span class="status online" ng-switch-when="ready">Select to import</span>
-                                    <span class="status" ng-switch-when="progress">In progress</span>
-                                    <span class="status online" ng-switch-when="success">
-                                        Imported to <a ui-sref="projects.details({uuid: ImportResource.currentProject.uuid})">
-                                            {{ ImportResource.currentProject.name }}
-                                        </a>
-                                    </span>
-                                    <span class="status offline" ng-switch-when="failed">Failed</span>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+                <importable-resources
+                    class="col full"
+                    empty="ImportResource.noResources"
+                    project="ImportResource.currentProject"
+                    service="ImportResource.selectedService"
+                    resources="ImportResource.importableResources"
+                    toggle="ImportResource.toggleResource"
+                ></importable-resources>
             </div>
         </div>
 
         <div class="decision" ng-show="ImportResource.importableResources.length">
             <div class="col select-project">
-                <article class="descriptoin-light">
+                <article>
                     Selected resources will be imported into project
                     {{ ImportResource.currentProject.name }}
                 </article>

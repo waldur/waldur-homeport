@@ -76,6 +76,11 @@
     &:hover {
         opacity: 0.8;
     }
+    &.pending {
+        border: 1px solid $button-green;
+        background-color: white;
+        color: $button-green;
+    }
 } // button-apply
 .button-select {
     @include inline-middle;

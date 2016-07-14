@@ -5,6 +5,7 @@
     .controller('ImportResourceController',
       ['baseControllerClass',
       'resourcesService',
+      'resourceUtils',
       'priceEstimationService',
       'ENV',
       'servicesService',
@@ -12,6 +13,7 @@
       'usersService',
       '$state',
       '$filter',
+      '$scope',
       '$q',
       'ncUtils',
       'ncUtilsFlash',
@@ -21,6 +23,7 @@
   function ImportResourceController(
     baseControllerClass,
     resourcesService,
+    resourceUtils,
     priceEstimationService,
     ENV,
     servicesService,
@@ -28,6 +31,7 @@
     usersService,
     $state,
     $filter,
+    $scope,
     $q,
     ncUtils,
     ncUtilsFlash,
@@ -103,10 +107,14 @@
         this.selectedResources = [];
         this.importedResources = [];
       },
-      toggleResource: function(resource){
+      toggleResource: function(resource, checked){
         if (resource.status == 'ready' || resource.status == 'success'){
           controllerScope.selectedResources = [];
-          resource.checked =! resource.checked;
+          if (angular.isDefined(checked)) {
+            resource.checked = checked;
+          } else {
+            resource.checked =! resource.checked;
+          }
           for (var i = 0; i < controllerScope.importableResources.length; i++) {
             if (controllerScope.importableResources[i].checked){
               controllerScope.selectedResources.push(controllerScope.importableResources[i]);
@@ -142,32 +150,22 @@
         if (service.type == 'Amazon') {
           query.resource_type = 'Amazon.Instance';
         }
-        return servicesService.getList(query, service.url).then(function(response) {
-          for (var i = 0; i < response.length; i++) {
-            response[i].status = 'ready';
+        return servicesService.getList(query, service.url).then(function(resources) {
+          for (var i = 0; i < resources.length; i++) {
+            resources[i].status = 'ready';
           }
-          controllerScope.importableResources = response;
-          if (response.length == 0){
+          angular.forEach(resources, function(resource) {
+            resource.icon = resourceUtils.getIcon(resource);
+            resource.details = resourceUtils.getSummary(resource);
+          });
+          controllerScope.importableResources = resources;
+          if (resources.length == 0){
             controllerScope.noResources = true;
           }
         }, function(){
           controllerScope.noResources = true;
           ncUtilsFlash.warning('Unable to get list of resources for service');
         });
-      },
-
-      getResourceDetails: function(resource) {
-        var str = 'CPU: ' + resource.cores;
-        if (resource.ram) {
-          str += ' / RAM: ' + $filter('mb2gb')(resource.ram);
-        }
-        if (resource.disk) {
-          str += ' / HDD: ' + $filter('mb2gb')(resource.disk);
-        }
-        if (resource.flavor_name) {
-          str += ' / Flavor: ' + resource.flavor_name;
-        }
-        return str;
       },
 
       canImport: function() {
