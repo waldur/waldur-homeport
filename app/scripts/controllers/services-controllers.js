@@ -160,6 +160,26 @@
       predefinedOptions: {
         available_for_all: true
       },
+
+      blacklistedOptions: ['name', 'images_regex'],
+      secretFields: ['token', 'password'],
+      optionTypes: ['string', 'choice', 'boolean', 'url', 'file upload'],
+
+      extraOptions: {},
+
+      optionsOrder: {
+        OpenStack: [
+          'backend_url',
+          'username',
+          'password',
+          'tenant_name',
+          'external_network_id',
+          'availability_zone',
+          'latitude',
+          'longitude',
+        ]
+      },
+
       init: function() {
         this.service = joinService;
         this.controllerScope = controllerScope;
@@ -170,14 +190,15 @@
       setModel: function(model) {
         this.model = angular.copy(model);
         this.model.serviceName = model.name;
-        this.hidePredefinedOptions();
+        this.getOptions(model.name).then(function(options) {
+          this.model.options = options;
+          angular.forEach(options, function(option) {
+            if (option.default_value) {
+              option.value = option.default_value;
+            }
+          })
+        }.bind(this));
         this.errors = {};
-      },
-
-      hidePredefinedOptions: function() {
-        this.model.options = this.model.options.filter(function(option) {
-          return !this.predefinedOptions[option.key];
-        }, this);
       },
 
       fillPredefinedOptions: function(data) {
@@ -212,10 +233,50 @@
 
       getServices: function() {
         var vm = this;
-        return servicesService.getServicesOptions().then(function(services) {
+        return servicesService.getServicesList().then(function(services) {
+          angular.forEach(services, function(service, name) {
+            service.name = name;
+          });
           vm.services = services;
           vm.setCategory(vm.categories[0]);
         });
+      },
+
+      getOptions: function(service_type) {
+        return joinService.getOptions(service_type).then(function(options) {
+          var items = [];
+          angular.forEach(options, function(option, key) {
+            if (this.isValidOption(option, key)) {
+              option.key = key;
+              option.secret = this.secretFields.indexOf(key) !== -1;
+              var extra = this.extraOptions[service_type];
+              if (extra) {
+                option = angular.extend(option, extra[key]);
+              }
+              items.push(option);
+            }
+          }.bind(this));
+          return this.orderOptions(service_type, items);
+        }.bind(this));
+      },
+
+      orderOptions: function(service_type, options) {
+        var ordering = this.optionsOrder[service_type];
+        if (!ordering) {
+          return options;
+        }
+        return options.sort(function(x, y) {
+          return ordering.indexOf(x.key) - ordering.indexOf(y.key);
+        });
+      },
+
+      isValidOption: function(option, key) {
+        // Skip non supported option types
+        return (
+          this.optionTypes.indexOf(option.type) !== -1 &&
+          this.blacklistedOptions.indexOf(key) === -1 &&
+          !this.predefinedOptions[key]
+        );
       },
 
       saveInstance: function() {

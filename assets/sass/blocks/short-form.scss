@@ -132,7 +132,18 @@
                   }
                 }
             }
-        } // foo
+            &.has-password {
+                position: relative;
+                .password-icon {
+                    position: absolute;
+                    right: 11px;
+                    top: 7px;
+                    &:hover {
+                        text-decoration: none;
+                    }
+                }
+            }
+        } // col
     } // form-row
 } // short-form
 .help-info {
