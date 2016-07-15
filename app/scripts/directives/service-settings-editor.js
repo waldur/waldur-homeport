@@ -78,7 +78,7 @@
       },
       getFields: function(options) {
         var fields = [];
-        var blacklist = ['name', 'customer', 'settings', 'available_for_all'];
+        var blacklist = ['name', 'customer', 'settings', 'available_for_all', 'scope', 'project'];
         var secretFields = ['password', 'token'];
         for (var name in options) {
           var option = options[name];
