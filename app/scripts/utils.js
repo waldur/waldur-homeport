@@ -125,6 +125,13 @@
           return result;
         }, {});
       },
+      toKeyValue: function (obj) {
+        var parts = [];
+        angular.forEach(obj, function(value, key) {
+          parts.push(key + '=' + encodeURIComponent(value));
+        });
+        return parts.length ? parts.join('&') : '';
+      },
       startsWith: function(string, target) {
         return string.indexOf(target) === 0;
       },
