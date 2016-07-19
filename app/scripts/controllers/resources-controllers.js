@@ -259,6 +259,7 @@
         'servicesService',
         'baseControllerDetailUpdateClass',
         'currentStateService',
+        'ncUtilsFlash',
         ResourceDetailUpdateController
       ]);
 
@@ -275,7 +276,8 @@
     alertsService,
     servicesService,
     baseControllerDetailUpdateClass,
-    currentStateService) {
+    currentStateService,
+    ncUtilsFlash) {
     var controllerScope = this;
     var Controller = baseControllerDetailUpdateClass.extend({
       canEdit: true,
@@ -339,7 +341,12 @@
       reInitResource: function() {
         controllerScope.getModel().then(function(model) {
           controllerScope.model = model;
-        });
+        }, function(error) {
+          if (error.status == 404) {
+            ncUtilsFlash.error('Resource is gone.');
+            this.modelNotFound();
+          }
+        }.bind(this));
       },
 
       afterActivate: function() {
