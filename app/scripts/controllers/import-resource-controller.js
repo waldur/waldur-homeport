@@ -18,6 +18,7 @@
       'ncUtils',
       'ncUtilsFlash',
       '$rootScope',
+      '$stateParams',
       ImportResourceController]);
 
   function ImportResourceController(
@@ -35,7 +36,8 @@
     $q,
     ncUtils,
     ncUtilsFlash,
-    $rootScope
+    $rootScope,
+    $stateParams
     ) {
     var controllerScope = this;
     var Controller = baseControllerClass.extend({
@@ -43,9 +45,8 @@
       importableResources: [],
       importedResources: [],
       noResources: false,
-      servicesList: null,
       selectedCategory: null,
-      services: [],
+      services: {},
 
       init: function() {
         this.controllerScope = controllerScope;
@@ -55,9 +56,6 @@
 
       activate: function() {
         var vm = this;
-        servicesService.getServicesList().then(function(response) {
-          vm.servicesList = response;
-        });
         currentStateService.getCustomer().then(function(customer) {
           vm.customer = customer;
           if (customer.projects.length == 0) {
@@ -97,6 +95,7 @@
             ncUtilsFlash.error("No providers!");
             $state.go('organizations.details', {uuid: vm.customer.uuid, tab: 'providers'});
           }
+          vm.setRoutedService();
         });
       },
       setCategory: function(category) {
@@ -106,6 +105,44 @@
         this.importableResources = [];
         this.selectedResources = [];
         this.importedResources = [];
+      },
+      getCategoryForServiceType: function(service_type) {
+        var categories = ENV.appStoreCategories;
+        for (var j = 0; j < categories.length; j++) {
+          var category = categories[j];
+          if (category.services.indexOf(service_type) !== -1) {
+            return category.name;
+          }
+        }
+      },
+      setCategoryByName: function(name) {
+        for (var j = 0; j < this.categories.length; j++) {
+          var category = this.categories[j];
+          if (category.name === name) {
+            this.setCategory(category);
+            return;
+          }
+        }
+      },
+      setRoutedService: function() {
+        if (!$stateParams.service_type || !$stateParams.service_uuid) {
+          return;
+        }
+        var categoryName = this.getCategoryForServiceType($stateParams.service_type);
+        if (!categoryName) {
+          return;
+        }
+        this.setCategoryByName(categoryName);
+
+        var services = this.services[categoryName];
+        for (var j = 0; j < services.length; j++) {
+          var service = services[j];
+          if (service.type == $stateParams.service_type &&
+              service.uuid == $stateParams.service_uuid) {
+            this.setService(service);
+            return;
+          }
+        }
       },
       toggleResource: function(resource, checked){
         if (resource.status == 'ready' || resource.status == 'success'){
