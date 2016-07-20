@@ -71,11 +71,6 @@
       serviceType: null,
       selectedCategory: {},
       selectedResourceType: null,
-      selectedResourceImageApiEndpoint: null,
-      resourceImagesUrl: null,
-      selectedResourceImagesCount: null,
-      selectedResourceImagesPage: 1,
-      selectedResourceImagesPageSize: 10,
       currentCustomer: {},
       currentProject: {},
       showCompare: ENV.showCompare,
@@ -246,9 +241,6 @@
 
         angular.forEach(formOptions, function(options, name) {
           if (options.url && name != 'service_project_link') {
-            if (name === 'Image') {
-              vm.setResourceImagesApiEndpoint(options.url);
-            }
             var parts = options.url.split("?");
             if (parts.length > 1) {
               var base_url = parts[0];
@@ -269,21 +261,6 @@
           return validChoices;
         });
       },
-      setResourceImagesApiEndpoint: function(resourceUrl) {
-        var resourceUrlParts = resourceUrl.split('/');
-        servicesService.pageSize = this.selectedResourceImagesPageSize;
-        this.resourceImagesUrl = options.url;
-        this.selectedResourceImageApiEndpoint = resourceUrlParts[resourceUrlParts.length - 2];
-        this.countResourceImages();
-      },
-      countResourceImages: function() {
-        var vm = this;
-        var fn = resourcesCountService[this.selectedResourceImageApiEndpoint];
-        var query = {settings_uuid: vm.selectedService.settings_uuid};
-        fn(query).then(function(count) {
-          vm.selectedResourceImagesCount = count;
-        });
-      },
       formatChoices: function(items, options) {
         return items.map(function(item) {
           return {
@@ -297,7 +274,7 @@
         this.fields = [];
         for (var name in formOptions) {
           var options = formOptions[name];
-          if (options.read_only || name == this.UNIQUE_FIELDS.service_project_link) {
+          if (name == this.UNIQUE_FIELDS.service_project_link) {
             continue;
           }
 
@@ -355,6 +332,11 @@
             }
           }
 
+          var item_type = name;
+          if (name === 'size') {
+            item_type = 'flavor';
+          }
+
           this.fields.push({
             name: name,
             label: display_label ? display_label : label,
@@ -366,7 +348,8 @@
             min: min,
             max: max,
             units: units,
-            options: options
+            options: options,
+            item_type: item_type
           });
           display_label = null;
         }
@@ -420,30 +403,6 @@
           field.limit = this.limitChoices;
         }
       },
-      isListLong: function(field) {
-        return field.name === 'image'
-          ? this.selectedResourceImagesCount > this.limitChoices
-            && (this.selectedResourceImagesPageSize * this.selectedResourceImagesPage < this.selectedResourceImagesCount)
-          : field.choices.length > this.limitChoices;
-      },
-      remoteLoadMore: function(fieldName) {
-        return fieldName === 'image';
-      },
-      loadMoreImages: function(field) {
-        field.limit += this.selectedResourceImagesPageSize;
-        var vm = this,
-        query = {
-          settings_uuid: this.selectedService.settings_uuid,
-          project: this.currentProject.uuid, // for security groups
-          page: ++this.selectedResourceImagesPage
-        };
-        servicesService.pageSize = this.selectedResourceImagesPageSize;
-        servicesService.getList(query, this.resourceImagesUrl).then(function(response) {
-          var choices = vm.formatChoices(response, field.options);
-          field.choices = field.choices.concat(choices);
-          vm.attachIconsToImages();
-        });
-      },
       isListExpanded: function(field) {
         return field.limit == field.choices.length;
       },
@@ -489,9 +448,11 @@
         if (ENV.nonChargeableAppStoreOptions.indexOf(name) !== -1) {
           return;
         }
-        defaultPriceListItemsService.getAll({resource_type: vm.serviceType + '.' + vm.selectedResourceType}).then(function(response) {
+        defaultPriceListItemsService.getAll({
+          resource_type: vm.serviceType + '.' + vm.selectedResourceType
+        }).then(function(response) {
           vm.defaultPriceListItems = response;
-          vm.setPriceItem(name, choice);
+          vm.setPriceItem(field.item_type, choice.display_name);
         });
       },
       updateDependentFields: function(name) {
@@ -697,19 +658,15 @@
           }
         }
       },
-      setPriceItem: function(name, choice) {
-        this.deletePriceItem(name);
-        var display_name = choice.display_name;
-        var price = this.findPrice(name, display_name);
-        price = price ? price : 0;
-        display_name = choice.display_name;
-        this.pushPriceItem(name, display_name, price);
+      setPriceItem: function(item_type, key) {
+        this.deletePriceItem(item_type);
+        var price = this.findPrice(item_type, key) || 0;
+        this.pushPriceItem(item_type, key, price);
       },
-      findPrice: function(name, display_name) {
+      findPrice: function(item_type, key) {
         for (var i = 0; i < this.defaultPriceListItems.length; i++) {
           var priceItem = this.defaultPriceListItems[i];
-          var keyExists = display_name.indexOf(priceItem.key) > -1;
-          if (priceItem.item_type === name && keyExists) {
+          if (priceItem.item_type === item_type && key.indexOf(priceItem.key) !== -1) {
             return priceItem.value;
           }
         }
