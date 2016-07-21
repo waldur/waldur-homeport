@@ -251,7 +251,7 @@
             }
             var query = angular.extend(query, context);
 
-            var promise = servicesService.getAll(query, options.url).then(function(response) {
+            var promise = servicesService.getAll(query, base_url).then(function(response) {
               validChoices[name] = vm.formatChoices(response, options);
             });
             promises.push(promise);
@@ -274,7 +274,7 @@
         this.fields = [];
         for (var name in formOptions) {
           var options = formOptions[name];
-          if (name == this.UNIQUE_FIELDS.service_project_link) {
+          if (name === this.UNIQUE_FIELDS.service_project_link) {
             continue;
           }
 
