@@ -137,8 +137,8 @@
         var services = this.services[categoryName];
         for (var j = 0; j < services.length; j++) {
           var service = services[j];
-          if (service.type == $stateParams.service_type &&
-              service.uuid == $stateParams.service_uuid) {
+          if (service.type === $stateParams.service_type &&
+              service.uuid === $stateParams.service_uuid) {
             this.setService(service);
             return;
           }
