@@ -134,7 +134,7 @@
                  prevent-body-scroll>
                 <div class="select-image-popup">
                     <h3>Select {{ field.label }}</h3>
-                    <form ng-show="AppStore.isListLong(field)">
+                    <form>
                         <div class="string-field">
                         <input type="text" placeholder="Type to filter by name"
                                ng-model="field.searchQuery" ng-init="field.searchQuery=''"/>
@@ -145,7 +145,7 @@
                         <div class="white-box list-box">
                             <ul class="object-list">
                                 <li class="list-item list"
-                                    ng-repeat="choice in field.choices | filter: {'display_name': field.searchQuery} | limitTo: field.limit"
+                                    ng-repeat="choice in field.choices | filter: {'display_name': field.searchQuery}"
                                     ng-click="AppStore.doChoice(field, choice)"
                                     ng-class="{'state': AppStore.isChosen(field.name, choice), 'disabled': choice.disabled}">
                                     <div ng-if="::!choice.icon" class="icon {{ ::field.icon }}"></div>
@@ -159,20 +159,6 @@
                                         </div>
                                     </div>
                                 </li>
-
-                                <a ng-init="field.limit = AppStore.limitChoices"
-                                   ng-show="!AppStore.remoteLoadMore(field.name) && AppStore.isListLong(field)"
-                                   ng-click="AppStore.toggleChoicesLimit(field)"
-                                   ng-class="{'active': AppStore.isListExpanded(field)}"
-                                   class="toggle-link pull-right">Show {{ AppStore.isListExpanded(field) && 'less' || 'more' }} choices</a>
-
-                                <div ng-show="AppStore.remoteLoadMore(field.name) && AppStore.isListLong(field)"
-                                     class="appstore-count-block pull-right">
-                                    Loaded {{field.choices.length}} of {{AppStore.selectedResourceImagesCount}} images
-                                </div>
-                                <a ng-show="AppStore.remoteLoadMore(field.name) && AppStore.isListLong(field)"
-                                   ng-click="AppStore.loadMoreImages(field)"
-                                   class="toggle-link remote-load pull-right">Load more choices</a>
                             </ul>
                         </div>
                     </div>
