@@ -55,7 +55,6 @@
     'customer_has_zero_services': 'Organization {customer_name} has no providers.',
     'customer_has_zero_resources': 'Organization {customer_name} does not have any resources.',
     'customer_has_zero_projects': 'Organization {customer_name} does not have any projects.',
-    'service_has_unmanaged_resources': 'Provider {service_name} has unmanaged resources.',
     'service_unavailable': 'Provider {service_name} is not responding.',
     'resource_disappeared_from_backend': 'Resource {resource_name} has disappeared from the {service_name} provider in {project_name} project.',
     'customer_projected_costs_exceeded': 'This month estimated costs for organization {customer_name} exceeded.',
@@ -90,8 +89,10 @@
   function alertFormatter(ALERT_TEMPLATES, ALERT_ICONS, BaseEventFormatter, $state, ncUtils) {
       var cls = BaseEventFormatter.extend({
           format: function(alert) {
-            if (alert.alert_type == 'quota_usage_is_over_threshold') {
+            if (alert.alert_type === 'quota_usage_is_over_threshold') {
               return this.renderQuotaAlert(alert);
+            } else if (alert.alert_type === 'service_has_unmanaged_resources') {
+              return this.renderUnmanagedResourcesAlert(alert);
             } else {
               return this._super(alert);
             }
@@ -111,6 +112,17 @@
             } else {
               var template = 'Customer {customer_name} has exceeded the {quota_threshold}% {quota_name} quota threshold. The quota limit is {quota_limit}, and current usage is {quota_use} ({quota_usage}% of limit). <a href="{plan_url}">Upgrade your plan</a>';
             }
+            return this.renderTemplate(template, context);
+          },
+          renderUnmanagedResourcesAlert: function(alert) {
+            var context = {
+              import_url: $state.href('import.import', {
+                service_type: alert.context.service_type,
+                service_uuid: alert.context.service_uuid
+              }),
+              service_name: alert.context.service_name
+            };
+            var template = 'Provider {service_name} has unmanaged resources. <a href="{import_url}">Import unmanaged resources to current project</a>.';
             return this.renderTemplate(template, context);
           },
           getTemplate: function(event) {

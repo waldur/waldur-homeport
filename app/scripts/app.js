@@ -171,7 +171,7 @@
         })
 
         .state('import.import', {
-          url: '',
+          url: '?service_type&service_uuid',
           views: {
             'appHeader@import' : {
               templateUrl: 'views/partials/app-header.html',
