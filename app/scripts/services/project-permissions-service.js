@@ -10,6 +10,15 @@
       init:function() {
         this._super();
         this.endpoint = '/project-permissions/';
+      },
+
+      deletePermission: function(permission) {
+        return this.$delete(this.getPermissionKey(permission));
+      },
+
+      getPermissionKey: function(url) {
+        var arr = url.split('/');
+        return arr[arr.length-2];
       }
     });
     return new ServiceClass();

@@ -1,14 +1,15 @@
-<div>
+<div class="add-team-member">
     <h3>{{addTitle}} team member</h3>
-    <div class="line-wrapper">
-        <div class="label">Name</div>
-        <div class="input">
+    <section class="short-form full">
+    <div class="form-row">
+        <div class="col label"><label>Name</label></div>
+        <div class="col input-full">
             <span ng-if="!userModel.name && loadingUsers">
                 <i class="fa fa-spinner fa-spin"></i>
             </span>
             <select ng-model="userModel.user_url" ng-if="!userModel.name && !loadingUsers">
                 <option ng-selected="userModel.name == user.full_name"
-                        ng-repeat="user in users | filter:ignoreAddedUsers"
+                        ng-repeat="user in users"
                         value="{{user.url}}">
                     {{user.full_name || user.username}} {{user.uuid === currentUser.uuid ? '(current)' : null }}
                 </option>
@@ -17,9 +18,9 @@
         </div>
         <div class="error" ng-show="errors.user" ng-bind="errors.user"></div>
     </div>
-    <div class="line-wrapper">
-        <div class="label">Organization owner</div>
-        <div class="input">
+    <div class="form-row">
+        <div class="col label"><label>Organization owner</label></div>
+        <div class="col input-full">
             <input id="userRoleCheckbox" type="checkbox" ng-model="userModel.role"
                    ng-true-value="'Owner'" ng-false-value="''">
             <div ng-if="changeRole">
@@ -34,36 +35,19 @@
         </div>
         <div class="error" ng-show="errors.role" ng-bind="errors.role"></div>
     </div>
-    <div class="line-wrapper">
-        <span class="added" ng-repeat="project in userModel.projects"
-              ng-click="projectRemove(project)">
-                    {{ project.name }}
-        </span>
+    <div class="form-row">
+        <div class="col label"><label>Projects</label></div>
     </div>
-    <div class="fixed-h">
-        <div class="line-wrapper">
-            <div class="label">Project</div>
-            <div class="input">
-                <angucomplete-alt
-                        ng-click="inputMode=!inputMode"
-                        placeholder="Add"
-                        pause="100"
-                        type="text"
-                        selected-object="selectedUsersCallback"
-                        local-data="projectsListForAutoComplete"
-                        search-fields="name"
-                        title-field="name"
-                        description-field="email"
-                        minlength="1"
-                        clear-selected="true"
-                        input-changed="userSearchInputChanged"
-                        input-class="add-label {{ inputMode ? 'input': '' }}"></angucomplete-alt>
-            </div>
+    <div class="form-row">
+        <div multiple-select choices="projectChoices"></div>
+    </div>
+    <div class="decision">
+        <div class="col">
+            <a class="button-apply" submit-button="add()">{{addText}}</a>
         </div>
-
+        <div class="col">
+            <a class="button-cancel" ng-click="cancel()">Cancel</a>
+        </div>
     </div>
-    <div class="line-wrapper control-buttons">
-        <a class="button" ng-click="add()">{{addText}}</a>
-        <a class="button-cancel" ng-click="cancel()">Cancel</a>
-    </div>
+    </section>
 </div>
