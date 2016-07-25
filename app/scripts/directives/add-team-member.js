@@ -24,86 +24,64 @@
         $q,
         scope
     ) {
-        scope.add = add;
+        scope.saveUser = saveUser;
         scope.cancel = cancel;
         scope.addText = 'Add';
         scope.addTitle = 'Add';
         scope.userModel = {};
         scope.errors = {};
-        scope.projectChoices = [];
+        scope.projects = [];
         scope.currentUser = null;
         scope.currentCustomer = null;
+        scope.refreshProjectChoices = refreshProjectChoices;
         scope.changeRoleHelpMessage = "You cannot change your own role";
-        var editUserRole;
-
-        currentStateService.getCustomer().then(function(response) {
-            scope.currentCustomer = response;
-        });
 
         if (scope.editUser) {
-            populatePopupModel(scope.editUser);
-        }
-        scope.$watch('editUser', function(user) {
-            if (user) {
-                populatePopupModel(user);
-            }
-        });
-
-        scope.loadingUsers = true;
-        usersService.getAll().then(function(users) {
-            scope.users = users.filter(function(user) {
-                return scope.addedUsers.indexOf(user.uuid) === -1;
-            });
-            scope.loadingUsers = false;
-        });
-
-        getProjectChoices();
-
-        function getProjectChoices() {
-            var existingProjects = getAdminedProjects();
-            projectsService.getList().then(function(projects) {
-                scope.projectChoices = projects.map(function(project) {
-                    var permission = existingProjects[project.uuid];
-                    return {
-                        title: project.name,
-                        selected: !!permission,
-                        permission: existingProjects[project.uuid],
-                        project_url: project.url
-                    }
-                })
-            })
-        }
-
-        function getAdminedProjects() {
-            var projects = scope.userModel.projects || [];
-            return projects.reduce(function(obj, project) {
-                obj[project.uuid] = project.permission;
-                return obj;
-            }, {});
-        }
-
-        function populatePopupModel(user) {
             scope.addText = 'Save';
             scope.addTitle = 'Edit';
-            scope.userModel.name = user.full_name;
-            scope.userModel.user_url = user.url;
-            scope.userModel.role = user.role;
-            editUserRole = user.role;
-            scope.userModel.projects = angular.copy(user.projects);
+            scope.userModel.user = scope.editUser;
+            scope.userModel.role = scope.editUser.role;
+            scope.userModel.projects = scope.editUser.projects.map(parseProject);
             usersService.getCurrentUser().then(function(currentUser) {
-                scope.currentUser = currentUser;
-                scope.changeRole = scope.editUser.uuid === scope.currentUser.uuid;
+                scope.canChangeRole = currentUser.is_staff || scope.editUser.uuid !== currentUser.uuid;
             });
+        } else {
+            scope.canChangeRole = true;
+            usersService.getAll().then(function(users) {
+                scope.users = users.filter(function(user) {
+                    return scope.addedUsers.indexOf(user.uuid) === -1;
+                });
+            });
+        }
+
+        function parseProject(project) {
+            return {
+                uuid: project.uuid,
+                name: project.name,
+                url: project.url
+            };
+        }
+
+        refreshProjectChoices();
+        function refreshProjectChoices(search) {
+            scope.projects = [];
+
+            return projectsService.getList(search && {name: search}).then(
+                function(projects) {
+                    scope.projects = projects.map(parseProject);
+                    scope.emptyProjectList = !search && !projects.length;
+                }
+            );
         }
 
         function cancel() {
             scope.closeThisDialog();
         }
 
-        function add() {
+        function saveUser() {
             scope.errors = {};
 
-            if (!scope.userModel.user_url) {
+            if (!scope.userModel.user) {
                 scope.errors.user = 'This field is required';
                 return $q.reject(scope.errors);
             }
@@ -117,44 +95,66 @@
         }
 
         function saveCustomerPermission() {
-            var userPermission = customerPermissionsService.$create();
-            userPermission.customer = scope.currentCustomer.url;
-            userPermission.user = scope.userModel.user_url;
-            userPermission.role = scope.userModel.role === 'Owner' ? 'owner' : null;
+            return currentStateService.getCustomer().then(function(currentCustomer) {
+                var permission = customerPermissionsService.$create();
+                permission.customer = currentCustomer.url;
+                permission.user = scope.userModel.user.url;
+                permission.role = scope.userModel.role === 'Owner' ? 'owner' : null;
 
-            if (scope.editUser) {
-                if (scope.userModel.role !== editUserRole) {
-                    if (scope.userModel.role !== 'Owner') {
-                        return customerPermissionsService.deletePermission(scope.editUser.permission);
-                    } else {
-                        userPermission.user = scope.editUser.url;
-                        return userPermission.$save();
+                if (scope.editUser) {
+                    if (scope.userModel.role !== scope.editUser.role) {
+                        if (scope.userModel.role !== 'Owner') {
+                            return customerPermissionsService.deletePermission(scope.editUser.permission);
+                        } else {
+                            permission.user = scope.editUser.url;
+                            return permission.$save();
+                        }
                     }
+                } else if (scope.userModel.role === 'Owner') {
+                    return permission.$save();
                 }
-            } else if (scope.userModel.role === 'Owner') {
-                return userPermission.$save();
-            }
+            });
         }
 
         function saveProjectPermissions() {
-            var toRemove = scope.projectChoices.filter(function(choice) {
-                return choice.permission && !choice.selected;
+            if (scope.editUser) {
+                var existingProjects = (scope.editUser.projects || []).reduce(function(obj, project) {
+                    obj[project.uuid] = project.permission;
+                    return obj;
+                }, {});
+            } else {
+                var existingProjects = {};
+            }
+
+            var currentProjects = scope.userModel.projects.reduce(function(obj, project) {
+                obj[project.uuid] = true;
+                return obj;
+            }, {});
+
+            var deletedPermissions = [];
+            angular.forEach(existingProjects, function(permission, project_uuid) {
+                if (!currentProjects[project_uuid]) {
+                    deletedPermissions.push(permission);
+                }
             });
-            var removalPromises = toRemove.map(function(choice) {
-                return projectPermissionsService.deletePermission(choice.permission);
+            var removalPromises = deletedPermissions.map(function(permission) {
+                return projectPermissionsService.deletePermission(permission);
             })
-            var toCreate = scope.projectChoices.filter(function(choice) {
-                return !choice.permission && choice.selected;
+
+            var addedProjects = [];
+            scope.userModel.projects.forEach(function(project) {
+                if (!existingProjects[project.uuid]) {
+                    addedProjects.push(project);
+                }
             });
-            var creationPromises = toCreate.map(function(choice) {
+            var creationPromises = addedProjects.map(function(project) {
                 var instance = projectPermissionsService.$create();
-                var url = scope.userModel.user_url;
-                instance.user = url ? url : scope.editUser.url;
-                instance.project = choice.project_url;
+                instance.user = scope.userModel.user.url || scope.editUser.url;
+                instance.project = project.url;
                 instance.role = 'admin';
                 return instance.$save();
-            })
-            return $q.all(removalPromises.concat(creationPromises));
+            });
+            return $q.all(creationPromises.concat(removalPromises));
         }
     }
 })();

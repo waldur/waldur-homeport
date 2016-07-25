@@ -173,6 +173,32 @@ module.exports = function(grunt) {
                     },
                     {
                         expand: true,
+                        cwd: 'bower_components/select2/',
+                        src: [
+                            'select2.css',
+                            'select2.png',
+                            'select2x2.png',
+                            'select2-spinner.gif'
+                        ],
+                        dest: 'app/static/css/',
+                        filter: 'isFile'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/angular-ui-select/dist/',
+                        src: ['select.js'],
+                        dest: 'app/static/js/angular/',
+                        filter: 'isFile'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/angular-ui-select/dist/',
+                        src: ['select.css'],
+                        dest: 'app/static/css/',
+                        filter: 'isFile'
+                    },
+                    {
+                        expand: true,
                         cwd: 'bower_components/momentjs',
                         src: ['moment.js'],
                         dest: 'app/static/js/angular/',

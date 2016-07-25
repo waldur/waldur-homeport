@@ -1,56 +1,65 @@
 <div class="add-team-member">
-    <h3>{{addTitle}} team member</h3>
-    <section class="short-form full">
-    <div class="form-row">
-        <div class="col label"><label>Name</label></div>
-        <div class="col input-full">
-            <span ng-if="!userModel.name && loadingUsers">
-                <i class="fa fa-spinner fa-spin"></i>
-            </span>
-            <select ng-model="userModel.user_url" ng-if="!userModel.name && !loadingUsers">
-                <option ng-selected="userModel.name == user.full_name"
-                        ng-repeat="user in users"
-                        value="{{user.url}}">
-                    {{user.full_name || user.username}} {{user.uuid === currentUser.uuid ? '(current)' : null }}
-                </option>
-            </select>
-            <span ng-if="userModel.name">{{userModel.name}}</span>
-        </div>
-        <div class="error" ng-show="errors.user" ng-bind="errors.user"></div>
-    </div>
-    <div class="form-row">
-        <div class="col label"><label>Organization owner</label></div>
-        <div class="col input-full">
-            <input id="userRoleCheckbox" type="checkbox" ng-model="userModel.role"
-                   ng-true-value="'Owner'" ng-false-value="''">
-            <div ng-if="changeRole">
-                <span class="icon check"></span>
-                <helpicon help-text="{{changeRoleHelpMessage}}"></helpicon>
-            </div>
+    <h3>{{ addTitle }} team member</h3>
 
-            <label ng-if="!changeRole" for="userRoleCheckbox">
-                <span>no</span>
-                <span>yes</span>
-            </label>
-        </div>
-        <div class="error" ng-show="errors.role" ng-bind="errors.role"></div>
+    <div class="form-row" ng-if="!editUser">
+        <label>User:</label>
+        <ui-select ng-model="userModel.user" theme="select2">
+            <ui-select-match placeholder="Select user...">
+                {{ $select.selected.full_name || $select.selected.username }}
+            </ui-select-match>
+            <ui-select-choices
+                repeat="user in users | filter: $select.search track by user.uuid "
+                refresh-delay="0">
+                {{ user.full_name || user.username }}
+            </ui-select-choices>
+        </ui-select>
     </div>
+
+    <div class="form-row" ng-if="editUser">
+        <label>User:</label>
+        <label ng-bind="editUser.full_name || user.username"></label>
+    </div>
+
     <div class="form-row">
-        <div class="col label">
-            <label ng-if="projectChoices.length">Projects</label>
-            <label ng-if="!projectChoices.length">There are no projects yet.</label>
-        </div>
+        <label for="userRoleCheckbox">
+            <input
+                id="userRoleCheckbox"
+                type="checkbox"
+                ng-disabled="!canChangeRole"
+                ng-model="userModel.role"
+                ng-true-value="'Owner'"
+                ng-false-value="''">
+            </input>
+            Organization owner
+        </label>
     </div>
-    <div class="form-row" ng-if="projectChoices">
-        <div multiple-select choices="projectChoices"></div>
+
+    <div class="form-row" ng-if="!emptyProjectList">
+        <label>Projects:</label>
+        <ui-select ng-model="userModel.projects" theme="select2" multiple>
+            <ui-select-match placeholder="Select projects...">
+                {{ $item.name }}
+            </ui-select-match>
+            <ui-select-choices
+                multiple
+                repeat="project in projects track by project.uuid"
+                refresh="refreshProjectChoices($select.search)"
+                refresh-delay="0">
+                {{ project.name }}
+            </ui-select-choices>
+        </ui-select>
     </div>
+
+    <div class="form-row" ng-if="emptyProjectList">
+        <label>There are no available projects.</label>
+    </div>
+
     <div class="decision">
         <div class="col">
-            <a class="button-apply" submit-button="add()">{{addText}}</a>
+            <a class="button-apply" submit-button="saveUser()">{{ addText }}</a>
         </div>
         <div class="col">
             <a class="button-cancel" ng-click="cancel()">Cancel</a>
         </div>
     </div>
-    </section>
 </div>

@@ -1,19 +1,6 @@
 .add-team-member {
-  text-align: right;
   margin: auto;
   padding: 10px;
-
-  @include bp(xs) {
-    width: 280px;
-    .line-wrapper {
-      .label {
-        width: 40%;
-      }
-      &.control-buttons {
-        margin-top: 30px;
-      }
-    }
-  }
 
   h3 {
     font-size: 24px;
@@ -21,58 +8,27 @@
     text-align: center;
   }
 
-  .short-form .form-row .col {
-    &.label {
-      width: auto;
-    }
-
-    &.input-full {
-      display: flex;
-      justify-content: center;
-    }
+  .form-row {
+    margin-bottom: 10px;
   }
 
-  .multiple-select {
-    margin: 0;
-    text-align: left;
-    font-size: 16px;
+  .ui-select-choices-row:hover {
+    background: #3875d7;
+    color: #fff;
   }
 
-  input[type=checkbox] {
-    display: none;
-  }
-
-  input[type=checkbox] + label {
-    display: inline-block;
-    background: #ccc;
-    position: relative;
-    width: 100px;
-    text-align: center;
-    border-radius: 4px;
-    overflow: hidden;
-    cursor: pointer;
-    span {
-      color: #fff;
-      display: block;
-      float: left;
-      width: 50%;
-      position: relative;
-      z-index: 1;
-    }
-    &:after {
-      position: absolute;
-      content: "";
-      width: 50%;
-      height: 100%;
-      background: #50b848;
-      left: 0;
-      top:0;
-      transition: left .5s;
+  .select2-container {
+    width: 100%;
+    .select2-choice {
+        height: 40px;
+        line-height: 40px;
+        .select2-arrow {
+          width: 28px;
+          padding: 5px;
+        }
     }
   }
-  input[type=checkbox]:checked + label {
-    &:after {
-      left: 50%;
-    }
+  .select2-container-multi .select2-choices {
+    padding-top: 5px;
   }
 }
