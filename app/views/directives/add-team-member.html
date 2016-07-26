@@ -71,7 +71,9 @@
 
     <div class="decision">
         <div class="col">
-            <a class="button-apply" submit-button="saveUser()">{{ addText }}</a>
+            <a class="button-apply"
+               submit-button="saveUser()"
+               ng-class="{'disabled': !editUser && !userModel.user}">{{ addText }}</a>
         </div>
         <div class="col">
             <a class="button-cancel" ng-click="cancel()">Cancel</a>
