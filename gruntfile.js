@@ -40,6 +40,8 @@ module.exports = function(grunt) {
                         'app/static/css/style.css',
                         'app/static/css/angular-flash.css',
                         'app/static/css/angucomplete-alt.css',
+                        'app/static/css/select2.css'
+                        'app/static/css/select.css',
                         'app/static/css/xeditable.css',
                         'app/static/css/angular-block-ui.css',
                         'app/static/css/ngDialog.css',
@@ -654,6 +656,7 @@ module.exports = function(grunt) {
                     'app/static/js/angular/angular-scroll.js',
                     'app/static/js/angular/angular-ui-router.js',
                     'app/static/js/angular/angucomplete-alt.js',
+                    'app/static/js/angular/select.js',
                     'app/static/js/angular/satellizer.js',
                     'app/static/js/angular/angular-translate.js',
                     'app/static/js/angular/angular-translate-storage-cookie.js',
