@@ -11,7 +11,6 @@
       scope: {
         choices: '='
       },
-      replace: true,
       templateUrl: 'views/directives/multiple-select.html'
     };
   }

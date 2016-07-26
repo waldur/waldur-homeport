@@ -504,6 +504,7 @@
         'currentStateService',
         '$q',
         '$rootScope',
+        'ngDialog',
         'ENTITYLISTFIELDTYPES',
         CustomerTeamTabController
       ]);
@@ -517,6 +518,7 @@
       currentStateService,
       $q,
       $rootScope,
+      ngDialog,
       ENTITYLISTFIELDTYPES) {
     var controllerScope = this;
     var TeamController = baseControllerListClass.extend({
@@ -555,13 +557,13 @@
             listKey: 'projects',
             addItemBlock: true,
             viewType: 'projects',
-            title: 'Projects with admin privileges'
+            title: 'Projects with admin privileges',
+            emptyTitle: 'User does not manage any project'
           }
         ];
         this.entityOptions = {
           entityData: {
             createPopupText: 'Add member',
-            showPopup: false,
             noDataText: 'No users yet',
             hideActionButtons: false,
             hideTableHead: false,
@@ -592,10 +594,6 @@
             }
           ]
         };
-        $rootScope.$on('reloadList', function() {
-          vm.service.clearAllCacheForCurrentEndpoint();
-          vm.getList();
-        })
       },
       afterGetList: function() {
         var vm = this;
@@ -619,35 +617,41 @@
       removeInstance: function(user) {
         var vm = this;
         var deferred = $q.defer();
-        var promises = [];
-        user.projects.forEach(function(project) {
-          var promise = projectPermissionsService.$delete(vm.getPermissionKey(project.permission));
-          promises.push(promise);
+        var promises = user.projects.map(function(project) {
+          return projectPermissionsService.deletePermission(project.permission);
         });
         $q.all(promises).then(function() {
           if (user.permission) {
-            customerPermissionsService.$delete(vm.getPermissionKey(user.permission)).then(
-                function() {
-                  deferred.resolve();
-                },
-                function(response) {
-                  deferred.reject(response.data.detail);
-                }
+            customerPermissionsService.deletePermission(user.permission).then(
+              function() {
+                deferred.resolve();
+              },
+              function(response) {
+                deferred.reject(response.data.detail);
+              }
             );
           } else {
             deferred.resolve();
           }
         });
-        this.entityOptions.entityData.showPopup = false;
         return deferred.promise;
       },
-      getPermissionKey: function(url) {
-        var arr = url.split('/');
-        return arr[arr.length-2];
-      },
       openPopup: function(user) {
-        this.entityOptions.entityData.showPopup = true;
-        $rootScope.$broadcast('populatePopupModel', user);
+        var dialogScope = $rootScope.$new();
+        dialogScope.editUser = user;
+        dialogScope.addedUsers = this.list.map(function(users) {
+          return users.uuid;
+        });
+        ngDialog.open({
+          templateUrl: 'views/directives/add-team-member.html',
+          className: 'ngdialog-theme-default',
+          controller: 'AddTeamMemberDialogController',
+          scope: dialogScope,
+        }).closePromise.then(function() {
+          this.service.clearAllCacheForCurrentEndpoint();
+          customerPermissionsService.clearAllCacheForCurrentEndpoint();
+          this.getList();
+        }.bind(this));
       }
     });
 

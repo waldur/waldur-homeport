@@ -12,6 +12,7 @@
       'duScroll',
       'ui.gravatar',
       'angucomplete-alt',
+      'ui.select',
       'angularMoment',
       'ngAnimate',
       'pascalprecht.translate',

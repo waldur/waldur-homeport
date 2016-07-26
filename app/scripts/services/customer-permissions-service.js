@@ -9,6 +9,15 @@
         this.endpoint = '/customer-permissions/';
       },
 
+      deletePermission: function(permission) {
+        return this.$delete(this.getPermissionKey(permission));
+      },
+
+      getPermissionKey: function(url) {
+        var arr = url.split('/');
+        return arr[arr.length-2];
+      },
+
       userHasCustomerRole: function(username, role, customerUUID) {
         var deferred = $q.defer(),
           filter = {username: username};
