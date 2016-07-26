@@ -1,7 +1,7 @@
 <div class="add-team-member">
     <h3>{{ addTitle }} team member</h3>
 
-    <div class="form-row" ng-if="!editUser">
+    <div class="form-row" ng-if="!editUser && users.length">
         <label>User:</label>
         <ui-select ng-model="userModel.user" theme="select2">
             <ui-select-match placeholder="Select user...">
@@ -10,9 +10,24 @@
             <ui-select-choices
                 repeat="user in users | filter: $select.search track by user.uuid "
                 refresh-delay="0">
-                {{ user.full_name || user.username }}
+                <div>{{ ::user.full_name }}</div>
+                <small>
+                    <div ng-if="::user.username">
+                        Username: {{ ::user.username }}
+                    </div>
+                    <div ng-if="::user.email">
+                        E-mail: {{ ::user.email }}
+                    </div>
+                    <div ng-if="::user.civil_number">
+                        Civil number: {{ ::user.civil_number }}
+                    </div>
+                </small>
             </ui-select-choices>
         </ui-select>
+    </div>
+
+    <div class="form-row" ng-if="!editUser && !users.length">
+        <label>There are no available users.</label>
     </div>
 
     <div class="form-row" ng-if="editUser">
