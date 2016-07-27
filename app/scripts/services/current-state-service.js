@@ -87,7 +87,6 @@
     }
 
     function setProject(newProject) {
-      $window.localStorage.removeItem(ENV.currentProjectUuidStorageKey);
       if (newProject) {
         project = $q.when(newProject);
         project.then(function(response) {
