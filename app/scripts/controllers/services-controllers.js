@@ -62,7 +62,7 @@
 
             clickFunction: function(service) {
               var vm = this.controllerScope;
-              var confirmDelete = confirm('Confirm unlinking provider and all related resources?');
+              var confirmDelete = confirm('Are you sure you want to unlink provider and all related resources?');
               if (confirmDelete) {
                 vm.unlinkService(service).then(function() {
                   vm.afterInstanceRemove(service);
