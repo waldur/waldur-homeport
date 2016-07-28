@@ -9,7 +9,9 @@
             ng-click="toggleMenu()">
             <a ng-if="::button.clickFunction" ng-click="button.clickFunction(buttonModel)"
                class="button-simple {{ button.className }}"
-               ng-class="{'disabled': button.isDisabled(buttonModel)}">{{ button.title }}</a>
+               ng-class="{'disabled': button.isDisabled(buttonModel), 'remove': button.destructive}">
+               {{ button.title }}
+            </a>
             <a ng-if="::button.state" ui-sref="{{ button.state }}" class="button-simple"
                ng-class="{'disabled': button.isDisabled(buttonModel)}">{{ button.title }}</a>
         </li>

@@ -5,7 +5,7 @@
         title="{{ action.tooltip(entity) }}">
         <a class="{{ action.className }}" 
            ng-click="action.clickFunction(entity)"
-           ng-class="{'disabled': action.isDisabled(entity)}">
+           ng-class="{'disabled': action.isDisabled(entity), 'remove': action.destructive}">
            <i class="icon" ng-class="action.icon" ng-if="::action.icon"></i>
             {{ action.title }}
         </a>
