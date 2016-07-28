@@ -36,6 +36,7 @@
           {
             title: 'Remove',
             icon: 'fa-trash',
+            destructive: true,
             clickFunction: this.remove.bind(this.controllerScope),
 
             isDisabled: function(service) {
@@ -51,6 +52,31 @@
               }
               if (service.resources_count > 0) {
                return 'Provider has resources. Please remove them first';
+              }
+            }.bind(this.controllerScope),
+          },
+          {
+            title: 'Unlink',
+            icon: 'fa-trash',
+            destructive: true,
+
+            clickFunction: function(service) {
+              var vm = this.controllerScope;
+              var confirmDelete = confirm('Confirm unlinking provider and all related resources?');
+              if (confirmDelete) {
+                vm.unlinkService(service).then(function() {
+                  vm.afterInstanceRemove(service);
+                }, vm.handleActionException.bind(vm));
+              }
+            }.bind(this.controllerScope),
+
+            isDisabled: function(service) {
+              return !this.canUserManageService;
+            }.bind(this.controllerScope),
+
+            tooltip: function(service) {
+              if (!this.canUserManageService) {
+                return 'Only customer owner or staff can unlink provider.';
               }
             }.bind(this.controllerScope),
           }
@@ -111,6 +137,9 @@
       },
       removeInstance: function(model) {
         return this.service.$deleteByUrl(model.url);
+      },
+      unlinkService: function(service) {
+        return this.service.operation('unlink', service.url);
       },
       afterInstanceRemove: function(instance) {
         $rootScope.$broadcast('refreshProjectList');
