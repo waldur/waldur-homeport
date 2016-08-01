@@ -287,6 +287,7 @@
         this.service = resourcesService;
         this.controllerScope = controllerScope;
         this._super();
+        this.detailsState = 'resources.details';
         this.detailsViewOptions = {
           title_plural: 'resources',
           listState: 'projects.details({uuid: controller.model.project_uuid, tab:controller.resourceTab})',

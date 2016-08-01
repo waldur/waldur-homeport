@@ -9,7 +9,8 @@
             ng-change="search()"/>
     </div>
     <div class="tabs-links">
-      <div class="tab-link__item"
+        <a class="tab-link__item"
+           ui-sref="{{ controller.detailsState + '({tab:\'' + tab.key + '\'})' }}"
            visible="{{ tab.key }}"
            ng-click="options.activeTab = tab"
            ng-repeat="tab in options.tabs"
@@ -23,7 +24,7 @@
             ({{ tab.count }})
           </span>
         </div>
-      </div>
+      </a>
     </div>
 </aside>
 <aside class="xs-show">
