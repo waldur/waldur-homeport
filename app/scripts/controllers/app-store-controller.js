@@ -728,7 +728,8 @@
             vm.categoryServices[category.name] = [];
             for (var i = 0; i < vm.currentProject.services.length; i++) {
               var service = vm.currentProject.services[i];
-              service.enabled = vm.isSafeState(service.state);
+              service.disabledReason = vm.getServiceDisabledReason(service);
+              service.enabled = !service.disabledReason;
               if (category.services && (category.services.indexOf(service.type) + 1)) {
                 vm.categoryServices[category.name].push(service);
               }
@@ -745,8 +746,12 @@
         });
         ncUtils.blockElement('store-content', listPromises);
       },
-      isSafeState: function(state) {
-        return state !== 'Erred';
+      getServiceDisabledReason: function(service) {
+        if (service.state === 'Erred') {
+          return 'Provider is in erred state.';
+        } else if (service.isQuotaExceeded) {
+          return 'Provider quota exceeded.'
+        }
       },
       addSupportCategory: function(list) {
         var vm = this;
