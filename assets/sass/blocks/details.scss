@@ -670,10 +670,18 @@ $searchInputHeight: 32px;
 }
 
 .details-table__row {
-  display: flex;
+  display: inline-flex;
+  width: 50%;
+  float: left;
   padding: 10px;
   padding-left: 0px;
   justify-content: space-between;
+
+  @include bp(xs) {
+    display: flex;
+    float: none;
+    width: auto;
+  }
 }
 
 .details-table__key {

@@ -1,6 +1,7 @@
 .list-item-details {
     @include clearfix;
     padding-left: 15px;
+    padding-bottom: 10px;
     border-top: 1px solid rgb(220, 220, 220);
     &.on-mobile {
         display: none;

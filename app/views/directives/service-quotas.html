@@ -5,12 +5,12 @@
   There are no quotas yet.
 </section>
 <section class="expand-service-limits" ng-if="!loading">
-  <div class="details-table__row" ng-repeat="quota in service.quotas">
+  <div class="details-table__row" ng-repeat="quota in service.quotas | orderBy:'name'">
     <div class="details-table__key">
       {{ ::quota.name | quotaName }}:
     </div>
     <div class="details-table__value">
-      {{ quota.limit }} / {{ quota.usage }}
+      {{ quota.usage }} of {{ quota.limit == -1 && '∞' || quota.limit }}
     </div>
   </div>
 </section>
