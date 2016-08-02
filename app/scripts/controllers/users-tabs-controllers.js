@@ -68,8 +68,6 @@
         this.entityOptions = {
           entityData: {
             noDataText: 'No keys yet',
-            createLink: 'keys.create',
-            createLinkText: 'Add SSH Key',
             rowTemplateUrl: 'views/user/key-row.html'
           },
           list: [
@@ -101,6 +99,12 @@
         return this.getUser().then(function(user) {
           vm.user = user;
           vm.service.defaultFilter.user_uuid = user.uuid;
+          if (user.uuid === $stateParams.uuid) {
+            angular.extend(vm.entityOptions, {
+              createLink: 'keys.create',
+              createLinkText: 'Add SSH Key'
+            });
+          }
           return fn(filter);
         });
       },
