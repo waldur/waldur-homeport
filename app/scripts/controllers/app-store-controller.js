@@ -749,8 +749,6 @@
       getServiceDisabledReason: function(service) {
         if (service.state === 'Erred') {
           return 'Provider is in erred state.';
-        } else if (service.isQuotaExceeded) {
-          return 'Provider quota exceeded.'
         }
       },
       addSupportCategory: function(list) {
