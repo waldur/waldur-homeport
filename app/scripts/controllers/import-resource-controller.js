@@ -47,6 +47,7 @@
       noResources: false,
       selectedCategory: null,
       services: {},
+      import_historical_usage: true,
 
       init: function() {
         this.controllerScope = controllerScope;
@@ -275,6 +276,7 @@
 
         instance.project = project_url;
         instance.backend_id = resource.id;
+        instance.back_propagate_price = this.import_historical_usage;
 
         if (resource.type) {
           instance.type = resource.type;
