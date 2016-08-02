@@ -96,7 +96,7 @@
               type: ENTITYLISTFIELDTYPES.linkOrText,
               initField: function(item) {
                 item.metadataRam = item.metadata.ram;
-                item.metadataRam && (item.filteredRam = $filter('mb2gb')(item.metadata.ram));
+                item.metadataRam && (item.filteredRam = $filter('filesize')(item.metadata.ram));
               }
             },
             {
@@ -106,7 +106,7 @@
               type: ENTITYLISTFIELDTYPES.linkOrText,
               initField: function(item) {
                 item.metadataDisk = item.metadata.disk;
-                item.metadataDisk && (item.filteredDisk = $filter('mb2gb')(item.metadata.disk));
+                item.metadataDisk && (item.filteredDisk = $filter('filesize')(item.metadata.disk));
               }
             },
             {

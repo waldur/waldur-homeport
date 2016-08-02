@@ -10,7 +10,8 @@
       {{ ::quota.name | quotaName }}:
     </div>
     <div class="details-table__value">
-      {{ quota.usage }} of {{ quota.limit == -1 && '∞' || quota.limit }}
+      {{ quota.usage|quotaValue:quota.name }} of
+      {{ quota.limit|quotaValue:quota.name }}
     </div>
   </div>
 </section>

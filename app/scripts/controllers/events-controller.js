@@ -600,8 +600,8 @@
         quotas.forEach(function(quota) {
           var project = quota.project;
           project.vcpu = quota.vcpu_usage;
-          project.ram = $filter('mb2gb')(quota.ram_usage);
-          project.storage = $filter('mb2gb')(quota.storage_usage);
+          project.ram = $filter('filesize')(quota.ram_usage);
+          project.storage = $filter('filesize')(quota.storage_usage);
         });
       },
       setCurrentUsageChartData: function() {

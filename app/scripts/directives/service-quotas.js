@@ -42,10 +42,11 @@
     var names = {
       floating_ip_count: 'Floating IP count',
       vcpu: 'vCPU count',
-      ram: 'RAM, MiB',
+      ram: 'RAM',
       vm_count: 'Virtual machines count',
-      storage: 'Storage, MiB',
-      itservice_count: 'IT service count'
+      instances: 'Instances count',
+      volumes: 'Volumes count',
+      snapshots: 'Snapshots count'
     }
     return function(name) {
       if (names[name]) {
@@ -56,4 +57,22 @@
     }
   });
 
+  angular.module('ncsaas').filter('quotaValue', function($filter) {
+    var filters = {
+      ram: 'filesize',
+      storage: 'filesize',
+      backup_storage: 'filesize'
+    }
+    return function(value, name) {
+      if (value == -1) {
+        return '∞';
+      }
+      var filter = filters[name];
+      if (filter) {
+        return $filter(filter)(value);
+      } else {
+        return value;
+      }
+    }
+  });
 })();

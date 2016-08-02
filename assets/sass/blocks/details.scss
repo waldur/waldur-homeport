@@ -671,22 +671,17 @@ $searchInputHeight: 32px;
 }
 
 .details-table__row {
-  display: inline-flex;
-  width: 50%;
-  float: left;
+  display: flex;
   padding: 10px;
   padding-left: 0px;
   justify-content: space-between;
-
-  @include bp(xs) {
-    display: flex;
-    float: none;
-    width: auto;
-  }
 }
 
 .details-table__key {
   width: 150px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
   flex-grow: 0;
   flex-shrink: 0;
   color: $gray-label;

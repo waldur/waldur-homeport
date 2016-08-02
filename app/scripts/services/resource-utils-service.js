@@ -37,16 +37,16 @@
           parts.push(resource.cores + ' vCPU');
         }
         if (resource.ram) {
-          parts.push($filter('mb2gb')(resource.ram) + ' memory');
+          parts.push($filter('filesize')(resource.ram) + ' memory');
         }
         if (resource.disk) {
-          parts.push($filter('mb2gb')(resource.disk) + ' storage');
+          parts.push($filter('filesize')(resource.disk) + ' storage');
         }
         if (resource.bootable) {
           parts.push('bootable');
         }
         if (resource.size) {
-          parts.push($filter('mb2gb')(resource.size));
+          parts.push($filter('filesize')(resource.size));
         }
         var summary = parts.join(' / ');
         return summary;
