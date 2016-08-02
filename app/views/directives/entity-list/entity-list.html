@@ -128,7 +128,7 @@
                               class="icon" ng-class="entity[field.propertyName]">
                         </span>
 
-                        <span ng-switch-when="name" class="item-title">
+                        <h3 ng-switch-when="name" class="item-title">
                             <a ng-if="field.link" stoppropagation
                                ng-click="entity.expandItemOpen = false"
                                ui-sref="{{ field.link }}">{{ entity[field.propertyName] }}</a>
@@ -140,7 +140,7 @@
                                   ng-if="field.description && field.description.condition == entity[field.description.field]">
                                 {{ field.description.text }}
                             </span>
-                        </span>
+                        </h3>
 
                         <a ng-switch-when="link" ng-if="field.link" ui-sref="{{ field.link }}">
                             {{ entity[field.propertyName] }}
