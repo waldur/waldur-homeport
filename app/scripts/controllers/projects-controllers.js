@@ -290,6 +290,7 @@
         this.controllerScope = controllerScope;
         this.setSignalHandler('refreshCounts', this.setCounters.bind(controllerScope));
         this._super();
+        this.detailsState = 'projects.details';
         this.detailsViewOptions = {
           title_plural: 'projects',
           listState: "organizations.details({uuid: controller.model.customer_uuid, tab: 'projects'})",

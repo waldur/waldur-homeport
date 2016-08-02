@@ -1,10 +1,19 @@
 (function() {
-  angular.module('ncsaas').filter('mb2gb', function() {
+  angular.module('ncsaas').filter('filesize', function() {
+    var units = ['MB', 'GB', 'TB', 'PB'];
+
     return function(input) {
-      if (input < 1024) {
-        return input + ' MB';
+      if (isNaN(parseFloat(input)) || ! isFinite(input)) {
+        return '?';
       }
-      return Math.round(input / 1024.0) + ' GB';
+      var unit = 0;
+
+      while (input >= 1024) {
+        input /= 1024;
+        unit++;
+      }
+
+      return input.toFixed(2) + ' ' + units[unit];
     }
   });
 

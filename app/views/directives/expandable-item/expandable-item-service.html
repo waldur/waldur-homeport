@@ -16,6 +16,11 @@
                 <a ng-click="activeTab = 'settings'">Settings</a>
             </li>
             <li ng-class="{
+                'active': activeTab == 'quotas',
+                'inactive': activeTab !== 'quotas'}">
+                <a ng-click="activeTab = 'quotas'">Quotas</a>
+            </li>
+            <li ng-class="{
                 'active': activeTab == 'projects',
                 'inactive': activeTab !== 'projects'}">
                 <a ng-click="activeTab = 'projects'">Projects</a>
@@ -31,6 +36,10 @@
 
     <div ng-if="activeTab == 'settings'">
         <div service-settings-editor service="expandableElement"></div>
+    </div>
+
+    <div ng-if="activeTab == 'quotas'">
+        <div service-quotas service="expandableElement"></div>
     </div>
 
     <div ng-if="activeTab == 'projects'">

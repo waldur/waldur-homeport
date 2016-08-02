@@ -498,6 +498,7 @@ $searchInputHeight: 32px;
   h3.item-title {
     font-weight: normal;
     font-size: 16px;
+    margin: 0;
   }
 
   .title {
@@ -678,6 +679,9 @@ $searchInputHeight: 32px;
 
 .details-table__key {
   width: 150px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
   flex-grow: 0;
   flex-shrink: 0;
   color: $gray-label;

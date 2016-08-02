@@ -36,7 +36,7 @@
       RAM
     </div>
     <div class="details-table__value">
-      {{ entity.metadata.ram | mb2gb}}
+      {{ entity.metadata.ram | filesize}}
     </div>
   </div>
   <div class="details-table__row" ng-if="entity.metadata.disk">
@@ -44,7 +44,7 @@
       Storage
     </div>
     <div class="details-table__value">
-      {{ entity.metadata.disk | mb2gb }}
+      {{ entity.metadata.disk | filesize }}
     </div>
   </div>
 </div>

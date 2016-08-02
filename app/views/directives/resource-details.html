@@ -136,7 +136,7 @@
   <div class="details-table__value">
     <li ng-repeat="volume in resource.volumes">
       <a ui-sref="resources.details({uuid: volume.uuid, resource_type: volume.resource_type})">
-      {{ ::volume.name }} ({{ ::volume.bootable && 'bootable' || '' }} {{ ::volume.size|mb2gb }})
+      {{ ::volume.name }} ({{ ::volume.bootable && 'bootable' || '' }} {{ ::volume.size|filesize }})
       </a>
     </li>
   </div>
