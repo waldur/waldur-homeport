@@ -307,29 +307,11 @@
               hideSearch: true
             },
             {
-              title: 'Backups',
-              key: 'backups',
-              viewName: 'tabBackups',
-              count: 0
-            },
-            {
               title: 'Alerts',
               key: 'alerts',
               viewName: 'tabAlerts',
               countFieldKey: 'alerts'
             },
-            {
-              title: 'Graphs',
-              key: 'graphs',
-              viewName: 'tabGraphs'
-            },
-            {
-              title: 'SLA',
-              key: 'sla',
-              viewName: 'tabSLA',
-              count: -1,
-              hideSearch: true
-            }
           ]
         };
         this.detailsViewOptions.activeTab = this.getActiveTab();
@@ -354,6 +336,34 @@
         this.setCounters();
         this.updateResourceTab();
         this.scheduleRefresh();
+        this.addMonitoringTabs();
+      },
+
+      addMonitoringTabs: function() {
+        if (this.isMonitoringEnabled(this.model)) {
+          this.detailsViewOptions.tabs.push({
+            title: 'Graphs',
+            key: 'graphs',
+            viewName: 'tabGraphs'
+          });
+          this.detailsViewOptions.tabs.push({
+            title: 'SLA',
+            key: 'sla',
+            viewName: 'tabSLA',
+            count: -1,
+            hideSearch: true
+          });
+        }
+      },
+
+      isMonitoringEnabled: function(resource) {
+        var hasZabbixHost = false;
+        angular.forEach(resource.related_resources, function(related_resource) {
+          if (related_resource.resource_type === 'Zabbix.Host') {
+            hasZabbixHost = true;
+          }
+        });
+        return hasZabbixHost;
       },
 
       updateResourceTab: function() {
