@@ -259,6 +259,7 @@
         'servicesService',
         'baseControllerDetailUpdateClass',
         'currentStateService',
+        'zabbixHostsService',
         'ncUtilsFlash',
         ResourceDetailUpdateController
       ]);
@@ -277,6 +278,7 @@
     servicesService,
     baseControllerDetailUpdateClass,
     currentStateService,
+    zabbixHostsService,
     ncUtilsFlash) {
     var controllerScope = this;
     var Controller = baseControllerDetailUpdateClass.extend({
@@ -340,30 +342,40 @@
       },
 
       addMonitoringTabs: function() {
-        if (this.isMonitoringEnabled(this.model)) {
-          this.detailsViewOptions.tabs.push({
+        var vm = this;
+        var host = vm.getZabbixHost(vm.model);
+        if (host) {
+          vm.detailsViewOptions.tabs.push({
             title: 'Graphs',
             key: 'graphs',
             viewName: 'tabGraphs'
           });
-          this.detailsViewOptions.tabs.push({
-            title: 'SLA',
-            key: 'sla',
-            viewName: 'tabSLA',
-            count: -1,
-            hideSearch: true
+          vm.getITServiceForHost(host).then(function(itservice) {
+            if (itservice) {
+              vm.detailsViewOptions.tabs.push({
+                title: 'SLA',
+                key: 'sla',
+                viewName: 'tabSLA',
+                count: -1,
+                hideSearch: true
+              });
+            }
           });
         }
       },
 
-      isMonitoringEnabled: function(resource) {
-        var hasZabbixHost = false;
-        angular.forEach(resource.related_resources, function(related_resource) {
-          if (related_resource.resource_type === 'Zabbix.Host') {
-            hasZabbixHost = true;
-          }
+      getZabbixHost: function(resource) {
+        return resource.related_resources.filter(function(item) {
+          return item.resource_type === 'Zabbix.Host';
+        })[0];
+      },
+
+      getITServiceForHost: function(host) {
+        return zabbixHostsService.$get(host.uuid).then(function(host) {
+          return host.related_resources.filter(function(item) {
+            return item.resource_type === 'Zabbix.ITService';
+          })[0];
         });
-        return hasZabbixHost;
       },
 
       updateResourceTab: function() {
