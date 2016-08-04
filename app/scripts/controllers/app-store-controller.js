@@ -21,6 +21,7 @@
       'keysService',
       '$document',
       '$scope',
+      '$filter',
       AppStoreController]);
 
   function AppStoreController(
@@ -43,7 +44,8 @@
     priceEstimationService,
     keysService,
     $document,
-    $scope) {
+    $scope,
+    $filter) {
     var controllerScope = this;
     var Controller = baseControllerAddClass.extend({
       UNIQUE_FIELDS: {
@@ -252,7 +254,7 @@
             var query = angular.extend(query, context);
 
             var promise = servicesService.getAll(query, base_url).then(function(response) {
-              validChoices[name] = vm.formatChoices(response, options);
+              validChoices[name] = vm.formatChoices(response, options, name);
             });
             promises.push(promise);
           }
@@ -261,14 +263,26 @@
           return validChoices;
         });
       },
-      formatChoices: function(items, options) {
+      formatChoices: function(items, options, name) {
+        var vm = this;
         return items.map(function(item) {
           return {
             value: item[options.value_field] || item.url,
-            display_name: item[options.display_name_field] || item.name,
+            display_name: vm.formatDisplayName(item, options, name),
             item: item
           }
         });
+      },
+      formatDisplayName: function(item, options, name) {
+        if (name == 'image' && this.selectedService.type == 'DigitalOcean') {
+          if (item.is_official) {
+            return item.name + ' distribution';
+          } else {
+            return item.name + ' snapshot created at ' + $filter('dateTime')(item.created_at);
+          }
+        } else {
+          return item[options.display_name_field] || item.name;
+        }
       },
       setFields: function(formOptions, validChoices) {
         this.fields = [];
