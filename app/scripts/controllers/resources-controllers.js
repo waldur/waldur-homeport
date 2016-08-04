@@ -259,6 +259,7 @@
         'servicesService',
         'baseControllerDetailUpdateClass',
         'currentStateService',
+        'zabbixHostsService',
         'ncUtilsFlash',
         ResourceDetailUpdateController
       ]);
@@ -277,6 +278,7 @@
     servicesService,
     baseControllerDetailUpdateClass,
     currentStateService,
+    zabbixHostsService,
     ncUtilsFlash) {
     var controllerScope = this;
     var Controller = baseControllerDetailUpdateClass.extend({
@@ -307,29 +309,11 @@
               hideSearch: true
             },
             {
-              title: 'Backups',
-              key: 'backups',
-              viewName: 'tabBackups',
-              count: 0
-            },
-            {
               title: 'Alerts',
               key: 'alerts',
               viewName: 'tabAlerts',
               countFieldKey: 'alerts'
             },
-            {
-              title: 'Graphs',
-              key: 'graphs',
-              viewName: 'tabGraphs'
-            },
-            {
-              title: 'SLA',
-              key: 'sla',
-              viewName: 'tabSLA',
-              count: -1,
-              hideSearch: true
-            }
           ]
         };
         this.detailsViewOptions.activeTab = this.getActiveTab();
@@ -354,6 +338,44 @@
         this.setCounters();
         this.updateResourceTab();
         this.scheduleRefresh();
+        this.addMonitoringTabs();
+      },
+
+      addMonitoringTabs: function() {
+        var vm = this;
+        var host = vm.getZabbixHost(vm.model);
+        if (host) {
+          vm.detailsViewOptions.tabs.push({
+            title: 'Graphs',
+            key: 'graphs',
+            viewName: 'tabGraphs'
+          });
+          vm.getITServiceForHost(host).then(function(itservice) {
+            if (itservice) {
+              vm.detailsViewOptions.tabs.push({
+                title: 'SLA',
+                key: 'sla',
+                viewName: 'tabSLA',
+                count: -1,
+                hideSearch: true
+              });
+            }
+          });
+        }
+      },
+
+      getZabbixHost: function(resource) {
+        return resource.related_resources.filter(function(item) {
+          return item.resource_type === 'Zabbix.Host';
+        })[0];
+      },
+
+      getITServiceForHost: function(host) {
+        return zabbixHostsService.$get(host.uuid).then(function(host) {
+          return host.related_resources.filter(function(item) {
+            return item.resource_type === 'Zabbix.ITService';
+          })[0];
+        });
       },
 
       updateResourceTab: function() {
