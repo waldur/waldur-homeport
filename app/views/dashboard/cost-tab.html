@@ -13,7 +13,7 @@
                  ng-click="DashboardController.selectRow(row);"
                  ng-class="{'active': row.selected}">
                  <expandable-indicator open="row.selected"></expandable-indicator>
-                <ul class="sort-list">
+                <ul class="sort-list" ng-if="row.total > 0">
                     <li>
                         <span class="month" ng-bind="::row.date"></span>
                     </li>
@@ -28,6 +28,14 @@
                     <li visible="providers">
                         <div class="icon"></div>
                         <a stoppropagation ng-click="row.selected=true; row.activeTab='services'" ng-class="{'active': row.selected && row.activeTab=='services'}">Providers (<span ng-bind="::row.services.length"></span>)</a>
+                    </li>
+                </ul>
+                <ul class="sort-list" ng-if="row.total == 0">
+                    <li>
+                        <span class="month" ng-bind="::row.date"></span>
+                    </li>
+                    <li>
+                        No resources used during this month.
                     </li>
                 </ul>
                 <div class="total-cost">
@@ -63,7 +71,6 @@
                 <div class="table desktop" ng-if="row.services.length && row.activeTab=='services'">
                     <div class="tr th">
                         <div class="td"><span>Provider name</span></div>
-                        <div class="td"><span>Resources</span></div>
                         <div class="td"><span>Cost</span></div>
                     </div>
                     <div class="tr" ng-repeat="service in row.services">
