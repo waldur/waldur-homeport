@@ -271,11 +271,11 @@
 
       processTableData: function(rows) {
         var results = {},
-            scopeArray;
+            scopeArray,
+            currentDate = new Date();;
         for (var i = 0; i < rows.length; i++) {
           var row = rows[i];
           var date = moment(row.month, 'MM').format('MMMM') + ' ' + row.year;
-          var currentDate = new Date();
           if (!results.hasOwnProperty(date)) {
             results[date] = {
               total: 0,
