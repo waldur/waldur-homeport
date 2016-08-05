@@ -47,6 +47,13 @@
         var currentCustomerUuid = currentStateService.getCustomerUuid();
         var vm = this;
 
+        this.actionButtonsListItems = [
+          {
+            title: 'Resize',
+            clickFunction: this.resize.bind(this)
+          }
+        ];
+
         this.entityOptions = {
           entityData: {
             noDataText: 'You have no resources yet.',
@@ -54,7 +61,7 @@
             checkQuotas: 'resource',
             timer: ENV.resourcesTimerInterval,
             rowTemplateUrl: 'views/resource/row.html',
-            actionButtonsType: 'resource'
+            // actionButtonsType: 'resource'
           },
           list: [
             {
@@ -121,6 +128,16 @@
               }
             }
           }
+        });
+      },
+      resize: function(resource) {
+        var scope = $rootScope.$new();
+        scope.droplet = resource;
+        ngDialog.open({
+          templateUrl: 'views/resource/droplet-resize.html',
+          className: 'ngdialog-theme-default',
+          controller: 'ResizeDropletController',
+          scope: scope
         });
       },
       rowFields: [
@@ -240,6 +257,41 @@
     });
 
     return ControllerListClass;
+  }
+})();
+
+(function() {
+  angular.module('ncsaas')
+      .controller('ResizeDropletController', [
+        '$scope',
+        'resourcesService',
+        'actionUtilsService',
+        ResizeDropletController
+      ]);
+
+  function ResizeDropletController($scope, resourcesService, actionUtilsService) {
+    angular.extend($scope, {
+      init: function() {
+        actionUtilsService.loadActions($scope.droplet).then(function(actions) {
+          $scope.action = actions.resize;
+          if (!$scope.action.enabled) {
+            return;
+          }
+          actionUtilsService.getSelectList($scope.action.fields).then(function() {
+            $scope.sizes = action.fields.filter(function(field) {
+              return field.name === 'image';
+            })[0];
+          });
+        });
+        resourcesService.$get(null, null, $scope.droplet.url, {
+          field: ['cores', 'ram', 'disk']
+        }).then(function(droplet) {
+          angular.extend($scope.droplet, droplet);
+        });
+        $scope.droplet.resizeType = 'flexible';
+      }
+    });
+    $scope.init();
   }
 })();
 

@@ -26,6 +26,35 @@
       });
     };
 
+    this.getSelectList = function(fields) {
+      var vm = this;
+      var promises = [];
+      angular.forEach(fields, function(field) {
+        if (field.url) {
+          promises.push(vm.loadChoices(field));
+        }
+      });
+      return $q.all(promises);
+    };
+
+    this.loadChoices = function(field) {
+      var url = field.url, query_params = {};
+      var parts = field.url.split("?");
+      if (parts.length == 2) {
+        url = parts[0];
+        query_params = ncUtils.parseQueryString(parts[1]);
+      }
+
+      return resourcesService.getList(query_params, url).then(function(response) {
+        field.list = response.map(function(item) {
+          return {
+            value: item[field.value_field],
+            display_name: item[field.display_name_field]
+          }
+        });
+      });
+    };
+
     this.buttonClick = function(controller, model, name, action) {
       if (action.type === 'button') {
         if (!action.destructive || this.confirmAction(model, name)) {
