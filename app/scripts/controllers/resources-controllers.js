@@ -140,7 +140,6 @@
           controller: 'ResizeDropletController',
           scope: scope
         }).closePromise.then(function(action) {
-          actionUtilsService.handleActionSuccess(action);
           vm.reInitResource(resource);
         });
       },
@@ -328,9 +327,9 @@
         form.size = $scope.options.newSize.url;
         form.disk = $scope.options.resizeType === 'permanent';
         return form.$save().then(function(response) {
+          actionUtilsService.handleActionSuccess($scope.action);
           $scope.errors = {};
           $scope.closeThisDialog();
-          return $scope.action;
         }, function(response) {
           $scope.errors = response.data;
         });
