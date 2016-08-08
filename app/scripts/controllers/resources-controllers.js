@@ -271,24 +271,48 @@
 
   function ResizeDropletController($scope, resourcesService, actionUtilsService) {
     angular.extend($scope, {
+      loading: true,
       init: function() {
-        actionUtilsService.loadActions($scope.droplet).then(function(actions) {
-          $scope.action = actions.resize;
-          if (!$scope.action.enabled) {
-            return;
-          }
-          actionUtilsService.getSelectList($scope.action.fields).then(function() {
-            $scope.sizes = action.fields.filter(function(field) {
-              return field.name === 'image';
-            })[0];
+        $scope.loadDroplet().then(function() {
+          return $scope.loadValidSizes().then(function() {
+            $scope.loading = false;
           });
         });
-        resourcesService.$get(null, null, $scope.droplet.url, {
+      },
+      loadDroplet: function() {
+        $scope.droplet.resizeType = 'flexible';
+
+        return resourcesService.$get(null, null, $scope.droplet.url, {
           field: ['cores', 'ram', 'disk']
         }).then(function(droplet) {
           angular.extend($scope.droplet, droplet);
         });
-        $scope.droplet.resizeType = 'flexible';
+      },
+      loadValidSizes: function() {
+        return actionUtilsService.loadActions($scope.droplet).then(function(actions) {
+          $scope.action = actions.resize;
+          if (!$scope.action.enabled) {
+            return;
+          }
+          return actionUtilsService.loadRawChoices($scope.action.fields.size).then(function(sizes) {
+            sizes.forEach(function(size) {
+              size.enabled = $scope.isValidSize(size);
+            });
+            sizes.sort(function(size1, size2) {
+              return size1.enabled < size2.enabled;
+            });
+            $scope.sizes = sizes;
+          });
+        });
+      },
+      isValidSize: function(size) {
+        // 1. New size should not be the same as the current size
+        // 2. New size disk should not be lower then current size disk
+        var droplet = $scope.droplet;
+        return size.disk !== droplet.disk &&
+               size.cores !== droplet.cores &&
+               size.ram !== droplet.ram &&
+               size.disk >= droplet.disk;
       }
     });
     $scope.init();

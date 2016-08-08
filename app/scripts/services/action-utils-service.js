@@ -38,14 +38,7 @@
     };
 
     this.loadChoices = function(field) {
-      var url = field.url, query_params = {};
-      var parts = field.url.split("?");
-      if (parts.length == 2) {
-        url = parts[0];
-        query_params = ncUtils.parseQueryString(parts[1]);
-      }
-
-      return resourcesService.getList(query_params, url).then(function(response) {
+      return this.loadRawChoices(field).then(function(response) {
         field.list = response.map(function(item) {
           return {
             value: item[field.value_field],
@@ -53,6 +46,16 @@
           }
         });
       });
+    };
+
+    this.loadRawChoices = function(field) {
+      var url = field.url, query_params = {};
+      var parts = field.url.split("?");
+      if (parts.length == 2) {
+        url = parts[0];
+        query_params = ncUtils.parseQueryString(parts[1]);
+      }
+      return resourcesService.getList(query_params, url);
     };
 
     this.buttonClick = function(controller, model, name, action) {

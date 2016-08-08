@@ -1,71 +1,78 @@
 <div class="add-team-member">
     <h3>Resize droplet</h3>
 
-    <div class="form-row" ng-if="!action.enabled">
-        <label>{{ action.reason }}</label>
+    <div class="form-row" ng-if="loading">
+        <i class="icon fa-spinner fa-spin"></i> Loading data, please wait.
     </div>
 
-    <div class="form-row">
-        <label>Current size:</label>
-        <div>
-            {{ droplet.cores }} vCPU,
-            {{ droplet.ram | filesize }} memory,
-            {{ droplet.disk | filesize }} storage
+    <div ng-if="!loading">
+        <div class="form-row" ng-if="!action.enabled">
+            <label>{{ action.reason }}</label>
         </div>
-    </div>
 
-    <div class="form-row" ng-class="{'disabled': !action.enabled}">
-        <label>New size:</label>
-        <ui-select ng-model="droplet.newSize" theme="select2" search-enabled="false">
-            <ui-select-match placeholder="Select size...">
-                {{ $select.selected.cores }} vCPU,
-                {{ $select.selected.ram | filesize }} memory,
-                {{ $select.selected.disk | filesize }} storage
-            </ui-select-match>
-            <ui-select-choices repeat="size in sizes track by size.uuid">
-                {{ size.cores }} vCPU,
-                {{ size.ram | filesize }} memory,
-                {{ size.disk | filesize }} storage
-            </ui-select-choices>
-        </ui-select>
-    </div>
-
-    <div class="form-row" ng-class="{'disabled': !action.enabled}">
-        <label for="flexible" style="display: block">
-            <input
-                id="flexible"
-                type="radio"
-                ng-model="droplet.resizeType"
-                name="resizeType"
-                value="flexible">
-            </input>
-            <b>Flexible</b>
-            <div>Increase a droplet's RAM and CPU only (not the storage).</div>
-        </label>
-    </div>
-
-    <div class="form-row" ng-class="{'disabled': !action.enabled}">
-        <label for="permanent" style="display: block">
-            <input
-                id="permanent"
-                type="radio"
-                ng-model="droplet.resizeType"
-                name="resizeType"
-                value="permanent">
-            </input>
-            <b>Permanent</b>
-            <div>Increase a droplet's RAM, CPU, and SSD disk.</div>
-        </label>
-    </div>
-
-    <div class="decision">
-        <div class="col">
-            <a class="button-apply"
-               ng-class="{'disabled': !action.enabled}"
-               submit-button="submit()">Submit</a>
+        <div class="form-row">
+            <label>Current size:</label>
+            <div>
+                {{ droplet.cores }} vCPU,
+                {{ droplet.ram | filesize }} memory,
+                {{ droplet.disk | filesize }} storage
+            </div>
         </div>
-        <div class="col">
-            <a class="button-cancel" ng-click="closeThisDialog()">Cancel</a>
+
+        <div class="form-row" ng-class="{'disabled': !action.enabled}">
+            <label>New size:</label>
+            <ui-select ng-model="droplet.newSize" theme="select2" search-enabled="false">
+                <ui-select-match placeholder="Select size...">
+                    {{ $select.selected.cores }} vCPU,
+                    {{ $select.selected.ram | filesize }} memory,
+                    {{ $select.selected.disk | filesize }} storage
+                </ui-select-match>
+                <ui-select-choices repeat="size in sizes track by size.uuid"
+                                   ui-disable-choice="!size.enabled">
+                    {{ size.cores }} vCPU,
+                    {{ size.ram | filesize }} memory,
+                    {{ size.disk | filesize }} storage
+                </ui-select-choices>
+            </ui-select>
+        </div>
+
+        <div class="form-row" ng-class="{'disabled': !action.enabled}">
+            <label for="flexible" style="display: block">
+                <input
+                    id="flexible"
+                    type="radio"
+                    ng-model="droplet.resizeType"
+                    name="resizeType"
+                    value="flexible">
+                </input>
+                <b>Flexible</b>
+                <div>Increase a droplet's RAM and CPU only (not the storage).</div>
+            </label>
+        </div>
+
+        <div class="form-row" ng-class="{'disabled': !action.enabled}">
+            <label for="permanent" style="display: block">
+                <input
+                    id="permanent"
+                    type="radio"
+                    ng-model="droplet.resizeType"
+                    name="resizeType"
+                    value="permanent">
+                </input>
+                <b>Permanent</b>
+                <div>Increase a droplet's RAM, CPU and SSD disk.</div>
+            </label>
+        </div>
+
+        <div class="decision">
+            <div class="col">
+                <a class="button-apply"
+                   ng-class="{'disabled': !action.enabled}"
+                   submit-button="submit()">Submit</a>
+            </div>
+            <div class="col">
+                <a class="button-cancel" ng-click="closeThisDialog()">Cancel</a>
+            </div>
         </div>
     </div>
 </div>
