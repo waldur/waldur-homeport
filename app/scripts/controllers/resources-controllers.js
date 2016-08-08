@@ -131,6 +131,7 @@
         });
       },
       resize: function(resource) {
+        var vm = this;
         var scope = $rootScope.$new();
         scope.droplet = resource;
         ngDialog.open({
@@ -138,6 +139,9 @@
           className: 'ngdialog-theme-default',
           controller: 'ResizeDropletController',
           scope: scope
+        }).closePromise.then(function(action) {
+          actionUtilsService.handleActionSuccess(action);
+          vm.reInitResource(resource);
         });
       },
       rowFields: [
@@ -272,16 +276,21 @@
   function ResizeDropletController($scope, resourcesService, actionUtilsService) {
     angular.extend($scope, {
       loading: true,
+      options: {
+        resizeType: 'flexible',
+        newSize: null,
+      },
       init: function() {
         $scope.loadDroplet().then(function() {
           return $scope.loadValidSizes().then(function() {
             $scope.loading = false;
           });
+        }).catch(function(error) {
+          $scope.loading = false;
+          $scope.error = error.message;
         });
       },
       loadDroplet: function() {
-        $scope.droplet.resizeType = 'flexible';
-
         return resourcesService.$get(null, null, $scope.droplet.url, {
           field: ['cores', 'ram', 'disk']
         }).then(function(droplet) {
@@ -313,6 +322,18 @@
                size.cores !== droplet.cores &&
                size.ram !== droplet.ram &&
                size.disk >= droplet.disk;
+      },
+      submitForm: function() {
+        var form = resourcesService.$create($scope.action.url);
+        form.size = $scope.options.newSize.url;
+        form.disk = $scope.options.resizeType === 'permanent';
+        return form.$save().then(function(response) {
+          $scope.errors = {};
+          $scope.closeThisDialog();
+          return $scope.action;
+        }, function(response) {
+          $scope.errors = response.data;
+        });
       }
     });
     $scope.init();

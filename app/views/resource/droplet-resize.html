@@ -5,11 +5,15 @@
         <i class="icon fa-spinner fa-spin"></i> Loading data, please wait.
     </div>
 
-    <div ng-if="!loading">
-        <div class="form-row" ng-if="!action.enabled">
-            <label>{{ action.reason }}</label>
-        </div>
+    <div class="form-row" ng-if="error">
+        Error: {{ error }}
+    </div>
 
+    <div class="form-row" ng-if="!action.enabled">
+        <label>{{ action.reason }}</label>
+    </div>
+
+    <div ng-if="!loading && action.enabled">
         <div class="form-row">
             <label>Current size:</label>
             <div>
@@ -19,9 +23,9 @@
             </div>
         </div>
 
-        <div class="form-row" ng-class="{'disabled': !action.enabled}">
+        <div class="form-row">
             <label>New size:</label>
-            <ui-select ng-model="droplet.newSize" theme="select2" search-enabled="false">
+            <ui-select ng-model="options.newSize" theme="select2" search-enabled="false">
                 <ui-select-match placeholder="Select size...">
                     {{ $select.selected.cores }} vCPU,
                     {{ $select.selected.ram | filesize }} memory,
@@ -36,12 +40,12 @@
             </ui-select>
         </div>
 
-        <div class="form-row" ng-class="{'disabled': !action.enabled}">
+        <div class="form-row">
             <label for="flexible" style="display: block">
                 <input
                     id="flexible"
                     type="radio"
-                    ng-model="droplet.resizeType"
+                    ng-model="options.resizeType"
                     name="resizeType"
                     value="flexible">
                 </input>
@@ -50,12 +54,12 @@
             </label>
         </div>
 
-        <div class="form-row" ng-class="{'disabled': !action.enabled}">
+        <div class="form-row">
             <label for="permanent" style="display: block">
                 <input
                     id="permanent"
                     type="radio"
-                    ng-model="droplet.resizeType"
+                    ng-model="options.resizeType"
                     name="resizeType"
                     value="permanent">
                 </input>
@@ -63,16 +67,15 @@
                 <div>Increase a droplet's RAM, CPU and SSD disk.</div>
             </label>
         </div>
-
-        <div class="decision">
-            <div class="col">
-                <a class="button-apply"
-                   ng-class="{'disabled': !action.enabled}"
-                   submit-button="submit()">Submit</a>
-            </div>
-            <div class="col">
-                <a class="button-cancel" ng-click="closeThisDialog()">Cancel</a>
-            </div>
+    </div>
+    <div class="decision">
+        <div class="col">
+            <a class="button-apply"
+               ng-class="{'disabled': !action.enabled || !options.newSize}"
+               submit-button="submitForm()">Submit</a>
+        </div>
+        <div class="col">
+            <a class="button-cancel" ng-click="closeThisDialog()">Cancel</a>
         </div>
     </div>
 </div>
