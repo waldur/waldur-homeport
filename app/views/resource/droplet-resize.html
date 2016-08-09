@@ -17,9 +17,7 @@
         <div class="form-row">
             <label>Current size:</label>
             <div>
-                {{ droplet.cores }} vCPU,
-                {{ droplet.ram | filesize }} memory,
-                {{ droplet.disk | filesize }} storage
+                {{ formatSize(resource) }}
             </div>
         </div>
 
@@ -27,15 +25,11 @@
             <label>New size:</label>
             <ui-select ng-model="options.newSize" theme="select2" search-enabled="false">
                 <ui-select-match placeholder="Select size...">
-                    {{ $select.selected.cores }} vCPU,
-                    {{ $select.selected.ram | filesize }} memory,
-                    {{ $select.selected.disk | filesize }} storage
+                    {{ formatSize($select.selected) }}
                 </ui-select-match>
                 <ui-select-choices repeat="size in sizes track by size.uuid"
                                    ui-disable-choice="!size.enabled">
-                    {{ size.cores }} vCPU,
-                    {{ size.ram | filesize }} memory,
-                    {{ size.disk | filesize }} storage
+                    {{ formatSize(size) }}
                 </ui-select-choices>
             </ui-select>
         </div>

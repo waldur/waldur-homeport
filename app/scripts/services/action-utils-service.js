@@ -64,7 +64,7 @@
           return this.applyAction(controller, model, name, action);
         }
       } else if (action.type === 'form') {
-        this.openActionDialog(controller, model, action);
+        this.openActionDialog(controller, model, name, action);
         return $q.when(true);
       }
       return $q.reject();
@@ -105,15 +105,24 @@
       ncUtilsFlash.success(message);
     };
 
-    this.openActionDialog = function(controller, resource, action) {
+    this.openActionDialog = function(controller, resource, name, action) {
+      var templateUrl = 'views/directives/action-dialog.html';
+      var controllerName = 'ActionDialogController';
+
+      if (resource.resource_type === 'DigitalOcean.Droplet' && name === 'resize') {
+        controllerName = 'ResizeDropletController';
+        templateUrl = 'views/resource/droplet-resize.html';
+      }
+
       var dialogScope = $rootScope.$new();
       dialogScope.action = action;
       dialogScope.controller = controller;
       dialogScope.resource = resource;
       ngDialog.open({
-        templateUrl: 'views/directives/action-dialog.html',
-        className: 'ngdialog-theme-default',
-        scope: dialogScope
+        templateUrl: templateUrl,
+        controller: controllerName,
+        scope: dialogScope,
+        className: 'ngdialog-theme-default'
       });
     };
   }

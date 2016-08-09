@@ -47,13 +47,6 @@
         var currentCustomerUuid = currentStateService.getCustomerUuid();
         var vm = this;
 
-        this.actionButtonsListItems = [
-          {
-            title: 'Resize',
-            clickFunction: this.resize.bind(this)
-          }
-        ];
-
         this.entityOptions = {
           entityData: {
             noDataText: 'You have no resources yet.',
@@ -61,7 +54,7 @@
             checkQuotas: 'resource',
             timer: ENV.resourcesTimerInterval,
             rowTemplateUrl: 'views/resource/row.html',
-            // actionButtonsType: 'resource'
+            actionButtonsType: 'resource'
           },
           list: [
             {
@@ -128,19 +121,6 @@
               }
             }
           }
-        });
-      },
-      resize: function(resource) {
-        var vm = this;
-        var scope = $rootScope.$new();
-        scope.droplet = resource;
-        ngDialog.open({
-          templateUrl: 'views/resource/droplet-resize.html',
-          className: 'ngdialog-theme-default',
-          controller: 'ResizeDropletController',
-          scope: scope
-        }).closePromise.then(function(action) {
-          vm.reInitResource(resource);
         });
       },
       rowFields: [
@@ -268,11 +248,12 @@
       .controller('ResizeDropletController', [
         '$scope',
         'resourcesService',
+        'resourceUtils',
         'actionUtilsService',
         ResizeDropletController
       ]);
 
-  function ResizeDropletController($scope, resourcesService, actionUtilsService) {
+  function ResizeDropletController($scope, resourcesService, resourceUtils, actionUtilsService) {
     angular.extend($scope, {
       loading: true,
       options: {
@@ -289,15 +270,16 @@
           $scope.error = error.message;
         });
       },
+      formatSize: resourceUtils.formatFlavor,
       loadDroplet: function() {
-        return resourcesService.$get(null, null, $scope.droplet.url, {
+        return resourcesService.$get(null, null, $scope.resource.url, {
           field: ['cores', 'ram', 'disk']
         }).then(function(droplet) {
-          angular.extend($scope.droplet, droplet);
+          angular.extend($scope.resource, droplet);
         });
       },
       loadValidSizes: function() {
-        return actionUtilsService.loadActions($scope.droplet).then(function(actions) {
+        return actionUtilsService.loadActions($scope.resource).then(function(actions) {
           $scope.action = actions.resize;
           if (!$scope.action.enabled) {
             return;
@@ -316,7 +298,7 @@
       isValidSize: function(size) {
         // 1. New size should not be the same as the current size
         // 2. New size disk should not be lower then current size disk
-        var droplet = $scope.droplet;
+        var droplet = $scope.resource;
         return size.disk !== droplet.disk &&
                size.cores !== droplet.cores &&
                size.ram !== droplet.ram &&
@@ -330,6 +312,7 @@
           actionUtilsService.handleActionSuccess($scope.action);
           $scope.errors = {};
           $scope.closeThisDialog();
+          $scope.controller.reInitResource($scope.resource);
         }, function(response) {
           $scope.errors = response.data;
         });
