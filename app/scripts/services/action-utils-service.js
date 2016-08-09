@@ -51,7 +51,7 @@
     this.loadRawChoices = function(field) {
       var url = field.url, query_params = {};
       var parts = field.url.split("?");
-      if (parts.length == 2) {
+      if (parts.length === 2) {
         url = parts[0];
         query_params = ncUtils.parseQueryString(parts[1]);
       }
