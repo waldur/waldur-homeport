@@ -1,4 +1,5 @@
 <div class="add-team-member">
+<form name="CustomerForm">
     <h3>{{ dialogTitle }}</h3>
 
     <div class="form-row">
@@ -8,6 +9,11 @@
                 name="name"
                 required ng-model="instance.name"
                 class="form-control">
+        <div class="error arrow-up" ng-if="CustomerForm.name.$dirty && CustomerForm.name.$invalid">
+            <ul class="error-list">
+                <li>This field is required.</li>
+            </ul>
+        </div>
     </div>
 
     <div class="form-row">
@@ -52,15 +58,22 @@
                ng-model="instance.vat_code"
                class="form-control">
         </div>
+        <div class="error arrow-up" ng-show="errors.vat_code">
+            <ul class="error-list">
+                <li ng-repeat="error in errors.vat_code">{{ error }}</li>
+            </ul>
+        </div>
     </div>
 
     <div class="decision">
         <div class="col">
             <a class="button-apply"
-               submit-button="saveCustomer()">Save</a>
+               submit-button="saveCustomer()"
+               ng-class="{'disabled': CustomerForm.$invalid}">Save</a>
         </div>
         <div class="col">
             <a class="button-cancel" ng-click="closeThisDialog()">Cancel</a>
         </div>
     </div>
+</form>
 </div>

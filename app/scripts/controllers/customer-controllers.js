@@ -437,6 +437,7 @@
       saveCustomer: function() {
         var vm = this;
         return vm.getPromise().then(function(customer) {
+          vm.errors = {};
           customersService.clearAllCacheForCurrentEndpoint();
           $rootScope.$broadcast('refreshCounts');
 
@@ -457,6 +458,8 @@
           }
 
           vm.closeThisDialog(customer);
+        }, function(response) {
+          vm.errors = response.data;
         });
       },
       getPromise: function() {
