@@ -6,7 +6,7 @@
          <input type="text"
                 id="customerName"
                 name="name"
-                required ng-model="customer.name"
+                required ng-model="instance.name"
                 class="form-control">
     </div>
 
@@ -14,13 +14,13 @@
         <label for="customerCode">Organization registration code:</label>
         <input type="text"
                id="customerCode"
-               ng-model="customer.registration_code"
+               ng-model="instance.registration_code"
                class="form-control">
     </div>
 
     <div class="form-row">
         <label for="customerCountry">Country:</label>
-        <ui-select ng-model="customer.country" theme="select2">
+        <ui-select ng-model="instance.country" theme="select2">
             <ui-select-match placeholder="Select country...">
             <span class="f16"><span class="flag {{ $select.selected.value | lowercase }}"></span></span>
                 {{ $select.selected.display_name }}
@@ -38,7 +38,7 @@
         <label for="customerAddress">Address:</label>
         <input type="text"
                id="customerAddress"
-               ng-model="customer.contact_details"
+               ng-model="instance.contact_details"
                class="form-control">
     </div>
 
@@ -49,7 +49,7 @@
         </label>
         <input type="text"
                id="vat_code"
-               ng-model="customer.vat_code"
+               ng-model="instance.vat_code"
                class="form-control">
         </div>
     </div>

@@ -197,26 +197,6 @@
           title_plural: 'organizations',
           hasLogo: false,
           listState: 'organizations.list',
-          aboutFields: [
-            {
-              fieldKey: 'name',
-              isEditable: true,
-              className: 'name',
-              emptyText: 'Add name'
-            },
-            {
-              fieldKey: 'contact_details',
-              isEditable: true,
-              className: 'details',
-              emptyText: 'Add contact details'
-            },
-            {
-              fieldKey: 'registration_code',
-              isEditable: true,
-              className: 'details',
-              emptyText: 'Add registration code'
-            }
-          ],
           tabs: [
             {
               title: 'Events',
@@ -305,11 +285,16 @@
       openDialog: function() {
         var dialogScope = $rootScope.$new();
         dialogScope.customer = controllerScope.model;
-        ngDialog.open({
+        var dialog = ngDialog.open({
           templateUrl: 'views/customer/edit-dialog.html',
-          controller: 'CustomerAddController',
+          controller: 'CustomerEditDialogController',
           scope: dialogScope,
           className: 'ngdialog-theme-default'
+        });
+        dialog.closePromise.then(function(data) {
+          if (data.value) {
+            angular.extend(controllerScope.model, data.value);
+          }
         });
       },
 
@@ -396,18 +381,6 @@
         }, function(response) {
           ncUtilsFlash.warning('Unable to delete image');
         });
-      },
-      editInPlace: function(data, fieldName) {
-        var d = $q.defer();
-        if (data || fieldName != 'name') {
-          return this._super(data, fieldName);
-        }
-        d.resolve('This field is required.');
-        return d.promise;
-      },
-      afterUpdate: function() {
-        ncUtilsFlash.success('Organization {} is updated'.replace('{}', controllerScope.model.name));
-        $rootScope.$broadcast('refreshCustomerList', {model: this.model, update: true});
       }
     });
 
@@ -418,27 +391,89 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('CustomerAddController',
-    ['customersService', '$scope', '$rootScope', CustomerAddController]);
+    .controller('CustomerEditDialogController',
+    ['customersService', '$scope', '$rootScope', '$state', 'ncUtilsFlash',
+    CustomerEditDialogController]);
 
-  function CustomerAddController(customersService, $scope, $rootScope) {
+  function CustomerEditDialogController(customersService, $scope, $rootScope, $state, ncUtilsFlash) {
     angular.extend($scope, {
-      dialogTitle: 'Edit organization',
+      fields: ['name', 'contact_details', 'registration_code', 'vat_code'],
+      instance: {},
       init: function() {
-        this.listState = 'organizations.list';
-        this.detailsState = 'organizations.details';
-        this.redirectToDetailsPage = true;
+        if (this.customer) {
+          this.dialogTitle = 'Edit organization';
+        } else {
+          this.dialogTitle = 'Create organization';
+        }
 
+        if (this.customer) {
+          this.copyFields(this.customer, this.instance, this.fields);
+        }
+        this.loadCountries();
+      },
+      loadCountries: function() {
+        function find(list, predicate) {
+          return (list.filter(predicate) || [])[0];
+        }
         var vm = this;
-        customersService.loadCountries().then(function(countryChoices) {
+        return customersService.loadCountries().then(function(countryChoices) {
           vm.countryChoices = countryChoices;
+          vm.instance.country = find(countryChoices, function(country) {
+            return country.value === vm.customer.country;
+          });
         });
       },
-      beforeSave: function() {
-        this.instance.is_company = this.instance.vat_code ? true : false;
+      saveCustomer: function() {
+        var vm = this;
+        return vm.getPromise().then(function(customer) {
+          customersService.clearAllCacheForCurrentEndpoint();
+          $rootScope.$broadcast('refreshCounts');
+
+          if (vm.customer.url) {
+            ncUtilsFlash.success('Organization {} is updated'.replace('{}', customer.name));
+            $rootScope.$broadcast('refreshCustomerList', {
+              model: customer,
+              update: true
+            });
+          } else {
+            ncUtilsFlash.success('Organization has been created.');
+            $rootScope.$broadcast('refreshCustomerList', {
+              model: customer,
+              new: true,
+              current: true
+            });
+            $state.go('organizations.details', {uuid: customer.uuid});
+          }
+
+          vm.closeThisDialog(customer);
+        });
       },
-      afterSave: function() {
-        $rootScope.$broadcast('refreshCustomerList', {model: this.instance, new: true, current: true});
+      getPromise: function() {
+        if (this.customer.url) {
+          return customersService.$update(null, this.customer.url, this.getOptions());
+        } else {
+          customer = customersService.$create();
+          angular.extend(customer, this.getOptions());
+          return customer.$save();
+        }
+      },
+      copyFields: function(src, dest, names) {
+        angular.forEach(names, function(name) {
+          if (src[name]) {
+            dest[name] = src[name];
+          }
+        });
+      },
+      getOptions: function() {
+        var options = {};
+        this.copyFields(this.instance, options, this.fields);
+        if (this.instance.vat_code) {
+          options.is_company = true;
+        }
+        if (this.instance.country) {
+          options.country = this.instance.country.value;
+        }
+        return options;
       }
     });
     $scope.init();

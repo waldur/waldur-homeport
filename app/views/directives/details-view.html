@@ -27,28 +27,34 @@
                     {{ options.title_plural | titleCase }}
                 </a>
 
-                <div class="icon pencil-square-o"
-                             ng-if="controller.canEdit"
-                             ng-click="controller.openDialog()"></div>
 
-                <div ng-repeat="field in options.aboutFields">
-                    <div>
-                        <span class="{{ field.className }}"
-                              ng-if="!field.isEditable || !controller.canEdit">{{ controller.model[field.fieldKey] }}</span>
-                        <span editable-text="controller.model[field.fieldKey]"
-                              e-form="rowform"
-                              buttons="no"
-                              onbeforesave="controller.editInPlace($data, field.fieldKey)"
-                              ng-show="field.isEditable && controller.canEdit"
-                              class="{{ field.className }}"
-                              ng-class="{'editable-empty': !controller.model[field.fieldKey]}">
-                            {{ controller.model[field.fieldKey] || field.emptyText }}
-                        </span>
-                        <div class="icon pencil-square-o"
-                             ng-if="field.isEditable && controller.canEdit"
-                             ng-click="rowform.$show()"
-                             ng-hide="rowform.$visible"></div>
-                    </div>
+                <div ng-if="!controller.aboutFields">
+                  <span class="name">{{ controller.model.name }}</span>
+                  <div class="icon pencil-square-o"
+                               ng-if="controller.canEdit"
+                               ng-click="controller.openDialog()"></div>
+                </div>
+
+                <div ng-if="controller.aboutFields">
+                  <div ng-repeat="field in options.aboutFields">
+                      <div>
+                          <span class="{{ field.className }}"
+                                ng-if="!field.isEditable || !controller.canEdit">{{ controller.model[field.fieldKey] }}</span>
+                          <span editable-text="controller.model[field.fieldKey]"
+                                e-form="rowform"
+                                buttons="no"
+                                onbeforesave="controller.editInPlace($data, field.fieldKey)"
+                                ng-show="field.isEditable && controller.canEdit"
+                                class="{{ field.className }}"
+                                ng-class="{'editable-empty': !controller.model[field.fieldKey]}">
+                              {{ controller.model[field.fieldKey] || field.emptyText }}
+                          </span>
+                          <div class="icon pencil-square-o"
+                               ng-if="field.isEditable && controller.canEdit"
+                               ng-click="rowform.$show()"
+                               ng-hide="rowform.$visible"></div>
+                      </div>
+                  </div>
                 </div>
                 <p ng-if="options.joinedDate">
                     Joined on {{ controller.model[options.joinedDate] | date:'dd MMMM yyyy' }}
