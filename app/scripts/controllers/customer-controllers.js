@@ -11,6 +11,7 @@
       '$state',
       'ENV',
       'ncUtils',
+      'ngDialog',
       'currentStateService',
       CustomerListController
     ]);
@@ -24,6 +25,7 @@
     $state,
     ENV,
     ncUtils,
+    ngDialog,
     currentStateService) {
     var controllerScope = this;
     var CustomerController = baseControllerListClass.extend({
@@ -59,7 +61,7 @@
             noDataText: 'You have no organizations yet.',
             noMatchesText: 'No organizations found matching filter.',
             title: 'Organizations',
-            createLink: 'organizations.create',
+            createLinkAction: this.openDialog,
             createLinkText: 'Add organization',
             rowTemplateUrl: 'views/customer/row.html'
           },
@@ -90,6 +92,13 @@
             notSortable: true
           });
         }
+      },
+      openDialog: function() {
+        ngDialog.open({
+          templateUrl: 'views/customer/edit-dialog.html',
+          controller: 'CustomerEditDialogController',
+          className: 'ngdialog-theme-default'
+        })
       },
       isOwnerOrStaff: function(customer) {
         if (this.currentUserIsStaff()) return true;
@@ -418,9 +427,11 @@
         var vm = this;
         return customersService.loadCountries().then(function(countryChoices) {
           vm.countryChoices = countryChoices;
-          vm.instance.country = find(countryChoices, function(country) {
-            return country.value === vm.customer.country;
-          });
+          if (vm.customer) {
+            vm.instance.country = find(countryChoices, function(country) {
+              return country.value === vm.customer.country;
+            });
+          }
         });
       },
       saveCustomer: function() {
@@ -429,7 +440,7 @@
           customersService.clearAllCacheForCurrentEndpoint();
           $rootScope.$broadcast('refreshCounts');
 
-          if (vm.customer.url) {
+          if (vm.customer) {
             ncUtilsFlash.success('Organization {} is updated'.replace('{}', customer.name));
             $rootScope.$broadcast('refreshCustomerList', {
               model: customer,
@@ -449,10 +460,10 @@
         });
       },
       getPromise: function() {
-        if (this.customer.url) {
+        if (this.customer) {
           return customersService.$update(null, this.customer.url, this.getOptions());
         } else {
-          customer = customersService.$create();
+          var customer = customersService.$create();
           angular.extend(customer, this.getOptions());
           return customer.$save();
         }
