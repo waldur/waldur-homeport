@@ -155,6 +155,7 @@
       'resourcesCountService',
       'currentStateService',
       '$state',
+      'ngDialog',
       CustomerDetailUpdateController
     ]);
 
@@ -175,7 +176,8 @@
     eventsService,
     resourcesCountService,
     currentStateService,
-    $state
+    $state,
+    ngDialog
     ) {
     var controllerScope = this,
       timer,
@@ -299,6 +301,18 @@
         };
         this.detailsViewOptions.activeTab = this.getActiveTab();
       },
+
+      openDialog: function() {
+        var dialogScope = $rootScope.$new();
+        dialogScope.customer = controllerScope.model;
+        ngDialog.open({
+          templateUrl: 'views/customer/edit-dialog.html',
+          controller: 'CustomerAddController',
+          scope: dialogScope,
+          className: 'ngdialog-theme-default'
+        });
+      },
+
       isOwnerOrStaff: function(customer) {
         if (this.currentUser.is_staff) return true;
         for (var i = 0; i < customer.owners.length; i++) {
@@ -405,15 +419,12 @@
 (function() {
   angular.module('ncsaas')
     .controller('CustomerAddController',
-    ['customersService', 'baseControllerAddClass', '$rootScope', CustomerAddController]);
+    ['customersService', '$scope', '$rootScope', CustomerAddController]);
 
-  function CustomerAddController(customersService, baseControllerAddClass, $rootScope) {
-    var controllerScope = this;
-    var Controller = baseControllerAddClass.extend({
+  function CustomerAddController(customersService, $scope, $rootScope) {
+    angular.extend($scope, {
+      dialogTitle: 'Edit organization',
       init: function() {
-        this.service = customersService;
-        this.controllerScope = controllerScope;
-        this._super();
         this.listState = 'organizations.list';
         this.detailsState = 'organizations.details';
         this.redirectToDetailsPage = true;
@@ -427,11 +438,9 @@
         this.instance.is_company = this.instance.vat_code ? true : false;
       },
       afterSave: function() {
-        this._super();
         $rootScope.$broadcast('refreshCustomerList', {model: this.instance, new: true, current: true});
       }
     });
-
-    controllerScope.__proto__ = new Controller();
+    $scope.init();
   }
 })();

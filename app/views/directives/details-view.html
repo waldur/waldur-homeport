@@ -20,12 +20,16 @@
                      class="profile-logo">
                 </div>
 
-                  <a ng-if="options.listState"
-                     ui-sref="{{ options.listState }}"
-                     class="back-to-list">
-                     <i class="icon fa-angle-left"></i>
-                      {{ options.title_plural | titleCase }}
-                  </a>
+                <a ng-if="options.listState"
+                   ui-sref="{{ options.listState }}"
+                   class="back-to-list">
+                   <i class="icon fa-angle-left"></i>
+                    {{ options.title_plural | titleCase }}
+                </a>
+
+                <div class="icon pencil-square-o"
+                             ng-if="controller.canEdit"
+                             ng-click="controller.openDialog()"></div>
 
                 <div ng-repeat="field in options.aboutFields">
                     <div>

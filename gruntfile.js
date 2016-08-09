@@ -47,6 +47,7 @@ module.exports = function(grunt) {
                         'app/static/css/ngDialog.css',
                         'app/static/css/ngDialog-theme-default.css',
                         'app/static/css/leaflet.css',
+                        'app/static/css/flags16.css',
                     ]
                 }
             }
@@ -379,6 +380,20 @@ module.exports = function(grunt) {
                         cwd: 'bower_components/angular-leaflet-directive/dist/',
                         src: ['angular-leaflet-directive.js'],
                         dest: 'app/static/js/angular/',
+                        filter: 'isFile'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/world-flags-sprite/stylesheets/',
+                        src: ['flags16.css'],
+                        dest: 'app/static/css/',
+                        filter: 'isFile'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/world-flags-sprite/images/',
+                        src: ['flags16.png'],
+                        dest: 'app/static/images/',
                         filter: 'isFile'
                     },
                 ]

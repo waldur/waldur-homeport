@@ -1,0 +1,66 @@
+<div class="add-team-member">
+    <h3>{{ dialogTitle }}</h3>
+
+    <div class="form-row">
+        <label for="customerName">Name:</label>
+         <input type="text"
+                id="customerName"
+                name="name"
+                required ng-model="customer.name"
+                class="form-control">
+    </div>
+
+    <div class="form-row">
+        <label for="customerCode">Organization registration code:</label>
+        <input type="text"
+               id="customerCode"
+               ng-model="customer.registration_code"
+               class="form-control">
+    </div>
+
+    <div class="form-row">
+        <label for="customerCountry">Country:</label>
+        <ui-select ng-model="customer.country" theme="select2">
+            <ui-select-match placeholder="Select country...">
+            <span class="f16"><span class="flag {{ $select.selected.value | lowercase }}"></span></span>
+                {{ $select.selected.display_name }}
+            </ui-select-match>
+            <ui-select-choices
+                repeat="country in countryChoices | filter: $select.search"
+                refresh-delay="0">
+                <span class="f16"><span class="flag {{ country.value | lowercase }}"></span></span>
+                {{ ::country.display_name }}
+            </ui-select-choices>
+        </ui-select>
+    </div>
+
+    <div class="form-row">
+        <label for="customerAddress">Address:</label>
+        <input type="text"
+               id="customerAddress"
+               ng-model="customer.contact_details"
+               class="form-control">
+    </div>
+
+    <div class="form-row">
+        <label for="vat_code">
+            <helpicon help-text="Please provide your EU VAT ID if you are registered in the European Union"></helpicon>
+            EU VAT ID
+        </label>
+        <input type="text"
+               id="vat_code"
+               ng-model="customer.vat_code"
+               class="form-control">
+        </div>
+    </div>
+
+    <div class="decision">
+        <div class="col">
+            <a class="button-apply"
+               submit-button="saveCustomer()">Save</a>
+        </div>
+        <div class="col">
+            <a class="button-cancel" ng-click="closeThisDialog()">Cancel</a>
+        </div>
+    </div>
+</div>
