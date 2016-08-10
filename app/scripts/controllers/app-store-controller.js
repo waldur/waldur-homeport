@@ -776,13 +776,19 @@
                 return quota.limit !== -1 && quota.usage >= (quota.limit * vm.quotaThreshold);
               });
               service.reachedThreshold = quotas.length > 0;
+              quotas = service.quotas.filter(function(quota) {
+                return quota.limit !== -1 && quota.usage >= quota.limit;
+              });
+              service.reachedLimit = quotas.length == service.quotas.length;
             });
-            var quotas = services.reduce(function(result, service) {
-              result[service.url] = service.reachedThreshold;
+            var details = services.reduce(function(result, service) {
+              result[service.url] = service;
               return result;
             }, {});
             angular.forEach(vm.currentProject.services, function(service) {
-              service.reachedThreshold = quotas[service.url];
+              var detail = details[service.url];
+              service.reachedThreshold = detail.reachedThreshold;
+              service.reachedLimit = detail.reachedLimit;
             });
           });
         });
@@ -790,6 +796,8 @@
       getServiceDisabledReason: function(service) {
         if (service.state === 'Erred') {
           return 'Provider is in erred state.';
+        } else if (service.reachedLimit) {
+          return 'All provider quotas have reached limit.';
         }
       },
       getServiceWarningMessage: function(service) {
