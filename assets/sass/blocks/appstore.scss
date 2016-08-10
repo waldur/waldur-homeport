@@ -41,6 +41,17 @@
                 }
             }
         }
+        &.warning {
+            .help-icon {
+                position: absolute !important;
+                right: 20px;
+                top: 10px;
+                display: inline-block;
+                span.help-text {
+                    color: #fff !important;
+                }
+            }
+        }
         &.no-active {
             opacity: 1;
         } // &.no-active

@@ -15,10 +15,10 @@
       'premiumSupportContractsService',
       'resourcesService',
       'resourcesCountService',
+      'joinService',
       'ncUtilsFlash',
       'projectsService',
       'priceEstimationService',
-      'keysService',
       '$document',
       '$scope',
       '$filter',
@@ -39,10 +39,10 @@
     premiumSupportContractsService,
     resourcesService,
     resourcesCountService,
+    joinService,
     ncUtilsFlash,
     projectsService,
     priceEstimationService,
-    keysService,
     $document,
     $scope,
     $filter) {
@@ -95,6 +95,8 @@
       fields: [],
       limitChoices: ENV.appStoreLimitChoices,
       fieldsOrder: null,
+
+      quotaThreshold: 0.8,
 
       init:function() {
         this.service = resourcesService;
@@ -407,6 +409,7 @@
         return {
           state: this.selectedService === service,
           disabled: !service.enabled,
+          warning: !!service.warning,
           provider: this.selectedCategory.type === 'provider'
         };
       },
@@ -731,19 +734,19 @@
         vm.countTotal();
         vm.loadingProviders = true;
 
-        var projectsPromise = currentStateService.getProject(),
+        var projectsPromise = vm.loadProjectWithServices(),
             supportPromise = premiumSupportPlansService.getList(),
           listPromises = $q.all([projectsPromise, supportPromise]);
         listPromises.then(function(entities) {
-          vm.currentProject = entities[0];
           var supportList = entities[1];
           for (var j = 0; j < categories.length; j++) {
             var category = categories[j];
             vm.categoryServices[category.name] = [];
             for (var i = 0; i < vm.currentProject.services.length; i++) {
               var service = vm.currentProject.services[i];
-              service.disabledReason = vm.getServiceDisabledReason(service);
-              service.enabled = !service.disabledReason;
+              service.warning = vm.getServiceDisabledReason(service) || 
+                                vm.getServiceWarningMessage(service);
+              service.enabled = !vm.getServiceDisabledReason(service);
               if (category.services && (category.services.indexOf(service.type) + 1)) {
                 vm.categoryServices[category.name].push(service);
               }
@@ -760,9 +763,38 @@
         });
         ncUtils.blockElement('store-content', listPromises);
       },
+      loadProjectWithServices: function() {
+        var vm = this;
+        return currentStateService.getProject().then(function(project) {
+          vm.currentProject = project;
+          return joinService.getAll({
+            project_uuid: project.uuid,
+            field: ['url', 'quotas']
+          }).then(function(services) {
+            angular.forEach(services, function(service) {
+              var quotas = service.quotas.filter(function(quota) {
+                return quota.limit !== -1 && quota.usage >= (quota.limit * vm.quotaThreshold);
+              });
+              service.reachedThreshold = quotas.length > 0;
+            });
+            var quotas = services.reduce(function(result, service) {
+              result[service.url] = service.reachedThreshold;
+              return result;
+            }, {});
+            angular.forEach(vm.currentProject.services, function(service) {
+              service.reachedThreshold = quotas[service.url];
+            });
+          });
+        });
+      },
       getServiceDisabledReason: function(service) {
         if (service.state === 'Erred') {
           return 'Provider is in erred state.';
+        }
+      },
+      getServiceWarningMessage: function(service) {
+        if (service.reachedThreshold) {
+          return 'Provider quota have reached threshold.';
         }
       },
       addSupportCategory: function(list) {
