@@ -26,6 +26,11 @@
     line-height: 1.5;
   }
 
+  .select2-results .select2-disabled {
+    color: #666;
+    background: #f4f4f4;
+  }
+
   .select2-container {
     width: 100%;
     .select2-choice {
