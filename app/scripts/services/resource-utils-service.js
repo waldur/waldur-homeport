@@ -33,14 +33,9 @@
         if (resource.image_name) {
           parts.push(resource.image_name);
         }
-        if (resource.cores) {
-          parts.push(resource.cores + ' vCPU');
-        }
-        if (resource.ram) {
-          parts.push($filter('filesize')(resource.ram) + ' memory');
-        }
-        if (resource.disk) {
-          parts.push($filter('filesize')(resource.disk) + ' storage');
+        var flavor = this.formatFlavor(resource);
+        if (flavor) {
+          parts.push(flavor);
         }
         if (resource.bootable) {
           parts.push('bootable');
@@ -48,8 +43,24 @@
         if (resource.size) {
           parts.push($filter('filesize')(resource.size));
         }
-        var summary = parts.join(' / ');
+        var summary = parts.join(' , ');
         return summary;
+      },
+      formatFlavor: function(resource) {
+        if (resource) {
+          var parts = [];
+          if (resource.cores) {
+            parts.push(resource.cores + ' vCPU');
+          }
+          if (resource.ram) {
+            parts.push($filter('filesize')(resource.ram) + ' memory');
+          }
+          if (resource.disk) {
+            parts.push($filter('filesize')(resource.disk) + ' storage');
+          }
+          var summary = parts.join(' , ');
+          return summary;
+        }
       },
       formatResourceType: function(resource) {
         return resource.resource_type.split(".").join(" ");

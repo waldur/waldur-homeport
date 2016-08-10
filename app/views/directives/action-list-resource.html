@@ -11,7 +11,7 @@
   </span>
 
   <span class="compact-list__action-item"
-        ng-repeat="action in actions"
+        ng-repeat="(name, action) in actions"
         title="{{ action.reason }}">
         <a ng-class="{'disabled': !action.enabled || action.pending, 'remove': action.destructive}"
            ng-click="buttonClick(name, action)">

@@ -13,7 +13,7 @@
         unit++;
       }
 
-      return input.toFixed(2) + ' ' + units[unit];
+      return input.toFixed(0) + ' ' + units[unit];
     }
   });
 
