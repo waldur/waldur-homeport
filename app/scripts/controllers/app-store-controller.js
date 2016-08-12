@@ -779,7 +779,7 @@
               quotas = service.quotas.filter(function(quota) {
                 return quota.limit !== -1 && quota.usage >= quota.limit;
               });
-              service.reachedLimit = quotas.length == service.quotas.length;
+              service.reachedLimit = quotas.length === service.quotas.length;
             });
             var details = services.reduce(function(result, service) {
               result[service.url] = service;
