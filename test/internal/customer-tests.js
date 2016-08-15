@@ -23,7 +23,7 @@ for(var i = 0; i < addCustomerTestData.length; i++) {
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/dashboard/');
       });
 
-      it('I should be able to go to "customer add" page', function() {
+      xit('I should be able to go to "customer add" page', function() {
         element(by.css('.dropdown.customers .customer-name')).click();
         element(by.cssContainingText('.dropdown.customers .nav-sublist li a', 'Manage organizations')).click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/organizations/');
@@ -32,7 +32,7 @@ for(var i = 0; i < addCustomerTestData.length; i++) {
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/organizations/add/');
       });
 
-      it('I should be able to add new customer', function() {
+      xit('I should be able to add new customer', function() {
         // fill name
         element(by.model('CustomerAdd.instance.name')).sendKeys(customerName);
 
@@ -41,7 +41,7 @@ for(var i = 0; i < addCustomerTestData.length; i++) {
         expect(element(by.cssContainingText('.details-about .name', customerName)).isPresent()).toBe(true);
       });
 
-      it('I should be able to see ' + customerName + ' at customers list page', function() {
+      xit('I should be able to see ' + customerName + ' at customers list page', function() {
         element(by.css('.dropdown.customers .customer-name')).click();
         element(by.cssContainingText('.dropdown.customers .nav-sublist li a', 'Manage organizations')).click();
         element(by.model('entityList.searchInput')).sendKeys(customerName);

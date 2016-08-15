@@ -143,7 +143,7 @@
       dashboard: ['dashboard.index'],
       resources: ['resources.list'],
       projects: ['projects.details', 'projects.create'],
-      organizations: ['organizations.list', 'organizations.create', 'organizations.details'],
+      organizations: ['organizations.list', 'organizations.details'],
       services: ['services.list', 'services.create'],
       users: ['users.list', 'users.details', 'profile.details'],
       support: ['support.list', 'support.create']

@@ -11,6 +11,7 @@
       '$state',
       'ENV',
       'ncUtils',
+      'ngDialog',
       'currentStateService',
       CustomerListController
     ]);
@@ -24,6 +25,7 @@
     $state,
     ENV,
     ncUtils,
+    ngDialog,
     currentStateService) {
     var controllerScope = this;
     var CustomerController = baseControllerListClass.extend({
@@ -59,7 +61,7 @@
             noDataText: 'You have no organizations yet.',
             noMatchesText: 'No organizations found matching filter.',
             title: 'Organizations',
-            createLink: 'organizations.create',
+            createLinkAction: this.openDialog,
             createLinkText: 'Add organization',
             rowTemplateUrl: 'views/customer/row.html'
           },
@@ -90,6 +92,13 @@
             notSortable: true
           });
         }
+      },
+      openDialog: function() {
+        ngDialog.open({
+          templateUrl: 'views/customer/edit-dialog.html',
+          controller: 'CustomerEditDialogController',
+          className: 'ngdialog-theme-default'
+        })
       },
       isOwnerOrStaff: function(customer) {
         if (this.currentUserIsStaff()) return true;
@@ -155,6 +164,7 @@
       'resourcesCountService',
       'currentStateService',
       '$state',
+      'ngDialog',
       CustomerDetailUpdateController
     ]);
 
@@ -175,7 +185,8 @@
     eventsService,
     resourcesCountService,
     currentStateService,
-    $state
+    $state,
+    ngDialog
     ) {
     var controllerScope = this,
       timer,
@@ -195,26 +206,6 @@
           title_plural: 'organizations',
           hasLogo: false,
           listState: 'organizations.list',
-          aboutFields: [
-            {
-              fieldKey: 'name',
-              isEditable: true,
-              className: 'name',
-              emptyText: 'Add name'
-            },
-            {
-              fieldKey: 'contact_details',
-              isEditable: true,
-              className: 'details',
-              emptyText: 'Add contact details'
-            },
-            {
-              fieldKey: 'registration_code',
-              isEditable: true,
-              className: 'details',
-              emptyText: 'Add registration code'
-            }
-          ],
           tabs: [
             {
               title: 'Events',
@@ -299,6 +290,23 @@
         };
         this.detailsViewOptions.activeTab = this.getActiveTab();
       },
+
+      openDialog: function() {
+        var dialogScope = $rootScope.$new();
+        dialogScope.customer = controllerScope.model;
+        var dialog = ngDialog.open({
+          templateUrl: 'views/customer/edit-dialog.html',
+          controller: 'CustomerEditDialogController',
+          scope: dialogScope,
+          className: 'ngdialog-theme-default'
+        });
+        dialog.closePromise.then(function(data) {
+          if (data.value) {
+            angular.extend(controllerScope.model, data.value);
+          }
+        });
+      },
+
       isOwnerOrStaff: function(customer) {
         if (this.currentUser.is_staff) return true;
         for (var i = 0; i < customer.owners.length; i++) {
@@ -382,18 +390,6 @@
         }, function(response) {
           ncUtilsFlash.warning('Unable to delete image');
         });
-      },
-      editInPlace: function(data, fieldName) {
-        var d = $q.defer();
-        if (data || fieldName != 'name') {
-          return this._super(data, fieldName);
-        }
-        d.resolve('This field is required.');
-        return d.promise;
-      },
-      afterUpdate: function() {
-        ncUtilsFlash.success('Organization {} is updated'.replace('{}', controllerScope.model.name));
-        $rootScope.$broadcast('refreshCustomerList', {model: this.model, update: true});
       }
     });
 
@@ -404,34 +400,96 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('CustomerAddController',
-    ['customersService', 'baseControllerAddClass', '$rootScope', CustomerAddController]);
+    .controller('CustomerEditDialogController',
+    ['customersService', '$scope', '$rootScope', '$state', 'ncUtilsFlash',
+    CustomerEditDialogController]);
 
-  function CustomerAddController(customersService, baseControllerAddClass, $rootScope) {
-    var controllerScope = this;
-    var Controller = baseControllerAddClass.extend({
+  function CustomerEditDialogController(customersService, $scope, $rootScope, $state, ncUtilsFlash) {
+    angular.extend($scope, {
+      fields: ['name', 'contact_details', 'registration_code', 'vat_code'],
+      instance: {},
       init: function() {
-        this.service = customersService;
-        this.controllerScope = controllerScope;
-        this._super();
-        this.listState = 'organizations.list';
-        this.detailsState = 'organizations.details';
-        this.redirectToDetailsPage = true;
+        if (this.customer) {
+          this.dialogTitle = 'Edit organization';
+        } else {
+          this.dialogTitle = 'Create organization';
+        }
 
+        if (this.customer) {
+          this.copyFields(this.customer, this.instance, this.fields);
+        }
+        this.loadCountries();
+      },
+      loadCountries: function() {
+        function find(list, predicate) {
+          return (list.filter(predicate) || [])[0];
+        }
         var vm = this;
-        customersService.loadCountries().then(function(countryChoices) {
+        return customersService.loadCountries().then(function(countryChoices) {
           vm.countryChoices = countryChoices;
+          if (vm.customer) {
+            vm.instance.country = find(countryChoices, function(country) {
+              return country.value === vm.customer.country;
+            });
+          }
         });
       },
-      beforeSave: function() {
-        this.instance.is_company = this.instance.vat_code ? true : false;
+      saveCustomer: function() {
+        var vm = this;
+        return vm.getPromise().then(function(customer) {
+          vm.errors = {};
+          customersService.clearAllCacheForCurrentEndpoint();
+          $rootScope.$broadcast('refreshCounts');
+
+          if (vm.customer) {
+            ncUtilsFlash.success('Organization {} is updated'.replace('{}', customer.name));
+            $rootScope.$broadcast('refreshCustomerList', {
+              model: customer,
+              update: true
+            });
+          } else {
+            ncUtilsFlash.success('Organization has been created.');
+            $rootScope.$broadcast('refreshCustomerList', {
+              model: customer,
+              new: true,
+              current: true
+            });
+            $state.go('organizations.details', {uuid: customer.uuid});
+          }
+
+          vm.closeThisDialog(customer);
+        }, function(response) {
+          vm.errors = response.data;
+        });
       },
-      afterSave: function() {
-        this._super();
-        $rootScope.$broadcast('refreshCustomerList', {model: this.instance, new: true, current: true});
+      getPromise: function() {
+        if (this.customer) {
+          return customersService.$update(null, this.customer.url, this.getOptions());
+        } else {
+          var customer = customersService.$create();
+          angular.extend(customer, this.getOptions());
+          return customer.$save();
+        }
+      },
+      copyFields: function(src, dest, names) {
+        angular.forEach(names, function(name) {
+          if (src[name]) {
+            dest[name] = src[name];
+          }
+        });
+      },
+      getOptions: function() {
+        var options = {};
+        this.copyFields(this.instance, options, this.fields);
+        if (this.instance.vat_code) {
+          options.is_company = true;
+        }
+        if (this.instance.country) {
+          options.country = this.instance.country.value;
+        }
+        return options;
       }
     });
-
-    controllerScope.__proto__ = new Controller();
+    $scope.init();
   }
 })();

@@ -15,6 +15,17 @@
   </div>
 </div>
 
+<div class="table-action" ng-if="entityOptions.entityData.createLinkAction">
+  <div class="tooltip-relative"
+       check-quotas="{{entityOptions.entityData.checkQuotas}}"
+       class-link="button"
+       ng-click="entityOptions.entityData.createLinkAction()"
+       tooltip-type="list-items">
+        <i class="icon plus"></i>
+        {{ entityOptions.entityData.createLinkText }}
+  </div>
+</div>
+
 <div class="table-action" ng-if="entityOptions.entityData.createPopup">
     <div class="tooltip-relative"
          check-quotas="{{entityOptions.entityData.checkQuotas}}"
