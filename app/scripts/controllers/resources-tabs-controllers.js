@@ -1,42 +1,5 @@
 (function() {
   angular.module('ncsaas')
-    .controller('ResourceBackupListTabController', [
-      'currentStateService',
-      'BaseBackupListController',
-      '$stateParams',
-      ResourceBackupListTabController
-    ]);
-
-  function ResourceBackupListTabController(currentStateService, BaseBackupListController, $stateParams) {
-    var controllerScope = this;
-    var Controller = BaseBackupListController.extend({
-      init:function() {
-        this.controllerScope = controllerScope;
-        this.blockUIElement = 'tab-content';
-        this._super();
-      },
-      getList: function(filter) {
-        var vm = this;
-        if ($stateParams.uuid) {
-          this.service.defaultFilter.project_uuid = $stateParams.uuid;
-          return this._super(filter);
-        } else {
-          var fn = this._super.bind(controllerScope);
-          return currentStateService.getProject().then(function(response) {
-            vm.service.defaultFilter.project_uuid = response.uuid;
-            return fn(filter);
-          });
-        }
-      }
-    });
-
-    controllerScope.__proto__ = new Controller();
-  }
-})();
-
-
-(function() {
-  angular.module('ncsaas')
     .controller('ResourceAlertsListController', [
       'BaseAlertsListController',
       'resourcesService',

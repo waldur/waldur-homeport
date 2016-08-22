@@ -5,7 +5,6 @@ angular.module('ncsaas')
     modeName: 'modeSquStudentCloud',
     toBeFeatures: [
       'monitoring',
-      'backups',
       'password',
       'services',
       'providers',
