@@ -40,7 +40,6 @@ module.exports = function(grunt) {
                         'app/static/css/style.css',
                         'app/static/css/angular-flash.css',
                         'app/static/css/angucomplete-alt.css',
-                        'app/static/css/select2.css',
                         'app/static/css/select.css',
                         'app/static/css/xeditable.css',
                         'app/static/css/angular-block-ui.css',
@@ -171,18 +170,6 @@ module.exports = function(grunt) {
                         expand: true,
                         cwd: 'bower_components/angucomplete-alt',
                         src: ['angucomplete-alt.css'],
-                        dest: 'app/static/css/',
-                        filter: 'isFile'
-                    },
-                    {
-                        expand: true,
-                        cwd: 'bower_components/select2/',
-                        src: [
-                            'select2.css',
-                            'select2.png',
-                            'select2x2.png',
-                            'select2-spinner.gif'
-                        ],
                         dest: 'app/static/css/',
                         filter: 'isFile'
                     },

@@ -26,7 +26,7 @@
 
     <div class="form-row">
         <label for="customerCountry">Country:</label>
-        <ui-select ng-model="instance.country" theme="select2">
+        <ui-select ng-model="instance.country" theme="bootstrap">
             <ui-select-match placeholder="Select country...">
             <span class="f16"><span class="flag {{ $select.selected.value | lowercase }}"></span></span>
                 {{ $select.selected.display_name }}
