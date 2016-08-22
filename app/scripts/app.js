@@ -15,7 +15,6 @@
       'angularMoment',
       'ngAnimate',
       'pascalprecht.translate',
-      'angular-cron-jobs',
       'flash',
       'angulartics',
       'angulartics.google.analytics',
