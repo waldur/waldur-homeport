@@ -11,7 +11,7 @@
     'servicesService',
     'currentStateService',
     'projectsService',
-    'ngDialog',
+    '$uibModal',
     '$rootScope',
     'resourceUtils',
     baseResourceListController
@@ -27,7 +27,7 @@
     servicesService,
     currentStateService,
     projectsService,
-    ngDialog,
+    $uibModal,
     $rootScope,
     resourceUtils) {
     var ControllerListClass = baseControllerListClass.extend({
@@ -165,10 +165,9 @@
           var scope = $rootScope.$new();
           scope.markers = markers;
           scope.maxbounds = new L.LatLngBounds(markers);
-          ngDialog.open({
+          $uibModal.open({
             template: '<leaflet width="100%" markers="markers" maxbounds="maxbounds"></leaflet>',
-            plain: true,
-            className: 'ngdialog-theme-default map-dialog',
+            windowClass: 'map-dialog',
             scope: scope
           });
         }
@@ -311,7 +310,7 @@
         return form.$save().then(function(response) {
           actionUtilsService.handleActionSuccess($scope.action);
           $scope.errors = {};
-          $scope.closeThisDialog();
+          $scope.$close();
           $scope.controller.reInitResource($scope.resource);
         }, function(response) {
           $scope.errors = response.data;

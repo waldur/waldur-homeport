@@ -504,7 +504,7 @@
         'currentStateService',
         '$q',
         '$rootScope',
-        'ngDialog',
+        '$uibModal',
         'ENTITYLISTFIELDTYPES',
         CustomerTeamTabController
       ]);
@@ -518,7 +518,7 @@
       currentStateService,
       $q,
       $rootScope,
-      ngDialog,
+      $uibModal,
       ENTITYLISTFIELDTYPES) {
     var controllerScope = this;
     var TeamController = baseControllerListClass.extend({
@@ -642,12 +642,11 @@
         dialogScope.addedUsers = this.list.map(function(users) {
           return users.uuid;
         });
-        ngDialog.open({
+        $uibModal.open({
           templateUrl: 'views/directives/add-team-member.html',
-          className: 'ngdialog-theme-default',
           controller: 'AddTeamMemberDialogController',
           scope: dialogScope,
-        }).closePromise.then(function() {
+        }).result.then(function() {
           this.service.clearAllCacheForCurrentEndpoint();
           customerPermissionsService.clearAllCacheForCurrentEndpoint();
           this.getList();

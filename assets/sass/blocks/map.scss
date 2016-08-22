@@ -1,11 +1,6 @@
 .map-dialog {
-    .ngdialog-content {
-        height: 500px !important;
-        width: 600px !important;
-    }
-
     .angular-leaflet-map {
-        height: 100%;
-        width: 100%;
+        height: 500px;
+        width: 600px;
     }
 }

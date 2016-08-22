@@ -3,9 +3,9 @@
 (function() {
   angular.module('ncsaas')
     .service('actionUtilsService', [
-      'ncUtilsFlash', '$rootScope', '$http', '$q', 'ngDialog', 'resourcesService', actionUtilsService]);
+      'ncUtilsFlash', '$rootScope', '$http', '$q', '$uibModal', 'resourcesService', actionUtilsService]);
 
-  function actionUtilsService(ncUtilsFlash, $rootScope, $http, $q, ngDialog, resourcesService) {
+  function actionUtilsService(ncUtilsFlash, $rootScope, $http, $q, $uibModal, resourcesService) {
     this.loadActions = function(model) {
       resourcesService.cleanOptionsCache(model.url);
       return resourcesService.getOption(model.url).then(function(response) {
@@ -118,11 +118,10 @@
       dialogScope.action = action;
       dialogScope.controller = controller;
       dialogScope.resource = resource;
-      ngDialog.open({
+      $uibModal.open({
         templateUrl: templateUrl,
         controller: controllerName,
-        scope: dialogScope,
-        className: 'ngdialog-theme-default'
+        scope: dialogScope
       });
     };
   }

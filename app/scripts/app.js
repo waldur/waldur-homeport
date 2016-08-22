@@ -22,7 +22,6 @@
       'xeditable',
       'blockUI',
       'ngSanitize',
-      'ngDialog',
       'leaflet-directive',
       'ui.bootstrap'
     ])

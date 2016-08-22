@@ -41,8 +41,6 @@ module.exports = function(grunt) {
                         'app/static/css/select.css',
                         'app/static/css/xeditable.css',
                         'app/static/css/angular-block-ui.css',
-                        'app/static/css/ngDialog.css',
-                        'app/static/css/ngDialog-theme-default.css',
                         'app/static/css/leaflet.css',
                         'app/static/css/flags16.css',
                     ]
@@ -288,27 +286,6 @@ module.exports = function(grunt) {
                         cwd: 'bower_components/angular-sanitize/',
                         src: ['angular-sanitize.js'],
                         dest: 'app/static/js/angular/',
-                        filter: 'isFile'
-                    },
-                    {
-                        expand: true,
-                        cwd: 'bower_components/ng-dialog/js/',
-                        src: ['ngDialog.js'],
-                        dest: 'app/static/js/angular/',
-                        filter: 'isFile'
-                    },
-                    {
-                        expand: true,
-                        cwd: 'bower_components/ng-dialog/css/',
-                        src: ['ngDialog.css'],
-                        dest: 'app/static/css/',
-                        filter: 'isFile'
-                    },
-                    {
-                        expand: true,
-                        cwd: 'bower_components/ng-dialog/css/',
-                        src: ['ngDialog-theme-default.css'],
-                        dest: 'app/static/css/',
                         filter: 'isFile'
                     },
                     {
@@ -649,7 +626,6 @@ module.exports = function(grunt) {
                     'app/scripts/directives/*.js',
                     'app/scripts/services/*.js',
                     'app/static/js/angular/angular-block-ui.js',
-                    'app/static/js/angular/ngDialog.js',
                     'app/static/js/leaflet.js',
                     'app/static/js/angular/angular-leaflet-directive.js',
                 ],
