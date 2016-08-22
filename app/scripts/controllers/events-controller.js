@@ -5,7 +5,7 @@
     .service('baseEventListController', [
       'baseControllerListClass',
       'eventsService',
-      'ngDialog',
+      '$uibModal',
       'ENTITYLISTFIELDTYPES',
       'eventFormatter',
       'ENV',
@@ -14,7 +14,7 @@
   function baseEventListController(
     baseControllerListClass,
     eventsService,
-    ngDialog,
+    $uibModal,
     ENTITYLISTFIELDTYPES,
     eventFormatter,
     ENV) {
@@ -58,10 +58,9 @@
         this._super();
       },
       showHelpTypes: function() {
-        ngDialog.open({
+        $uibModal.open({
           template: '<alerts-dialog type="events"></alerts-dialog>',
-          plain: true,
-          className: 'ngdialog-theme-default alerts-list-dialog',
+          windowClass: 'alerts-list-dialog',
         });
       },
       afterGetList: function() {
@@ -81,7 +80,7 @@
       'baseControllerListClass',
       'alertsService',
       'alertFormatter',
-      'ngDialog',
+      '$uibModal',
       'ENTITYLISTFIELDTYPES',
       'ENV',
       BaseAlertsListController]);
@@ -90,7 +89,7 @@
     baseControllerListClass,
     alertsService,
     alertFormatter,
-    ngDialog,
+    $uibModal,
     ENTITYLISTFIELDTYPES,
     ENV) {
     return baseControllerListClass.extend({
@@ -129,10 +128,9 @@
         };
       },
       showHelpTypes: function() {
-        ngDialog.open({
+        $uibModal.open({
           template: '<alerts-dialog type="alerts"></alerts-dialog>',
-          plain: true,
-          className: 'ngdialog-theme-default alerts-list-dialog',
+          windowClass: 'alerts-list-dialog',
         });
       },
       afterGetList: function() {
@@ -341,7 +339,7 @@
       '$window',
       '$q',
       'ncUtils',
-      'ngDialog',
+      '$uibModal',
       DashboardActivityController]);
 
   function DashboardActivityController(
@@ -361,7 +359,7 @@
     $window,
     $q,
     ncUtils,
-    ngDialog) {
+    $uibModal) {
     var controllerScope = this;
     var EventController = baseControllerClass.extend({
       showGraph: true,
@@ -399,10 +397,9 @@
         });
       },
       showHelpTypes: function(type) {
-        ngDialog.open({
+        $uibModal.open({
           template: '<alerts-dialog type="' + type + '"></alerts-dialog>',
-          plain: true,
-          className: 'ngdialog-theme-default alerts-list-dialog',
+          windowClass: 'alerts-list-dialog',
         });
       },
       selectProject: function(project) {

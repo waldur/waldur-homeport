@@ -33,7 +33,6 @@
     "angular-xeditable": "~0.1.9",
     "angular-block-ui": "0.2.0",
     "angular-sanitize": "~1.4.6",
-    "ng-dialog": "~0.5.6",
     "angular-leaflet-directive": "~0.10.0",
     "leaflet": "~0.7.7",
     "select2": "^3.4.5",

@@ -24,7 +24,7 @@
       'xeditable',
       'blockUI',
       'ngSanitize',
-      'ngDialog',
+      '$uibModal',
       'leaflet-directive'
     ])
     // urls

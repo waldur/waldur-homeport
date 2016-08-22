@@ -11,7 +11,7 @@
       '$state',
       'ENV',
       'ncUtils',
-      'ngDialog',
+      '$uibModal',
       'currentStateService',
       CustomerListController
     ]);
@@ -25,7 +25,7 @@
     $state,
     ENV,
     ncUtils,
-    ngDialog,
+    $uibModal,
     currentStateService) {
     var controllerScope = this;
     var CustomerController = baseControllerListClass.extend({
@@ -94,10 +94,9 @@
         }
       },
       openDialog: function() {
-        ngDialog.open({
+        $uibModal.open({
           templateUrl: 'views/customer/edit-dialog.html',
-          controller: 'CustomerEditDialogController',
-          className: 'ngdialog-theme-default'
+          controller: 'CustomerEditDialogController'
         })
       },
       isOwnerOrStaff: function(customer) {
@@ -164,7 +163,7 @@
       'resourcesCountService',
       'currentStateService',
       '$state',
-      'ngDialog',
+      '$uibModal',
       CustomerDetailUpdateController
     ]);
 
@@ -186,7 +185,7 @@
     resourcesCountService,
     currentStateService,
     $state,
-    ngDialog
+    $uibModal
     ) {
     var controllerScope = this,
       timer,
@@ -294,16 +293,13 @@
       openDialog: function() {
         var dialogScope = $rootScope.$new();
         dialogScope.customer = controllerScope.model;
-        var dialog = ngDialog.open({
+        var dialog = $uibModal.open({
           templateUrl: 'views/customer/edit-dialog.html',
           controller: 'CustomerEditDialogController',
-          scope: dialogScope,
-          className: 'ngdialog-theme-default'
+          scope: dialogScope
         });
-        dialog.closePromise.then(function(data) {
-          if (data.value) {
-            angular.extend(controllerScope.model, data.value);
-          }
+        dialog.result.then(function(customer) {
+          angular.extend(controllerScope.model, customer);
         });
       },
 
@@ -457,7 +453,7 @@
             $state.go('organizations.details', {uuid: customer.uuid});
           }
 
-          vm.closeThisDialog(customer);
+          vm.$close(customer);
         }, function(response) {
           vm.errors = response.data;
         });

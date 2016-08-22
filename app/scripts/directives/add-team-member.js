@@ -75,7 +75,7 @@
         }
 
         function cancel() {
-            scope.closeThisDialog();
+            scope.$dismiss();
         }
 
         function saveUser() {
@@ -90,7 +90,7 @@
                 saveCustomerPermission(),
                 saveProjectPermissions()
             ]).then(function() {
-                scope.closeThisDialog();
+                scope.$dismiss();
             });
         }
 

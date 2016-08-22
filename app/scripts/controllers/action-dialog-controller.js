@@ -42,13 +42,13 @@
           $scope.errors = {};
           actionUtilsService.handleActionSuccess($scope.action);
           $scope.controller.reInitResource($scope.resource);
-          $scope.closeThisDialog();
+          $scope.$dismiss();
         }, function(response) {
           $scope.errors = response.data;
         });
       },
       cancel: function() {
-        $scope.closeThisDialog();
+        $scope.$dismiss();
       }
     });
     $scope.init();
