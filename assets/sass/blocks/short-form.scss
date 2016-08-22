@@ -36,6 +36,7 @@
             padding: 0;
             &.label {
                 label {
+                    color: $text-color;
                     @include inline-middle;
                     padding: 3px 10px;
                 }

@@ -35,7 +35,6 @@ module.exports = function(grunt) {
             combine: {
                 files: {
                     'app/static/css/style.min.css': [
-                        'app/static/css/normalize.css',
                         'app/static/css/font-awesome.min.css',
                         'app/static/css/style.css',
                         'app/static/css/angular-flash.css',
@@ -67,13 +66,6 @@ module.exports = function(grunt) {
             main: {
                 files: [
                     // front-end
-                    {
-                        expand: true,
-                        cwd: 'bower_components/normalize.css',
-                        src: ['normalize.css'],
-                        dest: 'app/static/css/',
-                        filter: 'isFile'
-                    },
                     {
                         expand: true,
                         cwd: 'bower_components/fontawesome/fonts',
@@ -365,6 +357,13 @@ module.exports = function(grunt) {
                         cwd: 'bower_components/world-flags-sprite/images/',
                         src: ['flags16.png'],
                         dest: 'app/static/images/',
+                        filter: 'isFile'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/bootstrap/dist/css/',
+                        src: ['bootstrap.min.css'],
+                        dest: 'app/static/css/',
                         filter: 'isFile'
                     },
                     {
