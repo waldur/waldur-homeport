@@ -6,7 +6,6 @@ angular.module('ncsaas')
     toBeFeatures: [
       'localSignup',
       'people',
-      'backups',
       'templates',
       'monitoring',
       'projectGroups',

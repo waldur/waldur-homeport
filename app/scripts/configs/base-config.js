@@ -144,7 +144,6 @@ angular.module('ncsaas')
       'support',
       'monitoring',
       'users',
-      'backups',
       'templates',
       'invoices',
       'payments',
