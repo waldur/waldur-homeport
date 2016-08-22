@@ -39,7 +39,6 @@ module.exports = function(grunt) {
                         'app/static/css/font-awesome.min.css',
                         'app/static/css/style.css',
                         'app/static/css/angular-flash.css',
-                        'app/static/css/angucomplete-alt.css',
                         'app/static/css/select2.css',
                         'app/static/css/select.css',
                         'app/static/css/xeditable.css',
@@ -162,20 +161,6 @@ module.exports = function(grunt) {
                     },
                     {
                         expand: true,
-                        cwd: 'bower_components/angucomplete-alt',
-                        src: ['angucomplete-alt.js'],
-                        dest: 'app/static/js/angular/',
-                        filter: 'isFile'
-                    },
-                    {
-                        expand: true,
-                        cwd: 'bower_components/angucomplete-alt',
-                        src: ['angucomplete-alt.css'],
-                        dest: 'app/static/css/',
-                        filter: 'isFile'
-                    },
-                    {
-                        expand: true,
                         cwd: 'bower_components/select2/',
                         src: [
                             'select2.css',
@@ -268,20 +253,6 @@ module.exports = function(grunt) {
                         cwd: 'bower_components/angular-translate-loader-static-files',
                         src: ['angular-translate-loader-static-files.js'],
                         dest: 'app/static/js/angular/',
-                        filter: 'isFile'
-                    },
-                    {
-                        expand: true,
-                        cwd: 'bower_components/angular-cron-jobs/dist',
-                        src: ['angular-cron-jobs.js'],
-                        dest: 'app/static/js/angular/',
-                        filter: 'isFile'
-                    },
-                    {
-                        expand: true,
-                        cwd: 'bower_components/angular-cron-jobs/dist',
-                        src: ['angular-cron-jobs.css'],
-                        dest: 'app/static/css/',
                         filter: 'isFile'
                     },
                     {
@@ -394,6 +365,13 @@ module.exports = function(grunt) {
                         cwd: 'bower_components/world-flags-sprite/images/',
                         src: ['flags16.png'],
                         dest: 'app/static/images/',
+                        filter: 'isFile'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/angular-bootstrap/',
+                        src: ['ui-bootstrap-tpls.min.js'],
+                        dest: 'app/static/js/angular/',
                         filter: 'isFile'
                     },
                 ]
@@ -659,7 +637,6 @@ module.exports = function(grunt) {
                     'app/static/js/angular/angular.js',
                     'app/static/js/angular/angular-animate.js',
                     'app/static/js/angular/angular-cookies.js',
-                    'app/static/js/angular/angular-cron-jobs.js',
                     'app/static/js/angular/angular-flash.js',
                     'app/static/js/angular/angular-loader.js',
                     'app/static/js/angular/angular-gravatar.js',
@@ -670,7 +647,6 @@ module.exports = function(grunt) {
                     'app/static/js/angular/angular-resource.js',
                     'app/static/js/angular/angular-scroll.js',
                     'app/static/js/angular/angular-ui-router.js',
-                    'app/static/js/angular/angucomplete-alt.js',
                     'app/static/js/angular/select.js',
                     'app/static/js/angular/satellizer.js',
                     'app/static/js/angular/angular-translate.js',

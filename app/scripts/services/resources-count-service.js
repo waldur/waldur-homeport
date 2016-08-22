@@ -28,7 +28,6 @@
     }
     return {
       resources: factory('resources'),
-      backups: factory('backups'),
       users: factory('project-permissions'),
       alerts: factory('alerts'),
       events: factory('events'),

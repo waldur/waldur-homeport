@@ -8,7 +8,6 @@ angular.module('ncsaas')
       'providers',
       'services',
       'eventlog',
-      'backups',
       'localSignup',
       'people',
       'import',

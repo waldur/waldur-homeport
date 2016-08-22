@@ -9,7 +9,6 @@ angular.module('ncsaas')
       'password',
       'people',
       'compare',
-      'backups',
       'templates',
       'sizing',
       'projectGroups',
