@@ -38,7 +38,6 @@ module.exports = function(grunt) {
                         'app/static/css/font-awesome.min.css',
                         'app/static/css/style.css',
                         'app/static/css/angular-flash.css',
-                        'app/static/css/select2.css',
                         'app/static/css/select.css',
                         'app/static/css/xeditable.css',
                         'app/static/css/angular-block-ui.css',
@@ -149,18 +148,6 @@ module.exports = function(grunt) {
                         cwd: 'bower_components/angular-gravatar/build',
                         src: ['angular-gravatar.js'],
                         dest: 'app/static/js/angular/',
-                        filter: 'isFile'
-                    },
-                    {
-                        expand: true,
-                        cwd: 'bower_components/select2/',
-                        src: [
-                            'select2.css',
-                            'select2.png',
-                            'select2x2.png',
-                            'select2-spinner.gif'
-                        ],
-                        dest: 'app/static/css/',
                         filter: 'isFile'
                     },
                     {
