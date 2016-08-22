@@ -1,8 +1,6 @@
 .map-dialog {
-    .modal-content {
-        max-height: 500px;
-        max-width: 600px;
-        overflow-y: auto;
-        padding: 20px;
+    .angular-leaflet-map {
+        height: 500px;
+        width: 600px;
     }
 }

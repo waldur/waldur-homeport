@@ -3,7 +3,7 @@
 
     <div class="form-row" ng-if="!editUser && users.length">
         <label>User:</label>
-        <ui-select ng-model="userModel.user" theme="select2">
+        <ui-select ng-model="userModel.user" theme="bootstrap">
             <ui-select-match placeholder="Select user...">
                 {{ $select.selected.full_name || $select.selected.username }}
             </ui-select-match>
@@ -51,7 +51,7 @@
 
     <div class="form-row" ng-if="!emptyProjectList">
         <label>Projects:</label>
-        <ui-select ng-model="userModel.projects" theme="select2" multiple>
+        <ui-select ng-model="userModel.projects" theme="bootstrap" multiple>
             <ui-select-match placeholder="Select projects...">
                 {{ $item.name }}
             </ui-select-match>

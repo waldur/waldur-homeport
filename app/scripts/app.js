@@ -11,12 +11,10 @@
       'ngResource',
       'duScroll',
       'ui.gravatar',
-      'angucomplete-alt',
       'ui.select',
       'angularMoment',
       'ngAnimate',
       'pascalprecht.translate',
-      'angular-cron-jobs',
       'flash',
       'angulartics',
       'angulartics.google.analytics',
@@ -24,8 +22,8 @@
       'xeditable',
       'blockUI',
       'ngSanitize',
-      '$uibModal',
-      'leaflet-directive'
+      'leaflet-directive',
+      'ui.bootstrap'
     ])
     // urls
     .config(function($stateProvider, $urlRouterProvider, blockUIConfig, MODE) {
@@ -299,17 +297,11 @@
             'tabResources@projects.details' : {
               templateUrl: 'views/project/tab-resources.html',
             },
-            'tabUsers@projects.details' : {
-              templateUrl: 'views/project/tab-users.html',
-            },
             'tabApplications@projects.details' : {
               templateUrl: 'views/resource/tab-applications.html',
             },
             'tabPrivateClouds@projects.details' : {
               templateUrl: 'views/resource/tab-private-clouds.html',
-            },
-            'tabBackups@projects.details' : {
-              templateUrl: 'views/resource/tab-backups.html',
             },
             'tabPremiumSupport@projects.details': {
               templateUrl: 'views/project/tab-support.html',
@@ -588,14 +580,8 @@
             'tabResources@resources.list' : {
               templateUrl: 'views/project/tab-resources.html',
             },
-            'tabUsers@resources.list' : {
-              templateUrl: 'views/project/tab-users.html',
-            },
             'tabApplications@resources.list' : {
               templateUrl: 'views/resource/tab-applications.html',
-            },
-            'tabBackups@resources.list' : {
-              templateUrl: 'views/resource/tab-backups.html',
             },
             'tabPremiumSupport@resources.list': {
               templateUrl: 'views/project/tab-support.html',
@@ -621,9 +607,6 @@
             },
             'tabDetails@resources.details': {
               templateUrl: 'views/resource/tab-details.html',
-            },
-            'tabBackups@resources.details': {
-              templateUrl: 'views/resource/tab-backups.html',
             },
             'tabAlerts@resources.details': {
               templateUrl: 'views/resource/tab-alerts.html',
@@ -780,83 +763,6 @@
           auth: true
         })
 
-        .state('backups', {
-          url: '/backups/',
-          abstract: true,
-          templateUrl: 'views/partials/base.html',
-        })
-
-        .state('backups.list', {
-          url: '',
-          views: {
-            'appContent': {
-              templateUrl: 'views/backup/list.html',
-            },
-            'appHeader': {
-              templateUrl: 'views/partials/app-header.html',
-            }
-          },
-          resolve: {
-            authenticated: authCheck
-          },
-          auth: true
-        })
-
-        .state('backups.create', {
-          url: 'add/',
-          views: {
-            'appContent': {
-              templateUrl: 'views/backup/create.html',
-            },
-            'appHeader': {
-              templateUrl: 'views/partials/app-header.html',
-            }
-          },
-          resolve: {
-            authenticated: authCheck
-          },
-          auth: true
-        })
-
-        .state('backup-schedules', {
-          url: '/backup-schedules/',
-          abstract: true,
-          templateUrl: 'views/partials/base.html',
-          resolve: {
-            authenticated: authCheck
-          }
-        })
-
-        .state('backup-schedules.create', {
-          url: 'add/',
-          views: {
-            'appContent': {
-              templateUrl: 'views/backup-schedules/create.html',
-            },
-            'appHeader': {
-              templateUrl: 'views/partials/app-header.html',
-            }
-          },
-          resolve: {
-            authenticated: authCheck
-          },
-          auth: true
-        })
-        .state('backups.restore', {
-          url: ':uuid/restore/',
-          views: {
-            'appContent': {
-              templateUrl: 'views/backup/restore.html',
-            },
-            'appHeader': {
-              templateUrl: 'views/partials/app-header.html',
-            }
-          },
-          resolve: {
-            authenticated: authCheck
-          },
-          auth: true
-        })
         .state('help', {
           url: '/help/',
           abstract: true,
