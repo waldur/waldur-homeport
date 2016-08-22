@@ -30,9 +30,6 @@
             color: rgb(182, 182, 182);
         } // &:after
     } // added
-    .angucomplete-holder {
-        @include inline-middle;
-    }
     .add-label {
         @include inline-middle;
         width: 55px;
