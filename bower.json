@@ -38,7 +38,8 @@
     "leaflet": "~0.7.7",
     "select2": "^3.4.5",
     "angular-ui-select": "^0.18.1",
-    "world-flags-sprite": "*"
+    "world-flags-sprite": "*",
+    "angular-bootstrap": "^2.0.1"
   },
   "resolutions": {
     "angular": "1.3.8"

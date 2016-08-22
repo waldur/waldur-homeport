@@ -25,7 +25,8 @@
       'blockUI',
       'ngSanitize',
       'ngDialog',
-      'leaflet-directive'
+      'leaflet-directive',
+      'ui.bootstrap'
     ])
     // urls
     .config(function($stateProvider, $urlRouterProvider, blockUIConfig, MODE) {

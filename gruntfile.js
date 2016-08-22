@@ -396,6 +396,13 @@ module.exports = function(grunt) {
                         dest: 'app/static/images/',
                         filter: 'isFile'
                     },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/angular-bootstrap/',
+                        src: ['ui-bootstrap-tpls.min.js'],
+                        dest: 'app/static/js/angular/',
+                        filter: 'isFile'
+                    },
                 ]
             },
             modePrivateIaas: {
