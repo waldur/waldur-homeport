@@ -310,7 +310,7 @@
         return form.$save().then(function(response) {
           actionUtilsService.handleActionSuccess($scope.action);
           $scope.errors = {};
-          $scope.$dismiss();
+          $scope.$close();
           $scope.controller.reInitResource($scope.resource);
         }, function(response) {
           $scope.errors = response.data;

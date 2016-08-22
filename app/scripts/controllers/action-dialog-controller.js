@@ -42,7 +42,7 @@
           $scope.errors = {};
           actionUtilsService.handleActionSuccess($scope.action);
           $scope.controller.reInitResource($scope.resource);
-          $scope.$dismiss();
+          $scope.$close();
         }, function(response) {
           $scope.errors = response.data;
         });

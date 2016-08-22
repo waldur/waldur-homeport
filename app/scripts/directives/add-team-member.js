@@ -90,7 +90,7 @@
                 saveCustomerPermission(),
                 saveProjectPermissions()
             ]).then(function() {
-                scope.$dismiss();
+                scope.$close();
             });
         }
 
