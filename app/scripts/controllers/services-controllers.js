@@ -252,7 +252,7 @@
       setModel: function(model) {
         this.model = angular.copy(model);
         this.model.serviceName = model.name;
-        this.loading = true;
+        this.loadingService = true;
         this.getOptions(model.name).then(function(options) {
           this.model.options = options;
           angular.forEach(options, function(option) {
@@ -261,7 +261,7 @@
             }
           });
         }.bind(this)).finally(function() {
-          this.loading = false;
+          this.loadingService = false;
         }.bind(this));
         controllerScope.errors = {};
       },
@@ -273,8 +273,10 @@
       },
 
       activate: function() {
-        var promise = $q.all([this.getCustomer(), this.getServices()]);
-        ncUtils.blockElement('create-service', promise);
+        this.loadingCustomer = true;
+        $q.all([this.getCustomer(), this.getServices()]).finally(function() {
+          this.loadingCustomer = false;
+        }.bind(this));
       },
 
       getCustomer: function() {
