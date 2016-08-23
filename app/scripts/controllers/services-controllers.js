@@ -170,6 +170,7 @@
       'ENV',
       '$rootScope',
       '$state',
+      '$scope',
       '$q',
       'ncUtils',
       ServiceAddController]);
@@ -182,6 +183,7 @@
     ENV,
     $rootScope,
     $state,
+    $scope,
     $q,
     ncUtils) {
     var controllerScope = this;
@@ -194,7 +196,27 @@
       secretFields: ['token', 'password'],
       optionTypes: ['string', 'choice', 'boolean', 'url', 'file upload'],
 
-      extraOptions: {},
+      extraOptions: {
+        OpenStack: {
+          is_admin: {
+            type: 'boolean'
+          },
+          tenant_name: {
+            help_text: ''
+          },
+          backend_url: {
+            help_text: ''
+          },
+          username: {
+            help_text: ''
+          }
+        },
+        DigitalOcean: {
+          token: {
+            required: true
+          }
+        }
+      },
 
       optionsOrder: {
         OpenStack: [
@@ -209,25 +231,39 @@
         ]
       },
 
+      errors: {},
+
       init: function() {
         this.service = joinService;
         this.controllerScope = controllerScope;
         this.successMessage = 'Provider has been created';
-        this.categories = ENV.serviceCategories;
+        var vm = this;
+        $scope.$watch('ServiceAdd.serviceChoice', function(choice) {
+          if (!choice) {
+            return;
+          }
+          var service = vm.services[choice.name];
+          if (service) {
+            vm.setModel(service);
+          }
+        });
         this._super();
       },
       setModel: function(model) {
         this.model = angular.copy(model);
         this.model.serviceName = model.name;
+        this.loading = true;
         this.getOptions(model.name).then(function(options) {
           this.model.options = options;
           angular.forEach(options, function(option) {
             if (option.default_value) {
               option.value = option.default_value;
             }
-          })
+          });
+        }.bind(this)).finally(function() {
+          this.loading = false;
         }.bind(this));
-        this.errors = {};
+        controllerScope.errors = {};
       },
 
       fillPredefinedOptions: function(data) {
@@ -236,18 +272,6 @@
         });
       },
 
-      setCategory: function(category) {
-        this.category = category;
-        this.categoryServices = [];
-        for (var i = 0; i < category.services.length; i++) {
-          var name = category.services[i];
-          var service = this.services[name];
-          if (service) {
-            this.categoryServices.push(service);
-          }
-        }
-        this.setModel(this.categoryServices[0]);
-      },
       activate: function() {
         var promise = $q.all([this.getCustomer(), this.getServices()]);
         ncUtils.blockElement('create-service', promise);
@@ -263,11 +287,21 @@
       getServices: function() {
         var vm = this;
         return servicesService.getServicesList().then(function(services) {
+          vm.choices = [];
           angular.forEach(services, function(service, name) {
             service.name = name;
+            var category = ENV.serviceCategories.filter(function(category) {
+              return category.services.indexOf(name) !== -1;
+            })[0];
+            if (category) {
+              vm.choices.push({
+                name: name,
+                category: category.name
+              });
+            }
           });
+          vm.serviceChoice = vm.choices[0];
           vm.services = services;
-          vm.setCategory(vm.categories[0]);
         });
       },
 
@@ -323,7 +357,7 @@
         for (var i = 0; i < this.model.options.length; i++) {
           var option = this.model.options[i];
           var value = option.value;
-          if (!value) {
+          if (angular.isUndefined(value)) {
             continue;
           }
           if (ncUtils.isFileOption(option)) {
