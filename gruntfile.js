@@ -35,6 +35,7 @@ module.exports = function(grunt) {
             combine: {
                 files: {
                     'app/static/css/style.min.css': [
+                        'app/static/css/bootstrap.min.css',
                         'app/static/css/font-awesome.min.css',
                         'app/static/css/style.css',
                         'app/static/css/angular-flash.css',
@@ -628,6 +629,7 @@ module.exports = function(grunt) {
                     'app/static/js/angular/angular-block-ui.js',
                     'app/static/js/leaflet.js',
                     'app/static/js/angular/angular-leaflet-directive.js',
+                    'app/static/js/angular/ui-bootstrap-tpls.min.js',
                 ],
                 dest: 'app/static/js/main/main.js'
             }
