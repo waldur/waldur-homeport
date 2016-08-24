@@ -3,9 +3,9 @@
 (function() {
   angular.module('ncsaas')
     .service('actionUtilsService', [
-      'ncUtilsFlash', '$rootScope', '$http', '$q', '$uibModal', 'resourcesService', actionUtilsService]);
+      'ncUtilsFlash', '$rootScope', '$http', '$q', '$uibModal', 'ncUtils', 'resourcesService', actionUtilsService]);
 
-  function actionUtilsService(ncUtilsFlash, $rootScope, $http, $q, $uibModal, resourcesService) {
+  function actionUtilsService(ncUtilsFlash, $rootScope, $http, $q, $uibModal, ncUtils, resourcesService) {
     this.loadActions = function(model) {
       resourcesService.cleanOptionsCache(model.url);
       return resourcesService.getOption(model.url).then(function(response) {
@@ -55,7 +55,9 @@
         url = parts[0];
         query_params = ncUtils.parseQueryString(parts[1]);
       }
-      return resourcesService.getList(query_params, url);
+      return $http.get(url, {params: query_params}).then(function(response) {
+        return response.data;
+      });
     };
 
     this.buttonClick = function(controller, model, name, action) {
