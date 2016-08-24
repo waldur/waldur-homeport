@@ -45,7 +45,7 @@
   .inactive-content {
     animation: content-hide .2s 1 ease-out;
   }
-  .tooltip {
+  .nc-tooltip {
     &.quota-tooltip {
       top: 62px;
       @include bp(xs) {
@@ -55,7 +55,7 @@
   }
   .cost-tab-actions {
     position: relative;
-    .tooltip {
+    .nc-tooltip {
       &.quota-tooltip {
         top: 30px;
         @include bp(xs) {
