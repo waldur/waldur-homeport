@@ -1,5 +1,5 @@
 <div class="middle-box text-center loginscreen" ng-if="!auth.isSignupFormVisible">
-    <form form-autofill-fix visible="localSignin" class="m-b-sm">
+    <form visible="localSignin" class="m-b-sm">
         <h1 class="logo-name">Waldur</h1>
         <div class="form-group">
             <input type="text"
@@ -61,7 +61,7 @@
 <div class="middle-box text-center loginscreen"
     ng-if="auth.isSignupFormVisible" visible="localSignup">
     <h1 class="logo-name">Waldur</h1>
-    <form form-autofill-fix class="m-b-sm">
+    <form class="m-b-sm">
         <div class="form-group">
             <input type="text"
                 ng-model="auth.user.username"
