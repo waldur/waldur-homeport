@@ -15,13 +15,11 @@
                 <label class="text" for="type">Notification method</label>
             </div>
             <div class="col input input-full">
-                <div class="custom-select">
                 <select id="type"
                         ng-model="HookController.instance.hook_type"
                         ng-options="type as (type|titleCase) for type in HookController.types">
                     <option value="">Select notification method</option>
                 </select>
-                </div>
             </div>
         </div>
 
