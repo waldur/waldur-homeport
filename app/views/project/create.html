@@ -1,55 +1,50 @@
-<div ng-controller="ProjectAddController as ProjectAdd">
-
-    <div class="container">
-        <h1>Add project</h1>
-    </div>
-
-<div class="white-box">
-    <section class="short-form">
-        <div class="form-row">
-            <div class="col label">
-                <label for="">Project name</label>
-            </div>
-            <div class="col input input-full">
-                <input type="text" ng-model="ProjectAdd.project.name">
-                <div class="error arrow-up" ng-show="ProjectAdd.errors.name">
-                    <ul class="error-list">
-                        <li ng-repeat="error in ProjectAdd.errors.name">{{ error }}</li>
-                    </ul>
-                </div>
+<div ng-controller="ProjectAddController as ProjectAdd" class="white-box">
+    <div class="form-horizontal">
+        <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-5">
+                <h2>Add project</h2>
             </div>
         </div>
-        <div class="form-row">
-            <div class="col label">
-                <label for="">Project description</label>
+        <div class="form-group">
+            <label for="projectName" class="col-sm-3 control-label">
+                Project name
+            </label>
+            <div class="col-sm-5">
+                <input type="text"
+                    id="projectName"
+                    ng-model="ProjectAdd.project.name"
+                    class="form-control">
+                <p class="text-danger"
+                   ng-repeat="error in ProjectAdd.errors.name"
+                   ng-bind="error"></p>
             </div>
-            <div class="col input input-full">
-                <textarea class="full"
+        </div>
+
+        <div class="form-group">
+            <label for="projectDescription" class="col-sm-3 control-label">
+                Project description
+            </label>
+            <div class="col-sm-5">
+                <textarea id="projectDescription"
+                    class="form-control"
                     ng-model="ProjectAdd.project.description"></textarea>
+                <p class="text-danger"
+                   ng-repeat="error in ProjectAdd.errors.description"
+                   ng-bind="error"></p>
             </div>
         </div>
-    </section>
 
-    <!-- non field errors -->
-    <div class="simple-line" ng-show="ProjectAdd.errors.non_field_errors">
-        <div class="error">
-            <ul class="error-list">
-                <li ng-repeat="error in ProjectAdd.errors.non_field_errors">
-                    {{ error }}
-                </li>
-            </ul>
+        <div class="form-group">
+            <p class="help-block text-danger col-sm-offset-3 col-sm-5"
+               ng-repeat="error in ProjectAdd.errors.non_field_errors"
+               ng-bind="error"></p>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-5">
+                <button class="btn btn-primary" submit-button="ProjectAdd.save()">Add project</button>
+                <button class="btn btn-default" ng-click="ProjectAdd.cancel()">Cancel</button>
+            </div>
         </div>
     </div>
-    <!-- /non field errors -->
-
-    <div class="decision">
-        <div class="col">
-            <a class="button-apply" submit-button="ProjectAdd.save()">Add project</a>
-        </div>
-        <div class="col">
-            <a class="button-cancel" ng-click="ProjectAdd.cancel()">Cancel</a>
-        </div>
-    </div>
-</div>
-
 </div>
