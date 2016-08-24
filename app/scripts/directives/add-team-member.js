@@ -34,25 +34,31 @@
         scope.currentUser = null;
         scope.currentCustomer = null;
         scope.refreshProjectChoices = refreshProjectChoices;
-        scope.changeRoleHelpMessage = "You cannot change your own role";
 
-        if (scope.editUser) {
-            scope.addText = 'Save';
-            scope.addTitle = 'Edit';
-            scope.userModel.user = scope.editUser;
-            scope.userModel.role = scope.editUser.role;
-            scope.userModel.projects = scope.editUser.projects.map(parseProject);
-            usersService.getCurrentUser().then(function(currentUser) {
-                scope.canChangeRole = currentUser.is_staff || scope.editUser.uuid !== currentUser.uuid;
-            });
-        } else {
-            scope.canChangeRole = true;
-            usersService.getAll().then(function(users) {
-                scope.users = users.filter(function(user) {
-                    return scope.addedUsers.indexOf(user.uuid) === -1;
+        function loadData() {
+            if (scope.editUser) {
+                scope.addText = 'Save';
+                scope.addTitle = 'Edit';
+                scope.userModel.user = scope.editUser;
+                scope.userModel.role = scope.editUser.role;
+                scope.userModel.projects = scope.editUser.projects.map(parseProject);
+                return usersService.getCurrentUser().then(function(currentUser) {
+                    scope.canChangeRole = currentUser.is_staff || scope.editUser.uuid !== currentUser.uuid;
                 });
-            });
+            } else {
+                scope.canChangeRole = true;
+                return usersService.getAll().then(function(users) {
+                    scope.users = users.filter(function(user) {
+                        return scope.addedUsers.indexOf(user.uuid) === -1;
+                    });
+                });
+            }
         }
+
+        scope.loading = true;
+        loadData().finally(function() {
+            scope.loading = false;
+        });
 
         function parseProject(project) {
             return {
