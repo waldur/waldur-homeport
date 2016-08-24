@@ -37,10 +37,6 @@
         <h2 class="app-title" ng-bind="entityOptions.entityData.noMatchesText"></h2>
     </div>
 
-    <div ng-if="entityList.controlPanelShow"
-         ng-include="'views/directives/entity-list/batch-header.html'">
-    </div>
-
     <div class="white-box list-box" ng-show="entityList.list.length > 0">
         <ul class="mobile-show compact-list"
             ng-if="entityOptions.entityData.rowTemplateUrl">
@@ -53,7 +49,6 @@
         </ul>
         <ul class="object-list" ng-class="{'mobile-hide': entityOptions.entityData.rowTemplateUrl}">
             <li class="list-item list-header" ng-if="::!entityOptions.entityData.hideTableHead">
-                <div class="checkbox" ng-if="entityList.controlPanelShow"></div>
                 <div ng-repeat="fieldHead in entityOptions.list" class="additional-cell {{ fieldHead.className }}"
                      ng-class="{ 'display-for-mobile' : fieldHead.showForMobile, 'status': fieldHead.type == 'statusCircle' }">
                     <a ng-click="entityList.orderField=fieldHead.propertyName; entityList.reverseOrder = !entityList.reverseOrder"
@@ -78,13 +73,6 @@
                             track by $index">
                 <div class="list-item list" ng-class="{'opened': entity.expandItemOpen, 'pointer' : entityOptions.entityData.expandable}"
                      ng-click="entity.expandItemOpen=!entity.expandItemOpen; entityList.showMore(entity)">
-                    <div class="checkbox" ng-if="entityList.controlPanelShow">
-                        <div class="checkbox" stoppropagation>
-                            <input type="checkbox" ng-if="entityList.showgroup"
-                                   ng-checked="entityList.isInstanceSelected(entity)"
-                                   ng-click="entityList.changeInstanceSelection(entity)">
-                        </div>
-                    </div>
                     <div ng-repeat="field in entityOptions.list"
                          ng-switch="::field.type"
                          ng-class="{ 'display-for-mobile' : field.showForMobile, 'status': field.type == 'statusCircle' }"
