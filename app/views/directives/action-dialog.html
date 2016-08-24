@@ -1,60 +1,64 @@
-<form>
-    <h2>{{ action.title }}</h2>
-    <h3 ng-if="loading">Loading form</h3>
-    <section class="short-form full" ng-if="!loading">
-        <div class="form-row"
+<div class="modal-header">
+    <h3 class="modal-title">{{ action.title }}</h3>
+</div>
+<div class="modal-body">
+    <div ng-if="loading">
+        <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
+    </div>
+    <div ng-if="!loading">
+        <div class="form-group"
              ng-repeat="(name, field) in action.fields">
-            <div class="col label">
-                <label>{{ ::field.label }}</label>
-            </div>
-            <div class="col input-full" ng-switch="field.type">
+            <label class="control-label"
+                for="action-{{ name }}"
+                ng-if="field.type != 'boolean'"
+                ng-bind="::field.label">
+            </label>
+            <div ng-switch="field.type">
                 <div ng-switch-when="string">
-                    <input ng-model="form[name]"/>
+                    <input id="action-{{ name }}"
+                        ng-model="form[name]"
+                        class="form-control"/>
                 </div>
                 <div ng-switch-when="integer">
                     <input ng-model="form[name]"
                            type="number"
+                           id="action-{{ name }}"
                            min="{{ ::field.min_value }}"
                            max="{{ ::field.max_value }}"
-                           placeholder="{{ ::field.min_value }}"/>
+                           placeholder="{{ ::field.min_value }}"
+                           class="form-control"/>
                 </div>
                 <div ng-switch-when="select">
-                    <select
+                    <select id="action-{{ name }}"
                         ng-options="item.value as item.display_name for item in field.list"
                         ng-model="form[name]"
-                        ng-if="field.list">
+                        ng-if="field.list"
+                        class="form-control">
                         <option value="">Select an option</option>
                      </select>
-                     <div ng-if="!field.list">N/A</div>
+                     <div class="form-control-static" ng-if="!field.list">N/A</div>
                 </div>
                 <div ng-switch-when="boolean">
-                    <div class="toggle">
-                        <input id="toggle_{{$id}}" type="checkbox" ng-model="form[name]">
-                        <label for="toggle_{{$id}}">
-                            <span>no</span>
-                            <span>yes</span>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" ng-model="form[name]">
+                            {{ ::field.label }}
                         </label>
                     </div>
                 </div>
-                <div class="error arrow-up" ng-show="errors[name]">
-                    <ul class="error-list">
-                        <li ng-repeat="error in errors[name]" ng-bind="error"></li>
-                    </ul>
-                </div>
+                <p class="text-danger" ng-repeat="error in errors[name]" ng-bind="error"></p>
             </div>
         </div>
-        <div class="error arrow-up" ng-show="errors.non_field_errors">
-            <ul class="error-list">
-                <li ng-repeat="error in errors.non_field_errors" ng-bind="error"></li>
-            </ul>
-        </div>
-        <div class="decision">
-            <div class="col">
-                <a class="button-apply" submit-button="submitForm()">Submit</a>
-            </div>
-            <div class="col">
-                <a class="button-cancel" ng-click="cancel()">Cancel</a>
-            </div>
-        </div>
-    </section>
-</form>
+        <p class="text-danger" ng-repeat="error in errors.non_field_errors" ng-bind="error"></p>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary"
+        submit-button="submitForm()">
+        Submit
+    </button>
+    <button class="btn btn-default"
+        ng-click="cancel()">
+        Cancel
+    </button>
+</div>
