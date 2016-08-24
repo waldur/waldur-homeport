@@ -14,7 +14,7 @@
                 placeholder="Password">
         </div>
         <button type="submit"
-            class="btn btn-primary full-width"
+            class="btn btn-primary btn-block"
             submit-button="auth.signin()">Login</button>
         <p class="text-warning"
             ng-repeat="error in auth.getErrors()" ng-bind="error"></p>
@@ -85,7 +85,7 @@
         </div>
         <p class="text-warning"
             ng-repeat="error in auth.getErrors()" ng-bind="error"></p>
-        <button class="btn btn-primary full-width"
+        <button class="btn btn-primary btn-block"
             submit-button="auth.signup()"
             type="submit">
             Register
