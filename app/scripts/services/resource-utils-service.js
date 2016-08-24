@@ -43,7 +43,7 @@
         if (resource.size) {
           parts.push($filter('filesize')(resource.size));
         }
-        var summary = parts.join(' , ');
+        var summary = parts.join(', ');
         return summary;
       },
       formatFlavor: function(resource) {
@@ -58,7 +58,7 @@
           if (resource.disk) {
             parts.push($filter('filesize')(resource.disk) + ' storage');
           }
-          var summary = parts.join(' , ');
+          var summary = parts.join(', ');
           return summary;
         }
       },

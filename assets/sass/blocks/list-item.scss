@@ -1,8 +1,3 @@
-.more-details {
-    position: relative;
-    z-index: 10;
-} // more-details
-
 .empty-list-message {
     text-align: center;
 }
@@ -168,9 +163,6 @@
             text-align: right;
             &.switch {
                 @include property(width, 280);
-                .checkbox-toggle {
-                    @include property(top, -3);
-                }
             } // &.switch
             .actions-button {
                 .button {
@@ -196,16 +188,6 @@
                 } // button
             } // actions-button
         } // actions-box
-        &.ministatus {
-            display: none;
-            width: 40px;
-            @include bp(xs) {
-                @include table-cell;
-            } // xs
-            @include bp(sm) {
-                @include table-cell;
-            } // sm
-        } // &.ministatus
         &.additional-cell {
             &:not(.display-for-mobile){
                 @include bp(xs) {
@@ -335,10 +317,6 @@
                 width: 40%;
             }
         } // &.additional-cell
-        .more-details {
-            @include property(margin-left, 10);
-            text-decoration: none;
-        } // more-details
     } // > div
     .field-description {
         color: #50b848;
