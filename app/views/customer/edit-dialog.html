@@ -1,79 +1,93 @@
-<div class="add-team-member">
-<form name="CustomerForm">
-    <h3>{{ dialogTitle }}</h3>
-
-    <div class="form-row">
-        <label for="customerName">Name:</label>
-         <input type="text"
-                id="customerName"
-                name="name"
-                required ng-model="instance.name"
-                class="form-control">
-        <div class="error arrow-up" ng-if="CustomerForm.name.$dirty && CustomerForm.name.$invalid">
-            <ul class="error-list">
-                <li>This field is required.</li>
-            </ul>
+<div class="modal-header">
+    <h3 class="modal-title" ng-bind="dialogTitle"></h3>
+</div>
+<div class="modal-body">
+    <form name="CustomerForm">
+        <div class="form-group">
+            <label for="customerName" class="control-label">
+                Name:
+            </label>
+            <input type="text"
+                   id="customerName"
+                   name="name"
+                   required ng-model="instance.name"
+                   class="form-control">
+            <p class="text-danger"
+               ng-if="CustomerForm.name.$dirty && CustomerForm.name.$invalid">
+               This field is required.
+            </p>
         </div>
-    </div>
 
-    <div class="form-row">
-        <label for="customerCode">Organization registration code:</label>
-        <input type="text"
-               id="customerCode"
-               ng-model="instance.registration_code"
-               class="form-control">
-    </div>
-
-    <div class="form-row">
-        <label for="customerCountry">Country:</label>
-        <ui-select ng-model="instance.country" theme="bootstrap">
-            <ui-select-match placeholder="Select country...">
-            <span class="f16"><span class="flag {{ $select.selected.value | lowercase }}"></span></span>
-                {{ $select.selected.display_name }}
-            </ui-select-match>
-            <ui-select-choices
-                repeat="country in countryChoices | filter: $select.search"
-                refresh-delay="0">
-                <span class="f16"><span class="flag {{ country.value | lowercase }}"></span></span>
-                {{ ::country.display_name }}
-            </ui-select-choices>
-        </ui-select>
-    </div>
-
-    <div class="form-row">
-        <label for="customerAddress">Address:</label>
-        <input type="text"
-               id="customerAddress"
-               ng-model="instance.contact_details"
-               class="form-control">
-    </div>
-
-    <div class="form-row">
-        <label for="vat_code">
-            <helpicon help-text="Please provide your EU VAT ID if you are registered in the European Union"></helpicon>
-            EU VAT ID
-        </label>
-        <input type="text"
-               id="vat_code"
-               ng-model="instance.vat_code"
-               class="form-control">
+        <div class="form-group">
+            <label for="customerCode" class="control-label">
+                Organization registration code:
+            </label>
+            <input type="text"
+                   id="customerCode"
+                   ng-model="instance.registration_code"
+                   class="form-control">
         </div>
-        <div class="error arrow-up" ng-show="errors.vat_code">
-            <ul class="error-list">
-                <li ng-repeat="error in errors.vat_code">{{ error }}</li>
-            </ul>
-        </div>
-    </div>
 
-    <div class="decision">
-        <div class="col">
-            <a class="button-apply"
-               submit-button="saveCustomer()"
-               ng-class="{'disabled': CustomerForm.$invalid}">Save</a>
+        <div class="form-group">
+            <label for="customerCountry" class="control-label">
+                Country:
+            </label>
+            <ui-select ng-model="instance.country" theme="bootstrap">
+                <ui-select-match placeholder="Select country...">
+                <span class="f16"><span class="flag {{ $select.selected.value | lowercase }}"></span></span>
+                    {{ $select.selected.display_name }}
+                </ui-select-match>
+                <ui-select-choices
+                    repeat="country in countryChoices | filter: $select.search"
+                    refresh-delay="0">
+                    <span class="f16"><span class="flag {{ country.value | lowercase }}"></span></span>
+                    {{ ::country.display_name }}
+                </ui-select-choices>
+            </ui-select>
         </div>
-        <div class="col">
-            <a class="button-cancel" ng-click="$dismiss()">Cancel</a>
+
+        <div class="form-group">
+            <label for="customerAddress" class="control-label">
+                Address:
+            </label>
+            <input type="text"
+                   id="customerAddress"
+                   ng-model="instance.contact_details"
+                   class="form-control">
         </div>
-    </div>
-</form>
+
+        <div class="form-group">
+            <label for="vat_code" class="control-label">
+                <helpicon help-text="Please provide your EU VAT ID if you are registered in the European Union"></helpicon>
+                EU VAT ID
+            </label>
+            <input type="text"
+                   id="vat_code"
+                   ng-model="instance.vat_code"
+                   class="form-control">
+            </div>
+            <p class="text-danger" ng-repeat="error in errors.vat_code" ng-bind="error"></p>
+        </div>
+
+        <div class="form-group"
+            ng-if="errors.non_field_errors">
+            <p class="text-danger"
+               ng-repeat="error in errors.non_field_errors"
+               ng-bind="error">
+            </p>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button"
+        class="btn btn-primary"
+        ng-class="{'disabled': CustomerForm.$invalid}"
+        submit-button="saveCustomer()">
+        Save
+    </button>
+    <button class="btn btn-default"
+        type="button"
+        ng-click="$close()">
+        Cancel
+    </button>
 </div>
