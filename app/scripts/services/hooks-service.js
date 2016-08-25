@@ -21,18 +21,19 @@
       getTypes: function() {
         return Object.keys(endpoints);
       },
-      create: function(url, options) {
+      create: function(hook) {
+        var url = this.getUrlByType(hook.hook_type);
         var instance = this.$create(url);
-        this.cleanupOptions(options, instance);
+        this.cleanupOptions(hook, instance);
         return instance.$save();
       },
-      update: function(url, options) {
+      update: function(hook) {
         var data = {};
-        this.cleanupOptions(options, data);
-        return this.$update(null, url, data);
+        this.cleanupOptions(hook, data);
+        return this.$update(null, hook.url, data);
       },
       cleanupOptions: function(input, output) {
-        var fields = ['is_active', 'event_types', 'email', 'destination_url'];
+        var fields = ['is_active', 'event_groups', 'email', 'destination_url'];
         for(var i in fields) {
           var field = fields[i];
           if (input[field] !== undefined) {

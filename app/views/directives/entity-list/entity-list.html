@@ -120,7 +120,10 @@
                             <a ng-if="field.link" stoppropagation
                                ng-click="entity.expandItemOpen = false"
                                ui-sref="{{ field.link }}">{{ entity[field.propertyName] }}</a>
-                            <a ng-if="!field.link">{{ entity[field.propertyName] }}</a>
+                            <a ng-if="field.action" ng-click="field.action(entity)">
+                              {{ entity[field.propertyName] }}
+                            </a>
+                            <a ng-if="!field.link && !field.action">{{ entity[field.propertyName] }}</a>
                             <span ng-if="field.subtitle" class="subtitle">
                                 #{{ entity.key }} <span title="{{ ::entity.created | date:'medium' }}" am-time-ago="entity.created"></span>
                             </span>
