@@ -5,7 +5,6 @@ body, html {
 
 body {
     @include property(font-size, 16);
-    line-height: 150%;
     background: $main-background-color;
     font-family: $base-font-family;
     color: $text-color;
@@ -104,4 +103,11 @@ body.disable-scroll {
 
 .m-b-sm {
   margin-bottom: 10px;
+}
+
+.list-group-item.awesome-checkbox {
+    padding-left: 35px;
+    label {
+        width: 100%;
+    }
 }
