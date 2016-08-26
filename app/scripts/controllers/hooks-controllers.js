@@ -125,7 +125,8 @@
       var map = {
         ssh: 'SSH',
         jira: 'JIRA',
-        vms: 'Resources'
+        vms: 'Resources',
+        customers: 'Organizations'
       };
       if (map[choice]) {
         choice = map[choice];
@@ -167,7 +168,8 @@
           return {
             id: choice,
             title: $filter('formatEventTitle')(choice),
-            selected: vm.instance.event_groups.indexOf(choice) !== -1
+            selected: vm.instance.event_groups.indexOf(choice) !== -1,
+            help_text: groups[choice].join(', ')
           }
         });
       }).finally(function() {

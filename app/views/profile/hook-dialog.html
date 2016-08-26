@@ -30,11 +30,10 @@
             </div>
         </div>
 
-        <div class="checkbox" ng-if="HookController.instance.uuid">
-            <label>
-                <input type="checkbox" ng-model="HookController.instance.is_active">
-                Enabled
-            </label>
+        <div class="checkbox awesome-checkbox checkbox-success"
+            ng-if="HookController.instance.uuid">
+            <input id="hook-enabled" type="checkbox" ng-model="HookController.instance.is_active">
+            <label for="hook-enabled">Enabled</label>
         </div>
 
         <div class="form-group" ng-if="HookController.instance.hook_type == 'email'">
@@ -59,13 +58,10 @@
                 ng-bind="error"></p>
         </div>
 
-        <div class="form-group">
-            <label class="control-label">Event types</label>
-            <div multiple-select choices="HookController.choices"></div>
-            <p class="text-danger"
-                ng-repeat="error in HookController.errors.event_groups"
-                ng-bind="error"></p>
-        </div>
+        <div multiple-select choices="HookController.choices"></div>
+        <p class="text-danger"
+            ng-repeat="error in HookController.errors.event_groups"
+            ng-bind="error"></p>
 
         <p class="text-danger"
             ng-repeat="error in HookController.errors.non_field_errors"
