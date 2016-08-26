@@ -64,8 +64,8 @@
               name: 'Destination'
             },
             {
-              type: ENTITYLISTFIELDTYPES.listInField,
-              propertyName: 'event_groups',
+              type: ENTITYLISTFIELDTYPES.noType,
+              propertyName: 'events',
               name: 'Events'
             }
           ]
@@ -109,6 +109,7 @@
         this.list.forEach(function(item) {
           item.label = $filter('titleCase')(item.hook_type);
           item.destination = item.destination_url || item.email;
+          item.events = item.event_groups.map($filter('formatEventTitle')).join(', ');
         });
         this.service.list = this.list;
       }
@@ -118,12 +119,31 @@
 })();
 
 (function() {
+  angular.module('ncsaas').filter('formatEventTitle', ['$filter', formatEventTitle]);
+  function formatEventTitle($filter) {
+    return function(choice) {
+      var map = {
+        ssh: 'SSH',
+        jira: 'JIRA',
+        vms: 'Resources'
+      };
+      if (map[choice]) {
+        choice = map[choice];
+      } else {
+        choice = $filter('titleCase')(choice.replace('_', ' '));
+      }
+      return choice + ' events';
+    }
+  }
+})();
+
+(function() {
   angular.module('ncsaas')
     .controller('HookDialogController', [
-      'hooksService', 'eventsService', 'ncUtilsFlash',
+      'hooksService', 'eventsService', 'ncUtilsFlash', '$filter',
       HookDialogController]);
 
-  function HookDialogController(hooksService, eventsService, ncUtilsFlash) {
+  function HookDialogController(hooksService, eventsService, ncUtilsFlash, $filter) {
     var vm = this;
     vm.save = save;
 
@@ -143,14 +163,29 @@
     function loadEventGroups() {
       vm.loading = true;
       eventsService.getEventGroups().then(function(groups) {
-        vm.choices = Object.keys(groups).sort();
+        vm.choices = Object.keys(groups).sort().map(function(choice) {
+          return {
+            id: choice,
+            title: $filter('formatEventTitle')(choice),
+            selected: vm.instance.event_groups.indexOf(choice) !== -1
+          }
+        });
       }).finally(function() {
         vm.loading = false;
       });
     }
 
+    function getSelected() {
+      return vm.choices.filter(function(choice) {
+        return choice.selected
+      }).map(function(choice) {
+        return choice.id;
+      });
+    }
+
     function save() {
       var promise, message;
+      vm.instance.event_groups = getSelected();
       if (vm.instance.uuid) {
         promise = hooksService.update(vm.instance);
         message = 'Notification has been updated'

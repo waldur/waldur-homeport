@@ -38,20 +38,22 @@
         </div>
 
         <div class="form-group" ng-if="HookController.instance.hook_type == 'email'">
-            <input type="text"
+            <input type="email"
                 id="hookEmail"
                 ng-model="HookController.instance.email"
-                class="form-control"/>
+                class="form-control"
+                placeholder="E-mail address"/>
             <p class="text-danger"
                 ng-repeat="error in HookController.errors.email"
                 ng-bind="error"></p>
         </div>
 
         <div class="form-group" ng-if="HookController.instance.hook_type == 'webhook'">
-            <input type="text"
+            <input type="url"
                 id="destination_url"
                 ng-model="HookController.instance.destination_url"
-                class="form-control"/>
+                class="form-control"
+                placeholder="Destination URL"/>
             <p class="text-danger"
                 ng-repeat="error in HookController.errors.destination_url"
                 ng-bind="error"></p>
@@ -59,16 +61,9 @@
 
         <div class="form-group">
             <label class="control-label">Event types</label>
-            <ui-select ng-model="HookController.instance.event_groups" theme="bootstrap" multiple>
-                <ui-select-match placeholder="Select event types...">
-                    {{ $item|titleCase }} events
-                </ui-select-match>
-                <ui-select-choices multiple repeat="choice in HookController.choices">
-                    {{ choice|titleCase }} events
-                </ui-select-choices>
-            </ui-select>
+            <div multiple-select choices="HookController.choices"></div>
             <p class="text-danger"
-                ng-repeat="error in HookController.errors.event_types"
+                ng-repeat="error in HookController.errors.event_groups"
                 ng-bind="error"></p>
         </div>
 
