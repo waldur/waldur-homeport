@@ -1,6 +1,11 @@
-<div class="middle-box text-center loginscreen" ng-if="!auth.isSignupFormVisible">
-    <form visible="localSignin" class="m-b-sm">
-        <h1 class="logo-name">Waldur</h1>
+<div class="middle-box text-center loginscreen">
+    <h1 class="logo-name">Waldur</h1>
+    <h3>Welcome to Waldur HomePort</h3>
+    <p>
+        Your single pane of control for all cloud services.
+        Login in to see it in action.
+    </p>
+    <div visible="localSignin" ng-if="!auth.isSignupFormVisible" class="m-b-sm">
         <div class="form-group">
             <input type="text"
                 class="form-control"
@@ -18,8 +23,37 @@
             submit-button="auth.signin()">Login</button>
         <p class="text-warning"
             ng-repeat="error in auth.getErrors()" ng-bind="error"></p>
-    </form>
-    <p><small>Use social login</small></p>
+    </div>
+    <div visible="localSignup" ng-if="auth.isSignupFormVisible" class="m-b-sm">
+        <div class="form-group">
+            <input type="text"
+                ng-model="auth.user.username"
+                placeholder="Username"
+                class="form-control">
+        </div>
+        <div class="form-group">
+            <input type="text"
+                ng-model="auth.user.full_name"
+                placeholder="Full name"
+                class="form-control">
+        </div>
+        <div class="form-group">
+            <email-mask mask-model="auth.user.email"></email-mask>
+        </div>
+        <div class="form-group">
+            <input type="password"
+                ng-model="auth.user.password"
+                placeholder="Password"
+                class="form-control">
+        </div>
+        <p class="text-warning"
+            ng-repeat="error in auth.getErrors()" ng-bind="error"></p>
+        <button class="btn btn-primary btn-block"
+            submit-button="auth.signup()"
+            type="submit">
+            Register
+        </button>
+    </div>
     <div visible="socialSignup" class="m-b-sm">
         <button ng-click="auth.authenticate('google')" class="btn btn-google btn-block">
             <i class="fa fa-google-plus-square" aria-hidden="true"></i>
@@ -50,50 +84,13 @@
             </button>
         </form>
     </div>
-    <div visible="localSignup" class="m-b-sm">
-        <button ng-click="auth.isSignupFormVisible = true" class="btn btn-email btn-block">
-            <i class="fa fa-envelope-o" aria-hidden="true"></i>
-            Email
-        </button>
-    </div>
-    <p><small>© OpenNode</small></p>
-</div>
-<div class="middle-box text-center loginscreen"
-    ng-if="auth.isSignupFormVisible" visible="localSignup">
-    <h1 class="logo-name">Waldur</h1>
-    <form class="m-b-sm">
-        <div class="form-group">
-            <input type="text"
-                ng-model="auth.user.username"
-                placeholder="Username"
-                class="form-control">
-        </div>
-        <div class="form-group">
-            <input type="text"
-                ng-model="auth.user.full_name"
-                placeholder="Full name"
-                class="form-control">
-        </div>
-        <div class="form-group">
-            <email-mask mask-model="auth.user.email"></email-mask>
-        </div>
-        <div class="form-group">
-            <input type="password"
-                ng-model="auth.user.password"
-                placeholder="Password"
-                class="form-control">
-        </div>
-        <p class="text-warning"
-            ng-repeat="error in auth.getErrors()" ng-bind="error"></p>
-        <button class="btn btn-primary btn-block"
-            submit-button="auth.signup()"
-            type="submit">
+    <div visible="localSignup" class="form-group" ng-if="!auth.isSignupFormVisible">
+        <button ng-click="auth.isSignupFormVisible = true" class="btn btn-default btn-block">
             Register
         </button>
-    </form>
-    <div visible="localSignin" class="form-group">
-        <p class="text-muted text-center"><small>Already have an account?</small></p>
-        <button ng-click="auth.isSignupFormVisible = false" class="btn btn-default btn-block text-center">
+    </div>
+    <div visible="localSignin" class="form-group" ng-if="auth.isSignupFormVisible">
+        <button ng-click="auth.isSignupFormVisible = false" class="btn btn-default btn-block">
             Login
         </button>
     </div>

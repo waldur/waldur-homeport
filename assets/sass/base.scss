@@ -1,10 +1,9 @@
 body, html {
     height: 100%;
-    box-sizing: border-box;
-} // body, html
+}
 
 body {
-    @include property(font-size, 16);
+    @include property(font-size, $normal-font);
     background: $main-background-color;
     font-family: $base-font-family;
     color: $text-color;
@@ -16,24 +15,10 @@ body {
         overflow: hidden;
     } // &.no-scroll
     @include bp(xs) {
-        @include property(font-size, 16);
         .rem-mob.rem-mob.rem-mob { //remove on mobile
             display: none;
         }//rem-mob
     } // xs
-    @include bp(sm) {
-        @include property(font-size, 16);
-    } // sm
-    @include bp(md) {
-        @include property(font-size, 16);
-    } // md
-    @include bp(lg) {
-        @include property(font-size, 16);
-    } // lg
-    * {
-        -webkit-text-size-adjust: none;
-        box-sizing: border-box;
-    } // *
 } // body
 
 img {
@@ -50,15 +35,10 @@ a {
     } // &:hover
 } // a
 
-
-h1, h2, h3, h4, h5 {
-    font-weight: normal;
-    line-height: 1;
-} // h1, h2, h3, h4, h5
-
-img, fieldset, a img {
-    border: none;
-} // img, fieldset, a img
+h3 {
+    font-size: 16px;
+    font-weight: 600;
+}
 
 button {
     border: none;
