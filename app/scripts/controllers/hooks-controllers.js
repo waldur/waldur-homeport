@@ -5,6 +5,8 @@
     .controller('HookListController', [
       'baseControllerListClass',
       '$filter',
+      '$uibModal',
+      '$rootScope',
       'hooksService',
       'eventRegistry',
       'ENTITYLISTFIELDTYPES',
@@ -14,6 +16,8 @@
   function HookListController(
     baseControllerListClass,
     $filter,
+    $uibModal,
+    $rootScope,
     hooksService,
     eventRegistry,
     ENTITYLISTFIELDTYPES) {
@@ -37,7 +41,7 @@
         this.entityOptions = {
           entityData: {
             noDataText: 'No notifications registered',
-            createLink: 'profile.hook-create',
+            createLinkAction: this.openDialog.bind(this),
             createLinkText: 'Add notification',
             rowTemplateUrl: 'views/user/hook-row.html'
           },
@@ -52,7 +56,7 @@
               type: ENTITYLISTFIELDTYPES.name,
               propertyName: 'label',
               name: 'Method',
-              link: 'profile.hook-details({type: entity.hook_type, uuid: entity.uuid})'
+              action: this.openDialog.bind(this)
             },
             {
               type: ENTITYLISTFIELDTYPES.noType,
@@ -60,12 +64,27 @@
               name: 'Destination'
             },
             {
-              type: ENTITYLISTFIELDTYPES.listInField,
-              propertyName: 'entities',
+              type: ENTITYLISTFIELDTYPES.noType,
+              propertyName: 'events',
               name: 'Events'
             }
           ]
         };
+      },
+
+      openDialog: function(hook) {
+        var scope = $rootScope.$new();
+        scope.hook = hook;
+        $uibModal.open({
+          templateUrl: 'views/profile/hook-dialog.html',
+          controller: 'HookDialogController',
+          controllerAs: 'HookController',
+          bindToController: true,
+          scope: scope
+        }).result.then(function() {
+          this.service.clearAllCacheForCurrentEndpoint();
+          this.getList();
+        }.bind(this));
       },
 
       removeInstance: function(hook) {
@@ -90,7 +109,7 @@
         this.list.forEach(function(item) {
           item.label = $filter('titleCase')(item.hook_type);
           item.destination = item.destination_url || item.email;
-          item.entities = eventRegistry.types_to_entities(item.event_types);
+          item.events = item.event_groups.map($filter('formatEventTitle')).join(', ');
         });
         this.service.list = this.list;
       }
@@ -100,139 +119,89 @@
 })();
 
 (function() {
-  angular.module('ncsaas')
-    .controller('HookCreateController', [
-      'baseControllerAddClass',
-      'hooksService',
-      'eventRegistry',
-      '$state',
-      HookCreateController
-    ]);
-
-  function HookCreateController(
-    baseControllerAddClass,
-    hooksService,
-    eventRegistry,
-    $state) {
-    var controllerScope = this;
-    var Controller = baseControllerAddClass.extend({
-      init: function() {
-        this.controllerScope = controllerScope;
-        this.service = hooksService;
-        this._super();
-        this.fillRows();
-        this.types = hooksService.getTypes();
-        this.instance.hook_type = 'webhook';
-      },
-      fillRows: function() {
-        this.rows = eventRegistry.entities.map(function(entity) {
-          return {
-            id: entity,
-            selected: false
-          }
-        });
-      },
-      getEntities: function() {
-        var entities = [];
-        for (var i = 0; i < this.rows.length; i++) {
-          var row = this.rows[i];
-          if (row.selected) {
-            entities.push(row.id);
-          }
-        }
-        return entities;
-      },
-      saveInstance: function() {
-        var url = this.service.getUrlByType(this.instance.hook_type);
-        var event_types = eventRegistry.entities_to_types(this.getEntities());
-        var options = angular.extend({event_types: event_types}, this.instance);
-        return this.service.create(url, options);
-      },
-      successRedirect: function() {
-        this.gotoList();
-      },
-      getSuccessMessage: function() {
-        return 'Notification has been created';
-      },
-      cancel: function() {
-        this.gotoList();
-      },
-      gotoList: function() {
-        $state.go('profile.details', {tab: 'notifications'});
+  angular.module('ncsaas').filter('formatEventTitle', ['$filter', formatEventTitle]);
+  function formatEventTitle($filter) {
+    return function(choice) {
+      var map = {
+        ssh: 'SSH',
+        jira: 'JIRA',
+        vms: 'Resources',
+        customers: 'Organizations'
+      };
+      if (map[choice]) {
+        choice = map[choice];
+      } else {
+        choice = $filter('titleCase')(choice.replace('_', ' '));
       }
-    });
-
-    controllerScope.__proto__ = new Controller();
+      return choice + ' events';
+    }
   }
 })();
 
 (function() {
   angular.module('ncsaas')
-    .controller('HookUpdateController', [
-      'baseControllerDetailUpdateClass',
-      'hooksService',
-      'eventRegistry',
-      '$state',
-      '$stateParams',
-      HookUpdateController
-    ]);
+    .controller('HookDialogController', [
+      'hooksService', 'eventsService', 'ncUtilsFlash', '$filter',
+      HookDialogController]);
 
-  function HookUpdateController(
-    baseControllerDetailUpdateClass,
-    hooksService,
-    eventRegistry,
-    $state,
-    $stateParams) {
-    var controllerScope = this;
-    var Controller = baseControllerDetailUpdateClass.extend({
-      init: function() {
-        this.controllerScope = controllerScope;
-        this.service = hooksService;
-        this._super();
-      },
-      getModel: function() {
-        var url = this.service.getUrlByType($stateParams.type);
-        return hooksService.$get($stateParams.uuid, url);
-      },
-      afterActivate: function() {
-        this.fillRows();
-      },
-      fillRows: function() {
-        var entities = eventRegistry.types_to_entities(this.model.event_types);
-        this.rows = eventRegistry.entities.map(function(entity) {
+  function HookDialogController(hooksService, eventsService, ncUtilsFlash, $filter) {
+    var vm = this;
+    vm.save = save;
+
+    function init() {
+      loadEventGroups();
+      vm.types = hooksService.getTypes();
+      if (vm.hook) {
+        vm.instance = angular.copy(vm.hook);
+      } else {
+        vm.instance = {
+          hook_type: 'webhook',
+          event_groups: []
+        };
+      }
+    }
+
+    function loadEventGroups() {
+      vm.loading = true;
+      eventsService.getEventGroups().then(function(groups) {
+        vm.choices = Object.keys(groups).sort().map(function(choice) {
           return {
-            id: entity,
-            selected: entities.indexOf(entity) != -1
+            id: choice,
+            title: $filter('formatEventTitle')(choice),
+            selected: vm.instance.event_groups.indexOf(choice) !== -1,
+            help_text: groups[choice].join(', ')
           }
         });
-      },
-      getEntities: function() {
-        var entities = [];
-        for (var i = 0; i < this.rows.length; i++) {
-          var row = this.rows[i];
-          if (row.selected) {
-            entities.push(row.id);
-          }
-        }
-        return entities;
-      },
-      updateInstance: function() {
-        var url = this.model.url;
-        var event_types = eventRegistry.entities_to_types(this.getEntities());
-        var options = angular.extend({}, this.model, {event_types: event_types});
-        return this.service.update(url, options);
-      },
-      successRedirect: function() {
-        this.gotoList();
-      },
-      cancel: function() {
-        this.gotoList();
-      },
-      gotoList: function() {
-        $state.go('profile.details', {'tab': 'notifications'});
-      }
-    });
+      }).finally(function() {
+        vm.loading = false;
+      });
+    }
 
-    controllerScope.__proto__ = new Controller();
+    function getSelected() {
+      return vm.choices.filter(function(choice) {
+        return choice.selected
+      }).map(function(choice) {
+        return choice.id;
+      });
+    }
+
+    function save() {
+      var promise, message;
+      vm.instance.event_groups = getSelected();
+      if (vm.instance.uuid) {
+        promise = hooksService.update(vm.instance);
+        message = 'Notification has been updated'
+      } else {
+        promise = hooksService.create(vm.instance);
+        message = 'Notification has been created';
+      }
+      return promise.then(function() {
+        ncUtilsFlash.success(message);
+        vm.$close();
+      }, function(response) {
+        vm.errors = response.data;
+      });
+    }
+    init();
   }
 })();

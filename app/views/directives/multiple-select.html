@@ -1,13 +1,12 @@
-<div ng-if="choices">
-    <ul class="multiple-select">
-        <li ng-repeat="choice in choices"
-            ng-class="{'disabled': choice.disabled}"
-            ng-click="choice.selected = !choice.selected">
-            <i class="icon" ng-class="{'fa-check-circle': choice.selected, 'fa-circle-o': !choice.selected}"></i>
-            <div class="multiple-select__label">
-                <span ng-bind="choice.title"></span>
-                <span class="multiple-select__subtitle" ng-bind="choice.subtitle"></span>
-            </div>
-        </li>
-    </ul>
-</div>
+<ul class="list-group">
+    <li class="list-group-item checkbox awesome-checkbox checkbox-success"
+        ng-repeat="choice in choices"
+        ng-class="{'disabled': choice.disabled}">
+        <input id="{{ 'checkbox-' + $index }}" type="checkbox" ng-model="choice.selected">
+        <label for="{{ 'checkbox-' + $index }}">
+            {{ choice.title }}
+            <helpicon class="pull-right" help-text="{{ choice.help_text }}"/>
+        </label>
+        <small ng-bind="choice.subtitle" ng-if="choice.subtitle"></small>
+    </li>
+</ul>

@@ -3,9 +3,9 @@
 (function() {
   angular.module('ncsaas')
     .service('eventsService', [
-      'baseServiceClass', 'ENV', 'EVENT_ICONS_TYPES', 'EVENT_TEMPLATES', eventsService]);
+      '$q', 'baseServiceClass', 'ENV', 'EVENT_ICONS_TYPES', 'EVENT_TEMPLATES', eventsService]);
 
-  function eventsService(baseServiceClass, ENV, EVENT_ICONS_TYPES, EVENT_TEMPLATES) {
+  function eventsService($q, baseServiceClass, ENV, EVENT_ICONS_TYPES, EVENT_TEMPLATES) {
     /*jshint validthis: true */
     var ServiceClass = baseServiceClass.extend({
       init: function() {
@@ -17,6 +17,20 @@
         this.defaultFilter = {exclude_extra: true};
         if (!ENV.featuresVisible) {
           this.defaultFilter.exclude_features = ENV.toBeFeatures;
+        }
+      },
+      getEventGroups: function() {
+        var vm = this;
+        if (this.eventGroups) {
+          return $q.resolve(this.eventGroups);
+        } else {
+          var url = ENV.apiEndpoint + 'api/events/event_groups/';
+          return this.$get(null, url).then(function(eventGroups) {
+            delete eventGroups.$promise;
+            delete eventGroups.$resolved;
+            vm.eventGroups = eventGroups;
+            return vm.eventGroups;
+          });
         }
       },
       getResourceEvents: function (resource) {
