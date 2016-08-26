@@ -868,7 +868,7 @@
 
         if ($auth.isAuthenticated()) {
           // can't use $state because its will throw recursion error
-          $location.path('/login/');
+          $location.path('/dashboard/');
         } else {
           deferred.resolve();
         }
