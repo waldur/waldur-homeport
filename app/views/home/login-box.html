@@ -3,7 +3,9 @@
     <h4>Welcome to Waldur HomePort</h4>
     <p>
         Your single pane of control for all cloud services.
-        Login in to see it in action.
+        <span ng-if="!auth.isSignupFormVisible">Login in</span>
+        <span ng-if="auth.isSignupFormVisible">Create an account</span>
+        to see it in action.
     </p>
     <div visible="localSignin" ng-if="!auth.isSignupFormVisible" class="m-b-sm">
         <div class="form-group">
@@ -85,11 +87,13 @@
         </form>
     </div>
     <div visible="localSignup" class="form-group" ng-if="!auth.isSignupFormVisible">
+        <p><small>Do not have an account?</small></p>
         <button ng-click="auth.isSignupFormVisible = true" class="btn btn-default btn-block">
-            Register
+            Create an account
         </button>
     </div>
     <div visible="localSignin" class="form-group" ng-if="auth.isSignupFormVisible">
+        <p><small>Already have an account?</small></p>
         <button ng-click="auth.isSignupFormVisible = false" class="btn btn-default btn-block">
             Login
         </button>
