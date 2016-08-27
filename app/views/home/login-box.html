@@ -1,24 +1,27 @@
 <div class="middle-box text-center loginscreen">
     <h1 class="logo-name">Waldur</h1>
-    <h4>Welcome to Waldur HomePort</h4>
+    <h4 ng-if="!auth.isSignupFormVisible">Welcome to Waldur HomePort</h4>
+    <h4 ng-if="auth.isSignupFormVisible">Register to Waldur HomePort</h4>
     <p>
-        Your single pane of control for all cloud services.
-        <span ng-if="!auth.isSignupFormVisible">Login in</span>
+        <span ng-if="!auth.isSignupFormVisible">
+        Your single pane of control for all cloud services. Login in to see it in action.
+        </span>
         <span ng-if="auth.isSignupFormVisible">Create an account</span>
-        to see it in action.
+
     </p>
+    <!-- Login form -->
     <div visible="localSignin" ng-if="!auth.isSignupFormVisible" class="m-b-sm">
         <div class="form-group">
             <input type="text"
                 class="form-control"
                 ng-model="auth.user.username"
-                placeholder="Username">
+                placeholder="Username" required="">
         </div>
         <div class="form-group">
             <input type="password"
                 class="form-control"
                 ng-model="auth.user.password"
-                placeholder="Password">
+                placeholder="Password" required="">
         </div>
         <button type="submit"
             class="btn btn-primary btn-block"
@@ -26,12 +29,13 @@
         <p class="text-warning"
             ng-repeat="error in auth.getErrors()" ng-bind="error"></p>
     </div>
+    <!-- Registration form -->
     <div visible="localSignup" ng-if="auth.isSignupFormVisible" class="m-b-sm">
         <div class="form-group">
             <input type="text"
                 ng-model="auth.user.username"
                 placeholder="Username"
-                class="form-control">
+                class="form-control" required="">
         </div>
         <div class="form-group">
             <input type="text"
@@ -46,7 +50,7 @@
             <input type="password"
                 ng-model="auth.user.password"
                 placeholder="Password"
-                class="form-control">
+                class="form-control" required="">
         </div>
         <p class="text-warning"
             ng-repeat="error in auth.getErrors()" ng-bind="error"></p>
@@ -56,6 +60,7 @@
             Register
         </button>
     </div>
+    <p><small>Or use social login</small></p>
     <div visible="socialSignup" class="m-b-sm">
         <button ng-click="auth.authenticate('google')" class="btn btn-google btn-block">
             <i class="fa fa-google-plus-square" aria-hidden="true"></i>
