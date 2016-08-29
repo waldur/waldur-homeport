@@ -59,19 +59,25 @@
           }
         })
 
-        .state('home.login', {
-          url: 'login/',
-          controller: 'AuthController',
-          views: {
-            'appHeader@home' : {
-              templateUrl: MODE.homeHeaderTemplate ? MODE.homeHeaderTemplate : 'views/partials/site-header.html',
-            },
-            'appContent@home' : {
-              templateUrl: MODE.homeLoginTemplate ? MODE.homeLoginTemplate : 'views/home/login.html',
-            }
-          },
+        .state('login', {
+          url: '/login/',
+          templateUrl: MODE.homeLoginTemplate ? MODE.homeLoginTemplate : 'views/home/login.html',
           resolve: {
             authenticated: notLoggedCheck
+          },
+          data: {
+            isSignupFormVisible: false
+          }
+        })
+
+        .state('register', {
+          url: '/register/',
+          templateUrl: MODE.homeLoginTemplate ? MODE.homeLoginTemplate : 'views/home/login.html',
+          resolve: {
+            authenticated: notLoggedCheck
+          },
+          data: {
+            isSignupFormVisible: true
           }
         })
 

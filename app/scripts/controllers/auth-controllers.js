@@ -8,7 +8,7 @@
   function AuthController(ENV, $sce, $state, authService, baseControllerClass, ncUtilsFlash, $rootScope) {
     var controllerScope = this;
     var Controller = baseControllerClass.extend({
-      isSignupFormVisible: false,
+      isSignupFormVisible: $state.current.data.isSignupFormVisible,
       user: {},
       errors: {},
       openidUrl: $sce.trustAsResourceUrl(ENV.apiEndpoint + 'api-auth/openid/login/?next=/api-auth/login_complete'),

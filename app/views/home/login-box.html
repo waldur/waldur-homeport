@@ -93,15 +93,15 @@
     </div>
     <div visible="localSignup" class="form-group" ng-if="!auth.isSignupFormVisible">
         <p><small>Do not have an account?</small></p>
-        <button ng-click="auth.isSignupFormVisible = true" class="btn btn-default btn-block">
+        <a ui-sref="register" class="btn btn-default btn-block">
             Create an account
-        </button>
+        </a>
     </div>
     <div visible="localSignin" class="form-group" ng-if="auth.isSignupFormVisible">
         <p><small>Already have an account?</small></p>
-        <button ng-click="auth.isSignupFormVisible = false" class="btn btn-default btn-block">
+        <a ui-sref="login" class="btn btn-default btn-block">
             Login
-        </button>
+        </a>
     </div>
     <p><small>© OpenNode</small></p>
 </div>

@@ -347,7 +347,7 @@
         authService.signout();
         currentStateService.isCustomerDefined = false;
         $rootScope.$broadcast('abortRequests');
-        $state.go('home.login');
+        $state.go('login');
       },
       stateChangeSuccessHandler: function(event, toState, toParams, fromState, fromParams) {
         $rootScope.prevPreviousState = $rootScope.previousState;
