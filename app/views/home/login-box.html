@@ -10,7 +10,7 @@
 
     </p>
     <!-- Login form -->
-    <div visible="localSignin" ng-if="!auth.isSignupFormVisible" class="m-b-sm">
+    <form visible="localSignin" ng-if="!auth.isSignupFormVisible" class="m-b-sm" name="LoginForm">
         <div class="form-group">
             <input type="text"
                 class="form-control"
@@ -25,12 +25,15 @@
         </div>
         <button type="submit"
             class="btn btn-primary btn-block"
-            submit-button="auth.signin()">Login</button>
-        <p class="text-warning"
+            submit-button="auth.signin()"
+            ng-class="{disabled: LoginForm.$invalid}">
+            Login
+        </button>
+        <p class="text-danger"
             ng-repeat="error in auth.getErrors()" ng-bind="error"></p>
-    </div>
+    </form>
     <!-- Registration form -->
-    <div visible="localSignup" ng-if="auth.isSignupFormVisible" class="m-b-sm">
+    <form visible="localSignup" ng-if="auth.isSignupFormVisible" class="m-b-sm" name="RegisterForm">
         <div class="form-group">
             <input type="text"
                 ng-model="auth.user.username"
@@ -52,14 +55,15 @@
                 placeholder="Password"
                 class="form-control" required="">
         </div>
-        <p class="text-warning"
+        <p class="text-danger"
             ng-repeat="error in auth.getErrors()" ng-bind="error"></p>
         <button class="btn btn-primary btn-block"
+            ng-class="{disabled: RegisterForm.$invalid}"
             submit-button="auth.signup()"
             type="submit">
             Register
         </button>
-    </div>
+    </form>
     <p><small>Or use social login</small></p>
     <div visible="socialSignup" class="m-b-sm">
         <button ng-click="auth.authenticate('google')" class="btn btn-google btn-block">

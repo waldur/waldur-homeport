@@ -7,7 +7,7 @@
   function detailsView(ENV) {
     return {
       restrict: 'E',
-      template: '<input type="text" class="form-control" ng-model="model" ng-focus="focus()" ng-change="change($event)" placeholder="Email">',
+      template: '<input type="email" required="" class="form-control" ng-model="model" ng-focus="focus()" ng-change="change($event)" placeholder="Email">',
       replace: true,
       scope: {
         model: '=maskModel',
