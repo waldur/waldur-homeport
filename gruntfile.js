@@ -80,6 +80,27 @@ module.exports = function(grunt) {
                     },
                     {
                         expand: true,
+                        cwd: 'bower_components/open-sans-fontface/fonts/Semibold',
+                        src: ['*'],
+                        dest: 'app/static/fonts/',
+                        filter: 'isFile'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/open-sans-fontface/fonts/Bold',
+                        src: ['*'],
+                        dest: 'app/static/fonts/',
+                        filter: 'isFile'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/open-sans-fontface/fonts/Regular',
+                        src: ['*'],
+                        dest: 'app/static/fonts/',
+                        filter: 'isFile'
+                    },
+                    {
+                        expand: true,
                         cwd: 'bower_components/html5shiv/dist',
                         src: ['html5shiv.min.js'],
                         dest: 'app/static/js/',

@@ -3,12 +3,14 @@
 (function() {
   angular.module('ncsaas')
     .controller('AuthController', 
-      ['ENV', '$sce', '$state', 'authService', 'baseControllerClass', 'ncUtilsFlash', '$rootScope', AuthController]);
+      ['ENV', '$q', '$sce', '$scope', '$state', 'authService',
+      'baseControllerClass', 'ncUtilsFlash', '$rootScope', AuthController]);
 
-  function AuthController(ENV, $sce, $state, authService, baseControllerClass, ncUtilsFlash, $rootScope) {
+  function AuthController(ENV, $q, $sce, $scope, $state, authService,
+    baseControllerClass, ncUtilsFlash, $rootScope) {
     var controllerScope = this;
     var Controller = baseControllerClass.extend({
-      isSignupFormVisible: false,
+      isSignupFormVisible: $state.current.data.isSignupFormVisible,
       user: {},
       errors: {},
       openidUrl: $sce.trustAsResourceUrl(ENV.apiEndpoint + 'api-auth/openid/login/?next=/api-auth/login_complete'),
@@ -17,6 +19,9 @@
         this._super();
       },
       signin: function() {
+        if ($scope.auth.LoginForm.$invalid) {
+          return $q.reject();
+        }
         var vm = this;
         $rootScope.$broadcast('enableRequests');
         return authService.signin(vm.user.username, vm.user.password).then(vm.loginSuccess.bind(vm), vm.loginError.bind(vm));
@@ -61,6 +66,9 @@
         }
       },
       signup: function() {
+        if ($scope.auth.RegisterForm.$invalid) {
+          return $q.reject();
+        }
         var vm = this;
         vm.errors = {};
         $rootScope.$broadcast('enableRequests');

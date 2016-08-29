@@ -13,7 +13,7 @@ module.exports.login = function(user) {
 
   element(by.model('auth.user.username')).sendKeys(user.username);
   element(by.model('auth.user.password')).sendKeys(user.password);
-  element(by.css('.button-login')).click();
+  element(by.css('.btn-primary')).click();
 };
 
 module.exports.logout = function(user) {

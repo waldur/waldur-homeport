@@ -35,7 +35,8 @@
     "angular-ui-select": "^0.18.1",
     "world-flags-sprite": "*",
     "bootstrap": "^3.3.7",
-    "angular-bootstrap": "^2.0.1"
+    "angular-bootstrap": "^2.0.1",
+    "open-sans-fontface": "^1.4.2"
   },
   "resolutions": {
     "angular": "~1.4.x"
