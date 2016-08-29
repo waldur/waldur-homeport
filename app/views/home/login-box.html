@@ -1,4 +1,4 @@
-<div class="middle-box text-center loginscreen">
+<div class="middle-box text-center loginscreen" ng-controller="AuthController as auth">
     <h1 class="logo-name">Waldur</h1>
     <h4 ng-if="!auth.isSignupFormVisible">Welcome to Waldur HomePort</h4>
     <h4 ng-if="auth.isSignupFormVisible">Register to Waldur HomePort</h4>
@@ -10,7 +10,7 @@
 
     </p>
     <!-- Login form -->
-    <form visible="localSignin" ng-if="!auth.isSignupFormVisible" class="m-b-sm" name="LoginForm">
+    <form visible="localSignin" ng-if="!auth.isSignupFormVisible" class="m-b-sm" name="auth.LoginForm">
         <div class="form-group">
             <input type="text"
                 class="form-control"
@@ -25,15 +25,14 @@
         </div>
         <button type="submit"
             class="btn btn-primary btn-block"
-            submit-button="auth.signin()"
-            ng-class="{disabled: LoginForm.$invalid}">
+            submit-button="auth.signin()">
             Login
         </button>
         <p class="text-danger"
             ng-repeat="error in auth.getErrors()" ng-bind="error"></p>
     </form>
     <!-- Registration form -->
-    <form visible="localSignup" ng-if="auth.isSignupFormVisible" class="m-b-sm" name="RegisterForm">
+    <form visible="localSignup" ng-if="auth.isSignupFormVisible" class="m-b-sm" name="auth.RegisterForm">
         <div class="form-group">
             <input type="text"
                 ng-model="auth.user.username"
@@ -58,7 +57,6 @@
         <p class="text-danger"
             ng-repeat="error in auth.getErrors()" ng-bind="error"></p>
         <button class="btn btn-primary btn-block"
-            ng-class="{disabled: RegisterForm.$invalid}"
             submit-button="auth.signup()"
             type="submit">
             Register
