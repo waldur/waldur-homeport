@@ -348,9 +348,20 @@
       },
       activate: function() {
         var vm = this;
-        vm.getModel().then(function(response) {
+        if (vm.loadAll) {
+          vm.loading = true;
+          vm.loadAll().finally(function() {
+            vm.loading = false;
+          });
+        } else {
+          vm.loading = false;
+        }
+      },
+      loadAll: function() {
+        var vm = this;
+        return vm.getModel().then(function(response) {
           vm.model = response;
-          vm.afterActivate();
+          vm.afterActivate(response);
         }, vm.modelNotFound.bind(vm));
       },
       getModel: function() {

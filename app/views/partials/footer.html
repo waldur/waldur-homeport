@@ -1,0 +1,36 @@
+<footer class="footer">
+    <div class="pull-right">
+        <ul class="footer-nav">
+            <li ng-if="Main.modeName === 'modeCostTracking'">
+                <div id="fb-root"></div>
+                <div class="fb-like"
+                     data-share="true"
+                     data-width="450"
+                     data-show-faces="true"
+                     data-layout="button_count">
+                </div>
+            </li>
+            <li ng-if="Main.modeName === 'modeCostTracking'">
+                <a ui-sref="about.index">About</a>
+            </li>
+            <li>
+                <a ui-sref="policy.privacy">Privacy policy</a>
+            </li>
+            <li>
+                <a ui-sref="tos.index">Terms of Service</a>
+            </li>
+            <li ng-if="Main.isAuthenticated()" class="rem-mob" visible="help, providers, premiumSupport">
+                <a ui-sref="help.list">Help</a>
+            </li>
+            <li>
+                <a href="mailto:info@opennodecloud.com">Support</a>
+            </li>
+            <li>
+                Build: <span ng-bind="::buildId"></span>
+            </li>
+        </ul>
+    </div>
+    <div class="copy">
+        &copy; <a href="http://opennodecloud.com">OpenNode</a> 2016
+    </div>
+</footer>

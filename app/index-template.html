@@ -47,10 +47,11 @@
     </script-->
 
 </head>
-<body ng-controller="MainController as Main" ng-click="closeMenu()">
+<body ng-controller="MainController as Main" ng-click="closeMenu()"
+    class="fixed-sidebar fixed-nav {{$state.current.data.specialClass}}">
 <div class="flash-message-fixed" flash-message="5000" ></div>
 <div scroll-to-top></div>
-<div ui-view class="full-height"></div>
+<div ui-view id="wrapper"></div>
 <script>(function(d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
     if (d.getElementById(id)) return;

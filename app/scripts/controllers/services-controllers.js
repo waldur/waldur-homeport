@@ -132,6 +132,7 @@
       checkProjects: function() {
         var vm = this;
         currentStateService.getCustomer().then(function(customer) {
+          vm.currentCustomer = customer;
           vm.customerHasProjects = (customer.projects.length > 0);
         });
       },
@@ -149,7 +150,7 @@
         var vm = this;
         customersService.isOwnerOrStaff().then(function(isOwnerOrStaff) {
           if (isOwnerOrStaff) {
-            vm.entityOptions.entityData.createLink = 'services.create';
+            vm.entityOptions.entityData.createLink = 'organizations.details.providers-create({uuid:currentCustomer.uuid})';
           }
           vm.canUserManageService = isOwnerOrStaff;
         });

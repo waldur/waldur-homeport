@@ -57,7 +57,7 @@
                             </li>
                         </ul>
                         <div class="manage-item bottom bottom-1">
-                            <a ui-sref="organizations.details({uuid: Header.currentCustomer.uuid, tab: 'projects'})" class="manage">
+                            <a ui-sref="organizations.details.projects({uuid: Header.currentCustomer.uuid})" class="manage">
                                 <i class="icon wrench"></i>
                                 Manage projects
                             </a>
@@ -172,7 +172,7 @@
                     </a>
                 </li>
                 <li class="on-tablet customers current">
-                    <a ui-sref="organizations.details({uuid: Header.currentCustomer.uuid})">
+                    <a ui-sref="organizations.details.events({uuid: Header.currentCustomer.uuid})">
                         <span>Organization</span>
                         <div class="customer-name">{{ Header.currentCustomer.name }}</div>
                     </a>
@@ -216,7 +216,7 @@
                     <a ng-click="Header.setCurrentProject(project)">{{ project.name }}</a>
                 </li>
                 <li class="on-tablet">
-                    <a ui-sref="organizations.details({uuid: Header.currentCustomer.uuid, tab: 'projects'})" class="manage">
+                    <a ui-sref="organizations.details.projects({uuid: Header.currentCustomer.uuid})" class="manage">
                         <i class="icon wrench"></i>
                         Manage projects
                     </a>

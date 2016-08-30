@@ -4,13 +4,12 @@ body, html {
 
 body {
     @include property(font-size, $normal-font);
-    background: $main-background-color;
+    background: $gray;
     font-family: $base-font-family;
     color: $text-color;
     position: relative;
     padding: 0;
     margin: 0;
-    @include property(padding-top, 50);
     &.no-scroll {
         overflow: hidden;
     } // &.no-scroll
@@ -68,9 +67,28 @@ body.disable-scroll {
   margin-bottom: 10px;
 }
 
+.m-l-md {
+  margin-left: 20px;
+}
+
 .list-group-item.awesome-checkbox {
     padding-left: 35px;
     label {
         width: 100%;
     }
+}
+
+.old {
+    background-color: $gray;
+    &.fixed-nav #wrapper {
+        margin-top: 40px;
+        height: 100%;
+    }
+    .footer {
+        position: relative;
+    }
+}
+
+.white-bg {
+  background-color: #ffffff;
 }

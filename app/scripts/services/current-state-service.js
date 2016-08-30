@@ -16,9 +16,6 @@
     vm.reloadCurrentCustomer = reloadCurrentCustomer;
     vm.isCustomerDefined = false;
 
-    vm.getActiveItem = getActiveItem;
-    vm.getBodyClass = getBodyClass;
-
     vm.getProject = getProject;
     vm.setProject = setProject;
     vm.handleSelectedProjects = handleSelectedProjects;
@@ -131,62 +128,6 @@
             setProjects(projects, customer, undefined);
           }
         }
-      }
-    }
-
-    // XXX: getActiveItem and getBodyClass methods have to be moved to apps.js for code consistency.
-    // (We decided, that all URL-depended code have to defined near URLs definition)
-
-    // Active menuItem
-    var urlList = {
-      appstore: ['appstore.store'],
-      dashboard: ['dashboard.index'],
-      resources: ['resources.list'],
-      projects: ['projects.details', 'projects.create'],
-      organizations: ['organizations.list', 'organizations.details'],
-      services: ['services.list', 'services.create'],
-      users: ['users.list', 'users.details', 'profile.details'],
-      support: ['support.list', 'support.create']
-    };
-
-    function getActiveItem(stateName) {
-      var activeState;
-      for (var prop in urlList) {
-        if (urlList.hasOwnProperty(prop)) {
-          if (urlList[prop].indexOf(stateName) !== -1) {
-            activeState = prop;
-          }
-        }
-      }
-      return activeState;
-    }
-
-    // Body class
-    var stateWithProfile = [
-      'profile',
-      'profile-edit',
-      'projects.details',
-      'organizations.details',
-      'customer-plans',
-      'users.details',
-      'home',
-      'login',
-    ];
-
-    function getBodyClass(name) {
-      var bodyClass;
-
-      if (stateWithProfile.indexOf(name) > -1) {
-        if (name === 'login' || name === 'home') {
-          bodyClass = 'app-body site-body';
-          return bodyClass;
-        } else {
-          bodyClass = 'app-body obj-view';
-          return bodyClass;
-        }
-      } else {
-        bodyClass = 'app-body';
-        return bodyClass;
       }
     }
   }

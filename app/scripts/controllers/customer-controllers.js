@@ -60,7 +60,6 @@
           entityData: {
             noDataText: 'You have no organizations yet.',
             noMatchesText: 'No organizations found matching filter.',
-            title: 'Organizations',
             createLinkAction: this.openDialog,
             createLinkText: 'Add organization',
             rowTemplateUrl: 'views/customer/row.html'
@@ -78,7 +77,7 @@
               name: 'Name',
               propertyName: 'name',
               type: ENTITYLISTFIELDTYPES.name,
-              link: 'organizations.details({uuid: entity.uuid})',
+              link: 'organizations.details.events({uuid: entity.uuid})',
               showForMobile: ENTITYLISTFIELDTYPES.showForMobile
             }
           ]
@@ -201,93 +200,6 @@
         this._super();
         this.detailsState = 'organizations.details';
         this.currentUser = usersService.currentUser;
-        this.detailsViewOptions = {
-          title_plural: 'organizations',
-          hasLogo: false,
-          listState: 'organizations.list',
-          tabs: [
-            {
-              title: 'Events',
-              key: 'eventlog',
-              viewName: 'tabEventlog',
-              icon: 'event',
-              count: -1
-            },
-            {
-              title: 'Alerts',
-              key: 'alerts',
-              viewName: 'tabAlerts',
-              countFieldKey: 'alerts',
-              icon: 'alerts'
-            },
-            {
-              title: 'Projects',
-              key: 'projects',
-              viewName: 'tabProjects',
-              countFieldKey: 'projects',
-              icon: 'project'
-            },
-            {
-              title: 'Providers',
-              key: 'providers',
-              viewName: 'tabServices',
-              countFieldKey: 'services',
-              icon: 'service'
-            },
-            {
-              title: 'Team',
-              key: 'team',
-              viewName: 'tabTeam',
-              hideSearch: false,
-              countFieldKey: 'users',
-              icon: 'customer'
-            },
-            {
-              title: 'Billing',
-              key: 'billing',
-              viewName: 'tabBilling',
-              hideSearch: true,
-              icon: 'invoice',
-              count: -1
-            },
-            {
-              title: 'Sizing',
-              key: 'sizing',
-              viewName: 'tabSizing',
-              icon: 'calculator',
-              count: -1
-            },
-            {
-              title: 'VMs',
-              key: ENV.resourcesTypes.vms,
-              viewName: 'tabResources',
-              countFieldKey: 'vms',
-              icon: 'resource'
-            },
-            {
-              title: 'Private clouds',
-              key: ENV.resourcesTypes.privateClouds,
-              viewName: 'tabPrivateClouds',
-              countFieldKey: 'private_clouds',
-              icon: 'cloud'
-            },
-            {
-              title: 'Applications',
-              key: ENV.resourcesTypes.applications,
-              viewName: 'tabApplications',
-              countFieldKey: 'apps',
-              icon: 'application'
-            },
-            {
-              title: 'Manage',
-              key: 'delete',
-              viewName: 'tabDelete',
-              hideSearch: true,
-              icon: 'wrench'
-            }
-          ]
-        };
-        this.detailsViewOptions.activeTab = this.getActiveTab();
       },
 
       openDialog: function() {
@@ -312,18 +224,8 @@
         }
       },
 
-      loadAll: function() {
-        var deferred = $q.defer();
-        this.getModel().then(function(customer) {
-          $rootScope.$broadcast('adjustCurrentCustomer', customer);
-          $timeout(function() {
-            deferred.resolve();
-          });
-        });
-        return deferred.promise;
-      },
-
-      afterActivate: function() {
+      afterActivate: function(customer) {
+        $rootScope.$broadcast('adjustCurrentCustomer', customer);
         controllerScope.canEdit = controllerScope.isOwnerOrStaff(controllerScope.model);
         controllerScope.updateImageUrl();
         var vm = this;
@@ -487,5 +389,31 @@
       }
     });
     $scope.init();
+  }
+})();
+
+
+(function() {
+  angular.module('ncsaas')
+    .controller('CustomerDetailsController', CustomerDetailsController);
+
+  CustomerDetailsController.$inject = [
+    '$scope', '$rootScope', '$state', '$stateParams', 'customersService'
+  ];
+  function CustomerDetailsController($scope, $rootScope, $state, $stateParams, customersService) {
+    function getCustomerFromStateParams(params) {
+      customersService.$get(params.uuid).then(function(customer) {
+        $scope.currentCustomer = customer;
+        $rootScope.$broadcast('adjustCurrentCustomer', customer);
+      }, function() {
+        $state.go('errorPage.notFound');
+      });
+    }
+    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+      if (toParams.uuid) {
+        getCustomerFromStateParams(toParams);
+      }
+    });
+    getCustomerFromStateParams($stateParams);
   }
 })();

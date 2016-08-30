@@ -56,6 +56,9 @@
           },
           resolve: {
             authenticated: notLoggedCheck
+          },
+          data: {
+            specialClass: 'landing',
           }
         })
 
@@ -66,7 +69,8 @@
             authenticated: notLoggedCheck
           },
           data: {
-            isSignupFormVisible: false
+            isSignupFormVisible: false,
+            specialClass: 'old'
           }
         })
 
@@ -77,7 +81,8 @@
             authenticated: notLoggedCheck
           },
           data: {
-            isSignupFormVisible: true
+            isSignupFormVisible: true,
+            specialClass: 'old'
           }
         })
 
@@ -93,6 +98,9 @@
           },
           resolve: {
             authenticated: notLoggedCheck
+          },
+          data: {
+            specialClass: 'old'
           }
         })
 
@@ -108,6 +116,9 @@
           },
           resolve: {
             authenticated: notLoggedCheck
+          },
+          data: {
+            specialClass: 'old'
           }
         })
 
@@ -130,7 +141,10 @@
           resolve: {
             authenticated: authCheck
           },
-          noInitialData: true
+          noInitialData: true,
+          data: {
+            specialClass: 'old'
+          }
         })
 
         .state('support', {
@@ -151,6 +165,9 @@
           },
           resolve: {
             authenticated: authCheck
+          },
+          data: {
+            specialClass: 'old'
           }
         })
 
@@ -166,6 +183,9 @@
           },
           resolve: {
             authenticated: authCheck
+          },
+          data: {
+            specialClass: 'old'
           }
         })
 
@@ -187,6 +207,9 @@
           },
           resolve: {
             authenticated: authCheck
+          },
+          data: {
+            specialClass: 'old'
           }
         })
 
@@ -208,6 +231,9 @@
           },
           resolve: {
             authenticated: authCheck
+          },
+          data: {
+            specialClass: 'old'
           }
         })
 
@@ -240,6 +266,9 @@
           resolve: {
             authenticated: authCheck
           },
+          data: {
+            specialClass: 'old'
+          },
           auth: true
         })
 
@@ -262,29 +291,16 @@
           resolve: {
             authenticated: authCheck
           },
-          auth: true
+          auth: true,
+          data: {
+            specialClass: 'old'
+          }
         })
 
         .state('projects', {
           url: '/projects/',
           abstract: true,
           templateUrl: 'views/partials/base.html',
-        })
-
-        .state('projects.create', {
-          url: 'add/',
-          views: {
-            'appContent': {
-              templateUrl: 'views/project/create.html',
-            },
-            'appHeader': {
-              templateUrl: 'views/partials/app-header.html',
-            }
-          },
-          resolve: {
-            authenticated: authCheck
-          },
-          auth: true
         })
 
         .state('projects.details', {
@@ -322,29 +338,10 @@
           resolve: {
             authenticated: authCheck
           },
-          auth: true
-        })
-
-        .state('services', {
-          url: '/services/',
-          abstract: true,
-          templateUrl: 'views/partials/base.html',
-        })
-
-        .state('services.create', {
-          url: 'add/',
-          views: {
-            'appContent': {
-              templateUrl: 'views/service/create.html'
-            },
-            'appHeader': {
-              templateUrl: 'views/partials/app-header.html'
-            }
-          },
-          resolve: {
-            authenticated: authCheck
-          },
-          auth: true
+          auth: true,
+          data: {
+            specialClass: 'old'
+          }
         })
 
         .state('profile', {
@@ -385,79 +382,175 @@
           resolve: {
             authenticated: authCheck
           },
-          auth: true
+          auth: true,
+          data: {
+            specialClass: 'old'
+          }
         })
 
         .state('organizations', {
           url: '/organizations/',
           abstract: true,
-          templateUrl: 'views/partials/base.html',
+          templateUrl: 'views/customer/base.html',
+          data: {
+            specialClass: 'white-bg'
+          }
         })
 
         .state('organizations.list', {
           url: '',
-          views: {
-            'appContent': {
-              templateUrl: 'views/customer/list.html',
-            },
-            'appHeader': {
-              templateUrl: 'views/partials/app-header.html',
-            }
-          },
+          templateUrl: 'views/customer/list.html',
           resolve: {
             authenticated: authCheck
+          },
+          data: {
+            pageTitle: 'Organizations'
           },
           auth: true
         })
 
         .state('organizations.details', {
-          reloadOnSearch: false,
-          url: ':uuid/?tab&providerUuid&providerType',
-          views: {
-            'appContent': {
-              templateUrl: 'views/customer/details.html',
-            },
-            'tabSizing@organizations.details': {
-              templateUrl: 'views/customer/tab-sizing.html',
-            },
-            'tabEventlog@organizations.details': {
-              templateUrl: 'views/customer/tab-eventlog.html',
-            },
-            'tabResources@organizations.details': {
-              templateUrl: 'views/customer/tab-resources.html',
-            },
-            'tabApplications@organizations.details' : {
-              templateUrl: 'views/customer/tab-applications.html',
-            },
-            'tabPrivateClouds@organizations.details' : {
-              templateUrl: 'views/customer/tab-private-clouds.html',
-            },
-            'tabProjects@organizations.details': {
-              templateUrl: 'views/customer/tab-projects.html',
-            },
-            'tabServices@organizations.details': {
-              templateUrl: 'views/customer/tab-services.html',
-            },
-            'tabBilling@organizations.details': {
-              templateUrl: 'views/customer/tab-billing.html',
-            },
-            'tabAlerts@organizations.details': {
-              templateUrl: 'views/customer/tab-alerts.html',
-            },
-            'tabTeam@organizations.details': {
-              templateUrl: 'views/customer/tab-team.html',
-            },
-            'tabDelete@organizations.details': {
-              templateUrl: 'views/customer/tab-delete.html',
-            },
-            'appHeader': {
-              templateUrl: 'views/partials/app-header.html',
-            }
-          },
+          url: ':uuid/',
+          abstract: true,
+          template: '<div ui-view></div>',
           resolve: {
-            authenticated: authCheck
-          },
-          auth: true
+            currentCustomer: function(
+              $stateParams, $state, $rootScope, customersService, currentStateService) {
+              return customersService.$get($stateParams.uuid).then(function(customer) {
+                currentStateService.setCustomer(customer);
+                $rootScope.$broadcast('currentCustomerUpdated');
+                return customer;
+              }, function() {
+                $state.go('errorPage.notFound');
+              });
+            }
+          }
+        })
+
+        .state('organizations.details.alerts', {
+          url: 'alerts/',
+          templateUrl: 'views/customer/tab-alerts.html',
+          controller: 'CustomerAlertsListController',
+          controllerAs: 'Ctrl',
+          data: {
+            pageTitle: 'Alerts'
+          }
+        })
+
+        .state('organizations.details.events', {
+          url: 'events/',
+          templateUrl: 'views/customer/tab-eventlog.html',
+          controller: 'CustomerEventTabController',
+          controllerAs: 'EventList',
+          data: {
+            pageTitle: 'Events'
+          }
+        })
+
+        .state('organizations.details.projects', {
+          url: 'projects/',
+          templateUrl: 'views/customer/tab-projects.html',
+          controller: 'CustomerProjectTabController',
+          controllerAs: 'CustomerProjectTab',
+          data: {
+            pageTitle: 'Projects'
+          }
+        })
+
+        .state('organizations.details.projects-create', {
+          url: 'add/',
+          templateUrl: 'views/project/create.html',
+          controller: 'ProjectAddController',
+          controllerAs: 'ProjectAdd',
+          data: {
+            pageTitle: 'Create project'
+          }
+        })
+
+        .state('organizations.details.team', {
+          url: 'team/',
+          templateUrl: 'views/customer/tab-team.html',
+          controller: 'CustomerTeamTabController',
+          controllerAs: 'TeamList',
+          data: {
+            pageTitle: 'Team'
+          }
+        })
+
+        .state('organizations.details.providers', {
+          url: 'providers/',
+          templateUrl: 'views/customer/tab-services.html',
+          controller: 'CustomerServiceTabController',
+          controllerAs: 'ServiceList',
+          data: {
+            pageTitle: 'Providers'
+          }
+        })
+
+        .state('organizations.details.providers-create', {
+          url: 'add-provider/',
+          templateUrl: 'views/service/create.html',
+          controller: 'ServiceAddController',
+          controllerAs: 'ServiceAdd',
+          data: {
+            pageTitle: 'Create provider'
+          }
+        })
+
+        .state('organizations.details.virtual-machines', {
+          url: 'virtual-machines/',
+          templateUrl: 'views/customer/tab-resources.html',
+          controller: 'CustomerResourcesTabController',
+          controllerAs: 'ResourceList',
+          data: {
+            pageTitle: 'Virtual machines'
+          }
+        })
+
+        .state('organizations.details.applications', {
+          url: 'applications/',
+          templateUrl: 'views/customer/tab-applications.html',
+          controller: 'CustomerApplicationsTabController',
+          controllerAs: 'ResourceList',
+          data: {
+            pageTitle: 'Applications'
+          }
+        })
+
+        .state('organizations.details.private-clouds', {
+          url: 'private-clouds/',
+          templateUrl: 'views/customer/tab-private-clouds.html',
+          controller: 'CustomerPrivateCloudTabController',
+          controllerAs: 'PrivateCloud',
+          data: {
+            pageTitle: 'Private clouds'
+          }
+        })
+
+        .state('organizations.details.billing', {
+          url: 'billing/',
+          templateUrl: 'views/customer/tab-billing.html',
+          data: {
+            pageTitle: 'Billing'
+          }
+        })
+
+        .state('organizations.details.sizing', {
+          url: 'sizing/',
+          templateUrl: 'views/customer/tab-sizing.html',
+          data: {
+            pageTitle: 'Sizing'
+          }
+        })
+
+        .state('organizations.details.delete', {
+          url: 'delete/',
+          templateUrl: 'views/customer/tab-delete.html',
+          controller: 'CustomerDeleteTabController',
+          controllerAs: 'DeleteController',
+          data: {
+            pageTitle: 'Delete'
+          }
         })
 
         .state('organizations.plans', {
@@ -495,7 +588,10 @@
           resolve: {
             authenticated: authCheck
           },
-          auth: true
+          auth: true,
+          data: {
+            specialClass: 'old'
+          }
         })
 
         .state('users.details', {
@@ -527,7 +623,10 @@
           resolve: {
             authenticated: authCheck
           },
-          auth: true
+          auth: true,
+          data: {
+            specialClass: 'old'
+          }
         })
 
         .state('resources', {
@@ -570,7 +669,10 @@
           resolve: {
             authenticated: authCheck
           },
-          auth: true
+          auth: true,
+          data: {
+            specialClass: 'old'
+          }
         })
 
         .state('resources.details', {
@@ -598,7 +700,10 @@
           resolve: {
             authenticated: authCheck
           },
-          auth: true
+          auth: true,
+          data: {
+            specialClass: 'old'
+          }
         })
 
         .state('payment', {
@@ -620,7 +725,10 @@
           resolve: {
             authenticated: authCheck
           },
-          auth: true
+          auth: true,
+          data: {
+            specialClass: 'old'
+          }
         })
 
         .state('payment.cancel', {
@@ -636,7 +744,10 @@
           resolve: {
             authenticated: authCheck
           },
-          auth: true
+          auth: true,
+          data: {
+            specialClass: 'old'
+          }
         })
 
         .state('agreement', {
@@ -658,7 +769,10 @@
           resolve: {
             authenticated: authCheck
           },
-          auth: true
+          auth: true,
+          data: {
+            specialClass: 'old'
+          }
         })
 
         .state('agreement.cancel', {
@@ -674,7 +788,10 @@
           resolve: {
             authenticated: authCheck
           },
-          auth: true
+          auth: true,
+          data: {
+            specialClass: 'old'
+          }
         })
 
         .state('keys', {
@@ -696,7 +813,10 @@
           resolve: {
             authenticated: authCheck
           },
-          auth: true
+          auth: true,
+          data: {
+            specialClass: 'old'
+          }
         })
 
         .state('errorPage', {
@@ -718,7 +838,10 @@
           resolve: {
             authenticated: authCheck
           },
-          auth: true
+          auth: true,
+          data: {
+            specialClass: 'old'
+          }
         })
 
         .state('errorPage.limitQuota', {
@@ -734,7 +857,10 @@
           resolve: {
             authenticated: authCheck
           },
-          auth: true
+          auth: true,
+          data: {
+            specialClass: 'old'
+          }
         })
 
         .state('help', {
@@ -756,7 +882,10 @@
             authenticated: authCheck
           },
           auth: true,
-          noInitialData: true
+          noInitialData: true,
+          data: {
+            specialClass: 'old'
+          }
         })
         .state('help.details', {
           url: ':name/',
@@ -781,7 +910,10 @@
             authenticated: authCheck
           },
           auth: true,
-          noInitialData: true
+          noInitialData: true,
+          data: {
+            specialClass: 'old'
+          }
         })
         .state('tos', {
           url: '/tos/',
@@ -800,6 +932,9 @@
             'appHeaderIn': {
               templateUrl: 'views/partials/app-header.html',
             }
+          },
+          data: {
+            specialClass: 'old'
           }
         })
         .state('about', {
@@ -819,6 +954,9 @@
             'appHeaderIn': {
               templateUrl: 'views/partials/app-header.html',
             }
+          },
+          data: {
+            specialClass: 'old'
           }
         })
         .state('policy', {
@@ -838,6 +976,9 @@
             'appHeaderIn': {
               templateUrl: 'views/partials/app-header.html',
             }
+          },
+          data: {
+            specialClass: 'old'
           }
         });
 
@@ -900,8 +1041,10 @@
       }
     }
 
-    angular.module('ncsaas').run(['$translate', 'LANGUAGE', '$rootScope', 'ENV',
-      function($translate, LANGUAGE, $rootScope, ENV) {
+    angular.module('ncsaas').run(['$translate', 'LANGUAGE', '$rootScope', '$state', 'ENV',
+      function($translate, LANGUAGE, $rootScope, $state, ENV) {
+
+        $rootScope.$state = $state;
 
         if (ENV.modePageTitle) {
           $rootScope.pageTitle = ENV.modePageTitle;

@@ -34,7 +34,6 @@
 
       init: function() {
         this.activate();
-        this.menuItemActive = currentStateService.getActiveItem($state.current.name);
         this.setSignalHandler('adjustCurrentCustomer', this.adjustCurrentCustomer.bind(controllerScope));
         this.setSignalHandler('adjustCurrentProject', this.adjustCurrentProject.bind(controllerScope));
         this.setSignalHandler('refreshProjectList', this.refreshProjectListHandler.bind(controllerScope));
@@ -299,7 +298,7 @@
         return promise;
       },
       goToCurrentOrganization: function() {
-        $state.go('organizations.details', {uuid: this.currentCustomer.uuid});
+        $state.go('organizations.details.events', {uuid: this.currentCustomer.uuid});
       },
       goToCustomer: function(customer) {
         currentStateService.setCustomer(customer);
@@ -361,7 +360,6 @@
         ncUtils.deregisterEvent('currentProjectUpdated'); // clear currentProjectUpdated event handlers
         ncUtils.deregisterEvent('refreshCounts'); // clear refreshCounts event handlers
         ncUtils.deregisterEvent('refreshCustomerList'); // clear refreshCustomerList event handlers
-        $rootScope.bodyClass = currentStateService.getBodyClass(toState.name);
         // if user is authenticated - he should have selected customer
         if (authService.isAuthenticated() && !currentStateService.isCustomerDefined) {
           var deferred = $q.defer(),

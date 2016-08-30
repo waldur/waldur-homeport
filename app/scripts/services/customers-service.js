@@ -57,16 +57,18 @@
         return deferred.promise;
       },
       isOwnerOrStaff: function() {
-        if (usersService.currentUser.is_staff) {
-          return $q.when(true);
-        }
-        return currentStateService.getCustomer().then(function(customer) {
-          for (var i = 0; i < customer.owners.length; i++) {
-            if (usersService.currentUser.uuid === customer.owners[i].uuid) {
-              return $q.when(true);
-            }
+        return usersService.getCurrentUser().then(function(user) {
+          if (user.is_staff) {
+            return $q.when(true);
           }
-          return $q.when(false);
+          return currentStateService.getCustomer().then(function(customer) {
+            for (var i = 0; i < customer.owners.length; i++) {
+              if (user.uuid === customer.owners[i].uuid) {
+                return $q.when(true);
+              }
+            }
+            return $q.when(false);
+          });
         });
       },
       loadCountries: function() {

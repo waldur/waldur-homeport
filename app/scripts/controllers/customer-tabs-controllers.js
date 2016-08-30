@@ -87,9 +87,9 @@
 
   angular.module('ncsaas')
     .controller('CustomerProjectTabController', [
-      'BaseProjectListController', CustomerProjectTabController]);
+      'BaseProjectListController', 'currentCustomer', CustomerProjectTabController]);
 
-  function CustomerProjectTabController(BaseProjectListController) {
+  function CustomerProjectTabController(BaseProjectListController, currentCustomer) {
     var controllerScope = this;
     var Controller = BaseProjectListController.extend({
       init: function() {
@@ -98,6 +98,7 @@
         this._super();
         this.entityOptions.entityData.title = '';
         this.entityOptions.entityData.checkQuotas = 'project';
+        this.service.defaultFilter.customer = currentCustomer.uuid;
       }
     });
 
@@ -212,9 +213,10 @@
     .controller('CustomerAlertsListController', [
       'BaseAlertsListController',
       'currentStateService',
+      'currentCustomer',
       CustomerAlertsListController]);
 
-  function CustomerAlertsListController(BaseAlertsListController, currentStateService) {
+  function CustomerAlertsListController(BaseAlertsListController, currentStateService, currentCustomer) {
     var controllerScope = this;
     var controllerClass = BaseAlertsListController.extend({
       init: function() {
@@ -226,11 +228,9 @@
         var vm = this;
         var fn = this._super.bind(vm);
         filter = filter || {};
-        return currentStateService.getCustomer().then(function(customer) {
-          vm.service.defaultFilter.aggregate = 'customer';
-          vm.service.defaultFilter.uuid = customer.uuid;
-          return fn(filter);
-        })
+        vm.service.defaultFilter.aggregate = 'customer';
+        vm.service.defaultFilter.uuid = currentCustomer.uuid;
+        return fn(filter);
       }
     });
 
@@ -242,11 +242,11 @@
   angular.module('ncsaas')
     .controller('CustomerEventTabController', [
       'baseEventListController',
-      'currentStateService',
+      'currentCustomer',
       CustomerEventTabController
     ]);
 
-  function CustomerEventTabController(baseEventListController, currentStateService) {
+  function CustomerEventTabController(baseEventListController, currentCustomer) {
     var controllerScope = this;
     var EventController = baseEventListController.extend({
 
@@ -256,12 +256,8 @@
       },
 
       getList: function(filter) {
-        var vm = this,
-          fn = this._super.bind(vm);
-        return currentStateService.getCustomer().then(function(customer) {
-          vm.service.defaultFilter.scope = customer.url;
-          return fn(filter);
-        });
+        this.service.defaultFilter.scope = currentCustomer.url;
+        return this._super(filter);
       }
     });
 

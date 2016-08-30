@@ -2,7 +2,7 @@
     <div class="container" ng-if="entityOptions.entityData.title">
         <h1>{{ entityOptions.entityData.title }}</h1>
     </div>
-    <div class="white-box" ng-show="entityList.list.length > 0 || entityList.searchInput || entityList.chosenFilters.length">
+    <div ng-show="entityList.list.length > 0 || entityList.searchInput || entityList.chosenFilters.length">
         <div ng-if="entityOptions.entityData.filterTemplateUrl" 
             ng-include="entityOptions.entityData.filterTemplateUrl"></div>
         <ul class="sort-list"
@@ -24,8 +24,8 @@
         </ul>
     </div>
 
-    <div class="white-box no-styles" ng-show="entityList.list.length == 0 && !entityList.searchInput && !entityList.chosenFilters.length && !entityList.hideNoDataText">
-        <h2 class="app-title" ng-bind="::entityOptions.entityData.noDataText"></h2>
+    <div class="no-styles" ng-show="entityList.list.length == 0 && !entityList.searchInput && !entityList.chosenFilters.length && !entityList.hideNoDataText">
+        <h3 class="text-center" ng-bind="::entityOptions.entityData.noDataText"></h3>
         <div class="decision" ng-if="!entityOptions.entityData.hideActions">
             <div class="col">
                 <div ng-include="'views/directives/entity-list/table-actions.html'"></div>
@@ -33,11 +33,11 @@
         </div>
     </div>
 
-    <div class="white-box no-styles" ng-show="entityList.list.length == 0 && (entityList.searchInput || entityList.chosenFilters.length)">
-        <h2 class="app-title" ng-bind="entityOptions.entityData.noMatchesText"></h2>
+    <div class="no-styles" ng-show="entityList.list.length == 0 && (entityList.searchInput || entityList.chosenFilters.length)">
+        <h3 class="text-center" ng-bind="entityOptions.entityData.noMatchesText"></h3>
     </div>
 
-    <div class="white-box list-box" ng-show="entityList.list.length > 0">
+    <div class="list-box" ng-show="entityList.list.length > 0">
         <ul class="mobile-show compact-list"
             ng-if="entityOptions.entityData.rowTemplateUrl">
             <li class="compact-list__item"

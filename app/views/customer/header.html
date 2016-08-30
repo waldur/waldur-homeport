@@ -1,0 +1,14 @@
+<div class="row border-bottom" ng-controller="CustomerDetailsController">
+    <nav class="navbar navbar-fixed-top" role="navigation">
+        <div class="navbar-header m-l-md">
+            <h2 ng-if="currentCustomer">{{ currentCustomer.name }} · {{$state.current.data.pageTitle}}</h2>
+        </div>
+        <ul class="nav navbar-top-links navbar-right">
+            <li ng-controller="HeaderController as Header">
+                <a ng-click="logout()">
+                    <i class="fa fa-sign-out"></i> Log out
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>

@@ -9,7 +9,6 @@
       'currentStateService',
       'customersService',
       '$rootScope',
-      '$state',
       'ENV',
       'ENTITYLISTFIELDTYPES',
       'ncUtils',
@@ -22,7 +21,6 @@
       currentStateService,
       customersService,
       $rootScope,
-      $state,
       ENV,
       ENTITYLISTFIELDTYPES,
       ncUtils) {
@@ -62,41 +60,12 @@
               }.bind(this),
             }
           ];
-          var vm = this;
-          if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('resources') == -1) {
-            currentStateService.isQuotaExceeded('resource').then(function(response) {
-              if (!response) {
-                vm.actionButtonsListItems.push({
-                  title: 'Add resource',
-                  icon: 'fa-plus',
-                  clickFunction: function(project) {
-                    $rootScope.$broadcast('adjustCurrentProject', project);
-                    $state.go('appstore.store')
-                  }
-                });
-              }
-            });
-          }
-          if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('import') == -1) {
-            currentStateService.isQuotaExceeded('resource').then(function(response) {
-              if (!response) {
-                vm.actionButtonsListItems.push({
-                  title: 'Import resource',
-                  icon: 'fa-cloud-download',
-                  clickFunction: function(project) {
-                    $rootScope.$broadcast('adjustCurrentProject', project);
-                    $state.go('import.import');
-                  }
-                });
-              }
-            });
-          }
           this.entityOptions = {
             entityData: {
               noDataText: 'You have no projects yet.',
               noMatchesText: 'No projects found matching filter.',
               title: 'Projects',
-              createLink: 'projects.create',
+              createLink: 'organizations.details.projects-create({uuid: currentCustomer.uuid})',
               createLinkText: 'Add project',
               expandable: true,
               rowTemplateUrl: 'views/project/row.html'
@@ -243,7 +212,7 @@
       },
       cancel: function() {
         currentStateService.getCustomer().then(function(customer) {
-          $state.go('organizations.details', {uuid: customer.uuid, tab: 'projects'});
+          $state.go('organizations.details.projects', {uuid: customer.uuid});
         });
       }
     });
