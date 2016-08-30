@@ -251,25 +251,15 @@
         .state('appstore', {
           url: '/appstore/',
           abstract: true,
-          templateUrl: 'views/partials/base.html',
+          templateUrl: 'views/project/base.html',
         })
 
         .state('appstore.store', {
           url: ':category',
-          views: {
-            'appContent': {
-              templateUrl: 'views/appstore/store.html',
-            },
-            'appHeader': {
-              templateUrl: 'views/partials/app-header.html',
-            }
-          },
-          resolve: {
-            authenticated: authCheck
-          },
-          auth: true,
+          templateUrl: 'views/appstore/store.html',
           data: {
-            specialClass: 'old'
+            specialClass: 'white-bg',
+            pageTitle: 'Marketplace'
           }
         })
 
@@ -305,9 +295,9 @@
 
         .state('projects.details.events', {
           url: 'events/',
-          templateUrl: 'views/project/tab-eventlog.html',
+          templateUrl: 'views/partials/list.html',
           controller: 'ProjectEventTabController',
-          controllerAs: 'EventList',
+          controllerAs: 'Ctrl',
           data: {
             pageTitle: 'Events'
           }
@@ -315,7 +305,7 @@
 
         .state('projects.details.alerts', {
           url: 'alerts/',
-          templateUrl: 'views/resource/tab-alerts.html',
+          templateUrl: 'views/partials/list.html',
           controller: 'ProjectAlertTabController',
           controllerAs: 'Ctrl',
           data: {
@@ -325,9 +315,9 @@
 
         .state('projects.details.virtual-machines', {
           url: 'virtual-machines/',
-          templateUrl: 'views/project/tab-resources.html',
+          templateUrl: 'views/partials/list.html',
           controller: 'ProjectResourcesTabController',
-          controllerAs: 'ProjectResourcesTab',
+          controllerAs: 'Ctrl',
           data: {
             pageTitle: 'Virtual machines'
           }
@@ -335,9 +325,9 @@
 
         .state('projects.details.applications', {
           url: 'applications/',
-          templateUrl: 'views/resource/tab-applications.html',
+          templateUrl: 'views/partials/list.html',
           controller: 'ProjectApplicationsTabController',
-          controllerAs: 'ApplicationsList',
+          controllerAs: 'Ctrl',
           data: {
             pageTitle: 'Applications'
           }
@@ -345,9 +335,9 @@
 
         .state('projects.details.private-clouds', {
           url: 'private-clouds/',
-          templateUrl: 'views/resource/tab-private-clouds.html',
+          templateUrl: 'views/partials/list.html',
           controller: 'ProjectPrivateCloudsTabController',
-          controllerAs: 'PrivateClouds',
+          controllerAs: 'Ctrl',
           data: {
             pageTitle: 'Private clouds'
           }
@@ -355,9 +345,9 @@
 
         .state('projects.details.support', {
           url: 'support/',
-          templateUrl: 'views/project/tab-support.html',
+          templateUrl: 'views/partials/list.html',
           controller: 'ProjectSupportTabController',
-          controllerAs: 'ProjectSupportTab',
+          controllerAs: 'Ctrl',
           data: {
             pageTitle: 'Premium support'
           }
@@ -479,9 +469,9 @@
 
         .state('organizations.details.events', {
           url: 'events/',
-          templateUrl: 'views/customer/tab-eventlog.html',
+          templateUrl: 'views/partials/list.html',
           controller: 'CustomerEventTabController',
-          controllerAs: 'EventList',
+          controllerAs: 'Ctrl',
           data: {
             pageTitle: 'Events'
           }
@@ -489,9 +479,9 @@
 
         .state('organizations.details.projects', {
           url: 'projects/',
-          templateUrl: 'views/customer/tab-projects.html',
+          templateUrl: 'views/partials/list.html',
           controller: 'CustomerProjectTabController',
-          controllerAs: 'CustomerProjectTab',
+          controllerAs: 'Ctrl',
           data: {
             pageTitle: 'Projects'
           }
@@ -509,9 +499,9 @@
 
         .state('organizations.details.team', {
           url: 'team/',
-          templateUrl: 'views/customer/tab-team.html',
+          templateUrl: 'views/partials/list.html',
           controller: 'CustomerTeamTabController',
-          controllerAs: 'TeamList',
+          controllerAs: 'Ctrl',
           data: {
             pageTitle: 'Team'
           }
@@ -519,9 +509,9 @@
 
         .state('organizations.details.providers', {
           url: 'providers/',
-          templateUrl: 'views/customer/tab-services.html',
+          templateUrl: 'views/partials/list.html',
           controller: 'CustomerServiceTabController',
-          controllerAs: 'ServiceList',
+          controllerAs: 'Ctrl',
           data: {
             pageTitle: 'Providers'
           }
@@ -539,9 +529,9 @@
 
         .state('organizations.details.virtual-machines', {
           url: 'virtual-machines/',
-          templateUrl: 'views/customer/tab-resources.html',
+          templateUrl: 'views/partials/list.html',
           controller: 'CustomerResourcesTabController',
-          controllerAs: 'ResourceList',
+          controllerAs: 'Ctrl',
           data: {
             pageTitle: 'Virtual machines'
           }
@@ -549,9 +539,9 @@
 
         .state('organizations.details.applications', {
           url: 'applications/',
-          templateUrl: 'views/customer/tab-applications.html',
+          templateUrl: 'views/partials/list.html',
           controller: 'CustomerApplicationsTabController',
-          controllerAs: 'ResourceList',
+          controllerAs: 'Ctrl',
           data: {
             pageTitle: 'Applications'
           }
@@ -559,9 +549,9 @@
 
         .state('organizations.details.private-clouds', {
           url: 'private-clouds/',
-          templateUrl: 'views/customer/tab-private-clouds.html',
+          templateUrl: 'views/partials/list.html',
           controller: 'CustomerPrivateCloudTabController',
-          controllerAs: 'PrivateCloud',
+          controllerAs: 'Ctrl',
           data: {
             pageTitle: 'Private clouds'
           }
