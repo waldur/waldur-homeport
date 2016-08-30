@@ -63,7 +63,6 @@
     var AlertController = BaseAlertsListController.extend({
       init: function() {
         this.controllerScope = controllerScope;
-        this.blockUIElement = 'tab-content';
         this._super();
       },
       getList: function(filter) {
@@ -205,7 +204,6 @@
       init: function() {
         this.controllerScope = controllerScope;
         this.service = premiumSupportContractsService;
-        this.blockUIElement = 'tab-content';
         this._super();
 
         this.entityOptions = {

@@ -93,7 +93,6 @@
     var Controller = BaseProjectListController.extend({
       init: function() {
         this.controllerScope = controllerScope;
-        this.blockUIElement = 'tab-content';
         this._super();
         this.entityOptions.entityData.title = '';
         this.entityOptions.entityData.checkQuotas = 'project';
@@ -221,7 +220,6 @@
     var controllerClass = BaseAlertsListController.extend({
       init: function() {
         this.controllerScope = controllerScope;
-        this.blockUIElement = 'tab-content';
         this._super();
       },
       getList: function(filter) {

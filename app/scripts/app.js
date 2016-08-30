@@ -429,7 +429,7 @@
               }
               return customersService.$get($stateParams.uuid).then(function(customer) {
                 currentStateService.setCustomer(customer);
-                $rootScope.$broadcast('adjustCurrentCustomer', customer);
+                $rootScope.$broadcast('currentCustomerUpdated', customer);
                 return customer;
               }, function() {
                 $state.go('errorPage.notFound');
