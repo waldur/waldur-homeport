@@ -378,18 +378,16 @@
       },
 
       successRedirect: function() {
-        $state.go('organizations.details', {
+        $state.go('organizations.details.providers', {
           uuid: this.customer.uuid,
-          tab: 'providers',
           providerType: this.instance.service_type,
           providerUuid: this.instance.uuid
         });
       },
 
       cancel: function() {
-        $state.go('organizations.details', {
-          uuid: this.customer.uuid,
-          tab: 'providers'
+        $state.go('organizations.details.providers', {
+          uuid: this.customer.uuid
         });
       },
 

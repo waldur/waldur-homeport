@@ -189,30 +189,6 @@
           }
         })
 
-        .state('import', {
-          url: '/import/',
-          templateUrl: 'views/partials/base.html',
-          abstract: true
-        })
-
-        .state('import.import', {
-          url: '?service_type&service_uuid',
-          views: {
-            'appHeader@import' : {
-              templateUrl: 'views/partials/app-header.html',
-            },
-            'appContent@import' : {
-              templateUrl: 'views/import/import.html',
-            }
-          },
-          resolve: {
-            authenticated: authCheck
-          },
-          data: {
-            specialClass: 'old'
-          }
-        })
-
         .state('compare', {
           url: '/compare/',
           templateUrl: 'views/partials/base.html',
@@ -393,7 +369,15 @@
           controller: 'ProjectDeleteTabController',
           controllerAs: 'delController',
           data: {
-            pageTitle: 'Premium support'
+            pageTitle: 'Manage'
+          }
+        })
+
+        .state('projects.details.import', {
+          url: 'import/?service_type&service_uuid',
+          templateUrl: 'views/import/import.html',
+          data: {
+            pageTitle: 'Import resources from provider'
           }
         })
 
