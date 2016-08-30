@@ -1,0 +1,63 @@
+<nav ng-controller="ProjectDetailsController"
+    class="navbar-default navbar-static-side"
+    role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav" id="side-menu">
+            <li class="nav-header">
+                <div class="profile-element">
+                    <a ui-sref="dashboard.index">
+                        <h3 class="brand-name">Waldur</h3>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <a ui-sref="organizations.details.projects({uuid: currentProject.customer_uuid})">
+                    <i class="fa fa-angle-left"></i>
+                    <span class="nav-label">Back to list</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="projects.details.events({uuid: currentProject.uuid})">
+                    <i class="fa fa-bell-o"></i>
+                    <span class="nav-label">Events</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="projects.details.alerts({uuid: currentProject.uuid})">
+                    <i class="fa fa-fire"></i>
+                    <span class="nav-label">Alerts</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="projects.details.virtual-machines({uuid: currentProject.uuid})">
+                    <i class="fa fa-desktop"></i>
+                    <span class="nav-label">VMs</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="projects.details.private-clouds({uuid: currentProject.uuid})">
+                    <i class="fa fa-cloud"></i>
+                    <span class="nav-label">Private clouds</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="projects.details.applications({uuid: currentProject.uuid})">
+                    <i class="fa fa-cube"></i>
+                    <span class="nav-label">Applications</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="projects.details.support({uuid: currentProject.uuid})">
+                    <i class="fa fa-question-circle"></i>
+                    <span class="nav-label">Support</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="projects.details.delete({uuid: currentProject.uuid})">
+                    <i class="fa fa-wrench"></i>
+                    <span class="nav-label">Manage</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>

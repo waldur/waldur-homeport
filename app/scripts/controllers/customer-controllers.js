@@ -398,22 +398,14 @@
     .controller('CustomerDetailsController', CustomerDetailsController);
 
   CustomerDetailsController.$inject = [
-    '$scope', '$rootScope', '$state', '$stateParams', 'customersService'
+    '$scope', '$rootScope', 'currentStateService'
   ];
-  function CustomerDetailsController($scope, $rootScope, $state, $stateParams, customersService) {
-    function getCustomerFromStateParams(params) {
-      customersService.$get(params.uuid).then(function(customer) {
-        $scope.currentCustomer = customer;
-        $rootScope.$broadcast('adjustCurrentCustomer', customer);
-      }, function() {
-        $state.go('errorPage.notFound');
-      });
-    }
-    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-      if (toParams.uuid) {
-        getCustomerFromStateParams(toParams);
-      }
+  function CustomerDetailsController($scope, $rootScope, currentStateService) {
+    currentStateService.getCustomer().then(function(customer) {
+      $scope.currentCustomer = customer;
     });
-    getCustomerFromStateParams($stateParams);
+    $rootScope.$on('currentCustomerUpdated', function(event, customer) {
+      $scope.currentCustomer = customer;
+    });
   }
 })();

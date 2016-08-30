@@ -300,47 +300,100 @@
         .state('projects', {
           url: '/projects/',
           abstract: true,
-          templateUrl: 'views/partials/base.html',
+          templateUrl: 'views/project/base.html',
+          data: {
+            specialClass: 'white-bg'
+          }
         })
 
         .state('projects.details', {
-          reloadOnSearch: false,
-          url: ':uuid/?tab',
-          views: {
-            'appContent': {
-              templateUrl: 'views/project/details.html',
-            },
-            'tabEventlog@projects.details' : {
-              templateUrl: 'views/project/tab-eventlog.html',
-            },
-            'tabAlerts@projects.details' : {
-              templateUrl: 'views/project/tab-alerts.html',
-            },
-            'tabResources@projects.details' : {
-              templateUrl: 'views/project/tab-resources.html',
-            },
-            'tabApplications@projects.details' : {
-              templateUrl: 'views/resource/tab-applications.html',
-            },
-            'tabPrivateClouds@projects.details' : {
-              templateUrl: 'views/resource/tab-private-clouds.html',
-            },
-            'tabPremiumSupport@projects.details': {
-              templateUrl: 'views/project/tab-support.html',
-            },
-            'tabDelete@projects.details': {
-              templateUrl: 'views/project/tab-delete.html',
-            },
-            'appHeader': {
-              templateUrl: 'views/partials/app-header.html',
-            },
-          },
+          url: ':uuid/',
+          abstract: true,
+          template: '<div ui-view></div>',
           resolve: {
-            authenticated: authCheck
-          },
-          auth: true,
+            currentProject: function(
+              $stateParams, $state, $rootScope, projectsService, currentStateService) {
+              if (!$stateParams.uuid) {
+                return currentStateService.getProject();
+              }
+              return projectsService.$get($stateParams.uuid).then(function(project) {
+                currentStateService.setProject(project);
+                $rootScope.$broadcast('currentProjectUpdated');
+                return project;
+              }, function() {
+                $state.go('errorPage.notFound');
+              });
+            }
+          }
+        })
+
+        .state('projects.details.events', {
+          url: 'events/',
+          templateUrl: 'views/project/tab-eventlog.html',
+          controller: 'ProjectEventTabController',
+          controllerAs: 'EventList',
           data: {
-            specialClass: 'old'
+            pageTitle: 'Events'
+          }
+        })
+
+        .state('projects.details.alerts', {
+          url: 'alerts/',
+          templateUrl: 'views/resource/tab-alerts.html',
+          controller: 'ProjectAlertTabController',
+          controllerAs: 'Ctrl',
+          data: {
+            pageTitle: 'Alerts'
+          }
+        })
+
+        .state('projects.details.virtual-machines', {
+          url: 'virtual-machines/',
+          templateUrl: 'views/project/tab-resources.html',
+          controller: 'ProjectResourcesTabController',
+          controllerAs: 'ProjectResourcesTab',
+          data: {
+            pageTitle: 'Virtual machines'
+          }
+        })
+
+        .state('projects.details.applications', {
+          url: 'applications/',
+          templateUrl: 'views/resource/tab-applications.html',
+          controller: 'ProjectApplicationsTabController',
+          controllerAs: 'ApplicationsList',
+          data: {
+            pageTitle: 'Applications'
+          }
+        })
+
+        .state('projects.details.private-clouds', {
+          url: 'private-clouds/',
+          templateUrl: 'views/resource/tab-private-clouds.html',
+          controller: 'ProjectPrivateCloudsTabController',
+          controllerAs: 'PrivateClouds',
+          data: {
+            pageTitle: 'Private clouds'
+          }
+        })
+
+        .state('projects.details.support', {
+          url: 'support/',
+          templateUrl: 'views/project/tab-support.html',
+          controller: 'ProjectSupportTabController',
+          controllerAs: 'ProjectSupportTab',
+          data: {
+            pageTitle: 'Premium support'
+          }
+        })
+
+        .state('projects.details.delete', {
+          url: 'delete/',
+          templateUrl: 'views/project/tab-delete.html',
+          controller: 'ProjectDeleteTabController',
+          controllerAs: 'delController',
+          data: {
+            pageTitle: 'Premium support'
           }
         })
 
@@ -416,6 +469,9 @@
           resolve: {
             currentCustomer: function(
               $stateParams, $state, $rootScope, customersService, currentStateService) {
+              if (!$stateParams.uuid) {
+                return currentStateService.getCustomer();
+              }
               return customersService.$get($stateParams.uuid).then(function(customer) {
                 currentStateService.setCustomer(customer);
                 $rootScope.$broadcast('currentCustomerUpdated');

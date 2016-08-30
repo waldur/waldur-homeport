@@ -75,7 +75,7 @@
                 name: 'Name',
                 propertyName: 'name',
                 type: ENTITYLISTFIELDTYPES.name,
-                link: 'projects.details({uuid: entity.uuid})'
+                link: 'projects.details.events({uuid: entity.uuid})'
               },
               {
                 name: 'Creation date',
@@ -374,4 +374,21 @@
     controllerScope.__proto__ = new Controller();
   }
 
+})();
+
+(function() {
+  angular.module('ncsaas')
+    .controller('ProjectDetailsController', ProjectDetailsController);
+
+  ProjectDetailsController.$inject = [
+    '$scope', '$rootScope', 'currentStateService'
+  ];
+  function ProjectDetailsController($scope, $rootScope, currentStateService) {
+    currentStateService.getProject().then(function(project) {
+      $scope.currentProject = project;
+    });
+    $rootScope.$on('currentProjectUpdated', function(event, project) {
+      $scope.currentProject = project;
+    });
+  }
 })();

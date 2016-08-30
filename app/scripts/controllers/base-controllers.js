@@ -128,7 +128,7 @@
         vm.currentProject = project;
         $rootScope.$broadcast('currentProjectUpdated');
         if (!skipRedirect && project) {
-          $state.go('projects.details', {uuid: project.uuid});
+          $state.go('projects.details.events', {uuid: project.uuid});
         }
       },
       menuToggle: function(active, event) {
@@ -309,7 +309,7 @@
       },
       goToCurrentProject: function() {
         if (this.currentProject) {
-          $state.go('projects.details', {uuid: this.currentProject.uuid});
+          $state.go('projects.details.events', {uuid: this.currentProject.uuid});
         }
       },
       isOwner: function (customer) {

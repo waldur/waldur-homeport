@@ -99,6 +99,7 @@
         this.entityOptions.entityData.title = '';
         this.entityOptions.entityData.checkQuotas = 'project';
         this.service.defaultFilter.customer = currentCustomer.uuid;
+        this.entityOptions.createLink = 'organizations.details.projects-create({uuid: ' + currentCustomer.uuid + '})';
       }
     });
 
