@@ -1,4 +1,7 @@
-<div>
+<div ng-if="entityList.loading">
+    <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
+</div>
+<div ng-if="!entityList.loading">
     <div class="container" ng-if="entityOptions.entityData.title">
         <h1>{{ entityOptions.entityData.title }}</h1>
     </div>

@@ -88,8 +88,11 @@
         });
       },
       blockListElement: function() {
-        if (this.blockUIElement) {
-          ncUtils.blockElement(this.blockUIElement, this.listPromise);
+        if (this.listPromise && this.listPromise.finally) {
+          this.loading = true;
+          this.listPromise.finally(function() {
+            this.loading = false;
+          }.bind(this));
         }
       },
       afterGetList: function() {},
