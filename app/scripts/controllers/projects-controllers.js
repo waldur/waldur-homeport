@@ -384,11 +384,14 @@
     '$scope', '$rootScope', 'currentStateService'
   ];
   function ProjectDetailsController($scope, $rootScope, currentStateService) {
-    currentStateService.getProject().then(function(project) {
-      $scope.currentProject = project;
+    function refreshProject() {
+      currentStateService.getProject().then(function(project) {
+        $scope.currentProject = project;
+      });
+    }
+    $rootScope.$on('currentProjectUpdated', function() {
+      refreshProject();
     });
-    $rootScope.$on('currentProjectUpdated', function(event, project) {
-      $scope.currentProject = project;
-    });
+    refreshProject();
   }
 })();

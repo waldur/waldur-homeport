@@ -349,23 +349,12 @@
         $state.go('login');
       },
       stateChangeSuccessHandler: function(event, toState, toParams, fromState, fromParams) {
-        $rootScope.prevPreviousState = $rootScope.previousState;
-        $rootScope.prevPreviousParams = $rootScope.previousParams;
-        $rootScope.previousState = fromState;
-        $rootScope.previousParams= fromParams;
-        ncUtils.deregisterEvent('adjustCurrentCustomer');
-        ncUtils.deregisterEvent('adjustCurrentProject');
-        ncUtils.deregisterEvent('currentCustomerUpdated'); // clear currentCustomerUpdated event handlers
-        ncUtils.deregisterEvent('refreshProjectList'); // clear refreshProjectList event handlers
-        ncUtils.deregisterEvent('currentProjectUpdated'); // clear currentProjectUpdated event handlers
-        ncUtils.deregisterEvent('refreshCounts'); // clear refreshCounts event handlers
-        ncUtils.deregisterEvent('refreshCustomerList'); // clear refreshCustomerList event handlers
         // if user is authenticated - he should have selected customer
         if (authService.isAuthenticated() && !currentStateService.isCustomerDefined) {
           var deferred = $q.defer(),
             projectDeferred = $q.defer();
           usersService.getCurrentUser().then(function(user) {
-            var date  = new Date(user.date_joined).getTime();
+            // var date  = new Date(user.date_joined).getTime();
             // XXX: Temporarily disable Intercom
 /*            window.Intercom('boot', {
               app_id: ENV.IntercomAppId,

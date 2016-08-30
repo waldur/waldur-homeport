@@ -15,7 +15,6 @@
 
       init: function() {
         this.controllerScope = controllerScope;
-        this.blockUIElement = 'tab-content';
         this._super();
         this.getProject();
       },

@@ -1,11 +1,5 @@
 <div ng-controller="DashboardIndexController as DashboardController" class="event-log">
-    <div class="container">
-        <div class="app-title">
-            <h1>Dashboard</h1>
-            <customer-balance></customer-balance>
-        </div>
-    </div>
-    <div class="white-box">
+    <div>
         <ul class="sort-list event-nav">
             <li ng-class="{'active':activeTab == 'activity','inactive':activeTab !== 'activity'}">
                 <a ui-sref="{tab:'activity'}" ng-click="activeTab = 'activity'">Activity</a>
@@ -56,16 +50,16 @@
     </div>
     <div ng-if="activeTab == 'costs' && DashboardController.userCanManageProjects"
          ng-class="{'active-content':activeTab === 'costs', 'inactive-content':activeTab !== 'costs'}">
-         <div ui-view="costTab"></div>
+         <div ng-include="'views/dashboard/cost-tab.html'"></div>
     </div>
     <div ng-if="activeTab == 'activity'"
          ng-class="{'active-content':activeTab === 'activity',
                     'inactive-content':activeTab !== 'activity'}">
-        <div ui-view="activityTab"></div>
+        <div ng-include="'views/dashboard/activity-tab.html'"></div>
     </div>
     <div ng-if="activeTab == 'resources' && DashboardController.userCanManageProjects"
          ng-class="{'active-content':activeTab === 'resources',
                     'inactive-content':activeTab !== 'resources'}">
-        <div ui-view="resourcesTab"></div>
+        <div ng-include="'views/dashboard/resources-tab.html'"></div>
     </div>
 </div>

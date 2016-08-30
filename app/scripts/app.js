@@ -216,36 +216,17 @@
         .state('dashboard', {
           url: '/dashboard/',
           abstract: true,
-          templateUrl: 'views/partials/base.html',
+          templateUrl: 'views/customer/base.html',
+          data: {
+            specialClass: 'white-bg',
+            pageTitle: 'Dashboard'
+          }
         })
 
         .state('dashboard.index', {
           reloadOnSearch: false,
           url: '?tab',
-          views: {
-            'appHeader@dashboard': {
-              templateUrl: 'views/partials/app-header.html',
-            },
-            'appContent@dashboard': {
-              templateUrl: 'views/dashboard/index.html',
-            },
-            'activityTab@dashboard.index': {
-              templateUrl: 'views/dashboard/activity-tab.html',
-            },
-            'costTab@dashboard.index': {
-              templateUrl: 'views/dashboard/cost-tab.html',
-            },
-            'resourcesTab@dashboard.index': {
-              templateUrl: 'views/dashboard/resources-tab.html',
-            }
-          },
-          resolve: {
-            authenticated: authCheck
-          },
-          data: {
-            specialClass: 'old'
-          },
-          auth: true
+          templateUrl: 'views/dashboard/index.html',
         })
 
         .state('appstore', {
@@ -448,7 +429,7 @@
               }
               return customersService.$get($stateParams.uuid).then(function(customer) {
                 currentStateService.setCustomer(customer);
-                $rootScope.$broadcast('currentCustomerUpdated');
+                $rootScope.$broadcast('adjustCurrentCustomer', customer);
                 return customer;
               }, function() {
                 $state.go('errorPage.notFound');

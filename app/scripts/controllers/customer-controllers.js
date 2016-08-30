@@ -401,11 +401,14 @@
     '$scope', '$rootScope', 'currentStateService'
   ];
   function CustomerDetailsController($scope, $rootScope, currentStateService) {
-    currentStateService.getCustomer().then(function(customer) {
-      $scope.currentCustomer = customer;
+    function refreshCustomer() {
+      currentStateService.getCustomer().then(function(customer) {
+        $scope.currentCustomer = customer;
+      });
+    }
+    $rootScope.$on('currentCustomerUpdated', function() {
+      refreshCustomer();
     });
-    $rootScope.$on('currentCustomerUpdated', function(event, customer) {
-      $scope.currentCustomer = customer;
-    });
+    refreshCustomer();
   }
 })();
