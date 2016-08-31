@@ -580,18 +580,10 @@
 
         .state('organizations.plans', {
           url: ':uuid/plans/',
-          views: {
-            'appContent': {
-              templateUrl: 'views/customer/plans.html',
-            },
-            'appHeader': {
-              templateUrl: 'views/partials/app-header.html',
-            }
-          },
-          resolve: {
-            authenticated: authCheck
-          },
-          auth: true
+          templateUrl: 'views/customer/plans.html',
+          data: {
+            pageTitle: 'Plans'
+          }
         })
 
         .state('users', {
