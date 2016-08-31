@@ -3,16 +3,19 @@
 (function() {
 
   angular.module('ncsaas')
-    .directive('sidebar', [sidebar]);
+    .directive('sidebar', ['$state', sidebar]);
 
-  function sidebar() {
+  function sidebar($state) {
     return {
       restrict: 'E',
       scope: {
         items: '=',
         context: '='
       },
-      templateUrl: 'views/directives/sidebar.html'
+      templateUrl: 'views/directives/sidebar.html',
+      link: function(scope) {
+        scope.$state = $state;
+      }
     };
   }
 })();

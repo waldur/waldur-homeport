@@ -1,0 +1,10 @@
+<div ng-controller="UserDetailsController">
+    <sidebar items="items" context="context"></sidebar>
+    <div id="page-wrapper">
+        <nc-header ng-if="currentUser">
+            {{ currentUser.full_name || currentUser.username }} · 
+            <strong>{{$state.current.data.pageTitle}}</strong>
+        </nc-header>
+        <ui-view/>
+    </div>
+</div>

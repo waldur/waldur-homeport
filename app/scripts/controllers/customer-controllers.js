@@ -413,8 +413,8 @@
     refreshCustomer();
     $scope.items = [
       {
-          label: "Back to list",
-          icon: "fa-angle-left",
+          label: "Select organization",
+          icon: "fa-bars",
           link: "organizations.list"
       },
       {

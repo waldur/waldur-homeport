@@ -294,3 +294,50 @@
     controllerScope.__proto__ = new Controller();
   }
 })();
+
+
+(function() {
+  angular.module('ncsaas')
+    .controller('UserDetailsController', UserDetailsController);
+
+  UserDetailsController.$inject = ['$scope', '$stateParams', 'usersService'];
+  function UserDetailsController($scope, $stateParams, usersService) {
+    usersService.getCurrentUser().then(function(user) {
+      $scope.currentUser = user;
+      $scope.context = {user: user};
+    });
+
+    $scope.items = [
+      {
+          label: "Back to dashboard",
+          icon: "fa-angle-left",
+          link: "dashboard.index"
+      },
+      {
+          label: "Events",
+          icon: "fa-bell-o",
+          link: "profile.details.events({uuid: context.user.uuid})"
+      },
+      {
+          label: "SSH Keys",
+          icon: "fa-key",
+          link: "profile.details.keys({uuid: context.user.uuid})"
+      },
+      {
+          label: "Notifications",
+          icon: "fa-bookmark",
+          link: "profile.details.notifications({uuid: context.user.uuid})"
+      },
+      {
+          label: "Password",
+          icon: "fa-sign-in",
+          link: "profile.details.password({uuid: context.user.uuid})"
+      },
+      {
+          label: "Manage",
+          icon: "fa-wrench",
+          link: "profile.details.manage({uuid: context.user.uuid})"
+      }
+    ];
+  }
+})();

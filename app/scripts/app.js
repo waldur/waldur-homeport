@@ -389,44 +389,64 @@
         .state('profile', {
           url: '/profile/',
           abstract: true,
-          templateUrl: 'views/partials/base.html',
+          templateUrl: 'views/user/base.html'
         })
 
         .state('profile.details', {
-          reloadOnSearch: false,
-          url: '?tab',
-          views: {
-            'appHeader': {
-              templateUrl: 'views/partials/app-header.html',
-            },
-            'appContent': {
-              templateUrl: 'views/profile/details.html',
-            },
-            'tabEventlog@profile.details': {
-              templateUrl: 'views/user/tab-eventlog.html',
-            },
-            'tabKeys@profile.details': {
-              templateUrl: 'views/user/tab-keys.html',
-            },
-            'detailsTemplate@profile.details' : {
-              templateUrl: 'views/user/details-template.html',
-            },
-            'tabNotifications@profile.details' : {
-              templateUrl: 'views/user/tab-notifications.html'
-            },
-            'tabPassword@profile.details' : {
-              templateUrl: 'views/user/tab-password.html'
-            },
-            'tabManage@profile.details' : {
-              templateUrl: 'views/user/tab-manage.html'
-            }
-          },
-          resolve: {
-            authenticated: authCheck
-          },
-          auth: true,
+          url: '',
+          abstract: true,
+          template: '<ui-view/>',
           data: {
-            specialClass: 'old'
+            specialClass: 'white-bg'
+          }
+        })
+
+        .state('profile.details.events', {
+          url: 'events/',
+          templateUrl: 'views/partials/list.html',
+          controller: 'UserEventTabController',
+          controllerAs: 'Ctrl',
+          data: {
+            pageTitle: 'Events'
+          }
+        })
+
+        .state('profile.details.keys', {
+          url: 'keys/',
+          templateUrl: 'views/partials/list.html',
+          controller: 'UserKeyTabController',
+          controllerAs: 'Ctrl',
+          data: {
+            pageTitle: 'SSH keys'
+          }
+        })
+
+        .state('profile.details.notifications', {
+          url: 'notifications/',
+          templateUrl: 'views/partials/list.html',
+          controller: 'HookListController',
+          controllerAs: 'Ctrl',
+          data: {
+            pageTitle: 'Notifications'
+          }
+        })
+
+        .state('profile.details.password', {
+          url: 'password/',
+          templateUrl: 'views/user/tab-password.html',
+          controller: 'DetailUpdateProfileController',
+          data: {
+            pageTitle: 'Password'
+          }
+        })
+
+        .state('profile.details.manage', {
+          url: 'manage/',
+          templateUrl: 'views/user/tab-manage.html',
+          controller: 'UserDeleteTabController',
+          controllerAs: 'UserDelete',
+          data: {
+            pageTitle: 'Manage'
           }
         })
 
@@ -453,7 +473,7 @@
         .state('organizations.details', {
           url: ':uuid/',
           abstract: true,
-          template: '<div ui-view></div>',
+          template: '<ui-view/>',
           resolve: {
             currentCustomer: function(
               $stateParams, $state, $rootScope, customersService, currentStateService) {

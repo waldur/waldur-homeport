@@ -16,6 +16,12 @@
                     <span class="nav-label">{{ ::item.label }}</span>
                 </a>
             </li>
+            <li>
+                <a ui-sref="profile.details.events" ng-if="!$state.includes('profile')">
+                    <i class="fa fa-user"></i>
+                    <span class="nav-label">User settings</span>
+                </a>
+            </li>
         </ul>
     </div>
 </nav>
