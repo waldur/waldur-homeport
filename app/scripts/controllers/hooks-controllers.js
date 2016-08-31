@@ -26,7 +26,6 @@
       init: function() {
         this.controllerScope = controllerScope;
         this.service = hooksService;
-        this.blockUIElement = 'tab-content';
         this._super();
 
         this.actionButtonsListItems = [

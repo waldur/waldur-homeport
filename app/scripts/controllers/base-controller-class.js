@@ -58,7 +58,6 @@
       chosenFilters: [],
       cacheTime: ENV.defaultListCacheTime,
       controlPanelShow: true,
-      blockUIElement: null,
       mergeListFieldIdentifier: null,
 
       init: function() {
@@ -351,21 +350,14 @@
       },
       activate: function() {
         var vm = this;
-        if (vm.loadAll) {
-          vm.loading = true;
-          vm.loadAll().finally(function() {
-            vm.loading = false;
-          });
-        } else {
-          vm.loading = false;
-        }
-      },
-      loadAll: function() {
-        var vm = this;
-        return vm.getModel().then(function(response) {
+        vm.loading = true;
+        vm.getModel().then(function(response) {
           vm.model = response;
           vm.afterActivate(response);
-        }, vm.modelNotFound.bind(vm));
+        }, vm.modelNotFound.bind(vm))
+        .finally(function() {
+          vm.loading = false;
+        });
       },
       getModel: function() {
         return this.service.$get($stateParams.uuid);

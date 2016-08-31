@@ -410,5 +410,67 @@
       refreshCustomer();
     });
     refreshCustomer();
+    $scope.items = [
+      {
+          label: "Back to list",
+          icon: "fa-angle-left",
+          link: "organizations.list"
+      },
+      {
+          label: "Events",
+          icon: "fa-bell-o",
+          link: "organizations.details.events({uuid: currentCustomer.uuid})"
+      },
+      {
+          label: "Alerts",
+          icon: "fa-fire",
+          link: "organizations.details.alerts({uuid: currentCustomer.uuid})"
+      },
+      {
+          label: "Projects",
+          icon: "fa-folder-open-o",
+          link: "organizations.details.projects({uuid: currentCustomer.uuid})"
+      },
+      {
+          label: "Providers",
+          icon: "fa-database",
+          link: "organizations.details.providers({uuid: currentCustomer.uuid})"
+      },
+      {
+          label: "Team",
+          icon: "fa-group",
+          link: "organizations.details.team({uuid: currentCustomer.uuid})"
+      },
+      {
+          label: "Billing",
+          icon: "fa-file-text-o",
+          link: "organizations.details.billing({uuid: currentCustomer.uuid})"
+      },
+      {
+          label: "Sizing",
+          icon: "fa-calculator",
+          link: "organizations.details.sizing({uuid: currentCustomer.uuid})"
+      },
+      {
+          label: "VMs",
+          icon: "fa-desktop",
+          link: "organizations.details.virtual-machines({uuid: currentCustomer.uuid})"
+      },
+      {
+          label: "Private clouds",
+          icon: "fa-cloud",
+          link: "organizations.details.private-clouds({uuid: currentCustomer.uuid})"
+      },
+      {
+          label: "Applications",
+          icon: "fa-cube",
+          link: "organizations.details.applications({uuid: currentCustomer.uuid})"
+      },
+      {
+          label: "Manage",
+          icon: "fa-wrench",
+          link: "organizations.details.delete({uuid: currentCustomer.uuid})"
+      }
+    ];
   }
 })();

@@ -33,8 +33,6 @@
     var ControllerListClass = baseControllerListClass.extend({
       init: function() {
         this.service = resourcesService;
-        this.blockUIElement = 'tab-content';
-
         this.categories = {};
         this.categories[ENV.VirtualMachines] = 'vms';
         this.categories[ENV.Applications] = 'apps';

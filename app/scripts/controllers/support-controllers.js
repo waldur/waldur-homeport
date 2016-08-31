@@ -26,7 +26,6 @@
       init:function() {
         this.service = issuesService;
         this.controllerScope = controllerScope;
-        this.blockUIElement = 'issue-list';
         this._super();
         this.searchFieldName = 'search';
         this.entityOptions = {

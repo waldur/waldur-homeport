@@ -15,7 +15,6 @@
 
       init: function() {
         this.controllerScope = controllerScope;
-        this.blockUIElement = 'tab-content';
         this._super();
       },
       getList: function(filter) {
@@ -61,7 +60,6 @@
 
       init: function() {
         this.controllerScope = controllerScope;
-        this.blockUIElement = 'tab-content';
         this.service = keysService;
         this._super();
 

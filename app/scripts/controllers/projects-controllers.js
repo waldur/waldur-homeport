@@ -393,5 +393,48 @@
       refreshProject();
     });
     refreshProject();
+
+    $scope.items = [
+      {
+        link: "organizations.details.projects({uuid: currentProject.customer_uuid})",
+        icon: "fa-angle-left",
+        label: "Back to list"
+      },
+      {
+        link: "projects.details.events({uuid: currentProject.uuid})",
+        icon: "fa-bell-o",
+        label: "Events"
+      },
+      {
+        link: "projects.details.alerts({uuid: currentProject.uuid})",
+        icon: "fa-fire",
+        label: "Alerts"
+      },
+      {
+        link: "projects.details.virtual-machines({uuid: currentProject.uuid})",
+        icon: "fa-desktop",
+        label: "VMs"
+      },
+      {
+        link: "projects.details.private-clouds({uuid: currentProject.uuid})",
+        icon: "fa-cloud",
+        label: "Private clouds"
+      },
+      {
+        link: "projects.details.applications({uuid: currentProject.uuid})",
+        icon: "fa-cube",
+        label: "Applications"
+      },
+      {
+        link: "projects.details.support({uuid: currentProject.uuid})",
+        icon: "fa-question-circle",
+        label: "Support"
+      },
+      {
+        link: "projects.details.delete({uuid: currentProject.uuid})",
+        icon: "fa-wrench",
+        label: "Manage"
+      }
+    ];
   }
 })();
