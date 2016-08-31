@@ -649,46 +649,6 @@
           url: '/resources/',
           abstract: true,
           templateUrl: 'views/partials/base.html',
-          resolve: {
-            authenticated: authCheck
-          }
-        })
-
-        .state('resources.list', {
-          url: ':tab',
-          views: {
-            'appContent': {
-              templateUrl: 'views/project/details.html',
-            },
-            'tabEventlog@resources.list' : {
-              templateUrl: 'views/project/tab-eventlog.html',
-            },
-            'tabAlerts@resources.list': {
-              templateUrl: 'views/project/tab-alerts.html',
-            },
-            'tabResources@resources.list' : {
-              templateUrl: 'views/project/tab-resources.html',
-            },
-            'tabApplications@resources.list' : {
-              templateUrl: 'views/resource/tab-applications.html',
-            },
-            'tabPremiumSupport@resources.list': {
-              templateUrl: 'views/project/tab-support.html',
-            },
-            'tabDelete@resources.list': {
-              templateUrl: 'views/project/tab-delete.html',
-            },
-            'appHeader': {
-              templateUrl: 'views/partials/app-header.html',
-            }
-          },
-          resolve: {
-            authenticated: authCheck
-          },
-          auth: true,
-          data: {
-            specialClass: 'old'
-          }
         })
 
         .state('resources.details', {

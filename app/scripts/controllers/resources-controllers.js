@@ -491,8 +491,8 @@
       },
 
       modelNotFound: function() {
-        currentStateService.getProject().then(function() {
-          $state.go('resources.list');
+        currentStateService.getProject().then(function(project) {
+          $state.go('project.details.events', {uuid: project.uuid});
         }, function() {
           currentStateService.getCustomer().then(function(response) {
             $state.go('organizations.details', {uuid: response.uuid});
