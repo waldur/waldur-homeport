@@ -108,7 +108,7 @@
               vm.entityOptions.entityData.createLinkText = 'Add';
             }
             if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('import') == -1) {
-              vm.entityOptions.entityData.importLink = 'projects.details.import';
+              vm.entityOptions.entityData.importLink = 'import.import';
               vm.entityOptions.entityData.importLinkText = 'Import';
               if (!vm.projectHasNonSharedService(project)) {
                 vm.entityOptions.entityData.importDisabled = true;

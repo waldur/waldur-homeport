@@ -189,6 +189,21 @@
           }
         })
 
+        .state('import', {
+          url: '/import/',
+          templateUrl: 'views/project/base.html',
+          abstract: true,
+          data: {
+            specialClass: 'white-bg',
+            pageTitle: 'Import resources from provider'
+          }
+        })
+
+        .state('import.import', {
+          url: '?service_type&service_uuid',
+          templateUrl: 'views/import/import.html',
+         })
+
         .state('compare', {
           url: '/compare/',
           templateUrl: 'views/partials/base.html',
@@ -247,16 +262,26 @@
         .state('projects', {
           url: '/projects/',
           abstract: true,
-          templateUrl: 'views/project/base.html',
+          template: '<ui-view/>',
           data: {
             specialClass: 'white-bg'
+          }
+        })
+
+        .state('projects.create', {
+          url: 'add/',
+          templateUrl: 'views/project/create.html',
+          controller: 'ProjectAddController',
+          controllerAs: 'ProjectAdd',
+          data: {
+            pageTitle: 'Create project'
           }
         })
 
         .state('projects.details', {
           url: ':uuid/',
           abstract: true,
-          template: '<div ui-view></div>',
+          templateUrl: 'views/project/base.html',
           resolve: {
             currentProject: function(
               $stateParams, $state, $rootScope, projectsService, currentStateService) {
@@ -341,14 +366,6 @@
           controllerAs: 'delController',
           data: {
             pageTitle: 'Manage'
-          }
-        })
-
-        .state('projects.details.import', {
-          url: 'import/?service_type&service_uuid',
-          templateUrl: 'views/import/import.html',
-          data: {
-            pageTitle: 'Import resources from provider'
           }
         })
 
@@ -465,16 +482,6 @@
           controllerAs: 'Ctrl',
           data: {
             pageTitle: 'Projects'
-          }
-        })
-
-        .state('organizations.details.projects-create', {
-          url: 'add/',
-          templateUrl: 'views/project/create.html',
-          controller: 'ProjectAddController',
-          controllerAs: 'ProjectAdd',
-          data: {
-            pageTitle: 'Create project'
           }
         })
 

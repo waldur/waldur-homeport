@@ -404,6 +404,7 @@
     function refreshCustomer() {
       currentStateService.getCustomer().then(function(customer) {
         $scope.currentCustomer = customer;
+        $scope.context = {customer: customer};
       });
     }
     $rootScope.$on('currentCustomerUpdated', function() {
@@ -419,57 +420,57 @@
       {
           label: "Events",
           icon: "fa-bell-o",
-          link: "organizations.details.events({uuid: currentCustomer.uuid})"
+          link: "organizations.details.events({uuid: context.customer.uuid})"
       },
       {
           label: "Alerts",
           icon: "fa-fire",
-          link: "organizations.details.alerts({uuid: currentCustomer.uuid})"
+          link: "organizations.details.alerts({uuid: context.customer.uuid})"
       },
       {
           label: "Projects",
           icon: "fa-folder-open-o",
-          link: "organizations.details.projects({uuid: currentCustomer.uuid})"
+          link: "organizations.details.projects({uuid: context.customer.uuid})"
       },
       {
           label: "Providers",
           icon: "fa-database",
-          link: "organizations.details.providers({uuid: currentCustomer.uuid})"
+          link: "organizations.details.providers({uuid: context.customer.uuid})"
       },
       {
           label: "Team",
           icon: "fa-group",
-          link: "organizations.details.team({uuid: currentCustomer.uuid})"
+          link: "organizations.details.team({uuid: context.customer.uuid})"
       },
       {
           label: "Billing",
           icon: "fa-file-text-o",
-          link: "organizations.details.billing({uuid: currentCustomer.uuid})"
+          link: "organizations.details.billing({uuid: context.customer.uuid})"
       },
       {
           label: "Sizing",
           icon: "fa-calculator",
-          link: "organizations.details.sizing({uuid: currentCustomer.uuid})"
+          link: "organizations.details.sizing({uuid: context.customer.uuid})"
       },
       {
           label: "VMs",
           icon: "fa-desktop",
-          link: "organizations.details.virtual-machines({uuid: currentCustomer.uuid})"
+          link: "organizations.details.virtual-machines({uuid: context.customer.uuid})"
       },
       {
           label: "Private clouds",
           icon: "fa-cloud",
-          link: "organizations.details.private-clouds({uuid: currentCustomer.uuid})"
+          link: "organizations.details.private-clouds({uuid: context.customer.uuid})"
       },
       {
           label: "Applications",
           icon: "fa-cube",
-          link: "organizations.details.applications({uuid: currentCustomer.uuid})"
+          link: "organizations.details.applications({uuid: context.customer.uuid})"
       },
       {
           label: "Manage",
           icon: "fa-wrench",
-          link: "organizations.details.delete({uuid: currentCustomer.uuid})"
+          link: "organizations.details.delete({uuid: context.customer.uuid})"
       }
     ];
   }

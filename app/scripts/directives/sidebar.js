@@ -9,7 +9,8 @@
     return {
       restrict: 'E',
       scope: {
-        items: '='
+        items: '=',
+        context: '='
       },
       templateUrl: 'views/directives/sidebar.html'
     };

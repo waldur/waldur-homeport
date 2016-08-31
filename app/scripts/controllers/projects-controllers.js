@@ -65,7 +65,7 @@
               noDataText: 'You have no projects yet.',
               noMatchesText: 'No projects found matching filter.',
               title: 'Projects',
-              createLink: 'organizations.details.projects-create({uuid: currentCustomer.uuid})',
+              createLink: 'projects.create',
               createLinkText: 'Add project',
               expandable: true,
               rowTemplateUrl: 'views/project/row.html'
@@ -387,6 +387,7 @@
     function refreshProject() {
       currentStateService.getProject().then(function(project) {
         $scope.currentProject = project;
+        $scope.context = {project: project};
       });
     }
     $rootScope.$on('currentProjectUpdated', function() {
@@ -396,42 +397,42 @@
 
     $scope.items = [
       {
-        link: "organizations.details.projects({uuid: currentProject.customer_uuid})",
+        link: "organizations.details.projects({uuid: context.project.customer_uuid})",
         icon: "fa-angle-left",
         label: "Back to list"
       },
       {
-        link: "projects.details.events({uuid: currentProject.uuid})",
+        link: "projects.details.events({uuid: context.project.uuid})",
         icon: "fa-bell-o",
         label: "Events"
       },
       {
-        link: "projects.details.alerts({uuid: currentProject.uuid})",
+        link: "projects.details.alerts({uuid: context.project.uuid})",
         icon: "fa-fire",
         label: "Alerts"
       },
       {
-        link: "projects.details.virtual-machines({uuid: currentProject.uuid})",
+        link: "projects.details.virtual-machines({uuid: context.project.uuid})",
         icon: "fa-desktop",
         label: "VMs"
       },
       {
-        link: "projects.details.private-clouds({uuid: currentProject.uuid})",
+        link: "projects.details.private-clouds({uuid: context.project.uuid})",
         icon: "fa-cloud",
         label: "Private clouds"
       },
       {
-        link: "projects.details.applications({uuid: currentProject.uuid})",
+        link: "projects.details.applications({uuid: context.project.uuid})",
         icon: "fa-cube",
         label: "Applications"
       },
       {
-        link: "projects.details.support({uuid: currentProject.uuid})",
+        link: "projects.details.support({uuid: context.project.uuid})",
         icon: "fa-question-circle",
         label: "Support"
       },
       {
-        link: "projects.details.delete({uuid: currentProject.uuid})",
+        link: "projects.details.delete({uuid: context.project.uuid})",
         icon: "fa-wrench",
         label: "Manage"
       }
