@@ -441,10 +441,9 @@
 
         .state('organizations.list', {
           url: '',
-          templateUrl: 'views/customer/list.html',
-          resolve: {
-            authenticated: authCheck
-          },
+          templateUrl: 'views/partials/list.html',
+          controller: 'CustomerListController',
+          controllerAs: 'Ctrl',
           data: {
             pageTitle: 'Organizations'
           },
