@@ -369,6 +369,23 @@
           }
         })
 
+        .state('services', {
+          url: '/services/',
+          abstract: true,
+          templateUrl: 'views/customer/base.html'
+        })
+
+        .state('services.create', {
+          url: 'add/',
+          templateUrl: 'views/service/create.html',
+          controller: 'ServiceAddController',
+          controllerAs: 'ServiceAdd',
+          data: {
+            specialClass: 'white-bg',
+            pageTitle: 'Create provider'
+          }
+        })
+
         .state('profile', {
           url: '/profile/',
           abstract: true,
@@ -502,16 +519,6 @@
           controllerAs: 'Ctrl',
           data: {
             pageTitle: 'Providers'
-          }
-        })
-
-        .state('organizations.details.providers-create', {
-          url: 'add-provider/',
-          templateUrl: 'views/service/create.html',
-          controller: 'ServiceAddController',
-          controllerAs: 'ServiceAdd',
-          data: {
-            pageTitle: 'Create provider'
           }
         })
 
