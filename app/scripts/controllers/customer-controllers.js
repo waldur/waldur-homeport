@@ -402,7 +402,7 @@
   ];
   function CustomerDetailsController($scope, currentStateService) {
     function refreshCustomer() {
-      currentStateService.getCustomer().then(function(customer) {
+      currentStateService.isCustomerDefined && currentStateService.getCustomer().then(function(customer) {
         $scope.currentCustomer = customer;
         $scope.context = {customer: customer};
       });

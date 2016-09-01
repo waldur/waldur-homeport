@@ -297,6 +297,70 @@
         $state.go('login');
       },
 
+      stateChangeSuccessHandler: function(event, toState, toParams, fromState, fromParams) {
+        ctrl.selectInitialCustomer();
+        ctrl.checkQuotas(toState.name);
+      },
+
+      selectInitialCustomer: function() {
+        // if user is authenticated - he should have selected customer
+        if (authService.isAuthenticated() && !currentStateService.isCustomerDefined) {
+          var deferred = $q.defer(),
+            projectDeferred = $q.defer();
+          usersService.getCurrentUser().then(function(user) {
+            ctrl.bootIntercom();
+            if ($window.localStorage[ENV.currentCustomerUuidStorageKey]) {
+              customersService.$get($window.localStorage[ENV.currentCustomerUuidStorageKey]).then(function(customer) {
+                deferred.resolve(customer);
+                ctrl.getProject(projectDeferred);
+              }, setPersonalOrFirstCustomer);
+            } else {
+              setPersonalOrFirstCustomer();
+            }
+
+            function setPersonalOrFirstCustomer() {
+              customersService.getPersonalOrFirstCustomer(user.username).then(function(customer) {
+                deferred.resolve(customer);
+                ctrl.getProject(projectDeferred);
+              });
+            }
+          });
+          currentStateService.setCustomer(deferred.promise);
+          currentStateService.setProject(projectDeferred.promise);
+        }
+      },
+
+      getProject: function(projectDeferred) {
+        if ($window.localStorage[ENV.currentProjectUuidStorageKey]) {
+          projectsService.$get($window.localStorage[ENV.currentProjectUuidStorageKey]).then(function(response) {
+            currentStateService.getCustomer().then(function(customer) {
+              if (response.customer_uuid == customer.uuid) {
+                projectDeferred.resolve(response);
+              } else {
+                ctrl.getFirstProject(projectDeferred);
+              }
+            });
+          }, ctrl.getFirstProject);
+        } else {
+          ctrl.getFirstProject(projectDeferred);
+        }
+      },
+
+      getFirstProject: function(projectDeferred) {
+        var projectUuid = currentStateService.handleSelectedProjects($window.localStorage[ENV.currentCustomerUuidStorageKey]);
+        if (projectUuid) {
+          projectsService.$get(projectUuid).then(function(project) {
+            projectDeferred.resolve(project);
+          }, function() {
+            currentStateService.removeLastSelectedProject(projectUuid);
+          });
+        } else {
+          projectsService.getFirst().then(function(response) {
+            projectDeferred.resolve(response);
+          });
+        }
+      },
+
       bootIntercom: function(user) {
         // XXX: Temporarily disable Intercom
         return;
@@ -309,69 +373,13 @@
         });
       },
 
-      stateChangeSuccessHandler: function(event, toState, toParams, fromState, fromParams) {
-        // if user is authenticated - he should have selected customer
-        if (authService.isAuthenticated() && !currentStateService.isCustomerDefined) {
-          var deferred = $q.defer(),
-            projectDeferred = $q.defer();
-          usersService.getCurrentUser().then(function(user) {
-            ctrl.bootIntercom();
-            if ($window.localStorage[ENV.currentCustomerUuidStorageKey]) {
-              customersService.$get($window.localStorage[ENV.currentCustomerUuidStorageKey]).then(function(customer) {
-                deferred.resolve(customer);
-                getProject()
-              }, setPersonalOrFirstCustomer);
-            } else {
-              setPersonalOrFirstCustomer();
-            }
-
-            function setPersonalOrFirstCustomer() {
-              customersService.getPersonalOrFirstCustomer(user.username).then(function(customer) {
-                deferred.resolve(customer);
-                getProject()
-              });
-            }
-          });
-          currentStateService.setCustomer(deferred.promise);
-          currentStateService.setProject(projectDeferred.promise);
-        }
-
-        if (ENV.entityCreateLink[toState.name]) {
+      checkQuotas: function(stateName) {
+        if (ENV.entityCreateLink[stateName]) {
           currentStateService.isQuotaExceeded(ENV.entityCreateLink[toState.name]).then(function(response) {
             if (response) {
               $state.go('errorPage.limitQuota');
             }
           });
-        }
-
-        function getProject() {
-          if ($window.localStorage[ENV.currentProjectUuidStorageKey]) {
-            projectsService.$get($window.localStorage[ENV.currentProjectUuidStorageKey]).then(function(response) {
-              currentStateService.getCustomer().then(function(customer) {
-                if (response.customer_uuid == customer.uuid) {
-                  projectDeferred.resolve(response);
-                } else {
-                  getFirstProject();
-                }
-              });
-            }, getFirstProject);
-          } else {
-            getFirstProject();
-          }
-          function getFirstProject() {
-            var projectUuid = currentStateService.handleSelectedProjects($window.localStorage[ENV.currentCustomerUuidStorageKey]);
-            if (projectUuid) {
-              projectsService.$get(projectUuid).then(function(project) {
-                projectDeferred.resolve(project);
-              }, function() {
-                currentStateService.removeLastSelectedProject(projectUuid);
-              });
-            } else {
-              projectsService.getFirst().then(function(response) {
-                projectDeferred.resolve(response);
-              });
-            }
-          }
         }
       }
     });

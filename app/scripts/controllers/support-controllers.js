@@ -30,7 +30,6 @@
         this.searchFieldName = 'search';
         this.entityOptions = {
           entityData: {
-            title: 'Support',
             createLink: 'support.create',
             createLinkText: 'Create ticket',
             noDataText: 'No tickets yet.',
