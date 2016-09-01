@@ -243,6 +243,41 @@
         }
       },
 
+      getProjectList: function(cacheReset) {
+        projectsService.cacheTime = ENV.topMenuProjectsCacheTime;
+        projectsService.cacheReset = cacheReset;
+
+        var promise = projectsService.getList().then(function(response) {
+          if (response.length < 1
+            && $state.current.name != 'projects.create') {
+            ctrl.currentProject = null;
+            ctrl.setCurrentProject(null);
+            if ($state.current.name != 'errorPage.notFound') {
+              ncUtilsFlash.info('You have no projects! Please add one.');
+            }
+          }
+          ctrl.projects = response;
+          return response;
+        });
+
+        ncUtils.blockElement('project-menu', promise);
+        return promise;
+      },
+
+      getCustomerList: function(cacheReset) {
+        customersService.cacheTime = ENV.topMenuCustomerCacheTime;
+        customersService.cacheReset = cacheReset;
+ 
+        var promise = customersService.getList().then(function(response) {
+          ctrl.customers = response;
+          ctrl.hasMore = customersService.pages > 1;
+          return response;
+        });
+
+        ncUtils.blockElement('customer-menu', promise);
+        return promise;
+      },
+
       refreshCustomerListHandler: function(event, params) {
         var customerUuids,
           currentCustomerKey,
