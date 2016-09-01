@@ -398,16 +398,16 @@
     .controller('CustomerDetailsController', CustomerDetailsController);
 
   CustomerDetailsController.$inject = [
-    '$scope', '$rootScope', 'currentStateService'
+    '$scope', 'currentStateService'
   ];
-  function CustomerDetailsController($scope, $rootScope, currentStateService) {
+  function CustomerDetailsController($scope, currentStateService) {
     function refreshCustomer() {
       currentStateService.getCustomer().then(function(customer) {
         $scope.currentCustomer = customer;
         $scope.context = {customer: customer};
       });
     }
-    $rootScope.$on('currentCustomerUpdated', function() {
+    $scope.$on('currentCustomerUpdated', function() {
       refreshCustomer();
     });
     refreshCustomer();

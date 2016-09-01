@@ -9,8 +9,12 @@
         && ['alertsList', 'eventsList'].indexOf(HelpDetails.model.type) === -1">
             Help page is not available
         </div>
-        <div class="instruction-page" ng-if="HelpDetails.model.type == 'sshKeys'" ui-view="sshKeys"></div>
-        <div class="instruction-page" ng-if="['alertsList', 'eventsList'].indexOf(HelpDetails.model.type) !== -1" ui-view="alertsList"></div>
+        <div class="instruction-page"
+            ng-if="HelpDetails.model.type == 'sshKeys'"
+            ng-include="'views/help/ssh-keys.html'"></div>
+        <div class="instruction-page"
+            ng-if="['alertsList', 'eventsList'].indexOf(HelpDetails.model.type) !== -1"
+            ng-include="'views/help/alerts-events-list.html'"></div>
         <div class="instruction-page" ng-if="HelpDetails.model.type == 'providers'">
             <div class="">
                 <image-box image="static/images/help/{{ HelpDetails.model.key.toLowerCase() }}_tokens.png"></image-box>

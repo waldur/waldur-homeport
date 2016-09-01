@@ -771,6 +771,9 @@
             project_uuid: project.uuid,
             field: ['url', 'quotas']
           }).then(function(services) {
+            if (services.length === 0) {
+              return;
+            }
             angular.forEach(services, function(service) {
               var quotas = service.quotas.filter(function(quota) {
                 return quota.limit !== -1 && quota.usage >= (quota.limit * vm.quotaThreshold);

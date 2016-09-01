@@ -97,8 +97,8 @@
         return this.getUser().then(function(user) {
           vm.user = user;
           vm.service.defaultFilter.user_uuid = user.uuid;
-          if (user.uuid === $stateParams.uuid) {
-            angular.extend(vm.entityOptions, {
+          if (angular.isUndefined($stateParams.uuid) || user.uuid === $stateParams.uuid) {
+            angular.extend(vm.entityOptions.entityData, {
               createLink: 'keys.create',
               createLinkText: 'Add SSH Key'
             });

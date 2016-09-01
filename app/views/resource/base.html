@@ -1,0 +1,10 @@
+<div ng-controller="ResourceDetailUpdateController as Ctrl">
+    <sidebar items="Ctrl.items" context="Ctrl.context"></sidebar>
+    <div id="page-wrapper">
+        <nc-header ng-if="Ctrl.model">
+            {{ Ctrl.model.customer_name }} / {{ Ctrl.model.project_name }} · 
+            <strong>{{ Ctrl.model.name }}</strong>
+        </nc-header>
+        <div ui-view></div>
+    </div>
+</div>

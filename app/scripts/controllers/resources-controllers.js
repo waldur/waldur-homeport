@@ -393,6 +393,7 @@
           ]
         };
         this.detailsViewOptions.activeTab = this.getActiveTab();
+        this.activeTab = this.detailsViewOptions.activeTab.key;
       },
 
       getModel: function() {
@@ -411,30 +412,41 @@
       },
 
       afterActivate: function() {
+        this.updateMenu();
         this.setCounters();
         this.updateResourceTab();
         this.scheduleRefresh();
         this.addMonitoringTabs();
       },
 
+      updateMenu: function() {
+        controllerScope.context = {resource: controllerScope.model};
+        var resourceCategory = ENV.resourceCategory[this.model.resource_type];
+        var state;
+        if (resourceCategory === 'apps') {
+          state = 'projects.details.applications';
+        } else if (resourceCategory === 'private_clouds') {
+          state = 'projects.details.private-clouds';
+        } else {
+          state = 'projects.details.virtual-machines';
+        }
+        controllerScope.items = [
+          {
+              label: "Back to project",
+              icon: "fa-angle-left",
+              link: state + "({uuid: context.resource.project_uuid})"
+          }
+        ];
+      },
+
       addMonitoringTabs: function() {
         var vm = this;
         var host = vm.getZabbixHost(vm.model);
         if (host) {
-          vm.detailsViewOptions.tabs.push({
-            title: 'Graphs',
-            key: 'graphs',
-            viewName: 'tabGraphs'
-          });
+          vm.showGraphs = true;
           vm.getITServiceForHost(host).then(function(itservice) {
             if (itservice) {
-              vm.detailsViewOptions.tabs.push({
-                title: 'SLA',
-                key: 'sla',
-                viewName: 'tabSLA',
-                count: -1,
-                hideSearch: true
-              });
+              vm.showSla = true;
             }
           });
         }

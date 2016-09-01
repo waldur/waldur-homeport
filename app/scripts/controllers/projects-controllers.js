@@ -381,16 +381,16 @@
     .controller('ProjectDetailsController', ProjectDetailsController);
 
   ProjectDetailsController.$inject = [
-    '$scope', '$rootScope', 'currentStateService'
+    '$scope', 'currentStateService'
   ];
-  function ProjectDetailsController($scope, $rootScope, currentStateService) {
+  function ProjectDetailsController($scope, currentStateService) {
     function refreshProject() {
       currentStateService.getProject().then(function(project) {
         $scope.currentProject = project;
         $scope.context = {project: project};
       });
     }
-    $rootScope.$on('currentProjectUpdated', function() {
+    $scope.$on('currentProjectUpdated', function() {
       refreshProject();
     });
     refreshProject();

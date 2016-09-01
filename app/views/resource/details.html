@@ -1,4 +1,33 @@
-<div ng-controller="ResourceDetailUpdateController as ResourceDetailUpdate">
-    <details-view details-options="ResourceDetailUpdate.detailsViewOptions"
-                  details-controller="ResourceDetailUpdate"></details-view>
+<div ng-controller="ResourceDetailUpdateController as controller">
+    <div class="row m-l-sm">
+        <ul class="sort-list event-nav">
+            <li ng-class="{'active': controller.activeTab == 'details', 'inactive': controller.activeTab != 'details'}">
+                <a ng-click="controller.activeTab = 'details'">Details</a>
+            </li>
+            <li ng-class="{'active': controller.activeTab == 'alerts', 'inactive': controller.activeTab != 'alerts'}">
+                <a ng-click="controller.activeTab = 'alerts'">Alerts</a>
+            </li>
+            <li ng-class="{'active': controller.activeTab == 'graphs', 'inactive': controller.activeTab != 'graphs'}" ng-if="controller.showGraphs">
+                <a ng-click="controller.activeTab = 'graphs'">Graphs</a>
+            </li>
+            <li ng-class="{'active': controller.activeTab == 'sla', 'inactive': controller.activeTab != 'sla'}" ng-if="controller.showSla">
+                <a ng-click="controller.activeTab = 'sla'">SLA</a>
+            </li>
+        </ul>
+    </div>
+    <div ng-if="controller.activeTab == 'details'">
+        <div ng-include="'views/resource/tab-details.html'"></div>
+    </div>
+
+    <div ng-if="controller.activeTab == 'alerts'">
+        <div ng-include="'views/resource/tab-alerts.html'">
+    </div>
+
+    <div ng-if="controller.activeTab == 'graphs'">
+        <div ng-include="'views/resource/tab-graphs.html'">
+    </div>
+
+    <div ng-if="controller.activeTab == 'sla'">
+        <div ng-include="'views/resource/tab-sla.html'">
+    </div>
 </div>

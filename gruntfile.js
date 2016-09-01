@@ -647,6 +647,7 @@ module.exports = function(grunt) {
                     'app/scripts/controllers/*.js',
                     'app/scripts/directives/*.js',
                     'app/scripts/services/*.js',
+                    'app/scripts/routes/*.js',
                     'app/static/js/angular/angular-block-ui.js',
                     'app/static/js/leaflet.js',
                     'app/static/js/angular/angular-leaflet-directive.js',

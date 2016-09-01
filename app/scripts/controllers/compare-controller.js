@@ -44,7 +44,6 @@
           entityData: {
             noDataText: 'No items to compare yet.',
             noMatchesText: 'No items found matching filter.',
-            title: 'Compare',
             hidePagination: true,
             hideActionButtons: true,
             hideSearch: true,
@@ -128,8 +127,10 @@
         }
       },
       activate: function() {
-        var listPromise = this.setCurrentUserData();
-        ncUtils.blockElement('compare-list', listPromise);
+        controllerScope.loading = true;
+        this.setCurrentUserData().finally(function() {
+          controllerScope.loading = false;
+        });
       },
       setCurrentUserData: function() {
         var currentCustomerPromise = currentStateService.getCustomer(),
@@ -140,7 +141,7 @@
           vm.currentCustomer = result[0];
           vm.currentProject = result[1];
           vm.servicesMetadata = result[2];
-          vm.getDefaultPriceListItems();
+          return vm.getDefaultPriceListItems();
         });
       },
       getDefaultPriceListItems: function() {
