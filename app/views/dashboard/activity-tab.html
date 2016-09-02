@@ -39,7 +39,7 @@
                         </li>
                         <li class="resources" ng-class="{'empty': !project.count.resources}" visible="resources">
                             <div class="counter-name">Resources</div>
-                            <div ui-sref="project.virtual-machines({uuid: project.uuid})"
+                            <div ui-sref="project.resources.vms({uuid: project.uuid})"
                                  class="counter link-to-project" ng-bind="project.count.resources"></div>
                         </li>
                         <li visible="providers" class="services" ng-class="{'empty': !project.count.services}" visible="providers">

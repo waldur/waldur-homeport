@@ -74,7 +74,13 @@
         }
       })
 
-      .state('organization.virtual-machines', {
+      .state('organization.resources', {
+        url: '',
+        abstract: true,
+        template: '<ui-view/>'
+      })
+
+      .state('organization.resources.vms', {
         url: 'virtual-machines/',
         templateUrl: 'views/partials/list.html',
         controller: 'CustomerResourcesTabController',
@@ -84,7 +90,7 @@
         }
       })
 
-      .state('organization.applications', {
+      .state('organization.resources.apps', {
         url: 'applications/',
         templateUrl: 'views/partials/list.html',
         controller: 'CustomerApplicationsTabController',
@@ -94,7 +100,7 @@
         }
       })
 
-      .state('organization.private-clouds', {
+      .state('organization.resources.clouds', {
         url: 'private-clouds/',
         templateUrl: 'views/partials/list.html',
         controller: 'CustomerPrivateCloudTabController',
@@ -138,7 +144,13 @@
         }
       })
 
-      .state('organization.cost-analysis', {
+      .state('organization.analysis', {
+        url: '',
+        abstract: true,
+        template: '<ui-view/>'
+      })
+
+      .state('organization.analysis.cost', {
         url: 'cost-analysis/',
         templateUrl: 'views/dashboard/cost-tab.html',
         data: {
@@ -146,7 +158,7 @@
         }
       })
 
-      .state('organization.resource-usage', {
+      .state('organization.analysis.resources', {
         url: 'resource-usage/',
         templateUrl: 'views/dashboard/resources-tab.html',
         data: {

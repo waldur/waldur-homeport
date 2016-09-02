@@ -425,21 +425,22 @@
       {
         label: "Resources",
         icon: "fa-files-o",
+        state: "organization.resources",
         children: [
           {
             label: "Virtual machines",
             icon: "fa-desktop",
-            link: "organization.virtual-machines({uuid: context.customer.uuid})"
+            link: "organization.resources.vms({uuid: context.customer.uuid})"
           },
           {
             label: "Private clouds",
             icon: "fa-cloud",
-            link: "organization.private-clouds({uuid: context.customer.uuid})"
+            link: "organization.resources.clouds({uuid: context.customer.uuid})"
           },
           {
             label: "Applications",
             icon: "fa-cube",
-            link: "organization.applications({uuid: context.customer.uuid})"
+            link: "organization.resources.apps({uuid: context.customer.uuid})"
           },
         ]
       },
@@ -451,16 +452,17 @@
       {
         label: "Analytics",
         icon: "fa-bar-chart-o",
+        state: "organization.analysis",
         children: [
           {
             label: "Cost analysis",
             icon: "fa-pie-chart",
-            link: "organization.cost-analysis({uuid: context.customer.uuid})"
+            link: "organization.analysis.cost({uuid: context.customer.uuid})"
           },
           {
             label: "Resource usage",
             icon: "fa-tachometer",
-            link: "organization.resource-usage({uuid: context.customer.uuid})"
+            link: "organization.analysis.resources({uuid: context.customer.uuid})"
           }
         ]
       },

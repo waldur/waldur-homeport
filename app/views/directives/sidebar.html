@@ -16,7 +16,9 @@
                     <span class="nav-label">Select workspace</span>
                 </a>
             </li>
-            <li ui-sref-active="active" ng-repeat="item in items">
+            <li ui-sref-active="active"
+                ng-repeat="item in items"
+                ng-class="{active: $state.includes(item.state)}">
                 <a ui-sref="{{ item.link }}" ng-if="item.link">
                     <i class="fa {{ ::item.icon }}"></i>
                     <span class="nav-label">{{ ::item.label }}</span>
@@ -26,7 +28,9 @@
                     <span class="nav-label">{{ ::item.label }}</span>
                     <i class="fa arrow"></i>
                 </a>
-                <ul class="nav nav-second-level" ng-if="item.children">
+                <ul class="nav nav-second-level"
+                    ng-if="item.children"
+                    ng-class="{in: $state.includes(item.state)}">
                     <li ui-sref-active="active" ng-repeat="child in item.children">
                         <a ui-sref="{{ child.link }}">
                             <i class="fa {{ ::child.icon }}"></i>

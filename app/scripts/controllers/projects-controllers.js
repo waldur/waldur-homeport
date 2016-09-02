@@ -406,17 +406,17 @@
         icon: "fa-files-o",
         children: [
           {
-            link: "project.virtual-machines({uuid: context.project.uuid})",
+            link: "project.resources.vms({uuid: context.project.uuid})",
             icon: "fa-desktop",
             label: "Virtual machines"
           },
           {
-            link: "project.private-clouds({uuid: context.project.uuid})",
+            link: "project.resources.clouds({uuid: context.project.uuid})",
             icon: "fa-cloud",
             label: "Private clouds"
           },
           {
-            link: "project.applications({uuid: context.project.uuid})",
+            link: "project.resources.apps({uuid: context.project.uuid})",
             icon: "fa-cube",
             label: "Applications"
           }

@@ -297,11 +297,11 @@
 
       getListState: function() {
         if (this.isApplicationSelected()) {
-          return 'project.applications';
+          return 'project.resources.apps';
         } else if (this.isPrivateCloudSelected()) {
-          return 'project.private-clouds';
+          return 'project.resources.clouds';
         } else {
-          return 'project.virtual-machines';
+          return 'project.resources.vms';
         }
       },
 

@@ -434,11 +434,11 @@
       getListState: function(resourceType) {
         var resourceCategory = ENV.resourceCategory[resourceType];
         if (resourceCategory === 'apps') {
-          return 'project.applications';
+          return 'project.resources.apps';
         } else if (resourceCategory === 'private_clouds') {
-          return 'project.private-clouds';
+          return 'project.resources.clouds';
         } else {
-          return 'project.virtual-machines';
+          return 'project.resources.vms';
         }
       },
 

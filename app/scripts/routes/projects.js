@@ -55,7 +55,13 @@
         }
       })
 
-      .state('project.virtual-machines', {
+      .state('project.resources', {
+        url: '',
+        abstract: true,
+        template: '<ui-view/>'
+      })
+
+      .state('project.resources.vms', {
         url: 'virtual-machines/',
         templateUrl: 'views/partials/list.html',
         controller: 'ProjectResourcesTabController',
@@ -65,7 +71,7 @@
         }
       })
 
-      .state('project.applications', {
+      .state('project.resources.apps', {
         url: 'applications/',
         templateUrl: 'views/partials/list.html',
         controller: 'ProjectApplicationsTabController',
@@ -75,7 +81,7 @@
         }
       })
 
-      .state('project.private-clouds', {
+      .state('project.resources.clouds', {
         url: 'private-clouds/',
         templateUrl: 'views/partials/list.html',
         controller: 'ProjectPrivateCloudsTabController',
