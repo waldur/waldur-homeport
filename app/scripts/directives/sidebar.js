@@ -57,13 +57,24 @@
     ctrl.selectedProject = {};
 
     ctrl.selectOrganization = function(organization) {
+      ctrl.selectedOrganization = organization;
+      if (organization.projects.length > 0) {
+        ctrl.selectProject(organization.projects[0]);
+      }
+    };
+
+    ctrl.selectProject = function(project) {
+      ctrl.selectedProject = project;
+    };
+
+    ctrl.gotoOrganization = function(organization) {
       ctrl.$close();
       $state.go('organizations.details.events', {
         uuid: organization.uuid
       });
     };
 
-    ctrl.selectProject = function(project) {
+    ctrl.gotoProject = function(project) {
       ctrl.$close();
       $state.go('projects.details.events', {
         uuid: project.uuid
