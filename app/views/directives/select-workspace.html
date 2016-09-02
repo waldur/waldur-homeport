@@ -15,7 +15,7 @@
           Add new org
         </a>
       </h3>
-      <div class="list-group">
+      <div class="list-group" slimscroll="{height: '300px'}">
         <div class="list-group-item"
           ng-repeat="organization in Ctrl.organizations"
           ng-class="{active: organization.uuid == Ctrl.selectedOrganization.uuid}"
@@ -39,7 +39,9 @@
       <div ng-if="Ctrl.selectedOrganization.projects.length == 0">
           <p class="text-center text-danger">There are no projects yet for this organization.</p>
       </div>
-      <div ng-if="Ctrl.selectedOrganization.projects.length > 0" class="list-group">
+      <div ng-if="Ctrl.selectedOrganization.projects.length > 0"
+        class="list-group"
+        slimscroll="{height: '300px'}">
         <div class="list-group-item"
           ng-repeat="project in Ctrl.selectedOrganization.projects"
           ng-class="{active: project.uuid == Ctrl.selectedProject.uuid}"

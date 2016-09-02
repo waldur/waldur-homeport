@@ -359,6 +359,27 @@ module.exports = function(grunt) {
                         dest: 'app/static/js/angular/',
                         filter: 'isFile'
                     },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/jquery/dist/',
+                        src: ['jquery.min.js'],
+                        dest: 'app/static/js/',
+                        filter: 'isFile'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/slimScroll/',
+                        src: ['jquery.slimscroll.min.js'],
+                        dest: 'app/static/js/',
+                        filter: 'isFile'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/angular-slimscroll/',
+                        src: ['angular-slimscroll.js'],
+                        dest: 'app/static/js/angular/',
+                        filter: 'isFile'
+                    },
                 ]
             },
             modePrivateIaas: {
@@ -652,6 +673,9 @@ module.exports = function(grunt) {
                     'app/static/js/leaflet.js',
                     'app/static/js/angular/angular-leaflet-directive.js',
                     'app/static/js/angular/ui-bootstrap-tpls.min.js',
+                    'app/static/js/jquery.min.js',
+                    'app/static/js/jquery.slimscroll.min.js',
+                    'app/static/js/angular/angular-slimscroll.js',
                 ],
                 dest: 'app/static/js/main/main.js'
             }

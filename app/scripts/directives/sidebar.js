@@ -94,7 +94,7 @@
           ctrl.selectedProject = project;
         }),
 
-        customersService.getList({
+        customersService.getAll({
           field: ['name', 'uuid', 'projects']
         }).then(function(organizations) {
           ctrl.organizations = ctrl.organizations.concat(organizations.filter(function(organization) {

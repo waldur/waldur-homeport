@@ -23,7 +23,8 @@
       'blockUI',
       'ngSanitize',
       'leaflet-directive',
-      'ui.bootstrap'
+      'ui.bootstrap',
+      'ui.slimscroll'
     ])
     // urls
     .config(function($stateProvider, $urlRouterProvider, blockUIConfig, MODE) {
