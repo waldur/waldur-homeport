@@ -1,6 +1,6 @@
 <nav class="navbar-default navbar-static-side" role="navigation">
     <div class="sidebar-collapse" slimscroll="{height: '100%'}">
-        <ul class="nav" id="side-menu">
+        <ul class="nav metismenu" id="side-menu" metis-menu>
             <li class="nav-header">
                 <div class="profile-element">
                     <a ui-sref="dashboard.index">
@@ -21,12 +21,12 @@
                     <i class="fa {{ ::item.icon }}"></i>
                     <span class="nav-label">{{ ::item.label }}</span>
                 </a>
-                <a ng-if="!item.link" ng-click="item.opened = !item.opened">
+                <a ng-if="!item.link">
                     <i class="fa {{ ::item.icon }}"></i>
                     <span class="nav-label">{{ ::item.label }}</span>
-                    <i class="fa pull-right" ng-class="{'fa-angle-left': !item.opened, 'fa-angle-down': item.opened}"></i>
+                    <i class="fa arrow"></i>
                 </a>
-                <ul class="nav nav-second-level" ng-if="item.children && item.opened">
+                <ul class="nav nav-second-level" ng-if="item.children">
                     <li ui-sref-active="active" ng-repeat="child in item.children">
                         <a ui-sref="{{ child.link }}">
                             <i class="fa {{ ::child.icon }}"></i>

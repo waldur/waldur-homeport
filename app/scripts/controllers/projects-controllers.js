@@ -397,11 +397,6 @@
 
     $scope.items = [
       {
-        link: "organization.projects({uuid: context.project.customer_uuid})",
-        icon: "fa-bookmark",
-        label: "Back to organization"
-      },
-      {
         link: "appstore.store",
         icon: "fa-shopping-cart",
         label: "Marketplace"

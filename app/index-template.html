@@ -22,6 +22,7 @@
     <link rel="stylesheet" type="text/css" href="/static/css/angular-block-ui.css"/>
     <link rel="stylesheet" type="text/css" href="/static/css/leaflet.css"/>
     <link rel="stylesheet" type="text/css" href="/static/css/flags16.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/metisMenu.css">
     <!-- @endif -->
     <!-- @if NODE_ENV == 'PRODUCTION' -->
     <link rel="stylesheet" type="text/css" href="/static/css/style.min.css">
@@ -61,6 +62,7 @@
 }(document, 'script', 'facebook-jssdk'));</script>
 
 <!-- @if NODE_ENV == 'DEVELOPMENT' || NODE_ENV == 'TEST' -->
+<script src="static/js/jquery.min.js"></script>
 <!-- angular -->
 <script src="static/js/angular/angular.js"></script>
 <script src="static/js/angular/angular-animate.js"></script>
@@ -85,15 +87,13 @@
 <script src="static/js/angular/ng-file-upload.js"></script>
 <script src="static/js/angular/xeditable.js"></script>
 <script src="static/js/angular/angular-sanitize.js"></script>
-<script src="static/js/angular/ngDialog.js"></script>
 <script src="static/js/leaflet.js"></script>
 <script src="static/js/d3.js"></script>
 <script src="static/js/angular/angular-leaflet-directive.js"></script>
 <script src="static/js/angular/ui-bootstrap-tpls.min.js"></script>
-<script src="static/js/jquery.min.js"></script>
 <script src="static/js/jquery.slimscroll.min.js"></script>
 <script src="static/js/angular/angular-slimscroll.js"></script>
-
+<script src="static/js/metisMenu.min.js"></script>
 <!-- libs -->
 <script src="scripts/class.js"></script>
 
@@ -218,6 +218,7 @@
 <script src="scripts/directives/importable-resources.js"></script>
 <script src="scripts/directives/line-chart.js"></script>
 <script src="scripts/directives/list-cache-reset.js"></script>
+<script src="scripts/directives/metis-menu.js"></script>
 <script src="scripts/directives/mini-pagination.js"></script>
 <script src="scripts/directives/multiple-select.js"></script>
 <script src="scripts/directives/multi-line-chart.js"></script>

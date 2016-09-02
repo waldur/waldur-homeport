@@ -44,6 +44,7 @@ module.exports = function(grunt) {
                         'app/static/css/angular-block-ui.css',
                         'app/static/css/leaflet.css',
                         'app/static/css/flags16.css',
+                        'app/static/css/metisMenu.css',
                     ]
                 }
             }
@@ -380,6 +381,20 @@ module.exports = function(grunt) {
                         dest: 'app/static/js/angular/',
                         filter: 'isFile'
                     },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/metisMenu/dist/',
+                        src: ['metisMenu.css'],
+                        dest: 'app/static/css/',
+                        filter: 'isFile'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/metisMenu/dist/',
+                        src: ['metisMenu.min.js'],
+                        dest: 'app/static/js/',
+                        filter: 'isFile'
+                    },
                 ]
             },
             modePrivateIaas: {
@@ -676,6 +691,7 @@ module.exports = function(grunt) {
                     'app/static/js/jquery.min.js',
                     'app/static/js/jquery.slimscroll.min.js',
                     'app/static/js/angular/angular-slimscroll.js',
+                    'app/static/js/metisMenu.min.js',
                 ],
                 dest: 'app/static/js/main/main.js'
             }
