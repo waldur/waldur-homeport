@@ -137,5 +137,21 @@
           pageTitle: 'Plans'
         }
       })
+
+      .state('organization.cost-analysis', {
+        url: 'cost-analysis/',
+        templateUrl: 'views/dashboard/cost-tab.html',
+        data: {
+          pageTitle: 'Cost analysis'
+        }
+      })
+
+      .state('organization.resource-usage', {
+        url: 'resource-usage/',
+        templateUrl: 'views/dashboard/resources-tab.html',
+        data: {
+          pageTitle: 'Resource usage'
+        }
+      })
   });
 })();

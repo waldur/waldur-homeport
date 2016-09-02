@@ -398,38 +398,49 @@
     $scope.items = [
       {
         link: "organization.projects({uuid: context.project.customer_uuid})",
-        icon: "fa-angle-left",
-        label: "Back to list"
+        icon: "fa-bookmark",
+        label: "Back to organization"
       },
       {
-        link: "project.details({uuid: context.project.uuid})",
-        icon: "fa-bell-o",
-        label: "Events"
+        link: "appstore.store",
+        icon: "fa-shopping-cart",
+        label: "Marketplace"
       },
       {
-        link: "project.alerts({uuid: context.project.uuid})",
-        icon: "fa-fire",
-        label: "Alerts"
-      },
-      {
-        link: "project.virtual-machines({uuid: context.project.uuid})",
-        icon: "fa-desktop",
-        label: "VMs"
-      },
-      {
-        link: "project.private-clouds({uuid: context.project.uuid})",
-        icon: "fa-cloud",
-        label: "Private clouds"
-      },
-      {
-        link: "project.applications({uuid: context.project.uuid})",
-        icon: "fa-cube",
-        label: "Applications"
+        label: "Resources",
+        icon: "fa-files-o",
+        children: [
+          {
+            link: "project.virtual-machines({uuid: context.project.uuid})",
+            icon: "fa-desktop",
+            label: "Virtual machines"
+          },
+          {
+            link: "project.private-clouds({uuid: context.project.uuid})",
+            icon: "fa-cloud",
+            label: "Private clouds"
+          },
+          {
+            link: "project.applications({uuid: context.project.uuid})",
+            icon: "fa-cube",
+            label: "Applications"
+          }
+        ]
       },
       {
         link: "project.support({uuid: context.project.uuid})",
         icon: "fa-question-circle",
         label: "Support"
+      },
+      {
+        link: "project.details({uuid: context.project.uuid})",
+        icon: "fa-bell-o",
+        label: "Audit logs"
+      },
+      {
+        link: "project.alerts({uuid: context.project.uuid})",
+        icon: "fa-fire",
+        label: "Alerts"
       },
       {
         link: "project.delete({uuid: context.project.uuid})",

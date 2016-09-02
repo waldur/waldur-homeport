@@ -17,10 +17,23 @@
                 </a>
             </li>
             <li ui-sref-active="active" ng-repeat="item in items">
-                <a ui-sref="{{ item.link }}">
+                <a ui-sref="{{ item.link }}" ng-if="item.link">
                     <i class="fa {{ ::item.icon }}"></i>
                     <span class="nav-label">{{ ::item.label }}</span>
                 </a>
+                <a ng-if="!item.link" ng-click="item.opened = !item.opened">
+                    <i class="fa {{ ::item.icon }}"></i>
+                    <span class="nav-label">{{ ::item.label }}</span>
+                    <i class="fa pull-right" ng-class="{'fa-angle-left': !item.opened, 'fa-angle-down': item.opened}"></i>
+                </a>
+                <ul class="nav nav-second-level" ng-if="item.children && item.opened">
+                    <li ui-sref-active="active" ng-repeat="child in item.children">
+                        <a ui-sref="{{ child.link }}">
+                            <i class="fa {{ ::child.icon }}"></i>
+                            {{ ::child.label }}
+                        </a>
+                    </li>
+                </ul>
             </li>
             <li>
                 <a ui-sref="profile.details" ng-if="!$state.includes('profile')">

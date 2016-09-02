@@ -413,59 +413,86 @@
     refreshCustomer();
     $scope.items = [
       {
-          label: "Events",
-          icon: "fa-bell-o",
-          link: "organization.details({uuid: context.customer.uuid})"
+        label: "Providers",
+        icon: "fa-database",
+        link: "organization.providers({uuid: context.customer.uuid})"
       },
       {
-          label: "Alerts",
-          icon: "fa-fire",
-          link: "organization.alerts({uuid: context.customer.uuid})"
+        label: "Projects",
+        icon: "fa-bookmark",
+        link: "organization.projects({uuid: context.customer.uuid})"
       },
       {
-          label: "Projects",
-          icon: "fa-folder-open-o",
-          link: "organization.projects({uuid: context.customer.uuid})"
+        label: "Resources",
+        icon: "fa-files-o",
+        children: [
+          {
+            label: "Virtual machines",
+            icon: "fa-desktop",
+            link: "organization.virtual-machines({uuid: context.customer.uuid})"
+          },
+          {
+            label: "Private clouds",
+            icon: "fa-cloud",
+            link: "organization.private-clouds({uuid: context.customer.uuid})"
+          },
+          {
+            label: "Applications",
+            icon: "fa-cube",
+            link: "organization.applications({uuid: context.customer.uuid})"
+          },
+        ]
       },
       {
-          label: "Providers",
-          icon: "fa-database",
-          link: "organization.providers({uuid: context.customer.uuid})"
+        label: "Support",
+        icon: "fa-question-circle",
+        link: "support.list"
       },
       {
-          label: "Team",
-          icon: "fa-group",
-          link: "organization.team({uuid: context.customer.uuid})"
+        label: "Analytics",
+        icon: "fa-bar-chart-o",
+        children: [
+          {
+            label: "Cost analysis",
+            icon: "fa-pie-chart",
+            link: "organization.cost-analysis({uuid: context.customer.uuid})"
+          },
+          {
+            label: "Resource usage",
+            icon: "fa-tachometer",
+            link: "organization.resource-usage({uuid: context.customer.uuid})"
+          }
+        ]
       },
       {
-          label: "Billing",
-          icon: "fa-file-text-o",
-          link: "organization.billing({uuid: context.customer.uuid})"
+        label: "Audit logs",
+        icon: "fa-bell-o",
+        link: "organization.details({uuid: context.customer.uuid})"
       },
       {
-          label: "Sizing",
-          icon: "fa-calculator",
-          link: "organization.sizing({uuid: context.customer.uuid})"
+        label: "Alerts",
+        icon: "fa-fire",
+        link: "organization.alerts({uuid: context.customer.uuid})"
       },
       {
-          label: "VMs",
-          icon: "fa-desktop",
-          link: "organization.virtual-machines({uuid: context.customer.uuid})"
+        label: "Manage",
+        icon: "fa-wrench",
+        link: "organization.delete({uuid: context.customer.uuid})"
       },
       {
-          label: "Private clouds",
-          icon: "fa-cloud",
-          link: "organization.private-clouds({uuid: context.customer.uuid})"
+        label: "Team",
+        icon: "fa-group",
+        link: "organization.team({uuid: context.customer.uuid})"
       },
       {
-          label: "Applications",
-          icon: "fa-cube",
-          link: "organization.applications({uuid: context.customer.uuid})"
+        label: "Billing",
+        icon: "fa-file-text-o",
+        link: "organization.billing({uuid: context.customer.uuid})"
       },
       {
-          label: "Manage",
-          icon: "fa-wrench",
-          link: "organization.delete({uuid: context.customer.uuid})"
+        label: "Sizing",
+        icon: "fa-calculator",
+        link: "organization.sizing({uuid: context.customer.uuid})"
       }
     ];
   }
