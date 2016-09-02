@@ -155,7 +155,11 @@
           ctrl.currentCustomer = customer;
           currentStateService.setCustomer(customer);
           $rootScope.$broadcast('currentCustomerUpdated');
-          ctrl.setFirstOrLastSelectedProject();
+          currentStateService.getProject().then(function(project) {
+            if (project.customer_uuid !== customer.uuid) {
+              ctrl.setFirstOrLastSelectedProject();
+            }
+          });
         }, function() {
           var index = ctrl.customers.indexOf(customer);
           index > -1 && ctrl.customers.splice(index, 1);
@@ -173,6 +177,9 @@
         currentStateService.handleSelectedProjects(ctrl.currentCustomer.uuid, project);
         ctrl.currentProject = project;
         $rootScope.$broadcast('currentProjectUpdated');
+        customersService.$get(project.customer_uuid).then(function(customer) {
+          ctrl.setCurrentCustomer(customer);
+        });
       },
 
       setFirstOrLastSelectedProject: function() {
