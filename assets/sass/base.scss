@@ -90,3 +90,8 @@ a, a:focus, span {
 .elipsis {
     @include elipsis;
 }
+
+.btn-xs {
+    padding-top: 2px;
+    padding-bottom: 2px;
+}

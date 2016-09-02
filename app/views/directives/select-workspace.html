@@ -20,7 +20,7 @@
           ng-repeat="organization in Ctrl.organizations"
           ng-class="{active: organization.uuid == Ctrl.selectedOrganization.uuid}"
           ng-click="Ctrl.selectOrganization(organization)">
-          <a class="badge" ng-click="Ctrl.gotoOrganization(organization)">
+          <a class="btn btn-xs btn-default pull-right" ng-click="Ctrl.gotoOrganization(organization)">
             Select
           </a>
           <div class="elipsis">{{ organization.name }}</div>
@@ -46,7 +46,7 @@
           ng-repeat="project in Ctrl.selectedOrganization.projects"
           ng-class="{active: project.uuid == Ctrl.selectedProject.uuid}"
           ng-click="Ctrl.selectProject(project)">
-          <a class="badge" ng-click="Ctrl.gotoProject(project)">
+          <a class="btn btn-xs btn-default pull-right" ng-click="Ctrl.gotoProject(project)">
             Select
           </a>
           <div class="elipsis">{{ project.name }}</div>
