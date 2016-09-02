@@ -330,7 +330,7 @@
             currentStateService.reloadCurrentCustomer(function(customer) {
               $rootScope.$broadcast('checkQuotas:refresh');
               $rootScope.$broadcast('customerBalance:refresh');
-              $state.go('organizations.details', {uuid: customer.uuid, tab: 'projects'});
+              $state.go('organization.projects', {uuid: customer.uuid});
             });
           });
         }

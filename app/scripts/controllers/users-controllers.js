@@ -127,7 +127,7 @@
       init:function() {
         this.controllerScope = controllerScope;
         this._super();
-        this.detailsState = 'organizations.details';
+        this.detailsState = 'organization.details';
       }
     });
 

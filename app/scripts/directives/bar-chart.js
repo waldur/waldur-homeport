@@ -172,7 +172,7 @@
                     .on("mouseout", function(d) { element.css( 'cursor', 'default' ); })
                     .on('click',function (d) {
                         (chartType === 'resources' || chartType === 'services') &&
-                            $state.go('projects.details', {uuid: d});
+                            $state.go('project.details', {uuid: d});
                     }).append("text")
                     .attr("class", "subtitle")
                     .attr("dy", "2em")
@@ -213,7 +213,7 @@
                                 default:
                                     break;
                             }
-                            $state.go('organizations.details', {uuid: scope.currentCustomer.uuid, tab: link});
+                            $state.go('organization.details', {uuid: scope.currentCustomer.uuid, tab: link});
                         })
                         .text(s);
                     svg.append('rect')

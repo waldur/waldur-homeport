@@ -848,7 +848,7 @@
         return contract.$save().then(function(response) {
           premiumSupportContractsService.clearAllCacheForCurrentEndpoint();
           $rootScope.$broadcast('refreshProjectList');
-          $state.go('projects.details.support', {uuid: this.currentProject.uuid});
+          $state.go('project.support', {uuid: this.currentProject.uuid});
           return true;
         }, function(response) {
           vm.errors = response.data;
@@ -936,7 +936,7 @@
       },
       successRedirect: function(model) {
         if (this.isSupportSelected()) {
-          return $state.go('projects.details.support', {uuid: this.currentProject.uuid});
+          return $state.go('project.support', {uuid: this.currentProject.uuid});
         } else {
           $state.go('resources.details', {uuid: model.uuid, resource_type: model.resource_type});
         }

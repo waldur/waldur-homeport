@@ -74,8 +74,8 @@
               name: 'Provider',
               propertyName: 'service_name',
               type: ENTITYLISTFIELDTYPES.link,
-              link: 'organizations.details({uuid: "' + currentCustomerUuid +
-              '",tab: "providers", providerUuid: entity.service_uuid, providerType: entity.resource_type.split(".")[0]})'
+              link: 'organization.providers({uuid: "' + currentCustomerUuid +
+              '", providerUuid: entity.service_uuid, providerType: entity.resource_type.split(".")[0]})'
             },
             {
               name: 'State',
@@ -368,7 +368,7 @@
         this.detailsState = 'resources.details';
         this.detailsViewOptions = {
           title_plural: 'resources',
-          listState: 'projects.details({uuid: controller.model.project_uuid, tab:controller.resourceTab})',
+          listState: 'project.details({uuid: controller.model.project_uuid, tab:controller.resourceTab})',
           aboutFields: [
             {
               fieldKey: 'name',
@@ -421,15 +421,7 @@
 
       updateMenu: function() {
         controllerScope.context = {resource: controllerScope.model};
-        var resourceCategory = ENV.resourceCategory[this.model.resource_type];
-        var state;
-        if (resourceCategory === 'apps') {
-          state = 'projects.details.applications';
-        } else if (resourceCategory === 'private_clouds') {
-          state = 'projects.details.private-clouds';
-        } else {
-          state = 'projects.details.virtual-machines';
-        }
+        var state = this.getListState(this.model.resource_type);
         controllerScope.items = [
           {
               label: "Back to project",
@@ -437,6 +429,17 @@
               link: state + "({uuid: context.resource.project_uuid})"
           }
         ];
+      },
+
+      getListState: function(resourceType) {
+        var resourceCategory = ENV.resourceCategory[resourceType];
+        if (resourceCategory === 'apps') {
+          return 'project.applications';
+        } else if (resourceCategory === 'private_clouds') {
+          return 'project.private-clouds';
+        } else {
+          return 'project.virtual-machines';
+        }
       },
 
       addMonitoringTabs: function() {
@@ -496,18 +499,17 @@
       afterInstanceRemove: function(resource) {
         this.service.clearAllCacheForCurrentEndpoint();
         $rootScope.$broadcast('refreshCounts');
-        $state.go('projects.details', {
-          uuid: this.model.project_uuid,
-          tab: this.resourceTab
-        });
+
+        var state = this.getListState(this.model.resource_type);
+        $state.go(state, {uuid: this.model.project_uuid});
       },
 
       modelNotFound: function() {
         currentStateService.getProject().then(function(project) {
-          $state.go('project.details.events', {uuid: project.uuid});
+          $state.go('project.details', {uuid: project.uuid});
         }, function() {
           currentStateService.getCustomer().then(function(response) {
-            $state.go('organizations.details', {uuid: response.uuid});
+            $state.go('organization.details', {uuid: response.uuid});
           }, function() {
             $state.go('dashboard.index');
           });

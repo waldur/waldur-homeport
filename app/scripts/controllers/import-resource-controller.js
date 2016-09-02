@@ -61,7 +61,7 @@
           vm.customer = customer;
           if (customer.projects.length == 0) {
             ncUtilsFlash.error("No projects!");
-            $state.go('organizations.details', {uuid: customer.uuid, tab: 'projects'});
+            $state.go('organization.projects', {uuid: customer.uuid});
           } else {
             vm.setProject();
           }
@@ -94,7 +94,7 @@
           }
           if (vm.categories.length == 0) {
             ncUtilsFlash.error("No providers!");
-            $state.go('organizations.details', {uuid: vm.customer.uuid, tab: 'providers'});
+            $state.go('organization.providers', {uuid: vm.customer.uuid});
           }
           vm.setRoutedService();
         });
@@ -292,19 +292,16 @@
         resourcesService.clearAllCacheForCurrentEndpoint();
         priceEstimationService.clearAllCacheForCurrentEndpoint();
         $rootScope.$broadcast('refreshCounts');
-        $state.go('projects.details', {
-          uuid: this.currentProject.uuid,
-          tab: this.getTab()
-        });
+        $state.go(this.getListState(), {uuid: this.currentProject.uuid});
       },
 
-      getTab: function() {
+      getListState: function() {
         if (this.isApplicationSelected()) {
-          return ENV.resourcesTypes.applications;
+          return 'project.applications';
         } else if (this.isPrivateCloudSelected()) {
-          return ENV.resourcesTypes.privateClouds;
+          return 'project.private-clouds';
         } else {
-          return ENV.resourcesTypes.vms;
+          return 'project.virtual-machines';
         }
       },
 

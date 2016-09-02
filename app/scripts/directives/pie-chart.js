@@ -154,9 +154,9 @@
                                     break;
                             }
                             link && (link !== 'plans') &&
-                            $state.go('organizations.details', {uuid: scope.currentCustomer.uuid, tab: link});
+                            $state.go('organization.details', {uuid: scope.currentCustomer.uuid, tab: link});
                             link && (link === 'plans') &&
-                            $state.go('organizations.plans', {uuid: scope.currentCustomer.uuid});
+                            $state.go('organization.plans', {uuid: scope.currentCustomer.uuid});
                         })
                         .on("mouseover", function(d) { element.css( 'cursor', 'pointer' ); })
                         .on("mouseout", function(d) { element.css( 'cursor', 'default' ); })
@@ -173,10 +173,10 @@
                         .on("click", function(d, i) {
                             switch (legendLink) {
                                 case 'plans':
-                                    $state.go('organizations.plans', {uuid: scope.currentCustomer.uuid});
+                                    $state.go('organization.plans', {uuid: scope.currentCustomer.uuid});
                                     break;
                                 case 'providers':
-                                    $state.go('organizations.details', {uuid: scope.currentCustomer.uuid, tab: legendLink});
+                                    $state.go('organization.details', {uuid: scope.currentCustomer.uuid, tab: legendLink});
                                     break;
                                 default:
                                     break;

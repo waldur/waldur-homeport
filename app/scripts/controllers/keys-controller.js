@@ -12,7 +12,7 @@
         this.listState = 'profile.details';
       },
       successRedirect: function() {
-        $state.go('profile.details', {tab: 'keys'});
+        $state.go('profile.keys');
       },
       save: function() {
         if (this.instance.name) {

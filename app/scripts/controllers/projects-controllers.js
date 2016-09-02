@@ -65,7 +65,7 @@
               noDataText: 'You have no projects yet.',
               noMatchesText: 'No projects found matching filter.',
               title: 'Projects',
-              createLink: 'projects.create',
+              createLink: 'project-create',
               createLinkText: 'Add project',
               expandable: true,
               rowTemplateUrl: 'views/project/row.html'
@@ -75,7 +75,7 @@
                 name: 'Name',
                 propertyName: 'name',
                 type: ENTITYLISTFIELDTYPES.name,
-                link: 'projects.details.events({uuid: entity.uuid})'
+                link: 'project.details({uuid: entity.uuid})'
               },
               {
                 name: 'Creation date',
@@ -191,7 +191,7 @@
         this.service = projectsService;
         this.controllerScope = controllerScope;
         this._super();
-        this.detailsState = 'projects.details';
+        this.detailsState = 'project.details';
         this.redirectToDetailsPage = true;
         this.project = this.instance;
       },
@@ -212,7 +212,7 @@
       },
       cancel: function() {
         currentStateService.getCustomer().then(function(customer) {
-          $state.go('organizations.details.projects', {uuid: customer.uuid});
+          $state.go('organization.projects', {uuid: customer.uuid});
         });
       }
     });
@@ -259,10 +259,10 @@
         this.controllerScope = controllerScope;
         this.setSignalHandler('refreshCounts', this.setCounters.bind(controllerScope));
         this._super();
-        this.detailsState = 'projects.details';
+        this.detailsState = 'project.details';
         this.detailsViewOptions = {
           title_plural: 'projects',
-          listState: "organizations.details({uuid: controller.model.customer_uuid, tab: 'projects'})",
+          listState: "organization.projects({uuid: controller.model.customer_uuid})",
           aboutFields: [
             {
               fieldKey: 'name',
@@ -366,7 +366,7 @@
       getCountersError: function() {
         $interval.cancel(timer);
         projectsService.getFirst().then(function(project) {
-          $state.go('projects.details', {uuid: project.uuid});
+          $state.go('project.details', {uuid: project.uuid});
         });
       }
     });
@@ -397,42 +397,42 @@
 
     $scope.items = [
       {
-        link: "organizations.details.projects({uuid: context.project.customer_uuid})",
+        link: "organization.projects({uuid: context.project.customer_uuid})",
         icon: "fa-angle-left",
         label: "Back to list"
       },
       {
-        link: "projects.details.events({uuid: context.project.uuid})",
+        link: "project.details({uuid: context.project.uuid})",
         icon: "fa-bell-o",
         label: "Events"
       },
       {
-        link: "projects.details.alerts({uuid: context.project.uuid})",
+        link: "project.alerts({uuid: context.project.uuid})",
         icon: "fa-fire",
         label: "Alerts"
       },
       {
-        link: "projects.details.virtual-machines({uuid: context.project.uuid})",
+        link: "project.virtual-machines({uuid: context.project.uuid})",
         icon: "fa-desktop",
         label: "VMs"
       },
       {
-        link: "projects.details.private-clouds({uuid: context.project.uuid})",
+        link: "project.private-clouds({uuid: context.project.uuid})",
         icon: "fa-cloud",
         label: "Private clouds"
       },
       {
-        link: "projects.details.applications({uuid: context.project.uuid})",
+        link: "project.applications({uuid: context.project.uuid})",
         icon: "fa-cube",
         label: "Applications"
       },
       {
-        link: "projects.details.support({uuid: context.project.uuid})",
+        link: "project.support({uuid: context.project.uuid})",
         icon: "fa-question-circle",
         label: "Support"
       },
       {
-        link: "projects.details.delete({uuid: context.project.uuid})",
+        link: "project.delete({uuid: context.project.uuid})",
         icon: "fa-wrench",
         label: "Manage"
       }

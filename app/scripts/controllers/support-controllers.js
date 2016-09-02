@@ -164,7 +164,7 @@
       },
       cancel: function() {
         if (this.type === 'remove_user') {
-          return $state.go('profile.details', {tab: 'manage'});
+          return $state.go('profile.manage');
         }
         this._super();
       }

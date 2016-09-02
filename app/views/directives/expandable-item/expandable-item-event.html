@@ -35,7 +35,7 @@
     Customer
   </div>
   <div class="details-table__value">
-    <a ui-sref="organizations.details({uuid: expandableElement.customer_uuid })">
+    <a ui-sref="organization.details({uuid: expandableElement.customer_uuid })">
       {{ ::expandableElement.customer_name }}
     </a>
   </div>
@@ -45,7 +45,7 @@
     Project
   </div>
   <div class="details-table__value">
-    <a ui-sref="projects.details({uuid: expandableElement.project_uuid })">
+    <a ui-sref="project.details({uuid: expandableElement.project_uuid })">
       {{ ::expandableElement.project_name }}
     </a>
   </div>
@@ -55,9 +55,8 @@
     Service
   </div>
   <div class="details-table__value">
-    <a ui-sref="organizations.details({
+    <a ui-sref="organization.providers({
       uuid: expandableElement.customer_uuid,
-      tab: 'providers',
       providerUuid: expandableElement.service_uuid,
       providerType: expandableElement.service_type
     })">

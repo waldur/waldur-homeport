@@ -101,7 +101,7 @@
                             <span ng-if="!resource.scope">{{::resource.scope_name}}</span>
                         </div>
                         <div class="td"><span ng-bind="::resource.resource_type"></span></div>
-                        <div class="td"><a ui-sref="projects.details({uuid: resource.project_uuid})">{{::resource.project_name}}</a></div>
+                        <div class="td"><a ui-sref="project.details({uuid: resource.project_uuid})">{{::resource.project_name}}</a></div>
                         <div class="td"><span>{{ ::resource.total | defaultCurrency }}</span></div>
                     </div>
                 </div>

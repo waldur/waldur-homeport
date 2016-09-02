@@ -378,7 +378,7 @@
       },
 
       successRedirect: function() {
-        $state.go('organizations.details.providers', {
+        $state.go('organization.providers', {
           uuid: this.customer.uuid,
           providerType: this.instance.service_type,
           providerUuid: this.instance.uuid
@@ -386,7 +386,7 @@
       },
 
       cancel: function() {
-        $state.go('organizations.details.providers', {
+        $state.go('organization.providers', {
           uuid: this.customer.uuid
         });
       },

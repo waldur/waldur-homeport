@@ -52,7 +52,7 @@
         abstract: true,
         templateUrl: 'views/user/base.html',
         data: {
-          specialClass: 'white-bg'
+          bodyClass: 'white-bg'
         }
       })
 
@@ -63,11 +63,11 @@
       .state('profile.manage', tabs.manage)
 
       .state('users', {
-        url: '/users/',
+        url: '/users/:uuid/',
         abstract: true,
         templateUrl: 'views/user/base.html',
         data: {
-          specialClass: 'white-bg'
+          bodyClass: 'white-bg'
         }
       })
 
@@ -82,7 +82,7 @@
         abstract: true,
         templateUrl: 'views/user/base.html',
         data: {
-          specialClass: 'white-bg',
+          bodyClass: 'white-bg',
           pageTitle: 'Add SSH key'
         }
       })

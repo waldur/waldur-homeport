@@ -172,7 +172,7 @@ angular.module('ncsaas')
     enablePurchaseCostDisplay: true,
     entityCreateLink: {
       'services.create': 'service',
-      'projects.create': 'project',
+      'project-create': 'project',
       'appstore.store':  'resource',
       'import.import':   'resource'
     },

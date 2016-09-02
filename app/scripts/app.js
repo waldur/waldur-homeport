@@ -59,7 +59,7 @@
             authenticated: notLoggedCheck
           },
           data: {
-            specialClass: 'landing',
+            bodyClass: 'landing',
           }
         })
 
@@ -71,7 +71,7 @@
           },
           data: {
             isSignupFormVisible: false,
-            specialClass: 'old'
+            bodyClass: 'old'
           }
         })
 
@@ -83,7 +83,7 @@
           },
           data: {
             isSignupFormVisible: true,
-            specialClass: 'old'
+            bodyClass: 'old'
           }
         })
 
@@ -101,7 +101,7 @@
             authenticated: notLoggedCheck
           },
           data: {
-            specialClass: 'old'
+            bodyClass: 'old'
           }
         })
 
@@ -119,7 +119,7 @@
             authenticated: notLoggedCheck
           },
           data: {
-            specialClass: 'old'
+            bodyClass: 'old'
           }
         })
 
@@ -144,7 +144,7 @@
           },
           noInitialData: true,
           data: {
-            specialClass: 'old'
+            bodyClass: 'old'
           }
         })
 
@@ -153,7 +153,7 @@
           templateUrl: 'views/customer/base.html',
           abstract: true,
           data: {
-            specialClass: 'white-bg'
+            bodyClass: 'white-bg'
           }
         })
 
@@ -175,7 +175,7 @@
           abstract: true,
           templateUrl: 'views/customer/base.html',
           data: {
-            specialClass: 'white-bg',
+            bodyClass: 'white-bg',
             pageTitle: 'Dashboard'
           }
         })
@@ -196,7 +196,7 @@
           url: ':category',
           templateUrl: 'views/appstore/store.html',
           data: {
-            specialClass: 'white-bg',
+            bodyClass: 'white-bg',
             pageTitle: 'Marketplace'
           }
         })
@@ -213,7 +213,7 @@
           controller: 'ServiceAddController',
           controllerAs: 'ServiceAdd',
           data: {
-            specialClass: 'white-bg',
+            bodyClass: 'white-bg',
             pageTitle: 'Create provider'
           }
         })
@@ -223,7 +223,7 @@
           abstract: true,
           templateUrl: 'views/resource/base.html',
           data: {
-            specialClass: 'white-bg'
+            bodyClass: 'white-bg'
           }
         })
 
@@ -253,7 +253,7 @@
           },
           auth: true,
           data: {
-            specialClass: 'old'
+            bodyClass: 'old'
           }
         })
 
@@ -272,7 +272,7 @@
           },
           auth: true,
           data: {
-            specialClass: 'old'
+            bodyClass: 'old'
           }
         })
 
@@ -297,7 +297,7 @@
           },
           auth: true,
           data: {
-            specialClass: 'old'
+            bodyClass: 'old'
           }
         })
 
@@ -316,7 +316,7 @@
           },
           auth: true,
           data: {
-            specialClass: 'old'
+            bodyClass: 'old'
           }
         })
 
@@ -341,7 +341,7 @@
           },
           auth: true,
           data: {
-            specialClass: 'old'
+            bodyClass: 'old'
           }
         })
 
@@ -360,7 +360,7 @@
           },
           auth: true,
           data: {
-            specialClass: 'old'
+            bodyClass: 'old'
           }
         })
 
@@ -369,7 +369,7 @@
           abstract: true,
           templateUrl: 'views/customer/base.html',
           data: {
-            specialClass: 'white-bg',
+            bodyClass: 'white-bg',
             pageTitle: 'Help'
           }
         })
@@ -404,7 +404,7 @@
             }
           },
           data: {
-            specialClass: 'old'
+            bodyClass: 'old'
           }
         })
         .state('about', {
@@ -426,7 +426,7 @@
             }
           },
           data: {
-            specialClass: 'old'
+            bodyClass: 'old'
           }
         })
         .state('policy', {
@@ -448,7 +448,7 @@
             }
           },
           data: {
-            specialClass: 'old'
+            bodyClass: 'old'
           }
         });
 

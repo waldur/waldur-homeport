@@ -50,7 +50,7 @@
       getPrettyQuotaName: ncUtils.getPrettyQuotaName,
 
       cancel: function() {
-        $state.go('organizations.details', {uuid:$stateParams.uuid});
+        $state.go('organization.details', {uuid:$stateParams.uuid});
       },
 
       selectPlan: function(plan) {

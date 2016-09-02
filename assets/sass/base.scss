@@ -84,5 +84,9 @@ a, a:focus, span {
 }
 
 .white-bg {
-  background-color: #ffffff;
+    background-color: #ffffff;
+}
+
+.elipsis {
+    @include elipsis;
 }

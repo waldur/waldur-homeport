@@ -67,7 +67,7 @@
         }
       },
       goToCurrentOrganization: function() {
-        $state.go('organizations.details.events', {uuid: this.currentCustomer.uuid});
+        $state.go('organization.details', {uuid: this.currentCustomer.uuid});
       },
       goToCustomer: function(customer) {
         currentStateService.setCustomer(customer);
@@ -78,7 +78,7 @@
       },
       goToCurrentProject: function() {
         if (this.currentProject) {
-          $state.go('projects.details.events', {uuid: this.currentProject.uuid});
+          $state.go('project.details', {uuid: this.currentProject.uuid});
         }
       },
       isOwner: function (customer) {
@@ -249,7 +249,7 @@
 
         var promise = projectsService.getList().then(function(response) {
           if (response.length < 1
-            && $state.current.name != 'projects.create') {
+            && $state.current.name != 'project-create') {
             ctrl.currentProject = null;
             ctrl.setCurrentProject(null);
             if ($state.current.name != 'errorPage.notFound') {

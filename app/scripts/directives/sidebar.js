@@ -69,14 +69,14 @@
 
     ctrl.gotoOrganization = function(organization) {
       ctrl.$close();
-      $state.go('organizations.details.events', {
+      $state.go('organization.details', {
         uuid: organization.uuid
       });
     };
 
     ctrl.gotoProject = function(project) {
       ctrl.$close();
-      $state.go('projects.details.events', {
+      $state.go('project.details', {
         uuid: project.uuid
       });
     };
@@ -91,7 +91,7 @@
 
     ctrl.createProject = function() {
       ctrl.$close();
-      $state.go('projects.create');
+      $state.go('project-create');
     }
 
     function loadInitial() {

@@ -96,7 +96,7 @@
         this._super();
         this.entityOptions.entityData.title = '';
         this.entityOptions.entityData.checkQuotas = 'project';
-        this.entityOptions.createLink = 'projects.create';
+        this.entityOptions.createLink = 'project-create';
       }
     });
 
@@ -125,7 +125,7 @@
         this.entityOptions.list.push({
           name: 'Project',
           propertyName: 'project_name',
-          link: 'projects.details({uuid: entity.project_uuid})',
+          link: 'project.details({uuid: entity.project_uuid})',
           type: ENTITYLISTFIELDTYPES.name
         });
         this.rowFields = angular.copy(this.rowFields);
@@ -692,7 +692,7 @@
             customersService.clearAllCacheForCurrentEndpoint();
             customersService.getPersonalOrFirstCustomer(instance.name).then(function(customer) {
               currentStateService.setCustomer(customer);
-              $state.go('organizations.details', {uuid: customer.uuid, tab: 'eventlog'});
+              $state.go('organization.details', {uuid: customer.uuid});
             });
           }, function() {
             currentStateService.setCustomer(vm.customer);

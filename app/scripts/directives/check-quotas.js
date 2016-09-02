@@ -43,7 +43,7 @@
       var item = scope.checkQuotas,
         currentCustomerUuid = currentStateService.getCustomerUuid();
 
-      scope.plansLink = 'organizations.plans({uuid:\'' + currentCustomerUuid+ '\'})';
+      scope.plansLink = 'organization.plans({uuid:\'' + currentCustomerUuid+ '\'})';
 
       currentStateService.isQuotaExceeded(item).then(function(response) {
 

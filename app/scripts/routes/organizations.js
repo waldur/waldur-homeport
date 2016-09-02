@@ -1,47 +1,40 @@
 (function() {
   angular.module('ncsaas').config(function($stateProvider) {
     $stateProvider
-      .state('organizations', {
-          url: '/organizations/',
+      .state('organization', {
+          url: '/organizations/:uuid/',
           abstract: true,
           templateUrl: 'views/customer/base.html',
           data: {
-            specialClass: 'white-bg'
+            bodyClass: 'white-bg'
+          },
+          resolve: {
+            currentCustomer: function(
+              $stateParams, $state, $rootScope, customersService, currentStateService) {
+              if (!$stateParams.uuid) {
+                return currentStateService.getCustomer();
+              }
+              return customersService.$get($stateParams.uuid).then(function(customer) {
+                $rootScope.$broadcast('adjustCurrentCustomer', customer);
+                return customer;
+              }, function() {
+                $state.go('errorPage.notFound');
+              });
+            }
           }
         })
 
-      .state('organizations.list', {
+      .state('organization.details', {
         url: '',
         templateUrl: 'views/partials/list.html',
-        controller: 'CustomerListController',
+        controller: 'CustomerEventTabController',
         controllerAs: 'Ctrl',
         data: {
-          pageTitle: 'Organizations'
-        },
-        auth: true
-      })
-
-      .state('organizations.details', {
-        url: ':uuid/',
-        abstract: true,
-        template: '<ui-view/>',
-        resolve: {
-          currentCustomer: function(
-            $stateParams, $state, $rootScope, customersService, currentStateService) {
-            if (!$stateParams.uuid) {
-              return currentStateService.getCustomer();
-            }
-            return customersService.$get($stateParams.uuid).then(function(customer) {
-              $rootScope.$broadcast('adjustCurrentCustomer', customer);
-              return customer;
-            }, function() {
-              $state.go('errorPage.notFound');
-            });
-          }
+          pageTitle: 'Events'
         }
       })
 
-      .state('organizations.details.alerts', {
+      .state('organization.alerts', {
         url: 'alerts/',
         templateUrl: 'views/customer/tab-alerts.html',
         controller: 'CustomerAlertsListController',
@@ -51,17 +44,7 @@
         }
       })
 
-      .state('organizations.details.events', {
-        url: 'events/',
-        templateUrl: 'views/partials/list.html',
-        controller: 'CustomerEventTabController',
-        controllerAs: 'Ctrl',
-        data: {
-          pageTitle: 'Events'
-        }
-      })
-
-      .state('organizations.details.projects', {
+      .state('organization.projects', {
         url: 'projects/',
         templateUrl: 'views/partials/list.html',
         controller: 'CustomerProjectTabController',
@@ -71,7 +54,7 @@
         }
       })
 
-      .state('organizations.details.team', {
+      .state('organization.team', {
         url: 'team/',
         templateUrl: 'views/partials/list.html',
         controller: 'CustomerTeamTabController',
@@ -81,8 +64,8 @@
         }
       })
 
-      .state('organizations.details.providers', {
-        url: 'providers/',
+      .state('organization.providers', {
+        url: 'providers/?providerUuid&providerType',
         templateUrl: 'views/partials/list.html',
         controller: 'CustomerServiceTabController',
         controllerAs: 'Ctrl',
@@ -91,7 +74,7 @@
         }
       })
 
-      .state('organizations.details.virtual-machines', {
+      .state('organization.virtual-machines', {
         url: 'virtual-machines/',
         templateUrl: 'views/partials/list.html',
         controller: 'CustomerResourcesTabController',
@@ -101,7 +84,7 @@
         }
       })
 
-      .state('organizations.details.applications', {
+      .state('organization.applications', {
         url: 'applications/',
         templateUrl: 'views/partials/list.html',
         controller: 'CustomerApplicationsTabController',
@@ -111,7 +94,7 @@
         }
       })
 
-      .state('organizations.details.private-clouds', {
+      .state('organization.private-clouds', {
         url: 'private-clouds/',
         templateUrl: 'views/partials/list.html',
         controller: 'CustomerPrivateCloudTabController',
@@ -121,7 +104,7 @@
         }
       })
 
-      .state('organizations.details.billing', {
+      .state('organization.billing', {
         url: 'billing/',
         templateUrl: 'views/customer/tab-billing.html',
         data: {
@@ -129,7 +112,7 @@
         }
       })
 
-      .state('organizations.details.sizing', {
+      .state('organization.sizing', {
         url: 'sizing/',
         templateUrl: 'views/customer/tab-sizing.html',
         data: {
@@ -137,7 +120,7 @@
         }
       })
 
-      .state('organizations.details.delete', {
+      .state('organization.delete', {
         url: 'delete/',
         templateUrl: 'views/customer/tab-delete.html',
         controller: 'CustomerDeleteTabController',
@@ -147,8 +130,8 @@
         }
       })
 
-      .state('organizations.plans', {
-        url: ':uuid/plans/',
+      .state('organization.plans', {
+        url: 'plans/',
         templateUrl: 'views/customer/plans.html',
         data: {
           pageTitle: 'Plans'

@@ -43,9 +43,8 @@
     Provider:
   </div>
   <div class="details-table__value">
-    <a ui-sref="organizations.details({
+    <a ui-sref="organization.providers({
       uuid: resource.customer_uuid,
-      tab: 'providers',
       providerUuid: resource.service_uuid,
       providerType: resource.service_type})">
       {{ ::resource.service_name }}

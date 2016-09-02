@@ -1,29 +1,13 @@
 (function() {
   angular.module('ncsaas').config(function($stateProvider) {
     $stateProvider
-      .state('projects', {
-        url: '/projects/',
-        abstract: true,
-        template: '<ui-view/>',
-        data: {
-          specialClass: 'white-bg'
-        }
-      })
-
-      .state('projects.create', {
-        url: 'add/',
-        templateUrl: 'views/project/create.html',
-        controller: 'ProjectAddController',
-        controllerAs: 'ProjectAdd',
-        data: {
-          pageTitle: 'Create project'
-        }
-      })
-
-      .state('projects.details', {
-        url: ':uuid/',
+      .state('project', {
+        url: '/projects/:uuid/',
         abstract: true,
         templateUrl: 'views/project/base.html',
+        data: {
+          bodyClass: 'white-bg'
+        },
         resolve: {
           currentProject: function(
             $stateParams, $state, $rootScope, projectsService, currentStateService) {
@@ -40,8 +24,19 @@
         }
       })
 
-      .state('projects.details.events', {
-        url: 'events/',
+      .state('project-create', {
+        url: '/projects/add/',
+        templateUrl: 'views/project/create.html',
+        controller: 'ProjectAddController',
+        controllerAs: 'ProjectAdd',
+        data: {
+          pageTitle: 'Create project',
+          bodyClass: 'white-bg'
+        }
+      })
+
+      .state('project.details', {
+        url: '',
         templateUrl: 'views/partials/list.html',
         controller: 'ProjectEventTabController',
         controllerAs: 'Ctrl',
@@ -50,7 +45,7 @@
         }
       })
 
-      .state('projects.details.alerts', {
+      .state('project.alerts', {
         url: 'alerts/',
         templateUrl: 'views/partials/list.html',
         controller: 'ProjectAlertTabController',
@@ -60,7 +55,7 @@
         }
       })
 
-      .state('projects.details.virtual-machines', {
+      .state('project.virtual-machines', {
         url: 'virtual-machines/',
         templateUrl: 'views/partials/list.html',
         controller: 'ProjectResourcesTabController',
@@ -70,7 +65,7 @@
         }
       })
 
-      .state('projects.details.applications', {
+      .state('project.applications', {
         url: 'applications/',
         templateUrl: 'views/partials/list.html',
         controller: 'ProjectApplicationsTabController',
@@ -80,7 +75,7 @@
         }
       })
 
-      .state('projects.details.private-clouds', {
+      .state('project.private-clouds', {
         url: 'private-clouds/',
         templateUrl: 'views/partials/list.html',
         controller: 'ProjectPrivateCloudsTabController',
@@ -90,7 +85,7 @@
         }
       })
 
-      .state('projects.details.support', {
+      .state('project.support', {
         url: 'support/',
         templateUrl: 'views/partials/list.html',
         controller: 'ProjectSupportTabController',
@@ -100,7 +95,7 @@
         }
       })
 
-      .state('projects.details.delete', {
+      .state('project.delete', {
         url: 'delete/',
         templateUrl: 'views/project/tab-delete.html',
         controller: 'ProjectDeleteTabController',
@@ -115,29 +110,29 @@
         templateUrl: 'views/project/base.html',
         abstract: true,
         data: {
-          specialClass: 'white-bg',
-          pageTitle: 'Import resources from provider'
+          bodyClass: 'white-bg',
+          pageTitle: 'Import resources from provider',
         }
       })
 
       .state('import.import', {
         url: '?service_type&service_uuid',
         templateUrl: 'views/import/import.html',
-       })
+      })
 
       .state('compare', {
         url: '/compare/',
         templateUrl: 'views/project/base.html',
         abstract: true,
         data: {
-          specialClass: 'white-bg',
-          pageTitle: 'Compare flavors'
+          bodyClass: 'white-bg',
+          pageTitle: 'Compare flavors',
         }
       })
 
-      .state('compare.vms', {
-        url: '',
-        templateUrl: 'views/compare/table.html'
+      .state('compare.compare', {
+        url: '/compare/',
+        templateUrl: 'views/compare/table.html',
       })
   });
 })();
