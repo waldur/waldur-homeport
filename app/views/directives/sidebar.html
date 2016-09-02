@@ -20,11 +20,11 @@
                 ng-repeat="item in items"
                 ng-class="{active: $state.includes(item.state)}">
                 <a ui-sref="{{ item.link }}" ng-if="item.link">
-                    <i class="fa {{ ::item.icon }}"></i>
+                    <i class="fa {{ ::item.icon }} fixed-width-icon"></i>
                     <span class="nav-label">{{ ::item.label }}</span>
                 </a>
                 <a ng-if="!item.link">
-                    <i class="fa {{ ::item.icon }}"></i>
+                    <i class="fa {{ ::item.icon }} fixed-width-icon"></i>
                     <span class="nav-label">{{ ::item.label }}</span>
                     <i class="fa arrow"></i>
                 </a>
