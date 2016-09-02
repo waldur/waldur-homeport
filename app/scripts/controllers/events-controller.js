@@ -175,7 +175,6 @@
     .controller('DashboardCostController', [
       'baseControllerClass',
       'priceEstimationService',
-      'blockUI',
       'ENV',
       'customersService',
       'resourcesService',
@@ -184,7 +183,6 @@
   function DashboardCostController(
     baseControllerClass,
     priceEstimationService,
-    blockUI,
     ENV,
     customersService,
     resourcesService) {
@@ -193,7 +191,7 @@
       init: function() {
         this.controllerScope = controllerScope;
         this.activate();
-        blockUI.start();
+        controllerScope.loading = true;
 
         this.checkQuotasResource = 'resource';
         this.checkQuotasProvider = 'service';
@@ -262,7 +260,7 @@
 
           }
         });
-        blockUI.stop();
+        controllerScope.loading = false;
 
         this.costData = result;
       },

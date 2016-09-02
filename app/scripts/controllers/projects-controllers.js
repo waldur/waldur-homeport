@@ -404,6 +404,7 @@
       {
         label: "Resources",
         icon: "fa-files-o",
+        state: "project.resources",
         children: [
           {
             link: "project.resources.vms({uuid: context.project.uuid})",
