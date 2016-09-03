@@ -226,7 +226,7 @@
 
     usersService.getCurrentUser().then(function(user) {
       if (angular.isUndefined($stateParams.uuid) || $stateParams.uuid === user.uuid) {
-        $scope.items = publicTabs.concat(privateTabs);
+        $scope.items = privateTabs;
         $scope.currentUser = user;
         $scope.context = {user: user};
       } else {

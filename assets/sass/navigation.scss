@@ -142,6 +142,8 @@
 
 .nav-header {
   padding: 33px 25px;
+  background-color: $nav-bg;
+  background-image: url("../images/header-profile.png");
 }
 
 .pace-done .nav-header {
@@ -605,13 +607,6 @@ body.canvas-menu.mini-navbar nav.navbar-static-side {
 
 body.fixed-nav #wrapper .navbar-static-side {
   margin-top: -80px;
-}
-
-.nav-header {
-  background: #35485a;
-  cursor: pointer;
-  padding: 4px 20px;
-  padding-top: 10px;
 }
 
 .navbar-header h2 {

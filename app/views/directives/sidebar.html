@@ -2,13 +2,7 @@
     <div class="sidebar-collapse" slimscroll="{height: '100%'}">
         <ul class="nav metismenu" id="side-menu" metis-menu>
             <li class="nav-header">
-                <div class="profile-element">
-                    <a ui-sref="dashboard.index">
-                        <h3 class="brand-name">
-                            <i class="fa fa-th-large m-r-sm"></i> Waldur
-                        </h3>
-                    </a>
-                </div>
+                <sidebar-user/>
             </li>
             <li ui-sref-active="active"
                 ng-repeat="item in items"
