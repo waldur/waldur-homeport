@@ -10,9 +10,10 @@
       <h3 class="m-b-md">
         Organizations ({{ Ctrl.organizations.length }})
         <a class="pull-right btn btn-sm btn-default"
-          ng-click="Ctrl.createOrganization()">
+          ng-click="Ctrl.createOrganization()"
+          ng-if="Ctrl.canCreateOrganization">
           <i class="fa fa-plus"></i>
-          Add new org
+          Add new organization
         </a>
       </h3>
       <div class="list-group" slimscroll="{height: '300px'}">
@@ -31,7 +32,8 @@
       <h3 class="m-b-md">
         Projects ({{ Ctrl.selectedOrganization.projects.length }})
         <a class="pull-right btn btn-sm btn-default"
-          ng-click="Ctrl.createProject()">
+          ng-click="Ctrl.createProject()"
+          ng-if="Ctrl.canCreateProject">
           <i class="fa fa-plus"></i>
           Add new project
         </a>

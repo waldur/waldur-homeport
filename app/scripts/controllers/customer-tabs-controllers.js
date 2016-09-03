@@ -662,25 +662,53 @@
     .controller('CustomerDeleteTabController', [
       'baseControllerClass',
       'customersService',
+      'usersService',
       'currentStateService',
       '$state',
+      '$q',
+      'ENV',
       CustomerDeleteTabController
     ]);
 
   function CustomerDeleteTabController(
     baseControllerClass,
     customersService,
+    usersService,
     currentStateService,
-    $state
+    $state,
+    $q,
+    ENV
   ) {
     var controllerScope = this;
     var DeleteController = baseControllerClass.extend({
       init: function() {
         this.controllerScope = controllerScope;
         this._super();
+        this.loadInitial();
+      },
+      loadInitial: function() {
         var vm = this;
-        currentStateService.getCustomer().then(function(customer) {
+        vm.loading = true;
+        return currentStateService.getCustomer().then(function(customer) {
           vm.customer = customer;
+          return vm.checkCanRemoveCustomer(customer).then(function(result) {
+            vm.canRemoveCustomer = result;
+          });
+        }).finally(function() {
+          vm.loading = false;
+        });
+      },
+      checkCanRemoveCustomer: function(customer) {
+        return usersService.getCurrentUser().then(function(user) {
+          if (user.is_staff) {
+            return $q.when(true);
+          }
+          for (var i = 0; i < customer.owners.length; i++) {
+            if (user.uuid === customer.owners[i].uuid) {
+              return $q.when(ENV.ownerCanManageCustomer);
+            }
+          }
+          return $q.when(false);
         });
       },
       removeCustomer: function() {

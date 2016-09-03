@@ -214,5 +214,6 @@ angular.module('ncsaas')
       'Updating': 'processing',
       'Deletion Scheduled': 'processing',
       'Deleting': 'processing'
-    }
+    },
+    ownerCanManageCustomer: true
   });
