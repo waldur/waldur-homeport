@@ -125,7 +125,7 @@
                               class="icon" ng-class="entity[field.propertyName]">
                         </span>
 
-                        <h3 ng-switch-when="name" class="item-title">
+                        <span ng-switch-when="name" class="item-title">
                             <a ng-if="field.link" stoppropagation
                                ng-click="entity.expandItemOpen = false"
                                ui-sref="{{ field.link }}">{{ entity[field.propertyName] }}</a>
@@ -140,7 +140,7 @@
                                   ng-if="field.description && field.description.condition == entity[field.description.field]">
                                 {{ field.description.text }}
                             </span>
-                        </h3>
+                        </span>
 
                         <a ng-switch-when="link" ng-if="field.link" ui-sref="{{ field.link }}">
                             {{ entity[field.propertyName] }}
@@ -226,8 +226,10 @@
                          ng-switch="entityOptions.entityData.actionButtonsType">
                          <div ng-switch-when="refresh" 
                               class="actions-button">
-                             <a class="button reopen"
-                               ng-click="entityList.getCommentsForIssue(entity.key)"></a>
+                             <a class="btn btn-primary"
+                               ng-click="entityList.getCommentsForIssue(entity.key)">
+                                 <i class="fa fa-refresh"></i>
+                               </a>
                          </div>
 
                          <action-button-resource

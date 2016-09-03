@@ -1,10 +1,23 @@
 <div ng-controller="ProjectDetailsController">
     <sidebar items="items" context="context"></sidebar>
     <div id="page-wrapper">
-        <nc-header ng-if="currentProject">
-            {{ currentProject.customer_name }} / {{ currentProject.name }} · 
-            <strong>{{$state.current.data.pageTitle}}</strong>
-        </nc-header>
-        <div ui-view></div>
+        <nc-header/>
+        <div class="row wrapper border-bottom white-bg page-heading" ng-if="currentProject">
+            <div class="col-lg-12">
+                <h2>{{$state.current.data.pageTitle}}</h2>
+                <ol class="breadcrumb">
+                    <li>
+                        <a ui-sref="organization.details({uuid: currentProject.customer_uuid })">Home</a>
+                    </li>
+                    <li>
+                        <a ui-sref="organization.projects({uuid: currentProject.customer_uuid })">Projects</a>
+                    </li>
+                    <li class="active">
+                        <strong>{{$state.current.data.pageTitle}}</strong>
+                    </li>
+                </ol>
+            </div>
+        </div>
+       <div ui-view></div>
     </div>
 </div>

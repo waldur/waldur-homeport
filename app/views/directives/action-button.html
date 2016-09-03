@@ -1,5 +1,5 @@
 <div class="actions-button" stoppropagation>
-    <a ng-if="!buttonType && buttonList.length > 1" class="button"
+    <a ng-if="!buttonType && buttonList.length > 1" class="btn btn-primary"
        ng-click="openActionsListTrigger()">actions</a>
     <ul ng-if="buttonController.actionButtonsList[$id] || buttonList.length == 1"
         ng-class="{'actions-dropdown': buttonList.length > 1, 'one-action-button': buttonList.length == 1}">

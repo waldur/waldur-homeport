@@ -8,7 +8,6 @@
   function ncHeader() {
     return {
       restrict: 'E',
-      transclude: true,
       templateUrl: 'views/directives/nc-header.html'
     };
   }

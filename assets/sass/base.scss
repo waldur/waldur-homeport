@@ -18,10 +18,20 @@ img {
     vertical-align: top;
 } // img
 
-button {
-    border: none;
-    background: none;
-} // button
+
+.breadcrumb {
+  background-color: #ffffff;
+  padding: 0;
+  margin-bottom: 0;
+}
+
+.breadcrumb > li a {
+  color: inherit;
+}
+
+.breadcrumb > .active {
+  color: inherit;
+}
 
 .inline {
     display: inline;
@@ -83,11 +93,13 @@ button {
     @include elipsis;
 }
 
-.btn-xs {
-    padding-top: 2px;
-    padding-bottom: 2px;
-}
-
 .fixed-width-icon {
     width: 16px;
+}
+
+.list-group-item.active .btn-default {
+    color: $text-color;
+    &:hover {
+        color: $text-color;
+    }
 }
