@@ -184,42 +184,58 @@
 
   UserDetailsController.$inject = ['$scope', '$stateParams', 'usersService'];
   function UserDetailsController($scope, $stateParams, usersService) {
-    usersService.getCurrentUser().then(function(user) {
-      $scope.currentUser = user;
-      $scope.context = {user: user};
-    });
-
-    $scope.items = [
-      {
-          label: "Back to dashboard",
-          icon: "fa-angle-left",
-          link: "dashboard.index"
-      },
+    var publicTabs = [
       {
           label: "Events",
           icon: "fa-bell-o",
-          link: "profile.details({uuid: context.user.uuid})"
+          link: "users.details({uuid: context.user.uuid})"
       },
       {
           label: "SSH Keys",
           icon: "fa-key",
-          link: "profile.keys({uuid: context.user.uuid})"
+          link: "users.keys({uuid: context.user.uuid})"
+      }
+    ];
+    var privateTabs = [
+      {
+          label: "Events",
+          icon: "fa-bell-o",
+          link: "profile.details"
+      },
+      {
+          label: "SSH Keys",
+          icon: "fa-key",
+          link: "profile.keys"
       },
       {
           label: "Notifications",
           icon: "fa-bookmark",
-          link: "profile.notifications({uuid: context.user.uuid})"
+          link: "profile.notifications"
       },
       {
           label: "Password",
           icon: "fa-sign-in",
-          link: "profile.password({uuid: context.user.uuid})"
+          link: "profile.password"
       },
       {
           label: "Manage",
           icon: "fa-wrench",
-          link: "profile.manage({uuid: context.user.uuid})"
+          link: "profile.manage"
       }
     ];
+
+    usersService.getCurrentUser().then(function(user) {
+      if (angular.isUndefined($stateParams.uuid) || $stateParams.uuid === user.uuid) {
+        $scope.items = publicTabs.concat(privateTabs);
+        $scope.currentUser = user;
+        $scope.context = {user: user};
+      } else {
+        usersService.$get($stateParams.uuid).then(function(user) {
+          $scope.items = publicTabs;
+          $scope.currentUser = user;
+          $scope.context = {user: user};
+        });
+      }
+    });
   }
 })();
