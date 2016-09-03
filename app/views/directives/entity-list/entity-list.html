@@ -12,10 +12,16 @@
             ng-if="!entityOptions.entityData.hideControlButtons">
             <li class="search divid">
                 <div class="search-box">
-                    <input type="text" ng-model='entityList.searchInput'
+                    <input id="search-box"
+                           type="text"
+                           class="form-control" 
+                           ng-model='entityList.searchInput'
                            ng-model-options="{ debounce: 500 }"
-                           ng-change="entityList.search()">
-                    <button class="search-button" ng-click="entityList.search()"></button>
+                           ng-change="entityList.search()"
+                           placeholder="Search">
+                    <label for="search-box">
+                      <i class="fa fa-search"></i>
+                    </label>
                 </div>
             </li>
             <li class="full-width">

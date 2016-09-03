@@ -1,27 +1,12 @@
 .search-box {
-    @include inline-middle;
-    @include clearfix;
     position: relative;
-    @include property(margin-right, 30);
-    input[type=text] {
-        width: calc(120px - 35px);
-        outline: none;
-        // @include property(margin-top, 3);
-        @include transition(all, 0.4s, ease);
-        &:focus {
-            width: 200px;
-        }
-    } // input[type=text]
-    .search-button {
+    input {
+        width: 200px;
+        @include property(padding-left, 30);
+    }
+    label {
         position: absolute;
-        @include property(top, 5);
-        @include property(right, -20);
-        background: none;
-        color: #000;
-        @include property(margin-left, 10);
-        &:before {
-            @include icon-fa;
-            content: '\f002';
-        } // &:before
-    } // search-button
-} // search-box
+        top: 5px;
+        left: 10px;
+    }
+}
