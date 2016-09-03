@@ -3,7 +3,7 @@
 (function() {
 
   angular.module('ncsaas')
-    .directive('sidebar', ['$state', '$uibModal', sidebar]);
+    .directive('sidebar', ['$state', sidebar]);
 
   function sidebar($state, $uibModal) {
     return {
@@ -15,6 +15,18 @@
       templateUrl: 'views/directives/sidebar.html',
       link: function(scope) {
         scope.$state = $state;
+      }
+    };
+  }
+
+  angular.module('ncsaas')
+    .directive('workspaceSelectToggle', ['$uibModal', workspaceSelectToggle]);
+
+  function workspaceSelectToggle($uibModal) {
+    return {
+      restrict: 'E',
+      template: '<a><i class="fa fa-angle-down" ng-click="selectWorkspace()"></i></a>',
+      link: function(scope) {
         scope.selectWorkspace = function() {
           $uibModal.open({
             templateUrl: 'views/directives/select-workspace.html',
@@ -25,7 +37,7 @@
           })
         }
       }
-    };
+    }
   }
 
   angular.module('ncsaas')

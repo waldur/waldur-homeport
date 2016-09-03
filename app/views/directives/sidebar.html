@@ -10,12 +10,6 @@
                     </a>
                 </div>
             </li>
-            <li>
-                <a ng-click="selectWorkspace()">
-                    <i class="fa fa-bars"></i>
-                    <span class="nav-label">Select workspace</span>
-                </a>
-            </li>
             <li ui-sref-active="active"
                 ng-repeat="item in items"
                 ng-class="{active: $state.includes(item.state)}">

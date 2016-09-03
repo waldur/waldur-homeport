@@ -1,7 +1,10 @@
 <div class="row border-bottom">
     <nav class="navbar navbar-fixed-top" role="navigation">
         <div class="navbar-header m-l-md">
-            <h2><ng-transclude></ng-transclude></h2>
+            <h2>
+                <workspace-select-toggle/>
+                <ng-transclude/>
+            </h2>
         </div>
         <ul class="nav navbar-top-links navbar-right">
             <li>
