@@ -415,12 +415,14 @@
       {
         label: "Providers",
         icon: "fa-database",
-        link: "organization.providers({uuid: context.customer.uuid})"
+        link: "organization.providers({uuid: context.customer.uuid})",
+        feature: "providers"
       },
       {
         label: "Projects",
         icon: "fa-bookmark",
-        link: "organization.projects({uuid: context.customer.uuid})"
+        link: "organization.projects({uuid: context.customer.uuid})",
+        feature: "projects"
       },
       {
         label: "Resources",
@@ -430,24 +432,28 @@
           {
             label: "Virtual machines",
             icon: "fa-desktop",
-            link: "organization.resources.vms({uuid: context.customer.uuid})"
+            link: "organization.resources.vms({uuid: context.customer.uuid})",
+            feature: "vms"
           },
           {
             label: "Private clouds",
             icon: "fa-cloud",
-            link: "organization.resources.clouds({uuid: context.customer.uuid})"
+            link: "organization.resources.clouds({uuid: context.customer.uuid})",
+            feature: "private_clouds"
           },
           {
             label: "Applications",
             icon: "fa-cube",
-            link: "organization.resources.apps({uuid: context.customer.uuid})"
+            link: "organization.resources.apps({uuid: context.customer.uuid})",
+            feature: "apps"
           },
         ]
       },
       {
         label: "Support",
         icon: "fa-question-circle",
-        link: "support.list"
+        link: "support.list",
+        feature: "support"
       },
       {
         label: "Analytics",
@@ -469,12 +475,14 @@
       {
         label: "Audit logs",
         icon: "fa-bell-o",
-        link: "organization.details({uuid: context.customer.uuid})"
+        link: "organization.details({uuid: context.customer.uuid})",
+        feature: "eventlog"
       },
       {
         label: "Alerts",
         icon: "fa-fire",
-        link: "organization.alerts({uuid: context.customer.uuid})"
+        link: "organization.alerts({uuid: context.customer.uuid})",
+        feature: "alerts"
       },
       {
         label: "Manage",
@@ -484,17 +492,20 @@
       {
         label: "Team",
         icon: "fa-group",
-        link: "organization.team({uuid: context.customer.uuid})"
+        link: "organization.team({uuid: context.customer.uuid})",
+        feature: "team"
       },
       {
         label: "Billing",
         icon: "fa-file-text-o",
-        link: "organization.billing({uuid: context.customer.uuid})"
+        link: "organization.billing({uuid: context.customer.uuid})",
+        feature: "billing"
       },
       {
         label: "Sizing",
         icon: "fa-calculator",
-        link: "organization.sizing({uuid: context.customer.uuid})"
+        link: "organization.sizing({uuid: context.customer.uuid})",
+        feature: "sizing"
       }
     ];
   }

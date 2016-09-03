@@ -399,7 +399,8 @@
       {
         link: "appstore.store",
         icon: "fa-shopping-cart",
-        label: "Marketplace"
+        label: "Marketplace",
+        feature: "appstore"
       },
       {
         label: "Resources",
@@ -409,34 +410,40 @@
           {
             link: "project.resources.vms({uuid: context.project.uuid})",
             icon: "fa-desktop",
-            label: "Virtual machines"
+            label: "Virtual machines",
+            feature: "vms"
           },
           {
             link: "project.resources.clouds({uuid: context.project.uuid})",
             icon: "fa-cloud",
-            label: "Private clouds"
+            label: "Private clouds",
+            feature: "private_clouds"
           },
           {
             link: "project.resources.apps({uuid: context.project.uuid})",
             icon: "fa-cube",
-            label: "Applications"
+            label: "Applications",
+            feature: "apps"
           }
         ]
       },
       {
         link: "project.support({uuid: context.project.uuid})",
         icon: "fa-question-circle",
-        label: "Support"
+        label: "Support",
+        feature: "premiumSupport"
       },
       {
         link: "project.details({uuid: context.project.uuid})",
         icon: "fa-bell-o",
-        label: "Audit logs"
+        label: "Audit logs",
+        feature: "eventlog"
       },
       {
         link: "project.alerts({uuid: context.project.uuid})",
         icon: "fa-fire",
-        label: "Alerts"
+        label: "Alerts",
+        feature: "alerts"
       },
       {
         link: "project.delete({uuid: context.project.uuid})",
