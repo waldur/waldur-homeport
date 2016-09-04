@@ -197,11 +197,6 @@
           link: "profile.notifications"
       },
       {
-          label: "Password",
-          icon: "fa-sign-in",
-          link: "profile.password"
-      },
-      {
           label: "Manage",
           icon: "fa-wrench",
           link: "profile.manage"
