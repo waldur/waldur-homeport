@@ -25,7 +25,7 @@
   function workspaceSelectToggle($uibModal) {
     return {
       restrict: 'E',
-      template: '<button class="btn btn-primary dim minimalize-styl-2" ng-click="selectWorkspace()">'+
+      template: '<button class="btn btn-primary minimalize-styl-2" ng-click="selectWorkspace()">'+
                 '<i class="fa fa-bars"></i> Select workspace</button>',
       link: function(scope) {
         scope.selectWorkspace = function() {
