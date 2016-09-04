@@ -6,7 +6,8 @@
                 <strong class="font-bold">{{ Ctrl.user.full_name || 'User profile' }}</strong>
             </span>
             <span class="text-muted text-xs block">
-                {{ Ctrl.user.job_title }}
+                {{ Ctrl.user.job_title || 'Manage you account' }}
+                <b class="caret"></b>
             </span>
         </span>
     </a>
