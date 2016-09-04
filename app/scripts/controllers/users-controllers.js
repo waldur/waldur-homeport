@@ -180,23 +180,7 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('UserDetailsController', UserDetailsController);
-
-  UserDetailsController.$inject = ['$scope', '$stateParams', 'usersService'];
-  function UserDetailsController($scope, $stateParams, usersService) {
-    var publicTabs = [
-      {
-          label: "Events",
-          icon: "fa-bell-o",
-          link: "users.details({uuid: context.user.uuid})"
-      },
-      {
-          label: "SSH Keys",
-          icon: "fa-key",
-          link: "users.keys({uuid: context.user.uuid})"
-      }
-    ];
-    var privateTabs = [
+    .constant('PRIVATE_USER_TABS', [
       {
           label: "Events",
           icon: "fa-bell-o",
@@ -222,11 +206,28 @@
           icon: "fa-wrench",
           link: "profile.manage"
       }
-    ];
+    ]);
 
+  angular.module('ncsaas')
+    .controller('UserDetailsController', UserDetailsController);
+
+  UserDetailsController.$inject = ['$scope', '$stateParams', 'usersService', 'PRIVATE_USER_TABS'];
+  function UserDetailsController($scope, $stateParams, usersService, PRIVATE_USER_TABS) {
+    var publicTabs = [
+      {
+          label: "Events",
+          icon: "fa-bell-o",
+          link: "users.details({uuid: context.user.uuid})"
+      },
+      {
+          label: "SSH Keys",
+          icon: "fa-key",
+          link: "users.keys({uuid: context.user.uuid})"
+      }
+    ];
     usersService.getCurrentUser().then(function(user) {
       if (angular.isUndefined($stateParams.uuid) || $stateParams.uuid === user.uuid) {
-        $scope.items = privateTabs;
+        $scope.items = PRIVATE_USER_TABS;
         $scope.currentUser = user;
         $scope.context = {user: user};
       } else {
