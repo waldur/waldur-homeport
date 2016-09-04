@@ -14,23 +14,28 @@
       init:function() {
         this.service = plansService;
         this.controllerScope = controllerScope;
-        this.checkPermissions();
+        controllerScope.loading = true;
+        this.loadInitial().finally(function() {
+          controllerScope.loading = false;
+        });
         this.selectedPlan = null;
         this.helpIconMessage = "Both VMs and applications are counted as resources";
       },
 
-      checkPermissions: function() {
+      loadInitial: function() {
         // check is current user - customer owner and load page if he is
         var vm = this;
-        usersService.getCurrentUser().then(function(user) {
+        return usersService.getCurrentUser().then(function(user) {
           /*jshint camelcase: false */
-          customerPermissionsService.userHasCustomerRole(user.username, 'owner', $stateParams.uuid).then(
+          return customerPermissionsService.userHasCustomerRole(user.username, 'owner', $stateParams.uuid).then(
             function(hasRole) {
               vm.canSeePlans = hasRole;
 
               if (vm.canSeePlans || user.is_staff) {
-                vm.getLimitsAndUsages();
-                vm.getList();
+                return $q.all([
+                  vm.getLimitsAndUsages(),
+                  vm.getList()
+                ]);
               } else {
                 $state.go('errorPage.notFound');
               }

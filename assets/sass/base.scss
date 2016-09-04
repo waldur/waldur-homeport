@@ -49,15 +49,6 @@ a:hover, a:focus {
     display: block;
 }
 
-.fb_iframe_widget {
-    padding-bottom: 4px;
-}
-
-.f16 {
-    display: inline-block;
-    vertical-align: middle;
-}
-
 .m-b-sm {
   margin-bottom: 10px;
 }
@@ -78,36 +69,6 @@ a:hover, a:focus {
   margin-right: 10px;
 }
 
-.list-group-item.awesome-checkbox {
-    padding-left: 35px;
-    label {
-        width: 100%;
-    }
-}
-
-.old {
-    background-color: $gray;
-    &.fixed-nav #wrapper {
-        margin-top: 40px;
-        height: 100%;
-    }
-}
-
 .white-bg {
     background-color: #ffffff;
-}
-
-.elipsis {
-    @include elipsis;
-}
-
-.fixed-width-icon {
-    width: 16px;
-}
-
-.list-group-item.active .btn-default {
-    color: $text-color;
-    &:hover {
-        color: $text-color;
-    }
 }
