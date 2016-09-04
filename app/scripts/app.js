@@ -33,7 +33,7 @@
 
       blockUIConfig.autoBlock = false;
 
-      $urlRouterProvider.otherwise('/');
+      $urlRouterProvider.otherwise('/login/');
 
       $stateProvider
         .state('home', {
@@ -56,7 +56,7 @@
             }
           },
           resolve: {
-            authenticated: notLoggedCheck
+            authenticated: authCheck
           },
           data: {
             bodyClass: 'landing',
@@ -99,9 +99,6 @@
           },
           resolve: {
             authenticated: notLoggedCheck
-          },
-          data: {
-            bodyClass: 'old'
           }
         })
 
@@ -117,9 +114,6 @@
           },
           resolve: {
             authenticated: notLoggedCheck
-          },
-          data: {
-            bodyClass: 'old'
           }
         })
 
@@ -336,10 +330,6 @@
               templateUrl: 'views/partials/site-header.html',
             }
           },
-          resolve: {
-            authenticated: authCheck
-          },
-          auth: true,
           data: {
             bodyClass: 'old'
           }
@@ -355,10 +345,6 @@
               templateUrl: 'views/partials/site-header.html',
             }
           },
-          resolve: {
-            authenticated: authCheck
-          },
-          auth: true,
           data: {
             bodyClass: 'old'
           }
