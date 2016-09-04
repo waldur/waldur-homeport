@@ -1,7 +1,6 @@
 .search-box {
     position: relative;
     input {
-        width: 200px;
         @include property(padding-left, 30);
     }
     label {

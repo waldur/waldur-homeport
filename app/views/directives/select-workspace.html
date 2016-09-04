@@ -16,9 +16,22 @@
           Add new organization
         </a>
       </h3>
+      <div class="form-group">
+        <div class="search-box">
+          <input id="organization-search-box"
+                 type="text"
+                 class="form-control" 
+                 ng-model="Ctrl.organizationSearchInput"
+                 ng-model-options="{ debounce: 500 }"
+                 placeholder="Filter organizations">
+          <label for="organization-search-box">
+            <i class="fa fa-search"></i>
+          </label>
+        </div>
+      </div>
       <div class="list-group" slimscroll="{height: '300px'}">
         <div class="list-group-item"
-          ng-repeat="organization in Ctrl.organizations"
+          ng-repeat="organization in Ctrl.organizations | filter: {name: Ctrl.organizationSearchInput}"
           ng-class="{active: organization.uuid == Ctrl.selectedOrganization.uuid}"
           ng-click="Ctrl.selectOrganization(organization)">
           <a class="btn btn-xs btn-default pull-right" ng-click="Ctrl.gotoOrganization(organization)">
@@ -38,6 +51,19 @@
           Add new project
         </a>
       </h3>
+      <div class="form-group">
+        <div class="search-box">
+          <input id="project-search-box"
+                 type="text"
+                 class="form-control" 
+                 ng-model="Ctrl.projectSearchInput"
+                 ng-model-options="{ debounce: 500 }"
+                 placeholder="Filter projects">
+          <label for="project-search-box">
+            <i class="fa fa-search"></i>
+          </label>
+        </div>
+      </div>
       <div ng-if="Ctrl.selectedOrganization.projects.length == 0">
           <p class="text-center text-danger">There are no projects yet for this organization.</p>
       </div>
@@ -45,7 +71,7 @@
         class="list-group"
         slimscroll="{height: '300px'}">
         <div class="list-group-item"
-          ng-repeat="project in Ctrl.selectedOrganization.projects"
+          ng-repeat="project in Ctrl.selectedOrganization.projects | filter: {name: Ctrl.projectSearchInput}"
           ng-class="{active: project.uuid == Ctrl.selectedProject.uuid}"
           ng-click="Ctrl.selectProject(project)">
           <a class="btn btn-xs btn-default pull-right" ng-click="Ctrl.gotoProject(project)">
