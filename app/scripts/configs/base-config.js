@@ -5,7 +5,8 @@ angular.module('ncsaas')
     // general config
     name: '',
     apiEndpoint: 'http://localhost:8080/',
-    modePageTitle: 'NodeConductor - Cloud Service Management',
+    modePageTitle: 'Waldur | Cloud Service Management',
+    shortPageTitle: 'Waldur',
 
     // Social login config
     googleClientId: 'google client id',
