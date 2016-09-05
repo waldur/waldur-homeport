@@ -1,0 +1,9 @@
+<button class="btn btn-primary select-workspace" ng-click="Ctrl.selectWorkspace()">
+    <i class="fa fa-bars"></i>
+    <span ng-if="!Ctrl.project">
+        Select workspace
+    </span>
+    <span ng-if="Ctrl.project">
+        {{ Ctrl.project.customer_name }} | {{ Ctrl.project.name }}
+    </span>
+</button>

@@ -117,7 +117,11 @@
         this.controllerScope = controllerScope;
         this.category = ENV.VirtualMachines;
         this._super();
-        this.entityOptions.entityData.noMatchesText = 'No VMs found matching filter.';
+
+        this.entityOptions.entityData.noDataText = 'You have no virtual machines yet';
+        this.entityOptions.entityData.createLinkText = 'Add virtual machine';
+        this.entityOptions.entityData.importLinkText = 'Import virtual machine';
+        this.entityOptions.entityData.noMatchesText = 'No virtual machines found matching filter.';
         this.entityOptions.entityData.openMap = this.openMap.bind(this);
       }
     });
@@ -140,6 +144,9 @@
         this.controllerScope = controllerScope;
         this.category = ENV.PrivateClouds;
         this._super();
+        this.entityOptions.entityData.noDataText = 'You have no private clouds yet';
+        this.entityOptions.entityData.createLinkText = 'Add private cloud';
+        this.entityOptions.entityData.importLinkText = 'Import private cloud';
         this.entityOptions.entityData.noMatchesText = 'No private clouds found matching filter.';
         this.entityOptions.entityData.openMap = this.openMap.bind(this);
       }

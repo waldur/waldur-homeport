@@ -22,9 +22,8 @@
                     <span class="nav-label">{{ ::item.label }}</span>
                     <i class="fa arrow"></i>
                 </a>
-                <ul class="nav nav-second-level"
-                    ng-if="item.children"
-                    ng-class="{in: $state.includes(item.state)}">
+                <ul class="nav nav-second-level in"
+                    ng-if="::item.children">
                     <li ui-sref-active="active" ng-repeat="child in item.children">
                         <a ui-sref="{{ child.link }}" visible="::item.feature">
                             <i class="fa {{ ::child.icon }}"></i>

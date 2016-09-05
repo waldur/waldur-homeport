@@ -1,7 +1,7 @@
 <div class="row border-bottom">
     <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
-            <workspace-select-toggle/>
+            <select-workspace-toggle/>
             <div role="search" class="navbar-form-custom">
                 <div class="form-group">
                     <input type="text" placeholder="Search" class="form-control" name="top-search" id="top-search">
@@ -9,6 +9,11 @@
             </div>
         </div>
         <ul class="nav navbar-top-links navbar-right">
+            <li visible="support">
+                <a ui-sref="support.list">
+                    <i class="fa fa-question-circle"></i> Support
+                </a>
+            </li>
             <li uib-dropdown>
                 <a class="count-info" href uib-dropdown-toggle>
                     <i class="fa fa-bell"></i> <span class="label label-primary">8</span>

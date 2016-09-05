@@ -126,6 +126,21 @@
         templateUrl: 'views/import/import.html',
       })
 
+      .state('appstore', {
+        url: '/appstore/',
+        abstract: true,
+        templateUrl: 'views/project/base.html',
+      })
+
+      .state('appstore.store', {
+        url: ':category',
+        templateUrl: 'views/appstore/store.html',
+        data: {
+          bodyClass: 'white-bg',
+          pageTitle: 'Marketplace'
+        }
+      })
+
       .state('compare', {
         url: '/compare/',
         templateUrl: 'views/project/base.html',

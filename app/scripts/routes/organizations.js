@@ -74,42 +74,6 @@
         }
       })
 
-      .state('organization.resources', {
-        url: '',
-        abstract: true,
-        template: '<ui-view/>'
-      })
-
-      .state('organization.resources.vms', {
-        url: 'virtual-machines/',
-        templateUrl: 'views/partials/list.html',
-        controller: 'CustomerResourcesTabController',
-        controllerAs: 'Ctrl',
-        data: {
-          pageTitle: 'Virtual machines'
-        }
-      })
-
-      .state('organization.resources.apps', {
-        url: 'applications/',
-        templateUrl: 'views/partials/list.html',
-        controller: 'CustomerApplicationsTabController',
-        controllerAs: 'Ctrl',
-        data: {
-          pageTitle: 'Applications'
-        }
-      })
-
-      .state('organization.resources.clouds', {
-        url: 'private-clouds/',
-        templateUrl: 'views/partials/list.html',
-        controller: 'CustomerPrivateCloudTabController',
-        controllerAs: 'Ctrl',
-        data: {
-          pageTitle: 'Private clouds'
-        }
-      })
-
       .state('organization.billing', {
         url: 'billing/',
         templateUrl: 'views/customer/tab-billing.html',
@@ -163,6 +127,23 @@
         templateUrl: 'views/dashboard/resources-tab.html',
         data: {
           pageTitle: 'Resource usage'
+        }
+      })
+
+      .state('services', {
+        url: '/services/',
+        abstract: true,
+        templateUrl: 'views/customer/base.html'
+      })
+
+      .state('services.create', {
+        url: 'add/',
+        templateUrl: 'views/service/create.html',
+        controller: 'ServiceAddController',
+        controllerAs: 'ServiceAdd',
+        data: {
+          bodyClass: 'white-bg',
+          pageTitle: 'Create provider'
         }
       })
   });

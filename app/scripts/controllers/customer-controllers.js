@@ -413,6 +413,11 @@
     refreshCustomer();
     $scope.items = [
       {
+        link: "dashboard.index",
+        icon: "fa-th-large",
+        label: "Dashboard",
+      },
+      {
         label: "Providers",
         icon: "fa-database",
         link: "organization.providers({uuid: context.customer.uuid})",
@@ -423,37 +428,6 @@
         icon: "fa-bookmark",
         link: "organization.projects({uuid: context.customer.uuid})",
         feature: "projects"
-      },
-      {
-        label: "Resources",
-        icon: "fa-files-o",
-        state: "organization.resources",
-        children: [
-          {
-            label: "Virtual machines",
-            icon: "fa-desktop",
-            link: "organization.resources.vms({uuid: context.customer.uuid})",
-            feature: "vms"
-          },
-          {
-            label: "Private clouds",
-            icon: "fa-cloud",
-            link: "organization.resources.clouds({uuid: context.customer.uuid})",
-            feature: "private_clouds"
-          },
-          {
-            label: "Applications",
-            icon: "fa-cube",
-            link: "organization.resources.apps({uuid: context.customer.uuid})",
-            feature: "apps"
-          },
-        ]
-      },
-      {
-        label: "Support",
-        icon: "fa-question-circle",
-        link: "support.list",
-        feature: "support"
       },
       {
         label: "Analytics",

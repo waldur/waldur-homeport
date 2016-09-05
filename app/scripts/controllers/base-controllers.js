@@ -190,6 +190,7 @@
           projectsService.$get(projectUuid).then(function(project){
             if (project.customer_uuid == ctrl.currentCustomer.uuid) {
               currentStateService.setProject(project);
+              $rootScope.$broadcast('currentProjectUpdated');
               ctrl.currentProject = project;
             }
             deferred.resolve();
@@ -203,6 +204,7 @@
         function getFirst() {
           projectsService.getFirst().then(function(firstProject) {
             currentStateService.setProject(firstProject);
+            $rootScope.$broadcast('currentProjectUpdated');
             ctrl.currentProject = firstProject;
             deferred.resolve();
           });
@@ -369,6 +371,7 @@
           });
           currentStateService.setCustomer(deferred.promise);
           currentStateService.setProject(projectDeferred.promise);
+          $rootScope.$broadcast('currentProjectUpdated');
         }
       },
 

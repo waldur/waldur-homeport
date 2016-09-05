@@ -180,38 +180,6 @@
           templateUrl: 'views/dashboard/index.html',
         })
 
-        .state('appstore', {
-          url: '/appstore/',
-          abstract: true,
-          templateUrl: 'views/project/base.html',
-        })
-
-        .state('appstore.store', {
-          url: ':category',
-          templateUrl: 'views/appstore/store.html',
-          data: {
-            bodyClass: 'white-bg',
-            pageTitle: 'Marketplace'
-          }
-        })
-
-        .state('services', {
-          url: '/services/',
-          abstract: true,
-          templateUrl: 'views/customer/base.html'
-        })
-
-        .state('services.create', {
-          url: 'add/',
-          templateUrl: 'views/service/create.html',
-          controller: 'ServiceAddController',
-          controllerAs: 'ServiceAdd',
-          data: {
-            bodyClass: 'white-bg',
-            pageTitle: 'Create provider'
-          }
-        })
-
         .state('resources', {
           url: '/resources/',
           abstract: true,
