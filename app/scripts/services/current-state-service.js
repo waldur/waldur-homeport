@@ -62,6 +62,7 @@
 
     function isQuotaExceeded(entity) {
       return vm.getCustomer().then(function(response) {
+        response.quotas = response.quotas || [];
         for (var i = 0; i < response.quotas.length; i++) {
           var value = response.quotas[i];
           var name = ncUtils.getPrettyQuotaName(value.name);

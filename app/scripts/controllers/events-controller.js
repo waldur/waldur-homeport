@@ -378,6 +378,10 @@
 
         this.checkQuotas = 'project';
 
+        $scope.$on('currentCustomerUpdated', function() {
+          controllerScope.activate();
+        });
+
         this.activate();
         this.resizeControl();
       },

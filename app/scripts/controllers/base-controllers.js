@@ -419,7 +419,7 @@
       },
 
       checkQuotas: function(stateName) {
-        if (ENV.entityCreateLink[stateName]) {
+        if (ENV.entityCreateLink[stateName] && currentStateService.isCustomerDefined) {
           currentStateService.isQuotaExceeded(ENV.entityCreateLink[stateName]).then(function(response) {
             if (response) {
               $state.go('errorPage.limitQuota');

@@ -2,17 +2,19 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('SelectWorkspaceDialogController', [
-      '$scope',
-      '$rootScope',
-      '$uibModal',
-      '$state',
-      '$q',
-      'customersService',
-      'projectsService',
-      'currentStateService',
-      'usersService',
-      SelectWorkspaceDialogController]);
+    .controller('SelectWorkspaceDialogController', SelectWorkspaceDialogController);
+
+  SelectWorkspaceDialogController.$inject = [
+    '$scope',
+    '$rootScope',
+    '$uibModal',
+    '$state',
+    '$q',
+    'customersService',
+    'projectsService',
+    'currentStateService',
+    'usersService'
+  ];
 
   function SelectWorkspaceDialogController(
     $scope,
@@ -48,9 +50,8 @@
 
     ctrl.gotoOrganization = function(organization) {
       ctrl.$close();
-      $state.go('organization.details', {
-        uuid: organization.uuid
-      });
+      $rootScope.$broadcast('adjustCurrentCustomer', organization);
+      $state.go('dashboard.index', {}, {reload: true});
     };
 
     ctrl.gotoProject = function(project) {
