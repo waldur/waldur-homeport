@@ -38,7 +38,8 @@
     "angular-bootstrap": "^2.0.1",
     "open-sans-fontface": "^1.4.2",
     "angular-slimscroll": "^1.1.5",
-    "metisMenu": "^2.5.2"
+    "metisMenu": "^2.5.2",
+    "pace": "~1.0.2"
   },
   "resolutions": {
     "angular": "~1.4.x"

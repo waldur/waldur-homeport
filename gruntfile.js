@@ -395,6 +395,13 @@ module.exports = function(grunt) {
                         dest: 'app/static/js/',
                         filter: 'isFile'
                     },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/pace/',
+                        src: ['pace.min.js'],
+                        dest: 'app/static/js/',
+                        filter: 'isFile'
+                    }
                 ]
             },
             modePrivateIaas: {
@@ -692,6 +699,7 @@ module.exports = function(grunt) {
                     'app/static/js/jquery.slimscroll.min.js',
                     'app/static/js/angular/angular-slimscroll.js',
                     'app/static/js/metisMenu.min.js',
+                    'app/static/js/pace.min.js',
                 ],
                 dest: 'app/static/js/main/main.js'
             }

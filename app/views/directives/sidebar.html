@@ -1,7 +1,7 @@
 <nav class="navbar-default navbar-static-side" role="navigation">
     <div class="sidebar-collapse" slimscroll="{height: '100%'}">
         <ul class="nav metismenu" id="side-menu" metis-menu>
-            <li class="brand-name">
+            <li class="brand-name hidden-xs">
                 <a ui-sref="dashboard.index">
                     <i class="fa fa-th-large"></i>
                     Waldur
@@ -20,7 +20,7 @@
                 <a ng-if="!item.link">
                     <i class="fa {{ ::item.icon }} fixed-width-icon"></i>
                     <span class="nav-label">{{ ::item.label }}</span>
-                    <i class="fa arrow"></i>
+                    <span class="fa arrow"></span>
                 </a>
                 <ul class="nav nav-second-level in"
                     ng-if="::item.children">
