@@ -10,9 +10,8 @@
             <li class="nav-header">
                 <sidebar-user/>
             </li>
-            <li ui-sref-active="active"
-                ng-repeat="item in items"
-                ng-class="{active: $state.includes(item.state)}">
+            <li ng-repeat="item in items"
+                ng-class="{active: $state.includes(item.state) || item.children}">
                 <a ui-sref="{{ item.link }}" ng-if="item.link" visible="::item.feature">
                     <i class="fa {{ ::item.icon }} fixed-width-icon"></i>
                     <span class="nav-label">{{ ::item.label }}</span>
@@ -22,7 +21,7 @@
                     <span class="nav-label">{{ ::item.label }}</span>
                     <span class="fa arrow"></span>
                 </a>
-                <ul class="nav nav-second-level in"
+                <ul class="nav nav-second-level"
                     ng-if="::item.children">
                     <li ui-sref-active="active" ng-repeat="child in item.children">
                         <a ui-sref="{{ child.link }}" visible="::item.feature">
