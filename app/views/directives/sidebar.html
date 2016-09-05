@@ -10,7 +10,8 @@
             <li class="nav-header">
                 <sidebar-user/>
             </li>
-            <li ng-repeat="item in items"
+            <li ui-sref-active="active"
+                ng-repeat="item in items"
                 ng-class="{active: $state.includes(item.state)}">
                 <a ui-sref="{{ item.link }}" ng-if="item.link" visible="::item.feature">
                     <i class="fa {{ ::item.icon }} fixed-width-icon"></i>
