@@ -51,9 +51,6 @@
         url: '/profile/',
         abstract: true,
         templateUrl: 'views/user/base.html',
-        data: {
-          bodyClass: 'white-bg'
-        }
       })
 
       .state('profile.details', tabs.events)
@@ -66,9 +63,6 @@
         url: '/users/:uuid/',
         abstract: true,
         templateUrl: 'views/user/base.html',
-        data: {
-          bodyClass: 'white-bg'
-        }
       })
 
       .state('users.details', angular.copy(tabs.events))
@@ -82,7 +76,6 @@
         abstract: true,
         templateUrl: 'views/user/base.html',
         data: {
-          bodyClass: 'white-bg',
           pageTitle: 'Add SSH key'
         }
       })

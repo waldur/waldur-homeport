@@ -829,7 +829,7 @@ module.exports = function(grunt) {
     grunt.registerTask(
       'build', ['copy:main', 'image', 'sass', 'autoprefixer', 'cssmin']);
     grunt.registerTask(
-      'run', ['copy:main', 'env:dev', 'preprocess:index', 'connect:server', 'image', 'sass', 'autoprefixer',
+      'run', ['po2json_angular_translate', 'copy:main', 'env:dev', 'preprocess:index', 'connect:server', 'image', 'sass', 'autoprefixer',
           'copy:' + mode, 'focus:dev']);
     grunt.registerTask('serve', ['connect',]);
     grunt.registerTask('default', ['run']);

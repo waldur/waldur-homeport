@@ -2,7 +2,7 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('SelectWorkspaceController', [
+    .controller('SelectWorkspaceDialogController', [
       '$scope',
       '$rootScope',
       '$uibModal',
@@ -12,9 +12,9 @@
       'projectsService',
       'currentStateService',
       'usersService',
-      SelectWorkspaceController]);
+      SelectWorkspaceDialogController]);
 
-  function SelectWorkspaceController(
+  function SelectWorkspaceDialogController(
     $scope,
     $rootScope,
     $uibModal,

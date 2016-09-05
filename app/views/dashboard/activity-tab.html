@@ -1,8 +1,8 @@
-<div ng-controller="DashboardActivityController as DashboardController">
+<div ng-controller="DashboardActivityController as DashboardController" class="row">
     <div class="half-block">
         <h3>Projects</h3>
 
-        <div class="white-box graph dashboard-projects" block-ui="dashboard-projects-list">
+        <div class="graph dashboard-projects" block-ui="dashboard-projects-list">
             <div ng-repeat="project in DashboardController.projects">
                 <div ng-click="DashboardController.selectProject(project)" class="graph-head"
                      ng-class="{'active': project.selected}">
@@ -10,18 +10,18 @@
                         <expandable-indicator open="project.selected"></expandable-indicator>
                         <a stoppropagation ui-sref="project.details({uuid: project.uuid})">{{ project.name }}</a>
                         <div class="support-buttons" visible="premiumSupport">
-                            <a stoppropagation class="button-support"
+                            <a stoppropagation class="btn btn-primary btn-outline btn-sm"
                                ng-if="::project.plan"
                                ui-sref="project.support({uuid: project.uuid})">SLA details</a>
-                            <a stoppropagation class="button-support pending"
+                            <a stoppropagation class="btn btn-primary btn-outline btn-sm pending"
                                ng-if="::!project.plan && project.has_pending_contracts"
                                ui-sref="project.support({uuid: project.uuid})">SLA pending</a>
-                            <a stoppropagation class="button-support pending"
+                            <a stoppropagation class="btn btn-primary btn-outline btn-sm pending"
                                ng-if="::!project.plan && !project.has_pending_contracts"
                                ng-click="DashboardController.addSupportContract(project)">Add SLA</a>
                         </div>
                         <div class="information-blocks">
-                            <a stoppropagation class="button-support">
+                            <a stoppropagation class="btn btn-primary btn-sm">
                                 {{project.price_estimate.total || 0 | defaultCurrency}}
                             <span class="inline">
                                 <helpicon class="button-help-icon" help-text="Projected cost of resources used during this month within a project."></helpicon>
@@ -60,7 +60,7 @@
                     </div>
                 </div>
             </div>
-            <div class="placeholder white-box" ng-if="DashboardController.projects.length==0">
+            <div class="placeholder" ng-if="DashboardController.projects.length==0">
                 There are no projects
                 <div class="inline"
                      check-quotas="{{DashboardController.checkQuotas}}"
@@ -78,7 +78,7 @@
             <div>
                 <h3 class="alerts-header">Alerts</h3>
                 <div class="alerts-helper-link">
-                    <a stoppropagation class="button-support pending"
+                    <a stoppropagation class="btn btn-primary btn-outline btn-sm pending"
                        ng-click="DashboardController.showHelpTypes('alerts')">Supported alerts</a>
                 </div>
                 <div class="clear"></div>
@@ -108,7 +108,7 @@
             <div>
                 <h3 class="alerts-header">Recent events</h3>
                 <div class="alerts-helper-link">
-                    <a stoppropagation class="button-support pending"
+                    <a stoppropagation class="btn btn-primary btn-outline btn-sm pending"
                        ng-click="DashboardController.showHelpTypes('events')">Supported events</a>
                 </div>
                 <div class="clear"></div>

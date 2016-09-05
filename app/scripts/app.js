@@ -145,10 +145,7 @@
         .state('support', {
           url: '/support/',
           templateUrl: 'views/customer/base.html',
-          abstract: true,
-          data: {
-            bodyClass: 'white-bg'
-          }
+          abstract: true
         })
 
         .state('support.list', {
@@ -169,7 +166,6 @@
           abstract: true,
           templateUrl: 'views/customer/base.html',
           data: {
-            bodyClass: 'white-bg',
             pageTitle: 'Dashboard'
           }
         })
@@ -184,13 +180,10 @@
           url: '/resources/',
           abstract: true,
           templateUrl: 'views/resource/base.html',
-          data: {
-            bodyClass: 'white-bg'
-          }
         })
 
         .state('resources.details', {
-          url: ':resource_type/:uuid/?tab',
+          url: ':resource_type/:uuid',
           templateUrl: 'views/resource/details.html',
         })
 
@@ -323,7 +316,6 @@
           abstract: true,
           templateUrl: 'views/customer/base.html',
           data: {
-            bodyClass: 'white-bg',
             pageTitle: 'Help'
           }
         })

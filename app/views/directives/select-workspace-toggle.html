@@ -1,9 +1,12 @@
-<button class="btn btn-primary select-workspace" ng-click="Ctrl.selectWorkspace()">
+<button class="btn btn-primary select-workspace" ng-click="SelectWorkspaceToggleController.selectWorkspace()">
     <i class="fa fa-bars"></i>
-    <span ng-if="!Ctrl.project">
+    <span ng-if="!SelectWorkspaceToggleController.project">
         Select workspace
     </span>
-    <span ng-if="Ctrl.project">
-        {{ Ctrl.project.customer_name }} | {{ Ctrl.project.name }}
+    <span ng-if="SelectWorkspaceToggleController.project">
+        {{ SelectWorkspaceToggleController.project.customer_name }}
+        <span ng-if="$state.includes('project') || $state.includes('appstore')">
+          > {{ SelectWorkspaceToggleController.project.name }}
+        </span>
     </span>
 </button>

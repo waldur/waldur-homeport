@@ -326,15 +326,6 @@
           margin: 0px;
           position: relative;
           margin-right: 10px;
-          a {
-            &:not(.button-support) {
-              font-weight: bold;
-              font-size:17px;
-              @include bp(xs) {
-                font-weight:bold;
-              }
-            }
-          }
           .support-buttons {
             float: right;
             margin-right: 18px;
@@ -575,7 +566,6 @@
           clear: both;
           text-align: center;
           margin-top: 15px;
-          color: $dashboard-green;
         }
       }
     }

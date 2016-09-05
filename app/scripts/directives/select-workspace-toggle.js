@@ -9,7 +9,7 @@
       restrict: 'E',
       templateUrl: 'views/directives/select-workspace-toggle.html',
       controller: 'SelectWorkspaceToggleController',
-      controllerAs: 'Ctrl',
+      controllerAs: 'SelectWorkspaceToggleController',
       bindToController: true
     }
   }
@@ -40,7 +40,7 @@
     function selectWorkspace() {
       $uibModal.open({
         templateUrl: 'views/directives/select-workspace-dialog.html',
-        controller: 'SelectWorkspaceController',
+        controller: 'SelectWorkspaceDialogController',
         controllerAs: 'Ctrl',
         bindToController: true,
         size: 'lg'

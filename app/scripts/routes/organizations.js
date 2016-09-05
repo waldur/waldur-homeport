@@ -5,9 +5,6 @@
           url: '/organizations/:uuid/',
           abstract: true,
           templateUrl: 'views/customer/base.html',
-          data: {
-            bodyClass: 'white-bg'
-          },
           resolve: {
             currentCustomer: function(
               $stateParams, $state, $rootScope, customersService, currentStateService) {
@@ -96,7 +93,7 @@
         controller: 'CustomerDeleteTabController',
         controllerAs: 'DeleteController',
         data: {
-          pageTitle: 'Delete'
+          pageTitle: 'Delete organization'
         }
       })
 
@@ -142,7 +139,6 @@
         controller: 'ServiceAddController',
         controllerAs: 'ServiceAdd',
         data: {
-          bodyClass: 'white-bg',
           pageTitle: 'Create provider'
         }
       })

@@ -38,7 +38,7 @@
             },
             {
               propertyName: 'html_message',
-              className: 'message',
+              className: 'event-message',
               type: ENTITYLISTFIELDTYPES.html
             },
             {
@@ -115,7 +115,7 @@
             {
               name: 'Message',
               propertyName: 'html_message',
-              className: 'message',
+              className: 'event-message',
               type: ENTITYLISTFIELDTYPES.html
             },
             {

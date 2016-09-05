@@ -1,3 +1,8 @@
+img {
+    max-width: 100%;
+    vertical-align: top;
+}
+
 .fb_iframe_widget {
     padding-bottom: 4px;
 }
@@ -8,6 +13,7 @@
 }
 
 .list-group-item.awesome-checkbox {
+    background-color: $white;
     padding-left: 35px;
     label {
         width: 100%;
@@ -40,4 +46,23 @@
 .brand-name {
   font-size: 20px;
   line-height: 25px;
+}
+
+.nav-header {
+  background-image: url("../images/header-profile.png");
+}
+
+.middle-box h1.logo-name {
+  font-size: 74px;
+  letter-spacing: -4px;
+  margin-bottom: 12px;
+}
+
+body.landing {
+  background: $main-background-color;
+  padding-top: 50px;
+}
+
+.white-bg .navbar-fixed-top, .white-bg .navbar-static-top {
+    background: $gray;
 }

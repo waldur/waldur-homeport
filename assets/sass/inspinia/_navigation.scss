@@ -34,7 +34,8 @@
 }
 
 .navbar-default {
-  background-color: $nav-bg;
+  background-color: transparent;
+  border-color: $nav-bg;
 }
 
 .navbar-top-links li {
@@ -77,6 +78,15 @@
   margin: 4px;
   text-align: left;
   font-weight: normal;
+}
+
+.dropdown-menu > .active > a,
+.dropdown-menu > .active > a:focus,
+.dropdown-menu > .active > a:hover {
+  color: #fff;
+  text-decoration: none;
+  background-color: $navy;
+  outline: 0;
 }
 
 .dropdown-menu > li > a.font-bold {
@@ -143,7 +153,8 @@
 .nav-header {
   padding: 33px 25px;
   background-color: $nav-bg;
-  background-image: url("../images/header-profile.png");
+  background-image: $nav-profil-pattern;
+
 }
 
 .pace-done .nav-header {
@@ -254,11 +265,15 @@ body.mini-navbar .navbar-default .nav > li > .nav-second-level li a {
   border-radius: 3px;
 }
 
+.fixed-nav .slimScrollDiv #side-menu {
+  padding-bottom: 60px;
+}
+
 .mini-navbar .nav-second-level li a {
   padding: 10px 10px 10px 15px;
 }
 
-.mini-navbar .nav-second-level {
+.mini-navbar .nav .nav-second-level {
   position: absolute;
   left: 70px;
   top: 0;
@@ -325,6 +340,7 @@ body.mini-navbar .navbar-default .nav > li > .nav-second-level li a {
   background: #fff;
   transition-duration: 0.4s;
   border-bottom: 1px solid #e7eaec !important;
+  z-index: 2030;
 }
 
 .navbar-fixed-top, .navbar-static-top {
@@ -333,6 +349,31 @@ body.mini-navbar .navbar-default .nav > li > .nav-second-level li a {
 
 .fixed-nav #wrapper {
   margin-top: 0;
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+  -moz-border-bottom-colors: none;
+  -moz-border-left-colors: none;
+  -moz-border-right-colors: none;
+  -moz-border-top-colors: none;
+  background: none;
+  border-color: #DDDDDD #DDDDDD rgba(0, 0, 0, 0);
+  border-bottom: $gray;
+  border-image: none;
+  border-style: solid;
+  border-width: 1px;
+  color: #555555;
+  cursor: default;
+}
+
+.nav.nav-tabs li {
+  background: none;
+  border: none;
+}
+
+body.fixed-nav #wrapper .navbar-static-side,
+body.fixed-nav #wrapper #page-wrapper {
+  margin-top: 60px;
 }
 
 body.top-navigation.fixed-nav #wrapper #page-wrapper {
@@ -426,6 +467,7 @@ body.fixed-sidebar .navbar-static-side,
 body.canvas-menu .navbar-static-side {
   position: fixed;
   width: $sidebar-width;
+  z-index: 2001;
   height: 100%;
 }
 
@@ -505,6 +547,7 @@ body.canvas-menu.mini-navbar .navbar-default .nav li .profile-element a span {
 }
 
 body.canvas-menu nav.navbar-static-side {
+  z-index: 2001;
   background: #2f4050;
   height: 100%;
   position: fixed;
@@ -514,115 +557,4 @@ body.canvas-menu nav.navbar-static-side {
 body.canvas-menu.mini-navbar nav.navbar-static-side {
   display: block;
   width: 220px;
-}
-
-
-@media (min-width: 768px) {
-  #page-wrapper {
-    position: inherit;
-    margin: 0 0 0 $sidebar-width;
-  }
-
-  .navbar-static-side {
-    position: absolute;
-    width: $sidebar-width;
-  }
-}
-
-@media (max-width: 768px) {
-
-  #page-wrapper {
-    position: inherit;
-    margin: 0 0 0 0;
-  }
-
-  .body-small .navbar-static-side {
-    display: none;
-    position: absolute;
-    width: 70px;
-  }
-
-  .body-small.mini-navbar .navbar-static-side {
-    display: block;
-  }
-
-  .navbar-header {
-    display: inline;
-    float: left;
-  }
-
-  .sidebard-panel {
-    z-index: 2;
-    position: relative;
-    width: auto;
-    min-height: 100% !important;
-  }
-
-  .sidebar-content .wrapper {
-    padding-right: 0;
-    z-index: 1;
-  }
-
-  .fixed-sidebar.body-small .navbar-static-side {
-    display: none;
-    position: fixed;
-    width: $sidebar-width;
-  }
-
-  .fixed-sidebar.body-small.mini-navbar .navbar-static-side {
-    display: block;
-  }
-}
-
-
-#wrapper {
-  width: 100%;
-}
-
-.wrapper {
-  padding: 0 20px;
-}
-
-.wrapper-content {
-  padding: 20px 10px 40px;
-}
-
-#page-wrapper {
-  padding: 0 15px;
-  position: relative !important;
-}
-
-@media (min-width: 768px) {
-  #page-wrapper {
-    position: inherit;
-    margin: 0 0 0 $sidebar-width;
-  }
-}
-
-.navbar-fixed-top {
-  margin-left: $sidebar-width;
-  background: white;
-}
-
-.navbar-header h2 {
-  font-weight: 400;
-  font-size: 20px;
-}
-
-.brand-name {
-  font-size: 20px;
-  line-height: 31px;
-  color: #c5d0de;
-  font-weight: normal;
-  margin-top: 6px;
-}
-
-.brand-img {
-  margin-right: 10px;
-  float: left;
-}
-
-.page-heading {
-  border-top: 0;
-  padding: 0 10px 20px 10px;
 }

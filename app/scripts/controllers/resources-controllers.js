@@ -85,7 +85,7 @@
               getClass: function(state) {
                 var cls = ENV.resourceStateColorClasses[state];
                 if (cls == 'processing') {
-                  return 'icon refresh spin';
+                  return 'icon fa-refresh fa-spin';
                 } else {
                   return 'status-circle ' + cls;
                 }

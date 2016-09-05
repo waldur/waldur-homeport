@@ -5,9 +5,6 @@
         url: '/projects/:uuid/',
         abstract: true,
         templateUrl: 'views/project/base.html',
-        data: {
-          bodyClass: 'white-bg'
-        },
         resolve: {
           currentProject: function(
             $stateParams, $state, $rootScope, projectsService, currentStateService) {
@@ -31,7 +28,6 @@
         controllerAs: 'ProjectAdd',
         data: {
           pageTitle: 'Create project',
-          bodyClass: 'white-bg'
         }
       })
 
@@ -116,7 +112,6 @@
         templateUrl: 'views/project/base.html',
         abstract: true,
         data: {
-          bodyClass: 'white-bg',
           pageTitle: 'Import resources from provider',
         }
       })
@@ -136,7 +131,6 @@
         url: ':category',
         templateUrl: 'views/appstore/store.html',
         data: {
-          bodyClass: 'white-bg',
           pageTitle: 'Marketplace'
         }
       })
@@ -146,7 +140,6 @@
         templateUrl: 'views/project/base.html',
         abstract: true,
         data: {
-          bodyClass: 'white-bg',
           pageTitle: 'Compare flavors',
         }
       })

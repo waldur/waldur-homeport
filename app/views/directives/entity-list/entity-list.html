@@ -8,9 +8,8 @@
     <div ng-show="entityList.list.length > 0 || entityList.searchInput || entityList.chosenFilters.length">
         <div ng-if="entityOptions.entityData.filterTemplateUrl" 
             ng-include="entityOptions.entityData.filterTemplateUrl"></div>
-        <ul class="sort-list"
-            ng-if="!entityOptions.entityData.hideControlButtons">
-            <li class="search divid">
+        <div ng-if="!entityOptions.entityData.hideControlButtons">
+            <div class="form-group">
                 <div class="search-box">
                     <input id="search-box"
                            type="text"
@@ -23,14 +22,14 @@
                       <i class="fa fa-search"></i>
                     </label>
                 </div>
-            </li>
-            <li class="full-width">
+            </div>
+            <div class="pull-right">
                 <filter-list filter-controller="entityList"></filter-list>
-            </li>
-            <li>
+            </div>
+            <div>
                 <div ng-include="'views/directives/entity-list/table-actions.html'"></div>
-            </li>
-        </ul>
+            </div>
+        </div>
     </div>
 
     <div class="no-styles" ng-show="entityList.list.length == 0 && !entityList.searchInput && !entityList.chosenFilters.length && !entityList.hideNoDataText">
