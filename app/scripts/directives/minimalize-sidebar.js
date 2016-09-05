@@ -10,7 +10,7 @@
     function minimalizeSidebar($timeout) {
         return {
             restrict: 'A',
-            template: '<a class="navbar-minimalize minimalize-styl-2 btn btn-primary btn-outline" ng-click="minimalize()"><i class="fa fa-bars"></i></a>',
+            template: '<a class="navbar-minimalize minimalize-styl-2 btn btn-primary btn-outline visible-xs" ng-click="minimalize()"><i class="fa fa-bars"></i></a>',
             controller: function ($scope, $element) {
                 $scope.minimalize = function () {
                     $("body").toggleClass("mini-navbar");

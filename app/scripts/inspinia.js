@@ -59,9 +59,10 @@ $(document).ready(function () {
 $(function() {
     $(window).bind("load resize", function() {
         if ($(document).width() < 769) {
-            $('body').addClass('body-small')
+            $('body').addClass('body-small');
         } else {
-            $('body').removeClass('body-small')
+            $('body').removeClass('body-small');
+            $('body').removeClass('mini-navbar');
         }
     })
 });
