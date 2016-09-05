@@ -52,6 +52,11 @@ img {
   display: none;
 }
 
+.mini-navbar #page-wrapper {
+  overflow: hidden;
+  width: 100%;
+}
+
 .nav-header {
   background-image: url("../images/header-profile.png");
 }
