@@ -28,12 +28,22 @@
       $scope.$on('currentProjectUpdated', function() {
         refreshProject();
       });
+      $scope.$on('currentCustomerUpdated', function() {
+        refreshCustomer();
+      });
       refreshProject();
+      refreshCustomer();
     }
 
     function refreshProject() {
       currentStateService.getProject().then(function(project) {
         ctrl.project = project;
+      });
+    }
+
+    function refreshCustomer() {
+      currentStateService.getCustomer().then(function(customer) {
+        ctrl.customer = customer;
       });
     }
 
