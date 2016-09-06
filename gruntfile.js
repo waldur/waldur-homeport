@@ -662,6 +662,7 @@ module.exports = function(grunt) {
         concat: {
             build: {
                 src: [
+                    'app/static/js/jquery.min.js',
                     'app/static/js/angular/angular.js',
                     'app/static/js/angular/angular-animate.js',
                     'app/static/js/angular/angular-cookies.js',
@@ -695,7 +696,6 @@ module.exports = function(grunt) {
                     'app/static/js/leaflet.js',
                     'app/static/js/angular/angular-leaflet-directive.js',
                     'app/static/js/angular/ui-bootstrap-tpls.min.js',
-                    'app/static/js/jquery.min.js',
                     'app/static/js/jquery.slimscroll.min.js',
                     'app/static/js/angular/angular-slimscroll.js',
                     'app/static/js/metisMenu.min.js',
