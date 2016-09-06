@@ -397,11 +397,6 @@
 
     $scope.items = [
       {
-        link: "dashboard.index",
-        icon: "fa-th-large",
-        label: "Dashboard",
-      },
-      {
         link: "appstore.store",
         icon: "fa-shopping-cart",
         label: "Service store",

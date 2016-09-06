@@ -10,6 +10,12 @@
             <li class="nav-header">
                 <sidebar-user/>
             </li>
+            <li ui-sref-active="active">
+                <a ui-sref="dashboard.index">
+                    <i class="fa fa-th-large"></i>
+                    Dashboard
+                </a>
+            </li>
             <li ui-sref-active="active"
                 ng-repeat="item in items"
                 ng-class="{active: $state.includes(item.state)}">

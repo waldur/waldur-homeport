@@ -3,22 +3,22 @@
 (function() {
 
   angular.module('ncsaas')
-  .directive('minimalizeSidebar', minimalizeSidebar);
+  .directive('sidebarToggle', sidebarToggle);
 
-  minimalizeSidebar.$inject = ['$timeout', '$rootScope'];
+  sidebarToggle.$inject = ['$timeout', '$rootScope'];
 
-  function minimalizeSidebar($timeout, $rootScope) {
+  function sidebarToggle($timeout, $rootScope) {
     return {
-      restrict: 'A',
-      template: '<a class="navbar-minimalize minimalize-styl-2 btn btn-primary btn-outline visible-xs" ng-click="minimalize()"><i class="fa fa-bars"></i></a>',
+      restrict: 'E',
+      template: '<a class="navbar-minimalize minimalize-styl-2 btn btn-primary btn-outline visible-xs" ng-click="toggleSidebar()"><i class="fa fa-bars"></i></a>',
       controller: function ($scope, $element) {
         $rootScope.$on('$stateChangeStart', function() {
           if ($('body').hasClass('mini-navbar') && $('body').hasClass('body-small')) {
-            $("body").removeClass("mini-navbar");
+            $('body').removeClass('mini-navbar');
           }
         });
-        $scope.minimalize = function () {
-          $("body").toggleClass("mini-navbar");
+        $scope.toggleSidebar = function () {
+          $('body').toggleClass('mini-navbar');
           if (!$('body').hasClass('mini-navbar') || $('body').hasClass('body-small')) {
             // Hide menu in order to smoothly turn on when maximize menu
             $('#side-menu').hide();

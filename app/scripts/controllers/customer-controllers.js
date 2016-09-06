@@ -413,11 +413,6 @@
     refreshCustomer();
     $scope.items = [
       {
-        link: "dashboard.index",
-        icon: "fa-th-large",
-        label: "Dashboard",
-      },
-      {
         label: "Providers",
         icon: "fa-database",
         link: "organization.providers({uuid: context.customer.uuid})",
