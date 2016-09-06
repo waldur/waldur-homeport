@@ -14,7 +14,7 @@
                 <pie-chart chart-data="DashboardController.currentUsageData"
                            chart-controller="DashboardController"></pie-chart>
                 <div>Current plan:
-                    <a ui-sref="organizations.plans({uuid: DashboardController.currentCustomer.uuid})">
+                    <a ui-sref="organization.plans({uuid: DashboardController.currentCustomer.uuid})">
                         {{DashboardController.currentPlan}}
                     </a>
                 </div>

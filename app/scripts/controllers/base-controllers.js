@@ -14,19 +14,7 @@
     ENV, baseControllerClass, $translate, LANGUAGE, projectsService, $q, ncUtils, ncUtilsFlash) {
     var controllerScope = this;
     var HeaderControllerClass = baseControllerClass.extend({
-      customers: [],
-      hasMore: false,
-      currentUser: {},
-      currentCustomer: {},
-      projects: [],
-      currentProject: {},
       showImport: ENV.showImport,
-      menuState: {
-        addSomethingMenu: false,
-        customerMenu: false,
-        profileMenu: false,
-        LangMenu: false
-      },
       checkQuotas: {
         projects: 'project',
         resources: 'resource'
@@ -34,11 +22,6 @@
 
       init: function() {
         this.activate();
-        this.menuItemActive = currentStateService.getActiveItem($state.current.name);
-        this.setSignalHandler('adjustCurrentCustomer', this.adjustCurrentCustomer.bind(controllerScope));
-        this.setSignalHandler('adjustCurrentProject', this.adjustCurrentProject.bind(controllerScope));
-        this.setSignalHandler('refreshProjectList', this.refreshProjectListHandler.bind(controllerScope));
-        this.setSignalHandler('refreshCustomerList', this.refreshCustomerListHandler.bind(controllerScope));
         this._super();
       },
       activate: function() {
@@ -83,223 +66,8 @@
           }
         }
       },
-
-      closeMenu: function() {
-        var vm = controllerScope;
-        for (var property in vm.menuState) {
-          if (vm.menuState.hasOwnProperty(property)) {
-            vm.menuState[property] = false;
-          }
-        }
-        $rootScope.$broadcast('clicked-out');
-      },
-      adjustCurrentCustomer: function(event, customer) {
-        this.setCurrentCustomer(customer, true);
-      },
-      adjustCurrentProject: function(event, project) {
-        this.setCurrentProject(project, true);
-      },
-      setCurrentCustomer: function(customer, skipRedirect) {
-        var vm = this;
-        customersService.$get(customer.uuid).then(function() {
-          currentStateService.setCustomer(customer);
-          vm.currentCustomer = customer;
-          $rootScope.$broadcast('currentCustomerUpdated');
-          vm.setFirstOrLastSelectedProject().then(function() {
-            if (!skipRedirect) {
-              $state.go('organizations.details', {uuid: vm.currentCustomer.uuid});
-            }
-          });
-        }, function() {
-          var index = vm.customers.indexOf(customer);
-          index > -1 && vm.customers.splice(index, 1);
-          customersService.getTopMenuList().then(function(response) {
-            vm.customers = response;
-            vm.hasMore = customersService.pages > 1;
-          });
-          alert('Sorry "' + customer.name + '" organization was deleted in another session. ' +
-            'Please try to select another organization.');
-          vm.menuState.customerMenu = true;
-        });
-      },
-      setCurrentProject: function(project, skipRedirect) {
-        var vm = this;
-        currentStateService.setProject(project);
-        currentStateService.handleSelectedProjects(vm.currentCustomer.uuid, project);
-        vm.currentProject = project;
-        $rootScope.$broadcast('currentProjectUpdated');
-        if (!skipRedirect && project) {
-          $state.go('projects.details', {uuid: project.uuid});
-        }
-      },
-      menuToggle: function(active, event) {
-        var vm = this;
-        for (var property in vm.menuState) {
-          if (vm.menuState.hasOwnProperty(property)) {
-            if (property !== active) {
-              vm.menuState[property] = false;
-            }
-          }
-        }
-        event.stopPropagation();
-        vm.menuState[active] = !vm.menuState[active];
-      },
-      mobileMenu: function() {
-        this.showMobileMenu = !this.showMobileMenu;
-      },
-      setFirstOrLastSelectedProject: function() {
-        var vm = this,
-          deferred = $q.defer();
-
-        var projectUuid = currentStateService.handleSelectedProjects(vm.currentCustomer.uuid);
-        if (projectUuid) {
-          projectsService.$get(projectUuid).then(function(project){
-            if (project.customer_uuid == vm.currentCustomer.uuid) {
-              currentStateService.setProject(project);
-              controllerScope.currentProject = project;
-            }
-            deferred.resolve();
-          }, function() {
-            currentStateService.removeLastSelectedProject(projectUuid);
-            getFirst();
-          });
-        } else {
-          getFirst();
-        }
-        function getFirst() {
-          projectsService.getFirst().then(function(firstProject) {
-            currentStateService.setProject(firstProject);
-            vm.currentProject = firstProject;
-            deferred.resolve();
-          });
-        }
-        return deferred.promise;
-      },
-      refreshProjectListHandler: function(event, params) {
-        var vm = this,
-          projectUuids,
-          currentProjectKey,
-          model;
-        if (params) {
-          model = params.model;
-          projectUuids = vm.projects.map(function(obj) {
-            return obj.uuid;
-          });
-          currentProjectKey = projectUuids.indexOf(model.uuid);
-          if (params.update) {
-            if (currentProjectKey + 1) {
-              vm.projects[currentProjectKey] = model;
-            }
-            if (model.uuid == vm.currentProject.uuid) {
-              vm.currentProject = model;
-              vm.setCurrentProject(model);
-            }
-          }
-          if (params.new) {
-            if (!vm.currentProject || !vm.currentProject.uuid || params.current) {
-              vm.setCurrentProject(model);
-            }
-          }
-          if (params.remove) {
-            if (currentProjectKey + 1) {
-              vm.projects.splice(currentProjectKey, 1);
-            }
-            if (model && model.uuid == vm.currentProject.uuid) {
-              currentStateService.removeLastSelectedProject(model.uuid);
-              vm.setFirstOrLastSelectedProject();
-            }
-          }
-          projectsService.cacheReset = true;
-        } else {
-          vm.setFirstOrLastSelectedProject();
-          return vm.getProjectList(true);
-        }
-      },
-      refreshCustomerListHandler: function(event, params) {
-        var vm = this,
-          customerUuids,
-          currentCustomerKey,
-          model;
-        if (params) {
-          model = params.model;
-          customerUuids = vm.customers.map(function(obj) {
-            return obj.uuid;
-          });
-          currentCustomerKey = customerUuids.indexOf(model.uuid);
-          if (params.update) {
-            if (currentCustomerKey + 1) {
-              vm.customers[currentCustomerKey] = model;
-            }
-            if (model.uuid == vm.currentCustomer.uuid) {
-              vm.currentCustomer = model;
-              vm.setCurrentCustomer(model);
-            }
-          }
-          if (params.new) {
-            if (vm.customers.indexOf(model) == -1) {
-              vm.customers.push(model);
-            }
-            if (!vm.currentCustomer || params.current) {
-              vm.setCurrentCustomer(model);
-            }
-          }
-          if (params.remove) {
-            if (currentCustomerKey + 1) {
-              vm.customers.splice(currentCustomerKey, 1);
-            }
-            if (model && model.uuid == vm.currentCustomer.uuid) {
-              vm.setFirstCustomer();
-            }
-          }
-        } else {
-          vm.setFirstCustomer();
-          vm.getCustomerList(true);
-        }
-
-      },
-      setFirstCustomer: function() {
-        var vm = this;
-        customersService.getPersonalOrFirstCustomer().then(function(firstCustomer) {
-          vm.setCurrentCustomer(firstCustomer);
-        });
-      },
-      getProjectList: function(cacheReset) {
-        var vm = this;
-        projectsService.cacheTime = ENV.topMenuProjectsCacheTime;
-        projectsService.cacheReset = cacheReset;
-
-        var promise = projectsService.getList().then(function(response) {
-          if (response.length < 1
-            && $state.current.name != 'projects.create') {
-            vm.currentProject = null;
-            vm.setCurrentProject(null);
-            if ($state.current.name != 'errorPage.notFound') {
-              ncUtilsFlash.info('You have no projects! Please add one.');
-            }
-          }
-          vm.projects = response;
-          return response;
-        });
-
-        ncUtils.blockElement('project-menu', promise);
-        return promise;
-      },
-      getCustomerList: function(cacheReset) {
-        var vm = this;
-        customersService.cacheTime = ENV.topMenuCustomerCacheTime;
-        customersService.cacheReset = cacheReset;
-
-        var promise = customersService.getList().then(function(response) {
-          vm.customers = response;
-          vm.hasMore = customersService.pages > 1;
-          return response;
-        });
-
-        ncUtils.blockElement('customer-menu', promise);
-        return promise;
-      },
       goToCurrentOrganization: function() {
-        $state.go('organizations.details', {uuid: this.currentCustomer.uuid});
+        $state.go('organization.details', {uuid: this.currentCustomer.uuid});
       },
       goToCustomer: function(customer) {
         currentStateService.setCustomer(customer);
@@ -310,7 +78,7 @@
       },
       goToCurrentProject: function() {
         if (this.currentProject) {
-          $state.go('projects.details', {uuid: this.currentProject.uuid});
+          $state.go('project.details', {uuid: this.currentProject.uuid});
         }
       },
       isOwner: function (customer) {
@@ -326,60 +94,269 @@
 
   angular.module('ncsaas')
     .controller('MainController', [
-      '$q', '$rootScope', '$state', 'authService', 'currentStateService', 'customersService', 'usersService',
-      'baseControllerClass', '$window', 'ENV', 'projectsService', 'ncUtils', MainController]);
+      '$scope',
+      '$q',
+      '$rootScope',
+      '$state',
+      'authService',
+      'currentStateService',
+      'customersService',
+      'usersService',
+      'baseControllerClass',
+      '$window',
+      'ENV',
+      'projectsService',
+      'ncUtils',
+      MainController]);
 
   function MainController(
-    $q, $rootScope, $state, authService, currentStateService, customersService, usersService, baseControllerClass,
-    $window, ENV, projectsService, ncUtils) {
-    var controllerScope = this;
+    $scope,
+    $q,
+    $rootScope,
+    $state,
+    authService,
+    currentStateService,
+    customersService,
+    usersService,
+    baseControllerClass,
+    $window,
+    ENV,
+    projectsService,
+    ncUtils) {
+    var ctrl = this;
     var Controller = baseControllerClass.extend({
+      customers: [],
+      hasMore: false,
+      currentUser: {},
+      currentCustomer: {},
+      projects: [],
+      currentProject: {},
 
       init: function() {
-        this.setSignalHandler('$stateChangeSuccess', this.stateChangeSuccessHandler.bind(controllerScope));
+        $scope.$on('$stateChangeSuccess', this.stateChangeSuccessHandler);
+        $scope.$on('adjustCurrentCustomer', function(event, customer) {
+          ctrl.setCurrentCustomer(customer);
+        });
+        $scope.$on('adjustCurrentProject', function(event, project) {
+          ctrl.setCurrentProject(project);
+        });
+        $scope.$on('refreshProjectList', this.refreshProjectListHandler);
+        $scope.$on('refreshCustomerList', this.refreshCustomerListHandler);
+
         this._super();
         this.modeName = ENV.modeName;
         $rootScope.buildId = ENV.buildId;
         $rootScope.logout = this.logout;
         this.isAuthenticated = authService.isAuthenticated;
       },
+
+      setCurrentCustomer: function(customer) {
+        customersService.$get(customer.uuid).then(function() {
+          ctrl.currentCustomer = customer;
+          currentStateService.setCustomer(customer);
+          $rootScope.$broadcast('currentCustomerUpdated');
+          currentStateService.getProject().then(function(project) {
+            if (project.customer_uuid !== customer.uuid) {
+              ctrl.setFirstOrLastSelectedProject();
+            }
+          });
+        }, function() {
+          var index = ctrl.customers.indexOf(customer);
+          index > -1 && ctrl.customers.splice(index, 1);
+          customersService.getTopMenuList().then(function(response) {
+            ctrl.customers = response;
+            ctrl.hasMore = customersService.pages > 1;
+          });
+          alert('Sorry "' + customer.name + '" organization was deleted in another session. ' +
+            'Please try to select another organization.');
+        });
+      },
+
+      setCurrentProject: function(project) {
+        currentStateService.setProject(project);
+        currentStateService.handleSelectedProjects(ctrl.currentCustomer.uuid, project);
+        ctrl.currentProject = project;
+        $rootScope.$broadcast('currentProjectUpdated');
+        customersService.$get(project.customer_uuid).then(function(customer) {
+          ctrl.setCurrentCustomer(customer);
+        });
+      },
+
+      setFirstOrLastSelectedProject: function() {
+        var deferred = $q.defer();
+
+        var projectUuid = currentStateService.handleSelectedProjects(ctrl.currentCustomer.uuid);
+        if (projectUuid) {
+          projectsService.$get(projectUuid).then(function(project){
+            if (project.customer_uuid == ctrl.currentCustomer.uuid) {
+              currentStateService.setProject(project);
+              $rootScope.$broadcast('currentProjectUpdated');
+              ctrl.currentProject = project;
+            }
+            deferred.resolve();
+          }, function() {
+            currentStateService.removeLastSelectedProject(projectUuid);
+            getFirst();
+          });
+        } else {
+          getFirst();
+        }
+        function getFirst() {
+          projectsService.getFirst().then(function(firstProject) {
+            currentStateService.setProject(firstProject);
+            $rootScope.$broadcast('currentProjectUpdated');
+            ctrl.currentProject = firstProject;
+            deferred.resolve();
+          });
+        }
+        return deferred.promise;
+      },
+
+      refreshProjectListHandler: function(event, params) {
+        var projectUuids,
+          currentProjectKey,
+          model;
+        if (params) {
+          model = params.model;
+          projectUuids = ctrl.projects.map(function(obj) {
+            return obj.uuid;
+          });
+          currentProjectKey = projectUuids.indexOf(model.uuid);
+          if (params.update) {
+            if (currentProjectKey + 1) {
+              ctrl.projects[currentProjectKey] = model;
+            }
+            if (model.uuid == ctrl.currentProject.uuid) {
+              ctrl.currentProject = model;
+              ctrl.setCurrentProject(model);
+            }
+          }
+          if (params.new) {
+            if (!ctrl.currentProject || !ctrl.currentProject.uuid || params.current) {
+              ctrl.setCurrentProject(model);
+            }
+          }
+          if (params.remove) {
+            if (currentProjectKey + 1) {
+              ctrl.projects.splice(currentProjectKey, 1);
+            }
+            if (model && model.uuid == ctrl.currentProject.uuid) {
+              currentStateService.removeLastSelectedProject(model.uuid);
+              ctrl.setFirstOrLastSelectedProject();
+            }
+          }
+          projectsService.cacheReset = true;
+        } else {
+          ctrl.setFirstOrLastSelectedProject();
+          return ctrl.getProjectList(true);
+        }
+      },
+
+      getProjectList: function(cacheReset) {
+        projectsService.cacheTime = ENV.topMenuProjectsCacheTime;
+        projectsService.cacheReset = cacheReset;
+
+        var promise = projectsService.getList().then(function(response) {
+          if (response.length < 1
+            && $state.current.name != 'project-create') {
+            ctrl.currentProject = null;
+            ctrl.setCurrentProject(null);
+            if ($state.current.name != 'errorPage.notFound') {
+              ncUtilsFlash.info('You have no projects! Please add one.');
+            }
+          }
+          ctrl.projects = response;
+          return response;
+        });
+
+        ncUtils.blockElement('project-menu', promise);
+        return promise;
+      },
+
+      getCustomerList: function(cacheReset) {
+        customersService.cacheTime = ENV.topMenuCustomerCacheTime;
+        customersService.cacheReset = cacheReset;
+ 
+        var promise = customersService.getList().then(function(response) {
+          ctrl.customers = response;
+          ctrl.hasMore = customersService.pages > 1;
+          return response;
+        });
+
+        ncUtils.blockElement('customer-menu', promise);
+        return promise;
+      },
+
+      refreshCustomerListHandler: function(event, params) {
+        var customerUuids,
+          currentCustomerKey,
+          model;
+        if (params) {
+          model = params.model;
+          customerUuids = ctrl.customers.map(function(obj) {
+            return obj.uuid;
+          });
+          currentCustomerKey = customerUuids.indexOf(model.uuid);
+          if (params.update) {
+            if (currentCustomerKey + 1) {
+              ctrl.customers[currentCustomerKey] = model;
+            }
+            if (model.uuid == ctrl.currentCustomer.uuid) {
+              ctrl.currentCustomer = model;
+              ctrl.setCurrentCustomer(model);
+            }
+          }
+          if (params.new) {
+            if (ctrl.customers.indexOf(model) == -1) {
+              ctrl.customers.push(model);
+            }
+            if (!ctrl.currentCustomer || params.current) {
+              ctrl.setCurrentCustomer(model);
+            }
+          }
+          if (params.remove) {
+            if (currentCustomerKey + 1) {
+              ctrl.customers.splice(currentCustomerKey, 1);
+            }
+            if (model && model.uuid == ctrl.currentCustomer.uuid) {
+              ctrl.setFirstCustomer();
+            }
+          }
+        } else {
+          ctrl.setFirstCustomer();
+          ctrl.getCustomerList(true);
+        }
+      },
+
+      setFirstCustomer: function() {
+        customersService.getPersonalOrFirstCustomer().then(function(firstCustomer) {
+          ctrl.setCurrentCustomer(firstCustomer);
+        });
+      },
+
       logout: function() {
         authService.signout();
         currentStateService.isCustomerDefined = false;
         $rootScope.$broadcast('abortRequests');
         $state.go('login');
       },
+
       stateChangeSuccessHandler: function(event, toState, toParams, fromState, fromParams) {
-        $rootScope.prevPreviousState = $rootScope.previousState;
-        $rootScope.prevPreviousParams = $rootScope.previousParams;
-        $rootScope.previousState = fromState;
-        $rootScope.previousParams= fromParams;
-        ncUtils.deregisterEvent('adjustCurrentCustomer');
-        ncUtils.deregisterEvent('adjustCurrentProject');
-        ncUtils.deregisterEvent('currentCustomerUpdated'); // clear currentCustomerUpdated event handlers
-        ncUtils.deregisterEvent('refreshProjectList'); // clear refreshProjectList event handlers
-        ncUtils.deregisterEvent('currentProjectUpdated'); // clear currentProjectUpdated event handlers
-        ncUtils.deregisterEvent('refreshCounts'); // clear refreshCounts event handlers
-        ncUtils.deregisterEvent('refreshCustomerList'); // clear refreshCustomerList event handlers
-        $rootScope.bodyClass = currentStateService.getBodyClass(toState.name);
+        ctrl.selectInitialCustomer();
+        ctrl.checkQuotas(toState.name);
+      },
+
+      selectInitialCustomer: function() {
         // if user is authenticated - he should have selected customer
         if (authService.isAuthenticated() && !currentStateService.isCustomerDefined) {
           var deferred = $q.defer(),
             projectDeferred = $q.defer();
           usersService.getCurrentUser().then(function(user) {
-            var date  = new Date(user.date_joined).getTime();
-            // XXX: Temporarily disable Intercom
-/*            window.Intercom('boot', {
-              app_id: ENV.IntercomAppId,
-              name: user.full_name,
-              email: user.email,
-              created_at: date
-            });
-*/
+            ctrl.bootIntercom();
             if ($window.localStorage[ENV.currentCustomerUuidStorageKey]) {
               customersService.$get($window.localStorage[ENV.currentCustomerUuidStorageKey]).then(function(customer) {
                 deferred.resolve(customer);
-                getProject()
+                ctrl.getProject(projectDeferred);
               }, setPersonalOrFirstCustomer);
             } else {
               setPersonalOrFirstCustomer();
@@ -388,55 +365,71 @@
             function setPersonalOrFirstCustomer() {
               customersService.getPersonalOrFirstCustomer(user.username).then(function(customer) {
                 deferred.resolve(customer);
-                getProject()
+                ctrl.getProject(projectDeferred);
               });
             }
           });
           currentStateService.setCustomer(deferred.promise);
           currentStateService.setProject(projectDeferred.promise);
+          $rootScope.$broadcast('currentProjectUpdated');
         }
+      },
 
-        if (ENV.entityCreateLink[toState.name]) {
-          currentStateService.isQuotaExceeded(ENV.entityCreateLink[toState.name]).then(function(response) {
+      getProject: function(projectDeferred) {
+        if ($window.localStorage[ENV.currentProjectUuidStorageKey]) {
+          projectsService.$get($window.localStorage[ENV.currentProjectUuidStorageKey]).then(function(response) {
+            currentStateService.getCustomer().then(function(customer) {
+              if (response.customer_uuid == customer.uuid) {
+                projectDeferred.resolve(response);
+              } else {
+                ctrl.getFirstProject(projectDeferred);
+              }
+            });
+          }, ctrl.getFirstProject);
+        } else {
+          ctrl.getFirstProject(projectDeferred);
+        }
+      },
+
+      getFirstProject: function(projectDeferred) {
+        var projectUuid = currentStateService.handleSelectedProjects($window.localStorage[ENV.currentCustomerUuidStorageKey]);
+        if (projectUuid) {
+          projectsService.$get(projectUuid).then(function(project) {
+            projectDeferred.resolve(project);
+          }, function() {
+            currentStateService.removeLastSelectedProject(projectUuid);
+          });
+        } else {
+          projectsService.getFirst().then(function(response) {
+            projectDeferred.resolve(response);
+          });
+        }
+      },
+
+      bootIntercom: function(user) {
+        // XXX: Temporarily disable Intercom
+        return;
+        var date = new Date(user.date_joined).getTime();
+        window.Intercom('boot', {
+          app_id: ENV.IntercomAppId,
+          name: user.full_name,
+          email: user.email,
+          created_at: date
+        });
+      },
+
+      checkQuotas: function(stateName) {
+        if (ENV.entityCreateLink[stateName] && currentStateService.isCustomerDefined) {
+          currentStateService.isQuotaExceeded(ENV.entityCreateLink[stateName]).then(function(response) {
             if (response) {
               $state.go('errorPage.limitQuota');
             }
           });
         }
-
-        function getProject() {
-          if ($window.localStorage[ENV.currentProjectUuidStorageKey]) {
-            projectsService.$get($window.localStorage[ENV.currentProjectUuidStorageKey]).then(function(response) {
-              currentStateService.getCustomer().then(function(customer) {
-                if (response.customer_uuid == customer.uuid) {
-                  projectDeferred.resolve(response);
-                } else {
-                  getFirstProject();
-                }
-              });
-            }, getFirstProject);
-          } else {
-            getFirstProject();
-          }
-          function getFirstProject() {
-            var projectUuid = currentStateService.handleSelectedProjects($window.localStorage[ENV.currentCustomerUuidStorageKey]);
-            if (projectUuid) {
-              projectsService.$get(projectUuid).then(function(project) {
-                projectDeferred.resolve(project);
-              }, function() {
-                currentStateService.removeLastSelectedProject(projectUuid);
-              });
-            } else {
-              projectsService.getFirst().then(function(response) {
-                projectDeferred.resolve(response);
-              });
-            }
-          }
-        }
       }
     });
 
-    controllerScope.__proto__ = new Controller();
+    ctrl.__proto__ = new Controller();
   }
 
   angular.module('ncsaas')

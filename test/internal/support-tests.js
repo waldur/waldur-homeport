@@ -14,17 +14,17 @@ describe('List and create issue', function() {
     description: "When I click on add user button error message is displayed"
   };
 
-  it('I should be able to login', function() {
+  xit('I should be able to login', function() {
     auth.login(user);
     expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/dashboard/');
   });
 
-  it('I should be able to go to "Organization support" page', function() {
+  xit('I should be able to go to "Organization support" page', function() {
     gotoSupport();
     expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/support/');
   });
 
-  it('I should be able to add new issue', function() {
+  xit('I should be able to add new issue', function() {
     var listPage = new pages.ListIssuesPage();
     listPage.gotoCreateIssue();
 

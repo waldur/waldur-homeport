@@ -2,124 +2,6 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('UserListController', [
-      'baseControllerListClass',
-      'usersService',
-      'projectPermissionsService',
-      '$rootScope',
-      'ENTITYLISTFIELDTYPES',
-      UserListController
-    ]);
-
-  function UserListController(baseControllerListClass, usersService, projectPermissionsService, $rootScope, ENTITYLISTFIELDTYPES) {
-    var controllerScope = this;
-    var UserController = baseControllerListClass.extend({
-      userProjects: {},
-      expandableProjectsKey: 'projects',
-
-      init:function() {
-        this.service = usersService;
-        this.controllerScope = controllerScope;
-        this._super();
-        this.searchFieldName = 'full_name';
-        this.searchFilters = [
-          {
-            name: 'potential',
-            title: 'Colleagues',
-            value: true
-          }
-        ];
-        this.actionButtonsListItems = [
-          {
-            title: 'User action placeholder',
-            clickFunction: function(user) {}
-          }
-        ];
-        this.expandableOptions = [
-          {
-            isList: true,
-            sectionTitle: 'Connected projects',
-            headBlock: 'heading',
-            listKey: 'userProjects',
-            modelId: 'username',
-            minipaginationData:
-            {
-              pageChange: 'getProjectsForUser',
-              pageEntityName: this.expandableProjectsKey
-            },
-            list: [
-              {
-                entityDetailsLink: 'projects.details({uuid: element.project_uuid})',
-                entityDetailsLinkText: 'project_name',
-                type: 'link'
-              }
-            ]
-          }
-        ];
-        this.entityOptions = {
-          entityData: {
-            title: 'Users',
-            noDataText: 'No users yet.',
-            hideActionButtons: true,
-            expandable: true
-          },
-          list: [
-            {
-              type: ENTITYLISTFIELDTYPES.avatarPictureField,
-              className: 'avatar',
-              avatarSrc: 'email',
-              showForMobile: ENTITYLISTFIELDTYPES.showForMobile
-            },
-            {
-              name: 'Name',
-              propertyName: 'full_name',
-              type: ENTITYLISTFIELDTYPES.name,
-              link: 'users.details({uuid: entity.uuid})',
-              className: 'name',
-              showForMobile: ENTITYLISTFIELDTYPES.showForMobile
-            },
-            {
-              name: 'Email',
-              propertyName: 'email',
-              type: ENTITYLISTFIELDTYPES.noType
-            },
-            {
-              name: 'Username',
-              propertyName: 'username',
-              type: ENTITYLISTFIELDTYPES.noType
-            }
-          ]
-        };
-      },
-      showMore: function(user) {
-        if (!this.userProjects[user.username]) {
-          this.getProjectsForUser(user.username);
-        }
-      },
-      getProjectsForUser: function(username, page) {
-        var vm = controllerScope;
-        var filter = {
-          username:username
-        };
-        vm.userProjects[username] = {data:null};
-        page = page || 1;
-        projectPermissionsService.page = page;
-        projectPermissionsService.pageSize = 5;
-        vm.userProjects[username].page = page;
-        projectPermissionsService.filterByCustomer = false;
-        projectPermissionsService.getList(filter).then(function(response) {
-          vm.userProjects[username].data = response;
-          vm.userProjects[username].pages = projectPermissionsService.pages;
-          $rootScope.$broadcast('mini-pagination:getNumberList', vm.userProjects[username].pages,
-            page, vm.getProjectsForUser.bind(vm), vm.expandableProjectsKey, username);
-        });
-      }
-    });
-
-    controllerScope.__proto__ = new UserController();
-  }
-
-  angular.module('ncsaas')
     .service('baseUserDetailUpdateController', [
       'baseControllerDetailUpdateClass',
       'usersService',
@@ -245,7 +127,7 @@
       init:function() {
         this.controllerScope = controllerScope;
         this._super();
-        this.detailsState = 'organizations.details';
+        this.detailsState = 'organization.details';
       }
     });
 
@@ -292,5 +174,64 @@
     });
 
     controllerScope.__proto__ = new Controller();
+  }
+})();
+
+
+(function() {
+  angular.module('ncsaas')
+    .constant('PRIVATE_USER_TABS', [
+      {
+          label: "Events",
+          icon: "fa-bell-o",
+          link: "profile.details"
+      },
+      {
+          label: "SSH Keys",
+          icon: "fa-key",
+          link: "profile.keys"
+      },
+      {
+          label: "Notifications",
+          icon: "fa-bookmark",
+          link: "profile.notifications"
+      },
+      {
+          label: "Manage",
+          icon: "fa-wrench",
+          link: "profile.manage"
+      }
+    ]);
+
+  angular.module('ncsaas')
+    .controller('UserDetailsController', UserDetailsController);
+
+  UserDetailsController.$inject = ['$scope', '$stateParams', 'usersService', 'PRIVATE_USER_TABS'];
+  function UserDetailsController($scope, $stateParams, usersService, PRIVATE_USER_TABS) {
+    var publicTabs = [
+      {
+          label: "Events",
+          icon: "fa-bell-o",
+          link: "users.details({uuid: context.user.uuid})"
+      },
+      {
+          label: "SSH Keys",
+          icon: "fa-key",
+          link: "users.keys({uuid: context.user.uuid})"
+      }
+    ];
+    usersService.getCurrentUser().then(function(user) {
+      if (angular.isUndefined($stateParams.uuid) || $stateParams.uuid === user.uuid) {
+        $scope.items = PRIVATE_USER_TABS;
+        $scope.currentUser = user;
+        $scope.context = {user: user};
+      } else {
+        usersService.$get($stateParams.uuid).then(function(user) {
+          $scope.items = publicTabs;
+          $scope.currentUser = user;
+          $scope.context = {user: user};
+        });
+      }
+    });
   }
 })();

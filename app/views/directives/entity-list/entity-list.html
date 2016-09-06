@@ -1,31 +1,39 @@
-<div>
+<div ng-if="entityList.loading">
+    <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
+</div>
+<div ng-if="!entityList.loading">
     <div class="container" ng-if="entityOptions.entityData.title">
         <h1>{{ entityOptions.entityData.title }}</h1>
     </div>
-    <div class="white-box" ng-show="entityList.list.length > 0 || entityList.searchInput || entityList.chosenFilters.length">
+    <div ng-show="entityList.list.length > 0 || entityList.searchInput || entityList.chosenFilters.length">
         <div ng-if="entityOptions.entityData.filterTemplateUrl" 
             ng-include="entityOptions.entityData.filterTemplateUrl"></div>
-        <ul class="sort-list"
-            ng-if="!entityOptions.entityData.hideControlButtons">
-            <li class="search divid">
+        <div ng-if="!entityOptions.entityData.hideControlButtons">
+            <div class="form-group">
                 <div class="search-box">
-                    <input type="text" ng-model='entityList.searchInput'
+                    <input id="search-box"
+                           type="text"
+                           class="form-control" 
+                           ng-model='entityList.searchInput'
                            ng-model-options="{ debounce: 500 }"
-                           ng-change="entityList.search()">
-                    <button class="search-button" ng-click="entityList.search()"></button>
+                           ng-change="entityList.search()"
+                           placeholder="Search">
+                    <label for="search-box">
+                      <i class="fa fa-search"></i>
+                    </label>
                 </div>
-            </li>
-            <li class="full-width">
+            </div>
+            <div class="pull-right">
                 <filter-list filter-controller="entityList"></filter-list>
-            </li>
-            <li>
+            </div>
+            <div>
                 <div ng-include="'views/directives/entity-list/table-actions.html'"></div>
-            </li>
-        </ul>
+            </div>
+        </div>
     </div>
 
-    <div class="white-box no-styles" ng-show="entityList.list.length == 0 && !entityList.searchInput && !entityList.chosenFilters.length && !entityList.hideNoDataText">
-        <h2 class="app-title" ng-bind="::entityOptions.entityData.noDataText"></h2>
+    <div class="no-styles" ng-show="entityList.list.length == 0 && !entityList.searchInput && !entityList.chosenFilters.length && !entityList.hideNoDataText">
+        <h3 class="text-center" ng-bind="::entityOptions.entityData.noDataText"></h3>
         <div class="decision" ng-if="!entityOptions.entityData.hideActions">
             <div class="col">
                 <div ng-include="'views/directives/entity-list/table-actions.html'"></div>
@@ -33,11 +41,11 @@
         </div>
     </div>
 
-    <div class="white-box no-styles" ng-show="entityList.list.length == 0 && (entityList.searchInput || entityList.chosenFilters.length)">
-        <h2 class="app-title" ng-bind="entityOptions.entityData.noMatchesText"></h2>
+    <div class="no-styles" ng-show="entityList.list.length == 0 && (entityList.searchInput || entityList.chosenFilters.length)">
+        <h3 class="text-center" ng-bind="entityOptions.entityData.noMatchesText"></h3>
     </div>
 
-    <div class="white-box list-box" ng-show="entityList.list.length > 0">
+    <div class="list-box" ng-show="entityList.list.length > 0">
         <ul class="mobile-show compact-list"
             ng-if="entityOptions.entityData.rowTemplateUrl">
             <li class="compact-list__item"
@@ -116,7 +124,7 @@
                               class="icon" ng-class="entity[field.propertyName]">
                         </span>
 
-                        <h3 ng-switch-when="name" class="item-title">
+                        <span ng-switch-when="name" class="item-title">
                             <a ng-if="field.link" stoppropagation
                                ng-click="entity.expandItemOpen = false"
                                ui-sref="{{ field.link }}">{{ entity[field.propertyName] }}</a>
@@ -131,7 +139,7 @@
                                   ng-if="field.description && field.description.condition == entity[field.description.field]">
                                 {{ field.description.text }}
                             </span>
-                        </h3>
+                        </span>
 
                         <a ng-switch-when="link" ng-if="field.link" ui-sref="{{ field.link }}">
                             {{ entity[field.propertyName] }}
@@ -217,8 +225,10 @@
                          ng-switch="entityOptions.entityData.actionButtonsType">
                          <div ng-switch-when="refresh" 
                               class="actions-button">
-                             <a class="button reopen"
-                               ng-click="entityList.getCommentsForIssue(entity.key)"></a>
+                             <a class="btn btn-primary"
+                               ng-click="entityList.getCommentsForIssue(entity.key)">
+                                 <i class="fa fa-refresh"></i>
+                               </a>
                          </div>
 
                          <action-button-resource

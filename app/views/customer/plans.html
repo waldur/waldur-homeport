@@ -1,13 +1,10 @@
 <div ng-controller="PlansListController as PlanList">
-    <div class="container">
-        <h1>Plans</h1>
+    <div ng-if="PlanList.loading">
+        <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
     </div>
-    <div class="white-box">
+    <div ng-if="!PlanList.loading">
         <section class="content">
-            <h2 class="app-title"><a ui-sref="organizations.details({uuid: PlanList.customer.uuid})">{{ PlanList.customer.name }}</a></h2>
-            <div>
-                <h4 class="app-title">Choose new plan</h4>
-            </div>
+            <h4 class="app-title">Choose new plan</h4>
             <div class="plans">
                 <div class="plan" ng-repeat="plan in PlanList.list">
                     <div class="plan-item"
@@ -34,11 +31,11 @@
             </div>
             <div class="decision">
                 <div class="col">
-                    <a class="button-apply" ng-class="{'disabled': !PlanList.selectedPlan}"
+                    <a class="btn btn-primary" ng-class="{'disabled': !PlanList.selectedPlan}"
                        submit-button="PlanList.createOrder()">Confirm changing your plan</a>
                 </div>
                 <div class="col">
-                    <a class="button-cancel" ng-click="PlanList.cancel()">Cancel</a>
+                    <a class="btn btn-default" ng-click="PlanList.cancel()">Cancel</a>
                 </div>
             </div>
         </section>

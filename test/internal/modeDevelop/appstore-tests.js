@@ -25,12 +25,12 @@ for(var i = 0; i < testData.length; i++) {
   (function(user, data, resourceName, addedResource) {
     describe('App store creation test for administrator(' + user.username + '):', function() {
 
-      it('I should be able to login', function() {
+      xit('I should be able to login', function() {
         auth.login(user);
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/dashboard/');
       });
 
-      it('I should be able to go to "Appstore" page', function() {
+      xit('I should be able to go to "Appstore" page', function() {
         helpers.chooseCustomer(data.customer);
         element(by.cssContainingText('ul.nav-list.views li a', 'Appstore')).click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/appstore/');
@@ -68,7 +68,7 @@ for(var i = 0; i < testData.length; i++) {
         expect(element(by.cssContainingText('span.name', resourceName)).isPresent()).toBe(true);
       });
 
-      it('I should be able to logout', function() {
+      xit('I should be able to logout', function() {
         auth.logout();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/');
       });

@@ -1,4 +1,8 @@
  <div ng-controller="DashboardCostController as DashboardController">
+    <div ng-if="DashboardController.loading">
+        <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
+    </div>
+    <div ng-if="!DashboardController.loading">
      <div class="white-box empty-data-block" ng-if="DashboardController.table.length <= 1">
          <h1>Not enough data for cost analysis</h1>
          <h2 visible="import" visible="providers">Please import resources or add more providers</h2>
@@ -101,7 +105,7 @@
                             <span ng-if="!resource.scope">{{::resource.scope_name}}</span>
                         </div>
                         <div class="td"><span ng-bind="::resource.resource_type"></span></div>
-                        <div class="td"><a ui-sref="projects.details({uuid: resource.project_uuid})">{{::resource.project_name}}</a></div>
+                        <div class="td"><a ui-sref="project.details({uuid: resource.project_uuid})">{{::resource.project_name}}</a></div>
                         <div class="td"><span>{{ ::resource.total | defaultCurrency }}</span></div>
                     </div>
                 </div>
@@ -121,5 +125,6 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </div>

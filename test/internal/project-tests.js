@@ -14,12 +14,12 @@ for(var i = 0; i < testData.length; i++) {
   (function(user, projects, customer) {
     describe('Project list test for user ' + user.username + ':', function() {
 
-      it('I should be able to login', function() {
+      xit('I should be able to login', function() {
         auth.login(user);
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/dashboard/');
       });
 
-      it('I should be able to go to projects list', function() {
+      xit('I should be able to go to projects list', function() {
         helpers.chooseCustomer(customer);
         goToProjectList();
       });
@@ -27,14 +27,14 @@ for(var i = 0; i < testData.length; i++) {
 
       for(var j = 0; j < data.projects.length; j++) {
         (function(project) {
-          it('I should be able to see ' + project + ' at projects list page', function() {
+          xit('I should be able to see ' + project + ' at projects list page', function() {
             element(by.model('entityList.searchInput')).sendKeys(project);
             expect(element(by.cssContainingText('h3.item-title a', project)).isPresent()).toBe(true);
           });
         })(data.projects[j]);
       }
 
-      it('I should be able to logout', function() {
+      xit('I should be able to logout', function() {
         auth.logout();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/');
       });
@@ -62,12 +62,12 @@ for(var i = 0; i < addProjectTestData.length; i++) {
 
   (function(data, user, projectName) {
     describe('Project creation test for customer owner(' + user.username + '):', function() {
-      it('I should be able to login', function() {
+      xit('I should be able to login', function() {
         auth.login(user);
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/dashboard/');
       });
 
-      it('I should be able to go to "project add" page', function() {
+      xit('I should be able to go to "project add" page', function() {
         helpers.chooseCustomer(data.customer);
         goToProjectList();
 
@@ -75,7 +75,7 @@ for(var i = 0; i < addProjectTestData.length; i++) {
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/projects/add/');
       });
 
-      it('I should be able to add new project', function() {
+      xit('I should be able to add new project', function() {
         // fill name
         element(by.model('ProjectAdd.project.name')).sendKeys(projectName);
 
@@ -84,13 +84,13 @@ for(var i = 0; i < addProjectTestData.length; i++) {
         expect(element(by.cssContainingText('.details-about .name', projectName)).isPresent()).toBe(true);
       });
 
-      it('I should be able to see ' + projectName + ' at projects list page', function() {
+      xit('I should be able to see ' + projectName + ' at projects list page', function() {
         goToProjectList();
         element(by.model('entityList.searchInput')).sendKeys(projectName);
         expect(element(by.cssContainingText('h3.item-title a', projectName)).isPresent()).toBe(true);
       });
 
-      it('I should be able to logout', function() {
+      xit('I should be able to logout', function() {
         auth.logout();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/');
       });
@@ -113,12 +113,12 @@ for(var i = 0; i < addUserToProjectTestData.length; i++) {
 
   (function(data, user) {
     describe('Customer owner(' + user.username + ') should be able to add user to project:', function() {
-      it('I should be able to login', function() {
+      xit('I should be able to login', function() {
         auth.login(user);
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/dashboard/');
       });
 
-      it('I should be able to go to "users tab" at project "' + projectName + '"', function() {
+      xit('I should be able to go to "users tab" at project "' + projectName + '"', function() {
         helpers.chooseCustomer(data.customer);
         goToProjectList();
         element(by.model('entityList.searchInput')).sendKeys(projectName);
@@ -128,7 +128,7 @@ for(var i = 0; i < addUserToProjectTestData.length; i++) {
         expect(element(by.cssContainingText('.add-or-remove .app-title', 'Administrator')).isPresent()).toBe(true);
       });
 
-      it('I should be able to add user to project', function() {
+      xit('I should be able to add user to project', function() {
         element(by.css('#admin input')).sendKeys(data.adminUser);
         element(by.cssContainingText('#admin .angucomplete-row .angucomplete-title', data.adminUser)).click();
         expect(element(by.cssContainingText('.add-or-remove .added', data.adminUser)).isPresent()).toBe(true);
@@ -144,7 +144,7 @@ for(var i = 0; i < addUserToProjectTestData.length; i++) {
         expect(element(by.cssContainingText('.add-or-remove .added', data.managerUser)).isPresent()).toBe(false);
       });
 
-      it('I should be able to logout', function() {
+      xit('I should be able to logout', function() {
         auth.logout();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/');
       });

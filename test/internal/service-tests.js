@@ -20,12 +20,12 @@ for(var i = 0; i < testData.length; i++) {
   (function(user, data) {
     describe('Service creation test for customer owner(' + user.username + '):', function() {
 
-      it('I should be able to login', function() {
+      xit('I should be able to login', function() {
         auth.login(user);
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/dashboard/');
       });
 
-      it('I should be able to go to "service add" page', function() {
+      xit('I should be able to go to "service add" page', function() {
         element(by.css('.dropdown.customers .active-context')).click();
         element(by.cssContainingText('.tabs-links li', 'Providers')).click();
         browser.wait(function() {
@@ -35,7 +35,7 @@ for(var i = 0; i < testData.length; i++) {
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/services/add/');
       });
 
-      it('I should be able to add new service', function() {
+      xit('I should be able to add new service', function() {
         // choose service
         element(by.cssContainingText('h3', data.service)).click();
         // fill name
@@ -57,7 +57,7 @@ for(var i = 0; i < testData.length; i++) {
         }, constants.WATING_TIME);
       });
 
-      it('I should be able to find added service "' + data.name + '" in service list', function() {
+      xit('I should be able to find added service "' + data.name + '" in service list', function() {
         element(by.model('generalSearch')).sendKeys(data.name);
         browser.wait(function() {
           return element(by.cssContainingText('span', data.service)).isPresent();
@@ -65,14 +65,14 @@ for(var i = 0; i < testData.length; i++) {
         expect(element(by.cssContainingText('.object-list .name span', data.name)).isPresent()).toBe(true);
       });
 
-      it('I should be able to delete service', function() {
+      xit('I should be able to delete service', function() {
         element(by.css('.object-list .list-item .actions-button a.button')).click();
         element(by.cssContainingText('.object-list .list-item .actions-dropdown li a', 'Remove')).click();
         browser.switchTo().alert().accept();
         expect(element(by.cssContainingText('.object-list .name span', data.name)).isPresent()).toBe(false);
       });
 
-      it('I should be able to logout', function() {
+      xit('I should be able to logout', function() {
         auth.logout();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/');
       });

@@ -1,29 +1,32 @@
 <div ng-if="!controller.model">
-  <h3>Loading resource</h3>
+  <h1 class="text-center">
+    <i class="icon fa-spinner fa-spin"></i>
+  </h1>
 </div>
 <div ng-if="controller.model">
-  <div class="resource-details">
-    <div class="compact-list__item main">
-      <div class="compact-list__header background">
-        <div class="compact-list__title">
+  <div class="row">
+    <div class="col-md-9 col-xs-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
           Resource details
         </div>
-      </div>
-      <div class="compact-list__details">
-        <resource-details resource="controller.model"></resource-details>
-      </div>
-    </div>
-    <div class="compact-list__item sidebar">
-      <div class="compact-list__header background">
-        <div class="compact-list__title">
-          Latest status events
+        <div class="panel-body">
+          <resource-details resource="controller.model"></resource-details>
         </div>
       </div>
-      <div class="compact-list__details">
-        <resource-events resource="controller.model"></resource-events>
+    </div>
+    <div class="col-md-3 col-xs-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Latest status events
+        </div>
+        <div class="panel-body">
+          <resource-events resource="controller.model"></resource-events>
+        </div>
       </div>
     </div>
   </div>
+
   <action-list-resource
     entity="controller.model"
     controller="controller">

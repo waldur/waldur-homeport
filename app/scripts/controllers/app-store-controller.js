@@ -771,6 +771,9 @@
             project_uuid: project.uuid,
             field: ['url', 'quotas']
           }).then(function(services) {
+            if (services.length === 0) {
+              return;
+            }
             angular.forEach(services, function(service) {
               var quotas = service.quotas.filter(function(quota) {
                 return quota.limit !== -1 && quota.usage >= (quota.limit * vm.quotaThreshold);
@@ -845,7 +848,7 @@
         return contract.$save().then(function(response) {
           premiumSupportContractsService.clearAllCacheForCurrentEndpoint();
           $rootScope.$broadcast('refreshProjectList');
-          $state.go('resources.list', {tab: 'premiumSupport'});
+          $state.go('project.support', {uuid: this.currentProject.uuid});
           return true;
         }, function(response) {
           vm.errors = response.data;
@@ -933,7 +936,7 @@
       },
       successRedirect: function(model) {
         if (this.isSupportSelected()) {
-          return $state.go('resources.list', {tab: 'premiumSupport'});
+          return $state.go('project.support', {uuid: this.currentProject.uuid});
         } else {
           $state.go('resources.details', {uuid: model.uuid, resource_type: model.resource_type});
         }

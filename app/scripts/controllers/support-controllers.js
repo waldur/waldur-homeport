@@ -26,12 +26,10 @@
       init:function() {
         this.service = issuesService;
         this.controllerScope = controllerScope;
-        this.blockUIElement = 'issue-list';
         this._super();
         this.searchFieldName = 'search';
         this.entityOptions = {
           entityData: {
-            title: 'Support',
             createLink: 'support.create',
             createLinkText: 'Create ticket',
             noDataText: 'No tickets yet.',
@@ -166,7 +164,7 @@
       },
       cancel: function() {
         if (this.type === 'remove_user') {
-          return $state.go('profile.details', {tab: 'manage'});
+          return $state.go('profile.manage');
         }
         this._super();
       }

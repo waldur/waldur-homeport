@@ -21,18 +21,18 @@ for(var i = 0; i < testData.length; i++) {
   (function(user, data, resourceName) {
     describe('App store creation test for administrator(' + user.username + '):', function() {
 
-      it('I should be able to login', function() {
+      xit('I should be able to login', function() {
         auth.login(user);
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/dashboard/');
       });
 
-      it('I should be able to go to "Appstore" page', function() {
+      xit('I should be able to go to "Appstore" page', function() {
         helpers.chooseCustomer(data.customer);
         element(by.cssContainingText('ul.nav-list.views li a', 'Appstore')).click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/appstore/');
       });
 
-      it('I should be able to add new resource', function() {
+      xit('I should be able to add new resource', function() {
         // choose category
         element(by.cssContainingText('h3', data.category)).click();
         // choose service
@@ -52,12 +52,12 @@ for(var i = 0; i < testData.length; i++) {
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/resources/VMs');
       });
 
-      it('I should be able to find added resource in resource list', function() {
+      xit('I should be able to find added resource in resource list', function() {
         element(by.model('generalSearch')).sendKeys(resourceName);
         expect(element(by.cssContainingText('h3.item-title a', resourceName)).isPresent()).toBe(true);
       });
 
-      it('I should be able to logout', function() {
+      xit('I should be able to logout', function() {
         auth.logout();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/');
       });

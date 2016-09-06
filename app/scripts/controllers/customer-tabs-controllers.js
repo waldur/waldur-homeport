@@ -31,7 +31,6 @@
             title: 'Settings'
           }
         ];
-        this.blockUIElement = 'tab-content';
         this._super();
         this.entityOptions.list[0].type = 'editable';
         this.entityOptions.entityData.expandable = true;
@@ -94,10 +93,10 @@
     var Controller = BaseProjectListController.extend({
       init: function() {
         this.controllerScope = controllerScope;
-        this.blockUIElement = 'tab-content';
         this._super();
         this.entityOptions.entityData.title = '';
         this.entityOptions.entityData.checkQuotas = 'project';
+        this.entityOptions.createLink = 'project-create';
       }
     });
 
@@ -126,7 +125,7 @@
         this.entityOptions.list.push({
           name: 'Project',
           propertyName: 'project_name',
-          link: 'projects.details({uuid: entity.project_uuid})',
+          link: 'project.details({uuid: entity.project_uuid})',
           type: ENTITYLISTFIELDTYPES.name
         });
         this.rowFields = angular.copy(this.rowFields);
@@ -219,7 +218,6 @@
     var controllerClass = BaseAlertsListController.extend({
       init: function() {
         this.controllerScope = controllerScope;
-        this.blockUIElement = 'tab-content';
         this._super();
       },
       getList: function(filter) {
@@ -448,7 +446,7 @@
                 };
                 var cls = classes[state];
                 if (cls == 'processing') {
-                  return 'icon refresh spin';
+                  return 'icon fa-refresh fa-spin';
                 } else {
                   return 'status-circle ' + cls;
                 }
@@ -664,25 +662,53 @@
     .controller('CustomerDeleteTabController', [
       'baseControllerClass',
       'customersService',
+      'usersService',
       'currentStateService',
       '$state',
+      '$q',
+      'ENV',
       CustomerDeleteTabController
     ]);
 
   function CustomerDeleteTabController(
     baseControllerClass,
     customersService,
+    usersService,
     currentStateService,
-    $state
+    $state,
+    $q,
+    ENV
   ) {
     var controllerScope = this;
     var DeleteController = baseControllerClass.extend({
       init: function() {
         this.controllerScope = controllerScope;
         this._super();
+        this.loadInitial();
+      },
+      loadInitial: function() {
         var vm = this;
-        currentStateService.getCustomer().then(function(customer) {
+        vm.loading = true;
+        return currentStateService.getCustomer().then(function(customer) {
           vm.customer = customer;
+          return vm.checkCanRemoveCustomer(customer).then(function(result) {
+            vm.canRemoveCustomer = result;
+          });
+        }).finally(function() {
+          vm.loading = false;
+        });
+      },
+      checkCanRemoveCustomer: function(customer) {
+        return usersService.getCurrentUser().then(function(user) {
+          if (user.is_staff) {
+            return $q.when(true);
+          }
+          for (var i = 0; i < customer.owners.length; i++) {
+            if (user.uuid === customer.owners[i].uuid) {
+              return $q.when(ENV.ownerCanManageCustomer);
+            }
+          }
+          return $q.when(false);
         });
       },
       removeCustomer: function() {
@@ -694,7 +720,7 @@
             customersService.clearAllCacheForCurrentEndpoint();
             customersService.getPersonalOrFirstCustomer(instance.name).then(function(customer) {
               currentStateService.setCustomer(customer);
-              $state.go('organizations.details', {uuid: customer.uuid, tab: 'eventlog'});
+              $state.go('organization.details', {uuid: customer.uuid});
             });
           }, function() {
             currentStateService.setCustomer(vm.customer);

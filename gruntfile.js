@@ -44,6 +44,7 @@ module.exports = function(grunt) {
                         'app/static/css/angular-block-ui.css',
                         'app/static/css/leaflet.css',
                         'app/static/css/flags16.css',
+                        'app/static/css/metisMenu.css',
                     ]
                 }
             }
@@ -359,6 +360,48 @@ module.exports = function(grunt) {
                         dest: 'app/static/js/angular/',
                         filter: 'isFile'
                     },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/jquery/dist/',
+                        src: ['jquery.min.js'],
+                        dest: 'app/static/js/',
+                        filter: 'isFile'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/slimScroll/',
+                        src: ['jquery.slimscroll.min.js'],
+                        dest: 'app/static/js/',
+                        filter: 'isFile'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/angular-slimscroll/',
+                        src: ['angular-slimscroll.js'],
+                        dest: 'app/static/js/angular/',
+                        filter: 'isFile'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/metisMenu/dist/',
+                        src: ['metisMenu.css'],
+                        dest: 'app/static/css/',
+                        filter: 'isFile'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/metisMenu/dist/',
+                        src: ['metisMenu.min.js'],
+                        dest: 'app/static/js/',
+                        filter: 'isFile'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/pace/',
+                        src: ['pace.min.js'],
+                        dest: 'app/static/js/',
+                        filter: 'isFile'
+                    }
                 ]
             },
             modePrivateIaas: {
@@ -647,10 +690,16 @@ module.exports = function(grunt) {
                     'app/scripts/controllers/*.js',
                     'app/scripts/directives/*.js',
                     'app/scripts/services/*.js',
+                    'app/scripts/routes/*.js',
                     'app/static/js/angular/angular-block-ui.js',
                     'app/static/js/leaflet.js',
                     'app/static/js/angular/angular-leaflet-directive.js',
                     'app/static/js/angular/ui-bootstrap-tpls.min.js',
+                    'app/static/js/jquery.min.js',
+                    'app/static/js/jquery.slimscroll.min.js',
+                    'app/static/js/angular/angular-slimscroll.js',
+                    'app/static/js/metisMenu.min.js',
+                    'app/static/js/pace.min.js',
                 ],
                 dest: 'app/static/js/main/main.js'
             }
@@ -788,7 +837,7 @@ module.exports = function(grunt) {
     grunt.registerTask(
       'build', ['copy:main', 'image', 'sass', 'autoprefixer', 'cssmin']);
     grunt.registerTask(
-      'run', ['copy:main', 'env:dev', 'preprocess:index', 'connect:server', 'image', 'sass', 'autoprefixer',
+      'run', ['po2json_angular_translate', 'copy:main', 'env:dev', 'preprocess:index', 'connect:server', 'image', 'sass', 'autoprefixer',
           'copy:' + mode, 'focus:dev']);
     grunt.registerTask('serve', ['connect',]);
     grunt.registerTask('default', ['run']);

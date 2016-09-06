@@ -62,17 +62,17 @@
             Register
         </button>
     </form>
-    <p><small>Or use social login</small></p>
+    <p visible="localSignin"><small>Or use social login</small></p>
     <div visible="socialSignup" class="m-b-sm">
         <button ng-click="auth.authenticate('google')" class="btn btn-google btn-block">
             <i class="fa fa-google-plus-square" aria-hidden="true"></i>
-            Google
+            Sign in with Google
         </button>
     </div>
     <div visible="socialSignup" class="m-b-sm">
         <button ng-click="auth.authenticate('facebook')" class="btn btn-facebook btn-block">
             <i class="fa fa-facebook-square" aria-hidden="true"></i>
-            Facebook
+            Sign in with Facebook
         </button>
     </div>
     <div visible="estonianId" class="m-b-sm">
@@ -80,7 +80,7 @@
             <input type="hidden" name="openid_identifier" value="https://openid.ee/server/xrds/eid" />
             <button type="submit" class="btn btn-eid btn-block">
                 <i class="fa fa-openid" aria-hidden="true"></i>
-                Log in with ID card
+                Sign in with ID card
             </button>
         </form>
     </div>
@@ -89,7 +89,7 @@
             <input type="hidden" name="openid_identifier" value="https://openid.ee/server/xrds/mid" />
             <button type="submit" class="btn btn-mid btn-block">
                 <i class="fa fa-phone-square" aria-hidden="true"></i>
-                Log in with Mobile ID
+                Sign in with Mobile ID
             </button>
         </form>
     </div>
@@ -105,5 +105,5 @@
             Login
         </a>
     </div>
-    <p><small>© OpenNode</small></p>
+    <p><small><a href="http://opennodecloud.com/" target="_blank">© OpenNode</a></small></p>
 </div>

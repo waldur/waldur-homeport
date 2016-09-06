@@ -24,13 +24,13 @@ for(var i = 0; i < testData.length; i++) {
   (function(user, data, customer) {
     describe('Key add test for customer owner(' + user.username + '):', function() {
 
-      it('I should be able to login', function() {
+      xit('I should be able to login', function() {
         auth.login(user);
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/dashboard/');
         helpers.chooseCustomer(customer);
       });
 
-      it('I should be able go to backups list page', function() {
+      xit('I should be able go to backups list page', function() {
         browser.get('/#/backups/');
         expect(element(by.cssContainingText('.container h1', 'Backups')).isPresent()).toBe(true);
       });
@@ -56,7 +56,7 @@ for(var i = 0; i < testData.length; i++) {
         expect(element(by.cssContainingText('h3.item-title a', data.description)).isPresent()).toBe(true);
       });
 
-      it('I should be able to logout', function() {
+      xit('I should be able to logout', function() {
         auth.logout();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/');
       });

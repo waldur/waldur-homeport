@@ -1,8 +1,7 @@
 <div ng-controller="AppStoreController as AppStore" block-ui="store-content">
-    <div class="container">
+    <div>
         <div class="appstore-wrapper">
             <div class="appstore-content">
-                <h1>Appstore</h1>
                 <div ng-if="AppStore.renderStore"
                      ng-include="'views/appstore/sections.html'">
                 </div>
@@ -25,7 +24,7 @@
             There are no working accounts available for the current project.<br />
             <span visible="providers">
                 You can change that in
-                <a ui-sref="projects.details({uuid: AppStore.currentProject.uuid, tab: 'providers'})">provider management</a>.
+                <a ui-sref="project.details({uuid: AppStore.currentProject.uuid})">provider management</a>.
             </span>
         </p>
     </div>

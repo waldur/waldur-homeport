@@ -33,8 +33,6 @@
     var ControllerListClass = baseControllerListClass.extend({
       init: function() {
         this.service = resourcesService;
-        this.blockUIElement = 'tab-content';
-
         this.categories = {};
         this.categories[ENV.VirtualMachines] = 'vms';
         this.categories[ENV.Applications] = 'apps';
@@ -76,8 +74,8 @@
               name: 'Provider',
               propertyName: 'service_name',
               type: ENTITYLISTFIELDTYPES.link,
-              link: 'organizations.details({uuid: "' + currentCustomerUuid +
-              '",tab: "providers", providerUuid: entity.service_uuid, providerType: entity.resource_type.split(".")[0]})'
+              link: 'organization.providers({uuid: "' + currentCustomerUuid +
+              '", providerUuid: entity.service_uuid, providerType: entity.resource_type.split(".")[0]})'
             },
             {
               name: 'State',
@@ -87,7 +85,7 @@
               getClass: function(state) {
                 var cls = ENV.resourceStateColorClasses[state];
                 if (cls == 'processing') {
-                  return 'icon refresh spin';
+                  return 'icon fa-refresh fa-spin';
                 } else {
                   return 'status-circle ' + cls;
                 }
@@ -370,7 +368,7 @@
         this.detailsState = 'resources.details';
         this.detailsViewOptions = {
           title_plural: 'resources',
-          listState: 'projects.details({uuid: controller.model.project_uuid, tab:controller.resourceTab})',
+          listState: 'project.details({uuid: controller.model.project_uuid, tab:controller.resourceTab})',
           aboutFields: [
             {
               fieldKey: 'name',
@@ -395,6 +393,7 @@
           ]
         };
         this.detailsViewOptions.activeTab = this.getActiveTab();
+        this.activeTab = this.detailsViewOptions.activeTab.key;
       },
 
       getModel: function() {
@@ -413,30 +412,44 @@
       },
 
       afterActivate: function() {
+        this.updateMenu();
         this.setCounters();
         this.updateResourceTab();
         this.scheduleRefresh();
         this.addMonitoringTabs();
       },
 
+      updateMenu: function() {
+        controllerScope.context = {resource: controllerScope.model};
+        var state = this.getListState(this.model.resource_type);
+        controllerScope.items = [
+          {
+              label: "Back to project",
+              icon: "fa-angle-left",
+              link: state + "({uuid: context.resource.project_uuid})"
+          }
+        ];
+      },
+
+      getListState: function(resourceType) {
+        var resourceCategory = ENV.resourceCategory[resourceType];
+        if (resourceCategory === 'apps') {
+          return 'project.resources.apps';
+        } else if (resourceCategory === 'private_clouds') {
+          return 'project.resources.clouds';
+        } else {
+          return 'project.resources.vms';
+        }
+      },
+
       addMonitoringTabs: function() {
         var vm = this;
         var host = vm.getZabbixHost(vm.model);
         if (host) {
-          vm.detailsViewOptions.tabs.push({
-            title: 'Graphs',
-            key: 'graphs',
-            viewName: 'tabGraphs'
-          });
+          vm.showGraphs = true;
           vm.getITServiceForHost(host).then(function(itservice) {
             if (itservice) {
-              vm.detailsViewOptions.tabs.push({
-                title: 'SLA',
-                key: 'sla',
-                viewName: 'tabSLA',
-                count: -1,
-                hideSearch: true
-              });
+              vm.showSla = true;
             }
           });
         }
@@ -486,18 +499,17 @@
       afterInstanceRemove: function(resource) {
         this.service.clearAllCacheForCurrentEndpoint();
         $rootScope.$broadcast('refreshCounts');
-        $state.go('projects.details', {
-          uuid: this.model.project_uuid,
-          tab: this.resourceTab
-        });
+
+        var state = this.getListState(this.model.resource_type);
+        $state.go(state, {uuid: this.model.project_uuid});
       },
 
       modelNotFound: function() {
-        currentStateService.getProject().then(function() {
-          $state.go('resources.list');
+        currentStateService.getProject().then(function(project) {
+          $state.go('project.details', {uuid: project.uuid});
         }, function() {
           currentStateService.getCustomer().then(function(response) {
-            $state.go('organizations.details', {uuid: response.uuid});
+            $state.go('organization.details', {uuid: response.uuid});
           }, function() {
             $state.go('dashboard.index');
           });

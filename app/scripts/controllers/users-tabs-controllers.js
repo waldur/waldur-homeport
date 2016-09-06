@@ -15,7 +15,6 @@
 
       init: function() {
         this.controllerScope = controllerScope;
-        this.blockUIElement = 'tab-content';
         this._super();
       },
       getList: function(filter) {
@@ -61,7 +60,6 @@
 
       init: function() {
         this.controllerScope = controllerScope;
-        this.blockUIElement = 'tab-content';
         this.service = keysService;
         this._super();
 
@@ -99,8 +97,8 @@
         return this.getUser().then(function(user) {
           vm.user = user;
           vm.service.defaultFilter.user_uuid = user.uuid;
-          if (user.uuid === $stateParams.uuid) {
-            angular.extend(vm.entityOptions, {
+          if (angular.isUndefined($stateParams.uuid) || user.uuid === $stateParams.uuid) {
+            angular.extend(vm.entityOptions.entityData, {
               createLink: 'keys.create',
               createLinkText: 'Add SSH Key'
             });

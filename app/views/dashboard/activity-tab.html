@@ -2,26 +2,26 @@
     <div class="half-block">
         <h3>Projects</h3>
 
-        <div class="white-box graph dashboard-projects" block-ui="dashboard-projects-list">
+        <div class="graph dashboard-projects" block-ui="dashboard-projects-list">
             <div ng-repeat="project in DashboardController.projects">
                 <div ng-click="DashboardController.selectProject(project)" class="graph-head"
                      ng-class="{'active': project.selected}">
                     <h4 ng-class="{'current': project.selected}">
                         <expandable-indicator open="project.selected"></expandable-indicator>
-                        <a stoppropagation ui-sref="projects.details({uuid: project.uuid})">{{ project.name }}</a>
+                        <a stoppropagation ui-sref="project.details({uuid: project.uuid})">{{ project.name }}</a>
                         <div class="support-buttons" visible="premiumSupport">
-                            <a stoppropagation class="button-support"
+                            <a stoppropagation class="btn btn-primary btn-outline btn-sm"
                                ng-if="::project.plan"
-                               ui-sref="projects.details({uuid: project.uuid, tab: 'premiumSupport'})">SLA details</a>
-                            <a stoppropagation class="button-support pending"
+                               ui-sref="project.support({uuid: project.uuid})">SLA details</a>
+                            <a stoppropagation class="btn btn-primary btn-outline btn-sm pending"
                                ng-if="::!project.plan && project.has_pending_contracts"
-                               ui-sref="projects.details({uuid: project.uuid, tab: 'premiumSupport'})">SLA pending</a>
-                            <a stoppropagation class="button-support pending"
+                               ui-sref="project.support({uuid: project.uuid})">SLA pending</a>
+                            <a stoppropagation class="btn btn-primary btn-outline btn-sm pending"
                                ng-if="::!project.plan && !project.has_pending_contracts"
                                ng-click="DashboardController.addSupportContract(project)">Add SLA</a>
                         </div>
                         <div class="information-blocks">
-                            <a stoppropagation class="button-support">
+                            <a stoppropagation class="btn btn-primary btn-sm">
                                 {{project.price_estimate.total || 0 | defaultCurrency}}
                             <span class="inline">
                                 <helpicon class="button-help-icon" help-text="Projected cost of resources used during this month within a project."></helpicon>
@@ -34,12 +34,12 @@
                     <ul class="counters">
                         <li class="active-alert" ng-class="{'empty': !project.count.alerts}" visible="alerts">
                             <div class="counter-name">Active alerts</div>
-                            <div ui-sref="projects.details({uuid: project.uuid, tab: 'alerts'})"
+                            <div ui-sref="project.alerts({uuid: project.uuid})"
                                  class="counter link-to-project" ng-bind="project.count.alerts"></div>
                         </li>
                         <li class="resources" ng-class="{'empty': !project.count.resources}" visible="resources">
                             <div class="counter-name">Resources</div>
-                            <div ui-sref="projects.details({uuid: project.uuid, tab: 'vms'})"
+                            <div ui-sref="project.resources.vms({uuid: project.uuid})"
                                  class="counter link-to-project" ng-bind="project.count.resources"></div>
                         </li>
                         <li visible="providers" class="services" ng-class="{'empty': !project.count.services}" visible="providers">
@@ -60,25 +60,25 @@
                     </div>
                 </div>
             </div>
-            <div class="placeholder white-box" ng-if="DashboardController.projects.length==0">
+            <div class="placeholder" ng-if="DashboardController.projects.length==0">
                 There are no projects
                 <div class="inline"
                      check-quotas="{{DashboardController.checkQuotas}}"
-                     sref="projects.create"
+                     sref="project-create"
                      class-link="button-apply">
                     <div><i class="icon plus"></i>Add new project</div>
                 </div>
 
             </div>
         </div>
-        <a ng-if="DashboardController.projects.length" ui-sref="organizations.details({uuid: DashboardController.currentCustomer.uuid, tab: 'projects'})" class="center-link">Show all projects</a>
+        <a ng-if="DashboardController.projects.length" ui-sref="organization.projects({uuid: DashboardController.currentCustomer.uuid})" class="center-link">Show all projects</a>
     </div>
     <div class="half-block">
         <div class="alerts-list">
             <div>
                 <h3 class="alerts-header">Alerts</h3>
                 <div class="alerts-helper-link">
-                    <a stoppropagation class="button-support pending"
+                    <a stoppropagation class="btn btn-primary btn-outline btn-sm pending"
                        ng-click="DashboardController.showHelpTypes('alerts')">Supported alerts</a>
                 </div>
                 <div class="clear"></div>
@@ -102,13 +102,13 @@
                     No active alerts
                 </div>
             </div>
-            <a class="show-all" ui-sref="organizations.details({uuid: DashboardController.customer_uuid, tab:'alerts'})" ng-if="DashboardController.alerts.length">Show all alerts</a>
+            <a class="show-all" ui-sref="organization.alerts({uuid: DashboardController.customer_uuid})" ng-if="DashboardController.alerts.length">Show all alerts</a>
         </div>
         <div class="alerts-list" ng-if="DashboardController.events.length" visible="eventlog">
             <div>
                 <h3 class="alerts-header">Recent events</h3>
                 <div class="alerts-helper-link">
-                    <a stoppropagation class="button-support pending"
+                    <a stoppropagation class="btn btn-primary btn-outline btn-sm pending"
                        ng-click="DashboardController.showHelpTypes('events')">Supported events</a>
                 </div>
                 <div class="clear"></div>
@@ -131,7 +131,7 @@
                     No events yet
                 </div>
             </div>
-            <a class="show-all" ui-sref="organizations.details({uuid: DashboardController.currentCustomer.uuid, tab: 'eventlog'})">Show all recent events</a>
+            <a class="show-all" ui-sref="organization.details({uuid: DashboardController.currentCustomer.uuid})">Show all recent events</a>
         </div>
     </div>
 </div>

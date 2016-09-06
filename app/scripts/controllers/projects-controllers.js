@@ -9,7 +9,6 @@
       'currentStateService',
       'customersService',
       '$rootScope',
-      '$state',
       'ENV',
       'ENTITYLISTFIELDTYPES',
       'ncUtils',
@@ -22,7 +21,6 @@
       currentStateService,
       customersService,
       $rootScope,
-      $state,
       ENV,
       ENTITYLISTFIELDTYPES,
       ncUtils) {
@@ -62,41 +60,12 @@
               }.bind(this),
             }
           ];
-          var vm = this;
-          if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('resources') == -1) {
-            currentStateService.isQuotaExceeded('resource').then(function(response) {
-              if (!response) {
-                vm.actionButtonsListItems.push({
-                  title: 'Add resource',
-                  icon: 'fa-plus',
-                  clickFunction: function(project) {
-                    $rootScope.$broadcast('adjustCurrentProject', project);
-                    $state.go('appstore.store')
-                  }
-                });
-              }
-            });
-          }
-          if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('import') == -1) {
-            currentStateService.isQuotaExceeded('resource').then(function(response) {
-              if (!response) {
-                vm.actionButtonsListItems.push({
-                  title: 'Import resource',
-                  icon: 'fa-cloud-download',
-                  clickFunction: function(project) {
-                    $rootScope.$broadcast('adjustCurrentProject', project);
-                    $state.go('import.import');
-                  }
-                });
-              }
-            });
-          }
           this.entityOptions = {
             entityData: {
               noDataText: 'You have no projects yet.',
               noMatchesText: 'No projects found matching filter.',
               title: 'Projects',
-              createLink: 'projects.create',
+              createLink: 'project-create',
               createLinkText: 'Add project',
               expandable: true,
               rowTemplateUrl: 'views/project/row.html'
@@ -106,7 +75,7 @@
                 name: 'Name',
                 propertyName: 'name',
                 type: ENTITYLISTFIELDTYPES.name,
-                link: 'projects.details({uuid: entity.uuid})'
+                link: 'project.details({uuid: entity.uuid})'
               },
               {
                 name: 'Creation date',
@@ -222,7 +191,7 @@
         this.service = projectsService;
         this.controllerScope = controllerScope;
         this._super();
-        this.detailsState = 'projects.details';
+        this.detailsState = 'project.details';
         this.redirectToDetailsPage = true;
         this.project = this.instance;
       },
@@ -243,7 +212,7 @@
       },
       cancel: function() {
         currentStateService.getCustomer().then(function(customer) {
-          $state.go('organizations.details', {uuid: customer.uuid, tab: 'projects'});
+          $state.go('organization.projects', {uuid: customer.uuid});
         });
       }
     });
@@ -290,10 +259,10 @@
         this.controllerScope = controllerScope;
         this.setSignalHandler('refreshCounts', this.setCounters.bind(controllerScope));
         this._super();
-        this.detailsState = 'projects.details';
+        this.detailsState = 'project.details';
         this.detailsViewOptions = {
           title_plural: 'projects',
-          listState: "organizations.details({uuid: controller.model.customer_uuid, tab: 'projects'})",
+          listState: "organization.projects({uuid: controller.model.customer_uuid})",
           aboutFields: [
             {
               fieldKey: 'name',
@@ -397,7 +366,7 @@
       getCountersError: function() {
         $interval.cancel(timer);
         projectsService.getFirst().then(function(project) {
-          $state.go('projects.details', {uuid: project.uuid});
+          $state.go('project.details', {uuid: project.uuid});
         });
       }
     });
@@ -405,4 +374,120 @@
     controllerScope.__proto__ = new Controller();
   }
 
+})();
+
+(function() {
+  angular.module('ncsaas')
+    .controller('ProjectDetailsController', ProjectDetailsController);
+
+  ProjectDetailsController.$inject = [
+    '$scope', 'currentStateService', 'tabCounterService', 'eventsService', 'projectsService', '$state'
+  ];
+  function ProjectDetailsController(
+    $scope, currentStateService, tabCounterService, eventsService, projectsService, $state) {
+    activate();
+
+    function activate() {
+      $scope.items = [
+        {
+          link: "appstore.store",
+          icon: "fa-shopping-cart",
+          label: "Service store",
+          feature: "appstore"
+        },
+        {
+          label: "Resources",
+          icon: "fa-files-o",
+          state: "project.resources",
+          children: [
+            {
+              link: "project.resources.vms({uuid: context.project.uuid})",
+              icon: "fa-desktop",
+              label: "Virtual machines",
+              feature: "vms",
+              countFieldKey: "vms"
+            },
+            {
+              link: "project.resources.clouds({uuid: context.project.uuid})",
+              icon: "fa-cloud",
+              label: "Private clouds",
+              feature: "private_clouds",
+              countFieldKey: "private_clouds"
+            },
+            {
+              link: "project.resources.apps({uuid: context.project.uuid})",
+              icon: "fa-cube",
+              label: "Applications",
+              feature: "apps",
+              countFieldKey: "apps"
+            }
+          ]
+        },
+        {
+          link: "project.support({uuid: context.project.uuid})",
+          icon: "fa-question-circle",
+          label: "Support",
+          feature: "premiumSupport",
+          countFieldKey: "premium_support_contracts"
+        },
+        {
+          link: "project.details({uuid: context.project.uuid})",
+          icon: "fa-bell-o",
+          label: "Audit logs",
+          feature: "eventlog"
+        },
+        {
+          link: "project.alerts({uuid: context.project.uuid})",
+          icon: "fa-fire",
+          label: "Alerts",
+          feature: "alerts",
+          countFieldKey: "alerts"
+        },
+        {
+          link: "project.delete({uuid: context.project.uuid})",
+          icon: "fa-wrench",
+          label: "Manage"
+        }
+      ];
+      $scope.$on('currentProjectUpdated', function() {
+        refreshProject();
+      });
+      refreshProject();
+    }
+
+    function refreshProject() {
+      currentStateService.getProject().then(function(project) {
+        $scope.currentProject = project;
+        $scope.context = {project: project};
+        connectCounters(project);
+      });
+    }
+
+    function connectCounters(project) {
+      if ($scope.timer) {
+        tabCounterService.cancel($scope.timer);
+      }
+
+      $scope.timer = tabCounterService.connect({
+        $scope: $scope,
+        tabs: $scope.items,
+        getCounters: getCounters.bind(null, project),
+        getCountersError: getCountersError
+      });
+    }
+
+    function getCounters(project) {
+      var query = angular.extend(
+        {UUID: project.uuid},
+        eventsService.defaultFilter
+      );
+      return projectsService.getCounters(query);
+    }
+
+    function getCountersError() {
+      projectsService.getFirst().then(function(project) {
+        $state.go('project.details', {uuid: project.uuid});
+      });
+    }
+  }
 })();

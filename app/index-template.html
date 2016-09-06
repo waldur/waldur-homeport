@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="opennodecloud.com" />
     <base href="/"></base>
-    <title ng-bind-html="pageTitle">NodeConductor - Cloud Service Management</title>
+    <title page-title>Waldur | Cloud Service Management</title>
     <!-- favicon -->
     <link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon" />
     <!-- css -->
@@ -22,6 +22,7 @@
     <link rel="stylesheet" type="text/css" href="/static/css/angular-block-ui.css"/>
     <link rel="stylesheet" type="text/css" href="/static/css/leaflet.css"/>
     <link rel="stylesheet" type="text/css" href="/static/css/flags16.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/metisMenu.css">
     <!-- @endif -->
     <!-- @if NODE_ENV == 'PRODUCTION' -->
     <link rel="stylesheet" type="text/css" href="/static/css/style.min.css">
@@ -47,10 +48,10 @@
     </script-->
 
 </head>
-<body ng-controller="MainController as Main" ng-click="closeMenu()">
+<body ng-controller="MainController as Main" class="fixed-sidebar {{$state.current.data.bodyClass}}" id="page-top">
 <div class="flash-message-fixed" flash-message="5000" ></div>
 <div scroll-to-top></div>
-<div ui-view class="full-height"></div>
+<div ui-view id="wrapper"></div>
 <script>(function(d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
     if (d.getElementById(id)) return;
@@ -60,6 +61,7 @@
 }(document, 'script', 'facebook-jssdk'));</script>
 
 <!-- @if NODE_ENV == 'DEVELOPMENT' || NODE_ENV == 'TEST' -->
+<script src="static/js/jquery.min.js"></script>
 <!-- angular -->
 <script src="static/js/angular/angular.js"></script>
 <script src="static/js/angular/angular-animate.js"></script>
@@ -84,16 +86,23 @@
 <script src="static/js/angular/ng-file-upload.js"></script>
 <script src="static/js/angular/xeditable.js"></script>
 <script src="static/js/angular/angular-sanitize.js"></script>
-<script src="static/js/angular/ngDialog.js"></script>
 <script src="static/js/leaflet.js"></script>
 <script src="static/js/d3.js"></script>
 <script src="static/js/angular/angular-leaflet-directive.js"></script>
 <script src="static/js/angular/ui-bootstrap-tpls.min.js"></script>
+<script src="static/js/jquery.slimscroll.min.js"></script>
+<script src="static/js/angular/angular-slimscroll.js"></script>
+<script src="static/js/metisMenu.min.js"></script>
+<script src="static/js/pace.min.js"></script>
 <!-- libs -->
+<script src="scripts/inspinia.js"></script>
 <script src="scripts/class.js"></script>
 
 <!-- Custom modules -->
 <script src="scripts/app.js"></script>
+<script src="scripts/routes/projects.js"></script>
+<script src="scripts/routes/organizations.js"></script>
+<script src="scripts/routes/users.js"></script>
 <!-- Filters -->
 <script src="scripts/filters.js"></script>
 <!-- Utils -->
@@ -142,6 +151,7 @@
 <script src="scripts/controllers/support-controllers.js"></script>
 <script src="scripts/controllers/users-controllers.js"></script>
 <script src="scripts/controllers/users-tabs-controllers.js"></script>
+<script src="scripts/controllers/workspace-controller.js"></script>
 <!-- services -->
 <script src="scripts/services/action-utils-service.js"></script>
 <script src="scripts/services/agreements-service.js"></script>
@@ -155,7 +165,6 @@
 <script src="scripts/services/default-price-list-items-service.js"></script>
 <script src="scripts/services/event-statistics-service.js"></script>
 <script src="scripts/services/events-service.js"></script>
-<script src="scripts/services/flavors-service.js"></script>
 <script src="scripts/services/hooks-service.js"></script>
 <script src="scripts/services/invoices-service.js"></script>
 <script src="scripts/services/issue-comments-service.js"></script>
@@ -175,6 +184,7 @@
 <script src="scripts/services/resources-count-service.js"></script>
 <script src="scripts/services/resources-service.js"></script>
 <script src="scripts/services/services-service.js"></script>
+<script src="scripts/services/tab-counters-service.js"></script>
 <script src="scripts/services/users-service.js"></script>
 <script src="scripts/services/zabbix-hosts-service.js"></script>
 <script src="scripts/services/zabbix-itservices-service.js"></script>
@@ -192,16 +202,14 @@
 <script src="scripts/directives/check-quotas.js"></script>
 <script src="scripts/directives/compact-table-sorter.js"></script>
 <script src="scripts/directives/customer-balance.js"></script>
+<script src="scripts/directives/customer-workspace.js"></script>
 <script src="scripts/directives/dashboard-cost-chart.js"></script>
-<script src="scripts/directives/details-content.js"></script>
-<script src="scripts/directives/details-view.js"></script>
 <script src="scripts/directives/email-mask.js"></script>
 <script src="scripts/directives/entity-list.js"></script>
 <script src="scripts/directives/expandable-indicator.js"></script>
 <script src="scripts/directives/expandable-item.js"></script>
 <script src="scripts/directives/field-label.js"></script>
 <script src="scripts/directives/filter-list.js"></script>
-<script src="scripts/directives/fixed-when-scroll.js"></script>
 <script src="scripts/directives/footer-position.js"></script>
 <script src="scripts/directives/help-icon.js"></script>
 <script src="scripts/directives/image-box.js"></script>
@@ -209,9 +217,12 @@
 <script src="scripts/directives/importable-resources.js"></script>
 <script src="scripts/directives/line-chart.js"></script>
 <script src="scripts/directives/list-cache-reset.js"></script>
+<script src="scripts/directives/metis-menu.js"></script>
 <script src="scripts/directives/mini-pagination.js"></script>
 <script src="scripts/directives/multiple-select.js"></script>
 <script src="scripts/directives/multi-line-chart.js"></script>
+<script src="scripts/directives/nc-header.js"></script>
+<script src="scripts/directives/page-title.js"></script>
 <script src="scripts/directives/pagination.js"></script>
 <script src="scripts/directives/pie-chart.js"></script>
 <script src="scripts/directives/project-price-limit.js"></script>
@@ -220,10 +231,14 @@
 <script src="scripts/directives/resource-events.js"></script>
 <script src="scripts/directives/scroll-to-me.js"></script>
 <script src="scripts/directives/scroll-to-top.js"></script>
+<script src="scripts/directives/select-workspace-toggle.js"></script>
 <script src="scripts/directives/service-prices.js"></script>
 <script src="scripts/directives/service-project-link-editor.js"></script>
 <script src="scripts/directives/service-quotas.js"></script>
 <script src="scripts/directives/service-settings-editor.js"></script>
+<script src="scripts/directives/sidebar.js"></script>
+<script src="scripts/directives/sidebar-toggle.js"></script>
+<script src="scripts/directives/sidebar-user.js"></script>
 <script src="scripts/directives/sizing.js"></script>
 <script src="scripts/directives/stoppropagation.js"></script>
 <script src="scripts/directives/submit-button.js"></script>

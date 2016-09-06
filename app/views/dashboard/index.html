@@ -1,11 +1,6 @@
 <div ng-controller="DashboardIndexController as DashboardController" class="event-log">
-    <div class="container">
-        <div class="app-title">
-            <h1>Dashboard</h1>
-            <customer-balance></customer-balance>
-        </div>
-    </div>
-    <div class="white-box">
+    <div class="row">
+    <div class="col-lg-12">
         <ul class="sort-list event-nav">
             <li ng-class="{'active':activeTab == 'activity','inactive':activeTab !== 'activity'}">
                 <a ui-sref="{tab:'activity'}" ng-click="activeTab = 'activity'">Activity</a>
@@ -19,17 +14,17 @@
         </ul>
         <div class="event-action-buttons" ng-show="activeTab == 'activity'">
             <div visible="projects" class="cost-tab-actions inline">
-                <div sref="projects.create"
-                     class-link="button-apply"
+                <div sref="project-create"
+                     class-link="btn btn-primary"
                      check-quotas="{{DashboardController.checkQuotas}}">
-                    <span><i class="icon plus"></i>Add project</span>
+                    <span><i class="fa fa-plus"></i>Add project</span>
                 </div>
             </div>
             <div ng-show="DashboardController.showProviderButton" visible="providers" class="cost-tab-actions inline">
                 <div sref="services.create"
-                     class-link="button-apply"
+                     class-link="btn btn-primary"
                      check-quotas="{{DashboardController.checkQuotasProvider}}">
-                    <span><i class="icon plus"></i>Add provider</span>
+                    <span><i class="fa fa-plus"></i>Add provider</span>
                 </div>
             </div>
         </div>
@@ -38,7 +33,7 @@
                 <div class="inline"
                      check-quotas="{{DashboardController.checkQuotasResource}}"
                      sref="import.import"
-                     class-link="button-apply">
+                     class-link="btn btn-primary">
                     <div>Import resources</div>
                 </div>
             </div>
@@ -46,26 +41,25 @@
                 <div class="inline"
                      check-quotas="{{DashboardController.checkQuotasProvider}}"
                      sref="services.create"
-                     class-link="button-apply">
-                    <div><i class="icon plus"></i>Add provider</div>
+                     class-link="btn btn-primary">
+                    <div><i class="fa fa-plus"></i>Add provider</div>
                 </div>
             </div>
         </div>
-
-        <div class="clear"></div>
+    </div>
     </div>
     <div ng-if="activeTab == 'costs' && DashboardController.userCanManageProjects"
          ng-class="{'active-content':activeTab === 'costs', 'inactive-content':activeTab !== 'costs'}">
-         <div ui-view="costTab"></div>
+         <div ng-include="'views/dashboard/cost-tab.html'"></div>
     </div>
     <div ng-if="activeTab == 'activity'"
          ng-class="{'active-content':activeTab === 'activity',
                     'inactive-content':activeTab !== 'activity'}">
-        <div ui-view="activityTab"></div>
+        <div ng-include="'views/dashboard/activity-tab.html'"></div>
     </div>
     <div ng-if="activeTab == 'resources' && DashboardController.userCanManageProjects"
          ng-class="{'active-content':activeTab === 'resources',
                     'inactive-content':activeTab !== 'resources'}">
-        <div ui-view="resourcesTab"></div>
+        <div ng-include="'views/dashboard/resources-tab.html'"></div>
     </div>
 </div>

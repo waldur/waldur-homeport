@@ -1,0 +1,20 @@
+<div ng-controller="UserDetailsController">
+    <sidebar items="items" context="context"></sidebar>
+    <div id="page-wrapper" class="white-bg">
+        <nc-header/>
+        <div class="row wrapper white-bg page-heading" ng-if="currentUser">
+            <div class="col-lg-12">
+                <h2>{{$state.current.data.pageTitle}}</h2>
+                <ol class="breadcrumb">
+                    <li>
+                        {{ currentUser.full_name }}
+                    </li>
+                    <li class="active">
+                        <strong>{{$state.current.data.pageTitle}}</strong>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <ui-view/>
+    </div>
+</div>

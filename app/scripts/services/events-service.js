@@ -203,12 +203,12 @@
 angular.module('ncsaas').constant('EVENT_ROUTES', {
     'affected_user': 'users.details',
     'user': 'users.details',
-    'project': 'projects.details',
-    'customer': 'organizations.details',
-    'affected_organization': 'organizations.details',
+    'project': 'project.details',
+    'customer': 'organization.details',
+    'affected_organization': 'organization.details',
     'instance': 'resources.details',
     'resource': 'resources.details',
-    'service': 'organizations.details',
+    'service': 'organization.details',
 });
 
 angular.module('ncsaas').constant('EVENT_ICONS', {
@@ -327,11 +327,11 @@ angular.module('ncsaas').constant('EVENT_ICONS', {
                 var uuid = context[entity + "_uuid"];
                 var args = {uuid: uuid};
                 if (entity == 'service') {
+                    route = 'organization.providers'
                     args = {
                         uuid: context.customer_uuid,
                         providerUuid: uuid,
-                        providerType: context.service_type,
-                        tab: 'providers'
+                        providerType: context.service_type
                     }
                 }
                 if (entity == 'resource') {

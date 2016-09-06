@@ -1,5 +1,5 @@
 <div class="actions-button" stoppropagation>
-    <a class="button"
+    <a class="btn btn-primary"
        ng-click="openActionsListTrigger()">actions</a>
     <ul ng-if="loading" class="actions-dropdown">
         Loading actions
@@ -12,8 +12,7 @@
         <li ng-repeat="(name, action) in actions"
             title="{{ action.reason }}">
             <a ng-click="buttonClick(name, action)"
-               ng-class="{'disabled': !action.enabled || action.pending, 'remove': action.destructive}"
-               class="button-simple">
+               ng-class="{'disabled': !action.enabled || action.pending, 'remove': action.destructive}">
                {{ action.title }}
             </a>
         </li>

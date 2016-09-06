@@ -23,7 +23,8 @@
       'blockUI',
       'ngSanitize',
       'leaflet-directive',
-      'ui.bootstrap'
+      'ui.bootstrap',
+      'ui.slimscroll'
     ])
     // urls
     .config(function($stateProvider, $urlRouterProvider, blockUIConfig, MODE) {
@@ -32,7 +33,7 @@
 
       blockUIConfig.autoBlock = false;
 
-      $urlRouterProvider.otherwise('/');
+      $urlRouterProvider.otherwise('/login/');
 
       $stateProvider
         .state('home', {
@@ -55,7 +56,10 @@
             }
           },
           resolve: {
-            authenticated: notLoggedCheck
+            authenticated: authCheck
+          },
+          data: {
+            bodyClass: 'landing',
           }
         })
 
@@ -66,7 +70,8 @@
             authenticated: notLoggedCheck
           },
           data: {
-            isSignupFormVisible: false
+            isSignupFormVisible: false,
+            bodyClass: 'old'
           }
         })
 
@@ -77,7 +82,8 @@
             authenticated: notLoggedCheck
           },
           data: {
-            isSignupFormVisible: true
+            isSignupFormVisible: true,
+            bodyClass: 'old'
           }
         })
 
@@ -130,475 +136,55 @@
           resolve: {
             authenticated: authCheck
           },
-          noInitialData: true
+          noInitialData: true,
+          data: {
+            bodyClass: 'old'
+          }
         })
 
         .state('support', {
           url: '/support/',
-          templateUrl: 'views/partials/base.html',
+          templateUrl: 'views/customer/base.html',
           abstract: true
         })
 
         .state('support.list', {
           url: '',
-          views: {
-            'appHeader@support' : {
-              templateUrl: 'views/partials/app-header.html',
-            },
-            'appContent@support' : {
-              templateUrl: 'views/support/list.html',
-            }
-          },
-          resolve: {
-            authenticated: authCheck
+          templateUrl: 'views/support/list.html',
+          data: {
+            pageTitle: 'Support'
           }
         })
 
         .state('support.create', {
           url: 'add/:type',
-          views: {
-            'appHeader' : {
-              templateUrl: 'views/partials/app-header.html',
-            },
-            'appContent' : {
-              templateUrl: 'views/support/create.html',
-            }
-          },
-          resolve: {
-            authenticated: authCheck
-          }
-        })
-
-        .state('import', {
-          url: '/import/',
-          templateUrl: 'views/partials/base.html',
-          abstract: true
-        })
-
-        .state('import.import', {
-          url: '?service_type&service_uuid',
-          views: {
-            'appHeader@import' : {
-              templateUrl: 'views/partials/app-header.html',
-            },
-            'appContent@import' : {
-              templateUrl: 'views/import/import.html',
-            }
-          },
-          resolve: {
-            authenticated: authCheck
-          }
-        })
-
-        .state('compare', {
-          url: '/compare/',
-          templateUrl: 'views/partials/base.html',
-          abstract: true
-        })
-
-        .state('compare.vms', {
-          url: '',
-          views: {
-            'appHeader@compare' : {
-              templateUrl: 'views/partials/app-header.html',
-            },
-            'appContent@compare' : {
-              templateUrl: 'views/compare/table.html',
-            }
-          },
-          resolve: {
-            authenticated: authCheck
-          }
+          templateUrl: 'views/support/create.html',
         })
 
         .state('dashboard', {
           url: '/dashboard/',
           abstract: true,
-          templateUrl: 'views/partials/base.html',
+          templateUrl: 'views/customer/base.html',
+          data: {
+            pageTitle: 'Dashboard'
+          }
         })
 
         .state('dashboard.index', {
           reloadOnSearch: false,
           url: '?tab',
-          views: {
-            'appHeader@dashboard': {
-              templateUrl: 'views/partials/app-header.html',
-            },
-            'appContent@dashboard': {
-              templateUrl: 'views/dashboard/index.html',
-            },
-            'activityTab@dashboard.index': {
-              templateUrl: 'views/dashboard/activity-tab.html',
-            },
-            'costTab@dashboard.index': {
-              templateUrl: 'views/dashboard/cost-tab.html',
-            },
-            'resourcesTab@dashboard.index': {
-              templateUrl: 'views/dashboard/resources-tab.html',
-            }
-          },
-          resolve: {
-            authenticated: authCheck
-          },
-          auth: true
-        })
-
-        .state('appstore', {
-          url: '/appstore/',
-          abstract: true,
-          templateUrl: 'views/partials/base.html',
-        })
-
-        .state('appstore.store', {
-          url: ':category',
-          views: {
-            'appContent': {
-              templateUrl: 'views/appstore/store.html',
-            },
-            'appHeader': {
-              templateUrl: 'views/partials/app-header.html',
-            }
-          },
-          resolve: {
-            authenticated: authCheck
-          },
-          auth: true
-        })
-
-        .state('projects', {
-          url: '/projects/',
-          abstract: true,
-          templateUrl: 'views/partials/base.html',
-        })
-
-        .state('projects.create', {
-          url: 'add/',
-          views: {
-            'appContent': {
-              templateUrl: 'views/project/create.html',
-            },
-            'appHeader': {
-              templateUrl: 'views/partials/app-header.html',
-            }
-          },
-          resolve: {
-            authenticated: authCheck
-          },
-          auth: true
-        })
-
-        .state('projects.details', {
-          reloadOnSearch: false,
-          url: ':uuid/?tab',
-          views: {
-            'appContent': {
-              templateUrl: 'views/project/details.html',
-            },
-            'tabEventlog@projects.details' : {
-              templateUrl: 'views/project/tab-eventlog.html',
-            },
-            'tabAlerts@projects.details' : {
-              templateUrl: 'views/project/tab-alerts.html',
-            },
-            'tabResources@projects.details' : {
-              templateUrl: 'views/project/tab-resources.html',
-            },
-            'tabApplications@projects.details' : {
-              templateUrl: 'views/resource/tab-applications.html',
-            },
-            'tabPrivateClouds@projects.details' : {
-              templateUrl: 'views/resource/tab-private-clouds.html',
-            },
-            'tabPremiumSupport@projects.details': {
-              templateUrl: 'views/project/tab-support.html',
-            },
-            'tabDelete@projects.details': {
-              templateUrl: 'views/project/tab-delete.html',
-            },
-            'appHeader': {
-              templateUrl: 'views/partials/app-header.html',
-            },
-          },
-          resolve: {
-            authenticated: authCheck
-          },
-          auth: true
-        })
-
-        .state('services', {
-          url: '/services/',
-          abstract: true,
-          templateUrl: 'views/partials/base.html',
-        })
-
-        .state('services.create', {
-          url: 'add/',
-          views: {
-            'appContent': {
-              templateUrl: 'views/service/create.html'
-            },
-            'appHeader': {
-              templateUrl: 'views/partials/app-header.html'
-            }
-          },
-          resolve: {
-            authenticated: authCheck
-          },
-          auth: true
-        })
-
-        .state('profile', {
-          url: '/profile/',
-          abstract: true,
-          templateUrl: 'views/partials/base.html',
-        })
-
-        .state('profile.details', {
-          reloadOnSearch: false,
-          url: '?tab',
-          views: {
-            'appHeader': {
-              templateUrl: 'views/partials/app-header.html',
-            },
-            'appContent': {
-              templateUrl: 'views/profile/details.html',
-            },
-            'tabEventlog@profile.details': {
-              templateUrl: 'views/user/tab-eventlog.html',
-            },
-            'tabKeys@profile.details': {
-              templateUrl: 'views/user/tab-keys.html',
-            },
-            'detailsTemplate@profile.details' : {
-              templateUrl: 'views/user/details-template.html',
-            },
-            'tabNotifications@profile.details' : {
-              templateUrl: 'views/user/tab-notifications.html'
-            },
-            'tabPassword@profile.details' : {
-              templateUrl: 'views/user/tab-password.html'
-            },
-            'tabManage@profile.details' : {
-              templateUrl: 'views/user/tab-manage.html'
-            }
-          },
-          resolve: {
-            authenticated: authCheck
-          },
-          auth: true
-        })
-
-        .state('organizations', {
-          url: '/organizations/',
-          abstract: true,
-          templateUrl: 'views/partials/base.html',
-        })
-
-        .state('organizations.list', {
-          url: '',
-          views: {
-            'appContent': {
-              templateUrl: 'views/customer/list.html',
-            },
-            'appHeader': {
-              templateUrl: 'views/partials/app-header.html',
-            }
-          },
-          resolve: {
-            authenticated: authCheck
-          },
-          auth: true
-        })
-
-        .state('organizations.details', {
-          reloadOnSearch: false,
-          url: ':uuid/?tab&providerUuid&providerType',
-          views: {
-            'appContent': {
-              templateUrl: 'views/customer/details.html',
-            },
-            'tabSizing@organizations.details': {
-              templateUrl: 'views/customer/tab-sizing.html',
-            },
-            'tabEventlog@organizations.details': {
-              templateUrl: 'views/customer/tab-eventlog.html',
-            },
-            'tabResources@organizations.details': {
-              templateUrl: 'views/customer/tab-resources.html',
-            },
-            'tabApplications@organizations.details' : {
-              templateUrl: 'views/customer/tab-applications.html',
-            },
-            'tabPrivateClouds@organizations.details' : {
-              templateUrl: 'views/customer/tab-private-clouds.html',
-            },
-            'tabProjects@organizations.details': {
-              templateUrl: 'views/customer/tab-projects.html',
-            },
-            'tabServices@organizations.details': {
-              templateUrl: 'views/customer/tab-services.html',
-            },
-            'tabBilling@organizations.details': {
-              templateUrl: 'views/customer/tab-billing.html',
-            },
-            'tabAlerts@organizations.details': {
-              templateUrl: 'views/customer/tab-alerts.html',
-            },
-            'tabTeam@organizations.details': {
-              templateUrl: 'views/customer/tab-team.html',
-            },
-            'tabDelete@organizations.details': {
-              templateUrl: 'views/customer/tab-delete.html',
-            },
-            'appHeader': {
-              templateUrl: 'views/partials/app-header.html',
-            }
-          },
-          resolve: {
-            authenticated: authCheck
-          },
-          auth: true
-        })
-
-        .state('organizations.plans', {
-          url: ':uuid/plans/',
-          views: {
-            'appContent': {
-              templateUrl: 'views/customer/plans.html',
-            },
-            'appHeader': {
-              templateUrl: 'views/partials/app-header.html',
-            }
-          },
-          resolve: {
-            authenticated: authCheck
-          },
-          auth: true
-        })
-
-        .state('users', {
-          url: '/users/',
-          abstract: true,
-          templateUrl: 'views/partials/base.html',
-        })
-
-        .state('users.list', {
-          url: '',
-          views: {
-            'appContent': {
-              templateUrl: 'views/user/list.html',
-            },
-            'appHeader': {
-              templateUrl: 'views/partials/app-header.html',
-            }
-          },
-          resolve: {
-            authenticated: authCheck
-          },
-          auth: true
-        })
-
-        .state('users.details', {
-          reloadOnSearch: false,
-          url: ':uuid/?tab',
-          views: {
-            'appContent': {
-              templateUrl: 'views/user/details.html',
-            },
-            'tabEventlog@users.details': {
-              templateUrl: 'views/user/tab-eventlog.html',
-            },
-            'tabKeys@users.details': {
-              templateUrl: 'views/user/tab-keys.html',
-            },
-            'detailsTemplate@users.details' : {
-              templateUrl: 'views/user/details-template.html',
-            },
-            'tabNotifications@users.details' : {
-              templateUrl: 'views/user/tab-notifications.html'
-            },
-            'tabPassword@users.details' : {
-              templateUrl: 'views/user/tab-password.html'
-            },
-            'appHeader': {
-              templateUrl: 'views/partials/app-header.html',
-            }
-          },
-          resolve: {
-            authenticated: authCheck
-          },
-          auth: true
+          templateUrl: 'views/dashboard/index.html',
         })
 
         .state('resources', {
           url: '/resources/',
           abstract: true,
-          templateUrl: 'views/partials/base.html',
-          resolve: {
-            authenticated: authCheck
-          }
-        })
-
-        .state('resources.list', {
-          url: ':tab',
-          views: {
-            'appContent': {
-              templateUrl: 'views/project/details.html',
-            },
-            'tabEventlog@resources.list' : {
-              templateUrl: 'views/project/tab-eventlog.html',
-            },
-            'tabAlerts@resources.list': {
-              templateUrl: 'views/project/tab-alerts.html',
-            },
-            'tabResources@resources.list' : {
-              templateUrl: 'views/project/tab-resources.html',
-            },
-            'tabApplications@resources.list' : {
-              templateUrl: 'views/resource/tab-applications.html',
-            },
-            'tabPremiumSupport@resources.list': {
-              templateUrl: 'views/project/tab-support.html',
-            },
-            'tabDelete@resources.list': {
-              templateUrl: 'views/project/tab-delete.html',
-            },
-            'appHeader': {
-              templateUrl: 'views/partials/app-header.html',
-            }
-          },
-          resolve: {
-            authenticated: authCheck
-          },
-          auth: true
+          templateUrl: 'views/resource/base.html',
         })
 
         .state('resources.details', {
-          url: ':resource_type/:uuid/?tab',
-          views: {
-            'appContent': {
-              templateUrl: 'views/resource/details.html',
-            },
-            'tabDetails@resources.details': {
-              templateUrl: 'views/resource/tab-details.html',
-            },
-            'tabAlerts@resources.details': {
-              templateUrl: 'views/resource/tab-alerts.html',
-            },
-            'tabGraphs@resources.details': {
-              templateUrl: 'views/resource/tab-graphs.html',
-            },
-            'tabSLA@resources.details': {
-              templateUrl: 'views/resource/tab-sla.html',
-            },
-            'appHeader': {
-              templateUrl: 'views/partials/app-header.html',
-            }
-          },
-          resolve: {
-            authenticated: authCheck
-          },
-          auth: true
+          url: ':resource_type/:uuid',
+          templateUrl: 'views/resource/details.html',
         })
 
         .state('payment', {
@@ -620,7 +206,10 @@
           resolve: {
             authenticated: authCheck
           },
-          auth: true
+          auth: true,
+          data: {
+            bodyClass: 'old'
+          }
         })
 
         .state('payment.cancel', {
@@ -636,7 +225,10 @@
           resolve: {
             authenticated: authCheck
           },
-          auth: true
+          auth: true,
+          data: {
+            bodyClass: 'old'
+          }
         })
 
         .state('agreement', {
@@ -658,7 +250,10 @@
           resolve: {
             authenticated: authCheck
           },
-          auth: true
+          auth: true,
+          data: {
+            bodyClass: 'old'
+          }
         })
 
         .state('agreement.cancel', {
@@ -674,29 +269,10 @@
           resolve: {
             authenticated: authCheck
           },
-          auth: true
-        })
-
-        .state('keys', {
-          url: '/keys/',
-          abstract: true,
-          templateUrl: 'views/partials/base.html',
-        })
-
-        .state('keys.create', {
-          url: 'add/',
-          views: {
-            'appContent': {
-              templateUrl: 'views/keys/create.html'
-            },
-            'appHeader': {
-              templateUrl: 'views/partials/app-header.html'
-            }
-          },
-          resolve: {
-            authenticated: authCheck
-          },
-          auth: true
+          auth: true,
+          data: {
+            bodyClass: 'old'
+          }
         })
 
         .state('errorPage', {
@@ -712,13 +288,12 @@
               templateUrl: 'views/404.html',
             },
             'appHeader': {
-              templateUrl: 'views/partials/app-header.html',
+              templateUrl: 'views/partials/site-header.html',
             }
           },
-          resolve: {
-            authenticated: authCheck
-          },
-          auth: true
+          data: {
+            bodyClass: 'old'
+          }
         })
 
         .state('errorPage.limitQuota', {
@@ -728,60 +303,33 @@
               templateUrl: 'views/403.html',
             },
             'appHeader': {
-              templateUrl: 'views/partials/app-header.html',
+              templateUrl: 'views/partials/site-header.html',
             }
           },
-          resolve: {
-            authenticated: authCheck
-          },
-          auth: true
+          data: {
+            bodyClass: 'old'
+          }
         })
 
         .state('help', {
           url: '/help/',
           abstract: true,
-          templateUrl: 'views/partials/base.html',
+          templateUrl: 'views/customer/base.html',
+          data: {
+            pageTitle: 'Help'
+          }
         })
         .state('help.list', {
           url: '',
-          views: {
-            'appContent': {
-              templateUrl: 'views/help/list.html',
-            },
-            'appHeader': {
-              templateUrl: 'views/partials/app-header.html',
-            }
-          },
-          resolve: {
-            authenticated: authCheck
-          },
+          templateUrl: 'views/help/list.html',
           auth: true,
-          noInitialData: true
+          noInitialData: true,
         })
         .state('help.details', {
           url: ':name/',
-          views: {
-            'appContent': {
-              templateUrl: 'views/help/details.html',
-            },
-            'appHeader': {
-              templateUrl: 'views/partials/app-header.html',
-            },
-            'sshKeys@help.details': {
-              templateUrl: 'views/help/ssh-keys.html',
-            },
-            'alertsList@help.details': {
-              templateUrl: 'views/help/alerts-events-list.html',
-            },
-            'eventsList@help.details': {
-              templateUrl: 'views/help/alerts-events-list.html',
-            }
-          },
-          resolve: {
-            authenticated: authCheck
-          },
+          templateUrl: 'views/help/details.html',
           auth: true,
-          noInitialData: true
+          noInitialData: true,
         })
         .state('tos', {
           url: '/tos/',
@@ -798,8 +346,11 @@
               templateUrl: MODE.homeHeaderTemplate ? MODE.homeHeaderTemplate : 'views/partials/site-header.html',
             },
             'appHeaderIn': {
-              templateUrl: 'views/partials/app-header.html',
+              templateUrl: 'views/partials/site-header.html',
             }
+          },
+          data: {
+            bodyClass: 'old'
           }
         })
         .state('about', {
@@ -817,8 +368,11 @@
               templateUrl: MODE.homeHeaderTemplate ? MODE.homeHeaderTemplate : 'views/partials/site-header.html',
             },
             'appHeaderIn': {
-              templateUrl: 'views/partials/app-header.html',
+              templateUrl: 'views/partials/site-header.html',
             }
+          },
+          data: {
+            bodyClass: 'old'
           }
         })
         .state('policy', {
@@ -836,8 +390,11 @@
               templateUrl: MODE.homeHeaderTemplate ? MODE.homeHeaderTemplate : 'views/partials/site-header.html',
             },
             'appHeaderIn': {
-              templateUrl: 'views/partials/app-header.html',
+              templateUrl: 'views/partials/site-header.html',
             }
+          },
+          data: {
+            bodyClass: 'old'
           }
         });
 
@@ -900,12 +457,10 @@
       }
     }
 
-    angular.module('ncsaas').run(['$translate', 'LANGUAGE', '$rootScope', 'ENV',
-      function($translate, LANGUAGE, $rootScope, ENV) {
+    angular.module('ncsaas').run(['$translate', 'LANGUAGE', '$rootScope', '$state', 'ENV',
+      function($translate, LANGUAGE, $rootScope, $state, ENV) {
 
-        if (ENV.modePageTitle) {
-          $rootScope.pageTitle = ENV.modePageTitle;
-        }
+        $rootScope.$state = $state;
 
         // Check if current language is listed in choices
         function isValid(current) {

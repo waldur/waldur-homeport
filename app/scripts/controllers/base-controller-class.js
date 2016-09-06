@@ -58,7 +58,6 @@
       chosenFilters: [],
       cacheTime: ENV.defaultListCacheTime,
       controlPanelShow: true,
-      blockUIElement: null,
       mergeListFieldIdentifier: null,
 
       init: function() {
@@ -88,8 +87,11 @@
         });
       },
       blockListElement: function() {
-        if (this.blockUIElement) {
-          ncUtils.blockElement(this.blockUIElement, this.listPromise);
+        if (this.listPromise && this.listPromise.finally) {
+          this.loading = true;
+          this.listPromise.finally(function() {
+            this.loading = false;
+          }.bind(this));
         }
       },
       afterGetList: function() {},
@@ -348,10 +350,14 @@
       },
       activate: function() {
         var vm = this;
+        vm.loading = true;
         vm.getModel().then(function(response) {
           vm.model = response;
-          vm.afterActivate();
-        }, vm.modelNotFound.bind(vm));
+          vm.afterActivate(response);
+        }, vm.modelNotFound.bind(vm))
+        .finally(function() {
+          vm.loading = false;
+        });
       },
       getModel: function() {
         return this.service.$get($stateParams.uuid);

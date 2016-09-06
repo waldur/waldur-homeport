@@ -5,7 +5,8 @@ angular.module('ncsaas')
     // general config
     name: '',
     apiEndpoint: 'http://localhost:8080/',
-    modePageTitle: 'NodeConductor - Cloud Service Management',
+    modePageTitle: 'Waldur | Cloud Service Management',
+    shortPageTitle: 'Waldur',
 
     // Social login config
     googleClientId: 'google client id',
@@ -172,7 +173,7 @@ angular.module('ncsaas')
     enablePurchaseCostDisplay: true,
     entityCreateLink: {
       'services.create': 'service',
-      'projects.create': 'project',
+      'project-create': 'project',
       'appstore.store':  'resource',
       'import.import':   'resource'
     },
@@ -214,5 +215,6 @@ angular.module('ncsaas')
       'Updating': 'processing',
       'Deletion Scheduled': 'processing',
       'Deleting': 'processing'
-    }
+    },
+    ownerCanManageCustomer: true
   });

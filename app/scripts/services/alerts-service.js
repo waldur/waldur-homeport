@@ -105,7 +105,7 @@
                quota_threshold: 80,
                quota_use: alert.context.quota_usage,
                quota_usage: Math.round(alert.context.quota_usage * 100.0 / alert.context.quota_limit),
-               plan_url: $state.href('organizations.plans', {uuid: alert.context.scope_uuid})
+               plan_url: $state.href('organization.plans', {uuid: alert.context.scope_uuid})
             }
             if (alert.context.quota_limit == alert.context.quota_usage) {
               var template = 'Customer {customer_name} has reached {quota_name} quota limit ({quota_limit}). <a href="{plan_url}">Upgrade your plan</a>';
@@ -141,12 +141,11 @@
               var route, args, uuid = context[entity + "_uuid"];
               switch(entity) {
                 case 'service':
-                route = 'organizations.details';
+                route = 'organization.providers';
                 args = {
                   uuid: context.customer_uuid,
                   providerUuid: uuid,
                   providerType: context.service_type,
-                  tab: 'providers'
                 };
                 break;
 
@@ -159,7 +158,7 @@
                 break;
 
                 case 'customer':
-                route = 'organizations.details';
+                route = 'organization.details';
                 args = {
                   uuid: context.customer_uuid
                 };

@@ -15,7 +15,6 @@
 
       init: function() {
         this.controllerScope = controllerScope;
-        this.blockUIElement = 'tab-content';
         this._super();
         this.getProject();
       },
@@ -64,7 +63,6 @@
     var AlertController = BaseAlertsListController.extend({
       init: function() {
         this.controllerScope = controllerScope;
-        this.blockUIElement = 'tab-content';
         this._super();
       },
       getList: function(filter) {
@@ -119,7 +117,11 @@
         this.controllerScope = controllerScope;
         this.category = ENV.VirtualMachines;
         this._super();
-        this.entityOptions.entityData.noMatchesText = 'No VMs found matching filter.';
+
+        this.entityOptions.entityData.noDataText = 'You have no virtual machines yet';
+        this.entityOptions.entityData.createLinkText = 'Add virtual machine';
+        this.entityOptions.entityData.importLinkText = 'Import virtual machine';
+        this.entityOptions.entityData.noMatchesText = 'No virtual machines found matching filter.';
         this.entityOptions.entityData.openMap = this.openMap.bind(this);
       }
     });
@@ -142,6 +144,9 @@
         this.controllerScope = controllerScope;
         this.category = ENV.PrivateClouds;
         this._super();
+        this.entityOptions.entityData.noDataText = 'You have no private clouds yet';
+        this.entityOptions.entityData.createLinkText = 'Add private cloud';
+        this.entityOptions.entityData.importLinkText = 'Import private cloud';
         this.entityOptions.entityData.noMatchesText = 'No private clouds found matching filter.';
         this.entityOptions.entityData.openMap = this.openMap.bind(this);
       }
@@ -206,7 +211,6 @@
       init: function() {
         this.controllerScope = controllerScope;
         this.service = premiumSupportContractsService;
-        this.blockUIElement = 'tab-content';
         this._super();
 
         this.entityOptions = {
@@ -333,7 +337,7 @@
             currentStateService.reloadCurrentCustomer(function(customer) {
               $rootScope.$broadcast('checkQuotas:refresh');
               $rootScope.$broadcast('customerBalance:refresh');
-              $state.go('organizations.details', {uuid: customer.uuid, tab: 'projects'});
+              $state.go('organization.projects', {uuid: customer.uuid});
             });
           });
         }

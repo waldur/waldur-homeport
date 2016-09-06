@@ -1,0 +1,21 @@
+<div class="profile-element" uib-dropdown>
+    <img gravatar-src="Ctrl.user.email" class="img-circle" gravatar-size="48">
+    <a uib-dropdown-toggle>
+        <span class="clear">
+            <span class="block m-t-xs">
+                <strong class="font-bold">{{ Ctrl.user.full_name || 'User profile' }}</strong>
+            </span>
+            <span class="text-muted text-xs block">
+                {{ Ctrl.user.job_title || 'Details' }}
+                <b class="caret"></b>
+            </span>
+        </span>
+    </a>
+    <ul uib-dropdown-menu class="m-t-xs">
+        <li ng-repeat="item in Ctrl.items">
+            <a ui-sref="{{ ::item.link }}" ng-bind="::item.label"></a>
+        </li>
+        <li class="divider"></li>
+        <li><a ng-click="Ctrl.logout()">Logout</a></li>
+    </ul>
+</div>

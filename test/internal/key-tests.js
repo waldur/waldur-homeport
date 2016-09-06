@@ -22,19 +22,19 @@ for(var i = 0; i < testData.length; i++) {
   (function(user, data) {
     describe('Key add test for customer owner(' + user.username + '):', function() {
 
-      it('I should be able to login', function() {
+      xit('I should be able to login', function() {
         auth.login(user);
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/dashboard/');
       });
 
-      it('I should be able to go to "key add" page', function() {
+      xit('I should be able to go to "key add" page', function() {
         element(by.css('.user-dropdown .user-name')).click();
         element(by.cssContainingText('ul.nav-sublist.user-area li a', 'Profile')).click();
         element(by.cssContainingText('.button', 'Add SSH Key')).click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/keys/add/');
       });
 
-      it('I should be able to add new key', function() {
+      xit('I should be able to add new key', function() {
         // fill name
         element(by.model('KeyAdd.instance.name')).sendKeys(data.name);
         element(by.model('KeyAdd.instance.public_key')).sendKeys(data.public_key);
@@ -44,17 +44,17 @@ for(var i = 0; i < testData.length; i++) {
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/profile/keys');
       });
 
-      it('I should be able to find added key', function() {
+      xit('I should be able to find added key', function() {
         element(by.model('UserDetailUpdate.searchInput')).sendKeys(data.name);
         expect(element(by.cssContainingText('span', data.name)).isPresent()).toBe(true);
       });
 
-      it('I should be able to remove added key', function() {
+      xit('I should be able to remove added key', function() {
         element(by.cssContainingText('.one-action-button li a', 'Remove')).click();
         browser.switchTo().alert().accept();
       });
 
-      it('I should be able to logout', function() {
+      xit('I should be able to logout', function() {
         auth.logout();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/');
       });

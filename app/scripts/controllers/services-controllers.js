@@ -132,6 +132,7 @@
       checkProjects: function() {
         var vm = this;
         currentStateService.getCustomer().then(function(customer) {
+          vm.currentCustomer = customer;
           vm.customerHasProjects = (customer.projects.length > 0);
         });
       },
@@ -377,18 +378,16 @@
       },
 
       successRedirect: function() {
-        $state.go('organizations.details', {
+        $state.go('organization.providers', {
           uuid: this.customer.uuid,
-          tab: 'providers',
           providerType: this.instance.service_type,
           providerUuid: this.instance.uuid
         });
       },
 
       cancel: function() {
-        $state.go('organizations.details', {
-          uuid: this.customer.uuid,
-          tab: 'providers'
+        $state.go('organization.providers', {
+          uuid: this.customer.uuid
         });
       },
 

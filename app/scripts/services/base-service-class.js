@@ -95,6 +95,8 @@
       },
       getAll: function(filter, endpointUrl) {
         var vm = this;
+        var oldPageSize = vm.pageSize;
+        vm.pageSize = 100;
         return vm.getList(filter, endpointUrl).then(function(response) {
           if (vm.pages > 1) {
             var pages = {1: response};
@@ -120,7 +122,9 @@
             });
           }
           return response;
-        })
+        }).finally(function() {
+          vm.pageSize = oldPageSize;
+        });
       },
       setCache: function(time, response, cacheKey, endpoint) {
         var allCacheKeys = listCache.get(this.ALL_CACHE_KEYS) ? listCache.get(this.ALL_CACHE_KEYS) : {};

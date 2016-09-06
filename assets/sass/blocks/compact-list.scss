@@ -81,7 +81,6 @@ $compact-list-border-color: #e5e5e5;
 }
 
 .compact-list__action-list {
-  padding-left: 10px;
   padding-bottom: 5px;
 
   @include bp(xs) {

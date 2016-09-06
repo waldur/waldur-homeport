@@ -1,0 +1,12 @@
+<button class="btn btn-primary select-workspace" ng-click="SelectWorkspaceToggleController.selectWorkspace()">
+    <span ng-if="!SelectWorkspaceToggleController.customer">
+        Select workspace
+    </span>
+    <span ng-if="SelectWorkspaceToggleController.customer">
+        {{ SelectWorkspaceToggleController.customer.name }}
+    </span>
+    <span ng-if="SelectWorkspaceToggleController.project && ($state.includes('project') || $state.includes('appstore'))">
+      > {{ SelectWorkspaceToggleController.project.name }}
+    </span>
+    <i class="fa fa-angle-down"></i>
+</button>
