@@ -17,7 +17,7 @@ for(var i = 0; i < addCustomerTestData.length; i++) {
 
   (function(data, user, customerName) {
     describe('Customer creation test for customer owner(' + user.username + '):', function() {
-      it('I should be able to login', function() {
+      xit('I should be able to login', function() {
         auth.login(user);
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/dashboard/');
       });
@@ -45,7 +45,7 @@ for(var i = 0; i < addCustomerTestData.length; i++) {
         expect(element(by.cssContainingText('h3.item-title a', customerName)).isPresent()).toBe(true);
       });
 
-      it('I should be able to logout', function() {
+      xit('I should be able to logout', function() {
         auth.logout();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/');
       });

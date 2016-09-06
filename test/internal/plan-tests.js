@@ -7,19 +7,19 @@ var auth = require('../helpers/auth.js'),
 
 describe('Test plans ordering for ' + user.username + ':', function() {
 
-  it('I should be able to login', function() {
+  xit('I should be able to login', function() {
     auth.login(user);
     expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/dashboard/');
   });
 
-  it('I should be able to go to customers manage page', function() {
+  xit('I should be able to go to customers manage page', function() {
     element(by.css('.dropdown.customers .customer-name')).click();
 
     element(by.cssContainingText('li.dropdown.customers > ul > li > a', 'Manage organizations')).click();
     expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/organizations/');
   });
 
-  it('I should be able to see customer plans', function() {
+  xit('I should be able to see customer plans', function() {
     element(by.cssContainingText('h3.item-title a', customer.name)).click();
     browser.wait(function() {
       return element(by.cssContainingText('a.button', 'Plans')).isPresent();
@@ -33,7 +33,7 @@ describe('Test plans ordering for ' + user.username + ':', function() {
     }
   });
 
-  it('I should be able to select not current plan', function() {
+  xit('I should be able to select not current plan', function() {
     var plan = element(by.css('.plan-item:not(.current-plan) .plan-name'));
     plan.click();
     plan.getText().then(function(text) {
@@ -41,7 +41,7 @@ describe('Test plans ordering for ' + user.username + ':', function() {
     });
   });
 
-  it('I should be able to logout', function() {
+  xit('I should be able to logout', function() {
     auth.logout();
     expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/');
   });

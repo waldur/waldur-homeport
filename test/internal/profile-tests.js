@@ -9,12 +9,12 @@ for(var i=0; i < users.length; i++) {
   (function(user, newEmail) {
     describe('Test ' + user.username + ' can go to "profile" page:', function() {
 
-      it('I should be able to login', function() {
+      xit('I should be able to login', function() {
         auth.login(user);
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/dashboard/');
       });
 
-      it('I should be able to go to profile', function() {
+      xit('I should be able to go to profile', function() {
         element(by.css('.user-dropdown .user-name')).click();
         element(by.cssContainingText('ul.nav-sublist.user-area li a', 'Profile')).click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/profile/');
@@ -22,7 +22,7 @@ for(var i=0; i < users.length; i++) {
       });
 
       // XXX: This test changes user email, ideally we have to create new user and change his email.
-      it('I should be able to edit profile', function() {
+      xit('I should be able to edit profile', function() {
         function setEmail(email) {
           element(by.css('.user-email .icon')).click();
           element(by.css('.editable-input')).clear();
@@ -32,7 +32,7 @@ for(var i=0; i < users.length; i++) {
         expect(element(by.css('.user-email span')).getText()).toContain(newEmail);
       });
 
-      it('I should be able to logout', function() {
+      xit('I should be able to logout', function() {
         auth.logout();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/');
       });
@@ -50,7 +50,7 @@ for(var i=0; i < users.length; i++) {
 
   (function(user) {
     describe('Test ' + user.username + ' can go to delete account:', function() {
-      it('I should be able to login', function() {
+      xit('I should be able to login', function() {
         auth.login(user);
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/dashboard/');
       });
@@ -67,7 +67,7 @@ for(var i=0; i < users.length; i++) {
         expect(element(by.css('.tour-box .take-a-tour')).getText()).toEqual('Sign me up!');
       });
 
-      it('I should be able to logout', function() {
+      xit('I should be able to logout', function() {
         auth.logout();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/');
       });

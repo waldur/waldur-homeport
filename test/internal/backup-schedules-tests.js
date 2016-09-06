@@ -36,7 +36,7 @@ for(var i = 0; i < testData.length; i++) {
   (function(user, data, customer) {
     describe('Add backup-schedules test): ', function() {
 
-      it('I should be able to login', function() {
+      xit('I should be able to login', function() {
         auth.login(user);
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/dashboard/');
         helpers.chooseCustomer(customer);
@@ -65,7 +65,7 @@ for(var i = 0; i < testData.length; i++) {
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/backups/');
       });
 
-      it('I should be able to logout', function() {
+      xit('I should be able to logout', function() {
         auth.logout();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/#/');
       });
