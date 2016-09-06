@@ -381,75 +381,113 @@
     .controller('ProjectDetailsController', ProjectDetailsController);
 
   ProjectDetailsController.$inject = [
-    '$scope', 'currentStateService'
+    '$scope', 'currentStateService', 'tabCounterService', 'eventsService', 'projectsService', '$state'
   ];
-  function ProjectDetailsController($scope, currentStateService) {
+  function ProjectDetailsController(
+    $scope, currentStateService, tabCounterService, eventsService, projectsService, $state) {
+    activate();
+
+    function activate() {
+      $scope.items = [
+        {
+          link: "appstore.store",
+          icon: "fa-shopping-cart",
+          label: "Service store",
+          feature: "appstore"
+        },
+        {
+          label: "Resources",
+          icon: "fa-files-o",
+          state: "project.resources",
+          children: [
+            {
+              link: "project.resources.vms({uuid: context.project.uuid})",
+              icon: "fa-desktop",
+              label: "Virtual machines",
+              feature: "vms",
+              countFieldKey: "vms"
+            },
+            {
+              link: "project.resources.clouds({uuid: context.project.uuid})",
+              icon: "fa-cloud",
+              label: "Private clouds",
+              feature: "private_clouds",
+              countFieldKey: "private_clouds"
+            },
+            {
+              link: "project.resources.apps({uuid: context.project.uuid})",
+              icon: "fa-cube",
+              label: "Applications",
+              feature: "apps",
+              countFieldKey: "apps"
+            }
+          ]
+        },
+        {
+          link: "project.support({uuid: context.project.uuid})",
+          icon: "fa-question-circle",
+          label: "Support",
+          feature: "premiumSupport",
+          countFieldKey: "premium_support_contracts"
+        },
+        {
+          link: "project.details({uuid: context.project.uuid})",
+          icon: "fa-bell-o",
+          label: "Audit logs",
+          feature: "eventlog"
+        },
+        {
+          link: "project.alerts({uuid: context.project.uuid})",
+          icon: "fa-fire",
+          label: "Alerts",
+          feature: "alerts",
+          countFieldKey: "alerts"
+        },
+        {
+          link: "project.delete({uuid: context.project.uuid})",
+          icon: "fa-wrench",
+          label: "Manage"
+        }
+      ];
+      $scope.$on('currentProjectUpdated', function() {
+        refreshProject();
+      });
+      refreshProject();
+    }
+
     function refreshProject() {
       currentStateService.getProject().then(function(project) {
         $scope.currentProject = project;
         $scope.context = {project: project};
+        connectCounters(project);
       });
     }
-    $scope.$on('currentProjectUpdated', function() {
-      refreshProject();
-    });
-    refreshProject();
 
-    $scope.items = [
-      {
-        link: "appstore.store",
-        icon: "fa-shopping-cart",
-        label: "Service store",
-        feature: "appstore"
-      },
-      {
-        label: "Resources",
-        icon: "fa-files-o",
-        state: "project.resources",
-        children: [
-          {
-            link: "project.resources.vms({uuid: context.project.uuid})",
-            icon: "fa-desktop",
-            label: "Virtual machines",
-            feature: "vms"
-          },
-          {
-            link: "project.resources.clouds({uuid: context.project.uuid})",
-            icon: "fa-cloud",
-            label: "Private clouds",
-            feature: "private_clouds"
-          },
-          {
-            link: "project.resources.apps({uuid: context.project.uuid})",
-            icon: "fa-cube",
-            label: "Applications",
-            feature: "apps"
-          }
-        ]
-      },
-      {
-        link: "project.support({uuid: context.project.uuid})",
-        icon: "fa-question-circle",
-        label: "Support",
-        feature: "premiumSupport"
-      },
-      {
-        link: "project.details({uuid: context.project.uuid})",
-        icon: "fa-bell-o",
-        label: "Audit logs",
-        feature: "eventlog"
-      },
-      {
-        link: "project.alerts({uuid: context.project.uuid})",
-        icon: "fa-fire",
-        label: "Alerts",
-        feature: "alerts"
-      },
-      {
-        link: "project.delete({uuid: context.project.uuid})",
-        icon: "fa-wrench",
-        label: "Manage"
+    function connectCounters(project) {
+      if ($scope.timer) {
+        tabCounterService.cancel($scope.timer);
       }
-    ];
+
+      $scope.timer = tabCounterService.connect({
+        $scope: $scope,
+        tabs: $scope.items,
+        getCounters: getCounters.bind(null, project),
+        getCountersError: getCountersError
+      });
+    }
+
+    function getCounters(project) {
+      var query = angular.extend(
+        {UUID: project.uuid},
+        eventsService.defaultFilter
+      );
+      return projectsService.getCounters(query);
+    }
+
+    function getCountersError() {
+      projectsService.getFirst().then(function(project) {
+        $state.go('project.details', {uuid: project.uuid});
+      });
+    }
   }
 })();

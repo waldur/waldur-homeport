@@ -21,7 +21,10 @@
                 ng-class="{active: $state.includes(item.state)}">
                 <a ui-sref="{{ item.link }}" ng-if="item.link" visible="::item.feature">
                     <i class="fa {{ ::item.icon }} fixed-width-icon"></i>
-                    <span class="nav-label">{{ ::item.label }}</span>
+                    <span class="nav-label" ng-bind="::item.label"/>
+                    <span class="label label-default pull-right"
+                        ng-if="::item.countFieldKey"
+                        ng-bind="item.count"/>
                 </a>
                 <a ng-if="!item.link">
                     <i class="fa {{ ::item.icon }} fixed-width-icon"></i>
@@ -34,6 +37,9 @@
                         <a ui-sref="{{ child.link }}" visible="::item.feature">
                             <i class="fa {{ ::child.icon }}"></i>
                             {{ ::child.label }}
+                            <span class="label label-default pull-right"
+                                ng-if="::child.countFieldKey"
+                                ng-bind="child.count"/>
                         </a>
                     </li>
                 </ul>
