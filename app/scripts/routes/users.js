@@ -50,6 +50,9 @@
       .state('profile', {
         url: '/profile/',
         abstract: true,
+        data: {
+          auth: true
+        },
         templateUrl: 'views/user/base.html',
       })
 
@@ -62,6 +65,9 @@
       .state('users', {
         url: '/users/:uuid/',
         abstract: true,
+        data: {
+          auth: true
+        },
         templateUrl: 'views/user/base.html',
       })
 
@@ -76,6 +82,7 @@
         abstract: true,
         templateUrl: 'views/user/base.html',
         data: {
+          auth: true,
           pageTitle: 'Add SSH key'
         }
       })

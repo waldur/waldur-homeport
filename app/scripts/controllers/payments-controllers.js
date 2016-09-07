@@ -41,7 +41,7 @@
           currentStateService.reloadCurrentCustomer(function() {
             $rootScope.$broadcast('customerBalance:refresh');
           });
-          $state.go('home.home', {});
+          $state.go('dashboard.index', {});
         });
       },
     });
@@ -78,7 +78,7 @@
         }
         paymentsService.cancel({token: qs.token}).then(function(response) {
           ncUtilsFlash.success('Payment has been processed successfully.');
-          $state.go('home.home', {});
+          $state.go('dashboard.index', {});
         });
       },
     });

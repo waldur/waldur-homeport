@@ -362,8 +362,10 @@
       getModel: function() {
         return this.service.$get($stateParams.uuid);
       },
-      modelNotFound: function() {
-        $state.go('errorPage.notFound');
+      modelNotFound: function(error) {
+        if (error.status == 404) {
+          $state.go('errorPage.notFound');
+        }
       },
       remove: function() {
         var vm = this;

@@ -27,12 +27,11 @@
       'ui.slimscroll'
     ])
     // urls
-    .config(function($stateProvider, $urlRouterProvider, blockUIConfig, MODE) {
+    .config(function($stateProvider, $urlRouterProvider, MODE) {
       var initialDataState = 'initialdata.view',
         initialDataStatePath = '/initial-data/';
 
-      blockUIConfig.autoBlock = false;
-
+      $urlRouterProvider.when('/', '/dashboard/');
       $urlRouterProvider.otherwise('/login/');
 
       $stateProvider
@@ -40,9 +39,6 @@
           url: '/',
           abstract: true,
           templateUrl: 'views/partials/base.html',
-          resolve: {
-            authenticated: notLoggedCheck
-          }
         })
 
         .state('home.home', {
@@ -55,35 +51,29 @@
               templateUrl: MODE.homeTemplate ? MODE.homeTemplate : 'views/home/home.html',
             }
           },
-          resolve: {
-            authenticated: authCheck
-          },
           data: {
             bodyClass: 'landing',
-          }
+            disabled: true
+          },
         })
 
         .state('login', {
           url: '/login/',
           templateUrl: MODE.homeLoginTemplate ? MODE.homeLoginTemplate : 'views/home/login.html',
-          resolve: {
-            authenticated: notLoggedCheck
-          },
           data: {
             isSignupFormVisible: false,
-            bodyClass: 'old'
+            bodyClass: 'old',
+            anonymous: true,
           }
         })
 
         .state('register', {
           url: '/register/',
           templateUrl: MODE.homeLoginTemplate ? MODE.homeLoginTemplate : 'views/home/login.html',
-          resolve: {
-            authenticated: notLoggedCheck
-          },
           data: {
             isSignupFormVisible: true,
-            bodyClass: 'old'
+            bodyClass: 'old',
+            anonymous: true
           }
         })
 
@@ -97,8 +87,8 @@
               templateUrl: 'views/home/activate.html',
             }
           },
-          resolve: {
-            authenticated: notLoggedCheck
+          data: {
+            anonymous: true
           }
         })
 
@@ -112,8 +102,8 @@
               templateUrl: 'views/home/login_complete.html',
             }
           },
-          resolve: {
-            authenticated: notLoggedCheck
+          data: {
+            anonymous: true
           }
         })
 
@@ -133,11 +123,9 @@
               templateUrl: MODE.initialDataTemplate ? MODE.initialDataTemplate : 'views/initial-data/initial-data.html',
             }
           },
-          resolve: {
-            authenticated: authCheck
-          },
           noInitialData: true,
           data: {
+            auth: true,
             bodyClass: 'old'
           }
         })
@@ -145,7 +133,10 @@
         .state('support', {
           url: '/support/',
           templateUrl: 'views/customer/base.html',
-          abstract: true
+          abstract: true,
+          data: {
+            auth: true
+          }
         })
 
         .state('support.list', {
@@ -166,8 +157,9 @@
           abstract: true,
           templateUrl: 'views/customer/base.html',
           data: {
-            pageTitle: 'Dashboard'
-          }
+            pageTitle: 'Dashboard',
+            auth: true
+          },
         })
 
         .state('dashboard.index', {
@@ -180,6 +172,9 @@
           url: '/resources/',
           abstract: true,
           templateUrl: 'views/resource/base.html',
+          data: {
+            auth: true
+          }
         })
 
         .state('resources.details', {
@@ -191,6 +186,10 @@
           url: '/payment/',
           abstract: true,
           templateUrl: 'views/partials/base.html',
+          data: {
+            bodyClass: 'old',
+            auth: true
+          }
         })
 
         .state('payment.approve', {
@@ -203,12 +202,8 @@
               templateUrl: 'views/payment/approve.html',
             }
           },
-          resolve: {
-            authenticated: authCheck
-          },
-          auth: true,
           data: {
-            bodyClass: 'old'
+            pageTitle: 'Approve payment'
           }
         })
 
@@ -222,12 +217,8 @@
               templateUrl: 'views/payment/cancel.html',
             }
           },
-          resolve: {
-            authenticated: authCheck
-          },
-          auth: true,
           data: {
-            bodyClass: 'old'
+            pageTitle: 'Cancel payment'
           }
         })
 
@@ -235,6 +226,10 @@
           url: '/agreement/',
           abstract: true,
           templateUrl: 'views/partials/base.html',
+          data: {
+            auth: true,
+            bodyClass: 'old'
+          }
         })
 
         .state('agreement.approve', {
@@ -246,13 +241,6 @@
             'appContent' : {
               templateUrl: 'views/agreement/approve.html',
             }
-          },
-          resolve: {
-            authenticated: authCheck
-          },
-          auth: true,
-          data: {
-            bodyClass: 'old'
           }
         })
 
@@ -266,19 +254,15 @@
               templateUrl: 'views/agreement/cancel.html',
             }
           },
-          resolve: {
-            authenticated: authCheck
-          },
-          auth: true,
-          data: {
-            bodyClass: 'old'
-          }
         })
 
         .state('errorPage', {
           url: '/error/',
           templateUrl: 'views/partials/base.html',
           abstract: true,
+          data: {
+            bodyClass: 'old'
+          }
         })
 
         .state('errorPage.notFound', {
@@ -292,7 +276,7 @@
             }
           },
           data: {
-            bodyClass: 'old'
+            pageTitle: 'Page not found'
           }
         })
 
@@ -307,7 +291,7 @@
             }
           },
           data: {
-            bodyClass: 'old'
+            pageTitle: 'Quota limit exceeded'
           }
         })
 
@@ -350,7 +334,8 @@
             }
           },
           data: {
-            bodyClass: 'old'
+            bodyClass: 'old',
+            pageTitle: 'Terms of service'
           }
         })
         .state('about', {
@@ -372,7 +357,8 @@
             }
           },
           data: {
-            bodyClass: 'old'
+            bodyClass: 'old',
+            pageTitle: 'About'
           }
         })
         .state('policy', {
@@ -394,99 +380,113 @@
             }
           },
           data: {
-            bodyClass: 'old'
+            bodyClass: 'old',
+            pageTitle: 'Privacy policy'
           }
         });
+    });
 
-      function authCheck($q, $location, $auth, usersService, ENV) {
-        var deferred = $q.defer();
-        var vm = this;
-        if (!$auth.isAuthenticated()) {
-          // can't use $state because its will throw recursion error
-          $location.path('/login/');
-        } else {
-          if (!ENV.featuresVisible && (ENV.toBeFeatures.indexOf(vm.url.prefix.replace(/\//g, '')) !== -1
-            || ENV.toBeFeatures.indexOf(vm.url.source.replace(/\//g, '')) !== -1)) {
-            $location.path('/error/404/');
-          } else {
-            if (!vm.self.noInitialData) {
-              usersService.getCurrentUser().then(function(response) {
-                if (!response.email) {
-                  $location.path(initialDataStatePath);
-                } else {
-                  deferred.resolve();
-                }
-              });
-            } else {
-              deferred.resolve();
-            }
-          }
-        }
+})();
 
-        return deferred.promise;
+(function() {
+  angular.module('ncsaas')
+    .config(['ENV', 'CUSTOMENV', 'MODE', overrideBaseSettings]);
+
+  function overrideBaseSettings(ENV, CUSTOMENV, MODE) {
+    for (var modeProperty in MODE) {
+      if (MODE.hasOwnProperty(modeProperty)) {
+        ENV[modeProperty] = MODE[modeProperty];
+      }
+    }
+    for (var property in CUSTOMENV) {
+      if (CUSTOMENV.hasOwnProperty(property)) {
+        ENV[property] = CUSTOMENV[property];
+      }
+    }
+  }
+})();
+
+(function() {
+  angular.module('ncsaas').run(protectStates);
+
+  protectStates.$inject = ['$rootScope', '$state', '$auth', 'ENV', 'usersService'];
+
+  function protectStates($rootScope, $state, $auth, ENV, usersService) {
+    // 1) If state data has `disabled` flag, 
+    // user is redirected to dashboard.
+
+    // 2) If state data has `auth` flag and user is not authenticated,
+    // he is redirected to login page.
+
+    // 3) If state data has `anonymous` flag and user is authenticated,
+    // he is redirected to dashboard.
+
+    // 4) If state data has `feature` field and this feature is disabled,
+    // user is redirected to 404 error page.
+
+    $rootScope.$state = $state;
+
+    $rootScope.$on('$stateChangeStart',
+    function(event, toState, toParams, fromState, fromParams) {
+      var nextState = getNextState();
+      if (nextState) {
+        event.preventDefault();
+        $state.go(nextState);
       }
 
-      function notLoggedCheck($q, $location, $auth) {
-        var deferred = $q.defer();
-
-        if ($auth.isAuthenticated()) {
-          // can't use $state because its will throw recursion error
-          $location.path('/dashboard/');
-        } else {
-          deferred.resolve();
+      function getNextState() {
+        var data = toState.data;
+        if (!data) {
+          return;
+        } else if (data.disabled) {
+          return 'dashboard.index';
+        } else if (data.auth && !$auth.isAuthenticated()) {
+          return 'login';
+        } else if (data.anonymous && $auth.isAuthenticated()) {
+          return 'dashboard.index';
+        } else if (data.feature && disabledFeature(data.feature)) {
+          return 'errorPage.notFound';
         }
-
-        return deferred.promise;
       }
     });
 
-  (function() {
-    angular.module('ncsaas')
-      .config(['ENV', 'CUSTOMENV', 'MODE', overrideBaseSettings]);
+    function disabledFeature(feature) {
+      return (!ENV.featuresVisible && ENV.toBeFeatures.indexOf(feature) !== -1);
+    }
+  }
+})();
 
-    function overrideBaseSettings(ENV, CUSTOMENV, MODE) {
-      for (var modeProperty in MODE) {
-        if (MODE.hasOwnProperty(modeProperty)) {
-          ENV[modeProperty] = MODE[modeProperty];
+(function() {
+  angular.module('ncsaas').run(checkLanguage);
+
+  checkLanguage.$inject = ['$translate', 'LANGUAGE'];
+
+  function checkLanguage($translate, LANGUAGE) {
+    // Check if current language is listed in choices and
+    // switch to default language if current choice is invalid.
+
+    function isValid(current) {
+      for (var i=0; i<LANGUAGE.CHOICES.length; i++) {
+        if (LANGUAGE.CHOICES[i].code == current) {
+          return true;
         }
       }
-      for (var property in CUSTOMENV) {
-        if (CUSTOMENV.hasOwnProperty(property)) {
-          ENV[property] = CUSTOMENV[property];
-        }
-      }
+      return false;
     }
 
-    angular.module('ncsaas').run(['$translate', 'LANGUAGE', '$rootScope', '$state', 'ENV',
-      function($translate, LANGUAGE, $rootScope, $state, ENV) {
-
-        $rootScope.$state = $state;
-
-        // Check if current language is listed in choices
-        function isValid(current) {
-          for (var i=0; i<LANGUAGE.CHOICES.length; i++) {
-            if (LANGUAGE.CHOICES[i].code == current) {
-              return true;
-            }
-          }
-          return false;
-        }
-
-        // Switch to default language if current choice is invalid
-        var current = $translate.use();
-        if (!isValid(current)) {
-          $translate.use(LANGUAGE.DEFAULT);
-        }
-      }])
-  })();
+    var current = $translate.use();
+    if (!isValid(current)) {
+      $translate.use(LANGUAGE.DEFAULT);
+    }
+  }
 })();
 
 (function() {
   angular.module('ncsaas')
     .factory('httpInterceptor', [
-      '$q', 'ncUtilsFlash', 'ENV', 'blockUI', '$rootScope', httpInterceptor]);
+      '$q', '$location', 'ncUtilsFlash', 'ENV', 'blockUI', '$rootScope', httpInterceptor]);
 
-    function httpInterceptor($q, ncUtilsFlash, ENV, blockUI, $rootScope) {
+    function httpInterceptor($q, $location, ncUtilsFlash, ENV, blockUI, $rootScope) {
       var timeouts = {},
           abortRequests;
       function getKey(config) {
@@ -525,7 +525,11 @@
           return response;
         },
         'responseError': function(rejection) {
-          if (!abortRequests) {
+          if (rejection.status === 401) {
+            $rootScope.$broadcast('authService:signout');
+            $location.path('/login/');
+            return $q.reject(rejection);
+          } else if (!abortRequests) {
             var message = rejection.status ? (rejection.status + ': ' + rejection.statusText) : 'Connection error';
             if (rejection.data && rejection.data.non_field_errors) {
               message += ' ' + rejection.data.non_field_errors;
@@ -552,6 +556,7 @@
     .config(['$httpProvider', 'blockUIConfig', errorsHandler]);
 
   function errorsHandler($httpProvider, blockUIConfig) {
+    blockUIConfig.autoBlock = false;
     blockUIConfig.delay = 500;
     $httpProvider.interceptors.push('httpInterceptor');
 
@@ -562,4 +567,5 @@
       }
     };
   }
+
 })();

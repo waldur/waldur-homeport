@@ -4,6 +4,9 @@
       .state('organization', {
           url: '/organizations/:uuid/',
           abstract: true,
+          data: {
+            auth: true
+          },
           templateUrl: 'views/customer/base.html',
           resolve: {
             currentCustomer: function(
@@ -14,8 +17,10 @@
               return customersService.$get($stateParams.uuid).then(function(customer) {
                 $rootScope.$broadcast('adjustCurrentCustomer', customer);
                 return customer;
-              }, function() {
-                $state.go('errorPage.notFound');
+              }, function(error) {
+                if (error.status == 404) {
+                  $state.go('errorPage.notFound');
+                }
               });
             }
           }
@@ -130,7 +135,10 @@
       .state('services', {
         url: '/services/',
         abstract: true,
-        templateUrl: 'views/customer/base.html'
+        templateUrl: 'views/customer/base.html',
+        data: {
+          auth: true
+        }
       })
 
       .state('services.create', {
