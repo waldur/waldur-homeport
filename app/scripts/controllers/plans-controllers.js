@@ -121,7 +121,7 @@
         agreementsService.approve({token: qs.token}).then(function(response) {
           ncUtilsFlash.success('Billing plan agreement has been processed successfully.');
           currentStateService.reloadCurrentCustomer();
-          $state.go('home.home', {});
+          $state.go('dashboard.index', {});
         }, function(error) {
           if (error.data) {
             ncUtilsFlash.error(error.data.detail);
@@ -164,7 +164,7 @@
         }
         agreementsService.cancel({token: qs.token}).then(function(response) {
           ncUtilsFlash.success('Billing plan agreement has been processed successfully.');
-          $state.go('home.home', {});
+          $state.go('dashboard.index', {});
         }, function(error) {
           if (error.data) {
             ncUtilsFlash.error(error.data.detail);

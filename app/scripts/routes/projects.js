@@ -5,6 +5,9 @@
         url: '/projects/:uuid/',
         abstract: true,
         templateUrl: 'views/project/base.html',
+        data: {
+          auth: true,
+        },
         resolve: {
           currentProject: function(
             $stateParams, $state, $rootScope, projectsService, currentStateService) {
@@ -14,8 +17,10 @@
             return projectsService.$get($stateParams.uuid).then(function(project) {
               $rootScope.$broadcast('adjustCurrentProject', project);
               return project;
-            }, function() {
-              $state.go('errorPage.notFound');
+            }, function(error) {
+              if (error.status == 404) {
+                $state.go('errorPage.notFound');
+              }
             });
           }
         }
@@ -28,7 +33,8 @@
         controllerAs: 'ProjectAdd',
         data: {
           pageTitle: 'Create project',
-        }
+          auth: true
+        },
       })
 
       .state('project.details', {
@@ -112,6 +118,7 @@
         templateUrl: 'views/project/base.html',
         abstract: true,
         data: {
+          auth: true,
           pageTitle: 'Import resources from provider',
         }
       })
@@ -125,13 +132,16 @@
         url: '/appstore/',
         abstract: true,
         templateUrl: 'views/project/base.html',
+        data: {
+          auth: true,
+        }
       })
 
       .state('appstore.store', {
         url: ':category',
         templateUrl: 'views/appstore/store.html',
         data: {
-          pageTitle: 'Marketplace'
+          pageTitle: 'Service store'
         }
       })
 
@@ -140,6 +150,7 @@
         templateUrl: 'views/project/base.html',
         abstract: true,
         data: {
+          auth: true,
           pageTitle: 'Compare flavors',
         }
       })
