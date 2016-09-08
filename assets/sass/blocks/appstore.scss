@@ -646,35 +646,6 @@
         }
     }
 
-    .appstore-purchase {
-        text-align: center;
-        button {
-            margin: 15px;
-            display: inline-block;
-            border-radius: 5px;
-            background: $button-green;
-            text-align: center;
-            padding: 10px 15px;
-            &.cancel-purchase {
-                background: none;
-                &:hover {
-                    text-decoration: underline;
-                }
-            }
-            @include bp(xs) {
-                margin: 15px 2px 40px;
-            }
-            img {
-                display: inline;
-                margin-right: 10px;
-            }
-            span {
-                color: #FFF;
-                font-size: 16px;
-            }
-        }
-    }
-
     .appstore-aside {
         position: fixed;
         right: 22px;

@@ -1,5 +1,90 @@
 (function() {
   angular.module('ncsaas')
+    .constant('OFFERINGS', [
+      {
+        label: "IT Transformation Service",
+        description: "Hosting in highly secured data center.",
+        key: "transformation",
+        icon: "fa-building",
+        category: "Integrated offering",
+        link: "appstore.offering({category: 'transformation'})"
+      },
+      {
+        label: "Devops-as-a-Service platform",
+        description: "Enforce best-practices of application delivery.",
+        key: "devops",
+        icon: "fa-gears",
+        category: "Integrated offering",
+        link: "appstore.offering({category: 'devops'})"
+      },
+      {
+        label: "Disaster Recovery site",
+        description: "Planning for business continuity under all conditions.",
+        key: "recovery",
+        icon: "fa-get-pocket",
+        category: "Integrated offering",
+        link: "appstore.offering({category: 'recovery'})"
+      },
+      {
+        label: "Managed applications",
+        description: "Full monitoring and application support",
+        key: "managed_apps",
+        icon: "fa-gears",
+        category: "Integrated offering",
+        link: "appstore.offering({category: 'managed_apps'})"
+      },
+      {
+        label: "Virtual machines",
+        icon: "fa-desktop",
+        feature: "vms",
+        category: "Component offering",
+        key: "vms",
+        link: "appstore.store({category: 'vms'})"
+      },
+      {
+        label: "Private clouds",
+        icon: "fa-cloud",
+        feature: "private_clouds",
+        category: "Component offering",
+        key: "private_clouds",
+        link: "appstore.store({category: 'private_clouds'})"
+      },
+      {
+        label: "Applications",
+        icon: "fa-database",
+        feature: "apps",
+        category: "Component offering",
+        key: "apps",
+        link: "appstore.store({category: 'apps'})"
+      },
+      {
+        label: "Support",
+        icon: "fa-wrench",
+        key: "support",
+        feature: "premiumSupport",
+        category: "Premium support package",
+        link: "appstore.store({category: 'support'})"
+      }
+    ]);
+
+  angular.module('ncsaas')
+    .controller('AppStoreIndexController', AppStoreIndexController);
+
+  AppStoreIndexController.$inject = ['OFFERINGS'];
+  function AppStoreIndexController(OFFERINGS) {
+    this.offerings = OFFERINGS;
+  }
+
+  angular.module('ncsaas')
+    .controller('AppStoreOfferingController', AppStoreOfferingController);
+
+  AppStoreOfferingController.$inject = ['OFFERINGS', '$stateParams'];
+  function AppStoreOfferingController(OFFERINGS, $stateParams) {
+    this.category = $stateParams.category;
+  }
+
+
+  angular.module('ncsaas')
     .controller('AppStoreController', [
       'baseControllerAddClass',
       'servicesService',
@@ -174,7 +259,7 @@
         return this.selectedCategory.name == ENV.appStoreCategories[ENV.Applications].name;
       },
       isSupportSelected: function() {
-        return this.selectedCategory.name == 'SUPPORT';
+        return this.selectedCategory.name == 'Support';
       },
       setService: function(service) {
         if (!service.enabled) {
@@ -200,7 +285,7 @@
         }
       },
       filterResources: function(item) {
-        if (this.selectedCategory.name === 'VMs') {
+        if (this.selectedCategory.name === 'Virtual machines') {
           if (this.serviceType === 'OpenStack' && item != 'Instance') {
             return false;
           }
@@ -340,10 +425,10 @@
             display_label = this.selectedService.type + ' OS password';
           }
           if (name === 'name') {
-            if (this.selectedCategory.name === 'VMs') {
+            if (this.selectedCategory.name === 'Virtual machines') {
               display_label = 'VM name';
             }
-            if (this.selectedCategory.name === 'APPLICATIONS') {
+            if (this.selectedCategory.name === 'Applications') {
               display_label = 'Name'
             }
           }
@@ -760,8 +845,21 @@
             });
           }
           vm.addSupportCategory(supportList);
+          vm.setCategoryFromParams();
         });
         ncUtils.blockElement('store-content', listPromises);
+      },
+      setCategoryFromParams: function() {
+        var vm = this;
+        if ($stateParams.category) {
+          for (var i = 0; i < vm.categories.length; i++) {
+            var category = vm.categories[i];
+            if (category.key === $stateParams.category) {
+              vm.setCategory(category);
+              return;
+            }
+          }
+        }
       },
       loadProjectWithServices: function() {
         var vm = this;
@@ -816,14 +914,12 @@
               vm.renderStore = true;
               var category = {
                 type: 'package',
-                name: 'SUPPORT',
+                name: 'Support',
                 icon: 'wrench',
+                key: 'support',
                 packages: list
               };
               vm.categories.push(category);
-              if ($stateParams.category == 'support') {
-                vm.setCategory(category);
-              }
             }
         } else {
           vm.loadingProviders = false;

@@ -18,7 +18,7 @@ angular.module('ncsaas')
     featuresVisible: false,
     appStoreCategories: [
       {
-        name: 'VMs',
+        name: 'Virtual machines',
         icon: 'desktop',
         type: 'provider',
         services: ['OpenStack']

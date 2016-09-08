@@ -119,6 +119,7 @@
         this._super();
 
         this.entityOptions.entityData.noDataText = 'You have no virtual machines yet';
+        this.entityOptions.entityData.createLink = 'appstore.store({category: "vms"})';
         this.entityOptions.entityData.createLinkText = 'Add virtual machine';
         this.entityOptions.entityData.importLinkText = 'Import virtual machine';
         this.entityOptions.entityData.noMatchesText = 'No virtual machines found matching filter.';
@@ -145,6 +146,7 @@
         this.category = ENV.PrivateClouds;
         this._super();
         this.entityOptions.entityData.noDataText = 'You have no private clouds yet';
+        this.entityOptions.entityData.createLink = "appstore.store({category: 'private_clouds'})";
         this.entityOptions.entityData.createLinkText = 'Add private cloud';
         this.entityOptions.entityData.importLinkText = 'Import private cloud';
         this.entityOptions.entityData.noMatchesText = 'No private clouds found matching filter.';
@@ -171,6 +173,7 @@
         this._super();
 
         this.entityOptions.entityData.noDataText = 'You have no applications yet';
+        this.entityOptions.entityData.createLink = 'appstore.store({category: "apps"})';
         this.entityOptions.entityData.createLinkText = 'Add application';
         this.entityOptions.entityData.importLinkText = 'Import application';
         this.entityOptions.entityData.noMatchesText = 'No applications found matching filter.';

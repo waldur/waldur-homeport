@@ -1,0 +1,44 @@
+<div ng-if="OfferingController.category == 'transformation'">
+    <h3>IT Transformation Service</h3>
+    <ul>
+        <li>Hosting in highly secured data center allowing to run applications requiring ISKE H+ compliancy as well.</li>
+        <li>Carrier-neutral data center with several network providers.</li>
+        <li>Support tools for estimation of customer's resource requirements for existing or new systems.</li>
+        <li>Usage-based pricing, estimation of the maximum burden OR fixed monthly pricing to simplify planning.</li>
+        <li>Support for migration of licensed software and hardware.</li>
+        <li>Assistance with mid- and long-term planning for service development.</li>
+        <li>Support for migration activities.</li>
+        <li>Trainings for the IT personnel</li>
+    </ul>
+</div>
+<div ng-if="OfferingController.category == 'devops'">
+    <h3>Devops-as-a-Service platform</h3>
+    <ul>
+        <li>Enforce best-practices of application delivery.</li>
+        <li>Pre-made policies for vendor-driven project deployments.</li>
+        <li>Based on Apcera PaaS platform.</li>
+        <li>Integrated private docker hub for hosting application solutions. </li>
+    </ul>
+</div>
+<div ng-if="OfferingController.category == 'recovery'">
+    <h3>Disaster Recovery site</h3>
+    <ul>
+        <li>Planning for business continuity under all conditions.</li>
+        <li>Benefit from verified ISKE H+ compliant data center facilities.</li>
+        <li>Supporting all forms of DR sites: cold, warm or hot.</li>
+    </ul>
+</div>
+<div ng-if="OfferingController.category == 'managed_apps'">
+    <h3>Managed applications</h3>
+    <ul>
+        <li>Full monitoring and application support.</li>
+        <li>Assurance of ISKE compliancy, assistance with performing audits.</li>
+        <li>Professional 24/7 team that speaks your language.</li>
+        <li>Consultancy for application improvements and architecture reviews.</li>
+    </ul>
+</div>
+
+<button class="btn btn-primary" submit-button="OfferingController.save()">
+    <i class="fa fa-shopping-cart"></i> Create
+</button>
+<button class="btn btn-default" cancel-button>Cancel</button>

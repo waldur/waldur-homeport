@@ -1,31 +1,23 @@
-<div ng-controller="AppStoreController as AppStore" block-ui="store-content">
-    <div>
-        <div class="appstore-wrapper">
-            <div class="appstore-content">
-                <div ng-if="AppStore.renderStore"
-                     ng-include="'views/appstore/sections.html'">
-                </div>
-                <div class="clear"></div>
-            </div>
+<div ng-if="AppStore.renderStore"
+     ng-include="'views/appstore/sections.html'"
+     class="wrapper wrapper-content">
+</div>
 
-            <div ng-include="'views/appstore/summary.html'"></div>
+<div ng-include="'views/appstore/summary.html'"></div>
 
-            <section ng-show="AppStore.selectedResourceType" class="appstore-purchase" title="{{ AppStore.getTooltip() }}">
-                <button ng-class="{'disabled': !AppStore.canSave()}" submit-button="AppStore.save()">
-                <img ng-show="AppStore.enablePurchaseCostDisplay" src="/static/images/appstore/icon-curt.png" alt=""/>
-                <span>{{ AppStore.enablePurchaseCostDisplay ? 'Purchase' : 'Create' }}</span>
-                </button>
-                <button class="cancel-purchase" cancel-button>Cancel</button>
-            </section>
-        </div>
-    </div>
-    <div class="project-alert-message" ng-if="!AppStore.loadingProviders && !AppStore.renderStore">
-        <p>
-            There are no working accounts available for the current project.<br />
-            <span visible="providers">
-                You can change that in
-                <a ui-sref="project.details({uuid: AppStore.currentProject.uuid})">provider management</a>.
-            </span>
-        </p>
-    </div>
+<section ng-if="AppStore.selectedResourceType" title="{{ AppStore.getTooltip() }}">
+    <button class="btn btn-primary" ng-class="{'disabled': !AppStore.canSave()}" submit-button="AppStore.save()">
+        <i class="fa fa-shopping-cart" ng-if="AppStore.enablePurchaseCostDisplay"></i>
+        {{ AppStore.enablePurchaseCostDisplay ? 'Purchase' : 'Create' }}
+    </button>
+    <button class="btn btn-default" cancel-button>Cancel</button>
+</section>
+<div class="project-alert-message" ng-if="!AppStore.loadingProviders && !AppStore.renderStore">
+    <p>
+        There are no working accounts available for the current project.<br />
+        <span visible="providers">
+            You can change that in
+            <a ui-sref="project.details({uuid: AppStore.currentProject.uuid})">provider management</a>.
+        </span>
+    </p>
 </div>

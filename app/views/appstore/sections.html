@@ -1,35 +1,7 @@
-<section class="step-1">
-    <div class="step-title">
-        <span>Step 1: Choose category</span>
-    </div>
-    <div class="appstore-templates appstore-categories">
-        <!-- category -->
-        <div class="appstore-template appstore-category"
-             ng-repeat="category in AppStore.categories"
-             ng-click="AppStore.setCategory(category)"
-             ng-class="{'state': AppStore.selectedCategory == category}">
-            <div class="icon {{ ::category.icon }}"></div>
-            <h3>{{ category.name }}</h3>
-            <div visible="compare" class="compare compare-active"
-                 ng-show="AppStore.showCompare.indexOf(category.name) !== -1">
-                <a stoppropagation ui-sref="compare.compare">Compare</a>
-            </div>
-        </div>
-        <div class="appstore-template appstore-category disabled"
-             ng-repeat="category in AppStore.futureCategories">
-            <div class="icon {{ ::category.icon }}"></div>
-            <h3>{{ ::category.name }}</h3>
-            <div class="compare compare-active">
-                Coming soon
-            </div>
-        </div>
-        <!-- /category -->
-    </div>
-</section>
 <section class="step-2" ng-show="AppStore.secondStep">
     <div class="step-title">
         <span>
-            Step 2: Choose {{ AppStore.selectedCategory.type }}
+            Choose {{ AppStore.selectedCategory.type }}
         </span>
     </div>
     <div class="appstore-templates" ng-if="AppStore.selectedCategory.type == 'provider'">
@@ -64,7 +36,7 @@
 </section>
 
 <section class="step-2" ng-show="AppStore.resourceTypesBlock">
-    <div class="step-title"><span>Step {{ AppStore.chooseResourceTypeStepNumber }}: Choose resource type</span></div>
+    <div class="step-title"><span>Choose resource type</span></div>
     <div class="appstore-templates">
         <!-- service -->
         <div class="appstore-template {{name.toLowerCase()}}"
@@ -84,7 +56,7 @@
 <section class="step-3" ng-show="AppStore.selectedResourceType" block-ui="resource-properties">
     <div class="step-title">
         <span>
-            Step {{ AppStore.configureStepNumber }}: Configure {{ AppStore.secondStep && AppStore.serviceType || ''}}
+            Configure {{ AppStore.secondStep && AppStore.serviceType || ''}}
             {{ AppStore.selectedResourceTypeName }}
         </span>
     </div>
@@ -93,7 +65,7 @@
 </section>
 
 <section class="step-3 agreement appstore-purchase" ng-if="AppStore.agreementShow && AppStore.selectedCategory.type == 'package'">
-    <div class="step-title"><span>Step 3: Sign a support agreement</span></div>
+    <div class="step-title"><span>Sign a support agreement</span></div>
     <div class="step-content">
         <ul>
             <li>
@@ -117,8 +89,8 @@
             </li>
         </ul>
     </div>
-    <button ng-class="{'disabled': !AppStore.selectedPackage}" submit-button="AppStore.signContract()">
-        <img src="/static/images/appstore/icon-curt.png" alt=""/>
-        <span>Submit SLA request</span>
+    <button class="btn btn-primary" ng-class="{'disabled': !AppStore.selectedPackage}" submit-button="AppStore.signContract()">
+        <i class="fa fa-shopping-cart"></i>
+        Submit SLA request
     </button>
 </section>

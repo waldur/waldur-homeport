@@ -381,19 +381,20 @@
     .controller('ProjectDetailsController', ProjectDetailsController);
 
   ProjectDetailsController.$inject = [
-    '$scope', 'currentStateService', 'tabCounterService', 'eventsService', 'projectsService', '$state'
+    '$scope', 'currentStateService', 'tabCounterService', 'eventsService', 'projectsService', '$state', 'OFFERINGS'
   ];
   function ProjectDetailsController(
-    $scope, currentStateService, tabCounterService, eventsService, projectsService, $state) {
+    $scope, currentStateService, tabCounterService, eventsService, projectsService, $state, OFFERINGS) {
     activate();
 
     function activate() {
       $scope.items = [
         {
-          link: "appstore.store",
           icon: "fa-shopping-cart",
           label: "Service store",
-          feature: "appstore"
+          feature: "appstore",
+          state: "appstore",
+          children: OFFERINGS
         },
         {
           label: "Resources",

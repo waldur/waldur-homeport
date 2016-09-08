@@ -47,21 +47,24 @@ angular.module('ncsaas')
 
     appStoreCategories: [
       {
-        name: 'VMs',
+        name: 'Virtual machines',
         type: 'provider',
         icon: 'desktop',
+        key: 'vms',
         services: ['DigitalOcean', 'Azure', 'Amazon', 'OpenStack']
       },
       {
         name: 'Private clouds',
         type: 'provider',
         icon: 'cloud',
+        key: 'private_clouds',
         services: ['OpenStack']
       },
       {
-        name: 'APPLICATIONS',
+        name: 'Applications',
         icon: 'database',
         type: 'provider',
+        key: 'apps',
         services: ['Oracle', 'GitLab']
       }
     ],
@@ -93,7 +96,7 @@ angular.module('ncsaas')
         "Zabbix.ITService": "apps"
     },
     showCompare: [
-      'VMs'
+      'Virtual machines'
     ],
     IntercomAppId: 'xfbbcxck',
     defaultListCacheTime: 60 * 10,
