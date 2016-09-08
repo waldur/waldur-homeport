@@ -59,7 +59,7 @@
 
         .state('login', {
           url: '/login/',
-          templateUrl: MODE.homeLoginTemplate ? MODE.homeLoginTemplate : 'views/home/login.html',
+          templateUrl: 'views/home/login-box.html',
           data: {
             isSignupFormVisible: false,
             bodyClass: 'old',
@@ -69,7 +69,7 @@
 
         .state('register', {
           url: '/register/',
-          templateUrl: MODE.homeLoginTemplate ? MODE.homeLoginTemplate : 'views/home/login.html',
+          templateUrl: 'views/home/login-box.html',
           data: {
             isSignupFormVisible: true,
             bodyClass: 'old',
