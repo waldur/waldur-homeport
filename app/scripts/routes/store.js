@@ -19,14 +19,14 @@
       })
 
       .state('appstore.store', {
-        url: ':category',
+        url: ':category/',
         templateUrl: 'views/appstore/store.html',
         controller: 'AppStoreController',
         controllerAs: 'AppStore'
       })
 
       .state('appstore.offering', {
-        url: 'offering/:category',
+        url: 'offering/:category/',
         templateUrl: 'views/appstore/offering.html',
         controller: 'AppStoreOfferingController',
         controllerAs: 'OfferingController'
