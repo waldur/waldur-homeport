@@ -404,7 +404,8 @@
     'eventsService',
     'customersService',
     '$state',
-    'tabCounterService'
+    'tabCounterService',
+    'AppStoreDialogService'
   ];
   function CustomerDetailsController(
     $scope,
@@ -413,7 +414,8 @@
     eventsService,
     customersService,
     $state,
-    tabCounterService) {
+    tabCounterService,
+    AppStoreDialogService) {
 
     activate();
 
@@ -432,6 +434,12 @@
           link: "organization.projects({uuid: context.customer.uuid})",
           feature: "projects",
           countFieldKey: "projects"
+        },
+        {
+          icon: "fa-shopping-cart",
+          label: "Service store",
+          feature: "appstore",
+          action: AppStoreDialogService.openDialog.bind(null, {selectProject: true}),
         },
         {
           label: "Analytics",

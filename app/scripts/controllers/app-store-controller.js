@@ -7,7 +7,7 @@
         key: "transformation",
         icon: "fa-building",
         category: "Integrated offering",
-        link: "appstore.offering({category: 'transformation'})"
+        state: "appstore.offering"
       },
       {
         label: "Devops-as-a-Service platform",
@@ -15,7 +15,7 @@
         key: "devops",
         icon: "fa-gears",
         category: "Integrated offering",
-        link: "appstore.offering({category: 'devops'})"
+        state: "appstore.offering"
       },
       {
         label: "Disaster Recovery site",
@@ -23,7 +23,7 @@
         key: "recovery",
         icon: "fa-get-pocket",
         category: "Integrated offering",
-        link: "appstore.offering({category: 'recovery'})"
+        state: "appstore.offering"
       },
       {
         label: "Managed applications",
@@ -31,7 +31,7 @@
         key: "managed_apps",
         icon: "fa-gears",
         category: "Integrated offering",
-        link: "appstore.offering({category: 'managed_apps'})"
+        state: "appstore.offering"
       },
       {
         label: "Virtual machines",
@@ -39,7 +39,8 @@
         feature: "vms",
         category: "Component offering",
         key: "vms",
-        link: "appstore.store({category: 'vms'})"
+        state: "appstore.store",
+        description: "OpenStack Instances and DigitalOcean Droplets."
       },
       {
         label: "Private clouds",
@@ -47,7 +48,8 @@
         feature: "private_clouds",
         category: "Component offering",
         key: "private_clouds",
-        link: "appstore.store({category: 'private_clouds'})"
+        state: "appstore.store",
+        description: "OpenStack tenants and Amazon VPC."
       },
       {
         label: "Applications",
@@ -55,17 +57,82 @@
         feature: "apps",
         category: "Component offering",
         key: "apps",
-        link: "appstore.store({category: 'apps'})"
+        state: "appstore.store",
+        description: "Oracle database and SugarCRM."
       },
       {
         label: "Support",
         icon: "fa-wrench",
         key: "support",
         feature: "premiumSupport",
-        category: "Premium support package",
-        link: "appstore.store({category: 'support'})"
+        category: "Component offering",
+        state: "appstore.store",
+        description: "Premium support service."
       }
     ]);
+
+  angular.module('ncsaas')
+    .service('AppStoreDialogService', AppStoreDialogService);
+
+  AppStoreDialogService.$inject = ['$uibModal', '$rootScope'];
+  function AppStoreDialogService($uibModal, $rootScope) {
+    this.openDialog = function(options) {
+      var dialogScope = $rootScope.$new();
+      options = options || {};
+      dialogScope.selectProject = options.selectProject;
+      $uibModal.open({
+        templateUrl: 'views/directives/appstore-dialog.html',
+        size: 'lg',
+        controller: 'AppStoreDialogController',
+        controllerAs: 'DialogCtrl',
+        bindToController: true,
+        scope: dialogScope
+      });
+    }
+
+  }
+
+  angular.module('ncsaas')
+    .controller('AppStoreDialogController', AppStoreDialogController);
+
+  AppStoreDialogController.$inject = [
+    'OFFERINGS', '$state', '$rootScope', 'currentStateService', 'projectsService'
+  ];
+  function AppStoreDialogController(OFFERINGS, $state, $rootScope, currentStateService, projectsService) {
+    var vm = this;
+    vm.selectOffering = selectOffering;
+    activate();
+
+    function activate() {
+      vm.integratedOfferings = OFFERINGS.filter(function(offering) {
+        return offering.category === "Integrated offering";
+      });
+      vm.componentOfferings = OFFERINGS.filter(function(offering) {
+        return offering.category === "Component offering";
+      });
+      if (vm.selectProject) {
+        currentStateService.getCustomer().then(function(customer) {
+          vm.projects = customer.projects;
+        });
+      }
+    }
+
+    function selectOffering(offering) {
+      vm.$close();
+      if (vm.selectedProject) {
+        projectsService.$get(vm.selectedProject).then(function(project) {
+          $rootScope.$broadcast('adjustCurrentProject', project);
+          gotoOffering(offering);
+        });
+      } else {
+        gotoOffering(offering);
+      }
+    }
+
+    function gotoOffering(offering) {
+      $state.go(offering.state, {category: offering.key});
+    }
+  }
 
   angular.module('ncsaas')
     .controller('AppStoreIndexController', AppStoreIndexController);

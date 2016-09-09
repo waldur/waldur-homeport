@@ -26,7 +26,11 @@
                         ng-if="::item.countFieldKey"
                         ng-bind="item.count"/>
                 </a>
-                <a ng-if="!item.link">
+                <a ng-if="::item.action" ng-click="item.action()">
+                    <i class="fa {{ ::item.icon }} fixed-width-icon"></i>
+                    <span class="nav-label">{{ ::item.label }}</span>
+                </a>
+                <a ng-if="::item.children">
                     <i class="fa {{ ::item.icon }} fixed-width-icon"></i>
                     <span class="nav-label">{{ ::item.label }}</span>
                     <span class="fa arrow"></span>

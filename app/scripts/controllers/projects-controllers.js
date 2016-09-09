@@ -381,10 +381,12 @@
     .controller('ProjectDetailsController', ProjectDetailsController);
 
   ProjectDetailsController.$inject = [
-    '$scope', 'currentStateService', 'tabCounterService', 'eventsService', 'projectsService', '$state', 'OFFERINGS'
+    '$scope', 'currentStateService', 'tabCounterService',
+    'eventsService', 'projectsService', '$state', 'AppStoreDialogService'
   ];
   function ProjectDetailsController(
-    $scope, currentStateService, tabCounterService, eventsService, projectsService, $state, OFFERINGS) {
+    $scope, currentStateService, tabCounterService,
+    eventsService, projectsService, $state, AppStoreDialogService) {
     activate();
 
     function activate() {
@@ -393,8 +395,7 @@
           icon: "fa-shopping-cart",
           label: "Service store",
           feature: "appstore",
-          state: "appstore",
-          children: OFFERINGS
+          action: AppStoreDialogService.openDialog,
         },
         {
           label: "Resources",

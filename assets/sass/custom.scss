@@ -87,3 +87,16 @@ body.landing {
   font-size: 60px;
   padding: 20px 0px;
 }
+
+.appstore-dialog {
+  .list-group-item {
+    border-radius: 4px;
+  }
+  .list-group-item-heading {
+    margin-top: 5px;
+    font-size: 15px;
+  }
+  .list-group-item-text {
+    margin: 5px 45px 2px 30px;
+  }
+}

@@ -1,0 +1,57 @@
+<div class="modal-header">
+    <h2 class="modal-title">Service store</h2>
+</div>
+<div class="modal-body">
+    <div ng-if="DialogCtrl.loading">
+        <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
+    </div>
+    <div ng-if="!DialogCtrl.loading">
+        <div class="form-group" ng-if="DialogCtrl.selectProject">
+            <label class="control-label">Projects</label>
+            <select id="action-{{ name }}"
+                ng-options="project.uuid as project.name for project in DialogCtrl.projects"
+                ng-model="DialogCtrl.selectedProject"
+                class="form-control">
+                <option value="">Select project</option>
+             </select>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Integrated offerings</h3>
+                <div class="list-group appstore-dialog">
+                    <a class="list-group-item m-b-sm"
+                        ng-repeat="offering in DialogCtrl.integratedOfferings"
+                        ng-click="DialogCtrl.selectOffering(offering)">
+                        <h4 class="list-group-item-heading">
+                            <i class="fa m-r-sm fixed-width-icon" ng-class="::offering.icon"></i>
+                            {{ ::offering.label }}
+                            <div class="btn btn-default pull-right btn-xs">Select</div>
+                        </h4>
+                        <p class="list-group-item-text" ng-bind="::offering.description"></p>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h3>Component offerings</h3>
+                <div class="list-group appstore-dialog">
+                    <a class="list-group-item m-b-sm"
+                        ng-repeat="offering in DialogCtrl.componentOfferings"
+                        ng-click="DialogCtrl.selectOffering(offering)">
+                        <h4 class="list-group-item-heading">
+                            <i class="fa m-r-sm fixed-width-icon" ng-class="::offering.icon"></i>
+                            {{ ::offering.label }}
+                            <div class="btn btn-default pull-right btn-xs">Select</div>
+                        </h4>
+                        <p class="list-group-item-text" ng-bind="::offering.description"></p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-default"
+        ng-click="DialogCtrl.$dismiss()">
+        Cancel
+    </button>
+</div>

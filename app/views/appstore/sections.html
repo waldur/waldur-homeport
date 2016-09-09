@@ -1,3 +1,11 @@
+<div visible="compare"
+     ng-if="AppStore.showCompare.indexOf(AppStore.selectedCategory.name) !== -1">
+    <a ui-sref="compare.compare">
+        <i class="fa fa-balance-scale"></i>
+        Compare flavors
+    </a>
+</div>
+
 <section class="step-2" ng-show="AppStore.secondStep">
     <div class="step-title">
         <span>
