@@ -396,6 +396,7 @@
           label: "Service store",
           feature: "appstore",
           action: AppStoreDialogService.openDialog,
+          state: "appstore"
         },
         {
           label: "Resources",

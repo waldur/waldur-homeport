@@ -1011,7 +1011,7 @@
         return contract.$save().then(function(response) {
           premiumSupportContractsService.clearAllCacheForCurrentEndpoint();
           $rootScope.$broadcast('refreshProjectList');
-          $state.go('project.support', {uuid: this.currentProject.uuid});
+          $state.go('project.support', {uuid: vm.currentProject.uuid});
           return true;
         }, function(response) {
           vm.errors = response.data;

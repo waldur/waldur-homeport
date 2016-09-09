@@ -440,6 +440,7 @@
           label: "Service store",
           feature: "appstore",
           action: AppStoreDialogService.openDialog.bind(null, {selectProject: true}),
+          state: "appstore"
         },
         {
           label: "Analytics",

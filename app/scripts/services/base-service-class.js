@@ -147,6 +147,9 @@
       },
       clearAllCacheForCurrentEndpoint: function() {
         var allKeys = listCache.get(this.ALL_CACHE_KEYS);
+        if (!allKeys) {
+          return;
+        }
         var currentKeys = allKeys[this.endpoint];
         if (currentKeys) {
           for (var i = 0; i < currentKeys.length; i++) {
