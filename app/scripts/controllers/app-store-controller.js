@@ -34,9 +34,11 @@
     .controller('AppStoreDialogController', AppStoreDialogController);
 
   AppStoreDialogController.$inject = [
-    'ENV', 'ENV', '$state', '$rootScope', 'currentStateService', 'projectsService'
+    '$q', 'ENV', '$state', '$rootScope', 'currentStateService', 'projectsService'
   ];
-  function AppStoreDialogController(ENV, ENV, $state, $rootScope, currentStateService, projectsService) {
+  function AppStoreDialogController(
+    $q, ENV, $state, $rootScope, currentStateService, projectsService
+  ) {
     var vm = this;
     vm.selectOffering = selectOffering;
     activate();
@@ -72,21 +74,22 @@
 
     function selectOffering(offering) {
       if (vm.DialogForm.$invalid) {
-        return;
+        return $q.reject();
       }
-      vm.$close();
       if (vm.selectedProject) {
-        projectsService.$get(vm.selectedProject).then(function(project) {
+        return projectsService.$get(vm.selectedProject).then(function(project) {
           $rootScope.$broadcast('adjustCurrentProject', project);
-          gotoOffering(offering);
+          return gotoOffering(offering);
         });
       } else {
-        gotoOffering(offering);
+        return gotoOffering(offering);
       }
     }
 
     function gotoOffering(offering) {
-      $state.go(offering.state, {category: offering.key});
+      return $state.go(offering.state, {category: offering.key}).then(function() {
+        return vm.$close();
+      });
     }
   }
 
