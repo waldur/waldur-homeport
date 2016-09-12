@@ -56,6 +56,9 @@
     }
 
     function selectOffering(offering) {
+      if (vm.DialogForm.$invalid) {
+        return;
+      }
       vm.$close();
       if (vm.selectedProject) {
         projectsService.$get(vm.selectedProject).then(function(project) {
