@@ -405,7 +405,7 @@
     'customersService',
     '$state',
     'tabCounterService',
-    'AppStoreDialogService'
+    'AppStoreUtilsService'
   ];
   function CustomerDetailsController(
     $scope,
@@ -415,7 +415,7 @@
     customersService,
     $state,
     tabCounterService,
-    AppStoreDialogService) {
+    AppStoreUtilsService) {
 
     activate();
 
@@ -439,7 +439,7 @@
           icon: "fa-shopping-cart",
           label: "Service store",
           feature: "appstore",
-          action: AppStoreDialogService.openDialog.bind(null, {selectProject: true}),
+          action: AppStoreUtilsService.openDialog.bind(null, {selectProject: true}),
           state: "appstore"
         },
         {

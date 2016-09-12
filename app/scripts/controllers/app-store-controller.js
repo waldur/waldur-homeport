@@ -72,11 +72,14 @@
     ]);
 
   angular.module('ncsaas')
-    .service('AppStoreDialogService', AppStoreDialogService);
+    .service('AppStoreUtilsService', AppStoreUtilsService);
 
-  AppStoreDialogService.$inject = ['$uibModal', '$rootScope'];
-  function AppStoreDialogService($uibModal, $rootScope) {
-    this.openDialog = function(options) {
+  AppStoreUtilsService.$inject = ['$uibModal', '$rootScope', 'OFFERINGS'];
+  function AppStoreUtilsService($uibModal, $rootScope, OFFERINGS) {
+    this.openDialog = openDialog;
+    this.findOffering = findOffering;
+
+    function openDialog(options) {
       var dialogScope = $rootScope.$new();
       options = options || {};
       dialogScope.selectProject = options.selectProject;
@@ -89,7 +92,13 @@
         scope: dialogScope
       });
     }
-
+    function findOffering(key) {
+      for (var i = 0; i < OFFERINGS.length; i++) {
+        if (OFFERINGS[i].key === key) {
+          return OFFERINGS[i];
+        }
+      }
+    }
   }
 
   angular.module('ncsaas')
@@ -133,6 +142,49 @@
       $state.go(offering.state, {category: offering.key});
     }
   }
+
+  angular.module('ncsaas')
+    .controller('AppStoreOfferingController', AppStoreOfferingController);
+
+  AppStoreOfferingController.$inject = [
+    '$stateParams', '$state', 'issuesService', 'AppStoreUtilsService'
+  ];
+  function AppStoreOfferingController(
+    $stateParams, $state, issuesService, AppStoreUtilsService) {
+    var vm = this;
+    activate();
+    vm.save = save;
+
+    function activate() {
+      vm.offering = AppStoreUtilsService.findOffering($stateParams.category);
+      if (!vm.offering) {
+        $state.go('errorPage.notFound')
+      }
+    }
+
+    function save() {
+      return issuesService.createIssue({
+        summary: 'Please create integrated offering ' + vm.offering.label,
+        description: vm.details
+      });
+    }
+  }
+
+  angular.module('ncsaas')
+    .controller('AppStoreHeaderController', AppStoreHeaderController);
+
+  AppStoreHeaderController.$inject = ['$scope', '$stateParams', 'AppStoreUtilsService']
+  function AppStoreHeaderController($scope, $stateParams, AppStoreUtilsService) {
+    $scope.openDialog = AppStoreUtilsService.openDialog;
+    refreshCategory();
+    $scope.$on('$stateChangeSuccess', refreshCategory);
+    function refreshCategory() {
+      if ($stateParams.category) {
+        $scope.category = AppStoreUtilsService.findOffering($stateParams.category);
+      }
+    }
+  }
+
 
   angular.module('ncsaas')
     .controller('AppStoreController', [

@@ -4,7 +4,7 @@
       .state('appstore', {
         url: '/appstore/',
         abstract: true,
-        templateUrl: 'views/project/base.html',
+        templateUrl: 'views/appstore/base.html',
         data: {
           auth: true,
           pageTitle: 'Service store'
@@ -22,7 +22,8 @@
         url: 'offering/:category/',
         templateUrl: 'views/appstore/offering.html',
         controller: 'AppStoreOfferingController',
-        controllerAs: 'OfferingController'
+        controllerAs: 'OfferingController',
+        bindToController: true
       })
 
       .state('compare', {

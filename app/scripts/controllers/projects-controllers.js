@@ -382,11 +382,11 @@
 
   ProjectDetailsController.$inject = [
     '$scope', 'currentStateService', 'tabCounterService',
-    'eventsService', 'projectsService', '$state', 'AppStoreDialogService'
+    'eventsService', 'projectsService', '$state', 'AppStoreUtilsService'
   ];
   function ProjectDetailsController(
     $scope, currentStateService, tabCounterService,
-    eventsService, projectsService, $state, AppStoreDialogService) {
+    eventsService, projectsService, $state, AppStoreUtilsService) {
     activate();
 
     function activate() {
@@ -395,7 +395,7 @@
           icon: "fa-shopping-cart",
           label: "Service store",
           feature: "appstore",
-          action: AppStoreDialogService.openDialog,
+          action: AppStoreUtilsService.openDialog,
           state: "appstore"
         },
         {
