@@ -1,81 +1,9 @@
 (function() {
   angular.module('ncsaas')
-    .constant('OFFERINGS', [
-      {
-        label: "IT Transformation Service",
-        description: "Hosting in highly secured data center.",
-        key: "transformation",
-        icon: "fa-building",
-        category: "Integrated offering",
-        state: "appstore.offering"
-      },
-      {
-        label: "Devops-as-a-Service platform",
-        description: "Enforce best-practices of application delivery.",
-        key: "devops",
-        icon: "fa-gears",
-        category: "Integrated offering",
-        state: "appstore.offering"
-      },
-      {
-        label: "Disaster Recovery site",
-        description: "Planning for business continuity under all conditions.",
-        key: "recovery",
-        icon: "fa-get-pocket",
-        category: "Integrated offering",
-        state: "appstore.offering"
-      },
-      {
-        label: "Managed applications",
-        description: "Full monitoring and application support",
-        key: "managed_apps",
-        icon: "fa-gears",
-        category: "Integrated offering",
-        state: "appstore.offering"
-      },
-      {
-        label: "Virtual machines",
-        icon: "fa-desktop",
-        feature: "vms",
-        category: "Component offering",
-        key: "vms",
-        state: "appstore.store",
-        description: "OpenStack Instances and DigitalOcean Droplets."
-      },
-      {
-        label: "Private clouds",
-        icon: "fa-cloud",
-        feature: "private_clouds",
-        category: "Component offering",
-        key: "private_clouds",
-        state: "appstore.store",
-        description: "OpenStack tenants and Amazon VPC."
-      },
-      {
-        label: "Applications",
-        icon: "fa-database",
-        feature: "apps",
-        category: "Component offering",
-        key: "apps",
-        state: "appstore.store",
-        description: "Oracle database and SugarCRM."
-      },
-      {
-        label: "Support",
-        icon: "fa-wrench",
-        key: "support",
-        feature: "premiumSupport",
-        category: "Component offering",
-        state: "appstore.store",
-        description: "Premium support service."
-      }
-    ]);
-
-  angular.module('ncsaas')
     .service('AppStoreUtilsService', AppStoreUtilsService);
 
-  AppStoreUtilsService.$inject = ['$uibModal', '$rootScope', 'OFFERINGS'];
-  function AppStoreUtilsService($uibModal, $rootScope, OFFERINGS) {
+  AppStoreUtilsService.$inject = ['$uibModal', '$rootScope', 'ENV'];
+  function AppStoreUtilsService($uibModal, $rootScope, ENV) {
     this.openDialog = openDialog;
     this.findOffering = findOffering;
 
@@ -93,9 +21,10 @@
       });
     }
     function findOffering(key) {
-      for (var i = 0; i < OFFERINGS.length; i++) {
-        if (OFFERINGS[i].key === key) {
-          return OFFERINGS[i];
+      var offerings = ENV.offerings;
+      for (var i = 0; i < offerings.length; i++) {
+        if (offerings[i].key === key) {
+          return offerings[i];
         }
       }
     }
@@ -105,15 +34,15 @@
     .controller('AppStoreDialogController', AppStoreDialogController);
 
   AppStoreDialogController.$inject = [
-    'OFFERINGS', 'ENV', '$state', '$rootScope', 'currentStateService', 'projectsService'
+    'ENV', 'ENV', '$state', '$rootScope', 'currentStateService', 'projectsService'
   ];
-  function AppStoreDialogController(OFFERINGS, ENV, $state, $rootScope, currentStateService, projectsService) {
+  function AppStoreDialogController(ENV, ENV, $state, $rootScope, currentStateService, projectsService) {
     var vm = this;
     vm.selectOffering = selectOffering;
     activate();
 
     function activate() {
-      vm.offerings = OFFERINGS;
+      vm.offerings = ENV.offerings;
       angular.forEach(vm.offerings, function(offering) {
         if (ENV.futureCategories.indexOf(offering.key) !== -1) {
           offering.comingSoon = true;

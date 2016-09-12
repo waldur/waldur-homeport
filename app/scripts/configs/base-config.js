@@ -37,6 +37,77 @@ angular.module('ncsaas')
 
     currency: '$',
 
+    offerings: [
+      {
+        label: "IT Transformation Service",
+        description: "Hosting in highly secured data center.",
+        key: "transformation",
+        icon: "fa-building",
+        category: "Integrated offering",
+        state: "appstore.offering"
+      },
+      {
+        label: "Devops-as-a-Service platform",
+        description: "Enforce best-practices of application delivery.",
+        key: "devops",
+        icon: "fa-gears",
+        category: "Integrated offering",
+        state: "appstore.offering"
+      },
+      {
+        label: "Disaster Recovery site",
+        description: "Planning for business continuity under all conditions.",
+        key: "recovery",
+        icon: "fa-get-pocket",
+        category: "Integrated offering",
+        state: "appstore.offering"
+      },
+      {
+        label: "Managed applications",
+        description: "Full monitoring and application support",
+        key: "managed_apps",
+        icon: "fa-gears",
+        category: "Integrated offering",
+        state: "appstore.offering"
+      },
+      {
+        label: "Virtual machines",
+        icon: "fa-desktop",
+        feature: "vms",
+        category: "Component offering",
+        key: "vms",
+        state: "appstore.store",
+        description: "OpenStack Instances and DigitalOcean Droplets."
+      },
+      {
+        label: "Private clouds",
+        icon: "fa-cloud",
+        feature: "private_clouds",
+        category: "Component offering",
+        key: "private_clouds",
+        state: "appstore.store",
+        description: "OpenStack tenants and Amazon VPC."
+      },
+      {
+        label: "Applications",
+        icon: "fa-database",
+        feature: "apps",
+        category: "Component offering",
+        key: "apps",
+        state: "appstore.store",
+        description: "Oracle database and SugarCRM."
+      },
+      {
+        label: "Support",
+        icon: "fa-wrench",
+        key: "support",
+        feature: "premiumSupport",
+        category: "Component offering",
+        state: "appstore.store",
+        description: "Premium support service."
+      }
+    ],
+
     appStoreLimitChoices: 10,
 
     // Index of category inside of appStoreCategories
