@@ -11,13 +11,6 @@
         }
       })
 
-      .state('appstore.index', {
-        url: '',
-        templateUrl: 'views/appstore/index.html',
-        controller: 'AppStoreIndexController',
-        controllerAs: 'IndexController'
-      })
-
       .state('appstore.store', {
         url: ':category/',
         templateUrl: 'views/appstore/store.html',

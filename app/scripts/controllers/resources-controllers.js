@@ -103,12 +103,6 @@
 
         currentStateService.getProject().then(function(project) {
           if (project) {
-            if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('resources') == -1) {
-              if (!vm.entityOptions.entityData.createLink) {
-                vm.entityOptions.entityData.createLink = 'appstore.index';
-                vm.entityOptions.entityData.createLinkText = 'Add';
-              }
-            }
             if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('import') == -1) {
               vm.entityOptions.entityData.importLink = 'import.import';
               vm.entityOptions.entityData.importLinkText = 'Import';

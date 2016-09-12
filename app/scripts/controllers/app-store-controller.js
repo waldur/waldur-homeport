@@ -135,23 +135,6 @@
   }
 
   angular.module('ncsaas')
-    .controller('AppStoreIndexController', AppStoreIndexController);
-
-  AppStoreIndexController.$inject = ['OFFERINGS'];
-  function AppStoreIndexController(OFFERINGS) {
-    this.offerings = OFFERINGS;
-  }
-
-  angular.module('ncsaas')
-    .controller('AppStoreOfferingController', AppStoreOfferingController);
-
-  AppStoreOfferingController.$inject = ['OFFERINGS', '$stateParams'];
-  function AppStoreOfferingController(OFFERINGS, $stateParams) {
-    this.category = $stateParams.category;
-  }
-
-
-  angular.module('ncsaas')
     .controller('AppStoreController', [
       'baseControllerAddClass',
       'servicesService',
