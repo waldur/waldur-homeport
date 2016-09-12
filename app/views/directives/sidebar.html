@@ -18,25 +18,22 @@
             </li>
             <li ui-sref-active="active"
                 ng-repeat="item in items"
-                ng-class="{active: $state.includes(item.state)}">
+                ng-class="item.class">
                 <a ui-sref="{{ item.link }}" ng-if="item.link" visible="::item.feature">
                     <i class="fa {{ ::item.icon }} fixed-width-icon"></i>
                     <span class="nav-label" ng-bind="::item.label"/>
                     <span class="label label-default pull-right"
                         ng-if="::item.countFieldKey"
                         ng-bind="item.count"/>
+                    <span class="fa arrow" ng-if="::item.children"/>
                 </a>
                 <a ng-if="::item.action" ng-click="item.action()">
                     <i class="fa {{ ::item.icon }} fixed-width-icon"></i>
                     <span class="nav-label">{{ ::item.label }}</span>
                 </a>
-                <a ng-if="::item.children">
-                    <i class="fa {{ ::item.icon }} fixed-width-icon"></i>
-                    <span class="nav-label">{{ ::item.label }}</span>
-                    <span class="fa arrow"></span>
-                </a>
                 <ul class="nav nav-second-level"
-                    ng-if="::item.children">
+                    ng-if="::item.children"
+                    ng-class="{in: $state.includes(item.link)}">
                     <li ui-sref-active="active" ng-repeat="child in item.children">
                         <a ui-sref="{{ child.link }}" visible="::item.feature">
                             <i class="fa {{ ::child.icon }}"></i>

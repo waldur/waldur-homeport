@@ -396,12 +396,13 @@
           label: "Service store",
           feature: "appstore",
           action: AppStoreUtilsService.openDialog,
-          state: "appstore"
+          state: "appstore",
+          class: "special_link"
         },
         {
           label: "Resources",
           icon: "fa-files-o",
-          state: "project.resources",
+          link: "project.resources",
           children: [
             {
               link: "project.resources.vms({uuid: context.project.uuid})",

@@ -440,12 +440,12 @@
           label: "Service store",
           feature: "appstore",
           action: AppStoreUtilsService.openDialog.bind(null, {selectProject: true}),
-          state: "appstore"
+          class: "special_link"
         },
         {
           label: "Analytics",
           icon: "fa-bar-chart-o",
-          state: "organization.analysis",
+          link: "organization.analysis",
           children: [
             {
               label: "Cost analysis",
