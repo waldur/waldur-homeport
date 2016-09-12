@@ -43,7 +43,7 @@ angular.module('ncsaas')
         description: "Hosting in highly secured data center.",
         key: "transformation",
         icon: "fa-building",
-        category: "Integrated offering",
+        category: "Turnkey solution",
         state: "appstore.offering"
       },
       {
@@ -51,7 +51,7 @@ angular.module('ncsaas')
         description: "Enforce best-practices of application delivery.",
         key: "devops",
         icon: "fa-gears",
-        category: "Integrated offering",
+        category: "Turnkey solution",
         state: "appstore.offering"
       },
       {
@@ -59,7 +59,7 @@ angular.module('ncsaas')
         description: "Planning for business continuity under all conditions.",
         key: "recovery",
         icon: "fa-get-pocket",
-        category: "Integrated offering",
+        category: "Turnkey solution",
         state: "appstore.offering"
       },
       {
@@ -67,7 +67,7 @@ angular.module('ncsaas')
         description: "Full monitoring and application support",
         key: "managed_apps",
         icon: "fa-gears",
-        category: "Integrated offering",
+        category: "Turnkey solution",
         state: "appstore.offering"
       },
       {
