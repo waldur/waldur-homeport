@@ -30,6 +30,7 @@
       setAuthHeader(vm.user.token);
       $auth.setToken(vm.user.token);
       vm.user.isAuthenticated = true;
+      $rootScope.$broadcast('authService:signin');
     }
 
     function signup(user) {

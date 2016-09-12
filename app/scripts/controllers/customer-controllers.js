@@ -501,6 +501,9 @@
       $scope.$on('currentCustomerUpdated', function() {
         refreshCustomer();
       });
+      $scope.$on('authService:signin', function() {
+        refreshCustomer();
+      });
       refreshCustomer();
     }
 

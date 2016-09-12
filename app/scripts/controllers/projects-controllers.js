@@ -455,6 +455,9 @@
       $scope.$on('currentProjectUpdated', function() {
         refreshProject();
       });
+      $scope.$on('authService:signin', function() {
+        refreshProject();
+      });
       refreshProject();
     }
 
