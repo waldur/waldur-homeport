@@ -42,12 +42,27 @@
     activate();
 
     function activate() {
-      vm.offerings = ENV.offerings;
-      angular.forEach(vm.offerings, function(offering) {
+      angular.forEach(ENV.offerings, function(offering) {
         if (ENV.futureCategories.indexOf(offering.key) !== -1) {
           offering.comingSoon = true;
         }
       });
+
+      vm.groups = [
+        {
+          label: 'Integrated offerings',
+          items: ENV.offerings.filter(function(offering) {
+            return offering.category === "Integrated offering";
+          }),
+        },
+        {
+          label: 'Component offerings',
+          items: ENV.offerings.filter(function(offering) {
+            return offering.category === "Component offering";
+          })
+        }
+      ];
+
       if (vm.selectProject) {
         currentStateService.getCustomer().then(function(customer) {
           vm.projects = customer.projects;
@@ -79,10 +94,10 @@
     .controller('AppStoreOfferingController', AppStoreOfferingController);
 
   AppStoreOfferingController.$inject = [
-    '$stateParams', '$state', 'issuesService', 'AppStoreUtilsService'
+    '$stateParams', '$state', 'issuesService', 'AppStoreUtilsService', 'ncUtilsFlash'
   ];
   function AppStoreOfferingController(
-    $stateParams, $state, issuesService, AppStoreUtilsService) {
+    $stateParams, $state, issuesService, AppStoreUtilsService, ncUtilsFlash) {
     var vm = this;
     activate();
     vm.save = save;
@@ -98,6 +113,10 @@
       return issuesService.createIssue({
         summary: 'Please create integrated offering ' + vm.offering.label,
         description: vm.details
+      }).then(function() {
+        $state.go('support.list');
+      }, function(error) {
+        ncUtilsFlash.error('Unable to create integrated offering.');
       });
     }
   }

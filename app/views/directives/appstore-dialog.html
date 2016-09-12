@@ -16,14 +16,14 @@
                 <option value="">Select project</option>
              </select>
         </div>
-        <div class="row">
-            <div class="list-group appstore-dialog">
-                <div class="col-md-6" ng-repeat="offering in DialogCtrl.offerings" visible="{{::offering.feature}}">
+        <div ng-repeat="group in DialogCtrl.groups" ng-if="::group.items.length > 0">
+            <h3 ng-bind="::group.label"/>
+            <div class="list-group appstore-dialog row">
+                <div class="col-md-6" ng-repeat="offering in group.items" visible="{{::offering.feature}}">
                     <button class="list-group-item"
                         ng-click="DialogCtrl.selectOffering(offering)"
                         ng-class="::{disabled: offering.comingSoon}">
                         <i class="offering-icon fa" ng-class="::offering.icon"></i>
-                        <small ng-bind="::offering.category" class="m-l-xl elipsis"/>
                         <h4 class="list-group-item-heading m-l-xl elipsis">
                             {{ ::offering.label }}
                         </h4>
