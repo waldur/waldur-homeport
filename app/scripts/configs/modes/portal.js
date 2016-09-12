@@ -31,17 +31,8 @@ angular.module('ncsaas')
       }
     ],
     futureCategories: [
-      {
-        name: 'Private clouds',
-        icon: 'cloud'
-      },
-      {
-        name: 'Applications',
-        icon: 'database'
-      },
-      {
-        name: 'Support',
-        icon: 'wrench'
-      }
+      'private_clouds',
+      'support',
+      'apps',
     ]
   });

@@ -96,19 +96,19 @@
     .controller('AppStoreDialogController', AppStoreDialogController);
 
   AppStoreDialogController.$inject = [
-    'OFFERINGS', '$state', '$rootScope', 'currentStateService', 'projectsService'
+    'OFFERINGS', 'ENV', '$state', '$rootScope', 'currentStateService', 'projectsService'
   ];
-  function AppStoreDialogController(OFFERINGS, $state, $rootScope, currentStateService, projectsService) {
+  function AppStoreDialogController(OFFERINGS, ENV, $state, $rootScope, currentStateService, projectsService) {
     var vm = this;
     vm.selectOffering = selectOffering;
     activate();
 
     function activate() {
-      vm.integratedOfferings = OFFERINGS.filter(function(offering) {
-        return offering.category === "Integrated offering";
-      });
-      vm.componentOfferings = OFFERINGS.filter(function(offering) {
-        return offering.category === "Component offering";
+      vm.offerings = OFFERINGS;
+      angular.forEach(vm.offerings, function(offering) {
+        if (ENV.futureCategories.indexOf(offering.key) !== -1) {
+          offering.comingSoon = true;
+        }
       });
       if (vm.selectProject) {
         currentStateService.getCustomer().then(function(customer) {

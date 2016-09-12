@@ -16,33 +16,20 @@
              </select>
         </div>
         <div class="row">
-            <div class="col-md-6">
-                <h3>Integrated offerings</h3>
-                <div class="list-group appstore-dialog">
-                    <a class="list-group-item m-b-sm"
-                        ng-repeat="offering in DialogCtrl.integratedOfferings"
-                        ng-click="DialogCtrl.selectOffering(offering)">
-                        <h4 class="list-group-item-heading">
-                            <i class="fa m-r-sm fixed-width-icon" ng-class="::offering.icon"></i>
+            <div class="list-group appstore-dialog">
+                <div class="col-md-6" ng-repeat="offering in DialogCtrl.offerings" visible="{{::offering.feature}}">
+                    <a class="list-group-item"
+                        ng-click="DialogCtrl.selectOffering(offering)"
+                        ng-class="::{disabled: offering.comingSoon}">
+                        <i class="offering-icon fa" ng-class="::offering.icon"></i>
+                        <small ng-bind="::offering.category" class="m-l-xl elipsis"/>
+                        <h4 class="list-group-item-heading m-l-xl elipsis">
                             {{ ::offering.label }}
-                            <div class="btn btn-default pull-right btn-xs">Select</div>
                         </h4>
-                        <p class="list-group-item-text" ng-bind="::offering.description"></p>
-                    </a>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <h3>Component offerings</h3>
-                <div class="list-group appstore-dialog">
-                    <a class="list-group-item m-b-sm"
-                        ng-repeat="offering in DialogCtrl.componentOfferings"
-                        ng-click="DialogCtrl.selectOffering(offering)">
-                        <h4 class="list-group-item-heading">
-                            <i class="fa m-r-sm fixed-width-icon" ng-class="::offering.icon"></i>
-                            {{ ::offering.label }}
-                            <div class="btn btn-default pull-right btn-xs">Select</div>
-                        </h4>
-                        <p class="list-group-item-text" ng-bind="::offering.description"></p>
+                        <div class="btn btn-default pull-right btn-xs">
+                            {{ ::offering.comingSoon && 'Coming soon' || 'Select' }}
+                        </div>
+                        <p class="list-group-item-text m-l-xl" ng-bind="::offering.description"></p>
                     </a>
                 </div>
             </div>
