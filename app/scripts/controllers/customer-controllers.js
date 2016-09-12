@@ -440,7 +440,6 @@
           label: "Service store",
           feature: "appstore",
           action: AppStoreUtilsService.openDialog.bind(null, {selectProject: true}),
-          class: "special_link"
         },
         {
           label: "Analytics",

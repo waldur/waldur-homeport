@@ -397,7 +397,6 @@
           feature: "appstore",
           action: AppStoreUtilsService.openDialog,
           state: "appstore",
-          class: "special_link"
         },
         {
           label: "Resources",

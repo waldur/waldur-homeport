@@ -75,6 +75,9 @@
     }
 
     function isOwnerOrStaff() {
+      if (!ctrl.selectedOrganization) {
+        return false;
+      }
       if (ctrl.currentUser.is_staff) {
         return true;
       }
@@ -112,6 +115,7 @@
         })
       ]).then(function() {
         ctrl.canCreateProject = isOwnerOrStaff();
+        return true;
       });
     }
 
