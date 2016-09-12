@@ -50,9 +50,9 @@
 
       vm.groups = [
         {
-          label: 'Integrated offerings',
+          label: 'Turnkey solution',
           items: ENV.offerings.filter(function(offering) {
-            return offering.category === "Integrated offering";
+            return offering.category === "Turnkey solution";
           }),
         },
         {
