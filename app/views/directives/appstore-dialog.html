@@ -1,7 +1,7 @@
 <div class="modal-header">
     <h2 class="modal-title">Service store</h2>
 </div>
-<div class="modal-body">
+<div class="modal-body" block-ui="appstore-dialog">
     <div ng-if="DialogCtrl.loading">
         <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
     </div>
@@ -22,7 +22,7 @@
                 <div class="col-md-6" ng-repeat="offering in group.items" visible="{{::offering.feature}}">
                     <button class="list-group-item"
                         submit-button="DialogCtrl.selectOffering(offering)"
-                        ng-class="::{disabled: offering.comingSoon}">
+                        ng-class="{disabled: offering.comingSoon || DialogCtrl.leaving}">
                         <i class="offering-icon fa" ng-class="::offering.icon"></i>
                         <h4 class="list-group-item-heading m-l-xl elipsis">
                             {{ ::offering.label }}

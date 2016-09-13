@@ -1,7 +1,7 @@
 <div class="modal-header">
     <h3 class="modal-title">Select workspace</h3>
 </div>
-<div class="modal-body">
+<div class="modal-body" block-ui="select-workspace-dialog">
   <div ng-if="Ctrl.loadingOrganizations">
       <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
   </div>
@@ -34,7 +34,7 @@
           ng-repeat="organization in Ctrl.organizations | filter: {name: Ctrl.organizationSearchInput}"
           ng-class="{active: organization.uuid == Ctrl.selectedOrganization.uuid}"
           ng-click="Ctrl.selectOrganization(organization)">
-          <a class="btn btn-xs btn-default pull-right" ng-click="Ctrl.gotoOrganization(organization)">
+          <a class="btn btn-xs btn-default pull-right" submit-button="Ctrl.gotoOrganization(organization)">
             Select
           </a>
           <div class="elipsis">{{ organization.name }}</div>
@@ -74,7 +74,7 @@
           ng-repeat="project in Ctrl.selectedOrganization.projects | filter: {name: Ctrl.projectSearchInput}"
           ng-class="{active: project.uuid == Ctrl.selectedProject.uuid}"
           ng-click="Ctrl.selectProject(project)">
-          <a class="btn btn-xs btn-default pull-right" ng-click="Ctrl.gotoProject(project)">
+          <a class="btn btn-xs btn-default pull-right" submit-button="Ctrl.gotoProject(project)">
             Select
           </a>
           <div class="elipsis">{{ project.name }}</div>

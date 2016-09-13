@@ -32,7 +32,7 @@
         authService.authenticate(provider).then(vm.loginSuccess.bind(vm), vm.loginError.bind(vm));
       },
       loginSuccess: function() {
-        $state.go('dashboard.index');
+        $state.go('dashboard.index', {}, {reload: true});
         return true;
       },
       loginError: function(response) {

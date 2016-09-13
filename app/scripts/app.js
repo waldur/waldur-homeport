@@ -163,7 +163,6 @@
         })
 
         .state('dashboard.index', {
-          reloadOnSearch: false,
           url: '?tab',
           templateUrl: 'views/dashboard/index.html',
         })

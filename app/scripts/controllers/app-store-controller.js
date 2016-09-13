@@ -34,10 +34,10 @@
     .controller('AppStoreDialogController', AppStoreDialogController);
 
   AppStoreDialogController.$inject = [
-    '$q', 'ENV', '$state', '$rootScope', 'currentStateService', 'projectsService'
+    '$q', 'blockUI', 'ENV', '$state', '$rootScope', 'currentStateService', 'projectsService'
   ];
   function AppStoreDialogController(
-    $q, ENV, $state, $rootScope, currentStateService, projectsService
+    $q, blockUI, ENV, $state, $rootScope, currentStateService, projectsService
   ) {
     var vm = this;
     vm.selectOffering = selectOffering;
@@ -75,21 +75,31 @@
     function selectOffering(offering) {
       if (vm.DialogForm.$invalid) {
         return $q.reject();
-      }
-      if (vm.selectedProject) {
-        return projectsService.$get(vm.selectedProject).then(function(project) {
-          $rootScope.$broadcast('adjustCurrentProject', project);
-          return gotoOffering(offering);
-        });
       } else {
-        return gotoOffering(offering);
+        var promise = selectProject().then(function() {
+          return $state.go(offering.state, {category: offering.key});
+        });
+        return blockAndClose(promise);
       }
     }
 
-    function gotoOffering(offering) {
-      return $state.go(offering.state, {category: offering.key}).then(function() {
-        return vm.$close();
+    function blockAndClose(promise) {
+      var block = blockUI.instances.get('appstore-dialog');
+      block.start({delay: 0});
+      return promise.finally(function() {
+        block.stop();
+        vm.$close();
       });
+    }
+
+    function selectProject() {
+      if (vm.selectedProject) {
+        return projectsService.$get(vm.selectedProject).then(function(project) {
+          $rootScope.$broadcast('adjustCurrentProject', project);
+        });
+      } else {
+        return $q.when(true);
+      }
     }
   }
 
