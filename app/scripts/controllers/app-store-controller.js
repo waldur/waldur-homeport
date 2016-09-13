@@ -124,12 +124,12 @@
 
     function save() {
       return issuesService.createIssue({
-        summary: 'Please create integrated offering ' + vm.offering.label,
+        summary: 'Please create a turnkey solution: ' + vm.offering.label,
         description: vm.details
       }).then(function() {
         $state.go('support.list');
       }, function(error) {
-        ncUtilsFlash.error('Unable to create integrated offering.');
+        ncUtilsFlash.error('Unable to create request for a turnkey solution.');
       });
     }
   }
