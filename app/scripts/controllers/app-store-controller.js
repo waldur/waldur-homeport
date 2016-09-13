@@ -1,5 +1,156 @@
 (function() {
   angular.module('ncsaas')
+    .service('AppStoreUtilsService', AppStoreUtilsService);
+
+  AppStoreUtilsService.$inject = ['$uibModal', '$rootScope', 'ENV'];
+  function AppStoreUtilsService($uibModal, $rootScope, ENV) {
+    this.openDialog = openDialog;
+    this.findOffering = findOffering;
+
+    function openDialog(options) {
+      var dialogScope = $rootScope.$new();
+      options = options || {};
+      dialogScope.selectProject = options.selectProject;
+      $uibModal.open({
+        templateUrl: 'views/directives/appstore-dialog.html',
+        size: 'lg',
+        controller: 'AppStoreDialogController',
+        controllerAs: 'DialogCtrl',
+        bindToController: true,
+        scope: dialogScope
+      });
+    }
+    function findOffering(key) {
+      var offerings = ENV.offerings;
+      for (var i = 0; i < offerings.length; i++) {
+        if (offerings[i].key === key) {
+          return offerings[i];
+        }
+      }
+    }
+  }
+
+  angular.module('ncsaas')
+    .controller('AppStoreDialogController', AppStoreDialogController);
+
+  AppStoreDialogController.$inject = [
+    '$q', 'blockUI', 'ENV', '$state', '$rootScope', 'currentStateService', 'projectsService'
+  ];
+  function AppStoreDialogController(
+    $q, blockUI, ENV, $state, $rootScope, currentStateService, projectsService
+  ) {
+    var vm = this;
+    vm.selectOffering = selectOffering;
+    activate();
+
+    function activate() {
+      angular.forEach(ENV.offerings, function(offering) {
+        if (ENV.futureCategories.indexOf(offering.key) !== -1) {
+          offering.comingSoon = true;
+        }
+      });
+
+      vm.groups = [
+        {
+          label: 'Turnkey solution',
+          items: ENV.offerings.filter(function(offering) {
+            return offering.category === "Turnkey solution";
+          }),
+        },
+        {
+          label: 'Component offerings',
+          items: ENV.offerings.filter(function(offering) {
+            return offering.category === "Component offering";
+          })
+        }
+      ];
+
+      if (vm.selectProject) {
+        currentStateService.getCustomer().then(function(customer) {
+          vm.projects = customer.projects;
+        });
+      }
+    }
+
+    function selectOffering(offering) {
+      if (vm.DialogForm.$invalid) {
+        return $q.reject();
+      } else {
+        var promise = selectProject().then(function() {
+          return $state.go(offering.state, {category: offering.key});
+        });
+        return blockAndClose(promise);
+      }
+    }
+
+    function blockAndClose(promise) {
+      var block = blockUI.instances.get('appstore-dialog');
+      block.start({delay: 0});
+      return promise.finally(function() {
+        block.stop();
+        vm.$close();
+      });
+    }
+
+    function selectProject() {
+      if (vm.selectedProject) {
+        return projectsService.$get(vm.selectedProject).then(function(project) {
+          $rootScope.$broadcast('adjustCurrentProject', project);
+        });
+      } else {
+        return $q.when(true);
+      }
+    }
+  }
+
+  angular.module('ncsaas')
+    .controller('AppStoreOfferingController', AppStoreOfferingController);
+
+  AppStoreOfferingController.$inject = [
+    '$stateParams', '$state', 'issuesService', 'AppStoreUtilsService', 'ncUtilsFlash'
+  ];
+  function AppStoreOfferingController(
+    $stateParams, $state, issuesService, AppStoreUtilsService, ncUtilsFlash) {
+    var vm = this;
+    activate();
+    vm.save = save;
+
+    function activate() {
+      vm.offering = AppStoreUtilsService.findOffering($stateParams.category);
+      if (!vm.offering) {
+        $state.go('errorPage.notFound')
+      }
+    }
+
+    function save() {
+      return issuesService.createIssue({
+        summary: 'Please create a turnkey solution: ' + vm.offering.label,
+        description: vm.details
+      }).then(function() {
+        $state.go('support.list');
+      }, function(error) {
+        ncUtilsFlash.error('Unable to create request for a turnkey solution.');
+      });
+    }
+  }
+
+  angular.module('ncsaas')
+    .controller('AppStoreHeaderController', AppStoreHeaderController);
+
+  AppStoreHeaderController.$inject = ['$scope', '$stateParams', 'AppStoreUtilsService']
+  function AppStoreHeaderController($scope, $stateParams, AppStoreUtilsService) {
+    $scope.openDialog = AppStoreUtilsService.openDialog;
+    refreshCategory();
+    $scope.$on('$stateChangeSuccess', refreshCategory);
+    function refreshCategory() {
+      if ($stateParams.category) {
+        $scope.category = AppStoreUtilsService.findOffering($stateParams.category);
+      }
+    }
+  }
+
+
+  angular.module('ncsaas')
     .controller('AppStoreController', [
       'baseControllerAddClass',
       'servicesService',
@@ -174,7 +325,7 @@
         return this.selectedCategory.name == ENV.appStoreCategories[ENV.Applications].name;
       },
       isSupportSelected: function() {
-        return this.selectedCategory.name == 'SUPPORT';
+        return this.selectedCategory.name == 'Support';
       },
       setService: function(service) {
         if (!service.enabled) {
@@ -200,7 +351,7 @@
         }
       },
       filterResources: function(item) {
-        if (this.selectedCategory.name === 'VMs') {
+        if (this.selectedCategory.name === 'Virtual machines') {
           if (this.serviceType === 'OpenStack' && item != 'Instance') {
             return false;
           }
@@ -340,10 +491,10 @@
             display_label = this.selectedService.type + ' OS password';
           }
           if (name === 'name') {
-            if (this.selectedCategory.name === 'VMs') {
+            if (this.selectedCategory.name === 'Virtual machines') {
               display_label = 'VM name';
             }
-            if (this.selectedCategory.name === 'APPLICATIONS') {
+            if (this.selectedCategory.name === 'Applications') {
               display_label = 'Name'
             }
           }
@@ -760,8 +911,21 @@
             });
           }
           vm.addSupportCategory(supportList);
+          vm.setCategoryFromParams();
         });
         ncUtils.blockElement('store-content', listPromises);
+      },
+      setCategoryFromParams: function() {
+        var vm = this;
+        if ($stateParams.category) {
+          for (var i = 0; i < vm.categories.length; i++) {
+            var category = vm.categories[i];
+            if (category.key === $stateParams.category) {
+              vm.setCategory(category);
+              return;
+            }
+          }
+        }
       },
       loadProjectWithServices: function() {
         var vm = this;
@@ -816,14 +980,12 @@
               vm.renderStore = true;
               var category = {
                 type: 'package',
-                name: 'SUPPORT',
+                name: 'Support',
                 icon: 'wrench',
+                key: 'support',
                 packages: list
               };
               vm.categories.push(category);
-              if ($stateParams.category == 'support') {
-                vm.setCategory(category);
-              }
             }
         } else {
           vm.loadingProviders = false;
@@ -848,7 +1010,7 @@
         return contract.$save().then(function(response) {
           premiumSupportContractsService.clearAllCacheForCurrentEndpoint();
           $rootScope.$broadcast('refreshProjectList');
-          $state.go('project.support', {uuid: this.currentProject.uuid});
+          $state.go('project.support', {uuid: vm.currentProject.uuid});
           return true;
         }, function(response) {
           vm.errors = response.data;

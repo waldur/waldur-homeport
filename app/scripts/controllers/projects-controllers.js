@@ -381,24 +381,27 @@
     .controller('ProjectDetailsController', ProjectDetailsController);
 
   ProjectDetailsController.$inject = [
-    '$scope', 'currentStateService', 'tabCounterService', 'eventsService', 'projectsService', '$state'
+    '$scope', 'currentStateService', 'tabCounterService',
+    'eventsService', 'projectsService', '$state', 'AppStoreUtilsService'
   ];
   function ProjectDetailsController(
-    $scope, currentStateService, tabCounterService, eventsService, projectsService, $state) {
+    $scope, currentStateService, tabCounterService,
+    eventsService, projectsService, $state, AppStoreUtilsService) {
     activate();
 
     function activate() {
       $scope.items = [
         {
-          link: "appstore.store",
           icon: "fa-shopping-cart",
           label: "Service store",
-          feature: "appstore"
+          feature: "appstore",
+          action: AppStoreUtilsService.openDialog,
+          state: "appstore",
         },
         {
           label: "Resources",
           icon: "fa-files-o",
-          state: "project.resources",
+          link: "project.resources",
           children: [
             {
               link: "project.resources.vms({uuid: context.project.uuid})",

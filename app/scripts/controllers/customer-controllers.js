@@ -404,7 +404,8 @@
     'eventsService',
     'customersService',
     '$state',
-    'tabCounterService'
+    'tabCounterService',
+    'AppStoreUtilsService'
   ];
   function CustomerDetailsController(
     $scope,
@@ -413,7 +414,8 @@
     eventsService,
     customersService,
     $state,
-    tabCounterService) {
+    tabCounterService,
+    AppStoreUtilsService) {
 
     activate();
 
@@ -434,9 +436,15 @@
           countFieldKey: "projects"
         },
         {
+          icon: "fa-shopping-cart",
+          label: "Service store",
+          feature: "appstore",
+          action: AppStoreUtilsService.openDialog.bind(null, {selectProject: true}),
+        },
+        {
           label: "Analytics",
           icon: "fa-bar-chart-o",
-          state: "organization.analysis",
+          link: "organization.analysis",
           children: [
             {
               label: "Cost analysis",

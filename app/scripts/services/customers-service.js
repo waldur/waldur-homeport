@@ -62,6 +62,9 @@
             return $q.when(true);
           }
           return currentStateService.getCustomer().then(function(customer) {
+            if (!customer) {
+              return $q.when(false);
+            }
             for (var i = 0; i < customer.owners.length; i++) {
               if (user.uuid === customer.owners[i].uuid) {
                 return $q.when(true);

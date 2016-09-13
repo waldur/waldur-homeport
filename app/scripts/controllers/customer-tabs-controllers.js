@@ -197,6 +197,7 @@
         this._super();
 
         this.entityOptions.entityData.noDataText = 'You have no applications yet';
+        this.entityOptions.entityData.createLink = 'appstore.store({category: "apps"})';
         this.entityOptions.entityData.createLinkText = 'Add application';
         this.entityOptions.entityData.importLinkText = 'Import application';
         this.entityOptions.entityData.noMatchesText = 'No applications found matching filter.';

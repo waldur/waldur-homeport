@@ -127,37 +127,5 @@
         url: '?service_type&service_uuid',
         templateUrl: 'views/import/import.html',
       })
-
-      .state('appstore', {
-        url: '/appstore/',
-        abstract: true,
-        templateUrl: 'views/project/base.html',
-        data: {
-          auth: true,
-        }
-      })
-
-      .state('appstore.store', {
-        url: ':category',
-        templateUrl: 'views/appstore/store.html',
-        data: {
-          pageTitle: 'Service store'
-        }
-      })
-
-      .state('compare', {
-        url: '/compare/',
-        templateUrl: 'views/project/base.html',
-        abstract: true,
-        data: {
-          auth: true,
-          pageTitle: 'Compare flavors',
-        }
-      })
-
-      .state('compare.compare', {
-        url: '/compare/',
-        templateUrl: 'views/compare/table.html',
-      })
   });
 })();

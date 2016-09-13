@@ -18,7 +18,7 @@ angular.module('ncsaas')
     featuresVisible: false,
     appStoreCategories: [
       {
-        name: 'VMs',
+        name: 'Virtual machines',
         type: 'provider',
         icon: 'desktop',
         services: ['Amazon', 'DigitalOcean', 'OpenStack']
@@ -31,17 +31,8 @@ angular.module('ncsaas')
       }
     ],
     futureCategories: [
-      {
-        name: 'Private clouds',
-        icon: 'cloud'
-      },
-      {
-        name: 'Applications',
-        icon: 'database'
-      },
-      {
-        name: 'Support',
-        icon: 'wrench'
-      }
+      'private_clouds',
+      'support',
+      'apps',
     ]
   });

@@ -13,7 +13,8 @@
     'customersService',
     'projectsService',
     'currentStateService',
-    'usersService'
+    'usersService',
+    'blockUI'
   ];
 
   function SelectWorkspaceDialogController(
@@ -25,7 +26,8 @@
     customersService,
     projectsService,
     currentStateService,
-    usersService
+    usersService,
+    blockUI
   ) {
     var ctrl = this;
     ctrl.organizations = [];
@@ -49,32 +51,42 @@
     };
 
     ctrl.gotoOrganization = function(organization) {
-      ctrl.$close();
       $rootScope.$broadcast('adjustCurrentCustomer', organization);
-      $state.go('dashboard.index', {}, {reload: true});
+      var promise = $state.go('dashboard.index', {}, {reload: true});
+      return blockAndClose(promise);
     };
 
     ctrl.gotoProject = function(project) {
-      ctrl.$close();
-      $state.go('project.details', {
-        uuid: project.uuid
-      });
+      var promise = $state.go('project.details', {uuid: project.uuid});
+      return blockAndClose(promise);
     };
 
     ctrl.createOrganization = function() {
-      ctrl.$close();
-      $uibModal.open({
+      var promise = $uibModal.open({
         templateUrl: 'views/customer/edit-dialog.html',
         controller: 'CustomerEditDialogController'
-      });
+      }).opened;
+      return blockAndClose(promise);
     }
 
     ctrl.createProject = function() {
-      ctrl.$close();
-      $state.go('project-create');
+      var promise = $state.go('project-create');
+      return blockAndClose(promise);
+    }
+
+    function blockAndClose(promise) {
+      var block = blockUI.instances.get('select-workspace-dialog');
+      block.start({delay: 0});
+      return promise.finally(function() {
+        block.stop();
+        ctrl.$close();
+      });
     }
 
     function isOwnerOrStaff() {
+      if (!ctrl.selectedOrganization) {
+        return false;
+      }
       if (ctrl.currentUser.is_staff) {
         return true;
       }
@@ -104,7 +116,7 @@
         }),
 
         customersService.getAll({
-          field: ['name', 'uuid', 'projects']
+          field: ['name', 'uuid', 'projects', 'owners']
         }).then(function(organizations) {
           ctrl.organizations = ctrl.organizations.concat(organizations.filter(function(organization) {
             return organization.uuid !== ctrl.selectedOrganization.uuid;
@@ -112,6 +124,7 @@
         })
       ]).then(function() {
         ctrl.canCreateProject = isOwnerOrStaff();
+        return true;
       });
     }
 

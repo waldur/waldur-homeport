@@ -369,7 +369,7 @@
                 border-bottom: 1px solid $dashboard-green;
                 height: 12px;
                 span {
-                    background-color: $main-background-color;
+                    background-color: $white;
                     padding: 0 15px;
                     &.service-name {
                         text-transform: uppercase;
@@ -643,35 +643,6 @@
         }
         .appstore-count-block {
             padding-right: 15px;
-        }
-    }
-
-    .appstore-purchase {
-        text-align: center;
-        button {
-            margin: 15px;
-            display: inline-block;
-            border-radius: 5px;
-            background: $button-green;
-            text-align: center;
-            padding: 10px 15px;
-            &.cancel-purchase {
-                background: none;
-                &:hover {
-                    text-decoration: underline;
-                }
-            }
-            @include bp(xs) {
-                margin: 15px 2px 40px;
-            }
-            img {
-                display: inline;
-                margin-right: 10px;
-            }
-            span {
-                color: #FFF;
-                font-size: 16px;
-            }
         }
     }
 
