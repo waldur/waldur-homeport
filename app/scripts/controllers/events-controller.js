@@ -1,6 +1,42 @@
 'use strict';
 
 (function() {
+  angular.module('ncsaas').controller('EventListController', EventListController);
+
+  EventListController.$inject = ['eventsService', 'eventFormatter', '$filter', '$uibModal', '$rootScope'];
+
+  function EventListController(eventsService, eventFormatter, $filter, $uibModal, $rootScope) {
+    this.service = eventsService;
+    this.searchFieldName = 'search';
+    this.columns = [
+      {
+        title: 'Message',
+        render: function(data, type, row, meta) {
+          return eventFormatter.format(row);
+        }
+      },
+      {
+        title: 'Timestamp',
+        render: function(data, type, row, meta) {
+          return $filter('dateTime')(row['@timestamp']);
+        }
+      },
+    ];
+    this.rowActions = [
+      {
+        name: 'View',
+        callback: function(row) {
+          var dialogScope = $rootScope.$new();
+          dialogScope.expandableElement = row;
+          $uibModal.open({
+            templateUrl: 'views/directives/event-details-dialog.html',
+            scope: dialogScope,
+          });
+        }
+      }
+    ];
+  }
+
   angular.module('ncsaas')
     .service('baseEventListController', [
       'baseControllerListClass',

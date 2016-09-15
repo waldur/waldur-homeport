@@ -12,7 +12,17 @@
       },
       template: '<table class="table table-striped table-bordered table-hover"/>',
       link: function(scope, element) {
-        $(element.find('table')[0]).DataTable({
+        var rowActions = {
+          title: 'Actions',
+          orderable: false,
+          render: function(data, type, row, meta) {
+            return scope.controller.rowActions.map(function(action, index) {
+              return '<button class="btn btn-default" ng-click="onAction(' + meta.row + ', ' + index + ')">' + action.name + '</button>';
+            }).join('');
+          }
+        }
+
+        var table = $(element.find('table')[0]).DataTable({
           responsive: true,
           processing: true,
           serverSide: true,
@@ -24,8 +34,23 @@
             {extend: 'excel'},
             {extend: 'pdf'}
           ],
-          columns: scope.controller.columns
+          columns: scope.controller.columns.concat([rowActions])
         });
+
+        table.on('click', 'button', function(event) {
+          var expr = $(event.target).attr('ng-click');
+          $timeout(function() {
+            scope.$eval(expr);
+          });
+        });
+
+        scope.onAction = function(rowIndex, actionIndex) {
+          var action = scope.controller.rowActions[actionIndex];
+          var row = scope.controller.list[rowIndex];
+          $timeout(function() {
+            action.callback.apply(scope.controller, [row]);
+          });
+        };
 
         function serverDataTableCallback(request, drawCallback, settings) {
           var filter = {};
@@ -48,30 +73,5 @@
         }
       }
     };
-  }
-
-  angular.module('ncsaas').controller('ProjectListController', ProjectListController);
-
-  ProjectListController.$inject = ['$state', 'projectsService'];
-
-  function ProjectListController($state, projectsService) {
-    this.service = projectsService;
-    this.columns = [
-      {
-        data: 'uuid',
-        title: 'ID'
-      },
-      {
-        data: 'name',
-        title: 'Project name'
-      },
-      {
-        title: 'Customer name',
-        render: function(data, type, row, meta) {
-          var href = $state.href('organization.details', {uuid: row.customer_uuid});
-          return '<a href="' + href + '">' + row.customer_name + '</a>';
-        }
-      }
-    ];
   }
 })();

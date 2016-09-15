@@ -28,9 +28,9 @@
 
       .state('organization.details', {
         url: '',
-        templateUrl: 'views/partials/list.html',
-        controller: 'CustomerEventTabController',
-        controllerAs: 'Ctrl',
+        template: '<responsive-table table-ctrl="ListController"/>',
+        controller: 'EventListController',
+        controllerAs: 'ListController',
         data: {
           pageTitle: 'Events'
         }
