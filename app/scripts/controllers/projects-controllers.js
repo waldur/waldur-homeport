@@ -490,10 +490,14 @@
       return projectsService.getCounters(query);
     }
 
-    function getCountersError() {
-      projectsService.getFirst().then(function(project) {
-        $state.go('project.details', {uuid: project.uuid});
-      });
+    function getCountersError(error) {
+      if (error.status == 404) {
+        projectsService.getFirst().then(function(project) {
+          $state.go('project.details', {uuid: project.uuid});
+        });
+      } else {
+        tabCounterService.cancel($scope.timer);
+      }
     }
   }
 })();

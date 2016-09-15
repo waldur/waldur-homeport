@@ -536,10 +536,14 @@
       return customersService.getCounters(query);
     }
 
-    function getCountersError() {
-      customersService.getPersonalOrFirstCustomer().then(function(customer) {
-        $state.go('organization.details', {uuid: customer.uuid});
-      });
+    function getCountersError(error) {
+      if (error.status == 404) {
+        customersService.getPersonalOrFirstCustomer().then(function(customer) {
+          $state.go('organization.details', {uuid: customer.uuid});
+        });
+      } else {
+        tabCounterService.cancel($scope.timer);
+      }
     }
   }
 })();
