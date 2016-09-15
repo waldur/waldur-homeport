@@ -382,15 +382,7 @@
             bodyClass: 'old',
             pageTitle: 'Privacy policy'
           }
-        })
-
-        .state('datatables', {
-          url: '/datatables/',
-          templateUrl: 'views/datatables.html',
-          data: {
-            bodyClass: 'gray-bg',
-          }
-        })
+        });
     });
 
 })();

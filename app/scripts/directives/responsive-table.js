@@ -17,7 +17,7 @@
           orderable: false,
           render: function(data, type, row, meta) {
             return scope.controller.rowActions.map(function(action, index) {
-              return '<button class="btn btn-default" ng-click="onAction(' + meta.row + ', ' + index + ')">' + action.name + '</button>';
+              return '<button class="btn btn-default" row-index="' + meta.row + '" action-index="' + index + '">' + action.name + '</button>';
             }).join('');
           }
         }
@@ -38,19 +38,14 @@
         });
 
         table.on('click', 'button', function(event) {
-          var expr = $(event.target).attr('ng-click');
-          $timeout(function() {
-            scope.$eval(expr);
-          });
-        });
-
-        scope.onAction = function(rowIndex, actionIndex) {
+          var rowIndex = $(event.target).attr('row-index');
+          var actionIndex = $(event.target).attr('action-index');
           var action = scope.controller.rowActions[actionIndex];
           var row = scope.controller.list[rowIndex];
           $timeout(function() {
             action.callback.apply(scope.controller, [row]);
           });
-        };
+        });
 
         function serverDataTableCallback(request, drawCallback, settings) {
           var filter = {};
