@@ -22,6 +22,18 @@
           }
         }
 
+        function range(n) {
+          var x = [];
+          for (var i = 0; i < n; i++) {
+            x.push(i);
+          }
+          return x;
+        }
+
+        var exportOptions = {
+          columns: range(scope.controller.columns.length)
+        };
+
         var table = $(element.find('table')[0]).DataTable({
           responsive: true,
           processing: true,
@@ -29,15 +41,28 @@
           ajax: serverDataTableCallback,
           dom: '<"html5buttons"B>lTfgitp',
           buttons: [
-            {extend: 'copy'},
-            {extend: 'csv'},
-            {extend: 'excel'},
-            {extend: 'pdf'}
+            {
+              extend: 'copy',
+              exportOptions: exportOptions
+            },
+            {
+              extend: 'csv',
+              exportOptions: exportOptions
+            },
+            {
+              extend: 'excel',
+              exportOptions: exportOptions
+            },
+            {
+              extend: 'pdf',
+              exportOptions: exportOptions
+            }
           ],
           columns: scope.controller.columns.concat([rowActions])
         });
 
         table.on('click', 'button', function(event) {
+          $(this).blur();
           var rowIndex = $(event.target).attr('row-index');
           var actionIndex = $(event.target).attr('action-index');
           var action = scope.controller.rowActions[actionIndex];
