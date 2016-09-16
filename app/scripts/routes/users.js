@@ -7,7 +7,7 @@
         controller: 'UserEventTabController',
         controllerAs: 'Ctrl',
         data: {
-          pageTitle: 'Events'
+          pageTitle: 'Audit logs'
         }
       },
       keys: {

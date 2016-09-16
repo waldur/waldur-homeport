@@ -6,6 +6,24 @@
     {{ ::expandableElement['@timestamp'] | dateTime }}
   </div>
 </div>
+<div class="details-table__row" ng-if="::expandableElement.user_uuid">
+  <div class="details-table__key">
+    User
+  </div>
+  <div class="details-table__value">
+    <a ui-sref="users.details({uuid: expandableElement.user_uuid })">
+      {{ ::expandableElement.user_full_name || expandableElement.user_username }}
+    </a>
+  </div>
+</div>
+<div class="details-table__row" ng-if="::expandableElement.ip_address">
+  <div class="details-table__key">
+    IP address
+  </div>
+  <div class="details-table__value">
+    {{ ::expandableElement.ip_address }}
+  </div>
+</div>
 <div class="details-table__row">
   <div class="details-table__key">
     Importance
@@ -32,7 +50,7 @@
 </div>
 <div class="details-table__row" ng-if="::expandableElement.customer_uuid">
   <div class="details-table__key">
-    Customer
+    Organization
   </div>
   <div class="details-table__value">
     <a ui-sref="organization.details({uuid: expandableElement.customer_uuid })">
