@@ -12,39 +12,61 @@
       },
       template: '<table class="table table-striped table-bordered table-hover"/>',
       link: function(scope, element) {
-        var rowButtons = getRowButtons(scope.controller.rowActions);
+        var options = scope.controller.tableOptions;
 
-        var exportButtons = getExportButtons(
-          scope.controller.columns.length,
-          ['copyHtml5', 'csvHtml5', 'excelHtml5', 'pdfHtml5', 'print']
-        );
+        var table = initTable();
+        connectRowButtons(table);
 
-        var table = $(element.find('table')[0]).DataTable({
-          responsive: true,
-          processing: true,
-          serverSide: true,
-          ajax: serverDataTableCallback,
-          dom: '<"html5buttons"B>lTfgitp',
-          buttons: exportButtons,
-          columns: scope.controller.columns.concat([rowButtons])
-        });
+        function initTable() {
+          var exportButtons = getExportButtons(
+            options.columns.length,
+            ['copyHtml5', 'csvHtml5', 'excelHtml5', 'pdfHtml5', 'print']
+          );
+          var tableButtons = getTableButtons(options.tableActions || []);
+          var buttons = exportButtons.concat(tableButtons)
 
-        connectRowButtons(table, scope.controller);
+          var actionColumn = getActionColumn(options.rowActions || []);
+          var columns = options.columns.concat([actionColumn]);
 
-        function connectRowButtons(table, scope) {
+          var table = $(element.find('table')[0]).DataTable({
+            responsive: true,
+            processing: true,
+            serverSide: true,
+            ajax: serverDataTableCallback,
+            dom: '<"html5buttons"B>lTfgitp',
+            buttons: buttons,
+            columns: columns
+          });
+          return table;
+        }
+
+        function getTableButtons(actions) {
+          return actions.map(function(action) {
+            return {
+              text: action.name,
+              action: function() {
+                $timeout(function() {
+                  action.callback();
+                });
+              }
+            };
+          });
+        }
+
+        function connectRowButtons(table) {
           table.on('click', 'button', function(event) {
             $(this).blur();
             var rowIndex = parseInt($(event.target).attr('row-index'));
             var actionIndex = parseInt($(event.target).attr('action-index'));
-            var action = scope.rowActions[actionIndex];
-            var row = scope.list[rowIndex];
+            var action = options.rowActions[actionIndex];
+            var row = scope.controller.list[rowIndex];
             $timeout(function() {
               action.callback.apply(scope, [row]);
             });
           });
         }
 
-        function getRowButtons(spec) {
+        function getActionColumn(spec) {
           return {
             title: 'Actions',
             orderable: false,
@@ -81,7 +103,7 @@
         function serverDataTableCallback(request, drawCallback, settings) {
           var filter = {};
           if (request.search.value) {
-            filter[scope.controller.searchFieldName] = request.search.value;
+            filter[options.searchFieldName] = request.search.value;
           }
           var service = scope.controller.service;
           service.pageSize = request.length;

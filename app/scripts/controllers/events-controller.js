@@ -1,47 +1,92 @@
 'use strict';
 
 (function() {
+
+  angular.module('ncsaas').service('EventDialogsService', EventDialogsService);
+
+  EventDialogsService.$inject = ['$rootScope', '$uibModal']
+
+  function EventDialogsService($rootScope, $uibModal) {
+    this.eventTypes = function() {
+      $uibModal.open({
+        templateUrl: 'views/directives/alerts-dialog.html',
+        controller: 'EventTypesController',
+      });
+    };
+
+    this.alertTypes = function() {
+      $uibModal.open({
+        templateUrl: 'views/directives/alerts-dialog.html',
+        controller: 'AlertTypesController',
+      });
+    };
+
+    this.eventDetails = function(row) {
+      var dialogScope = $rootScope.$new();
+      dialogScope.expandableElement = row;
+      $uibModal.open({
+        templateUrl: 'views/directives/event-details-dialog.html',
+        scope: dialogScope
+      });
+    };
+  }
+
+  angular.module('ncsaas').controller('EventTypesController', EventTypesController);
+  EventTypesController.$inject = ['$scope', 'eventsService'];
+  function EventTypesController($scope, eventsService) {
+    $scope.type = 'Events';
+    $scope.types = eventsService.getAvailableIconTypes();
+  }
+
+  angular.module('ncsaas').controller('AlertTypesController', AlertTypesController);
+  AlertTypesController.$inject = ['$scope', 'alertsService'];
+  function AlertTypesController($scope, alertsService) {
+    $scope.type = 'Alerts';
+    $scope.types = alertsService.getAvailableIconTypes();
+  }
+
   angular.module('ncsaas').controller('EventListController', EventListController);
 
-  EventListController.$inject = ['eventsService', 'eventFormatter', '$filter', '$uibModal', '$rootScope'];
+  EventListController.$inject = ['eventsService', 'eventFormatter', '$filter', 'EventDialogsService'];
 
-  function EventListController(eventsService, eventFormatter, $filter, $uibModal, $rootScope) {
+  function EventListController(eventsService, eventFormatter, $filter, EventDialogsService) {
     this.service = eventsService;
-    this.searchFieldName = 'search';
-    this.columns = [
-      {
-        title: 'Message',
-        render: function(data, type, row, meta) {
-          return eventFormatter.format(row);
+    this.tableOptions = {
+      searchFieldName: 'search',
+      columns: [
+        {
+          title: 'Message',
+          render: function(data, type, row, meta) {
+            return eventFormatter.format(row);
+          }
+        },
+        {
+          title: 'Timestamp',
+          render: function(data, type, row, meta) {
+            return $filter('dateTime')(row['@timestamp']);
+          }
+        },
+      ],
+      tableActions: [
+        {
+          name: 'Event types',
+          callback: EventDialogsService.eventTypes
         }
-      },
-      {
-        title: 'Timestamp',
-        render: function(data, type, row, meta) {
-          return $filter('dateTime')(row['@timestamp']);
+      ],
+      rowActions: [
+        {
+          name: 'Details',
+          callback: EventDialogsService.eventDetails
         }
-      },
-    ];
-    this.rowActions = [
-      {
-        name: 'View',
-        callback: function(row) {
-          var dialogScope = $rootScope.$new();
-          dialogScope.expandableElement = row;
-          $uibModal.open({
-            templateUrl: 'views/directives/event-details-dialog.html',
-            scope: dialogScope,
-          });
-        }
-      }
-    ];
+      ]
+    };
   }
 
   angular.module('ncsaas')
     .service('baseEventListController', [
       'baseControllerListClass',
       'eventsService',
-      '$uibModal',
+      'EventDialogsService',
       'ENTITYLISTFIELDTYPES',
       'eventFormatter',
       'ENV',
@@ -50,7 +95,7 @@
   function baseEventListController(
     baseControllerListClass,
     eventsService,
-    $uibModal,
+    EventDialogsService,
     ENTITYLISTFIELDTYPES,
     eventFormatter,
     ENV) {
@@ -93,12 +138,7 @@
         ];
         this._super();
       },
-      showHelpTypes: function() {
-        $uibModal.open({
-          template: '<alerts-dialog type="events"></alerts-dialog>',
-          windowClass: 'alerts-list-dialog',
-        });
-      },
+      showHelpTypes: EventDialogsService.eventTypes,
       afterGetList: function() {
         angular.forEach(this.list, function(event) {
           event.html_message = eventFormatter.format(event);
@@ -116,8 +156,8 @@
       'baseControllerListClass',
       'alertsService',
       'alertFormatter',
-      '$uibModal',
       'ENTITYLISTFIELDTYPES',
+      'EventDialogsService',
       'ENV',
       BaseAlertsListController]);
 
@@ -125,8 +165,8 @@
     baseControllerListClass,
     alertsService,
     alertFormatter,
-    $uibModal,
     ENTITYLISTFIELDTYPES,
+    EventDialogsService,
     ENV) {
     return baseControllerListClass.extend({
       init: function() {
@@ -163,12 +203,7 @@
           ]
         };
       },
-      showHelpTypes: function() {
-        $uibModal.open({
-          template: '<alerts-dialog type="alerts"></alerts-dialog>',
-          windowClass: 'alerts-list-dialog',
-        });
-      },
+      showHelpTypes: EventDialogsService.alertTypes,
       afterGetList: function() {
         angular.forEach(this.list, function(alert) {
           alert.html_message = alertFormatter.format(alert);
@@ -434,12 +469,7 @@
           $scope.$apply();
         });
       },
-      showHelpTypes: function(type) {
-        $uibModal.open({
-          template: '<alerts-dialog type="' + type + '"></alerts-dialog>',
-          windowClass: 'alerts-list-dialog',
-        });
-      },
+      showHelpTypes: EventDialogsService.alertTypes,
       selectProject: function(project) {
         var projectCounters, projectEvents;
         if (project) {
