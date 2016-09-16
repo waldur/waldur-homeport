@@ -56,6 +56,10 @@
             {
               extend: 'pdfHtml5',
               exportOptions: exportOptions
+            },
+            {
+              extend: 'print',
+              exportOptions: exportOptions
             }
           ],
           columns: scope.controller.columns.concat([rowActions])
