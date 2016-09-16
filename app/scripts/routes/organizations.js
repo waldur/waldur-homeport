@@ -32,7 +32,7 @@
         controller: 'EventListController',
         controllerAs: 'ListController',
         data: {
-          pageTitle: 'Events'
+          pageTitle: 'Audit logs'
         }
       })
 
