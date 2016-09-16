@@ -42,19 +42,19 @@
           dom: '<"html5buttons"B>lTfgitp',
           buttons: [
             {
-              extend: 'copy',
+              extend: 'copyHtml5',
               exportOptions: exportOptions
             },
             {
-              extend: 'csv',
+              extend: 'csvHtml5',
               exportOptions: exportOptions
             },
             {
-              extend: 'excel',
+              extend: 'excelHtml5',
               exportOptions: exportOptions
             },
             {
-              extend: 'pdf',
+              extend: 'pdfHtml5',
               exportOptions: exportOptions
             }
           ],
