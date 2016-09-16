@@ -781,7 +781,17 @@ module.exports = function(grunt) {
                     'app/static/js/jquery.slimscroll.min.js',
                     'app/static/js/angular/angular-slimscroll.js',
                     'app/static/js/metisMenu.min.js',
-                    'app/static/js/datatables/*.js',
+                    'app/static/js/datatables/jszip.min.js',
+                    'app/static/js/datatables/pdfmake.min.js',
+                    'app/static/js/datatables/vfs_fonts.js',
+                    'app/static/js/datatables/jquery.dataTables.min.js',
+                    'app/static/js/datatables/dataTables.bootstrap.min.js',
+                    'app/static/js/datatables/dataTables.buttons.min.js',
+                    'app/static/js/datatables/buttons.html5.min.js',
+                    'app/static/js/datatables/buttons.print.min.js',
+                    'app/static/js/datatables/buttons.bootstrap.min.js',
+                    'app/static/js/datatables/dataTables.responsive.min.js',
+                    'app/static/js/datatables/responsive.bootstrap.js',
                 ],
                 dest: 'app/static/js/main/main.js'
             }
@@ -925,7 +935,7 @@ module.exports = function(grunt) {
     grunt.registerTask('default', ['run']);
 
     grunt.registerTask(
-      'prod', ['copy:main', 'env:prod', 'preprocess:index', 'image', 'sass', 'autoprefixer', 'concat',
+      'prod', ['copy:main', 'env:prod', 'preprocess:index', 'connect:server', 'image', 'sass', 'autoprefixer', 'concat',
           'uglify', 'cssmin', 'focus:prod']);
 
     grunt.registerTask(
