@@ -94,8 +94,19 @@
         if (request.search.value) {
           filter[options.searchFieldName] = request.search.value;
         }
+        vm.searchInput = request.search.value;
         vm.service.pageSize = request.length;
         vm.service.page = Math.ceil(request.start / request.length) + 1;
+        return vm.getList(filter);
+      },
+      resetCache: function () {
+        var vm = this;
+        var filter = {};
+        if (vm.searchInput) {
+          filter[vm.searchFieldName] = vm.searchInput;
+        }
+        vm.service.cacheReset = true;
+        vm.service.clearAllCacheForCurrentEndpoint();
         return vm.getList(filter);
       },
       getTotal: function() {

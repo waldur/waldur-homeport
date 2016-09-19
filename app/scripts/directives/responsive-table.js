@@ -25,12 +25,21 @@
           );
           var exportCollection = {
             extend: 'collection',
-            text: 'Export',
+            text: '<i class="fa fa-cloud-download"></i> Export',
             autoClose: true,
             fade: 0,
             buttons: exportButtons
           };
-          var tableButtons = getTableButtons(options.tableActions || []);
+          var tableButtons = getTableButtons(options.tableActions).concat([
+            {
+              text: '<i class="fa fa-refresh"></i> Refresh',
+              action: function() {
+                $timeout(function() {
+                  scope.controller.resetCache();
+                });
+              }
+            }
+          ]);
           var buttons = [exportCollection].concat(tableButtons);
 
           var actionColumn = getActionColumn(options.rowActions || []);

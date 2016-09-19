@@ -89,7 +89,7 @@
 
           tableActions: [
             {
-              name: 'Event types',
+              name: '<i class="fa fa-question-circle"></i> Event types',
               callback: EventDialogsService.eventTypes
             }
           ],
