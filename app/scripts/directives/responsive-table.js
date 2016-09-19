@@ -32,10 +32,15 @@
             responsive: true,
             processing: true,
             serverSide: true,
+            ordering: false,
             ajax: serverDataTableCallback,
             dom: '<"html5buttons"B>lTfgitp',
             buttons: buttons,
-            columns: columns
+            columns: columns,
+            language: {
+              emptyTable: options.noDataText,
+              zeroRecords: options.noMatchesText
+            }
           });
           return table;
         }
@@ -72,7 +77,7 @@
             orderable: false,
             render: function(data, type, row, meta) {
               return spec.map(function(action, index) {
-                return '<button class="btn btn-default" row-index="' + meta.row + '" action-index="' + index + '">' + action.name + '</button>';
+                return '<button class="btn btn-default btn-sm" row-index="' + meta.row + '" action-index="' + index + '">' + action.name + '</button>';
               }).join('');
             }
           };
@@ -101,21 +106,13 @@
         }
 
         function serverDataTableCallback(request, drawCallback, settings) {
-          var filter = {};
-          if (request.search.value) {
-            filter[options.searchFieldName] = request.search.value;
-          }
-          var service = scope.controller.service;
-          service.pageSize = request.length;
-          service.page = Math.ceil(request.start / request.length) + 1;
-          service.getList(filter).then(function(list) {
-            scope.controller.list = list;
-            var total = service.resultCount;
+          scope.controller.requestLoad(request).then(function(list) {
+            var total = scope.controller.getTotal();
             drawCallback({
               draw: request.draw,
               recordsTotal: total,
               recordsFiltered: total,
-              data: list
+              data: scope.controller.list
             });
           });
         }

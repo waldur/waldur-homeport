@@ -61,8 +61,6 @@
       mergeListFieldIdentifier: null,
 
       init: function() {
-        ncUtils.deregisterEvent('generalSearchChanged');
-        this.setSignalHandler('generalSearchChanged', this.generalSearchChanged.bind(this));
         this.service.page = 1;
         this.service.cacheTime = this.cacheTime;
         this._super();
@@ -81,10 +79,27 @@
         filter = filter || {};
         vm.service.cacheTime = vm.cacheTime;
         return vm.service.getList(filter).then(function(response) {
-          vm.list = ncUtils.mergeLists(vm.list, response, vm.mergeListFieldIdentifier);
+          if (vm.mergeListFieldIdentifier) {
+            vm.list = ncUtils.mergeLists(vm.list, response, vm.mergeListFieldIdentifier);
+          } else {
+            vm.list = response;
+          }
           vm.afterGetList();
           vm.hideNoDataText = false;
         });
+      },
+      requestLoad: function(request) {
+        var vm = this;
+        var filter = {};
+        if (request.search.value) {
+          filter[options.searchFieldName] = request.search.value;
+        }
+        vm.service.pageSize = request.length;
+        vm.service.page = Math.ceil(request.start / request.length) + 1;
+        return vm.getList(filter);
+      },
+      getTotal: function() {
+        return this.service.resultCount;
       },
       blockListElement: function() {
         if (this.listPromise && this.listPromise.finally) {

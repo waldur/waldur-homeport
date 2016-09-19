@@ -29,7 +29,7 @@
       .state('organization.details', {
         url: '',
         template: '<responsive-table table-ctrl="ListController"/>',
-        controller: 'EventListController',
+        controller: 'CustomerEventTabController',
         controllerAs: 'ListController',
         data: {
           pageTitle: 'Audit logs'

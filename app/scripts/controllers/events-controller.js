@@ -45,43 +45,6 @@
     $scope.types = alertsService.getAvailableIconTypes();
   }
 
-  angular.module('ncsaas').controller('EventListController', EventListController);
-
-  EventListController.$inject = ['eventsService', 'eventFormatter', '$filter', 'EventDialogsService'];
-
-  function EventListController(eventsService, eventFormatter, $filter, EventDialogsService) {
-    this.service = eventsService;
-    this.tableOptions = {
-      searchFieldName: 'search',
-      columns: [
-        {
-          title: 'Message',
-          render: function(data, type, row, meta) {
-            return eventFormatter.format(row);
-          }
-        },
-        {
-          title: 'Timestamp',
-          render: function(data, type, row, meta) {
-            return $filter('dateTime')(row['@timestamp']);
-          }
-        },
-      ],
-      tableActions: [
-        {
-          name: 'Event types',
-          callback: EventDialogsService.eventTypes
-        }
-      ],
-      rowActions: [
-        {
-          name: 'Details',
-          callback: EventDialogsService.eventDetails
-        }
-      ]
-    };
-  }
-
   angular.module('ncsaas')
     .service('baseEventListController', [
       'baseControllerListClass',
@@ -89,6 +52,7 @@
       'EventDialogsService',
       'ENTITYLISTFIELDTYPES',
       'eventFormatter',
+      '$filter',
       'ENV',
       baseEventListController]);
 
@@ -98,54 +62,47 @@
     EventDialogsService,
     ENTITYLISTFIELDTYPES,
     eventFormatter,
+    $filter,
     ENV) {
     var ControllerListClass = baseControllerListClass.extend({
       init:function() {
         this.service = eventsService;
-        this.searchFieldName = 'search';
-        this.helpKey = ENV.dashboardHelp.eventsList.name;
-        this.entityOptions = {
-          entityData: {
-            noDataText: 'No events yet',
-            noMatchesText: 'No events found matching filter.',
-            hideActionButtons: true,
-            hideTableHead: true
-          },
-          list: [
+        this.tableOptions = {
+          noDataText: 'No events yet',
+          noMatchesText: 'No events found matching filter.',
+          searchFieldName: 'search',
+
+          columns: [
             {
-              propertyName: 'icon',
-              className: 'icon',
-              type: ENTITYLISTFIELDTYPES.fontIcon
+              title: 'Message',
+              render: function(data, type, row, meta) {
+                return eventFormatter.format(row);
+              }
             },
             {
-              propertyName: 'html_message',
-              className: 'event-message',
-              type: ENTITYLISTFIELDTYPES.html
+              title: 'Timestamp',
+              render: function(data, type, row, meta) {
+                return $filter('dateTime')(row['@timestamp']);
+              }
             },
+          ],
+
+          tableActions: [
             {
-              propertyName: '@timestamp',
-              className: 'date',
-              type: ENTITYLISTFIELDTYPES.date
+              name: 'Event types',
+              callback: EventDialogsService.eventTypes
+            }
+          ],
+
+          rowActions: [
+            {
+              name: 'Details',
+              callback: EventDialogsService.eventDetails
             }
           ]
         };
-        this.expandableOptions = [
-          {
-            isList: false,
-            addItemBlock: false,
-            viewType: 'event'
-          }
-        ];
         this._super();
       },
-      showHelpTypes: EventDialogsService.eventTypes,
-      afterGetList: function() {
-        angular.forEach(this.list, function(event) {
-          event.html_message = eventFormatter.format(event);
-          event.icon = eventFormatter.getIcon(event) || 'fa-bell-o';
-        });
-        this._super();
-      }
     });
 
     return ControllerListClass;
