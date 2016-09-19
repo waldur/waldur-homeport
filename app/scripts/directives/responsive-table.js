@@ -23,8 +23,15 @@
             options.columns.length,
             ['copyHtml5', 'csvHtml5', 'excelHtml5', 'pdfHtml5', 'print']
           );
+          var exportCollection = {
+            extend: 'collection',
+            text: 'Export',
+            autoClose: true,
+            fade: 0,
+            buttons: exportButtons
+          };
           var tableButtons = getTableButtons(options.tableActions || []);
-          var buttons = exportButtons.concat(tableButtons)
+          var buttons = [exportCollection].concat(tableButtons);
 
           var actionColumn = getActionColumn(options.rowActions || []);
           var columns = options.columns.concat([actionColumn]);
