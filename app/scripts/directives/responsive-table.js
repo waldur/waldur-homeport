@@ -16,6 +16,7 @@
 
         var table = initTable();
         connectRowButtons(table);
+        connectWatcher(table);
 
         function initTable() {
           var exportButtons = getExportButtons(
@@ -43,6 +44,12 @@
             }
           });
           return table;
+        }
+
+        function connectWatcher(table) {
+          scope.$watchCollection('controller.list', function() {
+            table.draw();
+          });
         }
 
         function getTableButtons(actions) {
