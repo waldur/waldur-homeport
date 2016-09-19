@@ -39,9 +39,9 @@
 
       .state('project.details', {
         url: '',
-        templateUrl: 'views/partials/list.html',
+        template: '<responsive-table table-ctrl="ListController"/>',
         controller: 'ProjectEventTabController',
-        controllerAs: 'Ctrl',
+        controllerAs: 'ListController',
         data: {
           pageTitle: 'Audit logs'
         }

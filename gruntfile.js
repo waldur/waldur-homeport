@@ -45,6 +45,7 @@ module.exports = function(grunt) {
                         'app/static/css/leaflet.css',
                         'app/static/css/flags16.css',
                         'app/static/css/metisMenu.css',
+                        'app/static/css/datatables/*.css',
                     ]
                 }
             }
@@ -96,6 +97,13 @@ module.exports = function(grunt) {
                     {
                         expand: true,
                         cwd: 'bower_components/open-sans-fontface/fonts/Regular',
+                        src: ['*'],
+                        dest: 'app/static/fonts/',
+                        filter: 'isFile'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/bootstrap/dist/fonts/',
                         src: ['*'],
                         dest: 'app/static/fonts/',
                         filter: 'isFile'
@@ -395,6 +403,87 @@ module.exports = function(grunt) {
                         dest: 'app/static/js/',
                         filter: 'isFile'
                     },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/jszip/dist/',
+                        src: ['jszip.min.js'],
+                        dest: 'app/static/js/datatables/',
+                        filter: 'isFile',
+                    },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/pdfmake/build/',
+                        src: ['pdfmake.min.js', 'vfs_fonts.js'],
+                        dest: 'app/static/js/datatables/',
+                        filter: 'isFile',
+                    },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/datatables.net/js/',
+                        src: ['jquery.dataTables.min.js'],
+                        dest: 'app/static/js/datatables/',
+                        filter: 'isFile',
+                    },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/datatables.net-bs/js/',
+                        src: ['dataTables.bootstrap.min.js'],
+                        dest: 'app/static/js/datatables/',
+                        filter: 'isFile'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/datatables.net-bs/css/',
+                        src: ['dataTables.bootstrap.min.css'],
+                        dest: 'app/static/css/datatables/',
+                        filter: 'isFile'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/datatables.net-buttons/js/',
+                        src: [
+                            'dataTables.buttons.min.js',
+                            'buttons.html5.min.js',
+                            'buttons.print.min.js'
+                        ],
+                        dest: 'app/static/js/datatables/',
+                        filter: 'isFile'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/datatables.net-buttons-bs/css/',
+                        src: ['buttons.bootstrap.min.css'],
+                        dest: 'app/static/css/datatables/',
+                        filter: 'isFile'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/datatables.net-buttons-bs/js/',
+                        src: ['buttons.bootstrap.min.js'],
+                        dest: 'app/static/js/datatables/',
+                        filter: 'isFile'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/datatables.net-responsive/js/',
+                        src: ['dataTables.responsive.min.js'],
+                        dest: 'app/static/js/datatables/',
+                        filter: 'isFile'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/datatables.net-responsive-bs/js/',
+                        src: ['responsive.bootstrap.js'],
+                        dest: 'app/static/js/datatables/',
+                        filter: 'isFile'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/datatables.net-responsive-bs/css/',
+                        src: ['responsive.bootstrap.min.css'],
+                        dest: 'app/static/css/datatables/',
+                        filter: 'isFile'
+                    },
                 ]
             },
             modePrivateIaas: {
@@ -692,6 +781,17 @@ module.exports = function(grunt) {
                     'app/static/js/jquery.slimscroll.min.js',
                     'app/static/js/angular/angular-slimscroll.js',
                     'app/static/js/metisMenu.min.js',
+                    'app/static/js/datatables/jszip.min.js',
+                    'app/static/js/datatables/pdfmake.min.js',
+                    'app/static/js/datatables/vfs_fonts.js',
+                    'app/static/js/datatables/jquery.dataTables.min.js',
+                    'app/static/js/datatables/dataTables.bootstrap.min.js',
+                    'app/static/js/datatables/dataTables.buttons.min.js',
+                    'app/static/js/datatables/buttons.html5.min.js',
+                    'app/static/js/datatables/buttons.print.min.js',
+                    'app/static/js/datatables/buttons.bootstrap.min.js',
+                    'app/static/js/datatables/dataTables.responsive.min.js',
+                    'app/static/js/datatables/responsive.bootstrap.js',
                 ],
                 dest: 'app/static/js/main/main.js'
             }
@@ -835,7 +935,7 @@ module.exports = function(grunt) {
     grunt.registerTask('default', ['run']);
 
     grunt.registerTask(
-      'prod', ['copy:main', 'env:prod', 'preprocess:index', 'image', 'sass', 'autoprefixer', 'concat',
+      'prod', ['copy:main', 'env:prod', 'preprocess:index', 'connect:server', 'image', 'sass', 'autoprefixer', 'concat',
           'uglify', 'cssmin', 'focus:prod']);
 
     grunt.registerTask(

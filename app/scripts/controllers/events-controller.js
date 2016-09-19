@@ -1,75 +1,108 @@
 'use strict';
 
 (function() {
+
+  angular.module('ncsaas').service('EventDialogsService', EventDialogsService);
+
+  EventDialogsService.$inject = ['$rootScope', '$uibModal']
+
+  function EventDialogsService($rootScope, $uibModal) {
+    this.eventTypes = function() {
+      $uibModal.open({
+        templateUrl: 'views/directives/alerts-dialog.html',
+        controller: 'EventTypesController',
+      });
+    };
+
+    this.alertTypes = function() {
+      $uibModal.open({
+        templateUrl: 'views/directives/alerts-dialog.html',
+        controller: 'AlertTypesController',
+      });
+    };
+
+    this.eventDetails = function(row) {
+      var dialogScope = $rootScope.$new();
+      dialogScope.expandableElement = row;
+      $uibModal.open({
+        templateUrl: 'views/directives/event-details-dialog.html',
+        scope: dialogScope
+      });
+    };
+  }
+
+  angular.module('ncsaas').controller('EventTypesController', EventTypesController);
+  EventTypesController.$inject = ['$scope', 'eventsService'];
+  function EventTypesController($scope, eventsService) {
+    $scope.type = 'Events';
+    $scope.types = eventsService.getAvailableIconTypes();
+  }
+
+  angular.module('ncsaas').controller('AlertTypesController', AlertTypesController);
+  AlertTypesController.$inject = ['$scope', 'alertsService'];
+  function AlertTypesController($scope, alertsService) {
+    $scope.type = 'Alerts';
+    $scope.types = alertsService.getAvailableIconTypes();
+  }
+
   angular.module('ncsaas')
     .service('baseEventListController', [
       'baseControllerListClass',
       'eventsService',
-      '$uibModal',
+      'EventDialogsService',
       'ENTITYLISTFIELDTYPES',
       'eventFormatter',
+      '$filter',
       'ENV',
       baseEventListController]);
 
   function baseEventListController(
     baseControllerListClass,
     eventsService,
-    $uibModal,
+    EventDialogsService,
     ENTITYLISTFIELDTYPES,
     eventFormatter,
+    $filter,
     ENV) {
     var ControllerListClass = baseControllerListClass.extend({
       init:function() {
         this.service = eventsService;
-        this.searchFieldName = 'search';
-        this.helpKey = ENV.dashboardHelp.eventsList.name;
-        this.entityOptions = {
-          entityData: {
-            noDataText: 'No events yet',
-            noMatchesText: 'No events found matching filter.',
-            hideActionButtons: true,
-            hideTableHead: true
-          },
-          list: [
+        this.tableOptions = {
+          noDataText: 'No events yet',
+          noMatchesText: 'No events found matching filter.',
+          searchFieldName: 'search',
+
+          columns: [
             {
-              propertyName: 'icon',
-              className: 'icon',
-              type: ENTITYLISTFIELDTYPES.fontIcon
+              title: 'Message',
+              render: function(data, type, row, meta) {
+                return eventFormatter.format(row);
+              }
             },
             {
-              propertyName: 'html_message',
-              className: 'event-message',
-              type: ENTITYLISTFIELDTYPES.html
+              title: 'Timestamp',
+              render: function(data, type, row, meta) {
+                return $filter('dateTime')(row['@timestamp']);
+              }
             },
+          ],
+
+          tableActions: [
             {
-              propertyName: '@timestamp',
-              className: 'date',
-              type: ENTITYLISTFIELDTYPES.date
+              name: '<i class="fa fa-question-circle"></i> Event types',
+              callback: EventDialogsService.eventTypes
+            }
+          ],
+
+          rowActions: [
+            {
+              name: 'Details',
+              callback: EventDialogsService.eventDetails
             }
           ]
         };
-        this.expandableOptions = [
-          {
-            isList: false,
-            addItemBlock: false,
-            viewType: 'event'
-          }
-        ];
         this._super();
       },
-      showHelpTypes: function() {
-        $uibModal.open({
-          template: '<alerts-dialog type="events"></alerts-dialog>',
-          windowClass: 'alerts-list-dialog',
-        });
-      },
-      afterGetList: function() {
-        angular.forEach(this.list, function(event) {
-          event.html_message = eventFormatter.format(event);
-          event.icon = eventFormatter.getIcon(event) || 'fa-bell-o';
-        });
-        this._super();
-      }
     });
 
     return ControllerListClass;
@@ -80,8 +113,8 @@
       'baseControllerListClass',
       'alertsService',
       'alertFormatter',
-      '$uibModal',
       'ENTITYLISTFIELDTYPES',
+      'EventDialogsService',
       'ENV',
       BaseAlertsListController]);
 
@@ -89,8 +122,8 @@
     baseControllerListClass,
     alertsService,
     alertFormatter,
-    $uibModal,
     ENTITYLISTFIELDTYPES,
+    EventDialogsService,
     ENV) {
     return baseControllerListClass.extend({
       init: function() {
@@ -127,12 +160,7 @@
           ]
         };
       },
-      showHelpTypes: function() {
-        $uibModal.open({
-          template: '<alerts-dialog type="alerts"></alerts-dialog>',
-          windowClass: 'alerts-list-dialog',
-        });
-      },
+      showHelpTypes: EventDialogsService.alertTypes,
       afterGetList: function() {
         angular.forEach(this.list, function(alert) {
           alert.html_message = alertFormatter.format(alert);
@@ -398,12 +426,7 @@
           $scope.$apply();
         });
       },
-      showHelpTypes: function(type) {
-        $uibModal.open({
-          template: '<alerts-dialog type="' + type + '"></alerts-dialog>',
-          windowClass: 'alerts-list-dialog',
-        });
-      },
+      showHelpTypes: EventDialogsService.alertTypes,
       selectProject: function(project) {
         var projectCounters, projectEvents;
         if (project) {

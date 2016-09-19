@@ -3,9 +3,9 @@
     var tabs = {
       events: {
         url: 'events/',
-        templateUrl: 'views/partials/list.html',
+        template: '<responsive-table table-ctrl="ListController"/>',
         controller: 'UserEventTabController',
-        controllerAs: 'Ctrl',
+        controllerAs: 'ListController',
         data: {
           pageTitle: 'Audit logs'
         }
