@@ -4,6 +4,8 @@
 
   angular.module('ncsaas').directive('responsiveTable', responsiveTable);
 
+  responsiveTable.$inject = ['$timeout'];
+
   function responsiveTable($timeout) {
     return {
       restrict: 'E',
@@ -14,13 +16,16 @@
       link: function(scope, element) {
         var options = scope.controller.tableOptions;
 
-        var table = initTable();
-        connectRowButtons(table);
-        connectWatcher(table);
+        $timeout(function() {
+          var table = initTable();
+          connectRowButtons(table);
+          connectWatcher(table);
+        });
 
         function initTable() {
           var exportButtons = getExportButtons(
             options.columns.length,
+            options.rowActions,
             ['copyHtml5', 'csvHtml5', 'excelHtml5', 'pdfHtml5', 'print']
           );
           var exportCollection = {
@@ -42,8 +47,11 @@
           ]);
           var buttons = [exportCollection].concat(tableButtons);
 
-          var actionColumn = getActionColumn(options.rowActions || []);
-          var columns = options.columns.concat([actionColumn]);
+          var columns = options.columns;
+          if (options.rowActions) {
+            var actionColumn = getActionColumn(options.rowActions);
+            columns.push(actionColumn);
+          }
 
           var table = $(element.find('table')[0]).DataTable({
             responsive: true,
@@ -106,11 +114,12 @@
           };
         }
 
-        function getExportButtons(columnsCount, formats) {
+        function getExportButtons(columnsCount, rowActions, formats) {
           var title = document.title + ' - ' + moment().format('YYYY-MM-DD');
-          var exportOptions = {
-            columns: range(columnsCount)
-          };
+          var exportOptions = {};
+          if (rowActions) {
+            exportOptions.columns = range(columnsCount);
+          }
           return formats.map(function(format) {
             return {
               extend: format,

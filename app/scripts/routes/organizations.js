@@ -38,9 +38,9 @@
 
       .state('organization.alerts', {
         url: 'alerts/',
-        templateUrl: 'views/customer/tab-alerts.html',
+        template: '<responsive-table table-ctrl="ListController"/>',
         controller: 'CustomerAlertsListController',
-        controllerAs: 'Ctrl',
+        controllerAs: 'ListController',
         data: {
           pageTitle: 'Alerts'
         }

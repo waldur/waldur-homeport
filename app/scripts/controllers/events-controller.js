@@ -50,20 +50,16 @@
       'baseControllerListClass',
       'eventsService',
       'EventDialogsService',
-      'ENTITYLISTFIELDTYPES',
       'eventFormatter',
       '$filter',
-      'ENV',
       baseEventListController]);
 
   function baseEventListController(
     baseControllerListClass,
     eventsService,
     EventDialogsService,
-    ENTITYLISTFIELDTYPES,
     eventFormatter,
-    $filter,
-    ENV) {
+    $filter) {
     var ControllerListClass = baseControllerListClass.extend({
       init:function() {
         this.service = eventsService;
@@ -113,60 +109,46 @@
       'baseControllerListClass',
       'alertsService',
       'alertFormatter',
-      'ENTITYLISTFIELDTYPES',
       'EventDialogsService',
-      'ENV',
+      '$filter',
       BaseAlertsListController]);
 
   function BaseAlertsListController(
     baseControllerListClass,
     alertsService,
     alertFormatter,
-    ENTITYLISTFIELDTYPES,
     EventDialogsService,
-    ENV) {
+    $filter) {
     return baseControllerListClass.extend({
       init: function() {
         this.service = alertsService;
-        this.searchFieldName = 'message';
-        this.helpKey = ENV.dashboardHelp.alertsList.name;
         this._super();
 
-        this.entityOptions = {
-          entityData: {
-            noDataText: 'No alerts yet',
-            noMatchesText: 'No alerts found matching filter.',
-            hideActionButtons: true,
-            hideTableHead: true
-          },
-          list: [
+        this.tableOptions = {
+          noDataText: 'No alerts yet',
+          noMatchesText: 'No alerts found matching filter.',
+          searchFieldName: 'message',
+          columns: [
             {
-              propertyName: 'icon',
-              className: 'icon',
-              type: ENTITYLISTFIELDTYPES.fontIcon
+              title: 'Message',
+              render: function(data, type, row, meta) {
+                return alertFormatter.format(row);
+              }
             },
             {
-              name: 'Message',
-              propertyName: 'html_message',
-              className: 'event-message',
-              type: ENTITYLISTFIELDTYPES.html
-            },
+            title: 'Timestamp',
+              render: function(data, type, row, meta) {
+                return $filter('dateTime')(row.created);
+              }
+            }
+          ],
+          tableActions: [
             {
-              name: 'Date',
-              propertyName: 'created',
-              className: 'date',
-              type: ENTITYLISTFIELDTYPES.date
+              name: '<i class="fa fa-question-circle"></i> Alert types',
+              callback: EventDialogsService.alertTypes
             }
           ]
         };
-      },
-      showHelpTypes: EventDialogsService.alertTypes,
-      afterGetList: function() {
-        angular.forEach(this.list, function(alert) {
-          alert.html_message = alertFormatter.format(alert);
-          alert.icon = alertFormatter.getIcon(alert) || 'fa-bolt';
-        });
-        this._super();
       }
     });
   }

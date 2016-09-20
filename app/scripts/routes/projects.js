@@ -49,9 +49,9 @@
 
       .state('project.alerts', {
         url: 'alerts/',
-        templateUrl: 'views/partials/list.html',
+        template: '<responsive-table table-ctrl="ListController"/>',
         controller: 'ProjectAlertTabController',
-        controllerAs: 'Ctrl',
+        controllerAs: 'ListController',
         data: {
           pageTitle: 'Alerts'
         }
