@@ -420,6 +420,13 @@
     activate();
 
     function activate() {
+      $scope.$on('currentCustomerUpdated', function() {
+        refreshCustomer();
+      });
+      refreshCustomer();
+    }
+
+    function setItems() {
       $scope.items = [
         {
           label: "Providers",
@@ -496,14 +503,6 @@
           feature: "sizing"
         }
       ];
-
-      $scope.$on('currentCustomerUpdated', function() {
-        refreshCustomer();
-      });
-      $scope.$on('authService:signin', function() {
-        refreshCustomer();
-      });
-      refreshCustomer();
     }
 
     function refreshCustomer() {
@@ -511,6 +510,7 @@
         $scope.currentCustomer = customer;
         $scope.context = {customer: customer};
         connectCounters(customer);
+        setItems();
       });
     }
 
