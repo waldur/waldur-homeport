@@ -94,6 +94,7 @@
     'ENV',
     '$filter',
     '$state',
+    'ncUtils',
     'currentCustomer',
     'currentUser'
   ];
@@ -105,6 +106,7 @@
     ENV,
     $filter,
     $state,
+    ncUtils,
     currentCustomer,
     currentUser) {
     var controllerScope = this;
@@ -176,13 +178,14 @@
       },
       getTableActions: function() {
         var ownerOrStaff = customersService.checkCustomerUser(currentCustomer, currentUser);
+        var quotaReached = ncUtils.isCustomerQuotaReached(currentCustomer, 'project');
         return [
           {
             name: '<i class="fa fa-plus"></i> Add project',
             callback: function() {
               $state.go('project-create');
             },
-            disabled: !ownerOrStaff
+            disabled: !ownerOrStaff || quotaReached
           }
         ];
       },
