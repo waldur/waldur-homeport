@@ -86,7 +86,8 @@
                 $timeout(function() {
                   action.callback();
                 });
-              }
+              },
+              className: action.disabled && 'disabled' || ''
             };
           });
         }
