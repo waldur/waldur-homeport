@@ -26,6 +26,85 @@
       'ui.bootstrap',
       'ui.slimscroll'
     ])
+})();
+
+(function() {
+  angular.module('ncsaas').run(protectStates);
+
+  protectStates.$inject = ['$rootScope', '$state', '$auth', 'ENV'];
+
+  function protectStates($rootScope, $state, $auth, ENV) {
+    // 1) If state data has `disabled` flag, user is redirected to dashboard.
+
+    // 2) If state data has `auth` flag and user does not have authentication token,
+    // he is redirected to login page.
+
+    // 3) If state data has `anonymous` flag and user has authentication token,
+    // he is redirected to dashboard.
+
+    // 4) If state data has `feature` field and this feature is disabled,
+    // user is redirected to 404 error page.
+
+    $rootScope.$state = $state;
+
+    $rootScope.$on('$stateChangeStart',
+    function(event, toState, toParams, fromState, fromParams) {
+      var nextState = getNextState();
+      if (nextState) {
+        event.preventDefault();
+        $state.go(nextState);
+      }
+
+      function getNextState() {
+        var data = toState.data;
+        if (!data) {
+          return;
+        } else if (data.disabled) {
+          return 'dashboard.index';
+        } else if (data.auth && !$auth.isAuthenticated()) {
+          return authCheck();
+        } else if (data.anonymous && $auth.isAuthenticated()) {
+          return 'dashboard.index';
+        } else if (data.feature && disabledFeature(data.feature)) {
+          return 'errorPage.notFound';
+        }
+      }
+    });
+
+    function disabledFeature(feature) {
+      return (!ENV.featuresVisible && ENV.toBeFeatures.indexOf(feature) !== -1);
+    }
+  }
+
+  angular.module('ncsaas').config(attachAuthResolve);
+
+  attachAuthResolve.$inject = ['$stateProvider'];
+
+  function attachAuthResolve($stateProvider) {
+    $stateProvider.decorator('views', function(state, parent) {
+      var result = {}, views = parent(state);
+
+      angular.forEach(views, function(config, name) {
+        if (config.data && config.data.auth) {
+          config.resolve = config.resolve || {};
+          config.resolve.authentication = authentication;
+
+          authentication.$inject = ['usersService'];
+          function authentication(usersService) {
+            return usersService.getCurrentUser();
+          }
+        }
+        result[name] = config;
+      });
+
+      return result;
+    });
+  }
+
+})();
+
+(function() {
+  angular.module('ncsaas')
     // urls
     .config(function($stateProvider, $urlRouterProvider, MODE) {
       var initialDataState = 'initialdata.view',
@@ -401,56 +480,6 @@
       if (CUSTOMENV.hasOwnProperty(property)) {
         ENV[property] = CUSTOMENV[property];
       }
-    }
-  }
-})();
-
-(function() {
-  angular.module('ncsaas').run(protectStates);
-
-  protectStates.$inject = ['$rootScope', '$state', '$auth', 'ENV', 'usersService'];
-
-  function protectStates($rootScope, $state, $auth, ENV, usersService) {
-    // 1) If state data has `disabled` flag, 
-    // user is redirected to dashboard.
-
-    // 2) If state data has `auth` flag and user is not authenticated,
-    // he is redirected to login page.
-
-    // 3) If state data has `anonymous` flag and user is authenticated,
-    // he is redirected to dashboard.
-
-    // 4) If state data has `feature` field and this feature is disabled,
-    // user is redirected to 404 error page.
-
-    $rootScope.$state = $state;
-
-    $rootScope.$on('$stateChangeStart',
-    function(event, toState, toParams, fromState, fromParams) {
-      var nextState = getNextState();
-      if (nextState) {
-        event.preventDefault();
-        $state.go(nextState);
-      }
-
-      function getNextState() {
-        var data = toState.data;
-        if (!data) {
-          return;
-        } else if (data.disabled) {
-          return 'dashboard.index';
-        } else if (data.auth && !$auth.isAuthenticated()) {
-          return 'login';
-        } else if (data.anonymous && $auth.isAuthenticated()) {
-          return 'dashboard.index';
-        } else if (data.feature && disabledFeature(data.feature)) {
-          return 'errorPage.notFound';
-        }
-      }
-    });
-
-    function disabledFeature(feature) {
-      return (!ENV.featuresVisible && ENV.toBeFeatures.indexOf(feature) !== -1);
     }
   }
 })();
