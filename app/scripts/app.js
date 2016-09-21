@@ -31,9 +31,9 @@
 (function() {
   angular.module('ncsaas').run(protectStates);
 
-  protectStates.$inject = ['$rootScope', '$state', '$auth', 'ENV', 'usersService'];
+  protectStates.$inject = ['$rootScope', '$state', '$auth', 'ENV'];
 
-  function protectStates($rootScope, $state, $auth, ENV, usersService) {
+  function protectStates($rootScope, $state, $auth, ENV) {
     // 1) If state data has `disabled` flag, user is redirected to dashboard.
 
     // 2) If state data has `auth` flag and user does not have authentication token,
@@ -76,7 +76,11 @@
     }
   }
 
-  angular.module('ncsaas').config(function($stateProvider) {
+  angular.module('ncsaas').config(attachAuthResolve);
+
+  attachAuthResolve.$inject = ['$stateProvider'];
+
+  function attachAuthResolve($stateProvider) {
     $stateProvider.decorator('views', function(state, parent) {
       var result = {}, views = parent(state);
 
@@ -95,7 +99,7 @@
 
       return result;
     });
-  });
+  }
 
 })();
 
