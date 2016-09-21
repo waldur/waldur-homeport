@@ -94,9 +94,6 @@
       init: function() {
         this.controllerScope = controllerScope;
         this._super();
-        this.entityOptions.entityData.title = '';
-        this.entityOptions.entityData.checkQuotas = 'project';
-        this.entityOptions.createLink = 'project-create';
       }
     });
 

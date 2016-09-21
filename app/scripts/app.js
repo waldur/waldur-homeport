@@ -596,4 +596,8 @@
     };
   }
 
+  angular.module('ncsaas').run(['editableOptions', function(editableOptions) {
+    editableOptions.theme = 'bs3';
+  }]);
+
 })();

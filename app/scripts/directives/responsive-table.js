@@ -35,17 +35,19 @@
             fade: 0,
             buttons: exportButtons
           };
-          var tableButtons = getTableButtons(options.tableActions).concat([
-            {
-              text: '<i class="fa fa-refresh"></i> Refresh',
-              action: function() {
-                $timeout(function() {
-                  scope.controller.resetCache();
-                });
-              }
+          var buttons = [exportCollection];
+          if (options.tableActions) {
+            var tableButtons = getTableButtons(options.tableActions);
+            buttons = buttons.concat(tableButtons);
+          }
+          buttons.push({
+            text: '<i class="fa fa-refresh"></i> Refresh',
+            action: function() {
+              $timeout(function() {
+                scope.controller.resetCache();
+              });
             }
-          ]);
-          var buttons = [exportCollection].concat(tableButtons);
+          });
 
           var columns = options.columns;
           if (options.rowActions) {
