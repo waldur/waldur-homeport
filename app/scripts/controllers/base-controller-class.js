@@ -92,7 +92,7 @@
         var vm = this;
         var filter = {};
         if (request.search.value) {
-          filter[options.searchFieldName] = request.search.value;
+          filter[this.tableOptions.searchFieldName] = request.search.value;
         }
         vm.searchInput = request.search.value;
         vm.service.pageSize = request.length;

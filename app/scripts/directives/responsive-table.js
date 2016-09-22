@@ -51,7 +51,7 @@
 
           var columns = options.columns;
           if (options.rowActions) {
-            var actionColumn = getActionColumn(options.rowActions);
+            var actionColumn = getActionColumn(options.rowActions, options.actionsColumnWidth);
             columns.push(actionColumn);
           }
 
@@ -87,7 +87,8 @@
                   action.callback();
                 });
               },
-              className: action.disabled && 'disabled' || ''
+              className: action.disabled && 'disabled' || '',
+              titleAttr: action.titleAttr
             };
           });
         }
@@ -95,8 +96,9 @@
         function connectRowButtons(table) {
           table.on('click', 'button', function(event) {
             $(this).blur();
-            var rowIndex = parseInt($(event.target).attr('row-index'));
-            var actionIndex = parseInt($(event.target).attr('action-index'));
+            var target = $(event.target).closest('button');
+            var rowIndex = parseInt(target.attr('row-index'));
+            var actionIndex = parseInt(target.attr('action-index'));
             var action = options.rowActions[actionIndex];
             var row = scope.controller.list[rowIndex];
             $timeout(function() {
@@ -105,15 +107,27 @@
           });
         }
 
-        function getActionColumn(spec) {
+        function getActionColumn(spec, width) {
           return {
             title: 'Actions',
             orderable: false,
             render: function(data, type, row, meta) {
-              return spec.map(function(action, index) {
-                return '<button class="btn btn-default btn-sm" row-index="' + meta.row + '" action-index="' + index + '">' + action.name + '</button>';
+              var template = '<a title="{tooltip}"><button class="btn btn-default btn-sm {cls}" row-index="{row}" action-index="{action}">{name}</button></a>';
+              var buttons = spec.map(function(action, index) {
+                var cls = action.isDisabled && action.isDisabled(row) && 'disabled' || '';
+                if (action.className) {
+                  cls += ' ' + action.className;
+                }
+                var tooltip = action.tooltip && action.tooltip(row) || '';
+                return template.replace('{cls}', cls)
+                               .replace('{row}', meta.row)
+                               .replace('{action}', index)
+                               .replace('{name}', action.name)
+                               .replace('{tooltip}', tooltip);
               }).join('');
-            }
+              return '<div class="btn-group">' + buttons + '</div>';
+            },
+            width: width
           };
         }
 

@@ -68,9 +68,9 @@
 
       .state('organization.providers', {
         url: 'providers/?providerUuid&providerType',
-        templateUrl: 'views/partials/list.html',
-        controller: 'CustomerServiceTabController',
-        controllerAs: 'Ctrl',
+        template: '<responsive-table table-ctrl="ListController"/>',
+        controller: 'ProviderListController',
+        controllerAs: 'ListController',
         data: {
           pageTitle: 'Providers'
         }

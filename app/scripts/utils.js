@@ -41,7 +41,7 @@
       getStateClass: function(state) {
         var cls = ENV.servicesStateColorClasses[state];
         if (cls == 'processing') {
-          return 'icon refresh spin';
+          return 'fa fa-refresh fa-spin';
         } else {
           return 'status-circle ' + cls;
         }
