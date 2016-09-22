@@ -87,7 +87,8 @@
                   action.callback();
                 });
               },
-              className: action.disabled && 'disabled' || ''
+              className: action.disabled && 'disabled' || '',
+              titleAttr: action.titleAttr
             };
           });
         }
@@ -110,9 +111,20 @@
             title: 'Actions',
             orderable: false,
             render: function(data, type, row, meta) {
-              return spec.map(function(action, index) {
-                return '<button class="btn btn-default btn-sm" row-index="' + meta.row + '" action-index="' + index + '">' + action.name + '</button>';
+              var template = '<a title="{tooltip}"><button class="btn btn-default btn-sm {cls}" row-index="{row}" action-index="{action}">{name}</button></a>';
+              var buttons = spec.map(function(action, index) {
+                var cls = action.isDisabled && action.isDisabled(row) && 'disabled' || '';
+                if (action.className) {
+                  cls += ' ' + action.className;
+                }
+                var tooltip = action.tooltip && action.tooltip(row) || '';
+                return template.replace('{cls}', cls)
+                               .replace('{row}', meta.row)
+                               .replace('{action}', index)
+                               .replace('{name}', action.name)
+                               .replace('{tooltip}', tooltip);
               }).join('');
+              return '<div class="btn-group">' + buttons + '</div>';
             },
             width: width
           };
