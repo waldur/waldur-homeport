@@ -51,7 +51,7 @@
 
           var columns = options.columns;
           if (options.rowActions) {
-            var actionColumn = getActionColumn(options.rowActions);
+            var actionColumn = getActionColumn(options.rowActions, options.actionsColumnWidth);
             columns.push(actionColumn);
           }
 
@@ -105,7 +105,7 @@
           });
         }
 
-        function getActionColumn(spec) {
+        function getActionColumn(spec, width) {
           return {
             title: 'Actions',
             orderable: false,
@@ -113,7 +113,8 @@
               return spec.map(function(action, index) {
                 return '<button class="btn btn-default btn-sm" row-index="' + meta.row + '" action-index="' + index + '">' + action.name + '</button>';
               }).join('');
-            }
+            },
+            width: width
           };
         }
 
