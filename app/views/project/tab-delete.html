@@ -1,7 +1,23 @@
-<div class="text-center">
-    <h3>You can remove this project by pressing the button</h3>
-    <a submit-button="delController.removeProject()" class="btn btn-danger">
-        <i class="fa fa-trash"></i>
-        Remove project
-    </a>
+<div ng-if="!delController.project">
+  <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
+</div>
+
+<div ng-if="delController.project">
+  <div class="panel panel-default">
+    <div class="panel-heading">Project details</div>
+    <div class="panel-body">
+      <project-price-limit project="delController.project"></project-price-limit>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">Project actions</div>
+    <div class="panel-body">
+      <p>You can remove this project by pressing the button</p>
+      <a submit-button="delController.removeProject()" class="btn btn-danger">
+          <i class="fa fa-trash"></i>
+          Remove project
+      </a>
+    </div>
+  </div>
 </div>

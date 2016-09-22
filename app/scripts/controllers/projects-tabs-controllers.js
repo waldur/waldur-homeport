@@ -301,6 +301,7 @@
       'currentStateService',
       '$rootScope',
       '$state',
+      '$q',
       ProjectDeleteTabController
     ]);
 
@@ -309,7 +310,8 @@
     projectsService,
     currentStateService,
     $rootScope,
-    $state
+    $state,
+    $q
   ) {
     var controllerScope = this;
     var DeleteController = baseControllerClass.extend({
@@ -343,6 +345,8 @@
               $state.go('organization.projects', {uuid: customer.uuid});
             });
           });
+        } else {
+          return $q.reject();
         }
       }
     });

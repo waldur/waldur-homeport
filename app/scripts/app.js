@@ -87,7 +87,7 @@
       angular.forEach(views, function(config, name) {
         if (config.data && config.data.auth) {
           config.resolve = config.resolve || {};
-          config.resolve.authentication = authentication;
+          config.resolve.currentUser = authentication;
 
           authentication.$inject = ['usersService'];
           function authentication(usersService) {
@@ -595,5 +595,9 @@
       }
     };
   }
+
+  angular.module('ncsaas').run(['editableOptions', function(editableOptions) {
+    editableOptions.theme = 'bs3';
+  }]);
 
 })();

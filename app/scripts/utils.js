@@ -92,6 +92,17 @@
       getPrettyQuotaName: function(name) {
         return name.replace(/nc_|_count/g, '').replace(/_/g, ' ');
       },
+      isCustomerQuotaReached: function(customer, quotaName) {
+        var quotas = customer.quotas || [];
+        for (var i = 0; i < quotas.length; i++) {
+          var value = quotas[i];
+          var name = this.getPrettyQuotaName(value.name);
+          if (name === quotaName && value.limit > -1 && (value.limit === value.usage || value.limit === 0)) {
+            return {name: name, usage: [value.limit, value.usage]};
+          }
+        }
+        return false;
+      },
       getQuotaUsage: function(quotas) {
         var usage = {};
         for (var i = 0; i < quotas.length; i++) {

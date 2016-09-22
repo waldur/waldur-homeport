@@ -48,9 +48,9 @@
 
       .state('organization.projects', {
         url: 'projects/',
-        templateUrl: 'views/partials/list.html',
+        template: '<responsive-table table-ctrl="ListController"/>',
         controller: 'CustomerProjectTabController',
-        controllerAs: 'Ctrl',
+        controllerAs: 'ListController',
         data: {
           pageTitle: 'Projects'
         }

@@ -85,18 +85,128 @@
 (function() {
 
   angular.module('ncsaas')
-    .controller('CustomerProjectTabController', [
-      'BaseProjectListController', CustomerProjectTabController]);
+    .controller('CustomerProjectTabController', ProjectListController);
 
-  function CustomerProjectTabController(BaseProjectListController) {
+  ProjectListController.$inject = [
+    'baseControllerListClass',
+    'projectsService',
+    'customersService',
+    'ENV',
+    '$filter',
+    '$state',
+    'ncUtils',
+    'currentCustomer',
+    'currentUser'
+  ];
+
+  function ProjectListController(
+    baseControllerListClass,
+    projectsService,
+    customersService,
+    ENV,
+    $filter,
+    $state,
+    ncUtils,
+    currentCustomer,
+    currentUser) {
     var controllerScope = this;
-    var Controller = BaseProjectListController.extend({
+    var Controller = baseControllerListClass.extend({
       init: function() {
-        this.controllerScope = controllerScope;
+        this.service = projectsService;
         this._super();
-        this.entityOptions.entityData.title = '';
-        this.entityOptions.entityData.checkQuotas = 'project';
-        this.entityOptions.createLink = 'project-create';
+        this.tableOptions = {
+          searchFieldName: 'name',
+          noDataText: 'You have no projects yet.',
+          noMatchesText: 'No projects found matching filter.',
+          columns: this.getColumns(),
+          tableActions: this.getTableActions()
+        };
+      },
+      getColumns: function() {
+        var columns = [
+          {
+            title: 'Name',
+            render: function(data, type, row, meta) {
+              var href = $state.href('project.details', {uuid: row.uuid});
+              return "<a href=\"{href}\">{name}</a>"
+                     .replace('{href}', href)
+                     .replace('{name}', row.name);
+            }
+          },
+          {
+            title: 'Creation date',
+            render: function(data, type, row, meta) {
+              return $filter('dateTime')(row.created);
+            }
+          }
+        ];
+        if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('resources') == -1) {
+          columns.push({
+            title: 'VMs',
+            render: function(data, type, row, meta) {
+              return row.vm_count || 0;
+            }
+          });
+          columns.push({
+            title: 'Apps',
+            render: function(data, type, row, meta) {
+              return row.app_count || 0;
+            }
+          });
+          columns.push({
+            title: 'PCs',
+            render: function(data, type, row, meta) {
+              return row.private_cloud_count || 0;
+            }
+          });
+        }
+        if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('premiumSupport') == -1) {
+          columns.push({
+            title: 'SLA',
+            render: function(data, type, row, meta) {
+              if (row.plan) {
+                return row.plan.name;
+              } else if (row.has_pending_contracts) {
+                return 'Pending';
+              } else {
+                return 'No plan';
+              }
+            }
+          });
+        }
+        return columns;
+      },
+      getTableActions: function() {
+        var ownerOrStaff = customersService.checkCustomerUser(currentCustomer, currentUser);
+        var quotaReached = ncUtils.isCustomerQuotaReached(currentCustomer, 'project');
+        return [
+          {
+            name: '<i class="fa fa-plus"></i> Add project',
+            callback: function() {
+              $state.go('project-create');
+            },
+            disabled: !ownerOrStaff || quotaReached
+          }
+        ];
+      },
+      afterGetList: function() {
+        for (var i = 0; i < this.list.length; i++) {
+          var item = this.list[i];
+          this.setProjectCounters(item);
+        }
+        this._super();
+      },
+      setProjectCounters: function(project) {
+        for (var i = 0; i < project.quotas.length; i++) {
+          var quota = project.quotas[i];
+          if (quota.name == 'nc_app_count') {
+            project.app_count = quota.usage;
+          } else if (quota.name == 'nc_vm_count') {
+            project.vm_count = quota.usage;
+          } else if (quota.name == 'nc_private_cloud_count') {
+            project.private_cloud_count = quota.usage;
+          }
+        }
       }
     });
 
