@@ -96,8 +96,9 @@
         function connectRowButtons(table) {
           table.on('click', 'button', function(event) {
             $(this).blur();
-            var rowIndex = parseInt($(event.target).attr('row-index'));
-            var actionIndex = parseInt($(event.target).attr('action-index'));
+            var target = $(event.target).closest('button');
+            var rowIndex = parseInt(target.attr('row-index'));
+            var actionIndex = parseInt(target.attr('action-index'));
             var action = options.rowActions[actionIndex];
             var row = scope.controller.list[rowIndex];
             $timeout(function() {
