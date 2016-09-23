@@ -120,7 +120,6 @@
 
         this.tableOptions.noDataText = 'You have no virtual machines yet';
         this.tableOptions.noMatchesText = 'No virtual machines found matching filter.';
-        this.entityOptions.entityData.openMap = this.openMap.bind(this);
       },
       getImportTitle: function() {
         return 'Import virtual machine';
@@ -150,7 +149,6 @@
         this._super();
         this.tableOptions.noDataText = 'You have no private clouds yet';
         this.tableOptions.noMatchesText = 'No private clouds found matching filter.';
-        this.entityOptions.entityData.openMap = this.openMap.bind(this);
       },
       getImportTitle: function() {
         return 'Import private cloud';

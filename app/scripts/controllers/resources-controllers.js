@@ -134,6 +134,7 @@
           actions.push(this.getImportAction());
         }
         actions.push(this.getCreateAction());
+        actions.push(this.getMapAction());
         return actions;
       },
       getImportAction: function() {
@@ -189,6 +190,12 @@
         } else if (this.category === ENV.Applications) {
           $state.go('appstore.store', {category: 'apps'});
         }
+      },
+      getMapAction: function() {
+        return {
+          name: '<i class="fa fa-map-marker"></i> Open map',
+          callback: this.openMap.bind(this)
+        };
       },
       rowFields: [
         'uuid', 'url', 'name', 'state', 'runtime_state', 'created', 'error_message',
