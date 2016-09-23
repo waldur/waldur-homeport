@@ -70,24 +70,18 @@
           noMatchesText: 'No resources found matching filter.',
           columns: [
             {
-              title: 'Type',
-              render: function(data, type, row, meta) {
-                return '<img src="{src}" title="{title}" class="img-xs">'
-                      .replace('{src}', resourceUtils.getIcon(row))
-                      .replace('{title}', row.resource_type)
-              },
-              width: '20px'
-            },
-            {
               title: 'Name',
               render: function(data, type, row, meta) {
+                var img = '<img src="{src}" title="{title}" class="img-xs m-r-xs">'
+                      .replace('{src}', resourceUtils.getIcon(row))
+                      .replace('{title}', row.resource_type);
                 var href = $state.href('resources.details', {
                   uuid: row.uuid,
                   resource_type: row.resource_type
                 });
                 return '<a href="{href}">{name}</a>'
                           .replace('{href}', href)
-                          .replace('{name}', row.name);
+                          .replace('{name}', img + ' ' + row.name);
               }
             },
             {
@@ -120,8 +114,10 @@
                 if (cls === 'status-circle erred') {
                   title = row.error_message;
                 }
-                return '<a class="{cls}" title="{title}"></a>'
-                          .replace('{cls}', cls).replace('{title}', title);
+                return '<a class="{cls}" title="{title}"></a> {state}'
+                          .replace('{cls}', cls)
+                          .replace('{state}', row.runtime_state || row.state)
+                          .replace('{title}', title);
               },
             }
           ],
