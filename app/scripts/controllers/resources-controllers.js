@@ -162,9 +162,6 @@
         if (ncUtils.isCustomerQuotaReached(this.currentCustomer, 'resource')) {
           disabled = true;
           tooltip = 'Quota has been reached';
-        } else {
-          disabled = false;
-          tooltip = 'Import resources from the registered provider accounts.';
         }
         return {
           name: '<i class="fa fa-plus"></i> ' + this.getCreateTitle(),
@@ -196,7 +193,7 @@
       rowFields: [
         'uuid', 'url', 'name', 'state', 'runtime_state', 'created', 'error_message',
         'resource_type', 'latitude', 'longitude',
-        'service_name', 'service_type', 'service_uuid', 'customer'
+        'service_name', 'service_uuid', 'customer'
       ],
       getMarkers: function() {
         var items = this.controllerScope.list.filter(function hasCoordinates(item) {
