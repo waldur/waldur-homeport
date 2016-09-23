@@ -490,14 +490,8 @@
 
       updateMenu: function() {
         controllerScope.context = {resource: controllerScope.model};
-        var state = this.getListState(this.model.resource_type);
-        controllerScope.items = [
-          {
-              label: "Back to project",
-              icon: "fa-angle-left",
-              link: state + "({uuid: context.resource.project_uuid})"
-          }
-        ];
+        controllerScope.listState = this.getListState(this.model.resource_type)
+                                    + "({uuid: ResourceCtrl.context.resource.project_uuid})";
       },
 
       getListState: function(resourceType) {
