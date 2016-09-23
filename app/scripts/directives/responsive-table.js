@@ -74,7 +74,7 @@
 
         function connectWatcher(table) {
           scope.$watchCollection('controller.list', function() {
-            table.draw();
+            table.draw(false);
           });
         }
 
