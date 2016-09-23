@@ -14,7 +14,9 @@
     '$uibModal',
     '$rootScope',
     '$state',
+    '$q',
     'resourceUtils',
+    'ncUtils',
     baseResourceListController
     ]);
 
@@ -31,7 +33,9 @@
     $uibModal,
     $rootScope,
     $state,
-    resourceUtils) {
+    $q,
+    resourceUtils,
+    ncUtils) {
     var ControllerListClass = baseControllerListClass.extend({
       init: function() {
         this.service = resourcesService;
@@ -43,16 +47,30 @@
         this._super();
         this.hasCustomFilters = false;
 
-        var currentCustomerUuid = currentStateService.getCustomerUuid();
         var vm = this;
+        vm.loading = true;
+        $q.all([
+          currentStateService.getCustomer().then(function(customer) {
+            vm.currentCustomer = customer;
+          }),
+          currentStateService.getProject().then(function(project) {
+            vm.currentProject = project;
+          })
+        ]).finally(function() {
+          vm.loading = false;
+          vm.getTableOptions();
+        });
+        this.tableOptions = {};
         this.entityOptions = {entityData: {}};
+      },
+      getTableOptions: function() {
         this.tableOptions = {
           searchFieldName: 'name',
           noDataText: 'You have no resources yet.',
           noMatchesText: 'No resources found matching filter.',
           columns: [
             {
-              title: 'Icon',
+              title: 'Type',
               render: function(data, type, row, meta) {
                 return '<img src="{src}" title="{title}" class="img-xs">'
                       .replace('{src}', resourceUtils.getIcon(row))
@@ -92,13 +110,18 @@
               title: 'State',
               render: function(data, type, row, meta) {
                 var cls = ENV.resourceStateColorClasses[row.state];
-                if (cls == 'processing') {
+                var title = row.state;
+                if (cls === 'processing') {
                   cls = 'fa-refresh fa-spin';
+                  title = row.runtime_state;
                 } else {
                   cls = 'status-circle ' + cls;
                 }
+                if (cls === 'status-circle erred') {
+                  title = row.error_message;
+                }
                 return '<a class="{cls}" title="{title}"></a>'
-                          .replace('{cls}', cls).replace('{title}', row.state);
+                          .replace('{cls}', cls).replace('{title}', title);
               },
             }
           ],
@@ -108,18 +131,67 @@
       getTableActions: function() {
         var actions = [];
         if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('import') == -1) {
-          actions.push({
-            name: '<i class="fa fa-plus"></i> Import',
-            callback: function() {
-              $state.go('import.import');
-            },
-            titleAttr: 'Import resources from the registered provider accounts.'
-          });
+          actions.push(this.getImportAction());
         }
+        actions.push(this.getCreateAction());
         return actions;
       },
+      getImportAction: function() {
+        var disabled, tooltip;
+        if (ncUtils.isCustomerQuotaReached(this.currentCustomer, 'resource')) {
+          disabled = true;
+          tooltip = 'Quota has been reached';
+        } else if (!this.projectHasNonSharedService(this.currentProject)) {
+          disabled = true;
+          tooltip = 'Import is not possible as there are no personal provider accounts registered.';
+        } else {
+          disabled = false;
+          tooltip = 'Import resources from the registered provider accounts.';
+        }
+        return {
+          name: '<i class="fa fa-plus"></i> ' + this.getImportTitle(),
+          callback: function() {
+            $state.go('import.import');
+          },
+          disabled: disabled,
+          titleAttr: tooltip
+        };
+      },
+      getImportTitle: function() {
+        return 'Import';
+      },
+      getCreateAction: function() {
+        var disabled, tooltip;
+        if (ncUtils.isCustomerQuotaReached(this.currentCustomer, 'resource')) {
+          disabled = true;
+          tooltip = 'Quota has been reached';
+        } else {
+          disabled = false;
+          tooltip = 'Import resources from the registered provider accounts.';
+        }
+        return {
+          name: '<i class="fa fa-plus"></i> ' + this.getCreateTitle(),
+          callback: function() {
+            this.gotoAppstore();
+          }.bind(this),
+          disabled: disabled,
+          titleAttr: tooltip
+        };
+      },
+      getCreateTitle: function() {
+        return 'Create';
+      },
+      gotoAppstore: function() {
+        if (this.category === ENV.VirtualMachines) {
+          $state.go('appstore.store', {category: 'vms'});
+        } else if (this.category === ENV.PrivateClouds) {
+          $state.go('appstore.store', {category: 'private_clouds'});
+        } else if (this.category === ENV.Applications) {
+          $state.go('appstore.store', {category: 'apps'});
+        }
+      },
       rowFields: [
-        'uuid', 'url', 'name', 'state', 'runtime_state', 'created', 'start_time',
+        'uuid', 'url', 'name', 'state', 'runtime_state', 'created', 'error_message',
         'resource_type', 'latitude', 'longitude',
         'service_name', 'service_type', 'service_uuid', 'customer'
       ],

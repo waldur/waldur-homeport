@@ -1,0 +1,6 @@
+<div ng-if="ListController.loading">
+    <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
+</div>
+<div ng-if="!ListController.loading">
+	<responsive-table table-ctrl="ListController"></responsive-table>
+</div>

@@ -83,3 +83,7 @@ body.landing {
 .img-xs {
   width: 25px;
 }
+
+.dt-buttons .btn.disabled {
+    pointer-events: auto;
+}
