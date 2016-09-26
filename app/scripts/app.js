@@ -251,7 +251,8 @@
           abstract: true,
           templateUrl: 'views/resource/base.html',
           data: {
-            auth: true
+            auth: true,
+            showProject: true
           }
         })
 

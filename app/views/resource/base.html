@@ -14,7 +14,7 @@
                     <a ui-sref="project.details({uuid: ResourceCtrl.model.project_uuid })">{{ ResourceCtrl.model.project_name }}</a>
                 </li>
                 <li>
-                    <a ui-sref="{{ ::ResourceCtrl.listState }}">Resources</a>
+                    <a ui-sref="{{ ::ResourceCtrl.listState }}" ng-bind="::ResourceCtrl.listTitle"></a>
                 </li>
                 <li class="active">
                     <strong>{{ ResourceCtrl.model.name }}</strong>

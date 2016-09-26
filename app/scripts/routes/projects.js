@@ -7,6 +7,7 @@
         templateUrl: 'views/project/base.html',
         data: {
           auth: true,
+          showProject: true
         },
         resolve: {
           currentProject: function(
@@ -120,6 +121,7 @@
         data: {
           auth: true,
           pageTitle: 'Import resources from provider',
+          showProject: true
         }
       })
 

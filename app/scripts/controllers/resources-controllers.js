@@ -492,6 +492,18 @@
         controllerScope.context = {resource: controllerScope.model};
         controllerScope.listState = this.getListState(this.model.resource_type)
                                     + "({uuid: ResourceCtrl.context.resource.project_uuid})";
+        controllerScope.listTitle = this.getListTitle(this.model.resource_type);
+      },
+
+      getListTitle: function(resourceType) {
+        var resourceCategory = ENV.resourceCategory[resourceType];
+        if (resourceCategory === 'apps') {
+          return 'Applications';
+        } else if (resourceCategory === 'private_clouds') {
+          return 'Private clouds';
+        } else {
+          return 'Virtual machines';
+        }
       },
 
       getListState: function(resourceType) {

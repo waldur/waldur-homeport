@@ -5,7 +5,7 @@
     <span ng-if="SelectWorkspaceToggleController.customer">
         {{ SelectWorkspaceToggleController.customer.name }}
     </span>
-    <span ng-if="SelectWorkspaceToggleController.project && ($state.includes('project') || $state.includes('appstore'))">
+    <span ng-if="SelectWorkspaceToggleController.project && $state.current.data.showProject">
       > {{ SelectWorkspaceToggleController.project.name }}
     </span>
     <i class="fa fa-angle-down"></i>
