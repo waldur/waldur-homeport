@@ -10,61 +10,26 @@
     return {
       restrict: 'E',
       templateUrl: 'views/directives/action-button-resource.html',
-      replace: true,
       scope: {
         buttonController: '=',
         buttonModel: '='
       },
       link: function (scope) {
-        scope.actions = null;
+        scope.actions = [];
         scope.loading = false;
-        scope.toggleMenu = toggleMenu;
 
         scope.buttonClick = function(name, action) {
-          toggleMenu();
-          action.pending = true;
-          var promise = actionUtilsService.buttonClick(scope.buttonController, scope.buttonModel, name, action);
-          promise.finally(function() {
-            action.pending = false;
-          });
+          actionUtilsService.buttonClick(scope.buttonController, scope.buttonModel, name, action);
         }
-        scope.openActionsListTrigger = openActionsListTrigger;
-
-        var controller = scope.buttonController;
-        controller.actionButtonsList = controller.actionButtonsList || [];
-        controller.actionButtonsList[scope.$id] = false;
-
-        function openActionsListTrigger() {
-          loadActions();
-          if (!controller.actionButtonsList[scope.$id]) {
-            scope.$broadcast('actionButton:close');
-          }
-          toggleMenu();
-        }
-
-        function toggleMenu() {
-          controller.actionButtonsList[scope.$id] = !controller.actionButtonsList[scope.$id];
-        }
-
-        function loadActions() {
+        scope.openActionsListTrigger = function() {
           scope.loading = true;
+          scope.actions = [];
           actionUtilsService.loadActions(scope.buttonModel).then(function(actions) {
-            if (actions) {
-              scope.actions = actions;
-            }
+            scope.actions = actions;
           }).finally(function() {
             scope.loading = false;
           });
         }
-
-        function closeAll() {
-          for (var i = 0; controller.actionButtonsList.length > i; i++) {
-            controller.actionButtonsList[i] = false;
-          }
-        }
-
-        scope.$on('actionButton:close', closeAll);
-        $rootScope.$on('clicked-out', closeAll);
       }
     };
   }

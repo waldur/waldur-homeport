@@ -117,9 +117,12 @@
         this.controllerScope = controllerScope;
         this.category = ENV.VirtualMachines;
         this._super();
-
-        this.tableOptions.noDataText = 'You have no virtual machines yet';
-        this.tableOptions.noMatchesText = 'No virtual machines found matching filter.';
+      },
+      getTableOptions: function() {
+        var options = this._super();
+        options.noDataText = 'You have no virtual machines yet';
+        options.noMatchesText = 'No virtual machines found matching filter.';
+        return options;
       },
       getImportTitle: function() {
         return 'Import virtual machine';
@@ -147,8 +150,12 @@
         this.controllerScope = controllerScope;
         this.category = ENV.PrivateClouds;
         this._super();
-        this.tableOptions.noDataText = 'You have no private clouds yet';
-        this.tableOptions.noMatchesText = 'No private clouds found matching filter.';
+      },
+      getTableOptions: function() {
+        var options = this._super();
+        options.noDataText = 'You have no private clouds yet';
+        options.noMatchesText = 'No private clouds found matching filter.';
+        return options;
       },
       getImportTitle: function() {
         return 'Import private cloud';
@@ -175,9 +182,12 @@
         this.controllerScope = controllerScope;
         this.category = ENV.Applications;
         this._super();
-
-        this.tableOptions.noDataText = 'You have no applications yet';
-        this.tableOptions.noMatchesText = 'No applications found matching filter.';
+      },
+      getTableOptions: function() {
+        var options = this._super();
+        options.noDataText = 'You have no applications yet.';
+        options.noMatchesText = 'No applications found matching filter.';
+        return options;
       },
       getImportTitle: function() {
         return 'Import application';

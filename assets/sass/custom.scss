@@ -85,5 +85,10 @@ body.landing {
 }
 
 .dt-buttons .btn.disabled {
-    pointer-events: auto;
+  pointer-events: auto;
+}
+
+.dropdown-menu-right {
+  right: 0 !important;
+  left: auto !important;
 }

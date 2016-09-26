@@ -60,8 +60,6 @@
           vm.loading = false;
           vm.getTableOptions();
         });
-        this.tableOptions = {};
-        this.entityOptions = {entityData: {}};
       },
       getTableOptions: function() {
         this.tableOptions = {
@@ -121,7 +119,16 @@
               },
             }
           ],
-          tableActions: this.getTableActions()
+          tableActions: this.getTableActions(),
+          rowActions: function(row) {
+            var index;
+            for (var i = 0; i < this.list.length; i++) {
+              if (this.list[i].uuid === row.uuid) {
+                index = i;
+              }
+            }
+            return '<action-button-resource button-controller="controller" button-model="controller.list[' + index + ']"/>';
+          }
         };
       },
       getTableActions: function() {
