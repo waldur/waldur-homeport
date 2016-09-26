@@ -13,7 +13,7 @@
         context: '='
       },
       templateUrl: 'views/directives/sidebar.html',
-      link: function(scope, element, attrs) {
+      link: function(scope) {
         scope.onMenuClick = function(event, item) {
           if (item.children) {
             item.expanded = !item.expanded;
@@ -28,7 +28,7 @@
         scope.$on('$stateChangeSuccess', function() {
           syncMenu();
         });
-        attrs.$observe('items', function() {
+        scope.$watch('items', function() {
           syncMenu();
         });
       }

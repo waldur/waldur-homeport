@@ -32,7 +32,7 @@
                     <span class="nav-label">{{ ::item.label }}</span>
                 </a>
                 <ul class="nav nav-second-level"
-                    ng-hide="!item.expanded"
+                    ng-show="item.expanded"
                     ng-if="::item.children"
                     ng-class="{in: item.expanded}">
                     <li ui-sref-active="active" ng-repeat="child in item.children">
