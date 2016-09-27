@@ -7,7 +7,8 @@
         templateUrl: 'views/appstore/base.html',
         data: {
           auth: true,
-          pageTitle: 'Service store'
+          pageTitle: 'Service store',
+          showProject: true
         }
       })
 

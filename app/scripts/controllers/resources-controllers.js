@@ -13,7 +13,10 @@
     'projectsService',
     '$uibModal',
     '$rootScope',
+    '$state',
+    '$q',
     'resourceUtils',
+    'ncUtils',
     baseResourceListController
     ]);
 
@@ -29,7 +32,10 @@
     projectsService,
     $uibModal,
     $rootScope,
-    resourceUtils) {
+    $state,
+    $q,
+    resourceUtils,
+    ncUtils) {
     var ControllerListClass = baseControllerListClass.extend({
       init: function() {
         this.service = resourcesService;
@@ -39,88 +45,162 @@
         this.categories[ENV.PrivateClouds] = 'private_clouds';
 
         this._super();
-        this.searchFieldName = 'name';
         this.hasCustomFilters = false;
 
-        var currentCustomerUuid = currentStateService.getCustomerUuid();
         var vm = this;
-
-        this.entityOptions = {
-          entityData: {
-            noDataText: 'You have no resources yet.',
-            noMatchesText: 'No resources found matching filter.',
-            checkQuotas: 'resource',
-            timer: ENV.resourcesTimerInterval,
-            rowTemplateUrl: 'views/resource/row.html',
-            actionButtonsType: 'resource'
-          },
-          list: [
-            {
-              type: ENTITYLISTFIELDTYPES.icon,
-              className: 'icon',
-              getTitle: function(item) {
-                return item.resource_type;
-              },
-              getIcon: resourceUtils.getIcon
-            },
-            {
-              name: 'Name',
-              propertyName: 'name',
-              type: ENTITYLISTFIELDTYPES.name,
-              link: 'resources.details({uuid: entity.uuid, resource_type: entity.resource_type})',
-              className: 'resource-name'
-            },
-            {
-              name: 'Provider',
-              propertyName: 'service_name',
-              type: ENTITYLISTFIELDTYPES.link,
-              link: 'organization.providers({uuid: "' + currentCustomerUuid +
-              '", providerUuid: entity.service_uuid, providerType: entity.resource_type.split(".")[0]})'
-            },
-            {
-              name: 'State',
-              type: ENTITYLISTFIELDTYPES.colorState,
-              propertyName: 'state',
-              className: 'visual-status',
-              getClass: function(state) {
-                var cls = ENV.resourceStateColorClasses[state];
-                if (cls == 'processing') {
-                  return 'icon fa-refresh fa-spin';
-                } else {
-                  return 'status-circle ' + cls;
-                }
-              }
-            }
-          ]
-        };
-        this.expandableOptions = [
-          {
-            isList: false,
-            addItemBlock: false,
-            viewType: 'resource'
-          }
-        ];
-
-        currentStateService.getProject().then(function(project) {
-          if (project) {
-            if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('import') == -1) {
-              vm.entityOptions.entityData.importLink = 'import.import';
-              vm.entityOptions.entityData.importLinkText = 'Import';
-              if (!vm.projectHasNonSharedService(project)) {
-                vm.entityOptions.entityData.importDisabled = true;
-                vm.entityOptions.entityData.importLinkTooltip = 'Import is not possible as there are no personal provider accounts registered.';
-              } else {
-                vm.entityOptions.entityData.importDisabled = false;
-                vm.entityOptions.entityData.importLinkTooltip = 'Import resources from the registered provider accounts.';
-              }
-            }
-          }
+        vm.loading = true;
+        $q.all([
+          currentStateService.getCustomer().then(function(customer) {
+            vm.currentCustomer = customer;
+          }),
+          currentStateService.getProject().then(function(project) {
+            vm.currentProject = project;
+          })
+        ]).finally(function() {
+          vm.loading = false;
+          vm.getTableOptions();
         });
       },
+      getTableOptions: function() {
+        this.tableOptions = {
+          searchFieldName: 'name',
+          noDataText: 'You have no resources yet.',
+          noMatchesText: 'No resources found matching filter.',
+          columns: [
+            {
+              title: 'Name',
+              render: function(data, type, row, meta) {
+                var img = '<img src="{src}" title="{title}" class="img-xs m-r-xs">'
+                      .replace('{src}', resourceUtils.getIcon(row))
+                      .replace('{title}', row.resource_type);
+                var href = $state.href('resources.details', {
+                  uuid: row.uuid,
+                  resource_type: row.resource_type
+                });
+                return '<a href="{href}">{name}</a>'
+                          .replace('{href}', href)
+                          .replace('{name}', img + ' ' + row.name);
+              }
+            },
+            {
+              title: 'Provider',
+              render: function(data, type, row, meta) {
+                var parts = row.customer.split('/');
+                var customer_uuid = parts[parts.length - 2];
+                var provider_type = row.resource_type.split(".")[0];
+                var href = $state.href('organization.providers', {
+                  uuid: customer_uuid,
+                  providerUuid: row.service_uuid,
+                  providerType: provider_type
+                });
+                return '<a href="{href}">{name}</a>'
+                          .replace('{href}', href)
+                          .replace('{name}', row.service_name);
+              }
+            },
+            {
+              title: 'State',
+              render: function(data, type, row, meta) {
+                var cls = ENV.resourceStateColorClasses[row.state];
+                var title = row.state;
+                if (cls === 'processing') {
+                  cls = 'fa-refresh fa-spin';
+                  title = row.runtime_state;
+                } else {
+                  cls = 'status-circle ' + cls;
+                }
+                if (cls === 'status-circle erred') {
+                  title = row.error_message;
+                }
+                return '<a class="{cls}" title="{title}"></a> {state}'
+                          .replace('{cls}', cls)
+                          .replace('{state}', row.runtime_state || row.state)
+                          .replace('{title}', title);
+              },
+            }
+          ],
+          tableActions: this.getTableActions(),
+          rowActions: function(row) {
+            var index;
+            for (var i = 0; i < this.list.length; i++) {
+              if (this.list[i].uuid === row.uuid) {
+                index = i;
+              }
+            }
+            return '<action-button-resource button-controller="controller" button-model="controller.list[' + index + ']"/>';
+          }
+        };
+      },
+      getTableActions: function() {
+        var actions = [];
+        if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('import') == -1) {
+          actions.push(this.getImportAction());
+        }
+        actions.push(this.getCreateAction());
+        actions.push(this.getMapAction());
+        return actions;
+      },
+      getImportAction: function() {
+        var disabled, tooltip;
+        if (ncUtils.isCustomerQuotaReached(this.currentCustomer, 'resource')) {
+          disabled = true;
+          tooltip = 'Quota has been reached';
+        } else if (!this.projectHasNonSharedService(this.currentProject)) {
+          disabled = true;
+          tooltip = 'Import is not possible as there are no personal provider accounts registered.';
+        } else {
+          disabled = false;
+          tooltip = 'Import resources from the registered provider accounts.';
+        }
+        return {
+          name: '<i class="fa fa-plus"></i> ' + this.getImportTitle(),
+          callback: function() {
+            $state.go('import.import');
+          },
+          disabled: disabled,
+          titleAttr: tooltip
+        };
+      },
+      getImportTitle: function() {
+        return 'Import';
+      },
+      getCreateAction: function() {
+        var disabled, tooltip;
+        if (ncUtils.isCustomerQuotaReached(this.currentCustomer, 'resource')) {
+          disabled = true;
+          tooltip = 'Quota has been reached';
+        }
+        return {
+          name: '<i class="fa fa-plus"></i> ' + this.getCreateTitle(),
+          callback: function() {
+            this.gotoAppstore();
+          }.bind(this),
+          disabled: disabled,
+          titleAttr: tooltip
+        };
+      },
+      getCreateTitle: function() {
+        return 'Create';
+      },
+      gotoAppstore: function() {
+        if (this.category === ENV.VirtualMachines) {
+          $state.go('appstore.store', {category: 'vms'});
+        } else if (this.category === ENV.PrivateClouds) {
+          $state.go('appstore.store', {category: 'private_clouds'});
+        } else if (this.category === ENV.Applications) {
+          $state.go('appstore.store', {category: 'apps'});
+        }
+      },
+      getMapAction: function() {
+        return {
+          name: '<i class="fa fa-map-marker"></i> Open map',
+          callback: this.openMap.bind(this)
+        };
+      },
       rowFields: [
-        'uuid', 'url', 'name', 'state', 'runtime_state', 'created', 'start_time', 'error_message',
-        'resource_type', 'latitude', 'longitude', 'access_url',
-        'service_name', 'service_type', 'service_uuid', 'related_resources'
+        'uuid', 'url', 'name', 'state', 'runtime_state', 'created', 'error_message',
+        'resource_type', 'latitude', 'longitude',
+        'service_name', 'service_uuid', 'customer'
       ],
       getMarkers: function() {
         var items = this.controllerScope.list.filter(function hasCoordinates(item) {
@@ -417,14 +497,20 @@
 
       updateMenu: function() {
         controllerScope.context = {resource: controllerScope.model};
-        var state = this.getListState(this.model.resource_type);
-        controllerScope.items = [
-          {
-              label: "Back to project",
-              icon: "fa-angle-left",
-              link: state + "({uuid: context.resource.project_uuid})"
-          }
-        ];
+        controllerScope.listState = this.getListState(this.model.resource_type)
+                                    + "({uuid: ResourceCtrl.context.resource.project_uuid})";
+        controllerScope.listTitle = this.getListTitle(this.model.resource_type);
+      },
+
+      getListTitle: function(resourceType) {
+        var resourceCategory = ENV.resourceCategory[resourceType];
+        if (resourceCategory === 'apps') {
+          return 'Applications';
+        } else if (resourceCategory === 'private_clouds') {
+          return 'Private clouds';
+        } else {
+          return 'Virtual machines';
+        }
       },
 
       getListState: function(resourceType) {

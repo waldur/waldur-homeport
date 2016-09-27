@@ -4,9 +4,9 @@
 
   angular.module('ncsaas').directive('responsiveTable', responsiveTable);
 
-  responsiveTable.$inject = ['$timeout'];
+  responsiveTable.$inject = ['$timeout', '$compile'];
 
-  function responsiveTable($timeout) {
+  function responsiveTable($timeout, $compile) {
     return {
       restrict: 'E',
       scope: {
@@ -30,7 +30,7 @@
           );
           var exportCollection = {
             extend: 'collection',
-            text: '<i class="fa fa-cloud-download"></i> Export',
+            text: '<i class="fa fa-download"></i> Export as <span class="caret"></span>',
             autoClose: true,
             fade: 0,
             buttons: exportButtons
@@ -67,6 +67,11 @@
             language: {
               emptyTable: options.noDataText,
               zeroRecords: options.noMatchesText
+            },
+            fnDrawCallback: function() {
+              $(element).find('.actions').each(function(index, element) {
+                $compile(element)(scope);
+              });
             }
           });
           return table;
@@ -94,6 +99,9 @@
         }
 
         function connectRowButtons(table) {
+          if (!options.rowActions || options.rowActions instanceof Function) {
+            return;
+          }
           table.on('click', 'button', function(event) {
             $(this).blur();
             var target = $(event.target).closest('button');
@@ -111,7 +119,11 @@
           return {
             title: 'Actions',
             orderable: false,
+            className: 'actions',
             render: function(data, type, row, meta) {
+              if (options.rowActions instanceof Function) {
+                return options.rowActions.call(scope.controller, row);
+              }
               var template = '<a title="{tooltip}"><button class="btn btn-default btn-sm {cls}" row-index="{row}" action-index="{action}">{name}</button></a>';
               var buttons = spec.map(function(action, index) {
                 var cls = action.isDisabled && action.isDisabled(row) && 'disabled' || '';

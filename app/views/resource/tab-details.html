@@ -1,19 +1,7 @@
-<div ng-if="!controller.model">
-  <h1 class="text-center">
-    <i class="icon fa-spinner fa-spin"></i>
-  </h1>
-</div>
 <div ng-if="controller.model">
   <div class="row">
     <div class="col-md-9 col-xs-12">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          Resource details
-        </div>
-        <div class="panel-body">
-          <resource-details resource="controller.model"></resource-details>
-        </div>
-      </div>
+      <resource-details resource="controller.model"></resource-details>
     </div>
     <div class="col-md-3 col-xs-12">
       <div class="panel panel-default">

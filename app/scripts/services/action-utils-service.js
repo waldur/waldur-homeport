@@ -6,6 +6,7 @@
       'ncUtilsFlash', '$rootScope', '$http', '$q', '$uibModal', 'ncUtils', 'resourcesService', actionUtilsService]);
 
   function actionUtilsService(ncUtilsFlash, $rootScope, $http, $q, $uibModal, ncUtils, resourcesService) {
+    var vm = this;
     this.loadActions = function(model) {
       resourcesService.cleanOptionsCache(model.url);
       return resourcesService.getOption(model.url).then(function(response) {
@@ -15,6 +16,7 @@
           if (typeof action.title == 'string') {
             actions[name] = action;
             empty = false;
+            vm.adjustTitle(action);
           }
           if (action.fields && action.fields.delete_volumes) {
             action.fields.delete_volumes.default_value = true;
@@ -24,6 +26,12 @@
           return actions;
         }
       });
+    };
+
+    this.adjustTitle = function(action) {
+      if (action.title === 'Create Service') {
+        action.title = 'Create provider';
+      }
     };
 
     this.getSelectList = function(fields) {

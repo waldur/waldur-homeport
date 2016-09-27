@@ -79,3 +79,20 @@ body.landing {
 .white-bg .navbar-fixed-top, .white-bg .navbar-static-top {
     background: $gray;
 }
+
+.img-xs {
+  width: 25px;
+}
+
+.dt-buttons .btn.disabled {
+  pointer-events: auto;
+}
+
+.dropdown-menu-right {
+  right: 0 !important;
+  left: auto !important;
+}
+
+.full-width .dataTable {
+  width: 100%;
+}

@@ -509,8 +509,8 @@
       currentStateService.isCustomerDefined && currentStateService.getCustomer().then(function(customer) {
         $scope.currentCustomer = customer;
         $scope.context = {customer: customer};
-        connectCounters(customer);
         setItems();
+        connectCounters(customer);
       });
     }
 

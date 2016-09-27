@@ -7,6 +7,7 @@
         templateUrl: 'views/project/base.html',
         data: {
           auth: true,
+          showProject: true
         },
         resolve: {
           currentProject: function(
@@ -65,9 +66,9 @@
 
       .state('project.resources.vms', {
         url: 'virtual-machines/',
-        templateUrl: 'views/partials/list.html',
+        templateUrl: 'views/project/resources-list.html',
         controller: 'ProjectResourcesTabController',
-        controllerAs: 'Ctrl',
+        controllerAs: 'ListController',
         data: {
           pageTitle: 'Virtual machines'
         }
@@ -75,9 +76,9 @@
 
       .state('project.resources.apps', {
         url: 'applications/',
-        templateUrl: 'views/partials/list.html',
+        templateUrl: 'views/project/resources-list.html',
         controller: 'ProjectApplicationsTabController',
-        controllerAs: 'Ctrl',
+        controllerAs: 'ListController',
         data: {
           pageTitle: 'Applications'
         }
@@ -85,9 +86,9 @@
 
       .state('project.resources.clouds', {
         url: 'private-clouds/',
-        templateUrl: 'views/partials/list.html',
+        templateUrl: 'views/project/resources-list.html',
         controller: 'ProjectPrivateCloudsTabController',
-        controllerAs: 'Ctrl',
+        controllerAs: 'ListController',
         data: {
           pageTitle: 'Private clouds'
         }
@@ -120,6 +121,7 @@
         data: {
           auth: true,
           pageTitle: 'Import resources from provider',
+          showProject: true
         }
       })
 
