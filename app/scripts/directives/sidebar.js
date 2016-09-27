@@ -22,6 +22,10 @@
         }
         function syncMenu() {
           angular.forEach(scope.items, function(item) {
+            if ($state.$current.data && $state.$current.data.sidebarState) {
+              item.expanded = item.link === $state.$current.data.sidebarState;
+              return;
+            }
             item.expanded = $state.includes(item.link);
           });
         }

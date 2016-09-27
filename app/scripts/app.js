@@ -252,7 +252,8 @@
           templateUrl: 'views/resource/base.html',
           data: {
             auth: true,
-            showProject: true
+            showProject: true,
+            sidebarState: 'project.resources'
           }
         })
 
