@@ -31,7 +31,7 @@
                     <i class="fa {{ ::item.icon }} fixed-width-icon"></i>
                     <span class="nav-label">{{ ::item.label }}</span>
                 </a>
-                <ul class="nav nav-second-level"
+                <ul class="nav nav-second-level ng-hide"
                     ng-show="item.expanded"
                     ng-if="::item.children"
                     ng-class="{in: item.expanded}">
