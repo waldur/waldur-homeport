@@ -33,7 +33,7 @@
     </div>
 
     <div class="no-styles" ng-show="entityList.list.length == 0 && !entityList.searchInput && !entityList.chosenFilters.length && !entityList.hideNoDataText">
-        <h3 class="text-center" ng-bind="::entityOptions.entityData.noDataText"></h3>
+        <p class="text-center" ng-bind="::entityOptions.entityData.noDataText"></p>
         <div class="decision" ng-if="!entityOptions.entityData.hideActions">
             <div class="col">
                 <div ng-include="'views/directives/entity-list/table-actions.html'"></div>
@@ -42,7 +42,7 @@
     </div>
 
     <div class="no-styles" ng-show="entityList.list.length == 0 && (entityList.searchInput || entityList.chosenFilters.length)">
-        <h3 class="text-center" ng-bind="entityOptions.entityData.noMatchesText"></h3>
+        <p class="text-center" ng-bind="entityOptions.entityData.noMatchesText"></p>
     </div>
 
     <div class="list-box" ng-show="entityList.list.length > 0">

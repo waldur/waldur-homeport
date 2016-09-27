@@ -5,8 +5,8 @@
         {{ ::expandableElement.error_message || expandableList.defaultErrorMessage }}
     </div>
 
-    <div>
-        <ul class="sort-list event-nav">
+    <div class="tabs-container">
+        <ul class="nav nav-tabs">
             <li ng-class="{
                 'active': activeTab == 'settings',
                 'inactive': activeTab !== 'settings'}">
@@ -28,22 +28,23 @@
                 <a ng-click="activeTab = 'prices'">Prices</a>
             </li>
         </ul>
-        <div class="clear"></div>
-    </div>
 
-    <div ng-if="activeTab == 'settings'">
-        <div service-settings-editor service="expandableElement"></div>
-    </div>
+        <div class="tab-content">
+            <div class="tab-pane active" ng-if="activeTab == 'settings'">
+                <div class="panel-body" service-settings-editor service="expandableElement"></div>
+            </div>
+            <div class="tab-pane active" ng-if="activeTab == 'quotas'">
+                <div class="panel-body" service-quotas service="expandableElement"></div>
+            </div>
 
-    <div ng-if="activeTab == 'quotas'">
-        <div service-quotas service="expandableElement"></div>
-    </div>
+            <div class="tab-pane active" ng-if="activeTab == 'projects'">
+                <div class="panel-body" service-project-link-editor service="expandableElement"></div>
+            </div>
 
-    <div ng-if="activeTab == 'projects'">
-        <div service-project-link-editor service="expandableElement"></div>
-    </div>
+            <div class="tab-pane active" ng-if="activeTab == 'prices'">
+                <div class="panel-body" service-prices service="expandableElement"></div>
+            </div>
 
-    <div ng-if="activeTab == 'prices'">
-        <div service-prices service="expandableElement"></div>
+        </div>
     </div>
 </section>
