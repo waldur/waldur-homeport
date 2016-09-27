@@ -30,7 +30,7 @@
           );
           var exportCollection = {
             extend: 'collection',
-            text: '<i class="fa fa-cloud-download"></i> Export',
+            text: '<i class="fa fa-download"></i> Export as <span class="caret"></span>',
             autoClose: true,
             fade: 0,
             buttons: exportButtons
