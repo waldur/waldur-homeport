@@ -3,7 +3,7 @@
     var tabs = {
       events: {
         url: 'events/',
-        template: '<responsive-table table-ctrl="ListController"/>',
+        templateUrl: 'views/partials/filtered-list.html',
         controller: 'UserEventTabController',
         controllerAs: 'ListController',
         data: {

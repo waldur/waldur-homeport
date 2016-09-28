@@ -40,7 +40,7 @@
 
       .state('project.details', {
         url: '',
-        template: '<responsive-table table-ctrl="ListController"/>',
+        templateUrl: 'views/partials/filtered-list.html',
         controller: 'ProjectEventTabController',
         controllerAs: 'ListController',
         data: {
@@ -50,7 +50,7 @@
 
       .state('project.alerts', {
         url: 'alerts/',
-        template: '<responsive-table table-ctrl="ListController"/>',
+        templateUrl: 'views/partials/filtered-list.html',
         controller: 'ProjectAlertTabController',
         controllerAs: 'ListController',
         data: {
@@ -66,7 +66,7 @@
 
       .state('project.resources.vms', {
         url: 'virtual-machines/',
-        templateUrl: 'views/project/resources-list.html',
+        templateUrl: 'views/partials/filtered-list.html',
         controller: 'ProjectResourcesTabController',
         controllerAs: 'ListController',
         data: {
@@ -76,7 +76,7 @@
 
       .state('project.resources.apps', {
         url: 'applications/',
-        templateUrl: 'views/project/resources-list.html',
+        templateUrl: 'views/partials/filtered-list.html',
         controller: 'ProjectApplicationsTabController',
         controllerAs: 'ListController',
         data: {
@@ -86,7 +86,7 @@
 
       .state('project.resources.clouds', {
         url: 'private-clouds/',
-        templateUrl: 'views/project/resources-list.html',
+        templateUrl: 'views/partials/filtered-list.html',
         controller: 'ProjectPrivateCloudsTabController',
         controllerAs: 'ListController',
         data: {
