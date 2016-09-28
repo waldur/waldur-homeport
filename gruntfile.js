@@ -102,6 +102,13 @@ module.exports = function(grunt) {
                     },
                     {
                         expand: true,
+                        cwd: 'bower_components/open-sans-fontface/fonts/Light',
+                        src: ['*'],
+                        dest: 'app/static/fonts/',
+                        filter: 'isFile'
+                    },
+                    {
+                        expand: true,
                         cwd: 'bower_components/bootstrap/dist/fonts/',
                         src: ['*'],
                         dest: 'app/static/fonts/',

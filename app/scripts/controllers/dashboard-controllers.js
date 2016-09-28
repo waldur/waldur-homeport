@@ -3,9 +3,57 @@
 (function() {
   angular.module('ncsaas').service('DashboardChartService', DashboardChartService);
 
-  function DashboardChartService($q) {
+  DashboardChartService.$inject = ['$q', 'priceEstimationService'];
+  function DashboardChartService($q, priceEstimationService) {
+    var vm = this;
+
+    this.getResourceHistoryCharts = function(customer) {
+      var charts = [
+        {
+          quota: 'nc_app_count',
+          title: 'Applications'
+        },
+        {
+          quota: 'nc_vm_count',
+          title: 'Virtual machines'
+        },
+        {
+          quota: 'nc_private_cloud_count',
+          title: 'Private clouds'
+        }
+      ];
+
+      var promises = charts.map(function(chart) {
+        var matches = customer.quotas.filter(function(quota) {
+          return quota.name === chart.quota;
+        });
+        if (matches) {
+          var url = matches[0].url;
+          return vm.getQuotaHistory(url).then(function(data) {
+            chart.data = data;
+            chart.current = data[data.length - 1].value;
+          });
+        }
+      });
+      return $q.all(promises).then(function() {
+        return charts;
+      });
+    };
     this.getQuotaHistory = function(quota) {
       return $q.when(randomRange());
+    };
+    this.getCostChart = function(customer) {
+      return $q.when(randomRange());
+      return priceEstimationService.getList({
+        scope: customer.url
+      }).then(function(estimates) {
+        return estimates.map(function(estimate) {
+          return {
+            value: estimate.total,
+            date: formatDate(moment(new Date(estimate.year, estimate.month, 1)))
+          }
+        });
+      });
     };
     function randomRange() {
       var n = 10;
@@ -14,11 +62,14 @@
       for (var i = 0; i < n; i++) {
         xs.push({
           value: Math.round(Math.random() * 100),
-          date: date.format("YYYY-MM-DD")
+          date: formatDate(date)
         });
         date = date.add(1, 'day');
       }
       return xs;
+    }
+    function formatDate(date) {
+      return date.format("YYYY-MM-DD");
     }
   }
 })();
@@ -28,47 +79,33 @@
   angular.module('ncsaas')
     .controller('OrganizationDashboardController', OrganizationDashboardController);
 
+  OrganizationDashboardController.$inject = [
+    'currentStateService', 'DashboardChartService', '$q'
+  ];
   function OrganizationDashboardController(
     currentStateService, DashboardChartService, $q
   ) {
     var vm = this;
     activate();
 
-    vm.charts = [
-      {
-        quota: 'nc_app_count',
-        title: 'Applications'
-      },
-      {
-        quota: 'nc_vm_count',
-        title: 'Virtual machines'
-      },
-      {
-        quota: 'nc_private_cloud_count',
-        title: 'Private clouds'
-      }
-    ];
     function activate() {
       var promise = currentStateService.getCustomer().then(function(customer) {
-        var promises = vm.charts.map(function(chart) {
-          var matches = customer.quotas.filter(function(quota) {
-            return quota.name === chart.quota;
-          });
-          if (matches) {
-            var url = matches[0].url;
-            return DashboardChartService.getQuotaHistory(url).then(function(data) {
-              chart.data = data;
-              chart.current = data[data.length - 1].value;
-            });
-          }
-        });
-        return $q.all(promises);
+        return $q.all([
+          DashboardChartService.getResourceHistoryCharts(customer).then(function(charts) {
+            vm.resourceCharts = charts;
+          }),
+          DashboardChartService.getCostChart(customer).then(function(chart) {
+            vm.costChart = chart;
+            vm.currentMonthPrice = chart[chart.length - 1].value;
+          })
+        ]);
       });
       vm.loading = true;
       promise.finally(function() {
         vm.loading = false;
       });
     }
+
   }
 })();
 

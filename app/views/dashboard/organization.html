@@ -1,13 +1,29 @@
 <div class="wrapper wrapper-content">
-    <div class="row">
-        <div class="col-lg-4" ng-repeat="chart in DashboardCtrl.charts">
+    <div ng-if="DashboardCtrl.loading">
+        <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
+    </div>
+    <div class="row" ng-if="!DashboardCtrl.loading">
+        <div class="col-lg-3" ng-repeat="chart in DashboardCtrl.resourceCharts">
             <div class="ibox">
+                <div class="ibox-title">
+                    <span class="label label-success pull-right">This month</span>
+                    <h5>{{ ::chart.title }}</h5>
+                </div>
                 <div class="ibox-content">
-                    <h4>{{ ::chart.title }}</h4>
-                    <h3>{{ chart.current }}
-                        <small>in this month</small>
-                    </h3>
+                    <h1>{{ chart.current }}</h1>
                     <sparkline spark-data="chart.data"></sparkline>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <span class="label label-success pull-right">This month</span>
+                    <h5>Total price</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1>{{ DashboardCtrl.currentMonthPrice }}</h1>
+                    <sparkline spark-data="DashboardCtrl.costChart"></sparkline>
                 </div>
             </div>
         </div>
