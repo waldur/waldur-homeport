@@ -230,6 +230,8 @@
     '$filter',
     '$q',
     '$state',
+    '$scope',
+    '$timeout',
     'ncUtils',
     'currentStateService',
     'usersService'
@@ -243,6 +245,8 @@
     $filter,
     $q,
     $state,
+    $scope,
+    $timeout,
     ncUtils,
     currentStateService,
     usersService) {
@@ -252,6 +256,11 @@
         this.service = projectsService;
         this._super();
         this.activate();
+        $scope.$on('currentCustomerUpdated', function(event, customer) {
+          $timeout(function() {
+            controllerScope.resetCache();
+          });
+        });
       },
       activate: function() {
         var vm = this;
