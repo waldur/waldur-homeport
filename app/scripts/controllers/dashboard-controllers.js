@@ -3,8 +3,8 @@
 (function() {
   angular.module('ncsaas').service('DashboardChartService', DashboardChartService);
 
-  DashboardChartService.$inject = ['$q', 'priceEstimationService'];
-  function DashboardChartService($q, priceEstimationService) {
+  DashboardChartService.$inject = ['$q', 'priceEstimationService', 'quotasService'];
+  function DashboardChartService($q, priceEstimationService, quotasService) {
     var vm = this;
 
     this.getResourceHistoryCharts = function(customer) {
@@ -28,10 +28,10 @@
           return quota.name === chart.quota;
         });
         if (matches) {
-          var url = matches[0].url;
-          return vm.getQuotaHistory(url).then(function(data) {
+          var quota = matches[0];
+          chart.quota = quota;
+          return vm.getQuotaHistory(quota.url).then(function(data) {
             chart.data = data;
-            chart.current = data[data.length - 1].value;
           });
         }
       });
@@ -39,11 +39,23 @@
         return charts;
       });
     };
-    this.getQuotaHistory = function(quota) {
-      return $q.when(randomRange());
+    this.getQuotaHistory = function(url) {
+      var end = moment.utc().unix();
+      var count = 7;
+      var start = moment.utc().subtract(count + 1, 'days').unix();
+
+      return quotasService.getHistory(url, start, end, count).then(function(items) {
+        return items.filter(function(item) {
+          return !!item.object;
+        }).map(function(item) {
+          return {
+            date: formatDate(moment.unix(item.point)),
+            value: item.object.usage
+          };
+        });
+      });
     };
     this.getCostChart = function(customer) {
-      return $q.when(randomRange());
       return priceEstimationService.getList({
         scope: customer.url
       }).then(function(estimates) {
@@ -55,19 +67,6 @@
         });
       });
     };
-    function randomRange() {
-      var n = 10;
-      var xs = [];
-      var date = moment().subtract(n, 'days');
-      for (var i = 0; i < n; i++) {
-        xs.push({
-          value: Math.round(Math.random() * 100),
-          date: formatDate(date)
-        });
-        date = date.add(1, 'day');
-      }
-      return xs;
-    }
     function formatDate(date) {
       return date.format("YYYY-MM-DD");
     }
@@ -80,15 +79,21 @@
     .controller('OrganizationDashboardController', OrganizationDashboardController);
 
   OrganizationDashboardController.$inject = [
-    'currentStateService', 'DashboardChartService', '$q'
+    'currentStateService', 'DashboardChartService', '$q', '$scope'
   ];
   function OrganizationDashboardController(
-    currentStateService, DashboardChartService, $q
+    currentStateService, DashboardChartService, $q, $scope
   ) {
     var vm = this;
+
     activate();
+    $scope.$on('currentCustomerUpdated', function() {
+      activate();
+    });
 
     function activate() {
+      vm.costChart = null;
+      vm.currentMonthPrice = null;
       var promise = currentStateService.getCustomer().then(function(customer) {
         return $q.all([
           DashboardChartService.getResourceHistoryCharts(customer).then(function(charts) {
@@ -96,7 +101,9 @@
           }),
           DashboardChartService.getCostChart(customer).then(function(chart) {
             vm.costChart = chart;
-            vm.currentMonthPrice = chart[chart.length - 1].value;
+            if (chart.length > 0) {
+              vm.currentMonthPrice = chart[0].value;
+            }
           })
         ]);
       });

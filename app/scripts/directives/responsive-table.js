@@ -12,7 +12,7 @@
       scope: {
         controller: '=tableCtrl'
       },
-      template: '<table class="table table-bordered table-hover"/>',
+      template: '<table class="table table-striped"/>',
       link: function(scope, element) {
         var options = scope.controller.tableOptions;
 

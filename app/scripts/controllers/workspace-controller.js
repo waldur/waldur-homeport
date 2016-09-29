@@ -116,7 +116,7 @@
         }),
 
         customersService.getAll({
-          field: ['name', 'uuid', 'projects', 'owners']
+          field: ['name', 'uuid', 'projects', 'owners', 'quotas']
         }).then(function(organizations) {
           ctrl.organizations = ctrl.organizations.concat(organizations.filter(function(organization) {
             return organization.uuid !== ctrl.selectedOrganization.uuid;

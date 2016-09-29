@@ -10,12 +10,12 @@
                     <h5>{{ ::chart.title }}</h5>
                 </div>
                 <div class="ibox-content">
-                    <h1>{{ chart.current }}</h1>
+                    <h1>{{ chart.quota.usage }}</h1>
                     <sparkline spark-data="chart.data"></sparkline>
                 </div>
             </div>
         </div>
-        <div class="col-lg-3">
+        <div class="col-lg-3" ng-if="DashboardCtrl.currentMonthPrice">
             <div class="ibox">
                 <div class="ibox-title">
                     <span class="label label-success pull-right">This month</span>
