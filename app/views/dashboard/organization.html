@@ -6,24 +6,30 @@
         <div class="col-lg-3" ng-repeat="chart in DashboardCtrl.resourceCharts">
             <div class="ibox">
                 <div class="ibox-title">
-                    <span class="label label-success pull-right">This month</span>
                     <h5>{{ ::chart.title }}</h5>
                 </div>
                 <div class="ibox-content">
                     <h1>{{ chart.quota.usage }}</h1>
-                    <sparkline spark-data="chart.data"></sparkline>
+                    <sparkline ng-if="chart.data" spark-data="chart.data"></sparkline>
+                    <small ng-if="chart.data">There are no changes compared to the previous period.</small>
                 </div>
             </div>
         </div>
-        <div class="col-lg-3" ng-if="DashboardCtrl.currentMonthPrice">
+        <div class="col-lg-3">
             <div class="ibox">
                 <div class="ibox-title">
-                    <span class="label label-success pull-right">This month</span>
                     <h5>Total price</h5>
                 </div>
                 <div class="ibox-content">
-                    <h1>{{ DashboardCtrl.currentMonthPrice }}</h1>
+                    <h1>{{ DashboardCtrl.currentMonthPrice || 0 | defaultCurrency}}</h1>
                     <sparkline spark-data="DashboardCtrl.costChart"></sparkline>
+                    <small ng-if="!DashboardCtrl.costChange">
+                        There are no changes compared to the previous period.
+                    </small>
+                    <div ng-if="DashboardCtrl.costChange" class="stat-percent font-bold text-info">
+                        {{ DashboardCtrl.costChange }}%
+                        <i class="fa" ng-class="{'fa-level-up': DashboardCtrl.costChange > 0, 'fa-level-down': DashboardCtrl.costChange < 0}"></i>
+                    </div>
                 </div>
             </div>
         </div>

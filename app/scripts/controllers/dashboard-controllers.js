@@ -41,15 +41,15 @@
     };
     this.getQuotaHistory = function(url) {
       var end = moment.utc().unix();
-      var count = 7;
-      var start = moment.utc().subtract(count + 1, 'days').unix();
+      var count = 30;
+      var start = moment.utc().subtract(count, 'days').unix();
 
       return quotasService.getHistory(url, start, end, count).then(function(items) {
         return items.filter(function(item) {
           return !!item.object;
         }).map(function(item) {
           return {
-            date: formatDate(moment.unix(item.point)),
+            date: moment.unix(item.point).toDate(),
             value: item.object.usage
           };
         });
@@ -62,14 +62,20 @@
         return estimates.map(function(estimate) {
           return {
             value: estimate.total,
-            date: formatDate(moment(new Date(estimate.year, estimate.month, 1)))
+            date: new Date(estimate.year, estimate.month, 1)
           }
         });
       });
     };
-    function formatDate(date) {
-      return date.format("YYYY-MM-DD");
-    }
+    this.getCostChange = function(estimates) {
+      if (estimates.length < 2) {
+        return null;
+      }
+      // Latest values come first
+      var last = estimates[0].value;
+      var prev = estimates[1].value
+      return Math.round(100 * (last - prev) / prev);
+    };
   }
 })();
 
@@ -94,6 +100,7 @@
     function activate() {
       vm.costChart = null;
       vm.currentMonthPrice = null;
+      vm.costChange = null;
       var promise = currentStateService.getCustomer().then(function(customer) {
         return $q.all([
           DashboardChartService.getResourceHistoryCharts(customer).then(function(charts) {
@@ -103,6 +110,7 @@
             vm.costChart = chart;
             if (chart.length > 0) {
               vm.currentMonthPrice = chart[0].value;
+              vm.costChange = DashboardChartService.getCostChange(chart);
             }
           })
         ]);

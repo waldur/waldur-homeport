@@ -17,17 +17,12 @@
         var height = 60;
         var x = d3.scale.linear().range([0, width]);
         var y = d3.scale.linear().range([height, 0]);
-        var parseDate = d3.time.format("%Y-%m-%d").parse;
         var line = d3.svg.line()
                      .interpolate("basis")
                      .x(function(d) { return x(d.date); })
                      .y(function(d) { return y(d.value); });
 
         function sparkline(data) {
-          data.forEach(function(d) {
-            d.date = parseDate(d.date);
-          });
-
           x.domain(d3.extent(data, function(d) { return d.date; }));
           y.domain(d3.extent(data, function(d) { return d.value; }));
 

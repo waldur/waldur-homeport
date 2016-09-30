@@ -52,7 +52,7 @@
 
     ctrl.gotoOrganization = function(organization) {
       $rootScope.$broadcast('adjustCurrentCustomer', organization);
-      var promise = $state.go('dashboard.index', {}, {reload: true});
+      var promise = $state.go('dashboard.index');
       return blockAndClose(promise);
     };
 
