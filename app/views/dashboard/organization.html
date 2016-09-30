@@ -10,8 +10,12 @@
                 </div>
                 <div class="ibox-content">
                     <h1>{{ chart.quota.usage }}</h1>
-                    <sparkline ng-if="chart.data" spark-data="chart.data"></sparkline>
-                    <small ng-if="chart.data">There are no changes compared to the previous month.</small>
+                    <sparkline spark-data="chart.data"></sparkline>
+                    <div ng-if="!chart.data.length" class="font-bold text-info m-b-sm">
+                        <span class="pull-right">
+                            0% <i class="fa fa-bolt"></i>
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -23,12 +27,11 @@
                 <div class="ibox-content">
                     <h1>{{ DashboardCtrl.currentMonthPrice || 0 | defaultCurrency}}</h1>
                     <sparkline spark-data="DashboardCtrl.costChart"></sparkline>
-                    <small ng-if="!DashboardCtrl.costChange">
-                        There are no changes compared to the previous month.
-                    </small>
-                    <div ng-if="DashboardCtrl.costChange" class="stat-percent font-bold text-info">
-                        {{ DashboardCtrl.costChange }}%
-                        <i class="fa" ng-class="{'fa-level-up': DashboardCtrl.costChange > 0, 'fa-level-down': DashboardCtrl.costChange < 0}"></i>
+                    <div class="font-bold text-info m-b-sm">
+                        <span class="pull-right">
+                            {{ DashboardCtrl.costChange || 0 }}%
+                            <i class="fa" ng-class="{'fa-level-up': DashboardCtrl.costChange > 0, 'fa-level-down': DashboardCtrl.costChange < 0, 'fa-bolt': !DashboardCtrl.costChange}"></i>
+                        </span>
                     </div>
                 </div>
             </div>
