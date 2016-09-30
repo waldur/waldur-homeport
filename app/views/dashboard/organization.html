@@ -11,7 +11,7 @@
                 <div class="ibox-content">
                     <h1>{{ chart.quota.usage }}</h1>
                     <sparkline ng-if="chart.data" spark-data="chart.data"></sparkline>
-                    <small ng-if="chart.data">There are no changes compared to the previous period.</small>
+                    <small ng-if="chart.data">There are no changes compared to the previous month.</small>
                 </div>
             </div>
         </div>
@@ -24,7 +24,7 @@
                     <h1>{{ DashboardCtrl.currentMonthPrice || 0 | defaultCurrency}}</h1>
                     <sparkline spark-data="DashboardCtrl.costChart"></sparkline>
                     <small ng-if="!DashboardCtrl.costChange">
-                        There are no changes compared to the previous period.
+                        There are no changes compared to the previous month.
                     </small>
                     <div ng-if="DashboardCtrl.costChange" class="stat-percent font-bold text-info">
                         {{ DashboardCtrl.costChange }}%
