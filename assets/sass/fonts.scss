@@ -36,3 +36,12 @@ $OpenSansVersion: "1.1.0" !default;
   font-style: normal;
 }
 /* END Semibold */
+
+/* BEGIN Light */
+@font-face {
+  font-family: 'Open Sans';
+  @include fontdef($OpenSansPath, $OpenSansVersion, "Light");
+  font-weight: 300;
+  font-style: normal;
+}
+/* END Light */

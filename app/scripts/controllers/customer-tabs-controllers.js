@@ -149,7 +149,7 @@
         var dialogScope = $rootScope.$new();
         dialogScope.expandableElement = row;
         $uibModal.open({
-          templateUrl: 'views/provider-details-dialog.html',
+          templateUrl: 'views/directives/provider-details-dialog.html',
           scope: dialogScope,
           size: 'lg',
           controller: 'ProviderDetailsDialog'
@@ -241,10 +241,13 @@
     'customersService',
     'ENV',
     '$filter',
+    '$q',
     '$state',
+    '$scope',
+    '$timeout',
     'ncUtils',
-    'currentCustomer',
-    'currentUser'
+    'currentStateService',
+    'usersService'
   ];
 
   function ProjectListController(
@@ -253,22 +256,46 @@
     customersService,
     ENV,
     $filter,
+    $q,
     $state,
+    $scope,
+    $timeout,
     ncUtils,
-    currentCustomer,
-    currentUser) {
+    currentStateService,
+    usersService) {
     var controllerScope = this;
     var Controller = baseControllerListClass.extend({
       init: function() {
         this.service = projectsService;
         this._super();
-        this.tableOptions = {
-          searchFieldName: 'name',
-          noDataText: 'You have no projects yet.',
-          noMatchesText: 'No projects found matching filter.',
-          columns: this.getColumns(),
-          tableActions: this.getTableActions()
-        };
+        this.activate();
+        $scope.$on('currentCustomerUpdated', function(event, customer) {
+          $timeout(function() {
+            controllerScope.resetCache();
+          });
+        });
+      },
+      activate: function() {
+        var vm = this;
+        vm.loading = true;
+        $q.all([
+          currentStateService.getCustomer().then(function(customer) {
+            vm.currentCustomer = customer;
+          }),
+          usersService.getCurrentUser().then(function(user) {
+            vm.currentUser = user;
+          })
+        ]).finally(function() {
+          vm.loading = false;
+        }).then(function() {
+          vm.tableOptions = {
+            searchFieldName: 'name',
+            noDataText: 'You have no projects yet.',
+            noMatchesText: 'No projects found matching filter.',
+            columns: vm.getColumns(),
+            tableActions: vm.getTableActions()
+          };
+        });
       },
       getColumns: function() {
         var columns = [
@@ -325,8 +352,9 @@
         return columns;
       },
       getTableActions: function() {
-        var ownerOrStaff = customersService.checkCustomerUser(currentCustomer, currentUser);
-        var quotaReached = ncUtils.isCustomerQuotaReached(currentCustomer, 'project');
+        var vm = this;
+        var ownerOrStaff = customersService.checkCustomerUser(vm.currentCustomer, vm.currentUser);
+        var quotaReached = ncUtils.isCustomerQuotaReached(vm.currentCustomer, 'project');
         return [
           {
             name: '<i class="fa fa-plus"></i> Add project',

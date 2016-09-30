@@ -1,6 +1,25 @@
 (function() {
   angular.module('ncsaas').config(function($stateProvider) {
     $stateProvider
+      .state('dashboard', {
+        url: '/dashboard/',
+        abstract: true,
+        templateUrl: 'views/customer/base.html',
+        data: {
+          pageTitle: 'Dashboard',
+          pageClass: 'gray-bg',
+          auth: true
+        },
+      })
+
+      .state('dashboard.index', {
+        url: '?tab',
+        templateUrl: 'views/dashboard/organization.html',
+        controller: 'OrganizationDashboardController',
+        controllerAs: 'DashboardCtrl',
+        bindToController: true
+      })
+
       .state('organization', {
           url: '/organizations/:uuid/',
           abstract: true,
@@ -28,7 +47,7 @@
 
       .state('organization.details', {
         url: '',
-        template: '<responsive-table table-ctrl="ListController"/>',
+        templateUrl: 'views/partials/filtered-list.html',
         controller: 'CustomerEventTabController',
         controllerAs: 'ListController',
         data: {
@@ -38,7 +57,7 @@
 
       .state('organization.alerts', {
         url: 'alerts/',
-        template: '<responsive-table table-ctrl="ListController"/>',
+        templateUrl: 'views/partials/filtered-list.html',
         controller: 'CustomerAlertsListController',
         controllerAs: 'ListController',
         data: {
@@ -48,7 +67,7 @@
 
       .state('organization.projects', {
         url: 'projects/',
-        template: '<responsive-table table-ctrl="ListController"/>',
+        templateUrl: 'views/partials/filtered-list.html',
         controller: 'CustomerProjectTabController',
         controllerAs: 'ListController',
         data: {
@@ -68,7 +87,7 @@
 
       .state('organization.providers', {
         url: 'providers/?providerUuid&providerType',
-        template: '<responsive-table table-ctrl="ListController"/>',
+        templateUrl: 'views/partials/filtered-list.html',
         controller: 'ProviderListController',
         controllerAs: 'ListController',
         data: {

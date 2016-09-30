@@ -231,21 +231,6 @@
           templateUrl: 'views/support/create.html',
         })
 
-        .state('dashboard', {
-          url: '/dashboard/',
-          abstract: true,
-          templateUrl: 'views/customer/base.html',
-          data: {
-            pageTitle: 'Dashboard',
-            auth: true
-          },
-        })
-
-        .state('dashboard.index', {
-          url: '?tab',
-          templateUrl: 'views/dashboard/index.html',
-        })
-
         .state('resources', {
           url: '/resources/',
           abstract: true,

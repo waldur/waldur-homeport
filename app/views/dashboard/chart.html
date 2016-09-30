@@ -1,0 +1,15 @@
+<div class="ibox">
+    <div class="ibox-title">
+        <h5>{{ ::chart.title }}</h5>
+    </div>
+    <div class="ibox-content">
+        <h1>{{ chart.current }}</h1>
+        <sparkline spark-data="chart.data"></sparkline>
+        <div class="font-bold m-b-sm" ng-class="{'text-info': chart.change > 0, 'text-warning': chart.change < 0, 'text-muted': !chart.change}">
+            <span class="pull-right">
+                {{ chart.change || 0 }}%
+                <i class="fa" ng-class="{'fa-level-up': chart.change > 0, 'fa-level-down': chart.change < 0, 'fa-bolt': !chart.change}"></i>
+            </span>
+        </div>
+    </div>
+</div>
