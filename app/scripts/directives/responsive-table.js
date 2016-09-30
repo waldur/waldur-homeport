@@ -119,7 +119,7 @@
           return {
             title: 'Actions',
             orderable: false,
-            className: 'actions',
+            className: 'actions text-center',
             render: function(data, type, row, meta) {
               if (options.rowActions instanceof Function) {
                 return options.rowActions.call(scope.controller, row);

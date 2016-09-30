@@ -26,7 +26,8 @@
       dialogScope.expandableElement = row;
       $uibModal.open({
         templateUrl: 'views/directives/event-details-dialog.html',
-        scope: dialogScope
+        scope: dialogScope,
+        controller: 'EventDetailsDialog'
       });
     };
   }
@@ -43,6 +44,14 @@
   function AlertTypesController($scope, alertsService) {
     $scope.type = 'Alerts';
     $scope.types = alertsService.getAvailableIconTypes();
+  }
+
+  angular.module('ncsaas').controller('EventDetailsDialog', EventDetailsDialog);
+  EventDetailsDialog.$inject = ['$scope'];
+  function EventDetailsDialog($scope) {
+    $scope.$on('$stateChangeSuccess', function() {
+      $scope.$close();
+    });
   }
 
   angular.module('ncsaas')

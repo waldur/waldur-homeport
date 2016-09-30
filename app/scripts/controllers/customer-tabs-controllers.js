@@ -63,6 +63,7 @@
             },
             {
               title: 'State',
+              className: 'text-center',
               render: function(data, type, row, meta) {
                 var cls = ncServiceUtils.getStateClass(row.state);
                 return '<a class="{cls}" title="{title}"></a>'
@@ -72,6 +73,7 @@
             },
             {
               title: 'My provider',
+              className: 'text-center',
               render: function(data, type, row, meta) {
                 var cls = row.shared && 'fa-minus' || 'fa-check';
                 return '<a class="bool-field"><i class="fa {cls}"/></a>'.replace('{cls}', cls);
@@ -80,6 +82,7 @@
             },
             {
               title: 'Resources',
+              className: 'text-center',
               render: function(data, type, row, meta) {
                 return row.resources_count || 0;
               },
@@ -148,7 +151,8 @@
         $uibModal.open({
           templateUrl: 'views/directives/provider-details-dialog.html',
           scope: dialogScope,
-          size: 'lg'
+          size: 'lg',
+          controller: 'ProviderDetailsDialog'
         });
       },
       getTableActions: function() {
@@ -215,6 +219,15 @@
     });
     controllerScope.__proto__ = new Controller();
   }
+})();
+
+(function() {
+  angular.module('ncsaas')
+    .controller('ProviderDetailsDialog', ['$scope', function ProviderDetailsDialog($scope) {
+      $scope.$on('$stateChangeSuccess', function() {
+        $scope.$close();
+      });
+    }]);
 })();
 
 (function() {
