@@ -12,8 +12,8 @@
       },
       getHistory: function(url, start, end, points_count) {
         return this.getList({
-          start: moment(start).unix(),
-          end: moment(end).unix(),
+          start: start,
+          end: end,
           points_count: points_count
         }, url + 'history/');
       }
