@@ -7,16 +7,16 @@
   function DashboardChartService($q, priceEstimationService, quotasService, $filter) {
     var vm = this;
 
-    this.getAllCharts = function(customer) {
+    this.getAllCharts = function(scope) {
       return $q.all([
-        vm.getResourceHistoryCharts(customer),
-        vm.getCostChart(customer)
+        vm.getResourceHistoryCharts(scope),
+        vm.getCostChart(scope)
       ]).then(function(result) {
         return result[0].concat([result[1]]);
       });
     };
 
-    this.getResourceHistoryCharts = function(customer) {
+    this.getResourceHistoryCharts = function(scope) {
       var charts = [
         {
           quota: 'nc_app_count',
@@ -33,7 +33,7 @@
       ];
 
       var promises = charts.map(function(chart) {
-        var matches = customer.quotas.filter(function(quota) {
+        var matches = scope.quotas.filter(function(quota) {
           return quota.name === chart.quota;
         });
         if (matches) {
@@ -73,9 +73,9 @@
         });
       });
     };
-    this.getCostChart = function(customer) {
+    this.getCostChart = function(scope) {
       return priceEstimationService.getList({
-        scope: customer.url
+        scope: scope.url
       }).then(function(estimates) {
         estimates = estimates.map(function(estimate) {
           return {
