@@ -3,39 +3,8 @@
         <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
     </div>
     <div class="row" ng-if="!DashboardCtrl.loading">
-        <div class="col-lg-3" ng-repeat="chart in DashboardCtrl.resourceCharts">
-            <div class="ibox">
-                <div class="ibox-title">
-                    <h5>{{ ::chart.title }}</h5>
-                </div>
-                <div class="ibox-content">
-                    <h1>{{ chart.quota.usage }}</h1>
-                    <sparkline spark-data="chart.data"></sparkline>
-                    <div class="font-bold m-b-sm" ng-class="{'text-info': chart.change > 0, 'text-warning': chart.change < 0, 'text-muted': !chart.change}">
-                        <span class="pull-right">
-                            {{ chart.change || 0 }}%
-                            <i class="fa" ng-class="{'fa-level-up': chart.change > 0, 'fa-level-down': chart.change < 0, 'fa-bolt': !chart.change}"></i>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3">
-            <div class="ibox">
-                <div class="ibox-title">
-                    <h5>Total price</h5>
-                </div>
-                <div class="ibox-content">
-                    <h1>{{ DashboardCtrl.costChart.current || 0 | defaultCurrency}}</h1>
-                    <sparkline spark-data="DashboardCtrl.costChart.data"></sparkline>
-                    <div class="font-bold m-b-sm" ng-class="{'text-info': DashboardCtrl.costChart.change > 0, 'text-warning': DashboardCtrl.costChart.change < 0, 'text-muted': !DashboardCtrl.costChart.change}">
-                        <span class="pull-right">
-                            {{ DashboardCtrl.costChange || 0 }}%
-                            <i class="fa" ng-class="{'fa-level-up': DashboardCtrl.costChart.change > 0, 'fa-level-down': DashboardCtrl.costChart.change < 0, 'fa-bolt': !DashboardCtrl.costChart.change}"></i>
-                        </span>
-                    </div>
-                </div>
-            </div>
+        <div class="col-lg-3" ng-repeat="chart in DashboardCtrl.charts">
+            <div ng-include="'views/dashboard/chart.html'"></div>
         </div>
     </div>
 

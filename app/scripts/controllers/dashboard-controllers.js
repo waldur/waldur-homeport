@@ -3,9 +3,18 @@
 (function() {
   angular.module('ncsaas').service('DashboardChartService', DashboardChartService);
 
-  DashboardChartService.$inject = ['$q', 'priceEstimationService', 'quotasService'];
-  function DashboardChartService($q, priceEstimationService, quotasService) {
+  DashboardChartService.$inject = ['$q', 'priceEstimationService', 'quotasService', '$filter'];
+  function DashboardChartService($q, priceEstimationService, quotasService, $filter) {
     var vm = this;
+
+    this.getAllCharts = function(customer) {
+      return $q.all([
+        vm.getResourceHistoryCharts(customer),
+        vm.getCostChart(customer)
+      ]).then(function(result) {
+        return result[0].concat([result[1]]);
+      });
+    };
 
     this.getResourceHistoryCharts = function(customer) {
       var charts = [
@@ -30,6 +39,7 @@
         if (matches) {
           var quota = matches[0];
           chart.quota = quota;
+          chart.current = quota.usage;
           return vm.getQuotaHistory(quota.url).then(function(data) {
             chart.data = data;
           });
@@ -85,8 +95,9 @@
           }
         }
         return {
+          title: 'Total cost',
           data: estimates,
-          current: estimates[0].value,
+          current: $filter('defaultCurrency')(estimates[0].value),
           change: vm.getRelativeChange(estimates)
         };
       });
@@ -109,10 +120,10 @@
     .controller('OrganizationDashboardController', OrganizationDashboardController);
 
   OrganizationDashboardController.$inject = [
-    'currentStateService', 'DashboardChartService', '$q', '$scope'
+    'currentStateService', 'DashboardChartService', '$scope'
   ];
   function OrganizationDashboardController(
-    currentStateService, DashboardChartService, $q, $scope
+    currentStateService, DashboardChartService, $scope
   ) {
     var vm = this;
 
@@ -124,14 +135,9 @@
     function activate() {
       vm.costChart = null;
       var promise = currentStateService.getCustomer().then(function(customer) {
-        return $q.all([
-          DashboardChartService.getResourceHistoryCharts(customer).then(function(charts) {
-            vm.resourceCharts = charts;
-          }),
-          DashboardChartService.getCostChart(customer).then(function(costChart) {
-            vm.costChart = costChart;
-          })
-        ]);
+        return DashboardChartService.getAllCharts(customer).then(function(charts) {
+          vm.charts = charts;
+        });
       });
       vm.loading = true;
       promise.finally(function() {
