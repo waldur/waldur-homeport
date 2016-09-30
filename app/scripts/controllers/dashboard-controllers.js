@@ -40,9 +40,9 @@
       });
     };
     this.getQuotaHistory = function(url) {
-      var end = moment.utc().unix();
+      var end = moment.utc().unix() * 1000;
       var count = 30;
-      var start = moment.utc().subtract(count, 'days').unix();
+      var start = moment.utc().subtract(count, 'days').unix() * 1000;
 
       return quotasService.getHistory(url, start, end, count).then(function(items) {
         return items.filter(function(item) {

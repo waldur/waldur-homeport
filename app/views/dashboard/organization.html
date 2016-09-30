@@ -27,7 +27,7 @@
                 <div class="ibox-content">
                     <h1>{{ DashboardCtrl.currentMonthPrice || 0 | defaultCurrency}}</h1>
                     <sparkline spark-data="DashboardCtrl.costChart"></sparkline>
-                    <div class="font-bold text-info m-b-sm">
+                    <div class="font-bold text-info m-b-sm" ng-if="DashboardCtrl.costChange">
                         <span class="pull-right">
                             {{ DashboardCtrl.costChange || 0 }}%
                             <i class="fa" ng-class="{'fa-level-up': DashboardCtrl.costChange > 0, 'fa-level-down': DashboardCtrl.costChange < 0, 'fa-bolt': !DashboardCtrl.costChange}"></i>
