@@ -36,6 +36,14 @@
         }
       });
       return $q.all(promises).then(function() {
+        angular.forEach(charts, function(chart) {
+          if (chart.data.length > 1) {
+            chart.change = vm.getRelativeChange([
+              {value: chart.data[chart.data.length - 1].value},
+              {value: chart.data[0].value}
+            ]);
+          }
+        });
         return charts;
       });
     };
@@ -59,21 +67,37 @@
       return priceEstimationService.getList({
         scope: customer.url
       }).then(function(estimates) {
-        return estimates.map(function(estimate) {
+        estimates = estimates.map(function(estimate) {
           return {
             value: estimate.total,
             date: new Date(estimate.year, estimate.month, 1)
           }
         });
+
+        if (!estimates.length) {
+          var end = moment();
+          estimates = [];
+          for (var i = 0; i < 10; i++) {
+            estimates.push({
+              value: 0,
+              date: new Date(end.subtract(i, 'days').toDate())
+            });
+          }
+        }
+        return {
+          data: estimates,
+          current: estimates[0].value,
+          change: vm.getRelativeChange(estimates)
+        };
       });
     };
-    this.getCostChange = function(estimates) {
-      if (estimates.length < 2) {
+    this.getRelativeChange = function(items) {
+      if (items.length < 2) {
         return null;
       }
       // Latest values come first
-      var last = estimates[0].value;
-      var prev = estimates[1].value
+      var last = items[0].value;
+      var prev = items[1].value
       return Math.round(100 * (last - prev) / prev);
     };
   }
@@ -99,19 +123,13 @@
 
     function activate() {
       vm.costChart = null;
-      vm.currentMonthPrice = null;
-      vm.costChange = null;
       var promise = currentStateService.getCustomer().then(function(customer) {
         return $q.all([
           DashboardChartService.getResourceHistoryCharts(customer).then(function(charts) {
             vm.resourceCharts = charts;
           }),
-          DashboardChartService.getCostChart(customer).then(function(chart) {
-            vm.costChart = chart;
-            if (chart.length > 0) {
-              vm.currentMonthPrice = chart[0].value;
-              vm.costChange = DashboardChartService.getCostChange(chart);
-            }
+          DashboardChartService.getCostChart(customer).then(function(costChart) {
+            vm.costChart = costChart;
           })
         ]);
       });
