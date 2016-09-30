@@ -109,7 +109,8 @@
       // Latest values come first
       var last = items[0].value;
       var prev = items[1].value
-      return Math.round(100 * (last - prev) / prev);
+      var change = Math.round(100 * (last - prev) / prev);
+      return Math.min(100, Math.max(-100, change));
     };
   }
 })();
