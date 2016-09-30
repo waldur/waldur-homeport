@@ -151,7 +151,8 @@
         $uibModal.open({
           templateUrl: 'views/provider-details-dialog.html',
           scope: dialogScope,
-          size: 'lg'
+          size: 'lg',
+          controller: 'ProviderDetailsDialog'
         });
       },
       getTableActions: function() {
@@ -218,6 +219,15 @@
     });
     controllerScope.__proto__ = new Controller();
   }
+})();
+
+(function() {
+  angular.module('ncsaas')
+    .controller('ProviderDetailsDialog', ['$scope', function ProviderDetailsDialog($scope) {
+      $scope.$on('$stateChangeSuccess', function() {
+        $scope.$close();
+      });
+    }]);
 })();
 
 (function() {
