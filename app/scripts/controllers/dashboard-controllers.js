@@ -133,18 +133,15 @@
     });
 
     function activate() {
-      vm.costChart = null;
-      var promise = currentStateService.getCustomer().then(function(customer) {
+      vm.loading = true;
+      currentStateService.getCustomer().then(function(customer) {
         return DashboardChartService.getAllCharts(customer).then(function(charts) {
           vm.charts = charts;
         });
-      });
-      vm.loading = true;
-      promise.finally(function() {
+      }).finally(function() {
         vm.loading = false;
       });
     }
-
   }
 })();
 
