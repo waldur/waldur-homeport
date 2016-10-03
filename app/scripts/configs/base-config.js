@@ -35,7 +35,7 @@ angular.module('ncsaas')
     // build version
     buildId: 'develop',
 
-    currency: '$',
+    currency: '€',
 
     offerings: [
       {

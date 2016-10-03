@@ -219,10 +219,10 @@
 
       selectRow: function(row) {
         row.selected = !row.selected;
-        row.activeTab = (ENV.featuresVisible || ENV.toBeFeatures.indexOf('providers') == -1)
+        row.activeTab = (ENV.featuresVisible || ENV.toBeFeatures.indexOf('providers') === -1)
           ? 'services'
           : 'projects';
-        if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('resources') == -1) {
+        if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('resources') === -1) {
           this.getResourceDetails(row);
         }
       },
@@ -273,14 +273,14 @@
       processTableData: function(rows) {
         var results = {},
             scopeArray,
-            currentDate = new Date();;
+            currentDate = new Date();
         for (var i = 0; i < rows.length; i++) {
           var row = rows[i];
           var date = moment(row.month, 'MM').format('MMMM') + ' ' + row.year;
           if (!results.hasOwnProperty(date)) {
             results[date] = {
               total: 0,
-              isCurrent: (currentDate.getFullYear() === row.year && row.month == currentDate.getMonth() + 1),
+              isCurrent: (currentDate.getFullYear() === row.year && row.month === currentDate.getMonth() + 1),
               projects: [],
               services: [],
               resources: []
@@ -411,7 +411,7 @@
           if (!project.count) {
             projectCounters = this.getProjectCounters(project);
           }
-          if ((ENV.featuresVisible || ENV.toBeFeatures.indexOf('eventlog') == -1) && !project.chartData) {
+          if ((ENV.featuresVisible || ENV.toBeFeatures.indexOf('eventlog') === -1) && !project.chartData) {
             projectEvents = this.getProjectEvents(project);
           }
 
@@ -422,7 +422,7 @@
         this.customer_uuid = currentStateService.getCustomerUuid();
         this.getCustomerProjects();
         this.getCustomerAlerts();
-        if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('eventlog') == -1) {
+        if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('eventlog') === -1) {
           this.getCustomerEvents();
         }
       },
@@ -552,7 +552,7 @@
         this.cacheTime = ENV.dashboardEventsCacheTime;
         this._super();
         this.activeTab = 'resources';
-        this.barChartTab ='vmsByProject';
+        this.barChartTab = 'vmsByProject';
         this.activate();
         this.currentMonth = new Date().getMonth() + 1;
         this.currentYear = new Date().getFullYear();
@@ -622,7 +622,7 @@
           response.quotas.forEach(function(item) {
             if (item.name === 'nc_resource_count') {
               var limit;
-              if (item.limit != -1) {
+              if (item.limit !== -1) {
                 var free = item.limit - item.usage;
                 limit = item.limit;
                 freeResources = {
