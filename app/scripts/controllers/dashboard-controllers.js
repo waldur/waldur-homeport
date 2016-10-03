@@ -192,7 +192,7 @@
     var vm = this;
 
     activate();
-    $scope.$on('currentCustomerUpdated', function() {
+    $scope.$on('currentProjectUpdated', function() {
       activate();
     });
 
