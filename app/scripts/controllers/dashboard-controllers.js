@@ -200,7 +200,7 @@
       vm.loading = true;
       currentStateService.getProject().then(function(project) {
         vm.project = project;
-        return DashboardChartService.getAllCharts(project).then(function(charts) {
+        return DashboardChartService.getResourceHistoryCharts(project).then(function(charts) {
           vm.charts = charts;
         });
       }).finally(function() {

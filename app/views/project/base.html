@@ -7,10 +7,7 @@
                 <h2>{{ $state.current.data.pageTitle }}</h2>
                 <ol class="breadcrumb">
                     <li>
-                        <a ui-sref="organization.details({uuid: currentProject.customer_uuid })">Home</a>
-                    </li>
-                    <li>
-                        <a ui-sref="organization.projects({uuid: currentProject.customer_uuid })">Projects</a>
+                        <a ui-sref="project.details({uuid: currentProject.uuid })">Home</a>
                     </li>
                     <li class="active">
                         <strong>{{ $state.current.data.pageTitle || context.project.name }}</strong>

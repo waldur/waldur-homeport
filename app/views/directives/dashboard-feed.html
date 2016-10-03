@@ -1,7 +1,7 @@
 <div class="ibox float-e-margins">
     <div class="ibox-title">
         <h5>{{ ::FeedCtrl.title }}</h5>
-        <div class="ibox-tools">
+        <div class="pull-right">
             <a class="btn btn-xs btn-link" ng-click="FeedCtrl.showTypes()">
                 <i class="fa fa-question-circle"></i> {{ ::FeedCtrl.title }} types
             </a>
@@ -23,8 +23,8 @@
                         <small class="text-muted">{{ ::item.created | date:'medium' }}</small>
                     </div>
                 </div>
-                <a class="btn btn-primary btn-block m-t" ui-sref="{{ ::FeedCtrl.listState }}">
-                    <i class="fa fa-arrow-down"></i> Show all
+                <a class="btn btn-default btn-block m-t" ui-sref="{{ ::FeedCtrl.listState }}">
+                    Show all
                 </a>
             </div>
         </div>

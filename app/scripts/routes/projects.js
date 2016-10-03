@@ -45,6 +45,7 @@
         controllerAs: 'DashboardCtrl',
         bindToController: true,
         data: {
+          pageTitle: 'Project dashboard',
           pageClass: 'gray-bg'
         }
       })

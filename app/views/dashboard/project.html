@@ -3,7 +3,7 @@
         <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
     </div>
     <div class="row" ng-if="!DashboardCtrl.loading">
-        <div class="col-lg-3" ng-repeat="chart in DashboardCtrl.charts">
+        <div class="col-lg-4" ng-repeat="chart in DashboardCtrl.charts">
             <div ng-include="'views/dashboard/chart.html'"></div>
         </div>
     </div>

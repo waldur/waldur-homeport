@@ -220,14 +220,19 @@
           link: "users.keys({uuid: context.user.uuid})"
       }
     ];
+    var dashboardTab = {
+      label: "Back to organization",
+      icon: "fa-arrow-left",
+      link: "dashboard.index"
+    };
     usersService.getCurrentUser().then(function(user) {
       if (angular.isUndefined($stateParams.uuid) || $stateParams.uuid === user.uuid) {
-        $scope.items = PRIVATE_USER_TABS;
+        $scope.items = [dashboardTab].concat(PRIVATE_USER_TABS);
         $scope.currentUser = user;
         $scope.context = {user: user};
       } else {
         usersService.$get($stateParams.uuid).then(function(user) {
-          $scope.items = publicTabs;
+          $scope.items = [dashboardTab].concat(publicTabs);
           $scope.currentUser = user;
           $scope.context = {user: user};
         });

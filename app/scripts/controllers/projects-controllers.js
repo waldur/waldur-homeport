@@ -72,8 +72,8 @@
     function activate() {
       $scope.items = [
         {
-          icon: "fa-bookmark",
-          label: "Project details",
+          icon: "fa-th-large",
+          label: "Dashboard",
           link: "project.details({uuid: context.project.uuid})",
         },
         {
