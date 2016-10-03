@@ -148,34 +148,69 @@
 
 
 (function() {
-  angular.module('ncsaas')
-    .controller('DashboardIndexController', [
-      '$scope',
-      '$stateParams',
-      'baseControllerClass',
-      'customersService',
-      DashboardIndexController]);
+  angular.module('ncsaas').service('DashboardFeedService', DashboardFeedService);
 
-  function DashboardIndexController(
-    $scope, $stateParams, baseControllerClass, customersService) {
-    var controllerScope = this;
-    var EventController = baseControllerClass.extend({
-      userCanManageProjects: false,
-      init: function() {
-        $scope.activeTab = $stateParams.tab || 'activity';
-        this.checkQuotas = 'project';
-        this.checkPermissions();
-      },
-      checkPermissions: function() {
-        customersService.isOwnerOrStaff().then(function() {
-          this.userCanManageProjects = true;
-        }.bind(this));
-      }
+  DashboardFeedService.$inject = ['alertsService', 'eventsService', 'alertFormatter', 'eventFormatter'];
+  function DashboardFeedService(alertsService, eventsService, alertFormatter, eventFormatter) {
+    var vm = this;
+
+    this.getProjectAlerts = function(project) {
+      return alertsService.getList({
+        aggregate: 'project',
+        uuid: project.uuid
+      }).then(function(alerts) {
+        return alerts.map(function(alert) {
+          alert.html_message = alertFormatter.format(alert);
+          return alert;
+        });
+      });
+    };
+
+    this.getProjectEvents = function(project) {
+      return eventsService.getList({scope: project.url}).then(function(events) {
+        return events.map(function(event) {
+          event.html_message = eventFormatter.format(event);
+          event.created = event['@timestamp'];
+          return event;
+        });
+      });
+    };
+  }
+})();
+
+
+(function() {
+  angular.module('ncsaas')
+    .controller('ProjectDashboardController', ProjectDashboardController);
+
+  ProjectDashboardController.$inject = [
+    'currentStateService', 'DashboardChartService', '$scope'
+  ];
+  function ProjectDashboardController(
+    currentStateService, DashboardChartService, $scope
+  ) {
+    var vm = this;
+
+    activate();
+    $scope.$on('currentCustomerUpdated', function() {
+      activate();
     });
 
-    controllerScope.__proto__ = new EventController();
+    function activate() {
+      vm.loading = true;
+      currentStateService.getProject().then(function(project) {
+        vm.project = project;
+        return DashboardChartService.getAllCharts(project).then(function(charts) {
+          vm.charts = charts;
+        });
+      }).finally(function() {
+        vm.loading = false;
+      });
+    }
   }
+})();
 
+(function() {
   angular.module('ncsaas')
     .controller('DashboardCostController', [
       'baseControllerClass',

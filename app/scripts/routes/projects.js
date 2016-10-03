@@ -40,6 +40,17 @@
 
       .state('project.details', {
         url: '',
+        templateUrl: 'views/dashboard/project.html',
+        controller: 'ProjectDashboardController',
+        controllerAs: 'DashboardCtrl',
+        bindToController: true,
+        data: {
+          pageClass: 'gray-bg'
+        }
+      })
+
+      .state('project.events', {
+        url: 'events/',
         templateUrl: 'views/partials/filtered-list.html',
         controller: 'ProjectEventTabController',
         controllerAs: 'ListController',

@@ -1,0 +1,32 @@
+<div class="ibox float-e-margins">
+    <div class="ibox-title">
+        <h5>{{ ::FeedCtrl.title }}</h5>
+        <div class="ibox-tools">
+            <a class="btn btn-xs btn-link" ng-click="FeedCtrl.showTypes()">
+                <i class="fa fa-question-circle"></i> {{ ::FeedCtrl.title }} types
+            </a>
+        </div>
+    </div>
+    <div class="ibox-content">
+        <div ng-if="FeedCtrl.loading">
+            <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
+        </div>
+        <div ng-if="!FeedCtrl.loading">
+            <div ng-if="FeedCtrl.items.length == 0">
+                {{ ::FeedCtrl.emptyText }}
+            </div>
+            <div ng-if="FeedCtrl.items.length > 0">
+                <div class="feed-activity-list">
+                    <div class="feed-element" ng-repeat="item in FeedCtrl.items">
+                        <small class="pull-right" am-time-ago="item.created"></small>
+                        <div ng-bind-html="::item.html_message"></div>
+                        <small class="text-muted">{{ ::item.created | date:'medium' }}</small>
+                    </div>
+                </div>
+                <a class="btn btn-primary btn-block m-t" ui-sref="{{ ::FeedCtrl.listState }}">
+                    <i class="fa fa-arrow-down"></i> Show all
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
