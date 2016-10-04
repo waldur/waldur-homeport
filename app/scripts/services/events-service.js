@@ -137,7 +137,6 @@
     role: ['Role management events', 'user'],
     quota: ['Quota events', 'customer'],
     ssh: ['SSH key events', 'key'],
-    template: ['Template events', 'resource']
   });
 
   var types = {};
@@ -414,8 +413,6 @@ angular.module('ncsaas').constant('EVENT_ICONS', {
                 'project_group_deletion_succeeded',
                 'resource_deleted',
                 'ssh_key_deletion_succeeded',
-                'template_deletion_succeeded',
-                'template_service_deletion_succeeded',
                 'user_deletion_succeeded'
             ],
             showLinks: function(context) {
