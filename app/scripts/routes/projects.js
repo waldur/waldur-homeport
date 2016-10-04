@@ -7,7 +7,7 @@
         templateUrl: 'views/project/base.html',
         data: {
           auth: true,
-          showProject: true
+          workspace: 'project'
         },
         resolve: {
           currentProject: function(
@@ -34,12 +34,25 @@
         controllerAs: 'ProjectAdd',
         data: {
           pageTitle: 'Create project',
+          workspace: 'project',
           auth: true
         },
       })
 
       .state('project.details', {
         url: '',
+        templateUrl: 'views/dashboard/project.html',
+        controller: 'ProjectDashboardController',
+        controllerAs: 'DashboardCtrl',
+        bindToController: true,
+        data: {
+          pageTitle: 'Project dashboard',
+          pageClass: 'gray-bg'
+        }
+      })
+
+      .state('project.events', {
+        url: 'events/',
         templateUrl: 'views/partials/filtered-list.html',
         controller: 'ProjectEventTabController',
         controllerAs: 'ListController',
@@ -120,8 +133,8 @@
         abstract: true,
         data: {
           auth: true,
-          pageTitle: 'Import resources from provider',
-          showProject: true
+          workspace: 'project',
+          pageTitle: 'Import resources from provider'
         }
       })
 

@@ -8,6 +8,7 @@
         data: {
           pageTitle: 'Dashboard',
           pageClass: 'gray-bg',
+          workspace: 'organization',
           auth: true
         },
       })
@@ -24,7 +25,8 @@
           url: '/organizations/:uuid/',
           abstract: true,
           data: {
-            auth: true
+            auth: true,
+            workspace: 'organization'
           },
           templateUrl: 'views/customer/base.html',
           resolve: {
@@ -156,7 +158,8 @@
         abstract: true,
         templateUrl: 'views/customer/base.html',
         data: {
-          auth: true
+          auth: true,
+          workspace: 'organization'
         }
       })
 

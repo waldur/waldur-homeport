@@ -429,6 +429,11 @@
     function setItems() {
       $scope.items = [
         {
+          label: "Dashboard",
+          icon: "fa-th-large",
+          link: "dashboard.index"
+        },
+        {
           label: "Providers",
           icon: "fa-database",
           link: "organization.providers({uuid: context.customer.uuid})",

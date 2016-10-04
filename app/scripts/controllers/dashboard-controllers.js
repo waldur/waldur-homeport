@@ -6,6 +6,9 @@
   DashboardChartService.$inject = ['$q', 'priceEstimationService', 'quotasService', '$filter'];
   function DashboardChartService($q, priceEstimationService, quotasService, $filter) {
     var vm = this;
+    // Each chart should have equal number of data points
+    // Each sparkline chart bar has width equal to 4% so 25 by 4 points
+    var POINTS_COUNT = 25;
 
     this.getAllCharts = function(scope) {
       return $q.all([
@@ -49,8 +52,8 @@
         angular.forEach(charts, function(chart) {
           if (chart.data.length > 1) {
             chart.change = vm.getRelativeChange([
-              {value: chart.data[chart.data.length - 1].value},
-              {value: chart.data[0].value}
+              chart.data[chart.data.length - 1].value,
+              chart.data[0].value
             ]);
           }
         });
@@ -59,10 +62,9 @@
     };
     this.getQuotaHistory = function(url) {
       var end = moment.utc().unix();
-      var count = 30;
-      var start = moment.utc().subtract(count, 'days').unix();
+      var start = moment.utc().subtract(1, 'month').unix();
 
-      return quotasService.getHistory(url, start, end, count).then(function(items) {
+      return quotasService.getHistory(url, start, end, POINTS_COUNT).then(function(items) {
         return items.filter(function(item) {
           return !!item.object;
         }).map(function(item) {
@@ -70,6 +72,9 @@
             date: moment.unix(item.point).toDate(),
             value: item.object.usage
           };
+        }).map(function(item) {
+          item.label = item.value + ' at ' + $filter('date', 'yyyy-MM-dd')(item.date);
+          return item;
         });
       });
     };
@@ -84,21 +89,28 @@
           }
         });
 
-        if (!estimates.length) {
-          var end = moment();
-          estimates = [];
-          for (var i = 0; i < 10; i++) {
-            estimates.push({
-              value: 0,
-              date: new Date(end.subtract(i, 'days').toDate())
-            });
-          }
+        // Pad missing values
+        var i = 1, end = moment();
+        if (estimates.length > 0) {
+          end = moment(estimates[estimates.length - 1].date)
         }
+        while(estimates.length != POINTS_COUNT) {
+          estimates.push({
+            value: 0,
+            date: new Date(end.subtract(i, 'month').toDate())
+          });
+        }
+        estimates = estimates.map(function(estimate) {
+          estimate.label = $filter('defaultCurrency')(estimate.value) +  ' at ' +
+                           $filter('date', 'yyyy-MM-dd')(estimate.date);
+          return estimate;
+        });
+        estimates.reverse()
         return {
           title: 'Total cost',
           data: estimates,
-          current: $filter('defaultCurrency')(estimates[0].value),
-          change: vm.getRelativeChange(estimates)
+          current: $filter('defaultCurrency')(estimates[estimates.length - 1].value),
+          change: vm.getRelativeChange(estimates.slice(-2))
         };
       });
     };
@@ -107,8 +119,8 @@
         return null;
       }
       // Latest values come first
-      var last = items[0].value;
-      var prev = items[1].value
+      var last = items[0];
+      var prev = items[1];
       var change = Math.round(100 * (last - prev) / prev);
       return Math.min(100, Math.max(-100, change));
     };
@@ -148,34 +160,69 @@
 
 
 (function() {
-  angular.module('ncsaas')
-    .controller('DashboardIndexController', [
-      '$scope',
-      '$stateParams',
-      'baseControllerClass',
-      'customersService',
-      DashboardIndexController]);
+  angular.module('ncsaas').service('DashboardFeedService', DashboardFeedService);
 
-  function DashboardIndexController(
-    $scope, $stateParams, baseControllerClass, customersService) {
-    var controllerScope = this;
-    var EventController = baseControllerClass.extend({
-      userCanManageProjects: false,
-      init: function() {
-        $scope.activeTab = $stateParams.tab || 'activity';
-        this.checkQuotas = 'project';
-        this.checkPermissions();
-      },
-      checkPermissions: function() {
-        customersService.isOwnerOrStaff().then(function() {
-          this.userCanManageProjects = true;
-        }.bind(this));
-      }
+  DashboardFeedService.$inject = ['alertsService', 'eventsService', 'alertFormatter', 'eventFormatter'];
+  function DashboardFeedService(alertsService, eventsService, alertFormatter, eventFormatter) {
+    var vm = this;
+
+    this.getProjectAlerts = function(project) {
+      return alertsService.getList({
+        aggregate: 'project',
+        uuid: project.uuid
+      }).then(function(alerts) {
+        return alerts.map(function(alert) {
+          alert.html_message = alertFormatter.format(alert);
+          return alert;
+        });
+      });
+    };
+
+    this.getProjectEvents = function(project) {
+      return eventsService.getList({scope: project.url}).then(function(events) {
+        return events.map(function(event) {
+          event.html_message = eventFormatter.format(event);
+          event.created = event['@timestamp'];
+          return event;
+        });
+      });
+    };
+  }
+})();
+
+
+(function() {
+  angular.module('ncsaas')
+    .controller('ProjectDashboardController', ProjectDashboardController);
+
+  ProjectDashboardController.$inject = [
+    'currentStateService', 'DashboardChartService', '$scope'
+  ];
+  function ProjectDashboardController(
+    currentStateService, DashboardChartService, $scope
+  ) {
+    var vm = this;
+
+    activate();
+    $scope.$on('currentProjectUpdated', function() {
+      activate();
     });
 
-    controllerScope.__proto__ = new EventController();
+    function activate() {
+      vm.loading = true;
+      currentStateService.getProject().then(function(project) {
+        vm.project = project;
+        return DashboardChartService.getResourceHistoryCharts(project).then(function(charts) {
+          vm.charts = charts;
+        });
+      }).finally(function() {
+        vm.loading = false;
+      });
+    }
   }
+})();
 
+(function() {
   angular.module('ncsaas')
     .controller('DashboardCostController', [
       'baseControllerClass',
