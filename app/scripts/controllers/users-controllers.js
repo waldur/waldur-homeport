@@ -206,8 +206,10 @@
   angular.module('ncsaas')
     .controller('UserDetailsController', UserDetailsController);
 
-  UserDetailsController.$inject = ['$scope', '$stateParams', 'usersService', 'PRIVATE_USER_TABS'];
-  function UserDetailsController($scope, $stateParams, usersService, PRIVATE_USER_TABS) {
+  UserDetailsController.$inject = [
+    '$scope', '$stateParams', 'usersService', 'PRIVATE_USER_TABS', 'stateUtilsService'
+  ];
+  function UserDetailsController($scope, $stateParams, usersService, PRIVATE_USER_TABS, stateUtilsService) {
     var publicTabs = [
       {
           label: "Events",
@@ -220,11 +222,21 @@
           link: "users.keys({uuid: context.user.uuid})"
       }
     ];
-    var dashboardTab = {
-      label: "Back to organization",
-      icon: "fa-arrow-left",
-      link: "dashboard.index"
-    };
+    var prevWorkspace = stateUtilsService.getPrevWorkspace() || 'organization';
+    var dashboardTab;
+    if (prevWorkspace === 'project') {
+      dashboardTab = {
+        label: "Back to project",
+        icon: "fa-arrow-left",
+        action: stateUtilsService.goBack
+      };
+    } else {
+      dashboardTab = {
+        label: "Back to organization",
+        icon: "fa-arrow-left",
+        link: "dashboard.index"
+      };
+    }
     usersService.getCurrentUser().then(function(user) {
       if (angular.isUndefined($stateParams.uuid) || $stateParams.uuid === user.uuid) {
         $scope.items = [dashboardTab].concat(PRIVATE_USER_TABS);

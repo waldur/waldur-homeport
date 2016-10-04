@@ -588,3 +588,40 @@
   }]);
 
 })();
+
+
+(function() {
+  angular.module('ncsaas')
+    .service('stateUtilsService', stateUtilsService);
+
+  stateUtilsService.$inject = ['$state'];
+  function stateUtilsService($state) {
+    var vm = this;
+
+    vm.setPrevState = function(state, params) {
+      vm.prevState = state;
+      vm.prevParams = params;
+    }
+
+    vm.getPrevWorkspace = function() {
+      if (vm.prevState && vm.prevState.data && vm.prevState.data.workspace) {
+        return vm.prevState.data.workspace;
+      }
+    }
+
+    vm.goBack = function() {
+      if (vm.prevState) {
+        $state.go(vm.prevState, vm.prevParams);
+      }
+    }
+  }
+
+  angular.module('ncsaas')
+    .run(['$rootScope', 'stateUtilsService',
+    function($rootScope, stateUtilsService) {
+    $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
+      stateUtilsService.setPrevState(fromState, fromParams);
+    });
+  }]);
+
+})();

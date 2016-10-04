@@ -7,7 +7,8 @@
         templateUrl: 'views/project/base.html',
         data: {
           auth: true,
-          showProject: true
+          showProject: true,
+          workspace: 'project'
         },
         resolve: {
           currentProject: function(
@@ -34,6 +35,7 @@
         controllerAs: 'ProjectAdd',
         data: {
           pageTitle: 'Create project',
+          workspace: 'project',
           auth: true
         },
       })
@@ -132,6 +134,7 @@
         abstract: true,
         data: {
           auth: true,
+          workspace: 'project',
           pageTitle: 'Import resources from provider',
           showProject: true
         }
