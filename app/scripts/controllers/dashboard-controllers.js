@@ -6,6 +6,9 @@
   DashboardChartService.$inject = ['$q', 'priceEstimationService', 'quotasService', '$filter'];
   function DashboardChartService($q, priceEstimationService, quotasService, $filter) {
     var vm = this;
+    // Each chart should have equal number of data points
+    // Each sparkline chart bar has width equal to 4% so 25 by 4 points
+    var POINTS_COUNT = 25;
 
     this.getAllCharts = function(scope) {
       return $q.all([
@@ -49,8 +52,8 @@
         angular.forEach(charts, function(chart) {
           if (chart.data.length > 1) {
             chart.change = vm.getRelativeChange([
-              {value: chart.data[chart.data.length - 1].value},
-              {value: chart.data[0].value}
+              chart.data[chart.data.length - 1].value,
+              chart.data[0].value
             ]);
           }
         });
@@ -59,10 +62,9 @@
     };
     this.getQuotaHistory = function(url) {
       var end = moment.utc().unix();
-      var count = 30;
-      var start = moment.utc().subtract(count, 'days').unix();
+      var start = moment.utc().subtract(1, 'month').unix();
 
-      return quotasService.getHistory(url, start, end, count).then(function(items) {
+      return quotasService.getHistory(url, start, end, POINTS_COUNT).then(function(items) {
         return items.filter(function(item) {
           return !!item.object;
         }).map(function(item) {
@@ -70,6 +72,9 @@
             date: moment.unix(item.point).toDate(),
             value: item.object.usage
           };
+        }).map(function(item) {
+          item.label = item.value + ' at ' + $filter('date', 'yyyy-MM-dd')(item.date);
+          return item;
         });
       });
     };
@@ -84,21 +89,28 @@
           }
         });
 
-        if (!estimates.length) {
-          var end = moment();
-          estimates = [];
-          for (var i = 0; i < 10; i++) {
-            estimates.push({
-              value: 0,
-              date: new Date(end.subtract(i, 'days').toDate())
-            });
-          }
+        // Pad missing values
+        var i = 1, end = moment();
+        if (estimates.length > 0) {
+          end = moment(estimates[estimates.length - 1].date)
         }
+        while(estimates.length != POINTS_COUNT) {
+          estimates.push({
+            value: 0,
+            date: new Date(end.subtract(i, 'month').toDate())
+          });
+        }
+        estimates = estimates.map(function(estimate) {
+          estimate.label = $filter('defaultCurrency')(estimate.value) +  ' at ' +
+                           $filter('date', 'yyyy-MM-dd')(estimate.date);
+          return estimate;
+        });
+        estimates.reverse()
         return {
           title: 'Total cost',
           data: estimates,
-          current: $filter('defaultCurrency')(estimates[0].value),
-          change: vm.getRelativeChange(estimates)
+          current: $filter('defaultCurrency')(estimates[estimates.length - 1].value),
+          change: vm.getRelativeChange(estimates.slice(-2))
         };
       });
     };
@@ -107,8 +119,8 @@
         return null;
       }
       // Latest values come first
-      var last = items[0].value;
-      var prev = items[1].value
+      var last = items[0];
+      var prev = items[1];
       var change = Math.round(100 * (last - prev) / prev);
       return Math.min(100, Math.max(-100, change));
     };
