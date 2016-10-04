@@ -8,7 +8,7 @@
         data: {
           auth: true,
           pageTitle: 'Service store',
-          showProject: true
+          workspace: 'project'
         }
       })
 

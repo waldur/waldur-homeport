@@ -7,7 +7,6 @@
         templateUrl: 'views/project/base.html',
         data: {
           auth: true,
-          showProject: true,
           workspace: 'project'
         },
         resolve: {
@@ -135,8 +134,7 @@
         data: {
           auth: true,
           workspace: 'project',
-          pageTitle: 'Import resources from provider',
-          showProject: true
+          pageTitle: 'Import resources from provider'
         }
       })
 
