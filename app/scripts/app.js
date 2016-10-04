@@ -599,14 +599,15 @@
     var vm = this;
 
     vm.setPrevState = function(state, params) {
-      vm.prevState = state;
-      vm.prevParams = params;
+      if (state.data && state.data.workspace) {
+        vm.prevState = state;
+        vm.prevParams = params;
+        vm.prevWorkspace = state.data.workspace;
+      }
     }
 
     vm.getPrevWorkspace = function() {
-      if (vm.prevState && vm.prevState.data && vm.prevState.data.workspace) {
-        return vm.prevState.data.workspace;
-      }
+      return vm.prevWorkspace;
     }
 
     vm.goBack = function() {
