@@ -8,8 +8,6 @@
       '$uibModal',
       '$rootScope',
       'hooksService',
-      'eventRegistry',
-      'ENTITYLISTFIELDTYPES',
       HookListController
     ]);
 
@@ -18,9 +16,7 @@
     $filter,
     $uibModal,
     $rootScope,
-    hooksService,
-    eventRegistry,
-    ENTITYLISTFIELDTYPES) {
+    hooksService) {
     var controllerScope = this;
     var Controller = baseControllerListClass.extend({
       init: function() {
@@ -28,44 +24,55 @@
         this.service = hooksService;
         this._super();
 
-        this.actionButtonsListItems = [
-          {
-            title: 'Remove',
-            icon: 'fa-trash',
-            clickFunction: this.remove.bind(this.controllerScope),
-            className: 'remove'
-          }
-        ];
-
-        this.entityOptions = {
-          entityData: {
-            noDataText: 'No notifications registered',
-            createLinkAction: this.openDialog.bind(this),
-            createLinkText: 'Add notification',
-            rowTemplateUrl: 'views/user/hook-row.html'
-          },
-          list: [
+        this.tableOptions = {
+          noDataText: 'No notifications registered.',
+          noMatchesText: 'No notifications found matching filter.',
+          columns: [
             {
-              type: ENTITYLISTFIELDTYPES.statusCircle,
-              propertyName: 'is_active',
-              onlineStatus: true,
-              className: 'statusCircle'
+              title: 'State',
+              className: 'text-center',
+              render: function(data, type, row, meta) {
+                var cls = row.is_active && 'online' || '';
+                var title = row.is_active && 'Enabled' || 'Disabled';
+                return '<a class="status-circle {cls}" title="{title}"></a>'
+                          .replace('{cls}', cls).replace('{title}', title);
+              },
+              width: '40px'
             },
             {
-              type: ENTITYLISTFIELDTYPES.name,
-              propertyName: 'label',
-              name: 'Method',
-              action: this.openDialog.bind(this)
+              title: 'Method',
+              render: function(data, type, row, meta) {
+                return row.label;
+              }
             },
             {
-              type: ENTITYLISTFIELDTYPES.noType,
-              propertyName: 'destination',
-              name: 'Destination'
+              title: 'Destination',
+              render: function(data, type, row, meta) {
+                return row.destination;
+              }
             },
             {
-              type: ENTITYLISTFIELDTYPES.noType,
-              propertyName: 'events',
-              name: 'Events'
+              title: 'Events',
+              render: function(data, type, row, meta) {
+                return row.events;
+              }
+            }
+          ],
+          tableActions: [
+            {
+              name: '<i class="fa fa-plus"></i> Add notification',
+              callback: this.openDialog.bind(controllerScope)
+            }
+          ],
+          rowActions: [
+            {
+              name: '<i class="fa fa-pencil"></i> Edit',
+              callback: this.openDialog.bind(controllerScope)
+            },
+            {
+              name: '<i class="fa fa-trash"></i> Remove',
+              className: 'danger',
+              callback: this.remove.bind(controllerScope)
             }
           ]
         };
@@ -81,9 +88,8 @@
           bindToController: true,
           scope: scope
         }).result.then(function() {
-          this.service.clearAllCacheForCurrentEndpoint();
-          this.getList();
-        }.bind(this));
+          controllerScope.resetCache();
+        });
       },
 
       removeInstance: function(hook) {

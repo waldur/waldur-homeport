@@ -21,9 +21,9 @@
       },
       notifications: {
         url: 'notifications/',
-        templateUrl: 'views/partials/list.html',
+        templateUrl: 'views/partials/filtered-list.html',
         controller: 'HookListController',
-        controllerAs: 'Ctrl',
+        controllerAs: 'ListController',
         data: {
           pageTitle: 'Notifications'
         }

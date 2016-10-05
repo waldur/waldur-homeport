@@ -193,7 +193,7 @@
       },
       {
           label: "Notifications",
-          icon: "fa-bookmark",
+          icon: "fa-envelope",
           link: "profile.notifications"
       },
       {
