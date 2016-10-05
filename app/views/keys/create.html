@@ -1,56 +1,40 @@
-<div ng-controller="KeyAddController as KeyAdd">
-    <div>
-        <section class="short-form">
-            <div class="form-row">
-                <div class="col label">
-                    <label for="">Key name:</label>
-                </div>
-                <div class="col input input-full">
-                    <input type="text" ng-model="KeyAdd.instance.name">
-                    <div class="error arrow-up" ng-show="KeyAdd.errors.name">
-                        <ul class="error-list">
-                            <li ng-repeat="error in KeyAdd.errors.name">{{ error }}</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="col label">
-                    <a class="help-icon" title="How to generate RSA keys" href="#/help/keys/"></a>
-                    <label>Public key:</label>
-                </div>
-                <div class="col input input-full">
-                    <textarea class="full"
-                          ng-model="KeyAdd.instance.public_key"></textarea>
-                    <div class="error arrow-up" ng-show="KeyAdd.errors.public_key">
-                        <ul class="error-list">
-                            <li ng-repeat="error in KeyAdd.errors.public_key">{{ error }}</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- non field errors -->
-        <div class="simple-line" ng-show="KeyAdd.errors.non_field_errors">
-            <div class="error">
-                <ul class="error-list">
-                    <li ng-repeat="error in KeyAdd.errors.non_field_errors">
-                        {{ error }}
-                    </li>
-                </ul>
-            </div>
+<div ng-controller="KeyAddController as KeyAdd" class="form-horizontal">
+    <div class="form-group">
+        <label for="keyName" class="col-sm-3 control-label">
+            Key name:
+        </label>
+        <div class="col-sm-5">
+            <input id="keyName"
+                type="text"
+                ng-model="KeyAdd.instance.name"
+                class="form-control">
+            <p class="text-danger"
+               ng-repeat="error in KeyAdd.errors.name"
+               ng-bind="error"></p>
         </div>
-        <!-- /non field errors -->
-
-        <div class="decision">
-            <div class="col">
-                <a class="button-apply" submit-button="KeyAdd.save()">Add key</a>
-            </div>
-            <div class="col">
-                <a class="button-cancel" ng-click="KeyAdd.cancel()">Cancel</a>
-            </div>
+    </div>
+    <div class="form-group">
+        <label for="publicKey" class="col-sm-3 control-label">
+            <a class="help-icon" title="How to generate RSA keys" href="#/help/keys/"></a> Public key
+        </label>
+        <div class="col-sm-5">
+            <textarea id="publicKey"
+                class="form-control"
+                ng-model="KeyAdd.instance.public_key"></textarea>
+            <p class="text-danger"
+               ng-repeat="error in KeyAdd.errors.public_key"
+               ng-bind="error"></p>
         </div>
     </div>
 
+    <p class="text-danger"
+       ng-repeat="error in KeyAdd.errors.non_field_errors"
+       ng-bind="error"></p>
+
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-5">
+            <button class="btn btn-primary" submit-button="KeyAdd.save()">Add key</button>
+            <button class="btn btn-default" ng-click="KeyAdd.cancel()">Cancel</button>
+        </div>
+    </div>
 </div>
