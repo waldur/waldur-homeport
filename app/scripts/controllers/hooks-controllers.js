@@ -73,7 +73,7 @@
               name: '<i class="fa fa-trash"></i> Remove',
               className: 'danger',
               callback: this.remove.bind(controllerScope)
-            },
+            }
           ]
         };
       },
