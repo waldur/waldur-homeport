@@ -12,9 +12,9 @@
       },
       keys: {
         url: 'keys/',
-        templateUrl: 'views/partials/list.html',
+        templateUrl: 'views/partials/filtered-list.html',
         controller: 'UserKeyTabController',
-        controllerAs: 'Ctrl',
+        controllerAs: 'ListController',
         data: {
           pageTitle: 'SSH keys'
         }

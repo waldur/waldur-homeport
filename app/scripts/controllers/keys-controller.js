@@ -9,7 +9,7 @@
         this.service = keysService;
         this.controllerScope = controllerScope;
         this._super();
-        this.listState = 'profile.details';
+        this.listState = 'profile.keys';
       },
       successRedirect: function() {
         $state.go('profile.keys');

@@ -48,70 +48,76 @@
       '$stateParams',
       'keysService',
       'baseControllerListClass',
-      'usersService',
-      'ENTITYLISTFIELDTYPES',
+      'currentUser',
+      '$state',
       UserKeyTabController
     ]);
 
-  function UserKeyTabController($stateParams, keysService, baseControllerListClass, usersService, ENTITYLISTFIELDTYPES) {
+  function UserKeyTabController(
+    $stateParams,
+    keysService,
+    baseControllerListClass,
+    currentUser,
+    $state) {
     var controllerScope = this;
     var Controller = baseControllerListClass.extend({
-      user: {},
-
       init: function() {
         this.controllerScope = controllerScope;
         this.service = keysService;
         this._super();
 
-        this.entityOptions = {
-          entityData: {
-            noDataText: 'No keys yet',
-            rowTemplateUrl: 'views/user/key-row.html'
-          },
-          list: [
+        this.tableOptions = {
+          searchFieldName: 'name',
+          noDataText: 'No SSH keys yet.',
+          noMatchesText: 'No SSH keys found matching filter.',
+          columns: [
             {
-              type: ENTITYLISTFIELDTYPES.noType,
-              propertyName: 'name',
-              name: 'Title'
+              title: 'Title',
+              render: function(data, type, row, meta) {
+                return row.name;
+              }
             },
             {
-              type: ENTITYLISTFIELDTYPES.noType,
-              propertyName: 'fingerprint',
-              name: 'Fingerprint',
-              className: 'fingerprint'
+              title: 'Fingerprint',
+              render: function(data, type, row, meta) {
+                return row.fingerprint;
+              }
             }
-          ]
+          ],
+          rowActions: this.getRowActions(),
+          tableActions: this.getTableActions()
         };
-        this.actionButtonsListItems = [
-          {
-            title: 'Remove',
-            icon: 'fa-trash',
-            clickFunction: this.remove.bind(controllerScope)
-          }
-        ];
+      },
+      getRowActions: function() {
+        if (this.isStaffOrSelf()) {
+          return [
+            {
+              name: '<i class="fa fa-trash"></i> Remove',
+              callback: this.remove.bind(controllerScope)
+            }
+          ];
+        }
+      },
+      getTableActions: function() {
+        if (this.isStaffOrSelf()) {
+          return [
+            {
+              name: '<i class="fa fa-plus"></i> Add SSH key',
+              callback: function() {
+                $state.go('keys.create');
+              }
+            }
+          ];
+        }
+      },
+      isStaffOrSelf: function() {
+        return angular.isUndefined($stateParams.uuid) ||
+               currentUser.uuid === $stateParams.uuid ||
+               currentUser.is_staff;
       },
       getList: function(filter) {
-        var vm = this,
-          fn = this._super.bind(this);
-
-        return this.getUser().then(function(user) {
-          vm.user = user;
-          vm.service.defaultFilter.user_uuid = user.uuid;
-          if (angular.isUndefined($stateParams.uuid) || user.uuid === $stateParams.uuid) {
-            angular.extend(vm.entityOptions.entityData, {
-              createLink: 'keys.create',
-              createLinkText: 'Add SSH Key'
-            });
-          }
-          return fn(filter);
-        });
-      },
-      getUser: function() {
-        if ($stateParams.uuid) {
-          return usersService.$get($stateParams.uuid);
-        } else {
-          return usersService.getCurrentUser();
-        }
+        this.service.defaultFilter.user_uuid = $stateParams.uuid || currentUser.uuid;
+        return this._super(filter);
       }
     });
     controllerScope.__proto__ = new Controller();
