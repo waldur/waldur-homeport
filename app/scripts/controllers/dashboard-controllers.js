@@ -105,12 +105,15 @@
                            $filter('date', 'yyyy-MM-dd')(estimate.date);
           return estimate;
         });
-        estimates.reverse()
+        estimates.reverse();
         return {
           title: 'Total cost',
           data: estimates,
           current: $filter('defaultCurrency')(estimates[estimates.length - 1].value),
-          change: vm.getRelativeChange(estimates.slice(-2))
+          change: vm.getRelativeChange([
+            estimates[estimates.length - 1].value,
+            estimates[estimates.length - 2].value
+          ])
         };
       });
     };
