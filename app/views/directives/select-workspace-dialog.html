@@ -6,15 +6,15 @@
       <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
   </div>
   <div ng-if="!Ctrl.loadingOrganizations" class="row">
-    <div class="col-md-6 col-xs-12">
+    <div class="col-md-6 col-xs-12 m-b-md">
+      <a class="pull-right btn btn-sm btn-default"
+        ng-click="Ctrl.createOrganization()"
+        ng-if="Ctrl.canCreateOrganization">
+        <i class="fa fa-plus"></i>
+        Add new <span class="hidden-xs">organization</span>
+      </a>
       <h3 class="m-b-md">
         Organizations ({{ Ctrl.organizations.length }})
-        <a class="pull-right btn btn-sm btn-default"
-          ng-click="Ctrl.createOrganization()"
-          ng-if="Ctrl.canCreateOrganization">
-          <i class="fa fa-plus"></i>
-          Add new organization
-        </a>
       </h3>
       <div class="form-group">
         <div class="search-box">
@@ -42,14 +42,14 @@
       </div>
     </div>
     <div class="col-md-6 col-xs-12">
+      <a class="pull-right btn btn-sm btn-default"
+        ng-click="Ctrl.createProject()"
+        ng-if="Ctrl.canCreateProject">
+        <i class="fa fa-plus"></i>
+        Add new project
+      </a>
       <h3 class="m-b-md">
         Projects ({{ Ctrl.selectedOrganization.projects.length }})
-        <a class="pull-right btn btn-sm btn-default"
-          ng-click="Ctrl.createProject()"
-          ng-if="Ctrl.canCreateProject">
-          <i class="fa fa-plus"></i>
-          Add new project
-        </a>
       </h3>
       <div class="form-group">
         <div class="search-box">
