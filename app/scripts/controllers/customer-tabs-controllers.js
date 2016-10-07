@@ -791,6 +791,8 @@
         '$rootScope',
         '$uibModal',
         'ENTITYLISTFIELDTYPES',
+        '$timeout',
+        '$state',
         CustomerTeamTabController
       ]);
 
@@ -804,7 +806,9 @@
       $q,
       $rootScope,
       $uibModal,
-      ENTITYLISTFIELDTYPES) {
+      ENTITYLISTFIELDTYPES,
+      $timeout,
+      $state) {
     var controllerScope = this;
     var TeamController = baseControllerListClass.extend({
       init: function() {
@@ -813,29 +817,7 @@
         this.searchFieldName = 'full_name';
         this.hideNoDataText = true;
         var vm = this;
-        var fn = this._super.bind(this);
-        var currentUserPromise = usersService.getCurrentUser();
-        var currentCustomerPromise = currentStateService.getCustomer();
-        $q.all([currentUserPromise, currentCustomerPromise]).then(function(result) {
-          vm.currentUser = result[0];
-          vm.currentCustomer = result[1];
-          fn();
-          vm.currentCustomer.owners.forEach(function(item) {
-            if (vm.currentUser.uuid === item.uuid || vm.currentUser.is_staff) {
-              vm.entityOptions.entityData.createPopup = vm.openPopup.bind(vm);
-              vm.actionButtonsListItems = [
-                {
-                  title: 'Edit',
-                  clickFunction: vm.openPopup.bind(vm)
-                },
-                {
-                  title: 'Remove',
-                  clickFunction: vm.remove.bind(vm)
-                }
-              ];
-            }
-          });
-        });
+        this._super();
         this.expandableOptions = [
           {
             isList: true,
@@ -879,6 +861,68 @@
             }
           ]
         };
+        vm.tableOptions = {
+          noDataText: 'No alerts yet',
+          noMatchesText: 'No alerts found matching filter.',
+          searchFieldName: 'message',
+          columns: [
+            {
+              title: '',
+              render: function(data, type, row, meta) {
+                var gravatarSrc = 'taavitamm88@gmail.com';
+                return '<span class="avatar"><img gravatar-src="{gravatarSrc}" gravatar-size="100" alt="" class="avatar-img"></span>'
+                  .replace('{gravatarSrc}', gravatarSrc);
+              }
+            },
+            {
+              title: 'Member',
+              render: function(data, type, row, meta) {
+                return row.full_name || row.username;
+              }
+            },
+            {
+              title: 'Owner',
+              render: function(data, type, row, meta) {
+                var cls = row.role == 'Owner' ? 'check' : 'minus';
+                var title = row.role;
+                return '<span class="icon {cls}" title="{title}"></span>'
+                  .replace('{cls}', cls)
+                  .replace('{title}', title);
+              }
+            },
+            {
+              title: 'Projects with admin privileges:',
+              render: function(data, type, row, meta) {
+                return row.projects.map(function(item) {
+                  var projectName = item.name;
+                  var href = $state.href('project.details', { uuid: item.uuid });
+                  return '<a href="{href}">{projectName}</a>'
+                    .replace('{projectName}', projectName)
+                    .replace('{href}', href)
+                }).join(', ');
+              }
+            }
+
+          ],
+          tableActions: [
+            {
+              name: '<i class="fa fa-plus"></i> Add member',
+              callback: vm.openPopup.bind(vm)
+            }
+          ],
+          rowActions: [
+            {
+              name: '<i class="fa fa-pencil"></i> Edit',
+              callback: vm.openPopup.bind(vm)
+            },
+            {
+              name: '<i class="fa fa-trash"></i> Remove',
+              className: 'danger',
+              callback: vm.remove.bind(vm)
+            }
+          ]
+        };
+
       },
       afterGetList: function() {
         var vm = this;
@@ -891,16 +935,39 @@
               }
             });
           });
+
         });
       },
       getList: function(filter) {
         var vm = this;
         filter = filter || {};
-        filter = angular.extend({operation: 'users', UUID: vm.currentCustomer.uuid}, filter);
+        var currentUserPromise = usersService.getCurrentUser();
+        var currentCustomerPromise = currentStateService.getCustomer();
+        $q.all([currentUserPromise, currentCustomerPromise]).then(function(result) {
+          vm.currentUser = result[0];
+          vm.currentCustomer = result[1];
+          vm.currentCustomer.owners.forEach(function(item) {
+            if (vm.currentUser.uuid === item.uuid || vm.currentUser.is_staff) {
+              vm.entityOptions.entityData.createPopup = vm.openPopup.bind(vm);
+              vm.actionButtonsListItems = [
+                {
+                  title: 'Edit',
+                  clickFunction: vm.openPopup.bind(vm)
+                },
+                {
+                  title: 'Remove',
+                  clickFunction: vm.remove.bind(vm)
+                }
+              ];
+            }
+          });
+        });
+        if (vm.currentCustomer) {
+          filter = angular.extend({operation: 'users', UUID: vm.currentCustomer.uuid}, filter);
+        }
         return this._super(filter);
       },
       removeInstance: function(user) {
-        var vm = this;
         var deferred = $q.defer();
         var promises = user.projects.map(function(project) {
           return projectPermissionsService.deletePermission(project.permission);
@@ -930,11 +997,13 @@
         $uibModal.open({
           templateUrl: 'views/directives/add-team-member.html',
           controller: 'AddTeamMemberDialogController',
-          scope: dialogScope,
+          scope: dialogScope
         }).result.then(function() {
           this.service.clearAllCacheForCurrentEndpoint();
           customerPermissionsService.clearAllCacheForCurrentEndpoint();
-          this.getList();
+          $timeout(function() {
+            controllerScope.resetCache();
+          });
         }.bind(this));
       }
     });

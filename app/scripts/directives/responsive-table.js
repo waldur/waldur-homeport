@@ -50,7 +50,13 @@
           });
 
           var columns = options.columns;
-          if (options.rowActions) {
+          var hasActionsBlock = false;
+          columns.map(function(item) { return item.className }).forEach(function(item) {
+            if (item && item.indexOf('actions') !== -1) {
+              hasActionsBlock = true;
+            }
+          });
+          if (options.rowActions && !hasActionsBlock) {
             var actionColumn = getActionColumn(options.rowActions, options.actionsColumnWidth);
             columns.push(actionColumn);
           }
