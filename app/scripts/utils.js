@@ -122,6 +122,14 @@
         }
         return "";
       },
+      getUUID: function(url) {
+        return url.split('/').splice(-2)[0];
+      },
+      renderLink: function(href, name) {
+        return '<a href="{href}">{name}</a>'
+                .replace('{href}', href)
+                .replace('{name}', name);
+      },
       parseQueryString: function(qs) {
         // Example input: foo=123&bar=456
         // Example output: {foo: "123", bar: "456"}

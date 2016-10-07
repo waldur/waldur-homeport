@@ -110,10 +110,10 @@
               countFieldKey: "apps"
             },
             {
-              link: "project.resources.storages({uuid: context.project.uuid})",
+              link: "project.resources.storage({uuid: context.project.uuid})",
               icon: "fa-hdd-o",
-              label: "Storages",
-              feature: "storages"
+              label: "Storage",
+              feature: "storage"
             }
           ]
         },

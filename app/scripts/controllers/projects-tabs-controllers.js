@@ -240,15 +240,16 @@
 
   angular.module('ncsaas')
     .controller('SnapshotsListController', [
-      'BaseProjectResourcesTabController',
+      'BaseProjectResourcesTabController', 'ncUtils', '$state',
       SnapshotsListController]);
 
-  function SnapshotsListController(BaseProjectResourcesTabController, ENV) {
+  function SnapshotsListController(BaseProjectResourcesTabController, ncUtils, $state) {
     var controllerScope = this;
     var ResourceController = BaseProjectResourcesTabController.extend({
       init:function() {
         this.controllerScope = controllerScope;
         this._super();
+        this.rowFields.push('source_volume')
       },
       getList: function(filter) {
         return this._super(angular.extend({}, filter, {
@@ -259,6 +260,20 @@
         var options = this._super();
         options.noDataText = 'You have no snapshots yet.';
         options.noMatchesText = 'No snapshots found matching filter.';
+        options.columns.push({
+          title: 'Volume',
+          render: function(data, type, row, meta) {
+            if (!row.source_volume) {
+              return 'Not known';
+            }
+            var uuid = ncUtils.getUUID(row.source_volume);
+            var href = $state.href('resources.details', {
+              uuid: uuid,
+              resource_type: 'OpenStack.Volume'
+            });
+            return ncUtils.renderLink(href, 'Link');
+          }
+        });
         return options;
       },
       getImportTitle: function() {
