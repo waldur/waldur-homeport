@@ -818,49 +818,6 @@
         this.hideNoDataText = true;
         var vm = this;
         this._super();
-        this.expandableOptions = [
-          {
-            isList: true,
-            listKey: 'projects',
-            addItemBlock: true,
-            viewType: 'projects',
-            title: 'Projects with admin privileges',
-            emptyTitle: 'User does not manage any project'
-          }
-        ];
-        this.entityOptions = {
-          entityData: {
-            createPopupText: 'Add member',
-            noDataText: 'No users yet',
-            hideActionButtons: false,
-            hideTableHead: false,
-            hidePagination: true
-          },
-          list: [
-            {
-              className: 'avatar',
-              avatarSrc: 'email',
-              showForMobile: false,
-              notSortable: true,
-              type: ENTITYLISTFIELDTYPES.avatarPictureField
-            },
-            {
-              name: 'Member',
-              showForMobile: true,
-              propertyName: 'full_name',
-              propertyNameBackup: 'username',
-              type: ENTITYLISTFIELDTYPES.linkOrText,
-              className: 'reduce-cell-width'
-            },
-            {
-              name: 'Owner',
-              showForMobile: true,
-              propertyName: 'role',
-              type: ENTITYLISTFIELDTYPES.bool,
-              className: 'shared-filed reduce-cell-width'
-            }
-          ]
-        };
         vm.tableOptions = {
           noDataText: 'No alerts yet',
           noMatchesText: 'No alerts found matching filter.',
@@ -869,7 +826,7 @@
             {
               title: '',
               render: function(data, type, row, meta) {
-                var gravatarSrc = 'taavitamm88@gmail.com';
+                var gravatarSrc = '';
                 return '<span class="avatar"><img gravatar-src="{gravatarSrc}" gravatar-size="100" alt="" class="avatar-img"></span>'
                   .replace('{gravatarSrc}', gravatarSrc);
               }
@@ -946,21 +903,6 @@
         $q.all([currentUserPromise, currentCustomerPromise]).then(function(result) {
           vm.currentUser = result[0];
           vm.currentCustomer = result[1];
-          vm.currentCustomer.owners.forEach(function(item) {
-            if (vm.currentUser.uuid === item.uuid || vm.currentUser.is_staff) {
-              vm.entityOptions.entityData.createPopup = vm.openPopup.bind(vm);
-              vm.actionButtonsListItems = [
-                {
-                  title: 'Edit',
-                  clickFunction: vm.openPopup.bind(vm)
-                },
-                {
-                  title: 'Remove',
-                  clickFunction: vm.remove.bind(vm)
-                }
-              ];
-            }
-          });
         });
         if (vm.currentCustomer) {
           filter = angular.extend({operation: 'users', UUID: vm.currentCustomer.uuid}, filter);
