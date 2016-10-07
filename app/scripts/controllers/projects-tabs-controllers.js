@@ -249,7 +249,8 @@
       init:function() {
         this.controllerScope = controllerScope;
         this._super();
-        this.rowFields.push('source_volume')
+        this.rowFields.push('source_volume');
+        this.rowFields.push('source_volume_name');
       },
       getList: function(filter) {
         return this._super(angular.extend({}, filter, {
@@ -271,7 +272,7 @@
               uuid: uuid,
               resource_type: 'OpenStack.Volume'
             });
-            return ncUtils.renderLink(href, 'Link');
+            return ncUtils.renderLink(href, row.source_volume_name || 'Link');
           }
         });
         return options;
