@@ -201,6 +201,78 @@
 })();
 
 (function() {
+
+  angular.module('ncsaas')
+    .controller('VolumesListController', [
+      'BaseProjectResourcesTabController',
+      VolumesListController]);
+
+  function VolumesListController(BaseProjectResourcesTabController) {
+    var controllerScope = this;
+    var ResourceController = BaseProjectResourcesTabController.extend({
+      init:function() {
+        this.controllerScope = controllerScope;
+        this._super();
+      },
+      getList: function(filter) {
+        return this._super(angular.extend({}, filter, {
+          resource_type: 'OpenStack.Volume'
+        }));
+      },
+      getTableOptions: function() {
+        var options = this._super();
+        options.noDataText = 'You have no volumes yet.';
+        options.noMatchesText = 'No volumes found matching filter.';
+        return options;
+      },
+      getImportTitle: function() {
+        return 'Import volumes';
+      },
+      getCreateTitle: function() {
+        return 'Add volumes';
+      }
+    });
+    controllerScope.__proto__ = new ResourceController();
+  }
+})();
+
+(function() {
+
+  angular.module('ncsaas')
+    .controller('SnapshotsListController', [
+      'BaseProjectResourcesTabController',
+      SnapshotsListController]);
+
+  function SnapshotsListController(BaseProjectResourcesTabController, ENV) {
+    var controllerScope = this;
+    var ResourceController = BaseProjectResourcesTabController.extend({
+      init:function() {
+        this.controllerScope = controllerScope;
+        this._super();
+      },
+      getList: function(filter) {
+        return this._super(angular.extend({}, filter, {
+          resource_type: 'OpenStack.Snapshot'
+        }));
+      },
+      getTableOptions: function() {
+        var options = this._super();
+        options.noDataText = 'You have no snapshots yet.';
+        options.noMatchesText = 'No snapshots found matching filter.';
+        return options;
+      },
+      getImportTitle: function() {
+        return 'Import snapshots';
+      },
+      getCreateTitle: function() {
+        return 'Add snapshots';
+      }
+    });
+    controllerScope.__proto__ = new ResourceController();
+  }
+})();
+
+(function() {
   angular.module('ncsaas')
     .controller('ProjectSupportTabController', [
       'baseControllerListClass',

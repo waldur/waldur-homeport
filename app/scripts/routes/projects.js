@@ -107,6 +107,14 @@
         }
       })
 
+      .state('project.resources.storages', {
+        url: 'storages/',
+        templateUrl: 'views/project/storages.html',
+        data: {
+          pageTitle: 'Storages'
+        }
+      })
+
       .state('project.support', {
         url: 'support/',
         templateUrl: 'views/partials/list.html',

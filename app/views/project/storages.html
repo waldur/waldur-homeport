@@ -1,0 +1,14 @@
+<div class="tabs-container m-l-sm">
+    <uib-tabset>
+        <uib-tab heading="Volumes">
+            <div class="panel-body"
+                ng-controller="VolumesListController as ListController"
+                ng-include="'views/partials/filtered-list.html'"></div>
+        </uib-tab>
+        <uib-tab heading="Snapshots">
+            <div class="panel-body"
+                ng-controller="SnapshotsListController as ListController"
+                ng-include="'views/partials/filtered-list.html'"></div>
+        </uib-tab>
+    </uib-tabset>
+</div>

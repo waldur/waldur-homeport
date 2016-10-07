@@ -136,7 +136,9 @@
         if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('import') == -1) {
           actions.push(this.getImportAction());
         }
-        actions.push(this.getCreateAction());
+        if (this.category) {
+          actions.push(this.getCreateAction());
+        }
         actions.push(this.getMapAction());
         return actions;
       },
@@ -257,10 +259,12 @@
       },
       getList: function(filter) {
         var query = angular.extend({}, filter, {
-          resource_category: this.categories[this.category],
           field: this.rowFields
         });
-        this.updateFilters(filter);
+        if (this.category) {
+          query.resource_category = this.categories[this.category];
+          this.updateFilters(filter);
+        }
         return this._super(query);
       },
       updateFilters: function(filter) {
