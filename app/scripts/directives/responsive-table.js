@@ -52,13 +52,7 @@
           });
 
           var columns = options.columns;
-          var hasActionsBlock = false;
-          columns.map(function(item) { return item.className }).forEach(function(item) {
-            if (item && item.indexOf('actions') !== -1) {
-              hasActionsBlock = true;
-            }
-          });
-          if (options.rowActions && !hasActionsBlock) {
+          if (options.rowActions) {
             var actionColumn = getActionColumn(options.rowActions, options.actionsColumnWidth);
             columns.push(actionColumn);
           }
