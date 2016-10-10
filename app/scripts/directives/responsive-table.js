@@ -69,7 +69,7 @@
               zeroRecords: options.noMatchesText
             },
             fnDrawCallback: function() {
-              $(element).find('.actions').each(function(index, element) {
+              $(element).find('tr').each(function(index, element) {
                 $compile(element)(scope);
               });
             }

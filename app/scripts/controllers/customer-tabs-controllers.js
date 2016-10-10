@@ -787,10 +787,12 @@
         'projectPermissionsService',
         'usersService',
         'currentStateService',
+        'currentUser',
+        'currentCustomer',
         '$q',
         '$rootScope',
         '$uibModal',
-        'ENTITYLISTFIELDTYPES',
+        '$state',
         CustomerTeamTabController
       ]);
 
@@ -801,106 +803,100 @@
       projectPermissionsService,
       usersService,
       currentStateService,
+      currentUser,
+      currentCustomer,
       $q,
       $rootScope,
       $uibModal,
-      ENTITYLISTFIELDTYPES) {
+      $state) {
     var controllerScope = this;
     var TeamController = baseControllerListClass.extend({
       init: function() {
         this.controllerScope = controllerScope;
         this.service = customersService;
-        this.searchFieldName = 'full_name';
         this.hideNoDataText = true;
-        var vm = this;
-        var fn = this._super.bind(this);
-        var currentUserPromise = usersService.getCurrentUser();
-        var currentCustomerPromise = currentStateService.getCustomer();
-        $q.all([currentUserPromise, currentCustomerPromise]).then(function(result) {
-          vm.currentUser = result[0];
-          vm.currentCustomer = result[1];
-          fn();
-          vm.currentCustomer.owners.forEach(function(item) {
-            if (vm.currentUser.uuid === item.uuid || vm.currentUser.is_staff) {
-              vm.entityOptions.entityData.createPopup = vm.openPopup.bind(vm);
-              vm.actionButtonsListItems = [
-                {
-                  title: 'Edit',
-                  clickFunction: vm.openPopup.bind(vm)
-                },
-                {
-                  title: 'Remove',
-                  clickFunction: vm.remove.bind(vm)
-                }
-              ];
-            }
-          });
-        });
-        this.expandableOptions = [
-          {
-            isList: true,
-            listKey: 'projects',
-            addItemBlock: true,
-            viewType: 'projects',
-            title: 'Projects with admin privileges',
-            emptyTitle: 'User does not manage any project'
-          }
-        ];
-        this.entityOptions = {
-          entityData: {
-            createPopupText: 'Add member',
-            noDataText: 'No users yet',
-            hideActionButtons: false,
-            hideTableHead: false,
-            hidePagination: true
-          },
-          list: [
+        this.isOwnerOrStaff = customersService.checkCustomerUser(currentCustomer, currentUser);
+        this.tableOptions = this.getTableOptions();
+        this._super();
+      },
+      getTableOptions: function() {
+        return {
+          noDataText: 'You have no team members yet',
+          noMatchesText: 'No members found matching filter.',
+          searchFieldName: 'full_name',
+          columns: [
             {
-              className: 'avatar',
-              avatarSrc: 'email',
-              showForMobile: false,
-              notSortable: true,
-              type: ENTITYLISTFIELDTYPES.avatarPictureField
+              title: 'Member',
+              render: function(data, type, row, meta) {
+                var avatar = '<img gravatar-src="\'{gravatarSrc}\'" gravatar-size="100" alt="" class="avatar-img img-xs">'
+                  .replace('{gravatarSrc}', row.email);
+                return avatar + ' ' + row.full_name || row.username;
+              }
             },
             {
-              name: 'Member',
-              showForMobile: true,
-              propertyName: 'full_name',
-              propertyNameBackup: 'username',
-              type: ENTITYLISTFIELDTYPES.linkOrText,
-              className: 'reduce-cell-width'
+              title: 'E-mail',
+              render: function(data, type, row, meta) {
+                return row.email;
+              }
             },
             {
-              name: 'Owner',
-              showForMobile: true,
-              propertyName: 'role',
-              type: ENTITYLISTFIELDTYPES.bool,
-              className: 'shared-filed reduce-cell-width'
+              title: 'Owner',
+              render: function(data, type, row, meta) {
+                var cls = row.role == 'Owner' ? 'check' : 'minus';
+                var title = row.role;
+                return '<span class="icon {cls}" title="{title}"></span>'
+                  .replace('{cls}', cls)
+                  .replace('{title}', title || 'System administrator');
+              }
+            },
+            {
+              title: 'Projects with admin privileges',
+              render: function(data, type, row, meta) {
+                return row.projects.map(function(item) {
+                  var projectName = item.name;
+                  var href = $state.href('project.details', { uuid: item.uuid });
+                  return '<a href="{href}">{projectName}</a>'
+                    .replace('{projectName}', projectName)
+                    .replace('{href}', href)
+                }).join(', ');
+              }
             }
-          ]
+          ],
+          tableActions: this.getTableActions(),
+          rowActions: this.getRowActions()
         };
       },
-      afterGetList: function() {
-        var vm = this;
-        usersService.getList().then(function(result) {
-          vm.list.forEach(function(item, i) {
-            result.forEach(function(item2) {
-              if (item.uuid == item2.uuid) {
-                vm.list[i].email = item2.email;
-                vm.list[i].username = item2.username;
-              }
-            });
-          });
-        });
+      getTableActions: function() {
+        if (this.isOwnerOrStaff) {
+          return [
+            {
+              name: '<i class="fa fa-plus"></i> Add member',
+              callback: this.openPopup.bind(this)
+            }
+          ];
+        }
+      },
+      getRowActions: function() {
+        if (this.isOwnerOrStaff) {
+          return [
+            {
+              name: '<i class="fa fa-pencil"></i> Edit',
+              callback: this.openPopup.bind(this)
+            },
+            {
+              name: '<i class="fa fa-trash"></i> Remove',
+              callback: this.remove.bind(this)
+            }
+          ];
+        }
       },
       getList: function(filter) {
-        var vm = this;
-        filter = filter || {};
-        filter = angular.extend({operation: 'users', UUID: vm.currentCustomer.uuid}, filter);
-        return this._super(filter);
+        return this._super(angular.extend({
+          operation: 'users',
+          UUID: currentCustomer.uuid
+        }, filter));
       },
       removeInstance: function(user) {
-        var vm = this;
         var deferred = $q.defer();
         var promises = user.projects.map(function(project) {
           return projectPermissionsService.deletePermission(project.permission);
@@ -930,12 +926,11 @@
         $uibModal.open({
           templateUrl: 'views/directives/add-team-member.html',
           controller: 'AddTeamMemberDialogController',
-          scope: dialogScope,
+          scope: dialogScope
         }).result.then(function() {
-          this.service.clearAllCacheForCurrentEndpoint();
+          controllerScope.resetCache();
           customerPermissionsService.clearAllCacheForCurrentEndpoint();
-          this.getList();
-        }.bind(this));
+        });
       }
     });
 

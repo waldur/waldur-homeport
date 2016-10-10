@@ -79,9 +79,9 @@
 
       .state('organization.team', {
         url: 'team/',
-        templateUrl: 'views/partials/list.html',
+        templateUrl: 'views/partials/filtered-list.html',
         controller: 'CustomerTeamTabController',
-        controllerAs: 'Ctrl',
+        controllerAs: 'ListController',
         data: {
           pageTitle: 'Team'
         }
