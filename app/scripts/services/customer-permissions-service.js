@@ -1,8 +1,8 @@
 (function() {
   angular.module('ncsaas')
-    .service('customerPermissionsService', ['$q', 'baseServiceClass', customerPermissionsService]);
+    .service('customerPermissionsService', ['$q', 'baseServiceClass', 'ncUtils', customerPermissionsService]);
 
-  function customerPermissionsService($q, baseServiceClass) {
+  function customerPermissionsService($q, baseServiceClass, ncUtils) {
     var ServiceClass = baseServiceClass.extend({
       init:function() {
         this._super();
@@ -13,10 +13,7 @@
         return this.$delete(this.getPermissionKey(permission));
       },
 
-      getPermissionKey: function(url) {
-        var arr = url.split('/');
-        return arr[arr.length-2];
-      },
+      getPermissionKey: ncUtils.getUUID,
 
       userHasCustomerRole: function(username, role, customerUUID) {
         var deferred = $q.defer(),

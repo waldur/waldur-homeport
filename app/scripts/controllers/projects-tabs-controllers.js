@@ -201,6 +201,94 @@
 })();
 
 (function() {
+
+  angular.module('ncsaas')
+    .controller('VolumesListController', [
+      'BaseProjectResourcesTabController',
+      VolumesListController]);
+
+  function VolumesListController(BaseProjectResourcesTabController) {
+    var controllerScope = this;
+    var ResourceController = BaseProjectResourcesTabController.extend({
+      init:function() {
+        this.controllerScope = controllerScope;
+        this._super();
+      },
+      getList: function(filter) {
+        return this._super(angular.extend({}, filter, {
+          resource_type: 'OpenStack.Volume'
+        }));
+      },
+      getTableOptions: function() {
+        var options = this._super();
+        options.noDataText = 'You have no volumes yet.';
+        options.noMatchesText = 'No volumes found matching filter.';
+        return options;
+      },
+      getImportTitle: function() {
+        return 'Import volumes';
+      },
+      getCreateTitle: function() {
+        return 'Add volumes';
+      }
+    });
+    controllerScope.__proto__ = new ResourceController();
+  }
+})();
+
+(function() {
+
+  angular.module('ncsaas')
+    .controller('SnapshotsListController', [
+      'BaseProjectResourcesTabController', 'ncUtils', '$state',
+      SnapshotsListController]);
+
+  function SnapshotsListController(BaseProjectResourcesTabController, ncUtils, $state) {
+    var controllerScope = this;
+    var ResourceController = BaseProjectResourcesTabController.extend({
+      init:function() {
+        this.controllerScope = controllerScope;
+        this._super();
+        this.rowFields.push('source_volume');
+        this.rowFields.push('source_volume_name');
+      },
+      getList: function(filter) {
+        return this._super(angular.extend({}, filter, {
+          resource_type: 'OpenStack.Snapshot'
+        }));
+      },
+      getTableOptions: function() {
+        var options = this._super();
+        options.noDataText = 'You have no snapshots yet.';
+        options.noMatchesText = 'No snapshots found matching filter.';
+        options.columns.push({
+          title: 'Volume',
+          render: function(data, type, row, meta) {
+            if (!row.source_volume) {
+              return 'Not known';
+            }
+            var uuid = ncUtils.getUUID(row.source_volume);
+            var href = $state.href('resources.details', {
+              uuid: uuid,
+              resource_type: 'OpenStack.Volume'
+            });
+            return ncUtils.renderLink(href, row.source_volume_name || 'Link');
+          }
+        });
+        return options;
+      },
+      getImportTitle: function() {
+        return 'Import snapshots';
+      },
+      getCreateTitle: function() {
+        return 'Add snapshots';
+      }
+    });
+    controllerScope.__proto__ = new ResourceController();
+  }
+})();
+
+(function() {
   angular.module('ncsaas')
     .controller('ProjectSupportTabController', [
       'baseControllerListClass',

@@ -58,11 +58,11 @@
           })
         ]).finally(function() {
           vm.loading = false;
-          vm.getTableOptions();
+          vm.tableOptions = vm.getTableOptions();
         });
       },
       getTableOptions: function() {
-        this.tableOptions = {
+        return {
           searchFieldName: 'name',
           noDataText: 'You have no resources yet.',
           noMatchesText: 'No resources found matching filter.',
@@ -77,25 +77,20 @@
                   uuid: row.uuid,
                   resource_type: row.resource_type
                 });
-                return '<a href="{href}">{name}</a>'
-                          .replace('{href}', href)
-                          .replace('{name}', img + ' ' + row.name);
+                return ncUtils.renderLink(href, img + ' ' + row.name);
               }
             },
             {
               title: 'Provider',
               render: function(data, type, row, meta) {
-                var parts = row.customer.split('/');
-                var customer_uuid = parts[parts.length - 2];
+                var customer_uuid = ncUtils.getUUID(row.customer);
                 var provider_type = row.resource_type.split(".")[0];
                 var href = $state.href('organization.providers', {
                   uuid: customer_uuid,
                   providerUuid: row.service_uuid,
                   providerType: provider_type
                 });
-                return '<a href="{href}">{name}</a>'
-                          .replace('{href}', href)
-                          .replace('{name}', row.service_name);
+                return ncUtils.renderLink(href, row.service_name);
               }
             },
             {
@@ -136,7 +131,9 @@
         if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('import') == -1) {
           actions.push(this.getImportAction());
         }
-        actions.push(this.getCreateAction());
+        if (this.category) {
+          actions.push(this.getCreateAction());
+        }
         actions.push(this.getMapAction());
         return actions;
       },
@@ -257,10 +254,12 @@
       },
       getList: function(filter) {
         var query = angular.extend({}, filter, {
-          resource_category: this.categories[this.category],
           field: this.rowFields
         });
-        this.updateFilters(filter);
+        if (this.category) {
+          query.resource_category = this.categories[this.category];
+          this.updateFilters(filter);
+        }
         return this._super(query);
       },
       updateFilters: function(filter) {

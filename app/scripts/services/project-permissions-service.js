@@ -2,9 +2,9 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('projectPermissionsService', ['baseServiceClass', projectPermissionsService]);
+    .service('projectPermissionsService', ['baseServiceClass', 'ncUtils', projectPermissionsService]);
 
-  function projectPermissionsService(baseServiceClass) {
+  function projectPermissionsService(baseServiceClass, ncUtils) {
     /*jshint validthis: true */
     var ServiceClass = baseServiceClass.extend({
       init:function() {
@@ -16,10 +16,7 @@
         return this.$delete(this.getPermissionKey(permission));
       },
 
-      getPermissionKey: function(url) {
-        var arr = url.split('/');
-        return arr[arr.length-2];
-      }
+      getPermissionKey: ncUtils.getUUID
     });
     return new ServiceClass();
   }
