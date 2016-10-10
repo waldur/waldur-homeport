@@ -827,9 +827,10 @@
               }
             });
           });
+          vm.loading = true;
           vm.tableOptions = {
             noDataText: 'You have no team members yet',
-            noMatchesText: 'No alerts found matching filter.',
+            noMatchesText: 'No members found matching filter.',
             searchFieldName: 'full_name',
             columns: [
               {
@@ -897,6 +898,7 @@
             });
           }
         });
+        vm.loading = false;
       },
       getList: function(filter) {
         var vm = this;
