@@ -790,8 +790,6 @@
         '$q',
         '$rootScope',
         '$uibModal',
-        'ENTITYLISTFIELDTYPES',
-        '$timeout',
         '$state',
         CustomerTeamTabController
       ]);
@@ -806,8 +804,6 @@
       $q,
       $rootScope,
       $uibModal,
-      ENTITYLISTFIELDTYPES,
-      $timeout,
       $state) {
     var controllerScope = this;
     var TeamController = baseControllerListClass.extend({
@@ -818,70 +814,7 @@
         this.hideNoDataText = true;
         var vm = this;
         this._super();
-        // vm.tableOptions = null;
-        vm.tableOptions = {
-          noDataText: 'You have no team members yet',
-          noMatchesText: 'No alerts found matching filter.',
-          searchFieldName: 'full_name',
-          columns: [
-            {
-              title: '',
-              render: function(data, type, row, meta) {
-                var gravatarSrc = '';
-                return '<span class="avatar"><img gravatar-src="{gravatarSrc}" gravatar-size="100" alt="" class="avatar-img"></span>'
-                  .replace('{gravatarSrc}', gravatarSrc);
-              }
-            },
-            {
-              title: 'Member',
-              render: function(data, type, row, meta) {
-                return row.full_name || row.username;
-              }
-            },
-            {
-              title: 'Owner',
-              render: function(data, type, row, meta) {
-                var cls = row.role == 'Owner' ? 'check' : 'minus';
-                var title = row.role;
-                return '<span class="icon {cls}" title="{title}"></span>'
-                  .replace('{cls}', cls)
-                  .replace('{title}', title);
-              }
-            },
-            {
-              title: 'Projects with admin privileges:',
-              render: function(data, type, row, meta) {
-                return row.projects.map(function(item) {
-                  var projectName = item.name;
-                  var href = $state.href('project.details', { uuid: item.uuid });
-                  return '<a href="{href}">{projectName}</a>'
-                    .replace('{projectName}', projectName)
-                    .replace('{href}', href)
-                }).join(', ');
-              }
-            }
-
-          ],
-          tableActions: [
-            {
-              name: '<i class="fa fa-plus"></i> Add member',
-              callback: vm.openPopup.bind(vm)
-            }
-          ],
-          rowActions: [
-            {
-              name: '<i class="fa fa-pencil"></i> Edit',
-              callback: vm.openPopup.bind(vm)
-            },
-            {
-              name: '<i class="fa fa-trash"></i> Remove',
-              className: 'danger',
-              callback: vm.remove.bind(vm)
-            }
-          ]
-        };
-
-
+        vm.tableOptions = null;
       },
       afterGetList: function() {
         var vm = this;
@@ -894,7 +827,75 @@
               }
             });
           });
-
+          vm.tableOptions = {
+            noDataText: 'You have no team members yet',
+            noMatchesText: 'No alerts found matching filter.',
+            searchFieldName: 'full_name',
+            columns: [
+              {
+                title: '',
+                render: function(data, type, row, meta) {
+                  var gravatarSrc = row.email;
+                  return '<span class="avatar"><img gravatar-src="\'{gravatarSrc}\'" gravatar-size="100" alt="" class="avatar-img"></span>'
+                    .replace('{gravatarSrc}', gravatarSrc);
+                }
+              },
+              {
+                title: 'Member',
+                render: function(data, type, row, meta) {
+                  return row.full_name || row.username;
+                }
+              },
+              {
+                title: 'Owner',
+                render: function(data, type, row, meta) {
+                  var cls = row.role == 'Owner' ? 'check' : 'minus';
+                  var title = row.role;
+                  return '<span class="icon {cls}" title="{title}"></span>'
+                    .replace('{cls}', cls)
+                    .replace('{title}', title);
+                }
+              }
+            ]
+          };
+          vm.setAdminTableFields();
+          !vm.tableOptionsSet && $rootScope.$broadcast('tablePopulated');
+        });
+      },
+      setAdminTableFields: function() {
+        var vm = this;
+        vm.currentCustomer.owners.forEach(function(item) {
+          if (item.uuid === vm.currentUser.uuid) {
+            vm.tableOptions.tableActions = [
+              {
+                name: '<i class="fa fa-plus"></i> Add member',
+                callback: vm.openPopup.bind(vm)
+              }
+            ];
+            vm.tableOptions.rowActions = [
+              {
+                name: '<i class="fa fa-pencil"></i> Edit',
+                callback: vm.openPopup.bind(vm)
+              },
+              {
+                name: '<i class="fa fa-trash"></i> Remove',
+                className: 'danger',
+                callback: vm.remove.bind(vm)
+              }
+            ];
+            vm.tableOptions.columns.push({
+              title: 'Projects with admin privileges:',
+              render: function(data, type, row, meta) {
+                return row.projects.map(function(item) {
+                  var projectName = item.name;
+                  var href = $state.href('project.details', { uuid: item.uuid });
+                  return '<a href="{href}">{projectName}</a>'
+                    .replace('{projectName}', projectName)
+                    .replace('{href}', href)
+                }).join(', ');
+              }
+            });
+          }
         });
       },
       getList: function(filter) {
