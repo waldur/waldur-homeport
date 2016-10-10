@@ -818,10 +818,11 @@
         this.hideNoDataText = true;
         var vm = this;
         this._super();
+        // vm.tableOptions = null;
         vm.tableOptions = {
-          noDataText: 'No alerts yet',
+          noDataText: 'You have no team members yet',
           noMatchesText: 'No alerts found matching filter.',
-          searchFieldName: 'message',
+          searchFieldName: 'full_name',
           columns: [
             {
               title: '',
@@ -880,6 +881,7 @@
           ]
         };
 
+
       },
       afterGetList: function() {
         var vm = this;
@@ -898,16 +900,17 @@
       getList: function(filter) {
         var vm = this;
         filter = filter || {};
+        var fn = this._super.bind(this);
         var currentUserPromise = usersService.getCurrentUser();
         var currentCustomerPromise = currentStateService.getCustomer();
-        $q.all([currentUserPromise, currentCustomerPromise]).then(function(result) {
+        return $q.all([currentUserPromise, currentCustomerPromise]).then(function(result) {
           vm.currentUser = result[0];
           vm.currentCustomer = result[1];
+          if (vm.currentCustomer) {
+            filter = angular.extend({operation: 'users', UUID: vm.currentCustomer.uuid}, filter);
+            return fn(filter);
+          }
         });
-        if (vm.currentCustomer) {
-          filter = angular.extend({operation: 'users', UUID: vm.currentCustomer.uuid}, filter);
-        }
-        return this._super(filter);
       },
       removeInstance: function(user) {
         var deferred = $q.defer();
@@ -941,11 +944,7 @@
           controller: 'AddTeamMemberDialogController',
           scope: dialogScope
         }).result.then(function() {
-          this.service.clearAllCacheForCurrentEndpoint();
-          customerPermissionsService.clearAllCacheForCurrentEndpoint();
-          $timeout(function() {
             controllerScope.resetCache();
-          });
         }.bind(this));
       }
     });

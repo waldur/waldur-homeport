@@ -56,7 +56,7 @@
               hasActionsBlock = true;
             }
           });
-          if (options.rowActions && !hasActionsBlock) {
+          if (!hasActionsBlock) {
             var actionColumn = getActionColumn(options.rowActions, options.actionsColumnWidth);
             columns.push(actionColumn);
           }
