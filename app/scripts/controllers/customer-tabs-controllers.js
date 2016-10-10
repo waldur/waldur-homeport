@@ -787,6 +787,8 @@
         'projectPermissionsService',
         'usersService',
         'currentStateService',
+        'currentUser',
+        'currentCustomer',
         '$q',
         '$rootScope',
         '$uibModal',
@@ -801,6 +803,8 @@
       projectPermissionsService,
       usersService,
       currentStateService,
+      currentUser,
+      currentCustomer,
       $q,
       $rootScope,
       $uibModal,
@@ -810,82 +814,43 @@
       init: function() {
         this.controllerScope = controllerScope;
         this.service = customersService;
-        this.searchFieldName = 'full_name';
         this.hideNoDataText = true;
-        var vm = this;
+        this.isOwnerOrStaff = customersService.checkCustomerUser(currentCustomer, currentUser);
+        this.tableOptions = this.getTableOptions();
         this._super();
-        vm.tableOptions = null;
       },
-      afterGetList: function() {
-        var vm = this;
-        usersService.getList().then(function(result) {
-          vm.list.forEach(function(item, i) {
-            result.forEach(function(item2) {
-              if (item.uuid == item2.uuid) {
-                vm.list[i].email = item2.email;
-                vm.list[i].username = item2.username;
+      getTableOptions: function() {
+        return {
+          noDataText: 'You have no team members yet',
+          noMatchesText: 'No members found matching filter.',
+          searchFieldName: 'full_name',
+          columns: [
+            {
+              title: 'Member',
+              render: function(data, type, row, meta) {
+                var avatar = '<img gravatar-src="\'{gravatarSrc}\'" gravatar-size="100" alt="" class="avatar-img img-xs">'
+                  .replace('{gravatarSrc}', row.email);
+                return avatar + ' ' + row.full_name || row.username;
               }
-            });
-          });
-          vm.loading = true;
-          vm.tableOptions = {
-            noDataText: 'You have no team members yet',
-            noMatchesText: 'No members found matching filter.',
-            searchFieldName: 'full_name',
-            columns: [
-              {
-                title: '',
-                render: function(data, type, row, meta) {
-                  var gravatarSrc = row.email;
-                  return '<span class="avatar"><img gravatar-src="\'{gravatarSrc}\'" gravatar-size="100" alt="" class="avatar-img"></span>'
-                    .replace('{gravatarSrc}', gravatarSrc);
-                }
-              },
-              {
-                title: 'Member',
-                render: function(data, type, row, meta) {
-                  return row.full_name || row.username;
-                }
-              },
-              {
-                title: 'Owner',
-                render: function(data, type, row, meta) {
-                  var cls = row.role == 'Owner' ? 'check' : 'minus';
-                  var title = row.role;
-                  return '<span class="icon {cls}" title="{title}"></span>'
-                    .replace('{cls}', cls)
-                    .replace('{title}', title);
-                }
+            },
+            {
+              title: 'E-mail',
+              render: function(data, type, row, meta) {
+                return row.email;
               }
-            ]
-          };
-          vm.setAdminTableFields();
-          !vm.tableOptionsSet && $rootScope.$broadcast('tablePopulated');
-        });
-      },
-      setAdminTableFields: function() {
-        var vm = this;
-        vm.currentCustomer.owners.forEach(function(item) {
-          if (item.uuid === vm.currentUser.uuid) {
-            vm.tableOptions.tableActions = [
-              {
-                name: '<i class="fa fa-plus"></i> Add member',
-                callback: vm.openPopup.bind(vm)
+            },
+            {
+              title: 'Owner',
+              render: function(data, type, row, meta) {
+                var cls = row.role == 'Owner' ? 'check' : 'minus';
+                var title = row.role;
+                return '<span class="icon {cls}" title="{title}"></span>'
+                  .replace('{cls}', cls)
+                  .replace('{title}', title || 'System administrator');
               }
-            ];
-            vm.tableOptions.rowActions = [
-              {
-                name: '<i class="fa fa-pencil"></i> Edit',
-                callback: vm.openPopup.bind(vm)
-              },
-              {
-                name: '<i class="fa fa-trash"></i> Remove',
-                className: 'danger',
-                callback: vm.remove.bind(vm)
-              }
-            ];
-            vm.tableOptions.columns.push({
-              title: 'Projects with admin privileges:',
+            },
+            {
+              title: 'Projects with admin privileges',
               render: function(data, type, row, meta) {
                 return row.projects.map(function(item) {
                   var projectName = item.name;
@@ -895,25 +860,41 @@
                     .replace('{href}', href)
                 }).join(', ');
               }
-            });
-          }
-        });
-        vm.loading = false;
+            }
+          ],
+          tableActions: this.getTableActions(),
+          rowActions: this.getRowActions()
+        };
+      },
+      getTableActions: function() {
+        if (this.isOwnerOrStaff) {
+          return [
+            {
+              name: '<i class="fa fa-plus"></i> Add member',
+              callback: this.openPopup.bind(this)
+            }
+          ];
+        }
+      },
+      getRowActions: function() {
+        if (this.isOwnerOrStaff) {
+          return [
+            {
+              name: '<i class="fa fa-pencil"></i> Edit',
+              callback: this.openPopup.bind(this)
+            },
+            {
+              name: '<i class="fa fa-trash"></i> Remove',
+              callback: this.remove.bind(this)
+            }
+          ];
+        }
       },
       getList: function(filter) {
-        var vm = this;
-        filter = filter || {};
-        var fn = this._super.bind(this);
-        var currentUserPromise = usersService.getCurrentUser();
-        var currentCustomerPromise = currentStateService.getCustomer();
-        return $q.all([currentUserPromise, currentCustomerPromise]).then(function(result) {
-          vm.currentUser = result[0];
-          vm.currentCustomer = result[1];
-          if (vm.currentCustomer) {
-            filter = angular.extend({operation: 'users', UUID: vm.currentCustomer.uuid}, filter);
-            return fn(filter);
-          }
-        });
+        return this._super(angular.extend({
+          operation: 'users',
+          UUID: currentCustomer.uuid
+        }, filter));
       },
       removeInstance: function(user) {
         var deferred = $q.defer();
@@ -947,8 +928,9 @@
           controller: 'AddTeamMemberDialogController',
           scope: dialogScope
         }).result.then(function() {
-            controllerScope.resetCache();
-        }.bind(this));
+          controllerScope.resetCache();
+          customerPermissionsService.clearAllCacheForCurrentEndpoint();
+        });
       }
     });
 

@@ -4,9 +4,9 @@
 
   angular.module('ncsaas').directive('responsiveTable', responsiveTable);
 
-  responsiveTable.$inject = ['$timeout', '$compile', '$rootScope'];
+  responsiveTable.$inject = ['$timeout', '$compile'];
 
-  function responsiveTable($timeout, $compile, $rootScope) {
+  function responsiveTable($timeout, $compile) {
     return {
       restrict: 'E',
       scope: {
@@ -14,11 +14,9 @@
       },
       template: '<table class="table table-striped"/>',
       link: function(scope, element) {
-        var options = null;
+        var options = scope.controller.tableOptions;
 
-        $rootScope.$on('tablePopulated', function() {
-          scope.controller.tableOptionsSet = true;
-          options = scope.controller.tableOptions;
+        $timeout(function() {
           var table = initTable();
           connectRowButtons(table);
           connectWatcher(table);
@@ -71,7 +69,7 @@
               zeroRecords: options.noMatchesText
             },
             fnDrawCallback: function() {
-              $(element).find('.actions, .avatar').each(function(index, element) {
+              $(element).find('tr').each(function(index, element) {
                 $compile(element)(scope);
               });
             }
