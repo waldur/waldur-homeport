@@ -850,9 +850,27 @@
               }
             },
             {
-              title: 'Projects with admin privileges',
+              title: 'Project manager in:',
               render: function(data, type, row, meta) {
-                return row.projects.map(function(item) {
+                var filteredProjects = row.projects.filter(function(item) {
+                  return item.role === 'Manager';
+                });
+                return filteredProjects.map(function(item) {
+                  var projectName = item.name;
+                  var href = $state.href('project.details', { uuid: item.uuid });
+                  return '<a href="{href}">{projectName}</a>'
+                    .replace('{projectName}', projectName)
+                    .replace('{href}', href)
+                }).join(', ');
+              }
+            },
+            {
+              title: 'System administrator in:',
+              render: function(data, type, row, meta) {
+                var filteredProjects = row.projects.filter(function(item) {
+                  return item.role === 'Administrator';
+                });
+                return filteredProjects.map(function(item) {
                   var projectName = item.name;
                   var href = $state.href('project.details', { uuid: item.uuid });
                   return '<a href="{href}">{projectName}</a>'
