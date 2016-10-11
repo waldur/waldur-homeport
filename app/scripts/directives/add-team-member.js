@@ -55,11 +55,12 @@
                         });
 
                         function filterPermissions (item, role) {
+                            console.log('role ', role);
                             var isRolePresent = false;
                             for (var i = 0; i < permissions.length; i++) {
                                 if (permissions[i].project_uuid === item.uuid && permissions[i].role === role) {
                                     isRolePresent = true;
-                                    break
+                                    break;
                                 }
                             }
                             return isRolePresent;
@@ -147,8 +148,10 @@
                 if (scope.editUser) {
                     if (scope.userModel.role !== scope.editUser.role) {
                         if (scope.userModel.role !== 'Owner') {
+                            console.log('oops');
                             return customerPermissionsService.deletePermission(scope.editUser.permission);
                         } else {
+                            console.log('not deleting - just edit ');
                             permission.user = scope.editUser.url;
                             return permission.$save();
                         }
@@ -168,8 +171,6 @@
                     obj[project.uuid] = project.permission;
                     return obj;
                 }, {});
-            } else {
-                existingProjects = {};
             }
 
             if (scope.userModel.projects) {
@@ -180,7 +181,7 @@
             }
 
             if (scope.userModel.projectsManagerRole) {
-                currentManagerProjects =  scope.userModel.projectsManagerRole.reduce(function(obj, project) {
+                currentManagerProjects = scope.userModel.projectsManagerRole.reduce(function(obj, project) {
                     obj[project.uuid] = true;
                     return obj;
                 }, {});
