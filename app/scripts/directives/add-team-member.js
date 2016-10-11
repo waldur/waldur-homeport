@@ -55,7 +55,6 @@
                         });
 
                         function filterPermissions (item, role) {
-                            console.log('role ', role);
                             var isRolePresent = false;
                             for (var i = 0; i < permissions.length; i++) {
                                 if (permissions[i].project_uuid === item.uuid && permissions[i].role === role) {
@@ -148,10 +147,8 @@
                 if (scope.editUser) {
                     if (scope.userModel.role !== scope.editUser.role) {
                         if (scope.userModel.role !== 'Owner') {
-                            console.log('oops');
                             return customerPermissionsService.deletePermission(scope.editUser.permission);
                         } else {
-                            console.log('not deleting - just edit ');
                             permission.user = scope.editUser.url;
                             return permission.$save();
                         }
