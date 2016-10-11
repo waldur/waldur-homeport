@@ -1,9 +1,12 @@
+'use strict';
 /*jshint camelcase: false */
 
 var basePort = 8001,
   testPort = 8002;
 
 module.exports = function(grunt) {
+    require('load-grunt-tasks')(grunt);
+    var webpack = require('webpack');
 
     grunt.initConfig({
 
@@ -647,6 +650,37 @@ module.exports = function(grunt) {
             }
         },
 
+        webpack: {
+            options: {
+                entry: './app/scripts/index.js',
+                output: {
+                    path: __dirname + '/app/static/js',
+                    filename: 'bundle.js'
+                },
+                module: {
+                    loaders: [
+                        {
+                            test: /\.js$/,
+                            loader: 'ng-annotate!babel',
+                            exclude: /node_modules/
+                        }
+                    ]
+                }
+            },
+            dev: {
+                watch: true,
+                keepalive: true,
+                failOnError: false,
+                devtool: 'source-map',
+                debug: true
+            },
+            prod: {
+                plugins: [
+                    new webpack.optimize.DedupePlugin()
+                ]
+            }
+        },
+
         watch: {
             options: {
                 livereload: true
@@ -760,7 +794,11 @@ module.exports = function(grunt) {
                     'app/static/js/angular/xeditable.js',
                     'app/static/js/angular/angular-sanitize.js',
                     'app/static/js/d3.js',
-                    'app/scripts/*.js',
+                    'app/scripts/class.js',
+                    'app/scripts/inspinia.js',
+                    'app/scripts/app.js',
+                    'app/scripts/filters.js',
+                    'app/scripts/utils.js',
                     'app/scripts/configs/*.js',
                     'app/scripts/controllers/*.js',
                     'app/scripts/directives/*.js',
@@ -783,6 +821,7 @@ module.exports = function(grunt) {
                     'app/static/js/datatables/buttons.bootstrap.min.js',
                     'app/static/js/datatables/dataTables.responsive.min.js',
                     'app/static/js/datatables/responsive.bootstrap.js',
+                    'app/static/js/bundle.js',
                 ],
                 dest: 'app/static/js/main/main.js'
             }
@@ -909,28 +948,22 @@ module.exports = function(grunt) {
 
     });
 
-    require('load-grunt-tasks')(grunt);
-
     var mode = grunt.option('mode') || 'modeDevelop';
-
-    grunt.loadNpmTasks('grunt-angular-gettext');
-    grunt.loadNpmTasks('grunt-po2json-angular-translate');
-    grunt.loadNpmTasks('grunt-protractor-runner');
 
     grunt.registerTask(
       'build', ['copy:main', 'image', 'sass', 'autoprefixer', 'cssmin']);
     grunt.registerTask(
-      'run', ['po2json_angular_translate', 'copy:main', 'env:dev', 'preprocess:index', 'connect:server', 'image', 'sass', 'autoprefixer',
+      'run', ['po2json_angular_translate', 'copy:main', 'env:dev', 'preprocess:index', 'connect:server', 'sass', 'autoprefixer', 'webpack:dev',
           'copy:' + mode, 'focus:dev']);
     grunt.registerTask('serve', ['connect',]);
     grunt.registerTask('default', ['run']);
 
     grunt.registerTask(
-      'prod', ['copy:main', 'env:prod', 'preprocess:index', 'connect:server', 'image', 'sass', 'autoprefixer', 'concat',
+      'prod', ['copy:main', 'env:prod', 'preprocess:index', 'connect:server', 'image', 'sass', 'autoprefixer', 'webpack:prod', 'concat',
           'uglify', 'cssmin', 'focus:prod']);
 
     grunt.registerTask(
-      'prodbatch', ['copy:main', 'copy:' + mode, 'env:prod', 'preprocess:index', 'image', 'sass', 'autoprefixer', 'concat',
+      'prodbatch', ['copy:main', 'copy:' + mode, 'env:prod', 'preprocess:index', 'image', 'sass', 'autoprefixer', 'webpack:prod', 'concat',
           'uglify', 'cssmin']);
 
     grunt.registerTask('modePrivateIaas', ['copy:modePrivateIaas']);
