@@ -1,5 +1,27 @@
 # Development guidelines
 
+# Component approach
+
+Previously all code have been split by several directories: scripts, views, assets, tests.
+In scripts directory there was configs, controllers, directives and services.
+As project has even grown further, it became apparent that this approach does not scale very well.
+Think of situation when are working on some component and you need to switch all the time between its parts.
+Moreover, all these parts have been connected to the single Angular module and it made unit testing infeasible.
+
+In order to improve modularity and testability, we need to adopt component approach.
+Each component consists of script, SCSS stylesheet, HTML template and unit test.
+All these files reside in one directory, one directory for each component.
+
+Script imports template and stylesheet and exports component.
+Unit test imports component and specifes test case.
+In the module root there's script which declares components in the module.
+In the application root there's module which connects all other modules.
+
+Stylesheet file may import dependencies from core module.
+
+In order to inject dependencies into component, ng-annotate-loader is used.
+It is required to mark each function which needs annotations, with the following comment: `// @ngInject`
+
 ## Getting data from backend to view
 
 To get data from backend to view (and vice versa) 4 (3) layers have to be realized.
@@ -77,94 +99,6 @@ Workflow looks as following:
 
  4. Run `grunt po2json_angular_translate`. It will convert PO files to JSON files at `static/js/i18n/locale-LANGUAGECODE.json`
 
-
-## details-view directive
-
-  Directive is used to show details profile
-  
-  Details view directive calling looks like:
-  
-    <details-view details-options="CustomerDetailUpdate.detailsViewOptions"
-                  details-controller="CustomerDetailUpdate"></details-view>
-    
-  - details-options - object of directive options
-  - details-controller - current controller
-  
-  Options object looks like:
-    
-    this.detailsViewOptions = {
-      title: 'Customer',
-      activeTab: $stateParams.tab ? $stateParams.tab : this.activeTab,
-      hasLogo: true,
-      listState: 'organizations.list',
-      aboutFields: [
-        {
-          fieldKey: 'name',
-          isEditable: true,
-          className: 'name'
-        },
-        {
-          fieldKey: 'contact_details',
-          isEditable: true
-        }
-      ],
-      tabs: [
-        {
-          title: 'Resources',
-          key: 'resources',
-          viewName: 'tabResources'
-        },
-        {
-          title: 'Projects',
-          key: 'projects',
-          viewName: 'tabProjects'
-        },
-        {
-          title: 'Services',
-          key: 'services',
-          viewName: 'tabServices'
-        }
-      ]
-    };
-  
-  Options object
-  
-    title       - string - name of entity
-    activeTab   - string - key of tab witch should be active at first
-    hasLogo     - bool   - state of logo showing 
-    listState   - string - link to list page
-    aboutFields - array  - objects with options for fields
-        fieldKey   - string - key for filed
-        isEditable - bool   - state of using edit in place directive (in controller should be 'canEdit' variable)
-        className  - string - class name for field
-    tabs        - array  - objects with options for tabs
-        title      - string - title of tab
-        key        - string - key of tab
-        viewName   - string - key for tab view
-
-## checkQuotas directive
-
-Used on links to check whether it should be disabled based on current quotas or not. <br/>
-In addition optional tooltip can be shown to notify user about lack of quotas. <br/>
-Two options in controller should be defined e.g:
-
-     this.entityOptions = {
-       entityData: {
-         ...
-         checkQuotas: 'service'
-       },
-     ...
-     }
-
-checkQuotas possible values: user, project, service, resource <br/>
-
-    <div class="tooltip-relative inline"
-         check-quotas="{{entityOptions.entityData.checkQuotas}}"
-         sref="{{ entityOptions.entityData.createLink }}"
-         class-link="button"
-         tooltip-type="list-items">
-        <span>{{ entityOptions.entityData.createLinkText }}</span>
-    </div>
 
 ## submitButton directive
 
