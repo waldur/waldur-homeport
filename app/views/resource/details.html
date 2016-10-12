@@ -1,18 +1,79 @@
 <div ng-controller="ResourceDetailUpdateController as controller">
-    <div class="tabs-container m-l-sm">
-        <uib-tabset>
-            <uib-tab heading="Details">
-                <div class="panel-body" ng-include="'views/resource/tab-details.html'"></div>
-            </uib-tab>
-            <uib-tab heading="Alerts">
-                <div class="panel-body" ng-include="'views/resource/tab-alerts.html'"></div>
-            </uib-tab>
-            <uib-tab heading="Graphs" ng-if="controller.showGraphs">
-                <div class="panel-body" ng-include="'views/resource/tab-graphs.html'"></div>
-            </uib-tab>
-            <uib-tab heading="SLA" ng-if="controller.showSla">
-                <div class="panel-body" ng-include="'views/resource/tab-sla.html'"></div>
-            </uib-tab>
-        </uib-tabset>
+  <div class="row" ng-if="controller.model">
+    <div class="col-sm-8">
+      <div class="wrapper wrapper-content">
+        <div class="ibox">
+          <div class="ibox-content">
+            <div class="client-detail">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="m-b-md">
+                    <div class="pull-right">
+                      <action-button-resource button-model="controller.model"></action-button-resource>
+                    </div>
+                    <h2>Resource details</h2>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <resource-details resource="controller.model"></resource-details>
+              </div>
+              <div class="row">
+                <div class="col-lg-12">
+                  <uib-tabset>
+                    <uib-tab heading="Volumes" ng-if="::controller.model.volumes.length">
+                      <div class="panel-body">
+                        <div class="row">
+                          <table class="table table-bordered">
+                            <tr ng-repeat="volume in controller.model.volumes">
+                              <td>
+                                <a ui-sref="resources.details({uuid: volume.uuid, resource_type: volume.resource_type})">
+                                  {{ ::volume.name }}
+                                </a>
+
+                                ({{ ::volume.bootable && 'bootable ' || '' }}{{ ::volume.size|filesize }})
+                              </td>
+                              <td><action-button-resource button-model="volume"></action-button-resource></td>
+                            </tr>
+                          </table>
+                        </div>
+                      </div>
+                    </uib-tab>
+                    <uib-tab heading="Alerts">
+                      <div class="panel-body" ng-include="'views/resource/tab-alerts.html'"></div>
+                    </uib-tab>
+                    <uib-tab heading="Graphs" ng-if="controller.showGraphs">
+                      <div class="panel-body" ng-include="'views/resource/tab-graphs.html'"></div>
+                    </uib-tab>
+                    <uib-tab heading="SLA" ng-if="controller.showSla">
+                      <div class="panel-body" ng-include="'views/resource/tab-sla.html'"></div>
+                    </uib-tab>
+                  </uib-tabset>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-4">
+      <div class="wrapper wrapper-content">
+        <div class="ibox">
+          <div class="ibox-content">
+            <div class="client-detail">
+              <div class="full-height-scroll" slimscroll="{height: '100%'}">
+                <strong>Last activity</strong>
+                <resource-events resource="controller.model"></resource-events>
+
+                <div ng-if="controller.expandUserData">
+                  <strong>User data</strong>
+                  <pre>{{ ::controller.model.user_data }}</pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 </div>

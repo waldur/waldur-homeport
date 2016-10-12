@@ -1,7 +1,9 @@
 <div ng-controller="ProjectDetailsController as ProjectCtrl">
     <sidebar items="items" context="context"></sidebar>
 </div>
-<div id="page-wrapper" class="white-bg" ng-controller="ResourceDetailUpdateController as ResourceCtrl">
+<div id="page-wrapper"
+    ng-class="$state.current.data.pageClass || 'white-bg'"
+    ng-controller="ResourceDetailUpdateController as ResourceCtrl">
     <div ng-if="!ResourceCtrl.model">
         <h1 class="text-center">
             <i class="icon fa-spinner fa-spin"></i>
