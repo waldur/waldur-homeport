@@ -6,7 +6,6 @@ var basePort = 8001,
 
 module.exports = function(grunt) {
     require('load-grunt-tasks')(grunt);
-    var webpack = require('webpack');
 
     grunt.initConfig({
 
@@ -650,36 +649,7 @@ module.exports = function(grunt) {
             }
         },
 
-        webpack: {
-            options: {
-                entry: './app/scripts/index.js',
-                output: {
-                    path: __dirname + '/app/static/js',
-                    filename: 'bundle.js'
-                },
-                module: {
-                    loaders: [
-                        {
-                            test: /\.js$/,
-                            loader: 'ng-annotate!babel',
-                            exclude: /node_modules/
-                        }
-                    ]
-                }
-            },
-            dev: {
-                watch: true,
-                keepalive: true,
-                failOnError: false,
-                devtool: 'source-map',
-                debug: true
-            },
-            prod: {
-                plugins: [
-                    new webpack.optimize.DedupePlugin()
-                ]
-            }
-        },
+        webpack: require('./webpack.config.js'),
 
         watch: {
             options: {

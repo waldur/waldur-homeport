@@ -3,6 +3,8 @@
 // Generated on 2014-08-10 using
 // generator-karma 0.8.3
 
+var webpackConfig = require('../webpack.config.js')
+
 module.exports = function(config) {
   'use strict';
 
@@ -20,14 +22,17 @@ module.exports = function(config) {
     files: [
       'bower_components/angular/angular.js',
       'bower_components/angular-mocks/angular-mocks.js',
-      'bower_components/angular-loader/angular-loader.js',
-      'bower_components/angular-cookies/angular-cookies.js',
-      'bower_components/angular-route/angular-route.js',
-      'bower_components/angular-resource/angular-resource.js',
-      'app/scripts/**/*.js',
-      'test/mock/**/*.js',
-      'test/unit/**/*.js'
+      'test/test_index.js',
     ],
+
+    // add webpack as preprocessor
+    preprocessors: {
+      'test/test_index.js': ['webpack']
+    },
+
+    webpack: {
+      module: webpackConfig.options.module
+    },
 
     // list of files / patterns to exclude
     exclude: [],
@@ -50,7 +55,8 @@ module.exports = function(config) {
     // Which plugins to enable
     plugins: [
       'karma-phantomjs-launcher',
-      'karma-jasmine'
+      'karma-jasmine',
+      'karma-webpack',
     ],
 
     // Continuous Integration mode
