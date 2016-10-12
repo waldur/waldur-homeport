@@ -1,4 +1,5 @@
 import template from './sparkline.html';
+import './sparkline.scss';
 
 export default function sparkline() {
   return {

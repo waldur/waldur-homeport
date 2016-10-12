@@ -1,9 +1,4 @@
-// Karma configuration
-// http://karma-runner.github.io/0.12/config/configuration-file.html
-// Generated on 2014-08-10 using
-// generator-karma 0.8.3
-
-var webpackConfig = require('../webpack.config.js')
+var webpackConfig = require('../webpack.config.js');
 
 module.exports = function(config) {
   'use strict';
@@ -30,9 +25,7 @@ module.exports = function(config) {
       'test/test_index.js': ['webpack']
     },
 
-    webpack: {
-      module: webpackConfig.options.module
-    },
+    webpack: webpackConfig.options,
 
     // list of files / patterns to exclude
     exclude: [],

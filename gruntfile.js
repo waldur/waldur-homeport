@@ -47,6 +47,7 @@ module.exports = function(grunt) {
                         'app/static/css/leaflet.css',
                         'app/static/css/flags16.css',
                         'app/static/css/datatables/*.css',
+                        'app/static/css/bundle.min.css',
                     ]
                 }
             }
