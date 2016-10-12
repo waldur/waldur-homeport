@@ -20,11 +20,14 @@
               </div>
               <div class="row">
                 <div class="col-lg-12">
-                  <uib-tabset>
-                    <uib-tab heading="Volumes" ng-if="::controller.model.volumes.length">
-                      <div class="panel-body">
+                  <uib-tabset active="active">
+                    <uib-tab heading="Alerts" index="'alerts'">
+                      <div class="panel-body" ng-if="active=='alerts'" ng-include="'views/resource/tab-alerts.html'"></div>
+                    </uib-tab>
+                    <uib-tab heading="Volumes" index="'volumes'" ng-if="controller.model.volumes.length">
+                      <div class="panel-body" ng-if="active=='volumes'">
                         <div class="row">
-                          <table class="table table-bordered">
+                          <table class="table table-responsive">
                             <tr ng-repeat="volume in controller.model.volumes">
                               <td>
                                 <a ui-sref="resources.details({uuid: volume.uuid, resource_type: volume.resource_type})">
@@ -33,14 +36,11 @@
 
                                 ({{ ::volume.bootable && 'bootable ' || '' }}{{ ::volume.size|filesize }})
                               </td>
-                              <td><action-button-resource button-model="volume"></action-button-resource></td>
+                              <td class="text-center"><action-button-resource button-model="volume"></action-button-resource></td>
                             </tr>
                           </table>
                         </div>
                       </div>
-                    </uib-tab>
-                    <uib-tab heading="Alerts">
-                      <div class="panel-body" ng-include="'views/resource/tab-alerts.html'"></div>
                     </uib-tab>
                     <uib-tab heading="Graphs" ng-if="controller.showGraphs">
                       <div class="panel-body" ng-include="'views/resource/tab-graphs.html'"></div>
