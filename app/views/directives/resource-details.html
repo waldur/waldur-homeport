@@ -43,6 +43,30 @@
         </a>
       </dd>
     </div>
+
+    <div class="m-b-xs" ng-if="::resource.instance">
+      <dt>Instance:</dt>
+      <dd>
+        <a ui-sref="resources.details({
+          uuid: resource.instance_uuid,
+          resource_type: 'OpenStack.Instance'
+        })">
+          {{ ::resource.instance_name }}
+        </a>
+      </dd>
+    </div>
+
+    <div class="m-b-xs" ng-if="::resource.source_volume">
+      <dt>Volume:</dt>
+      <dd>
+        <a ui-sref="resources.details({
+          uuid: resource.source_volume_uuid,
+          resource_type: 'OpenStack.Volume'
+        })">
+          {{ ::resource.source_volume_name }}
+        </a>
+      </dd>
+    </div>
   </dl>
 </div>
 <div class="col-lg-6">

@@ -4,52 +4,38 @@
       <div class="wrapper wrapper-content">
         <div class="ibox">
           <div class="ibox-content">
-            <div class="client-detail">
-              <div class="row">
-                <div class="col-lg-12">
-                  <div class="m-b-md">
-                    <div class="pull-right">
-                      <action-button-resource button-model="controller.model"></action-button-resource>
-                    </div>
-                    <h2>Resource details</h2>
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="m-b-md">
+                  <div class="pull-right">
+                    <action-button-resource button-model="controller.model"></action-button-resource>
                   </div>
+                  <h2>Resource details</h2>
                 </div>
               </div>
-              <div class="row">
-                <resource-details resource="controller.model"></resource-details>
-              </div>
-              <div class="row">
-                <div class="col-lg-12">
-                  <uib-tabset active="active">
-                    <uib-tab heading="Alerts" index="'alerts'">
-                      <div class="panel-body" ng-if="active=='alerts'" ng-include="'views/resource/tab-alerts.html'"></div>
-                    </uib-tab>
-                    <uib-tab heading="Volumes" index="'volumes'" ng-if="controller.model.volumes.length">
-                      <div class="panel-body" ng-if="active=='volumes'">
-                        <div class="row">
-                          <table class="table table-responsive">
-                            <tr ng-repeat="volume in controller.model.volumes">
-                              <td>
-                                <a ui-sref="resources.details({uuid: volume.uuid, resource_type: volume.resource_type})">
-                                  {{ ::volume.name }}
-                                </a>
-
-                                ({{ ::volume.bootable && 'bootable ' || '' }}{{ ::volume.size|filesize }})
-                              </td>
-                              <td class="text-center"><action-button-resource button-model="volume"></action-button-resource></td>
-                            </tr>
-                          </table>
-                        </div>
-                      </div>
-                    </uib-tab>
-                    <uib-tab heading="Graphs" ng-if="controller.showGraphs">
-                      <div class="panel-body" ng-include="'views/resource/tab-graphs.html'"></div>
-                    </uib-tab>
-                    <uib-tab heading="SLA" ng-if="controller.showSla">
-                      <div class="panel-body" ng-include="'views/resource/tab-sla.html'"></div>
-                    </uib-tab>
-                  </uib-tabset>
-                </div>
+            </div>
+            <div class="row">
+              <resource-details resource="controller.model"></resource-details>
+            </div>
+            <div class="row">
+              <div class="col-lg-12">
+                <uib-tabset active="active">
+                  <uib-tab heading="Alerts" index="'alerts'">
+                    <div class="panel-body" ng-if="active=='alerts'" ng-include="'views/resource/tab-alerts.html'"></div>
+                  </uib-tab>
+                  <uib-tab heading="Volumes" index="'volumes'" ng-if="controller.model.volumes.length">
+                    <div class="panel-body" ng-if="active=='volumes'" ng-include="'views/resource/tab-volumes.html'"></div>
+                  </uib-tab>
+                  <uib-tab heading="Snapshots" index="'snapshots'" ng-if="controller.model.resource_type == 'OpenStack.Volume'">
+                    <div class="panel-body" ng-if="active=='snapshots'" ng-include="'views/resource/tab-snapshots.html'"></div>
+                  </uib-tab>
+                  <uib-tab heading="Graphs" ng-if="controller.showGraphs">
+                    <div class="panel-body" ng-include="'views/resource/tab-graphs.html'"></div>
+                  </uib-tab>
+                  <uib-tab heading="SLA" ng-if="controller.showSla">
+                    <div class="panel-body" ng-include="'views/resource/tab-sla.html'"></div>
+                  </uib-tab>
+                </uib-tabset>
               </div>
             </div>
           </div>
