@@ -855,6 +855,9 @@
                 var filteredProjects = row.projects.filter(function(item) {
                   return item.role === 'Manager';
                 });
+                if (filteredProjects.length === 0) {
+                  return 'No projects are assigned to this role';
+                }
                 return filteredProjects.map(function(item) {
                   var projectName = item.name;
                   var href = $state.href('project.details', { uuid: item.uuid });
@@ -870,6 +873,9 @@
                 var filteredProjects = row.projects.filter(function(item) {
                   return item.role === 'Administrator';
                 });
+                if (filteredProjects.length === 0) {
+                  return 'No projects are assigned to this role';
+                }
                 return filteredProjects.map(function(item) {
                   var projectName = item.name;
                   var href = $state.href('project.details', { uuid: item.uuid });

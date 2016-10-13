@@ -35,6 +35,23 @@
         scope.currentCustomer = null;
         scope.refreshProjectChoices = refreshProjectChoices;
 
+        // scope.$watch('userModel.projects', watchAddedProjects);
+        // scope.$watch('userModel.projectsManagerRole', watchAddedProjects);
+        //
+        // function watchAddedProjects(newVal) {
+        //     if (newVal && newVal.length !== 0) {
+        //         scope.projects = scope.projects.filter(function(project) {
+        //             var projectAdded = false;
+        //             newVal.forEach(function(selectedProject) {
+        //                 if (project.uuid === selectedProject.uuid) {
+        //                     projectAdded = true;
+        //                 }
+        //             });
+        //             return !projectAdded;
+        //         });
+        //     }
+        // }
+
         function loadData() {
             if (scope.editUser) {
                 scope.addText = 'Save';
@@ -160,7 +177,7 @@
         }
 
         function saveProjectPermissions() {
-            var existingProjects = null;
+            var existingProjects = {};
             var currentManagerProjects = {};
             var currentProjects = {};
             if (scope.editUser) {
@@ -187,7 +204,7 @@
 
             var deletedPermissions = [];
             angular.forEach(existingProjects, function(permission, project_uuid) {
-                if (!currentProjects[project_uuid] || !currentManagerProjects[project_uuid]) {
+                if (!currentProjects[project_uuid] && !currentManagerProjects[project_uuid]) {
                     deletedPermissions.push(permission);
                 }
             });
