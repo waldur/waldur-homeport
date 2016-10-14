@@ -206,3 +206,35 @@
     controllerScope.__proto__ = new controllerClass();
   }
 })();
+
+(function() {
+  angular.module('ncsaas')
+    .controller('VolumeSnapshotsListController', [
+      'baseResourceListController',
+      '$stateParams',
+      VolumeSnapshotsListController
+    ]);
+
+  function VolumeSnapshotsListController(baseResourceListController, $stateParams) {
+    var controllerScope = this;
+    var ResourceController = baseResourceListController.extend({
+      init: function() {
+        this.controllerScope = controllerScope;
+        this._super();
+      },
+      getTableOptions: function() {
+        var options = this._super();
+        options.noDataText = 'You have no snapshots yet';
+        options.noMatchesText = 'No snapshots found matching filter.';
+        return options;
+      },
+      getFilter: function() {
+        return {
+          source_volume_uuid: $stateParams.uuid,
+          resource_type: 'OpenStack.Snapshot'
+        };
+      }
+    });
+    controllerScope.__proto__ = new ResourceController();
+  }
+})();

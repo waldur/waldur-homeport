@@ -3,9 +3,9 @@
 (function() {
   angular.module('ncsaas')
     .directive('resourceDetails', [
-      'resourceUtils', 'currentStateService', resourceDetails]);
+      'resourceUtils', 'ncUtils', 'currentStateService', resourceDetails]);
 
-  function resourceDetails(resourceUtils, currentStateService) {
+  function resourceDetails(resourceUtils, ncUtils, currentStateService) {
     return {
       restrict: 'E',
       scope: {
@@ -23,6 +23,14 @@
             scope.formatted_resource_type = resourceUtils.formatResourceType(resource);
             scope.state_class = resourceUtils.getStateClass(resource);
             resource.uptime = resourceUtils.getUptime(resource);
+
+            if (resource.instance) {
+              resource.instance_uuid = ncUtils.getUUID(resource.instance);
+            }
+
+            if (resource.source_volume) {
+              resource.source_volume_uuid = ncUtils.getUUID(resource.source_volume);
+            }
           }
         });
       }

@@ -113,7 +113,8 @@
               link: "project.resources.storage({uuid: context.project.uuid})",
               icon: "fa-hdd-o",
               label: "Storage",
-              feature: "storage"
+              feature: "storage",
+              countFieldKey: "storages"
             }
           ]
         },

@@ -1,0 +1,14 @@
+<div class="row">
+  <table class="table table-responsive">
+    <tr ng-repeat="volume in controller.model.volumes">
+      <td>
+        <a ui-sref="resources.details({uuid: volume.uuid, resource_type: volume.resource_type})">
+          {{ ::volume.name }}
+        </a>
+
+        ({{ ::volume.bootable && 'bootable ' || '' }}{{ ::volume.size|filesize }})
+      </td>
+      <td class="text-center"><action-button-resource button-model="volume"></action-button-resource></td>
+    </tr>
+  </table>
+</div>

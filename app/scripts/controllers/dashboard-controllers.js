@@ -10,15 +10,6 @@
     // Each sparkline chart bar has width equal to 4% so 25 by 4 points
     var POINTS_COUNT = 25;
 
-    this.getAllCharts = function(scope) {
-      return $q.all([
-        vm.getResourceHistoryCharts(scope),
-        vm.getCostChart(scope)
-      ]).then(function(result) {
-        return result[0].concat([result[1]]);
-      });
-    };
-
     this.getResourceHistoryCharts = function(scope) {
       var charts = [
         {
@@ -32,6 +23,10 @@
         {
           quota: 'nc_private_cloud_count',
           title: 'Private clouds'
+        },
+        {
+          quota: 'nc_storage_count',
+          title: 'Storage'
         }
       ];
 
@@ -65,14 +60,18 @@
       var start = moment.utc().subtract(1, 'month').unix();
 
       return quotasService.getHistory(url, start, end, POINTS_COUNT).then(function(items) {
-        return items.filter(function(item) {
+        items = items.filter(function(item) {
           return !!item.object;
         }).map(function(item) {
           return {
             date: moment.unix(item.point).toDate(),
             value: item.object.usage
           };
-        }).map(function(item) {
+        });
+
+        items = vm.padMissingValues(items);
+
+        return items.map(function(item) {
           item.label = item.value + ' at ' + $filter('date', 'yyyy-MM-dd')(item.date);
           return item;
         });
@@ -89,23 +88,13 @@
           }
         });
 
-        // Pad missing values
-        var i = 1, end = moment();
-        if (estimates.length > 0) {
-          end = moment(estimates[estimates.length - 1].date)
-        }
-        while(estimates.length != POINTS_COUNT) {
-          estimates.push({
-            value: 0,
-            date: new Date(end.subtract(i, 'month').toDate())
-          });
-        }
+        estimates.reverse();
+        estimates = vm.padMissingValues(estimates, 'month');
         estimates = estimates.map(function(estimate) {
           estimate.label = $filter('defaultCurrency')(estimate.value) +  ' at ' +
                            $filter('date', 'yyyy-MM-dd')(estimate.date);
           return estimate;
         });
-        estimates.reverse();
         return {
           title: 'Total cost',
           data: estimates,
@@ -116,6 +105,19 @@
           ])
         };
       });
+    };
+    this.padMissingValues = function(items, interval) {
+      var i = 1, end = moment();
+      if (items.length > 0) {
+        end = moment(items[items.length - 1].date);
+      }
+      while(items.length != POINTS_COUNT) {
+        items.unshift({
+          value: 0,
+          date: new Date(end.subtract(i, interval).toDate())
+        });
+      }
+      return items;
     };
     this.getRelativeChange = function(items) {
       if (items.length < 2) {
@@ -136,12 +138,13 @@
     .controller('OrganizationDashboardController', OrganizationDashboardController);
 
   OrganizationDashboardController.$inject = [
-    'currentStateService', 'DashboardChartService', '$scope'
+    'currentStateService', 'DashboardChartService', '$scope', '$q'
   ];
   function OrganizationDashboardController(
-    currentStateService, DashboardChartService, $scope
+    currentStateService, DashboardChartService, $scope, $q
   ) {
     var vm = this;
+    vm.loading = true;
 
     activate();
     $scope.$on('currentCustomerUpdated', function() {
@@ -150,12 +153,17 @@
 
     function activate() {
       vm.loading = true;
-      currentStateService.getCustomer().then(function(customer) {
-        return DashboardChartService.getAllCharts(customer).then(function(charts) {
-          vm.charts = charts;
+      return currentStateService.getCustomer().then(function(customer) {
+        return $q.all([
+          DashboardChartService.getCostChart(customer).then(function(chart) {
+            vm.costChart = chart;
+          }),
+          DashboardChartService.getResourceHistoryCharts(customer).then(function(charts) {
+            vm.resourceCharts = charts;
+          })
+        ]).finally(function() {
+          vm.loading = false;
         });
-      }).finally(function() {
-        vm.loading = false;
       });
     }
   }

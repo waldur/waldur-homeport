@@ -238,7 +238,8 @@
           data: {
             auth: true,
             workspace: 'project',
-            sidebarState: 'project.resources'
+            sidebarState: 'project.resources',
+            pageClass: 'gray-bg'
           }
         })
 
