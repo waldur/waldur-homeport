@@ -20,13 +20,13 @@
         });
       },
       submitForm: function () {
+        if ($scope.ActionForm.$invalid) {
+          return $q.reject();
+        }
         var fields = $scope.action.fields;
         var form = resourcesService.$create($scope.action.url);
         for (var field in fields) {
-          if (fields[field].required && !$scope.form[field]) {
-            $scope.errors[field] = ['This field is required'];
-            return $q.reject();
-          } else if ($scope.form[field] != null) {
+          if ($scope.form[field] != null) {
             form[field] = $scope.form[field];
           }
         }
