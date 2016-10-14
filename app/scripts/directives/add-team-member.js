@@ -35,22 +35,22 @@
         scope.currentCustomer = null;
         scope.refreshProjectChoices = refreshProjectChoices;
 
-        // scope.$watch('userModel.projects', watchAddedProjects);
-        // scope.$watch('userModel.projectsManagerRole', watchAddedProjects);
-        //
-        // function watchAddedProjects(newVal) {
-        //     if (newVal && newVal.length !== 0) {
-        //         scope.projects = scope.projects.filter(function(project) {
-        //             var projectAdded = false;
-        //             newVal.forEach(function(selectedProject) {
-        //                 if (project.uuid === selectedProject.uuid) {
-        //                     projectAdded = true;
-        //                 }
-        //             });
-        //             return !projectAdded;
-        //         });
-        //     }
-        // }
+        scope.$watch('userModel.projects', watchAddedProjects);
+        scope.$watch('userModel.projectsManagerRole', watchAddedProjects);
+
+        function watchAddedProjects(newVal) {
+            if (newVal && newVal.length !== 0) {
+                scope.projects = scope.projects.filter(function(project) {
+                    var projectAdded = false;
+                    newVal.forEach(function(selectedProject) {
+                        if (project.uuid === selectedProject.uuid) {
+                            projectAdded = true;
+                        }
+                    });
+                    return !projectAdded;
+                });
+            }
+        }
 
         function loadData() {
             if (scope.editUser) {
