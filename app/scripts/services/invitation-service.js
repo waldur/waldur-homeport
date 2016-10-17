@@ -6,20 +6,19 @@
 
   function invitationService(baseServiceClass, $http, ENV) {
     /*jshint validthis: true */
-    var vm = this;
     var ServiceClass = baseServiceClass.extend({
       init: function() {
         this._super();
         this.endpoint = '/user-invitations/';
       },
       accept: function(invitation_uuid) {
-        return vm.executeAction(invitation_uuid, 'accept');
+        return this.executeAction(invitation_uuid, 'accept');
       },
       cancel: function(invitation_uuid) {
-        return vm.executeAction(invitation_uuid, 'cancel');
+        return this.executeAction(invitation_uuid, 'cancel');
       },
       resend: function(invitation_uuid) {
-        return vm.executeAction(invitation_uuid, 'resend');
+        return this.executeAction(invitation_uuid, 'resend');
       },
       executeAction: function(invitation_uuid, action) {
         var url = ENV.apiEndpoint + '/api/user-invitations/' + invitation_uuid + '/' + action + '/';
