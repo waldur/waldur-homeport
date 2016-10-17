@@ -1067,3 +1067,90 @@
   }
 
 })();
+
+
+(function() {
+  angular.module('ncsaas')
+    .controller('CustomerInvitationsTabController', CustomerInvitationsTabController);
+
+  CustomerInvitationsTabController.$inject = [
+    'baseControllerListClass',
+    'customersService',
+    'currentCustomer',
+    'currentUser',
+    'invitationService',
+    'ncUtils',
+    '$state',
+    '$filter'
+  ];
+  function CustomerInvitationsTabController(
+    baseControllerListClass,
+    customersService,
+    currentCustomer,
+    currentUser,
+    invitationService,
+    ncUtils,
+    $state,
+    $filter
+  ) {
+    var controllerScope = this;
+    var InvitationController = baseControllerListClass.extend({
+      init: function() {
+        this.controllerScope = controllerScope;
+        this.service = invitationService;
+        this.isOwnerOrStaff = customersService.checkCustomerUser(currentCustomer, currentUser);
+        this.tableOptions = this.getTableOptions();
+        this._super();
+      },
+      getTableOptions: function() {
+        return {
+          noDataText: 'You have no team invitations yet',
+          noMatchesText: 'No invitations found matching filter.',
+          columns: [
+            {
+              title: 'E-mail',
+              render: function(data, type, row, meta) {
+                var avatar = '<img gravatar-src="\'{gravatarSrc}\'" gravatar-size="100" alt="" class="avatar-img img-xs">'
+                  .replace('{gravatarSrc}', row.email);
+                return avatar + ' ' + row.email;
+              }
+            },
+            {
+              title: 'Permission',
+              render: function(data, type, row, meta) {
+                if (row.customer) {
+                  return 'Organization owner';
+                } else if (row.project) {
+                  var href = $state.href('project.details', {
+                    uuid: row.project_uuid
+                  });
+                  var title = row.project_role + ' in ' + row.project_name;
+                  return ncUtils.renderLink(href, title);
+                }
+              }
+            },
+            {
+              title: 'Status',
+              render: function(data, type, row, meta) {
+                return row.state;
+              }
+            },
+            {
+              title: 'Created at',
+              render: function(data, type, row, meta) {
+                return $filter('dateTime')(row.created);
+              }
+            },
+            {
+              title: 'Expires at',
+              render: function(data, type, row, meta) {
+                return $filter('dateTime')(row.expires);
+              }
+            },
+          ]
+        }
+      }
+    });
+    controllerScope.__proto__ = new InvitationController();
+  }
+})();
