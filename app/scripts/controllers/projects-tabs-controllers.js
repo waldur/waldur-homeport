@@ -207,12 +207,14 @@
       'BaseProjectResourcesTabController',
       'ncUtils',
       '$state',
+      'ENV',
       VolumesListController]);
 
-  function VolumesListController(BaseProjectResourcesTabController, ncUtils, $state) {
+  function VolumesListController(BaseProjectResourcesTabController, ncUtils, $state, ENV) {
     var controllerScope = this;
     var ResourceController = BaseProjectResourcesTabController.extend({
       init:function() {
+        this.category = ENV.Storages;
         this.controllerScope = controllerScope;
         this._super();
         this.rowFields.push('instance');

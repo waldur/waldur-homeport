@@ -43,6 +43,7 @@
         this.categories[ENV.VirtualMachines] = 'vms';
         this.categories[ENV.Applications] = 'apps';
         this.categories[ENV.PrivateClouds] = 'private_clouds';
+        this.categories[ENV.Storages] = 'storages';
 
         this._super();
         this.hasCustomFilters = false;
@@ -172,6 +173,8 @@
           $state.go('appstore.store', {category: 'private_clouds'});
         } else if (this.category === ENV.Applications) {
           $state.go('appstore.store', {category: 'apps'});
+        } else if (this.category === ENV.Storages) {
+          $state.go('appstore.store', {category: 'storages'});
         }
       },
       getMapAction: function() {
