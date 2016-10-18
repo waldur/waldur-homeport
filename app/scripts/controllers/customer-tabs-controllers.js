@@ -1106,7 +1106,32 @@
         this.service = invitationService;
         this.isOwnerOrStaff = customersService.checkCustomerUser(currentCustomer, currentUser);
         this.tableOptions = this.getTableOptions();
+        this.getSearchFilters();
         this._super();
+      },
+      getSearchFilters: function() {
+        this.searchFilters = [
+          {
+            name: 'state',
+            title: 'Pending',
+            value: 'pending'
+          },
+          {
+            name: 'state',
+            title: 'Cancelled',
+            value: 'cancelled'
+          },
+          {
+            name: 'state',
+            title: 'Expired',
+            value: 'expired'
+          },
+          {
+            name: 'state',
+            title: 'Accepted',
+            value: 'accepted'
+          }
+        ];
       },
       getTableOptions: function() {
         return {
