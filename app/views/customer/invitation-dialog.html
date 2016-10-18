@@ -1,0 +1,71 @@
+<div class="modal-header">
+    <button type="button" class="close" aria-label="Close"><span aria-hidden="true">×</span></button>
+    <h2 class="modal-title">Invite user</h2>
+</div>
+<form name="DialogCtrl.DialogForm">
+<div class="modal-body">
+    <div ng-if="DialogCtrl.loading">
+        <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
+    </div>
+    <div ng-if="!DialogCtrl.loading">
+        <div class="form-group">
+            <label class="control-label" for="inviteEmail">
+                E-mail <span class="text-danger">*</span>
+            </label>
+            <input class="form-control" id="inviteEmail" name="email" type="email" ng-model="DialogCtrl.email" required ng-disabled="DialogCtrl.submitting">
+            <p class="text-danger" ng-repeat="error in DialogCtrl.errors.email" ng-bind="error"></p>
+        </div>
+
+        <div class="form-group">
+            <div>
+                <label class="control-label">Role</label>
+            </div>
+            <div class="btn-group">
+                <button
+                    type="button"
+                    class="btn btn-default"
+                    ng-repeat="role in DialogCtrl.roles"
+                    ng-class="{active: DialogCtrl.role == role}"
+                    ng-click="DialogCtrl.role = role">
+                    <i class="fa" ng-class="role.icon"></i> {{ role.title }}
+                </button>
+            </div>
+            <p class="text-danger" ng-repeat="error in DialogCtrl.errors.customer" ng-bind="error"></p>
+        </div>
+
+        <div class="form-group" ng-if="DialogCtrl.role.field == 'project_role'">
+            <label class="control-label" for="inviteProject">
+                Project <span class="text-danger">*</span>
+            </label>
+            <select
+                id="inviteProject"
+                ng-options="project as project.name for project in DialogCtrl.customer.projects"
+                ng-model="DialogCtrl.project"
+                class="form-control"
+                required
+                ng-disabled="DialogCtrl.submitting">
+                <option value="">Select project</option>
+            </select>
+            <p class="text-danger" ng-repeat="error in DialogCtrl.errors.project" ng-bind="error"></p>
+        </div>
+
+        <div class="form-group"
+            ng-if="DialogCtrl.errors.non_field_errors">
+            <p class="text-danger"
+               ng-repeat="error in DialogCtrl.errors.non_field_errors"
+               ng-bind="error">
+            </p>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" type="submit"
+       submit-button="DialogCtrl.submitForm()">
+       Invite user
+    </button>
+    <button class="btn btn-default" type="button"
+        ng-click="DialogCtrl.$dismiss()">
+        Cancel
+    </button>
+</div>
+</form>

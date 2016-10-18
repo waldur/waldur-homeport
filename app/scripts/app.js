@@ -449,6 +449,15 @@
             bodyClass: 'old',
             pageTitle: 'Privacy policy'
           }
+        })
+        .state('invitation', {
+          url: '/invitation/:uuid/',
+          controller: 'InvitationController',
+          data: {
+            anonymous: true,
+            bodyClass: 'old'
+          },
+          templateUrl: 'views/invitation/invitation.html'
         });
     });
 
