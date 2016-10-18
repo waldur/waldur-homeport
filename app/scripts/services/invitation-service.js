@@ -18,7 +18,7 @@
         return this.executeAction(invitation_uuid, 'cancel');
       },
       resend: function(invitation_uuid) {
-        return this.executeAction(invitation_uuid, 'resend');
+        return this.executeAction(invitation_uuid, 'send');
       },
       executeAction: function(invitation_uuid, action) {
         var url = ENV.apiEndpoint + '/api/user-invitations/' + invitation_uuid + '/' + action + '/';

@@ -491,7 +491,7 @@
         {
           label: "Team",
           icon: "fa-group",
-          link: "organization.team({uuid: context.customer.uuid})",
+          link: "organization.team.tabs({uuid: context.customer.uuid})",
           feature: "team",
           countFieldKey: "users"
         },
