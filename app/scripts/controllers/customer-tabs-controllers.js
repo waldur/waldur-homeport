@@ -1091,3 +1091,272 @@
   }
 
 })();
+
+
+(function() {
+  angular.module('ncsaas')
+    .controller('CustomerInvitationsTabController', CustomerInvitationsTabController);
+
+  CustomerInvitationsTabController.$inject = [
+    'baseControllerListClass',
+    'customersService',
+    'currentCustomer',
+    'currentUser',
+    'invitationService',
+    'ncUtils',
+    '$state',
+    '$filter',
+    '$rootScope',
+    '$uibModal',
+    'ncUtilsFlash'
+  ];
+  function CustomerInvitationsTabController(
+    baseControllerListClass,
+    customersService,
+    currentCustomer,
+    currentUser,
+    invitationService,
+    ncUtils,
+    $state,
+    $filter,
+    $rootScope,
+    $uibModal,
+    ncUtilsFlash
+  ) {
+    var controllerScope = this;
+    var InvitationController = baseControllerListClass.extend({
+      init: function() {
+        this.controllerScope = controllerScope;
+        this.service = invitationService;
+        this.isOwnerOrStaff = customersService.checkCustomerUser(currentCustomer, currentUser);
+        this.tableOptions = this.getTableOptions();
+        this.getSearchFilters();
+        this._super();
+      },
+      getSearchFilters: function() {
+        this.searchFilters = [
+          {
+            name: 'state',
+            title: 'Pending',
+            value: 'pending'
+          },
+          {
+            name: 'state',
+            title: 'Cancelled',
+            value: 'cancelled'
+          },
+          {
+            name: 'state',
+            title: 'Expired',
+            value: 'expired'
+          },
+          {
+            name: 'state',
+            title: 'Accepted',
+            value: 'accepted'
+          }
+        ];
+      },
+      getTableOptions: function() {
+        return {
+          noDataText: 'You have no team invitations yet',
+          noMatchesText: 'No invitations found matching filter.',
+          columns: [
+            {
+              title: 'E-mail',
+              render: function(data, type, row, meta) {
+                var avatar = '<img gravatar-src="\'{gravatarSrc}\'" gravatar-size="100" alt="" class="avatar-img img-xs">'
+                  .replace('{gravatarSrc}', row.email);
+                return avatar + ' ' + row.email;
+              }
+            },
+            {
+              title: 'Role',
+              render: function(data, type, row, meta) {
+                if (row.customer) {
+                  return 'Organization owner';
+                } else if (row.project) {
+                  var href = $state.href('project.details', {
+                    uuid: row.project_uuid
+                  });
+                  var roleTitle;
+                  if (row.project_role === 'admin') {
+                    roleTitle = 'System administrator';
+                  } else if (row.project_role === 'manager') {
+                    roleTitle = 'Project manager';
+                  } else {
+                    return 'Unknown';
+                  }
+                  var title = roleTitle + ' in ' + row.project_name;
+                  return ncUtils.renderLink(href, title);
+                }
+              }
+            },
+            {
+              title: 'Status',
+              render: function(data, type, row, meta) {
+                return row.state;
+              }
+            },
+            {
+              title: 'Created at',
+              render: function(data, type, row, meta) {
+                return $filter('dateTime')(row.created);
+              }
+            },
+            {
+              title: 'Expires at',
+              render: function(data, type, row, meta) {
+                return $filter('dateTime')(row.expires);
+              }
+            },
+          ],
+          tableActions: this.getTableActions(),
+          rowActions: this.getRowActions()
+        }
+      },
+      getTableActions: function() {
+        return [
+          {
+            name: '<i class="fa fa-plus"></i> Invite user',
+            callback: this.openDialog.bind(this),
+            disabled: !this.isOwnerOrStaff,
+            titleAttr: !this.isOwnerOrStaff && 'Only customer owner or staff can invite users.'
+          }
+        ];
+      },
+      openDialog: function() {
+        var dialogScope = $rootScope.$new();
+        dialogScope.customer = currentCustomer;
+        $uibModal.open({
+          templateUrl: 'views/customer/invitation-dialog.html',
+          scope: dialogScope,
+          controller: 'InvitationDialogController',
+          controllerAs: 'DialogCtrl',
+          bindToController: true,
+        }).result.then(function() {
+          controllerScope.resetCache();
+        });
+      },
+      getRowActions: function() {
+        if (this.isOwnerOrStaff) {
+          return [
+            {
+              name: '<i class="fa fa-ban"></i> Cancel',
+              callback: this.cancelInvitation.bind(this),
+              isDisabled: function(row) {
+                return row.state !== 'pending';
+              },
+              tooltip: function(row) {
+                if (row.state !== 'pending') {
+                  return 'Only pending invitation can be cancelled.';
+                }
+              }
+            },
+            {
+              name: '<i class="fa fa-envelope-o"></i> Resend',
+              callback: this.resendInvitation.bind(this),
+              isDisabled: function(row) {
+                return row.state !== 'pending';
+              },
+              tooltip: function(row) {
+                if (row.state !== 'pending') {
+                  return 'Only pending invitation can be sent again.';
+                }
+              }
+            }
+          ];
+        }
+      },
+      cancelInvitation: function(row) {
+        invitationService.cancel(row.uuid).then(function() {
+          ncUtilsFlash.success('Invitation has been cancelled.');
+          row.state = 'cancelled';
+        }).catch(function() {
+          ncUtilsFlash.error('Unable to cancel invitation.');
+        });
+      },
+      resendInvitation: function(row) {
+        invitationService.resend(row.uuid).then(function() {
+          ncUtilsFlash.success('Invitation has been sent again.');
+        }).catch(function() {
+          ncUtilsFlash.error('Unable to resend invitation.');
+        });
+      }
+    });
+    controllerScope.__proto__ = new InvitationController();
+  }
+})();
+
+
+(function() {
+  angular.module('ncsaas')
+    .controller('InvitationDialogController', InvitationDialogController);
+
+  InvitationDialogController.$inject = ['$q', '$state', 'invitationService', 'ncUtilsFlash'];
+  function InvitationDialogController($q, $state, invitationService, ncUtilsFlash) {
+    var vm = this;
+    vm.submitForm = submitForm;
+    activate();
+
+    function activate() {
+      vm.roles = [
+        {
+          field: 'customer_role',
+          title: 'Organization owner',
+          value: 'owner',
+          icon: 'fa-sitemap'
+        },
+        {
+          field: 'project_role',
+          title: 'Project manager',
+          value: 'manager',
+          icon: 'fa-users'
+        },
+        {
+          field: 'project_role',
+          title: 'System administrator',
+          value: 'admin',
+          icon: 'fa-server'
+        }
+      ];
+      vm.role = vm.roles[0];
+    }
+
+    function submitForm() {
+      if (vm.DialogForm.$invalid) {
+        return $q.reject();
+      }
+
+      vm.submitting = true;
+      return createInvite().then(function() {
+        vm.$close();
+        ncUtilsFlash.success('Invitation has been created.');
+      }).catch(function(errors) {
+        vm.errors = errors;
+        ncUtilsFlash.error('Unable to create invitation.');
+      }).finally(function() {
+        vm.submitting = false;
+      });
+    }
+
+    function createInvite() {
+      var invite = invitationService.$create();
+      invite.link_template = getTemplateUrl();
+      invite.email = vm.email;
+      if (vm.role.field === 'customer_role') {
+        invite.customer_role = vm.role.value;
+        invite.customer = vm.customer.url;
+      } else if (vm.role.field === 'project_role') {
+        invite.project_role = vm.role.value;
+        invite.project = vm.project.url;
+      }
+      return invite.$save();
+    }
+
+    function getTemplateUrl() {
+      var path = $state.href('organization.details', {uuid: 'TEMPLATE'});
+      return location.origin + path.replace('TEMPLATE', '{uuid}');
+    }
+  }
+})();

@@ -205,24 +205,44 @@
   angular.module('ncsaas')
     .controller('VolumesListController', [
       'BaseProjectResourcesTabController',
+      'ncUtils',
+      '$state',
+      'ENV',
       VolumesListController]);
 
-  function VolumesListController(BaseProjectResourcesTabController) {
+  function VolumesListController(BaseProjectResourcesTabController, ncUtils, $state, ENV) {
     var controllerScope = this;
     var ResourceController = BaseProjectResourcesTabController.extend({
       init:function() {
+        this.category = ENV.Storages;
         this.controllerScope = controllerScope;
         this._super();
+        this.rowFields.push('instance');
+        this.rowFields.push('instance_name');
       },
-      getList: function(filter) {
-        return this._super(angular.extend({}, filter, {
+      getFilter: function() {
+        return {
           resource_type: 'OpenStack.Volume'
-        }));
+        };
       },
       getTableOptions: function() {
         var options = this._super();
         options.noDataText = 'You have no volumes yet.';
         options.noMatchesText = 'No volumes found matching filter.';
+        options.columns.push({
+          title: 'Attached to',
+          render: function(data, type, row, meta) {
+            if (!row.instance) {
+              return 'Not known';
+            }
+            var uuid = ncUtils.getUUID(row.instance);
+            var href = $state.href('resources.details', {
+              uuid: uuid,
+              resource_type: 'OpenStack.Instance'
+            });
+            return ncUtils.renderLink(href, row.instance_name || 'Link');
+          }
+        });
         return options;
       },
       getImportTitle: function() {
@@ -252,10 +272,10 @@
         this.rowFields.push('source_volume');
         this.rowFields.push('source_volume_name');
       },
-      getList: function(filter) {
-        return this._super(angular.extend({}, filter, {
+      getFilter: function(filter) {
+        return {
           resource_type: 'OpenStack.Snapshot'
-        }));
+        };
       },
       getTableOptions: function() {
         var options = this._super();

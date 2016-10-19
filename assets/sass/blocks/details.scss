@@ -612,8 +612,6 @@ $searchInputHeight: 32px;
 .details-table__value {
     flex-grow: 1;
     margin-left: 6px;
-    overflow: hidden;
-    text-overflow: ellipsis;
     padding: 3px 0px;
 
     select {

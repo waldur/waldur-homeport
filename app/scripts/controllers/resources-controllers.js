@@ -43,23 +43,10 @@
         this.categories[ENV.VirtualMachines] = 'vms';
         this.categories[ENV.Applications] = 'apps';
         this.categories[ENV.PrivateClouds] = 'private_clouds';
+        this.categories[ENV.Storages] = 'storages';
 
         this._super();
         this.hasCustomFilters = false;
-
-        var vm = this;
-        vm.loading = true;
-        $q.all([
-          currentStateService.getCustomer().then(function(customer) {
-            vm.currentCustomer = customer;
-          }),
-          currentStateService.getProject().then(function(project) {
-            vm.currentProject = project;
-          })
-        ]).finally(function() {
-          vm.loading = false;
-          vm.tableOptions = vm.getTableOptions();
-        });
       },
       getTableOptions: function() {
         return {
@@ -186,6 +173,8 @@
           $state.go('appstore.store', {category: 'private_clouds'});
         } else if (this.category === ENV.Applications) {
           $state.go('appstore.store', {category: 'apps'});
+        } else if (this.category === ENV.Storages) {
+          $state.go('appstore.store', {category: 'storages'});
         }
       },
       getMapAction: function() {
@@ -253,14 +242,26 @@
         return false;
       },
       getList: function(filter) {
-        var query = angular.extend({}, filter, {
-          field: this.rowFields
+        var vm = this;
+        var fn = this._super.bind(this);
+        return $q.all([
+          currentStateService.getCustomer().then(function(customer) {
+            vm.currentCustomer = customer;
+          }),
+          currentStateService.getProject().then(function(project) {
+            vm.currentProject = project;
+          })
+        ]).then(function() {
+          vm.tableOptions = vm.getTableOptions();
+          var query = angular.extend({}, filter, {
+            field: vm.rowFields
+          });
+          if (angular.isDefined(vm.category)) {
+            query.resource_category = vm.categories[vm.category];
+            vm.updateFilters(filter);
+          }
+          return fn(query);
         });
-        if (this.category) {
-          query.resource_category = this.categories[this.category];
-          this.updateFilters(filter);
-        }
-        return this._super(query);
       },
       updateFilters: function(filter) {
         var query = angular.extend({

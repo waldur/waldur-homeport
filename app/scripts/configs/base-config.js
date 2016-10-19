@@ -115,6 +115,7 @@ angular.module('ncsaas')
     VirtualMachines: 0,
     PrivateClouds: 1,
     Applications: 2,
+    Storages: 3,
 
     appStoreCategories: [
       {
@@ -137,6 +138,12 @@ angular.module('ncsaas')
         type: 'provider',
         key: 'apps',
         services: ['Oracle', 'GitLab']
+      },
+      {
+        name: 'Storages',
+        type: 'provider',
+        key: 'storages',
+        services: ['OpenStack'],
       }
     ],
     serviceCategories: [

@@ -238,7 +238,8 @@
           data: {
             auth: true,
             workspace: 'project',
-            sidebarState: 'project.resources'
+            sidebarState: 'project.resources',
+            pageClass: 'gray-bg'
           }
         })
 
@@ -448,6 +449,15 @@
             bodyClass: 'old',
             pageTitle: 'Privacy policy'
           }
+        })
+        .state('invitation', {
+          url: '/invitation/:uuid/',
+          controller: 'InvitationController',
+          data: {
+            anonymous: true,
+            bodyClass: 'old'
+          },
+          templateUrl: 'views/invitation/invitation.html'
         });
     });
 

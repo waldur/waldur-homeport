@@ -78,6 +78,7 @@
         var vm = this;
         filter = filter || {};
         vm.service.cacheTime = vm.cacheTime;
+        filter = angular.extend(filter, this.getFilter());
         return vm.service.getList(filter).then(function(response) {
           if (vm.mergeListFieldIdentifier) {
             vm.list = ncUtils.mergeLists(vm.list, response, vm.mergeListFieldIdentifier);
@@ -87,6 +88,9 @@
           vm.afterGetList();
           vm.hideNoDataText = false;
         });
+      },
+      getFilter: function() {
+        return {};
       },
       requestLoad: function(request) {
         var vm = this;
