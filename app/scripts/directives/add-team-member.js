@@ -38,7 +38,7 @@
         scope.$watch('userModel.projects', watchAddedProjects);
         scope.$watch('userModel.projectsManagerRole', watchAddedProjects);
 
-        function watchAddedProjects(newVal) {
+        function watchAddedProjects(newVal, oldVal) {
             if (newVal && newVal.length !== 0) {
                 scope.projects = scope.projects.filter(function(project) {
                     var projectAdded = false;
@@ -49,6 +49,20 @@
                     });
                     return !projectAdded;
                 });
+                if (oldVal && newVal && newVal.length < oldVal.length) {
+                    var found = false;
+                    oldVal.forEach(function (oldValItem) {
+                        newVal.forEach(function (newValItem) {
+                            if (oldValItem.uuid === newValItem.uuid) {
+                                found = true;
+                            }
+                        });
+                        if (found === false) {
+                            scope.projects.push(oldValItem);
+                        }
+                        found = false;
+                    });
+                }
             }
         }
 
