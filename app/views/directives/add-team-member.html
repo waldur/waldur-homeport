@@ -58,12 +58,16 @@
 
         <div class="form-group" ng-if="!emptyProjectList">
             <label class="control-label">Project manager in:</label>
-            <ui-select ng-model="userModel.projectsManagerRole" theme="bootstrap" multiple>
+            <ui-select ng-model="userModel.projectsManagerRole"
+                       on-remove="removeItem($item)"
+                       on-select="refreshProjectChoices($select.search)"
+                       theme="bootstrap"
+                       multiple>
                 <ui-select-match placeholder="Select projects...">
                     {{ $item.name }}
                 </ui-select-match>
                 <ui-select-choices multiple
-                                   repeat="project in projects track by project.uuid"
+                                   repeat="project in filteredProjects track by project.uuid"
                                    refresh="refreshProjectChoices($select.search)">
                     {{ project.name }}
                 </ui-select-choices>
@@ -72,12 +76,16 @@
 
         <div class="form-group" ng-if="!emptyProjectList">
             <label class="control-label">System administrator in:</label>
-            <ui-select ng-model="userModel.projects" theme="bootstrap" multiple>
+            <ui-select ng-model="userModel.projects"
+                       on-remove="removeItem($item)"
+                       on-select="refreshProjectChoices($select.search)"
+                       theme="bootstrap"
+                       multiple>
                 <ui-select-match placeholder="Select projects...">
                     {{ $item.name }}
                 </ui-select-match>
                 <ui-select-choices multiple
-                    repeat="project in projects track by project.uuid"
+                    repeat="project in filteredProjects track by project.uuid"
                     refresh="refreshProjectChoices($select.search)">
                     {{ project.name }}
                 </ui-select-choices>
