@@ -820,6 +820,7 @@
         this._super();
       },
       getTableOptions: function() {
+        var vm = this;
         return {
           noDataText: 'You have no team members yet',
           noMatchesText: 'No members found matching filter.',
@@ -852,43 +853,34 @@
             {
               title: 'Project manager in:',
               render: function(data, type, row, meta) {
-                var filteredProjects = row.projects.filter(function(item) {
-                  return item.role === 'Manager';
-                });
-                if (filteredProjects.length === 0) {
-                  return 'No projects are assigned to this role';
-                }
-                return filteredProjects.map(function(item) {
-                  var projectName = item.name;
-                  var href = $state.href('project.details', { uuid: item.uuid });
-                  return '<a href="{href}">{projectName}</a>'
-                    .replace('{projectName}', projectName)
-                    .replace('{href}', href)
-                }).join(', ');
+                return vm.formatProjectRolesList('Manager', row);
               }
             },
             {
               title: 'System administrator in:',
               render: function(data, type, row, meta) {
-                var filteredProjects = row.projects.filter(function(item) {
-                  return item.role === 'Administrator';
-                });
-                if (filteredProjects.length === 0) {
-                  return 'No projects are assigned to this role';
-                }
-                return filteredProjects.map(function(item) {
-                  var projectName = item.name;
-                  var href = $state.href('project.details', { uuid: item.uuid });
-                  return '<a href="{href}">{projectName}</a>'
-                    .replace('{projectName}', projectName)
-                    .replace('{href}', href)
-                }).join(', ');
+                return vm.formatProjectRolesList('Administrator', row);
               }
             }
           ],
           tableActions: this.getTableActions(),
           rowActions: this.getRowActions()
         };
+      },
+      formatProjectRolesList: function (roleName, row) {
+        var filteredProjects = row.projects.filter(function(item) {
+          return item.role === roleName;
+        });
+        if (filteredProjects.length === 0) {
+          return 'No projects are assigned to this role';
+        }
+        return filteredProjects.map(function(item) {
+          var projectName = item.name;
+          var href = $state.href('project.details', { uuid: item.uuid });
+          return '<a href="{href}">{projectName}</a>'
+            .replace('{projectName}', projectName)
+            .replace('{href}', href)
+        }).join(', ');
       },
       getTableActions: function() {
         if (this.isOwnerOrStaff) {
