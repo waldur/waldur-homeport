@@ -59,7 +59,7 @@
         <div class="form-group" ng-if="!emptyProjectList">
             <label class="control-label">Project manager in:</label>
             <ui-select ng-model="userModel.projectsManagerRole"
-                       on-remove="removeItem($item)"
+                       on-remove="pushBackToProjectsList($item)"
                        on-select="refreshProjectChoices($select.search)"
                        theme="bootstrap"
                        multiple>
@@ -76,8 +76,8 @@
 
         <div class="form-group" ng-if="!emptyProjectList">
             <label class="control-label">System administrator in:</label>
-            <ui-select ng-model="userModel.projects"
-                       on-remove="removeItem($item)"
+            <ui-select ng-model="userModel.projectsAdminRole"
+                       on-remove="pushBackToProjectsList($item)"
                        on-select="refreshProjectChoices($select.search)"
                        theme="bootstrap"
                        multiple>
@@ -104,7 +104,7 @@
        {{ addText }}
     </button>
     <button class="btn btn-default"
-        ng-click="cancel()">
+        ng-click="$dismiss()">
         Cancel
     </button>
 </div>

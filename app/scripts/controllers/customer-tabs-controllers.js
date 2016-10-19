@@ -785,8 +785,6 @@
         'customerPermissionsService',
         'customersService',
         'projectPermissionsService',
-        'usersService',
-        'currentStateService',
         'currentUser',
         'currentCustomer',
         '$q',
@@ -801,8 +799,6 @@
       customerPermissionsService,
       customersService,
       projectPermissionsService,
-      usersService,
-      currentStateService,
       currentUser,
       currentCustomer,
       $q,
@@ -936,6 +932,7 @@
       openPopup: function(user) {
         var dialogScope = $rootScope.$new();
         dialogScope.currentCustomer = currentCustomer;
+        dialogScope.currentUser = currentUser;
         dialogScope.editUser = user;
         dialogScope.addedUsers = this.list.map(function(users) {
           return users.uuid;
