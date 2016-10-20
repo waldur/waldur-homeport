@@ -5,10 +5,10 @@
     <div ng-if="loading">
         <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
     </div>
-    <div ng-if="!loading">
+    <div ng-if="!loading" block-ui="add-team-member-dialog">
         <div class="form-group" ng-if="!editUser && users.length">
             <label class="control-label">User:</label>
-            <ui-select ng-model="userModel.user" theme="bootstrap">
+            <ui-select ng-model="userModel.user" ng-required="userModel.user" theme="bootstrap">
                 <ui-select-match placeholder="Select user...">
                     {{ $select.selected.full_name || $select.selected.username }}
                 </ui-select-match>
@@ -36,7 +36,7 @@
         <div class="form-group" ng-if="editUser">
             <p class="form-control-static">
                 <strong>User:</strong>
-               {{ editUser.full_name || user.username }}
+                {{ editUser.full_name || user.username }}
             </p>
         </div>
 
@@ -44,14 +44,14 @@
             <div class="checkbox">
                 <label>
                     <input type="checkbox"
-                        ng-disabled="!canChangeRole"
-                        ng-model="userModel.role"
-                        ng-true-value="'Owner'"
-                        ng-false-value="''">
+                           ng-disabled="!canChangeRole"
+                           ng-model="userModel.role"
+                           ng-true-value="'Owner'"
+                           ng-false-value="''">
                     </input>
                     Organization owner
                     <helpicon ng-if="!canChangeRole"
-                        help-text="You cannot change your own role"></helpicon>
+                              help-text="You cannot change your own role"></helpicon>
                 </label>
             </div>
         </div>
@@ -67,7 +67,7 @@
                     {{ $item.name }}
                 </ui-select-match>
                 <ui-select-choices multiple
-                                   repeat="project in filteredProjects track by project.uuid"
+                                   repeat="project in projects | filter: {'name': $select.search}"
                                    refresh="refreshProjectChoices($select.search)">
                     {{ project.name }}
                 </ui-select-choices>
@@ -85,8 +85,8 @@
                     {{ $item.name }}
                 </ui-select-match>
                 <ui-select-choices multiple
-                    repeat="project in filteredProjects track by project.uuid"
-                    refresh="refreshProjectChoices($select.search)">
+                                   repeat="project in projects | filter: {'name': $select.search}"
+                                   refresh="refreshProjectChoices($select.search)">
                     {{ project.name }}
                 </ui-select-choices>
             </ui-select>
@@ -95,16 +95,17 @@
         <p ng-if="emptyProjectList" class="text-danger">
             There are no available projects.
         </p>
+        <div class="error" ng-repeat="error in errors" ng-bind="error"></div>
     </div>
 </div>
 <div class="modal-footer">
     <button class="btn btn-primary"
-       submit-button="saveUser()"
-       ng-class="{'disabled': !editUser && !userModel.user}">
-       {{ addText }}
+            submit-button="saveUser()"
+            ng-class="{'disabled': validateSubmit()}">
+        {{ addText }}
     </button>
     <button class="btn btn-default"
-        ng-click="$dismiss()">
+            ng-click="$dismiss()">
         Cancel
     </button>
 </div>

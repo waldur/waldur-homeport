@@ -1,6 +1,6 @@
 'use strict';
 
-(function () {
+(function() {
 
   angular.module('ncsaas').controller(
     'AddTeamMemberDialogController', AddTeamMemberDialogController);
@@ -9,6 +9,7 @@
     'customerPermissionsService',
     'projectPermissionsService',
     'usersService',
+    'blockUI',
     '$q',
     '$scope'
   ];
@@ -17,18 +18,21 @@
     customerPermissionsService,
     projectPermissionsService,
     usersService,
+    blockUI,
     $q,
     $scope) {
     $scope.saveUser = saveUser;
     $scope.addText = 'Add';
     $scope.addTitle = 'Add';
-    $scope.userModel = {};
+    $scope.userModel = {
+      projectsAdminRole: [],
+      projectsManagerRole: []
+    };
     $scope.errors = {};
     $scope.projects = [];
-    $scope.filteredProjects = [];
     $scope.refreshProjectChoices = refreshProjectChoices;
     $scope.pushBackToProjectsList = pushBackToProjectsList;
-
+    $scope.validateSubmit = validateSubmit;
     $scope.projects = $scope.currentCustomer.projects.filter(removeSelectedProjects);
     $scope.emptyProjectList = !$scope.projects.length;
 
@@ -38,10 +42,8 @@
         $scope.addTitle = 'Edit';
         $scope.userModel.user = $scope.editUser;
         $scope.userModel.role = $scope.editUser.role;
-        $scope.userModel.projectsAdminRole = [];
-        $scope.userModel.projectsManagerRole = [];
 
-        $scope.editUser.projects && $scope.editUser.projects.forEach(function (project) {
+        $scope.editUser.projects.forEach(function(project) {
           if (project.role === 'Administrator') {
             $scope.userModel.projectsAdminRole.push(project);
           } else {
@@ -52,8 +54,8 @@
         return $q.resolve();
       } else {
         $scope.canChangeRole = true;
-        return usersService.getAll().then(function (users) {
-          $scope.users = users.filter(function (user) {
+        return usersService.getAll().then(function(users) {
+          $scope.users = users.filter(function(user) {
             return $scope.addedUsers.indexOf(user.uuid) === -1;
           });
         });
@@ -61,136 +63,142 @@
     }
 
     $scope.loading = true;
-    loadData().finally(function () {
+    loadData().finally(function() {
       $scope.loading = false;
     });
 
     function pushBackToProjectsList(item) {
       $scope.projects.push(item);
-      $scope.filteredProjects = $scope.projects;
     }
 
     refreshProjectChoices();
-    function refreshProjectChoices(search) {
+    function refreshProjectChoices() {
       $scope.projects = $scope.projects.filter(removeSelectedProjects);
-      $scope.filteredProjects = $scope.projects.filter(function(item) {
-        return item.name.toLowerCase().indexOf(search) !== -1;
-      });
     }
 
     function removeSelectedProjects(project) {
-      var roleAdded = false;
-      $scope.userModel.projectsAdminRole && $scope.userModel.projectsAdminRole.forEach(function (item) {
-        if (item.uuid === project.uuid) {
+      var roleAdded = false,
+        i,
+        j;
+      for (i = 0; i < $scope.userModel.projectsAdminRole.length; i++) {
+        if ($scope.userModel.projectsAdminRole[i].uuid === project.uuid) {
           roleAdded = true;
+          break;
         }
-      });
-      $scope.userModel.projectsManagerRole && $scope.userModel.projectsManagerRole.forEach(function (item) {
-        if (item.uuid === project.uuid) {
+      }
+      for (j = 0; j < $scope.userModel.projectsManagerRole.length; j++) {
+        if ($scope.userModel.projectsManagerRole[j].uuid === project.uuid) {
           roleAdded = true;
+          break;
         }
-      });
+      }
       return !roleAdded;
     }
 
     function saveUser() {
       $scope.errors = {};
-
-      if (!$scope.userModel.user) {
-        $scope.errors.user = 'This field is required';
-        return $q.reject($scope.errors);
-      }
+      var block = blockUI.instances.get('add-team-member-dialog');
+      block.start({delay: 0});
 
       return $q.all([
         saveCustomerPermission(),
         saveProjectPermissions()
-      ]).then(function () {
+      ]).then(function() {
+        block.stop();
         $scope.$close();
+      }, function(error) {
+        block.stop();
+        $scope.errors = error.data;
       });
+    }
+
+    function validateSubmit() {
+      return (!$scope.editUser && !$scope.userModel.user) ||
+        (!$scope.userModel.role && !$scope.userModel.projectsAdminRole.length &&
+        !$scope.userModel.projectsManagerRole.length);
     }
 
     function saveCustomerPermission() {
-        var permission = customerPermissionsService.$create();
-        permission.customer = $scope.currentCustomer.url;
-        permission.user = $scope.userModel.user.url;
-        permission.role = $scope.userModel.role === 'Owner' ? 'owner' : null;
+      var permission = customerPermissionsService.$create();
+      permission.customer = $scope.currentCustomer.url;
+      permission.user = $scope.userModel.user.url;
+      permission.role = $scope.userModel.role === 'Owner' ? 'owner' : null;
 
-        if ($scope.editUser) {
-          if ($scope.userModel.role !== $scope.editUser.role) {
-            if ($scope.userModel.role !== 'Owner') {
-              return customerPermissionsService.deletePermission($scope.editUser.permission);
-            } else {
-              permission.user = $scope.editUser.url;
-              return permission.$save();
-            }
+      if ($scope.editUser) {
+        if ($scope.userModel.role !== $scope.editUser.role) {
+          if (!$scope.userModel.role) {
+            return customerPermissionsService.deletePermission($scope.editUser.permission);
+          } else {
+            permission.user = $scope.editUser.url;
+            return permission.$save();
           }
-        } else if ($scope.userModel.role === 'Owner') {
-          return permission.$save();
         }
+      } else if ($scope.userModel.role) {
+        return permission.$save();
+      }
     }
 
     function saveProjectPermissions() {
-      var existingProjects = {};
-      var currentManagerProjects = {};
-      var currentProjects = {};
-      $scope.userModel.projectsAdminRole = $scope.userModel.projectsAdminRole || [];
-      $scope.userModel.projectsManagerRole = $scope.userModel.projectsManagerRole || [];
+      var deletedPermissions = [];
+      var addedProjects;
+      var removalPromises;
+      var managerProjects = $scope.userModel.projectsManagerRole.map(function(item) {
+        item.role = 'manager';
+        return item;
+      });
+      var adminProjects = $scope.userModel.projectsAdminRole.map(function(item) {
+        item.role = 'admin';
+        return item;
+      });
+      var allFormProjects = managerProjects.concat(adminProjects);
 
       if ($scope.editUser) {
-        existingProjects = ($scope.editUser.projects || []).reduce(function (obj, project) {
-          obj[project.uuid] = { uuid: project.uuid, role: project.role, url: project.permission };
-          return obj;
-        }, {});
+        deletedPermissions = deletedProjectPermissions(allFormProjects);
+        removalPromises = deletedPermissions.map(function(permission) {
+          return projectPermissionsService.deletePermission(permission);
+        });
+        addedProjects = updatedProjectPermissions(allFormProjects);
+      } else {
+        addedProjects = allFormProjects;
       }
 
-      if ($scope.userModel.projectsAdminRole) {
-        currentProjects = $scope.userModel.projectsAdminRole.reduce(function (obj, project) {
-          obj[project.uuid] = { uuid: project.uuid, role: project.role };
-          return obj;
-        }, {});
-      }
-
-      if ($scope.userModel.projectsManagerRole) {
-        currentManagerProjects = $scope.userModel.projectsManagerRole.reduce(function (obj, project) {
-          obj[project.uuid] = { uuid: project.uuid, role: project.role, url: project.permission };
-          return obj;
-        }, {});
-      }
-
-      var deletedPermissions = [];
-      angular.forEach(existingProjects, function (permission, project_uuid) {
-        if (!currentProjects[project_uuid] && !currentManagerProjects[project_uuid]) {
-          deletedPermissions.push(permission.url);
-        }
-      });
-
-      var removalPromises = deletedPermissions.map(function (permission) {
-        return projectPermissionsService.deletePermission(permission);
-      });
-
-      var addedProjects = [];
-      $scope.userModel.projectsAdminRole.forEach(function (project) {
-        if (!existingProjects[project.uuid]) {
-          project.role = 'admin';
-          addedProjects.push(project);
-        }
-      });
-
-      $scope.userModel.projectsManagerRole.forEach(function (project) {
-        if (!existingProjects[project.uuid]) {
-          project.role = 'manager';
-          addedProjects.push(project);
-        }
-      });
-
-      var creationPromises = addedProjects.map(function (project) {
+      var creationPromises = addedProjects.map(function(project) {
         var instance = projectPermissionsService.$create();
         instance.user = $scope.userModel.user.url || $scope.editUser.url;
         instance.project = project.url;
         instance.role = project.role;
         return instance.$save();
       });
+
       return $q.all(creationPromises.concat(removalPromises));
+    }
+
+    function deletedProjectPermissions(allFormProjects) {
+      var deletedPermissions = [];
+      angular.forEach($scope.editUser.projects, function(project) {
+        var found = false;
+        for (var i = 0; i < allFormProjects.length; i++) {
+          if (project.uuid === allFormProjects[i].uuid) {
+            found = true;
+            break;
+          }
+        }
+        if (!found) {
+          deletedPermissions.push(project.permission);
+        }
+      });
+      return deletedPermissions;
+    }
+
+    function updatedProjectPermissions(allFormProjects) {
+      return allFormProjects.filter(function(projectItem) {
+        for (var i = 0; i < $scope.editUser.projects.length; i++) {
+          if (projectItem.uuid === $scope.editUser.projects[i].uuid) {
+            return false;
+          }
+        }
+        return true;
+      });
     }
   }
 })();
