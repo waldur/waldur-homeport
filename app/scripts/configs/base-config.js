@@ -171,7 +171,8 @@ angular.module('ncsaas')
         "OpenStack.Tenant": "private_clouds",
         "GitLab.Group": "apps",
         "Zabbix.Host": "apps",
-        "Zabbix.ITService": "apps"
+        "Zabbix.ITService": "apps",
+        "OpenStack.Volume": "storages"
     },
     showCompare: [
       'Virtual machines'
