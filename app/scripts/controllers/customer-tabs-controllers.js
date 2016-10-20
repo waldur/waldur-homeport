@@ -323,6 +323,12 @@
             }
           });
           columns.push({
+            title: 'Storage',
+            render: function(data, type, row, meta) {
+              return row.storage_count || 0;
+            }
+          });
+          columns.push({
             title: 'Apps',
             render: function(data, type, row, meta) {
               return row.app_count || 0;
@@ -381,6 +387,8 @@
             project.vm_count = quota.usage;
           } else if (quota.name == 'nc_private_cloud_count') {
             project.private_cloud_count = quota.usage;
+          } else if (quota.name == 'nc_storage_count') {
+            project.storage_count = quota.usage;
           }
         }
       }
