@@ -835,7 +835,7 @@
               render: function(data, type, row, meta) {
                 var avatar = '<img gravatar-src="\'{gravatarSrc}\'" gravatar-size="100" alt="" class="avatar-img img-xs">'
                   .replace('{gravatarSrc}', row.email);
-                return avatar + ' ' + row.full_name || row.username;
+                return avatar + ' ' + (row.full_name || row.username);
               }
             },
             {
