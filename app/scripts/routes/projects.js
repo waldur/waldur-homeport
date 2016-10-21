@@ -146,6 +146,16 @@
         }
       })
 
+      .state('project.team', {
+        url: 'team/',
+        templateUrl: 'views/partials/filtered-list.html',
+        controller: 'ProjectUsersListController',
+        controllerAs: 'ListController',
+        data: {
+          pageTitle: 'Team'
+        }
+      })
+
       .state('import.import', {
         url: '?service_type&service_uuid',
         templateUrl: 'views/import/import.html',
