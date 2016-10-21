@@ -793,8 +793,6 @@
         'customerPermissionsService',
         'customersService',
         'projectPermissionsService',
-        'usersService',
-        'currentStateService',
         'currentUser',
         'currentCustomer',
         '$q',
@@ -809,8 +807,6 @@
       customerPermissionsService,
       customersService,
       projectPermissionsService,
-      usersService,
-      currentStateService,
       currentUser,
       currentCustomer,
       $q,
@@ -828,6 +824,7 @@
         this._super();
       },
       getTableOptions: function() {
+        var vm = this;
         return {
           noDataText: 'You have no team members yet',
           noMatchesText: 'No members found matching filter.',
@@ -850,7 +847,7 @@
             {
               title: 'Owner',
               render: function(data, type, row, meta) {
-                var cls = row.role == 'Owner' ? 'check' : 'minus';
+                var cls = row.role == 'owner' ? 'check' : 'minus';
                 var title = row.role;
                 return '<span class="icon {cls}" title="{title}"></span>'
                   .replace('{cls}', cls)
@@ -858,21 +855,36 @@
               }
             },
             {
-              title: 'Projects with admin privileges',
+              title: 'Project manager in:',
               render: function(data, type, row, meta) {
-                return row.projects.map(function(item) {
-                  var projectName = item.name;
-                  var href = $state.href('project.details', { uuid: item.uuid });
-                  return '<a href="{href}">{projectName}</a>'
-                    .replace('{projectName}', projectName)
-                    .replace('{href}', href)
-                }).join(', ');
+                return vm.formatProjectRolesList('manager', row);
+              }
+            },
+            {
+              title: 'System administrator in:',
+              render: function(data, type, row, meta) {
+                return vm.formatProjectRolesList('admin', row);
               }
             }
           ],
           tableActions: this.getTableActions(),
           rowActions: this.getRowActions()
         };
+      },
+      formatProjectRolesList: function (roleName, row) {
+        var filteredProjects = row.projects.filter(function(item) {
+          return item.role === roleName;
+        });
+        if (filteredProjects.length === 0) {
+          return 'No projects are assigned to this role';
+        }
+        return filteredProjects.map(function(item) {
+          var projectName = item.name;
+          var href = $state.href('project.details', { uuid: item.uuid });
+          return '<a href="{href}">{projectName}</a>'
+            .replace('{projectName}', projectName)
+            .replace('{href}', href)
+        }).join(', ');
       },
       getTableActions: function() {
         if (this.isOwnerOrStaff) {
@@ -927,6 +939,8 @@
       },
       openPopup: function(user) {
         var dialogScope = $rootScope.$new();
+        dialogScope.currentCustomer = currentCustomer;
+        dialogScope.currentUser = currentUser;
         dialogScope.editUser = user;
         dialogScope.addedUsers = this.list.map(function(users) {
           return users.uuid;
