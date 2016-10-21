@@ -532,9 +532,6 @@
           ]
         };
       },
-      getList: function(filter) {
-        return this._super(angular.extend(this.getFilter(), filter));
-      },
       getFilter: function() {
         return {operation: 'users', UUID: currentProject.uuid};
       }
