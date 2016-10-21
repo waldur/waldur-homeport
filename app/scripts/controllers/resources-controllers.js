@@ -508,6 +508,8 @@
           return 'Applications';
         } else if (resourceCategory === 'private_clouds') {
           return 'Private clouds';
+        } else if (resourceCategory === 'storages') {
+          return 'Storage';
         } else {
           return 'Virtual machines';
         }
@@ -519,6 +521,8 @@
           return 'project.resources.apps';
         } else if (resourceCategory === 'private_clouds') {
           return 'project.resources.clouds';
+        } else if (resourceCategory === 'storages') {
+          return 'project.resources.storage';
         } else {
           return 'project.resources.vms';
         }

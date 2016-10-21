@@ -1,7 +1,7 @@
 ## Introduction
 
-NodeConductor-web is a thin web-based client for the NodeConductor REST client.
-It uses [bower.io][1] as package manager and [grunt][2] for automation.
+Waldur HomePort is web-based client for the Waldur MasterMind, also known as NodeConductor.
+It uses npm and [bower.io][1] as package manager and [grunt][2] and webpack for automation.
 
 ## System Requirements
 
@@ -70,7 +70,14 @@ CORS_EXPOSE_HEADERS = (
 )
 It is needed for enabling reading header's response from frontend app.
 
-## Tests
+## Unit tests
+
+Unit tests are used for testing services, controllers and directives.
+Unit tests are written in the `.spec.js` files.
+In order to run unit tests only once, for example in Jenkins, execute command `npm run test-single-run`.
+If you want to start Karma server, which watches for changes in tests, run simply `npm start`.
+
+## End-to-end tests
 
 [Protractor][6] is used for tests.
 
@@ -122,7 +129,7 @@ This server will not shut down after tests, so this command can be executed only
 
 ### Authentication configurations
 
-Nodeconductor-web allows authentication through GooglePlus and Facebook.
+Waldur HomePort allows authentication through GooglePlus and Facebook.
 [This instructions][3] can be used for Google or Facebook application creation.
 Application public id has to be set as `googleClientId` or `facebookClientId` parameters in `CUSTOMENV`.
 
