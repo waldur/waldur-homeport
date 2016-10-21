@@ -526,7 +526,7 @@
             {
               title: 'Role in project:',
               render: function(data, type, row, meta) {
-                return row.role;
+                return row.role == 'admin' ? 'System administrator' : 'Project manager';
               }
             }
           ]
