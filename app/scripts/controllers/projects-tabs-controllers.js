@@ -480,3 +480,64 @@
   }
 
 })();
+
+(function() {
+  angular.module('ncsaas')
+    .controller('ProjectUsersListController', [
+      'baseControllerListClass',
+      'projectsService',
+      'currentProject',
+      ProjectUsersListController
+    ]);
+
+  function ProjectUsersListController(
+    baseControllerListClass,
+    projectsService,
+    currentProject) {
+    var controllerScope = this;
+    var TeamController = baseControllerListClass.extend({
+      init: function() {
+        this.controllerScope = controllerScope;
+        this.service = projectsService;
+        this.hideNoDataText = true;
+        this.tableOptions = this.getTableOptions();
+        this._super();
+      },
+      getTableOptions: function() {
+        return {
+          noDataText: 'You have no team members yet',
+          noMatchesText: 'No members found matching filter.',
+          searchFieldName: 'full_name',
+          columns: [
+            {
+              title: 'Member',
+              render: function(data, type, row, meta) {
+                var avatar = '<img gravatar-src="\'{gravatarSrc}\'" gravatar-size="100" alt="" class="avatar-img img-xs">'
+                  .replace('{gravatarSrc}', row.email);
+                return avatar + ' ' + (row.full_name || row.username);
+              }
+            },
+            {
+              title: 'E-mail',
+              render: function(data, type, row, meta) {
+                return row.email;
+              }
+            },
+            {
+              title: 'Role in project:',
+              render: function(data, type, row, meta) {
+                return row.role == 'admin' ? 'System administrator' : 'Project manager';
+              }
+            }
+          ]
+        };
+      },
+      getFilter: function() {
+        return {operation: 'users', UUID: currentProject.uuid};
+      }
+    });
+
+    controllerScope.__proto__ = new TeamController();
+  }
+
+})();
