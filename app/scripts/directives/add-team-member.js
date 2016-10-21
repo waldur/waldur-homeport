@@ -122,7 +122,7 @@
       var permission = customerPermissionsService.$create();
       permission.customer = $scope.currentCustomer.url;
       permission.user = $scope.userModel.user.url;
-      permission.role = $scope.userModel.role === 'Owner' ? 'owner' : null;
+      permission.role = $scope.userModel.role === 'Owner' && 'owner';
 
       if ($scope.editUser) {
         if ($scope.userModel.role !== $scope.editUser.role) {
@@ -139,66 +139,61 @@
     }
 
     function saveProjectPermissions() {
-      var deletedPermissions = [];
-      var addedProjects;
-      var removalPromises;
-      var managerProjects = $scope.userModel.projectsManagerRole.map(function(item) {
-        item.role = 'manager';
-        return item;
-      });
-      var adminProjects = $scope.userModel.projectsAdminRole.map(function(item) {
-        item.role = 'admin';
-        return item;
-      });
-      var allFormProjects = managerProjects.concat(adminProjects);
-
+      var originalPermissions = {};
+      var originalRoles = {};
       if ($scope.editUser) {
-        deletedPermissions = deletedProjectPermissions(allFormProjects);
-        removalPromises = deletedPermissions.map(function(permission) {
-          return projectPermissionsService.deletePermission(permission);
+        angular.forEach($scope.editUser.projects, function(project) {
+          originalPermissions[project.uuid] = project.permission;
         });
-        addedProjects = updatedProjectPermissions(allFormProjects);
-      } else {
-        addedProjects = allFormProjects;
+
+        angular.forEach($scope.editUser.projects, function(project) {
+          if (project.role === 'Administrator') {
+            originalRoles[project.uuid] = 'admin';
+          }
+          if (project.role === 'Manager') {
+            originalRoles[project.uuid] = 'manager';
+          }
+        });
       }
 
-      var creationPromises = addedProjects.map(function(project) {
+      var newRoles = {};
+      var newProjects = {};
+      angular.forEach($scope.userModel.projectsManagerRole, function(project) {
+        newRoles[project.uuid] = 'manager';
+        newProjects[project.uuid] = project.url;
+      });
+      angular.forEach($scope.userModel.projectsAdminRole, function(project) {
+        newRoles[project.uuid] = 'admin';
+        newProjects[project.uuid] = project.url;
+      });
+
+      var createdProjects = [];
+      angular.forEach(newRoles, function(role, project) {
+        if (!originalPermissions[project] || (originalRoles[project] !== role)) {
+          createdProjects.push(project);
+        }
+      });
+
+      var creationPromises = createdProjects.map(function(project) {
         var instance = projectPermissionsService.$create();
         instance.user = $scope.userModel.user.url || $scope.editUser.url;
-        instance.project = project.url;
-        instance.role = project.role;
+        instance.project = newProjects[project];
+        instance.role = newRoles[project];
         return instance.$save();
       });
 
-      return $q.all(creationPromises.concat(removalPromises));
-    }
-
-    function deletedProjectPermissions(allFormProjects) {
       var deletedPermissions = [];
-      angular.forEach($scope.editUser.projects, function(project) {
-        var found = false;
-        for (var i = 0; i < allFormProjects.length; i++) {
-          if (project.uuid === allFormProjects[i].uuid) {
-            found = true;
-            break;
-          }
-        }
-        if (!found) {
-          deletedPermissions.push(project.permission);
+      angular.forEach(originalRoles, function(role, project) {
+        if (!newRoles[project] || (newRoles[project] !== role)) {
+          deletedPermissions.push(originalPermissions[project]);
         }
       });
-      return deletedPermissions;
-    }
 
-    function updatedProjectPermissions(allFormProjects) {
-      return allFormProjects.filter(function(projectItem) {
-        for (var i = 0; i < $scope.editUser.projects.length; i++) {
-          if (projectItem.uuid === $scope.editUser.projects[i].uuid) {
-            return false;
-          }
-        }
-        return true;
+      var removalPromises = deletedPermissions.map(function(permission) {
+        return projectPermissionsService.deletePermission(permission);
       });
+
+      return $q.all(creationPromises.concat(removalPromises));
     }
   }
 })();
