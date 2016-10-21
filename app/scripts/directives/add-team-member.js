@@ -44,7 +44,7 @@
         $scope.userModel.role = $scope.editUser.role;
 
         $scope.editUser.projects.forEach(function(project) {
-          if (project.role === 'Administrator') {
+          if (project.role === 'admin') {
             $scope.userModel.projectsAdminRole.push(project);
           } else {
             $scope.userModel.projectsManagerRole.push(project);
@@ -122,7 +122,7 @@
       var permission = customerPermissionsService.$create();
       permission.customer = $scope.currentCustomer.url;
       permission.user = $scope.userModel.user.url;
-      permission.role = $scope.userModel.role === 'Owner' && 'owner';
+      permission.role = $scope.userModel.role === 'owner' ? 'owner' : null;
 
       if ($scope.editUser) {
         if ($scope.userModel.role !== $scope.editUser.role) {
@@ -147,12 +147,7 @@
         });
 
         angular.forEach($scope.editUser.projects, function(project) {
-          if (project.role === 'Administrator') {
-            originalRoles[project.uuid] = 'admin';
-          }
-          if (project.role === 'Manager') {
-            originalRoles[project.uuid] = 'manager';
-          }
+          originalRoles[project.uuid] = project.role;
         });
       }
 

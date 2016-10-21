@@ -847,7 +847,7 @@
             {
               title: 'Owner',
               render: function(data, type, row, meta) {
-                var cls = row.role == 'Owner' ? 'check' : 'minus';
+                var cls = row.role == 'owner' ? 'check' : 'minus';
                 var title = row.role;
                 return '<span class="icon {cls}" title="{title}"></span>'
                   .replace('{cls}', cls)
@@ -857,13 +857,13 @@
             {
               title: 'Project manager in:',
               render: function(data, type, row, meta) {
-                return vm.formatProjectRolesList('Manager', row);
+                return vm.formatProjectRolesList('manager', row);
               }
             },
             {
               title: 'System administrator in:',
               render: function(data, type, row, meta) {
-                return vm.formatProjectRolesList('Administrator', row);
+                return vm.formatProjectRolesList('admin', row);
               }
             }
           ],
