@@ -298,5 +298,11 @@ angular.module('ncsaas')
       'Deletion Scheduled': 'processing',
       'Deleting': 'processing'
     },
-    ownerCanManageCustomer: true
+    ownerCanManageCustomer: true,
+
+    roles: {
+      owner: 'Organization owner',
+      manager: 'Project manager',
+      admin: 'System administrator'
+    }
   });

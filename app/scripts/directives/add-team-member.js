@@ -11,7 +11,8 @@
     'usersService',
     'blockUI',
     '$q',
-    '$scope'
+    '$scope',
+    'ENV'
   ];
 
   function AddTeamMemberDialogController(
@@ -20,7 +21,9 @@
     usersService,
     blockUI,
     $q,
-    $scope) {
+    $scope,
+    ENV) {
+    $scope.roles = ENV.roles;
     $scope.saveUser = saveUser;
     $scope.addText = 'Add';
     $scope.addTitle = 'Add';

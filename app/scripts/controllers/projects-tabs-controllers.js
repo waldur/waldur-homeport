@@ -487,13 +487,15 @@
       'baseControllerListClass',
       'projectsService',
       'currentProject',
+      'ENV',
       ProjectUsersListController
     ]);
 
   function ProjectUsersListController(
     baseControllerListClass,
     projectsService,
-    currentProject) {
+    currentProject,
+    ENV) {
     var controllerScope = this;
     var TeamController = baseControllerListClass.extend({
       init: function() {
@@ -526,7 +528,7 @@
             {
               title: 'Role in project:',
               render: function(data, type, row, meta) {
-                return row.role == 'admin' ? 'System administrator' : 'Project manager';
+                return ENV.roles[row.role];
               }
             }
           ]
