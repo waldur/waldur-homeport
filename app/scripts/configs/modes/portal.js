@@ -23,7 +23,15 @@ angular.module('ncsaas')
         name: 'Virtual machines',
         type: 'provider',
         icon: 'desktop',
+        key: 'vms',
         services: ['Amazon', 'DigitalOcean', 'OpenStack']
+      },
+      {
+        name: 'Private clouds',
+        type: 'provider',
+        icon: 'cloud',
+        key: 'private_clouds',
+        services: ['OpenStack']
       },
       {
         name: 'Storages',
