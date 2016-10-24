@@ -86,7 +86,7 @@
                 var cls = ENV.resourceStateColorClasses[row.state];
                 var title = row.state;
                 if (cls === 'processing') {
-                  cls = 'fa-refresh fa-spin';
+                  cls = 'fa fa-refresh fa-spin';
                   title = row.runtime_state;
                 } else {
                   cls = 'status-circle ' + cls;
@@ -97,7 +97,7 @@
                 return '<a class="{cls}" title="{title}"></a> {state}'
                           .replace('{cls}', cls)
                           .replace('{state}', row.runtime_state || row.state)
-                          .replace('{title}', title);
+                          .replace('{title}', row.runtime_state || row.state);
               },
             }
           ],

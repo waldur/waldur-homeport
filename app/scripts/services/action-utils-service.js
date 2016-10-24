@@ -132,6 +132,8 @@
         templateUrl: templateUrl,
         controller: controllerName,
         scope: dialogScope
+      }).result.then(function() {
+        $rootScope.$broadcast('actionApplied', name);
       });
     };
   }
