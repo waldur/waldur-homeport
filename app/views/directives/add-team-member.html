@@ -49,7 +49,7 @@
                            ng-true-value="'owner'"
                            ng-false-value="''">
                     </input>
-                    Organization owner
+                    {{ ::roles.owner }}
                     <helpicon ng-if="!canChangeRole"
                               help-text="You cannot change your own role"></helpicon>
                 </label>
@@ -57,7 +57,7 @@
         </div>
 
         <div class="form-group" ng-if="!emptyProjectList">
-            <label class="control-label">Project manager in:</label>
+            <label class="control-label">{{ ::roles.manager }} in:</label>
             <ui-select ng-model="userModel.projectsManagerRole"
                        on-remove="pushBackToProjectsList($item)"
                        on-select="refreshProjectChoices($select.search)"
@@ -75,7 +75,7 @@
         </div>
 
         <div class="form-group" ng-if="!emptyProjectList">
-            <label class="control-label">System administrator in:</label>
+            <label class="control-label">{{ ::roles.admin }} in:</label>
             <ui-select ng-model="userModel.projectsAdminRole"
                        on-remove="pushBackToProjectsList($item)"
                        on-select="refreshProjectChoices($select.search)"

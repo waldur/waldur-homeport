@@ -799,6 +799,7 @@
         '$rootScope',
         '$uibModal',
         '$state',
+        'ENV',
         CustomerTeamTabController
       ]);
 
@@ -812,7 +813,8 @@
       $q,
       $rootScope,
       $uibModal,
-      $state) {
+      $state,
+      ENV) {
     var controllerScope = this;
     var TeamController = baseControllerListClass.extend({
       init: function() {
@@ -848,20 +850,20 @@
               title: 'Owner',
               render: function(data, type, row, meta) {
                 var cls = row.role == 'owner' ? 'check' : 'minus';
-                var title = row.role;
+                var title = ENV.roles[row.role];
                 return '<span class="icon {cls}" title="{title}"></span>'
                   .replace('{cls}', cls)
-                  .replace('{title}', title || 'System administrator');
+                  .replace('{title}', title);
               }
             },
             {
-              title: 'Project manager in:',
+              title: ENV.roles.manager + ' in:',
               render: function(data, type, row, meta) {
                 return vm.formatProjectRolesList('manager', row);
               }
             },
             {
-              title: 'System administrator in:',
+              title: ENV.roles.admin + ' in:',
               render: function(data, type, row, meta) {
                 return vm.formatProjectRolesList('admin', row);
               }
@@ -1106,7 +1108,8 @@
     '$filter',
     '$rootScope',
     '$uibModal',
-    'ncUtilsFlash'
+    'ncUtilsFlash',
+    'ENV'
   ];
   function CustomerInvitationsTabController(
     baseControllerListClass,
@@ -1119,7 +1122,8 @@
     $filter,
     $rootScope,
     $uibModal,
-    ncUtilsFlash
+    ncUtilsFlash,
+    ENV
   ) {
     var controllerScope = this;
     var InvitationController = baseControllerListClass.extend({
@@ -1172,19 +1176,12 @@
               title: 'Role',
               render: function(data, type, row, meta) {
                 if (row.customer) {
-                  return 'Organization owner';
+                  return ENV.roles.owner;
                 } else if (row.project) {
                   var href = $state.href('project.details', {
                     uuid: row.project_uuid
                   });
-                  var roleTitle;
-                  if (row.project_role === 'admin') {
-                    roleTitle = 'System administrator';
-                  } else if (row.project_role === 'manager') {
-                    roleTitle = 'Project manager';
-                  } else {
-                    return 'Unknown';
-                  }
+                  var roleTitle = ENV.roles[row.project_role] || 'Unknown';
                   var title = roleTitle + ' in ' + row.project_name;
                   return ncUtils.renderLink(href, title);
                 }
@@ -1291,8 +1288,8 @@
   angular.module('ncsaas')
     .controller('InvitationDialogController', InvitationDialogController);
 
-  InvitationDialogController.$inject = ['$q', '$state', 'invitationService', 'ncUtilsFlash'];
-  function InvitationDialogController($q, $state, invitationService, ncUtilsFlash) {
+  InvitationDialogController.$inject = ['$q', '$state', 'invitationService', 'ncUtilsFlash', 'ENV'];
+  function InvitationDialogController($q, $state, invitationService, ncUtilsFlash, ENV) {
     var vm = this;
     vm.submitForm = submitForm;
     activate();
@@ -1301,19 +1298,19 @@
       vm.roles = [
         {
           field: 'customer_role',
-          title: 'Organization owner',
+          title: ENV.roles.owner,
           value: 'owner',
           icon: 'fa-sitemap'
         },
         {
           field: 'project_role',
-          title: 'Project manager',
+          title: ENV.roles.manager,
           value: 'manager',
           icon: 'fa-users'
         },
         {
           field: 'project_role',
-          title: 'System administrator',
+          title: ENV.roles.admin,
           value: 'admin',
           icon: 'fa-server'
         }
