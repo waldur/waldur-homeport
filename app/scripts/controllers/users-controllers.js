@@ -114,26 +114,6 @@
 
     return ControllerClass;
   }
-
-  angular.module('ncsaas')
-    .controller('UserDetailUpdateController', [
-      'baseUserDetailUpdateController',
-      UserDetailUpdateController
-    ]);
-
-  function UserDetailUpdateController(baseUserDetailUpdateController) {
-    var controllerScope = this;
-    var Controller = baseUserDetailUpdateController.extend({
-      init:function() {
-        this.controllerScope = controllerScope;
-        this._super();
-        this.detailsState = 'organization.details';
-      }
-    });
-
-    controllerScope.__proto__ = new Controller();
-  }
-
 })();
 
 (function() {
@@ -141,25 +121,17 @@
     .controller('DetailUpdateProfileController', [
       'baseUserDetailUpdateController',
       'usersService',
-      'ENV',
-      '$stateParams',
-      '$rootScope',
       DetailUpdateProfileController
     ]);
 
   function DetailUpdateProfileController(
     baseUserDetailUpdateController,
-    usersService,
-    ENV,
-    $stateParams,
-    $rootScope) {
+    usersService) {
     var controllerScope = this;
     var Controller = baseUserDetailUpdateController.extend({
       init:function() {
         this.controllerScope = controllerScope;
         this._super();
-        this.detailsState = 'profile.details';
-        this.showImport = ENV.showImport;
       },
       activate: function() {
         var vm = this;
@@ -167,9 +139,6 @@
           vm.model = response;
           vm.afterActivate();
         });
-      },
-      search: function() {
-        $rootScope.$broadcast('generalSearchChanged', this.searchInput);
       }
     });
 
@@ -194,7 +163,8 @@
       {
           label: "Notifications",
           icon: "fa-envelope",
-          link: "profile.notifications"
+          link: "profile.notifications",
+          feature: "notifications"
       },
       {
           label: "Manage",
@@ -212,7 +182,7 @@
   function UserDetailsController($scope, $stateParams, usersService, PRIVATE_USER_TABS, stateUtilsService) {
     var publicTabs = [
       {
-          label: "Events",
+          label: "Audit logs",
           icon: "fa-bell-o",
           link: "users.details({uuid: context.user.uuid})"
       },

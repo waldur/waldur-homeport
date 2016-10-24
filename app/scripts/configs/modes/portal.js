@@ -13,7 +13,9 @@ angular.module('ncsaas')
       'sizing',
       'projectGroups',
       'apps',
-      'premiumSupport'
+      'premiumSupport',
+      'notifications',
+      'alerts'
     ],
     featuresVisible: false,
     appStoreCategories: [

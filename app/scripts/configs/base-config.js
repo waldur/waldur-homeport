@@ -233,7 +233,10 @@ angular.module('ncsaas')
       'services:provider:uuid',
       'password',
       'premiumSupport',
-      'localSignup'
+      'localSignup',
+      'notifications',
+      'sizing',
+      'alerts',
     ],
     resourcesTypes: {
       vms: 'vms',

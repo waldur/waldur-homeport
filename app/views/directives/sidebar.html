@@ -12,8 +12,9 @@
             </li>
             <li ui-sref-active="active"
                 ng-repeat="item in items"
-                ng-class="item.class">
-                <a ui-sref="{{ item.link }}" ng-if="item.link" visible="::item.feature" ng-click="onMenuClick($event, item)">
+                ng-class="item.class"
+                visible-if="item.feature">
+                <a ui-sref="{{ item.link }}" ng-if="item.link" ng-click="onMenuClick($event, item)">
                     <i class="fa {{ ::item.icon }} fixed-width-icon"></i>
                     <span class="nav-label" ng-bind="::item.label"/>
                     <span class="label label-default pull-right"
@@ -29,8 +30,10 @@
                     ng-show="item.expanded"
                     ng-if="::item.children"
                     ng-class="{in: item.expanded}">
-                    <li ui-sref-active="active" ng-repeat="child in item.children">
-                        <a ui-sref="{{ child.link }}" visible="::item.feature">
+                    <li ui-sref-active="active"
+                        ng-repeat="child in item.children"
+                        visible-if="item.feature">
+                        <a ui-sref="{{ child.link }}">
                             <i class="fa {{ ::child.icon }}"></i>
                             {{ ::child.label }}
                             <span class="label label-info pull-right"
