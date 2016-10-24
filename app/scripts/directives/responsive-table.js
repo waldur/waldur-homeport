@@ -4,9 +4,9 @@
 
   angular.module('ncsaas').directive('responsiveTable', responsiveTable);
 
-  responsiveTable.$inject = ['$timeout', '$compile'];
+  responsiveTable.$inject = ['$timeout', '$interval', '$compile', 'ENV'];
 
-  function responsiveTable($timeout, $compile) {
+  function responsiveTable($timeout, $interval, $compile, ENV) {
     return {
       restrict: 'E',
       scope: {
@@ -80,6 +80,14 @@
         function connectWatcher(table) {
           scope.$watchCollection('controller.list', function() {
             table.draw(false);
+          });
+
+          var timer = $interval(
+            scope.controller.resetCache.bind(scope.controller),
+            ENV.countersTimerInterval * 1000
+          );
+          scope.$on('$destroy', function() {
+            $interval.cancel(timer);
           });
         }
 
