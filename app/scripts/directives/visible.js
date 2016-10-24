@@ -3,21 +3,17 @@
 (function() {
 
   angular.module('ncsaas')
-    .directive('visible', ['ENV', '$parse', visible]);
+    .directive('visible', ['ENV', visible]);
 
-  function visible(ENV, $parse) {
+  function visible(ENV) {
     return {
       restrict: 'A',
       scope: {
         excludeMode: "@"
       },
       link: function(scope, element, attrs) {
-        var doRemove = false, features;
-        if (attrs.visibleIf) {
-          features = [$parse(attrs.visibleIf)(scope)];
-        } else {
+        var doRemove = false,
           features = attrs.visible.split(',');
-        }
         for (var i = 0; i < features.length; i++) {
           if ((ENV.toBeFeatures.indexOf(features[i].trim()) !== -1
               || (ENV.toBeFeatures.indexOf('resources') !== -1 && features[i].trim()) in ENV.resourcesTypes)
