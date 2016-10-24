@@ -22,6 +22,12 @@ angular.module('ncsaas')
         type: 'provider',
         icon: 'desktop',
         services: ['Amazon', 'DigitalOcean', 'OpenStack']
+      },
+      {
+        name: 'Storages',
+        type: 'provider',
+        key: 'storages',
+        services: ['OpenStack']
       }
     ],
     serviceCategories: [
