@@ -1179,7 +1179,7 @@
                   return ENV.roles.owner;
                 } else if (row.project) {
                   var href = $state.href('project.details', {
-                    uuid: row.project_uuid
+                    uuid: ncUtils.getUUID(row.project)
                   });
                   var roleTitle = ENV.roles[row.project_role] || 'Unknown';
                   var title = roleTitle + ' in ' + row.project_name;
