@@ -151,7 +151,7 @@
   angular.module('ncsaas')
     .constant('PRIVATE_USER_TABS', [
       {
-          label: "Events",
+          label: "Audit logs",
           icon: "fa-bell-o",
           link: "profile.details"
       },

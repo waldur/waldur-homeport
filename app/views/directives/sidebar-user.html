@@ -12,7 +12,7 @@
         </span>
     </a>
     <ul uib-dropdown-menu class="m-t-xs">
-        <li ng-repeat="item in Ctrl.items">
+        <li ng-repeat="item in Ctrl.items" visible-if="item.feature">
             <a ui-sref="{{ ::item.link }}" ng-bind="::item.label"></a>
         </li>
         <li class="divider"></li>
