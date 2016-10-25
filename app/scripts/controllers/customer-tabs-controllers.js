@@ -323,6 +323,12 @@
             }
           });
           columns.push({
+            title: 'Storage',
+            render: function(data, type, row, meta) {
+              return row.storage_count || 0;
+            }
+          });
+          columns.push({
             title: 'Apps',
             render: function(data, type, row, meta) {
               return row.app_count || 0;
@@ -381,6 +387,8 @@
             project.vm_count = quota.usage;
           } else if (quota.name == 'nc_private_cloud_count') {
             project.private_cloud_count = quota.usage;
+          } else if (quota.name == 'nc_storage_count') {
+            project.storage_count = quota.usage;
           }
         }
       }
@@ -785,14 +793,13 @@
         'customerPermissionsService',
         'customersService',
         'projectPermissionsService',
-        'usersService',
-        'currentStateService',
         'currentUser',
         'currentCustomer',
         '$q',
         '$rootScope',
         '$uibModal',
         '$state',
+        'ENV',
         CustomerTeamTabController
       ]);
 
@@ -801,14 +808,13 @@
       customerPermissionsService,
       customersService,
       projectPermissionsService,
-      usersService,
-      currentStateService,
       currentUser,
       currentCustomer,
       $q,
       $rootScope,
       $uibModal,
-      $state) {
+      $state,
+      ENV) {
     var controllerScope = this;
     var TeamController = baseControllerListClass.extend({
       init: function() {
@@ -820,6 +826,7 @@
         this._super();
       },
       getTableOptions: function() {
+        var vm = this;
         return {
           noDataText: 'You have no team members yet',
           noMatchesText: 'No members found matching filter.',
@@ -830,7 +837,7 @@
               render: function(data, type, row, meta) {
                 var avatar = '<img gravatar-src="\'{gravatarSrc}\'" gravatar-size="100" alt="" class="avatar-img img-xs">'
                   .replace('{gravatarSrc}', row.email);
-                return avatar + ' ' + row.full_name || row.username;
+                return avatar + ' ' + (row.full_name || row.username);
               }
             },
             {
@@ -842,29 +849,44 @@
             {
               title: 'Owner',
               render: function(data, type, row, meta) {
-                var cls = row.role == 'Owner' ? 'check' : 'minus';
-                var title = row.role;
+                var cls = row.role == 'owner' ? 'check' : 'minus';
+                var title = ENV.roles[row.role];
                 return '<span class="icon {cls}" title="{title}"></span>'
                   .replace('{cls}', cls)
-                  .replace('{title}', title || 'System administrator');
+                  .replace('{title}', title);
               }
             },
             {
-              title: 'Projects with admin privileges',
+              title: ENV.roles.manager + ' in:',
               render: function(data, type, row, meta) {
-                return row.projects.map(function(item) {
-                  var projectName = item.name;
-                  var href = $state.href('project.details', { uuid: item.uuid });
-                  return '<a href="{href}">{projectName}</a>'
-                    .replace('{projectName}', projectName)
-                    .replace('{href}', href)
-                }).join(', ');
+                return vm.formatProjectRolesList('manager', row);
+              }
+            },
+            {
+              title: ENV.roles.admin + ' in:',
+              render: function(data, type, row, meta) {
+                return vm.formatProjectRolesList('admin', row);
               }
             }
           ],
           tableActions: this.getTableActions(),
           rowActions: this.getRowActions()
         };
+      },
+      formatProjectRolesList: function (roleName, row) {
+        var filteredProjects = row.projects.filter(function(item) {
+          return item.role === roleName;
+        });
+        if (filteredProjects.length === 0) {
+          return 'No projects are assigned to this role';
+        }
+        return filteredProjects.map(function(item) {
+          var projectName = item.name;
+          var href = $state.href('project.details', { uuid: item.uuid });
+          return '<a href="{href}">{projectName}</a>'
+            .replace('{projectName}', projectName)
+            .replace('{href}', href)
+        }).join(', ');
       },
       getTableActions: function() {
         if (this.isOwnerOrStaff) {
@@ -919,6 +941,8 @@
       },
       openPopup: function(user) {
         var dialogScope = $rootScope.$new();
+        dialogScope.currentCustomer = currentCustomer;
+        dialogScope.currentUser = currentUser;
         dialogScope.editUser = user;
         dialogScope.addedUsers = this.list.map(function(users) {
           return users.uuid;
@@ -1066,4 +1090,268 @@
     controllerScope.__proto__ = new SizingController();
   }
 
+})();
+
+
+(function() {
+  angular.module('ncsaas')
+    .controller('CustomerInvitationsTabController', CustomerInvitationsTabController);
+
+  CustomerInvitationsTabController.$inject = [
+    'baseControllerListClass',
+    'customersService',
+    'currentCustomer',
+    'currentUser',
+    'invitationService',
+    'ncUtils',
+    '$state',
+    '$filter',
+    '$rootScope',
+    '$uibModal',
+    'ncUtilsFlash',
+    'ENV'
+  ];
+  function CustomerInvitationsTabController(
+    baseControllerListClass,
+    customersService,
+    currentCustomer,
+    currentUser,
+    invitationService,
+    ncUtils,
+    $state,
+    $filter,
+    $rootScope,
+    $uibModal,
+    ncUtilsFlash,
+    ENV
+  ) {
+    var controllerScope = this;
+    var InvitationController = baseControllerListClass.extend({
+      init: function() {
+        this.controllerScope = controllerScope;
+        this.service = invitationService;
+        this.isOwnerOrStaff = customersService.checkCustomerUser(currentCustomer, currentUser);
+        this.tableOptions = this.getTableOptions();
+        this.getSearchFilters();
+        this._super();
+      },
+      getSearchFilters: function() {
+        this.searchFilters = [
+          {
+            name: 'state',
+            title: 'Pending',
+            value: 'pending'
+          },
+          {
+            name: 'state',
+            title: 'Cancelled',
+            value: 'cancelled'
+          },
+          {
+            name: 'state',
+            title: 'Expired',
+            value: 'expired'
+          },
+          {
+            name: 'state',
+            title: 'Accepted',
+            value: 'accepted'
+          }
+        ];
+      },
+      getTableOptions: function() {
+        return {
+          noDataText: 'You have no team invitations yet',
+          noMatchesText: 'No invitations found matching filter.',
+          columns: [
+            {
+              title: 'E-mail',
+              render: function(data, type, row, meta) {
+                var avatar = '<img gravatar-src="\'{gravatarSrc}\'" gravatar-size="100" alt="" class="avatar-img img-xs">'
+                  .replace('{gravatarSrc}', row.email);
+                return avatar + ' ' + row.email;
+              }
+            },
+            {
+              title: 'Role',
+              render: function(data, type, row, meta) {
+                if (row.customer) {
+                  return ENV.roles.owner;
+                } else if (row.project) {
+                  var href = $state.href('project.details', {
+                    uuid: ncUtils.getUUID(row.project)
+                  });
+                  var roleTitle = ENV.roles[row.project_role] || 'Unknown';
+                  var title = roleTitle + ' in ' + row.project_name;
+                  return ncUtils.renderLink(href, title);
+                }
+              }
+            },
+            {
+              title: 'Status',
+              render: function(data, type, row, meta) {
+                return row.state;
+              }
+            },
+            {
+              title: 'Created at',
+              render: function(data, type, row, meta) {
+                return $filter('dateTime')(row.created);
+              }
+            },
+            {
+              title: 'Expires at',
+              render: function(data, type, row, meta) {
+                return $filter('dateTime')(row.expires);
+              }
+            },
+          ],
+          tableActions: this.getTableActions(),
+          rowActions: this.getRowActions()
+        }
+      },
+      getTableActions: function() {
+        return [
+          {
+            name: '<i class="fa fa-plus"></i> Invite user',
+            callback: this.openDialog.bind(this),
+            disabled: !this.isOwnerOrStaff,
+            titleAttr: !this.isOwnerOrStaff && 'Only customer owner or staff can invite users.'
+          }
+        ];
+      },
+      openDialog: function() {
+        var dialogScope = $rootScope.$new();
+        dialogScope.customer = currentCustomer;
+        $uibModal.open({
+          templateUrl: 'views/customer/invitation-dialog.html',
+          scope: dialogScope,
+          controller: 'InvitationDialogController',
+          controllerAs: 'DialogCtrl',
+          bindToController: true,
+        }).result.then(function() {
+          controllerScope.resetCache();
+        });
+      },
+      getRowActions: function() {
+        if (this.isOwnerOrStaff) {
+          return [
+            {
+              name: '<i class="fa fa-ban"></i> Cancel',
+              callback: this.cancelInvitation.bind(this),
+              isDisabled: function(row) {
+                return row.state !== 'pending';
+              },
+              tooltip: function(row) {
+                if (row.state !== 'pending') {
+                  return 'Only pending invitation can be cancelled.';
+                }
+              }
+            },
+            {
+              name: '<i class="fa fa-envelope-o"></i> Resend',
+              callback: this.resendInvitation.bind(this),
+              isDisabled: function(row) {
+                return row.state !== 'pending';
+              },
+              tooltip: function(row) {
+                if (row.state !== 'pending') {
+                  return 'Only pending invitation can be sent again.';
+                }
+              }
+            }
+          ];
+        }
+      },
+      cancelInvitation: function(row) {
+        invitationService.cancel(row.uuid).then(function() {
+          ncUtilsFlash.success('Invitation has been cancelled.');
+          row.state = 'cancelled';
+        }).catch(function() {
+          ncUtilsFlash.error('Unable to cancel invitation.');
+        });
+      },
+      resendInvitation: function(row) {
+        invitationService.resend(row.uuid).then(function() {
+          ncUtilsFlash.success('Invitation has been sent again.');
+        }).catch(function() {
+          ncUtilsFlash.error('Unable to resend invitation.');
+        });
+      }
+    });
+    controllerScope.__proto__ = new InvitationController();
+  }
+})();
+
+
+(function() {
+  angular.module('ncsaas')
+    .controller('InvitationDialogController', InvitationDialogController);
+
+  InvitationDialogController.$inject = ['$q', '$state', 'invitationService', 'ncUtilsFlash', 'ENV'];
+  function InvitationDialogController($q, $state, invitationService, ncUtilsFlash, ENV) {
+    var vm = this;
+    vm.submitForm = submitForm;
+    activate();
+
+    function activate() {
+      vm.roles = [
+        {
+          field: 'customer_role',
+          title: ENV.roles.owner,
+          value: 'owner',
+          icon: 'fa-sitemap'
+        },
+        {
+          field: 'project_role',
+          title: ENV.roles.manager,
+          value: 'manager',
+          icon: 'fa-users'
+        },
+        {
+          field: 'project_role',
+          title: ENV.roles.admin,
+          value: 'admin',
+          icon: 'fa-server'
+        }
+      ];
+      vm.role = vm.roles[0];
+    }
+
+    function submitForm() {
+      if (vm.DialogForm.$invalid) {
+        return $q.reject();
+      }
+
+      vm.submitting = true;
+      return createInvite().then(function() {
+        vm.$close();
+        ncUtilsFlash.success('Invitation has been created.');
+      }).catch(function(errors) {
+        vm.errors = errors;
+        ncUtilsFlash.error('Unable to create invitation.');
+      }).finally(function() {
+        vm.submitting = false;
+      });
+    }
+
+    function createInvite() {
+      var invite = invitationService.$create();
+      invite.link_template = getTemplateUrl();
+      invite.email = vm.email;
+      if (vm.role.field === 'customer_role') {
+        invite.customer_role = vm.role.value;
+        invite.customer = vm.customer.url;
+      } else if (vm.role.field === 'project_role') {
+        invite.project_role = vm.role.value;
+        invite.project = vm.project.url;
+      }
+      return invite.$save();
+    }
+
+    function getTemplateUrl() {
+      var path = $state.href('organization.details', {uuid: 'TEMPLATE'});
+      return location.origin + path.replace('TEMPLATE', '{uuid}');
+    }
+  }
 })();

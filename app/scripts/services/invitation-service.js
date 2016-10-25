@@ -2,16 +2,27 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('invitationService', invitationService);
+    .service('invitationService', ['baseServiceClass', '$http', 'ENV', invitationService]);
 
-  invitationService.$inject = ['baseServiceClass'];
-
-  function invitationService(baseServiceClass) {
+  function invitationService(baseServiceClass, $http, ENV) {
     /*jshint validthis: true */
     var ServiceClass = baseServiceClass.extend({
-      init:function() {
+      init: function() {
         this._super();
         this.endpoint = '/user-invitations/';
+      },
+      accept: function(invitation_uuid) {
+        return this.executeAction(invitation_uuid, 'accept');
+      },
+      cancel: function(invitation_uuid) {
+        return this.executeAction(invitation_uuid, 'cancel');
+      },
+      resend: function(invitation_uuid) {
+        return this.executeAction(invitation_uuid, 'send');
+      },
+      executeAction: function(invitation_uuid, action) {
+        var url = ENV.apiEndpoint + '/api/user-invitations/' + invitation_uuid + '/' + action + '/';
+        return $http.post(url);
       }
     });
     return new ServiceClass();

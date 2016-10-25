@@ -212,15 +212,29 @@
     .controller('VolumeSnapshotsListController', [
       'baseResourceListController',
       '$stateParams',
+      '$scope',
+      '$timeout',
       VolumeSnapshotsListController
     ]);
 
-  function VolumeSnapshotsListController(baseResourceListController, $stateParams) {
+  function VolumeSnapshotsListController(
+    baseResourceListController,
+    $stateParams,
+    $scope,
+    $timeout) {
     var controllerScope = this;
     var ResourceController = baseResourceListController.extend({
       init: function() {
         this.controllerScope = controllerScope;
         this._super();
+
+        $scope.$on('actionApplied', function(event, name) {
+          if (name === 'snapshot') {
+            $timeout(function() {
+              controllerScope.resetCache();
+            });
+          }
+        })
       },
       getTableOptions: function() {
         var options = this._super();

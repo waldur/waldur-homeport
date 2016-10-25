@@ -43,6 +43,7 @@
         this.categories[ENV.VirtualMachines] = 'vms';
         this.categories[ENV.Applications] = 'apps';
         this.categories[ENV.PrivateClouds] = 'private_clouds';
+        this.categories[ENV.Storages] = 'storages';
 
         this._super();
         this.hasCustomFilters = false;
@@ -85,7 +86,7 @@
                 var cls = ENV.resourceStateColorClasses[row.state];
                 var title = row.state;
                 if (cls === 'processing') {
-                  cls = 'fa-refresh fa-spin';
+                  cls = 'fa fa-refresh fa-spin';
                   title = row.runtime_state;
                 } else {
                   cls = 'status-circle ' + cls;
@@ -96,7 +97,7 @@
                 return '<a class="{cls}" title="{title}"></a> {state}'
                           .replace('{cls}', cls)
                           .replace('{state}', row.runtime_state || row.state)
-                          .replace('{title}', title);
+                          .replace('{title}', row.runtime_state || row.state);
               },
             }
           ],
@@ -172,6 +173,8 @@
           $state.go('appstore.store', {category: 'private_clouds'});
         } else if (this.category === ENV.Applications) {
           $state.go('appstore.store', {category: 'apps'});
+        } else if (this.category === ENV.Storages) {
+          $state.go('appstore.store', {category: 'storages'});
         }
       },
       getMapAction: function() {
@@ -505,6 +508,8 @@
           return 'Applications';
         } else if (resourceCategory === 'private_clouds') {
           return 'Private clouds';
+        } else if (resourceCategory === 'storages') {
+          return 'Storage';
         } else {
           return 'Virtual machines';
         }
@@ -516,6 +521,8 @@
           return 'project.resources.apps';
         } else if (resourceCategory === 'private_clouds') {
           return 'project.resources.clouds';
+        } else if (resourceCategory === 'storages') {
+          return 'project.resources.storage';
         } else {
           return 'project.resources.vms';
         }

@@ -5,6 +5,8 @@
   angular.module('ncsaas')
     .directive('visible', ['ENV', visible]);
 
+  // This directive is deprecated. Please use visible-if directive instead which parses expression.
+  // For example: <a visible="resources"></a> becomes <a visible="'resources'"></a>
   function visible(ENV) {
     return {
       restrict: 'A',

@@ -115,6 +115,7 @@ angular.module('ncsaas')
     VirtualMachines: 0,
     PrivateClouds: 1,
     Applications: 2,
+    Storages: 3,
 
     appStoreCategories: [
       {
@@ -137,6 +138,12 @@ angular.module('ncsaas')
         type: 'provider',
         key: 'apps',
         services: ['Oracle', 'GitLab']
+      },
+      {
+        name: 'Storages',
+        type: 'provider',
+        key: 'storages',
+        services: ['OpenStack'],
       }
     ],
     serviceCategories: [
@@ -164,7 +171,8 @@ angular.module('ncsaas')
         "OpenStack.Tenant": "private_clouds",
         "GitLab.Group": "apps",
         "Zabbix.Host": "apps",
-        "Zabbix.ITService": "apps"
+        "Zabbix.ITService": "apps",
+        "OpenStack.Volume": "storages"
     },
     showCompare: [
       'Virtual machines'
@@ -225,7 +233,10 @@ angular.module('ncsaas')
       'services:provider:uuid',
       'password',
       'premiumSupport',
-      'localSignup'
+      'localSignup',
+      'notifications',
+      'sizing',
+      'alerts',
     ],
     resourcesTypes: {
       vms: 'vms',
@@ -290,6 +301,13 @@ angular.module('ncsaas')
       'Deletion Scheduled': 'processing',
       'Deleting': 'processing'
     },
+    ownerCanManageCustomer: true,
+
+    roles: {
+      owner: 'Organization owner',
+      manager: 'Project manager',
+      admin: 'System administrator'
+    }
     ownerCanManageCustomer: true,
     invitationStorageToken: 'ncInvitationToken',
     invitationRedirectTime: 5000

@@ -79,11 +79,26 @@
 
       .state('organization.team', {
         url: 'team/',
-        templateUrl: 'views/partials/filtered-list.html',
-        controller: 'CustomerTeamTabController',
-        controllerAs: 'ListController',
+        templateUrl: 'views/customer/tab-team.html',
         data: {
           pageTitle: 'Team'
+        },
+        abstract: true
+      })
+
+      .state('organization.team.tabs', {
+        url: '',
+        views: {
+          users: {
+            controller: 'CustomerTeamTabController',
+            controllerAs: 'ListController',
+            templateUrl: 'views/partials/filtered-list.html'
+          },
+          invitations: {
+            controller: 'CustomerInvitationsTabController',
+            controllerAs: 'ListController',
+            templateUrl: 'views/partials/filtered-list.html'
+          }
         }
       })
 

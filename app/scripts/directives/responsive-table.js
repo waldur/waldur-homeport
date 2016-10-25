@@ -4,9 +4,9 @@
 
   angular.module('ncsaas').directive('responsiveTable', responsiveTable);
 
-  responsiveTable.$inject = ['$timeout', '$compile'];
+  responsiveTable.$inject = ['$timeout', '$interval', '$compile', 'ENV'];
 
-  function responsiveTable($timeout, $compile) {
+  function responsiveTable($timeout, $interval, $compile, ENV) {
     return {
       restrict: 'E',
       scope: {
@@ -81,6 +81,14 @@
           scope.$watchCollection('controller.list', function() {
             table.draw(false);
           });
+
+          var timer = $interval(
+            scope.controller.resetCache.bind(scope.controller),
+            ENV.countersTimerInterval * 1000
+          );
+          scope.$on('$destroy', function() {
+            $interval.cancel(timer);
+          });
         }
 
         function getTableButtons(actions) {
@@ -110,6 +118,9 @@
             var action = options.rowActions[actionIndex];
             var row = scope.controller.list[rowIndex];
             $timeout(function() {
+              if (action.isDisabled && action.isDisabled(row)) {
+                return;
+              }
               action.callback.apply(scope, [row]);
             });
           });
@@ -124,14 +135,12 @@
               if (options.rowActions instanceof Function) {
                 return options.rowActions.call(scope.controller, row);
               }
-              var template = '<a title="{tooltip}"><button class="btn btn-default btn-sm {cls}" row-index="{row}" action-index="{action}">{name}</button></a>';
+              var template = '<button title="{tooltip}" class="btn btn-default btn-sm {cls}" {disabled} row-index="{row}" action-index="{action}">{name}</button>';
               var buttons = spec.map(function(action, index) {
-                var cls = action.isDisabled && action.isDisabled(row) && 'disabled' || '';
-                if (action.className) {
-                  cls += ' ' + action.className;
-                }
+                var disabled = action.isDisabled && action.isDisabled(row) && 'disabled' || '';
                 var tooltip = action.tooltip && action.tooltip(row) || '';
-                return template.replace('{cls}', cls)
+                return template.replace('{disabled}', disabled)
+                               .replace('{cls}', action.className)
                                .replace('{row}', meta.row)
                                .replace('{action}', index)
                                .replace('{name}', action.name)

@@ -30,29 +30,33 @@
         }
       ];
 
-      var promises = charts.map(function(chart) {
-        var matches = scope.quotas.filter(function(quota) {
-          return quota.name === chart.quota;
-        });
-        if (matches) {
-          var quota = matches[0];
-          chart.quota = quota;
-          chart.current = quota.usage;
-          return vm.getQuotaHistory(quota.url).then(function(data) {
-            chart.data = data;
-          });
-        }
+      var quotaMap = scope.quotas.reduce(function(map, quota) {
+        map[quota.name] = quota;
+        return map;
+      }, {});
+
+      var validCharts = charts.filter(function(chart) {
+        return !!quotaMap[chart.quota];
       });
+
+      var promises = validCharts.map(function(chart) {
+        chart.quota = quotaMap[chart.quota];
+        chart.current = chart.quota.usage;
+        return vm.getQuotaHistory(chart.quota.url).then(function(data) {
+          chart.data = data;
+        });
+      });
+
       return $q.all(promises).then(function() {
-        angular.forEach(charts, function(chart) {
-          if (chart.data.length > 1) {
+        angular.forEach(validCharts, function(chart) {
+          if (chart.data && chart.data.length > 1) {
             chart.change = vm.getRelativeChange([
               chart.data[chart.data.length - 1].value,
               chart.data[0].value
             ]);
           }
         });
-        return charts;
+        return validCharts;
       });
     };
     this.getQuotaHistory = function(url) {

@@ -340,8 +340,9 @@
 
         if (this.serviceMetadata) {
           var types = Object.keys(this.serviceMetadata.resources);
-          if (types.length === 1) {
-            this.setResourceType(types[0]);
+          var filteredTypes = types.filter(this.filterResources.bind(this));
+          if (filteredTypes.length === 1) {
+            this.setResourceType(filteredTypes[0]);
             this.resourceTypesBlock = false;
             this.configureStepNumber = 3;
           } else {
@@ -357,6 +358,8 @@
           }
         } else if (this.selectedCategory.name === 'Private clouds') {
           return item === 'Tenant';
+        } else if (this.selectedCategory.name === 'Storages') {
+          return item === 'Volume';
         }
         return true;
       },
