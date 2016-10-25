@@ -290,5 +290,7 @@ angular.module('ncsaas')
       'Deletion Scheduled': 'processing',
       'Deleting': 'processing'
     },
-    ownerCanManageCustomer: true
+    ownerCanManageCustomer: true,
+    invitationStorageToken: 'ncInvitationToken',
+    invitationRedirectTime: 5000
   });
