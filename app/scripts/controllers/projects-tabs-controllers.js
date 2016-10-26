@@ -518,8 +518,8 @@
         this.tableOptions = {};
         var fn = this._super.bind(this);
         var vm = this;
-        this.getAdminRoles().then(function(result) {
-          vm.isProjectAdmin = result.length ? true : false;
+        this.getProjectRole('manager').then(function(result) {
+          vm.isProjectManager = result.length ? true : false;
           vm.tableOptions = vm.getTableOptions();
           fn();
         });
@@ -556,7 +556,7 @@
         };
       },
       getTableActions: function() {
-        if (this.isOwnerOrStaff || this.isProjectAdmin) {
+        if (this.isOwnerOrStaff || this.isProjectManager) {
           return [
             {
               name: '<i class="fa fa-plus"></i> Add member',
@@ -566,7 +566,7 @@
         }
       },
       getRowActions: function() {
-        if (this.isOwnerOrStaff && !this.isProjectAdmin) {
+        if (this.isOwnerOrStaff || this.isProjectManager) {
           return [
             {
               name: '<i class="fa fa-pencil"></i> Edit',
@@ -601,11 +601,11 @@
       getFilter: function() {
         return {operation: 'users', UUID: currentProject.uuid};
       },
-      getAdminRoles: function() {
+      getProjectRole: function(role) {
         return projectPermissionsService.getList({
           user_url: currentUser.url,
-          project_uuid: currentProject.uuid,
-          role: 'admin'});
+          project: currentProject.uuid,
+          role: role});
       }
     });
 
