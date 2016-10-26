@@ -370,7 +370,7 @@
         vm.choiceDisplay = {};
         vm.selectedResourceTypeName = type.split(/(?=[A-Z])/).join(" ");
         vm.fields = [];
-        var resourceUrl = vm.serviceMetadata.resources[vm.selectedResourceType];
+        var resourceUrl = vm.getResourceUrl();
         if (resourceUrl) {
           vm.instance = servicesService.$create(resourceUrl);
           vm.instance.service_project_link = vm.selectedService.service_project_link_url;
@@ -1046,8 +1046,14 @@
           return "Please specify " + fields.join(", ").toLowerCase();
         }
       },
+      getResourceUrl: function() {
+        if (this.selectedResourceType === 'Tenant') {
+          return ENV.apiEndpoint + 'api/openstack-packages/';
+        }
+        return this.serviceMetadata.resources[this.selectedResourceType];
+      },
       saveInstance: function() {
-        var resourceUrl = this.serviceMetadata.resources[this.selectedResourceType];
+        var resourceUrl = this.getResourceUrl();
         var instance = servicesService.$create(resourceUrl);
         instance.service_project_link = this.selectedService.service_project_link_url;
 
@@ -1102,6 +1108,11 @@
       successRedirect: function(model) {
         if (this.isSupportSelected()) {
           return $state.go('project.support', {uuid: this.currentProject.uuid});
+        } else if (this.selectedResourceType === 'Tenant') {
+          $state.go('resources.details', {
+            uuid: ncUtils.getUUID(model.tenant),
+            resource_type: 'OpenStack.Tenant'
+          });
         } else {
           $state.go('resources.details', {uuid: model.uuid, resource_type: model.resource_type});
         }
