@@ -485,24 +485,37 @@
   angular.module('ncsaas')
     .controller('ProjectUsersListController', [
       'baseControllerListClass',
+      'customersService',
       'projectsService',
+      'projectPermissionsService',
+      'currentUser',
+      'currentCustomer',
       'currentProject',
       'ENV',
+      '$rootScope',
+      '$uibModal',
       ProjectUsersListController
     ]);
 
   function ProjectUsersListController(
     baseControllerListClass,
+    customersService,
     projectsService,
+    projectPermissionsService,
+    currentUser,
+    currentCustomer,
     currentProject,
-    ENV) {
+    ENV,
+    $rootScope,
+    $uibModal) {
     var controllerScope = this;
     var TeamController = baseControllerListClass.extend({
       init: function() {
         this.controllerScope = controllerScope;
         this.service = projectsService;
         this.hideNoDataText = true;
-        this.tableOptions = this.getTableOptions();
+        this.isOwnerOrStaff = customersService.checkCustomerUser(currentCustomer, currentUser);
+        this.tableOptions = {};
         this._super();
       },
       getTableOptions: function() {
@@ -531,11 +544,69 @@
                 return ENV.roles[row.role];
               }
             }
-          ]
+          ],
+          tableActions: this.getTableActions(),
+          rowActions: this.getRowActions()
         };
+      },
+      getTableActions: function() {
+        if (this.isOwnerOrStaff || this.isProjectAdmin) {
+          return [
+            {
+              name: '<i class="fa fa-plus"></i> Add member',
+              callback: this.openPopup.bind(this)
+            }
+          ];
+        }
+      },
+      getRowActions: function() {
+        if (this.isOwnerOrStaff && !this.isProjectAdmin) {
+          return [
+            {
+              name: '<i class="fa fa-pencil"></i> Edit',
+              callback: this.openPopup.bind(this)
+            },
+            {
+              name: '<i class="fa fa-trash"></i> Remove',
+              callback: this.remove.bind(this)
+            }
+          ];
+        }
+      },
+      removeInstance: function(user) {
+        return projectPermissionsService.deletePermission(user.permission);
+      },
+      openPopup: function(user) {
+        var dialogScope = $rootScope.$new();
+        dialogScope.currentProject = currentProject;
+        dialogScope.editUser = user;
+        dialogScope.isProjectAdmin = this.isProjectAdmin;
+        dialogScope.addedUsers = this.list.map(function(users) {
+          return users.uuid;
+        });
+        $uibModal.open({
+          templateUrl: 'views/directives/add-project-member.html',
+          controller: 'AddProjectMemberDialogController',
+          scope: dialogScope
+        }).result.then(function() {
+          controllerScope.resetCache();
+        });
       },
       getFilter: function() {
         return {operation: 'users', UUID: currentProject.uuid};
+      },
+      afterGetList: function() {
+        this.isProjectAdmin = this.checkAdminRole();
+        this.tableOptions = this.getTableOptions();
+      },
+      checkAdminRole: function() {
+        var i;
+        for (i = 0; i < this.list.length; i++) {
+          if (this.list[i].uuid === currentUser.uuid && this.list[i].role === 'admin') {
+            return true;
+          }
+        }
+        return false;
       }
     });
 
