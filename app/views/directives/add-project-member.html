@@ -8,25 +8,7 @@
     <div ng-if="!loading" block-ui="add-team-member-dialog">
         <div class="form-group" ng-if="!editUser && users.length">
             <label class="control-label">User:</label>
-            <ui-select ng-model="projectModel.user" ng-required="projectModel.user" theme="bootstrap">
-                <ui-select-match placeholder="Select user...">
-                    {{ $select.selected.full_name || $select.selected.username }}
-                </ui-select-match>
-                <ui-select-choices repeat="user in users | filter: $select.search track by user.uuid">
-                    <div>{{ ::user.full_name }}</div>
-                    <small>
-                        <div ng-if="::user.username">
-                            Username: {{ ::user.username }}
-                        </div>
-                        <div ng-if="::user.email">
-                            E-mail: {{ ::user.email }}
-                        </div>
-                        <div ng-if="::user.civil_number">
-                            Civil number: {{ ::user.civil_number }}
-                        </div>
-                    </small>
-                </ui-select-choices>
-            </ui-select>
+            <users-ui-select users="users" model="projectModel"></users-ui-select>
         </div>
 
         <p ng-if="!editUser && !users.length" class="text-danger">
@@ -45,24 +27,13 @@
                 Role: <span ng-if="isProjectAdmin">as {{::possibleRoles[0].name}}</span>
             </div>
             <div></div>
-            <div ng-if="!isProjectAdmin">
+            <div ng-if="!isProjectAdmin" ng-repeat="role in possibleRoles">
                 <label>
                     <input name="role"
                            type="radio"
                            ng-model="projectModel.role"
-                           ng-value="'manager'"
-                           value="possibleRoles[1].value">
-                    {{possibleRoles[1].name}}
-                </label>
-            </div>
-            <div ng-if="!isProjectAdmin">
-                <label>
-                    <input name="role"
-                           type="radio"
-                           ng-model="projectModel.role"
-                           ng-value="'admin'"
-                           value="possibleRoles[0].value">
-                    {{possibleRoles[0].name}}
+                           ng-value="role.value">
+                    {{role.name}}
                 </label>
             </div>
         </div>

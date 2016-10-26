@@ -21,7 +21,7 @@
     $q,
     $scope,
     ENV) {
-    $scope.roles = ENV.roles;
+    var roles = ENV.roles;
     $scope.saveUser = saveUser;
     $scope.addText = 'Add';
     $scope.addTitle = 'Add';
@@ -29,14 +29,14 @@
       role: null
     };
     $scope.possibleRoles = [
-      { name: $scope.roles.admin, value: 'admin' },
-      { name: $scope.roles.manager, value: 'manager' }
+      { name: roles.manager, value: 'manager' },
+      { name: roles.admin, value: 'admin' }
     ];
     $scope.errors = {};
     $scope.canSubmit = canSubmit;
 
     function loadData() {
-      $scope.projectModel.role = $scope.possibleRoles[0].value;
+      $scope.projectModel.role = $scope.possibleRoles[1].value;
 
       if ($scope.editUser) {
         $scope.addText = 'Save';
@@ -80,8 +80,8 @@
 
     function saveProjectPermissions() {
       if ($scope.editUser && $scope.editUser.role !== $scope.projectModel.role) {
-        return projectPermissionsService.deletePermission($scope.editUser.permission).then(function() {
-          return createPermission($scope.projectModel.role);
+        return createPermission($scope.projectModel.role).then(function() {
+          return projectPermissionsService.deletePermission($scope.editUser.permission);
         });
       } else if (!$scope.editUser) {
         return createPermission($scope.projectModel.role);

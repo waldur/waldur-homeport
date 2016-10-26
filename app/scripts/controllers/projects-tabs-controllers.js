@@ -516,7 +516,13 @@
         this.hideNoDataText = true;
         this.isOwnerOrStaff = customersService.checkCustomerUser(currentCustomer, currentUser);
         this.tableOptions = {};
-        this._super();
+        var fn = this._super.bind(this);
+        var vm = this;
+        this.getAdminRoles().then(function(result) {
+          vm.isProjectAdmin = result.length ? true : false;
+          vm.tableOptions = vm.getTableOptions();
+          fn();
+        });
       },
       getTableOptions: function() {
         return {
@@ -595,18 +601,11 @@
       getFilter: function() {
         return {operation: 'users', UUID: currentProject.uuid};
       },
-      afterGetList: function() {
-        this.isProjectAdmin = this.checkAdminRole();
-        this.tableOptions = this.getTableOptions();
-      },
-      checkAdminRole: function() {
-        var i;
-        for (i = 0; i < this.list.length; i++) {
-          if (this.list[i].uuid === currentUser.uuid && this.list[i].role === 'admin') {
-            return true;
-          }
-        }
-        return false;
+      getAdminRoles: function() {
+        return projectPermissionsService.getList({
+          user_url: currentUser.url,
+          project_uuid: currentProject.uuid,
+          role: 'admin'});
       }
     });
 
