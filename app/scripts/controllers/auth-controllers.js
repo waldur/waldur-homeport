@@ -4,10 +4,10 @@
   angular.module('ncsaas')
     .controller('AuthController', 
       ['ENV', '$q', '$sce', '$scope', '$state', 'authService',
-      'baseControllerClass', 'ncUtilsFlash', '$rootScope', AuthController]);
+      'baseControllerClass', 'ncUtilsFlash', '$rootScope', '$window', AuthController]);
 
   function AuthController(ENV, $q, $sce, $scope, $state, authService,
-    baseControllerClass, ncUtilsFlash, $rootScope) {
+    baseControllerClass, ncUtilsFlash, $rootScope, $window) {
     var controllerScope = this;
     var Controller = baseControllerClass.extend({
       isSignupFormVisible: $state.current.data.isSignupFormVisible,
@@ -66,6 +66,10 @@
         }
       },
       signup: function() {
+        if (!$window.localStorage[ENV.invitationStorageToken]) {
+          $state.go('errorPage.notFound');
+          return;
+        }
         if ($scope.auth.RegisterForm.$invalid) {
           return $q.reject();
         }

@@ -36,8 +36,15 @@
       getFilename: ncUtils.getFilename,
 
       init: function() {
-        this._super();
-        this.activate();
+        var fn = this._super.bind(this);
+        var vm = this;
+        vm.checkInvitation().then(function(invitation) {
+          vm.invitation = invitation;
+          fn();
+          vm.activate();
+        }, function() {
+          $state.go('errorPage.notFound');
+        });
       },
       activate: function() {
         this.getUser();
@@ -58,27 +65,16 @@
         });
       },
       gotoNextState: function() {
-        if (this.invitation && this.invitation.state === 'pending') {
+        var invitationValid = this.invitation && this.invitation.state === 'pending';
+        if (invitationValid) {
           $state.go('dashboard.index');
-        } else {
+        } else if (invitationValid && !this.invitation.customer && !this.invitation.project) {
           $state.go('profile.detail');
         }
       },
       checkInvitation: function() {
-        var vm = this;
-        // TODO: XXX replace dummy code when back end data is ready
-        vm.invitation =  {
-          'project': 'https://rest-test.nodeconductor.com/api/projects/6f3ae6f43d284ca196afeb467880b3b9/',
-          'project_role': 'admin',
-          'customer': 'https://rest-test.nodeconductor.com/api/customers/bf6d515c9e6e445f9c339021b30fc96b/',
-          'customer_role': 'owner',
-          'state': 'pending'
-        };
-
         var invitationUUID = $window.localStorage[ENV.invitationStorageToken];
-        return invitationService.$get(invitationUUID).then(function(invitation) {
-          vm.invitation = invitation;
-        });
+        return invitationService.$get(invitationUUID);
       },
       saveCustomerPermission: function() {
         var vm = this;
@@ -102,16 +98,14 @@
           vm.user.errors = {email: 'This field is required'};
           return $q.reject();
         }
-        return vm.checkInvitation().finally(function() {
-          if (vm.invitation && vm.invitation.state === 'pending') {
-            return vm.saveUser()
-              .then(vm.saveCustomerPermission.bind(vm))
-              .then(vm.saveProjectPermission.bind(vm))
-              .then(vm.gotoNextState);
-          }
+        if (vm.invitation && vm.invitation.state === 'pending') {
           return vm.saveUser()
+            .then(vm.saveCustomerPermission.bind(vm))
+            .then(vm.saveProjectPermission.bind(vm))
             .then(vm.gotoNextState);
-        });
+        }
+        return vm.saveUser()
+          .then(vm.gotoNextState);
       }
     });
 
