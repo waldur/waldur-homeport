@@ -52,7 +52,7 @@
           if (chart.data && chart.data.length > 1) {
             chart.change = vm.getRelativeChange([
               chart.data[chart.data.length - 1].value,
-              chart.data[0].value
+              chart.data[chart.data.length - 2].value
             ]);
           }
         });
