@@ -16,6 +16,10 @@
       openidUrl: $sce.trustAsResourceUrl(ENV.apiEndpoint + 'api-auth/openid/login/?next=/api-auth/login_complete'),
 
       init: function() {
+        if ($state.current.name === 'register' && !$window.localStorage[ENV.invitationStorageToken]) {
+          $state.go('errorPage.notFound');
+          return;
+        }
         this._super();
       },
       signin: function() {
@@ -66,10 +70,6 @@
         }
       },
       signup: function() {
-        if (!$window.localStorage[ENV.invitationStorageToken]) {
-          $state.go('errorPage.notFound');
-          return;
-        }
         if ($scope.auth.RegisterForm.$invalid) {
           return $q.reject();
         }

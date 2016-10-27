@@ -7,25 +7,17 @@
 
   InitialDataController.$inject = ['usersService',
     'invitationService',
-    'projectPermissionsService',
-    'customerPermissionsService',
     'baseControllerClass',
-    'ENV',
     '$q',
     '$state',
-    '$window',
     'ncUtils'];
 
   function InitialDataController(
     usersService,
     invitationService,
-    projectPermissionsService,
-    customerPermissionsService,
     baseControllerClass,
-    ENV,
     $q,
     $state,
-    $window,
     ncUtils) {
     var controllerScope = this;
     var Controller = baseControllerClass.extend({
@@ -39,7 +31,11 @@
         var fn = this._super.bind(this);
         var vm = this;
         vm.checkInvitation().then(function(invitation) {
+          console.log('INVITATION ', invitation);
           vm.invitation = invitation;
+          if (vm.invitation.state !== 'pending') {
+            $state.go('errorPage.notFound');
+          }
           fn();
           vm.activate();
         }, function() {
@@ -65,32 +61,14 @@
         });
       },
       gotoNextState: function() {
-        var invitationValid = this.invitation && this.invitation.state === 'pending';
-        if (invitationValid) {
+        if (this.invitation.customer) {
           $state.go('dashboard.index');
-        } else if (invitationValid && !this.invitation.customer && !this.invitation.project) {
+        } else if (!this.invitation.customer && !this.invitation.project) {
           $state.go('profile.detail');
         }
       },
-      checkInvitation: function() {
-        var invitationUUID = $window.localStorage[ENV.invitationStorageToken];
-        return invitationService.$get(invitationUUID);
-      },
-      saveCustomerPermission: function() {
-        var vm = this;
-        var permission = customerPermissionsService.$create();
-        permission.user = vm.user.url;
-        permission.customer = vm.invitation.customer;
-        permission.role = vm.invitation.customer_role;
-        return permission.$save();
-      },
-      saveProjectPermission: function() {
-        var vm = this;
-        var instance = projectPermissionsService.$create();
-        instance.user = vm.user.url;
-        instance.project = vm.invitation.project;
-        instance.role = vm.invitation.project_role;
-        return instance.$save();
+      checkInvitation: function() {        
+        return invitationService.$get(invitationService.getInvitationToken());
       },
       save: function() {
         var vm = this;
@@ -98,14 +76,9 @@
           vm.user.errors = {email: 'This field is required'};
           return $q.reject();
         }
-        if (vm.invitation && vm.invitation.state === 'pending') {
-          return vm.saveUser()
-            .then(vm.saveCustomerPermission.bind(vm))
-            .then(vm.saveProjectPermission.bind(vm))
-            .then(vm.gotoNextState);
-        }
-        return vm.saveUser()
-          .then(vm.gotoNextState);
+        return invitationService.accept(vm.invitation.uuid)
+          .then(vm.saveUser.bind(vm))
+          .then(vm.gotoNextState.bind(vm));
       }
     });
 
