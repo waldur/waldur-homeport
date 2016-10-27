@@ -36,7 +36,7 @@
     $scope.canSubmit = canSubmit;
 
     function loadData() {
-      $scope.projectModel.role = $scope.possibleRoles[1].value;
+      $scope.projectModel.role = 'admin';
 
       if ($scope.editUser) {
         $scope.addText = 'Save';
