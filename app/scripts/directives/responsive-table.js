@@ -16,11 +16,11 @@
       link: function(scope, element) {
         var options = scope.controller.tableOptions;
 
-        scope.$watch('controller.tableOptions', function(newEntity) {
-          if (newEntity.columns) {
+        scope.$watch('controller.tableOptions', function(newTableOptions) {
+          if (newTableOptions.columns) {
             var table = initTable();
-              connectRowButtons(table);
-              connectWatcher(table);
+            connectRowButtons(table);
+            connectWatcher(table);
           }
         });
 

@@ -8,7 +8,7 @@
     <div ng-if="!loading" block-ui="add-team-member-dialog">
         <div class="form-group" ng-if="!editUser && users.length">
             <label class="control-label">User:</label>
-            <users-ui-select users="users" model="projectModel"></users-ui-select>
+            <user-selector users="users" model="projectModel"></user-selector>
         </div>
 
         <p ng-if="!editUser && !users.length" class="text-danger">
