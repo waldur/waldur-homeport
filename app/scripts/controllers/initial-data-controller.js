@@ -10,6 +10,7 @@
     'baseControllerClass',
     '$q',
     '$state',
+    'ENV',
     'ncUtils'];
 
   function InitialDataController(
@@ -18,6 +19,7 @@
     baseControllerClass,
     $q,
     $state,
+    ENV,
     ncUtils) {
     var controllerScope = this;
     var Controller = baseControllerClass.extend({
@@ -30,16 +32,21 @@
       init: function() {
         var fn = this._super.bind(this);
         var vm = this;
-        vm.checkInvitation().then(function(invitation) {
-          vm.invitation = invitation;
-          if (vm.invitation.state !== 'pending') {
-            $state.go('errorPage.notFound');
-          }
+        if (!ENV.invitationsEnabled) {
           fn();
           vm.activate();
-        }, function() {
-          $state.go('errorPage.notFound');
-        });
+        } else {
+          vm.checkInvitation().then(function(invitation) {
+            vm.invitation = invitation;
+            if (vm.invitation.state !== 'pending') {
+              $state.go('errorPage.notFound');
+            }
+            fn();
+            vm.activate();
+          }, function() {
+            $state.go('errorPage.notFound');
+          });
+        }
       },
       activate: function() {
         this.getUser();
@@ -48,7 +55,7 @@
         var vm = this;
         usersService.getCurrentUser().then(function(response) {
           vm.user = response;
-          vm.user.email = vm.invitation.email;
+          vm.user.email = vm.invitation ? vm.invitation.email : response.email;
         });
       },
       saveUser: function() {
@@ -60,13 +67,14 @@
           vm.user.errors = response.data;
         });
       },
-      gotoNextState: function() {
-        if (this.invitation.customer) {
+      gotoNextState: function () {
+        if (!ENV.invitationsEnabled ||
+          (ENV.invitationsEnabled && !this.invitation.customer && !this.invitation.project)) {
+          $state.go('profile.detail');
+        } else if (this.invitation.customer) {
           $state.go('dashboard.index');
         } else if (!this.invitation.customer && this.invitation.project) {
           $state.go('project.details');
-        } else if (!this.invitation.customer && !this.invitation.project) {
-          $state.go('profile.detail');
         }
       },
       checkInvitation: function() {
@@ -77,6 +85,10 @@
         if (!vm.user.email) {
           vm.user.errors = {email: 'This field is required'};
           return $q.reject();
+        }
+        if (!ENV.invitationsEnabled) {
+          return vm.saveUser()
+            .then(vm.gotoNextState.bind(vm));
         }
         return invitationService.accept(vm.invitation.uuid)
           .then(vm.saveUser.bind(vm))

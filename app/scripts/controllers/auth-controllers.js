@@ -16,7 +16,7 @@
       openidUrl: $sce.trustAsResourceUrl(ENV.apiEndpoint + 'api-auth/openid/login/?next=/api-auth/login_complete'),
 
       init: function() {
-        if ($state.current.name === 'register' && !invitationService.getInvitationToken()) {
+        if (ENV.invitationsEnabled && $state.current.name === 'register' && !invitationService.getInvitationToken()) {
           $state.go('errorPage.notFound');
           return;
         }

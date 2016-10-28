@@ -14,6 +14,10 @@
     var controllerScope = this;
     var Controller = baseControllerClass.extend({
       init: function() {
+        if (!ENV.invitationsEnabled) {
+          $state.go('errorPage.notFound');
+          return;
+        }
         var invitationUUID = $state.params.uuid;
         this.setInvitationToken(invitationUUID);
         this._super();

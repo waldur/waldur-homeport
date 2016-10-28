@@ -309,5 +309,6 @@ angular.module('ncsaas')
       admin: 'System administrator'
     },
     invitationStorageToken: 'ncInvitationToken',
-    invitationRedirectTime: 5000
+    invitationRedirectTime: 5000,
+    invitationsEnabled: true
   });
