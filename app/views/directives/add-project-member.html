@@ -22,12 +22,14 @@
             </p>
         </div>
 
-        <div class="form-group">
-            <div>
-                Role: <span ng-if="isProjectAdmin">as {{::possibleRoles[0].name}}</span>
-            </div>
-            <div></div>
-            <div ng-if="!isProjectAdmin" ng-repeat="role in possibleRoles">
+        <div class="form-group" ng-if="isProjectManager">
+            <p class="form-control-static">
+                <strong>Role</strong>: {{::possibleRoles[1].name}}
+            </p>
+        </div>
+
+        <div class="form-group" ng-if="!isProjectManager">
+            <div ng-repeat="role in possibleRoles">
                 <label>
                     <input name="role"
                            type="radio"
