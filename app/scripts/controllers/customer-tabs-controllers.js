@@ -948,8 +948,7 @@
           return users.uuid;
         });
         $uibModal.open({
-          templateUrl: 'views/directives/add-team-member.html',
-          controller: 'AddTeamMemberDialogController',
+          component: 'addTeamMember',
           scope: dialogScope
         }).result.then(function() {
           controllerScope.resetCache();
