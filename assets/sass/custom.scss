@@ -96,3 +96,13 @@ body.landing {
 .full-width .dataTable {
   width: 100%;
 }
+
+.invitation-vertical-center {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+
+  p {
+    text-align: center;
+  }
+}

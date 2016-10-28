@@ -27,5 +27,6 @@ angular.module('ncsaas')
     serviceCategories: [],
     homeTemplate: 'views/home/private-iaas/home.html',
     homeHeaderTemplate: 'views/partials/private-iaas/site-header.html',
-    homeLoginTemplate: 'views/home/private-iaas/login.html'
+    homeLoginTemplate: 'views/home/private-iaas/login.html',
+    invitationsEnabled: true
   });

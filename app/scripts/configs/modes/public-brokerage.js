@@ -11,5 +11,6 @@ angular.module('ncsaas')
       'projectGroups',
       'estonianId'
     ],
-    featuresVisible: false
+    featuresVisible: false,
+    invitationsEnabled: true
   });
