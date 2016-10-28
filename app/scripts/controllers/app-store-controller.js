@@ -2,22 +2,20 @@
   angular.module('ncsaas')
     .service('AppStoreUtilsService', AppStoreUtilsService);
 
-  AppStoreUtilsService.$inject = ['$uibModal', '$rootScope', 'ENV'];
-  function AppStoreUtilsService($uibModal, $rootScope, ENV) {
+  AppStoreUtilsService.$inject = ['$uibModal', 'ENV'];
+  function AppStoreUtilsService($uibModal, ENV) {
     this.openDialog = openDialog;
     this.findOffering = findOffering;
 
     function openDialog(options) {
-      var dialogScope = $rootScope.$new();
-      options = options || {};
-      dialogScope.selectProject = options.selectProject;
       $uibModal.open({
-        templateUrl: 'views/directives/appstore-dialog.html',
+        component: 'appstoreCategorySelector',
         size: 'lg',
-        controller: 'AppStoreDialogController',
-        controllerAs: 'DialogCtrl',
-        bindToController: true,
-        scope: dialogScope
+        resolve: {
+          selectProject: function() {
+            return options && options.selectProject;
+          }
+        }
       });
     }
     function findOffering(key) {
@@ -30,78 +28,6 @@
     }
   }
 
-  angular.module('ncsaas')
-    .controller('AppStoreDialogController', AppStoreDialogController);
-
-  AppStoreDialogController.$inject = [
-    '$q', 'blockUI', 'ENV', '$state', '$rootScope', 'currentStateService', 'projectsService'
-  ];
-  function AppStoreDialogController(
-    $q, blockUI, ENV, $state, $rootScope, currentStateService, projectsService
-  ) {
-    var vm = this;
-    vm.selectOffering = selectOffering;
-    activate();
-
-    function activate() {
-      angular.forEach(ENV.offerings, function(offering) {
-        if (ENV.futureCategories.indexOf(offering.key) !== -1) {
-          offering.comingSoon = true;
-        }
-      });
-
-      vm.groups = [
-        {
-          label: 'Turnkey solution',
-          items: ENV.offerings.filter(function(offering) {
-            return offering.category === "Turnkey solution";
-          }),
-        },
-        {
-          label: 'Component offerings',
-          items: ENV.offerings.filter(function(offering) {
-            return offering.category === "Component offering";
-          })
-        }
-      ];
-
-      if (vm.selectProject) {
-        currentStateService.getCustomer().then(function(customer) {
-          vm.projects = customer.projects;
-        });
-      }
-    }
-
-    function selectOffering(offering) {
-      if (vm.DialogForm.$invalid) {
-        return $q.reject();
-      } else {
-        var promise = selectProject().then(function() {
-          return $state.go(offering.state, {category: offering.key});
-        });
-        return blockAndClose(promise);
-      }
-    }
-
-    function blockAndClose(promise) {
-      var block = blockUI.instances.get('appstore-dialog');
-      block.start({delay: 0});
-      return promise.finally(function() {
-        block.stop();
-        vm.$close();
-      });
-    }
-
-    function selectProject() {
-      if (vm.selectedProject) {
-        return projectsService.$get(vm.selectedProject).then(function(project) {
-          $rootScope.$broadcast('adjustCurrentProject', project);
-        });
-      } else {
-        return $q.when(true);
-      }
-    }
-  }
 
   angular.module('ncsaas')
     .controller('AppStoreOfferingController', AppStoreOfferingController);
