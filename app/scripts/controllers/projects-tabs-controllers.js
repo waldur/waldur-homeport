@@ -566,15 +566,36 @@
         }
       },
       getRowActions: function() {
+        var vm = this;
         if (this.isOwnerOrStaff || this.isProjectManager) {
           return [
             {
               name: '<i class="fa fa-pencil"></i> Edit',
-              callback: this.openPopup.bind(this)
+              callback: this.openPopup.bind(this),
+              isDisabled: function(row) {
+                var check = vm.isProjectManager && row.role === 'manager';
+                return check;
+              },
+              tooltip: function(row) {
+                if (vm.isProjectManager && row.role === 'manager') {
+                  return 'Project manager cannot edit users with same role';
+                }
+                return false;
+              }
             },
             {
               name: '<i class="fa fa-trash"></i> Remove',
-              callback: this.remove.bind(this)
+              callback: this.remove.bind(this),
+              isDisabled: function(row) {
+                var check = vm.isProjectManager && row.role === 'manager';
+                return check;
+              },
+              tooltip: function(row) {
+                if (vm.isProjectManager && row.role === 'manager') {
+                  return 'Project manager cannot edit users with same role';
+                }
+                return false;
+              }
             }
           ];
         }
