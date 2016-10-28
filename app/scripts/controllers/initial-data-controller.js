@@ -30,7 +30,6 @@
       init: function() {
         var fn = this._super.bind(this);
         var vm = this;
-        vm.emailDisabled = true;
         vm.checkInvitation().then(function(invitation) {
           vm.invitation = invitation;
           if (vm.invitation.state !== 'pending') {
