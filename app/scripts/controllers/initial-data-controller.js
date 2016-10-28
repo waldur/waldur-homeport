@@ -27,6 +27,7 @@
       customer: {},
       project: {},
       currentProcess: null,
+      invitation: {},
       getFilename: ncUtils.getFilename,
 
       init: function() {
@@ -68,12 +69,11 @@
         });
       },
       gotoNextState: function () {
-        if (!ENV.invitationsEnabled ||
-          (ENV.invitationsEnabled && !this.invitation.customer && !this.invitation.project)) {
+        if (!ENV.invitationsEnabled) {
           $state.go('profile.detail');
         } else if (this.invitation.customer) {
           $state.go('dashboard.index');
-        } else if (!this.invitation.customer && this.invitation.project) {
+        } else if (this.invitation.project) {
           $state.go('project.details');
         }
       },
