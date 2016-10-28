@@ -15,7 +15,7 @@
             </div>
             <div class="fields">
                 <label for="email">Email</label>
-                <input id="email" type="text" ng-model="InitialData.user.email"/>
+                <input id="email" ng-disabled="InitialData.emailDisabled" type="text" ng-model="InitialData.user.email"/>
                 <div class="error" ng-repeat="error in InitialData.user.errors" ng-bind="error"></div>
             </div>
             <div class="clear"></div>

@@ -30,8 +30,8 @@
       init: function() {
         var fn = this._super.bind(this);
         var vm = this;
+        vm.emailDisabled = true;
         vm.checkInvitation().then(function(invitation) {
-          console.log('INVITATION ', invitation);
           vm.invitation = invitation;
           if (vm.invitation.state !== 'pending') {
             $state.go('errorPage.notFound');
@@ -49,6 +49,7 @@
         var vm = this;
         usersService.getCurrentUser().then(function(response) {
           vm.user = response;
+          vm.user.email = vm.invitation.email;
         });
       },
       saveUser: function() {
@@ -63,11 +64,13 @@
       gotoNextState: function() {
         if (this.invitation.customer) {
           $state.go('dashboard.index');
+        } else if (!this.invitation.customer && this.invitation.project) {
+          $state.go('project.details');
         } else if (!this.invitation.customer && !this.invitation.project) {
           $state.go('profile.detail');
         }
       },
-      checkInvitation: function() {        
+      checkInvitation: function() {
         return invitationService.$get(invitationService.getInvitationToken());
       },
       save: function() {
