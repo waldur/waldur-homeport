@@ -1349,7 +1349,7 @@
     }
 
     function getTemplateUrl() {
-      var path = $state.href('organization.details', {uuid: 'TEMPLATE'});
+      var path = $state.href('invitation', {uuid: 'TEMPLATE'});
       return location.origin + path.replace('TEMPLATE', '{uuid}');
     }
   }
