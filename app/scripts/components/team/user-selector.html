@@ -2,7 +2,7 @@
     <ui-select-match placeholder="Select user...">
         {{ $select.selected.full_name || $select.selected.username }}
     </ui-select-match>
-    <ui-select-choices repeat="user in users | filter: $select.search track by user.uuid">
+    <ui-select-choices repeat="user in users | filter: $select.search">
         <div>{{ ::user.full_name }}</div>
         <small>
             <div ng-if="::user.username">

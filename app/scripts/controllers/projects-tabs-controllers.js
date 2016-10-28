@@ -605,8 +605,7 @@
           return users.uuid;
         });
         $uibModal.open({
-          templateUrl: 'views/directives/add-project-member.html',
-          controller: 'AddProjectMemberDialogController',
+          component: 'addProjectMember',
           scope: dialogScope
         }).result.then(function() {
           controllerScope.resetCache();
