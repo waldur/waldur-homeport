@@ -24,6 +24,17 @@
           }
           if (newTableOptions.columns) {
             table = initTable();
+            scope.expandedTableRows = [];
+
+            table.on('click', 'td', function () {
+              var expandedElementIndex = scope.expandedTableRows.indexOf(table.row(this).data().uuid);
+              if (parseInt($(this).attr('tabindex')) === 0 && expandedElementIndex === -1) {
+                scope.expandedTableRows.push(table.row(this).data().uuid);
+              } else if (parseInt($(this).attr('tabindex')) === 0 && expandedElementIndex !== -1) {
+                scope.expandedTableRows.splice(expandedElementIndex, 1);
+              }
+            });
+
             connectRowButtons(table);
             connectWatcher(table);
           }
@@ -76,6 +87,13 @@
               zeroRecords: options.noMatchesText
             },
             fnDrawCallback: function() {
+              scope.expandedTableRows.forEach(function(expandedItem) {
+                table.rows().data().each(function(tableItem, index) {
+                  if (expandedItem === tableItem.uuid) {
+                    $('td:first-child', table.row(index).node()).trigger('click');
+                  }
+                });
+              });
               $(element).find('tr').each(function(index, element) {
                 $compile(element)(scope);
               });
