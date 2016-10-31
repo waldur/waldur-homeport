@@ -61,7 +61,7 @@ function AppStoreCategorySelectorController(
   }
 
   function requestService() {
-    $state.go('support.create').then(function() {
+    $state.go('support.create', {type: 'add_service'}).then(function() {
       vm.close();
     });
   }

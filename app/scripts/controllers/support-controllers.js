@@ -149,11 +149,16 @@
         this.descriptionLabel = 'Ticket description';
         this.descriptionPlaceholder = 'Problem description';
         this.type = $stateParams.type;
+        this.summaryLabel = 'Ticket name';
         if (this.type === 'remove_user') {
           this.issue.summary = "Account removal";
           this.title = 'Account removal';
           this.descriptionPlaceholder = 'Please share why you want your account deleted';
           this.descriptionLabel = 'Reason';
+        } else if (this.type === 'add_service') {
+          this.summaryLabel = 'Service name';
+          this.descriptionLabel = 'Motivation';
+          this.descriptionPlaceholder = 'Why do you need it';
         }
       },
       getSuccessMessage: function() {

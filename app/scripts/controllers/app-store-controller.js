@@ -133,7 +133,6 @@
         field: 'field',
         integer: 'integer'
       },
-      futureCategories: ENV.futureCategories,
 
       currency: ENV.currency,
       enablePurchaseCostDisplay: ENV.enablePurchaseCostDisplay,
@@ -170,7 +169,6 @@
       priceItems: [],
 
       fields: [],
-      limitChoices: ENV.appStoreLimitChoices,
       fieldsOrder: null,
 
       quotaThreshold: 0.8,
@@ -492,16 +490,6 @@
           warning: !!service.warning,
           provider: this.selectedCategory.type === 'provider'
         };
-      },
-      toggleChoicesLimit: function(field) {
-        if (field.limit == this.limitChoices) {
-          field.limit = field.choices.length;
-        } else {
-          field.limit = this.limitChoices;
-        }
-      },
-      isListExpanded: function(field) {
-        return field.limit == field.choices.length;
       },
       choiceDisplay: {},
       resetChoice: function(field) {

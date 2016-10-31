@@ -105,6 +105,18 @@ angular.module('ncsaas')
         feature: "premiumSupport",
         state: "appstore.store",
         description: "Premium support service."
+      },
+      {
+        label: "netHSM",
+        icon: "fa-get-pocket",
+        key: "nethsm",
+        state: "appstore.offering"
+      },
+      {
+        label: "X-Road security server",
+        icon: "fa-get-pocket",
+        key: "xroad",
+        state: "appstore.offering"
       }
     ],
 
@@ -114,10 +126,24 @@ angular.module('ncsaas')
         items: ['private_clouds', 'vms', 'storage', 'support']
       },
       {
+        label: 'Security',
+        items: ['nethsm', 'xroad']
+      },
+      {
+        label: 'Platforms',
+        items: []
+      },
+      {
+        label: 'Applications',
+        items: []
+      },
+      {
         label: 'Turnkey solutions',
         items: ['transformation', 'devops', 'recovery', 'managed_apps']
       }
     ],
+
+    futureCategories: ['nethsm', 'xroad'],
 
     appStoreLimitChoices: 10,
 
@@ -167,7 +193,6 @@ angular.module('ncsaas')
         services: ['Oracle', 'GitLab']
       }
     ],
-    futureCategories: [],
     resourceCategory: {
         "Amazon.Instance": "vms",
         "SaltStack.SharepointTenant": "apps",
