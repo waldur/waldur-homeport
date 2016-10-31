@@ -1,41 +1,46 @@
 <div ng-controller="IssueAddController as IssueAdd">
+    <form class="form-horizontal">
+        <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-5">
+                <h2>{{ IssueAdd.title }}</h2>
+            </div>
+        </div>
 
-    <div class="container">
-        <h1>{{ IssueAdd.title }}</h1>
-    </div>
-
-    <div class="white-box">
-        <section class="short-form">
-            <div class="form-row" ng-hide="IssueAdd.type === 'remove_user'">
-                <div class="col label">
-                    <label for="">Ticket name:</label>
-                </div>
-                <div class="col input input-full">
-                    <input type="text" placeholder="Problem" ng-model="IssueAdd.issue.summary">
-                    <div class="error arrow-up" ng-show="IssueAdd.errors.summary">
-                        <ul class="error-list">
-                            <li ng-repeat="error in IssueAdd.errors.summary">{{ error }}</li>
-                        </ul>
-                    </div>
+        <div class="form-group" ng-hide="IssueAdd.type === 'remove_user'">
+            <label for="ticketName" class="col-sm-3 control-label">
+                Ticket name:
+            </label>
+            <div class="col-sm-5">
+                <input type="text"
+                       id="ticketName"
+                       placeholder="Problem"
+                       ng-model="IssueAdd.issue.summary"
+                       class="form-control">
+                <div class="error arrow-up" ng-show="IssueAdd.errors.summary">
+                    <ul class="error-list">
+                        <li ng-repeat="error in IssueAdd.errors.summary">{{ error }}</li>
+                    </ul>
                 </div>
             </div>
-            <div class="form-row">
-                <div class="col label">
-                    <label for="">{{ IssueAdd.descriptionLabel }}:</label>
-                </div>
-                <div class="col input input-full">
-                    <textarea class="full" placeholder="{{ IssueAdd.descriptionPlaceholder }}" ng-model="IssueAdd.issue.description"></textarea>
-                    <div class="error arrow-up" ng-show="IssueAdd.errors.description">
-                        <ul class="error-list">
-                            <li ng-repeat="error in IssueAdd.errors.description">{{ error }}</li>
-                        </ul>
-                    </div>
+        </div>
+        <div class="form-group">
+            <label for="ticketDescription" class="col-sm-3 control-label">
+                {{ IssueAdd.descriptionLabel }}:</label>
+            </label>
+            <div class="col-sm-5">
+                <textarea class="form-control"
+                          placeholder="{{ IssueAdd.descriptionPlaceholder }}"
+                          ng-model="IssueAdd.issue.description"
+                          id="ticketDescription"></textarea>
+                <div class="error arrow-up" ng-show="IssueAdd.errors.description">
+                    <ul class="error-list">
+                        <li ng-repeat="error in IssueAdd.errors.description">{{ error }}</li>
+                    </ul>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <!-- non field errors -->
-        <div class="simple-line" ng-show="IssueAdd.errors.non_field_errors">
+        <div class="form-group" ng-show="IssueAdd.errors.non_field_errors">
             <div class="error">
                 <ul class="error-list">
                     <li ng-repeat="error in IssueAdd.errors.non_field_errors">
@@ -44,15 +49,12 @@
                 </ul>
             </div>
         </div>
-        <!-- /non field errors -->
 
-        <div class="decision">
-            <div class="col">
-                <a class="button-apply" submit-button="IssueAdd.save()">Open ticket</a>
-            </div>
-            <div class="col">
-                <a class="button-cancel" ng-click="IssueAdd.cancel()">Cancel</a>
+        <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-5">
+                <a class="btn btn-primary" submit-button="IssueAdd.save()">Open ticket</a>
+                <a class="btn btn-default" ng-click="IssueAdd.cancel()">Cancel</a>
             </div>
         </div>
-    </div>
+    </form>
 </div>
