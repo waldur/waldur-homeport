@@ -1,4 +1,5 @@
 import template from './category-selector.html';
+import './category-selector.scss';
 
 // @ngInject
 function AppStoreCategorySelectorController(

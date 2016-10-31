@@ -1,4 +1,4 @@
-.appstore-dialog {
+.appstore-category-selector {
   .offering-icon {
     position: absolute;
     font-size: 32px;
@@ -6,6 +6,9 @@
     left: 8px;
     text-align: center;
     width: 40px;
+  }
+  &.list-group {
+    margin-bottom: 0px;
   }
   .list-group-item {
     border-radius: 4px;
@@ -20,5 +23,6 @@
   .list-group-item-text {
     height: 50px;
     overflow: hidden;
+    margin-bottom: 5px;
   }
 }
