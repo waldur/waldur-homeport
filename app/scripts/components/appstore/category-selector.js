@@ -25,7 +25,7 @@ function AppStoreCategorySelectorController(
 
     vm.groups = ENV.offeringCategories.map(category => ({
       label: category.label,
-      items: category.items.map(item => offerings[item]).filter(x => x !== null)
+      items: category.items.map(item => offerings[item]).filter(x => !!x)
     }));
 
     if (vm.selectProject) {

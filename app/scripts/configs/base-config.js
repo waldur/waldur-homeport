@@ -86,7 +86,7 @@ angular.module('ncsaas')
         label: "Storage",
         icon: "fa-hdd-o",
         feature: "storage",
-        key: "storage",
+        key: "storages",
         state: "appstore.store",
         description: "Block devices, object store spaces and other persistency services."
       },
@@ -123,7 +123,7 @@ angular.module('ncsaas')
     offeringCategories: [
       {
         label: 'IaaS',
-        items: ['private_clouds', 'vms', 'storage', 'support']
+        items: ['private_clouds', 'vms', 'storages', 'support']
       },
       {
         label: 'Security',
