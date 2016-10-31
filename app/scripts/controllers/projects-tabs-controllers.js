@@ -485,25 +485,44 @@
   angular.module('ncsaas')
     .controller('ProjectUsersListController', [
       'baseControllerListClass',
+      'customersService',
       'projectsService',
+      'projectPermissionsService',
+      'currentUser',
+      'currentCustomer',
       'currentProject',
       'ENV',
+      '$rootScope',
+      '$uibModal',
       ProjectUsersListController
     ]);
 
   function ProjectUsersListController(
     baseControllerListClass,
+    customersService,
     projectsService,
+    projectPermissionsService,
+    currentUser,
+    currentCustomer,
     currentProject,
-    ENV) {
+    ENV,
+    $rootScope,
+    $uibModal) {
     var controllerScope = this;
     var TeamController = baseControllerListClass.extend({
       init: function() {
         this.controllerScope = controllerScope;
         this.service = projectsService;
         this.hideNoDataText = true;
-        this.tableOptions = this.getTableOptions();
-        this._super();
+        this.isOwnerOrStaff = customersService.checkCustomerUser(currentCustomer, currentUser);
+        this.tableOptions = {};
+        var fn = this._super.bind(this);
+        var vm = this;
+        this.getProjectRole('manager').then(function(result) {
+          vm.isProjectManager = result.length ? true : false;
+          vm.tableOptions = vm.getTableOptions();
+          fn();
+        });
       },
       getTableOptions: function() {
         return {
@@ -531,11 +550,75 @@
                 return ENV.roles[row.role];
               }
             }
-          ]
+          ],
+          tableActions: this.getTableActions(),
+          rowActions: this.getRowActions()
         };
+      },
+      getTableActions: function() {
+        if (this.isOwnerOrStaff || this.isProjectManager) {
+          return [
+            {
+              name: '<i class="fa fa-plus"></i> Add member',
+              callback: this.openPopup.bind(this)
+            }
+          ];
+        }
+      },
+      getRowActions: function() {
+        var vm = this;
+        var actions = [];
+
+        if (this.isOwnerOrStaff) {
+          actions.push({
+            name: '<i class="fa fa-pencil"></i> Edit',
+            callback: this.openPopup.bind(this),
+          });
+        }
+
+        if (this.isOwnerOrStaff || this.isProjectManager) {
+          actions.push({
+            name: '<i class="fa fa-trash"></i> Remove',
+            callback: this.remove.bind(this),
+            isDisabled: function(row) {
+              return vm.isProjectManager && row.role === 'manager';
+            },
+            tooltip: function(row) {
+              if (vm.isProjectManager && row.role === 'manager') {
+                return 'Project manager cannot edit users with same role';
+              }
+            }
+          });
+        }
+
+        return actions;
+      },
+      removeInstance: function(user) {
+        return projectPermissionsService.deletePermission(user.permission);
+      },
+      openPopup: function(user) {
+        var dialogScope = $rootScope.$new();
+        dialogScope.currentProject = currentProject;
+        dialogScope.editUser = user;
+        dialogScope.isProjectManager = this.isProjectManager;
+        dialogScope.addedUsers = this.list.map(function(users) {
+          return users.uuid;
+        });
+        $uibModal.open({
+          component: 'addProjectMember',
+          scope: dialogScope
+        }).result.then(function() {
+          controllerScope.resetCache();
+        });
       },
       getFilter: function() {
         return {operation: 'users', UUID: currentProject.uuid};
+      },
+      getProjectRole: function(role) {
+        return projectPermissionsService.getList({
+          user_url: currentUser.url,
+          project: currentProject.uuid,
+          role: role});
       }
     });
 

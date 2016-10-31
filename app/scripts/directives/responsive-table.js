@@ -16,10 +16,12 @@
       link: function(scope, element) {
         var options = scope.controller.tableOptions;
 
-        $timeout(function() {
-          var table = initTable();
-          connectRowButtons(table);
-          connectWatcher(table);
+        scope.$watch('controller.tableOptions', function(newTableOptions) {
+          if (newTableOptions.columns) {
+            var table = initTable();
+            connectRowButtons(table);
+            connectWatcher(table);
+          }
         });
 
         function initTable() {

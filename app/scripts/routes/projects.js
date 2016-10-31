@@ -19,7 +19,19 @@
               $rootScope.$broadcast('adjustCurrentProject', project);
               return project;
             }, function(error) {
-              if (error.status == 404) {
+              if (error.status === 404) {
+                $state.go('errorPage.notFound');
+              }
+            });
+          },
+          currentCustomer: function(
+            $stateParams, $state, $rootScope, customersService, currentStateService, $window, ENV) {
+            return customersService.$get($window.localStorage[ENV.currentCustomerUuidStorageKey])
+              .then(function(customer) {
+              $rootScope.$broadcast('adjustCurrentCustomer', customer);
+              return customer;
+            }, function(error) {
+              if (error.status === 404) {
                 $state.go('errorPage.notFound');
               }
             });
@@ -159,6 +171,6 @@
       .state('import.import', {
         url: '?service_type&service_uuid',
         templateUrl: 'views/import/import.html',
-      })
+      });
   });
 })();

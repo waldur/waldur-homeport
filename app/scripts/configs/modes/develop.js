@@ -4,5 +4,6 @@ angular.module('ncsaas')
   .constant('MODE', {
     modeName: 'modeDevelop',
     toBeFeatures: [],
-    featuresVisible: true
+    featuresVisible: true,
+    invitationsEnabled: true
   });
