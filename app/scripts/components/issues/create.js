@@ -29,14 +29,14 @@ function IssueCreateController(issuesService, baseControllerAddClass, $statePara
       if (this.type === 'remove_user') {
         this.issue.summary = "Account removal";
         this.title = 'Account removal';
-        this.descriptionPlaceholder = 'Please share why you want your account deleted';
+        this.descriptionPlaceholder = 'Why would you want to go away? Help us become better please!';
         this.descriptionLabel = 'Reason';
       } else if (this.type === 'add_service') {
-        this.title = 'Request new service';
+        this.title = 'Request a new service';
         this.issue.summary = '';
         this.summaryLabel = 'Service name';
         this.descriptionLabel = 'Motivation';
-        this.descriptionPlaceholder = 'Why do you need it';
+        this.descriptionPlaceholder = 'Please clarify why do you need it';
       }
     },
     getSuccessMessage: function() {
