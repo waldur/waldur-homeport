@@ -43,7 +43,6 @@ angular.module('ncsaas')
         description: "Hosting in highly secured data center.",
         key: "transformation",
         icon: "fa-building",
-        category: "turnkey",
         state: "appstore.offering"
       },
       {
@@ -51,7 +50,6 @@ angular.module('ncsaas')
         description: "Enforce best-practices of application delivery.",
         key: "devops",
         icon: "fa-gears",
-        category: "turnkey",
         state: "appstore.offering"
       },
       {
@@ -59,7 +57,6 @@ angular.module('ncsaas')
         description: "Planning for business continuity under all conditions.",
         key: "recovery",
         icon: "fa-get-pocket",
-        category: "turnkey",
         state: "appstore.offering"
       },
       {
@@ -67,32 +64,36 @@ angular.module('ncsaas')
         description: "Full monitoring and application support",
         key: "managed_apps",
         icon: "fa-gears",
-        category: "turnkey",
         state: "appstore.offering"
       },
       {
         label: "Virtual machines",
         icon: "fa-desktop",
         feature: "vms",
-        category: "component",
         key: "vms",
         state: "appstore.store",
-        description: "OpenStack Instances and DigitalOcean Droplets."
+        description: "OpenStack instances and DigitalOcean droplets."
       },
       {
         label: "Private clouds",
         icon: "fa-cloud",
         feature: "private_clouds",
-        category: "component",
         key: "private_clouds",
         state: "appstore.store",
         description: "OpenStack tenants and Amazon VPC."
       },
       {
+        label: "Storage",
+        icon: "fa-hdd-o",
+        feature: "storage",
+        key: "storage",
+        state: "appstore.store",
+        description: "OpenStack volumes."
+      },
+      {
         label: "Applications",
         icon: "fa-database",
         feature: "apps",
-        category: "component",
         key: "apps",
         state: "appstore.store",
         description: "Oracle database and SugarCRM."
@@ -102,7 +103,6 @@ angular.module('ncsaas')
         icon: "fa-wrench",
         key: "support",
         feature: "premiumSupport",
-        category: "component",
         state: "appstore.store",
         description: "Premium support service."
       }
@@ -110,12 +110,12 @@ angular.module('ncsaas')
 
     offeringCategories: [
       {
-        label: 'Turnkey solutions',
-        key: 'turnkey'
+        label: 'IaaS',
+        items: ['private_clouds', 'vms', 'storage', 'support']
       },
       {
-        label: 'Component offerings',
-        key: 'component'
+        label: 'Turnkey solutions',
+        items: ['transformation', 'devops', 'recovery', 'managed_apps']
       }
     ],
 

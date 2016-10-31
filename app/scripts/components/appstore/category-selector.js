@@ -18,9 +18,14 @@ function AppStoreCategorySelectorController(
       }
     });
 
+    var offerings = ENV.offerings.reduce((map, item) => {
+      map[item.key] = item;
+      return map;
+    }, {});
+
     vm.groups = ENV.offeringCategories.map(category => ({
       label: category.label,
-      items: ENV.offerings.filter(offering => offering.category === category.key)
+      items: category.items.map(item => offerings[item]).filter(x => x !== null)
     }));
 
     if (vm.selectProject) {
