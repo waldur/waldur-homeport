@@ -17,28 +17,9 @@
                 <label for="email">Email</label>
                 <input id="email" type="text" ng-model="InitialData.user.email"/>
                 <div class="error" ng-repeat="error in InitialData.user.errors" ng-bind="error"></div>
-                <label for="customer_name">Organization name</label>
-                <input id="customer_name" ng-model="InitialData.customer.name" type="text"/>
-                <div class="error" ng-repeat="error in InitialData.customer.errors" ng-bind="error"></div>
             </div>
             <div class="clear"></div>
         </div>
-        <aside>
-            <p visible="plans">
-                <span>You are on a forever free plan!</span><br/>
-                If you need more analytical power please upgrade your plan later.
-            </p>
-            <div class="col initial-package" visible="plans" ng-if="InitialData.customer.plan">
-                <span class="plan-name">Free plan</span>
-                <div class="plan-item">
-                    <table>
-                        <tr ng-repeat="quota in InitialData.customer.plan.quotas" visible="{{ InitialData.getPrettyQuotaName(quota.name, quota.value) }}">
-                            <td>{{ quota.value }} {{ InitialData.getPrettyQuotaName(quota.name, quota.value) }}</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </aside>
         <div class="second-step">
             <div class="button-block" ng-if="!InitialData.loadingServices">
                 <a class="button" submit-button="InitialData.save()">Let’s get started</a>

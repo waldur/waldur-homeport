@@ -318,5 +318,8 @@ angular.module('ncsaas')
       owner: 'Organization owner',
       manager: 'Project manager',
       admin: 'System administrator'
-    }
+    },
+    invitationStorageToken: 'ncInvitationToken',
+    invitationRedirectTime: 5000,
+    invitationsEnabled: true
   });

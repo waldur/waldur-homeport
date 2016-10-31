@@ -4,10 +4,10 @@
   angular.module('ncsaas')
     .controller('AuthController', 
       ['ENV', '$q', '$sce', '$scope', '$state', 'authService',
-      'baseControllerClass', 'ncUtilsFlash', '$rootScope', AuthController]);
+      'baseControllerClass', 'ncUtilsFlash', '$rootScope', 'invitationService', AuthController]);
 
   function AuthController(ENV, $q, $sce, $scope, $state, authService,
-    baseControllerClass, ncUtilsFlash, $rootScope) {
+    baseControllerClass, ncUtilsFlash, $rootScope, invitationService) {
     var controllerScope = this;
     var Controller = baseControllerClass.extend({
       isSignupFormVisible: $state.current.data.isSignupFormVisible,
@@ -16,6 +16,10 @@
       openidUrl: $sce.trustAsResourceUrl(ENV.apiEndpoint + 'api-auth/openid/login/?next=/api-auth/login_complete'),
 
       init: function() {
+        if (ENV.invitationsEnabled && $state.current.name === 'register' && !invitationService.getInvitationToken()) {
+          $state.go('errorPage.notFound');
+          return;
+        }
         this._super();
       },
       signin: function() {
