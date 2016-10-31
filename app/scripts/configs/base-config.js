@@ -88,7 +88,7 @@ angular.module('ncsaas')
         feature: "storage",
         key: "storage",
         state: "appstore.store",
-        description: "OpenStack volumes."
+        description: "Block devices, object store spaces and other persistency services."
       },
       {
         label: "Applications",
