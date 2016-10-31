@@ -31,7 +31,6 @@
         var fn = this._super.bind(this);
         var vm = this;
         vm.checkInvitation().then(function(invitation) {
-          console.log('INVITATION ', invitation);
           vm.invitation = invitation;
           if (vm.invitation.state !== 'pending') {
             $state.go('errorPage.notFound');
@@ -49,6 +48,7 @@
         var vm = this;
         usersService.getCurrentUser().then(function(response) {
           vm.user = response;
+          vm.userCopy = angular.copy(response);
         });
       },
       saveUser: function() {
@@ -72,10 +72,21 @@
       },
       save: function() {
         var vm = this;
-        if (!vm.user.email) {
-          vm.user.errors = {email: 'This field is required'};
+        var i;
+        var requiredFields = {
+          email: 'Email is required',
+          full_name: 'Full name is required'
+        };
+        vm.user.errors = {};
+        for (i in requiredFields) {
+          if (requiredFields.hasOwnProperty(i) && !vm.user[i]) {
+            vm.user.errors[i] = requiredFields[i];
+          }
+        }
+        if (Object.keys(vm.user.errors).length !== 0) {
           return $q.reject();
         }
+
         return invitationService.accept(vm.invitation.uuid)
           .then(vm.saveUser.bind(vm))
           .then(vm.gotoNextState.bind(vm));

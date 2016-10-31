@@ -104,6 +104,15 @@
       input[type="text"] {
         width: 100%;
       }
+
+      .accept-policy {
+        padding-bottom: 25px;
+
+        .accept-policy-label {
+          float: right;
+          padding-right: 2em;
+        }
+      }
     }
   }
   .second-step {
@@ -143,7 +152,6 @@
   }
   .button-block {
     margin-left: -25px;
-    padding: 0 23px;
     padding-bottom: 40px;
     > a {
       width: 100%;
