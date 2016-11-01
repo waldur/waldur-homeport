@@ -70,14 +70,7 @@
             {
               title: 'Provider',
               render: function(data, type, row, meta) {
-                var customer_uuid = ncUtils.getUUID(row.customer);
-                var provider_type = row.resource_type.split(".")[0];
-                var href = $state.href('organization.providers', {
-                  uuid: customer_uuid,
-                  providerUuid: row.service_uuid,
-                  providerType: provider_type
-                });
-                return ncUtils.renderLink(href, row.service_name);
+                return row.service_name;
               }
             },
             {
@@ -96,9 +89,9 @@
                 }
                 return '<a class="{cls}" title="{title}"></a> {state}'
                           .replace('{cls}', cls)
-                          .replace('{state}', row.runtime_state || row.state)
-                          .replace('{title}', row.runtime_state || row.state);
-              },
+                          .replace('{state}', row.state || row.runtime_state)
+                          .replace('{title}', title);
+              }
             }
           ],
           tableActions: this.getTableActions(),

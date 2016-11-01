@@ -18,6 +18,7 @@
             empty = false;
             vm.adjustTitle(action);
           }
+          action.title = (action.title === 'Pull') ? 'Synchronise': action.title;
           if (action.fields && action.fields.delete_volumes) {
             action.fields.delete_volumes.default_value = true;
           }

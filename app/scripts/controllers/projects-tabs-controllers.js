@@ -95,7 +95,7 @@
         return currentStateService.getProject().then(function(project){
           vm.service.defaultFilter.project_uuid = project.uuid;
           return fn(filter);
-        })
+        });
       }
     });
     return controllerClass;
@@ -233,7 +233,7 @@
           title: 'Attached to',
           render: function(data, type, row, meta) {
             if (!row.instance) {
-              return 'Not known';
+              return '-';
             }
             var uuid = ncUtils.getUUID(row.instance);
             var href = $state.href('resources.details', {
