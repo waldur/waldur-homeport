@@ -201,6 +201,46 @@
 })();
 
 (function() {
+  angular.module('ncsaas')
+    .controller('StorageTabController', [
+      '$scope',
+      'resourcesService',
+      'currentProject',
+      StorageTabController]);
+
+  function StorageTabController($scope, resourcesService, currentProject) {
+    $scope.isNumber = angular.isNumber;
+    $scope.tabs = [
+      {
+        title: 'Volumes',
+        countKey: 'OpenStack.Volume',
+        viewKey: 'volumes'
+      },
+      {
+        title: 'Snapshots',
+        countKey: 'OpenStack.Snapshot',
+        viewKey: 'snapshots'
+      }
+    ];
+    function refreshCount() {
+      var query = {
+        resource_category: 'storages',
+        project: currentProject.uuid
+      };
+      resourcesService.countByType(query).then(function(counts) {
+        angular.forEach($scope.tabs, function(tab) {
+          tab.count = counts[tab.countKey];
+        });
+      });
+    }
+    $scope.$on('refreshCounts', function() {
+      refreshCount();
+    });
+    refreshCount();
+  }
+})();
+
+(function() {
 
   angular.module('ncsaas')
     .controller('VolumesListController', [

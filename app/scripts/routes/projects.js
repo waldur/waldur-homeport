@@ -122,8 +122,25 @@
       .state('project.resources.storage', {
         url: 'storage/',
         templateUrl: 'views/project/storage.html',
+        controller: 'StorageTabController',
         data: {
           pageTitle: 'Storage'
+        },
+        abstract: true
+      })
+
+
+      .state('project.resources.storage.tab', {
+        url: '',
+        views: {
+          volumes: {
+            controller: 'VolumesListController as ListController',
+            templateUrl: 'views/partials/filtered-list.html',
+          },
+          snapshots: {
+            controller: 'SnapshotsListController as ListController',
+            templateUrl: 'views/partials/filtered-list.html',
+          }
         }
       })
 
