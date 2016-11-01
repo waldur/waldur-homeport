@@ -1,8 +1,12 @@
 <div ng-controller="InitialDataController as InitialData">
-    <div class="initial-data-page">
-        <div class="first-step">
+    <div class="row initial-data-header">
+        <div class="col-xs-12 col-sm-6 col-sm-offset-3">
             <h2>Welcome to NodeConductor, {{ InitialData.user.full_name || InitialData.user.username }}!</h2>
             <p>Get your cloud expenses under control with just <b>1</b> click.</p>
+        </div>
+    </div>
+    <div class="row initial-data-page">
+        <div class="col-xs-12 col-sm-1 col-sm-offset-3">
             <div class="logo">
                 <div class="img-wrapper">
                     <img gravatar-src="InitialData.user.email" alt=""/>
@@ -11,9 +15,9 @@
                     Manage at
                     <a href="//gravatar.com" target="_blank">gravatar.com</a>
                 </span>
-                <div class="clear"></div>
             </div>
-            <div class="fields">
+        </div>
+        <div class="col-xs-12 col-sm-3 fields">
                 <label for="full_name">Full name</label>
                 <input id="full_name" type="text" ng-class="{'disabled': InitialData.userCopy.full_name}" ng-model="InitialData.user.full_name"/>
                 <div class="error" ng-if="InitialData.user.errors.full_name">{{::InitialData.user.errors.full_name}}</div>
@@ -33,21 +37,20 @@
                 <label for="phone_number">Phone number</label>
                 <input id="phone_number" type="text" ng-class="{'disabled': InitialData.userCopy.phone_number}" ng-model="InitialData.user.phone_number"/>
                 <div class="accept-policy">
-                    <div class="accept-policy-label">
-                        <label for="acceptPolicy">I accept the <a ui-sref="tos.index" target="_blank">Terms of Provider</a>.</label>
-                    </div>
                     <div class="accept-policy-input">
                         <input id="acceptPolicy" type="checkbox" ng-model="InitialData.user.acceptPolicy"/>
                     </div>
+                    <div class="accept-policy-label">
+                        <label for="acceptPolicy">I accept the <a ui-sref="tos.index" target="_blank">Terms of Provider</a>.</label>
+                    </div>
                 </div>
-            </div>
-            <div class="clear"></div>
         </div>
-        <div class="second-step">
+    </div>
+    <div class="row button-wrapper">
+        <div class="col-sm-2 col-sm-offset-4">
             <div class="button-block" ng-class="{'disabled': !InitialData.user.acceptPolicy}" ng-if="!InitialData.loadingServices">
                 <a class="button" submit-button="InitialData.save()">Let’s get started</a>
             </div>
-            <div class="clear"></div>
         </div>
     </div>
 </div>

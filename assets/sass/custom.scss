@@ -106,3 +106,10 @@ body.landing {
     text-align: center;
   }
 }
+
+#wrapper {
+  @include bp(xs) {
+    position: relative;
+    padding-bottom: 90px;
+  }
+}
