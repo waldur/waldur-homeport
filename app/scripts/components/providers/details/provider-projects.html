@@ -1,6 +1,6 @@
 <div>
-    <div ng-if="loading" class="empty-list-message">
-      <i class="icon fa-spinner fa-spin"></i> Loading data, please wait.
+    <div ng-if="loading">
+      <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
     </div>
     <div ng-if="!loading && !choices.length" class="empty-list-message">
         There are no projects yet.

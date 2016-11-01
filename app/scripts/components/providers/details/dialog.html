@@ -1,0 +1,33 @@
+<div class="modal-header">
+    <h3 class="modal-title">Provider details</h3>
+</div>
+<div class="modal-body">
+    <uib-tabset active="active">
+        <uib-tab heading="Settings" index="0">
+            <div class="panel-body" ng-if="active==0">
+                <provider-settings provider="$ctrl.provider"></provider-settings>
+            </div>
+        </uib-tab>
+        <uib-tab heading="Quotas" index="1">
+            <div class="panel-body" ng-if="active==1">
+                <provider-quotas provider="$ctrl.provider"></provider-quotas>
+            </div>
+        </uib-tab>
+        <uib-tab heading="Projects" index="2">
+            <div class="panel-body" ng-if="active==2">
+                <provider-projects provider="$ctrl.provider"></provider-projects>
+            </div>
+        </uib-tab>
+        <uib-tab heading="Prices" index="3">
+            <div class="panel-body" ng-if="active==3">
+                <provider-prices provider="$ctrl.provider"></provider-prices>
+            </div>
+        </uib-tab>
+    </uib-tabset>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-default"
+        ng-click="$ctrl.dismiss()">
+        Cancel
+    </button>
+</div>

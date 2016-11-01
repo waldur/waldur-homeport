@@ -1,11 +1,19 @@
 <div>
-    <div ng-if="loading" class="empty-list-message">
-      <i class="icon fa-spinner fa-spin"></i> Loading data, please wait.
+    <div class="success-message" ng-if="$ctrl.getClass() == 'processing'">
+        Please wait while provider is being configured.
+    </div>
+
+    <div ng-if="$ctrl.provider.state == 'Erred'" class="error-message">
+        {{ ::$ctrl.provider.error_message || $ctrl.defaultErrorMessage }}
+    </div>
+
+    <div ng-if="loading">
+      <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
     </div>
     <div ng-if="!service.editable" class="empty-list-message">
         Settings are not editable.
     </div>
-    <div class="form-horizontal" ng-if="service.editable">
+    <div class="form-horizontal" ng-if="!loading && service.editable">
         <div class="form-group" ng-repeat="field in service.fields">
             <label class="col-sm-3 control-label" for="{{ ::service.uuid }}_{{ ::field.name }}">
                 <helpicon help-text="{{ ::field.help_text }}" ng-if="::field.help_text"></helpicon>

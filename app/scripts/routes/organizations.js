@@ -180,9 +180,7 @@
 
       .state('services.create', {
         url: 'add/',
-        templateUrl: 'views/service/create.html',
-        controller: 'ServiceAddController',
-        controllerAs: 'ServiceAdd',
+        template: '<provider-create></provider-create>',
         data: {
           pageTitle: 'Create provider'
         }

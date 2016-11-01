@@ -435,7 +435,7 @@
     var controllerScope = this;
     var Controller = baseControllerDetailUpdateClass.extend({
       canEdit: true,
-      defaultErrorMessage: "Reason unknown, please contact support",
+      defaultErrorMessage: ENV.defaultErrorMessage,
 
       init:function() {
         this.service = resourcesService;
