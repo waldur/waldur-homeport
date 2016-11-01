@@ -18,7 +18,9 @@ function ProviderSettingsController(
   servicesService,
   ncUtils,
   ncUtilsFlash,
-  joinService) {
+  ncServiceUtils,
+  joinService,
+  ENV) {
   angular.extend($scope, {
     init: function() {
       var vm = this;
@@ -26,6 +28,7 @@ function ProviderSettingsController(
       vm.loadService($scope.service).finally(function() {
         vm.loading = false;
       });
+      vm.defaultErrorMessage = ENV.defaultErrorMessage;
     },
     loadService: function(service) {
       var vm = this;
@@ -71,6 +74,9 @@ function ProviderSettingsController(
         }
       }
       return fields;
+    },
+    getClass: function() {
+      return ncServiceUtils.getStateClass($scope.service.state);
     },
     getFilename: ncUtils.getFilename,
     isDisabled: function(service) {

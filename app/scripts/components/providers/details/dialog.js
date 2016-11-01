@@ -16,8 +16,7 @@ export default function providerDetails() {
 }
 
 // @ngInject
-function ProviderDetailsDialog($scope, ENV) {
-  this.defaultErrorMessage = ENV.defaultErrorMessage;
+function ProviderDetailsDialog($scope) {
   this.provider = this.resolve.provider;
   $scope.$on('$stateChangeSuccess', function() {
     $scope.close();

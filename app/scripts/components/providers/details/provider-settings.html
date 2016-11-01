@@ -1,10 +1,10 @@
 <div>
-    <div class="success-message" ng-if="$ctrl.getClass() == 'processing'">
+    <div class="success-message" ng-if="getClass() == 'processing'">
         Please wait while provider is being configured.
     </div>
 
-    <div ng-if="$ctrl.provider.state == 'Erred'" class="error-message">
-        {{ ::$ctrl.provider.error_message || $ctrl.defaultErrorMessage }}
+    <div ng-if="service.state == 'Erred'" class="error-message">
+        {{ ::service.error_message || defaultErrorMessage }}
     </div>
 
     <div ng-if="loading">
