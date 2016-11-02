@@ -18,39 +18,54 @@
             </div>
         </div>
         <div class="col-xs-12 col-sm-3 fields">
+            <div class="form-group">
                 <label for="full_name">Full name</label>
-                <input id="full_name" type="text" ng-disabled="InitialData.userCopy.full_name" ng-model="InitialData.user.full_name"/>
+                <input id="full_name" type="text" class="form-control" ng-disabled="InitialData.userCopy.full_name" ng-model="InitialData.user.full_name"/>
                 <div class="error" ng-if="InitialData.user.errors.full_name">{{::InitialData.user.errors.full_name}}</div>
+            </div>
+            <div class="form-group">
                 <label for="email">Email</label>
-                <input id="email" type="text" ng-disabled="InitialData.userCopy.email" ng-model="InitialData.user.email"/>
+                <input id="email" type="email" class="form-control" ng-disabled="InitialData.userCopy.email" ng-model="InitialData.user.email"/>
                 <div class="error" ng-if="InitialData.user.errors.email">{{::InitialData.user.errors.email}}</div>
+            </div>
+            <div class="form-group">
                 <label for="registration_method">Authentication method</label>
-                <input id="registration_method" type="text" ng-disabled="InitialData.userCopy.registration_method" ng-model="InitialData.user.registration_method"/>
+                <input id="registration_method" type="text" class="form-control" ng-disabled="InitialData.userCopy.registration_method" ng-model="InitialData.user.registration_method"/>
+            </div>
+            <div class="form-group">
                 <label for="idCode">ID Code</label>
-                <input id="idCode" type="text" ng-disabled="true" ng-model="InitialData.user.idCode"/>
+                <input id="idCode" type="text" class="form-control" ng-disabled="true" ng-model="InitialData.user.idCode"/>
+            </div>
+            <div class="form-group">
                 <label for="organization">Company name</label>
-                <input id="organization" type="text" ng-disabled="InitialData.userCopy.organization" ng-model="InitialData.user.organization"/>
+                <input id="organization" type="text" class="form-control" ng-disabled="InitialData.userCopy.organization" ng-model="InitialData.user.organization"/>
+            </div>
+            <div class="form-group">
                 <label for="job_title">Job position</label>
-                <input id="job_title" type="text" ng-disabled="InitialData.userCopy.job_title" ng-model="InitialData.user.job_title"/>
+                <input id="job_title" type="text" class="form-control" ng-disabled="InitialData.userCopy.job_title" ng-model="InitialData.user.job_title"/>
+            </div>
+            <div class="form-group">
                 <label for="description">Description</label>
-                <input id="description" type="text" ng-disabled="InitialData.userCopy.description" ng-model="InitialData.user.description"/>
+                <input id="description" type="text" class="form-control" ng-disabled="InitialData.userCopy.description" ng-model="InitialData.user.description"/>
+            </div>
+            <div class="form-group">
                 <label for="phone_number">Phone number</label>
-                <input id="phone_number" type="text" ng-disabled="InitialData.userCopy.phone_number" ng-model="InitialData.user.phone_number"/>
-                <div class="accept-policy">
-                    <div class="accept-policy-input">
-                        <input id="acceptPolicy" type="checkbox" ng-model="InitialData.user.acceptPolicy"/>
-                    </div>
-                    <div class="accept-policy-label">
-                        <label for="acceptPolicy">I accept the <a ui-sref="tos.index" target="_blank">Terms of Provider</a>.</label>
-                    </div>
+                <input id="phone_number" type="text" class="form-control" ng-disabled="InitialData.userCopy.phone_number" ng-model="InitialData.user.phone_number"/>
+            </div>
+            <div class="form-group">
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input id="acceptPolicy" type="checkbox" ng-model="InitialData.user.acceptPolicy"/> I accept the <a ui-sref="tos.index" target="_blank">Terms of Provider</a>.
+                    </label>
                 </div>
+            </div>
         </div>
     </div>
     <div class="row button-wrapper">
         <div class="col-sm-2 col-sm-offset-4">
-            <div class="button-block" ng-class="{'disabled': !InitialData.user.acceptPolicy}" ng-if="!InitialData.loadingServices">
-                <a class="button" submit-button="InitialData.save()">Let’s get started</a>
-            </div>
+            <button type="submit" class="btn btn-default" ng-disabled="!InitialData.user.acceptPolicy" submit-button="InitialData.save()">Let’s get started</button>
         </div>
     </div>
 </div>

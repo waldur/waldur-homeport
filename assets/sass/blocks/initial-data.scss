@@ -16,16 +16,6 @@
     margin-top: 25px;
   }
 
-  input[type="text"],select {
-    border-radius: 4px;
-    width: 226px;
-    box-sizing: border-box;
-    height: 32px;
-    margin-bottom: 7px;
-    background: white;
-    padding-left: 3px;
-  }
-
   label {
     font-weight: bold;
     display: block;
@@ -67,6 +57,16 @@
     }
   }
 
+  .fields {
+    padding-right: 50px;
+
+    .form-group {
+      input {
+        border-radius: 4px;
+      }
+    }
+  }
+
   .accept-policy {
     padding-bottom: 25px;
 
@@ -77,10 +77,6 @@
     .accept-policy-input {
       padding-right: 0.5em;
     }
-  }
-
-  .error {
-    width: 226px;
   }
 
   @include bp(xs) {
