@@ -11,7 +11,7 @@
 </div>
 
 <div ng-if="!service.editable && !service.nameEditable" class="empty-list-message">
-    Settings are not editable.
+    You don't have enough permissions to edit settings for <strong>{{ service.name }}</strong> provider.
 </div>
 
 <div class="form-horizontal" ng-if="!loading">

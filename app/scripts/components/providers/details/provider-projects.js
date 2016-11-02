@@ -17,7 +17,8 @@ function ProviderProjectsController(
   $scope,
   joinServiceProjectLinkService,
   projectsService,
-  currentStateService) {
+  currentStateService,
+  customersService) {
   angular.extend($scope, {
     init: function() {
       $scope.loading = true;
@@ -29,16 +30,23 @@ function ProviderProjectsController(
     },
     getChoices: function() {
       var vm = this;
-      return this.getContext().then(function(context) {
-        var link_for_project = {};
-        angular.forEach(context.links, function(link) {
-          link_for_project[link.project_uuid] = link;
-        });
-        return context.projects.map(function(project) {
-          var link = link_for_project[project.uuid];
-          return vm.newChoice(project, link);
+      return customersService.isOwnerOrStaff().then(function(canManage) {
+        vm.canManage = canManage;
+        if (!vm.canManage) {
+          return;
+        }
+        return vm.getContext().then(function(context) {
+          var link_for_project = {};
+          angular.forEach(context.links, function(link) {
+            link_for_project[link.project_uuid] = link;
+          });
+          return context.projects.map(function(project) {
+            var link = link_for_project[project.uuid];
+            return vm.newChoice(project, link);
+          });
         });
       });
+
     },
     newChoice: function(project, link) {
       return {
