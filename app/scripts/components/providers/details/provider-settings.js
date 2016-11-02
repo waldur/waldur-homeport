@@ -14,6 +14,7 @@ export default function providerSettings() {
 // @ngInject
 function ProviderSettingsController(
   $scope,
+  $q,
   $rootScope,
   usersService,
   servicesService,
@@ -44,7 +45,10 @@ function ProviderSettingsController(
         });
       }).then(() => {
         service.editable = vm.user.is_staff || !service.shared;
-        if (!service.editable || service.values) {
+        if (!service.editable) {
+          service.values = {name: service.name};
+        }
+        if (service.values) {
           return;
         }
 
@@ -54,6 +58,7 @@ function ProviderSettingsController(
 
           return servicesService.$get(null, service.settings).then(function(settings) {
             service.values = settings.toJSON();
+            service.values.name = service.name;
             angular.forEach(service.fields, function(field) {
               if (angular.isUndefined(service.values[field.name])) {
                 service.values[field.name] = '';
@@ -81,8 +86,10 @@ function ProviderSettingsController(
       return ncServiceUtils.getStateClass($scope.service.state);
     },
     getFilename: ncUtils.getFilename,
-    isDisabled: function(service) {
-      for (var name in service.values) {
+    isDisabled: function() {
+      var service = $scope.service;
+      for (var index in service.fields) {
+        var name = service.fields[index].name;
         var option = service.options[name];
         var value = service.values[name];
         if (option && option.required && !value) {
@@ -93,7 +100,8 @@ function ProviderSettingsController(
     },
     getData: function(service) {
       var values = {};
-      for (var name in service.values) {
+      for (var index in service.fields) {
+        var name = service.fields[index].name;
         var option = service.options[name];
         if (!option || option.read_only) {
           continue;
@@ -121,10 +129,18 @@ function ProviderSettingsController(
         ncUtilsFlash.success('Unable to update provider name');
       });
     },
-    updateSettings: function(service) {
+    updateSettings: function() {
+      var service = $scope.service;
       var url = service.settings;
       var data = this.getData(service);
-      return joinService.update(url, data).then(
+      var promises = [];
+      if (service.nameEditable && service.revision.name !== service.values.name) {
+        promises.push(this.updateServiceName(service.values.name));
+      }
+      if (service.editable) {
+        promises.push(joinService.update(url, data));
+      }
+      return $q.all(promises).then(
         this.onSaveSuccess.bind(this, service),
         this.onSaveError.bind(this, service)
       );
@@ -143,7 +159,8 @@ function ProviderSettingsController(
         ncUtilsFlash.error('Unable to save provider. ' + message);
       }
     },
-    hasChanged: function(model) {
+    hasChanged: function() {
+      var model = $scope.service;
       if (!model.values) {
         return false;
       }

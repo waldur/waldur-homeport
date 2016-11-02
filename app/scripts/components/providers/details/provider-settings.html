@@ -20,18 +20,7 @@
             Name:
         </label>
         <div class="col-sm-9">
-            <p class="form-control-static">
-                <span editable-text="service.name"
-                      id="serviceName"
-                      e-form="rowform"
-                      buttons="no"
-                      onbeforesave="updateServiceName($data)">
-                      {{ service.name }}
-                </span>
-                <i class="fa fa-pencil-square-o"
-                   ng-click="rowform.$show()"
-                   ng-hide="rowform.$visible"></i>
-            </p>
+            <input class="form-control" id="serviceName" ng-model="service.values.name">
         </div>
     </div>
     <div class="form-group" ng-repeat="field in service.fields" ng-if="::service.editable">
@@ -85,9 +74,10 @@
           </div>
         </div>
     </div>
-    <div class="decision" ng-show="hasChanged(service)">
-        <div class="col">
-            <a class="btn btn-primary" ng-click="updateSettings(service)" ng-class="{'disabled': isDisabled(service)}">Save</a>
-        </div>
+    <div class="text-center" ng-show="hasChanged()">
+        <button
+          class="btn btn-primary"
+          submit-button="updateSettings()"
+          ng-class="{disabled: isDisabled()}">Save</button>
     </div>
 </div>
