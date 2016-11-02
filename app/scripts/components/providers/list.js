@@ -6,6 +6,7 @@ export default function ProviderListController(
   joinService,
   $uibModal,
   $state,
+  $scope,
   ENV,
   ncUtils,
   baseControllerListClass,
@@ -127,6 +128,9 @@ export default function ProviderListController(
       };
       this._super();
       this.showSelectedProvider();
+      $scope.$on('refreshProviderList', function() {
+        controllerScope.resetCache();
+      });
     },
     openDialog: function(row) {
       $uibModal.open({

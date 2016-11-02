@@ -14,8 +14,11 @@ export default function providerSettings() {
 // @ngInject
 function ProviderSettingsController(
   $scope,
+  $rootScope,
   usersService,
   servicesService,
+  currentStateService,
+  customersService,
   ncUtils,
   ncUtilsFlash,
   ncServiceUtils,
@@ -32,8 +35,15 @@ function ProviderSettingsController(
     },
     loadService: function(service) {
       var vm = this;
-      return usersService.getCurrentUser().then(function(user) {
-        service.editable = user.is_staff || !service.shared;
+      return currentStateService.getCustomer().then(customer => {
+        vm.customer = customer;
+      }).then(() => {
+        return usersService.getCurrentUser().then(user => {
+          vm.user = user;
+          service.nameEditable = customersService.checkCustomerUser(vm.customer, vm.user);
+        });
+      }).then(() => {
+        service.editable = vm.user.is_staff || !service.shared;
         if (!service.editable || service.values) {
           return;
         }
@@ -52,14 +62,6 @@ function ProviderSettingsController(
           });
         });
       });
-    },
-    updateSettings: function(service) {
-      var url = service.settings;
-      var data = this.getData(service);
-      return joinService.update(url, data).then(
-        this.onSaveSuccess.bind(this, service),
-        this.onSaveError.bind(this, service)
-      );
     },
     getFields: function(options) {
       var fields = [];
@@ -110,9 +112,22 @@ function ProviderSettingsController(
       }
       return values;
     },
-    update: function(service) {
-      var saveService = joinService.$update(null, service.url, service);
-      return saveService.then(this.onSaveSuccess.bind(this), this.onSaveError.bind(this, service));
+    updateServiceName: function(name) {
+      return joinService.$update(null, $scope.service.url, {name: name}).then(function() {
+        $scope.service.name = name;
+        ncUtilsFlash.success('Provider name has been updated');
+        $rootScope.$broadcast('refreshProviderList');
+      }).catch(function(response) {
+        ncUtilsFlash.success('Unable to update provider name');
+      });
+    },
+    updateSettings: function(service) {
+      var url = service.settings;
+      var data = this.getData(service);
+      return joinService.update(url, data).then(
+        this.onSaveSuccess.bind(this, service),
+        this.onSaveError.bind(this, service)
+      );
     },
     onSaveSuccess: function(service) {
       if (service) {
