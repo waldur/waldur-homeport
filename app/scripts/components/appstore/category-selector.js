@@ -1,4 +1,5 @@
 import template from './category-selector.html';
+import './category-selector.scss';
 
 // @ngInject
 function AppStoreCategorySelectorController(
@@ -17,9 +18,14 @@ function AppStoreCategorySelectorController(
       }
     });
 
+    var offerings = ENV.offerings.reduce((map, item) => {
+      map[item.key] = item;
+      return map;
+    }, {});
+
     vm.groups = ENV.offeringCategories.map(category => ({
       label: category.label,
-      items: ENV.offerings.filter(offering => offering.category === category.key)
+      items: category.items.map(item => offerings[item]).filter(x => !!x)
     }));
 
     if (vm.selectProject) {
@@ -55,7 +61,7 @@ function AppStoreCategorySelectorController(
   }
 
   function requestService() {
-    $state.go('support.create').then(function() {
+    $state.go('support.create', {type: 'add_service'}).then(function() {
       vm.close();
     });
   }

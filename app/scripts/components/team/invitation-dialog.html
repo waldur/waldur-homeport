@@ -16,6 +16,14 @@
         </div>
 
         <div class="form-group">
+            <label class="control-label" for="inviteCivilNumber">
+                Civil number
+            </label>
+            <input class="form-control" id="inviteCivilNumber" name="civil_number" ng-model="DialogCtrl.civil_number" ng-disabled="DialogCtrl.submitting">
+            <p class="text-danger" ng-repeat="error in DialogCtrl.errors.civil_number" ng-bind="error"></p>
+        </div>
+
+        <div class="form-group">
             <div>
                 <label class="control-label">Role</label>
             </div>
@@ -63,7 +71,7 @@
        Invite user
     </button>
     <button class="btn btn-default" type="button"
-        ng-click="DialogCtrl.$dismiss()">
+        ng-click="DialogCtrl.dismiss()">
         Cancel
     </button>
 </div>
