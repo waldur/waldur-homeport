@@ -1,12 +1,3 @@
-.initial-data-header {
-  padding-top: 50px;
-
-  @include bp(xs) {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-}
-
 .initial-data-page {
   h2 {
     color: $dashboard-green;
@@ -57,47 +48,4 @@
     }
   }
 
-  .fields {
-    padding-right: 50px;
-
-    .form-group {
-      input {
-        border-radius: 4px;
-      }
-    }
-  }
-
-  .accept-policy {
-    padding-bottom: 25px;
-
-    .accept-policy-input, .accept-policy-label {
-      display: inline-block;
-    }
-
-    .accept-policy-input {
-      padding-right: 0.5em;
-    }
-  }
-
-  @include bp(xs) {
-    .button-wrapper {
-      padding-left: 30px;
-    }
-
-    .button-block {
-      a {
-        width: calc(100% - 20px);
-        margin-bottom: 30px;
-      }
-    }
-
-    .logo {
-      padding-left: 20px;
-    }
-
-    .fields {
-      padding-left: 30px;
-      padding-top: 30px;
-    }
-  } // xs
 }
