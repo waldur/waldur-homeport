@@ -108,8 +108,22 @@ body.landing {
 }
 
 #wrapper {
+  height: 100%;
+  .app-wrap {
+    margin-bottom: 0;
+  }
+
   @include bp(xs) {
+    height: auto;
     position: relative;
     padding-bottom: 90px;
+  }
+}
+
+.app-content {
+  padding-bottom: 50px;
+
+  @include bp(xs) {
+    padding-bottom: 0;
   }
 }

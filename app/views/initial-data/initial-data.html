@@ -19,23 +19,23 @@
         </div>
         <div class="col-xs-12 col-sm-3 fields">
                 <label for="full_name">Full name</label>
-                <input id="full_name" type="text" ng-class="{'disabled': InitialData.userCopy.full_name}" ng-model="InitialData.user.full_name"/>
+                <input id="full_name" type="text" ng-disabled="InitialData.userCopy.full_name" ng-model="InitialData.user.full_name"/>
                 <div class="error" ng-if="InitialData.user.errors.full_name">{{::InitialData.user.errors.full_name}}</div>
                 <label for="email">Email</label>
-                <input id="email" type="text" ng-class="{'disabled': InitialData.userCopy.email}" ng-model="InitialData.user.email"/>
+                <input id="email" type="text" ng-disabled="InitialData.userCopy.email" ng-model="InitialData.user.email"/>
                 <div class="error" ng-if="InitialData.user.errors.email">{{::InitialData.user.errors.email}}</div>
                 <label for="registration_method">Authentication method</label>
-                <input id="registration_method" type="text" ng-class="{'disabled': InitialData.userCopy.registration_method}" ng-model="InitialData.user.registration_method"/>
+                <input id="registration_method" type="text" ng-disabled="InitialData.userCopy.registration_method" ng-model="InitialData.user.registration_method"/>
                 <label for="idCode">ID Code</label>
-                <input id="idCode" type="text" class="disabled" ng-model="InitialData.user.idCode"/>
+                <input id="idCode" type="text" ng-disabled="true" ng-model="InitialData.user.idCode"/>
                 <label for="organization">Company name</label>
-                <input id="organization" type="text" ng-class="{'disabled': InitialData.userCopy.organization}" ng-model="InitialData.user.organization"/>
+                <input id="organization" type="text" ng-disabled="InitialData.userCopy.organization" ng-model="InitialData.user.organization"/>
                 <label for="job_title">Job position</label>
-                <input id="job_title" type="text" ng-class="{'disabled': InitialData.userCopy.job_title}" ng-model="InitialData.user.job_title"/>
+                <input id="job_title" type="text" ng-disabled="InitialData.userCopy.job_title" ng-model="InitialData.user.job_title"/>
                 <label for="description">Description</label>
-                <input id="description" type="text" ng-class="{'disabled': InitialData.userCopy.description}" ng-model="InitialData.user.description"/>
+                <input id="description" type="text" ng-disabled="InitialData.userCopy.description" ng-model="InitialData.user.description"/>
                 <label for="phone_number">Phone number</label>
-                <input id="phone_number" type="text" ng-class="{'disabled': InitialData.userCopy.phone_number}" ng-model="InitialData.user.phone_number"/>
+                <input id="phone_number" type="text" ng-disabled="InitialData.userCopy.phone_number" ng-model="InitialData.user.phone_number"/>
                 <div class="accept-policy">
                     <div class="accept-policy-input">
                         <input id="acceptPolicy" type="checkbox" ng-model="InitialData.user.acceptPolicy"/>

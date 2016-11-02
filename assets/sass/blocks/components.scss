@@ -1,4 +1,4 @@
-.disabled {
+.disabled, input[type="text"]:disabled {
     opacity: 0.3;
     pointer-events: none;
     @include transition(all, .2s, ease);
