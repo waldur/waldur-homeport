@@ -1,16 +1,11 @@
 <div class="tabs-container m-l-sm">
     <uib-tabset active="active">
-        <uib-tab heading="Volumes" index="0">
-            <div class="panel-body"
-                ng-if="active==0"
-                ng-controller="VolumesListController as ListController"
-                ng-include="'views/partials/filtered-list.html'"></div>
-        </uib-tab>
-        <uib-tab heading="Snapshots" index="1">
-            <div class="panel-body"
-                ng-if="active==1"
-                ng-controller="SnapshotsListController as ListController"
-                ng-include="'views/partials/filtered-list.html'"></div>
+        <uib-tab ng-repeat="tab in tabs" index="$index">
+            <uib-tab-heading>
+                {{ tab.title }}
+                <span ng-if="isNumber(tab.count)">({{ tab.count }})</span>
+            </uib-tab-heading>
+            <div class="panel-body" ng-if="active==$index" ui-view="{{ tab.viewKey }}"></div>
         </uib-tab>
     </uib-tabset>
 </div>

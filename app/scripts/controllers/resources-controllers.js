@@ -256,7 +256,7 @@
           var query = angular.extend({}, filter, {
             field: vm.rowFields
           });
-          if (angular.isDefined(vm.category)) {
+          if (angular.isDefined(vm.category) && !vm.getFilter().resource_type) {
             query.resource_category = vm.categories[vm.category];
             vm.updateFilters(filter);
           }
