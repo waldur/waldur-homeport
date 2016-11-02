@@ -4,15 +4,6 @@
     @include transition(all, .2s, ease);
 } // low-grade
 
-.btn-default {
-    background: $button-green;
-    color: $white;
-
-    &:hover, &:focus, &:active {
-        background: $button-green;
-    }
-}
-
 // errors
 .error-list {
     @include clear-list;
