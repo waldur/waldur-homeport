@@ -130,7 +130,7 @@
       })
 
 
-      .state('project.resources.storage.tab', {
+      .state('project.resources.storage.tabs', {
         url: '',
         views: {
           volumes: {
