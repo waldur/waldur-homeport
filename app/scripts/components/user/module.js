@@ -10,7 +10,7 @@ import userDetails, { PRIVATE_USER_TABS } from './user-details';
 import userDashboard from './user-dashboard';
 import userOrganizations from './user-organizations';
 import userProjects from './user-projects';
-import UserEventsController from './user-events';
+import { stateUtilsService, attachStateUtils } from './utils';
 import userRoutes from './routes';
 
 export default module => {
@@ -27,5 +27,7 @@ export default module => {
   module.directive('userDashboard', userDashboard);
   module.directive('userOrganizations', userOrganizations);
   module.directive('userProjects', userProjects);
+  module.service('stateUtilsService', stateUtilsService);
+  module.run(attachStateUtils);
   module.config(userRoutes);
 }
