@@ -11,6 +11,7 @@
     '$q',
     '$state',
     'ENV',
+    'blockUI',
     'ncUtils'];
 
   function InitialDataController(
@@ -20,6 +21,7 @@
     $q,
     $state,
     ENV,
+    blockUI,
     ncUtils) {
     var controllerScope = this;
     var Controller = baseControllerClass.extend({
@@ -29,6 +31,7 @@
       currentProcess: null,
       invitation: {},
       getFilename: ncUtils.getFilename,
+      pageTitle: ENV.shortPageTitle,
 
       init: function() {
         var fn = this._super.bind(this);
@@ -50,13 +53,16 @@
         }
       },
       activate: function() {
+        this.block = blockUI.instances.get('initial-data-block');
+        this.block.start({delay: 0});
         this.getUser();
       },
       getUser: function() {
         var vm = this;
         usersService.getCurrentUser().then(function(response) {
+          vm.block.stop();
           vm.user = response;
-          vm.user.email = vm.invitation ? vm.invitation.email : response.email;
+          vm.user.email = vm.invitation && vm.invitation.email ? vm.invitation.email : response.email;
           vm.userCopy = angular.copy(response);
         });
       },

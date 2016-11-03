@@ -1,7 +1,7 @@
-<div ng-controller="InitialDataController as InitialData" class="wrapper">
+<div ng-controller="InitialDataController as InitialData" class="wrapper" block-ui="initial-data-block">
     <div class="row m-t-xl">
         <div class="col-md-6 col-md-offset-3 col-xs-12 col-lg-6 col-lg-offset-3">
-            <h2>Welcome to NodeConductor, {{ InitialData.user.full_name || InitialData.user.username }}!</h2>
+            <h2>Welcome to {{::InitialData.pageTitle}}, {{ InitialData.user.full_name || InitialData.user.username }}!</h2>
             <p>Get your cloud expenses under control with just <b>1</b> click.</p>
         </div>
     </div>
@@ -22,47 +22,45 @@
                     </div>
                     <form class="col-sm-10 col-xs-12 form-horizontal">
                         <div class="form-group">
-                            <label for="full_name" class="col-sm-3 col-md-4 col-lg-3 control-label">Full name</label>
+                            <label for="full_name" class="col-sm-3 col-md-4 col-lg-3 control-label">
+                                Full name <span class='text-danger'>*</span>
+                            </label>
                             <div class="col-sm-9 col-md-8">
-                                <input id="full_name" type="text" class="form-control" ng-disabled="InitialData.userCopy.full_name" ng-model="InitialData.user.full_name"/>
-                            </div>
-                            <div class="error" ng-if="InitialData.user.errors.full_name">{{::InitialData.user.errors.full_name}}</div>
-                        </div>
-                        <div class="form-group">
-                            <label for="email" class="col-sm-3 col-md-4 col-lg-3 control-label">Email</label>
-                            <div class="col-sm-9 col-md-8">
-                                <input id="email" type="email" class="form-control" ng-disabled="InitialData.userCopy.email" ng-model="InitialData.user.email"/>
-                            </div>
-                            <div class="error" ng-if="InitialData.user.errors.email">{{::InitialData.user.errors.email}}</div>
-                        </div>
-                        <div class="form-group">
-                            <label for="idCode" class="col-sm-3 col-md-4 col-lg-3 control-label">ID Code</label>
-                            <div class="col-sm-9 col-md-8">
-                                <input id="idCode" type="text" class="form-control" ng-disabled="true" ng-model="InitialData.user.idCode"/>
+                                <input id="full_name" type="text" class="form-control" ng-model="InitialData.user.full_name"/>
+                                <div class="error" ng-if="InitialData.user.errors.full_name">{{::InitialData.user.errors.full_name}}</div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="organization" class="col-sm-3 col-md-4 col-lg-3 control-label">Company name</label>
+                            <label for="email" class="col-sm-3 col-md-4 col-lg-3 control-label">
+                                Email <span class='text-danger'>*</span>
+                            </label>
                             <div class="col-sm-9 col-md-8">
-                                <input id="organization" type="text" class="form-control" ng-disabled="InitialData.userCopy.organization" ng-model="InitialData.user.organization"/>
+                                <input id="email" type="email" class="form-control" ng-model="InitialData.user.email"/>
+                                <div class="error" ng-if="InitialData.user.errors.email">{{::InitialData.user.errors.email}}</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="organization" class="col-sm-3 col-md-4 col-lg-3 control-label">Organization name</label>
+                            <div class="col-sm-9 col-md-8">
+                                <input id="organization" type="text" class="form-control" ng-model="InitialData.user.organization"/>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="job_title" class="col-sm-3 col-md-4 col-lg-3 control-label">Job position</label>
                             <div class="col-sm-9 col-md-8">
-                                <input id="job_title" type="text" class="form-control" ng-disabled="InitialData.userCopy.job_title" ng-model="InitialData.user.job_title"/>
+                                <input id="job_title" type="text" class="form-control" ng-model="InitialData.user.job_title"/>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="description" class="col-sm-3 col-md-4 col-lg-3 control-label">Description</label>
                             <div class="col-sm-9 col-md-8">
-                                <input id="description" type="text" class="form-control" ng-disabled="InitialData.userCopy.description" ng-model="InitialData.user.description"/>
+                                <input id="description" type="text" class="form-control" ng-model="InitialData.user.description"/>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="phone_number" class="col-sm-3 col-md-4 col-lg-3 control-label">Phone number</label>
                             <div class="col-sm-9 col-md-8">
-                                <input id="phone_number" type="text" class="form-control" ng-disabled="InitialData.userCopy.phone_number" ng-model="InitialData.user.phone_number"/>
+                                <input id="phone_number" type="text" class="form-control" ng-model="InitialData.user.phone_number"/>
                             </div>
                         </div>
                         <div class="form-group">
