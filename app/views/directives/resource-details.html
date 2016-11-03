@@ -1,7 +1,7 @@
 <div class="col-lg-6">
   <dl class="dl-horizontal">
     <div class="m-b-xs" ng-if="::resource.summary">
-      <dt>Summary:</dt>
+      <dt>{{::resource.summaryLabel}}:</dt>
       <dd>
         {{ ::resource.summary }}
       </dd>
@@ -44,15 +44,18 @@
       </dd>
     </div>
 
-    <div class="m-b-xs" ng-if="::resource.instance">
+    <div class="m-b-xs">
       <dt>Attached to:</dt>
-      <dd>
+      <dd ng-if="::resource.instance">
         <a ui-sref="resources.details({
           uuid: resource.instance_uuid,
           resource_type: 'OpenStack.Instance'
         })">
           {{ ::resource.instance_name }}
         </a>
+      </dd>
+      <dd ng-if="!resource.instance">
+        &ndash;
       </dd>
     </div>
 
@@ -71,7 +74,7 @@
 </div>
 <div class="col-lg-6">
   <dl class="dl-horizontal">
-    <div class="m-b-xs">
+    <div class="m-b-xs" ng-if="!resource.isVolume">
       <dt>
         Access:
       </dt>
@@ -116,7 +119,7 @@
       </dd>
     </div>
 
-    <div class="m-b-xs">
+    <div class="m-b-xs" ng-if="!resource.isVolume">
       <dt>
         Created:
       </dt>
