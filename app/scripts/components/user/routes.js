@@ -1,4 +1,12 @@
 const tabs = {
+  dashboard: {
+    url: '',
+    template: '<user-dashboard></user-dashboard>',
+    data: {
+      pageTitle: 'User dashboard',
+      pageClass: 'gray-bg'
+    }
+  },
   events: {
     url: 'events/',
     templateUrl: 'views/partials/filtered-list.html',
@@ -47,7 +55,8 @@ export default function($stateProvider) {
       template: '<user-details></user-details>',
     })
 
-    .state('profile.details', tabs.events)
+    .state('profile.details', tabs.dashboard)
+    .state('profile.events', tabs.events)
     .state('profile.keys', tabs.keys)
     .state('profile.notifications', tabs.notifications)
     .state('profile.manage', tabs.manage)

@@ -1,0 +1,40 @@
+// @ngInject
+export default function UserProjectsController(
+  baseControllerListClass, projectPermissionsService, usersService) {
+  var controllerScope = this;
+  var ControllerListClass = baseControllerListClass.extend({
+    init: function() {
+      this.service = projectPermissionsService;
+      this.controllerScope = controllerScope;
+      this.tableOptions = {
+        noDataText: 'No projects yet',
+        noMatchesText: 'No projects found matching filter.',
+
+        columns: [
+          {
+            title: 'Project name',
+            className: 'all',
+            render: function(data, type, row, meta) {
+              return row.project_name;
+            }
+          },
+          {
+            title: 'Role',
+            className: 'all',
+            render: function(data, type, row, meta) {
+              return row.role;
+            }
+          },
+        ]
+      };
+      this._super();
+    },
+    getFilter: function() {
+      return {
+        user_url: usersService.currentUser.url
+      };
+    }
+  });
+
+  controllerScope.__proto__ = new ControllerListClass();
+}

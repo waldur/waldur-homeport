@@ -7,6 +7,10 @@ import UserEventsListController from './user-events-list';
 import userDelete from './user-delete';
 import userSidebar from './user-sidebar';
 import userDetails, { PRIVATE_USER_TABS } from './user-details';
+import userDashboard from './user-dashboard';
+import UserOrganizationsController from './user-organizations';
+import UserProjectsController from './user-projects';
+import UserEventsController from './user-events';
 import userRoutes from './routes';
 
 export default module => {
@@ -20,5 +24,9 @@ export default module => {
   module.directive('userSidebar', userSidebar);
   module.directive('userDetails', userDetails);
   module.constant('PRIVATE_USER_TABS', PRIVATE_USER_TABS);
+  module.directive('userDashboard', userDashboard);
+  module.controller('UserOrganizationsController', UserOrganizationsController);
+  module.controller('UserProjectsController', UserProjectsController);
+  module.controller('UserEventsController', UserEventsController);
   module.config(userRoutes);
 }

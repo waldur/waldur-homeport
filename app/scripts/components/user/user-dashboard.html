@@ -1,0 +1,36 @@
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Owned organizations</h5>
+                </div>
+                <div class="ibox-content" ng-controller="UserOrganizationsController as ListController">
+                    <div ng-include="'views/partials/filtered-list.html'"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Managed projects</h5>
+                </div>
+                <div class="ibox-content" ng-controller="UserProjectsController as ListController">
+                    <div ng-include="'views/partials/filtered-list.html'"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Audit logs</h5>
+                </div>
+                <div class="ibox-content" ng-controller="UserEventsController as ListController">
+                    <div ng-include="'views/partials/filtered-list.html'"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

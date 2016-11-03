@@ -10,9 +10,14 @@ export default function userDetails() {
 
 export const PRIVATE_USER_TABS = [
   {
+      label: "Dashboard",
+      icon: "fa-th-large",
+      link: "profile.details"
+  },
+  {
       label: "Audit logs",
       icon: "fa-bell-o",
-      link: "profile.details"
+      link: "profile.events"
   },
   {
       label: "SSH Keys",
