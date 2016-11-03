@@ -1,4 +1,6 @@
-.expand-service-limits {
+@import 'mixins/mediaqueries.scss';
+
+.provider-quotas {
   column-count: 2;
   @include bp(xs) {
     column-count: initial;

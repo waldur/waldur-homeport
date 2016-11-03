@@ -95,7 +95,7 @@
         return currentStateService.getProject().then(function(project){
           vm.service.defaultFilter.project_uuid = project.uuid;
           return fn(filter);
-        })
+        });
       }
     });
     return controllerClass;
@@ -201,6 +201,46 @@
 })();
 
 (function() {
+  angular.module('ncsaas')
+    .controller('StorageTabController', [
+      '$scope',
+      'resourcesService',
+      'currentProject',
+      StorageTabController]);
+
+  function StorageTabController($scope, resourcesService, currentProject) {
+    $scope.isNumber = angular.isNumber;
+    $scope.tabs = [
+      {
+        title: 'Volumes',
+        countKey: 'OpenStack.Volume',
+        viewKey: 'volumes'
+      },
+      {
+        title: 'Snapshots',
+        countKey: 'OpenStack.Snapshot',
+        viewKey: 'snapshots'
+      }
+    ];
+    function refreshCount() {
+      var query = {
+        resource_category: 'storages',
+        project: currentProject.uuid
+      };
+      resourcesService.countByType(query).then(function(counts) {
+        angular.forEach($scope.tabs, function(tab) {
+          tab.count = counts[tab.countKey];
+        });
+      });
+    }
+    $scope.$on('refreshCounts', function() {
+      refreshCount();
+    });
+    refreshCount();
+  }
+})();
+
+(function() {
 
   angular.module('ncsaas')
     .controller('VolumesListController', [
@@ -231,9 +271,10 @@
         options.noMatchesText = 'No volumes found matching filter.';
         options.columns.push({
           title: 'Attached to',
+          className: 'min-tablet-l',
           render: function(data, type, row, meta) {
             if (!row.instance) {
-              return 'Not known';
+              return '&ndash;';
             }
             var uuid = ncUtils.getUUID(row.instance);
             var href = $state.href('resources.details', {
@@ -532,6 +573,7 @@
           columns: [
             {
               title: 'Member',
+              className: 'all',
               render: function(data, type, row, meta) {
                 var avatar = '<img gravatar-src="\'{gravatarSrc}\'" gravatar-size="100" alt="" class="avatar-img img-xs">'
                   .replace('{gravatarSrc}', row.email);
@@ -540,12 +582,14 @@
             },
             {
               title: 'E-mail',
+              className: 'min-tablet-l',
               render: function(data, type, row, meta) {
                 return row.email;
               }
             },
             {
               title: 'Role in project:',
+              className: 'min-tablet-l',
               render: function(data, type, row, meta) {
                 return ENV.roles[row.role];
               }
