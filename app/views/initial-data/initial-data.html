@@ -1,71 +1,86 @@
-<div ng-controller="InitialDataController as InitialData">
-    <div class="row initial-data-header">
-        <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+<div ng-controller="InitialDataController as InitialData" class="wrapper">
+    <div class="row m-t-xl">
+        <div class="col-md-6 col-md-offset-3 col-xs-12 col-lg-6 col-lg-offset-3">
             <h2>Welcome to NodeConductor, {{ InitialData.user.full_name || InitialData.user.username }}!</h2>
             <p>Get your cloud expenses under control with just <b>1</b> click.</p>
         </div>
     </div>
     <div class="row initial-data-page">
-        <div class="col-xs-12 col-sm-1 col-sm-offset-3">
-            <div class="logo">
-                <div class="img-wrapper">
-                    <img gravatar-src="InitialData.user.email" alt=""/>
+        <div class="ibox col-md-offset-2 col-md-8 col-lg-6 col-lg-offset-3">
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-sm-2 col-xs-12">
+                        <div class="logo">
+                            <div class="img-wrapper">
+                                <img gravatar-src="InitialData.user.email" gravatar-size="100"/>
+                            </div>
+                            <span class="manage-gravatar">
+                                Manage at
+                                <a href="//gravatar.com" target="_blank">gravatar.com</a>
+                            </span>
+                        </div>
+                    </div>
+                    <form class="col-sm-10 col-xs-12 form-horizontal">
+                        <div class="form-group">
+                            <label for="full_name" class="col-sm-3 col-md-4 col-lg-3 control-label">Full name</label>
+                            <div class="col-sm-9 col-md-8">
+                                <input id="full_name" type="text" class="form-control" ng-disabled="InitialData.userCopy.full_name" ng-model="InitialData.user.full_name"/>
+                            </div>
+                            <div class="error" ng-if="InitialData.user.errors.full_name">{{::InitialData.user.errors.full_name}}</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="col-sm-3 col-md-4 col-lg-3 control-label">Email</label>
+                            <div class="col-sm-9 col-md-8">
+                                <input id="email" type="email" class="form-control" ng-disabled="InitialData.userCopy.email" ng-model="InitialData.user.email"/>
+                            </div>
+                            <div class="error" ng-if="InitialData.user.errors.email">{{::InitialData.user.errors.email}}</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="idCode" class="col-sm-3 col-md-4 col-lg-3 control-label">ID Code</label>
+                            <div class="col-sm-9 col-md-8">
+                                <input id="idCode" type="text" class="form-control" ng-disabled="true" ng-model="InitialData.user.idCode"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="organization" class="col-sm-3 col-md-4 col-lg-3 control-label">Company name</label>
+                            <div class="col-sm-9 col-md-8">
+                                <input id="organization" type="text" class="form-control" ng-disabled="InitialData.userCopy.organization" ng-model="InitialData.user.organization"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="job_title" class="col-sm-3 col-md-4 col-lg-3 control-label">Job position</label>
+                            <div class="col-sm-9 col-md-8">
+                                <input id="job_title" type="text" class="form-control" ng-disabled="InitialData.userCopy.job_title" ng-model="InitialData.user.job_title"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="description" class="col-sm-3 col-md-4 col-lg-3 control-label">Description</label>
+                            <div class="col-sm-9 col-md-8">
+                                <input id="description" type="text" class="form-control" ng-disabled="InitialData.userCopy.description" ng-model="InitialData.user.description"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone_number" class="col-sm-3 col-md-4 col-lg-3 control-label">Phone number</label>
+                            <div class="col-sm-9 col-md-8">
+                                <input id="phone_number" type="text" class="form-control" ng-disabled="InitialData.userCopy.phone_number" ng-model="InitialData.user.phone_number"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="checkbox col-sm-offset-3 col-xs-12">
+                                <label>
+                                    <input id="acceptPolicy" type="checkbox" ng-model="InitialData.user.acceptPolicy"/> I accept the <a ui-sref="tos.index" target="_blank">Terms of Provider</a>.
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-3 col-xs-12">
+                                <button type="submit" class="btn btn-primary" ng-disabled="!InitialData.user.acceptPolicy" submit-button="InitialData.save()">Let’s get started</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <span class="manage-gravatar">
-                    Manage at
-                    <a href="//gravatar.com" target="_blank">gravatar.com</a>
-                </span>
             </div>
-        </div>
-        <div class="col-xs-12 col-sm-3 fields">
-            <div class="form-group">
-                <label for="full_name">Full name</label>
-                <input id="full_name" type="text" class="form-control" ng-disabled="InitialData.userCopy.full_name" ng-model="InitialData.user.full_name"/>
-                <div class="error" ng-if="InitialData.user.errors.full_name">{{::InitialData.user.errors.full_name}}</div>
-            </div>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input id="email" type="email" class="form-control" ng-disabled="InitialData.userCopy.email" ng-model="InitialData.user.email"/>
-                <div class="error" ng-if="InitialData.user.errors.email">{{::InitialData.user.errors.email}}</div>
-            </div>
-            <div class="form-group">
-                <label for="registration_method">Authentication method</label>
-                <input id="registration_method" type="text" class="form-control" ng-disabled="InitialData.userCopy.registration_method" ng-model="InitialData.user.registration_method"/>
-            </div>
-            <div class="form-group">
-                <label for="idCode">ID Code</label>
-                <input id="idCode" type="text" class="form-control" ng-disabled="true" ng-model="InitialData.user.idCode"/>
-            </div>
-            <div class="form-group">
-                <label for="organization">Company name</label>
-                <input id="organization" type="text" class="form-control" ng-disabled="InitialData.userCopy.organization" ng-model="InitialData.user.organization"/>
-            </div>
-            <div class="form-group">
-                <label for="job_title">Job position</label>
-                <input id="job_title" type="text" class="form-control" ng-disabled="InitialData.userCopy.job_title" ng-model="InitialData.user.job_title"/>
-            </div>
-            <div class="form-group">
-                <label for="description">Description</label>
-                <input id="description" type="text" class="form-control" ng-disabled="InitialData.userCopy.description" ng-model="InitialData.user.description"/>
-            </div>
-            <div class="form-group">
-                <label for="phone_number">Phone number</label>
-                <input id="phone_number" type="text" class="form-control" ng-disabled="InitialData.userCopy.phone_number" ng-model="InitialData.user.phone_number"/>
-            </div>
-            <div class="form-group">
-            </div>
-            <div class="form-group">
-                <div class="checkbox">
-                    <label>
-                        <input id="acceptPolicy" type="checkbox" ng-model="InitialData.user.acceptPolicy"/> I accept the <a ui-sref="tos.index" target="_blank">Terms of Provider</a>.
-                    </label>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row button-wrapper">
-        <div class="col-sm-2 col-sm-offset-4">
-            <button type="submit" class="btn btn-primary" ng-disabled="!InitialData.user.acceptPolicy" submit-button="InitialData.save()">Let’s get started</button>
         </div>
     </div>
 </div>
