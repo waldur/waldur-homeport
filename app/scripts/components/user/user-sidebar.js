@@ -11,7 +11,7 @@ export default function userSidebar() {
 }
 
 // @ngInject
-function UserSidebarController($scope, $rootScope, usersService, PRIVATE_USER_TABS) {
+function UserSidebarController($rootScope, usersService, PRIVATE_USER_TABS) {
   var ctrl = this;
   ctrl.items = PRIVATE_USER_TABS;
   ctrl.logout = $rootScope.logout;
