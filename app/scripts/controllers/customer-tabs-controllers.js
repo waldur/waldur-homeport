@@ -51,19 +51,21 @@
           columns: [
             {
               title: 'Type',
+              className: 'all',
               render: function(data, type, row, meta) {
                 return row.service_type;
               }
             },
             {
               title: 'Name',
+              className: 'all',
               render: function(data, type, row, meta) {
-                return row.name
+                return row.name;
               }
             },
             {
               title: 'State',
-              className: 'text-center',
+              className: 'text-center min-tablet-l',
               render: function(data, type, row, meta) {
                 var cls = ncServiceUtils.getStateClass(row.state);
                 return '<a class="{cls}" title="{title}"></a>'
@@ -73,7 +75,7 @@
             },
             {
               title: 'My provider',
-              className: 'text-center',
+              className: 'text-center min-tablet-l',
               render: function(data, type, row, meta) {
                 var cls = row.shared && 'fa-minus' || 'fa-check';
                 return '<a class="bool-field"><i class="fa {cls}"/></a>'.replace('{cls}', cls);
@@ -82,7 +84,7 @@
             },
             {
               title: 'Resources',
-              className: 'text-center',
+              className: 'text-center min-tablet-l',
               render: function(data, type, row, meta) {
                 return row.resources_count || 0;
               },
@@ -731,6 +733,7 @@
           columns: [
             {
               title: 'Member',
+              className: 'all',
               render: function(data, type, row, meta) {
                 var avatar = '<img gravatar-src="\'{gravatarSrc}\'" gravatar-size="100" alt="" class="avatar-img img-xs">'
                   .replace('{gravatarSrc}', row.email);
@@ -739,12 +742,14 @@
             },
             {
               title: 'E-mail',
+              className: 'min-tablet-l',
               render: function(data, type, row, meta) {
                 return row.email;
               }
             },
             {
               title: 'Owner',
+              className: 'all',
               render: function(data, type, row, meta) {
                 var cls = row.role == 'owner' ? 'check' : 'minus';
                 var title = ENV.roles[row.role];
@@ -755,12 +760,14 @@
             },
             {
               title: ENV.roles.manager + ' in:',
+              className: 'min-tablet-l',
               render: function(data, type, row, meta) {
                 return vm.formatProjectRolesList('manager', row);
               }
             },
             {
               title: ENV.roles.admin + ' in:',
+              className: 'min-tablet-l',
               render: function(data, type, row, meta) {
                 return vm.formatProjectRolesList('admin', row);
               }
@@ -1062,6 +1069,7 @@
           columns: [
             {
               title: 'E-mail',
+              className: 'all',
               render: function(data, type, row, meta) {
                 var avatar = '<img gravatar-src="\'{gravatarSrc}\'" gravatar-size="100" alt="" class="avatar-img img-xs">'
                   .replace('{gravatarSrc}', row.email);
@@ -1070,6 +1078,7 @@
             },
             {
               title: 'Role',
+              className: 'min-tablet-l',
               render: function(data, type, row, meta) {
                 if (row.customer) {
                   return ENV.roles.owner;
@@ -1085,18 +1094,21 @@
             },
             {
               title: 'Status',
+              className: 'min-tablet-l',
               render: function(data, type, row, meta) {
                 return row.state;
               }
             },
             {
               title: 'Created at',
+              className: 'min-tablet-l',
               render: function(data, type, row, meta) {
                 return $filter('dateTime')(row.created);
               }
             },
             {
               title: 'Expires at',
+              className: 'min-tablet-l',
               render: function(data, type, row, meta) {
                 return $filter('dateTime')(row.expires);
               }

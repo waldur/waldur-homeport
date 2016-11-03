@@ -80,12 +80,14 @@
           columns: [
             {
               title: 'Message',
+              className: 'all',
               render: function(data, type, row, meta) {
                 return eventFormatter.format(row);
               }
             },
             {
               title: 'Timestamp',
+              className: 'all',
               render: function(data, type, row, meta) {
                 return $filter('dateTime')(row['@timestamp']);
               }
@@ -140,12 +142,14 @@
           columns: [
             {
               title: 'Message',
+              className: 'all',
               render: function(data, type, row, meta) {
                 return alertFormatter.format(row);
               }
             },
             {
-            title: 'Timestamp',
+              title: 'Timestamp',
+              className: 'all',
               render: function(data, type, row, meta) {
                 return $filter('dateTime')(row.created);
               }
