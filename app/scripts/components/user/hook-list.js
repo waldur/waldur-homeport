@@ -1,5 +1,15 @@
+export default function hookList() {
+  return {
+    restrict: 'E',
+    templateUrl: 'views/partials/filtered-list.html',
+    controller: HookListController,
+    controllerAs: 'ListController',
+    scope: {}
+  };
+}
+
 // @ngInject
-export default function HookListController(
+function HookListController(
   baseControllerListClass, $filter, $uibModal, hooksService) {
   var controllerScope = this;
   var Controller = baseControllerListClass.extend({

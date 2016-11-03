@@ -1,9 +1,19 @@
+export default function keyList() {
+  return {
+    restrict: 'E',
+    templateUrl: 'views/partials/filtered-list.html',
+    controller: KeyListController,
+    controllerAs: 'ListController',
+    scope: {}
+  };
+}
+
 // @ngInject
-export default function KeyListController(
+function KeyListController(
   $stateParams,
   keysService,
   baseControllerListClass,
-  currentUser,
+  usersService,
   $state) {
   var controllerScope = this;
   var Controller = baseControllerListClass.extend({
@@ -60,11 +70,11 @@ export default function KeyListController(
     },
     isStaffOrSelf: function() {
       return angular.isUndefined($stateParams.uuid) ||
-             currentUser.uuid === $stateParams.uuid ||
-             currentUser.is_staff;
+             usersService.currentUser.uuid === $stateParams.uuid ||
+             usersService.currentUser.is_staff;
     },
     getList: function(filter) {
-      this.service.defaultFilter.user_uuid = $stateParams.uuid || currentUser.uuid;
+      this.service.defaultFilter.user_uuid = $stateParams.uuid || usersService.currentUser.uuid;
       return this._super(filter);
     }
   });

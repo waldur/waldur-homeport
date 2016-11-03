@@ -9,27 +9,21 @@ const tabs = {
   },
   events: {
     url: 'events/',
-    templateUrl: 'views/partials/filtered-list.html',
-    controller: 'UserEventsListController',
-    controllerAs: 'ListController',
+    template: '<user-events></user-events>',
     data: {
       pageTitle: 'Audit logs'
     }
   },
   keys: {
     url: 'keys/',
-    templateUrl: 'views/partials/filtered-list.html',
-    controller: 'KeyListController',
-    controllerAs: 'ListController',
+    template: '<key-list></key-list>',
     data: {
       pageTitle: 'SSH keys'
     }
   },
   notifications: {
     url: 'notifications/',
-    templateUrl: 'views/partials/filtered-list.html',
-    controller: 'HookListController',
-    controllerAs: 'ListController',
+    template: '<hook-list></hook-list>',
     data: {
       pageTitle: 'Notifications'
     }

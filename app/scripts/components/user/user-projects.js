@@ -1,5 +1,15 @@
+export default function userProjects() {
+  return {
+    restrict: 'E',
+    templateUrl: 'views/partials/filtered-list.html',
+    controller: UserProjectsController,
+    controllerAs: 'ListController',
+    scope: {}
+  };
+}
+
 // @ngInject
-export default function UserProjectsController(
+function UserProjectsController(
   baseControllerListClass, projectPermissionsService, usersService) {
   var controllerScope = this;
   var ControllerListClass = baseControllerListClass.extend({

@@ -1,5 +1,15 @@
+export default function userOrganizations() {
+  return {
+    restrict: 'E',
+    templateUrl: 'views/partials/filtered-list.html',
+    controller: UserOrganizationsController,
+    controllerAs: 'ListController',
+    scope: {}
+  };
+}
+
 // @ngInject
-export default function UserOrganizationsController(
+function UserOrganizationsController(
   baseControllerListClass, customerPermissionsService, usersService) {
   var controllerScope = this;
   var ControllerListClass = baseControllerListClass.extend({

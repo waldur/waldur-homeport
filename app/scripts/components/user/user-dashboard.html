@@ -5,8 +5,8 @@
                 <div class="ibox-title">
                     <h5>Owned organizations</h5>
                 </div>
-                <div class="ibox-content" ng-controller="UserOrganizationsController as ListController">
-                    <div ng-include="'views/partials/filtered-list.html'"></div>
+                <div class="ibox-content">
+                    <user-organizations></user-organizations>
                 </div>
             </div>
         </div>
@@ -15,8 +15,8 @@
                 <div class="ibox-title">
                     <h5>Managed projects</h5>
                 </div>
-                <div class="ibox-content" ng-controller="UserProjectsController as ListController">
-                    <div ng-include="'views/partials/filtered-list.html'"></div>
+                <div class="ibox-content">
+                    <user-projects></user-projects>
                 </div>
             </div>
         </div>
@@ -27,8 +27,8 @@
                 <div class="ibox-title">
                     <h5>Audit logs</h5>
                 </div>
-                <div class="ibox-content" ng-controller="UserEventsController as ListController">
-                    <div ng-include="'views/partials/filtered-list.html'"></div>
+                <div class="ibox-content">
+                    <user-events></user-events>
                 </div>
             </div>
         </div>
