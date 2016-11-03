@@ -3,10 +3,10 @@
 (function() {
   angular.module('ncsaas')
     .directive('actionButtonResource', [
-      'actionUtilsService',
+      '$rootScope', 'actionUtilsService',
       actionButtonResource]);
 
-  function actionButtonResource(actionUtilsService) {
+  function actionButtonResource($rootScope, actionUtilsService) {
     return {
       restrict: 'E',
       templateUrl: 'views/directives/action-button-resource.html',
@@ -20,6 +20,9 @@
 
         scope.buttonClick = function(name, action) {
           actionUtilsService.buttonClick(scope.buttonController, scope.buttonModel, name, action);
+        };
+        scope.buttonsListToggle = function() {
+          $rootScope.isActionListOpened = !$rootScope.isActionListOpened;
         };
         scope.openActionsListTrigger = function() {
           scope.loading = true;

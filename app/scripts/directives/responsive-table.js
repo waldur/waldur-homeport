@@ -4,9 +4,9 @@
 
   angular.module('ncsaas').directive('responsiveTable', responsiveTable);
 
-  responsiveTable.$inject = ['$timeout', '$interval', '$compile', 'ENV'];
+  responsiveTable.$inject = ['$timeout', '$interval', '$compile', '$rootScope', 'ENV'];
 
-  function responsiveTable($timeout, $interval, $compile, ENV) {
+  function responsiveTable($timeout, $interval, $compile, $rootScope, ENV) {
     return {
       restrict: 'E',
       scope: {
@@ -16,6 +16,7 @@
       link: function(scope, element) {
         var options = scope.controller.tableOptions;
         var table;
+        $rootScope.isActionListOpened = false;
 
         scope.$watch('controller.tableOptions', function(newTableOptions) {
           if (table) {
@@ -108,12 +109,18 @@
           });
 
           var timer = $interval(
-            scope.controller.resetCache.bind(scope.controller),
+            intervalHandler,
             ENV.countersTimerInterval * 1000
           );
           scope.$on('$destroy', function() {
             $interval.cancel(timer);
           });
+        }
+
+        function intervalHandler() {
+          if ($rootScope.isActionListOpened === false) {
+            scope.controller.resetCache.call(scope.controller);
+          }
         }
 
         function getTableButtons(actions) {
