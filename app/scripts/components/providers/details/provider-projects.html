@@ -1,0 +1,16 @@
+<div ng-if="loading">
+  <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
+</div>
+<div ng-if="!loading && !canManage" class="empty-list-message">
+    You don't have enough permission to edit projects for <strong>{{ service.name }}</strong> provider.
+</div>
+<div ng-if="!loading && canManage && !choices.length" class="empty-list-message">
+    There are no projects yet.
+</div>
+<div ng-if="choices.length">
+    <p>Please select projects where usage of the provider is permitted.</p>
+    <div multiple-select choices="choices"></div>
+    <p class="text-center">
+        <a class="btn btn-primary" submit-button="save()">Save</a>
+    </p>
+</div>

@@ -62,7 +62,7 @@
           currentStateService.getCustomer(),
           usersService.getCurrentUser()
         ]).then(function(result) {
-          return vm.checkCustomerUser.apply.bind(null, result);
+          return vm.checkCustomerUser.apply(null, result);
         });
       },
       checkCustomerUser: function(customer, user) {
