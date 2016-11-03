@@ -56,6 +56,7 @@
           columns: [
             {
               title: 'Name',
+              className: 'all',
               render: function(data, type, row, meta) {
                 var img = '<img src="{src}" title="{title}" class="img-xs m-r-xs">'
                       .replace('{src}', resourceUtils.getIcon(row))
@@ -69,19 +70,14 @@
             },
             {
               title: 'Provider',
+              className: 'desktop',
               render: function(data, type, row, meta) {
-                var customer_uuid = ncUtils.getUUID(row.customer);
-                var provider_type = row.resource_type.split(".")[0];
-                var href = $state.href('organization.providers', {
-                  uuid: customer_uuid,
-                  providerUuid: row.service_uuid,
-                  providerType: provider_type
-                });
-                return ncUtils.renderLink(href, row.service_name);
+                return row.service_name;
               }
             },
             {
               title: 'State',
+              className: 'min-tablet-l',
               render: function(data, type, row, meta) {
                 var cls = ENV.resourceStateColorClasses[row.state];
                 var title = row.state;
@@ -96,9 +92,9 @@
                 }
                 return '<a class="{cls}" title="{title}"></a> {state}'
                           .replace('{cls}', cls)
-                          .replace('{state}', row.runtime_state || row.state)
-                          .replace('{title}', row.runtime_state || row.state);
-              },
+                          .replace('{state}', row.state || row.runtime_state)
+                          .replace('{title}', title);
+              }
             }
           ],
           tableActions: this.getTableActions(),
@@ -256,7 +252,7 @@
           var query = angular.extend({}, filter, {
             field: vm.rowFields
           });
-          if (angular.isDefined(vm.category)) {
+          if (angular.isDefined(vm.category) && !vm.getFilter().resource_type) {
             query.resource_category = vm.categories[vm.category];
             vm.updateFilters(filter);
           }

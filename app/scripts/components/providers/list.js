@@ -32,19 +32,21 @@ export default function ProviderListController(
         columns: [
           {
             title: 'Type',
+            className: 'all',
             render: function(data, type, row, meta) {
               return row.service_type;
             }
           },
           {
             title: 'Name',
+            className: 'all',
             render: function(data, type, row, meta) {
-              return row.name
+              return row.name;
             }
           },
           {
             title: 'State',
-            className: 'text-center',
+            className: 'text-center min-tablet-l',
             render: function(data, type, row, meta) {
               var cls = ncServiceUtils.getStateClass(row.state);
               return '<a class="{cls}" title="{title}"></a>'
@@ -54,7 +56,7 @@ export default function ProviderListController(
           },
           {
             title: 'System provider',
-            className: 'text-center',
+            className: 'text-center min-tablet-l',
             render: function(data, type, row, meta) {
               var cls = row.shared && 'fa-check' || 'fa-minus';
               return '<a class="bool-field"><i class="fa {cls}"/></a>'.replace('{cls}', cls);
@@ -63,7 +65,7 @@ export default function ProviderListController(
           },
           {
             title: 'Resources',
-            className: 'text-center',
+            className: 'text-center min-tablet-l',
             render: function(data, type, row, meta) {
               if (!controllerScope.canUserManageService) {
                 return 'N/A';

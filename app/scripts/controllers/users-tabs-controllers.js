@@ -73,12 +73,14 @@
           columns: [
             {
               title: 'Title',
+              className: 'all',
               render: function(data, type, row, meta) {
                 return row.name;
               }
             },
             {
               title: 'Fingerprint',
+              className: 'min-tablet-l',
               render: function(data, type, row, meta) {
                 return row.fingerprint;
               }

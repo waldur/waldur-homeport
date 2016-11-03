@@ -1,5 +1,4 @@
 (function() {
-
   angular.module('ncsaas')
     .controller('CustomerProjectTabController', ProjectListController);
 
@@ -501,6 +500,7 @@
           columns: [
             {
               title: 'Member',
+              className: 'all',
               render: function(data, type, row, meta) {
                 var avatar = '<img gravatar-src="\'{gravatarSrc}\'" gravatar-size="100" alt="" class="avatar-img img-xs">'
                   .replace('{gravatarSrc}', row.email);
@@ -509,12 +509,14 @@
             },
             {
               title: 'E-mail',
+              className: 'min-tablet-l',
               render: function(data, type, row, meta) {
                 return row.email;
               }
             },
             {
               title: 'Owner',
+              className: 'all',
               render: function(data, type, row, meta) {
                 var cls = row.role == 'owner' ? 'check' : 'minus';
                 var title = ENV.roles[row.role];
@@ -525,12 +527,14 @@
             },
             {
               title: ENV.roles.manager + ' in:',
+              className: 'min-tablet-l',
               render: function(data, type, row, meta) {
                 return vm.formatProjectRolesList('manager', row);
               }
             },
             {
               title: ENV.roles.admin + ' in:',
+              className: 'min-tablet-l',
               render: function(data, type, row, meta) {
                 return vm.formatProjectRolesList('admin', row);
               }
@@ -772,7 +776,6 @@
     'ncUtils',
     '$state',
     '$filter',
-    '$rootScope',
     '$uibModal',
     'ncUtilsFlash',
     'ENV'
@@ -786,7 +789,6 @@
     ncUtils,
     $state,
     $filter,
-    $rootScope,
     $uibModal,
     ncUtilsFlash,
     ENV
@@ -832,6 +834,7 @@
           columns: [
             {
               title: 'E-mail',
+              className: 'all',
               render: function(data, type, row, meta) {
                 var avatar = '<img gravatar-src="\'{gravatarSrc}\'" gravatar-size="100" alt="" class="avatar-img img-xs">'
                   .replace('{gravatarSrc}', row.email);
@@ -840,6 +843,7 @@
             },
             {
               title: 'Role',
+              className: 'min-tablet-l',
               render: function(data, type, row, meta) {
                 if (row.customer) {
                   return ENV.roles.owner;
@@ -855,18 +859,21 @@
             },
             {
               title: 'Status',
+              className: 'min-tablet-l',
               render: function(data, type, row, meta) {
                 return row.state;
               }
             },
             {
               title: 'Created at',
+              className: 'min-tablet-l',
               render: function(data, type, row, meta) {
                 return $filter('dateTime')(row.created);
               }
             },
             {
               title: 'Expires at',
+              className: 'min-tablet-l',
               render: function(data, type, row, meta) {
                 return $filter('dateTime')(row.expires);
               }
@@ -887,14 +894,13 @@
         ];
       },
       openDialog: function() {
-        var dialogScope = $rootScope.$new();
-        dialogScope.customer = currentCustomer;
         $uibModal.open({
-          templateUrl: 'views/customer/invitation-dialog.html',
-          scope: dialogScope,
-          controller: 'InvitationDialogController',
-          controllerAs: 'DialogCtrl',
-          bindToController: true,
+          component: 'invitationDialog',
+          resolve: {
+            customer: function() {
+              return currentCustomer;
+            }
+          },
         }).result.then(function() {
           controllerScope.resetCache();
         });
@@ -933,6 +939,7 @@
         invitationService.cancel(row.uuid).then(function() {
           ncUtilsFlash.success('Invitation has been cancelled.');
           row.state = 'cancelled';
+          controllerScope.resetCache();
         }).catch(function() {
           ncUtilsFlash.error('Unable to cancel invitation.');
         });
@@ -946,78 +953,5 @@
       }
     });
     controllerScope.__proto__ = new InvitationController();
-  }
-})();
-
-
-(function() {
-  angular.module('ncsaas')
-    .controller('InvitationDialogController', InvitationDialogController);
-
-  InvitationDialogController.$inject = ['$q', '$state', 'invitationService', 'ncUtilsFlash', 'ENV'];
-  function InvitationDialogController($q, $state, invitationService, ncUtilsFlash, ENV) {
-    var vm = this;
-    vm.submitForm = submitForm;
-    activate();
-
-    function activate() {
-      vm.roles = [
-        {
-          field: 'customer_role',
-          title: ENV.roles.owner,
-          value: 'owner',
-          icon: 'fa-sitemap'
-        },
-        {
-          field: 'project_role',
-          title: ENV.roles.manager,
-          value: 'manager',
-          icon: 'fa-users'
-        },
-        {
-          field: 'project_role',
-          title: ENV.roles.admin,
-          value: 'admin',
-          icon: 'fa-server'
-        }
-      ];
-      vm.role = vm.roles[0];
-    }
-
-    function submitForm() {
-      if (vm.DialogForm.$invalid) {
-        return $q.reject();
-      }
-
-      vm.submitting = true;
-      return createInvite().then(function() {
-        vm.$close();
-        ncUtilsFlash.success('Invitation has been created.');
-      }).catch(function(errors) {
-        vm.errors = errors;
-        ncUtilsFlash.error('Unable to create invitation.');
-      }).finally(function() {
-        vm.submitting = false;
-      });
-    }
-
-    function createInvite() {
-      var invite = invitationService.$create();
-      invite.link_template = getTemplateUrl();
-      invite.email = vm.email;
-      if (vm.role.field === 'customer_role') {
-        invite.customer_role = vm.role.value;
-        invite.customer = vm.customer.url;
-      } else if (vm.role.field === 'project_role') {
-        invite.project_role = vm.role.value;
-        invite.project = vm.project.url;
-      }
-      return invite.$save();
-    }
-
-    function getTemplateUrl() {
-      var path = $state.href('invitation', {uuid: 'TEMPLATE'});
-      return location.origin + path.replace('TEMPLATE', '{uuid}');
-    }
   }
 })();
