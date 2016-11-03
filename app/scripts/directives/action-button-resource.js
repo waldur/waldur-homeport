@@ -3,10 +3,10 @@
 (function() {
   angular.module('ncsaas')
     .directive('actionButtonResource', [
-      '$rootScope', 'resourcesService', 'actionUtilsService',
+      'actionUtilsService',
       actionButtonResource]);
 
-  function actionButtonResource($rootScope, resourcesService, actionUtilsService) {
+  function actionButtonResource(actionUtilsService) {
     return {
       restrict: 'E',
       templateUrl: 'views/directives/action-button-resource.html',
@@ -20,7 +20,7 @@
 
         scope.buttonClick = function(name, action) {
           actionUtilsService.buttonClick(scope.buttonController, scope.buttonModel, name, action);
-        }
+        };
         scope.openActionsListTrigger = function() {
           scope.loading = true;
           scope.actions = [];
@@ -29,7 +29,7 @@
           }).finally(function() {
             scope.loading = false;
           });
-        }
+        };
       }
     };
   }

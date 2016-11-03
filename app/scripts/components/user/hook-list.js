@@ -14,7 +14,7 @@ export default function HookListController(
         columns: [
           {
             title: 'State',
-            className: 'text-center',
+            className: 'text-center all',
             render: function(data, type, row, meta) {
               var cls = row.is_active && 'online' || '';
               var title = row.is_active && 'Enabled' || 'Disabled';
@@ -25,18 +25,21 @@ export default function HookListController(
           },
           {
             title: 'Method',
+            className: 'min-tablet-l',
             render: function(data, type, row, meta) {
               return row.label;
             }
           },
           {
             title: 'Destination',
+            className: 'min-tablet-l',
             render: function(data, type, row, meta) {
               return row.destination;
             }
           },
           {
             title: 'Events',
+            className: 'min-tablet-l',
             render: function(data, type, row, meta) {
               return row.events;
             }
