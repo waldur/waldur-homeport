@@ -209,28 +209,6 @@
           }
         })
 
-        .state('support', {
-          url: '/support/',
-          templateUrl: 'views/customer/base.html',
-          abstract: true,
-          data: {
-            auth: true
-          }
-        })
-
-        .state('support.list', {
-          url: '',
-          templateUrl: 'views/support/list.html',
-          data: {
-            pageTitle: 'Support'
-          }
-        })
-
-        .state('support.create', {
-          url: 'add/:type',
-          templateUrl: 'views/support/create.html',
-        })
-
         .state('resources', {
           url: '/resources/',
           abstract: true,

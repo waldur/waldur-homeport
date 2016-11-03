@@ -22,7 +22,7 @@
                          ng-if="::group.items.length > 0"
                          heading="{{ ::group.label }}">
                     <div class="panel-body">
-                        <div class="list-group appstore-dialog row">
+                        <div class="list-group appstore-category-selector row">
                             <div class="col-md-6" ng-repeat="offering in group.items" visible="{{::offering.feature}}">
                                 <button class="list-group-item"
                                     submit-button="DialogCtrl.selectOffering(offering)"

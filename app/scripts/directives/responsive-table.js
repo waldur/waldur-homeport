@@ -15,10 +15,15 @@
       template: '<table class="table table-striped"/>',
       link: function(scope, element) {
         var options = scope.controller.tableOptions;
+        var table;
 
         scope.$watch('controller.tableOptions', function(newTableOptions) {
+          if (table) {
+            // Table should be initialized once
+            return;
+          }
           if (newTableOptions.columns) {
-            var table = initTable();
+            table = initTable();
             connectRowButtons(table);
             connectWatcher(table);
           }
