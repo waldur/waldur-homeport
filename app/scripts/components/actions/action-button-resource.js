@@ -26,6 +26,10 @@ class ActionButtonController {
     this.actionUtilsService.buttonClick(this.buttonController, this.buttonModel, name, action);
   }
 
+  onToggle() {
+    this.buttonController.toggleRefresh();
+  }
+
   buttonClass(action) {
     return {
       disabled: !action.enabled || action.pending,

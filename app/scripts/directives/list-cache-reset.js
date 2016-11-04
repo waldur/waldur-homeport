@@ -7,7 +7,7 @@
   function listCacheReset($rootScope) {
     return {
       restrict: 'E',
-      templateUrl: "views/directives/list-cache-reset.html",
+      templateUrl: 'views/directives/list-cache-reset.html',
       replace: true,
       scope: {
         controller: '=listController',
@@ -28,7 +28,7 @@
           var timer = scope.timer * 1000;
           $rootScope.listCacheResetTimer = setInterval(resetCache, timer);
           scope.$on(
-            "$destroy",
+            '$destroy',
             function() {
               if ($rootScope.listCacheResetTimer) {
                 clearInterval($rootScope.listCacheResetTimer);
