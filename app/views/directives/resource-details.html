@@ -35,12 +35,7 @@
     <div class="m-b-xs">
       <dt>Provider:</dt>
       <dd>
-        <a ui-sref="organization.providers({
-          uuid: resource.customer_uuid,
-          providerUuid: resource.service_uuid,
-          providerType: resource.service_type})">
-          {{ ::resource.service_name }}
-        </a>
+        {{ ::resource.service_name }}
       </dd>
     </div>
 
@@ -71,6 +66,15 @@
 </div>
 <div class="col-lg-6">
   <dl class="dl-horizontal">
+    <div class="m-b-xs" ng-if="resource.description">
+      <dt>
+        Description:
+      </dt>
+      <dd>
+        <span ng-bind="resource.description"></span>
+      </dd>
+    </div>
+
     <div class="m-b-xs">
       <dt>
         Access:

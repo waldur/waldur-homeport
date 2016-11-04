@@ -227,6 +227,7 @@
         resource_category: 'storages',
         project: currentProject.uuid
       };
+      resourcesService.cleanAllCache();
       resourcesService.countByType(query).then(function(counts) {
         angular.forEach($scope.tabs, function(tab) {
           tab.count = counts[tab.countKey];

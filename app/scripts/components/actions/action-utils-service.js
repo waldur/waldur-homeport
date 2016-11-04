@@ -133,6 +133,8 @@ export default function actionUtilsService(
       component = 'dropletResizeDialog';
     } else if (resource.resource_type === 'OpenStack.Volume' && name === 'extend') {
       component = 'volumeExtendDialog';
+    } else if (resource.resource_type === 'OpenStack.Volume' && name === 'snapshot') {
+      component = 'snapshotCreateDialog';
     }
 
     return component;
