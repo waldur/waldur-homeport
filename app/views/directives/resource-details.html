@@ -44,7 +44,7 @@
       </dd>
     </div>
 
-    <div class="m-b-xs">
+    <div class="m-b-xs" ng-if="resource.isVolume">
       <dt>Attached to:</dt>
       <dd ng-if="::resource.instance">
         <a ui-sref="resources.details({
@@ -70,7 +70,7 @@
         </a>
       </dd>
     </div>
-    <div class="m-b-xs top-buffer-20">
+    <div class="m-b-xs m-t-md">
       <dt>
         UUID:
       </dt>
