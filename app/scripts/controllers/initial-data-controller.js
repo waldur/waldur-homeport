@@ -65,6 +65,9 @@
           vm.loading = false;
           vm.user = response;
           vm.user.email = vm.invitation && vm.invitation.email ? vm.invitation.email : response.email;
+          vm.user.registration_method = (vm.user.registration_method && vm.user.registration_method === 'openid') ?
+            'Estonian ID' :
+            vm.user.registration_method[0].toUpperCase() + vm.user.registration_method.slice(1);
         });
       },
       saveUser: function() {
