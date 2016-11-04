@@ -70,6 +70,22 @@
         </a>
       </dd>
     </div>
+    <div class="m-b-xs top-buffer-20">
+      <dt>
+        UUID:
+      </dt>
+      <dd>
+        {{ ::resource.uuid }}
+      </dd>
+    </div>
+    <div class="m-b-xs">
+      <dt>
+        Backend ID:
+      </dt>
+      <dd>
+        {{ ::resource.backend_id }}
+      </dd>
+    </div>
   </dl>
 </div>
 <div class="col-lg-6">
@@ -135,15 +151,6 @@
       </dt>
       <dd>
         {{ ::resource.uptime }}
-      </dd>
-    </div>
-
-    <div class="m-b-xs">
-      <dt>
-        UUID:
-      </dt>
-      <dd>
-        {{ ::resource.uuid }}
       </dd>
     </div>
   </dl>
