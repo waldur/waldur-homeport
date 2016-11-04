@@ -51,7 +51,6 @@
       },
       toggleRefresh: function() {
         this.enableRefresh = !this.enableRefresh;
-        console.log(this.enableRefresh);
       },
       resetCache: function () {
         if (!this.enableRefresh) {

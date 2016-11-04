@@ -4,9 +4,9 @@
 
   angular.module('ncsaas').directive('responsiveTable', responsiveTable);
 
-  responsiveTable.$inject = ['$timeout', '$interval', '$compile', '$rootScope', 'ENV'];
+  responsiveTable.$inject = ['$timeout', '$interval', '$compile', 'ENV'];
 
-  function responsiveTable($timeout, $interval, $compile, $rootScope, ENV) {
+  function responsiveTable($timeout, $interval, $compile, ENV) {
     return {
       restrict: 'E',
       scope: {
