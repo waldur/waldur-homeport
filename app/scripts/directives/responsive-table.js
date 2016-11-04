@@ -16,7 +16,6 @@
       link: function(scope, element) {
         var options = scope.controller.tableOptions;
         var table;
-        $rootScope.isActionListOpened = false;
 
         scope.$watch('controller.tableOptions', function(newTableOptions) {
           if (table) {
@@ -109,18 +108,12 @@
           });
 
           var timer = $interval(
-            intervalHandler,
+            scope.controller.resetCache.bind(scope.controller),
             ENV.countersTimerInterval * 1000
           );
           scope.$on('$destroy', function() {
             $interval.cancel(timer);
           });
-        }
-
-        function intervalHandler() {
-          if ($rootScope.isActionListOpened === false) {
-            scope.controller.resetCache.call(scope.controller);
-          }
         }
 
         function getTableButtons(actions) {
