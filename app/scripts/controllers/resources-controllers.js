@@ -44,9 +44,19 @@
         this.categories[ENV.Applications] = 'apps';
         this.categories[ENV.PrivateClouds] = 'private_clouds';
         this.categories[ENV.Storages] = 'storages';
+        this.enableRefresh = true;
 
         this._super();
         this.hasCustomFilters = false;
+      },
+      toggleRefresh: function() {
+        this.enableRefresh = !this.enableRefresh;
+      },
+      resetCache: function () {
+        if (!this.enableRefresh) {
+          return;
+        }
+        this._super();
       },
       getTableOptions: function() {
         return {
