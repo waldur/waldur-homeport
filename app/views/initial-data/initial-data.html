@@ -1,4 +1,4 @@
-<div ng-controller="InitialDataController as InitialData" class="wrapper" block-ui="initial-data-block">
+<div ng-controller="InitialDataController as InitialData" class="wrapper" ng-if="!InitialData.loading" block-ui="initial-data-block">
     <div class="row m-t-xl">
         <div class="col-md-6 col-md-offset-3 col-xs-12 col-lg-6 col-lg-offset-3">
             <h2>Welcome to {{::InitialData.pageTitle}}, {{ InitialData.user.full_name || InitialData.user.username }}!</h2>

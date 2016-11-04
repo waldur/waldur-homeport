@@ -36,6 +36,7 @@
       init: function() {
         var fn = this._super.bind(this);
         var vm = this;
+        this.loading = true;
         if (!ENV.invitationsEnabled) {
           fn();
           vm.activate();
@@ -61,9 +62,9 @@
         var vm = this;
         usersService.getCurrentUser().then(function(response) {
           vm.block.stop();
+          vm.loading = false;
           vm.user = response;
           vm.user.email = vm.invitation && vm.invitation.email ? vm.invitation.email : response.email;
-          vm.userCopy = angular.copy(response);
         });
       },
       saveUser: function() {
