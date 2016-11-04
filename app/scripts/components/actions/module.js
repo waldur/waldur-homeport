@@ -4,7 +4,8 @@ import actionList from './action-list';
 import actionButtonResource from './action-button-resource';
 import actionListResource from './action-list-resource';
 import actionDialog from './action-dialog';
-import resizeDropletDialog from './resize-droplet';
+import dropletResizeDialog from './droplet-resize';
+import volumeExtendDialog from './volume-extend';
 
 export default module => {
   module.service('actionUtilsService', actionUtilsService);
@@ -13,5 +14,6 @@ export default module => {
   module.directive('actionButtonResource', actionButtonResource);
   module.directive('actionListResource', actionListResource);
   module.directive('actionDialog', actionDialog);
-  module.directive('resizeDropletDialog', resizeDropletDialog);
+  module.directive('dropletResizeDialog', dropletResizeDialog);
+  module.directive('volumeExtendDialog', volumeExtendDialog);
 }

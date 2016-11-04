@@ -1,15 +1,15 @@
-import template from './resize-droplet.html';
+import template from './droplet-resize.html';
 
-export default function resizeDropletDialog() {
+export default function dropletResizeDialog() {
   return {
     restrict: 'E',
     template: template,
-    controller: ResizeDropletDialogController,
+    controller: DropletResizeDialogController,
   }
 }
 
 // @ngInject
-function ResizeDropletDialogController($scope, resourcesService, resourceUtils, actionUtilsService) {
+function DropletResizeDialogController($scope, resourcesService, resourceUtils, actionUtilsService) {
   angular.extend($scope, {
     loading: true,
     options: {

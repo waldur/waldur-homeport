@@ -68,7 +68,7 @@ export default function actionUtilsService(
   this.buttonClick = function(controller, model, name, action) {
     if (action.type === 'button') {
       if (!action.destructive || this.confirmAction(model, name)) {
-        return this.applyAction(controller, model, name, action);
+        return this.applyAction(controller, model, action);
       }
     } else if (action.type === 'form') {
       this.openActionDialog(controller, model, name, action);
@@ -89,7 +89,7 @@ export default function actionUtilsService(
     }
   };
 
-  this.applyAction = function(controller, resource, name, action) {
+  this.applyAction = function(controller, resource, action) {
     var vm = this;
     var promise = (action.method == 'DELETE') ? $http.delete(action.url) : $http.post(action.url);
 
@@ -113,12 +113,7 @@ export default function actionUtilsService(
   };
 
   this.openActionDialog = function(controller, resource, name, action) {
-    var component = 'actionDialog';
-
-    if (resource.resource_type === 'DigitalOcean.Droplet' && name === 'resize') {
-      component = 'resizeDropletDialog'
-    }
-
+    var component = this.getActionComponent(resource, name);
     var dialogScope = $rootScope.$new();
     dialogScope.action = action;
     dialogScope.controller = controller;
@@ -129,5 +124,17 @@ export default function actionUtilsService(
     }).result.then(function() {
       $rootScope.$broadcast('actionApplied', name);
     });
+  };
+
+  this.getActionComponent = function(resource, name) {
+    var component = 'actionDialog';
+
+    if (resource.resource_type === 'DigitalOcean.Droplet' && name === 'resize') {
+      component = 'dropletResizeDialog';
+    } else if (resource.resource_type === 'OpenStack.Volume' && name === 'extend') {
+      component = 'volumeExtendDialog';
+    }
+
+    return component;
   };
 }

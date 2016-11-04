@@ -257,6 +257,7 @@
         this.category = ENV.Storages;
         this.controllerScope = controllerScope;
         this._super();
+        this.rowFields.push('size');
         this.rowFields.push('instance');
         this.rowFields.push('instance_name');
       },
