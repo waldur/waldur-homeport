@@ -1,7 +1,83 @@
-<div class="text-center">
-    <h3>You can remove your profile by pressing the button</h3>
-    <a ng-click="UserDelete.removeUser()" class="btn btn-danger">
-        <i class="fa fa-trash"></i>
-        Remove profile
-    </a>
+<div class="row">
+    <div class="col-md-offset-2 col-md-8 col-lg-6 col-lg-offset-3">
+        <div class="row">
+            <div class="col-sm-2 col-xs-12">
+                <div class="logo">
+                    <div class="img-wrapper">
+                        <img gravatar-src="UserDelete.user.email" gravatar-size="100"/>
+                    </div>
+                        <span class="manage-gravatar">
+                            Manage at
+                            <a href="//gravatar.com" target="_blank">gravatar.com</a>
+                        </span>
+                </div>
+            </div>
+            <form class="col-sm-10 col-xs-12 form-horizontal">
+                <div class="form-group">
+                    <label for="full_name" class="col-sm-3 col-md-4 col-lg-3 control-label">
+                        Full name <span class="text-danger">*</span>
+                    </label>
+                    <div class="col-sm-9 col-md-8">
+                        <input id="full_name" type="text" class="form-control" ng-model="UserDelete.user.full_name"/>
+                        <div class="error" ng-if="UserDelete.user.errors.full_name">{{::UserDelete.user.errors.full_name}}</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="col-sm-3 col-md-4 col-lg-3 control-label">
+                        Email <span class="text-danger">*</span>
+                    </label>
+                    <div class="col-sm-9 col-md-8">
+                        <input id="email" type="email" class="form-control" ng-model="UserDelete.user.email"/>
+                        <div class="error" ng-if="UserDelete.user.errors.email">{{::UserDelete.user.errors.email}}</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 col-md-4 col-lg-3 control-label">
+                        ID code <span class="text-danger"></span>
+                    </label>
+                    <div class="col-sm-9 col-md-8">
+                        <p class="form-control-static">{{::UserDelete.user.civil_number || '&ndash;'}}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 col-md-4 col-lg-3 control-label">
+                        Registration Method <span class="text-danger"></span>
+                    </label>
+                    <div class="col-sm-9 col-md-8">
+                        <p class="form-control-static">{{::UserDelete.user.registration_method}}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="organization" class="col-sm-3 col-md-4 col-lg-3 control-label">Organization name</label>
+                    <div class="col-sm-9 col-md-8">
+                        <input id="organization" type="text" class="form-control" ng-model="UserDelete.user.organization"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="job_title" class="col-sm-3 col-md-4 col-lg-3 control-label">Job position</label>
+                    <div class="col-sm-9 col-md-8">
+                        <input id="job_title" type="text" class="form-control" ng-model="UserDelete.user.job_title"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="description" class="col-sm-3 col-md-4 col-lg-3 control-label">Description</label>
+                    <div class="col-sm-9 col-md-8">
+                        <input id="description" type="text" class="form-control" ng-model="UserDelete.user.description"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="phone_number" class="col-sm-3 col-md-4 col-lg-3 control-label">Phone number</label>
+                    <div class="col-sm-9 col-md-8">
+                        <input id="phone_number" type="text" class="form-control" ng-model="UserDelete.user.phone_number"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-xs-12">
+                        <button type="submit" class="btn btn-primary" submit-button="UserDelete.saveUser()">Update profile</button>
+                        <button type="submit" class="btn btn-danger" submit-button="UserDelete.removeUser()">Remove Profile</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
