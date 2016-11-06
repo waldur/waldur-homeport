@@ -465,6 +465,7 @@
       'baseControllerClass',
       'projectsService',
       'currentStateService',
+      'customersService',
       '$rootScope',
       '$state',
       '$q',
@@ -475,6 +476,7 @@
     baseControllerClass,
     projectsService,
     currentStateService,
+    customersService,
     $rootScope,
     $state,
     $q
@@ -487,8 +489,39 @@
         this._super();
 
         var vm = this;
+        vm.canManage = false;
+        vm.projectModel = {};
+        vm.activate();
+      },
+      activate: function() {
+        var vm = this;
         currentStateService.getProject().then(function(project) {
           vm.project = project;
+          vm.projectModel = angular.copy(project);
+        });
+        customersService.isOwnerOrStaff().then(function(canManage) {
+          vm.canManage = canManage;
+        });
+      },
+      saveProject: function() {
+        var vm = this;
+        var i;
+        var requiredFields = {
+          name: 'Project name is required'
+        };
+        vm.projectModel.errors = {};
+        for (i in requiredFields) {
+          if (requiredFields.hasOwnProperty(i) && !vm.projectModel[i]) {
+            vm.projectModel.errors[i] = requiredFields[i];
+          }
+        }
+        if (Object.keys(vm.projectModel.errors).length !== 0) {
+          return $q.reject();
+        }
+        return projectsService.$update(null, vm.project.url, vm.projectModel).then(function(project) {
+          $rootScope.$broadcast('adjustCurrentProject', project);
+        }, function(response) {
+          vm.projectModel.errors = response.data;
         });
       },
       removeProject: function () {
