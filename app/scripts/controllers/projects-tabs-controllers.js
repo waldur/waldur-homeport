@@ -95,7 +95,7 @@
         return currentStateService.getProject().then(function(project){
           vm.service.defaultFilter.project_uuid = project.uuid;
           return fn(filter);
-        })
+        });
       }
     });
     return controllerClass;
@@ -271,9 +271,10 @@
         options.noMatchesText = 'No volumes found matching filter.';
         options.columns.push({
           title: 'Attached to',
+          className: 'min-tablet-l',
           render: function(data, type, row, meta) {
             if (!row.instance) {
-              return 'Not known';
+              return '&ndash;';
             }
             var uuid = ncUtils.getUUID(row.instance);
             var href = $state.href('resources.details', {
@@ -572,6 +573,7 @@
           columns: [
             {
               title: 'Member',
+              className: 'all',
               render: function(data, type, row, meta) {
                 var avatar = '<img gravatar-src="\'{gravatarSrc}\'" gravatar-size="100" alt="" class="avatar-img img-xs">'
                   .replace('{gravatarSrc}', row.email);
@@ -580,12 +582,14 @@
             },
             {
               title: 'E-mail',
+              className: 'min-tablet-l',
               render: function(data, type, row, meta) {
                 return row.email;
               }
             },
             {
               title: 'Role in project:',
+              className: 'min-tablet-l',
               render: function(data, type, row, meta) {
                 return ENV.roles[row.role];
               }

@@ -31,6 +31,7 @@ angular.module('ncsaas')
     showImport: false,
     resourceOfflineStatus: 'Offline',
     resourceOnlineStatus: 'Online',
+    defaultErrorMessage: 'Reason unknown, please contact support',
 
     // build version
     buildId: 'develop',
