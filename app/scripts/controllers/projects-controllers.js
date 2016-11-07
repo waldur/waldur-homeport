@@ -139,16 +139,16 @@
           countFieldKey: "alerts"
         },
         {
-          link: "project.delete({uuid: context.project.uuid})",
-          icon: "fa-wrench",
-          label: "Manage"
-        },
-        {
           label: 'Team',
           icon: 'fa-group',
           link: 'project.team({uuid: context.project.uuid})',
           feature: 'team',
           countFieldKey: 'users'
+        },
+        {
+          link: "project.delete({uuid: context.project.uuid})",
+          icon: "fa-wrench",
+          label: "Manage"
         }
       ];
       $scope.$on('currentProjectUpdated', function() {

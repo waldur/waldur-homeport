@@ -1,0 +1,12 @@
+<div ng-if="$ctrl.loading">
+    <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
+</div>
+<div class="row wrapper" ng-if="!$ctrl.loading">
+    <div class="col-lg-10">
+        <user-edit user="$ctrl.user"
+                   errors="$ctrl.errors"
+                   on-save="$ctrl.saveUser()"
+                   on-remove="$ctrl.removeUser()">
+        </user-edit>
+    </div>
+</div>

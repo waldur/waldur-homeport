@@ -2,9 +2,9 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('usersService', ['baseServiceClass', '$q', usersService]);
+    .service('usersService', ['baseServiceClass', '$q', '$state', 'ENV', usersService]);
 
-  function usersService(baseServiceClass, $q) {
+  function usersService(baseServiceClass, $q, $state, ENV) {
     var ServiceClass = baseServiceClass.extend({
       currentUser: null,
       init: function() {
@@ -14,12 +14,25 @@
       getCurrentUser: function() {
         var vm = this;
         var deferred = $q.defer();
+        var missingField = false;
         if (!vm.currentUser) {
           vm.filterByCustomer = false;
           vm.getList({current:''}).then(function(response) {
             var user = response.length > 0 ? response[0] : null;
             vm.currentUser = user;
-            deferred.resolve(vm.currentUser);
+            if ($state.current.name !== 'initialdata.view') {
+              ENV.userMandatoryFields.forEach(function(item) {
+                if (!vm.currentUser[item]) {
+                  missingField = true;
+                }
+              });
+            }
+            if (missingField) {
+              deferred.reject();
+              $state.go('initialdata.view');
+            } else {
+              deferred.resolve(vm.currentUser);
+            }
           }, function(error) {
             deferred.reject(error);
           });

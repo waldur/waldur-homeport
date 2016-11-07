@@ -486,7 +486,7 @@
         controllerScope.getModel().then(function(model) {
           controllerScope.model = model;
         }, function(error) {
-          if (error.status == 404) {
+          if (error.status === 404) {
             ncUtilsFlash.error('Resource is gone.');
             this.modelNotFound();
           }
@@ -494,6 +494,7 @@
       },
 
       afterActivate: function() {
+        this.viewHeaderLabel = this.model.resource_type.split('.').join(' ');
         this.updateMenu();
         this.setCounters();
         this.updateResourceTab();

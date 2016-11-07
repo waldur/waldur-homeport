@@ -156,9 +156,7 @@
 
       .state('project.delete', {
         url: 'delete/',
-        templateUrl: 'views/project/tab-delete.html',
-        controller: 'ProjectDeleteTabController',
-        controllerAs: 'delController',
+        template: '<project-manage></project-manage>',
         data: {
           pageTitle: 'Manage'
         }

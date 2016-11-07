@@ -26,11 +26,13 @@ function IssueCreateController(issuesService, baseControllerAddClass, $statePara
       this.descriptionPlaceholder = 'Problem description';
       this.type = $stateParams.type;
       this.summaryLabel = 'Ticket name';
+      this.submitTitle = 'Sibmit';
       if (this.type === 'remove_user') {
         this.issue.summary = 'Account removal';
         this.title = 'Account removal';
         this.descriptionPlaceholder = 'Why would you want to go away? Help us become better please!';
         this.descriptionLabel = 'Reason';
+        this.submitTitle =  'Request removal';
       } else if (this.type === 'add_service') {
         this.title = 'Request a new service';
         this.issue.summary = '';
