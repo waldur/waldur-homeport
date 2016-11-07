@@ -64,8 +64,6 @@
         var vm = this;
         return vm.user.$update(function() {
           usersService.currentUser = null;
-        }, function(response) {
-          vm.errors = response.data;
         });
       },
       gotoNextState: function () {
@@ -81,20 +79,20 @@
         return invitationService.$get(invitationService.getInvitationToken());
       },
       save: function() {
-        if (this.UserForm.$invalid) {
-          return $q.reject();
-        }
-        if (!ENV.invitationsEnabled) {
-          return this.saveUser()
-            .then(this.gotoNextState.bind(this));
+        var vm = this;
+        var promise = $q.when(true);
+        if (ENV.invitationsEnabled) {
+          promise = invitationService.accept(this.invitation.uuid).then(function() {
+            invitationService.clearInitationToken();
+          });
         }
 
-        return invitationService.accept(this.invitation.uuid)
-          .then(function() {
-            invitationService.clearInitationToken();
-          })
+        return promise
           .then(this.saveUser.bind(this))
-          .then(this.gotoNextState.bind(this));
+          .then(this.gotoNextState.bind(this))
+          .catch(function(response) {
+            vm.errors = response.data;
+          });
       }
     });
     this.init();
