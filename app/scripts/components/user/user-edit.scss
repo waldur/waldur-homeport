@@ -1,0 +1,32 @@
+@import 'variables.scss';
+
+.user-edit {
+  .manage-gravatar {
+    display: block;
+    width: 100px;
+    line-height: 16px;
+    font-size: 12px;
+
+    > a {
+      color: $dashboard-green;
+      text-decoration: none;
+      text-align: center;
+      width: 200px;
+    }
+  }
+
+  .img-wrapper {
+    position: relative;
+    width: 67px;
+    height: 67px;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 7px;
+
+    img {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  }
+}

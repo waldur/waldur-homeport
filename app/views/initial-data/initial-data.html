@@ -1,31 +1,24 @@
-<div ng-controller="InitialDataController as InitialData">
-    <div class="initial-data-page">
-        <div class="first-step">
-            <h2>Welcome to NodeConductor, {{ InitialData.user.full_name || InitialData.user.username }}!</h2>
+<div ng-if="InitialData.loading" class="wrapper">
+    <div class="row m-t-xl">
+        <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
+    </div>
+</div>
+<div class="wrapper" ng-if="!InitialData.loading">
+    <div class="row m-t-xl">
+        <div class="col-md-6 col-md-offset-3 col-xs-12 col-lg-6 col-lg-offset-3">
+            <h2>Welcome to {{::InitialData.pageTitle}}, {{ InitialData.user.full_name || InitialData.user.username }}!</h2>
             <p>Get your cloud expenses under control with just <b>1</b> click.</p>
-            <div class="logo">
-                <div class="img-wrapper">
-                    <img gravatar-src="InitialData.user.email" alt=""/>
-                </div>
-                <span class="manage-gravatar">
-                    Manage at
-                    <a href="//gravatar.com" target="_blank">gravatar.com</a>
-                </span>
-                <div class="clear"></div>
-            </div>
-            <div class="fields">
-                <label for="email">Email</label>
-                <input id="email" type="text" ng-model="InitialData.user.email"/>
-                <div class="error" ng-repeat="error in InitialData.user.errors" ng-bind="error"></div>
-            </div>
-            <div class="clear"></div>
         </div>
-        <div class="second-step">
-            <div class="button-block" ng-if="!InitialData.loadingServices">
-                <a class="button" submit-button="InitialData.save()">Let’s get started</a>
-                <span>By continuing you agree to the <a ui-sref="tos.index" target="_blank">Terms of Provider</a>.</span>
+    </div>
+    <div class="row initial-data-page">
+        <div class="ibox col-md-offset-2 col-md-8 col-lg-6 col-lg-offset-3">
+            <div class="ibox-content">
+                <user-edit user="InitialData.user"
+                           errors="InitialData.errors"
+                           on-save="InitialData.save()"
+                           initial="true">
+                </user-edit>
             </div>
-            <div class="clear"></div>
         </div>
     </div>
 </div>
