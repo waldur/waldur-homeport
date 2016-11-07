@@ -347,5 +347,9 @@ angular.module('ncsaas')
     },
     invitationStorageToken: 'ncInvitationToken',
     invitationRedirectTime: 5000,
-    invitationsEnabled: true
+    invitationsEnabled: true,
+    userMandatoryFields: [
+      'full_name',
+      'email'
+    ]
   });

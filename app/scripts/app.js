@@ -200,6 +200,9 @@
             },
             'appContent@initialdata' : {
               templateUrl: MODE.initialDataTemplate ? MODE.initialDataTemplate : 'views/initial-data/initial-data.html',
+              controller: 'InitialDataController',
+              controllerAs: 'InitialData',
+              bindToController: true,
             }
           },
           noInitialData: true,
@@ -573,44 +576,6 @@
 
   angular.module('ncsaas').run(['editableOptions', function(editableOptions) {
     editableOptions.theme = 'bs3';
-  }]);
-
-})();
-
-
-(function() {
-  angular.module('ncsaas')
-    .service('stateUtilsService', stateUtilsService);
-
-  stateUtilsService.$inject = ['$state'];
-  function stateUtilsService($state) {
-    var vm = this;
-
-    vm.setPrevState = function(state, params) {
-      if (state.data && state.data.workspace) {
-        vm.prevState = state;
-        vm.prevParams = params;
-        vm.prevWorkspace = state.data.workspace;
-      }
-    }
-
-    vm.getPrevWorkspace = function() {
-      return vm.prevWorkspace;
-    }
-
-    vm.goBack = function() {
-      if (vm.prevState) {
-        $state.go(vm.prevState, vm.prevParams);
-      }
-    }
-  }
-
-  angular.module('ncsaas')
-    .run(['$rootScope', 'stateUtilsService',
-    function($rootScope, stateUtilsService) {
-    $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
-      stateUtilsService.setPrevState(fromState, fromParams);
-    });
   }]);
 
 })();
