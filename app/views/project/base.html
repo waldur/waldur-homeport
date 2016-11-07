@@ -4,7 +4,10 @@
         <nc-header/>
         <div class="row wrapper white-bg page-heading" ng-if="currentProject">
             <div class="col-lg-12">
-                <h2>{{ $state.current.data.pageTitle }}</h2>
+                <h2>{{currentProject.name}} {{ $state.current.data.pageTitle.toLowerCase() }}</h2>
+                <p ng-if="currentProject.description">
+                    {{currentProject.description}}
+                </p>
                 <ol class="breadcrumb">
                     <li>
                         <a ui-sref="project.details({uuid: currentProject.uuid })">Home</a>
