@@ -13,97 +13,11 @@
     <div class="row initial-data-page">
         <div class="ibox col-md-offset-2 col-md-8 col-lg-6 col-lg-offset-3">
             <div class="ibox-content">
-                <div class="row">
-                    <div class="col-sm-2 col-xs-12">
-                        <div class="logo">
-                            <div class="img-wrapper">
-                                <img gravatar-src="InitialData.user.email" gravatar-size="100"/>
-                            </div>
-                            <span class="manage-gravatar">
-                                Manage at
-                                <a href="//gravatar.com" target="_blank">gravatar.com</a>
-                            </span>
-                        </div>
-                    </div>
-                    <form class="col-sm-10 col-xs-12 form-horizontal" name="InitialData.UserForm">
-                        <div class="form-group">
-                            <label for="full_name" class="col-sm-3 col-md-4 col-lg-3 control-label">
-                                Full name <span class="text-danger">*</span>
-                            </label>
-                            <div class="col-sm-9 col-md-8">
-                                <input id="full_name" type="text" class="form-control" ng-model="InitialData.user.full_name" required />
-                                <div class="error" ng-if="InitialData.errors.full_name">{{::InitialData.errors.full_name}}</div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="email" class="col-sm-3 col-md-4 col-lg-3 control-label">
-                                E-mail <span class="text-danger">*</span>
-                            </label>
-                            <div class="col-sm-9 col-md-8">
-                                <input id="email" type="email" class="form-control" ng-model="InitialData.user.email" required/>
-                                <div class="error" ng-if="InitialData.errors.email">{{::InitialData.errors.email}}</div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 col-md-4 col-lg-3 control-label">
-                                Registration method <span class="text-danger"></span>
-                            </label>
-                            <div class="col-sm-9 col-md-8">
-                                <p class="form-control-static">{{::InitialData.registration_method || 'Default'}}</p>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 col-md-4 col-lg-3 control-label">
-                                ID code <span class="text-danger"></span>
-                            </label>
-                            <div class="col-sm-9 col-md-8">
-                                <p class="form-control-static">{{::InitialData.user.civil_number || '&ndash;'}}</p>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="organization" class="col-sm-3 col-md-4 col-lg-3 control-label">Organization name</label>
-                            <div class="col-sm-9 col-md-8">
-                                <input id="organization" type="text" class="form-control" ng-model="InitialData.user.organization"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="job_title" class="col-sm-3 col-md-4 col-lg-3 control-label">Job position</label>
-                            <div class="col-sm-9 col-md-8">
-                                <input id="job_title" type="text" class="form-control" ng-model="InitialData.user.job_title"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="description" class="col-sm-3 col-md-4 col-lg-3 control-label">Description</label>
-                            <div class="col-sm-9 col-md-8">
-                                <input id="description" type="text" class="form-control" ng-model="InitialData.user.description"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone_number" class="col-sm-3 col-md-4 col-lg-3 control-label">Phone number</label>
-                            <div class="col-sm-9 col-md-8">
-                                <input id="phone_number" type="text" class="form-control" ng-model="InitialData.user.phone_number"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="checkbox col-sm-offset-3 col-xs-12">
-                                <label>
-                                    <input id="acceptPolicy" type="checkbox" ng-model="InitialData.user.agree_with_policy"/> I accept the <a ui-sref="tos.index" target="_blank">Terms of Provider</a>.
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-sm-offset-3 col-xs-12">
-                                <button type="submit"
-                                    class="btn btn-primary"
-                                    ng-disabled="!InitialData.user.agree_with_policy"
-                                    submit-button="InitialData.save()">
-                                    Let’s get started
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                <user-edit user="InitialData.user"
+                           errors="InitialData.errors"
+                           on-save="InitialData.save()"
+                           initial="true">
+                </user-edit>
             </div>
         </div>
     </div>
