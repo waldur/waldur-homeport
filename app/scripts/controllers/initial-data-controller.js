@@ -7,7 +7,6 @@
 
   InitialDataController.$inject = ['usersService',
     'invitationService',
-    'baseControllerClass',
     '$q',
     '$state',
     'ENV',
@@ -16,61 +15,62 @@
   function InitialDataController(
     usersService,
     invitationService,
-    baseControllerClass,
     $q,
     $state,
     ENV,
     ncUtils) {
-    var controllerScope = this;
-    var Controller = baseControllerClass.extend({
+    angular.extend(this, {
       user: {},
-      customer: {},
-      project: {},
-      currentProcess: null,
       invitation: {},
-      getFilename: ncUtils.getFilename,
+      pageTitle: ENV.shortPageTitle,
 
       init: function() {
-        var fn = this._super.bind(this);
+        this.loading = true;
+        this.loadData().finally(function() {
+          this.loading = false;
+        }.bind(this));
+      },
+      loadData: function() {
         var vm = this;
         if (!ENV.invitationsEnabled) {
-          fn();
-          vm.activate();
+          return vm.getUser();
         } else {
-          vm.checkInvitation().then(function(invitation) {
+          return vm.checkInvitation().then(function(invitation) {
             vm.invitation = invitation;
             if (vm.invitation.state !== 'pending') {
-              $state.go('errorPage.notFound');
+              return $state.go('errorPage.notFound');
             }
-            fn();
-            vm.activate();
+            return vm.getUser();
           }, function() {
-            $state.go('errorPage.notFound');
+            return $state.go('errorPage.notFound');
           });
         }
       },
-      activate: function() {
-        this.getUser();
-      },
       getUser: function() {
         var vm = this;
-        usersService.getCurrentUser().then(function(response) {
+        return usersService.getCurrentUser().then(function(response) {
           vm.user = response;
-          vm.user.email = vm.invitation ? vm.invitation.email : response.email;
+          vm.user.email = vm.invitation && vm.invitation.email ? vm.invitation.email : response.email;
+          if (!vm.user.registration_method) {
+            return;
+          } else if (vm.user.registration_method === 'openid') {
+            vm.registration_method = 'Estonian ID';
+          } else {
+            vm.registration_method = vm.user.registration_method[0].toUpperCase() + vm.user.registration_method.slice(1);
+          }
         });
       },
       saveUser: function() {
         var vm = this;
-        vm.currentProcess = 'Saving user...';
         return vm.user.$update(function() {
           usersService.currentUser = null;
         }, function(response) {
-          vm.user.errors = response.data;
+          vm.errors = response.data;
         });
       },
       gotoNextState: function () {
         if (!ENV.invitationsEnabled) {
-          $state.go('profile.detail');
+          $state.go('profile.details');
         } else if (this.invitation.customer) {
           $state.go('dashboard.index');
         } else if (this.invitation.project) {
@@ -81,22 +81,22 @@
         return invitationService.$get(invitationService.getInvitationToken());
       },
       save: function() {
-        var vm = this;
-        if (!vm.user.email) {
-          vm.user.errors = {email: 'This field is required'};
+        if (this.UserForm.$invalid) {
           return $q.reject();
         }
         if (!ENV.invitationsEnabled) {
-          return vm.saveUser()
-            .then(vm.gotoNextState.bind(vm));
+          return this.saveUser()
+            .then(this.gotoNextState.bind(this));
         }
-        return invitationService.accept(vm.invitation.uuid)
-          .then(vm.saveUser.bind(vm))
-          .then(vm.gotoNextState.bind(vm));
+
+        return invitationService.accept(this.invitation.uuid)
+          .then(function() {
+            invitationService.clearInitationToken();
+          })
+          .then(this.saveUser.bind(this))
+          .then(this.gotoNextState.bind(this));
       }
     });
-
-    controllerScope.__proto__ = new Controller();
+    this.init();
   }
-
 })();

@@ -200,6 +200,9 @@
             },
             'appContent@initialdata' : {
               templateUrl: MODE.initialDataTemplate ? MODE.initialDataTemplate : 'views/initial-data/initial-data.html',
+              controller: 'InitialDataController',
+              controllerAs: 'InitialData',
+              bindToController: true,
             }
           },
           noInitialData: true,

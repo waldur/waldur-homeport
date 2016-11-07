@@ -31,6 +31,9 @@
       },
       getInvitationToken: function() {
         return $window.localStorage[ENV.invitationStorageToken];
+      },
+      clearInitationToken: function() {
+        $window.localStorage.removeItem(ENV.invitationStorageToken);
       }
     });
     return new ServiceClass();
