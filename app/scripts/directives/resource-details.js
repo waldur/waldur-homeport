@@ -16,6 +16,8 @@
         scope.$watch('resource', function() {
           var resource = scope.resource;
           if (resource) {
+            resource.isVolume = resource.resource_type.toLowerCase().indexOf('volume') !== -1;
+            resource.summaryLabel = resource.isVolume ? 'Size' : 'Summary';
             resourceUtils.setAccessInfo(resource);
             resource.service_type = resource.resource_type.split('.')[0];
             resource.customer_uuid = currentStateService.getCustomerUuid();
