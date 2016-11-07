@@ -11,8 +11,7 @@
     }
 
     &.processing {
-        border: 1px solid $head-menu-color;
-        color: $head-menu-color;
+        border: 1px solid $gray-text;
     }
 
     &.erred {
