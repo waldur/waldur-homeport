@@ -1,7 +1,7 @@
 <div ng-controller="CustomerDetailsController">
     <sidebar items="items" context="context"></sidebar>
     <div id="page-wrapper" ng-class="$state.current.data.pageClass || 'white-bg'">
-        <nc-header/>
+        <nc-header></nc-header>
         <div class="row wrapper white-bg page-heading" ng-if="currentCustomer">
             <div class="col-lg-12">
                 <h2>{{$state.current.data.pageTitle}}</h2>
