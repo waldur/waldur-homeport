@@ -23,6 +23,7 @@
             return;
           }
           if (newTableOptions.columns) {
+            options = newTableOptions;
             table = initTable();
             connectRowButtons(table);
             connectWatcher(table);
