@@ -6,7 +6,6 @@
         <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
     </div>
     <div ng-if="!loading">
-        <p ng-if="error" class="text-danger">Error: {{ error }}</p>
         <p ng-if="!action.enabled" class="text-danger" ng-bind="action.reason"></p>
 
         <div ng-if="action.enabled">
@@ -58,6 +57,14 @@
                         <p>Increase a droplet's RAM, CPU and SSD disk.</p>
                     </label>
                 </div>
+            </div>
+
+            <div class="form-group"
+                ng-if="errors.non_field_errors">
+                <p class="text-danger"
+                   ng-repeat="error in errors.non_field_errors"
+                   ng-bind="error">
+                </p>
             </div>
         </div>
     </div>

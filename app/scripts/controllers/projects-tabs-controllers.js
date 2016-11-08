@@ -227,6 +227,7 @@
         resource_category: 'storages',
         project: currentProject.uuid
       };
+      resourcesService.cleanAllCache();
       resourcesService.countByType(query).then(function(counts) {
         angular.forEach($scope.tabs, function(tab) {
           tab.count = counts[tab.countKey];
@@ -257,6 +258,7 @@
         this.category = ENV.Storages;
         this.controllerScope = controllerScope;
         this._super();
+        this.rowFields.push('size');
         this.rowFields.push('instance');
         this.rowFields.push('instance_name');
       },
