@@ -701,7 +701,7 @@
       removeCustomer: function() {
         var vm = this;
         if (this.customer.projects.length > 0) {
-          return  $state.go('support.create', {type: 'remove_customer'});
+          return $state.go('support.create', {type: 'remove_customer'});
         }
         var confirmDelete = confirm('Confirm deletion?');
           if (confirmDelete) {
