@@ -227,6 +227,7 @@
         .state('resources.details', {
           url: ':resource_type/:uuid',
           templateUrl: 'views/resource/details.html',
+          controller: 'ResourceDetailUpdateController as controller'
         })
 
         .state('payment', {
