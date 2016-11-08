@@ -461,69 +461,6 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('ProjectDeleteTabController', [
-      'baseControllerClass',
-      'projectsService',
-      'currentStateService',
-      '$rootScope',
-      '$state',
-      '$q',
-      ProjectDeleteTabController
-    ]);
-
-  function ProjectDeleteTabController(
-    baseControllerClass,
-    projectsService,
-    currentStateService,
-    $rootScope,
-    $state,
-    $q
-  ) {
-    var controllerScope = this;
-    var DeleteController = baseControllerClass.extend({
-      init: function() {
-        this.controllerScope = controllerScope;
-        this.service = projectsService;
-        this._super();
-
-        var vm = this;
-        currentStateService.getProject().then(function(project) {
-          vm.project = project;
-        });
-      },
-      removeProject: function () {
-        var confirmDelete = confirm('Confirm deletion?'),
-          vm = this;
-        if (confirmDelete) {
-          currentStateService.setProject(null);
-          return this.project.$delete().then(function() {
-            projectsService.clearAllCacheForCurrentEndpoint();
-            return projectsService.getFirst().then(function(project) {
-              currentStateService.setProject(project);
-              $rootScope.$broadcast('refreshProjectList', {model: controllerScope.project, remove: true});
-            });
-          }, function() {
-            currentStateService.setProject(vm.project);
-          }).then(function() {
-            currentStateService.reloadCurrentCustomer(function(customer) {
-              $rootScope.$broadcast('checkQuotas:refresh');
-              $rootScope.$broadcast('customerBalance:refresh');
-              $state.go('organization.projects', {uuid: customer.uuid});
-            });
-          });
-        } else {
-          return $q.reject();
-        }
-      }
-    });
-
-    controllerScope.__proto__ = new DeleteController();
-  }
-
-})();
-
-(function() {
-  angular.module('ncsaas')
     .controller('ProjectUsersListController', [
       'baseControllerListClass',
       'customersService',

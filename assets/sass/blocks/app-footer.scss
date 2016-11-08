@@ -52,3 +52,9 @@
         display: block;
     } // sm
 } // footer-nav
+
+footer.footer {
+    @include bp(xs) {
+        bottom: -30px;
+    }
+}

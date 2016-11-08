@@ -30,7 +30,7 @@ const tabs = {
   },
   manage: {
     url: 'manage/',
-    template: '<user-delete></user-delete>',
+    template: '<user-manage></user-manage>',
     data: {
       pageTitle: 'Manage'
     }
