@@ -233,7 +233,7 @@
         'baseControllerListClass',
         'invoicesService',
         'authService',
-        'ENTITYLISTFIELDTYPES',
+        '$state',
         CustomerInvoicesTabController
       ]);
 
@@ -241,57 +241,73 @@
     baseControllerListClass,
     invoicesService,
     authService,
-    ENTITYLISTFIELDTYPES) {
+    $state) {
     var controllerScope = this;
     var InvoicesController = baseControllerListClass.extend({
       init: function() {
         this.service = invoicesService;
         this._super();
-
-        this.entityOptions = {
-          entityData: {
-            noDataText: 'No invoices yet',
-            hideActionButtons: true,
-            hideTableHead: false,
-            rowTemplateUrl: 'views/payment/invoice.html'
-          },
-          list: [
+      },
+      getTableOptions: function() {
+        var vm = this;
+        return {
+          noDataText: 'You have no invoices yet',
+          noMatchesText: 'No invoices found matching filter.',
+          searchFieldName: 'uuid',
+          columns: [
             {
-              name: 'Invoice code',
-              propertyName: 'uuid',
-              type: ENTITYLISTFIELDTYPES.trimmed,
-              limit: 6
+              title: 'Invoice code',
+              className: 'all',
+              render: function(data, type, row, meta) {
+                var href = $state.href('organization.invoiceDetails',
+                  {invoiceUUID: row.uuid});
+                return '<a href="{href}">{name}</a>'
+                  .replace('{href}', href)
+                  .replace('{name}', row.uuid);
+              }
             },
             {
-              name: 'Amount',
-              propertyName: 'total_amount',
-              type: ENTITYLISTFIELDTYPES.currency,
+              title: 'Amount',
+              className: 'min-tablet-l',
+              render: function(data, type, row, meta) {
+                return row.total_amount;
+              }
             },
             {
-              name: 'Start date',
-              propertyName: 'start_date',
-              type: ENTITYLISTFIELDTYPES.dateShort,
+              title: 'Start date',
+              className: 'all',
+              render: function(data, type, row, meta) {
+                return row.start_date;
+              }
             },
             {
-              name: 'End date',
-              propertyName: 'end_date',
-              type: ENTITYLISTFIELDTYPES.dateShort,
+              title: 'End date',
+              className: 'min-tablet-l',
+              render: function(data, type, row, meta) {
+                return row.end_date;
+              }
             },
             {
-              name: '',
-              propertyName: 'downloadLink',
-              iconClass: 'fa-file-pdf-o',
-              type: ENTITYLISTFIELDTYPES.staticIconLink,
-              className: 'pdf-icon'
+              title: '',
+              className: 'min-tablet-l',
+              render: function(data, type, row, meta) {
+                var downloadLink = row.downloadLink;
+                return '<a href="{downloadLink}"><i class="icon fa-file-pdf-o"></i></a>'
+                  .replace('{downloadLink}', downloadLink);
+              }
             }
-          ]
+          ],
+          tableActions: this.getTableActions()
         };
+      },
+      getTableActions: function() {
       },
       afterGetList: function() {
         this._super();
         angular.forEach(this.list, function(invoice) {
           invoice.downloadLink = authService.getDownloadLink(invoice.pdf);
         });
+        this.tableOptions = this.getTableOptions();
       }
     });
 

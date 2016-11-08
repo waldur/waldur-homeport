@@ -15,6 +15,7 @@
     vm.isAuthenticated = isAuthenticated;
     vm.authenticate = authenticate;
     vm.getDownloadLink = getDownloadLink;
+    vm.getLink = getLink;
     vm.loginSuccess = loginSuccess;
 
     function signin(username, password) {
@@ -66,6 +67,12 @@
     function getDownloadLink(href) {
       if (href) {
         return href + '?x-auth-token=' + $auth.getToken() + '&download=true';
+      }
+    }
+
+    function getLink(href) {
+      if (href) {
+        return href + '?x-auth-token=' + $auth.getToken();
       }
     }
   }
