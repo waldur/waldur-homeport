@@ -1,0 +1,40 @@
+<div ng-if="InvoiceDetails.loading">
+    <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
+</div>
+
+<div ng-if="!InvoiceDetails.loading" class="row m-l-xs m-r-xs">
+    <div class="panel panel-default">
+        <div class="panel-heading">Details</div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-12">
+                    <p><strong>Invoice ID:</strong> {{::InvoiceDetails.invoice.uuid}}</p>
+                </div>
+                <div class="col-sm-12">
+                    <p><strong>Customer name:</strong> {{::InvoiceDetails.invoice.customer_name}}</p>
+                </div>
+                <div class="col-sm-12">
+                    <p><strong>Start date:</strong> {{::InvoiceDetails.invoice.start_date}}</p>
+                </div>
+                <div class="col-sm-12">
+                    <p><strong>End date:</strong> {{::InvoiceDetails.invoice.end_date}}</p>
+                </div>
+                <div class="col-sm-12">
+                    <p><strong>Items</strong></p>
+                    <ol>
+                        <li ng-repeat="item in InvoiceDetails.invoice.items">{{::item.description}}: {{::item.amount}}</li>
+                    </ol>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">Invoice actions</div>
+        <div class="panel-body">
+            <button class="btn btn-primary" ng-click="InvoiceDetails.printLink()">
+                Print invoice
+            </button>
+        </div>
+    </div>
+</div>

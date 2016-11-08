@@ -39,7 +39,7 @@
                 $rootScope.$broadcast('adjustCurrentCustomer', customer);
                 return customer;
               }, function(error) {
-                if (error.status == 404) {
+                if (error.status === 404) {
                   $state.go('errorPage.notFound');
                 }
               });
@@ -117,6 +117,38 @@
         templateUrl: 'views/customer/tab-billing.html',
         data: {
           pageTitle: 'Billing'
+        },
+        abstract: true
+      })
+
+      .state('organization.billing.tabs', {
+        url: '',
+        views: {
+          users: {
+            controller: 'CustomerTeamTabController',
+            controllerAs: 'ListController',
+            templateUrl: 'views/partials/filtered-list.html'
+          },
+          invitations: {
+            controller: 'CustomerInvitationsTabController',
+            controllerAs: 'ListController',
+            templateUrl: 'views/partials/filtered-list.html'
+          },
+          invoices: {
+            controller: 'CustomerInvoicesTabController',
+            controllerAs: 'ListController',
+            templateUrl: 'views/partials/filtered-list.html'
+          }
+        }
+      })
+
+      .state('organization.invoiceDetails', {
+        url: 'invoice/:invoiceUUID/',
+        templateUrl: 'views/customer/invoice-details.html',
+        controller: 'InvoiceDetailsController',
+        controllerAs: 'InvoiceDetails',
+        data: {
+          pageTitle: 'Invoice'
         }
       })
 
