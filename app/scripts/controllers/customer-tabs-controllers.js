@@ -323,8 +323,8 @@
           },
           {
             name: 'state',
-            title: 'Cancelled',
-            value: 'cancelled'
+            title: 'Canceled',
+            value: 'canceled'
           },
           {
             name: 'state',
