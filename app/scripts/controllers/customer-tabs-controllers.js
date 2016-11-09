@@ -656,7 +656,6 @@
       'customersService',
       'usersService',
       'currentStateService',
-      'invoicesService',
       '$state',
       '$q',
       'ENV',
@@ -668,7 +667,6 @@
     customersService,
     usersService,
     currentStateService,
-    invoicesService,
     $state,
     $q,
     ENV
@@ -685,17 +683,8 @@
         vm.loading = true;
         return currentStateService.getCustomer().then(function(customer) {
           vm.customer = customer;
-          return $q.all([
-            vm.checkCanRemoveCustomer(customer),
-            invoicesService.getList({customer: vm.customer.url})
-          ]).then(function(results){
-            vm.canRemoveCustomer = results[0];
-            vm.invoicesData = [];
-            results[1].forEach(function(invoice){
-              invoice.items.forEach(function(item) {
-                vm.invoicesData.push(item.description + '. Created at: ' + item.created_at);
-              });
-            });
+          return vm.checkCanRemoveCustomer(customer).then(function(result) {
+            vm.canRemoveCustomer = result;
           });
         }).finally(function() {
           vm.loading = false;

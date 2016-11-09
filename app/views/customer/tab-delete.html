@@ -6,13 +6,7 @@
     <div class="panel panel-default">
         <div class="panel-heading">Customer details</div>
         <div class="panel-body">
-            {{::DeleteController.customer.name}}
-        </div>
-    </div>
-    <div class="panel panel-default">
-        <div class="panel-heading">Invoices details:</div>
-        <div class="panel-body">
-            <div ng-repeat="invoice in DeleteController.invoicesData track by $index">{{::invoice}}</div>
+            <strong>Name: </strong>{{::DeleteController.customer.name}}
         </div>
     </div>
     <div class="panel panel-default" ng-if="DeleteController.canRemoveCustomer">
