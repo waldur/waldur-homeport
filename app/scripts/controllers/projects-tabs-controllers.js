@@ -314,15 +314,16 @@
 
   angular.module('ncsaas')
     .controller('SnapshotsListController', [
-      'BaseProjectResourcesTabController', 'ncUtils', '$state',
+      'BaseProjectResourcesTabController', 'ncUtils', '$state', '$filter',
       SnapshotsListController]);
 
-  function SnapshotsListController(BaseProjectResourcesTabController, ncUtils, $state) {
+  function SnapshotsListController(BaseProjectResourcesTabController, ncUtils, $state, $filter) {
     var controllerScope = this;
     var ResourceController = BaseProjectResourcesTabController.extend({
       init:function() {
         this.controllerScope = controllerScope;
         this._super();
+        this.rowFields.push('size');
         this.rowFields.push('source_volume');
         this.rowFields.push('source_volume_name');
       },
@@ -335,6 +336,16 @@
         var options = this._super();
         options.noDataText = 'You have no snapshots yet.';
         options.noMatchesText = 'No snapshots found matching filter.';
+        options.columns.push({
+          title: 'Size',
+          className: 'all',
+          render: function(data, type, row, meta) {
+            if (!row.size) {
+              return '&ndash;';
+            }
+            return $filter('filesize')(row.size);
+          }
+        });
         options.columns.push({
           title: 'Volume',
           render: function(data, type, row, meta) {
