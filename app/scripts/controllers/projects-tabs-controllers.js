@@ -104,24 +104,44 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('ProjectResourcesTabController', [
+    .controller('ProjectVirtualMachinesListController', [
       'BaseProjectResourcesTabController',
       'ENV',
-      ProjectResourcesTabController
+      ProjectVirtualMachinesListController
     ]);
 
-  function ProjectResourcesTabController(BaseProjectResourcesTabController, ENV) {
+  function ProjectVirtualMachinesListController(BaseProjectResourcesTabController, ENV) {
     var controllerScope = this;
     var ResourceController = BaseProjectResourcesTabController.extend({
       init: function() {
         this.controllerScope = controllerScope;
         this.category = ENV.VirtualMachines;
         this._super();
+        this.rowFields.push('internal_ips');
+        this.rowFields.push('external_ips');
       },
       getTableOptions: function() {
         var options = this._super();
         options.noDataText = 'You have no virtual machines yet';
         options.noMatchesText = 'No virtual machines found matching filter.';
+        options.columns.push({
+          title: 'Internal IP',
+          render: function(data, type, row, meta) {
+            if (row.internal_ips.length === 0) {
+              return '&ndash;';
+            }
+            return row.internal_ips.join(', ');
+          }
+        });
+        options.columns.push({
+          title: 'External IP',
+          render: function(data, type, row, meta) {
+            if (row.external_ips.length === 0) {
+              return '&ndash;';
+            }
+            return row.external_ips.join(', ');
+          }
+        });
         return options;
       },
       getImportTitle: function() {
@@ -227,6 +247,7 @@
         resource_category: 'storages',
         project: currentProject.uuid
       };
+      resourcesService.cleanAllCache();
       resourcesService.countByType(query).then(function(counts) {
         angular.forEach($scope.tabs, function(tab) {
           tab.count = counts[tab.countKey];
@@ -257,6 +278,7 @@
         this.category = ENV.Storages;
         this.controllerScope = controllerScope;
         this._super();
+        this.rowFields.push('size');
         this.rowFields.push('instance');
         this.rowFields.push('instance_name');
       },

@@ -22,30 +22,30 @@
       })
 
       .state('organization', {
-          url: '/organizations/:uuid/',
-          abstract: true,
-          data: {
-            auth: true,
-            workspace: 'organization'
-          },
-          templateUrl: 'views/customer/base.html',
-          resolve: {
-            currentCustomer: function(
-              $stateParams, $state, $rootScope, customersService, currentStateService) {
-              if (!$stateParams.uuid) {
-                return currentStateService.getCustomer();
-              }
-              return customersService.$get($stateParams.uuid).then(function(customer) {
-                $rootScope.$broadcast('adjustCurrentCustomer', customer);
-                return customer;
-              }, function(error) {
-                if (error.status == 404) {
-                  $state.go('errorPage.notFound');
-                }
-              });
+        url: '/organizations/:uuid/',
+        abstract: true,
+        data: {
+          auth: true,
+          workspace: 'organization'
+        },
+        templateUrl: 'views/customer/base.html',
+        resolve: {
+          currentCustomer: function(
+            $stateParams, $state, $rootScope, customersService, currentStateService) {
+            if (!$stateParams.uuid) {
+              return currentStateService.getCustomer();
             }
+            return customersService.$get($stateParams.uuid).then(function(customer) {
+              $rootScope.$broadcast('adjustCurrentCustomer', customer);
+              return customer;
+            }, function(error) {
+              if (error.status === 404) {
+                $state.go('errorPage.notFound');
+              }
+            });
           }
-        })
+        }
+      })
 
       .state('organization.details', {
         url: '',
@@ -117,6 +117,38 @@
         templateUrl: 'views/customer/tab-billing.html',
         data: {
           pageTitle: 'Billing'
+        },
+        abstract: true
+      })
+
+      .state('organization.billing.tabs', {
+        url: '',
+        views: {
+          users: {
+            controller: 'CustomerTeamTabController',
+            controllerAs: 'ListController',
+            templateUrl: 'views/partials/filtered-list.html'
+          },
+          invitations: {
+            controller: 'CustomerInvitationsTabController',
+            controllerAs: 'ListController',
+            templateUrl: 'views/partials/filtered-list.html'
+          },
+          invoices: {
+            controller: 'CustomerInvoicesTabController',
+            controllerAs: 'ListController',
+            templateUrl: 'views/partials/filtered-list.html'
+          }
+        }
+      })
+
+      .state('organization.invoiceDetails', {
+        url: 'invoice/:invoiceUUID/',
+        templateUrl: 'views/customer/invoice-details.html',
+        controller: 'InvoiceDetailsController',
+        controllerAs: 'InvoiceDetails',
+        data: {
+          pageTitle: 'Invoice'
         }
       })
 

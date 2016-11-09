@@ -17,7 +17,7 @@
             element.text(title);
           });
         };
-        $rootScope.$on('$stateChangeStart', listener);
+        $rootScope.$on('$stateChangeSuccess', listener);
       }
     }
   }

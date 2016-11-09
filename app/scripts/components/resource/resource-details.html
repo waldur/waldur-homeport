@@ -57,22 +57,16 @@
       </a>
     </dd>
   </div>
-  <div class="m-b-xs col-md-6">
+
+  <div class="m-b-xs col-md-6" ng-if="resource.description">
     <dt>
-      UUID:
+      Description:
     </dt>
     <dd>
-      {{ ::resource.uuid }}
+      <span ng-bind="resource.description"></span>
     </dd>
   </div>
-  <div class="m-b-xs col-md-6">
-    <dt>
-      Backend ID:
-    </dt>
-    <dd>
-      {{ ::resource.backend_id }}
-    </dd>
-  </div>
+
   <div class="m-b-xs col-md-6" ng-if="!resource.isVolume">
     <dt>
       Access:
@@ -136,4 +130,23 @@
       {{ ::resource.uptime }}
     </dd>
   </div>
+
+  <div class="m-b-xs col-md-6">
+    <dt>
+      UUID:
+    </dt>
+    <dd class="elipsis">
+      {{ ::resource.uuid }}
+    </dd>
+  </div>
+
+  <div class="m-b-xs col-md-6">
+    <dt>
+      Backend ID:
+    </dt>
+    <dd class="elipsis">
+      {{ ::resource.backend_id || '&mdash;' }}
+    </dd>
+  </div>
+
 </dl>

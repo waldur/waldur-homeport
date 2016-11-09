@@ -341,7 +341,7 @@
         {
           label: "Billing",
           icon: "fa-file-text-o",
-          link: "organization.billing({uuid: context.customer.uuid})",
+          link: "organization.billing.tabs({uuid: context.customer.uuid})",
           feature: "billing"
         },
         {
