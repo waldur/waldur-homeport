@@ -22,7 +22,7 @@
                <helpicon help-text="{{ service.warning }}"></helpicon>
             </div>
             <div class="icon">
-                <img ng-src="/static/images/appstore/icon-{{ service.type.toLowerCase() }}.png" alt="">
+                <img ng-src="{{ AppStore.getServiceIcon(service) }}" alt="">
             </div>
             <h3>{{ service.name }}</h3>
         </div>

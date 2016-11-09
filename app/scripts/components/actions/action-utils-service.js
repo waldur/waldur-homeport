@@ -131,9 +131,9 @@ export default function actionUtilsService(
 
     if (resource.resource_type === 'DigitalOcean.Droplet' && name === 'resize') {
       component = 'dropletResizeDialog';
-    } else if (resource.resource_type === 'OpenStack.Volume' && name === 'extend') {
+    } else if (resource.resource_type === 'OpenStackTenant.Volume' && name === 'extend') {
       component = 'volumeExtendDialog';
-    } else if (resource.resource_type === 'OpenStack.Volume' && name === 'snapshot') {
+    } else if (resource.resource_type === 'OpenStackTenant.Volume' && name === 'snapshot') {
       component = 'snapshotCreateDialog';
     }
 
