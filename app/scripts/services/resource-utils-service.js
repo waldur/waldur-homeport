@@ -3,9 +3,9 @@
 (function() {
   angular.module('ncsaas')
     .service('resourceUtils', [
-      'ncUtils', 'authService', '$filter', 'ENV', resourceUtils]);
+      'ncUtils', 'authService', '$filter', 'ENV', 'ncServiceUtils', resourceUtils]);
 
-  function resourceUtils(ncUtils, authService, $filter, ENV) {
+  function resourceUtils(ncUtils, authService, $filter, ENV, ncServiceUtils) {
     return {
       setAccessInfo: function(resource) {
         resource.access_info_text = 'No access info';
@@ -63,7 +63,9 @@
         }
       },
       formatResourceType: function(resource) {
-        return resource.resource_type.split(".").join(" ");
+        var parts = resource.resource_type.split(".");
+        var service = ncServiceUtils.getTypeDisplay(parts[0]);
+        return service + " " + parts[1];
       },
       getStateClass: function(resource) {
         return ENV.resourceStateColorClasses[resource.state];

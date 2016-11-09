@@ -99,6 +99,8 @@
       '$document',
       '$scope',
       '$filter',
+      'ncServiceUtils',
+      'resourceUtils',
       AppStoreController]);
 
   function AppStoreController(
@@ -122,7 +124,9 @@
     priceEstimationService,
     $document,
     $scope,
-    $filter) {
+    $filter,
+    ncServiceUtils,
+    resourceUtils) {
     var controllerScope = this;
     var Controller = baseControllerAddClass.extend({
       UNIQUE_FIELDS: {
@@ -498,13 +502,9 @@
           }
         }
       },
-      getServiceIcon: function(service) {
-        var type = service.type;
-        if (type === "OpenStackTenant") {
-          type = "OpenStack";
-        }
-        return "/static/images/appstore/icon-" + type.toLowerCase() + ".png";
-      },
+      getServiceTypeDisplay: ncServiceUtils.getTypeDisplay,
+      getServiceIcon: ncServiceUtils.getServiceIcon,
+      formatResourceType: resourceUtils.formatResourceType,
       serviceClass: function(service) {
         return {
           state: this.selectedService === service,
