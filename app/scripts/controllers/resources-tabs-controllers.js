@@ -245,7 +245,7 @@
       getFilter: function() {
         return {
           source_volume_uuid: $stateParams.uuid,
-          resource_type: 'OpenStack.Snapshot'
+          resource_type: 'OpenStackTenant.Snapshot'
         };
       }
     });

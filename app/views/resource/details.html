@@ -26,7 +26,7 @@
                   <uib-tab heading="Volumes" index="'volumes'" ng-if="controller.model.volumes.length">
                     <div class="panel-body" ng-if="active=='volumes'" ng-include="'views/resource/tab-volumes.html'"></div>
                   </uib-tab>
-                  <uib-tab heading="Snapshots" index="'snapshots'" ng-if="controller.model.resource_type == 'OpenStack.Volume'">
+                  <uib-tab heading="Snapshots" index="'snapshots'" ng-if="controller.model.resource_type == 'OpenStackTenant.Volume'">
                     <div class="panel-body" ng-if="active=='snapshots'" ng-include="'views/resource/tab-snapshots.html'"></div>
                   </uib-tab>
                   <uib-tab heading="Graphs" ng-if="controller.showGraphs">
