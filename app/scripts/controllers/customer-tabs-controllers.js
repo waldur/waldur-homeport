@@ -234,6 +234,7 @@
         'invoicesService',
         'currentCustomer',
         '$state',
+        '$filter',
         CustomerInvoicesTabController
       ]);
 
@@ -241,7 +242,8 @@
     baseControllerListClass,
     invoicesService,
     currentCustomer,
-    $state) {
+    $state,
+    $filter) {
     var controllerScope = this;
     var InvoicesController = baseControllerListClass.extend({
       init: function() {
@@ -278,35 +280,35 @@
               title: 'Price',
               className: 'all',
               render: function(data, type, row, meta) {
-                return row.price;
+                return $filter('defaultCurrency')(row.price);
               }
             },
             {
               title: 'Tax',
               className: 'min-tablet-l',
               render: function(data, type, row, meta) {
-                return row.tax;
+                return $filter('defaultCurrency')(row.tax);
               }
             },
             {
               title: 'Total',
               className: 'min-tablet-l',
               render: function(data, type, row, meta) {
-                return row.total;
+                return $filter('defaultCurrency')(row.total);
               }
             },
             {
               title: 'Invoice date',
               className: 'all',
               render: function(data, type, row, meta) {
-                return row.invoice_date;
+                return row.invoice_date || '&mdash;';
               }
             },
             {
               title: 'Due date',
               className: 'min-tablet-l',
               render: function(data, type, row, meta) {
-                return row.due_date;
+                return row.due_date || '&mdash;';
               }
             }
           ]

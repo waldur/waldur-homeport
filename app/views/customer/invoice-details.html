@@ -29,16 +29,16 @@
                         <h4 class="text-navy">{{::InvoiceDetails.invoice.number}}</h4>
                         <span>To:</span>
                         <address>
-                            <strong>{{::InvoiceDetails.invoice.issuer_details.company}}</strong><br>
-                            {{::InvoiceDetails.invoice.issuer_details.address}}<br>
-                            {{::InvoiceDetails.invoice.issuer_details.country}}, {{::InvoiceDetails.invoice.issuer_details.postal}}<br>
-                            <abbr title="Phone">P:</abbr> {{::InvoiceDetails.invoice.issuer_details.phone}}<br>
-                            {{::InvoiceDetails.invoice.issuer_details.bank}}<br>
-                            {{::InvoiceDetails.invoice.issuer_details.email}}
+                            <strong>{{::InvoiceDetails.invoice.customer_details.company}}</strong><br>
+                            {{::InvoiceDetails.invoice.customer_details.address}}<br>
+                            {{::InvoiceDetails.invoice.customer_details.country}}, {{::InvoiceDetails.invoice.customer_details.postal}}<br>
+                            <abbr title="Phone">P:</abbr> {{::InvoiceDetails.invoice.customer_details.phone}}<br>
+                            {{::InvoiceDetails.invoice.customer_details.bank}}<br>
+                            {{::InvoiceDetails.invoice.customer_details.email}}
                         </address>
                         <div>
-                            <span><strong>Invoice Date:</strong> {{::InvoiceDetails.invoice.invoice_date || '&ndash;'}}</span><br>
-                            <span><strong>Due Date:</strong> {{::InvoiceDetails.invoice.due_date || '&ndash;'}}</span>
+                            <span><strong>Invoice Date:</strong> {{::InvoiceDetails.invoice.invoice_date || '&mdash;'}}</span><br>
+                            <span><strong>Due Date:</strong> {{::InvoiceDetails.invoice.due_date || '&mdash;'}}</span>
                         </div>
                     </div>
                 </div>
@@ -55,13 +55,13 @@
                         </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="item in InvoiceDetails.invoice.openstack_items">
+                            <tr ng-repeat="item in InvoiceDetails.invoice.openstack_items track by $index">
                                 <td><div><strong>{{item.name}}</strong></div>
-                                    <small>Start time: {{item.start}}. End time: {{item.end}}</small></td>
+                                    <small>Start time: {{item.start || '&mdash;' | dateTime }}. End time: {{item.end || '&mdash;' | dateTime }}</small></td>
                                 <td>1</td>
-                                <td>{{item.price}}</td>
-                                <td>{{item.tax}}</td>
-                                <td>{{item.total}}</td>
+                                <td>{{item.price | defaultCurrency}}</td>
+                                <td>{{item.tax | defaultCurrency}}</td>
+                                <td>{{item.total | defaultCurrency}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -71,15 +71,15 @@
                     <tbody>
                     <tr>
                         <td><strong>Sub Total: </strong></td>
-                        <td>{{::InvoiceDetails.invoice.price}}</td>
+                        <td>{{::InvoiceDetails.invoice.price | defaultCurrency}}</td>
                     </tr>
                     <tr>
                         <td><strong>TAX: </strong></td>
-                        <td>{{::InvoiceDetails.invoice.tax}}</td>
+                        <td>{{::InvoiceDetails.invoice.tax | defaultCurrency}}</td>
                     </tr>
                     <tr>
                         <td><strong>TOTAL: </strong></td>
-                        <td>{{::InvoiceDetails.invoice.total}}</td>
+                        <td>{{::InvoiceDetails.invoice.total | defaultCurrency}}</td>
                     </tr>
                     </tbody>
                 </table>

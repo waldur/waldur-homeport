@@ -5,7 +5,7 @@
       'invoicesService',
       '$state',
       '$window',
-      'ncUtils',
+      '$filter',
       InvoiceDetailsController
     ]);
 
@@ -14,7 +14,7 @@
     invoicesService,
     $state,
     $window,
-    ncUtils) {
+    $filter) {
     var controllerScope = this;
     var InvoiceDetailsController = baseControllerClass.extend({
       init: function() {
@@ -28,14 +28,7 @@
         var vm = this;
         invoicesService.$get($state.params.invoiceUUID).then(function(invoice) {
           vm.invoice = invoice;
-          vm.invoice.openstack_items.map(function(item) {
-            item.start = moment(item.start).format('YYYY-MM-DD');
-
-            item.end = moment(item.end).format('YYYY-MM-DD');
-            return item;
-          });
           vm.loading = false;
-
         });
       },
       printLink: function() {
