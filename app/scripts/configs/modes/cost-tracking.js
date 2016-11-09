@@ -20,5 +20,5 @@ angular.module('ncsaas')
     homeLoginTemplate: 'views/home/costtracking/login.html',
     initialDataTemplate: 'views/initial-data/initial-data.html',
     aboutPageTemplate: 'views/about/costtracking/index.html',
-    invitationsEnabled: true
+    invitationsEnabled: false
   });

@@ -12,5 +12,5 @@ angular.module('ncsaas')
       'estonianId'
     ],
     featuresVisible: false,
-    invitationsEnabled: true
+    invitationsEnabled: false
   });
