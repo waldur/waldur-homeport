@@ -36,10 +36,10 @@
                             {{::InvoiceDetails.invoice.issuer_details.bank}}<br>
                             {{::InvoiceDetails.invoice.issuer_details.email}}
                         </address>
-                        <p>
+                        <div>
                             <span><strong>Invoice Date:</strong> {{::InvoiceDetails.invoice.invoice_date || '&ndash;'}}</span><br>
                             <span><strong>Due Date:</strong> {{::InvoiceDetails.invoice.due_date || '&ndash;'}}</span>
-                        </p>
+                        </div>
                     </div>
                 </div>
 
@@ -55,14 +55,14 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="item in InvoiceDetails.invoice.openstack_items">
-                            <td><div><strong>{{item.name}}</strong></div>
-                                <small>Start: {{item.start}}. Emd: {{item.end}}</small></td>
-                            <td>1</td>
-                            <td>{{item.price}}</td>
-                            <td>{{item.tax}}</td>
-                            <td>{{item.total}}</td>
-                        </tr>
+                            <tr ng-repeat="item in InvoiceDetails.invoice.openstack_items">
+                                <td><div><strong>{{item.name}}</strong></div>
+                                    <small>Start time: {{item.start}}. End time: {{item.end}}</small></td>
+                                <td>1</td>
+                                <td>{{item.price}}</td>
+                                <td>{{item.tax}}</td>
+                                <td>{{item.total}}</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div><!-- /table-responsive -->
@@ -70,15 +70,15 @@
                 <table class="table invoice-total">
                     <tbody>
                     <tr>
-                        <td><strong>Sub Total :</strong></td>
+                        <td><strong>Sub Total: </strong></td>
                         <td>{{::InvoiceDetails.invoice.price}}</td>
                     </tr>
                     <tr>
-                        <td><strong>TAX :</strong></td>
+                        <td><strong>TAX: </strong></td>
                         <td>{{::InvoiceDetails.invoice.tax}}</td>
                     </tr>
                     <tr>
-                        <td><strong>TOTAL :</strong></td>
+                        <td><strong>TOTAL: </strong></td>
                         <td>{{::InvoiceDetails.invoice.total}}</td>
                     </tr>
                     </tbody>

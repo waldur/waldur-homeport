@@ -29,8 +29,9 @@
         invoicesService.$get($state.params.invoiceUUID).then(function(invoice) {
           vm.invoice = invoice;
           vm.invoice.openstack_items.map(function(item) {
-            item.start = ncUtils.formatDate(item.start);
-            item.end = ncUtils.formatDate(item.end);
+            item.start = moment(item.start).format('YYYY-MM-DD');
+
+            item.end = moment(item.end).format('YYYY-MM-DD');
             return item;
           });
           vm.loading = false;
