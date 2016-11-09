@@ -3,8 +3,8 @@
 (function() {
   angular.module('ncsaas').service('DashboardChartService', DashboardChartService);
 
-  DashboardChartService.$inject = ['$q', 'priceEstimationService', 'quotasService', '$filter'];
-  function DashboardChartService($q, priceEstimationService, quotasService, $filter) {
+  DashboardChartService.$inject = ['$q', 'priceEstimationService', 'quotasService', '$filter', 'ENV'];
+  function DashboardChartService($q, priceEstimationService, quotasService, $filter, ENV) {
     var vm = this;
     // Each chart should have equal number of data points
     // Each sparkline chart bar has width equal to 4% so 25 by 4 points
@@ -14,21 +14,29 @@
       var charts = [
         {
           quota: 'nc_app_count',
-          title: 'Applications'
+          title: 'Applications',
+          feature: 'apps'
         },
         {
           quota: 'nc_vm_count',
-          title: 'Virtual machines'
+          title: 'Virtual machines',
+          feature: 'vms'
         },
         {
           quota: 'nc_private_cloud_count',
-          title: 'Private clouds'
+          title: 'Private clouds',
+          feature: 'private_clouds',
         },
         {
           quota: 'nc_storage_count',
-          title: 'Storage'
+          title: 'Storage',
+          feature: 'storage'
         }
       ];
+
+      charts = charts.filter(function(chart) {
+        return ENV.featuresVisible || ENV.toBeFeatures.indexOf(chart.feature) == -1
+      });
 
       var quotaMap = scope.quotas.reduce(function(map, quota) {
         map[quota.name] = quota;
