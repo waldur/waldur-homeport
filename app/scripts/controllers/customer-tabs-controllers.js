@@ -102,7 +102,7 @@
             }
           });
           columns.push({
-            title: 'PCs',
+            title: 'Private clouds',
             render: function(data, type, row, meta) {
               return row.private_cloud_count || 0;
             }
@@ -128,13 +128,20 @@
         var vm = this;
         var ownerOrStaff = customersService.checkCustomerUser(vm.currentCustomer, vm.currentUser);
         var quotaReached = ncUtils.isCustomerQuotaReached(vm.currentCustomer, 'project');
+        var title;
+        if (!ownerOrStaff) {
+          title = "You don't have enough privileges to perform this operation";
+        } else if (quotaReached) {
+          title = "Quota has been reached";
+        }
         return [
           {
             name: '<i class="fa fa-plus"></i> Add project',
             callback: function() {
               $state.go('project-create');
             },
-            disabled: !ownerOrStaff || quotaReached
+            disabled: !ownerOrStaff || quotaReached,
+            titleAttr: title
           }
         ];
       },
