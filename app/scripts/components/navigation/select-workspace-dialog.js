@@ -1,23 +1,21 @@
-'use strict';
+import template from './select-workspace-dialog.html';
 
-(function() {
-  angular.module('ncsaas')
-    .controller('SelectWorkspaceDialogController', SelectWorkspaceDialogController);
+export default function selectWorkspaceDialog() {
+  return {
+    restrict: 'E',
+    template: template,
+    controller: SelectWorkspaceDialogController,
+    controllerAs: 'Ctrl',
+    scope: {},
+    bindToController: {
+      dismiss: '&',
+      close: '&'
+    }
+  };
+}
 
-  SelectWorkspaceDialogController.$inject = [
-    '$scope',
-    '$rootScope',
-    '$uibModal',
-    '$state',
-    '$q',
-    'customersService',
-    'projectsService',
-    'currentStateService',
-    'usersService',
-    'blockUI'
-  ];
-
-  function SelectWorkspaceDialogController(
+// @ngInject
+function SelectWorkspaceDialogController(
     $scope,
     $rootScope,
     $uibModal,
@@ -27,7 +25,6 @@
     projectsService,
     currentStateService,
     usersService,
-    blockUI
   ) {
     var ctrl = this;
     ctrl.organizations = [];
@@ -61,6 +58,11 @@
       return blockAndClose(promise);
     };
 
+    ctrl.gotoProfile = function() {
+      var promise = $state.go('profile.details');
+      return blockAndClose(promise);
+    };
+
     ctrl.createOrganization = function() {
       var promise = $uibModal.open({
         templateUrl: 'views/customer/edit-dialog.html',
@@ -75,11 +77,10 @@
     }
 
     function blockAndClose(promise) {
-      var block = blockUI.instances.get('select-workspace-dialog');
-      block.start({delay: 0});
+      ctrl.loadingState = true;
       return promise.finally(function() {
-        block.stop();
-        ctrl.$close();
+        ctrl.loadingState = false;
+        ctrl.close();
       });
     }
 
@@ -132,6 +133,4 @@
       loadInitial().finally(function() {
       ctrl.loadingOrganizations = false;
     });
-  }
-
-})();
+}
