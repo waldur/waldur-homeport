@@ -7,6 +7,7 @@ import userModule from './components/user/module';
 import providersModule from './components/providers/module';
 import projectModule from './components/project/module';
 import actionsModule from './components/actions/module';
+import resourceModule from './components/resource/module';
 
 const module = angular.module('ncsaas');
 
@@ -19,3 +20,4 @@ userModule(module);
 providersModule(module);
 projectModule(module);
 actionsModule(module);
+resourceModule(module);
