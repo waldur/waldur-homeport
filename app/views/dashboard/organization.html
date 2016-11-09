@@ -6,6 +6,8 @@
         <div class="col-lg-3" ng-repeat="chart in DashboardCtrl.resourceCharts">
             <dashboard-chart chart="chart"></dashboard-chart>
         </div>
+    </div>
+    <div class="row" ng-if="!DashboardCtrl.loading">
         <div class="col-lg-3">
             <dashboard-chart chart="DashboardCtrl.costChart"></dashboard-chart>
         </div>
