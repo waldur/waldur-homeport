@@ -248,10 +248,11 @@
       'BaseProjectResourcesTabController',
       'ncUtils',
       '$state',
+      '$filter',
       'ENV',
       VolumesListController]);
 
-  function VolumesListController(BaseProjectResourcesTabController, ncUtils, $state, ENV) {
+  function VolumesListController(BaseProjectResourcesTabController, ncUtils, $state, $filter, ENV) {
     var controllerScope = this;
     var ResourceController = BaseProjectResourcesTabController.extend({
       init:function() {
@@ -271,6 +272,16 @@
         var options = this._super();
         options.noDataText = 'You have no volumes yet.';
         options.noMatchesText = 'No volumes found matching filter.';
+        options.columns.push({
+          title: 'Size',
+          className: 'all',
+          render: function(data, type, row, meta) {
+            if (!row.size) {
+              return '&ndash;';
+            }
+            return $filter('filesize')(row.size);
+          }
+        });
         options.columns.push({
           title: 'Attached to',
           className: 'min-tablet-l',
