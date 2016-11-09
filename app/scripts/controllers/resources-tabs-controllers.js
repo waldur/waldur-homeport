@@ -39,7 +39,6 @@
         'baseControllerClass',
         'resourcesService',
         'zabbixHostsService',
-        'resourceMonitoringService',
         '$stateParams',
         ResourceGraphsController]);
 
@@ -47,7 +46,6 @@
       baseControllerClass,
       resourcesService,
       zabbixHostsService,
-      resourceMonitoringService,
       $stateParams) {
     var controllerScope = this;
     var controllerClass = baseControllerClass.extend({

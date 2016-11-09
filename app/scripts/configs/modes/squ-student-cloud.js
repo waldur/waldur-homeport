@@ -43,5 +43,5 @@ angular.module('ncsaas')
     enablePurchaseCostDisplay: false,
     VmProviderSettingsUuid: 'Set UUID of a shared service setting for VMs',
     gitLabProviderSettingsUuid: 'Set UUID of a shared service setting for GitLab',
-    invitationsEnabled: true
+    invitationsEnabled: false
   });

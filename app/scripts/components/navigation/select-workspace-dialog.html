@@ -1,7 +1,7 @@
 <div class="modal-header">
     <h3 class="modal-title">Select workspace</h3>
 </div>
-<div class="modal-body" block-ui="select-workspace-dialog">
+<div class="modal-body" ng-class="{disabled: Ctrl.loadingState}">
   <div ng-if="Ctrl.loadingOrganizations">
       <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
   </div>
@@ -84,7 +84,10 @@
   </div>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-default" ng-click="$dismiss()">
+    <button class="btn btn-default" ng-click="Ctrl.gotoProfile()">
+      Go to my profile
+    </button>
+    <button class="btn btn-default" ng-click="Ctrl.dismiss()">
       Cancel
     </button>
 </div>

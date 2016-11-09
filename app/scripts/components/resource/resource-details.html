@@ -58,24 +58,6 @@
     </dd>
   </div>
 
-  <div class="m-b-xs col-md-6">
-    <dt>
-      UUID:
-    </dt>
-    <dd>
-      {{ ::resource.uuid }}
-    </dd>
-  </div>
-
-  <div class="m-b-xs col-md-6">
-    <dt>
-      Backend ID:
-    </dt>
-    <dd>
-      {{ ::resource.backend_id }}
-    </dd>
-  </div>
-
   <div class="m-b-xs col-md-6" ng-if="resource.description">
     <dt>
       Description:
@@ -148,4 +130,23 @@
       {{ ::resource.uptime }}
     </dd>
   </div>
+
+  <div class="m-b-xs col-md-6">
+    <dt>
+      UUID:
+    </dt>
+    <dd class="elipsis">
+      {{ ::resource.uuid }}
+    </dd>
+  </div>
+
+  <div class="m-b-xs col-md-6">
+    <dt>
+      Backend ID:
+    </dt>
+    <dd class="elipsis">
+      {{ ::resource.backend_id || '&mdash;' }}
+    </dd>
+  </div>
+
 </dl>
