@@ -232,7 +232,7 @@
       .controller('CustomerInvoicesTabController', [
         'baseControllerListClass',
         'invoicesService',
-        'authService',
+        'currentCustomer',
         '$state',
         CustomerInvoicesTabController
       ]);
@@ -240,74 +240,106 @@
   function CustomerInvoicesTabController(
     baseControllerListClass,
     invoicesService,
-    authService,
+    currentCustomer,
     $state) {
     var controllerScope = this;
     var InvoicesController = baseControllerListClass.extend({
       init: function() {
         this.service = invoicesService;
+        this.getSearchFilters();
+        this.tableOptions = this.getTableOptions();
         this._super();
       },
       getTableOptions: function() {
-        var vm = this;
         return {
           noDataText: 'You have no invoices yet',
           noMatchesText: 'No invoices found matching filter.',
-          searchFieldName: 'uuid',
+          searchFieldName: 'number',
           columns: [
             {
-              title: 'Invoice code',
+              title: 'Invoice number',
               className: 'all',
               render: function(data, type, row, meta) {
                 var href = $state.href('organization.invoiceDetails',
                   {invoiceUUID: row.uuid});
                 return '<a href="{href}">{name}</a>'
                   .replace('{href}', href)
-                  .replace('{name}', row.uuid);
+                  .replace('{name}', row.number);
               }
             },
             {
-              title: 'Amount',
-              className: 'min-tablet-l',
-              render: function(data, type, row, meta) {
-                return row.total_amount;
-              }
-            },
-            {
-              title: 'Start date',
+              title: 'State',
               className: 'all',
               render: function(data, type, row, meta) {
-                return row.start_date;
+                return row.state;
               }
             },
             {
-              title: 'End date',
-              className: 'min-tablet-l',
+              title: 'Price',
+              className: 'all',
               render: function(data, type, row, meta) {
-                return row.end_date;
+                return row.price;
               }
             },
             {
-              title: '',
+              title: 'Tax',
               className: 'min-tablet-l',
               render: function(data, type, row, meta) {
-                var downloadLink = row.downloadLink;
-                return '<a href="{downloadLink}"><i class="icon fa-file-pdf-o"></i></a>'
-                  .replace('{downloadLink}', downloadLink);
+                return row.tax;
+              }
+            },
+            {
+              title: 'Total',
+              className: 'min-tablet-l',
+              render: function(data, type, row, meta) {
+                return row.total;
+              }
+            },
+            {
+              title: 'Invoice date',
+              className: 'all',
+              render: function(data, type, row, meta) {
+                return row.invoice_date;
+              }
+            },
+            {
+              title: 'Due date',
+              className: 'min-tablet-l',
+              render: function(data, type, row, meta) {
+                return row.due_date;
               }
             }
-          ],
-          tableActions: this.getTableActions()
+          ]
         };
       },
-      getTableActions: function() {
+      getSearchFilters: function() {
+        this.searchFilters = [
+          {
+            name: 'state',
+            title: 'Pending',
+            value: 'pending'
+          },
+          {
+            name: 'state',
+            title: 'Cancelled',
+            value: 'cancelled'
+          },
+          {
+            name: 'state',
+            title: 'Created',
+            value: 'created'
+          },
+          {
+            name: 'state',
+            title: 'Paid',
+            value: 'paid'
+          }
+        ];
       },
-      afterGetList: function() {
-        this._super();
-        angular.forEach(this.list, function(invoice) {
-          invoice.downloadLink = authService.getDownloadLink(invoice.pdf);
-        });
-        this.tableOptions = this.getTableOptions();
+      getFilter: function() {
+        return {
+          customer: currentCustomer.url
+        };
       }
     });
 
