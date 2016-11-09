@@ -107,9 +107,6 @@
   angular.module('ncsaas')
     // urls
     .config(function($stateProvider, $urlRouterProvider, MODE) {
-      var initialDataState = 'initialdata.view',
-        initialDataStatePath = '/initial-data/';
-
       $urlRouterProvider.when('/', '/dashboard/');
       $urlRouterProvider.otherwise('/login/');
 
@@ -187,12 +184,12 @@
         })
 
         .state('initialdata', {
-          url: initialDataStatePath,
+          url: '/initial-data/',
           templateUrl: 'views/partials/base.html',
           abstract: true
         })
 
-        .state(initialDataState, {
+        .state('initialdata.view', {
           url: '',
           views: {
             'appHeader@initialdata' : {

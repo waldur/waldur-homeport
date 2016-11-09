@@ -7,7 +7,7 @@ export default function userEdit() {
     template: template,
     scope: {},
     bindToController: {
-      user: '=user',
+      user: '=',
       onRemove: '&',
       onSave: '&',
       errors: '=',
@@ -18,14 +18,26 @@ export default function userEdit() {
   };
 }
 
+
+// @ngInject
 class UserEditController {
-  constructor($q) {
+  constructor($q, $filter) {
     this.$q = $q;
+    this.$filter = $filter;
   }
   save() {
     if (this.UserForm.$invalid) {
       return this.$q.reject();
     }
     return this.onSave();
+  }
+  getRegistrationMethod() {
+    if (!this.user.registration_method) {
+      return 'Default';
+    } else if (this.user.registration_method === 'openid') {
+      return 'Estonian ID';
+    } else {
+      return this.$filter('titleCase')(this.user.registration_method);
+    }
   }
 }
