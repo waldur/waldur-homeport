@@ -124,7 +124,7 @@
         if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('import') == -1) {
           actions.push(this.getImportAction());
         }
-        if (this.category) {
+        if (this.category !== undefined) {
           actions.push(this.getCreateAction());
         }
         actions.push(this.getMapAction());
@@ -416,7 +416,7 @@
       },
 
       afterActivate: function() {
-        this.viewHeaderLabel = this.model.resource_type.split('.').join(' ');
+        this.viewHeaderLabel = resourceUtils.formatResourceType(this.model);
         this.updateMenu();
         this.setCounters();
         this.updateResourceTab();

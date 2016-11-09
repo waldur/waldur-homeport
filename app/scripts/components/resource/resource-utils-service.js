@@ -1,5 +1,5 @@
 // @ngInject
-export default function resourceUtils(ncUtils, authService, $filter, ENV) {
+export default function resourceUtils(ncUtils, ncServiceUtils, authService, $filter, ENV) {
   return {
     setAccessInfo: function(resource) {
       resource.access_info_text = 'No access info';
@@ -57,7 +57,9 @@ export default function resourceUtils(ncUtils, authService, $filter, ENV) {
       }
     },
     formatResourceType: function(resource) {
-      return resource.resource_type.split(".").join(" ");
+      var parts = resource.resource_type.split('.');
+      var service = ncServiceUtils.getTypeDisplay(parts[0]);
+      return service + ' ' + parts[1];
     },
     getStateClass: function(resource) {
       return ENV.resourceStateColorClasses[resource.state];
@@ -69,8 +71,8 @@ export default function resourceUtils(ncUtils, authService, $filter, ENV) {
     },
     getIcon: function(item) {
       var type = item.resource_type || item.type;
-      var service_type = type.split(".")[0];
-      return "/static/images/appstore/icon-" + service_type.toLowerCase() + ".png";
+      var service_type = ncServiceUtils.getTypeDisplay(type.split('.')[0]);
+      return '/static/images/appstore/icon-' + service_type.toLowerCase() + '.png';
     }
   }
 }
