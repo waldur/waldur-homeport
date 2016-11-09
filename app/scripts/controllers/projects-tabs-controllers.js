@@ -213,12 +213,12 @@
     $scope.tabs = [
       {
         title: 'Volumes',
-        countKey: 'OpenStack.Volume',
+        countKey: 'OpenStackTenant.Volume',
         viewKey: 'volumes'
       },
       {
         title: 'Snapshots',
-        countKey: 'OpenStack.Snapshot',
+        countKey: 'OpenStackTenant.Snapshot',
         viewKey: 'snapshots'
       }
     ];
@@ -264,7 +264,7 @@
       },
       getFilter: function() {
         return {
-          resource_type: 'OpenStack.Volume'
+          resource_type: 'OpenStackTenant.Volume'
         };
       },
       getTableOptions: function() {
@@ -281,7 +281,7 @@
             var uuid = ncUtils.getUUID(row.instance);
             var href = $state.href('resources.details', {
               uuid: uuid,
-              resource_type: 'OpenStack.Instance'
+              resource_type: 'OpenStackTenant.Instance'
             });
             return ncUtils.renderLink(href, row.instance_name || 'Link');
           }
@@ -317,7 +317,7 @@
       },
       getFilter: function(filter) {
         return {
-          resource_type: 'OpenStack.Snapshot'
+          resource_type: 'OpenStackTenant.Snapshot'
         };
       },
       getTableOptions: function() {
@@ -333,7 +333,7 @@
             var uuid = ncUtils.getUUID(row.source_volume);
             var href = $state.href('resources.details', {
               uuid: uuid,
-              resource_type: 'OpenStack.Volume'
+              resource_type: 'OpenStackTenant.Volume'
             });
             return ncUtils.renderLink(href, row.source_volume_name || 'Link');
           }
