@@ -46,7 +46,7 @@
         controllerAs: 'ProjectAdd',
         data: {
           pageTitle: 'Create project',
-          workspace: 'project',
+          workspace: 'organization',
           auth: true
         },
       })
