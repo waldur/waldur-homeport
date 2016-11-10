@@ -9,7 +9,7 @@
         var ServiceClass = baseServiceClass.extend({
             init:function() {
                 this._super();
-                this.endpoint = '/paypal-invoices/';
+                this.endpoint = '/invoices/';
             }
         });
         return new ServiceClass();

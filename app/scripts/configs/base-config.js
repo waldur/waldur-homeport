@@ -161,7 +161,7 @@ angular.module('ncsaas')
         type: 'provider',
         icon: 'desktop',
         key: 'vms',
-        services: ['DigitalOcean', 'Azure', 'Amazon', 'OpenStack']
+        services: ['DigitalOcean', 'Azure', 'Amazon', 'OpenStackTenant']
       },
       {
         name: 'Private clouds',
@@ -181,7 +181,7 @@ angular.module('ncsaas')
         name: 'Storages',
         type: 'provider',
         key: 'storages',
-        services: ['OpenStack'],
+        services: ['OpenStackTenant'],
       }
     ],
     serviceCategories: [
@@ -206,10 +206,14 @@ angular.module('ncsaas')
         "OpenStack.Instance": "vms",
         "SaltStack.ExchangeTenant": "apps",
         "OpenStack.Tenant": "private_clouds",
+        "OpenStackTenant.Instance": "vms",
+        "OpenStackTenant.Volume": "storages",
+        "OpenStackTenant.Snapshot": "storages",
         "GitLab.Group": "apps",
         "Zabbix.Host": "apps",
         "Zabbix.ITService": "apps",
-        "OpenStack.Volume": "storages"
+        "OpenStack.Volume": "storages",
+        "OpenStack.Snapshot": "storages"
     },
     showCompare: [
       'Virtual machines'
@@ -347,7 +351,7 @@ angular.module('ncsaas')
     },
     invitationStorageToken: 'ncInvitationToken',
     invitationRedirectTime: 5000,
-    invitationsEnabled: true,
+    invitationsEnabled: false,
     userMandatoryFields: [
       'full_name',
       'email'

@@ -3,18 +3,18 @@
     .controller('InvoiceDetailsController', [
       'baseControllerClass',
       'invoicesService',
-      'authService',
       '$state',
       '$window',
+      '$filter',
       InvoiceDetailsController
     ]);
 
   function InvoiceDetailsController(
     baseControllerClass,
     invoicesService,
-    authService,
     $state,
-    $window) {
+    $window,
+    $filter) {
     var controllerScope = this;
     var InvoiceDetailsController = baseControllerClass.extend({
       init: function() {
@@ -27,14 +27,12 @@
       loadInitial: function() {
         var vm = this;
         invoicesService.$get($state.params.invoiceUUID).then(function(invoice) {
-          invoice.downloadLink = authService.getLink(invoice.pdf);
           vm.invoice = invoice;
           vm.loading = false;
         });
-
       },
       printLink: function() {
-        $window.open(this.invoice.downloadLink);
+        $window.print();
       }
     });
 

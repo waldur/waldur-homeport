@@ -1,65 +1,47 @@
-<div ng-controller="ResourceDetailUpdateController as controller">
-  <div class="row" ng-if="controller.model">
-    <div class="col-sm-8">
-      <div class="wrapper wrapper-content">
-        <div class="ibox">
-          <div class="ibox-content">
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="m-b-md">
-                  <div class="pull-right">
-                    <action-button-resource button-model="controller.model" button-controller="controller"></action-button-resource>
-                  </div>
-                  <h2>{{::controller.viewHeaderLabel}}</h2>
-                </div>
-              </div>
-            </div>
-            <div class="row m-b-md">
-              <resource-details resource="controller.model"></resource-details>
-            </div>
-            <div class="row">
-              <div class="col-lg-12">
-                <uib-tabset active="active">
-                  <uib-tab heading="Alerts" index="'alerts'">
-                    <div class="panel-body" ng-if="active=='alerts'" ng-include="'views/resource/tab-alerts.html'"></div>
-                  </uib-tab>
-                  <uib-tab heading="Volumes" index="'volumes'" ng-if="controller.model.volumes.length">
-                    <div class="panel-body" ng-if="active=='volumes'" ng-include="'views/resource/tab-volumes.html'"></div>
-                  </uib-tab>
-                  <uib-tab heading="Snapshots" index="'snapshots'" ng-if="controller.model.resource_type == 'OpenStack.Volume'">
-                    <div class="panel-body" ng-if="active=='snapshots'" ng-include="'views/resource/tab-snapshots.html'"></div>
-                  </uib-tab>
-                  <uib-tab heading="Graphs" ng-if="controller.showGraphs">
-                    <div class="panel-body" ng-include="'views/resource/tab-graphs.html'"></div>
-                  </uib-tab>
-                  <uib-tab heading="SLA" ng-if="controller.showSla">
-                    <div class="panel-body" ng-include="'views/resource/tab-sla.html'"></div>
-                  </uib-tab>
-                </uib-tabset>
-              </div>
-            </div>
-          </div>
+<div class="wrapper wrapper-content" ng-if="controller.model">
+  <div class="ibox-content">
+    <div class="row m-b-md">
+      <div class="col-lg-12">
+        <div class="pull-right">
+          <action-button-resource button-model="controller.model" button-controller="controller">
+          </action-button-resource>
         </div>
+        <h2>{{::controller.viewHeaderLabel}}</h2>
       </div>
     </div>
-
-    <div class="col-sm-4">
-      <div class="wrapper wrapper-content">
-        <div class="ibox">
-          <div class="ibox-content">
-            <div class="client-detail">
-              <div class="full-height-scroll" slimscroll="{height: '100%'}">
-                <strong>Last activity</strong>
-                <resource-events resource="controller.model"></resource-events>
-
-                <div ng-if="controller.expandUserData">
-                  <strong>User data</strong>
-                  <pre>{{ ::controller.model.user_data }}</pre>
-                </div>
-              </div>
+    <div class="row m-b-md">
+      <resource-details resource="controller.model"></resource-details>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <uib-tabset active="active">
+          <uib-tab heading="Audit log" index="'events'">
+            <div class="panel-body" ng-if="active=='events'">
+              <resource-events resource="controller.model"></resource-events>
             </div>
-          </div>
-        </div>
+          </uib-tab>
+          <uib-tab heading="Alerts" index="'alerts'">
+            <div class="panel-body" ng-if="active=='alerts'" ng-include="'views/resource/tab-alerts.html'"></div>
+          </uib-tab>
+          <uib-tab heading="User data" index="'user_data'" ng-if="controller.model.user_data">
+            <div class="panel-body" ng-if="active=='user_data'">
+              <pre>{{ ::controller.model.user_data }}</pre>
+            </div>
+          </uib-tab>
+          <uib-tab heading="Volumes" index="'volumes'" ng-if="controller.model.volumes.length">
+            <div class="panel-body" ng-if="active=='volumes'" ng-include="'views/resource/tab-volumes.html'"></div>
+          </uib-tab>
+          <uib-tab heading="Snapshots" index="'snapshots'" ng-if="controller.model.resource_type == 'OpenStackTenant.Volume'">
+            <div class="panel-body" ng-if="active=='snapshots'" ng-include="'views/resource/tab-snapshots.html'"></div>
+          </uib-tab>
+          <uib-tab heading="Graphs" index="'graphs'" ng-if="controller.showGraphs">
+            <div class="panel-body" ng-if="active=='graphs'" ng-include="'views/resource/tab-graphs.html'"></div>
+          </uib-tab>
+          <uib-tab heading="SLA" index="'sla'"  ng-if="controller.showSla">
+            <div class="panel-body" ng-if="active=='sla'" ng-include="'views/resource/tab-sla.html'"></div>
+          </uib-tab>
+        </uib-tabset>
       </div>
     </div>
+  </div>
 </div>

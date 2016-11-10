@@ -39,6 +39,10 @@ function IssueCreateController(issuesService, baseControllerAddClass, $statePara
         this.summaryLabel = 'Service name';
         this.descriptionLabel = 'Motivation';
         this.descriptionPlaceholder = 'Please clarify why do you need it';
+      } else if (this.type === 'remove_customer') {
+        this.issue.summary = 'Customer removal';
+        this.title = 'Customer removal';
+        this.descriptionPlaceholder = 'Why do you need to remove customer with existing projects?';        
       }
     },
     getSuccessMessage: function() {
@@ -50,6 +54,9 @@ function IssueCreateController(issuesService, baseControllerAddClass, $statePara
     cancel: function() {
       if (this.type === 'remove_user') {
         return $state.go('profile.manage');
+      }
+      if (this.type === 'remove_customer') {
+        return $state.go('organization.delete');
       }
       this._super();
     }

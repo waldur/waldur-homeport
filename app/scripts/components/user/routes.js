@@ -44,7 +44,8 @@ export default function($stateProvider) {
       url: '/profile/',
       abstract: true,
       data: {
-        auth: true
+        auth: true,
+        workspace: 'user'
       },
       template: '<user-details></user-details>',
     })
@@ -59,7 +60,8 @@ export default function($stateProvider) {
       url: '/users/:uuid/',
       abstract: true,
       data: {
-        auth: true
+        auth: true,
+        workspace: 'user'
       },
       template: '<user-details></user-details>',
     })
@@ -75,7 +77,8 @@ export default function($stateProvider) {
       template: '<user-details></user-details>',
       data: {
         auth: true,
-        pageTitle: 'Add SSH key'
+        pageTitle: 'Add SSH key',
+        workspace: 'user'
       }
     })
 

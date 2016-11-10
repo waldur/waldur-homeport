@@ -92,7 +92,7 @@
       .state('project.resources.vms', {
         url: 'virtual-machines/',
         templateUrl: 'views/partials/filtered-list.html',
-        controller: 'ProjectResourcesTabController',
+        controller: 'ProjectVirtualMachinesListController',
         controllerAs: 'ListController',
         data: {
           pageTitle: 'Virtual machines'

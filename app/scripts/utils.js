@@ -37,15 +37,28 @@
     .service('ncServiceUtils', ['ENV', ncServiceUtils]);
 
   function ncServiceUtils(ENV) {
-    return {
-      getStateClass: function(state) {
-        var cls = ENV.servicesStateColorClasses[state];
-        if (cls == 'processing') {
-          return 'fa fa-refresh fa-spin';
-        } else {
-          return 'status-circle ' + cls;
-        }
+    function getStateClass(state) {
+      var cls = ENV.servicesStateColorClasses[state];
+      if (cls == 'processing') {
+        return 'fa fa-refresh fa-spin';
+      } else {
+        return 'status-circle ' + cls;
       }
+    }
+    function getTypeDisplay(type) {
+      if (type === 'OpenStackTenant') {
+        type = 'OpenStack';
+      }
+      return type;
+    }
+    function getServiceIcon(type) {
+      var type = getTypeDisplay(type);
+      return '/static/images/appstore/icon-' + type.toLowerCase() + '.png';
+    }
+    return {
+      getStateClass: getStateClass,
+      getTypeDisplay: getTypeDisplay,
+      getServiceIcon: getServiceIcon
     };
   }
 

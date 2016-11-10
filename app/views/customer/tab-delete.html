@@ -2,19 +2,22 @@
     <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
 </div>
 
-<div ng-if="!DeleteController.loading" class="text-center">
-    <div ng-if="DeleteController.canRemoveCustomer">
-        <h3>
-            {{ DeleteController.customer.projects.length < 1
-            ? 'You can remove this organization by pressing the button'
-            : 'Please remove all organization\'s projects before deletion of organization' }}
-        </h3>
-        <a ng-click="DeleteController.removeCustomer()"
-           ng-class="{'disabled': !(DeleteController.customer.projects.length < 1)}"
-           class="btn btn-danger">
-            <i class="fa fa-trash"></i>
-            Remove organization
-        </a>
+<div ng-if="!DeleteController.loading">
+    <div class="panel panel-default">
+        <div class="panel-heading">Customer details</div>
+        <div class="panel-body">
+            <strong>Name: </strong>{{::DeleteController.customer.name}}
+        </div>
+    </div>
+    <div class="panel panel-default" ng-if="DeleteController.canRemoveCustomer">
+        <div class="panel-heading">Customer actions</div>
+        <div class="panel-body">
+            <h3>You can remove this organization by pressing the button</h3>
+            <a ng-click="DeleteController.removeCustomer()" class="btn btn-danger">
+                <i class="fa fa-trash"></i>
+                Remove organization
+            </a>
+        </div>
     </div>
     <h3 ng-if="!DeleteController.canRemoveCustomer">
         Only staff user can remove organization.

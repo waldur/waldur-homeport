@@ -332,11 +332,6 @@
           countFieldKey: "alerts"
         },
         {
-          label: "Manage",
-          icon: "fa-wrench",
-          link: "organization.delete({uuid: context.customer.uuid})"
-        },
-        {
           label: "Team",
           icon: "fa-group",
           link: "organization.team.tabs({uuid: context.customer.uuid})",
@@ -354,6 +349,11 @@
           icon: "fa-calculator",
           link: "organization.sizing({uuid: context.customer.uuid})",
           feature: "sizing"
+        },
+        {
+          label: 'Manage',
+          icon: 'fa-wrench',
+          link: 'organization.delete({uuid: context.customer.uuid})'
         }
       ];
     }

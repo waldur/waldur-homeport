@@ -5,5 +5,5 @@ angular.module('ncsaas')
     modeName: 'modeDevelop',
     toBeFeatures: [],
     featuresVisible: true,
-    invitationsEnabled: true
+    invitationsEnabled: false
   });

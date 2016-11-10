@@ -3,7 +3,7 @@ export function stateUtilsService($state) {
   var vm = this;
 
   vm.setPrevState = function(state, params) {
-    if (state.data && state.data.workspace) {
+    if (state.data && state.data.workspace && state.data.workspace !== 'user') {
       vm.prevState = state;
       vm.prevParams = params;
       vm.prevWorkspace = state.data.workspace;

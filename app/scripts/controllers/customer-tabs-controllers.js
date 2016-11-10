@@ -239,82 +239,116 @@
       .controller('CustomerInvoicesTabController', [
         'baseControllerListClass',
         'invoicesService',
-        'authService',
+        'currentCustomer',
         '$state',
+        '$filter',
         CustomerInvoicesTabController
       ]);
 
   function CustomerInvoicesTabController(
     baseControllerListClass,
     invoicesService,
-    authService,
-    $state) {
+    currentCustomer,
+    $state,
+    $filter) {
     var controllerScope = this;
     var InvoicesController = baseControllerListClass.extend({
       init: function() {
         this.service = invoicesService;
+        this.getSearchFilters();
+        this.tableOptions = this.getTableOptions();
         this._super();
       },
       getTableOptions: function() {
-        var vm = this;
         return {
           noDataText: 'You have no invoices yet',
           noMatchesText: 'No invoices found matching filter.',
-          searchFieldName: 'uuid',
+          searchFieldName: 'number',
           columns: [
             {
-              title: 'Invoice code',
+              title: 'Invoice number',
               className: 'all',
               render: function(data, type, row, meta) {
                 var href = $state.href('organization.invoiceDetails',
                   {invoiceUUID: row.uuid});
                 return '<a href="{href}">{name}</a>'
                   .replace('{href}', href)
-                  .replace('{name}', row.uuid);
+                  .replace('{name}', row.number);
               }
             },
             {
-              title: 'Amount',
-              className: 'min-tablet-l',
-              render: function(data, type, row, meta) {
-                return row.total_amount;
-              }
-            },
-            {
-              title: 'Start date',
+              title: 'State',
               className: 'all',
               render: function(data, type, row, meta) {
-                return row.start_date;
+                return row.state;
               }
             },
             {
-              title: 'End date',
-              className: 'min-tablet-l',
+              title: 'Price',
+              className: 'all',
               render: function(data, type, row, meta) {
-                return row.end_date;
+                return $filter('defaultCurrency')(row.price);
               }
             },
             {
-              title: '',
+              title: 'Tax',
               className: 'min-tablet-l',
               render: function(data, type, row, meta) {
-                var downloadLink = row.downloadLink;
-                return '<a href="{downloadLink}"><i class="icon fa-file-pdf-o"></i></a>'
-                  .replace('{downloadLink}', downloadLink);
+                return $filter('defaultCurrency')(row.tax);
+              }
+            },
+            {
+              title: 'Total',
+              className: 'min-tablet-l',
+              render: function(data, type, row, meta) {
+                return $filter('defaultCurrency')(row.total);
+              }
+            },
+            {
+              title: 'Invoice date',
+              className: 'all',
+              render: function(data, type, row, meta) {
+                return row.invoice_date || '&mdash;';
+              }
+            },
+            {
+              title: 'Due date',
+              className: 'min-tablet-l',
+              render: function(data, type, row, meta) {
+                return row.due_date || '&mdash;';
               }
             }
-          ],
-          tableActions: this.getTableActions()
+          ]
         };
       },
-      getTableActions: function() {
+      getSearchFilters: function() {
+        this.searchFilters = [
+          {
+            name: 'state',
+            title: 'Pending',
+            value: 'pending'
+          },
+          {
+            name: 'state',
+            title: 'Canceled',
+            value: 'canceled'
+          },
+          {
+            name: 'state',
+            title: 'Created',
+            value: 'created'
+          },
+          {
+            name: 'state',
+            title: 'Paid',
+            value: 'paid'
+          }
+        ];
       },
-      afterGetList: function() {
-        this._super();
-        angular.forEach(this.list, function(invoice) {
-          invoice.downloadLink = authService.getDownloadLink(invoice.pdf);
-        });
-        this.tableOptions = this.getTableOptions();
+      getFilter: function() {
+        return {
+          customer: currentCustomer.url
+        };
       }
     });
 
@@ -711,9 +745,12 @@
         });
       },
       removeCustomer: function() {
-        var confirmDelete = confirm('Confirm deletion?'),
-          vm = this;
-        if (confirmDelete) {
+        var vm = this;
+        if (this.customer.projects.length > 0) {
+          return $state.go('support.create', {type: 'remove_customer'});
+        }
+        var confirmDelete = confirm('Confirm deletion?');
+          if (confirmDelete) {
           currentStateService.setCustomer(null);
           this.customer.$delete().then(function(instance) {
             customersService.clearAllCacheForCurrentEndpoint();
@@ -835,8 +872,8 @@
           },
           {
             name: 'state',
-            title: 'Cancelled',
-            value: 'cancelled'
+            title: 'Canceled',
+            value: 'canceled'
           },
           {
             name: 'state',
@@ -900,11 +937,11 @@
               render: function(data, type, row, meta) {
                 return $filter('dateTime')(row.expires);
               }
-            },
+            }
           ],
           tableActions: this.getTableActions(),
           rowActions: this.getRowActions()
-        }
+        };
       },
       getTableActions: function() {
         return [
@@ -923,7 +960,7 @@
             customer: function() {
               return currentCustomer;
             }
-          },
+          }
         }).result.then(function() {
           controllerScope.resetCache();
         });
@@ -939,7 +976,7 @@
               },
               tooltip: function(row) {
                 if (row.state !== 'pending') {
-                  return 'Only pending invitation can be cancelled.';
+                  return 'Only pending invitation can be canceled.';
                 }
               }
             },
@@ -960,8 +997,8 @@
       },
       cancelInvitation: function(row) {
         invitationService.cancel(row.uuid).then(function() {
-          ncUtilsFlash.success('Invitation has been cancelled.');
-          row.state = 'cancelled';
+          ncUtilsFlash.success('Invitation has been canceled.');
+          row.state = 'canceled';
           controllerScope.resetCache();
         }).catch(function() {
           ncUtilsFlash.error('Unable to cancel invitation.');

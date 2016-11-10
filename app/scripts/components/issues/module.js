@@ -9,7 +9,8 @@ function configureIssues($stateProvider) {
       template: '<customer-workspace><ui-view/></customer-workspace>',
       abstract: true,
       data: {
-        auth: true
+        auth: true,
+        workspace: 'organization'
       }
     })
 

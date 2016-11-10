@@ -99,6 +99,8 @@
       '$document',
       '$scope',
       '$filter',
+      'ncServiceUtils',
+      'resourceUtils',
       AppStoreController]);
 
   function AppStoreController(
@@ -122,7 +124,9 @@
     priceEstimationService,
     $document,
     $scope,
-    $filter) {
+    $filter,
+    ncServiceUtils,
+    resourceUtils) {
     var controllerScope = this;
     var Controller = baseControllerAddClass.extend({
       UNIQUE_FIELDS: {
@@ -205,6 +209,7 @@
         if (category === this.selectedCategory) {
           return;
         }
+
         this.selectedCategory = category;
         this.secondStep = true;
         this.serviceMetadata = {};
@@ -219,6 +224,10 @@
         this.resetPriceItems();
 
         var services = this.categoryServices[this.selectedCategory.name];
+
+        this.renderStore = (services && services.length > 0) ||
+                           (category.packages && category.packages.length > 0);
+
         if (ENV.VmProviderSettingsUuid && this.isVirtualMachinesSelected()) {
           for (var i = 0; i < services.length; i++) {
             if (services[i].settings_uuid == ENV.VmProviderSettingsUuid) {
@@ -277,7 +286,7 @@
       },
       filterResources: function(item) {
         if (this.selectedCategory.name === 'Virtual machines') {
-          if (this.serviceType === 'OpenStack' && item != 'Instance') {
+          if (this.serviceType === 'OpenStackTenant' && item != 'Instance') {
             return false;
           }
         } else if (this.selectedCategory.name === 'Private clouds') {
@@ -457,7 +466,17 @@
         this.attachIconsToImages();
       },
       fieldsComparator: function(a, b) {
-        return this.fieldsOrder.indexOf(a.name) - this.fieldsOrder.indexOf(b.name);
+        var i = this.fieldsOrder.indexOf(a.name);
+        var j = this.fieldsOrder.indexOf(b.name);
+        if (i === j) {
+          return 0;
+        } else if (i === -1) {
+          return 1;
+        } else if (j === -1) {
+          return -1;
+        } else {
+          return i - j;
+        }
       },
       cartComparator: function(a, b) {
         return this.fieldsOrder.indexOf(a.type) - this.fieldsOrder.indexOf(b.type);
@@ -483,6 +502,9 @@
           }
         }
       },
+      getServiceTypeDisplay: ncServiceUtils.getTypeDisplay,
+      getServiceIcon: ncServiceUtils.getServiceIcon,
+      formatResourceType: resourceUtils.formatResourceType,
       serviceClass: function(service) {
         return {
           state: this.selectedService === service,
@@ -821,7 +843,6 @@
             }
             if (vm.categoryServices[category.name].length > 0) {
               vm.categories.push(category);
-              vm.renderStore = true;
             }
             vm.categoryServices[category.name].sort(function(a, b) {
               return a.enabled < b.enabled;
@@ -863,7 +884,7 @@
               quotas = service.quotas.filter(function(quota) {
                 return quota.limit !== -1 && quota.usage >= quota.limit;
               });
-              service.reachedLimit = quotas.length === service.quotas.length;
+              service.reachedLimit = quotas.length === service.quotas.length && quotas.length > 0;
             });
             var details = services.reduce(function(result, service) {
               result[service.url] = service;
@@ -894,7 +915,6 @@
         if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('premiumSupport') == -1) {
             vm.loadingProviders = false;
             if (list.length != 0) {
-              vm.renderStore = true;
               var category = {
                 type: 'package',
                 name: 'Support',

@@ -104,24 +104,44 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('ProjectResourcesTabController', [
+    .controller('ProjectVirtualMachinesListController', [
       'BaseProjectResourcesTabController',
       'ENV',
-      ProjectResourcesTabController
+      ProjectVirtualMachinesListController
     ]);
 
-  function ProjectResourcesTabController(BaseProjectResourcesTabController, ENV) {
+  function ProjectVirtualMachinesListController(BaseProjectResourcesTabController, ENV) {
     var controllerScope = this;
     var ResourceController = BaseProjectResourcesTabController.extend({
       init: function() {
         this.controllerScope = controllerScope;
         this.category = ENV.VirtualMachines;
         this._super();
+        this.rowFields.push('internal_ips');
+        this.rowFields.push('external_ips');
       },
       getTableOptions: function() {
         var options = this._super();
         options.noDataText = 'You have no virtual machines yet';
         options.noMatchesText = 'No virtual machines found matching filter.';
+        options.columns.push({
+          title: 'Internal IP',
+          render: function(data, type, row, meta) {
+            if (row.internal_ips.length === 0) {
+              return '&ndash;';
+            }
+            return row.internal_ips.join(', ');
+          }
+        });
+        options.columns.push({
+          title: 'External IP',
+          render: function(data, type, row, meta) {
+            if (row.external_ips.length === 0) {
+              return '&ndash;';
+            }
+            return row.external_ips.join(', ');
+          }
+        });
         return options;
       },
       getImportTitle: function() {
@@ -213,12 +233,12 @@
     $scope.tabs = [
       {
         title: 'Volumes',
-        countKey: 'OpenStack.Volume',
+        countKey: 'OpenStackTenant.Volume',
         viewKey: 'volumes'
       },
       {
         title: 'Snapshots',
-        countKey: 'OpenStack.Snapshot',
+        countKey: 'OpenStackTenant.Snapshot',
         viewKey: 'snapshots'
       }
     ];
@@ -248,10 +268,11 @@
       'BaseProjectResourcesTabController',
       'ncUtils',
       '$state',
+      '$filter',
       'ENV',
       VolumesListController]);
 
-  function VolumesListController(BaseProjectResourcesTabController, ncUtils, $state, ENV) {
+  function VolumesListController(BaseProjectResourcesTabController, ncUtils, $state, $filter, ENV) {
     var controllerScope = this;
     var ResourceController = BaseProjectResourcesTabController.extend({
       init:function() {
@@ -264,13 +285,23 @@
       },
       getFilter: function() {
         return {
-          resource_type: 'OpenStack.Volume'
+          resource_type: 'OpenStackTenant.Volume'
         };
       },
       getTableOptions: function() {
         var options = this._super();
         options.noDataText = 'You have no volumes yet.';
         options.noMatchesText = 'No volumes found matching filter.';
+        options.columns.push({
+          title: 'Size',
+          className: 'all',
+          render: function(data, type, row, meta) {
+            if (!row.size) {
+              return '&ndash;';
+            }
+            return $filter('filesize')(row.size);
+          }
+        });
         options.columns.push({
           title: 'Attached to',
           className: 'min-tablet-l',
@@ -281,7 +312,7 @@
             var uuid = ncUtils.getUUID(row.instance);
             var href = $state.href('resources.details', {
               uuid: uuid,
-              resource_type: 'OpenStack.Instance'
+              resource_type: 'OpenStackTenant.Instance'
             });
             return ncUtils.renderLink(href, row.instance_name || 'Link');
           }
@@ -303,27 +334,38 @@
 
   angular.module('ncsaas')
     .controller('SnapshotsListController', [
-      'BaseProjectResourcesTabController', 'ncUtils', '$state',
+      'BaseProjectResourcesTabController', 'ncUtils', '$state', '$filter',
       SnapshotsListController]);
 
-  function SnapshotsListController(BaseProjectResourcesTabController, ncUtils, $state) {
+  function SnapshotsListController(BaseProjectResourcesTabController, ncUtils, $state, $filter) {
     var controllerScope = this;
     var ResourceController = BaseProjectResourcesTabController.extend({
       init:function() {
         this.controllerScope = controllerScope;
         this._super();
+        this.rowFields.push('size');
         this.rowFields.push('source_volume');
         this.rowFields.push('source_volume_name');
       },
       getFilter: function(filter) {
         return {
-          resource_type: 'OpenStack.Snapshot'
+          resource_type: 'OpenStackTenant.Snapshot'
         };
       },
       getTableOptions: function() {
         var options = this._super();
         options.noDataText = 'You have no snapshots yet.';
         options.noMatchesText = 'No snapshots found matching filter.';
+        options.columns.push({
+          title: 'Size',
+          className: 'all',
+          render: function(data, type, row, meta) {
+            if (!row.size) {
+              return '&ndash;';
+            }
+            return $filter('filesize')(row.size);
+          }
+        });
         options.columns.push({
           title: 'Volume',
           render: function(data, type, row, meta) {
@@ -333,7 +375,7 @@
             var uuid = ncUtils.getUUID(row.source_volume);
             var href = $state.href('resources.details', {
               uuid: uuid,
-              resource_type: 'OpenStack.Volume'
+              resource_type: 'OpenStackTenant.Volume'
             });
             return ncUtils.renderLink(href, row.source_volume_name || 'Link');
           }
