@@ -49,8 +49,8 @@
         this._super();
         this.hasCustomFilters = false;
       },
-      toggleRefresh: function() {
-        this.enableRefresh = !this.enableRefresh;
+      toggleRefresh: function(open) {
+        this.enableRefresh = !open;
       },
       resetCache: function () {
         if (!this.enableRefresh) {

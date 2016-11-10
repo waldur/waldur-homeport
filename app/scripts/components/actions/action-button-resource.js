@@ -27,8 +27,11 @@ class ActionButtonController {
     this.actionUtilsService.buttonClick(this.buttonController, this.buttonModel, name, action);
   }
 
-  onToggle() {
-    this.buttonController.toggleRefresh();
+  onToggle(open) {
+    this.buttonController.toggleRefresh(open);
+    if (open) {
+      this.openList();
+    }
   }
 
   buttonClass(action) {
