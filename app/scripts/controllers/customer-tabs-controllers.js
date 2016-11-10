@@ -930,6 +930,13 @@
               render: function(data, type, row, meta) {
                 return $filter('dateTime')(row.expires);
               }
+            },
+            {
+              title: 'URL',
+              className: 'none',
+              render: function(data, type, row, meta) {
+                return row.link_template.replace('{uuid}', row.uuid);
+              }
             }
           ],
           tableActions: this.getTableActions(),
