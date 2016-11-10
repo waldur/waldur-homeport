@@ -124,18 +124,8 @@
       .state('organization.billing.tabs', {
         url: '',
         views: {
-          users: {
-            controller: 'CustomerTeamTabController',
-            controllerAs: 'ListController',
-            templateUrl: 'views/partials/filtered-list.html'
-          },
-          invitations: {
-            controller: 'CustomerInvitationsTabController',
-            controllerAs: 'ListController',
-            templateUrl: 'views/partials/filtered-list.html'
-          },
           invoices: {
-            controller: 'CustomerInvoicesTabController',
+            controller: 'InvoicesListController',
             controllerAs: 'ListController',
             templateUrl: 'views/partials/filtered-list.html'
           }
@@ -144,9 +134,7 @@
 
       .state('organization.invoiceDetails', {
         url: 'invoice/:invoiceUUID/',
-        templateUrl: 'views/customer/invoice-details.html',
-        controller: 'InvoiceDetailsController',
-        controllerAs: 'InvoiceDetails',
+        template: '<invoice-details></invoice-details>',
         data: {
           pageTitle: 'Invoice'
         }
