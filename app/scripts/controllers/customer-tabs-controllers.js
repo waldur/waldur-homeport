@@ -240,6 +240,8 @@
         'baseControllerListClass',
         'invoicesService',
         'currentCustomer',
+        'currentUser',
+        'ncUtilsFlash',
         '$state',
         '$filter',
         CustomerInvoicesTabController
@@ -249,6 +251,8 @@
     baseControllerListClass,
     invoicesService,
     currentCustomer,
+    currentUser,
+    ncUtilsFlash,
     $state,
     $filter) {
     var controllerScope = this;
@@ -318,8 +322,36 @@
                 return row.due_date || '&mdash;';
               }
             }
-          ]
+          ],
+          rowActions: this.getRowActions()
         };
+      },
+      getRowActions: function() {
+        if (currentUser.is_staff) {
+          return [
+            {
+              name: '<i class="fa fa-envelope-o"></i> Send notification',
+              callback: this.sendNotification.bind(controllerScope),
+
+              isDisabled: function(row) {
+                return row.state != 'created';
+              }.bind(controllerScope),
+
+              tooltip: function(row) {
+                if (row.state != 'created') {
+                  return 'Notification only for the created invoice can be sent.';
+                }
+              }.bind(controllerScope),
+            }
+          ];
+        }
+      },
+      sendNotification: function(row) {
+        invoicesService.sendNotification(row.uuid).then(function() {
+          ncUtilsFlash.success('Invoice notification has been sent to organization owners.');
+        }).catch(function() {
+          ncUtilsFlash.error('Unable to invoice notification.');
+        });
       },
       getSearchFilters: function() {
         this.searchFilters = [
