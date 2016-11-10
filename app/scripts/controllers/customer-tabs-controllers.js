@@ -831,8 +831,8 @@
           },
           {
             name: 'state',
-            title: 'Cancelled',
-            value: 'cancelled'
+            title: 'Canceled',
+            value: 'canceled'
           },
           {
             name: 'state',
@@ -896,11 +896,11 @@
               render: function(data, type, row, meta) {
                 return $filter('dateTime')(row.expires);
               }
-            },
+            }
           ],
           tableActions: this.getTableActions(),
           rowActions: this.getRowActions()
-        }
+        };
       },
       getTableActions: function() {
         return [
@@ -919,7 +919,7 @@
             customer: function() {
               return currentCustomer;
             }
-          },
+          }
         }).result.then(function() {
           controllerScope.resetCache();
         });
@@ -935,7 +935,7 @@
               },
               tooltip: function(row) {
                 if (row.state !== 'pending') {
-                  return 'Only pending invitation can be cancelled.';
+                  return 'Only pending invitation can be canceled.';
                 }
               }
             },
@@ -956,8 +956,8 @@
       },
       cancelInvitation: function(row) {
         invitationService.cancel(row.uuid).then(function() {
-          ncUtilsFlash.success('Invitation has been cancelled.');
-          row.state = 'cancelled';
+          ncUtilsFlash.success('Invitation has been canceled.');
+          row.state = 'canceled';
           controllerScope.resetCache();
         }).catch(function() {
           ncUtilsFlash.error('Unable to cancel invitation.');
