@@ -10,32 +10,30 @@
     // Each sparkline chart bar has width equal to 4% so 25 by 4 points
     var POINTS_COUNT = 25;
 
-    this.getResourceHistoryCharts = function(scope) {
-      var charts = [
-        {
-          quota: 'nc_app_count',
-          title: 'Applications',
-          feature: 'apps'
-        },
-        {
-          quota: 'nc_vm_count',
-          title: 'Virtual machines',
-          feature: 'vms'
-        },
-        {
-          quota: 'nc_private_cloud_count',
-          title: 'Private clouds',
-          feature: 'private_clouds',
-        },
-        {
-          quota: 'nc_storage_count',
-          title: 'Storage',
-          feature: 'storage'
-        }
-      ];
+    this.getOrganizationCharts = function(organization) {
+      var quotas = this.getDashboardQuotas(ENV.organizationDashboardQuotas);
+      return $q.all([
+        this.getCostChart(organization),
+        this.getResourceHistoryCharts(quotas, organization)
+      ]).then(function(charts) {
+        return [charts[0]].concat(charts[1]);
+      });
+    };
 
+    this.getProjectCharts = function(project) {
+      var quotas = this.getDashboardQuotas(ENV.projectDashboardQuotas);
+      return this.getResourceHistoryCharts(quotas, project);
+    };
+
+    this.getDashboardQuotas = function(items) {
+      return items.map(function(quota) {
+        return angular.extend({quota: quota}, ENV.dashboardQuotas[quota]);
+      });
+    };
+
+    this.getResourceHistoryCharts = function(charts, scope) {
       charts = charts.filter(function(chart) {
-        return ENV.featuresVisible || ENV.toBeFeatures.indexOf(chart.feature) == -1
+        return !chart.feature || (ENV.featuresVisible || ENV.toBeFeatures.indexOf(chart.feature) == -1);
       });
 
       var quotaMap = scope.quotas.reduce(function(map, quota) {
@@ -96,7 +94,7 @@
         estimates = estimates.map(function(estimate) {
           return {
             value: estimate.total,
-            date: new Date(estimate.year, estimate.month, 1)
+            date: new Date(estimate.year, estimate.month - 1, 1)
           }
         });
 
@@ -104,7 +102,7 @@
         estimates = vm.padMissingValues(estimates, 'month');
         estimates = estimates.map(function(estimate) {
           estimate.label = $filter('defaultCurrency')(estimate.value) +  ' at ' +
-                           $filter('date', 'yyyy-MM-dd')(estimate.date);
+                           $filter('date', 'yyyy-MM')(estimate.date);
           return estimate;
         });
         return {
@@ -166,14 +164,9 @@
     function activate() {
       vm.loading = true;
       return currentStateService.getCustomer().then(function(customer) {
-        return $q.all([
-          DashboardChartService.getCostChart(customer).then(function(chart) {
-            vm.costChart = chart;
-          }),
-          DashboardChartService.getResourceHistoryCharts(customer).then(function(charts) {
-            vm.resourceCharts = charts;
-          })
-        ]).finally(function() {
+        return DashboardChartService.getOrganizationCharts(customer).then(function(charts) {
+          vm.charts = charts;
+        }).finally(function() {
           vm.loading = false;
         });
       });
@@ -235,7 +228,7 @@
       vm.loading = true;
       currentStateService.getProject().then(function(project) {
         vm.project = project;
-        return DashboardChartService.getResourceHistoryCharts(project).then(function(charts) {
+        return DashboardChartService.getProjectCharts(project).then(function(charts) {
           vm.charts = charts;
         });
       }).finally(function() {
