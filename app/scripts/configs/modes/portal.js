@@ -24,7 +24,7 @@ angular.module('ncsaas')
         type: 'provider',
         icon: 'desktop',
         key: 'vms',
-        services: ['Amazon', 'DigitalOcean', 'OpenStack']
+        services: ['Amazon', 'DigitalOcean', 'OpenStackTenant']
       },
       {
         name: 'Private clouds',
@@ -37,7 +37,7 @@ angular.module('ncsaas')
         name: 'Storages',
         type: 'provider',
         key: 'storages',
-        services: ['OpenStack']
+        services: ['OpenStackTenant']
       }
     ],
     serviceCategories: [
