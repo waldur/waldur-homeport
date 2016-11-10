@@ -16,7 +16,7 @@
                 return $http.post(url, {link_template: this.getTemplateUrl()});
             },
             getTemplateUrl: function() {
-                var path = $state.href('organization.invoiceDetails', {uuid: 'TEMPLATE'});
+                var path = $state.href('organization.invoiceDetails', {invoiceUUID: 'TEMPLATE'});
                 return location.origin + path.replace('TEMPLATE', '{uuid}');
             }
         });
