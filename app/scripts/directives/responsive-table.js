@@ -68,6 +68,7 @@
             processing: true,
             serverSide: true,
             ordering: false,
+            autoWidth: false,
             ajax: serverDataTableCallback,
             dom: '<"html5buttons"B>lTfgitp',
             buttons: buttons,
