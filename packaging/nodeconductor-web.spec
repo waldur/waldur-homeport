@@ -5,7 +5,7 @@ Name: nodeconductor-web
 Summary: NodeConductor web
 Version: 0.1.0
 Release: 1
-License: Copyright 2016 OpenNode LLC.  All rights reserved.
+License: MIT
 Source0: %{name}-%{version}.tar.gz
 
 BuildArch: noarch

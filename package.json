@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "NodeConductor web client",
   "repository": "https://code.opennodecloud.com/nc-saas/nodeconductor-web",
-  "license": "Proprietary",
+  "license": "MIT",
   "dependencies": {
     "babel-core": "^6.17.0",
     "babel-loader": "^6.2.5",
