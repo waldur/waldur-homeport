@@ -1,8 +1,8 @@
 %define __conf_dir %{_sysconfdir}/%{name}
 %define __data_dir %{_datadir}/%{name}
 
-Name: nodeconductor-web
-Summary: NodeConductor web
+Name: waldur-homeport
+Summary: Waldur HomePort
 Version: 0.1.0
 Release: 1
 License: MIT
@@ -22,7 +22,7 @@ BuildRequires: nodejs < 6
 BuildRequires: rubygem-sass
 
 %description
-NodeConductor web static files.
+Web interface for Waldur MasterMind cloud orchestrator.
 
 %prep
 %setup -q
