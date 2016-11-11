@@ -14,18 +14,18 @@ __Development/testing__:
 
 __Installation steps__:
 
-1. Clone project and go to its folder:
-
-        git clone git@code.opennodecloud.com:nc-saas/nodeconductor-web.git
-        cd nodeconductor-web
-
-2. Install dependencies. Example for CentOS 7:
+1. Install dependencies. Example for CentOS 7:
 
         yum -y install epel-release https://rpm.nodesource.com/pub_4.x/el/7/x86_64/nodesource-release-el7-1.noarch.rpm
-        yum -y install nodejs rubygems
+        yum -y install bzip2 git libjpeg-turbo-devel libpng-devel libtool make nasm "nodejs-4*" rubygems
 
         gem install sass
         npm install -g bower grunt-cli
+
+2. Clone project and go to its folder:
+
+        git clone git@code.opennodecloud.com:nc-saas/nodeconductor-web.git
+        cd nodeconductor-web
 
 3. Build static assets:
 

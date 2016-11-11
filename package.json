@@ -1,9 +1,9 @@
 {
-  "name": "NodeConductor-web",
+  "name": "waldur-homeport",
   "version": "0.0.0",
-  "description": "NodeConductor web client",
+  "description": "Web interface for Waldur MasterMind cloud orchestrator",
   "repository": "https://code.opennodecloud.com/nc-saas/nodeconductor-web",
-  "license": "Proprietary",
+  "license": "MIT",
   "dependencies": {
     "babel-core": "^6.17.0",
     "babel-loader": "^6.2.5",
