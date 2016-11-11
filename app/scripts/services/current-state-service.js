@@ -2,13 +2,13 @@
 
 (function() {
   angular.module('ncsaas')
-    .service('currentStateService', ['$q', '$window', 'ENV', 'ncUtils', currentStateService]);
+    .service('currentStateService', ['$q', '$window', 'ENV', 'ncUtils', '$rootScope', currentStateService]);
 
   /**
    * This service contains values of objects, that affect current displayed data.
    * Notice: CurrentStateService can not make any backend calls. It stores only selected on user-side objects.
    */
-  function currentStateService($q, $window, ENV, ncUtils) {
+  function currentStateService($q, $window, ENV, ncUtils, $rootScope) {
     /*jshint validthis: true */
     var vm = this;
     vm.getCustomer = getCustomer;
@@ -24,9 +24,22 @@
     vm.getProjectUuid = getProjectUuid;
     vm.isQuotaExceeded = isQuotaExceeded;
 
+    vm.getHasCustomer = getHasCustomer;
+    vm.setHasCustomer = setHasCustomer;
+
     // private variables:
-    var customer = null,
-      project = null;
+    var customer = null;
+    var project = null;
+    var hasCustomer = undefined;
+
+    function getHasCustomer() {
+      return hasCustomer;
+    }
+
+    function setHasCustomer(value) {
+      hasCustomer = value;
+      $rootScope.$broadcast('hasCustomer', value);
+    }
 
     function getCustomer() {
       return customer;
@@ -56,6 +69,7 @@
       customer.then(function(response) {
         if (response) {
           $window.localStorage[ENV.currentCustomerUuidStorageKey] = response.uuid;
+          vm.setHasCustomer(true);
         }
       });
     }

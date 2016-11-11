@@ -32,6 +32,11 @@ class SelectWorkspaceToggleController {
       this.workspace = toState.data.workspace;
     });
     this.workspace = this.$state.current.data.workspace;
+
+    this.$scope.$on('hasCustomer', (event, value) => {
+      this.hasCustomer = value;
+    });
+    this.hasCustomer = this.currentStateService.getHasCustomer();
   }
 
   refreshProject() {
@@ -56,7 +61,16 @@ class SelectWorkspaceToggleController {
     }
   }
 
+  getTooltip() {
+    if (!this.hasCustomer) {
+      return `You don't have any organization yet`;
+    }
+  }
+
   selectWorkspace() {
+    if (!this.hasCustomer) {
+      return;
+    }
     this.$uibModal.open({
       component: 'selectWorkspaceDialog',
       size: 'lg'

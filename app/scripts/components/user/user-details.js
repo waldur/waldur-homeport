@@ -38,7 +38,8 @@ export const PRIVATE_USER_TABS = [
 ];
 
 // @ngInject
-function UserDetailsController($scope, $stateParams, usersService, PRIVATE_USER_TABS, stateUtilsService) {
+function UserDetailsController($scope, $stateParams, usersService,
+  PRIVATE_USER_TABS, stateUtilsService, currentStateService) {
   var publicTabs = [
     {
         label: "Audit logs",
@@ -66,17 +67,30 @@ function UserDetailsController($scope, $stateParams, usersService, PRIVATE_USER_
       link: "dashboard.index"
     };
   }
-  usersService.getCurrentUser().then(function(user) {
-    if (angular.isUndefined($stateParams.uuid) || $stateParams.uuid === user.uuid) {
-      $scope.items = [dashboardTab].concat(PRIVATE_USER_TABS);
-      $scope.currentUser = user;
-      $scope.context = {user: user};
-    } else {
-      usersService.$get($stateParams.uuid).then(function(user) {
-        $scope.items = [dashboardTab].concat(publicTabs);
+
+  function updateSidebar() {
+    usersService.getCurrentUser().then(function(user) {
+      if (angular.isUndefined($stateParams.uuid) || $stateParams.uuid === user.uuid) {
+        if (currentStateService.getHasCustomer()) {
+          $scope.items = [dashboardTab].concat(PRIVATE_USER_TABS);
+        } else {
+          $scope.items = PRIVATE_USER_TABS;
+        }
         $scope.currentUser = user;
         $scope.context = {user: user};
-      });
-    }
-  });
+      } else {
+        usersService.$get($stateParams.uuid).then(function(user) {
+          if (currentStateService.getHasCustomer()) {
+            $scope.items = [dashboardTab].concat(publicTabs);
+          } else {
+            $scope.items = publicTabs;
+          }
+          $scope.currentUser = user;
+          $scope.context = {user: user};
+        });
+      }
+    });
+  }
+  $scope.$on('hasCustomer', updateSidebar);
+  updateSidebar();
 }

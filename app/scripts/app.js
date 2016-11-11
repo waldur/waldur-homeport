@@ -76,6 +76,26 @@
     }
   }
 
+  angular.module('ncsaas').run(disableCustomerStates);
+
+  disableCustomerStates.$inject = ['$rootScope', '$state', 'currentStateService'];
+
+  function disableCustomerStates($rootScope, $state, currentStateService) {
+    $rootScope.$on('$stateChangeStart',
+    function(event, toState, toParams, fromState, fromParams) {
+      if (!toState.data) {
+        return;
+      }
+
+      var workspace = toState.data.workspace;
+      if (workspace === 'organization' || workspace === 'project') {
+        if (currentStateService.getHasCustomer() === false) {
+          event.preventDefault();
+        }
+      }
+    });
+  }
+
   angular.module('ncsaas').config(attachAuthResolve);
 
   attachAuthResolve.$inject = ['$stateProvider'];

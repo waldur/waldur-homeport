@@ -25,9 +25,11 @@
               }
             }
             if (customers.length !== 0) {
+              currentStateService.setHasCustomer(true);
               deferred.resolve(customers[0]);
             } else {
-              $state.go('initialdata.view');
+              $state.go('profile.details');
+              currentStateService.setHasCustomer(false);
               deferred.reject();
             }
           }
