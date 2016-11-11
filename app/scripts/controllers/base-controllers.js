@@ -3,96 +3,6 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('HeaderController', [
-      '$rootScope', '$state', 'currentStateService', 'customersService',
-      'usersService', 'ENV', 'baseControllerClass', '$translate', 'LANGUAGE', 'projectsService', '$q', 'ncUtils',
-      'ncUtilsFlash',
-      HeaderController]);
-
-  function HeaderController(
-    $rootScope, $state, currentStateService, customersService, usersService,
-    ENV, baseControllerClass, $translate, LANGUAGE, projectsService, $q, ncUtils, ncUtilsFlash) {
-    var controllerScope = this;
-    var HeaderControllerClass = baseControllerClass.extend({
-      showImport: ENV.showImport,
-      checkQuotas: {
-        projects: 'project',
-        resources: 'resource'
-      },
-
-      init: function() {
-        this.activate();
-        this._super();
-      },
-      activate: function() {
-        var vm = this;
-
-        customersService.getTopMenuList().then(function(response) {
-          vm.customers = response;
-          vm.hasMore = customersService.pages > 1;
-        });
-
-        vm.getProjectList();
-
-        // initiate current user
-        usersService.getCurrentUser().then(function(response) {
-          vm.currentUser = response;
-        });
-
-        // initiate current customer
-        currentStateService.getCustomer().then(function(customer) {
-          vm.currentCustomer = customer;
-        });
-
-        currentStateService.getProject().then(function(project) {
-          vm.currentProject = project;
-        });
-
-        $rootScope.closeMenu = vm.closeMenu;
-
-        this.LANGUAGE_CHOICES = LANGUAGE.CHOICES;
-        this.currentLanguage = this.findLanguageByCode($translate.use());
-      },
-
-      changeLanguage: function(language) {
-        this.currentLanguage = language;
-        $translate.use(this.currentLanguage.code);
-      },
-
-      findLanguageByCode: function(code) {
-        for (var i=0; i<LANGUAGE.CHOICES.length; i++) {
-          if (LANGUAGE.CHOICES[i].code == code) {
-            return LANGUAGE.CHOICES[i];
-          }
-        }
-      },
-      goToCurrentOrganization: function() {
-        $state.go('organization.details', {uuid: this.currentCustomer.uuid});
-      },
-      goToCustomer: function(customer) {
-        currentStateService.setCustomer(customer);
-        this.currentCustomer = customer;
-        $rootScope.$broadcast('currentCustomerUpdated');
-        this.setFirstOrLastSelectedProject();
-        $state.go('dashboard.index', {}, {reload: true});
-      },
-      goToCurrentProject: function() {
-        if (this.currentProject) {
-          $state.go('project.details', {uuid: this.currentProject.uuid});
-        }
-      },
-      isOwner: function (customer) {
-        var vm = this;
-        return customer.owners.filter(function(user) {
-          return user.uuid === vm.currentUser.uuid;
-        })[0];
-      }
-    });
-
-    controllerScope.__proto__ = new HeaderControllerClass();
-  }
-
-  angular.module('ncsaas')
     .controller('MainController', [
       '$scope',
       '$q',
@@ -337,6 +247,7 @@
       logout: function() {
         authService.signout();
         currentStateService.isCustomerDefined = false;
+        currentStateService.setHasCustomer(undefined);
         $rootScope.$broadcast('abortRequests');
         $state.go('login');
       },

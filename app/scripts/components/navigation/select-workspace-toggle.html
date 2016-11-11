@@ -1,4 +1,8 @@
-<button class="btn btn-primary select-workspace" ng-click="$ctrl.selectWorkspace()">
-    {{ $ctrl.getTitle() }}
-    <i class="fa fa-angle-down"></i>
-</button>
+<a class="btn btn-primary select-workspace"
+   ng-click="$ctrl.selectWorkspace()"
+   ng-disabled="!$ctrl.hasCustomer"
+   uib-tooltip="{{ $ctrl.getTooltip() }}"
+   tooltip-placement="bottom">
+  {{ $ctrl.getTitle() }}
+  <i class="fa fa-angle-down"></i>
+</a>

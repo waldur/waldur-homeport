@@ -38,14 +38,16 @@ function HookListController(
             className: 'min-tablet-l',
             render: function(data, type, row, meta) {
               return row.label;
-            }
+            },
+            width: '100px'
           },
           {
             title: 'Destination',
             className: 'min-tablet-l',
             render: function(data, type, row, meta) {
               return row.destination;
-            }
+            },
+            width: '100px'
           },
           {
             title: 'Events',
@@ -71,7 +73,8 @@ function HookListController(
             className: 'danger',
             callback: this.remove.bind(controllerScope)
           }
-        ]
+        ],
+        actionsColumnWidth: '150px'
       };
     },
 
