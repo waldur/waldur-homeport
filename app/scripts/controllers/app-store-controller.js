@@ -559,7 +559,7 @@
           resource_type: vm.serviceType + '.' + vm.selectedResourceType
         }).then(function(response) {
           vm.defaultPriceListItems = response;
-          vm.setPriceItem(field.item_type, choice.display_name);
+          vm.setPriceItem(field.item_type, choice.display_name, choice);
         });
       },
       updateDependentFields: function(name) {
@@ -765,9 +765,9 @@
           }
         }
       },
-      setPriceItem: function(item_type, key) {
+      setPriceItem: function(item_type, key, choice) {
         this.deletePriceItem(item_type);
-        var price = this.findPrice(item_type, key) || 0;
+        var price = this.findPrice(item_type, key) || choice.item.price || 0;
         this.pushPriceItem(item_type, key, price);
       },
       findPrice: function(item_type, key) {

@@ -148,7 +148,10 @@
 
                                     <div class="description-{{::field.name}}">
                                         <div>
-                                            <p>{{ choice.display_name }}</p>
+                                            <p>
+                                                {{ choice.display_name }}
+                                                <span ng-if="choice.item.price"> - {{::choice.item.price | defaultCurrency}}</span>
+                                            </p>
                                         </div>
                                     </div>
                                 </li>

@@ -14,7 +14,7 @@
                 <span>{{ item.name }}</span>
             </div>
 
-            <div ng-show="AppStore.enablePurchaseCostDisplay" class="price">{{AppStore.currency}}{{item.price}}</div>
+            <div ng-show="AppStore.enablePurchaseCostDisplay" class="price">{{item.price | defaultCurrency}}</div>
             <div class="clear"></div>
         </li>
         <li class="total">
