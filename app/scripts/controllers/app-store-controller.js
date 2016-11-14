@@ -382,13 +382,13 @@
           }
 
           var type = options.type;
-          if (type == 'field' || type == 'select') {
+          if (type === 'field' || type === 'select') {
             type = 'choice';
           }
 
           var choices = validChoices[name] || options.choices;
 
-          if (name == 'user_data') {
+          if (name === 'user_data') {
             type = 'text';
           }
 
@@ -405,14 +405,14 @@
           var help_text = options.help_text;
           var min, max, units;
 
-          if (name == 'system_volume_size') {
+          if (name === 'system_volume_size' || name === 'size') {
             min = 0;
             max = 320;
             units = 'GB';
             help_text = null;
           }
 
-          if (name == 'data_volume_size') {
+          if (name === 'data_volume_size') {
             min = 1;
             max = 320;
             units = 'GB';

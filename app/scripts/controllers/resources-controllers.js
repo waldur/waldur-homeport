@@ -451,7 +451,7 @@
         } else if (resourceCategory === 'private_clouds') {
           return 'project.resources.clouds';
         } else if (resourceCategory === 'storages') {
-          return 'project.resources.storage';
+          return 'project.resources.storage.tabs';
         } else {
           return 'project.resources.vms';
         }
