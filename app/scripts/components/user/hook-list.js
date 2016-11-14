@@ -10,7 +10,7 @@ export default function hookList() {
 
 // @ngInject
 function HookListController(
-  baseControllerListClass, $filter, $uibModal, hooksService) {
+  baseControllerListClass, $filter, $uibModal, hooksService, usersService) {
   var controllerScope = this;
   var Controller = baseControllerListClass.extend({
     init: function() {
@@ -75,6 +75,12 @@ function HookListController(
           }
         ],
         actionsColumnWidth: '150px'
+      };
+    },
+
+    getFilter: function() {
+      return {
+        author_uuid: usersService.currentUser.uuid
       };
     },
 
