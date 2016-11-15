@@ -31,6 +31,9 @@ class SidebarController {
   }
 
   syncMenu() {
+    if (!this.items) {
+      return;
+    }
     var data = this.$state.$current.data;
     this.items.map(item => {
       if (data && data.sidebarState) {
