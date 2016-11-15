@@ -28,7 +28,9 @@ class ActionButtonController {
   }
 
   onToggle(open) {
-    this.buttonController.toggleRefresh(open);
+    if (this.buttonController.toggleRefresh) {
+      this.buttonController.toggleRefresh(open);
+    }
     if (open) {
       this.openList();
     }

@@ -8,7 +8,9 @@
 
         ({{ ::volume.bootable && 'bootable ' || '' }}{{ ::volume.size|filesize }})
       </td>
-      <td class="text-center"><action-button-resource button-model="volume"></action-button-resource></td>
+      <td class="text-center">
+        <action-button-resource button-model="volume" button-controller="controller"></action-button-resource>
+      </td>
     </tr>
   </table>
 </div>

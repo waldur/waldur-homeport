@@ -369,35 +369,7 @@
         this.service = resourcesService;
         this.controllerScope = controllerScope;
         this._super();
-        this.detailsState = 'resources.details';
-        this.detailsViewOptions = {
-          title_plural: 'resources',
-          listState: 'project.details({uuid: controller.model.project_uuid, tab:controller.resourceTab})',
-          aboutFields: [
-            {
-              fieldKey: 'name',
-              isEditable: true,
-              className: 'name'
-            }
-          ],
-          tabs: [
-            {
-              title: 'Details',
-              key: 'details',
-              viewName: 'tabDetails',
-              count: -1,
-              hideSearch: true
-            },
-            {
-              title: 'Alerts',
-              key: 'alerts',
-              viewName: 'tabAlerts',
-              countFieldKey: 'alerts'
-            },
-          ]
-        };
-        this.detailsViewOptions.activeTab = this.getActiveTab();
-        this.activeTab = this.detailsViewOptions.activeTab.key;
+        controllerScope.enableRefresh = true;
       },
 
       getModel: function() {
@@ -405,6 +377,9 @@
       },
 
       reInitResource: function() {
+        if (!controllerScope.enableRefresh) {
+          return;
+        }
         controllerScope.getModel().then(function(model) {
           controllerScope.model = model;
         }, function(error) {
@@ -418,7 +393,6 @@
       afterActivate: function() {
         this.viewHeaderLabel = resourceUtils.formatResourceType(this.model);
         this.updateMenu();
-        this.setCounters();
         this.updateResourceTab();
         this.scheduleRefresh();
         this.addMonitoringTabs();
@@ -493,11 +467,8 @@
         }
       },
 
-      getCounters: function() {
-        var query = angular.extend(alertsService.defaultFilter, {scope: this.model.url});
-        return resourcesCountService.alerts(query).then(function(response) {
-          return {alerts: response};
-        });
+      toggleRefresh: function(open) {
+        controllerScope.enableRefresh = !open;
       },
 
       scheduleRefresh: function() {
