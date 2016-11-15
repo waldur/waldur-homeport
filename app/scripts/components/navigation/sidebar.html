@@ -4,17 +4,17 @@
             <li class="brand-name hidden-xs">
                 <a ui-sref="dashboard.index">
                     <i class="fa fa-th-large"></i>
-                    Waldur
+                    {{ ::$ctrl.brandName }}
                 </a>
             </li>
             <li class="nav-header">
                 <user-sidebar></user-sidebar>
             </li>
             <li ui-sref-active="active"
-                ng-repeat="item in items"
+                ng-repeat="item in $ctrl.items"
                 ng-class="item.class"
                 visible-if="item.feature">
-                <a ui-sref="{{ item.link }}" ng-if="item.link" ng-click="onMenuClick($event, item)">
+                <a ui-sref="{{ item.link }}" ng-if="item.link" ng-click="$ctrl.onMenuClick($event, item)">
                     <i class="fa {{ ::item.icon }} fixed-width-icon"></i>
                     <span class="nav-label" ng-bind="::item.label"/>
                     <span class="label label-default pull-right"
@@ -32,7 +32,7 @@
                     ng-class="{in: item.expanded}">
                     <li ui-sref-active="active"
                         ng-repeat="child in item.children"
-                        visible-if="item.feature">
+                        visible-if="child.feature">
                         <a ui-sref="{{ child.link }}">
                             <i class="fa {{ ::child.icon }}"></i>
                             {{ ::child.label }}
