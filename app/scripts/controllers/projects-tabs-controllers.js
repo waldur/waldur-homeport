@@ -314,7 +314,7 @@
               uuid: uuid,
               resource_type: 'OpenStackTenant.Instance'
             });
-            return ncUtils.renderLink(href, row.instance_name || 'Link');
+            return ncUtils.renderLink(href, row.instance_name || 'OpenStack instance');
           }
         });
         return options;

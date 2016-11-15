@@ -38,7 +38,7 @@
         uuid: resource.instance_uuid,
         resource_type: 'OpenStackTenant.Instance'
       })">
-        {{ ::resource.instance_name }}
+        {{ ::resource.instance_name || 'OpenStack instance' }}
       </a>
     </dd>
     <dd ng-if="!resource.instance">
