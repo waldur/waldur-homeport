@@ -70,15 +70,19 @@
               ctrl.setFirstOrLastSelectedProject();
             }
           });
-        }, function() {
+        }, function(error) {
           var index = ctrl.customers.indexOf(customer);
           index > -1 && ctrl.customers.splice(index, 1);
           customersService.getTopMenuList().then(function(response) {
             ctrl.customers = response;
             ctrl.hasMore = customersService.pages > 1;
           });
-          alert('Sorry "' + customer.name + '" organization was deleted in another session. ' +
-            'Please try to select another organization.');
+          if (error.status === 404) {
+            alert('Sorry "' + customer.name + '" organization was deleted in another session. ' +
+              'Please try to select another organization.');
+          } else {
+            alert('Sorry, there is some network problem going on. Please, try to refresh the page');
+          }
         });
       },
 
