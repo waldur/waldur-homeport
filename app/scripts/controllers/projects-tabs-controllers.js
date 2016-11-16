@@ -555,6 +555,7 @@
             {
               title: 'Member',
               className: 'all',
+              width: '20%',
               render: function(data, type, row, meta) {
                 var avatar = '<img gravatar-src="\'{gravatarSrc}\'" gravatar-size="100" alt="" class="avatar-img img-xs">'
                   .replace('{gravatarSrc}', row.email);
@@ -624,6 +625,7 @@
       openPopup: function(user) {
         var dialogScope = $rootScope.$new();
         dialogScope.currentProject = currentProject;
+        dialogScope.currentCustomer = currentCustomer;
         dialogScope.editUser = user;
         dialogScope.isProjectManager = this.isProjectManager;
         dialogScope.addedUsers = this.list.map(function(users) {

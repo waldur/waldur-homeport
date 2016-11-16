@@ -4,7 +4,7 @@ import template from './add-team-member.html';
 function AddTeamMemberDialogController(
   customerPermissionsService,
   projectPermissionsService,
-  usersService,
+  customersService,
   blockUI,
   $q,
   $scope,
@@ -43,7 +43,7 @@ function AddTeamMemberDialogController(
       return $q.resolve();
     } else {
       $scope.canChangeRole = true;
-      return usersService.getAll().then(function(users) {
+      return customersService.getList({operation: 'users', UUID: $scope.currentCustomer.uuid}).then(function(users) {
         $scope.users = users.filter(function(user) {
           return $scope.addedUsers.indexOf(user.uuid) === -1;
         });

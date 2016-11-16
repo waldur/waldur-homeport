@@ -2,7 +2,7 @@ import template from './add-project-member.html';
 
 // @ngInject
 function AddProjectMemberDialogController(
-  projectPermissionsService, usersService, blockUI, $q, $scope, ENV) {
+  projectPermissionsService, customersService, blockUI, $q, $scope, ENV) {
   var roles = ENV.roles;
   $scope.saveUser = saveUser;
   $scope.addText = 'Add';
@@ -27,7 +27,7 @@ function AddProjectMemberDialogController(
       $scope.projectModel.role = $scope.editUser.role;
       return $q.resolve();
     } else {
-      return usersService.getAll().then(function(users) {
+      return customersService.getList({operation: 'users', UUID: $scope.currentCustomer.uuid}).then(function(users) {
         $scope.users = users.filter(function(user) {
           return $scope.addedUsers.indexOf(user.uuid) === -1;
         });

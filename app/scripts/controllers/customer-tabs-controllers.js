@@ -434,6 +434,7 @@
             {
               title: 'Member',
               className: 'all',
+              width: '20%',
               render: function(data, type, row, meta) {
                 var avatar = '<img gravatar-src="\'{gravatarSrc}\'" gravatar-size="100" alt="" class="avatar-img img-xs">'
                   .replace('{gravatarSrc}', row.email);
@@ -473,7 +474,6 @@
               }
             }
           ],
-          tableActions: this.getTableActions(),
           rowActions: this.getRowActions()
         };
       },
@@ -491,16 +491,6 @@
             .replace('{projectName}', projectName)
             .replace('{href}', href)
         }).join(', ');
-      },
-      getTableActions: function() {
-        if (this.isOwnerOrStaff) {
-          return [
-            {
-              name: '<i class="fa fa-plus"></i> Add member',
-              callback: this.openPopup.bind(this)
-            }
-          ];
-        }
       },
       getRowActions: function() {
         if (this.isOwnerOrStaff) {
