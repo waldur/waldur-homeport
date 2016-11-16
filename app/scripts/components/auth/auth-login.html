@@ -1,5 +1,5 @@
-<div class="middle-box text-center loginscreen" ng-controller="AuthController as auth">
-    <h1 class="logo-name">Waldur</h1>
+<div class="middle-box text-center loginscreen">
+    <h1 class="logo-name">{{ auth.shortPageTitle }}</h1>
     <h4 ng-if="!auth.isSignupFormVisible">Welcome to Waldur HomePort</h4>
     <h4 ng-if="auth.isSignupFormVisible">Register to Waldur HomePort</h4>
     <p>
