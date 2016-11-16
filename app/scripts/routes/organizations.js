@@ -134,10 +134,7 @@
 
       .state('organization.invoiceDetails', {
         url: 'invoice/:invoiceUUID/',
-        template: '<invoice-details></invoice-details>',
-        data: {
-          pageTitle: 'Invoice'
-        }
+        template: '<invoice-details></invoice-details>'
       })
 
       .state('organization.sizing', {
