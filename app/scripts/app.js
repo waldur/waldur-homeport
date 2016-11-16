@@ -131,104 +131,6 @@
       $urlRouterProvider.otherwise('/login/');
 
       $stateProvider
-        .state('home', {
-          url: '/',
-          abstract: true,
-          templateUrl: 'views/partials/base.html',
-        })
-
-        .state('home.home', {
-          url: '',
-          views: {
-            'appHeader@home' : {
-              templateUrl: MODE.homeHeaderTemplate ? MODE.homeHeaderTemplate : 'views/partials/site-header.html',
-            },
-            'appContent@home' : {
-              templateUrl: MODE.homeTemplate ? MODE.homeTemplate : 'views/home/home.html',
-            }
-          },
-          data: {
-            bodyClass: 'landing',
-            disabled: true
-          },
-        })
-
-        .state('login', {
-          url: '/login/',
-          templateUrl: 'views/home/login-box.html',
-          data: {
-            isSignupFormVisible: false,
-            bodyClass: 'old',
-            anonymous: true,
-          }
-        })
-
-        .state('register', {
-          url: '/register/',
-          templateUrl: 'views/home/login-box.html',
-          data: {
-            isSignupFormVisible: true,
-            bodyClass: 'old',
-            anonymous: true
-          }
-        })
-
-        .state('home.activate', {
-          url: 'activate/:user_uuid/:token/',
-          views: {
-            'appHeader@home' : {
-              templateUrl: 'views/partials/site-header.html',
-            },
-            'appContent@home' : {
-              templateUrl: 'views/home/activate.html',
-            }
-          },
-          data: {
-            anonymous: true
-          }
-        })
-
-        .state('home.login_complete', {
-          url: 'login_complete/:token/',
-          views: {
-            'appHeader@home' : {
-              templateUrl: 'views/partials/site-header.html',
-            },
-            'appContent@home' : {
-              templateUrl: 'views/home/login_complete.html',
-            }
-          },
-          data: {
-            anonymous: true
-          }
-        })
-
-        .state('initialdata', {
-          url: '/initial-data/',
-          templateUrl: 'views/partials/base.html',
-          abstract: true
-        })
-
-        .state('initialdata.view', {
-          url: '',
-          views: {
-            'appHeader@initialdata' : {
-              templateUrl: 'views/partials/site-header-initial.html',
-            },
-            'appContent@initialdata' : {
-              templateUrl: MODE.initialDataTemplate ? MODE.initialDataTemplate : 'views/initial-data/initial-data.html',
-              controller: 'InitialDataController',
-              controllerAs: 'InitialData',
-              bindToController: true,
-            }
-          },
-          noInitialData: true,
-          data: {
-            auth: true,
-            bodyClass: 'old'
-          }
-        })
-
         .state('resources', {
           url: '/resources/',
           abstract: true,
@@ -449,15 +351,6 @@
             pageTitle: 'Privacy policy'
           }
         })
-        .state('invitation', {
-          url: '/invitation/:uuid/',
-          controller: 'InvitationController',
-          data: {
-            anonymous: true,
-            bodyClass: 'old'
-          },
-          templateUrl: 'views/invitation/invitation.html'
-        });
     });
 
 })();

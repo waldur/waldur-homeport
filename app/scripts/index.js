@@ -10,6 +10,7 @@ import actionsModule from './components/actions/module';
 import navigationModule from './components/navigation/module';
 import resourceModule from './components/resource/module';
 import invoicesModule from './components/invoices/module';
+import authModule from './components/auth/module';
 
 const module = angular.module('ncsaas');
 
@@ -25,3 +26,4 @@ actionsModule(module);
 navigationModule(module);
 resourceModule(module);
 invoicesModule(module);
+authModule(module);

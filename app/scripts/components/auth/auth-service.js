@@ -1,10 +1,5 @@
-'use strict';
-
-(function() {
-  angular.module('ncsaas')
-    .service('authService', ['$http', '$auth', 'usersService', '$rootScope', '$window', 'ENV', authService]);
-
-  function authService($http, $auth, usersService, $rootScope, $window, ENV) {
+// @ngInject
+export default function authService($http, $auth, usersService, $rootScope, $window, ENV) {
     /*jshint validthis: true */
     var vm = this;
 
@@ -75,6 +70,4 @@
         return href + '?x-auth-token=' + $auth.getToken();
       }
     }
-  }
-
-})();
+}
