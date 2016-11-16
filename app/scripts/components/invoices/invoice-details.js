@@ -13,8 +13,9 @@ export default function invoiceDetails() {
 
 // @ngInject
 class InvoiceDetailsController {
-  constructor(invoicesService, $state, $window) {
+  constructor(invoicesService, $state, $window, currentStateService) {
     this.invoicesService = invoicesService;
+    this.currentStateService = currentStateService;
     this.$state = $state;
     this.$window = $window;
     this.init();
@@ -27,6 +28,7 @@ class InvoiceDetailsController {
       this.invoice = invoice;
       this.loading = false;
     });
+    this.customerUUID = this.currentStateService.getCustomerUuid();
   }
 
   printLink() {
