@@ -39,6 +39,9 @@
                             {{::InvoiceDetails.invoice.issuer_details.country}}, {{::InvoiceDetails.invoice.issuer_details.postal}}<br>
                             <abbr title="Phone">P:</abbr> {{::InvoiceDetails.invoice.issuer_details.phone}}<br>
                             {{::InvoiceDetails.invoice.issuer_details.bank}}, {{::InvoiceDetails.invoice.issuer_details.account}} <br>
+                            <span ng-if="InvoiceDetails.invoice.issuer_details.vat_code">
+                                <abbr>VAT:</abbr> {{::InvoiceDetails.invoice.issuer_details.vat_code}}<br>
+                            </span>
                             {{::InvoiceDetails.invoice.issuer_details.email}}
                         </address>
                     </div>
@@ -69,7 +72,7 @@
                             <th>Item List</th>
                             <th>Quantity</th>
                             <th>Unit Price</th>
-                            <th>Tax</th>
+                            <th ng-if="InvoiceDetails.invoice.issuer_details.vat_code">Tax</th>
                             <th>Total Price</th>
                         </tr>
                         </thead>
@@ -78,9 +81,9 @@
                                 <td><div><strong>{{item.name}}</strong></div>
                                     <small>Start time: {{item.start || '&mdash;' | dateTime }}. End time: {{item.end || '&mdash;' | dateTime }}</small></td>
                                 <!-- now items quantity always equals to 1 -->
-                                <td>1</td>
+                                <td>{{item.quantity}}</td>
                                 <td>{{item.price | defaultCurrency}}</td>
-                                <td>{{item.tax | defaultCurrency}}</td>
+                                <td ng-if="InvoiceDetails.invoice.issuer_details.vat_code">{{item.tax | defaultCurrency}}</td>
                                 <td>{{item.total | defaultCurrency}}</td>
                             </tr>
                         </tbody>
@@ -93,7 +96,7 @@
                         <td><strong>Sub Total: </strong></td>
                         <td>{{::InvoiceDetails.invoice.price | defaultCurrency}}</td>
                     </tr>
-                    <tr>
+                    <tr ng-if="InvoiceDetails.invoice.issuer_details.vat_code">
                         <td><strong>TAX: </strong></td>
                         <td>{{::InvoiceDetails.invoice.tax | defaultCurrency}}</td>
                     </tr>
