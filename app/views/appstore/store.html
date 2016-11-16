@@ -16,10 +16,10 @@
         </section>
         <div class="project-alert-message" ng-if="!AppStore.loadingProviders && !AppStore.renderStore">
             <p>
-                There are no working accounts available for the current project.<br />
+                There are no working {{category.label.toLowerCase()}} providers available for the current project.<br />
                 <span visible="providers">
                     You can change that in
-                    <a ui-sref="project.details({uuid: AppStore.currentProject.uuid})">provider management</a>.
+                    <a ui-sref="organization.providers({uuid: AppStore.currentCustomer.uuid})">provider management</a>.
                 </span>
             </p>
         </div>
