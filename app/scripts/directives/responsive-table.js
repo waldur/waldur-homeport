@@ -58,7 +58,7 @@
           });
 
           var columns = options.columns;
-          if (options.rowActions) {
+          if (options.rowActions && options.rowActions.length) {
             var actionColumn = getActionColumn(options.rowActions, options.actionsColumnWidth);
             columns.push(actionColumn);
           }
