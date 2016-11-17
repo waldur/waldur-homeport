@@ -74,7 +74,7 @@
         {
           icon: "fa-th-large",
           label: "Dashboard",
-          link: "project.details({uuid: context.project.uuid})",
+          link: "project.details({uuid: $ctrl.context.project.uuid})",
         },
         {
           icon: "fa-shopping-cart",
@@ -89,28 +89,28 @@
           link: "project.resources",
           children: [
             {
-              link: "project.resources.vms({uuid: context.project.uuid})",
+              link: "project.resources.vms({uuid: $ctrl.context.project.uuid})",
               icon: "fa-desktop",
               label: "Virtual machines",
               feature: "vms",
               countFieldKey: "vms"
             },
             {
-              link: "project.resources.clouds({uuid: context.project.uuid})",
+              link: "project.resources.clouds({uuid: $ctrl.context.project.uuid})",
               icon: "fa-cloud",
               label: "Private clouds",
               feature: "private_clouds",
               countFieldKey: "private_clouds"
             },
             {
-              link: "project.resources.apps({uuid: context.project.uuid})",
+              link: "project.resources.apps({uuid: $ctrl.context.project.uuid})",
               icon: "fa-cube",
               label: "Applications",
               feature: "apps",
               countFieldKey: "apps"
             },
             {
-              link: "project.resources.storage.tabs({uuid: context.project.uuid})",
+              link: "project.resources.storage.tabs({uuid: $ctrl.context.project.uuid})",
               icon: "fa-hdd-o",
               label: "Storage",
               feature: "storage",
@@ -119,20 +119,20 @@
           ]
         },
         {
-          link: "project.support({uuid: context.project.uuid})",
+          link: "project.support({uuid: $ctrl.context.project.uuid})",
           icon: "fa-question-circle",
           label: "Support",
           feature: "premiumSupport",
           countFieldKey: "premium_support_contracts"
         },
         {
-          link: "project.events({uuid: context.project.uuid})",
+          link: "project.events({uuid: $ctrl.context.project.uuid})",
           icon: "fa-bell-o",
           label: "Audit logs",
           feature: "eventlog"
         },
         {
-          link: "project.alerts({uuid: context.project.uuid})",
+          link: "project.alerts({uuid: $ctrl.context.project.uuid})",
           icon: "fa-fire",
           label: "Alerts",
           feature: "alerts",
@@ -141,12 +141,12 @@
         {
           label: 'Team',
           icon: 'fa-group',
-          link: 'project.team({uuid: context.project.uuid})',
+          link: 'project.team({uuid: $ctrl.context.project.uuid})',
           feature: 'team',
           countFieldKey: 'users'
         },
         {
-          link: "project.delete({uuid: context.project.uuid})",
+          link: "project.delete({uuid: $ctrl.context.project.uuid})",
           icon: "fa-wrench",
           label: "Manage"
         }

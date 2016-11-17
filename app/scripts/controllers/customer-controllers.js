@@ -284,14 +284,14 @@
         {
           label: "Providers",
           icon: "fa-database",
-          link: "organization.providers({uuid: context.customer.uuid})",
+          link: "organization.providers({uuid: $ctrl.context.customer.uuid})",
           feature: "providers",
           countFieldKey: "services"
         },
         {
           label: "Projects",
           icon: "fa-bookmark",
-          link: "organization.projects({uuid: context.customer.uuid})",
+          link: "organization.projects({uuid: $ctrl.context.customer.uuid})",
           feature: "projects",
           countFieldKey: "projects"
         },
@@ -309,51 +309,51 @@
             {
               label: "Cost analysis",
               icon: "fa-pie-chart",
-              link: "organization.analysis.cost({uuid: context.customer.uuid})"
+              link: "organization.analysis.cost({uuid: $ctrl.context.customer.uuid})"
             },
             {
               label: "Resource usage",
               icon: "fa-tachometer",
-              link: "organization.analysis.resources({uuid: context.customer.uuid})"
+              link: "organization.analysis.resources({uuid: $ctrl.context.customer.uuid})"
             }
           ]
         },
         {
           label: "Audit logs",
           icon: "fa-bell-o",
-          link: "organization.details({uuid: context.customer.uuid})",
+          link: "organization.details({uuid: $ctrl.context.customer.uuid})",
           feature: "eventlog"
         },
         {
           label: "Alerts",
           icon: "fa-fire",
-          link: "organization.alerts({uuid: context.customer.uuid})",
+          link: "organization.alerts({uuid: $ctrl.context.customer.uuid})",
           feature: "alerts",
           countFieldKey: "alerts"
         },
         {
           label: "Team",
           icon: "fa-group",
-          link: "organization.team.tabs({uuid: context.customer.uuid})",
+          link: "organization.team.tabs({uuid: $ctrl.context.customer.uuid})",
           feature: "team",
           countFieldKey: "users"
         },
         {
           label: "Billing",
           icon: "fa-file-text-o",
-          link: "organization.billing.tabs({uuid: context.customer.uuid})",
+          link: "organization.billing.tabs({uuid: $ctrl.context.customer.uuid})",
           feature: "billing"
         },
         {
           label: "Sizing",
           icon: "fa-calculator",
-          link: "organization.sizing({uuid: context.customer.uuid})",
+          link: "organization.sizing({uuid: $ctrl.context.customer.uuid})",
           feature: "sizing"
         },
         {
           label: 'Manage',
           icon: 'fa-wrench',
-          link: 'organization.delete({uuid: context.customer.uuid})'
+          link: 'organization.delete({uuid: $ctrl.context.customer.uuid})'
         }
       ];
     }
