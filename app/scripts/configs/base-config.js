@@ -81,7 +81,8 @@ angular.module('ncsaas')
         feature: "private_clouds",
         key: "private_clouds",
         state: "appstore.store",
-        description: "OpenStack tenants and Amazon VPC."
+        description: "OpenStack tenants and Amazon VPC.",
+        requireStaffOwnerManager: true
       },
       {
         label: "Storage",
@@ -168,7 +169,8 @@ angular.module('ncsaas')
         type: 'provider',
         icon: 'cloud',
         key: 'private_clouds',
-        services: ['OpenStack']
+        services: ['OpenStack'],
+        requireStaffOwnerManager: true
       },
       {
         name: 'Applications',
