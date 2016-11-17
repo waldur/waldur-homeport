@@ -44,12 +44,12 @@ function UserDetailsController($scope, $stateParams, usersService,
     {
         label: "Audit logs",
         icon: "fa-bell-o",
-        link: "users.details({uuid: context.user.uuid})"
+        link: "users.details({uuid: $ctrl.context.user.uuid})"
     },
     {
         label: "SSH Keys",
         icon: "fa-key",
-        link: "users.keys({uuid: context.user.uuid})"
+        link: "users.keys({uuid: $ctrl.context.user.uuid})"
     }
   ];
   var prevWorkspace = stateUtilsService.getPrevWorkspace() || 'organization';
