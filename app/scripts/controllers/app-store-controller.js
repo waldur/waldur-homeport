@@ -28,38 +28,6 @@
     }
   }
 
-
-  angular.module('ncsaas')
-    .controller('AppStoreOfferingController', AppStoreOfferingController);
-
-  AppStoreOfferingController.$inject = [
-    '$stateParams', '$state', 'issuesService', 'AppStoreUtilsService', 'ncUtilsFlash'
-  ];
-  function AppStoreOfferingController(
-    $stateParams, $state, issuesService, AppStoreUtilsService, ncUtilsFlash) {
-    var vm = this;
-    activate();
-    vm.save = save;
-
-    function activate() {
-      vm.offering = AppStoreUtilsService.findOffering($stateParams.category);
-      if (!vm.offering) {
-        $state.go('errorPage.notFound')
-      }
-    }
-
-    function save() {
-      return issuesService.createIssue({
-        summary: 'Please create a turnkey solution: ' + vm.offering.label,
-        description: vm.details
-      }).then(function() {
-        $state.go('support.list');
-      }, function(error) {
-        ncUtilsFlash.error('Unable to create request for a turnkey solution.');
-      });
-    }
-  }
-
   angular.module('ncsaas')
     .controller('AppStoreHeaderController', AppStoreHeaderController);
 
@@ -374,7 +342,51 @@
         }
       },
       setFields: function(formOptions, validChoices) {
-        this.fields = [];
+        this.fieldConfigurators = {
+          'OpenStack.Tenant': this.getOpenStackTenantFields
+        };
+        var key = this.serviceType + '.' + this.selectedResourceType;
+        var configurator = this.fieldConfigurators[key] || this.defaultFieldConfigurator;
+        this.fields = configurator(formOptions, validChoices);
+      },
+      getOpenStackTenantFields: function(formOptions, validChoices) {
+        return [
+          {
+            name: 'name',
+            type: 'string',
+            required: true,
+            label: 'Tenant name'
+          },
+          {
+            name: 'template',
+            type: 'choice',
+            required: true,
+            label: 'VPC package',
+            choices: validChoices.template
+          },
+          {
+            name: 'description',
+            type: 'text',
+            label: 'Description'
+          },
+          {
+            name: 'user_username',
+            type: 'string',
+            label: 'Initial admin username',
+            placeholder: '<generated username>',
+            help_text: 'Leave blank if you want admin username to be auto-generated'
+          },
+          {
+            name: 'user_password',
+            type: 'password',
+            label: 'Initial admin password',
+            placeholder: '<generated password>',
+            help_text: 'Leave blank if you want admin password to be auto-generated'
+          }
+        ];
+      },
+      defaultFieldConfigurator: function(formOptions, validChoices) {
+        var fields = [];
         for (var name in formOptions) {
           var options = formOptions[name];
           if (name === this.UNIQUE_FIELDS.service_project_link) {
@@ -440,7 +452,7 @@
             item_type = 'flavor';
           }
 
-          this.fields.push({
+          fields.push({
             name: name,
             label: display_label ? display_label : label,
             type: type,
@@ -461,9 +473,10 @@
           'security_groups', 'ssh_public_key', 'tenant', 'floating_ip', 'skip_external_ip_assignment',
           'availability_zone', 'description', 'user_data', 'user_username'
         ];
-        this.fields.sort(this.fieldsComparator.bind(this));
+        fields.sort(this.fieldsComparator.bind(this));
         this.sortFlavors();
         this.attachIconsToImages();
+        return fields;
       },
       fieldsComparator: function(a, b) {
         var i = this.fieldsOrder.indexOf(a.name);
