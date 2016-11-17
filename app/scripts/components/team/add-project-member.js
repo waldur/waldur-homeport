@@ -35,7 +35,7 @@ function AddProjectMemberDialogController(
       $scope.projectModel.role = $scope.editUser.role;
       return $q.resolve();
     } else {
-      return customersService.getList({
+      return customersService.getAll({
         operation: 'users', UUID: $scope.currentCustomer.uuid
       }).then(function(users) {
         $scope.users = users.filter(function(user) {
