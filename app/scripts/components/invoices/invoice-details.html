@@ -80,9 +80,8 @@
                             <tr ng-repeat="item in InvoiceDetails.invoice.openstack_items track by $index">
                                 <td><div><strong>{{item.name}}</strong></div>
                                     <small>Start time: {{item.start || '&mdash;' | dateTime }}. End time: {{item.end || '&mdash;' | dateTime }}</small></td>
-                                <!-- now items quantity always equals to 1 -->
-                                <td>{{item.quantity}}</td>
-                                <td>{{item.price | defaultCurrency}}</td>
+                                <td>{{item.usage_days}}</td>
+                                <td>{{item.daily_price | defaultCurrency}}</td>
                                 <td ng-if="InvoiceDetails.invoice.issuer_details.vat_code">{{item.tax | defaultCurrency}}</td>
                                 <td>{{item.total | defaultCurrency}}</td>
                             </tr>
