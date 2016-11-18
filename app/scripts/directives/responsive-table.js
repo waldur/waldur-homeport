@@ -109,7 +109,6 @@
                 '-' + scope.controller.orderField;
             }
 
-            console.log('here plus filter', filter);
             table.ajax.reload();
           });
         }
