@@ -20,12 +20,25 @@ function AuthLoginController(ENV, $q, $sce, $scope, $state, authService,
     errors: {},
     openidUrl: $sce.trustAsResourceUrl(ENV.apiEndpoint + 'api-auth/openid/login/?next=/api-auth/login_complete'),
     shortPageTitle: ENV.shortPageTitle,
+    civilNumberRequired: false,
     init: function() {
       if (ENV.invitationsEnabled && $state.current.name === 'register' && !invitationService.getInvitationToken()) {
         $state.go('errorPage.notFound');
         return;
+      } else {
+        this.checkRegistrationMethods();
       }
       this._super();
+    },
+    checkRegistrationMethods: function() {
+      var vm = this;
+      invitationService.executeAction(invitationService.getInvitationToken(), 'check').then(function(result) {
+        if (result.data.civil_number_required) {
+          vm.civilNumberRequired = true;
+        }
+      }, function() {
+        $state.go('errorPage.notFound');
+      });
     },
     signin: function() {
       if ($scope.auth.LoginForm.$invalid) {
