@@ -21,6 +21,13 @@ export default function CustomerInvitationsTabController(
       this.tableOptions = this.getTableOptions();
       this.getSearchFilters();
       this._super();
+      this.defaultFilter = {
+        name: 'state',
+        title: 'Pending',
+        value: 'pending'
+      };
+      this.orderField = 'created';
+      this.reverseOrder = true;
     },
     getSearchFilters: function() {
       this.searchFilters = [
@@ -52,7 +59,9 @@ export default function CustomerInvitationsTabController(
         noMatchesText: 'No invitations found matching filter.',
         columns: [
           {
-            title: 'E-mail',
+            title: '<span data-order="email">E-mail <i class="fa" ng-show="controller.orderField == \'email\'"' +
+            ' ng-class="{\'fa-angle-down\' : !controller.reverseOrder,' +
+            ' \'fa-angle-up\': controller.reverseOrder}"></i></span>',
             className: 'all',
             render: function(data, type, row, meta) {
               var avatar = '<img gravatar-src="\'{gravatarSrc}\'" gravatar-size="100" alt="" class="avatar-img img-xs">'
@@ -77,14 +86,19 @@ export default function CustomerInvitationsTabController(
             }
           },
           {
-            title: 'Status',
+            title: '<span data-order="state">Status <i class="fa" ng-show="controller.orderField == \'state\'"' +
+            ' ng-class="{\'fa-angle-down\' : !controller.reverseOrder,' +
+            ' \'fa-angle-up\': controller.reverseOrder}"></i></span>',
             className: 'min-tablet-l',
             render: function(data, type, row, meta) {
               return row.state;
             }
           },
           {
-            title: 'Created at',
+            title: '<span data-order="created">Created at <i class="fa" ' +
+            'ng-show="controller.orderField == \'created\'"' +
+            ' ng-class="{\'fa-angle-down\' : !controller.reverseOrder,' +
+            ' \'fa-angle-up\': controller.reverseOrder}"></i></span>',
             className: 'min-tablet-l',
             render: function(data, type, row, meta) {
               return $filter('dateTime')(row.created);

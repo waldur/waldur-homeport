@@ -92,9 +92,8 @@
       getFilter: function() {
         return {};
       },
-      requestLoad: function(request) {
+      requestLoad: function(request, filter) {
         var vm = this;
-        var filter = {};
         if (request.search.value) {
           filter[this.tableOptions.searchFieldName] = request.search.value;
         }

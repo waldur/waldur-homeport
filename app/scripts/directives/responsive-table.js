@@ -16,6 +16,7 @@
       link: function(scope, element) {
         var options = scope.controller.tableOptions;
         var table;
+        var filter = {};
 
         scope.$watch('controller.tableOptions', function(newTableOptions) {
           if (table) {
@@ -97,6 +98,19 @@
           );
           scope.$on('$destroy', function() {
             $interval.cancel(timer);
+          });
+
+          table.on( 'click', 'thead th', function () {
+            scope.controller.orderField = $(this).children('span').data('order');
+            scope.controller.reverseOrder = !scope.controller.reverseOrder;
+            if (scope.controller.orderField) {
+              filter.o = scope.controller.reverseOrder ?
+                scope.controller.orderField :
+                '-' + scope.controller.orderField;
+            }
+
+            console.log('here plus filter', filter);
+            table.ajax.reload();
           });
         }
 
@@ -185,7 +199,7 @@
         }
 
         function serverDataTableCallback(request, drawCallback, settings) {
-          scope.controller.requestLoad(request).then(function(list) {
+          scope.controller.requestLoad(request, filter).then(function(list) {
             var total = scope.controller.getTotal();
             drawCallback({
               draw: request.draw,
