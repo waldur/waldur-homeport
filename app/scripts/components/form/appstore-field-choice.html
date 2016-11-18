@@ -1,0 +1,62 @@
+<div ng-if="$ctrl.field.required && $ctrl.field.choices.length == 0">
+    <span ng-if="$ctrl.field.name!='ssh_public_key'">
+        {{ $ctrl.field.label }} is required for provisioning resource.
+    </span>
+    <span ng-if="$ctrl.field.name =='ssh_public_key'">
+        SSH public key is required for accessing a provisioned VM.
+        You can add a key in your <a ui-sref="profile.keys">profile</a>.
+    </span>
+</div>
+<div ng-if="$ctrl.field.choices.length > 0">
+    <p class="form-control-static">
+        <a ng-click="$ctrl.modalInit($ctrl.field)">
+            {{ $ctrl.choiceDisplay[field.name] || 'Show choices' }}
+            <i class="icon fa-caret-down"></i>
+        </a>
+    </p>
+    <div class="select-image-wrapper"
+         ng-if="$ctrl.field.showChoices"
+         add-body-class="disable-scroll">
+        <div class="select-image-popup">
+            <h3>Select {{ $ctrl.field.label }}</h3>
+            <form>
+                <div class="string-field">
+                <input type="text" placeholder="Type to filter by name"
+                       ng-model="$ctrl.field.searchQuery" ng-init="$ctrl.field.searchQuery=''"
+                       class="form-control" />
+                </div>
+            </form>
+
+            <div class="appstore-templates">
+                <div class="white-box list-box">
+                    <ul class="object-list">
+                        <li class="list-item list"
+                            ng-repeat="choice in $ctrl.field.choices | filter: {'display_name': $ctrl.field.searchQuery}"
+                            ng-click="$ctrl.doChoice($ctrl.field, choice)"
+                            ng-class="{'state': $ctrl.isChosenf$ctrl.field.name, choice), 'disabled': choice.disabled}">
+                            <div ng-if="::!choice.icon" class="icon {{ ::field.icon }}"></div>
+                            <div ng-if="::choice.icon" class="icon">
+                                <img ng-src="/static/images/appstore/icon-{{ ::choice.icon }}.png">
+                            </div>
+
+                            <div class="description-{{::$ctrl.field.name}}">
+                                <div>
+                                    <p>
+                                        {{ choice.display_name }}
+                                        <span ng-if="choice.item.price"> - {{::choice.item.price | defaultCurrency}}</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="control-buttons">
+                <a class="button-apply" ng-click="$ctrl.closeModal($ctrl.field)">OK</a>
+                <a class="button-cancel" ng-click="$ctrl.closeModal($ctrl.field)">Close</a>
+                <a class="button-cancel" ng-click="$ctrl.resetChoice($ctrl.field)">Reset</a>
+            </div>
+        </div>
+    </div>
+</div>

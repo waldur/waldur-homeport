@@ -1,0 +1,19 @@
+<form class="form-horizontal">
+    <div ng-repeat="field in $ctrl.fields" class="form-group">
+        <div ng-if="$ctrl.renderLabel(field)">
+            <div class="col-sm-3 control-label">
+                <label for="{{ field.name }}" uib-tooltip="{{ field.help_text }}">
+                    <i class="fa fa-question-circle" ng-if="field.help_text"></i>
+                    <field-label field="field"></field-label>
+                </label>
+            </div>
+            <div class="col-sm-4">
+                <appstore-field field="field" model="$ctrl.model"></appstore-field>
+                <appstore-field-errors field="field" errors="$ctrl.errors"></appstore-field-errors>
+            </div>
+        </div>
+        <div ng-if="!$ctrl.renderLabel(field)" class="col-sm-offset-3 col-sm-4">
+            <appstore-field field="field" model="$ctrl.model"></appstore-field>
+        </div>
+    </div>
+</form>

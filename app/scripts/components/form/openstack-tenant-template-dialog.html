@@ -1,0 +1,51 @@
+<div class="modal-header">
+    <h3 class="modal-title">
+        Select {{ $ctrl.field.label }}
+    </h3>
+</div>
+
+<div class="modal-body">
+  <table class="table">
+    <thead>
+      <tr>
+        <th></th>
+        <th>VPC package</th>
+        <th>vCPU</th>
+        <th>RAM</th>
+        <th>Storage</th>
+        <th>Price per hour</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="package in $ctrl.packages"
+          ng-click="$ctrl.selectPackage(package)"
+          class="cursor-pointer">
+        <td>
+          <input type="radio" ng-model="$ctrl.value" ng-value="package">
+        </td>
+        <td>
+          {{ package.name }}
+          <p ng-if="package.description">
+            <small>{{ package.description }}</small>
+          </p>
+        </td>
+        <td>
+          {{ package.cores }}
+        </td>
+        <td>
+          {{ package.ram | filesize }}
+        </td>
+        <td>
+          {{ package.storage | filesize }}
+        </td>
+        <td>{{ package.price | defaultCurrency }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-default" ng-click="$ctrl.dismiss()">Cancel</button>
+    <button class="btn btn-default" ng-click="$ctrl.reset()">Reset</button>
+    <button class="btn btn-primary" ng-click="$ctrl.confirm()">Select</button>
+</div>

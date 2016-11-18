@@ -69,7 +69,10 @@
         </span>
     </div>
 
-    <div ng-include="'views/appstore/fields.html'"></div>
+    <appstore-form fields="AppStore.fields"
+                   errors="AppStore.errors"
+                   model="AppStore.instance">
+    </appstore-form>
 </section>
 
 <section class="step-3 agreement appstore-purchase" ng-if="AppStore.agreementShow && AppStore.selectedCategory.type == 'package'">

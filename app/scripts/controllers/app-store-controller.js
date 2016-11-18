@@ -346,7 +346,7 @@
           'OpenStack.Tenant': this.getOpenStackTenantFields
         };
         var key = this.serviceType + '.' + this.selectedResourceType;
-        var configurator = this.fieldConfigurators[key] || this.defaultFieldConfigurator;
+        var configurator = this.fieldConfigurators[key] || this.defaultFieldConfigurator.bind(this);
         this.fields = configurator(formOptions, validChoices);
       },
       getOpenStackTenantFields: function(formOptions, validChoices) {
@@ -359,7 +359,7 @@
           },
           {
             name: 'template',
-            type: 'choice',
+            component: 'openstackTenantTemplateField',
             required: true,
             label: 'VPC package',
             choices: validChoices.template
@@ -368,6 +368,11 @@
             name: 'description',
             type: 'text',
             label: 'Description'
+          },
+          {
+            name: 'access',
+            type: 'label',
+            label: 'Access'
           },
           {
             name: 'user_username',

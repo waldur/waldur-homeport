@@ -31,7 +31,11 @@
       if (value.indexOf && value.indexOf(ENV.currency) !== -1) {
         return value;
       }
-      return $filter('currency')(value, ENV.currency);
+      var fractionSize = 2;
+      if (value < 0.01) {
+        fractionSize = 3;
+      }
+      return $filter('currency')(value, ENV.currency, fractionSize);
     }
   }
 
