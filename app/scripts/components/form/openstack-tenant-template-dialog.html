@@ -13,7 +13,9 @@
         <th>vCPU</th>
         <th>RAM</th>
         <th>Storage</th>
-        <th>Price per hour</th>
+        <th>Daily price</th>
+        <th>Monthly price</th>
+        <th>Annual price</th>
       </tr>
     </thead>
     <tbody>
@@ -38,7 +40,9 @@
         <td>
           {{ package.storage | filesize }}
         </td>
-        <td>{{ package.price | defaultCurrency }}</td>
+        <td>{{ package.price.day | defaultCurrency }}</td>
+        <td>{{ package.price.month | defaultCurrency }}</td>
+        <td>{{ package.price.year | defaultCurrency }}</td>
       </tr>
     </tbody>
   </table>

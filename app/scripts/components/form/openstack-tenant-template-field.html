@@ -1,8 +1,8 @@
 <div class="form-control-static">
-    <span ng-if="$ctrl.field.required && $ctrl.field.choices.length == 0" class="text-danger">
+    <span ng-if="$ctrl.isMissing()" class="text-danger">
         {{ $ctrl.field.label }} is required for provisioning resource.
     </span>
-    <a ng-if="$ctrl.field.choices.length > 0" ng-click="$ctrl.openDialog()">
+    <a ng-if="$ctrl.hasChoices()" ng-click="$ctrl.openDialog()">
         {{ $ctrl.getLabel() }}
         <i class="icon fa-caret-down"></i>
     </a>
