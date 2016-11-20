@@ -16,8 +16,9 @@ export default function openstackTenantTemplateField() {
 
 // @ngInject
 class FieldController {
-  constructor($uibModal) {
+  constructor($uibModal, $filter) {
     this.$uibModal = $uibModal;
+    this.$filter = $filter;
     this.packages = this.field.choices.map(parsePackage);
   }
 
@@ -27,15 +28,6 @@ class FieldController {
 
   hasChoices() {
     return this.packages.length > 0;
-  }
-
-  getLabel() {
-    const field = this.model[this.field.name];
-    if (field && field.name) {
-      return field.name;
-    } else {
-      return 'Show choices';
-    }
   }
 
   openDialog() {
@@ -50,6 +42,21 @@ class FieldController {
       }
     });
   }
+
+  getLabel() {
+    const value = this.model[this.field.name];
+    if (!value) {
+      return 'Show choices';
+    }
+    return formatPackageDetails(this.$filter, value);
+  }
+}
+
+function formatPackageDetails($filter, value) {
+  const ram = $filter('filesize')(value.ram);
+  const storage = $filter('filesize')(value.storage);
+  const props = `${value.cores} vCPU, ${ram} RAM, ${storage} storage`;
+  return `${value.name} (${props})`;
 }
 
 function parsePackage(choice) {
