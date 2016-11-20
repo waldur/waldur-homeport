@@ -5,37 +5,29 @@
 </div>
 
 <div class="modal-body">
-    <div ng-if="::$ctrl.component">
-        <appstore-list
-            component="$ctrl.component"
-            choices="$ctrl.choices"
-            on-change="$ctrl.selectItem(value)"
-            value="$ctrl.value">
-        </appstore-list>
-    </div>
-    <div ng-if="::!$ctrl.component">
-        <div class="table-responsive">
-          <table class="table">
+    <div class="table-responsive">
+        <table class="table">
             <thead>
-              <tr>
-                <th></th>
-                <th ng-repeat="column in $ctrl.columns">{{ ::column.label }}</th>
-              </tr>
+                <tr>
+                    <th></th>
+                    <th ng-repeat="column in $ctrl.columns">
+                        {{ ::column.label }}
+                    </th>
+                </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="choice in $ctrl.choices"
-                  ng-click="$ctrl.selectItem(choice.item)"
-                  class="cursor-pointer">
-                <td>
-                  <input type="radio" ng-model="$ctrl.value" ng-value="choice.item">
-                </td>
-                <td ng-repeat="column in $ctrl.columns">
-                  {{ ::$ctrl.formatValue(column, choice) }}
-                </td>
-              </tr>
+                <tr ng-repeat="choice in $ctrl.choices"
+                    ng-click="$ctrl.selectItem(choice.item)"
+                    class="cursor-pointer">
+                    <td>
+                        <input type="radio" ng-model="$ctrl.value" ng-value="choice.item">
+                    </td>
+                    <td ng-repeat="column in $ctrl.columns">
+                        {{ ::$ctrl.formatValue(column, choice) }}
+                    </td>
+                </tr>
             </tbody>
-          </table>
-        </div>
+        </table>
     </div>
 </div>
 
