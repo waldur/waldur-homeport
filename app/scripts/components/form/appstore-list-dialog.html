@@ -18,6 +18,7 @@
             <tbody>
                 <tr ng-repeat="choice in $ctrl.choices"
                     ng-click="$ctrl.selectItem(choice.item)"
+                    ng-keyup="$event.keyCode == 13 && $ctrl.selectItem(choice.item)"
                     class="cursor-pointer">
                     <td>
                         <input type="radio" ng-model="$ctrl.value" ng-value="choice.item">
