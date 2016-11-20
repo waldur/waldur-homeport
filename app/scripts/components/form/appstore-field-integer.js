@@ -17,8 +17,10 @@ export default function appstoreFieldInteger() {
 class FildController {
   constructor() {
     this.factor = this.getFactor();
-    this.value = this.field.min || 0;
-    this.onChange();
+    if (this.field.min) {
+      this.value = this.field.min
+      this.onChange();
+    }
   }
 
   onChange() {

@@ -1,4 +1,9 @@
-import { formatFlavorDetails, formatPackageDetails, parsePackage } from './utils';
+import {
+  formatFlavorDetails,
+  formatPackageDetails,
+  parsePackage,
+  compareFlavors
+} from './utils';
 
 // @ngInject
 export default AppstoreFieldConfigurationProvider => {
@@ -191,6 +196,53 @@ export default AppstoreFieldConfigurationProvider => {
       type: 'text',
       label: 'User data',
       help_text: 'Additional data that will be added to instance on provisioning'
+    }
+  ]);
+  AppstoreFieldConfigurationProvider.register('OpenStackTenant.Volume', (formOptions, validChoices) => [
+    {
+      name: 'name',
+      label: 'Volume name',
+      type: 'string',
+      required: true,
+      max_length: 150
+    },
+    {
+      name: 'image',
+      type: 'list',
+      required: false,
+      label: 'Image',
+      choices: validChoices.image,
+      columns: [
+        {
+          name: 'name',
+          label: 'Image name'
+        },
+        {
+          name: 'min_ram',
+          label: 'Min RAM',
+          filter: 'filesize'
+        },
+        {
+          name: 'min_disk',
+          label: 'Min storage',
+          filter: 'filesize'
+        }
+      ]
+    },
+    {
+      name: 'size',
+      type: 'integer',
+      label: 'Size',
+      factor: 1024,
+      units: 'GB',
+      min: 0,
+      max: 320
+    },
+    {
+      name: 'description',
+      type: 'text',
+      label: 'Description',
+      maxlength: 500
     }
   ]);
 }

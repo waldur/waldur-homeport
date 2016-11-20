@@ -24,7 +24,6 @@ class DialogController {
     this.value = this.model[this.field.name];
     this.title = this.field.dialogTitle || `Select ${this.field.label}`;
     this.choices = this.field.choices;
-    this.component = this.field.listComponent;
     this.columns = this.field.columns;
   }
 
@@ -34,6 +33,13 @@ class DialogController {
       return value;
     }
     return this.$filter(column.filter)(value);
+  }
+
+  compareItems(a, b) {
+    if (this.field.comparator) {
+      return this.field.comparator(a, b);
+    }
+    return 0;
   }
 
   selectItem(item) {
