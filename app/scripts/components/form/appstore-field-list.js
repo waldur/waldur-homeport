@@ -51,6 +51,9 @@ class FieldController {
     if (!value) {
       return 'Show choices';
     }
-    return this.field.formatValue(this.$filter, value);
+    if (this.field.formatValue) {
+      return this.field.formatValue(this.$filter, value);
+    }
+    return value.name;
   }
 }

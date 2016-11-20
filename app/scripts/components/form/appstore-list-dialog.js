@@ -20,6 +20,10 @@ class DialogController {
     this.field = this.resolve.field;
     this.model = this.resolve.model;
     this.value = this.model[this.field.name];
+    this.title = this.field.dialogTitle || `Select ${this.field.name}`;
+    this.choices = this.field.choices;
+    this.component = this.field.listComponent;
+    this.columns = this.field.columns;
   }
 
   selectItem(item) {

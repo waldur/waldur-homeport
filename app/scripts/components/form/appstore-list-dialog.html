@@ -1,16 +1,40 @@
 <div class="modal-header">
     <h3 class="modal-title">
-        {{ ::$ctrl.field.dialogTitle }}
+        {{ ::$ctrl.title }}
     </h3>
 </div>
 
 <div class="modal-body">
-  <appstore-list
-    component="$ctrl.field.listComponent"
-    choices="$ctrl.field.choices"
-    on-change="$ctrl.selectItem(value)"
-    value="$ctrl.value">
-  </appstore-list>
+    <div ng-if="::$ctrl.component">
+        <appstore-list
+            component="$ctrl.component"
+            choices="$ctrl.choices"
+            on-change="$ctrl.selectItem(value)"
+            value="$ctrl.value">
+        </appstore-list>
+    </div>
+    <div ng-if="::!$ctrl.component">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th></th>
+                <th ng-repeat="column in $ctrl.columns">{{ ::column.label }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="choice in $ctrl.choices"
+                  ng-click="$ctrl.selectItem(choice.item)"
+                  class="cursor-pointer">
+                <td>
+                  <input type="radio" ng-model="$ctrl.value" ng-value="choice.item">
+                </td>
+                <td ng-repeat="column in $ctrl.columns">{{ ::choice.item[column.name] }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    </div>
 </div>
 
 <div class="modal-footer">

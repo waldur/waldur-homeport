@@ -1,41 +1,43 @@
-<table class="table">
-  <thead>
-    <tr>
-      <th></th>
-      <th>VPC package</th>
-      <th>Max vCPU</th>
-      <th>Max RAM</th>
-      <th>Max storage</th>
-      <th>1 day</th>
-      <th>1 month</th>
-      <th>1 year</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr ng-repeat="package in $ctrl.choices"
-        ng-click="$ctrl.onChange({value: package})"
-        class="cursor-pointer">
-      <td>
-        <input type="radio" ng-model="$ctrl.value" ng-value="package">
-      </td>
-      <td>
-        {{ package.name }}
-        <p ng-if="package.description">
-          <small>{{ package.description }}</small>
-        </p>
-      </td>
-      <td>
-        {{ package.cores }}
-      </td>
-      <td>
-        {{ package.ram | filesize }}
-      </td>
-      <td>
-        {{ package.storage | filesize }}
-      </td>
-      <td>{{ package.price.day | defaultCurrency }}</td>
-      <td>{{ package.price.month | defaultCurrency }}</td>
-      <td>{{ package.price.year | defaultCurrency }}</td>
-    </tr>
-  </tbody>
-</table>
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th></th>
+        <th>VPC package</th>
+        <th>Max vCPU</th>
+        <th>Max RAM</th>
+        <th>Max storage</th>
+        <th>1 day</th>
+        <th>1 month</th>
+        <th>1 year</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="package in $ctrl.choices"
+          ng-click="$ctrl.onChange({value: package})"
+          class="cursor-pointer">
+        <td>
+          <input type="radio" ng-model="$ctrl.value" ng-value="package">
+        </td>
+        <td>
+          {{ package.name }}
+          <p ng-if="package.description">
+            <small>{{ package.description }}</small>
+          </p>
+        </td>
+        <td>
+          {{ package.cores }}
+        </td>
+        <td>
+          {{ package.ram | filesize }}
+        </td>
+        <td>
+          {{ package.storage | filesize }}
+        </td>
+        <td>{{ package.price.day | defaultCurrency }}</td>
+        <td>{{ package.price.month | defaultCurrency }}</td>
+        <td>{{ package.price.year | defaultCurrency }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

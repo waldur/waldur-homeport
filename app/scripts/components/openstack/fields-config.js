@@ -57,10 +57,11 @@ export default AppstoreFieldConfigurationProvider => {
     },
     {
       name: 'image',
-      type: 'choice',
+      type: 'list',
       required: true,
       label: 'Image',
-      choices: validChoices.image
+      choices: validChoices.image,
+      listComponent: 'openstackImageList'
     },
     {
       name: 'flavor',
@@ -93,9 +94,19 @@ export default AppstoreFieldConfigurationProvider => {
     },
     {
       name: 'ssh_public_key',
-      type: 'choice',
+      type: 'list',
       label: 'SSH public key',
-      choices: validChoices.ssh_public_key
+      choices: validChoices.ssh_public_key,
+      columns: [
+        {
+          name: 'name',
+          label: 'Name'
+        },
+        {
+          name: 'fingerprint',
+          label: 'Fingerprint'
+        }
+      ]
     },
     {
       name: 'skip_external_ip_assignment',
