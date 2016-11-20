@@ -53,7 +53,7 @@ class FieldController {
 }
 
 function parsePackage(choice) {
-  /* Output is list of items which have following format:
+  /* Output is item with the following format:
   {
     "url": "https://example.com/api/package-templates/2/",
     "name": "Minimal VPC package",

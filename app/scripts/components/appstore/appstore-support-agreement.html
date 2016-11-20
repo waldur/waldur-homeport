@@ -1,0 +1,50 @@
+<section class="step-2">
+    <div class="step-title">
+        <span>Choose package</span>
+    </div>
+
+    <div class="appstore-templates">
+        <div class="appstore-template appstore-package"
+             ng-repeat="package in AppStore.selectedCategory.packages"
+             ng-click="AppStore.selectSupportPackage(package)"
+             ng-class="{'state': AppStore.selectedPackage == package}">
+            <div class="appstore-package-row">
+                <div class="appstore-package-cell">{{ package.name }}</div>
+                <div class="appstore-package-cell">{{ package.description }}</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section ng-if="AppStore.agreementShow" class="step-3 agreement appstore-purchase">
+    <div class="step-title"><span>Sign a support agreement</span></div>
+    <div class="step-content">
+        <ul>
+            <li>
+                <div class="item-title">1. Check terms</div>
+                <ul>
+                    <li>
+                        <div class="item-name">Monthly base price:</div>
+                        <div class="item-value">{{ AppStore.selectedPackage.base_rate | defaultCurrency }}</div>
+                        <div class="clear"></div>
+                    </li>
+                    <li>
+                        <div class="item-name">Hour price:</div>
+                        <div class="item-value">{{ AppStore.selectedPackage.hour_rate | defaultCurrency }}</div>
+                        <div class="clear"></div>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <div class="item-title">2. Read through terms and conditions</div>
+                <div class="conditions" ng-bind="AppStore.selectedPackage.terms"></div>
+            </li>
+        </ul>
+    </div>
+    <div class="text-center">
+        <button class="btn btn-primary" ng-class="{'disabled': !AppStore.selectedPackage}" submit-button="AppStore.signContract()">
+            <i class="fa fa-shopping-cart"></i>
+            Submit SLA request
+        </button>
+    </div>
+</section>

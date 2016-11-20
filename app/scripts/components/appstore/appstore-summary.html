@@ -10,7 +10,7 @@
     <ul class="ap-aside-block">
         <li ng-repeat="item in AppStore.priceItems">
             <div class="descr">
-                <span>{{ item.type[0].toUpperCase() + item.type.slice(1) }}</span>
+                <span>{{ item.type | titleCase }}</span>
                 <span>{{ item.name }}</span>
             </div>
 
