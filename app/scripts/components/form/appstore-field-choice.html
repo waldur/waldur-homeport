@@ -33,7 +33,7 @@
                         <li class="list-item list"
                             ng-repeat="choice in $ctrl.field.choices | filter: {'display_name': $ctrl.field.searchQuery}"
                             ng-click="$ctrl.doChoice($ctrl.field, choice)"
-                            ng-class="{'state': $ctrl.isChosenf$ctrl.field.name, choice), 'disabled': choice.disabled}">
+                            ng-class="{'state': $ctrl.isChosen($ctrl.field.name, choice), 'disabled': choice.disabled}">
                             <div ng-if="::!choice.icon" class="icon {{ ::field.icon }}"></div>
                             <div ng-if="::choice.icon" class="icon">
                                 <img ng-src="/static/images/appstore/icon-{{ ::choice.icon }}.png">

@@ -12,6 +12,7 @@ import invoicesModule from './components/invoices/module';
 import authModule from './components/auth/module';
 import appstoreModule from './components/appstore/module';
 import formModule from './components/form/module';
+import openstackModule from './components/openstack/module';
 
 const module = angular.module('ncsaas');
 
@@ -29,3 +30,4 @@ invoicesModule(module);
 authModule(module);
 appstoreModule(module);
 formModule(module);
+openstackModule(module);

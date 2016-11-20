@@ -69,6 +69,7 @@
       '$filter',
       'ncServiceUtils',
       'resourceUtils',
+      'AppstoreFieldConfiguration',
       AppStoreController]);
 
   function AppStoreController(
@@ -94,7 +95,8 @@
     $scope,
     $filter,
     ncServiceUtils,
-    resourceUtils) {
+    resourceUtils,
+    AppstoreFieldConfiguration) {
     var controllerScope = this;
     var Controller = baseControllerAddClass.extend({
       UNIQUE_FIELDS: {
@@ -342,53 +344,9 @@
         }
       },
       setFields: function(formOptions, validChoices) {
-        this.fieldConfigurators = {
-          'OpenStack.Tenant': this.getOpenStackTenantFields
-        };
         var key = this.serviceType + '.' + this.selectedResourceType;
-        var configurator = this.fieldConfigurators[key] || this.defaultFieldConfigurator.bind(this);
+        var configurator = AppstoreFieldConfiguration[key] || this.defaultFieldConfigurator.bind(this);
         this.fields = configurator(formOptions, validChoices);
-      },
-      getOpenStackTenantFields: function(formOptions, validChoices) {
-        return [
-          {
-            name: 'name',
-            type: 'string',
-            required: true,
-            label: 'Tenant name'
-          },
-          {
-            name: 'template',
-            component: 'openstackTenantTemplateField',
-            required: true,
-            label: 'VPC package',
-            choices: validChoices.template
-          },
-          {
-            name: 'description',
-            type: 'text',
-            label: 'Description'
-          },
-          {
-            name: 'access',
-            type: 'label',
-            label: 'Access'
-          },
-          {
-            name: 'user_username',
-            type: 'string',
-            label: 'Initial admin username',
-            placeholder: '<generated username>',
-            help_text: 'Leave blank if you want admin username to be auto-generated'
-          },
-          {
-            name: 'user_password',
-            type: 'password',
-            label: 'Initial admin password',
-            placeholder: '<generated password>',
-            help_text: 'Leave blank if you want admin password to be auto-generated'
-          }
-        ];
       },
       defaultFieldConfigurator: function(formOptions, validChoices) {
         var fields = [];

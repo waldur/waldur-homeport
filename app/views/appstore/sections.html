@@ -1,3 +1,4 @@
+<div class="wrapper wrapper-content">
 <div visible="compare"
      ng-if="AppStore.showCompare.indexOf(AppStore.selectedCategory.name) !== -1">
     <a ui-sref="compare.compare">
@@ -6,7 +7,7 @@
     </a>
 </div>
 
-<section class="step-2" ng-if="AppStore.secondStep && AppStore.selectedCategory.type == 'provider'">
+<section class="step-2" ng-if="AppStore.secondStep">
     <div class="step-title">
         <span>Choose provider</span>
     </div>
@@ -52,8 +53,17 @@
                    errors="AppStore.errors"
                    model="AppStore.instance">
     </appstore-form>
+    <pre>{{ AppStore.fields|json }}</pre>
+    <pre>{{ AppStore.instance|json }}</pre>
 </section>
-
-<div ng-if="AppStore.selectedCategory.type == 'package'">
-    <appstore-support-agreement></appstore-support-agreement>
 </div>
+
+<appstore-summary></appstore-summary>
+
+<section ng-if="AppStore.selectedResourceType" title="{{ AppStore.getTooltip() }}" class="text-center">
+    <button class="btn btn-primary" ng-class="{'disabled': !AppStore.canSave()}" submit-button="AppStore.save()">
+        <i class="fa fa-shopping-cart" ng-if="AppStore.enablePurchaseCostDisplay"></i>
+        {{ AppStore.enablePurchaseCostDisplay ? 'Purchase' : 'Create' }}
+    </button>
+    <button class="btn btn-default" cancel-button>Cancel</button>
+</section>

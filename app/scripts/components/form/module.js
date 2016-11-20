@@ -10,8 +10,6 @@ import appstoreFieldErrors from './appstore-field-errors';
 import appstoreFieldLabel from './appstore-field-label';
 import fieldLabel from './field-label';
 import helpicon from './help-icon';
-import openstackTenantTemplateField from './openstack-tenant-template-field';
-import openstackTenantTemplateDialog from './openstack-tenant-template-dialog';
 
 export default module => {
   module.directive('appstoreForm', appstoreForm);
@@ -26,6 +24,4 @@ export default module => {
   module.directive('appstoreFieldLabel', appstoreFieldLabel);
   module.directive('fieldLabel', fieldLabel);
   module.directive('helpicon', helpicon);
-  module.directive('openstackTenantTemplateField', openstackTenantTemplateField);
-  module.directive('openstackTenantTemplateDialog', openstackTenantTemplateDialog);
 }
