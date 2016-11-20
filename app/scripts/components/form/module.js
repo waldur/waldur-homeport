@@ -8,6 +8,10 @@ import appstoreFieldBoolean from './appstore-field-boolean';
 import appstoreFieldChoice from './appstore-field-choice';
 import appstoreFieldErrors from './appstore-field-errors';
 import appstoreFieldLabel from './appstore-field-label';
+import appstoreFieldList from './appstore-field-list';
+import appstoreList from './appstore-list';
+import appstoreListDialog from './appstore-list-dialog';
+
 import fieldLabel from './field-label';
 import helpicon from './help-icon';
 
@@ -22,6 +26,9 @@ export default module => {
   module.directive('appstoreFieldChoice', appstoreFieldChoice);
   module.directive('appstoreFieldErrors', appstoreFieldErrors);
   module.directive('appstoreFieldLabel', appstoreFieldLabel);
+  module.directive('appstoreFieldList', appstoreFieldList);
+  module.directive('appstoreList', appstoreList);
+  module.directive('appstoreListDialog', appstoreListDialog);
   module.directive('fieldLabel', fieldLabel);
   module.directive('helpicon', helpicon);
 }

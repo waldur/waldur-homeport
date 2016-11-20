@@ -1,6 +1,6 @@
-import template from './openstack-tenant-template-dialog.html';
+import template from './appstore-list-dialog.html';
 
-export default function openstackTenantTemplateDialog() {
+export default function appstoreListDialog() {
   return {
     restrict: 'E',
     template: template,
@@ -19,11 +19,10 @@ class DialogController {
   constructor() {
     this.field = this.resolve.field;
     this.model = this.resolve.model;
-    this.packages = this.resolve.packages;
     this.value = this.model[this.field.name];
   }
 
-  selectPackage(item) {
+  selectItem(item) {
     this.value = item;
   }
 

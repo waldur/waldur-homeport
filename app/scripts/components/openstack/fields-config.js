@@ -1,3 +1,5 @@
+import { formatFlavorDetails, formatPackageDetails, parsePackage } from './utils';
+
 // @ngInject
 export default AppstoreFieldConfigurationProvider => {
   AppstoreFieldConfigurationProvider.register('OpenStack.Tenant', (formOptions, validChoices) => [
@@ -9,10 +11,15 @@ export default AppstoreFieldConfigurationProvider => {
     },
     {
       name: 'template',
-      component: 'openstackTenantTemplateField',
+      type: 'list',
       required: true,
       label: 'VPC package',
-      choices: validChoices.template
+      choices: validChoices.template,
+      listComponent: 'openstackTemplateList',
+      dialogTitle: 'Select Virtual Private Cloud package',
+      dialogSize: 'lg',
+      formatValue: formatPackageDetails,
+      parseChoices: parsePackage
     },
     {
       name: 'description',
@@ -57,10 +64,13 @@ export default AppstoreFieldConfigurationProvider => {
     },
     {
       name: 'flavor',
-      type: 'choice',
+      type: 'list',
       required: true,
       label: 'Flavor',
-      choices: validChoices.flavor
+      choices: validChoices.flavor,
+      listComponent: 'openstackFlavorList',
+      dialogTitle: 'Select OpenStack flavor',
+      formatValue: formatFlavorDetails
     },
     {
       name: 'system_volume_size',

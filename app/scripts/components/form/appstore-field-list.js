@@ -1,7 +1,6 @@
-import template from './openstack-tenant-template-field.html';
-import { formatPackageDetails, parsePackage } from './utils';
+import template from './appstore-field-list.html';
 
-export default function openstackTenantTemplateField() {
+export default function appstoreFieldList() {
   return {
     restrict: 'E',
     template: template,
@@ -20,7 +19,11 @@ class FieldController {
   constructor($uibModal, $filter) {
     this.$uibModal = $uibModal;
     this.$filter = $filter;
-    this.packages = this.field.choices.map(parsePackage);
+
+    if (this.field.parseChoices) {
+      const choices = this.field.choices.map(this.field.parseChoices);
+      this.field = angular.extend({}, this.field, {choices});
+    }
   }
 
   renderWarning() {
@@ -28,19 +31,18 @@ class FieldController {
   }
 
   hasChoices() {
-    return this.packages.length > 0;
+    return this.field.choices.length > 0;
   }
 
   openDialog() {
     const vm = this;
     this.$uibModal.open({
-      component: 'openstackTenantTemplateDialog',
-      size: 'lg',
+      component: 'appstoreListDialog',
       resolve: {
         field: () => vm.field,
-        model: () => vm.model,
-        packages: () => vm.packages
-      }
+        model: () => vm.model
+      },
+      size: vm.field.dialogSize
     });
   }
 
@@ -49,6 +51,6 @@ class FieldController {
     if (!value) {
       return 'Show choices';
     }
-    return formatPackageDetails(this.$filter, value);
+    return this.field.formatValue(this.$filter, value);
   }
 }

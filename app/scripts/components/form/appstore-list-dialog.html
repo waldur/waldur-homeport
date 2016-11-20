@@ -1,0 +1,20 @@
+<div class="modal-header">
+    <h3 class="modal-title">
+        {{ ::$ctrl.field.dialogTitle }}
+    </h3>
+</div>
+
+<div class="modal-body">
+  <appstore-list
+    component="$ctrl.field.listComponent"
+    choices="$ctrl.field.choices"
+    on-change="$ctrl.selectItem(value)"
+    value="$ctrl.value">
+  </appstore-list>
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-default" ng-click="$ctrl.dismiss()">Cancel</button>
+    <button class="btn btn-default" ng-click="$ctrl.reset()">Reset</button>
+    <button class="btn btn-primary" ng-click="$ctrl.confirm()">Select</button>
+</div>

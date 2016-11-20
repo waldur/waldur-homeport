@@ -1,3 +1,10 @@
+export function formatFlavorDetails($filter, value) {
+  const ram = $filter('filesize')(value.ram);
+  const storage = $filter('filesize')(value.disk);
+  const props = `${value.cores} vCPU, ${ram} RAM, ${storage} storage`;
+  return `${value.name} (${props})`;
+}
+
 export function formatPackageDetails($filter, value) {
   const ram = $filter('filesize')(value.ram);
   const storage = $filter('filesize')(value.storage);

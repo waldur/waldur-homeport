@@ -47,4 +47,15 @@
     }
   });
 
+  angular.module('ncsaas').filter('snakeCase', function() {
+    var SNAKE_CASE_REGEXP = /[A-Z]/g;
+    var separator = '-';
+
+    return function(input) {
+      return input.replace(SNAKE_CASE_REGEXP, function(letter, pos) {
+        return (pos ? separator : '') + letter.toLowerCase();
+      });
+    }
+  });
+
 })();
