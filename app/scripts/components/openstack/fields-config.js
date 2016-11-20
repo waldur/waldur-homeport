@@ -15,11 +15,45 @@ export default AppstoreFieldConfigurationProvider => {
       required: true,
       label: 'VPC package',
       choices: validChoices.template,
-      listComponent: 'openstackTemplateList',
       dialogTitle: 'Select Virtual Private Cloud package',
       dialogSize: 'lg',
       formatValue: formatPackageDetails,
-      parseChoices: parsePackage
+      parseChoices: parsePackage,
+      columns: [
+        {
+          name: 'name',
+          label: 'VPC package'
+        },
+        {
+          name: 'cores',
+          label: 'Max vCPU'
+        },
+        {
+          name: 'ram',
+          label: 'Max RAM',
+          filter: 'filesize'
+        },
+        {
+          name: 'storage',
+          label: 'Max storage',
+          filter: 'filesize'
+        },
+        {
+          name: 'dailyPrice',
+          label: '1 day',
+          filter: 'defaultCurrency'
+        },
+        {
+          name: 'monthlyPrice',
+          label: '1 month',
+          filter: 'defaultCurrency'
+        },
+        {
+          name: 'annualPrice',
+          label: '1 year',
+          filter: 'defaultCurrency'
+        }
+      ]
     },
     {
       name: 'description',
@@ -61,7 +95,22 @@ export default AppstoreFieldConfigurationProvider => {
       required: true,
       label: 'Image',
       choices: validChoices.image,
-      listComponent: 'openstackImageList'
+      columns: [
+        {
+          name: 'name',
+          label: 'Image name'
+        },
+        {
+          name: 'min_ram',
+          label: 'Min RAM',
+          filter: 'filesize'
+        },
+        {
+          name: 'min_disk',
+          label: 'Min storage',
+          filter: 'filesize'
+        }
+      ]
     },
     {
       name: 'flavor',
@@ -69,9 +118,27 @@ export default AppstoreFieldConfigurationProvider => {
       required: true,
       label: 'Flavor',
       choices: validChoices.flavor,
-      listComponent: 'openstackFlavorList',
-      dialogTitle: 'Select OpenStack flavor',
-      formatValue: formatFlavorDetails
+      formatValue: formatFlavorDetails,
+      columns: [
+        {
+          name: 'name',
+          label: 'Flavor name'
+        },
+        {
+          name: 'cores',
+          label: 'vCPU'
+        },
+        {
+          name: 'ram',
+          label: 'RAM',
+          filter: 'filesize'
+        },
+        {
+          name: 'disk',
+          label: 'Storage',
+          filter: 'filesize'
+        }
+      ]
     },
     {
       name: 'system_volume_size',

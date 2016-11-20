@@ -29,7 +29,9 @@
                 <td>
                   <input type="radio" ng-model="$ctrl.value" ng-value="choice.item">
                 </td>
-                <td ng-repeat="column in $ctrl.columns">{{ ::choice.item[column.name] }}</td>
+                <td ng-repeat="column in $ctrl.columns">
+                  {{ ::$ctrl.formatValue(column, choice) }}
+                </td>
               </tr>
             </tbody>
           </table>

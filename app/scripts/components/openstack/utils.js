@@ -32,14 +32,13 @@ export function parsePackage(choice) {
     return map;
   }, {});
   var dailyPrice = choice.item.price * 24;
-  return angular.extend({
+  const item = angular.extend({
     url: choice.item.url,
     name: choice.item.name,
     description: choice.item.description,
-    price: {
-      day: dailyPrice,
-      month: dailyPrice * 30,
-      year: dailyPrice * 365,
-    }
+    dailyPrice: dailyPrice,
+    monthlyPrice: dailyPrice * 30,
+    annualPrice: dailyPrice * 365
   }, components);
+  return {item};
 }
