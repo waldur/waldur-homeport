@@ -35,6 +35,14 @@
     }
   }
 
+  angular.module('ncsaas').filter('shortDate', function() {
+    return function(input) {
+      if (input) {
+        return moment(input).format('YYYY-MM-DD');
+      }
+    }
+  });
+
   angular.module('ncsaas').filter('dateTime', function() {
     return function(input) {
       if (input) {
