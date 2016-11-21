@@ -210,6 +210,11 @@
           return;
         }
 
+        if (category.requireStaffOwnerManager && !currentStateService.getStaffOwnerManager()) {
+          $state.go('errorPage.notFound');
+          return;
+        }
+
         this.selectedCategory = category;
         this.secondStep = true;
         this.serviceMetadata = {};

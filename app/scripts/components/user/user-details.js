@@ -52,26 +52,28 @@ function UserDetailsController($scope, $stateParams, usersService,
         link: "users.keys({uuid: $ctrl.context.user.uuid})"
     }
   ];
-  var prevWorkspace = stateUtilsService.getPrevWorkspace() || 'organization';
   var dashboardTab;
-  if (prevWorkspace === 'project') {
-    dashboardTab = {
-      label: "Back to project",
-      icon: "fa-arrow-left",
-      action: stateUtilsService.goBack
-    };
-  } else {
-    dashboardTab = {
-      label: "Back to organization",
-      icon: "fa-arrow-left",
-      link: "dashboard.index"
-    };
+  var prevWorkspace = stateUtilsService.getPrevWorkspace() || 'organization';
+  if (currentStateService.getHasCustomer()) {
+    if (prevWorkspace === 'project') {
+      dashboardTab = {
+        label: "Back to project",
+        icon: "fa-arrow-left",
+        action: stateUtilsService.goBack
+      };
+    } else if (currentStateService.getStaffOwnerManager()) {
+      dashboardTab = {
+        label: "Back to organization",
+        icon: "fa-arrow-left",
+        link: "dashboard.index"
+      };
+    }
   }
 
   function updateSidebar() {
     usersService.getCurrentUser().then(function(user) {
       if (angular.isUndefined($stateParams.uuid) || $stateParams.uuid === user.uuid) {
-        if (currentStateService.getHasCustomer()) {
+        if (dashboardTab) {
           $scope.items = [dashboardTab].concat(PRIVATE_USER_TABS);
         } else {
           $scope.items = PRIVATE_USER_TABS;
@@ -80,7 +82,7 @@ function UserDetailsController($scope, $stateParams, usersService,
         $scope.context = {user: user};
       } else {
         usersService.$get($stateParams.uuid).then(function(user) {
-          if (currentStateService.getHasCustomer()) {
+          if (dashboardTab) {
             $scope.items = [dashboardTab].concat(publicTabs);
           } else {
             $scope.items = publicTabs;
@@ -92,5 +94,6 @@ function UserDetailsController($scope, $stateParams, usersService,
     });
   }
   $scope.$on('hasCustomer', updateSidebar);
+  $scope.$on('staffOwnerManager', updateSidebar);
   updateSidebar();
 }
