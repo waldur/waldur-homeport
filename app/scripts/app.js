@@ -126,8 +126,8 @@
     return CustomerUtilsService.getStoredCustomer();
   }
 
-  function getCurrentProject(CustomerUtilsService, $stateParams) {
-    return CustomerUtilsService.getCurrentProject($stateParams.uuid);
+  function getCurrentProject(CustomerUtilsService, $state) {
+    return CustomerUtilsService.getCurrentProject($state);
   }
 
   function decorateStates($stateProvider) {

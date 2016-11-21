@@ -1,34 +1,37 @@
 // @ngInject
 export default function actionUtilsService(
   ncUtilsFlash, $rootScope, $http, $q, $uibModal, ncUtils, resourcesService) {
-  var vm = this;
   this.loadActions = function(model) {
     resourcesService.cleanOptionsCache(model.url);
-    return resourcesService.getOption(model.url).then(function(response) {
-      var actions = {};
-      var empty = true;
-      angular.forEach(response.actions, function(action, name) {
-        if (typeof action.title == 'string') {
-          actions[name] = action;
-          empty = false;
-          vm.adjustTitle(action);
+    return resourcesService.getOption(model.url).then(response => {
+      const order = this.getActionsOrder(model.resource_type) || Object.keys(response.actions);
+      return order.reduce((result, name) => {
+        const action = response.actions[name];
+        if (!action.hasOwnProperty('title')) {
+          return result;
         }
-        if (action.fields && action.fields.delete_volumes) {
-          action.fields.delete_volumes.default_value = true;
-        }
-      });
-      if (!empty) {
-        return actions;
-      }
+        result[name] = action;
+        this.adjustAction(action);
+        return result;
+      }, {});
     });
   };
 
-  this.adjustTitle = function(action) {
+  this.getActionsOrder = function(resource_type) {
+    if (resource_type === 'OpenStack.Tenant') {
+      return ['create_service', 'pull', 'destroy'];
+    }
+  };
+
+  this.adjustAction = function(action) {
     var mapping = {
       'Create Service': 'Create provider',
       'Pull': 'Synchronise'
     }
     action.title = mapping[action.title] || action.title;
+    if (action.fields && action.fields.delete_volumes) {
+      action.fields.delete_volumes.default_value = true;
+    }
   };
 
   this.getSelectList = function(fields) {
