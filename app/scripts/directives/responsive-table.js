@@ -64,11 +64,11 @@
             columns.push(actionColumn);
           }
 
-          var table = $(element.find('table')[0]).DataTable({
+          var table = window.table = $(element.find('table')[0]).DataTable({
             responsive: true,
             processing: true,
             serverSide: true,
-            ordering: false,
+            ordering: !!scope.controller.enableOrdering,
             autoWidth: false,
             ajax: serverDataTableCallback,
             dom: '<"html5buttons"B>lTfgitp',
@@ -98,18 +98,6 @@
           );
           scope.$on('$destroy', function() {
             $interval.cancel(timer);
-          });
-
-          table.on( 'click', 'thead th', function () {
-            scope.controller.orderField = $(this).children('span').data('order');
-            scope.controller.reverseOrder = !scope.controller.reverseOrder;
-            if (scope.controller.orderField) {
-              filter.o = scope.controller.reverseOrder ?
-                scope.controller.orderField :
-                '-' + scope.controller.orderField;
-            }
-
-            table.ajax.reload();
           });
         }
 
@@ -198,6 +186,10 @@
         }
 
         function serverDataTableCallback(request, drawCallback, settings) {
+          request.order.forEach(function(orderItem) {
+            var orderField = options.columns[orderItem.column].orderField;
+            filter.o = orderItem.dir === 'asc' ? orderField : '-' + orderField;
+          });
           scope.controller.requestLoad(request, filter).then(function(list) {
             var total = scope.controller.getTotal();
             drawCallback({

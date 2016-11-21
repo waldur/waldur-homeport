@@ -21,6 +21,7 @@ export default function CustomerInvitationsTabController(
       this.tableOptions = this.getTableOptions();
       this.getSearchFilters();
       this._super();
+      this.enableOrdering = true;
       this.defaultFilter = {
         name: 'state',
         title: 'Pending',
@@ -59,10 +60,9 @@ export default function CustomerInvitationsTabController(
         noMatchesText: 'No invitations found matching filter.',
         columns: [
           {
-            title: '<span data-order="email">E-mail <i class="fa" ng-show="controller.orderField == \'email\'"' +
-            ' ng-class="{\'fa-angle-down\' : !controller.reverseOrder,' +
-            ' \'fa-angle-up\': controller.reverseOrder}"></i></span>',
+            title: 'Email',
             className: 'all',
+            orderField: 'email',
             render: function(data, type, row, meta) {
               var avatar = '<img gravatar-src="\'{gravatarSrc}\'" gravatar-size="100" alt="" class="avatar-img img-xs">'
                 .replace('{gravatarSrc}', row.email);
@@ -72,6 +72,7 @@ export default function CustomerInvitationsTabController(
           {
             title: 'Role',
             className: 'min-tablet-l',
+            orderable: false,
             render: function(data, type, row, meta) {
               if (row.customer) {
                 return ENV.roles.owner;
@@ -86,20 +87,17 @@ export default function CustomerInvitationsTabController(
             }
           },
           {
-            title: '<span data-order="state">Status <i class="fa" ng-show="controller.orderField == \'state\'"' +
-            ' ng-class="{\'fa-angle-down\' : !controller.reverseOrder,' +
-            ' \'fa-angle-up\': controller.reverseOrder}"></i></span>',
+            title: 'Status',
             className: 'min-tablet-l',
+            orderField: 'state',
             render: function(data, type, row, meta) {
               return row.state;
             }
           },
           {
-            title: '<span data-order="created">Created at <i class="fa" ' +
-            'ng-show="controller.orderField == \'created\'"' +
-            ' ng-class="{\'fa-angle-down\' : !controller.reverseOrder,' +
-            ' \'fa-angle-up\': controller.reverseOrder}"></i></span>',
+            title: 'Created at',
             className: 'min-tablet-l',
+            orderField: 'created',
             render: function(data, type, row, meta) {
               return $filter('dateTime')(row.created);
             }
@@ -107,6 +105,7 @@ export default function CustomerInvitationsTabController(
           {
             title: 'Expires at',
             className: 'min-tablet-l',
+            orderable: false,
             render: function(data, type, row, meta) {
               return $filter('dateTime')(row.expires);
             }
@@ -114,6 +113,7 @@ export default function CustomerInvitationsTabController(
           {
             title: 'URL',
             className: 'none',
+            orderable: false,
             render: function(data, type, row, meta) {
               return row.link_template.replace('{uuid}', row.uuid);
             }
