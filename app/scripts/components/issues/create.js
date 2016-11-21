@@ -26,7 +26,7 @@ function IssueCreateController(issuesService, baseControllerAddClass, $statePara
       this.descriptionPlaceholder = 'Problem description';
       this.type = $stateParams.type;
       this.summaryLabel = 'Ticket name';
-      this.submitTitle = 'Sibmit';
+      this.submitTitle = 'Create';
       if (this.type === 'remove_user') {
         this.issue.summary = 'Account removal';
         this.title = 'Account removal';
