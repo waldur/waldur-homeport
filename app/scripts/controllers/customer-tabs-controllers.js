@@ -388,6 +388,7 @@
     .controller('CustomerDeleteTabController', [
       'baseControllerClass',
       'customersService',
+      'paymentDetailsService',
       'usersService',
       'currentStateService',
       '$state',
@@ -399,6 +400,7 @@
   function CustomerDeleteTabController(
     baseControllerClass,
     customersService,
+    paymentDetailsService,
     usersService,
     currentStateService,
     $state,
@@ -410,6 +412,7 @@
       init: function() {
         this.controllerScope = controllerScope;
         this._super();
+        this.paymentDetails = null;
         this.loadInitial();
       },
       loadInitial: function() {
@@ -417,11 +420,18 @@
         vm.loading = true;
         return currentStateService.getCustomer().then(function(customer) {
           vm.customer = customer;
+          vm.getPaymentDetails();
           return vm.checkCanRemoveCustomer(customer).then(function(result) {
             vm.canRemoveCustomer = result;
           });
         }).finally(function() {
           vm.loading = false;
+        });
+      },
+      getPaymentDetails: function() {
+        var vm = this;
+        paymentDetailsService.$get(vm.customer.url).then(function(result) {
+          vm.paymentDetails = result;
         });
       },
       checkCanRemoveCustomer: function(customer) {
