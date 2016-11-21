@@ -97,7 +97,7 @@ export default function CustomerInvitationsTabController(
             className: 'min-tablet-l',
             orderField: 'created',
             render: function(data, type, row, meta) {
-              return $filter('dateTime')(row.created);
+              return $filter('shortDate')(row.created);
             }
           },
           {
@@ -105,7 +105,7 @@ export default function CustomerInvitationsTabController(
             className: 'min-tablet-l',
             orderable: false,
             render: function(data, type, row, meta) {
-              return $filter('dateTime')(row.expires);
+              return $filter('shortDate')(row.expires);
             }
           },
           {
