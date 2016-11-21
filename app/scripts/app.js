@@ -126,10 +126,6 @@
     return CustomerUtilsService.getStoredCustomer();
   }
 
-  function getCurrentProject(CustomerUtilsService, $stateParams) {
-    return CustomerUtilsService.getCurrentProject($stateParams.uuid);
-  }
-
   function decorateStates($stateProvider) {
     decorateState($stateProvider, function(state) {
       if (state.data && state.data.auth) {
@@ -143,7 +139,6 @@
 
       if (state.data && state.data.workspace === 'project') {
         state.resolve.currentCustomer = getStoredCustomer;
-        state.resolve.currentProject = getCurrentProject;
       }
     });
   }

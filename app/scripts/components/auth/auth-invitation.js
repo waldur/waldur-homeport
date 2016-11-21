@@ -22,9 +22,13 @@ function AuthInvitationController(
         $state.go('errorPage.notFound');
         return;
       }
+      var vm = this;
       var invitationUUID = $state.params.uuid;
-      this.setInvitationToken(invitationUUID);
-      this._super();
+      invitationService.executeAction(invitationUUID, 'check').then(function() {
+        vm.setInvitationToken(invitationUUID);
+      }, function() {
+        $state.go('errorPage.notFound');
+      });
     },
     setInvitationToken: function(invitationUUID) {
       invitationService.setInvitationToken(invitationUUID);
