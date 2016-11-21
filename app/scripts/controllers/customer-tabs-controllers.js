@@ -430,8 +430,10 @@
       },
       getPaymentDetails: function() {
         var vm = this;
-        paymentDetailsService.$get(vm.customer.url).then(function(result) {
-          vm.paymentDetails = result;
+        paymentDetailsService.getList({customer: vm.customer.uuid}).then(function(result) {
+          if (result) {
+            vm.paymentDetails = result[0];
+          }
         });
       },
       checkCanRemoveCustomer: function(customer) {
