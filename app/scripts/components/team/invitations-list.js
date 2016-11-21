@@ -56,7 +56,7 @@ export default function CustomerInvitationsTabController(
         noDataText: 'You have no team invitations yet',
         noMatchesText: 'No invitations found matching filter.',
         enableOrdering: true,
-      columns: [
+        columns: [
           {
             title: 'Email',
             className: 'all',
