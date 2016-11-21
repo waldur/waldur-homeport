@@ -55,7 +55,7 @@ export class CustomerUtilsService {
 
   getCurrentProject(uuid) {
     if (!uuid) {
-      return this.currentStateService.getProject();
+      return this.projectsService.getProject(this.currentStateService.getProjectUuid());
     }
     return this.projectsService.$get(uuid).then(project => {
       this.$rootScope.$broadcast('adjustCurrentProject', project);

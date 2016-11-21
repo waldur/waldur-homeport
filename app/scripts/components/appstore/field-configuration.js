@@ -1,13 +1,22 @@
 export default class AppstoreFieldConfiguration {
-    constructor() {
-      this.fields = {};
-    }
+  constructor() {
+    this.fields = {};
+  }
 
-    register(resourceType, resourceFields) {
-      this.fields[resourceType] = resourceFields;
-    }
+  registerMap(map) {
+    angular.forEach(map, (config, type) => {
+      this.register(type, config);
+    });
+  }
 
-    $get() {
-      return this.fields;
-    }
+  register(type, config) {
+    this.fields[type] = config;
+    angular.forEach(config.options, (options, name) => {
+      options.name = name;
+    });
+  }
+
+  $get() {
+    return this.fields;
+  }
 }

@@ -1,4 +1,4 @@
-<form class="form-horizontal">
+<form class="form-horizontal" name="$ctrl.Form">
     <div ng-repeat="field in $ctrl.fieldsList" class="form-group">
         <div ng-if="$ctrl.renderLabel(field)">
             <div class="col-sm-3 control-label">
@@ -17,5 +17,3 @@
         </div>
     </div>
 </form>
-
-<pre>{{ $ctrl|json }}</pre>

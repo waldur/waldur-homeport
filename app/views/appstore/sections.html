@@ -41,7 +41,11 @@
     </div>
 </section>
 
-<section class="step-3" ng-if="AppStore.selectedResourceType" block-ui="resource-properties">
+<div ng-if="AppStore.loadingResourceProperties">
+    <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
+</div>
+
+<section class="step-3" ng-if="AppStore.selectedResourceType && !AppStore.loadingResourceProperties">
     <div class="step-title">
         <span>
             Configure {{ AppStore.getServiceTypeDisplay(AppStore.serviceType) }}

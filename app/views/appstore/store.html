@@ -11,6 +11,10 @@
             </p>
         </div>
 
+        <div ng-if="AppStore.loadingProviders">
+            <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
+        </div>
+
         <div ng-if="AppStore.renderStore">
             <div ng-if="AppStore.selectedCategory.type == 'package'">
                 <appstore-support-agreement></appstore-support-agreement>

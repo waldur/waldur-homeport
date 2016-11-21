@@ -104,6 +104,7 @@
 
       secondStep: false,
       resourceTypesBlock: false,
+      loadingResourceProperties: false,
 
       successMessage: 'Purchase of {vm_name} was successful.',
       formOptions: {},
@@ -266,7 +267,10 @@
               vm.setFields(formOptions, validChoices);
             });
           });
-          ncUtils.blockElement('resource-properties', promise);
+          vm.loadingResourceProperties = true;
+          promise.finally(function() {
+            vm.loadingResourceProperties = false;
+          });
         }
       },
       getValidChoices: function(formOptions) {
@@ -337,27 +341,6 @@
       cartComparator: function(a, b) {
         return this.fieldsOrder.indexOf(a.type) - this.fieldsOrder.indexOf(b.type);
       },
-      attachIconsToImages: function() {
-        var field = this.findFieldByName('image');
-        if (!field) {
-          return;
-        }
-        for (var i = 0; i < field.choices.length; i++) {
-          var choice = field.choices[i];
-          if (choice.display_name.indexOf('Visual Studio') != -1) {
-            choice.icon = 'visual-studio';
-          }
-          else if (choice.display_name.indexOf('CentOS') != -1) {
-            choice.icon = 'centos';
-          }
-          else if (choice.display_name.indexOf('Windows') != -1) {
-            choice.icon = 'windows';
-          }
-          else if (choice.display_name.indexOf('Ubuntu') != -1) {
-            choice.icon = 'ubuntu';
-          }
-        }
-      },
       getServiceTypeDisplay: ncServiceUtils.getTypeDisplay,
       getServiceIcon: ncServiceUtils.getServiceIcon,
       formatResourceType: resourceUtils.formatResourceType,
@@ -421,12 +404,6 @@
         if (name == 'region') {
           this.filterSizeByRegion();
           this.filterImageByRegion();
-        }
-        if (name == 'image') {
-          this.updateFlavors();
-        }
-        if (name == 'flavor') {
-          this.setSize();
         }
       },
       isChosen: function(name, choice) {
@@ -501,49 +478,6 @@
           this.choiceDisplay['image'] = null;
           this.deletePriceItem('image');
         }
-        this.sortImages();
-      },
-      setSize: function() {
-        var field = this.findFieldByName('system_volume_size');
-        if (!field) {
-          return;
-        }
-        if (this.instance.flavor_item) {
-          var disk_gb = Math.round(this.instance.flavor_item.disk / 1024);
-        } else {
-          var disk_gb = 0;
-        }
-        field.min = disk_gb;
-        this.instance.system_volume_size = disk_gb;
-        this.instance.system_volume_size_raw = disk_gb;
-      },
-      updateFlavors: function() {
-        var field = this.findFieldByName('flavor');
-        if (!field) {
-          return;
-        }
-        var image = this.instance.image_item;
-        if (!image) {
-          for (var i = 0; i < field.choices.length; i++) {
-            var choice = field.choices[i];
-            choice.disabled = false;
-          }
-          return;
-        }
-        for (var i = 0; i < field.choices.length; i++) {
-          var choice = field.choices[i];
-          choice.disabled = image.min_ram > choice.item.ram || image.min_disk > choice.item.disk;
-        }
-
-        var flavor = this.instance.flavor;
-        var choice = this.getChoiceByValue(field.choices, flavor);
-        if (choice && choice.disabled) {
-          this.instance.flavor = null;
-          this.choiceDisplay['flavor'] = null;
-          this.deletePriceItem('flavor');
-        }
-
-        this.sortFlavors();
       },
       sortSizes: function() {
         var field = this.findFieldByName('size');
@@ -564,43 +498,6 @@
           if (a.item.disk > b.item.disk) return 1;
           if (a.item.disk < b.item.disk) return -1;
 
-          return 0;
-        });
-      },
-      sortImages: function() {
-        var field = this.findFieldByName('image');
-        if (!field || !field.choices) {
-          return;
-        }
-
-        field.choices.sort(function(a, b) {
-          if (a.disabled < b.disabled) return -1;
-          if (a.disabled > b.disabled) return 1;
-
-          if (a.item.name > b.item.name) return 1;
-          if (a.item.name < b.item.name) return -1;
-
-          return 0;
-        });
-      },
-      sortFlavors: function() {
-        var field = this.findFieldByName('flavor');
-        if (!field || !field.choices) {
-          return;
-        }
-
-        field.choices.sort(function(a, b) {
-          if (a.disabled < b.disabled) return -1;
-          if (a.disabled > b.disabled) return 1;
-
-          if (a.item.cores > b.item.cores) return 1;
-          if (a.item.cores < b.item.cores) return -1;
-
-          if (a.item.ram > b.item.ram) return 1;
-          if (a.item.ram < b.item.ram) return -1;
-
-          if (a.item.disk > b.item.disk) return 1;
-          if (a.item.disk < b.item.disk) return -1;
           return 0;
         });
       },
@@ -850,12 +747,6 @@
           instance[name] = this.instance[name];
         }
 
-        if (this.instance.system_volume_size) {
-          instance.system_volume_size = this.instance.system_volume_size * 1024;
-        }
-        if (this.instance.data_volume_size) {
-          instance.data_volume_size = this.instance.data_volume_size * 1024;
-        }
         if (this.instance.security_groups) {
           instance.security_groups = [];
           for (var i = 0; i < this.instance.security_groups.length; i++) {

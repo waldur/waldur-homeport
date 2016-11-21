@@ -1,6 +1,7 @@
 <input type="text"
        class="form-control"
        id="{{ $ctrl.field.name }}"
+       name="{{ ::$ctrl.field.name }}"
        ng-model="$ctrl.model[$ctrl.field.name]"
        placeholder="{{ $ctrl.field.placeholder }}"
-       maxlength="{{ $ctrl.field.maxlength }}"/>
+       ng-maxlength="{{ $ctrl.field.maxlength }}"/>

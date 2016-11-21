@@ -17,32 +17,14 @@ export default function appstoreForm() {
 
 class AppstoreFormController {
   constructor($scope) {
-    this.$scope = $scope;
-    this.init();
-  }
+    const options = this.fields.options;
+    const watchers = this.fields.watchers;
+    const order = this.fields.order;
+    const model = this.model;
 
-  init() {
-    this.$scope.$watch('$ctrl.model.image', newImage => {
-      if (!newImage) {
-        return;
-      }
-      if (this.model.flavor && newImage.min_disk > this.model.flavor.disk) {
-        this.model.flavor = null;
-      }
-      if (this.fields.options.size) {
-        this.model.size.min = newImage.min_disk;
-      }
-    });
-    this.$scope.$watch('$ctrl.model.flavor', newFlavor => {
-      if (newFlavor) {
-        this.fields.options.system_volume_size.min = newFlavor.disk;
-      }
-    });
-    this.$scope.$watch('$ctrl.fields', newFields => {
-      if (newFields.order) {
-        this.fieldsList = newFields.order.map(name =>
-          angular.extend(newFields.options[name], {name: name}));
-      }
+    this.fieldsList = order.map(name => options[name]);
+    angular.forEach(watchers, (watcher, field) => {
+      $scope.$watch(() => model[field], watcher.bind(null, model, options));
     });
   }
 

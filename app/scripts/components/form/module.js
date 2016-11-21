@@ -11,6 +11,7 @@ import appstoreFieldList from './appstore-field-list';
 import appstoreListDialog from './appstore-list-dialog';
 import fieldLabel from './field-label';
 import helpicon from './help-icon';
+import multiplyBy from './multiply-by';
 
 export default module => {
   module.directive('appstoreForm', appstoreForm);
@@ -26,4 +27,5 @@ export default module => {
   module.directive('appstoreListDialog', appstoreListDialog);
   module.directive('fieldLabel', fieldLabel);
   module.directive('helpicon', helpicon);
+  module.directive('multiplyBy', multiplyBy);
 }

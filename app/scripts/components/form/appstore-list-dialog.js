@@ -35,13 +35,6 @@ class DialogController {
     return this.$filter(column.filter)(value);
   }
 
-  compareItems(a, b) {
-    if (this.field.comparator) {
-      return this.field.comparator(a, b);
-    }
-    return 0;
-  }
-
   selectItem(item) {
     this.value = item;
   }

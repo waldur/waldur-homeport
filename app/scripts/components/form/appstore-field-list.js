@@ -20,13 +20,14 @@ class FieldController {
     this.$uibModal = $uibModal;
     this.$filter = $filter;
 
-    if (this.field.parseChoices) {
-      const choices = this.field.choices.map(this.field.parseChoices);
+    if (this.field.parser) {
+      const choices = this.field.choices.map(this.field.parser);
       this.field = angular.extend({}, this.field, {choices});
     }
 
     this.hasChoices = this.field.choices && this.field.choices.length > 0;
     this.renderWarning = this.field.required && !this.hasChoices;
+    this.renderEmpty = !this.field.required && !this.hasChoices;
     this.warningMessage = this.field.warningMessage || '{{ $ctrl.field.label }} is required for provisioning resource.';
   }
 
@@ -47,8 +48,8 @@ class FieldController {
     if (!value) {
       return 'Show choices';
     }
-    if (this.field.formatValue) {
-      return this.field.formatValue(this.$filter, value);
+    if (this.field.formatter) {
+      return this.field.formatter(this.$filter, value);
     }
     return value.name;
   }
