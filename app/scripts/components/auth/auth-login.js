@@ -22,12 +22,13 @@ function AuthLoginController(ENV, $q, $sce, $scope, $state, authService,
     shortPageTitle: ENV.shortPageTitle,
     civilNumberRequired: false,
     init: function() {
-      if (ENV.invitationsEnabled && $state.current.name === 'register' && !invitationService.getInvitationToken()) {
-        $state.go('errorPage.notFound');
-        return;
-      } else if (ENV.invitationsEnabled &&
-        $state.current.name === 'register' && invitationService.getInvitationToken()) {
-        this.checkRegistrationMethods();
+      if (ENV.invitationsEnabled && $state.current.name === 'register') {
+        if (!invitationService.getInvitationToken()) {
+          $state.go('errorPage.notFound');
+          return;
+        } else {
+          this.checkRegistrationMethods();
+        }
       }
       this._super();
     },
