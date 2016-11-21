@@ -24,14 +24,10 @@ class FieldController {
       const choices = this.field.choices.map(this.field.parseChoices);
       this.field = angular.extend({}, this.field, {choices});
     }
-  }
 
-  renderWarning() {
-    return this.field.required && !this.hasChoices();
-  }
-
-  hasChoices() {
-    return this.field.choices.length > 0;
+    this.hasChoices = this.field.choices && this.field.choices.length > 0;
+    this.renderWarning = this.field.required && !this.hasChoices;
+    this.warningMessage = this.field.warningMessage || '{{ $ctrl.field.label }} is required for provisioning resource.';
   }
 
   openDialog() {

@@ -23,8 +23,14 @@ class AppstoreFormController {
 
   init() {
     this.$scope.$watch('$ctrl.model.image', newImage => {
-      if (newImage && this.model.flavor && newImage.min_disk > this.model.flavor.disk) {
+      if (!newImage) {
+        return;
+      }
+      if (this.model.flavor && newImage.min_disk > this.model.flavor.disk) {
         this.model.flavor = null;
+      }
+      if (this.fields.options.size) {
+        this.model.size.min = newImage.min_disk;
       }
     });
     this.$scope.$watch('$ctrl.model.flavor', newFlavor => {
@@ -35,7 +41,7 @@ class AppstoreFormController {
     this.$scope.$watch('$ctrl.fields', newFields => {
       if (newFields.order) {
         this.fieldsList = newFields.order.map(name =>
-          angular.extend(newFields.options[name], {name: name});
+          angular.extend(newFields.options[name], {name: name}));
       }
     });
   }

@@ -64,7 +64,6 @@
       'ncUtilsFlash',
       'projectsService',
       'priceEstimationService',
-      '$document',
       '$scope',
       '$filter',
       'ncServiceUtils',
@@ -91,7 +90,6 @@
     ncUtilsFlash,
     projectsService,
     priceEstimationService,
-    $document,
     $scope,
     $filter,
     ncServiceUtils,
@@ -99,15 +97,6 @@
     AppstoreFieldConfiguration) {
     var controllerScope = this;
     var Controller = baseControllerAddClass.extend({
-      UNIQUE_FIELDS: {
-        service_project_link: 'service_project_link',
-      },
-      FIELD_TYPES: {
-        string: 'string',
-        field: 'field',
-        integer: 'integer'
-      },
-
       currency: ENV.currency,
       enablePurchaseCostDisplay: ENV.enablePurchaseCostDisplay,
       VmProviderSettingsUuid: ENV.VmProviderSettingsUuid,
@@ -151,19 +140,6 @@
         this.service = resourcesService;
         this.controllerScope = controllerScope;
         this._super();
-      },
-      modalInit: function(field) {
-        var vm = this;
-        field.showChoices = true;
-        $document.bind('keydown', function(e) {
-          if (e.which === 27) {
-            vm.closeModal(field);
-          }
-        });
-      },
-      closeModal: function(field) {
-        field.showChoices = false;
-        $document.unbind('keypress');
       },
       activate:function() {
         var vm = this;
@@ -345,114 +321,13 @@
       },
       setFields: function(formOptions, validChoices) {
         var key = this.serviceType + '.' + this.selectedResourceType;
-        var configurator = AppstoreFieldConfiguration[key] || this.defaultFieldConfigurator.bind(this);
-        this.fields = configurator(formOptions, validChoices);
-      },
-      defaultFieldConfigurator: function(formOptions, validChoices) {
-        var fields = [];
-        for (var name in formOptions) {
-          var options = formOptions[name];
-          if (name === this.UNIQUE_FIELDS.service_project_link) {
-            continue;
+        var fields = angular.copy(AppstoreFieldConfiguration[key]);
+        angular.forEach(validChoices, function(choices, name) {
+          if (fields.options.hasOwnProperty(name)) {
+            fields.options[name].choices = choices;
           }
-
-          var type = options.type;
-          if (type === 'field' || type === 'select') {
-            type = 'choice';
-          }
-
-          var choices = validChoices[name] || options.choices;
-
-          if (name === 'user_data') {
-            type = 'text';
-          }
-
-          var icons = {
-            size: 'gear',
-            flavor: 'gear',
-            ssh_public_key: 'key',
-            security_groups: 'lock',
-            group: 'group'
-          };
-          var icon = icons[name] || 'cloud';
-          var label = options.label;
-          var required = options.required;
-          var help_text = options.help_text;
-          var min, max, units;
-
-          if (name === 'system_volume_size' || name === 'size') {
-            min = 0;
-            max = 320;
-            units = 'GB';
-            help_text = null;
-          }
-
-          if (name === 'data_volume_size') {
-            min = 1;
-            max = 320;
-            units = 'GB';
-            required = true;
-            help_text = null;
-          }
-          var display_label;
-          if (name === 'username') {
-            display_label = this.selectedService.type + ' OS username';
-          }
-          if (name === 'password') {
-            display_label = this.selectedService.type + ' OS password';
-          }
-          if (name === 'name') {
-            if (this.selectedCategory.name === 'Virtual machines') {
-              display_label = 'VM name';
-            }
-            if (this.selectedCategory.name === 'Applications') {
-              display_label = 'Name'
-            }
-          }
-
-          var item_type = name;
-          if (name === 'size') {
-            item_type = 'flavor';
-          }
-
-          fields.push({
-            name: name,
-            label: display_label ? display_label : label,
-            type: type,
-            help_text: help_text,
-            required: required,
-            choices: choices,
-            icon: icon,
-            min: min,
-            max: max,
-            units: units,
-            options: options,
-            item_type: item_type
-          });
-          display_label = null;
-        }
-        this.fieldsOrder = [
-          'name', 'region', 'image', 'size', 'flavor', 'system_volume_size', 'data_volume_size',
-          'security_groups', 'ssh_public_key', 'tenant', 'floating_ip', 'skip_external_ip_assignment',
-          'availability_zone', 'description', 'user_data', 'user_username'
-        ];
-        fields.sort(this.fieldsComparator.bind(this));
-        this.sortFlavors();
-        this.attachIconsToImages();
-        return fields;
-      },
-      fieldsComparator: function(a, b) {
-        var i = this.fieldsOrder.indexOf(a.name);
-        var j = this.fieldsOrder.indexOf(b.name);
-        if (i === j) {
-          return 0;
-        } else if (i === -1) {
-          return 1;
-        } else if (j === -1) {
-          return -1;
-        } else {
-          return i - j;
-        }
+        });
+        this.fields = fields;
       },
       cartComparator: function(a, b) {
         return this.fieldsOrder.indexOf(a.type) - this.fieldsOrder.indexOf(b.type);
@@ -496,7 +371,6 @@
         this.choiceDisplay[field.name] = undefined;
         this.updateDependentFields(field.name);
         this.deletePriceItem(field.name);
-        this.closeModal(field);
       },
       doChoice: function(field, choice) {
         var vm = this, name = field.name;

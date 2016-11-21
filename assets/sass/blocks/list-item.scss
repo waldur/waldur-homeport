@@ -300,21 +300,6 @@
             &.pdf-icon {
                 width: 30px;
             }
-            .help-icon {
-                position: absolute !important;
-                width: 110px;
-                @include bp(xs) {
-                    width: 70px;
-                }
-                height: 100%;
-                display: inline-block;
-                &:before {
-                    display: none;
-                }
-                span.help-text {
-                    color: #fff !important;
-                }
-            }
             &.reduce-cell-width {
                 width: 40%;
             }

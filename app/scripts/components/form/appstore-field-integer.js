@@ -19,8 +19,8 @@ export default function appstoreFieldInteger() {
 class FildController {
   constructor($scope) {
     this.factor = this.getFactor();
-    if (this.field.min) {
-      this.value = this.field.min
+    if (this.field.hasOwnProperty('min')) {
+      this.value = this.field.min / this.factor;
       this.onChange();
     }
     $scope.$watch(() => this.field.min, newValue => {

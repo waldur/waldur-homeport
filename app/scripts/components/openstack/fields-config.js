@@ -6,7 +6,7 @@ import {
 
 // @ngInject
 export default AppstoreFieldConfigurationProvider => {
-  AppstoreFieldConfigurationProvider.register('OpenStack.Tenant', (formOptions, validChoices) => ({
+  AppstoreFieldConfigurationProvider.register('OpenStack.Tenant', {
     order: [
       'name',
       'template',
@@ -25,7 +25,6 @@ export default AppstoreFieldConfigurationProvider => {
         type: 'list',
         required: true,
         label: 'VPC package',
-        choices: validChoices.template,
         dialogTitle: 'Select Virtual Private Cloud package',
         dialogSize: 'lg',
         formatValue: formatPackageDetails,
@@ -87,9 +86,9 @@ export default AppstoreFieldConfigurationProvider => {
         help_text: 'Leave blank if you want admin password to be auto-generated'
       }
     }
-  }));
+  });
 
-  AppstoreFieldConfigurationProvider.register('OpenStackTenant.Instance', (formOptions, validChoices) => ({
+  AppstoreFieldConfigurationProvider.register('OpenStackTenant.Instance', {
     order: [
       'name',
       'image',
@@ -112,7 +111,6 @@ export default AppstoreFieldConfigurationProvider => {
         type: 'list',
         required: true,
         label: 'Image',
-        choices: validChoices.image,
         columns: [
           {
             name: 'name',
@@ -134,7 +132,6 @@ export default AppstoreFieldConfigurationProvider => {
         type: 'list',
         required: true,
         label: 'Flavor',
-        choices: validChoices.flavor,
         formatValue: formatFlavorDetails,
         columns: [
           {
@@ -177,7 +174,6 @@ export default AppstoreFieldConfigurationProvider => {
       ssh_public_key: {
         type: 'list',
         label: 'SSH public key',
-        choices: validChoices.ssh_public_key,
         columns: [
           {
             name: 'name',
@@ -187,7 +183,8 @@ export default AppstoreFieldConfigurationProvider => {
             name: 'fingerprint',
             label: 'Fingerprint'
           }
-        ]
+        ],
+        warningMessage: `SSH public key is required for accessing a provisioned VM. You can add a key in your <a ui-sref="profile.keys">profile</a>.`
       },
       skip_external_ip_assignment: {
         type: 'boolean',
@@ -204,14 +201,14 @@ export default AppstoreFieldConfigurationProvider => {
         help_text: 'Additional data that will be added to instance on provisioning'
       }
     }
-  }));
+  });
 
-  AppstoreFieldConfigurationProvider.register('OpenStackTenant.Volume', (formOptions, validChoices) => ({
+  AppstoreFieldConfigurationProvider.register('OpenStackTenant.Volume', {
     order: [
       'name',
       'image',
       'size',
-      'description',
+      'description'
     ],
     options: {
       name: {
@@ -224,7 +221,6 @@ export default AppstoreFieldConfigurationProvider => {
         type: 'list',
         required: false,
         label: 'Image',
-        choices: validChoices.image,
         columns: [
           {
             name: 'name',
@@ -256,5 +252,5 @@ export default AppstoreFieldConfigurationProvider => {
         maxlength: 500
       }
     }
-  }));
+  });
 }
