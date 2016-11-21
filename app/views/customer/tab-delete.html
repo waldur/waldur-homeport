@@ -6,21 +6,25 @@
     <div class="panel panel-default">
         <div class="panel-heading">Customer details</div>
         <div class="panel-body">
-            <strong>Name: </strong>{{::DeleteController.customer.name}}
+            <dl class="dl-horizontal">
+                <dt>Name: </dt><dd>{{::DeleteController.customer.name}}</dd>
+            </dl>
         </div>
     </div>
     <div class="panel panel-default" ng-if="DeleteController.paymentDetails">
         <div class="panel-heading">Payment details</div>
         <div class="panel-body">
-            <strong>Company: </strong>{{::DeleteController.paymentDetails.company}}<br>
-            <strong>Address: </strong>{{::DeleteController.paymentDetails.address}}<br>
-            <strong>Country: </strong>{{::DeleteController.paymentDetails.country}}<br>
-            <strong>Email: </strong>{{::DeleteController.paymentDetails.email}}<br>
-            <strong>Postal: </strong>{{::DeleteController.paymentDetails.postal}}<br>
-            <strong>Phone: </strong>{{::DeleteController.paymentDetails.phone}}<br>
-            <strong>Bank: </strong>{{::DeleteController.paymentDetails.bank}}<br>
-            <strong>Account: </strong>{{::DeleteController.paymentDetails.account}}<br>
-            <strong>Default tax percent: </strong>{{::DeleteController.paymentDetails.default_tax_percent}}<br>
+            <dl class="dl-horizontal">
+                <dt>Company: </dt><dd>{{::DeleteController.paymentDetails.company}}</dd>
+                <dt>Address: </dt><dd>{{::DeleteController.paymentDetails.address}}</dd>
+                <dt>Country: </dt><dd>{{::DeleteController.paymentDetails.country}}</dd>
+                <dt>Email: </dt><dd>{{::DeleteController.paymentDetails.email}}</dd>
+                <dt>Postal: </dt><dd>{{::DeleteController.paymentDetails.postal}}</dd>
+                <dt>Phone: </dt><dd>{{::DeleteController.paymentDetails.phone}}</dd>
+                <dt>Bank: </dt><dd>{{::DeleteController.paymentDetails.bank}}</dd>
+                <dt>Account: </dt><dd>{{::DeleteController.paymentDetails.account}}</dd>
+                <dt>Default tax percent: </dt><dd>{{::DeleteController.paymentDetails.default_tax_percent}}</dd>
+            </dl>
         </div>
     </div>
     <div class="panel panel-default" ng-if="DeleteController.canRemoveCustomer">
