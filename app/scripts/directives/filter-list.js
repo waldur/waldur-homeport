@@ -17,11 +17,9 @@
         $scope.toggleFilter = toggleFilter;
         $scope.isFilterChosen = isFilterChosen;
 
-        if (controller.selectAll) {
-          selectAll();
+        if (controller.defaultFilter) {
+          toggleFilter(controller.defaultFilter);
         }
-
-        controller.chosenFilters = [];
 
         function toggleFilter(filter) {
           controller.hasCustomFilters = true;
