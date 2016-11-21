@@ -8,6 +8,11 @@
         data: {
           auth: true,
           workspace: 'project'
+        },
+        resolve: {
+          currentProject: function(CustomerUtilsService, $stateParams) {
+            return CustomerUtilsService.getCurrentProject($stateParams.uuid);
+          }
         }
       })
 

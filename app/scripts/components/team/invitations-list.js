@@ -21,6 +21,11 @@ export default function CustomerInvitationsTabController(
       this.tableOptions = this.getTableOptions();
       this.getSearchFilters();
       this._super();
+      this.defaultFilter = {
+        name: 'state',
+        title: 'Pending',
+        value: 'pending'
+      };
     },
     getSearchFilters: function() {
       this.searchFilters = [
@@ -50,10 +55,12 @@ export default function CustomerInvitationsTabController(
       return {
         noDataText: 'You have no team invitations yet',
         noMatchesText: 'No invitations found matching filter.',
+        enableOrdering: true,
         columns: [
           {
-            title: 'E-mail',
+            title: 'Email',
             className: 'all',
+            orderField: 'email',
             render: function(data, type, row, meta) {
               var avatar = '<img gravatar-src="\'{gravatarSrc}\'" gravatar-size="100" alt="" class="avatar-img img-xs">'
                 .replace('{gravatarSrc}', row.email);
@@ -63,6 +70,7 @@ export default function CustomerInvitationsTabController(
           {
             title: 'Role',
             className: 'min-tablet-l',
+            orderable: false,
             render: function(data, type, row, meta) {
               if (row.customer) {
                 return ENV.roles.owner;
@@ -79,6 +87,7 @@ export default function CustomerInvitationsTabController(
           {
             title: 'Status',
             className: 'min-tablet-l',
+            orderField: 'state',
             render: function(data, type, row, meta) {
               return row.state;
             }
@@ -86,20 +95,23 @@ export default function CustomerInvitationsTabController(
           {
             title: 'Created at',
             className: 'min-tablet-l',
+            orderField: 'created',
             render: function(data, type, row, meta) {
-              return $filter('dateTime')(row.created);
+              return $filter('shortDate')(row.created);
             }
           },
           {
             title: 'Expires at',
             className: 'min-tablet-l',
+            orderable: false,
             render: function(data, type, row, meta) {
-              return $filter('dateTime')(row.expires);
+              return $filter('shortDate')(row.expires);
             }
           },
           {
             title: 'URL',
             className: 'none',
+            orderable: false,
             render: function(data, type, row, meta) {
               return row.link_template.replace('{uuid}', row.uuid);
             }

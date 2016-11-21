@@ -53,12 +53,11 @@ export class CustomerUtilsService {
     });
   }
 
-  getCurrentProject($state) {
-    if (!$state.includes('project') || !$state.current.uuid) {
-      const uuid = this.currentStateService.getProjectUuid();
-      return this.projectsService.$get(uuid);
+  getCurrentProject(uuid) {
+    if (!uuid) {
+      return this.currentStateService.getProject();
     }
-    return this.projectsService.$get($state.current.uuid).then(project => {
+    return this.projectsService.$get(uuid).then(project => {
       this.$rootScope.$broadcast('adjustCurrentProject', project);
       return project;
     }).catch(error => {
