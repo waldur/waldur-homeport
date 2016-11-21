@@ -16,7 +16,6 @@
       link: function(scope, element) {
         var options = scope.controller.tableOptions;
         var table;
-        var filter = {};
 
         scope.$watch('controller.tableOptions', function(newTableOptions) {
           if (table) {
@@ -64,11 +63,11 @@
             columns.push(actionColumn);
           }
 
-          var table = window.table = $(element.find('table')[0]).DataTable({
+          var table = $(element.find('table')[0]).DataTable({
             responsive: true,
             processing: true,
             serverSide: true,
-            ordering: !!scope.controller.enableOrdering,
+            ordering: !!scope.controller.tableOptions.enableOrdering,
             autoWidth: false,
             ajax: serverDataTableCallback,
             dom: '<"html5buttons"B>lTfgitp',
@@ -186,6 +185,7 @@
         }
 
         function serverDataTableCallback(request, drawCallback, settings) {
+          var filter = {};
           request.order.forEach(function(orderItem) {
             var orderField = options.columns[orderItem.column].orderField;
             filter.o = orderItem.dir === 'asc' ? orderField : '-' + orderField;
