@@ -25,7 +25,8 @@ function AuthLoginController(ENV, $q, $sce, $scope, $state, authService,
       if (ENV.invitationsEnabled && $state.current.name === 'register' && !invitationService.getInvitationToken()) {
         $state.go('errorPage.notFound');
         return;
-      } else {
+      } else if (ENV.invitationsEnabled &&
+        $state.current.name === 'register' && invitationService.getInvitationToken()) {
         this.checkRegistrationMethods();
       }
       this._super();
