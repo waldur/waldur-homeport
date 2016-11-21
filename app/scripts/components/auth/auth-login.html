@@ -62,14 +62,14 @@
             Register
         </button>
     </form>
-    <p visible="localSignin" ng-if="!auth.civilNumberRequired" ><small>Or use social login</small></p>
-    <div visible="socialSignup" ng-if="!auth.civilNumberRequired"  class="m-b-sm">
+    <p visible="localSignin" ng-if="!auth.civilNumberRequired"><small>Or use social login</small></p>
+    <div visible="socialSignup" ng-if="!auth.civilNumberRequired" class="m-b-sm">
         <button ng-click="auth.authenticate('google')" class="btn btn-google btn-block">
             <i class="fa fa-google-plus-square" aria-hidden="true"></i>
             Sign in with Google
         </button>
     </div>
-    <div visible="socialSignup" ng-if="!auth.civilNumberRequired"  class="m-b-sm">
+    <div visible="socialSignup" ng-if="!auth.civilNumberRequired" class="m-b-sm">
         <button ng-click="auth.authenticate('facebook')" class="btn btn-facebook btn-block">
             <i class="fa fa-facebook-square" aria-hidden="true"></i>
             Sign in with Facebook
