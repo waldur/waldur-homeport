@@ -41,10 +41,10 @@
     </div>
 </section>
 
-<section class="step-3" ng-show="AppStore.selectedResourceType" block-ui="resource-properties">
+<section class="step-3" ng-if="AppStore.selectedResourceType" block-ui="resource-properties">
     <div class="step-title">
         <span>
-            Configure {{ AppStore.secondStep && AppStore.getServiceTypeDisplay(AppStore.serviceType) || ''}}
+            Configure {{ AppStore.getServiceTypeDisplay(AppStore.serviceType) }}
             {{ AppStore.selectedResourceTypeName }}
         </span>
     </div>
@@ -53,8 +53,6 @@
                    errors="AppStore.errors"
                    model="AppStore.instance">
     </appstore-form>
-    <pre>{{ AppStore.fields|json }}</pre>
-    <pre>{{ AppStore.instance|json }}</pre>
 </section>
 </div>
 

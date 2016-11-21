@@ -14,13 +14,30 @@ export default function appstoreFieldInteger() {
   }
 }
 
+
+// @ngInject
 class FildController {
-  constructor() {
+  constructor($scope) {
     this.factor = this.getFactor();
     if (this.field.min) {
       this.value = this.field.min
       this.onChange();
     }
+    $scope.$watch(() => this.field.min, newValue => {
+      if (newValue !== undefined) {
+        this.value = Math.max(this.value, newValue / this.factor);
+      } else {
+        this.value = 0;
+      }
+      this.onChange();
+    });
+    $scope.$watch(() => this.model[this.field.name], newValue => {
+      if (newValue !== undefined) {
+        this.value = newValue / this.factor;
+      } else {
+        this.value = 0;
+      }
+    });
   }
 
   onChange() {
