@@ -80,7 +80,8 @@ export default {
       label: 'Data volume size',
       factor: 1024,
       units: 'GB',
-      min: 0
+      min: 1024,
+      max: 1024 * 320
     },
     ssh_public_key: {
       type: 'list',

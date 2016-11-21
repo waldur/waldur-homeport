@@ -744,7 +744,13 @@
         instance.service_project_link = this.selectedService.service_project_link_url;
 
         for (var name in this.allFormOptions) {
-          instance[name] = this.instance[name];
+          if (this.instance.hasOwnProperty(name)) {
+            let value = this.instance[name];
+            if (value.hasOwnProperty('url')) {
+              value = value.url;
+            }
+            instance[name] = value;
+          }
         }
 
         if (this.instance.security_groups) {

@@ -28,7 +28,8 @@ class FieldController {
     this.hasChoices = this.field.choices && this.field.choices.length > 0;
     this.renderWarning = this.field.required && !this.hasChoices;
     this.renderEmpty = !this.field.required && !this.hasChoices;
-    this.warningMessage = this.field.warningMessage || '{{ $ctrl.field.label }} is required for provisioning resource.';
+    this.warningMessage = this.field.warningMessage ||
+      `${this.field.label} is required for provisioning resource.`;
   }
 
   openDialog() {
