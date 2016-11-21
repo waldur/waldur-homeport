@@ -29,22 +29,6 @@
           workspace: 'organization'
         },
         templateUrl: 'views/customer/base.html',
-        resolve: {
-          currentCustomer: function(
-            $stateParams, $state, $rootScope, customersService, currentStateService) {
-            if (!$stateParams.uuid) {
-              return currentStateService.getCustomer();
-            }
-            return customersService.$get($stateParams.uuid).then(function(customer) {
-              $rootScope.$broadcast('adjustCurrentCustomer', customer);
-              return customer;
-            }, function(error) {
-              if (error.status === 404) {
-                $state.go('errorPage.notFound');
-              }
-            });
-          }
-        }
       })
 
       .state('organization.details', {

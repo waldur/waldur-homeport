@@ -1,6 +1,21 @@
 import template from './category-selector.html';
 import './category-selector.scss';
 
+export default function() {
+  return {
+    restrict: 'E',
+    template: template,
+    controller: AppStoreCategorySelectorController,
+    controllerAs: 'DialogCtrl',
+    scope: {},
+    bindToController: {
+      dismiss: '&',
+      close: '&',
+      resolve: '='
+    }
+  }
+}
+
 // @ngInject
 function AppStoreCategorySelectorController(
   $q, ENV, $state, $rootScope, currentStateService, projectsService
@@ -12,13 +27,17 @@ function AppStoreCategorySelectorController(
 
   function activate() {
     vm.selectProject = vm.resolve.selectProject;
-    angular.forEach(ENV.offerings, function(offering) {
+
+    var offerings = ENV.offerings.filter(item =>
+      !item.requireStaffOwnerManager || currentStateService.getStaffOwnerManager());
+
+    angular.forEach(offerings, function(offering) {
       if (ENV.futureCategories.indexOf(offering.key) !== -1) {
         offering.comingSoon = true;
       }
     });
 
-    var offerings = ENV.offerings.reduce((map, item) => {
+    var offerings = offerings.reduce((map, item) => {
       map[item.key] = item;
       return map;
     }, {});
@@ -64,20 +83,5 @@ function AppStoreCategorySelectorController(
     $state.go('support.create', {type: 'add_service'}).then(function() {
       vm.close();
     });
-  }
-}
-
-export default function() {
-  return {
-    restrict: 'E',
-    template: template,
-    controller: AppStoreCategorySelectorController,
-    controllerAs: 'DialogCtrl',
-    scope: {},
-    bindToController: {
-      dismiss: '&',
-      close: '&',
-      resolve: '='
-    }
   }
 }
