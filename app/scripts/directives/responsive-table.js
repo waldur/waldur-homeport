@@ -67,7 +67,7 @@
             responsive: true,
             processing: true,
             serverSide: true,
-            ordering: false,
+            ordering: !!scope.controller.tableOptions.enableOrdering,
             autoWidth: false,
             ajax: serverDataTableCallback,
             dom: '<"html5buttons"B>lTfgitp',
@@ -185,7 +185,12 @@
         }
 
         function serverDataTableCallback(request, drawCallback, settings) {
-          scope.controller.requestLoad(request).then(function(list) {
+          var filter = {};
+          request.order.forEach(function(orderItem) {
+            var orderField = options.columns[orderItem.column].orderField;
+            filter.o = orderItem.dir === 'asc' ? orderField : '-' + orderField;
+          });
+          scope.controller.requestLoad(request, filter).then(function(list) {
             var total = scope.controller.getTotal();
             drawCallback({
               draw: request.draw,
