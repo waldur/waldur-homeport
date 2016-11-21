@@ -1,4 +1,5 @@
 import template from './resource-details.html';
+import './resource-details.scss';
 
 export default function resourceDetails() {
   return {
