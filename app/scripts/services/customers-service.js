@@ -71,6 +71,9 @@
         if (user.is_staff) {
           return true;
         }
+        if (!customer) {
+          return false;
+        }
         for (var i = 0; i < customer.owners.length; i++) {
           if (user.uuid === customer.owners[i].uuid) {
             return true;

@@ -96,30 +96,59 @@
     });
   }
 
-  angular.module('ncsaas').config(attachAuthResolve);
-
-  attachAuthResolve.$inject = ['$stateProvider'];
-
-  function attachAuthResolve($stateProvider) {
+  function decorateState($stateProvider, decorator) {
     $stateProvider.decorator('views', function(state, parent) {
       var result = {}, views = parent(state);
 
       angular.forEach(views, function(config, name) {
-        if (config.data && config.data.auth) {
-          config.resolve = config.resolve || {};
-          config.resolve.currentUser = authentication;
-
-          authentication.$inject = ['usersService'];
-          function authentication(usersService) {
-            return usersService.getCurrentUser();
-          }
-        }
+        config.resolve = config.resolve || {};
+        decorator(config);
         result[name] = config;
       });
 
       return result;
     });
   }
+
+  function getCurrentUser(usersService) {
+    return usersService.getCurrentUser();
+  }
+
+  function checkWorkspace(CustomerUtilsService) {
+    return CustomerUtilsService.checkWorkspace();
+  }
+
+  function getCurrentCustomer(CustomerUtilsService) {
+    return CustomerUtilsService.getCurrentCustomer();
+  }
+
+  function getStoredCustomer(CustomerUtilsService) {
+    return CustomerUtilsService.getStoredCustomer();
+  }
+
+  function getCurrentProject(CustomerUtilsService, $stateParams) {
+    return CustomerUtilsService.getCurrentProject($stateParams.uuid);
+  }
+
+  function decorateStates($stateProvider) {
+    decorateState($stateProvider, function(state) {
+      if (state.data && state.data.auth) {
+        state.resolve.currentUser = getCurrentUser;
+      }
+
+      if (state.data && state.data.workspace === 'organization') {
+        state.resolve.checkWorkspace = checkWorkspace;
+        state.resolve.currentCustomer = getCurrentCustomer;
+      }
+
+      if (state.data && state.data.workspace === 'project') {
+        state.resolve.currentCustomer = getStoredCustomer;
+        state.resolve.currentProject = getCurrentProject;
+      }
+    });
+  }
+
+  angular.module('ncsaas').config(decorateStates);
 
 })();
 
