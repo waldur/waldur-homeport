@@ -21,14 +21,11 @@ export default function CustomerInvitationsTabController(
       this.tableOptions = this.getTableOptions();
       this.getSearchFilters();
       this._super();
-      this.enableOrdering = true;
       this.defaultFilter = {
         name: 'state',
         title: 'Pending',
         value: 'pending'
       };
-      this.orderField = 'created';
-      this.reverseOrder = true;
     },
     getSearchFilters: function() {
       this.searchFilters = [
@@ -58,7 +55,8 @@ export default function CustomerInvitationsTabController(
       return {
         noDataText: 'You have no team invitations yet',
         noMatchesText: 'No invitations found matching filter.',
-        columns: [
+        enableOrdering: true,
+      columns: [
           {
             title: 'Email',
             className: 'all',
