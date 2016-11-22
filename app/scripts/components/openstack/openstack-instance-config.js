@@ -130,15 +130,19 @@ export default {
   }
 };
 
-function imageWatcher(model, options) {
-  const choices = options.flavor.choices;
+function validateAndSort(model, options, validator, comparator, name) {
+  const choices = options[name].choices;
   angular.forEach(choices, choice => {
-    choice.item.disabled = flavorValidator(model, choice.item);
+    choice.item.disabled = validator(model, choice.item);
   });
-  choices.sort(flavorComparator);
-  if (model.flavor && model.flavor.disabled) {
-    model.flavor = null;
+  choices.sort(comparator);
+  if (model[name] && model[name].disabled) {
+    model[name] = null;
   }
+}
+
+function imageWatcher(model, options) {
+  validateAndSort(model, options, flavorValidator, flavorComparator, 'flavor');
 }
 
 function flavorWatcher(model, options, newFlavor) {
