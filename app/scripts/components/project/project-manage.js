@@ -18,8 +18,7 @@ class ProjectManageController {
               customersService,
               $rootScope,
               $state,
-              $q,
-              ENV) {
+              $q) {
     this.projectsService = projectsService;
     this.currentStateService = currentStateService;
     this.customersService = customersService;
