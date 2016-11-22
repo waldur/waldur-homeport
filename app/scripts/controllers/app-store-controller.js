@@ -745,7 +745,7 @@
 
         for (var name in this.allFormOptions) {
           if (this.instance.hasOwnProperty(name)) {
-            let value = this.instance[name];
+            var value = this.instance[name];
             if (value.hasOwnProperty('url')) {
               value = value.url;
             }
