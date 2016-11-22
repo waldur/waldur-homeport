@@ -212,10 +212,10 @@
     .controller('ProjectDashboardController', ProjectDashboardController);
 
   ProjectDashboardController.$inject = [
-    'currentStateService', 'DashboardChartService', '$scope', 'ENV'
+    'currentStateService', 'DashboardChartService', '$scope'
   ];
   function ProjectDashboardController(
-    currentStateService, DashboardChartService, $scope, ENV
+    currentStateService, DashboardChartService, $scope
   ) {
     var vm = this;
 

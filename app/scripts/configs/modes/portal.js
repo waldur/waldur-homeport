@@ -18,8 +18,6 @@ angular.module('ncsaas')
       'alerts',
       'mainSearch',
       'analytics',
-      'turnkey_solutions',
-      'security',
       'projectCostDetails',
       'import',
       'openMap'
