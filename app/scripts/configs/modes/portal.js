@@ -61,14 +61,6 @@ angular.module('ncsaas')
       {
         label: 'IaaS',
         items: ['private_clouds', 'vms', 'storages', 'support']
-      },
-      {
-        label: 'Platforms',
-        items: []
-      },
-      {
-        label: 'Applications',
-        items: []
       }
     ]
   });

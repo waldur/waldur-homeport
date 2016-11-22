@@ -218,7 +218,6 @@
     currentStateService, DashboardChartService, $scope, ENV
   ) {
     var vm = this;
-    vm.hideAlerts = ENV.toBeFeatures.indexOf('alerts') !== -1 ? 'alerts' : null;
 
     activate();
     $scope.$on('currentProjectUpdated', function() {
