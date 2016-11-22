@@ -311,22 +311,9 @@
         var vm = this;
         return items.map(function(item) {
           return {
-            value: item[options.value_field] || item.url,
-            display_name: vm.formatDisplayName(item, options, name),
             item: item
           }
         });
-      },
-      formatDisplayName: function(item, options, name) {
-        if (name == 'image' && this.selectedService.type == 'DigitalOcean') {
-          if (item.is_official) {
-            return item.name + ' distribution';
-          } else {
-            return item.name + ' snapshot created at ' + $filter('dateTime')(item.created_at);
-          }
-        } else {
-          return item[options.display_name_field] || item.name;
-        }
       },
       setFields: function(formOptions, validChoices) {
         var key = this.serviceType + '.' + this.selectedResourceType;
@@ -353,43 +340,8 @@
         };
       },
       choiceDisplay: {},
-      resetChoice: function(field) {
-        this.instance[field.name] = undefined;
-        this.instance[field.name + '_item'] = undefined;
-        this.choiceDisplay[field.name] = undefined;
-        this.updateDependentFields(field.name);
-        this.deletePriceItem(field.name);
-      },
       doChoice: function(field, choice) {
         var vm = this, name = field.name;
-        this.choiceDisplay[name] = choice.display_name;
-        if (name == 'security_groups') {
-          if (this.instance[name] === undefined) {
-            this.instance[name] = [];
-          }
-          if (this.instance[name].indexOf(choice.value) === -1) {
-            this.instance[name].push(choice.value);
-          } else {
-            this.instance[name].splice(this.instance[name].indexOf(choice.value), 1);
-          }
-          var parts = [];
-          for (var i = 0; i < field.choices.length; i++) {
-            var c = field.choices[i];
-            if (this.instance[name].indexOf(c.value) !== -1) {
-              parts.push(c.display_name);
-            }
-          }
-          this.choiceDisplay[name] = parts.join(', ');
-        } else if (name === 'ssh_public_key') {
-          this.instance[name] = choice.value;
-          this.instance[name + '_item'] = choice;
-        } else if (name === 'group') {
-          this.instance[name] = choice.value;
-        } else {
-          this.instance[name] = choice.value;
-          this.instance[name + '_item'] = choice.item;
-        }
-        this.updateDependentFields(name);
         if (ENV.nonChargeableAppStoreOptions.indexOf(name) !== -1) {
           return;
         }
@@ -399,123 +351,6 @@
           vm.defaultPriceListItems = response;
           vm.setPriceItem(field.item_type, choice.display_name, choice);
         });
-      },
-      updateDependentFields: function(name) {
-        if (name == 'region') {
-          this.filterSizeByRegion();
-          this.filterImageByRegion();
-        }
-      },
-      isChosen: function(name, choice) {
-        var value = choice.value;
-        value = (name == 'group') ? this.instance[name] : value;
-        if (value == undefined) {
-          return false;
-        }
-        if (name == 'group' && this.instance[name]) {
-          return choice.value === this.instance[name];
-        }
-        if (name == 'security_groups') {
-          var vals = this.instance[name];
-          if (!vals) {
-            return false;
-          }
-          return vals.indexOf(value) > -1;
-        } else {
-          return this.instance[name] == value;
-        }
-      },
-      filterSizeByRegion: function() {
-        var field = this.findFieldByName('size');
-        if (!field) {
-          return;
-        }
-
-        var region = this.instance.region;
-        for (var i = 0; i < field.choices.length; i++) {
-          var choice = field.choices[i];
-          var found = false;
-          for (var j = 0; j < choice.item.regions.length; j++) {
-            var choice_region = choice.item.regions[j];
-            if (choice_region.url == region) {
-              found = true;
-              break;
-            }
-          }
-          choice.disabled = !found;
-        }
-        var choice = this.getChoiceByValue(field.choices, this.instance.size);
-        if (choice && choice.disabled) {
-          this.instance.size = null;
-          this.choiceDisplay['size'] = null;
-          this.deletePriceItem('size');
-        }
-        this.sortSizes();
-      },
-      filterImageByRegion: function() {
-        var field = this.findFieldByName('image');
-        if (!field) {
-          return;
-        }
-
-        var region = this.instance.region;
-        for (var i = 0; i < field.choices.length; i++) {
-          var choice = field.choices[i];
-          var found = false;
-          var regions = choice.item.regions || [choice.item.region];
-          for (var j = 0; j < regions.length; j++) {
-            var choice_region = regions[j];
-            if (choice_region.url == region) {
-              found = true;
-              break;
-            }
-          }
-          choice.disabled = !found;
-        }
-        var choice = this.getChoiceByValue(field.choices, this.instance.image);
-        if (choice && choice.disabled) {
-          this.instance.image = null;
-          this.choiceDisplay['image'] = null;
-          this.deletePriceItem('image');
-        }
-      },
-      sortSizes: function() {
-        var field = this.findFieldByName('size');
-        if (!field || !field.choices) {
-          return;
-        }
-
-        field.choices.sort(function(a, b) {
-          if (a.disabled < b.disabled) return -1;
-          if (a.disabled > b.disabled) return 1;
-
-          if (a.item.cores > b.item.cores) return 1;
-          if (a.item.cores < b.item.cores) return -1;
-
-          if (a.item.ram > b.item.ram) return 1;
-          if (a.item.ram < b.item.ram) return -1;
-
-          if (a.item.disk > b.item.disk) return 1;
-          if (a.item.disk < b.item.disk) return -1;
-
-          return 0;
-        });
-      },
-      findFieldByName: function(name) {
-        for (var i = 0; i < this.fields.length; i++) {
-          var field = this.fields[i];
-          if (field.name == name) {
-            return field;
-          }
-        }
-      },
-      getChoiceByValue: function(choices, value) {
-        for (var i = 0; i < choices.length; i++) {
-          var choice = choices[i];
-          if (choice.value == value) {
-            return choice;
-          }
-        }
       },
       setPriceItem: function(item_type, key, choice) {
         this.deletePriceItem(item_type);

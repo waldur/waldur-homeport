@@ -1,37 +1,24 @@
 // @ngInject
 export default function actionUtilsService(
-  ncUtilsFlash, $rootScope, $http, $q, $uibModal, ncUtils, resourcesService) {
+  ncUtilsFlash, $rootScope, $http, $q, $uibModal, ncUtils, resourcesService, ActionConfiguration) {
   this.loadActions = function(model) {
     resourcesService.cleanOptionsCache(model.url);
     return resourcesService.getOption(model.url).then(response => {
-      const order = this.getActionsOrder(model.resource_type) || Object.keys(response.actions);
+      const config = ActionConfiguration[model.resource_type];
+      const order = config && config.order || Object.keys(response.actions);
+      const options = config && config.options;
       return order.reduce((result, name) => {
-        const action = response.actions[name];
-        if (!action.hasOwnProperty('title')) {
+        let action = response.actions[name];
+        if (!action || !action.title) {
           return result;
         }
+        if (options && options[name]) {
+          action = angular.merge(action, options[name]);
+        }
         result[name] = action;
-        this.adjustAction(action);
         return result;
       }, {});
     });
-  };
-
-  this.getActionsOrder = function(resource_type) {
-    if (resource_type === 'OpenStack.Tenant') {
-      return ['create_service', 'pull', 'destroy'];
-    }
-  };
-
-  this.adjustAction = function(action) {
-    var mapping = {
-      'Create Service': 'Create provider',
-      'Pull': 'Synchronise'
-    }
-    action.title = mapping[action.title] || action.title;
-    if (action.fields && action.fields.delete_volumes) {
-      action.fields.delete_volumes.default_value = true;
-    }
   };
 
   this.getSelectList = function(fields) {
@@ -116,7 +103,7 @@ export default function actionUtilsService(
   };
 
   this.openActionDialog = function(controller, resource, name, action) {
-    var component = this.getActionComponent(resource, name);
+    var component = action.component || 'actionDialog';
     var dialogScope = $rootScope.$new();
     dialogScope.action = action;
     dialogScope.controller = controller;
@@ -127,19 +114,5 @@ export default function actionUtilsService(
     }).result.then(function() {
       $rootScope.$broadcast('actionApplied', name);
     });
-  };
-
-  this.getActionComponent = function(resource, name) {
-    var component = 'actionDialog';
-
-    if (resource.resource_type === 'DigitalOcean.Droplet' && name === 'resize') {
-      component = 'dropletResizeDialog';
-    } else if (resource.resource_type === 'OpenStackTenant.Volume' && name === 'extend') {
-      component = 'volumeExtendDialog';
-    } else if (resource.resource_type === 'OpenStackTenant.Volume' && name === 'snapshot') {
-      component = 'snapshotCreateDialog';
-    }
-
-    return component;
   };
 }
