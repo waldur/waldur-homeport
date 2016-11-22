@@ -18,10 +18,12 @@ class ProjectManageController {
               customersService,
               $rootScope,
               $state,
-              $q) {
+              $q,
+              ENV) {
     this.projectsService = projectsService;
     this.currentStateService = currentStateService;
     this.customersService = customersService;
+    this.hideProjectCostDetails = ENV.toBeFeatures.indexOf('projectCostDetails') !== -1 ? 'projectCostDetails' : null;
     this.$rootScope = $rootScope;
     this.$state = $state;
     this.$q = $q;

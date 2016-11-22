@@ -212,12 +212,13 @@
     .controller('ProjectDashboardController', ProjectDashboardController);
 
   ProjectDashboardController.$inject = [
-    'currentStateService', 'DashboardChartService', '$scope'
+    'currentStateService', 'DashboardChartService', '$scope', 'ENV'
   ];
   function ProjectDashboardController(
-    currentStateService, DashboardChartService, $scope
+    currentStateService, DashboardChartService, $scope, ENV
   ) {
     var vm = this;
+    vm.hideAlerts = ENV.toBeFeatures.indexOf('alerts') !== -1 ? 'alerts' : null;
 
     activate();
     $scope.$on('currentProjectUpdated', function() {
