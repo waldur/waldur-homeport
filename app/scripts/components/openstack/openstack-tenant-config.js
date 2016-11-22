@@ -72,13 +72,13 @@ export default {
     user_username: {
       type: 'string',
       label: 'Initial admin username',
-      placeholder: '<generated username>',
+      placeholder: 'generate automatically',
       help_text: 'Leave blank if you want admin username to be auto-generated'
     },
     user_password: {
       type: 'password',
       label: 'Initial admin password',
-      placeholder: '<generated password>',
+      placeholder: 'generate automatically',
       help_text: 'Leave blank if you want admin password to be auto-generated'
     }
   }
