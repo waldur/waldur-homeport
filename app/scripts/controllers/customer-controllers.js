@@ -305,6 +305,7 @@
           label: "Analytics",
           icon: "fa-bar-chart-o",
           link: "organization.analysis",
+          feature: 'analytics',
           children: [
             {
               label: "Cost analysis",

@@ -15,7 +15,12 @@ angular.module('ncsaas')
       'apps',
       'premiumSupport',
       'notifications',
-      'alerts'
+      'alerts',
+      'mainSearch',
+      'analytics',
+      'projectCostDetails',
+      'import',
+      'openMap'
     ],
     featuresVisible: false,
     appStoreCategories: [
@@ -48,6 +53,12 @@ angular.module('ncsaas')
     ],
     futureCategories: [
       'support',
-      'apps',
+      'apps'
+    ],
+    offeringCategories: [
+      {
+        label: 'IaaS',
+        items: ['private_clouds', 'vms', 'storages', 'support']
+      }
     ]
   });

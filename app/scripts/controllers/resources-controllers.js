@@ -121,13 +121,15 @@
       },
       getTableActions: function() {
         var actions = [];
-        if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('import') == -1) {
+        if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('import') === -1) {
           actions.push(this.getImportAction());
         }
         if (this.category !== undefined) {
           actions.push(this.getCreateAction());
         }
-        actions.push(this.getMapAction());
+        if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('openMap') === -1) {
+          actions.push(this.getMapAction());
+        }
         return actions;
       },
       getImportAction: function() {
