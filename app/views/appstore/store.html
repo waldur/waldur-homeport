@@ -1,20 +1,7 @@
 <div class="appstore-wrapper">
     <div class="appstore-content">
-        <div ng-if="AppStore.renderStore"
-             ng-include="'views/appstore/sections.html'"
-             class="wrapper wrapper-content">
-        </div>
-
-        <div ng-include="'views/appstore/summary.html'"></div>
-
-        <section ng-if="AppStore.selectedResourceType" title="{{ AppStore.getTooltip() }}" class="text-center">
-            <button class="btn btn-primary" ng-class="{'disabled': !AppStore.canSave()}" submit-button="AppStore.save()">
-                <i class="fa fa-shopping-cart" ng-if="AppStore.enablePurchaseCostDisplay"></i>
-                {{ AppStore.enablePurchaseCostDisplay ? 'Purchase' : 'Create' }}
-            </button>
-            <button class="btn btn-default" cancel-button>Cancel</button>
-        </section>
-        <div class="project-alert-message" ng-if="!AppStore.loadingProviders && !AppStore.renderStore">
+        <div class="project-alert-message"
+             ng-if="!AppStore.loadingProviders && !AppStore.renderStore">
             <p>
                 There are no working {{category.label.toLowerCase()}} providers available for the current project.<br />
                 <span visible="providers">
@@ -22,6 +9,20 @@
                     <a ui-sref="organization.providers({uuid: AppStore.currentCustomer.uuid})">provider management</a>.
                 </span>
             </p>
+        </div>
+
+        <div ng-if="AppStore.loadingProviders">
+            <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
+        </div>
+
+        <div ng-if="AppStore.renderStore">
+            <div ng-if="AppStore.selectedCategory.type == 'package'">
+                <appstore-support-agreement></appstore-support-agreement>
+            </div>
+
+            <div ng-if="AppStore.selectedCategory.type == 'provider'">
+                <div ng-include="'views/appstore/sections.html'"></div>
+            </div>
         </div>
     </div>
 </div>

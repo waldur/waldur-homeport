@@ -1,0 +1,40 @@
+<div class="modal-header">
+    <h3 class="modal-title">
+        {{ ::$ctrl.title }}
+    </h3>
+</div>
+
+<div class="modal-body">
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th ng-repeat="column in $ctrl.columns">
+                        {{ ::column.label }}
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="choice in $ctrl.choices"
+                    ng-click="$ctrl.selectItem(choice.item)"
+                    ng-keyup="$event.keyCode == 13 && $ctrl.selectItem(choice.item)"
+                    ng-class="{disabled: choice.item.disabled}"
+                    class="cursor-pointer">
+                    <td>
+                        <input type="radio" ng-model="$ctrl.value" ng-value="choice.item">
+                    </td>
+                    <td ng-repeat="column in $ctrl.columns">
+                        {{ ::$ctrl.formatValue(column, choice) }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-default" ng-click="$ctrl.dismiss()">Cancel</button>
+    <button class="btn btn-default" ng-click="$ctrl.reset()">Reset</button>
+    <button class="btn btn-primary" ng-click="$ctrl.confirm()">Select</button>
+</div>

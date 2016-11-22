@@ -28,38 +28,6 @@
     }
   }
 
-
-  angular.module('ncsaas')
-    .controller('AppStoreOfferingController', AppStoreOfferingController);
-
-  AppStoreOfferingController.$inject = [
-    '$stateParams', '$state', 'issuesService', 'AppStoreUtilsService', 'ncUtilsFlash'
-  ];
-  function AppStoreOfferingController(
-    $stateParams, $state, issuesService, AppStoreUtilsService, ncUtilsFlash) {
-    var vm = this;
-    activate();
-    vm.save = save;
-
-    function activate() {
-      vm.offering = AppStoreUtilsService.findOffering($stateParams.category);
-      if (!vm.offering) {
-        $state.go('errorPage.notFound')
-      }
-    }
-
-    function save() {
-      return issuesService.createIssue({
-        summary: 'Please create a turnkey solution: ' + vm.offering.label,
-        description: vm.details
-      }).then(function() {
-        $state.go('support.list');
-      }, function(error) {
-        ncUtilsFlash.error('Unable to create request for a turnkey solution.');
-      });
-    }
-  }
-
   angular.module('ncsaas')
     .controller('AppStoreHeaderController', AppStoreHeaderController);
 
@@ -96,11 +64,11 @@
       'ncUtilsFlash',
       'projectsService',
       'priceEstimationService',
-      '$document',
       '$scope',
       '$filter',
       'ncServiceUtils',
       'resourceUtils',
+      'AppstoreFieldConfiguration',
       AppStoreController]);
 
   function AppStoreController(
@@ -122,22 +90,13 @@
     ncUtilsFlash,
     projectsService,
     priceEstimationService,
-    $document,
     $scope,
     $filter,
     ncServiceUtils,
-    resourceUtils) {
+    resourceUtils,
+    AppstoreFieldConfiguration) {
     var controllerScope = this;
     var Controller = baseControllerAddClass.extend({
-      UNIQUE_FIELDS: {
-        service_project_link: 'service_project_link',
-      },
-      FIELD_TYPES: {
-        string: 'string',
-        field: 'field',
-        integer: 'integer'
-      },
-
       currency: ENV.currency,
       enablePurchaseCostDisplay: ENV.enablePurchaseCostDisplay,
       VmProviderSettingsUuid: ENV.VmProviderSettingsUuid,
@@ -145,6 +104,7 @@
 
       secondStep: false,
       resourceTypesBlock: false,
+      loadingResourceProperties: false,
 
       successMessage: 'Purchase of {vm_name} was successful.',
       formOptions: {},
@@ -181,19 +141,6 @@
         this.service = resourcesService;
         this.controllerScope = controllerScope;
         this._super();
-      },
-      modalInit: function(field) {
-        var vm = this;
-        field.showChoices = true;
-        $document.bind('keydown', function(e) {
-          if (e.which === 27) {
-            vm.closeModal(field);
-          }
-        });
-      },
-      closeModal: function(field) {
-        field.showChoices = false;
-        $document.unbind('keypress');
       },
       activate:function() {
         var vm = this;
@@ -320,7 +267,10 @@
               vm.setFields(formOptions, validChoices);
             });
           });
-          ncUtils.blockElement('resource-properties', promise);
+          vm.loadingResourceProperties = true;
+          promise.finally(function() {
+            vm.loadingResourceProperties = false;
+          });
         }
       },
       getValidChoices: function(formOptions) {
@@ -379,133 +329,17 @@
         }
       },
       setFields: function(formOptions, validChoices) {
-        this.fields = [];
-        for (var name in formOptions) {
-          var options = formOptions[name];
-          if (name === this.UNIQUE_FIELDS.service_project_link) {
-            continue;
+        var key = this.serviceType + '.' + this.selectedResourceType;
+        var fields = angular.copy(AppstoreFieldConfiguration[key]);
+        angular.forEach(validChoices, function(choices, name) {
+          if (fields.options.hasOwnProperty(name)) {
+            fields.options[name].choices = choices;
           }
-
-          var type = options.type;
-          if (type === 'field' || type === 'select') {
-            type = 'choice';
-          }
-
-          var choices = validChoices[name] || options.choices;
-
-          if (name === 'user_data') {
-            type = 'text';
-          }
-
-          var icons = {
-            size: 'gear',
-            flavor: 'gear',
-            ssh_public_key: 'key',
-            security_groups: 'lock',
-            group: 'group'
-          };
-          var icon = icons[name] || 'cloud';
-          var label = options.label;
-          var required = options.required;
-          var help_text = options.help_text;
-          var min, max, units;
-
-          if (name === 'system_volume_size' || name === 'size') {
-            min = 0;
-            max = 320;
-            units = 'GB';
-            help_text = null;
-          }
-
-          if (name === 'data_volume_size') {
-            min = 1;
-            max = 320;
-            units = 'GB';
-            required = true;
-            help_text = null;
-          }
-          var display_label;
-          if (name === 'username') {
-            display_label = this.selectedService.type + ' OS username';
-          }
-          if (name === 'password') {
-            display_label = this.selectedService.type + ' OS password';
-          }
-          if (name === 'name') {
-            if (this.selectedCategory.name === 'Virtual machines') {
-              display_label = 'VM name';
-            }
-            if (this.selectedCategory.name === 'Applications') {
-              display_label = 'Name'
-            }
-          }
-
-          var item_type = name;
-          if (name === 'size') {
-            item_type = 'flavor';
-          }
-
-          this.fields.push({
-            name: name,
-            label: display_label ? display_label : label,
-            type: type,
-            help_text: help_text,
-            required: required,
-            choices: choices,
-            icon: icon,
-            min: min,
-            max: max,
-            units: units,
-            options: options,
-            item_type: item_type
-          });
-          display_label = null;
-        }
-        this.fieldsOrder = [
-          'name', 'region', 'image', 'size', 'flavor', 'system_volume_size', 'data_volume_size',
-          'security_groups', 'ssh_public_key', 'tenant', 'floating_ip', 'skip_external_ip_assignment',
-          'availability_zone', 'description', 'user_data', 'user_username'
-        ];
-        this.fields.sort(this.fieldsComparator.bind(this));
-        this.sortFlavors();
-        this.attachIconsToImages();
-      },
-      fieldsComparator: function(a, b) {
-        var i = this.fieldsOrder.indexOf(a.name);
-        var j = this.fieldsOrder.indexOf(b.name);
-        if (i === j) {
-          return 0;
-        } else if (i === -1) {
-          return 1;
-        } else if (j === -1) {
-          return -1;
-        } else {
-          return i - j;
-        }
+        });
+        this.fields = fields;
       },
       cartComparator: function(a, b) {
         return this.fieldsOrder.indexOf(a.type) - this.fieldsOrder.indexOf(b.type);
-      },
-      attachIconsToImages: function() {
-        var field = this.findFieldByName('image');
-        if (!field) {
-          return;
-        }
-        for (var i = 0; i < field.choices.length; i++) {
-          var choice = field.choices[i];
-          if (choice.display_name.indexOf('Visual Studio') != -1) {
-            choice.icon = 'visual-studio';
-          }
-          else if (choice.display_name.indexOf('CentOS') != -1) {
-            choice.icon = 'centos';
-          }
-          else if (choice.display_name.indexOf('Windows') != -1) {
-            choice.icon = 'windows';
-          }
-          else if (choice.display_name.indexOf('Ubuntu') != -1) {
-            choice.icon = 'ubuntu';
-          }
-        }
       },
       getServiceTypeDisplay: ncServiceUtils.getTypeDisplay,
       getServiceIcon: ncServiceUtils.getServiceIcon,
@@ -525,7 +359,6 @@
         this.choiceDisplay[field.name] = undefined;
         this.updateDependentFields(field.name);
         this.deletePriceItem(field.name);
-        this.closeModal(field);
       },
       doChoice: function(field, choice) {
         var vm = this, name = field.name;
@@ -571,12 +404,6 @@
         if (name == 'region') {
           this.filterSizeByRegion();
           this.filterImageByRegion();
-        }
-        if (name == 'image') {
-          this.updateFlavors();
-        }
-        if (name == 'flavor') {
-          this.setSize();
         }
       },
       isChosen: function(name, choice) {
@@ -651,49 +478,6 @@
           this.choiceDisplay['image'] = null;
           this.deletePriceItem('image');
         }
-        this.sortImages();
-      },
-      setSize: function() {
-        var field = this.findFieldByName('system_volume_size');
-        if (!field) {
-          return;
-        }
-        if (this.instance.flavor_item) {
-          var disk_gb = Math.round(this.instance.flavor_item.disk / 1024);
-        } else {
-          var disk_gb = 0;
-        }
-        field.min = disk_gb;
-        this.instance.system_volume_size = disk_gb;
-        this.instance.system_volume_size_raw = disk_gb;
-      },
-      updateFlavors: function() {
-        var field = this.findFieldByName('flavor');
-        if (!field) {
-          return;
-        }
-        var image = this.instance.image_item;
-        if (!image) {
-          for (var i = 0; i < field.choices.length; i++) {
-            var choice = field.choices[i];
-            choice.disabled = false;
-          }
-          return;
-        }
-        for (var i = 0; i < field.choices.length; i++) {
-          var choice = field.choices[i];
-          choice.disabled = image.min_ram > choice.item.ram || image.min_disk > choice.item.disk;
-        }
-
-        var flavor = this.instance.flavor;
-        var choice = this.getChoiceByValue(field.choices, flavor);
-        if (choice && choice.disabled) {
-          this.instance.flavor = null;
-          this.choiceDisplay['flavor'] = null;
-          this.deletePriceItem('flavor');
-        }
-
-        this.sortFlavors();
       },
       sortSizes: function() {
         var field = this.findFieldByName('size');
@@ -714,43 +498,6 @@
           if (a.item.disk > b.item.disk) return 1;
           if (a.item.disk < b.item.disk) return -1;
 
-          return 0;
-        });
-      },
-      sortImages: function() {
-        var field = this.findFieldByName('image');
-        if (!field || !field.choices) {
-          return;
-        }
-
-        field.choices.sort(function(a, b) {
-          if (a.disabled < b.disabled) return -1;
-          if (a.disabled > b.disabled) return 1;
-
-          if (a.item.name > b.item.name) return 1;
-          if (a.item.name < b.item.name) return -1;
-
-          return 0;
-        });
-      },
-      sortFlavors: function() {
-        var field = this.findFieldByName('flavor');
-        if (!field || !field.choices) {
-          return;
-        }
-
-        field.choices.sort(function(a, b) {
-          if (a.disabled < b.disabled) return -1;
-          if (a.disabled > b.disabled) return 1;
-
-          if (a.item.cores > b.item.cores) return 1;
-          if (a.item.cores < b.item.cores) return -1;
-
-          if (a.item.ram > b.item.ram) return 1;
-          if (a.item.ram < b.item.ram) return -1;
-
-          if (a.item.disk > b.item.disk) return 1;
-          if (a.item.disk < b.item.disk) return -1;
           return 0;
         });
       },
@@ -997,15 +744,15 @@
         instance.service_project_link = this.selectedService.service_project_link_url;
 
         for (var name in this.allFormOptions) {
-          instance[name] = this.instance[name];
+          if (this.instance.hasOwnProperty(name)) {
+            var value = this.instance[name];
+            if (value.hasOwnProperty('url')) {
+              value = value.url;
+            }
+            instance[name] = value;
+          }
         }
 
-        if (this.instance.system_volume_size) {
-          instance.system_volume_size = this.instance.system_volume_size * 1024;
-        }
-        if (this.instance.data_volume_size) {
-          instance.data_volume_size = this.instance.data_volume_size * 1024;
-        }
         if (this.instance.security_groups) {
           instance.security_groups = [];
           for (var i = 0; i < this.instance.security_groups.length; i++) {

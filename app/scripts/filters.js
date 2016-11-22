@@ -31,7 +31,11 @@
       if (value.indexOf && value.indexOf(ENV.currency) !== -1) {
         return value;
       }
-      return $filter('currency')(value, ENV.currency);
+      var fractionSize = 2;
+      if (value < 0.01) {
+        fractionSize = 3;
+      }
+      return $filter('currency')(value, ENV.currency, fractionSize);
     }
   }
 
@@ -48,6 +52,17 @@
       if (input) {
         return moment(input).format('YYYY-MM-DD HH:mm');
       }
+    }
+  });
+
+  angular.module('ncsaas').filter('snakeCase', function() {
+    var SNAKE_CASE_REGEXP = /[A-Z]/g;
+    var separator = '-';
+
+    return function(input) {
+      return input.replace(SNAKE_CASE_REGEXP, function(letter, pos) {
+        return (pos ? separator : '') + letter.toLowerCase();
+      });
     }
   });
 
