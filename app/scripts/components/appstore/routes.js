@@ -21,7 +21,7 @@ export default function appstoreRoutes($stateProvider) {
 
     .state('appstore.offering', {
       url: 'offering/:category/',
-      templateUrl: '<appstore-offering></appstore-offering>',
+      template: '<appstore-offering></appstore-offering>',
     })
 
     .state('compare', {
