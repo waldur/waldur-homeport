@@ -288,14 +288,6 @@ angular.module('ncsaas')
     },
     featuresVisible: false,
 
-    nonChargeableAppStoreOptions: [
-      'ssh_public_key',
-      'region',
-      'visibility_level',
-      'group',
-      'security_groups'
-    ],
-
     requestTimeout: 1000 * 20,
     countsCacheTime: 60, // seconds
     enablePurchaseCostDisplay: true,

@@ -1,31 +1,87 @@
 <div class="wrapper wrapper-content">
-<div visible="compare"
-     ng-if="AppStore.showCompare.indexOf(AppStore.selectedCategory.name) !== -1">
-    <a ui-sref="compare.compare">
-        <i class="fa fa-balance-scale"></i>
-        Compare flavors
-    </a>
-</div>
+    <div class="row">
+        <div class="col-md-9">
+            <div class="row" ng-if="!AppStore.selectedResourceType">
+                <div class="col-md-4"
+                     ng-repeat="service in AppStore.categoryServices[AppStore.selectedCategory.name]"
+                     ng-click="AppStore.setService(service)"
+                     ng-class="AppStore.serviceClass(service)">
 
-<section class="step-2" ng-if="AppStore.secondStep">
-    <div class="step-title">
-        <span>Choose provider</span>
-    </div>
-    <div class="appstore-templates">
-        <div class="appstore-template {{ service.type.toLowerCase() }}"
-             ng-repeat="service in AppStore.categoryServices[AppStore.selectedCategory.name]"
-             ng-click="AppStore.setService(service)"
-             ng-class="AppStore.serviceClass(service)"
-             uib-tooltip="{{ service.warning }}">
-            <div class="icon">
-                <img ng-src="{{ AppStore.getServiceIcon(service.type) }}" alt="">
+                    <div class="ibox">
+                        <div class="ibox-content product-box cursor-pointer">
+                            <div class="text-center m-b-sm m-t-xl">
+                                <img ng-src="{{ AppStore.getServiceIcon(service.type) }}" class="img-lg">
+                            </div>
+                            <div class="product-desc">
+                                <div class="pull-right">
+                                    <a class="btn btn-sm btn-outline btn-primary">Select <i class="fa fa-long-arrow-right"></i> </a>
+                                </div>
+                                <a class="product-name">{{ ::service.name }}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <h3>{{ service.name }}</h3>
+
+            <div ng-if="AppStore.loadingResourceProperties">
+                <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
+            </div>
+
+            <div class="ibox" ng-if="AppStore.selectedResourceType && !AppStore.loadingResourceProperties">
+                <div class="ibox-title">
+                    <h5>Configure {{ AppStore.getServiceTypeDisplay(AppStore.serviceType) }}
+                        {{ AppStore.selectedResourceTypeName }}</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-sm-3 control-label">
+                                <label>Provider</label>
+                            </div>
+                            <div class="col-sm-4 form-control-static">
+                                {{ AppStore.selectedService.name }}
+                            </div>
+                        </div>
+                    </div>
+                    <appstore-form fields="AppStore.fields"
+                           errors="AppStore.errors"
+                           model="AppStore.instance">
+                    </appstore-form>
+                </div>
+                <div class="ibox-content">
+                    <button class="btn btn-primary pull-right"
+                        submit-button="AppStore.save()" type="submit">
+                        <i class="fa fa fa-shopping-cart"></i>
+                        {{ AppStore.enablePurchaseCostDisplay ? 'Purchase' : 'Create' }}
+                    </button>
+                    <button class="btn btn-white" cancel-button type="button">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="ibox" visible="compare" ng-if="!AppStore.selectedResourceType && AppStore.showCompare.indexOf(AppStore.selectedCategory.name) !== -1">
+                <div class="ibox-title">
+                    <h5>
+                        <a ui-sref="compare.compare">
+                            <i class="fa fa-balance-scale"></i>
+                            Compare flavors
+                        </a>
+                    </h5>
+                </div>
+            </div>
+            <div ng-if="AppStore.selectedResourceType && !AppStore.loadingResourceProperties">
+                <appstore-summary
+                    component="AppStore.fields.summaryComponent"
+                    model="AppStore.instance">
+                </appstore-summary>
+            </div>
         </div>
     </div>
-</section>
+</div>
 
-<section class="step-2" ng-show="AppStore.resourceTypesBlock">
+<!-- <section class="step-2" ng-show="AppStore.resourceTypesBlock">
     <div class="step-title"><span>Choose resource type</span></div>
     <div class="appstore-templates">
         <div class="appstore-template {{name.toLowerCase()}}"
@@ -40,32 +96,4 @@
         </div>
     </div>
 </section>
-
-<div ng-if="AppStore.loadingResourceProperties">
-    <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
-</div>
-
-<section class="step-3" ng-if="AppStore.selectedResourceType && !AppStore.loadingResourceProperties">
-    <div class="step-title">
-        <span>
-            Configure {{ AppStore.getServiceTypeDisplay(AppStore.serviceType) }}
-            {{ AppStore.selectedResourceTypeName }}
-        </span>
-    </div>
-
-    <appstore-form fields="AppStore.fields"
-                   errors="AppStore.errors"
-                   model="AppStore.instance">
-    </appstore-form>
-</section>
-</div>
-
-<appstore-summary></appstore-summary>
-
-<section ng-if="AppStore.selectedResourceType" title="{{ AppStore.getTooltip() }}" class="text-center">
-    <button class="btn btn-primary" ng-class="{'disabled': !AppStore.canSave()}" submit-button="AppStore.save()">
-        <i class="fa fa-shopping-cart" ng-if="AppStore.enablePurchaseCostDisplay"></i>
-        {{ AppStore.enablePurchaseCostDisplay ? 'Purchase' : 'Create' }}
-    </button>
-    <button class="btn btn-default" cancel-button>Cancel</button>
-</section>
+ -->

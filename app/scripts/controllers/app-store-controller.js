@@ -127,14 +127,7 @@
       agreementShow: false,
       chooseResourceTypeStepNumber: 3,
 
-      // cart
-      total: 0,
-      defaultPriceListItems: [],
-      priceItems: [],
-
       fields: [],
-      fieldsOrder: null,
-
       quotaThreshold: 0.8,
 
       init:function() {
@@ -173,7 +166,6 @@
         this.selectedResourceTypeName = null;
         this.selectedService = null;
         this.fields = [];
-        this.resetPriceItems();
 
         var services = this.categoryServices[this.selectedCategory.name];
 
@@ -216,7 +208,6 @@
         if (!service.enabled) {
           return;
         }
-        this.resetPriceItems();
         this.selectedService = service;
         this.serviceType = this.selectedService.type;
         this.serviceMetadata = this.servicesMetadata[this.serviceType];
@@ -252,26 +243,29 @@
         var vm = this;
         vm.selectedResourceType = type;
         vm.errors = {};
-        vm.choiceDisplay = {};
         vm.selectedResourceTypeName = type.split(/(?=[A-Z])/).join(" ");
         vm.fields = [];
-        var resourceUrl = vm.getResourceUrl();
-        if (resourceUrl) {
-          vm.instance = servicesService.$create(resourceUrl);
-          vm.instance.service_project_link = vm.selectedService.service_project_link_url;
+        vm.instance = vm.buildInstance();
 
-          var promise = servicesService.getOption(resourceUrl).then(function(response) {
-            var formOptions = response.actions.POST;
-            vm.allFormOptions = formOptions;
-            return vm.getValidChoices(formOptions).then(function(validChoices) {
-              vm.setFields(formOptions, validChoices);
-            });
+        var promise = servicesService.getOption(vm.getResourceUrl()).then(function(response) {
+          var formOptions = response.actions.POST;
+          vm.allFormOptions = formOptions;
+          return vm.getValidChoices(formOptions).then(function(validChoices) {
+            vm.setFields(formOptions, validChoices);
           });
-          vm.loadingResourceProperties = true;
-          promise.finally(function() {
-            vm.loadingResourceProperties = false;
-          });
-        }
+        });
+        vm.loadingResourceProperties = true;
+        promise.finally(function() {
+          vm.loadingResourceProperties = false;
+        });
+      },
+      buildInstance: function() {
+        return {
+          type: this.selectedResourceType,
+          customer: this.currentCustomer,
+          project: this.currentProject,
+          service: this.selectedService,
+        };
       },
       getValidChoices: function(formOptions) {
         var vm = this;
@@ -298,21 +292,13 @@
             var query = angular.extend(query, context);
 
             var promise = servicesService.getAll(query, base_url).then(function(response) {
-              validChoices[name] = vm.formatChoices(response, options, name);
+              validChoices[name] = response.map(function(item) {return {item: item}});
             });
             promises.push(promise);
           }
         });
         return $q.all(promises).then(function() {
           return validChoices;
-        });
-      },
-      formatChoices: function(items, options, name) {
-        var vm = this;
-        return items.map(function(item) {
-          return {
-            item: item
-          }
         });
       },
       setFields: function(formOptions, validChoices) {
@@ -325,9 +311,6 @@
         });
         this.fields = fields;
       },
-      cartComparator: function(a, b) {
-        return this.fieldsOrder.indexOf(a.type) - this.fieldsOrder.indexOf(b.type);
-      },
       getServiceTypeDisplay: ncServiceUtils.getTypeDisplay,
       getServiceIcon: ncServiceUtils.getServiceIcon,
       formatResourceType: resourceUtils.formatResourceType,
@@ -339,61 +322,6 @@
           provider: this.selectedCategory.type === 'provider'
         };
       },
-      choiceDisplay: {},
-      doChoice: function(field, choice) {
-        var vm = this, name = field.name;
-        if (ENV.nonChargeableAppStoreOptions.indexOf(name) !== -1) {
-          return;
-        }
-        defaultPriceListItemsService.getAll({
-          resource_type: vm.serviceType + '.' + vm.selectedResourceType
-        }).then(function(response) {
-          vm.defaultPriceListItems = response;
-          vm.setPriceItem(field.item_type, choice.display_name, choice);
-        });
-      },
-      setPriceItem: function(item_type, key, choice) {
-        this.deletePriceItem(item_type);
-        var price = this.findPrice(item_type, key) || choice.item.price || 0;
-        this.pushPriceItem(item_type, key, price);
-      },
-      findPrice: function(item_type, key) {
-        for (var i = 0; i < this.defaultPriceListItems.length; i++) {
-          var priceItem = this.defaultPriceListItems[i];
-          if (priceItem.item_type === item_type && key.indexOf(priceItem.key) !== -1) {
-            return priceItem.value;
-          }
-        }
-      },
-      pushPriceItem: function(type, name, price) {
-        this.priceItems.push({
-          type: type,
-          name: name,
-          price: price
-        });
-        this.priceItems.sort(this.cartComparator.bind(this));
-        this.countTotal();
-      },
-      deletePriceItem: function(name) {
-        var itemTypes = this.priceItems.map(function(item) {
-          return item.type;
-        });
-
-        var index = itemTypes.indexOf(name);
-        if (index + 1) {
-          this.priceItems.splice(index, 1);
-        }
-      },
-      resetPriceItems: function() {
-        this.priceItems = [];
-        this.total = 0;
-      },
-      countTotal: function() {
-        this.total = 0;
-        for (var i = 0; i < this.priceItems.length; i++) {
-          this.total += this.priceItems[i].price * 1;
-        }
-      },
       setCurrentProject: function() {
         var vm = this;
         var categories = ENV.appStoreCategories;
@@ -404,11 +332,9 @@
         vm.serviceType = null;
         vm.resourceTypesBlock = false;
         vm.fields = [];
-        vm.priceItems = [];
         vm.selectedResourceType = null;
         vm.instance = null;
         vm.renderStore = false;
-        vm.countTotal();
         vm.loadingProviders = true;
 
         var projectsPromise = vm.loadProjectWithServices(),
@@ -518,13 +444,6 @@
       selectSupportPackage: function(supportPackage) {
         this.agreementShow = true;
         this.selectedPackage = supportPackage;
-        this.serviceType = 'Total';
-
-        var type = 'Support plan';
-        var display_name = supportPackage.name;
-
-        this.deletePriceItem(type);
-        this.pushPriceItem(type, display_name, supportPackage.base_rate);
       },
       signContract: function() {
         var contract = premiumSupportContractsService.$create();
@@ -585,13 +504,6 @@
               value = value.url;
             }
             instance[name] = value;
-          }
-        }
-
-        if (this.instance.security_groups) {
-          instance.security_groups = [];
-          for (var i = 0; i < this.instance.security_groups.length; i++) {
-            instance.security_groups.push({url: this.instance.security_groups[i]});
           }
         }
         return instance.$save();

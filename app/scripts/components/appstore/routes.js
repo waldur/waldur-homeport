@@ -16,7 +16,10 @@ export default function appstoreRoutes($stateProvider) {
       url: ':category/',
       templateUrl: 'views/appstore/store.html',
       controller: 'AppStoreController',
-      controllerAs: 'AppStore'
+      controllerAs: 'AppStore',
+      data: {
+        pageClass: 'gray-bg'
+      }
     })
 
     .state('appstore.offering', {
