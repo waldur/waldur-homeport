@@ -1,0 +1,35 @@
+<div class="ibox">
+    <div class="ibox-title">
+        <h5>
+            Checkout summary
+        </h5>
+    </div>
+    <div class="ibox-content">
+        <p ng-if="!$ctrl.package.name">
+            No items yet.
+        </p>
+        <table class="table table-bordered"
+            ng-if="$ctrl.package.name">
+            <tr>
+                <td><strong>Support package</strong></td>
+                <td>{{ $ctrl.package.name }}</td>
+            </tr>
+            <tr>
+                <td><strong>Monthly base price</strong></td>
+                <td>{{ $ctrl.package.base_rate | defaultCurrency }}</td>
+            </tr>
+            <tr>
+                <td><strong>Hour price</strong></td>
+                <td>{{ $ctrl.package.hour_rate | defaultCurrency }}</td>
+            </tr>
+            <tr>
+                <td><strong>Invoiced to</strong></td>
+                <td>{{ $ctrl.customer.name }}</td>
+            </tr>
+            <tr>
+                <td><strong>Project</strong></td>
+                <td>{{ $ctrl.project.name }}</td>
+            </tr>
+        </table>
+    </div>
+</div>

@@ -97,7 +97,6 @@
     AppstoreFieldConfiguration) {
     var controllerScope = this;
     var Controller = baseControllerAddClass.extend({
-      currency: ENV.currency,
       enablePurchaseCostDisplay: ENV.enablePurchaseCostDisplay,
       VmProviderSettingsUuid: ENV.VmProviderSettingsUuid,
       gitLabProviderSettingsUuid: ENV.gitLabProviderSettingsUuid,

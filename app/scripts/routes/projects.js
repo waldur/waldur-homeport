@@ -123,9 +123,7 @@
 
       .state('project.support', {
         url: 'support/',
-        templateUrl: 'views/partials/list.html',
-        controller: 'ProjectSupportTabController',
-        controllerAs: 'Ctrl',
+        template: '<support-agreements-list></support-agreements-list>',
         data: {
           pageTitle: 'Premium support'
         }

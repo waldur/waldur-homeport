@@ -1,28 +1,24 @@
-<div class="appstore-wrapper">
-    <div class="appstore-content">
-        <div class="project-alert-message"
-             ng-if="!AppStore.loadingProviders && !AppStore.renderStore">
-            <p>
-                There are no working {{category.label.toLowerCase()}} providers available for the current project.<br />
-                <span visible="providers">
-                    You can change that in
-                    <a ui-sref="organization.providers({uuid: AppStore.currentCustomer.uuid})">provider management</a>.
-                </span>
-            </p>
-        </div>
+<div class="ibox-content"
+     ng-if="!AppStore.loadingProviders && !AppStore.renderStore">
+    <p>
+        There are no working {{category.label.toLowerCase()}} providers available for the current project.
+    </p>
+    <p visible="providers">
+        You can change that in
+        <a ui-sref="organization.providers({uuid: AppStore.currentCustomer.uuid})">provider management</a>.
+    </p>
+</div>
 
-        <div ng-if="AppStore.loadingProviders">
-            <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
-        </div>
+<div ng-if="AppStore.loadingProviders">
+    <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
+</div>
 
-        <div ng-if="AppStore.renderStore">
-            <div ng-if="AppStore.selectedCategory.type == 'package'">
-                <appstore-support-agreement></appstore-support-agreement>
-            </div>
+<div ng-if="AppStore.renderStore">
+    <div ng-if="AppStore.selectedCategory.type == 'package'">
+        <appstore-support-agreement></appstore-support-agreement>
+    </div>
 
-            <div ng-if="AppStore.selectedCategory.type == 'provider'">
-                <div ng-include="'views/appstore/sections.html'"></div>
-            </div>
-        </div>
+    <div ng-if="AppStore.selectedCategory.type == 'provider'">
+        <div ng-include="'views/appstore/sections.html'"></div>
     </div>
 </div>
