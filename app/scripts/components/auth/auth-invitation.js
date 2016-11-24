@@ -14,7 +14,11 @@ function AuthInvitationController(
   ENV,
   $state,
   $timeout,
-  invitationService) {
+  $auth,
+  usersService,
+  invitationService,
+  ncUtilsFlash,
+  $scope) {
   var controllerScope = this;
   var Controller = baseControllerClass.extend({
     init: function() {
@@ -24,11 +28,38 @@ function AuthInvitationController(
       }
       var vm = this;
       var invitationUUID = $state.params.uuid;
-      invitationService.executeAction(invitationUUID, 'check').then(function() {
-        vm.setInvitationToken(invitationUUID);
-      }, function() {
-        $state.go('errorPage.notFound');
+      $scope.$on('$stateChangeSuccess', function(event, to, toParams, from, fromParams) {
+        vm.previousState = from.name;
+        vm.previousStateParams = fromParams;
       });
+
+      if ($auth.isAuthenticated()) {
+        invitationService.$get(invitationUUID).then(function(invitation) {
+          if (invitation.civil_number) {
+            usersService.getCurrentUser().then(function(user) {
+              if (invitation.civil_number === user.civil_number) {
+                invitationService.accept(invitationUUID).then(function() {
+                  ncUtilsFlash.success('Your invitation was accepted');
+                  $state.go(vm.previousState, vm.previousStateParams);
+                });
+              } else {
+                ncUtilsFlash.error('Your civil number does not match number in invitation');
+              }
+            });
+          } else {
+            invitationService.accept(invitationUUID).then(function() {
+                ncUtilsFlash.success('Your invitation was accepted');
+                $state.go(vm.previousState, vm.previousStateParams);
+            });
+          }
+        });
+      } else {
+        invitationService.executeAction(invitationUUID, 'check').then(function() {
+          vm.setInvitationToken(invitationUUID);
+        }, function() {
+          $state.go('errorPage.notFound');
+        });
+      }
     },
     setInvitationToken: function(invitationUUID) {
       invitationService.setInvitationToken(invitationUUID);

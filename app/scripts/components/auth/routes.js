@@ -100,6 +100,7 @@ export default function authRoutes($stateProvider) {
       url: '/invitation/:uuid/',
       data: {
         anonymous: true,
+        invitation: true,
         bodyClass: 'old'
       },
       template: '<auth-invitation></auth-invitation>'
