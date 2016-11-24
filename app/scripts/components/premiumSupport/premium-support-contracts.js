@@ -1,15 +1,15 @@
-export default function supportAgreementsList() {
+export default function premiumSupportContracts() {
   return {
     restrict: 'E',
     templateUrl: 'views/partials/list.html',
-    controller: SupportAgreementsListController,
+    controller: ContractsListController,
     controllerAs: 'Ctrl',
     scope: {},
   }
 }
 
 // @ngInject
-function SupportAgreementsListController(
+function ContractsListController(
   baseControllerListClass,
   premiumSupportContractsService,
   premiumSupportPlansService,
@@ -30,7 +30,7 @@ function SupportAgreementsListController(
       this.entityOptions = {
         entityData: {
           noDataText: 'You have no SLAs yet.',
-          createLink: 'appstore.store({category: "support"})',
+          createLink: 'appstore.premiumSupport',
           createLinkText: 'Add SLA',
           expandable: true,
           hideActionButtons: true

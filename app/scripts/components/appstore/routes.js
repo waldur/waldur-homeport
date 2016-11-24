@@ -4,21 +4,48 @@ export default function appstoreRoutes($stateProvider) {
     .state('appstore', {
       url: '/appstore/',
       abstract: true,
-      templateUrl: 'views/appstore/base.html',
+      template: '<appstore-header></appstore-header>',
       data: {
         auth: true,
         pageTitle: 'Service store',
-        workspace: 'project'
+        workspace: 'project',
+        pageClass: 'gray-bg'
       }
     })
 
-    .state('appstore.store', {
-      url: ':category/',
-      templateUrl: 'views/appstore/store.html',
-      controller: 'AppStoreController',
-      controllerAs: 'AppStore',
+    .state('appstore.private_clouds', {
+      url: 'private_clouds/',
+      template: '<appstore-store></appstore-store>',
       data: {
-        pageClass: 'gray-bg'
+        category: 'private_clouds',
+        pageTitle: 'Private clouds'
+      }
+    })
+
+    .state('appstore.vms', {
+      url: 'vms/',
+      template: '<appstore-store></appstore-store>',
+      data: {
+        category: 'vms',
+        pageTitle: 'Virtual machines'
+      }
+    })
+
+    .state('appstore.apps', {
+      url: 'apps/',
+      template: '<appstore-store></appstore-store>',
+      data: {
+        category: 'apps',
+        pageTitle: 'Applications'
+      }
+    })
+
+    .state('appstore.storages', {
+      url: 'storages/',
+      template: '<appstore-store></appstore-store>',
+      data: {
+        category: 'storages',
+        pageTitle: 'Storages'
       }
     })
 

@@ -1,6 +1,6 @@
-import template from './support-agreement-summary.html';
+import template from './premium-support-summary.html';
 
-export default function supportAgreementSummary() {
+export default function premiumSupportSummary() {
   return {
     restrict: 'E',
     template: template,
@@ -8,7 +8,7 @@ export default function supportAgreementSummary() {
     controllerAs: '$ctrl',
     bindToController: true,
     scope: {
-      package: '=',
+      plan: '=',
       customer: '=',
       project: '='
     }

@@ -176,13 +176,13 @@
       },
       gotoAppstore: function() {
         if (this.category === ENV.VirtualMachines) {
-          $state.go('appstore.store', {category: 'vms'});
+          $state.go('appstore.vms');
         } else if (this.category === ENV.PrivateClouds) {
-          $state.go('appstore.store', {category: 'private_clouds'});
+          $state.go('appstore.private_clouds');
         } else if (this.category === ENV.Applications) {
-          $state.go('appstore.store', {category: 'apps'});
+          $state.go('appstore.apps');
         } else if (this.category === ENV.Storages) {
-          $state.go('appstore.store', {category: 'storages'});
+          $state.go('appstore.storages');
         }
       },
       getMapAction: function() {

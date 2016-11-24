@@ -1,14 +1,20 @@
-import { premiumSupportPlansService, premiumSupportContractsService } from './premium-support-service';
+import { premiumSupportPlansService, premiumSupportContractsService} from './premium-support-service';
 import longread from './longread';
-import appstoreSupportAgreement from './appstore-support-agreement';
-import supportAgreementsList from './support-agreements-list';
-import supportAgreementSummary from './support-agreement-summary';
+import premiumSupportProvision from './premium-support-provision';
+import premiumSupportAgreement from './premium-support-agreement';
+import premiumSupportPlans from './premium-support-plans';
+import premiumSupportContracts from './premium-support-contracts';
+import premiumSupportSummary from './premium-support-summary';
+import premiumSupportRoute from './routes';
 
 export default module => {
   module.service('premiumSupportPlansService', premiumSupportPlansService);
   module.service('premiumSupportContractsService', premiumSupportContractsService);
   module.directive('longread', longread);
-  module.directive('appstoreSupportAgreement', appstoreSupportAgreement);
-  module.directive('supportAgreementsList', supportAgreementsList);
-  module.directive('supportAgreementSummary', supportAgreementSummary);
+  module.directive('premiumSupportProvision', premiumSupportProvision);
+  module.directive('premiumSupportAgreement', premiumSupportAgreement);
+  module.directive('premiumSupportPlans', premiumSupportPlans);
+  module.directive('premiumSupportContracts', premiumSupportContracts);
+  module.directive('premiumSupportSummary', premiumSupportSummary);
+  module.config(premiumSupportRoute);
 }

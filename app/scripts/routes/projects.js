@@ -121,14 +121,6 @@
         }
       })
 
-      .state('project.support', {
-        url: 'support/',
-        template: '<support-agreements-list></support-agreements-list>',
-        data: {
-          pageTitle: 'Premium support'
-        }
-      })
-
       .state('project.delete', {
         url: 'delete/',
         template: '<project-manage></project-manage>',

@@ -1,6 +1,20 @@
-<div class="wrapper wrapper-content">
+<div class="wrapper wrapper-content"">
     <div class="row">
-        <div class="col-md-9">
+        <div ng-if="AppStore.loadingProviders">
+            <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
+        </div>
+
+        <div class="ibox-content" ng-if="!AppStore.loadingProviders && !AppStore.renderStore">
+            <p>
+                There are no working {{category.label.toLowerCase()}} providers available for the current project.
+            </p>
+            <p visible="providers">
+                You can change that in
+                <a ui-sref="organization.providers({uuid: AppStore.currentCustomer.uuid})">provider management</a>.
+            </p>
+        </div>
+
+        <div class="col-md-9" ng-if="AppStore.renderStore">
             <div class="row" ng-if="!AppStore.selectedResourceType">
                 <div class="col-md-4"
                      ng-repeat="service in AppStore.categoryServices[AppStore.selectedCategory.name]"
@@ -60,7 +74,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3" ng-if="AppStore.renderStore">
             <div class="ibox" visible="compare" ng-if="!AppStore.selectedResourceType && AppStore.showCompare.indexOf(AppStore.selectedCategory.name) !== -1">
                 <div class="ibox-title">
                     <h5>

@@ -5,22 +5,21 @@
         </h5>
     </div>
     <div class="ibox-content">
-        <p ng-if="!$ctrl.package.name">
+        <p ng-if="!$ctrl.plan.name">
             No items yet.
         </p>
-        <table class="table table-bordered"
-            ng-if="$ctrl.package.name">
+        <table class="table table-bordered" ng-if="$ctrl.plan.name">
             <tr>
                 <td><strong>Support package</strong></td>
-                <td>{{ $ctrl.package.name }}</td>
+                <td>{{ $ctrl.plan.name }}</td>
             </tr>
             <tr>
                 <td><strong>Monthly base price</strong></td>
-                <td>{{ $ctrl.package.base_rate | defaultCurrency }}</td>
+                <td>{{ $ctrl.plan.base_rate | defaultCurrency }}</td>
             </tr>
             <tr>
                 <td><strong>Hour price</strong></td>
-                <td>{{ $ctrl.package.hour_rate | defaultCurrency }}</td>
+                <td>{{ $ctrl.plan.hour_rate | defaultCurrency }}</td>
             </tr>
             <tr>
                 <td><strong>Invoiced to</strong></td>
