@@ -18,19 +18,24 @@
             <div class="row" ng-if="!AppStore.selectedResourceType">
                 <div class="col-md-4"
                      ng-repeat="service in AppStore.categoryServices[AppStore.selectedCategory.name]"
-                     ng-click="AppStore.setService(service)"
-                     ng-class="AppStore.serviceClass(service)">
+                     ng-click="AppStore.setService(service)">
 
-                    <div class="ibox">
+                    <div class="ibox" uib-tooltip="{{ service.warning }}">
                         <div class="ibox-content product-box cursor-pointer">
-                            <div class="text-center m-b-sm m-t-xl">
+                            <div class="text-center m-b-sm m-t-xl"
+                                 ng-class="{disabled: !service.enabled}">
                                 <img ng-src="{{ AppStore.getServiceIcon(service.type) }}" class="img-lg">
                             </div>
-                            <div class="product-desc">
+                            <div class="product-desc" ng-class="{disabled: !service.enabled}">
                                 <div class="pull-right">
-                                    <a class="btn btn-sm btn-outline btn-primary">Select <i class="fa fa-long-arrow-right"></i> </a>
+                                    <a class="btn btn-sm btn-outline btn-primary">
+                                        Select <i class="fa fa-long-arrow-right"></i>
+                                    </a>
                                 </div>
-                                <a class="product-name">{{ ::service.name }}</a>
+                                <a class="product-name">
+                                    <i class="fa fa-exclamation-triangle" ng-if="!!service.warning"></i>
+                                    {{ ::service.name }}
+                                </a>
                             </div>
                         </div>
                     </div>

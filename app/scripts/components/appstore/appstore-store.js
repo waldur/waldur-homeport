@@ -240,14 +240,6 @@ function AppStoreController(
     getServiceTypeDisplay: ncServiceUtils.getTypeDisplay,
     getServiceIcon: ncServiceUtils.getServiceIcon,
     formatResourceType: resourceUtils.formatResourceType,
-    serviceClass: function(service) {
-      return {
-        state: this.selectedService === service,
-        disabled: !service.enabled,
-        warning: !!service.warning,
-        provider: this.selectedCategory.type === 'provider'
-      };
-    },
     setCurrentProject: function() {
       var vm = this;
       var categories = ENV.appStoreCategories;
