@@ -260,8 +260,12 @@
           vm.instance = servicesService.$create(resourceUrl);
           vm.instance.service_project_link = vm.selectedService.service_project_link_url;
 
+          var key = vm.serviceType + '.' + vm.selectedResourceType;
+          var fields = angular.copy(AppstoreFieldConfiguration[key]);
+          vm.fields = fields;
+
           var promise = servicesService.getOption(resourceUrl).then(function(response) {
-            var formOptions = response.actions.POST;
+            var formOptions = angular.merge({}, response.actions.POST, fields.options);
             vm.allFormOptions = formOptions;
             return vm.getValidChoices(formOptions).then(function(validChoices) {
               vm.setFields(formOptions, validChoices);
@@ -286,6 +290,9 @@
         };
 
         angular.forEach(formOptions, function(options, name) {
+          if (options.resource) {
+            options.url = ENV.apiEndpoint + 'api/' + options.resource + '/';
+          }
           if (options.url && name != 'service_project_link') {
             var parts = options.url.split("?");
             if (parts.length > 1) {
@@ -316,14 +323,12 @@
         });
       },
       setFields: function(formOptions, validChoices) {
-        var key = this.serviceType + '.' + this.selectedResourceType;
-        var fields = angular.copy(AppstoreFieldConfiguration[key]);
+        var vm = this;
         angular.forEach(validChoices, function(choices, name) {
-          if (fields.options.hasOwnProperty(name)) {
-            fields.options[name].choices = choices;
+          if (vm.fields.options.hasOwnProperty(name)) {
+            vm.fields.options[name].choices = choices;
           }
         });
-        this.fields = fields;
       },
       cartComparator: function(a, b) {
         return this.fieldsOrder.indexOf(a.type) - this.fieldsOrder.indexOf(b.type);
