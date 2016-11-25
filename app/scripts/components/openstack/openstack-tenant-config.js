@@ -19,6 +19,7 @@ export default {
       label: 'VPC package',
       dialogTitle: 'Select Virtual Private Cloud package',
       dialogSize: 'lg',
+      resource: 'package-templates',
       parser: packageParser,
       formatter: packageFormatter,
       columns: [
