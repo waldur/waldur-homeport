@@ -1,5 +1,7 @@
 'use strict';
 
+// It is deployed on next
+
 angular.module('ncsaas')
   .constant('MODE', {
     modeName: 'modePortal',

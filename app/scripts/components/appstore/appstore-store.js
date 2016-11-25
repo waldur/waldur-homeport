@@ -164,13 +164,20 @@ function AppStoreController(
         return resource.split('.')[1];
       });
     },
+    resetResourceType: function() {
+      var vm = this;
+      vm.selectedResourceType = null;
+      vm.selectedResourceTypeName = null;
+      vm.fields = [];
+      vm.instance = null;
+      vm.allFormOptions = null;
+    },
     setResourceType: function(type) {
       var vm = this;
       vm.selectedResourceType = type;
       vm.errors = {};
       vm.selectedResourceTypeName = type.split(/(?=[A-Z])/).join(" ");
       vm.fields = [];
-      vm.instance = vm.buildInstance();
 
       var key = vm.serviceType + '.' + vm.selectedResourceType;
       var fields = angular.copy(AppstoreFieldConfiguration[key]);
@@ -185,6 +192,7 @@ function AppStoreController(
       });
       vm.loadingResourceProperties = true;
       promise.finally(function() {
+        vm.instance = vm.buildInstance();
         vm.loadingResourceProperties = false;
       });
     },
