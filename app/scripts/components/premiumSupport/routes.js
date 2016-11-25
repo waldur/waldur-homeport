@@ -7,7 +7,8 @@ export default function premiumSupportRoute($stateProvider) {
       data: {
         pageTitle: 'Premium support',
         pageClass: 'gray-bg',
-        workspace: 'project'
+        workspace: 'project',
+        category: 'support'
       }
     })
 
