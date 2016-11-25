@@ -1,4 +1,4 @@
-<div class="wrapper wrapper-content"">
+<div class="wrapper wrapper-content">
     <div class="row">
         <div ng-if="AppStore.loadingProviders">
             <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
@@ -63,11 +63,13 @@
                     </appstore-form>
                 </div>
                 <div class="ibox-content">
-                    <button class="btn btn-primary pull-right"
-                        submit-button="AppStore.save()" type="submit">
+                    <a class="btn btn-primary pull-right"
+                        submit-button="AppStore.save()" type="submit"
+                        ng-disabled="!AppStore.canSave()"
+                        uib-tooltip="{{ AppStore.getTooltip() }}">
                         <i class="fa fa fa-shopping-cart"></i>
                         {{ AppStore.enablePurchaseCostDisplay ? 'Purchase' : 'Create' }}
-                    </button>
+                    </a>
                     <button class="btn btn-white" cancel-button type="button">
                         Cancel
                     </button>

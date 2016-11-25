@@ -190,6 +190,7 @@ function AppStoreController(
         customer: this.currentCustomer,
         project: this.currentProject,
         service: this.selectedService,
+        service_project_link: this.selectedService.service_project_link_url
       };
     },
     getValidChoices: function(formOptions) {
@@ -376,6 +377,12 @@ function AppStoreController(
         return ENV.apiEndpoint + 'api/openstack-packages/';
       }
       return this.serviceMetadata.resources[this.selectedResourceType];
+    },
+    save: function() {
+      if (!this.canSave()) {
+        return $q.reject();
+      }
+      return this._super();
     },
     saveInstance: function() {
       var resourceUrl = this.getResourceUrl();

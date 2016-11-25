@@ -18,7 +18,8 @@ export default function appstoreRoutes($stateProvider) {
       template: '<appstore-store></appstore-store>',
       data: {
         category: 'private_clouds',
-        pageTitle: 'Private clouds'
+        pageTitle: 'Private clouds',
+        sidebarState: 'project.resources'
       }
     })
 
@@ -27,7 +28,8 @@ export default function appstoreRoutes($stateProvider) {
       template: '<appstore-store></appstore-store>',
       data: {
         category: 'vms',
-        pageTitle: 'Virtual machines'
+        pageTitle: 'Virtual machines',
+        sidebarState: 'project.resources'
       }
     })
 
@@ -36,7 +38,8 @@ export default function appstoreRoutes($stateProvider) {
       template: '<appstore-store></appstore-store>',
       data: {
         category: 'apps',
-        pageTitle: 'Applications'
+        pageTitle: 'Applications',
+        sidebarState: 'project.resources'
       }
     })
 
@@ -45,7 +48,8 @@ export default function appstoreRoutes($stateProvider) {
       template: '<appstore-store></appstore-store>',
       data: {
         category: 'storages',
-        pageTitle: 'Storages'
+        pageTitle: 'Storages',
+        sidebarState: 'project.resources'
       }
     })
 
