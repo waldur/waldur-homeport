@@ -299,7 +299,9 @@
           icon: "fa-shopping-cart",
           label: "Service store",
           feature: "appstore",
-          action: AppStoreUtilsService.openDialog.bind(null, {selectProject: true}),
+          action: function() {
+            return AppStoreUtilsService.openDialog({selectProject: true});
+          },
         },
         {
           label: "Analytics",

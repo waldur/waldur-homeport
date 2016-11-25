@@ -82,7 +82,8 @@ export default {
       placeholder: 'generate automatically',
       help_text: 'Leave blank if you want admin password to be auto-generated'
     }
-  }
+  },
+  summaryComponent: 'openstackTenantSummary'
 };
 
 function packageParser(choice) {

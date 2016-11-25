@@ -1,5 +1,7 @@
 'use strict';
 
+// It is deployed on demo
+
 angular.module('ncsaas')
   .constant('MODE', {
     modeName: 'modePublicBrokerage',

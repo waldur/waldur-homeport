@@ -72,7 +72,7 @@ angular.module('ncsaas')
         icon: "fa-desktop",
         feature: "vms",
         key: "vms",
-        state: "appstore.store",
+        state: "appstore.vms",
         description: "OpenStack instances and DigitalOcean droplets."
       },
       {
@@ -80,7 +80,7 @@ angular.module('ncsaas')
         icon: "fa-cloud",
         feature: "private_clouds",
         key: "private_clouds",
-        state: "appstore.store",
+        state: "appstore.private_clouds",
         description: "OpenStack tenants and Amazon VPC.",
         requireStaffOwnerManager: true
       },
@@ -89,7 +89,7 @@ angular.module('ncsaas')
         icon: "fa-hdd-o",
         feature: "storage",
         key: "storages",
-        state: "appstore.store",
+        state: "appstore.storages",
         description: "Block devices, object store spaces and other persistency services."
       },
       {
@@ -97,7 +97,7 @@ angular.module('ncsaas')
         icon: "fa-database",
         feature: "apps",
         key: "apps",
-        state: "appstore.store",
+        state: "appstore.apps",
         description: "Oracle database and SugarCRM."
       },
       {
@@ -105,7 +105,7 @@ angular.module('ncsaas')
         icon: "fa-wrench",
         key: "support",
         feature: "premiumSupport",
-        state: "appstore.store",
+        state: "appstore.premiumSupport",
         description: "Premium support service."
       },
       {
@@ -287,14 +287,6 @@ angular.module('ncsaas')
       privateClouds: 'private_clouds'
     },
     featuresVisible: false,
-
-    nonChargeableAppStoreOptions: [
-      'ssh_public_key',
-      'region',
-      'visibility_level',
-      'group',
-      'security_groups'
-    ],
 
     requestTimeout: 1000 * 20,
     countsCacheTime: 60, // seconds

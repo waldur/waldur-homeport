@@ -28,7 +28,7 @@
   angular.module('ncsaas').filter('defaultCurrency', ['ENV', '$filter', defaultCurrency]);
   function defaultCurrency(ENV, $filter) {
     return function(value) {
-      if (value.indexOf && value.indexOf(ENV.currency) !== -1) {
+      if (!value || value.indexOf && value.indexOf(ENV.currency) !== -1) {
         return value;
       }
       var fractionSize = 2;
