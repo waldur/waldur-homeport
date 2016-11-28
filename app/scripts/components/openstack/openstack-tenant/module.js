@@ -1,10 +1,16 @@
 import OpenStackTenantConfig from './openstack-tenant-config';
 import openstackTenantSummary from './openstack-tenant-summary';
+import openstackTenantChangePackageDialog from './openstack-tenant-change-package';
+import packageTemplatesService from './package-templates-service';
+import openstackPackagesService from './openstack-packages-service';
 
 export default module => {
   module.config(fieldsConfig);
   module.config(actionConfig);
   module.directive('openstackTenantSummary', openstackTenantSummary);
+  module.directive('openstackTenantChangePackageDialog', openstackTenantChangePackageDialog);
+  module.service('packageTemplatesService', packageTemplatesService);
+  module.service('openstackPackagesService', openstackPackagesService);
 }
 
 // @ngInject
@@ -18,6 +24,7 @@ function actionConfig(ActionConfigurationProvider) {
     order: [
       'pull',
       'create_service',
+      'change_package',
       'destroy'
     ],
     options: {
@@ -26,6 +33,13 @@ function actionConfig(ActionConfigurationProvider) {
       },
       pull: {
         title: 'Synchronise'
+      },
+      change_package: {
+        title: 'Change VPC package',
+        enabled: true,
+        type: 'form',
+        component: 'openstackTenantChangePackageDialog',
+        dialogSize: 'lg'
       }
     }
   });

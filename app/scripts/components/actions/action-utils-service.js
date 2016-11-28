@@ -9,11 +9,11 @@ export default function actionUtilsService(
       const options = config && config.options;
       return order.reduce((result, name) => {
         let action = response.actions[name];
-        if (!action || !action.title) {
+        if (!action && !options && !options[name] && !options[name].component) {
           return result;
         }
         if (options && options[name]) {
-          action = angular.merge(action, options[name]);
+          action = angular.merge({}, action, options[name]);
         }
         result[name] = action;
         return result;
@@ -110,7 +110,8 @@ export default function actionUtilsService(
     dialogScope.resource = resource;
     $uibModal.open({
       component: component,
-      scope: dialogScope
+      scope: dialogScope,
+      size: action.dialogSize
     }).result.then(function() {
       $rootScope.$broadcast('actionApplied', name);
     });

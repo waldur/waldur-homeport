@@ -1,0 +1,26 @@
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th ng-repeat="column in $ctrl.columns">
+                    {{ ::column.label }}
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="choice in $ctrl.choices"
+                ng-click="$ctrl.selectItem({item: choice})"
+                ng-keyup="$event.keyCode == 13 && $ctrl.selectItem({item: choice})"
+                ng-class="{disabled: choice.disabled}"
+                class="cursor-pointer">
+                <td>
+                    <input type="radio" ng-model="$ctrl.value" ng-value="choice">
+                </td>
+                <td ng-repeat="column in $ctrl.columns">
+                    {{ ::$ctrl.formatValue(column, choice) }}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
