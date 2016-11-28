@@ -127,7 +127,8 @@ export default {
   watchers: {
     image: imageWatcher,
     flavor: flavorWatcher
-  }
+  },
+  summaryComponent: 'openstackInstanceSummary'
 };
 
 function validateAndSort(model, options, validator, comparator, name) {

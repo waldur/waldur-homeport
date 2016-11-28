@@ -14,6 +14,7 @@ import appstoreModule from './components/appstore/module';
 import formModule from './components/form/module';
 import openstackModule from './components/openstack/module';
 import digitaloceanModule from './components/digitalocean/module';
+import premiumSupportModule from './components/premiumSupport/module';
 import customerModule from './components/customer/module';
 
 const module = angular.module('ncsaas');
@@ -34,4 +35,5 @@ appstoreModule(module);
 formModule(module);
 openstackModule(module);
 digitaloceanModule(module);
+premiumSupportModule(module);
 customerModule(module);

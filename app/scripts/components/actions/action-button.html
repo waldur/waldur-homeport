@@ -8,7 +8,7 @@
             title="{{ button.tooltip(buttonModel) }}"
             ng-click="toggleMenu()">
             <a ng-if="::button.clickFunction" ng-click="button.clickFunction(buttonModel)"
-               class="button-simple {{ button.className }}"
+               class="{{ button.className }}"
                ng-class="{'disabled': button.isDisabled(buttonModel), 'remove': button.destructive}">
                {{ button.title }}
             </a>

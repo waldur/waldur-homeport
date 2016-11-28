@@ -80,7 +80,9 @@
           icon: "fa-shopping-cart",
           label: "Service store",
           feature: "appstore",
-          action: AppStoreUtilsService.openDialog,
+          action: function() {
+            return AppStoreUtilsService.openDialog()
+          },
           state: "appstore",
         },
         {

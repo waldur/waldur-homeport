@@ -19,6 +19,7 @@ export default {
       label: 'VPC package',
       dialogTitle: 'Select Virtual Private Cloud package',
       dialogSize: 'lg',
+      resource: 'package-templates',
       parser: packageParser,
       formatter: packageFormatter,
       columns: [
@@ -81,7 +82,8 @@ export default {
       placeholder: 'generate automatically',
       help_text: 'Leave blank if you want admin password to be auto-generated'
     }
-  }
+  },
+  summaryComponent: 'openstackTenantSummary'
 };
 
 function packageParser(choice) {

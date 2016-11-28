@@ -2,6 +2,7 @@
   angular.module('ncsaas')
     .service('baseControllerClass', ['$rootScope', 'ncUtilsFlash', baseControllerClass]);
 
+  // This class is deprecated. Use ES6 class instead.
   function baseControllerClass($rootScope, ncUtilsFlash) {
     var ControllerClass = Class.extend({
       _signals: {},

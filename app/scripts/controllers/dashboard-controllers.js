@@ -575,7 +575,7 @@
       },
       addSupportContract: function(project) {
         $rootScope.$broadcast('adjustCurrentProject', project);
-        $state.go('appstore.store', {category: 'support'});
+        $state.go('appstore.premiumSupport');
       }
     });
 

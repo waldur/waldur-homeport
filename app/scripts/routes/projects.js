@@ -121,16 +121,6 @@
         }
       })
 
-      .state('project.support', {
-        url: 'support/',
-        templateUrl: 'views/partials/list.html',
-        controller: 'ProjectSupportTabController',
-        controllerAs: 'Ctrl',
-        data: {
-          pageTitle: 'Premium support'
-        }
-      })
-
       .state('project.delete', {
         url: 'delete/',
         template: '<project-manage></project-manage>',
