@@ -28,24 +28,18 @@ export function attachStateUtils($rootScope, stateUtilsService) {
   });
 }
 
-export function invitationUtilsService($rootScope, invitationService, ncUtilsFlash) {
+// @ngInject
+export function handleInvitationUtilsService($rootScope, invitationService, ncUtilsFlash) {
   $rootScope.$on('authService:signin', function() {
       var token = invitationService.getInvitationToken();
       if (token) {
         invitationService.accept(token).then(function() {
-          handleInvitation(true);
+          ncUtilsFlash.success('Your invitation was accepted');
+          invitationService.clearInvitationToken();
         }, function() {
-          handleInvitation();
+          ncUtilsFlash.error('Unable to accept invitation');
+          invitationService.clearInvitationToken();
         });
       }
   });
-
-  function handleInvitation(success) {
-    if (success) {
-      ncUtilsFlash.success('Your invitation was accepted');
-    } else {
-      ncUtilsFlash.error('Unable to accept invitation');
-    }
-    invitationService.clearInvitationToken();
-  }
 }
