@@ -63,7 +63,7 @@
           return 'dashboard.index';
         } else if (data.auth && !$auth.isAuthenticated()) {
           return 'login';
-        } else if (data.anonymous && $auth.isAuthenticated() && !data.invitation) {
+        } else if (data.anonymous && $auth.isAuthenticated()) {
           return 'dashboard.index';
         } else if (data.feature && disabledFeature(data.feature)) {
           return 'errorPage.notFound';

@@ -99,7 +99,6 @@ export default function authRoutes($stateProvider) {
     .state('invitation', {
       url: '/invitation/:uuid/',
       data: {
-        invitation: true,
         bodyClass: 'old'
       },
       template: '<auth-invitation></auth-invitation>'

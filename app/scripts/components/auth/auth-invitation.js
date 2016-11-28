@@ -4,7 +4,7 @@ export default function authInvitation() {
   return {
     restrict: 'E',
     controller: AuthInvitationController,
-    template: template,
+    template: template
   };
 }
 
@@ -15,7 +15,6 @@ function AuthInvitationController(
   $state,
   $timeout,
   $auth,
-  usersService,
   invitationService,
   ncUtilsFlash,
   $scope) {
@@ -34,29 +33,23 @@ function AuthInvitationController(
       });
 
       vm.authenticated = $auth.isAuthenticated();
-      if (vm.authenticated) {
-        invitationService.executeAction(vm.invitationUUID, 'check').catch(vm.invitationCatchHandler.bind(vm))
-          .then(vm.invitationCheckHandler.bind(vm));
-      } else {
-        invitationService.executeAction(vm.invitationUUID, 'check').catch(vm.invitationCatchHandler.bind(vm))
-          .then(vm.invitationCheckHandler.bind(vm));
-      }
+      invitationService.executeAction(vm.invitationUUID, 'check').catch(vm.invitationCatchHandler.bind(vm))
+        .then(vm.invitationCheckHandler.bind(vm));
     },
     invitationCheckHandler: function() {
-      var vm = this;
-      $timeout(function() {
-        if (vm.authenticated) {
-          vm.acceptInvitation();
-          vm.toNextState(null, vm.authenticated);
+      var handler = function() {
+        if (this.authenticated) {
+          this.acceptInvitation();
+          this.toNextState(null, this.authenticated);
         } else {
-          invitationService.setInvitationToken(vm.invitationUUID);
+          invitationService.setInvitationToken(this.invitationUUID);
           $state.go('register');
         }
-      }, ENV.invitationRedirectTime);
+      };
+      $timeout(handler.bind(this), ENV.invitationRedirectTime);
     },
     acceptInvitation: function() {
-      var vm = this;
-      invitationService.accept(vm.invitationUUID).then(function() {
+      invitationService.accept(this.invitationUUID).then(function() {
         ncUtilsFlash.success('Your invitation was accepted');
         invitationService.clearInvitationToken();
       }, function() {
@@ -65,25 +58,23 @@ function AuthInvitationController(
       });
     },
     invitationCatchHandler: function(response) {
-      var vm = this;
       if (response.status === 400) {
         ncUtilsFlash.error('Invitation is not found');
-        this.toNextState(response.status, vm.authenticated);
+        this.toNextState(response.status, this.authenticated);
       } else {
         ncUtilsFlash.error('Invitation is not valid');
-        this.toNextState(response.status, vm.authenticated);
+        this.toNextState(response.status, this.authenticated);
       }
     },
     toNextState: function(responseStatus, authenticated) {
-      var vm = this;
       if (authenticated) {
-        if (!vm.previousState) {
-          return $state.go('dashboard.index');
+        if (!this.previousState) {
+          $state.go('dashboard.index');
         }
-        $state.go(vm.previousState, vm.previousStateParams);
+        $state.go(this.previousState, this.previousStateParams);
       } else {
         if (responseStatus === 400) {
-          return $state.go('errorPage.notFound');
+          $state.go('errorPage.notFound');
         }
         $state.go('login');
       }
