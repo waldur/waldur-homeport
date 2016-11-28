@@ -11,7 +11,7 @@ import userEdit from './user-edit';
 import userDashboard from './user-dashboard';
 import userOrganizations from './user-organizations';
 import userProjects from './user-projects';
-import { stateUtilsService, attachStateUtils } from './utils';
+import { stateUtilsService, attachStateUtils, invitationUtilsService } from './utils';
 import userRoutes from './routes';
 
 export default module => {
@@ -31,5 +31,6 @@ export default module => {
   module.directive('userProjects', userProjects);
   module.service('stateUtilsService', stateUtilsService);
   module.run(attachStateUtils);
+  module.run(invitationUtilsService);
   module.config(userRoutes);
 }

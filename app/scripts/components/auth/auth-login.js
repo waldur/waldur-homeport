@@ -56,26 +56,8 @@ function AuthLoginController(ENV, $q, $sce, $scope, $state, authService,
       authService.authenticate(provider).then(vm.loginSuccess.bind(vm), vm.loginError.bind(vm));
     },
     loginSuccess: function() {
-      var vm = this;
-      vm.token = invitationService.getInvitationToken();
-      if (!vm.token) {
-        return true;
-      }
-      invitationService.accept(vm.token).then(function() {
-        vm.handleInvitation(true);
-      }, function() {
-        vm.handleInvitation();
-      });
-      return true;
-    },
-    handleInvitation: function(success) {
-      if (success) {
-        ncUtilsFlash.success('Your invitation was accepted');
-      } else {
-        ncUtilsFlash.error('Unable to accept invitation');
-      }
-      invitationService.clearInitationToken();
       $state.go('dashboard.index', {}, {reload: true});
+      return true;
     },
     loginError: function(response) {
       this.errors = [];

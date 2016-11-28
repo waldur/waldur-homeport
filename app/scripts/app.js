@@ -64,7 +64,6 @@
         } else if (data.auth && !$auth.isAuthenticated()) {
           return 'login';
         } else if (data.anonymous && $auth.isAuthenticated() && !data.invitation) {
-          console.log('here 3', event, toState, toParams);
           return 'dashboard.index';
         } else if (data.feature && disabledFeature(data.feature)) {
           return 'errorPage.notFound';

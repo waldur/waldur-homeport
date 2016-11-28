@@ -40,32 +40,50 @@ function AuthInvitationController(
               if (invitation.civil_number === user.civil_number) {
                 invitationService.accept(invitationUUID).then(function() {
                   ncUtilsFlash.success('Your invitation was accepted');
-                  $state.go(vm.previousState, vm.previousStateParams);
+                  vm.toNextState();
                 });
               } else {
                 ncUtilsFlash.error('Your civil number does not match number in invitation');
+                $state.go('dashboard.index');
               }
+            }, function() {
+              $state.go('dashboard.index');
             });
           } else {
             invitationService.accept(invitationUUID).then(function() {
-                ncUtilsFlash.success('Your invitation was accepted');
-                $state.go(vm.previousState, vm.previousStateParams);
+              ncUtilsFlash.success('Your invitation was accepted');
+              vm.toNextState();
             });
           }
         });
       } else {
         invitationService.executeAction(invitationUUID, 'check').then(function() {
-          vm.setInvitationToken(invitationUUID);
+
         }, function() {
           $state.go('errorPage.notFound');
         });
+        invitationService.executeAction(invitationUUID, 'check').catch(function(response) {
+          if (response.status === 400) {
+            ncUtilsFlash.error('Invitation is not found');
+            $state.go('errorPage.notFound');
+          } else {
+            ncUtilsFlash.error('Invitation is not valid');
+            $state.go('login');
+          }
+        }).then(function() {
+          invitationService.setInvitationToken(invitationUUID);
+          $timeout(function() {
+            $state.go('register');
+          }, ENV.invitationRedirectTime);
+        });
       }
     },
-    setInvitationToken: function(invitationUUID) {
-      invitationService.setInvitationToken(invitationUUID);
-      $timeout(function() {
-        $state.go('register');
-      }, ENV.invitationRedirectTime);
+    toNextState: function() {
+      var vm = this;
+      if (!vm.previousState) {
+        $state.go('dashboard.index');
+      }
+      $state.go(vm.previousState, vm.previousStateParams);
     }
   });
 

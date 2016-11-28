@@ -32,7 +32,7 @@
       getInvitationToken: function() {
         return $window.localStorage[ENV.invitationStorageToken];
       },
-      clearInitationToken: function() {
+      clearInvitationToken: function() {
         $window.localStorage.removeItem(ENV.invitationStorageToken);
       }
     });

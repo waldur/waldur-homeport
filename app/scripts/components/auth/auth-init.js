@@ -72,7 +72,7 @@ function AuthInitController(
         }
       }).then(function() {
         // Don't use the same token twice
-        invitationService.clearInitationToken();
+        invitationService.clearInvitationToken();
       });
     }
   });
