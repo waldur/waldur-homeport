@@ -1,0 +1,37 @@
+<div class="ibox float-e-margins">
+    <div class="ibox-title">
+        <h5>My open issues</h5>
+    </div>
+    <div class="ibox-content">
+        <div ng-if="$ctrl.loading">
+            <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
+        </div>
+        <div ng-if="!$ctrl.loading && $ctrl.items.length == 0">
+            There are no issues yet.
+        </div>
+        <table ng-if="!$ctrl.loading && $ctrl.items.length > 0"
+               class="table table-hover no-margins">
+            <thead>
+                <tr>
+                    <th>Key</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in $ctrl.items">
+                    <td>
+                        <span class="label"
+                              ng-class="item.labelClass"
+                              ng-bind="item.status">
+                        </span>
+                    </td>
+                    <td>
+                        <strong>{{ item.key }}</strong>
+                        <p>{{ item.title }}</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+</div>

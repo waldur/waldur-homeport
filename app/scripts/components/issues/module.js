@@ -1,38 +1,19 @@
 import issueCreate from './create';
 import issueList from './list';
-
-// @ngInject
-function configureIssues($stateProvider) {
-  $stateProvider
-    .state('support', {
-      url: '/support/',
-      template: '<customer-workspace><ui-view/></customer-workspace>',
-      abstract: true,
-      data: {
-        auth: true,
-        workspace: 'organization'
-      }
-    })
-
-    .state('support.list', {
-      url: '',
-      template: '<issue-list></issue-list>',
-      data: {
-        pageTitle: 'List issues'
-      }
-    })
-
-    .state('support.create', {
-      url: 'add/:type',
-      template: '<issue-create></issue-create>',
-      data: {
-        pageTitle: 'Create issue'
-      }
-    });
-}
+import issueRoutes from './routes';
+import issuesWorkspace from './issues-workspace';
+import issuesDashboard from './issues-dashboard';
+import issuesShortList from './issues-short-list';
+import issueQuickCreate from './issue-quick-create';
+import issuesActivityStream from './issues-activity-stream';
 
 export default module => {
   module.directive('issueList', issueList);
   module.directive('issueCreate', issueCreate);
-  module.config(configureIssues);
+  module.directive('issuesWorkspace', issuesWorkspace);
+  module.directive('issuesDashboard', issuesDashboard);
+  module.directive('issuesShortList', issuesShortList);
+  module.directive('issueQuickCreate', issueQuickCreate);
+  module.directive('issuesActivityStream', issuesActivityStream);
+  module.config(issueRoutes);
 }
