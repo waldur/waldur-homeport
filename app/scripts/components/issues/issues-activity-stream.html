@@ -14,11 +14,16 @@
              class="vertical-container dark-timeline">
             <div class="vertical-timeline-block" ng-repeat="item in $ctrl.items">
                 <div class="vertical-timeline-icon">
-                    <img gravatar-src="item.email" class="b-r-xl img-sm" gravatar-size="32">
+                    <img gravatar-src="item.user.email" class="b-r-xl img-sm" gravatar-size="32">
                 </div>
                 <div class="vertical-timeline-content">
                     <p class="m-n">
-                        <a href="profile.details">{{ item.name }}</a>
+                        <a uib-popover-template="'user-popover.html'"
+                           popover-placement="bottom"
+                           popover-trigger="'mouseenter'"
+                           popover-append-to-body="'true'">
+                            {{ item.user.username }}
+                        </a>
                         commented on
                         <a href="issue.details">{{ item.key }}</a>
                         {{ item.text }}
@@ -31,3 +36,7 @@
         </div>
     </div>
 </div>
+
+<script type="text/ng-template" id="user-popover.html">
+    <user-popover user="item.user"></user-popover>
+</script>

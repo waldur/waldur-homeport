@@ -1,9 +1,14 @@
+import { ISSUE_CLASSES } from './constants';
+import template from './issues-list.html';
+
 export default function issueList() {
   return {
     restrict: 'E',
-    templateUrl: 'views/partials/filtered-list.html',
+    template: template,
     controller: IssueListController,
-    controllerAs: 'ListController'
+    controllerAs: 'ListController',
+    scope: {},
+    bindToController: true
   };
 }
 
@@ -31,14 +36,16 @@ function IssueListController(baseControllerListClass, FakeIssuesService, $filter
         ],
         columns: [
           {
-            title: 'Status',
+            title: 'Type',
             render: function(data, type, row, meta) {
-              const classes = {
-                TODO: 'label-primary',
-                FIXED: 'label-warning',
-                BUG: 'label-danger'
-              };
-              return `<span class="label ${classes[row.status]}">${row.status}</span>`
+              return `<span class="label ${ISSUE_CLASSES[row.type]}">${row.type.toUpperCase()}</span>`
+            },
+            width: 50
+          },
+          {
+            title: 'Resolution',
+            render: function(data, type, row, meta) {
+              return row.resolution;
             },
             width: 50
           },
@@ -50,9 +57,15 @@ function IssueListController(baseControllerListClass, FakeIssuesService, $filter
             }
           },
           {
-            title: 'Issuer',
+            title: 'Reporter',
             render: function(data, type, row, meta) {
-              return row.user_username;
+              return row.user.username;
+            }
+          },
+          {
+            title: 'Assigned to',
+            render: function(data, type, row, meta) {
+              return row.assigned.username;
             }
           },
           {
@@ -61,9 +74,42 @@ function IssueListController(baseControllerListClass, FakeIssuesService, $filter
               return $filter('dateTime')(row.created);
             },
             width: 150
+          },
+          {
+            title: 'Updated',
+            render: function(data, type, row, meta) {
+              return $filter('dateTime')(row.updated);
+            },
+            width: 150
           }
         ]
       };
+      this.filterList = [
+        {
+          name: 'customer',
+          label: 'Organization name'
+        },
+        {
+          name: 'project',
+          label: 'Project name'
+        },
+        {
+          name: 'resource',
+          label: 'Affected resource'
+        },
+        {
+          name: 'type',
+          label: 'Ticket type'
+        },
+        {
+          name: 'reporter',
+          label: 'Reporter'
+        },
+        {
+          name: 'assignee',
+          label: 'Assignee'
+        }
+      ];
     }
   });
 

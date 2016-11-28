@@ -23,7 +23,8 @@ export default function issueRoutes($stateProvider) {
       url: 'list/',
       template: '<issues-list></issues-list>',
       data: {
-        pageTitle: 'List issues'
+        pageTitle: 'List issues',
+        pageClass: 'gray-bg'
       }
     })
 

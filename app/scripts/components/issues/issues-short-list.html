@@ -13,7 +13,7 @@
                class="table table-hover no-margins">
             <thead>
                 <tr>
-                    <th>Key</th>
+                    <th>Type</th>
                     <th>Description</th>
                 </tr>
             </thead>
@@ -22,16 +22,28 @@
                     <td>
                         <span class="label"
                               ng-class="item.labelClass"
-                              ng-bind="item.status">
+                              ng-bind="item.type | uppercase">
                         </span>
                     </td>
                     <td>
                         <strong>{{ item.key }}</strong>
-                        <p>{{ item.title }}</p>
+                        <p>
+                            {{ item.title }}<br>
+                            <small class="text-muted">
+                                Opened by
+                                <a ui-sref="profile.details"
+                                   uib-popover-template="'user-popover.html'"
+                                   popover-placement="bottom"
+                                   popover-trigger="'mouseenter'"
+                                   popover-append-to-body="'true'">
+                                    {{ item.user.username }}
+                                </a>
+                                at {{ item.updated | dateTime }}
+                            </small>
+                        </p>
                     </td>
                 </tr>
             </tbody>
         </table>
-        </div>
     </div>
 </div>

@@ -1,3 +1,4 @@
+import { ISSUE_TYPES } from './constants';
 import template from './issue-quick-create.html';
 
 export default function issueQuickCreate() {
@@ -13,10 +14,5 @@ export default function issueQuickCreate() {
 
 function IssueQuickCreateController() {
   this.issue = {};
-  this.issueTypes = [
-    'Incident',
-    'Change request',
-    'Service request',
-    'General'
-  ];
+  this.issueTypes = ISSUE_TYPES;
 }

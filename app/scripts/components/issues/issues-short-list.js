@@ -1,3 +1,4 @@
+import { ISSUE_CLASSES } from './constants';
 import template from './issues-short-list.html';
 
 export default function issuesShortList() {
@@ -14,17 +15,11 @@ export default function issuesShortList() {
 // ngInject
 function IssuesShortListController(FakeIssuesService) {
   this.loading = true;
-  const classes = {
-    TODO: 'label-primary',
-    FIXED: 'label-warning',
-    BUG: 'label-danger'
-  };
   FakeIssuesService.getList({personal: true}).then(items => {
     this.items = items.map(item => {
-      item.labelClass = classes[item.status];
+      item.labelClass = ISSUE_CLASSES[item.type];
       return item;
     });
     this.loading = false;
   });
 }
-
