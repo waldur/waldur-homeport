@@ -27,63 +27,66 @@ function AuthInvitationController(
         return;
       }
       var vm = this;
-      var invitationUUID = $state.params.uuid;
+      vm.invitationUUID = $state.params.uuid;
       $scope.$on('$stateChangeSuccess', function(event, to, toParams, from, fromParams) {
         vm.previousState = from.name;
         vm.previousStateParams = fromParams;
       });
 
-      if ($auth.isAuthenticated()) {
-        invitationService.$get(invitationUUID).then(function(invitation) {
-          if (invitation.civil_number) {
-            usersService.getCurrentUser().then(function(user) {
-              if (invitation.civil_number === user.civil_number) {
-                invitationService.accept(invitationUUID).then(function() {
-                  ncUtilsFlash.success('Your invitation was accepted');
-                  vm.toNextState();
-                });
-              } else {
-                ncUtilsFlash.error('Your civil number does not match number in invitation');
-                $state.go('dashboard.index');
-              }
-            }, function() {
-              $state.go('dashboard.index');
-            });
-          } else {
-            invitationService.accept(invitationUUID).then(function() {
-              ncUtilsFlash.success('Your invitation was accepted');
-              vm.toNextState();
-            });
-          }
-        });
+      vm.authenticated = $auth.isAuthenticated();
+      if (vm.authenticated) {
+        invitationService.executeAction(vm.invitationUUID, 'check').catch(vm.invitationCatchHandler.bind(vm))
+          .then(vm.invitationCheckHandler.bind(vm));
       } else {
-        invitationService.executeAction(invitationUUID, 'check').then(function() {
-
-        }, function() {
-          $state.go('errorPage.notFound');
-        });
-        invitationService.executeAction(invitationUUID, 'check').catch(function(response) {
-          if (response.status === 400) {
-            ncUtilsFlash.error('Invitation is not found');
-            $state.go('errorPage.notFound');
-          } else {
-            ncUtilsFlash.error('Invitation is not valid');
-            $state.go('login');
-          }
-        }).then(function() {
-          invitationService.setInvitationToken(invitationUUID);
-          $timeout(function() {
-            $state.go('register');
-          }, ENV.invitationRedirectTime);
-        });
+        invitationService.executeAction(vm.invitationUUID, 'check').catch(vm.invitationCatchHandler.bind(vm))
+          .then(vm.invitationCheckHandler.bind(vm));
       }
     },
-    toNextState: function() {
+    invitationCheckHandler: function() {
       var vm = this;
-      if (!vm.previousState) {
-        $state.go('dashboard.index');
+      $timeout(function() {
+        if (vm.authenticated) {
+          vm.acceptInvitation();
+          vm.toNextState(null, vm.authenticated);
+        } else {
+          invitationService.setInvitationToken(vm.invitationUUID);
+          $state.go('register');
+        }
+      }, ENV.invitationRedirectTime);
+    },
+    acceptInvitation: function() {
+      var vm = this;
+      invitationService.accept(vm.invitationUUID).then(function() {
+        ncUtilsFlash.success('Your invitation was accepted');
+        invitationService.clearInvitationToken();
+      }, function() {
+        ncUtilsFlash.error('Unable to accept invitation');
+        invitationService.clearInvitationToken();
+      });
+    },
+    invitationCatchHandler: function(response) {
+      var vm = this;
+      if (response.status === 400) {
+        ncUtilsFlash.error('Invitation is not found');
+        this.toNextState(response.status, vm.authenticated);
+      } else {
+        ncUtilsFlash.error('Invitation is not valid');
+        this.toNextState(response.status, vm.authenticated);
       }
-      $state.go(vm.previousState, vm.previousStateParams);
+    },
+    toNextState: function(responseStatus, authenticated) {
+      var vm = this;
+      if (authenticated) {
+        if (!vm.previousState) {
+          return $state.go('dashboard.index');
+        }
+        $state.go(vm.previousState, vm.previousStateParams);
+      } else {
+        if (responseStatus === 400) {
+          return $state.go('errorPage.notFound');
+        }
+        $state.go('login');
+      }
     }
   });
 
