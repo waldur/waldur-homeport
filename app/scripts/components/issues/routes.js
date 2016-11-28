@@ -21,7 +21,7 @@ export default function issueRoutes($stateProvider) {
 
     .state('support.list', {
       url: 'list/',
-      template: '<issue-list></issue-list>',
+      template: '<issues-list></issues-list>',
       data: {
         pageTitle: 'List issues'
       }

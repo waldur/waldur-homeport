@@ -13,4 +13,10 @@ export default function issueQuickCreate() {
 
 function IssueQuickCreateController() {
   this.issue = {};
+  this.issueTypes = [
+    'Incident',
+    'Change request',
+    'Service request',
+    'General'
+  ];
 }

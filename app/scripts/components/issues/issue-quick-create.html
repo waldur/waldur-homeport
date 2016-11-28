@@ -1,12 +1,12 @@
 <div class="ibox float-e-margins">
     <div class="ibox-title">
-        <h5>Quick create issue</h5>
+        <h5>Create issue</h5>
     </div>
     <div class="ibox-content">
         <form class="form-horizontal">
             <div class="form-group">
                 <label for="issueName" class="col-sm-2 control-label">
-                    Issue name
+                    Title
                 </label>
                 <div class="col-sm-10">
                     <input type="text"
@@ -24,6 +24,20 @@
                         id="issueDescription"
                         ng-model="$ctrl.issue.description"
                         class="form-control"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="issueType" class="col-sm-2 control-label">
+                    Issue type
+                </label>
+                <div class="col-sm-10">
+                    <div class="btn-group form-control-static">
+                        <div class="btn btn-default"
+                            ng-repeat="type in $ctrl.issueTypes"
+                            ng-click="$ctrl.issue.type = type"
+                            ng-class="{active: $ctrl.issue.type == type}"
+                            ng-bind="type"></div>
+                    </div>
                 </div>
             </div>
             <div class="text-right">
