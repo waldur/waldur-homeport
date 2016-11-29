@@ -33,8 +33,8 @@ function AuthInvitationController(
       });
 
       vm.authenticated = $auth.isAuthenticated();
-      invitationService.executeAction(vm.invitationUUID, 'check').catch(vm.invitationCatchHandler.bind(vm))
-        .then(vm.invitationCheckHandler.bind(vm));
+      invitationService.executeAction(vm.invitationUUID, 'check').then(vm.invitationCheckHandler.bind(vm))
+        .catch(vm.invitationCatchHandler.bind(vm));
     },
     invitationCheckHandler: function() {
       var handler = function() {

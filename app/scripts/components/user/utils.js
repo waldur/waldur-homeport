@@ -36,8 +36,12 @@ export function handleInvitationUtilsService($rootScope, invitationService, ncUt
         invitationService.accept(token).then(function() {
           ncUtilsFlash.success('Your invitation was accepted');
           invitationService.clearInvitationToken();
-        }, function() {
-          ncUtilsFlash.error('Unable to accept invitation');
+        }, function(response) {
+          if (response.status === 400) {
+            ncUtilsFlash.error('Invitation is invalid');
+          } else {
+            ncUtilsFlash.error('Unable to accept invitation');
+          }
           invitationService.clearInvitationToken();
         });
       }
