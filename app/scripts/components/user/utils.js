@@ -31,19 +31,19 @@ export function attachStateUtils($rootScope, stateUtilsService) {
 // @ngInject
 export function attachInvitationUtils($rootScope, invitationService, ncUtilsFlash) {
   $rootScope.$on('authService:signin', function() {
-      var token = invitationService.getInvitationToken();
-      if (token) {
-        invitationService.accept(token).then(function() {
-          ncUtilsFlash.success('Your invitation was accepted');
-          invitationService.clearInvitationToken();
-        }, function(response) {
-          if (response.status === 400) {
-            ncUtilsFlash.error('Invitation is invalid');
-          } else {
-            ncUtilsFlash.error('Unable to accept invitation');
-          }
-          invitationService.clearInvitationToken();
-        });
-      }
+    var token = invitationService.getInvitationToken();
+    if (token) {
+      invitationService.accept(token).then(function() {
+        ncUtilsFlash.success('Your invitation was accepted');
+        invitationService.clearInvitationToken();
+      }, function(response) {
+        if (response.status === 400) {
+          ncUtilsFlash.error('Invitation is invalid');
+        } else {
+          ncUtilsFlash.error('Unable to accept invitation');
+        }
+        invitationService.clearInvitationToken();
+      });
+    }
   });
 }
