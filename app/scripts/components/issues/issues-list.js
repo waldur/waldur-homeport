@@ -38,49 +38,64 @@ function IssueListController(baseControllerListClass, FakeIssuesService, $filter
           {
             title: 'Type',
             render: function(data, type, row, meta) {
-              return `<span class="label ${ISSUE_CLASSES[row.type]}">${row.type.toUpperCase()}</span>`
+              return `<span title="${row.type.toUpperCase()}" class="label ${ISSUE_CLASSES[row.type]}">${row.key}</span>`
             },
             width: 50
           },
           {
-            title: 'Resolution',
+            title: 'Status',
             render: function(data, type, row, meta) {
-              return row.resolution;
+              return row.status;
             },
             width: 50
           },
           {
             title: 'Summary',
-            className: 'issue-info',
             render: function(data, type, row, meta) {
-              return `<a href="issue.details">${row.key}</a><p><small>${row.title}</small></p>`
+              return row.title;
+            },
+            width: 400
+          },
+          {
+            title: 'Scope',
+            render: function(data, type, row, meta) {
+              return row.scope;
             }
           },
           {
             title: 'Reporter',
             render: function(data, type, row, meta) {
               return row.user.username;
-            }
+            },
+            width: 170
           },
           {
             title: 'Assigned to',
             render: function(data, type, row, meta) {
               return row.assigned.username;
-            }
+            },
+            width: 170
           },
           {
             title: 'Created',
             render: function(data, type, row, meta) {
-              return $filter('dateTime')(row.created);
+              return $filter('shortDate')(row.created);
             },
-            width: 150
+            width: 130
           },
           {
             title: 'Updated',
             render: function(data, type, row, meta) {
-              return $filter('dateTime')(row.updated);
+              return $filter('shortDate')(row.updated);
             },
-            width: 150
+            width: 130
+          },
+          {
+            title: 'Time spent',
+            render: function(data, type, row, meta) {
+              return row.timeSpent;
+            },
+            width: 100
           }
         ]
       };
@@ -99,7 +114,11 @@ function IssueListController(baseControllerListClass, FakeIssuesService, $filter
         },
         {
           name: 'type',
-          label: 'Ticket type'
+          label: 'Issue type'
+        },
+        {
+          name: 'status',
+          label: 'Status'
         },
         {
           name: 'reporter',

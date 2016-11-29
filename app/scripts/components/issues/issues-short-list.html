@@ -1,6 +1,17 @@
 <div class="ibox float-e-margins">
     <div class="ibox-title">
-        <h5>My open issues</h5>
+        <span class="pull-right">
+            <button class="btn btn-default btn-xs">
+                <small><i class="fa fa-list"></i></small>
+                See all
+            </button>
+
+            <button class="btn btn-default btn-xs">
+                <small><i class="fa fa-refresh"></i></small>
+                Refresh
+            </button>
+        </span>
+        <h5>{{ ::$ctrl.label }}</h5>
     </div>
     <div class="ibox-content">
         <div ng-if="$ctrl.loading">
@@ -15,6 +26,7 @@
                 <tr>
                     <th>Type</th>
                     <th>Description</th>
+                    <th width="120">Updated</th>
                 </tr>
             </thead>
             <tbody>
@@ -22,25 +34,26 @@
                     <td>
                         <span class="label"
                               ng-class="item.labelClass"
-                              ng-bind="item.type | uppercase">
+                              ng-bind="::item.key"
+                              uib-tooltip="{{ ::item.type | uppercase }}">
                         </span>
                     </td>
                     <td>
-                        <strong>{{ item.key }}</strong>
-                        <p>
-                            {{ item.title }}<br>
-                            <small class="text-muted">
-                                Opened by
-                                <a ui-sref="profile.details"
-                                   uib-popover-template="'user-popover.html'"
-                                   popover-placement="bottom"
-                                   popover-trigger="'mouseenter'"
-                                   popover-append-to-body="'true'">
-                                    {{ item.user.username }}
-                                </a>
-                                at {{ item.updated | dateTime }}
-                            </small>
-                        </p>
+                        {{ item.title }}<br>
+                        <small class="text-muted">
+                            Opened by
+                            <a ui-sref="profile.details"
+                               uib-popover-template="'user-popover.html'"
+                               popover-placement="bottom"
+                               popover-trigger="'mouseenter'"
+                               popover-append-to-body="'true'">
+                                {{ item.user.username }}
+                            </a>
+                            at {{ item.created | dateTime }}
+                        </small>
+                    </td>
+                    <td>
+                        <small>{{ item.updated | dateTime }}</small>
                     </td>
                 </tr>
             </tbody>

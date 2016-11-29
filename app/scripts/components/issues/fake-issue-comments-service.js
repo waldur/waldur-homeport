@@ -4,7 +4,7 @@ import { randomDate, randomChoice, randomText, randomKey, randomUser } from './f
 export default class FakeIssueCommentsService {
   constructor($timeout) {
     this.$timeout = $timeout;
-    this.comments = randomIssueComment(10);
+    this.comments = randomIssueComment(5);
   }
 
   getList() {

@@ -17,7 +17,7 @@ function IssuesWorkspaceController($scope) {
       link: "support.dashboard"
     },
     {
-      label: "Support cases",
+      label: "Issues",
       icon: "fa-list",
       link: "support.list"
     },

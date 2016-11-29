@@ -7,7 +7,10 @@ export default function issuesShortList() {
     template: template,
     controller: IssuesShortListController,
     controllerAs: '$ctrl',
-    scope: {},
+    scope: {
+      label: '=',
+      filter: '='
+    },
     bindToController: true
   };
 }
@@ -15,7 +18,7 @@ export default function issuesShortList() {
 // ngInject
 function IssuesShortListController(FakeIssuesService) {
   this.loading = true;
-  FakeIssuesService.getList({personal: true}).then(items => {
+  FakeIssuesService.getList(this.filter).then(items => {
     this.items = items.map(item => {
       item.labelClass = ISSUE_CLASSES[item.type];
       return item;

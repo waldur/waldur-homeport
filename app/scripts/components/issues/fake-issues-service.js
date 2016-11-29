@@ -10,6 +10,16 @@ export default class FakeIssuesService {
 
   getList(filter) {
     return this.$timeout(() => {
+      if (filter.assignee) {
+        this.resultCount = 5;
+        this.pages = 1;
+        return this.issues.slice(0, 5);
+      }
+      if (filter.reporter) {
+        this.resultCount = 5;
+        this.pages = 1;
+        return this.issues.slice(5, 10);
+      }
       this.resultCount = this.issues.length;
       this.pages = 1;
       return this.issues;
@@ -19,8 +29,22 @@ export default class FakeIssuesService {
 
 const randomType = () => randomChoice(ISSUE_TYPES);
 
-const randomResolution = () => randomChoice([
+const randomStatus = () => randomChoice([
   'Resolved', 'Unresolved', "Won't fix"
+]);
+
+const randomTimeSpent = () => randomChoice([
+  '2 hours', '1 day', '2 days', '1 week'
+]);
+
+const randomScope = () => randomChoice([
+  'User',
+  'Organization',
+  'Project',
+  'OpenStack Provider',
+  'OpenStack Tenant',
+  'OpenStack Instance',
+  'OpenStack Volume',
 ]);
 
 function randomIssues(n) {
@@ -30,11 +54,13 @@ function randomIssues(n) {
       key: randomKey(),
       title: randomText(),
       type: randomType(),
-      resolution: randomResolution(),
+      status: randomStatus(),
+      scope: randomScope(),
       user: randomUser(),
       assigned: randomUser(),
       created: randomDate(),
-      updated: randomDate()
+      updated: randomDate(),
+      timeSpent: randomTimeSpent()
     });
   }
   return result;
