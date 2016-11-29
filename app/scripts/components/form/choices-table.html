@@ -11,7 +11,7 @@
         <tbody>
             <tr ng-repeat="choice in $ctrl.choices"
                 ng-click="$ctrl.selectItem({item: choice})"
-                ng-keyup="$event.keyCode == 13 && $ctrl.selectItem({item: choice})"
+                ng-keyup="$event.keyCode === 13 && $ctrl.selectItem({item: choice})"
                 ng-class="{disabled: choice.disabled}"
                 class="cursor-pointer">
                 <td>

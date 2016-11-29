@@ -3,6 +3,7 @@ import openstackTenantSummary from './openstack-tenant-summary';
 import openstackTenantChangePackageDialog from './openstack-tenant-change-package';
 import packageTemplatesService from './package-templates-service';
 import openstackPackagesService from './openstack-packages-service';
+import openstackTenantChangePackageService from './openstack-tenant-change-package-service';
 
 export default module => {
   module.config(fieldsConfig);
@@ -11,6 +12,7 @@ export default module => {
   module.directive('openstackTenantChangePackageDialog', openstackTenantChangePackageDialog);
   module.service('packageTemplatesService', packageTemplatesService);
   module.service('openstackPackagesService', openstackPackagesService);
+  module.service('openstackTenantChangePackageService', openstackTenantChangePackageService);
 }
 
 // @ngInject
@@ -23,14 +25,10 @@ function actionConfig(ActionConfigurationProvider) {
   ActionConfigurationProvider.register('OpenStack.Tenant', {
     order: [
       'pull',
-      'create_service',
       'change_package',
       'destroy'
     ],
     options: {
-      create_service: {
-        title: 'Create provider',
-      },
       pull: {
         title: 'Synchronise'
       },

@@ -38,19 +38,6 @@ export const openstackTemplateColumns = [
   }
 ];
 
-export function templateComparator(a, b) {
-  if (a.cores < b.cores) {
-    return -1;
-  }
-  if (a.ram < b.ram) {
-    return -1;
-  }
-  if (a.storage < b.storage) {
-    return -1;
-  }
-  return 1;
-}
-
 export function templateParser(template) {
   /* Output is item with the following format:
   {

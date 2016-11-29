@@ -11,15 +11,15 @@
           {{ $ctrl.tenant.name }}
         </p>
 
-        <p ng-if="$ctrl.packageTemplateDisplay">
+        <p ng-if="$ctrl.templateDisplay">
           <strong>Current VPC package:</strong>
-          {{ ::$ctrl.packageTemplateDisplay }}
+          {{ ::$ctrl.templateDisplay }}
         </p>
         <p class="text-danger"
            ng-repeat="error in $ctrl.errors.package"
            ng-bind="error"></p>
 
-        <p ng-if="$ctrl.templates.length == 0">
+        <p ng-if="$ctrl.templates.length === 0">
           There are no suitable VPC packages for this tenant.
         </p>
 

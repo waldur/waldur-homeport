@@ -6,16 +6,12 @@ export default function actionUtilsService(
     return resourcesService.getOption(model.url).then(response => {
       const config = ActionConfiguration[model.resource_type];
       const order = config && config.order || Object.keys(response.actions);
-      const options = config && config.options;
+      const options = config && config.options || {};
       return order.reduce((result, name) => {
-        let action = response.actions[name];
-        if (!action && !options && !options[name] && !options[name].component) {
-          return result;
+        let action = angular.merge({}, response.actions[name], options[name]);
+        if (action.hasOwnProperty('enabled')) {
+          result[name] = action;
         }
-        if (options && options[name]) {
-          action = angular.merge({}, action, options[name]);
-        }
-        result[name] = action;
         return result;
       }, {});
     });
