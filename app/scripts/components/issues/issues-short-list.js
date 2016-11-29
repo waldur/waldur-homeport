@@ -16,7 +16,7 @@ export default function issuesShortList() {
 }
 
 // ngInject
-function IssuesShortListController(FakeIssuesService) {
+function IssuesShortListController(FakeIssuesService, $uibModal) {
   this.loading = true;
   FakeIssuesService.getList(this.filter).then(items => {
     this.items = items.map(item => {
@@ -25,4 +25,13 @@ function IssuesShortListController(FakeIssuesService) {
     });
     this.loading = false;
   });
+
+  this.openUserDialog = function(user) {
+    $uibModal.open({
+      component: 'userPopover',
+      resolve: {
+        user: () => user
+      }
+    });
+  };
 }

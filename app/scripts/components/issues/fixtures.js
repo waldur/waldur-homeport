@@ -22,15 +22,23 @@ export const randomKey = () => `ISSUE-${randomInteger(10, 100)}`;
 
 export const randomUser = () => randomChoice([
   {
+    civil_number: 'EE3750815',
+    phone_number: '+1-541-754-3010',
     email: 'victor.mireyev@gmail.com',
+    preferred_language: 'Estonian',
+    competence: 'CTO',
     username: 'Alice Lebowski',
-    position: 'Administrator',
-    organization: 'Ministry of Defense'
+    role_deprecation_time: 'Unlimited',
+    job_position: 'Administrator',
   },
   {
+    civil_number: 'DE12345678',
+    phone_number: '+49-89-636-48018',
     email: 'victor@opennodecloud.com',
+    preferred_language: 'English',
+    competence: 'OpenStack',
+    role_deprecation_time: '1 year',
     username: 'Walter Lebowski',
-    position: 'Manager',
-    organization: 'Ministry of State'
+    job_position: 'System administrator'
   }
 ]);

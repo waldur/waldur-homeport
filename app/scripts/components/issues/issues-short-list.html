@@ -42,11 +42,7 @@
                         {{ item.title }}<br>
                         <small class="text-muted">
                             Opened by
-                            <a ui-sref="profile.details"
-                               uib-popover-template="'user-popover.html'"
-                               popover-placement="bottom"
-                               popover-trigger="'mouseenter'"
-                               popover-append-to-body="'true'">
+                            <a ng-click="$ctrl.openUserDialog(item.user)">
                                 {{ item.user.username }}
                             </a>
                             at {{ item.created | dateTime }}

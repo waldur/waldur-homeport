@@ -4,11 +4,17 @@ export default function userPopover() {
   return {
     restrict: 'E',
     template: template,
-    controller: function() {},
+    controller: UserPopoverController,
     controllerAs: '$ctrl',
     scope: {},
     bindToController: {
-      user: '='
+      dismiss: '&',
+      close: '&',
+      resolve: '='
     }
   };
+}
+
+function UserPopoverController() {
+  this.user = this.resolve.user;
 }

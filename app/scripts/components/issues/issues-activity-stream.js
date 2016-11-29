@@ -12,10 +12,19 @@ export default function issuesActivityStream() {
 }
 
 // @ngInject
-function IssuesActivityStreamController(FakeIssueCommentsService) {
+function IssuesActivityStreamController(FakeIssueCommentsService, $uibModal) {
   this.loading = true;
   FakeIssueCommentsService.getList().then(items => {
     this.items = items;
     this.loading = false;
   });
+
+  this.openUserDialog = function(user) {
+    $uibModal.open({
+      component: 'userPopover',
+      resolve: {
+        user: () => user
+      }
+    });
+  };
 }

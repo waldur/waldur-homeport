@@ -30,10 +30,7 @@
                 </div>
                 <div class="vertical-timeline-content">
                     <p class="m-n">
-                        <a uib-popover-template="'user-popover.html'"
-                           popover-placement="bottom"
-                           popover-trigger="'mouseenter'"
-                           popover-append-to-body="'true'">
+                        <a ng-click="$ctrl.openUserDialog(item.user)">
                             {{ item.user.username }}
                         </a>
                         commented on
@@ -48,7 +45,3 @@
         </div>
     </div>
 </div>
-
-<script type="text/ng-template" id="user-popover.html">
-    <user-popover user="item.user"></user-popover>
-</script>
