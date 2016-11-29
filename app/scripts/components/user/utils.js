@@ -29,7 +29,7 @@ export function attachStateUtils($rootScope, stateUtilsService) {
 }
 
 // @ngInject
-export function handleInvitationUtilsService($rootScope, invitationService, ncUtilsFlash) {
+export function attachInvitationUtils($rootScope, invitationService, ncUtilsFlash) {
   $rootScope.$on('authService:signin', function() {
       var token = invitationService.getInvitationToken();
       if (token) {
