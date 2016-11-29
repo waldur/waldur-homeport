@@ -25,3 +25,7 @@ export const ISSUE_TEXT_CLASSES = {
   'Change request': 'text-success',
   'Service request': 'text-info'
 };
+
+export const ISSUE_STATUSES = [
+  'Resolved', 'Unresolved', "Won't fix"
+];

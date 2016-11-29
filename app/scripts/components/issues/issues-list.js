@@ -28,7 +28,7 @@ function IssueListController(baseControllerListClass, FakeIssuesService, $filter
         },
         tableActions: [
           {
-            name: 'Create ticket',
+            name: '<i class="fa fa fa-plus"></i> Create ticket',
             callback: function() {
               $state.go('support.create');
             }
@@ -102,11 +102,11 @@ function IssueListController(baseControllerListClass, FakeIssuesService, $filter
       this.filterList = [
         {
           name: 'customer',
-          label: 'Organization name'
+          label: 'Organization'
         },
         {
           name: 'project',
-          label: 'Project name'
+          label: 'Project'
         },
         {
           name: 'resource',

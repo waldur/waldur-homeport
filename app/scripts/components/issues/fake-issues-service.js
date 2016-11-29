@@ -1,4 +1,4 @@
-import { ISSUE_TYPES } from './constants';
+import { ISSUE_TYPES, ISSUE_STATUSES } from './constants';
 import { randomDate, randomChoice, randomInteger, randomText, randomKey, randomUser } from './fixtures';
 
 // @ngInject
@@ -29,9 +29,7 @@ export default class FakeIssuesService {
 
 const randomType = () => randomChoice(ISSUE_TYPES);
 
-const randomStatus = () => randomChoice([
-  'Resolved', 'Unresolved', "Won't fix"
-]);
+const randomStatus = () => randomChoice(ISSUE_STATUSES);
 
 const randomTimeSpent = () => randomChoice([
   '2 hours', '1 day', '2 days', '1 week'
