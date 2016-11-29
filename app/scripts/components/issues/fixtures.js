@@ -11,6 +11,10 @@ export function randomInteger(start, end) {
   return start + Math.round(Math.random() * (end - 1));
 }
 
+export function randomId() {
+  return Math.floor((1 + Math.random()) * 0x100000).toString(10).toUpperCase()
+}
+
 export const randomText = () => randomChoice([
   'Desktop publishing packages and web page editors now use Lorem Ipsum as their default model text',
   'This is issue with the coresponding note',

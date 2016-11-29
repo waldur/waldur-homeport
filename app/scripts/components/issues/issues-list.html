@@ -19,7 +19,7 @@
                 </div>
                 <div class="ibox-content">
                     <div class="form-group" ng-repeat="filter in ListController.filterList">
-                        <label class="control-label" for="{{ filter.name }}">{{ filter.label }}</label>
+                        <label class="control-label">{{ filter.label }}</label>
                         <ui-select ng-model="filter.value" theme="bootstrap">
                             <ui-select-match placeholder="Select {{ filter.label | lowercase }}...">
                                 {{ $select.selected.name }}

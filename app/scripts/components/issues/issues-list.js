@@ -91,7 +91,7 @@ function IssueListController(baseControllerListClass, FakeIssuesService, $filter
             width: 130
           },
           {
-            title: 'Time spent',
+            title: 'Time in progress',
             render: function(data, type, row, meta) {
               return row.timeSpent;
             },
@@ -102,11 +102,19 @@ function IssueListController(baseControllerListClass, FakeIssuesService, $filter
       this.filterList = [
         {
           name: 'customer',
-          label: 'Organization'
+          label: 'Organization name'
+        },
+        {
+          name: 'customer',
+          label: 'Organization code'
         },
         {
           name: 'project',
-          label: 'Project'
+          label: 'Project name'
+        },
+        {
+          name: 'scope',
+          label: 'Scope'
         },
         {
           name: 'resource',

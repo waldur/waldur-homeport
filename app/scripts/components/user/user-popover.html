@@ -1,41 +1,8 @@
 <div class="modal-header">
-    <h3 class="modal-title">{{ $ctrl.user.username }}</h3>
+    <h3 class="modal-title">User details</h3>
 </div>
 <div class="modal-body">
-    <div class="table-responsive">
-        <table class="table table-bordered">
-            <tbody>
-                <tr>
-                    <td><strong>ID code</strong></td>
-                    <td>{{ $ctrl.user.civil_number }}</td>
-                </tr>
-                <tr>
-                    <td><strong>Phone numbers</strong></td>
-                    <td>{{ $ctrl.user.phone_number }}</td>
-                </tr>
-                <tr>
-                    <td><strong>E-mail</strong></td>
-                    <td>{{ $ctrl.user.email }}</td>
-                </tr>
-                <tr>
-                    <td><strong>Preferred language</strong></td>
-                    <td>{{ $ctrl.user.preferred_language }}</td>
-                </tr>
-                <tr>
-                    <td><strong>Competence</strong></td>
-                    <td>{{ $ctrl.user.competence }}</td>
-                </tr>
-                <tr>
-                    <td><strong>Role deprecation time</strong></td>
-                    <td>{{ $ctrl.user.role_deprecation_time }}</td>
-                </tr>
-                <tr>
-                    <td><strong>Job position</strong></td>
-                    <td>{{ $ctrl.user.job_position }}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    <user-popover-table user="$ctrl.user"></user-popover-table>
 </div>
 <div class="modal-footer">
     <button class="btn btn-default"

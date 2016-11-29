@@ -26,7 +26,8 @@
                 <tr>
                     <th>Type</th>
                     <th>Description</th>
-                    <th width="120">Updated</th>
+                    <th width="100">Updated</th>
+                    <th width="100">Time in progress</th>
                 </tr>
             </thead>
             <tbody>
@@ -45,11 +46,18 @@
                             <a ng-click="$ctrl.openUserDialog(item.user)">
                                 {{ item.user.username }}
                             </a>
-                            at {{ item.created | dateTime }}
+                            from
+                            <a ng-click="$ctrl.openCustomerDialog(item.customer)">
+                                {{ item.customer.name }}
+                            </a>
+                            at {{ item.created | shortDate }}
                         </small>
                     </td>
                     <td>
-                        <small>{{ item.updated | dateTime }}</small>
+                        <small>{{ item.updated | shortDate }}</small>
+                    </td>
+                    <td>
+                        <small>{{ item.timeSpent }}</small>
                     </td>
                 </tr>
             </tbody>

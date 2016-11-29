@@ -34,4 +34,13 @@ function IssuesShortListController(FakeIssuesService, $uibModal) {
       }
     });
   };
+
+  this.openCustomerDialog = function(customer) {
+    $uibModal.open({
+      component: 'customerPopover',
+      resolve: {
+        customer: () => customer
+      }
+    });
+  };
 }

@@ -21,4 +21,15 @@ function IssueQuickCreateController() {
       label: item
     };
   });
+  this.contextItems = [
+    {
+      label: 'Organization'
+    },
+    {
+      label: 'Project'
+    },
+    {
+      label: 'Affected resource'
+    }
+  ];
 }

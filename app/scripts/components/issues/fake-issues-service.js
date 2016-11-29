@@ -1,5 +1,13 @@
 import { ISSUE_TYPES, ISSUE_STATUSES } from './constants';
-import { randomDate, randomChoice, randomInteger, randomText, randomKey, randomUser } from './fixtures';
+import {
+  randomDate,
+  randomChoice,
+  randomInteger,
+  randomText,
+  randomKey,
+  randomUser,
+  randomId
+} from './fixtures';
 
 // @ngInject
 export default class FakeIssuesService {
@@ -43,7 +51,26 @@ const randomScope = () => randomChoice([
   'OpenStack Tenant',
   'OpenStack Instance',
   'OpenStack Volume',
+  'netHSM',
+  'Office365'
 ]);
+
+const randomCompanyType = () => randomChoice([
+  'Ministry',
+  'ETO',
+  'Private company',
+  'Public company',
+  'Gov owned company'
+]);
+
+const randomCustomer = () => ({
+  name: randomChoice(['ABC corp.', 'XYZ corp.']),
+  type: randomCompanyType(),
+  registration_code: randomId(),
+  address: '100 MAIN ST PO BOX 1022 SEATTLE WA 98104',
+  email: 'contacts@xyz.com',
+  authorized_personnel: randomUser()
+});
 
 function randomIssues(n) {
   var result = [];
@@ -58,7 +85,8 @@ function randomIssues(n) {
       assigned: randomUser(),
       created: randomDate(),
       updated: randomDate(),
-      timeSpent: randomTimeSpent()
+      timeSpent: randomTimeSpent(),
+      customer: randomCustomer()
     });
   }
   return result;

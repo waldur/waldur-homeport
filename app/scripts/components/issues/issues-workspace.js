@@ -22,6 +22,11 @@ function IssuesWorkspaceController($scope) {
       link: "support.list"
     },
     {
+      label: "Activity stream",
+      icon: "fa-rss",
+      link: "support.activity"
+    },
+    {
       label: "SLAs",
       icon: "fa-headphones",
       link: "support.sla"

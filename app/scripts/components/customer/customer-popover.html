@@ -1,0 +1,44 @@
+<div class="modal-header">
+    <h3 class="modal-title">{{ $ctrl.customer.name }}</h3>
+</div>
+<div class="modal-body">
+    <uib-tabset>
+        <uib-tab heading="Company data">
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td><strong>Organization type</strong></td>
+                                <td>{{ $ctrl.customer.type }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Registration code</strong></td>
+                                <td>{{ $ctrl.customer.registration_code }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Legal address</strong></td>
+                                <td>{{ $ctrl.customer.address }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Contact email</strong></td>
+                                <td>{{ $ctrl.customer.email }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </uib-tab>
+        <uib-tab heading="Authorized personnel">
+            <div class="panel-body">
+                <user-popover-table user="$ctrl.customer.authorized_personnel"></user-popover-table>
+            </div>
+        </uib-tab>
+    </uib-tabset>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-default"
+        ng-click="$ctrl.dismiss()">
+        OK
+    </button>
+</div>
