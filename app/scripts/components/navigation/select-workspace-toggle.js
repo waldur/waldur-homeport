@@ -11,6 +11,18 @@ export default function selectWorkspaceToggle() {
   }
 }
 
+const workspaceIconClasses = {
+  organization: 'fa-sitemap',
+  project: 'fa-bookmark',
+  user: 'fa-user'
+};
+
+const workspaceButtonClasses = {
+  organization: 'btn-primary',
+  project: 'btn-success',
+  user: 'btn-info'
+};
+
 // @ngInject
 class SelectWorkspaceToggleController {
   constructor($scope, $state, $uibModal, currentStateService) {
@@ -59,6 +71,14 @@ class SelectWorkspaceToggleController {
     } else {
       return 'Select workspace';
     }
+  }
+
+  getIconClass() {
+    return ['fa', 'm-r-xs', workspaceIconClasses[this.workspace]];
+  }
+
+  getButtonClass() {
+    return ['btn', 'select-workspace', workspaceButtonClasses[this.workspace]];
   }
 
   getTooltip() {
