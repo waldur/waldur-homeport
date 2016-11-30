@@ -12,6 +12,7 @@ import appstoreListDialog from './appstore-list-dialog';
 import fieldLabel from './field-label';
 import helpicon from './help-icon';
 import multiplyBy from './multiply-by';
+import choicesTable from './choices-table';
 
 export default module => {
   module.directive('appstoreForm', appstoreForm);
@@ -28,4 +29,5 @@ export default module => {
   module.directive('fieldLabel', fieldLabel);
   module.directive('helpicon', helpicon);
   module.directive('multiplyBy', multiplyBy);
+  module.directive('choicesTable', choicesTable);
 }

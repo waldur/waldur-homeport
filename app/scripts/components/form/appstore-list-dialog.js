@@ -15,24 +15,14 @@ export default function appstoreListDialog() {
   }
 }
 
-// @ngInject
 class DialogController {
-  constructor($filter) {
-    this.$filter = $filter;
+  constructor() {
     this.field = this.resolve.field;
     this.model = this.resolve.model;
     this.value = this.model[this.field.name];
     this.title = this.field.dialogTitle || `Select ${this.field.label}`;
     this.choices = this.field.choices;
     this.columns = this.field.columns;
-  }
-
-  formatValue(column, choice) {
-    const value = choice.item[column.name];
-    if (!column.filter) {
-      return value;
-    }
-    return this.$filter(column.filter)(value);
   }
 
   selectItem(item) {

@@ -6,16 +6,12 @@ export default function actionUtilsService(
     return resourcesService.getOption(model.url).then(response => {
       const config = ActionConfiguration[model.resource_type];
       const order = config && config.order || Object.keys(response.actions);
-      const options = config && config.options;
+      const options = config && config.options || {};
       return order.reduce((result, name) => {
-        let action = response.actions[name];
-        if (!action || !action.title) {
-          return result;
+        let action = angular.merge({}, response.actions[name], options[name]);
+        if (action.hasOwnProperty('enabled')) {
+          result[name] = action;
         }
-        if (options && options[name]) {
-          action = angular.merge(action, options[name]);
-        }
-        result[name] = action;
         return result;
       }, {});
     });
@@ -110,7 +106,8 @@ export default function actionUtilsService(
     dialogScope.resource = resource;
     $uibModal.open({
       component: component,
-      scope: dialogScope
+      scope: dialogScope,
+      size: action.dialogSize
     }).result.then(function() {
       $rootScope.$broadcast('actionApplied', name);
     });
