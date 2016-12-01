@@ -14,24 +14,14 @@ export default function authInit() {
 // @ngInject
 function AuthInitController(
   usersService,
-  invitationService,
-  $q,
   $state,
   ENV,
-  ncUtilsFlash,
-  acceptInvitationHandler) {
+  ncUtilsFlash) {
   angular.extend(this, {
     user: {},
     pageTitle: ENV.shortPageTitle,
     init: function() {
-      this.checkInvitation();
       this.loadUser();
-    },
-    checkInvitation: function() {
-      if (ENV.invitationsEnabled && !invitationService.getInvitationToken()) {
-        ncUtilsFlash.error('Invitation token is not found');
-        $state.go('errorPage.notFound');
-      }
     },
     loadUser: function() {
       var vm = this;
@@ -43,11 +33,7 @@ function AuthInitController(
       });
     },
     save: function() {
-      var promises = [this.saveUser()];
-      if (ENV.invitationsEnabled) {
-        promises.push(this.acceptInvitation())
-      }
-      return $q.all(promises).then(function() {
+      return this.saveUser().then(function() {
         $state.go('profile.details');
       });
     },
@@ -60,10 +46,6 @@ function AuthInitController(
           this.errors = response.data;
         }
       }.bind(this));
-    },
-    acceptInvitation: function() {
-      var token = invitationService.getInvitationToken();
-      return acceptInvitationHandler.acceptInvitation(token, 'userInitialSave');
     }
   });
   this.init();

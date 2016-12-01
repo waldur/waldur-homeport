@@ -33,17 +33,18 @@ function AuthInvitationController(
         vm.previousStateParams = fromParams;
       });
 
-      vm.authenticated = $auth.isAuthenticated();
-      invitationService.executeAction(vm.invitationUUID, 'check').then(vm.invitationCheckHandler.bind(vm))
+      invitationService.executeAction(vm.invitationUUID, 'check')
+        .then(vm.invitationCheckHandler.bind(vm))
         .catch(vm.invitationCatchHandler.bind(vm));
     },
     invitationCheckHandler: function() {
+      var vm = this;
       var handler = function() {
-        if (this.authenticated) {
-          acceptInvitationHandler.acceptInvitation(this.invitationUUID, 'userIsAuthenticated');
-          this.toNextState(null, this.authenticated);
+        if ($auth.isAuthenticated()) {
+          acceptInvitationHandler.acceptInvitation(vm.invitationUUID)
+            .then(vm.toNextState.bind(vm, false));
         } else {
-          invitationService.setInvitationToken(this.invitationUUID);
+          invitationService.setInvitationToken(vm.invitationUUID);
           $state.go('register');
         }
       };
@@ -52,23 +53,26 @@ function AuthInvitationController(
     invitationCatchHandler: function(response) {
       if (response.status === 404) {
         ncUtilsFlash.error('Invitation is not found');
-        this.toNextState(response.status, this.authenticated);
-      } else {
+      } else if (response.status === 400) {
         ncUtilsFlash.error('Invitation is not valid');
-        this.toNextState(response.status, this.authenticated);
+      } else if (response.status === 500) {
+        ncUtilsFlash.error('Internal server error occurred. Please try again or contact support.');
       }
+      this.toNextState(true);
     },
-    toNextState: function(responseStatus, authenticated) {
-      if (authenticated) {
+    toNextState: function(responseErrorStatus) {
+      if ($auth.isAuthenticated()) {
         if (!this.previousState) {
           $state.go('dashboard.index');
+        } else {
+          $state.go(this.previousState, this.previousStateParams);
         }
-        $state.go(this.previousState, this.previousStateParams);
       } else {
-        if (responseStatus === 400) {
+        if (responseErrorStatus) {
           $state.go('errorPage.notFound');
+        } else {
+          $state.go('login');
         }
-        $state.go('login');
       }
     }
   });

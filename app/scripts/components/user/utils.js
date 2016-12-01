@@ -39,27 +39,26 @@ export function attachInvitationUtils($rootScope, invitationService, acceptInvit
 }
 
 // @ngInject
-export function acceptInvitationHandler(invitationService, ncUtilsFlash, $state, $rootScope) {
-  var vm = this;
-  vm.acceptInvitation = function(invitationToken, executionScope) {
+export function acceptInvitationHandler(invitationService, ncUtilsFlash, $auth, $rootScope) {
+  $rootScope.$on('currentCustomerUpdated', function() {
+    $rootScope.$broadcast('refreshProjectList');
+  });
+
+  this.acceptInvitation = (invitationToken) => {
     return invitationService.accept(invitationToken).then(function() {
       ncUtilsFlash.success('Your invitation was accepted');
       invitationService.clearInvitationToken();
-      if (executionScope === 'userIsAuthenticated') {
-        $rootScope.$on('currentCustomerUpdated', function() {
-          $rootScope.$broadcast('refreshProjectList');
-        });
+      if ($auth.isAuthenticated()) {
         $rootScope.$broadcast('refreshCustomerList', {updateSignal: true});
       }
     }).catch(function(response) {
-      if (response.status === 400) {
-        ncUtilsFlash.error('Invitation is invalid');
-        if (executionScope === 'userInitialSave') {
-          $state.go('errorPage.notFound');
-        }
-      } else {
-        // Server or connection error
-        ncUtilsFlash.error('Unable to accept invitation');
+      if (response.status === 404) {
+        ncUtilsFlash.error('Invitation is not found');
+      } else if (response.status === 400) {
+        invitationService.clearInvitationToken();
+        ncUtilsFlash.error('Invitation is not valid');
+      } else if (response.status === 500) {
+        ncUtilsFlash.error('Internal server error occurred. Please try again or contact support.');
       }
     });
   };
