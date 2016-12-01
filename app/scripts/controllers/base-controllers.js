@@ -205,7 +205,7 @@
         var customerUuids,
           currentCustomerKey,
           model;
-        if (params) {
+        if (params && !params.updateSignal) {
           model = params.model;
           customerUuids = ctrl.customers.map(function(obj) {
             return obj.uuid;
@@ -238,7 +238,11 @@
           }
         } else {
           ctrl.setFirstCustomer();
-          ctrl.getCustomerList(true);
+          ctrl.getCustomerList(true).then(function() {
+            if (params.updateSignal) {
+              $rootScope.$broadcast('currentCustomerUpdated');              
+            }
+          });
         }
       },
 

@@ -7,7 +7,7 @@ export default function authInit() {
     controllerAs: 'InitialData',
     template: template,
     scope: {},
-    bindToController: true,
+    bindToController: true
   };
 }
 
@@ -18,7 +18,8 @@ function AuthInitController(
   $q,
   $state,
   ENV,
-  ncUtilsFlash) {
+  ncUtilsFlash,
+  acceptInvitationHandler) {
   angular.extend(this, {
     user: {},
     pageTitle: ENV.shortPageTitle,
@@ -62,18 +63,7 @@ function AuthInitController(
     },
     acceptInvitation: function() {
       var token = invitationService.getInvitationToken();
-      return invitationService.accept(token).catch(function(response) {
-        if (response.status === 400) {
-          ncUtilsFlash.error('Invitation is invalid');
-          $state.go('errorPage.notFound');
-        } else {
-          // Server or connection error
-          ncUtilsFlash.error('Unable to accept invitation');
-        }
-      }).then(function() {
-        // Don't use the same token twice
-        invitationService.clearInvitationToken();
-      });
+      return acceptInvitationHandler.acceptInvitation(token, 'userInitialSave');
     }
   });
   this.init();

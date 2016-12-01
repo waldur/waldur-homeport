@@ -29,21 +29,39 @@ export function attachStateUtils($rootScope, stateUtilsService) {
 }
 
 // @ngInject
-export function attachInvitationUtils($rootScope, invitationService, ncUtilsFlash) {
+export function attachInvitationUtils($rootScope, invitationService, acceptInvitationHandler) {
   $rootScope.$on('authService:signin', function() {
     var token = invitationService.getInvitationToken();
     if (token) {
-      invitationService.accept(token).then(function() {
-        ncUtilsFlash.success('Your invitation was accepted');
-        invitationService.clearInvitationToken();
-      }, function(response) {
-        if (response.status === 400) {
-          ncUtilsFlash.error('Invitation is invalid');
-        } else {
-          ncUtilsFlash.error('Unable to accept invitation');
-        }
-        invitationService.clearInvitationToken();
-      });
+      acceptInvitationHandler.acceptInvitation(token);            
     }
   });
 }
+
+// @ngInject
+export function acceptInvitationHandler(invitationService, ncUtilsFlash, $state, $rootScope) {
+  var vm = this;
+  vm.acceptInvitation = function(invitationToken, executionScope) {
+    return invitationService.accept(invitationToken).then(function() {
+      ncUtilsFlash.success('Your invitation was accepted');
+      invitationService.clearInvitationToken();
+      if (executionScope === 'userIsAuthenticated') {
+        $rootScope.$on('currentCustomerUpdated', function() {
+          $rootScope.$broadcast('refreshProjectList');
+        });
+        $rootScope.$broadcast('refreshCustomerList', {updateSignal: true});
+      }
+    }).catch(function(response) {
+      if (response.status === 400) {
+        ncUtilsFlash.error('Invitation is invalid');
+        if (executionScope === 'userInitialSave') {
+          $state.go('errorPage.notFound');
+        }
+      } else {
+        // Server or connection error
+        ncUtilsFlash.error('Unable to accept invitation');
+      }
+    });
+  };
+}
+

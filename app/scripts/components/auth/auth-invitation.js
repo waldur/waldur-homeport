@@ -17,7 +17,8 @@ function AuthInvitationController(
   $auth,
   invitationService,
   ncUtilsFlash,
-  $scope) {
+  $scope,
+  acceptInvitationHandler) {
   var controllerScope = this;
   var Controller = baseControllerClass.extend({
     init: function() {
@@ -39,7 +40,7 @@ function AuthInvitationController(
     invitationCheckHandler: function() {
       var handler = function() {
         if (this.authenticated) {
-          this.acceptInvitation();
+          acceptInvitationHandler.acceptInvitation(this.invitationUUID, 'userIsAuthenticated');
           this.toNextState(null, this.authenticated);
         } else {
           invitationService.setInvitationToken(this.invitationUUID);
@@ -48,21 +49,8 @@ function AuthInvitationController(
       };
       $timeout(handler.bind(this), ENV.invitationRedirectTime);
     },
-    acceptInvitation: function() {
-      invitationService.accept(this.invitationUUID).then(function() {
-        ncUtilsFlash.success('Your invitation was accepted');
-        invitationService.clearInvitationToken();
-      }, function(response) {
-        if (response.status === 400) {
-          ncUtilsFlash.error('Invitation is not found');
-        } else {
-          ncUtilsFlash.error('Unable to accept invitation');
-        }
-        invitationService.clearInvitationToken();
-      });
-    },
     invitationCatchHandler: function(response) {
-      if (response.status === 400) {
+      if (response.status === 404) {
         ncUtilsFlash.error('Invitation is not found');
         this.toNextState(response.status, this.authenticated);
       } else {
