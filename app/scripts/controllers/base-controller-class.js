@@ -1,24 +1,11 @@
 (function(){
   angular.module('ncsaas')
-    .service('baseControllerClass', ['$rootScope', 'ncUtilsFlash', baseControllerClass]);
+    .service('baseControllerClass', ['ncUtilsFlash', baseControllerClass]);
 
   // This class is deprecated. Use ES6 class instead.
-  function baseControllerClass($rootScope, ncUtilsFlash) {
+  function baseControllerClass(ncUtilsFlash) {
     var ControllerClass = Class.extend({
-      _signals: {},
-
-      init: function() {
-        this.registerEventHandlers();
-      },
-      setSignalHandler: function(signalName, handlerFunction) {
-        this._signals[signalName] = handlerFunction;
-      },
-      registerEventHandlers: function() {
-        for (var eventName in this._signals) {
-          $rootScope.$on(eventName, this._signals[eventName]);
-          delete this._signals[eventName];
-        }
-      },
+      init: function() {},
       handleActionException: function(response) {
         if (response.status === 409) {
           var message = response.data.detail || response.data.status;
@@ -42,7 +29,6 @@
     /**
      * Use controllerScope.__proto__ = new Controller() in needed controller
      * use this.controllerScope for changes in event handler
-     * sеt events in this.setSignalHandler('eventName', this.eventFunction);
      */
     var ControllerListClass = baseControllerClass.extend({
       list: [],

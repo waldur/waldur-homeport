@@ -7,7 +7,7 @@
     </span>
     <a ng-if="::$ctrl.hasChoices"
        ng-click="$ctrl.openDialog()"
-       ng-keydown="$event.keyCode == 13 && $ctrl.openDialog()"
+       ng-keydown="$event.keyCode === 13 && $ctrl.openDialog()"
        tabindex="0">
       {{ $ctrl.getLabel() }}
       <i class="icon fa-caret-down"></i>

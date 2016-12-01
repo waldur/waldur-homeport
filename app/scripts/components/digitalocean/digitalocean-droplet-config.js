@@ -96,7 +96,7 @@ export default {
 function validateAndSort(model, options, validator, comparator, name) {
   const choices = options[name].choices;
   angular.forEach(choices, choice => {
-    choice.item.disabled = validator(model, choice.item);
+    choice.disabled = validator(model, choice);
   });
   choices.sort(comparator);
   if (model[name] && model[name].disabled) {
@@ -135,27 +135,27 @@ function imageValidator(model, choice) {
 }
 
 function imageComparator(a, b) {
-  if (a.item.disabled < b.item.disabled) return -1;
-  if (a.item.disabled > b.item.disabled) return 1;
+  if (a.disabled < b.disabled) return -1;
+  if (a.disabled > b.disabled) return 1;
 
-  if (a.item.name > b.item.name) return 1;
-  if (a.item.name < b.item.name) return -1;
+  if (a.name > b.name) return 1;
+  if (a.name < b.name) return -1;
 
   return 0;
 }
 
 function sizeComparator(a, b) {
-  if (a.item.disabled < b.item.disabled) return -1;
-  if (a.item.disabled > b.item.disabled) return 1;
+  if (a.disabled < b.disabled) return -1;
+  if (a.disabled > b.disabled) return 1;
 
-  if (a.item.cores > b.item.cores) return 1;
-  if (a.item.cores < b.item.cores) return -1;
+  if (a.cores > b.cores) return 1;
+  if (a.cores < b.cores) return -1;
 
-  if (a.item.ram > b.item.ram) return 1;
-  if (a.item.ram < b.item.ram) return -1;
+  if (a.ram > b.ram) return 1;
+  if (a.ram < b.ram) return -1;
 
-  if (a.item.disk > b.item.disk) return 1;
-  if (a.item.disk < b.item.disk) return -1;
+  if (a.disk > b.disk) return 1;
+  if (a.disk < b.disk) return -1;
 
   return 0;
 }
