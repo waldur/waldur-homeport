@@ -1,4 +1,4 @@
-import { ISSUE_CLASSES } from './constants';
+import { ISSUE_CLASSES, ISSUE_FILTERS } from './constants';
 import template from './issues-list.html';
 
 export default function issueList() {
@@ -6,14 +6,16 @@ export default function issueList() {
     restrict: 'E',
     template: template,
     controller: IssueListController,
-    controllerAs: 'ListController',
+    controllerAs: '$ctrl',
     scope: {},
-    bindToController: true
+    bindToController: {
+      filter: '='
+    }
   };
 }
 
 // @ngInject
-function IssueListController(baseControllerListClass, FakeIssuesService, $filter) {
+function IssueListController(baseControllerListClass, FakeIssuesService, $filter, $scope) {
   var controllerScope = this;
   var controllerClass = baseControllerListClass.extend({
     init: function() {
@@ -22,13 +24,14 @@ function IssueListController(baseControllerListClass, FakeIssuesService, $filter
       this._super();
       this.searchFieldName = 'search';
       this.tableOptions = {
+        disableButtons: true,
         entityData: {
           noDataText: 'No tickets yet.',
           noMatchesText: 'No tickets found matching filter.',
         },
         tableActions: [
           {
-            name: '<i class="fa fa fa-plus"></i> Create ticket',
+            name: '<i class="fa fa fa-plus"></i> Create new issue',
             callback: function() {
               $state.go('support.create');
             }
@@ -99,44 +102,10 @@ function IssueListController(baseControllerListClass, FakeIssuesService, $filter
           }
         ]
       };
-      this.filterList = [
-        {
-          name: 'customer',
-          label: 'Organization name'
-        },
-        {
-          name: 'customer',
-          label: 'Organization code'
-        },
-        {
-          name: 'project',
-          label: 'Project name'
-        },
-        {
-          name: 'scope',
-          label: 'Scope'
-        },
-        {
-          name: 'resource',
-          label: 'Affected resource'
-        },
-        {
-          name: 'type',
-          label: 'Issue type'
-        },
-        {
-          name: 'status',
-          label: 'Status'
-        },
-        {
-          name: 'reporter',
-          label: 'Reporter'
-        },
-        {
-          name: 'assignee',
-          label: 'Assignee'
-        }
-      ];
+      $scope.$watch(() => controllerScope.filter, filter => {
+        controllerScope.service.filter = filter;
+        controllerScope.getList();
+      }, true);
     }
   });
 

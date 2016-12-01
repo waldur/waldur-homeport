@@ -17,6 +17,11 @@ function IssuesWorkspaceController($scope) {
       link: "support.dashboard"
     },
     {
+      label: "Helpdesk",
+      icon: "fa-headphones",
+      link: "support.helpdesk"
+    },
+    {
       label: "Issues",
       icon: "fa-list",
       link: "support.list"
@@ -28,7 +33,7 @@ function IssuesWorkspaceController($scope) {
     },
     {
       label: "SLAs",
-      icon: "fa-headphones",
+      icon: "fa-book",
       link: "support.sla"
     }
   ];

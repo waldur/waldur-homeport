@@ -24,7 +24,7 @@ export const randomText = () => randomChoice([
 
 export const randomKey = () => `ISSUE-${randomInteger(10, 100)}`;
 
-export const randomUser = () => randomChoice([
+export const USERS = [
   {
     civil_number: 'EE3750815',
     phone_number: '+1-541-754-3010',
@@ -32,6 +32,7 @@ export const randomUser = () => randomChoice([
     preferred_language: 'Estonian',
     competence: 'CTO',
     username: 'Alice Lebowski',
+    label: 'Alice Lebowski',
     role_deprecation_time: 'Unlimited',
     job_position: 'Administrator',
   },
@@ -43,6 +44,9 @@ export const randomUser = () => randomChoice([
     competence: 'OpenStack',
     role_deprecation_time: '1 year',
     username: 'Walter Lebowski',
+    label: 'Walter Lebowski',
     job_position: 'System administrator'
   }
-]);
+];
+
+export const randomUser = () => randomChoice(USERS);

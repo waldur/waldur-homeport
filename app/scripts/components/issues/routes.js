@@ -19,9 +19,18 @@ export default function issueRoutes($stateProvider) {
       }
     })
 
+    .state('support.helpdesk', {
+      url: 'helpdesk/',
+      template: '<issues-helpdesk></issue-helpdesk>',
+      data: {
+        pageTitle: 'Helpdesk dashboard',
+        pageClass: 'gray-bg'
+      }
+    })
+
     .state('support.list', {
       url: 'list/',
-      template: '<issues-list></issues-list>',
+      template: '<issues-list-filtered></issues-list-filtered>',
       data: {
         pageTitle: 'List issues',
         pageClass: 'gray-bg'

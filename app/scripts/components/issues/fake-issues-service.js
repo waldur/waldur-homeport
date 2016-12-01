@@ -14,25 +14,52 @@ export default class FakeIssuesService {
   constructor($timeout) {
     this.$timeout = $timeout;
     this.issues = randomIssues(10);
+    this.filter = {};
+  }
+
+  createIssue(issue) {
+    return this.$timeout(() => {
+      // this.issues.unshift(issue);
+    });
   }
 
   getList(filter) {
     return this.$timeout(() => {
-      if (filter.assignee) {
-        this.resultCount = 5;
-        this.pages = 1;
-        return this.issues.slice(0, 5);
-      }
-      if (filter.reporter) {
-        this.resultCount = 5;
-        this.pages = 1;
-        return this.issues.slice(5, 10);
-      }
-      this.resultCount = this.issues.length;
+      let result = this.filterList(this.filter);
       this.pages = 1;
-      return this.issues;
-    }, 1000);
+      this.resultCount = result.length;
+      return result;
+    }, 0);
   }
+
+  filterList(filter) {
+    filter = filter || {};
+    let result = this.issues;
+    if (filter.assignee) {
+      result = result.slice(0, 5);
+    }
+    if (filter.reporter) {
+      result = result.slice(5, 10);
+    }
+    if (filter.customer) {
+      result = result.filter(issue => issue.customer.label === filter.customer.label);
+    }
+    if (filter.caller) {
+      result = result.filter(issue => issue.caller.label === filter.caller.label);
+    }
+    if (filter.type) {
+      result = result.filter(issue => issue.type === filter.type.label);
+    }
+    if (filter.status) {
+      result = result.filter(issue => issue.status === filter.status.label);
+    }
+    if (filter.summary) {
+      result = result.filter(issue => issue.title.toLowerCase().indexOf(filter.summary) !== -1);
+    }
+    return result;
+  }
+
+  clearAllCacheForCurrentEndpoint() {}
 }
 
 const randomType = () => randomChoice(ISSUE_TYPES);
@@ -72,6 +99,11 @@ const randomCustomer = () => ({
   authorized_personnel: randomUser()
 });
 
+export const CUSTOMERS = [
+  angular.extend(randomCustomer(), {label: 'ABC', name: 'ABC'}),
+  angular.extend(randomCustomer(), {label: 'XYZ', name: 'XYZ'})
+];
+
 function randomIssues(n) {
   var result = [];
   for (var i = 0; i < n; i++) {
@@ -82,11 +114,12 @@ function randomIssues(n) {
       status: randomStatus(),
       scope: randomScope(),
       user: randomUser(),
+      caller: randomUser(),
       assigned: randomUser(),
       created: randomDate(),
       updated: randomDate(),
       timeSpent: randomTimeSpent(),
-      customer: randomCustomer()
+      customer: randomChoice(CUSTOMERS)
     });
   }
   return result;

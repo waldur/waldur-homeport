@@ -31,6 +31,37 @@
         });
 
         function initTable() {
+          var buttons = getButtons();
+          var columns = getColumns();
+
+          var table = $(element.find('table')[0]).DataTable({
+            responsive: true,
+            processing: true,
+            serverSide: true,
+            ordering: !!options.enableOrdering,
+            autoWidth: false,
+            ajax: serverDataTableCallback,
+            dom: buttons ? '<"html5buttons"B>lTfgitp' : 'Tgitp',
+            buttons: buttons && buttons,
+            columns: columns,
+            language: {
+              emptyTable: options.noDataText,
+              zeroRecords: options.noMatchesText
+            },
+            fnDrawCallback: function() {
+              $(element).find('tr').each(function(index, element) {
+                $compile(element)(scope);
+              });
+            }
+          });
+          return table;
+        }
+
+        function getButtons() {
+          if (options.disableButtons) {
+            return;
+          }
+
           var exportButtons = getExportButtons(
             options.columns.length,
             options.rowActions,
@@ -56,34 +87,16 @@
               });
             }
           });
+          return buttons;
+        }
 
+        function getColumns() {
           var columns = options.columns;
           if (options.rowActions && options.rowActions.length) {
             var actionColumn = getActionColumn(options.rowActions, options.actionsColumnWidth);
             columns.push(actionColumn);
           }
-
-          var table = $(element.find('table')[0]).DataTable({
-            responsive: true,
-            processing: true,
-            serverSide: true,
-            ordering: !!scope.controller.tableOptions.enableOrdering,
-            autoWidth: false,
-            ajax: serverDataTableCallback,
-            dom: '<"html5buttons"B>lTfgitp',
-            buttons: buttons,
-            columns: columns,
-            language: {
-              emptyTable: options.noDataText,
-              zeroRecords: options.noMatchesText
-            },
-            fnDrawCallback: function() {
-              $(element).find('tr').each(function(index, element) {
-                $compile(element)(scope);
-              });
-            }
-          });
-          return table;
+          return columns;
         }
 
         function connectWatcher(table) {

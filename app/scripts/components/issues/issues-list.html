@@ -1,36 +1,10 @@
-<div class="wrapper wrapper-content">
-    <div class="row">
-        <div class="col-lg-9">
-            <div class="ibox">
-                <div class="ibox-content">
-                    <div ng-if="ListController.loading">
-                        <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
-                    </div>
-                    <div ng-if="!ListController.loading">
-                        <responsive-table table-ctrl="ListController"></responsive-table>
-                    </div>
-                </div>
-            </div>
+<div class="ibox">
+    <div class="ibox-content">
+        <div ng-if="$ctrl.loading">
+            <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
         </div>
-        <div class="col-lg-3">
-            <div class="ibox">
-                <div class="ibox-title">
-                    <h5>Apply filters</h5>
-                </div>
-                <div class="ibox-content">
-                    <div class="form-group" ng-repeat="filter in ListController.filterList">
-                        <label class="control-label">{{ filter.label }}</label>
-                        <ui-select ng-model="filter.value" theme="bootstrap">
-                            <ui-select-match placeholder="Select {{ filter.label | lowercase }}...">
-                                {{ $select.selected.name }}
-                            </ui-select-match>
-                            <ui-select-choices repeat="option in filter.options">
-                                {{ option.name }}
-                            </ui-select-choices>
-                        </ui-select>
-                    </div>
-                </div>
-            </div>
+        <div ng-if="!$ctrl.loading">
+            <responsive-table table-ctrl="$ctrl"></responsive-table>
         </div>
     </div>
 </div>

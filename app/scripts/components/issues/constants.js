@@ -27,5 +27,84 @@ export const ISSUE_TEXT_CLASSES = {
 };
 
 export const ISSUE_STATUSES = [
-  'Resolved', 'Unresolved', "Won't fix"
+  'Resolved',
+  'Unresolved',
+  'Won\'t fix'
 ];
+
+export const ISSUE_TYPE_CHOICES = ISSUE_TYPES.map(item => {
+  return {
+    iconClass: ISSUE_ICONS[item],
+    textClass: ISSUE_TEXT_CLASSES[item],
+    label: item
+  };
+});
+
+export const ISSUE_FILTERS = [
+  {
+    name: 'customer',
+    label: 'Organization name'
+  },
+  {
+    name: 'customer',
+    label: 'Organization code'
+  },
+  {
+    name: 'project',
+    label: 'Project name'
+  },
+  {
+    name: 'scope',
+    label: 'Scope'
+  },
+  {
+    name: 'resource',
+    label: 'Affected resource'
+  },
+  {
+    name: 'type',
+    label: 'Issue type'
+  },
+  {
+    name: 'status',
+    label: 'Status'
+  },
+  {
+    name: 'reporter',
+    label: 'Reporter'
+  },
+  {
+    name: 'assignee',
+    label: 'Assignee'
+  }
+];
+
+export const ISSUE_FILTERS_SHORT = {
+  order: [
+    'customer',
+    'caller',
+    'type',
+    'status'
+  ],
+  options: {
+    customer: {
+      label: 'Organization'
+    },
+    caller: {
+      label: 'Caller'
+    },
+    type: {
+      label: 'Issue type'
+    },
+    status: {
+      label: 'Status'
+    }
+  }
+}
+
+const mapStringsToChoices = choices => choices.map(item => ({
+  label: item,
+  value: item
+}));
+
+export const ISSUE_STATUS_CHOICES = mapStringsToChoices(ISSUE_STATUSES);

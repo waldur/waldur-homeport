@@ -12,6 +12,8 @@ export default class FakeIssueCommentsService {
       return this.comments;
     }, 1000);
   }
+
+  clearAllCacheForCurrentEndpoint() {}
 }
 
 function randomIssueComment(n) {
