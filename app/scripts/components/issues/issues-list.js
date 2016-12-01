@@ -39,7 +39,7 @@ function IssueListController(baseControllerListClass, FakeIssuesService, $filter
         ],
         columns: [
           {
-            title: 'Type',
+            title: 'Key',
             render: function(data, type, row, meta) {
               return `<span title="${row.type.toUpperCase()}" class="label ${ISSUE_CLASSES[row.type]}">${row.key}</span>`
             },
@@ -64,6 +64,19 @@ function IssueListController(baseControllerListClass, FakeIssuesService, $filter
             render: function(data, type, row, meta) {
               return row.scope;
             }
+          },
+          {
+            title: 'Organization',
+            render: function(data, type, row, meta) {
+              return row.customer.name;
+            }
+          },
+          {
+            title: 'Caller',
+            render: function(data, type, row, meta) {
+              return row.caller.username;
+            },
+            width: 170
           },
           {
             title: 'Reporter',

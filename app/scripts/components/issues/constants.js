@@ -108,3 +108,12 @@ const mapStringsToChoices = choices => choices.map(item => ({
 }));
 
 export const ISSUE_STATUS_CHOICES = mapStringsToChoices(ISSUE_STATUSES);
+
+export const CHANNELS = [
+  'phone',
+  'email',
+  'self-service',
+  'monitoring'
+];
+
+export const CHANNEL_CHOICES = mapStringsToChoices(CHANNELS);

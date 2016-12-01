@@ -5,7 +5,7 @@
                 <ui-select ng-model="$ctrl.filter[filter.name]" theme="bootstrap">
                     <ui-select-match placeholder="Select {{ filter.label | lowercase }}..."
                                      allow-clear="true">
-                        {{ $select.selected.label }}
+                        {{ filter.label }}: {{ $select.selected.label }}
                     </ui-select-match>
                     <ui-select-choices repeat="option in filter.options | filter: {label: $select.search}">
                         {{ option.label }}
