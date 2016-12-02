@@ -8,17 +8,17 @@ export function stateUtilsService($state) {
       vm.prevParams = params;
       vm.prevWorkspace = state.data.workspace;
     }
-  };
+  }
 
   vm.getPrevWorkspace = function() {
     return vm.prevWorkspace;
-  };
+  }
 
   vm.goBack = function() {
     if (vm.prevState) {
       $state.go(vm.prevState, vm.prevParams);
     }
-  };
+  }
 }
 
 // @ngInject

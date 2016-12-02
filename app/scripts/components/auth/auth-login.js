@@ -28,7 +28,7 @@ export default function authLogin() {
 
 // @ngInject
 function AuthLoginController(ENV, $q, $sce, $scope, $state, authService,
-  baseControllerClass, ncUtilsFlash, $rootScope, invitationService) {
+                             baseControllerClass, ncUtilsFlash, $rootScope, invitationService) {
   var controllerScope = this;
   var Controller = baseControllerClass.extend({
     isSignupFormVisible: $state.current.data.isSignupFormVisible,

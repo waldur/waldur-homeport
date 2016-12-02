@@ -1,5 +1,5 @@
 // @ngInject
-export default function resourceUtils(ncUtils, ncServiceUtils, authService, $filter, ENV) {
+export default function resourceUtils(ncUtils, ncServiceUtils, authService, $filter, ENV, ResourceStateConfiguration) {
   return {
     setAccessInfo: function(resource) {
       resource.access_info_text = 'No access info';
@@ -73,6 +73,61 @@ export default function resourceUtils(ncUtils, ncServiceUtils, authService, $fil
       var type = item.resource_type || item.type;
       var service_type = ncServiceUtils.getTypeDisplay(type.split('.')[0]);
       return '/static/images/appstore/icon-' + service_type.toLowerCase() + '.png';
+    },
+    getResourceState: function(resource) {
+      var runtimeShutdownStates = [];
+      var runtimeErrorStates = [];
+      var resourceType = this.formatResourceType(resource);
+      var config = ResourceStateConfiguration[resource.resource_type];
+      if (config) {
+        runtimeShutdownStates = config.shutdown_states || [];
+        runtimeErrorStates = config.error_states || [];
+      }
+      var context = {};
+      context.className = null;
+      var movement = false;
+      context.label = null;
+      context.tooltip = null;
+
+      if (runtimeErrorStates.indexOf(resource.runtime_state) !== -1) {
+        context.className = 'progress-bar-danger';
+      }
+      if(resource.state.toLowerCase() === 'ok') {
+        if (runtimeShutdownStates.indexOf(resource.runtime_state) !== -1) {
+          context.className = 'progress-bar-plain';
+        }
+        context.label = resource.runtime_state || resource.state;
+        if (resource.service_settings_state.toLowerCase() !== 'erred') {
+          context.className = context.className || 'progress-bar-primary';
+          context.tooltip = `Resource in sync on backend, currently in state ${resource.runtime_state}`;
+        } else {
+          var errorMessage = resource.service_settings_error_message || ENV.defaultErrorMessage;
+          context.className = context.className || 'progress-bar-warning';
+          context.tooltip = `Service settings of this resource are in state erred, error message received: ${errorMessage}`;
+        }
+      } else if (resource.state.toLowerCase() === 'erred') {
+        context.className = 'progress-bar-warning';
+        context.label = resource.runtime_state || resource.state;
+        context.tooltip = `Failed to operate with backend, ${resource.error_message}`;
+      } else {
+        movement = true;
+        context.className = 'progress-bar-primary';
+        if (resource.action) {
+          var descriptionState = resource.action_details.message || `${resource.action} ${resourceType}`;
+          context.label = resource.action;
+          context.tooltip = `${descriptionState}, current state on backend: ${resource.runtime_state}`;
+        } else {
+          context.label = resource.state;
+          if (runtimeErrorStates.indexOf(resource.state) !== -1) {
+            context.tooltip = `${resourceType} has state ${resource.state}, current state on backend: ${resource.runtime_state}`;
+          } else {
+            context.tooltip = `${resource.state} ${resourceType}, current state on backend: ${resource.runtime_state}`;
+          }
+        }
+      }
+      context.movementClassName = movement ? 'progress-striped active' : '';
+
+      return context;
     }
-  }
+  };
 }
