@@ -302,29 +302,6 @@ angular.module('ncsaas')
     countersTimerInterval: 7, // seconds
     providersTimerInterval: 7, // seconds
 
-    resourceStateColorClasses: {
-      'OK': 'online',
-      'Creation Scheduled': 'processing',
-      'Creating': 'processing',
-      'Update Scheduled': 'processing',
-      'Updating': 'processing',
-      'Online': 'online',
-      'Offline': 'offline',
-      'Erred': 'erred',
-      'Starting Scheduled': 'processing',
-      'Stopping Scheduled': 'processing',
-      'Restarting Scheduled': 'processing',
-      'Starting': 'processing',
-      'Stopping': 'processing',
-      'Restarting': 'processing',
-      'Provisioning Scheduled': 'processing',
-      'Provisioning': 'processing',
-      'Deletion Scheduled': 'processing',
-      'Deleting': 'processing',
-      'Resizing Scheduled': 'processing',
-      'Resizing': 'processing'
-    },
-
     servicesStateColorClasses: {
       'OK': 'online',
       'Erred': 'erred',
