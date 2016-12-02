@@ -1,13 +1,24 @@
+export default function invitationsList() {
+  return {
+    restrict: 'E',
+    controller: InvitationsListController,
+    controllerAs: 'ListController',
+    templateUrl: 'views/partials/filtered-list.html',
+    scope: {}
+  };
+}
+
 // @ngInject
-export default function CustomerInvitationsTabController(
+function InvitationsListController(
   baseControllerListClass,
   customersService,
-  currentCustomer,
-  currentUser,
+  currentStateService,
+  usersService,
   invitationService,
   ncUtils,
   $state,
   $filter,
+  $q,
   $uibModal,
   ncUtilsFlash,
   ENV
@@ -17,15 +28,28 @@ export default function CustomerInvitationsTabController(
     init: function() {
       this.controllerScope = controllerScope;
       this.service = invitationService;
-      this.isOwnerOrStaff = customersService.checkCustomerUser(currentCustomer, currentUser);
-      this.tableOptions = this.getTableOptions();
-      this.getSearchFilters();
-      this._super();
-      this.defaultFilter = {
-        name: 'state',
-        title: 'Pending',
-        value: 'pending'
-      };
+      var fn = this._super.bind(this);
+      this.loading = true;
+      $q.all([
+        currentStateService.getCustomer().then(customer => {
+          this.currentCustomer = customer;
+        }),
+        usersService.getCurrentUser().then(user => {
+          this.currentUser = user;
+        })
+      ]).then(() => {
+        this.isOwnerOrStaff = customersService.checkCustomerUser(this.currentCustomer, this.currentUser);
+        this.tableOptions = this.getTableOptions();
+        this.getSearchFilters();
+        fn();
+        this.defaultFilter = {
+          name: 'state',
+          title: 'Pending',
+          value: 'pending'
+        };
+      }).finally(() => {
+        this.loading = false;
+      });
     },
     getSearchFilters: function() {
       this.searchFilters = [
@@ -136,7 +160,7 @@ export default function CustomerInvitationsTabController(
         component: 'invitationDialog',
         resolve: {
           customer: function() {
-            return currentCustomer;
+            return this.currentCustomer;
           }
         }
       }).result.then(function() {
