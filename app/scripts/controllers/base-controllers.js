@@ -53,6 +53,10 @@
         $scope.$on('refreshProjectList', this.refreshProjectListHandler);
         $scope.$on('refreshCustomerList', this.refreshCustomerListHandler);
 
+        $scope.$on('currentCustomerUpdated', function() {
+          $scope.$broadcast('refreshProjectList');
+        });
+
         this._super();
         this.modeName = ENV.modeName;
         $rootScope.buildId = ENV.buildId;
@@ -240,7 +244,7 @@
           ctrl.setFirstCustomer();
           ctrl.getCustomerList(true).then(function() {
             if (params.updateSignal) {
-              $rootScope.$broadcast('currentCustomerUpdated');              
+              $rootScope.$broadcast('currentCustomerUpdated');
             }
           });
         }

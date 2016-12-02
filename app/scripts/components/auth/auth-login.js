@@ -10,6 +10,22 @@ export default function authLogin() {
   };
 }
 
+// TODO: 
+//
+// 1) This controller should NOT depend on baseControllerClass,
+//    because it has been deprecated. Instead ES6 class should be used
+//
+// 2) This controller should NOT depend on invitationService
+//    and on invitations module in general, because it leads to circular dependency
+//
+// 3) In order to break circular dependency we need to implement registry of enabled
+//    registration methods. When invitation token is checked,
+//    this registry should be updated
+//
+// 4) This controller should not broadcast signals, it should be done by service
+//
+// 5) Error formatting code should be moved to utils service.
+
 // @ngInject
 function AuthLoginController(ENV, $q, $sce, $scope, $state, authService,
   baseControllerClass, ncUtilsFlash, $rootScope, invitationService) {
@@ -34,7 +50,7 @@ function AuthLoginController(ENV, $q, $sce, $scope, $state, authService,
     },
     checkRegistrationMethods: function() {
       var vm = this;
-      invitationService.executeAction(invitationService.getInvitationToken(), 'check').then(function(result) {
+      invitationService.check(invitationService.getInvitationToken()).then(function(result) {
         if (result.data.civil_number_required) {
           vm.civilNumberRequired = true;
         }
