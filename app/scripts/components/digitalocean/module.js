@@ -5,7 +5,7 @@ export default module => {
   module.directive('dropletResizeDialog', dropletResizeDialog);
   module.config(actionConfig);
   module.config(fieldsConfig);
-}
+};
 
 // @ngInject
 function fieldsConfig(AppstoreFieldConfigurationProvider) {

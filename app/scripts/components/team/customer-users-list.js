@@ -1,11 +1,21 @@
+export default function customerUsersList() {
+  return {
+    restrict: 'E',
+    controller: CustomerUsersListController,
+    controllerAs: 'ListController',
+    templateUrl: 'views/partials/filtered-list.html',
+    scope: {}
+  };
+}
+
 // @ngInject
-export default function CustomerTeamTabController(
+function CustomerUsersListController(
     baseControllerListClass,
     customerPermissionsService,
     customersService,
     projectPermissionsService,
-    currentUser,
-    currentCustomer,
+    currentStateService,
+    usersService,
     $q,
     $rootScope,
     $uibModal,
@@ -16,10 +26,23 @@ export default function CustomerTeamTabController(
     init: function() {
       this.controllerScope = controllerScope;
       this.service = customersService;
-      this.hideNoDataText = true;
-      this.isOwnerOrStaff = customersService.checkCustomerUser(currentCustomer, currentUser);
-      this.tableOptions = this.getTableOptions();
-      this._super();
+
+      var fn = this._super.bind(this);
+      this.loading = true;
+      $q.all([
+        currentStateService.getCustomer().then(customer => {
+          this.currentCustomer = customer;
+        }),
+        usersService.getCurrentUser().then(user => {
+          this.currentUser = user;
+        })
+      ]).then(() => {
+        this.isOwnerOrStaff = customersService.checkCustomerUser(this.currentCustomer, this.currentUser);
+        this.tableOptions = this.getTableOptions();
+        fn();
+      }).finally(() => {
+        this.loading = false;
+      });
     },
     getTableOptions: function() {
       var vm = this;
@@ -106,7 +129,7 @@ export default function CustomerTeamTabController(
     getList: function(filter) {
       return this._super(angular.extend({
         operation: 'users',
-        UUID: currentCustomer.uuid
+        UUID: this.currentCustomer.uuid
       }, filter));
     },
     removeInstance: function(user) {
@@ -132,8 +155,8 @@ export default function CustomerTeamTabController(
     },
     openPopup: function(user) {
       var dialogScope = $rootScope.$new();
-      dialogScope.currentCustomer = currentCustomer;
-      dialogScope.currentUser = currentUser;
+      dialogScope.currentCustomer = this.currentCustomer;
+      dialogScope.currentUser = this.currentUser;
       dialogScope.editUser = user;
       dialogScope.addedUsers = this.list.map(function(users) {
         return users.uuid;

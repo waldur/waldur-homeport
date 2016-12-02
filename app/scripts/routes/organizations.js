@@ -74,14 +74,10 @@ export default function organizationRoutes($stateProvider) {
       url: '',
       views: {
         users: {
-          controller: 'CustomerTeamTabController',
-          controllerAs: 'ListController',
-          templateUrl: 'views/partials/filtered-list.html'
+          template: '<customer-users-list></customer-users-list>'
         },
         invitations: {
-          controller: 'CustomerInvitationsTabController',
-          controllerAs: 'ListController',
-          templateUrl: 'views/partials/filtered-list.html'
+          template: '<invitations-list></invitations-list>'
         }
       }
     })
