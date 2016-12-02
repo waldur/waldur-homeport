@@ -1,6 +1,6 @@
 import template from './resource-state.html';
 
-export default function resourceState(resourceUtils) {
+export default function resourceState() {
   return {
     restrict: 'E',
     template: template,
@@ -8,9 +8,12 @@ export default function resourceState(resourceUtils) {
     bindToController: {
       resource: '='
     },
-    controller: function () {
-      this.editedResourceState = resourceUtils.getResourceState(this.resource);
-    },
+    controller: ResourceStateController,
     controllerAs: '$ctrl'
   };
+}
+
+// @ngInject
+function ResourceStateController(resourceUtils) {
+  this.context = resourceUtils.getResourceState(this.resource);
 }
