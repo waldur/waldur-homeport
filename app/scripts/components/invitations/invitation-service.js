@@ -20,8 +20,7 @@ export default function invitationService(baseServiceClass, $http, ENV, $window)
       return this.executeAction(invitation_uuid, 'send');
     },
     executeAction: function(invitation_uuid, action) {
-      var url = ENV.apiEndpoint + '/api/user-invitations/' + invitation_uuid + '/' + action + '/';
-      return $http.post(url);
+      return $http.post(`${ENV.apiEndpoint}api/user-invitations/${invitation_uuid}/${action}/`);
     },
     setInvitationToken: function(invitationUUID) {
       if (invitationUUID) {
