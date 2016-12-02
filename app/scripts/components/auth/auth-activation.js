@@ -11,7 +11,7 @@ export default function authActivation() {
 }
 
 // @ngInject
-function AuthActivationController($state, $stateParams, authService, baseControllerClass, ncUtilsFlash) {
+function AuthActivationController($state, $stateParams, authService, ncUtilsFlash) {
   authService.activate({
     user_uuid: $stateParams.user_uuid,
     token: $stateParams.token
