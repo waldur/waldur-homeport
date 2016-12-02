@@ -5,32 +5,12 @@
 </div>
 
 <div class="modal-body">
-    <div class="table-responsive">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th ng-repeat="column in $ctrl.columns">
-                        {{ ::column.label }}
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="choice in $ctrl.choices"
-                    ng-click="$ctrl.selectItem(choice.item)"
-                    ng-keyup="$event.keyCode == 13 && $ctrl.selectItem(choice.item)"
-                    ng-class="{disabled: choice.item.disabled}"
-                    class="cursor-pointer">
-                    <td>
-                        <input type="radio" ng-model="$ctrl.value" ng-value="choice.item">
-                    </td>
-                    <td ng-repeat="column in $ctrl.columns">
-                        {{ ::$ctrl.formatValue(column, choice) }}
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    <choices-table
+        choices="$ctrl.choices"
+        columns="$ctrl.columns"
+        value="$ctrl.value"
+        select-item="$ctrl.selectItem(item)">
+    </choices-table>
 </div>
 
 <div class="modal-footer">
