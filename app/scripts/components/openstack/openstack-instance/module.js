@@ -5,7 +5,8 @@ export default module => {
   module.directive('openstackInstanceSummary', openstackInstanceSummary);
   module.config(fieldsConfig);
   module.config(actionConfig);
-}
+  module.config(stateConfig);
+};
 
 // @ngInject
 function fieldsConfig(AppstoreFieldConfigurationProvider) {
@@ -44,5 +45,19 @@ function actionConfig(ActionConfigurationProvider) {
         }
       }
     }
+  });
+}
+
+// @ngInject
+function stateConfig(ResourceStateConfigurationProvider) {
+  ResourceStateConfigurationProvider.register('OpenStackTenant.Instance', {
+    error_states: [
+      'ERROR'
+    ],
+    shutdown_states: [
+      'SHUTOFF',
+      'STOPPED',
+      'SUSPENDED'
+    ]
   });
 }

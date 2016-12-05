@@ -10,7 +10,8 @@ export default module => {
 
   module.config(fieldsConfig);
   module.config(actionConfig);
-}
+  module.config(stateConfig);
+};
 
 // @ngInject
 function fieldsConfig(AppstoreFieldConfigurationProvider) {
@@ -39,5 +40,20 @@ function actionConfig(ActionConfigurationProvider) {
         component: 'snapshotCreateDialog'
       }
     }
+  });
+}
+
+// @ngInject
+function stateConfig(ResourceStateConfigurationProvider) {
+  ResourceStateConfigurationProvider.register('OpenStackTenant.Volume', {
+    error_states: [
+      'error'
+    ]
+  });
+
+  ResourceStateConfigurationProvider.register('OpenStackTenant.Snapshot', {
+    error_states: [
+      'error'
+    ]
   });
 }

@@ -10,12 +10,14 @@ import navigationModule from './components/navigation/module';
 import resourceModule from './components/resource/module';
 import invoicesModule from './components/invoices/module';
 import authModule from './components/auth/module';
+import invitationsModule from './components/invitations/module';
 import appstoreModule from './components/appstore/module';
 import formModule from './components/form/module';
 import openstackModule from './components/openstack/module';
 import digitaloceanModule from './components/digitalocean/module';
 import premiumSupportModule from './components/premiumSupport/module';
 import customerModule from './components/customer/module';
+import routesModule from './routes/module';
 
 const module = angular.module('ncsaas');
 
@@ -31,9 +33,11 @@ navigationModule(module);
 resourceModule(module);
 invoicesModule(module);
 authModule(module);
+invitationsModule(module);
 appstoreModule(module);
 formModule(module);
 openstackModule(module);
 digitaloceanModule(module);
 premiumSupportModule(module);
 customerModule(module);
+routesModule(module);

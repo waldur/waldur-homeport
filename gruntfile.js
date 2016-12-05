@@ -924,8 +924,8 @@ module.exports = function(grunt) {
     grunt.registerTask(
       'build', ['copy:main', 'image', 'sass', 'autoprefixer', 'cssmin']);
     grunt.registerTask(
-      'run', ['po2json_angular_translate', 'copy:main', 'env:dev', 'preprocess:index', 'connect:server', 'sass', 'autoprefixer', 'webpack:dev',
-          'copy:' + mode, 'focus:dev']);
+      'run', ['po2json_angular_translate', 'copy:main', 'env:dev', 'preprocess:index', 'connect:server', 'sass', 'autoprefixer',
+        'copy:' + mode, 'webpack:dev', 'focus:dev']);
     grunt.registerTask('serve', ['connect',]);
     grunt.registerTask('default', ['run']);
 
