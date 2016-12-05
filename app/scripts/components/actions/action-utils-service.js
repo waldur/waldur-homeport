@@ -31,17 +31,11 @@ export default function actionUtilsService(
   this.loadChoices = function(field) {
     return this.loadRawChoices(field).then(function(response) {
       field.list = response.map(function(item) {
-        var obj = {};
-        switch (field.label.toLowerCase()) {
-          case 'flavor':
-            obj.display_name = `${item.name}. Storage: ${$filter('filesize')(item.disk)}, RAM: ${$filter('filesize')(item.ram)}`;
-            break;
-          default:
-            obj.display_name = item[field.display_name_field];
-            break;
-        }
-        obj.value = item[field.value_field];
-        return obj;
+        var displayName = field.formatter ? field.formatter($filter, item) : item[field.display_name_field];
+        return {
+          value: item[field.value_field],
+          display_name: displayName
+        };
       });
     });
   };
