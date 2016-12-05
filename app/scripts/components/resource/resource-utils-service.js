@@ -61,9 +61,6 @@ export default function resourceUtils(ncUtils, ncServiceUtils, authService, $fil
       var service = ncServiceUtils.getTypeDisplay(parts[0]);
       return service + ' ' + parts[1];
     },
-    getStateClass: function(resource) {
-      return ENV.resourceStateColorClasses[resource.state];
-    },
     getUptime: function(resource) {
       if (resource.start_time) {
         return moment(resource.start_time).fromNow().replace(' ago', '');
