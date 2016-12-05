@@ -17,6 +17,7 @@ import openstackModule from './components/openstack/module';
 import digitaloceanModule from './components/digitalocean/module';
 import premiumSupportModule from './components/premiumSupport/module';
 import customerModule from './components/customer/module';
+import routesModule from './routes/module';
 
 const module = angular.module('ncsaas');
 
@@ -39,3 +40,4 @@ openstackModule(module);
 digitaloceanModule(module);
 premiumSupportModule(module);
 customerModule(module);
+routesModule(module);
