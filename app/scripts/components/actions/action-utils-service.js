@@ -1,6 +1,6 @@
 // @ngInject
 export default function actionUtilsService(
-  ncUtilsFlash, $rootScope, $http, $q, $uibModal, ncUtils, resourcesService, ActionConfiguration) {
+  ncUtilsFlash, $rootScope, $http, $q, $uibModal, $filter, ncUtils, resourcesService, ActionConfiguration) {
   this.loadActions = function(model) {
     resourcesService.cleanOptionsCache(model.url);
     return resourcesService.getOption(model.url).then(response => {
@@ -31,10 +31,17 @@ export default function actionUtilsService(
   this.loadChoices = function(field) {
     return this.loadRawChoices(field).then(function(response) {
       field.list = response.map(function(item) {
-        return {
-          value: item[field.value_field],
-          display_name: item[field.display_name_field]
+        var obj = {};
+        switch (field.label.toLowerCase()) {
+          case 'flavor':
+            obj.display_name = `${item.name}. Storage: ${$filter('filesize')(item.disk)}, RAM: ${$filter('filesize')(item.ram)}`;
+            break;
+          default:
+            obj.display_name = item[field.display_name_field];
+            break;
         }
+        obj.value = item[field.value_field];
+        return obj;
       });
     });
   };
