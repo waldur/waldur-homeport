@@ -18,6 +18,7 @@ import digitaloceanModule from './components/digitalocean/module';
 import premiumSupportModule from './components/premiumSupport/module';
 import customerModule from './components/customer/module';
 import routesModule from './routes/module';
+import analyticsModule from './components/analytics/module';
 
 const module = angular.module('ncsaas');
 
@@ -41,3 +42,4 @@ digitaloceanModule(module);
 premiumSupportModule(module);
 customerModule(module);
 routesModule(module);
+analyticsModule(module);
