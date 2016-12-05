@@ -22,6 +22,7 @@ export default function issuesListHelpdesk() {
 class IssuesListHelpdeskController {
   constructor($state) {
     this.$state = $state;
+    this.listFilter = {};
     this.init();
   }
 
@@ -33,6 +34,10 @@ class IssuesListHelpdeskController {
 
   createIssue() {
     this.$state.go('support.createIssue');
+  }
+
+  search() {
+    this.listFilter = angular.copy(this.filter);
   }
 }
 

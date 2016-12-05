@@ -13,10 +13,13 @@
                 </ui-select>
             </div>
             <div class="col-md-2">
-                <input type="text" ng-model="$ctrl.filter.summary" class="form-control" placeholder="Search">
+                <a class="col-md-12 btn btn-default" ng-click="$ctrl.search()">
+                    <i class="fa fa-search"></i>
+                    Search
+                </a>
             </div>
             <div class="col-md-2">
-                <a class="btn btn-primary"
+                <a class="col-md-12 btn btn-primary"
                    ng-click="$ctrl.createIssue()">
                     <i class="fa fa-plus"></i>
                     Create new issue
@@ -26,4 +29,4 @@
     </div>
 </div>
 
-<issues-list filter="$ctrl.filter"></issues-list>
+<issues-list filter="$ctrl.listFilter"></issues-list>
