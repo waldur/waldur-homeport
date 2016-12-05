@@ -20,40 +20,35 @@ export default function issuesListHelpdesk() {
 
 // @ngInject
 class IssuesListHelpdeskController {
-  constructor($uibModal) {
-    this.$uibModal = $uibModal;
+  constructor($state) {
+    this.$state = $state;
     this.init();
   }
 
-  openDialog() {
-    this.$uibModal.open({
-      component: 'issueCreateDialog',
-      resolve: {
-        initial: () => angular.merge({}, this.filter)
-      }
-    });
-  }
-
   init() {
-    const choices = {
-      customer: {
-        options: CUSTOMERS
-      },
-      type: {
-        options: ISSUE_TYPE_CHOICES
-      },
-      status: {
-        options: ISSUE_STATUS_CHOICES
-      },
-      caller: {
-        options: USERS
-      }
-    };
-
-    let options = angular.merge(choices, ISSUE_FILTERS_SHORT.options);
     let order = ISSUE_FILTERS_SHORT.order;
     this.filters = order.map(field => angular.extend({ name: field }, options[field]));
     this.filter = {};
   }
+
+  createIssue() {
+    this.$state.go('support.createIssue');
+  }
 }
 
+const choices = {
+  customer: {
+    options: CUSTOMERS
+  },
+  type: {
+    options: ISSUE_TYPE_CHOICES
+  },
+  status: {
+    options: ISSUE_STATUS_CHOICES
+  },
+  caller: {
+    options: USERS
+  }
+};
+
+const options = angular.merge({}, choices, ISSUE_FILTERS_SHORT.options);

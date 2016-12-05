@@ -21,9 +21,18 @@ export default function issueRoutes($stateProvider) {
 
     .state('support.helpdesk', {
       url: 'helpdesk/',
-      template: '<issues-helpdesk></issue-helpdesk>',
+      template: '<issues-helpdesk></issues-helpdesk>',
       data: {
         pageTitle: 'Helpdesk dashboard',
+        pageClass: 'gray-bg'
+      }
+    })
+
+    .state('support.createIssue', {
+      url: 'helpdesk/create/',
+      template: '<issue-create-page></issue-create-page>',
+      data: {
+        pageTitle: 'Create issue',
         pageClass: 'gray-bg'
       }
     })

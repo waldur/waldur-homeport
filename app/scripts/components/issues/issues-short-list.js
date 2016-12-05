@@ -16,31 +16,39 @@ export default function issuesShortList() {
 }
 
 // ngInject
-function IssuesShortListController(FakeIssuesService, $uibModal) {
-  this.loading = true;
-  FakeIssuesService.getList(this.filter).then(items => {
-    this.items = items.map(item => {
-      item.labelClass = ISSUE_CLASSES[item.type];
-      return item;
-    });
-    this.loading = false;
-  });
+class IssuesShortListController {
+  constructor(FakeIssuesService, $uibModal) {
+    this.service = FakeIssuesService;
+    this.$uibModal = $uibModal;
+    this.init();
+  }
 
-  this.openUserDialog = function(user) {
-    $uibModal.open({
+  init() {
+    this.loading = true;
+    this.FakeIssuesService.getList(this.filter).then(items => {
+      this.items = items.map(item => {
+        item.labelClass = ISSUE_CLASSES[item.type];
+        return item;
+      });
+      this.loading = false;
+    });    
+  }
+
+  openUserDialog(user) {
+    this.$uibModal.open({
       component: 'userPopover',
       resolve: {
         user: () => user
       }
     });
-  };
+  }
 
-  this.openCustomerDialog = function(customer) {
-    $uibModal.open({
+  openCustomerDialog(customer) {
+    this.$uibModal.open({
       component: 'customerPopover',
       resolve: {
         customer: () => customer
       }
     });
-  };
+  }
 }

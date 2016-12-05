@@ -9,7 +9,7 @@ import issuesActivityStream from './issues-activity-stream';
 import issuesListFiltered from './issues-list-filtered';
 import issuesHelpdesk from './issues-helpdesk';
 import issuesListHelpdesk from './issues-list-helpdesk';
-import issueCreateDialog from './issue-create-dialog';
+import issueCreatePage from './issue-create-page';
 import FakeIssuesService from './fake-issues-service';
 import FakeIssueCommentsService from './fake-issue-comments-service';
 
@@ -24,7 +24,7 @@ export default module => {
   module.directive('issuesListFiltered', issuesListFiltered);
   module.directive('issuesHelpdesk', issuesHelpdesk);
   module.directive('issuesListHelpdesk', issuesListHelpdesk);
-  module.directive('issueCreateDialog', issueCreateDialog);
+  module.directive('issueCreatePage', issueCreatePage);
   module.service('FakeIssuesService', FakeIssuesService);
   module.service('FakeIssueCommentsService', FakeIssueCommentsService);
   module.config(issueRoutes);
