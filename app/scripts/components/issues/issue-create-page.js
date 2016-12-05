@@ -32,9 +32,6 @@ class IssueCreatePageController {
   }
 
   openUserDialog(user) {
-    if (!user) {
-      return;
-    }
     this.$uibModal.open({
       component: 'userPopover',
       resolve: {
@@ -44,9 +41,6 @@ class IssueCreatePageController {
   }
 
   openCustomerDialog(customer) {
-    if (!customer) {
-      return;
-    }
     this.$uibModal.open({
       component: 'customerPopover',
       resolve: {

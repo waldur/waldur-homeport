@@ -8,7 +8,7 @@
                         <label for="issueType" class="col-sm-3 control-label">
                             Issue type
                         </label>
-                        <div class="col-sm-9">
+                        <div class="col-sm-7">
                             <ui-select ng-model="$ctrl.issue.type" theme="bootstrap">
                                 <ui-select-match placeholder="Select issue type...">
                                     <i class="fa" ng-class="[$select.selected.iconClass, $select.selected.textClass]"></i>
@@ -25,7 +25,7 @@
                         <label for="issueName" class="col-sm-3 control-label">
                             Title
                         </label>
-                        <div class="col-sm-9">
+                        <div class="col-sm-7">
                             <input type="text"
                                 id="issueName"
                                 ng-model="$ctrl.issue.name"
@@ -36,7 +36,7 @@
                         <label for="issueDescription" class="col-sm-3 control-label">
                             Description
                         </label>
-                        <div class="col-sm-9">
+                        <div class="col-sm-7">
                             <textarea type="text"
                                 id="issueDescription"
                                 ng-model="$ctrl.issue.description"
@@ -44,13 +44,10 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label cursor-pointer"
-                               ng-click="$ctrl.openUserDialog($ctrl.issue.caller)">
-                            <i class="fa fa-question-circle"
-                               uib-tooltip="Show user details"></i>
+                        <label class="col-sm-3 control-label">
                             Caller
                         </label>
-                        <div class="col-sm-9">
+                        <div class="col-sm-7">
                             <ui-select ng-model="$ctrl.issue.caller" theme="bootstrap">
                                 <ui-select-match placeholder="Select caller...">
                                     {{ $select.selected.label }}
@@ -60,15 +57,17 @@
                                 </ui-select-choices>
                             </ui-select>
                         </div>
+                        <div class="col-sm-2 form-control-static" ng-if="$ctrl.issue.caller">
+                            <a ng-click="$ctrl.openUserDialog($ctrl.issue.caller)">
+                               Caller details
+                            </a>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label cursor-pointer"
-                               ng-click="$ctrl.openCustomerDialog($ctrl.issue.customer)">
-                            <i class="fa fa-question-circle"
-                               uib-tooltip="Show organization details"></i>
+                        <label class="col-sm-3 control-label">
                             Organization
                         </label>
-                        <div class="col-sm-9">
+                        <div class="col-sm-7">
                             <ui-select ng-model="$ctrl.issue.customer" theme="bootstrap">
                                 <ui-select-match placeholder="Select organization...">
                                     {{ $select.selected.label }}
@@ -78,12 +77,17 @@
                                 </ui-select-choices>
                             </ui-select>
                         </div>
+                        <div class="col-sm-2 form-control-static" ng-if="$ctrl.issue.customer">
+                            <a ng-click="$ctrl.openCustomerDialog($ctrl.issue.customer)">
+                               Organization details
+                            </a>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">
                             Project
                         </label>
-                        <div class="col-sm-9">
+                        <div class="col-sm-7">
                             <ui-select ng-model="$ctrl.issue.project" theme="bootstrap">
                                 <ui-select-match placeholder="Select project...">
                                     {{ $select.selected.label }}
@@ -98,7 +102,7 @@
                         <label class="col-sm-3 control-label">
                             Scope
                         </label>
-                        <div class="col-sm-9">
+                        <div class="col-sm-7">
                             <ui-select ng-model="$ctrl.issue.scope" theme="bootstrap">
                                 <ui-select-match placeholder="Select scope...">
                                     {{ $select.selected.label }}
@@ -113,7 +117,7 @@
                         <label class="col-sm-3 control-label">
                             Affected resource
                         </label>
-                        <div class="col-sm-9">
+                        <div class="col-sm-7">
                             <ui-select ng-model="$ctrl.issue.resource" theme="bootstrap">
                                 <ui-select-match placeholder="Select affected resource...">
                                     {{ $select.selected.label }}

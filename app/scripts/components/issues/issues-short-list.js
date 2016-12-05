@@ -25,7 +25,7 @@ class IssuesShortListController {
 
   init() {
     this.loading = true;
-    this.FakeIssuesService.getList(this.filter).then(items => {
+    this.service.getList(this.filter).then(items => {
       this.items = items.map(item => {
         item.labelClass = ISSUE_CLASSES[item.type];
         return item;
