@@ -1,4 +1,5 @@
 import template from './select-workspace-toggle.html';
+import './select-workspace-toggle.scss';
 
 export default function selectWorkspaceToggle() {
   return {

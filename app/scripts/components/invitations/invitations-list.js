@@ -159,7 +159,7 @@ function InvitationsListController(
       $uibModal.open({
         component: 'invitationDialog',
         resolve: {
-          customer: function() {
+          customer: () => {
             return this.currentCustomer;
           }
         }
