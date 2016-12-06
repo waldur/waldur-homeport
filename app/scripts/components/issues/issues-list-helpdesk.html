@@ -1,29 +1,39 @@
 <div class="ibox">
     <div class="ibox-content">
         <div class="row">
-            <div class="col-md-2" ng-repeat="filter in $ctrl.filters">
-                <ui-select ng-model="$ctrl.filter[filter.name]" theme="bootstrap">
-                    <ui-select-match placeholder="Select {{ filter.label | lowercase }}..."
-                                     allow-clear="true">
-                        {{ filter.label }}: {{ $select.selected.label }}
-                    </ui-select-match>
-                    <ui-select-choices repeat="option in filter.options | filter: {label: $select.search}">
-                        {{ option.label }}
-                    </ui-select-choices>
-                </ui-select>
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="col-md-4 m-b-sm" ng-repeat="filter in $ctrl.filters">
+                        <ui-select ng-model="$ctrl.filter[filter.name]">
+                            <ui-select-match placeholder="Select {{ filter.label | lowercase }}..."
+                                             allow-clear="true">
+                                {{ filter.label }}: {{ $select.selected.label }}
+                            </ui-select-match>
+                            <ui-select-choices repeat="option in filter.options | filter: {label: $select.search}">
+                                {{ option.label }}
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-2">
-                <a class="col-md-12 btn btn-default" ng-click="$ctrl.search()">
-                    <i class="fa fa-search"></i>
-                    Search
-                </a>
-            </div>
-            <div class="col-md-2">
-                <a class="col-md-12 btn btn-primary"
-                   ng-click="$ctrl.createIssue()">
-                    <i class="fa fa-plus"></i>
-                    Create new issue
-                </a>
+            <div class="col-md-3">
+                <div class="m-b-sm">
+                    <input type="text"
+                           class="form-control"
+                           placeholder="Contains text"
+                           ng-model="$ctrl.filter.summary">
+                </div>
+                <div>
+                    <a class="btn btn-primary pull-right"
+                       ng-click="$ctrl.createIssue()">
+                        <i class="fa fa-plus"></i>
+                        Create new
+                    </a>
+                    <a class="btn btn-default" ng-click="$ctrl.search()">
+                        <i class="fa fa-search"></i>
+                        Search
+                    </a>
+                </div>
             </div>
         </div>
     </div>

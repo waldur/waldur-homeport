@@ -82,7 +82,9 @@ export const ISSUE_FILTERS = [
 export const ISSUE_FILTERS_SHORT = {
   order: [
     'customer',
+    'project',
     'caller',
+    'key',
     'type',
     'status'
   ],
@@ -90,8 +92,14 @@ export const ISSUE_FILTERS_SHORT = {
     customer: {
       label: 'Organization'
     },
+    project: {
+      label: 'Project'
+    },
     caller: {
       label: 'Caller'
+    },
+    key: {
+      label: 'Key'
     },
     type: {
       label: 'Issue type'
