@@ -40,7 +40,18 @@ function actionConfig(ActionConfigurationProvider) {
         }
       },
       update_security_groups: {
-        title: 'Update security groups'
+        title: 'Update security groups',
+        fields: {
+          security_groups: {
+            urlFormatter: urlFormatter,
+            value_field: 'url',
+            resource_default_value: true,
+            endpoint: '/openstacktenant-security-groups/',
+            urlParams: [
+              'service_settings_uuid'
+            ]            
+          }
+        }
       },
       destroy: {
         fields: {
@@ -51,6 +62,20 @@ function actionConfig(ActionConfigurationProvider) {
       }
     }
   });
+
+  function urlFormatter(apiEndpoint, endpoint, params, resource) {
+    let urlParams = '';
+    if (params) {
+      urlParams += '?';
+      params.forEach(function(param, index){
+        urlParams += (param + '=' + resource[param]);
+        if (index + 1 < params.length) {
+          urlParams += '&';
+        }
+      });
+    }
+    return apiEndpoint + 'api' + endpoint + urlParams;
+  }
 }
 
 // @ngInject

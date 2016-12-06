@@ -1,6 +1,6 @@
 // @ngInject
 export default function actionUtilsService(
-  ncUtilsFlash, $rootScope, $http, $q, $uibModal, $filter, ncUtils, resourcesService, ActionConfiguration) {
+  ncUtilsFlash, $rootScope, $http, $q, $uibModal, $filter, ncUtils, resourcesService, ActionConfiguration, ENV) {
   this.loadActions = function(model) {
     resourcesService.cleanOptionsCache(model.url);
     return resourcesService.getOption(model.url).then(response => {
@@ -17,10 +17,13 @@ export default function actionUtilsService(
     });
   };
 
-  this.getSelectList = function(fields) {
+  this.getSelectList = function(fields, resource) {
     var vm = this;
     var promises = [];
     angular.forEach(fields, function(field) {
+      if (field.urlFormatter) {
+        field.url = field.urlFormatter(ENV.apiEndpoint, field.endpoint, field.urlParams, resource);
+      }
       if (field.url) {
         promises.push(vm.loadChoices(field));
       }
@@ -31,18 +34,24 @@ export default function actionUtilsService(
   this.loadChoices = function(field) {
     return this.loadRawChoices(field).then(function(response) {
       field.list = response.map(function(item) {
-        var displayName = field.formatter ? field.formatter($filter, item) : item[field.display_name_field];
-        return {
-          value: item[field.value_field],
-          display_name: displayName
-        };
+        let obj = {};
+        if (field.resource_default_value) {
+          obj.name =item.name;
+          obj.url = item[field.value_field];
+          obj.description = item.description;
+          obj.rules = item.rules;
+        } else {
+          obj.value = item[field.value_field];
+          obj.display_name = field.formatter ? field.formatter($filter, item) : item[field.display_name_field];
+        }
+        return obj;
       });
     });
   };
 
   this.loadRawChoices = function(field) {
     var url = field.url, query_params = {};
-    var parts = field.url.split("?");
+    var parts = field.url.split('?');
     if (parts.length === 2) {
       url = parts[0];
       query_params = ncUtils.parseQueryString(parts[1]);
@@ -78,10 +87,10 @@ export default function actionUtilsService(
 
   this.applyAction = function(controller, resource, action) {
     var vm = this;
-    var promise = (action.method == 'DELETE') ? $http.delete(action.url) : $http.post(action.url);
+    var promise = (action.method === 'DELETE') ? $http.delete(action.url) : $http.post(action.url);
 
     function onSuccess(response) {
-      if (response.status == 204) {
+      if (response.status === 204) {
         ncUtilsFlash.success('Resource has been deleted');
         controller.afterInstanceRemove(resource);
       } else {
@@ -94,8 +103,8 @@ export default function actionUtilsService(
   };
 
   this.handleActionSuccess = function(action) {
-    var template = "Request to {action} has been accepted";
-    var message = template.replace("{action}", action.title.toLowerCase());
+    var template = 'Request to {action} has been accepted';
+    var message = template.replace('{action}', action.title.toLowerCase());
     ncUtilsFlash.success(message);
   };
 
