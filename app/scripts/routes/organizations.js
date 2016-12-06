@@ -143,28 +143,6 @@ export default function organizationRoutes($stateProvider) {
       }
     })
 
-    .state('organization.analysis', {
-      url: '',
-      abstract: true,
-      template: '<ui-view/>'
-    })
-
-    .state('organization.analysis.cost', {
-      url: 'cost-analysis/',
-      templateUrl: 'views/dashboard/cost-tab.html',
-      data: {
-        pageTitle: 'Cost analysis'
-      }
-    })
-
-    .state('organization.analysis.resources', {
-      url: 'resource-usage/',
-      templateUrl: 'views/dashboard/resources-tab.html',
-      data: {
-        pageTitle: 'Resource usage'
-      }
-    })
-
     .state('services', {
       url: '/services/',
       abstract: true,
