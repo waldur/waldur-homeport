@@ -5,7 +5,6 @@
     .service('baseResourceListController',
     ['baseControllerListClass',
     'ENV',
-    'ENTITYLISTFIELDTYPES',
     'resourcesService',
     'priceEstimationService',
     'servicesService',
@@ -24,7 +23,6 @@
   function baseResourceListController(
     baseControllerListClass,
     ENV,
-    ENTITYLISTFIELDTYPES,
     resourcesService,
     priceEstimationService,
     servicesService,
@@ -59,6 +57,7 @@
         this._super();
       },
       getTableOptions: function() {
+        var vm = this;
         return {
           searchFieldName: 'name',
           noDataText: 'You have no resources yet.',
@@ -89,21 +88,12 @@
               title: 'State',
               className: 'min-tablet-l',
               render: function(data, type, row, meta) {
-                var cls = ENV.resourceStateColorClasses[row.state];
-                var title = row.state;
-                if (cls === 'processing') {
-                  cls = 'fa fa-refresh fa-spin';
-                  title = row.runtime_state;
-                } else {
-                  cls = 'status-circle ' + cls;
-                }
-                if (cls === 'status-circle erred') {
-                  title = row.error_message;
-                }
-                return '<a class="{cls}" title="{title}"></a> {state}'
-                          .replace('{cls}', cls)
-                          .replace('{state}', row.state || row.runtime_state)
-                          .replace('{title}', title);
+                var uuids = vm.list.map(function(item) {
+                  return item.uuid;
+                });
+                var index = uuids.indexOf(row.uuid);
+                return '<resource-state resource="controller.list[{index}]"></resource-state>'
+                  .replace('{index}', index);
               }
             }
           ],
@@ -194,7 +184,8 @@
       rowFields: [
         'uuid', 'url', 'name', 'state', 'runtime_state', 'created', 'error_message',
         'resource_type', 'latitude', 'longitude',
-        'service_name', 'service_uuid', 'customer'
+        'service_name', 'service_uuid', 'customer', 'service_settings_state',
+        'service_settings_error_message', 'service_settings_uuid'
       ],
       getMarkers: function() {
         var items = this.controllerScope.list.filter(function hasCoordinates(item) {
@@ -382,7 +373,7 @@
         if (!controllerScope.enableRefresh) {
           return;
         }
-        controllerScope.getModel().then(function(model) {
+        return controllerScope.getModel().then(function(model) {
           controllerScope.model = model;
         }, function(error) {
           if (error.status === 404) {

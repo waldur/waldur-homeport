@@ -7,20 +7,17 @@
   </div>
 
   <div class="m-b-xs">
+
     <dt>State:</dt>
     <dd>
-      <span class="resource-state {{ state_class }}">
-        <i ng-if="state_class == 'processing'" class="icon refresh spin"></i>
-        {{ resource.state }}
-      </span>
-      &nbsp; {{ resource.runtime_state }}
+      <resource-state resource="resource"></resource-state>
     </dd>
   </div>
 
   <div class="m-b-xs" ng-if="resource.state == 'Erred'">
-    <dt>Error:</dt>
+    <dt>Error message:</dt>
     <dd>
-      {{ resource.error_message || 'Reason unknown, please contact support' }}
+      {{ resource.error_message }}
     </dd>
   </div>
 

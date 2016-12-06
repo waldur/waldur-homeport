@@ -129,3 +129,8 @@ body.landing {
 }
 
 .cursor-pointer {cursor: pointer;}
+
+.progress-bar-plain {
+  background-color: $light-gray;
+  color: $label-badget-color;
+}

@@ -64,13 +64,10 @@
 
 
   angular.module('ncsaas')
-    .factory('ncUtils', ['$rootScope', 'blockUI', ncUtils]);
+    .factory('ncUtils', ['blockUI', ncUtils]);
 
-  function ncUtils($rootScope, blockUI) {
+  function ncUtils(blockUI) {
     return {
-      deregisterEvent: function(eventName) {
-        $rootScope.$$listeners[eventName] = [];
-      },
       updateIntercom: function() {
         // XXX: Temporarily disabled Intercom
         //window.Intercom('update');

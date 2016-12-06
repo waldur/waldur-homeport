@@ -1,4 +1,5 @@
 import template from './select-workspace-toggle.html';
+import './select-workspace-toggle.scss';
 
 export default function selectWorkspaceToggle() {
   return {
@@ -78,7 +79,7 @@ class SelectWorkspaceToggleController {
   }
 
   getButtonClass() {
-    return ['btn', 'select-workspace', workspaceButtonClasses[this.workspace]];
+    return ['btn', 'select-workspace-toggle', workspaceButtonClasses[this.workspace]];
   }
 
   getTooltip() {

@@ -1,21 +1,17 @@
 // @ngInject
 export default function actionUtilsService(
-  ncUtilsFlash, $rootScope, $http, $q, $uibModal, ncUtils, resourcesService, ActionConfiguration) {
+  ncUtilsFlash, $rootScope, $http, $q, $uibModal, $filter, ncUtils, resourcesService, ActionConfiguration) {
   this.loadActions = function(model) {
     resourcesService.cleanOptionsCache(model.url);
     return resourcesService.getOption(model.url).then(response => {
       const config = ActionConfiguration[model.resource_type];
       const order = config && config.order || Object.keys(response.actions);
-      const options = config && config.options;
+      const options = config && config.options || {};
       return order.reduce((result, name) => {
-        let action = response.actions[name];
-        if (!action || !action.title) {
-          return result;
+        let action = angular.merge({}, response.actions[name], options[name]);
+        if (action.hasOwnProperty('enabled')) {
+          result[name] = action;
         }
-        if (options && options[name]) {
-          action = angular.merge(action, options[name]);
-        }
-        result[name] = action;
         return result;
       }, {});
     });
@@ -35,10 +31,11 @@ export default function actionUtilsService(
   this.loadChoices = function(field) {
     return this.loadRawChoices(field).then(function(response) {
       field.list = response.map(function(item) {
+        var displayName = field.formatter ? field.formatter($filter, item) : item[field.display_name_field];
         return {
           value: item[field.value_field],
-          display_name: item[field.display_name_field]
-        }
+          display_name: displayName
+        };
       });
     });
   };
@@ -110,7 +107,8 @@ export default function actionUtilsService(
     dialogScope.resource = resource;
     $uibModal.open({
       component: component,
-      scope: dialogScope
+      scope: dialogScope,
+      size: action.dialogSize
     }).result.then(function() {
       $rootScope.$broadcast('actionApplied', name);
     });

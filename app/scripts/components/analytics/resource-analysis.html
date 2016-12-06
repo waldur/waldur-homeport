@@ -1,11 +1,8 @@
-<div ng-controller="DashboardResourcesController as DashboardController">
-     <div class="white-box empty-data-block"
-          ng-if="DashboardController.projectsList.length == 0">
-         <h1>Not enough data for resource analysis</h1>
-         <h2>Please create first project</h2>
-     </div>
-    <div class="white-box dashboard-resources-tab"
-         ng-if="DashboardController.projectsList.length">
+<div class="white-box empty-data-block" ng-if="DashboardController.projectsList.length == 0">
+    <h1>Not enough data for resource analysis</h1>
+    <h2>Please create first project</h2>
+</div>
+<div class="white-box dashboard-resources-tab" ng-if="DashboardController.projectsList.length">
         <div class="pie-charts-block" block-ui="pie-charts">
             <div class="chart-element"
                  ng-class="{'active': DashboardController.barChartTab === 'vmsByProject'}"
@@ -67,5 +64,4 @@
                        chart-data="DashboardController.servicesByProjectChartData"
                        chart-controller="DashboardController"></bar-chart>
         </div>
-    </div>
 </div>

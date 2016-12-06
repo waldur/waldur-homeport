@@ -234,7 +234,7 @@ function AppStoreController(
           var query = angular.extend(query, context);
 
           var promise = servicesService.getAll(query, base_url).then(function(response) {
-            validChoices[name] = response.map(function(item) {return {item: item}});
+            validChoices[name] = response;
           });
           promises.push(promise);
         }

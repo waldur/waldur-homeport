@@ -10,9 +10,7 @@
 @import "search-box";
 @import "sort-list";
 @import "app-title";
-@import "mobile-menu-side";
 @import "nav-list-side";
-@import "nav-sublist-side";
 @import "object-list";
 @import "list-item";
 @import "actions-button";
@@ -24,7 +22,6 @@
 @import "tabs-content";
 @import "view-control";
 @import "status-circle";
-@import "popup";
 @import "decision";
 @import "expand-item";
 @import "plans";
@@ -40,7 +37,6 @@
 @import "toggle-link";
 @import "error-404";
 @import "dashboard";
-@import "dashboard-cost-chart";
 @import "editable";
 @import "details";
 @import "list-cache-reset";
@@ -49,11 +45,9 @@
 @import "compact-list";
 @import "table-action";
 @import "balance-block";
-@import "dashboard-resources-tab";
 @import "bar-chart";
 @import "line-chart";
 @import "project-price-limit";
-@import "resource-state";
 @import "expandable-indicator";
 @import "tab-sizing";
 @import "vertical-bar-chart";
@@ -61,4 +55,4 @@
 @import "alerts-list-dialog";
 @import "resource-graphs";
 @import "button-social";
-@import "select-workspace";
+@import "ui-select";

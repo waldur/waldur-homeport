@@ -8,4 +8,4 @@ export default module => {
   openstackTenantModule(module);
   openstackInstanceModule(module);
   openstackVolumeModule(module);
-}
+};
