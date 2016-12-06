@@ -1,6 +1,6 @@
 // @ngInject
 export default function actionUtilsService(
-  ncUtilsFlash, $rootScope, $http, $q, $uibModal, ncUtils, resourcesService, ActionConfiguration) {
+  ncUtilsFlash, $rootScope, $http, $q, $uibModal, $filter, ncUtils, resourcesService, ActionConfiguration) {
   this.loadActions = function(model) {
     resourcesService.cleanOptionsCache(model.url);
     return resourcesService.getOption(model.url).then(response => {
@@ -31,10 +31,11 @@ export default function actionUtilsService(
   this.loadChoices = function(field) {
     return this.loadRawChoices(field).then(function(response) {
       field.list = response.map(function(item) {
+        var displayName = field.formatter ? field.formatter($filter, item) : item[field.display_name_field];
         return {
           value: item[field.value_field],
-          display_name: item[field.display_name_field]
-        }
+          display_name: displayName
+        };
       });
     });
   };

@@ -33,6 +33,11 @@ function actionConfig(ActionConfigurationProvider) {
       },
       change_flavor: {
         title: 'Change flavor',
+        fields: {
+          flavor: {
+            formatter: OpenStackInstanceConfig.options.flavor.formatter
+          }
+        }
       },
       update_security_groups: {
         title: 'Update security groups'
