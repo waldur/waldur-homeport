@@ -6,6 +6,7 @@
             <h2>{{$state.current.data.pageTitle}}</h2>
             <ol class="breadcrumb">
                 <li>
+                    <a ng-if="private" ui-sref="profile.details">User dashboard</a>
                     {{ currentUser.full_name }}
                 </li>
                 <li class="active">
