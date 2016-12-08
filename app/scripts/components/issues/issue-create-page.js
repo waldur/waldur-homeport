@@ -1,5 +1,3 @@
-import { CUSTOMERS } from './fake-issues-service';
-import { USERS } from './fixtures';
 import { ISSUE_TYPE_CHOICES } from './constants';
 import template from './issue-create-page.html';
 
@@ -14,20 +12,39 @@ export default function issueCreatePage() {
   };
 }
 
+// @ngInject
 class IssueCreatePageController {
-  constructor(FakeIssuesService, $state, $uibModal) {
-    this.service = FakeIssuesService;
-    this.issue = angular.copy(this.service.filter);
-    this.customers = CUSTOMERS;
-    this.users = USERS;
-    this.types = ISSUE_TYPE_CHOICES;
+  constructor($state,
+              $uibModal,
+              issuesService,
+              IssueFilterService) {
     this.$state = $state;
     this.$uibModal = $uibModal;
+    this.service = issuesService;
+    this.issue = angular.copy(this.service.filter);
+    this.types = ISSUE_TYPE_CHOICES;
+    this.filterService = IssueFilterService;
   }
 
   save() {
-    return this.service.createIssue(this.issue).then(() => {
-      return this.$state.go('support.helpdesk')
+    let issue = {
+      type: this.issue.type.id,
+      summary: this.issue.summary,
+      description: this.issue.description,
+      reporter: this.issue.caller.url
+    };
+    if (this.issue.customer) {
+      issue.customer = this.issue.customer.url;
+    }
+    if (this.issue.project) {
+      issue.project = this.issue.project.url;
+    }
+    if (this.issue.resource) {
+      issue.resource = this.issue.resource.url;
+    }
+    return this.service.createIssue(issue).then(() => {
+      this.service.clearAllCacheForCurrentEndpoint();
+      return this.$state.go('support.helpdesk');
     });
   }
 

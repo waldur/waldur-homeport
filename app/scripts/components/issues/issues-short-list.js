@@ -17,8 +17,8 @@ export default function issuesShortList() {
 
 // ngInject
 class IssuesShortListController {
-  constructor(FakeIssuesService, $uibModal) {
-    this.service = FakeIssuesService;
+  constructor(issuesService, $uibModal) {
+    this.service = issuesService;
     this.$uibModal = $uibModal;
     this.init();
   }

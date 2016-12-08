@@ -40,21 +40,21 @@
                         </span>
                     </td>
                     <td>
-                        {{ item.title }}<br>
+                        {{ item.summary }}<br>
                         <small class="text-muted">
                             Opened by
-                            <a ng-click="$ctrl.openUserDialog(item.user)">
-                                {{ item.user.username }}
+                            <a ng-click="$ctrl.openUserDialog(item.reporter_email)">
+                                {{ item.reporter_email }}
                             </a>
                             from
-                            <a ng-click="$ctrl.openCustomerDialog(item.customer)">
-                                {{ item.customer.name }}
+                            <a ng-click="$ctrl.openCustomerDialog(item.customer_name)">
+                                {{ item.customer_name }}
                             </a>
                             at {{ item.created | shortDate }}
                         </small>
                     </td>
                     <td>
-                        <small>{{ item.updated | shortDate }}</small>
+                        <small>{{ item.modified | shortDate }}</small>
                     </td>
                     <td>
                         <small>{{ item.timeSpent }}</small>

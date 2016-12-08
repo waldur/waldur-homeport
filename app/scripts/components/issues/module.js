@@ -1,3 +1,9 @@
+import issuesService from './issues-service';
+import issueCommentsService from './issue-comments-service';
+import IssueFilterService from './issue-filter-service';
+import FakeIssuesService from './fake-issues-service';
+import FakeIssueCommentsService from './fake-issue-comments-service';
+
 import issueCreate from './create';
 import issuesList from './issues-list';
 import issueRoutes from './routes';
@@ -10,10 +16,14 @@ import issuesListFiltered from './issues-list-filtered';
 import issuesHelpdesk from './issues-helpdesk';
 import issuesListHelpdesk from './issues-list-helpdesk';
 import issueCreatePage from './issue-create-page';
-import FakeIssuesService from './fake-issues-service';
-import FakeIssueCommentsService from './fake-issue-comments-service';
 
 export default module => {
+  module.service('issuesService', issuesService);
+  module.service('issueCommentsService', issueCommentsService);
+  module.service('IssueFilterService', IssueFilterService);
+  module.service('FakeIssuesService', FakeIssuesService);
+  module.service('FakeIssueCommentsService', FakeIssueCommentsService);
+
   module.directive('issuesList', issuesList);
   module.directive('issueCreate', issueCreate);
   module.directive('issuesWorkspace', issuesWorkspace);
@@ -25,7 +35,5 @@ export default module => {
   module.directive('issuesHelpdesk', issuesHelpdesk);
   module.directive('issuesListHelpdesk', issuesListHelpdesk);
   module.directive('issueCreatePage', issueCreatePage);
-  module.service('FakeIssuesService', FakeIssuesService);
-  module.service('FakeIssueCommentsService', FakeIssueCommentsService);
   module.config(issueRoutes);
 }

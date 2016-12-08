@@ -5,6 +5,13 @@ export const ISSUE_TYPES = [
   'Informational'
 ];
 
+export const ISSUE_IDS = {
+  'Incident': 'incident',
+  'Change request': 'change_request',
+  'Service request': 'service_request',
+  'Informational': 'informational'
+};
+
 export const ISSUE_CLASSES = {
   'Incident': 'label-danger',
   'Informational': 'label-warning',
@@ -36,7 +43,8 @@ export const ISSUE_TYPE_CHOICES = ISSUE_TYPES.map(item => {
   return {
     iconClass: ISSUE_ICONS[item],
     textClass: ISSUE_TEXT_CLASSES[item],
-    label: item
+    label: item,
+    id: ISSUE_IDS[item]
   };
 });
 

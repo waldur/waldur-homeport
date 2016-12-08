@@ -15,11 +15,11 @@ export default function issueList() {
 }
 
 // @ngInject
-function IssueListController(baseControllerListClass, FakeIssuesService, $filter, $scope) {
+function IssueListController(baseControllerListClass, issuesService, $filter, $scope) {
   var controllerScope = this;
   var controllerClass = baseControllerListClass.extend({
     init: function() {
-      this.service = FakeIssuesService;
+      this.service = issuesService;
       this.controllerScope = controllerScope;
       this._super();
       this.searchFieldName = 'search';
@@ -55,40 +55,40 @@ function IssueListController(baseControllerListClass, FakeIssuesService, $filter
           {
             title: 'Summary',
             render: function(data, type, row, meta) {
-              return row.title;
+              return row.summary;
             },
             width: 400
           },
           {
             title: 'Scope',
             render: function(data, type, row, meta) {
-              return row.scope;
+              return row.resource;
             }
           },
           {
             title: 'Organization',
             render: function(data, type, row, meta) {
-              return row.customer.name;
+              return row.customer_name;
             }
           },
           {
             title: 'Caller',
             render: function(data, type, row, meta) {
-              return row.caller.username;
+              return row.reporter_email;
             },
             width: 170
           },
           {
             title: 'Reporter',
             render: function(data, type, row, meta) {
-              return row.user.username;
+              return row.creator_email;
             },
             width: 170
           },
           {
             title: 'Assigned to',
             render: function(data, type, row, meta) {
-              return row.assigned.username;
+              return row.assignee_email && row.assignee_email || 'N/A';
             },
             width: 170
           },
@@ -102,14 +102,14 @@ function IssueListController(baseControllerListClass, FakeIssuesService, $filter
           {
             title: 'Updated',
             render: function(data, type, row, meta) {
-              return $filter('shortDate')(row.updated);
+              return $filter('shortDate')(row.modified);
             },
             width: 130
           },
           {
             title: 'Time in progress',
             render: function(data, type, row, meta) {
-              return row.timeSpent;
+              return '1h';
             },
             width: 100
           }
