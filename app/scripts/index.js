@@ -1,5 +1,5 @@
 import sparkline from './components/sparkline/sparkline';
-import visibleIf from './components/visibleIf/visibleIf';
+import featuresModule from './components/features/module';
 import teamModule from './components/team/module';
 import issuesModule from './components/issues/module';
 import userModule from './components/user/module';
@@ -23,7 +23,7 @@ import analyticsModule from './components/analytics/module';
 const module = angular.module('ncsaas');
 
 module.directive('sparkline', sparkline);
-module.directive('visibleIf', visibleIf);
+featuresModule(module);
 teamModule(module);
 issuesModule(module);
 userModule(module);
