@@ -1,8 +1,9 @@
-<a class="btn btn-primary select-workspace-toggle"
+<a ng-class="{{ $ctrl.getButtonClass() }}"
    ng-click="$ctrl.selectWorkspace()"
    ng-disabled="!$ctrl.hasCustomer"
    uib-tooltip="{{ $ctrl.getTooltip() }}"
    tooltip-placement="bottom">
+  <i ng-class="{{ $ctrl.getIconClass() }}"></i>
   {{ $ctrl.getTitle() }}
   <i class="fa fa-angle-down"></i>
 </a>

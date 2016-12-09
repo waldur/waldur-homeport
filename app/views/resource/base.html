@@ -16,10 +16,9 @@
             <h2>{{ ResourceCtrl.model.name }}</h2>
             <ol class="breadcrumb">
                 <li>
-                    <a ui-sref="organization.details({uuid: ResourceCtrl.model.customer_uuid })">Home</a>
-                </li>
-                <li>
-                    <a ui-sref="project.details({uuid: ResourceCtrl.model.project_uuid })">{{ ResourceCtrl.model.project_name }}</a>
+                    <a ui-sref="project.details({uuid: ResourceCtrl.model.project_uuid })">
+                        Project dashboard
+                    </a>
                 </li>
                 <li>
                     <a ui-sref="{{ ::ResourceCtrl.listState }}" ng-bind="ResourceCtrl.listTitle"></a>
