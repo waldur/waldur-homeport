@@ -31,6 +31,9 @@ class IssuesHelpdeskController {
     if (issue.project) {
       filter.project = issue.project.url;
     }
+    if (issue.summary) {
+      filter.summary = issue.summary;
+    }
     this.listFilter = filter;
   }
 }
