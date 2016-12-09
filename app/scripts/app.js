@@ -174,6 +174,14 @@
 })();
 
 (function() {
+  angular.module('ncsaas')
+    .config(function(ENV, featuresProvider) {
+      featuresProvider.setFeatures(ENV.toBeFeatures);
+      featuresProvider.setVisibility(ENV.featuresVisible);
+    });
+})();
+
+(function() {
   angular.module('ncsaas').run(checkLanguage);
 
   checkLanguage.$inject = ['$translate', 'LANGUAGE'];

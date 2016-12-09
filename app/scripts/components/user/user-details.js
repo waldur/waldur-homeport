@@ -78,6 +78,7 @@ function UserDetailsController($scope, $stateParams, usersService,
         } else {
           $scope.items = PRIVATE_USER_TABS;
         }
+        $scope.isPrivate = true;
         $scope.currentUser = user;
         $scope.context = {user: user};
       } else {
@@ -88,6 +89,7 @@ function UserDetailsController($scope, $stateParams, usersService,
             $scope.items = publicTabs;
           }
           $scope.currentUser = user;
+          $scope.isPrivate = false;
           $scope.context = {user: user};
         });
       }

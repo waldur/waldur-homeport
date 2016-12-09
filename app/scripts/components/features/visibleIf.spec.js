@@ -3,9 +3,10 @@ import visibleIfDirective from './visibleIf.js'
 describe('VisibleIf directive', function() {
 
   beforeEach(angular.mock.module(($provide, $compileProvider) => {
-    $provide.constant('ENV', {
-      featuresVisible: false,
-      toBeFeatures: ['resources']
+    $provide.provider('features', {
+      $get: () => ({
+        isVisible: feature => feature !== 'resources'
+      })
     });
     $compileProvider.directive('visibleIf', visibleIfDirective);
   }));
