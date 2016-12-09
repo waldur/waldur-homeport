@@ -40,7 +40,13 @@ function actionConfig(ActionConfigurationProvider) {
         }
       },
       update_security_groups: {
-        title: 'Update security groups'
+        title: 'Update security groups',
+        fields: {
+          security_groups: {
+            resource_default_value: true,
+            serializer: items => items.map(item => ({url: item.value}))
+          }
+        }
       },
       destroy: {
         fields: {
@@ -51,6 +57,7 @@ function actionConfig(ActionConfigurationProvider) {
       }
     }
   });
+
 }
 
 // @ngInject

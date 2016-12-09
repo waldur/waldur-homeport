@@ -32,16 +32,16 @@
                            class="form-control"
                            ng-required="field.required"/>
                 </div>
-                <div ng-switch-when="select">
+                <div ng-switch-when="select" ng-if="!field.many">
                     <select id="action-{{ name }}"
                         ng-options="item.value as item.display_name for item in field.list"
                         ng-model="form[name]"
-                        ng-if="field.list"
+                        ng-if="field.list && field.list.length !== 0"
                         class="form-control"
                         ng-required="field.required">
                         <option value="">Select an option</option>
                      </select>
-                     <div class="form-control-static" ng-if="!field.list">N/A</div>
+                     <div class="form-control-static" ng-if="!field.list || field.list.length === 0">N/A</div>
                 </div>
                 <div ng-switch-when="boolean">
                     <div class="checkbox">
@@ -51,6 +51,18 @@
                             <helpicon help-text="{{ ::field.help_text }}" ng-if="::field.help_text"></helpicon>
                         </label>
                     </div>
+                </div>
+                <div ng-switch-when="select" ng-if="field.many">
+                    <ui-select multiple
+                               ng-model="form[name]"
+                               ng-if="field.list && field.list.length !== 0"
+                               theme="bootstrap">
+                        <ui-select-match placeholder="Select {{field.label}}...">{{$item.display_name}}</ui-select-match>
+                        <ui-select-choices repeat="item in field.list | filter: {display_name: $select.search} track by item.value">
+                            <div ng-bind-html="item.display_name | highlight: $select.search"></div>
+                        </ui-select-choices>
+                    </ui-select>
+                    <div class="form-control-static" ng-if="!field.list || field.list.length === 0">N/A</div>
                 </div>
                 <p class="text-danger" ng-repeat="error in errors[name]" ng-bind="error"></p>
             </div>
