@@ -1,7 +1,6 @@
 import issuesService from './issues-service';
 import issueCommentsService from './issue-comments-service';
 import IssueFilterService from './issue-filter-service';
-import FakeIssuesService from './fake-issues-service';
 import FakeIssueCommentsService from './fake-issue-comments-service';
 
 import issueCreate from './create';
@@ -21,7 +20,6 @@ export default module => {
   module.service('issuesService', issuesService);
   module.service('issueCommentsService', issueCommentsService);
   module.service('IssueFilterService', IssueFilterService);
-  module.service('FakeIssuesService', FakeIssuesService);
   module.service('FakeIssueCommentsService', FakeIssueCommentsService);
 
   module.directive('issuesList', issuesList);

@@ -41,9 +41,9 @@ function IssueListController(baseControllerListClass, issuesService, $filter, $s
           {
             title: 'Key',
             render: function(data, type, row, meta) {
-              return `<span title="${row.type.toUpperCase()}" class="label ${ISSUE_CLASSES[row.type]}">${row.key}</span>`
+              return row.key;
             },
-            width: 50
+            width: 90
           },
           {
             title: 'Status',
@@ -53,16 +53,22 @@ function IssueListController(baseControllerListClass, issuesService, $filter, $s
             width: 50
           },
           {
-            title: 'Summary',
+            title: 'Title',
             render: function(data, type, row, meta) {
               return row.summary;
             },
             width: 400
           },
           {
+            title: 'Description',
+            render: function(data, type, row, meta) {
+              return `<span class="elipsis" style="width: 150px;" uib-tooltip="${row.description}">${row.description}</span>`;
+            }
+          },
+          {
             title: 'Scope',
             render: function(data, type, row, meta) {
-              return row.resource;
+              return row.resource_type || 'N/A';
             }
           },
           {
@@ -74,21 +80,21 @@ function IssueListController(baseControllerListClass, issuesService, $filter, $s
           {
             title: 'Caller',
             render: function(data, type, row, meta) {
-              return row.reporter_email;
+              return row.caller_name;
             },
             width: 170
           },
           {
             title: 'Reporter',
             render: function(data, type, row, meta) {
-              return row.creator_email;
+              return row.reporter_name;
             },
             width: 170
           },
           {
             title: 'Assigned to',
             render: function(data, type, row, meta) {
-              return row.assignee_email && row.assignee_email || 'N/A';
+              return row.assignee_name || 'N/A';
             },
             width: 170
           },

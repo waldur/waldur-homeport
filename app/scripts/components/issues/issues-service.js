@@ -3,7 +3,7 @@ export default function issuesService(baseServiceClass) {
   var ServiceClass = baseServiceClass.extend({
     init: function() {
       this._super();
-      this.endpoint = '/waldur-issues/';
+      this.endpoint = '/support-issues/';
       this.filterByCustomer = false;
     },
     setDefaultFilter: function() {

@@ -33,9 +33,7 @@
             <tbody>
                 <tr ng-repeat="item in $ctrl.items">
                     <td>
-                        <span class="label"
-                              ng-class="item.labelClass"
-                              ng-bind="::item.key"
+                        <span ng-bind="::item.key"
                               uib-tooltip="{{ ::item.type | uppercase }}">
                         </span>
                     </td>
@@ -43,8 +41,8 @@
                         {{ item.summary }}<br>
                         <small class="text-muted">
                             Opened by
-                            <a ng-click="$ctrl.openUserDialog(item.reporter_email)">
-                                {{ item.reporter_email }}
+                            <a ng-click="$ctrl.openUserDialog(item.reporter_name)">
+                                {{ item.reporter_name }}
                             </a>
                             from
                             <a ng-click="$ctrl.openCustomerDialog(item.customer_name)">

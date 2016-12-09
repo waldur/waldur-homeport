@@ -3,7 +3,6 @@ import {
   ISSUE_TYPE_CHOICES,
   ISSUE_STATUS_CHOICES
 } from './constants';
-import { CUSTOMERS } from './fake-issues-service';
 import { USERS } from './fixtures';
 import template from './issues-list-helpdesk.html';
 
@@ -43,7 +42,7 @@ class IssuesListHelpdeskController {
 
 const choices = {
   customer: {
-    options: CUSTOMERS
+    options: []
   },
   type: {
     options: ISSUE_TYPE_CHOICES

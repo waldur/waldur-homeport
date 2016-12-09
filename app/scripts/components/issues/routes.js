@@ -7,6 +7,7 @@ export default function issueRoutes($stateProvider) {
       abstract: true,
       data: {
         auth: true,
+        workspace: 'support'
       }
     })
 
@@ -14,8 +15,7 @@ export default function issueRoutes($stateProvider) {
       url: '',
       template: '<issues-dashboard></issue-dashboard>',
       data: {
-        pageTitle: 'Support dashboard',
-        pageClass: 'gray-bg'
+        pageTitle: 'Support dashboard'
       }
     })
 
@@ -23,8 +23,7 @@ export default function issueRoutes($stateProvider) {
       url: 'helpdesk/',
       template: '<issues-helpdesk></issues-helpdesk>',
       data: {
-        pageTitle: 'Helpdesk dashboard',
-        pageClass: 'gray-bg'
+        pageTitle: 'Helpdesk dashboard'
       }
     })
 
@@ -32,8 +31,7 @@ export default function issueRoutes($stateProvider) {
       url: 'helpdesk/create/',
       template: '<issue-create-page></issue-create-page>',
       data: {
-        pageTitle: 'Create issue',
-        pageClass: 'gray-bg'
+        pageTitle: 'Create issue'
       }
     })
 
@@ -41,8 +39,7 @@ export default function issueRoutes($stateProvider) {
       url: 'list/',
       template: '<issues-list-filtered></issues-list-filtered>',
       data: {
-        pageTitle: 'List issues',
-        pageClass: 'gray-bg'
+        pageTitle: 'List issues'
       }
     })
 
