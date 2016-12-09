@@ -20,7 +20,8 @@ class IssueCreatePageController {
               $q,
               $uibModal,
               issuesService,
-              IssueFilterService) {
+              IssueFilterService,
+              ncUtilsFlash) {
     this.$state = $state;
     this.$q = $q;
     this.$uibModal = $uibModal;
@@ -28,6 +29,7 @@ class IssueCreatePageController {
     this.issue = angular.copy(this.service.filter);
     this.types = ISSUE_TYPE_CHOICES;
     this.filterService = IssueFilterService;
+    this.ncUtilsFlash = ncUtilsFlash;
   }
 
   save() {
@@ -49,9 +51,12 @@ class IssueCreatePageController {
     if (this.issue.resource) {
       issue.resource = this.issue.resource.url;
     }
+    this.saving = true;
     return this.service.createIssue(issue).then(() => {
       this.service.clearAllCacheForCurrentEndpoint();
-      return this.$state.go('support.helpdesk');
+      this.ncUtilsFlash.success('Issue has been created');
+    }).finally(() => {
+      this.saving = false;
     });
   }
 

@@ -40,8 +40,10 @@ export default class IssueFilterService {
     if (name) {
       params.name = name;
     }
+    this.resourcesService.filterByCustomer = false;
     return this.resourcesService.getList(params).then(resources => {
       this.resources = resources;
     });
+    this.resourcesService.filterByCustomer = true;
   }
 }

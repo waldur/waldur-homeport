@@ -29,14 +29,6 @@ function IssueListController(baseControllerListClass, issuesService, $filter, $s
           noDataText: 'No tickets yet.',
           noMatchesText: 'No tickets found matching filter.',
         },
-        tableActions: [
-          {
-            name: '<i class="fa fa fa-plus"></i> Create new issue',
-            callback: function() {
-              $state.go('support.create');
-            }
-          }
-        ],
         columns: [
           {
             title: 'Type',
