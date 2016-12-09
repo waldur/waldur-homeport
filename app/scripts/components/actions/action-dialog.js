@@ -15,15 +15,15 @@ function ActionDialogController($scope, $q, $http, resourcesService, actionUtils
       $scope.errors = {};
       $scope.form = {};
       $scope.loading = true;
-      actionUtilsService.getSelectList($scope.action.fields, $scope.$parent.resource).finally(function() {
+      actionUtilsService.getSelectList($scope.action.fields).finally(function() {
         $scope.loading = false;
       });
       angular.forEach($scope.action.fields, function(field, name) {
-        if (field.resource_default_value) {
-          $scope.form[name] = $scope.$parent.resource[name];
-        }
         if (field.default_value) {
           $scope.form[name] = field.default_value;
+        }
+        if (field.resource_default_value) {
+          $scope.form[name] = $scope.resource[name];
         }
       });
     },

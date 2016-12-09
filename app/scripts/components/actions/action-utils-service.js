@@ -1,6 +1,6 @@
 // @ngInject
 export default function actionUtilsService(
-  ncUtilsFlash, $rootScope, $http, $q, $uibModal, $filter, ncUtils, resourcesService, ActionConfiguration, ENV) {
+  ncUtilsFlash, $rootScope, $http, $q, $uibModal, $filter, ncUtils, resourcesService, ActionConfiguration) {
   this.loadActions = function(model) {
     resourcesService.cleanOptionsCache(model.url);
     return resourcesService.getOption(model.url).then(response => {
@@ -17,13 +17,10 @@ export default function actionUtilsService(
     });
   };
 
-  this.getSelectList = function(fields, resource) {
+  this.getSelectList = function(fields) {
     var vm = this;
     var promises = [];
     angular.forEach(fields, function(field) {
-      if (field.urlFormatter) {
-        field.url = field.urlFormatter(ENV.apiEndpoint, field.endpoint, field.urlParams, resource);
-      }
       if (field.url) {
         promises.push(vm.loadChoices(field));
       }
