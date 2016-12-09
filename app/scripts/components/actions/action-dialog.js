@@ -23,7 +23,7 @@ function ActionDialogController($scope, $q, $http, resourcesService, actionUtils
           $scope.form[name] = field.default_value;
         }
         if (field.resource_default_value) {
-          $scope.form[name] = $scope.resource[name];
+          $scope.form[name] = actionUtilsService.formatChoices(field, $scope.resource[name]);
         }
       });
     },
@@ -33,9 +33,11 @@ function ActionDialogController($scope, $q, $http, resourcesService, actionUtils
       }
       var fields = $scope.action.fields;
       var form = resourcesService.$create($scope.action.url);
-      for (var field in fields) {
-        if ($scope.form[field] != null) {
-          form[field] = $scope.form[field];
+      for (var name in fields) {
+        if ($scope.form[name] != null) {
+          var field = fields[name];
+          var serializer = field.serializer || angular.identity;
+          form[name] = serializer($scope.form[name]);
         }
       }
 

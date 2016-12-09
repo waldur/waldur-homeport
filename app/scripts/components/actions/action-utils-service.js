@@ -29,21 +29,19 @@ export default function actionUtilsService(
   };
 
   this.loadChoices = function(field) {
-    return this.loadRawChoices(field).then(function(response) {
-      field.list = response.map(function(item) {
-        let obj = {};
-        if (field.resource_default_value) {
-          obj.name =item.name;
-          obj.url = item[field.value_field];
-          obj.description = item.description;
-          obj.rules = item.rules;
-        } else {
-          obj.value = item[field.value_field];
-          obj.display_name = field.formatter ? field.formatter($filter, item) : item[field.display_name_field];
-        }
-        return obj;
-      });
+    return this.loadRawChoices(field).then(items => {
+      field.list = this.formatChoices(field, items);
     });
+  };
+
+  this.formatChoices = function(field, items) {
+    const formatter = item => field.formatter ?
+                              field.formatter($filter, item) :
+                              item[field.display_name_field];
+    return items.map(item => ({
+      value: item[field.value_field],
+      display_name: formatter(item)
+    }));
   };
 
   this.loadRawChoices = function(field) {

@@ -43,7 +43,8 @@ function actionConfig(ActionConfigurationProvider) {
         title: 'Update security groups',
         fields: {
           security_groups: {
-            resource_default_value: true
+            resource_default_value: true,
+            serializer: items => items.map(item => ({url: item.value}))
           }
         }
       },
