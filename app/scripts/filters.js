@@ -14,7 +14,7 @@
       }
 
       return input.toFixed(0) + ' ' + units[unit];
-    }
+    };
   });
 
   angular.module('ncsaas').filter('titleCase', function() {
@@ -22,7 +22,7 @@
       if (input) {
         return input.charAt(0).toUpperCase() + input.slice(1);
       }
-    }
+    };
   });
 
   angular.module('ncsaas').filter('defaultCurrency', ['ENV', '$filter', defaultCurrency]);
@@ -36,7 +36,7 @@
         fractionSize = 3;
       }
       return $filter('currency')(value, ENV.currency, fractionSize);
-    }
+    };
   }
 
   angular.module('ncsaas').filter('shortDate', function() {
@@ -44,7 +44,7 @@
       if (input) {
         return moment(input).format('YYYY-MM-DD');
       }
-    }
+    };
   });
 
   angular.module('ncsaas').filter('dateTime', function() {
@@ -52,7 +52,7 @@
       if (input) {
         return moment(input).format('YYYY-MM-DD HH:mm');
       }
-    }
+    };
   });
 
   angular.module('ncsaas').filter('snakeCase', function() {
@@ -63,7 +63,7 @@
       return input.replace(SNAKE_CASE_REGEXP, function(letter, pos) {
         return (pos ? separator : '') + letter.toLowerCase();
       });
-    }
+    };
   });
 
 })();

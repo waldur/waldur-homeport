@@ -4,8 +4,8 @@ export default function actionDialog() {
   return {
     restrict: 'E',
     template: template,
-    controller: ActionDialogController,
-  }
+    controller: ActionDialogController
+  };
 }
 
 // @ngInject
@@ -22,6 +22,9 @@ function ActionDialogController($scope, $q, $http, resourcesService, actionUtils
         if (field.default_value) {
           $scope.form[name] = field.default_value;
         }
+        if (field.resource_default_value) {
+          $scope.form[name] = actionUtilsService.formatChoices(field, $scope.resource[name]);
+        }
       });
     },
     submitForm: function () {
@@ -30,13 +33,15 @@ function ActionDialogController($scope, $q, $http, resourcesService, actionUtils
       }
       var fields = $scope.action.fields;
       var form = resourcesService.$create($scope.action.url);
-      for (var field in fields) {
-        if ($scope.form[field] != null) {
-          form[field] = $scope.form[field];
+      for (var name in fields) {
+        if ($scope.form[name] != null) {
+          var field = fields[name];
+          var serializer = field.serializer || angular.identity;
+          form[name] = serializer($scope.form[name]);
         }
       }
 
-      if ($scope.action.method == 'DELETE') {
+      if ($scope.action.method === 'DELETE') {
         var url = $scope.action.url + '?' + ncUtils.toKeyValue($scope.form);
         var promise = $http.delete(url);
       } else {

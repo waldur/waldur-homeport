@@ -29,20 +29,24 @@ export default function actionUtilsService(
   };
 
   this.loadChoices = function(field) {
-    return this.loadRawChoices(field).then(function(response) {
-      field.list = response.map(function(item) {
-        var displayName = field.formatter ? field.formatter($filter, item) : item[field.display_name_field];
-        return {
-          value: item[field.value_field],
-          display_name: displayName
-        };
-      });
+    return this.loadRawChoices(field).then(items => {
+      field.list = this.formatChoices(field, items);
     });
+  };
+
+  this.formatChoices = function(field, items) {
+    const formatter = item => field.formatter ?
+                              field.formatter($filter, item) :
+                              item[field.display_name_field];
+    return items.map(item => ({
+      value: item[field.value_field],
+      display_name: formatter(item)
+    }));
   };
 
   this.loadRawChoices = function(field) {
     var url = field.url, query_params = {};
-    var parts = field.url.split("?");
+    var parts = field.url.split('?');
     if (parts.length === 2) {
       url = parts[0];
       query_params = ncUtils.parseQueryString(parts[1]);
@@ -78,10 +82,10 @@ export default function actionUtilsService(
 
   this.applyAction = function(controller, resource, action) {
     var vm = this;
-    var promise = (action.method == 'DELETE') ? $http.delete(action.url) : $http.post(action.url);
+    var promise = (action.method === 'DELETE') ? $http.delete(action.url) : $http.post(action.url);
 
     function onSuccess(response) {
-      if (response.status == 204) {
+      if (response.status === 204) {
         ncUtilsFlash.success('Resource has been deleted');
         controller.afterInstanceRemove(resource);
       } else {
@@ -94,8 +98,8 @@ export default function actionUtilsService(
   };
 
   this.handleActionSuccess = function(action) {
-    var template = "Request to {action} has been accepted";
-    var message = template.replace("{action}", action.title.toLowerCase());
+    var template = 'Request to {action} has been accepted';
+    var message = template.replace('{action}', action.title.toLowerCase());
     ncUtilsFlash.success(message);
   };
 
