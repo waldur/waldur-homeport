@@ -1,5 +1,5 @@
 import { ISSUE_TYPE_CHOICES } from './constants';
-import template from './issue-create-page.html';
+import template from './issue-registration.html';
 
 export default function issueCreatePage() {
   return {
@@ -7,7 +7,9 @@ export default function issueCreatePage() {
     template: template,
     controller: IssueCreatePageController,
     controllerAs: '$ctrl',
-    scope: {},
+    scope: {
+      onSearch: '&'
+    },
     bindToController: true
   };
 }
@@ -15,10 +17,12 @@ export default function issueCreatePage() {
 // @ngInject
 class IssueCreatePageController {
   constructor($state,
+              $q,
               $uibModal,
               issuesService,
               IssueFilterService) {
     this.$state = $state;
+    this.$q = $q;
     this.$uibModal = $uibModal;
     this.service = issuesService;
     this.issue = angular.copy(this.service.filter);
@@ -27,6 +31,9 @@ class IssueCreatePageController {
   }
 
   save() {
+    if (this.IssueForm.$invalid) {
+      return this.$q.reject();
+    }
     let issue = {
       type: this.issue.type.id,
       summary: this.issue.summary,

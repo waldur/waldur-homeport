@@ -27,14 +27,6 @@ export default function issueRoutes($stateProvider) {
       }
     })
 
-    .state('support.createIssue', {
-      url: 'helpdesk/create/',
-      template: '<issue-create-page></issue-create-page>',
-      data: {
-        pageTitle: 'Create issue'
-      }
-    })
-
     .state('support.list', {
       url: 'list/',
       template: '<issues-list-filtered></issues-list-filtered>',

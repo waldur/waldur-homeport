@@ -13,8 +13,7 @@ import issueQuickCreate from './issue-quick-create';
 import issuesActivityStream from './issues-activity-stream';
 import issuesListFiltered from './issues-list-filtered';
 import issuesHelpdesk from './issues-helpdesk';
-import issuesListHelpdesk from './issues-list-helpdesk';
-import issueCreatePage from './issue-create-page';
+import issueRegistration from './issue-registration';
 
 export default module => {
   module.service('issuesService', issuesService);
@@ -31,7 +30,6 @@ export default module => {
   module.directive('issuesActivityStream', issuesActivityStream);
   module.directive('issuesListFiltered', issuesListFiltered);
   module.directive('issuesHelpdesk', issuesHelpdesk);
-  module.directive('issuesListHelpdesk', issuesListHelpdesk);
-  module.directive('issueCreatePage', issueCreatePage);
+  module.directive('issueRegistration', issueRegistration);
   module.config(issueRoutes);
 }

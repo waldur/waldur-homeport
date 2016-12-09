@@ -26,9 +26,11 @@ export default class IssueFilterService {
 
   refreshProjects(name) {
     const params = name && {name};
+    this.projectsService.filterByCustomer = false;
     return this.projectsService.getList(params).then(projects => {
       this.projects = projects;
     });
+    this.projectsService.filterByCustomer = true;
   }
 
   refreshResources(name) {

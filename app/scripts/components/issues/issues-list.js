@@ -39,6 +39,13 @@ function IssueListController(baseControllerListClass, issuesService, $filter, $s
         ],
         columns: [
           {
+            title: 'Type',
+            render: function(data, type, row, meta) {
+              return row.type.toUpperCase();
+            },
+            width: 90
+          },
+          {
             title: 'Key',
             render: function(data, type, row, meta) {
               return row.key;
@@ -122,9 +129,11 @@ function IssueListController(baseControllerListClass, issuesService, $filter, $s
         ]
       };
       $scope.$watch(() => controllerScope.filter, filter => {
-        controllerScope.service.filter = filter;
         controllerScope.getList();
       }, true);
+    },
+    getFilter: function() {
+      return controllerScope.filter;
     }
   });
 

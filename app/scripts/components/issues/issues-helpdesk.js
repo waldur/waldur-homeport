@@ -7,13 +7,30 @@ export default function issuesHelpdesk() {
     controller: IssuesHelpdeskController,
     controllerAs: '$ctrl',
     scope: {},
-    bindToController: {
-      label: '=',
-      filter: '='
-    }
+    bindToController: true
   };
 }
 
-function IssuesHelpdeskController() {
+class IssuesHelpdeskController {
+  constructor() {
+    this.listFilter = {};
+  }
 
+  onSearch(issue) {
+    if (!issue) {
+      this.listFilter = {};
+      return;
+    }
+    let filter = {};
+    if (issue.caller) {
+      filter.caller_user = issue.caller.url;
+    }
+    if (issue.customer) {
+      filter.customer = issue.customer.url;
+    }
+    if (issue.project) {
+      filter.project = issue.project.url;
+    }
+    this.listFilter = filter;
+  }
 }
