@@ -2,12 +2,12 @@ import OpenStackVolumeConfig from './openstack-volume-config';
 import volumeExtendDialog from './volume-extend';
 import snapshotCreateDialog from './snapshot-create';
 import openstackVolumeSummary from './openstack-volume-summary';
-import openstackTenantVolumesService from './openstacktenant-volumes-service';
-import openstacktenantVolumesList from './openstacktenant-volumes-list';
+import openstackVolumesService from './openstack-volumes-service';
+import openstackVolumesList from './openstack-volumes-list';
 
 export default module => {
-  module.service('openstackTenantVolumesService', openstackTenantVolumesService);
-  module.directive('openstacktenantVolumesList', openstacktenantVolumesList);
+  module.service('openstackVolumesService', openstackVolumesService);
+  module.directive('openstackVolumesList', openstackVolumesList);
   module.directive('volumeExtendDialog', volumeExtendDialog);
   module.directive('snapshotCreateDialog', snapshotCreateDialog);
   module.directive('openstackVolumeSummary', openstackVolumeSummary);

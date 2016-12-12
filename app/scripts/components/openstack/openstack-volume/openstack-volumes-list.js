@@ -1,27 +1,27 @@
-import template from './openstacktenant-volumes-list.html';
+import template from './openstack-volumes-list.html';
 
-export default function openstacktenantVolumesList() {
+export default function openstackVolumesList() {
   return {
     restrict: 'E',
     template: template,
-    controller: OpenstacktenantVolumesList,
+    controller: OpenstackVolumesList,
     controllerAs: 'ListController'
   };
 }
 
 // @ngInject
-function OpenstacktenantVolumesList(
+function OpenstackVolumesList(
   baseResourceListController,
   $stateParams,
   $scope,
   $timeout,
-  openstackTenantVolumesService) {
+  openstackVolumesService) {
   var controllerScope = this;
   var ResourceController = baseResourceListController.extend({
     init: function() {
       this.controllerScope = controllerScope;
-      this.service = openstackTenantVolumesService;
       this._super();
+      this.service = openstackVolumesService;
 
       $scope.$on('actionApplied', function(event, name) {
         if (name === 'volume') {

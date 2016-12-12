@@ -1,5 +1,5 @@
 // @ngInject
-export default function openstackTenantVolumesService(baseServiceClass) {
+export default function openstackVolumesService(baseServiceClass) {
   /*jshint validthis: true */
   var ServiceClass = baseServiceClass.extend({
     init:function() {

@@ -57,7 +57,7 @@
         this._super();
       },
       getTableOptions: function() {
-        var vm = this;
+        var vm = this.controllerScope;
         return {
           searchFieldName: 'name',
           noDataText: 'You have no resources yet.',
