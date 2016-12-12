@@ -2,8 +2,8 @@
     <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
 </div>
 
-<div class="ibox">
-  <div class="ibox-content" ng-if="!$ctrl.loading && $ctrl.issue">
+<div class="ibox" ng-if="!$ctrl.loading && $ctrl.issue">
+  <div class="ibox-content">
     <div class="row m-b-md">
       <div class="col-lg-12">
         <h2>{{ $ctrl.issue.key }}: {{ $ctrl.issue.summary }}</h2>
@@ -73,8 +73,12 @@
   </div>
 </div>
 
-<div class="ibox">
-  <div class="ibox-content">
+<div class="ibox" ng-if="!$ctrl.loading && $ctrl.issue">
+  <div class="ibox-title">
     <h4>Comments</h4>
+  </div>
+  <div class="ibox-content">
+    <issue-comments-list issue="$ctrl.issue"></issue-comments-list>
+    <issue-comments-form issue="$ctrl.issue" on-comment-created="$ctrl.onCommentCreated()"></issue-comments-form>
   </div>
 </div>

@@ -1,10 +1,11 @@
 import issuesService from './issues-service';
 import issueCommentsService from './issue-comments-service';
 import IssueFilterService from './issue-filter-service';
-import FakeIssueCommentsService from './fake-issue-comments-service';
 
 import issueCreate from './create';
 import issueDetail from './issue-detail';
+import issueCommentsList from './issue-comments-list';
+import issueCommentsForm from './issue-comments-form';
 import issuesList from './issues-list';
 import issueRoutes from './routes';
 import issuesWorkspace from './issues-workspace';
@@ -20,11 +21,12 @@ export default module => {
   module.service('issuesService', issuesService);
   module.service('issueCommentsService', issueCommentsService);
   module.service('IssueFilterService', IssueFilterService);
-  module.service('FakeIssueCommentsService', FakeIssueCommentsService);
 
   module.directive('issuesList', issuesList);
   module.directive('issueCreate', issueCreate);
   module.directive('issueDetail', issueDetail);
+  module.directive('issueCommentsList', issueCommentsList);
+  module.directive('issueCommentsForm', issueCommentsForm);
   module.directive('issuesWorkspace', issuesWorkspace);
   module.directive('issuesDashboard', issuesDashboard);
   module.directive('issuesShortList', issuesShortList);

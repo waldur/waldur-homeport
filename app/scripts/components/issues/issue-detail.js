@@ -13,9 +13,10 @@ export default function issueDetail() {
 
 // @ngInject
 class IssueDetailController {
-  constructor($stateParams, $state, issuesService) {
+  constructor($stateParams, $state, $rootScope, issuesService) {
     this.$stateParams = $stateParams;
     this.$state = $state;
+    this.$rootScope = $rootScope;
     this.issuesService = issuesService;
     this.init();
   }
@@ -37,5 +38,9 @@ class IssueDetailController {
     if (error.status == 404) {
       this.$state.go('errorPage.notFound');
     }
+  }
+
+  onCommentCreated() {
+    this.$rootScope.$emit('refreshCommentsList');
   }
 }

@@ -12,9 +12,9 @@ export default function issuesActivityStream() {
 }
 
 // @ngInject
-function IssuesActivityStreamController(FakeIssueCommentsService, $uibModal) {
+function IssuesActivityStreamController(issueCommentsService, $uibModal) {
   this.loading = true;
-  FakeIssueCommentsService.getList().then(items => {
+  issueCommentsService.getList().then(items => {
     this.items = items;
     this.loading = false;
   });
