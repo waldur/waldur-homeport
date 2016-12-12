@@ -134,3 +134,7 @@ body.landing {
   background-color: $light-gray;
   color: $label-badget-color;
 }
+
+.nav.navbar-right > li > a.active {
+  border-bottom: 2px solid $blue;
+}
