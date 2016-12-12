@@ -28,6 +28,14 @@ export default function issueRoutes($stateProvider) {
       }
     })
 
+    .state('support.detail', {
+      url: 'issue/:uuid/',
+      template: '<issue-detail></issue-detail>',
+      data: {
+        pageTitle: 'Issue detail'
+      }
+    })
+
     .state('support.list', {
       url: 'list/',
       template: '<issues-list-filtered></issues-list-filtered>',

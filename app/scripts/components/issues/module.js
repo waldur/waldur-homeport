@@ -4,6 +4,7 @@ import IssueFilterService from './issue-filter-service';
 import FakeIssueCommentsService from './fake-issue-comments-service';
 
 import issueCreate from './create';
+import issueDetail from './issue-detail';
 import issuesList from './issues-list';
 import issueRoutes from './routes';
 import issuesWorkspace from './issues-workspace';
@@ -23,6 +24,7 @@ export default module => {
 
   module.directive('issuesList', issuesList);
   module.directive('issueCreate', issueCreate);
+  module.directive('issueDetail', issueDetail);
   module.directive('issuesWorkspace', issuesWorkspace);
   module.directive('issuesDashboard', issuesDashboard);
   module.directive('issuesShortList', issuesShortList);

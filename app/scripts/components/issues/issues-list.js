@@ -15,7 +15,7 @@ export default function issueList() {
 }
 
 // @ngInject
-function IssueListController(baseControllerListClass, issuesService, $filter, $scope) {
+function IssueListController(baseControllerListClass, issuesService, $filter, $scope, $state, ncUtils) {
   var controllerScope = this;
   var controllerClass = baseControllerListClass.extend({
     init: function() {
@@ -41,7 +41,8 @@ function IssueListController(baseControllerListClass, issuesService, $filter, $s
           {
             title: 'Key',
             render: function(data, type, row, meta) {
-              return row.key;
+              var href = $state.href('support.detail', {uuid: row.uuid});
+              return ncUtils.renderLink(href, row.key);
             },
             width: 90
           },
