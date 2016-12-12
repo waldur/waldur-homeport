@@ -49,9 +49,9 @@ class IssueCreatePageController {
       issue.resource = this.issue.resource.url;
     }
     this.saving = true;
-    return this.service.createIssue(issue).then(() => {
+    return this.service.createIssue(issue).then(issue => {
       this.service.clearAllCacheForCurrentEndpoint();
-      this.ncUtilsFlash.success('Issue has been created');
+      this.ncUtilsFlash.success(`Issue ${issue.key} has been created`);
     }).finally(() => {
       this.saving = false;
     });
