@@ -15,7 +15,8 @@ export default function issueRoutes($stateProvider) {
       url: '',
       template: '<issues-dashboard></issue-dashboard>',
       data: {
-        pageTitle: 'Support dashboard'
+        pageTitle: 'Support dashboard',
+        hideBreadcrumbs: true
       }
     })
 

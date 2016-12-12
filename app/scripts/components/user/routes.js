@@ -4,7 +4,8 @@ const tabs = {
     template: '<user-dashboard></user-dashboard>',
     data: {
       pageTitle: 'User dashboard',
-      pageClass: 'gray-bg'
+      pageClass: 'gray-bg',
+      hideBreadcrumbs: true
     }
   },
   events: {
