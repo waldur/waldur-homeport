@@ -24,7 +24,8 @@ function IssueListController(baseControllerListClass, issuesService, $filter, $s
       this._super();
       this.searchFieldName = 'search';
       this.tableOptions = {
-        disableButtons: true,
+        disableAutoUpdate: true,
+        disableSearch: true,
         entityData: {
           noDataText: 'No tickets yet.',
           noMatchesText: 'No tickets found matching filter.',

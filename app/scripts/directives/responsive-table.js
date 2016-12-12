@@ -26,13 +26,17 @@
             options = newTableOptions;
             table = initTable();
             connectRowButtons(table);
-            connectWatcher(table);
+
+            if (!newTableOptions.disableAutoUpdate) {
+              connectWatcher(table);
+            }
           }
         });
 
         function initTable() {
           var buttons = getButtons();
           var columns = getColumns();
+          var dom = getDom();
 
           var table = $(element.find('table')[0]).DataTable({
             responsive: true,
@@ -41,7 +45,7 @@
             ordering: !!options.enableOrdering,
             autoWidth: false,
             ajax: serverDataTableCallback,
-            dom: buttons ? '<"html5buttons"B>lTfgitp' : 'Tgitp',
+            dom: dom,
             buttons: buttons && buttons,
             columns: columns,
             language: {
@@ -55,6 +59,16 @@
             }
           });
           return table;
+        }
+
+        function getDom() {
+          if (options.disableButtons) {
+            return 'Tgitp';
+          } else if (options.disableSearch) {
+            return '<"html5buttons"B>rgitp'
+          } else {
+            return '<"html5buttons"B>lTfgitp';
+          }
         }
 
         function getButtons() {
