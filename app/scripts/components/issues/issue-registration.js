@@ -33,21 +33,18 @@ class IssueCreatePageController {
   }
 
   save() {
+    this.IssueForm.$submitted = true;
     if (this.IssueForm.$invalid) {
       return this.$q.reject();
     }
     let issue = {
       type: this.issue.type.id,
+      customer: this.issue.customer.url,
+      project: this.issue.project.url,
       summary: this.issue.summary,
       description: this.issue.description,
-      reporter: this.issue.caller.url
+      caller: this.issue.caller.url
     };
-    if (this.issue.customer) {
-      issue.customer = this.issue.customer.url;
-    }
-    if (this.issue.project) {
-      issue.project = this.issue.project.url;
-    }
     if (this.issue.resource) {
       issue.resource = this.issue.resource.url;
     }

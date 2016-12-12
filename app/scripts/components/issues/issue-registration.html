@@ -18,6 +18,10 @@
                             {{ option.full_name || option.username }}
                         </ui-select-choices>
                     </ui-select>
+                    <div class="help-block text-danger"
+                         ng-if="($ctrl.IssueForm.$submitted || $ctrl.IssueForm.caller.$touched) && $ctrl.IssueForm.caller.$error.required">
+                        You did not enter a field
+                    </div>
                 </div>
                 <div class="col-sm-2 form-control-static" ng-if="$ctrl.issue.caller">
                     <a ng-click="$ctrl.openUserDialog($ctrl.issue.caller)">
@@ -42,6 +46,10 @@
                             {{ option.name }}
                         </ui-select-choices>
                     </ui-select>
+                    <div class="help-block text-danger"
+                         ng-if="($ctrl.IssueForm.$submitted || $ctrl.IssueForm.customer.$touched) && $ctrl.IssueForm.customer.$error.required">
+                        You did not enter a field
+                    </div>
                 </div>
                 <div class="col-sm-2 form-control-static" ng-if="$ctrl.issue.customer">
                     <a ng-click="$ctrl.openCustomerDialog($ctrl.issue.customer)">
@@ -65,6 +73,10 @@
                             {{ option.label }}
                         </ui-select-choices>
                     </ui-select>
+                    <div class="help-block text-danger"
+                         ng-if="($ctrl.IssueForm.$submitted || $ctrl.IssueForm.type.$touched) && $ctrl.IssueForm.type.$error.required">
+                        You did not enter a field
+                    </div>
                 </div>
             </div>
             <div class="form-group">
@@ -77,6 +89,10 @@
                         ng-model="$ctrl.issue.summary"
                         class="form-control"
                         name="summary" required>
+                    <div class="help-block text-danger"
+                         ng-if="($ctrl.IssueForm.$submitted || $ctrl.IssueForm.summary.$touched) && $ctrl.IssueForm.summary.$error.required">
+                        You did not enter a field
+                    </div>
                 </div>
             </div>
             <div class="form-group">
@@ -89,6 +105,10 @@
                         ng-model="$ctrl.issue.description"
                         class="form-control"
                         name="description" required/>
+                    <div class="help-block text-danger"
+                         ng-if="($ctrl.IssueForm.$submitted || $ctrl.IssueForm.description.$touched) && $ctrl.IssueForm.description.$error.required">
+                        You did not enter a field
+                    </div>
                 </div>
             </div>
             <div class="form-group">
@@ -108,6 +128,10 @@
                             {{ option.name }}
                         </ui-select-choices>
                     </ui-select>
+                    <div class="help-block text-danger"
+                         ng-if="($ctrl.IssueForm.$submitted || $ctrl.IssueForm.project.$touched) && $ctrl.IssueForm.project.$error.required">
+                        You did not enter a field
+                    </div>
                 </div>
             </div>
             <div class="form-group">
