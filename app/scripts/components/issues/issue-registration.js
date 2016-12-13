@@ -138,6 +138,24 @@ class IssueRegistrationController {
     this.resourcesService.filterByCustomer = true;
   }
 
+  filterByCaller(caller) {
+    return this.onSearch({
+      filter: {caller}
+    });
+  }
+
+  filterByCustomer(customer) {
+    return this.onSearch({
+      filter: {customer}
+    });
+  }
+
+  filterByProject(project) {
+    return this.onSearch({
+      filter: {project}
+    });
+  }
+
   save() {
     this.IssueForm.$submitted = true;
     if (this.IssueForm.$invalid) {

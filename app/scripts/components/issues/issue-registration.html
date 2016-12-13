@@ -5,7 +5,7 @@
                 <label class="col-sm-3 control-label">
                     Caller <span class="text-danger">*</span>
                 </label>
-                <div class="col-sm-7">
+                <div class="col-sm-6">
                     <ui-select ng-model="$ctrl.issue.caller" name="caller" required>
                         <ui-select-match placeholder="Select caller..."
                                          allow-clear="true">
@@ -23,17 +23,25 @@
                         You did not enter a field
                     </div>
                 </div>
-                <div class="col-sm-2 form-control-static" ng-if="$ctrl.issue.caller">
-                    <a ng-click="$ctrl.openUserDialog($ctrl.issue.caller)">
-                       Caller details
-                    </a>
+                <div class="col-sm-3" ng-if="$ctrl.issue.caller">
+                    <div class="btn-group">
+                        <a ng-click="$ctrl.openUserDialog($ctrl.issue.caller)"
+                           class="btn btn-default">
+                            <i class="fa fa-eye"></i>
+                           Details
+                        </a>
+                        <a ng-click="$ctrl.filterByCaller($ctrl.issue.caller)" class="btn btn-default">
+                            <i class="fa fa-search"></i>
+                           Filter
+                        </a>
+                    </div>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label">
                     Organization <span class="text-danger">*</span>
                 </label>
-                <div class="col-sm-7" ng-class="{disabled: !$ctrl.issue.caller}">
+                <div class="col-sm-6" ng-class="{disabled: !$ctrl.issue.caller}">
                     <ui-select ng-model="$ctrl.issue.customer" name="customer" required>
                         <ui-select-match placeholder="Select organization..."
                                          allow-clear="true">
@@ -51,17 +59,25 @@
                         You did not enter a field
                     </div>
                 </div>
-                <div class="col-sm-2 form-control-static" ng-if="$ctrl.issue.customer">
-                    <a ng-click="$ctrl.openCustomerDialog($ctrl.issue.customer)">
-                       Organization details
-                    </a>
+                <div class="col-sm-3" ng-if="$ctrl.issue.customer">
+                    <div class="btn-group">
+                        <a ng-click="$ctrl.openCustomerDialog($ctrl.issue.customer)"
+                           class="btn btn-default">
+                            <i class="fa fa-eye"></i>
+                           Details
+                        </a>
+                        <a ng-click="$ctrl.filterByCustomer($ctrl.issue.customer)" class="btn btn-default">
+                            <i class="fa fa-search"></i>
+                           Filter
+                        </a>
+                    </div>
                 </div>
             </div>
             <div class="form-group">
                 <label for="issueType" class="col-sm-3 control-label">
                     Issue type <span class="text-danger">*</span>
                 </label>
-                <div class="col-sm-7">
+                <div class="col-sm-6">
                     <ui-select ng-model="$ctrl.issue.type" name="type" required>
                         <ui-select-match placeholder="Select issue type..."
                                          allow-clear="true">
@@ -83,7 +99,7 @@
                 <label for="issueSummary" class="col-sm-3 control-label">
                     Title <span class="text-danger">*</span>
                 </label>
-                <div class="col-sm-7">
+                <div class="col-sm-6">
                     <input type="text"
                         id="issueSummary"
                         ng-model="$ctrl.issue.summary"
@@ -99,7 +115,7 @@
                 <label for="issueDescription" class="col-sm-3 control-label">
                     Description <span class="text-danger">*</span>
                 </label>
-                <div class="col-sm-7">
+                <div class="col-sm-6">
                     <textarea type="text"
                         id="issueDescription"
                         ng-model="$ctrl.issue.description"
@@ -115,7 +131,7 @@
                 <label class="col-sm-3 control-label">
                     Project <span class="text-danger">*</span>
                 </label>
-                <div class="col-sm-7" ng-class="{disabled: !$ctrl.issue.customer}">
+                <div class="col-sm-6" ng-class="{disabled: !$ctrl.issue.customer}">
                     <ui-select ng-model="$ctrl.issue.project" name="project" required>
                         <ui-select-match placeholder="Select project..."
                                          allow-clear="true">
@@ -133,12 +149,18 @@
                         You did not enter a field
                     </div>
                 </div>
+                <div class="col-sm-3" ng-if="$ctrl.issue.project">
+                    <a ng-click="$ctrl.filterByProject($ctrl.issue.project)" class="btn btn-default">
+                        <i class="fa fa-search"></i>
+                       Filter
+                    </a>
+                </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label">
                     Scope
                 </label>
-                <div class="col-sm-7" ng-class="{disabled: !$ctrl.issue.project}">
+                <div class="col-sm-6" ng-class="{disabled: !$ctrl.issue.project}">
                     <ui-select ng-model="$ctrl.issue.scope">
                         <ui-select-match placeholder="Select scope...">
                             {{ $select.selected.display_name }}
@@ -153,7 +175,7 @@
                 <label class="col-sm-3 control-label">
                     Affected resource
                 </label>
-                <div class="col-sm-7" ng-class="{disabled: !$ctrl.issue.scope}">
+                <div class="col-sm-6" ng-class="{disabled: !$ctrl.issue.scope}">
                     <ui-select ng-model="$ctrl.issue.resource">
                         <ui-select-match placeholder="Select affected resource..."
                                          allow-clear="true">
