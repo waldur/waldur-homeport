@@ -6,10 +6,10 @@ export const ISSUE_TYPES = [
 ];
 
 export const ISSUE_IDS = {
-  'Incident': 'incident',
-  'Change request': 'change_request',
-  'Service request': 'service_request',
-  'Informational': 'informational'
+  'Incident': 'Incident',
+  'Change request': 'Change request',
+  'Service request': 'Service request',
+  'Informational': 'Informational'
 };
 
 export const ISSUE_CLASSES = {

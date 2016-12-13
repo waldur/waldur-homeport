@@ -2,5 +2,5 @@
     <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
 </div>
 <div ng-if="!$ctrl.loading">
-  <issues-list customer="$ctrl.customer"></issues-list>
+  <issues-list filter="$ctrl.filter" options="$ctrl.options"></issues-list>
 </div>

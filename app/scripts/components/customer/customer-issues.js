@@ -12,12 +12,41 @@ export default function customerIssues() {
 }
 
 class CustomerIssuesController {
-  constructor(currentStateService) {
+  constructor(currentStateService, $uibModal, $rootScope) {
+    this.currentStateService = currentStateService;
+    this.$uibModal = $uibModal;
+    this.$rootScope = $rootScope;
+    this.init();
+  }
+
+  init() {
     this.loading = true;
-    currentStateService.getCustomer().then(customer => {
-      this.customer = customer;
+    this.currentStateService.getCustomer().then(customer => {
+      this.setOptions(customer);
     }).finally(() => {
       this.loading = false;
     });
+  }
+
+  setOptions(customer) {
+    this.filter = {
+      customer: customer.url
+    };
+    this.options = {
+      disableAutoUpdate: false,
+      disableSearch: false,
+      tableActions: [
+        {
+          name: '<i class="fa fa-plus"></i> Create',
+          callback: () => {
+            this.$uibModal.open({
+              component: 'issueCreateDialog'
+            }).result.then(() => {
+              this.$rootScope.$broadcast('refreshIssuesList');
+            });
+          }
+        }
+      ]
+    };
   }
 }

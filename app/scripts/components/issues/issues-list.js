@@ -9,13 +9,15 @@ export default function issueList() {
     controllerAs: '$ctrl',
     scope: {},
     bindToController: {
-      filter: '='
+      filter: '=',
+      options: '='
     }
   };
 }
 
 // @ngInject
-function IssueListController(baseControllerListClass, issuesService, $filter, $scope, $state, ncUtils) {
+function IssueListController(
+    baseControllerListClass, issuesService, $filter, $scope, $rootScope, $state, ncUtils) {
   var controllerScope = this;
   var controllerClass = baseControllerListClass.extend({
     init: function() {
@@ -23,7 +25,7 @@ function IssueListController(baseControllerListClass, issuesService, $filter, $s
       this.controllerScope = controllerScope;
       this._super();
       this.searchFieldName = 'search';
-      this.tableOptions = {
+      this.tableOptions = angular.extend({
         disableAutoUpdate: true,
         disableSearch: true,
         enableOrdering: true,
@@ -135,10 +137,20 @@ function IssueListController(baseControllerListClass, issuesService, $filter, $s
             width: 100
           }
         ]
-      };
+      }, controllerScope.options || {});
+      this.connectWatchers();
+    },
+    connectWatchers: function() {
       $scope.$watch(() => controllerScope.filter, filter => {
         controllerScope.getList();
       }, true);
+      var unbind = $rootScope.$on('refreshIssuesList', () => {
+        this.service.clearAllCacheForCurrentEndpoint();
+        controllerScope.getList();
+      });
+      $scope.$on('$destroy', () => {
+        unbind();
+      });
     },
     getFilter: function() {
       return controllerScope.filter;
