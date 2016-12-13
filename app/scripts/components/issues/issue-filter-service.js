@@ -18,7 +18,10 @@ export default class IssueFilterService {
   }
 
   refreshCustomers(name) {
-    const params = name && {name};
+    const params = {};
+    if (name) {
+      params.name = name;
+    }
     return this.customersService.getList(params).then(customers => {
       this.customers = customers;
     });

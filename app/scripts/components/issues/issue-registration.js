@@ -1,11 +1,11 @@
 import { ISSUE_TYPE_CHOICES } from './constants';
 import template from './issue-registration.html';
 
-export default function issueCreatePage() {
+export default function issueRegistration() {
   return {
     restrict: 'E',
     template: template,
-    controller: IssueCreatePageController,
+    controller: IssueRegistrationController,
     controllerAs: '$ctrl',
     scope: {
       onSearch: '&'
@@ -15,21 +15,36 @@ export default function issueCreatePage() {
 }
 
 // @ngInject
-class IssueCreatePageController {
+class IssueRegistrationController {
   constructor($state,
+              $scope,
               $q,
               $uibModal,
               issuesService,
               IssueFilterService,
               ncUtilsFlash) {
     this.$state = $state;
+    this.$scope = $scope;
     this.$q = $q;
     this.$uibModal = $uibModal;
     this.service = issuesService;
-    this.issue = angular.copy(this.service.filter);
+    this.issue = {};
     this.types = ISSUE_TYPE_CHOICES;
     this.filterService = IssueFilterService;
     this.ncUtilsFlash = ncUtilsFlash;
+    this.init();
+  }
+
+  init() {
+    this.$scope.$watch(() => this.issue.caller, caller => {
+      this.issue.customer = null;
+    });
+    this.$scope.$watch(() => this.issue.customer, customer => {
+      this.issue.project = null;
+    });
+    this.$scope.$watch(() => this.issue.project, project => {
+      this.issue.resource = null;
+    });
   }
 
   save() {
