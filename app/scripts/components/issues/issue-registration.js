@@ -178,6 +178,9 @@ class IssueRegistrationController {
       description: this.issue.description,
       caller: this.issue.caller.url
     };
+    if (this.issue.assignee) {
+      issue.assignee = this.issue.assignee.url;
+    }
     if (this.issue.resource) {
       issue.resource = this.issue.resource.url;
     }
