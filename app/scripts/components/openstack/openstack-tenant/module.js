@@ -39,6 +39,7 @@ function actionConfig(ActionConfigurationProvider) {
         component: 'openstackTenantChangePackageDialog',
         dialogSize: 'lg'
       }
-    }
+    },
+    delete_message: 'All tenant resources will be deleted.'
   });
 }

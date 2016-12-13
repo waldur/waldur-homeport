@@ -1,6 +1,7 @@
 // @ngInject
 export default function actionUtilsService(
-  ncUtilsFlash, $rootScope, $http, $q, $uibModal, $filter, ncUtils, resourcesService, ActionConfiguration) {
+  ncUtilsFlash, $rootScope, $http, $q, $uibModal, $filter, ncUtils,
+  resourcesService, ActionConfiguration) {
   this.loadActions = function(model) {
     resourcesService.cleanOptionsCache(model.url);
     return resourcesService.getOption(model.url).then(response => {
@@ -69,12 +70,15 @@ export default function actionUtilsService(
   };
 
   this.confirmAction = function(model, name) {
+    let confirmTextSuffix = ActionConfiguration[model.resource_type].delete_message || '';
     if (name === 'destroy') {
       var confirmText = (model.state === 'Erred')
         ? 'Are you sure you want to delete a {resource_type} in an Erred state?' +
-          ' A cleanup attempt will be performed if you choose so.'
-        : 'Are you sure you want to delete a {resource_type}?';
-      return confirm(confirmText.replace('{resource_type}', model.resource_type));
+          ' A cleanup attempt will be performed if you choose so. {confirmTextSuffix}'
+        : 'Are you sure you want to delete a {resource_type}? {confirmTextSuffix}';
+      return confirm(confirmText
+        .replace('{resource_type}', model.resource_type)
+        .replace('{confirmTextSuffix}', confirmTextSuffix));
     } else {
       return confirm('Are you sure? This action cannot be undone.');
     }
