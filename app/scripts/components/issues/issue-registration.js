@@ -25,6 +25,7 @@ class IssueRegistrationController {
               issuesService,
               ncUtilsFlash,
               usersService,
+              issueUsersService,
               customersService,
               projectsService,
               resourcesService) {
@@ -39,6 +40,7 @@ class IssueRegistrationController {
     this.types = ISSUE_TYPE_CHOICES;
     this.ncUtilsFlash = ncUtilsFlash;
     this.usersService = usersService;
+    this.issueUsersService = issueUsersService;
     this.customersService = customersService;
     this.projectsService = projectsService;
     this.resourcesService = resourcesService;
@@ -83,6 +85,13 @@ class IssueRegistrationController {
     const params = name && {full_name: name};
     return this.usersService.getList(params).then(users => {
       this.users = users;
+    });
+  }
+
+  refreshSupportUsers(name) {
+    const params = name && {name: name};
+    return this.issueUsersService.getList(params).then(users => {
+      this.supportUsers = users;
     });
   }
 

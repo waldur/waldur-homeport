@@ -1,4 +1,5 @@
 import issuesService from './issues-service';
+import issueUsersService from './issue-users';
 import issueCommentsService from './issue-comments-service';
 import issueCreate from './create';
 import issueDetail from './issue-detail';
@@ -17,6 +18,7 @@ import issueRegistration from './issue-registration';
 
 export default module => {
   module.service('issuesService', issuesService);
+  module.service('issueUsersService', issueUsersService);
   module.service('issueCommentsService', issueCommentsService);
   module.directive('issuesList', issuesList);
   module.directive('issueCreate', issueCreate);
