@@ -13,7 +13,7 @@
       <dl class="dl-horizontal resource-details-table col-sm-12">
         <div class="m-b-xs">
           <dt>Caller:</dt>
-          <dd>{{ ::$ctrl.issue.caller_name }}</dd>
+          <dd>{{ ::$ctrl.issue.caller_full_name }}</dd>
         </div>
 
         <div class="m-b-xs">
@@ -46,6 +46,11 @@
           <dd>{{ ::$ctrl.issue.resource_type }}</dd>
         </div>
 
+        <div class="m-b-xs" ng-if="::$ctrl.issue.resource_name">
+          <dt>Affected resource:</dt>
+          <dd>{{ ::$ctrl.issue.resource_name }}</dd>
+        </div>
+
         <div class="m-b-xs">
           <dt>Status:</dt>
           <dd>{{ ::$ctrl.issue.status }}</dd>
@@ -54,6 +59,21 @@
         <div class="m-b-xs" ng-if="::$ctrl.issue.resolution">
           <dt>Resolution:</dt>
           <dd>{{ ::$ctrl.issue.resolution }}</dd>
+        </div>
+
+        <div class="m-b-xs" ng-if="::$ctrl.issue.priority">
+          <dt>Priority:</dt>
+          <dd>{{ ::$ctrl.issue.priority }}</dd>
+        </div>
+
+        <div class="m-b-xs" ng-if="::$ctrl.issue.link">
+          <dt>Link:</dt>
+          <dd>
+            <a href="{{ ::$ctrl.issue.link }}" class="btn btn-default">
+              <i class="fa fa-external-link"></i>
+              Open in JIRA
+            </a>
+          </dd>
         </div>
 
         <div class="m-b-xs">
