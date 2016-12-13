@@ -11,8 +11,8 @@
                                          allow-clear="true">
                             {{ $select.selected.full_name || $select.selected.username }}
                         </ui-select-match>
-                        <ui-select-choices repeat="option in $ctrl.filterService.users"
-                                           refresh="$ctrl.filterService.refreshUsers($select.search)"
+                        <ui-select-choices repeat="option in $ctrl.users"
+                                           refresh="$ctrl.refreshUsers($select.search)"
                                            refresh-delay="0"
                                            spinner-enabled="true">
                             {{ option.full_name || option.username }}
@@ -39,8 +39,8 @@
                                          allow-clear="true">
                             {{ $select.selected.name }}
                         </ui-select-match>
-                        <ui-select-choices repeat="option in $ctrl.filterService.customers"
-                                           refresh="$ctrl.filterService.refreshCustomers($select.search)"
+                        <ui-select-choices repeat="option in $ctrl.customers"
+                                           refresh="$ctrl.refreshCustomers($select.search)"
                                            refresh-delay="0"
                                            spinner-enabled="true">
                             {{ option.name }}
@@ -121,8 +121,8 @@
                                          allow-clear="true">
                             {{ $select.selected.name }}
                         </ui-select-match>
-                        <ui-select-choices repeat="option in $ctrl.filterService.projects"
-                                           refresh="$ctrl.filterService.refreshProjects($select.search)"
+                        <ui-select-choices repeat="option in $ctrl.projects"
+                                           refresh="$ctrl.refreshProjects($select.search)"
                                            refresh-delay="0"
                                            spinner-enabled="true">
                             {{ option.name }}
@@ -141,10 +141,10 @@
                 <div class="col-sm-7" ng-class="{disabled: !$ctrl.issue.project}">
                     <ui-select ng-model="$ctrl.issue.scope">
                         <ui-select-match placeholder="Select scope...">
-                            {{ $select.selected.label }}
+                            {{ $select.selected.display_name }}
                         </ui-select-match>
                         <ui-select-choices repeat="option in $ctrl.scopes">
-                            {{ option.label }}
+                            {{ option.display_name }}
                         </ui-select-choices>
                     </ui-select>
                 </div>
@@ -159,8 +159,8 @@
                                          allow-clear="true">
                             {{ $select.selected.name }}
                         </ui-select-match>
-                        <ui-select-choices repeat="option in $ctrl.filterService.resources"
-                                           refresh="$ctrl.filterService.refreshResources($select.search)"
+                        <ui-select-choices repeat="option in $ctrl.resources"
+                                           refresh="$ctrl.refreshResources($select.search)"
                                            refresh-delay="0"
                                            spinner-enabled="true">
                             {{ option.name }}
