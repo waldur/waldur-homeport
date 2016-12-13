@@ -1,0 +1,16 @@
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div ng-if="$ctrl.loading">
+                        <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
+                    </div>
+                    <div ng-if="!$ctrl.loading">
+                      <issues-list project="$ctrl.project"></issues-list>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -18,9 +18,7 @@ export default function projectRoutes($stateProvider) {
 
     .state('project-create', {
       url: '/projects/add/',
-      templateUrl: 'views/project/create.html',
-      controller: 'ProjectAddController',
-      controllerAs: 'ProjectAdd',
+      template: '<project-create></project-create>',
       data: {
         pageTitle: 'Create project',
         workspace: 'organization',
@@ -36,6 +34,15 @@ export default function projectRoutes($stateProvider) {
       bindToController: true,
       data: {
         pageTitle: 'Project dashboard',
+        pageClass: 'gray-bg'
+      }
+    })
+
+    .state('project.issues', {
+      url: 'issues/',
+      template: '<project-issues></project-issues>',
+      data: {
+        pageTitle: 'Issues',
         pageClass: 'gray-bg'
       }
     })
