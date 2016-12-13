@@ -24,11 +24,11 @@ function IssueListController(
       this.service = issuesService;
       this.controllerScope = controllerScope;
       this._super();
-      this.searchFieldName = 'search';
       this.tableOptions = angular.extend({
         disableAutoUpdate: true,
         disableSearch: true,
         enableOrdering: true,
+        searchFieldName: 'summary',
         entityData: {
           noDataText: 'No tickets yet.',
           noMatchesText: 'No tickets found matching filter.',

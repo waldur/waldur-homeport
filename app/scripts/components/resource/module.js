@@ -4,6 +4,7 @@ import resourceEvents from './resource-events';
 import resourceRoutes from './routes';
 import resourceState from './resource-state';
 import ResourceStateConfiguration from './resource-state-configuration';
+import resourceIssues from './resource-issues';
 
 export default module => {
   module.service('resourceUtils', resourceUtils);
@@ -11,5 +12,6 @@ export default module => {
   module.directive('resourceDetails', resourceDetails);
   module.directive('resourceEvents', resourceEvents);
   module.directive('resourceState', resourceState);
+  module.directive('resourceIssues', resourceIssues);
   module.config(resourceRoutes);
 };

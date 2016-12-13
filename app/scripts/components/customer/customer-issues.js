@@ -40,9 +40,10 @@ class CustomerIssuesController {
           name: '<i class="fa fa-plus"></i> Create',
           callback: () => {
             this.$uibModal.open({
-              component: 'issueCreateDialog'
-            }).result.then(() => {
-              this.$rootScope.$broadcast('refreshIssuesList');
+              component: 'issueCreateDialog',
+              resolve: {
+                issue: () => ({customer})
+              }
             });
           }
         }

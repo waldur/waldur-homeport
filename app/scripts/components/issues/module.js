@@ -14,6 +14,7 @@ import issueQuickCreate from './issue-quick-create';
 import issuesActivityStream from './issues-activity-stream';
 import issuesListFiltered from './issues-list-filtered';
 import issuesHelpdesk from './issues-helpdesk';
+import issueCreateDialog from './issue-create-dialog';
 import issueRegistration from './issue-registration';
 
 export default module => {
@@ -32,6 +33,7 @@ export default module => {
   module.directive('issuesActivityStream', issuesActivityStream);
   module.directive('issuesListFiltered', issuesListFiltered);
   module.directive('issuesHelpdesk', issuesHelpdesk);
+  module.directive('issueCreateDialog', issueCreateDialog);
   module.directive('issueRegistration', issueRegistration);
   module.config(issueRoutes);
 }

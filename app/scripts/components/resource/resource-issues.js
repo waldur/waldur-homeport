@@ -1,36 +1,27 @@
-import template from './project-issues.html';
-
-export default function projectIssues() {
+export default function resourceIssues() {
   return {
     restrict: 'E',
-    controller: ProjectIssuesController,
+    controller: ResourceIssuesController,
     controllerAs: '$ctrl',
-    template: template,
-    scope: {},
+    template: `<issues-list filter="$ctrl.filter" options="$ctrl.options"></issues-list>`,
+    scope: {
+      resource: '='
+    },
     bindToController: true
   };
 }
 
-class ProjectIssuesController {
-  constructor(currentStateService, $uibModal, $rootScope) {
-    this.currentStateService = currentStateService;
+// @ngInject
+class ResourceIssuesController {
+  constructor($uibModal, $rootScope) {
     this.$uibModal = $uibModal;
     this.$rootScope = $rootScope;
     this.init();
   }
 
   init() {
-    this.loading = true;
-    this.currentStateService.getProject().then(project => {
-      this.setOptions(project);
-    }).finally(() => {
-      this.loading = false;
-    });
-  }
-
-  setOptions(project) {
     this.filter = {
-      project: project.url
+      resource: this.resource.url
     };
     this.options = {
       disableAutoUpdate: false,
@@ -42,7 +33,7 @@ class ProjectIssuesController {
             this.$uibModal.open({
               component: 'issueCreateDialog',
               resolve: {
-                issue: () => ({project})
+                issue: () => ({resource: this.resource})
               }
             });
           }
