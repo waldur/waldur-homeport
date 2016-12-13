@@ -75,7 +75,7 @@ function IssueListController(
             }
           },
           {
-            title: 'Scope',
+            title: 'Service type',
             orderable: false,
             render: function(data, type, row, meta) {
               return row.resource_type || 'N/A';
