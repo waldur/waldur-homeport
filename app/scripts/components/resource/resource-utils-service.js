@@ -63,7 +63,7 @@ export default function resourceUtils(ncUtils, ncServiceUtils, authService, $fil
     },
     getUptime: function(resource) {
       if (resource.start_time) {
-        return moment(resource.start_time).fromNow().replace(' ago', '');
+        return ncUtils.relativeDate(resource.start_time);
       }
     },
     getIcon: function(item) {

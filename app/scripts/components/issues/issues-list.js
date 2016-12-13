@@ -88,9 +88,9 @@ function IssueListController(baseControllerListClass, issuesService, $filter, $s
           },
           {
             title: 'Caller',
-            orderField: 'caller_name',
+            orderField: 'caller_full_name',
             render: function(data, type, row, meta) {
-              return row.caller_name;
+              return row.caller_full_name;
             },
             width: 170
           },
@@ -130,7 +130,7 @@ function IssueListController(baseControllerListClass, issuesService, $filter, $s
             title: 'Time in progress',
             orderable: false,
             render: function(data, type, row, meta) {
-              return '1h';
+              return ncUtils.relativeDate(row.created);
             },
             width: 100
           }
