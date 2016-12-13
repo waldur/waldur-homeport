@@ -4,7 +4,7 @@ export default function resourceRoutes($stateProvider) {
     .state('resources', {
       url: '/resources/',
       abstract: true,
-      templateUrl: 'views/resource/base.html',
+      template: '<ui-view></ui-view>',
       data: {
         auth: true,
         workspace: 'project',
@@ -15,7 +15,7 @@ export default function resourceRoutes($stateProvider) {
 
     .state('resources.details', {
       url: ':resource_type/:uuid',
-      templateUrl: 'views/resource/details.html',
+      templateUrl: 'views/resource/base.html',
       controller: 'ResourceDetailUpdateController as controller'
     });
 }
