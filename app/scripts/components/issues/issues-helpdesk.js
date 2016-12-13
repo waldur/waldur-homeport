@@ -23,7 +23,7 @@ class IssuesHelpdeskController {
     }
     let filter = {};
     if (issue.caller) {
-      filter.caller_user = issue.caller.url;
+      filter.caller = issue.caller.url;
     }
     if (issue.customer) {
       filter.customer = issue.customer.url;
