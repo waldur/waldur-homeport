@@ -22,7 +22,7 @@
             // Table should be initialized once
             return;
           }
-          if (newTableOptions.columns) {
+          if (newTableOptions && newTableOptions.columns) {
             options = newTableOptions;
             table = initTable();
             connectRowButtons(table);
