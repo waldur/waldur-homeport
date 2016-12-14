@@ -39,7 +39,7 @@
           var columns = getColumns();
           var dom = getDom();
 
-          var table = $(element.find('table')[0]).DataTable({
+          var tableOptions = {
             responsive: true,
             processing: true,
             serverSide: true,
@@ -53,15 +53,22 @@
               emptyTable: options.noDataText,
               zeroRecords: options.noMatchesText
             },
-            scrollY: options.scrollY,
-            scrollCollapse: options.scrollCollapse,
             fnDrawCallback: function() {
               $(element).find('tr').each(function(index, element) {
                 $compile(element)(scope);
               });
             }
-          });
-          return table;
+          };
+
+          if (options.scrollY) {
+            tableOptions.scrollY = options.scrollY;
+          }
+
+          if (options.scrollCollapse) {
+            tableOptions.scrollCollapse = options.scrollCollapse;
+          }
+
+          return $(element.find('table')[0]).DataTable(tableOptions);
         }
 
         function getDom() {
