@@ -13,7 +13,6 @@ export default function ProviderListController(
   ENTITYLISTFIELDTYPES,
   currentStateService,
   customersService,
-  currentCustomer,
   currentUser,
   ncServiceUtils
   ) {
@@ -24,115 +23,118 @@ export default function ProviderListController(
       this.controllerScope = controllerScope;
       this.service = joinService;
       this.service.defaultFilter.customer = $stateParams.uuid;
-      this.checkPermissions();
-      this.tableOptions = {
-        searchFieldName: 'name',
-        noDataText: 'No providers yet.',
-        noMatchesText: 'No providers found matching filter.',
-        columns: [
-          {
-            title: 'Type',
-            className: 'all',
-            render: function(data, type, row, meta) {
-              return row.service_type;
-            }
-          },
-          {
-            title: 'Name',
-            className: 'all',
-            render: function(data, type, row, meta) {
-              return row.name;
-            }
-          },
-          {
-            title: 'State',
-            className: 'text-center min-tablet-l',
-            render: function(data, type, row, meta) {
-              var cls = ncServiceUtils.getStateClass(row.state);
-              return '<a class="{cls}" title="{title}"></a>'
-                        .replace('{cls}', cls).replace('{title}', row.state);
-            },
-            width: '40px'
-          },
-          {
-            title: 'System provider',
-            className: 'text-center min-tablet-l',
-            render: function(data, type, row, meta) {
-              var cls = row.shared && 'fa-check' || 'fa-minus';
-              return '<a class="bool-field"><i class="fa {cls}"/></a>'.replace('{cls}', cls);
-            },
-            width: '100px'
-          },
-          {
-            title: 'Resources',
-            className: 'text-center min-tablet-l',
-            render: function(data, type, row, meta) {
-              if (!controllerScope.canUserManageService) {
-                return 'N/A';
-              }
-              return row.resources_count || 0;
-            },
-            width: '40px'
-          }
-        ],
-        rowActions: [
-          {
-            name: '<i class="fa fa-search"></i> Details',
-            callback: this.openDialog
-          },
-          {
-            name: '<i class="fa fa-trash"></i> Remove',
-            callback: this.remove.bind(this.controllerScope),
-
-            isDisabled: function(service) {
-              return service.shared || !this.canUserManageService || service.resources_count > 0;
-            }.bind(this.controllerScope),
-
-            tooltip: function(service) {
-              if (service.shared) {
-                return 'You cannot remove shared provider';
-              }
-              if (!this.canUserManageService) {
-                return 'Only customer owner or staff can remove provider';
-              }
-              if (service.resources_count > 0) {
-               return 'Provider has resources. Please remove them first';
-              }
-            }.bind(this.controllerScope),
-          },
-
-          {
-            name: '<i class="fa fa-chain-broken"></i> Unlink',
-
-            callback: function(service) {
-              var vm = this.controllerScope;
-              var confirmDelete = confirm('Are you sure you want to unlink provider and all related resources?');
-              if (confirmDelete) {
-                vm.unlinkService(service).then(function() {
-                  vm.afterInstanceRemove(service);
-                }, vm.handleActionException.bind(vm));
-              }
-            }.bind(this.controllerScope),
-
-            isDisabled: function(service) {
-              return !this.canUserManageService;
-            }.bind(this.controllerScope),
-
-            tooltip: function(service) {
-              if (!this.canUserManageService) {
-                return 'Only customer owner or staff can unlink provider.';
-              }
-            }.bind(this.controllerScope),
-          }
-        ],
-        tableActions: this.getTableActions(),
-        actionsColumnWidth: '250px'
-      };
       this._super();
       this.showSelectedProvider();
       $scope.$on('refreshProviderList', function() {
         controllerScope.resetCache();
       });
+      currentStateService.getCustomer().then(customer => {
+        this.currentCustomer = customer;
+        this.checkPermissions();
+        this.tableOptions = {
+          searchFieldName: 'name',
+          noDataText: 'No providers yet.',
+          noMatchesText: 'No providers found matching filter.',
+          columns: [
+            {
+              title: 'Type',
+              className: 'all',
+              render: function(data, type, row, meta) {
+                return row.service_type;
+              }
+            },
+            {
+              title: 'Name',
+              className: 'all',
+              render: function(data, type, row, meta) {
+                return row.name;
+              }
+            },
+            {
+              title: 'State',
+              className: 'text-center min-tablet-l',
+              render: function(data, type, row, meta) {
+                var cls = ncServiceUtils.getStateClass(row.state);
+                return '<a class="{cls}" title="{title}"></a>'
+                  .replace('{cls}', cls).replace('{title}', row.state);
+              },
+              width: '40px'
+            },
+            {
+              title: 'System provider',
+              className: 'text-center min-tablet-l',
+              render: function(data, type, row, meta) {
+                var cls = row.shared && 'fa-check' || 'fa-minus';
+                return '<a class="bool-field"><i class="fa {cls}"/></a>'.replace('{cls}', cls);
+              },
+              width: '100px'
+            },
+            {
+              title: 'Resources',
+              className: 'text-center min-tablet-l',
+              render: function(data, type, row, meta) {
+                if (!controllerScope.canUserManageService) {
+                  return 'N/A';
+                }
+                return row.resources_count || 0;
+              },
+              width: '40px'
+            }
+          ],
+          rowActions: [
+            {
+              name: '<i class="fa fa-search"></i> Details',
+              callback: this.openDialog
+            },
+            {
+              name: '<i class="fa fa-trash"></i> Remove',
+              callback: this.remove.bind(this.controllerScope),
+
+              isDisabled: function(service) {
+                return service.shared || !this.canUserManageService || service.resources_count > 0;
+              }.bind(this.controllerScope),
+
+              tooltip: function(service) {
+                if (service.shared) {
+                  return 'You cannot remove shared provider';
+                }
+                if (!this.canUserManageService) {
+                  return 'Only customer owner or staff can remove provider';
+                }
+                if (service.resources_count > 0) {
+                  return 'Provider has resources. Please remove them first';
+                }
+              }.bind(this.controllerScope),
+            },
+
+            {
+              name: '<i class="fa fa-chain-broken"></i> Unlink',
+
+              callback: function(service) {
+                var vm = this.controllerScope;
+                var confirmDelete = confirm('Are you sure you want to unlink provider and all related resources?');
+                if (confirmDelete) {
+                  vm.unlinkService(service).then(function() {
+                    vm.afterInstanceRemove(service);
+                  }, vm.handleActionException.bind(vm));
+                }
+              }.bind(this.controllerScope),
+
+              isDisabled: function(service) {
+                return !this.canUserManageService;
+              }.bind(this.controllerScope),
+
+              tooltip: function(service) {
+                if (!this.canUserManageService) {
+                  return 'Only customer owner or staff can unlink provider.';
+                }
+              }.bind(this.controllerScope),
+            }
+          ],
+          tableActions: this.getTableActions(),
+          actionsColumnWidth: '250px'
+        };
+      })
     },
     openDialog: function(row) {
       $uibModal.open({
@@ -146,8 +148,9 @@ export default function ProviderListController(
       });
     },
     getTableActions: function() {
-      var quotaReached = ncUtils.isCustomerQuotaReached(currentCustomer, 'service');
-      var title;
+      let vm = this;
+      var quotaReached = ncUtils.isCustomerQuotaReached(vm.currentCustomer, 'service');
+      let title;
       if (!this.canUserManageService) {
         title = 'Only customer owner or staff can create provider.';
       }
@@ -176,7 +179,7 @@ export default function ProviderListController(
       this._super(instance);
     },
     checkPermissions: function() {
-      this.canUserManageService = customersService.checkCustomerUser(currentCustomer, currentUser);
+      this.canUserManageService = customersService.checkCustomerUser(this.currentCustomer, currentUser);
     },
     afterInstanceRemove: function(instance) {
       this._super(instance);
