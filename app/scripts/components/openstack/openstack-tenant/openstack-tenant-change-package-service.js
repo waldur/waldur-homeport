@@ -6,11 +6,12 @@ export default class openstackTenantChangePackageService {
   // * loadData - returns promise with fields {package, template, templates}
   // * saveData - accepts dictionary with fields {tenant, package, template, newTemplate}
 
-  constructor($q, packageTemplatesService, openstackPackagesService, issuesService) {
+  constructor($q, packageTemplatesService, openstackPackagesService, issuesService, ncUtilsFlash) {
     this.$q = $q;
     this.packageTemplatesService = packageTemplatesService;
     this.openstackPackagesService = openstackPackagesService;
     this.issuesService = issuesService;
+    this.ncUtilsFlash = ncUtilsFlash;
   }
 
   loadData(tenant) {
@@ -22,9 +23,19 @@ export default class openstackTenantChangePackageService {
 
   saveData(context) {
     if (this.compareTemplates(context.newTemplate, context.template)) {
-      return this.createIssue(context);
+      return this.createIssue(context).then(() => {
+        this.ncUtilsFlash.success('Request to change tenant package has been created.');
+      }).catch(response => {
+        this.ncUtilsFlash.error('Unable to create request to change tenant package.');
+        return response;
+      });
     } else {
-      return this.extendPackage(context);
+      return this.extendPackage(context).then(() => {
+        this.ncUtilsFlash.success('Tenant package has been upgraded.');
+      }).catch(response => {
+        this.ncUtilsFlash.error('Unable to upgraded tenant package.');
+        return response;
+      });
     }
   }
 
