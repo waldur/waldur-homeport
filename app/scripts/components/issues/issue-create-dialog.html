@@ -9,7 +9,7 @@
             </label>
             <div class="col-sm-9">
                 <ui-select ng-model="$ctrl.issue.type" name="type" required ng-class="{disabled: $ctrl.saving}">
-                    <ui-select-match placeholder="Select issue type..."
+                    <ui-select-match placeholder="Select request type..."
                                      allow-clear="true">
                         <i class="fa" ng-class="[$select.selected.iconClass, $select.selected.textClass]"></i>
                         {{ $select.selected.label }}

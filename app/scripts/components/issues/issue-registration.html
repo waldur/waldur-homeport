@@ -79,7 +79,7 @@
                 </label>
                 <div class="col-sm-6">
                     <ui-select ng-model="$ctrl.issue.type" name="type" required>
-                        <ui-select-match placeholder="Select issue type..."
+                        <ui-select-match placeholder="Select request type..."
                                          allow-clear="true">
                             <i class="fa" ng-class="[$select.selected.iconClass, $select.selected.textClass]"></i>
                             {{ $select.selected.label }}
@@ -162,7 +162,7 @@
                 </label>
                 <div class="col-sm-6" ng-class="{disabled: !$ctrl.issue.project}">
                     <ui-select ng-model="$ctrl.issue.scope">
-                        <ui-select-match placeholder="Select scope...">
+                        <ui-select-match placeholder="Select service type...">
                             {{ $select.selected.display_name }}
                         </ui-select-match>
                         <ui-select-choices repeat="option in $ctrl.scopes">
@@ -216,7 +216,7 @@
             <i class="fa fa-search"></i> Search
         </button>
         <button class="btn btn-primary" type="submit" submit-button="$ctrl.save()">
-            <i class="fa fa-plus"></i> Create issue
+            <i class="fa fa-plus"></i> Create request
         </button>
     </div>
 </div>

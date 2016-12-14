@@ -63,7 +63,7 @@ export const ISSUE_FILTERS = [
   },
   {
     name: 'scope',
-    label: 'Scope'
+    label: 'Service type'
   },
   {
     name: 'resource',

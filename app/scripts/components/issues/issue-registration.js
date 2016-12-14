@@ -187,7 +187,7 @@ class IssueRegistrationController {
     this.saving = true;
     return this.service.createIssue(issue).then(issue => {
       this.service.clearAllCacheForCurrentEndpoint();
-      this.ncUtilsFlash.success(`Issue ${issue.key} has been created`);
+      this.ncUtilsFlash.success(`Request ${issue.key} has been created`);
       return this.$state.go('support.detail', {uuid: issue.uuid});
     }).finally(() => {
       this.saving = false;
