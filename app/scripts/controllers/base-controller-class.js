@@ -59,6 +59,7 @@
         this.controlPanelShow = ENV.listControlPanelShow;
         // XXX: Temporarily disable Intercom
         //ncUtils.updateIntercom();
+        this.enableRefresh = true;
       },
       getList: function(filter) {
         // It should return promise
@@ -90,6 +91,9 @@
         return vm.getList(filter);
       },
       resetCache: function () {
+        if (!this.enableRefresh) {
+          return;
+        }
         var vm = this;
         var filter = {};
         if (vm.searchInput) {
@@ -180,7 +184,10 @@
         });
 
       },
-      showMore: function() {}
+      showMore: function() {},
+      toggleRefresh: function(open) {
+        this.enableRefresh = !open;
+      }
     });
 
     return ControllerListClass;
