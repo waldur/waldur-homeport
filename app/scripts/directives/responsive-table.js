@@ -27,6 +27,7 @@
             table = initTable();
             connectRowButtons(table);
             connectWatcher(table);
+            registerEvents(table);
           }
         });
 
@@ -112,6 +113,19 @@
               className: action.disabled && 'disabled' || '',
               titleAttr: action.titleAttr
             };
+          });
+        }
+
+        function registerEvents(table) {
+          table.on('click', 'tr', function() {
+            var tr = $(this).closest('tr');
+            var row = table.row(tr);
+            if (row.child.isShown()) {
+              scope.controller.toggleRefresh(true);
+            }
+            else {
+              scope.controller.toggleRefresh(false);
+            }
           });
         }
 
