@@ -17,6 +17,7 @@ function UserProjectsController(
       this.service = projectPermissionsService;
       this.controllerScope = controllerScope;
       this.tableOptions = {
+        disableSearch: true,
         noDataText: 'No projects yet',
         noMatchesText: 'No projects found matching filter.',
 
