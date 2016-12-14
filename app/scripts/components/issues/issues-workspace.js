@@ -22,7 +22,7 @@ function IssuesWorkspaceController($scope) {
       link: "support.helpdesk"
     },
     {
-      label: "Issues",
+      label: "Requests",
       icon: "fa-list",
       link: "support.list"
     },

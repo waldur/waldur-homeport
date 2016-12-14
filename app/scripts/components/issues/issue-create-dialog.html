@@ -1,11 +1,11 @@
 <div class="modal-header">
-    <h3 class="modal-title">Create issue</h3>
+    <h3 class="modal-title">Create request</h3>
 </div>
 <div class="modal-body">
     <form class="form-horizontal" name="$ctrl.IssueForm">
         <div class="form-group">
             <label for="issueType" class="col-sm-3 control-label">
-                Issue type <span class="text-danger">*</span>
+                Request type <span class="text-danger">*</span>
             </label>
             <div class="col-sm-9">
                 <ui-select ng-model="$ctrl.issue.type" name="type" required ng-class="{disabled: $ctrl.saving}">

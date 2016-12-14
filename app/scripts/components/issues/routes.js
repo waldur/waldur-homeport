@@ -32,7 +32,7 @@ export default function issueRoutes($stateProvider) {
       url: 'issue/:uuid/',
       template: '<issue-detail></issue-detail>',
       data: {
-        pageTitle: 'Issue detail'
+        pageTitle: 'Request detail'
       }
     })
 
@@ -40,7 +40,7 @@ export default function issueRoutes($stateProvider) {
       url: 'list/',
       template: '<issues-list-filtered></issues-list-filtered>',
       data: {
-        pageTitle: 'List issues'
+        pageTitle: 'List requests'
       }
     })
 
@@ -48,7 +48,7 @@ export default function issueRoutes($stateProvider) {
       url: 'add/:type',
       template: '<issue-create></issue-create>',
       data: {
-        pageTitle: 'Create issue'
+        pageTitle: 'Create requests'
       }
     });
 }

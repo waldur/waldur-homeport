@@ -71,7 +71,7 @@ export const ISSUE_FILTERS = [
   },
   {
     name: 'type',
-    label: 'Issue type'
+    label: 'Request type'
   },
   {
     name: 'status',
@@ -110,7 +110,7 @@ export const ISSUE_FILTERS_SHORT = {
       label: 'Key'
     },
     type: {
-      label: 'Issue type'
+      label: 'Request type'
     },
     status: {
       label: 'Status'
