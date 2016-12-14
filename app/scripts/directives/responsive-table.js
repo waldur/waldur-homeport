@@ -120,7 +120,13 @@
           table.on('click', 'tr', function() {
             var tr = $(this).closest('tr');
             var row = table.row(tr);
-            if (row.child.isShown()) {
+            var rowShown = false;
+            table.rows().every(function(rowIndex){
+              if (table.row(rowIndex).child.isShown()) {
+                rowShown = true;
+              }
+            });
+            if (rowShown) {
               scope.controller.toggleRefresh(true);
             }
             else {

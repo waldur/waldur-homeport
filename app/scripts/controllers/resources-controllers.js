@@ -47,15 +47,6 @@
         this._super();
         this.hasCustomFilters = false;
       },
-      toggleRefresh: function(open) {
-        this.enableRefresh = !open;
-      },
-      resetCache: function () {
-        if (!this.enableRefresh) {
-          return;
-        }
-        this._super();
-      },
       getTableOptions: function() {
         var vm = this.controllerScope;
         return {
@@ -458,10 +449,6 @@
         } else {
           this.resourceTab = ENV.resourcesTypes.vms;
         }
-      },
-
-      toggleRefresh: function(open) {
-        controllerScope.enableRefresh = !open;
       },
 
       scheduleRefresh: function() {
