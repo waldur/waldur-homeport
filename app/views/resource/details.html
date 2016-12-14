@@ -19,6 +19,11 @@
               <resource-events resource="controller.model"></resource-events>
             </div>
           </uib-tab>
+          <uib-tab heading="Issues" index="'issues'">
+            <div class="panel-body" ng-if="active=='issues'">
+              <resource-issues resource="controller.model"></resource-issues>
+            </div>
+          </uib-tab>
           <uib-tab heading="Alerts" index="'alerts'" visible-if="'alerts'">
             <div class="panel-body" ng-if="active=='alerts'" ng-include="'views/resource/tab-alerts.html'"></div>
           </uib-tab>

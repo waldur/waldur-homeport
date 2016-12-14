@@ -42,10 +42,7 @@
       getList:function(filter, endpointUrl) {
         var vm = this;
         var deferred = $q.defer();
-        filter = filter || {};
-        for (var key in this.defaultFilter) {
-          filter[key] = this.defaultFilter[key];
-        }
+        filter = angular.extend({}, this.defaultFilter, filter);
         var queryList = function() {
           filter.page = filter.page || vm.page;
           /*jshint camelcase: false */

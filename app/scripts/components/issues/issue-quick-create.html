@@ -1,0 +1,71 @@
+<div class="ibox float-e-margins">
+    <div class="ibox-title">
+        <h5>Create request</h5>
+    </div>
+    <div class="ibox-content">
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label for="issueType" class="col-sm-3 control-label">
+                    Request type
+                </label>
+                <div class="col-sm-9">
+                    <ui-select ng-model="$ctrl.issue.type" theme="bootstrap">
+                        <ui-select-match placeholder="Select request type...">
+                            <i class="fa" ng-class="[$select.selected.iconClass, $select.selected.textClass]"></i>
+                            {{ $select.selected.label }}
+                        </ui-select-match>
+                        <ui-select-choices repeat="option in $ctrl.issueTypes">
+                            <i class="fa" ng-class="[option.iconClass, option.textClass]"></i>
+                            {{ option.label }}
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="issueName" class="col-sm-3 control-label">
+                    Title
+                </label>
+                <div class="col-sm-9">
+                    <input type="text"
+                        id="issueName"
+                        ng-model="$ctrl.issue.name"
+                        class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="issueDescription" class="col-sm-3 control-label">
+                    Description
+                </label>
+                <div class="col-sm-9">
+                    <textarea type="text"
+                        id="issueDescription"
+                        ng-model="$ctrl.issue.description"
+                        class="form-control"/>
+                </div>
+            </div>
+            <div class="form-group" ng-repeat="item in $ctrl.contextItems">
+                <label class="col-sm-3 control-label">
+                    {{ item.label }}
+                </label>
+                <div class="col-sm-9">
+                    <ui-select ng-model="item.value" theme="bootstrap">
+                        <ui-select-match placeholder="Select {{ item.label | lowercase }}...">
+                            {{ $select.selected.name }}
+                        </ui-select-match>
+                        <ui-select-choices repeat="option in item.options">
+                            {{ option.name }}
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+            </div>
+            <div class="text-right">
+                <a class="btn btn-primary"
+                    submit-button="$ctrl.save()"
+                    type="submit">
+                    <i class="fa fa fa-plus"></i>
+                    Create request
+                </a>
+            </div>
+        </form>
+    </div>
+</div>

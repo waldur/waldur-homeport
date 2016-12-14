@@ -67,7 +67,7 @@
         filter = filter || {};
         vm.service.cacheTime = vm.cacheTime;
         filter = angular.extend(filter, this.getFilter());
-        return vm.service.getList(filter).then(function(response) {
+        var promise = vm.service.getList(filter).then(function(response) {
           if (vm.mergeListFieldIdentifier) {
             vm.list = ncUtils.mergeLists(vm.list, response, vm.mergeListFieldIdentifier);
           } else {
@@ -76,6 +76,8 @@
           vm.afterGetList();
           vm.hideNoDataText = false;
         });
+        vm.blockListElement(promise);
+        return promise;
       },
       getFilter: function() {
         return {};
