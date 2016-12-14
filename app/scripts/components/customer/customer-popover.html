@@ -2,36 +2,43 @@
     <h3 class="modal-title">{{ $ctrl.customer.name }}</h3>
 </div>
 <div class="modal-body">
-    <uib-tabset>
-        <uib-tab heading="Company data">
-            <div class="panel-body m-l-n m-r-n">
+    <div ng-if="$ctrl.loading">
+        <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
+    </div>
+
+    <uib-tabset ng-if="!$ctrl.loading" active="active">
+        <uib-tab heading="Company data" index="'summary'">
+            <div class="panel-body m-l-n m-r-n" ng-if="active === 'summary'">
                 <div class="table-responsive">
                     <table class="table table-bordered">
                         <tbody>
                             <tr>
-                                <td><strong>Organization type</strong></td>
-                                <td>{{ $ctrl.customer.type }}</td>
+                                <td class="col-md-3"><strong>Organization type</strong></td>
+                                <td class="col-md-9">{{ $ctrl.customer.type || 'N/A' }}</td>
                             </tr>
                             <tr>
                                 <td><strong>Registration code</strong></td>
-                                <td>{{ $ctrl.customer.registration_code }}</td>
+                                <td>{{ $ctrl.customer.registration_code || 'N/A' }}</td>
                             </tr>
                             <tr>
                                 <td><strong>Legal address</strong></td>
-                                <td>{{ $ctrl.customer.address }}</td>
+                                <td>{{ $ctrl.customer.address || 'N/A' }}</td>
                             </tr>
                             <tr>
                                 <td><strong>Contact email</strong></td>
-                                <td>{{ $ctrl.customer.email }}</td>
+                                <td>{{ $ctrl.customer.email || 'N/A' }}</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
         </uib-tab>
-        <uib-tab heading="Authorized personnel">
-            <div class="panel-body m-l-n m-r-n">
-                <user-popover-table user="$ctrl.customer.authorized_personnel"></user-popover-table>
+        <uib-tab heading="Authorized personnel" index="'users'">
+            <div class="panel-body m-l-n m-r-n" ng-if="active === 'users'">
+                <customer-users-list
+                    customer="$ctrl.customer"
+                    options="$ctrl.options">
+                </customer-users-list>
             </div>
         </uib-tab>
     </uib-tabset>

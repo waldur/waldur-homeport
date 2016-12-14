@@ -4,7 +4,11 @@ export default function customerUsersList() {
     controller: CustomerUsersListController,
     controllerAs: 'ListController',
     templateUrl: 'views/partials/filtered-list.html',
-    scope: {}
+    scope: {},
+    bindToController: {
+      customer: '=',
+      options: '='
+    }
   };
 }
 
@@ -30,19 +34,26 @@ function CustomerUsersListController(
       var fn = this._super.bind(this);
       this.loading = true;
       $q.all([
-        currentStateService.getCustomer().then(customer => {
-          this.currentCustomer = customer;
-        }),
+        this.loadCustomer(),
         usersService.getCurrentUser().then(user => {
           this.currentUser = user;
         })
       ]).then(() => {
         this.isOwnerOrStaff = customersService.checkCustomerUser(this.currentCustomer, this.currentUser);
-        this.tableOptions = this.getTableOptions();
+        this.tableOptions = angular.extend(this.getTableOptions(), controllerScope.options);
         fn();
       }).finally(() => {
         this.loading = false;
       });
+    },
+    loadCustomer: function() {
+      if (controllerScope.customer) {
+        this.currentCustomer = controllerScope.customer;
+      } else {
+        return currentStateService.getCustomer().then(customer => {
+          this.currentCustomer = customer;
+        });
+      }
     },
     getTableOptions: function() {
       var vm = this;

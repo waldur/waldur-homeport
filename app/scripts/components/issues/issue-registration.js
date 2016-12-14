@@ -206,6 +206,7 @@ class IssueRegistrationController {
   openCustomerDialog(customer) {
     this.$uibModal.open({
       component: 'customerPopover',
+      size: 'lg',
       resolve: {
         customer: () => customer
       }

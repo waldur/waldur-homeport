@@ -52,6 +52,8 @@
               emptyTable: options.noDataText,
               zeroRecords: options.noMatchesText
             },
+            scrollY: options.scrollY,
+            scrollCollapse: options.scrollCollapse,
             fnDrawCallback: function() {
               $(element).find('tr').each(function(index, element) {
                 $compile(element)(scope);
@@ -105,7 +107,7 @@
         }
 
         function getColumns() {
-          var columns = options.columns;
+          var columns = angular.copy(options.columns);
           if (options.rowActions && options.rowActions.length) {
             var actionColumn = getActionColumn(options.rowActions, options.actionsColumnWidth);
             columns.push(actionColumn);
