@@ -430,7 +430,9 @@
       },
       getPaymentDetails: function() {
         var vm = this;
-        paymentDetailsService.getList({customer: vm.customer.uuid}).then(function(result) {
+        paymentDetailsService.getList({
+          customer_uuid: vm.customer.uuid
+        }).then(function(result) {
           if (result) {
             vm.paymentDetails = result[0];
           }
