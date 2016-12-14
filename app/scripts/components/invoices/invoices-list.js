@@ -1,8 +1,8 @@
 // @ngInject
 export default function InvoicesListController(
   baseControllerListClass,
+  currentStateService,
   invoicesService,
-  currentCustomer,
   currentUser,
   ncUtilsFlash,
   $state,
@@ -14,6 +14,14 @@ export default function InvoicesListController(
       this.getSearchFilters();
       this.tableOptions = this.getTableOptions();
       this._super();
+    },
+    getList: function(filter) {
+      let fn = this._super.bind(this);
+      filter = filter || {};
+      return currentStateService.getCustomer().then(customer => {
+        this.currentCustomer = customer;
+        return fn(filter);
+      })
     },
     getTableOptions: function() {
       return {
@@ -131,7 +139,7 @@ export default function InvoicesListController(
     },
     getFilter: function() {
       return {
-        customer: currentCustomer.url
+        customer: this.currentCustomer.url
       };
     }
   });
