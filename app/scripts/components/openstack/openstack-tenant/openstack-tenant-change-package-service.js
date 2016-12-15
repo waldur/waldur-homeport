@@ -6,8 +6,10 @@ export default class openstackTenantChangePackageService {
   // * loadData - returns promise with fields {package, template, templates}
   // * saveData - accepts dictionary with fields {tenant, package, template, newTemplate}
 
-  constructor($q, packageTemplatesService, openstackPackagesService, issuesService, ncUtilsFlash) {
+  constructor($q, $state, packageTemplatesService,
+              openstackPackagesService, issuesService, ncUtilsFlash) {
     this.$q = $q;
+    this.$state = $state;
     this.packageTemplatesService = packageTemplatesService;
     this.openstackPackagesService = openstackPackagesService;
     this.issuesService = issuesService;
@@ -23,18 +25,19 @@ export default class openstackTenantChangePackageService {
 
   saveData(context) {
     if (this.compareTemplates(context.newTemplate, context.template)) {
-      return this.createIssue(context).then(() => {
+      return this.createIssue(context).then(issue => {
         this.ncUtilsFlash.success('Request to change tenant package has been created.');
+        return this.$state.go('support.detail', {uuid: issue.uuid});
       }).catch(response => {
         this.ncUtilsFlash.error('Unable to create request to change tenant package.');
-        return response;
+        return this.$q.reject(response);
       });
     } else {
       return this.extendPackage(context).then(() => {
         this.ncUtilsFlash.success('Tenant package has been upgraded.');
       }).catch(response => {
-        this.ncUtilsFlash.error('Unable to upgraded tenant package.');
-        return response;
+        this.ncUtilsFlash.error('Unable to upgrade tenant package.');
+        return this.$q.reject(response);
       });
     }
   }
@@ -77,9 +80,11 @@ export default class openstackTenantChangePackageService {
   }
 
   createIssue(context) {
-    return this.issuesService.createIssue({
+    return this.issuesService.createChangeRequest({
       summary: this.formatIssueSummary(context),
-      description: this.formatIssueDescription(context)
+      description: this.formatIssueDescription(context),
+      resource: context.tenant.url,
+      is_reported_manually: true
     });
   }
 

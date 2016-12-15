@@ -6,10 +6,10 @@ export const ISSUE_TYPES = [
 ];
 
 export const ISSUE_IDS = {
-  'Incident': 'Incident',
-  'Change request': 'Change request',
-  'Service request': 'Service request',
-  'Informational': 'Informational'
+  INCIDENT: 'Incident',
+  CHANGE_REQUEST: 'Change request',
+  SERVICE_REQUEST: 'Service request',
+  INFORMATIONAL: 'Informational'
 };
 
 export const ISSUE_CLASSES = {
@@ -44,7 +44,7 @@ export const ISSUE_TYPE_CHOICES = ISSUE_TYPES.map(item => {
     iconClass: ISSUE_ICONS[item],
     textClass: ISSUE_TEXT_CLASSES[item],
     label: item,
-    id: ISSUE_IDS[item]
+    id: item
   };
 });
 
