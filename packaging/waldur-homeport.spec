@@ -36,6 +36,8 @@ npm install --global bower grunt-cli
 npm install
 bower --allow-root --no-color install
 
+cp app/scripts/configs/custom-config.js.example app/scripts/configs/custom-config.js
+
 grunt prodbatch --mode=modePublicBrokerage
 grunt po2json_angular_translate
 
@@ -48,6 +50,7 @@ mkdir -p %{buildroot}%{__conf_dir}
 cp packaging%{__conf_dir}/custom-config.js %{buildroot}%{__conf_dir}
 cp packaging%{__conf_dir}/nginx.conf %{buildroot}%{__conf_dir}
 
+rm app/scripts/configs/custom-config.js
 rm app/scripts/configs/custom-config.js.example
 cp -r app %{buildroot}%{__data_dir}
 

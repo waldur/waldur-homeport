@@ -4,7 +4,7 @@ export default function organizationRoutes($stateProvider) {
     .state('dashboard', {
       url: '/dashboard/',
       abstract: true,
-      templateUrl: 'views/customer/base.html',
+      template: '<customer-workspace></customer-workspace>',
       data: {
         pageTitle: 'Dashboard',
         pageClass: 'gray-bg',
@@ -28,7 +28,7 @@ export default function organizationRoutes($stateProvider) {
         auth: true,
         workspace: 'organization'
       },
-      templateUrl: 'views/customer/base.html',
+      template: '<customer-workspace></customer-workspace>',
     })
 
     .state('organization.details', {
@@ -38,6 +38,14 @@ export default function organizationRoutes($stateProvider) {
       controllerAs: 'ListController',
       data: {
         pageTitle: 'Audit logs'
+      }
+    })
+
+    .state('organization.issues', {
+      url: 'issues/',
+      template: '<customer-issues></customer-issues>',
+      data: {
+        pageTitle: 'Issues'
       }
     })
 
@@ -53,9 +61,7 @@ export default function organizationRoutes($stateProvider) {
 
     .state('organization.projects', {
       url: 'projects/',
-      templateUrl: 'views/partials/filtered-list.html',
-      controller: 'CustomerProjectTabController',
-      controllerAs: 'ListController',
+      template: '<projects-list></projects-list>',
       data: {
         pageTitle: 'Projects'
       }
@@ -146,7 +152,7 @@ export default function organizationRoutes($stateProvider) {
     .state('services', {
       url: '/services/',
       abstract: true,
-      templateUrl: 'views/customer/base.html',
+      template: '<customer-workspace></customer-workspace>',
       data: {
         auth: true,
         workspace: 'organization'

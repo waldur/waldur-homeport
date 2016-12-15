@@ -65,8 +65,7 @@ function SelectWorkspaceDialogController(
 
     ctrl.createOrganization = function() {
       var promise = $uibModal.open({
-        templateUrl: 'views/customer/edit-dialog.html',
-        controller: 'CustomerEditDialogController'
+        component: 'customerCreateDialog',
       }).opened;
       return blockAndClose(promise);
     }

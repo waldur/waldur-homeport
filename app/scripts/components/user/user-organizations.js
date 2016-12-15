@@ -17,6 +17,7 @@ function UserOrganizationsController(
       this.service = customerPermissionsService;
       this.controllerScope = controllerScope;
       this.tableOptions = {
+        disableSearch: true,
         noDataText: 'No organizations yet',
         noMatchesText: 'No organizations found matching filter.',
 

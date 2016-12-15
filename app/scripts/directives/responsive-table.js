@@ -26,12 +26,66 @@
             options = newTableOptions;
             table = initTable();
             connectRowButtons(table);
-            connectWatcher(table);
+
+            if (!newTableOptions.disableAutoUpdate) {
+              connectWatcher(table);
+            }
             registerEvents(table);
           }
         });
 
         function initTable() {
+          var buttons = getButtons();
+          var columns = getColumns();
+          var dom = getDom();
+
+          var tableOptions = {
+            responsive: true,
+            processing: true,
+            serverSide: true,
+            ordering: !!options.enableOrdering,
+            autoWidth: false,
+            ajax: serverDataTableCallback,
+            dom: dom,
+            buttons: buttons && buttons,
+            columns: columns,
+            language: {
+              emptyTable: options.noDataText,
+              zeroRecords: options.noMatchesText
+            },
+            fnDrawCallback: function() {
+              $(element).find('tr').each(function(index, element) {
+                $compile(element)(scope);
+              });
+            }
+          };
+
+          if (options.scrollY) {
+            tableOptions.scrollY = options.scrollY;
+          }
+
+          if (options.scrollCollapse) {
+            tableOptions.scrollCollapse = options.scrollCollapse;
+          }
+
+          return $(element.find('table')[0]).DataTable(tableOptions);
+        }
+
+        function getDom() {
+          if (options.disableButtons) {
+            return 'Tgitp';
+          } else if (options.disableSearch) {
+            return '<"html5buttons"B>rgitp'
+          } else {
+            return '<"html5buttons"B>lTfgitp';
+          }
+        }
+
+        function getButtons() {
+          if (options.disableButtons) {
+            return;
+          }
+
           var exportButtons = getExportButtons(
             options.columns.length,
             options.rowActions,
@@ -57,34 +111,16 @@
               });
             }
           });
+          return buttons;
+        }
 
-          var columns = options.columns;
+        function getColumns() {
+          var columns = angular.copy(options.columns);
           if (options.rowActions && options.rowActions.length) {
             var actionColumn = getActionColumn(options.rowActions, options.actionsColumnWidth);
             columns.push(actionColumn);
           }
-
-          var table = $(element.find('table')[0]).DataTable({
-            responsive: true,
-            processing: true,
-            serverSide: true,
-            ordering: !!scope.controller.tableOptions.enableOrdering,
-            autoWidth: false,
-            ajax: serverDataTableCallback,
-            dom: '<"html5buttons"B>lTfgitp',
-            buttons: buttons,
-            columns: columns,
-            language: {
-              emptyTable: options.noDataText,
-              zeroRecords: options.noMatchesText
-            },
-            fnDrawCallback: function() {
-              $(element).find('tr').each(function(index, element) {
-                $compile(element)(scope);
-              });
-            }
-          });
-          return table;
+          return columns;
         }
 
         function connectWatcher(table) {

@@ -11,6 +11,8 @@ import userEdit from './user-edit';
 import userDashboard from './user-dashboard';
 import userOrganizations from './user-organizations';
 import userProjects from './user-projects';
+import userPopover from './user-popover';
+import userPopoverTable from './user-popover-table';
 import { stateUtilsService, attachStateUtils } from './utils';
 import userRoutes from './routes';
 
@@ -29,6 +31,8 @@ export default module => {
   module.directive('userDashboard', userDashboard);
   module.directive('userOrganizations', userOrganizations);
   module.directive('userProjects', userProjects);
+  module.directive('userPopover', userPopover);
+  module.directive('userPopoverTable', userPopoverTable);
   module.service('stateUtilsService', stateUtilsService);
   module.run(attachStateUtils);
   module.config(userRoutes);

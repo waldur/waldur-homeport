@@ -15,13 +15,15 @@ export default function selectWorkspaceToggle() {
 const workspaceIconClasses = {
   organization: 'fa-sitemap',
   project: 'fa-bookmark',
-  user: 'fa-user'
+  user: 'fa-user',
+  support: 'fa-question-circle'
 };
 
 const workspaceButtonClasses = {
   organization: 'btn-primary',
   project: 'btn-success',
-  user: 'btn-info'
+  user: 'btn-info',
+  support: 'btn-warning'
 };
 
 // @ngInject

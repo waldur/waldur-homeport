@@ -10,6 +10,7 @@
       init: function() {
         this._super();
         this.endpoint = '/users/';
+        this.filterByCustomer = false;
       },
       getCurrentUser: function() {
         var vm = this;

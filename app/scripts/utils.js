@@ -132,6 +132,9 @@
         }
         return "";
       },
+      relativeDate: function (startTime) {
+        return moment(startTime).fromNow().replace(' ago', '');
+      },
       getUUID: function(url) {
         return url.split('/').splice(-2)[0];
       },
