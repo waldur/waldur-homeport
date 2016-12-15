@@ -4,7 +4,7 @@ export default function organizationRoutes($stateProvider) {
     .state('dashboard', {
       url: '/dashboard/',
       abstract: true,
-      template: '<customer-workspace></customer-workspace>',
+      template: '<customer-workspace><ui-view></ui-view></customer-workspace>',
       data: {
         pageTitle: 'Dashboard',
         pageClass: 'gray-bg',
@@ -28,7 +28,7 @@ export default function organizationRoutes($stateProvider) {
         auth: true,
         workspace: 'organization'
       },
-      template: '<customer-workspace></customer-workspace>',
+      template: '<customer-workspace><ui-view></ui-view></customer-workspace>',
     })
 
     .state('organization.details', {
@@ -152,7 +152,7 @@ export default function organizationRoutes($stateProvider) {
     .state('services', {
       url: '/services/',
       abstract: true,
-      template: '<customer-workspace></customer-workspace>',
+      template: '<customer-workspace><ui-view></ui-view></customer-workspace>',
       data: {
         auth: true,
         workspace: 'organization'
