@@ -9,6 +9,7 @@ export default function eventDetailsDialog() {
     scope: {},
     bindToController: {
       dismiss: '&',
+      close: '&',
       resolve: '='
     }
   }
@@ -17,7 +18,5 @@ export default function eventDetailsDialog() {
 // @ngInject
 function EventDetailsDialogController($scope) {
   this.event = this.resolve.event;
-  $scope.$on('$stateChangeSuccess', function() {
-    $scope.$close();
-  });
+  $scope.$on('$stateChangeSuccess', () => this.close());
 }
