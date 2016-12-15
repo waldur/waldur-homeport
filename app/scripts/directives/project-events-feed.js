@@ -26,7 +26,7 @@
     var vm = this;
     vm.title = 'Events';
     vm.emptyText = 'No events yet.';
-    vm.showTypes = EventDialogsService.eventTypes;
+    vm.showTypes = EventDialogsService.eventTypes.bind(EventDialogsService);
     vm.listState = 'project.events({uuid: FeedCtrl.project.uuid})';
     activate();
 

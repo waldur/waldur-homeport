@@ -17,6 +17,8 @@ import openstackModule from './components/openstack/module';
 import digitaloceanModule from './components/digitalocean/module';
 import premiumSupportModule from './components/premiumSupport/module';
 import customerModule from './components/customer/module';
+import eventsModule from './components/events/module';
+import alertsModule from './components/alerts/module';
 import routesModule from './routes/module';
 import analyticsModule from './components/analytics/module';
 
@@ -41,5 +43,7 @@ openstackModule(module);
 digitaloceanModule(module);
 premiumSupportModule(module);
 customerModule(module);
+eventsModule(module);
+alertsModule(module);
 routesModule(module);
 analyticsModule(module);
