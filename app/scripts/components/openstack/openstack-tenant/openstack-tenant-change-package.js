@@ -13,11 +13,9 @@ export default function openstackTenantChangePackageDialog() {
 
 // @ngInject
 class DialogController {
-  constructor($scope, $filter, ncUtilsFlash, openstackTenantChangePackageService) {
+  constructor($scope, $filter, openstackTenantChangePackageService) {
     this.$filter = $filter;
-    this.ncUtilsFlash = ncUtilsFlash;
     this.service = openstackTenantChangePackageService;
-
     this.tenant = $scope.resource;
     this.dismiss = $scope.$dismiss;
     this.close = $scope.$close;
@@ -54,13 +52,11 @@ class DialogController {
       template: this.template,
       newTemplate: this.newTemplate
     }).then(() => {
-      this.ncUtilsFlash.success('Request to change tenant package has been created.');
       this.close();
     }).catch(response => {
       if (response) {
         this.errors = response.data;
       }
-      this.ncUtilsFlash.error('Unable to create request to change tenant package.');
     });
   }
 }

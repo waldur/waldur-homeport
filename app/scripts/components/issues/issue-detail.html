@@ -16,7 +16,7 @@
           <dd>{{ ::$ctrl.issue.caller_full_name }}</dd>
         </div>
 
-        <div class="m-b-xs">
+        <div class="m-b-xs" ng-if="::$ctrl.issue.reporter_name">
           <dt>Reporter:</dt>
           <dd>{{ ::$ctrl.issue.reporter_name }}</dd>
         </div>
@@ -26,7 +26,7 @@
           <dd>{{ ::$ctrl.issue.assignee_name || 'N/A' }}</dd>
         </div>
 
-        <div class="m-b-xs">
+        <div class="m-b-xs" ng-if="::$ctrl.issue.customer_name">
           <dt>Organization:</dt>
           <dd>{{ ::$ctrl.issue.customer_name }}</dd>
         </div>
@@ -36,7 +36,7 @@
           <dd>{{ ::$ctrl.issue.type }}</dd>
         </div>
 
-        <div class="m-b-xs">
+        <div class="m-b-xs" ng-if="::$ctrl.issue.project_name">
           <dt>Project:</dt>
           <dd>{{ ::$ctrl.issue.project_name }}</dd>
         </div>
