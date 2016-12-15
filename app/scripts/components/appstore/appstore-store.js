@@ -19,24 +19,17 @@ function AppStoreController(
   ncUtils,
   $q,
   $state,
-  $stateParams,
-  $rootScope,
   resourcesService,
-  resourcesCountService,
   joinService,
   ncUtilsFlash,
   projectsService,
   priceEstimationService,
-  $scope,
-  $filter,
   ncServiceUtils,
   resourceUtils,
   AppstoreFieldConfiguration) {
   var controllerScope = this;
   var Controller = baseControllerAddClass.extend({
     enablePurchaseCostDisplay: ENV.enablePurchaseCostDisplay,
-    VmProviderSettingsUuid: ENV.VmProviderSettingsUuid,
-    gitLabProviderSettingsUuid: ENV.gitLabProviderSettingsUuid,
 
     secondStep: false,
     resourceTypesBlock: false,
@@ -102,26 +95,7 @@ function AppStoreController(
 
       this.renderStore = services && services.length > 0;
 
-      if (ENV.VmProviderSettingsUuid && this.isVirtualMachinesSelected()) {
-        for (var i = 0; i < services.length; i++) {
-          if (services[i].settings_uuid == ENV.VmProviderSettingsUuid) {
-            this.setService(services[i]);
-            this.configureStepNumber = 2;
-            this.secondStep = false;
-            break;
-          }
-        }
-      } else if (ENV.gitLabProviderSettingsUuid && this.isApplicationSelected()) {
-        for (var i = 0; i < services.length; i++) {
-          if (services[i].settings_uuid == ENV.gitLabProviderSettingsUuid) {
-            this.setService(services[i]);
-            this.chooseResourceTypeStepNumber = 2;
-            this.configureStepNumber = 3;
-            this.secondStep = false;
-            break;
-          }
-        }
-      } else if (services && services.length == 1) {
+      if (services && services.length == 1) {
         this.setService(services[0]);
       }
     },

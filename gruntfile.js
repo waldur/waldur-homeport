@@ -481,20 +481,6 @@ module.exports = function(grunt) {
                     },
                 ]
             },
-            modePrivateIaas: {
-                files: [
-                    {
-                        expand: true,
-                        cwd: 'app/scripts/configs/modes/',
-                        src: ['private-iaas.js'],
-                        dest: 'app/scripts/configs/',
-                        filter: 'isFile',
-                        rename: function(dest) {
-                           return dest + 'mode-config.js';
-                        }
-                    }
-                ]
-            },
             modeSquStudentCloud: {
                 files: [
                     {
@@ -515,20 +501,6 @@ module.exports = function(grunt) {
                         expand: true,
                         cwd: 'app/scripts/configs/modes/',
                         src: ['public-brokerage.js'],
-                        dest: 'app/scripts/configs/',
-                        filter: 'isFile',
-                        rename: function(dest) {
-                            return dest + 'mode-config.js';
-                        }
-                    }
-                ]
-            },
-            modeCostTracking: {
-                files: [
-                    {
-                        expand: true,
-                        cwd: 'app/scripts/configs/modes/',
-                        src: ['cost-tracking.js'],
                         dest: 'app/scripts/configs/',
                         filter: 'isFile',
                         rename: function(dest) {
@@ -565,54 +537,12 @@ module.exports = function(grunt) {
                     }
                 ]
             },
-            testModePrivateIaas: {
-                files: [
-                    {
-                        expand: true,
-                        cwd: 'app/scripts/configs/modes/',
-                        src: ['private-iaas.js'],
-                        dest: 'app/scripts/configs/test/',
-                        filter: 'isFile',
-                        rename: function(dest) {
-                            return dest + 'mode-config.js';
-                        }
-                    }
-                ]
-            },
-            testModeSquStudentCloud: {
-                files: [
-                    {
-                        expand: true,
-                        cwd: 'app/scripts/configs/modes/',
-                        src: ['squ-student-cloud.js'],
-                        dest: 'app/scripts/configs/test/',
-                        filter: 'isFile',
-                        rename: function(dest) {
-                            return dest + 'mode-config.js';
-                        }
-                    }
-                ]
-            },
             testModePublicBrokerage: {
                 files: [
                     {
                         expand: true,
                         cwd: 'app/scripts/configs/modes/',
                         src: ['public-brokerage.js'],
-                        dest: 'app/scripts/configs/test/',
-                        filter: 'isFile',
-                        rename: function(dest) {
-                            return dest + 'mode-config.js';
-                        }
-                    }
-                ]
-            },
-            testModeCostTracking: {
-                files: [
-                    {
-                        expand: true,
-                        cwd: 'app/scripts/configs/modes/',
-                        src: ['cost-tracking.js'],
                         dest: 'app/scripts/configs/test/',
                         filter: 'isFile',
                         rename: function(dest) {
@@ -861,26 +791,6 @@ module.exports = function(grunt) {
                     }
                 }
             },
-            testModeCostTracking: {
-                options: {
-                    configFile: "test/protractor.conf.js",
-                    keepAlive: false,
-                    args: {
-                        baseUrl: 'http://localhost:' + testPort,
-                        suite: 'costTracking'
-                    }
-                }
-            },
-            testModePrivateIaas: {
-                options: {
-                    configFile: "test/protractor.conf.js",
-                    keepAlive: false,
-                    args: {
-                        baseUrl: 'http://localhost:' + testPort,
-                        suite: 'privateIaas'
-                    }
-                }
-            },
             testModePublicBrokerage: {
                 options: {
                     configFile: "test/protractor.conf.js",
@@ -891,16 +801,6 @@ module.exports = function(grunt) {
                     }
                 }
             },
-            testModeSquStudentCloud: {
-                options: {
-                    configFile: "test/protractor.conf.js",
-                    keepAlive: false,
-                    args: {
-                        baseUrl: 'http://localhost:' + testPort,
-                        suite: 'squStudentCloud'
-                    }
-                }
-            }
         },
         // server for testing purposes
         express: {
@@ -936,10 +836,7 @@ module.exports = function(grunt) {
       'prodbatch', ['copy:main', 'copy:' + mode, 'env:prod', 'preprocess:index', 'image', 'sass', 'autoprefixer', 'webpack:prod', 'concat',
           'uglify', 'cssmin']);
 
-    grunt.registerTask('modePrivateIaas', ['copy:modePrivateIaas']);
-    grunt.registerTask('modeSquStudentCloud', ['copy:modeSquStudentCloud']);
     grunt.registerTask('modePublicBrokerage', ['copy:modePublicBrokerage']);
-    grunt.registerTask('modeCostTracking', ['copy:modeCostTracking']);
     grunt.registerTask('modeDevelop', ['copy:modeDevelop']);
     grunt.registerTask('modePortal', ['copy:modePortal']);
 
@@ -948,10 +845,7 @@ module.exports = function(grunt) {
       'testModes', ['copy:main', 'env:test', 'preprocess:test', 'connect:test', 'image', 'sass', 'autoprefixer',
           'express:test',
           'copy:testModeDevelop', 'protractor:testModeDevelop',
-          'copy:testModeCostTracking', 'protractor:testModeCostTracking',
-          'copy:testModePrivateIaas', 'protractor:testModePrivateIaas',
-          'copy:testModePublicBrokerage', 'protractor:testModePublicBrokerage',
-          'copy:testModeSquStudentCloud', 'protractor:testModeSquStudentCloud'
+          'copy:testModePublicBrokerage', 'protractor:testModePublicBrokerage'
       ]);
 
     grunt.registerTask(
@@ -961,27 +855,9 @@ module.exports = function(grunt) {
       ]);
 
     grunt.registerTask(
-      'testModeCostTracking', ['copy:main', 'env:test', 'preprocess:test', 'connect:test', 'image', 'sass', 'autoprefixer',
-          'express:test',
-          'copy:testModeCostTracking', 'protractor:testModeCostTracking'
-      ]);
-
-    grunt.registerTask(
-      'testModePrivateIaas', ['copy:main', 'env:test', 'preprocess:test', 'connect:test', 'image', 'sass', 'autoprefixer',
-          'express:test',
-          'copy:testModePrivateIaas', 'protractor:testModePrivateIaas'
-      ]);
-
-    grunt.registerTask(
       'testModePublicBrokerage', ['copy:main', 'env:test', 'preprocess:test', 'connect:test', 'image', 'sass', 'autoprefixer',
           'express:test',
           'copy:testModePublicBrokerage', 'protractor:testModePublicBrokerage'
-      ]);
-
-    grunt.registerTask(
-      'testModeSquStudentCloud', ['copy:main', 'env:test', 'preprocess:test', 'connect:test', 'image', 'sass', 'autoprefixer',
-          'express:test',
-          'copy:testModeSquStudentCloud', 'protractor:testModeSquStudentCloud'
       ]);
 
     // to run testing environment manually if needed. node server should be launched separately

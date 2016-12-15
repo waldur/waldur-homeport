@@ -14,7 +14,7 @@ export default function aboutRoutes($stateProvider, MODE) {
           templateUrl: 'views/tos/index.html',
         },
         appHeaderOut: {
-          templateUrl: MODE.homeHeaderTemplate ? MODE.homeHeaderTemplate : 'views/partials/site-header.html',
+          templateUrl: 'views/partials/site-header.html',
         },
         appHeaderIn: {
           templateUrl: 'views/partials/site-header.html',
@@ -39,7 +39,7 @@ export default function aboutRoutes($stateProvider, MODE) {
           templateUrl: MODE.aboutPageTemplate ? MODE.aboutPageTemplate : 'views/about/index.html',
         },
         appHeaderOut: {
-          templateUrl: MODE.homeHeaderTemplate ? MODE.homeHeaderTemplate : 'views/partials/site-header.html',
+          templateUrl: 'views/partials/site-header.html',
         },
         appHeaderIn: {
           templateUrl: 'views/partials/site-header.html',
@@ -64,7 +64,7 @@ export default function aboutRoutes($stateProvider, MODE) {
           templateUrl: 'views/policy/privacy.html',
         },
         appHeaderOut: {
-          templateUrl: MODE.homeHeaderTemplate ? MODE.homeHeaderTemplate : 'views/partials/site-header.html',
+          templateUrl: 'views/partials/site-header.html',
         },
         appHeaderIn: {
           templateUrl: 'views/partials/site-header.html',
