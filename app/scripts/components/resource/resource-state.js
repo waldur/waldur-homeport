@@ -14,6 +14,8 @@ export default function resourceState() {
 }
 
 // @ngInject
-function ResourceStateController(resourceUtils) {
-  this.context = resourceUtils.getResourceState(this.resource);
+function ResourceStateController(resourceUtils, $scope) {
+  $scope.$watch(() => this.resource, () =>
+    this.context = resourceUtils.getResourceState(this.resource)
+  );
 }
