@@ -481,20 +481,6 @@ module.exports = function(grunt) {
                     },
                 ]
             },
-            modeSquStudentCloud: {
-                files: [
-                    {
-                        expand: true,
-                        cwd: 'app/scripts/configs/modes/',
-                        src: ['squ-student-cloud.js'],
-                        dest: 'app/scripts/configs/',
-                        filter: 'isFile',
-                        rename: function(dest) {
-                            return dest + 'mode-config.js';
-                        }
-                    }
-                ]
-            },
             modePublicBrokerage: {
                 files: [
                     {

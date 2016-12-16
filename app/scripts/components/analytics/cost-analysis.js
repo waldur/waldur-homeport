@@ -45,7 +45,9 @@ function CostAnalysisController(
 
     selectRow: function(row) {
       row.selected = !row.selected;
-      row.activeTab = ENV.featuresVisible ? 'services' : 'projects';
+      row.activeTab = (ENV.featuresVisible || ENV.toBeFeatures.indexOf('providers') === -1)
+        ? 'services'
+        : 'projects';
       if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('resources') === -1) {
         this.getResourceDetails(row);
       }

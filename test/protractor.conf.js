@@ -1,18 +1,12 @@
 exports.config = {
   directConnect: true,
   specs: [
-    'internal/modeCostTracking/*.js',
     'internal/modeDevelop/*.js',
-    'internal/modePrivateIaas/*.js',
     'internal/modePublicBrokerage/*.js',
-    'internal/modeSquStudentCloud/*.js'
   ],
   suites: {
-    costTracking: 'internal/modeCostTracking/*.js',
     develop: 'internal/modeDevelop/*.js',
-    privateIaas: 'internal/modePrivateIaas/*.js',
     publicBrokerage: 'internal/modePublicBrokerage/*.js',
-    squStudentCloud: 'internal/modeSquStudentCloud/*.js'
   },
   capabilities: {
     browserName: 'chrome',

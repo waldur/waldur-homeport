@@ -46,14 +46,8 @@ __Installation steps__:
 
     Or choose specific mode by passing additional paramater:
 
-     `grunt --mode=modePrivateIaas`
-     
-     `grunt --mode=modeSquStudentCloud`
-     
      `grunt --mode=modePublicBrokerage`
      
-     `grunt --mode=modeCostTracking`
-
      `grunt --mode=modePortal`
 
 Server will listen on `//localhost:8000`
