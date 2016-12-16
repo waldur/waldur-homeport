@@ -1,19 +1,30 @@
-import template from './resource-events.html';
-
 export default function resourceEvents() {
   return {
     restrict: 'E',
-    template: template,
+    templateUrl: 'views/partials/filtered-list.html',
     controller: ResourceEventsController,
-    scope: {
+    controllerAs: 'ListController',
+    scope: {},
+    bindToController: {
       resource: '='
     }
   }
 }
 
 // @ngInject
-function ResourceEventsController($scope, eventsService) {
-  eventsService.getResourceEvents($scope.resource).then(function(events) {
-    $scope.events = events;
+function ResourceEventsController(baseEventListController) {
+  var controllerScope = this;
+  var EventController = baseEventListController.extend({
+    init: function() {
+      this.controllerScope = controllerScope;
+      this._super();
+    },
+    getFilter: function() {
+      return {
+        scope: controllerScope.resource.url
+      }
+    }
   });
+
+  controllerScope.__proto__ = new EventController();
 }
