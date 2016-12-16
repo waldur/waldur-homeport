@@ -49,9 +49,7 @@ export default function projectRoutes($stateProvider) {
 
     .state('project.events', {
       url: 'events/',
-      templateUrl: 'views/partials/filtered-list.html',
-      controller: 'ProjectEventTabController',
-      controllerAs: 'ListController',
+      template: '<project-events project="currentProject"></project-events>',
       data: {
         pageTitle: 'Audit logs'
       }

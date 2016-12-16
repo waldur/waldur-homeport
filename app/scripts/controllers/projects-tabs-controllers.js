@@ -1,54 +1,5 @@
 (function() {
   angular.module('ncsaas')
-    .controller('ProjectEventTabController', [
-      '$stateParams',
-      'projectsService',
-      'baseEventListController',
-      'currentStateService',
-      ProjectEventTabController
-    ]);
-
-  function ProjectEventTabController($stateParams, projectsService, baseEventListController, currentStateService) {
-    var controllerScope = this;
-    var EventController = baseEventListController.extend({
-      project: null,
-
-      init: function() {
-        this.controllerScope = controllerScope;
-        this._super();
-        this.getProject();
-      },
-      getList: function(filter) {
-        if (this.project) {
-          this.service.defaultFilter.scope = this.project.url;
-          return this._super(filter);
-        } else {
-          return this.getProject();
-        }
-      },
-      getProject: function() {
-        var vm = this;
-        if ($stateParams.uuid) {
-          return projectsService.$get($stateParams.uuid).then(function(response) {
-            vm.project = response;
-            return vm.getList();
-          });
-        } else {
-          return currentStateService.getProject().then(function(response) {
-            vm.project = response;
-            return vm.getList();
-          });
-        }
-      }
-    });
-
-    controllerScope.__proto__ = new EventController();
-  }
-
-})();
-
-(function() {
-  angular.module('ncsaas')
     .controller('ProjectAlertTabController', [
       'BaseAlertsListController',
       'currentStateService',
