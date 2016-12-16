@@ -38,7 +38,7 @@ export const PRIVATE_USER_TABS = [
 ];
 
 // @ngInject
-function UserDetailsController($scope, $stateParams, usersService,
+function UserDetailsController($scope, $state, $stateParams, usersService,
   PRIVATE_USER_TABS, stateUtilsService, currentStateService) {
   var publicTabs = [
     {
@@ -91,6 +91,10 @@ function UserDetailsController($scope, $stateParams, usersService,
           $scope.currentUser = user;
           $scope.isPrivate = false;
           $scope.context = {user: user};
+        }).catch(function(response) {
+          if (response.status === 404) {
+            $state.go('errorPage.notFound')
+          }
         });
       }
     });
