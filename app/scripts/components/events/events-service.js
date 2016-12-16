@@ -11,9 +11,6 @@ export default function eventsService($q, baseServiceClass, ENV) {
     },
     setDefaultFilter: function() {
       this.defaultFilter = {exclude_extra: true};
-      if (!ENV.featuresVisible) {
-        this.defaultFilter.exclude_features = ENV.toBeFeatures;
-      }
     },
     getEventGroups: function() {
       var vm = this;

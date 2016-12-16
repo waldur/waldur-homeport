@@ -10,7 +10,7 @@ const tabs = {
   },
   events: {
     url: 'events/',
-    template: '<user-events></user-events>',
+    template: '<user-events user="currentUser"></user-events>',
     data: {
       pageTitle: 'Audit logs'
     }
