@@ -36,7 +36,7 @@ export default function aboutRoutes($stateProvider, MODE) {
       url: '',
       views: {
         appContent: {
-          templateUrl: MODE.aboutPageTemplate ? MODE.aboutPageTemplate : 'views/about/index.html',
+          templateUrl: 'views/about/index.html',
         },
         appHeaderOut: {
           templateUrl: 'views/partials/site-header.html',
