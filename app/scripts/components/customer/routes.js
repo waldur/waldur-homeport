@@ -33,9 +33,7 @@ export default function organizationRoutes($stateProvider) {
 
     .state('organization.details', {
       url: '',
-      templateUrl: 'views/partials/filtered-list.html',
-      controller: 'CustomerEventTabController',
-      controllerAs: 'ListController',
+      template: '<customer-events customer="currentCustomer"></customer-events>',
       data: {
         pageTitle: 'Audit logs'
       }
