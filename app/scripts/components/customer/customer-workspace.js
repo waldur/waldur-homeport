@@ -5,6 +5,7 @@ export default function customerWorkspace() {
     restrict: 'E',
     template: template,
     controller: CustomerWorkspaceController,
+    transclude: true
   };
 }
 
