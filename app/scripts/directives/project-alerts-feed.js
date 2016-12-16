@@ -21,12 +21,12 @@
   angular.module('ncsaas')
     .controller('ProjectAlertsFeedController', ProjectAlertsFeedController);
 
-  ProjectAlertsFeedController.$inject = ['$scope', 'DashboardFeedService', 'EventDialogsService'];
-  function ProjectAlertsFeedController($scope, DashboardFeedService, EventDialogsService) {
+  ProjectAlertsFeedController.$inject = ['$scope', 'DashboardFeedService', 'AlertDialogsService'];
+  function ProjectAlertsFeedController($scope, DashboardFeedService, AlertDialogsService) {
     var vm = this;
     vm.title = 'Alerts';
     vm.emptyText = 'No alerts yet.';
-    vm.showTypes = EventDialogsService.alertTypes;
+    vm.showTypes = AlertDialogsService.alertTypes.bind(AlertDialogsService);
     vm.listState = 'project.alerts({uuid: FeedCtrl.project.uuid})';
     activate();
 
