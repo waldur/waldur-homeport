@@ -43,12 +43,4 @@ export default function issueRoutes($stateProvider) {
         pageTitle: 'List requests'
       }
     })
-
-    .state('support.create', {
-      url: 'add/:type',
-      template: '<issue-create></issue-create>',
-      data: {
-        pageTitle: 'Create requests'
-      }
-    });
 }

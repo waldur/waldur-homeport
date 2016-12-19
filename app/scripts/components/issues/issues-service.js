@@ -16,11 +16,6 @@ export default function issuesService(baseServiceClass) {
       var issue = this.$create();
       angular.extend(issue, instance);
       return issue.$save();
-    },
-    createChangeRequest: function(details) {
-      return this.createIssue(angular.extend({
-        type: ISSUE_IDS.CHANGE_REQUEST
-      }, details));
     }
   });
   return new ServiceClass();

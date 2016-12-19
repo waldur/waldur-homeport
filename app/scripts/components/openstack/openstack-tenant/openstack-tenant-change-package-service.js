@@ -7,13 +7,14 @@ export default class openstackTenantChangePackageService {
   // * saveData - accepts dictionary with fields {tenant, package, template, newTemplate}
 
   constructor($q, $state, packageTemplatesService,
-              openstackPackagesService, issuesService, ncUtilsFlash) {
+              openstackPackagesService, issuesService, ncUtilsFlash, ISSUE_IDS) {
     this.$q = $q;
     this.$state = $state;
     this.packageTemplatesService = packageTemplatesService;
     this.openstackPackagesService = openstackPackagesService;
     this.issuesService = issuesService;
     this.ncUtilsFlash = ncUtilsFlash;
+    this.ISSUE_IDS = ISSUE_IDS;
   }
 
   loadData(tenant) {
@@ -80,11 +81,12 @@ export default class openstackTenantChangePackageService {
   }
 
   createIssue(context) {
-    return this.issuesService.createChangeRequest({
+    return this.issuesService.createIssue({
       summary: this.formatIssueSummary(context),
       description: this.formatIssueDescription(context),
       resource: context.tenant.url,
-      is_reported_manually: true
+      is_reported_manually: true,
+      type: this.ISSUE_IDS.CHANGE_REQUEST
     });
   }
 

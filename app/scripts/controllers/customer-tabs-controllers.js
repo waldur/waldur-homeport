@@ -185,9 +185,11 @@
       'paymentDetailsService',
       'usersService',
       'currentStateService',
+      '$uibModal',
       '$state',
       '$q',
       'ENV',
+      'ISSUE_IDS',
       CustomerDeleteTabController
     ]);
 
@@ -197,9 +199,11 @@
     paymentDetailsService,
     usersService,
     currentStateService,
+    $uibModal,
     $state,
     $q,
-    ENV
+    ENV,
+    ISSUE_IDS
   ) {
     var controllerScope = this;
     var DeleteController = baseControllerClass.extend({
@@ -248,7 +252,23 @@
       removeCustomer: function() {
         var vm = this;
         if (this.customer.projects.length > 0) {
-          return $state.go('support.create', {type: 'remove_customer'});
+          return $uibModal.open({
+            component: 'issueCreateDialog',
+            resolve: {
+              issue: () => ({
+                customer: vm.customer,
+                type: ISSUE_IDS.CHANGE_REQUEST,
+                summary: 'Customer removal'
+              }),
+              options: {
+                title: 'Customer removal',
+                hideTitle: true,
+                descriptionLabel: 'Reason',
+                descriptionPlaceholder: 'Why do you need to remove customer with existing projects?',
+                submitTitle: 'Request removal'
+              }
+            }
+          });
         }
         var confirmDelete = confirm('Confirm deletion?');
           if (confirmDelete) {
