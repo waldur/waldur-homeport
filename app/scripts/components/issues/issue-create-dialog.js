@@ -34,7 +34,7 @@ class IssueCreateDialogController {
       return this.$q.reject();
     }
     let issue = {
-      type: this.issue.type ? this.issue.type.id : this.options.issueType,
+      type: this.options.issueType,
       summary: this.issue.summary || this.options.issueSummary,
       description: this.issue.description,
       is_reported_manually: true
