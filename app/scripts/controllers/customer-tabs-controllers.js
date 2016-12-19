@@ -30,38 +30,6 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('CustomerEventTabController', [
-      'baseEventListController',
-      'currentStateService',
-      CustomerEventTabController
-    ]);
-
-  function CustomerEventTabController(baseEventListController, currentStateService) {
-    var controllerScope = this;
-    var EventController = baseEventListController.extend({
-
-      init: function() {
-        this.controllerScope = controllerScope;
-        this._super();
-      },
-
-      getList: function(filter) {
-        var vm = this,
-          fn = this._super.bind(vm);
-        return currentStateService.getCustomer().then(function(customer) {
-          vm.service.defaultFilter.scope = customer.url;
-          return fn(filter);
-        });
-      }
-    });
-
-    controllerScope.__proto__ = new EventController();
-  }
-
-})();
-
-(function() {
-  angular.module('ncsaas')
       .controller('CustomerAgreementsTabController', [
         'baseControllerListClass',
         'agreementsService',
