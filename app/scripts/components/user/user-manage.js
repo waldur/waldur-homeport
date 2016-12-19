@@ -13,11 +13,12 @@ export default function userManage() {
 
 // @ngInject
 class UserManageController {
-  constructor(usersService, $state, ncUtilsFlash, $uibModal, $q) {
+  constructor(usersService, $state, ncUtilsFlash, $uibModal, $q, ISSUE_IDS) {
     this.usersService = usersService;
     this.$state = $state;
     this.ncUtilsFlash = ncUtilsFlash;
     this.$uibModal = $uibModal;
+    this.ISSUE_IDS = ISSUE_IDS;
     this.$q = $q;
     this.init();
   }
@@ -46,15 +47,16 @@ class UserManageController {
       return this.$uibModal.open({
         component: 'issueCreateDialog',
         resolve: {
-          issue: () => ({user: user}),
+          issue: () => ({
+            user: user,
+            type: this.ISSUE_IDS.CHANGE_REQUEST,
+            summary: 'Account removal'
+          }),
           options: {
-            type: 'remove_user',
-            issueSummary: 'Account removal',
             title: 'Account removal',
             descriptionPlaceholder: 'Why would you want to go away? Help us become better please!',
             descriptionLabel: 'Reason',
-            submitTitle: 'Request removal',
-            issueType: 'Change request'
+            submitTitle: 'Request removal'
           }
         }
       });

@@ -15,8 +15,10 @@ import issuesListFiltered from './issues-list-filtered';
 import issuesHelpdesk from './issues-helpdesk';
 import issueCreateDialog from './issue-create-dialog';
 import issueRegistration from './issue-registration';
+import {ISSUE_IDS} from './constants';
 
 export default module => {
+  module.constant('ISSUE_IDS', ISSUE_IDS);
   module.service('issuesService', issuesService);
   module.service('issueUsersService', issueUsersService);
   module.service('issueCommentsService', issueCommentsService);

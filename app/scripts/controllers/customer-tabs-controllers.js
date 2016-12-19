@@ -221,6 +221,7 @@
       '$state',
       '$q',
       'ENV',
+      'ISSUE_IDS',
       CustomerDeleteTabController
     ]);
 
@@ -233,7 +234,8 @@
     $uibModal,
     $state,
     $q,
-    ENV
+    ENV,
+    ISSUE_IDS
   ) {
     var controllerScope = this;
     var DeleteController = baseControllerClass.extend({
@@ -285,13 +287,14 @@
           return $uibModal.open({
             component: 'issueCreateDialog',
             resolve: {
-              issue: () => ({customer: vm.customer}),
+              issue: () => ({
+                customer: vm.customer,
+                type: ISSUE_IDS.CHANGE_REQUEST,
+                summary: 'Customer removal'
+              }),
               options: {
-                type:'remove_customer',
-                issueSummary: 'Customer removal',
                 title: 'Customer removal',
-                descriptionPlaceholder: 'Why do you need to remove customer with existing projects?',
-                issueType: 'Change request'
+                descriptionPlaceholder: 'Why do you need to remove customer with existing projects?'
               }
             }
           });

@@ -1,7 +1,6 @@
 export default function submitButton() {
   return {
     restrict: 'A',
-    controllerAs: 'auth',
     scope: {
       submit: '&submitButton'
     },
