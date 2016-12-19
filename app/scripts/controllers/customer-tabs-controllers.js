@@ -294,7 +294,10 @@
               }),
               options: {
                 title: 'Customer removal',
-                descriptionPlaceholder: 'Why do you need to remove customer with existing projects?'
+                hideTitle: true,
+                descriptionLabel: 'Reason',
+                descriptionPlaceholder: 'Why do you need to remove customer with existing projects?',
+                submitTitle: 'Request removal'
               }
             }
           });

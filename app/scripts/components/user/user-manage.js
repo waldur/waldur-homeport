@@ -43,23 +43,21 @@ class UserManageController {
   }
 
   removeUser() {
-    return this.usersService.getCurrentUser().then(user => {
-      return this.$uibModal.open({
-        component: 'issueCreateDialog',
-        resolve: {
-          issue: () => ({
-            user: user,
-            type: this.ISSUE_IDS.CHANGE_REQUEST,
-            summary: 'Account removal'
-          }),
-          options: {
-            title: 'Account removal',
-            descriptionPlaceholder: 'Why would you want to go away? Help us become better please!',
-            descriptionLabel: 'Reason',
-            submitTitle: 'Request removal'
-          }
+    return this.$uibModal.open({
+      component: 'issueCreateDialog',
+      resolve: {
+        issue: () => ({
+          type: this.ISSUE_IDS.CHANGE_REQUEST,
+          summary: 'Account removal'
+        }),
+        options: {
+          title: 'Account removal',
+          hideTitle: true,
+          descriptionPlaceholder: 'Why would you want to go away? Help us become better please!',
+          descriptionLabel: 'Reason',
+          submitTitle: 'Request removal'
         }
-      });
+      }
     });
   }
 }

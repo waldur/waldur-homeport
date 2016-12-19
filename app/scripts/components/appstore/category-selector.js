@@ -85,8 +85,7 @@ function AppStoreCategorySelectorController(
       component: 'issueCreateDialog',
       resolve: {
         issue: () => ({
-          type: ISSUE_IDS.SERVICE_REQUEST,
-          summary: 'Request a new service'
+          type: ISSUE_IDS.SERVICE_REQUEST
         }),
         options: {
           title: 'Request a new service',

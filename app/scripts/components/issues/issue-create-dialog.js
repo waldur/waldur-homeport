@@ -1,4 +1,4 @@
-import { ISSUE_TYPE_CHOICES } from './constants';
+import { ISSUE_TYPES } from './constants';
 import template from './issue-create-dialog.html';
 
 export default function issueCreateDialog() {
@@ -16,6 +16,16 @@ export default function issueCreateDialog() {
   };
 }
 
+const DEFAULT_OPTIONS = {
+  title: 'Create request',
+  hideTitle: false,
+  descriptionLabel: 'Request description',
+  descriptionPlaceholder: 'Request description',
+  summaryLabel: 'Request name',
+  summaryPlaceholder: 'Request name',
+  submitTitle: 'Create'
+};
+
 // @ngInject
 class IssueCreateDialogController {
   constructor(issuesService, $q, $state, ncUtilsFlash) {
@@ -23,9 +33,8 @@ class IssueCreateDialogController {
     this.$q = $q;
     this.$state = $state;
     this.ncUtilsFlash = ncUtilsFlash;
-    this.types = ISSUE_TYPE_CHOICES;
     this.issue = this.resolve.issue || {};
-    this.options = this.setOptions(this.resolve.options);
+    this.options = angular.extend({}, DEFAULT_OPTIONS, this.resolve.options);
   }
 
   save() {
@@ -34,7 +43,7 @@ class IssueCreateDialogController {
       return this.$q.reject();
     }
     let issue = {
-      type: this.issue.type,
+      type: this.issue.type || ISSUE_TYPES.CHANGE_REQUEST,
       summary: this.issue.summary,
       description: this.issue.description,
       is_reported_manually: true
@@ -58,15 +67,5 @@ class IssueCreateDialogController {
     }).finally(() => {
       this.saving = false;
     });
-  }
-
-  setOptions(options) {
-    return {
-      title: options.title || 'Add ticket',
-      descriptionLabel: options.descriptionLabel || 'Ticket description',
-      descriptionPlaceholder: options.descriptionPlaceholder || 'Problem description',
-      summaryLabel: options.summaryLabel || 'Ticket name',
-      submitTitle: options.submitTitle || 'Create'
-    }
   }
 }
