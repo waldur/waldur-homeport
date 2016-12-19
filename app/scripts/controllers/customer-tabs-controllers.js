@@ -217,6 +217,7 @@
       'paymentDetailsService',
       'usersService',
       'currentStateService',
+      '$uibModal',
       '$state',
       '$q',
       'ENV',
@@ -229,6 +230,7 @@
     paymentDetailsService,
     usersService,
     currentStateService,
+    $uibModal,
     $state,
     $q,
     ENV
@@ -280,7 +282,19 @@
       removeCustomer: function() {
         var vm = this;
         if (this.customer.projects.length > 0) {
-          return $state.go('support.create', {type: 'remove_customer'});
+          return $uibModal.open({
+            component: 'issueCreateDialog',
+            resolve: {
+              issue: () => ({customer: vm.customer}),
+              options: {
+                type:'remove_customer',
+                issueSummary: 'Customer removal',
+                title: 'Customer removal',
+                descriptionPlaceholder: 'Why do you need to remove customer with existing projects?',
+                issueType: 'Change request'
+              }
+            }
+          });
         }
         var confirmDelete = confirm('Confirm deletion?');
           if (confirmDelete) {

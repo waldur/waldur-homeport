@@ -21,6 +21,11 @@ export default function issuesService(baseServiceClass) {
       return this.createIssue(angular.extend({
         type: ISSUE_IDS.CHANGE_REQUEST
       }, details));
+    },
+    createServiceRequest: details => {
+      return this.createIssue(angular.extend({
+        type: ISSUE_IDS.SERVICE_REQUEST
+      }, details));
     }
   });
   return new ServiceClass();

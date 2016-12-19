@@ -25,6 +25,7 @@ class IssueCreateDialogController {
     this.ncUtilsFlash = ncUtilsFlash;
     this.types = ISSUE_TYPE_CHOICES;
     this.issue = this.resolve.issue || {};
+    this.options = this.setOptions(this.resolve.options);
   }
 
   save() {
@@ -33,8 +34,8 @@ class IssueCreateDialogController {
       return this.$q.reject();
     }
     let issue = {
-      type: this.issue.type.id,
-      summary: this.issue.summary,
+      type: this.issue.type ? this.issue.type.id : this.options.issueType,
+      summary: this.issue.summary || this.options.issueSummary,
       description: this.issue.description,
       is_reported_manually: true
     };
@@ -48,7 +49,13 @@ class IssueCreateDialogController {
       issue.resource = this.issue.resource.url;
     }
     this.saving = true;
-    return this.service.createIssue(issue).then(issue => {
+    let promise = null;
+    if (this.options.type === 'add_service') {
+      promise = this.service.createServiceRequest(issue);
+    } else {
+      promise = this.service.createChangeRequest(issue);
+    }
+    return promise.then(issue => {
       this.service.clearAllCacheForCurrentEndpoint();
       this.ncUtilsFlash.success(`Request ${issue.key} has been created`);
       return this.$state.go('support.detail', {uuid: issue.uuid}).then(() => {
@@ -57,5 +64,18 @@ class IssueCreateDialogController {
     }).finally(() => {
       this.saving = false;
     });
+  }
+
+  setOptions(options) {
+    return {
+      type: options.type || null,
+      title: options.title ||'Add ticket',
+      descriptionLabel: options.descriptionLabel || 'Ticket description',
+      descriptionPlaceholder: options.descriptionPlaceholder || 'Problem description',
+      summaryLabel: options.summaryLabel ||  'Ticket name',
+      submitTitle: options.submitTitle|| 'Create',
+      issueSummary: options.issueSummary || '',
+      issueType: options.issueType || 'Change request'
+    }
   }
 }

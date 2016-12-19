@@ -21,6 +21,7 @@ import eventsModule from './components/events/module';
 import alertsModule from './components/alerts/module';
 import routesModule from './routes/module';
 import analyticsModule from './components/analytics/module';
+import coreModule from './components/core/module';
 
 const module = angular.module('ncsaas');
 
@@ -47,3 +48,4 @@ eventsModule(module);
 alertsModule(module);
 routesModule(module);
 analyticsModule(module);
+coreModule(module);

@@ -18,7 +18,7 @@ export default function() {
 
 // @ngInject
 function AppStoreCategorySelectorController(
-  $q, ENV, $state, $rootScope, currentStateService, projectsService
+  $q, ENV, $state, $rootScope, currentStateService, projectsService, $uibModal
 ) {
   var vm = this;
   vm.selectOffering = selectOffering;
@@ -80,8 +80,22 @@ function AppStoreCategorySelectorController(
   }
 
   function requestService() {
-    $state.go('support.create', {type: 'add_service'}).then(function() {
-      vm.close();
+      return $uibModal.open({
+      component: 'issueCreateDialog',
+      resolve: {
+        options: {
+          type:'add_service',
+          issueSummary: '',
+          title: 'Request a new service',
+          descriptionPlaceholder: 'Please clarify why do you need it',
+          descriptionLabel: 'Motivation',
+          summaryLabel: 'Service name',
+          issueType: 'Service request'
+        }
+      }
+    }).opened.then(function() {
+      // suppress submit-button then handler
+      // vm.close();
     });
   }
 }
