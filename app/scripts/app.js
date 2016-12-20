@@ -157,24 +157,6 @@
 
 (function() {
   angular.module('ncsaas')
-    .config(['ENV', 'CUSTOMENV', 'MODE', overrideBaseSettings]);
-
-  function overrideBaseSettings(ENV, CUSTOMENV, MODE) {
-    for (var modeProperty in MODE) {
-      if (MODE.hasOwnProperty(modeProperty)) {
-        ENV[modeProperty] = MODE[modeProperty];
-      }
-    }
-    for (var property in CUSTOMENV) {
-      if (CUSTOMENV.hasOwnProperty(property)) {
-        ENV[property] = CUSTOMENV[property];
-      }
-    }
-  }
-})();
-
-(function() {
-  angular.module('ncsaas')
     .config(function(ENV, featuresProvider) {
       featuresProvider.setFeatures(ENV.toBeFeatures);
       featuresProvider.setVisibility(ENV.featuresVisible);

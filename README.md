@@ -32,11 +32,11 @@ __Installation steps__:
         npm install
         bower install
 
-4. Create `/app/scripts/configs/custom-config.js`:
+4. Create `/app/scripts/configs/custom-config.json`:
 
-        cp app/scripts/configs/custom-config.js.example app/scripts/configs/custom-config.js
+        cp app/scripts/configs/custom-config.json.example app/scripts/configs/custom-config.json
 
-5. Configure `custom-config.js`
+5. Configure `custom-config.json`
 
 6. Run application:
 

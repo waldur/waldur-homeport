@@ -131,9 +131,7 @@ export default function organizationRoutes($stateProvider) {
 
     .state('organization.delete', {
       url: 'delete/',
-      templateUrl: 'views/customer/tab-delete.html',
-      controller: 'CustomerDeleteTabController',
-      controllerAs: 'DeleteController',
+      template: '<customer-delete></customer-delete>',
       data: {
         pageTitle: 'Delete organization'
       }
