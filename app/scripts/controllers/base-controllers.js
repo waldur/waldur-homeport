@@ -276,7 +276,6 @@
           var deferred = $q.defer(),
             projectDeferred = $q.defer();
           usersService.getCurrentUser().then(function(user) {
-            ctrl.bootIntercom();
             if ($window.localStorage[ENV.currentCustomerUuidStorageKey]) {
               customersService.$get($window.localStorage[ENV.currentCustomerUuidStorageKey]).then(function(customer) {
                 deferred.resolve(customer);
@@ -328,18 +327,6 @@
             projectDeferred.resolve(response);
           });
         }
-      },
-
-      bootIntercom: function(user) {
-        // XXX: Temporarily disable Intercom
-        return;
-        var date = new Date(user.date_joined).getTime();
-        window.Intercom('boot', {
-          app_id: ENV.IntercomAppId,
-          name: user.full_name,
-          email: user.email,
-          created_at: date
-        });
       },
 
       checkQuotas: function(stateName) {

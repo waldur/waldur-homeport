@@ -215,7 +215,6 @@ angular.module('ncsaas')
     showCompare: [
       'Virtual machines'
     ],
-    IntercomAppId: 'xfbbcxck',
     defaultListCacheTime: 60 * 10,
     optionsCacheTime: 10 * 1000,
     dashboardHelp: {

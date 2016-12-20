@@ -54,7 +54,7 @@ module.exports = {
             new webpack.optimize.DedupePlugin(),
             new webpack.DefinePlugin({
                 'process.env.CONFIG_FILES': JSON.stringify([
-                    '/scripts/configs/custom-config.json'
+                    '/scripts/configs/config.json'
                 ])
             })
 
