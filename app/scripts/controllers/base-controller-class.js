@@ -57,8 +57,6 @@
         // reset after state change
         this.selectedInstances = [];
         this.controlPanelShow = ENV.listControlPanelShow;
-        // XXX: Temporarily disable Intercom
-        //ncUtils.updateIntercom();
         this.enableRefresh = true;
       },
       getList: function(filter) {

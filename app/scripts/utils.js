@@ -68,10 +68,6 @@
 
   function ncUtils(blockUI) {
     return {
-      updateIntercom: function() {
-        // XXX: Temporarily disabled Intercom
-        //window.Intercom('update');
-      },
       blockElement: function(element, promise) {
         if (promise && promise.finally) {
           // Prevent blocking if promise is invalid

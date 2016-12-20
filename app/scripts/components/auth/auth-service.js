@@ -47,8 +47,6 @@ export default function authService($http, $auth, usersService, $rootScope, $win
       usersService.currentUser = null;
       usersService.cleanAllCache();
       $auth.logout();
-      // XXX: Temporarily disabled Intercom
-      // window.Intercom('shutdown');
     }
 
     function setAuthHeader(token) {
