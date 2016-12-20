@@ -845,6 +845,20 @@ module.exports = function(grunt) {
         'focus:prod'
     ]);
 
+    grunt.registerTask('staging', [
+        'copy:main',
+        'copy:' + mode,
+        'env:prod',
+        'preprocess:index',
+        'image',
+        'sass',
+        'autoprefixer',
+        'webpack:staging',
+        'concat',
+        'uglify',
+        'cssmin'
+    ]);
+
     grunt.registerTask('prodbatch', [
         'copy:main',
         'env:prod',
