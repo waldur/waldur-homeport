@@ -56,7 +56,7 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root,-)
 %{__data_dir}
-%config(noreplace) %{__conf_dir}/custom-config.js
+%config(noreplace) %{__conf_dir}/config.json
 %config(noreplace) %{__conf_dir}/nginx.conf
 
 %changelog
