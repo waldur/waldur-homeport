@@ -486,11 +486,11 @@ module.exports = function(grunt) {
                     {
                         expand: true,
                         cwd: 'app/scripts/configs/modes/',
-                        src: ['public-brokerage.js'],
+                        src: ['public-brokerage.json'],
                         dest: 'app/scripts/configs/',
                         filter: 'isFile',
                         rename: function(dest) {
-                            return dest + 'mode-config.js';
+                            return dest + 'mode-config.json';
                         }
                     }
                 ]
@@ -500,11 +500,11 @@ module.exports = function(grunt) {
                     {
                         expand: true,
                         cwd: 'app/scripts/configs/modes/',
-                        src: ['develop.js'],
+                        src: ['develop.json'],
                         dest: 'app/scripts/configs/',
                         filter: 'isFile',
                         rename: function(dest) {
-                            return dest + 'mode-config.js';
+                            return dest + 'mode-config.json';
                         }
                     }
                 ]
@@ -514,11 +514,11 @@ module.exports = function(grunt) {
                     {
                         expand: true,
                         cwd: 'app/scripts/configs/modes/',
-                        src: ['portal.js'],
+                        src: ['portal.json'],
                         dest: 'app/scripts/configs/',
                         filter: 'isFile',
                         rename: function(dest) {
-                            return dest + 'mode-config.js';
+                            return dest + 'mode-config.json';
                         }
                     }
                 ]
@@ -528,11 +528,11 @@ module.exports = function(grunt) {
                     {
                         expand: true,
                         cwd: 'app/scripts/configs/modes/',
-                        src: ['public-brokerage.js'],
+                        src: ['public-brokerage.json'],
                         dest: 'app/scripts/configs/test/',
                         filter: 'isFile',
                         rename: function(dest) {
-                            return dest + 'mode-config.js';
+                            return dest + 'mode-config.json';
                         }
                     }
                 ]
@@ -542,11 +542,11 @@ module.exports = function(grunt) {
                     {
                         expand: true,
                         cwd: 'app/scripts/configs/modes/',
-                        src: ['develop.js'],
+                        src: ['develop.json'],
                         dest: 'app/scripts/configs/test/',
                         filter: 'isFile',
                         rename: function(dest) {
-                            return dest + 'mode-config.js';
+                            return dest + 'mode-config.json';
                         }
                     }
                 ]
@@ -806,55 +806,135 @@ module.exports = function(grunt) {
 
     var mode = grunt.option('mode') || 'modeDevelop';
 
-    grunt.registerTask(
-      'build', ['copy:main', 'image', 'sass', 'autoprefixer', 'cssmin']);
-    grunt.registerTask(
-      'run', ['po2json_angular_translate', 'copy:main', 'env:dev', 'preprocess:index', 'connect:server', 'sass', 'autoprefixer',
-        'copy:' + mode, 'webpack:dev', 'focus:dev']);
+    grunt.registerTask('build', [
+        'copy:main',
+        'image',
+        'sass',
+        'autoprefixer',
+        'cssmin'
+    ]);
+
+    grunt.registerTask('run', [
+        'po2json_angular_translate',
+        'copy:main',
+        'env:dev',
+        'preprocess:index',
+        'connect:server',
+        'sass',
+        'autoprefixer',
+        'copy:' + mode,
+        'webpack:dev',
+        'focus:dev'
+    ]);
+
     grunt.registerTask('serve', ['connect',]);
     grunt.registerTask('default', ['run']);
 
-    grunt.registerTask(
-      'prod', ['copy:main', 'env:prod', 'preprocess:index', 'connect:server', 'image', 'sass', 'autoprefixer', 'webpack:prod', 'concat',
-          'uglify', 'cssmin', 'focus:prod']);
+    grunt.registerTask('prod', [
+        'copy:main',
+        'env:prod',
+        'preprocess:index',
+        'connect:server',
+        'image',
+        'sass',
+        'autoprefixer',
+        'webpack:prod',
+        'concat',
+        'uglify',
+        'cssmin',
+        'focus:prod'
+    ]);
 
-    grunt.registerTask(
-      'prodbatch', ['copy:main', 'copy:' + mode, 'env:prod', 'preprocess:index', 'image', 'sass', 'autoprefixer', 'webpack:prod', 'concat',
-          'uglify', 'cssmin']);
+    grunt.registerTask('prodbatch', [
+        'copy:main',
+        'env:prod',
+        'preprocess:index',
+        'image',
+        'sass',
+        'autoprefixer',
+        'webpack:prod',
+        'concat',
+        'uglify',
+        'cssmin'
+    ]);
 
-    grunt.registerTask('modePublicBrokerage', ['copy:modePublicBrokerage']);
-    grunt.registerTask('modeDevelop', ['copy:modeDevelop']);
-    grunt.registerTask('modePortal', ['copy:modePortal']);
+    grunt.registerTask('modePublicBrokerage', [
+        'copy:modePublicBrokerage'
+    ]);
+
+    grunt.registerTask('modeDevelop', [
+        'copy:modeDevelop'
+    ]);
+
+    grunt.registerTask('modePortal', [
+        'copy:modePortal'
+    ]);
 
     // tasks for testing
-    grunt.registerTask(
-      'testModes', ['copy:main', 'env:test', 'preprocess:test', 'connect:test', 'image', 'sass', 'autoprefixer',
-          'express:test',
-          'copy:testModeDevelop', 'protractor:testModeDevelop',
-          'copy:testModePublicBrokerage', 'protractor:testModePublicBrokerage'
-      ]);
+    grunt.registerTask('testModes', [
+        'copy:main',
+        'env:test',
+        'preprocess:test',
+        'connect:test',
+        'image',
+        'sass',
+        'autoprefixer',
+        'express:test',
+        'copy:testModeDevelop',
+        'protractor:testModeDevelop',
+        'copy:testModePublicBrokerage',
+        'protractor:testModePublicBrokerage'
+    ]);
 
-    grunt.registerTask(
-      'testModeDevelop', ['copy:main', 'env:test', 'preprocess:test', 'connect:test', 'image', 'sass', 'autoprefixer',
-          'express:test',
-          'copy:testModeDevelop', 'protractor:testModeDevelop'
-      ]);
+    grunt.registerTask('testModeDevelop', [
+        'copy:main',
+        'env:test',
+        'preprocess:test',
+        'connect:test',
+        'image',
+        'sass',
+        'autoprefixer',
+        'express:test',
+        'copy:testModeDevelop',
+        'protractor:testModeDevelop'
+    ]);
 
-    grunt.registerTask(
-      'testModePublicBrokerage', ['copy:main', 'env:test', 'preprocess:test', 'connect:test', 'image', 'sass', 'autoprefixer',
-          'express:test',
-          'copy:testModePublicBrokerage', 'protractor:testModePublicBrokerage'
+    grunt.registerTask('testModePublicBrokerage', [
+        'copy:main',
+        'env:test',
+        'preprocess:test',
+        'connect:test',
+        'image',
+        'sass',
+        'autoprefixer',
+        'express:test',
+        'copy:testModePublicBrokerage',
+        'protractor:testModePublicBrokerage'
       ]);
 
     // to run testing environment manually if needed. node server should be launched separately
-    grunt.registerTask(
-      'runTest', ['copy:main', 'env:test', 'preprocess:test', 'connect:test', 'image', 'sass', 'autoprefixer',
-          'copy:' + mode, 'focus:dev']);
+    grunt.registerTask('runTest', [
+        'copy:main',
+        'env:test',
+        'preprocess:test',
+        'connect:test',
+        'image',
+        'sass',
+        'autoprefixer',
+        'copy:' + mode,
+        'focus:dev'
+    ]);
 
     // old test task
-    grunt.registerTask('test',
-      ['copy:main', 'env:test', 'preprocess:test', 'connect:test', 'image', 'sass', 'autoprefixer',
-          'express:test',
-          'protractor:test'
-      ]);
+    grunt.registerTask('test', [
+        'copy:main',
+        'env:test',
+        'preprocess:test',
+        'connect:test',
+        'image',
+        'sass',
+        'autoprefixer',
+        'express:test',
+        'protractor:test'
+    ]);
 };

@@ -1,5 +1,5 @@
 // @ngInject
-export default function aboutRoutes($stateProvider, MODE) {
+export default function aboutRoutes($stateProvider) {
   $stateProvider
     .state('tos', {
       url: '/tos/',

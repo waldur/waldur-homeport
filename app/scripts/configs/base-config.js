@@ -14,9 +14,6 @@ angular.module('ncsaas')
     facebookClientId: 'facebook client id',
     facebookEndpointUrl: 'api-auth/facebook/',
 
-    // JIRA config
-    supportProjectUUID: 'support project UUID',
-
     pageSizes: [5, 10, 20, 50],
     pageSize: 10,
     topMenuCustomersCount: 50,
@@ -29,8 +26,6 @@ angular.module('ncsaas')
     currentCustomerUuidStorageKey: 'currentCustomerUuid',
     currentProjectUuidStorageKey: 'currentProjectUuid',
     showImport: false,
-    resourceOfflineStatus: 'Offline',
-    resourceOnlineStatus: 'Online',
     defaultErrorMessage: 'Reason unknown, please contact support',
 
     // build version
