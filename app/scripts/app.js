@@ -157,6 +157,13 @@
 
 (function() {
   angular.module('ncsaas')
+    .config(function(ENV) {
+      angular.extend(ENV, window.$$CUSTOMENV);
+    });
+})();
+
+(function() {
+  angular.module('ncsaas')
     .config(function(ENV, featuresProvider) {
       featuresProvider.setFeatures(ENV.toBeFeatures);
       featuresProvider.setVisibility(ENV.featuresVisible);

@@ -69,11 +69,10 @@ function AuthLoginController(ENV, $q, $sce, $scope, $state, authService,
     authenticate: function(provider) {
       var vm = this;
       $rootScope.$broadcast('enableRequests');
-      authService.authenticate(provider).then(vm.loginSuccess.bind(vm), vm.loginError.bind(vm));
+      return authService.authenticate(provider).then(vm.loginSuccess.bind(vm), vm.loginError.bind(vm));
     },
     loginSuccess: function() {
-      $state.go('dashboard.index', {}, {reload: true});
-      return true;
+      return $state.go('dashboard.index', {}, {reload: true});
     },
     loginError: function(response) {
       this.errors = [];

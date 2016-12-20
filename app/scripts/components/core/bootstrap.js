@@ -6,15 +6,11 @@ export default function bootstrap(modulename, files) {
     const initInjector = angular.injector(['ng']);
     const $http = initInjector.get('$http');
     const $q = initInjector.get('$q');
-    const promises = files.map(file =>
-      $http.get(file).then(updateSettings).catch(reportError)
-    );
-    return $q.all(promises);
+    const promises = files.map(file => $http.get(file).then(response => response.data));
+    return $q.all(promises).then(updateSettings);
 
-    function updateSettings(response) {
-      application.config(['ENV', ENV => {
-        angular.extend(ENV, response.data);
-      }]);
+    function updateSettings(responses) {
+      window.$$CUSTOMENV = angular.extend.apply(null, responses);
     }
 
     function reportError(response) {
