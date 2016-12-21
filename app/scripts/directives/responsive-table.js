@@ -115,7 +115,12 @@
         }
 
         function getColumns() {
-          var columns = angular.copy(options.columns);
+          var columns = options.columns.map(function(column) {
+            function render(data, type, row, meta) {
+              return column.render(row);
+            };
+            return angular.extend({}, column, {render: render});
+          });
           if (options.rowActions && options.rowActions.length) {
             var actionColumn = getActionColumn(options.rowActions, options.actionsColumnWidth);
             columns.push(actionColumn);

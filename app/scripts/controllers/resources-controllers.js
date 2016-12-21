@@ -57,7 +57,7 @@
             {
               title: 'Name',
               className: 'all',
-              render: function(data, type, row, meta) {
+              render: function(row) {
                 var img = '<img src="{src}" title="{title}" class="img-xs m-r-xs">'
                       .replace('{src}', resourceUtils.getIcon(row))
                       .replace('{title}', row.resource_type);
@@ -71,14 +71,14 @@
             {
               title: 'Provider',
               className: 'desktop',
-              render: function(data, type, row, meta) {
+              render: function(row) {
                 return row.service_name;
               }
             },
             {
               title: 'State',
               className: 'min-tablet-l',
-              render: function(data, type, row, meta) {
+              render: function(row) {
                 var uuids = vm.list.map(function(item) {
                   return item.uuid;
                 });

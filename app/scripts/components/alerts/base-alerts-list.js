@@ -18,14 +18,14 @@ export default function BaseAlertsListController(
           {
             title: 'Message',
             className: 'all',
-            render: function(data, type, row, meta) {
+            render: function(row) {
               return alertFormatter.format(row);
             }
           },
           {
             title: 'Timestamp',
             className: 'all',
-            render: function(data, type, row, meta) {
+            render: function(row) {
               return $filter('dateTime')(row.created);
             }
           }

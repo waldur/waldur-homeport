@@ -32,7 +32,7 @@ export default function InvoicesListController(
           {
             title: 'Invoice number',
             className: 'all',
-            render: function(data, type, row, meta) {
+            render: function(row) {
               var href = $state.href('organization.invoiceDetails',
                 {invoiceUUID: row.uuid});
               return '<a href="{href}">{name}</a>'
@@ -43,42 +43,42 @@ export default function InvoicesListController(
           {
             title: 'State',
             className: 'all',
-            render: function(data, type, row, meta) {
+            render: function(row) {
               return row.state;
             }
           },
           {
             title: 'Price',
             className: 'all',
-            render: function(data, type, row, meta) {
+            render: function(row) {
               return $filter('defaultCurrency')(row.price);
             }
           },
           {
             title: 'Tax',
             className: 'min-tablet-l',
-            render: function(data, type, row, meta) {
+            render: function(row) {
               return $filter('defaultCurrency')(row.tax);
             }
           },
           {
             title: 'Total',
             className: 'min-tablet-l',
-            render: function(data, type, row, meta) {
+            render: function(row) {
               return $filter('defaultCurrency')(row.total);
             }
           },
           {
             title: 'Invoice date',
             className: 'all',
-            render: function(data, type, row, meta) {
+            render: function(row) {
               return row.invoice_date || '&mdash;';
             }
           },
           {
             title: 'Due date',
             className: 'min-tablet-l',
-            render: function(data, type, row, meta) {
+            render: function(row) {
               return row.due_date || '&mdash;';
             }
           }

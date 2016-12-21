@@ -77,7 +77,7 @@
         options.noMatchesText = 'No virtual machines found matching filter.';
         options.columns.push({
           title: 'Internal IP',
-          render: function(data, type, row, meta) {
+          render: function(row) {
             if (row.internal_ips.length === 0) {
               return '&ndash;';
             }
@@ -86,7 +86,7 @@
         });
         options.columns.push({
           title: 'External IP',
-          render: function(data, type, row, meta) {
+          render: function(row) {
             if (row.external_ips.length === 0) {
               return '&ndash;';
             }
@@ -246,7 +246,7 @@
         options.columns.push({
           title: 'Size',
           className: 'all',
-          render: function(data, type, row, meta) {
+          render: function(row) {
             if (!row.size) {
               return '&ndash;';
             }
@@ -256,7 +256,7 @@
         options.columns.push({
           title: 'Attached to',
           className: 'min-tablet-l',
-          render: function(data, type, row, meta) {
+          render: function(row) {
             if (!row.instance) {
               return '&ndash;';
             }
@@ -310,7 +310,7 @@
         options.columns.push({
           title: 'Size',
           className: 'all',
-          render: function(data, type, row, meta) {
+          render: function(row) {
             if (!row.size) {
               return '&ndash;';
             }
@@ -319,7 +319,7 @@
         });
         options.columns.push({
           title: 'Volume',
-          render: function(data, type, row, meta) {
+          render: function(row) {
             if (!row.source_volume) {
               return 'Not known';
             }

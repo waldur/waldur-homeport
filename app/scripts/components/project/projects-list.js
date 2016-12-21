@@ -59,7 +59,7 @@ function ProjectsListController(
       var columns = [
         {
           title: 'Name',
-          render: function(data, type, row, meta) {
+          render: function(row) {
             var href = $state.href('project.details', {uuid: row.uuid});
             return "<a href=\"{href}\">{name}</a>"
                    .replace('{href}', href)
@@ -68,7 +68,7 @@ function ProjectsListController(
         },
         {
           title: 'Creation date',
-          render: function(data, type, row, meta) {
+          render: function(row) {
             return $filter('dateTime')(row.created);
           }
         }
@@ -76,25 +76,25 @@ function ProjectsListController(
       if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('resources') == -1) {
         columns.push({
           title: 'VMs',
-          render: function(data, type, row, meta) {
+          render: function(row) {
             return row.vm_count || 0;
           }
         });
         columns.push({
           title: 'Storage',
-          render: function(data, type, row, meta) {
+          render: function(row) {
             return row.storage_count || 0;
           }
         });
         columns.push({
           title: 'Apps',
-          render: function(data, type, row, meta) {
+          render: function(row) {
             return row.app_count || 0;
           }
         });
         columns.push({
           title: 'Private clouds',
-          render: function(data, type, row, meta) {
+          render: function(row) {
             return row.private_cloud_count || 0;
           }
         });
@@ -102,7 +102,7 @@ function ProjectsListController(
       if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('premiumSupport') == -1) {
         columns.push({
           title: 'SLA',
-          render: function(data, type, row, meta) {
+          render: function(row) {
             if (row.plan) {
               return row.plan.name;
             } else if (row.has_pending_contracts) {

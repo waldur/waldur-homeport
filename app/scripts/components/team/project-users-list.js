@@ -36,7 +36,7 @@ export default function ProjectUsersListController(
             title: 'Member',
             className: 'all',
             width: '20%',
-            render: function(data, type, row, meta) {
+            render: function(row) {
               var avatar = '<img gravatar-src="\'{gravatarSrc}\'" gravatar-size="100" alt="" class="avatar-img img-xs">'
                 .replace('{gravatarSrc}', row.email);
               return avatar + ' ' + (row.full_name || row.username);
@@ -45,14 +45,14 @@ export default function ProjectUsersListController(
           {
             title: 'E-mail',
             className: 'min-tablet-l',
-            render: function(data, type, row, meta) {
+            render: function(row) {
               return row.email;
             }
           },
           {
             title: 'Role in project:',
             className: 'min-tablet-l',
-            render: function(data, type, row, meta) {
+            render: function(row) {
               return ENV.roles[row.role];
             }
           }
