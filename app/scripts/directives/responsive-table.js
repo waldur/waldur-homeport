@@ -12,7 +12,7 @@
       scope: {
         controller: '=tableCtrl'
       },
-      template: '<table class="table table-striped"/>',
+      template: '<div class="full-width"><div class="table-responsive"><table class="table table-striped"></table></div></div>',
       link: function(scope, element) {
         var options = scope.controller.tableOptions;
         var table;
@@ -68,7 +68,7 @@
             tableOptions.scrollCollapse = options.scrollCollapse;
           }
 
-          return $(element.find('table')[0]).DataTable(tableOptions);
+          return $(element.find('.table')[0]).DataTable(tableOptions);
         }
 
         function getDom() {
