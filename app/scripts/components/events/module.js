@@ -16,4 +16,4 @@ export default module => {
   module.directive('eventDetailsDialog', eventDetailsDialog);
   module.directive('eventTypesDialog', eventTypesDialog);
   module.service('EventDialogsService', EventDialogsService);
-}
+};

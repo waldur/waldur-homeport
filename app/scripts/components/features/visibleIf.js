@@ -20,7 +20,7 @@ export default function visibleIf(features) {
     terminal: true,
     restrict: 'A',
     $$tlb: true,
-    compile: (element, attrs) => ($scope, element, attrs, ctrl, $transclude) => {
+    link: ($scope, element, attrs, ctrl, $transclude) => {
       const unbind = $scope.$watch(attrs.visibleIf, value => {
         if (features.isVisible(value)) {
           $transclude(clone => element.after(clone).remove());

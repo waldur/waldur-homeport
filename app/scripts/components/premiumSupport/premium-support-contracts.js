@@ -5,7 +5,7 @@ export default function premiumSupportContracts() {
     controller: ContractsListController,
     controllerAs: 'Ctrl',
     scope: {},
-  }
+  };
 }
 
 // @ngInject
@@ -86,7 +86,7 @@ function ContractsListController(
       return currentStateService.getProject().then(function(project) {
         vm.service.defaultFilter.project_uuid = project.uuid;
         return fn(filter);
-      })
+      });
     },
     showMore: function(contract) {
       var promise = premiumSupportPlansService.$get(null, contract.plan).then(function(response) {

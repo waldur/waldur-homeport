@@ -11,15 +11,7 @@ export default function authLoginComplete() {
 }
 
 // @ngInject
-function AuthLoginCompleteController($state, $stateParams, authService, baseControllerClass, usersService) {
-  var controllerScope = this;
-  var Controller = baseControllerClass.extend({
-    init: function() {
-      this._super();
-      authService.loginSuccess({data: {token: $stateParams.token}});
-      $state.go('dashboard.index')
-    }
-  });
-
-  controllerScope.__proto__ = new Controller();
+function AuthLoginCompleteController($state, $stateParams, authService) {
+  authService.loginSuccess({data: {token: $stateParams.token}});
+  $state.go('dashboard.index');
 }

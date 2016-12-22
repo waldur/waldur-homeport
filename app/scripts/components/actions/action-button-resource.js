@@ -1,5 +1,5 @@
 import template from './action-button-resource.html';
-import style from './action-button-resource.scss';
+import './action-button-resource.scss';
 
 export default function actionButtonResource() {
   return {

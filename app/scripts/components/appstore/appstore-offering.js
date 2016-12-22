@@ -8,7 +8,7 @@ export default function appstoreOffering() {
     controllerAs: 'OfferingController',
     scope: {},
     bindToController: true
-  }
+  };
 }
 
 function AppStoreOfferingController(
@@ -20,7 +20,7 @@ function AppStoreOfferingController(
   function activate() {
     vm.offering = AppStoreUtilsService.findOffering($stateParams.category);
     if (!vm.offering) {
-      $state.go('errorPage.notFound')
+      $state.go('errorPage.notFound');
     }
   }
 
@@ -32,7 +32,8 @@ function AppStoreOfferingController(
       is_reported_manually: true
     }).then(function() {
       $state.go('support.list');
-    }, function(error) {
+    }, function(response) {
+      vm.errors = response.data;
       ncUtilsFlash.error('Unable to create request for a turnkey solution.');
     });
   }

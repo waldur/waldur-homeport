@@ -9,5 +9,5 @@ export default function appstoreField($filter, $compile, $parse) {
       element.html(template);
       $compile(element.contents())(scope);
     }
-  }
+  };
 }

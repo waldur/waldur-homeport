@@ -24,4 +24,4 @@ export default function helpRoutes($stateProvider) {
       auth: true,
       noInitialData: true,
     });
-};
+}

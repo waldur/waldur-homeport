@@ -2,7 +2,7 @@ import { templateParser } from './openstack-template';
 
 // @ngInject
 export default class openstackTenantChangePackageService {
-  // Public API consists of two methods: 
+  // Public API consists of two methods:
   // * loadData - returns promise with fields {package, template, templates}
   // * saveData - accepts dictionary with fields {tenant, package, template, newTemplate}
 
@@ -104,6 +104,6 @@ export default class openstackTenantChangePackageService {
 Tenant name: ${context.tenant.name};
 tenant UUID: ${context.tenant.uuid};
 requested VPC template name: ${context.newTemplate.name};
-requested VPC template UUID: ${context.newTemplate.uuid}`
+requested VPC template UUID: ${context.newTemplate.uuid}`;
   }
 }

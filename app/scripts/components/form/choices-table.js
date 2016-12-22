@@ -13,7 +13,7 @@ export default function choicesTable() {
       value: '=',
       selectItem: '&'
     }
-  }
+  };
 }
 
 // @ngInject

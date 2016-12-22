@@ -6,4 +6,4 @@ export default module => {
   module.directive('invoiceDetails', invoiceDetails);
   module.controller('InvoicesListController', InvoicesListController);
   module.service('invoicesService', invoicesService);
-}
+};

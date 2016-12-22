@@ -1,4 +1,4 @@
-import sparklineDirective from './sparkline.js'
+import sparklineDirective from './sparkline.js';
 
 describe('Sparkline directive', function() {
 
@@ -15,7 +15,7 @@ describe('Sparkline directive', function() {
   const render = () => {
     element = $compile(directiveUsage)(scope);
     scope.$digest();
-  }
+  };
   const getColumns = () => element[0].querySelectorAll('.sparkline-column');
   const getBars = () => element[0].querySelectorAll('.sparkline-bar');
 

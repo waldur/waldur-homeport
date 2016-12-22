@@ -13,7 +13,7 @@ export default function() {
       close: '&',
       resolve: '='
     }
-  }
+  };
 }
 
 // @ngInject
@@ -37,7 +37,7 @@ function AppStoreCategorySelectorController(
       }
     });
 
-    var offerings = offerings.reduce((map, item) => {
+    offerings = offerings.reduce((map, item) => {
       map[item.key] = item;
       return map;
     }, {});

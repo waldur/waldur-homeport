@@ -161,5 +161,5 @@ export default function organizationRoutes($stateProvider) {
       data: {
         pageTitle: 'Create provider'
       }
-    })
-};
+    });
+}

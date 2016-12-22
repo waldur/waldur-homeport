@@ -4,7 +4,7 @@ export function appstoreHeader() {
   return {
     restrict: 'E',
     template: template,
-  }
+  };
 }
 
 // @ngInject

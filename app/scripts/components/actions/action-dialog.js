@@ -41,14 +41,15 @@ function ActionDialogController($scope, $q, $http, resourcesService, actionUtils
         }
       }
 
+      var promise;
       if ($scope.action.method === 'DELETE') {
         var url = $scope.action.url + '?' + ncUtils.toKeyValue($scope.form);
-        var promise = $http.delete(url);
+        promise = $http.delete(url);
       } else {
-        var promise = form.$save();
+        promise = form.$save();
       }
 
-      return promise.then(function(response) {
+      return promise.then(function() {
         $scope.errors = {};
         actionUtilsService.handleActionSuccess($scope.action);
         $scope.controller.reInitResource($scope.resource);

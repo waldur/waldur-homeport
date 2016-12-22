@@ -13,4 +13,4 @@ export default module => {
   module.directive('providerSettings', providerSettings);
   module.filter('quotaName', quotaName);
   module.filter('quotaValue', quotaValue);
-}
+};

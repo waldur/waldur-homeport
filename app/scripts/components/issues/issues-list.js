@@ -1,4 +1,3 @@
-import { ISSUE_CLASSES, ISSUE_FILTERS } from './constants';
 import template from './issues-list.html';
 
 export default function issueList() {
@@ -141,7 +140,7 @@ function IssueListController(
       this.connectWatchers();
     },
     connectWatchers: function() {
-      $scope.$watch(() => controllerScope.filter, filter => {
+      $scope.$watch(() => controllerScope.filter, () => {
         controllerScope.getList();
       }, true);
       var unbind = $rootScope.$on('refreshIssuesList', () => {

@@ -10,7 +10,7 @@ export default function openstackInstanceSummary() {
     scope: {
       model: '='
     }
-  }
+  };
 }
 
 // @ngInject
@@ -25,7 +25,7 @@ class SummaryController {
     this.components = {};
     this.OpenStackSummaryService.getServiceComponents(this.model.service)
       .then(components => {
-        this.components = components
+        this.components = components;
       })
       .finally(() => {
         this.loading = false;

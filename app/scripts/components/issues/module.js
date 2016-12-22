@@ -36,4 +36,4 @@ export default module => {
   module.directive('issueCreateDialog', issueCreateDialog);
   module.directive('issueRegistration', issueRegistration);
   module.config(issueRoutes);
-}
+};

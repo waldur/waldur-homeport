@@ -7,79 +7,79 @@ export default function ProjectDetailsController(
   function activate() {
     $scope.items = [
       {
-        icon: "fa-th-large",
-        label: "Dashboard",
-        link: "project.details({uuid: $ctrl.context.project.uuid})",
+        icon: 'fa-th-large',
+        label: 'Dashboard',
+        link: 'project.details({uuid: $ctrl.context.project.uuid})',
       },
       {
-        icon: "fa-shopping-cart",
-        label: "Service store",
-        feature: "appstore",
+        icon: 'fa-shopping-cart',
+        label: 'Service store',
+        feature: 'appstore',
         action: function() {
-          return AppStoreUtilsService.openDialog()
+          return AppStoreUtilsService.openDialog();
         },
-        state: "appstore",
+        state: 'appstore',
       },
       {
-        label: "Resources",
-        icon: "fa-files-o",
-        link: "project.resources",
+        label: 'Resources',
+        icon: 'fa-files-o',
+        link: 'project.resources',
         children: [
           {
-            link: "project.resources.vms({uuid: $ctrl.context.project.uuid})",
-            icon: "fa-desktop",
-            label: "Virtual machines",
-            feature: "vms",
-            countFieldKey: "vms"
+            link: 'project.resources.vms({uuid: $ctrl.context.project.uuid})',
+            icon: 'fa-desktop',
+            label: 'Virtual machines',
+            feature: 'vms',
+            countFieldKey: 'vms'
           },
           {
-            link: "project.resources.clouds({uuid: $ctrl.context.project.uuid})",
-            icon: "fa-cloud",
-            label: "Private clouds",
-            feature: "private_clouds",
-            countFieldKey: "private_clouds"
+            link: 'project.resources.clouds({uuid: $ctrl.context.project.uuid})',
+            icon: 'fa-cloud',
+            label: 'Private clouds',
+            feature: 'private_clouds',
+            countFieldKey: 'private_clouds'
           },
           {
-            link: "project.resources.apps({uuid: $ctrl.context.project.uuid})",
-            icon: "fa-cube",
-            label: "Applications",
-            feature: "apps",
-            countFieldKey: "apps"
+            link: 'project.resources.apps({uuid: $ctrl.context.project.uuid})',
+            icon: 'fa-cube',
+            label: 'Applications',
+            feature: 'apps',
+            countFieldKey: 'apps'
           },
           {
-            link: "project.resources.storage.tabs({uuid: $ctrl.context.project.uuid})",
-            icon: "fa-hdd-o",
-            label: "Storage",
-            feature: "storage",
-            countFieldKey: "storages"
+            link: 'project.resources.storage.tabs({uuid: $ctrl.context.project.uuid})',
+            icon: 'fa-hdd-o',
+            label: 'Storage',
+            feature: 'storage',
+            countFieldKey: 'storages'
           }
         ]
       },
       {
-        link: "project.support({uuid: $ctrl.context.project.uuid})",
-        icon: "fa-question-circle",
-        label: "Support",
-        feature: "premiumSupport",
-        countFieldKey: "premium_support_contracts"
+        link: 'project.support({uuid: $ctrl.context.project.uuid})',
+        icon: 'fa-question-circle',
+        label: 'Support',
+        feature: 'premiumSupport',
+        countFieldKey: 'premium_support_contracts'
       },
       {
-        link: "project.events({uuid: $ctrl.context.project.uuid})",
-        icon: "fa-bell-o",
-        label: "Audit logs",
-        feature: "eventlog"
+        link: 'project.events({uuid: $ctrl.context.project.uuid})',
+        icon: 'fa-bell-o',
+        label: 'Audit logs',
+        feature: 'eventlog'
       },
       {
-        link: "project.issues({uuid: $ctrl.context.project.uuid})",
-        icon: "fa-question-circle",
-        label: "Issues",
-        feature: "support"
+        link: 'project.issues({uuid: $ctrl.context.project.uuid})',
+        icon: 'fa-question-circle',
+        label: 'Issues',
+        feature: 'support'
       },
       {
-        link: "project.alerts({uuid: $ctrl.context.project.uuid})",
-        icon: "fa-fire",
-        label: "Alerts",
-        feature: "alerts",
-        countFieldKey: "alerts"
+        link: 'project.alerts({uuid: $ctrl.context.project.uuid})',
+        icon: 'fa-fire',
+        label: 'Alerts',
+        feature: 'alerts',
+        countFieldKey: 'alerts'
       },
       {
         label: 'Team',
@@ -89,9 +89,9 @@ export default function ProjectDetailsController(
         countFieldKey: 'users'
       },
       {
-        link: "project.delete({uuid: $ctrl.context.project.uuid})",
-        icon: "fa-wrench",
-        label: "Manage"
+        link: 'project.delete({uuid: $ctrl.context.project.uuid})',
+        icon: 'fa-wrench',
+        label: 'Manage'
       }
     ];
     $scope.$on('currentProjectUpdated', function() {

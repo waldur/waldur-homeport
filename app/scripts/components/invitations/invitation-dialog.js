@@ -12,7 +12,7 @@ export default function() {
       close: '&',
       resolve: '='
     }
-  }
+  };
 }
 
 // @ngInject

@@ -8,7 +8,7 @@ export default function premiumSupportProvision() {
     controller: PremiumSupportProvisionController,
     controllerAs: '$ctrl',
     bindToController: true
-  }
+  };
 }
 
 // @ngInject
@@ -60,14 +60,14 @@ class PremiumSupportProvisionController {
     let contract = this.contractsService.$create();
     contract.project = this.currentProject.url;
     contract.plan = this.selectedPlan.url;
-    return contract.$save().then(response => {
+    return contract.$save().then(() => {
       this.contractsService.clearAllCacheForCurrentEndpoint();
       this.$rootScope.$broadcast('refreshProjectList');
       this.$state.go('project.support', {uuid: this.currentProject.uuid});
       return true;
     }).catch(response => {
       this.errors = response.data;
-      this.ncUtilsFlash.error(message);
+      this.ncUtilsFlash.error('Unable to create premium support contract');
     });
   }
 }

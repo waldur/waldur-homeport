@@ -11,5 +11,5 @@ export default function appstoreFieldString() {
     controller: function() {},
     controllerAs: '$ctrl',
     bindToController: true
-  }
+  };
 }

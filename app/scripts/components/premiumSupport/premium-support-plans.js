@@ -14,5 +14,5 @@ export default function premiumSupportPlans() {
       selected: '=',
       onSelect: '&'
     }
-  }
+  };
 }

@@ -5,7 +5,7 @@ export default function volumeExtendDialog() {
     restrict: 'E',
     template: template,
     controller: VolumeExtendDialogController,
-  }
+  };
 }
 
 // @ngInject
@@ -15,7 +15,7 @@ function VolumeExtendDialogController($scope, resourcesService, actionUtilsServi
   $scope.submitForm = function() {
     var form = resourcesService.$create($scope.action.url);
     form.disk_size = $scope.options.newSize * 1024;
-    return form.$save().then(response => {
+    return form.$save().then(() => {
       actionUtilsService.handleActionSuccess($scope.action);
       $scope.errors = {};
       $scope.$close();

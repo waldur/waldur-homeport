@@ -12,5 +12,5 @@ export default function multiplyBy() {
         ngModelController.$formatters.unshift(x => Math.round(x / factor));
       }
     }
-  }
+  };
 }

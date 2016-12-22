@@ -116,7 +116,7 @@ export const ISSUE_FILTERS_SHORT = {
       label: 'Status'
     }
   }
-}
+};
 
 const mapStringsToChoices = choices => choices.map(item => ({
   label: item,

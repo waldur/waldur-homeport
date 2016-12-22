@@ -5,9 +5,9 @@ export default function issuesDashboard() {
     restrict: 'E',
     template: template,
     controller: IssuesDashboardController,
-  }
+  };
 }
 
 function IssuesDashboardController() {
-  
+
 }

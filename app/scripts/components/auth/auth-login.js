@@ -10,7 +10,7 @@ export default function authLogin() {
   };
 }
 
-// TODO: 
+// TODO:
 //
 // 1) This controller should NOT depend on baseControllerClass,
 //    because it has been deprecated. Instead ES6 class should be used

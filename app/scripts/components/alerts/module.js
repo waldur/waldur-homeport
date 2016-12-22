@@ -10,4 +10,4 @@ export default module => {
   module.service('AlertDialogsService', AlertDialogsService);
   module.directive('alertFilter', alertFilter);
   module.service('BaseAlertsListController', BaseAlertsListController);
-}
+};

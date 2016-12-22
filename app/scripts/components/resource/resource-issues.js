@@ -3,7 +3,7 @@ export default function resourceIssues() {
     restrict: 'E',
     controller: ResourceIssuesController,
     controllerAs: '$ctrl',
-    template: `<issues-list filter="$ctrl.filter" options="$ctrl.options"></issues-list>`,
+    template: '<issues-list filter="$ctrl.filter" options="$ctrl.options"></issues-list>',
     scope: {
       resource: '='
     },
