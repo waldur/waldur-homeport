@@ -179,7 +179,7 @@ export default function ProviderListController(
     },
     afterInstanceRemove: function(instance) {
       this._super(instance);
-      $location.search({'tab': 'providers'});
+      $location.search({tab: 'providers'});
     },
     showSelectedProvider: function() {
       var vm = this;

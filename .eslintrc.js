@@ -1,56 +1,65 @@
 module.exports = {
-  "env": {
-    "browser": true,
-    "es6": true
+  'env': {
+    'browser': true,
+    'es6': true
   },
-  "extends": "eslint:recommended",
-  "parserOptions": {
-    "sourceType": "module"
+  'extends': 'eslint:recommended',
+  'parserOptions': {
+    'sourceType': 'module'
   },
-  "rules": {
-    "indent": [
-      "error",
+  'rules': {
+    'indent': [
+      'error',
       2
     ],
-    "linebreak-style": [
-      "error",
-      "unix"
+    'linebreak-style': [
+      'error',
+      'unix'
     ],
-    "quotes": [
-      "error",
-      "single"
+    'quotes': [
+      'error',
+      'single'
     ],
-    "semi": [
-      "error",
-      "always"
+    'semi': [
+      'error',
+      'always'
     ],
-    "eol-last": [
-      "error",
-      "always"
+    'eol-last': [
+      'error',
+      'always'
     ],
-    "no-multiple-empty-lines": [
-      "error",
+    'no-multiple-empty-lines': [
+      'error',
       {
-        "max": 2,
-        "maxEOF": 1
+        'max': 2,
+        'maxEOF': 1
       }
     ],
-    "no-trailing-spaces": [
-      "error"
+    'no-trailing-spaces': [
+      'error'
     ],
-    "no-console": [
-      "warn"
-    ]
+    'no-console': [
+      'warn'
+    ],
+    'quote-props': [
+      'error',
+      'as-needed',
+      {
+        keywords: false,
+        unnecessary: true,
+        numbers: false
+      }
+    ],
   },
-  "globals": {
-    "angular": true,
-    "d3": true,
-    "Class": true,
-    "moment": true,
-    "describe": true,
-    "expect": true,
-    "it": true,
-    "beforeEach": true,
-    "inject": true
+  'globals': {
+    angular: true,
+    d3: true,
+    Class: true,
+    moment: true,
+    describe: true,
+    expect: true,
+    it: true,
+    beforeEach: true,
+    inject: true
   }
 };

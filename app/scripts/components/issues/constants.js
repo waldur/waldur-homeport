@@ -1,10 +1,3 @@
-export const ISSUE_TYPES = [
-  'Incident',
-  'Change request',
-  'Service request',
-  'Informational'
-];
-
 export const ISSUE_IDS = {
   INCIDENT: 'Incident',
   CHANGE_REQUEST: 'Change request',
@@ -13,24 +6,24 @@ export const ISSUE_IDS = {
 };
 
 export const ISSUE_CLASSES = {
-  'Incident': 'label-danger',
-  'Informational': 'label-warning',
-  'Change request': 'label-success',
-  'Service request': 'label-info'
+  INCIDENT: 'label-danger',
+  INFORMATIONAL: 'label-warning',
+  CHANGE_REQUEST: 'label-success',
+  SERVICE_REQUEST: 'label-info'
 };
 
 export const ISSUE_ICONS = {
-  'Incident': 'fa-exclamation-triangle',
-  'Change request': 'fa-check-square',
-  'Service request': 'fa-plus-square',
-  'Informational': 'fa-question-circle'
+  INCIDENT: 'fa-exclamation-triangle',
+  CHANGE_REQUEST: 'fa-check-square',
+  SERVICE_REQUEST: 'fa-plus-square',
+  INFORMATIONAL: 'fa-question-circle'
 };
 
 export const ISSUE_TEXT_CLASSES = {
-  'Incident': 'text-danger',
-  'Informational': 'text-warning',
-  'Change request': 'text-success',
-  'Service request': 'text-info'
+  INCIDENT: 'text-danger',
+  INFORMATIONAL: 'text-warning',
+  CHANGE_REQUEST: 'text-success',
+  SERVICE_REQUEST: 'text-info'
 };
 
 export const ISSUE_STATUSES = [
@@ -39,11 +32,11 @@ export const ISSUE_STATUSES = [
   'Won\'t fix'
 ];
 
-export const ISSUE_TYPE_CHOICES = ISSUE_TYPES.map(item => {
+export const ISSUE_TYPE_CHOICES = Object.keys(ISSUE_IDS).map(item => {
   return {
     iconClass: ISSUE_ICONS[item],
     textClass: ISSUE_TEXT_CLASSES[item],
-    label: item,
+    label: ISSUE_IDS[item],
     id: item
   };
 });

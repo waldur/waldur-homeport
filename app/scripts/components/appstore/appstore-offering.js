@@ -12,7 +12,7 @@ export default function appstoreOffering() {
 }
 
 function AppStoreOfferingController(
-  $stateParams, $state, issuesService, AppStoreUtilsService, ncUtilsFlash, ISSUE_TYPES) {
+  $stateParams, $state, issuesService, AppStoreUtilsService, ncUtilsFlash, ISSUE_IDS) {
   var vm = this;
   activate();
   vm.save = save;
@@ -28,7 +28,7 @@ function AppStoreOfferingController(
     return issuesService.createIssue({
       summary: 'Please create a turnkey solution: ' + vm.offering.label,
       description: vm.details,
-      type: ISSUE_TYPES.SERVICE_REQUEST,
+      type: ISSUE_IDS.SERVICE_REQUEST,
       is_reported_manually: true
     }).then(function() {
       $state.go('support.list');
