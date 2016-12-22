@@ -7,7 +7,7 @@ export default {
     'data_volume_size',
     'ssh_public_key',
     'floating_ip',
-    'skip_external_ip_assignment',
+    'allocate_floating_ip',
     'description',
     'user_data'
   ],
@@ -109,9 +109,9 @@ export default {
       ],
       formatter: floatingIPFormatter
     },
-    skip_external_ip_assignment: {
+    allocate_floating_ip: {
       type: 'boolean',
-      label: 'Skip external IP assignment'
+      label: 'Allocate and assign external IP'
     },
     description: {
       type: 'text',
