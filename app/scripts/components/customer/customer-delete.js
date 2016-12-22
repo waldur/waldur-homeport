@@ -88,7 +88,7 @@ function CustomerDeleteController(
         });
       }
       var confirmDelete = confirm('Confirm deletion?');
-        if (confirmDelete) {
+      if (confirmDelete) {
         currentStateService.setCustomer(null);
         this.customer.$delete().then(function(instance) {
           customersService.clearAllCacheForCurrentEndpoint();

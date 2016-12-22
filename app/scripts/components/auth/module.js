@@ -15,4 +15,4 @@ export default module => {
   module.config(authRoutes);
   module.config(initAuthToken);
   module.config(initAuthProvider);
-}
+};

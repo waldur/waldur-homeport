@@ -42,5 +42,5 @@ export default function issueRoutes($stateProvider) {
       data: {
         pageTitle: 'List requests'
       }
-    })
+    });
 }

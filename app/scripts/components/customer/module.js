@@ -16,4 +16,4 @@ export default module => {
   module.directive('customerIssues', customerIssues);
   module.directive('customerEvents', customerEvents);
   module.config(routes);
-}
+};

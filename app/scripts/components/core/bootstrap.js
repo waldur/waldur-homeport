@@ -1,5 +1,4 @@
 export default function bootstrap(modulename, files) {
-  const application = angular.module(modulename);
   loadSettings().then(bootstrapApplication);
 
   function loadSettings() {
@@ -7,15 +6,14 @@ export default function bootstrap(modulename, files) {
     const $http = initInjector.get('$http');
     const $q = initInjector.get('$q');
     const promises = files.map(file => $http.get(file).then(response => response.data));
-    return $q.all(promises).then(updateSettings);
+    return $q.all(promises).then(updateSettings).catch(reportError);
 
     function updateSettings(responses) {
       window.$$CUSTOMENV = angular.extend.apply(null, responses);
     }
 
-    function reportError(response) {
+    function reportError() {
       alert('Unable to load application configuration. Please reboot the page');
-      console.log(response);
     }
   }
 

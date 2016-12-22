@@ -1,4 +1,4 @@
-import visibleIfDirective from './visibleIf.js'
+import visibleIfDirective from './visibleIf.js';
 
 describe('VisibleIf directive', function() {
 
@@ -20,7 +20,7 @@ describe('VisibleIf directive', function() {
   const render = (directiveUsage = '<div><button visible-if="item.feature"></div>') => {
     element = $compile(directiveUsage)(scope);
     scope.$digest();
-  }
+  };
   const isVisible = () => element[0].querySelectorAll('button').length > 0;
 
   it('hides element if feature is hidden', function() {

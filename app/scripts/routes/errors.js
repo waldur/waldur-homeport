@@ -39,4 +39,4 @@ export default function errorRoutes($stateProvider) {
         pageTitle: 'Quota limit exceeded'
       }
     });
-};
+}

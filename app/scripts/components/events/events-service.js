@@ -32,7 +32,7 @@ export default function eventsService($q, baseServiceClass, ENV) {
           return {
             name: event.event_type.replace('resource_', '').replace(/_/g, ' '),
             timestamp: event['@timestamp']
-          }
+          };
         });
       });
     },

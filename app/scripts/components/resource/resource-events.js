@@ -8,7 +8,7 @@ export default function resourceEvents() {
     bindToController: {
       resource: '='
     }
-  }
+  };
 }
 
 // @ngInject
@@ -22,7 +22,7 @@ function ResourceEventsController(baseEventListController) {
     getFilter: function() {
       return {
         scope: controllerScope.resource.url
-      }
+      };
     }
   });
 

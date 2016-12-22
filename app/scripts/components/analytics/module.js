@@ -10,4 +10,4 @@ export default module => {
   module.directive('pieChart', pieChart);
   module.directive('resourceAnalysis', resourceAnalysis);
   module.config(analyticsRoutes);
-}
+};

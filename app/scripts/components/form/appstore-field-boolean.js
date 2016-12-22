@@ -11,5 +11,5 @@ export default function appstoreFieldBoolean() {
     controller: function() {},
     controllerAs: '$ctrl',
     bindToController: true
-  }
+  };
 }

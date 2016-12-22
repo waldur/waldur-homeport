@@ -7,7 +7,7 @@ export default function costAnalysis() {
     controller: CostAnalysisController,
     controllerAs: 'DashboardController',
     scope: {},
-  }
+  };
 }
 
 // @ngInject
@@ -72,7 +72,7 @@ function CostAnalysisController(
       rows.forEach(function(row) {
         if (['customer', 'service', 'project', 'resource'].indexOf(row.scope_type) >= 0) {
           var date = moment(row.month + ' ' + row.year, 'MM YYYY');
-          var key = date.format("YYYYMM");
+          var key = date.format('YYYYMM');
 
           if (!result[key]) {
 
@@ -98,8 +98,8 @@ function CostAnalysisController(
 
     processTableData: function(rows) {
       var results = {},
-          scopeArray,
-          currentDate = new Date();
+        scopeArray,
+        currentDate = new Date();
       for (var i = 0; i < rows.length; i++) {
         var row = rows[i];
         var date = moment(row.month, 'MM').format('MMMM') + ' ' + row.year;
@@ -110,7 +110,7 @@ function CostAnalysisController(
             projects: [],
             services: [],
             resources: []
-          }
+          };
         }
         if (row.scope_type === 'customer') {
           results[date].total = row.total;
@@ -129,15 +129,15 @@ function CostAnalysisController(
         }
       }
       var table = [];
-      for (var date in results) {
-        var row = results[date];
+      for (var key in results) {
+        var val = results[key];
         table.push({
-          date: date,
-          total: row.total,
-          projects: row.projects,
-          services: row.services,
-          resources: row.resources,
-          isCurrent: row.isCurrent
+          date: key,
+          total: val.total,
+          projects: val.projects,
+          services: val.services,
+          resources: val.resources,
+          isCurrent: val.isCurrent
         });
       }
       if (table.length > 0) {

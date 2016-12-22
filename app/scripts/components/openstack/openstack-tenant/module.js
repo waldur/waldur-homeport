@@ -13,7 +13,7 @@ export default module => {
   module.service('packageTemplatesService', packageTemplatesService);
   module.service('openstackPackagesService', openstackPackagesService);
   module.service('openstackTenantChangePackageService', openstackTenantChangePackageService);
-}
+};
 
 // @ngInject
 function fieldsConfig(AppstoreFieldConfigurationProvider) {

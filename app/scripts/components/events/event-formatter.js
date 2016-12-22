@@ -20,7 +20,7 @@ export default function eventFormatter(ENV, BaseEventFormatter) {
       if (ENV.featuresVisible) {
         return true;
       }
-      var parts = route.split(".");
+      var parts = route.split('.');
       for (var i = 0; i < parts.length; i++) {
         var part = parts[i];
         if (ENV.toBeFeatures.indexOf(part) != -1) {

@@ -5,37 +5,38 @@ export default function alertFormatter(BaseEventFormatter, $state, ncUtils) {
   var cls = BaseEventFormatter.extend({
     format: function(alert) {
       if (alert.alert_type === 'quota_usage_is_over_threshold') {
-      return this.renderQuotaAlert(alert);
+        return this.renderQuotaAlert(alert);
       } else if (alert.alert_type === 'service_has_unmanaged_resources') {
-      return this.renderUnmanagedResourcesAlert(alert);
+        return this.renderUnmanagedResourcesAlert(alert);
       } else {
-      return this._super(alert);
+        return this._super(alert);
       }
     },
     renderQuotaAlert: function(alert) {
       var context = {
-       customer_name: alert.context.scope_name,
-       quota_name: ncUtils.getPrettyQuotaName(alert.context.quota_name) + 's',
-       quota_limit: alert.context.quota_limit,
-       quota_threshold: 80,
-       quota_use: alert.context.quota_usage,
-       quota_usage: Math.round(alert.context.quota_usage * 100.0 / alert.context.quota_limit),
-       plan_url: $state.href('organization.plans', {uuid: alert.context.scope_uuid})
-      }
+        customer_name: alert.context.scope_name,
+        quota_name: ncUtils.getPrettyQuotaName(alert.context.quota_name) + 's',
+        quota_limit: alert.context.quota_limit,
+        quota_threshold: 80,
+        quota_use: alert.context.quota_usage,
+        quota_usage: Math.round(alert.context.quota_usage * 100.0 / alert.context.quota_limit),
+        plan_url: $state.href('organization.plans', {uuid: alert.context.scope_uuid})
+      };
+      var template;
       if (alert.context.quota_limit == alert.context.quota_usage) {
-      var template = 'Customer {customer_name} has reached {quota_name} quota limit ({quota_limit}). <a href="{plan_url}">Upgrade your plan</a>';
+        template = 'Customer {customer_name} has reached {quota_name} quota limit ({quota_limit}). <a href="{plan_url}">Upgrade your plan</a>';
       } else {
-      var template = 'Customer {customer_name} has exceeded the {quota_threshold}% {quota_name} quota threshold. The quota limit is {quota_limit}, and current usage is {quota_use} ({quota_usage}% of limit). <a href="{plan_url}">Upgrade your plan</a>';
+        template = 'Customer {customer_name} has exceeded the {quota_threshold}% {quota_name} quota threshold. The quota limit is {quota_limit}, and current usage is {quota_use} ({quota_usage}% of limit). <a href="{plan_url}">Upgrade your plan</a>';
       }
       return this.renderTemplate(template, context);
     },
     renderUnmanagedResourcesAlert: function(alert) {
       var context = {
-      import_url: $state.href('import.import', {
-        service_type: alert.context.service_type,
-        service_uuid: alert.context.service_uuid
-      }),
-      service_name: alert.context.service_name
+        import_url: $state.href('import.import', {
+          service_type: alert.context.service_type,
+          service_uuid: alert.context.service_uuid
+        }),
+        service_name: alert.context.service_name
       };
       var template = 'Provider {service_name} has unmanaged resources. <a href="{import_url}">Import unmanaged resources to current project</a>.';
       return this.renderTemplate(template, context);
@@ -53,29 +54,29 @@ export default function alertFormatter(BaseEventFormatter, $state, ncUtils) {
       if (!this.routeEnabled(route)) {
         return;
       }
-      var route, args, uuid = context[entity + "_uuid"];
+      var route, args, uuid = context[entity + '_uuid'];
       switch(entity) {
-        case 'service':
+      case 'service':
         route = 'organization.providers';
         args = {
-        uuid: context.customer_uuid,
-        providerUuid: uuid,
-        providerType: context.service_type,
+          uuid: context.customer_uuid,
+          providerUuid: uuid,
+          providerType: context.service_type,
         };
         break;
 
-        case 'resource':
+      case 'resource':
         route = 'resources.details';
         args = {
-        resource_type: context.resource_type,
-        uuid: uuid
+          resource_type: context.resource_type,
+          uuid: uuid
         };
         break;
 
-        case 'customer':
+      case 'customer':
         route = 'organization.details';
         args = {
-        uuid: context.customer_uuid
+          uuid: context.customer_uuid
         };
         break;
       }

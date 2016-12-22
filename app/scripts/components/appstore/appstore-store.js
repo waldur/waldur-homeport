@@ -7,7 +7,7 @@ export default function appstoreStore() {
     controller: AppStoreController,
     controllerAs: 'AppStore',
     scope: {},
-  }
+  };
 }
 
 // @ngInject
@@ -150,7 +150,7 @@ function AppStoreController(
       var vm = this;
       vm.selectedResourceType = type;
       vm.errors = {};
-      vm.selectedResourceTypeName = type.split(/(?=[A-Z])/).join(" ");
+      vm.selectedResourceTypeName = type.split(/(?=[A-Z])/).join(' ');
       vm.fields = [];
 
       var key = vm.serviceType + '.' + vm.selectedResourceType;
@@ -197,15 +197,17 @@ function AppStoreController(
         }
 
         if (options.url && name != 'service_project_link') {
-          var parts = options.url.split("?");
+          var parts = options.url.split('?');
+          var base_url;
+          var query;
           if (parts.length > 1) {
-            var base_url = parts[0];
-            var query = ncUtils.parseQueryString(parts[1])
+            base_url = parts[0];
+            query = ncUtils.parseQueryString(parts[1]);
           } else {
-            var base_url = options.url;
-            var query = {};
+            base_url = options.url;
+            query = {};
           }
-          var query = angular.extend(query, context);
+          query = angular.extend(query, context);
 
           var promise = servicesService.getAll(query, base_url).then(function(response) {
             validChoices[name] = response;
@@ -243,13 +245,13 @@ function AppStoreController(
       vm.renderStore = false;
       vm.loadingProviders = true;
 
-      vm.loadProjectWithServices().then(function(response) {
+      vm.loadProjectWithServices().then(function() {
         for (var j = 0; j < categories.length; j++) {
           var category = categories[j];
           vm.categoryServices[category.name] = [];
           for (var i = 0; i < vm.currentProject.services.length; i++) {
             var service = vm.currentProject.services[i];
-            service.warning = vm.getServiceDisabledReason(service) || 
+            service.warning = vm.getServiceDisabledReason(service) ||
                               vm.getServiceWarningMessage(service);
             service.enabled = !vm.getServiceDisabledReason(service);
             if (category.services && (category.services.indexOf(service.type) + 1)) {
@@ -339,7 +341,7 @@ function AppStoreController(
     },
     getTooltip: function() {
       if (!this.instance) {
-        return "Instance is not configured";
+        return 'Instance is not configured';
       }
       var fields = [];
       for (var name in this.allFormOptions) {
@@ -349,7 +351,7 @@ function AppStoreController(
         }
       }
       if (fields.length > 0) {
-        return "Please specify " + fields.join(", ").toLowerCase();
+        return 'Please specify ' + fields.join(', ').toLowerCase();
       }
     },
     getResourceUrl: function() {

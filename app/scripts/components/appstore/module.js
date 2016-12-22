@@ -19,4 +19,4 @@ export default module => {
   module.directive('appstoreStore', appstoreStore);
   module.config(appstoreRoutes);
   module.provider('AppstoreFieldConfiguration', AppstoreFieldConfiguration);
-}
+};

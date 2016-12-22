@@ -120,7 +120,7 @@ function CustomerUsersListController(
         var href = $state.href('project.details', { uuid: item.uuid });
         return '<a href="{href}">{projectName}</a>'
           .replace('{projectName}', projectName)
-          .replace('{href}', href)
+          .replace('{href}', href);
       }).join(', ');
     },
     getRowActions: function() {

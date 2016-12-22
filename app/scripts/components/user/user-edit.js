@@ -1,5 +1,5 @@
 import template from './user-edit.html';
-import style from './user-edit.scss';
+import './user-edit.scss';
 
 export default function userEdit() {
   return {

@@ -12,7 +12,7 @@ export default function appstoreListDialog() {
     },
     controller: DialogController,
     controllerAs: '$ctrl',
-  }
+  };
 }
 
 class DialogController {
