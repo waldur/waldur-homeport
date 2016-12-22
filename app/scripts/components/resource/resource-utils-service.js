@@ -7,11 +7,11 @@ export default function resourceUtils(ncUtils, ncServiceUtils, authService, $fil
         return;
       }
 
-      if (ncUtils.startsWith(resource.access_url, "http")) {
+      if (ncUtils.startsWith(resource.access_url, 'http')) {
         resource.access_info_url = resource.access_url;
         resource.access_info_text = 'Open';
 
-        if (ncUtils.endsWith(resource.access_url, "/rdp/")) {
+        if (ncUtils.endsWith(resource.access_url, '/rdp/')) {
           resource.access_info_text = 'Connect';
           resource.access_info_url = authService.getDownloadLink(resource.access_url);
         }
@@ -94,12 +94,12 @@ export default function resourceUtils(ncUtils, ncServiceUtils, authService, $fil
         context.label = resource.runtime_state || resource.state;
         if (resource.service_settings_state.toLowerCase() !== 'erred') {
           context.className = context.className || 'progress-bar-primary';
-          context.tooltip = `Resource is in sync`;
+          context.tooltip = 'Resource is in sync';
           showRuntimeState = true;
         } else {
           let errorMessage = resource.service_settings_error_message;
           context.className = context.className || 'progress-bar-warning';
-          context.tooltip = `Service settings of this resource are in state erred`;
+          context.tooltip = 'Service settings of this resource are in state erred';
           if (errorMessage) {
             context.tooltip += `, error message: ${errorMessage}`;
           }
@@ -107,7 +107,7 @@ export default function resourceUtils(ncUtils, ncServiceUtils, authService, $fil
       } else if (resource.state.toLowerCase() === 'erred') {
         context.className = 'progress-bar-warning';
         context.label = resource.runtime_state || resource.state;
-        context.tooltip = `Failed to operate with backend`;
+        context.tooltip = 'Failed to operate with backend';
         let errorMessage = resource.error_message;
         if (errorMessage) {
           context.tooltip += `, error message: ${errorMessage}`;

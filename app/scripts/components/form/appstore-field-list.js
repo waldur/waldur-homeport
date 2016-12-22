@@ -11,7 +11,7 @@ export default function appstoreFieldList() {
       field: '=',
       model: '='
     }
-  }
+  };
 }
 
 // @ngInject

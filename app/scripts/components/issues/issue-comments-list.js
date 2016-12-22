@@ -38,7 +38,7 @@ class IssueCommentsListController {
       issue_uuid: this.issue.uuid
     }).then(comments => {
       this.comments = comments;
-    }).catch(response => {
+    }).catch(() => {
       this.erred = true;
     }).finally(() => {
       this.loading = false;

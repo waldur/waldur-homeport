@@ -31,7 +31,7 @@ function ActionListController(actionUtilsService, scope) {
       action.pending = false;
       loadActions();
     });
-  }
+  };
   scope.loading = false;
   loadActions();
   scope.$watch('entity', function(newEntity, oldEntity) {

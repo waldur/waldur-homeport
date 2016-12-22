@@ -17,4 +17,4 @@ export default module => {
   module.directive('premiumSupportContracts', premiumSupportContracts);
   module.directive('premiumSupportSummary', premiumSupportSummary);
   module.config(premiumSupportRoute);
-}
+};

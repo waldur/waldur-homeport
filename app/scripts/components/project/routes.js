@@ -158,4 +158,4 @@ export default function projectRoutes($stateProvider) {
       url: '?service_type&service_uuid',
       templateUrl: 'views/import/import.html',
     });
-};
+}

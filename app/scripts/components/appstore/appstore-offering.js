@@ -8,11 +8,11 @@ export default function appstoreOffering() {
     controllerAs: 'OfferingController',
     scope: {},
     bindToController: true
-  }
+  };
 }
 
 function AppStoreOfferingController(
-  $stateParams, $state, issuesService, AppStoreUtilsService, ncUtilsFlash, ISSUE_TYPES) {
+  $stateParams, $state, issuesService, AppStoreUtilsService, ncUtilsFlash, ISSUE_IDS) {
   var vm = this;
   activate();
   vm.save = save;
@@ -20,7 +20,7 @@ function AppStoreOfferingController(
   function activate() {
     vm.offering = AppStoreUtilsService.findOffering($stateParams.category);
     if (!vm.offering) {
-      $state.go('errorPage.notFound')
+      $state.go('errorPage.notFound');
     }
   }
 
@@ -28,11 +28,12 @@ function AppStoreOfferingController(
     return issuesService.createIssue({
       summary: 'Please create a turnkey solution: ' + vm.offering.label,
       description: vm.details,
-      type: ISSUE_TYPES.SERVICE_REQUEST,
+      type: ISSUE_IDS.SERVICE_REQUEST,
       is_reported_manually: true
     }).then(function() {
       $state.go('support.list');
-    }, function(error) {
+    }, function(response) {
+      vm.errors = response.data;
       ncUtilsFlash.error('Unable to create request for a turnkey solution.');
     });
   }

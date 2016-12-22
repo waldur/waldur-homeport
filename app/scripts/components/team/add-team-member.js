@@ -5,7 +5,7 @@ export default function addTeamMember() {
     restrict: 'E',
     template: template,
     controller: AddTeamMemberDialogController
-  }
+  };
 }
 
 // @ngInject

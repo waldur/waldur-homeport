@@ -27,7 +27,7 @@ function ProjectsListController(
       this.service = projectsService;
       this._super();
       this.activate();
-      $scope.$on('currentCustomerUpdated', function(event, customer) {
+      $scope.$on('currentCustomerUpdated', function() {
         $timeout(function() {
           controllerScope.resetCache();
         });
@@ -61,7 +61,7 @@ function ProjectsListController(
           title: 'Name',
           render: function(row) {
             var href = $state.href('project.details', {uuid: row.uuid});
-            return "<a href=\"{href}\">{name}</a>"
+            return '<a href="{href}">{name}</a>'
                    .replace('{href}', href)
                    .replace('{name}', row.name);
           }
@@ -121,9 +121,9 @@ function ProjectsListController(
       var quotaReached = ncUtils.isCustomerQuotaReached(vm.currentCustomer, 'project');
       var title;
       if (!ownerOrStaff) {
-        title = "You don't have enough privileges to perform this operation";
+        title = 'You don\'t have enough privileges to perform this operation';
       } else if (quotaReached) {
-        title = "Quota has been reached";
+        title = 'Quota has been reached';
       }
       return [
         {

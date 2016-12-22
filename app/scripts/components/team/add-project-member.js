@@ -5,7 +5,7 @@ export default function addProjectMember() {
     restrict: 'E',
     template: template,
     controller: AddProjectMemberDialogController
-  }
+  };
 }
 
 // @ngInject

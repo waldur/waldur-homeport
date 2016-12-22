@@ -9,7 +9,7 @@ export default function eventRegistry() {
   }
 
   function type_to_entity(type) {
-    return type.split("_")[0];
+    return type.split('_')[0];
   }
 
   function types_to_entities(types) {
@@ -17,7 +17,7 @@ export default function eventRegistry() {
     for (var i = 0; i < types.length; i++) {
       var entity = type_to_entity(types[i]);
       if (entities.indexOf(entity) == -1) {
-        entities.push(entity)
+        entities.push(entity);
       }
     }
     entities.sort();
@@ -52,5 +52,5 @@ export default function eventRegistry() {
     entities: get_entities(),
     types_to_entities: types_to_entities,
     entities_to_types: entities_to_types
-  }
+  };
 }

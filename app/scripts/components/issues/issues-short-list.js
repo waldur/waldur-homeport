@@ -31,7 +31,7 @@ class IssuesShortListController {
         return item;
       });
       this.loading = false;
-    });    
+    });
   }
 
   openUserDialog(user) {

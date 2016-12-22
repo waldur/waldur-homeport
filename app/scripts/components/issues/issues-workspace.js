@@ -12,29 +12,29 @@ export default function issuesWorkspace() {
 function IssuesWorkspaceController($scope) {
   $scope.items = [
     {
-      label: "Dashboard",
-      icon: "fa-th-large",
-      link: "support.dashboard"
+      label: 'Dashboard',
+      icon: 'fa-th-large',
+      link: 'support.dashboard'
     },
     {
-      label: "Helpdesk",
-      icon: "fa-headphones",
-      link: "support.helpdesk"
+      label: 'Helpdesk',
+      icon: 'fa-headphones',
+      link: 'support.helpdesk'
     },
     {
-      label: "Requests",
-      icon: "fa-list",
-      link: "support.list"
+      label: 'Requests',
+      icon: 'fa-list',
+      link: 'support.list'
     },
     {
-      label: "Activity stream",
-      icon: "fa-rss",
-      link: "support.activity"
+      label: 'Activity stream',
+      icon: 'fa-rss',
+      link: 'support.activity'
     },
     {
-      label: "SLAs",
-      icon: "fa-book",
-      link: "support.sla"
+      label: 'SLAs',
+      icon: 'fa-book',
+      link: 'support.sla'
     }
   ];
 }

@@ -20,9 +20,9 @@ export default function alertsService(baseServiceClass, ENV) {
     },
     getAvailableIconTypes: function() {
       var icons = [],
-          icon,
-          descriptions = [],
-          description;
+        icon,
+        descriptions = [],
+        description;
       for (var i in ALERT_ICONS_TYPES) {
         if (ENV.toBeFeatures.indexOf(i) === -1 && ALERT_ICONS_TYPES.hasOwnProperty(i)) {
           icon = i.slice(0, -1);

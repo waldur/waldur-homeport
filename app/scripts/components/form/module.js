@@ -30,4 +30,4 @@ export default module => {
   module.directive('helpicon', helpicon);
   module.directive('multiplyBy', multiplyBy);
   module.directive('choicesTable', choicesTable);
-}
+};

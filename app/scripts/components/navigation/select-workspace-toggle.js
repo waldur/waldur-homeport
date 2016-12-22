@@ -9,7 +9,7 @@ export default function selectWorkspaceToggle() {
     controllerAs: '$ctrl',
     bindToController: true,
     scope: {}
-  }
+  };
 }
 
 const workspaceIconClasses = {
@@ -86,7 +86,7 @@ class SelectWorkspaceToggleController {
 
   getTooltip() {
     if (!this.hasCustomer) {
-      return `You don't have any organization yet`;
+      return 'You don\'t have any organization yet';
     }
   }
 

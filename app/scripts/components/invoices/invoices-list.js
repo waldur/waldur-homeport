@@ -21,7 +21,7 @@ export default function InvoicesListController(
       return currentStateService.getCustomer().then(customer => {
         this.currentCustomer = customer;
         return fn(filter);
-      })
+      });
     },
     getTableOptions: function() {
       return {

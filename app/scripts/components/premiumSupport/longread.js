@@ -13,5 +13,5 @@ export default function() {
       text: '='
     },
     template: '<div class="longread" ng-bind-html="$ctrl.formatted"></div>'
-  }
+  };
 }

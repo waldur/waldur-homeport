@@ -23,7 +23,7 @@ class IssueCommentsFormController {
     var form = this.issueCommentsService.$create(this.issue.url + 'comment/');
     form.description = this.description;
     this.submitting = true;
-    return form.$save().then(comment => {
+    return form.$save().then(() => {
       this.description = '';
       return this.onCommentCreated();
     }).finally(() => {

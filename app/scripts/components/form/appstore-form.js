@@ -12,7 +12,7 @@ export default function appstoreForm() {
     controller: AppstoreFormController,
     controllerAs: '$ctrl',
     bindToController: true
-  }
+  };
 }
 
 class AppstoreFormController {

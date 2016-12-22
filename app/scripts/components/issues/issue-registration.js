@@ -48,19 +48,19 @@ class IssueRegistrationController {
   }
 
   init() {
-    this.$scope.$watch(() => this.issue.caller, caller => {
+    this.$scope.$watch(() => this.issue.caller, () => {
       this.issue.customer = null;
       this.refreshCustomers();
     });
-    this.$scope.$watch(() => this.issue.customer, customer => {
+    this.$scope.$watch(() => this.issue.customer, () => {
       this.issue.project = null;
       this.refreshProjects();
     });
-    this.$scope.$watch(() => this.issue.project, project => {
+    this.$scope.$watch(() => this.issue.project, () => {
       this.issue.resource = null;
       this.refreshResources();
     });
-    this.$scope.$watch(() => this.issue.scope, scope => {
+    this.$scope.$watch(() => this.issue.scope, () => {
       this.issue.resource = null;
       this.refreshResources();
     });
@@ -121,10 +121,11 @@ class IssueRegistrationController {
       params.name = name;
     }
     this.projectsService.filterByCustomer = false;
-    return this.projectsService.getList(params).then(projects => {
+    let promise = this.projectsService.getList(params).then(projects => {
       this.projects = projects;
     });
     this.projectsService.filterByCustomer = true;
+    return promise;
   }
 
   refreshResources(name) {
@@ -141,10 +142,11 @@ class IssueRegistrationController {
       params.name = name;
     }
     this.resourcesService.filterByCustomer = false;
-    return this.resourcesService.getList(params).then(resources => {
+    let promise = this.resourcesService.getList(params).then(resources => {
       this.resources = resources;
     });
     this.resourcesService.filterByCustomer = true;
+    return promise;
   }
 
   filterByCaller(caller) {

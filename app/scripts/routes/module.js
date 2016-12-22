@@ -12,4 +12,4 @@ export default module => {
   module.config(helpRoutes);
   module.config(paymentRoutes);
   module.config(planRoutes);
-}
+};

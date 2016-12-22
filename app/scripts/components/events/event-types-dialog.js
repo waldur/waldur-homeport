@@ -11,7 +11,7 @@ export default function eventTypesDialog() {
       dismiss: '&',
       resolve: '='
     }
-  }
+  };
 }
 
 class EventTypesDialogController {

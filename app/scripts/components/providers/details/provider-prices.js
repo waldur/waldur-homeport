@@ -69,7 +69,7 @@ function ProviderPricesController(
           var hourlyRateColumn = vm.entityOptions.list[vm.entityOptions.list.length - 1];
           hourlyRateColumn.type = ENTITYLISTFIELDTYPES.editable;
         }
-      })
+      });
     },
     isEditable: function() {
       var vm = this;

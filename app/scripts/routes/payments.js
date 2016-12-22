@@ -40,4 +40,4 @@ export default function paymentRoutes($stateProvider) {
         pageTitle: 'Cancel payment'
       }
     });
-};
+}

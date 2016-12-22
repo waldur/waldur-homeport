@@ -8,4 +8,4 @@ export default module => {
   module.directive('selectWorkspaceDialog', selectWorkspaceDialog);
   module.directive('sidebar', sidebar);
   module.directive('uiSrefActiveIf', uiSrefActiveIf);
-}
+};
