@@ -13,7 +13,7 @@ export default function resourceDetails() {
 }
 
 // @ngInject
-function ResourceDetailsController($scope, resourceUtils, ncUtils, currentStateService, ENV) {
+function ResourceDetailsController($scope, resourceUtils, ncUtils, currentStateService, ENV, AppstoreFieldConfiguration) {
   $scope.$watch('resource', function() {
     var resource = $scope.resource;
     if (resource) {
@@ -26,7 +26,6 @@ function ResourceDetailsController($scope, resourceUtils, ncUtils, currentStateS
       $scope.formatted_resource_type = resourceUtils.formatResourceType(resource);
       resource.uptime = resourceUtils.getUptime(resource);
       resource.error_message = resource.error_message || ENV.defaultErrorMessage;
-      resource.displaySecurityGroups = securityGroupsFormatter(resource.security_groups);
 
       if (resource.instance) {
         resource.instance_uuid = ncUtils.getUUID(resource.instance);
@@ -35,24 +34,7 @@ function ResourceDetailsController($scope, resourceUtils, ncUtils, currentStateS
       if (resource.source_volume) {
         resource.source_volume_uuid = ncUtils.getUUID(resource.source_volume);
       }
+      resource.showSecurityGroups = !!AppstoreFieldConfiguration[resource.resource_type].security_groups;
     }
   });
-
-  function securityGroupsFormatter(securityGroups) {
-    let displayGroups = [];
-    securityGroups.forEach(function(item) {
-      let rules = item.rules.map(function(rule) {
-        let port = rule.from_port === rule.to_port ?
-          `port: ${rule.from_port}` :
-          `ports: ${rule.from_port}-${rule.to_port}`;
-        return `${rule.protocol}, ${port}, cidr: ${rule.cidr}`
-      }).join('<br />');
-      let description = item.description ? `${item.description} <br />` : ``;
-      displayGroups.push({
-        name: item.name,
-        rules: `${description} ${rules}`
-      });
-    });
-    return displayGroups
-  }
 }

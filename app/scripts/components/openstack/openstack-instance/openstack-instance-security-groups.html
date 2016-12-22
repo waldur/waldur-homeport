@@ -1,0 +1,12 @@
+<div class="m-b-xs">
+    <dt>
+        Security groups:
+    </dt>
+    <dd>
+        <ul>
+            <li ng-repeat="key in $ctrl.displayGroups" uib-tooltip-html="key.rules">
+                {{key.name}}
+            </li>
+        </ul>
+    </dd>
+</div>

@@ -146,17 +146,7 @@
     </dd>
   </div>
 
-  <div class="m-b-xs">
-    <dt>
-      Security groups:
-    </dt>
-    <dd>
-      <ul>
-        <li ng-repeat="key in resource.displaySecurityGroups" uib-tooltip-html="key.rules">
-          {{key.name}}
-        </li>
-      </ul>
-    </dd>
-  </div>
+  <openstack-instance-security-groups ng-if="resource.showSecurityGroups"
+                                      security-groups="resource.security_groups"></openstack-instance-security-groups>
 
 </dl>
