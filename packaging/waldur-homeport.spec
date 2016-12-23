@@ -60,7 +60,7 @@ rm -rf %{buildroot}
 %config(noreplace) %{__conf_dir}/nginx.conf
 
 %changelog
-* Fri Dec 23 2016 Juri Hudolejev <juri@opennodecloud.com> - 2.0.0-1.el7
+* Fri Dec 23 2016 Juri Hudolejev <juri@opennodecloud.com> - 2.0.0-1
 - New upstream release
 
 * Fri Nov 11 2016 Juri Hudolejev <juri@opennodecloud.com> - 0.1.0-1
