@@ -1,9 +1,9 @@
 {
-  "name": "NodeConductor-web",
-  "version": "0.0.0",
-  "description": "NodeConductor web client",
+  "name": "waldur-homeport",
+  "version": "2.0.0",
+  "description": "Web interface for Waldur MasterMind cloud orchestrator",
   "repository": "https://code.opennodecloud.com/nc-saas/nodeconductor-web",
-  "license": "Proprietary",
+  "license": "MIT",
   "dependencies": {
     "babel-core": "^6.17.0",
     "babel-loader": "^6.2.5",
@@ -46,6 +46,8 @@
   },
   "devDependencies": {
     "css-loader": "^0.25.0",
+    "eslint": "^3.12.2",
+    "eslint-loader": "^1.6.1",
     "extract-text-webpack-plugin": "^1.0.1",
     "grunt-angular-gettext": "~2.1.0",
     "grunt-po2json-angular-translate": "0.0.3",
@@ -60,7 +62,7 @@
     "karma-phantomjs-launcher": "^1.0.2",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^1.8.0",
-    "node-sass": "^3.10.1",
+    "node-sass": "~3.10.1",
     "sass-loader": "^4.0.2",
     "style-loader": "^0.13.1"
   }

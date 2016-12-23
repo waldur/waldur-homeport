@@ -3,96 +3,6 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('HeaderController', [
-      '$rootScope', '$state', 'currentStateService', 'customersService',
-      'usersService', 'ENV', 'baseControllerClass', '$translate', 'LANGUAGE', 'projectsService', '$q', 'ncUtils',
-      'ncUtilsFlash',
-      HeaderController]);
-
-  function HeaderController(
-    $rootScope, $state, currentStateService, customersService, usersService,
-    ENV, baseControllerClass, $translate, LANGUAGE, projectsService, $q, ncUtils, ncUtilsFlash) {
-    var controllerScope = this;
-    var HeaderControllerClass = baseControllerClass.extend({
-      showImport: ENV.showImport,
-      checkQuotas: {
-        projects: 'project',
-        resources: 'resource'
-      },
-
-      init: function() {
-        this.activate();
-        this._super();
-      },
-      activate: function() {
-        var vm = this;
-
-        customersService.getTopMenuList().then(function(response) {
-          vm.customers = response;
-          vm.hasMore = customersService.pages > 1;
-        });
-
-        vm.getProjectList();
-
-        // initiate current user
-        usersService.getCurrentUser().then(function(response) {
-          vm.currentUser = response;
-        });
-
-        // initiate current customer
-        currentStateService.getCustomer().then(function(customer) {
-          vm.currentCustomer = customer;
-        });
-
-        currentStateService.getProject().then(function(project) {
-          vm.currentProject = project;
-        });
-
-        $rootScope.closeMenu = vm.closeMenu;
-
-        this.LANGUAGE_CHOICES = LANGUAGE.CHOICES;
-        this.currentLanguage = this.findLanguageByCode($translate.use());
-      },
-
-      changeLanguage: function(language) {
-        this.currentLanguage = language;
-        $translate.use(this.currentLanguage.code);
-      },
-
-      findLanguageByCode: function(code) {
-        for (var i=0; i<LANGUAGE.CHOICES.length; i++) {
-          if (LANGUAGE.CHOICES[i].code == code) {
-            return LANGUAGE.CHOICES[i];
-          }
-        }
-      },
-      goToCurrentOrganization: function() {
-        $state.go('organization.details', {uuid: this.currentCustomer.uuid});
-      },
-      goToCustomer: function(customer) {
-        currentStateService.setCustomer(customer);
-        this.currentCustomer = customer;
-        $rootScope.$broadcast('currentCustomerUpdated');
-        this.setFirstOrLastSelectedProject();
-        $state.go('dashboard.index', {}, {reload: true});
-      },
-      goToCurrentProject: function() {
-        if (this.currentProject) {
-          $state.go('project.details', {uuid: this.currentProject.uuid});
-        }
-      },
-      isOwner: function (customer) {
-        var vm = this;
-        return customer.owners.filter(function(user) {
-          return user.uuid === vm.currentUser.uuid;
-        })[0];
-      }
-    });
-
-    controllerScope.__proto__ = new HeaderControllerClass();
-  }
-
-  angular.module('ncsaas')
     .controller('MainController', [
       '$scope',
       '$q',
@@ -143,6 +53,10 @@
         $scope.$on('refreshProjectList', this.refreshProjectListHandler);
         $scope.$on('refreshCustomerList', this.refreshCustomerListHandler);
 
+        $scope.$on('currentCustomerUpdated', function() {
+          $scope.$broadcast('refreshProjectList');
+        });
+
         this._super();
         this.modeName = ENV.modeName;
         $rootScope.buildId = ENV.buildId;
@@ -160,15 +74,19 @@
               ctrl.setFirstOrLastSelectedProject();
             }
           });
-        }, function() {
+        }, function(error) {
           var index = ctrl.customers.indexOf(customer);
           index > -1 && ctrl.customers.splice(index, 1);
           customersService.getTopMenuList().then(function(response) {
             ctrl.customers = response;
             ctrl.hasMore = customersService.pages > 1;
           });
-          alert('Sorry "' + customer.name + '" organization was deleted in another session. ' +
-            'Please try to select another organization.');
+          if (error.status === 404) {
+            alert('Sorry "' + customer.name + '" organization was deleted in another session. ' +
+              'Please try to select another organization.');
+          } else {
+            alert('Sorry, there is some network problem going on. Please, try to refresh the page');
+          }
         });
       },
 
@@ -291,7 +209,7 @@
         var customerUuids,
           currentCustomerKey,
           model;
-        if (params) {
+        if (params && !params.updateSignal) {
           model = params.model;
           customerUuids = ctrl.customers.map(function(obj) {
             return obj.uuid;
@@ -324,7 +242,11 @@
           }
         } else {
           ctrl.setFirstCustomer();
-          ctrl.getCustomerList(true);
+          ctrl.getCustomerList(true).then(function() {
+            if (params.updateSignal) {
+              $rootScope.$broadcast('currentCustomerUpdated');
+            }
+          });
         }
       },
 
@@ -337,6 +259,8 @@
       logout: function() {
         authService.signout();
         currentStateService.isCustomerDefined = false;
+        currentStateService.setHasCustomer(undefined);
+        currentStateService.setStaffOwnerManager(undefined);
         $rootScope.$broadcast('abortRequests');
         $state.go('login');
       },
@@ -352,7 +276,6 @@
           var deferred = $q.defer(),
             projectDeferred = $q.defer();
           usersService.getCurrentUser().then(function(user) {
-            ctrl.bootIntercom();
             if ($window.localStorage[ENV.currentCustomerUuidStorageKey]) {
               customersService.$get($window.localStorage[ENV.currentCustomerUuidStorageKey]).then(function(customer) {
                 deferred.resolve(customer);
@@ -404,18 +327,6 @@
             projectDeferred.resolve(response);
           });
         }
-      },
-
-      bootIntercom: function(user) {
-        // XXX: Temporarily disable Intercom
-        return;
-        var date = new Date(user.date_joined).getTime();
-        window.Intercom('boot', {
-          app_id: ENV.IntercomAppId,
-          name: user.full_name,
-          email: user.email,
-          created_at: date
-        });
       },
 
       checkQuotas: function(stateName) {

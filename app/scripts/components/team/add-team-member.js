@@ -1,10 +1,18 @@
 import template from './add-team-member.html';
 
+export default function addTeamMember() {
+  return {
+    restrict: 'E',
+    template: template,
+    controller: AddTeamMemberDialogController
+  };
+}
+
 // @ngInject
 function AddTeamMemberDialogController(
   customerPermissionsService,
   projectPermissionsService,
-  usersService,
+  customersService,
   blockUI,
   $q,
   $scope,
@@ -25,42 +33,29 @@ function AddTeamMemberDialogController(
   $scope.projects = $scope.currentCustomer.projects.filter(removeSelectedProjects);
   $scope.emptyProjectList = !$scope.projects.length;
 
-  function loadData() {
-    if ($scope.editUser) {
-      $scope.addText = 'Save';
-      $scope.addTitle = 'Edit';
-      $scope.userModel.user = $scope.editUser;
-      $scope.userModel.role = $scope.editUser.role;
+  init();
 
-      $scope.editUser.projects.forEach(function(project) {
-        if (project.role === 'admin') {
-          $scope.userModel.projectsAdminRole.push(project);
-        } else {
-          $scope.userModel.projectsManagerRole.push(project);
-        }
-      });
-      $scope.canChangeRole = $scope.currentUser.is_staff || $scope.editUser.uuid !== $scope.currentUser.uuid;
-      return $q.resolve();
-    } else {
-      $scope.canChangeRole = true;
-      return usersService.getAll().then(function(users) {
-        $scope.users = users.filter(function(user) {
-          return $scope.addedUsers.indexOf(user.uuid) === -1;
-        });
-      });
-    }
+  function init() {
+    $scope.addText = 'Save';
+    $scope.addTitle = 'Edit';
+    $scope.userModel.user = $scope.editUser;
+    $scope.userModel.role = $scope.editUser.role;
+
+    $scope.editUser.projects.forEach(function(project) {
+      if (project.role === 'admin') {
+        $scope.userModel.projectsAdminRole.push(project);
+      } else {
+        $scope.userModel.projectsManagerRole.push(project);
+      }
+    });
+    $scope.canChangeRole = $scope.currentUser.is_staff || $scope.editUser.uuid !== $scope.currentUser.uuid;
+    refreshProjectChoices();
   }
-
-  $scope.loading = true;
-  loadData().finally(function() {
-    $scope.loading = false;
-  });
 
   function pushBackToProjectsList(item) {
     $scope.projects.push(item);
   }
 
-  refreshProjectChoices();
   function refreshProjectChoices() {
     $scope.projects = $scope.projects.filter(removeSelectedProjects);
   }
@@ -178,14 +173,5 @@ function AddTeamMemberDialogController(
     });
 
     return $q.all(creationPromises.concat(removalPromises));
-  }
-}
-
-
-export default function() {
-  return {
-    restrict: 'E',
-    template: template,
-    controller: AddTeamMemberDialogController
   }
 }

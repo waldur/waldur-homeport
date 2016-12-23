@@ -76,24 +76,33 @@
     }
   }
 
-  angular.module('ncsaas').config(attachAuthResolve);
+  angular.module('ncsaas').run(disableCustomerStates);
 
-  attachAuthResolve.$inject = ['$stateProvider'];
+  disableCustomerStates.$inject = ['$rootScope', '$state', 'currentStateService'];
 
-  function attachAuthResolve($stateProvider) {
+  function disableCustomerStates($rootScope, $state, currentStateService) {
+    $rootScope.$on('$stateChangeStart',
+    function(event, toState, toParams, fromState, fromParams) {
+      if (!toState.data) {
+        return;
+      }
+
+      var workspace = toState.data.workspace;
+      if (workspace === 'organization' || workspace === 'project') {
+        if (currentStateService.getHasCustomer() === false) {
+          event.preventDefault();
+        }
+      }
+    });
+  }
+
+  function decorateState($stateProvider, decorator) {
     $stateProvider.decorator('views', function(state, parent) {
       var result = {}, views = parent(state);
 
       angular.forEach(views, function(config, name) {
-        if (config.data && config.data.auth) {
-          config.resolve = config.resolve || {};
-          config.resolve.currentUser = authentication;
-
-          authentication.$inject = ['usersService'];
-          function authentication(usersService) {
-            return usersService.getCurrentUser();
-          }
-        }
+        config.resolve = config.resolve || {};
+        decorator(config);
         result[name] = config;
       });
 
@@ -101,362 +110,64 @@
     });
   }
 
+  function getCurrentUser(usersService) {
+    return usersService.getCurrentUser();
+  }
+
+  function checkWorkspace(CustomerUtilsService) {
+    return CustomerUtilsService.checkWorkspace();
+  }
+
+  function getCurrentCustomer(CustomerUtilsService) {
+    return CustomerUtilsService.getCurrentCustomer();
+  }
+
+  function getStoredCustomer(CustomerUtilsService) {
+    return CustomerUtilsService.getStoredCustomer();
+  }
+
+  function decorateStates($stateProvider) {
+    decorateState($stateProvider, function(state) {
+      if (state.data && state.data.auth) {
+        state.resolve.currentUser = getCurrentUser;
+      }
+
+      if (state.data && state.data.workspace === 'organization') {
+        state.resolve.checkWorkspace = checkWorkspace;
+        state.resolve.currentCustomer = getCurrentCustomer;
+      }
+
+      if (state.data && state.data.workspace === 'project') {
+        state.resolve.currentCustomer = getStoredCustomer;
+      }
+    });
+  }
+
+  angular.module('ncsaas').config(decorateStates);
+
 })();
 
 (function() {
   angular.module('ncsaas')
-    // urls
-    .config(function($stateProvider, $urlRouterProvider, MODE) {
-      var initialDataState = 'initialdata.view',
-        initialDataStatePath = '/initial-data/';
-
+    .config(function($urlRouterProvider) {
       $urlRouterProvider.when('/', '/dashboard/');
       $urlRouterProvider.otherwise('/login/');
-
-      $stateProvider
-        .state('home', {
-          url: '/',
-          abstract: true,
-          templateUrl: 'views/partials/base.html',
-        })
-
-        .state('home.home', {
-          url: '',
-          views: {
-            'appHeader@home' : {
-              templateUrl: MODE.homeHeaderTemplate ? MODE.homeHeaderTemplate : 'views/partials/site-header.html',
-            },
-            'appContent@home' : {
-              templateUrl: MODE.homeTemplate ? MODE.homeTemplate : 'views/home/home.html',
-            }
-          },
-          data: {
-            bodyClass: 'landing',
-            disabled: true
-          },
-        })
-
-        .state('login', {
-          url: '/login/',
-          templateUrl: 'views/home/login-box.html',
-          data: {
-            isSignupFormVisible: false,
-            bodyClass: 'old',
-            anonymous: true,
-          }
-        })
-
-        .state('register', {
-          url: '/register/',
-          templateUrl: 'views/home/login-box.html',
-          data: {
-            isSignupFormVisible: true,
-            bodyClass: 'old',
-            anonymous: true
-          }
-        })
-
-        .state('home.activate', {
-          url: 'activate/:user_uuid/:token/',
-          views: {
-            'appHeader@home' : {
-              templateUrl: 'views/partials/site-header.html',
-            },
-            'appContent@home' : {
-              templateUrl: 'views/home/activate.html',
-            }
-          },
-          data: {
-            anonymous: true
-          }
-        })
-
-        .state('home.login_complete', {
-          url: 'login_complete/:token/',
-          views: {
-            'appHeader@home' : {
-              templateUrl: 'views/partials/site-header.html',
-            },
-            'appContent@home' : {
-              templateUrl: 'views/home/login_complete.html',
-            }
-          },
-          data: {
-            anonymous: true
-          }
-        })
-
-        .state('initialdata', {
-          url: initialDataStatePath,
-          templateUrl: 'views/partials/base.html',
-          abstract: true
-        })
-
-        .state(initialDataState, {
-          url: '',
-          views: {
-            'appHeader@initialdata' : {
-              templateUrl: 'views/partials/site-header-initial.html',
-            },
-            'appContent@initialdata' : {
-              templateUrl: MODE.initialDataTemplate ? MODE.initialDataTemplate : 'views/initial-data/initial-data.html',
-            }
-          },
-          noInitialData: true,
-          data: {
-            auth: true,
-            bodyClass: 'old'
-          }
-        })
-
-        .state('resources', {
-          url: '/resources/',
-          abstract: true,
-          templateUrl: 'views/resource/base.html',
-          data: {
-            auth: true,
-            workspace: 'project',
-            sidebarState: 'project.resources',
-            pageClass: 'gray-bg'
-          }
-        })
-
-        .state('resources.details', {
-          url: ':resource_type/:uuid',
-          templateUrl: 'views/resource/details.html',
-        })
-
-        .state('payment', {
-          url: '/payment/',
-          abstract: true,
-          templateUrl: 'views/partials/base.html',
-          data: {
-            bodyClass: 'old',
-            auth: true
-          }
-        })
-
-        .state('payment.approve', {
-          url: 'approve/',
-          views: {
-            'appHeader' : {
-              templateUrl: 'views/partials/site-header.html',
-            },
-            'appContent' : {
-              templateUrl: 'views/payment/approve.html',
-            }
-          },
-          data: {
-            pageTitle: 'Approve payment'
-          }
-        })
-
-        .state('payment.cancel', {
-          url: 'cancel/',
-          views: {
-            'appHeader' : {
-              templateUrl: 'views/partials/site-header.html',
-            },
-            'appContent' : {
-              templateUrl: 'views/payment/cancel.html',
-            }
-          },
-          data: {
-            pageTitle: 'Cancel payment'
-          }
-        })
-
-        .state('agreement', {
-          url: '/agreement/',
-          abstract: true,
-          templateUrl: 'views/partials/base.html',
-          data: {
-            auth: true,
-            bodyClass: 'old'
-          }
-        })
-
-        .state('agreement.approve', {
-          url: 'agreement/',
-          views: {
-            'appHeader' : {
-              templateUrl: 'views/partials/site-header.html',
-            },
-            'appContent' : {
-              templateUrl: 'views/agreement/approve.html',
-            }
-          }
-        })
-
-        .state('agreement.cancel', {
-          url: 'cancel/',
-          views: {
-            'appHeader' : {
-              templateUrl: 'views/partials/site-header.html',
-            },
-            'appContent' : {
-              templateUrl: 'views/agreement/cancel.html',
-            }
-          },
-        })
-
-        .state('errorPage', {
-          url: '/error/',
-          templateUrl: 'views/partials/base.html',
-          abstract: true,
-          data: {
-            bodyClass: 'old'
-          }
-        })
-
-        .state('errorPage.notFound', {
-          url: '404/',
-          views: {
-            'appContent': {
-              templateUrl: 'views/404.html',
-            },
-            'appHeader': {
-              templateUrl: 'views/partials/site-header.html',
-            }
-          },
-          data: {
-            pageTitle: 'Page not found'
-          }
-        })
-
-        .state('errorPage.limitQuota', {
-          url: '403/',
-          views: {
-            'appContent': {
-              templateUrl: 'views/403.html',
-            },
-            'appHeader': {
-              templateUrl: 'views/partials/site-header.html',
-            }
-          },
-          data: {
-            pageTitle: 'Quota limit exceeded'
-          }
-        })
-
-        .state('help', {
-          url: '/help/',
-          abstract: true,
-          templateUrl: 'views/customer/base.html',
-          data: {
-            pageTitle: 'Help'
-          }
-        })
-        .state('help.list', {
-          url: '',
-          templateUrl: 'views/help/list.html',
-          auth: true,
-          noInitialData: true,
-        })
-        .state('help.details', {
-          url: ':name/',
-          templateUrl: 'views/help/details.html',
-          auth: true,
-          noInitialData: true,
-        })
-        .state('tos', {
-          url: '/tos/',
-          abstract: true,
-          templateUrl: 'views/partials/base-universal.html',
-        })
-        .state('tos.index', {
-          url: '',
-          views: {
-            'appContent': {
-              templateUrl: 'views/tos/index.html',
-            },
-            'appHeaderOut': {
-              templateUrl: MODE.homeHeaderTemplate ? MODE.homeHeaderTemplate : 'views/partials/site-header.html',
-            },
-            'appHeaderIn': {
-              templateUrl: 'views/partials/site-header.html',
-            }
-          },
-          data: {
-            bodyClass: 'old',
-            pageTitle: 'Terms of service'
-          }
-        })
-        .state('about', {
-          url: '/about/',
-          abstract: true,
-          templateUrl: 'views/partials/base-universal.html',
-        })
-        .state('about.index', {
-          url: '',
-          views: {
-            'appContent': {
-              templateUrl: MODE.aboutPageTemplate ? MODE.aboutPageTemplate : 'views/about/index.html',
-            },
-            'appHeaderOut': {
-              templateUrl: MODE.homeHeaderTemplate ? MODE.homeHeaderTemplate : 'views/partials/site-header.html',
-            },
-            'appHeaderIn': {
-              templateUrl: 'views/partials/site-header.html',
-            }
-          },
-          data: {
-            bodyClass: 'old',
-            pageTitle: 'About'
-          }
-        })
-        .state('policy', {
-          url: '/policy/',
-          abstract: true,
-          templateUrl: 'views/partials/base-universal.html',
-        })
-        .state('policy.privacy', {
-          url: 'privacy/',
-          views: {
-            'appContent': {
-              templateUrl: 'views/policy/privacy.html',
-            },
-            'appHeaderOut': {
-              templateUrl: MODE.homeHeaderTemplate ? MODE.homeHeaderTemplate : 'views/partials/site-header.html',
-            },
-            'appHeaderIn': {
-              templateUrl: 'views/partials/site-header.html',
-            }
-          },
-          data: {
-            bodyClass: 'old',
-            pageTitle: 'Privacy policy'
-          }
-        })
-        .state('invitation', {
-          url: '/invitation/:uuid/',
-          controller: 'InvitationController',
-          data: {
-            anonymous: true,
-            bodyClass: 'old'
-          },
-          templateUrl: 'views/invitation/invitation.html'
-        });
     });
-
 })();
 
 (function() {
   angular.module('ncsaas')
-    .config(['ENV', 'CUSTOMENV', 'MODE', overrideBaseSettings]);
+    .config(function(ENV) {
+      angular.extend(ENV, window.$$CUSTOMENV);
+    });
+})();
 
-  function overrideBaseSettings(ENV, CUSTOMENV, MODE) {
-    for (var modeProperty in MODE) {
-      if (MODE.hasOwnProperty(modeProperty)) {
-        ENV[modeProperty] = MODE[modeProperty];
-      }
-    }
-    for (var property in CUSTOMENV) {
-      if (CUSTOMENV.hasOwnProperty(property)) {
-        ENV[property] = CUSTOMENV[property];
-      }
-    }
-  }
+(function() {
+  angular.module('ncsaas')
+    .config(function(ENV, featuresProvider) {
+      featuresProvider.setFeatures(ENV.toBeFeatures);
+      featuresProvider.setVisibility(ENV.featuresVisible);
+    });
 })();
 
 (function() {

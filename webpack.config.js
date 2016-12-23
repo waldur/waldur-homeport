@@ -16,7 +16,7 @@ module.exports = {
             loaders: [
                 {
                     test: /\.js$/,
-                    loader: 'ng-annotate!babel',
+                    loader: 'ng-annotate!babel!eslint-loader',
                     exclude: /node_modules/
                 },
                 {
@@ -39,11 +39,36 @@ module.exports = {
         failOnError: false,
         devtool: 'source-map',
         debug: true,
+        plugins: [
+            new webpack.DefinePlugin({
+                'process.env.CONFIG_FILES': JSON.stringify([
+                    '/scripts/configs/custom-config.json',
+                    '/scripts/configs/mode-config.json'
+                ])
+            })
+        ]
+    },
+    staging: {
+        plugins: [
+            extractPlugin,
+            new webpack.optimize.DedupePlugin(),
+            new webpack.DefinePlugin({
+                'process.env.CONFIG_FILES': JSON.stringify([
+                    '/scripts/configs/custom-config.json',
+                    '/scripts/configs/mode-config.json'
+                ])
+            })
+        ]
     },
     prod: {
         plugins: [
             extractPlugin,
-            new webpack.optimize.DedupePlugin()
+            new webpack.optimize.DedupePlugin(),
+            new webpack.DefinePlugin({
+                'process.env.CONFIG_FILES': JSON.stringify([
+                    '/scripts/configs/config.json'
+                ])
+            })
         ]
     }
 };

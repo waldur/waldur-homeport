@@ -37,31 +37,37 @@
     .service('ncServiceUtils', ['ENV', ncServiceUtils]);
 
   function ncServiceUtils(ENV) {
-    return {
-      getStateClass: function(state) {
-        var cls = ENV.servicesStateColorClasses[state];
-        if (cls == 'processing') {
-          return 'fa fa-refresh fa-spin';
-        } else {
-          return 'status-circle ' + cls;
-        }
+    function getStateClass(state) {
+      var cls = ENV.servicesStateColorClasses[state];
+      if (cls == 'processing') {
+        return 'fa fa-refresh fa-spin';
+      } else {
+        return 'status-circle ' + cls;
       }
+    }
+    function getTypeDisplay(type) {
+      if (type === 'OpenStackTenant') {
+        type = 'OpenStack';
+      }
+      return type;
+    }
+    function getServiceIcon(type) {
+      var type = getTypeDisplay(type);
+      return '/static/images/appstore/icon-' + type.toLowerCase() + '.png';
+    }
+    return {
+      getStateClass: getStateClass,
+      getTypeDisplay: getTypeDisplay,
+      getServiceIcon: getServiceIcon
     };
   }
 
 
   angular.module('ncsaas')
-    .factory('ncUtils', ['$rootScope', 'blockUI', ncUtils]);
+    .factory('ncUtils', ['blockUI', ncUtils]);
 
-  function ncUtils($rootScope, blockUI) {
+  function ncUtils(blockUI) {
     return {
-      deregisterEvent: function(eventName) {
-        $rootScope.$$listeners[eventName] = [];
-      },
-      updateIntercom: function() {
-        // XXX: Temporarily disabled Intercom
-        //window.Intercom('update');
-      },
       blockElement: function(element, promise) {
         if (promise && promise.finally) {
           // Prevent blocking if promise is invalid
@@ -121,6 +127,9 @@
           return parts[1];
         }
         return "";
+      },
+      relativeDate: function (startTime) {
+        return moment(startTime).fromNow().replace(' ago', '');
       },
       getUUID: function(url) {
         return url.split('/').splice(-2)[0];

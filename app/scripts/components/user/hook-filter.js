@@ -13,5 +13,5 @@ export default function formatEventTitle($filter) {
       choice = $filter('titleCase')(choice.replace('_', ' '));
     }
     return choice + ' events';
-  }
+  };
 }

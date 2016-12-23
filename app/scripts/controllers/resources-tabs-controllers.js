@@ -39,7 +39,6 @@
         'baseControllerClass',
         'resourcesService',
         'zabbixHostsService',
-        'resourceMonitoringService',
         '$stateParams',
         ResourceGraphsController]);
 
@@ -47,7 +46,6 @@
       baseControllerClass,
       resourcesService,
       zabbixHostsService,
-      resourceMonitoringService,
       $stateParams) {
     var controllerScope = this;
     var controllerClass = baseControllerClass.extend({
@@ -245,7 +243,7 @@
       getFilter: function() {
         return {
           source_volume_uuid: $stateParams.uuid,
-          resource_type: 'OpenStack.Snapshot'
+          resource_type: 'OpenStackTenant.Snapshot'
         };
       }
     });

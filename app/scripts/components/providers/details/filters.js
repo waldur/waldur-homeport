@@ -8,14 +8,14 @@ export function quotaName($filter) {
     instances: 'Instances count',
     volumes: 'Volumes count',
     snapshots: 'Snapshots count'
-  }
+  };
   return function(name) {
     if (names[name]) {
       return names[name];
     }
-    var name = name.replace(/_/g, ' ');
+    name = name.replace(/_/g, ' ');
     return $filter('titleCase')(name);
-  }
+  };
 }
 
 // @ngInject
@@ -24,7 +24,7 @@ export function quotaValue($filter) {
     ram: 'filesize',
     storage: 'filesize',
     backup_storage: 'filesize'
-  }
+  };
   return function(value, name) {
     if (value == -1) {
       return '∞';
@@ -35,5 +35,5 @@ export function quotaValue($filter) {
     } else {
       return value;
     }
-  }
+  };
 }

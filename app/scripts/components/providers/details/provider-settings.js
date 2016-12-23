@@ -63,7 +63,7 @@ function ProviderSettingsController(
               if (angular.isUndefined(service.values[field.name])) {
                 service.values[field.name] = '';
               }
-            })
+            });
           });
         });
       });
@@ -125,7 +125,7 @@ function ProviderSettingsController(
         $scope.service.name = name;
         ncUtilsFlash.success('Provider name has been updated');
         $rootScope.$broadcast('refreshProviderList');
-      }).catch(function(response) {
+      }).catch(function() {
         ncUtilsFlash.success('Unable to update provider name');
       });
     },

@@ -1,9 +1,24 @@
 import template from './category-selector.html';
 import './category-selector.scss';
 
+export default function() {
+  return {
+    restrict: 'E',
+    template: template,
+    controller: AppStoreCategorySelectorController,
+    controllerAs: 'DialogCtrl',
+    scope: {},
+    bindToController: {
+      dismiss: '&',
+      close: '&',
+      resolve: '='
+    }
+  };
+}
+
 // @ngInject
 function AppStoreCategorySelectorController(
-  $q, ENV, $state, $rootScope, currentStateService, projectsService
+  $q, ENV, $state, $rootScope, currentStateService, projectsService, $uibModal, ISSUE_IDS
 ) {
   var vm = this;
   vm.selectOffering = selectOffering;
@@ -12,13 +27,17 @@ function AppStoreCategorySelectorController(
 
   function activate() {
     vm.selectProject = vm.resolve.selectProject;
-    angular.forEach(ENV.offerings, function(offering) {
+
+    var offerings = ENV.offerings.filter(item =>
+      !item.requireStaffOwnerManager || currentStateService.getStaffOwnerManager());
+
+    angular.forEach(offerings, function(offering) {
       if (ENV.futureCategories.indexOf(offering.key) !== -1) {
         offering.comingSoon = true;
       }
     });
 
-    var offerings = ENV.offerings.reduce((map, item) => {
+    offerings = offerings.reduce((map, item) => {
       map[item.key] = item;
       return map;
     }, {});
@@ -61,23 +80,20 @@ function AppStoreCategorySelectorController(
   }
 
   function requestService() {
-    $state.go('support.create', {type: 'add_service'}).then(function() {
-      vm.close();
+    vm.close();
+    return $uibModal.open({
+      component: 'issueCreateDialog',
+      resolve: {
+        issue: () => ({
+          type: ISSUE_IDS.SERVICE_REQUEST
+        }),
+        options: {
+          title: 'Request a new service',
+          descriptionPlaceholder: 'Please clarify why do you need it',
+          descriptionLabel: 'Motivation',
+          summaryLabel: 'Service name'
+        }
+      }
     });
-  }
-}
-
-export default function() {
-  return {
-    restrict: 'E',
-    template: template,
-    controller: AppStoreCategorySelectorController,
-    controllerAs: 'DialogCtrl',
-    scope: {},
-    bindToController: {
-      dismiss: '&',
-      close: '&',
-      resolve: '='
-    }
   }
 }

@@ -14,9 +14,6 @@ angular.module('ncsaas')
     facebookClientId: 'facebook client id',
     facebookEndpointUrl: 'api-auth/facebook/',
 
-    // JIRA config
-    supportProjectUUID: 'support project UUID',
-
     pageSizes: [5, 10, 20, 50],
     pageSize: 10,
     topMenuCustomersCount: 50,
@@ -29,8 +26,6 @@ angular.module('ncsaas')
     currentCustomerUuidStorageKey: 'currentCustomerUuid',
     currentProjectUuidStorageKey: 'currentProjectUuid',
     showImport: false,
-    resourceOfflineStatus: 'Offline',
-    resourceOnlineStatus: 'Online',
     defaultErrorMessage: 'Reason unknown, please contact support',
 
     // build version
@@ -72,7 +67,7 @@ angular.module('ncsaas')
         icon: "fa-desktop",
         feature: "vms",
         key: "vms",
-        state: "appstore.store",
+        state: "appstore.vms",
         description: "OpenStack instances and DigitalOcean droplets."
       },
       {
@@ -80,15 +75,16 @@ angular.module('ncsaas')
         icon: "fa-cloud",
         feature: "private_clouds",
         key: "private_clouds",
-        state: "appstore.store",
-        description: "OpenStack tenants and Amazon VPC."
+        state: "appstore.private_clouds",
+        description: "OpenStack tenants and Amazon VPC.",
+        requireStaffOwnerManager: true
       },
       {
         label: "Storage",
         icon: "fa-hdd-o",
         feature: "storage",
         key: "storages",
-        state: "appstore.store",
+        state: "appstore.storages",
         description: "Block devices, object store spaces and other persistency services."
       },
       {
@@ -96,7 +92,7 @@ angular.module('ncsaas')
         icon: "fa-database",
         feature: "apps",
         key: "apps",
-        state: "appstore.store",
+        state: "appstore.apps",
         description: "Oracle database and SugarCRM."
       },
       {
@@ -104,7 +100,7 @@ angular.module('ncsaas')
         icon: "fa-wrench",
         key: "support",
         feature: "premiumSupport",
-        state: "appstore.store",
+        state: "appstore.premiumSupport",
         description: "Premium support service."
       },
       {
@@ -161,14 +157,15 @@ angular.module('ncsaas')
         type: 'provider',
         icon: 'desktop',
         key: 'vms',
-        services: ['DigitalOcean', 'Azure', 'Amazon', 'OpenStack']
+        services: ['DigitalOcean', 'Azure', 'Amazon', 'OpenStackTenant']
       },
       {
         name: 'Private clouds',
         type: 'provider',
         icon: 'cloud',
         key: 'private_clouds',
-        services: ['OpenStack']
+        services: ['OpenStack'],
+        requireStaffOwnerManager: true
       },
       {
         name: 'Applications',
@@ -181,7 +178,7 @@ angular.module('ncsaas')
         name: 'Storages',
         type: 'provider',
         key: 'storages',
-        services: ['OpenStack'],
+        services: ['OpenStackTenant'],
       }
     ],
     serviceCategories: [
@@ -206,15 +203,18 @@ angular.module('ncsaas')
         "OpenStack.Instance": "vms",
         "SaltStack.ExchangeTenant": "apps",
         "OpenStack.Tenant": "private_clouds",
+        "OpenStackTenant.Instance": "vms",
+        "OpenStackTenant.Volume": "storages",
+        "OpenStackTenant.Snapshot": "storages",
         "GitLab.Group": "apps",
         "Zabbix.Host": "apps",
         "Zabbix.ITService": "apps",
-        "OpenStack.Volume": "storages"
+        "OpenStack.Volume": "storages",
+        "OpenStack.Snapshot": "storages"
     },
     showCompare: [
       'Virtual machines'
     ],
-    IntercomAppId: 'xfbbcxck',
     defaultListCacheTime: 60 * 10,
     optionsCacheTime: 10 * 1000,
     dashboardHelp: {
@@ -282,14 +282,6 @@ angular.module('ncsaas')
     },
     featuresVisible: false,
 
-    nonChargeableAppStoreOptions: [
-      'ssh_public_key',
-      'region',
-      'visibility_level',
-      'group',
-      'security_groups'
-    ],
-
     requestTimeout: 1000 * 20,
     countsCacheTime: 60, // seconds
     enablePurchaseCostDisplay: true,
@@ -303,29 +295,6 @@ angular.module('ncsaas')
     resourcesTimerInterval: 7, // seconds
     countersTimerInterval: 7, // seconds
     providersTimerInterval: 7, // seconds
-
-    resourceStateColorClasses: {
-      'OK': 'online',
-      'Creation Scheduled': 'processing',
-      'Creating': 'processing',
-      'Update Scheduled': 'processing',
-      'Updating': 'processing',
-      'Online': 'online',
-      'Offline': 'offline',
-      'Erred': 'erred',
-      'Starting Scheduled': 'processing',
-      'Stopping Scheduled': 'processing',
-      'Restarting Scheduled': 'processing',
-      'Starting': 'processing',
-      'Stopping': 'processing',
-      'Restarting': 'processing',
-      'Provisioning Scheduled': 'processing',
-      'Provisioning': 'processing',
-      'Deletion Scheduled': 'processing',
-      'Deleting': 'processing',
-      'Resizing Scheduled': 'processing',
-      'Resizing': 'processing'
-    },
 
     servicesStateColorClasses: {
       'OK': 'online',
@@ -345,7 +314,48 @@ angular.module('ncsaas')
       manager: 'Project manager',
       admin: 'System administrator'
     },
-    invitationStorageToken: 'ncInvitationToken',
     invitationRedirectTime: 5000,
-    invitationsEnabled: true
-  });
+    invitationsEnabled: true,
+    userMandatoryFields: [
+      'full_name',
+      'email'
+    ],
+
+    dashboardQuotas: {
+      nc_app_count: {
+        title: 'Applications',
+        feature: 'apps'
+      },
+      nc_vm_count: {
+        title: 'Virtual machines',
+        feature: 'vms'
+      },
+      nc_private_cloud_count: {
+        title: 'Private clouds',
+        feature: 'private_clouds',
+      },
+      nc_storage_count: {
+        title: 'Storage',
+        feature: 'storage'
+      },
+      nc_user_count: {
+        title: 'Team size',
+        feature: 'users'
+      }
+  },
+
+  projectDashboardQuotas: [
+    'nc_app_count',
+    'nc_vm_count',
+    'nc_private_cloud_count',
+    'nc_storage_count'
+  ],
+
+  organizationDashboardQuotas: [
+    'nc_app_count',
+    'nc_vm_count',
+    'nc_private_cloud_count',
+    'nc_storage_count',
+    'nc_user_count'
+  ]
+});

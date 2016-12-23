@@ -1,54 +1,5 @@
 (function() {
   angular.module('ncsaas')
-    .controller('ProjectEventTabController', [
-      '$stateParams',
-      'projectsService',
-      'baseEventListController',
-      'currentStateService',
-      ProjectEventTabController
-    ]);
-
-  function ProjectEventTabController($stateParams, projectsService, baseEventListController, currentStateService) {
-    var controllerScope = this;
-    var EventController = baseEventListController.extend({
-      project: null,
-
-      init: function() {
-        this.controllerScope = controllerScope;
-        this._super();
-        this.getProject();
-      },
-      getList: function(filter) {
-        if (this.project) {
-          this.service.defaultFilter.scope = this.project.url;
-          return this._super(filter);
-        } else {
-          return this.getProject();
-        }
-      },
-      getProject: function() {
-        var vm = this;
-        if ($stateParams.uuid) {
-          return projectsService.$get($stateParams.uuid).then(function(response) {
-            vm.project = response;
-            return vm.getList();
-          });
-        } else {
-          return currentStateService.getProject().then(function(response) {
-            vm.project = response;
-            return vm.getList();
-          });
-        }
-      }
-    });
-
-    controllerScope.__proto__ = new EventController();
-  }
-
-})();
-
-(function() {
-  angular.module('ncsaas')
     .controller('ProjectAlertTabController', [
       'BaseAlertsListController',
       'currentStateService',
@@ -104,24 +55,44 @@
 
 (function() {
   angular.module('ncsaas')
-    .controller('ProjectResourcesTabController', [
+    .controller('ProjectVirtualMachinesListController', [
       'BaseProjectResourcesTabController',
       'ENV',
-      ProjectResourcesTabController
+      ProjectVirtualMachinesListController
     ]);
 
-  function ProjectResourcesTabController(BaseProjectResourcesTabController, ENV) {
+  function ProjectVirtualMachinesListController(BaseProjectResourcesTabController, ENV) {
     var controllerScope = this;
     var ResourceController = BaseProjectResourcesTabController.extend({
       init: function() {
         this.controllerScope = controllerScope;
         this.category = ENV.VirtualMachines;
         this._super();
+        this.rowFields.push('internal_ips');
+        this.rowFields.push('external_ips');
       },
       getTableOptions: function() {
         var options = this._super();
         options.noDataText = 'You have no virtual machines yet';
         options.noMatchesText = 'No virtual machines found matching filter.';
+        options.columns.push({
+          title: 'Internal IP',
+          render: function(row) {
+            if (row.internal_ips.length === 0) {
+              return '&ndash;';
+            }
+            return row.internal_ips.join(', ');
+          }
+        });
+        options.columns.push({
+          title: 'External IP',
+          render: function(row) {
+            if (row.external_ips.length === 0) {
+              return '&ndash;';
+            }
+            return row.external_ips.join(', ');
+          }
+        });
         return options;
       },
       getImportTitle: function() {
@@ -213,12 +184,12 @@
     $scope.tabs = [
       {
         title: 'Volumes',
-        countKey: 'OpenStack.Volume',
+        countKey: 'OpenStackTenant.Volume',
         viewKey: 'volumes'
       },
       {
         title: 'Snapshots',
-        countKey: 'OpenStack.Snapshot',
+        countKey: 'OpenStackTenant.Snapshot',
         viewKey: 'snapshots'
       }
     ];
@@ -227,6 +198,7 @@
         resource_category: 'storages',
         project: currentProject.uuid
       };
+      resourcesService.cleanAllCache();
       resourcesService.countByType(query).then(function(counts) {
         angular.forEach($scope.tabs, function(tab) {
           tab.count = counts[tab.countKey];
@@ -247,22 +219,24 @@
       'BaseProjectResourcesTabController',
       'ncUtils',
       '$state',
+      '$filter',
       'ENV',
       VolumesListController]);
 
-  function VolumesListController(BaseProjectResourcesTabController, ncUtils, $state, ENV) {
+  function VolumesListController(BaseProjectResourcesTabController, ncUtils, $state, $filter, ENV) {
     var controllerScope = this;
     var ResourceController = BaseProjectResourcesTabController.extend({
       init:function() {
         this.category = ENV.Storages;
         this.controllerScope = controllerScope;
         this._super();
+        this.rowFields.push('size');
         this.rowFields.push('instance');
         this.rowFields.push('instance_name');
       },
       getFilter: function() {
         return {
-          resource_type: 'OpenStack.Volume'
+          resource_type: 'OpenStackTenant.Volume'
         };
       },
       getTableOptions: function() {
@@ -270,18 +244,28 @@
         options.noDataText = 'You have no volumes yet.';
         options.noMatchesText = 'No volumes found matching filter.';
         options.columns.push({
+          title: 'Size',
+          className: 'all',
+          render: function(row) {
+            if (!row.size) {
+              return '&ndash;';
+            }
+            return $filter('filesize')(row.size);
+          }
+        });
+        options.columns.push({
           title: 'Attached to',
           className: 'min-tablet-l',
-          render: function(data, type, row, meta) {
+          render: function(row) {
             if (!row.instance) {
               return '&ndash;';
             }
             var uuid = ncUtils.getUUID(row.instance);
             var href = $state.href('resources.details', {
               uuid: uuid,
-              resource_type: 'OpenStack.Instance'
+              resource_type: 'OpenStackTenant.Instance'
             });
-            return ncUtils.renderLink(href, row.instance_name || 'Link');
+            return ncUtils.renderLink(href, row.instance_name || 'OpenStack instance');
           }
         });
         return options;
@@ -301,21 +285,22 @@
 
   angular.module('ncsaas')
     .controller('SnapshotsListController', [
-      'BaseProjectResourcesTabController', 'ncUtils', '$state',
+      'BaseProjectResourcesTabController', 'ncUtils', '$state', '$filter',
       SnapshotsListController]);
 
-  function SnapshotsListController(BaseProjectResourcesTabController, ncUtils, $state) {
+  function SnapshotsListController(BaseProjectResourcesTabController, ncUtils, $state, $filter) {
     var controllerScope = this;
     var ResourceController = BaseProjectResourcesTabController.extend({
       init:function() {
         this.controllerScope = controllerScope;
         this._super();
+        this.rowFields.push('size');
         this.rowFields.push('source_volume');
         this.rowFields.push('source_volume_name');
       },
       getFilter: function(filter) {
         return {
-          resource_type: 'OpenStack.Snapshot'
+          resource_type: 'OpenStackTenant.Snapshot'
         };
       },
       getTableOptions: function() {
@@ -323,15 +308,25 @@
         options.noDataText = 'You have no snapshots yet.';
         options.noMatchesText = 'No snapshots found matching filter.';
         options.columns.push({
+          title: 'Size',
+          className: 'all',
+          render: function(row) {
+            if (!row.size) {
+              return '&ndash;';
+            }
+            return $filter('filesize')(row.size);
+          }
+        });
+        options.columns.push({
           title: 'Volume',
-          render: function(data, type, row, meta) {
+          render: function(row) {
             if (!row.source_volume) {
               return 'Not known';
             }
             var uuid = ncUtils.getUUID(row.source_volume);
             var href = $state.href('resources.details', {
               uuid: uuid,
-              resource_type: 'OpenStack.Volume'
+              resource_type: 'OpenStackTenant.Volume'
             });
             return ncUtils.renderLink(href, row.source_volume_name || 'Link');
           }
@@ -347,326 +342,4 @@
     });
     controllerScope.__proto__ = new ResourceController();
   }
-})();
-
-(function() {
-  angular.module('ncsaas')
-    .controller('ProjectSupportTabController', [
-      'baseControllerListClass',
-      'premiumSupportContractsService',
-      'premiumSupportPlansService',
-      'currentStateService',
-      'ENTITYLISTFIELDTYPES',
-      'ENV',
-      '$filter',
-      '$stateParams',
-      'ncUtils',
-      ProjectSupportTabController
-    ]);
-
-  function ProjectSupportTabController(
-    baseControllerListClass,
-    premiumSupportContractsService,
-    premiumSupportPlansService,
-    currentStateService,
-    ENTITYLISTFIELDTYPES,
-    ENV,
-    $filter,
-    $stateParams,
-    ncUtils
-  ) {
-    var controllerScope = this;
-    var ResourceController = baseControllerListClass.extend({
-      init: function() {
-        this.controllerScope = controllerScope;
-        this.service = premiumSupportContractsService;
-        this._super();
-
-        this.entityOptions = {
-          entityData: {
-            noDataText: 'You have no SLAs yet.',
-            createLink: 'appstore.store({category: "support"})',
-            createLinkText: 'Add SLA',
-            expandable: true,
-            hideActionButtons: true
-          },
-          list: [
-            {
-              name: 'Name',
-              propertyName: 'plan_name',
-              type: ENTITYLISTFIELDTYPES.none,
-              showForMobile: ENTITYLISTFIELDTYPES.showForMobile
-            },
-            {
-              name: 'State',
-              propertyName: 'state',
-              type: ENTITYLISTFIELDTYPES.none,
-              showForMobile: ENTITYLISTFIELDTYPES.showForMobile
-            }
-          ]
-        };
-        this.expandableOptions = [
-          {
-            isList: false,
-            addItemBlock: false,
-            viewType: 'description',
-            items: [
-              {
-                key: 'plan_description',
-                label: 'Description'
-              },
-              {
-                key: 'plan_base_rate',
-                label: 'Base rate'
-              },
-              {
-                key: 'plan_hour_rate',
-                label: 'Hour rate'
-              },
-              {
-                key: 'plan_terms',
-                label: 'Terms'
-              }
-            ]
-          }
-        ];
-      },
-      getList: function(filter) {
-        var vm = this;
-        var fn = this._super.bind(vm);
-        if ($stateParams.uuid) {
-          this.service.defaultFilter.project_uuid = $stateParams.uuid;
-          return fn(filter);
-        }
-        return currentStateService.getProject().then(function(project) {
-          vm.service.defaultFilter.project_uuid = project.uuid;
-          return fn(filter);
-        })
-      },
-      showMore: function(contract) {
-        var promise = premiumSupportPlansService.$get(null, contract.plan).then(function(response) {
-          contract.plan_description = response.description;
-          contract.plan_terms = response.terms;
-          contract.plan_base_rate = $filter('currency')(response.base_rate, ENV.currency);
-          contract.plan_hour_rate = $filter('currency')(response.hour_rate, ENV.currency);
-        });
-        ncUtils.blockElement('block_'+contract.uuid, promise);
-      }
-    });
-
-    controllerScope.__proto__ = new ResourceController();
-  }
-
-})();
-
-(function() {
-  angular.module('ncsaas')
-    .controller('ProjectDeleteTabController', [
-      'baseControllerClass',
-      'projectsService',
-      'currentStateService',
-      '$rootScope',
-      '$state',
-      '$q',
-      ProjectDeleteTabController
-    ]);
-
-  function ProjectDeleteTabController(
-    baseControllerClass,
-    projectsService,
-    currentStateService,
-    $rootScope,
-    $state,
-    $q
-  ) {
-    var controllerScope = this;
-    var DeleteController = baseControllerClass.extend({
-      init: function() {
-        this.controllerScope = controllerScope;
-        this.service = projectsService;
-        this._super();
-
-        var vm = this;
-        currentStateService.getProject().then(function(project) {
-          vm.project = project;
-        });
-      },
-      removeProject: function () {
-        var confirmDelete = confirm('Confirm deletion?'),
-          vm = this;
-        if (confirmDelete) {
-          currentStateService.setProject(null);
-          return this.project.$delete().then(function() {
-            projectsService.clearAllCacheForCurrentEndpoint();
-            return projectsService.getFirst().then(function(project) {
-              currentStateService.setProject(project);
-              $rootScope.$broadcast('refreshProjectList', {model: controllerScope.project, remove: true});
-            });
-          }, function() {
-            currentStateService.setProject(vm.project);
-          }).then(function() {
-            currentStateService.reloadCurrentCustomer(function(customer) {
-              $rootScope.$broadcast('checkQuotas:refresh');
-              $rootScope.$broadcast('customerBalance:refresh');
-              $state.go('organization.projects', {uuid: customer.uuid});
-            });
-          });
-        } else {
-          return $q.reject();
-        }
-      }
-    });
-
-    controllerScope.__proto__ = new DeleteController();
-  }
-
-})();
-
-(function() {
-  angular.module('ncsaas')
-    .controller('ProjectUsersListController', [
-      'baseControllerListClass',
-      'customersService',
-      'projectsService',
-      'projectPermissionsService',
-      'currentUser',
-      'currentCustomer',
-      'currentProject',
-      'ENV',
-      '$rootScope',
-      '$uibModal',
-      ProjectUsersListController
-    ]);
-
-  function ProjectUsersListController(
-    baseControllerListClass,
-    customersService,
-    projectsService,
-    projectPermissionsService,
-    currentUser,
-    currentCustomer,
-    currentProject,
-    ENV,
-    $rootScope,
-    $uibModal) {
-    var controllerScope = this;
-    var TeamController = baseControllerListClass.extend({
-      init: function() {
-        this.controllerScope = controllerScope;
-        this.service = projectsService;
-        this.hideNoDataText = true;
-        this.isOwnerOrStaff = customersService.checkCustomerUser(currentCustomer, currentUser);
-        this.tableOptions = {};
-        var fn = this._super.bind(this);
-        var vm = this;
-        this.getProjectRole('manager').then(function(result) {
-          vm.isProjectManager = result.length ? true : false;
-          vm.tableOptions = vm.getTableOptions();
-          fn();
-        });
-      },
-      getTableOptions: function() {
-        return {
-          noDataText: 'You have no team members yet',
-          noMatchesText: 'No members found matching filter.',
-          searchFieldName: 'full_name',
-          columns: [
-            {
-              title: 'Member',
-              className: 'all',
-              render: function(data, type, row, meta) {
-                var avatar = '<img gravatar-src="\'{gravatarSrc}\'" gravatar-size="100" alt="" class="avatar-img img-xs">'
-                  .replace('{gravatarSrc}', row.email);
-                return avatar + ' ' + (row.full_name || row.username);
-              }
-            },
-            {
-              title: 'E-mail',
-              className: 'min-tablet-l',
-              render: function(data, type, row, meta) {
-                return row.email;
-              }
-            },
-            {
-              title: 'Role in project:',
-              className: 'min-tablet-l',
-              render: function(data, type, row, meta) {
-                return ENV.roles[row.role];
-              }
-            }
-          ],
-          tableActions: this.getTableActions(),
-          rowActions: this.getRowActions()
-        };
-      },
-      getTableActions: function() {
-        if (this.isOwnerOrStaff || this.isProjectManager) {
-          return [
-            {
-              name: '<i class="fa fa-plus"></i> Add member',
-              callback: this.openPopup.bind(this)
-            }
-          ];
-        }
-      },
-      getRowActions: function() {
-        var vm = this;
-        var actions = [];
-
-        if (this.isOwnerOrStaff) {
-          actions.push({
-            name: '<i class="fa fa-pencil"></i> Edit',
-            callback: this.openPopup.bind(this),
-          });
-        }
-
-        if (this.isOwnerOrStaff || this.isProjectManager) {
-          actions.push({
-            name: '<i class="fa fa-trash"></i> Remove',
-            callback: this.remove.bind(this),
-            isDisabled: function(row) {
-              return vm.isProjectManager && row.role === 'manager';
-            },
-            tooltip: function(row) {
-              if (vm.isProjectManager && row.role === 'manager') {
-                return 'Project manager cannot edit users with same role';
-              }
-            }
-          });
-        }
-
-        return actions;
-      },
-      removeInstance: function(user) {
-        return projectPermissionsService.deletePermission(user.permission);
-      },
-      openPopup: function(user) {
-        var dialogScope = $rootScope.$new();
-        dialogScope.currentProject = currentProject;
-        dialogScope.editUser = user;
-        dialogScope.isProjectManager = this.isProjectManager;
-        dialogScope.addedUsers = this.list.map(function(users) {
-          return users.uuid;
-        });
-        $uibModal.open({
-          component: 'addProjectMember',
-          scope: dialogScope
-        }).result.then(function() {
-          controllerScope.resetCache();
-        });
-      },
-      getFilter: function() {
-        return {operation: 'users', UUID: currentProject.uuid};
-      },
-      getProjectRole: function(role) {
-        return projectPermissionsService.getList({
-          user_url: currentUser.url,
-          project: currentProject.uuid,
-          role: role});
-      }
-    });
-
-    controllerScope.__proto__ = new TeamController();
-  }
-
 })();

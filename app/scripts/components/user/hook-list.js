@@ -10,7 +10,7 @@ export default function hookList() {
 
 // @ngInject
 function HookListController(
-  baseControllerListClass, $filter, $uibModal, hooksService) {
+  baseControllerListClass, $filter, $uibModal, hooksService, usersService) {
   var controllerScope = this;
   var Controller = baseControllerListClass.extend({
     init: function() {
@@ -25,7 +25,7 @@ function HookListController(
           {
             title: 'State',
             className: 'text-center all',
-            render: function(data, type, row, meta) {
+            render: function(row) {
               var cls = row.is_active && 'online' || '';
               var title = row.is_active && 'Enabled' || 'Disabled';
               return '<a class="status-circle {cls}" title="{title}"></a>'
@@ -36,21 +36,23 @@ function HookListController(
           {
             title: 'Method',
             className: 'min-tablet-l',
-            render: function(data, type, row, meta) {
+            render: function(row) {
               return row.label;
-            }
+            },
+            width: '100px'
           },
           {
             title: 'Destination',
             className: 'min-tablet-l',
-            render: function(data, type, row, meta) {
+            render: function(row) {
               return row.destination;
-            }
+            },
+            width: '100px'
           },
           {
             title: 'Events',
             className: 'min-tablet-l',
-            render: function(data, type, row, meta) {
+            render: function(row) {
               return row.events;
             }
           }
@@ -71,7 +73,14 @@ function HookListController(
             className: 'danger',
             callback: this.remove.bind(controllerScope)
           }
-        ]
+        ],
+        actionsColumnWidth: '150px'
+      };
+    },
+
+    getFilter: function() {
+      return {
+        author_uuid: usersService.currentUser.uuid
       };
     },
 

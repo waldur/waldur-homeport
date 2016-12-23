@@ -1,0 +1,16 @@
+<div class="btn-group dropdown" uib-dropdown on-toggle="$ctrl.onToggle(open)">
+    <a class="btn btn-default btn-sm" uib-dropdown-toggle>
+        Actions <span class="caret"></span>
+    </a>
+
+    <ul class="dropdown-menu dropdown-menu-right" uib-dropdown-menu>
+        <li role="menuitem" ng-show="$ctrl.loading"><a>Loading actions</a></li>
+        <li role="menuitem" ng-show="!$ctrl.loading && !$ctrl.actions"><a>There are no actions</a></li>
+        <li ng-repeat="(name, action) in $ctrl.actions" title="{{ action.reason }}">
+            <a ng-click="$ctrl.onClick(name, action)"
+               ng-class="$ctrl.buttonClass(action)">
+               {{ action.title }}
+            </a>
+        </li>
+    </ul>
+</div>

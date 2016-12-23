@@ -17,6 +17,7 @@ function UserProjectsController(
       this.service = projectPermissionsService;
       this.controllerScope = controllerScope;
       this.tableOptions = {
+        disableSearch: true,
         noDataText: 'No projects yet',
         noMatchesText: 'No projects found matching filter.',
 
@@ -24,14 +25,14 @@ function UserProjectsController(
           {
             title: 'Project name',
             className: 'all',
-            render: function(data, type, row, meta) {
+            render: function(row) {
               return row.project_name;
             }
           },
           {
             title: 'Role',
             className: 'all',
-            render: function(data, type, row, meta) {
+            render: function(row) {
               return row.role;
             }
           },

@@ -4,12 +4,13 @@ const tabs = {
     template: '<user-dashboard></user-dashboard>',
     data: {
       pageTitle: 'User dashboard',
-      pageClass: 'gray-bg'
+      pageClass: 'gray-bg',
+      hideBreadcrumbs: true
     }
   },
   events: {
     url: 'events/',
-    template: '<user-events></user-events>',
+    template: '<user-events user="currentUser"></user-events>',
     data: {
       pageTitle: 'Audit logs'
     }
@@ -30,7 +31,7 @@ const tabs = {
   },
   manage: {
     url: 'manage/',
-    template: '<user-delete></user-delete>',
+    template: '<user-manage></user-manage>',
     data: {
       pageTitle: 'Manage'
     }
@@ -44,7 +45,8 @@ export default function($stateProvider) {
       url: '/profile/',
       abstract: true,
       data: {
-        auth: true
+        auth: true,
+        workspace: 'user'
       },
       template: '<user-details></user-details>',
     })
@@ -59,7 +61,8 @@ export default function($stateProvider) {
       url: '/users/:uuid/',
       abstract: true,
       data: {
-        auth: true
+        auth: true,
+        workspace: 'user'
       },
       template: '<user-details></user-details>',
     })
@@ -75,12 +78,13 @@ export default function($stateProvider) {
       template: '<user-details></user-details>',
       data: {
         auth: true,
-        pageTitle: 'Add SSH key'
+        pageTitle: 'Add SSH key',
+        workspace: 'user'
       }
     })
 
     .state('keys.create', {
       url: 'add/',
       template: '<key-create></key-create>'
-    })
-};
+    });
+}

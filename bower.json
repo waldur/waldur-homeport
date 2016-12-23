@@ -1,6 +1,6 @@
 {
-  "name": "nodeconductor-web",
-  "description": "NodeConductor Web interface",
+  "name": "waldur-homeport",
+  "description": "Web interface for Waldur MasterMind cloud orchestrator",
   "version": "0.0.0",
   "private": true,
   "dependencies": {

@@ -10,6 +10,7 @@
       init:function() {
         this._super();
         this.endpoint = '/project-permissions/';
+        this.filterByCustomer = false;
       },
 
       deletePermission: function(permission) {

@@ -12,7 +12,7 @@
       scope: {
         controller: '=tableCtrl'
       },
-      template: '<table class="table table-striped"/>',
+      template: '<div class="full-width"><div class="table-responsive"><table class="table table-striped"></table></div></div>',
       link: function(scope, element) {
         var options = scope.controller.tableOptions;
         var table;
@@ -22,14 +22,70 @@
             // Table should be initialized once
             return;
           }
-          if (newTableOptions.columns) {
+          if (newTableOptions && newTableOptions.columns) {
+            options = newTableOptions;
             table = initTable();
             connectRowButtons(table);
-            connectWatcher(table);
+
+            if (!newTableOptions.disableAutoUpdate) {
+              connectWatcher(table);
+            }
+            registerEvents(table);
           }
         });
 
         function initTable() {
+          var buttons = getButtons();
+          var columns = getColumns();
+          var dom = getDom();
+
+          var tableOptions = {
+            responsive: true,
+            processing: true,
+            serverSide: true,
+            ordering: !!options.enableOrdering,
+            autoWidth: false,
+            ajax: serverDataTableCallback,
+            dom: dom,
+            buttons: buttons && buttons,
+            columns: columns,
+            language: {
+              emptyTable: options.noDataText,
+              zeroRecords: options.noMatchesText
+            },
+            fnDrawCallback: function() {
+              $(element).find('tr').each(function(index, element) {
+                $compile(element)(scope);
+              });
+            }
+          };
+
+          if (options.scrollY) {
+            tableOptions.scrollY = options.scrollY;
+          }
+
+          if (options.scrollCollapse) {
+            tableOptions.scrollCollapse = options.scrollCollapse;
+          }
+
+          return $(element.find('.table')[0]).DataTable(tableOptions);
+        }
+
+        function getDom() {
+          if (options.disableButtons) {
+            return 'Tgitp';
+          } else if (options.disableSearch) {
+            return '<"html5buttons"B>rgitp'
+          } else {
+            return '<"html5buttons"B>lTfgitp';
+          }
+        }
+
+        function getButtons() {
+          if (options.disableButtons) {
+            return;
+          }
+
           var exportButtons = getExportButtons(
             options.columns.length,
             options.rowActions,
@@ -55,33 +111,21 @@
               });
             }
           });
+          return buttons;
+        }
 
-          var columns = options.columns;
-          if (options.rowActions) {
+        function getColumns() {
+          var columns = options.columns.map(function(column) {
+            function render(data, type, row, meta) {
+              return column.render(row);
+            };
+            return angular.extend({}, column, {render: render});
+          });
+          if (options.rowActions && options.rowActions.length) {
             var actionColumn = getActionColumn(options.rowActions, options.actionsColumnWidth);
             columns.push(actionColumn);
           }
-
-          var table = $(element.find('table')[0]).DataTable({
-            responsive: true,
-            processing: true,
-            serverSide: true,
-            ordering: false,
-            ajax: serverDataTableCallback,
-            dom: '<"html5buttons"B>lTfgitp',
-            buttons: buttons,
-            columns: columns,
-            language: {
-              emptyTable: options.noDataText,
-              zeroRecords: options.noMatchesText
-            },
-            fnDrawCallback: function() {
-              $(element).find('tr').each(function(index, element) {
-                $compile(element)(scope);
-              });
-            }
-          });
-          return table;
+          return columns;
         }
 
         function connectWatcher(table) {
@@ -110,6 +154,25 @@
               className: action.disabled && 'disabled' || '',
               titleAttr: action.titleAttr
             };
+          });
+        }
+
+        function registerEvents(table) {
+          table.on('click', 'tr', function() {
+            var tr = $(this).closest('tr');
+            var row = table.row(tr);
+            var rowShown = false;
+            table.rows().every(function(rowIndex){
+              if (table.row(rowIndex).child.isShown()) {
+                rowShown = true;
+              }
+            });
+            if (rowShown) {
+              scope.controller.toggleRefresh(true);
+            }
+            else {
+              scope.controller.toggleRefresh(false);
+            }
           });
         }
 
@@ -183,7 +246,12 @@
         }
 
         function serverDataTableCallback(request, drawCallback, settings) {
-          scope.controller.requestLoad(request).then(function(list) {
+          var filter = {};
+          request.order.forEach(function(orderItem) {
+            var orderField = options.columns[orderItem.column].orderField;
+            filter.o = orderItem.dir === 'asc' ? orderField : '-' + orderField;
+          });
+          scope.controller.requestLoad(request, filter).then(function(list) {
             var total = scope.controller.getTotal();
             drawCallback({
               draw: request.draw,

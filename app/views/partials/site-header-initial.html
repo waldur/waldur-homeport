@@ -1,20 +1,18 @@
-<!-- app-header -->
-<header class="app-header" style="">
-    <nav class="container">
-        <!-- views nav -->
-        <ul class="nav-list views initial">
-            <li class="logo-box">
-                <a href="#maintop" du-smooth-scroll class="logo" target='_blanc'></a>
+<div class="row border-bottom">
+    <nav class="navbar navbar-static-top white-bg m-b-none">
+        <div class="navbar-header m-l-md">
+            <ul class="nav-list views initial">
+                <li>
+                    <a href="#" class="logo" target='_blank'></a>
+                </li>
+            </ul>
+        </div>
+        <ul class="nav navbar-top-links navbar-right">
+            <li>
+                <a ng-click="logout()">
+                    <i class="fa fa-sign-out"></i> Log out
+                </a>
             </li>
         </ul>
-        <!-- /views nav -->
-        <!-- context nav -->
-        <ul class="nav-list context initial">
-            <li class="logout-box">
-                <a class="logout" ng-click="logout()">Log out</a>
-            </li>
-        </ul>
-        <!-- /context nav -->
     </nav>
-</header>
-<!-- app-header -->
+</div>

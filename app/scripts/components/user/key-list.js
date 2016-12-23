@@ -30,14 +30,14 @@ function KeyListController(
           {
             title: 'Title',
             className: 'all',
-            render: function(data, type, row, meta) {
+            render: function(row) {
               return row.name;
             }
           },
           {
             title: 'Fingerprint',
             className: 'min-tablet-l',
-            render: function(data, type, row, meta) {
+            render: function(row) {
               return row.fingerprint;
             }
           }

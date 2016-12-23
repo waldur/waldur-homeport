@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="ncsaas">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
@@ -39,33 +39,11 @@
     <script src="/static/js/html5shiv.min.js"></script>
     <script src="/static/js/respond.min.js"></script>
     <![endif]-->
-
-    <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-        ga('create', 'UA-34543419-4', 'auto');
-    </script>
-
-    <!-- disable intercom for the time being -->
-    <!-- script>
-        (function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/xfbbcxck';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()
-    </script-->
-
 </head>
 <body ng-controller="MainController as Main" class="fixed-sidebar {{$state.current.data.bodyClass}}" id="page-top">
-<div class="flash-message-fixed" flash-message="5000" ></div>
+<div class="flash-message-fixed" flash-message="5000"></div>
 <div scroll-to-top></div>
 <div ui-view id="wrapper"></div>
-<script>(function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-    fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-
 <!-- @if NODE_ENV == 'DEVELOPMENT' || NODE_ENV == 'TEST' -->
 <script src="static/js/jquery.min.js"></script>
 <!-- angular -->
@@ -117,85 +95,56 @@
 
 <!-- Custom modules -->
 <script src="scripts/app.js"></script>
-<script src="scripts/routes/projects.js"></script>
-<script src="scripts/routes/organizations.js"></script>
-<script src="scripts/routes/store.js"></script>
 <!-- Filters -->
 <script src="scripts/filters.js"></script>
 <!-- Utils -->
 <script src="scripts/utils.js"></script>
 <!-- configs -->
 <!-- @if NODE_ENV == 'DEVELOPMENT' -->
-<script src="scripts/configs/auth-config.js"></script>
 <script src="scripts/configs/avatar-config.js"></script>
 <script src="scripts/configs/base-config.js"></script>
 <script src="scripts/configs/i18n-config.js"></script>
-<script src="scripts/configs/custom-config.js"></script>
-<script src="scripts/configs/mode-config.js"></script>
 <script src="scripts/configs/resource-config.js"></script>
 <!-- @endif -->
 <!-- @if NODE_ENV == 'TEST' -->
-<script src="scripts/configs/auth-config.js"></script>
 <script src="scripts/configs/avatar-config.js"></script>
 <script src="scripts/configs/base-config.js"></script>
 <script src="scripts/configs/i18n-config.js"></script>
-<script src="scripts/configs/test/custom-config.js"></script>
-<script src="scripts/configs/test/mode-config.js"></script>
 <script src="scripts/configs/resource-config.js"></script>
 <!-- @endif -->
 <!-- controllers -->
-<script src="scripts/controllers/action-dialog-controller.js"></script>
-<script src="scripts/controllers/app-store-controller.js"></script>
-<script src="scripts/controllers/auth-controllers.js"></script>
 <script src="scripts/controllers/base-controller-class.js"></script>
 <script src="scripts/controllers/base-controllers.js"></script>
 <script src="scripts/controllers/compare-controller.js"></script>
-<script src="scripts/controllers/customer-controllers.js"></script>
 <script src="scripts/controllers/customer-tabs-controllers.js"></script>
 <script src="scripts/controllers/dashboard-controllers.js"></script>
-<script src="scripts/controllers/events-controller.js"></script>
 <script src="scripts/controllers/help-controller.js"></script>
 <script src="scripts/controllers/import-resource-controller.js"></script>
-<script src="scripts/controllers/initial-data-controller.js"></script>
-<script src="scripts/controllers/invitation-controller.js"></script>
 <script src="scripts/controllers/payments-controllers.js"></script>
 <script src="scripts/controllers/plans-controllers.js"></script>
-<script src="scripts/controllers/projects-controllers.js"></script>
 <script src="scripts/controllers/projects-tabs-controllers.js"></script>
 <script src="scripts/controllers/resources-controllers.js"></script>
 <script src="scripts/controllers/resources-tabs-controllers.js"></script>
-<script src="scripts/controllers/workspace-controller.js"></script>
 <!-- services -->
-<script src="scripts/services/action-utils-service.js"></script>
 <script src="scripts/services/agreements-service.js"></script>
-<script src="scripts/services/alerts-service.js"></script>
-<script src="scripts/services/auth-service.js"></script>
 <script src="scripts/services/base-service-class.js"></script>
 <script src="scripts/services/current-state-service.js"></script>
 <script src="scripts/services/customer-image-service.js"></script>
 <script src="scripts/services/customer-permissions-service.js"></script>
 <script src="scripts/services/customers-service.js"></script>
 <script src="scripts/services/default-price-list-items-service.js"></script>
-<script src="scripts/services/event-statistics-service.js"></script>
-<script src="scripts/services/events-service.js"></script>
 <script src="scripts/services/hooks-service.js"></script>
-<script src="scripts/services/invitation-service.js"></script>
-<script src="scripts/services/invoices-service.js"></script>
-<script src="scripts/services/issue-comments-service.js"></script>
-<script src="scripts/services/issues-service.js"></script>
 <script src="scripts/services/join-service-project-link-service.js"></script>
 <script src="scripts/services/join-service.js"></script>
 <script src="scripts/services/keys-service.js"></script>
+<script src="scripts/services/payment-details.js"></script>
 <script src="scripts/services/payments-service.js"></script>
 <script src="scripts/services/plans-service.js"></script>
-<script src="scripts/services/premium-support-service.js"></script>
 <script src="scripts/services/price-estimation-service.js"></script>
 <script src="scripts/services/price-list-items-service.js"></script>
 <script src="scripts/services/project-permissions-service.js"></script>
 <script src="scripts/services/projects-service.js"></script>
 <script src="scripts/services/quotas-service.js"></script>
-<script src="scripts/services/resource-monitoring-service.js"></script>
-<script src="scripts/services/resource-utils-service.js"></script>
 <script src="scripts/services/resources-count-service.js"></script>
 <script src="scripts/services/resources-service.js"></script>
 <script src="scripts/services/services-service.js"></script>
@@ -204,28 +153,18 @@
 <script src="scripts/services/zabbix-hosts-service.js"></script>
 <script src="scripts/services/zabbix-itservices-service.js"></script>
 <!-- directives -->
-<script src="scripts/directives/action-button-resource.js"></script>
-<script src="scripts/directives/action-button.js"></script>
-<script src="scripts/directives/action-list-resource.js"></script>
-<script src="scripts/directives/action-list.js"></script>
-<script src="scripts/directives/alert-filter.js"></script>
 <script src="scripts/directives/bar-chart.js"></script>
 <script src="scripts/directives/cancel-button.js"></script>
 <script src="scripts/directives/check-quotas.js"></script>
 <script src="scripts/directives/compact-table-sorter.js"></script>
 <script src="scripts/directives/customer-balance.js"></script>
-<script src="scripts/directives/customer-workspace.js"></script>
 <script src="scripts/directives/dashboard-chart.js"></script>
-<script src="scripts/directives/dashboard-cost-chart.js"></script>
 <script src="scripts/directives/responsive-table.js"></script>
-<script src="scripts/directives/email-mask.js"></script>
 <script src="scripts/directives/entity-list.js"></script>
 <script src="scripts/directives/expandable-indicator.js"></script>
 <script src="scripts/directives/expandable-item.js"></script>
-<script src="scripts/directives/field-label.js"></script>
 <script src="scripts/directives/filter-list.js"></script>
 <script src="scripts/directives/footer-position.js"></script>
-<script src="scripts/directives/help-icon.js"></script>
 <script src="scripts/directives/image-box.js"></script>
 <script src="scripts/directives/import-resource-button.js"></script>
 <script src="scripts/directives/importable-resources.js"></script>
@@ -237,21 +176,15 @@
 <script src="scripts/directives/nc-header.js"></script>
 <script src="scripts/directives/page-title.js"></script>
 <script src="scripts/directives/pagination.js"></script>
-<script src="scripts/directives/pie-chart.js"></script>
 <script src="scripts/directives/project-alerts-feed.js"></script>
 <script src="scripts/directives/project-events-feed.js"></script>
 <script src="scripts/directives/project-price-limit.js"></script>
 <script src="scripts/directives/add-body-class.js"></script>
-<script src="scripts/directives/resource-details.js"></script>
-<script src="scripts/directives/resource-events.js"></script>
 <script src="scripts/directives/scroll-to-me.js"></script>
 <script src="scripts/directives/scroll-to-top.js"></script>
-<script src="scripts/directives/select-workspace-toggle.js"></script>
-<script src="scripts/directives/sidebar.js"></script>
 <script src="scripts/directives/sidebar-toggle.js"></script>
 <script src="scripts/directives/sizing.js"></script>
 <script src="scripts/directives/stoppropagation.js"></script>
-<script src="scripts/directives/submit-button.js"></script>
 <script src="scripts/directives/vertical-bar-chart.js"></script>
 <script src="scripts/directives/visible.js"></script>
 <script src="static/js/bundle.js"></script>

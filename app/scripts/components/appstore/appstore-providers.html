@@ -1,0 +1,47 @@
+<div ng-if="AppStore.loadingProviders">
+    <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
+</div>
+
+<div class="ibox-content" ng-if="!AppStore.loadingProviders && !AppStore.renderStore">
+    <p>
+        There are no working {{category.label.toLowerCase()}} providers available for the current project.
+    </p>
+    <p visible="providers">
+        You can change that in
+        <a ui-sref="organization.providers({uuid: AppStore.currentCustomer.uuid})">provider management</a>.
+    </p>
+</div>
+
+<div class="ibox" ng-if="!AppStore.loadingProviders && AppStore.renderStore && !AppStore.selectedResourceType">
+    <div class="ibox-title">
+        <h5>Select provider</h5>
+    </div>
+    <div class="ibox-content">
+        <div class="row">
+            <div class="col-md-4"
+                 ng-repeat="service in AppStore.categoryServices[AppStore.selectedCategory.name]"
+                 ng-click="AppStore.setService(service)">
+
+                <div class="ibox" uib-tooltip="{{ service.warning }}">
+                    <div class="ibox-content product-box cursor-pointer">
+                        <div class="text-center m-b-sm m-t-xl"
+                             ng-class="{disabled: !service.enabled}">
+                            <img ng-src="{{ AppStore.getServiceIcon(service.type) }}" class="img-lg">
+                        </div>
+                        <div class="product-desc" ng-class="{disabled: !service.enabled}">
+                            <div class="pull-right">
+                                <a class="btn btn-sm btn-outline btn-primary">
+                                    Select <i class="fa fa-long-arrow-right"></i>
+                                </a>
+                            </div>
+                            <a class="product-name">
+                                <i class="fa fa-exclamation-triangle" ng-if="!!service.warning"></i>
+                                {{ ::service.name }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

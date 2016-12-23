@@ -3,11 +3,8 @@
         <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
     </div>
     <div class="row" ng-if="!DashboardCtrl.loading">
-        <div class="col-lg-2" ng-repeat="chart in DashboardCtrl.resourceCharts">
+        <div class="col-lg-3 col-md-6" ng-repeat="chart in DashboardCtrl.charts">
             <dashboard-chart chart="chart"></dashboard-chart>
-        </div>
-        <div class="col-lg-4">
-            <dashboard-chart chart="DashboardCtrl.costChart"></dashboard-chart>
         </div>
     </div>
 
@@ -17,8 +14,8 @@
                 <div class="ibox-title">
                     <h5>Projects list</h5>
                 </div>
-                <div class="ibox-content" ng-controller="CustomerProjectTabController as ListController">
-                    <div ng-include="'views/partials/filtered-list.html'"></div>
+                <div class="ibox-content">
+                    <projects-list></projects-list>
                 </div>
             </div>
         </div>

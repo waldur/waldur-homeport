@@ -5,7 +5,6 @@
     .service('baseResourceListController',
     ['baseControllerListClass',
     'ENV',
-    'ENTITYLISTFIELDTYPES',
     'resourcesService',
     'priceEstimationService',
     'servicesService',
@@ -24,7 +23,6 @@
   function baseResourceListController(
     baseControllerListClass,
     ENV,
-    ENTITYLISTFIELDTYPES,
     resourcesService,
     priceEstimationService,
     servicesService,
@@ -49,16 +47,8 @@
         this._super();
         this.hasCustomFilters = false;
       },
-      toggleRefresh: function() {
-        this.enableRefresh = !this.enableRefresh;
-      },
-      resetCache: function () {
-        if (!this.enableRefresh) {
-          return;
-        }
-        this._super();
-      },
       getTableOptions: function() {
+        var vm = this.controllerScope;
         return {
           searchFieldName: 'name',
           noDataText: 'You have no resources yet.',
@@ -67,7 +57,7 @@
             {
               title: 'Name',
               className: 'all',
-              render: function(data, type, row, meta) {
+              render: function(row) {
                 var img = '<img src="{src}" title="{title}" class="img-xs m-r-xs">'
                       .replace('{src}', resourceUtils.getIcon(row))
                       .replace('{title}', row.resource_type);
@@ -81,29 +71,20 @@
             {
               title: 'Provider',
               className: 'desktop',
-              render: function(data, type, row, meta) {
+              render: function(row) {
                 return row.service_name;
               }
             },
             {
               title: 'State',
               className: 'min-tablet-l',
-              render: function(data, type, row, meta) {
-                var cls = ENV.resourceStateColorClasses[row.state];
-                var title = row.state;
-                if (cls === 'processing') {
-                  cls = 'fa fa-refresh fa-spin';
-                  title = row.runtime_state;
-                } else {
-                  cls = 'status-circle ' + cls;
-                }
-                if (cls === 'status-circle erred') {
-                  title = row.error_message;
-                }
-                return '<a class="{cls}" title="{title}"></a> {state}'
-                          .replace('{cls}', cls)
-                          .replace('{state}', row.state || row.runtime_state)
-                          .replace('{title}', title);
+              render: function(row) {
+                var uuids = vm.list.map(function(item) {
+                  return item.uuid;
+                });
+                var index = uuids.indexOf(row.uuid);
+                return '<resource-state resource="controller.list[{index}]"></resource-state>'
+                  .replace('{index}', index);
               }
             }
           ],
@@ -121,13 +102,15 @@
       },
       getTableActions: function() {
         var actions = [];
-        if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('import') == -1) {
+        if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('import') === -1) {
           actions.push(this.getImportAction());
         }
-        if (this.category) {
+        if (this.category !== undefined) {
           actions.push(this.getCreateAction());
         }
-        actions.push(this.getMapAction());
+        if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('openMap') === -1) {
+          actions.push(this.getMapAction());
+        }
         return actions;
       },
       getImportAction: function() {
@@ -174,13 +157,13 @@
       },
       gotoAppstore: function() {
         if (this.category === ENV.VirtualMachines) {
-          $state.go('appstore.store', {category: 'vms'});
+          $state.go('appstore.vms');
         } else if (this.category === ENV.PrivateClouds) {
-          $state.go('appstore.store', {category: 'private_clouds'});
+          $state.go('appstore.private_clouds');
         } else if (this.category === ENV.Applications) {
-          $state.go('appstore.store', {category: 'apps'});
+          $state.go('appstore.apps');
         } else if (this.category === ENV.Storages) {
-          $state.go('appstore.store', {category: 'storages'});
+          $state.go('appstore.storages');
         }
       },
       getMapAction: function() {
@@ -192,7 +175,8 @@
       rowFields: [
         'uuid', 'url', 'name', 'state', 'runtime_state', 'created', 'error_message',
         'resource_type', 'latitude', 'longitude',
-        'service_name', 'service_uuid', 'customer'
+        'service_name', 'service_uuid', 'customer', 'service_settings_state',
+        'service_settings_error_message', 'service_settings_uuid', 'security_groups'
       ],
       getMarkers: function() {
         var items = this.controllerScope.list.filter(function hasCoordinates(item) {
@@ -322,84 +306,6 @@
   }
 })();
 
-(function() {
-  angular.module('ncsaas')
-      .controller('ResizeDropletController', [
-        '$scope',
-        'resourcesService',
-        'resourceUtils',
-        'actionUtilsService',
-        ResizeDropletController
-      ]);
-
-  function ResizeDropletController($scope, resourcesService, resourceUtils, actionUtilsService) {
-    angular.extend($scope, {
-      loading: true,
-      options: {
-        resizeType: 'flexible',
-        newSize: null,
-      },
-      init: function() {
-        $scope.loadDroplet().then(function() {
-          return $scope.loadValidSizes().then(function() {
-            $scope.loading = false;
-          });
-        }).catch(function(error) {
-          $scope.loading = false;
-          $scope.error = error.message;
-        });
-      },
-      formatSize: resourceUtils.formatFlavor,
-      loadDroplet: function() {
-        return resourcesService.$get(null, null, $scope.resource.url, {
-          field: ['cores', 'ram', 'disk']
-        }).then(function(droplet) {
-          angular.extend($scope.resource, droplet);
-        });
-      },
-      loadValidSizes: function() {
-        return actionUtilsService.loadActions($scope.resource).then(function(actions) {
-          $scope.action = actions.resize;
-          if (!$scope.action.enabled) {
-            return;
-          }
-          return actionUtilsService.loadRawChoices($scope.action.fields.size).then(function(sizes) {
-            sizes.forEach(function(size) {
-              size.enabled = $scope.isValidSize(size);
-            });
-            sizes.sort(function(size1, size2) {
-              return size1.enabled < size2.enabled;
-            });
-            $scope.sizes = sizes;
-          });
-        });
-      },
-      isValidSize: function(size) {
-        // 1. New size should not be the same as the current size
-        // 2. New size disk should not be lower then current size disk
-        var droplet = $scope.resource;
-        return size.disk !== droplet.disk &&
-               size.cores !== droplet.cores &&
-               size.ram !== droplet.ram &&
-               size.disk >= droplet.disk;
-      },
-      submitForm: function() {
-        var form = resourcesService.$create($scope.action.url);
-        form.size = $scope.options.newSize.url;
-        form.disk = $scope.options.resizeType === 'permanent';
-        return form.$save().then(function(response) {
-          actionUtilsService.handleActionSuccess($scope.action);
-          $scope.errors = {};
-          $scope.$close();
-          $scope.controller.reInitResource($scope.resource);
-        }, function(response) {
-          $scope.errors = response.data;
-        });
-      }
-    });
-    $scope.init();
-  }
-})();
 
 (function() {
   angular.module('ncsaas')
@@ -447,35 +353,7 @@
         this.service = resourcesService;
         this.controllerScope = controllerScope;
         this._super();
-        this.detailsState = 'resources.details';
-        this.detailsViewOptions = {
-          title_plural: 'resources',
-          listState: 'project.details({uuid: controller.model.project_uuid, tab:controller.resourceTab})',
-          aboutFields: [
-            {
-              fieldKey: 'name',
-              isEditable: true,
-              className: 'name'
-            }
-          ],
-          tabs: [
-            {
-              title: 'Details',
-              key: 'details',
-              viewName: 'tabDetails',
-              count: -1,
-              hideSearch: true
-            },
-            {
-              title: 'Alerts',
-              key: 'alerts',
-              viewName: 'tabAlerts',
-              countFieldKey: 'alerts'
-            },
-          ]
-        };
-        this.detailsViewOptions.activeTab = this.getActiveTab();
-        this.activeTab = this.detailsViewOptions.activeTab.key;
+        controllerScope.enableRefresh = true;
       },
 
       getModel: function() {
@@ -483,10 +361,13 @@
       },
 
       reInitResource: function() {
-        controllerScope.getModel().then(function(model) {
+        if (!controllerScope.enableRefresh) {
+          return;
+        }
+        return controllerScope.getModel().then(function(model) {
           controllerScope.model = model;
         }, function(error) {
-          if (error.status == 404) {
+          if (error.status === 404) {
             ncUtilsFlash.error('Resource is gone.');
             this.modelNotFound();
           }
@@ -494,8 +375,8 @@
       },
 
       afterActivate: function() {
+        this.viewHeaderLabel = resourceUtils.formatResourceType(this.model);
         this.updateMenu();
-        this.setCounters();
         this.updateResourceTab();
         this.scheduleRefresh();
         this.addMonitoringTabs();
@@ -528,7 +409,7 @@
         } else if (resourceCategory === 'private_clouds') {
           return 'project.resources.clouds';
         } else if (resourceCategory === 'storages') {
-          return 'project.resources.storage';
+          return 'project.resources.storage.tabs';
         } else {
           return 'project.resources.vms';
         }
@@ -568,13 +449,6 @@
         } else {
           this.resourceTab = ENV.resourcesTypes.vms;
         }
-      },
-
-      getCounters: function() {
-        var query = angular.extend(alertsService.defaultFilter, {scope: this.model.url});
-        return resourcesCountService.alerts(query).then(function(response) {
-          return {alerts: response};
-        });
       },
 
       scheduleRefresh: function() {

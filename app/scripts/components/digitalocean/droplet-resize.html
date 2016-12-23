@@ -1,0 +1,77 @@
+<div class="modal-header">
+    <h3 class="modal-title">Resize droplet</h3>
+</div>
+<div class="modal-body">
+    <div ng-if="loading">
+        <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
+    </div>
+    <div ng-if="!loading">
+        <p ng-if="!action.enabled" class="text-danger" ng-bind="action.reason"></p>
+
+        <div ng-if="action.enabled">
+            <div class="form-group">
+                <p class="form-control-static">
+                    <strong>Current size:</strong>
+                    {{ formatSize(resource) }}
+                </p>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">New size:</label>
+                <ui-select ng-model="options.newSize" theme="bootstrap">
+                    <ui-select-match placeholder="Select size...">
+                        {{ formatSize($select.selected) }}
+                    </ui-select-match>
+                    <ui-select-choices repeat="size in sizes track by size.uuid"
+                                       ui-disable-choice="!size.enabled">
+                        {{ formatSize(size) }}
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+
+            <div class="form-group">
+                <div class="radio">
+                    <label for="flexible" class="control-label">
+                        <input
+                            id="flexible"
+                            type="radio"
+                            ng-model="options.resizeType"
+                            name="resizeType"
+                            value="flexible">
+                        <strong>Flexible</strong>
+                        <p>Increase a droplet's RAM and CPU only (not the storage).</p>
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="radio">
+                    <label for="permanent" class="control-label">
+                        <input
+                            id="permanent"
+                            type="radio"
+                            ng-model="options.resizeType"
+                            name="resizeType"
+                            value="permanent">
+                        <strong>Permanent</strong>
+                        <p>Increase a droplet's RAM, CPU and SSD disk.</p>
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group"
+                ng-if="errors.non_field_errors">
+                <p class="text-danger"
+                   ng-repeat="error in errors.non_field_errors"
+                   ng-bind="error">
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary"
+       ng-class="{'disabled': !action.enabled || !options.newSize}"
+       submit-button="submitForm()">Submit</button>
+    <button class="btn btn-default" ng-click="$dismiss()">Cancel</button>
+</div>

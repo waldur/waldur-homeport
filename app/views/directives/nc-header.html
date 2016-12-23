@@ -1,9 +1,9 @@
 <div class="row border-bottom">
-    <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+    <nav class="navbar navbar-static-top m-b-n" role="navigation">
         <div class="navbar-header">
             <sidebar-toggle/>
             <select-workspace-toggle/>
-            <div role="search" class="navbar-form-custom">
+            <div role="search" class="navbar-form-custom" visible-if="'mainSearch'">
                 <div class="form-group">
                     <input type="text" placeholder="Search" class="form-control" name="top-search" id="top-search">
                 </div>
@@ -11,11 +11,11 @@
         </div>
         <ul class="nav navbar-top-links navbar-right">
             <li visible="support">
-                <a ui-sref="support.list">
+                <a ui-sref="support.helpdesk" ui-sref-active-if="support">
                     <i class="fa fa-question-circle"></i> Support
                 </a>
             </li>
-            <li uib-dropdown>
+            <li uib-dropdown visible-if="'notifications'">
                 <a class="count-info" href uib-dropdown-toggle>
                     <i class="fa fa-bell"></i> <span class="label label-primary">8</span>
                 </a>

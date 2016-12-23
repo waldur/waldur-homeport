@@ -106,3 +106,35 @@ body.landing {
     text-align: center;
   }
 }
+
+#wrapper {
+  height: 100%;
+  .app-wrap {
+    margin-bottom: 0;
+  }
+
+  @include bp(xs) {
+    height: auto;
+    position: relative;
+    padding-bottom: 90px;
+  }
+}
+
+.app-content {
+  padding-bottom: 50px;
+
+  @include bp(xs) {
+    padding-bottom: 0;
+  }
+}
+
+.cursor-pointer {cursor: pointer;}
+
+.progress-bar-plain {
+  background-color: $light-gray;
+  color: $label-badget-color;
+}
+
+.nav.navbar-right > li > a.active {
+  color: $blue;
+}

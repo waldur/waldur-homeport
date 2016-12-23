@@ -1,0 +1,65 @@
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-md-9">
+
+            <appstore-providers></appstore-providers>
+
+            <div class="ibox" ng-if="AppStore.selectedResourceType">
+                <div class="ibox-title">
+                    <h5>Configure {{ AppStore.getServiceTypeDisplay(AppStore.serviceType) }}
+                        {{ AppStore.selectedResourceTypeName }}</h5>
+                </div>
+                <div class="ibox-content">
+                    <div ng-if="AppStore.loadingResourceProperties">
+                        <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
+                    </div>
+                    <div class="form-horizontal" ng-if="!AppStore.loadingResourceProperties">
+                        <div class="form-group">
+                            <div class="col-sm-3 control-label">
+                                <label>Provider</label>
+                            </div>
+                            <div class="col-sm-4 form-control-static">
+                                {{ AppStore.selectedService.name }}
+                            </div>
+                        </div>
+                        <appstore-form fields="AppStore.fields"
+                               errors="AppStore.errors"
+                               model="AppStore.instance">
+                        </appstore-form>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <a class="btn btn-primary pull-right"
+                        submit-button="AppStore.save()" type="submit"
+                        ng-disabled="!AppStore.canSave()"
+                        uib-tooltip="{{ AppStore.getTooltip() }}">
+                        <i class="fa fa fa-shopping-cart"></i>
+                        {{ AppStore.enablePurchaseCostDisplay ? 'Purchase' : 'Create' }}
+                    </a>
+                    <button class="btn btn-white" type="button"
+                        ng-click="AppStore.resetResourceType()">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3" ng-if="AppStore.renderStore">
+            <div class="ibox" visible="compare" ng-if="!AppStore.selectedResourceType && AppStore.showCompare.indexOf(AppStore.selectedCategory.name) !== -1">
+                <div class="ibox-title">
+                    <h5>
+                        <a ui-sref="compare.compare">
+                            <i class="fa fa-balance-scale"></i>
+                            Compare flavors
+                        </a>
+                    </h5>
+                </div>
+            </div>
+            <div ng-if="AppStore.selectedResourceType && !AppStore.loadingResourceProperties">
+                <appstore-summary
+                    component="AppStore.fields.summaryComponent"
+                    model="AppStore.instance">
+                </appstore-summary>
+            </div>
+        </div>
+    </div>
+</div>

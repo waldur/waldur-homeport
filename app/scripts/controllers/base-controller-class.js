@@ -1,23 +1,11 @@
 (function(){
   angular.module('ncsaas')
-    .service('baseControllerClass', ['$rootScope', 'ncUtilsFlash', baseControllerClass]);
+    .service('baseControllerClass', ['ncUtilsFlash', baseControllerClass]);
 
-  function baseControllerClass($rootScope, ncUtilsFlash) {
+  // This class is deprecated. Use ES6 class instead.
+  function baseControllerClass(ncUtilsFlash) {
     var ControllerClass = Class.extend({
-      _signals: {},
-
-      init: function() {
-        this.registerEventHandlers();
-      },
-      setSignalHandler: function(signalName, handlerFunction) {
-        this._signals[signalName] = handlerFunction;
-      },
-      registerEventHandlers: function() {
-        for (var eventName in this._signals) {
-          $rootScope.$on(eventName, this._signals[eventName]);
-          delete this._signals[eventName];
-        }
-      },
+      init: function() {},
       handleActionException: function(response) {
         if (response.status === 409) {
           var message = response.data.detail || response.data.status;
@@ -41,7 +29,6 @@
     /**
      * Use controllerScope.__proto__ = new Controller() in needed controller
      * use this.controllerScope for changes in event handler
-     * sеt events in this.setSignalHandler('eventName', this.eventFunction);
      */
     var ControllerListClass = baseControllerClass.extend({
       list: [],
@@ -70,8 +57,7 @@
         // reset after state change
         this.selectedInstances = [];
         this.controlPanelShow = ENV.listControlPanelShow;
-        // XXX: Temporarily disable Intercom
-        //ncUtils.updateIntercom();
+        this.enableRefresh = true;
       },
       getList: function(filter) {
         // It should return promise
@@ -79,7 +65,7 @@
         filter = filter || {};
         vm.service.cacheTime = vm.cacheTime;
         filter = angular.extend(filter, this.getFilter());
-        return vm.service.getList(filter).then(function(response) {
+        var promise = vm.service.getList(filter).then(function(response) {
           if (vm.mergeListFieldIdentifier) {
             vm.list = ncUtils.mergeLists(vm.list, response, vm.mergeListFieldIdentifier);
           } else {
@@ -88,13 +74,14 @@
           vm.afterGetList();
           vm.hideNoDataText = false;
         });
+        vm.blockListElement(promise);
+        return promise;
       },
       getFilter: function() {
         return {};
       },
-      requestLoad: function(request) {
+      requestLoad: function(request, filter) {
         var vm = this;
-        var filter = {};
         if (request.search.value) {
           filter[this.tableOptions.searchFieldName] = request.search.value;
         }
@@ -104,6 +91,9 @@
         return vm.getList(filter);
       },
       resetCache: function () {
+        if (!this.enableRefresh) {
+          return;
+        }
         var vm = this;
         var filter = {};
         if (vm.searchInput) {
@@ -194,7 +184,10 @@
         });
 
       },
-      showMore: function() {}
+      showMore: function() {},
+      toggleRefresh: function(open) {
+        this.enableRefresh = !open;
+      }
     });
 
     return ControllerListClass;

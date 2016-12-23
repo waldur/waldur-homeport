@@ -25,9 +25,11 @@
               }
             }
             if (customers.length !== 0) {
+              currentStateService.setHasCustomer(true);
               deferred.resolve(customers[0]);
             } else {
-              $state.go('initialdata.view');
+              $state.go('profile.details');
+              currentStateService.setHasCustomer(false);
               deferred.reject();
             }
           }
@@ -68,6 +70,9 @@
       checkCustomerUser: function(customer, user) {
         if (user.is_staff) {
           return true;
+        }
+        if (!customer) {
+          return false;
         }
         for (var i = 0; i < customer.owners.length; i++) {
           if (user.uuid === customer.owners[i].uuid) {
