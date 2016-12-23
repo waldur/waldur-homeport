@@ -1,8 +1,10 @@
 import openstackInstanceSummary from './openstack-instance-summary';
+import openstackInstanceSecurityGroups from './openstack-instance-security-groups';
 import OpenStackInstanceConfig from './openstack-instance-config';
 
 export default module => {
   module.directive('openstackInstanceSummary', openstackInstanceSummary);
+  module.directive('openstackInstanceSecurityGroups', openstackInstanceSecurityGroups);
   module.config(fieldsConfig);
   module.config(actionConfig);
   module.config(stateConfig);
