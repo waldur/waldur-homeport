@@ -13,7 +13,7 @@ export default function resourceDetails() {
 }
 
 // @ngInject
-function ResourceDetailsController($scope, resourceUtils, ncUtils, currentStateService, ENV, AppstoreFieldConfiguration) {
+function ResourceDetailsController($scope, resourceUtils, ncUtils, currentStateService, ENV) {
   $scope.$watch('resource', function() {
     var resource = $scope.resource;
     if (resource) {
@@ -34,8 +34,6 @@ function ResourceDetailsController($scope, resourceUtils, ncUtils, currentStateS
       if (resource.source_volume) {
         resource.source_volume_uuid = ncUtils.getUUID(resource.source_volume);
       }
-      resource.showSecurityGroups = !!AppstoreFieldConfiguration[resource.resource_type].security_groups 
-        && resource.security_groups;
     }
   });
 }

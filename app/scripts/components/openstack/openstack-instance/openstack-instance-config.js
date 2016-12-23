@@ -11,7 +11,6 @@ export default {
     'description',
     'user_data'
   ],
-  security_groups: true,
   options: {
     name: {
       type: 'string',
