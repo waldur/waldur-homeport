@@ -79,26 +79,26 @@
     </dd>
   </div>
 
-  <div class="m-b-xs" ng-if="::resource.internal_ips">
+  <div class="m-b-xs" ng-if="resource.internal_ips">
     <dt>
       Internal IP:
     </dt>
     <dd>
-      <span ng-if="::resource.internal_ips.length === 0">&ndash;</span>
-      <span ng-if="::resource.internal_ips.length > 0">
-        {{ ::resource.internal_ips.join(', ') }}
+      <span ng-if="resource.internal_ips.length === 0">&ndash;</span>
+      <span ng-if="resource.internal_ips.length > 0">
+        {{ resource.internal_ips.join(', ') }}
       </span>
     </dd>
   </div>
 
-  <div class="m-b-xs" ng-if="::resource.external_ips">
+  <div class="m-b-xs" ng-if="resource.external_ips">
     <dt>
       External IP:
     </dt>
     <dd>
-      <span ng-if="::resource.external_ips.length === 0">&ndash;</span>
-      <span ng-if="::resource.external_ips.length > 0">
-        {{ ::resource.external_ips.join(', ') }}
+      <span ng-if="resource.external_ips.length === 0">&ndash;</span>
+      <span ng-if="resource.external_ips.length > 0">
+        {{ resource.external_ips.join(', ') }}
       </span>
     </dd>
   </div>
