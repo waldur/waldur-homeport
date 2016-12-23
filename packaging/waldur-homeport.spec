@@ -37,7 +37,6 @@ npm install
 bower --allow-root --no-color install
 
 grunt prodbatch
-grunt po2json_angular_translate
 
 %install
 rm -rf %{buildroot}
@@ -48,7 +47,7 @@ mkdir -p %{buildroot}%{__conf_dir}
 cp packaging%{__conf_dir}/config.json %{buildroot}%{__conf_dir}
 cp packaging%{__conf_dir}/nginx.conf %{buildroot}%{__conf_dir}
 
-cp -r app %{buildroot}%{__data_dir}
+cp -r dist %{buildroot}%{__data_dir}
 
 %clean
 rm -rf %{buildroot}

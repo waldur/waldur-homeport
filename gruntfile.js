@@ -550,6 +550,58 @@ module.exports = function(grunt) {
                         }
                     }
                 ]
+            },
+            dist: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'app/',
+                        src: ['index.html'],
+                        dest: 'dist/'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'app/static/css/',
+                        src: ['style.min.css'],
+                        dest: 'dist/static/css/',
+                        rename: function(dest) {
+                            return dest + 'app.css';
+                        }
+                    },
+                    {
+                        expand: true,
+                        cwd: 'app/static/js/main/',
+                        src: ['main.min.js'],
+                        dest: 'dist/static/js/',
+                        rename: function(dest) {
+                            return dest + 'app.js';
+                        }
+                    },
+                    {
+                        expand: true,
+                        cwd: 'app/views/',
+                        src: ['**'],
+                        dest: 'dist/views/',
+                    },
+                    {
+                        expand: true,
+                        cwd: 'app/static/js/i18n/',
+                        src: ['*.json'],
+                        dest: 'dist/static/js/i18n/'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'app/static/images/',
+                        src: ['**'],
+                        dest: 'dist/static/images/'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'app/static/fonts/',
+                        src: ['**'],
+                        dest: 'dist/static/fonts/'
+                    }
+                ]
             }
         },
 
@@ -621,6 +673,13 @@ module.exports = function(grunt) {
                 base: 'app'
             },
             server: {},
+            dist: {
+                options: {
+                    base: {
+                        path: 'dist'
+                    }
+                }
+            },
             test: {
                 options: {
                     base: {
@@ -831,10 +890,11 @@ module.exports = function(grunt) {
     grunt.registerTask('default', ['run']);
 
     grunt.registerTask('prod', [
+        'po2json_angular_translate',
         'copy:main',
         'env:prod',
         'preprocess:index',
-        'connect:server',
+        'connect:dist',
         'image',
         'sass',
         'autoprefixer',
@@ -842,6 +902,7 @@ module.exports = function(grunt) {
         'concat',
         'uglify',
         'cssmin',
+        'copy:dist',
         'focus:prod'
     ]);
 
@@ -860,6 +921,7 @@ module.exports = function(grunt) {
     ]);
 
     grunt.registerTask('prodbatch', [
+        'po2json_angular_translate',
         'copy:main',
         'env:prod',
         'preprocess:index',
@@ -869,7 +931,8 @@ module.exports = function(grunt) {
         'webpack:prod',
         'concat',
         'uglify',
-        'cssmin'
+        'cssmin',
+        'copy:dist',
     ]);
 
     grunt.registerTask('modePublicBrokerage', [
