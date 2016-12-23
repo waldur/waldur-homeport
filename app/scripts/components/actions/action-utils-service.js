@@ -31,7 +31,13 @@ export default function actionUtilsService(
 
   this.loadChoices = function(field) {
     return this.loadRawChoices(field).then(items => {
-      field.list = this.formatChoices(field, items);
+      let choices = this.formatChoices(field, items);
+      if (field.emptyLabel && !field.required) {
+        choices.unshift({
+          display_name: field.emptyLabel
+        });
+      }
+      field.list = choices;
     });
   };
 
