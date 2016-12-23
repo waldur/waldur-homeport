@@ -41,6 +41,13 @@ function actionConfig(ActionConfigurationProvider) {
           }
         }
       },
+      assign_floating_ip: {
+        fields: {
+          floating_ip: {
+            emptyLabel: 'Allocate and assign new floating IP'
+          }
+        }
+      },
       update_security_groups: {
         title: 'Update security groups',
         fields: {
@@ -59,7 +66,6 @@ function actionConfig(ActionConfigurationProvider) {
       }
     }
   });
-
 }
 
 // @ngInject
