@@ -20,20 +20,18 @@ class SecurityGroupsController {
   }
 
   init() {
-    let displayGroups = [];
-    this.securityGroups.forEach(function(item) {
+    this.displayGroups = this.securityGroups.map(function(item) {
       let rules = item.rules.map(function(rule) {
         let port = rule.from_port === rule.to_port ?
           `port: ${rule.from_port}` :
           `ports: ${rule.from_port}-${rule.to_port}`;
         return `${rule.protocol}, ${port}, cidr: ${rule.cidr}`
       });
-      displayGroups.push({
+      return {
         name: item.name,
         description: item.description,
         rules: rules
-      });
+      };
     });
-    this.displayGroups = displayGroups;
   }
 }
