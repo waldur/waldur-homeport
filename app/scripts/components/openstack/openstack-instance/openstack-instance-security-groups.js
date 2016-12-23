@@ -27,11 +27,11 @@ class SecurityGroupsController {
           `port: ${rule.from_port}` :
           `ports: ${rule.from_port}-${rule.to_port}`;
         return `${rule.protocol}, ${port}, cidr: ${rule.cidr}`
-      }).join('<br />');
-      let description = item.description ? `${item.description} <br />` : ``;
+      });
       displayGroups.push({
         name: item.name,
-        rules: `${description} ${rules}`
+        description: item.description,
+        rules: rules
       });
     });
     this.displayGroups = displayGroups;

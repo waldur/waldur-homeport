@@ -46,6 +46,14 @@
           <uib-tab heading="SLA" index="'sla'"  ng-if="controller.showSla">
             <div class="panel-body" ng-if="active=='sla'" ng-include="'views/resource/tab-sla.html'"></div>
           </uib-tab>
+          <uib-tab heading="Security groups" index="'security_groups'" ng-if="controller.model.showSecurityGroups">
+            <div class="panel-body" ng-if="active=='security_groups'">
+              <openstack-instance-security-groups ng-if="controller.model.showSecurityGroups"
+                                                  security-groups="controller.model.security_groups">
+              </openstack-instance-security-groups>
+            </div>
+          </uib-tab>
+
         </uib-tabset>
       </div>
     </div>

@@ -34,7 +34,8 @@ function ResourceDetailsController($scope, resourceUtils, ncUtils, currentStateS
       if (resource.source_volume) {
         resource.source_volume_uuid = ncUtils.getUUID(resource.source_volume);
       }
-      resource.showSecurityGroups = !!AppstoreFieldConfiguration[resource.resource_type].security_groups;
+      resource.showSecurityGroups = !!AppstoreFieldConfiguration[resource.resource_type].security_groups 
+        && resource.security_groups;
     }
   });
 }
