@@ -28,17 +28,11 @@
     <link rel="stylesheet" type="text/css" href="/static/css/datatables/responsive.bootstrap.min.css">
 
     <link rel="stylesheet" type="text/css" href="/static/css/bundle.min.css">
-
     <!-- @endif -->
+
     <!-- @if NODE_ENV == 'PRODUCTION' -->
-    <link rel="stylesheet" type="text/css" href="/static/css/style.min.css">
+    <link rel="stylesheet" type="text/css" href="static/css/app.css">
     <!-- @endif -->
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    <script src="/static/js/html5shiv.min.js"></script>
-    <script src="/static/js/respond.min.js"></script>
-    <![endif]-->
 </head>
 <body ng-controller="MainController as Main" class="fixed-sidebar {{$state.current.data.bodyClass}}" id="page-top">
 <div class="flash-message-fixed" flash-message="5000"></div>
@@ -100,18 +94,10 @@
 <!-- Utils -->
 <script src="scripts/utils.js"></script>
 <!-- configs -->
-<!-- @if NODE_ENV == 'DEVELOPMENT' -->
 <script src="scripts/configs/avatar-config.js"></script>
 <script src="scripts/configs/base-config.js"></script>
 <script src="scripts/configs/i18n-config.js"></script>
 <script src="scripts/configs/resource-config.js"></script>
-<!-- @endif -->
-<!-- @if NODE_ENV == 'TEST' -->
-<script src="scripts/configs/avatar-config.js"></script>
-<script src="scripts/configs/base-config.js"></script>
-<script src="scripts/configs/i18n-config.js"></script>
-<script src="scripts/configs/resource-config.js"></script>
-<!-- @endif -->
 <!-- controllers -->
 <script src="scripts/controllers/base-controller-class.js"></script>
 <script src="scripts/controllers/base-controllers.js"></script>
@@ -191,7 +177,7 @@
 <!-- @endif -->
 
 <!-- @if NODE_ENV == 'PRODUCTION' -->
-<script src="static/js/main/main.min.js"></script>
+<script src="static/js/app.js"></script>
 <!-- @endif -->
 </body>
 </html>
