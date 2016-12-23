@@ -97,7 +97,7 @@ export default {
           label: 'Fingerprint'
         }
       ],
-      warningMessage: `SSH public key is required for accessing a provisioned VM. You can add a key in your <a ui-sref="profile.keys">profile</a>.`
+      warningMessage: 'SSH public key is required for accessing a provisioned VM. You can add a key in your <a ui-sref="profile.keys">profile</a>.'
     },
     floating_ip: {
       type: 'list',

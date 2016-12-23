@@ -11,5 +11,5 @@ export default function appstoreFieldErrors() {
     controller: function() {},
     controllerAs: '$ctrl',
     bindToController: true
-  }
+  };
 }

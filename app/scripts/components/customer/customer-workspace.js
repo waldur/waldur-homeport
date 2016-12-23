@@ -32,87 +32,87 @@ function CustomerWorkspaceController(
   function setItems() {
     $scope.items = [
       {
-        label: "Dashboard",
-        icon: "fa-th-large",
-        link: "dashboard.index"
+        label: 'Dashboard',
+        icon: 'fa-th-large',
+        link: 'dashboard.index'
       },
       {
-        label: "Providers",
-        icon: "fa-database",
-        link: "organization.providers({uuid: $ctrl.context.customer.uuid})",
-        feature: "providers",
-        countFieldKey: "services"
+        label: 'Providers',
+        icon: 'fa-database',
+        link: 'organization.providers({uuid: $ctrl.context.customer.uuid})',
+        feature: 'providers',
+        countFieldKey: 'services'
       },
       {
-        label: "Projects",
-        icon: "fa-bookmark",
-        link: "organization.projects({uuid: $ctrl.context.customer.uuid})",
-        feature: "projects",
-        countFieldKey: "projects"
+        label: 'Projects',
+        icon: 'fa-bookmark',
+        link: 'organization.projects({uuid: $ctrl.context.customer.uuid})',
+        feature: 'projects',
+        countFieldKey: 'projects'
       },
       {
-        icon: "fa-shopping-cart",
-        label: "Service store",
-        feature: "appstore",
+        icon: 'fa-shopping-cart',
+        label: 'Service store',
+        feature: 'appstore',
         action: function() {
           return AppStoreUtilsService.openDialog({selectProject: true});
         },
       },
       {
-        label: "Analytics",
-        icon: "fa-bar-chart-o",
-        link: "organization.analysis",
+        label: 'Analytics',
+        icon: 'fa-bar-chart-o',
+        link: 'organization.analysis',
         feature: 'analytics',
         children: [
           {
-            label: "Cost analysis",
-            icon: "fa-pie-chart",
-            link: "organization.analysis.cost({uuid: $ctrl.context.customer.uuid})"
+            label: 'Cost analysis',
+            icon: 'fa-pie-chart',
+            link: 'organization.analysis.cost({uuid: $ctrl.context.customer.uuid})'
           },
           {
-            label: "Resource usage",
-            icon: "fa-tachometer",
-            link: "organization.analysis.resources({uuid: $ctrl.context.customer.uuid})"
+            label: 'Resource usage',
+            icon: 'fa-tachometer',
+            link: 'organization.analysis.resources({uuid: $ctrl.context.customer.uuid})'
           }
         ]
       },
       {
-        label: "Audit logs",
-        icon: "fa-bell-o",
-        link: "organization.details({uuid: $ctrl.context.customer.uuid})",
-        feature: "eventlog"
+        label: 'Audit logs',
+        icon: 'fa-bell-o',
+        link: 'organization.details({uuid: $ctrl.context.customer.uuid})',
+        feature: 'eventlog'
       },
       {
-        label: "Issues",
-        icon: "fa-question-circle",
-        link: "organization.issues({uuid: $ctrl.context.customer.uuid})",
-        feature: "support"
+        label: 'Issues',
+        icon: 'fa-question-circle',
+        link: 'organization.issues({uuid: $ctrl.context.customer.uuid})',
+        feature: 'support'
       },
       {
-        label: "Alerts",
-        icon: "fa-fire",
-        link: "organization.alerts({uuid: $ctrl.context.customer.uuid})",
-        feature: "alerts",
-        countFieldKey: "alerts"
+        label: 'Alerts',
+        icon: 'fa-fire',
+        link: 'organization.alerts({uuid: $ctrl.context.customer.uuid})',
+        feature: 'alerts',
+        countFieldKey: 'alerts'
       },
       {
-        label: "Team",
-        icon: "fa-group",
-        link: "organization.team.tabs({uuid: $ctrl.context.customer.uuid})",
-        feature: "team",
-        countFieldKey: "users"
+        label: 'Team',
+        icon: 'fa-group',
+        link: 'organization.team.tabs({uuid: $ctrl.context.customer.uuid})',
+        feature: 'team',
+        countFieldKey: 'users'
       },
       {
-        label: "Billing",
-        icon: "fa-file-text-o",
-        link: "organization.billing.tabs({uuid: $ctrl.context.customer.uuid})",
-        feature: "billing"
+        label: 'Billing',
+        icon: 'fa-file-text-o',
+        link: 'organization.billing.tabs({uuid: $ctrl.context.customer.uuid})',
+        feature: 'billing'
       },
       {
-        label: "Sizing",
-        icon: "fa-calculator",
-        link: "organization.sizing({uuid: $ctrl.context.customer.uuid})",
-        feature: "sizing"
+        label: 'Sizing',
+        icon: 'fa-calculator',
+        link: 'organization.sizing({uuid: $ctrl.context.customer.uuid})',
+        feature: 'sizing'
       },
       {
         label: 'Manage',

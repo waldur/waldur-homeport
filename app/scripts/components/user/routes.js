@@ -86,5 +86,5 @@ export default function($stateProvider) {
     .state('keys.create', {
       url: 'add/',
       template: '<key-create></key-create>'
-    })
-};
+    });
+}

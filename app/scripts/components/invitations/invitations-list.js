@@ -85,7 +85,7 @@ function InvitationsListController(
             title: 'Email',
             className: 'all',
             orderField: 'email',
-            render: function(data, type, row, meta) {
+            render: function(row) {
               var avatar = '<img gravatar-src="\'{gravatarSrc}\'" gravatar-size="100" alt="" class="avatar-img img-xs">'
                 .replace('{gravatarSrc}', row.email);
               return avatar + ' ' + row.email;
@@ -95,7 +95,7 @@ function InvitationsListController(
             title: 'Role',
             className: 'min-tablet-l',
             orderable: false,
-            render: function(data, type, row, meta) {
+            render: function(row) {
               if (row.customer) {
                 return ENV.roles.owner;
               } else if (row.project) {
@@ -112,7 +112,7 @@ function InvitationsListController(
             title: 'Status',
             className: 'min-tablet-l',
             orderField: 'state',
-            render: function(data, type, row, meta) {
+            render: function(row) {
               return row.state;
             }
           },
@@ -120,7 +120,7 @@ function InvitationsListController(
             title: 'Created at',
             className: 'min-tablet-l',
             orderField: 'created',
-            render: function(data, type, row, meta) {
+            render: function(row) {
               return $filter('shortDate')(row.created);
             }
           },
@@ -128,7 +128,7 @@ function InvitationsListController(
             title: 'Expires at',
             className: 'min-tablet-l',
             orderable: false,
-            render: function(data, type, row, meta) {
+            render: function(row) {
               return $filter('shortDate')(row.expires);
             }
           },
@@ -136,7 +136,7 @@ function InvitationsListController(
             title: 'URL',
             className: 'none',
             orderable: false,
-            render: function(data, type, row, meta) {
+            render: function(row) {
               return row.link_template.replace('{uuid}', row.uuid);
             }
           }

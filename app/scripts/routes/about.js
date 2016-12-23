@@ -75,4 +75,4 @@ export default function aboutRoutes($stateProvider) {
         pageTitle: 'Privacy policy'
       }
     });
-};
+}

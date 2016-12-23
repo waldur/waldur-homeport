@@ -43,7 +43,7 @@ function HookDetailsController(hooksService, eventsService, ncUtilsFlash, $filte
           title: $filter('formatEventTitle')(choice),
           selected: vm.instance.event_groups.indexOf(choice) !== -1,
           help_text: groups[choice].join(', ')
-        }
+        };
       });
     }).finally(function() {
       vm.loading = false;
@@ -52,7 +52,7 @@ function HookDetailsController(hooksService, eventsService, ncUtilsFlash, $filte
 
   function getSelected() {
     return vm.choices.filter(function(choice) {
-      return choice.selected
+      return choice.selected;
     }).map(function(choice) {
       return choice.id;
     });
@@ -63,7 +63,7 @@ function HookDetailsController(hooksService, eventsService, ncUtilsFlash, $filte
     vm.instance.event_groups = getSelected();
     if (vm.instance.uuid) {
       promise = hooksService.update(vm.instance);
-      message = 'Notification has been updated'
+      message = 'Notification has been updated';
     } else {
       promise = hooksService.create(vm.instance);
       message = 'Notification has been created';

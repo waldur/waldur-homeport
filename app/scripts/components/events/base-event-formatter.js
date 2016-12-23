@@ -18,7 +18,7 @@ export default function BaseEventFormatter($state) {
       var templateContext = {};
       // Fill hyperlinks for entities
       if (this.showLinks(eventContext)) {
-        for (var field in entities) {
+        for (let field in entities) {
           var entity = entities[field];
           var url = this.formatUrl(entity, eventContext);
           if (url) {
@@ -29,7 +29,7 @@ export default function BaseEventFormatter($state) {
 
       // Fill other fields
       for (var i = 0; i < fields.length; i++) {
-        var field = fields[i];
+        let field = fields[i];
         if (!templateContext[field]) {
           if (eventContext[field] != undefined) {
             templateContext[field] = eventContext[field];
@@ -40,6 +40,7 @@ export default function BaseEventFormatter($state) {
       }
       return templateContext;
     },
+    /* eslint-disable no-unused-vars */
     showLinks: function(context) {
       return true;
     },
@@ -52,20 +53,21 @@ export default function BaseEventFormatter($state) {
     getEventContext: function(event) {
       return {};
     },
+    /* eslint-enable no-unused-vars */
     formatUrl: function(entity, context) {
       var route = EVENT_ROUTES[entity];
       if (!this.routeEnabled(route)) {
         return;
       }
-      var uuid = context[entity + "_uuid"];
+      var uuid = context[entity + '_uuid'];
       var args = {uuid: uuid};
       if (entity == 'service') {
-        route = 'organization.providers'
+        route = 'organization.providers';
         args = {
           uuid: context.customer_uuid,
           providerUuid: uuid,
           providerType: context.service_type
-        }
+        };
       }
       if (entity == 'resource') {
         args.resource_type = context.resource_type;
@@ -102,13 +104,13 @@ export default function BaseEventFormatter($state) {
       var entities = {};
       for(var key in event) {
         if (/_uuid$/.test(key)) {
-          var name = key.replace(/_uuid$/, '');
+          let name = key.replace(/_uuid$/, '');
           entities[name] = true;
         }
       }
 
       var table = {};
-      for (var name in entities) {
+      for (let name in entities) {
         for (var i = 0; i < fields.length; i++) {
           var field = fields[i];
           if (field.startsWith(name) && !table[field]) {
@@ -120,7 +122,7 @@ export default function BaseEventFormatter($state) {
     },
     renderTemplate: function(template, params) {
       for (var key in params) {
-        template = template.replace("{" + key + "}", params[key]);
+        template = template.replace('{' + key + '}', params[key]);
       }
       return template;
     }

@@ -25,7 +25,7 @@ function UserOrganizationsController(
           {
             title: 'Organization name',
             className: 'all',
-            render: function(data, type, row, meta) {
+            render: function(row) {
               return row.customer_name;
             }
           }

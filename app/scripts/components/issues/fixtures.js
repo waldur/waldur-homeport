@@ -12,5 +12,5 @@ export function randomInteger(start, end) {
 }
 
 export function randomId() {
-  return Math.floor((1 + Math.random()) * 0x100000).toString(10).toUpperCase()
+  return Math.floor((1 + Math.random()) * 0x100000).toString(10).toUpperCase();
 }

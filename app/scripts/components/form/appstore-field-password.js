@@ -11,5 +11,5 @@ export default function appstoreFieldPassword() {
     controller: function() {},
     controllerAs: '$ctrl',
     bindToController: true
-  }
+  };
 }

@@ -8,7 +8,7 @@ export default function resourceAnalysis() {
     controller: ResourceAnalysisController,
     controllerAs: 'DashboardController',
     scope: {},
-  }
+  };
 }
 
 // @ngInject
@@ -108,9 +108,9 @@ function ResourceAnalysisController(
                 count: free,
                 name: 'plans'
               };
-              vm.currentUsageData.legendDescription = item.usage + " used / " + limit + " total";
+              vm.currentUsageData.legendDescription = item.usage + ' used / ' + limit + ' total';
             } else {
-              vm.currentUsageData.legendDescription = item.usage + " used";
+              vm.currentUsageData.legendDescription = item.usage + ' used';
               limit = 'unlimited';
             }
             vm.resourcesLimit = limit;
@@ -122,11 +122,11 @@ function ResourceAnalysisController(
           }
           if (item.name === 'nc_app_count') {
             var apps = item.usage;
-            vm.currentUsageData.data.push({ label: apps + ' applications', count: apps, name: 'apps' })
+            vm.currentUsageData.data.push({ label: apps + ' applications', count: apps, name: 'apps' });
           }
           if (item.name === 'nc_private_cloud_count') {
             var pcs = item.usage;
-            vm.currentUsageData.data.push({ label: pcs + ' private clouds', count: pcs, name: 'private clouds' })
+            vm.currentUsageData.data.push({ label: pcs + ' private clouds', count: pcs, name: 'private clouds' });
           }
         });
         vm.currentUsageData.data = ncUtils.sortArrayOfObjects(vm.currentUsageData.data, 'name', 0);
@@ -166,7 +166,7 @@ function ResourceAnalysisController(
               name: 'providers' });
             !inData && (vm.totalMonthCost += item.total);
           }
-          vm.monthCostChartData.legendDescription = "Projected cost: " + ENV.currency + vm.totalMonthCost.toFixed(2);
+          vm.monthCostChartData.legendDescription = 'Projected cost: ' + ENV.currency + vm.totalMonthCost.toFixed(2);
         });
         vm.monthCostChartData.data = ncUtils.sortArrayOfObjects(vm.monthCostChartData.data, 'count', 1);
         vm.setServicesByProjectChartData();
@@ -235,7 +235,7 @@ function ResourceAnalysisController(
     },
     changeTab: function(tabName) {
       this.barChartTab = this.totalMonthCost ? tabName : this.barChartTab;
-      return false
+      return false;
     }
   });
 

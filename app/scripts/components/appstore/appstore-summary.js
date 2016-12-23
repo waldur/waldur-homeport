@@ -12,5 +12,5 @@ export default function appstoreSummary($filter, $compile, $parse) {
       element.html(template);
       $compile(element.contents())(scope);
     }
-  }
+  };
 }

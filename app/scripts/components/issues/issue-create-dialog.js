@@ -1,4 +1,3 @@
-import { ISSUE_TYPES } from './constants';
 import template from './issue-create-dialog.html';
 
 export default function issueCreateDialog() {
@@ -28,11 +27,12 @@ const DEFAULT_OPTIONS = {
 
 // @ngInject
 class IssueCreateDialogController {
-  constructor(issuesService, $q, $state, ncUtilsFlash) {
+  constructor(issuesService, $q, $state, ncUtilsFlash, ISSUE_IDS) {
     this.service = issuesService;
     this.$q = $q;
     this.$state = $state;
     this.ncUtilsFlash = ncUtilsFlash;
+    this.ISSUE_IDS = ISSUE_IDS;
     this.issue = this.resolve.issue || {};
     this.options = angular.extend({}, DEFAULT_OPTIONS, this.resolve.options);
   }
@@ -43,7 +43,7 @@ class IssueCreateDialogController {
       return this.$q.reject();
     }
     let issue = {
-      type: this.issue.type || ISSUE_TYPES.CHANGE_REQUEST,
+      type: this.issue.type || this.ISSUE_IDS.CHANGE_REQUEST,
       summary: this.issue.summary,
       description: this.issue.description,
       is_reported_manually: true

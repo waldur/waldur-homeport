@@ -200,7 +200,7 @@ export default function dashboardCostChart($window, $filter, ENV, ncUtils) {
       var focus = canvas.append('g').attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
       focus.append('svg:rect').attr('width', width).attr('height', height).attr('class', 'plot');
-      var clip = focus.append('svg:clipPath')
+      focus.append('svg:clipPath')
         .attr('id', 'clip')
         .append('svg:rect')
         .attr('x', 0)
@@ -334,7 +334,7 @@ export default function dashboardCostChart($window, $filter, ENV, ncUtils) {
 
     for (var k in data) {
       if (data.hasOwnProperty(k)) {
-        data[k][type].forEach(function(p, i) {
+        data[k][type].forEach(function(p) {
           if (!exist[p.name]) {
             exist[p.name] = true;
             var projectTitle = getShortProjectName(p.name);
@@ -462,7 +462,8 @@ function hover(bindId, color, data, rData, entities, focus, width, height, xScal
     onMove(entities);
   };
 
-  var hoverRect = focus.append('svg:rect')
+  // hoverRect
+  focus.append('svg:rect')
     .attr('width', width)
     .attr('height', height)
     .attr('fill', 'transparent')
@@ -474,10 +475,10 @@ function hover(bindId, color, data, rData, entities, focus, width, height, xScal
     hoverTool.call(this);
   }).on('touchmove', function() {
     hoverTool.call(this);
-  }).on('mouseout', function(e) {
-      var mouse = d3.mouse(this);
-      x = mouse[0];
-      y = mouse[1];
+  }).on('mouseout', function() {
+    var mouse = d3.mouse(this);
+    x = mouse[0];
+    y = mouse[1];
 
     if (x <= 0 || x >= rectSize.width || y <= 0 || y >= rectSize.height) {
       hoverLineGroup.style('opacity', 0);
@@ -492,11 +493,12 @@ function hover(bindId, color, data, rData, entities, focus, width, height, xScal
     .attr('class', 'hover-line')
     .style('opacity', 0);
 
-  var hoverLine = hoverLineGroup
+  // hoverLine
+  hoverLineGroup
     .append('line')
     .attr('x1', 0).attr('x2', 0)
     .attr('y1', 0).attr('y2', height)
-    .on('mouseout', function(e) {
+    .on('mouseout', function() {
       y = d3.mouse(this)[1];
       if (x <= 0 || x >= rectSize.width || y <= 0 || y >= rectSize.height) {
         hoverLineGroup.style('opacity', 0);
@@ -526,5 +528,5 @@ function hover(bindId, color, data, rData, entities, focus, width, height, xScal
             .duration(500)
             .style('opacity', 0);
         });
-  });
+    });
 }

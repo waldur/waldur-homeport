@@ -71,5 +71,5 @@ export default function appstoreRoutes($stateProvider) {
     .state('compare.compare', {
       url: '',
       templateUrl: 'views/compare/table.html',
-    })
+    });
 }

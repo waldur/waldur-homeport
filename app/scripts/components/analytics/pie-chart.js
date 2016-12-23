@@ -1,9 +1,9 @@
 // @ngInject
-export default function pieChart($state, currentStateService) {
+export default function pieChart($state) {
   return {
     restrict: 'E',
     replace: true,
-    template: `<div><div class="d3-pie-chart"></div></div>`,
+    template: '<div><div class="d3-pie-chart"></div></div>',
     scope: {
       data: '=chartData',
       controller: '=chartController'
@@ -30,15 +30,15 @@ export default function pieChart($state, currentStateService) {
 
       var color;
       switch (chartType) {
-        case 'vms':
-          color = d3.scale.category10();
-          break;
-        case 'services':
-          color = d3.scale.category20();
-          break;
-        default:
-          color = d3.scale.category20();
-          break;
+      case 'vms':
+        color = d3.scale.category10();
+        break;
+      case 'services':
+        color = d3.scale.category20();
+        break;
+      default:
+        color = d3.scale.category20();
+        break;
       }
 
       var transformWidth = chartType === 'services' ? 2 : 3;
@@ -57,34 +57,35 @@ export default function pieChart($state, currentStateService) {
         .value(function(d) { return d.count; })
         .sort(null);
 
-      var div = d3.select("body").append("div")
-        .attr("class", "chart-tooltip")
-        .style("opacity", 0);
+      var div = d3.select('body').append('div')
+        .attr('class', 'chart-tooltip')
+        .style('opacity', 0);
 
-      var path = svg.selectAll('path')
+      // path
+      svg.selectAll('path')
         .data(pie(dataset))
         .enter()
         .append('path')
         .attr('d', arc)
         .attr('value', function(d) { return d.data.fullLabel || d.data.label; })
-        .attr('fill', function(d, i) {
+        .attr('fill', function(d) {
           return color(d.data.label);
-        }).on("mouseenter", function() {
+        }).on('mouseenter', function() {
           var name = d3.event.toElement.getAttribute('value');
           div.transition()
             .duration(200)
-            .style("opacity", .9)
-            .style("display", "block");
+            .style('opacity', .9)
+            .style('display', 'block');
           div.html(name)
-            .style("left", (d3.event.pageX) + "px")
-            .style("top", (d3.event.pageY) + "px");
+            .style('left', (d3.event.pageX) + 'px')
+            .style('top', (d3.event.pageY) + 'px');
         })
-        .on("mouseout", function() {
+        .on('mouseout', function() {
           div.transition()
-            .style("display", "none");
+            .style('display', 'none');
         });
 
-      var legendRectSize = 18;                                  
+      var legendRectSize = 18;
       var legendSpacing = 4;
 
       if (chartType === 'services') {
@@ -104,7 +105,7 @@ export default function pieChart($state, currentStateService) {
           .style('padding-left', '5px')
           .style('padding-right', '5px')
           .style('max-width', '180px')
-          .text(function(d, i) { return dataset[i].fullLabel});
+          .text(function(d, i) { return dataset[i].fullLabel;});
         elem.append('div')
           .style('clear', 'both');
       } else {
@@ -129,32 +130,32 @@ export default function pieChart($state, currentStateService) {
         legend.append('text')
           .attr('x', legendRectSize + legendSpacing)
           .attr('y', legendRectSize - legendSpacing)
-          .on("click", function(d, i) {
+          .on('click', function(d, i) {
             var link = null;
             switch (dataset[i].name) {
-              case 'apps':
-                link = 'applications';
-                break;
-              case 'vms':
-                link = 'vms';
-                break;
-              case 'plans':
-                link = 'plans';
-                break;
-              case 'providers':
-                link = 'providers';
-                break;
-              default:
-                link = null;
-                break;
+            case 'apps':
+              link = 'applications';
+              break;
+            case 'vms':
+              link = 'vms';
+              break;
+            case 'plans':
+              link = 'plans';
+              break;
+            case 'providers':
+              link = 'providers';
+              break;
+            default:
+              link = null;
+              break;
             }
             link && (link !== 'plans') &&
             $state.go('organization.details', {uuid: scope.currentCustomer.uuid, tab: link});
             link && (link === 'plans') &&
             $state.go('organization.plans', {uuid: scope.currentCustomer.uuid});
           })
-          .on("mouseover", function(d) { element.css( 'cursor', 'pointer' ); })
-          .on("mouseout", function(d) { element.css( 'cursor', 'default' ); })
+          .on('mouseover', function() { element.css( 'cursor', 'pointer' ); })
+          .on('mouseout', function() { element.css( 'cursor', 'default' ); })
           .text(function(d) { return d; });
       }
 
@@ -165,25 +166,25 @@ export default function pieChart($state, currentStateService) {
         elem.append('div')
           .style('text-align', 'left')
           .append('text')
-          .on("click", function(d, i) {
+          .on('click', function() {
             switch (legendLink) {
-              case 'plans':
-                $state.go('organization.plans', {uuid: scope.currentCustomer.uuid});
-                break;
-              case 'providers':
-                $state.go('organization.details', {uuid: scope.currentCustomer.uuid, tab: legendLink});
-                break;
-              default:
-                break;
+            case 'plans':
+              $state.go('organization.plans', {uuid: scope.currentCustomer.uuid});
+              break;
+            case 'providers':
+              $state.go('organization.details', {uuid: scope.currentCustomer.uuid, tab: legendLink});
+              break;
+            default:
+              break;
             }
           })
           .text(legendDescription).attr('transform', function() {
-          var offset = (legend && legend[0].length) <= 1 ? 5 : 0,
-            height = legend ? (legendRectSize + legendSpacing) * legend[0].length + offset :
+            var offset = (legend && legend[0].length) <= 1 ? 5 : 0,
+              height = legend ? (legendRectSize + legendSpacing) * legend[0].length + offset :
             (legendRectSize + legendSpacing) + offset,
-            horz = 2 * 60;
-          return 'translate(' + horz + ',' + height + ')';
-        });
+              horz = 2 * 60;
+            return 'translate(' + horz + ',' + height + ')';
+          });
       }
     }
   }

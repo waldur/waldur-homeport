@@ -14,4 +14,4 @@ export default module => {
   module.directive('projectEvents', projectEvents);
   module.directive('projectsList', projectsList);
   module.config(projectRoutes);
-}
+};

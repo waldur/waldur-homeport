@@ -17,14 +17,14 @@ export default function baseEventListController(
           {
             title: 'Message',
             className: 'all',
-            render: function(data, type, row, meta) {
+            render: function(row) {
               return eventFormatter.format(row);
             }
           },
           {
             title: 'Timestamp',
             className: 'all',
-            render: function(data, type, row, meta) {
+            render: function(row) {
               return $filter('dateTime')(row['@timestamp']);
             }
           },

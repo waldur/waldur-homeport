@@ -13,4 +13,4 @@ export default module => {
   module.service('invitationUtilsService', invitationUtilsService);
   module.run(attachInvitationUtils);
   module.config(invitationRoutes);
-}
+};

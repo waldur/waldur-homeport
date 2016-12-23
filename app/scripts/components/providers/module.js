@@ -6,4 +6,4 @@ export default module => {
   module.controller('ProviderListController', ProviderListController);
   module.directive('providerCreate', providerCreate);
   detailsModule(module);
-}
+};

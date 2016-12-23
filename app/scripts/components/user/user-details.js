@@ -10,30 +10,30 @@ export default function userDetails() {
 
 export const PRIVATE_USER_TABS = [
   {
-      label: "Dashboard",
-      icon: "fa-th-large",
-      link: "profile.details"
+    label: 'Dashboard',
+    icon: 'fa-th-large',
+    link: 'profile.details'
   },
   {
-      label: "Audit logs",
-      icon: "fa-bell-o",
-      link: "profile.events"
+    label: 'Audit logs',
+    icon: 'fa-bell-o',
+    link: 'profile.events'
   },
   {
-      label: "SSH Keys",
-      icon: "fa-key",
-      link: "profile.keys"
+    label: 'SSH Keys',
+    icon: 'fa-key',
+    link: 'profile.keys'
   },
   {
-      label: "Notifications",
-      icon: "fa-envelope",
-      link: "profile.notifications",
-      feature: "notifications"
+    label: 'Notifications',
+    icon: 'fa-envelope',
+    link: 'profile.notifications',
+    feature: 'notifications'
   },
   {
-      label: "Manage",
-      icon: "fa-wrench",
-      link: "profile.manage"
+    label: 'Manage',
+    icon: 'fa-wrench',
+    link: 'profile.manage'
   }
 ];
 
@@ -42,14 +42,14 @@ function UserDetailsController($scope, $state, $stateParams, usersService,
   PRIVATE_USER_TABS, stateUtilsService, currentStateService) {
   var publicTabs = [
     {
-        label: "Audit logs",
-        icon: "fa-bell-o",
-        link: "users.details({uuid: $ctrl.context.user.uuid})"
+      label: 'Audit logs',
+      icon: 'fa-bell-o',
+      link: 'users.details({uuid: $ctrl.context.user.uuid})'
     },
     {
-        label: "SSH Keys",
-        icon: "fa-key",
-        link: "users.keys({uuid: $ctrl.context.user.uuid})"
+      label: 'SSH Keys',
+      icon: 'fa-key',
+      link: 'users.keys({uuid: $ctrl.context.user.uuid})'
     }
   ];
   var dashboardTab;
@@ -57,15 +57,15 @@ function UserDetailsController($scope, $state, $stateParams, usersService,
   if (currentStateService.getHasCustomer()) {
     if (prevWorkspace === 'project') {
       dashboardTab = {
-        label: "Back to project",
-        icon: "fa-arrow-left",
+        label: 'Back to project',
+        icon: 'fa-arrow-left',
         action: stateUtilsService.goBack
       };
     } else if (currentStateService.getStaffOwnerManager()) {
       dashboardTab = {
-        label: "Back to organization",
-        icon: "fa-arrow-left",
-        link: "dashboard.index"
+        label: 'Back to organization',
+        icon: 'fa-arrow-left',
+        link: 'dashboard.index'
       };
     }
   }
@@ -93,7 +93,7 @@ function UserDetailsController($scope, $state, $stateParams, usersService,
           $scope.context = {user: user};
         }).catch(function(response) {
           if (response.status === 404) {
-            $state.go('errorPage.notFound')
+            $state.go('errorPage.notFound');
           }
         });
       }

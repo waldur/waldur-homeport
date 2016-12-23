@@ -11,5 +11,5 @@ export default function premiumSupportAgreement() {
       plan: '=',
       onSubmit: '&'
     }
-  }
+  };
 }

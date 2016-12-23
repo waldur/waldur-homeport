@@ -10,4 +10,4 @@ export default module => {
   module.directive('addTeamMember', addTeamMember);
   module.directive('customerUsersList', customerUsersList);
   module.controller('ProjectUsersListController', ProjectUsersListController);
-}
+};

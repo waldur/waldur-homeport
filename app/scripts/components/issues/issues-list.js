@@ -1,4 +1,3 @@
-import { ISSUE_CLASSES, ISSUE_FILTERS } from './constants';
 import template from './issues-list.html';
 
 export default function issueList() {
@@ -37,7 +36,7 @@ function IssueListController(
           {
             title: 'Type',
             orderField: 'type',
-            render: function(data, type, row, meta) {
+            render: function(row) {
               return row.type.toUpperCase();
             },
             width: 90
@@ -45,7 +44,7 @@ function IssueListController(
           {
             title: 'Key',
             orderField: 'key',
-            render: function(data, type, row, meta) {
+            render: function(row) {
               var href = $state.href('support.detail', {uuid: row.uuid});
               return ncUtils.renderLink(href, row.key);
             },
@@ -54,7 +53,7 @@ function IssueListController(
           {
             title: 'Status',
             orderField: 'status',
-            render: function(data, type, row, meta) {
+            render: function(row) {
               return row.status;
             },
             width: 50
@@ -62,7 +61,7 @@ function IssueListController(
           {
             title: 'Title',
             orderField: 'summary',
-            render: function(data, type, row, meta) {
+            render: function(row) {
               return row.summary;
             },
             width: 400
@@ -70,28 +69,28 @@ function IssueListController(
           {
             title: 'Description',
             orderable: false,
-            render: function(data, type, row, meta) {
+            render: function(row) {
               return `<span class="elipsis" style="width: 150px;" uib-tooltip="${row.description}">${row.description}</span>`;
             }
           },
           {
             title: 'Service type',
             orderable: false,
-            render: function(data, type, row, meta) {
+            render: function(row) {
               return row.resource_type || 'N/A';
             }
           },
           {
             title: 'Organization',
             orderField: 'customer_name',
-            render: function(data, type, row, meta) {
+            render: function(row) {
               return row.customer_name;
             }
           },
           {
             title: 'Caller',
             orderField: 'caller_full_name',
-            render: function(data, type, row, meta) {
+            render: function(row) {
               return row.caller_full_name;
             },
             width: 170
@@ -99,7 +98,7 @@ function IssueListController(
           {
             title: 'Reporter',
             orderField: 'reporter_name',
-            render: function(data, type, row, meta) {
+            render: function(row) {
               return row.reporter_name;
             },
             width: 170
@@ -107,7 +106,7 @@ function IssueListController(
           {
             title: 'Assigned to',
             orderField: 'assignee_name',
-            render: function(data, type, row, meta) {
+            render: function(row) {
               return row.assignee_name || 'N/A';
             },
             width: 170
@@ -115,7 +114,7 @@ function IssueListController(
           {
             title: 'Created',
             orderField: 'created',
-            render: function(data, type, row, meta) {
+            render: function(row) {
               return $filter('shortDate')(row.created);
             },
             width: 130
@@ -123,7 +122,7 @@ function IssueListController(
           {
             title: 'Updated',
             orderField: 'modified',
-            render: function(data, type, row, meta) {
+            render: function(row) {
               return $filter('shortDate')(row.modified);
             },
             width: 130
@@ -131,7 +130,7 @@ function IssueListController(
           {
             title: 'Time in progress',
             orderable: false,
-            render: function(data, type, row, meta) {
+            render: function(row) {
               return ncUtils.relativeDate(row.created);
             },
             width: 100
@@ -141,7 +140,7 @@ function IssueListController(
       this.connectWatchers();
     },
     connectWatchers: function() {
-      $scope.$watch(() => controllerScope.filter, filter => {
+      $scope.$watch(() => controllerScope.filter, () => {
         controllerScope.getList();
       }, true);
       var unbind = $rootScope.$on('refreshIssuesList', () => {

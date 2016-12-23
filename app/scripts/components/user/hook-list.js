@@ -25,7 +25,7 @@ function HookListController(
           {
             title: 'State',
             className: 'text-center all',
-            render: function(data, type, row, meta) {
+            render: function(row) {
               var cls = row.is_active && 'online' || '';
               var title = row.is_active && 'Enabled' || 'Disabled';
               return '<a class="status-circle {cls}" title="{title}"></a>'
@@ -36,7 +36,7 @@ function HookListController(
           {
             title: 'Method',
             className: 'min-tablet-l',
-            render: function(data, type, row, meta) {
+            render: function(row) {
               return row.label;
             },
             width: '100px'
@@ -44,7 +44,7 @@ function HookListController(
           {
             title: 'Destination',
             className: 'min-tablet-l',
-            render: function(data, type, row, meta) {
+            render: function(row) {
               return row.destination;
             },
             width: '100px'
@@ -52,7 +52,7 @@ function HookListController(
           {
             title: 'Events',
             className: 'min-tablet-l',
-            render: function(data, type, row, meta) {
+            render: function(row) {
               return row.events;
             }
           }

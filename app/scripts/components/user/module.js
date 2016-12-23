@@ -36,4 +36,4 @@ export default module => {
   module.service('stateUtilsService', stateUtilsService);
   module.run(attachStateUtils);
   module.config(userRoutes);
-}
+};

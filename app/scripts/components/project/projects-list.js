@@ -27,7 +27,7 @@ function ProjectsListController(
       this.service = projectsService;
       this._super();
       this.activate();
-      $scope.$on('currentCustomerUpdated', function(event, customer) {
+      $scope.$on('currentCustomerUpdated', function() {
         $timeout(function() {
           controllerScope.resetCache();
         });
@@ -59,16 +59,16 @@ function ProjectsListController(
       var columns = [
         {
           title: 'Name',
-          render: function(data, type, row, meta) {
+          render: function(row) {
             var href = $state.href('project.details', {uuid: row.uuid});
-            return "<a href=\"{href}\">{name}</a>"
+            return '<a href="{href}">{name}</a>'
                    .replace('{href}', href)
                    .replace('{name}', row.name);
           }
         },
         {
           title: 'Creation date',
-          render: function(data, type, row, meta) {
+          render: function(row) {
             return $filter('dateTime')(row.created);
           }
         }
@@ -76,25 +76,25 @@ function ProjectsListController(
       if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('resources') == -1) {
         columns.push({
           title: 'VMs',
-          render: function(data, type, row, meta) {
+          render: function(row) {
             return row.vm_count || 0;
           }
         });
         columns.push({
           title: 'Storage',
-          render: function(data, type, row, meta) {
+          render: function(row) {
             return row.storage_count || 0;
           }
         });
         columns.push({
           title: 'Apps',
-          render: function(data, type, row, meta) {
+          render: function(row) {
             return row.app_count || 0;
           }
         });
         columns.push({
           title: 'Private clouds',
-          render: function(data, type, row, meta) {
+          render: function(row) {
             return row.private_cloud_count || 0;
           }
         });
@@ -102,7 +102,7 @@ function ProjectsListController(
       if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('premiumSupport') == -1) {
         columns.push({
           title: 'SLA',
-          render: function(data, type, row, meta) {
+          render: function(row) {
             if (row.plan) {
               return row.plan.name;
             } else if (row.has_pending_contracts) {
@@ -121,9 +121,9 @@ function ProjectsListController(
       var quotaReached = ncUtils.isCustomerQuotaReached(vm.currentCustomer, 'project');
       var title;
       if (!ownerOrStaff) {
-        title = "You don't have enough privileges to perform this operation";
+        title = 'You don\'t have enough privileges to perform this operation';
       } else if (quotaReached) {
-        title = "Quota has been reached";
+        title = 'Quota has been reached';
       }
       return [
         {

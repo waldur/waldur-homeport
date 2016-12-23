@@ -39,21 +39,21 @@ export default function ProviderListController(
             {
               title: 'Type',
               className: 'all',
-              render: function(data, type, row, meta) {
+              render: function(row) {
                 return row.service_type;
               }
             },
             {
               title: 'Name',
               className: 'all',
-              render: function(data, type, row, meta) {
+              render: function(row) {
                 return row.name;
               }
             },
             {
               title: 'State',
               className: 'text-center min-tablet-l',
-              render: function(data, type, row, meta) {
+              render: function(row) {
                 var cls = ncServiceUtils.getStateClass(row.state);
                 return '<a class="{cls}" title="{title}"></a>'
                   .replace('{cls}', cls).replace('{title}', row.state);
@@ -63,7 +63,7 @@ export default function ProviderListController(
             {
               title: 'System provider',
               className: 'text-center min-tablet-l',
-              render: function(data, type, row, meta) {
+              render: function(row) {
                 var cls = row.shared && 'fa-check' || 'fa-minus';
                 return '<a class="bool-field"><i class="fa {cls}"/></a>'.replace('{cls}', cls);
               },
@@ -72,7 +72,7 @@ export default function ProviderListController(
             {
               title: 'Resources',
               className: 'text-center min-tablet-l',
-              render: function(data, type, row, meta) {
+              render: function(row) {
                 if (!controllerScope.canUserManageService) {
                   return 'N/A';
                 }
@@ -120,11 +120,11 @@ export default function ProviderListController(
                 }
               }.bind(this.controllerScope),
 
-              isDisabled: function(service) {
+              isDisabled: function() {
                 return !this.canUserManageService;
               }.bind(this.controllerScope),
 
-              tooltip: function(service) {
+              tooltip: function() {
                 if (!this.canUserManageService) {
                   return 'Only customer owner or staff can unlink provider.';
                 }
@@ -134,7 +134,7 @@ export default function ProviderListController(
           tableActions: this.getTableActions(),
           actionsColumnWidth: '250px'
         };
-      })
+      });
     },
     openDialog: function(row) {
       $uibModal.open({
@@ -174,16 +174,12 @@ export default function ProviderListController(
     unlinkService: function(service) {
       return this.service.operation('unlink', service.url);
     },
-    afterInstanceRemove: function(instance) {
-      $rootScope.$broadcast('refreshProjectList');
-      this._super(instance);
-    },
     checkPermissions: function() {
       this.canUserManageService = customersService.checkCustomerUser(this.currentCustomer, currentUser);
     },
     afterInstanceRemove: function(instance) {
       this._super(instance);
-      $location.search({'tab': 'providers'});
+      $location.search({tab: 'providers'});
     },
     showSelectedProvider: function() {
       var vm = this;

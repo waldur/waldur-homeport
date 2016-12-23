@@ -1,5 +1,3 @@
-import { ISSUE_IDS } from './constants';
-
 // @ngInject
 export default function issuesService(baseServiceClass) {
   var ServiceClass = baseServiceClass.extend({

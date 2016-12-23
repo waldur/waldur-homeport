@@ -66,7 +66,7 @@ function CustomerUsersListController(
             title: 'Member',
             className: 'all',
             width: '20%',
-            render: function(data, type, row, meta) {
+            render: function(row) {
               var avatar = '<img gravatar-src="\'{gravatarSrc}\'" gravatar-size="100" alt="" class="avatar-img img-xs">'
                 .replace('{gravatarSrc}', row.email);
               return avatar + ' ' + (row.full_name || row.username);
@@ -75,14 +75,14 @@ function CustomerUsersListController(
           {
             title: 'E-mail',
             className: 'min-tablet-l',
-            render: function(data, type, row, meta) {
+            render: function(row) {
               return row.email;
             }
           },
           {
             title: 'Owner',
             className: 'all',
-            render: function(data, type, row, meta) {
+            render: function(row) {
               var cls = row.role == 'owner' ? 'check' : 'minus';
               var title = ENV.roles[row.role];
               return '<span class="icon {cls}" title="{title}"></span>'
@@ -93,14 +93,14 @@ function CustomerUsersListController(
           {
             title: ENV.roles.manager + ' in:',
             className: 'min-tablet-l',
-            render: function(data, type, row, meta) {
+            render: function(row) {
               return vm.formatProjectRolesList('manager', row);
             }
           },
           {
             title: ENV.roles.admin + ' in:',
             className: 'min-tablet-l',
-            render: function(data, type, row, meta) {
+            render: function(row) {
               return vm.formatProjectRolesList('admin', row);
             }
           }
@@ -120,7 +120,7 @@ function CustomerUsersListController(
         var href = $state.href('project.details', { uuid: item.uuid });
         return '<a href="{href}">{projectName}</a>'
           .replace('{projectName}', projectName)
-          .replace('{href}', href)
+          .replace('{href}', href);
       }).join(', ');
     },
     getRowActions: function() {

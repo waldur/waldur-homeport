@@ -5,7 +5,7 @@ export default function snapshotCreateDialog() {
     restrict: 'E',
     template: template,
     controller: SnapshotCreateDialogController,
-  }
+  };
 }
 
 // @ngInject
@@ -20,7 +20,7 @@ function SnapshotCreateDialogController($q, $rootScope, $scope, resourcesService
     var form = resourcesService.$create($scope.action.url);
     form.name = $scope.snapshot.name;
     form.description = $scope.snapshot.description;
-    return form.$save().then(response => {
+    return form.$save().then(() => {
       actionUtilsService.handleActionSuccess($scope.action);
       $scope.errors = {};
       $scope.$close();
