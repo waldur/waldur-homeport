@@ -6,7 +6,7 @@
 
 Name: waldur-homeport
 Summary: Waldur HomePort
-Version: 0.1.0
+Version: 2.0.0
 Release: 1
 License: MIT
 Source0: %{name}-%{version}.tar.gz
@@ -60,5 +60,8 @@ rm -rf %{buildroot}
 %config(noreplace) %{__conf_dir}/nginx.conf
 
 %changelog
+* Fri Dec 23 2016 Juri Hudolejev <juri@opennodecloud.com> - 2.0.0-1
+- New upstream release
+
 * Fri Nov 11 2016 Juri Hudolejev <juri@opennodecloud.com> - 0.1.0-1
 - Initial version of the package
