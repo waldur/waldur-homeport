@@ -786,7 +786,10 @@ module.exports = function(grunt) {
             dev: {
                 NODE_ENV: 'DEVELOPMENT'
             },
-            prod : {
+            staging: {
+                NODE_ENV: 'STAGING'
+            },
+            prod: {
                 NODE_ENV: 'PRODUCTION'
             },
             test: {
@@ -907,9 +910,10 @@ module.exports = function(grunt) {
     ]);
 
     grunt.registerTask('staging', [
+        'po2json_angular_translate',
         'copy:main',
         'copy:' + mode,
-        'env:prod',
+        'env:staging',
         'preprocess:index',
         'image',
         'sass',
