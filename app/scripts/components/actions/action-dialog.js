@@ -25,7 +25,17 @@ function ActionDialogController($scope, $q, $http, resourcesService, actionUtils
         if (field.resource_default_value) {
           $scope.form[name] = actionUtilsService.formatChoices(field, $scope.resource[name]);
         }
+        if ($scope.action.name === 'edit') {
+          $scope.form[name] = $scope.resource.name;
+        }
       });
+
+      $scope.format = 'dd.MM.yyyy';
+      $scope.altInputFormats = ['M!/d!/yyyy'];
+      $scope.dateOptions = {
+        minDate: new Date(),
+        startingDay: 1
+      };
     },
     submitForm: function () {
       if ($scope.ActionForm.$invalid) {
@@ -42,9 +52,13 @@ function ActionDialogController($scope, $q, $http, resourcesService, actionUtils
       }
 
       var promise;
+      var url;
       if ($scope.action.method === 'DELETE') {
-        var url = $scope.action.url + '?' + ncUtils.toKeyValue($scope.form);
+        url = $scope.action.url + '?' + ncUtils.toKeyValue($scope.form);
         promise = $http.delete(url);
+      } else if ($scope.action.method === 'PUT') {
+        url = $scope.resource.url;
+        promise = $http.put(url, form);
       } else {
         promise = form.$save();
       }

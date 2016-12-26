@@ -27,7 +27,8 @@ function actionConfig(ActionConfigurationProvider) {
       'assign_floating_ip',
       'update_security_groups',
       'unlink',
-      'destroy'
+      'destroy',
+      'backup'
     ],
     options: {
       pull: {
