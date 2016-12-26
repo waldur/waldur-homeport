@@ -26,7 +26,7 @@ function ActionDialogController($scope, $q, $http, resourcesService, actionUtils
           $scope.form[name] = actionUtilsService.formatChoices(field, $scope.resource[name]);
         }
         if ($scope.action.name === 'edit') {
-          $scope.form[name] = $scope.resource.name;
+          $scope.form[name] = $scope.resource[name];
         }
       });
 
