@@ -1,9 +1,7 @@
-import template from './openstack-volumes-list.html';
-
 export default function openstackVolumesList() {
   return {
     restrict: 'E',
-    template: template,
+    templateUrl: 'views/partials/filtered-list.html',
     controller: OpenstackVolumesList,
     controllerAs: 'ListController'
   };
@@ -35,6 +33,7 @@ function OpenstackVolumesList(
       var options = this._super();
       options.noDataText = 'You have no volumes yet';
       options.noMatchesText = 'No volumes found matching filter.';
+      this.rowFields.push('size');
       return options;
     },
     getFilter: function() {
