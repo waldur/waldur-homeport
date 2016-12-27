@@ -22,7 +22,6 @@ function backupSnapshotsListController(
       this._super();
       this.tableOptions = {
         disableSearch: true,
-        enableOrdering: true,
         searchFieldName: 'summary',
         entityData: {
           noDataText: 'No snapshots yet.',
