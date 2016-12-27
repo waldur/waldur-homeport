@@ -34,6 +34,12 @@
           }
         });
 
+        scope.$on('$destroy', function() {
+          if (table) {
+            table.destroy(true);
+          }
+        });
+
         function initTable() {
           var buttons = getButtons();
           var columns = getColumns();
