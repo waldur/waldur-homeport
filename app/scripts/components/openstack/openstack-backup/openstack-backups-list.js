@@ -1,21 +1,19 @@
-import template from './openstack-backups-list.html';
-
 export default function openStackBackupsList() {
   return {
     restrict: 'E',
-    template: template,
+    templateUrl: 'views/partials/filtered-list.html',
     controller: OpenStackBackupsListController,
-    controllerAs: '$ctrl',
+    controllerAs: 'ListController',
     scope: {},
     bindToController: {
-      instance: '='
+      instanceUrl: '='
     }
   };
 }
 
 // @ngInject
 function OpenStackBackupsListController(
-  baseControllerListClass, openstackBackupsService, $filter, $scope, $rootScope, $state, ncUtils) {
+  baseControllerListClass, openstackBackupsService, $filter, $state, ncUtils) {
   var controllerScope = this;
   var controllerClass = baseControllerListClass.extend({
     init: function() {
@@ -61,7 +59,7 @@ function OpenStackBackupsListController(
       };
     },
     getFilter: function() {
-      return {instance: controllerScope.instance};
+      return {instance: controllerScope.instanceUrl};
     }
   });
 

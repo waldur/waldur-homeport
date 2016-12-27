@@ -12,7 +12,7 @@ export default function actionDialog() {
 // @ngInject
 function ActionDialogController(
   $scope, $q, $http, resourcesService,
-  actionUtilsService, ncUtils, ResourceFieldConfiguration) {
+  actionUtilsService, ncUtils, RESOURCE_FIELDS_CONFIG) {
   angular.extend($scope, {
     init: function () {
       $scope.errors = {};
@@ -34,8 +34,8 @@ function ActionDialogController(
             $scope.form[name] = new Date($scope.resource[name]);
           }
         }
-        if (ResourceFieldConfiguration[field.type]) {
-          field.fieldOptions = ResourceFieldConfiguration[field.type];
+        if (RESOURCE_FIELDS_CONFIG[field.type]) {
+          field.options = RESOURCE_FIELDS_CONFIG[field.type];
         }
       });
     },

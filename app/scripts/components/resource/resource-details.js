@@ -13,7 +13,7 @@ export default function resourceDetails() {
 }
 
 // @ngInject
-function ResourceDetailsController($scope, resourceUtils, ncUtils, currentStateService, ENV, ActionConfiguration) {
+function ResourceDetailsController($scope, resourceUtils, ncUtils, currentStateService, ENV) {
   $scope.$watch('resource', function() {
     var resource = $scope.resource;
     if (resource) {
@@ -26,8 +26,6 @@ function ResourceDetailsController($scope, resourceUtils, ncUtils, currentStateS
       $scope.formatted_resource_type = resourceUtils.formatResourceType(resource);
       resource.uptime = resourceUtils.getUptime(resource);
       resource.error_message = resource.error_message || ENV.defaultErrorMessage;
-      resource.showBackups = ActionConfiguration[resource.resource_type] &&
-        ActionConfiguration[resource.resource_type].order.indexOf('backup') !== -1;
 
       if (resource.instance) {
         resource.instance_uuid = ncUtils.getUUID(resource.instance);

@@ -1,13 +1,10 @@
-export default class ResourceFieldConfiguration {
-  constructor() {
-    this.resourceFields = {};
+export const ResourceFieldConfiguration = {
+  datetime: {
+    format: 'dd.MM.yyyy',
+    altInputFormats: ['M!/d!/yyyy'],
+    dateOptions: {
+      minDate: new Date(),
+      startingDay: 1
+    }
   }
-
-  register(field, configs) {
-    this.resourceFields[field] = configs;
-  }
-
-  $get() {
-    return this.resourceFields;
-  }
-}
+};
