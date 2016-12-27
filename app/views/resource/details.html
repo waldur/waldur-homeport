@@ -54,7 +54,7 @@
           </uib-tab>
           <uib-tab heading="Backups" index="'backups'" ng-if="controller.model.showBackups">
             <div class="panel-body">
-              <openstack-backups-list></openstack-backups-list>
+              <openstack-backups-list instance="controller.model.url"></openstack-backups-list>
             </div>
           </uib-tab>
         </uib-tabset>

@@ -1,4 +1,5 @@
 import template from './action-dialog.html';
+import './action-dialog.scss';
 
 export default function actionDialog() {
   return {
@@ -9,7 +10,9 @@ export default function actionDialog() {
 }
 
 // @ngInject
-function ActionDialogController($scope, $q, $http, resourcesService, actionUtilsService, ncUtils) {
+function ActionDialogController(
+  $scope, $q, $http, resourcesService,
+  actionUtilsService, ncUtils, ResourceFieldConfiguration) {
   angular.extend($scope, {
     init: function () {
       $scope.errors = {};
@@ -27,15 +30,14 @@ function ActionDialogController($scope, $q, $http, resourcesService, actionUtils
         }
         if ($scope.action.name === 'edit') {
           $scope.form[name] = $scope.resource[name];
+          if (field.type === 'datetime') {
+            $scope.form[name] = new Date($scope.resource[name]);
+          }
+        }
+        if (ResourceFieldConfiguration[field.type]) {
+          field.fieldOptions = ResourceFieldConfiguration[field.type];
         }
       });
-
-      $scope.format = 'dd.MM.yyyy';
-      $scope.altInputFormats = ['M!/d!/yyyy'];
-      $scope.dateOptions = {
-        minDate: new Date(),
-        startingDay: 1
-      };
     },
     submitForm: function () {
       if ($scope.ActionForm.$invalid) {

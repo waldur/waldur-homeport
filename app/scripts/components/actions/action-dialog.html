@@ -67,18 +67,18 @@
                 <div ng-switch-when="datetime" class="datepicker input-group">
                     <input type="text"
                            class="form-control"
-                           uib-datepicker-popup="{{format}}"
+                           uib-datepicker-popup="{{field.fieldOptions.format}}"
                            ng-model="form[name]"
-                           required="field.required"
+                           ng-required="field.required"
                            is-open="dateTimeOpened"
-                           datepicker-options="dateOptions"
+                           datepicker-options="field.fieldOptions.dateOptions"
                            close-text="Close"
-                           alt-input-formats="altInputFormats"/>
+                           alt-input-formats="field.fieldOptions.altInputFormats"/>
                     <span class="input-group-btn">
                         <button type="button"
                                 class="btn btn-default"
                                 ng-click="dateTimeOpened = !dateTimeOpened">
-                            <i class="glyphicon glyphicon-calendar"></i>
+                            <i class="fa fa-calendar"></i>
                         </button>
                     </span>
                 </div>

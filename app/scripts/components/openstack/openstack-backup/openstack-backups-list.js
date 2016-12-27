@@ -7,7 +7,9 @@ export default function openStackBackupsList() {
     controller: OpenStackBackupsListController,
     controllerAs: '$ctrl',
     scope: {},
-    bindToController: {}
+    bindToController: {
+      instance: '='
+    }
   };
 }
 
@@ -51,7 +53,7 @@ function OpenStackBackupsListController(
             title: 'Keep until',
             orderField: 'kept_until',
             render: function(row) {
-              return row.kept_until || '&mdash;';
+              return $filter('shortDate')(row.kept_until) || '&mdash;';
             },
             width: 50
           }
@@ -59,7 +61,7 @@ function OpenStackBackupsListController(
       };
     },
     getFilter: function() {
-      return controllerScope.filter;
+      return {instance: controllerScope.instance};
     }
   });
 
