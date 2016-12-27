@@ -66,9 +66,8 @@ function ActionDialogController(
       }
 
       return promise.then(function() {
-        let type = $scope.resource.resource_type.split('.')[1] || 'Resource';
         $scope.errors = {};
-        actionUtilsService.handleActionSuccess($scope.action, type);
+        actionUtilsService.handleActionSuccess($scope.action);
         $scope.controller.reInitResource($scope.resource);
         $scope.$close();
       }, function(response) {

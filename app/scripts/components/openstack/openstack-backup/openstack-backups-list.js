@@ -21,7 +21,6 @@ function OpenStackBackupsListController(
       this.controllerScope = controllerScope;
       this._super();
       this.tableOptions = {
-        // disableAutoUpdate: true,
         disableSearch: true,
         enableOrdering: true,
         searchFieldName: 'summary',

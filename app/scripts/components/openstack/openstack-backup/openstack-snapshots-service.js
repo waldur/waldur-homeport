@@ -1,9 +1,9 @@
 // @ngInject
-export default function backupSnapshotsService(baseServiceClass) {
+export default function openstackSnapshotsService(baseServiceClass) {
   var ServiceClass = baseServiceClass.extend({
     init: function() {
       this._super();
-      this.endpoint = '/openstacktenant-snapshots//';
+      this.endpoint = '/openstacktenant-snapshots/';
       this.filterByCustomer = false;
     }
   });

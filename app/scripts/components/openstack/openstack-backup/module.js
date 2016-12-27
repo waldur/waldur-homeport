@@ -1,11 +1,11 @@
 import openstackBackupsService from '../openstack-backup/openstack-backups-service';
-import backupSnapshotsService from '../openstack-backup/backup-snapshots-service';
+import openstackSnapshotsService from '../openstack-backup/openstack-snapshots-service';
 import openstackBackupsList from '../openstack-backup/openstack-backups-list';
 import backupSnapshotsList from '../openstack-backup/backup-snapshots-list';
 
 export default module => {
   module.service('openstackBackupsService', openstackBackupsService);
-  module.service('backupSnapshotsService', backupSnapshotsService);
+  module.service('openstackSnapshotsService', openstackSnapshotsService);
   module.directive('openstackBackupsList', openstackBackupsList);
   module.directive('backupSnapshotsList', backupSnapshotsList);
   module.config(actionConfig);
@@ -23,6 +23,7 @@ function actionConfig(ActionConfigurationProvider) {
         enabled: true,
         type: 'form',
         method: 'PUT',
+        successMessage: 'Backup has been updated',
         fields: {
           name: {
             label: 'Name',
@@ -34,7 +35,7 @@ function actionConfig(ActionConfigurationProvider) {
             label: 'Description',
             max_length: 500,
             required: false,
-            type: 'string'
+            type: 'text'
           },
           kept_until: {
             help_text: 'Guaranteed time of backup retention. If null - keep forever.',

@@ -64,6 +64,13 @@ function actionConfig(ActionConfigurationProvider) {
             default_value: true
           }
         }
+      },
+      backup: {
+        fields: {
+          description: {
+            type: 'text'
+          }
+        }
       }
     }
   });

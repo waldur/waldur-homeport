@@ -13,15 +13,14 @@ export default function openStackBackupsList() {
 
 // @ngInject
 function backupSnapshotsListController(
-  baseControllerListClass, backupSnapshotsService, $filter) {
+  baseControllerListClass, openstackSnapshotsService, $filter) {
   var controllerScope = this;
   var controllerClass = baseControllerListClass.extend({
     init: function() {
-      this.service = backupSnapshotsService;
+      this.service = openstackSnapshotsService;
       this.controllerScope = controllerScope;
       this._super();
       this.tableOptions = {
-        // disableAutoUpdate: true,
         disableSearch: true,
         enableOrdering: true,
         searchFieldName: 'summary',

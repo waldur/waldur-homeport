@@ -107,10 +107,8 @@ export default function actionUtilsService(
     return promise.then(onSuccess, controller.handleActionException.bind(controller));
   };
 
-  this.handleActionSuccess = function(action, type) {
-    var template = action.name === 'edit' ?
-      `${type} has been updated` :
-      'Request to {action} has been accepted';
+  this.handleActionSuccess = function(action) {
+    var template = action.successMessage || 'Request to {action} has been accepted';
     var message = template.replace('{action}', action.title.toLowerCase());
     ncUtilsFlash.success(message);
   };
