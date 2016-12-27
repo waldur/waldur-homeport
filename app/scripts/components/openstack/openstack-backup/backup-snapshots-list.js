@@ -25,8 +25,8 @@ function backupSnapshotsListController(
         enableOrdering: true,
         searchFieldName: 'summary',
         entityData: {
-          noDataText: 'No backups yet.',
-          noMatchesText: 'No backups found matching filter.',
+          noDataText: 'No snapshots yet.',
+          noMatchesText: 'No snapshots found matching filter.',
         },
         columns: [
           {

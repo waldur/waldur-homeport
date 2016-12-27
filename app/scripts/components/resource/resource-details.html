@@ -27,8 +27,8 @@
     </dd>
   </div>
 
-  <div class="m-b-xs" ng-if="resource.isVolume">
-    <dt>Attached to:</dt>
+  <div class="m-b-xs" ng-if="resource.isVolume || resource.isBackup">
+    <dt>{{::resource.label}}:</dt>
     <dd ng-if="::resource.instance">
       <a ui-sref="resources.details({
         uuid: resource.instance_uuid,
