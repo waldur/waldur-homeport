@@ -13,7 +13,7 @@ export default function bootstrap(modulename, files) {
     }
 
     function reportError() {
-      alert('Unable to load application configuration. Please reboot the page');
+      alert('Unable to load application configuration. Please reload this page');
     }
   }
 
