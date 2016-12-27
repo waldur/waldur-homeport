@@ -1,9 +1,13 @@
 import openstackBackupsService from '../openstack-backup/openstack-backups-service';
+import backupSnapshotsService from '../openstack-backup/backup-snapshots-service';
 import openstackBackupsList from '../openstack-backup/openstack-backups-list';
+import backupSnapshotsList from '../openstack-backup/backup-snapshots-list';
 
 export default module => {
   module.service('openstackBackupsService', openstackBackupsService);
+  module.service('backupSnapshotsService', backupSnapshotsService);
   module.directive('openstackBackupsList', openstackBackupsList);
+  module.directive('backupSnapshotsList', backupSnapshotsList);
   module.config(actionConfig);
 };
 

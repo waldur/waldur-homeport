@@ -18,9 +18,16 @@
             <div ng-switch="field.type">
                 <div ng-switch-when="string">
                     <input id="action-{{ name }}"
+                           ng-if="field.max_length < 500"
                         ng-model="form[name]"
                         class="form-control"
                         ng-required="field.required"/>
+                    <textarea id="action-{{ name }}"
+                              ng-if="field.max_length >= 500"
+                              ng-model="form[name]"
+                              class="form-control"
+                              ng-required="field.required">
+                    </textarea>
                 </div>
                 <div ng-switch-when="integer">
                     <input ng-model="form[name]"

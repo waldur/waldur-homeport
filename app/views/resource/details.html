@@ -59,6 +59,12 @@
               <openstack-backups-list instanceUrl="controller.model.url"></openstack-backups-list>
             </div>
           </uib-tab>
+          <uib-tab heading="Backup snapshots" index="'backup-snapshots'"
+                   ng-if="controller.model.resource_type == 'OpenStackTenant.Backup'">
+            <div class="panel-body" ng-if="active=='backup-snapshots'">
+              <backup-snapshots-list backupUUID="controller.model.uuid"></backup-snapshots-list>
+            </div>
+          </uib-tab>
         </uib-tabset>
       </div>
     </div>
