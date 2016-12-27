@@ -22,6 +22,13 @@
                         class="form-control"
                         ng-required="field.required"/>
                 </div>
+                <div ng-switch-when="text">
+                    <textarea id="action-{{ name }}"
+                              ng-model="form[name]"
+                              class="form-control"
+                              ng-required="field.required">
+                    </textarea>
+                </div>
                 <div ng-switch-when="integer">
                     <input ng-model="form[name]"
                            type="number"
@@ -63,6 +70,24 @@
                         </ui-select-choices>
                     </ui-select>
                     <div class="form-control-static" ng-if="!field.list || field.list.length === 0">N/A</div>
+                </div>
+                <div ng-switch-when="datetime" class="datepicker input-group">
+                    <input type="text"
+                           class="form-control"
+                           uib-datepicker-popup="{{field.options.format}}"
+                           ng-model="form[name]"
+                           ng-required="field.required"
+                           is-open="dateTimeOpened"
+                           datepicker-options="field.options.dateOptions"
+                           close-text="Close"
+                           alt-input-formats="field.options.altInputFormats"/>
+                    <span class="input-group-btn">
+                        <button type="button"
+                                class="btn btn-default"
+                                ng-click="dateTimeOpened = !dateTimeOpened">
+                            <i class="fa fa-calendar"></i>
+                        </button>
+                    </span>
                 </div>
                 <p class="text-danger" ng-repeat="error in errors[name]" ng-bind="error"></p>
             </div>

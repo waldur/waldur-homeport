@@ -1,4 +1,5 @@
 import template from './action-dialog.html';
+import './action-dialog.scss';
 
 export default function actionDialog() {
   return {
@@ -9,7 +10,9 @@ export default function actionDialog() {
 }
 
 // @ngInject
-function ActionDialogController($scope, $q, $http, resourcesService, actionUtilsService, ncUtils) {
+function ActionDialogController(
+  $scope, $q, $http, resourcesService,
+  actionUtilsService, ncUtils, DEFAULT_FIELD_OPTIONS) {
   angular.extend($scope, {
     init: function () {
       $scope.errors = {};
@@ -24,6 +27,15 @@ function ActionDialogController($scope, $q, $http, resourcesService, actionUtils
         }
         if (field.resource_default_value) {
           $scope.form[name] = actionUtilsService.formatChoices(field, $scope.resource[name]);
+        }
+        if ($scope.action.name === 'edit') {
+          $scope.form[name] = $scope.resource[name];
+          if (field.type === 'datetime') {
+            $scope.form[name] = new Date($scope.resource[name]);
+          }
+        }
+        if (DEFAULT_FIELD_OPTIONS[field.type]) {
+          field.options = DEFAULT_FIELD_OPTIONS[field.type];
         }
       });
     },
@@ -42,9 +54,13 @@ function ActionDialogController($scope, $q, $http, resourcesService, actionUtils
       }
 
       var promise;
+      var url;
       if ($scope.action.method === 'DELETE') {
-        var url = $scope.action.url + '?' + ncUtils.toKeyValue($scope.form);
+        url = $scope.action.url + '?' + ncUtils.toKeyValue($scope.form);
         promise = $http.delete(url);
+      } else if ($scope.action.method === 'PUT') {
+        url = $scope.resource.url;
+        promise = $http.put(url, form);
       } else {
         promise = form.$save();
       }

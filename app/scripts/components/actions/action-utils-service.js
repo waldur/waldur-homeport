@@ -108,7 +108,7 @@ export default function actionUtilsService(
   };
 
   this.handleActionSuccess = function(action) {
-    var template = 'Request to {action} has been accepted';
+    var template = action.successMessage || 'Request to {action} has been accepted';
     var message = template.replace('{action}', action.title.toLowerCase());
     ncUtilsFlash.success(message);
   };

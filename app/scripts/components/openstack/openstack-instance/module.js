@@ -26,6 +26,7 @@ function actionConfig(ActionConfigurationProvider) {
       'change_flavor',
       'assign_floating_ip',
       'update_security_groups',
+      'backup',
       'unlink',
       'destroy'
     ],
@@ -61,6 +62,13 @@ function actionConfig(ActionConfigurationProvider) {
         fields: {
           delete_volumes: {
             default_value: true
+          }
+        }
+      },
+      backup: {
+        fields: {
+          description: {
+            type: 'text'
           }
         }
       }

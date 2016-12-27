@@ -37,7 +37,8 @@
               <openstack-volumes-list></openstack-volumes-list>
             </div>
           </uib-tab>
-          <uib-tab heading="Snapshots" index="'snapshots'" ng-if="controller.model.resource_type == 'OpenStackTenant.Volume'">
+          <uib-tab heading="Snapshots" index="'snapshots'"
+                   ng-if="controller.model.resource_type == 'OpenStackTenant.Volume'">
             <div class="panel-body" ng-if="active=='snapshots'" ng-include="'views/resource/tab-snapshots.html'"></div>
           </uib-tab>
           <uib-tab heading="Graphs" index="'graphs'" ng-if="controller.showGraphs">
@@ -47,9 +48,21 @@
             <div class="panel-body" ng-if="active=='sla'" ng-include="'views/resource/tab-sla.html'"></div>
           </uib-tab>
           <uib-tab heading="Security groups" index="'security_groups'" ng-if="controller.model.security_groups">
-            <div class="panel-body">
+            <div class="panel-body" ng-if="active=='security_groups'">
               <openstack-instance-security-groups security-groups="controller.model.security_groups">
               </openstack-instance-security-groups>
+            </div>
+          </uib-tab>
+          <uib-tab heading="Backups" index="'backups'"
+                   ng-if="controller.model.resource_type == 'OpenStackTenant.Instance'">
+            <div class="panel-body" ng-if="active=='backups'">
+              <openstack-backups-list instanceUrl="controller.model.url"></openstack-backups-list>
+            </div>
+          </uib-tab>
+          <uib-tab heading="Snapshots" index="'backup-snapshots'"
+                   ng-if="controller.model.resource_type == 'OpenStackTenant.Backup'">
+            <div class="panel-body" ng-if="active=='backup-snapshots'">
+              <backup-snapshots-list backupUUID="controller.model.uuid"></backup-snapshots-list>
             </div>
           </uib-tab>
         </uib-tabset>

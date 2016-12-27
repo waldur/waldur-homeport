@@ -18,6 +18,8 @@ function ResourceDetailsController($scope, resourceUtils, ncUtils, currentStateS
     var resource = $scope.resource;
     if (resource) {
       resource.isVolume = resource.resource_type.toLowerCase().indexOf('volume') !== -1;
+      resource.isBackup = resource.resource_type.toLowerCase().indexOf('backup') !== -1;
+      resource.label = resource.isBackup ? 'Instance' : 'Attached to';
       resource.summaryLabel = resource.isVolume ? 'Size' : 'Summary';
       resourceUtils.setAccessInfo(resource);
       resource.service_type = resource.resource_type.split('.')[0];
