@@ -4,6 +4,7 @@ import actionButtonResource from './action-button-resource';
 import actionListResource from './action-list-resource';
 import actionDialog from './action-dialog';
 import ActionConfiguration from './action-configuration';
+import {defaultFieldOptions} from './default-field-options';
 
 export default module => {
   module.service('actionUtilsService', actionUtilsService);
@@ -12,4 +13,5 @@ export default module => {
   module.directive('actionListResource', actionListResource);
   module.directive('actionDialog', actionDialog);
   module.provider('ActionConfiguration', ActionConfiguration);
+  module.constant('DEFAULT_FIELD_OPTIONS', defaultFieldOptions);
 };

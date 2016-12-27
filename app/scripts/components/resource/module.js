@@ -4,7 +4,6 @@ import resourceEvents from './resource-events';
 import resourceRoutes from './routes';
 import resourceState from './resource-state';
 import ResourceStateConfiguration from './resource-state-configuration';
-import {ResourceFieldConfiguration} from './resource-field-configuration';
 import resourceIssues from './resource-issues';
 
 export default module => {
@@ -15,5 +14,4 @@ export default module => {
   module.directive('resourceState', resourceState);
   module.directive('resourceIssues', resourceIssues);
   module.config(resourceRoutes);
-  module.constant('RESOURCE_FIELDS_CONFIG', ResourceFieldConfiguration);
 };

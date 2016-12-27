@@ -1,4 +1,4 @@
-export const ResourceFieldConfiguration = {
+export const defaultFieldOptions = {
   datetime: {
     format: 'dd.MM.yyyy',
     altInputFormats: ['M!/d!/yyyy'],
