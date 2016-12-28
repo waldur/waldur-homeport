@@ -33,6 +33,7 @@ function AuthLoginController(ENV, $q, $sce, $scope, $state, authService,
   var Controller = baseControllerClass.extend({
     isSignupFormVisible: $state.current.data.isSignupFormVisible,
     user: {},
+    loginLogo: ENV.loginLogo,
     errors: {},
     openidUrl: $sce.trustAsResourceUrl(ENV.apiEndpoint + 'api-auth/openid/login/?next=/api-auth/login_complete'),
     shortPageTitle: ENV.shortPageTitle,

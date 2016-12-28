@@ -17,7 +17,8 @@ export default function sidebar() {
 // @ngInject
 class SidebarController {
   constructor(ENV, $state, $scope) {
-    this.brandName = ENV.shortPageTitle;
+    this.shortPageTitle = ENV.shortPageTitle;
+    this.sidebarLogo = ENV.sidebarLogo;
     this.$state = $state;
     $scope.$on('$stateChangeSuccess', this.syncMenu.bind(this));
     $scope.$watch('items', this.syncMenu.bind(this));
