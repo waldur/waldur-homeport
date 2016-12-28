@@ -12,13 +12,13 @@ export default module => {
 };
 
 // @ngInject
-function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_FIELD) {
+function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
   ActionConfigurationProvider.register('OpenStackTenant.Backup', {
     order: [
       'edit'
     ],
     options: {
-      edit: angular.merge({}, DEFAULT_EDIT_FIELD, {
+      edit: angular.merge({}, DEFAULT_EDIT_ACTION, {
         successMessage: 'Backup has been updated',
         fields: {
           kept_until: {
@@ -37,7 +37,7 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_FIELD) {
       'edit'
     ],
     options: {
-      edit: angular.merge({}, DEFAULT_EDIT_FIELD, {
+      edit: angular.merge({}, DEFAULT_EDIT_ACTION, {
         successMessage: 'Snapshot has been updated'
       })
     }

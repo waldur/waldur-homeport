@@ -21,7 +21,7 @@ function fieldsConfig(AppstoreFieldConfigurationProvider) {
 }
 
 // @ngInject
-function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_FIELD) {
+function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
   ActionConfigurationProvider.register('OpenStack.Tenant', {
     order: [
       'edit',
@@ -30,7 +30,7 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_FIELD) {
       'destroy'
     ],
     options: {
-      edit: angular.merge({}, DEFAULT_EDIT_FIELD, {
+      edit: angular.merge({}, DEFAULT_EDIT_ACTION, {
         successMessage: 'Tenant has been updated'
       }),
       pull: {

@@ -9,7 +9,7 @@ export const defaultFieldOptions = {
   }
 };
 
-export const defaultEditField = {
+export const defaultEditAction = {
   title: 'Edit',
   enabled: true,
   type: 'form',
