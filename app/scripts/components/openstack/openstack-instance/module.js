@@ -16,9 +16,10 @@ function fieldsConfig(AppstoreFieldConfigurationProvider) {
 }
 
 // @ngInject
-function actionConfig(ActionConfigurationProvider) {
+function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
   ActionConfigurationProvider.register('OpenStackTenant.Instance', {
     order: [
+      'edit',
       'pull',
       'start',
       'stop',
@@ -31,6 +32,9 @@ function actionConfig(ActionConfigurationProvider) {
       'destroy'
     ],
     options: {
+      edit: angular.merge({}, DEFAULT_EDIT_ACTION, {
+        successMessage: 'Instance has been updated'
+      }),
       pull: {
         title: 'Synchronise'
       },

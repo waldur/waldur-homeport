@@ -23,9 +23,10 @@ function fieldsConfig(AppstoreFieldConfigurationProvider) {
 }
 
 // @ngInject
-function actionConfig(ActionConfigurationProvider) {
+function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
   ActionConfigurationProvider.register('OpenStackTenant.Volume', {
     order: [
+      'edit',
       'pull',
       'attach',
       'detach',
@@ -34,6 +35,9 @@ function actionConfig(ActionConfigurationProvider) {
       'destroy'
     ],
     options: {
+      edit: angular.merge({}, DEFAULT_EDIT_ACTION, {
+        successMessage: 'Volume has been updated'
+      }),
       pull: {
         title: 'Synchronise'
       },

@@ -12,31 +12,15 @@ export default module => {
 };
 
 // @ngInject
-function actionConfig(ActionConfigurationProvider) {
+function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
   ActionConfigurationProvider.register('OpenStackTenant.Backup', {
     order: [
       'edit'
     ],
     options: {
-      edit: {
-        title: 'Edit',
-        enabled: true,
-        type: 'form',
-        method: 'PUT',
+      edit: angular.merge({}, DEFAULT_EDIT_ACTION, {
         successMessage: 'Backup has been updated',
         fields: {
-          name: {
-            label: 'Name',
-            max_length: 150,
-            required: true,
-            type: 'string'
-          },
-          description: {
-            label: 'Description',
-            max_length: 500,
-            required: false,
-            type: 'text'
-          },
           kept_until: {
             help_text: 'Guaranteed time of backup retention. If null - keep forever.',
             label: 'Kept until',
@@ -44,7 +28,18 @@ function actionConfig(ActionConfigurationProvider) {
             type: 'datetime'
           }
         }
-      }
+      })
+    }
+  });
+
+  ActionConfigurationProvider.register('OpenStackTenant.Snapshot', {
+    order: [
+      'edit'
+    ],
+    options: {
+      edit: angular.merge({}, DEFAULT_EDIT_ACTION, {
+        successMessage: 'Snapshot has been updated'
+      })
     }
   });
 }
