@@ -4,12 +4,7 @@ export default function openstackInstanceSecurityGroups() {
   return {
     restrict: 'E',
     template: template,
-    controller: SecurityGroupController,
-    controllerAs: '$ctrl',
-    bindToController: true,
-    scope: {
-      securityGroups: '='
-    }
+    controller: SecurityGroupController
   };
 }
 

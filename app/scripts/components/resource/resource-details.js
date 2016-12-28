@@ -13,7 +13,7 @@ export default function resourceDetails() {
 }
 
 // @ngInject
-function ResourceDetailsController($scope, resourceUtils, ncUtils, currentStateService, ENV) {
+function ResourceDetailsController($scope, resourceUtils, ncUtils, currentStateService, ENV, $rootScope, $uibModal) {
   $scope.$watch('resource', function() {
     var resource = $scope.resource;
     if (resource) {
@@ -28,6 +28,11 @@ function ResourceDetailsController($scope, resourceUtils, ncUtils, currentStateS
       $scope.formatted_resource_type = resourceUtils.formatResourceType(resource);
       resource.uptime = resourceUtils.getUptime(resource);
       resource.error_message = resource.error_message || ENV.defaultErrorMessage;
+      if (resource.security_groups) {
+        resource.securityGroupsString = resource.security_groups.map(function(item) {
+          return item.name;
+        }).join(', ');
+      }
 
       if (resource.instance) {
         resource.instance_uuid = ncUtils.getUUID(resource.instance);
@@ -37,5 +42,14 @@ function ResourceDetailsController($scope, resourceUtils, ncUtils, currentStateS
         resource.source_volume_uuid = ncUtils.getUUID(resource.source_volume);
       }
     }
+    resource.securityGroupDetails = function() {
+      var component = 'openstackInstanceSecurityGroups';
+      var dialogScope = $rootScope.$new();
+      dialogScope.securityGroups = this.security_groups;
+      $uibModal.open({
+        component: component,
+        scope: dialogScope
+      });
+    };
   });
 }
