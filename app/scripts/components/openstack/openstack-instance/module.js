@@ -16,9 +16,10 @@ function fieldsConfig(AppstoreFieldConfigurationProvider) {
 }
 
 // @ngInject
-function actionConfig(ActionConfigurationProvider) {
+function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_FIELD) {
   ActionConfigurationProvider.register('OpenStackTenant.Instance', {
     order: [
+      'edit',
       'pull',
       'start',
       'stop',
@@ -31,6 +32,17 @@ function actionConfig(ActionConfigurationProvider) {
       'destroy'
     ],
     options: {
+      edit: {
+        title: 'Edit',
+        enabled: true,
+        type: 'form',
+        method: 'PUT',
+        successMessage: 'Instance has been updated',
+        fields: {
+          name: DEFAULT_EDIT_FIELD.name,
+          description: DEFAULT_EDIT_FIELD.description
+        }
+      },
       pull: {
         title: 'Synchronise'
       },

@@ -23,9 +23,10 @@ function fieldsConfig(AppstoreFieldConfigurationProvider) {
 }
 
 // @ngInject
-function actionConfig(ActionConfigurationProvider) {
+function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_FIELD) {
   ActionConfigurationProvider.register('OpenStackTenant.Volume', {
     order: [
+      'edit',
       'pull',
       'attach',
       'detach',
@@ -34,6 +35,17 @@ function actionConfig(ActionConfigurationProvider) {
       'destroy'
     ],
     options: {
+      edit: {
+        title: 'Edit',
+        enabled: true,
+        type: 'form',
+        method: 'PUT',
+        successMessage: 'Volume has been updated',
+        fields: {
+          name: DEFAULT_EDIT_FIELD.name,
+          description: DEFAULT_EDIT_FIELD.description
+        }
+      },
       pull: {
         title: 'Synchronise'
       },
