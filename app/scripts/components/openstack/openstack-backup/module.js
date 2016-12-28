@@ -18,23 +18,14 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_FIELD) {
       'edit'
     ],
     options: {
-      edit: {
-        title: 'Edit',
-        enabled: true,
-        type: 'form',
-        method: 'PUT',
-        successMessage: 'Backup has been updated',
-        fields: {
-          name: DEFAULT_EDIT_FIELD.name,
-          description: DEFAULT_EDIT_FIELD.description,
-          kept_until: {
-            help_text: 'Guaranteed time of backup retention. If null - keep forever.',
-            label: 'Kept until',
-            required: false,
-            type: 'datetime'
-          }
+      edit: editFieldFormatter({
+        kept_until: {
+          help_text: 'Guaranteed time of backup retention. If null - keep forever.',
+          label: 'Kept until',
+          required: false,
+          type: 'datetime'
         }
-      }
+      })
     }
   });
 
@@ -43,17 +34,15 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_FIELD) {
       'edit'
     ],
     options: {
-      edit: {
-        title: 'Edit',
-        enabled: true,
-        type: 'form',
-        method: 'PUT',
-        successMessage: 'Snapshot has been updated',
-        fields: {
-          name: DEFAULT_EDIT_FIELD.name,
-          description: DEFAULT_EDIT_FIELD.description
-        }
-      }
+      edit: DEFAULT_EDIT_FIELD
     }
   });
+
+  function editFieldFormatter(fields) {
+    let defaultField = angular.copy(DEFAULT_EDIT_FIELD);
+    for (let i in fields) {
+      defaultField.fields[i] = fields[i];
+    }
+    return defaultField;
+  }
 }

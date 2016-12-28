@@ -10,16 +10,23 @@ export const defaultFieldOptions = {
 };
 
 export const defaultEditField = {
-  name: {
-    label: 'Name',
-    max_length: 150,
-    required: true,
-    type: 'string'
-  },
-  description: {
-    label: 'Description',
-    max_length: 500,
-    required: false,
-    type: 'text'
+  title: 'Edit',
+  enabled: true,
+  type: 'form',
+  method: 'PUT',
+  successMessage: 'Resource has been updated',
+  fields: {
+    name: {
+      label: 'Name',
+      max_length: 150,
+      required: true,
+      type: 'string'
+    },
+    description: {
+      label: 'Description',
+      max_length: 500,
+      required: false,
+      type: 'text'
+    }
   }
 };

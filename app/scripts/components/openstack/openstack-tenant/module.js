@@ -30,17 +30,7 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_FIELD) {
       'destroy'
     ],
     options: {
-      edit: {
-        title: 'Edit',
-        enabled: true,
-        type: 'form',
-        method: 'PUT',
-        successMessage: 'Tenant has been updated',
-        fields: {
-          name: DEFAULT_EDIT_FIELD.name,
-          description: DEFAULT_EDIT_FIELD.description
-        }
-      },
+      edit: DEFAULT_EDIT_FIELD,
       pull: {
         title: 'Synchronise'
       },
