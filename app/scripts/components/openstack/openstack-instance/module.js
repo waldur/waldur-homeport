@@ -32,7 +32,9 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_FIELD) {
       'destroy'
     ],
     options: {
-      edit: DEFAULT_EDIT_FIELD,
+      edit: angular.merge({}, DEFAULT_EDIT_FIELD, {
+        successMessage: 'Instance has been updated'
+      }),
       pull: {
         title: 'Synchronise'
       },

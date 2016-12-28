@@ -18,12 +18,15 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_FIELD) {
       'edit'
     ],
     options: {
-      edit: editFieldFormatter({
-        kept_until: {
-          help_text: 'Guaranteed time of backup retention. If null - keep forever.',
-          label: 'Kept until',
-          required: false,
-          type: 'datetime'
+      edit: angular.merge({}, DEFAULT_EDIT_FIELD, {
+        successMessage: 'Backup has been updated',
+        fields: {
+          kept_until: {
+            help_text: 'Guaranteed time of backup retention. If null - keep forever.',
+            label: 'Kept until',
+            required: false,
+            type: 'datetime'
+          }
         }
       })
     }
@@ -34,15 +37,9 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_FIELD) {
       'edit'
     ],
     options: {
-      edit: DEFAULT_EDIT_FIELD
+      edit: angular.merge({}, DEFAULT_EDIT_FIELD, {
+        successMessage: 'Snapshot has been updated'
+      })
     }
   });
-
-  function editFieldFormatter(fields) {
-    let defaultField = angular.copy(DEFAULT_EDIT_FIELD);
-    for (let i in fields) {
-      defaultField.fields[i] = fields[i];
-    }
-    return defaultField;
-  }
 }
