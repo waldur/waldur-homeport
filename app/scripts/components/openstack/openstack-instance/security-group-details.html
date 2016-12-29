@@ -1,0 +1,31 @@
+<div class="modal-header">
+    <h3 class="modal-title">Security groups details</h3>
+</div>
+<div class="modal-body">
+    <div ng-if="$ctrl.securityGroups.length === 0">
+        Instance does not have any security groups yet.
+    </div>
+    <table class="table" ng-if="$ctrl.securityGroups.length > 0">
+        <thead>
+        <tr>
+            <th></td>
+            <th>IP protocol</td>
+            <th>Port range</td>
+            <th>Remote</td>
+        </tr>
+        </thead>
+        <tbody ng-repeat="group in $ctrl.securityGroups">
+            <tr ng-repeat="rule in group.rules">
+                <td>
+                    <strong>{{ group.name | uppercase }}</strong>
+                    <span ng-if="group.description">({{ group.description }})</span>
+                </td>
+                <td>{{ rule.protocol | uppercase }}</td>
+                <td>
+                    <span ng-bind-html="$ctrl.formatPortRange(rule)"></span>
+                </td>
+                <td>{{ rule.cidr }} (CIDR)</td>
+            </tr>
+            </tbody>
+    </table>
+</div>

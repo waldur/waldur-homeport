@@ -1,10 +1,16 @@
 import template from './openstack-instance-security-groups.html';
+import detailsTemplate from './security-group-details.html';
 
 export default function openstackInstanceSecurityGroups() {
   return {
     restrict: 'E',
     template: template,
-    controller: SecurityGroupController
+    controller: SecurityGroupController,
+    controllerAs: '$ctrl',
+    bindToController: true,
+    scope: {
+      securityGroups: '='
+    }
   };
 }
 
@@ -23,10 +29,18 @@ const COMMON_PORTS = {
   1433: 'MSSQL',
   3306: 'MYSQL',
   3389: 'RDP',
-  5432: 'POSTGRESQL',
+  5432: 'POSTGRESQL'
 };
 
 class SecurityGroupController {
+  constructor($uibModal, $scope) {
+    this.$uibModal = $uibModal;
+    this.$scope = $scope;
+    this.securityGroupsString = this.securityGroups.map(function(item) {
+      return item.name;
+    }).join(', ');
+  }
+
   formatPortRange(rule) {
     if (rule.from_port === -1) {
       return '&mdash;';
@@ -39,5 +53,12 @@ class SecurityGroupController {
     } else {
       return `${rule.from_port} - ${rule.to_port}`;
     }
+  }
+
+  securityGroupDetails() {
+    this.$uibModal.open({
+      template: detailsTemplate,
+      scope: this.$scope
+    });
   }
 }

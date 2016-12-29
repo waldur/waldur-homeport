@@ -132,17 +132,9 @@
     </dd>
   </div>
 
-  <div class="m-b-xs">
-    <dt>
-      Security groups:
-    </dt>
-    <dd>
-      <span ng-if="resource.security_groups">{{ ::resource.securityGroupsString }}
-        <i class="fa fa-info-circle m-l-xs" aria-hidden="true" ng-click="resource.securityGroupDetails()"></i>
-      </span>
-      <span ng-if="!resource.security_groups">'&mdash;'</span>
-    </dd>
-  </div>
+  <openstack-instance-security-groups
+          ng-if="resource.security_groups"
+          security-groups="resource.security_groups"></openstack-instance-security-groups>
 
   <div class="m-b-xs">
     <dt>
