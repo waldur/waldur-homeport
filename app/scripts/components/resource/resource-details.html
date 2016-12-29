@@ -132,9 +132,16 @@
     </dd>
   </div>
 
-  <openstack-instance-security-groups
-          ng-if="resource.security_groups"
-          security-groups="resource.security_groups"></openstack-instance-security-groups>
+  <div class="m-b-xs" ng-if="resource.security_groups">
+    <dt>
+      Security groups:
+    </dt>
+    <dd>
+      <openstack-instance-security-groups
+        security-groups="resource.security_groups"></openstack-instance-security-groups>
+    </dd>
+  </div>
+
 
   <div class="m-b-xs">
     <dt>
