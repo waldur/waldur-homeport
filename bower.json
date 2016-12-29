@@ -4,12 +4,12 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
-    "angular": "~1.4.x",
-    "angular-route": "~1.4.x",
-    "angular-loader": "~1.4.x",
-    "angular-mocks": "~1.4.x",
-    "angular-cookies": "~1.4.x",
-    "angular-resource": "~1.4.x",
+    "angular": "~1.5.9",
+    "angular-route": "~1.5.9",
+    "angular-loader": "~1.5.9",
+    "angular-mocks": "~1.5.9",
+    "angular-cookies": "~1.5.9",
+    "angular-resource": "~1.5.9",
     "angular-ui-router": "~0.2.13",
     "d3": "^3.5.13",
     "satellizer": "~0.9.2",
@@ -21,7 +21,7 @@
     "momentjs": "~2.6.0",
     "angular-moment": "0.10.1",
     "angular-flash-alert": "1.1.1",
-    "angular-animate": "~1.4.x",
+    "angular-animate": "~1.5.9",
     "angular-translate-storage-local": "~2.7.2",
     "angular-translate": "~2.7.2",
     "angular-translate-loader-static-files": "~2.7.2",
@@ -29,7 +29,7 @@
     "ng-file-upload": "~5.0.8",
     "angular-xeditable": "~0.1.9",
     "angular-block-ui": "0.2.2",
-    "angular-sanitize": "~1.4.x",
+    "angular-sanitize": "~1.5.9",
     "angular-leaflet-directive": "~0.10.0",
     "leaflet": "~0.7.7",
     "angular-ui-select": "^0.18.1",
@@ -48,6 +48,7 @@
     "pdfmake": "^0.1.20"
   },
   "resolutions": {
-    "angular": "~1.4.x"
+    "angular": "~1.5.9",
+    "angular-cookies": "~1.5.9"
   }
 }
