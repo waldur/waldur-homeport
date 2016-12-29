@@ -1,10 +1,10 @@
-import template from './security-group-details.html';
+import template from './security-groups-dialog.html';
 
-export default function securityGroupDetails() {
+export default function securityGroupsDialog() {
   return {
     restrict: 'E',
     template: template,
-    controller: securityGroupDetailsController,
+    controller: securityGroupsDialogController,
     controllerAs: '$ctrl',
     scope: {},
     bindToController: {
@@ -33,7 +33,8 @@ const COMMON_PORTS = {
   5432: 'POSTGRESQL',
 };
 
-class securityGroupDetailsController {
+// @ngInject
+class securityGroupsDialogController {
   constructor() {
     this.securityGroups = this.resolve.securityGroups;
   }

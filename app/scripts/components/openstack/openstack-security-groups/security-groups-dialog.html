@@ -7,12 +7,12 @@
     </div>
     <table class="table" ng-if="$ctrl.securityGroups.length > 0">
         <thead>
-        <tr>
-            <th></td>
-            <th>IP protocol</td>
-            <th>Port range</td>
-            <th>Remote</td>
-        </tr>
+            <tr>
+                <th></td>
+                <th>IP protocol</td>
+                <th>Port range</td>
+                <th>Remote</td>
+            </tr>
         </thead>
         <tbody ng-repeat="group in $ctrl.securityGroups">
             <tr ng-repeat="rule in group.rules track by $index">
@@ -26,6 +26,6 @@
                 </td>
                 <td>{{ rule.cidr }} (CIDR)</td>
             </tr>
-            </tbody>
+        </tbody>
     </table>
 </div>

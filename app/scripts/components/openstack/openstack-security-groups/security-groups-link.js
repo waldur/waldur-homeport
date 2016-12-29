@@ -1,10 +1,10 @@
-import template from './openstack-instance-security-groups.html';
+import template from './security-groups-link.html';
 
-export default function openstackInstanceSecurityGroups() {
+export default function securityGroupsLink() {
   return {
     restrict: 'E',
     template: template,
-    controller: SecurityGroupController,
+    controller: securityGroupsLinkController,
     controllerAs: '$ctrl',
     bindToController: true,
     scope: {
@@ -13,7 +13,8 @@ export default function openstackInstanceSecurityGroups() {
   };
 }
 
-class SecurityGroupController {
+// @ngInject
+class securityGroupsLinkController {
   constructor($uibModal, $scope) {
     this.$uibModal = $uibModal;
     $scope.$watch('$ctrl.securityGroups', ((newGroups) => {
@@ -27,7 +28,7 @@ class SecurityGroupController {
 
   openDetailsDialog() {
     this.$uibModal.open({
-      component: 'securityGroupDetails',
+      component: 'securityGroupsDialog',
       resolve: {
         securityGroups: () => this.securityGroups
       }
