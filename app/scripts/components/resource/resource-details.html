@@ -132,6 +132,17 @@
     </dd>
   </div>
 
+  <div class="m-b-xs" ng-if="resource.security_groups">
+    <dt>
+      Security groups:
+    </dt>
+    <dd>
+      <security-groups-link
+        security-groups="resource.security_groups"></security-groups-link>
+    </dd>
+  </div>
+
+
   <div class="m-b-xs">
     <dt>
       Created:

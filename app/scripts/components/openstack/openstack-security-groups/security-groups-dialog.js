@@ -1,14 +1,16 @@
-import template from './openstack-instance-security-groups.html';
+import template from './security-groups-dialog.html';
 
-export default function openstackInstanceSecurityGroups() {
+export default function securityGroupsDialog() {
   return {
     restrict: 'E',
     template: template,
-    controller: SecurityGroupController,
+    controller: securityGroupsDialogController,
     controllerAs: '$ctrl',
-    bindToController: true,
-    scope: {
-      securityGroups: '='
+    scope: {},
+    bindToController: {
+      dismiss: '&',
+      close: '&',
+      resolve: '='
     }
   };
 }
@@ -31,7 +33,12 @@ const COMMON_PORTS = {
   5432: 'POSTGRESQL',
 };
 
-class SecurityGroupController {
+// @ngInject
+class securityGroupsDialogController {
+  constructor() {
+    this.securityGroups = this.resolve.securityGroups;
+  }
+
   formatPortRange(rule) {
     if (rule.from_port === -1) {
       return '&mdash;';
