@@ -30,6 +30,13 @@ function UserProjectsController(
             }
           },
           {
+            title: 'Organization',
+            className: 'all',
+            render: function(row) {
+              return row.customer_name;
+            }
+          },
+          {
             title: 'Role',
             className: 'all',
             render: function(row) {
