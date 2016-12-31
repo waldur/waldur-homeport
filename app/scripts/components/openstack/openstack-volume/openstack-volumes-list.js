@@ -20,6 +20,7 @@ function OpenstackVolumesList(
       this.controllerScope = controllerScope;
       this._super();
       this.service = openstackVolumesService;
+      this.rowFields.push('size');
 
       $scope.$on('actionApplied', function(event, name) {
         if (name === 'volume') {
@@ -33,7 +34,6 @@ function OpenstackVolumesList(
       var options = this._super();
       options.noDataText = 'You have no volumes yet';
       options.noMatchesText = 'No volumes found matching filter.';
-      this.rowFields.push('size');
       return options;
     },
     getFilter: function() {
