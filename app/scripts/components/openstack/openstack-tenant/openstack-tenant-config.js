@@ -11,7 +11,9 @@ export default {
     'description',
     'access',
     'user_username',
-    'user_password'
+    'user_password',
+    'subnet_cidr',
+    'subnet_allocation_pool',
   ],
   options: {
     name: {
@@ -49,6 +51,19 @@ export default {
       label: 'Initial admin password',
       placeholder: 'generate automatically',
       help_text: 'Leave blank if you want admin password to be auto-generated'
+    },
+    subnet_cidr: {
+      component: 'openstackSubnet',
+      label: 'Subnet mask',
+      defaultValue: 42,
+      prefix: '192.168.',
+      suffix: '.0/24',
+    },
+    subnet_allocation_pool: {
+      component: 'openstackAllocationPool',
+      label: 'Subnet allocation pool',
+      rangeStart: '192.168.X.10',
+      rangeEnd: '192.168.X.200',
     }
   },
   summaryComponent: 'openstackTenantSummary'

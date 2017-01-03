@@ -4,6 +4,8 @@ import openstackTenantChangePackageDialog from './openstack-tenant-change-packag
 import packageTemplatesService from './package-templates-service';
 import openstackPackagesService from './openstack-packages-service';
 import openstackTenantChangePackageService from './openstack-tenant-change-package-service';
+import openstackAllocationPool from './openstack-allocation-pool';
+import openstackSubnet from './openstack-subnet';
 
 export default module => {
   module.config(fieldsConfig);
@@ -13,6 +15,8 @@ export default module => {
   module.service('packageTemplatesService', packageTemplatesService);
   module.service('openstackPackagesService', openstackPackagesService);
   module.service('openstackTenantChangePackageService', openstackTenantChangePackageService);
+  module.component('openstackAllocationPool', openstackAllocationPool);
+  module.component('openstackSubnet', openstackSubnet);
 };
 
 // @ngInject

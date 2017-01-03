@@ -26,6 +26,12 @@ class AppstoreFormController {
     angular.forEach(watchers, (watcher, field) => {
       $scope.$watch(() => model[field], watcher.bind(null, model, options));
     });
+
+    angular.forEach(this.fieldsList, field => {
+      if (field.defaultValue) {
+        model[field.name] = field.defaultValue;
+      }
+    });
   }
 
   renderLabel(field) {
