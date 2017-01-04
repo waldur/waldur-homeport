@@ -22,6 +22,7 @@ import alertsModule from './components/alerts/module';
 import routesModule from './routes/module';
 import analyticsModule from './components/analytics/module';
 import coreModule from './components/core/module';
+import filtersModule from './filters';
 import bootstrap from './components/core/bootstrap';
 
 const module = angular.module('ncsaas');
@@ -50,6 +51,7 @@ alertsModule(module);
 routesModule(module);
 analyticsModule(module);
 coreModule(module);
+filtersModule(module);
 
 // eslint-disable-next-line no-undef
 bootstrap('ncsaas', process.env.CONFIG_FILES);

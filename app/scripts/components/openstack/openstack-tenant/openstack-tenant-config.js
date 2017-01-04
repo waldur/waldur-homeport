@@ -54,16 +54,15 @@ export default {
     },
     subnet_cidr: {
       component: 'openstackSubnet',
-      label: 'Subnet mask',
+      label: 'Internal network mask (CIDR)',
       defaultValue: 42,
-      prefix: '192.168.',
-      suffix: '.0/24',
+      mask: '192.168.X.0/24',
+      serializer: (value, field) => field.mask.replace('X', value)
     },
     subnet_allocation_pool: {
       component: 'openstackAllocationPool',
-      label: 'Subnet allocation pool',
-      rangeStart: '192.168.X.10',
-      rangeEnd: '192.168.X.200',
+      label: 'Internal network allocation pool',
+      range: '192.168.X.10 — 192.168.X.200',
     }
   },
   summaryComponent: 'openstackTenantSummary'
