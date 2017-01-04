@@ -6,6 +6,7 @@ export default module => {
   module.config(fieldsConfig);
   module.config(actionConfig);
   module.config(stateConfig);
+  module.config(tabsConfig);
 };
 
 // @ngInject
@@ -89,5 +90,26 @@ function stateConfig(ResourceStateConfigurationProvider) {
       'STOPPED',
       'SUSPENDED'
     ]
+  });
+}
+
+// @ngInject
+function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
+  ResourceTabsConfigurationProvider.register('OpenStackTenant.Instance', {
+    order: [
+      ...DEFAULT_RESOURCE_TABS.order,
+      'volumes',
+      'backups',
+    ],
+    options: angular.merge({}, DEFAULT_RESOURCE_TABS.options, {
+      volumes: {
+        heading: 'Volumes',
+        component: 'openstackInstanceVolumes'
+      },
+      backups: {
+        heading: 'Backups',
+        component: 'openstackBackupsList'
+      },
+    })
   });
 }

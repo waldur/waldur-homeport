@@ -6,7 +6,7 @@ export default function openStackBackupsList() {
     controllerAs: 'ListController',
     scope: {},
     bindToController: {
-      instanceUrl: '='
+      resource: '='
     }
   };
 }
@@ -57,7 +57,7 @@ function OpenStackBackupsListController(
       };
     },
     getFilter: function() {
-      return {instance: controllerScope.instanceUrl};
+      return {instance: controllerScope.resource.url};
     }
   });
 

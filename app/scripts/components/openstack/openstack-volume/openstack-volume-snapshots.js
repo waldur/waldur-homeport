@@ -1,29 +1,27 @@
-export default function openstackVolumesList() {
-  return {
-    restrict: 'E',
-    templateUrl: 'views/partials/filtered-list.html',
-    controller: OpenstackVolumesList,
-    controllerAs: 'ListController'
-  };
-}
+const volumeSnapshots = {
+  templateUrl: 'views/partials/filtered-list.html',
+  controller: VolumeSnapshotsListController,
+  controllerAs: 'ListController',
+  bindings: {
+    resource: '<'
+  }
+};
+
+export default volumeSnapshots;
 
 // @ngInject
-function OpenstackVolumesList(
+function VolumeSnapshotsListController(
   baseResourceListController,
-  $stateParams,
   $scope,
-  $timeout,
-  openstackVolumesService) {
+  $timeout) {
   var controllerScope = this;
   var ResourceController = baseResourceListController.extend({
     init: function() {
       this.controllerScope = controllerScope;
       this._super();
-      this.service = openstackVolumesService;
-      this.rowFields.push('size');
 
       $scope.$on('actionApplied', function(event, name) {
-        if (name === 'volume') {
+        if (name === 'snapshot') {
           $timeout(function() {
             controllerScope.resetCache();
           });
@@ -32,13 +30,14 @@ function OpenstackVolumesList(
     },
     getTableOptions: function() {
       var options = this._super();
-      options.noDataText = 'You have no volumes yet';
-      options.noMatchesText = 'No volumes found matching filter.';
+      options.noDataText = 'You have no snapshots yet';
+      options.noMatchesText = 'No snapshots found matching filter.';
       return options;
     },
     getFilter: function() {
       return {
-        instance_uuid: $stateParams.uuid
+        source_volume_uuid: controllerScope.resource.uuid,
+        resource_type: 'OpenStackTenant.Snapshot'
       };
     }
   });

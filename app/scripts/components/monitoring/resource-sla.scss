@@ -1,4 +1,7 @@
-.tab-sla {
+@import 'mixins/mediaqueries.scss';
+@import 'variables.scss';
+
+.resource-sla {
   @mixin resetFloat() {
     float: none;
     width: 100%;

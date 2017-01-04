@@ -6,7 +6,7 @@ export default function openStackBackupsList() {
     controllerAs: 'ListController',
     scope: {},
     bindToController: {
-      backupUUID: '='
+      resource: '='
     }
   };
 }
@@ -64,7 +64,7 @@ function backupSnapshotsListController(
       };
     },
     getFilter: function() {
-      return {backup_uuid: controllerScope.backupUUID};
+      return {backup_uuid: controllerScope.resource.uuid};
     }
   });
 

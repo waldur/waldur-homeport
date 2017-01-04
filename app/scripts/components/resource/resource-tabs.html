@@ -1,0 +1,10 @@
+<uib-tabset active="active">
+  <uib-tab
+    ng-repeat="tab in $ctrl.tabs"
+    heading="{{ ::tab.heading }}"
+    visible-if="tab.feature">
+    <div class="panel-body" ng-if="active==$index">
+      <resource-tab resource="$ctrl.resource" tab="tab"></resource-tab>
+    </div>
+  </uib-tab>
+</uib-tabset>
