@@ -18,10 +18,10 @@ export default module => {
   module.provider('ResourceStateConfiguration', ResourceStateConfiguration);
   module.component('resourceDetails', resourceDetails);
   module.directive('resourceSummary', resourceSummary);
-  module.directive('resourceEvents', resourceEvents);
-  module.directive('resourceState', resourceState);
+  module.component('resourceEvents', resourceEvents);
+  module.component('resourceState', resourceState);
   module.component('resourceAlerts', resourceAlerts);
-  module.directive('resourceIssues', resourceIssues);
+  module.component('resourceIssues', resourceIssues);
   module.directive('resourceHeader', resourceHeader);
   module.config(resourceRoutes);
   module.directive('resourceTab', resourceTab);

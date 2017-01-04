@@ -1,15 +1,12 @@
-export default function resourceIssues() {
-  return {
-    restrict: 'E',
-    controller: ResourceIssuesController,
-    controllerAs: '$ctrl',
-    template: '<issues-list filter="$ctrl.filter" options="$ctrl.options"></issues-list>',
-    scope: {
-      resource: '='
-    },
-    bindToController: true
-  };
-}
+const resourceIssues = {
+  controller: ResourceIssuesController,
+  template: '<issues-list filter="$ctrl.filter" options="$ctrl.options"></issues-list>',
+  bindins: {
+    resource: '<'
+  },
+};
+
+export default resourceIssues;
 
 // @ngInject
 class ResourceIssuesController {

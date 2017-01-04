@@ -7,6 +7,7 @@ const resourceTabs = {
   },
   controller: class ResourceTabs {
     constructor(ResourceTabsConfiguration, DEFAULT_RESOURCE_TABS) {
+      // @ngInject
       this.registry = ResourceTabsConfiguration;
       this.defaults = DEFAULT_RESOURCE_TABS;
     }
