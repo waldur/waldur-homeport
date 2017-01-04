@@ -28,6 +28,7 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
       'edit',
       'pull',
       'change_package',
+      'create_network',
       'destroy'
     ],
     options: {
@@ -36,6 +37,14 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
       }),
       pull: {
         title: 'Synchronise'
+      },
+      create_network: {
+        title: 'Create network',
+        fields: {
+          description: {
+            type: 'text'
+          }
+        }
       },
       change_package: {
         title: 'Change VPC package',

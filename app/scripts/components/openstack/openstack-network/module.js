@@ -8,4 +8,28 @@ export default module => {
   module.component('openstackAllocationPool', openstackAllocationPool);
   module.component('openstackSubnet', openstackSubnet);
   module.component('openstackTenantNetworks', openstackTenantNetworks);
+  module.config(actionConfig);
 };
+
+// @ngInject
+function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
+  ActionConfigurationProvider.register('OpenStack.Network', {
+    order: [
+      'edit',
+      'pull',
+      'create_subnet',
+      'destroy'
+    ],
+    options: {
+      edit: angular.merge({}, DEFAULT_EDIT_ACTION, {
+        successMessage: 'Network has been updated'
+      }),
+      pull: {
+        title: 'Synchronise'
+      },
+      create_subnet: {
+        title: 'Create subnet'
+      },
+    },
+  });
+}

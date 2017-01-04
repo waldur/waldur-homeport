@@ -3,7 +3,8 @@ import template from './resource-details.html';
 const resourceDetails = {
   template,
   bindings: {
-    resource: '<'
+    resource: '<',
+    controller: '<',
   },
   controller: class {
     constructor(resourceUtils) {

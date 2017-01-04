@@ -13,7 +13,7 @@ const resourceTabs = {
 
     $onInit() {
       const config = this.registry[this.resource.resource_type] || this.defaults;
-      this.tabs = config.order.map(tab => config.options[tab]);
+      this.tabs = config.order.map(tab => angular.extend({name: tab}, config.options[tab]));
     }
   }
 };

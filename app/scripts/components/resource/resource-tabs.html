@@ -2,8 +2,9 @@
   <uib-tab
     ng-repeat="tab in $ctrl.tabs"
     heading="{{ ::tab.heading }}"
-    visible-if="tab.feature">
-    <div class="panel-body" ng-if="active==$index">
+    visible-if="tab.feature"
+    index="::tab.name">
+    <div class="panel-body" ng-if="active==tab.name">
       <resource-tab resource="$ctrl.resource" tab="tab"></resource-tab>
     </div>
   </uib-tab>
