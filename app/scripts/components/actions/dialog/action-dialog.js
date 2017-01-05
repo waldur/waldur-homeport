@@ -49,7 +49,7 @@ function ActionDialogController(
         if ($scope.form[name] != null) {
           var field = fields[name];
           var serializer = field.serializer || angular.identity;
-          form[name] = serializer($scope.form[name]);
+          form[name] = serializer($scope.form[name], field);
         }
       }
 

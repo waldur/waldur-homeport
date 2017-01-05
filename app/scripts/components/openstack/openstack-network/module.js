@@ -4,7 +4,6 @@ import openstackNetworksService from './openstack-networks-service';
 import openstackSubnetsService from './openstack-subnets-service';
 import openstackTenantNetworks from './openstack-tenant-networks';
 import openstackSubnetsList from './openstack-subnets-list';
-import { SUBNET_OPTIONS } from './constants';
 
 export default module => {
   module.service('openstackNetworksService', openstackNetworksService);
@@ -35,7 +34,21 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
       },
       create_subnet: {
         title: 'Create subnet',
-        fields: angular.extend({}, DEFAULT_EDIT_ACTION.fields, SUBNET_OPTIONS)
+        fields: angular.extend({}, DEFAULT_EDIT_ACTION.fields, {
+          cidr: {
+            component: 'openstackSubnet',
+            label: 'Internal network mask (CIDR)',
+            default_value: 42,
+            mask: '192.168.X.0/24',
+            serializer: (value, field) => field.mask.replace('X', value)
+          },
+          allocation_pool: {
+            component: 'openstackAllocationPool',
+            label: 'Internal network allocation pool',
+            range: '192.168.X.10 — 192.168.X.200',
+            parentField: 'cidr'
+          },
+        })
       },
     },
   });
