@@ -17,7 +17,7 @@ export default module => {
   module.service('resourceUtils', resourceUtils);
   module.provider('ResourceStateConfiguration', ResourceStateConfiguration);
   module.component('resourceDetails', resourceDetails);
-  module.directive('resourceSummary', resourceSummary);
+  module.component('resourceSummary', resourceSummary);
   module.component('resourceEvents', resourceEvents);
   module.component('resourceState', resourceState);
   module.component('resourceAlerts', resourceAlerts);
