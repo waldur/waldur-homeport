@@ -743,7 +743,6 @@ module.exports = function(grunt) {
                     'app/scripts/class.js',
                     'app/scripts/inspinia.js',
                     'app/scripts/app.js',
-                    'app/scripts/filters.js',
                     'app/scripts/utils.js',
                     'app/scripts/configs/*.js',
                     'app/scripts/controllers/*.js',
