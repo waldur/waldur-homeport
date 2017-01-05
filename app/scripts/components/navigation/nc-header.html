@@ -10,8 +10,8 @@
             </div>
         </div>
         <ul class="nav navbar-top-links navbar-right">
-            <li visible="support">
-                <a ui-sref="support.helpdesk" ui-sref-active-if="support">
+            <li visible-if="'support'">
+                <a ng-click="$ctrl.gotoSupport()" ui-sref-active-if="support">
                     <i class="fa fa-question-circle"></i> Support
                 </a>
             </li>
@@ -58,7 +58,7 @@
                 </ul>
             </li>
             <li>
-                <a ng-click="logout()">
+                <a ng-click="$ctrl.logout()">
                     <i class="fa fa-sign-out"></i> Log out
                 </a>
             </li>

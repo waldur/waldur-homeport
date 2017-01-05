@@ -26,7 +26,7 @@ export default module => {
   module.directive('issueDetail', issueDetail);
   module.directive('issueCommentsList', issueCommentsList);
   module.directive('issueCommentsForm', issueCommentsForm);
-  module.directive('issuesWorkspace', issuesWorkspace);
+  module.component('issuesWorkspace', issuesWorkspace);
   module.directive('issuesDashboard', issuesDashboard);
   module.directive('issuesShortList', issuesShortList);
   module.directive('issueQuickCreate', issueQuickCreate);

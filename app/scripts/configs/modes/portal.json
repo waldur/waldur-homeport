@@ -18,7 +18,9 @@
     "monitoring",
     "projectCostDetails",
     "import",
-    "openMap"
+    "openMap",
+    "support.activity",
+    "support.sla"
   ],
   "featuresVisible": false,
   "appStoreCategories": [
