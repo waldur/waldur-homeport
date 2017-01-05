@@ -75,13 +75,13 @@ function CustomerDeleteController(
             issue: () => ({
               customer: vm.customer,
               type: ISSUE_IDS.CHANGE_REQUEST,
-              summary: 'Customer removal'
+              summary: 'Organization removal'
             }),
             options: {
-              title: 'Customer removal',
+              title: 'Organization removal',
               hideTitle: true,
               descriptionLabel: 'Reason',
-              descriptionPlaceholder: 'Why do you need to remove customer with existing projects?',
+              descriptionPlaceholder: 'Why do you need to remove organization with existing projects?',
               submitTitle: 'Request removal'
             }
           }
