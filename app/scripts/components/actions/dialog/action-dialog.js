@@ -1,6 +1,6 @@
 import template from './action-dialog.html';
-import './action-dialog.scss';
 
+// TODO: Convert directive to Angular 1.5 component
 export default function actionDialog() {
   return {
     restrict: 'E',

@@ -28,8 +28,8 @@ class AppstoreFormController {
     });
 
     angular.forEach(this.fieldsList, field => {
-      if (field.defaultValue) {
-        model[field.name] = field.defaultValue;
+      if (field.default_value) {
+        model[field.name] = field.default_value;
       }
     });
   }

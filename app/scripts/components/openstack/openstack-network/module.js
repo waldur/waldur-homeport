@@ -4,6 +4,7 @@ import openstackNetworksService from './openstack-networks-service';
 import openstackSubnetsService from './openstack-subnets-service';
 import openstackTenantNetworks from './openstack-tenant-networks';
 import openstackSubnetsList from './openstack-subnets-list';
+import { SUBNET_OPTIONS } from './constants';
 
 export default module => {
   module.service('openstackNetworksService', openstackNetworksService);
@@ -33,7 +34,8 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
         title: 'Synchronise'
       },
       create_subnet: {
-        title: 'Create subnet'
+        title: 'Create subnet',
+        fields: angular.extend({}, DEFAULT_EDIT_ACTION.fields, SUBNET_OPTIONS)
       },
     },
   });
@@ -49,7 +51,7 @@ function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
     options: angular.merge({}, DEFAULT_RESOURCE_TABS.options, {
       subnets: {
         heading: 'Subnets',
-        component: 'openstackSubnetsList'
+        component: 'openstackSubnetsList',
       },
     })
   });

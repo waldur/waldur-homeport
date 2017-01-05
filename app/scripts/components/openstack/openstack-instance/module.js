@@ -56,6 +56,7 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
         title: 'Update security groups',
         fields: {
           security_groups: {
+            type: 'multiselect',
             resource_default_value: true,
             serializer: items => items.map(item => ({url: item.value}))
           }
