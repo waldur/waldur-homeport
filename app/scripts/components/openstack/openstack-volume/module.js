@@ -3,18 +3,21 @@ import volumeExtendDialog from './volume-extend';
 import snapshotCreateDialog from './snapshot-create';
 import openstackVolumeSummary from './openstack-volume-summary';
 import openstackVolumesService from './openstack-volumes-service';
-import openstackVolumesList from './openstack-volumes-list';
+import openstackInstanceVolumes from './openstack-instance-volumes';
+import openstackVolumeSnapshots from './openstack-volume-snapshots';
 
 export default module => {
   module.service('openstackVolumesService', openstackVolumesService);
-  module.directive('openstackVolumesList', openstackVolumesList);
   module.directive('volumeExtendDialog', volumeExtendDialog);
   module.directive('snapshotCreateDialog', snapshotCreateDialog);
   module.directive('openstackVolumeSummary', openstackVolumeSummary);
+  module.component('openstackInstanceVolumes', openstackInstanceVolumes);
+  module.component('openstackVolumeSnapshots', openstackVolumeSnapshots);
 
   module.config(fieldsConfig);
   module.config(actionConfig);
   module.config(stateConfig);
+  module.config(tabsConfig);
 };
 
 // @ngInject
@@ -58,10 +61,20 @@ function stateConfig(ResourceStateConfigurationProvider) {
       'error'
     ]
   });
+}
 
-  ResourceStateConfigurationProvider.register('OpenStackTenant.Snapshot', {
-    error_states: [
-      'error'
-    ]
+// @ngInject
+function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
+  ResourceTabsConfigurationProvider.register('OpenStackTenant.Volume', {
+    order: [
+      ...DEFAULT_RESOURCE_TABS.order,
+      'snapshots',
+    ],
+    options: angular.merge({}, DEFAULT_RESOURCE_TABS.options, {
+      snapshots: {
+        heading: 'Snapshots',
+        component: 'openstackVolumeSnapshots'
+      },
+    })
   });
 }

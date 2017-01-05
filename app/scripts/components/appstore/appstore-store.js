@@ -374,8 +374,12 @@ function AppStoreController(
       for (var name in this.allFormOptions) {
         if (this.instance.hasOwnProperty(name)) {
           var value = this.instance[name];
+          var option = this.allFormOptions[name];
           if (value.hasOwnProperty('url')) {
             value = value.url;
+          }
+          if (option.serializer) {
+            value = option.serializer(value, option);
           }
           instance[name] = value;
         }

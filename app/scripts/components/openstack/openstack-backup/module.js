@@ -1,14 +1,13 @@
-import openstackBackupsService from '../openstack-backup/openstack-backups-service';
-import openstackSnapshotsService from '../openstack-backup/openstack-snapshots-service';
-import openstackBackupsList from '../openstack-backup/openstack-backups-list';
-import backupSnapshotsList from '../openstack-backup/backup-snapshots-list';
+import openstackBackupsService from './openstack-backups-service';
+import openstackBackupsList from './openstack-backups-list';
+import backupSnapshotsList from './backup-snapshots-list';
 
 export default module => {
   module.service('openstackBackupsService', openstackBackupsService);
-  module.service('openstackSnapshotsService', openstackSnapshotsService);
   module.directive('openstackBackupsList', openstackBackupsList);
   module.directive('backupSnapshotsList', backupSnapshotsList);
   module.config(actionConfig);
+  module.config(tabsConfig);
 };
 
 // @ngInject
@@ -31,15 +30,20 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
       })
     }
   });
+}
 
-  ActionConfigurationProvider.register('OpenStackTenant.Snapshot', {
+// @ngInject
+function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
+  ResourceTabsConfigurationProvider.register('OpenStackTenant.Backup', {
     order: [
-      'edit'
+      ...DEFAULT_RESOURCE_TABS.order,
+      'snapshots',
     ],
-    options: {
-      edit: angular.merge({}, DEFAULT_EDIT_ACTION, {
-        successMessage: 'Snapshot has been updated'
-      })
-    }
+    options: angular.merge({}, DEFAULT_RESOURCE_TABS.options, {
+      snapshots: {
+        heading: 'Snapshots',
+        component: 'backupSnapshotsList'
+      },
+    })
   });
 }

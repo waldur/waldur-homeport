@@ -11,7 +11,9 @@ export default {
     'description',
     'access',
     'user_username',
-    'user_password'
+    'user_password',
+    'subnet_cidr',
+    'subnet_allocation_pool',
   ],
   options: {
     name: {
@@ -49,7 +51,20 @@ export default {
       label: 'Initial admin password',
       placeholder: 'generate automatically',
       help_text: 'Leave blank if you want admin password to be auto-generated'
-    }
+    },
+    subnet_cidr: {
+      component: 'openstackSubnet',
+      label: 'Internal network mask (CIDR)',
+      default_value: 42,
+      mask: '192.168.X.0/24',
+      serializer: (value, field) => field.mask.replace('X', value)
+    },
+    subnet_allocation_pool: {
+      component: 'openstackAllocationPool',
+      label: 'Internal network allocation pool',
+      range: '192.168.X.10 — 192.168.X.200',
+      parentField: 'subnet_cidr'
+    },
   },
   summaryComponent: 'openstackTenantSummary'
 };

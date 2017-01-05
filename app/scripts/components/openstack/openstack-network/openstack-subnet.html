@@ -1,0 +1,16 @@
+<div class="col-sm-6 input-group">
+  <span class="input-group-addon">
+    {{ ::$ctrl.prefix }}
+  </span>
+  <input
+    type="number"
+    id="{{ ::$ctrl.field.name }}"
+    name="{{ ::$ctrl.field.name }}"
+    min="1"
+    max="255"
+    ng-model="$ctrl.model[$ctrl.field.name]"
+    class="form-control"/>
+  <span class="input-group-addon">
+    {{ ::$ctrl.suffix }}
+  </span>
+</div>

@@ -13,6 +13,11 @@ export default function actionUtilsService(
         if (action.hasOwnProperty('enabled')) {
           result[name] = action;
         }
+        if (action.fields) {
+          angular.forEach(action.fields, (action, name) => {
+            action.name = name;
+          });
+        }
         return result;
       }, {});
     });
