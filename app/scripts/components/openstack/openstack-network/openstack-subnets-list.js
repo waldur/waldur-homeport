@@ -27,6 +27,9 @@ function OpenstackSubnetsListController(
       return {
         network_uuid: controllerScope.resource.uuid
       };
+    },
+    getTableActions: function() {
+      return [];
     }
   });
 

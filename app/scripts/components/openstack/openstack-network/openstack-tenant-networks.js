@@ -27,6 +27,9 @@ function TenantNetworksController(
       return {
         tenant_uuid: controllerScope.resource.uuid
       };
+    },
+    getTableActions: function() {
+      return [];
     }
   });
 
