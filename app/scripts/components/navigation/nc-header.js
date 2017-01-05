@@ -1,6 +1,5 @@
 import template from './nc-header.html';
 
-// TODO: Convert directive to component. Drop $rootScope.
 export default {
   template: template,
   controller: class AppHeader {
