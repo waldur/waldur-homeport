@@ -23,10 +23,8 @@ function OpenStackBackupsListController(
       this.tableOptions = {
         disableSearch: true,
         searchFieldName: 'summary',
-        entityData: {
-          noDataText: 'No backups yet.',
-          noMatchesText: 'No backups found matching filter.',
-        },
+        noDataText: 'No backups yet.',
+        noMatchesText: 'No backups found matching filter.',
         columns: [
           {
             title: 'Name',

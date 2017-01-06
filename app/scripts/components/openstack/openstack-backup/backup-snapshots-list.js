@@ -23,10 +23,8 @@ function backupSnapshotsListController(
       this.tableOptions = {
         disableSearch: true,
         searchFieldName: 'summary',
-        entityData: {
-          noDataText: 'No snapshots yet.',
-          noMatchesText: 'No snapshots found matching filter.',
-        },
+        noDataText: 'No snapshots yet.',
+        noMatchesText: 'No snapshots found matching filter.',
         columns: [
           {
             title: 'Name',
