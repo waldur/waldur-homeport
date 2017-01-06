@@ -5,6 +5,7 @@ import customerWorkspace from './customer-workspace';
 import customerPopover from './customer-popover';
 import customerIssues from './customer-issues';
 import customerEvents from './customer-events';
+import customerUsersDetailsList from './customer-users-details-list';
 import routes from './routes';
 
 export default module => {
@@ -15,5 +16,6 @@ export default module => {
   module.directive('customerPopover', customerPopover);
   module.directive('customerIssues', customerIssues);
   module.directive('customerEvents', customerEvents);
+  module.directive('customerUsersDetailsList', customerUsersDetailsList);
   module.config(routes);
 };
