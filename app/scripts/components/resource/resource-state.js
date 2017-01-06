@@ -1,17 +1,14 @@
 import template from './resource-state.html';
 
-export default function resourceState() {
-  return {
-    restrict: 'E',
-    template: template,
-    scope: {},
-    bindToController: {
-      resource: '='
-    },
-    controller: ResourceStateController,
-    controllerAs: '$ctrl'
-  };
-}
+const resourceState = {
+  template: template,
+  bindings: {
+    resource: '<'
+  },
+  controller: ResourceStateController,
+};
+
+export default resourceState;
 
 // @ngInject
 function ResourceStateController(resourceUtils, $scope) {

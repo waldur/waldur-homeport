@@ -6,7 +6,7 @@ export default function openStackBackupsList() {
     controllerAs: 'ListController',
     scope: {},
     bindToController: {
-      backupUUID: '='
+      resource: '='
     }
   };
 }
@@ -23,10 +23,8 @@ function backupSnapshotsListController(
       this.tableOptions = {
         disableSearch: true,
         searchFieldName: 'summary',
-        entityData: {
-          noDataText: 'No snapshots yet.',
-          noMatchesText: 'No snapshots found matching filter.',
-        },
+        noDataText: 'No snapshots yet.',
+        noMatchesText: 'No snapshots found matching filter.',
         columns: [
           {
             title: 'Name',
@@ -64,7 +62,7 @@ function backupSnapshotsListController(
       };
     },
     getFilter: function() {
-      return {backup_uuid: controllerScope.backupUUID};
+      return {backup_uuid: controllerScope.resource.uuid};
     }
   });
 

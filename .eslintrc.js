@@ -50,6 +50,7 @@ module.exports = {
   'globals': {
     angular: true,
     d3: true,
+    $: true,
     Class: true,
     moment: true,
     describe: true,

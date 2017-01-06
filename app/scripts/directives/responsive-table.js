@@ -12,7 +12,7 @@
       scope: {
         controller: '=tableCtrl'
       },
-      template: '<div class="full-width"><div class="table-responsive"><table class="table table-striped"></table></div></div>',
+      template: '<div class="full-width"><div class="table-responsive" ng-class="{\'table-large\': !controller.tableOptions.compactTable}"><table class="table table-striped"></table></div></div>',
       link: function(scope, element) {
         var options = scope.controller.tableOptions;
         var table;

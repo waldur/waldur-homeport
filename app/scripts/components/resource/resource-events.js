@@ -1,15 +1,13 @@
-export default function resourceEvents() {
-  return {
-    restrict: 'E',
-    templateUrl: 'views/partials/filtered-list.html',
-    controller: ResourceEventsController,
-    controllerAs: 'ListController',
-    scope: {},
-    bindToController: {
-      resource: '='
-    }
-  };
-}
+const resourceEvents = {
+  templateUrl: 'views/partials/filtered-list.html',
+  controller: ResourceEventsController,
+  controllerAs: 'ListController',
+  bindings: {
+    resource: '<'
+  }
+};
+
+export default resourceEvents;
 
 // @ngInject
 function ResourceEventsController(baseEventListController) {

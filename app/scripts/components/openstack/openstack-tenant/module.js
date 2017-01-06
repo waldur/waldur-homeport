@@ -8,6 +8,7 @@ import openstackTenantChangePackageService from './openstack-tenant-change-packa
 export default module => {
   module.config(fieldsConfig);
   module.config(actionConfig);
+  module.config(tabsConfig);
   module.directive('openstackTenantSummary', openstackTenantSummary);
   module.directive('openstackTenantChangePackageDialog', openstackTenantChangePackageDialog);
   module.service('packageTemplatesService', packageTemplatesService);
@@ -27,6 +28,7 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
       'edit',
       'pull',
       'change_package',
+      'create_network',
       'destroy'
     ],
     options: {
@@ -35,6 +37,14 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
       }),
       pull: {
         title: 'Synchronise'
+      },
+      create_network: {
+        title: 'Create network',
+        fields: {
+          description: {
+            type: 'text'
+          }
+        }
       },
       change_package: {
         title: 'Change VPC package',
@@ -45,5 +55,21 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
       }
     },
     delete_message: 'All tenant resources will be deleted.'
+  });
+}
+
+// @ngInject
+function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
+  ResourceTabsConfigurationProvider.register('OpenStack.Tenant', {
+    order: [
+      ...DEFAULT_RESOURCE_TABS.order,
+      'networks',
+    ],
+    options: angular.merge({}, DEFAULT_RESOURCE_TABS.options, {
+      networks: {
+        heading: 'Networks',
+        component: 'openstackTenantNetworks'
+      },
+    })
   });
 }

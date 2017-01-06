@@ -1,0 +1,20 @@
+<div class="datepicker input-group">
+  <input
+    type="text"
+    class="form-control"
+    uib-datepicker-popup="{{ $ctrl.field.options.format }}"
+    ng-model="$ctrl.model[$ctrl.field.name]"
+    ng-required="$ctrl.field.required"
+    is-open="dateTimeOpened"
+    datepicker-options="$ctrl.field.options.dateOptions"
+    close-text="Close"
+    alt-input-formats="$ctrl.field.options.altInputFormats"/>
+    <span class="input-group-btn">
+    <button
+      type="button"
+      class="btn btn-default"
+      ng-click="dateTimeOpened = !dateTimeOpened">
+      <i class="fa fa-calendar"></i>
+    </button>
+  </span>
+</div>

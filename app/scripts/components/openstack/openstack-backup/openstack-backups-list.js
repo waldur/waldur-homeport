@@ -6,7 +6,7 @@ export default function openStackBackupsList() {
     controllerAs: 'ListController',
     scope: {},
     bindToController: {
-      instanceUrl: '='
+      resource: '='
     }
   };
 }
@@ -23,10 +23,8 @@ function OpenStackBackupsListController(
       this.tableOptions = {
         disableSearch: true,
         searchFieldName: 'summary',
-        entityData: {
-          noDataText: 'No backups yet.',
-          noMatchesText: 'No backups found matching filter.',
-        },
+        noDataText: 'No backups yet.',
+        noMatchesText: 'No backups found matching filter.',
         columns: [
           {
             title: 'Name',
@@ -57,7 +55,7 @@ function OpenStackBackupsListController(
       };
     },
     getFilter: function() {
-      return {instance: controllerScope.instanceUrl};
+      return {instance: controllerScope.resource.url};
     }
   });
 
