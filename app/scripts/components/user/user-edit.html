@@ -9,6 +9,11 @@
                 <a href="//gravatar.com" target="_blank">gravatar.com</a>
             </span>
         </div>
+        <div class="m-t-sm" ng-if="$ctrl.user.is_staff">
+            <i uib-tooltip="This user has staff privileges"
+               class="fa fa-2x fa-user-circle text-info"
+               aria-hidden="true"></i>
+        </div>
     </div>
     <form class="col-sm-10 col-xs-12 form-horizontal" name="$ctrl.UserForm">
         <div class="form-group">

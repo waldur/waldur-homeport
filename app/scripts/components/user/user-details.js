@@ -97,7 +97,6 @@ function UserDetailsController($scope, $state, $stateParams, usersService,
           }
         });
       }
-      $scope.currentUser.isStaffInfoMessage = 'This user has admin privileges';
     });
   }
   $scope.$on('hasCustomer', updateSidebar);
