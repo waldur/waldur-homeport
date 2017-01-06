@@ -9,11 +9,6 @@
                 <a href="//gravatar.com" target="_blank">gravatar.com</a>
             </span>
         </div>
-        <div class="m-t-sm" ng-if="$ctrl.user.is_staff">
-            <i uib-tooltip="This user has staff privileges"
-               class="fa fa-2x fa-user-circle text-info"
-               aria-hidden="true"></i>
-        </div>
     </div>
     <form class="col-sm-10 col-xs-12 form-horizontal" name="$ctrl.UserForm">
         <div class="form-group">
@@ -42,6 +37,16 @@
             </label>
             <div class="col-sm-9 col-md-8">
                 <p class="form-control-static">{{::$ctrl.getRegistrationMethod()}}</p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 col-md-4 col-lg-3 control-label">
+                User status
+            </label>
+            <div class="col-sm-9 col-md-8">
+                <p class="form-control-static" ng-if="::$ctrl.user.is_staff">Staff</p>
+                <p class="form-control-static" ng-if="::!$ctrl.user.is_staff">User</p>
             </div>
         </div>
 
