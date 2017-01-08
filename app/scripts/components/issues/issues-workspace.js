@@ -51,7 +51,7 @@ export default {
             link: 'support.dashboard'
           },
           {
-            label: 'Requests',
+            label: 'Support requests',
             icon: 'fa-list',
             link: 'support.list'
           },
