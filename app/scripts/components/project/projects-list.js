@@ -68,9 +68,9 @@ function ProjectsListController(
         },
         {
           title: 'Description',
-          width: '250px',
+          width: '200px',
           render: function(row) {
-            return row.description || 'N/A';
+            return `<span class="elipsis" style="width: 150px;" uib-tooltip="${row.description}">${row.description}</span>`;
           }
         },
         {
