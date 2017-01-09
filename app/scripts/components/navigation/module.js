@@ -3,7 +3,8 @@ import selectWorkspaceDialog from './select-workspace-dialog';
 import sidebar from './sidebar';
 import sidebarToggle from './sidebar-toggle';
 import ncHeader from './nc-header';
-import pageTitle from './page-title';
+import titleService from './title-service';
+import setTitleFromState from './set-title-from-state';
 import uiSrefActiveIf from './ui-sref-active-if';
 
 export default module => {
@@ -12,6 +13,7 @@ export default module => {
   module.directive('sidebar', sidebar);
   module.component('sidebarToggle', sidebarToggle);
   module.component('ncHeader', ncHeader);
-  module.directive('pageTitle', pageTitle);
+  module.service('titleService', titleService);
+  module.run(setTitleFromState);
   module.directive('uiSrefActiveIf', uiSrefActiveIf);
 };

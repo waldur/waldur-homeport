@@ -20,7 +20,6 @@ function UserOrganizationsController(
         disableSearch: true,
         noDataText: 'No organizations yet',
         noMatchesText: 'No organizations found matching filter.',
-        compactTable: true,
 
         columns: [
           {
