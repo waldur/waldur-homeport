@@ -20,7 +20,6 @@ function UserProjectsController(
         disableSearch: true,
         noDataText: 'No projects yet',
         noMatchesText: 'No projects found matching filter.',
-        compactTable: true,
 
         columns: [
           {
@@ -28,6 +27,13 @@ function UserProjectsController(
             className: 'all',
             render: function(row) {
               return row.project_name;
+            }
+          },
+          {
+            title: 'Organization',
+            className: 'all',
+            render: function(row) {
+              return row.customer_name;
             }
           },
           {

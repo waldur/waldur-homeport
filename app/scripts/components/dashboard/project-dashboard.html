@@ -1,0 +1,19 @@
+<div class="wrapper wrapper-content">
+    <div ng-if="$ctrl.loading">
+        <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
+    </div>
+    <div class="row" ng-if="!$ctrl.loading">
+        <div class="col-lg-3" ng-repeat="chart in $ctrl.charts">
+            <dashboard-chart chart="chart"></dashboard-chart>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <project-events-feed project="$ctrl.project"/>
+        </div>
+        <div class="col-md-6" visible-if="'alerts'">
+            <project-alerts-feed project="$ctrl.project"/>
+        </div>
+    </div>
+</div>

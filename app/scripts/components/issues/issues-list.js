@@ -28,8 +28,8 @@ function IssueListController(
         disableSearch: true,
         enableOrdering: true,
         searchFieldName: 'summary',
-        noDataText: 'No requests yet.',
-        noMatchesText: 'No requests found matching filter.',
+        noDataText: 'No support requests yet.',
+        noMatchesText: 'No support requests found matching filter.',
         columns: [
           {
             title: 'Type',

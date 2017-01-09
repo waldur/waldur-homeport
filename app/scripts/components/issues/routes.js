@@ -40,7 +40,7 @@ export default function issueRoutes($stateProvider) {
       url: 'list/',
       template: '<issues-list-filtered></issues-list-filtered>',
       data: {
-        pageTitle: 'List requests'
+        pageTitle: 'Support requests'
       }
     });
 }

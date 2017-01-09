@@ -23,6 +23,7 @@ import alertsModule from './components/alerts/module';
 import routesModule from './routes/module';
 import analyticsModule from './components/analytics/module';
 import coreModule from './components/core/module';
+import dashboardModule from './components/dashboard/module';
 import filtersModule from './filters';
 import bootstrap from './components/core/bootstrap';
 
@@ -53,6 +54,7 @@ alertsModule(module);
 routesModule(module);
 analyticsModule(module);
 coreModule(module);
+dashboardModule(module);
 filtersModule(module);
 
 // eslint-disable-next-line no-undef
