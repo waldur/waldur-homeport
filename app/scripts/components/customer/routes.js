@@ -14,11 +14,8 @@ export default function organizationRoutes($stateProvider) {
     })
 
     .state('dashboard.index', {
-      url: '?tab',
-      templateUrl: 'views/dashboard/organization.html',
-      controller: 'OrganizationDashboardController',
-      controllerAs: 'DashboardCtrl',
-      bindToController: true
+      url: '',
+      template: '<organization-dashboard customer="currentCustomer"></organization-dashboard>',
     })
 
     .state('organization', {

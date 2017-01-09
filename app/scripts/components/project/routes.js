@@ -28,10 +28,7 @@ export default function projectRoutes($stateProvider) {
 
     .state('project.details', {
       url: '',
-      templateUrl: 'views/dashboard/project.html',
-      controller: 'ProjectDashboardController',
-      controllerAs: 'DashboardCtrl',
-      bindToController: true,
+      template: '<project-dashboard project="currentProject"></project-dashboard>',
       data: {
         pageTitle: 'Project dashboard',
         pageClass: 'gray-bg'
