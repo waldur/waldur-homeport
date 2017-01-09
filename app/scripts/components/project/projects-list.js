@@ -67,6 +67,13 @@ function ProjectsListController(
           }
         },
         {
+          title: 'Description',
+          width: '250px',
+          render: function(row) {
+            return row.description || 'N/A';
+          }
+        },
+        {
           title: 'Creation date',
           render: function(row) {
             return $filter('dateTime')(row.created);
