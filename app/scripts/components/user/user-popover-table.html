@@ -26,8 +26,12 @@
                 <td>{{ $ctrl.user.competence || 'N/A' }}</td>
             </tr>
             <tr>
-                <td><strong>Role deprecation time</strong></td>
-                <td>{{ $ctrl.user.role_deprecation_time || 'N/A' }}</td>
+                <td><strong>Registration method</strong></td>
+                <td>{{ $ctrl.user.registration_method || 'N/A' }}</td>
+            </tr>
+            <tr>
+                <td><strong>Date joined</strong></td>
+                <td>{{ $ctrl.user.date_joined | dateTime}}</td>
             </tr>
             <tr>
                 <td><strong>Job position</strong></td>

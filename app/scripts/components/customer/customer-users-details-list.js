@@ -1,26 +1,22 @@
-export default function customerUsersDetailsList() {
-  return {
-    restrict: 'E',
-    controller: customerUsersDetailsListController,
-    controllerAs: 'ListController',
-    templateUrl: 'views/partials/filtered-list.html',
-    scope: {},
-    bindToController: {
-      customer: '=',
-      options: '='
-    }
-  };
-}
+export const customerUsersDetailsList = {
+  controller: customerUsersDetailsListController,
+  controllerAs: 'ListController',
+  templateUrl: 'views/partials/filtered-list.html',
+  bindings: {
+    customer: '=',
+    options: '='
+  }
+};
 
 // @ngInject
 function customerUsersDetailsListController(
     baseControllerListClass,
-    customersService) {
+    usersService) {
   var controllerScope = this;
   var UsersController = baseControllerListClass.extend({
     init: function() {
       this.controllerScope = controllerScope;
-      this.service = customersService;
+      this.service = usersService;
       this._super();
       this.tableOptions = angular.extend(this.getTableOptions(), controllerScope.options);
     },
@@ -87,8 +83,7 @@ function customerUsersDetailsListController(
     },
     getList: function(filter) {
       return this._super(angular.extend({
-        operation: 'users',
-        UUID: controllerScope.customer.uuid
+        customer_uuid: controllerScope.customer.uuid
       }, filter));
     },
   });
