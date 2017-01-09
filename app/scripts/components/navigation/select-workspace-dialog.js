@@ -33,14 +33,12 @@ function SelectWorkspaceDialogController(
   ctrl.selectedProject = {};
   ctrl.currentUser = {};
   ctrl.canCreateOrganization = false;
-  ctrl.canCreateProject = false;
 
   ctrl.selectOrganization = function(organization) {
     ctrl.selectedOrganization = organization;
     if (organization.projects.length > 0) {
       ctrl.selectProject(organization.projects[0]);
     }
-    ctrl.canCreateProject = isOwnerOrStaff();
   };
 
   ctrl.selectProject = function(project) {
@@ -71,6 +69,7 @@ function SelectWorkspaceDialogController(
   };
 
   ctrl.createProject = function() {
+    $rootScope.$broadcast('adjustCurrentCustomer', ctrl.selectedOrganization);
     var promise = $state.go('project-create');
     return blockAndClose(promise);
   };
@@ -81,22 +80,6 @@ function SelectWorkspaceDialogController(
       ctrl.loadingState = false;
       ctrl.close();
     });
-  }
-
-  function isOwnerOrStaff() {
-    if (!ctrl.selectedOrganization) {
-      return false;
-    }
-    if (ctrl.currentUser.is_staff) {
-      return true;
-    }
-    var users = ctrl.selectedOrganization.owners;
-    for (var i = 0; i < users.length; i++) {
-      if (ctrl.currentUser.uuid === users[i].uuid) {
-        return true;
-      }
-    }
-    return false;
   }
 
   function loadInitial() {
@@ -116,16 +99,17 @@ function SelectWorkspaceDialogController(
       }),
 
       customersService.getAll({
-        field: ['name', 'uuid', 'projects', 'owners', 'quotas']
+        field: ['name', 'uuid', 'projects', 'owners', 'quotas', 'abbreviation']
       }).then(function(organizations) {
         ctrl.organizations = ctrl.organizations.concat(organizations.filter(function(organization) {
           return organization.uuid !== ctrl.selectedOrganization.uuid;
         }));
+
+        angular.forEach(ctrl.organizations, organization => {
+          organization.ownerOrStaff = customersService.checkCustomerUser(organization, ctrl.currentUser);
+        });
       })
-    ]).then(function() {
-      ctrl.canCreateProject = isOwnerOrStaff();
-      return true;
-    });
+    ]);
   }
 
   ctrl.loadingOrganizations = true;

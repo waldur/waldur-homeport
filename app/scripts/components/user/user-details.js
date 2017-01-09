@@ -61,7 +61,7 @@ function UserDetailsController($scope, $state, $stateParams, usersService,
         icon: 'fa-arrow-left',
         action: stateUtilsService.goBack
       };
-    } else if (currentStateService.getStaffOwnerManager()) {
+    } else if (currentStateService.getOwnerOrStaff()) {
       dashboardTab = {
         label: 'Back to organization',
         icon: 'fa-arrow-left',
@@ -100,6 +100,6 @@ function UserDetailsController($scope, $state, $stateParams, usersService,
     });
   }
   $scope.$on('hasCustomer', updateSidebar);
-  $scope.$on('staffOwnerManager', updateSidebar);
+  $scope.$on('ownerOrStaff', updateSidebar);
   updateSidebar();
 }

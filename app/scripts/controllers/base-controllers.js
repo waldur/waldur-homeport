@@ -260,7 +260,7 @@
         authService.signout();
         currentStateService.isCustomerDefined = false;
         currentStateService.setHasCustomer(undefined);
-        currentStateService.setStaffOwnerManager(undefined);
+        currentStateService.setOwnerOrStaff(undefined);
         $rootScope.$broadcast('abortRequests');
         $state.go('login');
       },
