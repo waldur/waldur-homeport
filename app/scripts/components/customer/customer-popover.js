@@ -19,6 +19,7 @@ export default function customerPopover() {
 class CustomerPopoverController {
   constructor(customersService) {
     this.customersService = customersService;
+    this.paymentDetails = this.resolve.paymentDetails;
     this.init();
   }
 
