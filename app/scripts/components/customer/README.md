@@ -1,12 +1,10 @@
-#### customerUsersDetailsList
-Component is used to render users list for selected customer, 
-with following fields exposed:
+# Customer module
 
-+ Full name or username
-+ email
-+ civil_number
-+ phone_number
-+ preferred_language
-+ competence
-+ job_title
+### Components
 
+* **customerEvents**  — renders customer's events list.
+* **customerIssues**  — renders customer's issues list.
+* **customerPopover** — renders customer's details.
+  It is used in issueRegistration component.
+* **customerUsersDetailsList** — renders detailed list of users connected to customer.
+  It is used in customerPopover component.
