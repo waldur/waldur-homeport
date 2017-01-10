@@ -64,12 +64,17 @@ function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
     order: [
       ...DEFAULT_RESOURCE_TABS.order,
       'networks',
+      'security_groups',
     ],
     options: angular.merge({}, DEFAULT_RESOURCE_TABS.options, {
       networks: {
         heading: 'Networks',
         component: 'openstackTenantNetworks'
       },
+      security_groups: {
+        heading: 'Security groups',
+        component: 'openstackSecurityGroupsList'
+      }
     })
   });
 }
