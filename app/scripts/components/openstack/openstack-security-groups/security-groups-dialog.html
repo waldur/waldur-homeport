@@ -22,7 +22,7 @@
                 </td>
                 <td>{{ rule.protocol | uppercase }}</td>
                 <td>
-                    <span ng-bind-html="$ctrl.formatPortRange(rule)"></span>
+                    {{ rule | securityGroupRulePortRange }}
                 </td>
                 <td>{{ rule.cidr }} (CIDR)</td>
             </tr>

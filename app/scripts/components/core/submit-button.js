@@ -1,4 +1,5 @@
-export default function submitButton() {
+// @ngInject
+export default function submitButton($q) {
   return {
     restrict: 'A',
     scope: {
@@ -10,7 +11,7 @@ export default function submitButton() {
       });
       function click() {
         element.addClass('disabled').addClass('button-spinner');
-        scope.submit().finally(function() {
+        $q.when(scope.submit()).finally(function() {
           element.removeClass('disabled').removeClass('button-spinner');
         });
       }
