@@ -29,6 +29,7 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
       'pull',
       'change_package',
       'create_network',
+      'create_security_group',
       'destroy'
     ],
     options: {
@@ -51,6 +52,15 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
         enabled: true,
         type: 'form',
         component: 'openstackTenantChangePackageDialog',
+        dialogSize: 'lg'
+      },
+      create_security_group: {
+        title: 'Create security group',
+        fields: {
+          rules: {
+            component: 'securityGroupRuleEditor'
+          }
+        },
         dialogSize: 'lg'
       }
     },

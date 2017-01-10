@@ -26,7 +26,10 @@ function ActionDialogController(
           $scope.form[name] = field.default_value;
         }
         if (field.resource_default_value) {
-          $scope.form[name] = actionUtilsService.formatChoices(field, $scope.resource[name]);
+          $scope.form[name] = $scope.resource[name];
+        }
+        if (field.type === 'multiselect') {
+          $scope.form[name] = actionUtilsService.formatChoices(field, $scope.form[name]);
         }
         if ($scope.action.name === 'edit') {
           $scope.form[name] = $scope.resource[name];
@@ -44,12 +47,19 @@ function ActionDialogController(
         return $q.reject();
       }
       var fields = $scope.action.fields;
-      var form = resourcesService.$create($scope.action.url);
-      for (var name in fields) {
-        if ($scope.form[name] != null) {
-          var field = fields[name];
-          var serializer = field.serializer || angular.identity;
-          form[name] = serializer($scope.form[name], field);
+      if (!$scope.action.url) {
+        $scope.action.url = $scope.resource.url + $scope.action.name + '/';
+      }
+      var form = {};
+      if ($scope.action.serializer) {
+        form = $scope.action.serializer($scope.form);
+      } else {
+        for (var name in fields) {
+          if ($scope.form[name] != null) {
+            var field = fields[name];
+            var serializer = field.serializer || angular.identity;
+            form[name] = serializer($scope.form[name], field);
+          }
         }
       }
 
@@ -62,7 +72,7 @@ function ActionDialogController(
         url = $scope.resource.url;
         promise = $http.put(url, form);
       } else {
-        promise = form.$save();
+        promise = $http.post($scope.action.url, form);
       }
 
       return promise.then(function() {
