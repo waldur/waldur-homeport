@@ -3,8 +3,8 @@ export const customerUsersDetailsList = {
   controllerAs: 'ListController',
   templateUrl: 'views/partials/filtered-list.html',
   bindings: {
-    customer: '=',
-    options: '='
+    customer: '<',
+    options: '<'
   }
 };
 
@@ -81,11 +81,9 @@ function customerUsersDetailsListController(
         ],
       };
     },
-    getList: function(filter) {
-      return this._super(angular.extend({
-        customer_uuid: controllerScope.customer.uuid
-      }, filter));
-    },
+    getFilter: function() {
+      return { customer_uuid: controllerScope.customer.uuid };
+    }
   });
 
   controllerScope.__proto__ = new UsersController();
