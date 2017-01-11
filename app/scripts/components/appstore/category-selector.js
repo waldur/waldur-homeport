@@ -29,7 +29,7 @@ function AppStoreCategorySelectorController(
     vm.selectProject = vm.resolve.selectProject;
 
     var offerings = ENV.offerings.filter(item =>
-      !item.requireStaffOwnerManager || currentStateService.getStaffOwnerManager());
+      !item.requireOwnerOrStaff || currentStateService.getOwnerOrStaff());
 
     angular.forEach(offerings, function(offering) {
       if (ENV.futureCategories.indexOf(offering.key) !== -1) {

@@ -76,7 +76,7 @@ function AppStoreController(
         return;
       }
 
-      if (category.requireStaffOwnerManager && !currentStateService.getStaffOwnerManager()) {
+      if (category.requireOwnerOrStaff && !currentStateService.getOwnerOrStaff()) {
         $state.go('errorPage.notFound');
         return;
       }

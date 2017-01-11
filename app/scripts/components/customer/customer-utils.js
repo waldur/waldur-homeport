@@ -17,21 +17,9 @@ export class CustomerUtilsService {
     this.$state = $state;
   }
 
-  isStaffOwnerManager() {
-    return this.customersService.isOwnerOrStaff().then(response => {
-      return response || this.projectPermissionsService.getList({
-        customer: this.currentStateService.getCustomerUuid(),
-        user: this.usersService.currentUser.uuid,
-        role: 'manager'
-      }).then(response => {
-        return response.length > 0;
-      });
-    });
-  }
-
   checkWorkspace() {
-    return this.isStaffOwnerManager().then(response => {
-      this.currentStateService.setStaffOwnerManager(response);
+    return this.customersService.isOwnerOrStaff().then(response => {
+      this.currentStateService.setOwnerOrStaff(response);
       if (!response) {
         this.$state.go('profile.details');
       }
@@ -70,8 +58,8 @@ export class CustomerUtilsService {
   getStoredCustomer() {
     const uuid = this.currentStateService.getCustomerUuid();
     return this.customersService.$get(uuid).then(customer => {
-      return this.isStaffOwnerManager().then(response => {
-        this.currentStateService.setStaffOwnerManager(response);
+      return this.customersService.isOwnerOrStaff().then(response => {
+        this.currentStateService.setOwnerOrStaff(response);
         this.$rootScope.$broadcast('adjustCurrentCustomer', customer);
         return customer;
       });

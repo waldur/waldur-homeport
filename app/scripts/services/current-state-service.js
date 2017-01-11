@@ -27,14 +27,14 @@
     vm.getHasCustomer = getHasCustomer;
     vm.setHasCustomer = setHasCustomer;
 
-    vm.getStaffOwnerManager = getStaffOwnerManager;
-    vm.setStaffOwnerManager = setStaffOwnerManager;
+    vm.getOwnerOrStaff = getOwnerOrStaff;
+    vm.setOwnerOrStaff = setOwnerOrStaff;
 
     // private variables:
     var customer = null;
     var project = null;
     var hasCustomer = undefined;
-    var staffOwnerManager = undefined;
+    var ownerOrStaff = undefined;
 
     function getHasCustomer() {
       return hasCustomer;
@@ -45,13 +45,13 @@
       $rootScope.$broadcast('hasCustomer', value);
     }
 
-    function getStaffOwnerManager() {
-      return staffOwnerManager;
+    function getOwnerOrStaff() {
+      return ownerOrStaff;
     }
 
-    function setStaffOwnerManager(value) {
-      staffOwnerManager = value;
-      $rootScope.$broadcast('staffOwnerManager', value);
+    function setOwnerOrStaff(value) {
+      ownerOrStaff = value;
+      $rootScope.$broadcast('ownerOrStaff', value);
     }
 
     function getCustomer() {
