@@ -29,6 +29,7 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
       'pull',
       'change_package',
       'create_network',
+      'create_security_group',
       'destroy'
     ],
     options: {
@@ -52,6 +53,15 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
         type: 'form',
         component: 'openstackTenantChangePackageDialog',
         dialogSize: 'lg'
+      },
+      create_security_group: {
+        title: 'Create security group',
+        fields: {
+          rules: {
+            component: 'securityGroupRuleEditor'
+          }
+        },
+        dialogSize: 'lg'
       }
     },
     delete_message: 'All tenant resources will be deleted.'
@@ -64,12 +74,17 @@ function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
     order: [
       ...DEFAULT_RESOURCE_TABS.order,
       'networks',
+      'security_groups',
     ],
     options: angular.merge({}, DEFAULT_RESOURCE_TABS.options, {
       networks: {
         heading: 'Networks',
         component: 'openstackTenantNetworks'
       },
+      security_groups: {
+        heading: 'Security groups',
+        component: 'openstackSecurityGroupsList'
+      }
     })
   });
 }

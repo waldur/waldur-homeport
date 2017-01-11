@@ -14,7 +14,7 @@
                         <tbody>
                             <tr>
                                 <td class="col-md-3"><strong>Organization type</strong></td>
-                                <td class="col-md-9">{{ $ctrl.customer.type || 'N/A' }}</td>
+                                <td class="col-md-9">{{ $ctrl.paymentDetails.type || 'N/A' }}</td>
                             </tr>
                             <tr>
                                 <td><strong>Registration code</strong></td>
@@ -22,11 +22,15 @@
                             </tr>
                             <tr>
                                 <td><strong>Legal address</strong></td>
-                                <td>{{ $ctrl.customer.address || 'N/A' }}</td>
+                                <td>{{ $ctrl.paymentDetails.address || 'N/A' }}</td>
                             </tr>
                             <tr>
                                 <td><strong>Contact email</strong></td>
-                                <td>{{ $ctrl.customer.email || 'N/A' }}</td>
+                                <td>{{ $ctrl.paymentDetails.email || 'N/A' }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Phone</strong></td>
+                                <td>{{ $ctrl.paymentDetails.phone || 'N/A' }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -35,10 +39,10 @@
         </uib-tab>
         <uib-tab heading="Authorized personnel" index="'users'">
             <div class="panel-body m-l-n m-r-n" ng-if="active === 'users'">
-                <customer-users-list
-                    customer="$ctrl.customer"
-                    options="$ctrl.options">
-                </customer-users-list>
+                <customer-users-details-list
+                        customer="$ctrl.customer"
+                        options="$ctrl.options">
+                </customer-users-details-list>
             </div>
         </uib-tab>
     </uib-tabset>

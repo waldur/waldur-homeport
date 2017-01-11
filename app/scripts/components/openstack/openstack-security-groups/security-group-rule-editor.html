@@ -1,0 +1,59 @@
+<table class="table table-bordered">
+  <thead>
+    <tr>
+        <th>IP protocol</th>
+        <th>Source port</th>
+        <th>Destination port</th>
+        <th>Remote CIRD</th>
+        <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="rule in $ctrl.model[$ctrl.field.name]">
+      <td>
+        <select
+          ng-options="protocol.toUpperCase() for protocol in $ctrl.protocols"
+          ng-model="rule.protocol"
+          ng-change="$ctrl.selectProtocol(rule)"
+          class="form-control"></select>
+      </td>
+      <td>
+        <input
+          ng-model="rule.from_port"
+          type="number"
+          min="{{ $ctrl.getPortMin(rule) }}"
+          max="{{ $ctrl.getPortMax(rule) }}"
+          class="form-control"/>
+      </td>
+      <td>
+        <input
+          ng-model="rule.to_port"
+          type="number"
+          min="{{ $ctrl.getPortMin(rule) }}"
+          max="{{ $ctrl.getPortMax(rule) }}"
+          class="form-control"/>
+      </td>
+      <td>
+        <input
+          ng-model="rule.cidr"
+          class="form-control"
+          ng-pattern="$ctrl.cidrPattern"
+          placeholder="10.0.0.1/24"/>
+      </td>
+      <td>
+        <button
+          class="btn btn-danger btn-xs"
+          type="button">
+          <i class="fa fa-trash"></i> Delete
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<button
+  class="btn btn-primary btn-sm"
+  ng-click="$ctrl.addRule()"
+  type="button">
+  <i class="fa fa-plus"></i> Add rule
+</button>

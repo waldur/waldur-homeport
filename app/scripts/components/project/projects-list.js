@@ -67,6 +67,13 @@ function ProjectsListController(
           }
         },
         {
+          title: 'Description',
+          width: '200px',
+          render: function(row) {
+            return `<span class="elipsis" style="width: 150px;" uib-tooltip="${row.description}">${row.description}</span>`;
+          }
+        },
+        {
           title: 'Creation date',
           render: function(row) {
             return $filter('dateTime')(row.created);

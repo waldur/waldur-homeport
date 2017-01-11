@@ -47,12 +47,12 @@ function SelectWorkspaceDialogController(
 
   ctrl.gotoOrganization = function(organization) {
     $rootScope.$broadcast('adjustCurrentCustomer', organization);
-    var promise = $state.go('dashboard.index');
+    var promise = $state.go('dashboard.index', null, {reload: true});
     return blockAndClose(promise);
   };
 
   ctrl.gotoProject = function(project) {
-    var promise = $state.go('project.details', {uuid: project.uuid});
+    var promise = $state.go('project.details', {uuid: project.uuid}, {reload: true});
     return blockAndClose(promise);
   };
 

@@ -319,43 +319,5 @@ angular.module('ncsaas')
     userMandatoryFields: [
       'full_name',
       'email'
-    ],
-
-    dashboardQuotas: {
-      nc_app_count: {
-        title: 'Applications',
-        feature: 'apps'
-      },
-      nc_vm_count: {
-        title: 'Virtual machines',
-        feature: 'vms'
-      },
-      nc_private_cloud_count: {
-        title: 'Private clouds',
-        feature: 'private_clouds',
-      },
-      nc_storage_count: {
-        title: 'Storage',
-        feature: 'storage'
-      },
-      nc_user_count: {
-        title: 'Team size',
-        feature: 'users'
-      }
-  },
-
-  projectDashboardQuotas: [
-    'nc_app_count',
-    'nc_vm_count',
-    'nc_private_cloud_count',
-    'nc_storage_count'
-  ],
-
-  organizationDashboardQuotas: [
-    'nc_app_count',
-    'nc_vm_count',
-    'nc_private_cloud_count',
-    'nc_storage_count',
-    'nc_user_count'
-  ]
+    ]
 });
