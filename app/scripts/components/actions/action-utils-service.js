@@ -100,7 +100,9 @@ export default function actionUtilsService(
     var promise = (action.method === 'DELETE') ? $http.delete(action.url) : $http.post(action.url);
 
     function onSuccess(response) {
-      if (response.status === 204) {
+      if (response.status === 201 || response.status === 202) {
+        vm.handleActionSuccess(action);
+      } else if (response.status === 204) {
         ncUtilsFlash.success('Resource has been deleted');
         controller.afterInstanceRemove(resource);
       } else {

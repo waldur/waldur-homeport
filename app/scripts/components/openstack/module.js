@@ -4,7 +4,8 @@ import openstackInstanceModule from './openstack-instance/module';
 import openstackVolumeModule from './openstack-volume/module';
 import openstackBackupModule from './openstack-backup/module';
 import openstackNetworkModule from './openstack-network/module';
-import securityGroupsModule from './openstack-security-groups/module';
+import openstackSecurityGroupsModule from './openstack-security-groups/module';
+import openstackFloatingIpsModule from './openstack-floating-ips/module';
 
 export default module => {
   module.service('OpenStackSummaryService', OpenStackSummaryService);
@@ -13,5 +14,6 @@ export default module => {
   openstackVolumeModule(module);
   openstackBackupModule(module);
   openstackNetworkModule(module);
-  securityGroupsModule(module);
+  openstackSecurityGroupsModule(module);
+  openstackFloatingIpsModule(module);
 };
