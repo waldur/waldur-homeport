@@ -30,6 +30,8 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
       'change_package',
       'create_network',
       'create_security_group',
+      'pull_floating_ips',
+      'create_floating_ip',
       'destroy'
     ],
     options: {
@@ -62,7 +64,13 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
           }
         },
         dialogSize: 'lg'
-      }
+      },
+      pull_floating_ips: {
+        title: 'Pull floating IPs'
+      },
+      create_floating_ip: {
+        title: 'Create floating IP'
+      },
     },
     delete_message: 'All tenant resources will be deleted.'
   });
@@ -75,6 +83,7 @@ function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
       ...DEFAULT_RESOURCE_TABS.order,
       'networks',
       'security_groups',
+      'floating_ips',
     ],
     options: angular.merge({}, DEFAULT_RESOURCE_TABS.options, {
       networks: {
@@ -84,7 +93,11 @@ function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
       security_groups: {
         heading: 'Security groups',
         component: 'openstackSecurityGroupsList'
-      }
+      },
+      floating_ips: {
+        heading: 'Floating IPs',
+        component: 'openstackFloatingIpsList'
+      },
     })
   });
 }
