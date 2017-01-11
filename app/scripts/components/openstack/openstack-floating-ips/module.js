@@ -8,7 +8,7 @@ export default module => {
 };
 
 // @ngInject
-function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
+function actionConfig(ActionConfigurationProvider) {
   ActionConfigurationProvider.register('OpenStack.FloatingIP', {
     order: [
       'pull',
