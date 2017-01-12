@@ -1,8 +1,10 @@
 import openstackInstanceSummary from './openstack-instance-summary';
 import OpenStackInstanceConfig from './openstack-instance-config';
+import openstackInstanceFloatingIp from './openstack-instance-floating-ip';
 
 export default module => {
   module.directive('openstackInstanceSummary', openstackInstanceSummary);
+  module.component('openstackInstanceFloatingIp', openstackInstanceFloatingIp);
   module.config(fieldsConfig);
   module.config(actionConfig);
   module.config(stateConfig);

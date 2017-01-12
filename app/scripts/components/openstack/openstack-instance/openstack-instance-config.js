@@ -7,7 +7,6 @@ export default {
     'data_volume_size',
     'ssh_public_key',
     'floating_ip',
-    'allocate_floating_ip',
     'description',
     'user_data'
   ],
@@ -107,11 +106,8 @@ export default {
           label: 'Address'
         }
       ],
+      component: 'openstackInstanceFloatingIp',
       formatter: floatingIPFormatter
-    },
-    allocate_floating_ip: {
-      type: 'boolean',
-      label: 'Allocate and assign external IP'
     },
     description: {
       type: 'text',
