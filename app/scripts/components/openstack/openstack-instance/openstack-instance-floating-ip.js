@@ -3,8 +3,8 @@ import template from './openstack-instance-floating-ip.html';
 export default {
   template: template,
   bindings: {
-    field: '=',
-    model: '='
+    field: '<',
+    model: '<'
   },
   controller: class OpenstackInstanceFloatingIp {
     // @ngInject
@@ -34,9 +34,8 @@ export default {
     }
 
     selectModelHandler() {
-      this.selectList.forEach(item => {
-        item.modelName && delete this.model[item.modelName];
-      });
+      delete this.model[this.field.name];
+      delete this.model['allocate_floating_ip'];
 
       if (this.selectModel.modelName) {
         this.model[this.selectModel.modelName] = this.selectModel.model;
