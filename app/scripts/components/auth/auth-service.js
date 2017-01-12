@@ -7,7 +7,6 @@ export default function authService(
   vm.signup = signup;
   vm.activate = activate;
   vm.logout = logout;
-  vm.signout = signout;
   vm.isAuthenticated = isAuthenticated;
   vm.authenticate = authenticate;
   vm.getDownloadLink = getDownloadLink;
@@ -39,20 +38,17 @@ export default function authService(
   }
 
   function logout() {
-    vm.signout();
-    currentStateService.isCustomerDefined = false;
-    currentStateService.setHasCustomer(undefined);
-    currentStateService.setOwnerOrStaff(undefined);
-    $rootScope.$broadcast('abortRequests');
-    $state.go('login');
-  }
-
-  function signout() {
+    $rootScope.$broadcast('logoutStart');
     delete $http.defaults.headers.common.Authorization;
     vm.user = {isAuthenticated: false};
     usersService.currentUser = null;
     usersService.cleanAllCache();
     $auth.logout();
+    currentStateService.isCustomerDefined = false;
+    currentStateService.setHasCustomer(undefined);
+    currentStateService.setOwnerOrStaff(undefined);
+    $rootScope.$broadcast('abortRequests');
+    $state.go('login');
   }
 
   function setAuthHeader(token) {

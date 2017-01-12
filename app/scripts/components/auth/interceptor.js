@@ -1,6 +1,7 @@
 export default module => {
   module.config(attachHttpInterceptor);
   module.run(requireAuth);
+  module.run(initAuthToken);
 };
 
 // @ngInject
@@ -34,4 +35,13 @@ function requireAuth($rootScope, $state, $auth) {
       $state.go('login');
     }
   });
+}
+
+// @ngInject
+function initAuthToken($window, $http) {
+  // When application starts up, we need to inject auth token if it exists
+  const token = $window.localStorage['satellizer_token'];
+  if (token) {
+    $http.defaults.headers.common.Authorization = 'Token ' + token;
+  }
 }
