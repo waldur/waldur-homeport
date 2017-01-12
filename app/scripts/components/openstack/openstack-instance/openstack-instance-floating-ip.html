@@ -1,9 +1,8 @@
 <select
-    ng-options="choice as choice.address for choice in $ctrl.field.choices"
-    ng-model="$ctrl.model[$ctrl.field.name]"
-    ng-if="$ctrl.field.choices && $ctrl.field.choices.length !== 0"
+    ng-options="choice as choice.label for choice in $ctrl.selectList"
+    ng-model="$ctrl.selectModel"
+    ng-init="$ctrl.selectModel = $ctrl.selectList[0]"
     class="form-control"
-    ng-change="$ctrl.selected($ctrl.model[$ctrl.field.name])"
+    ng-change="$ctrl.selectModelHandler()"
     ng-required="$ctrl.field.required">
-    <option value="">Skip assignment</option>
 </select>
