@@ -160,7 +160,7 @@
           uuid: this.currentProject.uuid
         });
       },
-      getCategoryState() {
+      getCategoryState: function() {
         if (this.category === ENV.VirtualMachines) {
           return 'appstore.vms';
         } else if (this.category === ENV.PrivateClouds) {
