@@ -3,6 +3,7 @@ export default function premiumSupportRoute($stateProvider) {
   $stateProvider
     .state('appstore.premiumSupport', {
       url: 'support/',
+      parent: 'project',
       template: '<premium-support-provision></premium-support-provision>',
       data: {
         pageTitle: 'Premium support',

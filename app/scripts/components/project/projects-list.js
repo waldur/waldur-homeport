@@ -25,8 +25,10 @@ function ProjectsListController(
   var Controller = baseControllerListClass.extend({
     init: function() {
       this.service = projectsService;
-      this._super();
-      this.activate();
+      var fn = this._super.bind(this);
+      this.activate().then(function() {
+        fn();
+      });
       $scope.$on('currentCustomerUpdated', function() {
         $timeout(function() {
           controllerScope.resetCache();
@@ -36,7 +38,7 @@ function ProjectsListController(
     activate: function() {
       var vm = this;
       vm.loading = true;
-      $q.all([
+      return $q.all([
         currentStateService.getCustomer().then(function(customer) {
           vm.currentCustomer = customer;
         }),
@@ -54,6 +56,11 @@ function ProjectsListController(
           tableActions: vm.getTableActions()
         };
       });
+    },
+    getFilter: function() {
+      return {
+        customer: controllerScope.currentCustomer.uuid
+      };
     },
     getColumns: function() {
       var columns = [
@@ -136,7 +143,9 @@ function ProjectsListController(
         {
           name: '<i class="fa fa-plus"></i> Add project',
           callback: function() {
-            $state.go('project-create');
+            $state.go('organization.createProject', {
+              uuid: vm.currentCustomer.uuid
+            });
           },
           disabled: !ownerOrStaff || quotaReached,
           titleAttr: title

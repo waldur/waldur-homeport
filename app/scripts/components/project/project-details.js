@@ -94,9 +94,6 @@ export default function ProjectDetailsController(
         label: 'Manage'
       }
     ];
-    $scope.$on('currentProjectUpdated', function() {
-      refreshProject();
-    });
     $scope.$on('authService:signin', function() {
       refreshProject();
     });

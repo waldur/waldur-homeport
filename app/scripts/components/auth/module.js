@@ -5,6 +5,7 @@ import authInit from './auth-init';
 import authActivation from './auth-activation';
 import authRoutes from './routes';
 import { initAuthToken, initAuthProvider } from './auth-config';
+import interceptorModule from './interceptor';
 
 export default module => {
   module.service('authService', authService);
@@ -15,4 +16,5 @@ export default module => {
   module.config(authRoutes);
   module.config(initAuthToken);
   module.config(initAuthProvider);
+  interceptorModule(module);
 };

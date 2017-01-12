@@ -9,7 +9,7 @@
         <div class="form-group" ng-if="DialogCtrl.selectProject">
             <label class="control-label">Projects</label>
             <select id="action-{{ name }}"
-                ng-options="project.uuid as project.name for project in DialogCtrl.projects"
+                ng-options="project as project.name for project in DialogCtrl.projects"
                 ng-model="DialogCtrl.selectedProject"
                 class="form-control"
                 required="">

@@ -3,11 +3,15 @@ import template from './nc-header.html';
 export default {
   template: template,
   controller: class AppHeader {
-    constructor($state, usersService, $rootScope) {
+    constructor($state, usersService, authService) {
       // @ngInject
       this.$state = $state;
       this.usersService = usersService;
-      this.logout = $rootScope.logout;
+      this.authService = authService;
+    }
+
+    logout() {
+      this.authService.logout();
     }
 
     gotoSupport() {

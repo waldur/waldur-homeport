@@ -73,7 +73,7 @@ function AuthLoginController(ENV, $q, $sce, $scope, $state, authService,
       return authService.authenticate(provider).then(vm.loginSuccess.bind(vm), vm.loginError.bind(vm));
     },
     loginSuccess: function() {
-      return $state.go('dashboard.index', {}, {reload: true});
+      return $state.go('profile.details', {}, {reload: true});
     },
     loginError: function(response) {
       this.errors = [];
