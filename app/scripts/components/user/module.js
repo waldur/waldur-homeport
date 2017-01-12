@@ -15,8 +15,10 @@ import userPopover from './user-popover';
 import userPopoverTable from './user-popover-table';
 import { stateUtilsService, attachStateUtils } from './utils';
 import userRoutes from './routes';
+import userStatusLabel from './user-status-label';
 
 export default module => {
+  module.component('userStatusLabel', userStatusLabel);
   module.directive('hookDetails', hookDetails);
   module.filter('formatEventTitle', formatEventTitle);
   module.directive('hookList', hookList);
