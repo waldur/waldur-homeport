@@ -18,12 +18,19 @@ export default function userEdit() {
   };
 }
 
+const USER_STATUS_LABELS = {
+  support: 'Support user',
+  staff: 'Staff',
+  regularUser: 'Regular user',
+  staffAndSupport: 'Staff and Support user'
+};
 
 // @ngInject
 class UserEditController {
   constructor($q, $filter) {
     this.$q = $q;
     this.$filter = $filter;
+    this.userStatusLabel = this.getUserStatusLabel();
   }
   save() {
     if (this.UserForm.$invalid) {
@@ -31,6 +38,19 @@ class UserEditController {
     }
     return this.onSave();
   }
+
+  getUserStatusLabel() {
+    let userStatus = USER_STATUS_LABELS.regularUser;
+    if (this.user.is_staff && !this.user.is_support) {
+      userStatus = USER_STATUS_LABELS.staff;
+    } else if (this.user.is_staff && this.user.is_support) {
+      userStatus = USER_STATUS_LABELS.staffAndSupport;
+    } else if (!this.user.is_staff && this.user.is_support) {
+      userStatus = USER_STATUS_LABELS.support;
+    }
+    return userStatus;
+  }
+
   getRegistrationMethod() {
     if (!this.user.registration_method) {
       return 'Default';

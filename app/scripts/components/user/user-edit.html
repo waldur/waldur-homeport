@@ -45,8 +45,9 @@
                 User status
             </label>
             <div class="col-sm-9 col-md-8">
-                <p class="form-control-static" ng-if="::$ctrl.user.is_staff">Staff</p>
-                <p class="form-control-static" ng-if="::!$ctrl.user.is_staff">User</p>
+                <p class="form-control-static">
+                    {{::$ctrl.userStatusLabel}}
+                </p>
             </div>
         </div>
 
