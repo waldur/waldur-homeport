@@ -7,12 +7,7 @@
                     <field-label field="field"></field-label>
                 </label>
             </div>
-            <div class="col-sm-7" ng-if="field.customDirective">
-                <openstack-instance-floating-ip
-                    field="field"
-                    model="$ctrl.model"></openstack-instance-floating-ip>
-            </div>
-            <div class="col-sm-6" ng-if="!field.customDirective">
+            <div class="col-sm-6">
                 <appstore-field field="field" model="$ctrl.model"></appstore-field>
                 <appstore-field-errors field="field" errors="$ctrl.errors"></appstore-field-errors>
             </div>

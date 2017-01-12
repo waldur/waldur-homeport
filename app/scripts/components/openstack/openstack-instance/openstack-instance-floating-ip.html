@@ -1,18 +1,9 @@
-<div>
-    <div class="btn-group m-b-xs">
-        <label class="btn btn-white"
-               ng-model="$ctrl.selected"
-               uib-btn-radio="'allocate_floating_ip'">Auto-assign</label>
-        <label class="btn btn-white"
-               ng-model="$ctrl.selected"
-               uib-btn-radio="'skip'">Skip assignment</label>
-        <label class="btn btn-white"
-               ng-model="$ctrl.selected"
-               uib-btn-radio="'floating_ip'">Select IP</label>
-    </div>
-    <div class="m-l-xs m-r-md">
-        <select class="form-control">
-            <option value="">Select an option</option>
-        </select>
-    </div>
-</div>
+<select
+    ng-options="choice as choice.address for choice in $ctrl.field.choices"
+    ng-model="$ctrl.model[$ctrl.field.name]"
+    ng-if="$ctrl.field.choices && $ctrl.field.choices.length !== 0"
+    class="form-control"
+    ng-change="$ctrl.selected($ctrl.model[$ctrl.field.name])"
+    ng-required="$ctrl.field.required">
+    <option value="">Skip assignment</option>
+</select>

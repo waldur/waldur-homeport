@@ -366,6 +366,11 @@ function AppStoreController(
       }
       return this._super();
     },
+    beforeSave: function() {
+      if (this.instance.allocate_floating_ip) {
+        delete this.instance.floating_ip;
+      }
+    },
     saveInstance: function() {
       var resourceUrl = this.getResourceUrl();
       var instance = servicesService.$create(resourceUrl);
