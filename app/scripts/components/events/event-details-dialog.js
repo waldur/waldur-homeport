@@ -16,7 +16,5 @@ export default function eventDetailsDialog() {
 }
 
 // @ngInject
-function EventDetailsDialogController($scope) {
-  this.event = this.resolve.event;
-  $scope.$on('$stateChangeSuccess', () => this.close());
+function EventDetailsDialogController() {
 }
