@@ -2,7 +2,7 @@ import issuesService from './issues-service';
 import issueUsersService from './issue-users';
 import issueCommentsService from './issue-comments-service';
 import issueDetail from './issue-detail';
-import issueCommentsList from './issue-comments-list';
+import { issueCommentsList } from './issue-comments-list';
 import issueCommentsForm from './issue-comments-form';
 import issuesList from './issues-list';
 import issueRoutes from './routes';
@@ -24,7 +24,7 @@ export default module => {
   module.service('issueCommentsService', issueCommentsService);
   module.directive('issuesList', issuesList);
   module.directive('issueDetail', issueDetail);
-  module.directive('issueCommentsList', issueCommentsList);
+  module.component('issueCommentsList', issueCommentsList);
   module.directive('issueCommentsForm', issueCommentsForm);
   module.component('issuesWorkspace', issuesWorkspace);
   module.directive('issuesDashboard', issuesDashboard);

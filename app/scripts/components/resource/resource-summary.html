@@ -5,6 +5,10 @@
     <security-group-summary resource="$ctrl.resource"></security-group-summary>
   </div>
 
+  <div ng-switch-when="OpenStack.FloatingIP">
+    <openstack-floating-ip-summary resource="$ctrl.resource"></openstack-floating-ip-summary>
+  </div>
+
   <div ng-switch-default>
 
     <div class="m-b-xs" ng-if="::$ctrl.resource.summary">
