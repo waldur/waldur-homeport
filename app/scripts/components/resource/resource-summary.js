@@ -23,6 +23,8 @@ const resourceSummary = {
 
       resource.isVolume = resource.resource_type.toLowerCase().indexOf('volume') !== -1;
       resource.isBackup = resource.resource_type.toLowerCase().indexOf('backup') !== -1;
+      resource.isNetwork = resource.resource_type.toLowerCase().indexOf('network') !== -1;
+      resource.isSubnet = resource.resource_type.toLowerCase().indexOf('subnet') !== -1;
       resource.label = resource.isBackup ? 'Instance' : 'Attached to';
       resource.summaryLabel = resource.isVolume ? 'Size' : 'Summary';
       this.resourceUtils.setAccessInfo(resource);
@@ -31,6 +33,15 @@ const resourceSummary = {
       resource.summary = this.resourceUtils.getSummary(resource);
       resource.uptime = this.resourceUtils.getUptime(resource);
       resource.error_message = resource.error_message || this.ENV.defaultErrorMessage;
+
+      if (resource.isNetwork || resource.isSubnet) {
+        resource.tenantUUID = this.ncUtils.getUUID(resource.tenant);
+      }
+
+      if (resource.isSubnet) {
+        resource.networkUUID = this.ncUtils.getUUID(resource.network);
+        resource.allocationPools = this.resourceUtils.formatAllocationPools(resource.allocation_pools);
+      }
 
       if (resource.instance) {
         resource.instance_uuid = this.ncUtils.getUUID(resource.instance);

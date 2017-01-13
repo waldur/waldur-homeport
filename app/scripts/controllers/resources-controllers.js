@@ -176,7 +176,8 @@
         'uuid', 'url', 'name', 'state', 'runtime_state', 'created', 'error_message',
         'resource_type', 'latitude', 'longitude',
         'service_name', 'service_uuid', 'customer', 'service_settings_state',
-        'service_settings_error_message', 'service_settings_uuid', 'security_groups'
+        'service_settings_error_message', 'service_settings_uuid', 'security_groups',
+        'subnets', 'cidr'
       ],
       getMarkers: function() {
         var items = this.controllerScope.list.filter(function hasCoordinates(item) {
