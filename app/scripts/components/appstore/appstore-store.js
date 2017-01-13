@@ -69,6 +69,9 @@ function AppStoreController(
       });
       currentStateService.getCustomer().then(function(response) {
         vm.currentCustomer = response;
+        if (ncUtils.isCustomerQuotaReached(vm.currentCustomer, 'resource')) {
+          $state.go('errorPage.limitQuota');
+        }
       });
     },
     setCategory: function(category) {

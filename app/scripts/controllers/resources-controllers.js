@@ -58,14 +58,7 @@
               title: 'Name',
               className: 'all',
               render: function(row) {
-                var img = '<img src="{src}" title="{title}" class="img-xs m-r-xs">'
-                      .replace('{src}', resourceUtils.getIcon(row))
-                      .replace('{title}', row.resource_type);
-                var href = $state.href('resources.details', {
-                  uuid: row.uuid,
-                  resource_type: row.resource_type
-                });
-                return ncUtils.renderLink(href, img + ' ' + row.name);
+                return vm.renderResourceName(row);
               }
             },
             {
@@ -79,12 +72,7 @@
               title: 'State',
               className: 'min-tablet-l',
               render: function(row) {
-                var uuids = vm.list.map(function(item) {
-                  return item.uuid;
-                });
-                var index = uuids.indexOf(row.uuid);
-                return '<resource-state resource="controller.list[{index}]"></resource-state>'
-                  .replace('{index}', index);
+                return vm.renderResourceState(row);
               }
             }
           ],
@@ -99,6 +87,24 @@
             return '<action-button-resource button-controller="controller" button-model="controller.list[' + index + ']"/>';
           }
         };
+      },
+      renderResourceName: function(row) {
+        var img = '<img src="{src}" title="{title}" class="img-xs m-r-xs">'
+          .replace('{src}', resourceUtils.getIcon(row))
+          .replace('{title}', row.resource_type);
+        var href = $state.href('resources.details', {
+          uuid: row.uuid,
+          resource_type: row.resource_type
+        });
+        return ncUtils.renderLink(href, img + ' ' + row.name);
+      },
+      renderResourceState: function(row) {
+        var uuids = this.list.map(function(item) {
+          return item.uuid;
+        });
+        var index = uuids.indexOf(row.uuid);
+        return '<resource-state resource="controller.list[{index}]"></resource-state>'
+          .replace('{index}', index);
       },
       getTableActions: function() {
         var actions = [];
@@ -156,14 +162,19 @@
         return 'Create';
       },
       gotoAppstore: function() {
+        $state.go(this.getCategoryState(), {
+          uuid: this.currentProject.uuid
+        });
+      },
+      getCategoryState: function() {
         if (this.category === ENV.VirtualMachines) {
-          $state.go('appstore.vms');
+          return 'appstore.vms';
         } else if (this.category === ENV.PrivateClouds) {
-          $state.go('appstore.private_clouds');
+          return 'appstore.private_clouds';
         } else if (this.category === ENV.Applications) {
-          $state.go('appstore.apps');
+          return 'appstore.apps';
         } else if (this.category === ENV.Storages) {
-          $state.go('appstore.storages');
+          return 'appstore.storages';
         }
       },
       getMapAction: function() {

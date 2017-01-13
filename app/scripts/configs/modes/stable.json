@@ -1,5 +1,4 @@
 {
-  "modeName": "modePortal",
   "toBeFeatures": [
     "localSignup",
     "localSignin",

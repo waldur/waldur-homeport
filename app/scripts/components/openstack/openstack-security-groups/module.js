@@ -1,14 +1,18 @@
 import openstackSecurityGroupsService from './security-groups-service';
 import openstackSecurityGroupsList from './security-groups-list';
+import { securityGroupRulesList } from './security-group-rules-list';
 import securityGroupsLink from './security-groups-link';
 import securityGroupsDialog from './security-groups-dialog';
 import { securityGroupRulePort, securityGroupRulePortRange } from './filters';
 import { securityGroupRuleEditor } from './security-group-rule-editor';
+import { securityGroupSummary } from './security-group-summary';
 
 export default module => {
   module.service('openstackSecurityGroupsService', openstackSecurityGroupsService);
   module.component('openstackSecurityGroupsList', openstackSecurityGroupsList);
+  module.component('securityGroupRulesList', securityGroupRulesList);
   module.component('securityGroupRuleEditor', securityGroupRuleEditor);
+  module.component('securityGroupSummary', securityGroupSummary);
   module.directive('securityGroupsLink', securityGroupsLink);
   module.directive('securityGroupsDialog', securityGroupsDialog);
   module.filter('securityGroupRulePort', securityGroupRulePort);
@@ -24,7 +28,12 @@ function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
       ...DEFAULT_RESOURCE_TABS.order,
       'rules',
     ],
-    options: DEFAULT_RESOURCE_TABS.options
+    options: angular.merge({
+      rules: {
+        heading: 'Rules',
+        component: 'securityGroupRulesList'
+      }
+    }, DEFAULT_RESOURCE_TABS.options)
   });
 }
 

@@ -69,7 +69,7 @@ export default function resourceUtils(ncUtils, ncServiceUtils, authService, $fil
     getIcon: function(item) {
       var type = item.resource_type || item.type;
       var service_type = ncServiceUtils.getTypeDisplay(type.split('.')[0]);
-      return '/static/images/appstore/icon-' + service_type.toLowerCase() + '.png';
+      return 'static/images/appstore/icon-' + service_type.toLowerCase() + '.png';
     },
     getResourceState: function(resource) {
       let resourceType = this.formatResourceType(resource);

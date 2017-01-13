@@ -16,9 +16,6 @@ export default function providerDetails() {
 }
 
 // @ngInject
-function ProviderDetailsDialog($scope) {
+function ProviderDetailsDialog() {
   this.provider = this.resolve.provider;
-  $scope.$on('$stateChangeSuccess', function() {
-    $scope.close();
-  });
 }

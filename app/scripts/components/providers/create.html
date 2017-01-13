@@ -13,11 +13,11 @@
                 ng-model="ServiceAdd.serviceChoice"
                 theme="bootstrap">
                 <ui-select-match placeholder="Select provider type...">
-                    <img width="25" ng-src="/static/images/appstore/icon-{{ $select.selected.name.toLowerCase() }}.png" />
+                    <img width="25" ng-src="static/images/appstore/icon-{{ $select.selected.name.toLowerCase() }}.png" />
                     {{ $select.selected.name }}
                 </ui-select-match>
                 <ui-select-choices repeat="service in ServiceAdd.choices" group-by="'category'">
-                  <img width="25" ng-src="/static/images/appstore/icon-{{ ::service.name.toLowerCase() }}.png"/>
+                  <img width="25" ng-src="static/images/appstore/icon-{{ ::service.name.toLowerCase() }}.png"/>
                     {{ service.name }}
                 </ui-select-choices>
               </ui-select>

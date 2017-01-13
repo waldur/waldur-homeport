@@ -1,13 +1,19 @@
+export const projectUsers = {
+  templateUrl: 'views/partials/filtered-list.html',
+  controller: ProjectUsersListController,
+  controllerAs: 'ListController',
+};
+
 // @ngInject
 export default function ProjectUsersListController(
   baseControllerListClass,
   customersService,
+  currentStateService,
+  usersService,
   projectsService,
   projectPermissionsService,
-  currentUser,
-  currentCustomer,
-  currentProject,
   ENV,
+  $q,
   $rootScope,
   $uibModal) {
   var controllerScope = this;
@@ -15,15 +21,24 @@ export default function ProjectUsersListController(
     init: function() {
       this.controllerScope = controllerScope;
       this.service = projectsService;
-      this.hideNoDataText = true;
-      this.isOwnerOrStaff = customersService.checkCustomerUser(currentCustomer, currentUser);
-      this.tableOptions = {};
       var fn = this._super.bind(this);
-      var vm = this;
-      this.getProjectRole('manager').then(function(result) {
-        vm.isProjectManager = !vm.isOwnerOrStaff && result.length > 0;
-        vm.tableOptions = vm.getTableOptions();
-        fn();
+      $q.all([
+        currentStateService.getCustomer().then(customer => {
+          controllerScope.currentCustomer = customer;
+        }),
+        currentStateService.getProject().then(project => {
+          controllerScope.currentProject = project;
+        }),
+        usersService.getCurrentUser().then(user => {
+          controllerScope.currentUser = user;
+        })
+      ]).then(() => {
+        this.isOwnerOrStaff = customersService.checkCustomerUser(controllerScope.currentCustomer, controllerScope.currentUser);
+        this.getProjectRole('manager').then(result => {
+          this.isProjectManager = !this.isOwnerOrStaff && result.length > 0;
+          this.tableOptions = this.getTableOptions();
+          fn();
+        });
       });
     },
     getTableOptions: function() {
@@ -104,8 +119,8 @@ export default function ProjectUsersListController(
     },
     openPopup: function(user) {
       var dialogScope = $rootScope.$new();
-      dialogScope.currentProject = currentProject;
-      dialogScope.currentCustomer = currentCustomer;
+      dialogScope.currentProject = controllerScope.currentProject;
+      dialogScope.currentCustomer = controllerScope.currentCustomer;
       dialogScope.editUser = user;
       dialogScope.isProjectManager = this.isProjectManager;
       dialogScope.addedUsers = this.list.map(function(users) {
@@ -119,12 +134,12 @@ export default function ProjectUsersListController(
       });
     },
     getFilter: function() {
-      return {operation: 'users', UUID: currentProject.uuid};
+      return {operation: 'users', UUID: controllerScope.currentProject.uuid};
     },
     getProjectRole: function(role) {
       return projectPermissionsService.getList({
-        user_url: currentUser.url,
-        project: currentProject.uuid,
+        user_url: controllerScope.currentUser.url,
+        project: controllerScope.currentProject.uuid,
         role: role});
     }
   });
