@@ -28,12 +28,34 @@ export function securityGroupRulePort() {
 // @ngInject
 export function securityGroupRulePortRange($filter) {
   return function formatPortRange(rule) {
-    if (rule.from_port === -1) {
-      return '―';
+    if (rule.from_port === -1 || !rule.from_port) {
+      return 'Any';
     } else if (rule.from_port === rule.to_port) {
       return $filter('securityGroupRulePort')(rule.from_port);
     } else {
       return `${rule.from_port} - ${rule.to_port}`;
+    }
+  };
+}
+
+// @ngInject
+export function securityGroupProtocol() {
+  return function(rule) {
+    if (!rule.protocol) {
+      return 'Any';
+    } else {
+      return rule.protocol.toUpperCase();
+    }
+  };
+}
+
+// @ngInject
+export function securityGroupCIDR() {
+  return function(rule) {
+    if (!rule.cidr) {
+      return 'Any';
+    } else {
+      return rule.cidr;
     }
   };
 }

@@ -3,7 +3,12 @@ import openstackSecurityGroupsList from './security-groups-list';
 import { securityGroupRulesList } from './security-group-rules-list';
 import securityGroupsLink from './security-groups-link';
 import securityGroupsDialog from './security-groups-dialog';
-import { securityGroupRulePort, securityGroupRulePortRange } from './filters';
+import {
+  securityGroupRulePort,
+  securityGroupRulePortRange,
+  securityGroupCIDR,
+  securityGroupProtocol,
+} from './filters';
 import { securityGroupRuleEditor } from './security-group-rule-editor';
 import { securityGroupSummary } from './security-group-summary';
 
@@ -17,6 +22,8 @@ export default module => {
   module.directive('securityGroupsDialog', securityGroupsDialog);
   module.filter('securityGroupRulePort', securityGroupRulePort);
   module.filter('securityGroupRulePortRange', securityGroupRulePortRange);
+  module.filter('securityGroupCIDR', securityGroupCIDR);
+  module.filter('securityGroupProtocol', securityGroupProtocol);
   module.config(tabsConfig);
   module.config(actionConfig);
 };
