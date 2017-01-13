@@ -4,20 +4,19 @@ export default {
     user: '<',
   },
   controller: class userStatusLabel {
-    constructor() {
+    $onInit() {
       this.userStatusLabel = this.getUserStatusLabel();
     }
 
     getUserStatusLabel() {
-      let userStatus = USER_STATUS_LABELS.regularUser;
       if (this.user.is_staff && !this.user.is_support) {
-        userStatus = USER_STATUS_LABELS.staff;
+        return USER_STATUS_LABELS.staff;
       } else if (this.user.is_staff && this.user.is_support) {
-        userStatus = USER_STATUS_LABELS.staffAndSupport;
+        return USER_STATUS_LABELS.staffAndSupport;
       } else if (!this.user.is_staff && this.user.is_support) {
-        userStatus = USER_STATUS_LABELS.support;
+        return USER_STATUS_LABELS.support;
       }
-      return userStatus;
+      return USER_STATUS_LABELS.regularUser;
     }
   },
 };
