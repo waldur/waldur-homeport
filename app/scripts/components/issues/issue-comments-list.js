@@ -21,7 +21,7 @@ export const issueCommentsList = {
     }
 
     $onDestroy() {
-      this.unbind();
+      this.unlisten();
     }
 
     refresh() {
