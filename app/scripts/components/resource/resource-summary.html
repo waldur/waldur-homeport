@@ -1,4 +1,12 @@
-<dl class="dl-horizontal resource-details-table col-sm-12">
+<dl class="dl-horizontal resource-details-table col-sm-12"
+  ng-switch="$ctrl.resource.resource_type">
+
+  <div ng-switch-when="OpenStack.SecurityGroup">
+    <security-group-summary resource="$ctrl.resource"></security-group-summary>
+  </div>
+
+  <div ng-switch-default>
+
   <div class="m-b-xs" ng-if="::$ctrl.resource.summary">
     <dt>{{$ctrl.resource.summaryLabel}}:</dt>
     <dd>
@@ -6,26 +14,7 @@
     </dd>
   </div>
 
-  <div class="m-b-xs">
-    <dt>State:</dt>
-    <dd>
-      <resource-state resource="$ctrl.resource"></resource-state>
-    </dd>
-  </div>
-
-  <div class="m-b-xs" ng-if="$ctrl.resource.state == 'Erred'">
-    <dt>Error message:</dt>
-    <dd>
-      {{ $ctrl.resource.error_message }}
-    </dd>
-  </div>
-
-  <div class="m-b-xs">
-    <dt>Provider:</dt>
-    <dd>
-      {{ ::$ctrl.resource.service_name }}
-    </dd>
-  </div>
+  <resource-summary-base resource="$ctrl.resource"></resource-summary-base>
 
   <div class="m-b-xs" ng-if="$ctrl.resource.isVolume || $ctrl.resource.isBackup">
     <dt>{{::$ctrl.resource.label}}:</dt>
@@ -54,15 +43,6 @@
     </dd>
   </div>
 
-  <div class="m-b-xs" ng-if="$ctrl.resource.description">
-    <dt>
-      Description:
-    </dt>
-    <dd>
-      <span ng-bind="$ctrl.resource.description"></span>
-    </dd>
-  </div>
-
   <div class="m-b-xs" ng-if="!$ctrl.resource.isVolume">
     <dt>
       Access:
@@ -71,6 +51,7 @@
       <a ng-if="$ctrl.resource.access_info_url"
          href="{{ $ctrl.resource.access_info_url }}"
          target="_blank">
+          <i class="fa fa-external-link"></i>
           {{ $ctrl.resource.access_info_text }}
       </a>
       <span ng-if="!$ctrl.resource.access_info_url">
@@ -142,17 +123,6 @@
     </dd>
   </div>
 
-
-  <div class="m-b-xs">
-    <dt>
-      Created:
-    </dt>
-    <dd>
-      <span am-time-ago="::$ctrl.resource.created"></span>,
-      {{ ::$ctrl.resource.created | dateTime }}
-    </dd>
-  </div>
-
   <div class="m-b-xs" ng-if="!$ctrl.resource.isVolume && $ctrl.resource.uptime">
     <dt>
       Uptime:
@@ -162,22 +132,5 @@
     </dd>
   </div>
 
-  <div class="m-b-xs">
-    <dt>
-      UUID:
-    </dt>
-    <dd class="elipsis">
-      {{ ::$ctrl.resource.uuid }}
-    </dd>
-  </div>
-
-  <div class="m-b-xs">
-    <dt>
-      Backend ID:
-    </dt>
-    <dd class="elipsis">
-      {{ ::$ctrl.resource.backend_id || '&mdash;' }}
-    </dd>
-  </div>
-
+</div>
 </dl>
