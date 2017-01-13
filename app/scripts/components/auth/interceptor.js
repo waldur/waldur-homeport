@@ -40,7 +40,7 @@ function requireAuth($rootScope, $state, $auth) {
 // @ngInject
 function initAuthToken($window, $http) {
   // When application starts up, we need to inject auth token if it exists
-  const token = $window.localStorage['satellizer_token'];
+  const token = $window.localStorage['AUTH_TOKEN'];
   if (token) {
     $http.defaults.headers.common.Authorization = 'Token ' + token;
   }
