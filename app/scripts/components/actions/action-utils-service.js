@@ -81,7 +81,8 @@ export default function actionUtilsService(
   };
 
   this.confirmAction = function(model, name) {
-    let confirmTextSuffix = ActionConfiguration[model.resource_type].delete_message || '';
+    const custom = ActionConfiguration[model.resource_type];
+    let confirmTextSuffix = custom && custom.delete_message || '';
     if (name === 'destroy') {
       var confirmText = (model.state === 'Erred')
         ? 'Are you sure you want to delete a {resource_type} in an Erred state?' +
