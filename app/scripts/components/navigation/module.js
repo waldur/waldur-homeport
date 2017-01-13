@@ -6,6 +6,7 @@ import ncHeader from './nc-header';
 import titleService from './title-service';
 import setTitleFromState from './set-title-from-state';
 import uiSrefActiveIf from './ui-sref-active-if';
+import WorkspaceService from './workspace-service';
 
 export default module => {
   module.directive('selectWorkspaceToggle', selectWorkspaceToggle);
@@ -16,4 +17,5 @@ export default module => {
   module.service('titleService', titleService);
   module.run(setTitleFromState);
   module.directive('uiSrefActiveIf', uiSrefActiveIf);
+  module.service('WorkspaceService', WorkspaceService);
 };

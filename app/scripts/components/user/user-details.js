@@ -39,7 +39,7 @@ export const PRIVATE_USER_TABS = [
 
 // @ngInject
 function UserDetailsController($scope, $state, $stateParams, usersService,
-  PRIVATE_USER_TABS, stateUtilsService, currentStateService) {
+  PRIVATE_USER_TABS, stateUtilsService, currentStateService, WorkspaceService) {
   var publicTabs = [
     {
       label: 'Audit logs',
@@ -54,23 +54,25 @@ function UserDetailsController($scope, $state, $stateParams, usersService,
   ];
   var dashboardTab;
   var prevWorkspace = stateUtilsService.getPrevWorkspace() || 'organization';
-  if (currentStateService.getHasCustomer()) {
-    if (prevWorkspace === 'project') {
-      dashboardTab = {
-        label: 'Back to project',
-        icon: 'fa-arrow-left',
-        action: stateUtilsService.goBack
-      };
-    } else if (currentStateService.getOwnerOrStaff()) {
-      dashboardTab = {
-        label: 'Back to organization',
-        icon: 'fa-arrow-left',
-        link: 'dashboard.index'
-      };
-    }
+  if (prevWorkspace === 'project') {
+    dashboardTab = {
+      label: 'Back to project',
+      icon: 'fa-arrow-left',
+      action: stateUtilsService.goBack
+    };
+  } else if (currentStateService.getOwnerOrStaff()) {
+    dashboardTab = {
+      label: 'Back to organization',
+      icon: 'fa-arrow-left',
+      action: stateUtilsService.goBack
+    };
   }
 
   function updateSidebar() {
+    WorkspaceService.setWorkspace({
+      hasCustomer: true,
+      workspace: 'user',
+    });
     usersService.getCurrentUser().then(function(user) {
       if (angular.isUndefined($stateParams.uuid) || $stateParams.uuid === user.uuid) {
         if (dashboardTab) {
@@ -100,6 +102,6 @@ function UserDetailsController($scope, $state, $stateParams, usersService,
     });
   }
   $scope.$on('hasCustomer', updateSidebar);
-  $scope.$on('ownerOrStaff', updateSidebar);
+  // $scope.$on('ownerOrStaff', updateSidebar);
   updateSidebar();
 }

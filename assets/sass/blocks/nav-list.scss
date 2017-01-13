@@ -236,7 +236,7 @@
                 @include property(background-size, 40 40);
                 background-position: 50% 50%;
                 background-repeat: no-repeat;
-                background-image: url('/static/images/logo.png');
+                background-image: url('static/images/logo.png');
             } // &.logo
             &.customer-context {
                 @include property(padding-top, 11);

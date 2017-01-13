@@ -34,21 +34,11 @@ __Installation steps__:
 
 4. Create `/app/scripts/configs/custom-config.json`:
 
-        cp app/scripts/configs/custom-config.json.example app/scripts/configs/custom-config.json
+        cp app/scripts/configs/config.json.example app/scripts/configs/config.json
 
-5. Configure `custom-config.json`
+5. Configure `config.json`. Please read `Configuration guide` (docs/config.md) to learn more.
 
-6. Run application:
-
-    `grunt` - in development mode
-
-    `grunt prod` - in production mode
-
-    Or choose specific mode by passing additional paramater:
-
-     `grunt --mode=modePublicBrokerage`
-     
-     `grunt --mode=modePortal`
+6. Run application: `grunt`.
 
 Server will listen on `//localhost:8000`
 
@@ -102,7 +92,7 @@ Notice: `Error: ECONNREFUSED connect ECONNREFUSED` Can be raised in the end of t
 It occurs because selenium server shuts down before protractor ends tests. ([Link to issue][7]).
 
 Google Chrome is used by default for running tests. If you want to use Mozilla Firefox instead,
-pass `--browser=firefox`, for example `grunt -v testModeDevelop --browser=firefox`
+pass `--browser=firefox`, for example `grunt -v --browser=firefox`
 
 ### Run modes tests
 

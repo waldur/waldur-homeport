@@ -161,7 +161,9 @@ export default function ProviderListController(
         {
           name: '<i class="fa fa-plus"></i> Add provider',
           callback: function() {
-            $state.go('services.create');
+            $state.go('organization.createProvider', {
+              uuid: vm.currentCustomer.uuid
+            });
           },
           disabled: !this.canUserManageService || quotaReached,
           titleAttr: title

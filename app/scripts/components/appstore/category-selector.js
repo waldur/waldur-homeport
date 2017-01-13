@@ -59,8 +59,8 @@ function AppStoreCategorySelectorController(
       return $q.reject();
     } else {
       vm.submitting = true;
-      return selectProject().then(function() {
-        return $state.go(offering.state, {category: offering.key});
+      return selectProject().then(project => {
+        return $state.go(offering.state, {category: offering.key, uuid: project.uuid});
       }).then(function() {
         vm.close();
       }).finally(function() {
@@ -71,11 +71,9 @@ function AppStoreCategorySelectorController(
 
   function selectProject() {
     if (vm.selectedProject) {
-      return projectsService.$get(vm.selectedProject).then(function(project) {
-        $rootScope.$broadcast('adjustCurrentProject', project);
-      });
+      return $q.when(vm.selectedProject);
     } else {
-      return $q.when(true);
+      return currentStateService.getProject();
     }
   }
 

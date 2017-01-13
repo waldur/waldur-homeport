@@ -62,7 +62,7 @@ function ResourceDetailUpdateController(
     updateMenu: function() {
       controllerScope.context = {resource: controllerScope.model};
       controllerScope.listState = this.getListState(this.model.resource_type)
-                                  + '({uuid: ResourceCtrl.context.resource.project_uuid})';
+                                  + '({uuid: controller.context.resource.project_uuid})';
       controllerScope.listTitle = this.getListTitle(this.model.resource_type);
     },
 
@@ -127,7 +127,7 @@ function ResourceDetailUpdateController(
         currentStateService.getCustomer().then(function(response) {
           $state.go('organization.details', {uuid: response.uuid});
         }, function() {
-          $state.go('dashboard.index');
+          $state.go('profile.details');
         });
       });
     },

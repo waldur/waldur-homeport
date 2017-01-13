@@ -12,8 +12,8 @@
 
   angular.module('ncsaas')
     .service('baseServiceClass', [
-      '$q', 'currentStateService', '$resource', 'ENV', '$rootScope', 'listCache', baseServiceClass]);
-  function baseServiceClass($q, currentStateService, $resource, ENV, $rootScope, listCache) {
+      '$q', '$resource', 'ENV', '$rootScope', 'listCache', baseServiceClass]);
+  function baseServiceClass($q, $resource, ENV, $rootScope, listCache) {
     // pageSize, page, pages - default variables, you can change this in your init method or call this._super() in init
     var BaseServiceClass = Class.extend({
       ALL_CACHE_KEYS: 'ALL_CACHE_KEYS',
@@ -21,7 +21,6 @@
       page:null,
       pages:null,
       resultCount:null,
-      currentStateService:null,
       endpoint:null,
       filterByCustomer: true,
       customerUuid:null,
@@ -34,7 +33,6 @@
         this.page = 1;
         this.pages = null;
         this.setDefaultFilter();
-        this.currentStateService = currentStateService;
         this.pageChangingReset();
         this.cacheTime = 0;
       },
@@ -68,23 +66,9 @@
               deferred.reject(err);
             });
           }
-
         };
 
-        if (vm.currentStateService == null || !vm.filterByCustomer) {
-          queryList();
-        } else {
-          vm.currentStateService.getCustomer().then(function (response) {
-            /*jshint camelcase: false */
-            if (response) {
-              filter.customer = (this.customerUuid) ? this.customerUuid() : response.uuid;
-            }
-            queryList();
-          }, function (err) {
-            deferred.reject(err);
-          });
-        }
-
+        queryList();
         return deferred.promise;
       },
       getAll: function(filter, endpointUrl) {

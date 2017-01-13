@@ -13,5 +13,5 @@ export default function authLoginComplete() {
 // @ngInject
 function AuthLoginCompleteController($state, $stateParams, authService) {
   authService.loginSuccess({data: {token: $stateParams.token}});
-  $state.go('dashboard.index');
+  $state.go('profile.details');
 }

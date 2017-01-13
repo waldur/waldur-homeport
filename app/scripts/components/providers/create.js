@@ -118,6 +118,9 @@ function ServiceAddController(
       var vm = this;
       return currentStateService.getCustomer().then(function(customer) {
         vm.customer = customer;
+        if (ncUtils.isCustomerQuotaReached(customer, 'service')) {
+          $state.go('errorPage.limitQuota');
+        }
       });
     },
 

@@ -46,8 +46,7 @@ function SelectWorkspaceDialogController(
   };
 
   ctrl.gotoOrganization = function(organization) {
-    $rootScope.$broadcast('adjustCurrentCustomer', organization);
-    var promise = $state.go('dashboard.index', null, {reload: true});
+    var promise = $state.go('organization.dashboard', {uuid: organization.uuid}, {reload: true});
     return blockAndClose(promise);
   };
 
@@ -69,8 +68,9 @@ function SelectWorkspaceDialogController(
   };
 
   ctrl.createProject = function() {
-    $rootScope.$broadcast('adjustCurrentCustomer', ctrl.selectedOrganization);
-    var promise = $state.go('project-create');
+    var promise = $state.go('organization.createProject', {
+      uuid: ctrl.selectedOrganization.uuid
+    });
     return blockAndClose(promise);
   };
 
@@ -85,7 +85,9 @@ function SelectWorkspaceDialogController(
   function loadInitial() {
     return $q.all([
       currentStateService.getCustomer().then(function(organization) {
-        ctrl.organizations.unshift(organization);
+        if (organization) {
+          ctrl.organizations.unshift(organization);
+        }
         ctrl.selectedOrganization = organization;
       }),
 
@@ -101,9 +103,12 @@ function SelectWorkspaceDialogController(
       customersService.getAll({
         field: ['name', 'uuid', 'projects', 'owners', 'quotas', 'abbreviation']
       }).then(function(organizations) {
-        ctrl.organizations = ctrl.organizations.concat(organizations.filter(function(organization) {
-          return organization.uuid !== ctrl.selectedOrganization.uuid;
-        }));
+        if (ctrl.selectedOrganization) {
+          organizations = organizations.filter(function(organization) {
+            return organization.uuid !== ctrl.selectedOrganization.uuid;
+          });
+        }
+        ctrl.organizations = ctrl.organizations.concat(organizations);
 
         angular.forEach(ctrl.organizations, organization => {
           organization.ownerOrStaff = customersService.checkCustomerUser(organization, ctrl.currentUser);

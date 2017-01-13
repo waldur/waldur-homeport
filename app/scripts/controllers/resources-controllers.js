@@ -162,14 +162,19 @@
         return 'Create';
       },
       gotoAppstore: function() {
+        $state.go(this.getCategoryState(), {
+          uuid: this.currentProject.uuid
+        });
+      },
+      getCategoryState: function() {
         if (this.category === ENV.VirtualMachines) {
-          $state.go('appstore.vms');
+          return 'appstore.vms';
         } else if (this.category === ENV.PrivateClouds) {
-          $state.go('appstore.private_clouds');
+          return 'appstore.private_clouds';
         } else if (this.category === ENV.Applications) {
-          $state.go('appstore.apps');
+          return 'appstore.apps';
         } else if (this.category === ENV.Storages) {
-          $state.go('appstore.storages');
+          return 'appstore.storages';
         }
       },
       getMapAction: function() {

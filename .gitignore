@@ -24,10 +24,8 @@ assets/css
 app/static
 
 # config
-app/scripts/configs/custom-config.json
-app/scripts/configs/mode-config.json
-app/scripts/configs/test/custom-config.json
-app/scripts/configs/test/mode-config.json
+app/scripts/configs/config.json
+app/scripts/configs/test/config.json
 
 # i18n
 *.mo
