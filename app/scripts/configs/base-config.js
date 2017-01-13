@@ -17,8 +17,8 @@ angular.module('ncsaas')
     pageSizes: [5, 10, 20, 50],
     pageSize: 10,
     topMenuCustomersCount: 50,
-    serviceIcon: '/static/images/icons/icon_openstack_small.png',
-    defaultCustomerIcon: '/static/images/logo.png',
+    serviceIcon: 'static/images/icons/icon_openstack_small.png',
+    defaultCustomerIcon: 'static/images/logo.png',
     topMenuCustomersCacheTime: 60 * 10, // seconds
     topMenuProjectsCacheTime: 60 * 10, // seconds
     dashboardEventsCacheTime: 60, // seconds
