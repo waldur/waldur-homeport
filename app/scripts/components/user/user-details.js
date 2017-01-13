@@ -54,20 +54,18 @@ function UserDetailsController($scope, $state, $stateParams, usersService,
   ];
   var dashboardTab;
   var prevWorkspace = stateUtilsService.getPrevWorkspace() || 'organization';
-  if (currentStateService.getHasCustomer()) {
-    if (prevWorkspace === 'project') {
-      dashboardTab = {
-        label: 'Back to project',
-        icon: 'fa-arrow-left',
-        action: stateUtilsService.goBack
-      };
-    } else if (currentStateService.getOwnerOrStaff()) {
-      dashboardTab = {
-        label: 'Back to organization',
-        icon: 'fa-arrow-left',
-        action: stateUtilsService.goBack
-      };
-    }
+  if (prevWorkspace === 'project') {
+    dashboardTab = {
+      label: 'Back to project',
+      icon: 'fa-arrow-left',
+      action: stateUtilsService.goBack
+    };
+  } else if (currentStateService.getOwnerOrStaff()) {
+    dashboardTab = {
+      label: 'Back to organization',
+      icon: 'fa-arrow-left',
+      action: stateUtilsService.goBack
+    };
   }
 
   function updateSidebar() {
