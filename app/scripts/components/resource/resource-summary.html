@@ -9,7 +9,17 @@
     <openstack-floating-ip-summary resource="$ctrl.resource"></openstack-floating-ip-summary>
   </div>
 
+  <div ng-switch-when="OpenStack.Network">
+    <openstack-network-summary resource="$ctrl.resource"></openstack-network-summary>
+  </div>
+
+  <div ng-switch-when="OpenStack.SubNet">
+    <openstack-subnet-summary resource="$ctrl.resource"></openstack-subnet-summary>
+  </div>
+
   <div ng-switch-default>
+
+  <resource-summary-base resource="$ctrl.resource"></resource-summary-base>
 
   <div class="m-b-xs" ng-if="::$ctrl.resource.summary">
     <dt>{{$ctrl.resource.summaryLabel}}:</dt>
@@ -17,8 +27,6 @@
       {{ ::$ctrl.resource.summary }}
     </dd>
   </div>
-
-  <resource-summary-base resource="$ctrl.resource"></resource-summary-base>
 
   <div class="m-b-xs" ng-if="$ctrl.resource.isVolume || $ctrl.resource.isBackup">
     <dt>{{::$ctrl.resource.label}}:</dt>
@@ -135,6 +143,6 @@
       {{ ::$ctrl.resource.uptime }}
     </dd>
   </div>
+  </div>
 
-</div>
 </dl>

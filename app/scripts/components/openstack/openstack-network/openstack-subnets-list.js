@@ -16,11 +16,37 @@ function OpenstackSubnetsListController(
       this.controllerScope = controllerScope;
       this._super();
       this.service = openstackSubnetsService;
+      this.rowFields.push('cidr');
     },
     getTableOptions: function() {
       var options = this._super();
+      var vm = this;
       options.noDataText = 'No subnets yet.';
       options.noMatchesText = 'No subnets found matching filter.';
+      options.columns = [
+        {
+          title: 'Name',
+          className: 'all',
+          render: function(row) {
+            return vm.renderResourceName(row);
+          }
+        },
+        {
+          title: 'CIDR',
+          className: 'min-tablet-l',
+          render: function(row) {
+            return row.cidr;
+          }
+        },
+        {
+          title: 'State',
+          className: 'min-tablet-l',
+          render: function(row) {
+            return vm.renderResourceState(row);
+          }
+        }
+      ];
+
       return options;
     },
     getFilter: function() {

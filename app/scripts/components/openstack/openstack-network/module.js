@@ -4,6 +4,9 @@ import openstackNetworksService from './openstack-networks-service';
 import openstackSubnetsService from './openstack-subnets-service';
 import openstackTenantNetworks from './openstack-tenant-networks';
 import openstackSubnetsList from './openstack-subnets-list';
+import { openstackNetworkSummary } from './openstack-network-summary';
+import { openstackSubnetSummary } from './openstack-subnet-summary';
+import { formatAllocationPool } from './filters';
 
 export default module => {
   module.service('openstackNetworksService', openstackNetworksService);
@@ -12,6 +15,9 @@ export default module => {
   module.component('openstackSubnet', openstackSubnet);
   module.component('openstackTenantNetworks', openstackTenantNetworks);
   module.component('openstackSubnetsList', openstackSubnetsList);
+  module.component('openstackNetworkSummary', openstackNetworkSummary);
+  module.component('openstackSubnetSummary', openstackSubnetSummary);
+  module.filter('formatAllocationPool', formatAllocationPool);
   module.config(actionConfig);
   module.config(tabsConfig);
 };
