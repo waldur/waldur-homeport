@@ -57,5 +57,4 @@ coreModule(module);
 dashboardModule(module);
 filtersModule(module);
 
-// eslint-disable-next-line no-undef
-bootstrap('ncsaas', process.env.CONFIG_FILES);
+bootstrap('ncsaas');

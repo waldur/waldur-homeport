@@ -159,6 +159,11 @@
   angular.module('ncsaas')
     .config(function(ENV) {
       angular.extend(ENV, window.$$CUSTOMENV);
+      if (ENV.enableExperimental) {
+        angular.merge(ENV, window.$$MODES.experimentalMode);
+      } else {
+        angular.merge(ENV, window.$$MODES.stableMode);
+      }
     });
 })();
 
