@@ -16,11 +16,22 @@ function OpenstackSecurityGroupsListController(
       this.controllerScope = controllerScope;
       this._super();
       this.service = openstackSecurityGroupsService;
+      this.rowFields.push('rules');
     },
     getTableOptions: function() {
       var options = this._super();
       options.noDataText = 'No security groups yet.';
       options.noMatchesText = 'No security groups found matching filter.';
+      options.columns = [
+        {
+          title: 'Name',
+          render: row => this.renderResourceName(row)
+        },
+        {
+          title: 'State',
+          render: row => this.renderResourceState(row)
+        }
+      ];
       return options;
     },
     getFilter: function() {
