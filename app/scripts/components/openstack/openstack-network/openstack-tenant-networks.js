@@ -16,6 +16,7 @@ function TenantNetworksController(
       this.controllerScope = controllerScope;
       this._super();
       this.service = openstackNetworksService;
+      this.rowFields.push('subnets');
     },
     getTableOptions: function() {
       var options = this._super();

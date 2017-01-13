@@ -1,30 +1,31 @@
-<div class="m-b-xs" ng-if="::$ctrl.resource.tenantUUID">
-    <dt>Tenant:</dt>
-    <dd>
-        <a ui-sref="resources.details({
-          uuid: $ctrl.resource.tenantUUID,
-          resource_type: 'OpenStack.Tenant'
-        })">
-            {{ ::$ctrl.resource.tenant_name }}
-        </a>
-    </dd>
+<resource-summary-base resource="$ctrl.resource"></resource-summary-base>
+
+<div class="m-b-xs">
+  <dt>Tenant:</dt>
+  <dd>
+    <a ui-sref="resources.details({
+      uuid: $ctrl.resource.tenant_uuid,
+      resource_type: 'OpenStack.Tenant'
+    })">
+      {{ ::$ctrl.resource.tenant_name }}
+    </a>
+  </dd>
 </div>
 
 <div class="m-b-xs">
-    <dt>
-        Type:
-    </dt>
-    <dd class="elipsis">
-        {{ ::$ctrl.resource.type || '&mdash;' }}
-    </dd>
+  <dt>
+    Type:
+  </dt>
+  <dd class="elipsis">
+    {{ ::$ctrl.resource.type || '&mdash;' }}
+  </dd>
 </div>
 
 <div class="m-b-xs">
-    <dt>
-        Segmentation ID:
-    </dt>
-    <dd class="elipsis">
-        {{ ::$ctrl.resource.segmentation_id || '&mdash;' }}
-    </dd>
+  <dt>
+    Segmentation ID:
+  </dt>
+  <dd class="elipsis">
+    {{ ::$ctrl.resource.segmentation_id || '&mdash;' }}
+  </dd>
 </div>
-

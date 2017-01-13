@@ -134,11 +134,6 @@ export default function resourceUtils(ncUtils, ncServiceUtils, authService, $fil
       }
 
       return context;
-    },
-    formatAllocationPools: function(allocation_pools) {
-      return allocation_pools.map(function(pool){
-        return pool.start + '-' + pool.end.split('.').pop();
-      }).join('<br />');
     }
   };
 }
