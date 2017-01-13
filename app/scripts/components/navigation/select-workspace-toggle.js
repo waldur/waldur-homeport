@@ -28,42 +28,26 @@ const workspaceButtonClasses = {
 
 // @ngInject
 class SelectWorkspaceToggleController {
-  constructor($scope, $state, $uibModal, currentStateService) {
-    this.$scope = $scope;
-    this.$state = $state;
+  constructor(WorkspaceService, $uibModal, $rootScope) {
+    this.WorkspaceService = WorkspaceService;
     this.$uibModal = $uibModal;
-    this.currentStateService = currentStateService;
+    this.$rootScope = $rootScope;
     this.init();
   }
 
   init() {
-    this.$scope.$on('currentProjectUpdated', this.refreshProject.bind(this));
-    this.refreshProject();
-
-    this.$scope.$on('currentCustomerUpdated', this.refreshCustomer.bind(this));
-    this.refreshCustomer();
-
-    this.$scope.$on('$stateChangeSuccess', (event, toState) => {
-      this.workspace = toState.data.workspace;
-    });
-    this.workspace = this.$state.current.data.workspace;
-
-    this.$scope.$on('hasCustomer', (event, value) => {
-      this.hasCustomer = value;
-    });
-    this.hasCustomer = this.currentStateService.getHasCustomer();
+    this.$rootScope.$on('WORKSPACE_CHANGED', this.refreshWorkspace.bind(this));
+    this.refreshWorkspace();
   }
 
-  refreshProject() {
-    this.currentStateService.getProject().then(project => {
-      this.project = project;
-    });
-  }
-
-  refreshCustomer() {
-    this.currentStateService.getCustomer().then(customer => {
-      this.customer = customer;
-    });
+  refreshWorkspace() {
+    const options = this.WorkspaceService.getWorkspace();
+    if (options) {
+      this.hasCustomer = options.hasCustomer;
+      this.customer = options.customer;
+      this.project = options.project;
+      this.workspace = options.workspace;
+    }
   }
 
   getTitle() {
@@ -81,7 +65,8 @@ class SelectWorkspaceToggleController {
   }
 
   getButtonClass() {
-    return ['btn', 'select-workspace-toggle', workspaceButtonClasses[this.workspace]];
+    const cls = workspaceButtonClasses[this.workspace] || 'btn-default';
+    return ['btn', 'select-workspace-toggle', cls];
   }
 
   getTooltip() {

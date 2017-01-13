@@ -4,9 +4,8 @@ export default function helpRoutes($stateProvider) {
     .state('help', {
       url: '/help/',
       abstract: true,
-      template: '<customer-workspace><ui-view></ui-view></customer-workspace>',
+      template: '<help-workspace><ui-view></ui-view></help-workspace>',
       data: {
-        workspace: 'organization',
         pageTitle: 'Help'
       }
     })

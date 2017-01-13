@@ -90,12 +90,9 @@ function CustomerDeleteController(
       var confirmDelete = confirm('Confirm deletion?');
       if (confirmDelete) {
         currentStateService.setCustomer(null);
-        this.customer.$delete().then(function(instance) {
+        this.customer.$delete().then(function() {
           customersService.clearAllCacheForCurrentEndpoint();
-          customersService.getPersonalOrFirstCustomer(instance.name).then(function(customer) {
-            currentStateService.setCustomer(customer);
-            $state.go('organization.details', {uuid: customer.uuid});
-          });
+          $state.go('profile.details');
         }, function() {
           currentStateService.setCustomer(vm.customer);
         });

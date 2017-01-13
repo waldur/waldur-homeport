@@ -59,6 +59,10 @@
         var vm = this;
         currentStateService.getCustomer().then(function(customer) {
           vm.customer = customer;
+          if (ncUtils.isCustomerQuotaReached(customer, 'resource')) {
+            $state.go('errorPage.limitQuota');
+          }
+
           if (customer.projects.length == 0) {
             ncUtilsFlash.error("No projects!");
             $state.go('organization.projects', {uuid: customer.uuid});

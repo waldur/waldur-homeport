@@ -4,13 +4,19 @@ export default {
   template: template,
   controller: class IssuesWorkspace {
     // @ngInject
-    constructor(usersService, $state, $rootScope) {
+    constructor(usersService, $state, $rootScope, WorkspaceService) {
       this.usersService = usersService;
       this.$state = $state;
       this.$rootScope = $rootScope;
+      this.WorkspaceService = WorkspaceService;
     }
 
     $onInit() {
+      this.WorkspaceService.setWorkspace({
+        hasCustomer: true,
+        workspace: 'support',
+      });
+
       this.usersService.getCurrentUser().then(user => {
         this.user = user;
         this.updateItems();

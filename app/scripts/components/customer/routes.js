@@ -1,23 +1,43 @@
 // @ngInject
+function loadCustomer($q, $stateParams, $state, customersService, currentStateService, WorkspaceService) {
+  if (!$stateParams.uuid) {
+    return $q.reject();
+  }
+  return customersService.$get($stateParams.uuid)
+    .then(customer => {
+      currentStateService.setCustomer(customer);
+      return customer;
+    }).then(customer => {
+      WorkspaceService.setWorkspace({
+        customer: customer,
+        project: null,
+        hasCustomer: true,
+        workspace: 'organization',
+      });
+      return customer;
+    }).catch(error => {
+      if (error.status === 404) {
+        $state.go('errorPage.notFound');
+      }
+    });
+}
+
+// @ngInject
+function CustomerController($scope, $state, currentCustomer, currentUser, customersService, currentStateService) {
+  $scope.currentCustomer = currentCustomer;
+  $scope.currentUser = currentUser;
+
+  if (customersService.checkCustomerUser(currentCustomer, currentUser)) {
+    currentStateService.setOwnerOrStaff(true);
+  } else {
+    currentStateService.setOwnerOrStaff(false);
+    $state.go('profile.details');
+  }
+}
+
+// @ngInject
 export default function organizationRoutes($stateProvider) {
   $stateProvider
-    .state('dashboard', {
-      url: '/dashboard/',
-      abstract: true,
-      template: '<customer-workspace><ui-view></ui-view></customer-workspace>',
-      data: {
-        pageTitle: 'Dashboard',
-        pageClass: 'gray-bg',
-        workspace: 'organization',
-        auth: true
-      },
-    })
-
-    .state('dashboard.index', {
-      url: '',
-      template: '<organization-dashboard customer="currentCustomer"></organization-dashboard>',
-    })
-
     .state('organization', {
       url: '/organizations/:uuid/',
       abstract: true,
@@ -26,10 +46,23 @@ export default function organizationRoutes($stateProvider) {
         workspace: 'organization'
       },
       template: '<customer-workspace><ui-view></ui-view></customer-workspace>',
+      resolve: {
+        currentCustomer: loadCustomer,
+      },
+      controller: CustomerController
+    })
+
+    .state('organization.dashboard', {
+      url: 'dashboard/',
+      template: '<organization-dashboard customer="currentCustomer"></organization-dashboard>',
+      data: {
+        pageTitle: 'Dashboard',
+        pageClass: 'gray-bg',
+      }
     })
 
     .state('organization.details', {
-      url: '',
+      url: 'events/',
       template: '<customer-events customer="currentCustomer"></customer-events>',
       data: {
         pageTitle: 'Audit logs'
@@ -142,18 +175,16 @@ export default function organizationRoutes($stateProvider) {
       }
     })
 
-    .state('services', {
-      url: '/services/',
-      abstract: true,
-      template: '<customer-workspace><ui-view></ui-view></customer-workspace>',
+    .state('organization.createProject', {
+      url: 'createProject/',
+      template: '<project-create></project-create>',
       data: {
-        auth: true,
-        workspace: 'organization'
+        pageTitle: 'Create project',
       }
     })
 
-    .state('services.create', {
-      url: 'add/',
+    .state('organization.createProvider', {
+      url: 'createProvider/',
       template: '<provider-create></provider-create>',
       data: {
         pageTitle: 'Create provider'

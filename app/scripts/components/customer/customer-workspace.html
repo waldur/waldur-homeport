@@ -6,7 +6,7 @@
             <h2>{{$state.current.data.pageTitle}}</h2>
             <ol class="breadcrumb">
                 <li>
-                    <a ui-sref="dashboard.index">Organization dashboard</a>
+                    <a ui-sref="organization.dashboard({uuid: currentCustomer.uuid})">Organization dashboard</a>
                 </li>
                 <li class="active">
                     <strong>{{$state.current.data.pageTitle}}</strong>

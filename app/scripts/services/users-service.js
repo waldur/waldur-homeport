@@ -10,14 +10,12 @@
       init: function() {
         this._super();
         this.endpoint = '/users/';
-        this.filterByCustomer = false;
       },
       getCurrentUser: function() {
         var vm = this;
         var deferred = $q.defer();
         var missingField = false;
         if (!vm.currentUser) {
-          vm.filterByCustomer = false;
           vm.getList({current:''}).then(function(response) {
             var user = response.length > 0 ? response[0] : null;
             vm.currentUser = user;
@@ -37,7 +35,6 @@
           }, function(error) {
             deferred.reject(error);
           });
-          vm.filterByCustomer = true;
         } else {
           deferred.resolve(vm.currentUser);
         }

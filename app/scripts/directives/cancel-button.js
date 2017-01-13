@@ -13,7 +13,7 @@
                     if($window.history.length > 2) {
                         $window.history.back();
                     } else {
-                        $state.go('dashboard.index');
+                        $state.go('profile.details');
                     }
                 });
             }

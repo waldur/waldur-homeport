@@ -32,7 +32,7 @@ export class invitationUtilsService {
     return this.invitationService.check(token).then(() => {
       if (this.$auth.isAuthenticated()) {
         this.acceptInvitation(token).then(() => {
-          this.$state.go('dashboard.index');
+          this.$state.go('profile.details');
         });
       } else {
         this.invitationService.setInvitationToken(token);
@@ -41,7 +41,7 @@ export class invitationUtilsService {
     }).catch(response => {
       this.showError(response);
       if (this.$auth.isAuthenticated()) {
-        this.$state.go('dashboard.index');
+        this.$state.go('profile.details');
       } else {
         this.$state.go('login');
       }

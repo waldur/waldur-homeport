@@ -36,9 +36,6 @@
   function protectStates($rootScope, $state, $auth, ENV) {
     // 1) If state data has `disabled` flag, user is redirected to dashboard.
 
-    // 2) If state data has `auth` flag and user does not have authentication token,
-    // he is redirected to login page.
-
     // 3) If state data has `anonymous` flag and user has authentication token,
     // he is redirected to dashboard.
 
@@ -60,11 +57,9 @@
         if (!data) {
           return;
         } else if (data.disabled) {
-          return 'dashboard.index';
-        } else if (data.auth && !$auth.isAuthenticated()) {
-          return 'login';
+          return 'errorPage.notFound';
         } else if (data.anonymous && $auth.isAuthenticated()) {
-          return 'dashboard.index';
+          return 'profile.details';
         } else if (data.feature && disabledFeature(data.feature)) {
           return 'errorPage.notFound';
         }
@@ -76,26 +71,10 @@
     }
   }
 
-  angular.module('ncsaas').run(disableCustomerStates);
+})();
 
-  disableCustomerStates.$inject = ['$rootScope', '$state', 'currentStateService'];
 
-  function disableCustomerStates($rootScope, $state, currentStateService) {
-    $rootScope.$on('$stateChangeStart',
-    function(event, toState, toParams, fromState, fromParams) {
-      if (!toState.data) {
-        return;
-      }
-
-      var workspace = toState.data.workspace;
-      if (workspace === 'organization' || workspace === 'project') {
-        if (currentStateService.getHasCustomer() === false) {
-          event.preventDefault();
-        }
-      }
-    });
-  }
-
+(function() {
   function decorateState($stateProvider, decorator) {
     $stateProvider.decorator('views', function(state, parent) {
       var result = {}, views = parent(state);
@@ -114,43 +93,21 @@
     return usersService.getCurrentUser();
   }
 
-  function checkWorkspace(CustomerUtilsService) {
-    return CustomerUtilsService.checkWorkspace();
-  }
-
-  function getCurrentCustomer(CustomerUtilsService) {
-    return CustomerUtilsService.getCurrentCustomer();
-  }
-
-  function getStoredCustomer(CustomerUtilsService) {
-    return CustomerUtilsService.getStoredCustomer();
-  }
-
   function decorateStates($stateProvider) {
     decorateState($stateProvider, function(state) {
       if (state.data && state.data.auth) {
         state.resolve.currentUser = getCurrentUser;
       }
-
-      if (state.data && state.data.workspace === 'organization') {
-        state.resolve.checkWorkspace = checkWorkspace;
-        state.resolve.currentCustomer = getCurrentCustomer;
-      }
-
-      if (state.data && state.data.workspace === 'project') {
-        state.resolve.currentCustomer = getStoredCustomer;
-      }
     });
   }
 
   angular.module('ncsaas').config(decorateStates);
-
 })();
 
 (function() {
   angular.module('ncsaas')
     .config(function($urlRouterProvider) {
-      $urlRouterProvider.when('/', '/dashboard/');
+      $urlRouterProvider.when('/', '/profile/');
       $urlRouterProvider.otherwise('/login/');
     });
 })();
@@ -203,9 +160,9 @@
 (function() {
   angular.module('ncsaas')
     .factory('httpInterceptor', [
-      '$q', '$location', 'ncUtilsFlash', 'ENV', 'blockUI', '$rootScope', httpInterceptor]);
+      '$q', '$location', 'ncUtilsFlash', 'ENV', '$rootScope', httpInterceptor]);
 
-    function httpInterceptor($q, $location, ncUtilsFlash, ENV, blockUI, $rootScope) {
+    function httpInterceptor($q, $location, ncUtilsFlash, ENV, $rootScope) {
       var timeouts = {},
           abortRequests;
       function getKey(config) {
@@ -232,7 +189,6 @@
               var errorMessage = 'Problem getting response from the server.';
               ncUtilsFlash.error(errorMessage);
               console.error(errorMessage, config);
-              blockUI.reset();
             }, ENV.requestTimeout);
           }
           return config;
@@ -244,11 +200,7 @@
           return response;
         },
         'responseError': function(rejection) {
-          if (rejection.status === 401) {
-            $rootScope.$broadcast('authService:signout');
-            $location.path('/login/');
-            return $q.reject(rejection);
-          } else if (!abortRequests) {
+          if (!abortRequests) {
             var message = rejection.status ? (rejection.status + ': ' + rejection.statusText) : 'Connection error';
             if (rejection.data && rejection.data.non_field_errors) {
               message += ' ' + rejection.data.non_field_errors;
@@ -260,7 +212,6 @@
               clearTimeout(timeouts[getKey(rejection.config)]);
               console.error(message, rejection.config);
             }
-            blockUI.reset();
             // handlers for excluding 404 errors are too slow
             if (!rejection.status || rejection.status !== 404) {
               ncUtilsFlash.error(message);
