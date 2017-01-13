@@ -16,6 +16,6 @@ export default function providerDetails() {
 }
 
 // @ngInject
-function ProviderDetailsDialog($scope) {
+function ProviderDetailsDialog() {
   this.provider = this.resolve.provider;
 }
