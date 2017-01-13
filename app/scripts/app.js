@@ -291,4 +291,12 @@
     editableOptions.theme = 'bs3';
   }]);
 
+  // Close all modal dialogs when router state changed
+  // http://stackoverflow.com/a/23766070/6917997
+  angular.module('ncsaas').run(['$rootScope', '$uibModalStack', function($rootScope, $uibModalStack) {
+    $rootScope.$on('$stateChangeSuccess', function() {
+      $uibModalStack.dismissAll();
+    });
+  }]);
+
 })();
