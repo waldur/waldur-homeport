@@ -55,7 +55,7 @@
       getPrettyQuotaName: ncUtils.getPrettyQuotaName,
 
       cancel: function() {
-        $state.go('organization.details', {uuid:$stateParams.uuid});
+        $state.go('organization.details', {uuid: $stateParams.uuid});
       },
 
       selectPlan: function(plan) {
@@ -121,7 +121,7 @@
         agreementsService.approve({token: qs.token}).then(function(response) {
           ncUtilsFlash.success('Billing plan agreement has been processed successfully.');
           currentStateService.reloadCurrentCustomer();
-          $state.go('dashboard.index', {});
+          $state.go('profile.details')
         }, function(error) {
           if (error.data) {
             ncUtilsFlash.error(error.data.detail);
@@ -164,7 +164,7 @@
         }
         agreementsService.cancel({token: qs.token}).then(function(response) {
           ncUtilsFlash.success('Billing plan agreement has been processed successfully.');
-          $state.go('dashboard.index', {});
+          $state.go('profile.details')
         }, function(error) {
           if (error.data) {
             ncUtilsFlash.error(error.data.detail);

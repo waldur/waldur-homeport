@@ -18,15 +18,14 @@ function CustomerWorkspaceController(
   customersService,
   $state,
   tabCounterService,
-  AppStoreUtilsService) {
+  AppStoreUtilsService,
+  WorkspaceService) {
 
   activate();
 
   function activate() {
-    $scope.$on('currentCustomerUpdated', function() {
-      refreshCustomer();
-    });
-    refreshCustomer();
+    $scope.$on('WORKSPACE_CHANGED', refreshWorkspace);
+    refreshWorkspace();
   }
 
   function setItems() {
@@ -34,7 +33,7 @@ function CustomerWorkspaceController(
       {
         label: 'Dashboard',
         icon: 'fa-th-large',
-        link: 'dashboard.index'
+        link: 'organization.dashboard({uuid: $ctrl.context.customer.uuid})'
       },
       {
         label: 'Providers',
@@ -122,13 +121,14 @@ function CustomerWorkspaceController(
     ];
   }
 
-  function refreshCustomer() {
-    currentStateService.isCustomerDefined && currentStateService.getCustomer().then(function(customer) {
-      $scope.currentCustomer = customer;
-      $scope.context = {customer: customer};
+  function refreshWorkspace() {
+    const options = WorkspaceService.getWorkspace();
+    if (options && options.customer) {
+      $scope.currentCustomer = options.customer;
+      $scope.context = {customer: options.customer};
       setItems();
-      connectCounters(customer);
-    });
+      connectCounters(options.customer);
+    }
   }
 
   function connectCounters(customer) {
@@ -155,9 +155,7 @@ function CustomerWorkspaceController(
 
   function getCountersError(error) {
     if (error.status == 404) {
-      customersService.getPersonalOrFirstCustomer().then(function(customer) {
-        $state.go('organization.details', {uuid: customer.uuid});
-      });
+      $state.go('errorPage.notFound');
     } else {
       tabCounterService.cancel($scope.timer);
     }

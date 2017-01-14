@@ -10,21 +10,17 @@ angular.module('ncsaas')
 
     // Social login config
     googleClientId: 'google client id',
-    googleEndpointUrl: 'api-auth/google/',
     facebookClientId: 'facebook client id',
-    facebookEndpointUrl: 'api-auth/facebook/',
 
     pageSizes: [5, 10, 20, 50],
     pageSize: 10,
     topMenuCustomersCount: 50,
-    serviceIcon: '/static/images/icons/icon_openstack_small.png',
-    defaultCustomerIcon: '/static/images/logo.png',
+    serviceIcon: 'static/images/icons/icon_openstack_small.png',
+    defaultCustomerIcon: 'static/images/logo.png',
     topMenuCustomersCacheTime: 60 * 10, // seconds
     topMenuProjectsCacheTime: 60 * 10, // seconds
     dashboardEventsCacheTime: 60, // seconds
     listControlPanelShow: false,
-    currentCustomerUuidStorageKey: 'currentCustomerUuid',
-    currentProjectUuidStorageKey: 'currentProjectUuid',
     showImport: false,
     defaultErrorMessage: 'Reason unknown, please contact support',
 
@@ -77,7 +73,7 @@ angular.module('ncsaas')
         key: "private_clouds",
         state: "appstore.private_clouds",
         description: "OpenStack tenants and Amazon VPC.",
-        requireStaffOwnerManager: true
+        requireOwnerOrStaff: true
       },
       {
         label: "Storage",
@@ -165,7 +161,7 @@ angular.module('ncsaas')
         icon: 'cloud',
         key: 'private_clouds',
         services: ['OpenStack'],
-        requireStaffOwnerManager: true
+        requireOwnerOrStaff: true
       },
       {
         name: 'Applications',
@@ -285,12 +281,6 @@ angular.module('ncsaas')
     requestTimeout: 1000 * 20,
     countsCacheTime: 60, // seconds
     enablePurchaseCostDisplay: true,
-    entityCreateLink: {
-      'services.create': 'service',
-      'project-create': 'project',
-      'appstore.store':  'resource',
-      'import.import':   'resource'
-    },
 
     resourcesTimerInterval: 7, // seconds
     countersTimerInterval: 7, // seconds
@@ -319,43 +309,5 @@ angular.module('ncsaas')
     userMandatoryFields: [
       'full_name',
       'email'
-    ],
-
-    dashboardQuotas: {
-      nc_app_count: {
-        title: 'Applications',
-        feature: 'apps'
-      },
-      nc_vm_count: {
-        title: 'Virtual machines',
-        feature: 'vms'
-      },
-      nc_private_cloud_count: {
-        title: 'Private clouds',
-        feature: 'private_clouds',
-      },
-      nc_storage_count: {
-        title: 'Storage',
-        feature: 'storage'
-      },
-      nc_user_count: {
-        title: 'Team size',
-        feature: 'users'
-      }
-  },
-
-  projectDashboardQuotas: [
-    'nc_app_count',
-    'nc_vm_count',
-    'nc_private_cloud_count',
-    'nc_storage_count'
-  ],
-
-  organizationDashboardQuotas: [
-    'nc_app_count',
-    'nc_vm_count',
-    'nc_private_cloud_count',
-    'nc_storage_count',
-    'nc_user_count'
-  ]
+    ]
 });

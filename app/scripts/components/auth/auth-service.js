@@ -1,12 +1,12 @@
 // @ngInject
-export default function authService($http, $auth, usersService, $rootScope, $window, ENV) {
-    /*jshint validthis: true */
+export default function authService(
+  $http, $auth, $rootScope, $window, $state, usersService, currentStateService,  ENV) {
   var vm = this;
 
   vm.signin = signin;
   vm.signup = signup;
   vm.activate = activate;
-  vm.signout = signout;
+  vm.logout = logout;
   vm.isAuthenticated = isAuthenticated;
   vm.authenticate = authenticate;
   vm.getDownloadLink = getDownloadLink;
@@ -37,16 +37,18 @@ export default function authService($http, $auth, usersService, $rootScope, $win
     return $http.post(ENV.apiEndpoint + 'api-auth/activation/', user).then(loginSuccess);
   }
 
-  $rootScope.$on('authService:signout', function () {
-    vm.signout();
-  });
-
-  function signout() {
+  function logout() {
+    $rootScope.$broadcast('logoutStart');
     delete $http.defaults.headers.common.Authorization;
     vm.user = {isAuthenticated: false};
     usersService.currentUser = null;
     usersService.cleanAllCache();
     $auth.logout();
+    currentStateService.isCustomerDefined = false;
+    currentStateService.setHasCustomer(undefined);
+    currentStateService.setOwnerOrStaff(undefined);
+    $rootScope.$broadcast('abortRequests');
+    $state.go('login');
   }
 
   function setAuthHeader(token) {

@@ -18,7 +18,6 @@ export default function userEdit() {
   };
 }
 
-
 // @ngInject
 class UserEditController {
   constructor($q, $filter) {
@@ -31,6 +30,7 @@ class UserEditController {
     }
     return this.onSave();
   }
+
   getRegistrationMethod() {
     if (!this.user.registration_method) {
       return 'Default';

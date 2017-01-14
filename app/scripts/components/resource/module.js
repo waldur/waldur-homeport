@@ -1,17 +1,33 @@
 import resourceUtils from './resource-utils-service';
 import resourceDetails from './resource-details';
+import resourceSummary from './resource-summary';
 import resourceEvents from './resource-events';
 import resourceRoutes from './routes';
 import resourceState from './resource-state';
 import ResourceStateConfiguration from './resource-state-configuration';
+import resourceAlerts from './resource-alerts';
 import resourceIssues from './resource-issues';
+import resourceHeader from './resource-header';
+import resourceTab from './resource-tab';
+import resourceTabs from './resource-tabs';
+import ResourceTabsConfiguration from './resource-tabs-configuration';
+import { DEFAULT_RESOURCE_TABS } from './constants';
+import { resourceSummaryBase } from './resource-summary-base';
 
 export default module => {
   module.service('resourceUtils', resourceUtils);
   module.provider('ResourceStateConfiguration', ResourceStateConfiguration);
-  module.directive('resourceDetails', resourceDetails);
-  module.directive('resourceEvents', resourceEvents);
-  module.directive('resourceState', resourceState);
-  module.directive('resourceIssues', resourceIssues);
+  module.component('resourceDetails', resourceDetails);
+  module.component('resourceSummary', resourceSummary);
+  module.component('resourceEvents', resourceEvents);
+  module.component('resourceState', resourceState);
+  module.component('resourceAlerts', resourceAlerts);
+  module.component('resourceIssues', resourceIssues);
+  module.directive('resourceHeader', resourceHeader);
   module.config(resourceRoutes);
+  module.directive('resourceTab', resourceTab);
+  module.component('resourceTabs', resourceTabs);
+  module.provider('ResourceTabsConfiguration', ResourceTabsConfiguration);
+  module.constant('DEFAULT_RESOURCE_TABS', DEFAULT_RESOURCE_TABS);
+  module.component('resourceSummaryBase', resourceSummaryBase);
 };

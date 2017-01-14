@@ -1,0 +1,18 @@
+<div class="table-responsive">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+          <th>IP protocol</th>
+          <th>Port range</th>
+          <th>Remote CIDR</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="rule in $ctrl.resource.rules">
+        <td>{{ rule.protocol | securityGroupProtocol }}</td>
+        <td>{{ rule | securityGroupRulePortRange }}</td>
+        <td>{{ rule | securityGroupCIDR }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

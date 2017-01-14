@@ -28,10 +28,8 @@ function IssueListController(
         disableSearch: true,
         enableOrdering: true,
         searchFieldName: 'summary',
-        entityData: {
-          noDataText: 'No tickets yet.',
-          noMatchesText: 'No tickets found matching filter.',
-        },
+        noDataText: 'No support requests yet.',
+        noMatchesText: 'No support requests found matching filter.',
         columns: [
           {
             title: 'Type',

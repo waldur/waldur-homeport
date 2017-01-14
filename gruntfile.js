@@ -481,73 +481,55 @@ module.exports = function(grunt) {
                     },
                 ]
             },
-            modePublicBrokerage: {
+            dist: {
                 files: [
                     {
                         expand: true,
-                        cwd: 'app/scripts/configs/modes/',
-                        src: ['public-brokerage.json'],
-                        dest: 'app/scripts/configs/',
-                        filter: 'isFile',
-                        rename: function(dest) {
-                            return dest + 'mode-config.json';
-                        }
-                    }
-                ]
-            },
-            modeDevelop: {
-                files: [
+                        cwd: 'app/',
+                        src: ['index.html'],
+                        dest: 'dist/'
+                    },
                     {
                         expand: true,
-                        cwd: 'app/scripts/configs/modes/',
-                        src: ['develop.json'],
-                        dest: 'app/scripts/configs/',
-                        filter: 'isFile',
+                        cwd: 'app/static/css/',
+                        src: ['style.min.css'],
+                        dest: 'dist/static/css/',
                         rename: function(dest) {
-                            return dest + 'mode-config.json';
+                            return dest + 'app.css';
                         }
-                    }
-                ]
-            },
-            modePortal: {
-                files: [
+                    },
                     {
                         expand: true,
-                        cwd: 'app/scripts/configs/modes/',
-                        src: ['portal.json'],
-                        dest: 'app/scripts/configs/',
-                        filter: 'isFile',
+                        cwd: 'app/static/js/main/',
+                        src: ['main.min.js'],
+                        dest: 'dist/static/js/',
                         rename: function(dest) {
-                            return dest + 'mode-config.json';
+                            return dest + 'app.js';
                         }
-                    }
-                ]
-            },
-            testModePublicBrokerage: {
-                files: [
+                    },
                     {
                         expand: true,
-                        cwd: 'app/scripts/configs/modes/',
-                        src: ['public-brokerage.json'],
-                        dest: 'app/scripts/configs/test/',
-                        filter: 'isFile',
-                        rename: function(dest) {
-                            return dest + 'mode-config.json';
-                        }
-                    }
-                ]
-            },
-            testModeDevelop: {
-                files: [
+                        cwd: 'app/views/',
+                        src: ['**'],
+                        dest: 'dist/views/',
+                    },
                     {
                         expand: true,
-                        cwd: 'app/scripts/configs/modes/',
-                        src: ['develop.json'],
-                        dest: 'app/scripts/configs/test/',
-                        filter: 'isFile',
-                        rename: function(dest) {
-                            return dest + 'mode-config.json';
-                        }
+                        cwd: 'app/static/js/i18n/',
+                        src: ['*.json'],
+                        dest: 'dist/static/js/i18n/'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'app/static/images/',
+                        src: ['**'],
+                        dest: 'dist/static/images/'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'app/static/fonts/',
+                        src: ['**'],
+                        dest: 'dist/static/fonts/'
                     }
                 ]
             }
@@ -621,6 +603,13 @@ module.exports = function(grunt) {
                 base: 'app'
             },
             server: {},
+            dist: {
+                options: {
+                    base: {
+                        path: 'dist'
+                    }
+                }
+            },
             test: {
                 options: {
                     base: {
@@ -684,7 +673,6 @@ module.exports = function(grunt) {
                     'app/scripts/class.js',
                     'app/scripts/inspinia.js',
                     'app/scripts/app.js',
-                    'app/scripts/filters.js',
                     'app/scripts/utils.js',
                     'app/scripts/configs/*.js',
                     'app/scripts/controllers/*.js',
@@ -727,7 +715,7 @@ module.exports = function(grunt) {
             dev: {
                 NODE_ENV: 'DEVELOPMENT'
             },
-            prod : {
+            prod: {
                 NODE_ENV: 'PRODUCTION'
             },
             test: {
@@ -767,26 +755,6 @@ module.exports = function(grunt) {
                     }
                 }
             },
-            testModeDevelop: {
-                options: {
-                    configFile: "test/protractor.conf.js",
-                    keepAlive: false,
-                    args: {
-                        baseUrl: 'http://localhost:' + testPort,
-                        suite: 'develop'
-                    }
-                }
-            },
-            testModePublicBrokerage: {
-                options: {
-                    configFile: "test/protractor.conf.js",
-                    keepAlive: false,
-                    args: {
-                        baseUrl: 'http://localhost:' + testPort,
-                        suite: 'publicBrokerage'
-                    }
-                }
-            },
         },
         // server for testing purposes
         express: {
@@ -804,8 +772,6 @@ module.exports = function(grunt) {
 
     });
 
-    var mode = grunt.option('mode') || 'modeDevelop';
-
     grunt.registerTask('build', [
         'copy:main',
         'image',
@@ -822,7 +788,6 @@ module.exports = function(grunt) {
         'connect:server',
         'sass',
         'autoprefixer',
-        'copy:' + mode,
         'webpack:dev',
         'focus:dev'
     ]);
@@ -831,10 +796,11 @@ module.exports = function(grunt) {
     grunt.registerTask('default', ['run']);
 
     grunt.registerTask('prod', [
+        'po2json_angular_translate',
         'copy:main',
         'env:prod',
         'preprocess:index',
-        'connect:server',
+        'connect:dist',
         'image',
         'sass',
         'autoprefixer',
@@ -842,24 +808,12 @@ module.exports = function(grunt) {
         'concat',
         'uglify',
         'cssmin',
+        'copy:dist',
         'focus:prod'
     ]);
 
-    grunt.registerTask('staging', [
-        'copy:main',
-        'copy:' + mode,
-        'env:prod',
-        'preprocess:index',
-        'image',
-        'sass',
-        'autoprefixer',
-        'webpack:staging',
-        'concat',
-        'uglify',
-        'cssmin'
-    ]);
-
     grunt.registerTask('prodbatch', [
+        'po2json_angular_translate',
         'copy:main',
         'env:prod',
         'preprocess:index',
@@ -869,62 +823,9 @@ module.exports = function(grunt) {
         'webpack:prod',
         'concat',
         'uglify',
-        'cssmin'
+        'cssmin',
+        'copy:dist',
     ]);
-
-    grunt.registerTask('modePublicBrokerage', [
-        'copy:modePublicBrokerage'
-    ]);
-
-    grunt.registerTask('modeDevelop', [
-        'copy:modeDevelop'
-    ]);
-
-    grunt.registerTask('modePortal', [
-        'copy:modePortal'
-    ]);
-
-    // tasks for testing
-    grunt.registerTask('testModes', [
-        'copy:main',
-        'env:test',
-        'preprocess:test',
-        'connect:test',
-        'image',
-        'sass',
-        'autoprefixer',
-        'express:test',
-        'copy:testModeDevelop',
-        'protractor:testModeDevelop',
-        'copy:testModePublicBrokerage',
-        'protractor:testModePublicBrokerage'
-    ]);
-
-    grunt.registerTask('testModeDevelop', [
-        'copy:main',
-        'env:test',
-        'preprocess:test',
-        'connect:test',
-        'image',
-        'sass',
-        'autoprefixer',
-        'express:test',
-        'copy:testModeDevelop',
-        'protractor:testModeDevelop'
-    ]);
-
-    grunt.registerTask('testModePublicBrokerage', [
-        'copy:main',
-        'env:test',
-        'preprocess:test',
-        'connect:test',
-        'image',
-        'sass',
-        'autoprefixer',
-        'express:test',
-        'copy:testModePublicBrokerage',
-        'protractor:testModePublicBrokerage'
-      ]);
 
     // to run testing environment manually if needed. node server should be launched separately
     grunt.registerTask('runTest', [
@@ -935,7 +836,6 @@ module.exports = function(grunt) {
         'image',
         'sass',
         'autoprefixer',
-        'copy:' + mode,
         'focus:dev'
     ]);
 

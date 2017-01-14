@@ -1,13 +1,14 @@
 import openstackInstanceSummary from './openstack-instance-summary';
-import openstackInstanceSecurityGroups from './openstack-instance-security-groups';
 import OpenStackInstanceConfig from './openstack-instance-config';
+import openstackInstanceFloatingIp from './openstack-instance-floating-ip';
 
 export default module => {
   module.directive('openstackInstanceSummary', openstackInstanceSummary);
-  module.directive('openstackInstanceSecurityGroups', openstackInstanceSecurityGroups);
+  module.component('openstackInstanceFloatingIp', openstackInstanceFloatingIp);
   module.config(fieldsConfig);
   module.config(actionConfig);
   module.config(stateConfig);
+  module.config(tabsConfig);
 };
 
 // @ngInject
@@ -16,9 +17,10 @@ function fieldsConfig(AppstoreFieldConfigurationProvider) {
 }
 
 // @ngInject
-function actionConfig(ActionConfigurationProvider) {
+function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
   ActionConfigurationProvider.register('OpenStackTenant.Instance', {
     order: [
+      'edit',
       'pull',
       'start',
       'stop',
@@ -26,10 +28,14 @@ function actionConfig(ActionConfigurationProvider) {
       'change_flavor',
       'assign_floating_ip',
       'update_security_groups',
+      'backup',
       'unlink',
       'destroy'
     ],
     options: {
+      edit: angular.merge({}, DEFAULT_EDIT_ACTION, {
+        successMessage: 'Instance has been updated'
+      }),
       pull: {
         title: 'Synchronise'
       },
@@ -41,10 +47,18 @@ function actionConfig(ActionConfigurationProvider) {
           }
         }
       },
+      assign_floating_ip: {
+        fields: {
+          floating_ip: {
+            emptyLabel: 'Allocate and assign new floating IP'
+          }
+        }
+      },
       update_security_groups: {
         title: 'Update security groups',
         fields: {
           security_groups: {
+            type: 'multiselect',
             resource_default_value: true,
             serializer: items => items.map(item => ({url: item.value}))
           }
@@ -56,10 +70,16 @@ function actionConfig(ActionConfigurationProvider) {
             default_value: true
           }
         }
+      },
+      backup: {
+        fields: {
+          description: {
+            type: 'text'
+          }
+        }
       }
     }
   });
-
 }
 
 // @ngInject
@@ -73,5 +93,26 @@ function stateConfig(ResourceStateConfigurationProvider) {
       'STOPPED',
       'SUSPENDED'
     ]
+  });
+}
+
+// @ngInject
+function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
+  ResourceTabsConfigurationProvider.register('OpenStackTenant.Instance', {
+    order: [
+      ...DEFAULT_RESOURCE_TABS.order,
+      'volumes',
+      'backups',
+    ],
+    options: angular.merge({}, DEFAULT_RESOURCE_TABS.options, {
+      volumes: {
+        heading: 'Volumes',
+        component: 'openstackInstanceVolumes'
+      },
+      backups: {
+        heading: 'Backups',
+        component: 'openstackBackupsList'
+      },
+    })
   });
 }

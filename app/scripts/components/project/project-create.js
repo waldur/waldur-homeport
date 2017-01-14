@@ -16,6 +16,7 @@ function ProjectAddController(
   baseControllerAddClass,
   $rootScope,
   $state,
+  ncUtils,
   ncUtilsFlash) {
   var controllerScope = this;
   var ProjectController = baseControllerAddClass.extend({
@@ -29,9 +30,11 @@ function ProjectAddController(
       this.project = this.instance;
     },
     activate: function() {
-      var vm = this;
-      currentStateService.getCustomer().then(function(customer) {
-        vm.project.customer = customer.url;
+      currentStateService.getCustomer().then(customer => {
+        this.project.customer = customer.url;
+        if (ncUtils.isCustomerQuotaReached(customer, 'project')) {
+          $state.go('errorPage.limitQuota');
+        }
       });
     },
     afterSave: function(project) {

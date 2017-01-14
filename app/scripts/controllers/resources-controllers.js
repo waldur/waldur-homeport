@@ -58,14 +58,7 @@
               title: 'Name',
               className: 'all',
               render: function(row) {
-                var img = '<img src="{src}" title="{title}" class="img-xs m-r-xs">'
-                      .replace('{src}', resourceUtils.getIcon(row))
-                      .replace('{title}', row.resource_type);
-                var href = $state.href('resources.details', {
-                  uuid: row.uuid,
-                  resource_type: row.resource_type
-                });
-                return ncUtils.renderLink(href, img + ' ' + row.name);
+                return vm.renderResourceName(row);
               }
             },
             {
@@ -79,12 +72,7 @@
               title: 'State',
               className: 'min-tablet-l',
               render: function(row) {
-                var uuids = vm.list.map(function(item) {
-                  return item.uuid;
-                });
-                var index = uuids.indexOf(row.uuid);
-                return '<resource-state resource="controller.list[{index}]"></resource-state>'
-                  .replace('{index}', index);
+                return vm.renderResourceState(row);
               }
             }
           ],
@@ -99,6 +87,24 @@
             return '<action-button-resource button-controller="controller" button-model="controller.list[' + index + ']"/>';
           }
         };
+      },
+      renderResourceName: function(row) {
+        var img = '<img src="{src}" title="{title}" class="img-xs m-r-xs">'
+          .replace('{src}', resourceUtils.getIcon(row))
+          .replace('{title}', row.resource_type);
+        var href = $state.href('resources.details', {
+          uuid: row.uuid,
+          resource_type: row.resource_type
+        });
+        return ncUtils.renderLink(href, img + ' ' + row.name);
+      },
+      renderResourceState: function(row) {
+        var uuids = this.list.map(function(item) {
+          return item.uuid;
+        });
+        var index = uuids.indexOf(row.uuid);
+        return '<resource-state resource="controller.list[{index}]"></resource-state>'
+          .replace('{index}', index);
       },
       getTableActions: function() {
         var actions = [];
@@ -156,14 +162,19 @@
         return 'Create';
       },
       gotoAppstore: function() {
+        $state.go(this.getCategoryState(), {
+          uuid: this.currentProject.uuid
+        });
+      },
+      getCategoryState: function() {
         if (this.category === ENV.VirtualMachines) {
-          $state.go('appstore.vms');
+          return 'appstore.vms';
         } else if (this.category === ENV.PrivateClouds) {
-          $state.go('appstore.private_clouds');
+          return 'appstore.private_clouds';
         } else if (this.category === ENV.Applications) {
-          $state.go('appstore.apps');
+          return 'appstore.apps';
         } else if (this.category === ENV.Storages) {
-          $state.go('appstore.storages');
+          return 'appstore.storages';
         }
       },
       getMapAction: function() {
@@ -176,7 +187,7 @@
         'uuid', 'url', 'name', 'state', 'runtime_state', 'created', 'error_message',
         'resource_type', 'latitude', 'longitude',
         'service_name', 'service_uuid', 'customer', 'service_settings_state',
-        'service_settings_error_message', 'service_settings_uuid', 'security_groups'
+        'service_settings_error_message', 'service_settings_uuid', 'security_groups',
       ],
       getMarkers: function() {
         var items = this.controllerScope.list.filter(function hasCoordinates(item) {
@@ -303,195 +314,5 @@
     });
 
     return ControllerListClass;
-  }
-})();
-
-
-(function() {
-  angular.module('ncsaas')
-      .controller('ResourceDetailUpdateController', [
-        '$stateParams',
-        '$state',
-        '$scope',
-        '$rootScope',
-        '$interval',
-        'ENV',
-        'resourcesService',
-        'resourcesCountService',
-        'resourceUtils',
-        'alertsService',
-        'servicesService',
-        'baseControllerDetailUpdateClass',
-        'currentStateService',
-        'zabbixHostsService',
-        'ncUtilsFlash',
-        ResourceDetailUpdateController
-      ]);
-
-  function ResourceDetailUpdateController(
-    $stateParams,
-    $state,
-    $scope,
-    $rootScope,
-    $interval,
-    ENV,
-    resourcesService,
-    resourcesCountService,
-    resourceUtils,
-    alertsService,
-    servicesService,
-    baseControllerDetailUpdateClass,
-    currentStateService,
-    zabbixHostsService,
-    ncUtilsFlash) {
-    var controllerScope = this;
-    var Controller = baseControllerDetailUpdateClass.extend({
-      canEdit: true,
-      defaultErrorMessage: ENV.defaultErrorMessage,
-
-      init:function() {
-        this.service = resourcesService;
-        this.controllerScope = controllerScope;
-        this._super();
-        controllerScope.enableRefresh = true;
-      },
-
-      getModel: function() {
-        return this.service.$get($stateParams.resource_type, $stateParams.uuid);
-      },
-
-      reInitResource: function() {
-        if (!controllerScope.enableRefresh) {
-          return;
-        }
-        return controllerScope.getModel().then(function(model) {
-          controllerScope.model = model;
-        }, function(error) {
-          if (error.status === 404) {
-            ncUtilsFlash.error('Resource is gone.');
-            this.modelNotFound();
-          }
-        }.bind(this));
-      },
-
-      afterActivate: function() {
-        this.viewHeaderLabel = resourceUtils.formatResourceType(this.model);
-        this.updateMenu();
-        this.updateResourceTab();
-        this.scheduleRefresh();
-        this.addMonitoringTabs();
-      },
-
-      updateMenu: function() {
-        controllerScope.context = {resource: controllerScope.model};
-        controllerScope.listState = this.getListState(this.model.resource_type)
-                                    + "({uuid: ResourceCtrl.context.resource.project_uuid})";
-        controllerScope.listTitle = this.getListTitle(this.model.resource_type);
-      },
-
-      getListTitle: function(resourceType) {
-        var resourceCategory = ENV.resourceCategory[resourceType];
-        if (resourceCategory === 'apps') {
-          return 'Applications';
-        } else if (resourceCategory === 'private_clouds') {
-          return 'Private clouds';
-        } else if (resourceCategory === 'storages') {
-          return 'Storage';
-        } else {
-          return 'Virtual machines';
-        }
-      },
-
-      getListState: function(resourceType) {
-        var resourceCategory = ENV.resourceCategory[resourceType];
-        if (resourceCategory === 'apps') {
-          return 'project.resources.apps';
-        } else if (resourceCategory === 'private_clouds') {
-          return 'project.resources.clouds';
-        } else if (resourceCategory === 'storages') {
-          return 'project.resources.storage.tabs';
-        } else {
-          return 'project.resources.vms';
-        }
-      },
-
-      addMonitoringTabs: function() {
-        var vm = this;
-        var host = vm.getZabbixHost(vm.model);
-        if (host) {
-          vm.showGraphs = true;
-          vm.getITServiceForHost(host).then(function(itservice) {
-            if (itservice) {
-              vm.showSla = true;
-            }
-          });
-        }
-      },
-
-      getZabbixHost: function(resource) {
-        return resource.related_resources.filter(function(item) {
-          return item.resource_type === 'Zabbix.Host';
-        })[0];
-      },
-
-      getITServiceForHost: function(host) {
-        return zabbixHostsService.$get(host.uuid).then(function(host) {
-          return host.related_resources.filter(function(item) {
-            return item.resource_type === 'Zabbix.ITService';
-          })[0];
-        });
-      },
-
-      updateResourceTab: function() {
-        var resourceCategory = ENV.resourceCategory[this.model.resource_type];
-        if (resourceCategory) {
-          this.resourceTab = resourceCategory;
-        } else {
-          this.resourceTab = ENV.resourcesTypes.vms;
-        }
-      },
-
-      scheduleRefresh: function() {
-        var refreshPromise = $interval(
-          this.reInitResource.bind(this),
-          ENV.resourcesTimerInterval * 1000
-        );
-
-        $scope.$on('$destroy', function() {
-          $interval.cancel(refreshPromise);
-        });
-      },
-
-      afterInstanceRemove: function(resource) {
-        this.service.clearAllCacheForCurrentEndpoint();
-        $rootScope.$broadcast('refreshCounts');
-
-        var state = this.getListState(this.model.resource_type);
-        $state.go(state, {uuid: this.model.project_uuid});
-      },
-
-      modelNotFound: function() {
-        currentStateService.getProject().then(function(project) {
-          $state.go('project.details', {uuid: project.uuid});
-        }, function() {
-          currentStateService.getCustomer().then(function(response) {
-            $state.go('organization.details', {uuid: response.uuid});
-          }, function() {
-            $state.go('dashboard.index');
-          });
-        });
-      },
-
-      update: function() {
-        var vm = this;
-        vm.model.$update(function success() {
-          resourcesService.clearAllCacheForCurrentEndpoint();
-        }, function error(response) {
-          vm.errors = response.data;
-        });
-      }
-    });
-
-    controllerScope.__proto__ = new Controller();
   }
 })();

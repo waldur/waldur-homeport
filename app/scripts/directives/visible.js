@@ -3,28 +3,15 @@
 (function() {
 
   angular.module('ncsaas')
-    .directive('visible', ['ENV', visible]);
+    .directive('visible', ['features', visible]);
 
   // This directive is deprecated. Please use visible-if directive instead which parses expression.
   // For example: <a visible="resources"></a> becomes <a visible="'resources'"></a>
-  function visible(ENV) {
+  function visible(features) {
     return {
       restrict: 'A',
-      scope: {
-        excludeMode: "@"
-      },
       link: function(scope, element, attrs) {
-        var doRemove = false,
-          features = attrs.visible.split(',');
-        for (var i = 0; i < features.length; i++) {
-          if ((ENV.toBeFeatures.indexOf(features[i].trim()) !== -1
-              || (ENV.toBeFeatures.indexOf('resources') !== -1 && features[i].trim()) in ENV.resourcesTypes)
-              && ENV.modeName !== attrs.excludeMode) {
-            doRemove = true;
-            break;
-          }
-        }
-        if (!ENV.featuresVisible && doRemove) {
+        if (!features.isVisible(attrs.visible)) {
           element.remove();
         }
       }

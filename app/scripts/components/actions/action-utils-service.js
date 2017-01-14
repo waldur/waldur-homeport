@@ -13,6 +13,11 @@ export default function actionUtilsService(
         if (action.hasOwnProperty('enabled')) {
           result[name] = action;
         }
+        if (action.fields) {
+          angular.forEach(action.fields, (action, name) => {
+            action.name = name;
+          });
+        }
         return result;
       }, {});
     });
@@ -31,7 +36,13 @@ export default function actionUtilsService(
 
   this.loadChoices = function(field) {
     return this.loadRawChoices(field).then(items => {
-      field.list = this.formatChoices(field, items);
+      let choices = this.formatChoices(field, items);
+      if (field.emptyLabel && !field.required) {
+        choices.unshift({
+          display_name: field.emptyLabel
+        });
+      }
+      field.list = choices;
     });
   };
 
@@ -70,7 +81,8 @@ export default function actionUtilsService(
   };
 
   this.confirmAction = function(model, name) {
-    let confirmTextSuffix = ActionConfiguration[model.resource_type].delete_message || '';
+    const custom = ActionConfiguration[model.resource_type];
+    let confirmTextSuffix = custom && custom.delete_message || '';
     if (name === 'destroy') {
       var confirmText = (model.state === 'Erred')
         ? 'Are you sure you want to delete a {resource_type} in an Erred state?' +
@@ -89,7 +101,9 @@ export default function actionUtilsService(
     var promise = (action.method === 'DELETE') ? $http.delete(action.url) : $http.post(action.url);
 
     function onSuccess(response) {
-      if (response.status === 204) {
+      if (response.status === 201 || response.status === 202) {
+        vm.handleActionSuccess(action);
+      } else if (response.status === 204) {
         ncUtilsFlash.success('Resource has been deleted');
         controller.afterInstanceRemove(resource);
       } else {
@@ -102,7 +116,7 @@ export default function actionUtilsService(
   };
 
   this.handleActionSuccess = function(action) {
-    var template = 'Request to {action} has been accepted';
+    var template = action.successMessage || 'Request to {action} has been accepted';
     var message = template.replace('{action}', action.title.toLowerCase());
     ncUtilsFlash.success(message);
   };

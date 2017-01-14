@@ -6,8 +6,8 @@
 
 Name: waldur-homeport
 Summary: Waldur HomePort
-Version: 2.0.0
-Release: 1
+Version: 2.1.0
+Release: 1.el7
 License: MIT
 Source0: %{name}-%{version}.tar.gz
 
@@ -37,7 +37,6 @@ npm install
 bower --allow-root --no-color install
 
 grunt prodbatch
-grunt po2json_angular_translate
 
 %install
 rm -rf %{buildroot}
@@ -48,7 +47,7 @@ mkdir -p %{buildroot}%{__conf_dir}
 cp packaging%{__conf_dir}/config.json %{buildroot}%{__conf_dir}
 cp packaging%{__conf_dir}/nginx.conf %{buildroot}%{__conf_dir}
 
-cp -r app %{buildroot}%{__data_dir}
+cp -r dist %{buildroot}%{__data_dir}
 
 %clean
 rm -rf %{buildroot}
@@ -60,6 +59,9 @@ rm -rf %{buildroot}
 %config(noreplace) %{__conf_dir}/nginx.conf
 
 %changelog
+* Sat Jan 14 2017 Jenkins <jenkins@opennodecloud.com> - 2.1.0-1.el7
+- New upstream release
+
 * Fri Dec 23 2016 Juri Hudolejev <juri@opennodecloud.com> - 2.0.0-1
 - New upstream release
 

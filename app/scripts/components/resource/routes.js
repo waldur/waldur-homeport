@@ -1,4 +1,36 @@
 // @ngInject
+function loadResource(
+  $stateParams, $q, $state, currentStateService, resourcesService, projectsService, customersService, WorkspaceService) {
+  if (!$stateParams.uuid) {
+    return $q.reject();
+  }
+
+  return resourcesService.$get($stateParams.resource_type, $stateParams.uuid)
+  .then(resource => {
+    return projectsService.$get(resource.project_uuid).then(project => {
+      currentStateService.setProject(project);
+      return { project };
+    });
+  }).then(({ project }) => {
+    return customersService.$get(project.customer_uuid).then(customer => {
+      currentStateService.setCustomer(customer);
+      return { customer, project };
+    });
+  }).then(({ customer, project }) => {
+    WorkspaceService.setWorkspace({
+      customer: customer,
+      project: project,
+      hasCustomer: true,
+      workspace: 'project',
+    });
+  }).catch(response => {
+    if (response.status === 404) {
+      $state.go('errorPage.notFound');
+    }
+  });
+}
+
+// @ngInject
 export default function resourceRoutes($stateProvider) {
   $stateProvider
     .state('resources', {
@@ -15,7 +47,9 @@ export default function resourceRoutes($stateProvider) {
 
     .state('resources.details', {
       url: ':resource_type/:uuid',
-      templateUrl: 'views/resource/base.html',
-      controller: 'ResourceDetailUpdateController as controller'
+      template: '<resource-header></resource-header>',
+      resolve: {
+        resource: loadResource
+      }
     });
 }

@@ -34,17 +34,27 @@
           ng-repeat="organization in Ctrl.organizations | filter: {name: Ctrl.organizationSearchInput}"
           ng-class="{active: organization.uuid == Ctrl.selectedOrganization.uuid}"
           ng-click="Ctrl.selectOrganization(organization)">
-          <a class="btn btn-xs btn-default pull-right" submit-button="Ctrl.gotoOrganization(organization)">
+          <a class="btn btn-xs btn-default pull-right"
+            ng-if="organization.ownerOrStaff"
+            submit-button="Ctrl.gotoOrganization(organization)">
             Select
           </a>
-          <div class="elipsis">{{ organization.name }}</div>
+          <div
+            class="elipsis"
+            ng-if="organization.abbreviation"
+            uib-tooltip="{{ organization.name }}"
+            ng-bind="organization.abbreviation"></div>
+          <div
+            class="elipsis"
+            ng-if="!organization.abbreviation"
+            ng-bind="organization.name"></div>
         </div>
       </div>
     </div>
     <div class="col-md-6 col-xs-12">
       <a class="pull-right btn btn-sm btn-default"
         ng-click="Ctrl.createProject()"
-        ng-if="Ctrl.canCreateProject">
+        ng-if="Ctrl.selectedOrganization.ownerOrStaff">
         <i class="fa fa-plus"></i>
         Add new project
       </a>

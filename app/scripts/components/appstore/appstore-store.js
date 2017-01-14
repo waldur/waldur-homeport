@@ -69,6 +69,9 @@ function AppStoreController(
       });
       currentStateService.getCustomer().then(function(response) {
         vm.currentCustomer = response;
+        if (ncUtils.isCustomerQuotaReached(vm.currentCustomer, 'resource')) {
+          $state.go('errorPage.limitQuota');
+        }
       });
     },
     setCategory: function(category) {
@@ -76,7 +79,7 @@ function AppStoreController(
         return;
       }
 
-      if (category.requireStaffOwnerManager && !currentStateService.getStaffOwnerManager()) {
+      if (category.requireOwnerOrStaff && !currentStateService.getOwnerOrStaff()) {
         $state.go('errorPage.notFound');
         return;
       }
@@ -374,8 +377,12 @@ function AppStoreController(
       for (var name in this.allFormOptions) {
         if (this.instance.hasOwnProperty(name)) {
           var value = this.instance[name];
+          var option = this.allFormOptions[name];
           if (value.hasOwnProperty('url')) {
             value = value.url;
+          }
+          if (option.serializer) {
+            value = option.serializer(value, option);
           }
           instance[name] = value;
         }

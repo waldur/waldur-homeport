@@ -1,4 +1,10 @@
-export default function bootstrap(modulename, files) {
+import stableMode from '../../configs/modes/stable.json';
+import experimentalMode from '../../configs/modes/experimental.json';
+
+const files = ['scripts/configs/config.json'];
+const modes = {stableMode, experimentalMode};
+
+export default function bootstrap(modulename) {
   loadSettings().then(bootstrapApplication);
 
   function loadSettings() {
@@ -10,10 +16,11 @@ export default function bootstrap(modulename, files) {
 
     function updateSettings(responses) {
       window.$$CUSTOMENV = angular.extend.apply(null, responses);
+      window.$$MODES = modes;
     }
 
     function reportError() {
-      alert('Unable to load application configuration. Please reboot the page');
+      alert('Unable to load application configuration. Please reload this page');
     }
   }
 

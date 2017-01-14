@@ -1,4 +1,37 @@
 // @ngInject
+function loadProject($stateParams, $q, $state, currentStateService, projectsService, customersService, WorkspaceService) {
+  if (!$stateParams.uuid) {
+    return $q.reject();
+  }
+  return projectsService.$get($stateParams.uuid).then(project => {
+    currentStateService.setProject(project);
+    return { project };
+  }).then(({ project }) => {
+    return customersService.$get(project.customer_uuid).then(customer => {
+      currentStateService.setCustomer(customer);
+      return { customer, project };
+    });
+  }).then(({ customer, project }) => {
+    WorkspaceService.setWorkspace({
+      customer: customer,
+      project: project,
+      hasCustomer: true,
+      workspace: 'project',
+    });
+    return project;
+  }).catch(response => {
+    if (response.status === 404) {
+      $state.go('errorPage.notFound');
+    }
+  });
+}
+
+// @ngInject
+function projectController($scope, currentProject) {
+  $scope.currentProject = currentProject;
+}
+
+// @ngInject
 export default function projectRoutes($stateProvider) {
   $stateProvider
     .state('project', {
@@ -7,31 +40,17 @@ export default function projectRoutes($stateProvider) {
       templateUrl: 'views/project/base.html',
       data: {
         auth: true,
-        workspace: 'project'
+        workspace: 'project',
       },
       resolve: {
-        currentProject: function(CustomerUtilsService, $stateParams) {
-          return CustomerUtilsService.getCurrentProject($stateParams.uuid);
-        }
-      }
-    })
-
-    .state('project-create', {
-      url: '/projects/add/',
-      template: '<project-create></project-create>',
-      data: {
-        pageTitle: 'Create project',
-        workspace: 'organization',
-        auth: true
+        currentProject: loadProject,
       },
+      controller: projectController
     })
 
     .state('project.details', {
       url: '',
-      templateUrl: 'views/dashboard/project.html',
-      controller: 'ProjectDashboardController',
-      controllerAs: 'DashboardCtrl',
-      bindToController: true,
+      template: '<project-dashboard project="currentProject"></project-dashboard>',
       data: {
         pageTitle: 'Project dashboard',
         pageClass: 'gray-bg'
@@ -135,17 +154,16 @@ export default function projectRoutes($stateProvider) {
 
     .state('project.team', {
       url: 'team/',
-      templateUrl: 'views/partials/filtered-list.html',
-      controller: 'ProjectUsersListController',
-      controllerAs: 'ListController',
+      template: '<project-users></project-users>',
       data: {
         pageTitle: 'Team'
       }
     })
 
     .state('import', {
-      url: '/import/',
-      templateUrl: 'views/project/base.html',
+      url: 'import/',
+      parent: 'project',
+      template: '<ui-view></ui-view>',
       abstract: true,
       data: {
         auth: true,

@@ -75,13 +75,13 @@ function CustomerDeleteController(
             issue: () => ({
               customer: vm.customer,
               type: ISSUE_IDS.CHANGE_REQUEST,
-              summary: 'Customer removal'
+              summary: 'Organization removal'
             }),
             options: {
-              title: 'Customer removal',
+              title: 'Organization removal',
               hideTitle: true,
               descriptionLabel: 'Reason',
-              descriptionPlaceholder: 'Why do you need to remove customer with existing projects?',
+              descriptionPlaceholder: 'Why do you need to remove organization with existing projects?',
               submitTitle: 'Request removal'
             }
           }
@@ -90,12 +90,9 @@ function CustomerDeleteController(
       var confirmDelete = confirm('Confirm deletion?');
       if (confirmDelete) {
         currentStateService.setCustomer(null);
-        this.customer.$delete().then(function(instance) {
+        this.customer.$delete().then(function() {
           customersService.clearAllCacheForCurrentEndpoint();
-          customersService.getPersonalOrFirstCustomer(instance.name).then(function(customer) {
-            currentStateService.setCustomer(customer);
-            $state.go('organization.details', {uuid: customer.uuid});
-          });
+          $state.go('profile.details');
         }, function() {
           currentStateService.setCustomer(vm.customer);
         });

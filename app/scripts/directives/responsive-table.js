@@ -10,9 +10,10 @@
     return {
       restrict: 'E',
       scope: {
-        controller: '=tableCtrl'
+        controller: '=tableCtrl',
+        isVisible: '='
       },
-      template: '<div class="full-width"><div class="table-responsive"><table class="table table-striped"></table></div></div>',
+      template: '<table class="table table-striped"></table>',
       link: function(scope, element) {
         var options = scope.controller.tableOptions;
         var table;
@@ -31,6 +32,15 @@
               connectWatcher(table);
             }
             registerEvents(table);
+          }
+        });
+
+        // http://www.gyrocode.com/articles/jquery-datatables-column-width-issues-with-bootstrap-tabs
+        scope.$watch('isVisible', function(value) {
+          if (table) {
+            $timeout(function() {
+              table.columns.adjust().responsive.recalc();
+            })
           }
         });
 

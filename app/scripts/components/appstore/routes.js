@@ -2,9 +2,10 @@
 export default function appstoreRoutes($stateProvider) {
   $stateProvider
     .state('appstore', {
-      url: '/appstore/',
+      url: 'appstore/',
+      parent: 'project',
       abstract: true,
-      template: '<appstore-header></appstore-header>',
+      template: '<ui-view></ui-view>',
       data: {
         auth: true,
         pageTitle: 'Service store',

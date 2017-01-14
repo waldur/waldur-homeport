@@ -33,14 +33,12 @@ function SelectWorkspaceDialogController(
   ctrl.selectedProject = {};
   ctrl.currentUser = {};
   ctrl.canCreateOrganization = false;
-  ctrl.canCreateProject = false;
 
   ctrl.selectOrganization = function(organization) {
     ctrl.selectedOrganization = organization;
     if (organization.projects.length > 0) {
       ctrl.selectProject(organization.projects[0]);
     }
-    ctrl.canCreateProject = isOwnerOrStaff();
   };
 
   ctrl.selectProject = function(project) {
@@ -48,13 +46,12 @@ function SelectWorkspaceDialogController(
   };
 
   ctrl.gotoOrganization = function(organization) {
-    $rootScope.$broadcast('adjustCurrentCustomer', organization);
-    var promise = $state.go('dashboard.index');
+    var promise = $state.go('organization.dashboard', {uuid: organization.uuid}, {reload: true});
     return blockAndClose(promise);
   };
 
   ctrl.gotoProject = function(project) {
-    var promise = $state.go('project.details', {uuid: project.uuid});
+    var promise = $state.go('project.details', {uuid: project.uuid}, {reload: true});
     return blockAndClose(promise);
   };
 
@@ -71,7 +68,9 @@ function SelectWorkspaceDialogController(
   };
 
   ctrl.createProject = function() {
-    var promise = $state.go('project-create');
+    var promise = $state.go('organization.createProject', {
+      uuid: ctrl.selectedOrganization.uuid
+    });
     return blockAndClose(promise);
   };
 
@@ -83,26 +82,12 @@ function SelectWorkspaceDialogController(
     });
   }
 
-  function isOwnerOrStaff() {
-    if (!ctrl.selectedOrganization) {
-      return false;
-    }
-    if (ctrl.currentUser.is_staff) {
-      return true;
-    }
-    var users = ctrl.selectedOrganization.owners;
-    for (var i = 0; i < users.length; i++) {
-      if (ctrl.currentUser.uuid === users[i].uuid) {
-        return true;
-      }
-    }
-    return false;
-  }
-
   function loadInitial() {
     return $q.all([
       currentStateService.getCustomer().then(function(organization) {
-        ctrl.organizations.unshift(organization);
+        if (organization) {
+          ctrl.organizations.unshift(organization);
+        }
         ctrl.selectedOrganization = organization;
       }),
 
@@ -116,16 +101,20 @@ function SelectWorkspaceDialogController(
       }),
 
       customersService.getAll({
-        field: ['name', 'uuid', 'projects', 'owners', 'quotas']
+        field: ['name', 'uuid', 'projects', 'owners', 'quotas', 'abbreviation']
       }).then(function(organizations) {
-        ctrl.organizations = ctrl.organizations.concat(organizations.filter(function(organization) {
-          return organization.uuid !== ctrl.selectedOrganization.uuid;
-        }));
+        if (ctrl.selectedOrganization) {
+          organizations = organizations.filter(function(organization) {
+            return organization.uuid !== ctrl.selectedOrganization.uuid;
+          });
+        }
+        ctrl.organizations = ctrl.organizations.concat(organizations);
+
+        angular.forEach(ctrl.organizations, organization => {
+          organization.ownerOrStaff = customersService.checkCustomerUser(organization, ctrl.currentUser);
+        });
       })
-    ]).then(function() {
-      ctrl.canCreateProject = isOwnerOrStaff();
-      return true;
-    });
+    ]);
   }
 
   ctrl.loadingOrganizations = true;

@@ -8,6 +8,7 @@ import projectModule from './components/project/module';
 import actionsModule from './components/actions/module';
 import navigationModule from './components/navigation/module';
 import resourceModule from './components/resource/module';
+import monitoringModule from './components/monitoring/module';
 import invoicesModule from './components/invoices/module';
 import authModule from './components/auth/module';
 import invitationsModule from './components/invitations/module';
@@ -22,6 +23,8 @@ import alertsModule from './components/alerts/module';
 import routesModule from './routes/module';
 import analyticsModule from './components/analytics/module';
 import coreModule from './components/core/module';
+import dashboardModule from './components/dashboard/module';
+import filtersModule from './filters';
 import bootstrap from './components/core/bootstrap';
 
 const module = angular.module('ncsaas');
@@ -36,6 +39,7 @@ projectModule(module);
 actionsModule(module);
 navigationModule(module);
 resourceModule(module);
+monitoringModule(module);
 invoicesModule(module);
 authModule(module);
 invitationsModule(module);
@@ -50,6 +54,7 @@ alertsModule(module);
 routesModule(module);
 analyticsModule(module);
 coreModule(module);
+dashboardModule(module);
+filtersModule(module);
 
-// eslint-disable-next-line no-undef
-bootstrap('ncsaas', process.env.CONFIG_FILES);
+bootstrap('ncsaas');
