@@ -1,11 +1,7 @@
 <div class="row border-bottom">
     <nav class="navbar navbar-static-top white-bg m-b-none">
-        <div class="navbar-header m-l-md">
-            <ul class="nav-list views initial">
-                <li>
-                    <a href="#" class="logo" target='_blank'></a>
-                </li>
-            </ul>
+        <div class="navbar-header m-l-xl" ng-if="headerLogo">
+            <a href="#" class="header-logo" target='_blank'><img ng-src="{{headerLogo}}" /></a>
         </div>
         <ul class="nav navbar-top-links navbar-right">
             <li>

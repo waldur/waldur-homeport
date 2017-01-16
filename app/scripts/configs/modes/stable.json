@@ -1,7 +1,6 @@
 {
   "toBeFeatures": [
     "localSignup",
-    "localSignin",
     "password",
     "people",
     "compare",

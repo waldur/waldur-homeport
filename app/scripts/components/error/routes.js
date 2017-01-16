@@ -1,4 +1,10 @@
 // @ngInject
+function headerController($scope, authService, ENV) {
+  $scope.logout = authService.logout;
+  $scope.headerLogo = ENV.loginLogo;
+}
+
+// @ngInject
 export default function errorRoutes($stateProvider) {
   $stateProvider
     .state('errorPage', {
@@ -14,10 +20,11 @@ export default function errorRoutes($stateProvider) {
       url: '404/',
       views: {
         appContent: {
-          templateUrl: 'views/404.html',
+          template: '<error404></error404>',
         },
         appHeader: {
           templateUrl: 'views/partials/site-header.html',
+          controller: headerController
         }
       },
       data: {
@@ -29,10 +36,11 @@ export default function errorRoutes($stateProvider) {
       url: '403/',
       views: {
         appContent: {
-          templateUrl: 'views/403.html',
+          template: '<error403></error403>',
         },
         appHeader: {
           templateUrl: 'views/partials/site-header.html',
+          controller: headerController
         }
       },
       data: {
