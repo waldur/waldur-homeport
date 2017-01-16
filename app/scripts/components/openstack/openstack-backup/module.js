@@ -8,6 +8,7 @@ export default module => {
   module.directive('backupSnapshotsList', backupSnapshotsList);
   module.config(actionConfig);
   module.config(tabsConfig);
+  module.config(breadcrumbsConfig);
 };
 
 // @ngInject
@@ -46,4 +47,34 @@ function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
       },
     })
   });
+}
+
+// @ngInject
+function breadcrumbsConfig(ResourceBreadcrumbsConfigurationProvider) {
+  ResourceBreadcrumbsConfigurationProvider.register('OpenStackTenant.Backup', resource => ([
+    {
+      label: 'Virtual machines',
+      state: 'project.resources.vms',
+      params: {
+        uuid: resource.project_uuid
+      }
+    },
+    {
+      label: resource.instance_name,
+      state: 'resources.details',
+      params: {
+        uuid: resource.instance_uuid,
+        resource_type: 'OpenStackTenant.Instance'
+      }
+    },
+    {
+      label: 'Backups',
+      state: 'resources.details',
+      params: {
+        uuid: resource.instance_uuid,
+        resource_type: 'OpenStackTenant.Instance',
+        tab: 'backups'
+      }
+    },
+  ]));
 }
