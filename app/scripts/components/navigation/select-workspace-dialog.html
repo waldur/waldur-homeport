@@ -10,6 +10,14 @@
         <h3 class="font-bold m-b-lg">
           You dont't have any organizations yet.
         </h3>
+        <div>
+            <a class="btn btn-default"
+              ng-click="Ctrl.createOrganization()"
+              ng-if="Ctrl.canCreateOrganization">
+              <i class="fa fa-plus"></i>
+              Add new organization
+            </a>
+        </div>
     </div>
   </div>
   <div ng-if="!Ctrl.loadingOrganizations && Ctrl.organizations.length > 0" class="row">
