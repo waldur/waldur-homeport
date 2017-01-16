@@ -7,14 +7,11 @@
             <li>
                 <a ui-sref="tos.index">Terms of Service</a>
             </li>
-            <li ng-if="Main.isAuthenticated()" class="rem-mob" visible="help, providers, premiumSupport">
+            <li>
                 <a ui-sref="help.list">Help</a>
             </li>
             <li>
-                <a href="mailto:info@opennodecloud.com">Support</a>
-            </li>
-            <li>
-                Build: <span ng-bind="::buildId"></span>
+                Build: <span ng-bind="::$ctrl.buildId"></span>
             </li>
         </ul>
     </div>
