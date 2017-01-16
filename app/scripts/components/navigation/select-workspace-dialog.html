@@ -5,7 +5,14 @@
   <div ng-if="Ctrl.loadingOrganizations">
       <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
   </div>
-  <div ng-if="!Ctrl.loadingOrganizations" class="row">
+  <div ng-if="!Ctrl.loadingOrganizations && Ctrl.organizations.length === 0" class="row">
+    <div class="middle-box text-center">
+        <h3 class="font-bold m-b-lg">
+          You dont't have any organizations yet.
+        </h3>
+    </div>
+  </div>
+  <div ng-if="!Ctrl.loadingOrganizations && Ctrl.organizations.length > 0" class="row">
     <div class="col-md-6 col-xs-12 m-b-md">
       <a class="pull-right btn btn-sm btn-default"
         ng-click="Ctrl.createOrganization()"
