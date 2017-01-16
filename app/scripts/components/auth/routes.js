@@ -83,7 +83,7 @@ export default function authRoutes($stateProvider) {
       url: '',
       views: {
         'appHeader@initialdata': {
-          templateUrl: 'views/partials/site-header-initial.html',
+          templateUrl: 'views/partials/site-header.html',
         },
         'appContent@initialdata': {
           template: '<auth-init></auth-init>',

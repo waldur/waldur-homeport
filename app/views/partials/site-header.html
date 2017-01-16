@@ -1,29 +1,18 @@
-<!-- app-header -->
-<header class="app-header site">
-    <nav class="container">
-        <!-- views nav -->
-        <ul class="nav-list in-home views">
-            <li class="logo-box site">
-                <a href="#maintop" du-smooth-scroll class="logo"></a>
-            </li>
-            <li class="node-conductor site">
-                <h2>NodeConductor</h2>
+<div class="row border-bottom">
+    <nav class="navbar navbar-static-top white-bg m-b-none">
+        <div class="navbar-header m-l-md">
+            <ul class="nav-list views initial">
+                <li>
+                    <a href="#" class="logo" target='_blank'></a>
+                </li>
+            </ul>
+        </div>
+        <ul class="nav navbar-top-links navbar-right">
+            <li>
+                <a ng-click="logout()">
+                    <i class="fa fa-sign-out"></i> Log out
+                </a>
             </li>
         </ul>
-        <!-- /views nav -->
-        <!-- context nav -->
-        <ul class="nav-list in-home context">
-            <li>
-               <a href="#features" du-smooth-scroll du-scrollspy="features">Features</a>
-            </li>
-            <li visible="plans">
-               <a href="#plans" du-smooth-scroll du-scrollspy="plans">Plans</a>
-            </li>
-            <li>
-               <a ui-sref="login">Login</a>
-            </li>
-        </ul>
-        <!-- /context nav -->
     </nav>
-</header>
-<!-- app-header -->
+</div>

@@ -1,8 +1,12 @@
-<div ng-controller="Error403Controller as Error403" class="white-box error-card">
-    <div class="list-item error-number">403</div>
-    <div>
-        You have exceeded maximum number of quotas. To update current plan visit
+<div ng-controller="Error403Controller as Error403" class="middle-box text-center">
+    <h1>403</h1>
+    <h3 class="font-bold">You have exceeded maximum number of quotas.</h3>
+
+    <div class="error-desc">
+        To update current plan visit
         <a ui-sref="organization.plans({uuid: Error403.customer.uuid})">plans page</a>
+        <div>
+            <a href="{{ Error404.href }}">< Back</a>
+        </div>
     </div>
-    <a href="{{ Error403.href }}">< Back</a>
 </div>
