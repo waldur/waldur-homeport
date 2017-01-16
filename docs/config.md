@@ -26,3 +26,13 @@ configuration files are loaded and their options are merged together with defaul
  - `loginLogo` is rendered on login / signup page, if specified
 
  - `sidebarLogo` is rendered in sidebar header, if specified
+
+## Configuring Terms of Service
+
+Terms of service are located in file `views/tos/index.html`
+
+In order to use custom Terms of Service, you may configure alias in Nginx. For example:
+
+  location /views/tos/index.html {
+    alias /var/www/waldur/tos.html;
+  }
