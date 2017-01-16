@@ -30,7 +30,10 @@ function OpenStackBackupsListController(
             title: 'Name',
             orderField: 'name',
             render: function(row) {
-              var href = $state.href('resources.details', {resource_type: 'OpenStackTenant.Backup', uuid: row.uuid});
+              var href = $state.href('resources.details', {
+                resource_type: 'OpenStackTenant.Backup',
+                uuid: row.uuid
+              });
               return ncUtils.renderLink(href, row.name);
             },
             width: 90

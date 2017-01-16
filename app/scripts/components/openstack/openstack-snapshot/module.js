@@ -10,12 +10,17 @@ export default module => {
 function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
   ActionConfigurationProvider.register('OpenStackTenant.Snapshot', {
     order: [
-      'edit'
+      'edit',
+      'pull',
+      'destroy',
     ],
     options: {
       edit: angular.merge({}, DEFAULT_EDIT_ACTION, {
         successMessage: 'Snapshot has been updated'
-      })
+      }),
+      pull: {
+        title: 'Synchronise'
+      },
     }
   });
 }
