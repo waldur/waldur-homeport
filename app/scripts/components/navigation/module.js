@@ -7,6 +7,7 @@ import titleService from './title-service';
 import setTitleFromState from './set-title-from-state';
 import uiSrefActiveIf from './ui-sref-active-if';
 import WorkspaceService from './workspace-service';
+import { appFooter } from './app-footer';
 
 export default module => {
   module.directive('selectWorkspaceToggle', selectWorkspaceToggle);
@@ -18,4 +19,5 @@ export default module => {
   module.run(setTitleFromState);
   module.directive('uiSrefActiveIf', uiSrefActiveIf);
   module.service('WorkspaceService', WorkspaceService);
+  module.component('appFooter', appFooter);
 };
