@@ -9,11 +9,16 @@ msgstr ""
 msgid "&lt; Back"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-summary.html:13
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:5
+msgid "Access"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:15
 msgid "Actions"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:68
+#: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:70
 msgid "Add rule"
 msgstr ""
 
@@ -26,7 +31,7 @@ msgstr ""
 msgid "Create an account"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:56
+#: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:58
 msgid "Delete"
 msgstr ""
 
@@ -34,8 +39,16 @@ msgstr ""
 msgid "Do not have an account?"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-summary.html:42
+msgid "External IP"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:12
 msgid "From port"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-summary.html:30
+msgid "Internal IP"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:11
@@ -51,12 +64,24 @@ msgstr ""
 msgid "Login"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:14
+msgid "No access info"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:12
+msgid "Open"
+msgstr ""
+
 #: app/scripts/components/auth/auth-login.html:76
 msgid "Or use social login"
 msgstr ""
 
 #: app/scripts/components/error/error-404.html:3
 msgid "Page Not Found :/"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:31
+msgid "Password"
 msgstr ""
 
 #: app/scripts/components/error/error-403.html:7
@@ -79,6 +104,10 @@ msgstr ""
 msgid "Security group does not contain any rule yet."
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-summary.html:63
+msgid "Security groups"
+msgstr ""
+
 #: app/scripts/components/auth/auth-login.html:87
 msgid "Sign in with Facebook"
 msgstr ""
@@ -95,12 +124,28 @@ msgstr ""
 msgid "Sign in with Mobile ID"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-summary.html:54
+msgid "SSH key"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-summary.html:5
+msgid "Summary"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:13
 msgid "To port"
 msgstr ""
 
 #: app/scripts/components/error/error-403.html:6
 msgid "To update current plan visit"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-summary.html:72
+msgid "Uptime"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:22
+msgid "Username"
 msgstr ""
 
 #: app/scripts/components/auth/auth-login.html:5

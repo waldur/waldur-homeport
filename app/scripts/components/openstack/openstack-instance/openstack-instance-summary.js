@@ -1,51 +1,25 @@
 import template from './openstack-instance-summary.html';
 
-export default function openstackInstanceSummary() {
-  return {
-    restrict: 'E',
-    template: template,
-    controller: SummaryController,
-    controllerAs: '$ctrl',
-    bindToController: true,
-    scope: {
-      model: '='
+export const openstackInstanceSummary = {
+  template,
+  bindings: {
+    resource: '<'
+  },
+  controller: class ResourceSummaryController {
+    // @ngInject
+    constructor(resourceUtils) {
+      this.resourceUtils = resourceUtils;
     }
-  };
-}
 
-// @ngInject
-class SummaryController {
-  constructor(OpenStackSummaryService) {
-    this.OpenStackSummaryService = OpenStackSummaryService;
-    this.init();
-  }
+    $onChanges(changes) {
+      let resource = changes.resource.currentValue;
+      if (!resource) {
+        return;
+      }
 
-  init() {
-    this.loading = true;
-    this.components = {};
-    this.OpenStackSummaryService.getServiceComponents(this.model.service)
-      .then(components => {
-        this.components = components;
-      })
-      .finally(() => {
-        this.loading = false;
-      });
-  }
-
-  getDailyPrice() {
-    if (this.components && this.model.flavor) {
-      return this.model.flavor.cores * this.components.cores +
-             this.model.flavor.ram * this.components.ram +
-             this.getTotalStorage() * this.components.storage;
+      this.resourceUtils.setAccessInfo(resource);
+      resource.summary = this.resourceUtils.getSummary(resource);
+      resource.uptime = this.resourceUtils.getUptime(resource);
     }
   }
-
-  getMonthlyPrice() {
-    return this.getDailyPrice() * 30;
-  }
-
-  getTotalStorage() {
-    return this.model.system_volume_size + this.model.data_volume_size;
-  }
-}
-
+};
