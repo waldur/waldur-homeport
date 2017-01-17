@@ -1,10 +1,4 @@
 // @ngInject
-function headerController($scope, authService, ENV) {
-  $scope.logout = authService.logout;
-  $scope.headerLogo = ENV.loginLogo;
-}
-
-// @ngInject
 export default function errorRoutes($stateProvider) {
   $stateProvider
     .state('errorPage', {
@@ -23,8 +17,7 @@ export default function errorRoutes($stateProvider) {
           template: '<error404></error404>',
         },
         appHeader: {
-          templateUrl: 'views/partials/site-header.html',
-          controller: headerController
+          template: '<site-header></site-header>',
         }
       },
       data: {
@@ -39,8 +32,7 @@ export default function errorRoutes($stateProvider) {
           template: '<error403></error403>',
         },
         appHeader: {
-          templateUrl: 'views/partials/site-header.html',
-          controller: headerController
+          template: '<site-header></site-header>',
         }
       },
       data: {

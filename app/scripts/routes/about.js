@@ -14,10 +14,10 @@ export default function aboutRoutes($stateProvider) {
           templateUrl: 'views/tos/index.html',
         },
         appHeaderOut: {
-          templateUrl: 'views/partials/site-header.html',
+          template: '<site-header></site-header>',
         },
         appHeaderIn: {
-          templateUrl: 'views/partials/site-header.html',
+          template: '<site-header></site-header>',
         }
       },
       data: {
@@ -39,10 +39,10 @@ export default function aboutRoutes($stateProvider) {
           templateUrl: 'views/about/index.html',
         },
         appHeaderOut: {
-          templateUrl: 'views/partials/site-header.html',
+          template: '<site-header></site-header>',
         },
         appHeaderIn: {
-          templateUrl: 'views/partials/site-header.html',
+          template: '<site-header></site-header>',
         }
       },
       data: {
@@ -64,10 +64,10 @@ export default function aboutRoutes($stateProvider) {
           templateUrl: 'views/policy/privacy.html',
         },
         appHeaderOut: {
-          templateUrl: 'views/partials/site-header.html',
+          template: '<site-header></site-header>',
         },
         appHeaderIn: {
-          templateUrl: 'views/partials/site-header.html',
+          template: '<site-header></site-header>',
         }
       },
       data: {
