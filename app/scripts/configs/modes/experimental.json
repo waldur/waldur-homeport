@@ -1,11 +1,7 @@
 {
   "toBeFeatures": [
-    "localSignup",
     "people",
-    "templates",
-    "monitoring",
-    "projectGroups",
-    "estonianId"
+    "monitoring"
   ],
   "featuresVisible": false,
   "invitationsEnabled": true
