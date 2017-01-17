@@ -5,23 +5,9 @@ const resourceState = {
   bindings: {
     resource: '<'
   },
-  controller: class ResourceStateController {
-    constructor(resourceUtils) {
-      // @ngInject
-      this.resourceUtils = resourceUtils;
-    }
-
-    $onInit() {
-      this.refresh();
-    }
-
-    $onChange() {
-      this.refresh();
-    }
-
-    refresh() {
-      this.context = this.resourceUtils.getResourceState(this.resource);
-    }
+  controller: function ResourceStateController($scope, resourceUtils) {
+    $scope.$watch(() => this.resource, () =>
+      this.context = resourceUtils.getResourceState(this.resource));
   }
 };
 

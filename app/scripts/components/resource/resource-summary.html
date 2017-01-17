@@ -17,6 +17,14 @@
     <openstack-subnet-summary resource="$ctrl.resource"></openstack-subnet-summary>
   </div>
 
+  <div ng-switch-when="OpenStack.Tenant">
+    <openstack-tenant-summary resource="$ctrl.resource"></openstack-tenant-summary>
+  </div>
+
+  <div ng-switch-when="OpenStackTenant.Instance">
+    <openstack-instance-summary resource="$ctrl.resource"></openstack-instance-summary>
+  </div>
+
   <div ng-switch-default>
 
   <resource-summary-base resource="$ctrl.resource"></resource-summary-base>
@@ -72,77 +80,6 @@
     </dd>
   </div>
 
-  <div class="m-b-xs" ng-if="$ctrl.resource.internal_ips">
-    <dt>
-      Internal IP:
-    </dt>
-    <dd>
-      <span ng-if="$ctrl.resource.internal_ips.length === 0">&ndash;</span>
-      <span ng-if="$ctrl.resource.internal_ips.length > 0">
-        {{ $ctrl.resource.internal_ips.join(', ') }}
-      </span>
-    </dd>
-  </div>
-
-  <div class="m-b-xs" ng-if="$ctrl.resource.external_ips">
-    <dt>
-      External IP:
-    </dt>
-    <dd>
-      <span ng-if="$ctrl.resource.external_ips.length === 0">&ndash;</span>
-      <span ng-if="$ctrl.resource.external_ips.length > 0">
-        {{ $ctrl.resource.external_ips.join(', ') }}
-      </span>
-    </dd>
-  </div>
-
-  <div class="m-b-xs" ng-if="$ctrl.resource.user_username">
-    <dt>
-      Username:
-    </dt>
-    <dd>
-      <span ng-bind="$ctrl.resource.user_username"></span>
-    </dd>
-  </div>
-
-  <div class="m-b-xs" ng-if="$ctrl.resource.user_password">
-    <dt>
-      Password:
-    </dt>
-    <dd>
-      <span ng-if="!showPassword">***************</span>
-      <a class="icon fa-eye" title="Show password" ng-click="showPassword=!showPassword"></a>
-      <span ng-if="showPassword" ng-bind="$ctrl.resource.user_password"></span>
-    </dd>
-  </div>
-
-  <div class="m-b-xs" ng-if="$ctrl.resource.key_name">
-    <dt>
-      SSH key:
-    </dt>
-    <dd>
-      <span ng-bind="$ctrl.resource.key_name"></span>
-    </dd>
-  </div>
-
-  <div class="m-b-xs" ng-if="$ctrl.resource.security_groups">
-    <dt>
-      Security groups:
-    </dt>
-    <dd>
-      <security-groups-link
-        security-groups="$ctrl.resource.security_groups"></security-groups-link>
-    </dd>
-  </div>
-
-  <div class="m-b-xs" ng-if="!$ctrl.resource.isVolume && $ctrl.resource.uptime">
-    <dt>
-      Uptime:
-    </dt>
-    <dd>
-      {{ ::$ctrl.resource.uptime }}
-    </dd>
-  </div>
   </div>
 
 </dl>

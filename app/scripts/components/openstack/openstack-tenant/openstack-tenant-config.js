@@ -66,5 +66,5 @@ export default {
       parentField: 'subnet_cidr'
     },
   },
-  summaryComponent: 'openstackTenantSummary'
+  summaryComponent: 'openstackTenantCheckoutSummary'
 };
