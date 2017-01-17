@@ -4,22 +4,113 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: \n"
 
-#: app/views/partials/app-header.html:108
-msgid "Add provider"
+#: app/scripts/components/error/error-403.html:9
+#: app/scripts/components/error/error-404.html:6
+msgid "&lt; Back"
 msgstr ""
 
-#: app/views/partials/app-header.html:126
-msgid "Import resources"
+#: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:15
+msgid "Actions"
 msgstr ""
 
-#: app/views/partials/app-header.html:136
-msgid "Logout"
+#: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:68
+msgid "Add rule"
 msgstr ""
 
-#: app/views/partials/app-header.html:133
-msgid "Profile"
+#: app/scripts/components/auth/auth-login.html:100
+msgid "Already have an account?"
 msgstr ""
 
-#: app/views/partials/app-header.html:130
-msgid "Support"
+#: app/scripts/components/auth/auth-login.html:18
+#: app/scripts/components/auth/auth-login.html:96
+msgid "Create an account"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:56
+msgid "Delete"
+msgstr ""
+
+#: app/scripts/components/auth/auth-login.html:94
+msgid "Do not have an account?"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:12
+msgid "From port"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:11
+msgid "IP protocol"
+msgstr ""
+
+#: app/scripts/components/navigation/site-header.html:12
+msgid "Log out"
+msgstr ""
+
+#: app/scripts/components/auth/auth-login.html:102
+#: app/scripts/components/auth/auth-login.html:39
+msgid "Login"
+msgstr ""
+
+#: app/scripts/components/auth/auth-login.html:76
+msgid "Or use social login"
+msgstr ""
+
+#: app/scripts/components/error/error-404.html:3
+msgid "Page Not Found :/"
+msgstr ""
+
+#: app/scripts/components/error/error-403.html:7
+msgid "plans page"
+msgstr ""
+
+#: app/scripts/components/auth/auth-login.html:72
+msgid "Register"
+msgstr ""
+
+#: app/scripts/components/auth/auth-login.html:12
+msgid "Register to"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:14
+msgid "Remote CIDR"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:4
+msgid "Security group does not contain any rule yet."
+msgstr ""
+
+#: app/scripts/components/auth/auth-login.html:87
+msgid "Sign in with Facebook"
+msgstr ""
+
+#: app/scripts/components/auth/auth-login.html:81
+msgid "Sign in with Google"
+msgstr ""
+
+#: app/scripts/components/auth/auth-estonian-id.html:6
+msgid "Sign in with ID card"
+msgstr ""
+
+#: app/scripts/components/auth/auth-estonian-id.html:15
+msgid "Sign in with Mobile ID"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:13
+msgid "To port"
+msgstr ""
+
+#: app/scripts/components/error/error-403.html:6
+msgid "To update current plan visit"
+msgstr ""
+
+#: app/scripts/components/auth/auth-login.html:5
+msgid "Welcome to"
+msgstr ""
+
+#: app/scripts/components/error/error-403.html:3
+msgid "You have exceeded maximum number of quotas."
+msgstr ""
+
+#: app/scripts/components/auth/auth-login.html:15
+msgid "Your single pane of control for all cloud services. Login in to see it in action."
 msgstr ""
