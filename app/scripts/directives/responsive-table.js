@@ -25,6 +25,10 @@
           }
           if (newTableOptions && newTableOptions.columns) {
             options = newTableOptions;
+            if (options.hiddenColumns) {
+              options.columns = options.columns.filter(column =>
+                options.hiddenColumns.indexOf(column.id) === -1);
+            }
             table = initTable();
             connectRowButtons(table);
 
