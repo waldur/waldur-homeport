@@ -37,7 +37,7 @@ export const ISSUE_TYPE_CHOICES = Object.keys(ISSUE_IDS).map(item => {
     iconClass: ISSUE_ICONS[item],
     textClass: ISSUE_TEXT_CLASSES[item],
     label: ISSUE_IDS[item],
-    id: item
+    id: ISSUE_IDS[item],
   };
 });
 
