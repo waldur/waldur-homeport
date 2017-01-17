@@ -1,4 +1,5 @@
 import template from './site-header.html';
+import './site-header.scss';
 
 export default {
   template: template,
@@ -6,11 +7,7 @@ export default {
     constructor(authService, ENV) {
       // @ngInject
       this.authService = authService;
-      this.ENV = ENV;
-    }
-
-    $onInit() {
-      this.headerLogo = this.ENV.loginLogo;
+      this.headerLogo = ENV.loginLogo;
     }
 
     logout() {
