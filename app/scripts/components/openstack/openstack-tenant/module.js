@@ -1,6 +1,7 @@
 import OpenStackTenantConfig from './openstack-tenant-config';
-import openstackTenantSummary from './openstack-tenant-summary';
+import openstackTenantCheckoutSummary from './openstack-tenant-checkout-summary';
 import openstackTenantChangePackageDialog from './openstack-tenant-change-package';
+import { openstackTenantSummary } from './openstack-tenant-summary';
 import packageTemplatesService from './package-templates-service';
 import openstackPackagesService from './openstack-packages-service';
 import openstackTenantChangePackageService from './openstack-tenant-change-package-service';
@@ -9,8 +10,9 @@ export default module => {
   module.config(fieldsConfig);
   module.config(actionConfig);
   module.config(tabsConfig);
-  module.directive('openstackTenantSummary', openstackTenantSummary);
+  module.directive('openstackTenantCheckoutSummary', openstackTenantCheckoutSummary);
   module.directive('openstackTenantChangePackageDialog', openstackTenantChangePackageDialog);
+  module.component('openstackTenantSummary', openstackTenantSummary);
   module.service('packageTemplatesService', packageTemplatesService);
   module.service('openstackPackagesService', openstackPackagesService);
   module.service('openstackTenantChangePackageService', openstackTenantChangePackageService);

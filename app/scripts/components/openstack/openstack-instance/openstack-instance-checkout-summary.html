@@ -1,0 +1,59 @@
+<div class="ibox">
+    <div class="ibox-title">
+        <h5>
+            Checkout summary
+        </h5>
+    </div>
+    <div class="ibox-content">
+        <p ng-if="!$ctrl.model.flavor">
+            No items yet.
+        </p>
+        <p ng-if="$ctrl.components">
+            Note that this virtual machine is charged as part of <strong>{{ $ctrl.model.service.name }}</strong> package.
+        </p>
+        <table class="table table-bordered" ng-if="$ctrl.model.flavor">
+          <tbody>
+            <tr ng-if="$ctrl.model.name">
+                <td><strong>VM name</strong></td>
+                <td>{{ $ctrl.model.name }}</td>
+            </tr>
+            <tr>
+                <td><strong>Image</strong></td>
+                <td>{{ $ctrl.model.image.name }}</td>
+            </tr>
+            <tr>
+                <td><strong>Flavor</strong></td>
+                <td>{{ $ctrl.model.flavor.name }}</td>
+            </tr>
+            <tr>
+                <td><strong>vCPU</strong></td>
+                <td>{{ $ctrl.model.flavor.cores }} cores</td>
+            </tr>
+            <tr>
+                <td><strong>RAM</strong></td>
+                <td>{{ $ctrl.model.flavor.ram | filesize }}</td>
+            </tr>
+            <tr>
+                <td><strong>Total storage</strong></td>
+                <td>{{ $ctrl.getTotalStorage() | filesize }}</td>
+            </tr>
+            <tr>
+                <td><strong>Price per day</strong></td>
+                <td>{{ $ctrl.getDailyPrice() | defaultCurrency }}</td>
+            </tr>
+            <tr>
+                <td><strong>Price per month</strong></td>
+                <td>{{ $ctrl.getMonthlyPrice() | defaultCurrency }}</td>
+            </tr>
+            <tr>
+                <td><strong>Invoiced to</strong></td>
+                <td>{{ $ctrl.model.customer.name }}</td>
+            </tr>
+            <tr>
+                <td><strong>Project</strong></td>
+                <td>{{ $ctrl.model.project.name }}</td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+</div>
