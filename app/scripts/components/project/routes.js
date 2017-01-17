@@ -27,8 +27,13 @@ function loadProject($stateParams, $q, $state, currentStateService, projectsServ
 }
 
 // @ngInject
-function projectController($scope, currentProject) {
+function projectController($scope, currentUser, currentProject, currentStateService, customersService) {
   $scope.currentProject = currentProject;
+
+  currentStateService.getCustomer().then(currentCustomer => {
+    const status = customersService.checkCustomerUser(currentCustomer, currentUser);
+    currentStateService.setOwnerOrStaff(status);
+  });
 }
 
 // @ngInject
