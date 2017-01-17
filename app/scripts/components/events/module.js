@@ -3,7 +3,7 @@ import eventRegistry from './event-registry';
 import BaseEventFormatter from './base-event-formatter';
 import eventFormatter from './event-formatter';
 import baseEventListController from './base-event-list';
-import eventDetailsDialog from './event-details-dialog';
+import { eventDetailsDialog } from './event-details-dialog';
 import eventTypesDialog from './event-types-dialog';
 import EventDialogsService from './event-dialogs-service';
 
@@ -13,7 +13,7 @@ export default module => {
   module.service('BaseEventFormatter', BaseEventFormatter);
   module.service('eventFormatter', eventFormatter);
   module.service('baseEventListController', baseEventListController);
-  module.directive('eventDetailsDialog', eventDetailsDialog);
+  module.component('eventDetailsDialog', eventDetailsDialog);
   module.directive('eventTypesDialog', eventTypesDialog);
   module.service('EventDialogsService', EventDialogsService);
 };

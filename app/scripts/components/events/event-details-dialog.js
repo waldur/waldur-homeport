@@ -1,20 +1,15 @@
 import template from './event-details-dialog.html';
 
-export default function eventDetailsDialog() {
-  return {
-    restrict: 'E',
-    template: template,
-    controller: EventDetailsDialogController,
-    controllerAs: '$ctrl',
-    scope: {},
-    bindToController: {
-      dismiss: '&',
-      close: '&',
-      resolve: '='
+export const eventDetailsDialog = {
+  template,
+  controller: class EventDetailsDialogController {
+    $onInit() {
+      this.event = this.resolve.event;
     }
-  };
-}
-
-// @ngInject
-function EventDetailsDialogController() {
-}
+  },
+  bindings: {
+    dismiss: '&',
+    close: '&',
+    resolve: '<'
+  }
+};
