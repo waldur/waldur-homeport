@@ -15,7 +15,7 @@ export default function paymentRoutes($stateProvider) {
       url: 'approve/',
       views: {
         appHeader: {
-          templateUrl: 'views/partials/site-header.html',
+          template: '<site-header></site-header>',
         },
         appContent: {
           templateUrl: 'views/payment/approve.html',
@@ -30,7 +30,7 @@ export default function paymentRoutes($stateProvider) {
       url: 'cancel/',
       views: {
         appHeader: {
-          templateUrl: 'views/partials/site-header.html',
+          template: '<site-header></site-header>',
         },
         appContent: {
           templateUrl: 'views/payment/cancel.html',
