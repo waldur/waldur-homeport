@@ -32,6 +32,7 @@ function IssueListController(
         noMatchesText: 'No support requests found matching filter.',
         columns: [
           {
+            id: 'type',
             title: 'Type',
             orderField: 'type',
             render: function(row) {
@@ -40,6 +41,7 @@ function IssueListController(
             width: 90
           },
           {
+            id: 'key',
             title: 'Key',
             orderField: 'key',
             render: function(row) {
@@ -49,6 +51,7 @@ function IssueListController(
             width: 90
           },
           {
+            id: 'status',
             title: 'Status',
             orderField: 'status',
             render: function(row) {
@@ -57,6 +60,7 @@ function IssueListController(
             width: 50
           },
           {
+            id: 'title',
             title: 'Title',
             orderField: 'summary',
             render: function(row) {
@@ -65,6 +69,7 @@ function IssueListController(
             width: 400
           },
           {
+            id: 'description',
             title: 'Description',
             orderable: false,
             render: function(row) {
@@ -72,6 +77,7 @@ function IssueListController(
             }
           },
           {
+            id: 'resource_type',
             title: 'Service type',
             orderable: false,
             render: function(row) {
@@ -79,6 +85,7 @@ function IssueListController(
             }
           },
           {
+            id: 'customer',
             title: 'Organization',
             orderField: 'customer_name',
             render: function(row) {
@@ -86,6 +93,7 @@ function IssueListController(
             }
           },
           {
+            id: 'caller',
             title: 'Caller',
             orderField: 'caller_full_name',
             render: function(row) {
@@ -94,6 +102,7 @@ function IssueListController(
             width: 170
           },
           {
+            id: 'reporter',
             title: 'Reporter',
             orderField: 'reporter_name',
             render: function(row) {
@@ -102,6 +111,7 @@ function IssueListController(
             width: 170
           },
           {
+            id: 'assignee',
             title: 'Assigned to',
             orderField: 'assignee_name',
             render: function(row) {
@@ -110,6 +120,7 @@ function IssueListController(
             width: 170
           },
           {
+            id: 'created',
             title: 'Created',
             orderField: 'created',
             render: function(row) {
@@ -118,6 +129,7 @@ function IssueListController(
             width: 130
           },
           {
+            id: 'modified',
             title: 'Updated',
             orderField: 'modified',
             render: function(row) {
@@ -126,6 +138,7 @@ function IssueListController(
             width: 130
           },
           {
+            id: 'in_progress',
             title: 'Time in progress',
             orderable: false,
             render: function(row) {
