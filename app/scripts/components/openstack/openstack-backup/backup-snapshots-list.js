@@ -35,11 +35,6 @@ function backupSnapshotsListController(
           render: row => this.renderResourceName(row)
         },
         {
-          title: 'State',
-          className: 'min-tablet-l',
-          render: row => this.renderResourceState(row)
-        },
-        {
           title: 'Description',
           render: row => row.description || 'N/A'
         },
@@ -50,7 +45,12 @@ function backupSnapshotsListController(
         {
           title: 'Created',
           render: row => $filter('shortDate')(row.created) || '&mdash;'
-        }
+        },
+        {
+          title: 'State',
+          className: 'min-tablet-l',
+          render: row => this.renderResourceState(row)
+        },
       ];
       return options;
     },
