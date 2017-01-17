@@ -14,7 +14,7 @@
         <span ng-if="auth.isSignupFormVisible">Create an account</span>
     </p>
     <!-- Login form -->
-    <form visible="localSignin" ng-if="!auth.isSignupFormVisible" class="m-b-sm" name="auth.LoginForm">
+    <form ng-if="auth.showLoginForm()" class="m-b-sm" name="auth.LoginForm">
         <div class="form-group">
             <input type="text"
                 class="form-control"
@@ -36,7 +36,7 @@
             ng-repeat="error in auth.getErrors()" ng-bind="error"></p>
     </form>
     <!-- Registration form -->
-    <form visible="localSignup" ng-if="auth.isSignupFormVisible && !auth.civilNumberRequired" class="m-b-sm" name="auth.RegisterForm">
+    <form ng-if="auth.showRegisterForm()" class="m-b-sm" name="auth.RegisterForm">
         <div class="form-group">
             <input type="text"
                 ng-model="auth.user.username"
@@ -66,46 +66,33 @@
             Register
         </button>
     </form>
-    <p visible="localSignin" ng-if="!auth.civilNumberRequired"><small>Or use social login</small></p>
-    <div visible="socialSignup" ng-if="!auth.civilNumberRequired" class="m-b-sm">
+    <p ng-if="auth.showSocialSignup()">
+        <small>Or use social login</small>
+    </p>
+    <div ng-if="auth.showSocialSignup()" class="m-b-sm">
         <button ng-click="auth.authenticate('google')" class="btn btn-google btn-block">
             <i class="fa fa-google-plus-square" aria-hidden="true"></i>
             Sign in with Google
         </button>
     </div>
-    <div visible="socialSignup" ng-if="!auth.civilNumberRequired" class="m-b-sm">
+    <div ng-if="auth.showSocialSignup()" class="m-b-sm">
         <button ng-click="auth.authenticate('facebook')" class="btn btn-facebook btn-block">
             <i class="fa fa-facebook-square" aria-hidden="true"></i>
             Sign in with Facebook
         </button>
     </div>
-    <div visible="estonianId" class="m-b-sm">
-        <form action="{{ auth.openidUrl }}" method="post">
-            <input type="hidden" name="openid_identifier" value="https://openid.ee/server/xrds/eid" />
-            <button type="submit" class="btn btn-eid btn-block">
-                <i class="fa fa-openid" aria-hidden="true"></i>
-                Sign in with ID card
-            </button>
-        </form>
+    <div ng-if="auth.showEstonianId()">
+        <auth-estonian-id/>
     </div>
-    <div visible="estonianId" class="m-b-sm">
-        <form action="{{ auth.openidUrl }}" method="post">
-            <input type="hidden" name="openid_identifier" value="https://openid.ee/server/xrds/mid" />
-            <button type="submit" class="btn btn-mid btn-block">
-                <i class="fa fa-phone-square" aria-hidden="true"></i>
-                Sign in with Mobile ID
-            </button>
-        </form>
-    </div>
-    <div visible="localSignup" class="form-group" ng-if="!auth.isSignupFormVisible">
+    <div class="form-group" ng-if="auth.showRegisterButton()">
         <p><small>Do not have an account?</small></p>
-        <a ui-sref="register" class="btn btn-default btn-block">
+        <a ng-click="auth.gotoRegister()" class="btn btn-default btn-block">
             Create an account
         </a>
     </div>
-    <div visible="localSignin" class="form-group" ng-if="auth.isSignupFormVisible">
+    <div class="form-group" ng-if="auth.showLoginButton()">
         <p><small>Already have an account?</small></p>
-        <a ui-sref="login" class="btn btn-default btn-block">
+        <a ng-click="auth.gotoLogin()" class="btn btn-default btn-block">
             Login
         </a>
     </div>

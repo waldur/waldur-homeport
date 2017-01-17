@@ -25,9 +25,8 @@ export default function authRoutes($stateProvider) {
 
     .state('login', {
       url: '/login/',
-      template: '<auth-login></auth-login>',
+      template: '<auth-login mode="login"></auth-login>',
       data: {
-        isSignupFormVisible: false,
         bodyClass: 'old',
         anonymous: true,
       }
@@ -35,9 +34,8 @@ export default function authRoutes($stateProvider) {
 
     .state('register', {
       url: '/register/',
-      template: '<auth-login></auth-login>',
+      template: '<auth-login mode="register"></auth-login>',
       data: {
-        isSignupFormVisible: true,
         bodyClass: 'old',
         anonymous: true
       }

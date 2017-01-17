@@ -1,13 +1,8 @@
 {
   "toBeFeatures": [
-    "localSignup",
-    "localSignin",
-    "password",
     "people",
     "compare",
-    "templates",
     "sizing",
-    "projectGroups",
     "apps",
     "premiumSupport",
     "notifications",

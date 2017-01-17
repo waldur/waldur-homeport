@@ -1,138 +1,173 @@
 import template from './auth-login.html';
 
-export default function authLogin() {
-  return {
-    restrict: 'E',
-    controller: AuthLoginController,
-    controllerAs: 'auth',
-    template: template,
-    scope: {}
-  };
-}
-
 // TODO:
 //
-// 1) This controller should NOT depend on baseControllerClass,
-//    because it has been deprecated. Instead ES6 class should be used
-//
-// 2) This controller should NOT depend on invitationService
+// 1) This controller should NOT depend on invitationService
 //    and on invitations module in general, because it leads to circular dependency
 //
-// 3) In order to break circular dependency we need to implement registry of enabled
+// 2) In order to break circular dependency we need to implement registry of enabled
 //    registration methods. When invitation token is checked,
 //    this registry should be updated
 //
-// 4) This controller should not broadcast signals, it should be done by service
-//
-// 5) Error formatting code should be moved to utils service.
+export const authLogin = {
+  template,
+  bindings: {
+    mode: '<' // Either "login" or "register"
+  },
+  controllerAs: 'auth',
+  controller: class AuthLoginController {
+    constructor(ENV, $q, $state, authService,
+                ncUtilsFlash, invitationService, usersService, UserSettings) {
+      // @ngInject
+      this.ENV = ENV;
+      this.$q = $q;
+      this.$state = $state;
+      this.authService = authService;
+      this.ncUtilsFlash = ncUtilsFlash;
+      this.invitationService = invitationService;
+      this.usersService = usersService;
+      this.UserSettings = UserSettings;
 
-// @ngInject
-function AuthLoginController(ENV, $q, $sce, $scope, $state, authService,
-                             baseControllerClass, ncUtilsFlash, $rootScope,
-                             invitationService, usersService, UserSettings) {
-  var controllerScope = this;
-  var Controller = baseControllerClass.extend({
-    isSignupFormVisible: $state.current.data.isSignupFormVisible,
-    user: {},
-    loginLogo: ENV.loginLogo,
-    errors: {},
-    openidUrl: $sce.trustAsResourceUrl(ENV.apiEndpoint + 'api-auth/openid/login/?next=/api-auth/login_complete'),
-    shortPageTitle: ENV.shortPageTitle,
-    civilNumberRequired: false,
-    init: function() {
-      if (ENV.invitationsEnabled && $state.current.name === 'register') {
-        if (!invitationService.getInvitationToken()) {
-          $state.go('errorPage.notFound');
-          return;
+      this.loginLogo = ENV.loginLogo;
+      this.shortPageTitle = ENV.shortPageTitle;
+      this.methods = ENV.authenticationMethods.reduce((result, item) => {
+        result[item] = true;
+        return result;
+      }, {});
+      this.isSignupFormVisible = this.mode === 'register';
+      this.user = {};
+      this.errors = {};
+      this.civilNumberRequired = false;
+    }
+
+    $onInit() {
+      if (this.ENV.invitationsEnabled && this.mode === 'register') {
+        if (!this.invitationService.getInvitationToken()) {
+          this.$state.go('errorPage.notFound');
         } else {
           this.checkRegistrationMethods();
         }
       }
-      this._super();
-    },
-    checkRegistrationMethods: function() {
-      var vm = this;
-      invitationService.check(invitationService.getInvitationToken()).then(function(result) {
+    }
+
+    showLoginButton() {
+      return this.methods.LOCAL_SIGNIN && this.isSignupFormVisible;
+    }
+
+    showLoginForm() {
+      return this.methods.LOCAL_SIGNIN && !this.isSignupFormVisible;
+    }
+
+    showRegisterButton() {
+      return this.methods.LOCAL_SIGNUP && !this.isSignupFormVisible;
+    }
+
+    showRegisterForm() {
+      return this.methods.LOCAL_SIGNUP && this.isSignupFormVisible && !this.civilNumberRequired;
+    }
+
+    showSocialSignup() {
+      return this.methods.SOCIAL_SIGNUP && !this.civilNumberRequired;
+    }
+
+    showEstonianId() {
+      return this.methods.ESTONIAN_ID;
+    }
+
+    gotoRegister() {
+      this.isSignupFormVisible = true;
+      this.$state.go('register');
+    }
+
+    gotoLogin() {
+      this.isSignupFormVisible = false;
+      this.$state.go('login');
+    }
+
+    checkRegistrationMethods() {
+      const token = this.invitationService.getInvitationToken();
+      this.invitationService.check(token).then(result => {
         if (result.data.civil_number_required) {
-          vm.civilNumberRequired = true;
+          this.civilNumberRequired = true;
         }
-      }, function() {
-        $state.go('errorPage.notFound');
+      }, () => {
+        this.$state.go('errorPage.notFound');
       });
-    },
-    signin: function() {
-      if ($scope.auth.LoginForm.$invalid) {
-        return $q.reject();
+    }
+
+    signin() {
+      if (this.LoginForm.$invalid) {
+        return this.$q.reject();
       }
-      var vm = this;
-      $rootScope.$broadcast('enableRequests');
-      return authService.signin(vm.user.username, vm.user.password).then(vm.loginSuccess.bind(vm), vm.loginError.bind(vm));
-    },
-    authenticate: function(provider) {
-      var vm = this;
-      $rootScope.$broadcast('enableRequests');
-      return authService.authenticate(provider).then(vm.loginSuccess.bind(vm), vm.loginError.bind(vm));
-    },
-    loginSuccess: function() {
+      return this.authService.signin(this.user.username, this.user.password)
+                 .then(this.loginSuccess.bind(this))
+                 .catch(this.loginError.bind(this));
+    }
+
+    authenticate(provider) {
+      return this.authService.authenticate(provider)
+                 .then(this.loginSuccess.bind(this))
+                 .catch(this.loginError.bind(this));
+    }
+
+    loginSuccess() {
       // TODO: Migrate to Angular-UI Router v1.0
       // And use $transition service which supports promises
       // https://github.com/angular-ui/ui-router/issues/1153
-      return usersService.getCurrentUser().then(user => {
-        const data = UserSettings.getSettings(user.uuid);
+      return this.usersService.getCurrentUser().then(user => {
+        const data = this.UserSettings.getSettings(user.uuid);
         if (data && data.name && data.params) {
-          return $state.go(data.name, data.params);
+          return this.$state.go(data.name, data.params);
         } else {
-          return $state.go('profile.details', {}, {reload: true});
+          return this.$state.go('profile.details', {}, {reload: true});
         }
       });
-    },
-    loginError: function(response) {
+    }
+
+    loginError(response) {
       this.errors = [];
       if (response.status != 400 && +response.status > 0) {
         this.errors[response.status] = response.statusText + ' Authentication failed';
       } else {
         this.errors = response.data;
       }
-    },
-    getErrors: function() {
-      var vm = this;
-      if (vm.errors !== undefined) {
-        var prettyErrors = [];
-        if (Object.prototype.toString.call(vm.errors) === '[object String]') {
-          prettyErrors.push(vm.errors);
-          return prettyErrors;
-        }
-        for (var key in vm.errors) {
-          if (vm.errors.hasOwnProperty(key)) {
-            if (Object.prototype.toString.call(vm.errors[key]) === '[object Array]') {
-              prettyErrors.push(key + ': ' + vm.errors[key].join(', '));
-            } else {
-              prettyErrors.push(key + ': ' + vm.errors[key]);
-            }
-          }
-        }
-        return prettyErrors;
-      } else {
+    }
+
+    getErrors() {
+      if (!this.errors) {
         return '';
       }
-    },
-    signup: function() {
-      if ($scope.auth.RegisterForm.$invalid) {
-        return $q.reject();
+
+      let prettyErrors = [];
+      if (angular.isString(this.errors)) {
+        prettyErrors.push(this.errors);
+        return prettyErrors;
       }
-      var vm = this;
-      vm.errors = {};
-      $rootScope.$broadcast('enableRequests');
-      return authService.signup(vm.user).then(function() {
-        ncUtilsFlash.info('Confirmation mail has been sent. Please check your inbox!');
-        vm.isSignupFormVisible = false;
-        vm.user = {};
+      for (let key in this.errors) {
+        if (this.errors.hasOwnProperty(key)) {
+          if (angular.isArray(this.errors[key])) {
+            prettyErrors.push(key + ': ' + this.errors[key].join(', '));
+          } else {
+            prettyErrors.push(key + ': ' + this.errors[key]);
+          }
+        }
+      }
+      return prettyErrors;
+    }
+
+    signup() {
+      if (this.RegisterForm.$invalid) {
+        return this.$q.reject();
+      }
+      this.errors = {};
+      return this.authService.signup(this.user).then(() => {
+        this.ncUtilsFlash.info('Confirmation mail has been sent. Please check your inbox!');
+        this.isSignupFormVisible = false;
+        this.user = {};
         return true;
-      }, function(response) {
-        vm.errors = response.data;
+      }, response => {
+        this.errors = response.data;
       });
     }
-  });
-
-  controllerScope.__proto__ = new Controller();
-}
+  }
+};
