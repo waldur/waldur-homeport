@@ -10,6 +10,10 @@ export default {
       this.headerLogo = ENV.loginLogo;
     }
 
+    $onInit() {
+      this.isAuthenticated = this.authService.isAuthenticated();
+    }
+
     logout() {
       this.authService.logout();
     }
