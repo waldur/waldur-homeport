@@ -64,6 +64,9 @@
           return 'errorPage.notFound';
         }
       }
+
+      $rootScope.prevPreviousState = fromState;
+      $rootScope.prevPreviousParams = fromParams;
     });
 
     function disabledFeature(feature) {

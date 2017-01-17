@@ -15,7 +15,7 @@ export default function planRoutes($stateProvider) {
       url: 'agreement/',
       views: {
         appHeader: {
-          templateUrl: 'views/partials/site-header.html',
+          template: '<site-header></site-header>',
         },
         appContent: {
           templateUrl: 'views/agreement/approve.html',
@@ -27,7 +27,7 @@ export default function planRoutes($stateProvider) {
       url: 'cancel/',
       views: {
         appHeader: {
-          templateUrl: 'views/partials/site-header.html',
+          template: '<site-header></site-header>',
         },
         appContent: {
           templateUrl: 'views/agreement/cancel.html',
