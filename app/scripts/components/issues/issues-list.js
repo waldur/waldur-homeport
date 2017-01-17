@@ -60,7 +60,7 @@ function IssueListController(
             title: 'Title',
             orderField: 'summary',
             render: function(row) {
-              return row.summary;
+              return `<span class="elipsis" style="width: 150px;" uib-tooltip="${row.summary}">${row.summary}</span>`;
             },
             width: 400
           },
@@ -82,14 +82,14 @@ function IssueListController(
             title: 'Organization',
             orderField: 'customer_name',
             render: function(row) {
-              return row.customer_name;
+              return row.customer_name || 'N/A';
             }
           },
           {
             title: 'Caller',
             orderField: 'caller_full_name',
             render: function(row) {
-              return row.caller_full_name;
+              return row.caller_full_name || 'N/A';
             },
             width: 170
           },
@@ -97,7 +97,7 @@ function IssueListController(
             title: 'Reporter',
             orderField: 'reporter_name',
             render: function(row) {
-              return row.reporter_name;
+              return row.reporter_name || 'N/A';
             },
             width: 170
           },
