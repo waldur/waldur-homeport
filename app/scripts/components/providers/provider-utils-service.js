@@ -5,13 +5,16 @@ export default function providerUtils(ENV) {
       let context = {
         className: '',
         label: '',
+        tooltip: '',
         movementClassName: ''
       };
       context.label = provider.state;
+
       if (ENV.servicesStateColorClasses[provider.state] === 'processing') {
         context.movementClassName = 'progress-striped active';
       } else if (ENV.servicesStateColorClasses[provider.state] === 'erred') {
         context.className = 'progress-bar-danger';
+        context.tooltip = provider.error_message;
       }
       return context;
     }
