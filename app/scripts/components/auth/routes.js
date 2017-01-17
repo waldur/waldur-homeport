@@ -84,6 +84,9 @@ export default function authRoutes($stateProvider) {
       views: {
         'appHeader@initialdata': {
           templateUrl: 'views/partials/site-header-initial.html',
+          controller: function($scope, authService) {
+            $scope.logout = authService.logout;
+          }
         },
         'appContent@initialdata': {
           template: '<auth-init></auth-init>',

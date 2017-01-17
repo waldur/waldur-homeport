@@ -26,3 +26,19 @@ configuration files are loaded and their options are merged together with defaul
  - `loginLogo` is rendered on login / signup page, if specified
 
  - `sidebarLogo` is rendered in sidebar header, if specified
+
+## Configuring flat pages
+
+ - Terms of Service are located in file `views/tos/index.html`
+
+ - Privacy Statement is located in file `views/policy/privacy.html`
+
+In order to customize it, you may configure alias in Nginx. For example:
+
+  location /views/tos/index.html {
+    alias /var/www/waldur/tos.html;
+  }
+
+  location /views/policy/privacy.html {
+    alias /var/www/waldur/privacy.html;
+  }

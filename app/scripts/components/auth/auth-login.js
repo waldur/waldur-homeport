@@ -28,7 +28,8 @@ export default function authLogin() {
 
 // @ngInject
 function AuthLoginController(ENV, $q, $sce, $scope, $state, authService,
-                             baseControllerClass, ncUtilsFlash, $rootScope, invitationService) {
+                             baseControllerClass, ncUtilsFlash, $rootScope,
+                             invitationService, usersService, UserSettings) {
   var controllerScope = this;
   var Controller = baseControllerClass.extend({
     isSignupFormVisible: $state.current.data.isSignupFormVisible,
@@ -73,7 +74,17 @@ function AuthLoginController(ENV, $q, $sce, $scope, $state, authService,
       return authService.authenticate(provider).then(vm.loginSuccess.bind(vm), vm.loginError.bind(vm));
     },
     loginSuccess: function() {
-      return $state.go('profile.details', {}, {reload: true});
+      // TODO: Migrate to Angular-UI Router v1.0
+      // And use $transition service which supports promises
+      // https://github.com/angular-ui/ui-router/issues/1153
+      return usersService.getCurrentUser().then(user => {
+        const data = UserSettings.getSettings(user.uuid);
+        if (data && data.name && data.params) {
+          return $state.go(data.name, data.params);
+        } else {
+          return $state.go('profile.details', {}, {reload: true});
+        }
+      });
     },
     loginError: function(response) {
       this.errors = [];
