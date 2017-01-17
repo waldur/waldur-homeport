@@ -13,53 +13,46 @@ export default function openStackBackupsList() {
 
 // @ngInject
 function backupSnapshotsListController(
-  baseControllerListClass, openstackSnapshotsService, $filter) {
+  baseResourceListController, openstackSnapshotsService, $filter) {
   var controllerScope = this;
-  var controllerClass = baseControllerListClass.extend({
+  var controllerClass = baseResourceListController.extend({
     init: function() {
-      this.service = openstackSnapshotsService;
       this.controllerScope = controllerScope;
       this._super();
-      this.tableOptions = {
-        disableSearch: true,
-        searchFieldName: 'summary',
-        noDataText: 'No snapshots yet.',
-        noMatchesText: 'No snapshots found matching filter.',
-        columns: [
-          {
-            title: 'Name',
-            orderField: 'name',
-            render: function(row) {
-              return row.name;
-            },
-            width: 90
-          },
-          {
-            title: 'Description',
-            orderField: 'description',
-            render: function(row) {
-              return row.description;
-            },
-            width: 90
-          },
-          {
-            title: 'Size',
-            orderField: 'size',
-            render: function(row) {
-              return $filter('filesize')(row.size);
-            },
-            width: 50
-          },
-          {
-            title: 'Created',
-            orderField: 'created',
-            render: function(row) {
-              return $filter('shortDate')(row.created) || '&mdash;';
-            },
-            width: 50
-          }
-        ]
-      };
+      this.service = openstackSnapshotsService;
+      this.rowFields.push('size');
+      this.rowFields.push('created');
+    },
+    getTableOptions: function() {
+      var options = this._super();
+      options.disableSearch = true;
+      options.noDataText = 'No snapshots yet.';
+      options.noMatchesText = 'No snapshots found matching filter.';
+      options.columns = [
+        {
+          title: 'Name',
+          className: 'all',
+          render: row => this.renderResourceName(row)
+        },
+        {
+          title: 'Description',
+          render: row => row.description || 'N/A'
+        },
+        {
+          title: 'Size',
+          render: row => $filter('filesize')(row.size)
+        },
+        {
+          title: 'Created',
+          render: row => $filter('shortDate')(row.created) || '&mdash;'
+        },
+        {
+          title: 'State',
+          className: 'min-tablet-l',
+          render: row => this.renderResourceState(row)
+        },
+      ];
+      return options;
     },
     getFilter: function() {
       return {backup_uuid: controllerScope.resource.uuid};

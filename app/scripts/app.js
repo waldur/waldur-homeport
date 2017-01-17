@@ -64,6 +64,9 @@
           return 'errorPage.notFound';
         }
       }
+
+      $rootScope.prevPreviousState = fromState;
+      $rootScope.prevPreviousParams = fromParams;
     });
 
     function disabledFeature(feature) {
@@ -117,9 +120,9 @@
     .config(function(ENV) {
       angular.extend(ENV, window.$$CUSTOMENV);
       if (ENV.enableExperimental) {
-        angular.merge(ENV, window.$$MODES.experimentalMode);
+        angular.extend(ENV, window.$$MODES.experimentalMode);
       } else {
-        angular.merge(ENV, window.$$MODES.stableMode);
+        angular.extend(ENV, window.$$MODES.stableMode);
       }
     });
 })();

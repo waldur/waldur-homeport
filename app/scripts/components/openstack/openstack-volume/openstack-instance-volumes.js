@@ -13,6 +13,7 @@ export default instanceVolumes;
 function OpenstackVolumesList(
   baseResourceListController,
   $scope,
+  $filter,
   $timeout,
   openstackVolumesService) {
   var controllerScope = this;
@@ -22,6 +23,7 @@ function OpenstackVolumesList(
       this._super();
       this.service = openstackVolumesService;
       this.rowFields.push('size');
+      this.rowFields.push('device');
 
       $scope.$on('actionApplied', function(event, name) {
         if (name === 'volume') {
@@ -35,6 +37,26 @@ function OpenstackVolumesList(
       var options = this._super();
       options.noDataText = 'You have no volumes yet';
       options.noMatchesText = 'No volumes found matching filter.';
+      options.columns = [
+        {
+          title: 'Name',
+          className: 'all',
+          render: row => this.renderResourceName(row)
+        },
+        {
+          title: 'Size',
+          render: row => $filter('filesize')(row.size)
+        },
+        {
+          title: 'Attached to',
+          render: row => row.device || 'N/A'
+        },
+        {
+          title: 'State',
+          className: 'min-tablet-l',
+          render: row => this.renderResourceState(row)
+        },
+      ];
       return options;
     },
     getFilter: function() {

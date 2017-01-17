@@ -20,9 +20,12 @@ export default function userEdit() {
 
 // @ngInject
 class UserEditController {
-  constructor($q, $filter) {
+  constructor($q, $filter, usersService) {
     this.$q = $q;
     this.$filter = $filter;
+    usersService.getCurrentUser().then(user => {
+      this.currentUser = user;
+    });
   }
   save() {
     if (this.UserForm.$invalid) {

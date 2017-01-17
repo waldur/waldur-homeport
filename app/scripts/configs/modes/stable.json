@@ -1,13 +1,8 @@
 {
   "toBeFeatures": [
-    "localSignup",
-    "localSignin",
-    "password",
     "people",
     "compare",
-    "templates",
     "sizing",
-    "projectGroups",
     "apps",
     "premiumSupport",
     "notifications",
@@ -19,7 +14,10 @@
     "import",
     "openMap",
     "support.activity",
-    "support.sla"
+    "support.sla",
+    "support.assigned_to_me",
+    "support.activity_stream",
+    "support.regular_issue_filters"
   ],
   "featuresVisible": false,
   "appStoreCategories": [

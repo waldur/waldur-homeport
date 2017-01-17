@@ -14,7 +14,9 @@ export default module => {
 function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
   ActionConfigurationProvider.register('OpenStackTenant.Backup', {
     order: [
-      'edit'
+      'edit',
+      'restore',
+      'destroy',
     ],
     options: {
       edit: angular.merge({}, DEFAULT_EDIT_ACTION, {

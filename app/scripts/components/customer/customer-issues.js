@@ -35,6 +35,9 @@ class CustomerIssuesController {
     this.options = {
       disableAutoUpdate: false,
       disableSearch: false,
+      hiddenColumns: [
+        'customer',
+      ],
       tableActions: [
         {
           name: '<i class="fa fa-plus"></i> Create',

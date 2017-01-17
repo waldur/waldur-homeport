@@ -6,6 +6,7 @@ import openstackBackupModule from './openstack-backup/module';
 import openstackNetworkModule from './openstack-network/module';
 import openstackSecurityGroupsModule from './openstack-security-groups/module';
 import openstackFloatingIpsModule from './openstack-floating-ips/module';
+import openstackSnapshotModule from './openstack-snapshot/module';
 
 export default module => {
   module.service('OpenStackSummaryService', OpenStackSummaryService);
@@ -16,4 +17,5 @@ export default module => {
   openstackNetworkModule(module);
   openstackSecurityGroupsModule(module);
   openstackFloatingIpsModule(module);
+  openstackSnapshotModule(module);
 };

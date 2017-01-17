@@ -5,14 +5,10 @@ const resourceState = {
   bindings: {
     resource: '<'
   },
-  controller: ResourceStateController,
+  controller: function ResourceStateController($scope, resourceUtils) {
+    $scope.$watch(() => this.resource, () =>
+      this.context = resourceUtils.getResourceState(this.resource));
+  }
 };
 
 export default resourceState;
-
-// @ngInject
-function ResourceStateController(resourceUtils, $scope) {
-  $scope.$watch(() => this.resource, () =>
-    this.context = resourceUtils.getResourceState(this.resource)
-  );
-}

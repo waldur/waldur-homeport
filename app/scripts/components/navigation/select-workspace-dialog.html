@@ -5,7 +5,22 @@
   <div ng-if="Ctrl.loadingOrganizations">
       <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
   </div>
-  <div ng-if="!Ctrl.loadingOrganizations" class="row">
+  <div ng-if="!Ctrl.loadingOrganizations && Ctrl.organizations.length === 0" class="row">
+    <div class="middle-box text-center">
+        <h3 class="font-bold m-b-lg">
+          You do not belong to any organisation yet.
+        </h3>
+        <div>
+            <a class="btn btn-default"
+              ng-click="Ctrl.createOrganization()"
+              ng-if="Ctrl.canCreateOrganization">
+              <i class="fa fa-plus"></i>
+              Add new organization
+            </a>
+        </div>
+    </div>
+  </div>
+  <div ng-if="!Ctrl.loadingOrganizations && Ctrl.organizations.length > 0" class="row">
     <div class="col-md-6 col-xs-12 m-b-md">
       <a class="pull-right btn btn-sm btn-default"
         ng-click="Ctrl.createOrganization()"

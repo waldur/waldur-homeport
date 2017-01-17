@@ -124,7 +124,7 @@ export default {
     image: imageWatcher,
     flavor: flavorWatcher
   },
-  summaryComponent: 'openstackInstanceSummary'
+  summaryComponent: 'openstackInstanceCheckoutSummary'
 };
 
 function validateAndSort(model, options, validator, comparator, name) {

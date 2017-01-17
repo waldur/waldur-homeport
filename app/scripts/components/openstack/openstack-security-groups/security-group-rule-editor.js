@@ -15,8 +15,8 @@ export const securityGroupRuleEditor = {
       this.protocols = PROTOCOLS;
       if (!this.model[this.field.name]) {
         this.model[this.field.name] = [];
-        this.addRule();
       }
+      this.target = this.model[this.field.name];
       this.cidrPattern = CIDR_RE;
     }
 
@@ -37,9 +37,16 @@ export const securityGroupRuleEditor = {
     }
 
     addRule() {
-      this.model[this.field.name].push({
+      this.target.push({
         protocol: PROTOCOLS[0]
       });
+    }
+
+    deleteRule(rule) {
+      const index = this.target.indexOf(rule);
+      if (index !== -1) {
+        this.target.splice(index, 1);
+      }
     }
   }
 };
