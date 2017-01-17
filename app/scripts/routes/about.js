@@ -4,7 +4,7 @@ export default function aboutRoutes($stateProvider) {
     .state('tos', {
       url: '/tos/',
       abstract: true,
-      templateUrl: 'views/partials/base-universal.html',
+      templateUrl: 'views/partials/base.html',
     })
 
     .state('tos.index', {
@@ -13,10 +13,10 @@ export default function aboutRoutes($stateProvider) {
         appContent: {
           templateUrl: 'views/tos/index.html',
         },
-        appHeaderOut: {
+        appHeader: {
           template: '<site-header></site-header>',
         },
-        appHeaderIn: {
+        appHeader: {
           template: '<site-header></site-header>',
         }
       },
@@ -29,7 +29,7 @@ export default function aboutRoutes($stateProvider) {
     .state('about', {
       url: '/about/',
       abstract: true,
-      templateUrl: 'views/partials/base-universal.html',
+      templateUrl: 'views/partials/base.html',
     })
 
     .state('about.index', {
@@ -38,10 +38,10 @@ export default function aboutRoutes($stateProvider) {
         appContent: {
           templateUrl: 'views/about/index.html',
         },
-        appHeaderOut: {
+        appHeader: {
           template: '<site-header></site-header>',
         },
-        appHeaderIn: {
+        appHeader: {
           template: '<site-header></site-header>',
         }
       },
@@ -54,7 +54,7 @@ export default function aboutRoutes($stateProvider) {
     .state('policy', {
       url: '/policy/',
       abstract: true,
-      templateUrl: 'views/partials/base-universal.html',
+      templateUrl: 'views/partials/base.html',
     })
 
     .state('policy.privacy', {
@@ -63,10 +63,10 @@ export default function aboutRoutes($stateProvider) {
         appContent: {
           templateUrl: 'views/policy/privacy.html',
         },
-        appHeaderOut: {
+        appHeader: {
           template: '<site-header></site-header>',
         },
-        appHeaderIn: {
+        appHeader: {
           template: '<site-header></site-header>',
         }
       },
