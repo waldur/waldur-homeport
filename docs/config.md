@@ -45,6 +45,8 @@ In order to enable or disable authentication methods, you should use the followi
  - `facebookClientId` - ID of Facebook application used for OAuth authentication.
     It is required if you use SOCIAL_SIGNUP method.
 
+ - `GoogleAnalyticsID` - Google Analytics ID, used for tracking, if specified, disabled by default.
+
 ## White-labeling
 
  - `shortPageTitle` is used as prefix for page title.

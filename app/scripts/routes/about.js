@@ -16,9 +16,6 @@ export default function aboutRoutes($stateProvider) {
         appHeader: {
           template: '<site-header></site-header>',
         },
-        appHeader: {
-          template: '<site-header></site-header>',
-        }
       },
       data: {
         bodyClass: 'old',
@@ -41,9 +38,6 @@ export default function aboutRoutes($stateProvider) {
         appHeader: {
           template: '<site-header></site-header>',
         },
-        appHeader: {
-          template: '<site-header></site-header>',
-        }
       },
       data: {
         bodyClass: 'old',
@@ -66,9 +60,6 @@ export default function aboutRoutes($stateProvider) {
         appHeader: {
           template: '<site-header></site-header>',
         },
-        appHeader: {
-          template: '<site-header></site-header>',
-        }
       },
       data: {
         bodyClass: 'old',

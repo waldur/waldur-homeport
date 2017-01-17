@@ -8,7 +8,9 @@
     <span ng-if="::auth.loginLogo">
         <img ng-src="{{ ::auth.loginLogo }}">
     </span>
-    <h4 ng-if="auth.isSignupFormVisible">Register to {{ ::auth.shortPageTitle }}</h4>
+    <h4 ng-if="auth.isSignupFormVisible">
+        <span translate>Register to</span> {{ ::auth.shortPageTitle }}
+    </h4>
     <p>
         <span ng-if="!auth.isSignupFormVisible" translate>
             Your single pane of control for all cloud services. Login in to see it in action.
@@ -33,8 +35,8 @@
         </div>
         <button type="submit"
             class="btn btn-primary btn-block"
-            submit-button="auth.signin()" translate>
-            Login
+            submit-button="auth.signin()">
+            <span translate>Login</span>
         </button>
         <p class="text-danger"
             ng-repeat="error in auth.getErrors()" ng-bind="error"></p>
@@ -66,8 +68,8 @@
             ng-repeat="error in auth.getErrors()" ng-bind="error"></p>
         <button class="btn btn-primary btn-block"
             submit-button="auth.signup()"
-            type="submit" translate>
-            Register
+            type="submit">
+            <span translate>Register</span>
         </button>
     </form>
     <p ng-if="auth.showSocialSignup()">
@@ -96,8 +98,8 @@
     </div>
     <div class="form-group" ng-if="auth.showLoginButton()">
         <p><small translate>Already have an account?</small></p>
-        <a ng-click="auth.gotoLogin()" class="btn btn-default btn-block" translate>
-            Login
+        <a ng-click="auth.gotoLogin()" class="btn btn-default btn-block">
+            <span translate>Login</span>
         </a>
     </div>
 </div>
