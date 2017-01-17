@@ -82,9 +82,6 @@ function ProviderSettingsController(
       }
       return fields;
     },
-    getClass: function() {
-      return ncServiceUtils.getStateClass($scope.service.state);
-    },
     getFilename: ncUtils.getFilename,
     isDisabled: function() {
       var service = $scope.service;
