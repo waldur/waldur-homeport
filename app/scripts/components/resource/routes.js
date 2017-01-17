@@ -31,6 +31,14 @@ function loadResource(
 }
 
 // @ngInject
+function ResourceController($scope, currentUser, currentStateService, customersService) {
+  currentStateService.getCustomer().then(currentCustomer => {
+    const status = customersService.checkCustomerUser(currentCustomer, currentUser);
+    currentStateService.setOwnerOrStaff(status);
+  });
+}
+
+// @ngInject
 export default function resourceRoutes($stateProvider) {
   $stateProvider
     .state('resources', {
@@ -50,6 +58,7 @@ export default function resourceRoutes($stateProvider) {
       template: '<resource-header></resource-header>',
       resolve: {
         resource: loadResource
-      }
+      },
+      controller: ResourceController
     });
 }
