@@ -28,8 +28,7 @@ class IssueRegistrationController {
               issueUsersService,
               customersService,
               projectsService,
-              resourcesService,
-              paymentDetailsService) {
+              resourcesService) {
     this.$state = $state;
     this.$scope = $scope;
     this.$q = $q;
@@ -45,7 +44,6 @@ class IssueRegistrationController {
     this.customersService = customersService;
     this.projectsService = projectsService;
     this.resourcesService = resourcesService;
-    this.paymentDetailsService = paymentDetailsService;
     this.init();
   }
 
@@ -212,13 +210,7 @@ class IssueRegistrationController {
       component: 'customerPopover',
       size: 'lg',
       resolve: {
-        customer: () => customer,
-        paymentDetails: () => {
-          return this.paymentDetailsService.getList({ customer_uuid: customer.uuid })
-            .then(function(result) {
-              return result[0] || null;
-            });
-        },
+        customer_uuid: () => customer.uuid,
       }
     });
   }
