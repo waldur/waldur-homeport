@@ -1,59 +1,77 @@
-<div class="ibox">
-    <div class="ibox-title">
-        <h5>
-            Checkout summary
-        </h5>
-    </div>
-    <div class="ibox-content">
-        <p ng-if="!$ctrl.model.flavor">
-            No items yet.
-        </p>
-        <p ng-if="$ctrl.components">
-            Note that this virtual machine is charged as part of <strong>{{ $ctrl.model.service.name }}</strong> package.
-        </p>
-        <table class="table table-bordered" ng-if="$ctrl.model.flavor">
-          <tbody>
-            <tr ng-if="$ctrl.model.name">
-                <td><strong>VM name</strong></td>
-                <td>{{ $ctrl.model.name }}</td>
-            </tr>
-            <tr>
-                <td><strong>Image</strong></td>
-                <td>{{ $ctrl.model.image.name }}</td>
-            </tr>
-            <tr>
-                <td><strong>Flavor</strong></td>
-                <td>{{ $ctrl.model.flavor.name }}</td>
-            </tr>
-            <tr>
-                <td><strong>vCPU</strong></td>
-                <td>{{ $ctrl.model.flavor.cores }} cores</td>
-            </tr>
-            <tr>
-                <td><strong>RAM</strong></td>
-                <td>{{ $ctrl.model.flavor.ram | filesize }}</td>
-            </tr>
-            <tr>
-                <td><strong>Total storage</strong></td>
-                <td>{{ $ctrl.getTotalStorage() | filesize }}</td>
-            </tr>
-            <tr>
-                <td><strong>Price per day</strong></td>
-                <td>{{ $ctrl.getDailyPrice() | defaultCurrency }}</td>
-            </tr>
-            <tr>
-                <td><strong>Price per month</strong></td>
-                <td>{{ $ctrl.getMonthlyPrice() | defaultCurrency }}</td>
-            </tr>
-            <tr>
-                <td><strong>Invoiced to</strong></td>
-                <td>{{ $ctrl.model.customer.name }}</td>
-            </tr>
-            <tr>
-                <td><strong>Project</strong></td>
-                <td>{{ $ctrl.model.project.name }}</td>
-            </tr>
-          </tbody>
-        </table>
-    </div>
+<resource-summary-base resource="$ctrl.resource"></resource-summary-base>
+
+<div class="m-b-xs" ng-if="::$ctrl.resource.summary">
+  <dt>
+    <span translate>Summary</span>:</dt>
+  <dd>
+    {{ ::$ctrl.resource.summary }}
+  </dd>
+</div>
+
+<div class="m-b-xs">
+  <dt>
+    <span translate>Access</span>:
+  </dt>
+  <dd>
+    <a ng-if="$ctrl.resource.access_info_url"
+       href="{{ $ctrl.resource.access_info_url }}"
+       target="_blank">
+        <i class="fa fa-external-link"></i>
+        {{ $ctrl.resource.access_info_text }}
+    </a>
+    <span ng-if="!$ctrl.resource.access_info_url">
+      {{ $ctrl.resource.access_info_text }}
+    </span>
+  </dd>
+</div>
+
+<div class="m-b-xs" ng-if="$ctrl.resource.internal_ips">
+  <dt>
+    <span translate>Internal IP</span>:
+  </dt>
+  <dd>
+    <span ng-if="$ctrl.resource.internal_ips.length === 0">&ndash;</span>
+    <span ng-if="$ctrl.resource.internal_ips.length > 0">
+      {{ $ctrl.resource.internal_ips.join(', ') }}
+    </span>
+  </dd>
+</div>
+
+<div class="m-b-xs" ng-if="$ctrl.resource.external_ips">
+  <dt>
+    <span translate>External IP</span>:
+  </dt>
+  <dd>
+    <span ng-if="$ctrl.resource.external_ips.length === 0">&ndash;</span>
+    <span ng-if="$ctrl.resource.external_ips.length > 0">
+      {{ $ctrl.resource.external_ips.join(', ') }}
+    </span>
+  </dd>
+</div>
+
+<div class="m-b-xs" ng-if="$ctrl.resource.key_name">
+  <dt>
+    <span translate>SSH key</span>:
+  </dt>
+  <dd>
+    <span ng-bind="$ctrl.resource.key_name"></span>
+  </dd>
+</div>
+
+<div class="m-b-xs" ng-if="$ctrl.resource.security_groups">
+  <dt>
+    <span translate>Security groups</span>:
+  </dt>
+  <dd>
+    <security-groups-link security-groups="$ctrl.resource.security_groups"/>
+  </dd>
+</div>
+
+<div class="m-b-xs" ng-if="$ctrl.resource.uptime">
+  <dt>
+    <span translate>Uptime</span>:
+  </dt>
+  <dd>
+    {{ ::$ctrl.resource.uptime }}
+  </dd>
 </div>

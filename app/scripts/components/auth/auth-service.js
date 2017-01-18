@@ -14,10 +14,12 @@ export default function authService(
   vm.loginSuccess = loginSuccess;
 
   function signin(username, password) {
+    $rootScope.$broadcast('enableRequests');
     return $auth.login({username: username, password: password}).then(loginSuccess);
   }
 
   function authenticate(provider) {
+    $rootScope.$broadcast('enableRequests');
     return $auth.authenticate(provider).then(loginSuccess);
   }
 
@@ -30,6 +32,7 @@ export default function authService(
   }
 
   function signup(user) {
+    $rootScope.$broadcast('enableRequests');
     return $http.post(ENV.apiEndpoint + 'api-auth/registration/', user);
   }
 

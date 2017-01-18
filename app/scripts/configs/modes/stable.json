@@ -1,13 +1,8 @@
 {
   "toBeFeatures": [
-    "localSignup",
-    "localSignin",
-    "password",
     "people",
     "compare",
-    "templates",
     "sizing",
-    "projectGroups",
     "apps",
     "premiumSupport",
     "notifications",
@@ -21,7 +16,8 @@
     "support.activity",
     "support.sla",
     "support.assigned_to_me",
-    "support.activity_stream"
+    "support.activity_stream",
+    "support.regular_issue_filters"
   ],
   "featuresVisible": false,
   "appStoreCategories": [

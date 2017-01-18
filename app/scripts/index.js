@@ -26,6 +26,7 @@ import coreModule from './components/core/module';
 import dashboardModule from './components/dashboard/module';
 import filtersModule from './filters';
 import bootstrap from './components/core/bootstrap';
+import errorModule from './components/error/module';
 
 const module = angular.module('ncsaas');
 
@@ -56,5 +57,6 @@ analyticsModule(module);
 coreModule(module);
 dashboardModule(module);
 filtersModule(module);
+errorModule(module);
 
 bootstrap('ncsaas');

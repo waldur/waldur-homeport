@@ -11,7 +11,7 @@ export default function authRoutes($stateProvider) {
       url: '',
       views: {
         'appHeader@home': {
-          templateUrl: 'views/partials/site-header.html',
+          template: '<site-header></site-header>',
         },
         'appContent@home': {
           templateUrl: 'views/home/home.html',
@@ -25,9 +25,8 @@ export default function authRoutes($stateProvider) {
 
     .state('login', {
       url: '/login/',
-      template: '<auth-login></auth-login>',
+      template: '<auth-login mode="login"></auth-login>',
       data: {
-        isSignupFormVisible: false,
         bodyClass: 'old',
         anonymous: true,
       }
@@ -35,9 +34,8 @@ export default function authRoutes($stateProvider) {
 
     .state('register', {
       url: '/register/',
-      template: '<auth-login></auth-login>',
+      template: '<auth-login mode="register"></auth-login>',
       data: {
-        isSignupFormVisible: true,
         bodyClass: 'old',
         anonymous: true
       }
@@ -47,7 +45,7 @@ export default function authRoutes($stateProvider) {
       url: 'activate/:user_uuid/:token/',
       views: {
         'appHeader@home': {
-          templateUrl: 'views/partials/site-header.html',
+          template: '<site-header></site-header>',
         },
         'appContent@home': {
           template: '<auth-activation></auth-activation>',
@@ -62,7 +60,7 @@ export default function authRoutes($stateProvider) {
       url: 'login_complete/:token/',
       views: {
         'appHeader@home': {
-          templateUrl: 'views/partials/site-header.html',
+          template: '<site-header></site-header>',
         },
         'appContent@home': {
           template: '<auth-login-complete></auth-login-complete>',
@@ -83,10 +81,7 @@ export default function authRoutes($stateProvider) {
       url: '',
       views: {
         'appHeader@initialdata': {
-          templateUrl: 'views/partials/site-header-initial.html',
-          controller: function($scope, authService) {
-            $scope.logout = authService.logout;
-          }
+          template: '<site-header></site-header>',
         },
         'appContent@initialdata': {
           template: '<auth-init></auth-init>',

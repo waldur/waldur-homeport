@@ -13,52 +13,46 @@ export default function openStackBackupsList() {
 
 // @ngInject
 function OpenStackBackupsListController(
-  baseControllerListClass, openstackBackupsService, $filter, $state, ncUtils) {
+  baseResourceListController, openstackBackupsService, $filter) {
   var controllerScope = this;
-  var controllerClass = baseControllerListClass.extend({
+  var controllerClass = baseResourceListController.extend({
     init: function() {
-      this.service = openstackBackupsService;
       this.controllerScope = controllerScope;
       this._super();
-      this.tableOptions = {
-        disableSearch: true,
-        searchFieldName: 'summary',
-        noDataText: 'No backups yet.',
-        noMatchesText: 'No backups found matching filter.',
-        columns: [
-          {
-            title: 'Name',
-            orderField: 'name',
-            render: function(row) {
-              var href = $state.href('resources.details', {
-                resource_type: 'OpenStackTenant.Backup',
-                uuid: row.uuid
-              });
-              return ncUtils.renderLink(href, row.name);
-            },
-            width: 90
-          },
-          {
-            title: 'Description',
-            orderField: 'description',
-            render: function(row) {
-              return row.description;
-            },
-            width: 90
-          },
-          {
-            title: 'Keep until',
-            orderField: 'kept_until',
-            render: function(row) {
-              return $filter('shortDate')(row.kept_until) || '&mdash;';
-            },
-            width: 50
-          }
-        ]
-      };
+      this.service = openstackBackupsService;
+      this.rowFields.push('kept_until');
+    },
+    getTableOptions: function() {
+      var options = this._super();
+      options.disableSearch = true;
+      options.noDataText = 'No backups yet.';
+      options.noMatchesText = 'No backups found matching filter.';
+      options.columns = [
+        {
+          title: 'Name',
+          className: 'all',
+          render: row => this.renderResourceName(row)
+        },
+        {
+          title: 'Description',
+          render: row => row.description || 'N/A'
+        },
+        {
+          title: 'Keep until',
+          render: row => $filter('shortDate')(row.kept_until) || '&mdash;'
+        },
+        {
+          title: 'State',
+          className: 'min-tablet-l',
+          render: row => this.renderResourceState(row)
+        },
+      ];
+      return options;
     },
     getFilter: function() {
-      return {instance: controllerScope.resource.url};
+      return {
+        instance: controllerScope.resource.url
+      };
     }
   });
 

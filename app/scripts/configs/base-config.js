@@ -253,23 +253,22 @@ angular.module('ncsaas')
       }
     ],
     toBeFeatures: [
-      'openStackPrivateCloud',
       'resources',
-      'pricelistsCompare',
-      'prePaid',
       'support',
       'monitoring',
       'users',
-      'templates',
       'invoices',
       'payments',
-      'services:provider:uuid',
-      'password',
       'premiumSupport',
-      'localSignup',
       'notifications',
       'sizing',
-      'alerts',
+      'alerts'
+    ],
+    authenticationMethods: [
+      'LOCAL_SIGNIN',
+      'LOCAL_SIGNUP',
+      'SOCIAL_SIGNUP',
+      'ESTONIAN_ID'
     ],
     resourcesTypes: {
       vms: 'vms',
@@ -286,17 +285,6 @@ angular.module('ncsaas')
     countersTimerInterval: 7, // seconds
     providersTimerInterval: 7, // seconds
 
-    servicesStateColorClasses: {
-      'OK': 'online',
-      'Erred': 'erred',
-      'In Sync': 'online',
-      'Creation Scheduled': 'processing',
-      'Creating': 'processing',
-      'Update Scheduled': 'processing',
-      'Updating': 'processing',
-      'Deletion Scheduled': 'processing',
-      'Deleting': 'processing'
-    },
     ownerCanManageCustomer: true,
 
     roles: {

@@ -78,12 +78,7 @@
           ],
           tableActions: this.getTableActions(),
           rowActions: function(row) {
-            var index;
-            for (var i = 0; i < this.list.length; i++) {
-              if (this.list[i].uuid === row.uuid) {
-                index = i;
-              }
-            }
+            var index = this.findIndexById(row);
             return '<action-button-resource button-controller="controller" button-model="controller.list[' + index + ']"/>';
           }
         };
@@ -96,15 +91,21 @@
           uuid: row.uuid,
           resource_type: row.resource_type
         });
-        return ncUtils.renderLink(href, img + ' ' + row.name);
+        return ncUtils.renderLink(href, img + ' ' + (row.name || '&mdash;'));
       },
       renderResourceState: function(row) {
-        var uuids = this.list.map(function(item) {
-          return item.uuid;
-        });
-        var index = uuids.indexOf(row.uuid);
+        var index = this.findIndexById(row);
         return '<resource-state resource="controller.list[{index}]"></resource-state>'
           .replace('{index}', index);
+      },
+      findIndexById: function(row) {
+        var index;
+        for (var i = 0; i < this.controllerScope.list.length; i++) {
+          if (this.controllerScope.list[i].uuid === row.uuid) {
+            index = i;
+          }
+        }
+        return index;
       },
       getTableActions: function() {
         var actions = [];

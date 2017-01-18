@@ -17,6 +17,10 @@ export default {
       this.options = {
         disableAutoUpdate: false,
         disableSearch: false,
+        hiddenColumns: [
+          'customer',
+          'resource_type',
+        ],
         tableActions: [
           {
             name: '<i class="fa fa-plus"></i> Create',
