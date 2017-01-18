@@ -35,6 +35,10 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
+#: app/scripts/components/issues/issues-short-list.html:28
+msgid "Description"
+msgstr ""
+
 #: app/scripts/components/auth/auth-login.html:94
 msgid "Do not have an account?"
 msgstr ""
@@ -55,6 +59,10 @@ msgstr ""
 msgid "IP protocol"
 msgstr ""
 
+#: app/scripts/components/issues/issues-short-list.html:27
+msgid "Key"
+msgstr ""
+
 #: app/scripts/components/navigation/site-header.html:12
 msgid "Log out"
 msgstr ""
@@ -70,6 +78,10 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:12
 msgid "Open"
+msgstr ""
+
+#: app/scripts/components/issues/issues-short-list.html:43
+msgid "Opened by"
 msgstr ""
 
 #: app/scripts/components/auth/auth-login.html:76
@@ -88,6 +100,10 @@ msgstr ""
 msgid "plans page"
 msgstr ""
 
+#: app/scripts/components/issues/issues-short-list.html:11
+msgid "Refresh"
+msgstr ""
+
 #: app/scripts/components/auth/auth-login.html:72
 msgid "Register"
 msgstr ""
@@ -100,12 +116,20 @@ msgstr ""
 msgid "Remote CIDR"
 msgstr ""
 
+#: app/scripts/components/issues/issues-short-list.html:14
+msgid "Reported by me"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:4
 msgid "Security group does not contain any rule yet."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-summary.html:63
 msgid "Security groups"
+msgstr ""
+
+#: app/scripts/components/issues/issues-short-list.html:6
+msgid "See all"
 msgstr ""
 
 #: app/scripts/components/auth/auth-login.html:87
@@ -132,12 +156,24 @@ msgstr ""
 msgid "Summary"
 msgstr ""
 
+#: app/scripts/components/issues/issues-short-list.html:20
+msgid "There are no requests yet."
+msgstr ""
+
+#: app/scripts/components/issues/issues-short-list.html:30
+msgid "Time in progress"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:13
 msgid "To port"
 msgstr ""
 
 #: app/scripts/components/error/error-403.html:6
 msgid "To update current plan visit"
+msgstr ""
+
+#: app/scripts/components/issues/issues-short-list.html:29
+msgid "Updated"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-summary.html:72

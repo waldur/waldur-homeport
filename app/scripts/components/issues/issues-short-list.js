@@ -1,54 +1,51 @@
-import { ISSUE_CLASSES } from './constants';
 import template from './issues-short-list.html';
 
-export default function issuesShortList() {
-  return {
-    restrict: 'E',
-    template: template,
-    controller: IssuesShortListController,
-    controllerAs: '$ctrl',
-    scope: {
-      label: '=',
-      filter: '='
-    },
-    bindToController: true
-  };
-}
+export const issuesShortList = {
+  template,
+  controller: class IssuesShortListController {
+    constructor(issuesService, usersService, $uibModal, ncUtils) {
+      // @ngInject
+      this.service = issuesService;
+      this.usersService = usersService;
+      this.$uibModal = $uibModal;
+      this.ncUtils = ncUtils;
+    }
 
-// ngInject
-class IssuesShortListController {
-  constructor(issuesService, $uibModal) {
-    this.service = issuesService;
-    this.$uibModal = $uibModal;
-    this.init();
-  }
+    $onInit() {
+      this.loadIssues();
+    }
 
-  init() {
-    this.loading = true;
-    this.service.getList(this.filter).then(items => {
-      this.items = items.map(item => {
-        item.labelClass = ISSUE_CLASSES[item.type];
-        return item;
+    loadIssues() {
+      this.loading = true;
+      this.usersService.getCurrentUser().then(user => {
+        this.service.getList({ caller: user.url }).then(items => {
+          this.items = items.map(item => {
+            item.timeSpent = this.ncUtils.relativeDate(item.created);
+            return item;
+          });
+        });
+      }).finally(() => {
+        this.loading = false;
       });
-      this.loading = false;
-    });
-  }
+    }
 
-  openUserDialog(user) {
-    this.$uibModal.open({
-      component: 'userPopover',
-      resolve: {
-        user: () => user
-      }
-    });
-  }
+    openUserDialog(user_uuid) {
+      this.$uibModal.open({
+        component: 'userPopover',
+        resolve: {
+          user_uuid: () => user_uuid
+        }
+      });
+    }
 
-  openCustomerDialog(customer) {
-    this.$uibModal.open({
-      component: 'customerPopover',
-      resolve: {
-        customer: () => customer
-      }
-    });
+    openCustomerDialog(customer_uuid) {
+      this.$uibModal.open({
+        component: 'customerPopover',
+        size: 'lg',
+        resolve: {
+          customer_uuid: () => customer_uuid
+        }
+      });
+    }
   }
-}
+};
