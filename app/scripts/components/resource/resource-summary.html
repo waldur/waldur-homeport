@@ -25,61 +25,19 @@
     <openstack-instance-summary resource="$ctrl.resource"></openstack-instance-summary>
   </div>
 
+  <div ng-switch-when="OpenStackTenant.Volume">
+    <openstack-volume-summary resource="$ctrl.resource"></openstack-volume-summary>
+  </div>
+
+  <div ng-switch-when="OpenStackTenant.Backup">
+    <openstack-backup-summary resource="$ctrl.resource"></openstack-backup-summary>
+  </div>
+
+  <div ng-switch-when="OpenStackTenant.Snapshot">
+    <openstack-snapshot-summary resource="$ctrl.resource"></openstack-snapshot-summary>
+  </div>
+
   <div ng-switch-default>
-
-  <resource-summary-base resource="$ctrl.resource"></resource-summary-base>
-
-  <div class="m-b-xs" ng-if="::$ctrl.resource.summary">
-    <dt>{{$ctrl.resource.summaryLabel}}:</dt>
-    <dd>
-      {{ ::$ctrl.resource.summary }}
-    </dd>
+    <resource-summary-base resource="$ctrl.resource"></resource-summary-base>
   </div>
-
-  <div class="m-b-xs" ng-if="$ctrl.resource.isVolume || $ctrl.resource.isBackup">
-    <dt>{{::$ctrl.resource.label}}:</dt>
-    <dd ng-if="::$ctrl.resource.instance">
-      <a ui-sref="resources.details({
-        uuid: $ctrl.resource.instance_uuid,
-        resource_type: 'OpenStackTenant.Instance'
-      })">
-        {{ ::$ctrl.resource.instance_name || 'OpenStack instance' }}
-      </a>
-    </dd>
-    <dd ng-if="!$ctrl.resource.instance">
-      &ndash;
-    </dd>
-  </div>
-
-  <div class="m-b-xs" ng-if="::$ctrl.resource.source_volume">
-    <dt>Volume:</dt>
-    <dd>
-      <a ui-sref="resources.details({
-        uuid: $ctrl.resource.source_volume_uuid,
-        resource_type: 'OpenStackTenant.Volume'
-      })">
-        {{ ::$ctrl.resource.source_volume_name }}
-      </a>
-    </dd>
-  </div>
-
-  <div class="m-b-xs" ng-if="!$ctrl.resource.isVolume">
-    <dt>
-      Access:
-    </dt>
-    <dd>
-      <a ng-if="$ctrl.resource.access_info_url"
-         href="{{ $ctrl.resource.access_info_url }}"
-         target="_blank">
-          <i class="fa fa-external-link"></i>
-          {{ $ctrl.resource.access_info_text }}
-      </a>
-      <span ng-if="!$ctrl.resource.access_info_url">
-        {{ $ctrl.resource.access_info_text }}
-      </span>
-    </dd>
-  </div>
-
-  </div>
-
 </dl>

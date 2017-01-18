@@ -18,9 +18,6 @@ function ResourceDetailUpdateController(
   ENV,
   resourcesService,
   resourcesCountService,
-  resourceUtils,
-  alertsService,
-  servicesService,
   baseControllerDetailUpdateClass,
   currentStateService,
   ncUtilsFlash) {
@@ -54,54 +51,6 @@ function ResourceDetailUpdateController(
     },
 
     afterActivate: function() {
-      this.updateMenu();
-      this.updateResourceTab();
-      this.scheduleRefresh();
-    },
-
-    updateMenu: function() {
-      controllerScope.context = {resource: controllerScope.model};
-      controllerScope.listState = this.getListState(this.model.resource_type)
-                                  + '({uuid: controller.context.resource.project_uuid})';
-      controllerScope.listTitle = this.getListTitle(this.model.resource_type);
-    },
-
-    getListTitle: function(resourceType) {
-      var resourceCategory = ENV.resourceCategory[resourceType];
-      if (resourceCategory === 'apps') {
-        return 'Applications';
-      } else if (resourceCategory === 'private_clouds') {
-        return 'Private clouds';
-      } else if (resourceCategory === 'storages') {
-        return 'Storage';
-      } else {
-        return 'Virtual machines';
-      }
-    },
-
-    getListState: function(resourceType) {
-      var resourceCategory = ENV.resourceCategory[resourceType];
-      if (resourceCategory === 'apps') {
-        return 'project.resources.apps';
-      } else if (resourceCategory === 'private_clouds') {
-        return 'project.resources.clouds';
-      } else if (resourceCategory === 'storages') {
-        return 'project.resources.storage.tabs';
-      } else {
-        return 'project.resources.vms';
-      }
-    },
-
-    updateResourceTab: function() {
-      var resourceCategory = ENV.resourceCategory[this.model.resource_type];
-      if (resourceCategory) {
-        this.resourceTab = resourceCategory;
-      } else {
-        this.resourceTab = ENV.resourcesTypes.vms;
-      }
-    },
-
-    scheduleRefresh: function() {
       var refreshPromise = $interval(
         this.reInitResource.bind(this),
         ENV.resourcesTimerInterval * 1000

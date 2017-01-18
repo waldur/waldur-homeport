@@ -13,9 +13,7 @@ export default function ProviderListController(
   ENTITYLISTFIELDTYPES,
   currentStateService,
   customersService,
-  currentUser,
-  ncServiceUtils
-  ) {
+  currentUser) {
   var controllerScope = this;
   var Controller = baseControllerListClass.extend({
     defaultErrorMessage: ENV.defaultErrorMessage,
@@ -29,6 +27,7 @@ export default function ProviderListController(
         controllerScope.resetCache();
       });
       currentStateService.getCustomer().then(customer => {
+        var vm = this;
         this.currentCustomer = customer;
         this.checkPermissions();
         this.tableOptions = {
@@ -54,9 +53,7 @@ export default function ProviderListController(
               title: 'State',
               className: 'text-center min-tablet-l',
               render: function(row) {
-                var cls = ncServiceUtils.getStateClass(row.state);
-                return '<a class="{cls}" title="{title}"></a>'
-                  .replace('{cls}', cls).replace('{title}', row.state);
+                return vm.renderProviderState(row);
               },
               width: '40px'
             },
@@ -135,6 +132,14 @@ export default function ProviderListController(
           actionsColumnWidth: '250px'
         };
       });
+    },
+    renderProviderState: function(row) {
+      var uuids = this.list.map(function(item) {
+        return item.uuid;
+      });
+      var index = uuids.indexOf(row.uuid);
+      return '<provider-state provider="controller.list[{index}]"></provider-state>'
+        .replace('{index}', index);
     },
     openDialog: function(row) {
       $uibModal.open({

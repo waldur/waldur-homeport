@@ -1,11 +1,11 @@
-import template from './openstack-network-summary.html';
+import template from './openstack-snapshot-summary.html';
 
-export const openstackNetworkSummary = {
+export const openstackSnapshotSummary = {
   template,
   bindings: {
     resource: '<'
   },
-  controller: class openstackNetworkSummaryController {
+  controller: class openstackSnapshotSummaryController {
     constructor($scope, ncUtils) {
       // @ngInject
       this.ncUtils = ncUtils;
@@ -15,7 +15,7 @@ export const openstackNetworkSummary = {
     }
 
     update() {
-      this.resource.tenant_uuid = this.ncUtils.getUUID(this.resource.tenant);
+      this.resource.source_volume_uuid = this.ncUtils.getUUID(this.resource.source_volume);
     }
   }
 };
