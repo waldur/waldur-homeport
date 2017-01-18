@@ -40,8 +40,8 @@ export default function breadcrumbsConfig(ResourceBreadcrumbsService, ncUtils, C
         label: 'Subnets',
         state: 'resources.details',
         params: {
-          uuid: tenant_uuid,
-          resource_type: 'OpenStack.Tenant',
+          uuid: network_uuid,
+          resource_type: 'OpenStack.Network',
           tab: 'subnets'
         }
       },
