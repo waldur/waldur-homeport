@@ -1,47 +1,29 @@
-<div class="ibox">
-    <div class="ibox-title">
-        <h5>
-            Checkout summary
-        </h5>
-    </div>
-    <div class="ibox-content">
-        <p ng-if="!$ctrl.model.size">
-            No items yet.
-        </p>
-        <p ng-if="$ctrl.components">
-            Note that this volume is charged as part of <strong>{{ $ctrl.model.service.name }}</strong> package.
-        </p>
-        <table class="table table-bordered" ng-if="$ctrl.model.size">
-          <tbody>
-            <tr ng-if="$ctrl.model.name">
-                <td><strong>Volume name</strong></td>
-                <td>{{ $ctrl.model.name }}</td>
-            </tr>
-            <tr ng-if="$ctrl.model.image">
-                <td><strong>Image</strong></td>
-                <td>{{ $ctrl.model.image.name }}</td>
-            </tr>
-            <tr>
-                <td><strong>Storage</strong></td>
-                <td>{{ $ctrl.model.size | filesize }}</td>
-            </tr>
-            <tr>
-                <td><strong>Price per day</strong></td>
-                <td>{{ $ctrl.getDailyPrice() | defaultCurrency }}</td>
-            </tr>
-            <tr>
-                <td><strong>Price per month</strong></td>
-                <td>{{ $ctrl.getMonthlyPrice() | defaultCurrency }}</td>
-            </tr>
-            <tr>
-                <td><strong>Invoiced to</strong></td>
-                <td>{{ $ctrl.model.customer.name }}</td>
-            </tr>
-            <tr>
-                <td><strong>Project</strong></td>
-                <td>{{ $ctrl.model.project.name }}</td>
-            </tr>
-          </tbody>
-        </table>
-    </div>
+<resource-summary-base resource="$ctrl.resource"></resource-summary-base>
+
+<div class="m-b-xs">
+  <dt>
+    <span translate>Size</span>:</dt>
+  <dd>
+    <span ng-if="$ctrl.resource.bootable" translate>
+      bootable
+    </span>&nbsp;
+    {{ $ctrl.resource.size | filesize }}
+  </dd>
+</div>
+
+<div class="m-b-xs">
+  <dt>
+    <span translate>Attached to</span>:
+  </dt>
+  <dd ng-if="$ctrl.resource.instance">
+    <a ui-sref="resources.details({
+      uuid: $ctrl.resource.instance_uuid,
+      resource_type: 'OpenStackTenant.Instance'
+    })">
+      {{ ::$ctrl.resource.instance_name }}
+    </a>
+  </dd>
+  <dd ng-if="!$ctrl.resource.instance">
+    &ndash;
+  </dd>
 </div>
