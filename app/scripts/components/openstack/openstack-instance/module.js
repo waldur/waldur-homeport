@@ -29,6 +29,7 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
       'restart',
       'change_flavor',
       'assign_floating_ip',
+      'unassign_floating_ip',
       'update_security_groups',
       'backup',
       'unlink',
