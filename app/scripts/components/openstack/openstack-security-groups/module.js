@@ -3,14 +3,10 @@ import openstackSecurityGroupsList from './security-groups-list';
 import { securityGroupRulesList } from './security-group-rules-list';
 import securityGroupsLink from './security-groups-link';
 import securityGroupsDialog from './security-groups-dialog';
-import {
-  securityGroupRulePort,
-  securityGroupRulePortRange,
-  securityGroupCIDR,
-  securityGroupProtocol,
-} from './filters';
+import filtersModule from './filters';
 import { securityGroupRuleEditor } from './security-group-rule-editor';
 import { securityGroupSummary } from './security-group-summary';
+import breadcrumbsConfig from './breadcrumbs';
 
 export default module => {
   module.service('openstackSecurityGroupsService', openstackSecurityGroupsService);
@@ -20,12 +16,10 @@ export default module => {
   module.component('securityGroupSummary', securityGroupSummary);
   module.directive('securityGroupsLink', securityGroupsLink);
   module.directive('securityGroupsDialog', securityGroupsDialog);
-  module.filter('securityGroupRulePort', securityGroupRulePort);
-  module.filter('securityGroupRulePortRange', securityGroupRulePortRange);
-  module.filter('securityGroupCIDR', securityGroupCIDR);
-  module.filter('securityGroupProtocol', securityGroupProtocol);
+  filtersModule(module);
   module.config(tabsConfig);
   module.config(actionConfig);
+  module.run(breadcrumbsConfig);
 };
 
 // @ngInject

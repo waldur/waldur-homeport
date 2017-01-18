@@ -6,8 +6,11 @@ const resourceState = {
     resource: '<'
   },
   controller: function ResourceStateController($scope, resourceUtils) {
-    $scope.$watch(() => this.resource, () =>
-      this.context = resourceUtils.getResourceState(this.resource));
+    $scope.$watch(() => this.resource, () => {
+      if (this.resource) {
+        this.context = resourceUtils.getResourceState(this.resource);
+      }
+    });
   }
 };
 
