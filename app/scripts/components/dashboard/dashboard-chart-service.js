@@ -15,6 +15,13 @@ export default class DashboardChartService {
     this.features = features;
   }
 
+  clearServiceCache() {
+    return this.$q.all([
+      this.priceEstimationService.cleanAllCache(),
+      this.quotasService.cleanAllCache()
+    ]);
+  }
+
   getOrganizationCharts(organization) {
     const quotas = this.getDashboardQuotas(ORGANIZATION_DASHBOARD_QUOTAS);
     return this.$q.all([
