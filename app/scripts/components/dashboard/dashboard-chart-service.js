@@ -16,14 +16,13 @@ export default class DashboardChartService {
   }
 
   clearServiceCache() {
-    return this.$q.all([
-      this.priceEstimationService.cleanAllCache(),
-      this.quotasService.cleanAllCache()
-    ]);
+    this.priceEstimationService.cleanAllCache();
+    this.quotasService.cleanAllCache();
   }
 
   getOrganizationCharts(organization) {
     const quotas = this.getDashboardQuotas(ORGANIZATION_DASHBOARD_QUOTAS);
+    this.clearServiceCache();
     return this.$q.all([
       this.getCostChart(organization),
       this.getResourceHistoryCharts(quotas, organization)
@@ -32,6 +31,7 @@ export default class DashboardChartService {
 
   getProjectCharts(project) {
     const quotas = this.getDashboardQuotas(PROJECT_DASHBOARD_QUOTAS);
+    this.clearServiceCache();
     return this.getResourceHistoryCharts(quotas, project);
   }
 

@@ -15,7 +15,7 @@ export const organizationDashboard = {
 
     $onInit() {
       this.loading = true;
-      this.pollingKey = this.startPolling();
+      this.pollingPromise = this.startPolling();
     }
 
     $onDestroy() {
@@ -27,18 +27,16 @@ export const organizationDashboard = {
     }
 
     stopPolling() {
-      this.$interval.cancel(this.pollingKey);
+      this.$interval.cancel(this.pollingPromise);
     }
 
     fetchCharts() {
-      this.DashboardChartService.clearServiceCache().then(() => {
-        this.DashboardChartService.getOrganizationCharts(this.customer).then(charts => {
-          this.charts = charts;
-        }).finally(() => {
-          if (this.loading) {
-            this.loading = false;
-          }
-        });
+      this.DashboardChartService.getOrganizationCharts(this.customer).then(charts => {
+        this.charts = charts;
+      }).finally(() => {
+        if (this.loading) {
+          this.loading = false;
+        }
       });
     }
   }
