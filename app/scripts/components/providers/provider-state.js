@@ -10,8 +10,22 @@ const providerState = {
 
 export default providerState;
 
+/* eslint-disable quote-props */
+const SERVICE_STATES = {
+  'OK': 'online',
+  'Erred': 'erred',
+  'In Sync': 'online',
+  'Creation Scheduled': 'processing',
+  'Creating': 'processing',
+  'Update Scheduled': 'processing',
+  'Updating': 'processing',
+  'Deletion Scheduled': 'processing',
+  'Deleting': 'processing'
+};
+/* eslint-enable quote-props */
+
 // @ngInject
-function ProviderStateController($scope, ENV) {
+function ProviderStateController($scope) {
   $scope.$watch(() => this.provider, () =>
     this.context = getProviderState(this.provider)
   );
@@ -19,15 +33,16 @@ function ProviderStateController($scope, ENV) {
   function getProviderState(provider) {
     let context = {
       className: '',
-      label: '',
+      label: provider.state,
       tooltip: '',
       movementClassName: ''
     };
-    context.label = provider.state;
 
-    if (ENV.servicesStateColorClasses[provider.state] === 'processing') {
+    const cls = SERVICE_STATES[provider.state];
+
+    if (cls === 'processing') {
       context.movementClassName = 'progress-striped active';
-    } else if (ENV.servicesStateColorClasses[provider.state] === 'erred') {
+    } else if (cls === 'erred') {
       context.className = 'progress-bar-danger';
       context.tooltip = provider.error_message;
     }
