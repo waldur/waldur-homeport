@@ -45,7 +45,7 @@
                                 {{ item.caller_full_name }}
                             </a>
                             <span ng-if="item.customer_uuid">
-                                from
+                                <span translate>from</span>
                                 <a ng-click="$ctrl.openCustomerDialog(item.customer_uuid)">
                                     {{ item.customer_name }}
                                 </a>
