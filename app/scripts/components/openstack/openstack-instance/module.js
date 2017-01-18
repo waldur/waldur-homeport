@@ -1,9 +1,11 @@
-import openstackInstanceSummary from './openstack-instance-summary';
+import { openstackInstanceSummary } from './openstack-instance-summary';
+import openstackInstanceCheckoutSummary from './openstack-instance-checkout-summary';
 import OpenStackInstanceConfig from './openstack-instance-config';
 import openstackInstanceFloatingIp from './openstack-instance-floating-ip';
 
 export default module => {
-  module.directive('openstackInstanceSummary', openstackInstanceSummary);
+  module.component('openstackInstanceSummary', openstackInstanceSummary);
+  module.directive('openstackInstanceCheckoutSummary', openstackInstanceCheckoutSummary);
   module.component('openstackInstanceFloatingIp', openstackInstanceFloatingIp);
   module.config(fieldsConfig);
   module.config(actionConfig);
@@ -27,6 +29,7 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
       'restart',
       'change_flavor',
       'assign_floating_ip',
+      'unassign_floating_ip',
       'update_security_groups',
       'backup',
       'unlink',
