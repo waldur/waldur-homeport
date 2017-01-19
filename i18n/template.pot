@@ -22,8 +22,34 @@ msgstr ""
 msgid "Add rule"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ip-summary.html:18
+msgid "Address"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-subnet/openstack-subnet-summary.html:42
+msgid "Allocation"
+msgstr ""
+
 #: app/scripts/components/auth/auth-login.html:100
 msgid "Already have an account?"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-summary.html:16
+msgid "Attached to"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-summary.html:7
+msgid "bootable"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:4
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:4
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:4
+msgid "Checkout summary"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-subnet/openstack-subnet-summary.html:33
+msgid "CIDR"
 msgstr ""
 
 #: app/scripts/components/auth/auth-login.html:18
@@ -48,6 +74,10 @@ msgstr ""
 msgid "E-mail"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-subnet/openstack-subnet-summary.html:69
+msgid "Enable DHCP"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-summary.html:42
 msgid "External IP"
 msgstr ""
@@ -56,8 +86,29 @@ msgstr ""
 msgid "from"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:25
+msgid "Flavor"
+msgstr ""
+
+#: app/scripts/components/issues/issues-short-list.html:48
+msgid "from"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:12
 msgid "From port"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-subnet/openstack-subnet-summary.html:51
+msgid "Gateway IP"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:21
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:21
+msgid "Image"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-backup/openstack-backup-summary.html:5
+msgid "Instance"
 msgstr ""
 
 #: app/scripts/components/user/user-edit.html:16
@@ -76,8 +127,18 @@ msgstr ""
 msgid "Internal IP"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:49
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:42
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:37
+msgid "Invoiced to"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:11
 msgid "IP protocol"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-subnet/openstack-subnet-summary.html:60
+msgid "IP version"
 msgstr ""
 
 #: app/scripts/components/user/user-edit.html:76
@@ -101,12 +162,34 @@ msgstr ""
 msgid "Login"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:26
+msgid "Max RAM"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:30
+msgid "Max storage"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:22
+msgid "Max vCPU"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-subnet/openstack-subnet-summary.html:19
+msgid "Network"
+msgstr ""
+
 #: app/scripts/components/user/user-edit.html:8
 msgid "Manage at"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:14
 msgid "No access info"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:9
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:9
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:9
+msgid "No items yet."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:12
@@ -141,6 +224,28 @@ msgstr ""
 msgid "plans page"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:41
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:34
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:29
+msgid "Price per day"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:45
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:38
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:33
+msgid "Price per month"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:53
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:46
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:41
+msgid "Project"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:33
+msgid "RAM"
+msgstr ""
+
 #: app/scripts/components/issues/issues-short-list.html:11
 msgid "Refresh"
 msgstr ""
@@ -169,6 +274,10 @@ msgstr ""
 msgid "Reported by me"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ip-summary.html:27
+msgid "Runtime state"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:4
 msgid "Security group does not contain any rule yet."
 msgstr ""
@@ -179,6 +288,10 @@ msgstr ""
 
 #: app/scripts/components/issues/issues-short-list.html:6
 msgid "See all"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-network/openstack-network-summary.html:28
+msgid "Segmentation ID"
 msgstr ""
 
 #: app/scripts/components/auth/auth-login.html:87
@@ -197,12 +310,32 @@ msgstr ""
 msgid "Sign in with Mobile ID"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshot-summary.html:5
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-summary.html:5
+msgid "Size"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-summary.html:54
 msgid "SSH key"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:25
+msgid "Storage"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-summary.html:5
 msgid "Summary"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ip-summary.html:5
+#: app/scripts/components/openstack/openstack-network/openstack-network-summary.html:5
+#: app/scripts/components/openstack/openstack-security-groups/security-group-summary.html:5
+#: app/scripts/components/openstack/openstack-subnet/openstack-subnet-summary.html:5
+msgid "Tenant"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:14
+msgid "Tenant name"
 msgstr ""
 
 #: app/scripts/components/user/user-edit.html:110
@@ -233,6 +366,14 @@ msgstr ""
 msgid "Update profile"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:37
+msgid "Total storage"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-network/openstack-network-summary.html:19
+msgid "Type"
+msgstr ""
+
 #: app/scripts/components/issues/issues-short-list.html:29
 msgid "Updated"
 msgstr ""
@@ -247,6 +388,26 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:22
 msgid "Username"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:29
+msgid "vCPU"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:17
+msgid "VM name"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshot-summary.html:13
+msgid "Volume"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:17
+msgid "Volume name"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:18
+msgid "VPC package"
 msgstr ""
 
 #: app/scripts/components/auth/auth-init.html:10

@@ -1,7 +1,8 @@
 <resource-summary-base resource="$ctrl.resource"></resource-summary-base>
 
 <div class="m-b-xs">
-  <dt>Tenant:</dt>
+  <dt>
+    <span translate>Tenant</span>:</dt>
   <dd>
     <a ui-sref="resources.details({
       uuid: $ctrl.resource.tenant_uuid,
@@ -14,7 +15,7 @@
 
 <div class="m-b-xs">
   <dt>
-    Address:
+    <span translate>Address</span>:
   </dt>
   <dd>
     {{ $ctrl.resource.address }}
@@ -23,7 +24,7 @@
 
 <div class="m-b-xs">
   <dt>
-    Runtime state:
+    <span translate>Runtime state</span>:
   </dt>
   <dd>
     {{ $ctrl.resource.runtime_state }}
