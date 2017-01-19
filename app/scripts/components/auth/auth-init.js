@@ -15,7 +15,7 @@ export const authInit = {
     $onInit() {
       this.loading = true;
       this.usersService.getCurrentUser().then(user => {
-        this.user = user;
+        this.user = angular.copy(user);
       }).finally(() => {
         this.loading = false;
       });
