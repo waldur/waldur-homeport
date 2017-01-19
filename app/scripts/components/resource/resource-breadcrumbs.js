@@ -22,5 +22,11 @@ export const resourceBreadcrumbs = {
 
       this.activeItem = this.resource.name;
     }
+
+    $doCheck() {
+      if (this.activeItem !== this.resource.name) {
+        this.activeItem = this.resource.name;
+      }
+    }
   }
 };
