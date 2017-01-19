@@ -19,16 +19,12 @@ export const organizationDashboard = {
     }
 
     $onDestroy() {
-      this.stopPolling();
+      this.$interval.cancel(this.pollingPromise);
     }
 
     startPolling() {
       this.fetchCharts();
       return this.$interval(this.fetchCharts.bind(this), this.ENV.countersTimerInterval * 1000);
-    }
-
-    stopPolling() {
-      this.$interval.cancel(this.pollingPromise);
     }
 
     fetchCharts() {
