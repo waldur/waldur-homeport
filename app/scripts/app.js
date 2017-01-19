@@ -97,7 +97,7 @@
     // And use $transition service which supports promises
     // https://github.com/angular-ui/ui-router/issues/1153
     return usersService.getCurrentUser().then(function(user) {
-      if (usersService.mandatoryFieldsMissing(user)) {
+      if (usersService.mandatoryFieldsMissing(user) || !user.agreement_date) {
         return $q.reject({
           redirectTo: 'initialdata.view'
         });
