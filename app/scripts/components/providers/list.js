@@ -13,7 +13,7 @@ export default function ProviderListController(
   ENTITYLISTFIELDTYPES,
   currentStateService,
   customersService,
-  currentUser) {
+  usersService) {
   var controllerScope = this;
   var Controller = baseControllerListClass.extend({
     defaultErrorMessage: ENV.defaultErrorMessage,
@@ -26,6 +26,8 @@ export default function ProviderListController(
       $scope.$on('refreshProviderList', function() {
         controllerScope.resetCache();
       });
+      usersService.getCurrentUser().then(currentUser => {
+      this.currentUser = currentUser;
       currentStateService.getCustomer().then(customer => {
         var vm = this;
         this.currentCustomer = customer;
@@ -132,6 +134,7 @@ export default function ProviderListController(
           actionsColumnWidth: '250px'
         };
       });
+      });
     },
     renderProviderState: function(row) {
       var uuids = this.list.map(function(item) {
@@ -182,7 +185,7 @@ export default function ProviderListController(
       return this.service.operation('unlink', service.url);
     },
     checkPermissions: function() {
-      this.canUserManageService = customersService.checkCustomerUser(this.currentCustomer, currentUser);
+      this.canUserManageService = customersService.checkCustomerUser(this.currentCustomer, this.currentUser);
     },
     afterInstanceRemove: function(instance) {
       this._super(instance);

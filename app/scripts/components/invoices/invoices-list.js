@@ -1,9 +1,15 @@
+export const invoicesList = {
+  controller: InvoicesListController,
+  controllerAs: 'ListController',
+  templateUrl: 'views/partials/filtered-list.html'
+};
+
 // @ngInject
 export default function InvoicesListController(
   baseControllerListClass,
   currentStateService,
+  usersService,
   invoicesService,
-  currentUser,
   ncUtilsFlash,
   $state,
   $filter) {
@@ -12,15 +18,14 @@ export default function InvoicesListController(
     init: function() {
       this.service = invoicesService;
       this.getSearchFilters();
-      this.tableOptions = this.getTableOptions();
-      this._super();
-    },
-    getList: function(filter) {
       let fn = this._super.bind(this);
-      filter = filter || {};
-      return currentStateService.getCustomer().then(customer => {
-        this.currentCustomer = customer;
-        return fn(filter);
+      return usersService.getCurrentUser().then(currentUser => {
+        this.currentUser = currentUser;
+        return currentStateService.getCustomer().then(currentCustomer => {
+          this.currentCustomer = currentCustomer;
+          this.tableOptions = this.getTableOptions();
+          return fn();
+        });
       });
     },
     getTableOptions: function() {
@@ -87,7 +92,7 @@ export default function InvoicesListController(
       };
     },
     getRowActions: function() {
-      if (currentUser.is_staff) {
+      if (this.currentUser.is_staff) {
         return [
           {
             name: '<i class="fa fa-envelope-o"></i> Send notification',

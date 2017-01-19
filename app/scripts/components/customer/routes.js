@@ -23,16 +23,20 @@ function loadCustomer($q, $stateParams, $state, customersService, currentStateSe
 }
 
 // @ngInject
-function CustomerController($scope, $state, currentCustomer, currentUser, customersService, currentStateService) {
-  $scope.currentCustomer = currentCustomer;
-  $scope.currentUser = currentUser;
+function CustomerController($scope, $state, usersService, currentStateService, customersService) {
+  usersService.getCurrentUser().then(currentUser => {
+    currentStateService.getCustomer().then(currentCustomer => {
+      $scope.currentCustomer = currentCustomer;
+      $scope.currentUser = currentUser;
 
-  if (customersService.checkCustomerUser(currentCustomer, currentUser)) {
-    currentStateService.setOwnerOrStaff(true);
-  } else {
-    currentStateService.setOwnerOrStaff(false);
-    $state.go('profile.details');
-  }
+      if (customersService.checkCustomerUser(currentCustomer, currentUser)) {
+        currentStateService.setOwnerOrStaff(true);
+      } else {
+        currentStateService.setOwnerOrStaff(false);
+        $state.go('profile.details');
+      }
+    });
+  });
 }
 
 // @ngInject
@@ -139,9 +143,7 @@ export default function organizationRoutes($stateProvider) {
       url: '',
       views: {
         invoices: {
-          controller: 'InvoicesListController',
-          controllerAs: 'ListController',
-          templateUrl: 'views/partials/filtered-list.html'
+          template: '<invoices-list></invoices-list>'
         }
       }
     })
