@@ -11,10 +11,10 @@ export const organizationDashboard = {
       this.DashboardChartService = DashboardChartService;
       this.ENV = ENV;
       this.$interval = $interval;
+      this.loading = null;
     }
 
     $onInit() {
-      this.loading = true;
       this.pollingPromise = this.startPolling();
     }
 
@@ -23,6 +23,7 @@ export const organizationDashboard = {
     }
 
     startPolling() {
+      this.fetchCharts();
       return this.$interval(this.fetchCharts.bind(this), this.ENV.countersTimerInterval * 1000);
     }
 
@@ -31,6 +32,9 @@ export const organizationDashboard = {
     }
 
     fetchCharts() {
+      if (this.loading === null) {
+        this.loading = true;
+      }
       this.DashboardChartService.getOrganizationCharts(this.customer).then(charts => {
         this.charts = charts;
       }).finally(() => {
