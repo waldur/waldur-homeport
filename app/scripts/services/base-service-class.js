@@ -12,8 +12,8 @@
 
   angular.module('ncsaas')
     .service('baseServiceClass', [
-      '$q', '$resource', 'ENV', '$rootScope', 'listCache', baseServiceClass]);
-  function baseServiceClass($q, $resource, ENV, $rootScope, listCache) {
+      '$q', '$http', '$resource', 'ENV', '$rootScope', 'listCache', baseServiceClass]);
+  function baseServiceClass($q, $http, $resource, ENV, $rootScope, listCache) {
     // pageSize, page, pages - default variables, you can change this in your init method or call this._super() in init
     var BaseServiceClass = Class.extend({
       ALL_CACHE_KEYS: 'ALL_CACHE_KEYS',
@@ -182,6 +182,10 @@
             }
           }
         );
+      },
+
+      update: function(model) {
+        return $http.put(model.url, model);
       },
 
       $update: function(uuid, url, fields) {

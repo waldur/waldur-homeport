@@ -25,16 +25,16 @@ class UserManageController {
 
   init() {
     this.loading = true;
-    this.usersService.getCurrentUser().then(response => {
-      this.user = response;
+    this.usersService.getCurrentUser().then(user => {
+      this.user = user;
     }).finally(() => {
       this.loading = false;
     });
   }
 
-  saveUser() {
-    return this.user.$update(() => {
-      this.usersService.currentUser = null;
+  saveUser({ user }) {
+    return this.usersService.update(user).then(response => {
+      this.usersService.currentUser = response.data;
     }).then(() => {
       this.ncUtilsFlash.success('Profile has been updated');
     }).catch(response => {
