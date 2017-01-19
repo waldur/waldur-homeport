@@ -33,7 +33,7 @@ function ActionDialogController(
         }
         if ($scope.action.name === 'edit') {
           $scope.form[name] = $scope.resource[name];
-          if (field.type === 'datetime') {
+          if (field.type === 'datetime' && $scope.resource[name]) {
             $scope.form[name] = new Date($scope.resource[name]);
           }
         }

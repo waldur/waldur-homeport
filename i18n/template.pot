@@ -42,6 +42,12 @@ msgstr ""
 msgid "bootable"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:4
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:4
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:4
+msgid "Checkout summary"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-subnet/openstack-subnet-summary.html:33
 msgid "CIDR"
 msgstr ""
@@ -53,6 +59,10 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:58
 msgid "Delete"
+msgstr ""
+
+#: app/scripts/components/issues/issues-short-list.html:28
+msgid "Description"
 msgstr ""
 
 #: app/scripts/components/auth/auth-login.html:94
@@ -67,12 +77,25 @@ msgstr ""
 msgid "External IP"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:25
+msgid "Flavor"
+msgstr ""
+
+#: app/scripts/components/issues/issues-short-list.html:48
+msgid "from"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:12
 msgid "From port"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-subnet/openstack-subnet-summary.html:51
 msgid "Gateway IP"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:21
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:21
+msgid "Image"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup/openstack-backup-summary.html:5
@@ -83,12 +106,22 @@ msgstr ""
 msgid "Internal IP"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:49
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:42
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:37
+msgid "Invoiced to"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:11
 msgid "IP protocol"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-subnet/openstack-subnet-summary.html:60
 msgid "IP version"
+msgstr ""
+
+#: app/scripts/components/issues/issues-short-list.html:27
+msgid "Key"
 msgstr ""
 
 #: app/scripts/components/navigation/site-header.html:12
@@ -100,6 +133,18 @@ msgstr ""
 msgid "Login"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:26
+msgid "Max RAM"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:30
+msgid "Max storage"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:22
+msgid "Max vCPU"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-subnet/openstack-subnet-summary.html:19
 msgid "Network"
 msgstr ""
@@ -108,8 +153,18 @@ msgstr ""
 msgid "No access info"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:9
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:9
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:9
+msgid "No items yet."
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:12
 msgid "Open"
+msgstr ""
+
+#: app/scripts/components/issues/issues-short-list.html:43
+msgid "Opened by"
 msgstr ""
 
 #: app/scripts/components/auth/auth-login.html:76
@@ -128,6 +183,32 @@ msgstr ""
 msgid "plans page"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:41
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:34
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:29
+msgid "Price per day"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:45
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:38
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:33
+msgid "Price per month"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:53
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:46
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:41
+msgid "Project"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:33
+msgid "RAM"
+msgstr ""
+
+#: app/scripts/components/issues/issues-short-list.html:11
+msgid "Refresh"
+msgstr ""
+
 #: app/scripts/components/auth/auth-login.html:72
 msgid "Register"
 msgstr ""
@@ -140,6 +221,10 @@ msgstr ""
 msgid "Remote CIDR"
 msgstr ""
 
+#: app/scripts/components/issues/issues-short-list.html:14
+msgid "Reported by me"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ip-summary.html:27
 msgid "Runtime state"
 msgstr ""
@@ -150,6 +235,10 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-summary.html:63
 msgid "Security groups"
+msgstr ""
+
+#: app/scripts/components/issues/issues-short-list.html:6
+msgid "See all"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-network/openstack-network-summary.html:28
@@ -181,6 +270,10 @@ msgstr ""
 msgid "SSH key"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:25
+msgid "Storage"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-summary.html:5
 msgid "Summary"
 msgstr ""
@@ -192,6 +285,18 @@ msgstr ""
 msgid "Tenant"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:14
+msgid "Tenant name"
+msgstr ""
+
+#: app/scripts/components/issues/issues-short-list.html:20
+msgid "There are no requests yet."
+msgstr ""
+
+#: app/scripts/components/issues/issues-short-list.html:30
+msgid "Time in progress"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:13
 msgid "To port"
 msgstr ""
@@ -200,8 +305,16 @@ msgstr ""
 msgid "To update current plan visit"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:37
+msgid "Total storage"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-network/openstack-network-summary.html:19
 msgid "Type"
+msgstr ""
+
+#: app/scripts/components/issues/issues-short-list.html:29
+msgid "Updated"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-summary.html:72
@@ -212,8 +325,24 @@ msgstr ""
 msgid "Username"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:29
+msgid "vCPU"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:17
+msgid "VM name"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshot-summary.html:13
 msgid "Volume"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:17
+msgid "Volume name"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:18
+msgid "VPC package"
 msgstr ""
 
 #: app/scripts/components/auth/auth-login.html:5

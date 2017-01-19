@@ -1,7 +1,7 @@
 export const ISSUE_IDS = {
   INCIDENT: 'Incident',
-  CHANGE_REQUEST: 'Change request',
-  SERVICE_REQUEST: 'Service request',
+  CHANGE_REQUEST: 'Change Request',
+  SERVICE_REQUEST: 'Service Request',
   INFORMATIONAL: 'Informational'
 };
 
