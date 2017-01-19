@@ -15,8 +15,14 @@ export default class DashboardChartService {
     this.features = features;
   }
 
+  clearServiceCache() {
+    this.priceEstimationService.clearAllCacheForCurrentEndpoint();
+    this.quotasService.clearAllCacheForCurrentEndpoint();
+  }
+
   getOrganizationCharts(organization) {
     const quotas = this.getDashboardQuotas(ORGANIZATION_DASHBOARD_QUOTAS);
+    this.clearServiceCache();
     return this.$q.all([
       this.getCostChart(organization),
       this.getResourceHistoryCharts(quotas, organization)
@@ -25,6 +31,7 @@ export default class DashboardChartService {
 
   getProjectCharts(project) {
     const quotas = this.getDashboardQuotas(PROJECT_DASHBOARD_QUOTAS);
+    this.clearServiceCache();
     return this.getResourceHistoryCharts(quotas, project);
   }
 
@@ -44,8 +51,8 @@ export default class DashboardChartService {
 
     var promises = validCharts.map(chart => {
       chart.quota = quotaMap[chart.quota];
-      chart.current = chart.quota.usage;
       return this.getQuotaHistory(chart.quota.url).then(data => {
+        chart.current = data[data.length - 1].value;
         chart.data = data;
       });
     });
@@ -64,7 +71,7 @@ export default class DashboardChartService {
   }
 
   getQuotaHistory(url) {
-    var end = moment.utc().unix();
+    var end = moment.utc().add(1, 'day').unix();
     var start = moment.utc().subtract(1, 'month').unix();
 
     return this.quotasService.getHistory(url, start, end, POINTS_COUNT).then(items => {

@@ -6,25 +6,37 @@ export const organizationDashboard = {
     customer: '<'
   },
   controller: class OrganizationDashboardController {
-    constructor(DashboardChartService) {
+    constructor(DashboardChartService, ENV, $interval) {
       // @ngInject
       this.DashboardChartService = DashboardChartService;
+      this.ENV = ENV;
+      this.$interval = $interval;
+      this.loading = null;
     }
 
     $onInit() {
-      this.fetchCharts();
+      this.pollingPromise = this.startPolling();
     }
 
-    $onChange() {
+    $onDestroy() {
+      this.$interval.cancel(this.pollingPromise);
+    }
+
+    startPolling() {
       this.fetchCharts();
+      return this.$interval(this.fetchCharts.bind(this), this.ENV.countersTimerInterval * 1000);
     }
 
     fetchCharts() {
-      this.loading = true;
+      if (this.loading === null) {
+        this.loading = true;
+      }
       this.DashboardChartService.getOrganizationCharts(this.customer).then(charts => {
         this.charts = charts;
       }).finally(() => {
-        this.loading = false;
+        if (this.loading) {
+          this.loading = false;
+        }
       });
     }
   }
