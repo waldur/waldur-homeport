@@ -1,38 +1,52 @@
 import template from './customer-popover.html';
 
-export default function customerPopover() {
-  return {
-    restrict: 'E',
-    template: template,
-    controller: CustomerPopoverController,
-    controllerAs: '$ctrl',
-    scope: {},
-    bindToController: {
-      dismiss: '&',
-      close: '&',
-      resolve: '='
+export const customerPopover = {
+  template,
+  bindings: {
+    dismiss: '&',
+    close: '&',
+    resolve: '<'
+  },
+  controller: class CustomerPopoverController {
+    constructor($q, customersService, paymentDetailsService) {
+      // @ngInject
+      this.$q = $q;
+      this.customersService = customersService;
+      this.paymentDetailsService = paymentDetailsService;
+      this.options = {
+        scrollY: '400px',
+        scrollCollapse: true
+      };
     }
-  };
-}
 
-// @ngInject
-class CustomerPopoverController {
-  constructor(customersService) {
-    this.customersService = customersService;
-    this.paymentDetails = this.resolve.paymentDetails;
-    this.init();
-  }
+    $onInit() {
+      this.loading = true;
+      this.loadData().finally(() => {
+        this.loading = false;
+      });
+    }
 
-  init() {
-    this.options = {
-      scrollY: '400px',
-      scrollCollapse: true
-    };
-    this.loading = true;
-    this.customersService.$get(this.resolve.customer.uuid).then(customer => {
-      this.customer = customer;
-    }).finally(() => {
-      this.loading = false;
-    });
+    loadData() {
+      return this.$q.all([
+        this.loadCustomer(),
+        this.loadPaymentDetails(),
+      ]);
+    }
+
+    loadCustomer() {
+      return this.customersService.$get(
+        this.resolve.customer_uuid
+      ).then(customer => {
+        this.customer = customer;
+      });
+    }
+
+    loadPaymentDetails() {
+      return this.paymentDetailsService.getList({
+        customer_uuid: this.resolve.customer_uuid
+      }).then(result => {
+        this.paymentDetails = result[0];
+      });
+    }
   }
-}
+};

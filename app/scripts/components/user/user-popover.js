@@ -1,20 +1,29 @@
 import template from './user-popover.html';
 
-export default function userPopover() {
-  return {
-    restrict: 'E',
-    template: template,
-    controller: UserPopoverController,
-    controllerAs: '$ctrl',
-    scope: {},
-    bindToController: {
-      dismiss: '&',
-      close: '&',
-      resolve: '='
+export const userPopover = {
+  template,
+  bindings: {
+    dismiss: '&',
+    close: '&',
+    resolve: '<'
+  },
+  controller: class UserPopoverController {
+    constructor(usersService) {
+      this.usersService = usersService;
     }
-  };
-}
 
-function UserPopoverController() {
-  this.user = this.resolve.user;
-}
+    $onInit() {
+      if (this.resolve.user_uuid) {
+        this.loading = true;
+        this.usersService.$get(this.resolve.user_uuid).then(user => {
+          this.user = user;
+        }).finally(() => {
+          this.loading = false;
+        });
+      } else {
+        this.loading = false;
+        this.user = this.resolve.user;
+      }
+    }
+  }
+};
